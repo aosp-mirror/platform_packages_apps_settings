@@ -36,6 +36,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 import java.security.cert.CertificateEncodingException;
@@ -210,15 +211,21 @@ public class TrustedCredentialsSettings extends Fragment {
             return view;
         };
 
-        private class AliasLoader extends AsyncTask<Void, Void, List<CertHolder>> {
+        private class AliasLoader extends AsyncTask<Void, Integer, List<CertHolder>> {
+            ProgressBar mProgressBar;
+            View mList;
             @Override protected void onPreExecute() {
                 View content = mTabHost.getTabContentView();
-                content.findViewById(mTab.mProgress).setVisibility(View.VISIBLE);
-                content.findViewById(mTab.mList).setVisibility(View.GONE);
+                mProgressBar = (ProgressBar) content.findViewById(mTab.mProgress);
+                mList = content.findViewById(mTab.mList);
+                mProgressBar.setVisibility(View.VISIBLE);
+                mList.setVisibility(View.GONE);
             }
             @Override protected List<CertHolder> doInBackground(Void... params) {
                 Set<String> aliases = mTab.getAliases(mStore);
-                List<CertHolder> certHolders = new ArrayList<CertHolder>(aliases.size());
+                int max = aliases.size();
+                int progress = 0;
+                List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
                 for (String alias : aliases) {
                     X509Certificate cert = (X509Certificate) mStore.getCertificate(alias, true);
                     certHolders.add(new CertHolder(mStore,
@@ -226,9 +233,18 @@ public class TrustedCredentialsSettings extends Fragment {
                                                    mTab,
                                                    alias,
                                                    cert));
+                    publishProgress(++progress, max);
                 }
                 Collections.sort(certHolders);
                 return certHolders;
+            }
+            @Override protected void onProgressUpdate(Integer... progressAndMax) {
+                int progress = progressAndMax[0];
+                int max = progressAndMax[1];
+                if (max != mProgressBar.getMax()) {
+                    mProgressBar.setMax(max);
+                }
+                mProgressBar.setProgress(progress);
             }
             @Override protected void onPostExecute(List<CertHolder> certHolders) {
                 mCertHolders.clear();
