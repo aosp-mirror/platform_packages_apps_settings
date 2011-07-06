@@ -567,4 +567,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public static class CryptKeeperSettingsActivity extends Settings { /* empty */ }
     public static class DeviceAdminSettingsActivity extends Settings { /* empty */ }
     public static class DataUsageSummaryActivity extends Settings { /* empty */ }
+    public static class AdvancedWifiSettingsActivity extends Settings { /* empty */ }
+    public static class AdvancedBluetoothSettingsActivity extends Settings { /* empty */ }
+    public static class TextToSpeechSettingsActivity extends Settings { /* empty */ }
 }
