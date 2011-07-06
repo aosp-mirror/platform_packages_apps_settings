@@ -251,8 +251,9 @@ public class TrustedCredentialsSettings extends Fragment {
                 mCertHolders.addAll(certHolders);
                 notifyDataSetChanged();
                 View content = mTabHost.getTabContentView();
-                content.findViewById(mTab.mProgress).setVisibility(View.GONE);
-                content.findViewById(mTab.mList).setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
+                mList.setVisibility(View.VISIBLE);
+                mProgressBar.setProgress(0);
             }
         }
     }
