@@ -16,10 +16,6 @@
 
 package com.android.settings.accounts;
 
-import com.android.settings.R;
-import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
@@ -52,6 +48,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.settings.R;
+import com.google.android.collect.Lists;
+import com.google.android.collect.Maps;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -175,7 +175,13 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         mDateFormat = DateFormat.getDateFormat(activity);
         mTimeFormat = DateFormat.getTimeFormat(activity);
 
-        mAccount = (Account) getArguments().getParcelable(ACCOUNT_KEY);
+        Bundle arguments = getArguments();
+        if (arguments == null) {
+            Log.e(TAG, "No arguments provided when starting intent. ACCOUNT_KEY needed.");
+            return;
+        }
+
+        mAccount = (Account) arguments.getParcelable(ACCOUNT_KEY);
         if (mAccount != null) {
             if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "Got account: " + mAccount);
             mUserId.setText(mAccount.name);
@@ -486,11 +492,13 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     protected void onAuthDescriptionsUpdated() {
         super.onAuthDescriptionsUpdated();
         getPreferenceScreen().removeAll();
-        mProviderIcon.setImageDrawable(getDrawableForType(mAccount.type));
-        mProviderId.setText(getLabelForType(mAccount.type));
-        PreferenceScreen prefs = addPreferencesForType(mAccount.type);
-        if (prefs != null) {
-            updatePreferenceIntents(prefs);
+        if (mAccount != null) {
+            mProviderIcon.setImageDrawable(getDrawableForType(mAccount.type));
+            mProviderId.setText(getLabelForType(mAccount.type));
+            PreferenceScreen prefs = addPreferencesForType(mAccount.type);
+            if (prefs != null) {
+                updatePreferenceIntents(prefs);
+            }
         }
         addPreferencesFromResource(R.xml.account_sync_settings);
     }

@@ -63,8 +63,7 @@
                 android:label="@string/settings_label_launcher"
                 android:taskAffinity="com.android.settings"
                 android:theme="@android:style/Theme.Holo"
-                android:launchMode="singleTask"
-                >
+                android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SETTINGS" />
@@ -75,8 +74,7 @@
 
         <activity android:name=".SubSettings"
                 android:taskAffinity="com.android.settings"
-                android:theme="@android:style/Theme.Holo"
-                >
+                android:theme="@android:style/Theme.Holo">
         </activity>
 
         <activity android:name="CreateShortcut" android:label="@string/settings_shortcut"
@@ -91,8 +89,7 @@
 
         <activity android:name="Settings$WirelessSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
-                android:label="@string/wireless_networks_settings_title"
-                >
+                android:label="@string/wireless_networks_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
@@ -112,9 +109,8 @@
         <activity android:name="Settings$WifiSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/wifi_settings"
-                android:configChanges="orientation|keyboardHidden"
-                android:clearTaskOnLaunch="true"
-                >
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_SETTINGS" />
@@ -125,7 +121,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/wireless_settings" />
+                android:resource="@id/wifi_settings" />
         </activity>
 
         <activity android:name=".wifi.WifiPickerActivity"
@@ -146,29 +142,22 @@
                   android:windowSoftInputMode="adjustResize"
                   android:exported="true" />
 
-        <activity-alias android:name=".wifi.AdvancedWifiSettings"
+        <activity android:name="Settings$AdvancedWifiSettingsActivity"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/wifi_advanced_settings_label"
-                android:targetActivity="Settings"
-                >
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_IP_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
-
-        <activity-alias android:name=".wifi.AdvancedSettings"
-                android:label="@string/wifi_advanced_settings_label"
-                android:targetActivity="Settings"
-                >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.WIFI_IP_SETTINGS" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.AdvancedWifiSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wifi_settings" />
+        </activity>
 
         <activity android:name=".wifi.WifiInfo"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge">
@@ -206,6 +195,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
         <activity-alias android:name=".wifi.WifiApSettings"
                 android:targetActivity="Settings">
             <intent-filter>
@@ -216,9 +206,8 @@
         </activity-alias>
 
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
-                  android:configChanges="orientation|keyboardHidden"
-                  android:launchMode="singleTask"
-                >
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -241,20 +230,23 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.bluetooth.BluetoothSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/wireless_settings" />
+                android:resource="@id/bluetooth_settings" />
         </activity>
 
-        <activity-alias android:name=".bluetooth.AdvancedBluetoothSettings"
+        <activity android:name="Settings$AdvancedBluetoothSettingsActivity"
                 android:label="@string/bluetooth_advanced_settings_label"
-                android:targetActivity="Settings"
-                >
+                android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ADVANCED_BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.AdvancedBluetoothSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/bluetooth_settings" />
+        </activity>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
@@ -323,7 +315,7 @@
 
         <activity android:name="Settings$DateTimeSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
-                android:label="@string/date_and_time" >
+                android:label="@string/date_and_time">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DATE_SETTINGS" />
@@ -448,8 +440,7 @@
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/display_settings"
-                android:clearTaskOnLaunch="true"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
@@ -500,7 +491,7 @@
         <activity android:name="SettingsLicenseActivity"
                 android:label="@string/settings_license_activity_title"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert"
-                android:configChanges="orientation">
+                android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.settings.LICENSE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -516,28 +507,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="Settings$ApplicationSettingsActivity"
-                android:theme="@android:style/Theme.Holo"
-                android:label="@string/applications_settings_header">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.APPLICATION_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.ApplicationSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/application_settings" />
-        </activity>
-
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/manageapplications_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
+                <action android:name="android.settings.APPLICATION_SETTINGS" />
                 <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
                 <action android:name="android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -548,10 +524,6 @@
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/applications_settings_header" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -569,6 +541,7 @@
                   android:label="@string/application_info_label"
                   android:exported="true">
         </activity>
+
         <activity-alias android:name=".applications.InstalledAppDetails"
                   android:label="@string/application_info_label"
                   android:targetActivity=".applications.InstalledAppDetailsTop">
@@ -594,10 +567,6 @@
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/applications_settings_header" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <!-- Provide direct entry into manage apps showing running services. -->
@@ -607,6 +576,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
                 <category android:name="android.intent.category.MONKEY" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -615,16 +585,12 @@
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/applications_settings_header" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <activity android:name="Settings$LocationSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/location_settings_title"
-                android:configChanges="orientation|keyboardHidden"
+                android:configChanges="orientation|keyboardHidden|screenSize"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -643,7 +609,7 @@
         <activity android:name="Settings$SecuritySettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/security_settings_title"
-                android:configChanges="orientation|keyboardHidden"
+                android:configChanges="orientation|keyboardHidden|screenSize"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -662,11 +628,12 @@
         <activity android:name="Settings$PrivacySettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/privacy_settings_title"
-                android:configChanges="orientation|keyboardHidden"
+                android:configChanges="orientation|keyboardHidden|screenSize"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <action android:name="android.settings.BACKUP_AND_RESET_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -678,7 +645,7 @@
 
         <activity android:name="CredentialStorage"
                 android:theme="@style/Transparent"
-                android:configChanges="orientation|keyboardHidden">
+                android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="com.android.credentials.UNLOCK" />
                 <action android:name="com.android.credentials.INSTALL" />
@@ -690,8 +657,7 @@
         <activity android:name="Settings$DeviceAdminSettingsActivity"
                 android:label="@string/device_admin_settings_title"
                 android:theme="@android:style/Theme.Holo"
-                android:clearTaskOnLaunch="true"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -711,8 +677,7 @@
         <activity android:name="DeviceAdminAdd"
                 android:label="@string/device_admin_add_title"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
-                android:clearTaskOnLaunch="true"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -745,12 +710,17 @@
                 android:resource="@id/accessibility_settings" />
         </activity>
 
-        <activity android:name="TextToSpeechSettings" android:label="@string/tts_settings">
+        <activity android:name="Settings$TextToSpeechSettingsActivity"
+                android:label="@string/tts_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.TextToSpeechSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
         </activity>
 
         <!-- Second and third-level settings -->
@@ -861,7 +831,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/application_settings" />
+                android:resource="@id/development_settings" />
         </activity>
 
         <activity-alias android:name="DevelopmentSettings"
@@ -869,16 +839,10 @@
                   android:exported="true"
                   android:label="@string/development_settings_title"
                   android:targetActivity="Settings$DevelopmentSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/application_settings" />
+                android:resource="@id/development_settings" />
         </activity-alias>
 
         <activity android:name="Settings$UsbSettingsActivity"
@@ -1055,6 +1019,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
         <activity-alias android:name="ProxySelector"
             android:label="@string/proxy_settings_label"
             android:targetActivity="Settings">
@@ -1121,10 +1086,6 @@
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/applications_settings_header" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <activity
