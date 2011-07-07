@@ -20,17 +20,21 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
@@ -49,6 +53,24 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     private PreferenceGroup mFoundDevicesCategory;
     private boolean mFoundDevicesCategoryIsPresent;
+
+    private View mView;
+    private TextView mEmptyView;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
+        return mView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mEmptyView = (TextView) mView.findViewById(R.id.empty);
+        getListView().setEmptyView(mEmptyView);
+    }
 
     @Override
     void addPreferencesForActivity() {
@@ -205,11 +227,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
         setDeviceListGroup(preferenceScreen);
         removeAllDevices();
-
-        // TODO: from xml, add top padding. Same as in wifi
-        Preference emptyListPreference = new Preference(getActivity());
-        emptyListPreference.setTitle(messageId);
-        preferenceScreen.addPreference(emptyListPreference);
+        mEmptyView.setText(messageId);
     }
 
     @Override

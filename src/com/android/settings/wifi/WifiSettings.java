@@ -56,6 +56,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.util.AsyncChannel;
@@ -106,6 +107,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     private WifiDialog mDialog;
 
+    private View mView;
+    private TextView mEmptyView;
+
     /* Used in Wifi Setup context */
 
     // this boolean extra specifies whether to disable the Next button when not connected
@@ -149,11 +153,8 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        if (mInXlSetupWizard) {
-            return inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
-        } else {
-            return super.onCreateView(inflater, container, savedInstanceState);
-        }
+        mView = inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
+        return mView;
     }
 
     @Override
@@ -208,6 +209,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
             mWifiEnabler = new WifiEnabler(activity, actionBarSwitch);
         }
+
+        mEmptyView = (TextView) mView.findViewById(R.id.empty);
+        getListView().setEmptyView(mEmptyView);
 
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
@@ -398,12 +402,11 @@ public class WifiSettings extends SettingsPreferenceFragment
      * the strength of network and the security for it.
      */
     private void updateAccessPoints() {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.removeAll();
         final int wifiState = mWifiManager.getWifiState();
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
+                getPreferenceScreen().removeAll();
                 // AccessPoints are automatically sorted with TreeSet.
                 final Collection<AccessPoint> accessPoints = constructAccessPoints();
                 if (mInXlSetupWizard) {
@@ -414,6 +417,10 @@ public class WifiSettings extends SettingsPreferenceFragment
                         getPreferenceScreen().addPreference(accessPoint);
                     }
                 }
+                break;
+
+            case WifiManager.WIFI_STATE_ENABLING:
+                getPreferenceScreen().removeAll();
                 break;
 
             case WifiManager.WIFI_STATE_DISABLING:
@@ -427,9 +434,8 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     private void addMessagePreference(int messageId) {
-        Preference emptyListPreference = new Preference(getActivity());
-        emptyListPreference.setTitle(messageId);
-        getPreferenceScreen().addPreference(emptyListPreference);
+        if (mEmptyView != null) mEmptyView.setText(messageId);
+        getPreferenceScreen().removeAll();
     }
 
     private Collection<AccessPoint> constructAccessPoints() {
@@ -550,15 +556,13 @@ public class WifiSettings extends SettingsPreferenceFragment
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLED:
                 mScanner.resume();
-                return; // not break, to avoid pause
+                return; // not break, to avoid the call to pause() below
 
             case WifiManager.WIFI_STATE_ENABLING:
-                getPreferenceScreen().removeAll();
                 addMessagePreference(R.string.wifi_starting);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
-                getPreferenceScreen().removeAll();
                 addMessagePreference(R.string.wifi_empty_list_wifi_off);
                 break;
         }
