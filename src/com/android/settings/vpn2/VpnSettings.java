@@ -21,6 +21,7 @@ import com.android.settings.R;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.IConnectivityManager;
+import android.net.LinkProperties;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,6 +42,7 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.nio.charset.Charsets;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -198,7 +200,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
             // If we are not editing, connect!
             if (!mDialog.isEditing()) {
-                connect(profile);
+                try {
+                    connect(profile);
+                } catch (Exception e) {
+                    Log.e(TAG, "connect", e);
+                }
             }
         }
     }
@@ -314,20 +320,45 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
-    private void connect(VpnProfile profile) {
+    private void connect(VpnProfile profile) throws Exception {
+        // Get the current active interface.
+        LinkProperties network = mService.getActiveLinkProperties();
+        String interfaze = (network == null) ? null : network.getInterfaceName();
+        if (interfaze == null) {
+            throw new IllegalStateException("Cannot get network interface");
+        }
+
+        // Load certificates.
+        String privateKey = "";
+        String userCert = "";
+        String caCert = "";
+        if (!profile.ipsecUserCert.isEmpty()) {
+            byte[] value = mKeyStore.get(Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert);
+            privateKey = (value == null) ? null : new String(value, Charsets.UTF_8);
+            value = mKeyStore.get(Credentials.USER_CERTIFICATE + profile.ipsecUserCert);
+            userCert = (value == null) ? null : new String(value, Charsets.UTF_8);
+        }
+        if (!profile.ipsecCaCert.isEmpty()) {
+            byte[] value = mKeyStore.get(Credentials.CA_CERTIFICATE + profile.ipsecCaCert);
+            caCert = (value == null) ? null : new String(value, Charsets.UTF_8);
+        }
+        if (privateKey == null || userCert == null || caCert == null) {
+            // TODO: find out a proper way to handle this. Delete these keys?
+            throw new IllegalStateException("Cannot load credentials");
+        }
+        Log.i(TAG, userCert);
+
+        // Prepare arguments for racoon.
         String[] racoon = null;
         switch (profile.type) {
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 racoon = new String[] {
-                    profile.server, "1701", profile.ipsecSecret,
+                    interfaze, profile.server, "udppsk", "1701", profile.ipsecSecret,
                 };
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
                 racoon = new String[] {
-                    profile.server, "1701",
-                    Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert,
-                    Credentials.USER_CERTIFICATE + profile.ipsecUserCert,
-                    Credentials.CA_CERTIFICATE + profile.ipsecCaCert,
+                    interfaze, profile.server, "udprsa", "1701", privateKey, userCert, caCert,
                 };
                 break;
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
@@ -338,6 +369,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                 break;
         }
 
+        // Prepare arguments for mtpd.
         String[] mtpd = null;
         switch (profile.type) {
             case VpnProfile.TYPE_PPTP:
@@ -369,11 +401,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             config.searchDomains = Arrays.asList(profile.searchDomains.split(" "));
         }
 
-        try {
-            mService.startLegacyVpn(config, racoon, mtpd);
-        } catch (Exception e) {
-            Log.e(TAG, "connect", e);
-        }
+        mService.startLegacyVpn(config, racoon, mtpd);
     }
 
     private void disconnect(String key) {

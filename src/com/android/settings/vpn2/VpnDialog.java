@@ -197,6 +197,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         // First, hide everything.
         mMppe.setVisibility(View.GONE);
         mView.findViewById(R.id.l2tp).setVisibility(View.GONE);
+        mView.findViewById(R.id.ipsec_id).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_psk).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_user).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_ca).setVisibility(View.GONE);
@@ -206,11 +207,12 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
             case VpnProfile.TYPE_PPTP:
                 mMppe.setVisibility(View.VISIBLE);
                 break;
-
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 mView.findViewById(R.id.l2tp).setVisibility(View.VISIBLE);
-                // fall through
+                mView.findViewById(R.id.ipsec_psk).setVisibility(View.VISIBLE);
+                break;
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
+                mView.findViewById(R.id.ipsec_id).setVisibility(View.VISIBLE);
                 mView.findViewById(R.id.ipsec_psk).setVisibility(View.VISIBLE);
                 break;
 
@@ -295,11 +297,12 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
             case VpnProfile.TYPE_PPTP:
                 profile.mppe = mMppe.isChecked();
                 break;
-
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 profile.l2tpSecret = getSecret(mProfile.l2tpSecret, mL2tpSecret);
-                // fall through
+                profile.ipsecSecret = getSecret(mProfile.ipsecSecret, mIpsecSecret);
+                break;
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
+                profile.ipsecIdentifier = mIpsecIdentifier.getText().toString();
                 profile.ipsecSecret = getSecret(mProfile.ipsecSecret, mIpsecSecret);
                 break;
 
