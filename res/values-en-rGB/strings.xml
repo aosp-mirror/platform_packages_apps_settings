@@ -19,6 +19,10 @@
     <string name="yes" msgid="4676390750360727396">"Yes"</string>
     <string name="no" msgid="6731231425810196216">"No"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Unknown"</string>
+    <string name="header_category_wireless_networks" msgid="4944823405420438623">"WIRELESS &amp; NETWORKS"</string>
+    <string name="header_category_device" msgid="5781174212691167553">"DEVICE"</string>
+    <string name="header_category_personal" msgid="6225932173498802187">"PERSONAL"</string>
+    <string name="header_category_system" msgid="2073558547468647128">"SYSTEM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Turn on radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Turn off radio"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"View SIM address book"</string>
@@ -111,7 +115,11 @@
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Pairing…"</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Paired, but not connected"</string>
     <string name="bluetooth_device" msgid="6873461446424952003">"handsfree/headset"</string>
-    <string name="progress_scanning" msgid="3760897655335759141">"Scanning"</string>
+    <!-- outdated translation 3760897655335759141 -->     <string name="progress_scanning" msgid="192587958424295789">"Scanning"</string>
+    <!-- no translation found for progress_tap_to_pair (4192342336107106334) -->
+    <skip />
+    <!-- no translation found for bluetooth_no_devices_found (2412462335116297668) -->
+    <skip />
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth pairing request"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing request"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"Select to pair with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -130,6 +138,9 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="7471195931669103553">"An application on your phone is requesting permission to turn on Bluetooth and to make your phone discoverable by other devices. Do you want to do this?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Turning on Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="8013003320667198460">"Auto-connect"</string>
+    <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Bluetooth connection request"</string>
+    <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Touch to connect to \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Do you want to connect to \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Date &amp; time settings"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 P.M."</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -235,7 +246,7 @@
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Disable all wireless connections"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Disabling wireless connections…"</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Enabling wireless connections…"</string>
-    <string name="radio_controls_title" msgid="5868688473587168882">"Wireless &amp; networks"</string>
+    <string name="radio_controls_title" msgid="6889937359495515769">"More…"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Wireless &amp; networks"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Manage Wi-Fi, Bluetooth, airplane mode, mobile networks &amp; VPNs"</string>
     <string name="roaming" msgid="3596055926335478572">"Data roaming"</string>
@@ -271,8 +282,8 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Owner info"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="2382525043173672857">"Enter text to display on the lock screen"</string>
-    <string name="security_settings_title" msgid="5168491784222013179">"Location &amp; security"</string>
-    <string name="location_security_settings_title" msgid="4624434296446625554">"Location &amp; security settings"</string>
+    <string name="location_settings_title" msgid="8935806698251432196">"Location services"</string>
+    <string name="security_settings_title" msgid="7945465324818485460">"Security"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Set My Location, screen unlock, SIM card lock, credential storage lock"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Set My Location, screen unlock, credential storage lock"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Passwords"</string>
@@ -375,8 +386,8 @@
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"View or deactivate device administrators"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Turn on Bluetooth"</string>
-    <string name="bluetooth_settings" msgid="2725796451253089609">"Bluetooth settings"</string>
-    <string name="bluetooth_settings_title" msgid="2824020086246268296">"Bluetooth settings"</string>
+    <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
+    <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Manage connections, set device name &amp; discoverability"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth pairing request"</string>
     <string name="bluetooth_enter_pin_msg" msgid="1499285355129256289">\n"Enter PIN to pair with \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Try 0000 or 1234.) You may need to enter the same PIN on the Bluetooth device."</string>
@@ -394,7 +405,10 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Pairing rejected by <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"There was a problem connecting to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan for devices"</string>
-    <string name="bluetooth_preference_find_nearby_title" msgid="5087410003465463318">"Find devices nearby"</string>
+    <!-- no translation found for bluetooth_search_for_devices (5957007154213560390) -->
+    <skip />
+    <!-- no translation found for bluetooth_searching_for_devices (9203739709307871727) -->
+    <skip />
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Device settings"</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Paired devices"</string>
     <string name="bluetooth_preference_found_devices" msgid="3133019331974936204">"Found devices"</string>
@@ -404,6 +418,10 @@
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Unpair"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Disconnect &amp; unpair"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Options…"</string>
+    <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Advanced"</string>
+    <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Advanced Bluetooth"</string>
+    <string name="bluetooth_advanced_settings_label" msgid="8659717781212434173">"Advanced Bluetooth"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="3631028334811113629">"Turn on Bluetooth to see devices available"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connect to…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Hands-free"</string>
@@ -445,28 +463,31 @@
     <string name="nfc_toggle_error" msgid="2233172102497535522">"An error occurred."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Turn on Wi-Fi"</string>
-    <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi settings"</string>
+    <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi settings"</string>
+    <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Set up &amp; manage wireless access points"</string>
-    <string name="wifi_starting" msgid="6710266609710860129">"Turning on…"</string>
-    <string name="wifi_stopping" msgid="5952909472548218348">"Turning off…"</string>
+    <string name="wifi_starting" msgid="7732330327758522943">"Turning on Wi-Fi..."</string>
+    <string name="wifi_stopping" msgid="244864762599017659">"Turning off Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
     <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"In airplane mode"</string>
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Unable to scan for networks"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Network notification"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Notify me when an open network is available"</string>
+    <string name="wifi_enable_watchdog_service" msgid="4723544454066601706">"Wi-Fi Connectivity Checks"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="8687400936839455926">"Detect and manage potential network connectivity problems"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Wi-Fi disconnection policy"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Specify when to switch from Wi-Fi to mobile data"</string>
     <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Specify when to disconnect from Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"There was a problem while changing the setting"</string>
-    <string name="wifi_add_network" msgid="1671334951296205616">"Add WiFi network"</string>
-    <string name="wifi_add_network_summary" msgid="6345544206968025811">"Configure a non-broadcast network"</string>
+    <string name="wifi_add_network" msgid="6234851776910938957">"Add network"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi networks"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Scan"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Advanced"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Connect to network"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Forget network"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modify network"</string>
+    <string name="wifi_empty_list_wifi_off" msgid="3682507011071029311">"Turn on Wi-Fi to see networks available"</string>
     <string name="wifi_network_setup" msgid="7974851890019344870">"Network Setup"</string>
     <string name="wifi_wps_pin" msgid="5471842298708321115">"Enter pin from access point"</string>
     <string name="wifi_wps_setup_title" msgid="150518971269252336">"WPS Setup"</string>
@@ -502,13 +523,13 @@
     <string name="wifi_save" msgid="3331121567988522826">"Save"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Cancel"</string>
     <string name="wifi_wps_overlap_error" msgid="6820987241637459748">"Another WPS session detected. Please retry in a few minutes."</string>
-    <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Advanced"</string>
+    <!-- outdated translation 5419052271935350999 -->     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Advanced"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Wi-Fi frequency band"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Specify the frequency range of operation"</string>
     <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"There was a problem while setting the frequency band."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC address"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP address"</string>
-    <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP settings"</string>
+    <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP settings"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Save"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Cancel"</string>
     <string name="wifi_ip_settings_invalid_ip_address" msgid="6387653152103405443">"Please type a valid IP address."</string>
@@ -526,7 +547,7 @@
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portable Wi-Fi hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android Hotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Sound"</string>
-    <string name="display_settings_title" msgid="2378894265964357591">"Screen"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Sound settings"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Silent mode"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"All sounds except media &amp; alarms"</string>
@@ -709,6 +730,16 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD card will be unmounted."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Unmounting"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Unmount in progress"</string>
+    <!-- no translation found for storage_menu_usb (1580545228584324704) -->
+    <skip />
+    <!-- no translation found for storage_title_usb (5775322159427546546) -->
+    <skip />
+    <!-- no translation found for usb_label_mtp (4157227401755543412) -->
+    <skip />
+    <!-- no translation found for usb_label_ptp (7417254019489575819) -->
+    <skip />
+    <!-- no translation found for usb_label_installer_cd (7438467574756086977) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Battery status"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Battery level"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -819,6 +850,8 @@
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Cannot tether to more than <xliff:g id="MAXCONNECTION">%1$d</xliff:g> devices"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> will be untethered."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Help"</string>
+    <string name="wireless_category_general" msgid="2973810407987118067">"General"</string>
+    <string name="wireless_category_mobile_networks" msgid="1254629216798424288">"Mobile networks"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobile networks"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Set options for roaming, networks, APNs"</string>
     <string name="location_title" msgid="1029961368397484576">"My Location"</string>
@@ -896,7 +929,7 @@
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Securing your tablet"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Securing your phone"</string>
     <string name="lock_intro_message" product="tablet" msgid="3692151094288835065">"Protect your tablet from unauthorised use by creating a personal screen-unlock pattern. Use your finger to connect the dots in any order on the next screen. You must connect at least four dots. "\n\n"Ready to start? Touch “Next”."</string>
-    <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Protect your phone from unauthorised use by creating a personal screen unlock pattern. "\n<font height="17">\n</font><b>"1"</b>"  On the next screen, watch while an example pattern is drawn. "\n<font height="17">\n</font><b>"2"</b>"  When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots. "\n<font height="17">\n</font><b>"3"</b>"  Redraw your pattern to confirm. "\n<font height="17">\n</font><b>"Ready to start? Select “Next”"</b>". "\n<font height="3">\n</font>"To leave your phone unprotected, select “Cancel”."</font></string>
+    <!-- outdated translation 3692151094288835065 -->     <string name="lock_intro_message" product="default" msgid="5796785892741212873">"Protect your tablet from unauthorised use by creating a personal screen-unlock pattern. Use your finger to connect the dots in any order on the next screen. You must connect at least four dots. "\n\n"Ready to start? Touch “Next”."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Manage applications"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Manage and remove installed applications"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Applications"</string>
@@ -920,9 +953,10 @@
     <string name="force_stop" msgid="7435006169872876756">"Force stop"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
     <string name="application_size_label" msgid="5055196275624686382">"Application"</string>
+    <string name="external_code_size_label" msgid="3459343140355961335">"USB storage app"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Data"</string>
-    <string name="external_size_label" product="nosdcard" msgid="4465530017830945766">"USB storage"</string>
-    <string name="external_size_label" product="default" msgid="2107155737635944440">"SD card"</string>
+    <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB storage data"</string>
+    <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD card"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Uninstall"</string>
     <string name="disable_text" msgid="6544054052049395202">"Disable"</string>
     <string name="enable_text" msgid="9217362512327828987">"Enable"</string>
@@ -1083,7 +1117,7 @@
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"On-screen keyboard settings"</string>
     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Physical keyboard"</string>
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Physical keyboard settings"</string>
-    <string name="development_settings_title" msgid="6719732334835420989">"Development"</string>
+    <string name="development_settings_title" msgid="215179176067683667">"Developer options"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Set options for application development"</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB debugging"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode when USB is connected"</string>
@@ -1108,14 +1142,14 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibility"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Accessibility settings"</string>
     <string name="accessibility_settings_summary" msgid="8185181964847149507">"Manage accessibility options"</string>
-    <string name="toggle_accessibility_title" msgid="650839277066574497">"Accessibility"</string>
+    <string name="toggle_large_text_title" msgid="42259643359869436">"Large text"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Accessibility services"</string>
+    <string name="toggle_accessibility_title" msgid="7338739354952553958">"Allow accessibility services"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"No installed accessibility services."</string>
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"This accessibility service may be able to collect all the text that you type, including personal data credit card numbers except passwords. It may also log your user interface interactions. It comes from the application <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Use this accessibility service?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Disable accessibility?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"No accessibility-related applications found"</string>
     <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"You do not have any accessibility-related applications installed."\n\n"You can download a screen reader for your device from Android Market."\n\n"Click OK to install the screen reader."</string>
-    <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Accessibility scripts"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Download accessibility scripts"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Allow applications to download accessibility scripts from Google"</string>
     <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Some applications can ask Google to download scripts to your tablet that make their content more accessible. Are you sure that you want to allow Google to install accessibility scripts on your tablet?"</string>
@@ -1127,7 +1161,7 @@
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Touch-screen gestures"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Touch &amp; hold delay"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Delay until a touch is interpreted as a touch &amp; hold"</string>
-    <string name="power_usage_summary_title" msgid="5180282911164282324">"Battery use"</string>
+    <string name="power_usage_summary_title" msgid="7190304207330319919">"Battery"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"What has been using the battery"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Battery usage data not available"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Battery use since unplugged"</string>
@@ -1248,85 +1282,8 @@
     <string name="gadget_title" msgid="7455548605888590466">"Power Control"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Updating WiFi setting"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Updating Bluetooth setting"</string>
-    <string name="vpn_settings_activity_title" msgid="7276864950701612579">"VPN settings"</string>
-    <string name="vpn_connect_to" msgid="2541409082892684362">"Connect to <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="vpn_username_colon" msgid="7854930370861306247">"Username:"</string>
-    <string name="vpn_password_colon" msgid="5716278710848606626">"Password:"</string>
-    <string name="vpn_a_username" msgid="6664733641993968692">"a username"</string>
-    <string name="vpn_a_password" msgid="1537213632501483753">"a password"</string>
-    <string name="vpn_save_username" msgid="1408415289165970790">"Remember username"</string>
-    <string name="vpn_connect_button" msgid="1699007212602470655">"Connect"</string>
-    <string name="vpn_yes_button" msgid="8034531001149843119">"Yes"</string>
-    <string name="vpn_no_button" msgid="7620339571187119107">"No"</string>
-    <string name="vpn_back_button" msgid="192036339792734970">"Back"</string>
-    <string name="vpn_mistake_button" msgid="1683383660912491270">"No"</string>
-    <string name="vpn_menu_done" msgid="93528279226907926">"Save"</string>
-    <string name="vpn_menu_cancel" msgid="7234451214611202868">"Cancel"</string>
-    <string name="vpn_menu_revert" msgid="4407762442281467659">"Revert"</string>
-    <string name="vpn_menu_connect" msgid="1089399414463784218">"Connect to network"</string>
-    <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Disconnect from network"</string>
-    <string name="vpn_menu_edit" msgid="4526245173583195618">"Edit network"</string>
-    <string name="vpn_menu_delete" msgid="3326527392609513129">"Delete network"</string>
-    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"You must enter <xliff:g id="CODE">%s</xliff:g>."</string>
-    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"You must select <xliff:g id="OPTION">%s</xliff:g>."</string>
-    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"<xliff:g id="NAME">%s</xliff:g>the VPN  \'NAME\' already exists. Find another name."</string>
-    <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"Are you sure that you want to delete this VPN?"</string>
-    <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"Are you sure that you don\'t want to create this profile?"</string>
-    <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"Are you sure that you want to discard the changes made to this profile?"</string>
-    <string name="vpn_confirm_reconnect" msgid="5748535476278674296">"Unable to connect to the network. Do you want to try again?"</string>
-    <string name="vpn_reconnect_from_lost" msgid="2442844155623372118">"Connection lost. Do you want to connect again?"</string>
-    <string name="vpn_unknown_server_dialog_msg" msgid="3080742299823671319">"Server name cannot be resolved. Do you want to check your server name setting?"</string>
-    <string name="vpn_challenge_error_dialog_msg" msgid="6174901754230038601">"Challenge error. Do you want to check your secret setting?"</string>
-    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"One or more secrets are missing in this VPN configuration. Do you want to check your secret setting?"</string>
-    <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"The username or password that you entered is incorrect. Do you want to try again?"</string>
-    <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Server hung up. The username or password that you entered could be incorrect. Do you want to try again?"</string>
-    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"Server hung up. It is possible that you are behind a firewall that prevents you from connecting to the server. Do you want to try again?"</string>
-    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Server negotiation failed. The server may not agree with your encryption option. Do you want to check your encryption setting?"</string>
-    <string name="vpn_type_title" msgid="6392933604218676224">"Add VPN"</string>
-    <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Add VPN"</string>
-    <string name="vpn_details_title" msgid="418806440938510331">"VPN details"</string>
-    <string name="vpn_edit_title_add" msgid="2121313217989682890">"<xliff:g id="NAME">%s</xliff:g>Add VPN"</string>
-    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"<xliff:g id="NAME">%s</xliff:g> details"</string>
-    <string name="vpns" msgid="3148141862835492816">"VPNs"</string>
-    <string name="vpn_connecting" msgid="8039521381692090116">"Connecting..."</string>
-    <string name="vpn_disconnecting" msgid="7748050200708257066">"Disconnecting..."</string>
-    <string name="vpn_connected" msgid="7641723116362845781">"Connected"</string>
-    <string name="vpn_connect_hint" msgid="7442898962925875181">"Connect to network"</string>
-    <string name="vpn_name" msgid="1550918148476193076">"VPN name"</string>
-    <string name="vpn_a_name" msgid="8445736942405283509">"a VPN name"</string>
-    <string name="vpn_profile_added" msgid="9061017910337129840">"\'<xliff:g id="NAME">%s</xliff:g>\' is added"</string>
-    <string name="vpn_profile_replaced" msgid="587435576816273815">"Changes are made to \'<xliff:g id="NAME">%s</xliff:g>\'"</string>
-    <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Set user certificate"</string>
-    <string name="vpn_user_certificate" msgid="949322691686938888">"User certificate"</string>
-    <string name="vpn_a_user_certificate" msgid="8943983437956898649">"a user certificate"</string>
-    <string name="vpn_ca_certificate_title" msgid="7846466160795589985">"Set CA certificate"</string>
-    <string name="vpn_ca_certificate" msgid="465085144064264742">"Certificate authority (CA) certificate"</string>
-    <string name="vpn_a_ca_certificate" msgid="3374242520974884295">"a CA certificate"</string>
-    <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"Set L2TP secret"</string>
-    <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TP secret"</string>
-    <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"an L2TP secret"</string>
-    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"encryption"</string>
-    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"PPTP encryption"</string>
-    <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Set IPSec preshared key"</string>
-    <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"IPSec preshared key"</string>
-    <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"an IPSec preshared key"</string>
-    <string name="vpn_vpn_server_title" msgid="8897005887420358913">"Set VPN server"</string>
-    <string name="vpn_vpn_server" msgid="1141754908824209260">"VPN server"</string>
-    <string name="vpn_a_vpn_server" msgid="5960906152125045853">"a VPN server"</string>
-    <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"VPN server name"</string>
-    <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS search domains"</string>
-    <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS search domains"</string>
-    <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> is set"</string>
-    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> not set"</string>
-    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> not set (optional)"</string>
-    <string name="vpn_enable_field" msgid="3700967675854517191">"Enable <xliff:g id="OPTION">%s</xliff:g>"</string>
-    <string name="vpn_disable_field" msgid="6905658811179634005">"Disable <xliff:g id="OPTION">%s</xliff:g>"</string>
-    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> is enabled"</string>
-    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> is disabled"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"VPN settings"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Set up &amp; manage Virtual Private Networks (VPNs)"</string>
-    <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(unchanged)"</string>
-    <string name="vpn_secret_not_set" msgid="1037792636371641845">"(not set)"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Credential storage"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Install from storage"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Install from SD card"</string>
@@ -1334,6 +1291,8 @@
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Install certificates from SD card"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Clear credentials"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Remove all certificates"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"Trusted credentials"</string>
+    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Display trusted CA certificates"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Enter Password"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Enter the password for credential storage."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Current password:"</string>
@@ -1348,8 +1307,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"You must set a lock-screen PIN or password before you can use credential storage. Would you like to do that now?"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Emergency tone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Set behaviour when an emergency call is placed"</string>
-    <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>
-    <string name="privacy_settings_title" msgid="1987089301293213705">"Privacy settings"</string>
+    <string name="privacy_settings" msgid="5446972770562918934">"Backup &amp; reset"</string>
+    <string name="privacy_settings_title" msgid="4856282165773594890">"Backup &amp; reset"</string>
     <string name="backup_section_title" msgid="8856083167469467588">"Back up and restore"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"personal data"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Back up my data"</string>
@@ -1453,6 +1412,36 @@
     <string name="select_all" msgid="6783085295161532497">"Select All"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP checking"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Set HDCP checking behaviour"</string>
+    <!-- no translation found for debug_ui_category (9023948280291055349) -->
+    <skip />
+    <!-- no translation found for strict_mode (1938795874357830695) -->
+    <skip />
+    <!-- no translation found for strict_mode_summary (142834318897332338) -->
+    <skip />
+    <!-- no translation found for pointer_location (6084434787496938001) -->
+    <skip />
+    <!-- no translation found for pointer_location_summary (840819275172753713) -->
+    <skip />
+    <!-- no translation found for show_screen_updates (8282711794220426931) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (1716122382094924596) -->
+    <skip />
+    <!-- no translation found for show_cpu_usage (2389212910758076024) -->
+    <skip />
+    <!-- no translation found for show_cpu_usage_summary (2113341923988958266) -->
+    <skip />
+    <!-- no translation found for window_animation_scale_title (6162587588166114700) -->
+    <skip />
+    <!-- no translation found for transition_animation_scale_title (387527540523595875) -->
+    <skip />
+    <!-- no translation found for debug_applications_category (6221644998451283813) -->
+    <skip />
+    <!-- no translation found for immediately_destroy_activities (3622005081180597749) -->
+    <skip />
+    <!-- no translation found for immediately_destroy_activities_summary (3592221124808773368) -->
+    <skip />
+    <!-- no translation found for app_process_limit_title (4121324758038197598) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Data usage"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Data usage cycle"</string>
     <string name="data_usage_menu_split_4g" msgid="7417435609285381968">"Split 4G usage"</string>
@@ -1476,7 +1465,7 @@
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"This feature may negatively affect applications which depend on background data usage."\n\n"More appropriate data usage controls may be found within this application\'s settings."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Usage cycle reset date"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Date of each month:"</string>
-    <string name="data_usage_cycle_editor_positive" msgid="4565302264487526138">"set"</string>
+    <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Set"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limiting data usage"</string>
     <string name="data_usage_limit_dialog_mobile" msgid="7931094451923591578">"Your mobile data connection will be disabled when the specified limit is reached."\n\n"To avoid coverage charges, consider using a reduced limit, as device and operator accounting methods may vary."</string>
     <string name="data_usage_limit_dialog_3g" msgid="5478553071420316963">"Your 2G-3G data connection will be disabled when the specified limit is reached."\n\n"To avoid coverage charges, consider using a reduced limit, as device and operator accounting methods may vary."</string>
@@ -1485,5 +1474,45 @@
     <string name="data_usage_disabled_dialog_4g_title" msgid="715585612162185936">"4G data disabled"</string>
     <string name="data_usage_disabled_dialog_mobile_title" msgid="209516216265000221">"Mobile data disabled"</string>
     <string name="data_usage_disabled_dialog" msgid="2874031671067845964">"The specified data usage limit has been reached."\n\n"Additional data use may incur operator charges."</string>
-    <string name="data_usage_disabled_dialog_enable" msgid="5738467047490662678">"re-enable data"</string>
+    <string name="data_usage_disabled_dialog_enable" msgid="2441219164620753329">"Reenable data"</string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="32">"<xliff:g id="NUMBER">%1$s</xliff:g>"</font>" "<font size="12">"<xliff:g id="UNIT">%2$s</xliff:g>"</font>\n<font size="12">"warning"</font></string>
+    <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Emergency call"</string>
+    <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Return to call"</string>
+    <string name="vpn_name" msgid="4689699885361002297">"Name"</string>
+    <string name="vpn_type" msgid="5435733139514388070">"Type"</string>
+    <string name="vpn_server" msgid="2123096727287421913">"Server address"</string>
+    <string name="vpn_mppe" msgid="6639001940500288972">"PPP encryption (MPPE)"</string>
+    <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TP secret"</string>
+    <string name="vpn_ipsec_identifier" msgid="4098175859460006296">"IPSec identifier"</string>
+    <string name="vpn_ipsec_secret" msgid="4526453255704888704">"IPSec preshared key"</string>
+    <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec user certificate"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA certificate"</string>
+    <!-- no translation found for vpn_search_domains (5391995501541199624) -->
+    <skip />
+    <!-- no translation found for vpn_routes (8556236801755260073) -->
+    <skip />
+    <string name="vpn_username" msgid="1863901629860867849">"Username"</string>
+    <string name="vpn_password" msgid="6756043647233596772">"Password"</string>
+    <!-- no translation found for vpn_save_login (6350322456427484881) -->
+    <skip />
+    <!-- no translation found for vpn_not_used (9094191054524660891) -->
+    <skip />
+    <string name="vpn_no_ca_cert" msgid="7820884983947090538">"(do not verify server)"</string>
+    <string name="vpn_cancel" msgid="1979937976123659332">"Cancel"</string>
+    <string name="vpn_save" msgid="4233484051644764510">"Save"</string>
+    <string name="vpn_connect" msgid="8469608541746132301">"Connect"</string>
+    <string name="vpn_edit" msgid="1111459297288136079">"Edit VPN network"</string>
+    <string name="vpn_connect_to" msgid="7328758950427515753">"Connect to <xliff:g id="NETWORK">%s</xliff:g>"</string>
+    <string name="vpn_title" msgid="7982620762043790565">"VPN settings"</string>
+    <string name="vpn_create" msgid="8966010925994175306">"Add VPN network"</string>
+    <string name="vpn_menu_edit" msgid="4526245173583195618">"Edit network"</string>
+    <string name="vpn_menu_delete" msgid="3326527392609513129">"Delete network"</string>
+    <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"System"</string>
+    <string name="trusted_credentials_user_tab" msgid="2244732111398939475">"User"</string>
+    <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Disable"</string>
+    <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Enable"</string>
+    <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Remove"</string>
+    <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Enable the system CA certificate?"</string>
+    <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Disable the system CA certificate?"</string>
+    <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Permanently remove the user CA certificate?"</string>
 </resources>
