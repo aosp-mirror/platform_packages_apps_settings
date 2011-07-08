@@ -76,7 +76,6 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(android.R.style.Theme_Holo_SplitActionBarWhenNarrow);
         getMetaData();
         mInLocalHeaderSwitch = true;
         super.onCreate(savedInstanceState);
