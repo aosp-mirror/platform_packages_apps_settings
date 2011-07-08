@@ -23,24 +23,16 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
-
-import android.app.ActivityManagerNative;
-import android.app.admin.DevicePolicyManager;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.IWindowManager;
 
 import java.util.ArrayList;
 
@@ -52,19 +44,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
-    private static final String KEY_ANIMATIONS = "animations";
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_FONT_SIZE = "font_size";
 
-    private ListPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
-    private float[] mAnimationScales;
     private ListPreference mFontSizePref;
 
     private final Configuration mCurConfig = new Configuration();
     
-    private IWindowManager mWindowManager;
-
     private ListPreference mScreenTimeoutPreference;
 
     private ContentObserver mAccelerometerRotationObserver = new ContentObserver(new Handler()) {
@@ -78,18 +65,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getActivity().getContentResolver();
-        mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
 
         addPreferencesFromResource(R.xml.display_settings);
 
-        // Fetch this once before attaching a listener for changes.
-        try {
-            mAnimationScales = mWindowManager.getAnimationScales();
-        } catch (RemoteException e) {
-            // Shouldn't happen and not much can be done anyway.
-        }
-        mAnimations = (ListPreference) findPreference(KEY_ANIMATIONS);
-        mAnimations.setOnPreferenceChangeListener(this);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
 
@@ -99,7 +77,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setValue(String.valueOf(currentTimeout));
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
-        updateTimeoutPreferenceDescription(resolver, mScreenTimeoutPreference,
+        updateTimeoutPreferenceDescription(mScreenTimeoutPreference,
                 R.string.screen_timeout_summary, currentTimeout);
 
         mFontSizePref = (ListPreference) findPreference(KEY_FONT_SIZE);
@@ -107,15 +85,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateTimeoutPreferenceDescription(
-            ContentResolver resolver,
-            ListPreference pref, 
+            ListPreference pref,
             int summaryStrings,
             long currentTimeout) {
-        updateTimeoutPreferenceDescription(resolver, pref, summaryStrings, 0, currentTimeout);
+        updateTimeoutPreferenceDescription(pref, summaryStrings, 0, currentTimeout);
     }
+
     private void updateTimeoutPreferenceDescription(
-            ContentResolver resolver,
-            ListPreference pref, 
+            ListPreference pref,
             int summaryStrings,
             int zeroString,
             long currentTimeout) {
@@ -188,19 +165,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     
     public void readFontSizePreference(ListPreference pref) {
         try {
-            mCurConfig.updateFrom(
-                ActivityManagerNative.getDefault().getConfiguration());
+            mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
         } catch (RemoteException e) {
+            Log.w(TAG, "Unable to retrieve font size");
         }
-        pref.setValueIndex(floatToIndex(mCurConfig.fontScale,
-                R.array.entryvalues_font_size));
+        pref.setValueIndex(floatToIndex(mCurConfig.fontScale, R.array.entryvalues_font_size));
     }
     
     @Override
     public void onResume() {
         super.onResume();
 
-        updateState(true);
+        updateState();
         getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 mAccelerometerRotationObserver);
@@ -213,33 +189,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         getContentResolver().unregisterContentObserver(mAccelerometerRotationObserver);
     }
 
-    private void updateState(boolean force) {
-        int animations = 0;
-        try {
-            mAnimationScales = mWindowManager.getAnimationScales();
-        } catch (RemoteException e) {
-            // Shouldn't happen and not much can be done anyway.
-        }
-        if (mAnimationScales != null) {
-            if (mAnimationScales.length >= 1) {
-                animations = ((int)(mAnimationScales[0]+.5f)) % 10;
-            }
-            if (mAnimationScales.length >= 2) {
-                animations += (((int)(mAnimationScales[1]+.5f)) & 0x7) * 10;
-            }
-        }
-        int idx = 0;
-        int best = 0;
-        CharSequence[] aents = mAnimations.getEntryValues();
-        for (int i=0; i<aents.length; i++) {
-            int val = Integer.parseInt(aents[i].toString());
-            if (val <= animations && val > best) {
-                best = val;
-                idx = i;
-            }
-        }
-        mAnimations.setValueIndex(idx);
-        updateAnimationsSummary(mAnimations.getValue());
+    private void updateState() {
         updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
     }
@@ -250,24 +200,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
-    private void updateAnimationsSummary(Object value) {
-        CharSequence[] summaries = getResources().getTextArray(R.array.animations_summaries);
-        CharSequence[] values = mAnimations.getEntryValues();
-        for (int i=0; i<values.length; i++) {
-            //Log.i("foo", "Comparing entry "+ values[i] + " to current "
-            //        + mAnimations.getValue());
-            if (values[i].equals(value)) {
-                mAnimations.setSummary(summaries[i]);
-                break;
-            }
-        }
-    }
-
     public void writeFontSizePreference(Object objValue) {
         try {
             mCurConfig.fontScale = Float.parseFloat(objValue.toString());
             ActivityManagerNative.getDefault().updateConfiguration(mCurConfig);
         } catch (RemoteException e) {
+            Log.w(TAG, "Unable to save font size");
         }
     }
     
@@ -283,31 +221,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        if (KEY_ANIMATIONS.equals(key)) {
-            try {
-                int value = Integer.parseInt((String) objValue);
-                if (mAnimationScales.length >= 1) {
-                    mAnimationScales[0] = value%10;
-                }
-                if (mAnimationScales.length >= 2) {
-                    mAnimationScales[1] = (value/10)%10;
-                }
-                try {
-                    mWindowManager.setAnimationScales(mAnimationScales);
-                } catch (RemoteException e) {
-                }
-                updateAnimationsSummary(objValue);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist animation setting", e);
-            }
-
-        }
         if (KEY_SCREEN_TIMEOUT.equals(key)) {
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(),
                         SCREEN_OFF_TIMEOUT, value);
-                updateTimeoutPreferenceDescription(getContentResolver(), mScreenTimeoutPreference,
+                updateTimeoutPreferenceDescription(mScreenTimeoutPreference,
                         R.string.screen_timeout_summary, value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);

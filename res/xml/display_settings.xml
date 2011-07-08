@@ -23,16 +23,14 @@
                 android:title="@string/brightness"
                 android:dialogTitle="@string/brightness" />
 
+        <PreferenceScreen
+                android:key="wallpaper"
+                android:title="@string/wallpaper_settings_title"
+                android:fragment="com.android.settings.WallpaperTypeSettings" />
+
         <CheckBoxPreference
             android:key="accelerometer"
             android:title="@string/accelerometer_title"/>
-
-        <ListPreference
-            android:key="animations"
-            android:title="@string/animations_title"
-            android:persistent="false"
-            android:entries="@array/animations_entries"
-            android:entryValues="@array/animations_values" />
 
         <ListPreference
                 android:key="screen_timeout"
@@ -42,18 +40,10 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
-        <PreferenceScreen
-                android:key="wallpaper"
-                android:title="@string/wallpaper_settings_title"
-                android:fragment="com.android.settings.WallpaperTypeSettings"
-            />
-
         <PreferenceScreen 
                 android:title="@string/dream_settings_title" 
                 android:summary="@string/dream_settings_summary"
-                android:fragment="com.android.settings.DreamSettings"
-                >
-        </PreferenceScreen>
+                android:fragment="com.android.settings.DreamSettings" />
 
         <ListPreference
                 android:key="font_size"
