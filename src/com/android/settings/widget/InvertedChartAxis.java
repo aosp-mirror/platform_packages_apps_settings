@@ -16,6 +16,9 @@
 
 package com.android.settings.widget;
 
+import android.content.res.Resources;
+import android.text.SpannableStringBuilder;
+
 /**
  * Utility to invert another {@link ChartAxis}.
  */
@@ -49,13 +52,8 @@ public class InvertedChartAxis implements ChartAxis {
     }
 
     /** {@inheritDoc} */
-    public CharSequence getLabel(long value) {
-        return mWrapped.getLabel(value);
-    }
-
-    /** {@inheritDoc} */
-    public CharSequence getShortLabel(long value) {
-        return mWrapped.getShortLabel(value);
+    public void buildLabel(Resources res, SpannableStringBuilder builder, long value) {
+        mWrapped.buildLabel(res, builder, value);
     }
 
     /** {@inheritDoc} */

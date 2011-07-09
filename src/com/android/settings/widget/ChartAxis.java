@@ -16,6 +16,9 @@
 
 package com.android.settings.widget;
 
+import android.content.res.Resources;
+import android.text.SpannableStringBuilder;
+
 /**
  * Axis along a {@link ChartView} that knows how to convert between raw point
  * and screen coordinate systems.
@@ -28,8 +31,7 @@ public interface ChartAxis {
     public float convertToPoint(long value);
     public long convertToValue(float point);
 
-    public CharSequence getLabel(long value);
-    public CharSequence getShortLabel(long value);
+    public void buildLabel(Resources res, SpannableStringBuilder builder, long value);
 
     public float[] getTickPoints();
 
