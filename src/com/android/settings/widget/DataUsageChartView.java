@@ -17,8 +17,12 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -283,15 +287,9 @@ public class DataUsageChartView extends ChartView {
         }
 
         /** {@inheritDoc} */
-        public CharSequence getLabel(long value) {
-            // TODO: convert to string
-            return Long.toString(value);
-        }
-
-        /** {@inheritDoc} */
-        public CharSequence getShortLabel(long value) {
-            // TODO: convert to string
-            return Long.toString(value);
+        public void buildLabel(Resources res, SpannableStringBuilder builder, long value) {
+            // TODO: convert to better string
+            builder.replace(0, builder.length(), Long.toString(value));
         }
 
         /** {@inheritDoc} */
@@ -345,16 +343,33 @@ public class DataUsageChartView extends ChartView {
             return (long) fraction;
         }
 
-        /** {@inheritDoc} */
-        public CharSequence getLabel(long value) {
-            // TODO: use exploded string here
-            return Long.toString(value);
-        }
+        private static final Object sSpanSize = new Object();
+        private static final Object sSpanUnit = new Object();
 
         /** {@inheritDoc} */
-        public CharSequence getShortLabel(long value) {
-            // TODO: convert to string
-            return Long.toString(value);
+        public void buildLabel(Resources res, SpannableStringBuilder builder, long value) {
+
+            float result = value;
+            final CharSequence unit;
+            if (result <= 100 * MB_IN_BYTES) {
+                unit = res.getText(com.android.internal.R.string.megabyteShort);
+                result /= MB_IN_BYTES;
+            } else {
+                unit = res.getText(com.android.internal.R.string.gigabyteShort);
+                result /= GB_IN_BYTES;
+            }
+
+            final CharSequence size;
+            if (result < 10) {
+                size = String.format("%.1f", result);
+            } else {
+                size = String.format("%.0f", result);
+            }
+
+            final int[] sizeBounds = findOrCreateSpan(builder, sSpanSize, "^1");
+            builder.replace(sizeBounds[0], sizeBounds[1], size);
+            final int[] unitBounds = findOrCreateSpan(builder, sSpanUnit, "^2");
+            builder.replace(unitBounds[0], unitBounds[1], unit);
         }
 
         /** {@inheritDoc} */
@@ -370,6 +385,18 @@ public class DataUsageChartView extends ChartView {
 
             return tickPoints;
         }
+    }
+
+    private static int[] findOrCreateSpan(
+            SpannableStringBuilder builder, Object key, CharSequence bootstrap) {
+        int start = builder.getSpanStart(key);
+        int end = builder.getSpanEnd(key);
+        if (start == -1) {
+            start = TextUtils.indexOf(builder, bootstrap);
+            end = start + bootstrap.length();
+            builder.setSpan(key, start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+        return new int[] { start, end };
     }
 
 }

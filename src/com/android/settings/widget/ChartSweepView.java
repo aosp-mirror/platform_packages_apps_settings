@@ -19,8 +19,15 @@ package com.android.settings.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.text.DynamicLayout;
+import android.text.Layout.Alignment;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.MotionEvent;
@@ -36,13 +43,20 @@ import com.google.common.base.Preconditions;
  */
 public class ChartSweepView extends FrameLayout {
 
-    // TODO: paint label when requested
-
     private Drawable mSweep;
-    private Rect mSweepMargins = new Rect();
+    private Rect mSweepPadding = new Rect();
+    private Point mSweepOffset = new Point();
+
+    private Rect mMargins = new Rect();
 
     private int mFollowAxis;
-    private boolean mShowLabel;
+
+    private int mLabelSize;
+    private int mLabelTemplateRes;
+    private int mLabelColor;
+
+    private SpannableStringBuilder mLabelTemplate;
+    private DynamicLayout mLabelLayout;
 
     private ChartAxis mAxis;
     private long mValue;
@@ -73,7 +87,10 @@ public class ChartSweepView extends FrameLayout {
 
         setSweepDrawable(a.getDrawable(R.styleable.ChartSweepView_sweepDrawable));
         setFollowAxis(a.getInt(R.styleable.ChartSweepView_followAxis, -1));
-        setShowLabel(a.getBoolean(R.styleable.ChartSweepView_showLabel, false));
+
+        setLabelSize(a.getDimensionPixelSize(R.styleable.ChartSweepView_labelSize, 0));
+        setLabelTemplate(a.getResourceId(R.styleable.ChartSweepView_labelTemplate, 0));
+        setLabelColor(a.getColor(R.styleable.ChartSweepView_labelColor, Color.BLUE));
 
         a.recycle();
 
@@ -90,27 +107,23 @@ public class ChartSweepView extends FrameLayout {
         return mFollowAxis;
     }
 
-    /**
-     * Return margins of {@link #setSweepDrawable(Drawable)}, indicating how the
-     * sweep should be displayed around a content region.
-     */
-    public Rect getSweepMargins() {
-        return mSweepMargins;
+    public Rect getMargins() {
+        return mMargins;
     }
 
     /**
      * Return the number of pixels that the "target" area is inset from the
      * {@link View} edge, along the current {@link #setFollowAxis(int)}.
      */
-    public float getTargetInset() {
+    private float getTargetInset() {
         if (mFollowAxis == VERTICAL) {
-            final float targetHeight = mSweep.getIntrinsicHeight() - mSweepMargins.top
-                    - mSweepMargins.bottom;
-            return mSweepMargins.top + (targetHeight / 2);
+            final float targetHeight = mSweep.getIntrinsicHeight() - mSweepPadding.top
+                    - mSweepPadding.bottom;
+            return mSweepPadding.top + (targetHeight / 2);
         } else {
-            final float targetWidth = mSweep.getIntrinsicWidth() - mSweepMargins.left
-                    - mSweepMargins.right;
-            return mSweepMargins.left + (targetWidth / 2);
+            final float targetWidth = mSweep.getIntrinsicWidth() - mSweepPadding.left
+                    - mSweepPadding.right;
+            return mSweepPadding.left + (targetWidth / 2);
         }
     }
 
@@ -122,6 +135,12 @@ public class ChartSweepView extends FrameLayout {
         if (mListener != null) {
             mListener.onSweep(this, sweepDone);
         }
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        requestLayout();
     }
 
     public void setSweepDrawable(Drawable sweep) {
@@ -137,7 +156,7 @@ public class ChartSweepView extends FrameLayout {
             }
             sweep.setVisible(getVisibility() == VISIBLE, false);
             mSweep = sweep;
-            sweep.getPadding(mSweepMargins);
+            sweep.getPadding(mSweepPadding);
         } else {
             mSweep = null;
         }
@@ -149,9 +168,49 @@ public class ChartSweepView extends FrameLayout {
         mFollowAxis = followAxis;
     }
 
-    public void setShowLabel(boolean showLabel) {
-        mShowLabel = showLabel;
+    public void setLabelSize(int size) {
+        mLabelSize = size;
+        invalidateLabelTemplate();
+    }
+
+    public void setLabelTemplate(int resId) {
+        mLabelTemplateRes = resId;
+        invalidateLabelTemplate();
+    }
+
+    public void setLabelColor(int color) {
+        mLabelColor = color;
+        invalidateLabelTemplate();
+    }
+
+    private void invalidateLabelTemplate() {
+        if (mLabelTemplateRes != 0) {
+            final CharSequence template = getResources().getText(mLabelTemplateRes);
+
+            final TextPaint paint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+            paint.density = getResources().getDisplayMetrics().density;
+            paint.setCompatibilityScaling(getResources().getCompatibilityInfo().applicationScale);
+            paint.setColor(mLabelColor);
+
+            mLabelTemplate = new SpannableStringBuilder(template);
+            mLabelLayout = new DynamicLayout(
+                    mLabelTemplate, paint, mLabelSize, Alignment.ALIGN_RIGHT, 1f, 0f, false);
+            invalidateLabel();
+
+        } else {
+            mLabelTemplate = null;
+            mLabelLayout = null;
+        }
+
         invalidate();
+        requestLayout();
+    }
+
+    private void invalidateLabel() {
+        if (mLabelTemplate != null && mAxis != null) {
+            mAxis.buildLabel(getResources(), mLabelTemplate, mValue);
+            invalidate();
+        }
     }
 
     @Override
@@ -181,6 +240,7 @@ public class ChartSweepView extends FrameLayout {
 
     public void setValue(long value) {
         mValue = value;
+        invalidateLabel();
     }
 
     public long getValue() {
@@ -207,9 +267,9 @@ public class ChartSweepView extends FrameLayout {
                 // only start tracking when in sweet spot
                 final boolean accept;
                 if (mFollowAxis == VERTICAL) {
-                    accept = event.getX() > getWidth() - (mSweepMargins.right * 2);
+                    accept = event.getX() > getWidth() - (mSweepPadding.right * 2);
                 } else {
-                    accept = event.getY() > getHeight() - (mSweepMargins.bottom * 2);
+                    accept = event.getY() > getHeight() - (mSweepPadding.bottom * 2);
                 }
 
                 if (accept) {
@@ -222,42 +282,40 @@ public class ChartSweepView extends FrameLayout {
             case MotionEvent.ACTION_MOVE: {
                 getParent().requestDisallowInterceptTouchEvent(true);
 
-                final Rect sweepMargins = mSweepMargins;
-
                 // content area of parent
                 final Rect parentContent = new Rect(parent.getPaddingLeft(), parent.getPaddingTop(),
                         parent.getWidth() - parent.getPaddingRight(),
                         parent.getHeight() - parent.getPaddingBottom());
 
                 if (mFollowAxis == VERTICAL) {
-                    final float currentTargetY = getTop() + getTargetInset();
+                    final float currentTargetY = getTop() - mMargins.top;
                     final float requestedTargetY = currentTargetY
                             + (event.getRawY() - mTracking.getRawY());
                     final float clampedTargetY = MathUtils.constrain(
                             requestedTargetY, parentContent.top, parentContent.bottom);
                     setTranslationY(clampedTargetY - currentTargetY);
 
-                    mValue = mAxis.convertToValue(clampedTargetY - parentContent.top);
-                    dispatchOnSweep(false);
+                    setValue(mAxis.convertToValue(clampedTargetY - parentContent.top));
                 } else {
-                    final float currentTargetX = getLeft() + getTargetInset();
+                    final float currentTargetX = getLeft() - mMargins.left;
                     final float requestedTargetX = currentTargetX
                             + (event.getRawX() - mTracking.getRawX());
                     final float clampedTargetX = MathUtils.constrain(
                             requestedTargetX, parentContent.left, parentContent.right);
                     setTranslationX(clampedTargetX - currentTargetX);
 
-                    mValue = mAxis.convertToValue(clampedTargetX - parentContent.left);
-                    dispatchOnSweep(false);
+                    setValue(mAxis.convertToValue(clampedTargetX - parentContent.left));
                 }
+
+                dispatchOnSweep(false);
                 return true;
             }
             case MotionEvent.ACTION_UP: {
                 mTracking = null;
+                dispatchOnSweep(true);
                 setTranslationX(0);
                 setTranslationY(0);
                 requestLayout();
-                dispatchOnSweep(true);
                 return true;
             }
             default: {
@@ -276,7 +334,39 @@ public class ChartSweepView extends FrameLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(mSweep.getIntrinsicWidth(), mSweep.getIntrinsicHeight());
+
+        // TODO: handle vertical labels
+        if (isEnabled() && mLabelLayout != null) {
+            final int sweepHeight = mSweep.getIntrinsicHeight();
+            final int templateHeight = mLabelLayout.getHeight();
+
+            mSweepOffset.x = 0;
+            mSweepOffset.y = (int) ((templateHeight / 2) - getTargetInset());
+            setMeasuredDimension(mSweep.getIntrinsicWidth(), Math.max(sweepHeight, templateHeight));
+
+        } else {
+            mSweepOffset.x = 0;
+            mSweepOffset.y = 0;
+            setMeasuredDimension(mSweep.getIntrinsicWidth(), mSweep.getIntrinsicHeight());
+        }
+
+        if (mFollowAxis == VERTICAL) {
+            final int targetHeight = mSweep.getIntrinsicHeight() - mSweepPadding.top
+                    - mSweepPadding.bottom;
+            mMargins.top = -(mSweepPadding.top + (targetHeight / 2));
+            mMargins.bottom = 0;
+            mMargins.left = -mSweepPadding.left;
+            mMargins.right = mSweepPadding.right;
+        } else {
+            final int targetWidth = mSweep.getIntrinsicWidth() - mSweepPadding.left
+                    - mSweepPadding.right;
+            mMargins.left = -(mSweepPadding.left + (targetWidth / 2));
+            mMargins.right = 0;
+            mMargins.top = -mSweepPadding.top;
+            mMargins.bottom = mSweepPadding.bottom;
+        }
+
+        mMargins.offset(-mSweepOffset.x, -mSweepOffset.y);
     }
 
     @Override
@@ -284,7 +374,22 @@ public class ChartSweepView extends FrameLayout {
         final int width = getWidth();
         final int height = getHeight();
 
-        mSweep.setBounds(0, 0, width, height);
+        final int labelSize;
+        if (isEnabled() && mLabelLayout != null) {
+            mLabelLayout.draw(canvas);
+            labelSize = mLabelSize;
+        } else {
+            labelSize = 0;
+        }
+
+        if (mFollowAxis == VERTICAL) {
+            mSweep.setBounds(labelSize, mSweepOffset.y, width,
+                    mSweepOffset.y + mSweep.getIntrinsicHeight());
+        } else {
+            mSweep.setBounds(mSweepOffset.x, labelSize,
+                    mSweepOffset.x + mSweep.getIntrinsicWidth(), height);
+        }
+
         mSweep.draw(canvas);
     }
 

@@ -56,14 +56,16 @@
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />
         </attr>
-        <attr name="showLabel" format="boolean" />
+        <attr name="labelSize" format="dimension" />
+        <attr name="labelTemplate" format="reference" />
+        <attr name="labelColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="ChartGridView">
         <attr name="primaryDrawable" format="reference" />
         <attr name="secondaryDrawable" format="reference" />
         <attr name="borderDrawable" format="reference" />
-        <attr name="labelColor" format="color" />
+        <attr name="labelColor" />
     </declare-styleable>
 
     <declare-styleable name="ChartNetworkSeriesView">
