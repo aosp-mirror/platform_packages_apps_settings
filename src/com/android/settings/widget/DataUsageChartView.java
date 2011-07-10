@@ -87,6 +87,12 @@ public class DataUsageChartView extends ChartView {
         mSweepLimit = (ChartSweepView) findViewById(R.id.sweep_limit);
         mSweepWarning = (ChartSweepView) findViewById(R.id.sweep_warning);
 
+        // prevent sweeps from crossing each other
+        mSweepLeft.setClampBefore(mSweepRight);
+        mSweepRight.setClampAfter(mSweepLeft);
+        mSweepLimit.setClampBefore(mSweepWarning);
+        mSweepWarning.setClampAfter(mSweepLimit);
+
         mSweepLeft.addOnSweepListener(mSweepListener);
         mSweepRight.addOnSweepListener(mSweepListener);
         mSweepWarning.addOnSweepListener(mWarningListener);

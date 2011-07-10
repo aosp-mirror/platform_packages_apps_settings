@@ -61,6 +61,9 @@ public class ChartSweepView extends FrameLayout {
     private ChartAxis mAxis;
     private long mValue;
 
+    private ChartSweepView mClampAfter;
+    private ChartSweepView mClampBefore;
+
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
@@ -256,6 +259,14 @@ public class ChartSweepView extends FrameLayout {
         }
     }
 
+    public void setClampAfter(ChartSweepView clampAfter) {
+        mClampAfter = clampAfter;
+    }
+
+    public void setClampBefore(ChartSweepView clampBefore) {
+        mClampBefore = clampBefore;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isEnabled()) return false;
@@ -286,13 +297,14 @@ public class ChartSweepView extends FrameLayout {
                 final Rect parentContent = new Rect(parent.getPaddingLeft(), parent.getPaddingTop(),
                         parent.getWidth() - parent.getPaddingRight(),
                         parent.getHeight() - parent.getPaddingBottom());
+                final Rect clampRect = computeClampRect(parentContent);
 
                 if (mFollowAxis == VERTICAL) {
                     final float currentTargetY = getTop() - mMargins.top;
                     final float requestedTargetY = currentTargetY
                             + (event.getRawY() - mTracking.getRawY());
                     final float clampedTargetY = MathUtils.constrain(
-                            requestedTargetY, parentContent.top, parentContent.bottom);
+                            requestedTargetY, clampRect.top, clampRect.bottom);
                     setTranslationY(clampedTargetY - currentTargetY);
 
                     setValue(mAxis.convertToValue(clampedTargetY - parentContent.top));
@@ -301,7 +313,7 @@ public class ChartSweepView extends FrameLayout {
                     final float requestedTargetX = currentTargetX
                             + (event.getRawX() - mTracking.getRawX());
                     final float clampedTargetX = MathUtils.constrain(
-                            requestedTargetX, parentContent.left, parentContent.right);
+                            requestedTargetX, clampRect.left, clampRect.right);
                     setTranslationX(clampedTargetX - currentTargetX);
 
                     setValue(mAxis.convertToValue(clampedTargetX - parentContent.left));
@@ -322,6 +334,35 @@ public class ChartSweepView extends FrameLayout {
                 return false;
             }
         }
+    }
+
+    /**
+     * Compute {@link Rect} in {@link #getParent()} coordinates that we should
+     * be clamped inside of, usually from {@link #setClampAfter(ChartSweepView)}
+     * style rules.
+     */
+    private Rect computeClampRect(Rect parentContent) {
+        final Rect clampRect = new Rect(parentContent);
+
+        final ChartSweepView after = mClampAfter;
+        final ChartSweepView before = mClampBefore;
+
+        if (mFollowAxis == VERTICAL) {
+            if (after != null) {
+                clampRect.top += after.getPoint();
+            }
+            if (before != null) {
+                clampRect.bottom -= clampRect.height() - before.getPoint();
+            }
+        } else {
+            if (after != null) {
+                clampRect.left += after.getPoint();
+            }
+            if (before != null) {
+                clampRect.right -= clampRect.width() - before.getPoint();
+            }
+        }
+        return clampRect;
     }
 
     @Override
