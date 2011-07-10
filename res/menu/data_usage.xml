@@ -21,11 +21,19 @@
         android:showAsAction="always">
         <menu>
             <item
-                android:id="@+id/action_split_4g"
+                android:id="@+id/data_usage_menu_roaming"
+                android:title="@string/data_usage_menu_roaming"
+                android:checkable="true" />
+            <item
+                android:id="@+id/data_usage_menu_restrict_background"
+                android:title="@string/data_usage_menu_restrict_background"
+                android:checkable="true" />
+            <item
+                android:id="@+id/data_usage_menu_split_4g"
                 android:title="@string/data_usage_menu_split_4g"
                 android:checkable="true" />
             <item
-                android:id="@+id/action_show_wifi"
+                android:id="@+id/data_usage_menu_show_wifi"
                 android:title="@string/data_usage_menu_show_wifi"
                 android:checkable="true" />
         </menu>

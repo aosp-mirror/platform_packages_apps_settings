@@ -37,6 +37,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -58,6 +59,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.Preference;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -117,10 +119,12 @@ public class DataUsageSummary extends Fragment {
     private static final String TAB_MOBILE = "mobile";
     private static final String TAB_WIFI = "wifi";
 
+    private static final String TAG_CONFIRM_ROAMING = "confirmRoaming";
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
     private static final String TAG_POLICY_LIMIT = "policyLimit";
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
+    private static final String TAG_CONFIRM_APP_RESTRICT = "confirmAppRestrict";
     private static final String TAG_APP_DETAILS = "appDetails";
 
     private static final long KB_IN_BYTES = 1024;
@@ -182,6 +186,9 @@ public class DataUsageSummary extends Fragment {
     private String mCurrentTab = null;
     private String mIntentTab = null;
 
+    private MenuItem mMenuDataRoaming;
+    private MenuItem mMenuRestrictBackground;
+
     /** Flag used to ignore listeners during binding. */
     private boolean mBinding;
 
@@ -195,6 +202,7 @@ public class DataUsageSummary extends Fragment {
                 ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
         mConnService = (ConnectivityManager) getActivity().getSystemService(
                 Context.CONNECTIVITY_SERVICE);
+
         mPrefs = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
         mPolicyEditor = new NetworkPolicyEditor(mPolicyService);
@@ -308,30 +316,54 @@ public class DataUsageSummary extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         final Context context = getActivity();
 
-        final MenuItem split4g = menu.findItem(R.id.action_split_4g);
+        mMenuDataRoaming = menu.findItem(R.id.data_usage_menu_roaming);
+        mMenuDataRoaming.setVisible(hasMobileRadio(context));
+        mMenuDataRoaming.setChecked(getDataRoaming());
+
+        mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
+        mMenuRestrictBackground.setChecked(getRestrictBackground());
+
+        final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
         split4g.setVisible(hasMobile4gRadio(context));
         split4g.setChecked(isMobilePolicySplit());
 
-        final MenuItem showWifi = menu.findItem(R.id.action_show_wifi);
+        final MenuItem showWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
         showWifi.setVisible(hasMobileRadio(context) && hasWifiRadio(context));
         showWifi.setChecked(mShowWifi);
-
-        final MenuItem settings = menu.findItem(R.id.action_settings);
-        settings.setVisible(split4g.isVisible() || showWifi.isVisible());
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_split_4g: {
+            case R.id.data_usage_menu_roaming: {
+                final boolean dataRoaming = !item.isChecked();
+                if (dataRoaming) {
+                    ConfirmDataRoamingFragment.show(this);
+                } else {
+                    // no confirmation to disable roaming
+                    setDataRoaming(false);
+                }
+                return true;
+            }
+            case R.id.data_usage_menu_restrict_background: {
+                final boolean restrictBackground = !item.isChecked();
+                if (restrictBackground) {
+                    ConfirmRestrictFragment.show(this);
+                } else {
+                    // no confirmation to drop restriction
+                    setRestrictBackground(false);
+                }
+                return true;
+            }
+            case R.id.data_usage_menu_split_4g: {
                 final boolean mobileSplit = !item.isChecked();
                 setMobilePolicySplit(mobileSplit);
                 item.setChecked(isMobilePolicySplit());
                 updateTabs();
                 return true;
             }
-            case R.id.action_show_wifi: {
+            case R.id.data_usage_menu_show_wifi: {
                 mShowWifi = !item.isChecked();
                 mPrefs.edit().putBoolean(PREF_SHOW_WIFI, mShowWifi).apply();
                 item.setChecked(mShowWifi);
@@ -529,8 +561,10 @@ public class DataUsageSummary extends Fragment {
     private void updateAppDetail() {
         if (isAppDetailMode()) {
             mAppDetail.setVisibility(View.VISIBLE);
+            mCycleAdapter.setChangeVisible(false);
         } else {
             mAppDetail.setVisibility(View.GONE);
+            mCycleAdapter.setChangeVisible(true);
 
             // hide detail stats when not in detail mode
             mChart.bindDetailNetworkStats(null);
@@ -577,18 +611,7 @@ public class DataUsageSummary extends Fragment {
         final Context context = getActivity();
         if (NetworkPolicyManager.isUidValidForPolicy(context, mUid)) {
             mAppRestrictView.setVisibility(View.VISIBLE);
-
-            final int uidPolicy;
-            try {
-                uidPolicy = mPolicyService.getUidPolicy(mUid);
-            } catch (RemoteException e) {
-                // since we can't do much without policy, we bail hard.
-                throw new RuntimeException("problem reading network policy", e);
-            }
-
-            // update policy checkbox
-            final boolean restrictBackground = (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
-            mAppRestrict.setChecked(restrictBackground);
+            mAppRestrict.setChecked(getAppRestrictBackground());
 
         } else {
             mAppRestrictView.setVisibility(View.GONE);
@@ -612,6 +635,41 @@ public class DataUsageSummary extends Fragment {
         if (LOGD) Log.d(TAG, "setPolicyLimitBytes()");
         mPolicyEditor.setPolicyLimitBytes(mTemplate, limitBytes);
         updatePolicy(false);
+    }
+
+    private boolean getDataRoaming() {
+        final ContentResolver resolver = getActivity().getContentResolver();
+        return Settings.Secure.getInt(resolver, Settings.Secure.DATA_ROAMING, 0) != 0;
+    }
+
+    private void setDataRoaming(boolean enabled) {
+        // TODO: teach telephony DataConnectionTracker to watch and apply
+        // updates when changed.
+        final ContentResolver resolver = getActivity().getContentResolver();
+        Settings.Secure.putInt(resolver, Settings.Secure.DATA_ROAMING, enabled ? 1 : 0);
+        mMenuDataRoaming.setChecked(enabled);
+    }
+
+    private boolean getRestrictBackground() {
+        return !mConnService.getBackgroundDataSetting();
+    }
+
+    private void setRestrictBackground(boolean restrictBackground) {
+        if (LOGD) Log.d(TAG, "setRestrictBackground()");
+        mConnService.setBackgroundDataSetting(!restrictBackground);
+        mMenuRestrictBackground.setChecked(restrictBackground);
+    }
+
+    private boolean getAppRestrictBackground() {
+        final int uidPolicy;
+        try {
+            uidPolicy = mPolicyService.getUidPolicy(mUid);
+        } catch (RemoteException e) {
+            // since we can't do much without policy, we bail hard.
+            throw new RuntimeException("problem reading network policy", e);
+        }
+
+        return (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
     }
 
     private void setAppRestrictBackground(boolean restrictBackground) {
@@ -709,12 +767,13 @@ public class DataUsageSummary extends Fragment {
             }
 
             // one last cycle entry to modify policy cycle day
-            mCycleAdapter.add(new CycleChangeItem(context));
+            mCycleAdapter.setChangePossible(true);
 
         } else {
             // no valid cycle; show all data
             // TODO: offer simple ranges like "last week" etc
             mCycleAdapter.add(new CycleItem(context, historyStart, historyEnd));
+            mCycleAdapter.setChangePossible(false);
 
         }
 
@@ -761,7 +820,7 @@ public class DataUsageSummary extends Fragment {
             if (restrictBackground) {
                 // enabling restriction; show confirmation dialog which
                 // eventually calls setRestrictBackground() once user confirms.
-                ConfirmRestrictFragment.show(DataUsageSummary.this);
+                ConfirmAppRestrictFragment.show(DataUsageSummary.this);
             } else {
                 setAppRestrictBackground(false);
             }
@@ -946,9 +1005,32 @@ public class DataUsageSummary extends Fragment {
     }
 
     public static class CycleAdapter extends ArrayAdapter<CycleItem> {
+        private boolean mChangePossible = false;
+        private boolean mChangeVisible = false;
+
+        private final CycleChangeItem mChangeItem;
+
         public CycleAdapter(Context context) {
             super(context, android.R.layout.simple_spinner_item);
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mChangeItem = new CycleChangeItem(context);
+        }
+
+        public void setChangePossible(boolean possible) {
+            mChangePossible = possible;
+            updateChange();
+        }
+
+        public void setChangeVisible(boolean visible) {
+            mChangeVisible = visible;
+            updateChange();
+        }
+
+        private void updateChange() {
+            remove(mChangeItem);
+            if (mChangePossible && mChangeVisible) {
+                add(mChangeItem);
+            }
         }
     }
 
@@ -1235,13 +1317,83 @@ public class DataUsageSummary extends Fragment {
 
     /**
      * Dialog to request user confirmation before setting
-     * {@link #POLICY_REJECT_METERED_BACKGROUND}.
+     * {@link Settings.Secure#DATA_ROAMING}.
+     */
+    public static class ConfirmDataRoamingFragment extends DialogFragment {
+        public static void show(DataUsageSummary parent) {
+            final Bundle args = new Bundle();
+
+            final ConfirmDataRoamingFragment dialog = new ConfirmDataRoamingFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_ROAMING);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.roaming_reenable_title);
+            builder.setMessage(R.string.roaming_warning);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                    if (target != null) {
+                        target.setDataRoaming(true);
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Dialog to request user confirmation before setting
+     * {@link ConnectivityManager#setBackgroundDataSetting(boolean)}.
      */
     public static class ConfirmRestrictFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
+            final Bundle args = new Bundle();
+
             final ConfirmRestrictFragment dialog = new ConfirmRestrictFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_RESTRICT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.data_usage_restrict_background_title);
+            builder.setMessage(R.string.data_usage_restrict_background);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                    if (target != null) {
+                        target.setRestrictBackground(true);
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Dialog to request user confirmation before setting
+     * {@link #POLICY_REJECT_METERED_BACKGROUND}.
+     */
+    public static class ConfirmAppRestrictFragment extends DialogFragment {
+        public static void show(DataUsageSummary parent) {
+            final ConfirmAppRestrictFragment dialog = new ConfirmAppRestrictFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_APP_RESTRICT);
         }
 
         @Override

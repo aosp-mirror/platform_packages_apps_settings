@@ -59,6 +59,8 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     private static final String META_DATA_KEY_PARENT_FRAGMENT_CLASS =
         "com.android.settings.PARENT_FRAGMENT_CLASS";
 
+    private static final String EXTRA_THEME = "settings:theme";
+
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
 
@@ -76,6 +78,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final int theme = getIntent().getIntExtra(
+                EXTRA_THEME, android.R.style.Theme_Holo_SolidActionBar_SplitActionBarWhenNarrow);
+        setTheme(theme);
+
         getMetaData();
         mInLocalHeaderSwitch = true;
         super.onCreate(savedInstanceState);
@@ -277,6 +283,12 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             int titleRes, int shortTitleRes) {
         Intent intent = super.onBuildStartFragmentIntent(fragmentName, args,
                 titleRes, shortTitleRes);
+
+        // some fragments would like a custom activity theme
+        if (DataUsageSummary.class.getName().equals(fragmentName)) {
+            intent.putExtra(EXTRA_THEME, android.R.style.Theme_Holo_SolidActionBar);
+        }
+
         intent.setClass(this, SubSettings.class);
         return intent;
     }

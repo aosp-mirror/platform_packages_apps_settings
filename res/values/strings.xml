@@ -3343,6 +3343,10 @@ found in the list of installed applications.</string>
     <string name="data_usage_summary_title">Data usage</string>
     <!-- Title for option to pick visible time range from a list available usage periods. [CHAR LIMIT=25] -->
     <string name="data_usage_cycle">Data usage cycle</string>
+    <!-- Title for checkbox menu option to enable mobile data when roaming. [CHAR LIMIT=32] -->
+    <string name="data_usage_menu_roaming">Data roaming</string>
+    <!-- Title for checkbox menu option to restrict background data usage. [CHAR LIMIT=32] -->
+    <string name="data_usage_menu_restrict_background">Restrict background data</string>
     <!-- Title for checkbox menu option to show 4G mobile data usage separate from other mobile data usage. [CHAR LIMIT=32] -->
     <string name="data_usage_menu_split_4g">Split 4G usage</string>
     <!-- Title for checkbox menu option to show Wi-Fi data usage. [CHAR LIMIT=32] -->
@@ -3412,6 +3416,11 @@ found in the list of installed applications.</string>
     <string name="data_usage_disabled_dialog">The specified data usage limit has been reached.\n\nAdditional data use may incur carrier charges.</string>
     <!-- Dialog button indicating that data connection should be re-enabled. [CHAR LIMIT=28] -->
     <string name="data_usage_disabled_dialog_enable">Re-enable data</string>
+
+    <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
+    <string name="data_usage_restrict_background_title">Restricting background data</string>
+    <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_restrict_background">This feature will disable auto-sync and may negatively impact applications which depend on background data usage.</string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="21"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>
