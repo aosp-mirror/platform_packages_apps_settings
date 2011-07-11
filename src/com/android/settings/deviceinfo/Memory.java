@@ -85,12 +85,10 @@ public class Memory extends SettingsPreferenceFragment {
         if (!Environment.isExternalStorageEmulated()) {
             // External storage is separate from internal storage; need to
             // show internal storage as a separate item.
-            StorageVolumePreferenceCategory storagePreferenceCategory =
-                new StorageVolumePreferenceCategory(getActivity(), mResources, null,
-                        mStorageManager, true);
-            mInternalStorageVolumePreferenceCategory = storagePreferenceCategory;
-            getPreferenceScreen().addPreference(storagePreferenceCategory);
-            storagePreferenceCategory.init();
+            mInternalStorageVolumePreferenceCategory = new StorageVolumePreferenceCategory(
+                    getActivity(), mResources, null, mStorageManager, false);
+            getPreferenceScreen().addPreference(mInternalStorageVolumePreferenceCategory);
+            mInternalStorageVolumePreferenceCategory.init();
         }
 
         StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
@@ -101,12 +99,11 @@ public class Memory extends SettingsPreferenceFragment {
         mStorageVolumePreferenceCategories = new StorageVolumePreferenceCategory[length];
         for (int i = 0; i < length; i++) {
             StorageVolume storageVolume = storageVolumes[i];
-            StorageVolumePreferenceCategory storagePreferenceCategory =
-                new StorageVolumePreferenceCategory(getActivity(), mResources, storageVolume,
-                        mStorageManager, i == 0); // The first volume is the primary volume
-            mStorageVolumePreferenceCategories[i] = storagePreferenceCategory;
-            getPreferenceScreen().addPreference(storagePreferenceCategory);
-            storagePreferenceCategory.init();
+            boolean isPrimary = i == 0;
+            mStorageVolumePreferenceCategories[i] = new StorageVolumePreferenceCategory(
+                    getActivity(), mResources, storageVolume, mStorageManager, isPrimary);
+            getPreferenceScreen().addPreference(mStorageVolumePreferenceCategories[i]);
+            mStorageVolumePreferenceCategories[i].init();
         }
 
         // only show options menu if we are not using the legacy USB mass storage support
@@ -132,9 +129,8 @@ public class Memory extends SettingsPreferenceFragment {
     StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onStorageStateChanged(String path, String oldState, String newState) {
-            Log.i(TAG, "Received storage state changed notification that " +
-                    path + " changed state from " + oldState +
-                    " to " + newState);
+            Log.i(TAG, "Received storage state changed notification that " + path +
+                    " changed state from " + oldState + " to " + newState);
             for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
                 StorageVolumePreferenceCategory svpc = mStorageVolumePreferenceCategories[i];
                 if (path.equals(svpc.getStorageVolume().getPath())) {
@@ -233,6 +229,7 @@ public class Memory extends SettingsPreferenceFragment {
     private final BroadcastReceiver mMediaScannerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            // mInternalStorageVolumePreferenceCategory is not affected by the media scanner
             for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
                 mStorageVolumePreferenceCategories[i].onMediaScannerFinished();
             }

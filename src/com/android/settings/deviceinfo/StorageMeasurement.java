@@ -549,7 +549,7 @@ public class StorageMeasurement {
     /**
      * TODO remove this method, only used because external SD Card needs a special treatment.
      */
-    boolean isPrimary() {
-        return mIsPrimary;
+    boolean isExternalSDCard() {
+        return !mIsPrimary && !mIsInternal;
     }
 }
