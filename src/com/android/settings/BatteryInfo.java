@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IPowerManager;
 import android.os.Message;
-import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
@@ -198,7 +197,6 @@ public class BatteryInfo extends Activity {
     private void updateBatteryStats() {
         long uptime = SystemClock.elapsedRealtime();
         mUptime.setText(DateUtils.formatElapsedTime(uptime / 1000));
-        
     }
     
 }

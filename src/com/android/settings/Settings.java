@@ -37,7 +37,9 @@ import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.settings.accounts.ManageAccountsSettings;
 import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.wifi.WifiEnabler;
 
 import java.util.ArrayList;
@@ -285,7 +287,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 titleRes, shortTitleRes);
 
         // some fragments would like a custom activity theme
-        if (DataUsageSummary.class.getName().equals(fragmentName)) {
+        if (DataUsageSummary.class.getName().equals(fragmentName) ||
+                PowerUsageSummary.class.getName().equals(fragmentName) ||
+                UserDictionarySettings.class.getName().equals(fragmentName) ||
+                ManageAccountsSettings.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_THEME, android.R.style.Theme_Holo_SolidActionBar);
         }
 

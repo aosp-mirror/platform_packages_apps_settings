@@ -16,18 +16,10 @@
 
 package com.android.settings.fuelgauge;
 
-import com.android.internal.app.IBatteryStats;
-import com.android.internal.os.BatteryStatsImpl;
-import com.android.internal.os.PowerProfile;
-import com.android.settings.R;
-import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
-
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.BatteryStats;
+import android.os.BatteryStats.Uid;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,7 +28,6 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
-import android.os.BatteryStats.Uid;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -48,6 +39,12 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.android.internal.app.IBatteryStats;
+import com.android.internal.os.BatteryStatsImpl;
+import com.android.internal.os.PowerProfile;
+import com.android.settings.R;
+import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -292,7 +289,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         MenuItem refresh = menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
                 .setIcon(R.drawable.ic_menu_refresh_holo_dark)
                 .setAlphabeticShortcut('r');
-        refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
 
     @Override
