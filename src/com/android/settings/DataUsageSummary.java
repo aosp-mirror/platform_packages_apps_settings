@@ -37,10 +37,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -97,6 +99,7 @@ import android.widget.TextView;
 
 import com.android.internal.telephony.Phone;
 import com.android.settings.net.NetworkPolicyEditor;
+import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.widget.DataUsageChartView;
 import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
 import com.google.android.collect.Lists;
@@ -126,6 +129,8 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
     private static final String TAG_CONFIRM_APP_RESTRICT = "confirmAppRestrict";
     private static final String TAG_APP_DETAILS = "appDetails";
+
+    private static final int LOADER_SUMMARY = 2;
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
@@ -305,6 +310,23 @@ public class DataUsageSummary extends Fragment {
         if (ACTION_DATA_USAGE_LIMIT.equals(action)) {
             PolicyLimitFragment.show(this);
         }
+
+        // kick off background task to update stats
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    mStatsService.forceUpdate();
+                } catch (RemoteException e) {
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                updateBody();
+            }
+        }.execute();
     }
 
     @Override
@@ -894,33 +916,35 @@ public class DataUsageSummary extends Fragment {
                 mAppSubtitle.setText(Formatter.formatFileSize(context, totalCombined));
             }
 
-            // clear any existing app list details
-            mAdapter.bindStats(null);
+            getLoaderManager().destroyLoader(LOADER_SUMMARY);
 
-            return;
+        } else {
+            // kick off loader for detailed stats
+            final long[] range = mChart.getInspectRange();
+            getLoaderManager().restartLoader(LOADER_SUMMARY,
+                    SummaryForAllUidLoader.buildArgs(mTemplate, range[0], range[1]),
+                    mSummaryForAllUid);
+
+        }
+    }
+
+    private final LoaderCallbacks<NetworkStats> mSummaryForAllUid = new LoaderCallbacks<
+            NetworkStats>() {
+        /** {@inheritDoc} */
+        public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
+            return new SummaryForAllUidLoader(getActivity(), mStatsService, args);
         }
 
-        // otherwise kick off task to update list
-        new AsyncTask<Void, Void, NetworkStats>() {
-            @Override
-            protected NetworkStats doInBackground(Void... params) {
-                try {
-                    final long[] range = mChart.getInspectRange();
-                    return mStatsService.getSummaryForAllUid(mTemplate, range[0], range[1], false);
-                } catch (RemoteException e) {
-                    Log.w(TAG, "problem reading stats");
-                }
-                return null;
-            }
+        /** {@inheritDoc} */
+        public void onLoadFinished(Loader<NetworkStats> loader, NetworkStats data) {
+            mAdapter.bindStats(data);
+        }
 
-            @Override
-            protected void onPostExecute(NetworkStats stats) {
-                if (stats != null) {
-                    mAdapter.bindStats(stats);
-                }
-            }
-        }.execute();
-    }
+        /** {@inheritDoc} */
+        public void onLoaderReset(Loader<NetworkStats> loader) {
+            mAdapter.bindStats(null);
+        }
+    };
 
     private boolean isMobilePolicySplit() {
         final String subscriberId = getActiveSubscriberId(getActivity());
@@ -1535,5 +1559,4 @@ public class DataUsageSummary extends Fragment {
         summary.setVisibility(View.VISIBLE);
         summary.setText(resId);
     }
-
 }
