@@ -15,17 +15,18 @@
  */
 package com.android.settings.inputmethod;
 
-import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
+import android.provider.Settings;
 import android.view.inputmethod.InputMethodManager;
 
-public class InputMethodDialogActivity extends Activity {
+public class InputMethodDialogReceiver extends BroadcastReceiver {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
-                showInputMethodPicker();
-        finish();
+    public void onReceive(Context context, Intent intent) {
+        if (Settings.ACTION_SHOW_INPUT_METHOD_PICKER.equals(intent.getAction())) {
+            ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .showInputMethodPicker();
+        }
     }
 }
