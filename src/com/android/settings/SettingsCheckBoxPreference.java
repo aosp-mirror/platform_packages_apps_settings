@@ -61,16 +61,9 @@ public class SettingsCheckBoxPreference extends CheckBoxPreference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-
         ImageView settingsButton = (ImageView) view.findViewById(R.id.settings_button);
-        if (settingsButton == null) {
-            return;
-        }
         if (mSettingsIntent != null) {
             CheckBox checkbox = (CheckBox) view.findViewById(com.android.internal.R.id.checkbox);
-            if (checkbox == null) {
-                return;
-            }
             if (checkbox.isChecked()) {
                 settingsButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View view) {
@@ -86,6 +79,7 @@ public class SettingsCheckBoxPreference extends CheckBoxPreference {
             }
         } else {
             settingsButton.setVisibility(View.GONE);
+            view.findViewById(R.id.divider).setVisibility(View.GONE);
         }
     }
 }
