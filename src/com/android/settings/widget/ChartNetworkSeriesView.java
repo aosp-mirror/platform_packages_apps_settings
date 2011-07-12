@@ -140,7 +140,7 @@ public class ChartNetworkSeriesView extends View {
         mPathFill.reset();
 
         // bail when not enough stats to render
-        if (mStats == null || mStats.bucketCount < 2) return;
+        if (mStats == null || mStats.size() < 2) return;
 
         final int width = getWidth();
         final int height = getHeight();
@@ -155,8 +155,11 @@ public class ChartNetworkSeriesView extends View {
 
         long totalData = 0;
 
-        for (int i = 0; i < mStats.bucketCount; i++) {
-            final float x = mHoriz.convertToPoint(mStats.bucketStart[i]);
+        NetworkStatsHistory.Entry entry = null;
+        for (int i = 0; i < mStats.size(); i++) {
+            entry = mStats.getValues(i, entry);
+
+            final float x = mHoriz.convertToPoint(entry.bucketStart);
             final float y = mVert.convertToPoint(totalData);
 
             // skip until we find first stats on screen
@@ -170,7 +173,7 @@ public class ChartNetworkSeriesView extends View {
             if (started) {
                 mPathStroke.lineTo(x, y);
                 mPathFill.lineTo(x, y);
-                totalData += mStats.rx[i] + mStats.tx[i];
+                totalData += entry.rxBytes + entry.txBytes;
             }
 
             // skip if beyond view

@@ -745,9 +745,13 @@ public class DataUsageSummary extends Fragment {
 
         long start = currentTime;
         long end = currentTime;
-        if (history.bucketCount > 0) {
-            start = history.bucketStart[0];
-            end = history.bucketStart[history.bucketCount - 1];
+
+        NetworkStatsHistory.Entry entry = null;
+        if (history.size() > 0) {
+            entry = history.getValues(0, entry);
+            start = entry.bucketStart;
+            entry = history.getValues(history.size() - 1, entry);
+            end = entry.bucketStart + entry.bucketDuration;
         }
 
         return new long[] { start, end };
@@ -1081,11 +1085,12 @@ public class DataUsageSummary extends Fragment {
             mItems.clear();
 
             if (stats != null) {
-                for (int i = 0; i < stats.size; i++) {
-                    final long total = stats.rx[i] + stats.tx[i];
+                NetworkStats.Entry entry = null;
+                for (int i = 0; i < stats.size(); i++) {
+                    entry = stats.getValues(i, entry);
                     final AppUsageItem item = new AppUsageItem();
-                    item.uid = stats.uid[i];
-                    item.total = total;
+                    item.uid = entry.uid;
+                    item.total = entry.rxBytes + entry.txBytes;
                     mItems.add(item);
                 }
             }
