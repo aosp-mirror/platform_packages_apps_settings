@@ -257,6 +257,14 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         return true;
     }
 
+    /**
+     * Return true if user initiated pairing on this device. The message text is
+     * slightly different for local vs. remote initiated pairing dialogs.
+     */
+    boolean isUserInitiatedPairing() {
+        return mConnectAfterPairing;
+    }
+
     void unpair() {
         disconnect();
 

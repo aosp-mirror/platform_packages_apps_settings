@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -200,7 +201,8 @@ public final class BluetoothDevicePreference extends Preference implements
         if (TextUtils.isEmpty(name)) {
             name = context.getString(R.string.bluetooth_device);
         }
-        String message = context.getString(R.string.bluetooth_disconnect_blank, name);
+        String message = context.getString(R.string.bluetooth_disconnect_all_profiles, name);
+        String title = context.getString(R.string.bluetooth_disconnect_title);
 
         DialogInterface.OnClickListener disconnectListener = new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -209,7 +211,7 @@ public final class BluetoothDevicePreference extends Preference implements
         };
 
         mDisconnectDialog = Utils.showDisconnectDialog(context,
-                mDisconnectDialog, disconnectListener, name, message);
+                mDisconnectDialog, disconnectListener, title, Html.fromHtml(message));
     }
 
     private void pair() {
@@ -221,7 +223,6 @@ public final class BluetoothDevicePreference extends Preference implements
 
     private int getConnectionSummary() {
         final CachedBluetoothDevice cachedDevice = mCachedDevice;
-        final BluetoothDevice device = cachedDevice.getDevice();
 
         // if any profiles are connected or busy, return that status
         for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {

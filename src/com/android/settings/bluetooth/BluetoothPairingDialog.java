@@ -24,13 +24,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,8 +46,8 @@ import com.android.settings.R;
  * BluetoothPairingDialog asks the user to enter a PIN / Passkey / simple confirmation
  * for pairing with a remote Bluetooth device. It is an activity that appears as a dialog.
  */
-public final class BluetoothPairingDialog extends AlertActivity implements DialogInterface.OnClickListener,
-        TextWatcher {
+public final class BluetoothPairingDialog extends AlertActivity implements
+        CompoundButton.OnCheckedChangeListener, DialogInterface.OnClickListener, TextWatcher {
     private static final String TAG = "BluetoothPairingDialog";
 
     private static final int BLUETOOTH_PIN_MAX_LENGTH = 16;
@@ -156,7 +160,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements Dialo
         final AlertController.AlertParams p = mAlertParams;
         p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pairing_request);
-        p.mView = createView(deviceManager);
+        p.mView = createPinEntryView(deviceManager.getName(mDevice));
         p.mPositiveButtonText = getString(android.R.string.ok);
         p.mPositiveButtonListener = this;
         p.mNegativeButtonText = getString(android.R.string.cancel);
@@ -167,56 +171,78 @@ public final class BluetoothPairingDialog extends AlertActivity implements Dialo
         mOkButton.setEnabled(false);
     }
 
-    private View createView(CachedBluetoothDeviceManager deviceManager) {
+    private View createPinEntryView(String deviceName) {
         View view = getLayoutInflater().inflate(R.layout.bluetooth_pin_entry, null);
-        String name = deviceManager.getName(mDevice);
         TextView messageView = (TextView) view.findViewById(R.id.message);
+        TextView messageView2 = (TextView) view.findViewById(R.id.message_below_pin);
+        CheckBox alphanumericPin = (CheckBox) view.findViewById(R.id.alphanumeric_pin);
         mPairingView = (EditText) view.findViewById(R.id.text);
         mPairingView.addTextChangedListener(this);
+        alphanumericPin.setOnCheckedChangeListener(this);
 
+        int messageId1;
+        int messageId2;
+        int maxLength;
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
-                messageView.setText(getString(R.string.bluetooth_enter_pin_msg, name));
-                // Maximum of 16 characters in a PIN adb sync
-                mPairingView.setFilters(new InputFilter[] {
-                        new LengthFilter(BLUETOOTH_PIN_MAX_LENGTH) });
+                messageId1 = R.string.bluetooth_enter_pin_msg;
+                messageId2 = R.string.bluetooth_enter_pin_other_device;
+                // Maximum of 16 characters in a PIN
+                maxLength = BLUETOOTH_PIN_MAX_LENGTH;
                 break;
 
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY:
-                messageView.setText(getString(R.string.bluetooth_enter_passkey_msg, name));
+                messageId1 = R.string.bluetooth_enter_passkey_msg;
+                messageId2 = R.string.bluetooth_enter_passkey_other_device;
                 // Maximum of 6 digits for passkey
-                mPairingView.setInputType(InputType.TYPE_CLASS_NUMBER |
-                        InputType.TYPE_NUMBER_FLAG_SIGNED);
-                mPairingView.setFilters(new InputFilter[] {
-                        new LengthFilter(BLUETOOTH_PASSKEY_MAX_LENGTH)});
+                maxLength = BLUETOOTH_PASSKEY_MAX_LENGTH;
+                alphanumericPin.setVisibility(View.GONE);
                 break;
 
+            default:
+                Log.e(TAG, "Incorrect pairing type for createPinEntryView: " + mType);
+                return null;
+        }
+
+        // Format the message string, then parse HTML style tags
+        String messageText = getString(messageId1, deviceName);
+        messageView.setText(Html.fromHtml(messageText));
+        messageView2.setText(messageId2);
+        mPairingView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mPairingView.setFilters(new InputFilter[] {
+                new LengthFilter(maxLength) });
+
+        return view;
+    }
+
+    private View createView(CachedBluetoothDeviceManager deviceManager) {
+        View view = getLayoutInflater().inflate(R.layout.bluetooth_pin_confirm, null);
+        String name = deviceManager.getName(mDevice);
+        TextView messageView = (TextView) view.findViewById(R.id.message);
+
+        String messageText; // formatted string containing HTML style tags
+        switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION:
-                mPairingView.setVisibility(View.GONE);
-                messageView.setText(getString(R.string.bluetooth_confirm_passkey_msg, name,
-                        mPairingKey));
+                messageText = getString(R.string.bluetooth_confirm_passkey_msg,
+                        name, mPairingKey);
                 break;
 
             case BluetoothDevice.PAIRING_VARIANT_CONSENT:
-                mPairingView.setVisibility(View.GONE);
-                messageView.setText(getString(R.string.bluetooth_incoming_pairing_msg, name));
+            case BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT:
+                messageText = getString(R.string.bluetooth_incoming_pairing_msg, name);
                 break;
 
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY:
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN:
-                mPairingView.setVisibility(View.GONE);
-                messageView.setText(getString(R.string.bluetooth_display_passkey_pin_msg, name,
-                        mPairingKey));
-                break;
-
-            case BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT:
-                mPairingView.setVisibility(View.GONE);
-                messageView.setText(getString(R.string.bluetooth_incoming_pairing_msg, name));
+                messageText = getString(R.string.bluetooth_display_passkey_pin_msg, name,
+                        mPairingKey);
                 break;
 
             default:
                 Log.e(TAG, "Incorrect pairing type received, not creating view");
+                return null;
         }
+        messageView.setText(Html.fromHtml(messageText));
         return view;
     }
 
@@ -317,7 +343,11 @@ public final class BluetoothPairingDialog extends AlertActivity implements Dialo
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case BUTTON_POSITIVE:
-                onPair(mPairingView.getText().toString());
+                if (mPairingView != null) {
+                    onPair(mPairingView.getText().toString());
+                } else {
+                    onPair(null);
+                }
                 break;
 
             case BUTTON_NEGATIVE:
@@ -335,4 +365,12 @@ public final class BluetoothPairingDialog extends AlertActivity implements Dialo
     public void onTextChanged(CharSequence s, int start, int before, int count) {
     }
 
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        // change input type for soft keyboard to numeric or alphanumeric
+        if (isChecked) {
+            mPairingView.setInputType(InputType.TYPE_CLASS_TEXT);
+        } else {
+            mPairingView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }
+    }
 }

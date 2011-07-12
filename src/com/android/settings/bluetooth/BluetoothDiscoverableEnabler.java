@@ -21,11 +21,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.SystemProperties;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
+import android.text.format.DateUtils;
 
 import com.android.settings.R;
 
@@ -34,7 +34,7 @@ import com.android.settings.R;
  * checkbox. It sets/unsets discoverability and keeps track of how much time
  * until the the discoverability is automatically turned off.
  */
-final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChangeListener {
+final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClickListener {
 
     private static final String SYSTEM_PROPERTY_DISCOVERABLE_TIMEOUT =
             "debug.bt.discoverable_time";
@@ -43,6 +43,10 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
     private static final int DISCOVERABLE_TIMEOUT_FIVE_MINUTES = 300;
     private static final int DISCOVERABLE_TIMEOUT_ONE_HOUR = 3600;
     static final int DISCOVERABLE_TIMEOUT_NEVER = 0;
+
+    // Bluetooth advanced settings screen was replaced with action bar items.
+    // Use the same preference key for discoverable timeout as the old ListPreference.
+    private static final String KEY_DISCOVERABLE_TIMEOUT = "bt_discoverable_timeout";
 
     private static final String VALUE_DISCOVERABLE_TIMEOUT_TWO_MINUTES = "twomin";
     private static final String VALUE_DISCOVERABLE_TIMEOUT_FIVE_MINUTES = "fivemin";
@@ -53,10 +57,16 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
 
     private final Context mContext;
     private final Handler mUiHandler;
-    private final CheckBoxPreference mCheckBoxPreference;
-    private final ListPreference mTimeoutListPreference;
+    private final Preference mDiscoveryPreference;
 
     private final LocalBluetoothAdapter mLocalAdapter;
+
+    private final SharedPreferences mSharedPreferences;
+
+    private boolean mDiscoverable;
+    private int mNumberOfPairedDevices;
+
+    private int mTimeoutSecs = -1;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -78,21 +88,13 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
     };
 
     BluetoothDiscoverableEnabler(Context context, LocalBluetoothAdapter adapter,
-            CheckBoxPreference checkBoxPreference, ListPreference timeoutListPreference) {
+            Preference discoveryPreference) {
         mContext = context;
         mUiHandler = new Handler();
-        mCheckBoxPreference = checkBoxPreference;
-        mTimeoutListPreference = timeoutListPreference;
-
-        checkBoxPreference.setPersistent(false);
-        // we actually want to persist this since can't infer from BT device state
-        mTimeoutListPreference.setPersistent(true);
-
         mLocalAdapter = adapter;
-        if (adapter == null) {
-            // Bluetooth not supported
-            checkBoxPreference.setEnabled(false);
-        }
+        mDiscoveryPreference = discoveryPreference;
+        mSharedPreferences = discoveryPreference.getSharedPreferences();
+        discoveryPreference.setPersistent(false);
     }
 
     public void resume() {
@@ -102,8 +104,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
 
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
         mContext.registerReceiver(mReceiver, filter);
-        mCheckBoxPreference.setOnPreferenceChangeListener(this);
-        mTimeoutListPreference.setOnPreferenceChangeListener(this);
+        mDiscoveryPreference.setOnPreferenceClickListener(this);
         handleModeChanged(mLocalAdapter.getScanMode());
     }
 
@@ -113,20 +114,14 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
         }
 
         mUiHandler.removeCallbacks(mUpdateCountdownSummaryRunnable);
-        mCheckBoxPreference.setOnPreferenceChangeListener(null);
-        mTimeoutListPreference.setOnPreferenceChangeListener(null);
         mContext.unregisterReceiver(mReceiver);
+        mDiscoveryPreference.setOnPreferenceClickListener(null);
     }
 
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        if (preference == mCheckBoxPreference) {
-            // Turn on/off BT discoverability
-            setEnabled((Boolean) value);
-        } else if (preference == mTimeoutListPreference) {
-            mTimeoutListPreference.setValue((String) value);
-            setEnabled(true);
-        }
-
+    public boolean onPreferenceClick(Preference preference) {
+        // toggle discoverability
+        mDiscoverable = !mDiscoverable;
+        setEnabled(mDiscoverable);
         return true;
     }
 
@@ -138,9 +133,8 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
             long endTimestamp = System.currentTimeMillis() + timeout * 1000L;
             LocalBluetoothPreferences.persistDiscoverableEndTimestamp(mContext, endTimestamp);
 
-            updateCountdownSummary();
-
             mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, timeout);
+            updateCountdownSummary();
         } else {
             mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
         }
@@ -148,22 +142,51 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
 
     private void updateTimerDisplay(int timeout) {
         if (getDiscoverableTimeout() == DISCOVERABLE_TIMEOUT_NEVER) {
-            mCheckBoxPreference.setSummaryOn(
-                mContext.getString(R.string.bluetooth_is_discoverable_always));
+            mDiscoveryPreference.setSummary(R.string.bluetooth_is_discoverable_always);
         } else {
-            mCheckBoxPreference.setSummaryOn(
-                mContext.getString(R.string.bluetooth_is_discoverable, timeout));
+            String textTimeout = DateUtils.formatElapsedTime(timeout);
+            mDiscoveryPreference.setSummary(mContext.getString(R.string.bluetooth_is_discoverable,
+                    textTimeout));
         }
     }
 
+    void setDiscoverableTimeout(int index) {
+        String timeoutValue;
+        switch (index) {
+            case 0:
+            default:
+                mTimeoutSecs = DISCOVERABLE_TIMEOUT_TWO_MINUTES;
+                timeoutValue = VALUE_DISCOVERABLE_TIMEOUT_TWO_MINUTES;
+                break;
+
+            case 1:
+                mTimeoutSecs = DISCOVERABLE_TIMEOUT_FIVE_MINUTES;
+                timeoutValue = VALUE_DISCOVERABLE_TIMEOUT_FIVE_MINUTES;
+                break;
+
+            case 2:
+                mTimeoutSecs = DISCOVERABLE_TIMEOUT_ONE_HOUR;
+                timeoutValue = VALUE_DISCOVERABLE_TIMEOUT_ONE_HOUR;
+                break;
+
+            case 3:
+                mTimeoutSecs = DISCOVERABLE_TIMEOUT_NEVER;
+                timeoutValue = VALUE_DISCOVERABLE_TIMEOUT_NEVER;
+                break;
+        }
+        mSharedPreferences.edit().putString(KEY_DISCOVERABLE_TIMEOUT, timeoutValue).apply();
+        setEnabled(true);   // enable discovery and reset timer
+    }
+
     private int getDiscoverableTimeout() {
+        if (mTimeoutSecs != -1) {
+            return mTimeoutSecs;
+        }
+
         int timeout = SystemProperties.getInt(SYSTEM_PROPERTY_DISCOVERABLE_TIMEOUT, -1);
         if (timeout < 0) {
-            String timeoutValue = mTimeoutListPreference.getValue();
-            if (timeoutValue == null) {
-                mTimeoutListPreference.setValue(VALUE_DISCOVERABLE_TIMEOUT_TWO_MINUTES);
-                return DISCOVERABLE_TIMEOUT_TWO_MINUTES;
-            }
+            String timeoutValue = mSharedPreferences.getString(KEY_DISCOVERABLE_TIMEOUT,
+                    VALUE_DISCOVERABLE_TIMEOUT_TWO_MINUTES);
 
             if (timeoutValue.equals(VALUE_DISCOVERABLE_TIMEOUT_NEVER)) {
                 timeout = DISCOVERABLE_TIMEOUT_NEVER;
@@ -175,16 +198,48 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
                 timeout = DISCOVERABLE_TIMEOUT_TWO_MINUTES;
             }
         }
-
+        mTimeoutSecs = timeout;
         return timeout;
     }
 
-    private void handleModeChanged(int mode) {
+    int getDiscoverableTimeoutIndex() {
+        int timeout = getDiscoverableTimeout();
+        switch (timeout) {
+            case DISCOVERABLE_TIMEOUT_TWO_MINUTES:
+            default:
+                return 0;
+
+            case DISCOVERABLE_TIMEOUT_FIVE_MINUTES:
+                return 1;
+
+            case DISCOVERABLE_TIMEOUT_ONE_HOUR:
+                return 2;
+
+            case DISCOVERABLE_TIMEOUT_NEVER:
+                return 3;
+        }
+    }
+
+    void setNumberOfPairedDevices(int pairedDevices) {
+        mNumberOfPairedDevices = pairedDevices;
+        setSummaryNotDiscoverable();
+    }
+
+    void handleModeChanged(int mode) {
         if (mode == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            mCheckBoxPreference.setChecked(true);
+            mDiscoverable = true;
             updateCountdownSummary();
         } else {
-            mCheckBoxPreference.setChecked(false);
+            mDiscoverable = false;
+            setSummaryNotDiscoverable();
+        }
+    }
+
+    private void setSummaryNotDiscoverable() {
+        if (mNumberOfPairedDevices != 0) {
+            mDiscoveryPreference.setSummary(R.string.bluetooth_only_visible_to_paired_devices);
+        } else {
+            mDiscoveryPreference.setSummary(R.string.bluetooth_not_visible_to_other_devices);
         }
     }
 
@@ -199,7 +254,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChang
 
         if (currentTimestamp > endTimestamp) {
             // We're still in discoverable mode, but maybe there isn't a timeout.
-            mCheckBoxPreference.setSummaryOn(null);
+            updateTimerDisplay(0);
             return;
         }
 

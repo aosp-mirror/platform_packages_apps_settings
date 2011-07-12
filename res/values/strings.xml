@@ -191,14 +191,18 @@
     <string name="bluetooth">Bluetooth</string>
     <!-- Bluetooth settings screen, check box label when the Bluetooth device can be seen by others -->
     <string name="bluetooth_visibility">Discoverable</string>
-    <!-- Bluetooth settings screen, summary after selecting Discoverable check box -->
-    <string name="bluetooth_is_discoverable">Discoverable for <xliff:g id="discoverable_time_period">%1$s</xliff:g> seconds\u2026</string>
-    <!-- Bluetooth settings screen, Discoverable checkbox summary text when Discoverable duration is set to "forever" -->
-    <string name="bluetooth_is_discoverable_always">Discoverable</string>
+    <!-- Bluetooth settings screen, summary after selecting Discoverable check box [CHAR LIMIT=50] -->
+    <string name="bluetooth_is_discoverable">Visible to all nearby Bluetooth devices (<xliff:g id="discoverable_time_period">%1$s</xliff:g>)</string>
+    <!-- Bluetooth settings screen, summary when Discoverable duration is set to "forever" [CHAR LIMIT=50] -->
+    <string name="bluetooth_is_discoverable_always">Visible to all nearby Bluetooth devices</string>
+    <!-- Bluetooth settings screen, summary text when not discoverable and no paired devices [CHAR LIMIT=50] -->
+    <string name="bluetooth_not_visible_to_other_devices">Not visible to other Bluetooth devices</string>
+    <!-- Bluetooth settings screen, summary text when not discoverable with paired devices [CHAR LIMIT=50] -->
+    <string name="bluetooth_only_visible_to_paired_devices">Only visible to paired devices</string>
     <!-- Bluetooth settings screen, Discoverable checkbox summary text -->
     <string name="bluetooth_not_discoverable">Make device discoverable</string>
     <!-- Bluetooth settings screen, option name to pick discoverability timeout duration (a list dialog comes up) -->
-    <string name="bluetooth_visibility_timeout">Discoverable timeout</string>
+    <string name="bluetooth_visibility_timeout">Visibility timeout</string>
     <!-- Bluetooth settings screen, Discoverable timout list dialog summary text -->
     <string name="bluetooth_visibility_timeout_summary">Set how long device will be discoverable</string>
     <!-- Bluetooth settings screen, check box label whether or not to allow
@@ -216,8 +220,16 @@
     <string name="bluetooth_name_not_set">No name set, using account name</string>
     <!-- Bluetooth settings screen, menu item to scan for nearby bluetooth devices -->
     <string name="bluetooth_scan_for_devices">Scan for devices</string>
-    <!-- Bluetooth settings.  Message for disconnecting from a bluetooth device -->
-    <string name="bluetooth_disconnect_blank"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected.</string>
+    <!-- Bluetooth settings screen, menu item to change this device's Bluetooth name. [CHAR LIMIT=30] -->
+    <string name="bluetooth_rename_device" product="tablet">Rename tablet</string>
+    <!-- Bluetooth settings screen, menu item to change this device's Bluetooth name. [CHAR LIMIT=30] -->
+    <string name="bluetooth_rename_device" product="default">Rename phone</string>
+    <!-- Bluetooth settings screen, confirmation button for rename device dialog. [CHAR LIMIT=20] -->
+    <string name="bluetooth_rename_button">Rename</string>
+    <!-- Bluetooth settings.  Dialog title to confirm disconnecting from all profiles of a device. [CHAR LIMIT=30] -->
+    <string name="bluetooth_disconnect_title">Disconnect?</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
     <!-- Bluetooth settings.  Message when connected to a device -->
     <string name="bluetooth_connected">Connected</string>
     <!-- Bluetooth settings.  Message when a device is disconnected -->
@@ -234,8 +246,8 @@
     <string name="bluetooth_pairing">Pairing\u2026</string>
     <!--Bluetooth settings screen, summary text under individual Bluetooth devices when paired with one -->
     <string name="bluetooth_paired">Paired but not connected</string>
-    <!--Bluetooth settings screen, summary text under individual Bluetooth devices that are hands free or a headset -->
-    <string name="bluetooth_device">handsfree/headset</string>
+    <!--Bluetooth settings screen, summary text for Bluetooth device with no name -->
+    <string name="bluetooth_device">Unnamed Bluetooth device</string>
     <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
     <string name="progress_scanning">Searching</string>
     <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices is finished, indicating that user can tap on a device to pair with it [CHAR LIMIT=20]-->
@@ -248,10 +260,8 @@
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_message">Select to pair with <xliff:g id="device_name">%1$s</xliff:g></string>
-    <!-- Bluetooth settings screen, title of the item to show the list of received files [CHAR LIMIT=30] -->
-    <string name="bluetooth_show_received_files_title">Show received files</string>
-    <!-- Bluetooth settings screen, summary of the item to show the list of received files [CHAR LIMIT=50] -->
-    <string name="bluetooth_show_received_files_summary">Show the list of files received via Bluetooth</string>
+    <!-- Bluetooth settings screen, menu to show the list of received files [CHAR LIMIT=30] -->
+    <string name="bluetooth_show_received_files">Show received files</string>
 
     <!-- Strings for BluetoothDevicePicker -->
     <string name="device_picker">Bluetooth device picker</string>
@@ -913,24 +923,45 @@
     <!--Wireless controls screen, settings summary for the item tot ake you to the bluetooth settings screen -->
     <string name="bluetooth_settings_summary">Manage connections, set device name &amp; discoverability</string>
 
-    <!-- Title for the dialog to enter PIN.  -->
+    <!-- ======================================================================================= -->
+    <!-- Note: The opening brackets of HTML style tags are escaped (e.g. "<b>" is "&lt;b>") in   -->
+    <!--   the following resources to enable formatting followed by HTML styling, as described   -->
+    <!--   here:  http://developer.android.com/guide/topics/resources/string-resource.html       -->
+    <!-- ======================================================================================= -->
+
+    <!-- Title for the dialog to enter PIN. [CHAR LIMIT=40] -->
     <string name="bluetooth_pairing_request">Bluetooth pairing request</string>
-    <!-- Message when bluetooth dialog for pin entry is showing -->
-    <string name="bluetooth_enter_pin_msg">\nEnter PIN to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022. (Try 0000 or 1234.) You may need to enter the same PIN on the Bluetooth device.</string>
-    <!-- Message when bluetooth dialog for passkey entry is showing -->
-    <string name="bluetooth_enter_passkey_msg">\nEnter passkey to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022.</string>
-    <!-- Message when bluetooth dialog for confirmation of passkey is showing -->
-    <string name="bluetooth_confirm_passkey_msg">To pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022, confirm that it is showing the passkey: <xliff:g id="passkey">%2$s</xliff:g>.</string>
+
+    <!-- Message when bluetooth dialog for pin entry is showing. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_enter_pin_msg">To pair with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Enter the device\'s required PIN:</string>
+
+    <!-- Message when bluetooth dialog for passkey entry is showing. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_enter_passkey_msg">To pair with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Enter the device\'s required passkey:</string>
+
+    <!-- Checkbox label for alphanumeric PIN entry (default is numeric PIN). [CHAR LIMIT=50] -->
+    <string name="bluetooth_enable_alphanumeric_pin">PIN contains letters or symbols</string>
+
+    <!-- Bluetooth PIN hint text (below the text entry box). [CHAR LIMIT=30] -->
+    <string name="bluetooth_pin_values_hint">Usually 0000 or 1234</string>
+
+    <!-- Pairing dialog text to remind user to enter the PIN on the other device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_enter_pin_other_device">You may also need to enter this PIN on the other device.</string>
+    <!-- Pairing dialog text to remind user to enter the passkey on the other device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_enter_passkey_other_device">You may also need to enter this passkey on the other device.</string>
+
+    <!-- Message for confirmation of passkey to complete pairing. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_confirm_passkey_msg">To pair with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Make sure it is showing this passkey:&lt;br>&lt;b><xliff:g id="passkey">%2$s</xliff:g>&lt;/b></string>
+
     <!-- Message when bluetooth incoming pairing request for (2.1 devices) dialog is showing -->
-    <string name="bluetooth_incoming_pairing_msg"><xliff:g id="device_name">%1$s</xliff:g>\nwants to pair.</string>
+    <string name="bluetooth_incoming_pairing_msg">From:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Pair with this device?</string>
+
     <!-- Message when bluetooth dialog when passkey or pin needs to be displayed. -->
-    <string name="bluetooth_display_passkey_pin_msg">Enter \u0022<xliff:g id="passkey">%2$s</xliff:g>\u0022 on \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022 to pair followed by return or enter. </string>
-    <!-- Button text for accepting an incoming pairing request -->
+    <string name="bluetooth_display_passkey_pin_msg">To pair with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Type on it:&lt;br>&lt;b><xliff:g id="passkey">%2$s</xliff:g>&lt;/b>, then Return or Enter.</string>
+
+    <!-- Button text for accepting an incoming pairing request. [CHAR LIMIT=20] -->
     <string name="bluetooth_pairing_accept">Pair</string>
-    <!-- Button text for declining an incoming pairing request -->
-    <string name="bluetooth_pairing_decline">Don\u0027t Pair</string>
-    <!-- Generic string for remote Bluetooth device  -->
-    <string name="bluetooth_remote_device">bluetooth device</string>
+    <!-- Button text for declining an incoming pairing request. [CHAR LIMIT=20] -->
+    <string name="bluetooth_pairing_decline">Cancel</string>
 
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title">Attention</string>
@@ -975,8 +1006,6 @@
     <string name="bluetooth_menu_advanced">Advanced</string>
     <!-- Bluetooth settings. Title of the advanced bluetooth settings screen [CHAR LIMIT=30]-->
     <string name="bluetooth_advanced_titlebar">Advanced Bluetooth</string>
-    <!-- Bluetooth Advanced settings.  Used as a label under the shortcut icon that goes to Bluetooth advanced settings. [CHAR LIMIT=20]-->
-    <string name="bluetooth_advanced_settings_label">Advanced Bluetooth</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">To see devices, turn Bluetooth on.</string>
 
