@@ -206,14 +206,12 @@ public class DataUsageChartView extends ChartView {
         }
     }
 
-    /**
-     * Return current inspection range (start and end time) based on internal
-     * {@link ChartSweepView} positions.
-     */
-    public long[] getInspectRange() {
-        final long start = mSweepLeft.getValue();
-        final long end = mSweepRight.getValue();
-        return new long[] { start, end };
+    public long getInspectStart() {
+        return mSweepLeft.getValue();
+    }
+
+    public long getInspectEnd() {
+        return mSweepRight.getValue();
     }
 
     public long getWarningBytes() {

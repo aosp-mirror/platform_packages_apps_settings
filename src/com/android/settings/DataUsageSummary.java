@@ -48,6 +48,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -56,6 +57,7 @@ import android.net.NetworkPolicyManager;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -105,7 +107,6 @@ import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -737,27 +738,6 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
-     * Return full time bounds (earliest and latest time recorded) of the given
-     * {@link NetworkStatsHistory}.
-     */
-    public static long[] getHistoryBounds(NetworkStatsHistory history) {
-        final long currentTime = System.currentTimeMillis();
-
-        long start = currentTime;
-        long end = currentTime;
-
-        NetworkStatsHistory.Entry entry = null;
-        if (history.size() > 0) {
-            entry = history.getValues(0, entry);
-            start = entry.bucketStart;
-            entry = history.getValues(history.size() - 1, entry);
-            end = entry.bucketStart + entry.bucketDuration;
-        }
-
-        return new long[] { start, end };
-    }
-
-    /**
      * Rebuild {@link #mCycleAdapter} based on {@link NetworkPolicy#cycleDay}
      * and available {@link NetworkStatsHistory} data. Always selects the newest
      * item, updating the inspection range on {@link #mChart}.
@@ -766,11 +746,15 @@ public class DataUsageSummary extends Fragment {
         mCycleAdapter.clear();
 
         final Context context = mCycleSpinner.getContext();
+        long historyStart = mHistory.getStart();
+        long historyEnd = mHistory.getEnd();
 
-        final long[] bounds = getHistoryBounds(mHistory);
-        final long historyStart = bounds[0];
-        final long historyEnd = bounds[1];
+        if (historyStart == Long.MAX_VALUE || historyEnd == Long.MIN_VALUE) {
+            historyStart = System.currentTimeMillis();
+            historyEnd = System.currentTimeMillis();
+        }
 
+        boolean hasCycles = false;
         if (policy != null) {
             // find the next cycle boundary
             long cycleEnd = computeNextCycleBoundary(historyEnd, policy);
@@ -784,23 +768,24 @@ public class DataUsageSummary extends Fragment {
                         + historyStart);
                 mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
                 cycleEnd = cycleStart;
+                hasCycles = true;
 
                 // TODO: remove this guard once we have better testing
                 if (guardCount++ > 50) {
-                    Log.wtf(TAG, "stuck generating ranges for bounds=" + Arrays.toString(bounds)
-                            + " and policy=" + policy);
+                    Log.wtf(TAG, "stuck generating ranges for historyStart=" + historyStart
+                            + ", historyEnd=" + historyEnd + " and policy=" + policy);
                 }
             }
 
             // one last cycle entry to modify policy cycle day
             mCycleAdapter.setChangePossible(true);
+        }
 
-        } else {
-            // no valid cycle; show all data
+        if (!hasCycles) {
+            // no valid cycles; show all data
             // TODO: offer simple ranges like "last week" etc
             mCycleAdapter.add(new CycleItem(context, historyStart, historyEnd));
             mCycleAdapter.setChangePossible(false);
-
         }
 
         // force pick the current cycle (first item)
@@ -889,8 +874,7 @@ public class DataUsageSummary extends Fragment {
 
                 // update chart to show selected cycle, and update detail data
                 // to match updated sweep bounds.
-                final long[] bounds = getHistoryBounds(mHistory);
-                mChart.setVisibleRange(cycle.start, cycle.end, bounds[1]);
+                mChart.setVisibleRange(cycle.start, cycle.end, mHistory.getEnd());
 
                 updateDetailData();
             }
@@ -911,23 +895,25 @@ public class DataUsageSummary extends Fragment {
     private void updateDetailData() {
         if (LOGD) Log.d(TAG, "updateDetailData()");
 
+        final long start = mChart.getInspectStart();
+        final long end = mChart.getInspectEnd();
+
         if (isAppDetailMode()) {
             if (mDetailHistory != null) {
                 final Context context = mChart.getContext();
-                final long[] range = mChart.getInspectRange();
-                final long[] total = mDetailHistory.getTotalData(range[0], range[1], null);
-                final long totalCombined = total[0] + total[1];
-                mAppSubtitle.setText(Formatter.formatFileSize(context, totalCombined));
+                final long now = System.currentTimeMillis();
+                final NetworkStatsHistory.Entry entry = mDetailHistory.getValues(
+                        start, end, now, null);
+                final long total = entry.rxBytes + entry.txBytes;
+                mAppSubtitle.setText(Formatter.formatFileSize(context, total));
             }
 
             getLoaderManager().destroyLoader(LOADER_SUMMARY);
 
         } else {
             // kick off loader for detailed stats
-            final long[] range = mChart.getInspectRange();
             getLoaderManager().restartLoader(LOADER_SUMMARY,
-                    SummaryForAllUidLoader.buildArgs(mTemplate, range[0], range[1]),
-                    mSummaryForAllUid);
+                    SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryForAllUid);
 
         }
     }
@@ -1085,13 +1071,27 @@ public class DataUsageSummary extends Fragment {
             mItems.clear();
 
             if (stats != null) {
+                final AppUsageItem systemItem = new AppUsageItem();
+                systemItem.uid = android.os.Process.SYSTEM_UID;
+
                 NetworkStats.Entry entry = null;
                 for (int i = 0; i < stats.size(); i++) {
                     entry = stats.getValues(i, entry);
-                    final AppUsageItem item = new AppUsageItem();
-                    item.uid = entry.uid;
-                    item.total = entry.rxBytes + entry.txBytes;
-                    mItems.add(item);
+
+                    final boolean isApp = entry.uid >= android.os.Process.FIRST_APPLICATION_UID
+                            && entry.uid <= android.os.Process.LAST_APPLICATION_UID;
+                    if (isApp || entry.uid == TrafficStats.UID_REMOVED) {
+                        final AppUsageItem item = new AppUsageItem();
+                        item.uid = entry.uid;
+                        item.total = entry.rxBytes + entry.txBytes;
+                        mItems.add(item);
+                    } else {
+                        systemItem.total += entry.rxBytes + entry.txBytes;
+                    }
+                }
+
+                if (systemItem.total > 0) {
+                    mItems.add(systemItem);
                 }
             }
 
@@ -1122,13 +1122,12 @@ public class DataUsageSummary extends Fragment {
             }
 
             final Context context = parent.getContext();
-            final PackageManager pm = context.getPackageManager();
 
             final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
             final TextView text2 = (TextView) convertView.findViewById(android.R.id.text2);
 
             final AppUsageItem item = mItems.get(position);
-            text1.setText(resolveLabelForUid(pm, item.uid));
+            text1.setText(resolveLabelForUid(context, item.uid));
             text2.setText(Formatter.formatFileSize(context, item.total));
 
             return convertView;
@@ -1470,7 +1469,19 @@ public class DataUsageSummary extends Fragment {
     /**
      * Resolve best descriptive label for the given UID.
      */
-    public static CharSequence resolveLabelForUid(PackageManager pm, int uid) {
+    public static CharSequence resolveLabelForUid(Context context, int uid) {
+        final Resources res = context.getResources();
+        final PackageManager pm = context.getPackageManager();
+
+        // handle special case labels
+        switch (uid) {
+            case android.os.Process.SYSTEM_UID:
+                return res.getText(R.string.process_kernel_label);
+            case TrafficStats.UID_REMOVED:
+                return res.getText(R.string.data_usage_uninstalled_apps);
+        }
+
+        // otherwise fall back to using packagemanager labels
         final String[] packageNames = pm.getPackagesForUid(uid);
         final int length = packageNames != null ? packageNames.length : 0;
 
