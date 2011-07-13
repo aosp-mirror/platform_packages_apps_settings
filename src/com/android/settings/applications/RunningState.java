@@ -756,6 +756,7 @@ public class RunningState {
         }
         
         // Look for services and their primary processes that no longer exist...
+        ArrayList<Integer> uidToDelete = null;
         for (int i=0; i<mServiceProcessesByName.size(); i++) {
             HashMap<String, ProcessItem> procs = mServiceProcessesByName.valueAt(i);
             Iterator<ProcessItem> pit = procs.values().iterator();
@@ -772,7 +773,10 @@ public class RunningState {
                     changed = true;
                     pit.remove();
                     if (procs.size() == 0) {
-                        mServiceProcessesByName.remove(mServiceProcessesByName.keyAt(i));
+                        if (uidToDelete == null) {
+                            uidToDelete = new ArrayList<Integer>();
+                        }
+                        uidToDelete.add(mServiceProcessesByName.keyAt(i));
                     }
                     if (pi.mPid != 0) {
                         mServiceProcessesByPid.remove(pi.mPid);
@@ -790,6 +794,13 @@ public class RunningState {
             }
         }
         
+        if (uidToDelete != null) {
+            for (int i = 0; i < uidToDelete.size(); i++) {
+                int uid = uidToDelete.get(i);
+                mServiceProcessesByName.remove(uid);
+            }
+        }
+
         if (changed) {
             // First determine an order for the services.
             ArrayList<ProcessItem> sortedProcesses = new ArrayList<ProcessItem>();
