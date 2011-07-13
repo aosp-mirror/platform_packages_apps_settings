@@ -14,14 +14,13 @@
      limitations under the License.
 -->
 
-<resources>
-    <dimen name="screen_margin_sides">40dip</dimen>
-    <dimen name="datetime_margin_top">40dip</dimen>
-    <dimen name="datetime_margin_bottom">40dip</dimen>
-    <dimen name="app_icon_size">72dip</dimen>
-    <dimen name="screen_margin_top">48dip</dimen>
-    <dimen name="screen_margin_bottom">48dip</dimen>
-    <dimen name="title_height">48dip</dimen>
-    <dimen name="content_margin_left">16dip</dimen>
-    <dimen name="description_margin_top">26dip</dimen>
-</resources>
+<GridView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/all_apps"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:columnWidth="72dip"
+    android:numColumns="auto_fit"
+    android:verticalSpacing="10dip"
+    android:horizontalSpacing="10dip"
+    android:stretchMode="columnWidth" />

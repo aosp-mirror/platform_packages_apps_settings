@@ -2641,6 +2641,15 @@ found in the list of installed applications.</string>
     <string name="accessibility_services_category">Accessibility services</string>
     <!-- Setting Checkbox title for enabling accessibility services [CHAR LIMIT=40] -->
     <string name="toggle_accessibility_title">Allow accessibility services</string>
+    <!-- Setting Checkbox title for enabling touch exploration mode [CHAR LIMIT=40] -->
+    <string name="accessibility_touch_exploration_title">Enable touch exploration mode</string>
+    <!-- Setting Checkbox summary for enabling touch exploration mode [CHAR LIMIT=65] -->
+    <string name="accessibility_touch_exploration_summary">Allows you to touch the screen to hear the contents under your finger.</string>
+    <!-- Warning message describing changes in interaction from enabling touch exploration mode
+         and suggesting that the user goes through a tutorial, displayed as a dialog message the
+         first time the user selects to enable touch exploration -->
+    <string name="accessibility_touch_exploration_warning">Touch exploration mode changes the way your
+        device handles touch input. Would you like to take a short tutorial on using touch exploration?</string>
     <!-- Message for announcing the lack of installed accessibility services. -->
     <string name="no_accessibility_services_summary">No installed accessibility services.</string>
     <!-- Warning message about security implications of enabling an accessibility service,
@@ -3502,5 +3511,44 @@ found in the list of installed applications.</string>
     <string name="trusted_credentials_disable_confirmation">Disable the system CA certificate?</string>
     <!-- Alert dialog confirmation when removing a user CA certificate. -->
     <string name="trusted_credentials_remove_confirmation">Permanently remove the user CA certificate?</string>
+
+    <!-- Title for the touch exploration tutorial. [CHAR LIMIT=40] -->
+    <string name="accessibility_tutorial_title">Touch exploration tutorial</string>
+    <!-- Button label to go to the next touch exploration tutorial lesson. [CHAR LIMIT=10] -->
+    <string name="accessibility_tutorial_next">Next</string>
+    <!-- Button label to go back to the previous touch explorationtutorial lesson. [CHAR LIMIT=10] -->
+    <string name="accessibility_tutorial_back">Back</string>
+    <!-- Button label to exit the touch explorationtutorial. [CHAR LIMIT=10] -->
+    <string name="accessibility_tutorial_finish">Finish</string>
+    <!-- Button label to skip the touch exploration tutorial. [CHAR LIMIT=10] -->
+    <string name="accessibility_tutorial_skip">Skip</string>
+
+    <!-- Title for touch exploration tutorial lesson 1. -->
+    <string name="accessibility_tutorial_lesson_1_title">Exploring the screen</string>
+    <!-- Instruction for touch exploration tutorial lesson 1. -->
+    <string name="accessibility_tutorial_lesson_1_text_1">When touch exploration is enabled, you can touch the screen to hear spoken descriptions of the content under your finger. The screen currently contains a list of application icons. Find one of them by placing a finger on the screen and sliding it around.</string>
+    <!-- Instruction for touch exploration tutorial lesson 1, displayed after the user touches one icon. -->
+    <string name="accessibility_tutorial_lesson_1_text_2_more">Good, keep your finger on the screen and keep sliding around to find at least one more icon.</string>
+    <!-- Instruction for touch exploration tutorial lesson 1, displayed after the user touches a second icon. -->
+    <string name="accessibility_tutorial_lesson_1_text_3">When you\'ve found a widget that you want to click on, you can tap once to activate it. Slide your finger to find the icon for <xliff:g id="app_name" example="Browser">%s</xliff:g>.</string>
+    <!-- Instruction for touch exploration tutorial lesson 1, displayed if the user touched the target area and stays inside it. -->
+    <string name="accessibility_tutorial_lesson_1_text_4">Your finger is on top of the <xliff:g id="app_name" example="Browser">%s</xliff:g> icon. Tap once to activate the icon.</string>
+    <!-- Instruction for touch exploration tutorial lesson 1, displayed if the user touches inside the target area but moves outside. -->
+    <string name="accessibility_tutorial_lesson_1_text_4_exited">You\'ve entered and left the <xliff:g id="app_name" example="Browser">%s</xliff:g> icon. Slowly explore again to find the icon while keeping your finger on the screen.</string>
+    <!-- Instruction for touch exploration tutorial lesson 1, displayed after the user has tapped the target icon. -->
+    <string name="accessibility_tutorial_lesson_1_text_5">Good. To move to the next section, find and activate the button labeled \"<xliff:g id="next" example="Next">%s</xliff:g>\" that\'s located near the bottom-right of the screen.</string>
+
+    <!-- Title for touch exploration tutorial lesson 2. -->
+    <string name="accessibility_tutorial_lesson_2_title">Scrolling using two fingers</string>
+    <!-- Instruction for touch exploration tutorial lesson 2. -->
+    <string name="accessibility_tutorial_lesson_2_text_1">To perform single-finger gestures like scrolling, you can place two fingers on the screen. The screen currently contains a scrollable list of application names. First, try exploring a few of the list items using one finger.</string>
+    <!-- Instruction for touch exploration tutorial lesson 2, displayed after the user touches one list item. -->
+    <string name="accessibility_tutorial_lesson_2_text_2_more">Good, keep sliding your finger around to find at least one more list item.</string>
+    <!-- Instruction for touch exploration tutorial lesson 2, displayed after the user touches a second list item. -->
+    <string name="accessibility_tutorial_lesson_2_text_3">Now scroll through the list by placing two fingers on a list item and sliding your fingers up. If you reach the top of the screen, you can place your fingers back on the list and continue.</string>
+    <!-- Instruction for touch exploration tutorial lesson 2, displayed after the user scrolls a small amount. -->
+    <string name="accessibility_tutorial_lesson_2_text_3_more">Good, keep sliding your fingers up to scroll some more.</string>
+    <!-- Instruction for touch exploration tutorial lesson 2, displayed after the user has scrolled a large amount. -->
+    <string name="accessibility_tutorial_lesson_2_text_4">You have completed the touch exploration tutorial. To exit, find and click the button labeled \"<xliff:g id="finish" example="Finish">%s</xliff:g>.\"</string>
 
 </resources>
