@@ -103,11 +103,14 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowScreenUpdates = (CheckBoxPreference) findPreference(SHOW_SCREEN_UPDATES_KEY);
         mShowCpuUsage = (CheckBoxPreference) findPreference(SHOW_CPU_USAGE_KEY);
         mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
+        mWindowAnimationScale.setOnPreferenceChangeListener(this);
         mTransitionAnimationScale = (ListPreference) findPreference(TRANSITION_ANIMATION_SCALE_KEY);
+        mTransitionAnimationScale.setOnPreferenceChangeListener(this);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
         mAppProcessLimit = (ListPreference) findPreference(APP_PROCESS_LIMIT_KEY);
+        mAppProcessLimit.setOnPreferenceChangeListener(this);
 
         removeHdcpOptionsForProduction();
     }
@@ -276,10 +279,12 @@ public class DevelopmentSettings extends PreferenceFragment
                 float val = Float.parseFloat(values[i].toString());
                 if (scale <= val) {
                     pref.setValueIndex(i);
+                    pref.setSummary(pref.getEntries()[i]);
                     return;
                 }
             }
             pref.setValueIndex(values.length-1);
+            pref.setSummary(pref.getEntries()[0]);
         } catch (RemoteException e) {
         }
     }
@@ -289,9 +294,9 @@ public class DevelopmentSettings extends PreferenceFragment
         updateAnimationScaleValue(1, mTransitionAnimationScale);
     }
 
-    private void writeAnimationScaleOption(int which, ListPreference pref) {
+    private void writeAnimationScaleOption(int which, ListPreference pref, Object newValue) {
         try {
-            float scale = Float.parseFloat(pref.getValue().toString());
+            float scale = Float.parseFloat(newValue.toString());
             mWindowManager.setAnimationScale(which, scale);
         } catch (RemoteException e) {
         }
@@ -305,17 +310,19 @@ public class DevelopmentSettings extends PreferenceFragment
                 int val = Integer.parseInt(values[i].toString());
                 if (val >= limit) {
                     mAppProcessLimit.setValueIndex(i);
+                    mAppProcessLimit.setSummary(mAppProcessLimit.getEntries()[i]);
                     return;
                 }
             }
             mAppProcessLimit.setValueIndex(0);
+            mAppProcessLimit.setSummary(mAppProcessLimit.getEntries()[0]);
         } catch (RemoteException e) {
         }
     }
 
-    private void writeAppProcessLimitOptions() {
+    private void writeAppProcessLimitOptions(Object newValue) {
         try {
-            int limit = Integer.parseInt(mAppProcessLimit.getValue().toString());
+            int limit = Integer.parseInt(newValue.toString());
             ActivityManagerNative.getDefault().setProcessLimit(limit);
         } catch (RemoteException e) {
         }
@@ -361,16 +368,29 @@ public class DevelopmentSettings extends PreferenceFragment
             writeFlingerOptions();
         } else if (preference == mShowCpuUsage) {
             writeCpuUsageOptions();
-        } else if (preference == mWindowAnimationScale) {
-            writeAnimationScaleOption(0, mWindowAnimationScale);
-        } else if (preference == mTransitionAnimationScale) {
-            writeAnimationScaleOption(1, mTransitionAnimationScale);
         } else if (preference == mImmediatelyDestroyActivities) {
             writeImmediatelyDestroyActivitiesOptions();
-        } else if (preference == mAppProcessLimit) {
-            writeAppProcessLimitOptions();
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
+            SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
+            updateHdcpValues();
+            return true;
+        } else if (preference == mWindowAnimationScale) {
+            writeAnimationScaleOption(0, mWindowAnimationScale, newValue);
+            return true;
+        } else if (preference == mTransitionAnimationScale) {
+            writeAnimationScaleOption(1, mTransitionAnimationScale, newValue);
+            return true;
+        } else if (preference == mAppProcessLimit) {
+            writeAppProcessLimitOptions(newValue);
+            return true;
+        }
         return false;
     }
 
@@ -402,15 +422,5 @@ public class DevelopmentSettings extends PreferenceFragment
     public void onDestroy() {
         dismissDialog();
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
-            SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
-            updateHdcpValues();
-            return true;
-        }
-        return false;
     }
 }
