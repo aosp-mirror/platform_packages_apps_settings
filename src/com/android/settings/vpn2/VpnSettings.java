@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.IConnectivityManager;
 import android.net.LinkProperties;
+import android.net.RouteInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -42,6 +43,7 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.net.Inet4Address;
 import java.nio.charset.Charsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,6 +53,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "VpnSettings";
+    private static final String SCRIPT = "/etc/ppp/ip-up-vpn";
 
     private final IConnectivityManager mService = IConnectivityManager.Stub
             .asInterface(ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
@@ -320,13 +323,34 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
-    private void connect(VpnProfile profile) throws Exception {
-        // Get the current active interface.
+    private String[] getDefaultNetwork() throws Exception {
         LinkProperties network = mService.getActiveLinkProperties();
-        String interfaze = (network == null) ? null : network.getInterfaceName();
-        if (interfaze == null) {
-            throw new IllegalStateException("Cannot get network interface");
+        if (network == null) {
+            throw new IllegalStateException("Network is not available");
         }
+        String interfaze = network.getInterfaceName();
+        if (interfaze == null) {
+            throw new IllegalStateException("Cannot get the default interface");
+        }
+        String gateway = null;
+        for (RouteInfo route : network.getRoutes()) {
+            // Currently legacy VPN only works on IPv4.
+            if (route.isDefaultRoute() && route.getGateway() instanceof Inet4Address) {
+                gateway = route.getGateway().getHostAddress();
+                break;
+            }
+        }
+        if (gateway == null) {
+            throw new IllegalStateException("Cannot get the default gateway");
+        }
+        return new String[] {interfaze, gateway};
+    }
+
+    private void connect(VpnProfile profile) throws Exception {
+        // Get the default interface and the default gateway.
+        String[] network = getDefaultNetwork();
+        String interfaze = network[0];
+        String gateway = network[1];
 
         // Load certificates.
         String privateKey = "";
@@ -346,26 +370,37 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             // TODO: find out a proper way to handle this. Delete these keys?
             throw new IllegalStateException("Cannot load credentials");
         }
-        Log.i(TAG, userCert);
 
         // Prepare arguments for racoon.
         String[] racoon = null;
         switch (profile.type) {
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 racoon = new String[] {
-                    interfaze, profile.server, "udppsk", "1701", profile.ipsecSecret,
+                    interfaze, profile.server, "udppsk", profile.ipsecSecret, "1701",
                 };
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
                 racoon = new String[] {
-                    interfaze, profile.server, "udprsa", "1701", privateKey, userCert, caCert,
+                    interfaze, profile.server, "udprsa", privateKey, userCert, caCert, "1701",
                 };
                 break;
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
+                racoon = new String[] {
+                    interfaze, profile.server, "xauthpsk", profile.ipsecIdentifier,
+                    profile.ipsecSecret, profile.username, profile.password, SCRIPT, gateway,
+                };
                 break;
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
+                racoon = new String[] {
+                    interfaze, profile.server, "xauthrsa", privateKey, userCert, caCert,
+                    profile.username, profile.password, SCRIPT, gateway,
+                };
                 break;
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
+                racoon = new String[] {
+                    interfaze, profile.server, "hybridrsa", caCert,
+                    profile.username, profile.password, SCRIPT, gateway,
+                };
                 break;
         }
 
@@ -374,27 +409,27 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         switch (profile.type) {
             case VpnProfile.TYPE_PPTP:
                 mtpd = new String[] {
-                    "pptp", profile.server, "1723",
+                    interfaze, "pptp", profile.server, "1723",
                     "name", profile.username, "password", profile.password,
                     "linkname", "vpn", "refuse-eap", "nodefaultroute",
                     "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
-                    "ipparam", profile.routes, (profile.mppe ? "+mppe" : "nomppe"),
+                    (profile.mppe ? "+mppe" : "nomppe"),
                 };
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
                 mtpd = new String[] {
-                    "l2tp", profile.server, "1701", profile.l2tpSecret,
+                    interfaze, "l2tp", profile.server, "1701", profile.l2tpSecret,
                     "name", profile.username, "password", profile.password,
                     "linkname", "vpn", "refuse-eap", "nodefaultroute",
                     "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
-                    "ipparam", profile.routes,
                 };
                 break;
         }
 
         VpnConfig config = new VpnConfig();
         config.packagz = profile.key;
+        config.interfaze = interfaze;
         config.session = profile.name;
         config.routes = profile.routes;
         if (!profile.searchDomains.isEmpty()) {
