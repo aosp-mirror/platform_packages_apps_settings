@@ -21,32 +21,6 @@
     android:layout_width="fill_parent">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/AccessibilityTutorialTitle"
-            android:layout_marginTop="11dip" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:layout_gravity="center"
-            android:background="@color/divider_color"
-            android:layout_marginTop="14dip"
-            android:layout_marginBottom="13dip"
-            android:focusable="false"
-            android:clickable="false" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/content"
         android:orientation="vertical"
         android:layout_height="0dip"
@@ -88,28 +62,29 @@
         android:background="@android:drawable/bottom_bar">
 
         <Button
-            android:id="@+id/back_button"
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:id="@+id/skip_button"
+            style="@style/AccessibilityTutorialButton"
             android:layout_alignParentLeft="true"
-            android:drawablePadding="3dip"
-            android:text="@string/accessibility_tutorial_back" />
+            android:text="@string/accessibility_tutorial_skip"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/back_button"
+            style="@style/AccessibilityTutorialButton"
+            android:layout_alignParentLeft="true"
+            android:text="@string/accessibility_tutorial_back"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/next_button"
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            style="@style/AccessibilityTutorialButton"
             android:layout_alignParentRight="true"
-            android:drawablePadding="3dip"
-            android:text="@string/accessibility_tutorial_next" />
+            android:text="@string/accessibility_tutorial_next"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/finish_button"
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            style="@style/AccessibilityTutorialButton"
             android:layout_alignParentRight="true"
             android:text="@string/accessibility_tutorial_finish"
             android:visibility="gone" />
