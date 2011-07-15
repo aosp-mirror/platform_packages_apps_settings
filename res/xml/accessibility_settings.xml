@@ -56,6 +56,10 @@
                 android:entries="@array/long_press_timeout_selector_titles"
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:defaultValue="@string/long_press_timeout_selector_default_value"/>
+        <CheckBoxPreference
+                android:key="touch_exploration_enabled"
+                android:title="@string/accessibility_touch_exploration_enabled"
+                android:persistent="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

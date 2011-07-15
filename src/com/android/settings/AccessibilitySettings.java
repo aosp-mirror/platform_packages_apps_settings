@@ -74,6 +74,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
         "power_button_ends_call";
 
+    private static final String TOUCH_EXPLORATION_ENABLED_CHECKBOX =
+        "touch_exploration_enabled";
+
     private static final String KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
         "key_toggle_accessibility_service_checkbox";
 
@@ -92,6 +95,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private PreferenceCategory mPowerButtonCategory;
     private CheckBoxPreference mPowerButtonEndsCallCheckBox;
+    private CheckBoxPreference mTouchExplorationEnabledCheckBox;
 
     private PreferenceGroup mAccessibilityServicesCategory;
 
@@ -127,6 +131,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mPowerButtonEndsCallCheckBox = (CheckBoxPreference) findPreference(
                 POWER_BUTTON_ENDS_CALL_CHECKBOX);
 
+        mTouchExplorationEnabledCheckBox = (CheckBoxPreference) findPreference(
+                TOUCH_EXPLORATION_ENABLED_CHECKBOX);
+
         mLongPressTimeoutListPreference = (ListPreference) findPreference(
                 KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE);
 
@@ -153,6 +160,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // this entire category is irrelevant.
             getPreferenceScreen().removePreference(mPowerButtonCategory);
         }
+
+        boolean touchExplorationEnabled = (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.TOUCH_EXPLORATION_REQUESTED, 0) == 1);
+        mTouchExplorationEnabledCheckBox.setChecked(touchExplorationEnabled);
 
         mLongPressTimeoutListPreference.setOnPreferenceChangeListener(this);
     }
@@ -295,6 +306,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
                     (isChecked ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
                             : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
+        } else if (TOUCH_EXPLORATION_ENABLED_CHECKBOX.equals(key)) {
+            final int touchExplorationState = ((CheckBoxPreference) preference).isChecked() ? 1 : 0;
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.TOUCH_EXPLORATION_REQUESTED, touchExplorationState);
         } else if (TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX.equals(key)) {
             handleToggleAccessibilityScriptInjection((CheckBoxPreference) preference);
         } else if (preference instanceof CheckBoxPreference) {
