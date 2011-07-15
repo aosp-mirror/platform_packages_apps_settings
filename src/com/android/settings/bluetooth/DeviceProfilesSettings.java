@@ -30,7 +30,11 @@ import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-
+import android.widget.EditText;
+import android.text.TextWatcher;
+import android.app.Dialog;
+import android.widget.Button;
+import android.text.Editable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -53,7 +57,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     //private static final String KEY_ALLOW_INCOMING = "allow_incoming";
 
     public static final String EXTRA_DEVICE = "device";
-
+    private RenameEditTextPreference mRenameDeviceNamePref;
     private LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
     private LocalBluetoothProfileManager mProfileManager;
@@ -65,7 +69,24 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             = new HashMap<LocalBluetoothProfile, CheckBoxPreference>();
 
     private AlertDialog mDisconnectDialog;
+    private class RenameEditTextPreference implements TextWatcher{
+        public void afterTextChanged(Editable s) {
+            Dialog d = mDeviceNamePref.getDialog();
+            if (d instanceof AlertDialog) {
+                ((AlertDialog) d).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+            }
+        }
 
+        // TextWatcher interface
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // not used
+        }
+
+        // TextWatcher interface
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // not used
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +109,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             finish();
             return;  // TODO: test this failure path
         }
-
+        mRenameDeviceNamePref = new RenameEditTextPreference();
         mManager = LocalBluetoothManager.getInstance(getActivity());
         CachedBluetoothDeviceManager deviceManager =
                 mManager.getCachedDeviceManager();
@@ -137,6 +158,15 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         mCachedDevice.registerCallback(this);
 
         refresh();
+        EditText et = mDeviceNamePref.getEditText();
+        if (et != null) {
+            et.addTextChangedListener(mRenameDeviceNamePref);
+            Dialog d = mDeviceNamePref.getDialog();
+            if (d instanceof AlertDialog) {
+                Button b = ((AlertDialog) d).getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setEnabled(et.getText().length() > 0);
+            }
+        }
     }
 
     @Override
