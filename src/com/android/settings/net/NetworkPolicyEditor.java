@@ -20,7 +20,9 @@ import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
-import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
+import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
+import static android.net.NetworkTemplate.buildTemplateMobile4g;
+import static android.net.NetworkTemplate.buildTemplateMobileAll;
 import static com.android.internal.util.Preconditions.checkNotNull;
 
 import android.net.INetworkPolicyManager;
@@ -134,9 +136,9 @@ public class NetworkPolicyEditor {
     public void setMobilePolicySplit(String subscriberId, boolean split) {
         final boolean beforeSplit = isMobilePolicySplit(subscriberId);
 
-        final NetworkTemplate template3g = new NetworkTemplate(MATCH_MOBILE_3G_LOWER, subscriberId);
-        final NetworkTemplate template4g = new NetworkTemplate(MATCH_MOBILE_4G, subscriberId);
-        final NetworkTemplate templateAll = new NetworkTemplate(MATCH_MOBILE_ALL, subscriberId);
+        final NetworkTemplate template3g = buildTemplateMobile3gLower(subscriberId);
+        final NetworkTemplate template4g = buildTemplateMobile4g(subscriberId);
+        final NetworkTemplate templateAll = buildTemplateMobileAll(subscriberId);
 
         if (split == beforeSplit) {
             // already in requested state; skip
