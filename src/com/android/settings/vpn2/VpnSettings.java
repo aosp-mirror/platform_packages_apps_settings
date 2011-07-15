@@ -73,9 +73,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         addPreferencesFromResource(R.xml.vpn_settings2);
-        PreferenceGroup group = getPreferenceScreen();
-        group.setOrderingAsAdded(false);
-        group.findPreference("add_network").setOnPreferenceClickListener(this);
+        getPreferenceScreen().setOrderingAsAdded(false);
 
         if (savedState != null) {
             VpnProfile profile = VpnProfile.decode(savedState.getString("VpnKey"),
@@ -124,6 +122,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         // safely cache profiles in the memory.
         if (mPreferences == null) {
             mPreferences = new HashMap<String, VpnPreference>();
+            PreferenceGroup group = getPreferenceScreen();
 
             String[] keys = mKeyStore.saw(Credentials.VPN);
             if (keys != null && keys.length > 0) {
@@ -138,13 +137,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                     } else {
                         VpnPreference preference = new VpnPreference(context, profile);
                         mPreferences.put(key, preference);
+                        group.addPreference(preference);
                     }
                 }
             }
-        }
-        PreferenceGroup group = getPreferenceScreen();
-        for (VpnPreference preference : mPreferences.values()) {
-            group.addPreference(preference);
+            group.findPreference("add_network").setOnPreferenceClickListener(this);
         }
 
         // Show the dialog if there is one.
