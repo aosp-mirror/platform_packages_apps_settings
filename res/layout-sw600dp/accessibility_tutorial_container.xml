@@ -74,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <View
             android:layout_marginBottom="16dip"
             style="@style/AccessibilityTutorialDivider" />
@@ -81,24 +82,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right">
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/back_button"
+                android:id="@+id/skip_button"
                 style="@style/AccessibilityTutorialButton"
-                android:text="@string/accessibility_tutorial_back" />
-
-            <Button
-                android:id="@+id/next_button"
-                style="@style/AccessibilityTutorialButton"
-                android:text="@string/accessibility_tutorial_next" />
-
-            <Button
-                android:id="@+id/finish_button"
-                style="@style/AccessibilityTutorialButton"
-                android:text="@string/accessibility_tutorial_finish"
+                android:text="@string/accessibility_tutorial_skip"
                 android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right">
+
+                <Button
+                    android:id="@+id/back_button"
+                    style="@style/AccessibilityTutorialButton"
+                    android:text="@string/accessibility_tutorial_back"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/next_button"
+                    style="@style/AccessibilityTutorialButton"
+                    android:text="@string/accessibility_tutorial_next"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@id/finish_button"
+                    style="@style/AccessibilityTutorialButton"
+                    android:text="@string/accessibility_tutorial_finish"
+                    android:visibility="gone" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -306,7 +306,7 @@ public class AccessibilityTutorialActivity extends Activity {
 
             findViewById(R.id.next_button).setOnHoverListener(this);
 
-            setPreviousVisible(false);
+            setSkipVisible(true);
         }
 
         @Override
@@ -350,6 +350,7 @@ public class AccessibilityTutorialActivity extends Activity {
                 final CharSequence nextText = getContext().getText(
                         R.string.accessibility_tutorial_next);
                 addInstruction(R.string.accessibility_tutorial_lesson_1_text_5, nextText);
+                setNextVisible(true);
             }
         }
 
@@ -403,8 +404,7 @@ public class AccessibilityTutorialActivity extends Activity {
             ((ListView) findViewById(R.id.list_view)).setAdapter(mAppsAdapter);
             ((ListView) findViewById(R.id.list_view)).setOnScrollListener(this);
 
-            setNextVisible(false);
-            setFinishVisible(true);
+            setBackVisible(true);
         }
 
         @Override
@@ -452,6 +452,7 @@ public class AccessibilityTutorialActivity extends Activity {
                             R.string.accessibility_tutorial_finish);
                     addInstruction(R.string.accessibility_tutorial_lesson_2_text_4, finishText);
                     setFlag(FLAG_COMPLETED_TUTORIAL, true);
+                    setFinishVisible(true);
                 } else if (mScrollCount == MORE_SCROLL_COUNT) {
                     addInstruction(R.string.accessibility_tutorial_lesson_2_text_3_more);
                 }
@@ -476,8 +477,8 @@ public class AccessibilityTutorialActivity extends Activity {
     private static abstract class TutorialModule extends FrameLayout implements OnClickListener {
         private final AccessibilityTutorialActivity mController;
         private final TextView mInstructions;
-        private final TextView mTitle;
-        private final Button mPrevious;
+        private final Button mSkip;
+        private final Button mBack;
         private final Button mNext;
         private final Button mFinish;
 
@@ -505,14 +506,22 @@ public class AccessibilityTutorialActivity extends Activity {
                     R.layout.accessibility_tutorial_container, this, true);
 
             mInstructions = (TextView) container.findViewById(R.id.instructions);
-            mTitle = (TextView) container.findViewById(R.id.title);
-            mTitle.setText(titleResId);
-            mPrevious = (Button) container.findViewById(R.id.back_button);
-            mPrevious.setOnClickListener(this);
+            mSkip = (Button) container.findViewById(R.id.skip_button);
+            mSkip.setOnClickListener(this);
+            mBack = (Button) container.findViewById(R.id.back_button);
+            mBack.setOnClickListener(this);
             mNext = (Button) container.findViewById(R.id.next_button);
             mNext.setOnClickListener(this);
             mFinish = (Button) container.findViewById(R.id.finish_button);
             mFinish.setOnClickListener(this);
+
+            final TextView title = (TextView) container.findViewById(R.id.title);
+
+            if (title != null) {
+                title.setText(titleResId);
+            }
+
+            controller.setTitle(titleResId);
 
             final ViewGroup contentHolder = (ViewGroup) container.findViewById(R.id.content);
             LayoutInflater.from(context).inflate(layoutResId, contentHolder, true);
@@ -526,7 +535,6 @@ public class AccessibilityTutorialActivity extends Activity {
 
             mFlags = 0;
             mInstructions.setVisibility(View.GONE);
-            mTitle.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
 
             onShown();
         }
@@ -572,6 +580,9 @@ public class AccessibilityTutorialActivity extends Activity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.skip_button:
+                    mController.finish();
+                    break;
                 case R.id.back_button:
                     mController.previous();
                     break;
@@ -585,10 +596,6 @@ public class AccessibilityTutorialActivity extends Activity {
         }
 
         public abstract void onShown();
-
-        protected void setFinishVisible(boolean visible) {
-            mFinish.setVisibility(visible ? VISIBLE : GONE);
-        }
 
         /**
          * Sets or removes the flag with the specified id.
@@ -605,12 +612,20 @@ public class AccessibilityTutorialActivity extends Activity {
             }
         }
 
+        protected void setSkipVisible(boolean visible) {
+            mSkip.setVisibility(visible ? VISIBLE : GONE);
+        }
+
+        protected void setBackVisible(boolean visible) {
+            mBack.setVisibility(visible ? VISIBLE : GONE);
+        }
+
         protected void setNextVisible(boolean visible) {
             mNext.setVisibility(visible ? VISIBLE : GONE);
         }
 
-        protected void setPreviousVisible(boolean visible) {
-            mPrevious.setVisibility(visible ? VISIBLE : GONE);
+        protected void setFinishVisible(boolean visible) {
+            mFinish.setVisibility(visible ? VISIBLE : GONE);
         }
     }
 }
