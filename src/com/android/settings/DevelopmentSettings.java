@@ -250,7 +250,7 @@ public class DevelopmentSettings extends PreferenceFragment
         Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_PROCESSES, value ? 1 : 0);
         Intent service = (new Intent())
-                .setClassName("android", "com.android.server.LoadAverageService");
+                .setClassName("com.android.systemui", "com.android.systemui.LoadAverageService");
         if (value) {
             getActivity().startService(service);
         } else {
@@ -298,6 +298,7 @@ public class DevelopmentSettings extends PreferenceFragment
         try {
             float scale = Float.parseFloat(newValue.toString());
             mWindowManager.setAnimationScale(which, scale);
+            updateAnimationScaleValue(which, pref);
         } catch (RemoteException e) {
         }
     }
@@ -324,6 +325,7 @@ public class DevelopmentSettings extends PreferenceFragment
         try {
             int limit = Integer.parseInt(newValue.toString());
             ActivityManagerNative.getDefault().setProcessLimit(limit);
+            updateAppProcessLimitOptions();
         } catch (RemoteException e) {
         }
     }
