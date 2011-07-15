@@ -45,6 +45,13 @@
             android:persistent="false"
             android:streamType="ring" />
 
+    <Preference
+            android:key="musicfx"
+            android:title="@string/musicfx_title">
+        <intent android:targetPackage="com.android.musicfx"
+                android:targetClass="com.android.musicfx.ControlPanelPicker" />
+    </Preference>
+
     <PreferenceCategory
             android:key="category_calls"
             android:title="@string/sound_category_calls_title"/>

@@ -21,7 +21,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.media.AudioManager;
+import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
@@ -34,6 +37,8 @@ import android.provider.Settings.SettingNotFoundException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import java.util.List;
+
 public class SoundSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SoundAndDisplaysSettings";
@@ -44,6 +49,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SILENT = "silent";
     private static final String KEY_VIBRATE = "vibrate";
     private static final String KEY_RING_VOLUME = "ring_volume";
+    private static final String KEY_MUSICFX = "musicfx";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
@@ -80,6 +86,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
     private CheckBoxPreference mNotificationPulse;
+    private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
 
     private AudioManager mAudioManager;
@@ -163,6 +170,19 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } catch (SettingNotFoundException snfe) {
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
+        }
+
+        mMusicFx = mSoundSettings.findPreference(KEY_MUSICFX);
+        Intent i = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+        PackageManager p = getPackageManager();
+        List<ResolveInfo> ris = p.queryIntentActivities(i, PackageManager.GET_DISABLED_COMPONENTS);
+        if (ris.size() <= 2) {
+            // no need to show the item if there is no choice for the user to make
+            // note: the built in musicfx panel has two activities (one being a
+            // compatibility shim that launches either the other activity, or a
+            // third party one), hence the check for <=2. If the implementation
+            // of the compatbility layer changes, this check may need to be updated.
+            mSoundSettings.removePreference(mMusicFx);
         }
 
         if (!Utils.isVoiceCapable(getActivity())) {
@@ -335,6 +355,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             boolean value = mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.NOTIFICATION_LIGHT_PULSE, value ? 1 : 0);
+        } else if (preference == mMusicFx) {
+            // let the framework fire off the intent
+            return false;
         }
 
         return true;
