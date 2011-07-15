@@ -45,7 +45,7 @@ class VpnProfile implements Cloneable {
     String dnsServers = "";     // 5
     String searchDomains = "";  // 6
     String routes = "";         // 7
-    boolean mppe = false;       // 8
+    boolean mppe = true;        // 8
     String l2tpSecret = "";     // 9
     String ipsecIdentifier = "";// 10
     String ipsecSecret = "";    // 11
