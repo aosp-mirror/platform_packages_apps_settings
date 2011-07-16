@@ -29,16 +29,6 @@
     <item msgid="5345178126174698955">"тихоокеанско"</item>
     <item msgid="8392017019801393511">"Всички"</item>
   </string-array>
-  <string-array name="animations_entries">
-    <item msgid="207790005475613429">"Без анимации"</item>
-    <item msgid="6291186755504776720">"Някои анимации"</item>
-    <item msgid="3856065399819979491">"Всички анимации"</item>
-  </string-array>
-  <string-array name="animations_summaries">
-    <item msgid="4569165952409350897">"Не се показват никакви анимации на прозорци"</item>
-    <item msgid="4460915688877708508">"Показват се някои анимации на прозорци"</item>
-    <item msgid="488968798204105119">"Показват се всички анимации на прозорци"</item>
-  </string-array>
   <string-array name="screen_timeout_entries">
     <item msgid="3342301044271143016">"15 секунди"</item>
     <item msgid="8881760709354815449">"30 секунди"</item>
@@ -240,24 +230,30 @@
     <item msgid="3878793616631049349">"Да се използва проверка с HDCP само за DRM съдържание"</item>
     <item msgid="45075631231212732">"Винаги да се използва проверка с HDCP"</item>
   </string-array>
-    <!-- no translation found for window_animation_scale_entries:0 (8134156599370824081) -->
-    <!-- no translation found for window_animation_scale_entries:1 (6624864048416710414) -->
-    <!-- no translation found for window_animation_scale_entries:2 (2219332261255416635) -->
-    <!-- no translation found for window_animation_scale_entries:3 (3544428804137048509) -->
-    <!-- no translation found for window_animation_scale_entries:4 (3110710404225974514) -->
-    <!-- no translation found for window_animation_scale_entries:5 (4402738611528318731) -->
-    <!-- no translation found for window_animation_scale_entries:6 (6189539267968330656) -->
-    <!-- no translation found for transition_animation_scale_entries:0 (8464255836173039442) -->
-    <!-- no translation found for transition_animation_scale_entries:1 (3375781541913316411) -->
-    <!-- no translation found for transition_animation_scale_entries:2 (1991041427801869945) -->
-    <!-- no translation found for transition_animation_scale_entries:3 (4012689927622382874) -->
-    <!-- no translation found for transition_animation_scale_entries:4 (3289156759925947169) -->
-    <!-- no translation found for transition_animation_scale_entries:5 (7705857441213621835) -->
-    <!-- no translation found for transition_animation_scale_entries:6 (6660750935954853365) -->
-    <!-- no translation found for app_process_limit_entries:0 (6799596560242275471) -->
-    <!-- no translation found for app_process_limit_entries:1 (2412794376818632575) -->
-    <!-- no translation found for app_process_limit_entries:2 (1578904888612645001) -->
-    <!-- no translation found for app_process_limit_entries:3 (8819235336299873577) -->
+  <string-array name="window_animation_scale_entries">
+    <item msgid="8134156599370824081">"Анимацията е изключена"</item>
+    <item msgid="6624864048416710414">"Скала на анимацията .5x"</item>
+    <item msgid="2219332261255416635">"Скала на анимацията 1x"</item>
+    <item msgid="3544428804137048509">"Скала на анимацията 1.5x"</item>
+    <item msgid="3110710404225974514">"Скала на анимацията 2x"</item>
+    <item msgid="4402738611528318731">"Скала на анимацията 5x"</item>
+    <item msgid="6189539267968330656">"Скала на анимацията 10x"</item>
+  </string-array>
+  <string-array name="transition_animation_scale_entries">
+    <item msgid="8464255836173039442">"Анимацията е изключена"</item>
+    <item msgid="3375781541913316411">"Скала на анимацията .5x"</item>
+    <item msgid="1991041427801869945">"Скала на анимацията 1x"</item>
+    <item msgid="4012689927622382874">"Скала на анимацията 1.5x"</item>
+    <item msgid="3289156759925947169">"Скала на анимацията 2x"</item>
+    <item msgid="7705857441213621835">"Скала на анимацията 5x"</item>
+    <item msgid="6660750935954853365">"Скала на анимацията 10x"</item>
+  </string-array>
+    <!-- no translation found for app_process_limit_entries:0 (3401625457385943795) -->
+    <!-- no translation found for app_process_limit_entries:1 (4071574792028999443) -->
+    <!-- no translation found for app_process_limit_entries:2 (4810006996171705398) -->
+    <!-- no translation found for app_process_limit_entries:3 (8586370216857360863) -->
+    <!-- no translation found for app_process_limit_entries:4 (836593137872605381) -->
+    <!-- no translation found for app_process_limit_entries:5 (7899496259191969307) -->
   <string-array name="vpn_types_long">
     <item msgid="2732002039459078847">"VPN с PPTP"</item>
     <item msgid="3799752201662127867">"VPN с L2TP/IPSec с предварително споделени ключове"</item>
@@ -266,10 +262,12 @@
     <item msgid="8064740940687465039">"VPN с IPSec със сертификати и удостоверяване за Xauth"</item>
     <item msgid="4946199982372391490">"VPN с IPSec със сертификати и хибридно удостоверяване"</item>
   </string-array>
-    <!-- no translation found for vpn_states:0 (8621078286418985762) -->
-    <!-- no translation found for vpn_states:1 (6692305604213080515) -->
-    <!-- no translation found for vpn_states:2 (8001704909356800092) -->
-    <!-- no translation found for vpn_states:3 (4039737283841672166) -->
-    <!-- no translation found for vpn_states:4 (4042143101664725090) -->
-    <!-- no translation found for vpn_states:5 (2690164254699635531) -->
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"Няма връзка"</item>
+    <item msgid="6692305604213080515">"Подготвя се за работа..."</item>
+    <item msgid="8001704909356800092">"Установява се връзка..."</item>
+    <item msgid="4039737283841672166">"Има връзка"</item>
+    <item msgid="4042143101664725090">"Време за изчакване"</item>
+    <item msgid="2690164254699635531">"Неуспешно"</item>
+  </string-array>
 </resources>
