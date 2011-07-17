@@ -196,13 +196,14 @@ public class MasterClear extends Fragment {
                         + " type=" + account.type);
                 continue;
             }
-            Drawable icon;
+            Drawable icon = null;
             try {
-                Context authContext = context.createPackageContext(desc.packageName, 0);
-                icon = authContext.getResources().getDrawable(desc.iconId);
+                if (desc.iconId != 0) {
+                    Context authContext = context.createPackageContext(desc.packageName, 0);
+                    icon = authContext.getResources().getDrawable(desc.iconId);
+                }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "No icon for account type " + desc.type);
-                icon = null;
             }
 
             TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
