@@ -156,7 +156,8 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
 
         mManager.setForegroundActivity(getActivity());
         mCachedDevice.registerCallback(this);
-
+        if(mCachedDevice.getBondState() == BluetoothDevice.BOND_NONE)
+            finish();
         refresh();
         EditText et = mDeviceNamePref.getEditText();
         if (et != null) {
