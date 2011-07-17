@@ -38,14 +38,15 @@ public class SettingsCheckBoxPreference extends CheckBoxPreference {
     private final Intent mSettingsIntent;
 
     /**
-     * Creates a new instance.
+     * Creates a new instance. The constructor is checking whether the
+     * settings intent is resolved to an activity and acts accordingly.
      *
      * @param context Context for accessing resources.
-     * @param settingsIntent Intent to use as settings for the item represented by
+     * @param intent Intent to use as settings for the item represented by
      *        this preference. Pass <code>null</code> if there is no associated 
      *        settings activity.
      */
-    public SettingsCheckBoxPreference(Context context, Intent settingsIntent) {
+    public SettingsCheckBoxPreference(Context context, Intent intent) {
         super(context);
 
         if (sDimAlpha == Integer.MIN_VALUE) {
@@ -54,7 +55,13 @@ public class SettingsCheckBoxPreference extends CheckBoxPreference {
             sDimAlpha = (int) (outValue.getFloat() * 255);
         }
 
-        mSettingsIntent = settingsIntent;
+        if (intent != null
+                && !context.getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
+            mSettingsIntent = intent;
+        } else {
+            mSettingsIntent = null;
+        }
+
         setWidgetLayoutResource(R.layout.preference_settings_checkbox_widget);
     }
 

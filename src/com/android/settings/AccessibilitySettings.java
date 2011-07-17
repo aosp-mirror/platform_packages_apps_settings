@@ -51,6 +51,7 @@ import java.util.Map;
  */
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener {
+
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
@@ -362,7 +363,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private void persistEnabledAccessibilityServices() {
         StringBuilder builder = new StringBuilder(256);
 
-        int firstEnabled = -1;
         for (String key : mAccessibilityServices.keySet()) {
             CheckBoxPreference preference = (CheckBoxPreference) findPreference(key);
             if (preference.isChecked()) {
@@ -399,16 +399,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             String key = accessibilityServiceInfo.getId();
 
             if (mAccessibilityServices.put(key, accessibilityServiceInfo) == null) {
-                String settingsActivityName = accessibilityServiceInfo.getSettingsActivityName();
+                SettingsCheckBoxPreference preference = null;
                 Intent settingsIntent = null;
+                String settingsActivityName = accessibilityServiceInfo.getSettingsActivityName();
+
                 if (!TextUtils.isEmpty(settingsActivityName)) {
-                    String packageName = accessibilityServiceInfo.getResolveInfo()
-                        .serviceInfo.packageName;
                     settingsIntent = new Intent(Intent.ACTION_MAIN);
-                    settingsIntent.setClassName(packageName, settingsActivityName);
+                    settingsIntent.setClassName(
+                            accessibilityServiceInfo.getResolveInfo().serviceInfo.packageName,
+                            settingsActivityName);
                 }
-                SettingsCheckBoxPreference preference = new SettingsCheckBoxPreference(
-                        getActivity(), settingsIntent);
+
+                preference = new SettingsCheckBoxPreference(getActivity(), settingsIntent);
                 preference.setKey(key);
                 preference.setOrder(i);
                 ServiceInfo serviceInfo = accessibilityServiceInfo.getResolveInfo().serviceInfo;
