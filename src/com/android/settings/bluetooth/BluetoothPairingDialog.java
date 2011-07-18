@@ -297,8 +297,8 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     }
 
     public void afterTextChanged(Editable s) {
-        if (s.length() > 0) {
-            mOkButton.setEnabled(true);
+        if (mOkButton != null) {
+            mOkButton.setEnabled(s.length() > 0);
         }
     }
 
