@@ -22,6 +22,7 @@ import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,11 +45,25 @@ import java.io.IOException;
  * when returning from each account setup, which doesn't look good.
  */
 public class AddAccountSettings extends Activity {
+    /**
+     * 
+     */
+    private static final String KEY_ADD_CALLED = "AddAccountCalled";
+
+    /**
+     * Extra parameter to identify the caller. Applications may display a
+     * different UI if the calls is made from Settings or from a specific
+     * application.
+     */
+    private static final String KEY_CALLER_IDENTITY = "pendingIntent";
+
     private static final String TAG = "AccountSettings";
 
     /* package */ static final String EXTRA_SELECTED_ACCOUNT = "selected_account";
 
     private static final int CHOOSE_ACCOUNT_REQUEST = 1;
+
+    private PendingIntent mPendingIntent;
 
     private AccountManagerCallback<Bundle> mCallback = new AccountManagerCallback<Bundle>() {
         public void run(AccountManagerFuture<Bundle> future) {
@@ -56,6 +71,11 @@ public class AddAccountSettings extends Activity {
                 Bundle bundle = future.getResult();
                 bundle.keySet();
                 setResult(RESULT_OK);
+
+                if (mPendingIntent != null) {
+                    mPendingIntent.cancel();
+                }
+
                 if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "account added: " + bundle);
             } catch (OperationCanceledException e) {
                 if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "addAccount was canceled");
@@ -69,10 +89,22 @@ public class AddAccountSettings extends Activity {
         }
     };
 
+    private boolean mAddAccountCalled = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (savedInstanceState != null) {
+            mAddAccountCalled = savedInstanceState.getBoolean(KEY_ADD_CALLED);
+            if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "restored");
+        }
+
+        if (mAddAccountCalled) {
+            // We already called add account - maybe the callback was lost.
+            finish();
+            return;
+        }
         final String[] authorities =
                 getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
         final String[] accountTypes =
@@ -102,14 +134,24 @@ public class AddAccountSettings extends Activity {
         }
     }
 
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_ADD_CALLED, mAddAccountCalled);
+        if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "saved");
+    }
+
     private void addAccount(String accountType) {
+        Bundle addAccountOptions = new Bundle();
+        mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(), 0);
+        addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
         AccountManager.get(this).addAccount(
                 accountType,
                 null, /* authTokenType */
                 null, /* requiredFeatures */
-                null, /* addAccountOptions */
+                addAccountOptions,
                 this,
                 mCallback,
                 null /* handler */);
+        mAddAccountCalled  = true;
     }
 }
