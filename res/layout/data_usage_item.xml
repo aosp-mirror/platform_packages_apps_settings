@@ -14,26 +14,34 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="48dip"
-    android:orientation="vertical">
+    android:padding="8dip"
+    android:columnCount="2">
 
+    <!-- TODO: consider using canShrink -->
     <TextView
-        android:id="@android:id/text1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6dip"
-        android:layout_marginTop="6dip"
+        android:id="@android:id/title"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_columnFlexibility="canStretch"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@android:id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6dip"
-        android:layout_marginBottom="6dip"
+        android:id="@android:id/summary"
+        android:layout_gravity="right"
+        android:layout_marginLeft="8dip"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@android:id/progress"
+        android:layout_height="12dip"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="4dip"
+        android:max="100"
+        android:progressDrawable="@drawable/data_usage_bar"
+        style="?android:attr/progressBarStyleHorizontal" />
+
+</GridLayout>

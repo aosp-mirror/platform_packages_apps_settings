@@ -97,6 +97,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TabHost;
@@ -946,8 +947,11 @@ public class DataUsageSummary extends Fragment {
                 final long now = System.currentTimeMillis();
                 final NetworkStatsHistory.Entry entry = mDetailHistory.getValues(
                         start, end, now, null);
-                final long total = entry.rxBytes + entry.txBytes;
-                mAppSubtitle.setText(Formatter.formatFileSize(context, total));
+
+                mAppSubtitle.setText(
+                        getString(R.string.data_usage_received_sent,
+                                Formatter.formatFileSize(context, entry.rxBytes),
+                                Formatter.formatFileSize(context, entry.txBytes)));
             }
 
             getLoaderManager().destroyLoader(LOADER_SUMMARY);
@@ -1110,6 +1114,7 @@ public class DataUsageSummary extends Fragment {
      */
     public static class DataUsageAdapter extends BaseAdapter {
         private ArrayList<AppUsageItem> mItems = Lists.newArrayList();
+        private long mLargest;
 
         /**
          * Bind the given {@link NetworkStats}, or {@code null} to clear list.
@@ -1143,6 +1148,7 @@ public class DataUsageSummary extends Fragment {
             }
 
             Collections.sort(mItems);
+            mLargest = (mItems.size() > 0) ? mItems.get(0).total : 0;
             notifyDataSetChanged();
         }
 
@@ -1170,12 +1176,17 @@ public class DataUsageSummary extends Fragment {
 
             final Context context = parent.getContext();
 
-            final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
-            final TextView text2 = (TextView) convertView.findViewById(android.R.id.text2);
+            final TextView title = (TextView) convertView.findViewById(android.R.id.title);
+            final TextView summary = (TextView) convertView.findViewById(android.R.id.summary);
+            final ProgressBar progress = (ProgressBar) convertView.findViewById(
+                    android.R.id.progress);
 
             final AppUsageItem item = mItems.get(position);
-            text1.setText(resolveLabelForUid(context, item.uid));
-            text2.setText(Formatter.formatFileSize(context, item.total));
+            title.setText(resolveLabelForUid(context, item.uid));
+            summary.setText(Formatter.formatFileSize(context, item.total));
+
+            final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
+            progress.setProgress(percentTotal);
 
             return convertView;
         }
@@ -1187,7 +1198,7 @@ public class DataUsageSummary extends Fragment {
      * {@link DataUsageSummary}.
      */
     public static class AppDetailsFragment extends Fragment {
-        public static final String EXTRA_UID = "uid";
+        private static final String EXTRA_UID = "uid";
 
         public static void show(DataUsageSummary parent, int uid) {
             final Bundle args = new Bundle();
@@ -1225,8 +1236,8 @@ public class DataUsageSummary extends Fragment {
      * {@link NetworkPolicy#limitBytes}.
      */
     public static class ConfirmLimitFragment extends DialogFragment {
-        public static final String EXTRA_MESSAGE_ID = "messageId";
-        public static final String EXTRA_LIMIT_BYTES = "limitBytes";
+        private static final String EXTRA_MESSAGE_ID = "messageId";
+        private static final String EXTRA_LIMIT_BYTES = "limitBytes";
 
         public static void show(DataUsageSummary parent) {
             final Bundle args = new Bundle();
@@ -1278,7 +1289,7 @@ public class DataUsageSummary extends Fragment {
      * Dialog to edit {@link NetworkPolicy#cycleDay}.
      */
     public static class CycleEditorFragment extends DialogFragment {
-        public static final String EXTRA_CYCLE_DAY = "cycleDay";
+        private static final String EXTRA_CYCLE_DAY = "cycleDay";
 
         public static void show(DataUsageSummary parent) {
             final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate);
@@ -1331,7 +1342,7 @@ public class DataUsageSummary extends Fragment {
      * and giving the user an option to bypass.
      */
     public static class PolicyLimitFragment extends DialogFragment {
-        public static final String EXTRA_TITLE_ID = "titleId";
+        private static final String EXTRA_TITLE_ID = "titleId";
 
         public static void show(DataUsageSummary parent) {
             final Bundle args = new Bundle();
