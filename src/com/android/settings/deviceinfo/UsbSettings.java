@@ -16,9 +16,12 @@
 
 package com.android.settings.deviceinfo;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
@@ -53,6 +56,13 @@ public class UsbSettings extends SettingsPreferenceFragment {
     private String mInstallerImagePath;
     private CheckBoxPreference mMtp;
     private CheckBoxPreference mPtp;
+    private MenuItem mInstallerCd;
+
+    private final BroadcastReceiver mStateReceiver = new BroadcastReceiver() {
+        public void onReceive(Context content, Intent intent) {
+            updateToggles();
+        }
+    };
 
     private PreferenceScreen createPreferenceHierarchy() {
         PreferenceScreen root = getPreferenceScreen();
@@ -80,13 +90,22 @@ public class UsbSettings extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mStateReceiver);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
         // Make sure we reload the preference hierarchy since some of these settings
         // depend on others...
         createPreferenceHierarchy();
-        updateToggles();
+
+        // ACTION_USB_STATE is sticky so this will call updateToggles
+        getActivity().registerReceiver(mStateReceiver,
+                new IntentFilter(UsbManager.ACTION_USB_STATE));
     }
 
     private void updateToggles() {
@@ -99,6 +118,13 @@ public class UsbSettings extends SettingsPreferenceFragment {
         } else  {
             mMtp.setChecked(false);
             mPtp.setChecked(false);
+        }
+        if (mInstallerCd != null) {
+            if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MASS_STORAGE)) {
+                mInstallerCd.setTitle( R.string.usb_label_installer_cd_done);
+            } else {
+                mInstallerCd.setTitle( R.string.usb_label_installer_cd);
+            }
         }
     }
 
@@ -115,34 +141,35 @@ public class UsbSettings extends SettingsPreferenceFragment {
                 return true;
             }
         }
-
         if (preference == mMtp) {
             mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, true);
-            mPtp.setChecked(false);
         } else if (preference == mPtp) {
             mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP, true);
-            mMtp.setChecked(false);
         }
-
+        updateToggles();
         return true;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, MENU_ID_INSTALLER_CD, 0, R.string.usb_label_installer_cd)
-                //.setIcon(com.android.internal.R.drawable.stat_sys_data_usb)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        mInstallerCd = menu.add(Menu.NONE, MENU_ID_INSTALLER_CD, 0,
+                R.string.usb_label_installer_cd);
+        mInstallerCd.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ID_INSTALLER_CD:
-                // installer CD is never default
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MASS_STORAGE, false);
-                mUsbManager.setMassStorageBackingFile(mInstallerImagePath);
-                mMtp.setChecked(false);
-                mPtp.setChecked(false);
+                if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MASS_STORAGE)) {
+                    // Disable installer CD, return to default function.
+                    mUsbManager.setCurrentFunction(null, false);
+                } else {
+                    // Enable installer CD.  Don't set as default function.
+                    mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MASS_STORAGE, false);
+                    mUsbManager.setMassStorageBackingFile(mInstallerImagePath);
+                }
+                updateToggles();
                 return true;
         }
         return super.onOptionsItemSelected(item);
