@@ -202,7 +202,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         pref.setOrder(getProfilePreferenceIndex(profile.getOrdinal()));
         pref.setOnExpandClickListener(this);
 
-        int iconResource = profile.getDrawableResource(null);  // FIXME: get BT class for this?
+        int iconResource = profile.getDrawableResource(mCachedDevice.getBtClass());
         if (iconResource != 0) {
             pref.setProfileDrawable(getResources().getDrawable(iconResource));
         }
