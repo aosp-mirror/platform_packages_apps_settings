@@ -147,6 +147,7 @@ public class InstalledAppDetails extends Fragment
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 4;
     private static final int DLG_FORCE_STOP = DLG_BASE + 5;
     private static final int DLG_MOVE_FAILED = DLG_BASE + 6;
+    private static final int DLG_DISABLE = DLG_BASE + 7;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -754,6 +755,22 @@ public class InstalledAppDetails extends Fragment
                     .setMessage(msg)
                     .setNeutralButton(R.string.dlg_ok, null)
                     .create();
+                case DLG_DISABLE:
+                    return new AlertDialog.Builder(getActivity())
+                    .setTitle(getActivity().getText(R.string.app_disable_dlg_title))
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(getActivity().getText(R.string.app_disable_dlg_text))
+                    .setPositiveButton(R.string.dlg_ok,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Disable the app
+                            new DisableChanger(getOwner(), getOwner().mAppEntry.info,
+                                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
+                            .execute((Object)null);
+                        }
+                    })
+                    .setNegativeButton(R.string.dlg_cancel, null)
+                    .create();
             }
             throw new IllegalArgumentException("unknown id " + id);
         }
@@ -837,9 +854,13 @@ public class InstalledAppDetails extends Fragment
                 showDialogInner(DLG_FACTORY_RESET, 0);
             } else {
                 if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                    new DisableChanger(this, mAppEntry.info, mAppEntry.info.enabled ?
-                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
-                            : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT).execute((Object)null);
+                    if (mAppEntry.info.enabled) {
+                        showDialogInner(DLG_DISABLE, 0);
+                    } else {
+                        new DisableChanger(this, mAppEntry.info,
+                                PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
+                        .execute((Object)null);
+                    }
                 } else {
                     uninstallPkg(packageName);
                 }
