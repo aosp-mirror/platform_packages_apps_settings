@@ -31,6 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.AssetManager;
+import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -94,6 +95,9 @@ public class TetherSettings extends SettingsPreferenceFragment
     private WifiApDialog mDialog;
     private WifiManager mWifiManager;
     private WifiConfiguration mWifiConfig = null;
+
+    private boolean mUsbConnected;
+    private boolean mMassStorageActive;
 
     private boolean mBluetoothEnableForTether;
 
@@ -253,8 +257,14 @@ public class TetherSettings extends SettingsPreferenceFragment
                 updateState(available.toArray(new String[available.size()]),
                         active.toArray(new String[active.size()]),
                         errored.toArray(new String[errored.size()]));
-            } else if (action.equals(Intent.ACTION_MEDIA_SHARED) ||
-                       action.equals(Intent.ACTION_MEDIA_UNSHARED)) {
+            } else if (action.equals(Intent.ACTION_MEDIA_SHARED)) {
+                mMassStorageActive = true;
+                updateState();
+            } else if (action.equals(Intent.ACTION_MEDIA_UNSHARED)) {
+                mMassStorageActive = false;
+                updateState();
+            } else if (action.equals(UsbManager.ACTION_USB_STATE)) {
+                mUsbConnected = intent.getBooleanExtra(UsbManager.USB_CONNECTED, false);
                 updateState();
             } else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 if (mBluetoothEnableForTether) {
@@ -285,9 +295,14 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         final Activity activity = getActivity();
 
+        mMassStorageActive = Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         mTetherChangeReceiver = new TetherChangeReceiver();
         IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
         Intent intent = activity.registerReceiver(mTetherChangeReceiver, filter);
+
+        filter = new IntentFilter();
+        filter.addAction(UsbManager.ACTION_USB_STATE);
+        activity.registerReceiver(mTetherChangeReceiver, filter);
 
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_SHARED);
@@ -334,14 +349,11 @@ public class TetherSettings extends SettingsPreferenceFragment
             String[] errored) {
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean usbAvailable = false;
+        boolean usbAvailable = mUsbConnected && !mMassStorageActive;
         int usbError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
-        boolean massStorageActive =
-                Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         for (String s : available) {
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) {
-                    usbAvailable = true;
                     if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
                         usbError = cm.getLastTetherError(s);
                     }
@@ -377,7 +389,7 @@ public class TetherSettings extends SettingsPreferenceFragment
             mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
-        } else if (massStorageActive) {
+        } else if (mMassStorageActive) {
             mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
@@ -434,40 +446,18 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
         if (preference == mUsbTether) {
             boolean newState = mUsbTether.isChecked();
 
-            ConnectivityManager cm =
-                    (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            if (newState) {
-                String[] available = cm.getTetherableIfaces();
-
-                String usbIface = findIface(available, mUsbRegexs);
-                if (usbIface == null) {
-                    updateState();
-                    return true;
-                }
-                if (cm.tether(usbIface) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-                    mUsbTether.setChecked(false);
-                    mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
-                    return true;
-                }
-                mUsbTether.setSummary("");
-            } else {
-                String [] tethered = cm.getTetheredIfaces();
-
-                String usbIface = findIface(tethered, mUsbRegexs);
-                if (usbIface == null) {
-                    updateState();
-                    return true;
-                }
-                if (cm.untether(usbIface) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-                    mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
-                    return true;
-                }
-                mUsbTether.setSummary("");
+            if (cm.setUsbTethering(newState) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
+                mUsbTether.setChecked(false);
+                mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
+                return true;
             }
+            mUsbTether.setSummary("");
         } else if (preference == mBluetoothTether) {
             boolean bluetoothTetherState = mBluetoothTether.isChecked();
 
@@ -486,8 +476,6 @@ public class TetherSettings extends SettingsPreferenceFragment
             } else {
                 boolean errored = false;
 
-                ConnectivityManager cm =
-                    (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
                 String [] tethered = cm.getTetheredIfaces();
                 String bluetoothIface = findIface(tethered, mBluetoothRegexs);
                 if (bluetoothIface != null &&
