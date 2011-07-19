@@ -89,11 +89,17 @@ final class Utils {
 
     static void showError(Context context, String name, int messageResId) {
         String message = context.getString(messageResId, name);
-        new AlertDialog.Builder(context)
+        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+        Context activity = manager.getForegroundActivity();
+        if(manager.isForegroundActivity()) {
+            new AlertDialog.Builder(activity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(R.string.bluetooth_error_title)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
+        } else {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        }
     }
 }

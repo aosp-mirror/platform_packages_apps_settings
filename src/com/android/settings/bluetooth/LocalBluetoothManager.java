@@ -79,6 +79,10 @@ public final class LocalBluetoothManager {
         return mContext;
     }
 
+    public Context getForegroundActivity() {
+        return mForegroundActivity;
+    }
+
     boolean isForegroundActivity() {
         return mForegroundActivity != null;
     }
