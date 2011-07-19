@@ -105,7 +105,7 @@ public class Display extends Activity implements View.OnClickListener {
 
     public void onClick(View v) {
         try {
-            ActivityManagerNative.getDefault().updateConfiguration(mCurConfig);
+            ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
         } catch (RemoteException e) {
         }
         finish();

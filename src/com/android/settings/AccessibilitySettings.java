@@ -295,7 +295,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             try {
                 mCurConfig.fontScale = mToggleLargeTextCheckBox.isChecked()
                         ? LARGE_FONT_SCALE : 1;
-                ActivityManagerNative.getDefault().updateConfiguration(mCurConfig);
+                ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
             } catch (RemoteException e) {
             }
         } else if (POWER_BUTTON_ENDS_CALL_CHECKBOX.equals(key)) {
