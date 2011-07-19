@@ -139,25 +139,18 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             if (wifiAvailable && usbAvailable && bluetoothAvailable) {
                 p.setTitle(R.string.tether_settings_title_all);
-                p.setSummary(R.string.tether_settings_summary_all);
             } else if (wifiAvailable && usbAvailable) {
                 p.setTitle(R.string.tether_settings_title_all);
-                p.setSummary(R.string.tether_settings_summary_usb_wifi);
             } else if (wifiAvailable && bluetoothAvailable) {
                 p.setTitle(R.string.tether_settings_title_all);
-                p.setSummary(R.string.tether_settings_summary_wifi_bluetooth);
             } else if (wifiAvailable) {
                 p.setTitle(R.string.tether_settings_title_wifi);
-                p.setSummary(R.string.tether_settings_summary_wifi);
             } else if (usbAvailable && bluetoothAvailable) {
                 p.setTitle(R.string.tether_settings_title_usb_bluetooth);
-                p.setSummary(R.string.tether_settings_summary_usb_bluetooth);
             } else if (usbAvailable) {
                 p.setTitle(R.string.tether_settings_title_usb);
-                p.setSummary(R.string.tether_settings_summary_usb);
             } else {
                 p.setTitle(R.string.tether_settings_title_bluetooth);
-                p.setSummary(R.string.tether_settings_summary_bluetooth);
             }
         }
     }

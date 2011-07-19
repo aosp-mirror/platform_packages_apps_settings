@@ -16,8 +16,6 @@
 
 package com.android.settings.nfc;
 
-import com.android.settings.R;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +24,6 @@ import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.provider.Settings;
 import android.util.Log;
 
 /**
@@ -98,6 +95,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         // Start async update of the NFC adapter state, as the API is
         // unfortunately blocking...
         new Thread("toggleNFC") {
+            @Override
             public void run() {
                 Log.d(TAG, "Setting NFC enabled state to: " + desiredState);
                 boolean success = false;
@@ -118,7 +116,6 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
                     mHandler.post(new Runnable() {
                             public void run() {
                                 mCheckbox.setEnabled(true);
-                                mCheckbox.setSummary(R.string.nfc_toggle_error);
                             }
                         });
                 }
@@ -130,6 +127,5 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     private void handleNfcStateChanged(boolean newState) {
         mCheckbox.setChecked(newState);
         mCheckbox.setEnabled(true);
-        mCheckbox.setSummary(R.string.nfc_quick_toggle_summary);
     }
 }
