@@ -203,7 +203,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public void writeFontSizePreference(Object objValue) {
         try {
             mCurConfig.fontScale = Float.parseFloat(objValue.toString());
-            ActivityManagerNative.getDefault().updateConfiguration(mCurConfig);
+            ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
         } catch (RemoteException e) {
             Log.w(TAG, "Unable to save font size");
         }
