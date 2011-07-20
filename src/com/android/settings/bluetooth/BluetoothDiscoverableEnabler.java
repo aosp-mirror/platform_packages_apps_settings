@@ -144,10 +144,22 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         if (getDiscoverableTimeout() == DISCOVERABLE_TIMEOUT_NEVER) {
             mDiscoveryPreference.setSummary(R.string.bluetooth_is_discoverable_always);
         } else {
-            String textTimeout = DateUtils.formatElapsedTime(timeout);
+            String textTimeout = formatTimeRemaining(timeout);
             mDiscoveryPreference.setSummary(mContext.getString(R.string.bluetooth_is_discoverable,
                     textTimeout));
         }
+    }
+
+    private static String formatTimeRemaining(int timeout) {
+        StringBuilder sb = new StringBuilder(6);    // "mmm:ss"
+        int min = timeout / 60;
+        sb.append(min).append(':');
+        int sec = timeout - (min * 60);
+        if (sec < 10) {
+            sb.append('0');
+        }
+        sb.append(sec);
+        return sb.toString();
     }
 
     void setDiscoverableTimeout(int index) {

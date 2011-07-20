@@ -151,7 +151,6 @@ public abstract class DeviceListPreferenceFragment extends
 
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
         if (mDevicePreferenceMap.get(cachedDevice) != null) {
-            Log.e(TAG, "Got onDeviceAdded, but cachedDevice already exists");
             return;
         }
 

@@ -72,6 +72,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     private View mView;
     private TextView mEmptyView;
 
+    private final IntentFilter mIntentFilter;
+
     // accessed from inner class (not private to avoid thunks)
     Preference mMyDevicePreference;
 
@@ -79,20 +81,21 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED) ||
-                    (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED) &&
-                            (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                                    BluetoothAdapter.ERROR) == BluetoothAdapter.STATE_ON))) {
+            if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 updateDeviceName();
             }
         }
 
         private void updateDeviceName() {
-            if (mLocalAdapter != null && mLocalAdapter.isEnabled() && mMyDevicePreference != null) {
+            if (mLocalAdapter.isEnabled() && mMyDevicePreference != null) {
                 mMyDevicePreference.setTitle(mLocalAdapter.getName());
             }
         }
     };
+
+    public BluetoothSettings() {
+        mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,16 +145,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         super.onResume();
 
         mBluetoothEnabler.resume();
-        updateContent(mLocalAdapter.getBluetoothState());
-
         if (mDiscoverableEnabler != null) {
             mDiscoverableEnabler.resume();
         }
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        filter.addAction(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
-        getActivity().registerReceiver(mReceiver, filter);
+        updateContent(mLocalAdapter.getBluetoothState());
     }
 
     @Override
@@ -174,8 +173,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 .setEnabled(bluetoothIsEnabled && !isDiscovering)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(Menu.NONE, MENU_ID_RENAME_DEVICE, 0, R.string.bluetooth_rename_device)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setEnabled(bluetoothIsEnabled)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_VISIBILITY_TIMEOUT, 0, R.string.bluetooth_visibility_timeout)
+                .setEnabled(bluetoothIsEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_SHOW_RECEIVED, 0, R.string.bluetooth_show_received_files)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -233,7 +234,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     private void updateContent(int bluetoothState) {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        getActivity().invalidateOptionsMenu();
         int messageId = 0;
 
         switch (bluetoothState) {
@@ -245,9 +245,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 if (mMyDevicePreference == null) {
                     mMyDevicePreference = new Preference(getActivity());
                 }
-                if (mLocalAdapter != null) {
-                    mMyDevicePreference.setTitle(mLocalAdapter.getName());
-                }
+                mMyDevicePreference.setTitle(mLocalAdapter.getName());
                 mMyDevicePreference.setPersistent(false);
                 mMyDevicePreference.setEnabled(true);
                 preferenceScreen.addPreference(mMyDevicePreference);
@@ -255,6 +253,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 if (mDiscoverableEnabler == null) {
                     mDiscoverableEnabler = new BluetoothDiscoverableEnabler(getActivity(),
                             mLocalAdapter, mMyDevicePreference);
+                    mDiscoverableEnabler.resume();
                 }
 
                 // Paired devices category
@@ -291,14 +290,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                     preferenceScreen.removePreference(mPairedDevicesCategory);
                     startScanning();
                 }
+                getActivity().invalidateOptionsMenu();
                 return; // not break
 
             case BluetoothAdapter.STATE_TURNING_OFF:
-                int preferenceCount = preferenceScreen.getPreferenceCount();
-                for (int i = 0; i < preferenceCount; i++) {
-                    preferenceScreen.getPreference(i).setEnabled(false);
-                }
-                return; // not break
+                messageId = R.string.bluetooth_turning_off;
+                break;
 
             case BluetoothAdapter.STATE_OFF:
                 messageId = R.string.bluetooth_empty_list_bluetooth_off;
@@ -312,6 +309,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         setDeviceListGroup(preferenceScreen);
         removeAllDevices();
         mEmptyView.setText(messageId);
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
