@@ -171,12 +171,15 @@ public class RingerVolumePreference extends VolumePreference implements
         mNotificationsUseRingVolumeCheckbox =
                 (CheckBox) view.findViewById(R.id.same_notification_volume);
         mNotificationsUseRingVolumeCheckbox.setOnCheckedChangeListener(this);
-        mNotificationsUseRingVolumeCheckbox.setChecked(
-                Utils.isVoiceCapable(getContext())
-                && Settings.System.getInt(
+        mNotificationsUseRingVolumeCheckbox.setChecked(Settings.System.getInt(
                         getContext().getContentResolver(),
                         Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
-        setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
+        // Notification volume always visible for non voice capable devices
+        if (Utils.isVoiceCapable(getContext())) {
+            setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
+        } else {
+            setNotificationVolumeVisibility(true);
+        }
         disableSettingsThatNeedVoice(view);
 
         // Register callbacks for mute/unmute buttons
@@ -240,16 +243,19 @@ public class RingerVolumePreference extends VolumePreference implements
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        setNotificationVolumeVisibility(!isChecked);
+        // ignore R.id.same_notification_volume checkbox for non voice capable devices
+        if (Utils.isVoiceCapable(getContext())) {
+            setNotificationVolumeVisibility(!isChecked);
 
-        Settings.System.putInt(getContext().getContentResolver(),
-                Settings.System.NOTIFICATIONS_USE_RING_VOLUME, isChecked ? 1 : 0);
+            Settings.System.putInt(getContext().getContentResolver(),
+                    Settings.System.NOTIFICATIONS_USE_RING_VOLUME, isChecked ? 1 : 0);
 
-        if (isChecked) {
-            // The user wants the notification to be same as ring, so do a
-            // one-time sync right now
-            mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
-                    mAudioManager.getStreamVolume(AudioManager.STREAM_RING), 0);
+            if (isChecked) {
+                // The user wants the notification to be same as ring, so do a
+                // one-time sync right now
+                mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
+                        mAudioManager.getStreamVolume(AudioManager.STREAM_RING), 0);
+            }
         }
     }
 
