@@ -16,10 +16,13 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
@@ -52,6 +55,8 @@ public class UsbSettings extends SettingsPreferenceFragment {
     private static final String KEY_INSTALLER_CD = "usb_installer_cd";
     private static final int MENU_ID_INSTALLER_CD = Menu.FIRST;
 
+    private static final int DLG_INSTALLER_CD = 1;
+
     private UsbManager mUsbManager;
     private String mInstallerImagePath;
     private CheckBoxPreference mMtp;
@@ -60,6 +65,9 @@ public class UsbSettings extends SettingsPreferenceFragment {
 
     private final BroadcastReceiver mStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context content, Intent intent) {
+            if (!intent.getBooleanExtra(UsbManager.USB_CONNECTED, false)) {
+                removeDialog(DLG_INSTALLER_CD);
+            }
             updateToggles();
         }
     };
@@ -106,6 +114,24 @@ public class UsbSettings extends SettingsPreferenceFragment {
         // ACTION_USB_STATE is sticky so this will call updateToggles
         getActivity().registerReceiver(mStateReceiver,
                 new IntentFilter(UsbManager.ACTION_USB_STATE));
+    }
+
+    @Override
+    public Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DLG_INSTALLER_CD:
+                return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.dlg_installer_cd_title)
+                    .setMessage(R.string.dlg_installer_cd_text)
+                    .setPositiveButton(R.string.dlg_installer_cd_ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                               // Disable installer CD, return to default function.
+                                mUsbManager.setCurrentFunction(null, false);
+                            }})
+                    .create();
+        }
+        return null;
     }
 
     private void updateToggles() {
@@ -164,10 +190,12 @@ public class UsbSettings extends SettingsPreferenceFragment {
                 if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MASS_STORAGE)) {
                     // Disable installer CD, return to default function.
                     mUsbManager.setCurrentFunction(null, false);
+                    removeDialog(DLG_INSTALLER_CD);
                 } else {
                     // Enable installer CD.  Don't set as default function.
                     mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MASS_STORAGE, false);
                     mUsbManager.setMassStorageBackingFile(mInstallerImagePath);
+                    showDialog(DLG_INSTALLER_CD);
                 }
                 updateToggles();
                 return true;
