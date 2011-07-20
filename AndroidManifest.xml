@@ -1180,12 +1180,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <!-- actions from NetworkPolicyManager notifications -->
-                <action android:name="android.intent.action.DATA_USAGE_WARNING" />
-                <action android:name="android.intent.action.DATA_USAGE_LIMIT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DataUsageSummary" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
