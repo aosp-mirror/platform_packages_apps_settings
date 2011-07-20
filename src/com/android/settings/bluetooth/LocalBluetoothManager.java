@@ -36,6 +36,8 @@ public final class LocalBluetoothManager {
     /** If a BT-related activity is in the foreground, this will be it. */
     private Context mForegroundActivity;
 
+    private BluetoothDiscoverableEnabler mDiscoverableEnabler;
+
     private final LocalBluetoothAdapter mLocalAdapter;
 
     private final CachedBluetoothDeviceManager mCachedDeviceManager;
@@ -58,6 +60,14 @@ public final class LocalBluetoothManager {
         }
 
         return sInstance;
+    }
+
+    public void setDiscoverableEnabler(BluetoothDiscoverableEnabler discoverableEnabler) {
+        mDiscoverableEnabler = discoverableEnabler;
+    }
+
+    public BluetoothDiscoverableEnabler getDiscoverableEnabler() {
+        return mDiscoverableEnabler;
     }
 
     private LocalBluetoothManager(LocalBluetoothAdapter adapter, Context context) {

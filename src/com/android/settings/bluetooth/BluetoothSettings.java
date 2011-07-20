@@ -194,12 +194,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 return true;
 
             case MENU_ID_RENAME_DEVICE:
-                new BluetoothNameDialogFragment(mLocalAdapter).show(
+                new BluetoothNameDialogFragment().show(
                         getFragmentManager(), "rename device");
                 return true;
 
             case MENU_ID_VISIBILITY_TIMEOUT:
-                new BluetoothVisibilityTimeoutFragment(mDiscoverableEnabler).show(
+                new BluetoothVisibilityTimeoutFragment().show(
                         getFragmentManager(), "visibility timeout");
                 return true;
 
@@ -261,6 +261,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                     mDiscoverableEnabler = new BluetoothDiscoverableEnabler(getActivity(),
                             mLocalAdapter, mMyDevicePreference);
                     mDiscoverableEnabler.resume();
+                    LocalBluetoothManager.getInstance(getActivity()).setDiscoverableEnabler(
+                            mDiscoverableEnabler);
                 }
 
                 // Paired devices category
