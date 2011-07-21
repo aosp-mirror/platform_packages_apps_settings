@@ -17,34 +17,50 @@
 package com.android.settings;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.text.TextUtils.SimpleStringSplitter;
+import android.view.Gravity;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.Switch;
+import android.widget.TextView;
 
+import com.android.internal.content.PackageMonitor;
+import com.android.settings.AccessibilitySettings.ToggleSwitch.OnBeforeCheckedChangeListener;
+
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Activity with the accessibility settings.
@@ -57,392 +73,335 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private static final float LARGE_FONT_SCALE = 1.3f;
 
-    private static final String TOGGLE_LARGE_TEXT_CHECKBOX =
-        "toggle_large_text_checkbox";
+    // Timeout before we update the services if packages are added/removed since
+    // the AccessibilityManagerService has to do that processing first to generate
+    // the AccessibilityServiceInfo we need for proper presentation.
+    private static final long DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS = 1000;
 
-    private static final String TOGGLE_ACCESSIBILITY_CHECKBOX =
-        "toggle_accessibility_service_checkbox";
+    private static final char ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ':';
 
-    private static final String ACCESSIBILITY_SERVICES_CATEGORY =
-        "accessibility_services_category";
+    // Preference categories
+    private static final String SERVICES_CATEGORY = "services_category";
 
-    private static final String TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX =
-        "toggle_accessibility_script_injection_checkbox";
+    // Preferences
+    private static final String TOGGLE_LARGE_TEXT_PREFERENCE = "toggle_large_text_preference";
+    private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
+        "toggle_power_button_ends_call_preference";
+    private static final String TOGGLE_TOUCH_EXPLORATION_PREFERENCE =
+        "toggle_touch_exploration_preference";
+    private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
+        "select_long_press_timeout_preference";
+    private static final String TOGGLE_SCRIPT_INJECTION_PREFERENCE =
+        "toggle_script_injection_preference";
 
-    private static final String POWER_BUTTON_CATEGORY =
-        "power_button_category";
+    // Extras passed to sub-fragments.
+    static final String EXTRA_PREFERENCE_KEY = "preference_key";
+    static final String EXTRA_CHECKED = "checked";
+    static final String EXTRA_TITLE = "title";
+    static final String EXTRA_SUMMARY = "summary";
+    static final String EXTRA_WARNING_MESSAGE = "warning_message";
+    static final String EXTRA_SETTINGS_TITLE = "settings_title";
+    static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
 
-    private static final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
-        "power_button_ends_call";
-
-    private static final String TOUCH_EXPLORATION_ENABLED_CHECKBOX =
-        "touch_exploration_enabled";
-
-    private static final String KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
-        "key_toggle_accessibility_service_checkbox";
-
-    private static final String KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE =
-        "long_press_timeout_list_preference";
-
+    // Dialog IDs.
     private static final int DIALOG_ID_DISABLE_ACCESSIBILITY = 1;
     private static final int DIALOG_ID_ENABLE_SCRIPT_INJECTION = 2;
-    private static final int DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE = 3;
-    private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 4;
+    private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 3;
 
-    private CheckBoxPreference mToggleLargeTextCheckBox;
-    private CheckBoxPreference mToggleAccessibilityCheckBox;
-    private CheckBoxPreference mToggleScriptInjectionCheckBox;
-    private SettingsCheckBoxPreference mToggleAccessibilityServiceCheckBox;
+    // Auxiliary members.
+    private final SimpleStringSplitter mStringColonSplitter =
+        new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
 
-    private PreferenceCategory mPowerButtonCategory;
-    private CheckBoxPreference mPowerButtonEndsCallCheckBox;
-    private CheckBoxPreference mTouchExplorationEnabledCheckBox;
-
-    private PreferenceGroup mAccessibilityServicesCategory;
-
-    private ListPreference mLongPressTimeoutListPreference;
+    private final Map<String, String> mLongPressTimeoutValuetoTitleMap =
+        new HashMap<String, String>();
 
     private final Configuration mCurConfig = new Configuration();
 
-    private Map<String, AccessibilityServiceInfo> mAccessibilityServices =
-        new LinkedHashMap<String, AccessibilityServiceInfo>();
+    private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
 
-    private TextUtils.SimpleStringSplitter mStringColonSplitter =
-        new TextUtils.SimpleStringSplitter(':');
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void dispatchMessage(Message msg) {
+            super.dispatchMessage(msg);
+            updateServicesPreferences();
+        }
+    };
+
+    // Preference controls.
+    private ToggleSwitch mToggleAccessibilitySwitch;
+
+    private PreferenceCategory mServicesCategory;
+
+    private CheckBoxPreference mToggleLargeTextPreference;
+    private CheckBoxPreference mTogglePowerButtonEndsCallPreference;
+    private Preference mTouchExplorationEnabledPreference;
+    private ListPreference mSelectLongPressTimeoutPreference;
+    private Preference mToggleScriptInjectionPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
         addPreferencesFromResource(R.xml.accessibility_settings);
-
-        mToggleLargeTextCheckBox = (CheckBoxPreference) findPreference(
-                TOGGLE_LARGE_TEXT_CHECKBOX);
-
-        mAccessibilityServicesCategory =
-            (PreferenceGroup) findPreference(ACCESSIBILITY_SERVICES_CATEGORY);
-
-        mToggleAccessibilityCheckBox = (CheckBoxPreference) findPreference(
-                TOGGLE_ACCESSIBILITY_CHECKBOX);
-
-        mToggleScriptInjectionCheckBox = (CheckBoxPreference) findPreference(
-                TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX);
-
-        mPowerButtonCategory = (PreferenceCategory) findPreference(POWER_BUTTON_CATEGORY);
-        mPowerButtonEndsCallCheckBox = (CheckBoxPreference) findPreference(
-                POWER_BUTTON_ENDS_CALL_CHECKBOX);
-
-        mTouchExplorationEnabledCheckBox = (CheckBoxPreference) findPreference(
-                TOUCH_EXPLORATION_ENABLED_CHECKBOX);
-
-        mLongPressTimeoutListPreference = (ListPreference) findPreference(
-                KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE);
-
-        // set the accessibility script injection category
-        boolean scriptInjectionEnabled = (Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0) == 1);
-        mToggleScriptInjectionCheckBox.setChecked(scriptInjectionEnabled);
-        mToggleScriptInjectionCheckBox.setEnabled(true);
-
-        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
-                && Utils.isVoiceCapable(getActivity())) {
-            int incallPowerBehavior = Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
-                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT);
-            // The checkbox is labeled "Power button ends call"; thus the in-call
-            // Power button behavior is INCALL_POWER_BUTTON_BEHAVIOR_HANGUP if
-            // checked, and INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF if unchecked.
-            boolean powerButtonCheckboxEnabled =
-                    (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
-            mPowerButtonEndsCallCheckBox.setChecked(powerButtonCheckboxEnabled);
-            mPowerButtonEndsCallCheckBox.setEnabled(true);
-        } else {
-            // No POWER key on the current device or no voice capability;
-            // this entire category is irrelevant.
-            getPreferenceScreen().removePreference(mPowerButtonCategory);
-        }
-
-        boolean touchExplorationEnabled = (Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.TOUCH_EXPLORATION_REQUESTED, 0) == 1);
-        mTouchExplorationEnabledCheckBox.setChecked(touchExplorationEnabled);
-
-        mLongPressTimeoutListPreference.setOnPreferenceChangeListener(this);
+        installToggleAccessibilitySwitch();
+        findPreferences();
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        addAccessibilityServicePreferences();
-
-        final HashSet<String> enabled = new HashSet<String>();
-        String settingValue = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-        if (settingValue != null) {
-            TextUtils.SimpleStringSplitter splitter = mStringColonSplitter;
-            splitter.setString(settingValue);
-            while (splitter.hasNext()) {
-                enabled.add(splitter.next());
-            }
-        }
-
-        Map<String, AccessibilityServiceInfo> accessibilityServices = mAccessibilityServices;
-
-        for (String key : accessibilityServices.keySet()) {
-            CheckBoxPreference preference = (CheckBoxPreference) findPreference(key);
-            if (preference != null) {
-                preference.setChecked(enabled.contains(key));
-            }
-        }
-
-        int serviceState = Settings.Secure.getInt(getContentResolver(),
-            Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-
-        if (!accessibilityServices.isEmpty()) {
-            if (serviceState == 1) {
-                mToggleAccessibilityCheckBox.setChecked(true);
-                if (savedInstanceState != null) {
-                    restoreInstanceState(savedInstanceState);
-                }
-            } else {
-                setAccessibilityServicePreferencesState(false);
-            }
-            mToggleAccessibilityCheckBox.setEnabled(true);
-        } else {
-            if (serviceState == 1) {
-                // no service and accessibility is enabled => disable
-                Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-            }
-            mToggleAccessibilityCheckBox.setEnabled(false);
-            // Notify user that they do not have any accessibility apps
-            // installed and direct them to Market to get TalkBack
-            showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
-        }
-
-        readFontSizePreference();
-
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        updateServicesPreferences();
+        updateSystemPreferences();
+        updatePreferencesForAccessibilityState();
+        mSettingsPackageMonitor.register(getActivity(), false);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        persistEnabledAccessibilityServices();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        if (mToggleAccessibilityServiceCheckBox != null) {
-            outState.putString(KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX,
-                    mToggleAccessibilityServiceCheckBox.getKey());
-        }
+        mSettingsPackageMonitor.unregister();
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mLongPressTimeoutListPreference) {
-            int intValue = Integer.parseInt((String) newValue);
+        if (preference == mSelectLongPressTimeoutPreference) {
+            final int intValue = Integer.parseInt((String) newValue);
             Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.LONG_PRESS_TIMEOUT, intValue);
+                    Settings.Secure.LONG_PRESS_TIMEOUT, intValue);
+            mSelectLongPressTimeoutPreference.setSummary(
+                    mLongPressTimeoutValuetoTitleMap.get(String.valueOf(intValue)));
             return true;
         }
         return false;
     }
 
-    /**
-     * Restores the instance state from <code>savedInstanceState</code>.
-     */
-    private void restoreInstanceState(Bundle savedInstanceState) {
-        String key = savedInstanceState.getString(KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
-        if (key != null) {
-            Preference preference = findPreference(key);
-            if (!(preference instanceof CheckBoxPreference)) {
-                throw new IllegalArgumentException(
-                        KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX
-                                + " must be mapped to an instance of a "
-                                + SettingsCheckBoxPreference.class.getName());
-            }
-            mToggleAccessibilityServiceCheckBox = (SettingsCheckBoxPreference) preference;
-        }
-    }
-
-    /**
-     * Sets the state of the preferences for enabling/disabling
-     * AccessibilityServices.
-     *
-     * @param isEnabled If to enable or disable the preferences.
-     */
-    private void setAccessibilityServicePreferencesState(boolean isEnabled) {
-        if (mAccessibilityServicesCategory == null) {
-            return;
-        }
-
-        int count = mAccessibilityServicesCategory.getPreferenceCount();
-        for (int i = 0; i < count; i++) {
-            Preference pref = mAccessibilityServicesCategory.getPreference(i);
-            if (pref != mToggleAccessibilityCheckBox) {
-                pref.setEnabled(isEnabled);
-            }
-        }
+    private void updatePreferencesForAccessibilityState() {
+        final boolean accessibilityEnabled = (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1);
+        mServicesCategory.setEnabled(accessibilityEnabled);
+        mTouchExplorationEnabledPreference.setEnabled(accessibilityEnabled);
+        mToggleScriptInjectionPreference.setEnabled(accessibilityEnabled);
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
-
-        if (TOGGLE_ACCESSIBILITY_CHECKBOX.equals(key)) {
-            handleEnableAccessibilityStateChange((CheckBoxPreference) preference);
-        } else if (TOGGLE_LARGE_TEXT_CHECKBOX.equals(key)) {
-            try {
-                mCurConfig.fontScale = mToggleLargeTextCheckBox.isChecked()
-                        ? LARGE_FONT_SCALE : 1;
-                ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
-            } catch (RemoteException e) {
-            }
-        } else if (POWER_BUTTON_ENDS_CALL_CHECKBOX.equals(key)) {
-            boolean isChecked = ((CheckBoxPreference) preference).isChecked();
-            // The checkbox is labeled "Power button ends call"; thus the in-call
-            // Power button behavior is INCALL_POWER_BUTTON_BEHAVIOR_HANGUP if
-            // checked, and INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF if unchecked.
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
-                    (isChecked ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
-                            : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
-        } else if (TOUCH_EXPLORATION_ENABLED_CHECKBOX.equals(key)) {
-            final int touchExplorationState = ((CheckBoxPreference) preference).isChecked() ? 1 : 0;
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.TOUCH_EXPLORATION_REQUESTED, touchExplorationState);
-        } else if (TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX.equals(key)) {
-            handleToggleAccessibilityScriptInjection((CheckBoxPreference) preference);
-        } else if (preference instanceof CheckBoxPreference) {
-            handleEnableAccessibilityServiceStateChange((SettingsCheckBoxPreference) preference);
+        if (mToggleLargeTextPreference == preference) {
+            handleToggleLargeTextPreference((CheckBoxPreference) preference);
+            return true;
+        } else if (mTogglePowerButtonEndsCallPreference == preference) {
+            handleTogglePowerButtonEndsCallPreference((CheckBoxPreference) preference);
+            return true;
+        } else if (mToggleScriptInjectionPreference == preference) {
+            handleToggleAccessibilityScriptInjectionPreference(preference);
+            return true;
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
-    /**
-     * Handles the change of the accessibility enabled setting state.
-     *
-     * @param preference The preference for enabling/disabling accessibility.
-     */
-    private void handleEnableAccessibilityStateChange(CheckBoxPreference preference) {
-        if (preference.isChecked()) {
-            Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_ENABLED, 1);
-            setAccessibilityServicePreferencesState(true);
-        } else {
-            // set right enabled state since the user may press back
-            preference.setChecked(true);
-            showDialog(DIALOG_ID_DISABLE_ACCESSIBILITY);
+    private void handleTogglePowerButtonEndsCallPreference(CheckBoxPreference preference) {
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
+                (preference.isChecked() ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
+                        : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
+    }
+
+    private void handleToggleLargeTextPreference(CheckBoxPreference preference) {
+        try {
+            mCurConfig.fontScale = preference.isChecked() ? LARGE_FONT_SCALE : 1;
+            ActivityManagerNative.getDefault().updatePersistentConfiguration(mCurConfig);
+        } catch (RemoteException e) {
+            /* ignore */
         }
     }
 
-    /**
-     * Handles the change of the accessibility script injection setting state.
-     *
-     * @param preference The preference for enabling/disabling accessibility script injection.
-     */
-    private void handleToggleAccessibilityScriptInjection(CheckBoxPreference preference) {
-        if (preference.isChecked()) {
-            // set right enabled state since the user may press back
-            preference.setChecked(false);
+    private void handleToggleAccessibilityScriptInjectionPreference(Preference preference) {
+        String allowed = getString(R.string.accessibility_script_injection_disallowed);
+        if (preference.getSummary().equals(allowed)) {
+            // set right enabled state since the user may press back.
             showDialog(DIALOG_ID_ENABLE_SCRIPT_INJECTION);
         } else {
             Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0);
+                    Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0);
+            mToggleScriptInjectionPreference.setSummary(
+                    getString(R.string.accessibility_script_injection_disallowed));
         }
     }
 
-    /**
-     * Handles the change of the preference for enabling/disabling an AccessibilityService.
-     *
-     * @param preference The preference.
-     */
-    private void handleEnableAccessibilityServiceStateChange(
-            SettingsCheckBoxPreference preference) {
-        if (preference.isChecked()) {
-            mToggleAccessibilityServiceCheckBox = preference;
-            // set right enabled state since the user may press back
-            preference.setChecked(false);
-            showDialog(DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE);
-        } else {
-            persistEnabledAccessibilityServices();
-        }
-    }
-
-    /**
-     * Persists the Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES setting.
-     * The AccessibilityManagerService watches this property and manages the
-     * AccessibilityServices.
-     */
-    private void persistEnabledAccessibilityServices() {
-        StringBuilder builder = new StringBuilder(256);
-
-        for (String key : mAccessibilityServices.keySet()) {
-            CheckBoxPreference preference = (CheckBoxPreference) findPreference(key);
-            if (preference.isChecked()) {
-                 builder.append(key);
-                 builder.append(':');
+    private void installToggleAccessibilitySwitch() {
+        mToggleAccessibilitySwitch = createActionBarToggleSwitch(getActivity());
+        final boolean checked = (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1);
+        mToggleAccessibilitySwitch.setChecked(checked);
+        mToggleAccessibilitySwitch.setOnBeforeCheckedChangeListener(
+                new OnBeforeCheckedChangeListener() {
+            @Override
+            public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
+                if (!checked) {
+                    toggleSwitch.setCheckedNoBeforeCheckedChangeListener(true);
+                    showDialog(DIALOG_ID_DISABLE_ACCESSIBILITY);
+                    return true;
+                }
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+                updatePreferencesForAccessibilityState();
+                return false;
             }
-        }
-
-        Settings.Secure.putString(getContentResolver(),
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, builder.toString());
+        });
     }
 
-    /**
-     * Adds {@link CheckBoxPreference} for enabling or disabling an accessibility services.
-     */
-    private void addAccessibilityServicePreferences() {
-        AccessibilityManager accessibilityManager =
-            (AccessibilityManager) getSystemService(Service.ACCESSIBILITY_SERVICE);
+    private void findPreferences() {
+        mServicesCategory = (PreferenceCategory) findPreference(SERVICES_CATEGORY);
+
+        mToggleLargeTextPreference = (CheckBoxPreference) findPreference(
+                TOGGLE_LARGE_TEXT_PREFERENCE);
+        mTogglePowerButtonEndsCallPreference = (CheckBoxPreference) findPreference(
+                TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE);
+        mTouchExplorationEnabledPreference = findPreference(TOGGLE_TOUCH_EXPLORATION_PREFERENCE);
+        mSelectLongPressTimeoutPreference = (ListPreference) findPreference(
+                SELECT_LONG_PRESS_TIMEOUT_PREFERENCE);
+        mSelectLongPressTimeoutPreference.setOnPreferenceChangeListener(this);
+        mToggleScriptInjectionPreference = findPreference(TOGGLE_SCRIPT_INJECTION_PREFERENCE);
+        mToggleScriptInjectionPreference.setOnPreferenceChangeListener(this);
+    }
+
+    private void updateServicesPreferences() {
+        mServicesCategory.removeAll();
+
+        AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(getActivity());
 
         List<AccessibilityServiceInfo> installedServices =
             accessibilityManager.getInstalledAccessibilityServiceList();
 
-        for (int i = 0; i < mAccessibilityServicesCategory.getPreferenceCount(); i++) {
-            Preference pref = mAccessibilityServicesCategory.getPreference(i);
-            if (pref != mToggleAccessibilityCheckBox
-                    && pref != mToggleScriptInjectionCheckBox) {
-                mAccessibilityServicesCategory.removePreference(pref);
-                i--;
+        if (installedServices.isEmpty() && accessibilityManager.isEnabled()) {
+            // no service and accessibility is enabled => disable
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+            mToggleAccessibilitySwitch.setChecked(false);
+            mToggleAccessibilitySwitch.setEnabled(false);
+            // Notify user that they do not have any accessibility
+            // services installed and direct them to Market to get TalkBack.
+            showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
+            return;
+        }
+
+        Set<ComponentName> enabledComponentNames = new HashSet<ComponentName>();
+        String settingValue = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+        if (settingValue != null) {
+            SimpleStringSplitter splitter = mStringColonSplitter;
+            splitter.setString(settingValue);
+            while (splitter.hasNext()) {
+                enabledComponentNames.add(ComponentName.unflattenFromString(splitter.next()));
             }
         }
 
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
-            AccessibilityServiceInfo accessibilityServiceInfo = installedServices.get(i);
-            String key = accessibilityServiceInfo.getId();
+            AccessibilityServiceInfo info = installedServices.get(i);
+            String key = info.getId();
 
-            if (mAccessibilityServices.put(key, accessibilityServiceInfo) == null) {
-                SettingsCheckBoxPreference preference = null;
-                Intent settingsIntent = null;
-                String settingsActivityName = accessibilityServiceInfo.getSettingsActivityName();
+            PreferenceScreen preference = getPreferenceManager().createPreferenceScreen(
+                    getActivity());
+            String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
-                if (!TextUtils.isEmpty(settingsActivityName)) {
-                    settingsIntent = new Intent(Intent.ACTION_MAIN);
-                    settingsIntent.setClassName(
-                            accessibilityServiceInfo.getResolveInfo().serviceInfo.packageName,
-                            settingsActivityName);
-                }
+            ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
+            ComponentName componentName = new ComponentName(serviceInfo.packageName,
+                    serviceInfo.name);
 
-                preference = new SettingsCheckBoxPreference(getActivity(), settingsIntent);
-                preference.setKey(key);
-                preference.setOrder(i);
-                ServiceInfo serviceInfo = accessibilityServiceInfo.getResolveInfo().serviceInfo;
-                preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
-                mAccessibilityServicesCategory.addPreference(preference);
+            preference.setKey(componentName.flattenToString());
+
+            preference.setTitle(title);
+            final boolean enabled = enabledComponentNames.contains(componentName);
+            if (enabled) {
+                preference.setSummary(getString(R.string.accessibility_service_state_on));
+            } else {
+                preference.setSummary(getString(R.string.accessibility_service_state_off));
             }
+
+            preference.setOrder(i);
+            preference.setFragment(ToggleAccessibilityServiceFragment.class.getName());
+
+            Bundle extras = preference.getExtras();
+            extras.putString(EXTRA_PREFERENCE_KEY, preference.getKey());
+            extras.putBoolean(EXTRA_CHECKED, enabled);
+            extras.putString(EXTRA_TITLE, title);
+            extras.putString(EXTRA_SUMMARY, info.getDescription());
+            extras.putString(EXTRA_WARNING_MESSAGE, getString(
+                    R.string.accessibility_service_security_warning,
+                    info.getResolveInfo().loadLabel(getPackageManager())));
+
+            String settingsClassName = info.getSettingsActivityName();
+            if (!TextUtils.isEmpty(settingsClassName)) {
+                extras.putString(EXTRA_SETTINGS_TITLE,
+                        getString(R.string.accessibility_menu_item_settings));
+                extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
+                        new ComponentName(info.getResolveInfo().serviceInfo.packageName,
+                                settingsClassName).flattenToString());
+            }
+
+            mServicesCategory.addPreference(preference);
         }
     }
 
-    public void readFontSizePreference() {
+    public void updateSystemPreferences() {
+        // Large text.
         try {
-            mCurConfig.updateFrom(
-                ActivityManagerNative.getDefault().getConfiguration());
-        } catch (RemoteException e) {
+            mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
+        } catch (RemoteException re) {
+            /* ignore */
         }
-        mToggleLargeTextCheckBox.setChecked(Float.compare(mCurConfig.fontScale,
+        mToggleLargeTextPreference.setChecked(Float.compare(mCurConfig.fontScale,
                 LARGE_FONT_SCALE) == 0);
+
+        // Power button ends call.
+        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
+                && Utils.isVoiceCapable(getActivity())) {
+              final int incallPowerBehavior = Settings.Secure.getInt(getContentResolver(),
+                      Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
+                      Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT);
+              final boolean powerButtonEndsCall =
+                  (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
+              mTogglePowerButtonEndsCallPreference.setChecked(powerButtonEndsCall);
+        } else {
+              getPreferenceScreen().removePreference(mTogglePowerButtonEndsCallPreference);
+        }
+
+        // Touch exploration enabled.
+        final boolean touchExplorationEnabled = (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.TOUCH_EXPLORATION_ENABLED, 0) == 1);
+        if (touchExplorationEnabled) {
+            mTouchExplorationEnabledPreference.setSummary(
+                    getString(R.string.accessibility_service_state_on));
+            mTouchExplorationEnabledPreference.getExtras().putBoolean(EXTRA_CHECKED, true);
+        } else {
+            mTouchExplorationEnabledPreference.setSummary(
+                    getString(R.string.accessibility_service_state_off));
+            mTouchExplorationEnabledPreference.getExtras().putBoolean(EXTRA_CHECKED, false);
+        }
+
+        // Long press timeout.
+        if (mLongPressTimeoutValuetoTitleMap.isEmpty()) {
+            String[] timeoutValues = getResources().getStringArray(
+                    R.array.long_press_timeout_selector_values);
+            String[] timeoutTitles = getResources().getStringArray(
+                    R.array.long_press_timeout_selector_titles);
+            final int timeoutValueCount = timeoutValues.length;
+            for (int i = 0;i < timeoutValueCount; i++) {
+                mLongPressTimeoutValuetoTitleMap.put(timeoutValues[i], timeoutTitles[i]);
+            }
+        }
+        String longPressTimeout = String.valueOf(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LONG_PRESS_TIMEOUT, 0));
+        mSelectLongPressTimeoutPreference.setSummary(
+                mLongPressTimeoutValuetoTitleMap.get(longPressTimeout));
+
+        // Script injection.
+        final boolean scriptInjectionAllowed = (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0) == 1);
+        if (scriptInjectionAllowed) {
+            mToggleScriptInjectionPreference.setSummary(
+                    getString(R.string.accessibility_script_injection_allowed));
+        } else {
+            mToggleScriptInjectionPreference.setSummary(
+                    getString(R.string.accessibility_script_injection_disallowed));
+        }
     }
 
     @Override
@@ -460,11 +419,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                             public void onClick(DialogInterface dialog, int which) {
                                 Settings.Secure.putInt(getContentResolver(),
                                     Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-                                mToggleAccessibilityCheckBox.setChecked(false);
-                                setAccessibilityServicePreferencesState(false);
+                                mToggleAccessibilitySwitch.setCheckedNoBeforeCheckedChangeListener(
+                                        false);
+                                updatePreferencesForAccessibilityState();
                             }
                     })
-                    .setNegativeButton(android.R.string.cancel, null)
+                    .setNegativeButton(android.R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mToggleAccessibilitySwitch.setCheckedNoBeforeCheckedChangeListener(
+                                        true);
+                            }
+                        })
                     .create();
             case DIALOG_ID_ENABLE_SCRIPT_INJECTION:
                 return new AlertDialog.Builder(getActivity())
@@ -473,35 +439,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 .setMessage(getActivity().getString(
                         R.string.accessibility_script_injection_security_warning))
                 .setCancelable(true)
-                .setPositiveButton(android.R.string.ok,
+                .setPositiveButton(R.string.accessibility_script_injection_button_allow,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Settings.Secure.putInt(getContentResolver(),
                             Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 1);
-                            mToggleScriptInjectionCheckBox.setChecked(true);
+                            mToggleScriptInjectionPreference.setSummary(
+                                    getString(R.string.accessibility_script_injection_allowed));
                         }
                 })
-                .setNegativeButton(android.R.string.cancel, null)
+
+                .setNegativeButton(R.string.accessibility_script_injection_button_disallow, null)
                 .create();
-            case DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE:
-                return new AlertDialog.Builder(getActivity())
-                    .setTitle(android.R.string.dialog_alert_title)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setMessage(getResources().getString(
-                            R.string.accessibility_service_security_warning,
-                            mAccessibilityServices.get(mToggleAccessibilityServiceCheckBox.getKey())
-                            .getResolveInfo().serviceInfo.applicationInfo.loadLabel(
-                                    getActivity().getPackageManager())))
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    mToggleAccessibilityServiceCheckBox.setChecked(true);
-                                    persistEnabledAccessibilityServices();
-                                }
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .create();
             case DIALOG_ID_NO_ACCESSIBILITY_SERVICES:
                 return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.accessibility_service_no_apps_title)
@@ -524,6 +473,266 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     .create();
             default:
                 return null;
+        }
+    }
+
+    private class SettingsPackageMonitor extends PackageMonitor {
+
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+            Message message = mHandler.obtainMessage();
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+        }
+
+        @Override
+        public void onPackageAppeared(String packageName, int reason) {
+            Message message = mHandler.obtainMessage();
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+        }
+
+        @Override
+        public void onPackageDisappeared(String packageName, int reason) {
+            Message message = mHandler.obtainMessage();
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+        }
+
+        @Override
+        public void onPackageRemoved(String packageName, int uid) {
+            Message message = mHandler.obtainMessage();
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+        }
+    }
+
+    private static ToggleSwitch createActionBarToggleSwitch(Activity activity) {
+        ToggleSwitch toggleSwitch = new ToggleSwitch(activity);
+        final int padding = activity.getResources().getDimensionPixelSize(
+                R.dimen.action_bar_switch_padding);
+        toggleSwitch.setPadding(0, 0, padding, 0);
+        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(toggleSwitch,
+                new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+        return toggleSwitch;
+    }
+
+    public static class ToggleSwitch extends Switch {
+
+        private OnBeforeCheckedChangeListener mOnBeforeListener;
+
+        public static interface OnBeforeCheckedChangeListener {
+            public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked);
+        }
+
+        public ToggleSwitch(Context context) {
+            super(context);
+        }
+
+        public void setOnBeforeCheckedChangeListener(OnBeforeCheckedChangeListener listener) {
+            mOnBeforeListener = listener;
+        }
+
+        @Override
+        public void setChecked(boolean checked) {
+            if (mOnBeforeListener != null
+                    && mOnBeforeListener.onBeforeCheckedChanged(this, checked)) {
+                return;
+            }
+            super.setChecked(checked);
+        }
+
+        public void setCheckedNoBeforeCheckedChangeListener(boolean checked) {
+            super.setChecked(checked);
+        }
+    }
+
+    public static class ToggleAccessibilityServiceFragment extends TogglePreferenceFragment {
+        @Override
+        public void onPreferenceToggled(String preferenceKey, boolean enabled) {
+            String enabledServices = Settings.Secure.getString(getContentResolver(),
+                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+            if (enabledServices == null) {
+                enabledServices = "";
+            }
+            final int length = enabledServices.length();
+            if (enabled) {
+                if (enabledServices.contains(preferenceKey)) {
+                    return;
+                }
+                if (length == 0) {
+                    enabledServices += preferenceKey;
+                    Settings.Secure.putString(getContentResolver(),
+                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
+                } else if (length > 0) {
+                    enabledServices += ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR + preferenceKey;
+                    Settings.Secure.putString(getContentResolver(),
+                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
+                }
+            } else {
+                final int index = enabledServices.indexOf(preferenceKey);
+                if (index == 0) {
+                    enabledServices = enabledServices.replace(preferenceKey, "");
+                    Settings.Secure.putString(getContentResolver(),
+                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
+                } else if (index > 0) {
+                    enabledServices = enabledServices.replace(
+                            ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR + preferenceKey, "");
+                    Settings.Secure.putString(getContentResolver(),
+                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
+                }
+            }
+        }
+    }
+
+    public static class ToggleTouchExplorationFragment extends TogglePreferenceFragment {
+        @Override
+        public void onPreferenceToggled(String preferenceKey, boolean enabled) {
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.TOUCH_EXPLORATION_ENABLED, enabled ? 1 : 0);
+        }
+    }
+
+    private abstract static class TogglePreferenceFragment extends SettingsPreferenceFragment
+            implements DialogInterface.OnClickListener {
+
+        private static final int DIALOG_ID_WARNING = 1;
+
+        private String mPreferenceKey;
+
+        private ToggleSwitch mToggleSwitch;
+
+        private CharSequence mWarningMessage;
+        private Preference mSummaryPreference;
+
+        private CharSequence mSettingsTitle;
+        private Intent mSettingsIntent;
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            installActionBarToggleSwitch();
+            processArguments();
+            getListView().setDivider(null);
+            getListView().setEnabled(false);
+            super.onActivityCreated(savedInstanceState);
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
+                    getActivity());
+            setPreferenceScreen(preferenceScreen);
+            mSummaryPreference = new Preference(getActivity()) {
+                @Override
+                protected void onBindView(View view) {
+                    super.onBindView(view);
+                    TextView summaryView = (TextView) view.findViewById(R.id.summary);
+                    summaryView.setText(getSummary());
+                }
+            };
+            mSummaryPreference.setPersistent(false);
+            mSummaryPreference.setLayoutResource(R.layout.text_description_preference);
+            preferenceScreen.addPreference(mSummaryPreference);
+        }
+
+        public abstract void onPreferenceToggled(String preferenceKey, boolean value);
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            super.onCreateOptionsMenu(menu, inflater);
+            MenuItem menuItem = menu.add(mSettingsTitle);
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            menuItem.setIntent(mSettingsIntent);
+        }
+
+        @Override
+        public Dialog onCreateDialog(int dialogId) {
+            switch (dialogId) {
+                case DIALOG_ID_WARNING:
+                    return new AlertDialog.Builder(getActivity())
+                        .setTitle(android.R.string.dialog_alert_title)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage(mWarningMessage)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, this)
+                        .create();
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    // OK, we got the user consent so set checked.
+                    mToggleSwitch.setCheckedNoBeforeCheckedChangeListener(true);
+                    onPreferenceToggled(mPreferenceKey, true);
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    onPreferenceToggled(mPreferenceKey, false);
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        private void installActionBarToggleSwitch() {
+            mToggleSwitch = createActionBarToggleSwitch(getActivity());
+            mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
+                @Override
+                public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
+                    if (checked) {
+                        if (!TextUtils.isEmpty(mWarningMessage)) {
+                            toggleSwitch.setCheckedNoBeforeCheckedChangeListener(false);
+                            showDialog(DIALOG_ID_WARNING);
+                            return true;
+                        }
+                        onPreferenceToggled(mPreferenceKey, true);
+                    } else {
+                        onPreferenceToggled(mPreferenceKey, false);
+                    }
+                    return false;
+                }
+            });
+        }
+
+        private void processArguments() {
+            Bundle arguments = getArguments();
+
+            // Key.
+            mPreferenceKey = arguments.getString(EXTRA_PREFERENCE_KEY);
+
+            // Enabled.
+            final boolean enabled = arguments.getBoolean(EXTRA_CHECKED);
+            mToggleSwitch.setCheckedNoBeforeCheckedChangeListener(enabled);
+
+            // Title.
+            String title = arguments.getString(EXTRA_TITLE);
+            getActivity().getActionBar().setTitle(arguments.getCharSequence(EXTRA_TITLE));
+
+            // Summary.
+            String summary = arguments.getString(EXTRA_SUMMARY);
+            mSummaryPreference.setSummary(summary);
+
+            // Settings title and intent.
+            String settingsTitle = arguments.getString(EXTRA_SETTINGS_TITLE);
+            String settingsComponentName = arguments.getString(EXTRA_SETTINGS_COMPONENT_NAME);
+            if (!TextUtils.isEmpty(settingsTitle) && !TextUtils.isEmpty(settingsComponentName)) {
+                Intent settingsIntent = new Intent(Intent.ACTION_MAIN).setComponent(
+                        ComponentName.unflattenFromString(settingsComponentName.toString()));
+                if (!getPackageManager().queryIntentActivities(settingsIntent, 0).isEmpty()) {
+                    mSettingsTitle = settingsTitle;
+                    mSettingsIntent = settingsIntent;
+                    setHasOptionsMenu(true);
+                }
+            }
+
+            // Waring message.
+            mWarningMessage = arguments.getCharSequence(
+                    AccessibilitySettings.EXTRA_WARNING_MESSAGE);
         }
     }
 }

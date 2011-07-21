@@ -691,12 +691,15 @@
         </activity>
 
         <activity android:name="Settings$AccessibilitySettingsActivity"
-                android:label="@string/accessibility_settings_title">
+                android:label="@string/accessibility_settings_title"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.AccessibilitySettings" />

@@ -2659,78 +2659,73 @@ found in the list of installed applications.</string>
     <string name="accessibility_settings">Accessibility</string>
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
-    <!-- Settings summary for accessibility settings [CHAR LIMIT=40] -->
-    <string name="accessibility_settings_summary">Manage accessibility options</string>
-    <!-- Setting Checkbox title for enabling accessibility large text [CHAR LIMIT=25] -->
-    <string name="toggle_large_text_title">Large text</string>
-    <!-- Setting accessibility services category [CHAR LIMIT=25] -->
-    <string name="accessibility_services_category">Accessibility services</string>
-    <!-- Setting Checkbox title for enabling accessibility services [CHAR LIMIT=40] -->
-    <string name="toggle_accessibility_title">Allow accessibility services</string>
-    <!-- Setting Checkbox title for enabling touch exploration mode [CHAR LIMIT=40] -->
-    <string name="accessibility_touch_exploration_title">Enable touch exploration mode</string>
-    <!-- Setting Checkbox summary for enabling touch exploration mode [CHAR LIMIT=65] -->
-    <string name="accessibility_touch_exploration_summary">Allows you to touch the screen to hear the contents under your finger.</string>
-    <!-- Warning message describing changes in interaction from enabling touch exploration mode
-         and suggesting that the user goes through a tutorial, displayed as a dialog message the
-         first time the user selects to enable touch exploration -->
-    <string name="accessibility_touch_exploration_warning">Touch exploration mode changes the way your
-        device handles touch input. Would you like to take a short tutorial on using touch exploration?</string>
-    <!-- Message for announcing the lack of installed accessibility services. -->
-    <string name="no_accessibility_services_summary">No installed accessibility services.</string>
+
+    <!--  Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
+    <string name="accessibility_services_title">Services</string>
+
+    <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
+    <string name="accessibility_system_title">System</string>
+    <!-- Title for the accessibility preference to enable large text. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_large_text_title">Large text</string>
+    <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
+    <string name="accessibility_power_button_ends_call_title">Power button ends call</string>
+    <!-- Title for accessibility preference to enable touch exploration mode. [CHAR LIMIT=35] -->
+    <string name="accessibility_touch_exploration_title">Explore by touch</string>
+    <!-- Summary for accessibility of the touch exploration mode. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_touch_exploration_summary" >Allows exploring screen content and interacting with the device.\n\n
+        Touch the screen to receive feedback of the content under your finger.\n\n Tap on the last explored location to activate.\n\n
+        Use two fingers to drag. </string>
+    <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
+    <string name="accessibility_long_press_timeout_title">Touch &amp; hold delay</string>
+    <!-- Title for accessibility preference to install accessibility scripts from Google. [CHAR LIMIT=35] -->
+    <string name="accessibility_script_injection_title">Install accessibility scripts</string>
+
+    <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
+    <string name="accessibility_menu_item_settings">Settings</string>
+    <!-- Title for accessibility menu item to lauch a tutorial. [CHAR LIMIT=15] -->
+    <string name="accessibility_menu_item_tutorial">Tutorial</string>
+
+    <!-- Summary for the enabled state of an accessiblity serivce. [CHAR LIMIT=10] -->
+    <string name="accessibility_service_state_on">On</string>
+    <!-- Summary for the disabled state of an accessiblity serivce. [CHAR LIMIT=10] -->
+    <string name="accessibility_service_state_off">Off</string>
+
+    <!-- Summary for the allowed state of script injection. [CHAR LIMIT=15] -->
+    <string name="accessibility_script_injection_allowed">Allowed</string>
+    <!-- Summary for the disallowed state of script injection. [CHAR LIMIT=15] -->
+    <string name="accessibility_script_injection_disallowed">Disallowed</string>
+
+    <!-- Title for the dialog button to allow script injection. [CHAR LIMIT=15] -->
+    <string name="accessibility_script_injection_button_allow">Allow</string>
+    <!-- Title for the dialog button to disallow script injection. [CHAR LIMIT=15] -->
+    <string name="accessibility_script_injection_button_disallow">Don\'t Allow</string>
+
     <!-- Warning message about security implications of enabling an accessibility service,
-         displayed as a dialog message when the user selects to enable an accessibility service. -->
+         displayed as a dialog message when the user selects to enable an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_security_warning">This accessibility service may be able to collect
         all the text you type, including personal data credit card numbers except passwords.
         It may also log your user interface interactions. It comes from the application
         <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Use this accessibility service?</string>
     <!-- Warning about disabling accessibility displayed as a dialog message when the user
-         selects to disable accessibility. This avoids accidental disabling. -->
+         selects to disable accessibility. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_disable_warning">Disable accessibility?</string>
     <!-- Title for the prompt that lets users know that they have no accessibility related apps
-         installed and that they can install TalkBack from Market. -->
+         installed and that they can install TalkBack from Market. [CHAR LIMIT=50] -->
     <string name="accessibility_service_no_apps_title">No accessibility related applications found
         </string>
     <!-- Message for the prompt that lets users know that they have no accessibility related apps
-         installed and that they can install TalkBack from Market. -->
+         installed and that they can install TalkBack from Market. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_no_apps_message">You do not have any accessibility-related
         applications installed.\n\nYou can download a screen reader for your device from Android
         Market.\n\nClick "OK" to install the screen reader.</string>
-
-    <!-- Accessibility settings: Checkbox title for enabling download of accessibility scripts [CHAR LIMIT=40] -->
-    <string name="accessibility_script_injection_enabled">Download accessibility scripts</string>
-    <!-- Accessibility settings: Checkbox summary for enabling download of accessibility scripts [CHAR LIMIT=65] -->
-    <string name="accessibility_script_injection_enabled_summary">Allow applications to download accessibility scripts from Google</string>
     <!-- Warning message about security implications of downloading accessibility scripts,
-         displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT="NONE"] -->
-    <string name="accessibility_script_injection_security_warning" product="tablet">Some applications can ask Google
-        to download scripts to your tablet that make their content more accessible. Are you sure you
-        want to allow Google to install accessibility scripts on your tablet?</string>
-    <!-- Warning message about security implications of downloading accessibility scripts,
-         displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT="NONE"] -->
-    <string name="accessibility_script_injection_security_warning" product="default">Some applications can ask Google
-        to download scripts to your phone that make their content more accessible. Are you sure you
-        want to allow Google to install accessibility scripts on your phone?</string>
-    <!-- Accessibility settings: Power button category -->
-    <string name="accessibility_power_button_category">Power button</string>
-    <!-- Accessibility settings: checkbox title for power button behavior -->
-    <string name="accessibility_power_button_ends_call">Power button ends call</string>
-    <!-- Accessibility settings: power button behavior summary text -->
-    <string name="accessibility_power_button_ends_call_summary">During a call, pressing Power ends call instead of turning off screen</string>
-    <!-- Accessibility settings: touch exploration state -->
-    <string name="accessibility_touch_exploration_enabled">Touch exploration</string>
-
-    <!-- Accessibility settings: button for lauching settings for an accessibility service -->
-    <string name="settings_button">Settings</string>
-
-    <!-- Setting interaction category [CHAR LIMIT=35] -->
-    <string name="touchscreen_gestures_category">Touchscreen gestures</string>
-    <!-- Title for setting the long-press timeout [CHAR LIMIT=35] -->
-    <string name="long_press_timeout_selector_title">Touch &amp; hold delay</string>
-    <!-- Summary for setting the long-press timeout [CHAR LIMIT=85] -->
-    <string name="long_press_timeout_selector_summary">Delay until a touch is interpreted as a touch &amp; hold</string>
-    <!-- The default value for the long press timeout. -->
-    <string name="long_press_timeout_selector_default_value" translatable="false">500</string>
+         displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_script_injection_security_warning">Some applications can ask Google
+        to download scripts to your device that make their content more accessible. Are you sure you
+        want to allow Google to install accessibility scripts on your device?</string>
+    <!-- Warning message that the interaction model changes on enabling touch exploration. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_touch_exploration_warning">Enabling explore by touch
+        changes the interation model. Enable explore by touch?</string>
 
     <!-- App Fuel Gauge strings -->
     <skip />
