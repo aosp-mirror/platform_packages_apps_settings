@@ -65,9 +65,7 @@ public class ZeroClick extends Fragment
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean value) {
-        Log.e("AAP", "onCheckedChanged!");
-        final boolean desiredState = (Boolean) value;
+    public void onCheckedChanged(CompoundButton buttonView, boolean desiredState) {
         boolean success = false;
         mCheckbox.setEnabled(false);
         if (desiredState) {
