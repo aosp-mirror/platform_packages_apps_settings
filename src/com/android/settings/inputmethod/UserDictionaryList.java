@@ -49,7 +49,10 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
                 new String[] { UserDictionary.Words.LOCALE },
                 null, null, null);
         final Set<String> localeList = new TreeSet<String>();
-        if (null != cursor && cursor.moveToFirst()) {
+        if (null == cursor) {
+            // The user dictionary service is not present or disabled. Return null.
+            return null;
+        } else if (cursor.moveToFirst()) {
             final int columnIndex = cursor.getColumnIndex(UserDictionary.Words.LOCALE);
             do {
                 String locale = cursor.getString(columnIndex);
