@@ -223,6 +223,7 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     }
 
     private String getWord(int position) {
+        if (null == mCursor) return null;
         mCursor.moveToPosition(position);
         // Handle a possible race-condition
         if (mCursor.isAfterLast()) return null;
@@ -298,7 +299,7 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
                     FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
             Locale.setDefault(prevLocale);
         }
-        if (!mCursor.requery()) {
+        if (null != mCursor && !mCursor.requery()) {
             throw new IllegalStateException("can't requery on already-closed cursor.");
         }
         mAddedWordAlready = true;
@@ -333,23 +334,25 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
             super(context, layout, c, from, to);
 
             mSettings = settings;
-            int wordColIndex = c.getColumnIndexOrThrow(UserDictionary.Words.WORD);
-            String alphabet = context.getString(
-                    com.android.internal.R.string.fast_scroll_alphabet);
-            mIndexer = new AlphabetIndexer(c, wordColIndex, alphabet);
+            if (null != c) {
+                final String alphabet = context.getString(
+                        com.android.internal.R.string.fast_scroll_alphabet);
+                final int wordColIndex = c.getColumnIndexOrThrow(UserDictionary.Words.WORD);
+                mIndexer = new AlphabetIndexer(c, wordColIndex, alphabet);
+            }
             setViewBinder(mViewBinder);
         }
 
         public int getPositionForSection(int section) {
-            return mIndexer.getPositionForSection(section);
+            return null == mIndexer ? 0 : mIndexer.getPositionForSection(section);
         }
 
         public int getSectionForPosition(int position) {
-            return mIndexer.getSectionForPosition(position);
+            return null == mIndexer ? 0 : mIndexer.getSectionForPosition(position);
         }
 
         public Object[] getSections() {
-            return mIndexer.getSections();
+            return null == mIndexer ? null : mIndexer.getSections();
         }
 
         public void onClick(View v) {
