@@ -37,6 +37,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
+    private static final String KEY_ZEROCLICK_SETTINGS = "zeroclick_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
@@ -87,9 +88,11 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
+        PreferenceScreen zeroclick = (PreferenceScreen)
+                findPreference(KEY_ZEROCLICK_SETTINGS);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
-        mNfcEnabler = new NfcEnabler(activity, nfc);
+        mNfcEnabler = new NfcEnabler(activity, nfc, zeroclick);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -107,6 +110,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Remove NFC if its not available
         if (NfcAdapter.getDefaultAdapter(activity) == null) {
             getPreferenceScreen().removePreference(nfc);
+            getPreferenceScreen().removePreference(zeroclick);
         }
 
         // Remove Mobile Network Settings if it's a wifi-only device.

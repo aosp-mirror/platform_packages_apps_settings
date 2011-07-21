@@ -39,6 +39,14 @@
         android:persistent="false" />
 
     <PreferenceScreen
+        android:fragment="com.android.settings.nfc.ZeroClick"
+        android:key="zeroclick_settings"
+        android:title="@string/zeroclick_settings_title"
+        android:summary="@string/zeroclick_settings_summary" >
+    </PreferenceScreen>
+
+
+    <PreferenceScreen
         android:key="mobile_network_settings"
         android:title="@string/network_settings_title"
         android:dependency="toggle_airplane">

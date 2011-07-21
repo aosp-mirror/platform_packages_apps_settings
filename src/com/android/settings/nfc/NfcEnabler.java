@@ -24,6 +24,7 @@ import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 
 /**
@@ -36,6 +37,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
 
     private final Context mContext;
     private final CheckBoxPreference mCheckbox;
+    private final PreferenceScreen mZeroClick;
     private final NfcAdapter mNfcAdapter;
     private final IntentFilter mIntentFilter;
     private final Handler mHandler = new Handler();
@@ -54,9 +56,11 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
 
     private boolean mNfcState;
 
-    public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference) {
+    public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference,
+            PreferenceScreen zeroclick) {
         mContext = context;
         mCheckbox = checkBoxPreference;
+        mZeroClick = zeroclick;
         mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
         if (mNfcAdapter == null) {
@@ -127,5 +131,6 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     private void handleNfcStateChanged(boolean newState) {
         mCheckbox.setChecked(newState);
         mCheckbox.setEnabled(true);
+        mZeroClick.setEnabled(newState);
     }
 }
