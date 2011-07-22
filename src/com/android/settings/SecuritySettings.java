@@ -237,7 +237,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void updateLockAfterPreferenceSummary() {
         // Update summary message with current value
         long currentTimeout = Settings.Secure.getLong(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 0);
+                Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
         final CharSequence[] entries = mLockAfter.getEntries();
         final CharSequence[] values = mLockAfter.getEntryValues();
         int best = 0;
