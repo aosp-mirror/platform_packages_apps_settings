@@ -22,6 +22,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -56,18 +57,28 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         Configuration config = getResources().getConfiguration();
         mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
 
+        final Bundle arguments = getArguments();
         // Input method id should be available from an Intent when this preference is launched as a
         // single Activity (see InputMethodAndSubtypeEnablerActivity). It should be available
         // from a preference argument when the preference is launched as a part of the other
         // Activity (like a right pane of 2-pane Settings app)
         mInputMethodId = getActivity().getIntent().getStringExtra(
                 android.provider.Settings.EXTRA_INPUT_METHOD_ID);
-        if (mInputMethodId == null && (getArguments() != null)) {
+        if (mInputMethodId == null && (arguments != null)) {
             final String inputMethodId =
-                    getArguments().getString(android.provider.Settings.EXTRA_INPUT_METHOD_ID);
+                    arguments.getString(android.provider.Settings.EXTRA_INPUT_METHOD_ID);
             if (inputMethodId != null) {
                 mInputMethodId = inputMethodId;
             }
+        }
+        CharSequence title = getActivity().getIntent().getStringExtra(
+                Intent.EXTRA_TITLE);
+        if (title == null && (arguments != null)) {
+            title = arguments.getString(Intent.EXTRA_TITLE);
+        }
+
+        if (!TextUtils.isEmpty(title)) {
+            getActivity().setTitle(title);
         }
 
         onCreateIMM();
