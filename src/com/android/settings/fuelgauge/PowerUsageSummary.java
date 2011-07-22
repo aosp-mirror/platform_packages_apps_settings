@@ -16,10 +16,14 @@
 
 package com.android.settings.fuelgauge;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.SensorManager;
 import android.os.BatteryStats;
 import android.os.BatteryStats.Uid;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -64,6 +68,9 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
 
     private static final String TAG = "PowerUsageSummary";
 
+    private static final String KEY_APP_LIST = "app_list";
+    private static final String KEY_BATTERY_STATUS = "battery_status";
+
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
 
@@ -76,6 +83,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     private final List<BatterySipper> mBluetoothSippers = new ArrayList<BatterySipper>();
 
     private PreferenceGroup mAppListGroup;
+    private Preference mBatteryStatusPref;
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -96,7 +104,23 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     private ArrayList<BatterySipper> mRequestQueue = new ArrayList<BatterySipper>();
     private Thread mRequestThread;
     private boolean mAbort;
-    
+
+    private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+                String batteryLevel = com.android.settings.Utils.getBatteryPercentage(intent);
+                String batteryStatus = com.android.settings.Utils.getBatteryStatus(getResources(),
+                        intent);
+                String batterySummary = context.getResources().getString(
+                        R.string.power_usage_level_and_status, batteryLevel, batteryStatus);
+                mBatteryStatusPref.setTitle(batterySummary);
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -108,7 +132,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         addPreferencesFromResource(R.xml.power_usage_summary);
         mBatteryInfo = IBatteryStats.Stub.asInterface(
                 ServiceManager.getService("batteryinfo"));
-        mAppListGroup = (PreferenceGroup) findPreference("app_list");
+        mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
+        mBatteryStatusPref = mAppListGroup.findPreference(KEY_BATTERY_STATUS);
         mPowerProfile = new PowerProfile(getActivity());
         setHasOptionsMenu(true);
     }
@@ -117,6 +142,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     public void onResume() {
         super.onResume();
         mAbort = false;
+        getActivity().registerReceiver(mBatteryInfoReceiver,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         refreshStats();
     }
 
@@ -126,6 +153,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             mAbort = true;
         }
         mHandler.removeMessages(MSG_UPDATE_NAME_ICON);
+        getActivity().unregisterReceiver(mBatteryInfoReceiver);
         super.onPause();
     }
 
@@ -335,6 +363,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         mBluetoothSippers.clear();
         mAppListGroup.setOrderingAsAdded(false);
 
+        mBatteryStatusPref.setOrder(-2);
+        mAppListGroup.addPreference(mBatteryStatusPref);
         BatteryHistoryPreference hist = new BatteryHistoryPreference(getActivity(), mStats);
         hist.setOrder(-1);
         mAppListGroup.addPreference(hist);

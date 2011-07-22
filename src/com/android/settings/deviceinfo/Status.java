@@ -157,33 +157,8 @@ public class Status extends PreferenceActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
-
-                int level = intent.getIntExtra("level", 0);
-                int scale = intent.getIntExtra("scale", 100);
-
-                mBatteryLevel.setSummary(String.valueOf(level * 100 / scale) + "%");
-
-                int plugType = intent.getIntExtra("plugged", 0);
-                int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
-                String statusString;
-                if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
-                    statusString = getString(R.string.battery_info_status_charging);
-                    if (plugType > 0) {
-                        statusString = statusString + " " + getString(
-                                (plugType == BatteryManager.BATTERY_PLUGGED_AC)
-                                        ? R.string.battery_info_status_charging_ac
-                                        : R.string.battery_info_status_charging_usb);
-                    }
-                } else if (status == BatteryManager.BATTERY_STATUS_DISCHARGING) {
-                    statusString = getString(R.string.battery_info_status_discharging);
-                } else if (status == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
-                    statusString = getString(R.string.battery_info_status_not_charging);
-                } else if (status == BatteryManager.BATTERY_STATUS_FULL) {
-                    statusString = getString(R.string.battery_info_status_full);
-                } else {
-                    statusString = getString(R.string.battery_info_status_unknown);
-                }
-                mBatteryStatus.setSummary(statusString);
+                mBatteryLevel.setSummary(Utils.getBatteryPercentage(intent));
+                mBatteryStatus.setSummary(Utils.getBatteryStatus(getResources(), intent));
             }
         }
     };
