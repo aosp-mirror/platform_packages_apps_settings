@@ -71,6 +71,7 @@ public class AccountPreference extends Preference {
         setSummary(getSyncStatusMessage(mStatus));
         mSyncStatusIcon = (ImageView) view.findViewById(R.id.syncStatusIcon);
         mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));
+        mSyncStatusIcon.setContentDescription(getSyncContentDescription(mStatus));
     }
 
     public void setProviderIcon(Drawable icon) {
@@ -124,6 +125,20 @@ public class AccountPreference extends Preference {
                 Log.e(TAG, "Unknown sync status: " + status);
         }
         return res;
+    }
+
+    private String getSyncContentDescription(int status) {
+        switch (status) {
+            case SYNC_ENABLED:
+                return getContext().getString(R.string.accessibility_sync_enabled);
+            case SYNC_DISABLED:
+                return getContext().getString(R.string.accessibility_sync_disabled);
+            case SYNC_ERROR:
+                return getContext().getString(R.string.accessibility_sync_error);
+            default:
+                Log.e(TAG, "Unknown sync status: " + status);
+                return getContext().getString(R.string.accessibility_sync_error);
+        }
     }
 
     @Override
