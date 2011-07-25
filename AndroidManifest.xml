@@ -639,6 +639,11 @@
                 android:resource="@id/privacy_settings" />
         </activity>
 
+        <activity android:name="SetFullBackupPassword"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:exported="false">
+        </activity>
+
         <activity android:name="CredentialStorage"
                 android:theme="@style/Transparent"
                 android:configChanges="orientation|keyboardHidden|screenSize">

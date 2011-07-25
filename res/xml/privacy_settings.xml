@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!-- Copyright (C) 2009-2011 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -38,6 +38,16 @@
                 android:title="@string/auto_restore_title"
                 android:summary="@string/auto_restore_summary"
                 android:persistent="false" />
+        <PreferenceScreen
+                android:key="local_backup_password"
+                android:title="@string/local_backup_password_title"
+                android:summary="@string/local_backup_password_summary_none"
+                android:persistent="false" >
+            <intent
+                    android:action="android.settings.privacy.SET_FULL_BACKUP_PASSWORD"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.SetFullBackupPassword" />
+        </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -3080,6 +3080,14 @@ found in the list of installed applications.</string>
     <string name="auto_restore_title">Automatic restore</string>
     <!-- Summary text of the "automatic restore" setting -->
     <string name="auto_restore_summary">If I reinstall an application, restore backed up settings or other data</string>
+
+    <!-- Local backup password menu title [CHAR LIMIT=25] -->
+    <string name="local_backup_password_title">Local backup password</string>
+    <!-- Summary text of the "local backup password" setting when the user has not supplied a password -->
+    <string name="local_backup_password_summary_none">Local full backups are not currently protected.</string>
+    <!-- Summary text of the "local backup password" setting when the user has already supplied a password -->
+    <string name="local_backup_password_summary_change">Select to change or remove the password for local full backups</string>
+
     <!-- Dialog title for confirmation to erase backup data from server -->
     <string name="backup_erase_dialog_title">Backup</string>
     <!-- Dialog title for confirmation to erase backup data from server -->
@@ -3593,4 +3601,17 @@ found in the list of installed applications.</string>
 
     <!--  Title for spelling correction settings -->
     <string name="spellcheckers_settings_title">Spelling correction</string>
+
+    <!-- Prompt for the user to enter their current full-backup password -->
+    <string name="current_backup_pw_prompt">Enter your current full backup password here</string>
+    <!-- Prompt for the user to enter a new full-backup password -->
+    <string name="new_backup_pw_prompt">Enter a new password for full backups here</string>
+    <!-- Prompt for the user to confirm the new full-backup password by re-entering it -->
+    <string name="confirm_new_backup_pw_prompt">Please re-enter your new full backup password here</string>
+
+    <!-- Button label for setting the user's new full-backup password -->
+    <string name="backup_pw_set_button_text">Set backup password</string>
+    <!-- Button label for cancelling the new-password operation and retaining the user's previous full-backup password -->
+    <string name="backup_pw_cancel_button_text">Cancel</string>
+
 </resources>
