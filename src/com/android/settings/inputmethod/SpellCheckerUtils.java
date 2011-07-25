@@ -16,20 +16,28 @@
 
 package com.android.settings.inputmethod;
 
+import android.util.Log;
 import android.view.textservice.SpellCheckerInfo;
+import android.view.textservice.TextServicesManager;
 
 public class SpellCheckerUtils {
-    public static void setSpellCheckersEnabled(boolean enable) {
+    private static final String TAG = SpellCheckerUtils.class.getSimpleName();
+    private static final boolean DBG = false;
+    public static void setSpellCheckersEnabled(TextServicesManager tsm, boolean enable) {
     }
-    public static boolean getSpellCheckersEnabled() {
+    public static boolean getSpellCheckersEnabled(TextServicesManager tsm) {
         return true;
     }
-    public static void setCurrentSpellChecker(SpellCheckerInfo info) {
+    public static void setCurrentSpellChecker(TextServicesManager tsm, SpellCheckerInfo info) {
     }
-    public static SpellCheckerInfo getCurrentSpellChecker() {
+    public static SpellCheckerInfo getCurrentSpellChecker(TextServicesManager tsm) {
         return null;
     }
-    public static SpellCheckerInfo[] getEnabledSpellCheckers() {
-        return null;
+    public static SpellCheckerInfo[] getEnabledSpellCheckers(TextServicesManager tsm) {
+        final SpellCheckerInfo[] retval = tsm.getEnabledSpellCheckers();
+        if (DBG) {
+            Log.d(TAG, "get spell checkers: " + retval.length);
+        }
+        return retval;
     }
 }
