@@ -561,6 +561,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public static class WifiSettingsActivity extends Settings { /* empty */ }
     public static class InputMethodAndLanguageSettingsActivity extends Settings { /* empty */ }
     public static class InputMethodAndSubtypeEnablerActivity extends Settings { /* empty */ }
+    public static class SpellCheckersSettingsActivity extends Settings { /* empty */ }
     public static class LocalePickerActivity extends Settings { /* empty */ }
     public static class UserDictionarySettingsActivity extends Settings { /* empty */ }
     public static class SoundSettingsActivity extends Settings { /* empty */ }

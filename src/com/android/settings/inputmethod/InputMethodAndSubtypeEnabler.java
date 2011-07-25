@@ -147,6 +147,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                             .setCancelable(true)
                             .setPositiveButton(android.R.string.ok,
                                     new DialogInterface.OnClickListener() {
+                                        @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             chkPref.setChecked(true);
                                             InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
@@ -157,6 +158,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                             })
                             .setNegativeButton(android.R.string.cancel,
                                     new DialogInterface.OnClickListener() {
+                                        @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                         }
 

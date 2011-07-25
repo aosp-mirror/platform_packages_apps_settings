@@ -17,6 +17,7 @@
 package com.android.settings.inputmethod;
 
 import com.android.settings.R;
+import com.android.settings.Settings.SpellCheckersSettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
@@ -112,6 +113,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mImis = mImm.getInputMethodList();
         createImePreferenceHierarchy((PreferenceGroup)findPreference("keyboard_settings_category"));
+
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClass(getActivity(), SpellCheckersSettingsActivity.class);
+        ((SpellCheckersPreference)findPreference("spellcheckers_settings")).setFragmentIntent(
+                this, intent);
     }
 
     private void updateInputMethodSelectorSummary(int value) {

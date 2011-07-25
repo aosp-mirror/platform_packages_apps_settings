@@ -30,6 +30,10 @@
         <PreferenceScreen
                  android:key="key_user_dictionary_settings" />
 
+        <com.android.settings.inputmethod.SpellCheckersPreference
+                 android:key="spellcheckers_settings"
+                 android:title="@string/spellcheckers_settings_title"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="keyboard_settings_category"

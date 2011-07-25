@@ -45,6 +45,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     }
 
     static Set<String> getUserDictionaryLocalesList(Activity activity) {
+        @SuppressWarnings("deprecation")
         final Cursor cursor = activity.managedQuery(UserDictionary.Words.CONTENT_URI,
                 new String[] { UserDictionary.Words.LOCALE },
                 null, null, null);
