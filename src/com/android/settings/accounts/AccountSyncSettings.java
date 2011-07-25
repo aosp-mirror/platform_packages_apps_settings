@@ -236,10 +236,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                                        getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
 
-        removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS
-                | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
 
     @Override

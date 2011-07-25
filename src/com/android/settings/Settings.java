@@ -16,6 +16,11 @@
 
 package com.android.settings;
 
+import com.android.settings.accounts.AccountSyncSettings;
+import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.wifi.WifiEnabler;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,11 +41,6 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import com.android.settings.accounts.ManageAccountsSettings;
-import com.android.settings.bluetooth.BluetoothEnabler;
-import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.wifi.WifiEnabler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final int theme = getIntent().getIntExtra(
-                EXTRA_THEME, android.R.style.Theme_Holo_SolidActionBar_SplitActionBarWhenNarrow);
+                EXTRA_THEME, android.R.style.Theme_Holo_SplitActionBarWhenNarrow);
         setTheme(theme);
 
         getMetaData();
@@ -289,8 +289,8 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         // some fragments would like a custom activity theme
         if (DataUsageSummary.class.getName().equals(fragmentName) ||
                 PowerUsageSummary.class.getName().equals(fragmentName) ||
-                UserDictionarySettings.class.getName().equals(fragmentName) ||
-                ManageAccountsSettings.class.getName().equals(fragmentName)) {
+                AccountSyncSettings.class.getName().equals(fragmentName) ||
+                UserDictionarySettings.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_THEME, android.R.style.Theme_Holo_SolidActionBar);
         }
 

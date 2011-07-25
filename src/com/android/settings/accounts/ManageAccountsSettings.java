@@ -19,7 +19,6 @@ package com.android.settings.accounts;
 import com.android.settings.AccountPreference;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.google.android.collect.Maps;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -35,7 +34,6 @@ import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -201,6 +199,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         return null;
     }
 
+    @Override
     public void showDialog(int dialogId) {
         if (mDialogFragment != null) {
             Log.e(TAG, "Old dialog fragment not null!");
@@ -212,8 +211,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem actionItem =
-                menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label)
-                .setIcon(R.drawable.ic_menu_add);
+                menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                 | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
@@ -235,6 +233,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         connManager.setBackgroundDataSetting(enabled);
     }
 
+    @Override
     protected void onSyncStateUpdated() {
         // Catch any delayed delivery of update messages
         if (getActivity() == null) return;
@@ -342,6 +341,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         onSyncStateUpdated();
     }
 
+    @Override
     protected void onAuthDescriptionsUpdated() {
         // Update account icons for all account preference items
         for (int i = 0; i < mManageAccountsCategory.getPreferenceCount(); i++) {
