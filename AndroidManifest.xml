@@ -364,6 +364,26 @@
                 android:resource="@id/language_settings" />
         </activity>
 
+        <activity android:name="Settings$SpellCheckersSettingsActivity"
+                android:label="@string/spellcheckers_settings_title"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.SpellCheckersSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/language_keyboard_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
+        </activity>
+
         <activity android:name=".inputmethod.InputMethodAndSubtypeEnablerActivity"
                 android:label=""
                 android:clearTaskOnLaunch="true">
