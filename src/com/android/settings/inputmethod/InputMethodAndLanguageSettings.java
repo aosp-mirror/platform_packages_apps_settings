@@ -116,8 +116,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), SpellCheckersSettingsActivity.class);
-        ((SpellCheckersPreference)findPreference("spellcheckers_settings")).setFragmentIntent(
-                this, intent);
+        final SpellCheckersPreference scp = ((SpellCheckersPreference)findPreference(
+                "spellcheckers_settings"));
+        if (scp != null) {
+            scp.setFragmentIntent(this, intent);
+        }
     }
 
     private void updateInputMethodSelectorSummary(int value) {

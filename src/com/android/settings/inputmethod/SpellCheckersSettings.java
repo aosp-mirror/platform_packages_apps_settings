@@ -19,20 +19,24 @@ package com.android.settings.inputmethod;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.view.textservice.SpellCheckerInfo;
+import android.view.textservice.TextServicesManager;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private SpellCheckerInfo mCurrentSci;
     private SpellCheckerInfo[] mEnabledScis;
+    private TextServicesManager mTsm;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mTsm = (TextServicesManager) getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
         addPreferencesFromResource(R.xml.spellchecker_prefs);
         updateScreen();
     }
@@ -49,16 +53,18 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
 
     @Override
     public void onResume() {
+        super.onResume();
         updateScreen();
     }
 
     @Override
     public void onPause() {
+        super.onPause();
         saveState();
     }
 
     private void saveState() {
-        SpellCheckerUtils.setCurrentSpellChecker(mCurrentSci);
+        SpellCheckerUtils.setCurrentSpellChecker(mTsm, mCurrentSci);
     }
 
     private void updateScreen() {
@@ -67,8 +73,8 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     private void updateEnabledSpellCheckers() {
-        mCurrentSci = SpellCheckerUtils.getCurrentSpellChecker();
-        mEnabledScis = SpellCheckerUtils.getEnabledSpellCheckers();
+        mCurrentSci = SpellCheckerUtils.getCurrentSpellChecker(mTsm);
+        mEnabledScis = SpellCheckerUtils.getEnabledSpellCheckers(mTsm);
         if (mCurrentSci == null || mEnabledScis == null) {
             return;
         }
