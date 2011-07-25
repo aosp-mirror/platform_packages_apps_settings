@@ -31,7 +31,11 @@ public class SpellCheckerUtils {
     public static void setCurrentSpellChecker(TextServicesManager tsm, SpellCheckerInfo info) {
     }
     public static SpellCheckerInfo getCurrentSpellChecker(TextServicesManager tsm) {
-        return null;
+        final SpellCheckerInfo retval = tsm.getCurrentSpellChecker();
+        if (DBG) {
+            Log.d(TAG, "getCurrentSpellChecker: " + retval);
+        }
+        return retval;
     }
     public static SpellCheckerInfo[] getEnabledSpellCheckers(TextServicesManager tsm) {
         final SpellCheckerInfo[] retval = tsm.getEnabledSpellCheckers();
