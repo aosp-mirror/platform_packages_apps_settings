@@ -481,6 +481,7 @@ public class AccessibilityTutorialActivity extends Activity {
         private final Button mBack;
         private final Button mNext;
         private final Button mFinish;
+        private final int mTitleResId;
 
         /** Which bit flags have been set. */
         private long mFlags;
@@ -501,6 +502,7 @@ public class AccessibilityTutorialActivity extends Activity {
             super(context);
 
             mController = controller;
+            mTitleResId = titleResId;
 
             final View container = LayoutInflater.from(context).inflate(
                     R.layout.accessibility_tutorial_container, this, true);
@@ -521,8 +523,6 @@ public class AccessibilityTutorialActivity extends Activity {
                 title.setText(titleResId);
             }
 
-            controller.setTitle(titleResId);
-
             final ViewGroup contentHolder = (ViewGroup) container.findViewById(R.id.content);
             LayoutInflater.from(context).inflate(layoutResId, contentHolder, true);
         }
@@ -535,6 +535,7 @@ public class AccessibilityTutorialActivity extends Activity {
 
             mFlags = 0;
             mInstructions.setVisibility(View.GONE);
+            mController.setTitle(mTitleResId);
 
             onShown();
         }
