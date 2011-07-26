@@ -84,7 +84,6 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             final PreferenceScreen scs = new PreferenceScreen(getActivity(), null);
             scs.setTitle(sci.getId());
             getPreferenceScreen().addPreference(scs);
-            
         }
     }
 }
