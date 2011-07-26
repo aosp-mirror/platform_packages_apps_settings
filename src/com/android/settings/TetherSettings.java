@@ -516,16 +516,13 @@ public class TetherSettings extends SettingsPreferenceFragment
             mWifiConfig = mDialog.getConfig();
             if (mWifiConfig != null) {
                 /**
-                 * if soft AP is running, bring up with new config
-                 * else update the configuration alone
+                 * if soft AP is stopped, bring up
+                 * else restart with new config
+                 * TODO: update config on a running access point when framework support is added
                  */
                 if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
+                    mWifiManager.setWifiApEnabled(null, false);
                     mWifiManager.setWifiApEnabled(mWifiConfig, true);
-                    /**
-                     * There is no tether notification on changing AP
-                     * configuration. Update status with new config.
-                     */
-                    mWifiApEnabler.updateConfigSummary(mWifiConfig);
                 } else {
                     mWifiManager.setWifiApConfiguration(mWifiConfig);
                 }
