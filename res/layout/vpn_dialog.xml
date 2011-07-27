@@ -15,7 +15,7 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,15 +96,27 @@
                         android:prompt="@string/vpn_ipsec_ca_cert" />
             </LinearLayout>
 
+            <CheckBox style="@style/vpn_value" android:id="@+id/show_options"
+                    android:singleLine="false"
+                    android:text="@string/vpn_show_options"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
             <TextView style="@style/vpn_label" android:text="@string/vpn_search_domains"/>
             <EditText style="@style/vpn_value" android:id="@+id/search_domains"
                     android:hint="@string/vpn_not_used"/>
 
-            <!-- Not sure if we have time to make it. -->
-            <TextView style="@style/vpn_label" android:text="@string/vpn_routes"
-                    android:visibility="gone"/>
+            <TextView style="@style/vpn_label" android:text="@string/vpn_dns_servers"/>
+            <EditText style="@style/vpn_value" android:id="@+id/dns_servers"
+                    android:hint="@string/vpn_not_used"/>
+
+            <TextView style="@style/vpn_label" android:text="@string/vpn_routes"/>
             <EditText style="@style/vpn_value" android:id="@+id/routes"
-                    android:visibility="gone"/>
+                    android:hint="@string/vpn_not_used"/>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/login"
