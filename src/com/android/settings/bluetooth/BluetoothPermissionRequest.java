@@ -83,7 +83,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 Notification notification = new Notification(android.R.drawable.stat_sys_data_bluetooth,
                     context.getString(R.string.bluetooth_connection_permission_request),
                     System.currentTimeMillis());
-                String deviceName = device != null ? device.getName() : null;
+                String deviceName = device != null ? device.getAliasName() : null;
                 notification.setLatestEventInfo(context,
                     context.getString(R.string.bluetooth_connection_permission_request),
                     context.getString(R.string.bluetooth_connection_notif_message, deviceName),

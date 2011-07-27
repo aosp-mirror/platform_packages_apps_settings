@@ -326,8 +326,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                 mName = mDevice.getAddress();
             } else {
                 mName = name;
+                mDevice.setAlias(name);
             }
-            // TODO: save custom device name in preferences
             dispatchAttributesChanged();
         }
     }
@@ -338,7 +338,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     private void fetchName() {
-        mName = mDevice.getName();
+        mName = mDevice.getAliasName();
 
         if (TextUtils.isEmpty(mName)) {
             mName = mDevice.getAddress();
@@ -422,7 +422,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         mProfileManager.updateProfiles(uuids, localUuids, mProfiles, mRemovedProfiles);
 
         if (DEBUG) {
-            Log.e(TAG, "updating profiles for " + mDevice.getName());
+            Log.e(TAG, "updating profiles for " + mDevice.getAliasName());
             BluetoothClass bluetoothClass = mDevice.getBluetoothClass();
 
             if (bluetoothClass != null) Log.v(TAG, "Class: " + bluetoothClass.toString());

@@ -82,7 +82,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
 
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
                 if (TextUtils.isEmpty(name)) {
-                    name = device != null ? device.getName() :
+                    name = device != null ? device.getAliasName() :
                             context.getString(android.R.string.unknownName);
                 }
 

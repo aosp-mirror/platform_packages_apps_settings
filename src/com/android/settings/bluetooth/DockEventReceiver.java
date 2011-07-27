@@ -54,7 +54,7 @@ public final class DockEventReceiver extends BroadcastReceiver {
 
         if (DEBUG) {
             Log.d(TAG, "Action: " + intent.getAction() + " State:" + state + " Device: "
-                    + (device == null ? "null" : device.getName()));
+                    + (device == null ? "null" : device.getAliasName()));
         }
 
         if (Intent.ACTION_DOCK_EVENT.equals(intent.getAction())
