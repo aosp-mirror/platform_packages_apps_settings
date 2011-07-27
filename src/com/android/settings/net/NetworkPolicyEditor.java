@@ -17,6 +17,7 @@
 package com.android.settings.net;
 
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicy.SNOOZE_NEVER;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
@@ -100,17 +101,23 @@ public class NetworkPolicyEditor {
     }
 
     public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
-        getPolicy(template).cycleDay = cycleDay;
+        final NetworkPolicy policy = getPolicy(template);
+        policy.cycleDay = cycleDay;
+        policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
     public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
-        getPolicy(template).warningBytes = warningBytes;
+        final NetworkPolicy policy = getPolicy(template);
+        policy.warningBytes = warningBytes;
+        policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
     public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {
-        getPolicy(template).limitBytes = limitBytes;
+        final NetworkPolicy policy = getPolicy(template);
+        policy.limitBytes = limitBytes;
+        policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
@@ -155,17 +162,19 @@ public class NetworkPolicyEditor {
             mPolicies.remove(policy4g);
             mPolicies.add(
                     new NetworkPolicy(templateAll, restrictive.cycleDay, restrictive.warningBytes,
-                            restrictive.limitBytes));
+                            restrictive.limitBytes, SNOOZE_NEVER));
             writeAsync();
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
             final NetworkPolicy policyAll = getPolicy(templateAll);
             mPolicies.remove(policyAll);
-            mPolicies.add(new NetworkPolicy(
-                    template3g, policyAll.cycleDay, policyAll.warningBytes, policyAll.limitBytes));
-            mPolicies.add(new NetworkPolicy(
-                    template4g, policyAll.cycleDay, policyAll.warningBytes, policyAll.limitBytes));
+            mPolicies.add(
+                    new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,
+                            policyAll.limitBytes, SNOOZE_NEVER));
+            mPolicies.add(
+                    new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.warningBytes,
+                            policyAll.limitBytes, SNOOZE_NEVER));
             writeAsync();
 
         }

@@ -20,7 +20,6 @@ import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.ConnectivityManager.TYPE_WIMAX;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
-import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_LIMIT;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
@@ -141,7 +140,6 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG_CONFIRM_ROAMING = "confirmRoaming";
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
-    private static final String TAG_POLICY_LIMIT = "policyLimit";
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
     private static final String TAG_CONFIRM_APP_RESTRICT = "confirmAppRestrict";
     private static final String TAG_APP_DETAILS = "appDetails";
@@ -323,12 +321,6 @@ public class DataUsageSummary extends Fragment {
         // this kicks off chain reaction which creates tabs, binds the body to
         // selected network, and binds chart, cycles and detail list.
         updateTabs();
-
-        // template and tab has been selected; show dialog if limit passed
-        final String action = intent.getAction();
-        if (ACTION_DATA_USAGE_LIMIT.equals(action)) {
-            PolicyLimitFragment.show(this);
-        }
 
         // kick off background task to update stats
         new AsyncTask<Void, Void, Void>() {
@@ -1338,58 +1330,6 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
-     * Dialog explaining that {@link NetworkPolicy#limitBytes} has been passed,
-     * and giving the user an option to bypass.
-     */
-    public static class PolicyLimitFragment extends DialogFragment {
-        private static final String EXTRA_TITLE_ID = "titleId";
-
-        public static void show(DataUsageSummary parent) {
-            final Bundle args = new Bundle();
-
-            final String currentTab = parent.mCurrentTab;
-            if (TAB_3G.equals(currentTab)) {
-                args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_3g_title);
-            } else if (TAB_4G.equals(currentTab)) {
-                args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_4g_title);
-            } else if (TAB_MOBILE.equals(currentTab)) {
-                args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_mobile_title);
-            }
-
-            final PolicyLimitFragment dialog = new PolicyLimitFragment();
-            dialog.setArguments(args);
-            dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), TAG_POLICY_LIMIT);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context context = getActivity();
-
-            final int titleId = getArguments().getInt(EXTRA_TITLE_ID);
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(titleId);
-            builder.setMessage(R.string.data_usage_disabled_dialog);
-
-            builder.setPositiveButton(android.R.string.ok, null);
-            builder.setNegativeButton(R.string.data_usage_disabled_dialog_enable,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-                            if (target != null) {
-                                // TODO: consider "allow 100mb more data", or
-                                // only bypass limit for current cycle.
-                                target.setPolicyLimitBytes(LIMIT_DISABLED);
-                            }
-                        }
-                    });
-
-            return builder.create();
-        }
-    }
-
-    /**
      * Dialog to request user confirmation before setting
      * {@link Settings.Secure#DATA_ROAMING}.
      */
@@ -1497,8 +1437,10 @@ public class DataUsageSummary extends Fragment {
      * {@link NetworkPolicyManager#EXTRA_NETWORK_TEMPLATE} extra.
      */
     private static String computeTabFromIntent(Intent intent) {
-        final int networkTemplate = intent.getIntExtra(EXTRA_NETWORK_TEMPLATE, MATCH_MOBILE_ALL);
-        switch (networkTemplate) {
+        final NetworkTemplate template = intent.getParcelableExtra(EXTRA_NETWORK_TEMPLATE);
+        if (template == null) return null;
+
+        switch (template.getMatchRule()) {
             case MATCH_MOBILE_3G_LOWER:
                 return TAB_3G;
             case MATCH_MOBILE_4G:
