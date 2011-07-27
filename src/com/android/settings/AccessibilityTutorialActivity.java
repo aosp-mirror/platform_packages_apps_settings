@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,9 +54,6 @@ import java.util.List;
  * available in Touch Exploration.
  */
 public class AccessibilityTutorialActivity extends Activity {
-    /** Intent action for launching this activity. */
-    public static final String ACTION = "com.android.settings.touchtutorial.LAUNCH_TUTORIAL";
-
     /** Instance state saving constant for the active module. */
     private static final String KEY_ACTIVE_MODULE = "active_module";
 
@@ -65,6 +64,9 @@ public class AccessibilityTutorialActivity extends Activity {
     private ViewAnimator mViewAnimator;
 
     private AccessibilityManager mAccessibilityManager;
+
+    /** Should touch exploration be disabled when this activity is paused? */
+    private boolean mDisableOnPause;
 
     private final AnimationListener mInAnimationListener = new AnimationListener() {
         @Override
@@ -111,6 +113,30 @@ public class AccessibilityTutorialActivity extends Activity {
             show(savedInstanceState.getInt(KEY_ACTIVE_MODULE, DEFAULT_MODULE));
         } else {
             show(DEFAULT_MODULE);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final ContentResolver cr = getContentResolver();
+
+        if (Settings.Secure.getInt(cr, Settings.Secure.TOUCH_EXPLORATION_ENABLED, 0) == 0) {
+            Settings.Secure.putInt(cr, Settings.Secure.TOUCH_EXPLORATION_ENABLED, 1);
+            mDisableOnPause = true;
+        } else {
+            mDisableOnPause = false;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mDisableOnPause) {
+            final ContentResolver cr = getContentResolver();
+            Settings.Secure.putInt(cr, Settings.Secure.TOUCH_EXPLORATION_ENABLED, 0);
         }
     }
 
