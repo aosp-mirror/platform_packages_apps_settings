@@ -27,6 +27,7 @@ import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
@@ -329,5 +330,39 @@ public class Utils {
         } else {
             return new Locale(brokenDownLocale[0], brokenDownLocale[1], brokenDownLocale[2]);
         }
+    }
+
+    public static String getBatteryPercentage(Intent batteryChangedIntent) {
+        int level = batteryChangedIntent.getIntExtra("level", 0);
+        int scale = batteryChangedIntent.getIntExtra("scale", 100);
+        return String.valueOf(level * 100 / scale) + "%";
+    }
+
+    public static String getBatteryStatus(Resources res, Intent batteryChangedIntent) {
+        final Intent intent = batteryChangedIntent;
+
+        int plugType = intent.getIntExtra("plugged", 0);
+        int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+        String statusString;
+        if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
+            statusString = res.getString(R.string.battery_info_status_charging);
+            if (plugType > 0) {
+                statusString = statusString
+                        + " "
+                        + res.getString((plugType == BatteryManager.BATTERY_PLUGGED_AC)
+                                ? R.string.battery_info_status_charging_ac
+                                : R.string.battery_info_status_charging_usb);
+            }
+        } else if (status == BatteryManager.BATTERY_STATUS_DISCHARGING) {
+            statusString = res.getString(R.string.battery_info_status_discharging);
+        } else if (status == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            statusString = res.getString(R.string.battery_info_status_not_charging);
+        } else if (status == BatteryManager.BATTERY_STATUS_FULL) {
+            statusString = res.getString(R.string.battery_info_status_full);
+        } else {
+            statusString = res.getString(R.string.battery_info_status_unknown);
+        }
+
+        return statusString;
     }
 }

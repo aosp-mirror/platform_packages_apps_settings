@@ -28,7 +28,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -532,6 +534,17 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
         }
+    }
+
+    @Override
+    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
+        // Override the fragment title for Wallpaper settings
+        CharSequence title = pref.getTitle();
+        if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
+            title = getString(R.string.wallpaper_settings_fragment_title);
+        }
+        startPreferencePanel(pref.getFragment(), pref.getExtras(), 0, title, null, 0);
+        return true;
     }
 
     @Override
