@@ -128,6 +128,7 @@ public class DataUsageSummary extends Fragment {
     private static final boolean LOGD = true;
 
     // TODO: remove this testing code
+    private static final boolean TEST_ANIM = false;
     private static final boolean TEST_RADIOS = false;
     private static final String TEST_RADIOS_PROP = "test.radios";
 
@@ -175,10 +176,12 @@ public class DataUsageSummary extends Fragment {
     private CheckBox mDisableAtLimit;
     private View mDisableAtLimitView;
 
+    private View mCycleView;
     private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
 
     private DataUsageChartView mChart;
+    private TextView mUsageSummary;
 
     private View mAppDetail;
     private TextView mAppTitle;
@@ -272,7 +275,8 @@ public class DataUsageSummary extends Fragment {
         }
 
         // bind cycle dropdown
-        mCycleSpinner = (Spinner) mHeader.findViewById(R.id.cycles);
+        mCycleView = mHeader.findViewById(R.id.cycles);
+        mCycleSpinner = (Spinner) mCycleView.findViewById(R.id.cycles_spinner);
         mCycleAdapter = new CycleAdapter(context);
         mCycleSpinner.setAdapter(mCycleAdapter);
         mCycleSpinner.setOnItemSelectedListener(mCycleListener);
@@ -282,12 +286,12 @@ public class DataUsageSummary extends Fragment {
 
         {
             // bind app detail controls
-            mAppDetail = view.findViewById(R.id.app_detail);
-            mAppTitle = (TextView) view.findViewById(R.id.app_title);
-            mAppSubtitle = (TextView) view.findViewById(R.id.app_subtitle);
-            mAppSwitches = (LinearLayout) view.findViewById(R.id.app_switches);
+            mAppDetail = mHeader.findViewById(R.id.app_detail);
+            mAppTitle = (TextView) mAppDetail.findViewById(R.id.app_title);
+            mAppSubtitle = (TextView) mAppDetail.findViewById(R.id.app_subtitle);
+            mAppSwitches = (LinearLayout) mAppDetail.findViewById(R.id.app_switches);
 
-            mAppSettings = (Button) view.findViewById(R.id.app_settings);
+            mAppSettings = (Button) mAppDetail.findViewById(R.id.app_settings);
             mAppSettings.setOnClickListener(mAppSettingsListener);
 
             mAppRestrict = new CheckBox(inflater.getContext());
@@ -300,8 +304,10 @@ public class DataUsageSummary extends Fragment {
             mAppSwitches.addView(mAppRestrictView);
         }
 
+        mUsageSummary = (TextView) mHeader.findViewById(R.id.usage_summary);
+
         // only assign layout transitions once first layout is finished
-        mHeader.getViewTreeObserver().addOnGlobalLayoutListener(mFirstLayoutListener);
+        mListView.getViewTreeObserver().addOnGlobalLayoutListener(mFirstLayoutListener);
 
         mAdapter = new DataUsageAdapter();
         mListView.setOnItemClickListener(mListListener);
@@ -443,18 +449,27 @@ public class DataUsageSummary extends Fragment {
     private OnGlobalLayoutListener mFirstLayoutListener = new OnGlobalLayoutListener() {
         /** {@inheritDoc} */
         public void onGlobalLayout() {
-            mHeader.getViewTreeObserver().removeGlobalOnLayoutListener(mFirstLayoutListener);
+            mListView.getViewTreeObserver().removeGlobalOnLayoutListener(mFirstLayoutListener);
 
-            mTabsContainer.setLayoutTransition(new LayoutTransition());
-            mHeader.setLayoutTransition(new LayoutTransition());
-            mNetworkSwitchesContainer.setLayoutTransition(new LayoutTransition());
+            mTabsContainer.setLayoutTransition(buildLayoutTransition());
+            mHeader.setLayoutTransition(buildLayoutTransition());
+            mNetworkSwitchesContainer.setLayoutTransition(buildLayoutTransition());
 
-            final LayoutTransition chartTransition = new LayoutTransition();
+            final LayoutTransition chartTransition = buildLayoutTransition();
             chartTransition.setStartDelay(LayoutTransition.APPEARING, 0);
             chartTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0);
             mChart.setLayoutTransition(chartTransition);
         }
     };
+
+    private static LayoutTransition buildLayoutTransition() {
+        final LayoutTransition transition = new LayoutTransition();
+        if (TEST_ANIM) {
+            transition.setDuration(1500);
+        }
+        transition.setAnimateParentHierarchy(false);
+        return transition;
+    }
 
     /**
      * Rebuild all tabs based on {@link NetworkPolicyEditor} and
@@ -668,7 +683,7 @@ public class DataUsageSummary extends Fragment {
         updateDetailData();
 
         final Context context = getActivity();
-        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid)) {
+        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid) && !getRestrictBackground()) {
             mAppRestrictView.setVisibility(View.VISIBLE);
             mAppRestrict.setChecked(getAppRestrictBackground());
 
@@ -710,13 +725,22 @@ public class DataUsageSummary extends Fragment {
     }
 
     private boolean getRestrictBackground() {
-        return !mConnService.getBackgroundDataSetting();
+        try {
+            return mPolicyService.getRestrictBackground();
+        } catch (RemoteException e) {
+            Log.w(TAG, "problem talking with policy service: " + e);
+            return false;
+        }
     }
 
     private void setRestrictBackground(boolean restrictBackground) {
         if (LOGD) Log.d(TAG, "setRestrictBackground()");
-        mConnService.setBackgroundDataSetting(!restrictBackground);
-        mMenuRestrictBackground.setChecked(restrictBackground);
+        try {
+            mPolicyService.setRestrictBackground(restrictBackground);
+            mMenuRestrictBackground.setChecked(restrictBackground);
+        } catch (RemoteException e) {
+            Log.w(TAG, "problem talking with policy service: " + e);
+        }
     }
 
     private boolean getAppRestrictBackground() {
@@ -732,7 +756,7 @@ public class DataUsageSummary extends Fragment {
     }
 
     private void setAppRestrictBackground(boolean restrictBackground) {
-        if (LOGD) Log.d(TAG, "setRestrictBackground()");
+        if (LOGD) Log.d(TAG, "setAppRestrictBackground()");
         try {
             mPolicyService.setUidPolicy(
                     mUid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
@@ -909,7 +933,7 @@ public class DataUsageSummary extends Fragment {
 
                 // update chart to show selected cycle, and update detail data
                 // to match updated sweep bounds.
-                mChart.setVisibleRange(cycle.start, cycle.end, mHistory.getEnd());
+                mChart.setVisibleRange(cycle.start, cycle.end);
 
                 updateDetailData();
             }
@@ -932,28 +956,40 @@ public class DataUsageSummary extends Fragment {
 
         final long start = mChart.getInspectStart();
         final long end = mChart.getInspectEnd();
+        final long now = System.currentTimeMillis();
+
+        final Context context = getActivity();
+        final NetworkStatsHistory.Entry entry;
 
         if (isAppDetailMode()) {
             if (mDetailHistory != null) {
-                final Context context = mChart.getContext();
-                final long now = System.currentTimeMillis();
-                final NetworkStatsHistory.Entry entry = mDetailHistory.getValues(
-                        start, end, now, null);
+                entry = mDetailHistory.getValues(start, end, now, null);
 
                 mAppSubtitle.setText(
                         getString(R.string.data_usage_received_sent,
                                 Formatter.formatFileSize(context, entry.rxBytes),
                                 Formatter.formatFileSize(context, entry.txBytes)));
+            } else {
+                entry = null;
             }
 
             getLoaderManager().destroyLoader(LOADER_SUMMARY);
 
         } else {
+            entry = mHistory.getValues(start, end, now, null);
+
             // kick off loader for detailed stats
             getLoaderManager().restartLoader(LOADER_SUMMARY,
                     SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryForAllUid);
 
         }
+
+        final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
+        final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
+        final String rangePhrase = formatDateRangeUtc(context, start, end);
+
+        mUsageSummary.setText(
+                getString(R.string.data_usage_total_during_range, totalPhrase, rangePhrase));
     }
 
     private final LoaderCallbacks<NetworkStats> mSummaryForAllUid = new LoaderCallbacks<
@@ -1022,10 +1058,6 @@ public class DataUsageSummary extends Fragment {
         public long start;
         public long end;
 
-        private static final StringBuilder sBuilder = new StringBuilder(50);
-        private static final java.util.Formatter sFormatter = new java.util.Formatter(
-                sBuilder, Locale.getDefault());
-
         CycleItem(CharSequence label) {
             this.label = label;
         }
@@ -1036,18 +1068,27 @@ public class DataUsageSummary extends Fragment {
             this.end = end;
         }
 
-        private static String formatDateRangeUtc(Context context, long start, long end) {
-            synchronized (sBuilder) {
-                sBuilder.setLength(0);
-                return DateUtils.formatDateRange(context, sFormatter, start, end,
-                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH,
-                        Time.TIMEZONE_UTC).toString();
-            }
-        }
-
         @Override
         public String toString() {
             return label.toString();
+        }
+    }
+
+    private static final StringBuilder sBuilder = new StringBuilder(50);
+    private static final java.util.Formatter sFormatter = new java.util.Formatter(
+            sBuilder, Locale.getDefault());
+
+    private static String formatDateRangeUtc(Context context, long start, long end) {
+        synchronized (sBuilder) {
+            int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
+            if (Time.getJulianDay(start, 0) == Time.getJulianDay(end, 0)) {
+                // when times are on same day, include time detail
+                flags |= DateUtils.FORMAT_SHOW_TIME;
+            }
+
+            sBuilder.setLength(0);
+            return DateUtils.formatDateRange(
+                    context, sFormatter, start, end, flags, Time.TIMEZONE_UTC).toString();
         }
     }
 
@@ -1366,7 +1407,7 @@ public class DataUsageSummary extends Fragment {
 
     /**
      * Dialog to request user confirmation before setting
-     * {@link ConnectivityManager#setBackgroundDataSetting(boolean)}.
+     * {@link INetworkPolicyManager#setRestrictBackground(boolean)}.
      */
     public static class ConfirmRestrictFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {

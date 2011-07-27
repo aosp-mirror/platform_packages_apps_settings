@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import static android.text.format.DateUtils.HOUR_IN_MILLIS;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
@@ -46,6 +48,8 @@ public class DataUsageChartView extends ChartView {
     private ChartGridView mGrid;
     private ChartNetworkSeriesView mSeries;
     private ChartNetworkSeriesView mDetailSeries;
+
+    private NetworkStatsHistory mHistory;
 
     private ChartSweepView mSweepLeft;
     private ChartSweepView mSweepRight;
@@ -88,10 +92,14 @@ public class DataUsageChartView extends ChartView {
         mSweepWarning = (ChartSweepView) findViewById(R.id.sweep_warning);
 
         // prevent sweeps from crossing each other
-        mSweepLeft.setClampBefore(mSweepRight);
-        mSweepRight.setClampAfter(mSweepLeft);
-        mSweepLimit.setClampBefore(mSweepWarning);
-        mSweepWarning.setClampAfter(mSweepLimit);
+        mSweepLeft.setValidRangeDynamic(null, mSweepRight, HOUR_IN_MILLIS);
+        mSweepRight.setValidRangeDynamic(mSweepLeft, null, HOUR_IN_MILLIS);
+
+        // TODO: assign these ranges as user changes data axis
+        mSweepWarning.setValidRange(0L, 5 * GB_IN_BYTES);
+        mSweepWarning.setValidRangeDynamic(null, mSweepLimit, MB_IN_BYTES);
+        mSweepLimit.setValidRange(0L, 5 * GB_IN_BYTES);
+        mSweepLimit.setValidRangeDynamic(mSweepWarning, null, MB_IN_BYTES);
 
         mSweepLeft.addOnSweepListener(mSweepListener);
         mSweepRight.addOnSweepListener(mSweepListener);
@@ -116,6 +124,7 @@ public class DataUsageChartView extends ChartView {
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
         mSeries.bindNetworkStats(stats);
+        mHistory = stats;
         updatePrimaryRange();
         requestLayout();
     }
@@ -197,15 +206,6 @@ public class DataUsageChartView extends ChartView {
         }
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!isActivated()) {
-            return true;
-        } else {
-            return super.onInterceptTouchEvent(ev);
-        }
-    }
-
     public long getInspectStart() {
         return mSweepLeft.getValue();
     }
@@ -222,18 +222,33 @@ public class DataUsageChartView extends ChartView {
         return mSweepLimit.getValue();
     }
 
+    private long getStatsStart() {
+        return mHistory != null ? mHistory.getStart() : Long.MIN_VALUE;
+    }
+
+    private long getStatsEnd() {
+        return mHistory != null ? mHistory.getEnd() : Long.MAX_VALUE;
+    }
+
     /**
      * Set the exact time range that should be displayed, updating how
      * {@link ChartNetworkSeriesView} paints. Moves inspection ranges to be the
      * last "week" of available data, without triggering listener events.
      */
-    public void setVisibleRange(long start, long end, long dataBoundary) {
-        mHoriz.setBounds(start, end);
+    public void setVisibleRange(long visibleStart, long visibleEnd) {
+        mHoriz.setBounds(visibleStart, visibleEnd);
+
+        final long validStart = Math.max(visibleStart, getStatsStart());
+        final long validEnd = Math.min(visibleEnd, getStatsEnd());
+
+        // prevent time sweeps from leaving valid data
+        mSweepLeft.setValidRange(validStart, validEnd);
+        mSweepRight.setValidRange(validStart, validEnd);
 
         // default sweeps to last week of data
-        final long halfRange = (end + start) / 2;
-        final long sweepMax = Math.min(end, dataBoundary);
-        final long sweepMin = Math.max(start, (sweepMax - DateUtils.WEEK_IN_MILLIS));
+        final long halfRange = (visibleEnd + visibleStart) / 2;
+        final long sweepMax = validEnd;
+        final long sweepMin = Math.max(visibleStart, (sweepMax - DateUtils.WEEK_IN_MILLIS));
 
         mSweepLeft.setValue(sweepMin);
         mSweepRight.setValue(sweepMax);

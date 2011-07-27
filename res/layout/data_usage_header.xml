@@ -32,28 +32,19 @@
             android:divider="?android:attr/listDivider" />
     </FrameLayout>
 
-    <LinearLayout
+    <include layout="@layout/data_usage_cycles" />
+    <include layout="@layout/data_usage_chart" />
+
+    <TextView
+        android:id="@+id/usage_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:paddingLeft="16dip"
-        android:paddingRight="16dip">
+        android:paddingRight="16dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/data_usage_cycle" />
-
-        <Spinner
-            android:id="@+id/cycles"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <include layout="@layout/data_usage_chart" />
     <include layout="@layout/data_usage_detail" />
 
 </LinearLayout>
