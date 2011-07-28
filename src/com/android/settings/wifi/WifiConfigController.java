@@ -112,8 +112,8 @@ public class WifiConfigController implements TextWatcher,
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
 
-    private IpAssignment mIpAssignment;
-    private ProxySettings mProxySettings;
+    private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
+    private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
     private LinkProperties mLinkProperties = new LinkProperties();
 
     // True when this instance is used in SetupWizard XL context.
