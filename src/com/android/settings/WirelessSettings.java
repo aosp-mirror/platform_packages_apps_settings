@@ -54,6 +54,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private CheckBoxPreference mAirplaneModePreference;
     private NfcEnabler mNfcEnabler;
+    private NfcAdapter mNfcAdapter;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -113,7 +114,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         }
 
         // Remove NFC if its not available
-        if (NfcAdapter.getDefaultAdapter(activity) == null) {
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
+        if (mNfcAdapter == null) {
             getPreferenceScreen().removePreference(nfc);
             getPreferenceScreen().removePreference(zeroclick);
         }
@@ -175,6 +177,18 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
         mAirplaneModeEnabler.resume();
         mNfcEnabler.resume();
+
+        if (mNfcAdapter != null) {
+            // Update zero-click subtitle
+            Preference zeroClick = getPreferenceScreen().
+                    findPreference(KEY_ZEROCLICK_SETTINGS);
+
+            if (mNfcAdapter.zeroClickEnabled()) {
+                zeroClick.setSummary(R.string.zeroclick_on_summary);
+            } else {
+                zeroClick.setSummary(R.string.zeroclick_off_summary);
+            }
+        }
     }
 
     @Override

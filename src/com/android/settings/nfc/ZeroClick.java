@@ -16,28 +16,54 @@
 
 package com.android.settings.nfc;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
-import android.content.ContentResolver;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.provider.Settings;
+import android.preference.PreferenceActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.util.Log;
+import android.widget.Switch;
 import com.android.settings.R;
 
 public class ZeroClick extends Fragment
         implements CompoundButton.OnCheckedChangeListener {
     private View mView;
-    private CheckBox mCheckbox;
     private NfcAdapter mNfcAdapter;
+    private Switch mActionBarSwitch;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Activity activity = getActivity();
+
+        mActionBarSwitch = new Switch(activity);
+
+        if (activity instanceof PreferenceActivity) {
+            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
+                final int padding = activity.getResources().getDimensionPixelSize(
+                        R.dimen.action_bar_switch_padding);
+                mActionBarSwitch.setPadding(0, 0, padding, 0);
+                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                        ActionBar.DISPLAY_SHOW_CUSTOM);
+                activity.getActionBar().setCustomView(mActionBarSwitch, new ActionBar.LayoutParams(
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+            }
+        }
+
+        mActionBarSwitch.setOnCheckedChangeListener(this);
+
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
+        mActionBarSwitch.setChecked(mNfcAdapter.zeroClickEnabled());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +74,9 @@ public class ZeroClick extends Fragment
     }
 
     private void initView(View view) {
-        mCheckbox = (CheckBox) mView.findViewById(R.id.zeroclick_checkbox);
-        mCheckbox.setOnCheckedChangeListener(this);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-        mCheckbox.setChecked(mNfcAdapter.zeroClickEnabled());
+        mActionBarSwitch.setOnCheckedChangeListener(this);
+        mActionBarSwitch.setChecked(mNfcAdapter.zeroClickEnabled());
     }
 
     @Override
@@ -67,15 +92,15 @@ public class ZeroClick extends Fragment
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean desiredState) {
         boolean success = false;
-        mCheckbox.setEnabled(false);
+        mActionBarSwitch.setEnabled(false);
         if (desiredState) {
             success = mNfcAdapter.enableZeroClick();
         } else {
             success = mNfcAdapter.disableZeroClick();
         }
         if (success) {
-            mCheckbox.setChecked(desiredState);
+            mActionBarSwitch.setChecked(desiredState);
         }
-        mCheckbox.setEnabled(true);
+        mActionBarSwitch.setEnabled(true);
     }
 }
