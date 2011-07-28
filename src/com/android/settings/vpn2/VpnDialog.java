@@ -27,15 +27,18 @@ import android.security.KeyStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListener {
+import java.net.InetAddress;
+
+class VpnDialog extends AlertDialog implements TextWatcher,
+        View.OnClickListener, AdapterView.OnItemSelectedListener {
     private final KeyStore mKeyStore = KeyStore.getInstance();
     private final DialogInterface.OnClickListener mListener;
     private final VpnProfile mProfile;
@@ -50,6 +53,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
     private TextView mUsername;
     private TextView mPassword;
     private TextView mSearchDomains;
+    private TextView mDnsServers;
     private TextView mRoutes;
     private CheckBox mMppe;
     private TextView mL2tpSecret;
@@ -82,6 +86,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         mUsername = (TextView) mView.findViewById(R.id.username);
         mPassword = (TextView) mView.findViewById(R.id.password);
         mSearchDomains = (TextView) mView.findViewById(R.id.search_domains);
+        mDnsServers = (TextView) mView.findViewById(R.id.dns_servers);
         mRoutes = (TextView) mView.findViewById(R.id.routes);
         mMppe = (CheckBox) mView.findViewById(R.id.mppe);
         mL2tpSecret = (TextView) mView.findViewById(R.id.l2tp_secret);
@@ -98,6 +103,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         mUsername.setText(mProfile.username);
         mPassword.setText(mProfile.password);
         mSearchDomains.setText(mProfile.searchDomains);
+        mDnsServers.setText(mProfile.dnsServers);
         mRoutes.setText(mProfile.routes);
         mMppe.setChecked(mProfile.mppe);
         mL2tpSecret.setText(mProfile.l2tpSecret);
@@ -115,6 +121,8 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         mServer.addTextChangedListener(this);
         mUsername.addTextChangedListener(this);
         mPassword.addTextChangedListener(this);
+        mDnsServers.addTextChangedListener(this);
+        mRoutes.addTextChangedListener(this);
         mIpsecSecret.addTextChangedListener(this);
         mIpsecUserCert.setOnItemSelectedListener(this);
 
@@ -130,6 +138,15 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
 
             // Show type-specific fields.
             changeType(mProfile.type);
+
+            // Show advanced options directly if any of them is set.
+            View showOptions = mView.findViewById(R.id.show_options);
+            if (mProfile.searchDomains.isEmpty() && mProfile.dnsServers.isEmpty() &&
+                    mProfile.routes.isEmpty()) {
+                showOptions.setOnClickListener(this);
+            } else {
+                onClick(showOptions);
+            }
 
             // Create a button to save the profile.
             setButton(DialogInterface.BUTTON_POSITIVE,
@@ -155,6 +172,10 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         // Disable the action button if necessary.
         getButton(DialogInterface.BUTTON_POSITIVE)
                 .setEnabled(mEditing ? valid : validate(false));
+
+        // Workaround to resize the dialog for the input method.
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     @Override
@@ -168,6 +189,12 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+    }
+
+    @Override
+    public void onClick(View showOptions) {
+        showOptions.setVisibility(View.GONE);
+        mView.findViewById(R.id.options).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -221,7 +248,9 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         if (!editing) {
             return mUsername.getText().length() != 0 && mPassword.getText().length() != 0;
         }
-        if (mName.getText().length() == 0 || mServer.getText().length() == 0) {
+        if (mName.getText().length() == 0 || mServer.getText().length() == 0 ||
+                !validateAddresses(mDnsServers.getText().toString(), false) ||
+                !validateAddresses(mRoutes.getText().toString(), true)) {
             return false;
         }
         switch (mType.getSelectedItemPosition()) {
@@ -237,6 +266,33 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
                 return mIpsecUserCert.getSelectedItemPosition() != 0;
         }
         return false;
+    }
+
+    private boolean validateAddresses(String addresses, boolean cidr) {
+        try {
+            for (String address : addresses.split(" ")) {
+                if (address.isEmpty()) {
+                    continue;
+                }
+                // Legacy VPN currently only supports IPv4.
+                int prefixLength = 32;
+                if (cidr) {
+                    String[] parts = address.split("/", 2);
+                    address = parts[0];
+                    prefixLength = Integer.parseInt(parts[1]);
+                }
+                byte[] bytes = InetAddress.parseNumericAddress(address).getAddress();
+                int integer = (bytes[3] & 0xFF) | (bytes[2] & 0xFF) << 8 |
+                        (bytes[1] & 0xFF) << 16 | (bytes[0] & 0xFF) << 24;
+                if (bytes.length != 4 || prefixLength < 0 || prefixLength > 32 ||
+                        (prefixLength < 32 && (integer << prefixLength) != 0)) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     private void loadCertificates(Spinner spinner, String prefix, int firstId, String selected) {
@@ -279,6 +335,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         profile.username = mUsername.getText().toString();
         profile.password = mPassword.getText().toString();
         profile.searchDomains = mSearchDomains.getText().toString().trim();
+        profile.dnsServers = mDnsServers.getText().toString().trim();
         profile.routes = mRoutes.getText().toString().trim();
 
         // Then, save type-specific fields.

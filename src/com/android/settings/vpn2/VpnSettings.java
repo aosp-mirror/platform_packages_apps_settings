@@ -108,7 +108,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                 Credentials.getInstance().unlock(getActivity());
             } else {
                 // We already tried, but it is still not working!
-                getActivity().getFragmentManager().popBackStack();
+                finishFragment();
             }
             mUnlocking = !mUnlocking;
             return;
@@ -429,8 +429,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         config.interfaze = interfaze;
         config.session = profile.name;
         config.routes = profile.routes;
+        if (!profile.dnsServers.isEmpty()) {
+            config.dnsServers = Arrays.asList(profile.dnsServers.split(" +"));
+        }
         if (!profile.searchDomains.isEmpty()) {
-            config.searchDomains = Arrays.asList(profile.searchDomains.split(" "));
+            config.searchDomains = Arrays.asList(profile.searchDomains.split(" +"));
         }
 
         mService.startLegacyVpn(config, racoon, mtpd);
