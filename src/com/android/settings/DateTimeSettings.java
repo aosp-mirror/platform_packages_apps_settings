@@ -354,6 +354,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
         long when = c.getTimeInMillis();
 
         if (when / 1000 < Integer.MAX_VALUE) {
