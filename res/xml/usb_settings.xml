@@ -17,6 +17,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/location_settings_title">
 
+    <PreferenceCategory
+            android:title="@string/usb_connection_category" />
+
     <CheckBoxPreference
         android:key="usb_mtp"
         android:title="@string/usb_label_mtp"
