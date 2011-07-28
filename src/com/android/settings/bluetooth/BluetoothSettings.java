@@ -68,6 +68,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     private PreferenceGroup mAvailableDevicesCategory;
     private boolean mAvailableDevicesCategoryIsPresent;
+    private boolean mActivityStarted;
 
     private TextView mEmptyView;
 
@@ -98,6 +99,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        mActivityStarted = true;
         super.onActivityCreated(savedInstanceState);
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
@@ -144,7 +146,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         }
         getActivity().registerReceiver(mReceiver, mIntentFilter);
 
-        updateContent(mLocalAdapter.getBluetoothState());
+        updateContent(mLocalAdapter.getBluetoothState(), mActivityStarted);
     }
 
     @Override
@@ -226,7 +228,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         preferenceGroup.setEnabled(true);
     }
 
-    private void updateContent(int bluetoothState) {
+    private void updateContent(int bluetoothState, boolean scanState) {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         int messageId = 0;
 
@@ -289,7 +291,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
                 if (numberOfPairedDevices == 0) {
                     preferenceScreen.removePreference(mPairedDevicesCategory);
-                    startScanning();
+                    if (scanState == true) {
+                        mActivityStarted = false;
+                        startScanning();
+                    } else {
+                        if (!mAvailableDevicesCategoryIsPresent) {
+                            getPreferenceScreen().addPreference(mAvailableDevicesCategory);
+                        }
+                    }
                 }
                 getActivity().invalidateOptionsMenu();
                 return; // not break
@@ -316,7 +325,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
-        updateContent(bluetoothState);
+        updateContent(bluetoothState, true);
     }
 
     @Override
@@ -329,7 +338,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
         setDeviceListGroup(getPreferenceScreen());
         removeAllDevices();
-        updateContent(mLocalAdapter.getBluetoothState());
+        updateContent(mLocalAdapter.getBluetoothState(), false);
     }
 
     private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
