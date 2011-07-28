@@ -61,8 +61,11 @@ public class ChartSweepView extends FrameLayout {
     private ChartAxis mAxis;
     private long mValue;
 
-    private ChartSweepView mClampAfter;
-    private ChartSweepView mClampBefore;
+    private long mValidAfter;
+    private long mValidBefore;
+    private ChartSweepView mValidAfterDynamic;
+    private ChartSweepView mValidBeforeDynamic;
+    private long mValidBufferArea;
 
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
@@ -259,12 +262,25 @@ public class ChartSweepView extends FrameLayout {
         }
     }
 
-    public void setClampAfter(ChartSweepView clampAfter) {
-        mClampAfter = clampAfter;
+    /**
+     * Set valid range this sweep can move within, in {@link #mAxis} values. The
+     * most restrictive combination of all valid ranges is used.
+     */
+    public void setValidRange(long validAfter, long validBefore) {
+        mValidAfter = validAfter;
+        mValidBefore = validBefore;
     }
 
-    public void setClampBefore(ChartSweepView clampBefore) {
-        mClampBefore = clampBefore;
+    /**
+     * Set valid range this sweep can move within, defined by the given
+     * {@link ChartSweepView}. The most restrictive combination of all valid
+     * ranges is used.
+     */
+    public void setValidRangeDynamic(
+            ChartSweepView validAfter, ChartSweepView validBefore, long bufferArea) {
+        mValidAfterDynamic = validAfter;
+        mValidBeforeDynamic = validBefore;
+        mValidBufferArea = bufferArea;
     }
 
     @Override
@@ -285,6 +301,12 @@ public class ChartSweepView extends FrameLayout {
 
                 if (accept) {
                     mTracking = event.copy();
+
+                    // starting drag should activate entire chart
+                    if (!parent.isActivated()) {
+                        parent.setActivated(true);
+                    }
+
                     return true;
                 } else {
                     return false;
@@ -336,31 +358,52 @@ public class ChartSweepView extends FrameLayout {
         }
     }
 
+    @Override
+    public void addOnLayoutChangeListener(OnLayoutChangeListener listener) {
+        // ignored to keep LayoutTransition from animating us
+    }
+
+    @Override
+    public void removeOnLayoutChangeListener(OnLayoutChangeListener listener) {
+        // ignored to keep LayoutTransition from animating us
+    }
+
+    private long getValidAfterValue() {
+        final ChartSweepView dynamic = mValidAfterDynamic;
+        final boolean dynamicEnabled = dynamic != null && dynamic.isEnabled();
+        return Math.max(mValidAfter,
+                dynamicEnabled ? dynamic.getValue() + mValidBufferArea : Long.MIN_VALUE);
+    }
+
+    private long getValidBeforeValue() {
+        final ChartSweepView dynamic = mValidBeforeDynamic;
+        final boolean dynamicEnabled = dynamic != null && dynamic.isEnabled();
+        return Math.min(mValidBefore,
+                dynamicEnabled ? dynamic.getValue() - mValidBufferArea : Long.MAX_VALUE);
+    }
+
     /**
      * Compute {@link Rect} in {@link #getParent()} coordinates that we should
-     * be clamped inside of, usually from {@link #setClampAfter(ChartSweepView)}
+     * be clamped inside of, usually from {@link #setValidRange(long, long)}
      * style rules.
      */
     private Rect computeClampRect(Rect parentContent) {
         final Rect clampRect = new Rect(parentContent);
 
-        final ChartSweepView after = mClampAfter;
-        final ChartSweepView before = mClampBefore;
+        float validAfterPoint = mAxis.convertToPoint(getValidAfterValue());
+        float validBeforePoint = mAxis.convertToPoint(getValidBeforeValue());
+        if (validAfterPoint > validBeforePoint) {
+            float swap = validBeforePoint;
+            validBeforePoint = validAfterPoint;
+            validAfterPoint = swap;
+        }
 
         if (mFollowAxis == VERTICAL) {
-            if (after != null) {
-                clampRect.top += after.getPoint();
-            }
-            if (before != null) {
-                clampRect.bottom -= clampRect.height() - before.getPoint();
-            }
+            clampRect.bottom = clampRect.top + (int) validBeforePoint;
+            clampRect.top += validAfterPoint;
         } else {
-            if (after != null) {
-                clampRect.left += after.getPoint();
-            }
-            if (before != null) {
-                clampRect.right -= clampRect.width() - before.getPoint();
-            }
+            clampRect.right = clampRect.left + (int) validBeforePoint;
+            clampRect.left += validAfterPoint;
         }
         return clampRect;
     }
