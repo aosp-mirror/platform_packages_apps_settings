@@ -970,6 +970,19 @@
             </intent-filter>
         </activity>
 
+        <!-- NFC settings -->
+        <activity android:name="Settings$NfcSharingSettingsActivity"
+                android:label="@string/zeroclick_settings_title"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.NFCSHARING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.nfc.ZeroClick" />
+        </activity>
+
         <!-- Accessibility tutorial -->
         <activity android:name="AccessibilityTutorialActivity"
                 android:label="@string/accessibility_tutorial_title"
