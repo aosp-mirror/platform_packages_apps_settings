@@ -2012,32 +2012,26 @@
 
     <!-- Security & location settings screen, section header for settings relating to location -->
     <string name="location_title">My Location</string>
-    <!-- Security & location settings screen, setting check box label if the user wants to use wireless network-based positioning (cell ID, wifi, etc.) -->
-    <string name="location_network_based">Use wireless networks</string>
-    <!-- Security & location settings screen, setting summary when Use wireless networks check box is clear -->
-    <string name="location_networks_disabled">See location in applications (such as Maps) using wireless networks</string>
-    <!-- Security & location settings screen, setting summary when Use wireless networks check box is selected -->
-    <string name="location_neighborhood_level">Location determined by Wi-Fi and/or mobile networks</string>
+    <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
+    <string name="location_network_based">Google location service</string>
+    <!-- [CHAR LIMIT=100] Security & location settings screen, setting summary for Google location service check box-->
+    <string name="location_neighborhood_level">Let apps use Wi-Fi and mobile networks to determine your approximate location</string>
     <!-- Security & location settings screen, setting summary when Use wireless networks check box is selected, for wifi-only devices [CHAR LIMIT=100] -->
     <string name="location_neighborhood_level_wifi">Location determined by Wi-Fi</string>
-    <!-- Security & location settings screen, setting check box label if the GPS receiver should be enabled -->
-    <string name="location_gps">Use GPS satellites</string>
-    <!-- [CHAR LIMIT=100] Security & location settings screen, setting summary when Use GPS satellites check box is selected -->
-    <string name="location_street_level">When locating, accurate to street level</string>
-    <!-- Security & location settings screen, setting summary when Use GPS satellites check box is clear -->
-    <string name="location_gps_disabled">Locate to street-level (requires more battery plus view of sky)</string>
+    <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for GPS satellites -->
+    <string name="location_gps">GPS satellites</string>
+    <!-- [CHAR LIMIT=100] Security & location settings screen, setting check box summary for GPS satellites -->
+    <string name="location_street_level">Let apps use GPS to pinpoint your location</string>
     <!-- Security & location settings screen, setting check box label if Assisted GPS should be enabled -->
     <string name="assisted_gps">Use assisted GPS</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is selected -->
     <string name="assisted_gps_enabled">Use server to assist GPS (uncheck to reduce network usage)</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is clear -->
     <string name="assisted_gps_disabled">Use server to assist GPS (uncheck to improve GPS performance)</string>
-    <!-- [CHAR_LIMIT=100] Security & location settings screen, setting check box label if the user wants to use their location for Google Search & other Google services -->
-    <string name="use_location_title">Use location for Google Search</string>
-    <!-- [CHAR_LIMIT=100] Security & location settings screen, setting summary when Use My Location for Google services is clear -->
-    <string name="use_location_summary_disabled">Use location for Google Search and other Google services</string>
-    <!-- [CHAR_LIMIT=100] Security & location settings screen, setting summary when Use My Location for Google services is checked -->
-    <string name="use_location_summary_enabled">Location used to improve Google Search results and other Google services</string>
+    <!-- [CHAR_LIMIT=30] Security & location settings screen, setting check box label for Google search -->
+    <string name="use_location_title">Location &amp; Google search</string>
+    <!-- [CHAR_LIMIT=100] Security & location settings screen, setting check box summary for Google search -->
+    <string name="use_location_summary">Let Google use your location to improve search results and other services</string>
 
     <!-- About --> <skip />
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->

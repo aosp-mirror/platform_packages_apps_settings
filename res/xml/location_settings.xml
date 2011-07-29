@@ -20,14 +20,12 @@
         <CheckBoxPreference
             android:key="location_network"
             android:title="@string/location_network_based"
-            android:summaryOn="@string/location_neighborhood_level"
-            android:summaryOff="@string/location_networks_disabled"/>
+            android:summary="@string/location_neighborhood_level"/>
 
         <CheckBoxPreference
             android:key="location_gps"
             android:title="@string/location_gps"
-            android:summaryOn="@string/location_street_level"
-            android:summaryOff="@string/location_gps_disabled"/>
+            android:summary="@string/location_street_level"/>
 
 <!-- Disabled to avoid confusion on devices with no AGPS
      For Google experience devices we want AGPS on by default (if supported) so we don't really need this.
