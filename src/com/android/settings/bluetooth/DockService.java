@@ -424,7 +424,7 @@ public final class DockService extends Service implements ServiceListener {
 
         if (DEBUG) {
             Log.d(TAG, "Action: " + intent.getAction() + " State:" + state
-                    + " Device: " + (device == null ? "null" : device.getName()));
+                    + " Device: " + (device == null ? "null" : device.getAliasName()));
         }
 
         if (device == null) {

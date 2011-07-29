@@ -130,7 +130,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     }
 
     private String createConnectionDisplayText() {
-        String mRemoteName = mDevice != null ? mDevice.getName() : null;
+        String mRemoteName = mDevice != null ? mDevice.getAliasName() : null;
 
         if (mRemoteName == null) mRemoteName = getString(R.string.unknown);
         String mMessage1 = getString(R.string.bluetooth_connection_dialog_text,
@@ -139,7 +139,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     }
 
     private String createPbapDisplayText() {
-        String mRemoteName = mDevice != null ? mDevice.getName() : null;
+        String mRemoteName = mDevice != null ? mDevice.getAliasName() : null;
 
         if (mRemoteName == null) mRemoteName = getString(R.string.unknown);
         String mMessage1 = getString(R.string.bluetooth_pb_acceptance_dialog_text,
