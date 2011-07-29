@@ -47,7 +47,8 @@
             android:focusable="false"
             android:clickable="false" />
 
-        <TextView
+        <view
+            class="com.android.settings.AccessibilityTutorialActivity$TutorialTextView"
             android:id="@+id/instructions"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

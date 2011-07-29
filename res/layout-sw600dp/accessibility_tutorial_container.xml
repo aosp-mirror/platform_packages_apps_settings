@@ -57,7 +57,8 @@
         <View
             style="@style/AccessibilityTutorialDivider" />
 
-        <TextView
+        <view
+            class="com.android.settings.AccessibilityTutorialActivity$TutorialTextView"
             android:id="@+id/instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
