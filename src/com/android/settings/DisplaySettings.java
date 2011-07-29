@@ -23,6 +23,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -150,8 +151,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         screenTimeoutPreference.setEnabled(revisedEntries.size() > 0);
     }
 
-    int floatToIndex(float val, int resid) {
-        String[] indices = getResources().getStringArray(resid);
+    int floatToIndex(float val) {
+        String[] indices = getResources().getStringArray(R.array.entryvalues_font_size);
         float lastVal = Float.parseFloat(indices[0]);
         for (int i=1; i<indices.length; i++) {
             float thisVal = Float.parseFloat(indices[i]);
@@ -169,7 +170,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } catch (RemoteException e) {
             Log.w(TAG, "Unable to retrieve font size");
         }
-        pref.setValueIndex(floatToIndex(mCurConfig.fontScale, R.array.entryvalues_font_size));
+
+        // mark the appropriate item in the preferences list
+        int index = floatToIndex(mCurConfig.fontScale);
+        pref.setValueIndex(index);
+
+        // report the current size in the summary text
+        final Resources res = getResources();
+        String[] fontSizeNames = res.getStringArray(R.array.entries_font_size);
+        pref.setSummary(String.format(res.getString(R.string.summary_font_size),
+                fontSizeNames[index]));
     }
     
     @Override
