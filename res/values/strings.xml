@@ -2681,9 +2681,8 @@ found in the list of installed applications.</string>
     <!-- Title for accessibility preference to enable touch exploration mode. [CHAR LIMIT=35] -->
     <string name="accessibility_touch_exploration_title">Explore by touch</string>
     <!-- Summary for accessibility of the touch exploration mode. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_touch_exploration_summary" >Allows exploring screen content and interacting with the device.\n\n
-        Touch the screen to receive feedback of the content under your finger.\n\n Tap on the last explored location to activate.\n\n
-        Use two fingers to drag. </string>
+    <string name="accessibility_touch_exploration_summary" >When Explore by Touch is turned on,
+    you can hear or see descriptions of what\'s under your finger.\n\n This feature is for low-vision users.</string>
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_title">Touch &amp; hold delay</string>
     <!-- Title for accessibility preference to install accessibility scripts from Google. [CHAR LIMIT=35] -->
@@ -2710,31 +2709,37 @@ found in the list of installed applications.</string>
     <string name="accessibility_script_injection_button_disallow">Don\'t Allow</string>
 
     <!-- Warning message about security implications of enabling an accessibility service,
-         displayed as a dialog message when the user selects to enable an accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_security_warning">This accessibility service may be able to collect
-        all the text you type, including personal data credit card numbers except passwords.
-        It may also log your user interface interactions. It comes from the application
-        <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Use this accessibility service?</string>
-    <!-- Warning about disabling accessibility displayed as a dialog message when the user
+         displayed as a dialog message when the user selects to enable an accessibility service (tablet). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_security_warning">
+            <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
+            collect all of the text you type, except passwords. This includes personal data such as credit card
+            numbers. It can also collect data about your interactions with the device.</string>
+    <!-- Title for a warning about disabling accessibility displayed as a dialog message when the user
+         selects to disable accessibility. This avoids accidental disabling. [CHAR LIMIT=30] -->
+    <string name="accessibility_disable_warning_title">Turn accessibility off?</string>
+    <!-- Summary for a warning about disabling accessibility displayed as a dialog message when the user
          selects to disable accessibility. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_disable_warning">Disable accessibility?</string>
+    <string name="accessibility_disable_warning_summary">Touching OK will stop spoken
+        descriptions and all other accessibility features you\'ve been using.</string>
     <!-- Title for the prompt that lets users know that they have no accessibility related apps
          installed and that they can install TalkBack from Market. [CHAR LIMIT=50] -->
-    <string name="accessibility_service_no_apps_title">No accessibility related applications found
+    <string name="accessibility_service_no_apps_title">No accessibility applications
         </string>
     <!-- Message for the prompt that lets users know that they have no accessibility related apps
          installed and that they can install TalkBack from Market. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_no_apps_message">You do not have any accessibility-related
-        applications installed.\n\nYou can download a screen reader for your device from Android
-        Market.\n\nClick "OK" to install the screen reader.</string>
+    <string name="accessibility_service_no_apps_message">You don\'t have accessibility
+        applications installed. Do you want to download a screen reader from the Android Market?</string>
     <!-- Warning message about security implications of downloading accessibility scripts,
          displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_script_injection_security_warning">Some applications can ask Google
-        to download scripts to your device that make their content more accessible. Are you sure you
-        want to allow Google to install accessibility scripts on your device?</string>
+    <string name="accessibility_script_injection_security_warning">Do you want applications to install
+        scripts from Google that will make their content more accessible?</string>
     <!-- Warning message that the interaction model changes on enabling touch exploration. [CHAR LIMIT=NONE] -->
     <string name="accessibility_touch_exploration_warning">Enabling explore by touch
-        changes the interation model. Enable explore by touch?</string>
+        changes how the devices respons to touch. Enable explore by touch?</string>
+    <!-- Default description for an accessiiblity serivice if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_default_description">This accessibility service has no
+        description.\n\nAccessibility services provide various types of feedback when you interact
+        with the device. </string>
 
     <!-- App Fuel Gauge strings -->
     <skip />

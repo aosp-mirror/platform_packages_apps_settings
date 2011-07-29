@@ -47,6 +47,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
+import com.android.settings.R;
+
 import java.util.List;
 
 /**
@@ -54,6 +56,10 @@ import java.util.List;
  * available in Touch Exploration.
  */
 public class AccessibilityTutorialActivity extends Activity {
+
+    /** Intent action for launching this activity. */
+    public static final String ACTION = "android.settings.ACCESSIBILITY_TUTORIAL";
+
     /** Instance state saving constant for the active module. */
     private static final String KEY_ACTIVE_MODULE = "active_module";
 
