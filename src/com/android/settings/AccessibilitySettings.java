@@ -489,7 +489,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSelectLongPressTimeoutPreference.setEnabled(accessibilityEnabled);
         final int longPressTimeout;
         if (accessibilityEnabled) {
-            longPressTimeout = Integer.parseInt(mSelectLongPressTimeoutPreference.getValue());
+            String value = mSelectLongPressTimeoutPreference.getValue();
+            longPressTimeout = (value != null) ? Integer.parseInt(value) : mLongPressTimeoutDefault;
         } else {
             longPressTimeout = mLongPressTimeoutDefault;
         }
