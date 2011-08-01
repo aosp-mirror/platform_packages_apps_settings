@@ -26,12 +26,16 @@ import android.preference.PreferenceScreen;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
 
+import java.util.ArrayList;
+
 public class SpellCheckersSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceClickListener {
 
     private SpellCheckerInfo mCurrentSci;
     private SpellCheckerInfo[] mEnabledScis;
     private TextServicesManager mTsm;
+    private final ArrayList<SingleSpellCheckerPreference> mSpellCheckers =
+            new ArrayList<SingleSpellCheckerPreference>();
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -39,11 +43,6 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         mTsm = (TextServicesManager) getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
         addPreferencesFromResource(R.xml.spellchecker_prefs);
         updateScreen();
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference arg0, Object arg1) {
-        return false;
     }
 
     @Override
@@ -78,12 +77,28 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         if (mCurrentSci == null || mEnabledScis == null) {
             return;
         }
-        // TODO: implement here
+        mSpellCheckers.clear();
         for (int i = 0; i < mEnabledScis.length; ++i) {
             final SpellCheckerInfo sci = mEnabledScis[i];
-            final PreferenceScreen scs = new PreferenceScreen(getActivity(), null);
-            scs.setTitle(sci.getId());
-            getPreferenceScreen().addPreference(scs);
+            final SingleSpellCheckerPreference scPref = new SingleSpellCheckerPreference(
+                    this, null, sci);
+            mSpellCheckers.add(scPref);
+            scPref.setTitle(sci.getId());
+            scPref.setSelected(mCurrentSci != null && mCurrentSci.getId().equals(sci.getId()));
+            getPreferenceScreen().addPreference(scPref);
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference arg0) {
+        for (SingleSpellCheckerPreference scp : mSpellCheckers) {
+            if (arg0.equals(scp)) {
+                scp.setSelected(true);
+                mTsm.setCurrentSpellChecker(scp.getSpellCheckerInfo());
+            } else {
+                scp.setSelected(false);
+            }
+        }
+        return true;
     }
 }
