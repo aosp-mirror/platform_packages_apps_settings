@@ -53,7 +53,6 @@ final class BluetoothVisibilityTimeoutFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-                .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(R.string.bluetooth_visibility_timeout)
                 .setSingleChoiceItems(R.array.bluetooth_visibility_timeout_entries,
                         mDiscoverableEnabler.getDiscoverableTimeoutIndex(), this)

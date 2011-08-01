@@ -225,7 +225,7 @@ final class BluetoothEventManager {
                 Log.w(TAG, "received ACTION_DISAPPEARED for an unknown device: " + device);
                 return;
             }
-            if (mDeviceManager.onDeviceDisappeared(cachedDevice)) {
+            if (CachedBluetoothDeviceManager.onDeviceDisappeared(cachedDevice)) {
                 synchronized (mCallbacks) {
                     for (BluetoothCallback callback : mCallbacks) {
                         callback.onDeviceDeleted(cachedDevice);
@@ -283,7 +283,7 @@ final class BluetoothEventManager {
 
                     // if the device is undocked, remove it from the list as well
                     if (!device.getAddress().equals(getDockedDeviceAddress(context))) {
-                        mDeviceManager.onDeviceDisappeared(cachedDevice);
+                        cachedDevice.setVisible(false);
                     }
                 }
                 int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON,
@@ -361,7 +361,7 @@ final class BluetoothEventManager {
                 if (device != null && device.getBondState() == BluetoothDevice.BOND_NONE) {
                     CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(device);
                     if (cachedDevice != null) {
-                        mDeviceManager.onDeviceDisappeared(cachedDevice);
+                        cachedDevice.setVisible(false);
                     }
                 }
             }

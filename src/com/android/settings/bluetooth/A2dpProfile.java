@@ -138,12 +138,8 @@ final class A2dpProfile implements LocalBluetoothProfile {
         return ORDINAL;
     }
 
-    public int getNameResource() {
+    public int getNameResource(BluetoothDevice device) {
         return R.string.bluetooth_profile_a2dp;
-    }
-
-    public int getDisconnectResource(BluetoothDevice device) {
-        return R.string.bluetooth_disconnect_a2dp_profile;
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {

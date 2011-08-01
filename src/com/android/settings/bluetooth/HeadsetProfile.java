@@ -170,12 +170,8 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         return ORDINAL;
     }
 
-    public int getNameResource() {
+    public int getNameResource(BluetoothDevice device) {
         return R.string.bluetooth_profile_headset;
-    }
-
-    public int getDisconnectResource(BluetoothDevice device) {
-        return R.string.bluetooth_disconnect_headset_profile;
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {

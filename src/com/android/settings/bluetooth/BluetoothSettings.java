@@ -142,9 +142,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     @Override
     public void onResume() {
+        // resume BluetoothEnabler before calling super.onResume() so we don't get
+        // any onDeviceAdded() callbacks before setting up view in updateContent()
+        mBluetoothEnabler.resume();
         super.onResume();
 
-        mBluetoothEnabler.resume();
         if (mDiscoverableEnabler != null) {
             mDiscoverableEnabler.resume();
         }
@@ -246,6 +248,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                     mMyDevicePreference = new Preference(getActivity());
                 }
                 mMyDevicePreference.setTitle(mLocalAdapter.getName());
+                if (getResources().getBoolean(com.android.internal.R.bool.config_voice_capable)) {
+                    mMyDevicePreference.setIcon(R.drawable.ic_bt_cellphone);    // for phones
+                } else {
+                    mMyDevicePreference.setIcon(R.drawable.ic_bt_laptop);   // for tablets, etc.
+                }
                 mMyDevicePreference.setPersistent(false);
                 mMyDevicePreference.setEnabled(true);
                 preferenceScreen.addPreference(mMyDevicePreference);
@@ -337,13 +344,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
             if (v.getTag() instanceof CachedBluetoothDevice) {
                 CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
 
-                Preference pref = new Preference(getActivity());
-                pref.setTitle(device.getName());
-                pref.setFragment(DeviceProfilesSettings.class.getName());
-                pref.getExtras().putParcelable(DeviceProfilesSettings.EXTRA_DEVICE,
-                        device.getDevice());
-                ((PreferenceActivity) getActivity()).onPreferenceStartFragment(
-                        BluetoothSettings.this, pref);
+                Bundle args = new Bundle(1);
+                args.putParcelable(DeviceProfilesSettings.EXTRA_DEVICE, device.getDevice());
+
+                ((PreferenceActivity) getActivity()).startPreferencePanel(
+                        DeviceProfilesSettings.class.getName(), args,
+                        R.string.bluetooth_device_advanced_title, null, null, 0);
             } else {
                 Log.w(TAG, "onClick() called for other View: " + v); // TODO remove
             }

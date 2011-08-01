@@ -112,15 +112,11 @@ final class PanProfile implements LocalBluetoothProfile {
         return ORDINAL;
     }
 
-    public int getNameResource() {
-        return R.string.bluetooth_profile_pan;
-    }
-
-    public int getDisconnectResource(BluetoothDevice device) {
+    public int getNameResource(BluetoothDevice device) {
         if (isLocalRoleNap(device)) {
-            return R.string.bluetooth_disconnect_pan_nap_profile;
+            return R.string.bluetooth_profile_pan_nap;
         } else {
-            return R.string.bluetooth_disconnect_pan_user_profile;
+            return R.string.bluetooth_profile_pan;
         }
     }
 

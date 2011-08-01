@@ -54,15 +54,9 @@ interface LocalBluetoothProfile {
 
     /**
      * Returns the string resource ID for the localized name for this profile.
+     * @param device the Bluetooth device (to distinguish between PAN roles)
      */
-    int getNameResource();
-
-    /**
-     * Returns the string resource ID for the disconnect confirmation text
-     * for this profile.
-     * @param device
-     */
-    int getDisconnectResource(BluetoothDevice device);
+    int getNameResource(BluetoothDevice device);
 
     /**
      * Returns the string resource ID for the summary text for this profile

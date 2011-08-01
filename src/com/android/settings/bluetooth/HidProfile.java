@@ -112,12 +112,9 @@ final class HidProfile implements LocalBluetoothProfile {
         return ORDINAL;
     }
 
-    public int getNameResource() {
+    public int getNameResource(BluetoothDevice device) {
+        // TODO: distinguish between keyboard and mouse?
         return R.string.bluetooth_profile_hid;
-    }
-
-    public int getDisconnectResource(BluetoothDevice device) {
-        return R.string.bluetooth_disconnect_hid_profile;
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {

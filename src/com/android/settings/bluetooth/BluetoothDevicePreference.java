@@ -65,7 +65,9 @@ public final class BluetoothDevicePreference extends Preference implements
 
         mCachedDevice = cachedDevice;
 
-        setWidgetLayoutResource(R.layout.preference_bluetooth);
+        if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
+            setWidgetLayoutResource(R.layout.preference_bluetooth);
+        }
 
         mCachedDevice.registerCallback(this);
 
@@ -98,7 +100,17 @@ public final class BluetoothDevicePreference extends Preference implements
          */
         setTitle(mCachedDevice.getName());
 
-        setSummary(getConnectionSummary());
+        int summaryResId = getConnectionSummary();
+        if (summaryResId != 0) {
+            setSummary(summaryResId);
+        } else {
+            setSummary(null);   // empty summary for unpaired devices
+        }
+
+        int iconResId = getBtClassDrawable();
+        if (iconResId != 0) {
+            setIcon(iconResId);
+        }
 
         // Used to gray out the item
         setEnabled(!mCachedDevice.isBusy());
@@ -114,40 +126,16 @@ public final class BluetoothDevicePreference extends Preference implements
             setDependency("bt_checkbox");
         }
 
+        if (mCachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
+            ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
+            if (deviceDetails != null) {
+                deviceDetails.setOnClickListener(this);
+                deviceDetails.setTag(mCachedDevice);
+                deviceDetails.setAlpha(isEnabled() ? 255 : sDimAlpha);
+            }
+        }
+
         super.onBindView(view);
-
-        ImageView btClass = (ImageView) view.findViewById(android.R.id.icon);
-        btClass.setImageResource(getBtClassDrawable());
-        btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
-        btClass.setVisibility(View.VISIBLE);
-        ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
-        if (mOnSettingsClickListener != null) {
-            deviceDetails.setOnClickListener(this);
-            deviceDetails.setTag(mCachedDevice);
-            deviceDetails.setAlpha(isEnabled() ? 255 : sDimAlpha);
-        } else { // Hide the settings icon and divider
-            deviceDetails.setVisibility(View.GONE);
-            View divider = view.findViewById(R.id.divider);
-            if (divider != null) {
-                divider.setVisibility(View.GONE);
-            }
-        }
-
-        LayoutInflater inflater = (LayoutInflater)
-                getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewGroup profilesGroup = (ViewGroup) view.findViewById(R.id.profileIcons);
-        for (LocalBluetoothProfile profile : mCachedDevice.getProfiles()) {
-            int iconResource = profile.getDrawableResource(mCachedDevice.getBtClass());
-            if (iconResource != 0) {
-                Drawable icon = getContext().getResources().getDrawable(iconResource);
-                inflater.inflate(R.layout.profile_icon_small, profilesGroup, true);
-                ImageView imageView =
-                        (ImageView) profilesGroup.getChildAt(profilesGroup.getChildCount() - 1);
-                imageView.setImageDrawable(icon);
-                boolean profileEnabled = mCachedDevice.isConnectedProfile(profile);
-                imageView.setAlpha(profileEnabled ? 255 : sDimAlpha);
-            }
-        }
     }
 
     public void onClick(View v) {
@@ -224,22 +212,52 @@ public final class BluetoothDevicePreference extends Preference implements
     private int getConnectionSummary() {
         final CachedBluetoothDevice cachedDevice = mCachedDevice;
 
-        // if any profiles are connected or busy, return that status
+        boolean profileConnected = false;       // at least one profile is connected
+        boolean a2dpNotConnected = false;       // A2DP is preferred but not connected
+        boolean headsetNotConnected = false;    // Headset is preferred but not connected
+
         for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
             int connectionStatus = cachedDevice.getProfileConnectionState(profile);
 
-            if (connectionStatus != BluetoothProfile.STATE_DISCONNECTED) {
-                return Utils.getConnectionStateSummary(connectionStatus);
+            switch (connectionStatus) {
+                case BluetoothProfile.STATE_CONNECTING:
+                case BluetoothProfile.STATE_DISCONNECTING:
+                    return Utils.getConnectionStateSummary(connectionStatus);
+
+                case BluetoothProfile.STATE_CONNECTED:
+                    profileConnected = true;
+                    break;
+
+                case BluetoothProfile.STATE_DISCONNECTED:
+                    if (profile.isProfileReady() && profile.isPreferred(cachedDevice.getDevice())) {
+                        if (profile instanceof A2dpProfile) {
+                            a2dpNotConnected = true;
+                        } else if (profile instanceof HeadsetProfile) {
+                            headsetNotConnected = true;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        if (profileConnected) {
+            if (a2dpNotConnected && headsetNotConnected) {
+                return R.string.bluetooth_connected_no_headset_no_a2dp;
+            } else if (a2dpNotConnected) {
+                return R.string.bluetooth_connected_no_a2dp;
+            } else if (headsetNotConnected) {
+                return R.string.bluetooth_connected_no_headset;
+            } else {
+                return R.string.bluetooth_connected;
             }
         }
 
         switch (cachedDevice.getBondState()) {
-            case BluetoothDevice.BOND_BONDED:
-                return R.string.bluetooth_paired;
             case BluetoothDevice.BOND_BONDING:
                 return R.string.bluetooth_pairing;
+
+            case BluetoothDevice.BOND_BONDED:
             case BluetoothDevice.BOND_NONE:
-                return R.string.bluetooth_not_connected;
             default:
                 return 0;
         }
