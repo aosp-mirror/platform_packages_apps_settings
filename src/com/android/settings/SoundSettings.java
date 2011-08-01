@@ -23,16 +23,25 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.media.audiofx.AudioEffect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.provider.MediaStore.Images.Media;
 import android.provider.Settings.SettingNotFoundException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -41,7 +50,7 @@ import java.util.List;
 
 public class SoundSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "SoundAndDisplaysSettings";
+    private static final String TAG = "SoundSettings";
 
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
@@ -60,7 +69,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls";
-    private static final String KEY_CATEGORY_NOTIFICATION = "category_notification";
 
     private static final String VALUE_VIBRATE_NEVER = "never";
     private static final String VALUE_VIBRATE_ALWAYS = "always";
@@ -71,6 +79,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
             KEY_EMERGENCY_TONE
     };
+
+    private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
+    private static final int MSG_UPDATE_NOTIFICATION_SUMMARY = 2;
 
     private CheckBoxPreference mSilent;
 
@@ -88,6 +99,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mNotificationPulse;
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
+    private Preference mRingtonePreference;
+    private Preference mNotificationPreference;
+
+    private Runnable mRingtoneLookupRunnable;
 
     private AudioManager mAudioManager;
 
@@ -96,6 +111,19 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
                 updateState(false);
+            }
+        }
+    };
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+            case MSG_UPDATE_RINGTONE_SUMMARY:
+                mRingtonePreference.setSummary((CharSequence) msg.obj);
+                break;
+            case MSG_UPDATE_NOTIFICATION_SUMMARY:
+                mNotificationPreference.setSummary((CharSequence) msg.obj);
+                break;
             }
         }
     };
@@ -133,15 +161,18 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mSoundEffects = (CheckBoxPreference) findPreference(KEY_SOUND_EFFECTS);
         mSoundEffects.setPersistent(false);
         mSoundEffects.setChecked(Settings.System.getInt(resolver,
-                Settings.System.SOUND_EFFECTS_ENABLED, 0) != 0);
+                Settings.System.SOUND_EFFECTS_ENABLED, 1) != 0);
         mHapticFeedback = (CheckBoxPreference) findPreference(KEY_HAPTIC_FEEDBACK);
         mHapticFeedback.setPersistent(false);
         mHapticFeedback.setChecked(Settings.System.getInt(resolver,
-                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0);
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0);
         mLockSounds = (CheckBoxPreference) findPreference(KEY_LOCK_SOUNDS);
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
+
+        mRingtonePreference = findPreference(KEY_RINGTONE);
+        mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
 
         if (!((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
             getPreferenceScreen().removePreference(mVibrate);
@@ -193,6 +224,19 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 }
             }
         }
+
+        mRingtoneLookupRunnable = new Runnable() {
+            public void run() {
+                if (mRingtonePreference != null) {
+                    updateRingtoneName(RingtoneManager.TYPE_RINGTONE, mRingtonePreference,
+                            MSG_UPDATE_RINGTONE_SUMMARY);
+                }
+                if (mNotificationPreference != null) {
+                    updateRingtoneName(RingtoneManager.TYPE_NOTIFICATION, mNotificationPreference,
+                            MSG_UPDATE_NOTIFICATION_SUMMARY);
+                }
+            }
+        };
     }
 
     @Override
@@ -200,6 +244,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         updateState(true);
+        lookupRingtoneNames();
 
         IntentFilter filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
         getActivity().registerReceiver(mReceiver, filter);
@@ -306,13 +351,34 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             mVibrate.setValue(phoneVibrateSetting);
         }
         mVibrate.setSummary(mVibrate.getEntry());
+    }
 
-        int silentModeStreams = Settings.System.getInt(getContentResolver(),
-                Settings.System.MODE_RINGER_STREAMS_AFFECTED, 0);
-        boolean isAlarmInclSilentMode = (silentModeStreams & (1 << AudioManager.STREAM_ALARM)) != 0;
-        mSilent.setSummary(isAlarmInclSilentMode ?
-                R.string.silent_mode_incl_alarm_summary :
-                R.string.silent_mode_summary);
+    private void updateRingtoneName(int type, Preference preference, int msg) {
+        if (preference == null) return;
+        Context context = getActivity();
+        if (context == null) return;
+        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(context, type);
+        CharSequence summary = context.getString(com.android.internal.R.string.ringtone_unknown);
+        // Is it a silent ringtone?
+        if (ringtoneUri == null) {
+            summary = context.getString(com.android.internal.R.string.ringtone_silent);
+        } else {
+            // Fetch the ringtone title from the media provider
+            try {
+                Cursor cursor = context.getContentResolver().query(ringtoneUri,
+                        new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
+                if (cursor.moveToFirst()) {
+                    summary = cursor.getString(0);
+                }
+            } catch (SQLiteException sqle) {
+                // Unknown title for the ringtone
+            }
+        }
+        mHandler.sendMessage(mHandler.obtainMessage(msg, summary));
+    }
+
+    private void lookupRingtoneNames() {
+        new Thread(mRingtoneLookupRunnable).start();
     }
 
     @Override

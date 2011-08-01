@@ -1399,38 +1399,24 @@
     <string name="sound_settings">Sound</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="silent_mode_title">Silent mode</string>
-    <!-- Sound settings screen, setting option summary text when going into silent mode.  Media and alarms sounds WILL NOT be silenced in silent mode. -->
-    <string name="silent_mode_summary">Silence all sounds except media &amp; alarms</string>
-    <!-- Sound settings screen, setting option summary text when going into silent mode.  Media WILL NOT be silenced in silent mode, but alarms WILL be silenced. -->
-    <string name="silent_mode_incl_alarm_summary">All sounds except media are silenced</string>
     <!-- Sound settings screen, setting option name to pick ringtone (a list dialog comes up)-->
-    <string name="ringtone_title">Incoming call ringtone</string>
+    <string name="ringtone_title">Phone ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="ringtone_summary">""</string>
     <!-- Sound settings screen, volume title -->
-    <string name="all_volume_title">Volume</string>
+    <string name="all_volume_title">Volumes</string>
     <!-- Sound settings screen, music effects title [CHAR LIMIT=30]-->
     <string name="musicfx_title">Music Effects</string>
     <!-- Sound settings screen, setting option name -->
     <string name="ring_volume_title">Ringer volume</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="ring_volume_summary">""</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="vibrate_in_silent_title">Vibrate when silent</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="vibrate_in_silent_summary">Allow vibration feedback in silent mode</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="vibrate_title">Vibrate</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="vibrate_summary">Vibration feedback for calls and notifications</string>
     <!-- Sound settings screen, setting option name -->
-    <string name="notification_sound_title">Notification ringtone</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="notification_sound_summary">""</string>
+    <string name="notification_sound_title">Default notification</string>
     <!-- Sound settings screen, notification light repeat pulsing title -->
     <string name="notification_pulse_title">Pulse notification light</string>
-    <!-- Sound settings screen, notification light repeat pulsing summary -->
-    <string name="notification_pulse_summary">Pulse trackball light repeatedly for new notifications</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the incoming call volume -->
     <string name="incoming_call_volume_title">Ringtone</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the notification volume -->
@@ -1449,33 +1435,23 @@
     <!-- Sound settings screen, dock settings summary-->
     <string name="dock_settings_summary">Audio settings for the attached dock</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="dtmf_tone_enable_title">Audible touch tones</string>
-    <!-- Sound settings screen, setting option summary text when check box is selected -->
-    <string name="dtmf_tone_enable_summary_on">Play tones when using dial pad</string>
-    <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="dtmf_tone_enable_summary_off">Play tones when using dial pad</string>
+    <string name="dtmf_tone_enable_title">Dial pad touch tones</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="sound_effects_enable_title">Audible selection</string>
-    <!-- Sound settings screen, setting option summary text when check box is selected -->
-    <string name="sound_effects_enable_summary_on">Play sound when making screen selection</string>
-    <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="sound_effects_enable_summary_off">Play sound when making screen selection</string>
+    <string name="sound_effects_enable_title">Touch sounds</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="lock_sounds_enable_title">Screen lock sounds</string>
-    <!-- Sound settings screen, setting option summary text when check box is selected -->
-    <string name="lock_sounds_enable_summary_on">Play sounds when locking and unlocking the screen</string>
-    <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="lock_sounds_enable_summary_off">Play sounds when locking and unlocking the screen</string>
+    <string name="lock_sounds_enable_title">Screen lock sound</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="haptic_feedback_enable_title">Haptic feedback</string>
-    <!-- Sound settings screen, setting option summary text when check box is selected -->
-    <string name="haptic_feedback_enable_summary_on">Vibrate when pressing soft keys and on certain UI interactions</string>
-    <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="haptic_feedback_enable_summary_off">Vibrate when pressing soft keys and on certain UI interactions</string>
+    <string name="haptic_feedback_enable_title">Vibrate on touch</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
     <string name="audio_record_proc_title">Noise cancellation</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="audio_record_proc_summary">Suppress background noise when speaking or recording.</string>
+    <!-- Volume description for media volume -->
+    <string name="volume_media_description">Music, video, games &amp; other media</string>
+    <!-- Volume description for ringtone and notification volume -->
+    <string name="volume_ring_description">Ringtone &amp; notifications</string>
+    <!-- Volume description for notification volume -->
+    <string name="volume_notification_description">Notifications</string>
+    <!-- Volume description for alarm volume -->
+    <string name="volume_alarm_description">Alarms</string>
 
     <!-- Dock settings title, top level -->
     <string name="dock_settings">Dock</string>
@@ -3126,9 +3102,9 @@ found in the list of installed applications.</string>
     <string name="untitled_apn">Untitled</string>
 
     <string name="sound_category_sound_title">General</string>
-    <string name="sound_category_calls_title">Incoming calls</string>
+    <string name="sound_category_calls_and_notification_title">Ringtone &amp; notifications</string>
     <string name="sound_category_notification_title">Notifications</string>
-    <string name="sound_category_feedback_title">Feedback</string>
+    <string name="sound_category_feedback_title">System</string>
 
     <!-- Wifi Setup For Setup Wizard with XL screen -->
     <!-- Title shown in Wifi Setup Wizard with XL screen -->
