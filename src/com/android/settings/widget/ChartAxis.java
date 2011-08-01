@@ -25,14 +25,26 @@ import android.text.SpannableStringBuilder;
  */
 public interface ChartAxis {
 
+    /** Set range of raw values this axis should cover. */
     public void setBounds(long min, long max);
+    /** Set range of screen points this axis should cover. */
     public void setSize(float size);
 
+    /** Convert raw value into screen point. */
     public float convertToPoint(long value);
+    /** Convert screen point into raw value. */
     public long convertToValue(float point);
 
+    /** Build label that describes given raw value. */
     public void buildLabel(Resources res, SpannableStringBuilder builder, long value);
 
+    /** Return list of tick points for drawing a grid. */
     public float[] getTickPoints();
+
+    /**
+     * Test if given raw value should cause the axis to grow or shrink;
+     * returning positive value to grow and negative to shrink.
+     */
+    public int shouldAdjustAxis(long value);
 
 }

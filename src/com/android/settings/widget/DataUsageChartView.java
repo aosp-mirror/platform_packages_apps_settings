@@ -16,12 +16,12 @@
 
 package com.android.settings.widget;
 
-import static android.text.format.DateUtils.HOUR_IN_MILLIS;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -43,7 +43,8 @@ public class DataUsageChartView extends ChartView {
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
     private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
-    // TODO: enforce that sweeps cant cross each other
+    private static final int MSG_UPDATE_AXIS = 100;
+    private static final long DELAY_MILLIS = 250;
 
     private ChartGridView mGrid;
     private ChartNetworkSeriesView mSeries;
@@ -55,6 +56,11 @@ public class DataUsageChartView extends ChartView {
     private ChartSweepView mSweepRight;
     private ChartSweepView mSweepWarning;
     private ChartSweepView mSweepLimit;
+
+    private Handler mHandler;
+
+    /** Current maximum value of {@link #mVert}. */
+    private long mVertMax;
 
     public interface DataUsageChartListener {
         public void onInspectRangeChanged();
@@ -75,6 +81,18 @@ public class DataUsageChartView extends ChartView {
     public DataUsageChartView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(new TimeAxis(), new InvertedChartAxis(new DataAxis()));
+
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                final ChartSweepView sweep = (ChartSweepView) msg.obj;
+                updateVertAxisBounds(sweep);
+                updateEstimateVisible();
+
+                // we keep dispatching repeating updates until sweep is dropped
+                sendUpdateAxisDelayed(sweep, true);
+            }
+        };
     }
 
     @Override
@@ -92,19 +110,15 @@ public class DataUsageChartView extends ChartView {
         mSweepWarning = (ChartSweepView) findViewById(R.id.sweep_warning);
 
         // prevent sweeps from crossing each other
-        mSweepLeft.setValidRangeDynamic(null, mSweepRight, HOUR_IN_MILLIS);
-        mSweepRight.setValidRangeDynamic(mSweepLeft, null, HOUR_IN_MILLIS);
+        mSweepLeft.setValidRangeDynamic(null, mSweepRight);
+        mSweepRight.setValidRangeDynamic(mSweepLeft, null);
+        mSweepWarning.setValidRangeDynamic(null, mSweepLimit);
+        mSweepLimit.setValidRangeDynamic(mSweepWarning, null);
 
-        // TODO: assign these ranges as user changes data axis
-        mSweepWarning.setValidRange(0L, 5 * GB_IN_BYTES);
-        mSweepWarning.setValidRangeDynamic(null, mSweepLimit, MB_IN_BYTES);
-        mSweepLimit.setValidRange(0L, 5 * GB_IN_BYTES);
-        mSweepLimit.setValidRangeDynamic(mSweepWarning, null, MB_IN_BYTES);
-
-        mSweepLeft.addOnSweepListener(mSweepListener);
-        mSweepRight.addOnSweepListener(mSweepListener);
-        mSweepWarning.addOnSweepListener(mWarningListener);
-        mSweepLimit.addOnSweepListener(mLimitListener);
+        mSweepLeft.addOnSweepListener(mHorizListener);
+        mSweepRight.addOnSweepListener(mHorizListener);
+        mSweepWarning.addOnSweepListener(mVertListener);
+        mSweepLimit.addOnSweepListener(mVertListener);
 
         // tell everyone about our axis
         mGrid.init(mHoriz, mVert);
@@ -125,6 +139,8 @@ public class DataUsageChartView extends ChartView {
     public void bindNetworkStats(NetworkStatsHistory stats) {
         mSeries.bindNetworkStats(stats);
         mHistory = stats;
+        updateVertAxisBounds(null);
+        updateEstimateVisible();
         updatePrimaryRange();
         requestLayout();
     }
@@ -132,6 +148,11 @@ public class DataUsageChartView extends ChartView {
     public void bindDetailNetworkStats(NetworkStatsHistory stats) {
         mDetailSeries.bindNetworkStats(stats);
         mDetailSeries.setVisibility(stats != null ? View.VISIBLE : View.GONE);
+        if (mHistory != null) {
+            mDetailSeries.setEndTime(mHistory.getEnd());
+        }
+        updateVertAxisBounds(null);
+        updateEstimateVisible();
         updatePrimaryRange();
         requestLayout();
     }
@@ -139,17 +160,20 @@ public class DataUsageChartView extends ChartView {
     public void bindNetworkPolicy(NetworkPolicy policy) {
         if (policy == null) {
             mSweepLimit.setVisibility(View.INVISIBLE);
+            mSweepLimit.setValue(-1);
             mSweepWarning.setVisibility(View.INVISIBLE);
+            mSweepWarning.setValue(-1);
             return;
         }
 
         if (policy.limitBytes != NetworkPolicy.LIMIT_DISABLED) {
             mSweepLimit.setVisibility(View.VISIBLE);
-            mSweepLimit.setValue(policy.limitBytes);
             mSweepLimit.setEnabled(true);
+            mSweepLimit.setValue(policy.limitBytes);
         } else {
             mSweepLimit.setVisibility(View.VISIBLE);
             mSweepLimit.setEnabled(false);
+            mSweepLimit.setValue(-1);
         }
 
         if (policy.warningBytes != NetworkPolicy.WARNING_DISABLED) {
@@ -157,12 +181,81 @@ public class DataUsageChartView extends ChartView {
             mSweepWarning.setValue(policy.warningBytes);
         } else {
             mSweepWarning.setVisibility(View.INVISIBLE);
+            mSweepWarning.setValue(-1);
         }
 
+        updateVertAxisBounds(null);
         requestLayout();
     }
 
-    private OnSweepListener mSweepListener = new OnSweepListener() {
+    /**
+     * Update {@link #mVert} to both show data from {@link NetworkStatsHistory}
+     * and controls from {@link NetworkPolicy}.
+     */
+    private void updateVertAxisBounds(ChartSweepView activeSweep) {
+        final long max = mVertMax;
+        final long newMax;
+        if (activeSweep != null) {
+            final int adjustAxis = activeSweep.shouldAdjustAxis();
+            if (adjustAxis > 0) {
+                // hovering around upper edge, grow axis
+                newMax = max * 11 / 10;
+            } else if (adjustAxis < 0) {
+                // hovering around lower edge, shrink axis
+                newMax = max * 9 / 10;
+            } else {
+                newMax = max;
+            }
+
+        } else {
+            // try showing all known data and policy
+            final long maxSweep = Math.max(mSweepWarning.getValue(), mSweepLimit.getValue());
+            final long maxVisible = Math.max(mSeries.getMaxVisible(), maxSweep) * 12 / 10;
+            newMax = Math.max(maxVisible, 2 * GB_IN_BYTES);
+        }
+
+        // only invalidate when vertMax actually changed
+        if (newMax != mVertMax) {
+            mVertMax = newMax;
+
+            mVert.setBounds(0L, newMax);
+            mSweepWarning.setValidRange(0L, newMax);
+            mSweepLimit.setValidRange(0L, newMax);
+
+            mSeries.generatePath();
+            mDetailSeries.generatePath();
+
+            mGrid.invalidate();
+            mSeries.invalidate();
+            mDetailSeries.invalidate();
+
+            // since we just changed axis, make sweep recalculate its value
+            if (activeSweep != null) {
+                activeSweep.updateValueFromPosition();
+            }
+        }
+    }
+
+    /**
+     * Control {@link ChartNetworkSeriesView#setEstimateVisible(boolean)} based
+     * on how close estimate comes to {@link #mSweepWarning}.
+     */
+    private void updateEstimateVisible() {
+        final long maxEstimate = mSeries.getMaxEstimate();
+
+        // show estimate when near warning/limit
+        long interestLine = Long.MAX_VALUE;
+        if (mSweepWarning.isEnabled()) {
+            interestLine = mSweepWarning.getValue();
+        } else if (mSweepLimit.isEnabled()) {
+            interestLine = mSweepLimit.getValue();
+        }
+
+        final boolean estimateVisible = (maxEstimate >= interestLine * 7 / 10);
+        mSeries.setEstimateVisible(estimateVisible);
+    }
+
+    private OnSweepListener mHorizListener = new OnSweepListener() {
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
             updatePrimaryRange();
 
@@ -173,18 +266,31 @@ public class DataUsageChartView extends ChartView {
         }
     };
 
-    private OnSweepListener mWarningListener = new OnSweepListener() {
-        public void onSweep(ChartSweepView sweep, boolean sweepDone) {
-            if (sweepDone && mListener != null) {
-                mListener.onWarningChanged();
-            }
+    private void sendUpdateAxisDelayed(ChartSweepView sweep, boolean force) {
+        if (force || !mHandler.hasMessages(MSG_UPDATE_AXIS, sweep)) {
+            mHandler.sendMessageDelayed(
+                    mHandler.obtainMessage(MSG_UPDATE_AXIS, sweep), DELAY_MILLIS);
         }
-    };
+    }
 
-    private OnSweepListener mLimitListener = new OnSweepListener() {
+    private void clearUpdateAxisDelayed(ChartSweepView sweep) {
+        mHandler.removeMessages(MSG_UPDATE_AXIS, sweep);
+    }
+
+    private OnSweepListener mVertListener = new OnSweepListener() {
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
-            if (sweepDone && mListener != null) {
-                mListener.onLimitChanged();
+            if (sweepDone) {
+                clearUpdateAxisDelayed(sweep);
+                updateEstimateVisible();
+
+                if (sweep == mSweepWarning && mListener != null) {
+                    mListener.onWarningChanged();
+                } else if (sweep == mSweepLimit && mListener != null) {
+                    mListener.onLimitChanged();
+                }
+            } else {
+                // while moving, kick off delayed grow/shrink axis updates
+                sendUpdateAxisDelayed(sweep, false);
             }
         }
     };
@@ -252,11 +358,14 @@ public class DataUsageChartView extends ChartView {
 
         mSweepLeft.setValue(sweepMin);
         mSweepRight.setValue(sweepMax);
-        updatePrimaryRange();
 
         requestLayout();
         mSeries.generatePath();
         mSeries.invalidate();
+
+        updateVertAxisBounds(null);
+        updateEstimateVisible();
+        updatePrimaryRange();
     }
 
     private void updatePrimaryRange() {
@@ -321,18 +430,18 @@ public class DataUsageChartView extends ChartView {
             }
             return tickPoints;
         }
+
+        /** {@inheritDoc} */
+        public int shouldAdjustAxis(long value) {
+            // time axis never adjusts
+            return 0;
+        }
     }
 
     public static class DataAxis implements ChartAxis {
         private long mMin;
         private long mMax;
         private float mSize;
-
-        public DataAxis() {
-            // TODO: adapt ranges to show when history >5GB, and handle 4G
-            // interfaces with higher limits.
-            setBounds(0, 5 * GB_IN_BYTES);
-        }
 
         /** {@inheritDoc} */
         public void setBounds(long min, long max) {
@@ -347,19 +456,19 @@ public class DataUsageChartView extends ChartView {
 
         /** {@inheritDoc} */
         public float convertToPoint(long value) {
-            // TODO: this assumes range of [0,5]GB
+            // derived polynomial fit to make lower values more visible
+            final double normalized = ((double) value - mMin) / (mMax - mMin);
             final double fraction = Math.pow(
-                    10, 0.36884343106175160321 * Math.log10(value) + -3.62828151137812282556);
-            return (float) fraction * mSize;
+                    10, 0.36884343106175121463 * Math.log10(normalized) + -0.04328199452018252624);
+            return (float) (fraction * mSize);
         }
 
         /** {@inheritDoc} */
         public long convertToValue(float point) {
-            final double y = point / mSize;
-            // TODO: this assumes range of [0,5]GB
-            final double fraction = 6.869341163271789302 * Math.pow(10, 9)
-                    * Math.pow(y, 2.71117746931646030774);
-            return (long) fraction;
+            final double normalized = point / mSize;
+            final double fraction = 1.3102228476089056629
+                    * Math.pow(normalized, 2.7111774693164631640);
+            return (long) (mMin + (fraction * (mMax - mMin)));
         }
 
         private static final Object sSpanSize = new Object();
@@ -393,16 +502,30 @@ public class DataUsageChartView extends ChartView {
 
         /** {@inheritDoc} */
         public float[] getTickPoints() {
-            final float[] tickPoints = new float[16];
+            final long range = mMax - mMin;
+            final long tickJump = 256 * MB_IN_BYTES;
 
-            final long jump = ((mMax - mMin) / tickPoints.length);
+            final int tickCount = (int) (range / tickJump);
+            final float[] tickPoints = new float[tickCount];
             long value = mMin;
             for (int i = 0; i < tickPoints.length; i++) {
                 tickPoints[i] = convertToPoint(value);
-                value += jump;
+                value += tickJump;
             }
 
             return tickPoints;
+        }
+
+        /** {@inheritDoc} */
+        public int shouldAdjustAxis(long value) {
+            final float point = convertToPoint(value);
+            if (point < mSize * 0.1) {
+                return -1;
+            } else if (point > mSize * 0.85) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
     }
 

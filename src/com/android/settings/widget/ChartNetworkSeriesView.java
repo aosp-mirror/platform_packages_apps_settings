@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -41,7 +42,7 @@ import com.google.common.base.Preconditions;
  */
 public class ChartNetworkSeriesView extends View {
     private static final String TAG = "ChartNetworkSeriesView";
-    private static final boolean LOGD = true;
+    private static final boolean LOGD = false;
 
     private ChartAxis mHoriz;
     private ChartAxis mVert;
@@ -59,6 +60,14 @@ public class ChartNetworkSeriesView extends View {
 
     private long mPrimaryLeft;
     private long mPrimaryRight;
+
+    /** Series will be extended to reach this end time. */
+    private long mEndTime = Long.MIN_VALUE;
+
+    private boolean mEstimateVisible = false;
+
+    private long mMax;
+    private long mMaxEstimate;
 
     public ChartNetworkSeriesView(Context context) {
         this(context, null, 0);
@@ -116,6 +125,7 @@ public class ChartNetworkSeriesView extends View {
         mPaintEstimate.setColor(fillSecondary);
         mPaintEstimate.setStyle(Style.STROKE);
         mPaintEstimate.setAntiAlias(true);
+        mPaintEstimate.setPathEffect(new DashPathEffect(new float[] { 10, 10 }, 1));
     }
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
@@ -149,6 +159,7 @@ public class ChartNetworkSeriesView extends View {
     public void generatePath() {
         if (LOGD) Log.d(TAG, "generatePath()");
 
+        mMax = 0;
         mPathStroke.reset();
         mPathFill.reset();
         mPathEstimate.reset();
@@ -174,8 +185,8 @@ public class ChartNetworkSeriesView extends View {
         for (int i = 0; i < mStats.size(); i++) {
             entry = mStats.getValues(i, entry);
 
-            lastTime = entry.bucketStart;
-            final float x = mHoriz.convertToPoint(entry.bucketStart);
+            lastTime = entry.bucketStart + entry.bucketDuration;
+            final float x = mHoriz.convertToPoint(lastTime);
             final float y = mVert.convertToPoint(totalData);
 
             // skip until we find first stats on screen
@@ -199,6 +210,16 @@ public class ChartNetworkSeriesView extends View {
             lastY = y;
         }
 
+        // when data falls short, extend to requested end time
+        if (lastTime < mEndTime) {
+            lastX = mHoriz.convertToPoint(mEndTime);
+
+            if (started) {
+                mPathStroke.lineTo(lastX, lastY);
+                mPathFill.lineTo(lastX, lastY);
+            }
+        }
+
         if (LOGD) {
             final RectF bounds = new RectF();
             mPathFill.computeBounds(bounds, true);
@@ -209,6 +230,8 @@ public class ChartNetworkSeriesView extends View {
         // drop to bottom of graph from current location
         mPathFill.lineTo(lastX, height);
         mPathFill.lineTo(firstX, height);
+
+        mMax = totalData;
 
         // build estimated data
         mPathEstimate.moveTo(lastX, lastY);
@@ -234,10 +257,29 @@ public class ChartNetworkSeriesView extends View {
             totalData += (longWindow * 7 + shortWindow * 3) / 10;
 
             lastX = mHoriz.convertToPoint(lastTime + futureTime);
-            final float y = mVert.convertToPoint(totalData);
+            lastY = mVert.convertToPoint(totalData);
 
-            mPathEstimate.lineTo(lastX, y);
+            mPathEstimate.lineTo(lastX, lastY);
         }
+
+        mMaxEstimate = totalData;
+    }
+
+    public void setEndTime(long endTime) {
+        mEndTime = endTime;
+    }
+
+    public void setEstimateVisible(boolean estimateVisible) {
+        mEstimateVisible = estimateVisible;
+        invalidate();
+    }
+
+    public long getMaxEstimate() {
+        return mMaxEstimate;
+    }
+
+    public long getMaxVisible() {
+        return mEstimateVisible ? mMaxEstimate : mMax;
     }
 
     @Override
@@ -247,10 +289,12 @@ public class ChartNetworkSeriesView extends View {
         final float primaryLeftPoint = mHoriz.convertToPoint(mPrimaryLeft);
         final float primaryRightPoint = mHoriz.convertToPoint(mPrimaryRight);
 
-        save = canvas.save();
-        canvas.clipRect(0, 0, getWidth(), getHeight());
-        canvas.drawPath(mPathEstimate, mPaintEstimate);
-        canvas.restoreToCount(save);
+        if (mEstimateVisible) {
+            save = canvas.save();
+            canvas.clipRect(0, 0, getWidth(), getHeight());
+            canvas.drawPath(mPathEstimate, mPaintEstimate);
+            canvas.restoreToCount(save);
+        }
 
         save = canvas.save();
         canvas.clipRect(0, 0, primaryLeftPoint, getHeight());

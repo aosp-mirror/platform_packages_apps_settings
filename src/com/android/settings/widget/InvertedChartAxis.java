@@ -64,4 +64,9 @@ public class InvertedChartAxis implements ChartAxis {
         }
         return points;
     }
+
+    /** {@inheritDoc} */
+    public int shouldAdjustAxis(long value) {
+        return mWrapped.shouldAdjustAxis(value);
+    }
 }

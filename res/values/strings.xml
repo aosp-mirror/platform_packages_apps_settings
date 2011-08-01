@@ -230,6 +230,8 @@
     <string name="bluetooth_disconnect_title">Disconnect?</string>
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> will be disconnected."</string>
     <!-- Bluetooth settings.  Message when connected to a device -->
     <string name="bluetooth_connected">Connected</string>
     <!-- Bluetooth settings.  Message when a device is disconnected -->
@@ -1788,8 +1790,10 @@
     <string name="usb_mtp_summary">Lets you transfer media files on Windows, or using Android File Transfer on Mac (see www.android.com/filetransfer)</string>
     <!-- Storage setting.  Title for PTP checkbox [CHAR LIMIT=30]-->
     <string name="usb_ptp_title">Camera (PTP)</string>
-    <!-- Storage setting.  Summary for PTP checkbox [CHAR LIMIT=NONE]-->
+    <!-- Storage setting.  Label for installer CD [CHAR LIMIT=30]-->
     <string name="usb_ptp_summary">Lets you transfer photos using camera software, and transfer any files on computers that don\'t support MTP</string>
+    <!-- Storage setting.  Summary for PTP checkbox [CHAR LIMIT=NONE]-->
+    <string name="usb_label_installer_cd">"Install file-transfer tools"</string>
 
     <!-- Phone info screen, section titles: -->
     <string name="battery_status_title">Battery status</string>
@@ -3409,6 +3413,8 @@ found in the list of installed applications.</string>
     <string name="data_usage_change_cycle">Change cycle\u2026</string>
     <!-- Body of dialog prompting user to change numerical day of month that data usage cycle should reset. [CHAR LIMIT=64] -->
     <string name="data_usage_pick_cycle_day">Day of month to reset data usage cycle:</string>
+    <!-- Label shown when no applications used data during selected time period. [CHAR LIMIT=48] -->
+    <string name="data_usage_empty">No applications used data during this period.</string>
 
     <!-- Checkbox label that will disable mobile network data connection when user-defined limit is reached. [CHAR LIMIT=32] -->
     <string name="data_usage_disable_mobile_limit">Disable mobile data at limit</string>

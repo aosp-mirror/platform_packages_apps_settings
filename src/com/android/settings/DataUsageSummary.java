@@ -182,6 +182,7 @@ public class DataUsageSummary extends Fragment {
 
     private DataUsageChartView mChart;
     private TextView mUsageSummary;
+    private TextView mEmpty;
 
     private View mAppDetail;
     private TextView mAppTitle;
@@ -305,6 +306,7 @@ public class DataUsageSummary extends Fragment {
         }
 
         mUsageSummary = (TextView) mHeader.findViewById(R.id.usage_summary);
+        mEmpty = (TextView) mHeader.findViewById(android.R.id.empty);
 
         // only assign layout transitions once first layout is finished
         mListView.getViewTreeObserver().addOnGlobalLayoutListener(mFirstLayoutListener);
@@ -986,7 +988,7 @@ public class DataUsageSummary extends Fragment {
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
         final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
-        final String rangePhrase = formatDateRangeUtc(context, start, end);
+        final String rangePhrase = formatDateRange(context, start, end, null);
 
         mUsageSummary.setText(
                 getString(R.string.data_usage_total_during_range, totalPhrase, rangePhrase));
@@ -1002,11 +1004,18 @@ public class DataUsageSummary extends Fragment {
         /** {@inheritDoc} */
         public void onLoadFinished(Loader<NetworkStats> loader, NetworkStats data) {
             mAdapter.bindStats(data);
+            updateEmptyVisible();
         }
 
         /** {@inheritDoc} */
         public void onLoaderReset(Loader<NetworkStats> loader) {
             mAdapter.bindStats(null);
+            updateEmptyVisible();
+        }
+
+        private void updateEmptyVisible() {
+            final boolean isEmpty = mAdapter.isEmpty() && !isAppDetailMode();
+            mEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         }
     };
 
@@ -1063,7 +1072,7 @@ public class DataUsageSummary extends Fragment {
         }
 
         public CycleItem(Context context, long start, long end) {
-            this.label = formatDateRangeUtc(context, start, end);
+            this.label = formatDateRange(context, start, end, Time.TIMEZONE_UTC);
             this.start = start;
             this.end = end;
         }
@@ -1078,7 +1087,7 @@ public class DataUsageSummary extends Fragment {
     private static final java.util.Formatter sFormatter = new java.util.Formatter(
             sBuilder, Locale.getDefault());
 
-    private static String formatDateRangeUtc(Context context, long start, long end) {
+    private static String formatDateRange(Context context, long start, long end, String timezone) {
         synchronized (sBuilder) {
             int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
             if (Time.getJulianDay(start, 0) == Time.getJulianDay(end, 0)) {
@@ -1087,8 +1096,8 @@ public class DataUsageSummary extends Fragment {
             }
 
             sBuilder.setLength(0);
-            return DateUtils.formatDateRange(
-                    context, sFormatter, start, end, flags, Time.TIMEZONE_UTC).toString();
+            return DateUtils
+                    .formatDateRange(context, sFormatter, start, end, flags, timezone).toString();
         }
     }
 
@@ -1197,7 +1206,7 @@ public class DataUsageSummary extends Fragment {
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return mItems.get(position).uid;
         }
 
         @Override

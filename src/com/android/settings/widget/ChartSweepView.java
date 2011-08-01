@@ -29,6 +29,7 @@ import android.text.Layout.Alignment;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.MathUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,6 +49,7 @@ public class ChartSweepView extends FrameLayout {
     private Point mSweepOffset = new Point();
 
     private Rect mMargins = new Rect();
+    private float mNeighborMargin;
 
     private int mFollowAxis;
 
@@ -65,7 +67,6 @@ public class ChartSweepView extends FrameLayout {
     private long mValidBefore;
     private ChartSweepView mValidAfterDynamic;
     private ChartSweepView mValidBeforeDynamic;
-    private long mValidBufferArea;
 
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
@@ -93,6 +94,7 @@ public class ChartSweepView extends FrameLayout {
 
         setSweepDrawable(a.getDrawable(R.styleable.ChartSweepView_sweepDrawable));
         setFollowAxis(a.getInt(R.styleable.ChartSweepView_followAxis, -1));
+        setNeighborMargin(a.getDimensionPixelSize(R.styleable.ChartSweepView_neighborMargin, 0));
 
         setLabelSize(a.getDimensionPixelSize(R.styleable.ChartSweepView_labelSize, 0));
         setLabelTemplate(a.getResourceId(R.styleable.ChartSweepView_labelTemplate, 0));
@@ -271,16 +273,18 @@ public class ChartSweepView extends FrameLayout {
         mValidBefore = validBefore;
     }
 
+    public void setNeighborMargin(float neighborMargin) {
+        mNeighborMargin = neighborMargin;
+    }
+
     /**
      * Set valid range this sweep can move within, defined by the given
      * {@link ChartSweepView}. The most restrictive combination of all valid
      * ranges is used.
      */
-    public void setValidRangeDynamic(
-            ChartSweepView validAfter, ChartSweepView validBefore, long bufferArea) {
+    public void setValidRangeDynamic(ChartSweepView validAfter, ChartSweepView validBefore) {
         mValidAfterDynamic = validAfter;
         mValidBeforeDynamic = validBefore;
-        mValidBufferArea = bufferArea;
     }
 
     @Override
@@ -316,9 +320,7 @@ public class ChartSweepView extends FrameLayout {
                 getParent().requestDisallowInterceptTouchEvent(true);
 
                 // content area of parent
-                final Rect parentContent = new Rect(parent.getPaddingLeft(), parent.getPaddingTop(),
-                        parent.getWidth() - parent.getPaddingRight(),
-                        parent.getHeight() - parent.getPaddingBottom());
+                final Rect parentContent = getParentContentRect();
                 final Rect clampRect = computeClampRect(parentContent);
 
                 if (mFollowAxis == VERTICAL) {
@@ -358,6 +360,33 @@ public class ChartSweepView extends FrameLayout {
         }
     }
 
+    /**
+     * Update {@link #mValue} based on current position, including any
+     * {@link #onTouchEvent(MotionEvent)} in progress. Typically used when
+     * {@link ChartAxis} changes during sweep adjustment.
+     */
+    public void updateValueFromPosition() {
+        final Rect parentContent = getParentContentRect();
+        if (mFollowAxis == VERTICAL) {
+            final float effectiveY = getY() - mMargins.top - parentContent.top;
+            setValue(mAxis.convertToValue(effectiveY));
+        } else {
+            final float effectiveX = getX() - mMargins.left - parentContent.left;
+            setValue(mAxis.convertToValue(effectiveX));
+        }
+    }
+
+    public int shouldAdjustAxis() {
+        return mAxis.shouldAdjustAxis(getValue());
+    }
+
+    private Rect getParentContentRect() {
+        final View parent = (View) getParent();
+        return new Rect(parent.getPaddingLeft(), parent.getPaddingTop(),
+                parent.getWidth() - parent.getPaddingRight(),
+                parent.getHeight() - parent.getPaddingBottom());
+    }
+
     @Override
     public void addOnLayoutChangeListener(OnLayoutChangeListener listener) {
         // ignored to keep LayoutTransition from animating us
@@ -368,18 +397,14 @@ public class ChartSweepView extends FrameLayout {
         // ignored to keep LayoutTransition from animating us
     }
 
-    private long getValidAfterValue() {
+    private long getValidAfterDynamic() {
         final ChartSweepView dynamic = mValidAfterDynamic;
-        final boolean dynamicEnabled = dynamic != null && dynamic.isEnabled();
-        return Math.max(mValidAfter,
-                dynamicEnabled ? dynamic.getValue() + mValidBufferArea : Long.MIN_VALUE);
+        return dynamic != null && dynamic.isEnabled() ? dynamic.getValue() : Long.MIN_VALUE;
     }
 
-    private long getValidBeforeValue() {
+    private long getValidBeforeDynamic() {
         final ChartSweepView dynamic = mValidBeforeDynamic;
-        final boolean dynamicEnabled = dynamic != null && dynamic.isEnabled();
-        return Math.min(mValidBefore,
-                dynamicEnabled ? dynamic.getValue() - mValidBufferArea : Long.MAX_VALUE);
+        return dynamic != null && dynamic.isEnabled() ? dynamic.getValue() : Long.MAX_VALUE;
     }
 
     /**
@@ -388,22 +413,36 @@ public class ChartSweepView extends FrameLayout {
      * style rules.
      */
     private Rect computeClampRect(Rect parentContent) {
-        final Rect clampRect = new Rect(parentContent);
+        // create two rectangles, and pick most restrictive combination
+        final Rect rect = buildClampRect(parentContent, mValidAfter, mValidBefore, 0f);
+        final Rect dynamicRect = buildClampRect(
+                parentContent, getValidAfterDynamic(), getValidBeforeDynamic(), mNeighborMargin);
 
-        float validAfterPoint = mAxis.convertToPoint(getValidAfterValue());
-        float validBeforePoint = mAxis.convertToPoint(getValidBeforeValue());
-        if (validAfterPoint > validBeforePoint) {
-            float swap = validBeforePoint;
-            validBeforePoint = validAfterPoint;
-            validAfterPoint = swap;
+        rect.intersect(dynamicRect);
+        return rect;
+    }
+
+    private Rect buildClampRect(
+            Rect parentContent, long afterValue, long beforeValue, float margin) {
+        if (mAxis instanceof InvertedChartAxis) {
+            long temp = beforeValue;
+            beforeValue = afterValue;
+            afterValue = temp;
         }
 
+        final boolean afterValid = afterValue != Long.MIN_VALUE && afterValue != Long.MAX_VALUE;
+        final boolean beforeValid = beforeValue != Long.MIN_VALUE && beforeValue != Long.MAX_VALUE;
+
+        final float afterPoint = mAxis.convertToPoint(afterValue) + margin;
+        final float beforePoint = mAxis.convertToPoint(beforeValue) - margin;
+
+        final Rect clampRect = new Rect(parentContent);
         if (mFollowAxis == VERTICAL) {
-            clampRect.bottom = clampRect.top + (int) validBeforePoint;
-            clampRect.top += validAfterPoint;
+            if (beforeValid) clampRect.bottom = clampRect.top + (int) beforePoint;
+            if (afterValid) clampRect.top += afterPoint;
         } else {
-            clampRect.right = clampRect.left + (int) validBeforePoint;
-            clampRect.left += validAfterPoint;
+            if (beforeValid) clampRect.right = clampRect.left + (int) beforePoint;
+            if (afterValid) clampRect.left += afterPoint;
         }
         return clampRect;
     }
