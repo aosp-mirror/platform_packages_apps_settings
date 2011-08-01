@@ -356,7 +356,6 @@
                 <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.InputMethodAndLanguageSettings" />
@@ -372,7 +371,6 @@
                 <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.SpellCheckersSettings" />
@@ -392,7 +390,6 @@
                 <action android:name="android.settings.INPUT_METHOD_SUBTYPE_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
@@ -412,7 +409,6 @@
                 <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.UserDictionarySettings" />
@@ -467,7 +463,6 @@
                 <action android:name="com.android.settings.DOCK_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DockSettings" />
@@ -510,7 +505,7 @@
         </activity>
 
         <activity android:name="Settings$ManageApplicationsActivity"
-                android:label="@string/manageapplications_settings_title"
+                android:label="@string/applications_settings"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -561,7 +556,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ManageApplications" />
@@ -578,7 +572,6 @@
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
                 <category android:name="android.intent.category.MONKEY" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ManageApplications" />
@@ -614,7 +607,6 @@
                 <action android:name="android.credentials.UNLOCK" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.SecuritySettings" />
@@ -662,7 +654,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DeviceAdminSettings" />
@@ -696,7 +687,7 @@
         </activity>
 
         <activity android:name="Settings$AccessibilitySettingsActivity"
-                android:label="@string/accessibility_settings_title"
+                android:label="@string/accessibility_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
