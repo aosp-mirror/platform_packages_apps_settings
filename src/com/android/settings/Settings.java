@@ -83,7 +83,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final int theme = getIntent().getIntExtra(
-                EXTRA_THEME, android.R.style.Theme_Holo_SplitActionBarWhenNarrow);
+                EXTRA_THEME, android.R.style.Theme_Holo);
         setTheme(theme);
 
         getMetaData();
