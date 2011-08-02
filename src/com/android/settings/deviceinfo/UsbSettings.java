@@ -95,10 +95,11 @@ public class UsbSettings extends SettingsPreferenceFragment {
     }
 
     private void updateToggles() {
-        if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
+        String function = mUsbManager.getDefaultFunction();
+        if (UsbManager.USB_FUNCTION_MTP.equals(function)) {
             mMtp.setChecked(true);
             mPtp.setChecked(false);
-        } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_PTP)) {
+        } else if (UsbManager.USB_FUNCTION_PTP.equals(function)) {
             mMtp.setChecked(false);
             mPtp.setChecked(true);
         } else  {
@@ -109,7 +110,6 @@ public class UsbSettings extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        Log.d(TAG, "onPreferenceTreeClick " + preference);
 
         // temporary hack - using check boxes as radio buttons
         // don't allow unchecking them
