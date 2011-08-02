@@ -165,7 +165,7 @@ public class Memory extends SettingsPreferenceFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_ID_USB, 0, R.string.storage_menu_usb)
                 //.setIcon(com.android.internal.R.drawable.stat_sys_data_usb)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
     }
 
     @Override
