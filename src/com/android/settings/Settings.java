@@ -293,7 +293,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 PowerUsageSummary.class.getName().equals(fragmentName) ||
                 AccountSyncSettings.class.getName().equals(fragmentName) ||
                 UserDictionarySettings.class.getName().equals(fragmentName)) {
-            intent.putExtra(EXTRA_THEME, android.R.style.Theme_Holo_SolidActionBar);
+            intent.putExtra(EXTRA_THEME, android.R.style.Theme_Holo);
         }
 
         intent.setClass(this, SubSettings.class);
