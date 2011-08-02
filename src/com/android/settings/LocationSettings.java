@@ -90,8 +90,7 @@ public class LocationSettings extends SettingsPreferenceFragment
             CheckBoxPreference useLocation = new CheckBoxPreference(getActivity());
             useLocation.setKey(KEY_USE_LOCATION);
             useLocation.setTitle(R.string.use_location_title);
-            useLocation.setSummaryOn(R.string.use_location_summary_enabled);
-            useLocation.setSummaryOff(R.string.use_location_summary_disabled);
+            useLocation.setSummary(R.string.use_location_summary);
             useLocation.setChecked(
                     GoogleLocationSettingHelper.getUseLocationForServices(getActivity())
                     == GoogleLocationSettingHelper.USE_LOCATION_FOR_SERVICES_ON);
