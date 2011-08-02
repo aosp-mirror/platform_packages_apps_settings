@@ -93,6 +93,11 @@
             android:entries="@array/app_process_limit_entries"
             android:entryValues="@array/app_process_limit_values" />
 
+        <CheckBoxPreference
+            android:key="show_all_anrs"
+            android:title="@string/show_all_anrs"
+            android:summary="@string/show_all_anrs_summary"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
