@@ -65,6 +65,8 @@ public class DevelopmentSettings extends PreferenceFragment
             = "immediately_destroy_activities";
     private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
 
+    private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
+
     private IWindowManager mWindowManager;
 
     private CheckBoxPreference mEnableAdb;
@@ -80,6 +82,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
+
+    private CheckBoxPreference mShowAllANRs;
 
     // To track whether Yes was clicked in the adb warning dialog
     private boolean mOkClicked;
@@ -111,6 +115,9 @@ public class DevelopmentSettings extends PreferenceFragment
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
         mAppProcessLimit = (ListPreference) findPreference(APP_PROCESS_LIMIT_KEY);
         mAppProcessLimit.setOnPreferenceChangeListener(this);
+
+        mShowAllANRs = (CheckBoxPreference) findPreference(
+                SHOW_ALL_ANRS_KEY);
 
         removeHdcpOptionsForProduction();
     }
@@ -144,6 +151,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateAnimationScaleOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
+        updateShowAllANRsOptions();
     }
 
     private void updateHdcpValues() {
@@ -330,6 +338,17 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
+    private void writeShowAllANRsOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.ANR_SHOW_BACKGROUND,
+                mShowAllANRs.isChecked() ? 1 : 0);
+    }
+
+    private void updateShowAllANRsOptions() {
+        mShowAllANRs.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
@@ -372,6 +391,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeCpuUsageOptions();
         } else if (preference == mImmediatelyDestroyActivities) {
             writeImmediatelyDestroyActivitiesOptions();
+        } else if (preference == mShowAllANRs) {
+            writeShowAllANRsOptions();
         }
 
         return false;
