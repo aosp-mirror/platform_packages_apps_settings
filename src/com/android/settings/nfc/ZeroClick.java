@@ -56,6 +56,7 @@ public class ZeroClick extends Fragment
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                activity.getActionBar().setTitle(R.string.zeroclick_settings_title);
             }
         }
 
