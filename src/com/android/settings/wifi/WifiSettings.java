@@ -21,6 +21,7 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -89,6 +90,12 @@ public class WifiSettings extends SettingsPreferenceFragment
     private static final int MENU_ID_FORGET = Menu.FIRST + 4;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 5;
 
+    private static final int WIFI_DIALOG_ID = 1;
+
+    // Instance state keys
+    private static final String SAVE_DIALOG_EDIT_MODE = "edit_mode";
+    private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
+
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
     private final Scanner mScanner;
@@ -118,6 +125,11 @@ public class WifiSettings extends SettingsPreferenceFragment
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
     private boolean mInXlSetupWizard;
+
+    // Save the dialog details
+    private boolean mDlgEdit;
+    private AccessPoint mDlgAccessPoint;
+    private Bundle mAccessPointSavedState;
 
     /* End of "used in Wifi Setup context" */
 
@@ -165,6 +177,11 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         mWifiManager.asyncConnect(getActivity(), new WifiServiceHandler());
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
+            mDlgEdit = savedInstanceState.getBoolean(SAVE_DIALOG_EDIT_MODE);
+            mAccessPointSavedState = savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+        }
 
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
@@ -245,10 +262,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
         getActivity().unregisterReceiver(mReceiver);
         mScanner.pause();
-        if (mDialog != null) {
-            mDialog.dismiss();
-            mDialog = null;
-        }
     }
 
     @Override
@@ -268,6 +281,21 @@ public class WifiSettings extends SettingsPreferenceFragment
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // If the dialog is showing, save its state.
+        if (mDialog != null && mDialog.isShowing()) {
+            outState.putBoolean(SAVE_DIALOG_EDIT_MODE, mDlgEdit);
+            if (mDlgAccessPoint != null) {
+                mAccessPointSavedState = new Bundle();
+                mDlgAccessPoint.saveWifiState(mAccessPointSavedState);
+                outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
+            }
+        }
     }
 
     @Override
@@ -380,10 +408,31 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     private void showDialog(AccessPoint accessPoint, boolean edit) {
         if (mDialog != null) {
-            mDialog.dismiss();
+            removeDialog(WIFI_DIALOG_ID);
+            mDialog = null;
         }
-        mDialog = new WifiDialog(getActivity(), this, accessPoint, edit);
-        mDialog.show();
+
+        // Save the access point and edit mode
+        mDlgAccessPoint = accessPoint;
+        mDlgEdit = edit;
+
+        showDialog(WIFI_DIALOG_ID);
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        AccessPoint ap = mDlgAccessPoint; // For manual launch
+        if (ap == null) { // For re-launch from saved state
+            if (mAccessPointSavedState != null) {
+                ap = new AccessPoint(getActivity(), mAccessPointSavedState);
+                // For repeated orientation changes
+                mDlgAccessPoint = ap;
+            }
+        }
+        // If it's still null, fine, it's for Add Network
+        mSelectedAccessPoint = ap;
+        mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit);
+        return mDialog;
     }
 
     private boolean requireKeyStore(WifiConfiguration config) {
