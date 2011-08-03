@@ -399,6 +399,7 @@ public class ActivityPicker extends AlertActivity implements
                         //noinspection deprecation
                         icon = new BitmapDrawable(thumb);
                         ((BitmapDrawable) icon).setTargetDensity(mMetrics);
+                        canvas.setBitmap(null);
                     } else if (iconWidth < width && iconHeight < height) {
                         final Bitmap.Config c = Bitmap.Config.ARGB_8888;
                         final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
@@ -413,6 +414,7 @@ public class ActivityPicker extends AlertActivity implements
                         //noinspection deprecation
                         icon = new BitmapDrawable(thumb);
                         ((BitmapDrawable) icon).setTargetDensity(mMetrics);
+                        canvas.setBitmap(null);
                     }
                 }
     
