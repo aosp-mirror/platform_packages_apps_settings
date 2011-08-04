@@ -25,6 +25,9 @@ import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
+import static android.net.NetworkStats.TAG_NONE;
+import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
+import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
 import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
@@ -65,6 +68,7 @@ import android.net.NetworkTemplate;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -151,6 +155,7 @@ public class DataUsageSummary extends Fragment {
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
     private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
+    private INetworkManagementService mNetworkService;
     private INetworkStatsService mStatsService;
     private INetworkPolicyManager mPolicyService;
     private ConnectivityManager mConnService;
@@ -221,6 +226,8 @@ public class DataUsageSummary extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mNetworkService = INetworkManagementService.Stub.asInterface(
+                ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
         mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         mPolicyService = INetworkPolicyManager.Stub.asInterface(
@@ -606,7 +613,8 @@ public class DataUsageSummary extends Fragment {
 
         try {
             // load stats for current template
-            mHistory = mStatsService.getHistoryForNetwork(mTemplate);
+            mHistory = mStatsService.getHistoryForNetwork(
+                    mTemplate, FIELD_RX_BYTES | FIELD_TX_BYTES);
         } catch (RemoteException e) {
             // since we can't do much without policy or history, and we don't
             // want to leave with half-baked UI, we bail hard.
@@ -672,7 +680,8 @@ public class DataUsageSummary extends Fragment {
         try {
             // load stats for current uid and template
             // TODO: read template from extras
-            mDetailHistory = mStatsService.getHistoryForUid(mTemplate, mUid, NetworkStats.TAG_NONE);
+            mDetailHistory = mStatsService.getHistoryForUid(
+                    mTemplate, mUid, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
         } catch (RemoteException e) {
             // since we can't do much without history, and we don't want to
             // leave with half-baked UI, we bail hard.
@@ -685,7 +694,8 @@ public class DataUsageSummary extends Fragment {
         updateDetailData();
 
         final Context context = getActivity();
-        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid) && !getRestrictBackground()) {
+        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid) && !getRestrictBackground()
+                && isBandwidthControlEnabled()) {
             mAppRestrictView.setVisibility(View.VISIBLE);
             mAppRestrict.setChecked(getAppRestrictBackground());
 
@@ -711,6 +721,19 @@ public class DataUsageSummary extends Fragment {
         if (LOGD) Log.d(TAG, "setPolicyLimitBytes()");
         mPolicyEditor.setPolicyLimitBytes(mTemplate, limitBytes);
         updatePolicy(false);
+    }
+
+    private boolean isNetworkPolicyModifiable() {
+        return isBandwidthControlEnabled() && mDataEnabled.isChecked();
+    }
+
+    private boolean isBandwidthControlEnabled() {
+        try {
+            return mNetworkService.isBandwidthControlEnabled();
+        } catch (RemoteException e) {
+            Log.w(TAG, "problem talking with INetworkManagementService: " + e);
+            return false;
+        }
     }
 
     private boolean getDataRoaming() {
@@ -788,10 +811,16 @@ public class DataUsageSummary extends Fragment {
         }
 
         final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
+        if (isNetworkPolicyModifiable()) {
+            mDisableAtLimitView.setVisibility(View.VISIBLE);
+            mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
+            mChart.bindNetworkPolicy(policy);
 
-        // reflect policy limit in checkbox
-        mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
-        mChart.bindNetworkPolicy(policy);
+        } else {
+            // controls are disabled; don't bind warning/limit sweeps
+            mDisableAtLimitView.setVisibility(View.GONE);
+            mChart.bindNetworkPolicy(null);
+        }
 
         if (refreshCycle) {
             // generate cycle list based on policy and available history
@@ -840,7 +869,7 @@ public class DataUsageSummary extends Fragment {
             }
 
             // one last cycle entry to modify policy cycle day
-            mCycleAdapter.setChangePossible(true);
+            mCycleAdapter.setChangePossible(isNetworkPolicyModifiable());
         }
 
         if (!hasCycles) {
@@ -867,6 +896,9 @@ public class DataUsageSummary extends Fragment {
             if (TAB_MOBILE.equals(currentTab)) {
                 mConnService.setMobileDataEnabled(dataEnabled);
             }
+
+            // rebind policy to match radio state
+            updatePolicy(true);
         }
     };
 
