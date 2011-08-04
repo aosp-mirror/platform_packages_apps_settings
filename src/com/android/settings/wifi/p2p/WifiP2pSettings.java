@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.wifi.p2p;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -43,9 +43,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Switch;
 
-import com.android.settings.wifi.p2p.WifiP2pDialog;
-import com.android.settings.wifi.p2p.WifiP2pEnabler;
-import com.android.settings.wifi.p2p.WifiP2pPeer;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Arrays;
 import java.util.List;
