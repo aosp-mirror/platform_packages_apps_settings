@@ -425,7 +425,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         VpnConfig config = new VpnConfig();
-        config.packagz = profile.key;
+        config.user = profile.key;
         config.interfaze = interfaze;
         config.session = profile.name;
         config.routes = profile.routes;
