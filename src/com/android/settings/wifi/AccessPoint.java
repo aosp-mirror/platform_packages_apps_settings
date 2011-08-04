@@ -25,6 +25,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +33,12 @@ import android.widget.ImageView;
 import java.util.Comparator;
 
 class AccessPoint extends Preference {
+
+    private static final String KEY_DETAILEDSTATE = "key_detailedstate";
+    private static final String KEY_WIFIINFO = "key_wifiinfo";
+    private static final String KEY_SCANRESULT = "key_scanresult";
+    private static final String KEY_CONFIG = "key_config";
+
     private static final int[] STATE_SECURED = {R.attr.state_encrypted};
     private static final int[] STATE_NONE = {};
 
@@ -41,13 +48,15 @@ class AccessPoint extends Preference {
     static final int SECURITY_PSK = 2;
     static final int SECURITY_EAP = 3;
 
-    final String ssid;
-    final String bssid;
-    final int security;
-    final int networkId;
+    String ssid;
+    String bssid;
+    int security;
+    int networkId;
     boolean wpsAvailable = false;
 
     private WifiConfiguration mConfig;
+    /*package*/ScanResult mScanResult;
+
     private int mRssi;
     private WifiInfo mInfo;
     private DetailedState mState;
@@ -78,24 +87,60 @@ class AccessPoint extends Preference {
     AccessPoint(Context context, WifiConfiguration config) {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
-        ssid = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
-        bssid = config.BSSID;
-        security = getSecurity(config);
-        networkId = config.networkId;
-        mConfig = config;
-        mRssi = Integer.MAX_VALUE;
+        loadConfig(config);
     }
 
     AccessPoint(Context context, ScanResult result) {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
+        loadResult(result);
+    }
+
+    AccessPoint(Context context, Bundle savedState) {
+        super(context);
+        setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
+
+        mConfig = savedState.getParcelable(KEY_CONFIG);
+        if (mConfig != null) {
+            loadConfig(mConfig);
+        }
+        mScanResult = (ScanResult) savedState.getParcelable(KEY_SCANRESULT);
+        if (mScanResult != null) {
+            loadResult(mScanResult);
+        }
+        mInfo = (WifiInfo) savedState.getParcelable(KEY_WIFIINFO);
+        if (savedState.containsKey(KEY_DETAILEDSTATE)) {
+            mState = DetailedState.valueOf(savedState.getString(KEY_DETAILEDSTATE));
+        }
+        update(mInfo, mState);
+    }
+
+    public void saveWifiState(Bundle savedState) {
+        savedState.putParcelable(KEY_CONFIG, mConfig);
+        savedState.putParcelable(KEY_SCANRESULT, mScanResult);
+        savedState.putParcelable(KEY_WIFIINFO, mInfo);
+        if (mState != null) {
+            savedState.putString(KEY_DETAILEDSTATE, mState.toString());
+        }
+    }
+
+    private void loadConfig(WifiConfiguration config) {
+        ssid = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
+        bssid = config.BSSID;
+        security = getSecurity(config);
+        networkId = config.networkId;
+        mRssi = Integer.MAX_VALUE;
+        mConfig = config;
+    }
+
+    private void loadResult(ScanResult result) {
         ssid = result.SSID;
         bssid = result.BSSID;
         security = getSecurity(result);
-        wpsAvailable = security != SECURITY_EAP &&
-                result.capabilities.contains("WPS");
+        wpsAvailable = security != SECURITY_EAP && result.capabilities.contains("WPS");
         networkId = -1;
         mRssi = result.level;
+        mScanResult = result;
     }
 
     @Override
