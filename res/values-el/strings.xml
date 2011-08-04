@@ -94,10 +94,12 @@
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Κρύο"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Ανιχνεύσιμο"</string>
-    <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Ανιχνεύσιμο για <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> δευτερόλεπτα..."</string>
-    <string name="bluetooth_is_discoverable_always" msgid="8573385118329733931">"Ανιχνεύσιμη"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Ορατό σε όλες τις κοντινές συσκευές Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Ορατή σε όλες τις κοντινές συσκευές Bluetooth"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Δεν είναι ορατό σε άλλες συσκευές Bluetooth"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Ορατό μόνο σε συζευγμένες συσκευές"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Να γίνει η συσκευή ανιχνεύσιμη"</string>
-    <string name="bluetooth_visibility_timeout" msgid="6634508002347847278">"Ανιχνεύσιμη λήξη ορίου χρόνου"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Λήξη χρονικού ορίου προβολής"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Ρυθμίστε τον χρόνο δυνατότητας ανίχνευσης της συσκευής"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Κλείδωμα της λειτουργίας φωνητικών κλήσεων"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Να μην επιτρέπεται η χρήση του προγράμματος κλήσης bluetooth όταν η οθόνη είναι κλειδωμένη"</string>
@@ -105,6 +107,11 @@
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Όνομα συσκευής"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Δεν έχει οριστεί όνομα, χρήση ονόματος λογαριασμού"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Σάρωση για συσκευές"</string>
+    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Μετονομασία tablet"</string>
+    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"Μετονομασία τηλεφώνου"</string>
+    <string name="bluetooth_rename_button" msgid="1648028693822994566">"Μετονομασία"</string>
+    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Αποσύνδεση;"</string>
+    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Θα τερματιστεί η σύνδεσή σας με τη συσκευή:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"Το <xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί."</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Συνδεδεμένο"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Αποσυνδέθηκε"</string>
@@ -114,15 +121,14 @@
     <string name="bluetooth_not_connected" msgid="3389882907500605937">"Σύζευξη με αυτή τη συσκευή"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Σύζευξη..."</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Συζευγμένα αλλά όχι συνδεδεμένα"</string>
-    <string name="bluetooth_device" msgid="6873461446424952003">"σετ ακουστικού-μικροφώνου"</string>
+    <string name="bluetooth_device" msgid="5291950341750186887">"Συσκευή Bluetooth χωρίς όνομα"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Αναζήτηση"</string>
     <string name="progress_tap_to_pair" msgid="4192342336107106334">"Πάτ.για αντιστοίχιση"</string>
     <string name="bluetooth_no_devices_found" msgid="2412462335116297668">"Δεν βρέθηκαν συσκευές Bluetooth κοντά."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Αίτημα σύζευξης Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Αίτημα σύζευξης"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"Επιλογή για ζεύξη με <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_show_received_files_title" msgid="816172853268536399">"Εμφάνιση ληφθέντων αρχείων"</string>
-    <string name="bluetooth_show_received_files_summary" msgid="7322193220909480775">"Εμφάνιση αρχείων που έχουν ληφθεί μέσω Bluetooth"</string>
+    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Εμφάνιση ληφθέντων αρχείων"</string>
     <string name="device_picker" msgid="8721012448931226323">"Επιλογή συσκευής Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Αίτημα άδειας Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Μια εφαρμογή ζητά άδεια ενεργοποίησης του Bluetooth. Θέλετε να το επιτρέψετε;"</string>
@@ -135,13 +141,14 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="6132824454823539873">"Μια εφαρμογή στο tablet σας ζητά άδεια να ενεργοποιήσει το Bluetooth και να καταστήσει τη συσκευή σας ανιχνεύσιμη από άλλες συσκευές. Θέλετε να τη χορηγήσετε;"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="7471195931669103553">"Μια εφαρμογή στο τηλέφωνό σας ζητά άδεια να ενεργοποιήσει το Bluetooth και να καταστήσει το τηλέφωνό σας ανιχνεύσιμο από άλλες συσκευές. Θέλετε να τη χορηγήσετε;"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Ενεργοποίηση του Bluetooth???"</string>
+    <!-- no translation found for bluetooth_turning_off (2337747302892025192) -->
+    <skip />
     <string name="bluetooth_auto_connect" msgid="8013003320667198460">"Αυτόματη σύνδεση"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Αίτημα σύνδεσης Bluetooth"</string>
     <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Αγγίξτε για να συνδεθείτε στο \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Θέλετε να συνδεθείτε στο \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\";"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Αίτημα τηλεφωνικού καταλόγου"</string>
-    <!-- no translation found for bluetooth_pb_acceptance_dialog_text (5203107624986011263) -->
-    <skip />
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="5203107624986011263">"Το %1$s ζητά πρόσβαση στις επαφές σας και στο ιστορικό κλήσεών σας. Να εκχωρηθεί πρόσβαση στο %2$s;"</string>
     <string name="bluetooth_pb_alwaysallowed" msgid="3953839482721299910">"Να επιτρέπεται πάντα;"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Ρυθμίσεις ημερομηνίας &amp; ώρας"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 μμ"</string>
@@ -158,7 +165,6 @@
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Λογαριασμός:"</string>
     <string name="proxy_settings_title" msgid="5912878565897294401">"Ρυθμίσεις διακομιστή μεσολάβησης"</string>
-    <string name="proxy_settings_summary" msgid="7898928000758321486">"Ορίστε το γενικό διακομιστή μεσολάβησης HTTP και τις λίστες εξαιρέσεων"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Εκκαθάριση"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Θύρα διακομιστή μεσολάβησης"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Διακομιστής μεσολάβησης παράκαμψης για"</string>
@@ -243,11 +249,8 @@
     <string name="cancel" msgid="6859253417269739139">"Ακύρωση"</string>
     <string name="settings_label" msgid="1626402585530130914">"Ρυθμίσεις"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Ρυθμίσεις"</string>
-    <string name="settings_shortcut" msgid="8597387747077828217">"Επιλογή συντόμευσης ρυθμίσεων"</string>
+    <!-- outdated translation 8597387747077828217 -->     <string name="settings_shortcut" msgid="3936651951364030415">"Επιλογή συντόμευσης ρυθμίσεων"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Λειτουργία πτήσης"</string>
-    <string name="airplane_mode_summary" msgid="3154817401368780988">"Απενεργοποίηση όλων των ασύρματων συνδέσεων"</string>
-    <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Απενεργοποίηση ασύρματων συνδέσεων..."</string>
-    <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Ενεργοποίηση ασύρματων συνδέσεων..."</string>
     <string name="radio_controls_title" msgid="6889937359495515769">"Περισσότερα ..."</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Ασύρματο και δίκτυα"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Διαχείριση Wi-Fi, Bluetooth, λειτουργίας πτήσης, δικτύων κινητής τηλεφωνίας και VPN"</string>
@@ -392,14 +395,17 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Διαχείριση συνδέσεων, ορισμός ονόματος συσκευής &amp; ανιχνευσιμότητα"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Αίτημα σύζευξης Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="1499285355129256289">\n"Εισαγάγετε το PIN για να πραγματοποιήσετε ζεύξη με τη συσκευή \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Δοκιμάστε 0000 ή 1234.) Ενδέχεται να χρειαστεί να εισαγάγετε το ίδιο PIN στη συσκευή Bluetooth."</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="8301499416158195044">\n"Πληκτρολογήστε το κλειδί πρόσβασης για ζεύξη με τη συσκευή \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Για ζεύξη με τη συσκευή \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", βεβαιωθείτε ότι προβάλλεται το κλειδί πρόσβασης: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"επιθυμεί σύζευξη."</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="9139892462102104755">"Εισαγάγετε \"<xliff:g id="PASSKEY">%2$s</xliff:g>\" στη συσκευή \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" για να πραγματοποιήσετε ζεύξη και, στη συνέχεια, πατήστε return ή enter."</string>
+    <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"Για σύζευξη με:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Εισαγάγετε το PIN της συσκευής που απαιτείται:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"Για σύζευξη με:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Εισαγάγετε το κλειδί πρόσβασης της συσκευής που απαιτείται:"</string>
+    <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Το PIN περιέχει γράμματα ή σύμβολα"</string>
+    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Συνήθως 0000 ή 1234"</string>
+    <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Επίσης, ενδέχεται να χρειαστεί να καταχωρίσετε αυτό το PIN στην άλλη συσκευή"</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Επίσης, ενδέχεται να χρειαστεί να καταχωρίσετε το κλειδί πρόσβασης στην άλλη συσκευή."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Για σύζευξη με τη συσκευή:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Βεβαιωθείτε ότι εμφανίζεται το κλειδί πρόσβασης:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Από:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Να γίνει σύζευξη με αυτήν τη συσκευή;"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"Για σύζευξη με:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Πληκτρολογήστε:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;, και μετά πατήστε Return ή Enter."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Ζεύγος"</string>
-    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Χωρίς ζεύξη"</string>
-    <string name="bluetooth_remote_device" msgid="2406662802908395389">"συσκευή bluetooth"</string>
+    <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Ακύρωση"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Προσοχή"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Παρουσιάστηκε ένα πρόβλημα κατά τη σύζευξη με <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Παρουσιάστηκε ένα πρόβλημα κατά τη ζεύξη με το <xliff:g id="DEVICE_NAME">%1$s</xliff:g> επειδή ο αριθμός PIN ή το κλειδί πρόσβασης είναι εσφαλμένο."</string>
@@ -420,7 +426,6 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Επιλογές..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Για προχωρημένους"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Προηγμένες ρυθμίσεις Bluetooth"</string>
-    <string name="bluetooth_advanced_settings_label" msgid="8659717781212434173">"Προηγμένες ρυθμίσεις Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Για να δείτε τις συσκευές, ενεργοποιήστε το Bluetooth."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Σύνδεση σε..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Πολυμέσα"</string>
@@ -459,8 +464,16 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Για μουσική και πολυμέσα"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Διατήρηση ρυθμίσεων"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Κάντε χρήση της Επικοινωνίας κοντινού πεδίου για την ανάγνωση και ανταλλαγή ετικετών"</string>
-    <string name="nfc_toggle_error" msgid="2233172102497535522">"Παρουσιάστηκε σφάλμα."</string>
+    <!-- no translation found for zeroclick_settings_title (3105038392089982549) -->
+    <skip />
+    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
+    <!-- no translation found for zeroclick_on_summary (3157018760403281266) -->
+    <skip />
+    <!-- no translation found for zeroclick_off_summary (2896320184904157018) -->
+    <skip />
+    <string name="zeroclick_label" msgid="6908892664706309626">"Κοινή χρήση χωρίς κλικ"</string>
+    <!-- no translation found for zeroclick_explained (3953149564512166049) -->
+    <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Ενεργοποίηση Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -540,31 +553,33 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Πύλη"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Μήκος προθέματος δικτύου"</string>
+    <string name="wifi_p2p_settings_title" msgid="400503541488064638">"Wi-Fi Direct"</string>
+    <string name="wifi_p2p_settings_summary" msgid="819202165773287900">"Ρύθμιση ομότιμης σύνδεσης"</string>
+    <string name="wifi_p2p_device_info" msgid="6092748173212362426">"Πληροφορίες συσκευής"</string>
+    <string name="wifi_p2p_wps_setup" msgid="7706254437161351448">"Wi-Fi Protected Setup"</string>
+    <string name="wifi_p2p_wps_pin" msgid="492162570392614138">"Εισαγάγετε το PIN"</string>
+    <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Απομνημόνευση αυτής της σύνδεσης"</string>
+    <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"Αναζήτηση"</string>
+    <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"Δημιουργία ομάδας"</string>
+    <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"Σύνθετες"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Φορητό σημείο πρόσβασης Wi-Fi"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Το φορητό σημείο πρόσβασης <xliff:g id="NETWORK_SSID">%1$s</xliff:g> είναι ενεργό"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Σφάλμα φορητού σημείου πρόσβασης Wi-Fi"</string>
     <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Διαμόρφωση σημείου πρόσβασης Wi-Fi"</string>
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> φορητό σημείο πρόσβασης Wi-Fi"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <string name="sound_settings_title" msgid="8735891486683305886">"Ήχος"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Προβολή"</string>
-    <string name="sound_settings" msgid="5007659014828162881">"Ρυθμίσεις ήχου"</string>
+    <!-- outdated translation 5007659014828162881 -->     <string name="sound_settings" msgid="5534671337768745343">"Ρυθμίσεις ήχου"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Λειτουργία σίγασης"</string>
-    <string name="silent_mode_summary" msgid="3309650676072917899">"Σίγαση όλων των ήχων εκτός από τα μέσα και τις ειδοποιήσεις"</string>
-    <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Όλοι οι ήχοι εκτός από τους ήχους πολυμέσων έχουν σιγασθεί"</string>
-    <string name="ringtone_title" msgid="7037881886694206550">"Ήχος εισερχόμενης κλήσης"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"Ήχος κλήσης τηλεφώνου"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
-    <string name="all_volume_title" msgid="8741571721868253103">"Ένταση ήχου"</string>
+    <!-- outdated translation 8741571721868253103 -->     <string name="all_volume_title" msgid="4296957391257836961">"Ένταση ήχου"</string>
+    <string name="musicfx_title" msgid="3853457094486073206">"Μουσικά εφέ"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Ένταση ήχου ειδοποίησης"</string>
-    <string name="ring_volume_summary" msgid="7055497624193116879"></string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Δόνηση στο αθόρυβο"</string>
-    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Να επιτρέπεται η ανάδραση με δόνηση στην αθόρυβη λειτουργία"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"Δόνηση"</string>
-    <string name="vibrate_summary" msgid="7378130397830790458">"Ανάδραση με δόνηση για κλήσεις και ειδοποιήσεις"</string>
-    <string name="notification_sound_title" msgid="6316316069880531693">"Ήχος κλήσης ειδοποίησης"</string>
-    <string name="notification_sound_summary" msgid="2953599929394109819"></string>
+    <!-- outdated translation 6316316069880531693 -->     <string name="notification_sound_title" msgid="312032901303146002">"Ήχος κλήσης ειδοποίησης"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Φωτεινός παλμός ειδοποίησης"</string>
-    <string name="notification_pulse_summary" msgid="6899220780534617152">"Επαναλαμβανόμενος παλμός φωτεινής ένδειξης του trackball για νέες ειδοποιήσεις"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Ήχος κλήσης"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Ειδοποίηση"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Χρήση έντασης ήχου εισερχόμενης κλήσης για ειδοποιήσεις"</string>
@@ -573,20 +588,19 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"Ορισμός έντασης ήχου για μουσική και βίντεο"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Ξυπνητήρι"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Ρυθμίσεις ήχου για τη συνδεδεμένη βάση σύνδεσης αυτοκινήτου"</string>
-    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Ήχοι αγγίγματος οθόνης"</string>
-    <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Αναπαραγωγή ήχων κατά τη χρήση του πληκτρολογίου κλήσης"</string>
-    <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Αναπαραγωγή ήχων κατά τη χρήση του πληκτρολογίου κλήσης"</string>
-    <string name="sound_effects_enable_title" msgid="3197313718929122833">"Ηχητική επιλογή"</string>
-    <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Αναπαραγωγή ήχου κατά την πραγματοποίηση επιλογής στην οθόνη"</string>
-    <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Αναπαραγωγή ήχου κατά την πραγματοποίηση επιλογής στην οθόνη"</string>
-    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Ήχοι κλειδώματος οθόνης"</string>
-    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Αναπαραγωγή ήχων κατά το κλείδωμα και το ξεκλείδωμα της οθόνης"</string>
-    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Αναπαραγωγή ήχων κατά το κλείδωμα και το ξεκλείδωμα της οθόνης"</string>
-    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Απτικά σχόλια"</string>
-    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Δόνηση κατά το πάτημα μαλακών πλήκτρων και σε συγκεκριμένες αλληλεπιδράσεις της επιφάνειας UI"</string>
-    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Δόνηση κατά το πάτημα μαλακών πλήκτρων και σε συγκεκριμένες αλληλεπιδράσεις της επιφάνειας UI"</string>
+    <!-- outdated translation 1453831168789523185 -->     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Ήχοι αγγίγματος οθόνης"</string>
+    <!-- outdated translation 3197313718929122833 -->     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Ηχητική επιλογή"</string>
+    <!-- outdated translation 1575990840389107141 -->     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Ήχοι κλειδώματος οθόνης"</string>
+    <!-- outdated translation 6311736559245411290 -->     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Απτικά σχόλια"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Εξουδετέρωση θορύβου"</string>
-    <string name="audio_record_proc_summary" msgid="8113628457499616498">"Εξάλειψη θορύβου παρασκηνίου κατά τη διάρκεια ομιλίας ή εγγραφής."</string>
+    <!-- no translation found for volume_media_description (3352166372220845956) -->
+    <skip />
+    <!-- no translation found for volume_ring_description (5936851631698298989) -->
+    <skip />
+    <!-- no translation found for volume_notification_description (5810902320215328321) -->
+    <skip />
+    <!-- no translation found for volume_alarm_description (8322615148532654841) -->
+    <skip />
     <string name="dock_settings" msgid="1820107306693002541">"Βάση σύνδεσης"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Ρυθμίσεις βάσης σύνδεσης"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Ήχος"</string>
@@ -607,7 +621,7 @@
     <string name="sync_settings_summary" msgid="2962179505214965667">"Προσθήκη ή κατάργηση λογαριασμών και αλλαγή ρυθμίσεων λογαριασμού"</string>
     <string name="search_settings" msgid="1910951467596035063">"Αναζήτηση"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Διαχείριση ρυθμίσεων αναζήτησης και ιστορικού"</string>
-    <string name="display_settings" msgid="5947830029420609057">"Ρυθμίσεις οθόνης"</string>
+    <!-- outdated translation 5947830029420609057 -->     <string name="display_settings" msgid="7965901687241669598">"Ρυθμίσεις οθόνης"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Αυτόματη περιστροφή οθόνης"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Αυτόματη εναλλαγή προσανατολισμού κατά την περιστροφή του tablet"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Αυτόματη εναλλαγή προσανατολισμού κατά την περιστροφή του τηλεφώνου"</string>
@@ -618,6 +632,8 @@
     <string name="screen_timeout" msgid="6962654593018319466">"Λήξη ορίου χρόνου"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Η οθόνη απενεργοποιείται αυτόματα μετά από  <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Ταπετσαρία"</string>
+    <!-- no translation found for wallpaper_settings_fragment_title (443941273453987627) -->
+    <skip />
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"Προφύλαξη οθόνης και άλλες μορφές διαφοροποίησης αδράνειας"</string>
     <string name="dream_component_title" msgid="505229894674572578">"Selected dream"</string>
@@ -627,7 +643,6 @@
     <string name="dream_test" msgid="5968002644622194481">"Δοκιμάστε το!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Αυτόματη φωτεινότητα"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Μέγεθος γραμματοσειράς"</string>
-    <string name="summary_font_size" msgid="7548243392515500554">"Συνολικό μέγεθος γραμματοσειράς"</string>
     <string name="dialog_title_font_size" msgid="4503471078477715461">"Επιλέξτε μέγεθος γραμματοσειράς"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ρυθμίσεις κλειδώματος κάρτας SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Ορισμός κλειδώματος κάρτας SIM"</string>
@@ -676,8 +691,7 @@
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"Έκδοση PRL"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
-    <!-- no translation found for status_icc_id (943368755577172747) -->
-    <skip />
+    <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Τύπος δικτύου κινητής τηλεφωνίας"</string>
     <string name="status_data_state" msgid="5503181397066522950">"Κατάστ.δικτ.κιν.τηλ."</string>
     <string name="status_service_state" msgid="2323931627519429503">"Κατάσταση υπηρεσίας"</string>
@@ -729,11 +743,22 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"Θα γίνει αποπροσάρτηση της κάρτας SD."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Αφαίρεση"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Αφαίρεση σε εξέλιξη"</string>
-    <string name="storage_menu_usb" msgid="1580545228584324704">"Ρυθμίσεις μεταφοράς USB"</string>
-    <string name="storage_title_usb" msgid="5775322159427546546">"Ρυθμίσεις μεταφοράς USB"</string>
-    <string name="usb_label_mtp" msgid="4157227401755543412">"Σύνδεση ως συσκευή μέσων (MTP)"</string>
-    <string name="usb_label_ptp" msgid="7417254019489575819">"Σύνδεση ως φωτογραφική μηχανή (PTP)"</string>
-    <string name="usb_label_installer_cd" msgid="7438467574756086977">"Εγκ/ση εργαλείων μεταφ.αρχείων"</string>
+    <!-- no translation found for storage_menu_usb (5708207885333243384) -->
+    <skip />
+    <!-- no translation found for storage_title_usb (679612779321689418) -->
+    <skip />
+    <!-- no translation found for usb_connection_category (7805945595165422882) -->
+    <skip />
+    <!-- no translation found for usb_mtp_title (3399663424394065964) -->
+    <skip />
+    <!-- no translation found for usb_mtp_summary (4617321473211391236) -->
+    <skip />
+    <!-- no translation found for usb_ptp_title (3852760810622389620) -->
+    <skip />
+    <!-- no translation found for usb_ptp_summary (7673397474756664929) -->
+    <skip />
+    <!-- no translation found for usb_label_installer_cd (4331173824920630215) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Κατάσταση μπαταρίας"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Επίπεδο μπαταρίας"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -812,18 +837,6 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth tethering"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Tethering"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Tethering και φορητό σημ. πρόσβ."</string>
-    <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Κοινή χρήση της σύνδεσης δεδομένων κινητού του υπολογιστή tablet μέσω USB"</string>
-    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Μοιραστείτε τη σύνδεση δεδομένων του κινητού σας τηλεφώνου μέσω USB"</string>
-    <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Κοινή χρήση της σύνδεσης δεδομένων κινητού ως φορητού σημείου πρόσβασης Wi-Fi"</string>
-    <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Κοινή χρήση της σύνδεσης δεδομένων κινητού μέσω Bluetooth"</string>
-    <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Κοινή χρήση της σύνδ. δεδ. κινητού του υπολογιστή tablet μέσω USB ή ως φορητού σημείου πρόσβ. Wi-Fi"</string>
-    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Μοιραστείτε τη σύνδεση δεδομένων του κινητού σας τηλεφώνου μέσω USB ή ως φορ. σημείο πρόσβασης Wi-Fi"</string>
-    <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Κοινή χρήση της σύνδεσης δεδομένων κινητού του υπολογιστή tablet μέσω USB ή Bluetooth"</string>
-    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Μοιραστείτε τη σύνδεση δεδομένων του κινητού σας τηλεφώνου μέσω USB ή Bluetooth"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Κοινή χρήση της σύνδ. δεδ. κινητού του υπολογ. tablet μέσω Bluetooth ή ως φορ. σημείου πρόσβ. Wi-Fi"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Μοιραστείτε τη σύνδεση δεδομ. του κινητού σας τηλεφ. μέσω Bluetooth ή ως φορ. σημείο πρόσβασης Wi-Fi"</string>
-    <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Κοινή χρήση της σύνδεσης δεδομένων κινητού του υπολογιστή tablet μέσω USB, Wi-Fi ή Bluetooth"</string>
-    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Μοιραστείτε τη σύνδεση δεδομένων του κινητού σας τηλεφώνου μέσω USB, Wi-Fi ή Bluetooth"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Σύνδεση μέσω κινητής συσκευής με USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"To USB είναι συνδεδεμένο, επιλέξτε για σύνδεση μέσω κινητής συσκευής"</string>
@@ -844,24 +857,18 @@
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Δεν γίνεται σύνδ. σε περισσότερες από <xliff:g id="MAXCONNECTION">%1$d</xliff:g> συσκευές"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Βοήθεια"</string>
-    <string name="wireless_category_general" msgid="2973810407987118067">"Γενικά"</string>
-    <string name="wireless_category_mobile_networks" msgid="1254629216798424288">"Δίκτυα κινητής τηλεφωνίας"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Δίκτυα κινητής τηλεφωνίας"</string>
-    <string name="network_settings_summary" msgid="5149750850846813553">"Ορισμός επιλογών για περιαγωγή, δίκτυα, APN"</string>
     <string name="location_title" msgid="1029961368397484576">"Η τοποθεσία μου"</string>
-    <string name="location_network_based" msgid="8815705866861993344">"Χρήση ασύρματων δικτύων"</string>
-    <string name="location_networks_disabled" msgid="2708968452901433980">"Προβ.τοποθ.σε εφαρμ.(όπως π.χ. στους Χάρτες) με χρήση ασύρ.δικτ."</string>
-    <string name="location_neighborhood_level" msgid="4656658097932515921">"Η τοποθ.προσδ.από δίκτ.Wi-Fi και/ή δίκτ.κινητ.τηλεφ."</string>
+    <!-- outdated translation 8815705866861993344 -->     <string name="location_network_based" msgid="1093258647152327199">"Χρήση ασύρματων δικτύων"</string>
+    <!-- outdated translation 4656658097932515921 -->     <string name="location_neighborhood_level" msgid="4260886124154148129">"Η τοποθ.προσδ.από δίκτ.Wi-Fi και/ή δίκτ.κινητ.τηλεφ."</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Η τοποθεσία καθορίζεται από το Wi-Fi"</string>
-    <string name="location_gps" msgid="6296125378829097831">"Χρήση δορυφόρων GPS"</string>
-    <string name="location_street_level" msgid="7456259025474443314">"Κατά την εύρεση τοποθεσίας, η ακρίβεια είναι σε επίπεδο δρόμου"</string>
-    <string name="location_gps_disabled" msgid="6632537158777308128">"Εντοπ.σε επίπ.δρόμου (απαιτ.μεγ.καταν.μπαταρ.και μετάβ.σε ανοικτό χώρο)"</string>
+    <!-- outdated translation 6296125378829097831 -->     <string name="location_gps" msgid="8392461023569708478">"Χρήση δορυφόρων GPS"</string>
+    <!-- outdated translation 7456259025474443314 -->     <string name="location_street_level" msgid="4244496898967415234">"Κατά την εύρεση τοποθεσίας, η ακρίβεια είναι σε επίπεδο δρόμου"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Χρήση υποβοηθούμενου GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Χρήση διακομιστή για βοήθεια GPS (αποεπιλογή για να μειώσετε τη χρήση του δικτύου)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Χρήση διακομιστή για βοήθεια του GPS (αποεπιλογή για βελτίωση της απόδοσης του GPS)"</string>
-    <string name="use_location_title" msgid="3659340070401464551">"Χρήση τοποθεσίας για Αναζήτηση Google"</string>
-    <string name="use_location_summary_disabled" msgid="6518008620918354403">"Χρήση της τοποθεσίας για την Αναζήτηση Google και άλλες υπηρεσίες της Google"</string>
-    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Τοποθεσία που χρησιμοπ. για βελτίωση των αποτελ. Αναζήτησης Google και άλλων υπηρεσιών της Google"</string>
+    <!-- outdated translation 3659340070401464551 -->     <string name="use_location_title" msgid="5206937465504979977">"Χρήση τοποθεσίας για Αναζήτηση Google"</string>
+    <!-- outdated translation 1816849484040070431 -->     <string name="use_location_summary" msgid="3978805802386162520">"Χρήση της Τοποθεσίας μου για τα αποτελέσματα αναζήτησης Google και τις υπόλοιπες υπηρεσίες Google"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Σχετικά με το tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Σχετικά με το τηλέφωνο"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Προβολή νομικών πληροφοριών, κατάστασης, έκδοσης λογισμικού"</string>
@@ -1015,6 +1022,8 @@
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Η μετακίνηση της εφαρμογής απέτυχε. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Προτιμώμενη θέση εγκατάστασης"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Αλλαγή της προτιμώμενης θέσης εγκατάστασης για νέες εφαρμογές."</string>
+    <string name="app_disable_dlg_title" msgid="6662184657838747395">"Απενεργ. ενσωματ. εφαρμογής"</string>
+    <string name="app_disable_dlg_text" msgid="1328080928456579599">"Αν απενεργοποιήσετε μια ενσωματωμένη εφαρμογή, ενδέχεται να παρουσιαστεί πρόβλημα σε άλλες εφαρμογές. Είστε βέβαιοι;"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Αποθηκευτικός χώρος"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Προβολή του χώρου αποθήκευσης που χρησιμοποιούν οι εφαρμογές"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Υπηρεσίες που εκτελούνται"</string>
@@ -1104,6 +1113,8 @@
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"Πάντα απόκρυψη"</string>
     <string name="configure_input_method" msgid="7773992829158322455">"Διαμόρφωση μεθόδων εισαγωγής"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"Ρυθμίσεις"</string>
+    <!-- no translation found for input_method_settings_button (6778344383871619368) -->
+    <skip />
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Ενεργές μέθοδοι εισαγωγής"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"Χρήση γλώσσας συστήματος"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Ρυθμίσεις <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
@@ -1135,35 +1146,60 @@
     <string name="usage_time_label" msgid="295954901452833058">"Χρόνος χρήσης"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Προσβασιμότητα"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ρυθμίσεις προσβασιμότητας"</string>
-    <string name="accessibility_settings_summary" msgid="8185181964847149507">"Διαχείριση επιλογών προσβασιμότητας"</string>
-    <string name="toggle_large_text_title" msgid="42259643359869436">"Μεγάλο κείμενο"</string>
-    <string name="accessibility_services_category" msgid="8127851026323672607">"Υπηρεσίες προσβασιμότητας"</string>
-    <string name="toggle_accessibility_title" msgid="7338739354952553958">"Να επιτρέπεται η χρήση υπηρ. πρόσβασης"</string>
-    <!-- no translation found for accessibility_touch_exploration_title (8051665745907100462) -->
+    <!-- no translation found for accessibility_services_title (2592221829284342237) -->
     <skip />
-    <!-- no translation found for accessibility_touch_exploration_summary (2240315325033987563) -->
+    <!-- no translation found for accessibility_system_title (7187919089874130484) -->
     <skip />
-    <!-- no translation found for accessibility_touch_exploration_warning (3757888126817237932) -->
+    <!-- no translation found for accessibility_toggle_large_text_title (6618674985313017711) -->
     <skip />
-    <string name="no_accessibility_services_summary" msgid="694578333333808159">"Καμία εγκατεστημένη υπηρεσία προσβασιμότητας."</string>
-    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Αυτή η υπηρεσία προσβασιμότητας ενδέχεται να έχει τη δυνατότητα συλλογής όλων των κειμένων που πληκτρολογείτε, συμπεριλαμβανομένων των προσωπικών δεδομένων και των αριθμών πιστωτικών καρτών εκτός των κωδικών πρόσβασης. Ενδέχεται επίσης να καταγράφει τις δραστηριότητες της επιφάνειας χρήστη. Αυτή η λειτουργία προέρχεται από την εφαρμογή <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Να χρησιμοποιηθεί αυτή η υπηρεσία προσβασιμότητας;"</string>
-    <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Να απενεργοποιηθεί η προσβασιμότητα;"</string>
-    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Δεν βρέθηκαν εφαρμογές που σχετίζονται με δυνατότητα πρόσβασης"</string>
-    <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"Δεν έχετε εγκαταστήσει καμία εφαρμογή που σχετίζεται με την προσβασιμότητα."\n\n"Μπορείτε να κάνετε λήψη ενός προγράμματος ανάγνωσης οθόνης για τη συσκευή σας από το Android Market."\n\n"Κάντε κλικ στην επιλογή \"OK\" για να εγκαταστήσετε το πρόγραμμα ανάγνωσης οθόνης."</string>
-    <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Λήψη σεναρίων προσβασιμότητας"</string>
-    <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Να επιτρ. στις εφ/γές η λήψη σεναρίων προσβ/τας από την Google"</string>
-    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Ορισμένες εφαρμογές ενδέχεται να ζητήσουν από την Google τη λήψη σεναρίων στο  tablet σας, τα οποία κάνουν το περιεχόμενό τους πιο προσβάσιμο. Είστε βέβαιοι ότι θέλετε να επιτρέψετε στην Google να εγκαθιστά σενάρια προσβασιμότητας στο tablet σας;"</string>
-    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Ορισμένες εφαρμογές ενδέχεται να ζητήσουν από την Google τη λήψη σεναρίων στο τηλέφωνό σας, τα οποία κάνουν το περιεχόμενό τους πιο προσβάσιμο. Θέλετε σίγουρα να επιτρέψετε στην Google να εγκαθιστά σενάρια προσβασιμότητας στο τηλέφωνό σας;"</string>
-    <string name="accessibility_power_button_category" msgid="8545885236482339928">"Κουμπί λειτουργίας"</string>
-    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Το κουμπί λειτουργίας τερματίζει τις κλήσεις"</string>
-    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Κατά τη διάρκεια μιας κλήσης, το πάτημα του κουμπιού λειτουργίας τερματίζει τις κλήσεις αντί να απενεργοποιεί την οθόνη"</string>
+    <!-- no translation found for accessibility_power_button_ends_call_title (5468375366375940894) -->
+    <skip />
+    <!-- no translation found for accessibility_touch_exploration_title (4171477646863806078) -->
+    <skip />
+    <!-- no translation found for accessibility_touch_exploration_summary (1163951209315238103) -->
+    <skip />
+    <!-- no translation found for accessibility_long_press_timeout_title (2373216941395035306) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_title (7661286619870144136) -->
+    <skip />
+    <!-- no translation found for accessibility_menu_item_settings (3344942964710773365) -->
+    <skip />
+    <!-- no translation found for accessibility_menu_item_tutorial (567989492004682307) -->
+    <skip />
+    <!-- no translation found for accessibility_service_state_on (8791337599927106344) -->
+    <skip />
+    <!-- no translation found for accessibility_service_state_off (2458594460762620776) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_allowed (7624804397748427621) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_disallowed (5156785826922460983) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_button_allow (2201503285877102870) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_button_disallow (1846740874310014190) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning (8318281678500467596) -->
+    <skip />
+    <!-- no translation found for accessibility_disable_warning_title (6094507649988366153) -->
+    <skip />
+    <!-- no translation found for accessibility_disable_warning_summary (3421051138834637486) -->
+    <skip />
+    <!-- outdated translation 898893674114288531 -->     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Δεν βρέθηκαν εφαρμογές που σχετίζονται με δυνατότητα πρόσβασης"</string>
+    <!-- unknown placeholder BREAK_0 in accessibility_service_no_apps_message -->
+    <skip />
+    <!-- no translation found for accessibility_service_no_apps_message (3019731308902198093) -->
+    <skip />
+    <!-- outdated translation 1113600871264359828 -->     <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Ορισμένες εφαρμογές ενδέχεται να ζητήσουν από την Google τη λήψη σεναρίων στο  tablet σας, τα οποία κάνουν το περιεχόμενό τους πιο προσβάσιμο. Είστε βέβαιοι ότι θέλετε να επιτρέψετε στην Google να εγκαθιστά σενάρια προσβασιμότητας στο tablet σας;"</string>
+    <!-- no translation found for accessibility_touch_exploration_warning (3545647203361863891) -->
+    <skip />
+    <!-- no translation found for accessibility_service_default_description (7913667934411055972) -->
+    <skip />
     <string name="settings_button" msgid="3006713718908152930">"Ρυθμίσεις"</string>
-    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Κινήσεις δαχτύλων στην οθόνη αφής"</string>
-    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Καθυστέρηση παρατεταμένου αγγίγματος"</string>
-    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Καθυστέρηση μέχρι ένα άγγιγμα να ερμηνευθεί ως παρατεταμένο άγγιγμα"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Μπαταρία"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Τι χρησιμοποιούσε την μπαταρία"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Δεν υπάρχουν δεδομένα χρήσης"</string>
+    <!-- no translation found for power_usage_level_and_status (1457675765137705432) -->
+    <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"Χρήση μπαταρίας από τη στιγμή της αποσύνδεσης από την τροφοδοσία"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Χρήση μπαταρίας από τη στιγμή της επαναφοράς"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> με μπαταρία"</string>
@@ -1283,7 +1319,6 @@
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Ενημέρωση ρύθμισης Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Ενημέρωση ρύθμισης Bluetooth"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"Ρυθμίσεις VPN"</string>
-    <string name="vpn_settings_summary" msgid="8849924181594963972">"Εγκατάσταση και διαχείριση Εικονικών Ιδιωτικών Δικτύων (VPN)"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Αποθηκ. χώρος διαπιστευτηρίων"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Εγκατάσταση από συσκευή αποθ."</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Εγκατάσταση από κάρτα SD"</string>
@@ -1317,6 +1352,12 @@
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Κανένας λογαριασμός δεν αποθηκεύει αντίγραφα ασφαλείας"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Αυτόματη επαναφορά"</string>
     <string name="auto_restore_summary" msgid="83177150536734378">"Εάν εγκαταστήσω ξανά μια εφαρμογή, να γίνει επαναφορά των ρυθμίσεων ή άλλων δεδομένων για τα οποία έχουν δημιουργηθεί αντίγραφα ασφαλείας"</string>
+    <!-- no translation found for local_backup_password_title (8654157395556264248) -->
+    <skip />
+    <!-- no translation found for local_backup_password_summary_none (6957183071243950438) -->
+    <skip />
+    <!-- no translation found for local_backup_password_summary_change (2838158406324091370) -->
+    <skip />
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Αντίγραφο ασφαλείας"</string>
     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Είστε βέβαιοι ότι θέλετε να διακόψετε τη δημιουργία αντιγράφων ασφαλείας των κωδικών Wi-Fi, των σελιδοδεικτών και άλλων ρυθμίσεων και των δεδομένων εφαρμογών και να διαγράψετε όλα τα αντίγραφα από τους διακομιστές της Google;"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Ρυθμίσεις διαχείρισης συσκευής"</string>
@@ -1331,9 +1372,10 @@
     <string name="device_admin_status" msgid="7169948053970923035">"Αυτός ο διαχειριστής είναι ενεργός και επιτρέπει στην εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> να εκτελέσει τις ακόλουθες λειτουργίες:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Χωρίς τίτλο"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Γενικές"</string>
-    <string name="sound_category_calls_title" msgid="3688531959256239012">"Εισερχόμενες κλήσεις"</string>
+    <!-- no translation found for sound_category_calls_and_notification_title (4703470169010662085) -->
+    <skip />
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Ειδοποιήσεις"</string>
-    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Σχόλια"</string>
+    <!-- outdated translation 4399742321363475393 -->     <string name="sound_category_feedback_title" msgid="6047518536574673606">"Σχόλια"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Ρύθμιση Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Σύνδεση στο δίκτυο Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="2408378435027118687">"Σύνδεση σε δίκτυο Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1362,17 +1404,21 @@
     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Δεν είναι δυνατή η διαμόρφωση μιας σύνδεσης EAP Wi-Fi κατά τη διάρκεια της ρύθμισης. Μετά τη ρύθμιση, μπορείτε να τη διαμορφώσετε από τις Ρυθμίσεις, στην ενότητα "<b>"Ασύρματο και Δίκτυα"</b>"."</string>
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Η σύνδεση μπορεί να διαρκέσει αρκετά λεπτά..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Αγγίξτε το στοιχείο "<b>"Επόμενο"</b>" για να συνεχίσετε την εγκατάσταση."\n\n"Αγγίξτε το στοιχείο "<b>"Πίσω"</b>" για να συνδεθείτε σε διαφορετικό δίκτυο Wi-Fi."</string>
-    <string name="account_sync_settings_title" msgid="4578227872921044660">"Ρυθμίσεις συγχρονισμού"</string>
-    <!-- no translation found for sync_is_failing (1591561768344128377) -->
+    <!-- no translation found for accessibility_sync_enabled (558480439730263116) -->
     <skip />
+    <!-- no translation found for accessibility_sync_disabled (1741194106479011384) -->
+    <skip />
+    <!-- no translation found for accessibility_sync_error (8703299118794272041) -->
+    <skip />
+    <string name="account_sync_settings_title" msgid="4578227872921044660">"Ρυθμίσεις συγχρονισμού"</string>
+    <string name="sync_is_failing" msgid="1591561768344128377">"Ο συγχρονισμός αντιμετωπίζει προβλήματα αυτήν τη στιγμή. Θα είναι διαθέσιμο ξανά σύντομα."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Προσθήκη λογαριασμού"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Γενικές ρυθμίσεις συγχρονισμού"</string>
     <string name="background_data" msgid="5779592891375473817">"Δεδομένα φόντου"</string>
     <string name="background_data_summary" msgid="3630389249212620467">"Οι εφ/γές μπορούν να κάνουν συγχρ., αποστ. και λήψη δεδομ."</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Προσοχή"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Η απενεργοποίηση δεδομένων παρασκηνίου αυξάνει το χρόνο ζωής της μπαταρίας και μειώνει τη χρήση δεδομένων. Ορισμένες εφαρμογές ενδέχεται να συνεχίσουν να χρησιμοποιούν τη σύνδεση δεδομένων παρασκηνίου."</string>
-    <!-- no translation found for sync_automatically (7558810110682562376) -->
-    <skip />
+    <string name="sync_automatically" msgid="7558810110682562376">"Αυτόματος συγχρονισμός"</string>
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Οι εφαρμογές συγχρονίζουν αυτόματα τα δεδομένα"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Διαχείριση λογαριασμών"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Συγχρ. είναι ενεργ."</string>
@@ -1380,18 +1426,13 @@
     <string name="sync_error" msgid="5060969083117872149">"Σφάλμα συγχρονισμού"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Δημιουργία αντιγράφων ασφαλείας για τις ρυθμίσεις"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Δημιουργία αντιγράφων ασφαλείας για τις ρυθμίσεις μου"</string>
-    <!-- no translation found for sync_menu_sync_now (6154608350395805683) -->
-    <skip />
-    <!-- no translation found for sync_menu_sync_cancel (8292379009626966949) -->
-    <skip />
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"Συγχρονισμός τώρα"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Ακύρωση συγχρονισμού"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Πατήστε για άμεσο συγχρονισμό<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- no translation found for sync_gmail (714886122098006477) -->
-    <skip />
-    <!-- no translation found for sync_calendar (9056527206714733735) -->
-    <skip />
-    <!-- no translation found for sync_contacts (9174914394377828043) -->
-    <skip />
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"Ημερολόγιο"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Επαφές"</string>
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Καλώς ορίσατε στο Google Sync!"</font>" "\n"Μια προσέγγιση της Google στο συγχρονισμό δεδομένων, που επιτρέπει την πρόσβαση στις επαφές σας, στις συναντήσεις σας και σε άλλα στοιχεία, όπου και αν βρίσκεστε."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Ρυθμίσεις συγχρονισμού εφαρμογής"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Δεδομένα και συγχρονισμός"</string>
@@ -1431,10 +1472,12 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Κλίμακα κίνησης παραθύρου"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Κλίμακα κίνησης μετάβασης"</string>
     <string name="debug_applications_category" msgid="6221644998451283813">"Εφαρμογές"</string>
-    <!-- no translation found for immediately_destroy_activities (8366775083630234121) -->
-    <skip />
+    <string name="immediately_destroy_activities" msgid="8366775083630234121">"Μη διατήρ. δραστηριοτήτων"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Διαγραφή κάθε δραστηριότητας μετά τον τερματισμό"</string>
-    <!-- no translation found for app_process_limit_title (4280600650253107163) -->
+    <string name="app_process_limit_title" msgid="4280600650253107163">"Όριο διεργασ. παρασκηνίου"</string>
+    <!-- no translation found for show_all_anrs (28462979638729082) -->
+    <skip />
+    <!-- no translation found for show_all_anrs_summary (92558681104207054) -->
     <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Χρήση δεδομένων"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Κύκλος δεδομένων χρήσης"</string>
@@ -1442,16 +1485,16 @@
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Περιορισμός δεδομένων παρασκηνίου"</string>
     <string name="data_usage_menu_split_4g" msgid="7417435609285381968">"Διαχωρισμός χρήσης 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Εμφάνιση χρήσης Wi-Fi"</string>
-    <!-- no translation found for data_usage_menu_show_ethernet (5181361208532314097) -->
-    <skip />
+    <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Εμφάνιση χρήσης Ethernet"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Αλλαγή κύκλου..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Η ημέρα που θα γίνει η επαναφορά του κύκλου χρήσης δεδομένων:"</string>
+    <!-- no translation found for data_usage_empty (9089930257306304588) -->
+    <skip />
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Απεν. δεδ. κιν. τηλεφ. στο όριο"</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Απενεργοπ. δεδομένων 4G στο όριο"</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Απενεργ. δεδομ. 2G-3G στο όριο"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
-    <!-- no translation found for data_usage_tab_ethernet (7298064366282319911) -->
-    <skip />
+    <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"Κινητό"</string>
     <string name="data_usage_tab_4g" msgid="1301978716067512235">"4G"</string>
     <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G-3G"</string>
@@ -1470,16 +1513,13 @@
     <string name="data_usage_limit_dialog_mobile" msgid="7931094451923591578">"Η σύνδεση δεδομένων κινητής τηλεφωνίας θα απενεργοποιηθεί όταν συμπληρωθεί το καθορισμένο όριο."\n\n"Για την αποφυγή χρεώσεων, σκεφτείτε το ενδεχόμενο χρήσης μειωμένου ορίου, καθώς ο υπολογισμός των χρεώσεων από τη συσκευή και την εταιρεία κινητής τηλεφωνίας ενδέχεται να διαφέρει."</string>
     <string name="data_usage_limit_dialog_3g" msgid="5478553071420316963">"Η σύνδεση δεδομένων 2G-3G θα απενεργοποιηθεί όταν συμπληρωθεί το καθορισμένο όριο."\n\n"Για την αποφυγή χρεώσεων, σκεφτείτε το ενδεχόμενο χρήσης μειωμένου ορίου, καθώς ο υπολογισμός των χρεώσεων από τη συσκευή και την εταιρεία κινητής τηλεφωνίας ενδέχεται να διαφέρει."</string>
     <string name="data_usage_limit_dialog_4g" msgid="6134008906742403777">"Η σύνδεση δεδομένων 4G θα απενεργοποιηθεί όταν συμπληρωθεί το καθορισμένο όριο."\n\n"Για την αποφυγή χρεώσεων, σκεφτείτε το ενδεχόμενο χρήσης μειωμένου ορίου, καθώς ο υπολογισμός των χρεώσεων από τη συσκευή και την εταιρεία κινητής τηλεφωνίας ενδέχεται να διαφέρει."</string>
-    <string name="data_usage_disabled_dialog_3g_title" msgid="4221584306492812040">"Τα δεδομένα 2G-3G απενεργοποιήθηκαν"</string>
-    <string name="data_usage_disabled_dialog_4g_title" msgid="715585612162185936">"Τα δεδομένα 4G απενεργοποιήθηκαν"</string>
-    <string name="data_usage_disabled_dialog_mobile_title" msgid="209516216265000221">"Τα δεδομένα κινητής τηλεφωνίας απενεργοποιήθηκαν"</string>
-    <string name="data_usage_disabled_dialog" msgid="2874031671067845964">"Το καθορισμένο όριο χρήσης δεδομένων συμπληρώθηκε."\n\n"Πρόσθετη χρήση δεδομένων ενδέχεται να επιφέρει χρεώσεις από την εταιρεία κινητής τηλεφωνίας."</string>
-    <string name="data_usage_disabled_dialog_enable" msgid="2441219164620753329">"Εκ νέου ενεργοποίηση δεδομ."</string>
     <string name="data_usage_restrict_background_title" msgid="8698943580968040399">"Περιορισμός δεδομένων παρασκηνίου"</string>
     <string name="data_usage_restrict_background" msgid="8423203957506810725">"Αυτή η λειτουργία θα απενεργοποιήσει τον αυτόματο συγχρονισμό και ενδέχεται να επηρεάσει αρνητικά τις εφαρμογές που εξαρτώνται από τη χρήση δεδομένων παρασκηνίου."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">" <xliff:g id="NUMBER">^1</xliff:g> "</font>" "<font size="9">" <xliff:g id="UNIT">^2</xliff:g> "</font>" "\n" "<font size="12">" προειδοποίηση "</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"όριο"</font></string>
-    <!-- no translation found for data_usage_uninstalled_apps (614263770923231598) -->
+    <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Εφαρμογές που καταργήθηκαν"</string>
+    <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> ελήφθησαν, <xliff:g id="SENT">%2$s</xliff:g> εστάλησαν"</string>
+    <!-- no translation found for data_usage_total_during_range (4054704716100246458) -->
     <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Κλήση έκτακτης ανάγκης"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Επιστροφή στην κλήση"</string>
@@ -1492,14 +1532,17 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"Ήδη κοινόχρηστο κλειδί IPSec"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"Πιστοποιητικό χρήστη IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"Πιστοποιητικό CA IPSec"</string>
+    <!-- no translation found for vpn_show_options (7182688955890457003) -->
+    <skip />
     <string name="vpn_search_domains" msgid="5391995501541199624">"Τομείς αναζήτησης DNS"</string>
-    <!-- no translation found for vpn_routes (8556236801755260073) -->
+    <!-- no translation found for vpn_dns_servers (5570715561245741829) -->
+    <skip />
+    <!-- no translation found for vpn_routes (3818655448226312232) -->
     <skip />
     <string name="vpn_username" msgid="1863901629860867849">"Όνομα χρήστη"</string>
     <string name="vpn_password" msgid="6756043647233596772">"Κωδικός πρόσβασης"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"Αποθήκευση πληροφοριών λογαριασμού"</string>
-    <!-- no translation found for vpn_not_used (9094191054524660891) -->
-    <skip />
+    <string name="vpn_not_used" msgid="9094191054524660891">"(δεν χρησιμοποιείται)"</string>
     <string name="vpn_no_ca_cert" msgid="7820884983947090538">"(να μην γίνεται επαλήθευση διακομιστή)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"Ακύρωση"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Αποθήκευση"</string>
@@ -1518,40 +1561,33 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Ενεργοποίηση πιστοποιητικού CA συστήματος;"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Απενεργοποίηση πιστοποιητικού CA συστήματος;"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Να καταργηθεί οριστικά το πιστοποιητικό CA χρήστη;"</string>
-    <!-- no translation found for accessibility_tutorial_title (3926765293260792376) -->
+    <string name="accessibility_tutorial_title" msgid="7577630829320003070">"Οδηγός για το \"Talk As I Touch\""</string>
+    <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Επόμενο"</string>
+    <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Πίσω"</string>
+    <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Τέλος"</string>
+    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Παρ.οδηγ."</string>
+    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Μάθημα 1: Εξερεύνηση της οθόνης"</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="2465037336858060269">"Όταν ενεργοποιήσετε τη λειτουργία \"Talk As I Touch\", μπορείτε να αγγίξετε την οθόνη για να ακούσετε μια περιγραφή του στοιχείου που βρίσκεται κάτω από το δάχτυλό σας. Για παράδειγμα, η τρέχουσα οθόνη περιέχει εικονίδια εφαρμογών. Για να βρείτε ένα από αυτά, αγγίξτε την οθόνη και σύρετε το δάχτυλό σας."</string>
+    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Συνεχίστε την ολίσθηση με το δάχτυλό σας στην οθόνη έως ότου βρείτε τουλάχιστον ένα ακόμη εικονίδιο."</string>
+    <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Για να ενεργοποιήσετε ένα στοιχείο που αγγίζετε, πατήστε το. Σύρετε το δάχτυλό σας έως ότου βρείτε το εικονίδιο για την εφαρμογή <xliff:g id="APP_NAME">%s</xliff:g>. Στη συνέχεια, πατήστε στο εικονίδιο μία φορά για να το ενεργοποιήσετε."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Το δάχτυλό σας αγγίζει το εικονίδιο <xliff:g id="APP_NAME">%s</xliff:g>. Πατήστε μία φορά για να ενεργοποιήσετε το εικονίδιο."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"Μετακινήσατε το δάχτυλό σας πάνω από το εικονίδιο <xliff:g id="APP_NAME">%s</xliff:g> και μετά το απομακρύνατε. Σύρετε αργά το δάχτυλό σας στην οθόνη έως ότου βρείτε ξανά το εικονίδιο \"Πρόγραμμα περιήγησης\"."</string>
+    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"Για να μεταβείτε στο επόμενο μάθημα, βρείτε και ενεργοποιήστε το κουμπί <xliff:g id="NEXT">%s</xliff:g> που βρίσκεται στην κάτω δεξιά γωνία της οθόνης."</string>
+    <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"Μάθημα 2: Κύλιση με δύο δάχτυλα"</string>
+    <string name="accessibility_tutorial_lesson_2_text_1" msgid="6093658992237125829">"Για να πραγματοποιήσετε κύλιση σε μια λίστα, μπορείτε να σύρετε δύο δάχτυλα στην οθόνη. Για παράδειγμα, η τρέχουσα οθόνη περιέχει μια λίστα ονομάτων εφαρμογών, στην οποία μπορείτε να πραγματοποιήσετε κύλιση προς τα πάνω ή προς τα κάτω. Αρχικά, προσπαθήστε να αναγνωρίσετε μερικά στοιχεία στη λίστα με ολίσθηση με ένα δάχτυλο."</string>
+    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Συνεχίστε την ολίσθηση για να βρείτε τουλάχιστον ένα ακόμη στοιχείο."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Τοποθετήστε δύο δάχτυλα σε ένα στοιχείο στη λίστα και σύρετε δύο δάχτυλα προς τα πάνω. Αν φτάσετε στο πάνω μέρος της οθόνης, ανασηκώστε τα δάχτυλά σας, τοποθετήστε τα χαμηλότερα στη λίστα και συνεχίστε την ολίσθηση προς τα πάνω."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Συνεχίστε την ολίσθηση προς τα πάνω για να πραγματοποιήσετε περισσότερη κύλιση."</string>
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="5374753806314829405">"Ολοκληρώσατε τον οδηγό. Για να πραγματοποιήσετε έξοδο και να επιστρέψετε στη ρύθμιση \"Talk As I Touch\", βρείτε και πατήστε το κουμπί <xliff:g id="FINISH">%s</xliff:g>."</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Διόρθωση ορθογραφίας"</string>
+    <!-- no translation found for current_backup_pw_prompt (8314880813545036591) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_next (5079911515520801099) -->
+    <!-- no translation found for new_backup_pw_prompt (3491404828757901644) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_back (2583933084111712540) -->
+    <!-- no translation found for confirm_new_backup_pw_prompt (7087168267741332184) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_finish (3964330895719289570) -->
+    <!-- no translation found for backup_pw_set_button_text (2387480910044648795) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_skip (3635250542851027317) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_title (3873621900803351663) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_1 (760431092060077556) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_2_more (8660172173481222391) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_3 (3194180028342431396) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4 (4599587752899003671) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4_exited (5998233832613317990) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_5 (2794415091544942274) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_title (5433835224510038931) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_1 (4995371521679893271) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_2_more (4911096540770139540) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3 (3296298872582868831) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3_more (8104405316747426728) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (4722003802780348144) -->
+    <!-- no translation found for backup_pw_cancel_button_text (8845630125391744615) -->
     <skip />
 </resources>
