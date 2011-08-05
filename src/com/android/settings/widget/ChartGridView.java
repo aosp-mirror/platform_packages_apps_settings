@@ -17,12 +17,20 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 
+import com.android.settings.DataUsageSummary;
 import com.android.settings.R;
 import com.google.common.base.Preconditions;
 
@@ -32,14 +40,16 @@ import com.google.common.base.Preconditions;
  */
 public class ChartGridView extends View {
 
-    // TODO: eventually teach about drawing chart labels
-
     private ChartAxis mHoriz;
     private ChartAxis mVert;
 
     private Drawable mPrimary;
     private Drawable mSecondary;
     private Drawable mBorder;
+    private int mLabelColor;
+
+    private Layout mLayoutStart;
+    private Layout mLayoutEnd;
 
     public ChartGridView(Context context) {
         this(context, null, 0);
@@ -60,7 +70,7 @@ public class ChartGridView extends View {
         mPrimary = a.getDrawable(R.styleable.ChartGridView_primaryDrawable);
         mSecondary = a.getDrawable(R.styleable.ChartGridView_secondaryDrawable);
         mBorder = a.getDrawable(R.styleable.ChartGridView_borderDrawable);
-        // TODO: eventually read labelColor
+        mLabelColor = a.getColor(R.styleable.ChartGridView_labelColor, Color.RED);
 
         a.recycle();
     }
@@ -68,6 +78,13 @@ public class ChartGridView extends View {
     void init(ChartAxis horiz, ChartAxis vert) {
         mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
         mVert = Preconditions.checkNotNull(vert, "missing vert");
+    }
+
+    void setBounds(long start, long end) {
+        final Context context = getContext();
+        mLayoutStart = makeLayout(DataUsageSummary.formatDateRange(context, start, start, true));
+        mLayoutEnd = makeLayout(DataUsageSummary.formatDateRange(context, end, end, true));
+        invalidate();
     }
 
     @Override
@@ -98,5 +115,38 @@ public class ChartGridView extends View {
 
         mBorder.setBounds(0, 0, width, height);
         mBorder.draw(canvas);
+
+        final int padding = mLayoutStart.getHeight() / 8;
+
+        final Layout start = mLayoutStart;
+        if (start != null) {
+            canvas.save();
+            canvas.translate(0, height + padding);
+            start.draw(canvas);
+            canvas.restore();
+        }
+
+        final Layout end = mLayoutEnd;
+        if (end != null) {
+            canvas.save();
+            canvas.translate(width - end.getWidth(), height + padding);
+            end.draw(canvas);
+            canvas.restore();
+        }
     }
+
+    private Layout makeLayout(CharSequence text) {
+        final Resources res = getResources();
+        final TextPaint paint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+        paint.density = res.getDisplayMetrics().density;
+        paint.setCompatibilityScaling(res.getCompatibilityInfo().applicationScale);
+        paint.setColor(mLabelColor);
+        paint.setTextSize(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, res.getDisplayMetrics()));
+
+        return new StaticLayout(text, paint,
+                (int) Math.ceil(Layout.getDesiredWidth(text, paint)),
+                Layout.Alignment.ALIGN_NORMAL, 1.f, 0, true);
+    }
+
 }
