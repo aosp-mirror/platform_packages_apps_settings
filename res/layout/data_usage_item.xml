@@ -21,7 +21,15 @@
     android:paddingRight="16dip"
     android:paddingTop="8dip"
     android:paddingBottom="8dip"
-    android:columnCount="2">
+    android:columnCount="3">
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
+        android:layout_rowSpan="2"
+        android:layout_marginRight="8dip"
+        android:scaleType="centerInside" />
 
     <TextView
         android:id="@android:id/title"

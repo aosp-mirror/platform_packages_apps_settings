@@ -343,6 +343,7 @@ public class DataUsageChartView extends ChartView {
      */
     public void setVisibleRange(long visibleStart, long visibleEnd) {
         mHoriz.setBounds(visibleStart, visibleEnd);
+        mGrid.setBounds(visibleStart, visibleEnd);
 
         final long validStart = Math.max(visibleStart, getStatsStart());
         final long validEnd = Math.min(visibleEnd, getStatsEnd());

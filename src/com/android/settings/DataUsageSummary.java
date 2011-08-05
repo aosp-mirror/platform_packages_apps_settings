@@ -37,6 +37,9 @@ import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
 import static android.net.NetworkTemplate.buildTemplateMobile4g;
 import static android.net.NetworkTemplate.buildTemplateMobileAll;
 import static android.net.NetworkTemplate.buildTemplateWifi;
+import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
+import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
+import static android.text.format.Time.TIMEZONE_UTC;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.animation.LayoutTransition;
@@ -57,6 +60,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -78,7 +82,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -97,6 +100,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -190,8 +194,8 @@ public class DataUsageSummary extends Fragment {
     private TextView mEmpty;
 
     private View mAppDetail;
-    private TextView mAppTitle;
-    private TextView mAppSubtitle;
+    private ImageView mAppIcon;
+    private ViewGroup mAppTitles;
     private Button mAppSettings;
 
     private LinearLayout mAppSwitches;
@@ -295,8 +299,8 @@ public class DataUsageSummary extends Fragment {
         {
             // bind app detail controls
             mAppDetail = mHeader.findViewById(R.id.app_detail);
-            mAppTitle = (TextView) mAppDetail.findViewById(R.id.app_title);
-            mAppSubtitle = (TextView) mAppDetail.findViewById(R.id.app_subtitle);
+            mAppIcon = (ImageView) mAppDetail.findViewById(R.id.app_icon);
+            mAppTitles = (ViewGroup) mAppDetail.findViewById(R.id.app_titles);
             mAppSwitches = (LinearLayout) mAppDetail.findViewById(R.id.app_switches);
 
             mAppSettings = (Button) mAppDetail.findViewById(R.id.app_settings);
@@ -643,6 +647,10 @@ public class DataUsageSummary extends Fragment {
      * depending on {@link #isAppDetailMode()}.
      */
     private void updateAppDetail() {
+        final Context context = getActivity();
+        final PackageManager pm = context.getPackageManager();
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
+
         if (isAppDetailMode()) {
             mAppDetail.setVisibility(View.VISIBLE);
             mCycleAdapter.setChangeVisible(false);
@@ -658,8 +666,18 @@ public class DataUsageSummary extends Fragment {
         // remove warning/limit sweeps while in detail mode
         mChart.bindNetworkPolicy(null);
 
-        final PackageManager pm = getActivity().getPackageManager();
-        mAppTitle.setText(pm.getNameForUid(mUid));
+        // show icon and all labels appearing under this app
+        final UidDetail detail = resolveDetailForUid(context, mUid);
+        mAppIcon.setImageDrawable(detail.icon);
+
+        mAppTitles.removeAllViews();
+        if (detail.detailLabels != null) {
+            for (CharSequence label : detail.detailLabels) {
+                mAppTitles.addView(inflateAppTitle(inflater, mAppTitles, label));
+            }
+        } else {
+            mAppTitles.addView(inflateAppTitle(inflater, mAppTitles, detail.label));
+        }
 
         // enable settings button when package provides it
         // TODO: target torwards entire UID instead of just first package
@@ -693,7 +711,6 @@ public class DataUsageSummary extends Fragment {
 
         updateDetailData();
 
-        final Context context = getActivity();
         if (NetworkPolicyManager.isUidValidForPolicy(context, mUid) && !getRestrictBackground()
                 && isBandwidthControlEnabled()) {
             mAppRestrictView.setVisibility(View.VISIBLE);
@@ -814,7 +831,9 @@ public class DataUsageSummary extends Fragment {
         if (isNetworkPolicyModifiable()) {
             mDisableAtLimitView.setVisibility(View.VISIBLE);
             mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
-            mChart.bindNetworkPolicy(policy);
+            if (!isAppDetailMode()) {
+                mChart.bindNetworkPolicy(policy);
+            }
 
         } else {
             // controls are disabled; don't bind warning/limit sweeps
@@ -998,11 +1017,6 @@ public class DataUsageSummary extends Fragment {
         if (isAppDetailMode()) {
             if (mDetailHistory != null) {
                 entry = mDetailHistory.getValues(start, end, now, null);
-
-                mAppSubtitle.setText(
-                        getString(R.string.data_usage_received_sent,
-                                Formatter.formatFileSize(context, entry.rxBytes),
-                                Formatter.formatFileSize(context, entry.txBytes)));
             } else {
                 entry = null;
             }
@@ -1015,12 +1029,11 @@ public class DataUsageSummary extends Fragment {
             // kick off loader for detailed stats
             getLoaderManager().restartLoader(LOADER_SUMMARY,
                     SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryForAllUid);
-
         }
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
         final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
-        final String rangePhrase = formatDateRange(context, start, end, null);
+        final String rangePhrase = formatDateRange(context, start, end, false);
 
         mUsageSummary.setText(
                 getString(R.string.data_usage_total_during_range, totalPhrase, rangePhrase));
@@ -1104,7 +1117,7 @@ public class DataUsageSummary extends Fragment {
         }
 
         public CycleItem(Context context, long start, long end) {
-            this.label = formatDateRange(context, start, end, Time.TIMEZONE_UTC);
+            this.label = formatDateRange(context, start, end, true);
             this.start = start;
             this.end = end;
         }
@@ -1119,14 +1132,11 @@ public class DataUsageSummary extends Fragment {
     private static final java.util.Formatter sFormatter = new java.util.Formatter(
             sBuilder, Locale.getDefault());
 
-    private static String formatDateRange(Context context, long start, long end, String timezone) {
-        synchronized (sBuilder) {
-            int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
-            if (Time.getJulianDay(start, 0) == Time.getJulianDay(end, 0)) {
-                // when times are on same day, include time detail
-                flags |= DateUtils.FORMAT_SHOW_TIME;
-            }
+    public static String formatDateRange(Context context, long start, long end, boolean utcTime) {
+        final int flags = FORMAT_SHOW_DATE | FORMAT_ABBREV_MONTH;
+        final String timezone = utcTime ? TIMEZONE_UTC : null;
 
+        synchronized (sBuilder) {
             sBuilder.setLength(0);
             return DateUtils
                     .formatDateRange(context, sFormatter, start, end, flags, timezone).toString();
@@ -1250,13 +1260,17 @@ public class DataUsageSummary extends Fragment {
 
             final Context context = parent.getContext();
 
+            final ImageView icon = (ImageView) convertView.findViewById(android.R.id.icon);
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
             final TextView summary = (TextView) convertView.findViewById(android.R.id.summary);
             final ProgressBar progress = (ProgressBar) convertView.findViewById(
                     android.R.id.progress);
 
             final AppUsageItem item = mItems.get(position);
-            title.setText(resolveLabelForUid(context, item.uid));
+            final UidDetail detail = resolveDetailForUid(context, item.uid);
+
+            icon.setImageDrawable(detail.icon);
+            title.setText(detail.label);
             summary.setText(Formatter.formatFileSize(context, item.total));
 
             final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
@@ -1536,48 +1550,66 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
+    public static class UidDetail {
+        public CharSequence label;
+        public CharSequence[] detailLabels;
+        public Drawable icon;
+    }
+
     /**
      * Resolve best descriptive label for the given UID.
      */
-    public static CharSequence resolveLabelForUid(Context context, int uid) {
+    public static UidDetail resolveDetailForUid(Context context, int uid) {
         final Resources res = context.getResources();
         final PackageManager pm = context.getPackageManager();
+
+        final UidDetail detail = new UidDetail();
+        detail.label = pm.getNameForUid(uid);
+        detail.icon = pm.getDefaultActivityIcon();
 
         // handle special case labels
         switch (uid) {
             case android.os.Process.SYSTEM_UID:
-                return res.getText(R.string.process_kernel_label);
+                detail.label = res.getString(R.string.process_kernel_label);
+                detail.icon = pm.getDefaultActivityIcon();
+                return detail;
             case TrafficStats.UID_REMOVED:
-                return res.getText(R.string.data_usage_uninstalled_apps);
+                detail.label = res.getString(R.string.data_usage_uninstalled_apps);
+                detail.icon = pm.getDefaultActivityIcon();
+                return detail;
         }
 
         // otherwise fall back to using packagemanager labels
         final String[] packageNames = pm.getPackagesForUid(uid);
         final int length = packageNames != null ? packageNames.length : 0;
 
-        CharSequence label = pm.getNameForUid(uid);
         try {
             if (length == 1) {
                 final ApplicationInfo info = pm.getApplicationInfo(packageNames[0], 0);
-                label = info.loadLabel(pm);
+                detail.label = info.loadLabel(pm).toString();
+                detail.icon = info.loadIcon(pm);
             } else if (length > 1) {
-                for (String packageName : packageNames) {
-                    final PackageInfo info = pm.getPackageInfo(packageName, 0);
-                    if (info.sharedUserLabel != 0) {
-                        label = pm.getText(packageName, info.sharedUserLabel, info.applicationInfo);
-                        if (!TextUtils.isEmpty(label)) {
-                            break;
-                        }
+                detail.detailLabels = new CharSequence[length];
+                for (int i = 0; i < length; i++) {
+                    final String packageName = packageNames[i];
+                    final PackageInfo packageInfo = pm.getPackageInfo(packageName, 0);
+                    final ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
+
+                    detail.detailLabels[i] = appInfo.loadLabel(pm).toString();
+                    if (packageInfo.sharedUserLabel != 0) {
+                        detail.label = pm.getText(packageName, packageInfo.sharedUserLabel,
+                                packageInfo.applicationInfo).toString();
+                        detail.icon = appInfo.loadIcon(pm);
                     }
                 }
             }
         } catch (NameNotFoundException e) {
         }
 
-        if (TextUtils.isEmpty(label)) {
-            label = Integer.toString(uid);
+        if (TextUtils.isEmpty(detail.label)) {
+            detail.label = Integer.toString(uid);
         }
-        return label;
+        return detail;
     }
 
     /**
@@ -1649,6 +1681,14 @@ public class DataUsageSummary extends Fragment {
         final LinearLayout widgetFrame = (LinearLayout) view.findViewById(
                 android.R.id.widget_frame);
         widgetFrame.addView(widget, new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+        return view;
+    }
+
+    private static View inflateAppTitle(
+            LayoutInflater inflater, ViewGroup root, CharSequence label) {
+        final TextView view = (TextView) inflater.inflate(
+                R.layout.data_usage_app_title, root, false);
+        view.setText(label);
         return view;
     }
 

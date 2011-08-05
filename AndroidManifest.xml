@@ -1185,7 +1185,8 @@
         </activity>
 
         <activity android:name="Settings$DataUsageSummaryActivity"
-                android:label="@string/data_usage_summary_title">
+                android:label="@string/data_usage_summary_title"
+                android:uiOptions="none">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
