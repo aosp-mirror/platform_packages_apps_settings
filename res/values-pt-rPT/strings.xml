@@ -94,15 +94,12 @@
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Frio"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Detectável"</string>
-    <!-- no translation found for bluetooth_is_discoverable (8373421452106840526) -->
-    <skip />
-    <!-- outdated translation 8573385118329733931 -->     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Detectável"</string>
-    <!-- no translation found for bluetooth_not_visible_to_other_devices (9120274591523391910) -->
-    <skip />
-    <!-- no translation found for bluetooth_only_visible_to_paired_devices (2049983392373296028) -->
-    <skip />
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visível p/ tds aparelhos Bluetooth próximos (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visível para todos os aparelhos Bluetooth nas proximidades"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Não visível a outros aparelhos Bluetooth"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Visível apenas para aparelhos sincronizados"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Tornar o dispositivo detectável"</string>
-    <!-- outdated translation 6634508002347847278 -->     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Tempo limite em que é detectável"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Tempo limite de visibilidade"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Definir durante quanto tempo ficará o dispositivo detectável"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Bloquear marcação por voz"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Evitar a utilização do telefone Bluetooth quando o ecrã está bloqueado"</string>
@@ -110,16 +107,11 @@
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Nome do dispositivo"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Nenhum nome definido. A utilizar o nome da conta"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Procurar dispositivos"</string>
-    <!-- no translation found for bluetooth_rename_device (787970073150631155) -->
-    <skip />
-    <!-- no translation found for bluetooth_rename_device (6267987985556136749) -->
-    <skip />
-    <!-- no translation found for bluetooth_rename_button (1648028693822994566) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_title (6026705382020027966) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (9148530542956217908) -->
-    <skip />
+    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Mudar o nome do tablet"</string>
+    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"Mudar o nome do telefone"</string>
+    <string name="bluetooth_rename_button" msgid="1648028693822994566">"Mudar o nome"</string>
+    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Desligar?"</string>
+    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Isto terminará a sua ligação com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"O <xliff:g id="DEVICE_NAME">%1$s</xliff:g> será desligado."</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Ligado"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Desligado"</string>
@@ -129,15 +121,14 @@
     <string name="bluetooth_not_connected" msgid="3389882907500605937">"Emparelhar com este dispositivo"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"A emparelhar..."</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Emparelhado mas não ligado"</string>
-    <!-- outdated translation 6873461446424952003 -->     <string name="bluetooth_device" msgid="5291950341750186887">"mãos-livres/auricular"</string>
+    <string name="bluetooth_device" msgid="5291950341750186887">"Aparelho Bluetooth sem nome"</string>
     <string name="progress_scanning" msgid="192587958424295789">"A pesquisar"</string>
     <string name="progress_tap_to_pair" msgid="4192342336107106334">"Toque para sincronizar"</string>
     <string name="bluetooth_no_devices_found" msgid="2412462335116297668">"Nenhum aparelho Bluetooth nas proximid."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Pedido de emparelhamento de Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pedido de emparelhamento"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"Seleccionar emparelhamento com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_show_received_files (5164787486105868895) -->
-    <skip />
+    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar ficheiros recebidos"</string>
     <string name="device_picker" msgid="8721012448931226323">"Seleccionador de dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Pedido de emparelhamento de Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Uma aplicação está a pedir autorização para activar o Bluetooth. Pretende fazê-lo?"</string>
@@ -404,26 +395,17 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gerir ligações, definir nome e detectabilidade do dispositivo"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Pedido de emparelhamento de Bluetooth"</string>
-    <!-- no translation found for bluetooth_enter_pin_msg (7437165032040778458) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_msg (711115233006730281) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_alphanumeric_pin (7222713483058171357) -->
-    <skip />
-    <!-- no translation found for bluetooth_pin_values_hint (3815897557875873646) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_pin_other_device (3617812138113586885) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_other_device (1808735246794073465) -->
-    <skip />
-    <!-- no translation found for bluetooth_confirm_passkey_msg (3708312912841950052) -->
-    <skip />
-    <!-- no translation found for bluetooth_incoming_pairing_msg (1615930853859551491) -->
-    <skip />
-    <!-- no translation found for bluetooth_display_passkey_pin_msg (2084350245062266220) -->
-    <skip />
+    <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"Para sincronizar com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Introduza o PIN exigido do aparelho:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"Para sincronizar com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Introduza a chave de acesso exigida do aparelho:"</string>
+    <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"O PIN contém letras ou símbolos"</string>
+    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Geralmente 0000 ou 1234"</string>
+    <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Pode também ter de introduzir este PIN no outro aparelho."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Pode também ter de introduzir esta chave de acesso no outro aparelho."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Verifique se apresenta esta chave de acesso: &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Sincronizar com este aparelho?"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"Para sincronizar com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Introduza no mesmo: &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; e em seguida prima Enter."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Par"</string>
-    <!-- outdated translation 930951069988011471 -->     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Não emparelhar"</string>
+    <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancelar"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Atenção"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Ocorreu um problema ao emparelhar com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Ocorreu um problema ao emparelhar com <xliff:g id="DEVICE_NAME">%1$s</xliff:g> porque o PIN ou a Chave de acesso introduzidos não estão correctos."</string>
@@ -489,8 +471,7 @@
     <skip />
     <!-- no translation found for zeroclick_off_summary (2896320184904157018) -->
     <skip />
-    <!-- no translation found for zeroclick_label (6908892664706309626) -->
-    <skip />
+    <string name="zeroclick_label" msgid="6908892664706309626">"Partilha de zero cliques"</string>
     <!-- no translation found for zeroclick_explained (3953149564512166049) -->
     <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
@@ -572,24 +553,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Compr. do prefixo de rede"</string>
-    <!-- no translation found for wifi_p2p_settings_title (400503541488064638) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_settings_summary (819202165773287900) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_device_info (6092748173212362426) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_wps_setup (7706254437161351448) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_wps_pin (492162570392614138) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_persist_network (1646424791818168590) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_search (7189970585393813135) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_create_group (7595229161883902082) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_advanced (2578792521809265949) -->
-    <skip />
+    <string name="wifi_p2p_settings_title" msgid="400503541488064638">"Wi-Fi Direct"</string>
+    <string name="wifi_p2p_settings_summary" msgid="819202165773287900">"Configuração da conetividade ponto a ponto"</string>
+    <string name="wifi_p2p_device_info" msgid="6092748173212362426">"Informações do Aparelho"</string>
+    <string name="wifi_p2p_wps_setup" msgid="7706254437161351448">"Configuração Wi-Fi protegida"</string>
+    <string name="wifi_p2p_wps_pin" msgid="492162570392614138">"Introduzir PIN"</string>
+    <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Memorizar esta ligação"</string>
+    <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"Pesquisar"</string>
+    <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"Criar grupo"</string>
+    <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"Avançadas"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Hotspot Wi-Fi portátil"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Hotspot portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activo"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Erro do hotspot Wi-Fi portátil"</string>
@@ -602,8 +574,7 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Toque do telefone"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <!-- outdated translation 8741571721868253103 -->     <string name="all_volume_title" msgid="4296957391257836961">"Volume"</string>
-    <!-- no translation found for musicfx_title (3853457094486073206) -->
-    <skip />
+    <string name="musicfx_title" msgid="3853457094486073206">"Efeitos Musicais"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Volume da campainha"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrar quando estiver em silêncio"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"Vibrar"</string>
@@ -1051,10 +1022,8 @@
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Falha ao mover a aplicação. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Localização de instalação preferida"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Alterar a localização de instalação preferida para novas aplicações."</string>
-    <!-- no translation found for app_disable_dlg_title (6662184657838747395) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (1328080928456579599) -->
-    <skip />
+    <string name="app_disable_dlg_title" msgid="6662184657838747395">"Desativar aplicação incorporada"</string>
+    <string name="app_disable_dlg_text" msgid="1328080928456579599">"Desativar uma aplicação incorporada pode levar outras aplicações a funcionar incorretamente. Tem a certeza?"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Utilização do armazenam."</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Ver o armazenamento utilizado pelas aplicações"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Serviços em execução"</string>
@@ -1549,9 +1518,8 @@
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"aviso"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicações removidas"</string>
-    <!-- no translation found for data_usage_received_sent (5039699009276621757) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range (4054704716100246458) -->
+    <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> recebidos, <xliff:g id="SENT">%2$s</xliff:g> enviados"</string>
+    <!-- no translation found for data_usage_total_during_range (8958205082707733605) -->
     <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Chamada de emergência"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Regressar à chamada"</string>
@@ -1593,40 +1561,25 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Ativar o certificado da AC do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Desativar o certificado da AC do sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Remover permanentemente o certificado de utilizador da AC?"</string>
-    <!-- no translation found for accessibility_tutorial_title (7577630829320003070) -->
-    <skip />
+    <string name="accessibility_tutorial_title" msgid="7577630829320003070">"Tutorial Falar Enquanto Toco"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Seguinte"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Anterior"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Concluir"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Ign. tutorial"</string>
-    <!-- no translation found for accessibility_tutorial_lesson_1_title (1358771359529627110) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_1 (2465037336858060269) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_2_more (7849927882225521983) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_3 (7343496813666809738) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4 (1032496840167920946) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4_exited (4950620030782545150) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_5 (9010294007210301008) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_title (5970537388562569614) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_1 (6093658992237125829) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_2_more (2052918502757226679) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3 (1326501593438442305) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3_more (2223814499106104083) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (5374753806314829405) -->
-    <skip />
-    <!-- no translation found for spellcheckers_settings_title (8843785708050235008) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lição 1: Explorar o ecrã"</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="2465037336858060269">"Depois de ativar Falar Enquanto Toco, poderá tocar no ecrã para ouvir uma descrição do que está sob o dedo. Por exemplo, o ecrã atual contém ícones de aplicações. Localize uma delas tocando no ecrã e deslizando o dedo a toda a volta."</string>
+    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Bom. Continue a deslizar o dedo pelo ecrã até localizar pelo menos mais um ícone."</string>
+    <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Para ativar algo em que está a tocar, toque nisso. Deslize o dedo até localizar o ícone do <xliff:g id="APP_NAME">%s</xliff:g>. Toque depois uma vez no ícone para o ativar."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"O seu dedo está a tocar no ícone <xliff:g id="APP_NAME">%s</xliff:g>. Toque uma vez para ativar o ícone."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"O seu dedo moveu-se sobre o ícone <xliff:g id="APP_NAME">%s</xliff:g> e depois afastou-se. Lentamente, deslize o dedo em torno do ecrã até encontrar novamente o ícone do Navegador."</string>
+    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"Bom. Para passar à próxima lição, localize e ative o botão <xliff:g id="NEXT">%s</xliff:g>, situado junto ao canto inferior direito do ecrã."</string>
+    <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"Lição 2: Percorrer com dois dedos"</string>
+    <string name="accessibility_tutorial_lesson_2_text_1" msgid="6093658992237125829">"Para percorrer uma lista, pode deslizar dois dedos ao longo do ecrã. Por exemplo, o ecrã atual contém uma lista de nomes de aplicações que pode percorrer para cima ou para baixo. Primeiro, tente identificar alguns itens na lista deslizando um dedo por ali."</string>
+    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Ótimo. Continue a deslizar o dedo para encontrar pelo menos mais um item."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Agora, coloque dois dedos sobre um item da lista e deslize os dedos para cima. Se chegar ao topo do ecrã, levante os dedos, coloque-os mais abaixo na lista e continue a deslizar para cima."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Ótimo. Continue a deslizar os dedos para percorrer mais itens."</string>
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="5374753806314829405">"Concluiu o tutorial. Para sair e regressar à definição Falar Enquanto Toco, localize e toque no botão <xliff:g id="FINISH">%s</xliff:g>."</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Correção ortográfica"</string>
     <!-- no translation found for current_backup_pw_prompt (8314880813545036591) -->
     <skip />
     <!-- no translation found for new_backup_pw_prompt (3491404828757901644) -->

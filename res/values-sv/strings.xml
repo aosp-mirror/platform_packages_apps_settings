@@ -94,15 +94,12 @@
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Sval"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Synlighet"</string>
-    <!-- no translation found for bluetooth_is_discoverable (8373421452106840526) -->
-    <skip />
-    <!-- outdated translation 8573385118329733931 -->     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Synlig"</string>
-    <!-- no translation found for bluetooth_not_visible_to_other_devices (9120274591523391910) -->
-    <skip />
-    <!-- no translation found for bluetooth_only_visible_to_paired_devices (2049983392373296028) -->
-    <skip />
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Synlig för alla Bluetooth-enheter i närheten (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visas för alla närliggande Bluetooth-enheter"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Inte synlig för andra Bluetooth-enheter"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Bara synlig för parkopplade enheter"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Gör enheten synlig"</string>
-    <!-- outdated translation 6634508002347847278 -->     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Tidsgräns för synlighet"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Tidsgräns för synlighet"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Ange hur länge enheten ska vara synlig"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Röstuppringning med låsskärm"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Förhindra att bluetooth-uppringningsfunktionen används när skärmen är låst"</string>
@@ -110,16 +107,11 @@
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Enhetens namn"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Inget namn har angetts, använder kontonamn"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Sök efter enheter"</string>
-    <!-- no translation found for bluetooth_rename_device (787970073150631155) -->
-    <skip />
-    <!-- no translation found for bluetooth_rename_device (6267987985556136749) -->
-    <skip />
-    <!-- no translation found for bluetooth_rename_button (1648028693822994566) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_title (6026705382020027966) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (9148530542956217908) -->
-    <skip />
+    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Byt namn på pekdator"</string>
+    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"Byt namn på telefon"</string>
+    <string name="bluetooth_rename_button" msgid="1648028693822994566">"Byt namn"</string>
+    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Vill du koppla från?"</string>
+    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Detta avslutar din anslutning till:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kopplas ifrån."</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Ansluten"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Kopplas ifrån"</string>
@@ -129,15 +121,14 @@
     <string name="bluetooth_not_connected" msgid="3389882907500605937">"Parkoppla med den här enheten"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Parkoppling…"</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Parkopplad men inte ansluten"</string>
-    <!-- outdated translation 6873461446424952003 -->     <string name="bluetooth_device" msgid="5291950341750186887">"handsfree/headset"</string>
+    <string name="bluetooth_device" msgid="5291950341750186887">"Namnlös Bluetooth-enhet"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Söker"</string>
     <string name="progress_tap_to_pair" msgid="4192342336107106334">"Tryck för att koppla"</string>
     <string name="bluetooth_no_devices_found" msgid="2412462335116297668">"Inga Bluetooth-enheter fanns i närheten."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Begäran om parkoppling för Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Begäran om parkoppling"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"Välj att parkoppla med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_show_received_files (5164787486105868895) -->
-    <skip />
+    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Visa mottagna filer"</string>
     <string name="device_picker" msgid="8721012448931226323">"Bluetooth-enhetsväljare"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Begäran om Bluetooth-behörighet"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"En app begär tillåtelse att aktivera Bluetooth. Vill du tillåta det?"</string>
@@ -404,26 +395,17 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Hantera anslutningar, ange inställningar för enhetens namn och synlighet"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Begäran om Bluetooth-parkoppling"</string>
-    <!-- no translation found for bluetooth_enter_pin_msg (7437165032040778458) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_msg (711115233006730281) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_alphanumeric_pin (7222713483058171357) -->
-    <skip />
-    <!-- no translation found for bluetooth_pin_values_hint (3815897557875873646) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_pin_other_device (3617812138113586885) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_other_device (1808735246794073465) -->
-    <skip />
-    <!-- no translation found for bluetooth_confirm_passkey_msg (3708312912841950052) -->
-    <skip />
-    <!-- no translation found for bluetooth_incoming_pairing_msg (1615930853859551491) -->
-    <skip />
-    <!-- no translation found for bluetooth_display_passkey_pin_msg (2084350245062266220) -->
-    <skip />
+    <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"Om du vill parkoppla med&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;anger du PIN-koden som krävs:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"Om du vill parkoppla med&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;anger du enhetens lösenord:"</string>
+    <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN-koden innehåller bokstäver eller symboler"</string>
+    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Oftast 0000 eller 1234"</string>
+    <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Du kan också behöva ange PIN-koden på den andra enheten."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Du kan också behöva ange lösenordet på den andra enheten."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Om du vill parkoppla med&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;måste lösenordet&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; visas i den"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Från:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vill du parkoppla med enheten?"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"Om du vill parkoppla med:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Skriv:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; på den och tryck på Retur."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Parkoppling"</string>
-    <!-- outdated translation 930951069988011471 -->     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Parkoppla inte"</string>
+    <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Avbryt"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Obs!"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Ett problem inträffade när <xliff:g id="DEVICE_NAME">%1$s</xliff:g> parkopplades."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Det gick inte att parkoppla <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eftersom PIN-koden eller nyckeln inte stämmer."</string>
@@ -489,8 +471,7 @@
     <skip />
     <!-- no translation found for zeroclick_off_summary (2896320184904157018) -->
     <skip />
-    <!-- no translation found for zeroclick_label (6908892664706309626) -->
-    <skip />
+    <string name="zeroclick_label" msgid="6908892664706309626">"Dela utan klick"</string>
     <!-- no translation found for zeroclick_explained (3953149564512166049) -->
     <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
@@ -572,24 +553,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Nätverksprefixets längd"</string>
-    <!-- no translation found for wifi_p2p_settings_title (400503541488064638) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_settings_summary (819202165773287900) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_device_info (6092748173212362426) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_wps_setup (7706254437161351448) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_wps_pin (492162570392614138) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_persist_network (1646424791818168590) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_search (7189970585393813135) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_create_group (7595229161883902082) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_advanced (2578792521809265949) -->
-    <skip />
+    <string name="wifi_p2p_settings_title" msgid="400503541488064638">"Wi-Fi direkt"</string>
+    <string name="wifi_p2p_settings_summary" msgid="819202165773287900">"peer-till-peer-anslutning"</string>
+    <string name="wifi_p2p_device_info" msgid="6092748173212362426">"Enhetsinformation"</string>
+    <string name="wifi_p2p_wps_setup" msgid="7706254437161351448">"Skyddad Wi-Fi-konfiguration"</string>
+    <string name="wifi_p2p_wps_pin" msgid="492162570392614138">"Ange PIN-kod"</string>
+    <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Kom ihåg anslutningen"</string>
+    <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"Sök"</string>
+    <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"Skapa grupp"</string>
+    <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"Avancerat"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Mobil Wi-Fi-surfpunkt"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Mobil surfpunkt <xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktiv"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fel på mobil Wi-Fi-surfpunkt"</string>
@@ -602,8 +574,7 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Telefonens ringsignal"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <!-- outdated translation 8741571721868253103 -->     <string name="all_volume_title" msgid="4296957391257836961">"Volym"</string>
-    <!-- no translation found for musicfx_title (3853457094486073206) -->
-    <skip />
+    <string name="musicfx_title" msgid="3853457094486073206">"Musikeffekter"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Ringvolym"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrera vid tyst"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"Vibrera"</string>
@@ -1051,10 +1022,8 @@
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Det gick inte att flytta appar. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Önskad installationsplats"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Ändra önskad installationsplats för nya appar."</string>
-    <!-- no translation found for app_disable_dlg_title (6662184657838747395) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (1328080928456579599) -->
-    <skip />
+    <string name="app_disable_dlg_title" msgid="6662184657838747395">"Inaktivera inbyggd app"</string>
+    <string name="app_disable_dlg_text" msgid="1328080928456579599">"Om du inaktiverar ett inbyggt program kanske andra program inte fungerar korrekt. Vill du göra detta?"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Använt utrymme"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Visa lagring som används av appar"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktiva tjänster"</string>
@@ -1549,9 +1518,8 @@
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"varning"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"gräns"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Borttagna appar"</string>
-    <!-- no translation found for data_usage_received_sent (5039699009276621757) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range (4054704716100246458) -->
+    <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> mottagna, <xliff:g id="SENT">%2$s</xliff:g> skickade"</string>
+    <!-- no translation found for data_usage_total_during_range (8958205082707733605) -->
     <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Nödsamtal"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Tillbaka till samtal"</string>
@@ -1593,40 +1561,25 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Vill du att systemets CA-certifikat ska aktiveras?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vill du att systemets CA-certifikat ska inaktiveras?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vill du att användarens CA-certifikat ska tas bort permanent?"</string>
-    <!-- no translation found for accessibility_tutorial_title (7577630829320003070) -->
-    <skip />
+    <string name="accessibility_tutorial_title" msgid="7577630829320003070">"Självstudier för Tala när jag pekar"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Nästa"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Tillbaka"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Klar"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Hoppa över"</string>
-    <!-- no translation found for accessibility_tutorial_lesson_1_title (1358771359529627110) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_1 (2465037336858060269) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_2_more (7849927882225521983) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_3 (7343496813666809738) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4 (1032496840167920946) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4_exited (4950620030782545150) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_5 (9010294007210301008) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_title (5970537388562569614) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_1 (6093658992237125829) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_2_more (2052918502757226679) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3 (1326501593438442305) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3_more (2223814499106104083) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (5374753806314829405) -->
-    <skip />
-    <!-- no translation found for spellcheckers_settings_title (8843785708050235008) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lektion 1: Utforska skärmen"</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="2465037336858060269">"När du har aktiverat Tala när jag pekar kan du vidröra skärmen om du vill höra en beskrivning av det som finns under fingret. Om skärmen som visas innehåller ikoner för appar kan du hitta dem genom att sätta fingret på skärmen och dra runt."</string>
+    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Bra. Fortsätt dra runt fingret på skärmen tills du hittar minst en ikon till."</string>
+    <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Om du vill aktivera något som du har fingret på knackar du lätt på det. Dra fingret tills du hittar ikonen för <xliff:g id="APP_NAME">%s</xliff:g>. Knacka sedan lätt på ikonen för att aktivera den."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Fingret vilar på ikonen <xliff:g id="APP_NAME">%s</xliff:g>. Knacka lätt en gång om du vill aktivera ikonen."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"Du förde fingret över ikonen <xliff:g id="APP_NAME">%s</xliff:g> och sedan bort igen. Dra långsamt runt fingret på skärmen tills du hittar ikonen för webbläsaren igen."</string>
+    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"Bra. Fortsätt till nästa lektion genom att hitta och aktivera knappen <xliff:g id="NEXT">%s</xliff:g> nära skärmens nedre högra hörn."</string>
+    <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"Lektion 2: Rulla med två fingrar"</string>
+    <string name="accessibility_tutorial_lesson_2_text_1" msgid="6093658992237125829">"Om du vill rulla i en lista kan du dra två fingrar längs skärmen. Om skärmen till exempel innehåller en lista med appnamn kan du rulla uppåt och nedåt i den. Försök först identifiera några objekt i listan genom att dra runt ett finger."</string>
+    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Bra! Fortsätt att dra fingret på skärmen tills du hittar minst ett objekt till i listan."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Placera nu två fingrar på ett objekt i listan och dra båda fingrarna uppåt. Om du når toppen av skärmen lyfter du fingrarna, placerar dem längre ner i listan och fortsätter dra uppåt."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Bra! Fortsätt att dra fingrarna över skärmen om du vill bläddra mer."</string>
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="5374753806314829405">"Du har slutfört självstudierna. Klicka på knappen <xliff:g id="FINISH">%s</xliff:g> om du vill avsluta och återgå till inställningen Tala när jag pekar."</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Stavningskorrigering"</string>
     <!-- no translation found for current_backup_pw_prompt (8314880813545036591) -->
     <skip />
     <!-- no translation found for new_backup_pw_prompt (3491404828757901644) -->
