@@ -388,8 +388,8 @@ public class RunningState {
             return changed;
         }
         
-        boolean updateSize(Context context, Debug.MemoryInfo mem, int curSeq) {
-            mSize = ((long)mem.getTotalPss()) * 1024;
+        boolean updateSize(Context context, long pss, int curSeq) {
+            mSize = pss * 1024;
             if (mCurSeq == curSeq) {
                 String sizeStr = Formatter.formatShortFileSize(
                         context, mSize);
@@ -964,12 +964,12 @@ public class RunningState {
             for (int i=0; i<numProc; i++) {
                 pids[i] = mAllProcessItems.get(i).mPid;
             }
-            Debug.MemoryInfo[] mem = ActivityManagerNative.getDefault()
-                    .getProcessMemoryInfo(pids);
+            long[] pss = ActivityManagerNative.getDefault()
+                    .getProcessPss(pids);
             int bgIndex = 0;
             for (int i=0; i<pids.length; i++) {
                 ProcessItem proc = mAllProcessItems.get(i);
-                changed |= proc.updateSize(context, mem[i], mSequence);
+                changed |= proc.updateSize(context, pss[i], mSequence);
                 if (proc.mCurSeq == mSequence) {
                     serviceProcessMemory += proc.mSize;
                 } else if (proc.mRunningProcessInfo.importance >=
