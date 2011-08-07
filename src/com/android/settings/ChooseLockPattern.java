@@ -235,7 +235,7 @@ public class ChooseLockPattern extends PreferenceActivity {
             Introduction(
                     R.string.lockpattern_recording_intro_header,
                     LeftButtonMode.Cancel, RightButtonMode.ContinueDisabled,
-                    R.string.lockpattern_recording_intro_footer, true),
+                    ID_EMPTY_MESSAGE, true),
             HelpScreen(
                     R.string.lockpattern_settings_help_how_to_record,
                     LeftButtonMode.Gone, RightButtonMode.Ok, ID_EMPTY_MESSAGE, false),
