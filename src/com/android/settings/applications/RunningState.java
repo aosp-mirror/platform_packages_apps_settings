@@ -28,7 +28,6 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
-import android.os.Debug;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -250,7 +249,9 @@ public class RunningState {
         ActivityManager.RunningAppProcessInfo mRunningProcessInfo;
         
         MergedItem mMergedItem;
-        
+
+        boolean mInteresting;
+
         // Purely for sorting.
         boolean mIsSystem;
         boolean mIsStarted;
@@ -616,7 +617,8 @@ public class RunningState {
             return true;
         }
         if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_PERSISTENT) == 0
-                && pi.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                && pi.importance >= ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                && pi.importance < ActivityManager.RunningAppProcessInfo.IMPORTANCE_CANT_SAVE_STATE
                 && pi.importanceReasonCode
                         == ActivityManager.RunningAppProcessInfo.REASON_UNKNOWN) {
             return true;
@@ -718,13 +720,16 @@ public class RunningState {
                     mInterestingProcesses.add(proc);
                 }
                 proc.mCurSeq = mSequence;
+                proc.mInteresting = true;
                 proc.ensureLabel(pm);
+            } else {
+                proc.mInteresting = false;
             }
             
             proc.mRunningSeq = mSequence;
             proc.mRunningProcessInfo = pi;
         }
-        
+
         // Build the chains from client processes to the process they are
         // dependent on; also remove any old running processes.
         int NRP = mRunningProcesses.size();
@@ -756,7 +761,7 @@ public class RunningState {
         int NHP = mInterestingProcesses.size();
         for (int i=0; i<NHP; i++) {
             ProcessItem proc = mInterestingProcesses.get(i);
-            if (mRunningProcesses.get(proc.mPid) == null) {
+            if (!proc.mInteresting || mRunningProcesses.get(proc.mPid) == null) {
                 changed = true;
                 mInterestingProcesses.remove(i);
                 i--;

@@ -80,6 +80,8 @@ public class ApplicationsState {
         final long id;
         String label;
         long size;
+        long internalSize;
+        long externalSize;
 
         boolean mounted;
         
@@ -155,12 +157,35 @@ public class ApplicationsState {
         }
     };
 
-    public static final Comparator<AppEntry> SIZE_COMPARATOR = new Comparator<AppEntry>() {
+    public static final Comparator<AppEntry> SIZE_COMPARATOR
+            = new Comparator<AppEntry>() {
         private final Collator sCollator = Collator.getInstance();
         @Override
         public int compare(AppEntry object1, AppEntry object2) {
             if (object1.size < object2.size) return 1;
             if (object1.size > object2.size) return -1;
+            return sCollator.compare(object1.label, object2.label);
+        }
+    };
+
+    public static final Comparator<AppEntry> INTERNAL_SIZE_COMPARATOR
+            = new Comparator<AppEntry>() {
+        private final Collator sCollator = Collator.getInstance();
+        @Override
+        public int compare(AppEntry object1, AppEntry object2) {
+            if (object1.internalSize < object2.internalSize) return 1;
+            if (object1.internalSize > object2.internalSize) return -1;
+            return sCollator.compare(object1.label, object2.label);
+        }
+    };
+
+    public static final Comparator<AppEntry> EXTERNAL_SIZE_COMPARATOR
+            = new Comparator<AppEntry>() {
+        private final Collator sCollator = Collator.getInstance();
+        @Override
+        public int compare(AppEntry object1, AppEntry object2) {
+            if (object1.externalSize < object2.externalSize) return 1;
+            if (object1.externalSize > object2.externalSize) return -1;
             return sCollator.compare(object1.label, object2.label);
         }
     };
@@ -712,8 +737,10 @@ public class ApplicationsState {
                                 entry.externalCodeSize = externalCodeSize;
                                 entry.externalDataSize = externalDataSize;
                                 entry.sizeStr = getSizeStr(entry.size);
-                                entry.internalSizeStr = getSizeStr(getTotalInternalSize(stats));
-                                entry.externalSizeStr = getSizeStr(getTotalExternalSize(stats));
+                                entry.internalSize = getTotalInternalSize(stats);
+                                entry.internalSizeStr = getSizeStr(entry.internalSize);
+                                entry.externalSize = getTotalExternalSize(stats);
+                                entry.externalSizeStr = getSizeStr(entry.externalSize);
                                 if (DEBUG) Log.i(TAG, "Set size of " + entry.label + " " + entry
                                         + ": " + entry.sizeStr);
                                 sizeChanged = true;
