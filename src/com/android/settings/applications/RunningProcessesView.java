@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
 
 import android.app.ActivityManager;
@@ -24,9 +25,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.preference.PreferenceActivity;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
@@ -42,7 +41,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AbsListView.RecyclerListener;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,9 +48,6 @@ import java.util.Iterator;
 public class RunningProcessesView extends FrameLayout
         implements AdapterView.OnItemClickListener, RecyclerListener,
         RunningState.OnRefreshUiListener {
-    
-    // Memory pages are 4K.
-    static final long PAGE_SIZE = 4*1024;
     
     long SECONDARY_SERVER_MEM;
     
@@ -85,9 +80,9 @@ public class RunningProcessesView extends FrameLayout
     long mLastAvailMemory = -1;
     
     Dialog mCurDialog;
-    
-    byte[] mBuffer = new byte[1024];
-    
+
+    MemInfoReader mMemInfoReader = new MemInfoReader();
+
     public static class ActiveItem {
         View mRootView;
         RunningState.BaseItem mItem;
@@ -304,71 +299,7 @@ public class RunningProcessesView extends FrameLayout
             }
         }
     }
-    
-    private boolean matchText(byte[] buffer, int index, String text) {
-        int N = text.length();
-        if ((index+N) >= buffer.length) {
-            return false;
-        }
-        for (int i=0; i<N; i++) {
-            if (buffer[index+i] != text.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    private long extractMemValue(byte[] buffer, int index) {
-        while (index < buffer.length && buffer[index] != '\n') {
-            if (buffer[index] >= '0' && buffer[index] <= '9') {
-                int start = index;
-                index++;
-                while (index < buffer.length && buffer[index] >= '0'
-                    && buffer[index] <= '9') {
-                    index++;
-                }
-                String str = new String(buffer, 0, start, index-start);
-                return ((long)Integer.parseInt(str)) * 1024;
-            }
-            index++;
-        }
-        return 0;
-    }
-    
-    private long readAvailMem() {
-        // Permit disk reads here, as /proc/meminfo isn't really "on
-        // disk" and should be fast.  TODO: make BlockGuard ignore
-        // /proc/ and /sys/ files perhaps?
-        StrictMode.ThreadPolicy savedPolicy = StrictMode.allowThreadDiskReads();
-        try {
-            long memFree = 0;
-            long memCached = 0;
-            FileInputStream is = new FileInputStream("/proc/meminfo");
-            int len = is.read(mBuffer);
-            is.close();
-            final int BUFLEN = mBuffer.length;
-            for (int i=0; i<len && (memFree == 0 || memCached == 0); i++) {
-                if (matchText(mBuffer, i, "MemFree")) {
-                    i += 7;
-                    memFree = extractMemValue(mBuffer, i);
-                } else if (matchText(mBuffer, i, "Cached")) {
-                    i += 6;
-                    memCached = extractMemValue(mBuffer, i);
-                }
-                while (i < BUFLEN && mBuffer[i] != '\n') {
-                    i++;
-                }
-            }
-            return memFree + memCached;
-        } catch (java.io.FileNotFoundException e) {
-        } catch (java.io.IOException e) {
-        } finally {
-            StrictMode.setThreadPolicy(savedPolicy);
-        }
-        return 0;
-    }
 
-    
     void refreshUi(boolean dataChanged) {
         if (dataChanged) {
             ServiceListAdapter adapter = (ServiceListAdapter)(mListView.getAdapter());
@@ -383,11 +314,13 @@ public class RunningProcessesView extends FrameLayout
 
         // This is the amount of available memory until we start killing
         // background services.
-        long availMem = readAvailMem() - SECONDARY_SERVER_MEM;
+        mMemInfoReader.readMemInfo();
+        long availMem = mMemInfoReader.getFreeSize() + mMemInfoReader.getCachedSize()
+                - SECONDARY_SERVER_MEM;
         if (availMem < 0) {
             availMem = 0;
         }
-        
+
         synchronized (mState.mLock) {
             if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses
                     || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory
@@ -395,10 +328,14 @@ public class RunningProcessesView extends FrameLayout
                 mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
                 mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
                 mLastAvailMemory = availMem;
-                String sizeStr = Formatter.formatShortFileSize(getContext(),
-                        mLastAvailMemory + mLastBackgroundProcessMemory);
+                long freeMem = mLastAvailMemory + mLastBackgroundProcessMemory;
+                String sizeStr = Formatter.formatShortFileSize(getContext(), freeMem);
                 mBackgroundProcessText.setText(getResources().getString(
                         R.string.service_background_processes, sizeStr));
+                sizeStr = Formatter.formatShortFileSize(getContext(),
+                        mMemInfoReader.getTotalSize() - freeMem);
+                mForegroundProcessText.setText(getResources().getString(
+                        R.string.service_foreground_processes, sizeStr));
             }
             if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses
                     || mLastForegroundProcessMemory != mState.mForegroundProcessMemory
@@ -408,15 +345,18 @@ public class RunningProcessesView extends FrameLayout
                 mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
                 mLastNumServiceProcesses = mState.mNumServiceProcesses;
                 mLastServiceProcessMemory = mState.mServiceProcessMemory;
+                /*
                 String sizeStr = Formatter.formatShortFileSize(getContext(),
                         mLastForegroundProcessMemory + mLastServiceProcessMemory);
                 mForegroundProcessText.setText(getResources().getString(
                         R.string.service_foreground_processes, sizeStr));
+                */
             }
             
-            float totalMem = availMem + mLastBackgroundProcessMemory
-                    + mLastForegroundProcessMemory + mLastServiceProcessMemory;
-            mColorBar.setRatios(mLastForegroundProcessMemory/totalMem,
+            float totalMem = mMemInfoReader.getTotalSize();
+            float totalShownMem = availMem + mLastBackgroundProcessMemory
+                    + mLastServiceProcessMemory;
+            mColorBar.setRatios((totalMem-totalShownMem)/totalMem,
                     mLastServiceProcessMemory/totalMem,
                     mLastBackgroundProcessMemory/totalMem);
         }
@@ -482,10 +422,10 @@ public class RunningProcessesView extends FrameLayout
                 mAdapter.setShowBackground(false);
             }
         });
-        
-        // Magic!  Implementation detail!  Don't count on this!
-        SECONDARY_SERVER_MEM =
-            Integer.valueOf(SystemProperties.get("ro.SECONDARY_SERVER_MEM"))*PAGE_SIZE;
+
+        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+        mAm.getMemoryInfo(memInfo);
+        SECONDARY_SERVER_MEM = memInfo.secondaryServerThreshold;
     }
     
     public void doPause() {

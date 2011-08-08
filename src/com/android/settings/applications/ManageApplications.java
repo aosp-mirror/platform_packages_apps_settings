@@ -333,7 +333,17 @@ public class ManageApplications extends Fragment implements
             }
             switch (mLastSortMode) {
                 case SORT_ORDER_SIZE:
-                    comparatorObj = ApplicationsState.SIZE_COMPARATOR;
+                    switch (mWhichSize) {
+                        case SIZE_INTERNAL:
+                            comparatorObj = ApplicationsState.INTERNAL_SIZE_COMPARATOR;
+                            break;
+                        case SIZE_EXTERNAL:
+                            comparatorObj = ApplicationsState.EXTERNAL_SIZE_COMPARATOR;
+                            break;
+                        default:
+                            comparatorObj = ApplicationsState.SIZE_COMPARATOR;
+                            break;
+                    }
                     break;
                 default:
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
