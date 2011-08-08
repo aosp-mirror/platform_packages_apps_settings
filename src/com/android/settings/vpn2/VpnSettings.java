@@ -53,7 +53,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "VpnSettings";
-    private static final String SCRIPT = "/etc/ppp/ip-up-vpn";
 
     private final IConnectivityManager mService = IConnectivityManager.Stub
             .asInterface(ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
@@ -171,7 +170,9 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         // Unregister for context menu.
-        unregisterForContextMenu(getListView());
+        if (getView() != null) {
+            unregisterForContextMenu(getListView());
+        }
     }
 
     @Override
@@ -373,7 +374,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         switch (profile.type) {
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 racoon = new String[] {
-                    interfaze, profile.server, "udppsk", profile.ipsecSecret, "1701",
+                    interfaze, profile.server, "udppsk", profile.ipsecIdentifier,
+                    profile.ipsecSecret, "1701",
                 };
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
@@ -384,19 +386,19 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
                 racoon = new String[] {
                     interfaze, profile.server, "xauthpsk", profile.ipsecIdentifier,
-                    profile.ipsecSecret, profile.username, profile.password, SCRIPT, gateway,
+                    profile.ipsecSecret, profile.username, profile.password, "", gateway,
                 };
                 break;
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
                 racoon = new String[] {
                     interfaze, profile.server, "xauthrsa", privateKey, userCert, caCert,
-                    profile.username, profile.password, SCRIPT, gateway,
+                    profile.username, profile.password, "", gateway,
                 };
                 break;
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
                 racoon = new String[] {
                     interfaze, profile.server, "hybridrsa", caCert,
-                    profile.username, profile.password, SCRIPT, gateway,
+                    profile.username, profile.password, "", gateway,
                 };
                 break;
         }
