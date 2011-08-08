@@ -615,6 +615,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                 break;
         }
 
+        mLastInfo = null;
+        mLastState = null;
         mScanner.pause();
     }
 
