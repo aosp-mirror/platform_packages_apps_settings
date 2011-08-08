@@ -94,15 +94,12 @@
     <string name="battery_info_health_cold" msgid="3835692786176707318">"سرد"</string>
     <string name="bluetooth" msgid="5549625000628014477">"بلوتوث"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"قابل شناسایی"</string>
-    <!-- no translation found for bluetooth_is_discoverable (8373421452106840526) -->
-    <skip />
-    <!-- outdated translation 8573385118329733931 -->     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"قابل شناسایی"</string>
-    <!-- no translation found for bluetooth_not_visible_to_other_devices (9120274591523391910) -->
-    <skip />
-    <!-- no translation found for bluetooth_only_visible_to_paired_devices (2049983392373296028) -->
-    <skip />
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"نمایان برای تمام دستگاه های بلوتوث مجاور (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"قابل مشاهده برای تمام دستگاه های بلوتوث مجاور"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"برای دیگر دستگاه های بلوتوث قابل مشاهده نیست"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"فقط برای دستگاه های جفت شده قابل مشاهده است"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"دستگاه قابل شناسایی شود"</string>
-    <!-- outdated translation 6634508002347847278 -->     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"پایان زمان قابلیت شناسایی"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"پایان زمان قابل مشاهده بودن"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"مدت زمان قابل شناسایی بودن دستگاه را تنظیم کنید"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"قفل کردن شماره گیری صوتی"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"ممانعت از استفاده شماره گیر بلوتوث هنگام قفل شدن صفحه"</string>
@@ -110,16 +107,11 @@
     <string name="bluetooth_device_name" msgid="8415828355207423800">"نام دستگاه"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"نامی تنظیم نشده، از نام حساب استفاده کنید"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"اسکن برای دستگاه ها"</string>
-    <!-- no translation found for bluetooth_rename_device (787970073150631155) -->
-    <skip />
-    <!-- no translation found for bluetooth_rename_device (6267987985556136749) -->
-    <skip />
-    <!-- no translation found for bluetooth_rename_button (1648028693822994566) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_title (6026705382020027966) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (9148530542956217908) -->
-    <skip />
+    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"تغییر نام رایانه لوحی"</string>
+    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"تغییر نام تلفن"</string>
+    <string name="bluetooth_rename_button" msgid="1648028693822994566">"تغییر نام"</string>
+    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"اتصال قطع شود؟"</string>
+    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"این کار اتصال شما را با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;قطع می کند."</string>
     <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع می شود."</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"اتصال برقرار شد"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"اتصال قطع شد"</string>
@@ -129,15 +121,14 @@
     <string name="bluetooth_not_connected" msgid="3389882907500605937">"جفت سازی با این دستگاه"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"در حال جفت سازی..."</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"جفت شده اما وصل نیست"</string>
-    <!-- outdated translation 6873461446424952003 -->     <string name="bluetooth_device" msgid="5291950341750186887">"هندزفری/گوشی"</string>
+    <string name="bluetooth_device" msgid="5291950341750186887">"دستگاه بلوتوث بدون نام"</string>
     <string name="progress_scanning" msgid="192587958424295789">"در حال جستجو"</string>
     <string name="progress_tap_to_pair" msgid="4192342336107106334">"ضربه برای مرتبط کردن"</string>
     <string name="bluetooth_no_devices_found" msgid="2412462335116297668">"هیچ دستگاه بلوتوثی در این نزدیکی یافت شد."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"درخواست جفت سازی"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"درخواست جفت سازی"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"انتخاب برای جفت سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_show_received_files (5164787486105868895) -->
-    <skip />
+    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"نمایش فایل های دریافتی"</string>
     <string name="device_picker" msgid="8721012448931226323">"انتخاب کننده دستگاه بلوتوث"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"درخواست مجوز بلوتوث"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"برنامه ای درخواست کرده است که بلوتوث روشن شود. می خواهید این کار را انجام دهید؟"</string>
@@ -157,8 +148,7 @@
     <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"برای اتصال به \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" لمس کنید"</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"آیا می خواهید به \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" وصل شوید؟"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"درخواست دفترچه تلفن"</string>
-    <!-- no translation found for bluetooth_pb_acceptance_dialog_text (5203107624986011263) -->
-    <skip />
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="5203107624986011263">"%1$s می خواهد به مخاطبین و سابقه تماس شما دسترسی پیدا کند. اجازه دسترسی به %2$s داده شود؟"</string>
     <string name="bluetooth_pb_alwaysallowed" msgid="3953839482721299910">"همیشه مجاز باشد؟"</string>
     <string name="date_and_time" msgid="4114084177056654663">"تنظیمات تاریخ و ساعت"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 بعدازظهر"</string>
@@ -405,26 +395,17 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"بلوتوث"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"مدیریت اتصال ها، تنظیم نام دستگاه و قابلیت شناسایی"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"درخواست جفت سازی بلوتوث"</string>
-    <!-- no translation found for bluetooth_enter_pin_msg (7437165032040778458) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_msg (711115233006730281) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_alphanumeric_pin (7222713483058171357) -->
-    <skip />
-    <!-- no translation found for bluetooth_pin_values_hint (3815897557875873646) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_pin_other_device (3617812138113586885) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_other_device (1808735246794073465) -->
-    <skip />
-    <!-- no translation found for bluetooth_confirm_passkey_msg (3708312912841950052) -->
-    <skip />
-    <!-- no translation found for bluetooth_incoming_pairing_msg (1615930853859551491) -->
-    <skip />
-    <!-- no translation found for bluetooth_display_passkey_pin_msg (2084350245062266220) -->
-    <skip />
+    <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"برای جفت شدن با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;پین مورد نیاز دستگاه را وارد کنید:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"برای جفت شدن با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;کلید عبور مورد نیاز دستگاه را وارد کنید:"</string>
+    <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"پین شامل حروف یا نماد است"</string>
+    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"معمولا 0000 یا 1234"</string>
+    <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"ممکن است لازم باشد که شما این پین را در دستگاه دیگری وارد کنید."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"ممکن است لازم باشد شما این کلید عبور را در دستگاه دیگری وارد کنید."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"برای جفت شدن با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;مطمئن شوید که آن دستگاه این کلید عبور را نمایش می دهد:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"از:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه جفت شود؟"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"برای جفت شدن با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;این کد را در آن وارد کنید:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;, سپس کلید ورود یا تأیید را فشار دهید."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"جفت سازی"</string>
-    <!-- outdated translation 930951069988011471 -->     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"جفت نشود"</string>
+    <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"لغو"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"توجه"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"مشکلی در جفت سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> وجود داشت."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"مشکلی در جفت سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> وجود داشت زیرا پین یا کلید عبور اشتباه است."</string>
@@ -490,8 +471,7 @@
     <skip />
     <!-- no translation found for zeroclick_off_summary (2896320184904157018) -->
     <skip />
-    <!-- no translation found for zeroclick_label (6908892664706309626) -->
-    <skip />
+    <string name="zeroclick_label" msgid="6908892664706309626">"اشتراک گذاری بدون کلید"</string>
     <!-- no translation found for zeroclick_explained (3953149564512166049) -->
     <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
@@ -573,24 +553,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"دروازه"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"طول پیشوند شبکه"</string>
-    <!-- no translation found for wifi_p2p_settings_title (400503541488064638) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_settings_summary (819202165773287900) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_device_info (6092748173212362426) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_wps_setup (7706254437161351448) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_wps_pin (492162570392614138) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_persist_network (1646424791818168590) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_search (7189970585393813135) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_create_group (7595229161883902082) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_menu_advanced (2578792521809265949) -->
-    <skip />
+    <string name="wifi_p2p_settings_title" msgid="400503541488064638">"Wi-Fi Direct"</string>
+    <string name="wifi_p2p_settings_summary" msgid="819202165773287900">"راه اندازی اتصال peer-to-peer"</string>
+    <string name="wifi_p2p_device_info" msgid="6092748173212362426">"اطلاعات دستگاه"</string>
+    <string name="wifi_p2p_wps_setup" msgid="7706254437161351448">"راه اندازی Wi-Fi حفاظت شده"</string>
+    <string name="wifi_p2p_wps_pin" msgid="492162570392614138">"پین را وارد کنید"</string>
+    <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"به یادسپاری این ارتباط"</string>
+    <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"جستجو"</string>
+    <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"ایجاد گروه"</string>
+    <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"پیشرفته"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"نقطه اتصال Wi-Fi قابل حمل"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"نقطه اتصال قابل حمل <xliff:g id="NETWORK_SSID">%1$s</xliff:g> فعال"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"خطای نقطه اتصال Wi-Fi قابل حمل"</string>
@@ -603,8 +574,7 @@
     <string name="ringtone_title" msgid="5379026328015343686">"آهنگ زنگ تلفن"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <!-- outdated translation 8741571721868253103 -->     <string name="all_volume_title" msgid="4296957391257836961">"میزان صدا"</string>
-    <!-- no translation found for musicfx_title (3853457094486073206) -->
-    <skip />
+    <string name="musicfx_title" msgid="3853457094486073206">"جلوه های موسیقی"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"میزان صدای زنگ"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"لرزش در حالت بیصدا"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"لرزش"</string>
@@ -1053,10 +1023,8 @@
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"برنامه حذف نشد. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"مکان نصب برگزیده"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"تغییر مکان نصب مورد نظر برای برنامه های جدید."</string>
-    <!-- no translation found for app_disable_dlg_title (6662184657838747395) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (1328080928456579599) -->
-    <skip />
+    <string name="app_disable_dlg_title" msgid="6662184657838747395">"غیر فعال کردن برنامه داخلی"</string>
+    <string name="app_disable_dlg_text" msgid="1328080928456579599">"غیرفعال کردن یک برنامه داخلی ممکن است باعث اختلال در عملکرد دیگر برنامه ها شود. آیا مطمئنید؟"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"استفاده از حافظه"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"مشاهده حافظه استفاده شده توسط برنامه ها"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"سرویس های در حال اجرا"</string>
@@ -1444,8 +1412,7 @@
     <!-- no translation found for accessibility_sync_error (8703299118794272041) -->
     <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"همگام سازی تنظیمات"</string>
-    <!-- no translation found for sync_is_failing (1591561768344128377) -->
-    <skip />
+    <string name="sync_is_failing" msgid="1591561768344128377">"همگام سازی در حال حاضر دارای مشکلی است. در مدت کوتاهی تصحیح می‌شود."</string>
     <string name="add_account_label" msgid="7811707265834013767">"افزودن حساب"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"تنظیمات همگام سازی کلی"</string>
     <string name="background_data" msgid="5779592891375473817">"داده های پس زمینه"</string>
@@ -1506,7 +1473,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"مقیاس انیمیشن انتقال"</string>
     <string name="debug_applications_category" msgid="6221644998451283813">"برنامه های کاربردی"</string>
-    <string name="immediately_destroy_activities" msgid="8366775083630234121">"فعالیت ها حفظ نشوند"</string>
+    <string name="immediately_destroy_activities" msgid="8366775083630234121">"فعالیت ها را ادامه ندهید"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"از بین بردن هر فعالیت به محض خروج کاربر از آن"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"محدودیت پردازش در پس زمینه"</string>
     <!-- no translation found for show_all_anrs (28462979638729082) -->
@@ -1552,9 +1519,8 @@
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"هشدار"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"محدودیت"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"برنامه های حذف شده"</string>
-    <!-- no translation found for data_usage_received_sent (5039699009276621757) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range (4054704716100246458) -->
+    <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> دریافت شد، <xliff:g id="SENT">%2$s</xliff:g> فرستاده شد"</string>
+    <!-- no translation found for data_usage_total_during_range (8958205082707733605) -->
     <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"تماس اضطراری"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"بازگشت به تماس"</string>
@@ -1577,8 +1543,7 @@
     <string name="vpn_username" msgid="1863901629860867849">"نام کاربری"</string>
     <string name="vpn_password" msgid="6756043647233596772">"رمز ورود"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"ذخیره اطلاعات حساب"</string>
-    <!-- no translation found for vpn_not_used (9094191054524660891) -->
-    <skip />
+    <string name="vpn_not_used" msgid="9094191054524660891">"(استفاده نشده)"</string>
     <string name="vpn_no_ca_cert" msgid="7820884983947090538">"(سرور تأیید نشود)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"لغو"</string>
     <string name="vpn_save" msgid="4233484051644764510">"ذخیره"</string>
@@ -1597,40 +1562,25 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"گواهی CA سیستم فعال شود؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"گواهی CA سیستم غیرفعال شود؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"گواهی CA کاربر به صورت دائمی حذف شود؟"</string>
-    <!-- no translation found for accessibility_tutorial_title (7577630829320003070) -->
-    <skip />
+    <string name="accessibility_tutorial_title" msgid="7577630829320003070">"برنامه آموزشی صحبت در حین لمس"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"بعدی"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"برگشت"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"پایان"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"رد شدن از برنامه آموزشی"</string>
-    <!-- no translation found for accessibility_tutorial_lesson_1_title (1358771359529627110) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_1 (2465037336858060269) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_2_more (7849927882225521983) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_3 (7343496813666809738) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4 (1032496840167920946) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_4_exited (4950620030782545150) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_5 (9010294007210301008) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_title (5970537388562569614) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_1 (6093658992237125829) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_2_more (2052918502757226679) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3 (1326501593438442305) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_3_more (2223814499106104083) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (5374753806314829405) -->
-    <skip />
-    <!-- no translation found for spellcheckers_settings_title (8843785708050235008) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"درس 1: گشت و گذار در صفحه"</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="2465037336858060269">"بعد از فعال کردن \"صحبت در حین لمس\"، بعد از هر لمس شما بر روی صفحه، توضیحی در مورد آنچه در زیر انگشت شما است می شنوید. برای مثال، صفحه کنونی شامل نمادهای برنامه ها است. با لمس صفحه و کشیدن انگشت خود بر روی آن یکی از آنها را پیدا کنید."</string>
+    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"خوب است. برای پیدا کردن حداقل یک نماد بیشتر، همچنان انگشت خود را روی صفحه گذاشته و در اطراف بکشید."</string>
+    <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"برای فعال کردن چیزی که در حال لمس آن هستید، بر روی آن ضربه بزنید. برای یافتن نماد <xliff:g id="APP_NAME">%s</xliff:g> انگشت خود را حرکت دهید. سپس بر روی نماد ضربه بزنید تا آن را فعال کنید."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"درحالی که انگشت شما نماد <xliff:g id="APP_NAME">%s</xliff:g> را لمس می کند، یک بار ضربه بزنید تا فعال شود."</string>
+    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"انگشت شما بر روی نماد <xliff:g id="APP_NAME">%s</xliff:g> حرکت کرد و از روی آن رد شد. به آرامی دوباره انگشت خود را بر روی صفحه بکشید تا دوباره نماد مرورگر را بیابید."</string>
+    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"خوب است. برای رفتن به درس بعدی، دکمه <xliff:g id="NEXT">%s</xliff:g> را یافته و فعال کنید، این دکمه نزدیک گوشه پایین سمت راست صفحه قرار دارد."</string>
+    <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"درس 2: پیمایش با استفاده از دو انگشت"</string>
+    <string name="accessibility_tutorial_lesson_2_text_1" msgid="6093658992237125829">"برای پیمایش در یک لیست، می توانید دو انگشت خود را بر روی صفحه به بالا بکشید. برای مثال، صفحه کنونی دارای لیست برنامه هایی است که می توانند به بالا یا پایین پیمایش شوند. ابتدا، سعی کنید که چند مورد در لیست را با کشیدن یک انگشت به اطراف بشناسید."</string>
+    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"خوب است. همچنان انگشت خود را در اطراف بکشید تا حداقل یک مورد دیگر را پیدا کنید."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"حالا دو انگشت را بر روی یک مورد در لیست قرار داده و هردو را به بالا بکشید. اگر به بالای صفحه رسیدید انگشتان خود را بردارید، آنها را در قسمت پایین تری از لیست بگذارید و دوباره به بالا بکشید."</string>
+    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"خوب است. برای پیمایش بیشتر همچنان انگشتان خود را روی صفحه بکشید."</string>
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="5374753806314829405">"شما برنامه آموزشی را کامل کردید. برای خروج و بازگشت به تنظیمات \"صحبت در حین لمس\"، دکمه <xliff:g id="FINISH">%s</xliff:g> را یافته و بر روی آن ضربه بزنید."</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"تصحیح املایی"</string>
     <!-- no translation found for current_backup_pw_prompt (8314880813545036591) -->
     <skip />
     <!-- no translation found for new_backup_pw_prompt (3491404828757901644) -->
