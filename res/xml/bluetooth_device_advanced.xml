@@ -15,12 +15,8 @@
 -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory
-            android:key="title"
-            android:order="10"
-            android:title="@string/bluetooth_device_advanced_device_actions_title" />
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/bluetooth_device_advanced_title">
 
     <EditTextPreference
             android:key="rename_device"

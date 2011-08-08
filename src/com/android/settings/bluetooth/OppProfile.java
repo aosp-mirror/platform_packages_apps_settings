@@ -75,12 +75,8 @@ final class OppProfile implements LocalBluetoothProfile {
         return ORDINAL;
     }
 
-    public int getNameResource() {
+    public int getNameResource(BluetoothDevice device) {
         return R.string.bluetooth_profile_opp;
-    }
-
-    public int getDisconnectResource(BluetoothDevice device) {
-        return 0; // user must use notification to disconnect OPP transfer.
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {

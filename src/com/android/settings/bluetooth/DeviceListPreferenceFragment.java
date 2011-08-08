@@ -128,7 +128,6 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
-
         if (KEY_BT_SCAN.equals(preference.getKey())) {
             mLocalAdapter.startScanning(true);
             return true;

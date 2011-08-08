@@ -26,7 +26,6 @@ import java.util.List;
  * CachedBluetoothDeviceManager manages the set of remote Bluetooth devices.
  */
 final class CachedBluetoothDeviceManager {
-//    private static final String TAG = "CachedBluetoothDeviceManager";
 
     private final List<CachedBluetoothDevice> mCachedDevices =
             new ArrayList<CachedBluetoothDevice>();
@@ -35,20 +34,9 @@ final class CachedBluetoothDeviceManager {
         return new ArrayList<CachedBluetoothDevice>(mCachedDevices);
     }
 
-    public boolean onDeviceDisappeared(CachedBluetoothDevice cachedDevice) {
+    public static boolean onDeviceDisappeared(CachedBluetoothDevice cachedDevice) {
         cachedDevice.setVisible(false);
-        return checkForDeviceRemoval(cachedDevice);
-    }
-
-    private boolean checkForDeviceRemoval(
-            CachedBluetoothDevice cachedDevice) {
-        if (cachedDevice.getBondState() == BluetoothDevice.BOND_NONE &&
-                !cachedDevice.isVisible()) {
-            // If device isn't paired, remove it altogether
-            mCachedDevices.remove(cachedDevice);
-            return true;  // dispatch device deleted
-        }
-        return false;
+        return cachedDevice.getBondState() == BluetoothDevice.BOND_NONE;
     }
 
     public void onDeviceNameUpdated(BluetoothDevice device) {
@@ -120,7 +108,6 @@ final class CachedBluetoothDeviceManager {
         for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
             CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
             cachedDevice.setVisible(false);
-            checkForDeviceRemoval(cachedDevice);
         }
     }
 
