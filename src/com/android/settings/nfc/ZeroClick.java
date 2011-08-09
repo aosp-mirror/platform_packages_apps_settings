@@ -63,7 +63,7 @@ public class ZeroClick extends Fragment
         mActionBarSwitch.setOnCheckedChangeListener(this);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-        mActionBarSwitch.setChecked(mNfcAdapter.zeroClickEnabled());
+        mActionBarSwitch.setChecked(mNfcAdapter.isZeroClickEnabled());
     }
 
     @Override
@@ -77,7 +77,7 @@ public class ZeroClick extends Fragment
     private void initView(View view) {
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
         mActionBarSwitch.setOnCheckedChangeListener(this);
-        mActionBarSwitch.setChecked(mNfcAdapter.zeroClickEnabled());
+        mActionBarSwitch.setChecked(mNfcAdapter.isZeroClickEnabled());
     }
 
     @Override

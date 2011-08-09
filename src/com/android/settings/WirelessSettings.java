@@ -94,8 +94,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
-        PreferenceScreen zeroclick = (PreferenceScreen)
-                findPreference(KEY_ZEROCLICK_SETTINGS);
+        PreferenceScreen zeroclick = (PreferenceScreen) findPreference(KEY_ZEROCLICK_SETTINGS);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, zeroclick);
@@ -113,11 +112,18 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             // No bluetooth-dependent items in the list. Code kept in case one is added later.
         }
 
+        // Manually set dependencies for NFC when not toggleable.
+        if (toggleable == null || !toggleable.contains(Settings.System.RADIO_NFC)) {
+            findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
+            findPreference(KEY_ZEROCLICK_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+        }
+
         // Remove NFC if its not available
         mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         if (mNfcAdapter == null) {
             getPreferenceScreen().removePreference(nfc);
             getPreferenceScreen().removePreference(zeroclick);
+            mNfcEnabler = null;
         }
 
         // Remove Mobile Network Settings if it's a wifi-only device.
@@ -176,18 +182,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         super.onResume();
 
         mAirplaneModeEnabler.resume();
-        mNfcEnabler.resume();
-
-        if (mNfcAdapter != null) {
-            // Update zero-click subtitle
-            Preference zeroClick = getPreferenceScreen().
-                    findPreference(KEY_ZEROCLICK_SETTINGS);
-
-            if (mNfcAdapter.zeroClickEnabled()) {
-                zeroClick.setSummary(R.string.zeroclick_on_summary);
-            } else {
-                zeroClick.setSummary(R.string.zeroclick_off_summary);
-            }
+        if (mNfcEnabler != null) {
+            mNfcEnabler.resume();
         }
     }
 
@@ -196,7 +192,9 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         super.onPause();
 
         mAirplaneModeEnabler.pause();
-        mNfcEnabler.pause();
+        if (mNfcEnabler != null) {
+            mNfcEnabler.pause();
+        }
     }
 
     @Override

@@ -27,6 +27,8 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.settings.R;
+
 /**
  * NfcEnabler is a helper to manage the Nfc on/off checkbox preference. It is
  * turns on/off Nfc and ensures the summary of the preference reflects the
@@ -46,15 +48,12 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (NfcAdapter.ACTION_ADAPTER_STATE_CHANGE.equals(action)) {
-                handleNfcStateChanged(intent.getBooleanExtra(
-                    NfcAdapter.EXTRA_NEW_BOOLEAN_STATE,
-                    false));
+            if (NfcAdapter.ACTION_ADAPTER_STATE_CHANGED.equals(action)) {
+                handleNfcStateChanged(intent.getIntExtra(NfcAdapter.EXTRA_ADAPTER_STATE,
+                        NfcAdapter.STATE_OFF));
             }
         }
     };
-
-    private boolean mNfcState;
 
     public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference,
             PreferenceScreen zeroclick) {
@@ -66,20 +65,20 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         if (mNfcAdapter == null) {
             // NFC is not supported
             mCheckbox.setEnabled(false);
+            mZeroClick.setEnabled(false);
+            mIntentFilter = null;
+            return;
         }
-
-        mIntentFilter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGE);
-
+        mIntentFilter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
     }
 
     public void resume() {
         if (mNfcAdapter == null) {
             return;
         }
+        handleNfcStateChanged(mNfcAdapter.getAdapterState());
         mContext.registerReceiver(mReceiver, mIntentFilter);
         mCheckbox.setOnPreferenceChangeListener(this);
-        mNfcState = mNfcAdapter.isEnabled();
-        mCheckbox.setChecked(mNfcState);
     }
 
     public void pause() {
@@ -96,41 +95,43 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         final boolean desiredState = (Boolean) value;
         mCheckbox.setEnabled(false);
 
-        // Start async update of the NFC adapter state, as the API is
-        // unfortunately blocking...
-        new Thread("toggleNFC") {
-            @Override
-            public void run() {
-                Log.d(TAG, "Setting NFC enabled state to: " + desiredState);
-                boolean success = false;
-                if (desiredState) {
-                    success = mNfcAdapter.enable();
-                } else {
-                    success = mNfcAdapter.disable();
-                }
-                if (success) {
-                    Log.d(TAG, "Successfully changed NFC enabled state to " + desiredState);
-                    mHandler.post(new Runnable() {
-                        public void run() {
-                            handleNfcStateChanged(desiredState);
-                        }
-                    });
-                } else {
-                    Log.w(TAG, "Error setting NFC enabled state to " + desiredState);
-                    mHandler.post(new Runnable() {
-                            public void run() {
-                                mCheckbox.setEnabled(true);
-                            }
-                        });
-                }
-            }
-        }.start();
+        if (desiredState) {
+            mNfcAdapter.enable();
+        } else {
+            mNfcAdapter.disable();
+        }
+
         return false;
     }
 
-    private void handleNfcStateChanged(boolean newState) {
-        mCheckbox.setChecked(newState);
-        mCheckbox.setEnabled(true);
-        mZeroClick.setEnabled(newState);
+    private void handleNfcStateChanged(int newState) {
+        switch (newState) {
+        case NfcAdapter.STATE_OFF:
+            mCheckbox.setChecked(false);
+            mCheckbox.setEnabled(true);
+            mZeroClick.setEnabled(false);
+            mZeroClick.setSummary(R.string.zeroclick_off_summary);
+            break;
+        case NfcAdapter.STATE_ON:
+            mCheckbox.setChecked(true);
+            mCheckbox.setEnabled(true);
+            mZeroClick.setEnabled(true);
+            if (mNfcAdapter.isZeroClickEnabled()) {
+                mZeroClick.setSummary(R.string.zeroclick_on_summary);
+            } else {
+                mZeroClick.setSummary(R.string.zeroclick_off_summary);
+            }
+            break;
+        case NfcAdapter.STATE_TURNING_ON:
+            mCheckbox.setChecked(true);
+            mCheckbox.setEnabled(false);
+            mZeroClick.setEnabled(false);
+            break;
+        case NfcAdapter.STATE_TURNING_OFF:
+            mCheckbox.setChecked(false);
+            mCheckbox.setEnabled(false);
+            mZeroClick.setEnabled(false);
+            break;
+        }
     }
 }
