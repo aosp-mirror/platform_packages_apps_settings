@@ -234,7 +234,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
 
     void setNumberOfPairedDevices(int pairedDevices) {
         mNumberOfPairedDevices = pairedDevices;
-        setSummaryNotDiscoverable();
+        handleModeChanged(mLocalAdapter.getScanMode());
     }
 
     void handleModeChanged(int mode) {
