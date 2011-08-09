@@ -21,7 +21,6 @@
 
     <com.android.settings.RingerVolumePreference
             android:key="ring_volume"
-            android:dependency="silent"
             android:title="@string/all_volume_title"
             android:dialogTitle="@string/all_volume_title"
             android:persistent="false"
@@ -37,7 +36,7 @@
             android:key="silent"
             android:title="@string/silent_mode_title"
             android:persistent="false"
-            android:disableDependentsState="true" />
+            />
 
     <Preference
             android:key="musicfx"
