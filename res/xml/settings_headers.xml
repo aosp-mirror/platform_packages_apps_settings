@@ -54,9 +54,7 @@
         android:id="@+id/wireless_settings"
         android:title="@string/radio_controls_title"
         android:breadCrumbTitle="@string/wireless_networks_settings_title"
-        android:fragment="com.android.settings.WirelessSettings"
-        android:icon="@drawable/ic_settings_more_wireless" />
-
+        android:fragment="com.android.settings.WirelessSettings" />
 
     <!-- DEVICE -->
     <header android:title="@string/header_category_device" />
@@ -140,7 +138,7 @@
     <!-- Backup and reset -->
     <header
         android:fragment="com.android.settings.PrivacySettings"
-        android:icon="@drawable/ic_settings_privacy"
+        android:icon="@drawable/ic_settings_backup"
         android:title="@string/privacy_settings"
         android:id="@+id/privacy_settings" />
 
