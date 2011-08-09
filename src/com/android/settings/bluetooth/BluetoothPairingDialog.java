@@ -41,6 +41,7 @@ import android.widget.TextView;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
+import android.view.KeyEvent;
 
 /**
  * BluetoothPairingDialog asks the user to enter a PIN / Passkey / simple confirmation
@@ -338,6 +339,13 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
     private void onCancel() {
         mDevice.cancelPairingUserInput();
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onCancel();
+        }
+        return super.onKeyDown(keyCode,event);
     }
 
     public void onClick(DialogInterface dialog, int which) {
