@@ -17,6 +17,8 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,9 +28,16 @@ import java.util.List;
  * CachedBluetoothDeviceManager manages the set of remote Bluetooth devices.
  */
 final class CachedBluetoothDeviceManager {
+    private static final String TAG = "CachedBluetoothDeviceManager";
+    private static final boolean DEBUG = Utils.D;
 
+    private Context mContext;
     private final List<CachedBluetoothDevice> mCachedDevices =
             new ArrayList<CachedBluetoothDevice>();
+
+    CachedBluetoothDeviceManager(Context context) {
+        mContext = context;
+    }
 
     public synchronized Collection<CachedBluetoothDevice> getCachedDevicesCopy() {
         return new ArrayList<CachedBluetoothDevice>(mCachedDevices);
@@ -74,8 +83,8 @@ final class CachedBluetoothDeviceManager {
     CachedBluetoothDevice addDevice(LocalBluetoothAdapter adapter,
             LocalBluetoothProfileManager profileManager,
             BluetoothDevice device) {
-        CachedBluetoothDevice newDevice = new CachedBluetoothDevice(adapter, profileManager,
-                device);
+        CachedBluetoothDevice newDevice = new CachedBluetoothDevice(mContext, adapter,
+            profileManager, device);
         mCachedDevices.add(newDevice);
         return newDevice;
     }
@@ -122,6 +131,12 @@ final class CachedBluetoothDeviceManager {
         CachedBluetoothDevice cachedDevice = findDevice(device);
         if (cachedDevice != null) {
             cachedDevice.onUuidChanged();
+        }
+    }
+
+    private void log(String msg) {
+        if (DEBUG) {
+            Log.d(TAG, msg);
         }
     }
 }

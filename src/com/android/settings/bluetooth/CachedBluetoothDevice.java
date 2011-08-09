@@ -19,6 +19,8 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.ParcelUuid;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -40,6 +42,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     private static final String TAG = "CachedBluetoothDevice";
     private static final boolean DEBUG = Utils.V;
 
+    private final Context mContext;
     private final LocalBluetoothAdapter mLocalAdapter;
     private final LocalBluetoothProfileManager mProfileManager;
     private final BluetoothDevice mDevice;
@@ -60,7 +63,19 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     private boolean mVisible;
 
+    private int mPhonebookPermissionChoice;
+
     private final Collection<Callback> mCallbacks = new ArrayList<Callback>();
+
+    // Following constants indicate the user's choices of Phone book access settings
+    // User hasn't made any choice or settings app has wiped out the memory
+    final static int PHONEBOOK_ACCESS_UNKNOWN = 0;
+    // User has accepted the connection and let Settings app remember the decision
+    final static int PHONEBOOK_ACCESS_ALLOWED = 1;
+    // User has rejected the connection and let Settings app remember the decision
+    final static int PHONEBOOK_ACCESS_REJECTED = 2;
+
+    private final static String PHONEBOOK_PREFS_NAME = "bluetooth_phonebook_permission";
 
     /**
      * When we connect to multiple profiles, we only want to display a single
@@ -125,9 +140,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         }
     }
 
-    CachedBluetoothDevice(LocalBluetoothAdapter adapter,
-            LocalBluetoothProfileManager profileManager,
-            BluetoothDevice device) {
+    CachedBluetoothDevice(Context context,
+                          LocalBluetoothAdapter adapter,
+                          LocalBluetoothProfileManager profileManager,
+                          BluetoothDevice device) {
+        mContext = context;
         mLocalAdapter = adapter;
         mProfileManager = profileManager;
         mDevice = device;
@@ -305,9 +322,9 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         fetchName();
         fetchBtClass();
         updateProfiles();
+        fetchPhonebookPermissionChoice();
 
         mVisible = false;
-
         dispatchAttributesChanged();
     }
 
@@ -470,6 +487,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         if (bondState == BluetoothDevice.BOND_NONE) {
             mProfiles.clear();
             mConnectAfterPairing = false;  // cancel auto-connect
+            setPhonebookPermissionChoice(PHONEBOOK_ACCESS_UNKNOWN);
         }
 
         refresh();
@@ -580,4 +598,28 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     public interface Callback {
         void onDeviceAttributesChanged();
     }
+
+    int getPhonebookPermissionChoice() {
+        return mPhonebookPermissionChoice;
+    }
+
+    void setPhonebookPermissionChoice(int permissionChoice) {
+        SharedPreferences.Editor editor =
+            mContext.getSharedPreferences(PHONEBOOK_PREFS_NAME, Context.MODE_PRIVATE).edit();
+        if (permissionChoice == PHONEBOOK_ACCESS_UNKNOWN) {
+            editor.remove(mDevice.getAddress());
+        } else {
+            editor.putInt(mDevice.getAddress(), permissionChoice);
+        }
+        editor.commit();
+        mPhonebookPermissionChoice = permissionChoice;
+    }
+
+    private void fetchPhonebookPermissionChoice() {
+        SharedPreferences preference = mContext.getSharedPreferences(PHONEBOOK_PREFS_NAME,
+                                                                     Context.MODE_PRIVATE);
+        mPhonebookPermissionChoice = preference.getInt(mDevice.getAddress(),
+                                                       PHONEBOOK_ACCESS_UNKNOWN);
+    }
+
 }
