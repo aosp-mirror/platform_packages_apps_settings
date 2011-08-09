@@ -213,7 +213,6 @@ class VpnDialog extends AlertDialog implements TextWatcher,
         // First, hide everything.
         mMppe.setVisibility(View.GONE);
         mView.findViewById(R.id.l2tp).setVisibility(View.GONE);
-        mView.findViewById(R.id.ipsec_id).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_psk).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_user).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_ca).setVisibility(View.GONE);
@@ -223,12 +222,11 @@ class VpnDialog extends AlertDialog implements TextWatcher,
             case VpnProfile.TYPE_PPTP:
                 mMppe.setVisibility(View.VISIBLE);
                 break;
+
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 mView.findViewById(R.id.l2tp).setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.ipsec_psk).setVisibility(View.VISIBLE);
-                break;
+                // fall through
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
-                mView.findViewById(R.id.ipsec_id).setVisibility(View.VISIBLE);
                 mView.findViewById(R.id.ipsec_psk).setVisibility(View.VISIBLE);
                 break;
 
@@ -255,6 +253,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
         }
         switch (mType.getSelectedItemPosition()) {
             case VpnProfile.TYPE_PPTP:
+            case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
                 return true;
 
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
@@ -343,10 +342,10 @@ class VpnDialog extends AlertDialog implements TextWatcher,
             case VpnProfile.TYPE_PPTP:
                 profile.mppe = mMppe.isChecked();
                 break;
+
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
                 profile.l2tpSecret = mL2tpSecret.getText().toString();
-                profile.ipsecSecret = mIpsecSecret.getText().toString();
-                break;
+                // fall through
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
                 profile.ipsecIdentifier = mIpsecIdentifier.getText().toString();
                 profile.ipsecSecret = mIpsecSecret.getText().toString();
