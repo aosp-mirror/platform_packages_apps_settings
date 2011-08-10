@@ -21,6 +21,7 @@ import com.android.settings.SettingsPreferenceFragment;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -102,7 +103,13 @@ public class InputMethodPreference extends CheckBoxPreference
                     new OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
-                            mFragment.startActivity(mSettingsIntent);
+                            try {
+                                mFragment.startActivity(mSettingsIntent);
+                            } catch (ActivityNotFoundException e) {
+                                Log.d(TAG, "IME's Settings Activity Not Found: " + e);
+                                // If the IME's settings activity does not exist, we can just
+                                // do nothing...
+                            }
                         }
                     });
         }
