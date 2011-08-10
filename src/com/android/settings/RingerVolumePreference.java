@@ -182,8 +182,8 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
                 public void onReceive(Context context, Intent intent) {
                     final String action = intent.getAction();
                     if (AudioManager.RINGER_MODE_CHANGED_ACTION.equals(action)) {
-                        mHandler.sendMessage(mHandler.obtainMessage(MSG_RINGER_MODE_CHANGED,
-                                intent.getIntExtra(AudioManager.EXTRA_RINGER_MODE, -1), 0));
+                        mHandler.sendMessage(mHandler.obtainMessage(MSG_RINGER_MODE_CHANGED, intent
+                                .getIntExtra(AudioManager.EXTRA_RINGER_MODE, -1), 0));
                     }
                 }
             };
@@ -222,7 +222,10 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
     @Override
     public void onActivityStop() {
         super.onActivityStop();
-        cleanup();
+
+        for (SeekBarVolumizer vol : mSeekBarVolumizer) {
+            if (vol != null) vol.stopSample();
+        }
     }
 
     @Override
