@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.media.AudioSystem;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,6 +37,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.VolumePreference;
 import android.provider.Settings;
+import android.provider.Settings.System;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -164,10 +166,15 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
             }
         }
 
+        final int silentableStreams = System.getInt(getContext().getContentResolver(),
+                System.MODE_RINGER_STREAMS_AFFECTED,
+                ((1 << AudioSystem.STREAM_NOTIFICATION) | (1 << AudioSystem.STREAM_RING)));
         // Register callbacks for mute/unmute buttons
         for (int i = 0; i < mCheckBoxes.length; i++) {
             ImageView checkbox = (ImageView) view.findViewById(CHECKBOX_VIEW_ID[i]);
-            checkbox.setOnClickListener(this);
+            if ((silentableStreams & (1 << SEEKBAR_TYPE[i])) != 0) {
+                checkbox.setOnClickListener(this);
+            }
             mCheckBoxes[i] = checkbox;
         }
 

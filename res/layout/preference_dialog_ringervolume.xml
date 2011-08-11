@@ -59,7 +59,7 @@
                 <ImageView android:id="@+id/media_mute_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="8dip"
+                        android:padding="16dip"
                         android:background="?android:attr/selectableItemBackground"
                     />
 
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingTop="2dip"
-                        android:paddingLeft="20dip"
+                        android:paddingLeft="12dip"
                         android:paddingRight="20dip" />
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                     <ImageView android:id="@+id/ringer_mute_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dip"
+                            android:padding="16dip"
                             android:background="?android:attr/selectableItemBackground"
                         />
 
@@ -109,7 +109,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingTop="2dip"
-                            android:paddingLeft="20dip"
+                            android:paddingLeft="12dip"
                             android:paddingRight="20dip" />
             </LinearLayout>
 
@@ -143,7 +143,7 @@
                     <ImageView android:id="@+id/notification_mute_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dip"
+                            android:padding="16dip"
                             android:background="?android:attr/selectableItemBackground"
                         />
 
@@ -152,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingTop="2dip"
-                            android:paddingLeft="20dip"
+                            android:paddingLeft="12dip"
                             android:paddingRight="20dip" />
             </LinearLayout>
 
@@ -173,12 +173,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dip"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <ImageView android:id="@+id/alarm_mute_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="8dip"
+                        android:padding="16dip"
                         android:background="?android:attr/selectableItemBackground"
                     />
                 <SeekBar android:id="@+id/alarm_volume_seekbar"
@@ -186,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingTop="2dip"
-                        android:paddingLeft="20dip"
+                        android:paddingLeft="12dip"
                         android:paddingRight="20dip" />
         </LinearLayout>
 
