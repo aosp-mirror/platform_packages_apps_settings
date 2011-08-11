@@ -224,7 +224,7 @@ public class UserDictionarySettings extends ListActivity {
                         if (mAutoReturn) finish();                        
                     }})
                 .create();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN |
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
     }
