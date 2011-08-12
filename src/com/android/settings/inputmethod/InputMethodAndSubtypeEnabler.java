@@ -49,6 +49,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     private InputMethodManager mImm;
     private List<InputMethodInfo> mInputMethodProperties;
     private String mInputMethodId;
+    private String mTitle;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -71,18 +72,24 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                 mInputMethodId = inputMethodId;
             }
         }
-        CharSequence title = getActivity().getIntent().getStringExtra(
-                Intent.EXTRA_TITLE);
-        if (title == null && (arguments != null)) {
-            title = arguments.getString(Intent.EXTRA_TITLE);
-        }
-
-        if (!TextUtils.isEmpty(title)) {
-            getActivity().setTitle(title);
+        mTitle = getActivity().getIntent().getStringExtra(Intent.EXTRA_TITLE);
+        if (mTitle == null && (arguments != null)) {
+            final String title = arguments.getString(Intent.EXTRA_TITLE);
+            if (title != null) {
+                mTitle = title;
+            }
         }
 
         onCreateIMM();
         setPreferenceScreen(createPreferenceHierarchy());
+    }
+
+    @Override
+    public void onActivityCreated(Bundle icicle) {
+        super.onActivityCreated(icicle);
+        if (!TextUtils.isEmpty(mTitle)) {
+            getActivity().setTitle(mTitle);
+        }
     }
 
     @Override
