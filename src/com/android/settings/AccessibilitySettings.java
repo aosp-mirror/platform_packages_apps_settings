@@ -254,6 +254,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     public void removeToggleAccessibilitySwitch() {
+        mToggleAccessibilitySwitch.setOnBeforeCheckedChangeListener(null);
         getActivity().getActionBar().setCustomView(null);
     }
 
@@ -778,6 +779,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             if (mOldActivityTitle != null) {
                 getActivity().getActionBar().setTitle(mOldActivityTitle);
             }
+            mToggleSwitch.setOnBeforeCheckedChangeListener(null);
             super.onDestroyView();
         }
 
