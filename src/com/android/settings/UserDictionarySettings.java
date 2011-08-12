@@ -217,7 +217,7 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
                         if (mAutoReturn) activity.onBackPressed();
                     }})
                 .create();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN |
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
     }
