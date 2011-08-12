@@ -291,16 +291,27 @@
     </string-array>
 
     <!-- Match this with the constants in AccessPoint. --> <skip />
-    <!-- Wi-Fi settings.  The type of security a Wi-Fi network has. -->
+    <!-- Wi-Fi security choices used when manually added a Wi-Fi network -->
     <string-array name="wifi_security">
         <!-- The Wi-Fi network does not have any security. -->
-        <item>Open</item>
+        <item>@string/wifi_security_none</item>
         <!-- Do not translate. -->
-        <item>WEP</item>
+        <item>@string/wifi_security_wep</item>
         <!-- Do not translate. -->
-        <item>WPA/WPA2 PSK</item>
+        <item>@string/wifi_security_psk_generic</item>
         <!-- Do not translate. -->
-        <item>802.1x EAP</item>
+        <item>@string/wifi_security_eap</item>
+    </string-array>
+
+    <!-- Match this with the constants in AccessPoint. --> <skip />
+    <!-- Wi-Fi security types for New User Dialog. EAP is not configurable. -->
+    <string-array name="wifi_security_no_eap">
+        <!-- The Wi-Fi network does not have any security. -->
+        <item>@string/wifi_security_none</item>
+        <!-- Do not translate. -->
+        <item>@string/wifi_security_wep</item>
+        <!-- Do not translate. -->
+        <item>@string/wifi_security_psk_generic</item>
     </string-array>
 
    <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->

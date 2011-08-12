@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
@@ -27,26 +25,37 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.util.Comparator;
+import com.android.settings.R;
 
 class AccessPoint extends Preference {
+    static final String TAG = "Settings.AccessPoint";
 
     private static final String KEY_DETAILEDSTATE = "key_detailedstate";
     private static final String KEY_WIFIINFO = "key_wifiinfo";
     private static final String KEY_SCANRESULT = "key_scanresult";
     private static final String KEY_CONFIG = "key_config";
 
-    private static final int[] STATE_SECURED = {R.attr.state_encrypted};
+    private static final int[] STATE_SECURED = {
+        R.attr.state_encrypted
+    };
     private static final int[] STATE_NONE = {};
 
-
+    /** These values are matched in string arrays -- changes must be kept in sync */
     static final int SECURITY_NONE = 0;
     static final int SECURITY_WEP = 1;
     static final int SECURITY_PSK = 2;
     static final int SECURITY_EAP = 3;
+
+    enum PskType {
+        UNKNOWN,
+        WPA,
+        WPA2,
+        WPA_WPA2
+    }
 
     String ssid;
     String bssid;
@@ -54,8 +63,10 @@ class AccessPoint extends Preference {
     int networkId;
     boolean wpsAvailable = false;
 
+    PskType pskType = PskType.UNKNOWN;
+
     private WifiConfiguration mConfig;
-    /*package*/ScanResult mScanResult;
+    /* package */ScanResult mScanResult;
 
     private int mRssi;
     private WifiInfo mInfo;
@@ -82,6 +93,52 @@ class AccessPoint extends Preference {
             return SECURITY_EAP;
         }
         return SECURITY_NONE;
+    }
+
+    public String getSecurityString(boolean concise) {
+        Context context = getContext();
+        switch(security) {
+            case SECURITY_EAP:
+                return concise ? context.getString(R.string.wifi_security_short_eap) :
+                    context.getString(R.string.wifi_security_eap);
+            case SECURITY_PSK:
+                switch (pskType) {
+                    case WPA:
+                        return concise ? context.getString(R.string.wifi_security_short_wpa) :
+                            context.getString(R.string.wifi_security_wpa);
+                    case WPA2:
+                        return concise ? context.getString(R.string.wifi_security_short_wpa2) :
+                            context.getString(R.string.wifi_security_wpa2);
+                    case WPA_WPA2:
+                        return concise ? context.getString(R.string.wifi_security_short_wpa_wpa2) :
+                            context.getString(R.string.wifi_security_wpa_wpa2);
+                    case UNKNOWN:
+                    default:
+                        return concise ? context.getString(R.string.wifi_security_short_psk_generic)
+                                : context.getString(R.string.wifi_security_psk_generic);
+                }
+            case SECURITY_WEP:
+                return concise ? context.getString(R.string.wifi_security_short_wep) :
+                    context.getString(R.string.wifi_security_wep);
+            case SECURITY_NONE:
+            default:
+                return concise ? "" : context.getString(R.string.wifi_security_none);
+        }
+    }
+
+    private static PskType getPskType(ScanResult result) {
+        boolean wpa = result.capabilities.contains("WPA-PSK");
+        boolean wpa2 = result.capabilities.contains("WPA2-PSK");
+        if (wpa2 && wpa) {
+            return PskType.WPA_WPA2;
+        } else if (wpa2) {
+            return PskType.WPA2;
+        } else if (wpa) {
+            return PskType.WPA;
+        } else {
+            Log.w(TAG, "Received abnormal flag string: " + result.capabilities);
+            return PskType.UNKNOWN;
+        }
     }
 
     AccessPoint(Context context, WifiConfiguration config) {
@@ -138,6 +195,8 @@ class AccessPoint extends Preference {
         bssid = result.BSSID;
         security = getSecurity(result);
         wpsAvailable = security != SECURITY_EAP && result.capabilities.contains("WPS");
+        if (security == SECURITY_PSK)
+            pskType = getPskType(result);
         networkId = -1;
         mRssi = result.level;
         mScanResult = result;
@@ -185,13 +244,15 @@ class AccessPoint extends Preference {
         return ssid.compareToIgnoreCase(other.ssid);
     }
 
-
     boolean update(ScanResult result) {
         // We do not call refresh() since this is called before onBindView().
         if (ssid.equals(result.SSID) && security == getSecurity(result)) {
             if (WifiManager.compareSignalLevel(result.level, mRssi) > 0) {
                 mRssi = result.level;
             }
+            // This flag only comes from scans, is not easily saved in config
+            if (security == SECURITY_PSK)
+                pskType = getPskType(result);
             return true;
         }
         return false;
@@ -255,34 +316,46 @@ class AccessPoint extends Preference {
         Context context = getContext();
         mSignal.setImageLevel(getLevel());
 
-        if (mState != null) {
+        if (mState != null) { // This is the active connection
             setSummary(Summary.get(context, mState));
-        } else {
-            String status = null;
-            if (mRssi == Integer.MAX_VALUE) {
-                status = context.getString(R.string.wifi_not_in_range);
-            } else if (mConfig != null) {
-                status = context.getString((mConfig.status == WifiConfiguration.Status.DISABLED) ?
-                        R.string.wifi_disabled : R.string.wifi_remembered);
+        } else if (mRssi == Integer.MAX_VALUE) { // Wifi out of range
+            setSummary(context.getString(R.string.wifi_not_in_range));
+        } else if (mConfig != null && mConfig.status == WifiConfiguration.Status.DISABLED) {
+            switch (mConfig.disableReason) {
+                case WifiConfiguration.DISABLED_AUTH_FAILURE:
+                    setSummary(context.getString(R.string.wifi_disabled_password_failure));
+                    break;
+                case WifiConfiguration.DISABLED_DHCP_FAILURE:
+                case WifiConfiguration.DISABLED_DNS_FAILURE:
+                    setSummary(context.getString(R.string.wifi_disabled_network_failure));
+                    break;
+                case WifiConfiguration.DISABLED_UNKNOWN_REASON:
+                    setSummary(context.getString(R.string.wifi_disabled_generic));
+            }
+        } else { // In range, not disabled.
+            StringBuilder summary = new StringBuilder();
+            if (mConfig != null) { // Is saved network
+                summary.append(context.getString(R.string.wifi_remembered));
             }
 
-            if (security == SECURITY_NONE) {
-                if (wpsAvailable && mConfig == null) {
-                    setSummary(context.getString(R.string.wifi_open_with_wps));
+            if (security != SECURITY_NONE) {
+                String securityStrFormat;
+                if (summary.length() == 0) {
+                    securityStrFormat = context.getString(R.string.wifi_secured_first_item);
                 } else {
-                    setSummary(status);
+                    securityStrFormat = context.getString(R.string.wifi_secured_second_item);
                 }
-            } else {
-                String format;
-                if (wpsAvailable && mConfig == null) {
-                    format = context.getString(R.string.wifi_secured_with_wps);
-                } else {
-                    format = context.getString((status == null) ?
-                            R.string.wifi_secured : R.string.wifi_secured_with_status);
-                }
-                String[] type = context.getResources().getStringArray(R.array.wifi_security);
-                setSummary(String.format(format, type[security], status));
+                summary.append(String.format(securityStrFormat, getSecurityString(true)));
             }
+
+            if (mConfig == null && wpsAvailable) { // Only list WPS available for unsaved networks
+                if (summary.length() == 0) {
+                    summary.append(context.getString(R.string.wifi_wps_available_first_item));
+                } else {
+                    summary.append(context.getString(R.string.wifi_wps_available_second_item));
+                }
+            }
+            setSummary(summary.toString());
         }
     }
 }

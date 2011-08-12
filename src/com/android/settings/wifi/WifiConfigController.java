@@ -158,10 +158,11 @@ public class WifiConfigController implements TextWatcher,
                 mView.findViewById(R.id.type_ssid).setVisibility(View.VISIBLE);
                 mView.findViewById(R.id.type_security).setVisibility(View.VISIBLE);
                 // We want custom layout. The content must be same as the other cases.
-                mSecuritySpinner.setAdapter(
-                        new ArrayAdapter<String>(context, R.layout.wifi_setup_custom_list_item_1,
-                                android.R.id.text1,
-                                context.getResources().getStringArray(R.array.wifi_security)));
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        R.layout.wifi_setup_custom_list_item_1, android.R.id.text1,
+                        context.getResources().getStringArray(R.array.wifi_security_no_eap));
+                mSecuritySpinner.setAdapter(adapter);
             } else {
                 mView.findViewById(R.id.type).setVisibility(View.VISIBLE);
             }
@@ -181,8 +182,7 @@ public class WifiConfigController implements TextWatcher,
                 addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(), state));
             }
 
-            String[] type = resources.getStringArray(R.array.wifi_security);
-            addRow(group, R.string.wifi_security, type[mAccessPoint.security]);
+            addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
 
             int level = mAccessPoint.getLevel();
             if (level != -1) {
