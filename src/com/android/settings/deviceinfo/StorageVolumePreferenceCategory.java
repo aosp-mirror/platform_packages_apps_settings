@@ -254,10 +254,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             }
         }
 
-        if (mFormatPreference != null) {
-            removePreference(mFormatPreference);
-        }
-
         if ((mStorageVolume == null || !mStorageVolume.isRemovable())
                 && !Environment.MEDIA_UNMOUNTED.equals(state)) {
             // This device has built-in storage that is not removable.
