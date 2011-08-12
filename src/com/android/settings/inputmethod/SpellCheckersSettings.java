@@ -20,6 +20,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -72,6 +73,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     private void updateEnabledSpellCheckers() {
+        final PackageManager pm = getPackageManager();
         mCurrentSci = SpellCheckerUtils.getCurrentSpellChecker(mTsm);
         mEnabledScis = SpellCheckerUtils.getEnabledSpellCheckers(mTsm);
         if (mCurrentSci == null || mEnabledScis == null) {
@@ -81,9 +83,9 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         for (int i = 0; i < mEnabledScis.length; ++i) {
             final SpellCheckerInfo sci = mEnabledScis[i];
             final SingleSpellCheckerPreference scPref = new SingleSpellCheckerPreference(
-                    this, null, sci);
+                    this, null, sci, mTsm);
             mSpellCheckers.add(scPref);
-            scPref.setTitle(sci.getId());
+            scPref.setTitle(sci.loadLabel(pm));
             scPref.setSelected(mCurrentSci != null && mCurrentSci.getId().equals(sci.getId()));
             getPreferenceScreen().addPreference(scPref);
         }
@@ -93,12 +95,10 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     public boolean onPreferenceClick(Preference arg0) {
         for (SingleSpellCheckerPreference scp : mSpellCheckers) {
             if (arg0.equals(scp)) {
-                scp.setSelected(true);
                 mTsm.setCurrentSpellChecker(scp.getSpellCheckerInfo());
-            } else {
-                scp.setSelected(false);
             }
         }
+        updateScreen();
         return true;
     }
 }
