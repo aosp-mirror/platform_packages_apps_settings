@@ -63,7 +63,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     private static final String META_DATA_KEY_PARENT_FRAGMENT_CLASS =
         "com.android.settings.PARENT_FRAGMENT_CLASS";
 
-    private static final String EXTRA_THEME = "settings:theme";
+    private static final String EXTRA_CLEAR_UI_OPTIONS = "settings:remove_ui_options";
 
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
@@ -82,9 +82,9 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final int theme = getIntent().getIntExtra(
-                EXTRA_THEME, android.R.style.Theme_Holo);
-        setTheme(theme);
+        if (getIntent().getBooleanExtra(EXTRA_CLEAR_UI_OPTIONS, false)) {
+            getWindow().setUiOptions(0);
+        }
 
         getMetaData();
         mInLocalHeaderSwitch = true;
@@ -288,12 +288,12 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         Intent intent = super.onBuildStartFragmentIntent(fragmentName, args,
                 titleRes, shortTitleRes);
 
-        // some fragments would like a custom activity theme
+        // some fragments want to avoid split actionbar
         if (DataUsageSummary.class.getName().equals(fragmentName) ||
                 PowerUsageSummary.class.getName().equals(fragmentName) ||
                 AccountSyncSettings.class.getName().equals(fragmentName) ||
                 UserDictionarySettings.class.getName().equals(fragmentName)) {
-            intent.putExtra(EXTRA_THEME, android.R.style.Theme_Holo);
+            intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 
         intent.setClass(this, SubSettings.class);

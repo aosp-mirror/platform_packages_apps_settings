@@ -105,7 +105,7 @@ public class ChartNetworkSeriesView extends View {
 
     public void setChartColor(int stroke, int fill, int fillSecondary) {
         mPaintStroke = new Paint();
-        mPaintStroke.setStrokeWidth(6.0f);
+        mPaintStroke.setStrokeWidth(4.0f * getResources().getDisplayMetrics().density);
         mPaintStroke.setColor(stroke);
         mPaintStroke.setStyle(Style.STROKE);
         mPaintStroke.setAntiAlias(true);
@@ -165,7 +165,10 @@ public class ChartNetworkSeriesView extends View {
         mPathEstimate.reset();
 
         // bail when not enough stats to render
-        if (mStats == null || mStats.size() < 2) return;
+        if (mStats == null || mStats.size() < 2) {
+            invalidate();
+            return;
+        }
 
         final int width = getWidth();
         final int height = getHeight();
@@ -263,6 +266,8 @@ public class ChartNetworkSeriesView extends View {
         }
 
         mMaxEstimate = totalData;
+
+        invalidate();
     }
 
     public void setEndTime(long endTime) {

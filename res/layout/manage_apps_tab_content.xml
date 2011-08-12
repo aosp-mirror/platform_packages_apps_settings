@@ -37,10 +37,10 @@
 
             <TabWidget
                 android:id="@android:id/tabs"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:orientation="horizontal"
+                style="?android:attr/tabWidgetStyle" />
 
         </HorizontalScrollView>
 
@@ -48,7 +48,7 @@
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
             android:layout_height="0dip"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 </TabHost>
