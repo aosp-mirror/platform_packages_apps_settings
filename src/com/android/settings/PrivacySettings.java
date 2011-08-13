@@ -43,13 +43,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
     private static final String CONFIGURE_ACCOUNT = "configure_account";
-    private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private IBackupManager mBackupManager;
     private CheckBoxPreference mBackup;
     private CheckBoxPreference mAutoRestore;
     private Dialog mConfirmDialog;
     private PreferenceScreen mConfigure;
-    private PreferenceScreen mPassword;
 
     private static final int DIALOG_ERASE_BACKUP = 2;
     private int mDialogType;
@@ -66,7 +64,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_DATA);
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
         mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
-        mPassword = (PreferenceScreen) screen.findPreference(LOCAL_BACKUP_PASSWORD);
 
         // Vendor specific
         if (getActivity().getPackageManager().
@@ -104,16 +101,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
                 setBackupEnabled(true);
             }
         } else if (preference == mAutoRestore) {
-            IBackupManager bm = IBackupManager.Stub.asInterface(
-                    ServiceManager.getService(Context.BACKUP_SERVICE));
-            if (bm != null) {
-                // TODO: disable via the backup manager interface
-                boolean curState = mAutoRestore.isChecked();
-                try {
-                    bm.setAutoRestore(curState);
-                } catch (RemoteException e) {
-                    mAutoRestore.setChecked(!curState);
-                }
+            boolean curState = mAutoRestore.isChecked();
+            try {
+                mBackupManager.setAutoRestore(curState);
+            } catch (RemoteException e) {
+                mAutoRestore.setChecked(!curState);
             }
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -161,8 +153,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mConfigure.setEnabled(configureEnabled);
         mConfigure.setIntent(configIntent);
         setConfigureSummary(configSummary);
-
-        updatePasswordSummary();
 }
 
     private void setConfigureSummary(String summary) {
@@ -178,18 +168,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
             String transport = mBackupManager.getCurrentTransport();
             String summary = mBackupManager.getDestinationString(transport);
             setConfigureSummary(summary);
-        } catch (RemoteException e) {
-            // Not much we can do here
-        }
-    }
-
-    private void updatePasswordSummary() {
-        try {
-            if (mBackupManager.hasBackupPassword()) {
-                mPassword.setSummary(R.string.local_backup_password_summary_change);
-            } else {
-                mPassword.setSummary(R.string.local_backup_password_summary_none);
-            }
         } catch (RemoteException e) {
             // Not much we can do here
         }
