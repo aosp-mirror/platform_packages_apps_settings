@@ -19,7 +19,9 @@ package com.android.settings;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.BatteryManager;
@@ -53,6 +55,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
+    private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
 
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
@@ -68,10 +71,12 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
     private IWindowManager mWindowManager;
+    private IBackupManager mBackupManager;
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
+    private PreferenceScreen mPassword;
 
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
@@ -95,12 +100,15 @@ public class DevelopmentSettings extends PreferenceFragment
         super.onCreate(icicle);
 
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+        mBackupManager = IBackupManager.Stub.asInterface(
+                ServiceManager.getService(Context.BACKUP_SERVICE));
 
         addPreferencesFromResource(R.xml.development_prefs);
 
         mEnableAdb = (CheckBoxPreference) findPreference(ENABLE_ADB);
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
         mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
+        mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
 
         mStrictMode = (CheckBoxPreference) findPreference(STRICT_MODE_KEY);
         mPointerLocation = (CheckBoxPreference) findPreference(POINTER_LOCATION_KEY);
@@ -144,6 +152,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mAllowMockLocation.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
+        updatePasswordSummary();
         updateStrictModeVisualOptions();
         updatePointerLocationOptions();
         updateFlingerOptions();
@@ -170,6 +179,18 @@ public class DevelopmentSettings extends PreferenceFragment
             hdcpChecking.setValue(values[index]);
             hdcpChecking.setSummary(summaries[index]);
             hdcpChecking.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    private void updatePasswordSummary() {
+        try {
+            if (mBackupManager.hasBackupPassword()) {
+                mPassword.setSummary(R.string.local_backup_password_summary_change);
+            } else {
+                mPassword.setSummary(R.string.local_backup_password_summary_none);
+            }
+        } catch (RemoteException e) {
+            // Not much we can do here
         }
     }
 

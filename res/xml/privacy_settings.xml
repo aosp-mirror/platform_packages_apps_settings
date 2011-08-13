@@ -38,16 +38,6 @@
                 android:title="@string/auto_restore_title"
                 android:summary="@string/auto_restore_summary"
                 android:persistent="false" />
-        <PreferenceScreen
-                android:key="local_backup_password"
-                android:title="@string/local_backup_password_title"
-                android:summary="@string/local_backup_password_summary_none"
-                android:persistent="false" >
-            <intent
-                    android:action="android.settings.privacy.SET_FULL_BACKUP_PASSWORD"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.SetFullBackupPassword" />
-        </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory

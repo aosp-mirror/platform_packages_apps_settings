@@ -39,6 +39,17 @@
         android:entries="@array/hdcp_checking_titles"
         android:entryValues="@array/hdcp_checking_values" />
 
+    <PreferenceScreen
+            android:key="local_backup_password"
+            android:title="@string/local_backup_password_title"
+            android:summary="@string/local_backup_password_summary_none"
+            android:persistent="false" >
+        <intent
+                android:action="android.settings.privacy.SET_FULL_BACKUP_PASSWORD"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.SetFullBackupPassword" />
+    </PreferenceScreen>
+
     <PreferenceCategory android:key="debug_ui_category"
             android:title="@string/debug_ui_category">
 
