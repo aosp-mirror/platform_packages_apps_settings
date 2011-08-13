@@ -68,13 +68,6 @@
     <item msgid="490158884605093126">"아주 크게"</item>
     <item msgid="2123802548987439763">"매우 크게"</item>
   </string-array>
-    <!-- no translation found for entryvalues_font_size:0 (8122189478379706788) -->
-    <!-- no translation found for entryvalues_font_size:1 (186029675505810577) -->
-    <!-- no translation found for entryvalues_font_size:2 (5864822191921585498) -->
-    <!-- no translation found for entryvalues_font_size:3 (5580820036923893743) -->
-    <!-- no translation found for entryvalues_font_size:4 (5106590751949630532) -->
-    <!-- no translation found for entryvalues_font_size:5 (1803159594904488544) -->
-    <!-- no translation found for entryvalues_font_size:6 (7410681469566563300) -->
   <string-array name="tts_rate_entries">
     <item msgid="6041212618892492920">"매우 느림"</item>
     <item msgid="2361722960903353554">"느림"</item>
@@ -135,7 +128,7 @@
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"누름 버튼"</item>
     <item msgid="8084424421884876981">"피어 기기 PIN"</item>
-    <item msgid="9033470670389392191">"이 기기의 Pin"</item>
+    <item msgid="9033470670389392191">"이 기기의 PIN"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"연결됨"</item>
@@ -145,10 +138,10 @@
     <item msgid="829499112585677508">"범위를 벗어났습니다."</item>
   </string-array>
   <string-array name="bluetooth_visibility_timeout_entries">
-    <item msgid="1106621950288502195">"2분"</item>
-    <item msgid="5780349442819375570">"5분"</item>
-    <item msgid="1166466894270177580">"1시간"</item>
-    <item msgid="9032073376232198148">"선택 안함"</item>
+    <!-- outdated translation 1106621950288502195 -->     <item msgid="8151962652413645395">"2분"</item>
+    <!-- outdated translation 5780349442819375570 -->     <item msgid="8675215713017289017">"5분"</item>
+    <!-- outdated translation 1166466894270177580 -->     <item msgid="477015974247590543">"1시간"</item>
+    <!-- outdated translation 9032073376232198148 -->     <item msgid="5198271470953124739">"선택 안함"</item>
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"나쁨"</item>
@@ -213,9 +206,11 @@
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"PAP 또는 CHAP"</item>
   </string-array>
-    <!-- no translation found for apn_protocol_entries:0 (4852355456199302715) -->
-    <!-- no translation found for apn_protocol_entries:1 (4394161344888484571) -->
-    <!-- no translation found for apn_protocol_entries:2 (8084938354605535381) -->
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"내부 기기 저장용량"</item>
     <item msgid="3738430123799803530">"이동식 SD 카드"</item>
@@ -281,7 +276,7 @@
     <item msgid="6692305604213080515">"초기화 중..."</item>
     <item msgid="8001704909356800092">"연결 중..."</item>
     <item msgid="4039737283841672166">"연결됨"</item>
-    <item msgid="4042143101664725090">"시간제한"</item>
+    <item msgid="4042143101664725090">"시간초과됨"</item>
     <item msgid="2690164254699635531">"실패"</item>
   </string-array>
 </resources>

@@ -97,7 +97,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"周辺のすべてのBluetoothデバイスに表示（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"周辺のすべてのBluetoothデバイスに表示"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"他のBluetoothデバイスには非表示"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"ペア設定したデバイスのみに表示"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"ペア設定したデバイスにのみ表示"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"この端末の検出を許可する"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"表示のタイムアウト"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"端末の検出可能時間を設定する"</string>
@@ -111,16 +111,23 @@
     <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"端末の名前を変更"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"名前を変更"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"切断しますか？"</string>
-    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"これで次のデバイスとの接続が切断されます:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>の接続を解除します"</string>
+    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"この操作を行うと、次のデバイスとの接続が切断されます:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <!-- no translation found for bluetooth_disable_profile_title (5916643979709342557) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_profile_message (2895844842011809904) -->
+    <skip />
     <string name="bluetooth_connected" msgid="6038755206916626419">"接続"</string>
+    <!-- no translation found for bluetooth_connected_no_headset (2866994875046035609) -->
+    <skip />
+    <!-- no translation found for bluetooth_connected_no_a2dp (4576188601581440337) -->
+    <skip />
+    <!-- no translation found for bluetooth_connected_no_headset_no_a2dp (9195757766755553810) -->
+    <skip />
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"切断"</string>
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"切断中..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"接続中..."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_not_connected" msgid="3389882907500605937">"この端末をペアに設定する"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"ペアとして設定中..."</string>
-    <string name="bluetooth_paired" msgid="1247541089000057726">"ペア設定、非接続"</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"名前のないBluetoothデバイス"</string>
     <string name="progress_scanning" msgid="192587958424295789">"検索中"</string>
     <string name="progress_tap_to_pair" msgid="4192342336107106334">"タップでペアにします"</string>
@@ -141,8 +148,7 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="6132824454823539873">"アプリケーションが、BluetoothをONにしてこのタブレットを他のデバイスから検出できるようにする許可をリクエストしています。許可しますか？"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="7471195931669103553">"アプリケーションが、BluetoothをONにしてこの端末を他のデバイスから検出できるようにする許可をリクエストしています。許可しますか？"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"BluetoothをONにしています..."</string>
-    <!-- no translation found for bluetooth_turning_off (2337747302892025192) -->
-    <skip />
+    <string name="bluetooth_turning_off" msgid="2337747302892025192">"BluetoothをOFFにしています..."</string>
     <string name="bluetooth_auto_connect" msgid="8013003320667198460">"自動接続"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Bluetooth接続リクエスト"</string>
     <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」に接続するにはタップしてください"</string>
@@ -154,7 +160,8 @@
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 PM"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"タイムゾーンの選択"</string>
-    <string name="normal_date_format" msgid="1982904221918374153">"標準（<xliff:g id="DATE">%s</xliff:g>）"</string>
+    <!-- no translation found for normal_date_format (7636406984925498359) -->
+    <skip />
     <string name="display_preview_label" msgid="1127597250917274792">"プレビュー:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"フォントサイズ:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -249,7 +256,7 @@
     <string name="cancel" msgid="6859253417269739139">"キャンセル"</string>
     <string name="settings_label" msgid="1626402585530130914">"設定"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"設定"</string>
-    <!-- outdated translation 8597387747077828217 -->     <string name="settings_shortcut" msgid="3936651951364030415">"設定をショートカットとして選択"</string>
+    <string name="settings_shortcut" msgid="3936651951364030415">"設定をショートカットとする"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"機内モード"</string>
     <string name="radio_controls_title" msgid="6889937359495515769">"その他..."</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"無線とネットワーク"</string>
@@ -281,8 +288,9 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"タイムゾーン順"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日付"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
-    <string name="lock_after_timeout" msgid="940509402681580537">"タイムアウト"</string>
-    <string name="lock_after_timeout_summary" msgid="4726009794344934278">"画面が自動的にOFFになってから<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後に画面をロックする"</string>
+    <!-- outdated translation 940509402681580537 -->     <string name="lock_after_timeout" msgid="4590337686681194648">"タイムアウト"</string>
+    <!-- no translation found for lock_after_timeout_summary (1961885807970181047) -->
+    <skip />
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"ロック画面に所有者情報を表示"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"所有者情報"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
@@ -395,15 +403,15 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"接続、端末名、検出の許可を設定する"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetoothのペア設定リクエスト"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"次のデバイスとペア設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスに必要なPINを入力してください:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"次のデバイスとペア設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスに必要なパスキーを入力してください:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"次のデバイスをペアに設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスに必要なPINを入力してください:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"次のデバイスをペアに設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスに必要なパスキーを入力してください:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PINに文字か記号が含まれる"</string>
-    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"通常は0000か1234です"</string>
+    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"通常は0000または1234です"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"もう一方のデバイスでも、このPINの入力が必要な場合があります。"</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"もう一方のデバイスでも、このパスキーの入力が必要な場合があります。"</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"次のデバイスとペア設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;以下のパスキーが表示されていることを確認してください:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"送信元:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスとペア設定しますか？"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"次のデバイスとペア設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;というパスキーを入力してReturnかEnterを押してください。"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"次のデバイスをペアに設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;次のパスキーが表示されていることを確認してください:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"発信元:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;このデバイスをペアに設定しますか？"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"次のデバイスをペアに設定する場合:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;次のパスキーを入力します:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;入力したら、ReturnキーまたはEnterキーを押してください。"</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"ペア設定する"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"キャンセル"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"注意"</string>
@@ -428,23 +436,27 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth詳細設定"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"デバイスを表示するにはBluetoothをON"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"接続先..."</string>
-    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"メディア"</string>
-    <string name="bluetooth_profile_headset" msgid="81844079120986198">"ハンズフリー"</string>
-    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"転送"</string>
-    <string name="bluetooth_profile_hid" msgid="3000858580917633478">"入力デバイス"</string>
+    <!-- outdated translation 3259633293424539529 -->     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"メディア"</string>
+    <!-- outdated translation 81844079120986198 -->     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"ハンズフリー"</string>
+    <!-- outdated translation 3799470046565284440 -->     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"転送"</string>
+    <!-- outdated translation 3000858580917633478 -->     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"入力デバイス"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"インターネットアクセス"</string>
+    <!-- no translation found for bluetooth_profile_pan_nap (8429049285027482959) -->
+    <skip />
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>はメディアの音声から切断されます。"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>はハンズフリー音声デバイスから切断されます。"</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>は入力デバイスから切断されます。"</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>経由のインターネットアクセスを切断します。"</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"このタブレットのインターネット接続の共有から<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を切断します。"</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"この携帯端末のインターネット接続の共有から<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を切断します。"</string>
-    <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>オプション"</string>
-    <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"デバイスの動作"</string>
+    <!-- unknown placeholder DEVICE_NAME in bluetooth_device_advanced_title -->
+    <skip />
+    <!-- no translation found for bluetooth_device_advanced_title (6066342531927499308) -->
+    <skip />
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"接続"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Bluetoothデバイスに接続"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"プロフィール"</string>
-    <string name="bluetooth_device_advanced_rename_device" msgid="350508394033808532">"デバイス名の変更"</string>
+    <!-- outdated translation 350508394033808532 -->     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"デバイス名の変更"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"ファイル転送の受信を許可"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"メディアの音声に接続"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"携帯電話の音声に接続"</string>
@@ -464,16 +476,12 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"音楽とメディア"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"設定を保存"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for zeroclick_settings_title (3105038392089982549) -->
-    <skip />
+    <string name="zeroclick_settings_title" msgid="3105038392089982549">"タップして共有"</string>
     <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <!-- no translation found for zeroclick_on_summary (3157018760403281266) -->
-    <skip />
-    <!-- no translation found for zeroclick_off_summary (2896320184904157018) -->
-    <skip />
+    <string name="zeroclick_on_summary" msgid="3157018760403281266">"ON"</string>
+    <string name="zeroclick_off_summary" msgid="2896320184904157018">"OFF"</string>
     <string name="zeroclick_label" msgid="6908892664706309626">"ゼロクリック共有"</string>
-    <!-- no translation found for zeroclick_explained (3953149564512166049) -->
-    <skip />
+    <string name="zeroclick_explained" msgid="3953149564512166049">"[タップして共有]を使用すると、NFC対応の端末同士を近付けるだけで、アプリケーションのコンテンツを共有できます。"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Wi-FiをONにする"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -554,13 +562,13 @@
     <string name="wifi_gateway" msgid="163914742461092086">"ゲートウェイ"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"ネットワークプレフィックス長"</string>
     <string name="wifi_p2p_settings_title" msgid="400503541488064638">"Wi-Fi Direct"</string>
-    <string name="wifi_p2p_settings_summary" msgid="819202165773287900">"ピアツーピア接続の設定"</string>
+    <string name="wifi_p2p_settings_summary" msgid="819202165773287900">"ピアツーピア接続のセットアップ"</string>
     <string name="wifi_p2p_device_info" msgid="6092748173212362426">"デバイス情報"</string>
     <string name="wifi_p2p_wps_setup" msgid="7706254437161351448">"Wi-Fi保護設定"</string>
-    <string name="wifi_p2p_wps_pin" msgid="492162570392614138">"PINを入力してください"</string>
+    <string name="wifi_p2p_wps_pin" msgid="492162570392614138">"PINを入力"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"この接続を保存"</string>
     <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"検索"</string>
-    <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"グループの作成"</string>
+    <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"グループを作成"</string>
     <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"詳細設定"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"ポータブルWi-Fiアクセスポイント"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"ポータブルアクセスポイント<xliff:g id="NETWORK_SSID">%1$s</xliff:g>が有効です"</string>
@@ -569,7 +577,7 @@
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>ポータブルWi-Fiアクセスポイント"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"表示"</string>
-    <!-- outdated translation 5007659014828162881 -->     <string name="sound_settings" msgid="5534671337768745343">"音の設定"</string>
+    <string name="sound_settings" msgid="5534671337768745343">"音"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"マナーモード"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"着信音"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
@@ -621,7 +629,7 @@
     <string name="sync_settings_summary" msgid="2962179505214965667">"アカウントの追加や削除、アカウント設定の変更を行います"</string>
     <string name="search_settings" msgid="1910951467596035063">"検索"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"検索設定と履歴の管理"</string>
-    <!-- outdated translation 5947830029420609057 -->     <string name="display_settings" msgid="7965901687241669598">"画面の設定"</string>
+    <string name="display_settings" msgid="7965901687241669598">"ディスプレイ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"画面の自動回転"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"画面の向きに合わせて縦横表示を切り替える"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"画面の向きに合わせて縦横表示を切り替える"</string>
@@ -629,11 +637,11 @@
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"画面の向きに合わせて縦横表示を切り替える"</string>
     <string name="brightness" msgid="2354961343555249270">"画面の明るさ"</string>
     <string name="brightness_summary" msgid="838917350127550703">"画面の明るさを調整する"</string>
-    <string name="screen_timeout" msgid="6962654593018319466">"タイムアウト"</string>
-    <string name="screen_timeout_summary" msgid="4471347210332380587">"画面を<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後に自動的にOFFにする"</string>
-    <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁紙"</string>
-    <!-- no translation found for wallpaper_settings_fragment_title (443941273453987627) -->
+    <!-- outdated translation 6962654593018319466 -->     <string name="screen_timeout" msgid="4351334843529712571">"タイムアウト"</string>
+    <!-- no translation found for screen_timeout_summary (327761329263064327) -->
     <skip />
+    <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁紙"</string>
+    <string name="wallpaper_settings_fragment_title" msgid="443941273453987627">"壁紙を選択"</string>
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"スクリーンセーバーとその他のアイドル状態ツール"</string>
     <string name="dream_component_title" msgid="505229894674572578">"選択されているスクリーンセーバー"</string>
@@ -743,22 +751,14 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SDカードのマウントが解除されます。"</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"マウント解除中"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"マウントを解除中"</string>
-    <!-- no translation found for storage_menu_usb (5708207885333243384) -->
-    <skip />
-    <!-- no translation found for storage_title_usb (679612779321689418) -->
-    <skip />
-    <!-- no translation found for usb_connection_category (7805945595165422882) -->
-    <skip />
-    <!-- no translation found for usb_mtp_title (3399663424394065964) -->
-    <skip />
-    <!-- no translation found for usb_mtp_summary (4617321473211391236) -->
-    <skip />
-    <!-- no translation found for usb_ptp_title (3852760810622389620) -->
-    <skip />
-    <!-- no translation found for usb_ptp_summary (7673397474756664929) -->
-    <skip />
-    <!-- no translation found for usb_label_installer_cd (4331173824920630215) -->
-    <skip />
+    <string name="storage_menu_usb" msgid="5708207885333243384">"USBでパソコンに接続"</string>
+    <string name="storage_title_usb" msgid="679612779321689418">"USBでパソコンに接続"</string>
+    <string name="usb_connection_category" msgid="7805945595165422882">"次で接続:"</string>
+    <string name="usb_mtp_title" msgid="3399663424394065964">"メディアデバイス（MTP）"</string>
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"Windowsから、またはMacでAndroid File Transfer（www.android.com/filetransfer）を使用してメディアファイルを転送できます"</string>
+    <string name="usb_ptp_title" msgid="3852760810622389620">"カメラ（PTP）"</string>
+    <string name="usb_ptp_summary" msgid="7673397474756664929">"カメラソフトやMTP非対応パソコンからファイルを転送できるようにします"</string>
+    <string name="usb_label_installer_cd" msgid="4331173824920630215">"ファイル転送ツールをインストール"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"電池の状態:"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電池残量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -1113,8 +1113,7 @@
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"常に非表示"</string>
     <string name="configure_input_method" msgid="7773992829158322455">"入力方法の設定"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"設定"</string>
-    <!-- no translation found for input_method_settings_button (6778344383871619368) -->
-    <skip />
+    <string name="input_method_settings_button" msgid="6778344383871619368">"設定"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"有効な入力方法"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"システムの言語を使用"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>の設定"</string>
@@ -1146,60 +1145,35 @@
     <string name="usage_time_label" msgid="295954901452833058">"使用時間"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ユーザー補助の設定"</string>
-    <!-- no translation found for accessibility_services_title (2592221829284342237) -->
-    <skip />
-    <!-- no translation found for accessibility_system_title (7187919089874130484) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_large_text_title (6618674985313017711) -->
-    <skip />
-    <!-- no translation found for accessibility_power_button_ends_call_title (5468375366375940894) -->
-    <skip />
-    <!-- no translation found for accessibility_touch_exploration_title (4171477646863806078) -->
-    <skip />
-    <!-- no translation found for accessibility_touch_exploration_summary (1163951209315238103) -->
-    <skip />
-    <!-- no translation found for accessibility_long_press_timeout_title (2373216941395035306) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_title (7661286619870144136) -->
-    <skip />
-    <!-- no translation found for accessibility_menu_item_settings (3344942964710773365) -->
-    <skip />
-    <!-- no translation found for accessibility_menu_item_tutorial (567989492004682307) -->
-    <skip />
-    <!-- no translation found for accessibility_service_state_on (8791337599927106344) -->
-    <skip />
-    <!-- no translation found for accessibility_service_state_off (2458594460762620776) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_allowed (7624804397748427621) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_disallowed (5156785826922460983) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_button_allow (2201503285877102870) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_button_disallow (1846740874310014190) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning (8318281678500467596) -->
-    <skip />
-    <!-- no translation found for accessibility_disable_warning_title (6094507649988366153) -->
-    <skip />
-    <!-- no translation found for accessibility_disable_warning_summary (3421051138834637486) -->
-    <skip />
-    <!-- outdated translation 898893674114288531 -->     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"ユーザー補助アプリケーションが見つかりません"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_no_apps_message -->
-    <skip />
-    <!-- no translation found for accessibility_service_no_apps_message (3019731308902198093) -->
-    <skip />
-    <!-- outdated translation 1113600871264359828 -->     <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"一部のアプリケーションでは、アプリケーションコンテンツへのアクセスについてユーザーを補助するスクリプトをタブレットにダウンロードするよう求められることがあります。タブレット上にユーザー補助スクリプトをインストールすることを許可してもよろしいですか？"</string>
-    <!-- no translation found for accessibility_touch_exploration_warning (3545647203361863891) -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (7913667934411055972) -->
-    <skip />
+    <string name="accessibility_services_title" msgid="2592221829284342237">"サービス"</string>
+    <string name="accessibility_system_title" msgid="7187919089874130484">"システム"</string>
+    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"文字サイズ大"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"電源ボタンで通話を終了"</string>
+    <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"タッチガイド"</string>
+    <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"タッチガイドをONにすると、指で触れているアイテムについて説明を聞くか見ることができます。"\n\n"この機能は低視力のユーザー向けです。"</string>
+    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"押し続ける時間"</string>
+    <string name="accessibility_script_injection_title" msgid="7661286619870144136">"インストール:ユーザー補助スクリプト"</string>
+    <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"設定"</string>
+    <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"チュートリアル"</string>
+    <string name="accessibility_service_state_on" msgid="8791337599927106344">"ON"</string>
+    <string name="accessibility_service_state_off" msgid="2458594460762620776">"OFF"</string>
+    <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"許可"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="5156785826922460983">"不許可"</string>
+    <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"許可"</string>
+    <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"許可しない"</string>
+    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>では、パスワードを除き、入力したあらゆるテキストが収集される可能性があります。これにはクレジットカード番号などの個人データも含まれます。端末の操作に関するデータも収集される可能性があります。"</string>
+    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"ユーザー補助をOFFにしますか？"</string>
+    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"[OK]をタップすると、説明の読み上げの他、使用しているすべてのユーザー補助機能が停止します。"</string>
+    <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"ユーザー補助アプリケーションはありません"</string>
+    <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"ユーザー補助アプリケーションがインストールされていません。Androidマーケットからスクリーンリーダーをダウンロードしますか？"</string>
+    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"アプリケーションコンテンツへのアクセスについてユーザーを補助するスクリプトをインストールしますか？"</string>
+    <string name="accessibility_touch_exploration_warning" msgid="3545647203361863891">"タッチガイドを有効にすると、画面に触れたときの端末の反応方法が変わります。タッチガイドを有効にしますか？"</string>
+    <string name="accessibility_service_default_description" msgid="7913667934411055972">"このユーザー補助サービスには説明がありません。"\n\n"ユーザー補助サービスを使用すると、端末を操作する際にさまざまな反応を得ることができます。"</string>
     <string name="settings_button" msgid="3006713718908152930">"設定"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"電池"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"電池の使用状況"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"電池使用量データなし"</string>
-    <!-- no translation found for power_usage_level_and_status (1457675765137705432) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="1457675765137705432">"電池残量: <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"電池使用時間"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"リセット後の電池使用量"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"電池使用時間: <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1318,7 +1292,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"電源管理"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Wi-Fi設定の更新"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Bluetooth設定の更新"</string>
-    <string name="vpn_settings_title" msgid="7327468307909556719">"VPN設定"</string>
+    <!-- outdated translation 7327468307909556719 -->     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN設定"</string>
     <string name="credentials_title" msgid="4446234003860769883">"認証情報ストレージ"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"ストレージからのインストール"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"SDカードからインストール"</string>
@@ -1352,12 +1326,9 @@
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"バックアップデータを保存しているアカウントはありません"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"自動復元"</string>
     <string name="auto_restore_summary" msgid="83177150536734378">"バックアップ済みの設定やその他のデータをアプリケーションの再インストール時に復元する"</string>
-    <!-- no translation found for local_backup_password_title (8654157395556264248) -->
-    <skip />
-    <!-- no translation found for local_backup_password_summary_none (6957183071243950438) -->
-    <skip />
-    <!-- no translation found for local_backup_password_summary_change (2838158406324091370) -->
-    <skip />
+    <string name="local_backup_password_title" msgid="8654157395556264248">"ローカルバックアップパスワード"</string>
+    <string name="local_backup_password_summary_none" msgid="6957183071243950438">"ローカルフルバックアップは現在保護されていません。"</string>
+    <string name="local_backup_password_summary_change" msgid="2838158406324091370">"ローカルフルバックアップ用のパスワードを変更または削除する場合に選択します"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"バックアップ"</string>
     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Wi-Fiパスワード、ブックマーク、その他の設定とアプリケーションデータのバックアップを停止し、Googleサーバー上のすべてのコピーを消去してよろしいですか？"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"デバイス管理の設定"</string>
@@ -1404,12 +1375,9 @@
     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"設定時にはEAP Wi-Fi接続を設定できません。設定の完了後に[設定]の["<b>"無線とネットワーク"</b>"]で設定することができます。"</string>
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"接続には数分かかることがあります..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"設定を続けるには["<b>"次へ"</b>"]をタップします。"\n\n"別のWi-Fiネットワークに接続するには["<b>"戻る"</b>"]をタップします。"</string>
-    <!-- no translation found for accessibility_sync_enabled (558480439730263116) -->
-    <skip />
-    <!-- no translation found for accessibility_sync_disabled (1741194106479011384) -->
-    <skip />
-    <!-- no translation found for accessibility_sync_error (8703299118794272041) -->
-    <skip />
+    <string name="accessibility_sync_enabled" msgid="558480439730263116">"同期が有効です"</string>
+    <string name="accessibility_sync_disabled" msgid="1741194106479011384">"同期は無効になっています"</string>
+    <string name="accessibility_sync_error" msgid="8703299118794272041">"同期エラー。"</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"同期設定"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"現在同期で問題が発生しています。しばらくお待ちください。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"アカウントを追加"</string>
@@ -1473,7 +1441,7 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"トランジションアニメスケール"</string>
     <string name="debug_applications_category" msgid="6221644998451283813">"アプリケーション"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"アクティビティを保持しない"</string>
-    <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"ユーザーが残したアクティビティは直ちに破棄"</string>
+    <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"ユーザーが離れたアクティビティは直ちに破棄"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"バックグラウンドプロセスの上限"</string>
     <!-- no translation found for show_all_anrs (28462979638729082) -->
     <skip />
@@ -1488,8 +1456,7 @@
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"イーサネットの使用状況を表示する"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"サイクルを変更…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"毎月データ使用サイクルをリセットする日:"</string>
-    <!-- no translation found for data_usage_empty (9089930257306304588) -->
-    <skip />
+    <string name="data_usage_empty" msgid="9089930257306304588">"この期間中には、いずれのアプリケーションでもデータが使用されませんでした。"</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"上限でモバイルデータを無効にする"</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"上限で4Gデータを無効にする"</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"上限で2G～3Gデータを無効にする"</string>
@@ -1532,13 +1499,10 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"IPSec事前共有鍵"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSecユーザー証明書"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA証明書"</string>
-    <!-- no translation found for vpn_show_options (7182688955890457003) -->
-    <skip />
+    <string name="vpn_show_options" msgid="7182688955890457003">"詳細オプションを表示する"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS検索ドメイン"</string>
-    <!-- no translation found for vpn_dns_servers (5570715561245741829) -->
-    <skip />
-    <!-- no translation found for vpn_routes (3818655448226312232) -->
-    <skip />
+    <string name="vpn_dns_servers" msgid="5570715561245741829">"DNSサーバー（例: 8.8.8.8）"</string>
+    <string name="vpn_routes" msgid="3818655448226312232">"転送ルート（例: 10.0.0.0/8）"</string>
     <string name="vpn_username" msgid="1863901629860867849">"ユーザー名"</string>
     <string name="vpn_password" msgid="6756043647233596772">"パスワード"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"アカウント情報を保存する"</string>
@@ -1549,7 +1513,8 @@
     <string name="vpn_connect" msgid="8469608541746132301">"接続"</string>
     <string name="vpn_edit" msgid="1111459297288136079">"VPNネットワークの編集"</string>
     <string name="vpn_connect_to" msgid="7328758950427515753">"<xliff:g id="NETWORK">%s</xliff:g>に接続"</string>
-    <string name="vpn_title" msgid="7982620762043790565">"VPN設定"</string>
+    <!-- no translation found for vpn_title (6317731879966640551) -->
+    <skip />
     <string name="vpn_create" msgid="8966010925994175306">"VPNネットワークの追加"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"ネットワークの編集"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"ネットワークを削除"</string>
@@ -1561,33 +1526,28 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"システムのCA証明書を有効にしますか？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"システムのCA証明書を無効にしますか？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"ユーザーのCA証明書を完全に削除しますか？"</string>
-    <string name="accessibility_tutorial_title" msgid="7577630829320003070">"Talk As I Touchのチュートリアル"</string>
+    <string name="accessibility_tutorial_title" msgid="7577630829320003070">"タッチトークのチュートリアル"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"次へ"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"戻る"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"終了"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"チュートリアルをスキップ"</string>
-    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"レッスン1: 画面上を探索する"</string>
-    <string name="accessibility_tutorial_lesson_1_text_1" msgid="2465037336858060269">"Talk As I Touchをオンにすると、画面上で指で触れたアイテムの説明を聞くことができます。たとえば現在の画面には、各種アプリケーションアイコンが表示されています。指で画面に触れたまま周りにスライドさせてアイコンを探してみましょう。"</string>
-    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"OKです。画面で指をスライドさせて他のアイコンを探してみましょう。"</string>
+    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"レッスン1:画面の各部について知る"</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="2465037336858060269">"タッチトークをONにすると、画面上で指で触れたアイテムの説明を聞くことができます。たとえば現在の画面には各種アプリケーションのアイコンがあります。画面に触れたまま指をあちこちにスライドさせて、アイコンを探してみてください。"</string>
+    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"OKです。指を画面のあちこちにスライドさせて、アイテムを少なくともあと1つ探してみてください。"</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"指で触れたアイテムを有効にするにはタップします。指をスライドさせて<xliff:g id="APP_NAME">%s</xliff:g>のアイコンを見つけたら、1回タップして有効にしてください。"</string>
-    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"<xliff:g id="APP_NAME">%s</xliff:g>アイコンに指が触れています。1回タップしてアイコンを有効にしてください。"</string>
-    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"<xliff:g id="APP_NAME">%s</xliff:g>アイコンの上に指を合わせましたが離れてしまいました。画面に指で触れてゆっくりスライドしながら、もう一度アイコンを探しましょう。"</string>
-    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"OKです。次のレッスンに進むには、画面の右下にある[<xliff:g id="NEXT">%s</xliff:g>]ボタンをタップしてください。"</string>
+    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"<xliff:g id="APP_NAME">%s</xliff:g>アイコンに指が触れています。アイコンを有効にするには1回タップしてください。"</string>
+    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"<xliff:g id="APP_NAME">%s</xliff:g>アイコンの上を通過しました。指を画面のあちこちにゆっくりスライドさせて、もう一度アイコンを探してみてください。"</string>
+    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"OKです。次のレッスンに進むには、画面の右下にある[<xliff:g id="NEXT">%s</xliff:g>]ボタンを探して有効にしてください。"</string>
     <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"レッスン2: 2本の指でスクロールする"</string>
-    <string name="accessibility_tutorial_lesson_2_text_1" msgid="6093658992237125829">"リストをスクロールするには、画面上で2本の指をスライドさせます。たとえば現在の画面には、上下にスクロール可能なアプリケーション名のリストが表示されています。まず、 1本の指をスライドさせてリスト内のアイテムを見てみましょう。"</string>
-    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"OKです。指をそのまま周りへスライドさせて他のアイコンを探してみましょう。"</string>
-    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"2本の指でリスト内のアイテムに触れて上にスライドします。画面の一番上までスライドしたら、両方の指を離してリストの下部に触れ、また上にスライドします。"</string>
-    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"OKです。指を上にスライドさせてもう少しスクロールしましょう。"</string>
-    <string name="accessibility_tutorial_lesson_2_text_4" msgid="5374753806314829405">"チュートリアルは完了しました。終了してTalk As I Touch設定に戻るには、[<xliff:g id="FINISH">%s</xliff:g>]ボタンをタップしてください。"</string>
-    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"つづりの修正"</string>
-    <!-- no translation found for current_backup_pw_prompt (8314880813545036591) -->
-    <skip />
-    <!-- no translation found for new_backup_pw_prompt (3491404828757901644) -->
-    <skip />
-    <!-- no translation found for confirm_new_backup_pw_prompt (7087168267741332184) -->
-    <skip />
-    <!-- no translation found for backup_pw_set_button_text (2387480910044648795) -->
-    <skip />
-    <!-- no translation found for backup_pw_cancel_button_text (8845630125391744615) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_2_text_1" msgid="6093658992237125829">"リストをスクロールするには、2本の指を画面上でスライドさせます。たとえば現在の画面にはアプリケーション名のリストがあり、上下にスクロール可能です。まず1本の指をスライドさせて、リスト内のアイテムをいくつか確認してみてください。"</string>
+    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"OKです。指をあちこちにスライドさせて、アイテムを少なくともあと1つ探してみてください。"</string>
+    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"2本の指でリスト内のアイテムに触れて両指を上にスライドさせます。画面の一番上まで来たら両指を離し、リストの下の方に触れてまた上にスライドさせます。"</string>
+    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"OKです。指を上にスライドさせて、もう少しスクロールしてみてください。"</string>
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="5374753806314829405">"チュートリアルが完了しました。終了してタッチトークの設定に戻るには、[<xliff:g id="FINISH">%s</xliff:g>]ボタンを探してタップしてください。"</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"表記ミスを修正"</string>
+    <string name="current_backup_pw_prompt" msgid="8314880813545036591">"現在のフルバックアップパスワードをここに入力してください"</string>
+    <string name="new_backup_pw_prompt" msgid="3491404828757901644">"フルバックアップ用の新しいパスワードをここに入力してください"</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"新しいフルバックアップパスワードをここに再入力してください"</string>
+    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"バックアップパスワードを設定"</string>
+    <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"キャンセル"</string>
 </resources>
