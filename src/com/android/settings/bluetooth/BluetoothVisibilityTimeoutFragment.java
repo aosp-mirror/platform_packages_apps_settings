@@ -41,13 +41,14 @@ import com.android.settings.R;
 /**
  * Dialog fragment for setting the discoverability timeout.
  */
-final class BluetoothVisibilityTimeoutFragment extends DialogFragment
+public final class BluetoothVisibilityTimeoutFragment extends DialogFragment
         implements DialogInterface.OnClickListener {
 
     private final BluetoothDiscoverableEnabler mDiscoverableEnabler;
 
-    public BluetoothVisibilityTimeoutFragment(BluetoothDiscoverableEnabler enabler) {
-        mDiscoverableEnabler = enabler;
+    public BluetoothVisibilityTimeoutFragment() {
+        mDiscoverableEnabler = LocalBluetoothManager.getInstance(getActivity())
+                .getDiscoverableEnabler();
     }
 
     @Override
