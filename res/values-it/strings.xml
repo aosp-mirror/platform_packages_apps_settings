@@ -94,8 +94,8 @@
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Minimo"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Rilevabile"</string>
-    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visibile a tutti dispositivi Bluetooth vicini (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visibile a tutti dispositivi Bluetooth vicini"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visibile a tutti dispositivi Bluetooth in vicinanze (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visibile a tutti dispositivi Bluetooth in vicinanze"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Non visibile ad altri dispositivi Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Visibile solo ai dispositivi accoppiati"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Rendi rilevabile il dispositivo"</string>
@@ -112,15 +112,17 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Rinomina"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Disconnettere?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Questa operazione terminerà la connessione con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso."</string>
+    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Disattivare il profilo?"</string>
+    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Verrà disattivato:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Su:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Connesso"</string>
+    <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"Collegato (telefono escluso)"</string>
+    <string name="bluetooth_connected_no_a2dp" msgid="4576188601581440337">"Collegato (contenuti multimed. esclusi)"</string>
+    <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"Collegato (telef. o conten. mult. esclusi)"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Disconnesso"</string>
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Disconnessione..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"Connessione..."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_not_connected" msgid="3389882907500605937">"Accoppia con il dispositivo"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Accoppiamento..."</string>
-    <string name="bluetooth_paired" msgid="1247541089000057726">"Accoppiato ma non collegato"</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Dispositivo Bluetooth senza nome"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Ricerca"</string>
     <string name="progress_tap_to_pair" msgid="4192342336107106334">"Tocca per accoppiare"</string>
@@ -153,7 +155,7 @@
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Seleziona fuso orario"</string>
-    <string name="normal_date_format" msgid="1982904221918374153">"Normale (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="normal_date_format" msgid="7636406984925498359">"Regionale (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Anteprima:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Dimensioni carattere:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -248,7 +250,7 @@
     <string name="cancel" msgid="6859253417269739139">"Annulla"</string>
     <string name="settings_label" msgid="1626402585530130914">"Impostazioni"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Impostazioni"</string>
-    <!-- outdated translation 8597387747077828217 -->     <string name="settings_shortcut" msgid="3936651951364030415">"Seleziona scorciatoia impostazioni"</string>
+    <string name="settings_shortcut" msgid="3936651951364030415">"Scorciatoia Impostazioni"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Modalità aereo"</string>
     <string name="radio_controls_title" msgid="6889937359495515769">"Altro..."</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Wireless e reti"</string>
@@ -280,8 +282,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordina per fuso orario"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="940509402681580537">"Timeout"</string>
-    <string name="lock_after_timeout_summary" msgid="4726009794344934278">"Blocca schermo <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo lo spegnimento automatico dello schermo"</string>
+    <string name="lock_after_timeout" msgid="4590337686681194648">"Blocca automaticamente"</string>
+    <string name="lock_after_timeout_summary" msgid="1961885807970181047">"Dopo <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> di sospensione"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra info proprietario su blocco schermo"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Info proprietario"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
@@ -397,7 +399,7 @@
     <string name="bluetooth_enter_pin_msg" msgid="7437165032040778458">"Per l\'accoppiamento con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Inserisci il PIN richiesto del dispositivo:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="711115233006730281">"Per l\'accoppiamento con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Inserisci la passkey richiesta del dispositivo:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Il PIN contiene lettere o simboli"</string>
-    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Di solito 0000 o 1234"</string>
+    <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Generalmente 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Potrebbe inoltre essere necessario inserire questo PIN sull\'altro dispositivo."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Potrebbe inoltre essere necessario inserire questa passkey sull\'altro dispositivo."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per l\'accoppiamento con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assicurati che sia visualizzata questa passkey:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
@@ -427,23 +429,23 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth avanzato"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Per visualizzare i dispositivi, attiva Bluetooth."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connessione a…"</string>
-    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Multimediali"</string>
-    <string name="bluetooth_profile_headset" msgid="81844079120986198">"Vivavoce"</string>
-    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Trasferisci"</string>
-    <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Dispositivo di input"</string>
+    <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Audio multimediale"</string>
+    <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Audio telefono"</string>
+    <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Trasferimento file"</string>
+    <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Dispositivo di input"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Accesso Internet"</string>
+    <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Condivisione connessione Internet"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio multimediale."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio vivavoce."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dal dispositivo di input."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accesso Internet tramite <xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dalla condivisione della connessione Internet del tablet."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dalla condivisione della connessione Internet del telefono."</string>
-    <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Opzioni <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Azioni dispositivo"</string>
+    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositivo Bluetooth accoppiato"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connetti"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connessione a dispositivo Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profili"</string>
-    <string name="bluetooth_device_advanced_rename_device" msgid="350508394033808532">"Rinomina dispositivo"</string>
+    <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Rinomina"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Consenti trasfer. file arrivo"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Collegato ad audio media"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Collegato ad audio telefono"</string>
@@ -468,7 +470,7 @@
     <string name="zeroclick_on_summary" msgid="3157018760403281266">"Attivo"</string>
     <string name="zeroclick_off_summary" msgid="2896320184904157018">"Disattivato"</string>
     <string name="zeroclick_label" msgid="6908892664706309626">"Condivisione con zero clic"</string>
-    <string name="zeroclick_explained" msgid="3953149564512166049">"Tocca per condividere consente di condividere contenuti delle applicazioni semplicemente collegando il dispositivo NFC a un altro dispositivo."</string>
+    <string name="zeroclick_explained" msgid="3953149564512166049">"\"Tocca per condividere\" consente di condividere contenuti delle applicazioni semplicemente collegando il dispositivo NFC a un altro dispositivo."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Attiva Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -564,16 +566,16 @@
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Hotspot Wi-Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portatile"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"HotspotAndroid"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
-    <!-- outdated translation 5007659014828162881 -->     <string name="sound_settings" msgid="5534671337768745343">"Impostazioni audio"</string>
+    <string name="sound_settings" msgid="5534671337768745343">"Suoni"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Modalità silenziosa"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Suoneria telefono"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
-    <!-- outdated translation 8741571721868253103 -->     <string name="all_volume_title" msgid="4296957391257836961">"Volume"</string>
+    <string name="all_volume_title" msgid="4296957391257836961">"Volumi"</string>
     <string name="musicfx_title" msgid="3853457094486073206">"Effetti musicali"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Volume suoneria"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibra in modalità silenziosa"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"Vibrazione"</string>
-    <!-- outdated translation 6316316069880531693 -->     <string name="notification_sound_title" msgid="312032901303146002">"Suoneria notifiche"</string>
+    <string name="notification_sound_title" msgid="312032901303146002">"Notifica predefinita"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Luce di notifica pulsante"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Suoneria"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Notifica"</string>
@@ -583,19 +585,15 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"Imposta il volume di musica e video"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Allarme"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Impostazioni audio per dock collegato"</string>
-    <!-- outdated translation 1453831168789523185 -->     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Toni udibili al tocco"</string>
-    <!-- outdated translation 3197313718929122833 -->     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Selezione sonora"</string>
-    <!-- outdated translation 1575990840389107141 -->     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Suoni di blocco schermo"</string>
-    <!-- outdated translation 6311736559245411290 -->     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Feedback aptico"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Toni pressione tastierino numerico"</string>
+    <string name="sound_effects_enable_title" msgid="1171590821131077296">"Suoni alla pressione"</string>
+    <string name="lock_sounds_enable_title" msgid="450098505659399520">"Suono di blocco schermo"</string>
+    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Vibra alla pressione"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Eliminazione rumori"</string>
-    <!-- no translation found for volume_media_description (3352166372220845956) -->
-    <skip />
-    <!-- no translation found for volume_ring_description (5936851631698298989) -->
-    <skip />
-    <!-- no translation found for volume_notification_description (5810902320215328321) -->
-    <skip />
-    <!-- no translation found for volume_alarm_description (8322615148532654841) -->
-    <skip />
+    <string name="volume_media_description" msgid="3352166372220845956">"Musica, video, giochi e altri media"</string>
+    <string name="volume_ring_description" msgid="5936851631698298989">"Suoneria e notifiche"</string>
+    <string name="volume_notification_description" msgid="5810902320215328321">"Notifiche"</string>
+    <string name="volume_alarm_description" msgid="8322615148532654841">"Allarmi"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Impostazioni dock"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
@@ -616,7 +614,7 @@
     <string name="sync_settings_summary" msgid="2962179505214965667">"Aggiungi o rimuovi account e modifica impostazioni account"</string>
     <string name="search_settings" msgid="1910951467596035063">"Ricerca"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gestisci le impostazioni e la cronologia delle ricerche"</string>
-    <!-- outdated translation 5947830029420609057 -->     <string name="display_settings" msgid="7965901687241669598">"Impostazioni schermo"</string>
+    <string name="display_settings" msgid="7965901687241669598">"Display"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rotazione automatica"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Cambia automaticamente l\'orientamento quando il tablet viene ruotato"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Cambia automaticamente quando il cellulare viene ruotato"</string>
@@ -624,8 +622,8 @@
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Cambia automatic. l\'orientamento quando il cell. viene ruotato"</string>
     <string name="brightness" msgid="2354961343555249270">"Luminosità"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Regola la luminosità dello schermo"</string>
-    <string name="screen_timeout" msgid="6962654593018319466">"Timeout"</string>
-    <string name="screen_timeout_summary" msgid="4471347210332380587">"Lo schermo si spegne automaticamente dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screen_timeout" msgid="4351334843529712571">"Sospensione"</string>
+    <string name="screen_timeout_summary" msgid="327761329263064327">"Dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> di inattività"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Sfondo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="443941273453987627">"Seleziona sfondo da"</string>
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
@@ -741,12 +739,10 @@
     <string name="storage_title_usb" msgid="679612779321689418">"Connessione computer USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Connetti come"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositivo multimediale (MTP)"</string>
-    <!-- no translation found for usb_mtp_summary (4617321473211391236) -->
-    <skip />
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"Consente di trasferire file multimediali su Windows oppure utilizzando Android File Transfer su Mac (visita www.android.com/filetransfer)"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"Fotocamera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Consente di trasferire foto utilizzando il software della fotocamera e di trasferire i file su computer che non supportano MTP"</string>
-    <!-- no translation found for usb_label_installer_cd (4331173824920630215) -->
-    <skip />
+    <string name="usb_label_installer_cd" msgid="4331173824920630215">"Installa strumenti trasferimento file"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Stato batteria"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Livello batteria"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -847,16 +843,16 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Guida"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Reti mobili"</string>
     <string name="location_title" msgid="1029961368397484576">"La mia posizione"</string>
-    <!-- outdated translation 8815705866861993344 -->     <string name="location_network_based" msgid="1093258647152327199">"Usa reti wireless"</string>
-    <!-- outdated translation 4656658097932515921 -->     <string name="location_neighborhood_level" msgid="4260886124154148129">"Posizione determinata dalle reti mobili e/o Wi-Fi"</string>
+    <string name="location_network_based" msgid="1093258647152327199">"Servizio localizzazione Google"</string>
+    <string name="location_neighborhood_level" msgid="4260886124154148129">"Consenti alle applicazioni di usare Wi-Fi e reti mobili per stabilire la tua posizione approssimativa"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Posizione determinata da Wi-Fi"</string>
-    <!-- outdated translation 6296125378829097831 -->     <string name="location_gps" msgid="8392461023569708478">"Utilizza satelliti GPS"</string>
-    <!-- outdated translation 7456259025474443314 -->     <string name="location_street_level" msgid="4244496898967415234">"Nel rilevamento della posizione, precisione a livello stradale"</string>
+    <string name="location_gps" msgid="8392461023569708478">"Satelliti GPS"</string>
+    <string name="location_street_level" msgid="4244496898967415234">"Consenti alle applicazioni di utilizzare il GPS per individuare la tua posizione"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Utilizza GPS assistito"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utilizza il server per assistere il GPS (deseleziona per ridurre l\'utilizzo della rete)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Utilizza il server per assistere il GPS (deseleziona per migliorare le prestazioni GPS)"</string>
-    <!-- outdated translation 3659340070401464551 -->     <string name="use_location_title" msgid="5206937465504979977">"Usa posizione per Ricerca Google"</string>
-    <!-- outdated translation 1816849484040070431 -->     <string name="use_location_summary" msgid="3978805802386162520">"Utilizza \"La mia posizione\" per i risultati di ricerca di Google e altri servizi Google"</string>
+    <string name="use_location_title" msgid="5206937465504979977">"Posizione e ricerca Google"</string>
+    <string name="use_location_summary" msgid="3978805802386162520">"Consenti a Google di usare la tua posizione per migliorare i risultati di ricerca e altri servizi"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Informazioni sul tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Info sul telefono"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Visualizza informazioni legali, stato, versione del software"</string>
@@ -1011,7 +1007,7 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Percorso di installazione"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Cambia il percorso preferito per l\'installazione di nuove applicazioni."</string>
     <string name="app_disable_dlg_title" msgid="6662184657838747395">"Disattiva applicazione integrata"</string>
-    <string name="app_disable_dlg_text" msgid="1328080928456579599">"La disattivazione di un\'applicazione integrata potrebbe causare il funzionamento anomalo di altre applicazioni. Procedere?"</string>
+    <string name="app_disable_dlg_text" msgid="1328080928456579599">"La disattivazione di un\'applicazione integrata potrebbe causare il funzionamento anomalo di altre applicazioni. Confermi?"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Utilizzo memoria"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Visualizza la memoria utilizzata dalle applicazioni"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Servizi in esecuzione"</string>
@@ -1280,7 +1276,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"Controllo risparmio energia"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Aggiornamento impostazione Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Aggiornamento impostazione Bluetooth"</string>
-    <string name="vpn_settings_title" msgid="7327468307909556719">"Impostazioni VPN"</string>
+    <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Archivio credenziali"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installa da archivio"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Installa da scheda SD"</string>
@@ -1331,10 +1327,9 @@
     <string name="device_admin_status" msgid="7169948053970923035">"Questo amministratore è attivo e consente all\'applicazione <xliff:g id="APP_NAME">%1$s</xliff:g> di eseguire le seguenti operazioni:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Senza titolo"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Generali"</string>
-    <!-- no translation found for sound_category_calls_and_notification_title (4703470169010662085) -->
-    <skip />
+    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Suoneria e notifiche"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Notifiche"</string>
-    <!-- outdated translation 4399742321363475393 -->     <string name="sound_category_feedback_title" msgid="6047518536574673606">"Commenti"</string>
+    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sistema"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Impostazione Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Connetti alla rete Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="2408378435027118687">"Connessione alla rete Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g> in corso..."</string>
@@ -1431,10 +1426,8 @@
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Non conservare attività"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Elimina ogni attività appena l\'utente la interrompe"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite processi background"</string>
-    <!-- no translation found for show_all_anrs (28462979638729082) -->
-    <skip />
-    <!-- no translation found for show_all_anrs_summary (92558681104207054) -->
-    <skip />
+    <string name="show_all_anrs" msgid="28462979638729082">"Mostra tutte finestre ANR"</string>
+    <string name="show_all_anrs_summary" msgid="92558681104207054">"Mostra finestra ANR per applicazioni in background"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilizzo dati"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo utilizzo dati"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming dei dati"</string>
@@ -1444,8 +1437,7 @@
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostra utilizzo Ethernet"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambia ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Giorno del mese in cui reimpostare ciclo di utilizzo dei dati:"</string>
-    <!-- no translation found for data_usage_empty (9089930257306304588) -->
-    <skip />
+    <string name="data_usage_empty" msgid="9089930257306304588">"Dati non usati da applicazioni in questo periodo."</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Disattiva dati mobili al limite"</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Disattiva dati 4G al limite"</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Disattiva dati 2G-3G al limite"</string>
@@ -1475,8 +1467,7 @@
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Applicazioni rimosse"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> ricevuti, <xliff:g id="SENT">%2$s</xliff:g> inviati"</string>
-    <!-- no translation found for data_usage_total_during_range (8958205082707733605) -->
-    <skip />
+    <string name="data_usage_total_during_range" msgid="8958205082707733605">"Utilizzo dei dati: <xliff:g id="TOTAL">%1$s</xliff:g> nel periodo <xliff:g id="RANGE">%2$s</xliff:g>"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Chiamata di emergenza"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Torna a chiamata"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nome"</string>
@@ -1502,7 +1493,7 @@
     <string name="vpn_connect" msgid="8469608541746132301">"Connetti"</string>
     <string name="vpn_edit" msgid="1111459297288136079">"Modifica rete VPN"</string>
     <string name="vpn_connect_to" msgid="7328758950427515753">"Collegati a <xliff:g id="NETWORK">%s</xliff:g>"</string>
-    <string name="vpn_title" msgid="7982620762043790565">"Impostazioni VPN"</string>
+    <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="8966010925994175306">"Aggiungi rete VPN"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Modifica rete"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"Elimina rete"</string>

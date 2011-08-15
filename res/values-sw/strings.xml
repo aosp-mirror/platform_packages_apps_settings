@@ -190,19 +190,20 @@
     <skip />
     <!-- no translation found for bluetooth_disconnect_all_profiles (9148530542956217908) -->
     <skip />
-    <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa."</string>
+    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Lemaza maelezo mafupi?"</string>
+    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Hii italemaza:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Kutoka:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <!-- no translation found for bluetooth_connected (6038755206916626419) -->
     <skip />
+    <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"Imeunganishwa (hakuna simu)"</string>
+    <string name="bluetooth_connected_no_a2dp" msgid="4576188601581440337">"Imeunganishwa(hakuna vyombo vya habari)"</string>
+    <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"Imeunganishwa(hakuna simu au vyombo vya habari)"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Imetenganishwa"</string>
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Inatenganisha..."</string>
     <!-- no translation found for bluetooth_connecting (8555009514614320497) -->
     <skip />
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <!-- no translation found for bluetooth_not_connected (3389882907500605937) -->
-    <skip />
     <!-- no translation found for bluetooth_pairing (1426882272690346242) -->
     <skip />
-    <string name="bluetooth_paired" msgid="1247541089000057726">"Imelinganishwa lakini haijaunganishwa"</string>
     <!-- no translation found for bluetooth_device (5291950341750186887) -->
     <skip />
     <!-- no translation found for progress_scanning (192587958424295789) -->
@@ -254,7 +255,7 @@
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <!-- no translation found for choose_timezone (7762866468013985022) -->
     <skip />
-    <string name="normal_date_format" msgid="1982904221918374153">"Kawaida (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="normal_date_format" msgid="7636406984925498359">"Mkoa ( <xliff:g id="DATE">%s</xliff:g> )"</string>
     <!-- no translation found for display_preview_label (1127597250917274792) -->
     <skip />
     <!-- no translation found for display_font_size_label (8941851418397475389) -->
@@ -411,7 +412,7 @@
     <!-- no translation found for settings_label (1626402585530130914) -->
     <skip />
     <string name="settings_label_launcher" msgid="8344735489639482340">"Mipangilio"</string>
-    <!-- outdated translation 8597387747077828217 -->     <string name="settings_shortcut" msgid="3936651951364030415">"Chagua njia ya mkato ya mipangilio"</string>
+    <string name="settings_shortcut" msgid="3936651951364030415">"Mipangilio ya njia ya mkato"</string>
     <!-- no translation found for airplane_mode (8837269988154128601) -->
     <skip />
     <!-- unknown quoting pattern: original -1, translation 1 -->
@@ -461,8 +462,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Panga kwa ukanda wa saa"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Tarehe"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Saa"</string>
-    <string name="lock_after_timeout" msgid="940509402681580537">"Muda umeisha"</string>
-    <string name="lock_after_timeout_summary" msgid="4726009794344934278">"Skrini ya kufunga <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> baada ya skrini kuzima kiotomatiki"</string>
+    <string name="lock_after_timeout" msgid="4590337686681194648">"Funga kiotomatiki"</string>
+    <string name="lock_after_timeout_summary" msgid="1961885807970181047">"Baada ya <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ya kulala"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Onyesha maelezo ya mmiliki skrini inapofunga"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Maelezo ya mmiliki"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
@@ -655,11 +656,12 @@
     <!-- no translation found for bluetooth_empty_list_bluetooth_off (4793562956642282639) -->
     <skip />
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Unganisha kwa..."</string>
-    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"media"</string>
-    <string name="bluetooth_profile_headset" msgid="81844079120986198">"Isiyotumia mikono"</string>
-    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Hamisha"</string>
-    <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Kifaa cha Kuingiza"</string>
+    <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Media ya sauti"</string>
+    <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Sauti ya simu"</string>
+    <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Uhamishaji wa faili"</string>
+    <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Kifaa cha kuingiza"</string>
     <!-- outdated translation 4225813400648547154 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Inazuia"</string>
+    <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Kushiriki muunganisho wa tovuti"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa kutoka kwa sauti ya media."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa kutoka kwa sauti ya kifaa kisichotumia mikono."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> itatenganishwa kutoka kwa kifaa cha kuingiza."</string>
@@ -669,12 +671,11 @@
     <skip />
     <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
     <skip />
-    <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Chaguo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Vitendo vya kifaa"</string>
+    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Kifaa cha Bluetooth kilicholinganishwa"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Unganisha"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Unganisha kwa kifaa cha Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Maelezo mafupi"</string>
-    <string name="bluetooth_device_advanced_rename_device" msgid="350508394033808532">"Ipe jina jipya kifaa"</string>
+    <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Ipe jina jipya"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Ruhusu mahamisho ya faili inayoingia"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Imeunganishwa kwenye sikika ya njia ya mawasiliano"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Imeunganishwa kwenye sauti ya simu"</string>
@@ -696,17 +697,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Kwa muziki na midia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Kumbuka mipangilio"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for zeroclick_settings_title (3105038392089982549) -->
-    <skip />
+    <string name="zeroclick_settings_title" msgid="3105038392089982549">"Gusa ili kushiriki"</string>
     <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <!-- no translation found for zeroclick_on_summary (3157018760403281266) -->
-    <skip />
-    <!-- no translation found for zeroclick_off_summary (2896320184904157018) -->
-    <skip />
+    <string name="zeroclick_on_summary" msgid="3157018760403281266">"Mnamo"</string>
+    <string name="zeroclick_off_summary" msgid="2896320184904157018">"Imezimwa"</string>
     <!-- no translation found for zeroclick_label (6908892664706309626) -->
     <skip />
-    <!-- no translation found for zeroclick_explained (3953149564512166049) -->
-    <skip />
+    <string name="zeroclick_explained" msgid="3953149564512166049">"Gusa ili kushiriki hukuruhusu kushiriki maudhui kutoka kwa programu, kwa kugusa kifaa chako kilichowezesha NFC kwa kingine."</string>
     <!-- no translation found for wifi_quick_toggle_title (874495178395350104) -->
     <skip />
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Washa Wi-Fi"</string>
@@ -840,21 +837,19 @@
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> ubebezi wa Wi-Fi hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Onyesha"</string>
-    <!-- no translation found for sound_settings (5534671337768745343) -->
-    <skip />
+    <string name="sound_settings" msgid="5534671337768745343">"Sauti"</string>
     <!-- no translation found for silent_mode_title (3181479108593217704) -->
     <skip />
     <!-- outdated translation 7037881886694206550 -->     <string name="ringtone_title" msgid="5379026328015343686">"Mlio wa simu inayoingia"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
-    <!-- outdated translation 8741571721868253103 -->     <string name="all_volume_title" msgid="4296957391257836961">"Kiwango"</string>
+    <string name="all_volume_title" msgid="4296957391257836961">"Sauti"</string>
     <!-- no translation found for musicfx_title (3853457094486073206) -->
     <skip />
     <!-- no translation found for ring_volume_title (7938706566797464165) -->
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Tetema wakati imenyamaza"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"Tikisika"</string>
-    <!-- no translation found for notification_sound_title (312032901303146002) -->
-    <skip />
+    <string name="notification_sound_title" msgid="312032901303146002">"Taarifa msingi"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Arifu ya mwangaza wa palsi"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Mlio wa simu"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Arifa"</string>
@@ -866,21 +861,15 @@
     <skip />
     <string name="alarm_volume_title" msgid="2285597478377758706">"Kengele"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Mipangilio ya sauti ya kiambatisho cha gati"</string>
-    <!-- no translation found for dtmf_tone_enable_title (8533399267725365088) -->
-    <skip />
-    <!-- no translation found for sound_effects_enable_title (1171590821131077296) -->
-    <skip />
-    <!-- outdated translation 1575990840389107141 -->     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Sauti ya kufunga skrini"</string>
-    <!-- outdated translation 6311736559245411290 -->     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Majibu unayoweza kuhisi"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Toni za mguso wa pedi ya kupiga"</string>
+    <string name="sound_effects_enable_title" msgid="1171590821131077296">"Gusa sauti"</string>
+    <string name="lock_sounds_enable_title" msgid="450098505659399520">"Sauti ya kufunga skrini"</string>
+    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Tetema inapoguswa"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Ughairi wa kelele"</string>
-    <!-- no translation found for volume_media_description (3352166372220845956) -->
-    <skip />
-    <!-- no translation found for volume_ring_description (5936851631698298989) -->
-    <skip />
-    <!-- no translation found for volume_notification_description (5810902320215328321) -->
-    <skip />
-    <!-- no translation found for volume_alarm_description (8322615148532654841) -->
-    <skip />
+    <string name="volume_media_description" msgid="3352166372220845956">"Muziki, video, michezo na media nyingine"</string>
+    <string name="volume_ring_description" msgid="5936851631698298989">"Toni ya mlio na taarifa"</string>
+    <string name="volume_notification_description" msgid="5810902320215328321">"Arifa"</string>
+    <string name="volume_alarm_description" msgid="8322615148532654841">"Kengele"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Gati"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Mipangilio ya gati"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Faili ya kusikika"</string>
@@ -901,8 +890,7 @@
     <string name="sync_settings_summary" msgid="2962179505214965667">"Ongeza au ondoa akaunti na ubadilishe mipangilio ya akaunti"</string>
     <string name="search_settings" msgid="1910951467596035063">"Tafuta"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Simamia mipangilio ya utafutaji na historia"</string>
-    <!-- no translation found for display_settings (7965901687241669598) -->
-    <skip />
+    <string name="display_settings" msgid="7965901687241669598">"Onyesha"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Zungusha otomatiki skrini"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Badilisha uelekezo kiotomatiki wakati unazungusha kompyuta ndogo"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Badili uelekezaji kiotomatiki wakati wa kuzungusha simu"</string>
@@ -911,8 +899,8 @@
     <!-- no translation found for brightness (2354961343555249270) -->
     <skip />
     <string name="brightness_summary" msgid="838917350127550703">"Rekebisha mwangaza wa skrini"</string>
-    <string name="screen_timeout" msgid="6962654593018319466">"Muda wa umeisha"</string>
-    <string name="screen_timeout_summary" msgid="4471347210332380587">"Skrini huzima kiotomati baada ya <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screen_timeout" msgid="4351334843529712571">"Usingizi"</string>
+    <string name="screen_timeout_summary" msgid="327761329263064327">"Baada ya <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ya kutokuwa na shughuli"</string>
     <!-- no translation found for wallpaper_settings_title (5449180116365824625) -->
     <skip />
     <!-- no translation found for wallpaper_settings_fragment_title (443941273453987627) -->
@@ -1071,22 +1059,14 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"Kadi ya SD itaanguliwa"</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Inaangua"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Shughuli ya kuanguliwa inaendelea"</string>
-    <!-- no translation found for storage_menu_usb (5708207885333243384) -->
-    <skip />
-    <!-- no translation found for storage_title_usb (679612779321689418) -->
-    <skip />
-    <!-- no translation found for usb_connection_category (7805945595165422882) -->
-    <skip />
-    <!-- no translation found for usb_mtp_title (3399663424394065964) -->
-    <skip />
-    <!-- no translation found for usb_mtp_summary (4617321473211391236) -->
-    <skip />
-    <!-- no translation found for usb_ptp_title (3852760810622389620) -->
-    <skip />
-    <!-- no translation found for usb_ptp_summary (7673397474756664929) -->
-    <skip />
-    <!-- no translation found for usb_label_installer_cd (4331173824920630215) -->
-    <skip />
+    <string name="storage_menu_usb" msgid="5708207885333243384">"Muunganisho wa kompyuta ya USB"</string>
+    <string name="storage_title_usb" msgid="679612779321689418">"Muunganisho wa kompyuta ya USB"</string>
+    <string name="usb_connection_category" msgid="7805945595165422882">"Unganisha kama"</string>
+    <string name="usb_mtp_title" msgid="3399663424394065964">"Kifaa cha media (MTP)"</string>
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"Hukuwezesha kuhamisha faili za media kwenye Windows, au kwa kutumia Uhamishaji Faili ya Android kwenye Mac  (angalia www.android.com/filetransfer)"</string>
+    <string name="usb_ptp_title" msgid="3852760810622389620">"Kamera (PTP)"</string>
+    <string name="usb_ptp_summary" msgid="7673397474756664929">"Inakuwezesha kuhamisha picha kwa kutumia programu ya kamera, na kuhamisha faili zozote kwenye kompyuta ambayo haiauni MTP"</string>
+    <string name="usb_label_installer_cd" msgid="4331173824920630215">"Sakinisha zana za kuhamisha fali"</string>
     <!-- no translation found for battery_status_title (9159414319574976203) -->
     <skip />
     <!-- no translation found for battery_level_title (2965679202786873272) -->
@@ -1226,19 +1206,17 @@
     <!-- no translation found for network_settings_title (7967552516440151852) -->
     <skip />
     <string name="location_title" msgid="1029961368397484576">"Mahali pangu"</string>
-    <!-- no translation found for location_network_based (1093258647152327199) -->
-    <skip />
-    <!-- no translation found for location_neighborhood_level (4260886124154148129) -->
-    <skip />
+    <string name="location_network_based" msgid="1093258647152327199">"Huduma ya mahali pa Google"</string>
+    <string name="location_neighborhood_level" msgid="4260886124154148129">"Ruhusu programu kutumia Mtandao-Hewa na mitandoa ya simu ili kubainisha takriban eneo lako"</string>
     <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
     <skip />
-    <!-- outdated translation 6296125378829097831 -->     <string name="location_gps" msgid="8392461023569708478">"Tumia setileti za GPS"</string>
-    <!-- outdated translation 7456259025474443314 -->     <string name="location_street_level" msgid="4244496898967415234">"Unapoelekeza, usawa kwa kiwango cha mji"</string>
+    <string name="location_gps" msgid="8392461023569708478">"Setileti za GPS"</string>
+    <string name="location_street_level" msgid="4244496898967415234">"Ruhusu programu kutumia GPS kupata mahali pako"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Tumia GPS iliyosaidiwa"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Tumia seva ili kusaidia GPS (toa tiki ili kupunguza utumiaji wa mtandao)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Tumia seva ili kusaidia GPS (Toa tiki ili kuboresha utendajikazi wa GPS)"</string>
-    <!-- outdated translation 3659340070401464551 -->     <string name="use_location_title" msgid="5206937465504979977">"Tumia mahali kwa Utafutaji wa Google"</string>
-    <!-- outdated translation 1816849484040070431 -->     <string name="use_location_summary" msgid="3978805802386162520">"Tumia Mahali Pangu kwa matokeo ya utafutaji wa Google na huduma zingine za Google"</string>
+    <string name="use_location_title" msgid="5206937465504979977">"Mahali na Utafutaji wa Google"</string>
+    <string name="use_location_summary" msgid="3978805802386162520">"Ruhusu Google kutumia mahali pako kuboresha matokeo ya utafutaji na huduma zingine"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Kuhusu kompyuta ndogo"</string>
     <!-- outdated translation 593457295516533765 -->     <string name="about_settings" product="default" msgid="1743378368185371685">"Kuhusu kompyuta ndogo"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Angalia maelezo ya kisheria, hadhi, toleo la programu"</string>
@@ -1574,8 +1552,7 @@
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"Ficha kila wakati"</string>
     <string name="configure_input_method" msgid="7773992829158322455">"Sanidi mbinu za uingizaji"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"Mipangilio"</string>
-    <!-- no translation found for input_method_settings_button (6778344383871619368) -->
-    <skip />
+    <string name="input_method_settings_button" msgid="6778344383871619368">"Mipangilio"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Mbinu amilifu za uingizaji"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"Tumia lugha ya mfumo"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Mipangilio ya <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
@@ -1622,8 +1599,7 @@
     <skip />
     <!-- no translation found for accessibility_touch_exploration_title (4171477646863806078) -->
     <skip />
-    <!-- no translation found for accessibility_touch_exploration_summary (1163951209315238103) -->
-    <skip />
+    <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Wakati Explore by Touch imewashwa, unaweza kusikia au kuona ufafanuzi ulio chini ya kidole chako."\n\n" Kipengele hiki ni cha watumiaji wasioona vizuri"</string>
     <!-- no translation found for accessibility_long_press_timeout_title (2373216941395035306) -->
     <skip />
     <!-- no translation found for accessibility_script_injection_title (7661286619870144136) -->
@@ -1644,22 +1620,14 @@
     <skip />
     <!-- no translation found for accessibility_script_injection_button_disallow (1846740874310014190) -->
     <skip />
-    <!-- no translation found for accessibility_service_security_warning (8318281678500467596) -->
-    <skip />
-    <!-- no translation found for accessibility_disable_warning_title (6094507649988366153) -->
-    <skip />
-    <!-- no translation found for accessibility_disable_warning_summary (3421051138834637486) -->
-    <skip />
-    <!-- outdated translation 898893674114288531 -->     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Hakuna ufikivu unaohusiana na programu iliyopatikana"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_no_apps_message -->
-    <skip />
-    <!-- no translation found for accessibility_service_no_apps_message (3019731308902198093) -->
-    <skip />
-    <!-- outdated translation 1113600871264359828 -->     <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Programu zingine zinaweza kuuliza Google kupakua hati kwenye kompyuta yako ndogo ambayo hufanya maudhui yake kufikiwa zaidi. Una uhakika unataka kuruhusu Google kusakinisha hati za ufikiaji kwenye kompyuta yako ndogo?"</string>
-    <!-- no translation found for accessibility_touch_exploration_warning (3545647203361863891) -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (7913667934411055972) -->
-    <skip />
+    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> inaweza kukusanya maandishi yote unayocharaza, isipokuwa manenosiri. Hii hujumuisha data ya kibinafsi kama vile namba ya kadi ya mkopo. Inaweza pia kukusanya data kuhusu maingiliano yako na kifaa."</string>
+    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"Zima ufikiaji?"</string>
+    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"Kugusa OK kutakomesha fafanuzi zilizosemwa na vipengele vile vingine vyote vya ufikiaji ulivyokuwa ukituma"</string>
+    <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Hakuna programu ya ufikiaji"</string>
+    <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Huna ufikiaji wa programu uliosakinishwa. Je, unataka kupakua kisomaji skrini kutoka kwa Soko la Android?"</string>
+    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Je, unataka programu kusakinisha hati kutoka kwa Google ambazo zitafanya maudhui yake kufikia zaidi?"</string>
+    <string name="accessibility_touch_exploration_warning" msgid="3545647203361863891">"Kuwezesha chunguza kwa kugusa hubadilisha jinsi vifaa hujibu mguso. Wezesha chunguza kwa kugusa?"</string>
+    <string name="accessibility_service_default_description" msgid="7913667934411055972">"Huduma hii ya ufikiaji haina ufafanuzi. "\n" "\n" Huduma za ufikiaji hutoa aina tofauti za maoni wakati unapoingiliana na kifaa."</string>
     <!-- no translation found for settings_button (3006713718908152930) -->
     <skip />
     <!-- outdated translation 5180282911164282324 -->     <string name="power_usage_summary_title" msgid="7190304207330319919">"Utumiaji wa betri"</string>
@@ -1787,7 +1755,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"Kidhibiti Nishati"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Inasasisha mpangilio wa Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Inasasisha mpangilio wa Bluetooth"</string>
-    <string name="vpn_settings_title" msgid="7327468307909556719">"Mipangilio ya VPN"</string>
+    <!-- outdated translation 7327468307909556719 -->     <string name="vpn_settings_title" msgid="5662579425832406705">"Mipangilio ya VPN"</string>
     <!-- no translation found for credentials_title (4446234003860769883) -->
     <skip />
     <!-- no translation found for credentials_install (466093273825150847) -->
@@ -1831,12 +1799,9 @@
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Hakuna akaunti inayohifadhi kwa sasa data iliyochelezwa"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Onyesha upya otomatiki"</string>
     <string name="auto_restore_summary" msgid="83177150536734378">"Kama nitasakinisha upya programu, kurejesha mipangilio ya chelezo au data nyingine"</string>
-    <!-- no translation found for local_backup_password_title (8654157395556264248) -->
-    <skip />
-    <!-- no translation found for local_backup_password_summary_none (6957183071243950438) -->
-    <skip />
-    <!-- no translation found for local_backup_password_summary_change (2838158406324091370) -->
-    <skip />
+    <string name="local_backup_password_title" msgid="8654157395556264248">"Nenosiri la chelezo la ndani"</string>
+    <string name="local_backup_password_summary_none" msgid="6957183071243950438">"Chelezo kamili za ndani hazijalindwa kwa sasa."</string>
+    <string name="local_backup_password_summary_change" msgid="2838158406324091370">"Chagua ili ubadilishe au uondoe nenosiri la chelezo kamili za ndani"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Cheleza"</string>
     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Una uhakika unataka kukomesha kucheleza menenosiri yako ya mtandao-hewa, alamisho, na mipangilio mengine na data ya programu na kufuta nakala zote kwenye seva za Google?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Mipangilio za usimamizi wa kifaa"</string>
@@ -1851,10 +1816,9 @@
     <string name="device_admin_status" msgid="7169948053970923035">"Msimamizi huyu ni amilifu na huruhusu programu <xliff:g id="APP_NAME">%1$s</xliff:g> kwa kutenda uendeshi ufuatao:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Hakuna Kichwa"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Kawaida"</string>
-    <!-- no translation found for sound_category_calls_and_notification_title (4703470169010662085) -->
-    <skip />
+    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Toni ya mlio na taarifa"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Arifa"</string>
-    <!-- outdated translation 4399742321363475393 -->     <string name="sound_category_feedback_title" msgid="6047518536574673606">"Maoni"</string>
+    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Mfumo"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Usanidi wa mtandao-hewa"</string>
     <!-- no translation found for wifi_setup_title_editing_network (7304321031985059969) -->
     <skip />
@@ -1991,10 +1955,8 @@
     <skip />
     <!-- no translation found for app_process_limit_title (4280600650253107163) -->
     <skip />
-    <!-- no translation found for show_all_anrs (28462979638729082) -->
-    <skip />
-    <!-- no translation found for show_all_anrs_summary (92558681104207054) -->
-    <skip />
+    <string name="show_all_anrs" msgid="28462979638729082">"Onyesha ANR zote"</string>
+    <string name="show_all_anrs_summary" msgid="92558681104207054">"Onyesha kisanduku kidadisi cha Programu Haiitikii kwa programu za usuli"</string>
     <!-- no translation found for data_usage_summary_title (3804110657238092929) -->
     <skip />
     <!-- no translation found for data_usage_cycle (5652529796195787949) -->
@@ -2013,8 +1975,7 @@
     <skip />
     <!-- no translation found for data_usage_pick_cycle_day (4470796861757050966) -->
     <skip />
-    <!-- no translation found for data_usage_empty (9089930257306304588) -->
-    <skip />
+    <string name="data_usage_empty" msgid="9089930257306304588">"Hakuna programu zilizotumia data wakati wa kipindi hiki."</string>
     <!-- no translation found for data_usage_disable_mobile_limit (289740911281022322) -->
     <skip />
     <!-- no translation found for data_usage_disable_4g_limit (5808210773758699800) -->
@@ -2073,8 +2034,7 @@
     <skip />
     <!-- no translation found for data_usage_received_sent (5039699009276621757) -->
     <skip />
-    <!-- no translation found for data_usage_total_during_range (8958205082707733605) -->
-    <skip />
+    <string name="data_usage_total_during_range" msgid="8958205082707733605">"Matumizi ya data: <xliff:g id="TOTAL">%1$s</xliff:g> ya <xliff:g id="RANGE">%2$s</xliff:g>"</string>
     <!-- no translation found for cryptkeeper_emergency_call (198578731586097145) -->
     <skip />
     <!-- no translation found for cryptkeeper_return_to_call (5613717339452772491) -->
@@ -2095,14 +2055,11 @@
     <skip />
     <!-- no translation found for vpn_ipsec_ca_cert (91338213449148229) -->
     <skip />
-    <!-- no translation found for vpn_show_options (7182688955890457003) -->
-    <skip />
+    <string name="vpn_show_options" msgid="7182688955890457003">"onyesha chaguo mahiri"</string>
     <!-- no translation found for vpn_search_domains (5391995501541199624) -->
     <skip />
-    <!-- no translation found for vpn_dns_servers (5570715561245741829) -->
-    <skip />
-    <!-- no translation found for vpn_routes (3818655448226312232) -->
-    <skip />
+    <string name="vpn_dns_servers" msgid="5570715561245741829">"Seva ya DNS(mfano 8.8.8.8)"</string>
+    <string name="vpn_routes" msgid="3818655448226312232">"Njia za usambazaji (mfano 10.0.0.0 / 8)"</string>
     <!-- no translation found for vpn_username (1863901629860867849) -->
     <skip />
     <!-- no translation found for vpn_password (6756043647233596772) -->
@@ -2123,8 +2080,7 @@
     <skip />
     <!-- no translation found for vpn_connect_to (7328758950427515753) -->
     <skip />
-    <!-- no translation found for vpn_title (7982620762043790565) -->
-    <skip />
+    <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <!-- no translation found for vpn_create (8966010925994175306) -->
     <skip />
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Hariri mtandao"</string>
@@ -2183,14 +2139,9 @@
     <skip />
     <!-- no translation found for spellcheckers_settings_title (8843785708050235008) -->
     <skip />
-    <!-- no translation found for current_backup_pw_prompt (8314880813545036591) -->
-    <skip />
-    <!-- no translation found for new_backup_pw_prompt (3491404828757901644) -->
-    <skip />
-    <!-- no translation found for confirm_new_backup_pw_prompt (7087168267741332184) -->
-    <skip />
-    <!-- no translation found for backup_pw_set_button_text (2387480910044648795) -->
-    <skip />
-    <!-- no translation found for backup_pw_cancel_button_text (8845630125391744615) -->
-    <skip />
+    <string name="current_backup_pw_prompt" msgid="8314880813545036591">"Ingiza nenosiri lako kamili la sasa la chelezo hapa"</string>
+    <string name="new_backup_pw_prompt" msgid="3491404828757901644">"Ingiza nenosiri mpya kwa chelezo zote kamili"</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"Tafadhali ingiza upya nenosiri lako jipya kamili hapa"</string>
+    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Weka nenosiri la chelezo"</string>
+    <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Ghairi"</string>
 </resources>
