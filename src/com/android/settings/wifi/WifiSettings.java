@@ -114,7 +114,6 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     private WifiDialog mDialog;
 
-    private View mView;
     private TextView mEmptyView;
 
     /* Used in Wifi Setup context */
@@ -160,13 +159,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         super.onAttach(activity);
 
         mInXlSetupWizard = (activity instanceof WifiSettingsForSetupWizardXL);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
-        return mView;
     }
 
     @Override
@@ -227,7 +219,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             mWifiEnabler = new WifiEnabler(activity, actionBarSwitch);
         }
 
-        mEmptyView = (TextView) mView.findViewById(R.id.empty);
+        mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
 
         registerForContextMenu(getListView());

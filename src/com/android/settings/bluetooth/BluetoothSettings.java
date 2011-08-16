@@ -69,7 +69,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     private PreferenceGroup mAvailableDevicesCategory;
     private boolean mAvailableDevicesCategoryIsPresent;
 
-    private View mView;
     private TextView mEmptyView;
 
     private final IntentFilter mIntentFilter;
@@ -98,17 +97,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
-        return mView;
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mEmptyView = (TextView) mView.findViewById(R.id.empty);
+        mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
     }
 
