@@ -19,17 +19,16 @@
     android:layout_height="wrap_content"
     android:minHeight="48dip"
     android:gravity="center_vertical"
+    android:paddingLeft="@*android:dimen/preference_item_padding_side"
     android:paddingRight="?android:attr/scrollbarSize"
     android:background="?android:attr/selectableItemBackground">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="6dip"
-        android:layout_marginTop="6dip"
-        android:layout_marginBottom="6dip"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingTop="6dip"
+        android:paddingBottom="6dip">
 
         <TextView
             android:id="@+android:id/title"

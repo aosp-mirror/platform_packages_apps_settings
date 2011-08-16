@@ -226,8 +226,6 @@ public class DataUsageChartView extends ChartView {
             mDetailSeries.generatePath();
 
             mGrid.invalidate();
-            mSeries.invalidate();
-            mDetailSeries.invalidate();
 
             // since we just changed axis, make sweep recalculate its value
             if (activeSweep != null) {
@@ -362,7 +360,6 @@ public class DataUsageChartView extends ChartView {
 
         requestLayout();
         mSeries.generatePath();
-        mSeries.invalidate();
 
         updateVertAxisBounds(null);
         updateEstimateVisible();

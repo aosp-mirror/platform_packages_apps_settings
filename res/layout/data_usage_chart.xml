@@ -19,8 +19,13 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:id="@+id/chart"
     android:layout_width="match_parent"
-    android:layout_height="220dip"
-    android:padding="16dip">
+    android:layout_height="@dimen/data_usage_chart_height"
+    android:paddingLeft="@*android:dimen/preference_item_padding_side"
+    android:paddingRight="@*android:dimen/preference_item_padding_side"
+    android:paddingTop="16dip"
+    android:paddingBottom="16dip"
+    settings:optimalWidth="@dimen/data_usage_chart_optimalWidth"
+    settings:optimalWidthWeight="0.4">
 
     <com.android.settings.widget.ChartGridView
         android:id="@+id/grid"
@@ -48,7 +53,7 @@
         android:layout_gravity="left|bottom"
         settings:strokeColor="#d88d3a"
         settings:fillColor="#c0ba7f3e"
-        settings:fillColorSecondary="#0000" />
+        settings:fillColorSecondary="#60ba7f3e" />
 
     <com.android.settings.widget.ChartSweepView
         android:id="@+id/sweep_warning"

@@ -25,6 +25,8 @@ import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
+import static android.net.NetworkStats.SET_DEFAULT;
+import static android.net.NetworkStats.SET_FOREGROUND;
 import static android.net.NetworkStats.TAG_NONE;
 import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
 import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
@@ -60,6 +62,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
@@ -83,6 +86,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -119,6 +123,7 @@ import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.widget.DataUsageChartView;
 import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
+import com.android.settings.widget.PieChartView;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -196,6 +201,9 @@ public class DataUsageSummary extends Fragment {
     private View mAppDetail;
     private ImageView mAppIcon;
     private ViewGroup mAppTitles;
+    private PieChartView mAppPieChart;
+    private TextView mAppForeground;
+    private TextView mAppBackground;
     private Button mAppSettings;
 
     private LinearLayout mAppSwitches;
@@ -216,6 +224,8 @@ public class DataUsageSummary extends Fragment {
 
     private NetworkStatsHistory mHistory;
     private NetworkStatsHistory mDetailHistory;
+    private NetworkStatsHistory mDetailHistoryDefault;
+    private NetworkStatsHistory mDetailHistoryForeground;
 
     private String mCurrentTab = null;
     private String mIntentTab = null;
@@ -301,6 +311,9 @@ public class DataUsageSummary extends Fragment {
             mAppDetail = mHeader.findViewById(R.id.app_detail);
             mAppIcon = (ImageView) mAppDetail.findViewById(R.id.app_icon);
             mAppTitles = (ViewGroup) mAppDetail.findViewById(R.id.app_titles);
+            mAppPieChart = (PieChartView) mAppDetail.findViewById(R.id.app_pie_chart);
+            mAppForeground = (TextView) mAppDetail.findViewById(R.id.app_foreground);
+            mAppBackground = (TextView) mAppDetail.findViewById(R.id.app_background);
             mAppSwitches = (LinearLayout) mAppDetail.findViewById(R.id.app_switches);
 
             mAppSettings = (Button) mAppDetail.findViewById(R.id.app_settings);
@@ -539,12 +552,8 @@ public class DataUsageSummary extends Fragment {
      * Build {@link TabSpec} with thin indicator, and empty content.
      */
     private TabSpec buildTabSpec(String tag, int titleRes) {
-        final LayoutInflater inflater = LayoutInflater.from(mTabWidget.getContext());
-        final View indicator = inflater.inflate(
-                R.layout.tab_indicator_thin_holo, mTabWidget, false);
-        final TextView title = (TextView) indicator.findViewById(android.R.id.title);
-        title.setText(titleRes);
-        return mTabHost.newTabSpec(tag).setIndicator(indicator).setContent(mEmptyTabContent);
+        return mTabHost.newTabSpec(tag).setIndicator(getText(titleRes)).setContent(
+                mEmptyTabContent);
     }
 
     private OnTabChangeListener mTabListener = new OnTabChangeListener() {
@@ -658,6 +667,10 @@ public class DataUsageSummary extends Fragment {
             mAppDetail.setVisibility(View.GONE);
             mCycleAdapter.setChangeVisible(true);
 
+            mDetailHistory = null;
+            mDetailHistoryDefault = null;
+            mDetailHistoryForeground = null;
+
             // hide detail stats when not in detail mode
             mChart.bindDetailNetworkStats(null);
             return;
@@ -697,14 +710,19 @@ public class DataUsageSummary extends Fragment {
 
         try {
             // load stats for current uid and template
-            // TODO: read template from extras
-            mDetailHistory = mStatsService.getHistoryForUid(
-                    mTemplate, mUid, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
+            mDetailHistoryDefault = mStatsService.getHistoryForUid(
+                    mTemplate, mUid, SET_DEFAULT, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
+            mDetailHistoryForeground = mStatsService.getHistoryForUid(
+                    mTemplate, mUid, SET_FOREGROUND, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
         } catch (RemoteException e) {
             // since we can't do much without history, and we don't want to
             // leave with half-baked UI, we bail hard.
             throw new RuntimeException("problem reading network stats", e);
         }
+
+        mDetailHistory = new NetworkStatsHistory(mDetailHistoryForeground.getBucketDuration());
+        mDetailHistory.recordEntireHistory(mDetailHistoryDefault);
+        mDetailHistory.recordEntireHistory(mDetailHistoryForeground);
 
         // bind chart to historical stats
         mChart.bindDetailNetworkStats(mDetailHistory);
@@ -1012,14 +1030,28 @@ public class DataUsageSummary extends Fragment {
         final long now = System.currentTimeMillis();
 
         final Context context = getActivity();
-        final NetworkStatsHistory.Entry entry;
 
-        if (isAppDetailMode()) {
-            if (mDetailHistory != null) {
-                entry = mDetailHistory.getValues(start, end, now, null);
-            } else {
-                entry = null;
-            }
+        NetworkStatsHistory.Entry entry = null;
+        if (isAppDetailMode() && mDetailHistory != null) {
+            // bind foreground/background to piechart and labels
+            entry = mDetailHistoryDefault.getValues(start, end, now, entry);
+            final long defaultBytes = entry.rxBytes + entry.txBytes;
+            entry = mDetailHistoryForeground.getValues(start, end, now, entry);
+            final long foregroundBytes = entry.rxBytes + entry.txBytes;
+
+            mAppPieChart.setOriginAngle(175);
+
+            mAppPieChart.removeAllSlices();
+            mAppPieChart.addSlice(foregroundBytes, Color.parseColor("#d88d3a"));
+            mAppPieChart.addSlice(defaultBytes, Color.parseColor("#666666"));
+
+            mAppPieChart.generatePath();
+
+            mAppBackground.setText(Formatter.formatFileSize(context, defaultBytes));
+            mAppForeground.setText(Formatter.formatFileSize(context, foregroundBytes));
+
+            // and finally leave with summary data for label below
+            entry = mDetailHistory.getValues(start, end, now, null);
 
             getLoaderManager().destroyLoader(LOADER_SUMMARY);
 
@@ -1206,29 +1238,36 @@ public class DataUsageSummary extends Fragment {
         public void bindStats(NetworkStats stats) {
             mItems.clear();
 
-            if (stats != null) {
-                final AppUsageItem systemItem = new AppUsageItem();
-                systemItem.uid = android.os.Process.SYSTEM_UID;
+            final AppUsageItem systemItem = new AppUsageItem();
+            systemItem.uid = android.os.Process.SYSTEM_UID;
 
-                NetworkStats.Entry entry = null;
-                for (int i = 0; i < stats.size(); i++) {
-                    entry = stats.getValues(i, entry);
+            final SparseArray<AppUsageItem> knownUids = new SparseArray<AppUsageItem>();
 
-                    final boolean isApp = entry.uid >= android.os.Process.FIRST_APPLICATION_UID
-                            && entry.uid <= android.os.Process.LAST_APPLICATION_UID;
-                    if (isApp || entry.uid == TrafficStats.UID_REMOVED) {
-                        final AppUsageItem item = new AppUsageItem();
-                        item.uid = entry.uid;
-                        item.total = entry.rxBytes + entry.txBytes;
+            NetworkStats.Entry entry = null;
+            final int size = stats != null ? stats.size() : 0;
+            for (int i = 0; i < size; i++) {
+                entry = stats.getValues(i, entry);
+
+                final int uid = entry.uid;
+                final boolean isApp = uid >= android.os.Process.FIRST_APPLICATION_UID
+                        && uid <= android.os.Process.LAST_APPLICATION_UID;
+                if (isApp || uid == TrafficStats.UID_REMOVED) {
+                    AppUsageItem item = knownUids.get(uid);
+                    if (item == null) {
+                        item = new AppUsageItem();
+                        item.uid = uid;
+                        knownUids.put(uid, item);
                         mItems.add(item);
-                    } else {
-                        systemItem.total += entry.rxBytes + entry.txBytes;
                     }
-                }
 
-                if (systemItem.total > 0) {
-                    mItems.add(systemItem);
+                    item.total += entry.rxBytes + entry.txBytes;
+                } else {
+                    systemItem.total += entry.rxBytes + entry.txBytes;
                 }
+            }
+
+            if (systemItem.total > 0) {
+                mItems.add(systemItem);
             }
 
             Collections.sort(mItems);

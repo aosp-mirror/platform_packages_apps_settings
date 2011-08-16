@@ -32,7 +32,6 @@ import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.android.settings.R;
 import com.google.common.base.Preconditions;
@@ -41,7 +40,7 @@ import com.google.common.base.Preconditions;
  * Sweep across a {@link ChartView} at a specific {@link ChartAxis} value, which
  * a user can drag.
  */
-public class ChartSweepView extends FrameLayout {
+public class ChartSweepView extends View {
 
     private Drawable mSweep;
     private Rect mSweepPadding = new Rect();
@@ -78,7 +77,7 @@ public class ChartSweepView extends FrameLayout {
     private MotionEvent mTracking;
 
     public ChartSweepView(Context context) {
-        this(context, null, 0);
+        this(context, null);
     }
 
     public ChartSweepView(Context context, AttributeSet attrs) {
@@ -101,8 +100,6 @@ public class ChartSweepView extends FrameLayout {
 
         a.recycle();
 
-        setClipToPadding(false);
-        setClipChildren(false);
         setWillNotDraw(false);
     }
 

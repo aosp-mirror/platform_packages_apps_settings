@@ -17,8 +17,8 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dip"
-    android:paddingRight="16dip"
+    android:paddingLeft="@*android:dimen/preference_item_padding_side"
+    android:paddingRight="@*android:dimen/preference_item_padding_side"
     android:paddingTop="8dip"
     android:paddingBottom="8dip"
     android:columnCount="3">

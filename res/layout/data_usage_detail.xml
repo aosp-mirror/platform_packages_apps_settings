@@ -17,29 +17,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/app_detail"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/app_icon"
-        android:layout_width="48dip"
-        android:layout_height="48dip"
-        android:layout_marginLeft="16dip"
-        android:scaleType="centerInside" />
-
     <LinearLayout
-        android:id="@+id/app_titles"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dip"
-        android:layout_marginTop="8dip"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@*android:dimen/preference_item_padding_side"
+        android:layout_marginRight="@*android:dimen/preference_item_padding_side"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@*android:dimen/preference_item_padding_inner"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/app_icon"
+                android:layout_width="48dip"
+                android:layout_height="48dip"
+                android:scaleType="centerInside" />
+
+            <LinearLayout
+                android:id="@+id/app_titles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:orientation="vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:textColor="#d88d3a"
+                android:text="@string/data_usage_label_foreground" />
+            <TextView
+                android:id="@+id/app_foreground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#d88d3a" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:text="@string/data_usage_label_background" />
+            <TextView
+                android:id="@+id/app_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <com.android.settings.widget.PieChartView
+            android:id="@+id/app_pie_chart"
+            android:layout_width="160dip"
+            android:layout_height="160dip" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/app_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dip"
+        android:layout_marginLeft="@*android:dimen/preference_item_padding_side"
+        android:layout_marginRight="@*android:dimen/preference_item_padding_side"
+        android:layout_marginTop="16dip"
+        android:layout_marginBottom="16dip"
         android:text="@string/data_usage_app_settings" />
 
     <LinearLayout

@@ -50,6 +50,13 @@
         <attr name="minTickWidth" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="ChartView">
+        <!-- optimal width of the chart -->
+        <attr name="optimalWidth" format="dimension" />
+        <!-- how to weight extra space beyond optimal width -->
+        <attr name="optimalWidthWeight" format="float" />
+    </declare-styleable>
+
     <declare-styleable name="ChartSweepView">
         <attr name="sweepDrawable" format="reference" />
         <attr name="followAxis">
