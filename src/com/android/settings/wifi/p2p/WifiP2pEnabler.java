@@ -43,6 +43,7 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
     private final IntentFilter mIntentFilter;
     private final Handler mHandler = new WifiP2pHandler();
     private WifiP2pManager mWifiP2pManager;
+    private WifiP2pManager.Channel mChannel;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -61,11 +62,16 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
         mSwitch = switch_;
 
         mWifiP2pManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
-        if (!mWifiP2pManager.connectHandler(mContext, mHandler)) {
-            //Failure to set up connection
-            Log.e(TAG, "Failed to set up connection with wifi p2p service");
-            mWifiP2pManager = null;
-            mSwitch.setEnabled(false);
+        if (mWifiP2pManager != null) {
+            mChannel = mWifiP2pManager.initialize(mContext, mHandler);
+            if (mChannel == null) {
+                //Failure to set up connection
+                Log.e(TAG, "Failed to set up connection with wifi p2p service");
+                mWifiP2pManager = null;
+                mSwitch.setEnabled(false);
+            }
+        } else {
+            Log.e(TAG, "mWifiP2pManager is null!");
         }
         mIntentFilter = new IntentFilter(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
 
@@ -97,9 +103,9 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
         if (mWifiP2pManager == null) return;
 
         if (isChecked) {
-            mWifiP2pManager.enableP2p();
+            mWifiP2pManager.enableP2p(mChannel);
         } else {
-            mWifiP2pManager.disableP2p();
+            mWifiP2pManager.disableP2p(mChannel);
         }
     }
 
