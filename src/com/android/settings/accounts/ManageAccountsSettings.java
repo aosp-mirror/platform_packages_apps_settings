@@ -16,26 +16,17 @@
 
 package com.android.settings.accounts;
 
-import com.android.settings.AccountPreference;
-import com.android.settings.DialogCreatable;
-import com.android.settings.R;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -52,6 +43,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.settings.AccountPreference;
+import com.android.settings.DialogCreatable;
+import com.android.settings.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -67,14 +62,11 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     private static final String AUTO_SYNC_CHECKBOX_KEY = "syncAutomaticallyCheckBox";
     private static final String MANAGE_ACCOUNTS_CATEGORY_KEY = "manageAccountsCategory";
-    private static final String BACKGROUND_DATA_CHECKBOX_KEY = "backgroundDataCheckBox";
-    private static final int DIALOG_DISABLE_BACKGROUND_DATA = 1;
 
     private static final int MENU_ADD_ACCOUNT = Menu.FIRST;
 
     private static final int REQUEST_SHOW_SYNC_SETTINGS = 1;
 
-    private CheckBoxPreference mBackgroundDataCheckBox;
     private PreferenceCategory mManageAccountsCategory;
     private String[] mAuthorities;
     private TextView mErrorInfoView;
@@ -122,7 +114,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 activity.getResources().getDrawable(R.drawable.ic_list_syncerror),
                 null, null, null);
 
-        mBackgroundDataCheckBox = (CheckBoxPreference) findPreference(BACKGROUND_DATA_CHECKBOX_KEY);
         mAutoSyncCheckbox = (CheckBoxPreference) findPreference(AUTO_SYNC_CHECKBOX_KEY);
 
         mManageAccountsCategory = (PreferenceCategory)findPreference(MANAGE_ACCOUNTS_CATEGORY_KEY);
@@ -139,22 +130,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
-        if (preference == mBackgroundDataCheckBox) {
-            final ConnectivityManager connManager = (ConnectivityManager)
-                    getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            final boolean oldBackgroundDataSetting = connManager.getBackgroundDataSetting();
-            final boolean backgroundDataSetting = mBackgroundDataCheckBox.isChecked();
-            if (oldBackgroundDataSetting != backgroundDataSetting) {
-                if (backgroundDataSetting) {
-                    setBackgroundDataInt(true);
-                    onSyncStateUpdated();
-                } else {
-                    // This will get unchecked only if the user hits "Ok"
-                    mBackgroundDataCheckBox.setChecked(true);
-                    showDialog(DIALOG_DISABLE_BACKGROUND_DATA);
-                }
-            }
-        } else if (preference == mAutoSyncCheckbox) {
+        if (preference == mAutoSyncCheckbox) {
             ContentResolver.setMasterSyncAutomatically(mAutoSyncCheckbox.isChecked());
             onSyncStateUpdated();
         } else if (preference instanceof AccountPreference) {
@@ -172,31 +148,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 AccountSyncSettings.class.getCanonicalName(), args,
                 R.string.account_sync_settings_title, acctPref.getAccount().name,
                 this, REQUEST_SHOW_SYNC_SETTINGS);
-    }
-
-    @Override
-    public Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DIALOG_DISABLE_BACKGROUND_DATA:
-                final CheckBoxPreference pref =
-                    (CheckBoxPreference) findPreference(BACKGROUND_DATA_CHECKBOX_KEY);
-                return new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.background_data_dialog_title)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(R.string.background_data_dialog_message)
-                        .setPositiveButton(android.R.string.ok,
-                                    new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    setBackgroundDataInt(false);
-                                    pref.setChecked(false);
-                                    onSyncStateUpdated();
-                                }
-                            })
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .create();
-        }
-
-        return null;
     }
 
     @Override
@@ -226,22 +177,11 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         }
     }
 
-    private void setBackgroundDataInt(boolean enabled) {
-        if (getActivity() == null) return;
-        final ConnectivityManager connManager = (ConnectivityManager)
-                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        connManager.setBackgroundDataSetting(enabled);
-    }
-
     @Override
     protected void onSyncStateUpdated() {
         // Catch any delayed delivery of update messages
         if (getActivity() == null) return;
         // Set background connection state
-        final ConnectivityManager connManager = (ConnectivityManager)
-                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        final boolean backgroundDataSetting = connManager.getBackgroundDataSetting();
-        mBackgroundDataCheckBox.setChecked(backgroundDataSetting);
         boolean masterSyncAutomatically = ContentResolver.getMasterSyncAutomatically();
         mAutoSyncCheckbox.setChecked(masterSyncAutomatically);
 
@@ -275,7 +215,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                     SyncStatusInfo status = ContentResolver.getSyncStatus(account, authority);
                     boolean syncEnabled = ContentResolver.getSyncAutomatically(account, authority)
                             && masterSyncAutomatically
-                            && backgroundDataSetting
                             && (ContentResolver.getIsSyncable(account, authority) > 0);
                     boolean authorityIsPending = ContentResolver.isSyncPending(account, authority);
                     boolean activelySyncing = currentSync != null

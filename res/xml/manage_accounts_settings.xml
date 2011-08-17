@@ -19,14 +19,8 @@
     <PreferenceCategory
             android:title="@string/header_general_sync_settings" />
 
-    <CheckBoxPreference android:key="backgroundDataCheckBox"
-        android:persistent="false"
-        android:title="@string/background_data"
-        android:summary="@string/background_data_summary"/>
-
     <CheckBoxPreference android:key="syncAutomaticallyCheckBox"
         android:persistent="false"
-        android:dependency="backgroundDataCheckBox"
         android:title="@string/sync_automatically"
         android:summary="@string/sync_automatically_summary"/>
 
