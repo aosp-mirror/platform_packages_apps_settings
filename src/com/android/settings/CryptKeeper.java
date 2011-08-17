@@ -16,10 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.telephony.ITelephony;
-import com.android.internal.widget.PasswordEntryKeyboardHelper;
-import com.android.internal.widget.PasswordEntryKeyboardView;
-
 import android.app.Activity;
 import android.app.StatusBarManager;
 import android.content.ComponentName;
@@ -53,6 +49,23 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.telephony.ITelephony;
+import com.android.internal.widget.PasswordEntryKeyboardHelper;
+import com.android.internal.widget.PasswordEntryKeyboardView;
+
+/**
+ * Settings screens to show the UI flows for encrypting/decrypting the device.
+ *
+ * This may be started via adb for debugging the UI layout, without having to go through
+ * encryption flows everytime. It should be noted that starting the activity in this manner
+ * is only useful for verifying UI-correctness - the behavior will not be identical.
+ * <pre>
+ * $ adb shell pm enable com.android.settings/.CryptKeeper
+ * $ adb shell am start \
+ *     -e "com.android.settings.CryptKeeper.DEBUG_FORCE_VIEW" "progress" \
+ *     -n com.android.settings/.CryptKeeper
+ * </pre>
+ */
 public class CryptKeeper extends Activity implements TextView.OnEditorActionListener {
     private static final String TAG = "CryptKeeper";
 
@@ -67,6 +80,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     // Intent action for launching the Emergency Dialer activity.
     static final String ACTION_EMERGENCY_DIAL = "com.android.phone.EmergencyDialer.DIAL";
+
+    // Debug Intent extras so that this Activity may be started via adb for debugging UI layouts
+    private static final String EXTRA_FORCE_VIEW =
+            "com.android.settings.CryptKeeper.DEBUG_FORCE_VIEW";
+    private static final String FORCE_VIEW_PROGRESS = "progress";
+    private static final String FORCE_VIEW_ENTRY = "entry";
+    private static final String FORCE_VIEW_ERROR = "error";
 
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
@@ -162,7 +182,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
-    private Handler mHandler = new Handler() {
+    private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -177,13 +197,23 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     };
 
+    /** @return whether or not this Activity was started for debugging the UI only. */
+    private boolean isDebugView() {
+        return getIntent().hasExtra(EXTRA_FORCE_VIEW);
+    }
+
+    /** @return whether or not this Activity was started for debugging the specific UI view only. */
+    private boolean isDebugView(String viewType /* non-nullable */) {
+        return viewType.equals(getIntent().getStringExtra(EXTRA_FORCE_VIEW));
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // If we are not encrypted or encrypting, get out quickly.
         String state = SystemProperties.get("vold.decrypt");
-        if ("".equals(state) || DECRYPT_STATE.equals(state)) {
+        if (!isDebugView() && ("".equals(state) || DECRYPT_STATE.equals(state))) {
             // Disable the crypt keeper.
             PackageManager pm = getPackageManager();
             ComponentName name = new ComponentName(this, CryptKeeper.class);
@@ -219,7 +249,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         // Check to see why we were started.
         String progress = SystemProperties.get("vold.encrypt_progress");
-        if (!"".equals(progress)) {
+        if (!"".equals(progress)
+                || isDebugView(FORCE_VIEW_PROGRESS)
+                || isDebugView(FORCE_VIEW_ERROR)) {
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
         } else {
@@ -301,14 +333,15 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private void updateProgress() {
         String state = SystemProperties.get("vold.encrypt_progress");
 
-        if ("error_partially_encrypted".equals(state)) {
+        if ("error_partially_encrypted".equals(state) || isDebugView(FORCE_VIEW_ERROR)) {
             showFactoryReset();
             return;
         }
 
         int progress = 0;
         try {
-            progress = Integer.parseInt(state);
+            // Force a 50% progress state when debugging the view.
+            progress = isDebugView() ? 50 : Integer.parseInt(state);
         } catch (Exception e) {
             Log.w(TAG, "Error parsing progress: " + e.toString());
         }
