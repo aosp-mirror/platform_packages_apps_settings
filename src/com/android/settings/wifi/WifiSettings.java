@@ -511,6 +511,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 for (AccessPoint accessPoint : accessPoints) {
                     if (accessPoint.update(result)) {
                         found = true;
+                        break;
                     }
                 }
                 if (!found) {

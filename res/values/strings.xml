@@ -1213,19 +1213,59 @@
     <!-- Hint for unspecified fields -->
     <string name="wifi_unspecified">(unspecified)</string>
     <!-- Summary for the remembered network. -->
-    <string name="wifi_remembered">Remembered</string>
-    <!-- Summary for the disabled network. -->
-    <string name="wifi_disabled">Disabled</string>
+    <string name="wifi_remembered">Saved</string>
+    <!-- Status for networks disabled for unknown reason -->
+    <string name="wifi_disabled_generic">Disabled</string>
+    <!-- Status for networked disabled from a DNS or DHCP failure -->
+    <string name="wifi_disabled_network_failure">Avoided poor connection</string>
+    <!-- Status for networks disabled from authentication failure (wrong password
+         or certificate). -->
+    <string name="wifi_disabled_password_failure">Authentication problem</string>
     <!-- Summary for the remembered network but currently not in range. -->
     <string name="wifi_not_in_range">Not in range</string>
-    <!-- Summary for an open network with WPS being available [CHAR LIMIT=50]-->
-    <string name="wifi_open_with_wps">WPS available</string>
-    <!-- Summary for the secured network. -->
-    <string name="wifi_secured">Secured with <xliff:g id="wifi_security">%1$s</xliff:g></string>
-    <!-- Summary for the secured network with WPS being available [CHAR LIMIT=50]-->
-    <string name="wifi_secured_with_wps">Secured with <xliff:g id="wifi_security">%1$s</xliff:g> (WPS available)</string>
-    <!-- Summary for the secured and remembered network. Status can be "Remembered", "Disabled" or "Not in range". -->
-    <string name="wifi_secured_with_status"><xliff:g id="wifi_status">%2$s</xliff:g>, secured with <xliff:g id="wifi_security">%1$s</xliff:g></string>
+    <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
+         string is listed first -->
+    <string name="wifi_wps_available_first_item">WPS available</string>
+    <!-- Substring of wifi status when Wi-Fi Protected Setup (WPS) is available and
+         string is listed after a wifi_secured_* string-->
+    <string name="wifi_wps_available_second_item">\u0020(WPS available)</string>
+    <!-- Substring of wifi status for wifi with authentication.  This version is for when the
+         string is first in the list (titlecase in english) -->
+    <string name="wifi_secured_first_item">Secured with <xliff:g id="wifi_security_short">%1$s</xliff:g></string>
+    <!-- Substring of wifi status for wifi with authentication.  This version is for when the
+         string is not first in the list (lowercase in english) -->
+    <string name="wifi_secured_second_item">, secured with <xliff:g id="wifi_security_short">%1$s</xliff:g></string>
+
+    <!-- Do not translate.  Concise terminology for wifi with WEP security -->
+    <string name="wifi_security_short_wep">WEP</string>
+    <!-- Do not translate.  Concise terminology for wifi with WPA security -->
+    <string name="wifi_security_short_wpa">WPA</string>
+    <!-- Do not translate.  Concise terminology for wifi with WPA2 security -->
+    <string name="wifi_security_short_wpa2">WPA2</string>
+    <!-- Do not translate.  Concise terminology for wifi with both WPA/WPA2 security -->
+    <string name="wifi_security_short_wpa_wpa2">WPA/WPA2</string>
+    <!-- Do not translate.  Concise terminology for wifi with unknown PSK type -->
+    <string name="wifi_security_short_psk_generic">@string/wifi_security_short_wpa_wpa2</string>
+    <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
+    <string name="wifi_security_short_eap">802.1x</string>
+
+    <!-- Used in Wi-Fi settings dialogs when Wi-Fi does not have any security. -->
+    <string name="wifi_security_none">None</string>
+
+    <!-- Do not translate.  Terminology for wifi with WEP security -->
+    <string name="wifi_security_wep">WEP</string>
+    <!-- Do not translate.  Terminology for wifi with WPA security -->
+    <string name="wifi_security_wpa">WPA PSK</string>
+    <!-- Do not translate.  Terminology for wifi with WPA2 security -->
+    <string name="wifi_security_wpa2">WPA2 PSK</string>
+    <!-- Do not translate.  Terminology for wifi with both WPA/WPA2 security, or unknown -->
+    <string name="wifi_security_wpa_wpa2">WPA/WPA2 PSK</string>
+    <!-- Do not translate.  Terminology for wifi with unknown PSK type -->
+    <string name="wifi_security_psk_generic">@string/wifi_security_wpa_wpa2</string>
+    <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
+    <string name="wifi_security_eap">802.1x EAP</string>
+
+
     <!-- Button label to connect to a Wi-Fi network -->
     <string name="wifi_connect">Connect</string>
     <!-- Button label to delete a Wi-Fi network -->
