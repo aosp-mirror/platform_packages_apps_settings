@@ -327,7 +327,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         tv.setText(R.string.crypt_keeper_failed_summary);
 
         View view = findViewById(R.id.bottom_divider);
-        view.setVisibility(View.VISIBLE);
+        if (view != null) {
+            view.setVisibility(View.VISIBLE);
+        }
     }
 
     private void updateProgress() {
