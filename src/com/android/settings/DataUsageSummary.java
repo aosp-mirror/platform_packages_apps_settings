@@ -322,9 +322,6 @@ public class DataUsageSummary extends Fragment {
             mAppRestrict = new CheckBox(inflater.getContext());
             mAppRestrict.setClickable(false);
             mAppRestrictView = inflatePreference(inflater, mAppSwitches, mAppRestrict);
-            setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
-            setPreferenceSummary(
-                    mAppRestrictView, R.string.data_usage_app_restrict_background_summary);
             mAppRestrictView.setOnClickListener(mAppRestrictListener);
             mAppSwitches.addView(mAppRestrictView);
         }
@@ -731,6 +728,11 @@ public class DataUsageSummary extends Fragment {
 
         if (NetworkPolicyManager.isUidValidForPolicy(context, mUid) && !getRestrictBackground()
                 && isBandwidthControlEnabled()) {
+            setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
+            setPreferenceSummary(mAppRestrictView,
+                    getString(R.string.data_usage_app_restrict_background_summary,
+                            buildLimitedNetworksList()));
+
             mAppRestrictView.setVisibility(View.VISIBLE);
             mAppRestrict.setChecked(getAppRestrictBackground());
 
@@ -1470,8 +1472,6 @@ public class DataUsageSummary extends Fragment {
      */
     public static class ConfirmDataRoamingFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
-            final Bundle args = new Bundle();
-
             final ConfirmDataRoamingFragment dialog = new ConfirmDataRoamingFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_ROAMING);
@@ -1505,8 +1505,6 @@ public class DataUsageSummary extends Fragment {
      */
     public static class ConfirmRestrictFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
-            final Bundle args = new Bundle();
-
             final ConfirmRestrictFragment dialog = new ConfirmRestrictFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_RESTRICT);
@@ -1518,7 +1516,13 @@ public class DataUsageSummary extends Fragment {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.data_usage_restrict_background_title);
-            builder.setMessage(R.string.data_usage_restrict_background);
+
+            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+            if (target != null) {
+                final CharSequence limitedNetworks = target.buildLimitedNetworksList();
+                builder.setMessage(
+                        getString(R.string.data_usage_restrict_background, limitedNetworks));
+            }
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
@@ -1732,6 +1736,40 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
+     * Build string describing currently limited networks, which defines when
+     * background data is restricted.
+     */
+    private CharSequence buildLimitedNetworksList() {
+        final Context context = getActivity();
+        final String subscriberId = getActiveSubscriberId(context);
+
+        // build combined list of all limited networks
+        final ArrayList<CharSequence> limited = Lists.newArrayList();
+        if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobileAll(subscriberId))) {
+            limited.add(getText(R.string.data_usage_list_mobile));
+        }
+        if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobile3gLower(subscriberId))) {
+            limited.add(getText(R.string.data_usage_tab_3g));
+        }
+        if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobile4g(subscriberId))) {
+            limited.add(getText(R.string.data_usage_tab_4g));
+        }
+        if (mPolicyEditor.hasLimitedPolicy(buildTemplateWifi())) {
+            limited.add(getText(R.string.data_usage_tab_wifi));
+        }
+        if (mPolicyEditor.hasLimitedPolicy(buildTemplateEthernet())) {
+            limited.add(getText(R.string.data_usage_tab_ethernet));
+        }
+
+        // handle case where no networks limited
+        if (limited.isEmpty()) {
+            limited.add(getText(R.string.data_usage_list_none));
+        }
+
+        return TextUtils.join(limited);
+    }
+
+    /**
      * Set {@link android.R.id#title} for a preference view inflated with
      * {@link #inflatePreference(LayoutInflater, ViewGroup, View)}.
      */
@@ -1744,9 +1782,9 @@ public class DataUsageSummary extends Fragment {
      * Set {@link android.R.id#summary} for a preference view inflated with
      * {@link #inflatePreference(LayoutInflater, ViewGroup, View)}.
      */
-    private static void setPreferenceSummary(View parent, int resId) {
+    private static void setPreferenceSummary(View parent, CharSequence string) {
         final TextView summary = (TextView) parent.findViewById(android.R.id.summary);
         summary.setVisibility(View.VISIBLE);
-        summary.setText(resId);
+        summary.setText(string);
     }
 }
