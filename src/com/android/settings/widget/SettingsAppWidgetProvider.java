@@ -26,11 +26,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncStorageEngine;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.IPowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -103,6 +105,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static final StateTracker sBluetoothState = new BluetoothStateTracker();
     private static final StateTracker sGpsState = new GpsStateTracker();
     private static final StateTracker sSyncState = new SyncStateTracker();
+    private static SettingsObserver sSettingsObserver;
 
     /**
      * The state machine for a setting's toggling, tracking reality
@@ -533,8 +536,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
         @Override
         public int getActualState(Context context) {
-            boolean on = getBackgroundDataState(context) &&
-                    ContentResolver.getMasterSyncAutomatically();
+            boolean on = ContentResolver.getMasterSyncAutomatically();
             return on ? STATE_ENABLED : STATE_DISABLED;
         }
 
@@ -547,7 +549,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         public void requestStateChange(final Context context, final boolean desiredState) {
             final ConnectivityManager connManager =
                     (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            final boolean backgroundData = getBackgroundDataState(context);
             final boolean sync = ContentResolver.getMasterSyncAutomatically();
 
             new AsyncTask<Void, Void, Boolean>() {
@@ -555,9 +556,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 protected Boolean doInBackground(Void... args) {
                     // Turning sync on.
                     if (desiredState) {
-                        if (!backgroundData) {
-                            connManager.setBackgroundDataSetting(true);
-                        }
                         if (!sync) {
                             ContentResolver.setMasterSyncAutomatically(true);
                         }
@@ -600,6 +598,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 new ComponentName("com.android.settings", ".widget.SettingsAppWidgetProvider"),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
+        if (sSettingsObserver == null) {
+            sSettingsObserver = new SettingsObserver(new Handler(),
+                    context.getApplicationContext());
+            sSettingsObserver.startObserving();
+        }
     }
 
     @Override
@@ -610,6 +613,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 new ComponentName("com.android.settings", ".widget.SettingsAppWidgetProvider"),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
+        if (sSettingsObserver != null) {
+            sSettingsObserver.stopObserving();
+            sSettingsObserver = null;
+        }
     }
 
     /**
@@ -740,18 +747,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * Gets the state of background data.
-     *
-     * @param context
-     * @return true if enabled
-     */
-    private static boolean getBackgroundDataState(Context context) {
-        ConnectivityManager connManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return connManager.getBackgroundDataSetting();
-    }
-
-    /**
      * Gets state of brightness.
      *
      * @param context
@@ -849,4 +844,34 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             Log.d(TAG, "toggleBrightness: " + e);
         }
     }
+
+    /** Observer to watch for changes to the BRIGHTNESS setting */
+    private static class SettingsObserver extends ContentObserver {
+
+        private Context mContext;
+
+        SettingsObserver(Handler handler, Context context) {
+            super(handler);
+            mContext = context;
+        }
+
+        void startObserving() {
+            ContentResolver resolver = mContext.getContentResolver();
+            // Listen to brightness and brightness mode
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.SCREEN_BRIGHTNESS), false, this);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE), false, this);
+        }
+
+        void stopObserving() {
+            mContext.getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateWidget(mContext);
+        }
+    }
+
 }
