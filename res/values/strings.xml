@@ -3414,6 +3414,8 @@ found in the list of installed applications.</string>
     <string name="data_usage_disable_4g_limit">Disable 4G data at limit</string>
     <!-- Checkbox label that will disable 2G-3G network data connection when user-defined limit is reached. [CHAR LIMIT=32] -->
     <string name="data_usage_disable_3g_limit">Disable 2G-3G data at limit</string>
+    <!-- Checkbox label that will disable Wi-Fi network data connection when user-defined limit is reached. [CHAR LIMIT=32] -->
+    <string name="data_usage_disable_wifi_limit">Disable Wi-Fi data at limit</string>
 
     <!-- Tab title for showing Wi-Fi data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_wifi">Wi-Fi</string>
@@ -3459,11 +3461,7 @@ found in the list of installed applications.</string>
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_mobile">Your mobile data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
-    <!-- Body of dialog shown before user limits 3G data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_3g">Your 2G-3G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
-    <!-- Body of dialog shown before user limits 4G data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_4g">Your 4G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
+    <string name="data_usage_limit_dialog">Your <xliff:g id="networks" example="mobile">%1$s</xliff:g> data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
 
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_restrict_background_title">Restrict background data?</string>

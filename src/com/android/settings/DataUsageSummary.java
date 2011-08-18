@@ -585,22 +585,8 @@ public class DataUsageSummary extends Fragment {
 
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
-        if (TAB_WIFI.equals(currentTab)) {
-            // wifi doesn't have any controls
-            mDataEnabledView.setVisibility(View.GONE);
-            mDisableAtLimitView.setVisibility(View.GONE);
-            mTemplate = buildTemplateWifi();
-
-        } else if (TAB_ETHERNET.equals(currentTab)) {
-            // ethernet doesn't have any controls
-            mDataEnabledView.setVisibility(View.GONE);
-            mDisableAtLimitView.setVisibility(View.GONE);
-            mTemplate = buildTemplateEthernet();
-
-        } else {
-            mDataEnabledView.setVisibility(View.VISIBLE);
-            mDisableAtLimitView.setVisibility(View.VISIBLE);
-        }
+        mDataEnabledView.setVisibility(View.VISIBLE);
+        mDisableAtLimitView.setVisibility(View.VISIBLE);
 
         if (TAB_MOBILE.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
@@ -619,6 +605,20 @@ public class DataUsageSummary extends Fragment {
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_4g_limit);
             // TODO: bind mDataEnabled to 4G radio state
             mTemplate = buildTemplateMobile4g(getActiveSubscriberId(context));
+
+        } else if (TAB_WIFI.equals(currentTab)) {
+            mDataEnabledView.setVisibility(View.GONE);
+            setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_wifi_limit);
+            mTemplate = buildTemplateWifi();
+
+        } else if (TAB_ETHERNET.equals(currentTab)) {
+            // ethernet doesn't have any controls
+            mDataEnabledView.setVisibility(View.GONE);
+            mDisableAtLimitView.setVisibility(View.GONE);
+            mTemplate = buildTemplateEthernet();
+
+        } else {
+            throw new IllegalStateException("unknown tab: " + currentTab);
         }
 
         try {
@@ -847,7 +847,7 @@ public class DataUsageSummary extends Fragment {
             }
         }
 
-        final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
+        final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate, true);
         if (isNetworkPolicyModifiable()) {
             mDisableAtLimitView.setVisibility(View.VISIBLE);
             mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
@@ -1365,24 +1365,36 @@ public class DataUsageSummary extends Fragment {
      * {@link NetworkPolicy#limitBytes}.
      */
     public static class ConfirmLimitFragment extends DialogFragment {
-        private static final String EXTRA_MESSAGE_ID = "messageId";
+        private static final String EXTRA_MESSAGE = "message";
         private static final String EXTRA_LIMIT_BYTES = "limitBytes";
 
         public static void show(DataUsageSummary parent) {
-            final Bundle args = new Bundle();
+            final Resources res = parent.getResources();
+
+            final CharSequence message;
+            final long limitBytes;
 
             // TODO: customize default limits based on network template
             final String currentTab = parent.mCurrentTab;
             if (TAB_3G.equals(currentTab)) {
-                args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_3g);
-                args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
+                message = buildDialogMessage(res, R.string.data_usage_tab_3g);
+                limitBytes = 5 * GB_IN_BYTES;
             } else if (TAB_4G.equals(currentTab)) {
-                args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_4g);
-                args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
+                message = buildDialogMessage(res, R.string.data_usage_tab_4g);
+                limitBytes = 5 * GB_IN_BYTES;
             } else if (TAB_MOBILE.equals(currentTab)) {
-                args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_mobile);
-                args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
+                message = buildDialogMessage(res, R.string.data_usage_list_mobile);
+                limitBytes = 5 * GB_IN_BYTES;
+            } else if (TAB_WIFI.equals(currentTab)) {
+                message = buildDialogMessage(res, R.string.data_usage_tab_wifi);
+                limitBytes = 5 * GB_IN_BYTES;
+            } else {
+                throw new IllegalArgumentException("unknown current tab: " + currentTab);
             }
+
+            final Bundle args = new Bundle();
+            args.putCharSequence(EXTRA_MESSAGE, message);
+            args.putLong(EXTRA_LIMIT_BYTES, limitBytes);
 
             final ConfirmLimitFragment dialog = new ConfirmLimitFragment();
             dialog.setArguments(args);
@@ -1390,16 +1402,20 @@ public class DataUsageSummary extends Fragment {
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_LIMIT);
         }
 
+        private static CharSequence buildDialogMessage(Resources res, int networkResId) {
+            return res.getString(R.string.data_usage_limit_dialog, res.getString(networkResId));
+        }
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
 
-            final int messageId = getArguments().getInt(EXTRA_MESSAGE_ID);
+            final CharSequence message = getArguments().getCharSequence(EXTRA_MESSAGE);
             final long limitBytes = getArguments().getLong(EXTRA_LIMIT_BYTES);
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.data_usage_limit_dialog_title);
-            builder.setMessage(messageId);
+            builder.setMessage(message);
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
@@ -1421,7 +1437,7 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_CYCLE_DAY = "cycleDay";
 
         public static void show(DataUsageSummary parent) {
-            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate);
+            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate, false);
             final Bundle args = new Bundle();
             args.putInt(CycleEditorFragment.EXTRA_CYCLE_DAY, policy.cycleDay);
 

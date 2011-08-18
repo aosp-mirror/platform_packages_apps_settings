@@ -31,6 +31,7 @@ import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.AsyncTask;
 import android.os.RemoteException;
+import android.text.format.Time;
 
 import com.android.internal.util.Objects;
 import com.google.android.collect.Lists;
@@ -92,35 +93,52 @@ public class NetworkPolicyEditor {
     }
 
     public boolean hasLimitedPolicy(NetworkTemplate template) {
-        final NetworkPolicy policy = getPolicy(template);
+        final NetworkPolicy policy = getPolicy(template, false);
         return policy != null && policy.limitBytes != LIMIT_DISABLED;
     }
 
-    public NetworkPolicy getPolicy(NetworkTemplate template) {
+    public NetworkPolicy getPolicy(NetworkTemplate template, boolean createDefault) {
         for (NetworkPolicy policy : mPolicies) {
             if (policy.template.equals(template)) {
                 return policy;
             }
         }
-        return null;
+
+        if (createDefault) {
+            final NetworkPolicy policy = buildDefaultPolicy(template);
+            mPolicies.add(policy);
+            return policy;
+        } else {
+            return null;
+        }
+    }
+
+    private static NetworkPolicy buildDefaultPolicy(NetworkTemplate template) {
+        // TODO: move this into framework to share with NetworkPolicyManagerService
+        final Time time = new Time();
+        time.setToNow();
+        final int cycleDay = time.monthDay;
+
+        return new NetworkPolicy(
+                template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, SNOOZE_NEVER);
     }
 
     public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
-        final NetworkPolicy policy = getPolicy(template);
+        final NetworkPolicy policy = getPolicy(template, true);
         policy.cycleDay = cycleDay;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
     public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
-        final NetworkPolicy policy = getPolicy(template);
+        final NetworkPolicy policy = getPolicy(template, true);
         policy.warningBytes = warningBytes;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
     public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {
-        final NetworkPolicy policy = getPolicy(template);
+        final NetworkPolicy policy = getPolicy(template, true);
         policy.limitBytes = limitBytes;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
@@ -158,8 +176,8 @@ public class NetworkPolicyEditor {
 
         } else if (beforeSplit && !split) {
             // combine, picking most restrictive policy
-            final NetworkPolicy policy3g = getPolicy(template3g);
-            final NetworkPolicy policy4g = getPolicy(template4g);
+            final NetworkPolicy policy3g = getPolicy(template3g, false);
+            final NetworkPolicy policy4g = getPolicy(template4g, false);
 
             final NetworkPolicy restrictive = policy3g.compareTo(policy4g) < 0 ? policy3g
                     : policy4g;
@@ -172,7 +190,7 @@ public class NetworkPolicyEditor {
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
-            final NetworkPolicy policyAll = getPolicy(templateAll);
+            final NetworkPolicy policyAll = getPolicy(templateAll, false);
             mPolicies.remove(policyAll);
             mPolicies.add(
                     new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,
