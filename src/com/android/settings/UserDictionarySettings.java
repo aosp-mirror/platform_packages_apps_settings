@@ -96,6 +96,13 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     }
 
     @Override
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(
+                com.android.internal.R.layout.preference_list_fragment, container, false);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 

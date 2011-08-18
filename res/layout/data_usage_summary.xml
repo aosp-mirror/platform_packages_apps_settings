@@ -25,20 +25,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:scrollbars="none">
-
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                style="?android:attr/tabWidgetStyle" />
-
-        </HorizontalScrollView>
+        <include layout="@layout/tab_widget" />
 
         <!-- give an empty content area to make tabhost happy -->
         <FrameLayout
@@ -51,6 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
+            android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:smoothScrollbar="false" />
 
     </LinearLayout>

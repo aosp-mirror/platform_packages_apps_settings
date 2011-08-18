@@ -43,6 +43,7 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.text.format.Time.TIMEZONE_UTC;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static com.android.settings.Utils.prepareCustomPreferencesList;
 
 import android.animation.LayoutTransition;
 import android.app.AlertDialog;
@@ -271,6 +272,9 @@ public class DataUsageSummary extends Fragment {
         mTabsContainer = (ViewGroup) view.findViewById(R.id.tabs_container);
         mTabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
         mListView = (ListView) view.findViewById(android.R.id.list);
+
+        // adjust padding around tabwidget as needed
+        prepareCustomPreferencesList(container, view, mListView);
 
         mTabHost.setup();
         mTabHost.setOnTabChangedListener(mTabListener);

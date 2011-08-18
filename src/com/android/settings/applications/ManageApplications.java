@@ -16,11 +16,7 @@
 
 package com.android.settings.applications;
 
-import com.android.internal.content.PackageHelper;
-import com.android.settings.R;
-import com.android.settings.Settings.RunningServicesActivity;
-import com.android.settings.Settings.StorageUseActivity;
-import com.android.settings.applications.ApplicationsState.AppEntry;
+import static com.android.settings.Utils.prepareCustomPreferencesList;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -57,6 +53,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.android.internal.content.PackageHelper;
+import com.android.settings.R;
+import com.android.settings.Settings.RunningServicesActivity;
+import com.android.settings.Settings.StorageUseActivity;
+import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -618,9 +620,8 @@ public class ManageApplications extends Fragment implements
 
         mCreatedRunning = mResumedRunning = false;
         mCurView = VIEW_NOTHING;
-        
-        View tabRoot = mInflater.inflate(R.layout.manage_apps_tab_content, null);
-        mTabHost = (TabHost)tabRoot.findViewById(com.android.internal.R.id.tabhost);
+
+        mTabHost = (TabHost) mInflater.inflate(R.layout.manage_apps_tab_content, container, false);
         mTabHost.setup();
         final TabHost tabHost = mTabHost;
         tabHost.addTab(tabHost.newTabSpec(TAB_DOWNLOADED)
@@ -644,7 +645,10 @@ public class ManageApplications extends Fragment implements
         tabHost.setCurrentTabByTag(mDefaultTab);
         tabHost.setOnTabChangedListener(this);
 
-        return tabRoot;
+        // adjust padding around tabwidget as needed
+        prepareCustomPreferencesList(container, mTabHost, mListView);
+
+        return mTabHost;
     }
 
     @Override

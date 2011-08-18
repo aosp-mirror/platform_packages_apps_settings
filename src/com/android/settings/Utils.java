@@ -20,8 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
@@ -31,13 +31,17 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceActivity.Header;
+import android.preference.PreferenceFrameLayout;
+import android.preference.PreferenceGroup;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TabWidget;
 
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -364,5 +368,24 @@ public class Utils {
         }
 
         return statusString;
+    }
+
+    /**
+     * Prepare a custom preferences layout, moving padding to {@link ListView}
+     * when outside scrollbars are requested. Usually used to display
+     * {@link ListView} and {@link TabWidget} with correct padding.
+     */
+    public static void prepareCustomPreferencesList(ViewGroup parent, View child, ListView list) {
+        final boolean movePadding = list.getScrollBarStyle() == View.SCROLLBARS_OUTSIDE_OVERLAY;
+        if (movePadding && parent instanceof PreferenceFrameLayout) {
+            ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
+
+            final Resources res = list.getResources();
+            final int paddingSide = res.getDimensionPixelSize(
+                    com.android.internal.R.dimen.preference_fragment_padding_side);
+            final int paddingBottom = res.getDimensionPixelSize(
+                    com.android.internal.R.dimen.preference_fragment_padding_bottom);
+            list.setPadding(paddingSide, 0, paddingSide, paddingBottom);
+        }
     }
 }

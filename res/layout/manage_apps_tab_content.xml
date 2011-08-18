@@ -28,21 +28,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:scrollbars="none">
-
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                style="?android:attr/tabWidgetStyle" />
-
-        </HorizontalScrollView>
+        
+        <include layout="@layout/tab_widget" />
 
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -52,4 +39,3 @@
 
     </LinearLayout>
 </TabHost>
-
