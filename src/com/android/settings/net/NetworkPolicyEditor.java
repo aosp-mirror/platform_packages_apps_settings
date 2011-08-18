@@ -91,6 +91,11 @@ public class NetworkPolicyEditor {
         }
     }
 
+    public boolean hasLimitedPolicy(NetworkTemplate template) {
+        final NetworkPolicy policy = getPolicy(template);
+        return policy != null && policy.limitBytes != LIMIT_DISABLED;
+    }
+
     public NetworkPolicy getPolicy(NetworkTemplate template) {
         for (NetworkPolicy policy : mPolicies) {
             if (policy.template.equals(template)) {
@@ -179,5 +184,4 @@ public class NetworkPolicyEditor {
 
         }
     }
-
 }

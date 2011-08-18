@@ -116,7 +116,7 @@ public class ChartGridView extends View {
         mBorder.setBounds(0, 0, width, height);
         mBorder.draw(canvas);
 
-        final int padding = mLayoutStart.getHeight() / 8;
+        final int padding = mLayoutStart != null ? mLayoutStart.getHeight() / 8 : 0;
 
         final Layout start = mLayoutStart;
         if (start != null) {

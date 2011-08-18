@@ -3466,6 +3466,11 @@ found in the list of installed applications.</string>
     <!-- Tab title for showing 2G and 3G data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_3g">2G-3G</string>
 
+    <!-- Title shown when current operation applies to mobile networks. [CHAR LIMIT=10] -->
+    <string name="data_usage_list_mobile">mobile</string>
+    <!-- Title shown when current operation applies to no networks. [CHAR LIMIT=10] -->
+    <string name="data_usage_list_none">none</string>
+
     <!-- Toggle switch title for enabling all mobile data network connections. [CHAR LIMIT=32] -->
     <string name="data_usage_enable_mobile">Mobile data</string>
     <!-- Toggle switch title for enabling 2G and 3G data network connections. [CHAR LIMIT=32] -->
@@ -3478,9 +3483,9 @@ found in the list of installed applications.</string>
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
     <string name="data_usage_app_restrict_background">Restrict background data usage</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary">Only allow application background data when using an unlimited network</string>
+    <string name="data_usage_app_restrict_background_summary">Disable background data on networks that you\'ve chosen to limit (<xliff:g id="networks" example="Mobile, Wi-Fi">%1$s</xliff:g>).</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
-    <string name="data_usage_app_restrict_dialog_title">Restricting background data</string>
+    <string name="data_usage_app_restrict_dialog_title">Restrict background data?</string>
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
     <string name="data_usage_app_restrict_dialog">This feature may negatively impact applications which depend on background data usage.\n\nMore appropriate data usage controls may be found within this application\'s settings.</string>
 
@@ -3501,9 +3506,9 @@ found in the list of installed applications.</string>
     <string name="data_usage_limit_dialog_4g">Your 4G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
 
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
-    <string name="data_usage_restrict_background_title">Restricting background data</string>
+    <string name="data_usage_restrict_background_title">Restrict background data?</string>
     <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background">This feature will disable auto-sync and may negatively impact applications which depend on background data usage.</string>
+    <string name="data_usage_restrict_background">If you restrict background data, some apps and services won\'t work on networks that you\'ve chosen to limit.\n\nCurrently limited networks: <xliff:g id="networks" example="Mobile, Wi-Fi">%1$s</xliff:g></string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="21"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>
