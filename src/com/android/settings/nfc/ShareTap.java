@@ -19,20 +19,25 @@ package com.android.settings.nfc;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.drawable.AnimationDrawable;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import com.android.settings.R;
 
-public class ZeroClick extends Fragment
+public class ShareTap extends Fragment
         implements CompoundButton.OnCheckedChangeListener {
     private View mView;
+    private AnimationDrawable mAnimation;
+    private ImageView mImageView;
     private NfcAdapter mNfcAdapter;
     private Switch mActionBarSwitch;
 
@@ -69,25 +74,42 @@ public class ZeroClick extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.zeroclick, container, false);
+        mView = inflater.inflate(R.layout.sharetap, container, false);
         initView(mView);
         return mView;
     }
 
     private void initView(View view) {
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
         mActionBarSwitch.setOnCheckedChangeListener(this);
         mActionBarSwitch.setChecked(mNfcAdapter.isZeroClickEnabled());
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mImageView = (ImageView) getActivity().findViewById(R.id.sharetap_image);
+        mImageView.setBackgroundResource(R.drawable.sharetap_anim);
+        mAnimation = (AnimationDrawable) mImageView.getBackground();
+
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
+        mAnimation.stop();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        // This is nasty: the animation can only be started once the fragment
+        // is attached to the window, and there are no callbacks for that.
+        mImageView.post(new Runnable() {
+            public void run() {
+                mAnimation.start();
+            }
+        });
     }
 
     @Override

@@ -30,15 +30,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView android:id="@+id/zeroclick_explained"
+            <TextView android:id="@+id/sharetap_explained"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:gravity="top"
                 android:text="@string/zeroclick_explained"
             />
-
-
+            <ImageView android:id="@+id/sharetap_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            />
+            <TextView android:id="@+id/sharetap_safety"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:gravity="top"
+                android:text="@string/zeroclick_top"
+            />
+            <TextView android:id="@+id/sharetap_safety"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:gravity="top"
+                android:text="@string/zeroclick_safety"
+            />
         </LinearLayout>
 
     </ScrollView>
