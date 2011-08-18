@@ -81,7 +81,6 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     /** The word being edited in the dialog (null means the user is adding a word). */
     private String mDialogEditingWord;
 
-    private View mView;
     private Cursor mCursor;
 
     protected String mLocale;
@@ -94,13 +93,6 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
-        return mView;
     }
 
     @Override
@@ -126,7 +118,7 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
 
         mLocale = locale;
         mCursor = createCursor(locale);
-        TextView emptyView = (TextView)mView.findViewById(R.id.empty);
+        TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
         emptyView.setText(R.string.user_dict_settings_empty_text);
 
         final ListView listView = getListView();
