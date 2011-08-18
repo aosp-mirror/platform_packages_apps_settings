@@ -2978,8 +2978,6 @@ found in the list of installed applications.</string>
     <string name="tts_install_data_summary">Install the voice data required for speech synthesis</string>
     <!-- On main TTS Settings screen, summary for when required speech synthesis data alrady installed on SD card -->
     <string name="tts_data_installed_summary">Voices required for speech synthesis already properly installed</string>
-    <!-- Text spoken by the TTS engine for demonstration purposes -->
-    <string name="tts_demo">This is an example of speech synthesis.</string>
     <!-- Text spoken by the TTS engine when TTS settings (other than language) have been changed -->
     <string name="tts_settings_changed_demo">Your settings have changed. This is an example of how they sound.</string>
     <!-- Error screen when a selected TTS engine can't run because it's missing components -->
@@ -3026,6 +3024,15 @@ found in the list of installed applications.</string>
          to warn the user that this engine cannot be used before the checkbox for that engine
          in TTS settings is checked. -->
     <string name="tts_notif_engine_install_message">Enable new engine before use</string>
+    <!-- [CHAR LIMIT=150] Text for screen readers / accessibility programs for
+         the image that launches the TTS engine settings when clicked. -->
+    <string name="tts_engine_settings_button">Launch engine settings</string>
+    <!-- [CHAR LIMIT=50] The text for the settings section that users to set a
+         preferred text to speech engine -->
+    <string name="tts_engine_preference_section_title">Preferred engine</string>
+    <!-- [CHAR LIMIT=50] Title of the settings section that displays general preferences
+         that are applicable to all engines, such as the speech rate -->
+    <string name="tts_general_section_title">General</string>
 
     <!-- Power Control Widget -->
     <string name="gadget_title">Power Control</string>
