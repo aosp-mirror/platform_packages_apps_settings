@@ -182,8 +182,6 @@ public class WifiConfigController implements TextWatcher,
                 addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(), state));
             }
 
-            addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
-
             int level = mAccessPoint.getLevel();
             if (level != -1) {
                 String[] signal = resources.getStringArray(R.array.wifi_signal);
@@ -195,10 +193,14 @@ public class WifiConfigController implements TextWatcher,
                 addRow(group, R.string.wifi_speed, info.getLinkSpeed() + WifiInfo.LINK_SPEED_UNITS);
             }
 
+            addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
+
+            boolean showAdvancedFields = false;
             if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
                 WifiConfiguration config = mAccessPoint.getConfig();
                 if (config.ipAssignment == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
+                    showAdvancedFields = true;
                 } else {
                     mIpSettingsSpinner.setSelection(DHCP);
                 }
@@ -210,6 +212,7 @@ public class WifiConfigController implements TextWatcher,
 
                 if (config.proxySettings == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
+                    showAdvancedFields = true;
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
                 }
@@ -224,6 +227,12 @@ public class WifiConfigController implements TextWatcher,
                 showSecurityFields();
                 showIpConfigFields();
                 showProxyFields();
+                mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.wifi_advanced_togglebox).setOnClickListener(this);
+                if (showAdvancedFields) {
+                    ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox)).setChecked(true);
+                    mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
+                }
             }
 
             if (mEdit) {
@@ -726,10 +735,18 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void onClick(View view) {
-        mPasswordView.setInputType(
-                InputType.TYPE_CLASS_TEXT | (((CheckBox) view).isChecked() ?
-                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
-                InputType.TYPE_TEXT_VARIATION_PASSWORD));
+        if (view.getId() == R.id.show_password) {
+            mPasswordView.setInputType(
+                    InputType.TYPE_CLASS_TEXT | (((CheckBox) view).isChecked() ?
+                            InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
+                                InputType.TYPE_TEXT_VARIATION_PASSWORD));
+        } else if (view.getId() == R.id.wifi_advanced_togglebox) {
+            if (((CheckBox) view).isChecked()) {
+                mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
+            } else {
+                mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
