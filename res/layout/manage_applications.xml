@@ -29,7 +29,8 @@
             <ListView android:id="@android:id/list"
                 android:drawSelectorOnTop="false"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle" />
             <TextView android:id="@android:id/empty"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
