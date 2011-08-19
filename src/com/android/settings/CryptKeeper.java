@@ -235,6 +235,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (lastInstance instanceof NonConfigurationInstanceState) {
             NonConfigurationInstanceState retained = (NonConfigurationInstanceState) lastInstance;
             mWakeLock = retained.wakelock;
+            Log.d(TAG, "Restoring wakelock from NonConfigurationInstanceState");
         }
     }
 
@@ -276,6 +277,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     @Override
     public Object onRetainNonConfigurationInstance() {
         NonConfigurationInstanceState state = new NonConfigurationInstanceState(mWakeLock);
+        Log.d(TAG, "Handing wakelock off to NonConfigurationInstanceState");
         mWakeLock = null;
         return state;
     }
@@ -285,6 +287,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         super.onDestroy();
 
         if (mWakeLock != null) {
+            Log.d(TAG, "Releasing and destroying wakelock");
             mWakeLock.release();
             mWakeLock = null;
         }
@@ -295,10 +298,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // we never release this wakelock as we will be restarted after the device
         // is encrypted.
 
-        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
-
-        mWakeLock.acquire();
+        Log.d(TAG, "Encryption progress screen initializing.");
+        if (mWakeLock != null) {
+            Log.d(TAG, "Acquiring wakelock.");
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
+            mWakeLock.acquire();
+        }
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         progressBar.setIndeterminate(true);
@@ -349,6 +355,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
 
         CharSequence status = getText(R.string.crypt_keeper_setup_description);
+        Log.v(TAG, "Encryption progress: " + progress);
         TextView tv = (TextView) findViewById(R.id.status);
         tv.setText(TextUtils.expandTemplate(status, Integer.toString(progress)));
 
@@ -418,6 +425,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // cooldown period.
             mPasswordEntry.setEnabled(false);
 
+            Log.d(TAG, "Attempting to send command to decrypt");
             new DecryptTask().execute(password);
 
             return true;
