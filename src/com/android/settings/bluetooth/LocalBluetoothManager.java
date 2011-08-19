@@ -74,7 +74,7 @@ public final class LocalBluetoothManager {
         mContext = context;
         mLocalAdapter = adapter;
 
-        mCachedDeviceManager = new CachedBluetoothDeviceManager();
+        mCachedDeviceManager = new CachedBluetoothDeviceManager(context);
         mEventManager = new BluetoothEventManager(mLocalAdapter,
                 mCachedDeviceManager, context);
         mProfileManager = new LocalBluetoothProfileManager(context,
