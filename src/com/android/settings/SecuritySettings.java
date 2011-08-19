@@ -37,6 +37,7 @@ import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.android.internal.telephony.Phone;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.ArrayList;
@@ -162,8 +163,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.security_settings_misc);
 
         // Do not display SIM lock for CDMA phone
-        if (TelephonyManager.PHONE_TYPE_CDMA ==
-                TelephonyManager.getDefault().getCurrentPhoneType()) {
+        TelephonyManager tm = TelephonyManager.getDefault();
+        if ((TelephonyManager.PHONE_TYPE_CDMA == tm.getCurrentPhoneType()) &&
+                (tm.getLteOnCdmaMode() != Phone.LTE_ON_CDMA_TRUE)) {
             root.removePreference(root.findPreference(KEY_SIM_LOCK));
         }
 
