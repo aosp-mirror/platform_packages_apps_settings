@@ -49,7 +49,7 @@
     <item msgid="6415509612413178727">"30 minuuttia"</item>
   </string-array>
   <string-array name="lock_after_timeout_entries">
-    <item msgid="5416834369150305288">"heti"</item>
+    <!-- outdated translation 5416834369150305288 -->     <item msgid="8929270399652145290">"heti"</item>
     <item msgid="6736512735606834431">"5 sekuntia"</item>
     <item msgid="8044619388267891375">"15 sekuntia"</item>
     <item msgid="1822002388249545488">"30 sekuntia"</item>
@@ -114,34 +114,35 @@
     <item msgid="197508606402264311">"Yhteys katkaistu"</item>
     <item msgid="8578370891960825148">"Epäonnistui"</item>
   </string-array>
-  <string-array name="wifi_security">
-    <item msgid="1435933968767043814">"Avaa"</item>
-    <item msgid="6318432659048829665">"WEP"</item>
-    <item msgid="2966395706508338179">"WPA/WPA2 PSK"</item>
-    <item msgid="9098390198768443435">"802.1x EAP"</item>
-  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
     <item msgid="2892994535305020162">"TTLS"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
-    <item msgid="5085064298144493867">"Push-painike"</item>
-    <item msgid="8084424421884876981">"PIN-koodi vertaislaitteelta"</item>
+    <item msgid="5085064298144493867">"Paina painiketta"</item>
+    <item msgid="8084424421884876981">"Vertaislaitteen PIN-koodi"</item>
     <item msgid="9033470670389392191">"PIN-koodi tältä laitteelta"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"Yhdistetty"</item>
     <item msgid="3189211552661432651">"Kutsuttu"</item>
-    <item msgid="7455862395128183796">"Epäonnistui"</item>
+    <!-- outdated translation 7455862395128183796 -->     <item msgid="3206450250360237549">"Epäonnistui"</item>
     <item msgid="7785896708926971207">"Käytettävissä"</item>
-    <item msgid="829499112585677508">"Katvealueella"</item>
+    <item msgid="829499112585677508">"Ei yhteyttä"</item>
   </string-array>
   <string-array name="bluetooth_visibility_timeout_entries">
-    <!-- outdated translation 1106621950288502195 -->     <item msgid="8151962652413645395">"2 minuuttia"</item>
-    <!-- outdated translation 5780349442819375570 -->     <item msgid="8675215713017289017">"5 minuuttia"</item>
-    <!-- outdated translation 1166466894270177580 -->     <item msgid="477015974247590543">"1 tunti"</item>
-    <!-- outdated translation 9032073376232198148 -->     <item msgid="5198271470953124739">"Ei koskaan"</item>
+    <item msgid="8151962652413645395">"2 minuuttia"</item>
+    <item msgid="8675215713017289017">"5 minuuttia"</item>
+    <item msgid="477015974247590543">"1 tunti"</item>
+    <item msgid="5198271470953124739">"Ei aikakatkaisua"</item>
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Huono"</item>
@@ -206,9 +207,11 @@
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"PAP tai CHAP"</item>
   </string-array>
-    <!-- no translation found for apn_protocol_entries:0 (4852355456199302715) -->
-    <!-- no translation found for apn_protocol_entries:1 (4394161344888484571) -->
-    <!-- no translation found for apn_protocol_entries:2 (8084938354605535381) -->
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"Laitteen sisäinen tallennustila"</item>
     <item msgid="3738430123799803530">"Poistettava SD-kortti"</item>
@@ -256,7 +259,7 @@
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Vakioraja"</item>
     <item msgid="4071574792028999443">"Ei taustaprosesseja"</item>
-    <item msgid="4810006996171705398">"Enintään 1 prosessi"</item>
+    <item msgid="4810006996171705398">"Enintään 4 prosessia"</item>
     <item msgid="8586370216857360863">"Enintään 2 prosessia"</item>
     <item msgid="836593137872605381">"Enintään 3 prosessia"</item>
     <item msgid="7899496259191969307">"Enintään 4 prosessia"</item>
@@ -275,6 +278,6 @@
     <item msgid="8001704909356800092">"Yhdistetään..."</item>
     <item msgid="4039737283841672166">"Yhdistetty"</item>
     <item msgid="4042143101664725090">"Aikaraja"</item>
-    <item msgid="2690164254699635531">"Epäonnistui"</item>
+    <!-- outdated translation 2690164254699635531 -->     <item msgid="7664124146786465092">"Epäonnistui"</item>
   </string-array>
 </resources>
