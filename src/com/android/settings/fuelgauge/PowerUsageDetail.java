@@ -44,8 +44,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.DisplaySettings;
+import com.android.settings.LocationSettings;
 import com.android.settings.R;
-import com.android.settings.SecuritySettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -79,7 +79,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     public static final int ACTION_BLUETOOTH_SETTINGS = 3;
     public static final int ACTION_WIRELESS_SETTINGS = 4;
     public static final int ACTION_APP_DETAILS = 5;
-    public static final int ACTION_SECURITY_SETTINGS = 6;
+    public static final int ACTION_LOCATION_SETTINGS = 6;
     public static final int ACTION_FORCE_STOP = 7;
     public static final int ACTION_REPORT = 8;
 
@@ -280,9 +280,9 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
             case ACTION_APP_DETAILS:
                 startApplicationDetailsActivity();
                 break;
-            case ACTION_SECURITY_SETTINGS:
-                pa.startPreferencePanel(SecuritySettings.class.getName(), null,
-                        R.string.security_settings_title, null, null, 0);
+            case ACTION_LOCATION_SETTINGS:
+                pa.startPreferencePanel(LocationSettings.class.getName(), null,
+                        R.string.location_settings_title, null, null, 0);
                 break;
             case ACTION_FORCE_STOP:
                 killProcesses();
@@ -348,8 +348,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     // TODO:
                 }
                 if (mUsesGps) {
-                    addControl(R.string.security_settings_title,
-                            R.string.battery_sugg_apps_gps, ACTION_SECURITY_SETTINGS);
+                    addControl(R.string.location_settings_title,
+                            R.string.battery_sugg_apps_gps, ACTION_LOCATION_SETTINGS);
                     removeHeader = false;
                 }
                 break;
