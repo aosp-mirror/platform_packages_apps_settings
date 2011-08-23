@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.widget.LockPatternUtils;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -28,6 +26,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
+
+import com.android.internal.widget.LockPatternUtils;
 
 public class ChooseLockGeneric extends PreferenceActivity {
 
