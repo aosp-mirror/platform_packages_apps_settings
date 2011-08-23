@@ -712,10 +712,10 @@ public class ManageApplications extends Fragment implements
         // bar UI to be very confusing.
         menu.add(0, SORT_ORDER_ALPHA, 1, R.string.sort_order_alpha)
                 //.setIcon(android.R.drawable.ic_menu_sort_alphabetically)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
                 //.setIcon(android.R.drawable.ic_menu_sort_by_size)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(0, SHOW_RUNNING_SERVICES, 3, R.string.show_running_services)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes)
