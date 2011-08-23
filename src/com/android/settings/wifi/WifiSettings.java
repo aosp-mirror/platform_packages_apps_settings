@@ -353,11 +353,9 @@ public class WifiSettings extends SettingsPreferenceFragment
                         mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
                     }
                 } else if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
-                    // Shortcut for open networks.
-                    WifiConfiguration config = new WifiConfiguration();
-                    config.SSID = AccessPoint.convertToQuotedString(mSelectedAccessPoint.ssid);
-                    config.allowedKeyManagement.set(KeyMgmt.NONE);
-                    mWifiManager.connectNetwork(config);
+                    /** Bypass dialog for unsecured networks */
+                    mSelectedAccessPoint.generateOpenNetworkConfig();
+                    mWifiManager.connectNetwork(mSelectedAccessPoint.getConfig());
                 } else {
                     showConfigUi(mSelectedAccessPoint, true);
                 }
@@ -379,7 +377,14 @@ public class WifiSettings extends SettingsPreferenceFragment
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         if (preference instanceof AccessPoint) {
             mSelectedAccessPoint = (AccessPoint) preference;
-            showConfigUi(mSelectedAccessPoint, false);
+            /** Bypass dialog for unsecured, unsaved networks */
+            if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE &&
+                    mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
+                mSelectedAccessPoint.generateOpenNetworkConfig();
+                mWifiManager.connectNetwork(mSelectedAccessPoint.getConfig());
+            } else {
+                showConfigUi(mSelectedAccessPoint, false);
+            }
         } else {
             return super.onPreferenceTreeClick(screen, preference);
         }
@@ -623,6 +628,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
 
         void forceScan() {
+            removeMessages(0);
             sendEmptyMessage(0);
         }
 

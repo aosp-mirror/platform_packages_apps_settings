@@ -358,4 +358,19 @@ class AccessPoint extends Preference {
             setSummary(summary.toString());
         }
     }
+
+    /**
+     * Generate and save a default wifiConfiguration with common values.
+     * Can only be called for unsecured networks.
+     * @hide
+     */
+    protected void generateOpenNetworkConfig() {
+        if (security != SECURITY_NONE)
+            throw new IllegalStateException();
+        if (mConfig != null)
+            return;
+        mConfig = new WifiConfiguration();
+        mConfig.SSID = AccessPoint.convertToQuotedString(ssid);
+        mConfig.allowedKeyManagement.set(KeyMgmt.NONE);
+    }
 }
