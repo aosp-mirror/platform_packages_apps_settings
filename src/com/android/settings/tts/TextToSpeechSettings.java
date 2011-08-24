@@ -192,15 +192,30 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         checkVoiceData(mCurrentEngine);
     }
 
+    private void maybeUpdateTtsLanguage(String currentEngine) {
+        if (currentEngine != null && mTts != null) {
+            final String localeString = mEnginesHelper.getLocalePrefForEngine(
+                    currentEngine);
+            if (localeString != null) {
+                final String[] locale = TtsEngines.parseLocalePref(localeString);
+
+                if (DBG) Log.d(TAG, "Loading language ahead of sample check : " + locale);
+                mTts.setLanguage(new Locale(locale[0], locale[1], locale[2]));
+            }
+        }
+    }
+
     /**
      * Ask the current default engine to return a string of sample text to be
      * spoken to the user.
      */
     private void getSampleText() {
         String currentEngine = mTts.getCurrentEngine();
-        Locale currentLocale = mTts.getLanguage();
 
         if (TextUtils.isEmpty(currentEngine)) currentEngine = mTts.getDefaultEngine();
+
+        maybeUpdateTtsLanguage(currentEngine);
+        Locale currentLocale = mTts.getLanguage();
 
         // TODO: This is currently a hidden private API. The intent extras
         // and the intent action should be made public if we intend to make this
@@ -220,7 +235,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             startActivityForResult(intent, GET_SAMPLE_TEXT);
         } catch (ActivityNotFoundException ex) {
             Log.e(TAG, "Failed to get sample text, no activity found for " + intent + ")");
-            onSampleTextReceived(TextToSpeech.ERROR, null);
         }
     }
 
