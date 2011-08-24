@@ -78,8 +78,6 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         watchdogEnabled.setChecked(Secure.getInt(getContentResolver(),
                 Secure.WIFI_WATCHDOG_ON, 1) == 1);
 
-        watchdogEnabled.setEnabled(mWifiManager.isWifiEnabled());
-
         ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
 
         if (mWifiManager.isDualBandSupported()) {
