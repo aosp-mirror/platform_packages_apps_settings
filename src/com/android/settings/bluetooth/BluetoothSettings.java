@@ -236,6 +236,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
             case BluetoothAdapter.STATE_ON:
                 preferenceScreen.removeAll();
                 preferenceScreen.setOrderingAsAdded(true);
+                mDevicePreferenceMap.clear();
 
                 // This device
                 if (mMyDevicePreference == null) {
