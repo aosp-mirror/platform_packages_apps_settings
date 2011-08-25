@@ -159,7 +159,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     if (mWifiP2pManager != null) {
-                        mWifiP2pManager.disconnect(mChannel);
+                        mWifiP2pManager.removeGroup(mChannel);
                     }
                 }
             }

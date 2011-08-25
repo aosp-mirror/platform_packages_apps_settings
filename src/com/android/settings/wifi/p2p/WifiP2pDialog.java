@@ -82,9 +82,6 @@ public class WifiP2pDialog extends AlertDialog implements AdapterView.OnItemSele
                 config.wpsConfig.setup = Setup.PBC;
                 break;
         }
-        if (mDevice.isGroupOwner()) {
-            config.joinExistingGroup = true;
-        }
         return config;
     }
 
