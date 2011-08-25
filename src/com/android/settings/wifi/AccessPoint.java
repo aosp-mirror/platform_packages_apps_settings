@@ -71,7 +71,6 @@ class AccessPoint extends Preference {
     private int mRssi;
     private WifiInfo mInfo;
     private DetailedState mState;
-    private ImageView mSignal;
 
     static int getSecurity(WifiConfiguration config) {
         if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
@@ -145,12 +144,14 @@ class AccessPoint extends Preference {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         loadConfig(config);
+        refresh();
     }
 
     AccessPoint(Context context, ScanResult result) {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         loadResult(result);
+        refresh();
     }
 
     AccessPoint(Context context, Bundle savedState) {
@@ -204,17 +205,16 @@ class AccessPoint extends Preference {
 
     @Override
     protected void onBindView(View view) {
-        setTitle(ssid);
-        mSignal = (ImageView) view.findViewById(R.id.signal);
+        super.onBindView(view);
+        ImageView signal = (ImageView) view.findViewById(R.id.signal);
         if (mRssi == Integer.MAX_VALUE) {
-            mSignal.setImageDrawable(null);
+            signal.setImageDrawable(null);
         } else {
-            mSignal.setImageResource(R.drawable.wifi_signal);
-            mSignal.setImageState((security != SECURITY_NONE) ?
+            signal.setImageLevel(getLevel());
+            signal.setImageResource(R.drawable.wifi_signal);
+            signal.setImageState((security != SECURITY_NONE) ?
                     STATE_SECURED : STATE_NONE, true);
         }
-        refresh();
-        super.onBindView(view);
     }
 
     @Override
@@ -245,14 +245,19 @@ class AccessPoint extends Preference {
     }
 
     boolean update(ScanResult result) {
-        // We do not call refresh() since this is called before onBindView().
         if (ssid.equals(result.SSID) && security == getSecurity(result)) {
             if (WifiManager.compareSignalLevel(result.level, mRssi) > 0) {
+                int oldLevel = getLevel();
                 mRssi = result.level;
+                if (getLevel() != oldLevel) {
+                    notifyChanged();
+                }
             }
             // This flag only comes from scans, is not easily saved in config
-            if (security == SECURITY_PSK)
+            if (security == SECURITY_PSK) {
                 pskType = getPskType(result);
+            }
+            refresh();
             return true;
         }
         return false;
@@ -260,7 +265,8 @@ class AccessPoint extends Preference {
 
     void update(WifiInfo info, DetailedState state) {
         boolean reorder = false;
-        if (info != null && networkId != -1 && networkId == info.getNetworkId()) {
+        if (info != null && networkId != WifiConfiguration.INVALID_NETWORK_ID
+                && networkId == info.getNetworkId()) {
             reorder = (mInfo == null);
             mRssi = info.getRssi();
             mInfo = info;
@@ -309,13 +315,11 @@ class AccessPoint extends Preference {
         return "\"" + string + "\"";
     }
 
+    /** Updates the title and summary; may indirectly call notifyChanged()  */
     private void refresh() {
-        if (mSignal == null) {
-            return;
-        }
-        Context context = getContext();
-        mSignal.setImageLevel(getLevel());
+        setTitle(ssid);
 
+        Context context = getContext();
         if (mState != null) { // This is the active connection
             setSummary(Summary.get(context, mState));
         } else if (mRssi == Integer.MAX_VALUE) { // Wifi out of range
