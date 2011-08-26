@@ -49,12 +49,10 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -66,6 +64,8 @@ import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -91,6 +91,9 @@ public class WifiSettings extends SettingsPreferenceFragment
     private static final int MENU_ID_MODIFY = Menu.FIRST + 5;
 
     private static final int WIFI_DIALOG_ID = 1;
+
+    // Combo scans can take 5-6s to complete - set to 10s.
+    private static final int WIFI_RESCAN_INTERVAL_MS = 10 * 1000;
 
     // Instance state keys
     private static final String SAVE_DIALOG_EDIT_MODE = "edit_mode";
@@ -451,9 +454,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                getPreferenceScreen().removeAll();
                 // AccessPoints are automatically sorted with TreeSet.
                 final Collection<AccessPoint> accessPoints = constructAccessPoints();
+                getPreferenceScreen().removeAll();
                 if (mInXlSetupWizard) {
                     ((WifiSettingsForSetupWizardXL)getActivity()).onAccessPointsUpdated(
                             getPreferenceScreen(), accessPoints);
@@ -483,8 +486,12 @@ public class WifiSettings extends SettingsPreferenceFragment
         getPreferenceScreen().removeAll();
     }
 
-    private Collection<AccessPoint> constructAccessPoints() {
-        Collection<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
+    /** Returns sorted list of access points */
+    private List<AccessPoint> constructAccessPoints() {
+        ArrayList<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
+        /** Lookup table to more quickly update AccessPoints by only considering objects with the
+         * correct SSID.  Maps SSID -> List of AccessPoints with the given SSID.  */
+        Multimap<String, AccessPoint> apMap = new Multimap<String, AccessPoint>();
 
         final List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
         if (configs != null) {
@@ -492,6 +499,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 AccessPoint accessPoint = new AccessPoint(getActivity(), config);
                 accessPoint.update(mLastInfo, mLastState);
                 accessPoints.add(accessPoint);
+                apMap.put(accessPoint.ssid, accessPoint);
             }
         }
 
@@ -505,19 +513,41 @@ public class WifiSettings extends SettingsPreferenceFragment
                 }
 
                 boolean found = false;
-                for (AccessPoint accessPoint : accessPoints) {
-                    if (accessPoint.update(result)) {
-                        found = true;
-                        break;
+                if (apMap.getAll(result.SSID) != null) {
+                    for (AccessPoint accessPoint : apMap.getAll(result.SSID)) {
+                        if (accessPoint.update(result))
+                            found = true;
                     }
                 }
                 if (!found) {
-                    accessPoints.add(new AccessPoint(getActivity(), result));
+                    AccessPoint accessPoint = new AccessPoint(getActivity(), result);
+                    accessPoints.add(accessPoint);
+                    apMap.put(accessPoint.ssid, accessPoint);
                 }
             }
         }
 
+        //
+        Collections.sort(accessPoints);
         return accessPoints;
+    }
+
+    /** A restricted multimap for use in constructAccessPoints */
+    private class Multimap<K,V> {
+        private HashMap<K,List<V>> store = new HashMap<K,List<V>>();
+        /** retrieve a possibly null list of values with key K */
+        List<V> getAll(K key) {
+            return store.get(key);
+        }
+
+        void put(K key, V val) {
+            List<V> curVals = store.get(key);
+            if (curVals == null) {
+                curVals = new ArrayList<V>(3);
+                store.put(key, curVals);
+            }
+            curVals.add(val);
+        }
     }
 
     private void handleEvent(Context context, Intent intent) {
@@ -647,8 +677,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                         Toast.LENGTH_LONG).show();
                 return;
             }
-            // Combo scans can take 5-6s to complete. Increase interval to 10s.
-            sendEmptyMessageDelayed(0, 10000);
+            sendEmptyMessageDelayed(0, WIFI_RESCAN_INTERVAL_MS);
         }
     }
 
