@@ -513,11 +513,9 @@ public class WifiSettings extends SettingsPreferenceFragment
                 }
 
                 boolean found = false;
-                if (apMap.getAll(result.SSID) != null) {
-                    for (AccessPoint accessPoint : apMap.getAll(result.SSID)) {
-                        if (accessPoint.update(result))
-                            found = true;
-                    }
+                for (AccessPoint accessPoint : apMap.getAll(result.SSID)) {
+                    if (accessPoint.update(result))
+                        found = true;
                 }
                 if (!found) {
                     AccessPoint accessPoint = new AccessPoint(getActivity(), result);
@@ -527,7 +525,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             }
         }
 
-        //
+        // Pre-sort accessPoints to speed preference insertion
         Collections.sort(accessPoints);
         return accessPoints;
     }
@@ -535,9 +533,10 @@ public class WifiSettings extends SettingsPreferenceFragment
     /** A restricted multimap for use in constructAccessPoints */
     private class Multimap<K,V> {
         private HashMap<K,List<V>> store = new HashMap<K,List<V>>();
-        /** retrieve a possibly null list of values with key K */
+        /** retrieve a non-null list of values with key K */
         List<V> getAll(K key) {
-            return store.get(key);
+            List<V> values = store.get(key);
+            return values != null ? values : Collections.<V>emptyList();
         }
 
         void put(K key, V val) {
