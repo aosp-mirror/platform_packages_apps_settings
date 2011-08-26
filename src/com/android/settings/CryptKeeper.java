@@ -22,8 +22,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
-import android.inputmethodservice.KeyboardView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,22 +34,22 @@ import android.os.SystemProperties;
 import android.os.storage.IMountService;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.telephony.ITelephony;
-import com.android.internal.widget.PasswordEntryKeyboardHelper;
-import com.android.internal.widget.PasswordEntryKeyboardView;
+
+import java.util.List;
 
 /**
  * Settings screens to show the UI flows for encrypting/decrypting the device.
@@ -109,37 +107,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.crypt_keeper_blank);
-        }
-    }
-
-    // Use a custom EditText to prevent the input method from showing.
-    public static class CryptEditText extends EditText {
-        InputMethodManager imm;
-
-        public CryptEditText(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            imm = ((InputMethodManager) getContext().
-                    getSystemService(Context.INPUT_METHOD_SERVICE));
-        }
-
-        @Override
-        protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
-            super.onFocusChanged(focused, direction, previouslyFocusedRect);
-
-            if (focused && imm != null && imm.isActive(this)) {
-                imm.hideSoftInputFromWindow(getApplicationWindowToken(), 0);
-            }
-        }
-
-        @Override
-        public boolean onTouchEvent(MotionEvent event) {
-            boolean handled = super.onTouchEvent(event);
-
-            if (imm != null && imm.isActive(this)) {
-                imm.hideSoftInputFromWindow(getApplicationWindowToken(), 0);
-            }
-
-            return handled;
         }
     }
 
@@ -387,16 +354,77 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private void passwordEntryInit() {
         mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
         mPasswordEntry.setOnEditorActionListener(this);
+        mPasswordEntry.requestFocus();
 
-        KeyboardView keyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
-
-        if (keyboardView != null) {
-            PasswordEntryKeyboardHelper keyboardHelper = new PasswordEntryKeyboardHelper(this,
-                    keyboardView, mPasswordEntry, false);
-            keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
+        View imeSwitcher = findViewById(R.id.switch_ime_button);
+        final InputMethodManager imm = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imeSwitcher != null && hasMultipleEnabledIMEsOrSubtypes(imm, false)) {
+            imeSwitcher.setVisibility(View.VISIBLE);
+            imeSwitcher.setOnClickListener(new OnClickListener() {
+                public void onClick(View v) {
+                    imm.showInputMethodPicker();
+                }
+            });
         }
 
+        // Asynchronously throw up the IME, since there are issues with requesting it to be shown
+        // immediately.
+        mHandler.postDelayed(new Runnable() {
+            @Override public void run() {
+                imm.showSoftInputUnchecked(0, null);
+            }
+        }, 0);
+
         updateEmergencyCallButtonState();
+    }
+
+    /**
+     * Method adapted from com.android.inputmethod.latin.Utils
+     *
+     * @param imm The input method manager
+     * @param shouldIncludeAuxiliarySubtypes
+     * @return true if we have multiple IMEs to choose from
+     */
+    private boolean hasMultipleEnabledIMEsOrSubtypes(InputMethodManager imm,
+            final boolean shouldIncludeAuxiliarySubtypes) {
+        final List<InputMethodInfo> enabledImis = imm.getEnabledInputMethodList();
+
+        // Number of the filtered IMEs
+        int filteredImisCount = 0;
+
+        for (InputMethodInfo imi : enabledImis) {
+            // We can return true immediately after we find two or more filtered IMEs.
+            if (filteredImisCount > 1) return true;
+            final List<InputMethodSubtype> subtypes =
+                    imm.getEnabledInputMethodSubtypeList(imi, true);
+            // IMEs that have no subtypes should be counted.
+            if (subtypes.isEmpty()) {
+                ++filteredImisCount;
+                continue;
+            }
+
+            int auxCount = 0;
+            for (InputMethodSubtype subtype : subtypes) {
+                if (subtype.isAuxiliary()) {
+                    ++auxCount;
+                }
+            }
+            final int nonAuxCount = subtypes.size() - auxCount;
+
+            // IMEs that have one or more non-auxiliary subtypes should be counted.
+            // If shouldIncludeAuxiliarySubtypes is true, IMEs that have two or more auxiliary
+            // subtypes should be counted as well.
+            if (nonAuxCount > 0 || (shouldIncludeAuxiliarySubtypes && auxCount > 1)) {
+                ++filteredImisCount;
+                continue;
+            }
+        }
+
+        return filteredImisCount > 1
+        // imm.getEnabledInputMethodSubtypeList(null, false) will return the current IME's enabled
+        // input method subtype (The current IME should be LatinIME.)
+                || imm.getEnabledInputMethodSubtypeList(null, false).size() > 1;
     }
 
     private IMountService getMountService() {
