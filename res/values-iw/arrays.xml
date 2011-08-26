@@ -34,8 +34,8 @@
     <item msgid="8881760709354815449">"30 שניות"</item>
     <item msgid="7589406073232279088">"דקה אחת"</item>
     <item msgid="7001195990902244174">"2 דקות"</item>
-    <item msgid="7489864775127957179">"5 דקות"</item>
-    <item msgid="2314124409517439288">"10 דקות"</item>
+    <item msgid="7489864775127957179">"חמש דקות"</item>
+    <item msgid="2314124409517439288">"עשר דקות"</item>
     <item msgid="6864027152847611413">"30 דקות"</item>
   </string-array>
   <string-array name="dream_timeout_entries">
@@ -55,8 +55,8 @@
     <item msgid="1822002388249545488">"30 שניות"</item>
     <item msgid="8538071621211916519">"דקה אחת"</item>
     <item msgid="5663439580228932882">"2 דקות"</item>
-    <item msgid="49888496216106852">"5 דקות"</item>
-    <item msgid="9002737361305019353">"10 דקות"</item>
+    <item msgid="49888496216106852">"חמש דקות"</item>
+    <item msgid="9002737361305019353">"עשר דקות"</item>
     <item msgid="4322676235684793329">"30 דקות"</item>
   </string-array>
   <string-array name="entries_font_size">
@@ -81,14 +81,6 @@
     <item msgid="3332408460740717754">"רגיל"</item>
     <item msgid="4907380534957572531">"גבוה"</item>
     <item msgid="4699640516390840297">"גבוה מאוד"</item>
-  </string-array>
-  <string-array name="tts_lang_entries">
-    <item msgid="478030717868306353">"אנגלית אמריקנית"</item>
-    <item msgid="5192284521396794598">"אנגלית בריטית"</item>
-    <item msgid="3000262452051711991">"צרפתית"</item>
-    <item msgid="9214080387341763401">"גרמנית"</item>
-    <item msgid="5972100016440094433">"איטלקית"</item>
-    <item msgid="5811378076054402537">"ספרדית"</item>
   </string-array>
   <string-array name="wifi_status">
     <item msgid="1922181315419294640"></item>
@@ -151,9 +143,9 @@
     <item msgid="5702329417707689835">"מצוין"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
-    <item msgid="643915340724070374">"בעת כיבוי המסך (שימוש ביותר נתונים לנייד)"</item>
+    <item msgid="643915340724070374">"בעת כיבוי המסך (משתמש בנתונים רבים יותר לנייד)"</item>
     <item msgid="1549288661423279207">"לעולם לא כאשר מחובר"</item>
-    <item msgid="6592896328877671197">"לעולם לא (שימוש ביותר צריכת סוללה)"</item>
+    <item msgid="6592896328877671197">"לעולם לא (משתמש בצריכת סוללה רבה יותר)"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2659922042905569057">"כאשר המסך נכבה"</item>
@@ -161,7 +153,7 @@
     <item msgid="5996547094658157629">"לעולם לא (משתמש בצריכת סוללה רבה יותר)"</item>
   </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"רכב"</item>
+    <item msgid="624340809384223320">"אוטומטי"</item>
     <item msgid="6670588712989942178">"‎5 GHz בלבד"</item>
     <item msgid="2715516524973207876">"‎2.4 GHz בלבד"</item>
   </string-array>
@@ -183,10 +175,10 @@
     <item msgid="8651992560135239389">"GTC"</item>
   </string-array>
   <string-array name="wifi_network_setup">
-    <item msgid="784271777398638325">"ידני"</item>
-    <item msgid="700386742589384062">"לחצן דחיפת WPS"</item>
-    <item msgid="7131487972018976724">"PIN של WPS מנקודת גישה"</item>
-    <item msgid="4809199848225172977">"PIN של WPS מהתקן זה"</item>
+    <!-- outdated translation 784271777398638325 -->     <item msgid="3318069057130819160">"ידני"</item>
+    <!-- outdated translation 700386742589384062 -->     <item msgid="3564693183575724416">"לחצן דחיפת WPS"</item>
+    <!-- outdated translation 7131487972018976724 -->     <item msgid="318930020580530354">"PIN של WPS מנקודת גישה"</item>
+    <!-- outdated translation 4809199848225172977 -->     <item msgid="1807770381361400934">"PIN של WPS ממכשיר זה"</item>
   </string-array>
   <string-array name="wifi_ip_settings">
     <item msgid="3906714200993111074">"DHCP"</item>
@@ -207,9 +199,11 @@
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"PAP או CHAP"</item>
   </string-array>
-    <!-- no translation found for apn_protocol_entries:0 (4852355456199302715) -->
-    <!-- no translation found for apn_protocol_entries:1 (4394161344888484571) -->
-    <!-- no translation found for apn_protocol_entries:2 (8084938354605535381) -->
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"אחסון פנימי במכשיר"</item>
     <item msgid="3738430123799803530">"כרטיס SD נשלף"</item>
@@ -254,8 +248,14 @@
     <item msgid="7705857441213621835">"קנה מידה להנפשה 5x"</item>
     <item msgid="6660750935954853365">"קנה מידה להנפשה 10x"</item>
   </string-array>
-    <!-- no translation found for app_process_limit_entries:4 (836593137872605381) -->
-    <!-- no translation found for app_process_limit_entries:5 (7899496259191969307) -->
+  <string-array name="app_process_limit_entries">
+    <item msgid="3401625457385943795">"הגבלת תקן"</item>
+    <item msgid="4071574792028999443">"אין תהליכים ברקע"</item>
+    <item msgid="4810006996171705398">"תהליך אחד לכל היותר"</item>
+    <item msgid="8586370216857360863">"2 תהליכים לכל היותר"</item>
+    <item msgid="836593137872605381">"3 תהליכים לכל היותר"</item>
+    <item msgid="7899496259191969307">"4 תהליכים לכל היותר"</item>
+  </string-array>
   <string-array name="vpn_types_long">
     <item msgid="2732002039459078847">"PPTP VPN"</item>
     <item msgid="3799752201662127867">"L2TP/IPSec VPN עם מפתחות משותפים מראש"</item>
@@ -267,7 +267,7 @@
   <string-array name="vpn_states">
     <item msgid="8621078286418985762">"מנותק"</item>
     <item msgid="6692305604213080515">"מאתחל..."</item>
-    <item msgid="8001704909356800092">"מתחבר…"</item>
+    <item msgid="8001704909356800092">"מתחבר ..."</item>
     <item msgid="4039737283841672166">"מחובר"</item>
     <item msgid="4042143101664725090">"זמן קצוב לתפוגה"</item>
     <!-- outdated translation 2690164254699635531 -->     <item msgid="7664124146786465092">"נכשל"</item>
