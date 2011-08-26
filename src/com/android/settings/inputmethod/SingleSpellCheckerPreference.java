@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.preference.Preference;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.textservice.SpellCheckerInfo;
@@ -36,6 +37,8 @@ import android.widget.TextView;
 
 public class SingleSpellCheckerPreference extends Preference {
     private static final float DISABLED_ALPHA = 0.4f;
+    private static final String TAG = SingleSpellCheckerPreference.class.getSimpleName();
+    private static final boolean DBG = false;
 
     private final SpellCheckerInfo mSpellCheckerInfo;
 
@@ -156,6 +159,11 @@ public class SingleSpellCheckerPreference extends Preference {
                     mTsm.setSpellCheckerSubtype(null);
                 } else {
                     mTsm.setSpellCheckerSubtype(mSpellCheckerInfo.getSubtypeAt(which - 1));
+                }
+                if (DBG) {
+                    final SpellCheckerSubtype subtype = mTsm.getCurrentSpellCheckerSubtype(true);
+                    Log.d(TAG, "Current spell check locale is "
+                            + subtype == null ? "null" : subtype.getLocale());
                 }
                 dialog.dismiss();
             }

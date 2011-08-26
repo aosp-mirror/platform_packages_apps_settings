@@ -24,13 +24,17 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.util.Log;
 import android.view.textservice.SpellCheckerInfo;
+import android.view.textservice.SpellCheckerSubtype;
 import android.view.textservice.TextServicesManager;
 
 import java.util.ArrayList;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener {
+    private static final String TAG = SpellCheckersSettings.class.getSimpleName();
+    private static final boolean DBG = false;
 
     private SpellCheckerInfo mCurrentSci;
     private SpellCheckerInfo[] mEnabledScis;
@@ -97,6 +101,10 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             if (arg0.equals(scp)) {
                 mTsm.setCurrentSpellChecker(scp.getSpellCheckerInfo());
             }
+        }
+        if (DBG) {
+            Log.d(TAG, "Current spell check is "
+                        + SpellCheckerUtils.getCurrentSpellChecker(mTsm).getId());
         }
         updateScreen();
         return true;
