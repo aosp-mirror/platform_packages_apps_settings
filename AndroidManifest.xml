@@ -967,7 +967,7 @@
 
         <!-- NFC settings -->
         <activity android:name="Settings$NfcSharingSettingsActivity"
-                android:label="@string/zeroclick_settings_title"
+                android:label="@string/ndef_push_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -975,7 +975,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.nfc.ShareTap" />
+                android:value="com.android.settings.nfc.NdefPush" />
         </activity>
 
         <!-- Accessibility tutorial -->

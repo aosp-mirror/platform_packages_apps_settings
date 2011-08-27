@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import com.android.settings.R;
 
-public class ShareTap extends Fragment
+public class NdefPush extends Fragment
         implements CompoundButton.OnCheckedChangeListener {
     private View mView;
     private AnimationDrawable mAnimation;
@@ -61,35 +61,35 @@ public class ShareTap extends Fragment
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-                activity.getActionBar().setTitle(R.string.zeroclick_settings_title);
+                activity.getActionBar().setTitle(R.string.ndef_push_settings_title);
             }
         }
 
         mActionBarSwitch.setOnCheckedChangeListener(this);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-        mActionBarSwitch.setChecked(mNfcAdapter.isZeroClickEnabled());
+        mActionBarSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.sharetap, container, false);
+        mView = inflater.inflate(R.layout.ndefpush, container, false);
         initView(mView);
         return mView;
     }
 
     private void initView(View view) {
         mActionBarSwitch.setOnCheckedChangeListener(this);
-        mActionBarSwitch.setChecked(mNfcAdapter.isZeroClickEnabled());
+        mActionBarSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mImageView = (ImageView) getActivity().findViewById(R.id.sharetap_image);
-        mImageView.setBackgroundResource(R.drawable.sharetap_anim);
+        mImageView = (ImageView) getActivity().findViewById(R.id.ndef_push_image);
+        mImageView.setBackgroundResource(R.drawable.ndef_push_anim);
         mAnimation = (AnimationDrawable) mImageView.getBackground();
 
     }
@@ -117,9 +117,9 @@ public class ShareTap extends Fragment
         boolean success = false;
         mActionBarSwitch.setEnabled(false);
         if (desiredState) {
-            success = mNfcAdapter.enableZeroClick();
+            success = mNfcAdapter.enableNdefPush();
         } else {
-            success = mNfcAdapter.disableZeroClick();
+            success = mNfcAdapter.disableNdefPush();
         }
         if (success) {
             mActionBarSwitch.setChecked(desiredState);

@@ -39,10 +39,10 @@
         android:persistent="false" />
 
     <PreferenceScreen
-        android:fragment="com.android.settings.nfc.ShareTap"
-        android:key="zeroclick_settings"
-        android:title="@string/zeroclick_settings_title"
-        android:summary="@string/zeroclick_settings_summary" >
+        android:fragment="com.android.settings.nfc.NdefPush"
+        android:key="ndef_push_settings"
+        android:title="@string/ndef_push_settings_title"
+        android:summary="@string/ndef_push_settings_summary" >
     </PreferenceScreen>
 
     <PreferenceScreen
