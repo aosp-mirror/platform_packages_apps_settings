@@ -36,8 +36,6 @@ import com.android.settings.R;
  * and screen coordinates.
  */
 public class ChartView extends FrameLayout {
-    private static final String TAG = "ChartView";
-
     // TODO: extend something that supports two-dimensional scrolling
 
     private static final int SWEEP_GRAVITY = Gravity.TOP | Gravity.LEFT;
@@ -122,29 +120,39 @@ public class ChartView extends FrameLayout {
                 child.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
 
             } else if (child instanceof ChartSweepView) {
-                // sweep is always placed along specific dimension
-                final ChartSweepView sweep = (ChartSweepView) child;
-                final Rect sweepMargins = sweep.getMargins();
-
-                if (sweep.getFollowAxis() == ChartSweepView.VERTICAL) {
-                    parentRect.top += sweepMargins.top + (int) sweep.getPoint();
-                    parentRect.bottom = parentRect.top;
-                    parentRect.left += sweepMargins.left;
-                    parentRect.right += sweepMargins.right;
-                    Gravity.apply(SWEEP_GRAVITY, parentRect.width(), child.getMeasuredHeight(),
-                            parentRect, childRect);
-
-                } else {
-                    parentRect.left += sweepMargins.left + (int) sweep.getPoint();
-                    parentRect.right = parentRect.left;
-                    parentRect.top += sweepMargins.top;
-                    parentRect.bottom += sweepMargins.bottom;
-                    Gravity.apply(SWEEP_GRAVITY, child.getMeasuredWidth(), parentRect.height(),
-                            parentRect, childRect);
-                }
+                layoutSweep((ChartSweepView) child, parentRect, childRect);
+                child.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
             }
+        }
+    }
 
-            child.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
+    protected void layoutSweep(ChartSweepView sweep) {
+        final Rect parentRect = new Rect(mContent);
+        final Rect childRect = new Rect();
+
+        layoutSweep(sweep, parentRect, childRect);
+        sweep.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
+    }
+
+    protected void layoutSweep(ChartSweepView sweep, Rect parentRect, Rect childRect) {
+        final Rect sweepMargins = sweep.getMargins();
+
+        // sweep is always placed along specific dimension
+        if (sweep.getFollowAxis() == ChartSweepView.VERTICAL) {
+            parentRect.top += sweepMargins.top + (int) sweep.getPoint();
+            parentRect.bottom = parentRect.top;
+            parentRect.left += sweepMargins.left;
+            parentRect.right += sweepMargins.right;
+            Gravity.apply(SWEEP_GRAVITY, parentRect.width(), sweep.getMeasuredHeight(),
+                    parentRect, childRect);
+
+        } else {
+            parentRect.left += sweepMargins.left + (int) sweep.getPoint();
+            parentRect.right = parentRect.left;
+            parentRect.top += sweepMargins.top;
+            parentRect.bottom += sweepMargins.bottom;
+            Gravity.apply(SWEEP_GRAVITY, sweep.getMeasuredWidth(), parentRect.height(),
+                    parentRect, childRect);
         }
     }
 

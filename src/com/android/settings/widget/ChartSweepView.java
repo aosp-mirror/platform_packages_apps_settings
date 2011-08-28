@@ -21,6 +21,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -42,8 +43,14 @@ import com.google.common.base.Preconditions;
  */
 public class ChartSweepView extends View {
 
+    private static final boolean DRAW_OUTLINE = false;
+
     private Drawable mSweep;
     private Rect mSweepPadding = new Rect();
+
+    /** Offset of content inside this view. */
+    private Point mContentOffset = new Point();
+    /** Offset of {@link #mSweep} inside this view. */
     private Point mSweepOffset = new Point();
 
     private Rect mMargins = new Rect();
@@ -65,6 +72,8 @@ public class ChartSweepView extends View {
     private long mValidBefore;
     private ChartSweepView mValidAfterDynamic;
     private ChartSweepView mValidBeforeDynamic;
+
+    private Paint mOutlinePaint = new Paint();
 
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
@@ -98,6 +107,10 @@ public class ChartSweepView extends View {
         setLabelTemplate(a.getResourceId(R.styleable.ChartSweepView_labelTemplate, 0));
         setLabelColor(a.getColor(R.styleable.ChartSweepView_labelColor, Color.BLUE));
 
+        mOutlinePaint.setColor(Color.RED);
+        mOutlinePaint.setStrokeWidth(1f);
+        mOutlinePaint.setStyle(Style.STROKE);
+
         a.recycle();
 
         setWillNotDraw(false);
@@ -123,11 +136,11 @@ public class ChartSweepView extends View {
         if (mFollowAxis == VERTICAL) {
             final float targetHeight = mSweep.getIntrinsicHeight() - mSweepPadding.top
                     - mSweepPadding.bottom;
-            return mSweepPadding.top + (targetHeight / 2);
+            return mSweepPadding.top + (targetHeight / 2) + mSweepOffset.y;
         } else {
             final float targetWidth = mSweep.getIntrinsicWidth() - mSweepPadding.left
                     - mSweepPadding.right;
-            return mSweepPadding.left + (targetWidth / 2);
+            return mSweepPadding.left + (targetWidth / 2) + mSweepOffset.x;
         }
     }
 
@@ -195,6 +208,7 @@ public class ChartSweepView extends View {
             paint.density = getResources().getDisplayMetrics().density;
             paint.setCompatibilityScaling(getResources().getCompatibilityInfo().applicationScale);
             paint.setColor(mLabelColor);
+            paint.setShadowLayer(4 * paint.density, 0, 0, Color.BLACK);
 
             mLabelTemplate = new SpannableStringBuilder(template);
             mLabelLayout = new DynamicLayout(
@@ -283,6 +297,26 @@ public class ChartSweepView extends View {
         mValidBeforeDynamic = validBefore;
     }
 
+    /**
+     * Test if given {@link MotionEvent} is closer to another
+     * {@link ChartSweepView} compared to ourselves.
+     */
+    public boolean isTouchCloserTo(MotionEvent eventInParent, ChartSweepView another) {
+        if (another == null) return false;
+
+        if (mFollowAxis == HORIZONTAL) {
+            final float selfDist = Math.abs(eventInParent.getX() - (getX() + getTargetInset()));
+            final float anotherDist = Math.abs(
+                    eventInParent.getX() - (another.getX() + another.getTargetInset()));
+            return anotherDist < selfDist;
+        } else {
+            final float selfDist = Math.abs(eventInParent.getY() - (getY() + getTargetInset()));
+            final float anotherDist = Math.abs(
+                    eventInParent.getY() - (another.getY() + another.getTargetInset()));
+            return anotherDist < selfDist;
+        }
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isEnabled()) return false;
@@ -294,9 +328,18 @@ public class ChartSweepView extends View {
                 // only start tracking when in sweet spot
                 final boolean accept;
                 if (mFollowAxis == VERTICAL) {
-                    accept = event.getX() > getWidth() - (mSweepPadding.right * 2);
+                    accept = event.getX() > getWidth() - (mSweepPadding.right * 3);
                 } else {
-                    accept = event.getY() > getHeight() - (mSweepPadding.bottom * 2);
+                    accept = event.getY() > getHeight() - (mSweepPadding.bottom * 3);
+                }
+
+                final MotionEvent eventInParent = event.copy();
+                eventInParent.offsetLocation(getLeft(), getTop());
+
+                // ignore event when closer to a neighbor
+                if (isTouchCloserTo(eventInParent, mValidAfterDynamic)
+                        || isTouchCloserTo(eventInParent, mValidBeforeDynamic)) {
+                    return false;
                 }
 
                 if (accept) {
@@ -460,6 +503,7 @@ public class ChartSweepView extends View {
             final int templateHeight = mLabelLayout.getHeight();
 
             mSweepOffset.x = 0;
+            mSweepOffset.y = 0;
             mSweepOffset.y = (int) ((templateHeight / 2) - getTargetInset());
             setMeasuredDimension(mSweep.getIntrinsicWidth(), Math.max(sweepHeight, templateHeight));
 
@@ -485,6 +529,23 @@ public class ChartSweepView extends View {
             mMargins.bottom = mSweepPadding.bottom;
         }
 
+        mContentOffset.x = 0;
+        mContentOffset.y = 0;
+
+        // make touch target area larger
+        if (mFollowAxis == HORIZONTAL) {
+            final int widthBefore = getMeasuredWidth();
+            final int widthAfter = widthBefore * 3;
+            setMeasuredDimension(widthAfter, getMeasuredHeight());
+            mContentOffset.offset((widthAfter - widthBefore) / 2, 0);
+        } else {
+            final int heightBefore = getMeasuredHeight();
+            final int heightAfter = heightBefore * 3;
+            setMeasuredDimension(getMeasuredWidth(), heightAfter);
+            mContentOffset.offset(0, (heightAfter - heightBefore) / 2);
+        }
+
+        mSweepOffset.offset(mContentOffset.x, mContentOffset.y);
         mMargins.offset(-mSweepOffset.x, -mSweepOffset.y);
     }
 
@@ -493,9 +554,43 @@ public class ChartSweepView extends View {
         final int width = getWidth();
         final int height = getHeight();
 
+        if (DRAW_OUTLINE) {
+            canvas.drawRect(0, 0, width, height, mOutlinePaint);
+        }
+
+        // when overlapping with neighbor, split difference and push label
+        float margin;
+        float labelOffset = 0;
+        if (mFollowAxis == VERTICAL) {
+            if (mValidAfterDynamic != null) {
+                margin = getLabelTop(mValidAfterDynamic) - getLabelBottom(this);
+                if (margin < 0) {
+                    labelOffset = margin / 2;
+                }
+            } else if (mValidBeforeDynamic != null) {
+                margin = getLabelTop(this) - getLabelBottom(mValidBeforeDynamic);
+                if (margin < 0) {
+                    labelOffset = -margin / 2;
+                }
+            }
+        } else {
+            // TODO: implement horizontal labels
+        }
+
+        // when offsetting label, neighbor probably needs to offset too
+        if (labelOffset != 0) {
+            if (mValidAfterDynamic != null) mValidAfterDynamic.invalidate();
+            if (mValidBeforeDynamic != null) mValidBeforeDynamic.invalidate();
+        }
+
         final int labelSize;
         if (isEnabled() && mLabelLayout != null) {
-            mLabelLayout.draw(canvas);
+            final int count = canvas.save();
+            {
+                canvas.translate(mContentOffset.x, mContentOffset.y + labelOffset);
+                mLabelLayout.draw(canvas);
+            }
+            canvas.restoreToCount(count);
             labelSize = mLabelSize;
         } else {
             labelSize = 0;
@@ -512,4 +607,11 @@ public class ChartSweepView extends View {
         mSweep.draw(canvas);
     }
 
+    public static float getLabelTop(ChartSweepView view) {
+        return view.getY() + view.mContentOffset.y;
+    }
+
+    public static float getLabelBottom(ChartSweepView view) {
+        return getLabelTop(view) + view.mLabelLayout.getHeight();
+    }
 }
