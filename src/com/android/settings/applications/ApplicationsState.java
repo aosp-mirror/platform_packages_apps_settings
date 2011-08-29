@@ -153,6 +153,9 @@ public class ApplicationsState {
         private final Collator sCollator = Collator.getInstance();
         @Override
         public int compare(AppEntry object1, AppEntry object2) {
+            if (object1.info.enabled != object2.info.enabled) {
+                return object1.info.enabled ? -1 : 1;
+            }
             return sCollator.compare(object1.label, object2.label);
         }
     };

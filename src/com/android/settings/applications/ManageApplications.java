@@ -628,10 +628,6 @@ public class ManageApplications extends Fragment implements
                 .setIndicator(getActivity().getString(R.string.filter_apps_third_party),
                         getActivity().getResources().getDrawable(R.drawable.ic_tab_download))
                 .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
-                .setIndicator(getActivity().getString(R.string.filter_apps_all),
-                        getActivity().getResources().getDrawable(R.drawable.ic_tab_all))
-                .setContent(this));
         if (!Environment.isExternalStorageEmulated()) {
             tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
                     .setIndicator(getActivity().getString(R.string.filter_apps_onsdcard),
@@ -641,6 +637,10 @@ public class ManageApplications extends Fragment implements
         tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
                 .setIndicator(getActivity().getString(R.string.filter_apps_running),
                         getActivity().getResources().getDrawable(R.drawable.ic_tab_running))
+                .setContent(this));
+        tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
+                .setIndicator(getActivity().getString(R.string.filter_apps_all),
+                        getActivity().getResources().getDrawable(R.drawable.ic_tab_all))
                 .setContent(this));
         tabHost.setCurrentTabByTag(mDefaultTab);
         tabHost.setOnTabChangedListener(this);
