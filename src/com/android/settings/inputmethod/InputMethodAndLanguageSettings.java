@@ -181,7 +181,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         // Hard keyboard
         if (mHaveHardKeyboard) {
             for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
-                InputMethodPreference chkPref = (InputMethodPreference)
+                CheckBoxPreference chkPref = (CheckBoxPreference)
                         mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i]);
                 chkPref.setChecked(
                         System.getInt(getContentResolver(), sSystemSettingNames[i], 1) > 0);
