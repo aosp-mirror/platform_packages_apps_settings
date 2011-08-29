@@ -21,6 +21,7 @@ import static android.net.NetworkPolicy.SNOOZE_NEVER;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
+import static android.net.NetworkTemplate.MATCH_WIFI;
 import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
 import static android.net.NetworkTemplate.buildTemplateMobile4g;
 import static android.net.NetworkTemplate.buildTemplateMobileAll;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 
 /**
  * Utility class to modify list of {@link NetworkPolicy}. Specifically knows
- * about which policies can coexist.
+ * about which policies can coexist. Not thread safe.
  */
 public class NetworkPolicyEditor {
     // TODO: be more robust when missing policies from service
@@ -53,64 +54,80 @@ public class NetworkPolicyEditor {
     }
 
     public void read() {
+        final NetworkPolicy[] policies;
         try {
-            final NetworkPolicy[] policies = mPolicyService.getNetworkPolicies();
-            mPolicies.clear();
-            for (NetworkPolicy policy : policies) {
-                // TODO: find better place to clamp these
-                if (policy.limitBytes < -1) {
-                    policy.limitBytes = LIMIT_DISABLED;
-                }
-                if (policy.warningBytes < -1) {
-                    policy.warningBytes = WARNING_DISABLED;
-                }
-
-                mPolicies.add(policy);
-            }
+            policies = mPolicyService.getNetworkPolicies();
         } catch (RemoteException e) {
             throw new RuntimeException("problem reading policies", e);
         }
+
+        boolean modified = false;
+        mPolicies.clear();
+        for (NetworkPolicy policy : policies) {
+            // TODO: find better place to clamp these
+            if (policy.limitBytes < -1) {
+                policy.limitBytes = LIMIT_DISABLED;
+                modified = true;
+            }
+            if (policy.warningBytes < -1) {
+                policy.warningBytes = WARNING_DISABLED;
+                modified = true;
+            }
+
+            // drop any WIFI policies that were defined
+            if (policy.template.getMatchRule() == MATCH_WIFI) {
+                modified = true;
+                continue;
+            }
+
+            mPolicies.add(policy);
+        }
+
+        // when we cleaned policies above, write back changes
+        if (modified) writeAsync();
     }
 
     public void writeAsync() {
         // TODO: consider making more robust by passing through service
+        final NetworkPolicy[] policies = mPolicies.toArray(new NetworkPolicy[mPolicies.size()]);
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                write();
+                write(policies);
                 return null;
             }
         }.execute();
     }
 
-    public void write() {
+    public void write(NetworkPolicy[] policies) {
         try {
-            final NetworkPolicy[] policies = mPolicies.toArray(new NetworkPolicy[mPolicies.size()]);
             mPolicyService.setNetworkPolicies(policies);
         } catch (RemoteException e) {
-            throw new RuntimeException("problem reading policies", e);
+            throw new RuntimeException("problem writing policies", e);
         }
     }
 
     public boolean hasLimitedPolicy(NetworkTemplate template) {
-        final NetworkPolicy policy = getPolicy(template, false);
+        final NetworkPolicy policy = getPolicy(template);
         return policy != null && policy.limitBytes != LIMIT_DISABLED;
     }
 
-    public NetworkPolicy getPolicy(NetworkTemplate template, boolean createDefault) {
+    public NetworkPolicy getOrCreatePolicy(NetworkTemplate template) {
+        NetworkPolicy policy = getPolicy(template);
+        if (policy == null) {
+            policy = buildDefaultPolicy(template);
+            mPolicies.add(policy);
+        }
+        return policy;
+    }
+
+    public NetworkPolicy getPolicy(NetworkTemplate template) {
         for (NetworkPolicy policy : mPolicies) {
             if (policy.template.equals(template)) {
                 return policy;
             }
         }
-
-        if (createDefault) {
-            final NetworkPolicy policy = buildDefaultPolicy(template);
-            mPolicies.add(policy);
-            return policy;
-        } else {
-            return null;
-        }
+        return null;
     }
 
     private static NetworkPolicy buildDefaultPolicy(NetworkTemplate template) {
@@ -124,21 +141,21 @@ public class NetworkPolicyEditor {
     }
 
     public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
-        final NetworkPolicy policy = getPolicy(template, true);
+        final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.cycleDay = cycleDay;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
     public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
-        final NetworkPolicy policy = getPolicy(template, true);
+        final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.warningBytes = warningBytes;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
     }
 
     public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {
-        final NetworkPolicy policy = getPolicy(template, true);
+        final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.limitBytes = limitBytes;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
@@ -176,8 +193,8 @@ public class NetworkPolicyEditor {
 
         } else if (beforeSplit && !split) {
             // combine, picking most restrictive policy
-            final NetworkPolicy policy3g = getPolicy(template3g, false);
-            final NetworkPolicy policy4g = getPolicy(template4g, false);
+            final NetworkPolicy policy3g = getPolicy(template3g);
+            final NetworkPolicy policy4g = getPolicy(template4g);
 
             final NetworkPolicy restrictive = policy3g.compareTo(policy4g) < 0 ? policy3g
                     : policy4g;
@@ -190,7 +207,7 @@ public class NetworkPolicyEditor {
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
-            final NetworkPolicy policyAll = getPolicy(templateAll, false);
+            final NetworkPolicy policyAll = getPolicy(templateAll);
             mPolicies.remove(policyAll);
             mPolicies.add(
                     new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,

@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<com.android.settings.widget.DataUsageChartView
+<com.android.settings.widget.ChartDataUsageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:id="@+id/chart"
@@ -56,28 +56,6 @@
         settings:fillColorSecondary="#60ba7f3e" />
 
     <com.android.settings.widget.ChartSweepView
-        android:id="@+id/sweep_warning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        settings:sweepDrawable="@drawable/data_sweep_warning"
-        settings:followAxis="vertical"
-        settings:neighborMargin="40dip"
-        settings:labelSize="60dip"
-        settings:labelTemplate="@string/data_usage_sweep_warning"
-        settings:labelColor="#f7931d" />
-
-    <com.android.settings.widget.ChartSweepView
-        android:id="@+id/sweep_limit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        settings:sweepDrawable="@drawable/data_sweep_limit"
-        settings:followAxis="vertical"
-        settings:neighborMargin="40dip"
-        settings:labelSize="60dip"
-        settings:labelTemplate="@string/data_usage_sweep_limit"
-        settings:labelColor="#c01a2c" />
-
-    <com.android.settings.widget.ChartSweepView
         android:id="@+id/sweep_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -93,4 +71,26 @@
         settings:followAxis="horizontal"
         settings:neighborMargin="5dip" />
 
-</com.android.settings.widget.DataUsageChartView>
+    <com.android.settings.widget.ChartSweepView
+        android:id="@+id/sweep_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        settings:sweepDrawable="@drawable/data_sweep_warning"
+        settings:followAxis="vertical"
+        settings:neighborMargin="5dip"
+        settings:labelSize="60dip"
+        settings:labelTemplate="@string/data_usage_sweep_warning"
+        settings:labelColor="#f7931d" />
+
+    <com.android.settings.widget.ChartSweepView
+        android:id="@+id/sweep_limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        settings:sweepDrawable="@drawable/data_sweep_limit"
+        settings:followAxis="vertical"
+        settings:neighborMargin="5dip"
+        settings:labelSize="60dip"
+        settings:labelTemplate="@string/data_usage_sweep_limit"
+        settings:labelColor="#c01a2c" />
+
+</com.android.settings.widget.ChartDataUsageView>

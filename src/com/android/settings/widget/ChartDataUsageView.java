@@ -27,6 +27,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -37,7 +38,7 @@ import com.android.settings.widget.ChartSweepView.OnSweepListener;
  * Specific {@link ChartView} that displays {@link ChartNetworkSeriesView} along
  * with {@link ChartSweepView} for inspection ranges and warning/limits.
  */
-public class DataUsageChartView extends ChartView {
+public class ChartDataUsageView extends ChartView {
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
@@ -45,6 +46,8 @@ public class DataUsageChartView extends ChartView {
 
     private static final int MSG_UPDATE_AXIS = 100;
     private static final long DELAY_MILLIS = 250;
+
+    private static final boolean LIMIT_SWEEPS_TO_VALID_DATA = false;
 
     private ChartGridView mGrid;
     private ChartNetworkSeriesView mSeries;
@@ -70,15 +73,15 @@ public class DataUsageChartView extends ChartView {
 
     private DataUsageChartListener mListener;
 
-    public DataUsageChartView(Context context) {
+    public ChartDataUsageView(Context context) {
         this(context, null, 0);
     }
 
-    public DataUsageChartView(Context context, AttributeSet attrs) {
+    public ChartDataUsageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public DataUsageChartView(Context context, AttributeSet attrs, int defStyle) {
+    public ChartDataUsageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(new TimeAxis(), new InvertedChartAxis(new DataAxis()));
 
@@ -186,6 +189,7 @@ public class DataUsageChartView extends ChartView {
 
         updateVertAxisBounds(null);
         requestLayout();
+        invalidate();
     }
 
     /**
@@ -194,7 +198,8 @@ public class DataUsageChartView extends ChartView {
      */
     private void updateVertAxisBounds(ChartSweepView activeSweep) {
         final long max = mVertMax;
-        final long newMax;
+
+        long newMax = 0;
         if (activeSweep != null) {
             final int adjustAxis = activeSweep.shouldAdjustAxis();
             if (adjustAxis > 0) {
@@ -206,13 +211,13 @@ public class DataUsageChartView extends ChartView {
             } else {
                 newMax = max;
             }
-
-        } else {
-            // try showing all known data and policy
-            final long maxSweep = Math.max(mSweepWarning.getValue(), mSweepLimit.getValue());
-            final long maxVisible = Math.max(mSeries.getMaxVisible(), maxSweep) * 12 / 10;
-            newMax = Math.max(maxVisible, 2 * GB_IN_BYTES);
         }
+
+        // always show known data and policy lines
+        final long maxSweep = Math.max(mSweepWarning.getValue(), mSweepLimit.getValue());
+        final long maxVisible = Math.max(mSeries.getMaxVisible(), maxSweep) * 12 / 10;
+        final long maxDefault = Math.max(maxVisible, 2 * GB_IN_BYTES);
+        newMax = Math.max(maxDefault, newMax);
 
         // only invalidate when vertMax actually changed
         if (newMax != mVertMax) {
@@ -230,6 +235,16 @@ public class DataUsageChartView extends ChartView {
             // since we just changed axis, make sweep recalculate its value
             if (activeSweep != null) {
                 activeSweep.updateValueFromPosition();
+            }
+
+            // layout other sweeps to match changed axis
+            // TODO: find cleaner way of doing this, such as requesting full
+            // layout and making activeSweep discard its tracking MotionEvent.
+            if (mSweepLimit != activeSweep) {
+                layoutSweep(mSweepLimit);
+            }
+            if (mSweepWarning != activeSweep) {
+                layoutSweep(mSweepWarning);
             }
         }
     }
@@ -346,9 +361,14 @@ public class DataUsageChartView extends ChartView {
         final long validStart = Math.max(visibleStart, getStatsStart());
         final long validEnd = Math.min(visibleEnd, getStatsEnd());
 
-        // prevent time sweeps from leaving valid data
-        mSweepLeft.setValidRange(validStart, validEnd);
-        mSweepRight.setValidRange(validStart, validEnd);
+        if (LIMIT_SWEEPS_TO_VALID_DATA) {
+            // prevent time sweeps from leaving valid data
+            mSweepLeft.setValidRange(validStart, validEnd);
+            mSweepRight.setValidRange(validStart, validEnd);
+        } else {
+            mSweepLeft.setValidRange(visibleStart, visibleEnd);
+            mSweepRight.setValidRange(visibleStart, visibleEnd);
+        }
 
         // default sweeps to last week of data
         final long halfRange = (visibleEnd + visibleStart) / 2;
@@ -424,7 +444,7 @@ public class DataUsageChartView extends ChartView {
             final int tickCount = (int) ((mMax - mMin) / TICK_INTERVAL);
             final float[] tickPoints = new float[tickCount];
             for (int i = 0; i < tickCount; i++) {
-                tickPoints[i] = convertToPoint(mMax - (TICK_INTERVAL * i));
+                tickPoints[i] = convertToPoint(mMax - (TICK_INTERVAL * (i + 1)));
             }
             return tickPoints;
         }
@@ -501,7 +521,14 @@ public class DataUsageChartView extends ChartView {
         /** {@inheritDoc} */
         public float[] getTickPoints() {
             final long range = mMax - mMin;
-            final long tickJump = 256 * MB_IN_BYTES;
+            final long tickJump;
+            if (range < 6 * GB_IN_BYTES) {
+                tickJump = 256 * MB_IN_BYTES;
+            } else if (range < 12 * GB_IN_BYTES) {
+                tickJump = 512 * MB_IN_BYTES;
+            } else {
+                tickJump = 1 * GB_IN_BYTES;
+            }
 
             final int tickCount = (int) (range / tickJump);
             final float[] tickPoints = new float[tickCount];

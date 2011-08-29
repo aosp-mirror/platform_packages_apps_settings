@@ -122,12 +122,13 @@ import android.widget.TextView;
 import com.android.internal.telephony.Phone;
 import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
-import com.android.settings.widget.DataUsageChartView;
-import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
+import com.android.settings.widget.ChartDataUsageView;
+import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.PieChartView;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -195,7 +196,7 @@ public class DataUsageSummary extends Fragment {
     private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
 
-    private DataUsageChartView mChart;
+    private ChartDataUsageView mChart;
     private TextView mUsageSummary;
     private TextView mEmpty;
 
@@ -216,8 +217,7 @@ public class DataUsageSummary extends Fragment {
 
     private NetworkTemplate mTemplate = null;
 
-    private static final int UID_NONE = -1;
-    private int mUid = UID_NONE;
+    private int[] mAppDetailUids = null;
 
     private Intent mAppSettingsIntent;
 
@@ -307,7 +307,7 @@ public class DataUsageSummary extends Fragment {
         mCycleSpinner.setAdapter(mCycleAdapter);
         mCycleSpinner.setOnItemSelectedListener(mCycleListener);
 
-        mChart = (DataUsageChartView) mHeader.findViewById(R.id.chart);
+        mChart = (ChartDataUsageView) mHeader.findViewById(R.id.chart);
         mChart.setListener(mChartListener);
 
         {
@@ -611,8 +611,9 @@ public class DataUsageSummary extends Fragment {
             mTemplate = buildTemplateMobile4g(getActiveSubscriberId(context));
 
         } else if (TAB_WIFI.equals(currentTab)) {
+            // wifi doesn't have any controls
             mDataEnabledView.setVisibility(View.GONE);
-            setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_wifi_limit);
+            mDisableAtLimitView.setVisibility(View.GONE);
             mTemplate = buildTemplateWifi();
 
         } else if (TAB_ETHERNET.equals(currentTab)) {
@@ -649,12 +650,16 @@ public class DataUsageSummary extends Fragment {
     }
 
     private boolean isAppDetailMode() {
-        return mUid != UID_NONE;
+        return mAppDetailUids != null;
+    }
+
+    private int getAppDetailPrimaryUid() {
+        return mAppDetailUids[0];
     }
 
     /**
-     * Update UID details panels to match {@link #mUid}, showing or hiding them
-     * depending on {@link #isAppDetailMode()}.
+     * Update UID details panels to match {@link #mAppDetailUids}, showing or
+     * hiding them depending on {@link #isAppDetailMode()}.
      */
     private void updateAppDetail() {
         final Context context = getActivity();
@@ -681,7 +686,8 @@ public class DataUsageSummary extends Fragment {
         mChart.bindNetworkPolicy(null);
 
         // show icon and all labels appearing under this app
-        final UidDetail detail = resolveDetailForUid(context, mUid);
+        final int primaryUid = getAppDetailPrimaryUid();
+        final UidDetail detail = resolveDetailForUid(context, primaryUid);
         mAppIcon.setImageDrawable(detail.icon);
 
         mAppTitles.removeAllViews();
@@ -695,7 +701,7 @@ public class DataUsageSummary extends Fragment {
 
         // enable settings button when package provides it
         // TODO: target torwards entire UID instead of just first package
-        final String[] packageNames = pm.getPackagesForUid(mUid);
+        final String[] packageNames = pm.getPackagesForUid(primaryUid);
         if (packageNames != null && packageNames.length > 0) {
             mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
             mAppSettingsIntent.setPackage(packageNames[0]);
@@ -709,12 +715,40 @@ public class DataUsageSummary extends Fragment {
             mAppSettings.setEnabled(false);
         }
 
+        updateDetailHistory();
+        updateDetailData();
+
+        if (NetworkPolicyManager.isUidValidForPolicy(context, primaryUid)
+                && !getRestrictBackground() && isBandwidthControlEnabled()) {
+            setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
+            setPreferenceSummary(mAppRestrictView,
+                    getString(R.string.data_usage_app_restrict_background_summary,
+                            buildLimitedNetworksList()));
+
+            mAppRestrictView.setVisibility(View.VISIBLE);
+            mAppRestrict.setChecked(getAppRestrictBackground());
+
+        } else {
+            mAppRestrictView.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Update {@link #mDetailHistory} and related values based on
+     * {@link #mAppDetailUids}.
+     */
+    private void updateDetailHistory() {
         try {
+            mDetailHistoryDefault = null;
+            mDetailHistoryForeground = null;
+
             // load stats for current uid and template
-            mDetailHistoryDefault = mStatsService.getHistoryForUid(
-                    mTemplate, mUid, SET_DEFAULT, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
-            mDetailHistoryForeground = mStatsService.getHistoryForUid(
-                    mTemplate, mUid, SET_FOREGROUND, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
+            for (int uid : mAppDetailUids) {
+                mDetailHistoryDefault = collectHistoryForUid(
+                        uid, SET_DEFAULT, mDetailHistoryDefault);
+                mDetailHistoryForeground = collectHistoryForUid(
+                        uid, SET_FOREGROUND, mDetailHistoryForeground);
+            }
         } catch (RemoteException e) {
             // since we can't do much without history, and we don't want to
             // leave with half-baked UI, we bail hard.
@@ -727,23 +761,24 @@ public class DataUsageSummary extends Fragment {
 
         // bind chart to historical stats
         mChart.bindDetailNetworkStats(mDetailHistory);
+    }
 
-        updateDetailData();
+    /**
+     * Collect {@link NetworkStatsHistory} for the requested UID, combining with
+     * an existing {@link NetworkStatsHistory} if provided.
+     */
+    private NetworkStatsHistory collectHistoryForUid(
+            int uid, int set, NetworkStatsHistory existing)
+            throws RemoteException {
+        final NetworkStatsHistory history = mStatsService.getHistoryForUid(
+                mTemplate, uid, set, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
 
-        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid) && !getRestrictBackground()
-                && isBandwidthControlEnabled()) {
-            setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
-            setPreferenceSummary(mAppRestrictView,
-                    getString(R.string.data_usage_app_restrict_background_summary,
-                            buildLimitedNetworksList()));
-
-            mAppRestrictView.setVisibility(View.VISIBLE);
-            mAppRestrict.setChecked(getAppRestrictBackground());
-
+        if (existing != null) {
+            existing.recordEntireHistory(history);
+            return existing;
         } else {
-            mAppRestrictView.setVisibility(View.GONE);
+            return history;
         }
-
     }
 
     private void setPolicyCycleDay(int cycleDay) {
@@ -764,8 +799,8 @@ public class DataUsageSummary extends Fragment {
         updatePolicy(false);
     }
 
-    private boolean isNetworkPolicyModifiable() {
-        return isBandwidthControlEnabled() && mDataEnabled.isChecked();
+    private boolean isNetworkPolicyModifiable(NetworkPolicy policy) {
+        return policy != null && isBandwidthControlEnabled() && mDataEnabled.isChecked();
     }
 
     private boolean isBandwidthControlEnabled() {
@@ -810,9 +845,10 @@ public class DataUsageSummary extends Fragment {
     }
 
     private boolean getAppRestrictBackground() {
+        final int primaryUid = getAppDetailPrimaryUid();
         final int uidPolicy;
         try {
-            uidPolicy = mPolicyService.getUidPolicy(mUid);
+            uidPolicy = mPolicyService.getUidPolicy(primaryUid);
         } catch (RemoteException e) {
             // since we can't do much without policy, we bail hard.
             throw new RuntimeException("problem reading network policy", e);
@@ -823,9 +859,10 @@ public class DataUsageSummary extends Fragment {
 
     private void setAppRestrictBackground(boolean restrictBackground) {
         if (LOGD) Log.d(TAG, "setAppRestrictBackground()");
+        final int primaryUid = getAppDetailPrimaryUid();
         try {
-            mPolicyService.setUidPolicy(
-                    mUid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
+            mPolicyService.setUidPolicy(primaryUid,
+                    restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
         } catch (RemoteException e) {
             throw new RuntimeException("unable to save policy", e);
         }
@@ -851,8 +888,8 @@ public class DataUsageSummary extends Fragment {
             }
         }
 
-        final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate, true);
-        if (isNetworkPolicyModifiable()) {
+        final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
+        if (isNetworkPolicyModifiable(policy)) {
             mDisableAtLimitView.setVisibility(View.VISIBLE);
             mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
             if (!isAppDetailMode()) {
@@ -912,19 +949,28 @@ public class DataUsageSummary extends Fragment {
             }
 
             // one last cycle entry to modify policy cycle day
-            mCycleAdapter.setChangePossible(isNetworkPolicyModifiable());
+            mCycleAdapter.setChangePossible(isNetworkPolicyModifiable(policy));
         }
 
         if (!hasCycles) {
-            // no valid cycles; show all data
-            // TODO: offer simple ranges like "last week" etc
-            mCycleAdapter.add(new CycleItem(context, historyStart, historyEnd));
+            // no policy defined cycles; show entry for each four-week period
+            long cycleEnd = historyEnd;
+            while (cycleEnd > historyStart) {
+                final long cycleStart = cycleEnd - (DateUtils.WEEK_IN_MILLIS * 4);
+                mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+                cycleEnd = cycleStart;
+            }
+
             mCycleAdapter.setChangePossible(false);
         }
 
         // force pick the current cycle (first item)
-        mCycleSpinner.setSelection(0);
-        mCycleListener.onItemSelected(mCycleSpinner, null, 0, 0);
+        if (mCycleAdapter.getCount() > 0) {
+            mCycleSpinner.setSelection(0);
+            mCycleListener.onItemSelected(mCycleSpinner, null, 0, 0);
+        } else {
+            updateDetailData();
+        }
     }
 
     private OnCheckedChangeListener mDataEnabledListener = new OnCheckedChangeListener() {
@@ -985,8 +1031,10 @@ public class DataUsageSummary extends Fragment {
     private OnItemClickListener mListListener = new OnItemClickListener() {
         /** {@inheritDoc} */
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final Context context = view.getContext();
             final AppUsageItem app = (AppUsageItem) parent.getItemAtPosition(position);
-            AppDetailsFragment.show(DataUsageSummary.this, app.uid);
+            final UidDetail detail = resolveDetailForUid(context, app.uids[0]);
+            AppDetailsFragment.show(DataUsageSummary.this, app.uids, detail.label);
         }
     };
 
@@ -1065,6 +1113,7 @@ public class DataUsageSummary extends Fragment {
             entry = mHistory.getValues(start, end, now, null);
 
             // kick off loader for detailed stats
+            // TODO: delay loader until animation is finished
             getLoaderManager().restartLoader(LOADER_SUMMARY,
                     SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryForAllUid);
         }
@@ -1222,8 +1271,19 @@ public class DataUsageSummary extends Fragment {
     }
 
     private static class AppUsageItem implements Comparable<AppUsageItem> {
-        public int uid;
+        public int[] uids;
         public long total;
+
+        public AppUsageItem(int uid) {
+            uids = new int[] { uid };
+        }
+
+        public void addUid(int uid) {
+            if (contains(uids, uid)) return;
+            final int length = uids.length;
+            uids = Arrays.copyOf(uids, length + 1);
+            uids[length] = uid;
+        }
 
         /** {@inheritDoc} */
         public int compareTo(AppUsageItem another) {
@@ -1244,9 +1304,7 @@ public class DataUsageSummary extends Fragment {
         public void bindStats(NetworkStats stats) {
             mItems.clear();
 
-            final AppUsageItem systemItem = new AppUsageItem();
-            systemItem.uid = android.os.Process.SYSTEM_UID;
-
+            final AppUsageItem systemItem = new AppUsageItem(android.os.Process.SYSTEM_UID);
             final SparseArray<AppUsageItem> knownUids = new SparseArray<AppUsageItem>();
 
             NetworkStats.Entry entry = null;
@@ -1260,8 +1318,7 @@ public class DataUsageSummary extends Fragment {
                 if (isApp || uid == TrafficStats.UID_REMOVED) {
                     AppUsageItem item = knownUids.get(uid);
                     if (item == null) {
-                        item = new AppUsageItem();
-                        item.uid = uid;
+                        item = new AppUsageItem(uid);
                         knownUids.put(uid, item);
                         mItems.add(item);
                     }
@@ -1269,6 +1326,7 @@ public class DataUsageSummary extends Fragment {
                     item.total += entry.rxBytes + entry.txBytes;
                 } else {
                     systemItem.total += entry.rxBytes + entry.txBytes;
+                    systemItem.addUid(uid);
                 }
             }
 
@@ -1293,7 +1351,7 @@ public class DataUsageSummary extends Fragment {
 
         @Override
         public long getItemId(int position) {
-            return mItems.get(position).uid;
+            return mItems.get(position).uids[0];
         }
 
         @Override
@@ -1312,7 +1370,7 @@ public class DataUsageSummary extends Fragment {
                     android.R.id.progress);
 
             final AppUsageItem item = mItems.get(position);
-            final UidDetail detail = resolveDetailForUid(context, item.uid);
+            final UidDetail detail = resolveDetailForUid(context, item.uids[0]);
 
             icon.setImageDrawable(detail.icon);
             title.setText(detail.label);
@@ -1323,7 +1381,6 @@ public class DataUsageSummary extends Fragment {
 
             return convertView;
         }
-
     }
 
     /**
@@ -1331,11 +1388,11 @@ public class DataUsageSummary extends Fragment {
      * {@link DataUsageSummary}.
      */
     public static class AppDetailsFragment extends Fragment {
-        private static final String EXTRA_UID = "uid";
+        private static final String EXTRA_UIDS = "uids";
 
-        public static void show(DataUsageSummary parent, int uid) {
+        public static void show(DataUsageSummary parent, int[] uids, CharSequence label) {
             final Bundle args = new Bundle();
-            args.putInt(EXTRA_UID, uid);
+            args.putIntArray(EXTRA_UIDS, uids);
 
             final AppDetailsFragment fragment = new AppDetailsFragment();
             fragment.setArguments(args);
@@ -1344,6 +1401,7 @@ public class DataUsageSummary extends Fragment {
             final FragmentTransaction ft = parent.getFragmentManager().beginTransaction();
             ft.add(fragment, TAG_APP_DETAILS);
             ft.addToBackStack(TAG_APP_DETAILS);
+            ft.setBreadCrumbTitle(label);
             ft.commit();
         }
 
@@ -1351,7 +1409,7 @@ public class DataUsageSummary extends Fragment {
         public void onStart() {
             super.onStart();
             final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-            target.mUid = getArguments().getInt(EXTRA_UID);
+            target.mAppDetailUids = getArguments().getIntArray(EXTRA_UIDS);
             target.updateBody();
         }
 
@@ -1359,7 +1417,7 @@ public class DataUsageSummary extends Fragment {
         public void onStop() {
             super.onStop();
             final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-            target.mUid = UID_NONE;
+            target.mAppDetailUids = null;
             target.updateBody();
         }
     }
@@ -1441,7 +1499,7 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_CYCLE_DAY = "cycleDay";
 
         public static void show(DataUsageSummary parent) {
-            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate, false);
+            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate);
             final Bundle args = new Bundle();
             args.putInt(CycleEditorFragment.EXTRA_CYCLE_DAY, policy.cycleDay);
 
@@ -1806,5 +1864,14 @@ public class DataUsageSummary extends Fragment {
         final TextView summary = (TextView) parent.findViewById(android.R.id.summary);
         summary.setVisibility(View.VISIBLE);
         summary.setText(string);
+    }
+
+    private static boolean contains(int[] haystack, int needle) {
+        for (int value : haystack) {
+            if (value == needle) {
+                return true;
+            }
+        }
+        return false;
     }
 }
