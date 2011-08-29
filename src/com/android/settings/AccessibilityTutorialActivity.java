@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -659,6 +660,15 @@ public class AccessibilityTutorialActivity extends Activity {
 
         protected void setFinishVisible(boolean visible) {
             mFinish.setVisibility(visible ? VISIBLE : GONE);
+        }
+    }
+
+    /**
+     * Provides a tutorial-specific class name for fired accessibility events.
+     */
+    public static class TutorialTextView extends TextView {
+        public TutorialTextView(Context context, AttributeSet attrs) {
+            super(context, attrs);
         }
     }
 }
