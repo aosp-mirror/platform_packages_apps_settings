@@ -36,6 +36,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
 
     private static final String TAG = "BluetoothPermissionRequest";
     private static final boolean DEBUG = false;
+    private BluetoothDevice mDevice;
 
     public static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
 
@@ -48,15 +49,14 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
         if (action.equals(BluetoothDevice.ACTION_CONNECTION_ACCESS_REQUEST)) {
             LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(context);
             // convert broadcast intent into activity intent (same action string)
-            BluetoothDevice device =
-                intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
             Intent connectionAccessIntent = new Intent(action);
             connectionAccessIntent.setClass(context, BluetoothPermissionActivity.class);
             connectionAccessIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            connectionAccessIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
+            connectionAccessIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
 
-            String deviceAddress = device != null ? device.getAddress() : null;
+            String deviceAddress = mDevice != null ? mDevice.getAddress() : null;
 
             PowerManager powerManager =
                 (PowerManager) context.getSystemService(Context.POWER_SERVICE);
@@ -71,12 +71,13 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 // "Clear All Notifications" button
 
                 Intent deleteIntent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
+                deleteIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         BluetoothDevice.CONNECTION_ACCESS_NO);
 
                 Notification notification = new Notification(android.R.drawable.stat_sys_data_bluetooth,
                     context.getString(R.string.bluetooth_connection_permission_request), System.currentTimeMillis());
-                String deviceName = device != null ? device.getName() : null;
+                String deviceName = mDevice != null ? mDevice.getName() : null;
                 notification.setLatestEventInfo(context,
                     context.getString(R.string.bluetooth_connection_permission_request),
                     context.getString(R.string.bluetooth_connection_notif_message, deviceName),
