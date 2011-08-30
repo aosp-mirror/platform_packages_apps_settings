@@ -77,21 +77,21 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static final int POS_RIGHT = 2;
 
     private static final int[] IND_DRAWABLE_OFF = {
-        R.drawable.appwidget_settings_ind_off_l,
-        R.drawable.appwidget_settings_ind_off_c,
-        R.drawable.appwidget_settings_ind_off_r
+        R.drawable.appwidget_settings_ind_off_l_holo,
+        R.drawable.appwidget_settings_ind_off_c_holo,
+        R.drawable.appwidget_settings_ind_off_r_holo
     };
 
     private static final int[] IND_DRAWABLE_MID = {
-        R.drawable.appwidget_settings_ind_mid_l,
-        R.drawable.appwidget_settings_ind_mid_c,
-        R.drawable.appwidget_settings_ind_mid_r
+        R.drawable.appwidget_settings_ind_mid_l_holo,
+        R.drawable.appwidget_settings_ind_mid_c_holo,
+        R.drawable.appwidget_settings_ind_mid_r_holo
     };
 
     private static final int[] IND_DRAWABLE_ON = {
-        R.drawable.appwidget_settings_ind_on_l,
-        R.drawable.appwidget_settings_ind_on_c,
-        R.drawable.appwidget_settings_ind_on_r
+        R.drawable.appwidget_settings_ind_on_l_holo,
+        R.drawable.appwidget_settings_ind_on_c_holo,
+        R.drawable.appwidget_settings_ind_on_r_holo
     };
 
     /**
@@ -326,8 +326,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         public int getButtonId() { return R.id.img_wifi; }
         public int getIndicatorId() { return R.id.ind_wifi; }
         public int getButtonImageId(boolean on) {
-            return on ? R.drawable.ic_appwidget_settings_wifi_on
-                    : R.drawable.ic_appwidget_settings_wifi_off;
+            return on ? R.drawable.ic_appwidget_settings_wifi_on_holo
+                    : R.drawable.ic_appwidget_settings_wifi_off_holo;
         }
 
         @Override
@@ -409,8 +409,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         public int getButtonId() { return R.id.img_bluetooth; }
         public int getIndicatorId() { return R.id.ind_bluetooth; }
         public int getButtonImageId(boolean on) {
-            return on ? R.drawable.ic_appwidget_settings_bluetooth_on
-                    : R.drawable.ic_appwidget_settings_bluetooth_off;
+            return on ? R.drawable.ic_appwidget_settings_bluetooth_on_holo
+                    : R.drawable.ic_appwidget_settings_bluetooth_off_holo;
         }
 
         @Override
@@ -480,8 +480,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         public int getButtonId() { return R.id.img_gps; }
         public int getIndicatorId() { return R.id.ind_gps; }
         public int getButtonImageId(boolean on) {
-            return on ? R.drawable.ic_appwidget_settings_gps_on
-                    : R.drawable.ic_appwidget_settings_gps_off;
+            return on ? R.drawable.ic_appwidget_settings_gps_on_holo
+                    : R.drawable.ic_appwidget_settings_gps_off_holo;
         }
 
         @Override
@@ -530,8 +530,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         public int getButtonId() { return R.id.img_sync; }
         public int getIndicatorId() { return R.id.ind_sync; }
         public int getButtonImageId(boolean on) {
-            return on ? R.drawable.ic_appwidget_settings_sync_on
-                    : R.drawable.ic_appwidget_settings_sync_off;
+            return on ? R.drawable.ic_appwidget_settings_sync_on_holo
+                    : R.drawable.ic_appwidget_settings_sync_off_holo;
         }
 
         @Override
@@ -669,19 +669,19 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
         if (getBrightnessMode(context)) {
             views.setImageViewResource(R.id.img_brightness,
-                                       R.drawable.ic_appwidget_settings_brightness_auto);
+                                       R.drawable.ic_appwidget_settings_brightness_auto_holo);
             views.setImageViewResource(R.id.ind_brightness,
-                                       R.drawable.appwidget_settings_ind_on_r);
+                                       R.drawable.appwidget_settings_ind_on_r_holo);
         } else if (getBrightness(context)) {
             views.setImageViewResource(R.id.img_brightness,
-                                       R.drawable.ic_appwidget_settings_brightness_on);
+                                       R.drawable.ic_appwidget_settings_brightness_full_holo);
             views.setImageViewResource(R.id.ind_brightness,
-                                       R.drawable.appwidget_settings_ind_on_r);
+                                       R.drawable.appwidget_settings_ind_on_r_holo);
         } else {
             views.setImageViewResource(R.id.img_brightness,
-                                       R.drawable.ic_appwidget_settings_brightness_off);
+                                       R.drawable.ic_appwidget_settings_brightness_off_holo);
             views.setImageViewResource(R.id.ind_brightness,
-                                       R.drawable.appwidget_settings_ind_off_r);
+                                       R.drawable.appwidget_settings_ind_off_r_holo);
         }
     }
 
