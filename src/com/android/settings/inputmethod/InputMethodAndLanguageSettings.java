@@ -110,6 +110,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         // IME
         mIsOnlyImeSettings = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
                 getActivity().getIntent().getAction());
+        getActivity().getIntent().setAction(null);
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mImis = mImm.getInputMethodList();
         createImePreferenceHierarchy((PreferenceGroup)findPreference("keyboard_settings_category"));
