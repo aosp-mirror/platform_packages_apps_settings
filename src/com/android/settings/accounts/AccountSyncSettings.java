@@ -158,8 +158,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         mErrorInfoView = (TextView) rootView.findViewById(R.id.sync_settings_error_info);
         mErrorInfoView.setVisibility(View.GONE);
-        mErrorInfoView.setCompoundDrawablesWithIntrinsicBounds(
-                getResources().getDrawable(R.drawable.ic_list_syncerror), null, null, null);
 
         mUserId = (TextView) rootView.findViewById(R.id.user_id);
         mProviderId = (TextView) rootView.findViewById(R.id.provider_id);

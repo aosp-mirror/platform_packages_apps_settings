@@ -16,17 +16,15 @@
 
 package com.android.settings.accounts;
 
-import com.android.settings.R;
-
+import android.accounts.Account;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
-import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.accounts.Account;
+
+import com.android.settings.R;
+import com.android.settings.widget.AnimatedImageView;
 
 public class SyncStateCheckBoxPreference extends CheckBoxPreference {
 
@@ -59,35 +57,16 @@ public class SyncStateCheckBoxPreference extends CheckBoxPreference {
     @Override
     public void onBindView(View view) {
         super.onBindView(view);
-        ImageView syncActiveView = (ImageView) view.findViewById(R.id.sync_active);
-        View syncPendingView = view.findViewById(R.id.sync_pending);
-        View syncFailedView = view.findViewById(R.id.sync_failed);
+        final AnimatedImageView syncActiveView = (AnimatedImageView) view.findViewById(
+                R.id.sync_active);
+        final View syncFailedView = view.findViewById(R.id.sync_failed);
 
-        syncActiveView.setVisibility(mIsActive ? View.VISIBLE : View.GONE);
-        final AnimationDrawable anim = (AnimationDrawable) syncActiveView.getDrawable();
-        boolean showError;
-        boolean showPending;
-        if (mIsActive) {
-            new Handler(getContext().getMainLooper()).post(new Runnable() {
-                public void run() {
-                    anim.start();
-                }
-            });
-            showPending = false;
-            showError = false;
-        } else {
-            anim.stop();
-            if (mIsPending) {
-                showPending = true;
-                showError = false;
-            } else {
-                showPending = false;
-                showError = mFailed;
-            }
-        }
+        final boolean activeVisible = mIsActive || mIsPending;
+        syncActiveView.setVisibility(activeVisible ? View.VISIBLE : View.GONE);
+        syncActiveView.setAnimating(mIsActive);
 
-        syncFailedView.setVisibility(showError ? View.VISIBLE : View.GONE);
-        syncPendingView.setVisibility((showPending && !mIsActive) ? View.VISIBLE : View.GONE);
+        final boolean failedVisible = mFailed && !activeVisible;
+        syncFailedView.setVisibility(failedVisible ? View.VISIBLE : View.GONE);
 
         View checkBox = view.findViewById(android.R.id.checkbox);
         if (mOneTimeSyncMode) {
