@@ -139,8 +139,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (null == localeList) {
             // The locale list is null if and only if the user dictionary service is
             // not present or disabled. In this case we need to remove the preference.
-            ((PreferenceGroup)findPreference("language_settings_category")).removePreference(
-                    userDictionaryPreference);
+            getPreferenceScreen().removePreference(userDictionaryPreference);
         } else if (localeList.size() <= 1) {
             userDictionaryPreference.setTitle(R.string.user_dict_single_settings_title);
             userDictionaryPreference.setFragment(UserDictionarySettings.class.getName());

@@ -18,23 +18,18 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/language_keyboard_settings_title">
 
-    <PreferenceCategory android:key="language_settings_category"
-            android:title="@string/language_settings_category">
+    <PreferenceScreen
+            android:fragment="com.android.settings.LocalePicker"
+            android:key="phone_language"
+            android:title="@string/phone_language"/>
 
-        <PreferenceScreen
-                 android:fragment="com.android.settings.LocalePicker"
-                 android:key="phone_language"
-                 android:title="@string/phone_language"/>
+    <com.android.settings.inputmethod.SpellCheckersPreference
+            android:key="spellcheckers_settings"
+            android:title="@string/spellcheckers_settings_title"/>
 
-        <!-- User dictionary preference title and fragment will be set programmatically. -->
-        <PreferenceScreen
-                 android:key="key_user_dictionary_settings" />
-
-        <com.android.settings.inputmethod.SpellCheckersPreference
-                 android:key="spellcheckers_settings"
-                 android:title="@string/spellcheckers_settings_title"/>
-
-    </PreferenceCategory>
+    <!-- User dictionary preference title and fragment will be set programmatically. -->
+    <PreferenceScreen
+            android:key="key_user_dictionary_settings" />
 
     <PreferenceCategory android:key="keyboard_settings_category"
             android:title="@string/keyboard_settings_category">
@@ -65,8 +60,8 @@
                 android:persistent="false"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:key="voice_input_category"
-            android:title="@string/voice_input_category" >
+    <PreferenceCategory android:key="voice_category"
+            android:title="@string/voice_category" >
 
         <!-- entries, entryValues, and defaultValue will be populated programmatically. -->
         <ListPreference
@@ -77,10 +72,6 @@
         <!-- An intent for this preference will be populated programmatically. -->
         <PreferenceScreen android:key="recognizer_settings"
                 android:title="@string/recognizer_settings_title" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:key="voice_output_category"
-            android:title="@string/voice_output_category" >
 
         <PreferenceScreen android:key="tts_settings"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
