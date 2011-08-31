@@ -42,7 +42,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -66,7 +65,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
     private final Handler mHandler = new WifiP2pHandler();
     private WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
-    private WifiP2pEnabler mWifiP2pEnabler;
     private WifiP2pDialog mConnectDialog;
     private OnClickListener mConnectListener;
     private OnClickListener mDisconnectListener;
@@ -121,25 +119,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
             Log.e(TAG, "mWifiP2pManager is null !");
         }
 
-        Switch actionBarSwitch = new Switch(activity);
-
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPadding(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-            }
-        }
-
-        mWifiP2pEnabler = new WifiP2pEnabler(activity, actionBarSwitch);
-
         //connect dialog listener
         mConnectListener = new OnClickListener() {
             @Override
@@ -171,9 +150,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         getActivity().registerReceiver(mReceiver, mIntentFilter);
-        if (mWifiP2pEnabler != null) {
-            mWifiP2pEnabler.resume();
-        }
 
         if (mWifiP2pManager != null) mWifiP2pManager.discoverPeers(mChannel);
     }
@@ -181,9 +157,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mWifiP2pEnabler != null) {
-            mWifiP2pEnabler.pause();
-        }
         getActivity().unregisterReceiver(mReceiver);
     }
 
