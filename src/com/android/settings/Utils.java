@@ -290,8 +290,10 @@ public class Utils {
         return telephony != null && telephony.isVoiceCapable();
     }
 
-    public static boolean isWifiOnly() {
-        return "wifi-only".equals(SystemProperties.get("ro.carrier"));
+    public static boolean isWifiOnly(Context context) {
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        return (cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE) == false);
     }
 
     /**

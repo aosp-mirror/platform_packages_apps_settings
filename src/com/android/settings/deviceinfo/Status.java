@@ -194,7 +194,7 @@ public class Status extends PreferenceActivity {
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
         mUptime = findPreference("up_time");
 
-        if (Utils.isWifiOnly()) {
+        if (Utils.isWifiOnly(getApplicationContext())) {
             for (String key : PHONE_RELATED_ENTRIES) {
                 removePreferenceFromScreen(key);
             }
@@ -263,7 +263,7 @@ public class Status extends PreferenceActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!Utils.isWifiOnly()) {
+        if (!Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.registerIntent();
 
             updateSignalStrength();
@@ -281,7 +281,7 @@ public class Status extends PreferenceActivity {
     public void onPause() {
         super.onPause();
 
-        if (!Utils.isWifiOnly()) {
+        if (!Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.unregisterIntent();
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }

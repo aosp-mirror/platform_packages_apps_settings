@@ -713,7 +713,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         addBluetoothUsage(uSecNow);
         addIdleUsage(uSecNow); // Not including cellular idle power
         // Don't compute radio usage if it's a wifi-only device
-        if (!com.android.settings.Utils.isWifiOnly()) {
+        if (!com.android.settings.Utils.isWifiOnly(getActivity())) {
             addRadioUsage(uSecNow);
         }
     }
