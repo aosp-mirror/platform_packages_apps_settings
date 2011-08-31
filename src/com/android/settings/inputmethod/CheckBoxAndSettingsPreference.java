@@ -52,7 +52,7 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
                 new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        onCheckBoxClicked(arg0);
+                        onCheckBoxClicked();
                     }
                 });
         mSetingsButton = (ImageView)view.findViewById(R.id.inputmethod_settings);
@@ -80,7 +80,7 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
         mSettingsIntent = intent;
     }
 
-    protected void onCheckBoxClicked(View view) {
+    protected void onCheckBoxClicked() {
         if (isChecked()) {
             setChecked(false);
         } else {
