@@ -18,10 +18,22 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.textservice.TextServicesManager;
 
 public class SpellCheckersPreference extends CheckBoxAndSettingsPreference {
+    private final TextServicesManager mTsm;
 
     public SpellCheckersPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mTsm = (TextServicesManager) context.getSystemService(
+                Context.TEXT_SERVICES_MANAGER_SERVICE);
+        setChecked(mTsm.isSpellCheckerEnabled());
+    }
+
+    @Override
+    protected void onCheckBoxClicked() {
+        super.onCheckBoxClicked();
+        final boolean checked = isChecked();
+        mTsm.setSpellCheckerEnabled(checked);
     }
 }
