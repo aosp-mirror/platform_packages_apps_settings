@@ -1148,7 +1148,8 @@
                   android:immersive="true"
                   android:launchMode="singleTop"
                   android:theme="@android:style/Theme.Holo.NoActionBar"
-                  android:windowSoftInputMode="stateAlwaysHidden">
+                  android:configChanges="mcc|mnc|keyboard|keyboardHidden|uiMode"
+                  android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
