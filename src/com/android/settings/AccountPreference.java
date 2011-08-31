@@ -112,16 +112,16 @@ public class AccountPreference extends Preference {
         int res;
         switch (status) {
             case SYNC_ENABLED:
-                res = R.drawable.ic_sync_green;
+                res = R.drawable.ic_sync_green_holo;
                 break;
             case SYNC_DISABLED:
-                res = R.drawable.ic_sync_grey;
+                res = R.drawable.ic_sync_grey_holo;
                 break;
             case SYNC_ERROR:
-                res = R.drawable.ic_sync_red;
+                res = R.drawable.ic_sync_red_holo;
                 break;
             default:
-                res = R.drawable.ic_sync_red;
+                res = R.drawable.ic_sync_red_holo;
                 Log.e(TAG, "Unknown sync status: " + status);
         }
         return res;

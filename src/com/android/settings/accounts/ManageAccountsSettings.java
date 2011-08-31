@@ -110,9 +110,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
         mErrorInfoView = (TextView)view.findViewById(R.id.sync_settings_error_info);
         mErrorInfoView.setVisibility(View.GONE);
-        mErrorInfoView.setCompoundDrawablesWithIntrinsicBounds(
-                activity.getResources().getDrawable(R.drawable.ic_list_syncerror),
-                null, null, null);
 
         mAutoSyncCheckbox = (CheckBoxPreference) findPreference(AUTO_SYNC_CHECKBOX_KEY);
 
