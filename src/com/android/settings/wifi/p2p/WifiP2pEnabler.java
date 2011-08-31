@@ -25,21 +25,19 @@ import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 
 /**
  * WifiP2pEnabler is a helper to manage the Wifi p2p on/off
  */
-public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
+public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "WifiP2pEnabler";
 
     private final Context mContext;
-    private Switch mSwitch;
-    private int mWifiP2pState;
+    private final CheckBoxPreference mCheckBox;
     private final IntentFilter mIntentFilter;
     private final Handler mHandler = new WifiP2pHandler();
     private WifiP2pManager mWifiP2pManager;
@@ -57,9 +55,9 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
         }
     };
 
-    public WifiP2pEnabler(Context context, Switch switch_) {
+    public WifiP2pEnabler(Context context, CheckBoxPreference checkBox) {
         mContext = context;
-        mSwitch = switch_;
+        mCheckBox = checkBox;
 
         mWifiP2pManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         if (mWifiP2pManager != null) {
@@ -68,7 +66,7 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");
                 mWifiP2pManager = null;
-                mSwitch.setEnabled(false);
+                mCheckBox.setEnabled(false);
             }
         } else {
             Log.e(TAG, "mWifiP2pManager is null!");
@@ -80,48 +78,39 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
     public void resume() {
         if (mWifiP2pManager == null) return;
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        mSwitch.setOnCheckedChangeListener(this);
+        mCheckBox.setOnPreferenceChangeListener(this);
     }
 
     public void pause() {
         if (mWifiP2pManager == null) return;
         mContext.unregisterReceiver(mReceiver);
-        mSwitch.setOnCheckedChangeListener(null);
+        mCheckBox.setOnPreferenceChangeListener(null);
     }
 
-    public void setSwitch(Switch switch_) {
-        if (mSwitch == switch_) return;
-        mSwitch.setOnCheckedChangeListener(null);
-        mSwitch = switch_;
-        mSwitch.setOnCheckedChangeListener(this);
+    public boolean onPreferenceChange(Preference preference, Object value) {
 
-        mSwitch.setChecked(mWifiP2pState == WifiP2pManager.WIFI_P2P_STATE_ENABLED);
-    }
+        if (mWifiP2pManager == null) return false;
 
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-        if (mWifiP2pManager == null) return;
-
-        if (isChecked) {
+        mCheckBox.setEnabled(false);
+        final boolean enable = (Boolean) value;
+        if (enable) {
             mWifiP2pManager.enableP2p(mChannel);
         } else {
             mWifiP2pManager.disableP2p(mChannel);
         }
+        return false;
     }
 
     private void handleP2pStateChanged(int state) {
-        mSwitch.setEnabled(true);
+        mCheckBox.setEnabled(true);
         switch (state) {
             case WifiP2pManager.WIFI_P2P_STATE_ENABLED:
-                mWifiP2pState = WifiP2pManager.WIFI_P2P_STATE_ENABLED;
-                mSwitch.setChecked(true);
+                mCheckBox.setChecked(true);
                 break;
             case WifiP2pManager.WIFI_P2P_STATE_DISABLED:
-                mWifiP2pState = WifiP2pManager.WIFI_P2P_STATE_DISABLED;
-                mSwitch.setChecked(false);
+                mCheckBox.setChecked(false);
                 break;
             default:
-                mWifiP2pState = WifiP2pManager.WIFI_P2P_STATE_DISABLED;
                 Log.e(TAG,"Unhandled wifi state " + state);
                 break;
         }
@@ -135,10 +124,10 @@ public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
                     //Failure to set up connection
                     Log.e(TAG, "Lost connection with wifi p2p service");
                     mWifiP2pManager = null;
-                    mSwitch.setEnabled(false);
+                    mCheckBox.setEnabled(false);
                     break;
                 case WifiP2pManager.ENABLE_P2P_FAILED:
-                    mSwitch.setEnabled(true);
+                    mCheckBox.setEnabled(true);
                     break;
                 default:
                     //Ignore
