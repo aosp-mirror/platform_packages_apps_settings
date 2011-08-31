@@ -56,7 +56,6 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
-    private static final String WIFI_AP_SETTINGS = "wifi_ap_settings";
     private static final String ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
     private static final String TETHERING_HELP = "tethering_help";
     private static final String USB_HELP_MODIFIER = "usb_";
@@ -115,7 +114,7 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         CheckBoxPreference enableWifiAp =
                 (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
-        Preference wifiApSettings = findPreference(WIFI_AP_SETTINGS);
+        Preference wifiApSettings = findPreference(WIFI_AP_SSID_AND_SECURITY);
         mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
         mBluetoothTether = (CheckBoxPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
         mTetherHelp = (PreferenceScreen) findPreference(TETHERING_HELP);
@@ -135,7 +134,10 @@ public class TetherSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(mUsbTether);
         }
 
-        if (!wifiAvailable) {
+        if (wifiAvailable) {
+            mWifiApEnabler = new WifiApEnabler(activity, enableWifiAp);
+            initWifiTethering();
+        } else {
             getPreferenceScreen().removePreference(enableWifiAp);
             getPreferenceScreen().removePreference(wifiApSettings);
         }
@@ -150,10 +152,7 @@ public class TetherSettings extends SettingsPreferenceFragment
             }
         }
 
-        mWifiApEnabler = new WifiApEnabler(activity, enableWifiAp);
         mView = new WebView(activity);
-
-        initWifiTethering();
     }
 
     private void initWifiTethering() {
@@ -315,7 +314,9 @@ public class TetherSettings extends SettingsPreferenceFragment
         activity.registerReceiver(mTetherChangeReceiver, filter);
 
         if (intent != null) mTetherChangeReceiver.onReceive(activity, intent);
-        mWifiApEnabler.resume();
+        if (mWifiApEnabler != null) {
+            mWifiApEnabler.resume();
+        }
 
         updateState();
     }
@@ -325,7 +326,9 @@ public class TetherSettings extends SettingsPreferenceFragment
         super.onStop();
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTetherChangeReceiver = null;
-        mWifiApEnabler.pause();
+        if (mWifiApEnabler != null) {
+            mWifiApEnabler.pause();
+        }
     }
 
     private void updateState() {
