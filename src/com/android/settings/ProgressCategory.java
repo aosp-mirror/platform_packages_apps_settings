@@ -26,12 +26,13 @@ public class ProgressCategory extends ProgressCategoryBase {
 
     private boolean mProgress = false;
     private Preference mNoDeviceFoundPreference;
+    private boolean mNoDeviceFoundAdded;
 
     public ProgressCategory(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.preference_progress_category);
     }
-    
+
     @Override
     public void onBindView(View view) {
         super.onBindView(view);
@@ -39,21 +40,26 @@ public class ProgressCategory extends ProgressCategoryBase {
         final View progressBar = view.findViewById(R.id.scanning_progress);
 
         textView.setText(mProgress ? R.string.progress_scanning : R.string.progress_tap_to_pair);
-        boolean noDeviceFound = getPreferenceCount() == 0;
+        boolean noDeviceFound = (getPreferenceCount() == 0 ||
+                (getPreferenceCount() == 1 && getPreference(0) == mNoDeviceFoundPreference));
         textView.setVisibility(noDeviceFound ? View.INVISIBLE : View.VISIBLE);
         progressBar.setVisibility(mProgress ? View.VISIBLE : View.INVISIBLE);
 
         if (mProgress) {
-            if (mNoDeviceFoundPreference != null) {
+            if (mNoDeviceFoundAdded) {
                 removePreference(mNoDeviceFoundPreference);
+                mNoDeviceFoundAdded = false;
             }
         } else {
-            if (noDeviceFound) {
+            if (noDeviceFound && !mNoDeviceFoundAdded) {
                 if (mNoDeviceFoundPreference == null) {
                     mNoDeviceFoundPreference = new Preference(getContext());
-                    mNoDeviceFoundPreference.setSummary(R.string.bluetooth_no_devices_found);
+                    mNoDeviceFoundPreference.setLayoutResource(R.layout.preference_empty_list);
+                    mNoDeviceFoundPreference.setTitle(R.string.bluetooth_no_devices_found);
+                    mNoDeviceFoundPreference.setSelectable(false);
                 }
                 addPreference(mNoDeviceFoundPreference);
+                mNoDeviceFoundAdded = true;
             }
         }
     }

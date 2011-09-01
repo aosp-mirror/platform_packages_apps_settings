@@ -99,8 +99,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        mActivityStarted = true;
         super.onActivityCreated(savedInstanceState);
+        mActivityStarted = (savedInstanceState == null);    // don't auto start scan after rotation
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
