@@ -378,7 +378,7 @@ public class BatteryHistoryChart extends View {
         mNumHist = lastInteresting;
         mHaveGps = (aggrStates&HistoryItem.STATE_GPS_ON_FLAG) != 0;
         mHaveWifi = (aggrStates&HistoryItem.STATE_WIFI_RUNNING_FLAG) != 0;
-        if (!com.android.settings.Utils.isWifiOnly()) {
+        if (!com.android.settings.Utils.isWifiOnly(getContext())) {
             mHavePhoneSignal = true;
         }
         if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;

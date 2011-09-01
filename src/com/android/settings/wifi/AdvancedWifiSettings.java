@@ -97,7 +97,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
 
         ListPreference sleepPolicyPref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
         if (sleepPolicyPref != null) {
-            if (Utils.isWifiOnly()) {
+            if (Utils.isWifiOnly(getActivity())) {
                 sleepPolicyPref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
                 sleepPolicyPref.setSummary(R.string.wifi_setting_sleep_policy_summary_wifi_only);
             }

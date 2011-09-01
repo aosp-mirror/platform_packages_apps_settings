@@ -135,7 +135,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         }
 
         // Remove Mobile Network Settings if it's a wifi-only device.
-        if (Utils.isWifiOnly()) {
+        if (Utils.isWifiOnly(getActivity())) {
             getPreferenceScreen().removePreference(findPreference(KEY_MOBILE_NETWORK_SETTINGS));
         }
 
