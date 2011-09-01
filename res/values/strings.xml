@@ -2718,38 +2718,49 @@ found in the list of installed applications.</string>
     <!-- Summary for the allowed state of script injection. [CHAR LIMIT=15] -->
     <string name="accessibility_script_injection_allowed">Allowed</string>
     <!-- Summary for the disallowed state of script injection. [CHAR LIMIT=15] -->
-    <string name="accessibility_script_injection_disallowed">Disallowed</string>
+    <string name="accessibility_script_injection_disallowed">Not allowed</string>
 
     <!-- Title for the dialog button to allow script injection. [CHAR LIMIT=15] -->
     <string name="accessibility_script_injection_button_allow">Allow</string>
     <!-- Title for the dialog button to disallow script injection. [CHAR LIMIT=15] -->
     <string name="accessibility_script_injection_button_disallow">Don\'t Allow</string>
 
-    <!-- Warning message about security implications of enabling an accessibility service,
+     <!-- Title for a warning message about security implications of enabling an accessibility service,
          displayed as a dialog message when the user selects to enable an accessibility service (tablet). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_security_warning">
+    <string name="accessibility_service_security_warning_title">Use
+         <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling an accessibility service,
+         displayed as a dialog message when the user selects to enable an accessibility service (tablet). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_security_warning_summary">
             <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
             collect all of the text you type, except passwords. This includes personal data such as credit card
             numbers. It can also collect data about your interactions with the device.</string>
-    <!-- Title for a warning about disabling accessibility displayed as a dialog message when the user
-         selects to disable accessibility. This avoids accidental disabling. [CHAR LIMIT=30] -->
-    <string name="accessibility_disable_warning_title">Turn accessibility off?</string>
-    <!-- Summary for a warning about disabling accessibility displayed as a dialog message when the user
-         selects to disable accessibility. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_disable_warning_summary">Touching OK will stop spoken
-        descriptions and all other accessibility features you\'ve been using.</string>
+
+    <!-- Title for a warning about disabling an accessibility service displayed as a dialog message when the user
+         selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_disable_warning_title">Stop
+         <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning about disabling accessibility service displayed as a dialog message when the user
+         selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_disable_warning_summary">Touching OK will
+        stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
+
     <!-- Title for the prompt that lets users know that they have no accessibility related apps
          installed and that they can install TalkBack from Market. [CHAR LIMIT=50] -->
-    <string name="accessibility_service_no_apps_title">No accessibility applications
-        </string>
+    <string name="accessibility_service_no_apps_title">No accessibility applications</string>
     <!-- Message for the prompt that lets users know that they have no accessibility related apps
          installed and that they can install TalkBack from Market. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_no_apps_message">You don\'t have accessibility
         applications installed. Do you want to download a screen reader from the Android Market?</string>
+
+    <!-- Title for a warning about downloading accessibility scripts displayed as a dialog message
+         when the user selects to enable script downloading. [CHAR LIMIT=40] -->
+    <string name="accessibility_script_injection_security_warning_title">Install accessibility scripts?</string>
     <!-- Warning message about security implications of downloading accessibility scripts,
          displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_script_injection_security_warning">Do you want applications to install
+    <string name="accessibility_script_injection_security_warning_summary">Do you want applications to install
         scripts from Google that will make their content more accessible?</string>
+
     <!-- Warning message that the interaction model changes on enabling touch exploration. [CHAR LIMIT=NONE] -->
     <string name="accessibility_touch_exploration_warning">This feature changes the
         way your device responds to touch. Turn on?</string>
@@ -2757,6 +2768,7 @@ found in the list of installed applications.</string>
     <string name="accessibility_service_default_description">This accessibility service has no
         description.\n\nAccessibility services provide various types of feedback when you interact
         with the device. </string>
+
     <!-- Accessibility settings: button for lauching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
 
