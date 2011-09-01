@@ -19,10 +19,10 @@
 
 <!-- Status to show on the left side of lock screen -->
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
 >
 
     <com.android.internal.widget.DigitalClock android:id="@+id/time"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textSize="120sp"
+            android:textSize="@dimen/crypt_clock_size"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/crypt_keeper_clock_background"
             android:layout_marginBottom="6dip"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textSize="120sp"
+            android:textSize="@dimen/crypt_clock_size"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/crypt_keeper_clock_foreground"
             android:layout_alignLeft="@*android:id/timeDisplayBackground"
