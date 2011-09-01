@@ -58,7 +58,6 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
     private static final int MSG_RINGER_MODE_CHANGED = 101;
 
     private SeekBarVolumizer [] mSeekBarVolumizer;
-    private boolean mIgnoreVolumeKeys;
 
     // These arrays must all match in length and order
     private static final int[] SEEKBAR_ID = new int[] {
@@ -145,7 +144,6 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
         //setDialogIcon(R.drawable.ic_settings_sound);
 
         mSeekBarVolumizer = new SeekBarVolumizer[SEEKBAR_ID.length];
-        mIgnoreVolumeKeys = !Utils.isVoiceCapable(context);
 
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
@@ -242,11 +240,7 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
             case KeyEvent.KEYCODE_VOLUME_DOWN:
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_VOLUME_MUTE:
-                if (mIgnoreVolumeKeys) {
-                    return true;
-                } else {
-                    return super.onKey(v, keyCode, event);
-                }
+                return true;
             default:
                 return false;
         }
