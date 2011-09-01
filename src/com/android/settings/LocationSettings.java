@@ -101,7 +101,7 @@ public class LocationSettings extends SettingsPreferenceFragment
         }
 
         // Change the summary for wifi-only devices
-        if (Utils.isWifiOnly()) {
+        if (Utils.isWifiOnly(getActivity())) {
             mNetwork.setSummaryOn(R.string.location_neighborhood_level_wifi);
         }
 
