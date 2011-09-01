@@ -563,11 +563,11 @@ public class ManageApplications extends Fragment implements
         if (className.equals(RunningServicesActivity.class.getName())) {
             defaultTabTag = TAB_RUNNING;
         } else if (className.equals(StorageUseActivity.class.getName())
-                || action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
+                || Intent.ACTION_MANAGE_PACKAGE_STORAGE.equals(action)) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
             defaultTabTag = TAB_ALL;
-        } else if (action.equals(Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS)) {
+        } else if (Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS.equals(action)) {
             // Select the all-apps tab, with the default sorting
             defaultTabTag = TAB_ALL;
         }
