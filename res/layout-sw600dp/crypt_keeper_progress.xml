@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:padding="64dip"
     >
         <ImageView
             android:id="@+id/encroid"
@@ -42,8 +43,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="16dip"
+            android:layout_marginRight="16dip"
             android:textSize="30dip"
-            android:textColor="#ff99cc00"
+            android:textColor="@color/title_color"
             android:text="@string/crypt_keeper_setup_title"
             android:gravity="bottom"
         />
@@ -68,8 +70,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/top_divider"
-            android:paddingLeft="152dip"
             android:paddingTop="21dip"
+            android:layout_marginLeft="16dip"
+            android:layout_marginRight="16dip"
             android:textAppearance="?android:attr/textAppearanceMedium"
         />
 
@@ -78,7 +81,6 @@
             android:id="@+id/bottom_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="152dip"
             android:layout_above="@+id/factory_reset"
             android:visibility="gone"
         >
@@ -96,6 +98,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="80dip"
+            android:layout_marginRight="16dip"
             android:text="@string/master_clear_button_text"
             android:visibility="gone"
         />
