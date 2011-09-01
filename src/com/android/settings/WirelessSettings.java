@@ -50,7 +50,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 
-    private static final Boolean WIFI_P2P_DEBUG = false;
+    private static final int WIFI_P2P_DEBUG = SystemProperties.getInt("ro.debuggable", 0);
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -143,13 +143,13 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
         if (!p2p.isP2pSupported()) {
             getPreferenceScreen().removePreference(wifiP2p);
+            getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
         } else {
             mWifiP2pEnabler = new WifiP2pEnabler(activity, wifiP2p);
-        }
-
-        //Settings is used for debug alone
-        if (!WIFI_P2P_DEBUG) {
-            getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
+            //Settings is used for debug alone
+            if (WIFI_P2P_DEBUG == 0) {
+                getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
+            }
         }
 
         // Enable Proxy selector settings if allowed.
