@@ -2491,7 +2491,7 @@ found in the list of installed applications.</string>
     <!-- On Language & keyboard settings screen, heading. Inside the "Language & keyboard settings" screen, this is the header for settings that relate to language (select the system language, user dictionary for the language). -->
     <string name="language_settings_category">Language settings</string>
     <!-- On Language & keyboard settings screen, heading. Inside the "Language & keyboard settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
-    <string name="keyboard_settings_category">Keyboard settings</string>
+    <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
     <string name="phone_language">Select language</string>
     <!-- On Text & language settings screen, setting option name. summary of the setting to take the user to a screen to select the locale. -->
@@ -2522,17 +2522,17 @@ found in the list of installed applications.</string>
     <xliff:g id="ime_application_name">%1$s</xliff:g>.
     Use this input method?</string>
     <!-- On Language & input settings screen, heading. Inside the "Language & input settings" screen, this is the header for settings that relate to mouse and trackpad devices. [CHAR LIMIT=40] -->
-    <string name="pointer_settings_category">Mouse and trackpad settings</string>
+    <string name="pointer_settings_category">Mouse/trackpad</string>
     <!-- On Language & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
 
     <!-- User dictionary settings --><skip />
     <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->
     <string name="user_dict_settings_titlebar">User dictionary</string>
-    <!-- User dictionary settings, The title of the list item to go into the User dictionary settings screen when there is only one user dictionary. -->
-    <string name="user_dict_single_settings_title">User dictionary</string>
-    <!-- User dictionary settings, The title of the list item to go into the User dictionary list when there are several user dictionaries. -->
-    <string name="user_dict_multiple_settings_title">Manage user dictionaries</string>
+    <!-- User dictionary settings, The title of the list item to go into the User dictionary settings screen when there is only one user dictionary. [CHAR LIMIT=35] -->
+    <string name="user_dict_single_settings_title">Personal dictionary</string>
+    <!-- User dictionary settings, The title of the list item to go into the User dictionary list when there are several user dictionaries. [CHAR LIMIT=35] -->
+    <string name="user_dict_multiple_settings_title">Personal dictionaries</string>
     <!-- User dictionary settings.  The summary of the listem item to go into the User dictionary settings screen. -->
     <string name="user_dict_settings_summary">""</string>
     <!-- User dictionary settings. The title of the menu item to add a new word to the user dictionary. -->
@@ -2590,8 +2590,8 @@ found in the list of installed applications.</string>
     <string name="input_methods_settings_title">Text input</string>
     <!-- Setting name for Input Method chooser -->
     <string name="input_method">Input method</string>
-    <!-- Title for selecting the current input method [CHAR LIMIT=35] -->
-    <string name="current_input_method">Current input method</string>
+    <!-- Title for the option to press to choose the current input method [CHAR LIMIT=35] -->
+    <string name="current_input_method">Default</string>
     <!-- Title for setting the visibility of input method selector [CHAR LIMIT=35] -->
     <string name="input_method_selector">Input method selector</string>
     <!-- An option to always show input method selector automatically when needed [CHAR LIMIT=25] -->
@@ -2932,22 +2932,20 @@ found in the list of installed applications.</string>
     <!-- Title of keyboard settings list item within voice input/output settings -->
     <string name="keyboard_settings_title">Android keyboard</string>
     <!-- Title for the 'voice input' category of voice input/output settings -->
-    <string name="voice_input_category">Voice input</string>
-    <!-- Title for the 'voice output' category of voice input/output settings -->
-    <string name="voice_output_category">Voice output</string>
+    <string name="voice_category">Voice</string>
     <!-- Title for the voice recognizer setting in voice input/output settings -->
     <string name="recognizer_title">Voice recognizer</string>
     <!-- Title for the link to settings for the chosen voice recognizer in voice input/output settings -->
-    <string name="recognizer_settings_title">Voice recognizer settings</string>
+    <string name="recognizer_settings_title">Voice input for search</string>
     <!-- Summary for the link to settings for the chosen voice recognizer in voice input/output settings.
          Would say something like, e.g., "Settings for 'Google'". -->
     <string name="recognizer_settings_summary">Settings for \'<xliff:g id="recognizer_name">%s</xliff:g>\'</string>
 
     <!-- Text-To-Speech (TTS) settings --><skip />
-    <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings related to the text-to-speech functionality -->
+    <!-- Name of the TTS package as listed by the package manager. -->
     <string name="tts_settings">Text-to-speech settings</string>
-    <!-- Main TTS Settings screen title -->
-    <string name="tts_settings_title">Text-to-speech settings</string>
+    <!-- TTS option item name in the main settings screen -->
+    <string name="tts_settings_title">Text-to-speech output</string>
     <!-- On main TTS Settings screen, title for toggle used to force use of default TTS settings -->
     <string name="use_default_tts_settings_title">Always use my settings</string>
     <!-- On main TTS Settings screen, summary for toggle used to force use of default TTS settings -->

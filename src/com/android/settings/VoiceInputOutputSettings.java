@@ -51,12 +51,12 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
 
     private static final String TAG = "VoiceInputOutputSettings";
 
-    private static final String KEY_VOICE_INPUT_CATEGORY = "voice_input_category";
+    private static final String KEY_VOICE_CATEGORY = "voice_category";
     private static final String KEY_RECOGNIZER = "recognizer";
     private static final String KEY_RECOGNIZER_SETTINGS = "recognizer_settings";
     
     private PreferenceGroup mParent;
-    private PreferenceCategory mVoiceInputCategory;
+    private PreferenceCategory mVoiceCategory;
     private ListPreference mRecognizerPref;
     private PreferenceScreen mSettingsPref;
     private SettingsPreferenceFragment mFragment;
@@ -70,11 +70,11 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
     public void onCreate() {
 
         mParent = (PreferenceGroup) mFragment.getPreferenceScreen();
-        mVoiceInputCategory = (PreferenceCategory) mParent.findPreference(KEY_VOICE_INPUT_CATEGORY);
-        mRecognizerPref = (ListPreference) mVoiceInputCategory.findPreference(KEY_RECOGNIZER);
+        mVoiceCategory = (PreferenceCategory) mParent.findPreference(KEY_VOICE_CATEGORY);
+        mRecognizerPref = (ListPreference) mVoiceCategory.findPreference(KEY_RECOGNIZER);
         mRecognizerPref.setOnPreferenceChangeListener(this);
         mSettingsPref = (PreferenceScreen)
-                mVoiceInputCategory.findPreference(KEY_RECOGNIZER_SETTINGS);
+                mVoiceCategory.findPreference(KEY_RECOGNIZER_SETTINGS);
 
         mAvailableRecognizersMap = new HashMap<String, ResolveInfo>();
 
@@ -89,11 +89,11 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
         
         if (numAvailable == 0) {
             // No recognizer available - remove all related preferences.
-            mFragment.getPreferenceScreen().removePreference(mVoiceInputCategory);
+            mFragment.getPreferenceScreen().removePreference(mVoiceCategory);
         } else if (numAvailable == 1) {
             // Only one recognizer available, so don't show the list of choices, but do
             // set up the link to settings for the available recognizer.
-            mVoiceInputCategory.removePreference(mRecognizerPref);
+            mVoiceCategory.removePreference(mRecognizerPref);
 
             // But first set up the available recognizers map with just the one recognizer.
             ResolveInfo resolveInfo = availableRecognitionServices.get(0);
@@ -193,7 +193,7 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
             // No settings preference available - hide the preference.
             Log.w(TAG, "no recognizer settings available for " + si.packageName);
             mSettingsPref.setIntent(null);
-            mVoiceInputCategory.removePreference(mSettingsPref);
+            mVoiceCategory.removePreference(mSettingsPref);
         } else {
             Intent i = new Intent(Intent.ACTION_MAIN);
             i.setComponent(new ComponentName(si.packageName, settingsActivity));
