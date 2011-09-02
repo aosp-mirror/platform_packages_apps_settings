@@ -17,6 +17,7 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingLeft="@*android:dimen/preference_item_padding_side"
     android:paddingRight="@*android:dimen/preference_item_padding_side"
     android:paddingTop="8dip"
@@ -27,7 +28,7 @@
         android:id="@android:id/icon"
         android:layout_width="48dip"
         android:layout_height="48dip"
-        android:layout_rowSpan="2"
+        android:layout_rowSpan="3"
         android:layout_marginRight="8dip"
         android:scaleType="centerInside" />
 
@@ -40,7 +41,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@android:id/summary"
+        android:id="@android:id/text1"
         android:layout_marginLeft="8dip"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -53,5 +54,13 @@
         android:max="100"
         android:progressDrawable="@drawable/data_usage_bar"
         style="?android:attr/progressBarStyleHorizontal" />
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="4dip"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </GridLayout>

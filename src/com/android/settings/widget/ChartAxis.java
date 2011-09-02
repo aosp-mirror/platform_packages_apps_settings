@@ -35,8 +35,11 @@ public interface ChartAxis {
     /** Convert screen point into raw value. */
     public long convertToValue(float point);
 
-    /** Build label that describes given raw value. */
-    public void buildLabel(Resources res, SpannableStringBuilder builder, long value);
+    /**
+     * Build label that describes given raw value. If the label is rounded for
+     * display, return the rounded value.
+     */
+    public long buildLabel(Resources res, SpannableStringBuilder builder, long value);
 
     /** Return list of tick points for drawing a grid. */
     public float[] getTickPoints();

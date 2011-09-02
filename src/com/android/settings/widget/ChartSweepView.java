@@ -67,6 +67,7 @@ public class ChartSweepView extends View {
 
     private ChartAxis mAxis;
     private long mValue;
+    private long mLabelValue;
 
     private long mValidAfter;
     private long mValidBefore;
@@ -226,7 +227,7 @@ public class ChartSweepView extends View {
 
     private void invalidateLabel() {
         if (mLabelTemplate != null && mAxis != null) {
-            mAxis.buildLabel(getResources(), mLabelTemplate, mValue);
+            mLabelValue = mAxis.buildLabel(getResources(), mLabelTemplate, mValue);
             invalidate();
         }
     }
@@ -263,6 +264,10 @@ public class ChartSweepView extends View {
 
     public long getValue() {
         return mValue;
+    }
+
+    public long getLabelValue() {
+        return mLabelValue;
     }
 
     public float getPoint() {

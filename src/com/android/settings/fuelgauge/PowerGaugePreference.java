@@ -20,70 +20,46 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
 
 /**
- * Custom preference for displaying power consumption as a bar and an icon on the left for the
- * subsystem/app type.
- *
+ * Custom preference for displaying power consumption as a bar and an icon on
+ * the left for the subsystem/app type.
  */
 public class PowerGaugePreference extends Preference {
-
-    private Drawable mIcon;
-    private PercentageBar mGauge;
-    private double mValue;
     private BatterySipper mInfo;
-    private double mPercent;
+    private int mProgress;
+    private CharSequence mProgressText;
 
     public PowerGaugePreference(Context context, Drawable icon, BatterySipper info) {
         super(context);
-        setLayoutResource(R.layout.preference_powergauge);
-        mIcon = icon;
-        mGauge = new PercentageBar();
-        mGauge.bar = context.getResources().getDrawable(R.drawable.app_gauge);
+        setLayoutResource(R.layout.app_percentage_item);
+        setIcon(icon);
         mInfo = info;
     }
 
-    /**
-     * Sets the width of the gauge in percentage (0 - 100)
-     * @param percent
-     */
-    void setGaugeValue(double percent) {
-        mValue = percent;
-        mGauge.percent = mValue;
-    }
-
-    void setPercent(double percent) {
-        mPercent = percent;
+    public void setPercent(double percentOfMax, double percentOfTotal) {
+        mProgress = (int) Math.ceil(percentOfMax);
+        mProgressText = getContext().getResources().getString(
+                R.string.percentage, (int) Math.ceil(percentOfTotal));
+        notifyChanged();
     }
 
     BatterySipper getInfo() {
         return mInfo;
     }
 
-    void setPowerIcon(Drawable icon) {
-        mIcon = icon;
-        notifyChanged();
-    }
-
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
 
-        ImageView appIcon = (ImageView) view.findViewById(R.id.appIcon);
-        if (mIcon == null) {
-            mIcon = getContext().getResources().getDrawable(android.R.drawable.sym_def_app_icon);
-        }
-        appIcon.setImageDrawable(mIcon);
+        final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
+        progress.setProgress(mProgress);
 
-        ImageView appGauge = (ImageView) view.findViewById(R.id.appGauge);
-        appGauge.setImageDrawable(mGauge);
-
-        TextView percentView = (TextView) view.findViewById(R.id.percent);
-        percentView.setText((int) (Math.ceil(mPercent)) + "%");
+        final TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+        text1.setText(mProgressText);
     }
-
 }
