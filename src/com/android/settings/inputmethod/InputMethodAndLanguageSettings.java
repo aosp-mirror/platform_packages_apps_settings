@@ -141,8 +141,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // not present or disabled. In this case we need to remove the preference.
             getPreferenceScreen().removePreference(userDictionaryPreference);
         } else if (localeList.size() <= 1) {
+            final Intent intent =
+                    new Intent(UserDictionaryList.USER_DICTIONARY_SETTINGS_INTENT_ACTION);
             userDictionaryPreference.setTitle(R.string.user_dict_single_settings_title);
-            userDictionaryPreference.setFragment(UserDictionarySettings.class.getName());
+            userDictionaryPreference.setIntent(intent);
             // If the size of localeList is 0, we don't set the locale parameter in the
             // extras. This will be interpreted by the UserDictionarySettings class as
             // meaning "the current locale".
