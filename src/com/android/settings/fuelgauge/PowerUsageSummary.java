@@ -23,7 +23,6 @@ import android.content.IntentFilter;
 import android.hardware.SensorManager;
 import android.os.BatteryStats;
 import android.os.BatteryStats.Uid;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -382,12 +381,11 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             final double percentOfTotal =  ((sipper.getSortValue() / mTotalPower) * 100);
             if (percentOfTotal < 1) continue;
             PowerGaugePreference pref = new PowerGaugePreference(getActivity(), sipper.getIcon(), sipper);
-            double percentOfMax = (sipper.getSortValue() * 100) / mMaxPower;
+            final double percentOfMax = (sipper.getSortValue() * 100) / mMaxPower;
             sipper.percent = percentOfTotal;
             pref.setTitle(sipper.name);
-            pref.setPercent(percentOfTotal);
             pref.setOrder(Integer.MAX_VALUE - (int) sipper.getSortValue()); // Invert the order
-            pref.setGaugeValue(percentOfMax);
+            pref.setPercent(percentOfMax, percentOfTotal);
             if (sipper.uidObj != null) {
                 pref.setKey(Integer.toString(sipper.uidObj.getUid()));
             }
@@ -771,8 +769,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                             (PowerGaugePreference) findPreference(
                                     Integer.toString(bs.uidObj.getUid()));
                     if (pgp != null) {
-                        pgp.setPowerIcon(bs.icon);
-                        pgp.setPercent(bs.percent);
+                        pgp.setIcon(bs.icon);
                         pgp.setTitle(bs.name);
                     }
                     break;

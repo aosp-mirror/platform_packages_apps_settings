@@ -27,7 +27,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -334,11 +333,11 @@ public class ChartDataUsageView extends ChartView {
     }
 
     public long getWarningBytes() {
-        return mSweepWarning.getValue();
+        return mSweepWarning.getLabelValue();
     }
 
     public long getLimitBytes() {
-        return mSweepLimit.getValue();
+        return mSweepLimit.getLabelValue();
     }
 
     private long getStatsStart() {
@@ -433,9 +432,10 @@ public class ChartDataUsageView extends ChartView {
         }
 
         /** {@inheritDoc} */
-        public void buildLabel(Resources res, SpannableStringBuilder builder, long value) {
+        public long buildLabel(Resources res, SpannableStringBuilder builder, long value) {
             // TODO: convert to better string
             builder.replace(0, builder.length(), Long.toString(value));
+            return value;
         }
 
         /** {@inheritDoc} */
@@ -493,16 +493,19 @@ public class ChartDataUsageView extends ChartView {
         private static final Object sSpanUnit = new Object();
 
         /** {@inheritDoc} */
-        public void buildLabel(Resources res, SpannableStringBuilder builder, long value) {
+        public long buildLabel(Resources res, SpannableStringBuilder builder, long value) {
 
-            float result = value;
             final CharSequence unit;
+            float result = value;
+            long labelValue = 1;
             if (result <= 100 * MB_IN_BYTES) {
                 unit = res.getText(com.android.internal.R.string.megabyteShort);
                 result /= MB_IN_BYTES;
+                labelValue = MB_IN_BYTES;
             } else {
                 unit = res.getText(com.android.internal.R.string.gigabyteShort);
                 result /= GB_IN_BYTES;
+                labelValue = GB_IN_BYTES;
             }
 
             final CharSequence size;
@@ -511,11 +514,14 @@ public class ChartDataUsageView extends ChartView {
             } else {
                 size = String.format("%.0f", result);
             }
+            labelValue *= Float.parseFloat(size.toString());
 
             final int[] sizeBounds = findOrCreateSpan(builder, sSpanSize, "^1");
             builder.replace(sizeBounds[0], sizeBounds[1], size);
             final int[] unitBounds = findOrCreateSpan(builder, sSpanUnit, "^2");
             builder.replace(unitBounds[0], unitBounds[1], unit);
+
+            return labelValue;
         }
 
         /** {@inheritDoc} */

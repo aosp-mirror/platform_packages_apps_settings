@@ -153,7 +153,8 @@ public class DataUsageSummary extends Fragment {
     private static final String TAB_WIFI = "wifi";
     private static final String TAB_ETHERNET = "ethernet";
 
-    private static final String TAG_CONFIRM_ROAMING = "confirmRoaming";
+    private static final String TAG_CONFIRM_DATA_DISABLE = "confirmDataDisable";
+    private static final String TAG_CONFIRM_DATA_ROAMING = "confirmDataRoaming";
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
@@ -485,6 +486,7 @@ public class DataUsageSummary extends Fragment {
             final LayoutTransition chartTransition = buildLayoutTransition();
             chartTransition.setStartDelay(LayoutTransition.APPEARING, 0);
             chartTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0);
+            chartTransition.setAnimator(LayoutTransition.DISAPPEARING, null);
             mChart.setLayoutTransition(chartTransition);
         }
     };
@@ -595,7 +597,6 @@ public class DataUsageSummary extends Fragment {
         if (TAB_MOBILE.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_mobile_limit);
-            mDataEnabled.setChecked(mConnService.getMobileDataEnabled());
             mTemplate = buildTemplateMobileAll(getActiveSubscriberId(context));
 
         } else if (TAB_3G.equals(currentTab)) {
@@ -799,6 +800,28 @@ public class DataUsageSummary extends Fragment {
         updatePolicy(false);
     }
 
+    /**
+     * Local cache of value, used to work around delay when
+     * {@link ConnectivityManager#setMobileDataEnabled(boolean)} is async.
+     */
+    private Boolean mMobileDataEnabled;
+
+    private boolean isMobileDataEnabled() {
+        if (mMobileDataEnabled != null) {
+            // TODO: deprecate and remove this once enabled flag is on policy
+            return mMobileDataEnabled;
+        } else {
+            return mConnService.getMobileDataEnabled();
+        }
+    }
+
+    private void setMobileDataEnabled(boolean enabled) {
+        if (LOGD) Log.d(TAG, "setMobileDataEnabled()");
+        mConnService.setMobileDataEnabled(enabled);
+        mMobileDataEnabled = enabled;
+        updatePolicy(false);
+    }
+
     private boolean isNetworkPolicyModifiable(NetworkPolicy policy) {
         return policy != null && isBandwidthControlEnabled() && mDataEnabled.isChecked();
     }
@@ -886,6 +909,13 @@ public class DataUsageSummary extends Fragment {
             if (!refreshCycle) {
                 updateDetailData();
             }
+        }
+
+        // TODO: move enabled state directly into policy
+        if (TAB_MOBILE.equals(mCurrentTab)) {
+            mBinding = true;
+            mDataEnabled.setChecked(isMobileDataEnabled());
+            mBinding = false;
         }
 
         final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
@@ -979,15 +1009,18 @@ public class DataUsageSummary extends Fragment {
             if (mBinding) return;
 
             final boolean dataEnabled = isChecked;
-            mDataEnabled.setChecked(dataEnabled);
-
             final String currentTab = mCurrentTab;
             if (TAB_MOBILE.equals(currentTab)) {
-                mConnService.setMobileDataEnabled(dataEnabled);
+                if (dataEnabled) {
+                    setMobileDataEnabled(true);
+                } else {
+                    // disabling data; show confirmation dialog which eventually
+                    // calls setMobileDataEnabled() once user confirms.
+                    ConfirmDataDisableFragment.show(DataUsageSummary.this);
+                }
             }
 
-            // rebind policy to match radio state
-            updatePolicy(true);
+            updatePolicy(false);
         }
     };
 
@@ -1358,14 +1391,14 @@ public class DataUsageSummary extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.data_usage_item, parent, false);
+                        R.layout.app_percentage_item, parent, false);
             }
 
             final Context context = parent.getContext();
 
             final ImageView icon = (ImageView) convertView.findViewById(android.R.id.icon);
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
-            final TextView summary = (TextView) convertView.findViewById(android.R.id.summary);
+            final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
             final ProgressBar progress = (ProgressBar) convertView.findViewById(
                     android.R.id.progress);
 
@@ -1374,7 +1407,7 @@ public class DataUsageSummary extends Fragment {
 
             icon.setImageDrawable(detail.icon);
             title.setText(detail.label);
-            summary.setText(Formatter.formatFileSize(context, item.total));
+            text1.setText(Formatter.formatFileSize(context, item.total));
 
             final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
             progress.setProgress(percentTotal);
@@ -1545,6 +1578,38 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
+     * Dialog to request user confirmation before disabling data.
+     */
+    public static class ConfirmDataDisableFragment extends DialogFragment {
+        public static void show(DataUsageSummary parent) {
+            final ConfirmDataDisableFragment dialog = new ConfirmDataDisableFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_DATA_DISABLE);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(R.string.data_usage_disable_mobile);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                    if (target != null) {
+                        // TODO: extend to modify policy enabled flag.
+                        target.setMobileDataEnabled(false);
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    /**
      * Dialog to request user confirmation before setting
      * {@link Settings.Secure#DATA_ROAMING}.
      */
@@ -1552,7 +1617,7 @@ public class DataUsageSummary extends Fragment {
         public static void show(DataUsageSummary parent) {
             final ConfirmDataRoamingFragment dialog = new ConfirmDataRoamingFragment();
             dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_ROAMING);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_DATA_ROAMING);
         }
 
         @Override

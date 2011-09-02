@@ -52,8 +52,8 @@ public class InvertedChartAxis implements ChartAxis {
     }
 
     /** {@inheritDoc} */
-    public void buildLabel(Resources res, SpannableStringBuilder builder, long value) {
-        mWrapped.buildLabel(res, builder, value);
+    public long buildLabel(Resources res, SpannableStringBuilder builder, long value) {
+        return mWrapped.buildLabel(res, builder, value);
     }
 
     /** {@inheritDoc} */

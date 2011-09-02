@@ -41,6 +41,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.DisplaySettings;
@@ -116,7 +117,6 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     private ViewGroup mControlsParent;
     private long mStartTime;
     private DrainType mDrainType;
-    private PercentageBar mGauge;
     private Drawable mAppIcon;
     private double mNoCoverage; // Percentage of time that there was no coverage
 
@@ -181,30 +181,29 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         }
 
         // Set the description
-        String summary = getDescriptionForDrainType();
-        ((TextView)mRootView.findViewById(R.id.summary)).setText(summary);
-        
+        final TextView summary = (TextView) mRootView.findViewById(android.R.id.summary);
+        summary.setText(getDescriptionForDrainType());
+        summary.setVisibility(View.VISIBLE);
+
         mTypes = args.getIntArray(EXTRA_DETAIL_TYPES);
         mValues = args.getDoubleArray(EXTRA_DETAIL_VALUES);
 
-        mTitleView = (TextView)mRootView.findViewById(R.id.name);
+        mTitleView = (TextView) mRootView.findViewById(android.R.id.title);
         mTitleView.setText(mTitle);
-        ((TextView)mRootView.findViewById(R.id.battery_percentage))
-            .setText(String.format("%d%%", percentage));
+
+        final TextView text1 = (TextView)mRootView.findViewById(android.R.id.text1);
+        text1.setText(getString(R.string.percentage, percentage));
 
         mTwoButtonsPanel = (ViewGroup)mRootView.findViewById(R.id.two_buttons_panel);
         mForceStopButton = (Button)mRootView.findViewById(R.id.left_button);
         mReportButton = (Button)mRootView.findViewById(R.id.right_button);
         mForceStopButton.setEnabled(false);
-        
-        ImageView gaugeImage = (ImageView)mRootView.findViewById(R.id.gauge);
-        mGauge = new PercentageBar();
-        mGauge.percent = gaugeValue;
-        mGauge.bar = getResources().getDrawable(R.drawable.app_gauge);
-        gaugeImage.setImageDrawable(mGauge);
 
-        ImageView iconImage = (ImageView)mRootView.findViewById(R.id.icon);
-        iconImage.setImageDrawable(mAppIcon);
+        final ProgressBar progress = (ProgressBar) mRootView.findViewById(android.R.id.progress);
+        progress.setProgress(gaugeValue);
+
+        final ImageView icon = (ImageView) mRootView.findViewById(android.R.id.icon);
+        icon.setImageDrawable(mAppIcon);
 
         mDetailsParent = (ViewGroup)mRootView.findViewById(R.id.details);
         mControlsParent = (ViewGroup)mRootView.findViewById(R.id.controls);
