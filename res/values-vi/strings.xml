@@ -465,13 +465,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Cho nhạc và phương tiện"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Nhớ cài đặt"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="zeroclick_settings_title" msgid="6111073171447659136">"ShareTap"</string>
-    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <string name="zeroclick_on_summary" msgid="3157018760403281266">"Bật"</string>
-    <string name="zeroclick_off_summary" msgid="2896320184904157018">"Tắt"</string>
-    <string name="zeroclick_label" msgid="263279563746672463">"ShareTap"</string>
-    <string name="zeroclick_explained" msgid="3676026098073094212">"Chia sẻ nội dung bằng cách chạm vào hai thiết bị hỗ trợ NFC liên tiếp."</string>
-    <string name="zeroclick_top" msgid="8405284328201668102">"Ứng dụng trên màn hình của thiết bị đầu gửi nội dung tới thiết bị cuối."\n\n"Dữ liệu của bạn an toàn: không có dữ liệu nào bị chia sẻ trừ khi cả hai thiết bị đều được bật và mở khóa."\n\n"Bạn có thể tắt tính năng này trong Cài đặt &gt; Khác &gt; ShareTap."</string>
+    <string name="ndef_push_settings_title" msgid="7096910206093746606">"ShareTap"</string>
+    <string name="ndef_push_settings_summary" msgid="8205304119235885812"></string>
+    <string name="ndef_push_on_summary" msgid="1493927094678614793">"Bật"</string>
+    <string name="ndef_push_off_summary" msgid="2112211912532524478">"Tắt"</string>
+    <string name="ndef_push_label" msgid="6216995559457479606">"ShareTap"</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"Chia sẻ nội dung bằng cách chạm vào hai thiết bị hỗ trợ NFC liên tiếp."</string>
+    <string name="ndef_push_top" msgid="8112767699009558636">"Ứng dụng trên màn hình của thiết bị đầu gửi nội dung tới thiết bị cuối."\n\n"Dữ liệu của bạn an toàn: không có dữ liệu nào bị chia sẻ trừ khi cả hai thiết bị đều bật và mở khóa."\n\n"Bạn có thể tắt tính năng này trong Cài đặt &gt; Khác &gt; ShareTap."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Bật Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -485,8 +485,8 @@
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Không thể quét mạng"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Thông báo mạng"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Thông báo cho tôi khi mạng mở khả dụng"</string>
-    <!-- outdated translation 4723544454066601706 -->     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Kiểm tra kết nối Wi-Fi"</string>
-    <!-- outdated translation 8687400936839455926 -->     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Phát hiện và quản lý sự cố kết nối mạng có thể xảy ra"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Tránh kết nối kém"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Không sử dụng mạng Wi-Fi trừ khi mạng này có kết nối internet tốt"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Chính sách ngắt kết nối Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Chỉ định thời điểm sẽ chuyển từ Wi-Fi sang dữ liệu di động"</string>
     <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Chỉ rõ thời điểm ngắt kết nối Wi-Fi"</string>
@@ -525,7 +525,7 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(không xác định)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Đã lưu"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Đã tắt"</string>
-    <!-- outdated translation 7192323081514322537 -->     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Đã tránh kết nối kém"</string>
+    <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Đã tránh kết nối internet kém"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Sự cố xác thực"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Ngoài vùng phủ sóng"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Có WPS"</string>
@@ -1051,8 +1051,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Ngôn ngữ &amp; phương thức nhập"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Ngôn ngữ &amp; phương thức nhập"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Cài đặt ngôn ngữ"</string>
-    <string name="keyboard_settings_category" msgid="7060453865544070642">"Cài đặt bàn phím"</string>
-    <string name="phone_language" msgid="1165758957501090679">"Chọn ngôn ngữ"</string>
+    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Cài đặt bàn phím"</string>
+    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Chọn ngôn ngữ"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Tự động thay thế"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Sửa từ bị đánh sai"</string>
@@ -1064,19 +1064,18 @@
     <string name="show_password" msgid="3001113966880559611">"Hiển thị mật khẩu"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Phương thức nhập này có thể thu thập tất cả văn bản bạn nhập, bao gồm dữ liệu cá nhân như mật khẩu và số thẻ tín dụng. Phương thức nhập này xuất phát từ ứng dụng <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Sử dụng phương thức nhập này?"</string>
-    <string name="pointer_settings_category" msgid="6090176550039035130">"Cài đặt chuột và ô di chuột"</string>
+    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Cài đặt chuột và ô di chuột"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Tốc độ con trỏ"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Từ điển người dùng"</string>
-    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Từ điển người dùng"</string>
-    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Quản lý từ điển người dùng"</string>
+    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Từ điển người dùng"</string>
+    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Quản lý từ điển người dùng"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Thêm"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Thêm vào từ điển"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Chỉnh sửa từ"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Chỉnh sửa"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Xoá"</string>
-    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Bạn không có bất kỳ từ nào trong từ điển người dùng. Bạn có thể thêm từ bằng cách chạm vào nút Thêm ( + )."</string>
-    <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Bạn không có từ nào trong từ điển người dùng. Bạn có thể thêm từ qua trình đơn."</string>
+    <string name="user_dict_settings_empty_text" msgid="1766522102636921529">"Bạn không có bất kỳ từ nào trong từ điển người dùng. Bạn có thể thêm từ bằng cách chạm vào nút Thêm ( + )."</string>
     <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"Tất cả ngôn ngữ"</string>
     <string name="testing" msgid="6584352735303604146">"Đang kiểm tra"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Thông tin về máy tính bảng"</string>
@@ -1095,7 +1094,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Lối tắt"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Nhập văn bản"</string>
     <string name="input_method" msgid="5434026103176856164">"Phương thức nhập"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"Phương pháp nhập liệu hiện tại"</string>
+    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Phương pháp nhập liệu hiện tại"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Bộ chọn phương thức nhập"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Tự động"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Luôn hiển thị"</string>
@@ -1147,15 +1146,23 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Bật"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Tắt"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Được phép"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="5156785826922460983">"Không được phép"</string>
+    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Không được phép"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Cho phép"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Không cho phép"</string>
-    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> có thể thu thập tất cả văn bản bạn nhập, ngoại trừ mật khẩu, bao gồm dữ liệu cá nhân như số thẻ tín dụng. Dịch vụ này cũng có thể thu thập dữ liệu về tương tác của bạn với thiết bị."</string>
-    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"Tắt tính năng hỗ trợ truy cập?"</string>
-    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"Chạm OK sẽ dừng mô tả bằng tiếng nói và tất cả tính năng truy cập khác mà bạn đang sử dụng."</string>
+    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
+    <skip />
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Không có ứng dụng hỗ trợ truy cập nào"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Bạn chưa cài đặt các ứng dụng truy cập. Bạn có muốn tải xuống trình đọc màn hình từ Android Market không?"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Bạn có muốn các ứng dụng cài đặt các tập lệnh từ Google làm cho nội dung của chúng dễ truy cập hơn không?"</string>
+    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
+    <skip />
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Tính năng này thay đổi cách thiết bị của bạn phải hồi với tác vụ chạm. Bật?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Dịch vụ hỗ trợ truy cập này không có mô tả nào."\n\n"Dịch vụ hỗ trợ truy cập cung cấp nhiều loại phản hồi khi bạn tương tác với thiết bị."</string>
     <string name="settings_button" msgid="3006713718908152930">"Cài đặt"</string>
@@ -1236,13 +1243,13 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Cài đặt nhập liệu bằng giọng nói &amp; đầu ra bằng giọng nói"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Tìm kiếm bằng giọng nói"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Bàn phím Android"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Nhập liệu bằng giọng nói"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Đầu ra bằng giọng nói"</string>
+    <!-- no translation found for voice_category (4730605956740531248) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"Trình nhận dạng giọng nói"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Cài đặt trình nhận dạng giọng nói"</string>
+    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Cài đặt trình nhận dạng giọng nói"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Cài đặt cho \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Cài đặt chuyển văn bản thành giọng nói"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Cài đặt chuyển văn bản thành giọng nói"</string>
+    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Cài đặt chuyển văn bản thành giọng nói"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Luôn sử dụng cài đặt của tôi"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Cài đặt mặc định dưới đây sẽ ghi đè cài đặt ứng dụng"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Cài đặt mặc định"</string>
@@ -1277,12 +1284,9 @@
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"Nam"</string>
     <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Công cụ tổng hợp tiếng nói đã cài đặt"</string>
     <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Bật công cụ mới trước khi sử dụng"</string>
-    <!-- no translation found for tts_engine_settings_button (1030512042040722285) -->
-    <skip />
-    <!-- no translation found for tts_engine_preference_section_title (448294500990971413) -->
-    <skip />
-    <!-- no translation found for tts_general_section_title (4402572014604490502) -->
-    <skip />
+    <string name="tts_engine_settings_button" msgid="1030512042040722285">"Cài đặt khởi chạy công cụ"</string>
+    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Công cụ ưu tiên"</string>
+    <string name="tts_general_section_title" msgid="4402572014604490502">"Chung"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Kiểm soát Nguồn điện"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Đang cập nhật cài đặt Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Đang cập nhật cài đặt Bluetooth"</string>
@@ -1322,7 +1326,7 @@
     <string name="auto_restore_summary" msgid="83177150536734378">"Nếu tôi cài đặt lại ứng dụng, hãy khôi phục cài đặt hoặc dữ liệu khác đã được sao lưu"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"MK sao lưu của m.tính"</string>
     <string name="local_backup_password_summary_none" msgid="9189890994730711939">"Sao lưu toàn bộ tới máy tính hiện không được bảo vệ."</string>
-    <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Chọn để thay đổi hoặc xóa mật khẩu dành cho sao lưu toàn bộ tới máy tính"</string>
+    <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Chọn để thay đổi hoặc xóa mật khẩu dành cho bộ sao lưu toàn bộ tới máy tính"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Sao lưu"</string>
     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Bạn có chắc chắn muốn dừng sao lưu mật khẩu Wi-Fi, dấu trang và dữ liệu ứng dụng và cài đặt khác của mình và xóa tất cả bản sao trên các máy chủ Google không?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Cài đặt quản trị viên thiết bị"</string>
@@ -1426,6 +1430,8 @@
     <string name="strict_mode_summary" msgid="142834318897332338">"Màn hình flash khi ứng dụng thực hiện các hoạt động dài trên chuỗi chính"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Vị trí con trỏ"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Lớp phủ màn hình hiển thị dữ liệu chạm hiện tại"</string>
+    <string name="show_touches" msgid="1356420386500834339">"Hiển thị số lần chạm"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Hiển thị phản hồi trực quan cho các lần chạm"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"H.thị t.tin cập nhật màn hình"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Vùng flash của màn hình khi chúng cập nhật"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Hiển thị mức sử dụng CPU"</string>
@@ -1465,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Dữ liệu 2G-3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G dữ liệu"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Xem cài đặt ứng dụng"</string>
-    <string name="data_usage_app_restrict_background" msgid="8856643905291165256">"Hạn chế sử dụng dữ liệu nền"</string>
+    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Hạn chế sử dụng dữ liệu nền"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Tắt dữ liệu nền trên mạng bạn đã chọn để hạn chế (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Giới hạn dữ liệu nền?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Tính năng này có thể tác động tiêu cực đến các ứng dụng phụ thuộc vào sử dụng dữ liệu nền."\n\n"Có thể tìm thấy các kiểm soát sử dụng dữ liệu phù hợp hơn trong cài đặt của ứng dụng này."</string>
@@ -1518,13 +1524,13 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Bật chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Tắt chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Xóa vĩnh viễn chứng chỉ CA người dùng?"</string>
-    <!-- outdated translation 7577630829320003070 -->     <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Hướng dẫn về Nói khi tôi chạm"</string>
+    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Hướng dẫn truy cập"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Tiếp theo"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Quay lại"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Kết thúc"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Bỏ qua h.d"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Bài 1: Khám phá màn hình"</string>
-    <!-- outdated translation 2465037336858060269 -->     <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Sau khi bạn bật tính năng Nói khi tôi chạm, bạn có thể chạm vào màn hình để nghe mô tả của mục ở dưới ngón tay mình. Ví dụ: màn hình hiện tại chứa các biểu tượng ứng dụng. Tìm một trong các biểu tượng này bằng cách chạm vào màn hình và trượt ngón tay của bạn khắp nơi."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Sau khi bạn bật \"Khám phá bằng cách chạm\", bạn có thể chạm vào màn hình để tìm hiểu xem điều gì nằm dưới ngón tay bạn. Ví dụ: màn hình hiện tại chứa các biểu tượng ứng dụng. Tìm kiếm một trong những biểu tượng đó bằng cách chạm vào màn hình và trượt ngón tay của bạn xung quanh."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Tốt. Tiếp tục trượt ngón tay của bạn quanh màn hình cho đến khi bạn tìm thấy ít nhất thêm một biểu tượng."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Để kích hoạt mục bạn đang chạm vào, hãy chạm vào mục đó. Trượt ngón tay cho đến khi bạn tìm thấy biểu tượng cho <xliff:g id="APP_NAME">%s</xliff:g>. Sau đó chạm vào biểu tượng một lần để kích hoạt biểu tượng đó."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Ngón tay của bạn đang chạm vào biểu tượng <xliff:g id="APP_NAME">%s</xliff:g>. Chạm một lần để kích hoạt biểu tượng."</string>
@@ -1535,8 +1541,7 @@
     <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Tốt. Tiếp tục trượt ngón tay của bạn khắp nơi để tìm ít nhất thêm một mục khác."</string>
     <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Bây giờ, hãy đặt hai ngón tay trên một mục trong danh sách và trượt cả hai ngón tay lên trên. Nếu bạn đạt đến đầu màn hình, nhấc ngón tay lên, đặt ngón tay ở dưới danh sách và tiếp tục trượt lên."</string>
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Tốt. Tiếp tục trượt ngón tay của bạn lên phía trên để cuộn qua thêm một số mục."</string>
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (3442269986312288556) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3442269986312288556">"Bạn đã hoàn tất hướng dẫn. Để thoát, tìm và bấm vào nút <xliff:g id="FINISH">%s</xliff:g>."</string>
     <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Sửa lỗi chính tả"</string>
     <string name="current_backup_pw_prompt" msgid="8314880813545036591">"Nhập toàn bộ mật khẩu sao lưu hiện tại của bạn vào đây"</string>
     <string name="new_backup_pw_prompt" msgid="3491404828757901644">"Nhập mật khẩu mới để sao lưu toàn bộ vào đây"</string>

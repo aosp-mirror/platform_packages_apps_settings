@@ -696,13 +696,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"ለሙዚቃ እና ማህደረ መረጃ"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"ቅንብሮች አስታውስ"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="zeroclick_settings_title" msgid="6111073171447659136">"ንኪ አጋራ"</string>
-    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <string name="zeroclick_on_summary" msgid="3157018760403281266">"በ"</string>
-    <string name="zeroclick_off_summary" msgid="2896320184904157018">"ውጪ"</string>
-    <string name="zeroclick_label" msgid="263279563746672463">"ንኪ አጋራ"</string>
-    <string name="zeroclick_explained" msgid="3676026098073094212">"ሁለት በ NFC-የነቁ መሳሪያዎችን ጀርባ ለጀርባ በመንካት ይዘት አጋራ፡፡"</string>
-    <string name="zeroclick_top" msgid="8405284328201668102">"በላይኛው መሳሪያ ማሳያ ላይ ያለው መተግበሪያ ይዘትን ወደ ታችኛው መሳሪያ ይልካል፡፡"\n\n"ያንተ ውሂብ ደህንነቱ የተጠበቀ ነው፤ መሳሪያዎች ካልበሩ እና እንዳይቆለፉ ካልተደረገ በቀር ምንም ነገር አይጋራም፡፡"\n\n"ይህን ባህሪ በቅንጅቶች ላይ ማጥፋት ትችላለህ &gt; ተጨማሪ &gt; ንኪ አጋራ፡፡"</string>
+    <string name="ndef_push_settings_title" msgid="7096910206093746606">"ንኪ አጋራ"</string>
+    <string name="ndef_push_settings_summary" msgid="8205304119235885812"></string>
+    <string name="ndef_push_on_summary" msgid="1493927094678614793">"በርቷል"</string>
+    <string name="ndef_push_off_summary" msgid="2112211912532524478">"ጠፍቷል"</string>
+    <string name="ndef_push_label" msgid="6216995559457479606">"ንኪ አጋራ"</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"ሁለት በ NFC-የነቁ መሳሪያዎችን ጀርባ ለጀርባ በመንካት ይዘት አጋራ፡፡"</string>
+    <string name="ndef_push_top" msgid="8112767699009558636">"በላይኛው መሳሪያ ማሳያ ላይ ያለው መተግበሪያ ይዘትን ወደ ታችኛው መሳሪያ ይልካል፡፡"\n\n"ያንተ ውሂብ ደህንነቱ የተጠበቀ ነው፤ ሁለቱም መሳሪያዎች ካልበሩ እና እንዳይቆለፉ ካልተደረገ በቀር ምንም ያንተ ነገር አይጋራም፡፡"\n\n"ይህን ባህሪ በቅንጅቶች ላይ ማጥፋት ትችላለህ &gt; ተጨማሪ &gt; ንኪ አጋራ፡፡"</string>
     <!-- no translation found for wifi_quick_toggle_title (874495178395350104) -->
     <skip />
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Wi-Fi አብራ"</string>
@@ -726,10 +726,8 @@
     <skip />
     <!-- no translation found for wifi_notify_open_networks_summary (3038290727701553612) -->
     <skip />
-    <!-- no translation found for wifi_enable_watchdog_service (3808826765041243874) -->
-    <skip />
-    <!-- no translation found for wifi_enable_watchdog_service_summary (744684490718614436) -->
-    <skip />
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"ደካማ ግንኙነቶች አስወግድ"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"ተቀባይነት ያለው የበየነመረብ ግንኙነት ከሌለው በቀር Wi-Fi አውታረመረብን አትጠቀም"</string>
     <!-- outdated translation 1367731352485585528 -->     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"የWiFi አንቀላፋ ፖሊሲ"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"ከWi-Fi  ወደ ተንቀሳቃሽ ውሂብ መቼ እንደሚቀየርግለፅ"</string>
     <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
@@ -777,7 +775,7 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">" (ያልተገለፀ)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"ተቀምጧል"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"ተሰነክሏል"</string>
-    <!-- outdated translation 7192323081514322537 -->     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"ደካማ ተያያዥ አስቀርቷል"</string>
+    <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"ደካማ የበየነመረብ ግንኙነት አስወግድ"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"የማረጋገጫ ችግር"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"በክልል ውስጥ የለም"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS አለ"</string>
@@ -1476,8 +1474,8 @@
     <string name="language_settings" msgid="5292716747264442359">"ቋንቋ&amp; ግቤት"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"ቋንቋ&amp; ግቤት"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"የቋንቋ ቅንብሮች"</string>
-    <string name="keyboard_settings_category" msgid="7060453865544070642">"የቁልፍ ሰሌዳ ቅንብሮች"</string>
-    <!-- outdated translation 2138384312336494991 -->     <string name="phone_language" msgid="1165758957501090679">"የአካባቢውን ሁኔታ ምረጥ"</string>
+    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"የቁልፍ ሰሌዳ ቅንብሮች"</string>
+    <!-- outdated translation 2138384312336494991 -->     <string name="phone_language" msgid="8870144109924299673">"የአካባቢውን ሁኔታ ምረጥ"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <!-- no translation found for auto_replace (6199184757891937822) -->
     <skip />
@@ -1494,14 +1492,14 @@
     <string name="show_password" msgid="3001113966880559611">"ይለፍቃሎችን የሚታዩ አድርግ"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"ይህ ግቤት ሜተድ እርስዎ የሚተይቡትን ፅሁፍ ሁሉ፣ እንደይለፍ ቃል እና የዱቤ ካርድ ጨምሮ የግል ውሂብ  ምናልባት መሰብሰብ ይችላል።ከትግበራው ይመጣል።<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> ይህን ግቤት ሜተድ ይጠቀም?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
+    <!-- no translation found for pointer_settings_category (8183819795164034286) -->
     <skip />
     <!-- no translation found for pointer_speed (1221342330217861616) -->
     <skip />
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"የተጠቃሚ መዝገበ ቃላት"</string>
-    <!-- no translation found for user_dict_single_settings_title (5454855286173849284) -->
+    <!-- no translation found for user_dict_single_settings_title (524997218433540614) -->
     <skip />
-    <!-- no translation found for user_dict_multiple_settings_title (326583195525296750) -->
+    <!-- no translation found for user_dict_multiple_settings_title (3735224433307996276) -->
     <skip />
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"አክል"</string>
@@ -1509,8 +1507,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"ቃሉን አርትዕ"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"አርትእ"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"ሰርዝ"</string>
-    <!-- outdated translation 6209268025109242806 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"በተጠቃሚ መዝገበ ቃላት ውስጥ ማንኛውም ቃላቶች የልዎትም። በምናሌ በኩል ቃል ማከል ይችላሉ።"</string>
-    <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"በተጠቃሚ መዝገበ ቃላት ውስጥ ማንኛውም ቃላቶች የልዎትም። በምናሌ በኩል ቃል ማከል ይችላሉ።"</string>
+    <!-- outdated translation 6209268025109242806 -->     <string name="user_dict_settings_empty_text" msgid="1766522102636921529">"በተጠቃሚ መዝገበ ቃላት ውስጥ ማንኛውም ቃላቶች የልዎትም። በምናሌ በኩል ቃል ማከል ይችላሉ።"</string>
     <!-- no translation found for user_dict_settings_all_languages (7713910347678213719) -->
     <skip />
     <!-- no translation found for testing (6584352735303604146) -->
@@ -1543,7 +1540,7 @@
     <skip />
     <string name="input_methods_settings_title" msgid="6800066636850553887">"ፅሁፍ ግቤት"</string>
     <string name="input_method" msgid="5434026103176856164">"የግቤት ሜተድ"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"የአሁን ግቤት ሜተድ"</string>
+    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"የአሁን ግቤት ሜተድ"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"የግቤት ሜተድ መራጭ"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"ራስ ሰር"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"ሁልጊዜ አሳይ"</string>
@@ -1612,18 +1609,26 @@
     <skip />
     <!-- no translation found for accessibility_script_injection_allowed (7624804397748427621) -->
     <skip />
-    <!-- no translation found for accessibility_script_injection_disallowed (5156785826922460983) -->
+    <!-- no translation found for accessibility_script_injection_disallowed (8639525487720429182) -->
     <skip />
     <!-- no translation found for accessibility_script_injection_button_allow (2201503285877102870) -->
     <skip />
     <!-- no translation found for accessibility_script_injection_button_disallow (1846740874310014190) -->
     <skip />
-    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> እርስዎ የሚተይቡትን ፅሁፍ ሁሉ፣ ከይለፍ ቃል በስተቀር መሰብሰብ ይችላል። ይህም እንደ ዱቤ ካርድ ያሉ የግል ውሂብ ቁጥሮችን ያካትታል። እንዲሁም ከመሣሪያው ጋር ያልዎትን በይነ ግኑኙነት ውሂብ መሰብሰብ ይችላል።"</string>
-    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"ተደራሽነት ይጥፋ?"</string>
-    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"እሺን መንካት የንግግር መግለጫዎችን እና ሲጠቀሙበት የቆዩትን ሌሎች የተደራሽነት ገፅታዎች ያቆማል።"</string>
+    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
+    <skip />
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"ምንም የተደራሽነት ትግበራዎች የሉም።"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"የተጫኑ የተደራሽነት ትግበራዎች የልዎትም። ከAndroid ገበያ ላይ የማያ"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"ይዘታቸውን የበለጠ ተደራሽ የሚያደርጉ ትግበራዎችን ከGoogle ላይ ፅሁፎች እንዲጭኑ ይፈልጋሉ?"</string>
+    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
+    <skip />
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"ይህ ባህሪ መሳሪያህ ለንኪ የሚሰጠውን ምላሽ አሰጣጥ ይለውጣል፡፡ አብራው?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"ይህ የተደራሽነት አገልግሎት ምንም መግለጫ የለውም። "\n\n" ከመሣሪያው ጋር በይነ ግኑኙነት ሲኖርዎት የተደራሽነት አገልግሎቶች የተለያዩ የግብረ ምላሽች አይነት ያቀርባሉ።"</string>
     <!-- no translation found for settings_button (3006713718908152930) -->
@@ -1706,13 +1711,13 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"የድምፅ ግቤት &amp; ውፅአት ቅንብሮች"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"የድምፅ ፍለጋ"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"የAndroid ቁልፍ ሰሌዳ"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"የድምፅ ግቤት"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"የድምፅ ውፅአት"</string>
+    <!-- no translation found for voice_category (4730605956740531248) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"የድምፅ መለያ"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"የድምፅ መለያ ቅንብሮች"</string>
+    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"የድምፅ መለያ ቅንብሮች"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"የ \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\" ቅንብሮች"</string>
     <string name="tts_settings" msgid="8186971894801348327">"ፅሁፍ-ወደ-ንግግር ቅንብሮች"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"ፅሁፍን ወደ ንግግር ቅንብሮች"</string>
+    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"ፅሁፍን ወደ ንግግር ቅንብሮች"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"ሁልጊዜም የኔን ቅንብሮች ተጠቀም"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"ከስር ያሉ ነባሪ ቅንብሮች የትግበራ ቅንብሮችን ያግዳሉ"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"ነባሪ ቅንብሮች"</string>
@@ -1749,12 +1754,9 @@
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"ወንድ"</string>
     <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"የንግግር ልምምድ አንቀሳቃሽ ተጭኗል"</string>
     <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"አዲስ አንቀሳቃሽ ከመጠቀምህ በፊት አንቃ"</string>
-    <!-- no translation found for tts_engine_settings_button (1030512042040722285) -->
-    <skip />
-    <!-- no translation found for tts_engine_preference_section_title (448294500990971413) -->
-    <skip />
-    <!-- no translation found for tts_general_section_title (4402572014604490502) -->
-    <skip />
+    <string name="tts_engine_settings_button" msgid="1030512042040722285">"ሞተር ቅንጅቶችን አስጀምር"</string>
+    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"የተመረጠ ሞተር"</string>
+    <string name="tts_general_section_title" msgid="4402572014604490502">"አጠቃላይ"</string>
     <string name="gadget_title" msgid="7455548605888590466">"የኃይል መቆጣጠሪያ"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"የWi-Fi ቅንብር ማዘመን"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"የብሉቱዝቅንብር ማዘመን"</string>
@@ -1938,6 +1940,8 @@
     <skip />
     <!-- no translation found for pointer_location_summary (840819275172753713) -->
     <skip />
+    <string name="show_touches" msgid="1356420386500834339">"ንኪዎችን አሳይ"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"ለንኪዎች የሚታይ ግብረመልስ አሳይ"</string>
     <!-- no translation found for show_screen_updates (8282711794220426931) -->
     <skip />
     <!-- no translation found for show_screen_updates_summary (1716122382094924596) -->
@@ -2007,7 +2011,7 @@
     <skip />
     <!-- no translation found for data_usage_app_settings (3727561362090820369) -->
     <skip />
-    <!-- no translation found for data_usage_app_restrict_background (8856643905291165256) -->
+    <!-- no translation found for data_usage_app_restrict_background (9149728936265100841) -->
     <skip />
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"(<xliff:g id="NETWORKS">%1$s</xliff:g>) ለመገደብ በመረጥካቸው አውታረመረቦች ላይ በስተጀርባ ውሂብ አቦዝን፡፡"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"በስተጀርባ ውሂብ አግድ?"</string>
@@ -2099,8 +2103,7 @@
     <skip />
     <!-- no translation found for trusted_credentials_remove_confirmation (443561923016852941) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_title (5163147830174854622) -->
-    <skip />
+    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"ትምህርት ተደራሽነት"</string>
     <!-- no translation found for accessibility_tutorial_next (5079911515520801099) -->
     <skip />
     <!-- no translation found for accessibility_tutorial_back (2583933084111712540) -->
@@ -2111,8 +2114,7 @@
     <skip />
     <!-- no translation found for accessibility_tutorial_lesson_1_title (1358771359529627110) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_1_text_1 (5332837263739078691) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"በ \"ንኪ አስስ\" የሚለውን ካበራህ በኋላ፣ ከጣትህ ስር ም???ን እንዳለ ለማወቅ መታያ ገጹን መንካት ትችላለህ፡፡ ለምሳሌ፣ አሁን ያለው መታያ ገጽ መተግበሪያ አዶዎችን ይዞ ሊሆን ይችላል፡፡ መታያ ገጹን በመንካት አንደኛቸውን በመንካት እና እዛው አካባቢ ጣትህን በማንሸራተት አግኝ፡፡"</string>
     <!-- no translation found for accessibility_tutorial_lesson_1_text_2_more (7849927882225521983) -->
     <skip />
     <!-- no translation found for accessibility_tutorial_lesson_1_text_3 (7343496813666809738) -->
@@ -2133,8 +2135,7 @@
     <skip />
     <!-- no translation found for accessibility_tutorial_lesson_2_text_3_more (2223814499106104083) -->
     <skip />
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (3442269986312288556) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3442269986312288556">"ትምህርቱን አጠናቀሃል:: ለመውጣት፣ <xliff:g id="FINISH">%s</xliff:g> አዝራር አግኝና ጠቅ አድርገው::"</string>
     <!-- no translation found for spellcheckers_settings_title (8843785708050235008) -->
     <skip />
     <string name="current_backup_pw_prompt" msgid="8314880813545036591">"ሙሉ የይለፍቃል መጠባበቂያዎን እዚህ ያስገቡ።"</string>
