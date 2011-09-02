@@ -64,7 +64,6 @@ public class WifiP2pDialog extends AlertDialog implements AdapterView.OnItemSele
     public WifiP2pConfig getConfig() {
         WifiP2pConfig config = new WifiP2pConfig();
         config.deviceAddress = mDeviceAddress.getText().toString();
-        config.deviceName = mDeviceName.getText().toString();
         config.wpsConfig = new WpsConfiguration();
         switch (mWpsSetupIndex) {
             case WPS_PBC:
