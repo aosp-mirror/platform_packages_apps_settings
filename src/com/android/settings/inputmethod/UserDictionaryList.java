@@ -35,7 +35,7 @@ import java.util.TreeSet;
 
 public class UserDictionaryList extends SettingsPreferenceFragment {
 
-    private static final String USER_DICTIONARY_SETTINGS_INTENT_ACTION =
+    public static final String USER_DICTIONARY_SETTINGS_INTENT_ACTION =
             "android.settings.USER_DICTIONARY_SETTINGS";
 
     @Override
@@ -101,7 +101,6 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
             newPref.getExtras().putString("locale", locale);
         }
         newPref.setIntent(intent);
-        newPref.setFragment(UserDictionarySettings.class.getName());
         return newPref;
     }
 
