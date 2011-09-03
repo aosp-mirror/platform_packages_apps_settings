@@ -106,6 +106,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 resid = R.xml.security_settings_chooser;
             }
+        } else if (mLockPatternUtils.usingBiometricWeak()) {
+            resid = R.xml.security_settings_biometric_weak;
         } else {
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
@@ -120,6 +122,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     resid = R.xml.security_settings_password;
                     break;
             }
+            // TODO: enable facepass options
         }
         addPreferencesFromResource(resid);
 
