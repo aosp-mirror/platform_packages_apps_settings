@@ -345,17 +345,6 @@ public class InputMethodAndSubtypeUtil {
     }
 
     public static boolean isAuxiliaryIme(InputMethodInfo imi) {
-        final int subtypeCount = imi.getSubtypeCount();
-        if (subtypeCount == 0) {
-            return false;
-        } else {
-            for (int i = 0; i < subtypeCount; ++i) {
-                final InputMethodSubtype subtype = imi.getSubtypeAt(i);
-                if (!subtype.isAuxiliary()) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return imi.isAuxiliaryIme();
     }
 }
