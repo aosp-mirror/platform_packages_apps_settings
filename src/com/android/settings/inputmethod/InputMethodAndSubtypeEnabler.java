@@ -31,6 +31,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
@@ -40,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
+    private static final String TAG =InputMethodAndSubtypeEnabler.class.getSimpleName();
     private AlertDialog mDialog = null;
     private boolean mHaveHardKeyboard;
     final private HashMap<String, List<Preference>> mInputMethodAndSubtypePrefsMap =
@@ -223,36 +225,54 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             if (!TextUtils.isEmpty(mInputMethodId) && !mInputMethodId.equals(imiId)) {
                 continue;
             }
-            PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(context);
+            final PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(context);
             root.addPreference(keyboardSettingsCategory);
-            PackageManager pm = getPackageManager();
-            CharSequence label = imi.loadLabel(pm);
+            final PackageManager pm = getPackageManager();
+            final CharSequence label = imi.loadLabel(pm);
 
             keyboardSettingsCategory.setTitle(label);
             keyboardSettingsCategory.setKey(imiId);
             // TODO: Use toggle Preference if images are ready.
-            CheckBoxPreference autoCB = new CheckBoxPreference(context);
-            autoCB.setTitle(R.string.use_system_language_to_select_input_method_subtypes);
+            final CheckBoxPreference autoCB = new CheckBoxPreference(context);
             mSubtypeAutoSelectionCBMap.put(imiId, autoCB);
             keyboardSettingsCategory.addPreference(autoCB);
 
-            PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(context);
+            final PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(context);
             activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
             root.addPreference(activeInputMethodsCategory);
 
-            ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
+            boolean isAutoSubtype = false;
+            CharSequence autoSubtypeLabel = null;
+            final ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
             if (subtypeCount > 0) {
                 for (int j = 0; j < subtypeCount; ++j) {
                     final InputMethodSubtype subtype = imi.getSubtypeAt(j);
                     final CharSequence subtypeLabel = subtype.getDisplayName(context,
                             imi.getPackageName(), imi.getServiceInfo().applicationInfo);
-                    final CheckBoxPreference chkbxPref = new CheckBoxPreference(context);
-                    chkbxPref.setKey(imiId + subtype.hashCode());
-                    chkbxPref.setTitle(subtypeLabel);
-                    activeInputMethodsCategory.addPreference(chkbxPref);
-                    subtypePreferences.add(chkbxPref);
+                    if (subtype.overridesImplicitlyEnabledSubtype()) {
+                        if (!isAutoSubtype) {
+                            isAutoSubtype = true;
+                            autoSubtypeLabel = subtypeLabel;
+                        }
+                    } else {
+                        final CheckBoxPreference chkbxPref = new CheckBoxPreference(context);
+                        chkbxPref.setKey(imiId + subtype.hashCode());
+                        chkbxPref.setTitle(subtypeLabel);
+                        activeInputMethodsCategory.addPreference(chkbxPref);
+                        subtypePreferences.add(chkbxPref);
+                    }
                 }
                 mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
+            }
+            if (isAutoSubtype) {
+                if (TextUtils.isEmpty(autoSubtypeLabel)) {
+                    Log.w(TAG, "Title for auto subtype is empty.");
+                    autoCB.setTitle("---");
+                } else {
+                    autoCB.setTitle(autoSubtypeLabel);
+                }
+            } else {
+                autoCB.setTitle(R.string.use_system_language_to_select_input_method_subtypes);
             }
         }
         return root;
