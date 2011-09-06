@@ -149,7 +149,7 @@
     <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Zum Herstellen einer Verbindung mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" berühren"</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Möchten Sie eine Verbindung mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" herstellen?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Telefonbuchanfrage"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="5203107624986011263">"%1$s möchte auf Ihre Kontakte und Ihr Anrufprotokoll zugreifen. Möchten Sie %2$s den Zugriff gestatten?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="5203107624986011263">"%1$s möchte auf Ihre Kontakte und Ihr Anrufprotokoll zugreifen. Möchten Sie %2$s den Zugriff erlauben?"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Nicht mehr fragen"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Einstellungen für Datum &amp; Uhrzeit"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00"</string>
@@ -320,7 +320,7 @@
     <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Damit Sie Ihr Telefon wieder verwenden können, müssen Sie es auf die Werkseinstellungen zurücksetzen, wobei alle Ihre Daten gelöscht werden. Nachdem das Telefon zurückgesetzt wurde, können Sie es erneut verschlüsseln."</string>
     <string name="lock_settings_picker_title" msgid="6288468357346846402">"Bildschirmsperre"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bildschirmsperre"</string>
-    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Bildschirmsp. ändern"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Bildschirmsperre ändern"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Sperre (Muster, PIN, Passwort) ändern oder deaktivieren"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Methode zum Sperren des Bildschirms wählen"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Keine"</string>
@@ -465,13 +465,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Für Musik und Medien"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Einstellungen speichern"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="zeroclick_settings_title" msgid="6111073171447659136">"Berühren und teilen"</string>
-    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <string name="zeroclick_on_summary" msgid="3157018760403281266">"Ein"</string>
-    <string name="zeroclick_off_summary" msgid="2896320184904157018">"Aus"</string>
-    <string name="zeroclick_label" msgid="263279563746672463">"Berühren und teilen"</string>
-    <string name="zeroclick_explained" msgid="3676026098073094212">"Teilen Sie Inhalte, indem Sie die Rückseiten von zwei NFC-fähigen Geräten aneinanderhalten."</string>
-    <string name="zeroclick_top" msgid="8405284328201668102">"Die App auf dem Bildschirm des oberen Geräts sendet Inhalte an das untere Gerät."\n\n"Ihre Daten sind sicher: Es werden keine Inhalte geteilt, solange nicht beide Geräte eingeschaltet und entsperrt sind."\n\n"Sie können diese Funktion unter \"Einstellungen &gt; Mehr &gt; Teilen und berühren\" deaktivieren."</string>
+    <string name="ndef_push_settings_title" msgid="7096910206093746606">"Berühren und teilen"</string>
+    <string name="ndef_push_settings_summary" msgid="8205304119235885812"></string>
+    <string name="ndef_push_on_summary" msgid="1493927094678614793">"Ein"</string>
+    <string name="ndef_push_off_summary" msgid="2112211912532524478">"Aus"</string>
+    <string name="ndef_push_label" msgid="6216995559457479606">"Berühren und teilen"</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"Teilen Sie Inhalte, indem Sie die Rückseiten von zwei NFC-fähigen Geräten aneinanderhalten."</string>
+    <string name="ndef_push_top" msgid="8112767699009558636">"Die App auf dem Bildschirm des oberen Geräts sendet Inhalte an das untere Gerät."\n\n"Ihre Daten sind sicher: Es werden keine Inhalte geteilt, solange nicht beide Geräte eingeschaltet und entsperrt sind."\n\n"Sie können diese Funktion unter \"Einstellungen &gt; Mehr &gt; Teilen und berühren\" deaktivieren."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WLAN"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"WLAN aktivieren"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"WLAN"</string>
@@ -485,8 +485,8 @@
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Netzwerkscan nicht möglich"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Netzwerkhinweis"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Benachrichtigen, wenn ein offenes Netzwerk verfügbar ist"</string>
-    <!-- outdated translation 4723544454066601706 -->     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"WLAN-Verbindungsprüfungen"</string>
-    <!-- outdated translation 8687400936839455926 -->     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Mögliche Probleme mit der Netzwerkverbindung erkennen und verwalten"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Schlechte Internetverbindungen vermeiden"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"WLAN-Netzwerk nur bei guter Internetverbindung verwenden"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"WLAN-Standby-Richtlinie"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Festlegen, wann von WLAN auf mobile Daten umgeschaltet werden soll"</string>
     <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Legen Sie fest, wann die WLAN-Verbindung getrennt werden soll."</string>
@@ -525,7 +525,7 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(keine Angabe)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Gespeichert"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Deaktiviert"</string>
-    <!-- outdated translation 7192323081514322537 -->     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Schlechte Internetverbindung vermieden"</string>
+    <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Schlechte Internetverbindung vermieden"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Authentifizierungsproblem"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Nicht in Reichweite"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS verfügbar"</string>
@@ -1051,8 +1051,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Sprache &amp; Eingabe"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Sprache &amp; Eingabe"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Spracheinstellungen"</string>
-    <string name="keyboard_settings_category" msgid="7060453865544070642">"Tastatureinstellungen"</string>
-    <string name="phone_language" msgid="1165758957501090679">"Sprache auswählen"</string>
+    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatureinstellungen"</string>
+    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Sprache auswählen"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Autom. Ersetzung"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Tippfehler korrigieren"</string>
@@ -1064,19 +1064,18 @@
     <string name="show_password" msgid="3001113966880559611">"Passwörter sichtbar machen"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Diese Eingabemethode kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Passwörter und Kreditkartennummern. Sie ist Teil der Anwendung <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Möchten diese Eingabemethode verwenden?"</string>
-    <string name="pointer_settings_category" msgid="6090176550039035130">"Maus- und Touchpad-Einstellungen"</string>
+    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Maus- und Touchpad-Einstellungen"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Zeigergeschwindigkeit"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Mein Wörterbuch"</string>
-    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Mein Wörterbuch"</string>
-    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Meine Wörterbücher verwalten"</string>
+    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Mein Wörterbuch"</string>
+    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Meine Wörterbücher verwalten"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Hinzufügen"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Ins Wörterbuch"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Wort bearbeiten"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Bearbeiten"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Löschen"</string>
-    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Es sind keine Wörter in Ihrem Wörterbuch vorhanden. Sie können durch Berühren der Schaltfläche \"+\" ein Wort hinzufügen."</string>
-    <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Keine Wörter im Ihrem Wörterbuch vorhanden. Sie können über das Menü ein Wort hinzufügen."</string>
+    <string name="user_dict_settings_empty_text" msgid="1766522102636921529">"Es sind keine Wörter in Ihrem Wörterbuch vorhanden. Sie können durch Berühren der Schaltfläche \"+\" ein Wort hinzufügen."</string>
     <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"Alle Sprachen"</string>
     <string name="testing" msgid="6584352735303604146">"Test"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Tablet-Informationen"</string>
@@ -1095,7 +1094,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Tastenkombinationen"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Texteingabe"</string>
     <string name="input_method" msgid="5434026103176856164">"Eingabemethode"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"Aktuelle Eingabemethode"</string>
+    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Aktuelle Eingabemethode"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Auswahl der Eingabemethoden"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatisch"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Immer anzeigen"</string>
@@ -1147,15 +1146,23 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Ein"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Deaktiviert"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Zulässig"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="5156785826922460983">"Unzulässig"</string>
+    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Unzulässig"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Zulassen"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Nicht zulassen"</string>
-    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Kreditkartennummern, jedoch keine Passwörter. Auch Daten bezüglich Ihrer Interaktion mit dem Gerät können erfasst werden."</string>
-    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"Eingabehilfen deaktivieren?"</string>
-    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"Durch Tippen auf \"OK\" werden die gesprochenen Erläuterungen sowie alle weiteren verwendeten Eingabehilfen deaktiviert."</string>
+    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
+    <skip />
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Keine Eingabehilfen in Form von Apps"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Sie haben keine Apps installiert, die als Eingabehilfen fungieren. Möchten Sie ein Sprachausgabeprogramm über Android Market herunterladen?"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Sollen Apps Skripts von Google installieren, um den Zugang zu Inhalten zu erleichtern?"</string>
+    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
+    <skip />
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Diese Funktion ändert die Art und Weise, wie Ihr Gerät auf Berührungen reagiert. Aktivieren?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Für diese Eingabehilfe ist keine Beschreibung verfügbar."\n\n"Eingabehilfen bieten bei der Interaktion mit dem Gerät verschiedene Arten von Feedback."</string>
     <string name="settings_button" msgid="3006713718908152930">"Einstellungen"</string>
@@ -1236,13 +1243,13 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Einstellungen für Spracheingabe &amp; -ausgabe"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Sprachsuche"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android-Tastatur"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Spracheingabe"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Sprachausgabe"</string>
+    <!-- no translation found for voice_category (4730605956740531248) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"Spracherkennung"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Spracherkennung"</string>
+    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Spracherkennung"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Einstellungen für \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Text-in-Sprache"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Text-in-Sprache-Einstellungen"</string>
+    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Text-in-Sprache-Einstellungen"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Immer meine Einstellungen verwenden"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Standardeinstellungen überschreiben Anwendungseinstellungen"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Standardeinstellungen"</string>
@@ -1277,12 +1284,9 @@
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"Männlich"</string>
     <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Sprachsynthese installiert"</string>
     <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Neue Engine aktivieren"</string>
-    <!-- no translation found for tts_engine_settings_button (1030512042040722285) -->
-    <skip />
-    <!-- no translation found for tts_engine_preference_section_title (448294500990971413) -->
-    <skip />
-    <!-- no translation found for tts_general_section_title (4402572014604490502) -->
-    <skip />
+    <string name="tts_engine_settings_button" msgid="1030512042040722285">"Einstellungen der Suchmaschine starten"</string>
+    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Bevorzugte Engine"</string>
+    <string name="tts_general_section_title" msgid="4402572014604490502">"Allgemein"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Energiesteuerung"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Aktualisieren der WLAN-Einstellung"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Aktualisieren der Bluetooth-Einstellung"</string>
@@ -1426,6 +1430,8 @@
     <string name="strict_mode_summary" msgid="142834318897332338">"Bei längeren Aktionen im Hauptthread Bildschirm kurz einblenden"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Zeigerposition"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Overlay mit aktuellen Daten zu Tippaktionen"</string>
+    <string name="show_touches" msgid="1356420386500834339">"Berührungen anzeigen"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Visuelles Feedback für Berührungen anzeigen"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Updates anzeigen"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Bildschirmbereiche beim Update kurz einblenden"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU-Auslastung anzeigen"</string>
@@ -1433,7 +1439,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Maßstab Fensteranimation"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Maßstab Übergangsanimation"</string>
     <string name="debug_applications_category" msgid="6221644998451283813">"Apps"</string>
-    <string name="immediately_destroy_activities" msgid="8366775083630234121">"Aktivitäten nicht speichern"</string>
+    <string name="immediately_destroy_activities" msgid="8366775083630234121">"Aktionen nicht speichern"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Aktivität löschen, sobald der Nutzer diese beendet"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Hintergrundprozesslimit"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Alle ANRS anzeigen"</string>
@@ -1465,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-/3G-Daten"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G-Daten"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"App-Einstellungen anzeigen"</string>
-    <string name="data_usage_app_restrict_background" msgid="8856643905291165256">"Datennutzung beschränken"</string>
+    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Datennutzung beschränken"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Deaktivieren Sie Hintergrunddaten in beschränkten Netzwerken (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Hintergrunddaten beschränken?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Diese Funktion kann sich negativ auf Apps auswirken, die auf eine Datennutzung im Hintergrund angewiesen sind."\n\n"Geeignetere Steuerelemente für die Datennutzung finden Sie in den Einstellungen der App."</string>
@@ -1518,13 +1524,13 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"System-CA-Zertifikat aktivieren?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"System-CA-Zertifikat deaktivieren?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"CA-Zertifikat des Nutzers endgültig entfernen?"</string>
-    <!-- outdated translation 7577630829320003070 -->     <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Anleitung zu \"Talk As I Touch\""</string>
+    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Anleitung zu Eingabehilfen"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Weiter"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Zurück"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Beenden"</string>
-    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Weiter"</string>
+    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Überspringen"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lektion 1: Touchscreen-Erkundung"</string>
-    <!-- outdated translation 2465037336858060269 -->     <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Nach dem Aktivieren von \"Talk As I Touch\" können Sie den Bildschirm berühren, um eine Beschreibung des unter Ihrem Finger befindlichen Elements zu hören. Derzeit enthält der Bildschirm beispielsweise Symbole für Apps. Suchen Sie eines davon, indem Sie den Bildschirm berühren und den Finger darüber bewegen."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Nachdem Sie \"Tippen &amp; Entdecken\" aktiviert haben, können Sie den Bildschirm berühren, um zu erfahren, was sich unter Ihrem Finger befindet. Momentan enthält der Bildschirm beispielsweise Symbole für Apps. Suchen Sie eines davon, indem Sie den Bildschirm berühren und den Finger darüber bewegen."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Gut. Bewegen Sie den Finger weiter über den Bildschirm, um mindestens ein weiteres Symbol zu finden."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Tippen Sie auf ein Element, das Sie berühren, um es zu aktivieren. Bewegen Sie den Finger, bis Sie das Symbol für <xliff:g id="APP_NAME">%s</xliff:g> gefunden haben. Tippen Sie dann darauf, um es zu aktivieren."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Ihr Finger befindet sich auf dem <xliff:g id="APP_NAME">%s</xliff:g>-Symbol. Tippen Sie ein Mal, um das Symbol zu aktivieren."</string>
@@ -1535,8 +1541,7 @@
     <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Gut. Bewegen Sie den Finger weiter, um mindestens ein weiteres Element zu finden."</string>
     <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Platzieren Sie jetzt zwei Finger auf ein Listenelement und bewegen Sie sie nach oben. Wenn Sie den oberen Bildschirmrand erreichen, heben Sie die Finger, platzieren Sie sie weiter unten auf der Liste und bewegen Sie sie dann weiter nach oben."</string>
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Gut. Bewegen Sie die Finger weiter nach oben, um zu scrollen."</string>
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (3442269986312288556) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3442269986312288556">"Sie haben die Anleitung abgeschlossen. Suchen Sie zum Beenden die Schaltfläche <xliff:g id="FINISH">%s</xliff:g> und tippen Sie darauf."</string>
     <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Rechtschreibprüfung"</string>
     <string name="current_backup_pw_prompt" msgid="8314880813545036591">"Bitte geben Sie Ihr aktuelles Passwort für vollständige Sicherungen hier ein."</string>
     <string name="new_backup_pw_prompt" msgid="3491404828757901644">"Geben Sie hier ein neues Passwort für vollständige Sicherungen ein."</string>

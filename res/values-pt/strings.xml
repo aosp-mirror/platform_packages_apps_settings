@@ -465,13 +465,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música e mídia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Lembrar configurações"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="zeroclick_settings_title" msgid="6111073171447659136">"ShareTap"</string>
-    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <string name="zeroclick_on_summary" msgid="3157018760403281266">"Ativado"</string>
-    <string name="zeroclick_off_summary" msgid="2896320184904157018">"Desativado"</string>
-    <string name="zeroclick_label" msgid="263279563746672463">"ShareTap"</string>
-    <string name="zeroclick_explained" msgid="3676026098073094212">"Compartilhe conteúdo tocando em dois dispositivos habilitados para NFC simultaneamente."</string>
-    <string name="zeroclick_top" msgid="8405284328201668102">"O aplicativo na tela do dispositivo superior envia conteúdo para o dispositivo inferior."\n\n"Seus dados estão seguros: nada é compartilhada, a menos que ambos os dispositivos estejam ligados e desbloqueados."\n\n"Você pode desativar esse recurso em Configurações &gt; Mais &gt; ShareTap."</string>
+    <string name="ndef_push_settings_title" msgid="7096910206093746606">"ShareTap"</string>
+    <string name="ndef_push_settings_summary" msgid="8205304119235885812"></string>
+    <string name="ndef_push_on_summary" msgid="1493927094678614793">"Ativado"</string>
+    <string name="ndef_push_off_summary" msgid="2112211912532524478">"Desativado"</string>
+    <string name="ndef_push_label" msgid="6216995559457479606">"ShareTap"</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"Compartilhe conteúdo tocando simultaneamente em dois dispositivos ativados para NFC."</string>
+    <string name="ndef_push_top" msgid="8112767699009558636">"O aplicativo na tela do dispositivo superior envia conteúdo ao dispositivo inferior."\n\n"Seus dados estão seguros: nada é compartilhado, a menos que os dispositivos estejam ligados e desbloqueados."\n\n"Você pode desativar esse recurso em Configurações &gt; Mais &gt; ShareTap."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Ativar Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -485,8 +485,8 @@
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Não é possível verificar a existência de redes"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notificação de rede"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Receber notificação quando uma rede aberta estiver disponível"</string>
-    <!-- outdated translation 4723544454066601706 -->     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Verificações de conectividade Wi-Fi"</string>
-    <!-- outdated translation 8687400936839455926 -->     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Detectar e controlar problemas potenciais de conectividade de rede"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Evitar conexões de baixa qualidade"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Não usar uma rede Wi-Fi, a menos que tenha uma boa conexão com a Internet"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Política de desconexão de Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Especificar quando alternar de Wi-Fi para dados móveis"</string>
     <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Especificar quando desconectar da rede Wi-Fi"</string>
@@ -525,7 +525,7 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(não especificado)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Salva"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Desativado"</string>
-    <!-- outdated translation 7192323081514322537 -->     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Má conexão evitada"</string>
+    <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Evitada conexão de baixa qualidade com a Internet"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problema de autenticação"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Não está dentro do alcance"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS disponível"</string>
@@ -1051,8 +1051,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Idioma e entrada"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Idioma e entrada"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Configurações de idioma"</string>
-    <string name="keyboard_settings_category" msgid="7060453865544070642">"Configurações do teclado"</string>
-    <string name="phone_language" msgid="1165758957501090679">"Selecionar idioma"</string>
+    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Configurações do teclado"</string>
+    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Selecionar idioma"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Substituição automática"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Corrigir palavras digitadas incorretamente"</string>
@@ -1064,19 +1064,18 @@
     <string name="show_password" msgid="3001113966880559611">"Tornar as senhas visíveis"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Este método de entrada pode coletar todo o texto que você digitar, incluindo dados pessoais como senhas e números de cartão de crédito. Ele é proveniente do aplicativo <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Usar este método de entrada?"</string>
-    <string name="pointer_settings_category" msgid="6090176550039035130">"Configurações de mouse e trackpad"</string>
+    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Configurações de mouse e trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocidade do ponteiro"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Dicionário do usuário"</string>
-    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Dicionário do usuário"</string>
-    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Gerenciar dicionários do usuário"</string>
+    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Dicionário do usuário"</string>
+    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Gerenciar dicionários do usuário"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Adicionar"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Adicionar ao dicionário"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Editar palavra"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Editar"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Excluir"</string>
-    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Você não possui palavras no dicionário do usuário. Adicione uma palavra tocando o botão \"Adicionar\" (+)."</string>
-    <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Você não possui palavras no dicionário do usuário. Você pode adicionar uma palavra por meio do menu."</string>
+    <string name="user_dict_settings_empty_text" msgid="1766522102636921529">"Você não possui palavras no dicionário do usuário. Adicione uma palavra tocando o botão \"Adicionar\" (+)."</string>
     <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"Todos os idiomas"</string>
     <string name="testing" msgid="6584352735303604146">"Testando"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informações do tablet"</string>
@@ -1095,7 +1094,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Atalhos"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Entrada de texto"</string>
     <string name="input_method" msgid="5434026103176856164">"Método de entrada"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"Método atual de entrada"</string>
+    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Método atual de entrada"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Seletor do método de entrada"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automático"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Mostrar sempre"</string>
@@ -1147,15 +1146,23 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Ativado"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Desativado"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Permitido"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="5156785826922460983">"Proibido"</string>
+    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Proibido"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Permitir"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Não permitir"</string>
-    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> pode coletar todo o texto que você digita, exceto senhas. Isso inclui dados pessoais, como números de cartão de crédito. Ele também pode coletar dados sobre suas interações com o dispositivo."</string>
-    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"Desligar a acessibilidade?"</string>
-    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"Tocar em OK interromperá as descrições faladas e todos os outros recursos de acessibilidade que você está usando."</string>
+    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
+    <skip />
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Nenhum aplicativo de acessibilidade"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Você não tem aplicativos de acessibilidade instalado. Você quer baixar um leitor de tela a partir do Android Market?"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Você deseja que os aplicativos instalem scripts do Google que tornarão seu conteúdo mais acessível?"</string>
+    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
+    <skip />
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Este recurso muda a forma como seu dispositivo responde ao toque. Deseja ativá-lo?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Este serviço de acessibilidade não tem descrição."\n\n" Os serviços Acessibilidade fornecem vários tipos de comentários quando você interage com o dispositivo."</string>
     <string name="settings_button" msgid="3006713718908152930">"Configurações"</string>
@@ -1236,13 +1243,13 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Configurações de entrada e saída de voz"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Pesquisa por voz"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Teclado Android"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Entrada de voz"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Saída de voz"</string>
+    <!-- no translation found for voice_category (4730605956740531248) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"Reconhecedor de voz"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Config. do reconhecedor de voz"</string>
+    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Config. do reconhecedor de voz"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Configurações para \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Configurações da conversão de texto em voz"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Configurações da conversão de texto em voz"</string>
+    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Configurações da conversão de texto em voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Usar minhas config."</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"As conf. padrão abaixo substituem as conf. do aplicativo"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Configurações padrão"</string>
@@ -1277,12 +1284,9 @@
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"Masculino"</string>
     <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Sintetização de voz instalada"</string>
     <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Ativar novo mecanismo antes"</string>
-    <!-- no translation found for tts_engine_settings_button (1030512042040722285) -->
-    <skip />
-    <!-- no translation found for tts_engine_preference_section_title (448294500990971413) -->
-    <skip />
-    <!-- no translation found for tts_general_section_title (4402572014604490502) -->
-    <skip />
+    <string name="tts_engine_settings_button" msgid="1030512042040722285">"Iniciar configurações do mecanismo"</string>
+    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Mecanismo preferencial"</string>
+    <string name="tts_general_section_title" msgid="4402572014604490502">"Gerais"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Controle de energia"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Atualizando configuração Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Atualizando configuração Bluetooth"</string>
@@ -1426,6 +1430,8 @@
     <string name="strict_mode_summary" msgid="142834318897332338">"T. Flash q/ aplic. fazem oper. longas conv. princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Localização do ponteiro"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Sobrepos. de tela que mostra dados de toque atual"</string>
+    <string name="show_touches" msgid="1356420386500834339">"Mostrar toques"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Mostrar feedback visual para toques"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Mostrar atualiz. de tela"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Áreas Flash de tela quando eles atualizam"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar o uso da CPU"</string>
@@ -1465,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Dados 2G e 3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Dados 4G"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Ver configurações do aplicativo"</string>
-    <string name="data_usage_app_restrict_background" msgid="8856643905291165256">"Restr. uso de dados de seg. plano"</string>
+    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restr. uso de dados de seg. plano"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Desat. dados segundo plano nas redes que serão limitadas (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Restringir dados de segundo plano?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Este recurso pode ter um impacto negativo nos aplicativos que dependem do uso de dados de segundo plano."\n\n"Controles mais adequados do uso de dados podem ser encontrados nas configurações deste aplicativo."</string>
@@ -1518,13 +1524,13 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Ativar o certificado CA do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Desativar o certificado CA do sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Remover permanentemente o certificado CA do usuário?"</string>
-    <!-- outdated translation 7577630829320003070 -->     <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Tutorial do Falar enquanto toco"</string>
+    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Tutorial de acessibilidade"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Avançar"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Voltar"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Concluir"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Pular tutorial"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lição 1: como explorar a tela"</string>
-    <!-- outdated translation 2465037336858060269 -->     <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Depois de ativar o recurso Falar enquanto toco, você pode tocar na tela para ouvir uma descrição do que está sob o dedo. Por exemplo, a tela atual contém ícones de aplicativos. Encontre um deles tocando na tela e deslizando seu dedo."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Depois de ativar o recurso \"Explorar pelo toque\", você pode tocar na tela para saber o que está sob seu dedo. Por exemplo, a tela atual contém ícones de aplicativos. Encontre um deles tocando na tela e deslizando o dedo."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Muito bem! Continue deslizando o dedo pela tela até encontrar pelo menos mais um ícone."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Para ativar um ícone que está sob seu dedo, toque nele. Deslize o dedo até encontrar o ícone para o <xliff:g id="APP_NAME">%s</xliff:g>. Depois, toque no ícone uma vez para ativá-lo."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Seu dedo está em cima do ícone do <xliff:g id="APP_NAME">%s</xliff:g>. Toque uma vez para ativar o ícone."</string>
@@ -1535,8 +1541,7 @@
     <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Muito bem! Continue deslizando o dedo para encontrar, pelo menos, mais um item."</string>
     <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Agora, coloque dois dedos em um item na lista e deslize os dedos para cima. Se chegar ao topo da tela, levante os dedos, posicione-os mais abaixo na lista e continue deslizando para cima."</string>
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Muito bem! Continue deslizando os dedos para rolar um pouco mais."</string>
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (3442269986312288556) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3442269986312288556">"Você concluiu o tutorial. Para sair, encontre e toque no botão <xliff:g id="FINISH">%s</xliff:g>."</string>
     <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Correção ortográfica"</string>
     <string name="current_backup_pw_prompt" msgid="8314880813545036591">"Digite sua senha atual de backup completo aqui"</string>
     <string name="new_backup_pw_prompt" msgid="3491404828757901644">"Digite uma nova senha para backups completos aqui"</string>

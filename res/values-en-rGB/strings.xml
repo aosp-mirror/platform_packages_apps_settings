@@ -465,13 +465,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For music and media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Remember settings"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="zeroclick_settings_title" msgid="6111073171447659136">"ShareTap"</string>
-    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <string name="zeroclick_on_summary" msgid="3157018760403281266">"On"</string>
-    <string name="zeroclick_off_summary" msgid="2896320184904157018">"Off"</string>
-    <string name="zeroclick_label" msgid="263279563746672463">"ShareTap"</string>
-    <string name="zeroclick_explained" msgid="3676026098073094212">"Share content by touching two NFC-enabled devices back to back."</string>
-    <string name="zeroclick_top" msgid="8405284328201668102">"The app on the top device\'s screen sends content to the bottom device."\n\n"Your data is safe: nothing is shared unless both devices are on and unlocked."\n\n"You can turn this feature off in Settings &gt; More &gt; ShareTap."</string>
+    <string name="ndef_push_settings_title" msgid="7096910206093746606">"ShareTap"</string>
+    <string name="ndef_push_settings_summary" msgid="8205304119235885812"></string>
+    <string name="ndef_push_on_summary" msgid="1493927094678614793">"On"</string>
+    <string name="ndef_push_off_summary" msgid="2112211912532524478">"Off"</string>
+    <string name="ndef_push_label" msgid="6216995559457479606">"ShareTap"</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"Share content by touching two NFC-enabled devices back to back."</string>
+    <string name="ndef_push_top" msgid="8112767699009558636">"The app on the top device\'s screen sends content to the bottom device."\n\n"Your data is safe: nothing is shared unless both devices are on and unlocked."\n\n"You can turn this feature off in Settings &gt; More &gt; ShareTap."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Turn on Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -1051,8 +1051,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Language &amp; input"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Language &amp; input"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Language settings"</string>
-    <string name="keyboard_settings_category" msgid="7060453865544070642">"Keyboard settings"</string>
-    <string name="phone_language" msgid="1165758957501090679">"Select language"</string>
+    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Keyboard settings"</string>
+    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Select language"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Auto-replace"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Correct mistyped words"</string>
@@ -1064,19 +1064,18 @@
     <string name="show_password" msgid="3001113966880559611">"Make passwords visible"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"This input method may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Use this input method?"</string>
-    <string name="pointer_settings_category" msgid="6090176550039035130">"Mouse and track pad settings"</string>
+    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse and track pad settings"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Pointer speed"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"User dictionary"</string>
-    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"User dictionary"</string>
-    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Manage user dictionaries"</string>
+    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"User dictionary"</string>
+    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Manage user dictionaries"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Add"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Add to dictionary"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Edit word"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Edit"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Delete"</string>
-    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"You do not have any words in the user dictionary. You can add a word by touching the Add ( + ) button."</string>
-    <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"You do not have any words in the user dictionary. You can add a word through the menu."</string>
+    <string name="user_dict_settings_empty_text" msgid="1766522102636921529">"You do not have any words in the user dictionary. You can add a word by touching the Add ( + ) button."</string>
     <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"All languages"</string>
     <string name="testing" msgid="6584352735303604146">"Testing"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Tablet information"</string>
@@ -1095,7 +1094,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Short cuts"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Text input"</string>
     <string name="input_method" msgid="5434026103176856164">"Input method"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"Current input method"</string>
+    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Current input method"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Input method selector"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatic"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Always show"</string>
@@ -1147,15 +1146,23 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"On"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Off"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Allowed"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="5156785826922460983">"Disallowed"</string>
+    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Disallowed"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Allow"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Don\'t Allow"</string>
-    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> can collect all of the text you type, except passwords. This includes personal data such as credit card numbers. It can also collect data about your interactions with the device."</string>
-    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"Turn accessibility off?"</string>
-    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"Touching OK will stop spoken descriptions and all other accessibility features that you\'ve been using."</string>
+    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
+    <skip />
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"No accessibility applications"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"You don\'t have accessibility applications installed. Do you want to download a screen reader from the Android Market?"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Do you want applications to install scripts from Google that will make their content more accessible?"</string>
+    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
+    <skip />
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"This feature changes the way that your device responds to touch. Turn on?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"This accessibility service has no description."\n\n"Accessibility services provide various types of feedback when you interact with the device."</string>
     <string name="settings_button" msgid="3006713718908152930">"Settings"</string>
@@ -1236,13 +1243,13 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Voice input &amp; output settings"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Voice search"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android keyboard"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Voice input"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Voice output"</string>
+    <!-- no translation found for voice_category (4730605956740531248) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"Voice recogniser"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Voice recogniser settings"</string>
+    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Voice recogniser settings"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Settings for \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Text-to-speech settings"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Text-to-speech settings"</string>
+    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Text-to-speech settings"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Always use my settings"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Default settings below override application settings"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"default settings"</string>
@@ -1423,6 +1430,8 @@
     <string name="strict_mode_summary" msgid="142834318897332338">"Flash screen when apps do long operations on main thread"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Pointer location"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Screen overlay showing current touch data"</string>
+    <string name="show_touches" msgid="1356420386500834339">"Show touches"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Show visual feedback for touches"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Show screen updates"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Flash areas of screen when they update"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Show CPU usage"</string>
@@ -1462,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-3G data"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G data"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"View application settings"</string>
-    <string name="data_usage_app_restrict_background" msgid="8856643905291165256">"Restrict background data usage"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restrict background data"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Disable background data on networks that you\'ve chosen to limit (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Restrict background data?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"This feature may negatively affect applications which depend on background data usage."\n\n"More appropriate data usage controls may be found within this application\'s settings."</string>
