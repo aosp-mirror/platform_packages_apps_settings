@@ -465,13 +465,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музики та медіа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запам\'ятати налашт."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="zeroclick_settings_title" msgid="6111073171447659136">"ShareTap"</string>
-    <string name="zeroclick_settings_summary" msgid="1552171461663258522"></string>
-    <string name="zeroclick_on_summary" msgid="3157018760403281266">"Увімк."</string>
-    <string name="zeroclick_off_summary" msgid="2896320184904157018">"Вимк."</string>
-    <string name="zeroclick_label" msgid="263279563746672463">"ShareTap"</string>
-    <string name="zeroclick_explained" msgid="3676026098073094212">"Обмінюйтеся вмістом, торкаючись зворотніми сторонами двох пристроїв з увімкненим режимом NFC."</string>
-    <string name="zeroclick_top" msgid="8405284328201668102">"Програма на екрані верхнього пристрою надсилає вміст на нижній пристрій."\n\n"Ваші дані в безпеці: вміст надсилається, коли обидва пристрої ввімкнені та розблоковані."\n\n"Цю функцію можна вимкнути, в меню Налаштування &gt; Інше &gt; ShareTap."</string>
+    <string name="ndef_push_settings_title" msgid="7096910206093746606">"ShareTap"</string>
+    <string name="ndef_push_settings_summary" msgid="8205304119235885812"></string>
+    <string name="ndef_push_on_summary" msgid="1493927094678614793">"Увімк."</string>
+    <string name="ndef_push_off_summary" msgid="2112211912532524478">"Вимк."</string>
+    <string name="ndef_push_label" msgid="6216995559457479606">"ShareTap"</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"Обмінюйтеся вмістом, торкаючись зворотніми сторонами двох пристроїв з увімкненим режимом NFC."</string>
+    <string name="ndef_push_top" msgid="8112767699009558636">"Програма на екрані верхнього пристрою надсилає вміст на нижній пристрій."\n\n"Ваші дані в безпеці: вміст надсилається, коли обидва пристрої ввімкнені та розблоковані."\n\n"Цю функцію можна вимкнути в меню Налаштування &gt; Інше &gt; ShareTap."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Увімкнути Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -485,8 +485,8 @@
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Неможл. здійснити скан. мереж"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Сповіщення мережі"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Сповіщати мене про доступність відкритої мережі"</string>
-    <!-- outdated translation 4723544454066601706 -->     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Перевірки під’єднання через Wi-Fi"</string>
-    <!-- outdated translation 8687400936839455926 -->     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Виявляти потенційні проблеми з під’єднанням до мережі та керувати ними"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Уникнення слабких з’єднань"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Не використовувати мережу Wi-Fi, якщо немає стійкого з’єднання з Інтернетом"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Політика від’єднання Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Укажіть, коли переключ. від Wi-Fi до моб. даних"</string>
     <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Укажіть, коли від’єднуватися від Wi-Fi"</string>
@@ -525,7 +525,7 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(не вказано)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Збережено"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Вимкнено"</string>
-    <!-- outdated translation 7192323081514322537 -->     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Уникнення слабкого з’єднання"</string>
+    <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Уникнення слабкого з’єднання з Інтернетом"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Проблема з автентифікацією"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Не в діапазоні"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Є доступ до WPS"</string>
@@ -1051,8 +1051,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Мова та введення"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Мова та введення"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Налаштування мови"</string>
-    <string name="keyboard_settings_category" msgid="7060453865544070642">"Налашт-ня клавіат."</string>
-    <string name="phone_language" msgid="1165758957501090679">"Вибір мови"</string>
+    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Налашт-ня клавіат."</string>
+    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Вибір мови"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Автозаміна"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Виправте слова з помилк."</string>
@@ -1064,19 +1064,18 @@
     <string name="show_password" msgid="3001113966880559611">"Зробити паролі видимими"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Цей метод введення може збирати всі введені вами тексти, зокрема особисті дані, такі як паролі та номери кредитних карток. Він походить від програми. <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Використ. цей метод введення?"</string>
-    <string name="pointer_settings_category" msgid="6090176550039035130">"Налаштування миші та сенсорної панелі"</string>
+    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Налаштування миші та сенсорної панелі"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Швидкість указівника"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Словник корист-ча"</string>
-    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Словник користувача"</string>
-    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Керування словниками користувача"</string>
+    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Словник користувача"</string>
+    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Керування словниками користувача"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Додати"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Додати до словника"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Редаг. слово"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Редаг."</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Видалити"</string>
-    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"У словнику користувача немає жодного слова. Слово можна додати, торкнувшись кнопки \"Додати\" ( + )."</string>
-    <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"У словнику користувача немає жодних слів. Слово можна додати за допомогою меню."</string>
+    <string name="user_dict_settings_empty_text" msgid="1766522102636921529">"У словнику користувача немає жодного слова. Слово можна додати, торкнувшись кнопки \"Додати\" ( + )."</string>
     <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"Усі мови"</string>
     <string name="testing" msgid="6584352735303604146">"Тестування"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Інф-ція про пристрій"</string>
@@ -1095,7 +1094,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Ярлики"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Текст. введ."</string>
     <string name="input_method" msgid="5434026103176856164">"Метод введення"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"Поточний метод введення"</string>
+    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Поточний метод введення"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Вибір методу введення"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Автоматично"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Завжди показувати"</string>
@@ -1147,15 +1146,23 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Увімк."</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Вимк."</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Дозволено"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="5156785826922460983">"Заборонено"</string>
+    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Заборонено"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Дозволити"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Не дозволяти"</string>
-    <string name="accessibility_service_security_warning" msgid="8318281678500467596">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> може записувати весь введений вами текст, окрім паролів. Це включає й особисті дані, як-от номери кредитних карток. Можуть також збиратися дані про вашу взаємодію з пристроєм."</string>
-    <string name="accessibility_disable_warning_title" msgid="6094507649988366153">"Вимкнути доступність?"</string>
-    <string name="accessibility_disable_warning_summary" msgid="3421051138834637486">"Якщо торкнутись ОК, припиняться голосові описи та всі інші функції доступності, які ви використовуєте."</string>
+    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
+    <skip />
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Немає програм доступності"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"У вас немає встановлених програм доступності. Завантажити програму зчитування з екрана з Android Market?"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="3222458225014522516">"Дозволити програмам установлювати сценарії від Google, які зроблять вміст більш доступним?"</string>
+    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
+    <skip />
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Ця функція змінює реакцію вашого пристрою на дотик. Увімкнути?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Ця служба забезпечення доступності не має опису."\n\n"Служби забезпечення доступності надають різні типи відгуків під час вашої взаємодії з пристроєм."</string>
     <string name="settings_button" msgid="3006713718908152930">"Налаштування"</string>
@@ -1236,13 +1243,13 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Налашт-ня голосового вводу та виводу"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Голос. пошук"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Клавіатура Android"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Голос. ввід"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Голос. вивід"</string>
+    <!-- no translation found for voice_category (4730605956740531248) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"Розпізнавач голосу"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Налашт-ня розпізн-ча голосу"</string>
+    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Налашт-ня розпізн-ча голосу"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Налашт-ня для &amp;quot;<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>&amp;quot;"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Налашт. синтезу мовлення"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Налашт. синтезу мовлення"</string>
+    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Налашт. синтезу мовлення"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Завжди викор. мої налашт."</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Налашт-ня за умовч. нижче замінюють налашт-ня програми"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Налашт-ня за умовч."</string>
@@ -1277,12 +1284,9 @@
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"Чолов."</string>
     <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Систему синтезу мовл. встановлено"</string>
     <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Перед викор. увімк. нову сист."</string>
-    <!-- no translation found for tts_engine_settings_button (1030512042040722285) -->
-    <skip />
-    <!-- no translation found for tts_engine_preference_section_title (448294500990971413) -->
-    <skip />
-    <!-- no translation found for tts_general_section_title (4402572014604490502) -->
-    <skip />
+    <string name="tts_engine_settings_button" msgid="1030512042040722285">"Запускати налаштування системи"</string>
+    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Бажана система"</string>
+    <string name="tts_general_section_title" msgid="4402572014604490502">"Загальні"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Контроль потужн."</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Оновлення налашт. Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Оновлення налашт. Bluetooth"</string>
@@ -1426,6 +1430,8 @@
     <string name="strict_mode_summary" msgid="142834318897332338">"Підсвіч. екран, коли прогр. довго працюють в осн. потоці"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Розташування курсора"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Наклад. на екрані, яке показ.поточні сенсорні дані"</string>
+    <string name="show_touches" msgid="1356420386500834339">"Показувати дотики"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Показувати візуальну реакцію на торкання"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Показати оновлення екрана"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Підсвічувати області екрана, коли ті оновлюються"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показати використання ЦП"</string>
@@ -1465,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Дані 2G–3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Дані 4G"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Див. налаштування програми"</string>
-    <string name="data_usage_app_restrict_background" msgid="8856643905291165256">"Обмежити використ. фонових даних"</string>
+    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Обмежити використ. фонових даних"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Вимкнути фонові дані в мережах, які потрібно обмежити (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Обмежити використання фонових даних?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Ця функція може негативно вплинути на програми, які залежать від використання фонових даних."\n\n"Відповідніші елементи керування використанням даних можна знайти в налаштуваннях цієї програми."</string>
@@ -1518,13 +1524,13 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Увімкнути сертифікат ЦС для системи?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Вимкнути сертифікат ЦС для системи?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Назавжди видалити сертифікат ЦС для користувача?"</string>
-    <!-- outdated translation 7577630829320003070 -->     <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Навчальний посібник із функції Talk As I Touch"</string>
+    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Посібник із доступності"</string>
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Далі"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Назад"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Закінчити"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Пропустити"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Урок 1. Дослідження екрана"</string>
-    <!-- outdated translation 2465037336858060269 -->     <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Увімкнувши функцію Talk As I Touch, можна торкатися екрана, щоб почути, що розташовано під вашим пальцем. Наприклад, на цьому екрані є значки програм. Знайдіть один із них, торкнувшись екрана та провівши по ньому пальцем."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="5332837263739078691">"Увімкнувши функцію дослідження дотиком, можна торкатися екрана, щоб дізнатися, що розташовано під вашим пальцем. Наприклад, на поточному екрані є піктограми програм. Знайдіть один із них, торкнувшись екрана та пересуваючи по ньому пальцем."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Добре. Водіть пальцем по екрану, доки не знайдете принаймні ще один значок."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="7343496813666809738">"Щоб активувати елемент, якого ви торкаєтеся, натисніть його. Проводьте пальцем, доки не знайдете значок програми <xliff:g id="APP_NAME">%s</xliff:g>. Після цього натисніть значок один раз, щоб активувати його."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Ваш палець торкається значка програми <xliff:g id="APP_NAME">%s</xliff:g>. Торкніться один раз, щоб активувати значок."</string>
@@ -1535,8 +1541,7 @@
     <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Добре. Продовжуйте пересувати палець, щоб знайти принаймні ще один елемент."</string>
     <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Тепер покладіть два пальці на елемент у списку та проведіть обома пальцями вгору. Досягнувши кінця екрана, підніміть пальці, покладіть їх нижче на список і знову проведіть угору."</string>
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Добре. Продовжуйте пересувати пальці, щоб прокрутити ще трохи."</string>
-    <!-- no translation found for accessibility_tutorial_lesson_2_text_4 (3442269986312288556) -->
-    <skip />
+    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3442269986312288556">"Ви закінчили перегляд посібника. Щоб вийти, знайдіть і натисніть кнопку \"<xliff:g id="FINISH">%s</xliff:g>\"."</string>
     <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Виправлення написання"</string>
     <string name="current_backup_pw_prompt" msgid="8314880813545036591">"Введіть тут поточний пароль пароль повної резервної копії"</string>
     <string name="new_backup_pw_prompt" msgid="3491404828757901644">"Введіть тут новий пароль для повного резервного копіювання"</string>
