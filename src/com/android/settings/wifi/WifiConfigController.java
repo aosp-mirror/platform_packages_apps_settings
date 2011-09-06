@@ -31,6 +31,7 @@ import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration.ProxySettings;
+import android.net.wifi.WifiConfiguration.Status;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WpsConfiguration;
 import android.net.wifi.WpsConfiguration.Setup;
@@ -216,6 +217,13 @@ public class WifiConfigController implements TextWatcher,
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
                 }
+
+                if (config.status == Status.DISABLED &&
+                        config.disableReason == WifiConfiguration.DISABLED_DNS_FAILURE) {
+                    addRow(group, R.string.wifi_disabled_heading,
+                            context.getString(R.string.wifi_disabled_help));
+                }
+
             }
 
             /* Show network setup options only for a new network */
