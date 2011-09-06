@@ -637,6 +637,7 @@
 
         <activity android:name="CredentialStorage"
                 android:theme="@style/Transparent"
+                android:launchMode="singleTop"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="com.android.credentials.UNLOCK" />
