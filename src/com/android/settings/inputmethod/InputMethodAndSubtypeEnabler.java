@@ -37,6 +37,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,12 +54,13 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     private List<InputMethodInfo> mInputMethodProperties;
     private String mInputMethodId;
     private String mTitle;
+    private String mSystemLocale = "";
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        Configuration config = getResources().getConfiguration();
+        final Configuration config = getResources().getConfiguration();
         mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
 
         final Bundle arguments = getArguments();
@@ -82,6 +85,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             }
         }
 
+        mSystemLocale = config.locale.toString();
         onCreateIMM();
         setPreferenceScreen(createPreferenceHierarchy());
     }
@@ -255,12 +259,16 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                             autoSubtypeLabel = subtypeLabel;
                         }
                     } else {
-                        final CheckBoxPreference chkbxPref = new CheckBoxPreference(context);
+                        final CheckBoxPreference chkbxPref = new SubtypeCheckBoxPreference(
+                                context, subtype.getLocale(), mSystemLocale);
                         chkbxPref.setKey(imiId + subtype.hashCode());
                         chkbxPref.setTitle(subtypeLabel);
-                        activeInputMethodsCategory.addPreference(chkbxPref);
                         subtypePreferences.add(chkbxPref);
                     }
+                }
+                Collections.sort(subtypePreferences);
+                for (int j = 0; j < subtypePreferences.size(); ++j) {
+                    activeInputMethodsCategory.addPreference(subtypePreferences.get(j));
                 }
                 mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
             }
@@ -358,5 +366,57 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             setSubtypeAutoSelectionEnabled(imiId, isNoSubtypesExplicitlySelected(imiId));
         }
         setCheckedImplicitlyEnabledSubtypes(null);
+    }
+
+    private static class SubtypeCheckBoxPreference extends CheckBoxPreference {
+        private final boolean mIsSystemLocale;
+        private final boolean mIsSystemLanguage;
+
+        public SubtypeCheckBoxPreference(
+                Context context, String subtypeLocale, String systemLocale) {
+            super(context);
+            if (TextUtils.isEmpty(subtypeLocale)) {
+                mIsSystemLocale = false;
+                mIsSystemLanguage = false;
+            } else {
+                mIsSystemLocale = subtypeLocale.equals(systemLocale);
+                mIsSystemLanguage = mIsSystemLocale
+                        || subtypeLocale.startsWith(systemLocale.substring(0, 2));
+            }
+        }
+
+        @Override
+        public int compareTo(Preference p) {
+            if (p instanceof SubtypeCheckBoxPreference) {
+                final SubtypeCheckBoxPreference pref = ((SubtypeCheckBoxPreference)p);
+                final CharSequence t0 = getTitle();
+                final CharSequence t1 = pref.getTitle();
+                if (TextUtils.equals(t0, t1)) {
+                    return 0;
+                }
+                if (mIsSystemLocale) {
+                    return -1;
+                }
+                if (pref.mIsSystemLocale) {
+                    return 1;
+                }
+                if (mIsSystemLanguage) {
+                    return -1;
+                }
+                if (pref.mIsSystemLanguage) {
+                    return 1;
+                }
+                if (TextUtils.isEmpty(t0)) {
+                    return 1;
+                }
+                if (TextUtils.isEmpty(t1)) {
+                    return -1;
+                }
+                return t0.toString().compareTo(t1.toString());
+            } else {
+                Log.w(TAG, "Illegal preference type.");
+                return -1;
+            }
+        }
     }
 }
