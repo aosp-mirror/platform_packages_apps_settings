@@ -64,21 +64,21 @@ public class WifiP2pDialog extends AlertDialog implements AdapterView.OnItemSele
     public WifiP2pConfig getConfig() {
         WifiP2pConfig config = new WifiP2pConfig();
         config.deviceAddress = mDeviceAddress.getText().toString();
-        config.wpsConfig = new Wps();
+        config.wps = new Wps();
         switch (mWpsSetupIndex) {
             case WPS_PBC:
-                config.wpsConfig.setup = Setup.PBC;
+                config.wps.setup = Setup.PBC;
                 break;
             case WPS_KEYPAD:
-                config.wpsConfig.setup = Setup.KEYPAD;
-                config.wpsConfig.pin = ((TextView) mView.findViewById(R.id.wps_pin)).
+                config.wps.setup = Setup.KEYPAD;
+                config.wps.pin = ((TextView) mView.findViewById(R.id.wps_pin)).
                         getText().toString();
                 break;
             case WPS_DISPLAY:
-                config.wpsConfig.setup = Setup.DISPLAY;
+                config.wps.setup = Setup.DISPLAY;
                 break;
             default:
-                config.wpsConfig.setup = Setup.PBC;
+                config.wps.setup = Setup.PBC;
                 break;
         }
         return config;
