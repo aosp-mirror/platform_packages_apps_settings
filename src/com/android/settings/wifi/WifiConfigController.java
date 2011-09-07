@@ -33,8 +33,8 @@ import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiConfiguration.Status;
 import android.net.wifi.WifiInfo;
-import android.net.wifi.WpsConfiguration;
-import android.net.wifi.WpsConfiguration.Setup;
+import android.net.wifi.Wps;
+import android.net.wifi.Wps.Setup;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -484,8 +484,8 @@ public class WifiConfigController implements TextWatcher,
         return MANUAL;
     }
 
-    WpsConfiguration getWpsConfig() {
-        WpsConfiguration config = new WpsConfiguration();
+    Wps getWpsConfig() {
+        Wps config = new Wps();
         switch (mNetworkSetupSpinner.getSelectedItemPosition()) {
             case WPS_PBC:
                 config.setup = Setup.PBC;
