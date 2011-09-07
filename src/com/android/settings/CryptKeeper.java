@@ -86,6 +86,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final String FORCE_VIEW_ENTRY = "entry";
     private static final String FORCE_VIEW_ERROR = "error";
 
+    /** When encryption is detected, this flag indivates whether or not we've checked for erros. */
+    private boolean mValidationComplete;
+    /** A flag to indicate that the volume is in a bad state (e.g. partially encrypted). */
+    private boolean mEncryptionGoneBad;
+
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
     private EditText mPasswordEntry;
@@ -149,6 +154,34 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
+    private class ValidationTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            IMountService service = getMountService();
+            try {
+                int state = service.getEncryptionState();
+                if (state == IMountService.ENCRYPTION_STATE_NONE) {
+                    Log.w(TAG, "Unexpectedly in CryptKeeper even though there is no encryption.");
+                    return true; // Unexpected, but fine, I guess...
+                }
+                return state == IMountService.ENCRYPTION_STATE_OK;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Unable to get encryption state properly");
+                return true;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            mValidationComplete = true;
+            if (Boolean.FALSE.equals(result)) {
+                Log.w(TAG, "Incomplete, or corrupted encryption detected. Prompting user to wipe.");
+                mEncryptionGoneBad = true;
+            }
+            setupUi();
+        }
+    }
+
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -204,6 +237,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mWakeLock = retained.wakelock;
             Log.d(TAG, "Restoring wakelock from NonConfigurationInstanceState");
         }
+
+        // Check the encryption status to ensure something hasn't gone bad.
+        new ValidationTask().execute((Void[]) null);
     }
 
     /**
@@ -216,10 +252,24 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         super.onStart();
 
         // Check to see why we were started.
+        if (mValidationComplete) {
+            setupUi();
+        }
+    }
+
+    /**
+     * Initializes the UI based on the current state of encryption.
+     * This is idempotent - calling repeatedly will simply re-initialize the UI.
+     */
+    private void setupUi() {
+        if (mEncryptionGoneBad || isDebugView(FORCE_VIEW_ERROR)) {
+            setContentView(R.layout.crypt_keeper_progress);
+            showFactoryReset();
+            return;
+        }
+
         String progress = SystemProperties.get("vold.encrypt_progress");
-        if (!"".equals(progress)
-                || isDebugView(FORCE_VIEW_PROGRESS)
-                || isDebugView(FORCE_VIEW_ERROR)) {
+        if (!"".equals(progress) || isDebugView(FORCE_VIEW_PROGRESS)) {
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
         } else {
@@ -308,7 +358,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private void updateProgress() {
         String state = SystemProperties.get("vold.encrypt_progress");
 
-        if ("error_partially_encrypted".equals(state) || isDebugView(FORCE_VIEW_ERROR)) {
+        if ("error_partially_encrypted".equals(state)) {
             showFactoryReset();
             return;
         }
