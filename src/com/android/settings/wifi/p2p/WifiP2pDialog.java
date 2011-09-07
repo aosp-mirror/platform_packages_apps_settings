@@ -19,8 +19,8 @@ package com.android.settings.wifi.p2p;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.wifi.WpsConfiguration;
-import android.net.wifi.WpsConfiguration.Setup;
+import android.net.wifi.Wps;
+import android.net.wifi.Wps.Setup;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.os.Bundle;
@@ -64,7 +64,7 @@ public class WifiP2pDialog extends AlertDialog implements AdapterView.OnItemSele
     public WifiP2pConfig getConfig() {
         WifiP2pConfig config = new WifiP2pConfig();
         config.deviceAddress = mDeviceAddress.getText().toString();
-        config.wpsConfig = new WpsConfiguration();
+        config.wpsConfig = new Wps();
         switch (mWpsSetupIndex) {
             case WPS_PBC:
                 config.wpsConfig.setup = Setup.PBC;
