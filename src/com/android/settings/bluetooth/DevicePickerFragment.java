@@ -33,6 +33,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private boolean mNeedAuth;
     private String mLaunchPackage;
     private String mLaunchClass;
+    private boolean mStartScanOnResume;
 
     @Override
     void addPreferencesForActivity() {
@@ -50,13 +51,17 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(getString(R.string.device_picker));
+        mStartScanOnResume = (savedInstanceState == null);  // don't start scan after rotation
     }
 
     @Override
     public void onResume() {
         super.onResume();
         addCachedDevices();
-        mLocalAdapter.startScanning(true);
+        if (mStartScanOnResume) {
+            mLocalAdapter.startScanning(true);
+            mStartScanOnResume = false;
+        }
     }
 
     @Override
