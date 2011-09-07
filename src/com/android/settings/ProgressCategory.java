@@ -45,13 +45,13 @@ public class ProgressCategory extends ProgressCategoryBase {
         textView.setVisibility(noDeviceFound ? View.INVISIBLE : View.VISIBLE);
         progressBar.setVisibility(mProgress ? View.VISIBLE : View.INVISIBLE);
 
-        if (mProgress) {
+        if (mProgress || !noDeviceFound) {
             if (mNoDeviceFoundAdded) {
                 removePreference(mNoDeviceFoundPreference);
                 mNoDeviceFoundAdded = false;
             }
         } else {
-            if (noDeviceFound && !mNoDeviceFoundAdded) {
+            if (!mNoDeviceFoundAdded) {
                 if (mNoDeviceFoundPreference == null) {
                     mNoDeviceFoundPreference = new Preference(getContext());
                     mNoDeviceFoundPreference.setLayoutResource(R.layout.preference_empty_list);
@@ -70,4 +70,3 @@ public class ProgressCategory extends ProgressCategoryBase {
         notifyChanged();
     }
 }
-
