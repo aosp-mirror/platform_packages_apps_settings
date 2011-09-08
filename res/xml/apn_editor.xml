@@ -121,4 +121,17 @@
         android:entries="@array/apn_protocol_entries"
         android:entryValues="@array/apn_protocol_values"
         />
+    <CheckBoxPreference
+        android:title="@string/carrier_enabled"
+        android:key="carrier_enabled"
+        android:enabled="false"
+        android:summaryOn="@string/carrier_enabled_summaryOn"
+        android:summaryOff="@@string/carrier_enabled_summaryOff"
+        />
+    <ListPreference
+        android:title="@string/bearer"
+        android:key="bearer"
+        android:entries="@array/bearer_entries"
+        android:entryValues="@array/bearer_values"
+        />
 </PreferenceScreen>   
