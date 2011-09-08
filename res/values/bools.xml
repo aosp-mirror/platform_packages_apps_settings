@@ -22,4 +22,7 @@
     <!-- Whether the power control widget is enabled for this device. Should be overridden for 
          specific product builds. -->
     <bool name="has_powercontrol_widget">true</bool>
+    <!-- Whether the bluetooth activation confirmation dialogs should be auto dismissed.
+         Can be overridden for specific product builds. -->
+    <bool name="auto_confirm_bluetooth_activation_dialog">false</bool>
 </resources>
