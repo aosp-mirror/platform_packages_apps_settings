@@ -99,7 +99,20 @@ public class RunningState {
     
     // All processes, used for retrieving memory information.
     final ArrayList<ProcessItem> mAllProcessItems = new ArrayList<ProcessItem>();
-    
+
+    static class AppProcessInfo {
+        final ActivityManager.RunningAppProcessInfo info;
+        boolean hasServices;
+        boolean hasForegroundServices;
+
+        AppProcessInfo(ActivityManager.RunningAppProcessInfo _info) {
+            info = _info;
+        }
+    }
+
+    // Temporary structure used when updating above information.
+    final SparseArray<AppProcessInfo> mTmpAppProcesses = new SparseArray<AppProcessInfo>();
+
     int mSequence = 0;
     
     // ----- following protected by mLock -----
@@ -641,25 +654,97 @@ public class RunningState {
         mSequence++;
         
         boolean changed = false;
-        
+
+        // Retrieve list of services, filtering out anything that definitely
+        // won't be shown in the UI.
         List<ActivityManager.RunningServiceInfo> services 
                 = am.getRunningServices(MAX_SERVICES);
-        final int NS = services != null ? services.size() : 0;
+        int NS = services != null ? services.size() : 0;
         for (int i=0; i<NS; i++) {
             ActivityManager.RunningServiceInfo si = services.get(i);
             // We are not interested in services that have not been started
             // and don't have a known client, because
             // there is nothing the user can do about them.
             if (!si.started && si.clientLabel == 0) {
+                services.remove(i);
+                i--;
+                NS--;
                 continue;
             }
             // We likewise don't care about services running in a
             // persistent process like the system or phone.
             if ((si.flags&ActivityManager.RunningServiceInfo.FLAG_PERSISTENT_PROCESS)
                     != 0) {
+                services.remove(i);
+                i--;
+                NS--;
                 continue;
             }
-            
+        }
+
+        // Retrieve list of running processes, organizing them into a sparse
+        // array for easy retrieval.
+        List<ActivityManager.RunningAppProcessInfo> processes
+                = am.getRunningAppProcesses();
+        final int NP = processes != null ? processes.size() : 0;
+        mTmpAppProcesses.clear();
+        for (int i=0; i<NP; i++) {
+            ActivityManager.RunningAppProcessInfo pi = processes.get(i);
+            mTmpAppProcesses.put(pi.pid, new AppProcessInfo(pi));
+        }
+
+        // Initial iteration through running services to collect per-process
+        // info about them.
+        for (int i=0; i<NS; i++) {
+            ActivityManager.RunningServiceInfo si = services.get(i);
+            if (si.restarting == 0 && si.pid > 0) {
+                AppProcessInfo ainfo = mTmpAppProcesses.get(si.pid);
+                if (ainfo != null) {
+                    ainfo.hasServices = true;
+                    if (si.foreground) {
+                        ainfo.hasForegroundServices = true;
+                    }
+                }
+            }
+        }
+
+        // Update state we are maintaining about process that are running services.
+        for (int i=0; i<NS; i++) {
+            ActivityManager.RunningServiceInfo si = services.get(i);
+
+            // If this service's process is in use at a higher importance
+            // due to another process bound to one of its services, then we
+            // won't put it in the top-level list of services.  Instead we
+            // want it to be included in the set of processes that the other
+            // process needs.
+            if (si.restarting == 0 && si.pid > 0) {
+                AppProcessInfo ainfo = mTmpAppProcesses.get(si.pid);
+                if (ainfo != null && !ainfo.hasForegroundServices) {
+                    // This process does not have any foreground services.
+                    // If its importance is greater than the service importance
+                    // then there is something else more significant that is
+                    // keeping it around that it should possibly be included as
+                    // a part of instead of being shown by itself.
+                    if (ainfo.info.importance
+                            < ActivityManager.RunningAppProcessInfo.IMPORTANCE_SERVICE) {
+                        // Follow process chain to see if there is something
+                        // else that could be shown
+                        boolean skip = false;
+                        ainfo = mTmpAppProcesses.get(ainfo.info.importanceReasonPid);
+                        while (ainfo != null) {
+                            if (ainfo.hasServices || isInterestingProcess(ainfo.info)) {
+                                skip = true;
+                                break;
+                            }
+                            ainfo = mTmpAppProcesses.get(ainfo.info.importanceReasonPid);
+                        }
+                        if (skip) {
+                            continue;
+                        }
+                    }
+                }
+            }
+
             HashMap<String, ProcessItem> procs = mServiceProcessesByName.get(si.uid);
             if (procs == null) {
                 procs = new HashMap<String, ProcessItem>();
@@ -694,9 +779,6 @@ public class RunningState {
         
         // Now update the map of other processes that are running (but
         // don't have services actively running inside them).
-        List<ActivityManager.RunningAppProcessInfo> processes
-                = am.getRunningAppProcesses();
-        final int NP = processes != null ? processes.size() : 0;
         for (int i=0; i<NP; i++) {
             ActivityManager.RunningAppProcessInfo pi = processes.get(i);
             ProcessItem proc = mServiceProcessesByPid.get(pi.pid);
