@@ -173,6 +173,11 @@ public class RequestPermissionActivity extends Activity implements
 
         mDialog = builder.create();
         mDialog.show();
+
+        if (getResources().getBoolean(R.bool.auto_confirm_bluetooth_activation_dialog) == true) {
+            // dismiss dialog immediately if settings say so
+            onClick(null, DialogInterface.BUTTON_POSITIVE);
+        }
     }
 
     @Override
