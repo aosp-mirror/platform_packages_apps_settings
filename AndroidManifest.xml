@@ -937,7 +937,8 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".bluetooth.BluetoothPermissionRequest">
+        <receiver android:name=".bluetooth.BluetoothPermissionRequest"
+                  android:permission="android.permission.BLUETOOTH_ADMIN">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
