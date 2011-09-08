@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.nfc.NfcAdapter;
@@ -141,7 +142,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
         WifiP2pManager p2p = (WifiP2pManager) activity.getSystemService(Context.WIFI_P2P_SERVICE);
 
-        if (!p2p.isP2pSupported()) {
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)) {
             getPreferenceScreen().removePreference(wifiP2p);
             getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
         } else {
