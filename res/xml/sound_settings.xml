@@ -64,11 +64,6 @@
             android:persistent="false"
             android:ringtoneType="notification" />
 
-    <CheckBoxPreference
-            android:key="notification_pulse"
-            android:title="@string/notification_pulse_title"
-            android:persistent="false" />
-
     <PreferenceCategory
             android:title="@string/sound_category_feedback_title"/>
 
@@ -93,6 +88,11 @@
             android:key="haptic_feedback"
             android:title="@string/haptic_feedback_enable_title"
             android:defaultValue="true" />
+
+    <CheckBoxPreference
+            android:key="notification_pulse"
+            android:title="@string/notification_pulse_title"
+            android:persistent="false" />
 
     <ListPreference
             android:key="emergency_tone"
