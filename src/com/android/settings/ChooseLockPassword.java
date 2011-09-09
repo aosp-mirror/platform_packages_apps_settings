@@ -368,7 +368,9 @@ public class ChooseLockPassword extends PreferenceActivity {
             } else if (mUiStage == Stage.NeedToConfirm) {
                 if (mFirstPin.equals(pin)) {
                     mLockPatternUtils.clearLock();
-                    mLockPatternUtils.saveLockPassword(pin, mRequestedQuality);
+                    final boolean isFallback = getActivity().getIntent().getBooleanExtra(
+                            LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
+                    mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
                     getActivity().finish();
                 } else {
                     updateStage(Stage.ConfirmWrong);

@@ -33,6 +33,12 @@
             android:persistent="false"/>
 
         <PreferenceScreen
+            android:key="unlock_set_biometric_weak"
+            android:title="@string/unlock_set_unlock_biometric_weak_title"
+            android:summary="@string/unlock_set_unlock_biometric_weak_summary"
+            android:persistent="false"/>
+
+        <PreferenceScreen
             android:key="unlock_set_pattern"
             android:title="@string/unlock_set_unlock_pattern_title"
             android:summary="@string/unlock_set_unlock_pattern_summary"
