@@ -646,7 +646,7 @@ public class ManageApplications extends Fragment implements
         tabHost.setOnTabChangedListener(this);
 
         // adjust padding around tabwidget as needed
-        prepareCustomPreferencesList(container, mTabHost, mListView);
+        prepareCustomPreferencesList(container, mTabHost, mListView, false);
 
         return mTabHost;
     }
