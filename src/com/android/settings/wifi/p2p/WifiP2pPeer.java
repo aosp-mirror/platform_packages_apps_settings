@@ -22,7 +22,6 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pDevice;
-import android.net.wifi.p2p.WifiP2pDevice.Status;
 import android.preference.Preference;
 import android.text.TextUtils;
 import android.view.View;
@@ -74,7 +73,7 @@ public class WifiP2pPeer extends Preference {
 
         // devices go in the order of the status
         if (device.status != other.device.status) {
-            return device.status.ordinal() < other.device.status.ordinal() ? -1 : 1;
+            return device.status < other.device.status ? -1 : 1;
         }
 
         // Sort by name/address
@@ -99,6 +98,6 @@ public class WifiP2pPeer extends Preference {
         Context context = getContext();
         mSignal.setImageLevel(getLevel());
         String[] statusArray = context.getResources().getStringArray(R.array.wifi_p2p_status);
-        setSummary(statusArray[device.status.ordinal()]);
+        setSummary(statusArray[device.status]);
     }
 }

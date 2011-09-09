@@ -31,8 +31,8 @@ import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -53,7 +53,8 @@ import java.util.Collection;
 /*
  * Displays Wi-fi p2p settings UI
  */
-public class WifiP2pSettings extends SettingsPreferenceFragment {
+public class WifiP2pSettings extends SettingsPreferenceFragment
+        implements PeerListListener {
 
     private static final String TAG = "WifiP2pSettings";
     private static final int MENU_ID_SEARCH = Menu.FIRST;
@@ -62,7 +63,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
 
 
     private final IntentFilter mIntentFilter = new IntentFilter();
-    private final Handler mHandler = new WifiP2pHandler();
     private WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
     private WifiP2pDialog mConnectDialog;
@@ -81,17 +81,15 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
             if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
                 //TODO: nothing right now
             } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
-                if (mWifiP2pManager != null) mWifiP2pManager.requestPeers(mChannel);
+                if (mWifiP2pManager != null) {
+                    mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
+                }
             } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
                 if (mWifiP2pManager == null) return;
                 NetworkInfo networkInfo = (NetworkInfo) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_NETWORK_INFO);
                 if (networkInfo.isConnected()) {
-                    Log.d(TAG, "Start peer connections");
-                    mWifiP2pManager.startPeerCommunication();
-                } else {
-                    Log.d(TAG, "Stop peer connections");
-                    mWifiP2pManager.stopPeerCommunication();
+                    Log.d(TAG, "Connected");
                 }
             }
         }
@@ -109,7 +107,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         if (mWifiP2pManager != null) {
-            mChannel = mWifiP2pManager.initialize(activity, mHandler);
+            mChannel = mWifiP2pManager.initialize(activity, getActivity().getMainLooper(), null);
             if (mChannel == null) {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");
@@ -126,7 +124,15 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     WifiP2pConfig config = mConnectDialog.getConfig();
                     if (mWifiP2pManager != null) {
-                        mWifiP2pManager.connect(mChannel, config);
+                        mWifiP2pManager.connect(mChannel, config,
+                                new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                Log.d(TAG, " connect success");
+                            }
+                            public void onFailure(int reason) {
+                                Log.d(TAG, " connect fail " + reason);
+                            }
+                        });
                     }
                 }
             }
@@ -138,7 +144,14 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     if (mWifiP2pManager != null) {
-                        mWifiP2pManager.removeGroup(mChannel);
+                        mWifiP2pManager.removeGroup(mChannel, new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                Log.d(TAG, " remove group success");
+                            }
+                            public void onFailure(int reason) {
+                                Log.d(TAG, " remove group fail " + reason);
+                            }
+                        });
                     }
                 }
             }
@@ -151,7 +164,16 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
         super.onResume();
         getActivity().registerReceiver(mReceiver, mIntentFilter);
 
-        if (mWifiP2pManager != null) mWifiP2pManager.discoverPeers(mChannel);
+        if (mWifiP2pManager != null) {
+            mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                Log.d(TAG, " discover success");
+                            }
+                            public void onFailure(int reason) {
+                                Log.d(TAG, " discover fail " + reason);
+                            }
+                        });
+        }
     }
 
     @Override
@@ -176,12 +198,26 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
         switch (item.getItemId()) {
             case MENU_ID_SEARCH:
                 if (mWifiP2pManager != null) {
-                    mWifiP2pManager.discoverPeers(mChannel);
+                    mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                Log.d(TAG, " discover success");
+                            }
+                            public void onFailure(int reason) {
+                                Log.d(TAG, " discover fail " + reason);
+                            }
+                        });
                 }
                 return true;
             case MENU_ID_CREATE_GROUP:
                 if (mWifiP2pManager != null) {
-                    mWifiP2pManager.createGroup(mChannel);
+                    mWifiP2pManager.createGroup(mChannel, new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                Log.d(TAG, " create group success");
+                            }
+                            public void onFailure(int reason) {
+                                Log.d(TAG, " create group fail " + reason);
+                            }
+                        });
                 }
                 return true;
             case MENU_ID_ADVANCED:
@@ -195,7 +231,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         if (preference instanceof WifiP2pPeer) {
             mSelectedWifiPeer = (WifiP2pPeer) preference;
-            if (mSelectedWifiPeer.device.status == WifiP2pDevice.Status.CONNECTED) {
+            if (mSelectedWifiPeer.device.status == WifiP2pDevice.CONNECTED) {
                 showDialog(DIALOG_DISCONNECT);
             } else {
                 showDialog(DIALOG_CONNECT);
@@ -222,7 +258,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
         return null;
     }
 
-    private void updatePeers(WifiP2pDeviceList peers) {
+    public void onPeersAvailable(WifiP2pDeviceList peers) {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
 
@@ -230,24 +266,4 @@ public class WifiP2pSettings extends SettingsPreferenceFragment {
             preferenceScreen.addPreference(new WifiP2pPeer(getActivity(), peer));
         }
     }
-
-    private class WifiP2pHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            switch (message.what) {
-                case WifiP2pManager.HANDLER_DISCONNECTION:
-                    //Failure to set up connection
-                    Log.e(TAG, "Lost connection with wifi p2p service");
-                    mWifiP2pManager = null;
-                    break;
-                case WifiP2pManager.RESPONSE_PEERS:
-                    updatePeers(mWifiP2pManager.peersInResponse(message));
-                    break;
-                default:
-                    //Ignore
-                    break;
-            }
-        }
-    }
-
 }
