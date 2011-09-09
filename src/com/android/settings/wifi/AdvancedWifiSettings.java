@@ -99,14 +99,35 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         if (sleepPolicyPref != null) {
             if (Utils.isWifiOnly(getActivity())) {
                 sleepPolicyPref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
-                sleepPolicyPref.setSummary(R.string.wifi_setting_sleep_policy_summary_wifi_only);
             }
             sleepPolicyPref.setOnPreferenceChangeListener(this);
             int value = Settings.System.getInt(getContentResolver(),
                     Settings.System.WIFI_SLEEP_POLICY,
                     Settings.System.WIFI_SLEEP_POLICY_NEVER);
-            sleepPolicyPref.setValue(String.valueOf(value));
+            String stringValue = String.valueOf(value);
+            sleepPolicyPref.setValue(stringValue);
+            updateSleepPolicySummary(sleepPolicyPref, stringValue);
         }
+    }
+
+    private void updateSleepPolicySummary(Preference sleepPolicyPref, String value) {
+        if (value != null) {
+            String[] values = getResources().getStringArray(R.array.wifi_sleep_policy_values);
+            final int summaryArrayResId = Utils.isWifiOnly(getActivity()) ?
+                    R.array.wifi_sleep_policy_entries_wifi_only : R.array.wifi_sleep_policy_entries;
+            String[] summaries = getResources().getStringArray(summaryArrayResId);
+            for (int i = 0; i < values.length; i++) {
+                if (value.equals(values[i])) {
+                    if (i < summaries.length) {
+                        sleepPolicyPref.setSummary(summaries[i]);
+                        return;
+                    }
+                }
+            }
+        }
+
+        sleepPolicyPref.setSummary("");
+        Log.e(TAG, "Invalid sleep policy value: " + value);
     }
 
     @Override
@@ -133,7 +154,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
 
         if (KEY_FREQUENCY_BAND.equals(key)) {
             try {
-                mWifiManager.setFrequencyBand(Integer.parseInt(((String) newValue)), true);
+                mWifiManager.setFrequencyBand(Integer.parseInt((String) newValue), true);
             } catch (NumberFormatException e) {
                 Toast.makeText(getActivity(), R.string.wifi_setting_frequency_band_error,
                         Toast.LENGTH_SHORT).show();
@@ -143,8 +164,10 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
 
         if (KEY_SLEEP_POLICY.equals(key)) {
             try {
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
+                String stringValue = (String) newValue;
+                Settings.System.putInt(getContentResolver(), Settings.System.WIFI_SLEEP_POLICY,
+                        Integer.parseInt(stringValue));
+                updateSleepPolicySummary(preference, stringValue);
             } catch (NumberFormatException e) {
                 Toast.makeText(getActivity(), R.string.wifi_setting_sleep_policy_error,
                         Toast.LENGTH_SHORT).show();
