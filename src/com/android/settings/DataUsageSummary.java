@@ -64,7 +64,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.InsetDrawable;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -120,6 +122,8 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.android.internal.telephony.Phone;
+import com.android.settings.drawable.InsetBoundsDrawable;
+import com.android.settings.drawable.DrawableWrapper;
 import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.widget.ChartDataUsageView;
@@ -275,7 +279,12 @@ public class DataUsageSummary extends Fragment {
         mListView = (ListView) view.findViewById(android.R.id.list);
 
         // adjust padding around tabwidget as needed
-        prepareCustomPreferencesList(container, view, mListView);
+        prepareCustomPreferencesList(container, view, mListView, true);
+
+        // inset selector and divider drawables
+        final int insetSide = view.getResources().getDimensionPixelOffset(
+                com.android.internal.R.dimen.preference_fragment_padding_side);
+        insetListViewDrawables(mListView, insetSide);
 
         mTabHost.setup();
         mTabHost.setOnTabChangedListener(mTabListener);
@@ -1391,7 +1400,7 @@ public class DataUsageSummary extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.app_percentage_item, parent, false);
+                        R.layout.data_usage_item, parent, false);
             }
 
             final Context context = parent.getContext();
@@ -1910,6 +1919,24 @@ public class DataUsageSummary extends Fragment {
         }
 
         return TextUtils.join(limited);
+    }
+
+    /**
+     * Inset both selector and divider {@link Drawable} on the given
+     * {@link ListView} by the requested dimensions.
+     */
+    private static void insetListViewDrawables(ListView view, int insetSide) {
+        final Drawable selector = view.getSelector();
+        final Drawable divider = view.getDivider();
+
+        // fully unregister these drawables so callbacks can be maintained after
+        // wrapping below.
+        final Drawable stub = new ColorDrawable(Color.TRANSPARENT);
+        view.setSelector(stub);
+        view.setDivider(stub);
+
+        view.setSelector(new InsetBoundsDrawable(selector, insetSide));
+        view.setDivider(new InsetBoundsDrawable(divider, insetSide));
     }
 
     /**

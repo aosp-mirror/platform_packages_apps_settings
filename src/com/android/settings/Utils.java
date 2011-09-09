@@ -377,7 +377,8 @@ public class Utils {
      * when outside scrollbars are requested. Usually used to display
      * {@link ListView} and {@link TabWidget} with correct padding.
      */
-    public static void prepareCustomPreferencesList(ViewGroup parent, View child, ListView list) {
+    public static void prepareCustomPreferencesList(
+            ViewGroup parent, View child, ListView list, boolean ignoreSidePadding) {
         final boolean movePadding = list.getScrollBarStyle() == View.SCROLLBARS_OUTSIDE_OVERLAY;
         if (movePadding && parent instanceof PreferenceFrameLayout) {
             ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
@@ -387,7 +388,9 @@ public class Utils {
                     com.android.internal.R.dimen.preference_fragment_padding_side);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
-            list.setPadding(paddingSide, 0, paddingSide, paddingBottom);
+
+            final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingBottom;
+            list.setPadding(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
         }
     }
 }
