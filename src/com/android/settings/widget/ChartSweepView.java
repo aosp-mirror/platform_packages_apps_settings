@@ -45,11 +45,13 @@ public class ChartSweepView extends View {
 
     private static final boolean DRAW_OUTLINE = false;
 
+    // TODO: clean up all the various padding/offset/margins
+
     private Drawable mSweep;
     private Rect mSweepPadding = new Rect();
 
     /** Offset of content inside this view. */
-    private Point mContentOffset = new Point();
+    private Rect mContentOffset = new Rect();
     /** Offset of {@link #mSweep} inside this view. */
     private Point mSweepOffset = new Point();
 
@@ -229,6 +231,8 @@ public class ChartSweepView extends View {
         if (mLabelTemplate != null && mAxis != null) {
             mLabelValue = mAxis.buildLabel(getResources(), mLabelTemplate, mValue);
             invalidate();
+        } else {
+            mLabelValue = mValue;
         }
     }
 
@@ -333,9 +337,9 @@ public class ChartSweepView extends View {
                 // only start tracking when in sweet spot
                 final boolean accept;
                 if (mFollowAxis == VERTICAL) {
-                    accept = event.getX() > getWidth() - (mSweepPadding.right * 3);
+                    accept = event.getX() > getWidth() - (mSweepPadding.right * 8);
                 } else {
-                    accept = event.getY() > getHeight() - (mSweepPadding.bottom * 3);
+                    accept = event.getY() > getHeight() - (mSweepPadding.bottom * 8);
                 }
 
                 final MotionEvent eventInParent = event.copy();
@@ -392,6 +396,7 @@ public class ChartSweepView extends View {
             }
             case MotionEvent.ACTION_UP: {
                 mTracking = null;
+                mValue = mLabelValue;
                 dispatchOnSweep(true);
                 setTranslationX(0);
                 setTranslationY(0);
@@ -534,23 +539,30 @@ public class ChartSweepView extends View {
             mMargins.bottom = mSweepPadding.bottom;
         }
 
-        mContentOffset.x = 0;
-        mContentOffset.y = 0;
+        mContentOffset.set(0, 0, 0, 0);
 
         // make touch target area larger
+        final int widthBefore = getMeasuredWidth();
+        final int heightBefore = getMeasuredHeight();
         if (mFollowAxis == HORIZONTAL) {
-            final int widthBefore = getMeasuredWidth();
             final int widthAfter = widthBefore * 3;
-            setMeasuredDimension(widthAfter, getMeasuredHeight());
-            mContentOffset.offset((widthAfter - widthBefore) / 2, 0);
+            setMeasuredDimension(widthAfter, heightBefore);
+            mContentOffset.left = (widthAfter - widthBefore) / 2;
+
+            final int offset = mSweepPadding.bottom * 2;
+            mContentOffset.bottom -= offset;
+            mMargins.bottom += offset;
         } else {
-            final int heightBefore = getMeasuredHeight();
             final int heightAfter = heightBefore * 3;
-            setMeasuredDimension(getMeasuredWidth(), heightAfter);
+            setMeasuredDimension(widthBefore, heightAfter);
             mContentOffset.offset(0, (heightAfter - heightBefore) / 2);
+
+            final int offset = mSweepPadding.right * 2;
+            mContentOffset.right -= offset;
+            mMargins.right += offset;
         }
 
-        mSweepOffset.offset(mContentOffset.x, mContentOffset.y);
+        mSweepOffset.offset(mContentOffset.left, mContentOffset.top);
         mMargins.offset(-mSweepOffset.x, -mSweepOffset.y);
     }
 
@@ -592,7 +604,7 @@ public class ChartSweepView extends View {
         if (isEnabled() && mLabelLayout != null) {
             final int count = canvas.save();
             {
-                canvas.translate(mContentOffset.x, mContentOffset.y + labelOffset);
+                canvas.translate(mContentOffset.left, mContentOffset.top + labelOffset);
                 mLabelLayout.draw(canvas);
             }
             canvas.restoreToCount(count);
@@ -602,18 +614,18 @@ public class ChartSweepView extends View {
         }
 
         if (mFollowAxis == VERTICAL) {
-            mSweep.setBounds(labelSize, mSweepOffset.y, width,
+            mSweep.setBounds(labelSize, mSweepOffset.y, width + mContentOffset.right,
                     mSweepOffset.y + mSweep.getIntrinsicHeight());
         } else {
-            mSweep.setBounds(mSweepOffset.x, labelSize,
-                    mSweepOffset.x + mSweep.getIntrinsicWidth(), height);
+            mSweep.setBounds(mSweepOffset.x, labelSize, mSweepOffset.x + mSweep.getIntrinsicWidth(),
+                    height + mContentOffset.bottom);
         }
 
         mSweep.draw(canvas);
     }
 
     public static float getLabelTop(ChartSweepView view) {
-        return view.getY() + view.mContentOffset.y;
+        return view.getY() + view.mContentOffset.top;
     }
 
     public static float getLabelBottom(ChartSweepView view) {
