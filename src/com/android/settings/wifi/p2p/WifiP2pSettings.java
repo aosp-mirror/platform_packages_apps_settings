@@ -36,7 +36,10 @@ import android.os.Bundle;
 import android.os.Message;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -59,7 +62,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private static final String TAG = "WifiP2pSettings";
     private static final int MENU_ID_SEARCH = Menu.FIRST;
     private static final int MENU_ID_CREATE_GROUP = Menu.FIRST + 1;
-    private static final int MENU_ID_ADVANCED = Menu.FIRST +2;
+    private static final int MENU_ID_REMOVE_GROUP = Menu.FIRST + 2;
+    private static final int MENU_ID_ADVANCED = Menu.FIRST +3;
 
 
     private final IntentFilter mIntentFilter = new IntentFilter();
@@ -70,8 +74,14 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private OnClickListener mDisconnectListener;
     private WifiP2pPeer mSelectedWifiPeer;
 
+    private PreferenceGroup mPeersGroup;
+    private Preference mThisDevicePref;
+
     private static final int DIALOG_CONNECT     = 1;
     private static final int DIALOG_DISCONNECT  = 2;
+
+    private WifiP2pDevice mThisDevice;
+    private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -91,6 +101,11 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 if (networkInfo.isConnected()) {
                     Log.d(TAG, "Connected");
                 }
+            } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
+                mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
+                        WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
+                Log.d(TAG, "Update device info: " + mThisDevice);
+                updateDevicePref();
             }
         }
     };
@@ -103,6 +118,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
         final Activity activity = getActivity();
         mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
@@ -188,6 +204,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(Menu.NONE, MENU_ID_CREATE_GROUP, 0, R.string.wifi_p2p_menu_create_group)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(Menu.NONE, MENU_ID_REMOVE_GROUP, 0, R.string.wifi_p2p_menu_remove_group)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_p2p_menu_advanced)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         super.onCreateOptionsMenu(menu, inflater);
@@ -216,6 +234,18 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                             }
                             public void onFailure(int reason) {
                                 Log.d(TAG, " create group fail " + reason);
+                            }
+                        });
+                }
+                return true;
+            case MENU_ID_REMOVE_GROUP:
+                if (mWifiP2pManager != null) {
+                    mWifiP2pManager.removeGroup(mChannel, new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                Log.d(TAG, " remove group success");
+                            }
+                            public void onFailure(int reason) {
+                                Log.d(TAG, " remove group fail " + reason);
                             }
                         });
                 }
@@ -259,11 +289,49 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     }
 
     public void onPeersAvailable(WifiP2pDeviceList peers) {
+
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
 
-        for (WifiP2pDevice peer: peers.getDeviceList()) {
-            preferenceScreen.addPreference(new WifiP2pPeer(getActivity(), peer));
+        preferenceScreen.setOrderingAsAdded(true);
+
+        if (mPeersGroup == null) {
+            mPeersGroup = new PreferenceCategory(getActivity());
+        } else {
+            mPeersGroup.removeAll();
         }
+
+        preferenceScreen.addPreference(mThisDevicePref);
+
+        mPeersGroup.setTitle(R.string.wifi_p2p_available_devices);
+        mPeersGroup.setEnabled(true);
+        preferenceScreen.addPreference(mPeersGroup);
+
+        mPeers = peers;
+        for (WifiP2pDevice peer: peers.getDeviceList()) {
+            mPeersGroup.addPreference(new WifiP2pPeer(getActivity(), peer));
+        }
+    }
+
+    private void updateDevicePref() {
+        mThisDevicePref = new Preference(getActivity());
+
+        if (mThisDevice != null) {
+            if (TextUtils.isEmpty(mThisDevice.deviceName)) {
+                mThisDevicePref.setTitle(mThisDevice.deviceAddress);
+            } else {
+                mThisDevicePref.setTitle(mThisDevice.deviceName);
+            }
+
+            if (mThisDevice.status == WifiP2pDevice.CONNECTED) {
+                String[] statusArray = getActivity().getResources().getStringArray(
+                        R.array.wifi_p2p_status);
+                mThisDevicePref.setSummary(statusArray[mThisDevice.status]);
+            }
+            mThisDevicePref.setPersistent(false);
+            mThisDevicePref.setEnabled(true);
+            mThisDevicePref.setSelectable(false);
+        }
+        onPeersAvailable(mPeers); //update UI
     }
 }
