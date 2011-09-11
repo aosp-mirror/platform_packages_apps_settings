@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import com.android.settings.R;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
@@ -30,6 +28,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
@@ -107,7 +106,7 @@ public class MasterClear extends Fragment {
      * keyguard confirmation if the user has currently enabled one.  If there
      * is no keyguard available, we simply go to the final confirmation prompt.
      */
-    private Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
+    private final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
 
         public void onClick(View v) {
             if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
@@ -138,9 +137,12 @@ public class MasterClear extends Fragment {
          * If the external storage is emulated, it will be erased with a factory
          * reset at any rate. There is no need to have a separate option until
          * we have a factory reset that only erases some directories and not
-         * others.
+         * others. Likewise, if it's non-removable storage, it could potentially have been
+         * encrypted, and will also need to be wiped.
          */
-        if (Environment.isExternalStorageEmulated()) {
+        boolean isExtStorageEmulated = Environment.isExternalStorageEmulated();
+        if (isExtStorageEmulated
+                || (!Environment.isExternalStorageRemovable() && isExtStorageEncrypted())) {
             mExternalStorageContainer.setVisibility(View.GONE);
 
             final View externalOption = mContentView.findViewById(R.id.erase_external_option_text);
@@ -148,6 +150,10 @@ public class MasterClear extends Fragment {
 
             final View externalAlsoErased = mContentView.findViewById(R.id.also_erases_external);
             externalAlsoErased.setVisibility(View.VISIBLE);
+
+            // If it's not emulated, it is on a separate partition but it means we're doing
+            // a force wipe due to encryption.
+            mExternalStorage.setChecked(!isExtStorageEmulated);
         } else {
             mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
 
@@ -159,6 +165,11 @@ public class MasterClear extends Fragment {
         }
 
         loadAccountList();
+    }
+
+    private boolean isExtStorageEncrypted() {
+        String state = SystemProperties.get("vold.decrypt");
+        return !"".equals(state);
     }
 
     private void loadAccountList() {
