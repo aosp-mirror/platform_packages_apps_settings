@@ -60,7 +60,7 @@ public class Memory extends SettingsPreferenceFragment {
     // one's preference is disabled
     private Preference mLastClickedMountToggle;
     private String mClickedMountPoint;
-    
+
     // Access using getMountService()
     private IMountService mMountService = null;
 
@@ -197,7 +197,7 @@ public class Memory extends SettingsPreferenceFragment {
        }
        return mMountService;
     }
-    
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
@@ -225,7 +225,7 @@ public class Memory extends SettingsPreferenceFragment {
 
         return false;
     }
-     
+
     private final BroadcastReceiver mMediaScannerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -267,7 +267,7 @@ public class Memory extends SettingsPreferenceFragment {
             mLastClickedMountToggle.setEnabled(false);
             mLastClickedMountToggle.setTitle(mResources.getString(R.string.sd_ejecting_title));
             mLastClickedMountToggle.setSummary(mResources.getString(R.string.sd_ejecting_summary));
-            mountService.unmountVolume(mClickedMountPoint, true);
+            mountService.unmountVolume(mClickedMountPoint, true, false);
         } catch (RemoteException e) {
             // Informative dialog to user that unmount failed.
             showDialogInner(DLG_ERROR_UNMOUNT);
