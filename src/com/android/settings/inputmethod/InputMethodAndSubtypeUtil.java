@@ -19,7 +19,9 @@ package com.android.settings.inputmethod;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -28,6 +30,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.HashMap;
@@ -146,6 +149,28 @@ public class InputMethodAndSubtypeUtil {
             set.add(sStringInputMethodSplitter.next());
         }
         return set;
+    }
+
+    public static CharSequence getCurrentInputMethodName(Context context, ContentResolver resolver,
+            InputMethodManager imm, List<InputMethodInfo> imis, PackageManager pm) {
+        if (resolver == null || imis == null) return null;
+        final String currentInputMethodId = Settings.Secure.getString(resolver,
+                Settings.Secure.DEFAULT_INPUT_METHOD);
+        if (TextUtils.isEmpty(currentInputMethodId)) return null;
+        for (InputMethodInfo imi : imis) {
+            if (currentInputMethodId.equals(imi.getId())) {
+                final InputMethodSubtype subtype = imm.getCurrentInputMethodSubtype();
+                final CharSequence imiLabel = imi.loadLabel(pm);
+                final CharSequence summary = subtype != null
+                        ? TextUtils.concat(subtype.getDisplayName(context,
+                                    imi.getPackageName(), imi.getServiceInfo().applicationInfo),
+                                            (TextUtils.isEmpty(imiLabel) ?
+                                                    "" : " - " + imiLabel))
+                        : imiLabel;
+                return summary;
+            }
+        }
+        return null;
     }
 
     public static void saveInputMethodSubtypeList(SettingsPreferenceFragment context,
