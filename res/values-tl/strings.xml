@@ -316,8 +316,8 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Subukang muli sa loob ng <xliff:g id="DELAY">^1</xliff:g> (na) segundo."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Ipasok ang iyong password"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Hindi matagumpay ang pag-encrypt"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Nagambala ang pag-encrypt at hindi makumpleto. Dapat kang magsagawa ng pag-reset ng factory data (na bumubura sa lahat ng iyong data) bago mo maaaring matuloy ang paggamit sa iyong tablet. Maaari mong subukang i-encrypt muli ang iyong tablet pagkatapos na makumpleto ang pag-reset."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Nagambala ang pag-encrypt at hindi makumpleto. Dapat kang magsagawa ng pag-reset ng factory data (na bumubura sa lahat ng iyong data) bago mo maaaring matuloy ang paggamit sa iyong telepono. Maaari mong subukang i-encrypt muli ang iyong telepono pagkatapos na makumpleto ang pag-reset."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="6891198717505120682">"Ang pag-encrypt ay naantala at hindi makumpleto. Bilang resulta, hindi na maa-access ang data sa iyong telepono. "\n\n"Upang patuloy na magamit ang iyong telepono, dapat kang magpaganap ng factory reset. Kapag na-set up mo ang iyong telepono pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong magpanumbalik ng anumang data na na-back up sa iyong Google Account."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="1341912405353765293">"Ang pag-encrypt ay naantala at hindi makumpleto. Bilang resulta, hindi na maa-access ang data sa iyong telepono. "\n\n"Upang patuloy na magamit ang iyong telepono, dapat kang magpaganap ng factory reset. Kapag na-set up mo ang iyong telepono pagkatapos ng pag-reset, magkakaraoon ka ng pagkakataong magpanumbalik ng anumang data na na-back up sa iyong Google Account."</string>
     <string name="lock_settings_picker_title" msgid="6288468357346846402">"Lock ng screen"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"I-screen lock"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Baguhin ang lock ng screen"</string>
@@ -326,16 +326,22 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Wala"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Slide"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="4654618968017235437"></string>
+    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Hindi nangangailangan ng isang pattern, PIN, o password upang ma-unlock ang screen"</string>
+    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
+    <skip />
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Pattern"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="3689520051155195467"></string>
+    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Nangangailangan ng pattern upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3411238428953648165"></string>
+    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Nangangailangan ng numeric na PIN upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="6314705845824442665"></string>
+    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Nangangailangan ng password upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Hindi pinagana ng administrator, patakaran sa pag-encrypt, o storage ng kredensyal"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Wala"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Slide"</string>
+    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
+    <skip />
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Naka-secure na may pattern"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Naka-secure na may PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Naka-secure na may password"</string>
@@ -487,9 +493,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"I-notify ako kapag available ang bukas na network"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Iwasan ang mahinang mga koneksyon"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Huwag gumamit ng network ng Wi-Fi maliban kung mayroon itong disenteng koneksyon sa internet"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Patakaran sa pag-alis sa pagkakakonekta ng Wi-Fi"</string>
-    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Tukuyin kung kailan lilipat mula sa Wi-Fi patungong data ng mobile"</string>
-    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Tukuyin kung kailan aalisin ang koneksyon mula sa Wi-Fi"</string>
+    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Patakaran sa pag-alis sa pagkakakonekta ng Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Nagkaproblema sa pagbabago ng setting"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Magdagdag ng network"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Mga Wi-Fi network"</string>
@@ -526,6 +530,8 @@
     <string name="wifi_remembered" msgid="4955746899347821096">"Na-save"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Hindi Pinagana"</string>
     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Umiwas sa mahinang koneksyon sa internet"</string>
+    <string name="wifi_disabled_heading" msgid="2653023318639789196">"Mga Detalye"</string>
+    <string name="wifi_disabled_help" msgid="836952961850626904">"Iniwasan ang network dahil sa mahinang koneksyon. Maaari mong i-off sa advanced na menu ng mga setting ng Wi-Fi ang pag-uugaling ito na umiwas sa network na may mahinang koneksyon."</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problema sa pagpapatotoo"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Wala sa sakop"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Available ang WPS"</string>
@@ -1051,8 +1057,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Wika at input"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Wika at input"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Mga setting ng wika"</string>
-    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Mga setting ng keyboard"</string>
-    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Pumili ng wika"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"Mga pamamaraan ng keyboard at input"</string>
+    <string name="phone_language" msgid="8870144109924299673">"Wika"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Auto-replace"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Itama ang maling na-type na mga salita"</string>
@@ -1064,11 +1070,11 @@
     <string name="show_password" msgid="3001113966880559611">"Gawing nakikita ang mga password"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Maaaring magawa ng pamamaraan ng pag-input na ito na makolekta ang lahat ng teksto na iyong tina-type, kasama ang personal na data tulad ng mga password at mga numero ng credit card. Nanggagaling ito mula sa application na <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Gamitin ang pamamaraan ng pag-input na ito?"</string>
-    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Mga setting ng mouse at trackpad"</string>
+    <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Bilis ng pointer"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Diksyunaryo ng user"</string>
-    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Diksyunaryo ng user"</string>
-    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Pamahalaan ang mga diksyunaryo ng user"</string>
+    <string name="user_dict_single_settings_title" msgid="524997218433540614">"Personal na diksyunaryo"</string>
+    <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Personal na mga diksyunaryo"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Magdagdag"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Idagdag sa diksyunaryo"</string>
@@ -1094,7 +1100,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Mga Shortcut"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Pag-input ng teksto"</string>
     <string name="input_method" msgid="5434026103176856164">"Paraan ng input"</string>
-    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Kasalukuyang paraan ng pag-input"</string>
+    <string name="current_input_method" msgid="234072873286056438">"Default"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Tagapili ng paraan ng pag-input"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Awtomatiko"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Palaging ipakita"</string>
@@ -1146,23 +1152,17 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Naka-on"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Naka-off"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Pinapayagan"</string>
-    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Hindi Pinapayagan"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Hindi pinapayagan"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Payagan"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Huwag Payagan"</string>
-    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
-    <skip />
+    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Gamitin ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="accessibility_service_security_warning_summary" msgid="3952006000910406653">"Maaaring kolektahin ng <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> ang lahat ng tekstong tina-type mo, maliban sa mga password. Kabilang dito ang personal na data tulad ng mga numero ng credit card. Maaari rin itong mangolekta ng data tungkol sa iyong mga pakikipag-ugnayan sa device."</string>
+    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Ihinto ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Ang pagpindot sa OK ay magpapahinto sa <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Walang mga application sa accessibility"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Wala kang naka-install na mga application sa accessibility. Nais mo bang mag-download ng screen reader mula sa Android Market?"</string>
-    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
-    <skip />
+    <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"I-install ang mga script sa accessibility?"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Nais mo bang mag-install ang mga application ng mga script mula sa Google na gagawing higit na naa-access ang kanilang nilalaman?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Binabago ng tampok na ito ang paraan ng pagtugon sa pagpindot sa iyong device. I-on?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Walang paglalarawan ang serbisyo sa accessibility na ito."\n\n"Ang mga serbisyo sa accessibility ay nagbibigay ng iba\'t-ibang uri ng feedback kapag nakikipag-ugnayan ka sa device."</string>
     <string name="settings_button" msgid="3006713718908152930">"Mga Setting"</string>
@@ -1243,13 +1243,12 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Pag-input ng boses &amp; mga setting ng output"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Paghahanap gamit ang boses"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android keyboard"</string>
-    <!-- no translation found for voice_category (4730605956740531248) -->
-    <skip />
+    <string name="voice_category" msgid="4730605956740531248">"Voice"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Tagakilala ng boses"</string>
-    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Mga setting ng tagakilala ng boses"</string>
+    <string name="recognizer_settings_title" msgid="8967349667879743521">"Voice input para sa paghahanap"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Mga setting para sa \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Mga setting ng text-to-speech"</string>
-    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Mga setting ng text-to-speech"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"Output ng text-to-speech"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Palaging gamitin ang aking mga setting"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Ang default na mga setting sa ibaba ay pinapatungan ang mga setting ng application"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Mga default na setting"</string>
@@ -1447,7 +1446,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Paggamit ng data"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cycle sa paggamit ng data"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming ng data"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Paghigpitan ang data ng background"</string>
+    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Paghigpitan ang data ng background"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Hiwalay na paggamit ng 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Ipakita ang paggamit ng Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Ipakita ang paggamit ng Ethernet"</string>
@@ -1456,6 +1455,7 @@
     <string name="data_usage_empty" msgid="9089930257306304588">"Walang mga application ang gumamit ng data sa panahong ito."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Foreground"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Background"</string>
+    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Huwag paganahin ang data ng mobile?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Wag gumana mobile data sa limit"</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Wag paganahin 4G data sa limit"</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Wag gumana 2G-3G data sa limit"</string>
@@ -1471,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"data ng 2G-3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"data ng 4G"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Tingnan setting ng application"</string>
-    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Higpitan paggamit bckground data"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Paghigpitan ang data ng background"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Huwag paganahin ang data ng background sa mga network na pinili mong limitahan (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Paghigpitan ang data ng background?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Maaaring magkaroon ng negatibong epekto ang tampok na ito sa mga application na umaasa sa paggamit ng data sa background."\n\n"Higit pang mga kontrol sa paggamit ng data ang mahahanap sa loob ng mga setting ng application na ito."</string>
@@ -1548,4 +1548,5 @@
     <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"Pakilagay muli ang iyong bagong password ng buong backup dito"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Itakda ang backup na password"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Kanselahin"</string>
+    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
 </resources>
