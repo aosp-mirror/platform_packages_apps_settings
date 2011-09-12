@@ -88,6 +88,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     /** When encryption is detected, this flag indivates whether or not we've checked for erros. */
     private boolean mValidationComplete;
+    private boolean mValidationRequested;
     /** A flag to indicate that the volume is in a bad state (e.g. partially encrypted). */
     private boolean mEncryptionGoneBad;
 
@@ -159,6 +160,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         protected Boolean doInBackground(Void... params) {
             IMountService service = getMountService();
             try {
+                Log.d(TAG, "Validating encryption state.");
                 int state = service.getEncryptionState();
                 if (state == IMountService.ENCRYPTION_STATE_NONE) {
                     Log.w(TAG, "Unexpectedly in CryptKeeper even though there is no encryption.");
@@ -177,6 +179,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (Boolean.FALSE.equals(result)) {
                 Log.w(TAG, "Incomplete, or corrupted encryption detected. Prompting user to wipe.");
                 mEncryptionGoneBad = true;
+            } else {
+                Log.d(TAG, "Encryption state validated. Proceeding to configure UI");
             }
             setupUi();
         }
@@ -237,9 +241,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mWakeLock = retained.wakelock;
             Log.d(TAG, "Restoring wakelock from NonConfigurationInstanceState");
         }
-
-        // Check the encryption status to ensure something hasn't gone bad.
-        new ValidationTask().execute((Void[]) null);
     }
 
     /**
@@ -251,10 +252,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     public void onStart() {
         super.onStart();
 
-        // Check to see why we were started.
-        if (mValidationComplete) {
-            setupUi();
-        }
+        setupUi();
     }
 
     /**
@@ -272,9 +270,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (!"".equals(progress) || isDebugView(FORCE_VIEW_PROGRESS)) {
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
-        } else {
+        } else if (mValidationComplete) {
             setContentView(R.layout.crypt_keeper_password_entry);
             passwordEntryInit();
+        } else if (!mValidationRequested) {
+            // We're supposed to be encrypted, but no validation has been done.
+            new ValidationTask().execute((Void[]) null);
+            mValidationRequested = true;
         }
     }
 
