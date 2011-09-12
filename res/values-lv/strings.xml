@@ -316,8 +316,8 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Mēģiniet vēlreiz pēc <xliff:g id="DELAY">^1</xliff:g> sekundēm."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Ievadiet paroli"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Šifrēšana neizdevās."</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Lai atsāktu lietot planšetdatoru, ir jāveic rūpnīcas datu atiestatīšana (tiks dzēsti visi dati). Kad ir veikta atiestatīšana, varat mēģināt atkārtoti šifrēt planšetdatoru."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Lai atsāktu lietot tālruni, ir jāveic rūpnīcas datu atiestatīšana (tiks dzēsti visi dati). Kad ir veikta atiestatīšana, varat mēģināt atkārtoti šifrēt tālruni."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="6891198717505120682">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Tādējādi planšetdatora dati vairs nav pieejami."\n\n"Lai atsāktu lietot planšetdatoru, ir jāveic atiestatīšana uz rūpnīcas iestatījumiem. Kad esat veicis atiestatīšanu, varat atjaunot jebkādus datus, kas tika dublēti jūsu Google kontā."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="1341912405353765293">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Tādējādi tālruņa dati vairs nav pieejami."\n\n"Lai atsāktu lietot tālruni, ir jāveic atiestatīšana uz rūpnīcas iestatījumiem. Kad esat veicis atiestatīšanu, varat atjaunot jebkādus datus, kas tika dublēti jūsu Google kontā."</string>
     <string name="lock_settings_picker_title" msgid="6288468357346846402">"Ekrāna bloķēšana"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrāna bloķēšana"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Bloķ. ekr. izmaiņas"</string>
@@ -326,16 +326,22 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Nav"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Vilkt ar pirkstu"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="4654618968017235437"></string>
+    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Nepiepr.kombin.,PIN vai paroli,lai atbl. ekr."</string>
+    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
+    <skip />
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Kombinācija"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="3689520051155195467"></string>
+    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Pieprasīt kombināciju, lai atbloķētu ekrānu"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3411238428953648165"></string>
+    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Pieprasīt ciparu PIN, lai atbloķētu ekrānu"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Parole"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="6314705845824442665"></string>
+    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Pieprasīt paroli, lai atbloķētu ekrānu"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Atspēj. admin., šifr. polit. vai akred. datu krāt."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nav"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Vilkt ar pirkstu"</string>
+    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
+    <skip />
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Aizsargāts ar kombināciju"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Aizsargāts ar PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Aizsargāts ar paroli"</string>
@@ -487,9 +493,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Informēt mani, kad ir pieejams atvērts tīkls"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Novērst nekvalitatīvus savienojumus"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Nelietot Wi-Fi tīklu, ja vien tam nav kvalitatīvs interneta pieslēgums"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Wi-Fi atvienošanas politika"</string>
-    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Norādīt, kad pārslēgt no Wi-Fi uz mobilajiem datiem"</string>
-    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Norādīt, kad pārtraukt Wi-Fi savienojumu"</string>
+    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Wi-Fi atvienošanas politika"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Mainot iestatījumu, radās kļūda"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Pievienot tīklu"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi tīkli"</string>
@@ -526,6 +530,8 @@
     <string name="wifi_remembered" msgid="4955746899347821096">"Saglabāts"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Atspējots"</string>
     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Novērsts nekvalitatīvs interneta savienojums"</string>
+    <string name="wifi_disabled_heading" msgid="2653023318639789196">"Detalizēta informācija"</string>
+    <string name="wifi_disabled_help" msgid="836952961850626904">"Tīkls netika izmantots slikta savienojuma dēļ. Ja nevēlaties, ka tiek novērsta tādu tīklu izmantošana, kuriem ir slikts savienojums, izmantojiet Wi-Fi iestatījumu papildu izvēlni un izslēdziet šāda veida darbības."</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Autentificēšanas problēma"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Nav diapazona ietvaros"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ir pieejams"</string>
@@ -1051,8 +1057,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Valodas ievade"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Valodas ievade"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Valodas iestatījumi"</string>
-    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatūras iestatījumi"</string>
-    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Atlasīt valodu"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatūra un ievades metodes"</string>
+    <string name="phone_language" msgid="8870144109924299673">"Valoda"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Automātiski aizstāt"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Izlabot nepareizi uzrakstītos vārdus"</string>
@@ -1064,11 +1070,11 @@
     <string name="show_password" msgid="3001113966880559611">"Padarīt paroles redzamas"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Lietojot šo ievades metodi, var tikt apkopots viss jūsu ievadītais teksts, tostarp, personīgie dati, piemēram, paroles un kredītkaršu numuri. Tā ir no <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> lietojumprogrammas. Vai lietot šo ievades metodi?"</string>
-    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Peles un skārienpaliktņa iestatījumi"</string>
+    <string name="pointer_settings_category" msgid="8183819795164034286">"Pele/kursorplanšete"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Rādītāja ātrums"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Lietotāja vārdnīca"</string>
-    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Lietotāja vārdnīca"</string>
-    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Pārvaldīt lietotāja vārdnīcas"</string>
+    <string name="user_dict_single_settings_title" msgid="524997218433540614">"Personiskā vārdnīca"</string>
+    <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Personiskās vārdnīcas"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Pievienot"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Pievienot vārdnīcai"</string>
@@ -1094,7 +1100,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Saīsnes"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Teksta ievade"</string>
     <string name="input_method" msgid="5434026103176856164">"Ievades metode"</string>
-    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Pašreizējā ievades metode"</string>
+    <string name="current_input_method" msgid="234072873286056438">"Noklusējuma"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Ievades metodes atlasītājs"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automātiski"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Vienmēr rādīt"</string>
@@ -1146,23 +1152,17 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Ieslēgts"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Izslēgts"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Atļauts"</string>
-    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Nav atļauts"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Nav atļauta"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Atļaut"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Neatļaut"</string>
-    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
-    <skip />
+    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Vai izmantot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="accessibility_service_security_warning_summary" msgid="3952006000910406653">"Pakalpojumā <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> var tikt apkopots viss jūsu rakstītais teksts, izņemot paroles. Tas attiecas arī uz personas datiem, piemēram, kredītkaršu numuriem. Pakalpojumā var tikt apkopoti arī dati par jūsu darbībām ar ierīci."</string>
+    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Vai apturēt pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> darbību?"</string>
+    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Pieskaroties pogai Labi, tiks apturēta pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> darbība."</string>
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Nav pieejamības lietojumprogrammu"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Pieejamības lietojumprogrammas nav instalētas. Vai vēlaties lejupielādēt ekrāna lasītāju vietnē Android Market?"</string>
-    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
-    <skip />
+    <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Vai instalēt pieejamības skriptus?"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Vai vēlaties, lai lietojumprogrammās tiktu instalēti skripti no Google, kuri padarīs lietojumprogrammu saturu pieejamāku?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Izmantojot šo funkciju, tiek mainīta ierīces reakcija uz skārienu. Vai ieslēgt?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Šim pieejamības pakalpojumam nav apraksta."\n\n"Pieejamības pakalpojumos tiek sniegtas dažāda veida atsauksmes, kad veicat darbības ar ierīci."</string>
     <string name="settings_button" msgid="3006713718908152930">"Iestatījumi"</string>
@@ -1243,13 +1243,12 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Balss ievades un izvades iestatījumi"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Balss meklēšana"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android tastatūra"</string>
-    <!-- no translation found for voice_category (4730605956740531248) -->
-    <skip />
+    <string name="voice_category" msgid="4730605956740531248">"Balss"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Balss atpazinējs"</string>
-    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Balss atpazīšanas iestatījumi"</string>
+    <string name="recognizer_settings_title" msgid="8967349667879743521">"Balss ievade meklēšanai"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g> iestatījumi"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Teksta-runas iestatījumi"</string>
-    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Teksta-runas iestatījumi"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"Teksta pārveidošanas runā izvade"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Vienmēr lietot manus iestatījumus"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Noklusējuma iestatījumi ignorē lietojumprogrammas iestatījumus"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Noklusējuma iestatījumi"</string>
@@ -1447,7 +1446,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datu lietojums"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Datu izmantošanas cikls"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Datu viesabonēšana"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ierobežot fona datus"</string>
+    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Ierobežot fona datus"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Atsevišķs 4G lietojums"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Rādīt inform. par Wi-Fi izmant."</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Rādīt tīkla Ethernet lietojumu"</string>
@@ -1456,6 +1455,7 @@
     <string name="data_usage_empty" msgid="9089930257306304588">"Neviena programma nelietoja datus šai periodā"</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Priekšplāns"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Fons"</string>
+    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Vai atspējot mobilos datus?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Atspēj. mob. d., sasniedzot lim."</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Atspējot 4G datus, sasn. lim."</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Atspēj. 2G–3G datus, sasn. lim."</string>
@@ -1471,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G–3G dati"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G dati"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Skatīt lietojumpr. iestatījumus"</string>
-    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ierobežot fona datu izmantošanu"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ierobežot fona datus"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Atspējojiet fona datus tīklos, kuri tiek ierobežoti (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Vai ierobežot fona datus?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Šī funkcija var negatīvi ietekmēt lietojumprogrammas, kurās tiek izmantoti fona dati."\n\n"Piemērotākas datu izmantošanas vadīklas ir pieejamas šīs lietojumprogrammas iestatījumos."</string>
@@ -1548,4 +1548,5 @@
     <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"Lūdzu, šeit atkārtoti ievadiet jauno pilna dublējuma paroli."</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Iestatīt dublējuma paroli"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Atcelt"</string>
+    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
 </resources>

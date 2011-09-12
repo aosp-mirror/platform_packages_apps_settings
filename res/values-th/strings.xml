@@ -316,8 +316,8 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"ลองใหม่อีกครั้งใน <xliff:g id="DELAY">^1</xliff:g> วินาที"</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"ป้อนรหัสผ่านของคุณ"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสไม่สำเร็จ"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น (ซึ่งจะลบข้อมูลทั้งหมดของคุณ) ก่อนจึงจะใช้แท็บเล็ตของคุณได้อีกครั้ง คุณสามารถลองเข้ารหัสแท็บเล็ตของคุณอีกครั้งได้หลังจากรีเซ็ตเรียบร้อยแล้ว"</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น (ซึ่งจะลบข้อมูลทั้งหมดของคุณ) ก่อนจึงจะใช้โทรศัพท์ของคุณได้อีกครั้ง คุณสามารถลองเข้ารหัสโทรศัพท์ของคุณอีกครั้งได้หลังจากรีเซ็ตเรียบร้อยแล้ว"</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="6891198717505120682">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น ส่งผลให้คุณไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป"\n\n"ในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตให้เป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="1341912405353765293">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น ส่งผลให้คุณไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป"\n\n"ในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตให้เป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
     <string name="lock_settings_picker_title" msgid="6288468357346846402">"ล็อกหน้าจอ"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"ล็อกหน้าจอ"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"เปลี่ยนหน้าจอล็อก"</string>
@@ -326,16 +326,22 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"ไม่มี"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"เลื่อน"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="4654618968017235437"></string>
+    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"ไม่ใช้รูปแบบ PIN หรือรหัสผ่านปลดล็อคหน้าจอ"</string>
+    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
+    <skip />
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"รูปแบบ"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="3689520051155195467"></string>
+    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"ต้องใช้รูปแบบเพื่อปลดล็อคหน้าจอ"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3411238428953648165"></string>
+    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"ต้องใช้ PIN ตัวเลขเพื่อปลดล็อคหน้าจอ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"รหัสผ่าน"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="6314705845824442665"></string>
+    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"ต้องใช้รหัสผ่านเพื่อปลดล็อคหน้าจอ"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"ปิดใช้งานโดยผู้ดูแลระบบ นโยบายการเข้ารหัส หรือที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ไม่มี"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"เลื่อน"</string>
+    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
+    <skip />
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"รักษาความปลอดภัยด้วยรูปแบบ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"รักษาความปลอดภัยด้วย PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"รักษาความปลอดภัยด้วยรหัสผ่าน"</string>
@@ -487,9 +493,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"แจ้งฉันเมื่อมีเครือข่ายเปิดให้ใช้งานได้"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"หลีกเลี่ยงการเชื่อมต่อที่สัญญาณไม่แรงพอ"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"อย่าใช้เครือข่าย Wi-Fi หากเครือข่ายนั้นไม่มีการเชื่อมต่ออินเทอร์เน็ตที่ดีพอ"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"นโยบายการยกเลิกการเชื่อมต่อ Wi-Fi"</string>
-    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"ระบุเมื่อต้องการเปลี่ยนจาก Wi-Fi เป็นข้อมูลมือถือ"</string>
-    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"ระบุเวลาที่จะยกเลิกการเชื่อมต่อจาก Wi-Fi"</string>
+    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"นโยบายการยกเลิกการเชื่อมต่อ Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"มีปัญหาในการเปลี่ยนแปลงการตั้งค่า"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"เพิ่มเครือข่าย"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"เครือข่าย Wi-Fi"</string>
@@ -526,6 +530,8 @@
     <string name="wifi_remembered" msgid="4955746899347821096">"บันทึกแล้ว"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"ปิดใช้งานแล้ว"</string>
     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"หลีกเลี่ยงการเชื่อมต่อที่สัญญาณไม่แรงพอ"</string>
+    <string name="wifi_disabled_heading" msgid="2653023318639789196">"รายละเอียด"</string>
+    <string name="wifi_disabled_help" msgid="836952961850626904">"เลี่ยงการใช้งานเครือข่ายเนื่องจากการเชื่อมต่อมีสัญญาณไม่แรงพอ คุณสามารถปิดการเลี่ยงใช้งานเครือข่ายเนื่องจากการเชื่อมต่อมีสัญญาณไม่แรงพอได้ในเมนูขั้นสูงของการตั้งค่า Wi-Fi"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"ปัญหาในการตรวจสอบสิทธิ์"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"ไม่อยู่ในพื้นที่ให้บริการ"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ใช้งานได้"</string>
@@ -1051,8 +1057,8 @@
     <string name="language_settings" msgid="5292716747264442359">"ภาษาและการป้อนข้อมูล"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"ภาษาและการป้อนข้อมูล"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"การตั้งค่าภาษา"</string>
-    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"การตั้งค่าแป้นพิมพ์"</string>
-    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"เลือกภาษา"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"แป้นพิมพ์และวิธีการป้อนข้อมูล"</string>
+    <string name="phone_language" msgid="8870144109924299673">"ภาษา"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"แทนที่อัตโนมัติ"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"แก้คำที่พิมพ์ผิด"</string>
@@ -1064,11 +1070,11 @@
     <string name="show_password" msgid="3001113966880559611">"กำหนดให้เห็นรหัสผ่านได้"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"วิธีป้อนข้อมูลนี้อาจเก็บข้อความทั้งหมดที่คุณพิมพ์ รวมถึงข้อมูลส่วนบุคคล เช่น รหัสผ่านและหมายเลขบัตรเครดิต โดยมาจากแอปพลิเคชัน<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> ใช้วิธีป้อนข้อมูลนี้หรือไม่"</string>
-    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"การตั้งค่าเมาส์และแทร็กแพด"</string>
+    <string name="pointer_settings_category" msgid="8183819795164034286">"เมาส์/แทร็กแพด"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ความเร็วของตัวชี้"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"พจนานุกรมของผู้ใช้"</string>
-    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"พจนานุกรมของผู้ใช้"</string>
-    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"จัดการพจนานุกรมของผู้ใช้"</string>
+    <string name="user_dict_single_settings_title" msgid="524997218433540614">"พจนานุกรมส่วนบุคคล"</string>
+    <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"พจนานุกรมส่วนบุคคล"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"เพิ่ม"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"เพิ่มลงในพจนานุกรม"</string>
@@ -1094,7 +1100,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"ทางลัดของ"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"การป้อนข้อความ"</string>
     <string name="input_method" msgid="5434026103176856164">"วิธีการป้อนข้อมูล"</string>
-    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"วิธีการป้อนข้อมูลในปัจจุบัน"</string>
+    <string name="current_input_method" msgid="234072873286056438">"ค่าเริ่มต้น"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"ตัวเลือกวิธีการป้อนข้อมูล"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"อัตโนมัติ"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"แสดงตลอดเวลา"</string>
@@ -1146,23 +1152,17 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"เปิด"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"ปิด"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"อนุญาต"</string>
-    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"ไม่อนุญาต"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"ไม่อนุญาต"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"อนุญาต"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"ไม่อนุญาต"</string>
-    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
-    <skip />
+    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"ใช้ <xliff:g id="SERVICE">%1$s</xliff:g> หรือไม่"</string>
+    <string name="accessibility_service_security_warning_summary" msgid="3952006000910406653">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> สามารถเก็บรวบรวมข้อความทั้งหมดที่คุณพิมพ์ไว้ได้ยกเว้นรหัสผ่าน โดยรวมถึงข้อมูลส่วนบุคคลต่างๆ เช่น หมายเลขบัตรเครดิต และยังสามารถเก็บข้อมูลเกี่ยวกับการโต้ตอบระหว่างคุณกับอุปกรณ์ได้ด้วย"</string>
+    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"หยุด <xliff:g id="SERVICE">%1$s</xliff:g> หรือไม่"</string>
+    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"การแตะ \"ตกลง\" จะเป็นการหยุด <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"ไม่มีแอปพลิเคชันการเข้าถึง"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"คุณไม่ได้ติดตั้งแอปพลิเคชันการเข้าถึง คุณต้องการดาวน์โหลดโปรแกรมอ่านหน้าจอจาก Android Market หรือไม่"</string>
-    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
-    <skip />
+    <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"ติดตั้งสคริปต์การเข้าถึงหรือไม่"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"คุณต้องการให้แอปพลิเคชันติดตั้งสคริปต์จาก Google เพื่อให้เข้าถึงเนื้อหาของแอปพลิเคชันได้มากขึ้นหรือไม่"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"คุณลักษณะนี้จะเปลี่ยนวิธีการที่อุปกรณ์ของคุณตอบสนองต่อการแตะ ต้องการเปิดใช้งานหรือไม่"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"บริการเกี่ยวกับการเข้าถึงนี้ไม่มีคำอธิบาย"\n\n"บริการเกี่ยวกับการเข้าถึงจะมีการตอบสนองหลายประเภทเมื่อคุณโต้ตอบกับอุปกรณ์"</string>
     <string name="settings_button" msgid="3006713718908152930">"การตั้งค่า"</string>
@@ -1243,13 +1243,12 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"การตั้งค่าอินพุตและเอาต์พุตเสียง"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"ค้นหาด้วยเสียง"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"แป้นพิมพ์ Android"</string>
-    <!-- no translation found for voice_category (4730605956740531248) -->
-    <skip />
+    <string name="voice_category" msgid="4730605956740531248">"เสียง"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"โปรแกรมจำเสียง"</string>
-    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"การตั้งค่าโปรแกรมจำเสียง"</string>
+    <string name="recognizer_settings_title" msgid="8967349667879743521">"การป้อนข้อมูลด้วยเสียงสำหรับการค้นหา"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"การตั้งค่าสำหรับ \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
     <string name="tts_settings" msgid="8186971894801348327">"การตั้งค่าการอ่านออกเสียงข้อความ"</string>
-    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"การตั้งค่าการอ่านออกเสียงข้อความ"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"เอาต์พุตของการอ่านออกเสียงข้อความ"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"ใช้การตั้งค่าของฉันทุกครั้ง"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"การตั้งค่าเริ่มต้นด้านล่างนี้จะแทนที่การตั้งค่าแอปพลิเคชัน"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"การตั้งค่าเริ่มต้น"</string>
@@ -1447,7 +1446,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"การใช้ข้อมูล"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"รอบการใช้ข้อมูล"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"การโรมมิ่งข้อมูล"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"จำกัดข้อมูลแบ็กกราวด์"</string>
+    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"จำกัดข้อมูลแบ็กกราวด์"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"แยกการใช้งาน 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"แสดงการใช้ Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"แสดงการใช้งานอีเทอร์เน็ต"</string>
@@ -1456,6 +1455,7 @@
     <string name="data_usage_empty" msgid="9089930257306304588">"ไม่มีข้อมูลการใช้แอปพลิเคชันในช่วงเวลานี้"</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"พื้นหน้า"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"พื้นหลัง"</string>
+    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"ปิดใช้งานข้อมูลมือถือหรือไม่"</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"ปิดใช้ข้อมูลมือถือเมื่อถึงกำหนด"</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"ปิดใช้งานข้อมูล 4G เมื่อถึงกำหนด"</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"ปิดใช้ข้อมูล 2G-3G เมื่อถึงกำหนด"</string>
@@ -1471,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"ข้อมูล 2G-3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"ข้อมูล 4G"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"ดูการตั้งค่าแอปพลิเคชัน"</string>
-    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"จำกัดการใช้ข้อมูลแบ็กกราวด์"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"จำกัดข้อมูลแบ็กกราวด์"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"ปิดการใช้งานข้อมูลแบ็กกราวด์บนเครือข่ายที่คุณเลือกจำกัด (<xliff:g id="NETWORKS">%1$s</xliff:g>)"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"ต้องการจำกัดข้อมูลแบ็กกราวด์หรือไม่"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"คุณลักษณะนี้อาจส่งผลกระทบต่อแอปพลิเคชันในทางลบซึ่งขึ้นอยู่กับการใช้ข้อมูลแบ็กกราวด์"\n\n"อาจพบตัวควบคุมการใช้ข้อมูลที่เหมาะสมเพิ่มเติมในการตั้งค่าของแอปพลิเคชันนี้"</string>
@@ -1548,4 +1548,5 @@
     <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"โปรดป้อนรหัสผ่านใหม่สำหรับการสำรองข้อมูลเต็มรูปแบบอีกครั้งที่นี่"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"ตั้งค่ารหัสผ่านสำรอง"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"ยกเลิก"</string>
+    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
 </resources>

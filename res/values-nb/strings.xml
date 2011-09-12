@@ -133,15 +133,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Vis mottatte filer"</string>
     <string name="device_picker" msgid="8721012448931226323">"Bluetooths enhetsvelger"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-tillatelse"</string>
-    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Et program på nettbrettet spør om tillatelse til å slå på Bluetooth. Ønsker du å gjøre dette?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Et program på nettbrettet ber om tillatelse til å gjøre nettbrettet synlig for andre Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"En applikasjon på nettbrettet spør om tillatelse til å slå på Bluetooth. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"En applikasjon på nettbrettet ber om tillatelse til å gjøre nettbrettet synlig for andre Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"En applikasjon på telefonen spør om tillatelse for å gjøre telefonen synlig for andre Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="1680661751413856600">"Et program på nettbrettet ber om tillatelse til å gjøre nettbrettet permanent synlig for andre Bluetooth-enheter. Ønsker du å gjøre dette?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="3413855805411554871">"Et program på telefonen ber om tillatelse til å gjøre telefonen permanent synlig for andre Bluetooth-enheter. Ønsker du å gjøre dette?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Et program på nettbrettet ber om tillatelse til å aktivere Bluetooth og gjøre nettbrettet synlig for andre enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="1680661751413856600">"En applikasjon på nettbrettet ber om tillatelse til å gjøre nettbrettet permanent synlig for andre Bluetooth-enheter. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="3413855805411554871">"En applikasjon på telefonen ber om tillatelse til å gjøre telefonen permanent synlig for andre Bluetooth-enheter. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"En applikasjon på nettbrettet ber om tillatelse til å aktivere Bluetooth og gjøre nettbrettet synlig for andre enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"En applikasjon på telefonen spør om tillatelse til å slå på Bluetooth og gjøre telefonen synlig for andre enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="6132824454823539873">"Et program på nettbrettet ber om tillatelse til å aktivere Bluetooth og gjøre nettbrettet synlig for andre enheter. Ønsker du å gjøre dette?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="7471195931669103553">"Et program på telefonen ber om tillatelse til å aktivere Bluetooth og gjøre telefonen synlig for andre enheter. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="6132824454823539873">"En applikasjon på nettbrettet ber om tillatelse til å aktivere Bluetooth og gjøre nettbrettet synlig for andre enheter. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="7471195931669103553">"En applikasjon på telefonen ber om tillatelse til å aktivere Bluetooth og gjøre telefonen synlig for andre enheter. Ønsker du å gjøre dette?"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Slår på Bluetooth …"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Slår av Bluetooth …"</string>
     <string name="bluetooth_auto_connect" msgid="8013003320667198460">"Automatisk tilkobling"</string>
@@ -316,26 +316,32 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Prøv på nytt om <xliff:g id="DELAY">^1</xliff:g> sekunder."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Skriv inn passordet"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Kryptering mislykket"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Kryptering ble avbrutt og kan ikke fullføre. Du må utføre en tilbakestilling til fabrikkstandard (sletter all data) før du kan gjenoppta bruken av nettbrettet. Du kan prøve å kryptere nettbrettet på nytt etter at tilbakestillingen er fullført."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Kryptering ble avbrutt og kan ikke fullføre. Du må utføre en tilbakestilling til fabrikkstandard (sletter all data) før du kan gjenoppta bruken av telefonen. Du kan prøve å kryptere telefonen på nytt etter at tilbakestillingen er fullført."</string>
+    <!-- outdated translation 1075638996134310507 -->     <string name="crypt_keeper_failed_summary" product="tablet" msgid="6891198717505120682">"Kryptering ble avbrutt og kan ikke fullføre. Du må utføre en tilbakestilling til fabrikkstandard (sletter all data) før du kan gjenoppta bruken av nettbrettet. Du kan prøve å kryptere nettbrettet på nytt etter at tilbakestillingen er fullført."</string>
+    <!-- outdated translation 1075638996134310507 -->     <string name="crypt_keeper_failed_summary" product="default" msgid="1341912405353765293">"Kryptering ble avbrutt og kan ikke fullføre. Du må utføre en tilbakestilling til fabrikkstandard (sletter all data) før du kan gjenoppta bruken av nettbrettet. Du kan prøve å kryptere nettbrettet på nytt etter at tilbakestillingen er fullført."</string>
     <string name="lock_settings_picker_title" msgid="6288468357346846402">"Skjermlås"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skjermlås"</string>
-    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Endre låsingsskjerm"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Endre skjermlås"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Endre eller deaktiver mønster, personlig kode eller passordsikkerhet"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Velg en metode for å låse skjermen"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Ingen"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
-    <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Dra"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="4654618968017235437"></string>
+    <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Dra sidelengs"</string>
+    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Ikke krev mønster, PIN eller passord for å låse opp skjermen"</string>
+    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
+    <skip />
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Mønster"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="3689520051155195467"></string>
+    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Krev mønster for å låse opp skjermen"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"Personlig kode"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3411238428953648165"></string>
+    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Krev personlig tallkode for å låse opp skjermen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Passord"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="6314705845824442665"></string>
+    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Krev passord for å låse opp skjermen"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Deaktivert av admin., krypteringsregel eller legitimasjonslager"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ingen"</string>
-    <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Dra"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Dra sidelengs"</string>
+    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
+    <skip />
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Sikret med mønster"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Sikret med PIN-kode"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Sikret med passord"</string>
@@ -470,7 +476,7 @@
     <string name="ndef_push_on_summary" msgid="1493927094678614793">"På"</string>
     <string name="ndef_push_off_summary" msgid="2112211912532524478">"Av"</string>
     <string name="ndef_push_label" msgid="6216995559457479606">"ShareTap"</string>
-    <string name="ndef_push_explained" msgid="5647715489587953206">"Del innhold ved å føre to enheter som er aktivert for nærfeltskommunikasjon sammen, rygg mot rygg."</string>
+    <string name="ndef_push_explained" msgid="5647715489587953206">"Del innhold ved å holde to enheter som er aktivert for nærfeltskommunikasjon mot hverandre, rygg mot rygg."</string>
     <string name="ndef_push_top" msgid="8112767699009558636">"Appen på skjermen til toppenheten sender innhold til bunnenheten. "\n\n"Dataene dine er trygge: ingenting deles med mindre begge enhetene er på og opplåst."\n\n"Du kan slå av denne funksjonen i Innstillinger &gt; Mer &gt; ShareTap."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Trådløst nett"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Slå på trådløst nett"</string>
@@ -485,11 +491,9 @@
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Kan ikke søke etter nettverk"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Varsling om nettverk"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Varsle når et åpent nettverk er tilgjengelig"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Ungikk dårlige tilkoblinger"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Unngå dårlige tilkoblinger"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Ikke bruk et Wi-Fi-nettverk med mindre det har en brukbar Internett-tilkobling."</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Retningslinjer for frakoblet Wi-Fi"</string>
-    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Spesifiser når telefonen skal bytte fra trådløsnett til mobiltelefonidata"</string>
-    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Angi når du vil koble fra Wi-Fi"</string>
+    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Retningslinjer for frakoblet Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Det oppstod et problem under endring av innstillingen"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Legg til nettverk"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Trådløse nettverk"</string>
@@ -526,6 +530,10 @@
     <string name="wifi_remembered" msgid="4955746899347821096">"Lagret"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Deaktivert"</string>
     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Ungikk dårlig internettforbindelse"</string>
+    <!-- no translation found for wifi_disabled_heading (2653023318639789196) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_help (836952961850626904) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Autentiseringsproblem"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Utenfor område"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS tilgjengelig"</string>
@@ -1006,8 +1014,8 @@
     <string name="invalid_location" msgid="4934491353200240499">"Den angitte installasjonsplasseringen er ikke gyldig."</string>
     <string name="system_package" msgid="1030561474413022831">"Systemoppdateringer kan ikke installeres på eksterne medier."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"Tving avslutning"</string>
-    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Hvis du slår av et program ved tvang, kan det slutte å fungere. Er du sikker på at du vil fortsette?"</string>
-    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Flytt program"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Hvis du slår av en applikasjon ved tvang, kan den slutte å fungere. Er du sikker på at du vil fortsette?"</string>
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Flytt applikasjon"</string>
     <string name="move_app_failed_dlg_text" msgid="3704066601101413027">"Kunne ikke flytte applikasjon. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Foretrukket installeringssted"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Endre foretrukket plassering for installasjon av nye applikasjoner."</string>
@@ -1020,7 +1028,7 @@
     <string name="service_restarting" msgid="2242747937372354306">"Starter på nytt"</string>
     <string name="cached" msgid="1059590879740175019">"Bufret bakgrunnsprosess"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Ingenting kjører."</string>
-    <string name="service_started_by_app" msgid="6575184738671598131">"Startet av program."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"Startet av applikasjon."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
     <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> grts."</string>
@@ -1051,8 +1059,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Språk og inndata"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Språk og inndata"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Språkinnstillinger"</string>
-    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastaturinnstillinger"</string>
-    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Velg språk"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatur og inndatametoder"</string>
+    <string name="phone_language" msgid="8870144109924299673">"Språk"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Automatisk erstatting"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Rett opp stavefeil"</string>
@@ -1064,11 +1072,11 @@
     <string name="show_password" msgid="3001113966880559611">"Gjør passord synlig"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Inndatametoden har mulighet til å samle inn all tekst du skriver, inkludert personlige data som passord og kredittkortnummer. Den kommer fra applikasjonen <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Aktiver inndatametoden?"</string>
-    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Innstillinger for mus og styreflate"</string>
+    <string name="pointer_settings_category" msgid="8183819795164034286">"Mus/styreflate"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Pekerhastighet"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Ordliste"</string>
-    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Brukerordliste"</string>
-    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Administrer brukerordlister"</string>
+    <string name="user_dict_single_settings_title" msgid="524997218433540614">"Personlig ordbok"</string>
+    <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Personlige ordbøker"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Legg til"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Legg til ordliste"</string>
@@ -1094,7 +1102,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Snarveier"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Skriving av tekst"</string>
     <string name="input_method" msgid="5434026103176856164">"Inndatametode"</string>
-    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Nåværende inndatametode"</string>
+    <string name="current_input_method" msgid="234072873286056438">"Standard"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Valg av inndatametode"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatisk"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Vis alltid"</string>
@@ -1146,23 +1154,17 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"På"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Av"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Tillatt"</string>
-    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Ikke tillatt"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Ikke tillatt"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Tillat"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Ikke tillat"</string>
-    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
-    <skip />
+    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Vil du bruke <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="accessibility_service_security_warning_summary" msgid="3952006000910406653">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> kan samle all teksten du skriver, bortsett fra passord. Dette omfatter også personlige opplysninger som for eksempel kredittkortnumre. Tjenesten kan også samle inn data om samhandlingen din med enheten."</string>
+    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Vil du stoppe <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Du stopper <xliff:g id="SERVICE">%1$s</xliff:g> ved å trykke på OK."</string>
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Uten tilgjengelighetsapplikasjoner"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Du har ikke installert tilgjengelighetsapplikasjoner. Vil du laste ned en skjermleser fra Android Market?"</string>
-    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
-    <skip />
+    <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Vil du inst. tilgjengelighetsskript?"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Vil du at applikasjoner skal installere skript fra Google som gjør appenes innhold mer tilgjengelig?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Denne funksjonen endrer måten enheten din reagerer på berøring på. Vil du slå på funksjonen?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Denne tilgjengelighetstjenesten har ingen beskrivelse."\n\n"Tilgjengelighetstjenestene gir ulike typer tilbakemelding når du kommuniserer med enheten."</string>
     <string name="settings_button" msgid="3006713718908152930">"Innstillinger"</string>
@@ -1229,7 +1231,7 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Batteri brukt av Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Slå av Bluetooth når det ikke er i bruk"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Prøv å koble til en annen Bluetooth-enhet"</string>
-    <string name="battery_desc_apps" msgid="6665712811746233450">"Batteri brukt av program"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"Batteri brukt av applikasjon"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Stopp eller avinstaller applikasjonen"</string>
     <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Kontroller GPS manuelt, for å forhindre at applikasjoner bruker funksjonen"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Applikasjonen har muligens innstillinger som kan redusere batteribruken"</string>
@@ -1243,13 +1245,12 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Innstillinger for talekommando og -styring"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Talesøk"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android-tastatur"</string>
-    <!-- no translation found for voice_category (4730605956740531248) -->
-    <skip />
+    <string name="voice_category" msgid="4730605956740531248">"Tale"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Talegjenkjenning"</string>
-    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Innstillinger for talegjenkjenning"</string>
+    <string name="recognizer_settings_title" msgid="8967349667879743521">"Taleinndata for søk"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Innstillinger for «<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>»"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Talesyntese-kontroller"</string>
-    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"Talesyntese-kontroller"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"Tekst-til-tale-utdata"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Overstyr innstillinger"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Standardvalgene under overstyrer applikasjonsinnstillinger"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Standardvalg"</string>
@@ -1323,7 +1324,7 @@
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sikkerhetskop. av konto"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Ingen konto lagrer for øyeblikket sikkerhetskopierte data"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Auto-gjenoppretting"</string>
-    <string name="auto_restore_summary" msgid="83177150536734378">"Gjenopprett sikkerhetskopierte innstillinger og andre data hvis jeg installerer et program på nytt"</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"Gjenopprett sikkerhetskopierte innstillinger og andre data hvis jeg installerer en applikasjon på nytt"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Passord for sikkerhetskopiering på stasjonær datamaskin"</string>
     <string name="local_backup_password_summary_none" msgid="9189890994730711939">"Fullstendig sikkerhetskopiering på stasjonær datamaskin beskyttes ikke for øybelikket."</string>
     <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Velg for å endre eller fjerne passordet for fullstendige sikkerhetskopier på stasjonær datamaskin"</string>
@@ -1447,7 +1448,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Databruk"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Databruksyklus"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Datastreifing"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Begrensning av bakgrunnsdata"</string>
+    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Begrensning av bakgrunnsdata"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Separat 4G-bruk"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Vis Wi-Fi-bruk"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Vis Ethernet-bruk"</string>
@@ -1456,6 +1457,7 @@
     <string name="data_usage_empty" msgid="9089930257306304588">"Ingen applikasjoner brukte data i denne perioden."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Forgrunn"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Bakgrunn"</string>
+    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Vil du deaktivere mobildata?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Deaktiver mobildata ved grensen"</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Deaktiver 4G-data ved grensen"</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Deaktiver 2G-3G-data ved grensen"</string>
@@ -1471,7 +1473,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-3G-data"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G-data"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Se applikasjoninnstillinger"</string>
-    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Begrens bruk av bakgrunnsdata"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Begrensning av bakgrunnsdata"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Deaktiver bakgr.data i nettverk du har valgt å begrense (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Vil du begrense bruken av bakgrunnsdata?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Denne funksjonen kan innvirke negativt på applikasjoner som er avhengige av databruk i bakgrunnen."\n\n"Du finner mer hensiktsmessige kontroller for databruk i denne applikasjonens innstillinger."</string>
@@ -1548,4 +1550,5 @@
     <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"Tast inn nytt passord for fullstendig sikkerhetskopiering her"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Angi passord for sikkerhetskopiering"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Avbryt"</string>
+    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
 </resources>

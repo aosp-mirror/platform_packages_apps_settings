@@ -316,8 +316,8 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Bandyti dar kartą po <xliff:g id="DELAY">^1</xliff:g> sek."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Įveskite slaptažodį"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Šifruotė nepavyko"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Šifravimas buvo nutrauktas ir jo negalima užbaigti. Reikia atlikti gamyklinių duomenų nustatymą iš naujo (bus ištrinti visi duomenys), kad naudodami planšetinį kompiuterį galėtumėte atnaujinti šifravimą. Kai nustatymas iš naujo bus baigtas, galėsite dar kartą bandyti šifruoti planšetinį kompiuterį."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Šifravimas buvo nutrauktas ir jo negalima užbaigti. Reikia atlikti gamyklinių duomenų nustatymą iš naujo (bus ištrinti visi duomenys), kad naudodami telefoną galėtumėte atnaujinti šifravimą. Kai nustatymas iš naujo bus baigtas, galėsite dar kartą bandyti šifruoti telefoną."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="6891198717505120682">"Šifravimas buvo pertrauktas ir nepavyko jo užbaigti. Todėl duomenys planšetiniame kompiuteryje nebepasiekiami. "\n\n" Jei norite vėl naudoti planšetinį kompiuterį, turite iš naujo nustatyti gamyklinius nustatymus. Kai iš naujo nustatę nustatysite planšetinį kompiuterį, galėsite atkurti visus duomenis, kurių atsarginės kopijos buvo sukurtos „Google“ paskyroje."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="1341912405353765293">"Šifravimas buvo pertrauktas ir nepavyko jo užbaigti. Todėl duomenys telefone nebepasiekiami. "\n\n"Jei norite vėl naudoti telefoną, turite iš naujo nustatyti gamyklinius nustatymus. Kai iš naujo nustatę nustatysite telefoną, galėsite atkurti visus duomenis, kurių atsarginės kopijos buvo sukurtos „Google“ paskyroje."</string>
     <string name="lock_settings_picker_title" msgid="6288468357346846402">"Ekrano užraktas"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrano užraktas"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Pakeisti užrak. ekraną"</string>
@@ -326,16 +326,22 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Nėra"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Slinkti"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="4654618968017235437"></string>
+    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Ekr. atrak. nereik. model., PIN k. ar slapt."</string>
+    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
+    <skip />
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Modelis"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="3689520051155195467"></string>
+    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Ekranui atrakinti reikia modelio"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3411238428953648165"></string>
+    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Ekranui atrakinti reikia skaitinio PIN k."</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Slaptažodis"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="6314705845824442665"></string>
+    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Ekranui atrakinti reikia slaptažodžio"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Neleido: administr., šifrav. polit. ar įgalioj. atmint."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nėra"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Slinkti"</string>
+    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
+    <skip />
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Apsaugota taikant modelį"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Apsaugota taikant PIN kodą"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Apsaugota taikant slaptažodį"</string>
@@ -487,9 +493,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Pranešti, kai bus galimas atviras tinklas"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Vengti prasto ryšio"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Nenaudoti „Wi-Fi“ tinklo, jei jo interneto ryšys nėra geras"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"„Wi-Fi“ atjungimo politika"</string>
-    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Nurodyti, kada perjungti iš „Wi-Fi“ į mobilius duomenis"</string>
-    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Nurodykite, kada atjungti nuo „Wi-Fi“"</string>
+    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"„Wi-Fi“ atjungimo politika"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Keičiant nustatymą kilo problemų"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Pridėti tinklą"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"„Wi-Fi“ tinklai"</string>
@@ -526,6 +530,8 @@
     <string name="wifi_remembered" msgid="4955746899347821096">"Išsaugotas"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Neleidžiama"</string>
     <string name="wifi_disabled_network_failure" msgid="2683474385231344245">"Išvengta prasto interneto ryšio"</string>
+    <string name="wifi_disabled_heading" msgid="2653023318639789196">"Išsami informacija"</string>
+    <string name="wifi_disabled_help" msgid="836952961850626904">"Tinklas anuliuotas dėl prasto ryšio. Galite išjungti šią tinklo anuliavimo esant prastam ryšiui funkciją apsilankę išplėstiniame „Wi-Fi“ nustatymų meniu."</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Autentifikavimo problema"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Ne diapazone"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Galima WPS"</string>
@@ -1051,8 +1057,8 @@
     <string name="language_settings" msgid="5292716747264442359">"Kalba ir įvestis"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Kalba ir įvestis"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Kalbos nustatymai"</string>
-    <!-- outdated translation 7060453865544070642 -->     <string name="keyboard_settings_category" msgid="8275523930352487827">"Klaviatūros nustatymai"</string>
-    <!-- outdated translation 1165758957501090679 -->     <string name="phone_language" msgid="8870144109924299673">"Pasirinkti kalbą"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"Klaviatūra ir įvesties metodai"</string>
+    <string name="phone_language" msgid="8870144109924299673">"Kalba"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Automatiškai pakeisti"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Taisyti blogai įvestus žodžius"</string>
@@ -1064,11 +1070,11 @@
     <string name="show_password" msgid="3001113966880559611">"Padaryti slaptažodžius matomus"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="812267421486877917">"Šis įvesties būdas gali rinkti visą įvedamą tekstą, įskaitant asmeninius duomenis, pvz., slaptažodžius ir kredito kortelės numerius. Tai vyksta dėl programos <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Naudoti šį įvesties būdą?"</string>
-    <!-- outdated translation 6090176550039035130 -->     <string name="pointer_settings_category" msgid="8183819795164034286">"Pelės ir jutiklinės planšetės nustat."</string>
+    <string name="pointer_settings_category" msgid="8183819795164034286">"Pelė / jutiklinis kilimėlis"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Žymiklio greitis"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Naudotojo žodynas"</string>
-    <!-- outdated translation 5454855286173849284 -->     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Naudotojo žodynas"</string>
-    <!-- outdated translation 326583195525296750 -->     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Valdyti naudotojo žodynus"</string>
+    <string name="user_dict_single_settings_title" msgid="524997218433540614">"Asmeninis žodynas"</string>
+    <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Asmeniniai žodynai"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Pridėti"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Pridėti prie žodyno"</string>
@@ -1094,7 +1100,7 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Spartieji klavišai"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Teksto įvestis"</string>
     <string name="input_method" msgid="5434026103176856164">"Įvesties metodas"</string>
-    <!-- outdated translation 2146807723398303917 -->     <string name="current_input_method" msgid="234072873286056438">"Dabartinis įvesties metodas"</string>
+    <string name="current_input_method" msgid="234072873286056438">"Numatytasis"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Įvesties metodo pasirink. priemonė"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatinis"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Visada rodyti"</string>
@@ -1146,23 +1152,17 @@
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Įjungta"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Išjungta"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Leidžiama"</string>
-    <!-- outdated translation 5156785826922460983 -->     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Neleidžiama"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Neleidžiama"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Leisti"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Neleisti"</string>
-    <!-- no translation found for accessibility_service_security_warning_title (5421628151509995404) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (3952006000910406653) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_title (3393956845814484859) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning_summary (625013894287895398) -->
-    <skip />
+    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Naudoti „<xliff:g id="SERVICE">%1$s</xliff:g>“?"</string>
+    <string name="accessibility_service_security_warning_summary" msgid="3952006000910406653">"„<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>“ gali surinkti visą jūsų įvedamą tekstą, išskyrus slaptažodžius. Tai apima ir asmeninius duomenis, pvz., kredito kortelės numerius. Ji taip pat gali surinkti duomenis apie jūsų sąveiką su įrenginiu."</string>
+    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Stabdyti „<xliff:g id="SERVICE">%1$s</xliff:g>“?"</string>
+    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Palietus „Gerai“ bus sustabdyta „<xliff:g id="SERVICE">%1$s</xliff:g>“."</string>
     <string name="accessibility_service_no_apps_title" msgid="6101087395877319765">"Nėra pritaikymo neįgaliesiems programų"</string>
     <string name="accessibility_service_no_apps_message" msgid="3019731308902198093">"Jūs neįdiegėte programų neįgaliesiems. Ar norite atsisiųsti ekrano skaitytuvą iš „Android“ prekyvietės?"</string>
-    <!-- no translation found for accessibility_script_injection_security_warning_title (2487257471447580474) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning_summary (632046609292311949) -->
-    <skip />
+    <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Įdiegti pasiekiamumo scenarijus?"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Ar norite programose įdiegti scenarijus iš „Google“, kurie padarytų jų turinį geriau pasiekiamą?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Įjungus šią funkciją, pasikeis įrenginio reakcija į palietimą. Įjungti?"</string>
     <string name="accessibility_service_default_description" msgid="7913667934411055972">"Ši pritaikymo neįgaliesiems paslauga yra be aprašo."\n\n"Naudojant pritaikymo neįgaliesiems paslaugas gaunama skirtingo tipo atsakomoji reakcija, kai sąveikaujama su įrenginiu."</string>
     <string name="settings_button" msgid="3006713718908152930">"Nustatymai"</string>
@@ -1243,13 +1243,12 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Balso įvesties ir išvesties nustatymai"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Balso paieška"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"„Android“ klaviatūra"</string>
-    <!-- no translation found for voice_category (4730605956740531248) -->
-    <skip />
+    <string name="voice_category" msgid="4730605956740531248">"Balsas"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Balso atpažinimo priemonė"</string>
-    <!-- outdated translation 6038598099039717232 -->     <string name="recognizer_settings_title" msgid="8967349667879743521">"Balso atpažinimo priemonės nustatymai"</string>
+    <string name="recognizer_settings_title" msgid="8967349667879743521">"Įvestis balsu ieškant"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"„<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>“ nustatymai"</string>
     <string name="tts_settings" msgid="8186971894801348327">"„Teksto į kalbą“ nustatymai"</string>
-    <!-- outdated translation 4182348653053000933 -->     <string name="tts_settings_title" msgid="1237820681016639683">"„Teksto į kalbą“ nustatymai"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"„Teksto į kalbą“ išvestis"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Visada naudoti mano nustatymus"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Toliau pateikti numatytieji nustatymai atšaukia programos nustatymus"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Numatytieji nustatymai"</string>
@@ -1447,7 +1446,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Duomenų naudojimas"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Duomenų naudojimo ciklas"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Tarptinklinis duomenų ryšys"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Fono duomenų ribojimas"</string>
+    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Fono duomenų ribojimas"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Atskirti 4G naudojimą"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Rodyti „Wi-Fi“ naudojimą"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Rodyti eterneto naudojimą"</string>
@@ -1456,6 +1455,7 @@
     <string name="data_usage_empty" msgid="9089930257306304588">"Šiuo laikotarpiu jokios progr. nenaudojo duom."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Priekinis planas"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Fonas"</string>
+    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Neleisti mobiliųjų duomenų?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Neleis. mob. duom. pasiek. apr."</string>
     <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Neleis. 4G duom. pasiek. apr."</string>
     <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Neleis. 2G–3G duom. pasiek. apr."</string>
@@ -1471,7 +1471,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G–3G duomenys"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G duomenys"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Žiūrėti programos nustatymus"</string>
-    <!-- outdated translation 8856643905291165256 -->     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Apriboti fono duomenų naudojimą"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Fono duomenų ribojimas"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Neleisti fon. duomenų tinkl., pasirinktuose apriboti (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Apriboti foninius duomenis?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Ši funkcija gali turėti neigiamos įtakos programoms, kurių veikimas priklauso nuo fono duomenų naudojimo."\n\n"Tinkamesnių duomenų naudojimo valdiklių galima rasti šios programos nustatymuose."</string>
@@ -1548,4 +1548,5 @@
     <string name="confirm_new_backup_pw_prompt" msgid="7087168267741332184">"Čia įveskite naują visos atsarginės kopijos slaptažodį iš naujo"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Nustatyti atsarginės kopijos slaptažodį"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Atšaukti"</string>
+    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
 </resources>
