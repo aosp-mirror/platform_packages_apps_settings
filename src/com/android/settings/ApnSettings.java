@@ -149,8 +149,8 @@ public class ApnSettings extends PreferenceActivity implements
             + android.os.SystemProperties.get(TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC, "")
             + "\"";
 
-        Cursor cursor = managedQuery(Telephony.Carriers.CONTENT_URI, new String[] {
-                "_id", "name", "apn", "type"}, where,
+        Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
+                "_id", "name", "apn", "type"}, where, null,
                 Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         PreferenceGroup apnList = (PreferenceGroup) findPreference("apn_list");
@@ -254,8 +254,8 @@ public class ApnSettings extends PreferenceActivity implements
     private String getSelectedApnKey() {
         String key = null;
 
-        Cursor cursor = managedQuery(PREFERAPN_URI, new String[] {"_id"},
-                null, Telephony.Carriers.DEFAULT_SORT_ORDER);
+        Cursor cursor = getContentResolver().query(PREFERAPN_URI, new String[] {"_id"},
+                null, null, Telephony.Carriers.DEFAULT_SORT_ORDER);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             key = cursor.getString(ID_INDEX);
