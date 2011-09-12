@@ -19,16 +19,18 @@ package com.android.settings.inputmethod;
 import com.android.settings.R;
 import com.android.settings.Settings.SpellCheckersSettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 import com.android.settings.VoiceInputOutputSettings;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -74,6 +76,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private InputMethodManager mImm;
     private List<InputMethodInfo> mImis;
     private boolean mIsOnlyImeSettings;
+    private Handler mHandler;
+    @SuppressWarnings("unused")
+    private SettingsObserver mSettingsObserver;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -122,6 +127,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (scp != null) {
             scp.setFragmentIntent(this, intent);
         }
+
+        mHandler = new Handler();
+        mSettingsObserver = new SettingsObserver(mHandler, getActivity());
     }
 
     private void updateInputMethodSelectorSummary(int value) {
@@ -269,6 +277,22 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 ((InputMethodPreference)pref).updateSummary();
             }
         }
+        updateCurrentImeName();
+    }
+
+    private void updateCurrentImeName() {
+        final Context context = getActivity();
+        if (context == null || mImm == null) return;
+        final Preference curPref = getPreferenceScreen().findPreference(KEY_CURRENT_INPUT_METHOD);
+        if (curPref != null) {
+            final CharSequence curIme = InputMethodAndSubtypeUtil.getCurrentInputMethodName(
+                    context, getContentResolver(), mImm, mImis, getPackageManager());
+            if (!TextUtils.isEmpty(curIme)) {
+                synchronized(this) {
+                    curPref.setSummary(curIme);
+                }
+            }
+        }
     }
 
     private InputMethodPreference getInputMethodPreference(InputMethodInfo imi, int imiSize) {
@@ -331,6 +355,21 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         Collections.sort(mInputMethodPreferenceList);
         for (int i = 0; i < N; ++i) {
             root.addPreference(mInputMethodPreferenceList.get(i));
+        }
+    }
+
+    private class SettingsObserver extends ContentObserver {
+        public SettingsObserver(Handler handler, Context context) {
+            super(handler);
+            final ContentResolver cr = context.getContentResolver();
+            cr.registerContentObserver(
+                    Settings.Secure.getUriFor(Settings.Secure.DEFAULT_INPUT_METHOD), false, this);
+            cr.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE), false, this);
+        }
+
+        @Override public void onChange(boolean selfChange) {
+            updateCurrentImeName();
         }
     }
 }
