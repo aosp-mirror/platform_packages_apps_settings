@@ -36,8 +36,10 @@ import android.text.format.Time;
 
 import com.android.internal.util.Objects;
 import com.google.android.collect.Lists;
+import com.google.android.collect.Sets;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Utility class to modify list of {@link NetworkPolicy}. Specifically knows
@@ -45,6 +47,8 @@ import java.util.ArrayList;
  */
 public class NetworkPolicyEditor {
     // TODO: be more robust when missing policies from service
+
+    public static final boolean ENABLE_SPLIT_POLICIES = false;
 
     private INetworkPolicyManager mPolicyService;
     private ArrayList<NetworkPolicy> mPolicies = Lists.newArrayList();
@@ -81,6 +85,11 @@ public class NetworkPolicyEditor {
             }
 
             mPolicies.add(policy);
+        }
+
+        // force combine any split policies when disabled
+        if (!ENABLE_SPLIT_POLICIES) {
+            modified |= forceMobilePolicyCombined();
         }
 
         // when we cleaned policies above, write back changes
@@ -161,6 +170,22 @@ public class NetworkPolicyEditor {
         writeAsync();
     }
 
+    /**
+     * Remove any split {@link NetworkPolicy}.
+     */
+    private boolean forceMobilePolicyCombined() {
+        final HashSet<String> subscriberIds = Sets.newHashSet();
+        for (NetworkPolicy policy : mPolicies) {
+            subscriberIds.add(policy.template.getSubscriberId());
+        }
+
+        boolean modified = false;
+        for (String subscriberId : subscriberIds) {
+            modified |= setMobilePolicySplitInternal(subscriberId, false);
+        }
+        return modified;
+    }
+
     public boolean isMobilePolicySplit(String subscriberId) {
         boolean has3g = false;
         boolean has4g = false;
@@ -181,6 +206,18 @@ public class NetworkPolicyEditor {
     }
 
     public void setMobilePolicySplit(String subscriberId, boolean split) {
+        if (setMobilePolicySplitInternal(subscriberId, split)) {
+            writeAsync();
+        }
+    }
+
+    /**
+     * Mutate {@link NetworkPolicy} for given subscriber, combining or splitting
+     * the policy as requested.
+     *
+     * @return {@code true} when any {@link NetworkPolicy} was mutated.
+     */
+    private boolean setMobilePolicySplitInternal(String subscriberId, boolean split) {
         final boolean beforeSplit = isMobilePolicySplit(subscriberId);
 
         final NetworkTemplate template3g = buildTemplateMobile3gLower(subscriberId);
@@ -189,7 +226,7 @@ public class NetworkPolicyEditor {
 
         if (split == beforeSplit) {
             // already in requested state; skip
-            return;
+            return false;
 
         } else if (beforeSplit && !split) {
             // combine, picking most restrictive policy
@@ -203,7 +240,7 @@ public class NetworkPolicyEditor {
             mPolicies.add(
                     new NetworkPolicy(templateAll, restrictive.cycleDay, restrictive.warningBytes,
                             restrictive.limitBytes, SNOOZE_NEVER));
-            writeAsync();
+            return true;
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
@@ -215,8 +252,9 @@ public class NetworkPolicyEditor {
             mPolicies.add(
                     new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.warningBytes,
                             policyAll.limitBytes, SNOOZE_NEVER));
-            writeAsync();
-
+            return true;
+        } else {
+            return false;
         }
     }
 }

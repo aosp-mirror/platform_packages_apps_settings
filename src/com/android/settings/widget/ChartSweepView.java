@@ -76,6 +76,8 @@ public class ChartSweepView extends View {
     private ChartSweepView mValidAfterDynamic;
     private ChartSweepView mValidBeforeDynamic;
 
+    private float mLabelOffset;
+
     private Paint mOutlinePaint = new Paint();
 
     public static final int HORIZONTAL = 0;
@@ -230,9 +232,41 @@ public class ChartSweepView extends View {
     private void invalidateLabel() {
         if (mLabelTemplate != null && mAxis != null) {
             mLabelValue = mAxis.buildLabel(getResources(), mLabelTemplate, mValue);
+            invalidateLabelOffset();
             invalidate();
         } else {
             mLabelValue = mValue;
+        }
+    }
+
+    /**
+     * When overlapping with neighbor, split difference and push label.
+     */
+    public void invalidateLabelOffset() {
+        float margin;
+        float labelOffset = 0;
+        if (mFollowAxis == VERTICAL) {
+            if (mValidAfterDynamic != null) {
+                margin = getLabelTop(mValidAfterDynamic) - getLabelBottom(this);
+                if (margin < 0) {
+                    labelOffset = margin / 2;
+                }
+            } else if (mValidBeforeDynamic != null) {
+                margin = getLabelTop(this) - getLabelBottom(mValidBeforeDynamic);
+                if (margin < 0) {
+                    labelOffset = -margin / 2;
+                }
+            }
+        } else {
+            // TODO: implement horizontal labels
+        }
+
+        // when offsetting label, neighbor probably needs to offset too
+        if (labelOffset != mLabelOffset) {
+            mLabelOffset = labelOffset;
+            invalidate();
+            if (mValidAfterDynamic != null) mValidAfterDynamic.invalidateLabelOffset();
+            if (mValidBeforeDynamic != null) mValidBeforeDynamic.invalidateLabelOffset();
         }
     }
 
@@ -567,6 +601,12 @@ public class ChartSweepView extends View {
     }
 
     @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        invalidateLabelOffset();
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         final int width = getWidth();
         final int height = getHeight();
@@ -575,36 +615,11 @@ public class ChartSweepView extends View {
             canvas.drawRect(0, 0, width, height, mOutlinePaint);
         }
 
-        // when overlapping with neighbor, split difference and push label
-        float margin;
-        float labelOffset = 0;
-        if (mFollowAxis == VERTICAL) {
-            if (mValidAfterDynamic != null) {
-                margin = getLabelTop(mValidAfterDynamic) - getLabelBottom(this);
-                if (margin < 0) {
-                    labelOffset = margin / 2;
-                }
-            } else if (mValidBeforeDynamic != null) {
-                margin = getLabelTop(this) - getLabelBottom(mValidBeforeDynamic);
-                if (margin < 0) {
-                    labelOffset = -margin / 2;
-                }
-            }
-        } else {
-            // TODO: implement horizontal labels
-        }
-
-        // when offsetting label, neighbor probably needs to offset too
-        if (labelOffset != 0) {
-            if (mValidAfterDynamic != null) mValidAfterDynamic.invalidate();
-            if (mValidBeforeDynamic != null) mValidBeforeDynamic.invalidate();
-        }
-
         final int labelSize;
         if (isEnabled() && mLabelLayout != null) {
             final int count = canvas.save();
             {
-                canvas.translate(mContentOffset.left, mContentOffset.top + labelOffset);
+                canvas.translate(mContentOffset.left, mContentOffset.top + mLabelOffset);
                 mLabelLayout.draw(canvas);
             }
             canvas.restoreToCount(count);
