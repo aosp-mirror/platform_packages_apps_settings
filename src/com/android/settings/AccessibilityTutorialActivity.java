@@ -522,6 +522,9 @@ public class AccessibilityTutorialActivity extends Activity {
         /** Whether this module is currently focused. */
         private boolean mIsVisible;
 
+        /** Handler for sending accessibility events after the current UI action. */
+        private InstructionHandler mHandler = new InstructionHandler();
+
         /**
          * Constructs a new tutorial module for the given context and controller
          * with the specified layout.
@@ -585,8 +588,11 @@ public class AccessibilityTutorialActivity extends Activity {
                 return;
             }
 
-            final String text = getContext().getString(resId, formatArgs);
+            final String text = mContext.getString(resId, formatArgs);
+            mHandler.addInstruction(text);
+        }
 
+        private void addInstructionSync(CharSequence text) {
             mInstructions.setVisibility(View.VISIBLE);
             mInstructions.setText(text);
             mInstructions.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
@@ -660,6 +666,24 @@ public class AccessibilityTutorialActivity extends Activity {
 
         protected void setFinishVisible(boolean visible) {
             mFinish.setVisibility(visible ? VISIBLE : GONE);
+        }
+
+        private class InstructionHandler extends Handler {
+            private static final int ADD_INSTRUCTION = 1;
+
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case ADD_INSTRUCTION:
+                        final String text = (String) msg.obj;
+                        addInstructionSync(text);
+                        break;
+                }
+            }
+
+            public void addInstruction(String text) {
+                obtainMessage(ADD_INSTRUCTION, text).sendToTarget();
+            }
         }
     }
 
