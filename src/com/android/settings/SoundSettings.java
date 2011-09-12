@@ -191,7 +191,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mNotificationPulse = (CheckBoxPreference)
                 mSoundSettings.findPreference(KEY_NOTIFICATION_PULSE);
         if (mNotificationPulse != null
-                && getResources().getBoolean(R.bool.has_intrusive_led) == false) {
+                && getResources().getBoolean(
+                        com.android.internal.R.bool.config_intrusiveNotificationLed) == false) {
             mSoundSettings.removePreference(mNotificationPulse);
         } else {
             try {
