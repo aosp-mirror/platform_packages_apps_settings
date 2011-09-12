@@ -58,12 +58,16 @@ public class ChartNetworkSeriesView extends View {
     private Path mPathFill;
     private Path mPathEstimate;
 
+    private long mStart;
+    private long mEnd;
+
     private long mPrimaryLeft;
     private long mPrimaryRight;
 
     /** Series will be extended to reach this end time. */
     private long mEndTime = Long.MIN_VALUE;
 
+    private boolean mPathValid = false;
     private boolean mEstimateVisible = false;
 
     private long mMax;
@@ -130,11 +134,13 @@ public class ChartNetworkSeriesView extends View {
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
         mStats = stats;
-
-        mPathStroke.reset();
-        mPathFill.reset();
-        mPathEstimate.reset();
+        invalidatePath();
         invalidate();
+    }
+
+    public void setBounds(long start, long end) {
+        mStart = start;
+        mEnd = end;
     }
 
     /**
@@ -147,26 +153,27 @@ public class ChartNetworkSeriesView extends View {
         invalidate();
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        generatePath();
+    public void invalidatePath() {
+        mPathValid = false;
+        mMax = 0;
+        invalidate();
     }
 
     /**
      * Erase any existing {@link Path} and generate series outline based on
      * currently bound {@link NetworkStatsHistory} data.
      */
-    public void generatePath() {
+    private void generatePath() {
         if (LOGD) Log.d(TAG, "generatePath()");
 
         mMax = 0;
         mPathStroke.reset();
         mPathFill.reset();
         mPathEstimate.reset();
+        mPathValid = true;
 
         // bail when not enough stats to render
         if (mStats == null || mStats.size() < 2) {
-            invalidate();
             return;
         }
 
@@ -185,7 +192,10 @@ public class ChartNetworkSeriesView extends View {
         long totalData = 0;
 
         NetworkStatsHistory.Entry entry = null;
-        for (int i = 0; i < mStats.size(); i++) {
+
+        final int start = mStats.getIndexBefore(mStart);
+        final int end = mStats.getIndexAfter(mEnd);
+        for (int i = start; i <= end; i++) {
             entry = mStats.getValues(i, entry);
 
             lastTime = entry.bucketStart + entry.bucketDuration;
@@ -205,9 +215,6 @@ public class ChartNetworkSeriesView extends View {
                 mPathFill.lineTo(x, y);
                 totalData += entry.rxBytes + entry.txBytes;
             }
-
-            // skip if beyond view
-            if (x > width) break;
 
             lastX = x;
             lastY = y;
@@ -284,12 +291,23 @@ public class ChartNetworkSeriesView extends View {
     }
 
     public long getMaxVisible() {
-        return mEstimateVisible ? mMaxEstimate : mMax;
+        final long maxVisible = mEstimateVisible ? mMaxEstimate : mMax;
+        if (maxVisible <= 0 && mStats != null) {
+            // haven't generated path yet; fall back to raw data
+            final NetworkStatsHistory.Entry entry = mStats.getValues(mStart, mEnd, null);
+            return entry.rxBytes + entry.txBytes;
+        } else {
+            return maxVisible;
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         int save;
+
+        if (!mPathValid) {
+            generatePath();
+        }
 
         final float primaryLeftPoint = mHoriz.convertToPoint(mPrimaryLeft);
         final float primaryRightPoint = mHoriz.convertToPoint(mPrimaryRight);
