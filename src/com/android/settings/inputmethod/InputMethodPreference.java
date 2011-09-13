@@ -97,7 +97,19 @@ public class InputMethodPreference extends CheckBoxPreference
                 });
         mInputMethodSettingsButton = (ImageView)view.findViewById(R.id.inputmethod_settings);
         mTitleText = (TextView)view.findViewById(android.R.id.title);
+
+        final boolean hasSubtypes = mImi.getSubtypeCount() > 1;
+        final String imiId = mImi.getId();
         mSummaryText = (TextView)view.findViewById(android.R.id.summary);
+        mSummaryText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final Bundle bundle = new Bundle();
+                bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
+                startFragment(mFragment, InputMethodAndSubtypeEnabler.class.getName(),
+                        0, bundle);
+            }
+        });
         if (mSettingsIntent != null) {
             mInputMethodSettingsButton.setOnClickListener(
                     new OnClickListener() {
@@ -113,8 +125,6 @@ public class InputMethodPreference extends CheckBoxPreference
                         }
                     });
         }
-        final boolean hasSubtypes = mImi.getSubtypeCount() > 1;
-        final String imiId = mImi.getId();
         if (hasSubtypes) {
             final OnLongClickListener listener = new OnLongClickListener() {
                 @Override
@@ -142,8 +152,8 @@ public class InputMethodPreference extends CheckBoxPreference
     }
 
     private void enableSettingsButton() {
+        final boolean checked = isChecked();
         if (mInputMethodSettingsButton != null) {
-            final boolean checked = isChecked();
             mInputMethodSettingsButton.setEnabled(checked);
             mInputMethodSettingsButton.setClickable(checked);
             mInputMethodSettingsButton.setFocusable(checked);
@@ -155,7 +165,8 @@ public class InputMethodPreference extends CheckBoxPreference
             mTitleText.setEnabled(true);
         }
         if (mSummaryText != null) {
-            mSummaryText.setEnabled(true);
+            mSummaryText.setEnabled(checked);
+            mSummaryText.setClickable(checked);
         }
     }
 
