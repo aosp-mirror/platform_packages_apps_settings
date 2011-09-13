@@ -26,9 +26,9 @@ import android.text.SpannableStringBuilder;
 public interface ChartAxis {
 
     /** Set range of raw values this axis should cover. */
-    public void setBounds(long min, long max);
+    public boolean setBounds(long min, long max);
     /** Set range of screen points this axis should cover. */
-    public void setSize(float size);
+    public boolean setSize(float size);
 
     /** Convert raw value into screen point. */
     public float convertToPoint(long value);

@@ -25,11 +25,6 @@ import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
-import static android.net.NetworkStats.SET_DEFAULT;
-import static android.net.NetworkStats.SET_FOREGROUND;
-import static android.net.NetworkStats.TAG_NONE;
-import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
-import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
 import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
@@ -43,6 +38,7 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.text.format.Time.TIMEZONE_UTC;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static com.android.internal.util.Preconditions.checkNotNull;
 import static com.android.settings.Utils.prepareCustomPreferencesList;
 
 import android.animation.LayoutTransition;
@@ -58,15 +54,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.InsetDrawable;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -123,9 +115,12 @@ import android.widget.TextView;
 
 import com.android.internal.telephony.Phone;
 import com.android.settings.drawable.InsetBoundsDrawable;
-import com.android.settings.drawable.DrawableWrapper;
+import com.android.settings.net.ChartData;
+import com.android.settings.net.ChartDataLoader;
 import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
+import com.android.settings.net.UidDetail;
+import com.android.settings.net.UidDetailProvider;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.PieChartView;
@@ -165,7 +160,8 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG_CONFIRM_APP_RESTRICT = "confirmAppRestrict";
     private static final String TAG_APP_DETAILS = "appDetails";
 
-    private static final int LOADER_SUMMARY = 2;
+    private static final int LOADER_CHART_DATA = 2;
+    private static final int LOADER_SUMMARY = 3;
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
@@ -187,6 +183,9 @@ public class DataUsageSummary extends Fragment {
     private TabWidget mTabWidget;
     private ListView mListView;
     private DataUsageAdapter mAdapter;
+
+    /** Distance to inset content from sides, when needed. */
+    private int mInsetSide = 0;
 
     private ViewGroup mHeader;
 
@@ -220,18 +219,14 @@ public class DataUsageSummary extends Fragment {
     private boolean mShowWifi = false;
     private boolean mShowEthernet = false;
 
-    private NetworkTemplate mTemplate = null;
+    private NetworkTemplate mTemplate;
+    private ChartData mChartData;
 
     private int[] mAppDetailUids = null;
 
     private Intent mAppSettingsIntent;
 
     private NetworkPolicyEditor mPolicyEditor;
-
-    private NetworkStatsHistory mHistory;
-    private NetworkStatsHistory mDetailHistory;
-    private NetworkStatsHistory mDetailHistoryDefault;
-    private NetworkStatsHistory mDetailHistoryForeground;
 
     private String mCurrentTab = null;
     private String mIntentTab = null;
@@ -241,6 +236,8 @@ public class DataUsageSummary extends Fragment {
 
     /** Flag used to ignore listeners during binding. */
     private boolean mBinding;
+
+    private UidDetailProvider mUidDetailProvider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -273,24 +270,38 @@ public class DataUsageSummary extends Fragment {
         final Context context = inflater.getContext();
         final View view = inflater.inflate(R.layout.data_usage_summary, container, false);
 
+        mUidDetailProvider = new UidDetailProvider(context);
+
         mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
         mTabsContainer = (ViewGroup) view.findViewById(R.id.tabs_container);
         mTabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
         mListView = (ListView) view.findViewById(android.R.id.list);
 
+        // decide if we need to manually inset our content, or if we should rely
+        // on parent container for inset.
+        final boolean shouldInset = mListView.getScrollBarStyle()
+                == View.SCROLLBARS_OUTSIDE_OVERLAY;
+        if (shouldInset) {
+            mInsetSide = view.getResources().getDimensionPixelOffset(
+                    com.android.internal.R.dimen.preference_fragment_padding_side);
+        } else {
+            mInsetSide = 0;
+        }
+
         // adjust padding around tabwidget as needed
         prepareCustomPreferencesList(container, view, mListView, true);
-
-        // inset selector and divider drawables
-        final int insetSide = view.getResources().getDimensionPixelOffset(
-                com.android.internal.R.dimen.preference_fragment_padding_side);
-        insetListViewDrawables(mListView, insetSide);
 
         mTabHost.setup();
         mTabHost.setOnTabChangedListener(mTabListener);
 
         mHeader = (ViewGroup) inflater.inflate(R.layout.data_usage_header, mListView, false);
         mListView.addHeaderView(mHeader, null, false);
+
+        if (mInsetSide > 0) {
+            // inset selector and divider drawables
+            insetListViewDrawables(mListView, mInsetSide);
+            mHeader.setPadding(mInsetSide, 0, mInsetSide, 0);
+        }
 
         {
             // bind network switches
@@ -346,7 +357,7 @@ public class DataUsageSummary extends Fragment {
         // only assign layout transitions once first layout is finished
         mListView.getViewTreeObserver().addOnGlobalLayoutListener(mFirstLayoutListener);
 
-        mAdapter = new DataUsageAdapter();
+        mAdapter = new DataUsageAdapter(mUidDetailProvider, mInsetSide);
         mListView.setOnItemClickListener(mListListener);
         mListView.setAdapter(mAdapter);
 
@@ -370,7 +381,10 @@ public class DataUsageSummary extends Fragment {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
+                    // wait a few seconds before kicking off
+                    Thread.sleep(2 * DateUtils.SECOND_IN_MILLIS);
                     mStatsService.forceUpdate();
+                } catch (InterruptedException e) {
                 } catch (RemoteException e) {
                 }
                 return null;
@@ -382,7 +396,7 @@ public class DataUsageSummary extends Fragment {
                     updateBody();
                 }
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -393,21 +407,23 @@ public class DataUsageSummary extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         final Context context = getActivity();
+        final boolean appDetailMode = isAppDetailMode();
 
         mMenuDataRoaming = menu.findItem(R.id.data_usage_menu_roaming);
-        mMenuDataRoaming.setVisible(hasMobileRadio(context));
+        mMenuDataRoaming.setVisible(hasMobileRadio(context) && !appDetailMode);
         mMenuDataRoaming.setChecked(getDataRoaming());
 
         mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
+        mMenuRestrictBackground.setVisible(!appDetailMode);
         mMenuRestrictBackground.setChecked(getRestrictBackground());
 
         final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
-        split4g.setVisible(hasMobile4gRadio(context));
+        split4g.setVisible(hasMobile4gRadio(context) && !appDetailMode);
         split4g.setChecked(isMobilePolicySplit());
 
         final MenuItem showWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
         if (hasWifiRadio(context) && hasMobileRadio(context)) {
-            showWifi.setVisible(true);
+            showWifi.setVisible(!appDetailMode);
             showWifi.setChecked(mShowWifi);
         } else {
             showWifi.setVisible(false);
@@ -416,7 +432,7 @@ public class DataUsageSummary extends Fragment {
 
         final MenuItem showEthernet = menu.findItem(R.id.data_usage_menu_show_ethernet);
         if (hasEthernet(context) && hasMobileRadio(context)) {
-            showEthernet.setVisible(true);
+            showEthernet.setVisible(!appDetailMode);
             showEthernet.setChecked(mShowEthernet);
         } else {
             showEthernet.setVisible(false);
@@ -478,6 +494,9 @@ public class DataUsageSummary extends Fragment {
 
         mDataEnabledView = null;
         mDisableAtLimitView = null;
+
+        mUidDetailProvider.clearCache();
+        mUidDetailProvider = null;
     }
 
     /**
@@ -495,6 +514,7 @@ public class DataUsageSummary extends Fragment {
             final LayoutTransition chartTransition = buildLayoutTransition();
             chartTransition.setStartDelay(LayoutTransition.APPEARING, 0);
             chartTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0);
+            chartTransition.setAnimator(LayoutTransition.APPEARING, null);
             chartTransition.setAnimator(LayoutTransition.DISAPPEARING, null);
             mChart.setLayoutTransition(chartTransition);
         }
@@ -536,17 +556,14 @@ public class DataUsageSummary extends Fragment {
         mTabWidget.setVisibility(multipleTabs ? View.VISIBLE : View.GONE);
         if (mIntentTab != null) {
             if (Objects.equal(mIntentTab, mTabHost.getCurrentTabTag())) {
+                // already hit updateBody() when added; ignore
                 updateBody();
             } else {
                 mTabHost.setCurrentTabByTag(mIntentTab);
             }
             mIntentTab = null;
         } else {
-            if (mTabHost.getCurrentTab() == 0) {
-                updateBody();
-            } else {
-                mTabHost.setCurrentTab(0);
-            }
+            // already hit updateBody() when added; ignore
         }
     }
 
@@ -583,6 +600,7 @@ public class DataUsageSummary extends Fragment {
      */
     private void updateBody() {
         mBinding = true;
+        if (!isAdded()) return;
 
         final Context context = getActivity();
         final String currentTab = mTabHost.getCurrentTabTag();
@@ -636,25 +654,14 @@ public class DataUsageSummary extends Fragment {
             throw new IllegalStateException("unknown tab: " + currentTab);
         }
 
-        try {
-            // load stats for current template
-            mHistory = mStatsService.getHistoryForNetwork(
-                    mTemplate, FIELD_RX_BYTES | FIELD_TX_BYTES);
-        } catch (RemoteException e) {
-            // since we can't do much without policy or history, and we don't
-            // want to leave with half-baked UI, we bail hard.
-            throw new RuntimeException("problem reading network policy or stats", e);
-        }
+        // kick off loader for network history
+        // TODO: consider chaining two loaders together instead of reloading
+        // network history when showing app detail.
+        getLoaderManager().restartLoader(LOADER_CHART_DATA,
+                ChartDataLoader.buildArgs(mTemplate, mAppDetailUids), mChartDataCallbacks);
 
-        // bind chart to historical stats
-        mChart.bindNetworkStats(mHistory);
-
-        // only update policy when switching tabs
-        updatePolicy(tabChanged);
-        updateAppDetail();
-
-        // force scroll to top of body
-        mListView.smoothScrollToPosition(0);
+        // detail mode can change visible menus, invalidate
+        getActivity().invalidateOptionsMenu();
 
         mBinding = false;
     }
@@ -683,10 +690,6 @@ public class DataUsageSummary extends Fragment {
             mAppDetail.setVisibility(View.GONE);
             mCycleAdapter.setChangeVisible(true);
 
-            mDetailHistory = null;
-            mDetailHistoryDefault = null;
-            mDetailHistoryForeground = null;
-
             // hide detail stats when not in detail mode
             mChart.bindDetailNetworkStats(null);
             return;
@@ -697,7 +700,7 @@ public class DataUsageSummary extends Fragment {
 
         // show icon and all labels appearing under this app
         final int primaryUid = getAppDetailPrimaryUid();
-        final UidDetail detail = resolveDetailForUid(context, primaryUid);
+        final UidDetail detail = mUidDetailProvider.getUidDetail(primaryUid, true);
         mAppIcon.setImageDrawable(detail.icon);
 
         mAppTitles.removeAllViews();
@@ -725,7 +728,6 @@ public class DataUsageSummary extends Fragment {
             mAppSettings.setEnabled(false);
         }
 
-        updateDetailHistory();
         updateDetailData();
 
         if (NetworkPolicyManager.isUidValidForPolicy(context, primaryUid)
@@ -740,54 +742,6 @@ public class DataUsageSummary extends Fragment {
 
         } else {
             mAppRestrictView.setVisibility(View.GONE);
-        }
-    }
-
-    /**
-     * Update {@link #mDetailHistory} and related values based on
-     * {@link #mAppDetailUids}.
-     */
-    private void updateDetailHistory() {
-        try {
-            mDetailHistoryDefault = null;
-            mDetailHistoryForeground = null;
-
-            // load stats for current uid and template
-            for (int uid : mAppDetailUids) {
-                mDetailHistoryDefault = collectHistoryForUid(
-                        uid, SET_DEFAULT, mDetailHistoryDefault);
-                mDetailHistoryForeground = collectHistoryForUid(
-                        uid, SET_FOREGROUND, mDetailHistoryForeground);
-            }
-        } catch (RemoteException e) {
-            // since we can't do much without history, and we don't want to
-            // leave with half-baked UI, we bail hard.
-            throw new RuntimeException("problem reading network stats", e);
-        }
-
-        mDetailHistory = new NetworkStatsHistory(mDetailHistoryForeground.getBucketDuration());
-        mDetailHistory.recordEntireHistory(mDetailHistoryDefault);
-        mDetailHistory.recordEntireHistory(mDetailHistoryForeground);
-
-        // bind chart to historical stats
-        mChart.bindDetailNetworkStats(mDetailHistory);
-    }
-
-    /**
-     * Collect {@link NetworkStatsHistory} for the requested UID, combining with
-     * an existing {@link NetworkStatsHistory} if provided.
-     */
-    private NetworkStatsHistory collectHistoryForUid(
-            int uid, int set, NetworkStatsHistory existing)
-            throws RemoteException {
-        final NetworkStatsHistory history = mStatsService.getHistoryForUid(
-                mTemplate, uid, set, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
-
-        if (existing != null) {
-            existing.recordEntireHistory(history);
-            return existing;
-        } else {
-            return history;
         }
     }
 
@@ -956,20 +910,21 @@ public class DataUsageSummary extends Fragment {
         mCycleAdapter.clear();
 
         final Context context = mCycleSpinner.getContext();
-        long historyStart = mHistory.getStart();
-        long historyEnd = mHistory.getEnd();
 
-        if (historyStart == Long.MAX_VALUE || historyEnd == Long.MIN_VALUE) {
-            historyStart = System.currentTimeMillis();
-            historyEnd = System.currentTimeMillis();
+        long historyStart = Long.MAX_VALUE;
+        long historyEnd = Long.MIN_VALUE;
+        if (mChartData != null) {
+            historyStart = mChartData.network.getStart();
+            historyEnd = mChartData.network.getEnd();
         }
+
+        if (historyStart == Long.MAX_VALUE) historyStart = System.currentTimeMillis();
+        if (historyEnd == Long.MIN_VALUE) historyEnd = System.currentTimeMillis();
 
         boolean hasCycles = false;
         if (policy != null) {
             // find the next cycle boundary
             long cycleEnd = computeNextCycleBoundary(historyEnd, policy);
-
-            int guardCount = 0;
 
             // walk backwards, generating all valid cycle ranges
             while (cycleEnd > historyStart) {
@@ -979,12 +934,6 @@ public class DataUsageSummary extends Fragment {
                 mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
                 cycleEnd = cycleStart;
                 hasCycles = true;
-
-                // TODO: remove this guard once we have better testing
-                if (guardCount++ > 50) {
-                    Log.wtf(TAG, "stuck generating ranges for historyStart=" + historyStart
-                            + ", historyEnd=" + historyEnd + " and policy=" + policy);
-                }
             }
 
             // one last cycle entry to modify policy cycle day
@@ -1075,7 +1024,7 @@ public class DataUsageSummary extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final Context context = view.getContext();
             final AppUsageItem app = (AppUsageItem) parent.getItemAtPosition(position);
-            final UidDetail detail = resolveDetailForUid(context, app.uids[0]);
+            final UidDetail detail = mUidDetailProvider.getUidDetail(app.uids[0], true);
             AppDetailsFragment.show(DataUsageSummary.this, app.uids, detail.label);
         }
     };
@@ -1128,11 +1077,11 @@ public class DataUsageSummary extends Fragment {
         final Context context = getActivity();
 
         NetworkStatsHistory.Entry entry = null;
-        if (isAppDetailMode() && mDetailHistory != null) {
+        if (isAppDetailMode() && mChartData != null && mChartData.detail != null) {
             // bind foreground/background to piechart and labels
-            entry = mDetailHistoryDefault.getValues(start, end, now, entry);
+            entry = mChartData.detailDefault.getValues(start, end, now, entry);
             final long defaultBytes = entry.rxBytes + entry.txBytes;
-            entry = mDetailHistoryForeground.getValues(start, end, now, entry);
+            entry = mChartData.detailForeground.getValues(start, end, now, entry);
             final long foregroundBytes = entry.rxBytes + entry.txBytes;
 
             mAppPieChart.setOriginAngle(175);
@@ -1147,17 +1096,18 @@ public class DataUsageSummary extends Fragment {
             mAppForeground.setText(Formatter.formatFileSize(context, foregroundBytes));
 
             // and finally leave with summary data for label below
-            entry = mDetailHistory.getValues(start, end, now, null);
+            entry = mChartData.detail.getValues(start, end, now, null);
 
             getLoaderManager().destroyLoader(LOADER_SUMMARY);
 
         } else {
-            entry = mHistory.getValues(start, end, now, null);
+            if (mChartData != null) {
+                entry = mChartData.network.getValues(start, end, now, null);
+            }
 
             // kick off loader for detailed stats
-            // TODO: delay loader until animation is finished
             getLoaderManager().restartLoader(LOADER_SUMMARY,
-                    SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryForAllUid);
+                    SummaryForAllUidLoader.buildArgs(mTemplate, start, end), mSummaryCallbacks);
         }
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
@@ -1168,7 +1118,38 @@ public class DataUsageSummary extends Fragment {
                 getString(R.string.data_usage_total_during_range, totalPhrase, rangePhrase));
     }
 
-    private final LoaderCallbacks<NetworkStats> mSummaryForAllUid = new LoaderCallbacks<
+    private final LoaderCallbacks<ChartData> mChartDataCallbacks = new LoaderCallbacks<
+            ChartData>() {
+        /** {@inheritDoc} */
+        public Loader<ChartData> onCreateLoader(int id, Bundle args) {
+            return new ChartDataLoader(getActivity(), mStatsService, args);
+        }
+
+        /** {@inheritDoc} */
+        public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
+            mChartData = data;
+            mChart.bindNetworkStats(mChartData.network);
+            mChart.bindDetailNetworkStats(mChartData.detail);
+
+            // calcuate policy cycles based on available data
+            updatePolicy(true);
+            updateAppDetail();
+
+            // force scroll to top of body when showing detail
+            if (mChartData.detail != null) {
+                mListView.smoothScrollToPosition(0);
+            }
+        }
+
+        /** {@inheritDoc} */
+        public void onLoaderReset(Loader<ChartData> loader) {
+            mChartData = null;
+            mChart.bindNetworkStats(null);
+            mChart.bindDetailNetworkStats(null);
+        }
+    };
+
+    private final LoaderCallbacks<NetworkStats> mSummaryCallbacks = new LoaderCallbacks<
             NetworkStats>() {
         /** {@inheritDoc} */
         public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
@@ -1337,8 +1318,16 @@ public class DataUsageSummary extends Fragment {
      * Adapter of applications, sorted by total usage descending.
      */
     public static class DataUsageAdapter extends BaseAdapter {
+        private final UidDetailProvider mProvider;
+        private final int mInsetSide;
+
         private ArrayList<AppUsageItem> mItems = Lists.newArrayList();
         private long mLargest;
+
+        public DataUsageAdapter(UidDetailProvider provider, int insetSide) {
+            mProvider = checkNotNull(provider);
+            mInsetSide = insetSide;
+        }
 
         /**
          * Bind the given {@link NetworkStats}, or {@code null} to clear list.
@@ -1401,21 +1390,22 @@ public class DataUsageSummary extends Fragment {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.data_usage_item, parent, false);
+
+                if (mInsetSide > 0) {
+                    convertView.setPadding(mInsetSide, 0, mInsetSide, 0);
+                }
             }
 
             final Context context = parent.getContext();
 
-            final ImageView icon = (ImageView) convertView.findViewById(android.R.id.icon);
-            final TextView title = (TextView) convertView.findViewById(android.R.id.title);
             final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
             final ProgressBar progress = (ProgressBar) convertView.findViewById(
                     android.R.id.progress);
 
+            // kick off async load of app details
             final AppUsageItem item = mItems.get(position);
-            final UidDetail detail = resolveDetailForUid(context, item.uids[0]);
+            UidDetailTask.bindView(mProvider, item, convertView);
 
-            icon.setImageDrawable(detail.icon);
-            title.setText(detail.label);
             text1.setText(Formatter.formatFileSize(context, item.total));
 
             final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
@@ -1745,66 +1735,64 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
-    public static class UidDetail {
-        public CharSequence label;
-        public CharSequence[] detailLabels;
-        public Drawable icon;
-    }
-
     /**
-     * Resolve best descriptive label for the given UID.
+     * Background task that loads {@link UidDetail}, binding to
+     * {@link DataUsageAdapter} row item when finished.
      */
-    public static UidDetail resolveDetailForUid(Context context, int uid) {
-        final Resources res = context.getResources();
-        final PackageManager pm = context.getPackageManager();
+    private static class UidDetailTask extends AsyncTask<Void, Void, UidDetail> {
+        private final UidDetailProvider mProvider;
+        private final AppUsageItem mItem;
+        private final View mTarget;
 
-        final UidDetail detail = new UidDetail();
-        detail.label = pm.getNameForUid(uid);
-        detail.icon = pm.getDefaultActivityIcon();
-
-        // handle special case labels
-        switch (uid) {
-            case android.os.Process.SYSTEM_UID:
-                detail.label = res.getString(R.string.process_kernel_label);
-                detail.icon = pm.getDefaultActivityIcon();
-                return detail;
-            case TrafficStats.UID_REMOVED:
-                detail.label = res.getString(R.string.data_usage_uninstalled_apps);
-                detail.icon = pm.getDefaultActivityIcon();
-                return detail;
+        private UidDetailTask(UidDetailProvider provider, AppUsageItem item, View target) {
+            mProvider = checkNotNull(provider);
+            mItem = checkNotNull(item);
+            mTarget = checkNotNull(target);
         }
 
-        // otherwise fall back to using packagemanager labels
-        final String[] packageNames = pm.getPackagesForUid(uid);
-        final int length = packageNames != null ? packageNames.length : 0;
-
-        try {
-            if (length == 1) {
-                final ApplicationInfo info = pm.getApplicationInfo(packageNames[0], 0);
-                detail.label = info.loadLabel(pm).toString();
-                detail.icon = info.loadIcon(pm);
-            } else if (length > 1) {
-                detail.detailLabels = new CharSequence[length];
-                for (int i = 0; i < length; i++) {
-                    final String packageName = packageNames[i];
-                    final PackageInfo packageInfo = pm.getPackageInfo(packageName, 0);
-                    final ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
-
-                    detail.detailLabels[i] = appInfo.loadLabel(pm).toString();
-                    if (packageInfo.sharedUserLabel != 0) {
-                        detail.label = pm.getText(packageName, packageInfo.sharedUserLabel,
-                                packageInfo.applicationInfo).toString();
-                        detail.icon = appInfo.loadIcon(pm);
-                    }
-                }
+        public static void bindView(
+                UidDetailProvider provider, AppUsageItem item, View target) {
+            final UidDetailTask existing = (UidDetailTask) target.getTag();
+            if (existing != null) {
+                existing.cancel(false);
             }
-        } catch (NameNotFoundException e) {
+
+            final UidDetail cachedDetail = provider.getUidDetail(item.uids[0], false);
+            if (cachedDetail != null) {
+                bindView(cachedDetail, target);
+            } else {
+                target.setTag(new UidDetailTask(provider, item, target).executeOnExecutor(
+                        AsyncTask.THREAD_POOL_EXECUTOR));
+            }
         }
 
-        if (TextUtils.isEmpty(detail.label)) {
-            detail.label = Integer.toString(uid);
+        private static void bindView(UidDetail detail, View target) {
+            final ImageView icon = (ImageView) target.findViewById(android.R.id.icon);
+            final TextView title = (TextView) target.findViewById(android.R.id.title);
+
+            if (detail != null) {
+                icon.setImageDrawable(detail.icon);
+                title.setText(detail.label);
+            } else {
+                icon.setImageDrawable(null);
+                title.setText(null);
+            }
         }
-        return detail;
+
+        @Override
+        protected void onPreExecute() {
+            bindView(null, mTarget);
+        }
+
+        @Override
+        protected UidDetail doInBackground(Void... params) {
+            return mProvider.getUidDetail(mItem.uids[0], true);
+        }
+
+        @Override
+        protected void onPostExecute(UidDetail result) {
+            bindView(result, mTarget);
+        }
     }
 
     /**
@@ -1827,6 +1815,9 @@ public class DataUsageSummary extends Fragment {
      * Test if device has a mobile 4G data radio.
      */
     private static boolean hasMobile4gRadio(Context context) {
+        if (!NetworkPolicyEditor.ENABLE_SPLIT_POLICIES) {
+            return false;
+        }
         if (TEST_RADIOS) {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("4g");
         }

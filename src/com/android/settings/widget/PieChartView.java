@@ -40,7 +40,7 @@ import java.util.ArrayList;
  */
 public class PieChartView extends View {
     public static final String TAG = "PieChartView";
-    public static final boolean LOGD = true;
+    public static final boolean LOGD = false;
 
     private ArrayList<Slice> mSlices = Lists.newArrayList();
 

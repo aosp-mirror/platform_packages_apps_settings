@@ -30,6 +30,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.android.internal.util.Objects;
 import com.android.settings.R;
 import com.android.settings.widget.ChartSweepView.OnSweepListener;
 
@@ -214,7 +215,8 @@ public class ChartDataUsageView extends ChartView {
 
         // always show known data and policy lines
         final long maxSweep = Math.max(mSweepWarning.getValue(), mSweepLimit.getValue());
-        final long maxVisible = Math.max(mSeries.getMaxVisible(), maxSweep) * 12 / 10;
+        final long maxSeries = Math.max(mSeries.getMaxVisible(), mDetailSeries.getMaxVisible());
+        final long maxVisible = Math.max(maxSeries, maxSweep) * 12 / 10;
         final long maxDefault = Math.max(maxVisible, 2 * GB_IN_BYTES);
         newMax = Math.max(maxDefault, newMax);
 
@@ -222,12 +224,14 @@ public class ChartDataUsageView extends ChartView {
         if (newMax != mVertMax) {
             mVertMax = newMax;
 
-            mVert.setBounds(0L, newMax);
+            final boolean changed = mVert.setBounds(0L, newMax);
             mSweepWarning.setValidRange(0L, newMax);
             mSweepLimit.setValidRange(0L, newMax);
 
-            mSeries.generatePath();
-            mDetailSeries.generatePath();
+            if (changed) {
+                mSeries.invalidatePath();
+                mDetailSeries.invalidatePath();
+            }
 
             mGrid.invalidate();
 
@@ -261,6 +265,10 @@ public class ChartDataUsageView extends ChartView {
             interestLine = mSweepWarning.getValue();
         } else if (mSweepLimit.isEnabled()) {
             interestLine = mSweepLimit.getValue();
+        }
+
+        if (interestLine < 0) {
+            interestLine = Long.MAX_VALUE;
         }
 
         final boolean estimateVisible = (maxEstimate >= interestLine * 7 / 10);
@@ -354,8 +362,10 @@ public class ChartDataUsageView extends ChartView {
      * last "week" of available data, without triggering listener events.
      */
     public void setVisibleRange(long visibleStart, long visibleEnd) {
-        mHoriz.setBounds(visibleStart, visibleEnd);
+        final boolean changed = mHoriz.setBounds(visibleStart, visibleEnd);
         mGrid.setBounds(visibleStart, visibleEnd);
+        mSeries.setBounds(visibleStart, visibleEnd);
+        mDetailSeries.setBounds(visibleStart, visibleEnd);
 
         final long validStart = Math.max(visibleStart, getStatsStart());
         final long validEnd = Math.min(visibleEnd, getStatsEnd());
@@ -378,7 +388,10 @@ public class ChartDataUsageView extends ChartView {
         mSweepRight.setValue(sweepMax);
 
         requestLayout();
-        mSeries.generatePath();
+        if (changed) {
+            mSeries.invalidatePath();
+            mDetailSeries.invalidatePath();
+        }
 
         updateVertAxisBounds(null);
         updateEstimateVisible();
@@ -410,15 +423,30 @@ public class ChartDataUsageView extends ChartView {
             setBounds(currentTime - DateUtils.DAY_IN_MILLIS * 30, currentTime);
         }
 
-        /** {@inheritDoc} */
-        public void setBounds(long min, long max) {
-            mMin = min;
-            mMax = max;
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(mMin, mMax, mSize);
         }
 
         /** {@inheritDoc} */
-        public void setSize(float size) {
-            this.mSize = size;
+        public boolean setBounds(long min, long max) {
+            if (mMin != min || mMax != max) {
+                mMin = min;
+                mMax = max;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /** {@inheritDoc} */
+        public boolean setSize(float size) {
+            if (mSize != size) {
+                mSize = size;
+                return true;
+            } else {
+                return false;
+            }
         }
 
         /** {@inheritDoc} */
@@ -461,15 +489,30 @@ public class ChartDataUsageView extends ChartView {
         private long mMax;
         private float mSize;
 
-        /** {@inheritDoc} */
-        public void setBounds(long min, long max) {
-            mMin = min;
-            mMax = max;
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(mMin, mMax, mSize);
         }
 
         /** {@inheritDoc} */
-        public void setSize(float size) {
-            mSize = size;
+        public boolean setBounds(long min, long max) {
+            if (mMin != min || mMax != max) {
+                mMin = min;
+                mMax = max;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /** {@inheritDoc} */
+        public boolean setSize(float size) {
+            if (mSize != size) {
+                mSize = size;
+                return true;
+            } else {
+                return false;
+            }
         }
 
         /** {@inheritDoc} */
