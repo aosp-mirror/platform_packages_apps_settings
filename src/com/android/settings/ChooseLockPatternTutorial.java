@@ -66,6 +66,10 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
                 Intent intent = new Intent(getActivity(), ChooseLockPattern.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 intent.putExtra("confirm_credentials", false);
+                final boolean isFallback = getActivity().getIntent()
+                    .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
+                intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK,
+                                isFallback);
                 startActivity(intent);
                 getActivity().finish();
             }
@@ -99,8 +103,12 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
                 getActivity().setResult(ChooseLockPattern.RESULT_FINISHED);
                 getActivity().finish();
             } else if (v == mNextButton) {
+                final boolean isFallback = getActivity().getIntent()
+                    .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
                 Intent intent = new Intent(getActivity(), ChooseLockPattern.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK,
+                                isFallback);
                 startActivity(intent);
                 getActivity().overridePendingTransition(0, 0); // no animation
                 getActivity().finish();
@@ -108,4 +116,3 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
         }
     }
 }
-
