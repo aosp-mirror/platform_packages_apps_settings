@@ -33,8 +33,7 @@ import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiConfiguration.Status;
 import android.net.wifi.WifiInfo;
-import android.net.wifi.Wps;
-import android.net.wifi.Wps.Setup;
+import android.net.wifi.WpsInfo;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -484,20 +483,20 @@ public class WifiConfigController implements TextWatcher,
         return MANUAL;
     }
 
-    Wps getWpsConfig() {
-        Wps config = new Wps();
+    WpsInfo getWpsConfig() {
+        WpsInfo config = new WpsInfo();
         switch (mNetworkSetupSpinner.getSelectedItemPosition()) {
             case WPS_PBC:
-                config.setup = Setup.PBC;
+                config.setup = WpsInfo.PBC;
                 break;
             case WPS_KEYPAD:
-                config.setup = Setup.KEYPAD;
+                config.setup = WpsInfo.KEYPAD;
                 break;
             case WPS_DISPLAY:
-                config.setup = Setup.DISPLAY;
+                config.setup = WpsInfo.DISPLAY;
                 break;
             default:
-                config.setup = Setup.INVALID;
+                config.setup = WpsInfo.INVALID;
                 Log.e(TAG, "WPS not selected type");
                 return config;
         }

@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.os.Handler;
 import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -39,7 +38,6 @@ public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
     private final Context mContext;
     private final CheckBoxPreference mCheckBox;
     private final IntentFilter mIntentFilter;
-    private final Handler mHandler = new WifiP2pHandler();
     private WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
 
@@ -61,7 +59,7 @@ public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
 
         mWifiP2pManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         if (mWifiP2pManager != null) {
-            mChannel = mWifiP2pManager.initialize(mContext, mHandler);
+            mChannel = mWifiP2pManager.initialize(mContext, mContext.getMainLooper(), null);
             if (mChannel == null) {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");
@@ -113,26 +111,6 @@ public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
             default:
                 Log.e(TAG,"Unhandled wifi state " + state);
                 break;
-        }
-    }
-
-    private class WifiP2pHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case WifiP2pManager.HANDLER_DISCONNECTION:
-                    //Failure to set up connection
-                    Log.e(TAG, "Lost connection with wifi p2p service");
-                    mWifiP2pManager = null;
-                    mCheckBox.setEnabled(false);
-                    break;
-                case WifiP2pManager.ENABLE_P2P_FAILED:
-                    mCheckBox.setEnabled(true);
-                    break;
-                default:
-                    //Ignore
-                    break;
-            }
         }
     }
 
