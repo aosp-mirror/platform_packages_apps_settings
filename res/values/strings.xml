@@ -1548,10 +1548,8 @@
     <!-- Sound settings screen, setting option summary text when check box is clear -->
     <string name="dock_sounds_enable_summary_off" product="default">Don\'t play sound when inserting or removing phone from dock</string>
 
-    <!-- Acounts & Sync settings screen setting option name to go into the screen for data sync settings-->
+    <!-- Acounts & Sync settings screen setting title. This screen will list the different accounts (mail, gmail...) used on that phone and their sync settings -->
     <string name="sync_settings">Accounts &amp; sync</string>
-    <!-- Main Settings screen setting option summary text for the itme to go into the screen with data sync settings-->
-    <string name="sync_settings_summary">Add or remove accounts and change account settings</string>
 
     <!-- Main Settings screen, setting option name to go into search settings -->
     <string name="search_settings">Search</string>
@@ -3308,9 +3306,6 @@ found in the list of installed applications.</string>
     <string name="sync_is_failing">Sync is currently experiencing problems. It will be back shortly.</string>
     <!-- Button label to add an account [CHAR LIMIT=20] -->
     <string name="add_account_label">Add account</string>
-    <!-- Header title for those settings relating to general syncing.
-         [CHAR LIMIT=30] -->
-    <string name="header_general_sync_settings">General sync settings</string>
     <!-- Data synchronization settings screen, title of setting that controls whether background data should be used [CHAR LIMIT=30] -->
     <string name="background_data">Background data</string>
     <!-- Data synchronization settings screen, summary of setting that controls whether background data should be used [CHAR LIMIT=60] -->
@@ -3319,13 +3314,8 @@ found in the list of installed applications.</string>
     <string name="background_data_dialog_title">Attention</string>
     <!-- Data synchronization settings screen, message of dialog that confirms the user's unchecking of background data [CHAR LIMIT=200] -->
     <string name="background_data_dialog_message">Disabling background data extends battery life and lowers data use. Some applications may still use the background data connection.</string>
-    <!-- Data synchronization settings screen, setting option name
-         [CHAR LIMIT=30] -->
-    <string name="sync_automatically">Auto-sync</string>
-    <!-- Data synchronization settings screen, setting option summary text when check box is selected [CHAR LIMIT=60] -->
-    <string name="sync_automatically_summary">Applications sync data automatically</string>
-    <!-- Header title for list of accounts on Accounts & Synchronization settings [CHAR LIMIT=30] -->
-    <string name="header_manage_accounts">Manage accounts</string>
+    <!-- Title for a checkbox that enables data synchronization in the account and sync screen [CHAR LIMIT=35] -->
+    <string name="sync_automatically">Auto-sync app data</string>
 
     <!-- Sync status messages on Accounts & Synchronization settings --><skip />
     <!-- Sync status shown when sync is enabled [CHAR LIMIT=20] -->

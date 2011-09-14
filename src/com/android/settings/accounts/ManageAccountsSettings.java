@@ -18,7 +18,6 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AuthenticatorDescription;
 import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -28,10 +27,8 @@ import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +37,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.AccountPreference;
@@ -48,37 +44,21 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 public class ManageAccountsSettings extends AccountPreferenceBase
         implements OnAccountsUpdateListener, DialogCreatable {
 
-    private static final String TAG = ManageAccountsSettings.class.getSimpleName();
-
-    private static final String AUTHORITIES_FILTER_KEY = "authorities";
-    private static final boolean LDEBUG = Log.isLoggable(TAG, Log.DEBUG);
-
-    private static final String AUTO_SYNC_CHECKBOX_KEY = "syncAutomaticallyCheckBox";
-    private static final String MANAGE_ACCOUNTS_CATEGORY_KEY = "manageAccountsCategory";
-
     private static final int MENU_ADD_ACCOUNT = Menu.FIRST;
+    private static final int MENU_SYNC_APP = MENU_ADD_ACCOUNT + 1;
 
     private static final int REQUEST_SHOW_SYNC_SETTINGS = 1;
 
-    private PreferenceCategory mManageAccountsCategory;
     private String[] mAuthorities;
     private TextView mErrorInfoView;
-    private Button mAddAccountButton;
-    private CheckBoxPreference mAutoSyncCheckbox;
+    private MenuItem mSyncAppMenuItem;
 
     private SettingsDialogFragment mDialogFragment;
-
-    private AuthenticatorDescription[] mAuthDescs;
-    private Map<String, AuthenticatorDescription> mTypeToAuthDescription
-            = new HashMap<String, AuthenticatorDescription>();
-    private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -111,9 +91,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         mErrorInfoView = (TextView)view.findViewById(R.id.sync_settings_error_info);
         mErrorInfoView.setVisibility(View.GONE);
 
-        mAutoSyncCheckbox = (CheckBoxPreference) findPreference(AUTO_SYNC_CHECKBOX_KEY);
-
-        mManageAccountsCategory = (PreferenceCategory)findPreference(MANAGE_ACCOUNTS_CATEGORY_KEY);
         mAuthorities = activity.getIntent().getStringArrayExtra(AUTHORITIES_FILTER_KEY);
 
         updateAuthDescriptions();
@@ -127,10 +104,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
-        if (preference == mAutoSyncCheckbox) {
-            ContentResolver.setMasterSyncAutomatically(mAutoSyncCheckbox.isChecked());
-            onSyncStateUpdated();
-        } else if (preference instanceof AccountPreference) {
+        if (preference instanceof AccountPreference) {
             startAccountSettings((AccountPreference) preference);
         } else {
             return false;
@@ -158,16 +132,24 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem actionItem =
-                menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label);
-        actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+        MenuItem addAccountItem = menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label);
+        addAccountItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                 | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        mSyncAppMenuItem = menu.add(0, MENU_SYNC_APP, 0, R.string.sync_automatically).
+                setCheckable(true).setChecked(ContentResolver.getMasterSyncAutomatically());
+        mSyncAppMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == MENU_ADD_ACCOUNT) {
+        final int itemId = item.getItemId();
+        if (itemId == MENU_ADD_ACCOUNT) {
             onAddAccountClicked();
+            return true;
+        } else if (itemId == MENU_SYNC_APP) {
+            // Use the opposite, the checked state has not yet been changed
+            ContentResolver.setMasterSyncAutomatically(!item.isChecked());
+            onSyncStateUpdated();            
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -179,8 +161,9 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         // Catch any delayed delivery of update messages
         if (getActivity() == null) return;
         // Set background connection state
-        boolean masterSyncAutomatically = ContentResolver.getMasterSyncAutomatically();
-        mAutoSyncCheckbox.setChecked(masterSyncAutomatically);
+        if (mSyncAppMenuItem != null) {
+            mSyncAppMenuItem.setChecked(ContentResolver.getMasterSyncAutomatically());
+        }
 
         // iterate over all the preferences, setting the state properly for each
         SyncInfo currentSync = ContentResolver.getCurrentSync();
@@ -196,8 +179,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 userFacing.add(sa.authority);
             }
         }
-        for (int i = 0, count = mManageAccountsCategory.getPreferenceCount(); i < count; i++) {
-            Preference pref = mManageAccountsCategory.getPreference(i);
+        for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
+            Preference pref = getPreferenceScreen().getPreference(i);
             if (! (pref instanceof AccountPreference)) {
                 continue;
             }
@@ -211,7 +194,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 for (String authority : authorities) {
                     SyncStatusInfo status = ContentResolver.getSyncStatus(account, authority);
                     boolean syncEnabled = ContentResolver.getSyncAutomatically(account, authority)
-                            && masterSyncAutomatically
+                            && ContentResolver.getMasterSyncAutomatically()
                             && (ContentResolver.getIsSyncable(account, authority) > 0);
                     boolean authorityIsPending = ContentResolver.isSyncPending(account, authority);
                     boolean activelySyncing = currentSync != null
@@ -251,7 +234,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onAccountsUpdated(Account[] accounts) {
         if (getActivity() == null) return;
-        mManageAccountsCategory.removeAll();
+        getPreferenceScreen().removeAll();
         for (int i = 0, n = accounts.length; i < n; i++) {
             final Account account = accounts[i];
             final ArrayList<String> auths = getAuthoritiesForAccountType(account.type);
@@ -271,7 +254,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 final Drawable icon = getDrawableForType(account.type);
                 final AccountPreference preference =
                         new AccountPreference(getActivity(), account, icon, auths);
-                mManageAccountsCategory.addPreference(preference);
+                getPreferenceScreen().addPreference(preference);
             }
         }
         onSyncStateUpdated();
@@ -280,8 +263,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     protected void onAuthDescriptionsUpdated() {
         // Update account icons for all account preference items
-        for (int i = 0; i < mManageAccountsCategory.getPreferenceCount(); i++) {
-            AccountPreference pref = (AccountPreference) mManageAccountsCategory.getPreference(i);
+        for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+            AccountPreference pref = (AccountPreference) getPreferenceScreen().getPreference(i);
             pref.setProviderIcon(getDrawableForType(pref.getAccount().type));
             pref.setSummary(getLabelForType(pref.getAccount().type));
         }
