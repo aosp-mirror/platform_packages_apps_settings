@@ -153,6 +153,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mToggleTouchExplorationPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private AccessibilityEnableScriptInjectionPreference mToggleScriptInjectionPreference;
+    private Preference mNoServicesMessagePreference;
 
     private int mLongPressTimeoutDefault;
 
@@ -376,7 +377,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         containerView.setGravity(Gravity.CENTER);
 
                         TextView summaryView = (TextView) view.findViewById(R.id.summary);
-                        String title = getString(R.string.accessibility_service_no_apps_title);
+                        String title = getString(R.string.accessibility_no_services_installed);
                         summaryView.setText(title);
                     }
                 };
@@ -388,8 +389,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mServicesCategory.addPreference(mNoServicesMessagePreference);
         }
     }
-
-    private Preference mNoServicesMessagePreference;
 
     private void updateSystemPreferences() {
         // Large text.
@@ -417,16 +416,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mToggleAutoRotateScreenPreference.setChecked(autoRotationEnabled);
 
         // Touch exploration enabled.
-        final boolean touchExplorationEnabled = (Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.TOUCH_EXPLORATION_ENABLED, 0) == 1);
-        if (touchExplorationEnabled) {
-            mToggleTouchExplorationPreference.setSummary(
-                    getString(R.string.accessibility_service_state_on));
-            mToggleTouchExplorationPreference.getExtras().putBoolean(EXTRA_CHECKED, true);
+        if (AccessibilityManager.getInstance(getActivity()).isEnabled()) {
+            mSystemsCategory.addPreference(mToggleTouchExplorationPreference);
+            final boolean touchExplorationEnabled = (Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.TOUCH_EXPLORATION_ENABLED, 0) == 1);
+            if (touchExplorationEnabled) {
+                mToggleTouchExplorationPreference.setSummary(
+                        getString(R.string.accessibility_service_state_on));
+                mToggleTouchExplorationPreference.getExtras().putBoolean(EXTRA_CHECKED, true);
+            } else {
+                mToggleTouchExplorationPreference.setSummary(
+                        getString(R.string.accessibility_service_state_off));
+                mToggleTouchExplorationPreference.getExtras().putBoolean(EXTRA_CHECKED, false);
+            }
+
         } else {
-            mToggleTouchExplorationPreference.setSummary(
-                    getString(R.string.accessibility_service_state_off));
-            mToggleTouchExplorationPreference.getExtras().putBoolean(EXTRA_CHECKED, false);
+            mSystemsCategory.removePreference(mToggleTouchExplorationPreference);
         }
 
         // Long press timeout.
@@ -443,7 +448,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void offerInstallAccessibilitySerivceOnce() {
-        if (mServicesCategory.getPreferenceCount() > 0) {
+        // There is always one preference - if no services it is just a message.
+        if (mServicesCategory.getPreference(0) != mNoServicesMessagePreference) {
             return;
         }
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -578,7 +584,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     // Enabling the first service enables accessibility.
                     Settings.Secure.putInt(getContentResolver(),
                             Settings.Secure.ACCESSIBILITY_ENABLED, 1);
-
                 } else if (length > 0) {
                     enabledServices += ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR + preferenceKey;
                     Settings.Secure.putString(getContentResolver(),
