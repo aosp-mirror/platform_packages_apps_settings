@@ -149,6 +149,10 @@ public class NetworkPolicyEditor {
                 template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, SNOOZE_NEVER);
     }
 
+    public int getPolicyCycleDay(NetworkTemplate template) {
+        return getPolicy(template).cycleDay;
+    }
+
     public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.cycleDay = cycleDay;
@@ -156,11 +160,19 @@ public class NetworkPolicyEditor {
         writeAsync();
     }
 
+    public long getPolicyWarningBytes(NetworkTemplate template) {
+        return getPolicy(template).warningBytes;
+    }
+
     public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.warningBytes = warningBytes;
         policy.lastSnooze = SNOOZE_NEVER;
         writeAsync();
+    }
+
+    public long getPolicyLimitBytes(NetworkTemplate template) {
+        return getPolicy(template).limitBytes;
     }
 
     public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {

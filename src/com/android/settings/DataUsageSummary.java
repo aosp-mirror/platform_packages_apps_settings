@@ -20,6 +20,7 @@ import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.ConnectivityManager.TYPE_WIMAX;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicy.WARNING_DISABLED;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
@@ -129,6 +130,7 @@ import com.google.android.collect.Lists;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 import libcore.util.Objects;
@@ -156,7 +158,10 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG_CONFIRM_DATA_ROAMING = "confirmDataRoaming";
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
+    private static final String TAG_WARNING_EDITOR = "warningEditor";
+    private static final String TAG_LIMIT_EDITOR = "limitEditor";
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
+    private static final String TAG_DENIED_RESTRICT = "deniedRestrict";
     private static final String TAG_CONFIRM_APP_RESTRICT = "confirmAppRestrict";
     private static final String TAG_APP_DETAILS = "appDetails";
 
@@ -295,7 +300,10 @@ public class DataUsageSummary extends Fragment {
         mTabHost.setOnTabChangedListener(mTabListener);
 
         mHeader = (ViewGroup) inflater.inflate(R.layout.data_usage_header, mListView, false);
-        mListView.addHeaderView(mHeader, null, false);
+        mHeader.setClickable(true);
+
+        mListView.addHeaderView(mHeader, null, true);
+        mListView.setItemsCanFocus(true);
 
         if (mInsetSide > 0) {
             // inset selector and divider drawables
@@ -316,7 +324,10 @@ public class DataUsageSummary extends Fragment {
 
             mDisableAtLimit = new CheckBox(inflater.getContext());
             mDisableAtLimit.setClickable(false);
+            mDisableAtLimit.setFocusable(false);
             mDisableAtLimitView = inflatePreference(inflater, mNetworkSwitches, mDisableAtLimit);
+            mDisableAtLimitView.setClickable(true);
+            mDisableAtLimitView.setFocusable(true);
             mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
             mNetworkSwitches.addView(mDisableAtLimitView);
         }
@@ -346,7 +357,10 @@ public class DataUsageSummary extends Fragment {
 
             mAppRestrict = new CheckBox(inflater.getContext());
             mAppRestrict.setClickable(false);
+            mAppRestrict.setFocusable(false);
             mAppRestrictView = inflatePreference(inflater, mAppSwitches, mAppRestrict);
+            mAppRestrictView.setClickable(true);
+            mAppRestrictView.setFocusable(true);
             mAppRestrictView.setOnClickListener(mAppRestrictListener);
             mAppSwitches.addView(mAppRestrictView);
         }
@@ -456,7 +470,11 @@ public class DataUsageSummary extends Fragment {
             case R.id.data_usage_menu_restrict_background: {
                 final boolean restrictBackground = !item.isChecked();
                 if (restrictBackground) {
-                    ConfirmRestrictFragment.show(this);
+                    if (hasLimitedNetworks()) {
+                        ConfirmRestrictFragment.show(this);
+                    } else {
+                        DeniedRestrictFragment.show(this);
+                    }
                 } else {
                     // no confirmation to drop restriction
                     setRestrictBackground(false);
@@ -619,7 +637,6 @@ public class DataUsageSummary extends Fragment {
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
         mDataEnabledView.setVisibility(View.VISIBLE);
-        mDisableAtLimitView.setVisibility(View.VISIBLE);
 
         if (TAB_MOBILE.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
@@ -735,7 +752,7 @@ public class DataUsageSummary extends Fragment {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
             setPreferenceSummary(mAppRestrictView,
                     getString(R.string.data_usage_app_restrict_background_summary,
-                            buildLimitedNetworksList()));
+                            buildLimitedNetworksString()));
 
             mAppRestrictView.setVisibility(View.VISIBLE);
             mAppRestrict.setChecked(getAppRestrictBackground());
@@ -743,12 +760,6 @@ public class DataUsageSummary extends Fragment {
         } else {
             mAppRestrictView.setVisibility(View.GONE);
         }
-    }
-
-    private void setPolicyCycleDay(int cycleDay) {
-        if (LOGD) Log.d(TAG, "setPolicyCycleDay()");
-        mPolicyEditor.setPolicyCycleDay(mTemplate, cycleDay);
-        updatePolicy(true);
     }
 
     private void setPolicyWarningBytes(long warningBytes) {
@@ -863,15 +874,8 @@ public class DataUsageSummary extends Fragment {
     private void updatePolicy(boolean refreshCycle) {
         if (isAppDetailMode()) {
             mNetworkSwitches.setVisibility(View.GONE);
-            // we fall through to update cycle list for detail mode
         } else {
             mNetworkSwitches.setVisibility(View.VISIBLE);
-
-            // when heading back to summary without cycle refresh, kick details
-            // update to repopulate list.
-            if (!refreshCycle) {
-                updateDetailData();
-            }
         }
 
         // TODO: move enabled state directly into policy
@@ -907,6 +911,8 @@ public class DataUsageSummary extends Fragment {
      * item, updating the inspection range on {@link #mChart}.
      */
     private void updateCycleList(NetworkPolicy policy) {
+        // stash away currently selected cycle to try restoring below
+        final CycleItem previousItem = (CycleItem) mCycleSpinner.getSelectedItem();
         mCycleAdapter.clear();
 
         final Context context = mCycleSpinner.getContext();
@@ -954,8 +960,18 @@ public class DataUsageSummary extends Fragment {
 
         // force pick the current cycle (first item)
         if (mCycleAdapter.getCount() > 0) {
-            mCycleSpinner.setSelection(0);
-            mCycleListener.onItemSelected(mCycleSpinner, null, 0, 0);
+            final int position = mCycleAdapter.findNearestPosition(previousItem);
+            mCycleSpinner.setSelection(position);
+
+            // only force-update cycle when changed; skipping preserves any
+            // user-defined inspection region.
+            final CycleItem selectedItem = mCycleAdapter.getItem(position);
+            if (!Objects.equal(selectedItem, previousItem)) {
+                mCycleListener.onItemSelected(mCycleSpinner, null, position, 0);
+            } else {
+                // but still kick off loader for detailed list
+                updateDetailData();
+            }
         } else {
             updateDetailData();
         }
@@ -1002,9 +1018,16 @@ public class DataUsageSummary extends Fragment {
             final boolean restrictBackground = !mAppRestrict.isChecked();
 
             if (restrictBackground) {
-                // enabling restriction; show confirmation dialog which
-                // eventually calls setRestrictBackground() once user confirms.
-                ConfirmAppRestrictFragment.show(DataUsageSummary.this);
+                if (hasLimitedNetworks()) {
+                    // enabling restriction; show confirmation dialog which
+                    // eventually calls setRestrictBackground() once user
+                    // confirms.
+                    ConfirmAppRestrictFragment.show(DataUsageSummary.this);
+                } else {
+                    // no limited networks; show dialog to guide user towards
+                    // setting a network limit. doesn't mutate restrict state.
+                    DeniedRestrictFragment.show(DataUsageSummary.this);
+                }
             } else {
                 setAppRestrictBackground(false);
             }
@@ -1211,13 +1234,22 @@ public class DataUsageSummary extends Fragment {
         public void onLimitChanged() {
             setPolicyLimitBytes(mChart.getLimitBytes());
         }
-    };
 
+        /** {@inheritDoc} */
+        public void requestWarningEdit() {
+            WarningEditorFragment.show(DataUsageSummary.this);
+        }
+
+        /** {@inheritDoc} */
+        public void requestLimitEdit() {
+            LimitEditorFragment.show(DataUsageSummary.this);
+        }
+    };
 
     /**
      * List item that reflects a specific data usage cycle.
      */
-    public static class CycleItem {
+    public static class CycleItem implements Comparable<CycleItem> {
         public CharSequence label;
         public long start;
         public long end;
@@ -1235,6 +1267,20 @@ public class DataUsageSummary extends Fragment {
         @Override
         public String toString() {
             return label.toString();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o instanceof CycleItem) {
+                final CycleItem another = (CycleItem) o;
+                return start == another.start && end == another.end;
+            }
+            return false;
+        }
+
+        /** {@inheritDoc} */
+        public int compareTo(CycleItem another) {
+            return Long.compare(start, another.start);
         }
     }
 
@@ -1290,6 +1336,25 @@ public class DataUsageSummary extends Fragment {
             if (mChangePossible && mChangeVisible) {
                 add(mChangeItem);
             }
+        }
+
+        /**
+         * Find position of {@link CycleItem} in this adapter which is nearest
+         * the given {@link CycleItem}.
+         */
+        public int findNearestPosition(CycleItem target) {
+            if (target != null) {
+                final int count = getCount();
+                for (int i = count - 1; i >= 0; i--) {
+                    final CycleItem item = getItem(i);
+                    if (item instanceof CycleChangeItem) {
+                        continue;
+                    } else if (item.compareTo(target) >= 0) {
+                        return i;
+                    }
+                }
+            }
+            return 0;
         }
     }
 
@@ -1528,12 +1593,11 @@ public class DataUsageSummary extends Fragment {
      * Dialog to edit {@link NetworkPolicy#cycleDay}.
      */
     public static class CycleEditorFragment extends DialogFragment {
-        private static final String EXTRA_CYCLE_DAY = "cycleDay";
+        private static final String EXTRA_TEMPLATE = "template";
 
         public static void show(DataUsageSummary parent) {
-            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate);
             final Bundle args = new Bundle();
-            args.putInt(CycleEditorFragment.EXTRA_CYCLE_DAY, policy.cycleDay);
+            args.putParcelable(EXTRA_TEMPLATE, parent.mTemplate);
 
             final CycleEditorFragment dialog = new CycleEditorFragment();
             dialog.setArguments(args);
@@ -1544,6 +1608,8 @@ public class DataUsageSummary extends Fragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
+            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+            final NetworkPolicyEditor editor = target.mPolicyEditor;
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
@@ -1551,11 +1617,12 @@ public class DataUsageSummary extends Fragment {
             final View view = dialogInflater.inflate(R.layout.data_usage_cycle_editor, null, false);
             final NumberPicker cycleDayPicker = (NumberPicker) view.findViewById(R.id.cycle_day);
 
-            final int oldCycleDay = getArguments().getInt(EXTRA_CYCLE_DAY, 1);
+            final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
+            final int cycleDay = editor.getPolicyCycleDay(template);
 
             cycleDayPicker.setMinValue(1);
             cycleDayPicker.setMaxValue(31);
-            cycleDayPicker.setValue(oldCycleDay);
+            cycleDayPicker.setValue(cycleDay);
             cycleDayPicker.setWrapSelectorWheel(true);
 
             builder.setTitle(R.string.data_usage_cycle_editor_title);
@@ -1565,10 +1632,8 @@ public class DataUsageSummary extends Fragment {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             final int cycleDay = cycleDayPicker.getValue();
-                            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-                            if (target != null) {
-                                target.setPolicyCycleDay(cycleDay);
-                            }
+                            editor.setPolicyCycleDay(template, cycleDay);
+                            target.updatePolicy(true);
                         }
                     });
 
@@ -1576,6 +1641,125 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
+    /**
+     * Dialog to edit {@link NetworkPolicy#warningBytes}.
+     */
+    public static class WarningEditorFragment extends DialogFragment {
+        private static final String EXTRA_TEMPLATE = "template";
+
+        public static void show(DataUsageSummary parent) {
+            final Bundle args = new Bundle();
+            args.putParcelable(EXTRA_TEMPLATE, parent.mTemplate);
+
+            final WarningEditorFragment dialog = new WarningEditorFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_WARNING_EDITOR);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+            final NetworkPolicyEditor editor = target.mPolicyEditor;
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
+
+            final View view = dialogInflater.inflate(R.layout.data_usage_bytes_editor, null, false);
+            final NumberPicker bytesPicker = (NumberPicker) view.findViewById(R.id.bytes);
+
+            final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
+            final long warningBytes = editor.getPolicyWarningBytes(template);
+            final long limitBytes = editor.getPolicyLimitBytes(template);
+
+            bytesPicker.setMinValue(0);
+            if (limitBytes != LIMIT_DISABLED) {
+                bytesPicker.setMaxValue((int) (limitBytes / MB_IN_BYTES) - 1);
+            } else {
+                bytesPicker.setMaxValue(Integer.MAX_VALUE);
+            }
+            bytesPicker.setValue((int) (warningBytes / MB_IN_BYTES));
+            bytesPicker.setWrapSelectorWheel(false);
+
+            builder.setTitle(R.string.data_usage_warning_editor_title);
+            builder.setView(view);
+
+            builder.setPositiveButton(R.string.data_usage_cycle_editor_positive,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // clear focus to finish pending text edits
+                            bytesPicker.clearFocus();
+
+                            final long bytes = bytesPicker.getValue() * MB_IN_BYTES;
+                            editor.setPolicyWarningBytes(template, bytes);
+                            target.updatePolicy(false);
+                        }
+                    });
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Dialog to edit {@link NetworkPolicy#limitBytes}.
+     */
+    public static class LimitEditorFragment extends DialogFragment {
+        private static final String EXTRA_TEMPLATE = "template";
+
+        public static void show(DataUsageSummary parent) {
+            final Bundle args = new Bundle();
+            args.putParcelable(EXTRA_TEMPLATE, parent.mTemplate);
+
+            final LimitEditorFragment dialog = new LimitEditorFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_LIMIT_EDITOR);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+            final NetworkPolicyEditor editor = target.mPolicyEditor;
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
+
+            final View view = dialogInflater.inflate(R.layout.data_usage_bytes_editor, null, false);
+            final NumberPicker bytesPicker = (NumberPicker) view.findViewById(R.id.bytes);
+
+            final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
+            final long warningBytes = editor.getPolicyWarningBytes(template);
+            final long limitBytes = editor.getPolicyLimitBytes(template);
+
+            bytesPicker.setMaxValue(Integer.MAX_VALUE);
+            if (warningBytes != WARNING_DISABLED) {
+                bytesPicker.setMinValue((int) (warningBytes / MB_IN_BYTES) + 1);
+            } else {
+                bytesPicker.setMinValue(0);
+            }
+            bytesPicker.setValue((int) (limitBytes / MB_IN_BYTES));
+            bytesPicker.setWrapSelectorWheel(false);
+
+            builder.setTitle(R.string.data_usage_limit_editor_title);
+            builder.setView(view);
+
+            builder.setPositiveButton(R.string.data_usage_cycle_editor_positive,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // clear focus to finish pending text edits
+                            bytesPicker.clearFocus();
+
+                            final long bytes = bytesPicker.getValue() * MB_IN_BYTES;
+                            editor.setPolicyLimitBytes(template, bytes);
+                            target.updatePolicy(false);
+                        }
+                    });
+
+            return builder.create();
+        }
+    }
     /**
      * Dialog to request user confirmation before disabling data.
      */
@@ -1661,7 +1845,7 @@ public class DataUsageSummary extends Fragment {
 
             final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
             if (target != null) {
-                final CharSequence limitedNetworks = target.buildLimitedNetworksList();
+                final CharSequence limitedNetworks = target.buildLimitedNetworksString();
                 builder.setMessage(
                         getString(R.string.data_usage_restrict_background, limitedNetworks));
             }
@@ -1675,6 +1859,31 @@ public class DataUsageSummary extends Fragment {
                 }
             });
             builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Dialog to inform user that {@link #POLICY_REJECT_METERED_BACKGROUND}
+     * change has been denied, usually based on
+     * {@link DataUsageSummary#hasLimitedNetworks()}.
+     */
+    public static class DeniedRestrictFragment extends DialogFragment {
+        public static void show(DataUsageSummary parent) {
+            final DeniedRestrictFragment dialog = new DeniedRestrictFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_DENIED_RESTRICT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.data_usage_app_restrict_background);
+            builder.setMessage(R.string.data_usage_restrict_denied_dialog);
+            builder.setPositiveButton(android.R.string.ok, null);
 
             return builder.create();
         }
@@ -1879,10 +2088,32 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
+     * Test if any networks are currently limited.
+     */
+    private boolean hasLimitedNetworks() {
+        return !buildLimitedNetworksList().isEmpty();
+    }
+
+    /**
      * Build string describing currently limited networks, which defines when
      * background data is restricted.
      */
-    private CharSequence buildLimitedNetworksList() {
+    private CharSequence buildLimitedNetworksString() {
+        final List<CharSequence> limited = buildLimitedNetworksList();
+
+        // handle case where no networks limited
+        if (limited.isEmpty()) {
+            limited.add(getText(R.string.data_usage_list_none));
+        }
+
+        return TextUtils.join(limited);
+    }
+
+    /**
+     * Build list of currently limited networks, which defines when background
+     * data is restricted.
+     */
+    private List<CharSequence> buildLimitedNetworksList() {
         final Context context = getActivity();
         final String subscriberId = getActiveSubscriberId(context);
 
@@ -1904,12 +2135,7 @@ public class DataUsageSummary extends Fragment {
             limited.add(getText(R.string.data_usage_tab_ethernet));
         }
 
-        // handle case where no networks limited
-        if (limited.isEmpty()) {
-            limited.add(getText(R.string.data_usage_list_none));
-        }
-
-        return TextUtils.join(limited);
+        return limited;
     }
 
     /**
