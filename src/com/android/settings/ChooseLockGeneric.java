@@ -67,6 +67,11 @@ public class ChooseLockGeneric extends PreferenceActivity {
             mKeyStore = KeyStore.getInstance();
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
 
+            // Defaults to needing to confirm credentials
+            final boolean confirmCredentials = getActivity().getIntent()
+                .getBooleanExtra(CONFIRM_CREDENTIALS, true);
+            mPasswordConfirmed = !confirmCredentials;
+
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
             }
