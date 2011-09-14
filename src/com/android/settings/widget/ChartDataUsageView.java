@@ -69,6 +69,8 @@ public class ChartDataUsageView extends ChartView {
         public void onInspectRangeChanged();
         public void onWarningChanged();
         public void onLimitChanged();
+        public void requestWarningEdit();
+        public void requestLimitEdit();
     }
 
     private DataUsageChartListener mListener;
@@ -122,6 +124,15 @@ public class ChartDataUsageView extends ChartView {
         mSweepRight.addOnSweepListener(mHorizListener);
         mSweepWarning.addOnSweepListener(mVertListener);
         mSweepLimit.addOnSweepListener(mVertListener);
+
+        mSweepWarning.setDragInterval(5 * MB_IN_BYTES);
+        mSweepLimit.setDragInterval(5 * MB_IN_BYTES);
+
+        // TODO: make time sweeps adjustable through dpad
+        mSweepLeft.setClickable(false);
+        mSweepLeft.setFocusable(false);
+        mSweepRight.setClickable(false);
+        mSweepRight.setFocusable(false);
 
         // tell everyone about our axis
         mGrid.init(mHoriz, mVert);
@@ -276,6 +287,7 @@ public class ChartDataUsageView extends ChartView {
     }
 
     private OnSweepListener mHorizListener = new OnSweepListener() {
+        /** {@inheritDoc} */
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
             updatePrimaryRange();
 
@@ -283,6 +295,11 @@ public class ChartDataUsageView extends ChartView {
             if (sweepDone && mListener != null) {
                 mListener.onInspectRangeChanged();
             }
+        }
+
+        /** {@inheritDoc} */
+        public void requestEdit(ChartSweepView sweep) {
+            // ignored
         }
     };
 
@@ -298,6 +315,7 @@ public class ChartDataUsageView extends ChartView {
     }
 
     private OnSweepListener mVertListener = new OnSweepListener() {
+        /** {@inheritDoc} */
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
             if (sweepDone) {
                 clearUpdateAxisDelayed(sweep);
@@ -311,6 +329,15 @@ public class ChartDataUsageView extends ChartView {
             } else {
                 // while moving, kick off delayed grow/shrink axis updates
                 sendUpdateAxisDelayed(sweep, false);
+            }
+        }
+
+        /** {@inheritDoc} */
+        public void requestEdit(ChartSweepView sweep) {
+            if (sweep == mSweepWarning && mListener != null) {
+                mListener.requestWarningEdit();
+            } else if (sweep == mSweepLimit && mListener != null) {
+                mListener.requestLimitEdit();
             }
         }
     };
@@ -540,7 +567,7 @@ public class ChartDataUsageView extends ChartView {
 
             final CharSequence unit;
             final long unitFactor;
-            if (value <= 100 * MB_IN_BYTES) {
+            if (value < 1000 * MB_IN_BYTES) {
                 unit = res.getText(com.android.internal.R.string.megabyteShort);
                 unitFactor = MB_IN_BYTES;
             } else {
@@ -551,6 +578,7 @@ public class ChartDataUsageView extends ChartView {
             final double result = (double) value / unitFactor;
             final double resultRounded;
             final CharSequence size;
+
             if (result < 10) {
                 size = String.format("%.1f", result);
                 resultRounded = (unitFactor * Math.round(result * 10)) / 10;

@@ -3526,6 +3526,8 @@ found in the list of installed applications.</string>
     <string name="data_usage_app_restrict_dialog_title">Restrict background data?</string>
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
     <string name="data_usage_app_restrict_dialog">This feature may negatively impact applications which depend on background data usage.\n\nMore appropriate data usage controls may be found within this application\'s settings.</string>
+    <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_restrict_denied_dialog">Restricting background data is only available when you\'ve set a network data limit.</string>
 
     <!-- Title of dialog for editing data usage cycle reset date. [CHAR LIMIT=48] -->
     <string name="data_usage_cycle_editor_title">Usage cycle reset date</string>
@@ -3533,6 +3535,11 @@ found in the list of installed applications.</string>
     <string name="data_usage_cycle_editor_subtitle">Date of each month:</string>
     <!-- Positive button title for data usage cycle editor, confirming that changes should be saved. [CHAR LIMIT=32] -->
     <string name="data_usage_cycle_editor_positive">Set</string>
+
+    <!-- Title of dialog for editing data usage warning in bytes. [CHAR LIMIT=48] -->
+    <string name="data_usage_warning_editor_title">Set data usage warning</string>
+    <!-- Title of dialog for editing data usage limit in bytes. [CHAR LIMIT=48] -->
+    <string name="data_usage_limit_editor_title">Set data usage limit</string>
 
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>

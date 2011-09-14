@@ -83,11 +83,22 @@ public class ChartSweepView extends View {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
+    private int mTouchMode = MODE_NONE;
+
+    private static final int MODE_NONE = 0;
+    private static final int MODE_DRAG = 1;
+    private static final int MODE_LABEL = 2;
+
+    private long mDragInterval = 1;
+
     public interface OnSweepListener {
         public void onSweep(ChartSweepView sweep, boolean sweepDone);
+        public void requestEdit(ChartSweepView sweep);
     }
 
     private OnSweepListener mListener;
+
+    private float mTrackingStart;
     private MotionEvent mTracking;
 
     public ChartSweepView(Context context) {
@@ -112,14 +123,27 @@ public class ChartSweepView extends View {
         setLabelTemplate(a.getResourceId(R.styleable.ChartSweepView_labelTemplate, 0));
         setLabelColor(a.getColor(R.styleable.ChartSweepView_labelColor, Color.BLUE));
 
+        // TODO: moved focused state directly into assets
+        setBackgroundResource(R.drawable.data_usage_sweep_background);
+
         mOutlinePaint.setColor(Color.RED);
         mOutlinePaint.setStrokeWidth(1f);
         mOutlinePaint.setStyle(Style.STROKE);
 
         a.recycle();
 
+        setClickable(true);
+        setFocusable(true);
+        setOnClickListener(mClickListener);
+
         setWillNotDraw(false);
     }
+
+    private OnClickListener mClickListener = new OnClickListener() {
+        public void onClick(View v) {
+            dispatchRequestEdit();
+        }
+    };
 
     void init(ChartAxis axis) {
         mAxis = Preconditions.checkNotNull(axis, "missing axis");
@@ -131,6 +155,10 @@ public class ChartSweepView extends View {
 
     public Rect getMargins() {
         return mMargins;
+    }
+
+    public void setDragInterval(long dragInterval) {
+        mDragInterval = dragInterval;
     }
 
     /**
@@ -159,9 +187,16 @@ public class ChartSweepView extends View {
         }
     }
 
+    private void dispatchRequestEdit() {
+        if (mListener != null) {
+            mListener.requestEdit(this);
+        }
+    }
+
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
+        setFocusable(enabled);
         requestLayout();
     }
 
@@ -232,6 +267,7 @@ public class ChartSweepView extends View {
     private void invalidateLabel() {
         if (mLabelTemplate != null && mAxis != null) {
             mLabelValue = mAxis.buildLabel(getResources(), mLabelTemplate, mValue);
+            setContentDescription(mLabelTemplate);
             invalidateLabelOffset();
             invalidate();
         } else {
@@ -369,11 +405,16 @@ public class ChartSweepView extends View {
             case MotionEvent.ACTION_DOWN: {
 
                 // only start tracking when in sweet spot
-                final boolean accept;
+                final boolean acceptDrag;
+                final boolean acceptLabel;
                 if (mFollowAxis == VERTICAL) {
-                    accept = event.getX() > getWidth() - (mSweepPadding.right * 8);
+                    acceptDrag = event.getX() > getWidth() - (mSweepPadding.right * 8);
+                    acceptLabel = mLabelLayout != null ? event.getX() < mLabelLayout.getWidth()
+                            : false;
                 } else {
-                    accept = event.getY() > getHeight() - (mSweepPadding.bottom * 8);
+                    acceptDrag = event.getY() > getHeight() - (mSweepPadding.bottom * 8);
+                    acceptLabel = mLabelLayout != null ? event.getY() < mLabelLayout.getHeight()
+                            : false;
                 }
 
                 final MotionEvent eventInParent = event.copy();
@@ -385,8 +426,14 @@ public class ChartSweepView extends View {
                     return false;
                 }
 
-                if (accept) {
+                if (acceptDrag) {
+                    if (mFollowAxis == VERTICAL) {
+                        mTrackingStart = getTop() - mMargins.top;
+                    } else {
+                        mTrackingStart = getLeft() - mMargins.left;
+                    }
                     mTracking = event.copy();
+                    mTouchMode = MODE_DRAG;
 
                     // starting drag should activate entire chart
                     if (!parent.isActivated()) {
@@ -394,47 +441,68 @@ public class ChartSweepView extends View {
                     }
 
                     return true;
+                } else if (acceptLabel) {
+                    mTouchMode = MODE_LABEL;
+                    return true;
                 } else {
+                    mTouchMode = MODE_NONE;
                     return false;
                 }
             }
             case MotionEvent.ACTION_MOVE: {
+                if (mTouchMode == MODE_LABEL) {
+                    return true;
+                }
+
                 getParent().requestDisallowInterceptTouchEvent(true);
 
                 // content area of parent
                 final Rect parentContent = getParentContentRect();
                 final Rect clampRect = computeClampRect(parentContent);
+                if (clampRect.isEmpty()) return true;
 
+                long value;
                 if (mFollowAxis == VERTICAL) {
                     final float currentTargetY = getTop() - mMargins.top;
-                    final float requestedTargetY = currentTargetY
+                    final float requestedTargetY = mTrackingStart
                             + (event.getRawY() - mTracking.getRawY());
                     final float clampedTargetY = MathUtils.constrain(
                             requestedTargetY, clampRect.top, clampRect.bottom);
                     setTranslationY(clampedTargetY - currentTargetY);
 
-                    setValue(mAxis.convertToValue(clampedTargetY - parentContent.top));
+                    value = mAxis.convertToValue(clampedTargetY - parentContent.top);
                 } else {
                     final float currentTargetX = getLeft() - mMargins.left;
-                    final float requestedTargetX = currentTargetX
+                    final float requestedTargetX = mTrackingStart
                             + (event.getRawX() - mTracking.getRawX());
                     final float clampedTargetX = MathUtils.constrain(
                             requestedTargetX, clampRect.left, clampRect.right);
                     setTranslationX(clampedTargetX - currentTargetX);
 
-                    setValue(mAxis.convertToValue(clampedTargetX - parentContent.left));
+                    value = mAxis.convertToValue(clampedTargetX - parentContent.left);
                 }
+
+                // round value from drag to nearest increment
+                value -= value % mDragInterval;
+                setValue(value);
 
                 dispatchOnSweep(false);
                 return true;
             }
             case MotionEvent.ACTION_UP: {
-                mTracking = null;
-                mValue = mLabelValue;
-                dispatchOnSweep(true);
-                setTranslationX(0);
-                setTranslationY(0);
-                requestLayout();
+                if (mTouchMode == MODE_LABEL) {
+                    performClick();
+                } else if (mTouchMode == MODE_DRAG) {
+                    mTrackingStart = 0;
+                    mTracking = null;
+                    mValue = mLabelValue;
+                    dispatchOnSweep(true);
+                    setTranslationX(0);
+                    setTranslationY(0);
+                    requestLayout();
+                }
+
+                mTouchMode = MODE_NONE;
                 return true;
             }
             default: {
@@ -501,7 +569,9 @@ public class ChartSweepView extends View {
         final Rect dynamicRect = buildClampRect(
                 parentContent, getValidAfterDynamic(), getValidBeforeDynamic(), mNeighborMargin);
 
-        rect.intersect(dynamicRect);
+        if (!rect.intersect(dynamicRect)) {
+            rect.setEmpty();
+        }
         return rect;
     }
 
@@ -587,7 +657,7 @@ public class ChartSweepView extends View {
             mContentOffset.bottom -= offset;
             mMargins.bottom += offset;
         } else {
-            final int heightAfter = heightBefore * 3;
+            final int heightAfter = heightBefore * 2;
             setMeasuredDimension(widthBefore, heightAfter);
             mContentOffset.offset(0, (heightAfter - heightBefore) / 2);
 
@@ -608,12 +678,10 @@ public class ChartSweepView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
         final int width = getWidth();
         final int height = getHeight();
-
-        if (DRAW_OUTLINE) {
-            canvas.drawRect(0, 0, width, height, mOutlinePaint);
-        }
 
         final int labelSize;
         if (isEnabled() && mLabelLayout != null) {
@@ -637,6 +705,11 @@ public class ChartSweepView extends View {
         }
 
         mSweep.draw(canvas);
+
+        if (DRAW_OUTLINE) {
+            mOutlinePaint.setColor(Color.RED);
+            canvas.drawRect(0, 0, width, height, mOutlinePaint);
+        }
     }
 
     public static float getLabelTop(ChartSweepView view) {
