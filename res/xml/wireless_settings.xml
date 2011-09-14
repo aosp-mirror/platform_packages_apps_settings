@@ -38,13 +38,6 @@
         android:title="@string/nfc_quick_toggle_title"
         android:persistent="false" />
 
-    <PreferenceScreen
-        android:fragment="com.android.settings.nfc.NdefPush"
-        android:key="ndef_push_settings"
-        android:title="@string/ndef_push_settings_title"
-        android:summary="@string/ndef_push_settings_summary" >
-    </PreferenceScreen>
-
     <CheckBoxPreference
         android:key="toggle_wifi_p2p"
         android:title="@string/wifi_p2p_settings_title"
