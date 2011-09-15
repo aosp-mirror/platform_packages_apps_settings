@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.provider.Telephony;
@@ -50,6 +51,8 @@ public class ApnEditor extends PreferenceActivity
     private final static String SAVED_POS = "pos";
     private final static String KEY_AUTH_TYPE = "auth_type";
     private final static String KEY_PROTOCOL = "apn_protocol";
+    private final static String KEY_CARRIER_ENABLED = "carrier_enabled";
+    private final static String KEY_BEARER = "bearer";
 
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_SAVE = Menu.FIRST + 1;
@@ -72,6 +75,8 @@ public class ApnEditor extends PreferenceActivity
     private ListPreference mAuthType;
     private EditTextPreference mApnType;
     private ListPreference mProtocol;
+    private CheckBoxPreference mCarrierEnabled;
+    private ListPreference mBearer;
 
     private String mCurMnc;
     private String mCurMcc;
@@ -103,6 +108,8 @@ public class ApnEditor extends PreferenceActivity
             Telephony.Carriers.AUTH_TYPE, // 14
             Telephony.Carriers.TYPE, // 15
             Telephony.Carriers.PROTOCOL, // 16
+            Telephony.Carriers.CARRIER_ENABLED, // 17
+            Telephony.Carriers.BEARER, // 18
     };
 
     private static final int ID_INDEX = 0;
@@ -121,6 +128,8 @@ public class ApnEditor extends PreferenceActivity
     private static final int AUTH_TYPE_INDEX = 14;
     private static final int TYPE_INDEX = 15;
     private static final int PROTOCOL_INDEX = 16;
+    private static final int CARRIER_ENABLED_INDEX = 17;
+    private static final int BEARER_INDEX = 18;
 
 
     @Override
@@ -149,6 +158,11 @@ public class ApnEditor extends PreferenceActivity
 
         mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
         mProtocol.setOnPreferenceChangeListener(this);
+
+        mCarrierEnabled = (CheckBoxPreference) findPreference(KEY_CARRIER_ENABLED);
+
+        mBearer = (ListPreference) findPreference(KEY_BEARER);
+        mBearer.setOnPreferenceChangeListener(this);
 
         mRes = getResources();
 
@@ -247,6 +261,8 @@ public class ApnEditor extends PreferenceActivity
             }
 
             mProtocol.setValue(mCursor.getString(PROTOCOL_INDEX));
+            mCarrierEnabled.setChecked(mCursor.getInt(CARRIER_ENABLED_INDEX)==1);
+            mBearer.setValue(mCursor.getString(BEARER_INDEX));
         }
 
         mName.setSummary(checkNull(mName.getText()));
@@ -276,6 +292,8 @@ public class ApnEditor extends PreferenceActivity
 
         mProtocol.setSummary(
                 checkNull(protocolDescription(mProtocol.getValue())));
+        mBearer.setSummary(
+                checkNull(bearerDescription(mBearer.getValue())));
     }
 
     /**
@@ -291,6 +309,20 @@ public class ApnEditor extends PreferenceActivity
             String[] values = mRes.getStringArray(R.array.apn_protocol_entries);
             try {
                 return values[protocolIndex];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return null;
+            }
+        }
+    }
+
+    private String bearerDescription(String raw) {
+        int mBearerIndex = mBearer.findIndexOfValue(raw);
+        if (mBearerIndex == -1) {
+            return null;
+        } else {
+            String[] values = mRes.getStringArray(R.array.bearer_entries);
+            try {
+                return values[mBearerIndex];
             } catch (ArrayIndexOutOfBoundsException e) {
                 return null;
             }
@@ -320,6 +352,16 @@ public class ApnEditor extends PreferenceActivity
             mProtocol.setSummary(protocol);
             mProtocol.setValue((String) newValue);
         }
+
+        if (KEY_BEARER.equals(key)) {
+            String bearer = bearerDescription((String) newValue);
+            if (bearer == null) {
+                return false;
+            }
+            mBearer.setValue((String) newValue);
+            mBearer.setSummary(bearer);
+        }
+
         return true;
     }
 
@@ -448,6 +490,11 @@ public class ApnEditor extends PreferenceActivity
             if (mCurMnc.equals(mnc) && mCurMcc.equals(mcc)) {
                 values.put(Telephony.Carriers.CURRENT, 1);
             }
+        }
+
+        String bearerVal = mBearer.getValue();
+        if (bearerVal != null) {
+            values.put(Telephony.Carriers.BEARER, Integer.parseInt(bearerVal));
         }
 
         getContentResolver().update(mUri, values, null, null);
