@@ -21,13 +21,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
-import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.util.Log;
-
-import com.android.settings.R;
 
 /**
  * NfcEnabler is a helper to manage the Nfc on/off checkbox preference. It is
@@ -35,14 +30,10 @@ import com.android.settings.R;
  * current state.
  */
 public class NfcEnabler implements Preference.OnPreferenceChangeListener {
-    private static final String TAG = "NfcEnabler";
-
     private final Context mContext;
     private final CheckBoxPreference mCheckbox;
-    private final PreferenceScreen mNdefPush;
     private final NfcAdapter mNfcAdapter;
     private final IntentFilter mIntentFilter;
-    private final Handler mHandler = new Handler();
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -55,17 +46,14 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         }
     };
 
-    public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference,
-            PreferenceScreen ndefPush) {
+    public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference) {
         mContext = context;
         mCheckbox = checkBoxPreference;
-        mNdefPush = ndefPush;
         mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
         if (mNfcAdapter == null) {
             // NFC is not supported
             mCheckbox.setEnabled(false);
-            mNdefPush.setEnabled(false);
             mIntentFilter = null;
             return;
         }
@@ -109,28 +97,18 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         case NfcAdapter.STATE_OFF:
             mCheckbox.setChecked(false);
             mCheckbox.setEnabled(true);
-            mNdefPush.setEnabled(false);
-            mNdefPush.setSummary(R.string.ndef_push_settings_summary);
             break;
         case NfcAdapter.STATE_ON:
             mCheckbox.setChecked(true);
             mCheckbox.setEnabled(true);
-            mNdefPush.setEnabled(true);
-            if (mNfcAdapter.isNdefPushEnabled()) {
-                mNdefPush.setSummary(R.string.ndef_push_on_summary);
-            } else {
-                mNdefPush.setSummary(R.string.ndef_push_off_summary);
-            }
             break;
         case NfcAdapter.STATE_TURNING_ON:
             mCheckbox.setChecked(true);
             mCheckbox.setEnabled(false);
-            mNdefPush.setEnabled(false);
             break;
         case NfcAdapter.STATE_TURNING_OFF:
             mCheckbox.setChecked(false);
             mCheckbox.setEnabled(false);
-            mNdefPush.setEnabled(false);
             break;
         }
     }

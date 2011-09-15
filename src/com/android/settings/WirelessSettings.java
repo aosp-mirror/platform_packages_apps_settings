@@ -43,7 +43,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
-    private static final String KEY_NDEF_PUSH_SETTINGS = "ndef_push_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TOGGLE_WIFI_P2P = "toggle_wifi_p2p";
     private static final String KEY_WIFI_P2P_SETTINGS = "wifi_p2p_settings";
@@ -101,12 +100,11 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
-        PreferenceScreen ndefPush = (PreferenceScreen) findPreference(KEY_NDEF_PUSH_SETTINGS);
 
         CheckBoxPreference wifiP2p = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI_P2P);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
-        mNfcEnabler = new NfcEnabler(activity, nfc, ndefPush);
+        mNfcEnabler = new NfcEnabler(activity, nfc);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -124,14 +122,12 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Manually set dependencies for NFC when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_NFC)) {
             findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
-            findPreference(KEY_NDEF_PUSH_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
         // Remove NFC if its not available
         mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         if (mNfcAdapter == null) {
             getPreferenceScreen().removePreference(nfc);
-            getPreferenceScreen().removePreference(ndefPush);
             mNfcEnabler = null;
         }
 
