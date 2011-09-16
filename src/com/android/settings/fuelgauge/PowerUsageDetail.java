@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ApplicationErrorReport;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -102,7 +103,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     public static final String EXTRA_NO_COVERAGE = "noCoverage";
     public static final String EXTRA_ICON_ID = "iconId"; // Int
 
-    private static final boolean DEBUG = true;
+    private PackageManager mPm;
+    private DevicePolicyManager mDpm;
     private String mTitle;
     private int mUsageSince;
     private int[] mTypes;
@@ -131,6 +133,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mPm = getActivity().getPackageManager();
+        mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
     }
 
     @Override
@@ -428,6 +432,22 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         if (mPackages == null || mUid < Process.FIRST_APPLICATION_UID) {
             mForceStopButton.setEnabled(false);
             return;
+        }
+        for (int i = 0; i < mPackages.length; i++) {
+            if (mDpm.packageHasActiveAdmins(mPackages[i])) {
+                mForceStopButton.setEnabled(false);
+                return;
+            }
+        }
+        for (int i = 0; i < mPackages.length; i++) {
+            try {
+                ApplicationInfo info = mPm.getApplicationInfo(mPackages[i], 0);
+                if ((info.flags&ApplicationInfo.FLAG_STOPPED) == 0) {
+                    mForceStopButton.setEnabled(true);
+                    break;
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+            }
         }
         Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                 Uri.fromParts("package", mPackages[0], null));
