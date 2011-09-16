@@ -25,6 +25,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -86,6 +87,7 @@ public class InstalledAppDetails extends Fragment
 
     private PackageManager mPm;
     private IUsbManager mUsbManager;
+    private DevicePolicyManager mDpm;
     private ApplicationsState mState;
     private ApplicationsState.AppEntry mAppEntry;
     private PackageInfo mPackageInfo;
@@ -206,7 +208,8 @@ public class InstalledAppDetails extends Fragment
     private void initDataButtons() {
         if ((mAppEntry.info.flags&(ApplicationInfo.FLAG_SYSTEM
                 | ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA))
-                == ApplicationInfo.FLAG_SYSTEM) {
+                == ApplicationInfo.FLAG_SYSTEM
+                || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             mClearDataButton.setText(R.string.clear_user_data_text);
             mClearDataButton.setEnabled(false);
             mCanClearData = false;
@@ -304,6 +307,11 @@ public class InstalledAppDetails extends Fragment
                 mUninstallButton.setText(R.string.uninstall_text);
             }
         }
+        // If this is a device admin, it can't be uninstall or disabled.
+        // We do this here so the text of the button is still set correctly.
+        if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+            enabled = false;
+        }
         mUninstallButton.setEnabled(enabled);
         if (enabled) {
             // Register listener
@@ -320,6 +328,7 @@ public class InstalledAppDetails extends Fragment
         mPm = getActivity().getPackageManager();
         IBinder b = ServiceManager.getService(Context.USB_SERVICE);
         mUsbManager = IUsbManager.Stub.asInterface(b);
+        mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
     }
@@ -809,15 +818,18 @@ public class InstalledAppDetails extends Fragment
     }
     
     private void checkForceStop() {
-        Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
-                Uri.fromParts("package", mAppEntry.info.packageName, null));
-        intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
-        intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
-        if ((mAppEntry.info.flags&ApplicationInfo.FLAG_STOPPED) == 0) {
+        if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+            // User can't force stop device admin.
+            updateForceStopButton(false);
+        } else if ((mAppEntry.info.flags&ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
             updateForceStopButton(true);
         } else {
+            Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
+                    Uri.fromParts("package", mAppEntry.info.packageName, null));
+            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
+            intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
                     Activity.RESULT_CANCELED, null, null);
         }
