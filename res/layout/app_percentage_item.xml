@@ -57,9 +57,12 @@
 
     <TextView
         android:id="@android:id/summary"
+        android:layout_width="0dip"
+        android:layout_gravity="fill_horizontal"
         android:layout_columnSpan="2"
         android:layout_marginTop="4dip"
         android:visibility="gone"
+        android:maxLines="2"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </GridLayout>
