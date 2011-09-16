@@ -84,7 +84,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // the AccessibilityServiceInfo we need for proper presentation.
     private static final long DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS = 1000;
 
-    private static final char ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ':';
+    private static final String ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ":";
 
     private static final String KEY_ACCESSIBILITY_TUTORIAL_LAUNCHED_ONCE =
         "key_accessibility_tutorial_launched_once";
@@ -126,7 +126,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     // Auxiliary members.
     private final SimpleStringSplitter mStringColonSplitter =
-        new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
+        new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR.charAt(0));
 
     private final Map<String, String> mLongPressTimeoutValuetoTitleMap =
         new HashMap<String, String>();
@@ -571,6 +571,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
             if (enabledServices == null) {
                 enabledServices = "";
+            }
+            // Due to a legacy bug we can get an enabled services value ending with a
+            // separator. Make sure to catch and fix that before handling.
+            if (enabledServices.endsWith(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR)) {
+                enabledServices = enabledServices.substring(0, enabledServices.length() - 1);
             }
             final int length = enabledServices.length();
             if (enabled) {
