@@ -40,6 +40,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
     private AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private final WifiManager mWifiManager;
+    private boolean mStateMachineEvent;
     private final IntentFilter mIntentFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -98,6 +99,10 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        //Do nothing if called as a result of a state machine event
+        if (mStateMachineEvent) {
+            return;
+        }
         // Show toast message if Wi-Fi is not allowed in airplane mode
         if (isChecked && !WirelessSettings.isRadioAllowed(mContext, Settings.System.RADIO_WIFI)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
@@ -127,19 +132,28 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
                 mSwitch.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_ENABLED:
-                mSwitch.setChecked(true);
+                setSwitchChecked(true);
                 mSwitch.setEnabled(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
                 mSwitch.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_DISABLED:
-                mSwitch.setChecked(false);
+                setSwitchChecked(false);
                 mSwitch.setEnabled(true);
                 break;
             default:
-                mSwitch.setChecked(false);
+                setSwitchChecked(false);
                 mSwitch.setEnabled(true);
+                break;
+        }
+    }
+
+    private void setSwitchChecked(boolean checked) {
+        if (checked != mSwitch.isChecked()) {
+            mStateMachineEvent = true;
+            mSwitch.setChecked(checked);
+            mStateMachineEvent = false;
         }
     }
 
