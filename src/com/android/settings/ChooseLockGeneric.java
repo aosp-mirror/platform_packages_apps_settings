@@ -43,6 +43,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
 
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
         private static final int MIN_PASSWORD_LENGTH = 4;
+        private static final String KEY_UNLOCK_BACKUP_INFO = "unlock_backup_info";
         private static final String KEY_UNLOCK_SET_OFF = "unlock_set_off";
         private static final String KEY_UNLOCK_SET_NONE = "unlock_set_none";
         private static final String KEY_UNLOCK_SET_BIOMETRIC_WEAK = "unlock_set_biometric_weak";
@@ -212,13 +213,21 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
             final boolean weakBiometricAvailable = isBiometricSensorAvailable(
                     DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK);
+            if (onlyShowFallback) {
+                picker.setTitle(R.string.backup_lock_settings_picker_title);
+            } else {
+                picker.setTitle(R.string.lock_settings_picker_title);
+            }
             for (int i = preferenceCount-1; i >= 0; --i) {
                 Preference pref = cat.getPreference(i);
                 if (pref instanceof PreferenceScreen) {
                     final String key = ((PreferenceScreen) pref).getKey();
                     boolean enabled = true;
                     boolean visible = true;
-                    if (KEY_UNLOCK_SET_OFF.equals(key)) {
+                    if (KEY_UNLOCK_BACKUP_INFO.equals(key)) {
+                        enabled = true;
+                        visible = onlyShowFallback;
+                    } else if (KEY_UNLOCK_SET_OFF.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
@@ -250,7 +259,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
          * @return true if allowed
          */
         private boolean allowedForFallback(String key) {
-            return KEY_UNLOCK_SET_PATTERN.equals(key) || KEY_UNLOCK_SET_PIN.equals(key);
+            return KEY_UNLOCK_BACKUP_INFO.equals(key)  ||
+                    KEY_UNLOCK_SET_PATTERN.equals(key) || KEY_UNLOCK_SET_PIN.equals(key);
         }
 
         private boolean isBiometricSensorAvailable(int quality) {

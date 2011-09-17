@@ -20,6 +20,13 @@
         android:key="security_picker_category"
         android:title="@string/lock_settings_picker_title">
 
+<!-- TODO: find a better way to display this backup info -->
+        <PreferenceScreen
+            android:key="unlock_backup_info"
+            android:summary="@string/unlock_backup_info_summary"
+            android:selectable="false"
+            android:persistent="false"/>
+
         <PreferenceScreen
             android:key="unlock_set_off"
             android:title="@string/unlock_set_unlock_off_title"
