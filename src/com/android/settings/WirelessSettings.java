@@ -163,30 +163,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (!cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
-            String[] usbRegexs = cm.getTetherableUsbRegexs();
-            String[] wifiRegexs = cm.getTetherableWifiRegexs();
-            String[] bluetoothRegexs = cm.getTetherableBluetoothRegexs();
-
-            boolean usbAvailable = usbRegexs.length != 0;
-            boolean wifiAvailable = wifiRegexs.length != 0;
-            boolean bluetoothAvailable = bluetoothRegexs.length != 0;
-
             Preference p = findPreference(KEY_TETHER_SETTINGS);
-            if (wifiAvailable && usbAvailable && bluetoothAvailable) {
-                p.setTitle(R.string.tether_settings_title_all);
-            } else if (wifiAvailable && usbAvailable) {
-                p.setTitle(R.string.tether_settings_title_all);
-            } else if (wifiAvailable && bluetoothAvailable) {
-                p.setTitle(R.string.tether_settings_title_all);
-            } else if (wifiAvailable) {
-                p.setTitle(R.string.tether_settings_title_wifi);
-            } else if (usbAvailable && bluetoothAvailable) {
-                p.setTitle(R.string.tether_settings_title_usb_bluetooth);
-            } else if (usbAvailable) {
-                p.setTitle(R.string.tether_settings_title_usb);
-            } else {
-                p.setTitle(R.string.tether_settings_title_bluetooth);
-            }
+            p.setTitle(Utils.getTetheringLabel(cm));
         }
     }
 

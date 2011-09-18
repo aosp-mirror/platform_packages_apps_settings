@@ -22,11 +22,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
 import android.net.TrafficStats;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 public class UidDetailProvider {
     private final Context mContext;
@@ -68,6 +70,13 @@ public class UidDetailProvider {
                 return detail;
             case TrafficStats.UID_REMOVED:
                 detail.label = res.getString(R.string.data_usage_uninstalled_apps);
+                detail.icon = pm.getDefaultActivityIcon();
+                mUidDetailCache.put(uid, detail);
+                return detail;
+            case TrafficStats.UID_TETHERING:
+                final ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(
+                        Context.CONNECTIVITY_SERVICE);
+                detail.label = res.getString(Utils.getTetheringLabel(cm));
                 detail.icon = pm.getDefaultActivityIcon();
                 mUidDetailCache.put(uid, detail);
                 return detail;
