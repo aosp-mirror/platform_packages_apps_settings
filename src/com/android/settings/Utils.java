@@ -393,4 +393,34 @@ public class Utils {
             list.setPadding(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
         }
     }
+
+    /**
+     * Return string resource that best describes combination of tethering
+     * options available on this device.
+     */
+    public static int getTetheringLabel(ConnectivityManager cm) {
+        String[] usbRegexs = cm.getTetherableUsbRegexs();
+        String[] wifiRegexs = cm.getTetherableWifiRegexs();
+        String[] bluetoothRegexs = cm.getTetherableBluetoothRegexs();
+
+        boolean usbAvailable = usbRegexs.length != 0;
+        boolean wifiAvailable = wifiRegexs.length != 0;
+        boolean bluetoothAvailable = bluetoothRegexs.length != 0;
+
+        if (wifiAvailable && usbAvailable && bluetoothAvailable) {
+            return R.string.tether_settings_title_all;
+        } else if (wifiAvailable && usbAvailable) {
+            return R.string.tether_settings_title_all;
+        } else if (wifiAvailable && bluetoothAvailable) {
+            return R.string.tether_settings_title_all;
+        } else if (wifiAvailable) {
+            return R.string.tether_settings_title_wifi;
+        } else if (usbAvailable && bluetoothAvailable) {
+            return R.string.tether_settings_title_usb_bluetooth;
+        } else if (usbAvailable) {
+            return R.string.tether_settings_title_usb;
+        } else {
+            return R.string.tether_settings_title_bluetooth;
+        }
+    }
 }

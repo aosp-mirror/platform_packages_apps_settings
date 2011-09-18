@@ -35,6 +35,8 @@ import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
 import static android.net.NetworkTemplate.buildTemplateMobile4g;
 import static android.net.NetworkTemplate.buildTemplateMobileAll;
 import static android.net.NetworkTemplate.buildTemplateWifi;
+import static android.net.TrafficStats.UID_REMOVED;
+import static android.net.TrafficStats.UID_TETHERING;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.text.format.Time.TIMEZONE_UTC;
@@ -68,7 +70,6 @@ import android.net.NetworkPolicyManager;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
-import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
@@ -1411,7 +1412,7 @@ public class DataUsageSummary extends Fragment {
                 final int uid = entry.uid;
                 final boolean isApp = uid >= android.os.Process.FIRST_APPLICATION_UID
                         && uid <= android.os.Process.LAST_APPLICATION_UID;
-                if (isApp || uid == TrafficStats.UID_REMOVED) {
+                if (isApp || uid == UID_REMOVED || uid == UID_TETHERING) {
                     AppUsageItem item = knownUids.get(uid);
                     if (item == null) {
                         item = new AppUsageItem(uid);
