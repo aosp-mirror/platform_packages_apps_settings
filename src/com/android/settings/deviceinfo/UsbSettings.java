@@ -51,7 +51,7 @@ public class UsbSettings extends SettingsPreferenceFragment {
 
     private final BroadcastReceiver mStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context content, Intent intent) {
-            updateToggles();
+            updateToggles(mUsbManager.getDefaultFunction());
         }
     };
 
@@ -94,8 +94,7 @@ public class UsbSettings extends SettingsPreferenceFragment {
                 new IntentFilter(UsbManager.ACTION_USB_STATE));
     }
 
-    private void updateToggles() {
-        String function = mUsbManager.getDefaultFunction();
+    private void updateToggles(String function) {
         if (UsbManager.USB_FUNCTION_MTP.equals(function)) {
             mMtp.setChecked(true);
             mPtp.setChecked(false);
@@ -122,10 +121,11 @@ public class UsbSettings extends SettingsPreferenceFragment {
         }
         if (preference == mMtp) {
             mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, true);
+            updateToggles(UsbManager.USB_FUNCTION_MTP);
         } else if (preference == mPtp) {
             mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP, true);
+            updateToggles(UsbManager.USB_FUNCTION_PTP);
         }
-        updateToggles();
         return true;
     }
 }
