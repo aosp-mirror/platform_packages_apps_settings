@@ -123,6 +123,7 @@ public class RadioInfo extends Activity {
     private TextView dnsCheckState;
     private EditText smsc;
     private Button radioPowerButton;
+    private Button imsRegRequiredButton;
     private Button dnsCheckToggleButton;
     private Button pingTestButton;
     private Button updateSmscButton;
@@ -282,6 +283,9 @@ public class RadioInfo extends Activity {
         radioPowerButton = (Button) findViewById(R.id.radio_power);
         radioPowerButton.setOnClickListener(mPowerButtonHandler);
 
+        imsRegRequiredButton = (Button) findViewById(R.id.ims_reg_required);
+        imsRegRequiredButton.setOnClickListener(mImsRegRequiredHandler);
+
         pingTestButton = (Button) findViewById(R.id.ping_test);
         pingTestButton.setOnClickListener(mPingButtonHandler);
         updateSmscButton = (Button) findViewById(R.id.update_smsc);
@@ -327,6 +331,7 @@ public class RadioInfo extends Activity {
         updateDataStats();
         updateDataStats2();
         updatePowerState();
+        updateImsRegRequiredState();
         updateProperties();
         updateDnsCheckState();
 
@@ -402,6 +407,19 @@ public class RadioInfo extends Activity {
                             getString(R.string.turn_on_radio);
         radioPowerButton.setText(buttonText);
     }
+
+    private boolean isImsRegRequired() {
+        return SystemProperties.getBoolean(TelephonyProperties.PROPERTY_IMS_REG_REQUIRED, false);
+    }
+
+    private void updateImsRegRequiredState() {
+        Log.d(TAG, "updateImsRegRequiredState isImsRegRequired()=" + isImsRegRequired());
+        String buttonText = isImsRegRequired() ?
+                            getString(R.string.ims_reg_required_off) :
+                            getString(R.string.ims_reg_required_on);
+        imsRegRequiredButton.setText(buttonText);
+    }
+
 
     private void updateDnsCheckState() {
         dnsCheckState.setText(phone.isDnsCheckDisabled() ?
@@ -874,6 +892,18 @@ public class RadioInfo extends Activity {
         public void onClick(View v) {
             //log("toggle radio power: currently " + (isRadioOn()?"on":"off"));
             phone.setRadioPower(!isRadioOn());
+        }
+    };
+
+    OnClickListener mImsRegRequiredHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, String.format("toggle %s: currently %s",
+                TelephonyProperties.PROPERTY_IMS_REG_REQUIRED, (isImsRegRequired() ? "on":"off")));
+            boolean newValue = !isImsRegRequired();
+            SystemProperties.set(TelephonyProperties.PROPERTY_IMS_REG_REQUIRED,
+                    newValue ? "1":"0");
+            updateImsRegRequiredState();
         }
     };
 
