@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"SYSTEM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Mobilfunkverbindung aktivieren"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Mobilfunkverbindung deaktivieren"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIM-Adressbuch anzeigen"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Zugelassene Rufnummern anzeigen"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Servicerufnummern anzeigen"</string>
@@ -326,22 +330,19 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Keine"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Finger bewegen"</string>
-    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Kein Muster, Passwort oder PIN zum Entsp. des                                Displays nötig"</string>
-    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
-    <skip />
+    <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Keine Sicherheit"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Geringe Sicherheit, experimentell"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Muster"</string>
-    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Muster zur Displayentsperrung erfordern"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Mittlere Sicherheit"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Numerische PIN zur Display-Entsp. erfordern"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Mittlere bis hohe Sicherheit"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Passwort"</string>
-    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Passwort zur Displayentsperrung erfordern"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Hohe Sicherheit"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Von Admin, Richtlinie oder Anmeldedaten deaktiviert"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Keine"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Finger bewegen"</string>
-    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="7010138770486467881">"FacePass"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Durch Muster geschützt"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Durch PIN geschützt"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Durch Passwort geschützt"</string>
@@ -408,7 +409,7 @@
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"In der Regel 0000 oder 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Möglicherweise müssen Sie diese PIN auch auf dem anderen Gerät eingeben."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Möglicherweise müssen Sie diesen Schlüssel auch auf dem anderen Gerät eingeben."</string>
-    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:241 in java.io.StringReader@3597a37c)  -->
+    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:241 in java.io.StringReader@65bd0dd4)  -->
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pairing mit diesem Gerät durchführen?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2084350245062266220">"Zum Pairing mit:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Tippen Sie Folgendes ein:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;. Drücken Sie anschließend die Eingabetaste."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Kopplung durchführen"</string>
@@ -486,7 +487,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Benachrichtigen, wenn ein offenes Netzwerk verfügbar ist"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Schlechte Internetverbindungen vermeiden"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"WLAN-Netzwerk nur bei guter Internetverbindung verwenden"</string>
-    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"WLAN-Standby-Richtlinie"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"WLAN im Standby-Modus aktiviert lassen"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Beim Ändern der Einstellung ist ein Problem aufgetreten."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Netzwerk hinzufügen"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"WLAN-Netzwerke"</string>
@@ -854,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Hilfe"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilfunknetze"</string>
     <string name="location_title" msgid="1029961368397484576">"Mein Standort"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Standortdienst von Google"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Apps dürfen WLAN und Mobilfunknetze zur Bestimmung Ihres ungefähren Standorts verwenden."</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Standortdienst von Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Zulassen, dass Apps WLAN und Mobilfunknetze für die Bestimmung Ihres ungefähren Standorts verwenden"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Standort per WLAN bestimmt"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS-Satelliten"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Apps dürfen Ihren Standort mithilfe von GPS bestimmen."</string>
@@ -1156,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Zulassen"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Nicht zulassen"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"<xliff:g id="SERVICE">%1$s</xliff:g> verwenden?"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Kreditkartennummern, jedoch keine Passwörter. Auch Daten bezüglich Ihrer Interaktion mit dem Tablet können erfasst werden."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Kreditkartennummern, jedoch keine Passwörter. Auch Daten bezüglich Ihrer Interaktion mit dem Telefon können erfasst werden."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"<xliff:g id="SERVICE">%1$s</xliff:g> beenden?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Durch Berühren von \"OK\" wird <xliff:g id="SERVICE">%1$s</xliff:g> beendet."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Keine Eingabehilfen in Form von Apps"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Sie haben keine Apps installiert, die als Eingabehilfen fungieren. Möchten Sie ein Sprachausgabeprogramm über Android Market herunterladen?"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Keine Dienste installiert"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Benötigen Sie einen Screenreader?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack bietet blinden Nutzern und Nutzern mit eingeschränktem Sehvermögen gesprochenes Feedback. Möchten Sie diese Funktion kostenlos von Android Market installieren?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Skripts für Eingabehilfen installieren?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Sollen Apps Skripts von Google installieren, um den Zugang zu Inhalten zu erleichtern?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Diese Funktion ändert die Art und Weise, wie Ihr Gerät auf Berührungen reagiert. Aktivieren?"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Es wurde keine Beschreibung bereitgestellt."</string>
     <string name="settings_button" msgid="3006713718908152930">"Einstellungen"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akku"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Was zum Akkuverbrauch beiträgt"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Keine Akku-Nutzungsdaten"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akkuverbrauch seit dem Ausstecken"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akkuverbrauch seit dem Zurücksetzen"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> mit Akku"</string>
@@ -1390,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Daten können synchronisiert, gesendet und empfangen werden."</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Achtung"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Durch die Hintergrunddaten-Deaktivierung kann die Akkulaufzeit verlängert und die Verwendung von Daten verringert werden. Einige Anwendungen nutzen die Hintergrunddatenverbindung eventuell weiterhin."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Autom. synchronisieren"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"App-Daten autom. synchronisieren"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synchronisierung an"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synchronisierung aus"</string>
     <string name="sync_error" msgid="5060969083117872149">"Synchron.fehler"</string>
@@ -1452,7 +1446,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datennutzung"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Datennutzungszyklus"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Daten-Roaming"</string>
-    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Hintergrunddaten-Nutzungsbeschränkung"</string>
+    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Daten beschränken"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"4G-Nutzung separat anzeigen"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"WLAN-Nutzung anzeigen"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Ethernet-Nutzung anzeigen"</string>
@@ -1462,10 +1456,10 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Vordergrund"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Hintergrund"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Mobile Daten deaktivieren?"</string>
-    <!-- outdated translation 289740911281022322 -->     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Daten nach Verbrauch deaktivieren"</string>
-    <!-- outdated translation 5808210773758699800 -->     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G-Daten bei Limit deaktivieren"</string>
-    <!-- outdated translation 3856971004328238231 -->     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G/3G bei Limit deaktivieren"</string>
-    <!-- outdated translation 316329558509856780 -->     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"WLAN-Daten ab Limit deaktivieren"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Limit für mobile Daten festlegen"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G-Datenlimit festlegen"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-/3G-Datenlimit festlegen"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"WLAN-Datenlimit festlegen"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"WLAN"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"Mobil"</string>
@@ -1481,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Deaktivieren Sie Hintergrunddaten in beschränkten Netzwerken (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Hintergrunddaten beschränken?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Diese Funktion kann sich negativ auf Apps auswirken, die auf eine Datennutzung im Hintergrund angewiesen sind."\n\n"Geeignetere Steuerelemente für die Datennutzung finden Sie in den Einstellungen der App."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Die Beschränkung der Hintergrunddaten ist nur verfügbar, wenn Sie ein Datenlimit für Ihr Netzwerk festgelegt haben."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum für Zurücksetzung der Nutzungszyklen"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum (monatlich):"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Übernehmen"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Warnung für Datennutzung festlegen"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Limit für Datennutzung festlegen"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Begrenzung der Datennutzung"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"Ihre Datenverbindung (<xliff:g id="NETWORKS">%1$s</xliff:g>) wird deaktiviert, sobald das angegebene Limit erreicht wurde."\n\n"Um zusätzliche Kosten zu vermeiden, sollten Sie eine Herabsetzung des Limits in Betracht ziehen, da die Abrechnungsmethoden von Gerät und Mobilfunkanbieter variieren können."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Hintergrunddaten beschränken?"</string>

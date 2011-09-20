@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"SISTEM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Hidupkan radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Matikan radio"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Lihat buku alamat SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Lihat Nombor Dailan Tetap"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Lihat Nombor Dailan Servis"</string>
@@ -326,22 +330,19 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Tiada"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Slaid"</string>
-    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Tidak memerlukan corak, PIN atau kata laluan untuk membuka kunci skrin"</string>
-    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
-    <skip />
+    <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Tiada keselamatan"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Keselamatan yang rendah, percubaan"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Corak"</string>
-    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Memerlukan corak untuk membuka kunci skrin"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Keselamatan sederhana"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Memerlukan PIN angka untuk membuka kunci skrin"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Keselamatan sederhana ke tinggi"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Kata laluan"</string>
-    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Memerlukan kata laluan untuk membuka kunci skrin"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Keselamatan tinggi"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Dlumpuhkn pentadbir, dsr penyulitan/storan klayakn"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Tiada"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Slaid"</string>
-    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="7010138770486467881">"FacePass"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Dilindungi dengan corak"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Dilindungi PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Dilindungi kata laluan"</string>
@@ -486,7 +487,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Beritahu saya apabila rangkaian terbuka tersedia"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Sambungan lemah dielakkan"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Jangan gunakan rangkaian Wi-Fi melainkan jika ia mempunyai sambungan internet yang memuaskan"</string>
-    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Dasar memutuskan sambungan Wi-Fi"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Biarkan Wi-Fi semasa tidur"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Terdapat masalah menukar tetapan"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Tambah rangkaian"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Rangkaian Wi-Fi"</string>
@@ -1452,7 +1453,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Penggunaan data"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Kitaran penggunaan data"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Perayauan data"</string>
-    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Hadkan data latar belakang"</string>
+    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Hadkan data"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Penggunaan 4G berasingan"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Tunjukkan penggunaan Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Tunjukkan penggunaan Ethernet"</string>
@@ -1462,10 +1463,10 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Latar depan"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Latar belakang"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Lumpuhkan data mudah alih?"</string>
-    <!-- outdated translation 289740911281022322 -->     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Lumpuhkan data mudah alih pd had"</string>
-    <!-- outdated translation 5808210773758699800 -->     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Lumpuhkan data 4G pada had"</string>
-    <!-- outdated translation 3856971004328238231 -->     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Lumpuhkan data 2G-3G pada had"</string>
-    <!-- outdated translation 316329558509856780 -->     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Lumpuhkan data Wi-Fi pada had"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Tetapkan had data mudah alih"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Tetapkan had data 4G"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Tetapkan had data 2G-3G"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Tetapkan had data Wi-Fi"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"Mudah Alih"</string>

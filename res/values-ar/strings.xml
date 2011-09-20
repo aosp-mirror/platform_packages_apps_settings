@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"النظام"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"تشغيل اللاسلكي"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"إيقاف اللاسلكي"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"عرض دفتر عناوين SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"عرض أرقام الاتصال الثابت"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"عرض أرقام اتصال الخدمة"</string>
@@ -795,7 +799,7 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"تم تسجيل دخولك حاليًا في الحسابات التالية:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"الموسيقى"</li>\n<li>"الصور"</li>\n<li>"بيانات المستخدم الأخرى"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"لمسح الموسيقى والصور وبيانات المستخدم الأخرى أيضًا، يلزم محو "<b>"وحدة تخزين USB"</b>"."</string>
-    <!-- syntax error in translation for master_clear_desc_erase_external_storage (7339100478676372901) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:177 in java.io.StringReader@72e3b895)  -->
+    <!-- syntax error in translation for master_clear_desc_erase_external_storage (7339100478676372901) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:177 in java.io.StringReader@eb1c260)  -->
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"محو وحدة تخزين USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"محو بطاقة SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"محو كل البيانات على وحدة تخزين USB الداخلية، مثل الموسيقى والصور."</string>
@@ -851,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"مساعدة"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"شبكات الجوال"</string>
     <string name="location_title" msgid="1029961368397484576">"موقعي"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"خدمة الموقع الجغرافي من Google"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"السماح للتطبيقات باستخدام Wi-Fi وشبكات الجوال لتحديد الموقع التقريبي"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"خدمة الموقع من Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"السماح للتطبيقات باستخدام بيانات من مصادر مثل شبكة Wi-Fi وشبكات الجوال لتحديد موقعك التقريبي"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"الموقع الذي تم تحديده بواسطة Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"الأقمار الصناعية لنظام GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"السماح للتطبيقات باستخدام GPS لتحديد موقعك"</string>
@@ -1153,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"السماح"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"عدم السماح"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"هل تريد استخدام <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"يمكن لـ <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> جمع كل النصوص التي تكتبها باستثناء كلمات المرور. ويتضمن ذلك البيانات الشخصية مثل أرقام البطاقات الائتمانية. كما يمكنها جمع بيانات عن تعاملاتك مع الجهاز اللوحي."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"يمكن لـ <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> جمع كل النصوص التي تكتبها باستثناء كلمات المرور. ويتضمن ذلك البيانات الشخصية مثل أرقام البطاقات الائتمانية. كما يمكنها جمع بيانات عن تعاملاتك مع الهاتف."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"هل تريد إيقاف <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"سيؤدي لمس \"موافق\" إلى إيقاف <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"لا توجد تطبيقات متعلقة بإمكانية الدخول"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"لا توجد لديك تطبيقات مثبتة للتمكين من الدخول. هل تريد تنزيل قارئ شاشة من Android Market؟"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"لم يتم تثبيت أي خدمات"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"هل تحتاج إلى قارئ شاشة؟"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"يقدم TalkBack تعليقات منطوقة لمساعدة المستخدمين من المكفوفين وضعاف البصر. هل تريد تثبيته مجانًا من Android Market؟"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"تثبيت البرامج النصية لإمكانية الدخول؟"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"هل تريد تثبيت نصوص برمجية من Google بواسطة التطبيقات لسهولة الدخول إلى محتواها؟"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"تعمل هذه الميزة على تغيير الطريقة التي يستجيب بها الجهاز إلى اللمس. هل تريد تشغيلها؟"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"لم يتم تقديم أي وصف."</string>
     <string name="settings_button" msgid="3006713718908152930">"الإعدادات"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"البطارية"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"ما الذي كان يستخدم البطارية"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"بيانات استخدام البطارية غير متاحة"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"استخدام البطارية عند فصل الطاقة"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"استخدام البطارية منذ إعادة التعيين"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> على البطارية"</string>
@@ -1387,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"يمكن للتطبيقات مزامنة وإرسال وتلقي البيانات في أي وقت"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"تنبيه"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"يؤدي تعطيل بيانات الخلفية إلى إطالة عمر البطارية وتقليل استخدام البيانات. ربما هناك بعض التطبيقات التي ما زالت تستخدم اتصال بيانات الخلفية."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"مزامنة تلقائية"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"مزامنة بيانات التطبيق تلقائيًا"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"المزامنة قيد التشغيل"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"المزامنة متوقفة"</string>
     <string name="sync_error" msgid="5060969083117872149">"خطأ في المزامنة"</string>
@@ -1478,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"تعطيل بيانات الخلفية على الشبكات التي اخترت تقييدها (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"هل تريد تقييد بيانات الخلفية؟"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"قد تؤثر هذه الميزة سلبًا في التطبيقات التي تعتمد على استخدام بيانات الخلفية."\n\n"يمكن العثور على المزيد من عناصر التحكم المناسبة في استخدام البيانات بداخل إعدادات هذا التطبيق."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"لا يتاح تقييد بيانات الخلفية سوى عند تعيين حد بيانات الشبكة."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"تاريخ إعادة تعيين دائرة الاستخدام"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"تاريخ كل شهر:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"تعيين"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"تعيين تحذير استخدام البيانات"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"تعيين حد استخدام البيانات"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"وضع حد لاستخدام البيانات"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"سيتم تعطيل اتصال بيانات شبكات <xliff:g id="NETWORKS">%1$s</xliff:g> عند بلوغ الحد المحدد."\n\n"لتجنب الرسوم الزائدة، جرّب استخدام حد مخفض، حيث قد تتباين طرق الحساب في الأجهزة ومشغلي شبكات الجوال."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"هل تريد تقييد بيانات الخلفية؟"</string>

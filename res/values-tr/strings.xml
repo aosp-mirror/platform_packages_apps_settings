@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"SİSTEM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Radyoyu aç"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Radyoyu kapat"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIM adres defterini görüntüle"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Sabit Arama Numaralarını Görüntüle"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Hizmet Arama Numaralarını Görüntüle"</string>
@@ -326,22 +330,19 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Yok"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Kaydırma"</string>
-    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Ekran kilidini açmak için desen, PIN veya şifre gerektirme"</string>
-    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
-    <skip />
+    <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Güvenlik yok"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Düşük güvenlik, deneysel"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Şekil"</string>
-    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Ekranın kilidini açmak için bir desen gerektir"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Orta güvenlik"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Ekr kilidini açmak için sayısal PIN gerektir"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Orta-yüksek güvenlik"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Şifre"</string>
-    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Ekranın kilidini açmak için şifre gerektir"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Yüksek güvenlik"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Devre dışı bırakıldı"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Hiçbiri"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Kaydırma"</string>
-    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="7010138770486467881">"FacePass"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Desenle güvenlik etkin"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"PIN ile güvenlik etkin"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Şifre ile güvenlik etkin"</string>
@@ -486,7 +487,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Açık bir ağ kullanılabilir olduğunda bana bildir"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Kötü bağlantılardan kaçın"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"İnternet bağlantısı iyi olmadıkça Kablosuz ağı kullanma"</string>
-    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Kablosuz bağlantı kesme politikası"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Uyku modunda sırasına Kablosuz etkin kalsın"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Ayarı değiştirirken bir sorun oluştu"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Ağ ekle"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Kablosuz ağlar"</string>
@@ -1452,7 +1453,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Veri kullanımı"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Veri kullanım dönemi"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Veri dolaşımında"</string>
-    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Arka plan verileri sınırla"</string>
+    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Verileri kısıtla"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Ayrı 4G kullanımı"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Kablosuz kullanımını göster"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Ethernet kullanımını göster"</string>
@@ -1462,10 +1463,10 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Ön plan"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Arka plan"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Mobil veriler devre dışı bırakılsın mı?"</string>
-    <!-- outdated translation 289740911281022322 -->     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Mobil verileri snrd dvr dışı brk"</string>
-    <!-- outdated translation 5808210773758699800 -->     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G verileri sınırda dvr dışı brk"</string>
-    <!-- outdated translation 3856971004328238231 -->     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-3G verileri snrd dvr dışı brk"</string>
-    <!-- outdated translation 316329558509856780 -->     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Limt dolnca Kablsz verilri devr dşı brak"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Mobil veri limitini ayarla"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G veri limitini ayarla"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-3G veri limitini ayarla"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Kablosuz veri limitini ayarla"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Kablosuz"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"Mobil"</string>
