@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"SYSTÈME"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Allumer le signal radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Éteindre le signal radio"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Afficher le carnet d\'adresses de la carte SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Afficher les numéros autorisés"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Afficher les numéros de service"</string>
@@ -851,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Aide"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Réseaux mobiles"</string>
     <string name="location_title" msgid="1029961368397484576">"Ma position"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Service de localisation Google"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Autoriser applications à utiliser Wi-Fi et réseaux mobiles pour déterminer position approximative"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Service de localisation Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Utiliser les données issues des réseaux Wi-Fi et mobiles pour déterminer votre position approximative"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Position déterminée par le Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satellites GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Autoriser les applications à utiliser le GPS pour localiser votre position"</string>
@@ -1153,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Autoriser"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Ne pas autoriser"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> peut recueillir la totalité du texte que vous saisissez, à l\'exception des mots de passe. Ceci comprend les données personnelles, telles que le numéro de votre carte de paiement, mais également les données sur vos interactions avec la tablette."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> peut recueillir la totalité du texte que vous saisissez, à l\'exception des mots de passe. Ceci comprend les données personnelles, telles que le numéro de votre carte de paiement, mais également les données sur vos interactions avec le téléphone."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Arrêter <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Si vous appuyez sur \"OK\", <xliff:g id="SERVICE">%1$s</xliff:g> sera arrêté."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Aucune application d\'accessibilité"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Vous n\'avez pas installé d\'applications d\'accessibilité. Voulez-vous télécharger un lecteur d\'écran depuis l\'Android Market ?"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Aucun service installé"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Vous avez besoin d\'un lecteur d\'écran ?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack fournit des commentaires audio aux personnes malvoyantes. Voulez-vous l\'installer gratuitement depuis l\'Android Market ?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Installer les scripts d\'accessibilité ?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Voulez-vous que les applications installent des scripts de Google pour rendre leur contenu plus accessible ?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Cette fonctionnalité change la façon dont votre appareil gère la saisie tactile. Voulez-vous l\'activer ?"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Aucune description fournie."</string>
     <string name="settings_button" msgid="3006713718908152930">"Paramètres"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Répartition de l\'utilisation de la batterie"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Données batterie non disponibles"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilisation de la batterie depuis le débranchement"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Utilisation de la batterie depuis la dernière réinitialisation"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"Sur la batterie : <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1387,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Synchronisation, envoi et réception de données à tout moment"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Avertissement"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"La désactivation des données en arrière-plan permet d\'économiser la batterie et de réduire l\'utilisation des données. Certaines applications peuvent utiliser la connexion des données en arrière-plan."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Synchronisation automatique"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Synchro automatique données applis"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synchronisation activée"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synchronisation désactivée"</string>
     <string name="sync_error" msgid="5060969083117872149">"Erreur de synchronisation"</string>
@@ -1478,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Désactiver données en arrière-plan sur réseaux spécifiés (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Limiter les données en arrière-plan ?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Cette fonctionnalité peut nuire à des applications qui dépendent de l\'utilisation des données en arrière-plan."\n\n"Des options plus appropriées de contrôle d\'utilisation des services de données sont disponibles dans les paramètres de cette application."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"La restriction des données en arrière-plan n\'est disponible que lorsque vous avez défini un quota de données pour le réseau."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Date de réinitialisation du cycle d\'utilisation"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Date réinitialisation mensuelle :"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Défini"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Définir avertissement utilisation des données"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Définir un quota d\'utilisation des données"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitation de l\'utilisation des données mobiles"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"Votre connexion <xliff:g id="NETWORKS">%1$s</xliff:g> est désactivée lorsque vous atteignez la limite spécifiée."\n\n"Pour éviter des frais supplémentaires, pensez à définir une limite réduite, puisque les méthodes comptables de l\'appareil et de l\'opérateur peuvent varier."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Limiter les données en arrière-plan ?"</string>

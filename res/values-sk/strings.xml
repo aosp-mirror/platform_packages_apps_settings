@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"SYSTÉM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Zapnúť rádio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Vypnúť rádio"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Zobraziť adresár karty SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Zobraziť čísla pevného vytáčania"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Zobraziť čísla volaní služieb"</string>
@@ -851,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Pomocník"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilné siete"</string>
     <string name="location_title" msgid="1029961368397484576">"Moja poloha"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Služba určenia polohy Google"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Povoliť aplikáciám používať sieť Wi-Fi a mobilné siete na určenie vašej približnej polohy"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Služba určovania polohy Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Na určenie približnej polohy povoľte aplikáciám používať údaje zo siete Wi-Fi a mobilných sietí"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Poloha je určená podľa siete Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satelity GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Povoliť aplikáciám použiť zariadenie GPS na určenie vašej polohy"</string>
@@ -1153,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Povoliť"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Nepovoliť"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Použiť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Služba na zjednodušenie ovládania <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> zaznamenáva všetok text, ktorý napíšete, okrem hesiel. To zahŕňa osobné údaje, ako sú čísla kreditných kariet. Zaznamenáva aj údaje o interakcii so zariadením."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Služba na zjednodušenie ovládania <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> zaznamenáva všetok text, ktorý napíšete, okrem hesiel. To zahŕňa osobné údaje, ako sú čísla kreditných kariet. Zaznamenáva aj údaje o využívaní telefónu."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Zastaviť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Ak sa dotknete klávesu OK, služba <xliff:g id="SERVICE">%1$s</xliff:g> sa zastaví."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Žiadne aplikácie pre zjednodušenie prístupu"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Nemáte nainštalované aplikácie pre zjednodušenie ovládania. Chcete prevziať zo stránok služby Android Market čítačku obrazovky?"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nie sú nainštalované žiadne služby"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Potrebujete čítačku obrazovky?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Aplikácia Talkback poskytuje hovorenú odozvu na pomoc nevidomým a slabozrakým používateľom. Chcete si túto aplikáciu bezplatne nainštalovať zo služby Android Market?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Nainštalovať skripty pre zjednodušenie ovládania?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Chcete, aby aplikácie prevzali zo služby Google skripty, ktoré uľahčia prístup k ich obsahu?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Táto funkcia mení spôsob, akým zariadenie reaguje na dotyk. Chcete ju zapnúť?"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"K dispozícii nie je žiadny popis."</string>
     <string name="settings_button" msgid="3006713718908152930">"Nastavenia"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batéria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Čo využíva batériu"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Údaje o spotrebe sú nedostup."</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Využitie batérie od odpojenia"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Využitie batérie od obnovenia"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"Doba prevádzky na batérii: <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1387,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Aplikácie môžu kedykoľvek synchronizovať, odosielať a prijímať údaje."</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Pozor"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Zakázanie prenosu údajov na pozadí šetrí batériu a znižuje objem použitých údajov. Niektoré aplikácie môžu používať dátové pripojenie na pozadí aj napriek tomuto nastaveniu."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Automatická synchronizácia"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Automatická synch. údajov aplikácií"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synchronizácia je ZAPNUTÁ"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synchronizácia je VYPNUTÁ"</string>
     <string name="sync_error" msgid="5060969083117872149">"Chyba synchronizácie"</string>
@@ -1478,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Zakázať údaje na pozadí v sieťach, ktoré chcete obmedziť (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Obmedziť údaje na pozadí?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Táto funkcia môže nepriaznivo ovplyvniť aplikácie, ktoré sú závislé na prenose údajov na pozadí."\n\n"V nastaveniach týchto aplikácií nájdete vhodnejšie ovládacie prvky na obmedzenie množstva prenesených údajov."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Obmedzenie údajov na pozadí je dostupné len vtedy, ak ste pre sieť nastavili limit údajov."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Dátum obnovenia cyklu sledovania prenesených dát"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Dátum v každom mesiaci:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Nastaviť"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Nastaviť upozornenie o využívaní údajov"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Nastaviť limit využívania údajov"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Nastavuje sa obmedzenie dátových prenosov"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"Po dosiahnutí stanoveného limitu bude vaše dátové pripojenie <xliff:g id="NETWORKS">%1$s</xliff:g> zakázané."\n\n"Ak sa chcete vyhnúť dodatočným poplatkom, zvážte použitie nižšieho limitu, pretože spôsob účtovania operátora môže byť iný ako spôsob účtovania zariadenia."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Obmedziť údaje na pozadí?"</string>

@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"系統"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"開啟無線通訊"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"關閉無線通訊"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"檢視 SIM 地址簿"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定撥號"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"檢視服務撥號號碼"</string>
@@ -326,22 +330,19 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"無"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"滑動"</string>
-    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"不需畫出圖形或輸入 PIN 或密碼，直接解鎖螢幕"</string>
-    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
-    <skip />
+    <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"無安全性設定"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"低安全性、實驗性"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"圖形"</string>
-    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"需畫出圖形替螢幕解鎖"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性設定"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"需輸入數字 PIN 替螢幕解鎖"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中高等安全性設定"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密碼"</string>
-    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"需輸入密碼替螢幕解鎖"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高等安全性設定"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已由管理員、加密政策或認證儲存空間停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"無"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"滑動"</string>
-    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="7010138770486467881">"FacePass"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"以解鎖圖形設定安全保護"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"以 PIN 設定安全保護"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"以密碼設定安全保護"</string>
@@ -486,7 +487,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"有開放網路時通知我"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"避開品質不佳的連線"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"除非 Wi-Fi 網路連線穩定，否則不使用。"</string>
-    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Wi-Fi 中斷連線設定"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"休眠期間仍保持 Wi-Fi 連線"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"變更設定時發生問題"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"新增網路"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi 網路"</string>
@@ -854,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"說明"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"行動網路"</string>
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Google 定位服務"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"允許應用程式使用 Wi-Fi 和行動網路判斷您的大略位置"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Google 的定位服務"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"讓應用程式使用 Wi-Fi 和行動網路等來源的資料測定您的約略位置"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"根據 Wi-Fi 判定位置"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS 衛星定位"</string>
     <string name="location_street_level" msgid="4244496898967415234">"允許應用程式使用 GPS 定出您的精確位置"</string>
@@ -1156,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"允許"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"不允許"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"使用「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」可收集您輸入的所有文字 (惟密碼例外)，包括信用卡號等個人資料。此外，也可收集您與平板電腦互動的資料。"</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」可收集您輸入的所有文字 (惟密碼例外)，包括信用卡號等個人資料。此外，也可收集您與手機互動的資料。"</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"停止「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"輕觸 [確定] 會讓「<xliff:g id="SERVICE">%1$s</xliff:g>」停止。"</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"沒有協助工具應用程式"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"您未安裝協助工具應用程式。您要從 Android Market 下載螢幕閱讀器嗎？"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安裝任何服務"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"需要螢幕閱讀器嗎？"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack 提供語音回應功能協助視障或視力不佳的使用者。現在可以免費從 Android Market 安裝這項功能，您要安裝嗎？"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"安裝協助工具指令碼？"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"您要讓應用程式從 Google 安裝指令碼，藉此讓內容更加易於存取嗎？"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"這項功能會變更裝置回應觸控的方式，確定要開啟嗎？"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"未提供說明。"</string>
     <string name="settings_button" msgid="3006713718908152930">"設定"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"電池"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"查看正在消耗電力的功能"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"沒有電池用量資料"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重設後的電池使用狀況"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"電池已使用時間：<xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1390,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"應用程式隨時可以同步處理、傳送和接收資料"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"注意"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"停用背景資料可延長電池使用時間，並減少資料的傳輸量。但某些應用程式可能仍會使用背景資料連線。"</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"自動同步處理"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"自動同步處理應用程式資料"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"已開啟同步處理功能"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"已關閉同步處理功能"</string>
     <string name="sync_error" msgid="5060969083117872149">"同步處理錯誤"</string>
@@ -1452,7 +1446,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"資料用量"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"資料用量週期"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"漫遊服務"</string>
-    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"限制背景資料"</string>
+    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"限制資料"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"獨立顯示 4G 用量"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"顯示 Wi-Fi 用量"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"顯示乙太網路使用量"</string>
@@ -1462,10 +1456,10 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"前景"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"背景"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"停用行動數據？"</string>
-    <!-- outdated translation 289740911281022322 -->     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"達到上限時停用行動數據"</string>
-    <!-- outdated translation 5808210773758699800 -->     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"達到上限時停用 4G 數據"</string>
-    <!-- outdated translation 3856971004328238231 -->     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"達到上限時停用 2G-3G 數據"</string>
-    <!-- outdated translation 316329558509856780 -->     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"達到上限時停用 Wi-Fi 數據"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"設定行動數據上限"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"設定 4G 數據上限"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"設定 2G 至 3G 的數據上限"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"設定 Wi-Fi 數據上限"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"乙太網路"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"行動數據"</string>
@@ -1481,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"對您已選擇要限制流量的網路停用背景資料 (<xliff:g id="NETWORKS">%1$s</xliff:g>)。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"限制背景資料？"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"根據背景資料用量的不同，這項功能可能會對應用程式產生負面影響。"\n\n"您可以在應用程式設定中找到更多相關的資料用量控制項。"</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"僅在您設定網路資料限制後，才可以限制背景資料。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"用量週期重設日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"每月固定日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"儲存設定"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"設定資料用量警告"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"設定資料用量限制"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制資料用量"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"達到指定的流量上限時，系統會停用您的 <xliff:g id="NETWORKS">%1$s</xliff:g> 數據連線。"\n\n"如要避免支付超量費用，請根據不同裝置與各家系統業者的計費方式，考慮降低數據用量限制。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"限制背景資料？"</string>

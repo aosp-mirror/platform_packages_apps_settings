@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"RENDSZER"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Rádió bekapcsolása"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Rádió kikapcsolása"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIM-kártya telefonkönyvének megtekintése"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Fix hívószámok megtekintése"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Szolgáltatásszámok megtekintése"</string>
@@ -851,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Súgó"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilhálózatok"</string>
     <string name="location_title" msgid="1029961368397484576">"Saját pozíció"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Google helymeghatározás szolg."</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Wi-Fi és mobilhálózatokon keresztül az alkalmazások meghatározhatják tartózkodási helyét"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"A Google helyszolgáltatása"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Wi-Fi és mobiladatok engedélyezése a hozzávetőleges tartózkodási hely meghatározásához"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Helymeghatározás Wi-Fi-vel"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS-műholdak"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Engedélyezze a GPS használatát az alkalmazások számára tartózkodási helyének meghatározása érdekében"</string>
@@ -1153,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Engedélyezés"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Tiltás"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Használja a következő szolgáltatást: <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"A(z) <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> összegyűjti az összes beírt szöveget, kivéve a jelszavakat. Ez magában foglalja a személyes adatokat, például a bankkártyaszámokat. A táblagépével való interakciójáról is gyűjthet adatokat."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"A(z) <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> összegyűjti az összes beírt szöveget, kivéve a jelszavakat. Ez magában foglalja a személyes adatokat, például a bankkártyaszámokat. Az eszközzel való interakciójáról is gyűjthet adatokat."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Leállítja a következőt: <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Az OK gomb megnyomásával leállítja a következőt: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Nincs kisegítő lehetőségekkel kapcsolatos alkalmazás"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Nem rendelkezik telepített kisegítő lehetőségeket támogató alkalmazásokkal. Szeretne letölteni egy képernyőolvasót az Android Marketről?"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nincs telepített szolgáltatás"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Képernyőolvasóra van szüksége?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"A TalkBack beszéddel történő visszajelzést kínál vak és gyengénlátó felhasználók számára az Android használata közben. Szeretné ingyen telepíteni az Android Marketről?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Kisegítő szkriptek telepítése?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Szeretné, ha az alkalmazások telepíthetnének olyan szkripteket a Google-tól, melyek révén a tartalom még inkább hozzáférhetővé válik?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Ez a funkció megváltoztatja, hogyan válaszol a készüléke az érintésre. Bekapcsolja?"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nincs leírás."</string>
     <string name="settings_button" msgid="3006713718908152930">"Beállítások"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akkumulátor"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Mi használta az akkumulátort"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Nincs elérhető akkuhaszn. adat"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> -- <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akkumulátorhasználat a legutolsó töltés óta"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akkumulátorhasználat a visszaállítás óta"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> akkumulátorról"</string>
@@ -1387,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Szinkronizálás, adatküldés és -fogádás bármikor"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Figyelem"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"A háttéradatok letiltása megnöveli a használati időt és csökkenti az adathasználatot. Egyesek alkalmazások lehet, hogy továbbra is használják a háttér-adatkapcsolatot."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Automatikus szinkronizálás"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Adatok automatikus szinkronizálása"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Szinkr. BEKAPCSOLVA"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Szinkr. KIKAPCSOLVA"</string>
     <string name="sync_error" msgid="5060969083117872149">"Szinkronizálási hiba"</string>
@@ -1478,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Háttéradatok letiltása az Ön által korlátozott hálózatokon (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Korlátozza a háttéradatokat?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Ez a funkció negatívan befolyásolhatja azokat az alkalmazásokat, amelyek a háttérben zajló adatforgalomra támaszkodnak."\n\n"Lehet, hogy beállítható megfelelőbb adathasználat az alkalmazás beállításai között."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"A háttéradatok korlátozása csak akkor érhető el, ha beállított hálózati adatkorlátot."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Használati ciklus visszaállításának ideje"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Hónap napja:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Beállítás"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Adathasználati figyelmeztetés beállítása"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Adathasználati korlát beállítása"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Adatforgalom korlátozása"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"A(z) <xliff:g id="NETWORKS">%1$s</xliff:g> adatkapcsolata le lesz tiltva a megadott korlát elérésekor."\n\n"A többletdíjak elkerülése érdekében fontolja meg csökkentett korlát használatát, mivel az eszköz és a szolgáltató számolási módszerei eltérők lehetnek."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Korlátozza a háttéradatokat?"</string>

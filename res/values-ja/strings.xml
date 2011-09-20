@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"システム"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"無線通信をON"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"無線通信をOFF"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIMのアドレス帳を表示"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"発信番号制限を表示"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"サービス電話番号を表示"</string>
@@ -328,22 +332,19 @@
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"なし"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"スライド"</string>
-    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"解除にパターン、PIN、パスワードを必要としない"</string>
-    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
-    <skip />
+    <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"セキュリティなし"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"低レベルのセキュリティ、試験的"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"パターン"</string>
-    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"画面ロックをパターンで解除する"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中程度のセキュリティ"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"画面ロックを数値PINで解除する"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中程度から高レベルのセキュリティ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"パスワード"</string>
-    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"画面ロックをパスワードで解除する"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高レベルのセキュリティ"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"管理者、暗号化ポリシー、または認証情報により無効"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"スライド"</string>
-    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="7010138770486467881">"FacePass"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"パターンで保護されています"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"PINで保護されています"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"パスワードで保護されています"</string>
@@ -488,7 +489,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"オープンネットワークが利用可能なときに通知する"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"接続不良のとき無効にする"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"安定したインターネット接続があるときのみWi-Fiネットワークを使用する"</string>
-    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Wi-Fiの切断ポリシー"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"スリープ時にWi-Fiを使用する"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"設定の変更中に問題が発生しました"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"ネットワークを追加"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fiネットワーク"</string>
@@ -1454,7 +1455,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"データ使用"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"データ使用サイクル"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"データローミング"</string>
-    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"バックグラウンドデータを制限する"</string>
+    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"データを制限する"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"4G使用を別にする"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Wi-Fi使用を表示する"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"イーサネットの使用状況を表示する"</string>
@@ -1464,10 +1465,10 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"フォアグラウンド"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"バックグラウンド"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"モバイルデータを無効にしますか？"</string>
-    <!-- outdated translation 289740911281022322 -->     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"上限でモバイルデータを無効にする"</string>
-    <!-- outdated translation 5808210773758699800 -->     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"上限で4Gデータを無効にする"</string>
-    <!-- outdated translation 3856971004328238231 -->     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"上限で2G～3Gデータを無効にする"</string>
-    <!-- outdated translation 316329558509856780 -->     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"上限でWi-Fiデータを無効にする"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"モバイルデータの制限を設定する"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4Gデータの制限を設定する"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G～3Gデータの制限を設定する"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Wi-Fiデータの制限を設定する"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"イーサネット"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"モバイル"</string>

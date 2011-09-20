@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"ΣΥΣΤΗΜΑ"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Ενεργοποίηση πομπού"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Απενεργοποίηση πομπού"</string>
+    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <skip />
+    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Προβολή βιβλίου διευθύνσεων κάρτας SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Προβολή καθορισμένων αριθμών κλήσης"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Προβολή αριθμών κλήσης υπηρεσίας"</string>
@@ -851,8 +855,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Βοήθεια"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Δίκτυα κινητής τηλεφωνίας"</string>
     <string name="location_title" msgid="1029961368397484576">"Η τοποθεσία μου"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Υπηρεσία τοποθεσίας Google"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Να επιτρ. στις εφαρμ. η χρήση Wi-Fi και δικτ. κιν.τηλεφ. για τον καθορ. της τοπ. σας κατά προσέγγιση"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Υπηρεσία τοποθεσίας Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Να επιτρ.σε εφαρμ. η χρ.δεδ.από δίκτυα Wi-Fi και κιν. τηλ. για τον προσδ.της τοπ.σας κατά προσέγγιση"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Η τοποθεσία καθορίζεται από το Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Δορυφόροι GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Να επιτρέπεται στις εφαρμογές η χρήση του GPS για την επισήμανση της τοποθεσίας σας"</string>
@@ -1153,29 +1157,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Να επιτραπεί"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Να μην επιτρέπεται"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Χρήση <xliff:g id="SERVICE">%1$s</xliff:g>;"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Η υπηρεσία <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> μπορεί να συλλέξει όλο το κείμενο που πληκτρολογείτε, εκτός από τους κωδικούς πρόσβασης. Αυτό περιλαμβάνει προσωπικά δεδομένα όπως αριθμούς πιστωτικών καρτών. Μπορεί επίσης να συλλέξει δεδομένα σχετικά με τις αλληλεπιδράσεις σας με το tablet."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Η υπηρεσία <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> μπορεί να συλλέξει όλο το κείμενο που πληκτρολογείτε, εκτός από τους κωδικούς πρόσβασης. Αυτό περιλαμβάνει προσωπικά δεδομένα όπως αριθμούς πιστωτικών καρτών. Μπορεί επίσης να συλλέξει δεδομένα σχετικά με τις αλληλεπιδράσεις σας με το τηλέφωνο."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Διακοπή <xliff:g id="SERVICE">%1$s</xliff:g>;"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Αγγίξτε το OK για να διακοπεί η υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Δεν υπάρχουν εφαρμογές προσβασιμότητας"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Δεν έχετε εγκαταστήσει εφαρμογές προσβασιμότητας. Θέλετε να κατεβάσετε ένα πρόγραμμα ανάγνωσης οθόνης από το Android Market;"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Δεν έχουν εγκατασταθεί υπηρεσίες"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Χρειάζεστε έναν αναγνώστη οθόνης;"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Το TalkBack παρέχει σχόλια σε μορφή ομιλίας για να διευκολύνει χρήστες με προβλήματα όρασης. Θέλετε να το εγκαταστήσετε δωρεάν από το Android Market;"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Εγκατάσταση σεναρίων προσβασιμότητας;"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Θέλετε να γίνει εγκατάσταση σεναρίων από την Google για τις εφαρμογές, τα οποία θα κάνουν το περιεχόμενό τους πιο προσβάσιμο;"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Αυτή η λειτουργία αλλάζει τον τρόπο απόκρισης της συσκευής σας στα αγγίγματα. Να ενεργοποιηθεί;"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Δεν υπάρχει περιγραφή."</string>
     <string name="settings_button" msgid="3006713718908152930">"Ρυθμίσεις"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Μπαταρία"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Τι χρησιμοποιούσε την μπαταρία"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Δεν υπάρχουν δεδομένα χρήσης"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Χρήση μπαταρίας από τη στιγμή της αποσύνδεσης από την τροφοδοσία"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Χρήση μπαταρίας από τη στιγμή της επαναφοράς"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> με μπαταρία"</string>
@@ -1387,7 +1384,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Οι εφ/γές μπορούν να κάνουν συγχρ., αποστ. και λήψη δεδομ."</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Προσοχή"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Η απενεργοποίηση δεδομένων παρασκηνίου αυξάνει το χρόνο ζωής της μπαταρίας και μειώνει τη χρήση δεδομένων. Ορισμένες εφαρμογές ενδέχεται να συνεχίσουν να χρησιμοποιούν τη σύνδεση δεδομένων παρασκηνίου."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Αυτόματος συγχρονισμός"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Αυτόμ. συγχρ. δεδομένων εφαρμογών"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Συγχρ. είναι ενεργ."</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Ο συγχρονισμός είναι απενεργοποιημένος"</string>
     <string name="sync_error" msgid="5060969083117872149">"Σφάλμα συγχρονισμού"</string>
@@ -1478,15 +1475,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Απενεργ. δεδ. παρασκηνίου σε δίκτυα που επιλέγετε (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Περιορ.δεδομ.παρασκην.;"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Αυτή η λειτουργία μπορεί να επηρεάσει αρνητικά τις εφαρμογές που εξαρτώνται από τη χρήση δεδομένων παρασκηνίου."\n\n"Περισσότερο κατάλληλα στοιχεία ελέγχου χρήσης δεδομένων ενδέχεται να βρείτε στις ρυθμίσεις της εφαρμογής."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Ο περιορισμός των δεδομένων παρασκηνίου είναι διαθέσιμος μόνο όταν έχετε ορίσει ένα όριο δεδομένων δικτύου."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Ημερομηνία επαναφοράς κύκλου χρήσης"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Ημερομηνία του κάθε μήνα:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Ορισμός"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Ορισμός προειδοποίησης χρήσης δεδομένων"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Ορισμός ορίου χρήσης δεδομένων"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Περιορισμός χρήσης δεδομένων"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"Η σύνδεση δεδομένων <xliff:g id="NETWORKS">%1$s</xliff:g> θα απενεργοποιηθεί όταν συμπληρωθεί το καθορισμένο όριο."\n\n"Για την αποφυγή χρεώσεων, εξετάστε το ενδεχόμενο χρήσης μειωμένου ορίου, καθώς ο υπολογισμός των χρεώσεων από τη συσκευή και την εταιρεία κινητής τηλεφωνίας ενδέχεται να διαφέρει."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Περιορ.δεδομ.παρασκην.;"</string>
