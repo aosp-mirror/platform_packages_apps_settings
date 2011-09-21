@@ -318,7 +318,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // is encrypted.
 
         Log.d(TAG, "Encryption progress screen initializing.");
-        if (mWakeLock != null) {
+        if (mWakeLock == null) {
             Log.d(TAG, "Acquiring wakelock.");
             PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
