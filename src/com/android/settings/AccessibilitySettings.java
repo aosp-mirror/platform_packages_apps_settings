@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -82,7 +83,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // Timeout before we update the services if packages are added/removed since
     // the AccessibilityManagerService has to do that processing first to generate
     // the AccessibilityServiceInfo we need for proper presentation.
-    private static final long DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS = 1000;
+    private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
 
     private static final String ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ":";
 
@@ -125,8 +126,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 1;
 
     // Auxiliary members.
-    private final SimpleStringSplitter mStringColonSplitter =
+    private final static SimpleStringSplitter sStringColonSplitter =
         new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR.charAt(0));
+
+    private static final Set<ComponentName> sInstalledServices = new HashSet<ComponentName>();
+    private static final Set<ComponentName> sEnabledServices = new HashSet<ComponentName>();
 
     private final Map<String, String> mLongPressTimeoutValuetoTitleMap =
         new HashMap<String, String>();
@@ -139,6 +143,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         @Override
         public void dispatchMessage(Message msg) {
             super.dispatchMessage(msg);
+            loadInstalledServices();
             updateServicesPreferences();
         }
     };
@@ -167,6 +172,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        loadInstalledServices();
         updateAllPreferences();
         if (mServicesCategory.getPreference(0) == mNoServicesMessagePreference) {
             offerInstallAccessibilitySerivceOnce();
@@ -296,7 +302,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         String settingValue = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
         if (settingValue != null) {
-            SimpleStringSplitter splitter = mStringColonSplitter;
+            SimpleStringSplitter splitter = sStringColonSplitter;
             splitter.setString(settingValue);
             while (splitter.hasNext()) {
                 enabledComponentNames.add(ComponentName.unflattenFromString(splitter.next()));
@@ -493,30 +499,46 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void loadInstalledServices() {
+        List<AccessibilityServiceInfo> installedServiceInfos =
+            AccessibilityManager.getInstance(getActivity())
+                .getInstalledAccessibilityServiceList();
+        Set<ComponentName> installedServices = sInstalledServices;
+        installedServices.clear();
+        final int installedServiceInfoCount = installedServiceInfos.size();
+        for (int i = 0; i < installedServiceInfoCount; i++) {
+            ResolveInfo resolveInfo = installedServiceInfos.get(i).getResolveInfo();
+            ComponentName installedService = new ComponentName(
+                    resolveInfo.serviceInfo.packageName,
+                    resolveInfo.serviceInfo.name);
+            installedServices.add(installedService);
+        }
+    }
+
     private class SettingsPackageMonitor extends PackageMonitor {
 
         @Override
         public void onPackageAdded(String packageName, int uid) {
             Message message = mHandler.obtainMessage();
-            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_MILLIS);
         }
 
         @Override
         public void onPackageAppeared(String packageName, int reason) {
             Message message = mHandler.obtainMessage();
-            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_MILLIS);
         }
 
         @Override
         public void onPackageDisappeared(String packageName, int reason) {
             Message message = mHandler.obtainMessage();
-            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_MILLIS);
         }
 
         @Override
         public void onPackageRemoved(String packageName, int uid) {
             Message message = mHandler.obtainMessage();
-            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_PREFERENCES_MILLIS);
+            mHandler.sendMessageDelayed(message, DELAY_UPDATE_SERVICES_MILLIS);
         }
     }
 
@@ -567,49 +589,69 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static class ToggleAccessibilityServiceFragment extends TogglePreferenceFragment {
         @Override
         public void onPreferenceToggled(String preferenceKey, boolean enabled) {
-            String enabledServices = Settings.Secure.getString(getContentResolver(),
+            String enabledServicesSetting = Settings.Secure.getString(getContentResolver(),
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-            if (enabledServices == null) {
-                enabledServices = "";
+            if (enabledServicesSetting == null) {
+                enabledServicesSetting = "";
             }
-            // Due to a legacy bug we can get an enabled services value ending with a
-            // separator. Make sure to catch and fix that before handling.
-            if (enabledServices.endsWith(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR)) {
-                enabledServices = enabledServices.substring(0, enabledServices.length() - 1);
+
+            // Parse the enabled services.
+            Set<ComponentName> enabledServices = sEnabledServices;
+            enabledServices.clear();
+            SimpleStringSplitter colonSplitter = sStringColonSplitter;
+            colonSplitter.setString(enabledServicesSetting);
+            while (colonSplitter.hasNext()) {
+                String componentNameString = colonSplitter.next();
+                ComponentName enabledService = ComponentName.unflattenFromString(
+                        componentNameString);
+                if (enabledService != null) {
+                    enabledServices.add(enabledService);
+                }
             }
-            final int length = enabledServices.length();
+
+            // Determine enabled services and accessibility state.
+            ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
+            final boolean accessibilityEnabled;
             if (enabled) {
-                if (enabledServices.contains(preferenceKey)) {
-                    return;
-                }
-                if (length == 0) {
-                    enabledServices += preferenceKey;
-                    Settings.Secure.putString(getContentResolver(),
-                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
-                    // Enabling the first service enables accessibility.
-                    Settings.Secure.putInt(getContentResolver(),
-                            Settings.Secure.ACCESSIBILITY_ENABLED, 1);
-                } else if (length > 0) {
-                    enabledServices += ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR + preferenceKey;
-                    Settings.Secure.putString(getContentResolver(),
-                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
-                }
+                // Enabling at least one service enables accessibility.
+                accessibilityEnabled = true;
+                enabledServices.add(toggledService);
             } else {
-                final int index = enabledServices.indexOf(preferenceKey);
-                if (index == 0) {
-                    enabledServices = enabledServices.replace(preferenceKey, "");
-                    Settings.Secure.putString(getContentResolver(),
-                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
-                    // Disabling the last service disables accessibility).
-                    Settings.Secure.putInt(getContentResolver(),
-                            Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-                } else if (index > 0) {
-                    enabledServices = enabledServices.replace(
-                            ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR + preferenceKey, "");
-                    Settings.Secure.putString(getContentResolver(),
-                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, enabledServices);
+                // Check how many enabled and installed services are present.
+                int enabledAndInstalledServiceCount = 0;
+                Set<ComponentName> installedServices = sInstalledServices;
+                for (ComponentName enabledService : enabledServices) {
+                    if (installedServices.contains(enabledService)) {
+                        enabledAndInstalledServiceCount++;
+                    }
                 }
+                // Disabling the last service disables accessibility.
+                accessibilityEnabled = enabledAndInstalledServiceCount > 1
+                    || (enabledAndInstalledServiceCount == 1
+                            && !installedServices.contains(toggledService));
+                enabledServices.remove(toggledService);
             }
+
+            // Update the enabled services setting.
+            StringBuilder enabledServicesBuilder = new StringBuilder();
+            // Keep the enabled services even if they are not installed since we have
+            // no way to know whether the application restore process has completed.
+            // In general the system should be responsible for the clean up not settings.
+            for (ComponentName enabledService : enabledServices) {
+                enabledServicesBuilder.append(enabledService.flattenToString());
+                enabledServicesBuilder.append(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
+            }
+            final int enabledServicesBuilderLength = enabledServicesBuilder.length();
+            if (enabledServicesBuilderLength > 0) {
+                enabledServicesBuilder.deleteCharAt(enabledServicesBuilderLength - 1);
+            }
+            Settings.Secure.putString(getContentResolver(),
+                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+                    enabledServicesBuilder.toString());
+
+            // Update accessibility enabled.
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_ENABLED, accessibilityEnabled ? 1 : 0);
         }
     }
 
