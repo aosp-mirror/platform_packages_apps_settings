@@ -124,6 +124,7 @@ public class RadioInfo extends Activity {
     private EditText smsc;
     private Button radioPowerButton;
     private Button imsRegRequiredButton;
+    private Button smsOverImsButton;
     private Button dnsCheckToggleButton;
     private Button pingTestButton;
     private Button updateSmscButton;
@@ -286,6 +287,9 @@ public class RadioInfo extends Activity {
         imsRegRequiredButton = (Button) findViewById(R.id.ims_reg_required);
         imsRegRequiredButton.setOnClickListener(mImsRegRequiredHandler);
 
+        smsOverImsButton = (Button) findViewById(R.id.sms_over_ims);
+        smsOverImsButton.setOnClickListener(mSmsOverImsHandler);
+
         pingTestButton = (Button) findViewById(R.id.ping_test);
         pingTestButton.setOnClickListener(mPingButtonHandler);
         updateSmscButton = (Button) findViewById(R.id.update_smsc);
@@ -332,6 +336,7 @@ public class RadioInfo extends Activity {
         updateDataStats2();
         updatePowerState();
         updateImsRegRequiredState();
+        updateSmsOverImsState();
         updateProperties();
         updateDnsCheckState();
 
@@ -418,6 +423,18 @@ public class RadioInfo extends Activity {
                             getString(R.string.ims_reg_required_off) :
                             getString(R.string.ims_reg_required_on);
         imsRegRequiredButton.setText(buttonText);
+    }
+
+    private boolean isSmsOverImsEnabled() {
+        return SystemProperties.getBoolean(PROPERTY_SMS_OVER_IMS, false);
+    }
+
+    private void updateSmsOverImsState() {
+        Log.d(TAG, "updateSmsOverImsState isSmsOverImsEnabled()=" + isSmsOverImsEnabled());
+        String buttonText = isSmsOverImsEnabled() ?
+                            getString(R.string.sms_over_ims_off) :
+                            getString(R.string.sms_over_ims_on);
+        smsOverImsButton.setText(buttonText);
     }
 
 
@@ -904,6 +921,18 @@ public class RadioInfo extends Activity {
             SystemProperties.set(TelephonyProperties.PROPERTY_IMS_REG_REQUIRED,
                     newValue ? "1":"0");
             updateImsRegRequiredState();
+        }
+    };
+
+    static final String PROPERTY_SMS_OVER_IMS = "persist.radio.imsallowmtsms";
+    OnClickListener mSmsOverImsHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, String.format("toggle %s: currently %s",
+                    PROPERTY_SMS_OVER_IMS, (isSmsOverImsEnabled() ? "on":"off")));
+            boolean newValue = !isSmsOverImsEnabled();
+            SystemProperties.set(PROPERTY_SMS_OVER_IMS, newValue ? "1":"0");
+            updateSmsOverImsState();
         }
     };
 
