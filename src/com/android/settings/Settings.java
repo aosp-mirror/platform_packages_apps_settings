@@ -600,5 +600,5 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public static class DataUsageSummaryActivity extends Settings { /* empty */ }
     public static class AdvancedWifiSettingsActivity extends Settings { /* empty */ }
     public static class TextToSpeechSettingsActivity extends Settings { /* empty */ }
-    public static class NfcSharingSettingsActivity extends Settings { /* empty */ }
+    public static class AndroidBeamSettingsActivity extends Settings { /* empty */ }
 }

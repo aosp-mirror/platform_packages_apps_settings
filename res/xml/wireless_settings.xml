@@ -36,7 +36,13 @@
     <CheckBoxPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_quick_toggle_title"
+        android:summary="@string/nfc_quick_toggle_summary"
         android:persistent="false" />
+
+    <PreferenceScreen
+        android:fragment="com.android.settings.nfc.AndroidBeam"
+        android:key="android_beam_settings"
+        android:title="@string/android_beam_settings_title" />
 
     <CheckBoxPreference
         android:key="toggle_wifi_p2p"
