@@ -968,6 +968,19 @@
             </intent-filter>
         </activity>
 
+        <!-- NFC settings -->
+        <activity android:name="Settings$AndroidBeamSettingsActivity"
+                android:label="@string/android_beam_settings_title"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.ANDROID_BEAM_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.nfc.NdefPush" />
+        </activity>
+
         <!-- Accessibility tutorial -->
         <activity android:name="AccessibilityTutorialActivity"
                 android:label="@string/accessibility_tutorial_title"
