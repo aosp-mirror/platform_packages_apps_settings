@@ -51,7 +51,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone" />
+                    android:visibility="gone">
+                <!-- Do not add any children here as they will be removed in the MasterClear.java
+                    code. A list of accounts will be inserted programmatically. -->
+            </LinearLayout>
             <TextView android:id="@+id/erase_external_option_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
