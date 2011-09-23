@@ -25,6 +25,10 @@
     <string name="header_category_system" msgid="2073558547468647128">"SİSTEM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Radyoyu aç"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Radyoyu kapat"</string>
+    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
+    <skip />
+    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
+    <skip />
     <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
     <skip />
     <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
@@ -472,6 +476,19 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Müzik ve medya için"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ayarları anımsa"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Etkt okumk ve değş yap içn Yakın Alan İletşm\'ni kullnn"</string>
+    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
+    <skip />
+    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
+    <skip />
+    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
+    <skip />
+    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
+    <skip />
+    <!-- no translation found for android_beam_label (6257036050366775040) -->
+    <skip />
+    <!-- no translation found for android_beam_explained (6981652347448777459) -->
+    <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Kablosuz"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Kablosuzu aç"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Kablosuz"</string>
@@ -855,8 +872,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Yardım"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobil ağlar"</string>
     <string name="location_title" msgid="1029961368397484576">"Konumum"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Google konum hizmeti"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Yaklaşık konumunuzu belirlemek için uygulamlrn Kablosuz ve mobil ağları kullanmasına izin verir"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Google\'ın konum hizmeti"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Uygulamalar yaklaşık konumumu belirlemek için Kablosuz ve mobil ağlar gibi kaynaklardan gelen verileri kullansın"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Konum, Kablosuz tarafından belirlendi"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS uyduları"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Konumunuzu belirlemek üzere uygulamaların GPS kullanmasına izin verir"</string>
@@ -1157,29 +1174,22 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"İzin ver"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"İzin Verme"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"<xliff:g id="SERVICE">%1$s</xliff:g> kullanılsın mı?"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> şifreler dışında tüm yazdığınız metinleri toplayabilir. Buna kredi kartı numaraları gibi kişisel veriler de dahildir. Ayrıca, tablet ile etkileşimleriniz hakkında da bilgi toplayabilir."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> şifreler dışında tüm yazdığınız metinleri toplayabilir. Buna kredi kartı numaraları gibi kişisel veriler de dahildir. Ayrıca, telefon ile etkileşimleriniz hakkında da bilgi toplayabilir."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"<xliff:g id="SERVICE">%1$s</xliff:g> durdurulsun mu?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Tamam\'a dokunulduğunda <xliff:g id="SERVICE">%1$s</xliff:g> durdurulur."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Erişilebilirlik uygulaması yok"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Yüklü herhangi bir erişilebilirlik uygulamanız yok. Android Market\'ten bir ekran okuyucu indirmek ister misiniz?"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Hiçbir hizmet yüklenmedi"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Ekran okuyucusuna ihtiyacınız var mı?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack, görme engelli veya az gören kullanıcılara yardımcı olmak için sesli geri bildirim sağlar. Bu uygulamayı Android Market\'ten ücretsiz olarak yüklemek ister misiniz?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Erişilebilirlk komut dosylr yüklensn mi?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Uygulamaların, içeriklerinin daha erişilebilir olması için Google\'dan komut dosyaları indirmesini istiyor musunuz?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Bu özellik, cihazınızın dokunmaya yanıt verme şeklini değiştirir. Açılsın mı?"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Hiçbir açıklama sağlanmadı."</string>
     <string name="settings_button" msgid="3006713718908152930">"Ayarlar"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Pil"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Pili ne kullanıyor?"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Pil kullanma verisi mevcut değil"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Fişten çekildikten sonra pil kullanımı"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Sıfırlamadan itibaren pil kullanımı"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> pilde"</string>
@@ -1391,7 +1401,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Uyg., istediğiniz zaman verileri senk eder, gönderir ve alır"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Dikkat"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Arka plan verilerini devre dışı bırakmak, pilden tasarruf sağlar ve veri kullanımını azaltır. Bazı uygulamalar yine de arka plan veri bağlantısını kullanmaya devam edebilir."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Otomatik senkronizasyon"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Uyglma verilerini otomatik senk et"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Senkronizasyon AÇIK"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Senkronizasyon KAPALI"</string>
     <string name="sync_error" msgid="5060969083117872149">"Senk. hatası"</string>
@@ -1482,15 +1492,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Sınrlmy seçtğnz ağlrdki (<xliff:g id="NETWORKS">%1$s</xliff:g>) arka pln verilri devr dş bırakn."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Arka plan verileri kısıtlansın mı?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Bu özellik arka plan veri kullanımına bağlı uygulamaları olumsuz etkileyebilir."\n\n"Bu uygulamanın ayarları içinde daha uygun veri kullanım denetimleri bulunabilir."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Arka plan verilerinin kısıtlanması yalnızca bir ağ veri limiti ayarladıysanız kullanılabilir."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Kullanım dönemi sıfırlama tarihi"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Her ayın şu günü:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Ayarla"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Veri kullanım uyarısını ayarla"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Veri kullanım limitini ayarla"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Veri kullanımını sınırlama"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"Belirlenen sınıra ulaşıldığında <xliff:g id="NETWORKS">%1$s</xliff:g> veri bağlantınız devre dışı bırakılacak."\n\n"Cihazın ve taşıyıcının hesaplama yöntemleri farklı olabileceğinden kullanım ücretlerinin fazla olmaması için daha düşük bir sınır kullanmaya çalışın."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Arka plan verileri kısıtlansın mı?"</string>

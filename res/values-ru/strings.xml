@@ -25,10 +25,12 @@
     <string name="header_category_system" msgid="2073558547468647128">"СИСТЕМА"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Включить радио"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Отключить радио"</string>
-    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
     <skip />
-    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
     <skip />
+    <string name="ims_reg_required_on" msgid="3885152087309614653">"Обязательная регистрация IMS включена"</string>
+    <string name="ims_reg_required_off" msgid="1720570343422743943">"Обязательная регистрация IMS отключена"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Просмотреть адресную книгу на SIM-карте"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Просм. список разреш. номеров"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Просмотреть номера служебного набора"</string>
@@ -472,6 +474,19 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"Включить NFC"</string>
+    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Использовать радиосвязь ближнего действия для чтения и обмена тегами"</string>
+    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
+    <skip />
+    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
+    <skip />
+    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
+    <skip />
+    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
+    <skip />
+    <!-- no translation found for android_beam_label (6257036050366775040) -->
+    <skip />
+    <!-- no translation found for android_beam_explained (6981652347448777459) -->
+    <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Включить Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -771,14 +786,10 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP или CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Тип APN"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"Протокол APN"</string>
-    <!-- no translation found for carrier_enabled (5345015879918180684) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOn (2928646805009033590) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOff (7064396156584668630) -->
-    <skip />
-    <!-- no translation found for bearer (594270280031923558) -->
-    <skip />
+    <string name="carrier_enabled" msgid="5345015879918180684">"Включить/отключить APN"</string>
+    <string name="carrier_enabled_summaryOn" msgid="2928646805009033590">"APN включен"</string>
+    <string name="carrier_enabled_summaryOff" msgid="7064396156584668630">"APN отключен"</string>
+    <string name="bearer" msgid="594270280031923558">"Владелец"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Удалить APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Новая точка доступа"</string>
     <string name="menu_save" msgid="8109345640668285399">"Сохранить"</string>
@@ -856,7 +867,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Мобильная сеть"</string>
     <string name="location_title" msgid="1029961368397484576">"Мое местоположение"</string>
     <string name="location_network_based" msgid="5569673665032992664">"Геопозиционирование Google"</string>
-    <string name="location_neighborhood_level" msgid="1337612962522836900">"Разрешить приложениям использовать Wi-Fi и мобильные сети для определения приблизительного местоположения"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Разрешить приложениям определять примерное местоположение через Wi-Fi и мобильные сети"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Местоположение определяется с помощью Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Спутники GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Разрешить приложениям использовать GPS для точного определения вашего местоположения"</string>
@@ -1157,8 +1168,8 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Разрешить"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Не разрешать"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Использовать службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Служба <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> может сохранять любой вводимый текст, кроме паролей. В частности, сохраняются личные данные, например номера кредитных карт. Служба также может собирать данные об использовании плантешного ПК."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Служба <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> может сохранять любой вводимый текст, кроме паролей. В частности, сохраняются личные данные, например номера кредитных карт. Служба также может собирать данные об использовании телефона."</string>
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Служба <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> может сохранять любой вводимый текст, кроме паролей. В частности, сохраняются личные данные, например номера кредитных карт. Кроме того, могут собираться данные об использовании плантешного ПК."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Служба <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> может сохранять любой вводимый текст, кроме паролей. В частности, сохраняются личные данные, например номера кредитных карт. Кроме того, могут собираться данные об использовании телефона."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Отключить службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Чтобы отключить службу <xliff:g id="SERVICE">%1$s</xliff:g>, нажмите ОК."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Службы специальных возможностей не установлены."</string>
@@ -1167,7 +1178,7 @@
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Установить скрипты доступности?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Разрешить приложениям устанавливать скрипты Google, повышающие доступность их содержания?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Эта функция меняет способ сенсорной навигации устройства. Включить?"</string>
-    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Описания нет."</string>
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Нет описания"</string>
     <string name="settings_button" msgid="3006713718908152930">"Настройки"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Батарея"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"На что расходуется заряд батареи"</string>
@@ -1384,7 +1395,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Синхронизация, отправка и прием данных возможны всегда"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Внимание!"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Отключение фонового режима обмена данными экономит энергию батареи и уменьшает объем трафика. Однако некоторые приложения могут использовать фоновую передачу даже после ее отключения."</string>
-    <string name="sync_automatically" msgid="1682730255435062059">"Автосинхронизация данных приложения"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Cинхронизировать данные приложений"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Синхронизация включена"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхронизация выключена"</string>
     <string name="sync_error" msgid="5060969083117872149">"Ошибка синхронизации"</string>
@@ -1475,7 +1486,7 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Отключить фоновый режим для ограниченных вами сетей (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Ограничение фонового режима"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Эта функция может негативно повлиять на приложения, которые используют фоновый режим обмена данными."\n" "\n"Возможно, в настройках этого приложения есть более подходящие средства управления объемом трафика."</string>
-    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Ограничение фонового режима возможно только при установленном лимите сетевого трафика."</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Ограничение фонового режима возможно только при лимитировании сетевого трафика."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Дата сброса цикла использования"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Число каждого месяца:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Сохранить"</string>

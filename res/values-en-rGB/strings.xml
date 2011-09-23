@@ -25,10 +25,12 @@
     <string name="header_category_system" msgid="2073558547468647128">"SYSTEM"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Turn on radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Turn off radio"</string>
-    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
     <skip />
-    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
     <skip />
+    <string name="ims_reg_required_on" msgid="3885152087309614653">"Turn on IMS registration required"</string>
+    <string name="ims_reg_required_off" msgid="1720570343422743943">"Turn off IMS registration required"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"View SIM address book"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"View Fixed Dialling Numbers"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"View Service Dialling Numbers"</string>
@@ -472,6 +474,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For music and media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Remember settings"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Allow devices separated by a few centimetres to exchange information"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_on_summary" msgid="614304206886681503">"On"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"Off"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Unavailable because NFC is turned off"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam Browser pages, YouTube videos, People contacts and more."\n\n"Just bring the devices together (typically back to back) and then touch your screen. The app determines what gets beamed."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Turn on Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -771,14 +780,10 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP or CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN type"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"APN protocol"</string>
-    <!-- no translation found for carrier_enabled (5345015879918180684) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOn (2928646805009033590) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOff (7064396156584668630) -->
-    <skip />
-    <!-- no translation found for bearer (594270280031923558) -->
-    <skip />
+    <string name="carrier_enabled" msgid="5345015879918180684">"APN Enable/Disable"</string>
+    <string name="carrier_enabled_summaryOn" msgid="2928646805009033590">"APN Enabled"</string>
+    <string name="carrier_enabled_summaryOff" msgid="7064396156584668630">"APN Disabled"</string>
+    <string name="bearer" msgid="594270280031923558">"Bearer"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Delete APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"New APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Save"</string>
@@ -1163,7 +1168,7 @@
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Touching OK will stop <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"No services installed"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Need a screen reader?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack provides spoken feedback to help blind and low-vision users. Do you want to install it free from Android Market?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack provides spoken feedback to help blind and low-vision users. Do you want to install it for free from Android Market?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Install accessibility scripts?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Do you want applications to install scripts from Google that will make their content more accessible?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"This feature changes the way that your device responds to touch. Turn on?"</string>
@@ -1292,7 +1297,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"Power Control"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Updating WiFi setting"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Updating Bluetooth setting"</string>
-    <!-- outdated translation 7327468307909556719 -->     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN settings"</string>
+    <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Credential storage"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Install from storage"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Install from SD card"</string>

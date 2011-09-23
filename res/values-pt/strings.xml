@@ -25,10 +25,12 @@
     <string name="header_category_system" msgid="2073558547468647128">"SISTEMA"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Ativar o rádio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Desativar o rádio"</string>
-    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
+    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
     <skip />
-    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
     <skip />
+    <string name="ims_reg_required_on" msgid="3885152087309614653">"É obrigatório ligar o registro IMS"</string>
+    <string name="ims_reg_required_off" msgid="1720570343422743943">"É obrigatório desligar o registro IMS"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Visualizar o catálogo de endereços do SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Visualizar números de chamada fixa"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Visualizar números de chamada de serviço"</string>
@@ -472,6 +474,19 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música e mídia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Lembrar configurações"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Usar comunicação a curta distância para ler e trocar tags"</string>
+    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
+    <skip />
+    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
+    <skip />
+    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
+    <skip />
+    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
+    <skip />
+    <!-- no translation found for android_beam_label (6257036050366775040) -->
+    <skip />
+    <!-- no translation found for android_beam_explained (6981652347448777459) -->
+    <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Ativar Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -771,14 +786,10 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP ou CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Tipo APN"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"Protocolo APN"</string>
-    <!-- no translation found for carrier_enabled (5345015879918180684) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOn (2928646805009033590) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOff (7064396156584668630) -->
-    <skip />
-    <!-- no translation found for bearer (594270280031923558) -->
-    <skip />
+    <string name="carrier_enabled" msgid="5345015879918180684">"Ativar/Desativar APN"</string>
+    <string name="carrier_enabled_summaryOn" msgid="2928646805009033590">"APN habilitado"</string>
+    <string name="carrier_enabled_summaryOff" msgid="7064396156584668630">"APN desativado"</string>
+    <string name="bearer" msgid="594270280031923558">"Portador"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Excluir APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Novo APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Salvar"</string>
@@ -1030,7 +1041,7 @@
     <string name="service_started_by_app" msgid="6575184738671598131">"Iniciado pelo aplicativo."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> grat."</string>
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> livre"</string>
     <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> usada"</string>
     <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
