@@ -85,7 +85,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // the AccessibilityServiceInfo we need for proper presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
 
-    private static final String ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ":";
+    private static final char ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ':';
 
     private static final String KEY_ACCESSIBILITY_TUTORIAL_LAUNCHED_ONCE =
         "key_accessibility_tutorial_launched_once";
@@ -127,10 +127,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     // Auxiliary members.
     private final static SimpleStringSplitter sStringColonSplitter =
-        new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR.charAt(0));
+        new SimpleStringSplitter(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
 
     private static final Set<ComponentName> sInstalledServices = new HashSet<ComponentName>();
-    private static final Set<ComponentName> sEnabledServices = new HashSet<ComponentName>();
 
     private final Map<String, String> mLongPressTimeoutValuetoTitleMap =
         new HashMap<String, String>();
@@ -297,17 +296,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         List<AccessibilityServiceInfo> installedServices =
             accessibilityManager.getInstalledAccessibilityServiceList();
+        Set<ComponentName> enabledServices = getEnabledServicesFromSettings(getActivity());
 
-        Set<ComponentName> enabledComponentNames = new HashSet<ComponentName>();
-        String settingValue = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-        if (settingValue != null) {
-            SimpleStringSplitter splitter = sStringColonSplitter;
-            splitter.setString(settingValue);
-            while (splitter.hasNext()) {
-                enabledComponentNames.add(ComponentName.unflattenFromString(splitter.next()));
-            }
-        }
+        final boolean accessibilityEnabled = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1;
 
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             AccessibilityServiceInfo info = installedServices.get(i);
@@ -323,8 +315,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
-            final boolean enabled = enabledComponentNames.contains(componentName);
-            if (enabled) {
+            final boolean serviceEnabled = accessibilityEnabled
+                && enabledServices.contains(componentName);
+            if (serviceEnabled) {
                 preference.setSummary(getString(R.string.accessibility_service_state_on));
             } else {
                 preference.setSummary(getString(R.string.accessibility_service_state_off));
@@ -336,7 +329,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
             Bundle extras = preference.getExtras();
             extras.putString(EXTRA_PREFERENCE_KEY, preference.getKey());
-            extras.putBoolean(EXTRA_CHECKED, enabled);
+            extras.putBoolean(EXTRA_CHECKED, serviceEnabled);
             extras.putString(EXTRA_TITLE, title);
 
             String description = info.getDescription();
@@ -515,6 +508,26 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private static Set<ComponentName> getEnabledServicesFromSettings(Context context) {
+        String enabledServicesSetting = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+        if (enabledServicesSetting == null) {
+            enabledServicesSetting = "";
+        }
+        Set<ComponentName> enabledServices = new HashSet<ComponentName>();
+        SimpleStringSplitter colonSplitter = sStringColonSplitter;
+        colonSplitter.setString(enabledServicesSetting);
+        while (colonSplitter.hasNext()) {
+            String componentNameString = colonSplitter.next();
+            ComponentName enabledService = ComponentName.unflattenFromString(
+                    componentNameString);
+            if (enabledService != null) {
+                enabledServices.add(enabledService);
+            }
+        }
+        return enabledServices;
+    }
+
     private class SettingsPackageMonitor extends PackageMonitor {
 
         @Override
@@ -589,25 +602,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static class ToggleAccessibilityServiceFragment extends TogglePreferenceFragment {
         @Override
         public void onPreferenceToggled(String preferenceKey, boolean enabled) {
-            String enabledServicesSetting = Settings.Secure.getString(getContentResolver(),
-                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-            if (enabledServicesSetting == null) {
-                enabledServicesSetting = "";
-            }
-
             // Parse the enabled services.
-            Set<ComponentName> enabledServices = sEnabledServices;
-            enabledServices.clear();
-            SimpleStringSplitter colonSplitter = sStringColonSplitter;
-            colonSplitter.setString(enabledServicesSetting);
-            while (colonSplitter.hasNext()) {
-                String componentNameString = colonSplitter.next();
-                ComponentName enabledService = ComponentName.unflattenFromString(
-                        componentNameString);
-                if (enabledService != null) {
-                    enabledServices.add(enabledService);
-                }
-            }
+            Set<ComponentName> enabledServices = getEnabledServicesFromSettings(getActivity());
 
             // Determine enabled services and accessibility state.
             ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
