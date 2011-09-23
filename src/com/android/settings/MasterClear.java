@@ -175,6 +175,7 @@ public class MasterClear extends Fragment {
     private void loadAccountList() {
         View accountsLabel = mContentView.findViewById(R.id.accounts_label);
         LinearLayout contents = (LinearLayout)mContentView.findViewById(R.id.accounts);
+        contents.removeAllViews();
 
         Context context = getActivity();
 
