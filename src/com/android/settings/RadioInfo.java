@@ -123,8 +123,6 @@ public class RadioInfo extends Activity {
     private TextView dnsCheckState;
     private EditText smsc;
     private Button radioPowerButton;
-    private Button imsRegRequiredButton;
-    private Button smsOverImsButton;
     private Button dnsCheckToggleButton;
     private Button pingTestButton;
     private Button updateSmscButton;
@@ -290,6 +288,9 @@ public class RadioInfo extends Activity {
         smsOverImsButton = (Button) findViewById(R.id.sms_over_ims);
         smsOverImsButton.setOnClickListener(mSmsOverImsHandler);
 
+        lteRamDumpButton = (Button) findViewById(R.id.lte_ram_dump);
+        lteRamDumpButton.setOnClickListener(mLteRamDumpHandler);
+
         pingTestButton = (Button) findViewById(R.id.ping_test);
         pingTestButton.setOnClickListener(mPingButtonHandler);
         updateSmscButton = (Button) findViewById(R.id.update_smsc);
@@ -337,6 +338,7 @@ public class RadioInfo extends Activity {
         updatePowerState();
         updateImsRegRequiredState();
         updateSmsOverImsState();
+        updateLteRamDumpState();
         updateProperties();
         updateDnsCheckState();
 
@@ -412,31 +414,6 @@ public class RadioInfo extends Activity {
                             getString(R.string.turn_on_radio);
         radioPowerButton.setText(buttonText);
     }
-
-    private boolean isImsRegRequired() {
-        return SystemProperties.getBoolean(TelephonyProperties.PROPERTY_IMS_REG_REQUIRED, false);
-    }
-
-    private void updateImsRegRequiredState() {
-        Log.d(TAG, "updateImsRegRequiredState isImsRegRequired()=" + isImsRegRequired());
-        String buttonText = isImsRegRequired() ?
-                            getString(R.string.ims_reg_required_off) :
-                            getString(R.string.ims_reg_required_on);
-        imsRegRequiredButton.setText(buttonText);
-    }
-
-    private boolean isSmsOverImsEnabled() {
-        return SystemProperties.getBoolean(PROPERTY_SMS_OVER_IMS, false);
-    }
-
-    private void updateSmsOverImsState() {
-        Log.d(TAG, "updateSmsOverImsState isSmsOverImsEnabled()=" + isSmsOverImsEnabled());
-        String buttonText = isSmsOverImsEnabled() ?
-                            getString(R.string.sms_over_ims_off) :
-                            getString(R.string.sms_over_ims_on);
-        smsOverImsButton.setText(buttonText);
-    }
-
 
     private void updateDnsCheckState() {
         dnsCheckState.setText(phone.isDnsCheckDisabled() ?
@@ -912,18 +889,33 @@ public class RadioInfo extends Activity {
         }
     };
 
+    private Button imsRegRequiredButton;
+    static final String PROPERTY_IMS_REG_REQUIRED = "persist.radio.imsregrequired";
     OnClickListener mImsRegRequiredHandler = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Log.d(TAG, String.format("toggle %s: currently %s",
-                TelephonyProperties.PROPERTY_IMS_REG_REQUIRED, (isImsRegRequired() ? "on":"off")));
+                PROPERTY_IMS_REG_REQUIRED, (isImsRegRequired() ? "on":"off")));
             boolean newValue = !isImsRegRequired();
-            SystemProperties.set(TelephonyProperties.PROPERTY_IMS_REG_REQUIRED,
+            SystemProperties.set(PROPERTY_IMS_REG_REQUIRED,
                     newValue ? "1":"0");
             updateImsRegRequiredState();
         }
     };
 
+    private boolean isImsRegRequired() {
+        return SystemProperties.getBoolean(PROPERTY_IMS_REG_REQUIRED, false);
+    }
+
+    private void updateImsRegRequiredState() {
+        Log.d(TAG, "updateImsRegRequiredState isImsRegRequired()=" + isImsRegRequired());
+        String buttonText = isImsRegRequired() ?
+                            getString(R.string.ims_reg_required_off) :
+                            getString(R.string.ims_reg_required_on);
+        imsRegRequiredButton.setText(buttonText);
+    }
+
+    private Button smsOverImsButton;
     static final String PROPERTY_SMS_OVER_IMS = "persist.radio.imsallowmtsms";
     OnClickListener mSmsOverImsHandler = new OnClickListener() {
         @Override
@@ -935,6 +927,43 @@ public class RadioInfo extends Activity {
             updateSmsOverImsState();
         }
     };
+
+    private boolean isSmsOverImsEnabled() {
+        return SystemProperties.getBoolean(PROPERTY_SMS_OVER_IMS, false);
+    }
+
+    private void updateSmsOverImsState() {
+        Log.d(TAG, "updateSmsOverImsState isSmsOverImsEnabled()=" + isSmsOverImsEnabled());
+        String buttonText = isSmsOverImsEnabled() ?
+                            getString(R.string.sms_over_ims_off) :
+                            getString(R.string.sms_over_ims_on);
+        smsOverImsButton.setText(buttonText);
+    }
+
+    private Button lteRamDumpButton;
+    static final String PROPERTY_LTE_RAM_DUMP = "persist.radio.ramdump";
+    OnClickListener mLteRamDumpHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, String.format("toggle %s: currently %s",
+                    PROPERTY_LTE_RAM_DUMP, (isSmsOverImsEnabled() ? "on":"off")));
+            boolean newValue = !isLteRamDumpEnabled();
+            SystemProperties.set(PROPERTY_LTE_RAM_DUMP, newValue ? "1":"0");
+            updateLteRamDumpState();
+        }
+    };
+
+    private boolean isLteRamDumpEnabled() {
+        return SystemProperties.getBoolean(PROPERTY_LTE_RAM_DUMP, false);
+    }
+
+    private void updateLteRamDumpState() {
+        Log.d(TAG, "updateLteRamDumpState isLteRamDumpEnabled()=" + isLteRamDumpEnabled());
+        String buttonText = isLteRamDumpEnabled() ?
+                            getString(R.string.lte_ram_dump_off) :
+                            getString(R.string.lte_ram_dump_on);
+        lteRamDumpButton.setText(buttonText);
+    }
 
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
         public void onClick(View v) {
