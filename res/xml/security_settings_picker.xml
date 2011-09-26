@@ -16,53 +16,40 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-     <PreferenceCategory
-        android:key="security_picker_category"
-        android:title="@string/lock_settings_picker_title">
-
-<!-- TODO: find a better way to display this backup info -->
-        <PreferenceScreen
-            android:key="unlock_backup_info"
-            android:summary="@string/unlock_backup_info_summary"
-            android:selectable="false"
-            android:persistent="false"/>
-
-        <PreferenceScreen
+    <PreferenceScreen
             android:key="unlock_set_off"
             android:title="@string/unlock_set_unlock_off_title"
             android:summary="@string/unlock_set_unlock_off_summary"
             android:persistent="false"/>
 
-        <PreferenceScreen
+    <PreferenceScreen
             android:key="unlock_set_none"
             android:title="@string/unlock_set_unlock_none_title"
             android:summary="@string/unlock_set_unlock_none_summary"
             android:persistent="false"/>
 
-        <PreferenceScreen
+    <PreferenceScreen
             android:key="unlock_set_biometric_weak"
             android:title="@string/unlock_set_unlock_biometric_weak_title"
             android:summary="@string/unlock_set_unlock_biometric_weak_summary"
             android:persistent="false"/>
 
-        <PreferenceScreen
+    <PreferenceScreen
             android:key="unlock_set_pattern"
             android:title="@string/unlock_set_unlock_pattern_title"
             android:summary="@string/unlock_set_unlock_pattern_summary"
             android:persistent="false"/>
 
-        <PreferenceScreen
+    <PreferenceScreen
             android:key="unlock_set_pin"
             android:title="@string/unlock_set_unlock_pin_title"
             android:summary="@string/unlock_set_unlock_pin_summary"
             android:persistent="false"/>
 
-        <PreferenceScreen
+    <PreferenceScreen
             android:key="unlock_set_password"
             android:title="@string/unlock_set_unlock_password_title"
             android:summary="@string/unlock_set_unlock_password_summary"
             android:persistent="false"/>
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
