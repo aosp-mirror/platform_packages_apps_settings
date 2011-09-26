@@ -25,13 +25,13 @@
     <string name="header_category_system" msgid="2073558547468647128">"СИСТЕМНИ"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Включване на радио"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Изключване на радио"</string>
-    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
+    <string name="sms_over_ims_on" msgid="5085290395865632925">"Включване на SMS през услугата за незабавни съобщения"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"Изключване на SMS през услугата за незабавни съобщения"</string>
+    <string name="ims_reg_required_on" msgid="3885152087309614653">"Изисква се включване на регистрацията за незабавни съобщения"</string>
+    <string name="ims_reg_required_off" msgid="1720570343422743943">"Изисква се изключване на регистрацията за незабавни съобщения"</string>
+    <!-- no translation found for lte_ram_dump_on (8568568019520172177) -->
     <skip />
-    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
-    <skip />
-    <!-- no translation found for ims_reg_required_on (3885152087309614653) -->
-    <skip />
-    <!-- no translation found for ims_reg_required_off (1720570343422743943) -->
+    <!-- no translation found for lte_ram_dump_off (2514507918652378283) -->
     <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Преглед на указателят на SIM картата"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Преглед на фиксирани номера за набиране"</string>
@@ -336,13 +336,13 @@
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Плъзгане"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Без защита"</string>
     <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
-    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Ниска степен на защита, експериментална"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Ниска защита, експериментално"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Фигура"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Средна степен на защита"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Средна защита"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Средна до висока степен на защита"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Средна до висока защита"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Парола"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Висока степен на защита"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Висока защита"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Деакт. от админ., правила за шифроване или хранил. за идент. данни"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Няма"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Плъзгане"</string>
@@ -788,14 +788,10 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP или CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Тип на името на точката за достъп (APN)"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"APN протокол"</string>
-    <!-- no translation found for carrier_enabled (5345015879918180684) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOn (2928646805009033590) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOff (7064396156584668630) -->
-    <skip />
-    <!-- no translation found for bearer (594270280031923558) -->
-    <skip />
+    <string name="carrier_enabled" msgid="5345015879918180684">"Активиране/деактивиране на името на точката за достъп (APN)"</string>
+    <string name="carrier_enabled_summaryOn" msgid="2928646805009033590">"Името на точката за достъп (APN) е активирано"</string>
+    <string name="carrier_enabled_summaryOff" msgid="7064396156584668630">"Името на точката за достъп (APN) е деактивирано"</string>
+    <string name="bearer" msgid="594270280031923558">"Носител"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Изтриване на името на точката за достъп (APN)"</string>
     <string name="menu_new" msgid="3014205883303921729">"Ново име на точка за достъп (APN)"</string>
     <string name="menu_save" msgid="8109345640668285399">"Запазване"</string>
@@ -1463,7 +1459,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Използване на данни"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Цикъл: Ползване на данни"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Роуминг на данни"</string>
-    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Огран. на данните"</string>
+    <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Ограничени данни"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Отделно използване на 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Ползване на Wi-Fi – показване"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Да се покаже употр. на Ethernet"</string>

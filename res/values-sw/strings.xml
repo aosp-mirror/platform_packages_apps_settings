@@ -25,12 +25,14 @@
     <string name="header_category_system" msgid="2073558547468647128">"MFUMO"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Fungua radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Zima radio"</string>
-    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
-    <skip />
-    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
-    <skip />
+    <string name="sms_over_ims_on" msgid="5085290395865632925">"Washa SMS juu ya IMS"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"Zima SMS juu ya IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Inahitaji kuwasha usajili wa IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Inahitaji kuzima usajili wa IMS"</string>
+    <!-- no translation found for lte_ram_dump_on (8568568019520172177) -->
+    <skip />
+    <!-- no translation found for lte_ram_dump_off (2514507918652378283) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Ona anwani za kijitabu cha SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Ona nambari zilizopangwa za kupiga"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Angalia number za huduma za kubonyeza"</string>
@@ -474,19 +476,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Kwa muziki na midia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Kumbuka mipangilio"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Tumia Mawasiliano ya Karibu na Uga ili kusoma lebo za ubadilishanaji"</string>
-    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
-    <skip />
-    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
-    <skip />
-    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
-    <skip />
-    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
-    <skip />
-    <!-- no translation found for android_beam_label (6257036050366775040) -->
-    <skip />
-    <!-- no translation found for android_beam_explained (6981652347448777459) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Inaruhusu vifaa vilivyojitenga na sentimita chache kwa kubadilishana habari"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_on_summary" msgid="614304206886681503">"Washa"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"Imezimwa"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Hazipatikani kwa sababu NFC imezimwa"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"Wakati kipengele hiki ni kimewashwa, unaweza boriti maudhui ya prog kwa kifaa kingine cha NFC chenye uwezo kwa kusikilia vifaa karibu pamoja. Kwa mfano, unaweza boriti  kurasa za Kivinjari, videos za YouTube, wasiliani wa Watu, na zaidi. "\n" "\n" Leta tu vifaa pamoja (kawaida nyuma kwa nyuma) na kisha gusa kioo chako. Prog huamua nini inapata mwale."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Mtandao-hewa"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Washa Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -867,7 +863,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Mitandao ya simu"</string>
     <string name="location_title" msgid="1029961368397484576">"Mahali pangu"</string>
     <string name="location_network_based" msgid="5569673665032992664">"Eneo la huduma ya Google"</string>
-    <string name="location_neighborhood_level" msgid="1337612962522836900">"Wacha prog itumie data kutoka kwa yanzo kama zile za Wi-Fi na mitandao ya simu ili kuamua kadirio la eneo lako"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Wacha prog itumie data kutoka kwa vyanzo kama zile za Wi-Fi na mitandao ya simu ili kuamua kadirio la eneo lako"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Mahali pame tathminiwa na Mtandao hewa"</string>
     <string name="location_gps" msgid="8392461023569708478">"Setileti za GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Ruhusu programu kutumia GPS kupata mahali pako"</string>
@@ -1168,13 +1164,13 @@
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Ruhusu"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Usiruhusu"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"tumia<xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> anaweza kukusanya maandishi yote unayoyaandika, isipokuwa nywila. Hii ni pamoja na data ya kibinafsi kama nambari za kadi za mikopo. Pia inaweza kukusanya data kuhusu kuathiriana kwako na kompyuta."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> anaweza kukusanya maandishi yote unayaandika, isipokuwa nywila. Hii ni pamoja na taarifa ya binafsi kama nambari za kadi za mikopo. Inaweza pia kukusanya data kuhusu kuathiriana kwako na simu."</string>
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> anaweza kukusanya maandishi yote unayoyaandika, isipokuwa nenosiri. Hii ni pamoja na data ya kibinafsi kama nambari za kadi za mikopo. Pia inaweza kukusanya data kuhusu kuathiriana kwako na kompyuta."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> anaweza kukusanya maandishi yote unayoyaandika, isipokuwa nenisiri. Hii ni pamoja na taarifa ya kibinafsi kama nambari za kadi za mikopo. Inaweza pia kukusanya data kuhusu kuathiriana kwako na simu."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"simamisha <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Kugusa OK kutasimamisha <xliff:g id="SERVICE">%1$s</xliff:g> ."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Hakuna huduma zilizosanidiwa"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Unahitaji msomaji wa skrini?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack hutoa majibu yaliyosemwa ili kuwasaidia watumiaji vipofu na wenye-kuona kidogo. Je, unataka kuisanidi kutoka kwa Soko la Android?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack hutoa majibu yaliyosemwa ili kuwasaidia watumiaji vipofu na wenye-kuona kidogo. Je, unataka kuisanidi bure kutoka kwa Android Market?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Ingiza miswada inayoonekana?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Unataka programu-matumizi kuingiza miswada kutoka Google ili kufanya yaliyomo ndani yake kuonekana zaidi?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Kipengele hiki hubadilisha jinsi kifaa chako  kinaitikia mguso. Kiwashe?"</string>
@@ -1395,7 +1391,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Programu inaweza kusawazisha, kutuma, na kupokea data kwa wakati wowote"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Zingatia"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Kulemaza data ya maandhari nyuma huzidisha nguvu za batri na kupunguza matumizi ya data. Baadhi ya programu huenda zikatumia muunganisho wa data ya maandhari nyuma."</string>
-    <string name="sync_automatically" msgid="1682730255435062059">"Oto-ainsha prog ya  data"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Oto-landanisha prog ya  data"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Kusawazishwa Kumewezeshwa"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Sawazisha Kumezimwa"</string>
     <string name="sync_error" msgid="5060969083117872149">"Hitilafu ya usawazishaji"</string>
@@ -1486,7 +1482,7 @@
     <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Lemaza data ya mandhari nyuma kwenye mitandao ambayo umechjagua kupima ( <xliff:g id="NETWORKS">%1$s</xliff:g> )."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Zuia data ya mandhari nyuma?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Kipengele hiki kinaweza kuasi programu ambazo zinategemea matumizi ya data ya mandhari nyuma. "\n\n"Vidhibiti zaidi vya  matumizi ya data vinaweza kupatikana kati ya mipangilio hii ya programu."</string>
-    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Kuzuia data ya usuli inapatikana tu wakati umeweka kikomo ch data ya mtandao."</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="3186668789600978826">"Kuzuia data ya usuli inapatikana tu wakati umeweka kikomo cha data ya mtandao."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Tarehe iliyowekwa upya ya msururu wa matumizi"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Tarehe ya kila mwezi:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Weka"</string>

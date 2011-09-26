@@ -25,12 +25,14 @@
     <string name="header_category_system" msgid="2073558547468647128">"SISTEMA"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Attiva segnale cellulare"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Disattiva segnale cellulare"</string>
-    <!-- no translation found for sms_over_ims_on (5085290395865632925) -->
-    <skip />
-    <!-- no translation found for sms_over_ims_off (8354792045992793959) -->
-    <skip />
+    <string name="sms_over_ims_on" msgid="5085290395865632925">"Attiva SMS su IMS"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"Disattiva SMS su IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Attivazione registrazione IMS obbligatoria"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Disattivazione registrazione IMS obbligatoria"</string>
+    <!-- no translation found for lte_ram_dump_on (8568568019520172177) -->
+    <skip />
+    <!-- no translation found for lte_ram_dump_off (2514507918652378283) -->
+    <skip />
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Visualizza rubrica SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Visualizza numeri selezione fissa"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Visualizza numeri dell\'elenco dei numeri di servizio"</string>
@@ -474,19 +476,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per musica e audio media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ricorda impostazioni"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Usa Near Field Communication per leggere e scambiare tag"</string>
-    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
-    <skip />
-    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
-    <skip />
-    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
-    <skip />
-    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
-    <skip />
-    <!-- no translation found for android_beam_label (6257036050366775040) -->
-    <skip />
-    <!-- no translation found for android_beam_explained (6981652347448777459) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Consenti lo scambio di informazioni tra dispositivi distanti pochi centimetri"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_on_summary" msgid="614304206886681503">"Attiva"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"Non attiva"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Non disponibile perché la tecnologia NFC non è attiva"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"Quando questa funzione è attiva, puoi trasferire contenuti di applicazioni su un altro dispositivo che supporta la tecnologia NFC tenendo vicini i due dispositivi. Puoi trasferire, ad esempio, pagine dell\'applicazione Browser, video di YouTube, contatti di Persone e altri dati."\n\n"È sufficiente avvicinare i dispositivi (generalmente mettendo a contatto le due parti posteriori), quindi toccare lo schermo. L\'applicazione stabilisce i dati da trasferire."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Attiva Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -866,8 +862,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Guida"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Reti mobili"</string>
     <string name="location_title" msgid="1029961368397484576">"La mia posizione"</string>
-    <string name="location_network_based" msgid="5569673665032992664">"Servizio di localizzazione Google"</string>
-    <string name="location_neighborhood_level" msgid="1337612962522836900">"Consenti ad applicazioni di usare dati da fonti come reti Wi-Fi/mobili per determinare la tua posizione"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Servizio localizzazione Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Consenti alle applicazioni di utilizzare dati di fonti come reti Wi-Fi/mobili per determinare la tua posizione approssimativa"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Posizione determinata da Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satelliti GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Consenti alle applicazioni di utilizzare il GPS per individuare la tua posizione"</string>
@@ -1174,7 +1170,7 @@
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Se tocchi OK <xliff:g id="SERVICE">%1$s</xliff:g> verrà interrotto."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nessun servizio installato"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Hai bisogno di uno screen reader?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack fornisce un feedback vocale per aiutare gli utenti non vedenti e ipovedenti. Vuoi installarlo gratuitamente da Android Market?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack fornisce commenti vocali per utenti non vedenti o con problemi di vista. Vuoi installare gratuitamente l\'applicazione da Android Market?"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Installare script di accessibilità?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Vuoi che le applicazioni installino script di Google per rendere più accessibili i relativi contenuti?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Questa funzione cambia il modo in cui il dispositivo risponde al tocco. Attivarla?"</string>
