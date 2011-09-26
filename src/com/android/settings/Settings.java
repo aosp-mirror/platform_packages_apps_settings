@@ -190,6 +190,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 mCurrentHeader = parentHeader;
 
                 switchToHeaderLocal(parentHeader);
+                highlightHeader();
 
                 mParentHeader = new Header();
                 mParentHeader.fragment
@@ -217,6 +218,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             Integer index = mHeaderIndexMap.get(mTopLevelHeaderId);
             if (index != null) {
                 getListView().setItemChecked(index, true);
+                getListView().smoothScrollToPosition(index);
             }
         }
     }

@@ -153,6 +153,10 @@
                 android:value="com.android.settings.wifi.AdvancedWifiSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wifi_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/wifi_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$WifiSettingsActivity" />
         </activity>
 
         <activity android:name=".wifi.WifiInfo"
@@ -354,7 +358,6 @@
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
                 <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -370,7 +373,6 @@
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
