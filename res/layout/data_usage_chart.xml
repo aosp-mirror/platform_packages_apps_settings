@@ -59,6 +59,22 @@
         settings:fillColorSecondary="#60ba7f3e" />
 
     <com.android.settings.widget.ChartSweepView
+        android:id="@+id/sweep_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        settings:sweepDrawable="@drawable/data_sweep_left"
+        settings:followAxis="horizontal"
+        settings:neighborMargin="5dip" />
+
+    <com.android.settings.widget.ChartSweepView
+        android:id="@+id/sweep_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        settings:sweepDrawable="@drawable/data_sweep_right"
+        settings:followAxis="horizontal"
+        settings:neighborMargin="5dip" />
+
+    <com.android.settings.widget.ChartSweepView
         android:id="@+id/sweep_warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,21 +97,5 @@
         settings:labelSize="60dip"
         settings:labelTemplate="@string/data_usage_sweep_limit"
         settings:labelColor="#c01a2c" />
-
-    <com.android.settings.widget.ChartSweepView
-        android:id="@+id/sweep_left"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        settings:sweepDrawable="@drawable/data_sweep_left"
-        settings:followAxis="horizontal"
-        settings:neighborMargin="5dip" />
-
-    <com.android.settings.widget.ChartSweepView
-        android:id="@+id/sweep_right"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        settings:sweepDrawable="@drawable/data_sweep_right"
-        settings:followAxis="horizontal"
-        settings:neighborMargin="5dip" />
 
 </com.android.settings.widget.ChartDataUsageView>

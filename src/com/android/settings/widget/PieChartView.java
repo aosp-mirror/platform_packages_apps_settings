@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -42,31 +43,34 @@ public class PieChartView extends View {
     public static final String TAG = "PieChartView";
     public static final boolean LOGD = false;
 
+    private static final boolean FILL_GRADIENT = false;
+
     private ArrayList<Slice> mSlices = Lists.newArrayList();
 
     private int mOriginAngle;
+    private Matrix mMatrix = new Matrix();
 
-    private Paint mPaintPrimary = new Paint();
-    private Paint mPaintShadow = new Paint();
+    private Paint mPaintOutline = new Paint();
 
     private Path mPathSide = new Path();
-    private Path mPathSideShadow = new Path();
+    private Path mPathSideOutline = new Path();
 
-    private Path mPathShadow = new Path();
+    private Path mPathOutline = new Path();
 
     private int mSideWidth;
 
     public class Slice {
         public long value;
 
-        public Path pathPrimary = new Path();
-        public Path pathShadow = new Path();
+        public Path path = new Path();
+        public Path pathSide = new Path();
+        public Path pathOutline = new Path();
 
-        public Paint paintPrimary;
+        public Paint paint;
 
         public Slice(long value, int color) {
             this.value = value;
-            this.paintPrimary = buildFillPaint(color, getResources());
+            this.paint = buildFillPaint(color, getResources());
         }
     }
 
@@ -81,12 +85,10 @@ public class PieChartView extends View {
     public PieChartView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        mPaintPrimary = buildFillPaint(Color.parseColor("#666666"), getResources());
-
-        mPaintShadow.setColor(Color.BLACK);
-        mPaintShadow.setStyle(Style.STROKE);
-        mPaintShadow.setStrokeWidth(3f * getResources().getDisplayMetrics().density);
-        mPaintShadow.setAntiAlias(true);
+        mPaintOutline.setColor(Color.BLACK);
+        mPaintOutline.setStyle(Style.STROKE);
+        mPaintOutline.setStrokeWidth(3f * getResources().getDisplayMetrics().density);
+        mPaintOutline.setAntiAlias(true);
 
         mSideWidth = (int) (20 * getResources().getDisplayMetrics().density);
 
@@ -100,8 +102,10 @@ public class PieChartView extends View {
         paint.setStyle(Style.FILL_AND_STROKE);
         paint.setAntiAlias(true);
 
-        final int width = (int) (280 * res.getDisplayMetrics().density);
-        paint.setShader(new RadialGradient(0, 0, width, color, darken(color), TileMode.MIRROR));
+        if (FILL_GRADIENT) {
+            final int width = (int) (280 * res.getDisplayMetrics().density);
+            paint.setShader(new RadialGradient(0, 0, width, color, darken(color), TileMode.MIRROR));
+        }
 
         return paint;
     }
@@ -120,6 +124,13 @@ public class PieChartView extends View {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        final float centerX = getWidth() / 2;
+        final float centerY = getHeight() / 2;
+
+        mMatrix.reset();
+        mMatrix.postScale(0.665f, 0.95f, centerX, centerY);
+        mMatrix.postRotate(-40, centerX, centerY);
+
         generatePath();
     }
 
@@ -128,14 +139,15 @@ public class PieChartView extends View {
 
         long total = 0;
         for (Slice slice : mSlices) {
-            slice.pathPrimary.reset();
-            slice.pathShadow.reset();
+            slice.path.reset();
+            slice.pathSide.reset();
+            slice.pathOutline.reset();
             total += slice.value;
         }
 
         mPathSide.reset();
-        mPathSideShadow.reset();
-        mPathShadow.reset();
+        mPathSideOutline.reset();
+        mPathOutline.reset();
 
         // bail when not enough stats to render
         if (total == 0) {
@@ -147,23 +159,56 @@ public class PieChartView extends View {
         final int height = getHeight();
 
         final RectF rect = new RectF(0, 0, width, height);
+        final RectF rectSide = new RectF();
+        rectSide.set(rect);
+        rectSide.offset(-mSideWidth, 0);
 
-        mPathSide.addOval(rect, Direction.CW);
-        mPathSideShadow.addOval(rect, Direction.CW);
-        mPathShadow.addOval(rect, Direction.CW);
+        mPathSide.addOval(rectSide, Direction.CW);
+        mPathSideOutline.addOval(rectSide, Direction.CW);
+        mPathOutline.addOval(rect, Direction.CW);
 
         int startAngle = mOriginAngle;
         for (Slice slice : mSlices) {
             final int sweepAngle = (int) (slice.value * 360 / total);
+            final int endAngle = startAngle + sweepAngle;
 
-            slice.pathPrimary.moveTo(rect.centerX(), rect.centerY());
-            slice.pathPrimary.arcTo(rect, startAngle, sweepAngle);
-            slice.pathPrimary.lineTo(rect.centerX(), rect.centerY());
+            final float startAngleMod = startAngle % 360;
+            final float endAngleMod = endAngle % 360;
+            final boolean startSideVisible = startAngleMod > 90 && startAngleMod < 270;
+            final boolean endSideVisible = endAngleMod > 90 && endAngleMod < 270;
 
-            slice.pathShadow.moveTo(rect.centerX(), rect.centerY());
-            slice.pathShadow.arcTo(rect, startAngle, 0);
-            slice.pathShadow.moveTo(rect.centerX(), rect.centerY());
-            slice.pathShadow.arcTo(rect, startAngle + sweepAngle, 0);
+            // draw slice
+            slice.path.moveTo(rect.centerX(), rect.centerY());
+            slice.path.arcTo(rect, startAngle, sweepAngle);
+            slice.path.lineTo(rect.centerX(), rect.centerY());
+
+            if (startSideVisible || endSideVisible) {
+
+                // when start is beyond horizon, push until visible
+                final float startAngleSide = startSideVisible ? startAngle : 450;
+                final float endAngleSide = endSideVisible ? endAngle : 270;
+                final float sweepAngleSide = endAngleSide - startAngleSide;
+
+                // draw slice side
+                slice.pathSide.moveTo(rect.centerX(), rect.centerY());
+                slice.pathSide.arcTo(rect, startAngleSide, 0);
+                slice.pathSide.rLineTo(-mSideWidth, 0);
+                slice.pathSide.arcTo(rectSide, startAngleSide, sweepAngleSide);
+                slice.pathSide.rLineTo(mSideWidth, 0);
+                slice.pathSide.arcTo(rect, endAngleSide, -sweepAngleSide);
+            }
+
+            // draw slice outline
+            slice.pathOutline.moveTo(rect.centerX(), rect.centerY());
+            slice.pathOutline.arcTo(rect, startAngle, 0);
+            if (startSideVisible) {
+                slice.pathOutline.rLineTo(-mSideWidth, 0);
+            }
+            slice.pathOutline.moveTo(rect.centerX(), rect.centerY());
+            slice.pathOutline.arcTo(rect, startAngle + sweepAngle, 0);
+            if (endSideVisible) {
+                slice.pathOutline.rLineTo(-mSideWidth, 0);
+            }
 
             startAngle += sweepAngle;
         }
@@ -174,21 +219,18 @@ public class PieChartView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        canvas.translate(getWidth() * 0.25f, getHeight() * -0.05f);
-        canvas.rotate(-40, getWidth() * 0.5f, getHeight());
-        canvas.scale(0.7f, 1.0f, getWidth(), getHeight());
-
-        canvas.save();
-        canvas.translate(-mSideWidth, 0);
-        canvas.drawPath(mPathSide, mPaintPrimary);
-        canvas.drawPath(mPathSideShadow, mPaintShadow);
-        canvas.restore();
+        canvas.concat(mMatrix);
 
         for (Slice slice : mSlices) {
-            canvas.drawPath(slice.pathPrimary, slice.paintPrimary);
-            canvas.drawPath(slice.pathShadow, mPaintShadow);
+            canvas.drawPath(slice.pathSide, slice.paint);
         }
-        canvas.drawPath(mPathShadow, mPaintShadow);
+        canvas.drawPath(mPathSideOutline, mPaintOutline);
+
+        for (Slice slice : mSlices) {
+            canvas.drawPath(slice.path, slice.paint);
+            canvas.drawPath(slice.pathOutline, mPaintOutline);
+        }
+        canvas.drawPath(mPathOutline, mPaintOutline);
     }
 
     public static int darken(int color) {
