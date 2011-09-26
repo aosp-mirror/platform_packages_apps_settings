@@ -22,6 +22,13 @@
         android:title="@string/enable_adb" 
         android:summary="@string/enable_adb_summary"/>
 
+    <Preference
+        android:key="verifier_device_identifier"
+        style="?android:attr/preferenceInformationStyle"
+        android:title="@string/verifier_device_identifier"
+        android:summary="@string/verifier_device_identifier_not_available"
+        android:persistent="false" />
+
     <CheckBoxPreference 
         android:key="keep_screen_on" 
         android:title="@string/keep_screen_on" 
