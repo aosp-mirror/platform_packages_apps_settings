@@ -751,9 +751,13 @@ public class DataUsageSummary extends Fragment {
         if (NetworkPolicyManager.isUidValidForPolicy(context, primaryUid)
                 && !getRestrictBackground() && isBandwidthControlEnabled()) {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
-            setPreferenceSummary(mAppRestrictView,
-                    getString(R.string.data_usage_app_restrict_background_summary,
-                            buildLimitedNetworksString()));
+            if (hasLimitedNetworks()) {
+                setPreferenceSummary(mAppRestrictView,
+                        getString(R.string.data_usage_app_restrict_background_summary));
+            } else {
+                setPreferenceSummary(mAppRestrictView,
+                        getString(R.string.data_usage_app_restrict_background_summary_disabled));
+            }
 
             mAppRestrictView.setVisibility(View.VISIBLE);
             mAppRestrict.setChecked(getAppRestrictBackground());
@@ -925,8 +929,9 @@ public class DataUsageSummary extends Fragment {
             historyEnd = mChartData.network.getEnd();
         }
 
-        if (historyStart == Long.MAX_VALUE) historyStart = System.currentTimeMillis();
-        if (historyEnd == Long.MIN_VALUE) historyEnd = System.currentTimeMillis();
+        final long now = System.currentTimeMillis();
+        if (historyStart == Long.MAX_VALUE) historyStart = now;
+        if (historyEnd == Long.MIN_VALUE) historyEnd = now + 1;
 
         boolean hasCycles = false;
         if (policy != null) {
@@ -1489,6 +1494,8 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_UIDS = "uids";
 
         public static void show(DataUsageSummary parent, int[] uids, CharSequence label) {
+            if (!parent.isAdded()) return;
+
             final Bundle args = new Bundle();
             args.putIntArray(EXTRA_UIDS, uids);
 
@@ -1529,8 +1536,9 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_LIMIT_BYTES = "limitBytes";
 
         public static void show(DataUsageSummary parent) {
-            final Resources res = parent.getResources();
+            if (!parent.isAdded()) return;
 
+            final Resources res = parent.getResources();
             final CharSequence message;
             final long limitBytes;
 
@@ -1597,6 +1605,8 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_TEMPLATE = "template";
 
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final Bundle args = new Bundle();
             args.putParcelable(EXTRA_TEMPLATE, parent.mTemplate);
 
@@ -1649,6 +1659,8 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_TEMPLATE = "template";
 
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final Bundle args = new Bundle();
             args.putParcelable(EXTRA_TEMPLATE, parent.mTemplate);
 
@@ -1709,6 +1721,8 @@ public class DataUsageSummary extends Fragment {
         private static final String EXTRA_TEMPLATE = "template";
 
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final Bundle args = new Bundle();
             args.putParcelable(EXTRA_TEMPLATE, parent.mTemplate);
 
@@ -1766,6 +1780,8 @@ public class DataUsageSummary extends Fragment {
      */
     public static class ConfirmDataDisableFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final ConfirmDataDisableFragment dialog = new ConfirmDataDisableFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_DATA_DISABLE);
@@ -1799,6 +1815,8 @@ public class DataUsageSummary extends Fragment {
      */
     public static class ConfirmDataRoamingFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final ConfirmDataRoamingFragment dialog = new ConfirmDataRoamingFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_DATA_ROAMING);
@@ -1832,6 +1850,8 @@ public class DataUsageSummary extends Fragment {
      */
     public static class ConfirmRestrictFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final ConfirmRestrictFragment dialog = new ConfirmRestrictFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_RESTRICT);
@@ -1843,13 +1863,7 @@ public class DataUsageSummary extends Fragment {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.data_usage_restrict_background_title);
-
-            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-            if (target != null) {
-                final CharSequence limitedNetworks = target.buildLimitedNetworksString();
-                builder.setMessage(
-                        getString(R.string.data_usage_restrict_background, limitedNetworks));
-            }
+            builder.setMessage(getString(R.string.data_usage_restrict_background));
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
@@ -1872,6 +1886,8 @@ public class DataUsageSummary extends Fragment {
      */
     public static class DeniedRestrictFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final DeniedRestrictFragment dialog = new DeniedRestrictFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_DENIED_RESTRICT);
@@ -1896,6 +1912,8 @@ public class DataUsageSummary extends Fragment {
      */
     public static class ConfirmAppRestrictFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
+            if (!parent.isAdded()) return;
+
             final ConfirmAppRestrictFragment dialog = new ConfirmAppRestrictFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_APP_RESTRICT);
