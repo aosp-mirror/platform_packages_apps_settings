@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -278,7 +279,7 @@ public class Utils {
      * Returns true if Monkey is running.
      */
     public static boolean isMonkeyRunning() {
-        return SystemProperties.getBoolean("ro.monkey", false);
+        return ActivityManager.isUserAMonkey();
     }
 
     /**
