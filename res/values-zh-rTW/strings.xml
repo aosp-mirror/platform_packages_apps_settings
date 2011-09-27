@@ -336,7 +336,7 @@
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"滑動"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"無安全性設定"</string>
     <string name="unlock_set_unlock_biometric_weak_title" msgid="6228880437600746409">"FacePass"</string>
-    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"低安全性、實驗性"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"安全性低的實驗性設定"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"圖形"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性設定"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
@@ -476,19 +476,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"使用於音樂與媒體"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"記住設定"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"使用近距離無線通訊讀取和交換標記"</string>
-    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
-    <skip />
-    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
-    <skip />
-    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
-    <skip />
-    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
-    <skip />
-    <!-- no translation found for android_beam_label (6257036050366775040) -->
-    <skip />
-    <!-- no translation found for android_beam_explained (6981652347448777459) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"允許裝置在相距幾公分的距離交換資訊"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_on_summary" msgid="614304206886681503">"開啟"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"關閉"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"NFC 已關閉，因此無法使用"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"這項功能啟用時，您只要將裝置靠在一起，即可讓應用程式內容傳輸至其他支援 NFC 的裝置。例如，您可以傳輸「瀏覽器」頁面、YouTube 影片、「使用者」聯絡人等內容。"\n\n"只要將裝置靠在一起 (一般都是背靠背)，然後輕觸螢幕，接著應用程式會決定要傳輸哪些內容。"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"開啟 Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -1397,7 +1391,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"應用程式隨時可以同步處理、傳送和接收資料"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"注意"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"停用背景資料可延長電池使用時間，並減少資料的傳輸量。但某些應用程式可能仍會使用背景資料連線。"</string>
-    <string name="sync_automatically" msgid="1682730255435062059">"自動同步處理應用程式資料"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"自動同步處理應用程式的資料"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"已開啟同步處理功能"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"已關閉同步處理功能"</string>
     <string name="sync_error" msgid="5060969083117872149">"同步處理錯誤"</string>
@@ -1492,8 +1486,8 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"用量週期重設日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"每月固定日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"儲存設定"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"設定資料用量警告"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"設定資料用量限制"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"設定數據用量警告"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"設定數據用量上限"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制資料用量"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"達到指定的流量上限時，系統會停用您的 <xliff:g id="NETWORKS">%1$s</xliff:g> 數據連線。"\n\n"如要避免支付超量費用，請根據不同裝置與各家系統業者的計費方式，考慮降低數據用量限制。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"限制背景資料？"</string>
