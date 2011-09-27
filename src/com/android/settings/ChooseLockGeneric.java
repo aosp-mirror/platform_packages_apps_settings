@@ -213,6 +213,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
             final boolean weakBiometricAvailable = isBiometricSensorAvailable(
                     DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK);
+            // TODO: This code can be removed once the second header is gone
             if (onlyShowFallback) {
                 picker.setTitle(R.string.backup_lock_settings_picker_title);
             } else {
@@ -271,6 +272,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
             Intent fallBackIntent = new Intent().setClass(getActivity(), ChooseLockGeneric.class);
             fallBackIntent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, true);
             fallBackIntent.putExtra(CONFIRM_CREDENTIALS, false);
+            fallBackIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE,
+                    R.string.backup_lock_settings_picker_title);
             fallBackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             Intent intent = new Intent().setClassName("com.android.facelock",
