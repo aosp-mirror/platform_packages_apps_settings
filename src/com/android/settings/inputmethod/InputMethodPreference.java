@@ -59,6 +59,24 @@ public class InputMethodPreference extends CheckBoxPreference
     private TextView mSummaryText;
     private View mInputMethodPref;
 
+    private final OnClickListener mPrefOnclickListener = new OnClickListener() {
+        @Override
+        public void onClick(View arg0) {
+            if (!isEnabled()) {
+                return;
+            }
+            if (isChecked()) {
+                setChecked(false);
+            } else {
+                if (mIsSystemIme) {
+                    setChecked(true);
+                } else {
+                    showSecurityWarnDialog(mImi, InputMethodPreference.this);
+                }
+            }
+        }
+    };
+
     public InputMethodPreference(SettingsPreferenceFragment fragment, Intent settingsIntent,
             InputMethodManager imm, InputMethodInfo imi, int imiCount) {
         super(fragment.getActivity(), null, R.style.InputMethodPreferenceStyle);
@@ -80,36 +98,23 @@ public class InputMethodPreference extends CheckBoxPreference
     protected void onBindView(View view) {
         super.onBindView(view);
         mInputMethodPref = view.findViewById(R.id.inputmethod_pref);
-        mInputMethodPref.setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        if (isChecked()) {
-                            setChecked(false);
-                        } else {
-                            if (mIsSystemIme) {
-                                setChecked(true);
-                            } else {
-                                showSecurityWarnDialog(mImi, InputMethodPreference.this);
-                            }
-                        }
-                    }
-                });
+        mInputMethodPref.setOnClickListener(mPrefOnclickListener);
         mInputMethodSettingsButton = (ImageView)view.findViewById(R.id.inputmethod_settings);
         mTitleText = (TextView)view.findViewById(android.R.id.title);
-
+        mSummaryText = (TextView)view.findViewById(android.R.id.summary);
         final boolean hasSubtypes = mImi.getSubtypeCount() > 1;
         final String imiId = mImi.getId();
-        mSummaryText = (TextView)view.findViewById(android.R.id.summary);
-        mSummaryText.setOnClickListener(new OnClickListener() {
+        mInputMethodPref.setOnLongClickListener(new OnLongClickListener() {
             @Override
-            public void onClick(View arg0) {
+            public boolean onLongClick(View arg0) {
                 final Bundle bundle = new Bundle();
                 bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
                 startFragment(mFragment, InputMethodAndSubtypeEnabler.class.getName(),
                         0, bundle);
+                return true;
             }
         });
+
         if (mSettingsIntent != null) {
             mInputMethodSettingsButton.setOnClickListener(
                     new OnClickListener() {
@@ -141,17 +146,17 @@ public class InputMethodPreference extends CheckBoxPreference
         if (mSettingsIntent == null) {
             mInputMethodSettingsButton.setVisibility(View.GONE);
         } else {
-            enableSettingsButton();
+            updatePreferenceViews();
         }
     }
 
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        enableSettingsButton();
+        updatePreferenceViews();
     }
 
-    private void enableSettingsButton() {
+    private void updatePreferenceViews() {
         final boolean checked = isChecked();
         if (mInputMethodSettingsButton != null) {
             mInputMethodSettingsButton.setEnabled(checked);
@@ -166,7 +171,15 @@ public class InputMethodPreference extends CheckBoxPreference
         }
         if (mSummaryText != null) {
             mSummaryText.setEnabled(checked);
-            mSummaryText.setClickable(checked);
+        }
+        if (mInputMethodPref != null) {
+            mInputMethodPref.setEnabled(true);
+            mInputMethodPref.setLongClickable(checked);
+            final boolean enabled = isEnabled();
+            mInputMethodPref.setOnClickListener(enabled ? mPrefOnclickListener : null);
+            if (!enabled) {
+                mInputMethodPref.setBackgroundColor(0);
+            }
         }
     }
 
