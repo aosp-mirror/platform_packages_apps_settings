@@ -120,6 +120,12 @@ public class ChartDataUsageView extends ChartView {
         mSweepWarning.setValidRangeDynamic(null, mSweepLimit);
         mSweepLimit.setValidRangeDynamic(mSweepWarning, null);
 
+        // mark neighbors for checking touch events against
+        mSweepLeft.setNeighbors(mSweepRight);
+        mSweepRight.setNeighbors(mSweepLeft);
+        mSweepLimit.setNeighbors(mSweepWarning, mSweepLeft, mSweepRight);
+        mSweepWarning.setNeighbors(mSweepLimit, mSweepLeft, mSweepRight);
+
         mSweepLeft.addOnSweepListener(mHorizListener);
         mSweepRight.addOnSweepListener(mHorizListener);
         mSweepWarning.addOnSweepListener(mVertListener);
@@ -375,12 +381,12 @@ public class ChartDataUsageView extends ChartView {
         return mSweepLimit.getLabelValue();
     }
 
-    private long getStatsStart() {
-        return mHistory != null ? mHistory.getStart() : Long.MIN_VALUE;
+    private long getHistoryStart() {
+        return mHistory != null ? mHistory.getStart() : Long.MAX_VALUE;
     }
 
-    private long getStatsEnd() {
-        return mHistory != null ? mHistory.getEnd() : Long.MAX_VALUE;
+    private long getHistoryEnd() {
+        return mHistory != null ? mHistory.getEnd() : Long.MIN_VALUE;
     }
 
     /**
@@ -394,8 +400,13 @@ public class ChartDataUsageView extends ChartView {
         mSeries.setBounds(visibleStart, visibleEnd);
         mDetailSeries.setBounds(visibleStart, visibleEnd);
 
-        final long validStart = Math.max(visibleStart, getStatsStart());
-        final long validEnd = Math.min(visibleEnd, getStatsEnd());
+        final long historyStart = getHistoryStart();
+        final long historyEnd = getHistoryEnd();
+
+        final long validStart = historyStart == Long.MAX_VALUE ? visibleStart
+                : Math.max(visibleStart, historyStart);
+        final long validEnd = historyEnd == Long.MIN_VALUE ? visibleEnd
+                : Math.min(visibleEnd, historyEnd);
 
         if (LIMIT_SWEEPS_TO_VALID_DATA) {
             // prevent time sweeps from leaving valid data

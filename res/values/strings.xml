@@ -3505,7 +3505,7 @@ found in the list of installed applications.</string>
     <!-- Title for checkbox menu option to enable mobile data when roaming. [CHAR LIMIT=32] -->
     <string name="data_usage_menu_roaming">Data roaming</string>
     <!-- Title for checkbox menu option to restrict background data usage. [CHAR LIMIT=20] -->
-    <string name="data_usage_menu_restrict_background">Restrict data</string>
+    <string name="data_usage_menu_restrict_background">Restrict background data</string>
     <!-- Title for checkbox menu option to show 4G mobile data usage separate from other mobile data usage. [CHAR LIMIT=32] -->
     <string name="data_usage_menu_split_4g">Separate 4G usage</string>
     <!-- Title for checkbox menu option to show Wi-Fi data usage. [CHAR LIMIT=32] -->
@@ -3562,13 +3562,15 @@ found in the list of installed applications.</string>
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
     <string name="data_usage_app_restrict_background">Restrict background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary">Disable background data on networks that you\'ve chosen to limit (<xliff:g id="networks" example="Mobile, Wi-Fi">%1$s</xliff:g>).</string>
+    <string name="data_usage_app_restrict_background_summary">Disable background data on mobile data network only. Wi-Fi will be used if available.</string>
+    <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=64] -->
+    <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a mobile data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
     <string name="data_usage_app_restrict_dialog_title">Restrict background data?</string>
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_dialog">This feature may negatively impact applications which depend on background data usage.\n\nMore appropriate data usage controls may be found within this application\'s settings.</string>
+    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when Wi-Fi isn\'t available.\n\nMore appropriate data usage controls may be found in the settings available from within the app.</string>
     <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_denied_dialog">Restricting background data is only available when you\'ve set a network data limit.</string>
+    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\'ve set a mobile data limit.</string>
 
     <!-- Title of dialog for editing data usage cycle reset date. [CHAR LIMIT=48] -->
     <string name="data_usage_cycle_editor_title">Usage cycle reset date</string>
@@ -3590,7 +3592,7 @@ found in the list of installed applications.</string>
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_restrict_background_title">Restrict background data?</string>
     <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background">If you restrict background data, some apps and services won\'t work on networks that you\'ve chosen to limit.\n\nCurrently limited networks: <xliff:g id="networks" example="Mobile, Wi-Fi">%1$s</xliff:g></string>
+    <string name="data_usage_restrict_background">If you restrict background mobile data, some apps and services won\'t work unless Wi-Fi is available.</string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="21"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>

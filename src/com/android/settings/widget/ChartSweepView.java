@@ -101,6 +101,8 @@ public class ChartSweepView extends View {
     private float mTrackingStart;
     private MotionEvent mTracking;
 
+    private ChartSweepView[] mNeighbors = new ChartSweepView[0];
+
     public ChartSweepView(Context context) {
         this(context, null);
     }
@@ -147,6 +149,10 @@ public class ChartSweepView extends View {
 
     void init(ChartAxis axis) {
         mAxis = Preconditions.checkNotNull(axis, "missing axis");
+    }
+
+    public void setNeighbors(ChartSweepView... neighbors) {
+        mNeighbors = neighbors;
     }
 
     public int getFollowAxis() {
@@ -381,18 +387,16 @@ public class ChartSweepView extends View {
      * {@link ChartSweepView} compared to ourselves.
      */
     public boolean isTouchCloserTo(MotionEvent eventInParent, ChartSweepView another) {
-        if (another == null) return false;
+        final float selfDist = getTouchDistanceFromTarget(eventInParent);
+        final float anotherDist = another.getTouchDistanceFromTarget(eventInParent);
+        return anotherDist < selfDist;
+    }
 
+    private float getTouchDistanceFromTarget(MotionEvent eventInParent) {
         if (mFollowAxis == HORIZONTAL) {
-            final float selfDist = Math.abs(eventInParent.getX() - (getX() + getTargetInset()));
-            final float anotherDist = Math.abs(
-                    eventInParent.getX() - (another.getX() + another.getTargetInset()));
-            return anotherDist < selfDist;
+            return Math.abs(eventInParent.getX() - (getX() + getTargetInset()));
         } else {
-            final float selfDist = Math.abs(eventInParent.getY() - (getY() + getTargetInset()));
-            final float anotherDist = Math.abs(
-                    eventInParent.getY() - (another.getY() + another.getTargetInset()));
-            return anotherDist < selfDist;
+            return Math.abs(eventInParent.getY() - (getY() + getTargetInset()));
         }
     }
 
@@ -421,9 +425,10 @@ public class ChartSweepView extends View {
                 eventInParent.offsetLocation(getLeft(), getTop());
 
                 // ignore event when closer to a neighbor
-                if (isTouchCloserTo(eventInParent, mValidAfterDynamic)
-                        || isTouchCloserTo(eventInParent, mValidBeforeDynamic)) {
-                    return false;
+                for (ChartSweepView neighbor : mNeighbors) {
+                    if (isTouchCloserTo(eventInParent, neighbor)) {
+                        return false;
+                    }
                 }
 
                 if (acceptDrag) {
