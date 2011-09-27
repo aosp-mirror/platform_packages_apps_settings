@@ -25,8 +25,8 @@
     <string name="header_category_system" msgid="2073558547468647128">"SISTEMA"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Ligar rádio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Desligar rádio"</string>
-    <string name="sms_over_ims_on" msgid="5085290395865632925">"Ativar SMS sobre MIs"</string>
-    <string name="sms_over_ims_off" msgid="8354792045992793959">"Desativar SMS sobre MIs"</string>
+    <string name="sms_over_ims_on" msgid="5085290395865632925">"Ativar SMS via IMS"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"Desativar SMS via IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Ativar registo IMS obrigatório"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Desativar registo IMS obrigatório"</string>
     <!-- no translation found for lte_ram_dump_on (8568568019520172177) -->
@@ -476,19 +476,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música e multimédia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Memorizar definições"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- outdated translation 1988408027741447231 -->     <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Utilizar Near Field Communication para ler e trocar etiquetas"</string>
-    <!-- no translation found for android_beam_settings_title (7832812974600338649) -->
-    <skip />
-    <!-- no translation found for android_beam_on_summary (614304206886681503) -->
-    <skip />
-    <!-- no translation found for android_beam_off_summary (4663095428454779138) -->
-    <skip />
-    <!-- no translation found for android_beam_disabled_summary (1737782116894793393) -->
-    <skip />
-    <!-- no translation found for android_beam_label (6257036050366775040) -->
-    <skip />
-    <!-- no translation found for android_beam_explained (6981652347448777459) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Permitir que aparelhos separados por alguns centímetros troquem informações"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_on_summary" msgid="614304206886681503">"Ativado"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"Desativado"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Não disponível, porque o NFC está desativado"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"Quando esta funcionalidade está ativada, pode transmitir o conteúdo da aplicação para outro aparelho com capacidade de NFC mantendo os aparelhos próximos um do outro. Por exemplo, pode transmitir páginas do Navegador, vídeos do YouTube, contactos de Pessoas e muito mais. "\n\n"Basta juntar os aparelhos (normalmente de costas) e, em seguida, tocar no ecrã. A aplicação determina o que é transmitido."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Activar Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -868,7 +862,7 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Ajuda"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móveis"</string>
     <string name="location_title" msgid="1029961368397484576">"A minha localização"</string>
-    <string name="location_network_based" msgid="5569673665032992664">"Serviço de localização do Google"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Serviço de localiz. do Google"</string>
     <string name="location_neighborhood_level" msgid="1337612962522836900">"Permita que as aplicações utilizem dados de fontes como redes Wi-Fi e de telemóvel para determinar a sua localização aproximada"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Localização determinada por Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satélites GPS"</string>
@@ -1305,7 +1299,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"Controlo de Energia"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Actualizar definição de Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Actualizar a definição do Bluetooth"</string>
-    <!-- outdated translation 7327468307909556719 -->     <string name="vpn_settings_title" msgid="5662579425832406705">"Definições VPN"</string>
+    <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Armazenamento de credenciais"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar do armazenamento"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Instalar a partir do cartão SD"</string>
@@ -1397,7 +1391,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Aplic. podem sincr., enviar/receber dados a qualq. momento"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Atenção"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"A desactivação de dados em segundo plano economiza a bateria e reduz a utilização de dados. Algumas aplicações podem continuar a utilizar a ligação de dados em segundo plano."</string>
-    <string name="sync_automatically" msgid="1682730255435062059">"Sincronização automática de dados da aplicação"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Sinc. autom. de dados da aplicação"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sincron. activada"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"A sincronização está desactivada"</string>
     <string name="sync_error" msgid="5060969083117872149">"Erro de sincron."</string>
