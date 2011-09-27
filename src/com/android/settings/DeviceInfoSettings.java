@@ -42,6 +42,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
     private static final String LOG_TAG = "DeviceInfoSettings";
 
+    private static final String FILENAME_PROC_VERSION = "/proc/version";
+    private static final String FILENAME_MSV = "/sys/board_properties/soc/msv";
+
     private static final String KEY_CONTAINER = "container";
     private static final String KEY_TEAM = "team";
     private static final String KEY_CONTRIBUTORS = "contributors";
@@ -78,7 +81,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         setStringSummary(KEY_FIRMWARE_VERSION, Build.VERSION.RELEASE);
         findPreference(KEY_FIRMWARE_VERSION).setEnabled(true);
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
-        setStringSummary(KEY_DEVICE_MODEL, Build.MODEL);
+        setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + getMsvSuffix());
         setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
 
@@ -168,16 +171,26 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         }
     }
 
+    /**
+     * Reads a line from the specified file.
+     * @param filename the file to read from
+     * @return the first line, if any.
+     * @throws IOException if the file couldn't be read
+     */
+    private String readLine(String filename) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filename), 256);
+        try {
+            return reader.readLine();
+        } finally {
+            reader.close();
+        }
+    }
+
     private String getFormattedKernelVersion() {
         String procVersionStr;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("/proc/version"), 256);
-            try {
-                procVersionStr = reader.readLine();
-            } finally {
-                reader.close();
-            }
+            procVersionStr = readLine(FILENAME_PROC_VERSION);
 
             final String PROC_VERSION_REGEX =
                 "\\w+\\s+" + /* ignore: Linux */
@@ -213,4 +226,24 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         }
     }
 
+    /**
+     * Returns " (ENGINEERING)" if the msv file has a zero value, else returns "".
+     * @return a string to append to the model number description.
+     */
+    private String getMsvSuffix() {
+        // Production devices should have a non-zero value. If we can't read it, assume it's a
+        // production device so that we don't accidentally show that it's an ENGINEERING device.
+        try {
+            String msv = readLine(FILENAME_MSV);
+            // Parse as a hex number. If it evaluates to a zero, then it's an engineering build.
+            if (Long.parseLong(msv, 16) == 0) {
+                return " (ENGINEERING)";
+            }
+        } catch (IOException ioe) {
+            // Fail quietly, as the file may not exist on some devices.
+        } catch (NumberFormatException nfe) {
+            // Fail quietly, returning empty string should be sufficient
+        }
+        return "";
+    }
 }
