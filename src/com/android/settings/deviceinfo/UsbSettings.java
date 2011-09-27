@@ -34,6 +34,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 /**
  * USB storage settings.
@@ -111,6 +112,11 @@ public class UsbSettings extends SettingsPreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
+        // Don't allow any changes to take effect as the USB host will be disconnected, killing
+        // the monkeys
+        if (Utils.isMonkeyRunning()) {
+            return true;
+        }
         // temporary hack - using check boxes as radio buttons
         // don't allow unchecking them
         if (preference instanceof CheckBoxPreference) {
