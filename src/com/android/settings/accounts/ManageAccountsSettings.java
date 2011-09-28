@@ -19,6 +19,7 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -31,12 +32,15 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.AccountPreference;
@@ -50,15 +54,14 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         implements OnAccountsUpdateListener, DialogCreatable {
 
     private static final int MENU_ADD_ACCOUNT = Menu.FIRST;
-    private static final int MENU_SYNC_APP = MENU_ADD_ACCOUNT + 1;
 
     private static final int REQUEST_SHOW_SYNC_SETTINGS = 1;
 
     private String[] mAuthorities;
     private TextView mErrorInfoView;
-    private MenuItem mSyncAppMenuItem;
 
     private SettingsDialogFragment mDialogFragment;
+    private Switch mAutoSyncSwitch;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -90,6 +93,27 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
         mErrorInfoView = (TextView)view.findViewById(R.id.sync_settings_error_info);
         mErrorInfoView.setVisibility(View.GONE);
+
+        mAutoSyncSwitch = new Switch(activity);
+
+        // TODO Where to put the switch in tablet multipane layout?
+        final int padding = activity.getResources().getDimensionPixelSize(
+                R.dimen.action_bar_switch_padding);
+        mAutoSyncSwitch.setPadding(0, 0, padding, 0);
+        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(mAutoSyncSwitch, new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+        mAutoSyncSwitch.setChecked(ContentResolver.getMasterSyncAutomatically());
+        mAutoSyncSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ContentResolver.setMasterSyncAutomatically(isChecked);
+                onSyncStateUpdated();
+            }
+        });
 
         mAuthorities = activity.getIntent().getStringArrayExtra(AUTHORITIES_FILTER_KEY);
 
@@ -135,9 +159,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         MenuItem addAccountItem = menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label);
         addAccountItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                 | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        mSyncAppMenuItem = menu.add(0, MENU_SYNC_APP, 0, R.string.sync_automatically).
-                setCheckable(true).setChecked(ContentResolver.getMasterSyncAutomatically());
-        mSyncAppMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
     }
 
     @Override
@@ -145,11 +166,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         final int itemId = item.getItemId();
         if (itemId == MENU_ADD_ACCOUNT) {
             onAddAccountClicked();
-            return true;
-        } else if (itemId == MENU_SYNC_APP) {
-            // Use the opposite, the checked state has not yet been changed
-            ContentResolver.setMasterSyncAutomatically(!item.isChecked());
-            onSyncStateUpdated();            
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -161,8 +177,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         // Catch any delayed delivery of update messages
         if (getActivity() == null) return;
         // Set background connection state
-        if (mSyncAppMenuItem != null) {
-            mSyncAppMenuItem.setChecked(ContentResolver.getMasterSyncAutomatically());
+        if (mAutoSyncSwitch != null) {
+            mAutoSyncSwitch.setChecked(ContentResolver.getMasterSyncAutomatically());
         }
 
         // iterate over all the preferences, setting the state properly for each
