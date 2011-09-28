@@ -104,16 +104,18 @@ public class InputMethodPreference extends CheckBoxPreference
         mSummaryText = (TextView)view.findViewById(android.R.id.summary);
         final boolean hasSubtypes = mImi.getSubtypeCount() > 1;
         final String imiId = mImi.getId();
-        mInputMethodPref.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View arg0) {
-                final Bundle bundle = new Bundle();
-                bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
-                startFragment(mFragment, InputMethodAndSubtypeEnabler.class.getName(),
-                        0, bundle);
-                return true;
-            }
-        });
+        if (hasSubtypes) {
+            mInputMethodPref.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View arg0) {
+                    final Bundle bundle = new Bundle();
+                    bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
+                    startFragment(mFragment, InputMethodAndSubtypeEnabler.class.getName(),
+                            0, bundle);
+                    return true;
+                }
+            });
+        }
 
         if (mSettingsIntent != null) {
             mInputMethodSettingsButton.setOnClickListener(
