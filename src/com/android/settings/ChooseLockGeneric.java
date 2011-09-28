@@ -302,6 +302,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
 
             quality = upgradeQuality(quality);
+
+            LockPatternUtils.setLastAttemptWasBiometric(false);
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null);
                 if (minLength < MIN_PASSWORD_LENGTH) {
@@ -330,10 +332,11 @@ public class ChooseLockGeneric extends PreferenceActivity {
                         isFallback);
                 startActivity(intent);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK) {
+                LockPatternUtils.setLastAttemptWasBiometric(true);
                 Intent intent = getBiometricSensorIntent(quality);
                 startActivity(intent);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-                mChooseLockSettingsHelper.utils().clearLock();
+                mChooseLockSettingsHelper.utils().clearLock(false);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
                 getActivity().setResult(Activity.RESULT_OK);
             }
