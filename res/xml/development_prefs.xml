@@ -85,6 +85,11 @@
             android:title="@string/show_cpu_usage"
             android:summary="@string/show_cpu_usage_summary"/>
 
+        <CheckBoxPreference
+            android:key="force_hw_ui"
+            android:title="@string/force_hw_ui"
+            android:summary="@string/force_hw_ui_summary"/>
+
         <ListPreference
             android:key="window_animation_scale"
             android:title="@string/window_animation_scale_title"
