@@ -25,9 +25,12 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -119,6 +122,21 @@ public class ChooseLockGeneric extends PreferenceActivity {
         }
 
         @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View v = super.onCreateView(inflater, container, savedInstanceState);
+            final boolean onlyShowFallback = getActivity().getIntent()
+                    .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
+            if (onlyShowFallback) {
+                View header = v.inflate(getActivity(),
+                        R.layout.weak_biometric_fallback_header, null);
+                ((ListView) v.findViewById(android.R.id.list)).addHeaderView(header, null, false);
+            }
+
+            return v;
+        }
+
+        @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -205,30 +223,18 @@ public class ChooseLockGeneric extends PreferenceActivity {
          * @param quality the requested quality.
          */
         private void disableUnusablePreferences(final int quality) {
-            final Preference picker =
-                    getPreferenceScreen().findPreference("security_picker_category");
-            final PreferenceCategory cat = (PreferenceCategory) picker;
-            final int preferenceCount = cat.getPreferenceCount();
+            final PreferenceScreen entries = getPreferenceScreen();
             final boolean onlyShowFallback = getActivity().getIntent()
                     .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
             final boolean weakBiometricAvailable = isBiometricSensorAvailable(
                     DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK);
-            // TODO: This code can be removed once the second header is gone
-            if (onlyShowFallback) {
-                picker.setTitle(R.string.backup_lock_settings_picker_title);
-            } else {
-                picker.setTitle(R.string.lock_settings_picker_title);
-            }
-            for (int i = preferenceCount-1; i >= 0; --i) {
-                Preference pref = cat.getPreference(i);
+            for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
+                Preference pref = entries.getPreference(i);
                 if (pref instanceof PreferenceScreen) {
                     final String key = ((PreferenceScreen) pref).getKey();
                     boolean enabled = true;
                     boolean visible = true;
-                    if (KEY_UNLOCK_BACKUP_INFO.equals(key)) {
-                        enabled = true;
-                        visible = onlyShowFallback;
-                    } else if (KEY_UNLOCK_SET_OFF.equals(key)) {
+                    if (KEY_UNLOCK_SET_OFF.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
@@ -243,7 +249,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
                     }
                     if (!visible || (onlyShowFallback && !allowedForFallback(key))) {
-                        cat.removePreference(pref);
+                        entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setSummary(R.string.unlock_set_unlock_disabled_summary);
                         pref.setEnabled(false);
