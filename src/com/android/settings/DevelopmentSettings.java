@@ -60,12 +60,14 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
+    private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
 
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
     private static final String SHOW_TOUCHES_KEY = "show_touches";
     private static final String SHOW_SCREEN_UPDATES_KEY = "show_screen_updates";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
+    private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
 
@@ -88,6 +90,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mShowTouches;
     private CheckBoxPreference mShowScreenUpdates;
     private CheckBoxPreference mShowCpuUsage;
+    private CheckBoxPreference mForceHardwareUi;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
 
@@ -121,6 +124,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowTouches = (CheckBoxPreference) findPreference(SHOW_TOUCHES_KEY);
         mShowScreenUpdates = (CheckBoxPreference) findPreference(SHOW_SCREEN_UPDATES_KEY);
         mShowCpuUsage = (CheckBoxPreference) findPreference(SHOW_CPU_USAGE_KEY);
+        mForceHardwareUi = (CheckBoxPreference) findPreference(FORCE_HARDWARE_UI_KEY);
         mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
         mWindowAnimationScale.setOnPreferenceChangeListener(this);
         mTransitionAnimationScale = (ListPreference) findPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -172,6 +176,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateShowTouchesOptions();
         updateFlingerOptions();
         updateCpuUsageOptions();
+        updateHardwareUiOptions();
         updateAnimationScaleOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
@@ -294,11 +299,19 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
+    private void updateHardwareUiOptions() {
+        mForceHardwareUi.setChecked(SystemProperties.getBoolean(HARDWARE_UI_PROPERTY, false));
+    }
+    
+    private void writeHardwareUiOptions() {
+        SystemProperties.set(HARDWARE_UI_PROPERTY, mForceHardwareUi.isChecked() ? "true" : "false");
+    }
+
     private void updateCpuUsageOptions() {
         mShowCpuUsage.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_PROCESSES, 0) != 0);
     }
-
+    
     private void writeCpuUsageOptions() {
         boolean value = mShowCpuUsage.isChecked();
         Settings.System.putInt(getActivity().getContentResolver(),
@@ -441,6 +454,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeImmediatelyDestroyActivitiesOptions();
         } else if (preference == mShowAllANRs) {
             writeShowAllANRsOptions();
+        } else if (preference == mForceHardwareUi) {
+            writeHardwareUiOptions();
         }
 
         return false;
