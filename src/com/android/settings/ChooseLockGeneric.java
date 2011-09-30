@@ -54,6 +54,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
         private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
         private static final int CONFIRM_EXISTING_REQUEST = 100;
+        private static final int FALLBACK_REQUEST = 101;
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String CONFIRM_CREDENTIALS = "confirm_credentials";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
@@ -142,6 +143,10 @@ public class ChooseLockGeneric extends PreferenceActivity {
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 updatePreferencesOrFinish();
+            } else if(requestCode == FALLBACK_REQUEST) {
+                mChooseLockSettingsHelper.utils().deleteTempGallery();
+                getActivity().setResult(resultCode);
+                finish();
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
@@ -309,7 +314,6 @@ public class ChooseLockGeneric extends PreferenceActivity {
 
             quality = upgradeQuality(quality);
 
-            LockPatternUtils.setLastAttemptWasBiometric(false);
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null);
                 if (minLength < MIN_PASSWORD_LENGTH) {
@@ -321,24 +325,35 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 intent.putExtra(ChooseLockPassword.PASSWORD_MIN_KEY, minLength);
                 intent.putExtra(ChooseLockPassword.PASSWORD_MAX_KEY, maxLength);
                 intent.putExtra(CONFIRM_CREDENTIALS, false);
-                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK,
                         isFallback);
-                startActivity(intent);
+                if(isFallback) {
+                    startActivityForResult(intent, FALLBACK_REQUEST);
+                    return;
+                }
+                else {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    startActivity(intent);
+                }
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
                 boolean showTutorial = !mChooseLockSettingsHelper.utils().isPatternEverChosen();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), showTutorial
                         ? ChooseLockPatternTutorial.class
                         : ChooseLockPattern.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 intent.putExtra("key_lock_method", "pattern");
                 intent.putExtra(CONFIRM_CREDENTIALS, false);
                 intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK,
                         isFallback);
-                startActivity(intent);
+                if(isFallback) {
+                    startActivityForResult(intent, FALLBACK_REQUEST);
+                    return;
+                }
+                else {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    startActivity(intent);
+                }
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK) {
-                LockPatternUtils.setLastAttemptWasBiometric(true);
                 Intent intent = getBiometricSensorIntent(quality);
                 startActivity(intent);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
