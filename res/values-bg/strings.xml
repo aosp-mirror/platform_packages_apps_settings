@@ -25,6 +25,12 @@
     <string name="header_category_system" msgid="2073558547468647128">"СИСТЕМНИ"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Включване на радио"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Изключване на радио"</string>
+    <string name="sms_over_ims_on" msgid="5085290395865632925">"Включване на SMS през услугата за незабавни съобщения"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"Изключване на SMS през услугата за незабавни съобщения"</string>
+    <string name="ims_reg_required_on" msgid="3885152087309614653">"Изисква се включване на регистрацията за незабавни съобщения"</string>
+    <string name="ims_reg_required_off" msgid="1720570343422743943">"Изисква се изключване на регистрацията за незабавни съобщения"</string>
+    <string name="lte_ram_dump_on" msgid="8568568019520172177">"Включване на разтоварването на lte ram"</string>
+    <string name="lte_ram_dump_off" msgid="2514507918652378283">"Изключване на разтоварването на lte ram"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Преглед на указателят на SIM картата"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Преглед на фиксирани номера за набиране"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Преглед на номера за набиране на услуги"</string>
@@ -318,34 +324,29 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Шифроването не бе успешно"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="6891198717505120682">"Шифроването бе прекъснато и не може да завърши. В резултат на това вече няма достъп до данните на таблета ви."\n\n"За да възобновите използването му, трябва да възстановите фабричните настройки. След това, когато го настройвате, ще имате възможност да възстановите всички данни, на които е направено резервно копие в профила ви в Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="1341912405353765293">"Шифроването бе прекъснато и не може да завърши. В резултат на това вече няма достъп до данните на телефона ви."\n\n"За да възобновите използването му, трябва да възстановите фабричните настройки. След това, когато го настройвате, ще имате възможност да възстановите всички данни, на които е направено резервно копие в профила ви в Google."</string>
-    <string name="lock_settings_picker_title" msgid="6288468357346846402">"Заключване на екрана"</string>
-    <!-- no translation found for backup_lock_settings_picker_title (8530380598637963916) -->
-    <skip />
+    <string name="lock_settings_picker_title" msgid="3332098786253116023">"Заключване на екрана"</string>
+    <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Резервно заключване"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Заключване на екрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Промяна на заключването"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Промяна или деактивиране на защита с фигура, PIN или парола"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Изберете начин за заключване на екрана"</string>
-    <!-- no translation found for unlock_backup_info_summary (9188771173517519710) -->
-    <skip />
+    <!-- outdated translation 9188771173517519710 -->     <string name="unlock_backup_info_summary" msgid="6837999719911366958">"Как искате да отключвате, когато условията за FaceLock не са идеални?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Няма"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Плъзгане"</string>
-    <!-- outdated translation 2609139908913114644 -->     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Откл. на екрана без парола, фигура или PIN"</string>
-    <!-- no translation found for unlock_set_unlock_biometric_weak_title (6228880437600746409) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_biometric_weak_summary (180083326982058964) -->
-    <skip />
+    <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Без защита"</string>
+    <!-- outdated translation 6228880437600746409 -->     <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"FacePass"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Ниска защита, експериментално"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Фигура"</string>
-    <!-- outdated translation 8467282436608077882 -->     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Изисква се фигура за отключване на екрана"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Средна защита"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 5556722736289132512 -->     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Изисква се цифров PIN за отключване на екрана"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Средна до висока защита"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Парола"</string>
-    <!-- outdated translation 7871968012198279034 -->     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Изисква се парола за отключване на екрана"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Висока защита"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Деакт. от админ., правила за шифроване или хранил. за идент. данни"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Няма"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Плъзгане"</string>
-    <!-- no translation found for unlock_set_unlock_mode_biometric_weak (7010138770486467881) -->
-    <skip />
+    <!-- outdated translation 7010138770486467881 -->     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"FacePass"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Защитено с фигура"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Защитено с PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Защитено с парола"</string>
@@ -475,6 +476,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"За музика и медийни файлове"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомняне на настройки"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="8121928675123450314">"Разрешава на устройства, които са на няколко сантиметра едно от друго, да обменят информация"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_on_summary" msgid="614304206886681503">"Включено"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"Изключено"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Не е налице, защото КБП е изключена"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"Когато тази функция е включена, можете да излъчвате съдържание от приложенията до друго устройство с поддръжка за КБП, като държите устройствата близо едно до друго. Например можете да излъчвате страници от Браузър, видеоклипове от YouTube, контакти от Хора и др."\n\n"Трябва само да поставите устройствата едно до друго (обикновено задните им страни), след което да докоснете екрана си. Приложението определя какво се излъчва."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Включване на Wi-Fi"</string>
     <string name="wifi_settings" msgid="1277428034634973011">"Wi-Fi"</string>
@@ -490,7 +498,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Известие при налична отворена мрежа"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Да се избягват лоши връзки"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="744684490718614436">"Да не се използва Wi-Fi мрежа, освен ако няма добра връзка с интернет"</string>
-    <!-- outdated translation 2256739245628081979 -->     <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"Правила за изключване на Wi-Fi"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="7509112843244540964">"С включен Wi-Fi при спящ режим"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Възникна проблем при промяна на настройката"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Добавяне на мрежа"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi мрежи"</string>
@@ -566,11 +574,9 @@
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Запомняне на тази връзка"</string>
     <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"Търсене"</string>
     <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"Създаване на група"</string>
-    <!-- no translation found for wifi_p2p_menu_remove_group (4844634506540667517) -->
-    <skip />
+    <string name="wifi_p2p_menu_remove_group" msgid="4844634506540667517">"Премахване на група"</string>
     <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"Разширени"</string>
-    <!-- no translation found for wifi_p2p_available_devices (6201627903323497722) -->
-    <skip />
+    <string name="wifi_p2p_available_devices" msgid="6201627903323497722">"Налични устройства"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Преносима точка за достъп през Wi-Fi"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Активна преносима точка за достъп до <xliff:g id="NETWORK_SSID">%1$s</xliff:g>"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Грешка на преносимата точката за достъп до Wi-Fi"</string>
@@ -778,14 +784,10 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP или CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Тип на името на точката за достъп (APN)"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"APN протокол"</string>
-    <!-- no translation found for carrier_enabled (5345015879918180684) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOn (2928646805009033590) -->
-    <skip />
-    <!-- no translation found for carrier_enabled_summaryOff (7064396156584668630) -->
-    <skip />
-    <!-- no translation found for bearer (594270280031923558) -->
-    <skip />
+    <string name="carrier_enabled" msgid="5345015879918180684">"Активиране/деактивиране на името на точката за достъп (APN)"</string>
+    <string name="carrier_enabled_summaryOn" msgid="2928646805009033590">"Името на точката за достъп (APN) е активирано"</string>
+    <string name="carrier_enabled_summaryOff" msgid="7064396156584668630">"Името на точката за достъп (APN) е деактивирано"</string>
+    <string name="bearer" msgid="594270280031923558">"Носител"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Изтриване на името на точката за достъп (APN)"</string>
     <string name="menu_new" msgid="3014205883303921729">"Ново име на точка за достъп (APN)"</string>
     <string name="menu_save" msgid="8109345640668285399">"Запазване"</string>
@@ -862,8 +864,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Помощ"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Мобилни мрежи"</string>
     <string name="location_title" msgid="1029961368397484576">"Моето местоположение"</string>
-    <!-- outdated translation 1093258647152327199 -->     <string name="location_network_based" msgid="5569673665032992664">"Услуга за местопол. на Google"</string>
-    <!-- outdated translation 4260886124154148129 -->     <string name="location_neighborhood_level" msgid="1337612962522836900">"Разрешавам на приложенията да използват Wi-Fi и мобилни мрежи, за да определят прибл. ми местопол."</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Услуга на Google за местопол."</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Приложенията да използват данни от източници като Wi-Fi и мобилни мрежи, за да определят приблизителното ми местоположение"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Местоположението се определя чрез Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Спътници на GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Разрешавам на приложенията да използват GPS, за да посочат местоположението ми"</string>
@@ -1127,6 +1129,8 @@
     <string name="development_settings_summary" msgid="2151320488701538355">"Задаване на опции за програмиране на приложения"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Отстраняване на грешки през USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Режим за отстраняване на грешки, когато е свързано USB"</string>
+    <string name="verifier_device_identifier" msgid="5079997701152411060">"Идент. № на устройството за програмиране"</string>
+    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Няма налична информация за устройството"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Да остане активен"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Екранът никога няма е в спящ режим при зареждане"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Разрешаване на измислени местоположения"</string>
@@ -1154,7 +1158,7 @@
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"Изследване чрез докосване"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Когато изследването чрез докосване е включено, можете да чуете или видите описания на това, какво има под пръста ви."\n\n" Тази функция е за потребители с намалено зрение."</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Докосване и дълго задържане"</string>
-    <string name="accessibility_script_injection_title" msgid="7661286619870144136">"Инстал. на скриптове за достъпност"</string>
+    <string name="accessibility_script_injection_title" msgid="3264723681038625967">"Инсталиране на уеб скриптове"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Настройки"</string>
     <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"Урок"</string>
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Включено"</string>
@@ -1162,31 +1166,24 @@
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Разрешено"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Не е разрешено"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Разрешаване"</string>
-    <string name="accessibility_script_injection_button_disallow" msgid="1846740874310014190">"Без разрешаване"</string>
+    <string name="accessibility_script_injection_button_disallow" msgid="5697152768523270885">"Без разрешаване"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Да се използва ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for accessibility_service_security_warning_summary (8558441850832543571) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning_summary (2869015914319424723) -->
-    <skip />
+    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> може да събира целия въвеждан от вас текст с изключение на паролите. Това включва лични данни, като номера на кредитни карти. Услугата може също така да събира данни за взаимодействията ви с таблета."</string>
+    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> може да събира целия въвеждан от вас текст с изключение на паролите. Това включва лични данни, като номера на кредитни карти. Услугата може също така да събира данни за взаимодействията ви с телефона."</string>
     <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Да се спре ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Докосването на „ОК“ ще спре <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <!-- no translation found for accessibility_no_services_installed (7200948194639038807) -->
-    <skip />
-    <!-- outdated translation 6101087395877319765 -->     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Няма приложения за достъпност"</string>
-    <!-- outdated translation 3019731308902198093 -->     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Нямате инсталирани приложения за достъпност. Искате ли да изтеглите екранен четец от Android Market?"</string>
-    <string name="accessibility_script_injection_security_warning_title" msgid="2487257471447580474">"Да се инсталират ли скриптовете?"</string>
-    <string name="accessibility_script_injection_security_warning_summary" msgid="632046609292311949">"Искате ли приложенията да инсталират скриптове от Google, които ще направят съдържанието им по-достъпно?"</string>
+    <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Няма инсталирани услуги"</string>
+    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Трябва ли ви екранен четец?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack осигурява устна обратна връзка, за да помогне на потребители с увредено и намалено зрение. Искате ли да го инсталирате безплатно от Android Market?"</string>
+    <string name="accessibility_script_injection_security_warning_title" msgid="4158946557435736650">"Да се инсталират ли уеб скриптовете?"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"Искате ли приложенията да инсталират скриптове от Google, които правят съдържанието им в мрежата по-достъпно?"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"Тази функция променя начина, по който устройството ви реагира при допир. Да се включи ли?"</string>
-    <!-- unknown placeholder BREAK_0 in accessibility_service_default_description -->
-    <skip />
-    <!-- no translation found for accessibility_service_default_description (1072730037861494125) -->
-    <skip />
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"Не е предоставено описание."</string>
     <string name="settings_button" msgid="3006713718908152930">"Настройки"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Батерия"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Какво е използвало батерията"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Няма данни за батерията"</string>
-    <!-- no translation found for power_usage_level_and_status (7449847570973811784) -->
-    <skip />
+    <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Употреба на батерията след изключването"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Употреба на батерията след рестартирането"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> на батерия"</string>
@@ -1260,9 +1257,9 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Настройки за въвеждане и синтезиране на глас"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Гласово търсене"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Клавиатура на Android"</string>
-    <string name="voice_category" msgid="4730605956740531248">"Глас"</string>
+    <string name="voice_category" msgid="1430370497125803904">"Говор"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Разпознаване на глас"</string>
-    <string name="recognizer_settings_title" msgid="8967349667879743521">"Гласово въвеждане за търсене"</string>
+    <string name="recognizer_settings_title" msgid="432493301215113154">"Гласово търсене"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Настройки за „<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>“"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Настройки за синтезиран говор"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Синтезиран говор"</string>
@@ -1306,7 +1303,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"Контрол на захранването"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Актуализиране на настройките за Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Актуализиране на настройките за Bluetooth"</string>
-    <!-- outdated translation 7327468307909556719 -->     <string name="vpn_settings_title" msgid="5662579425832406705">"Настройки за VPN"</string>
+    <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Хранилище за идент. данни"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Инсталиране от хранилището"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Инсталиране от SD картата"</string>
@@ -1398,7 +1395,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Приложенията да синхр., пращат и получават данни винаги"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Внимание"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Деактивирането на данните на заден план удължава живота на батерията и намалява употребата на данни. Някои приложения могат пак да ползват връзката за данни на заден план."</string>
-    <!-- outdated translation 7558810110682562376 -->     <string name="sync_automatically" msgid="1682730255435062059">"Автоматично синхронизиране"</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"Данни от приложенията: Авт. синхрон"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Синхр. е ВКЛЮЧЕНО"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхр. е ИЗКЛЮЧЕНО"</string>
     <string name="sync_error" msgid="5060969083117872149">"Грешка при синхр."</string>
@@ -1449,6 +1446,10 @@
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Примигване на участъци от екрана при актуализиране"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Употреба на процесора"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Наслагване на екрана показва употр. на процесора"</string>
+    <!-- no translation found for force_hw_ui (5143430903281111095) -->
+    <skip />
+    <!-- no translation found for force_hw_ui_summary (2684262444912455737) -->
+    <skip />
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Скала на аним.: Прозорец"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Скала на анимация: Преход"</string>
     <string name="debug_applications_category" msgid="6221644998451283813">"Приложения"</string>
@@ -1460,7 +1461,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Използване на данни"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Цикъл: Ползване на данни"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Роуминг на данни"</string>
-    <!-- outdated translation 1989394568592253331 -->     <string name="data_usage_menu_restrict_background" msgid="7434364185289788820">"Огран. на данните на заден план"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Огран. на данните на заден план"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Отделно използване на 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Ползване на Wi-Fi – показване"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Да се покаже употр. на Ethernet"</string>
@@ -1470,10 +1471,10 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"На преден план"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"На заден план"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Да се деактивират ли мобилните данни?"</string>
-    <!-- outdated translation 289740911281022322 -->     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Моб. данни – деактив. при лимит"</string>
-    <!-- outdated translation 5808210773758699800 -->     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G данни – деактив. при лимит"</string>
-    <!-- outdated translation 3856971004328238231 -->     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-3G данни – деактив. при лимит"</string>
-    <!-- outdated translation 316329558509856780 -->     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Wi-Fi данни: Деактив. при лимит"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Лимит на мобилни данни: Задаване"</string>
+    <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Задаване на лимит на 4G данните"</string>
+    <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Лимит на 2G–3G данни: Задаване"</string>
+    <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Лимит на Wi-Fi данни: Задаване"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
     <string name="data_usage_tab_mobile" msgid="454140350007299045">"Мобилни"</string>
@@ -1486,27 +1487,26 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G данни"</string>
     <string name="data_usage_app_settings" msgid="3727561362090820369">"Настройки на прилож. – преглед"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"По-малко данни на заден план"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="3027916596555364396">"Деактивиране на данните на заден план за ограничени мрежи (<xliff:g id="NETWORKS">%1$s</xliff:g>)."</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Деактивиране на данните на заден план само за мобилна мрежа. Ще се използва Wi-Fi, ако е налице."</string>
+    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"За по-малко данни на заден план за прилож. намалете мобилните."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Да се ограничат ли данните на заден план?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"Тази функция може да се отрази негативно на приложенията, които зависят от използването на данни на заден план."\n\n" По-подходящи контроли за използването на данни могат да бъдат намерени в настройките на това приложение."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (3186668789600978826) -->
-    <skip />
+    <string name="data_usage_app_restrict_dialog" msgid="214814080069240868">"Тази функция може да доведе до спиране на работата на приложение, което зависи от данните на заден план, когато Wi-Fi не е налице."\n\n"Може да намерите по-подходящи контроли за използването им в наличните в приложението настройки."</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Ограничаването на данните на заден план е възможно само когато сте задали ограничение на мобилните данни."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Дата на възстановяване на цикъла за използване"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Дата от всеки месец:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Задаване"</string>
-    <!-- no translation found for data_usage_warning_editor_title (3704136912240060339) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_editor_title (9153595142385030015) -->
-    <skip />
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Задаване на предупреждение за ползване на данни"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Задаване на ограничение за ползване на данни"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Ограничаване на използването на данни"</string>
     <string name="data_usage_limit_dialog" msgid="6591454084759870407">"Връзката ви за данни за <xliff:g id="NETWORKS">%1$s</xliff:g> ще бъде деактивирана при достигане на посочения лимит."\n\n"За да избегнете таксуване над месечния си план, обмислете намаляването на лимита си, тъй като начините на изчисляване от устройството и оператора може да са различни."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Да се ограничат ли данните на заден план?"</string>
-    <string name="data_usage_restrict_background" msgid="3799820698075219154">"Ако намалите данните на заден план, някои приложения и услуги няма да работят на ограничените от вас мрежи."\n\n"Ограничени понастоящем мрежи:<xliff:g id="NETWORKS">%1$s</xliff:g>"</string>
+    <string name="data_usage_restrict_background" msgid="3346053126132262185">"Ако ограничите мобилните данни на заден план, някои приложения и услуги ще работят само при Wi-Fi."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"предупреждение"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ограничение"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Премахнати приложения"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> получени, <xliff:g id="SENT">%2$s</xliff:g> изпратени"</string>
-    <string name="data_usage_total_during_range" msgid="8785247922759430201">"<xliff:g id="RANGE">%2$s</xliff:g>: Ползвани –  <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <!-- no translation found for data_usage_total_during_range (441648308264260691) -->
+    <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Спешно обаждане"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Назад към обаждането"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Име"</string>

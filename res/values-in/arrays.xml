@@ -60,10 +60,10 @@
     <item msgid="4322676235684793329">"30 menit"</item>
   </string-array>
   <string-array name="entries_font_size">
-    <!-- outdated translation 2722636506084795405 -->     <item msgid="8166647333858618801">"Amat Sangat Kecil"</item>
-    <!-- outdated translation 383133849547816572 -->     <item msgid="1932071435506638315">"Ekstra Kecil"</item>
-    <!-- outdated translation 6490061470416867723 -->     <item msgid="38373998008112077">"Kecil"</item>
-    <!-- outdated translation 3579015730662088893 -->     <item msgid="8776287284679843760">"Normal"</item>
+    <item msgid="8166647333858618801">"Kecil"</item>
+    <item msgid="1932071435506638315">"Normal"</item>
+    <item msgid="38373998008112077">"Besar"</item>
+    <item msgid="8776287284679843760">"Ekstra Besar"</item>
   </string-array>
   <string-array name="tts_rate_entries">
     <item msgid="6041212618892492920">"Sangat lambat"</item>
@@ -142,12 +142,12 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Selalu"</item>
     <item msgid="844721238536786870">"Hanya ketika terhubung ke sumber daya"</item>
-    <item msgid="2990218920631468642">"Tidak Pernah (meningkatkan penggunaan data)"</item>
+    <item msgid="2990218920631468642">"Tidak pernah (meningkatkan penggunaan data)"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Selalu"</item>
     <item msgid="7433294150916905997">"Hanya saat trhbng ke smbr daya"</item>
-    <item msgid="1390404486722375028">"Tidak Pernah"</item>
+    <item msgid="1390404486722375028">"Tidak pernah"</item>
   </string-array>
   <string-array name="wifi_frequency_band_entries">
     <item msgid="624340809384223320">"Otomatis"</item>
@@ -201,9 +201,11 @@
     <item msgid="4394161344888484571">"IPv6"</item>
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
-    <!-- no translation found for bearer_entries:0 (1770285336669531300) -->
-    <!-- no translation found for bearer_entries:1 (3044323519470167625) -->
-    <!-- no translation found for bearer_entries:2 (6848428671997893147) -->
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"Tidak ditentukan"</item>
+  </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"Penyimpanan perangkat internal"</item>
     <item msgid="3738430123799803530">"Kartu SD yang dapat dicopot"</item>

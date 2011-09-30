@@ -60,10 +60,10 @@
     <item msgid="4322676235684793329">"30 Minuten"</item>
   </string-array>
   <string-array name="entries_font_size">
-    <!-- outdated translation 2722636506084795405 -->     <item msgid="8166647333858618801">"Sehr klein"</item>
-    <!-- outdated translation 383133849547816572 -->     <item msgid="1932071435506638315">"Extraklein"</item>
-    <!-- outdated translation 6490061470416867723 -->     <item msgid="38373998008112077">"Klein"</item>
-    <!-- outdated translation 3579015730662088893 -->     <item msgid="8776287284679843760">"Normal"</item>
+    <item msgid="8166647333858618801">"Klein"</item>
+    <item msgid="1932071435506638315">"Normal"</item>
+    <item msgid="38373998008112077">"Groß"</item>
+    <item msgid="8776287284679843760">"Extragroß"</item>
   </string-array>
   <string-array name="tts_rate_entries">
     <item msgid="6041212618892492920">"Sehr langsam"</item>
@@ -140,14 +140,14 @@
     <item msgid="5702329417707689835">"Ausgezeichnet"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
-    <!-- outdated translation 643915340724070374 -->     <item msgid="3269131034472904310">"Wenn Bildschirm sich abschaltet (mehr Mobildaten werden verwendet)"</item>
-    <!-- outdated translation 1549288661423279207 -->     <item msgid="844721238536786870">"Nie, wenn im Netzbetrieb"</item>
-    <!-- outdated translation 6592896328877671197 -->     <item msgid="2990218920631468642">"Nie (erfordert mehr Akkuleistung)"</item>
+    <item msgid="3269131034472904310">"Immer"</item>
+    <item msgid="844721238536786870">"Nur wenn angeschlossen"</item>
+    <item msgid="2990218920631468642">"Nie (erhöht die Datennutzung)"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
-    <!-- outdated translation 2659922042905569057 -->     <item msgid="2124319326282651391">"Wenn Bildschirm sich abschaltet"</item>
-    <!-- outdated translation 8137861573803398334 -->     <item msgid="7433294150916905997">"Nie, wenn im Netzbetrieb"</item>
-    <!-- outdated translation 5996547094658157629 -->     <item msgid="1390404486722375028">"Nie (erfordert mehr Akkuleistung)"</item>
+    <item msgid="2124319326282651391">"Immer"</item>
+    <item msgid="7433294150916905997">"Nur wenn angeschlossen"</item>
+    <item msgid="1390404486722375028">"Nie"</item>
   </string-array>
   <string-array name="wifi_frequency_band_entries">
     <item msgid="624340809384223320">"Automatisch"</item>
@@ -201,9 +201,11 @@
     <item msgid="4394161344888484571">"IPv6"</item>
     <item msgid="8084938354605535381">"IPv4/IPv6"</item>
   </string-array>
-    <!-- no translation found for bearer_entries:0 (1770285336669531300) -->
-    <!-- no translation found for bearer_entries:1 (3044323519470167625) -->
-    <!-- no translation found for bearer_entries:2 (6848428671997893147) -->
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"Keine Angabe"</item>
+  </string-array>
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"Interner Gerätespeicher"</item>
     <item msgid="3738430123799803530">"Austauschbare SD-Karte"</item>
