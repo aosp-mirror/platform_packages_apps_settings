@@ -731,7 +731,8 @@
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity android:name="ChooseLockGeneric"
-            android:label="@string/lockpassword_choose_lock_generic_header">
+            android:label="@string/lockpassword_choose_lock_generic_header"
+            android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.app.action.SET_NEW_PASSWORD" />
                 <category android:name="android.intent.category.DEFAULT" />
