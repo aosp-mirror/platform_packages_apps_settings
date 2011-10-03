@@ -100,6 +100,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static final int MINIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_DIM + 10;
     private static final int MAXIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_ON;
     private static final int DEFAULT_BACKLIGHT = (int) (android.os.Power.BRIGHTNESS_ON * 0.4f);
+    /** Minimum brightness at which the indicator is shown at half-full and ON */
+    private static final int HALF_BRIGHTNESS_THRESHOLD = (int) (0.3 * MAXIMUM_BACKLIGHT);
+    /** Minimum brightness at which the indicator is shown at full */
+    private static final int FULL_BRIGHTNESS_THRESHOLD = (int) (0.8 * MAXIMUM_BACKLIGHT);
 
     private static final StateTracker sWifiState = new WifiStateTracker();
     private static final StateTracker sBluetoothState = new BluetoothStateTracker();
@@ -580,6 +584,14 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         }
     }
 
+    private static void checkObserver(Context context) {
+        if (sSettingsObserver == null) {
+            sSettingsObserver = new SettingsObserver(new Handler(),
+                    context.getApplicationContext());
+            sSettingsObserver.startObserving();
+        }
+    }
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
             int[] appWidgetIds) {
@@ -598,11 +610,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 new ComponentName("com.android.settings", ".widget.SettingsAppWidgetProvider"),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
-        if (sSettingsObserver == null) {
-            sSettingsObserver = new SettingsObserver(new Handler(),
-                    context.getApplicationContext());
-            sSettingsObserver.startObserving();
-        }
+        checkObserver(context);
     }
 
     @Override
@@ -653,6 +661,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         // Update specific list of appWidgetIds if given, otherwise default to all
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
         gm.updateAppWidget(THIS_APPWIDGET, views);
+        checkObserver(context);
     }
 
     /**
@@ -669,19 +678,30 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
         if (getBrightnessMode(context)) {
             views.setImageViewResource(R.id.img_brightness,
-                                       R.drawable.ic_appwidget_settings_brightness_auto_holo);
+                    R.drawable.ic_appwidget_settings_brightness_auto_holo);
             views.setImageViewResource(R.id.ind_brightness,
-                                       R.drawable.appwidget_settings_ind_on_r_holo);
-        } else if (getBrightness(context)) {
-            views.setImageViewResource(R.id.img_brightness,
-                                       R.drawable.ic_appwidget_settings_brightness_full_holo);
-            views.setImageViewResource(R.id.ind_brightness,
-                                       R.drawable.appwidget_settings_ind_on_r_holo);
+                    R.drawable.appwidget_settings_ind_on_r_holo);
         } else {
-            views.setImageViewResource(R.id.img_brightness,
-                                       R.drawable.ic_appwidget_settings_brightness_off_holo);
-            views.setImageViewResource(R.id.ind_brightness,
-                                       R.drawable.appwidget_settings_ind_off_r_holo);
+            final int brightness = getBrightness(context);
+            // Set the icon
+            if (brightness > FULL_BRIGHTNESS_THRESHOLD) {
+                views.setImageViewResource(R.id.img_brightness,
+                        R.drawable.ic_appwidget_settings_brightness_full_holo);
+            } else if (brightness > HALF_BRIGHTNESS_THRESHOLD) {
+                views.setImageViewResource(R.id.img_brightness,
+                        R.drawable.ic_appwidget_settings_brightness_half_holo);
+            } else {
+                views.setImageViewResource(R.id.img_brightness,
+                        R.drawable.ic_appwidget_settings_brightness_off_holo);
+            }
+            // Set the ON state
+            if (brightness > HALF_BRIGHTNESS_THRESHOLD) {
+                views.setImageViewResource(R.id.ind_brightness,
+                        R.drawable.appwidget_settings_ind_on_r_holo);
+            } else {
+                views.setImageViewResource(R.id.ind_brightness,
+                        R.drawable.appwidget_settings_ind_off_r_holo);
+            }
         }
     }
 
@@ -747,24 +767,23 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * Gets state of brightness.
+     * Gets brightness level.
      *
      * @param context
-     * @return true if more than moderately bright.
+     * @return brightness level between 0 and 255.
      */
-    private static boolean getBrightness(Context context) {
+    private static int getBrightness(Context context) {
         try {
             IPowerManager power = IPowerManager.Stub.asInterface(
                     ServiceManager.getService("power"));
             if (power != null) {
                 int brightness = Settings.System.getInt(context.getContentResolver(),
                         Settings.System.SCREEN_BRIGHTNESS);
-                return brightness > 100;
+                return brightness;
             }
         } catch (Exception e) {
-            Log.d(TAG, "getBrightness: " + e);
         }
-        return false;
+        return 0;
     }
 
     /**
