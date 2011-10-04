@@ -414,6 +414,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         }
         final double averageCostPerByte = getAverageDataCost();
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
+        long appWakelockTime = 0;
+        BatterySipper osApp = null;
         mStatsPeriod = uSecTime;
         SparseArray<? extends Uid> uidStats = mStats.getUidStats();
         final int NU = uidStats.size();
@@ -488,6 +490,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 }
             }
             wakelockTime /= 1000; // convert to millis
+            appWakelockTime += wakelockTime;
 
             // Add cost of holding a wake lock
             power += (wakelockTime
@@ -535,7 +538,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             if (DEBUG) Log.i(TAG, "UID " + u.getUid() + ": power=" + power);
 
             // Add the app to the list if it is consuming power
-            if (power != 0) {
+            if (power != 0 || u.getUid() == 0) {
                 BatterySipper app = new BatterySipper(getActivity(), mRequestQueue, mHandler,
                         packageWithHighestDrain, DrainType.APP, 0, u,
                         new double[] {power});
@@ -553,6 +556,9 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 } else {
                     mUsageList.add(app);
                 }
+                if (u.getUid() == 0) {
+                    osApp = app;
+                }
             }
             if (u.getUid() == Process.WIFI_UID) {
                 mWifiPower += power;
@@ -563,6 +569,25 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 mTotalPower += power;
             }
             if (DEBUG) Log.i(TAG, "Added power = " + power);
+        }
+
+        // The device has probably been awake for longer than the screen on
+        // time and application wake lock time would account for.  Assign
+        // this remainder to the OS, if possible.
+        if (osApp != null) {
+            long wakeTimeMillis = mStats.computeBatteryUptime(
+                    SystemClock.uptimeMillis() * 1000, which) / 1000;
+            wakeTimeMillis -= appWakelockTime - (mStats.getScreenOnTime(
+                    SystemClock.elapsedRealtime(), which) / 1000);
+            if (wakeTimeMillis > 0) {
+                double power = (wakeTimeMillis
+                        * mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_AWAKE)) / 1000;
+                osApp.wakeLockTime += wakeTimeMillis;
+                osApp.value += power;
+                osApp.values[0] += power;
+                if (osApp.value > mMaxPower) mMaxPower = osApp.value;
+                mTotalPower += power;
+            }
         }
     }
 
