@@ -106,7 +106,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 resid = R.xml.security_settings_chooser;
             }
-        } else if (mLockPatternUtils.usingBiometricWeak()) {
+        } else if (mLockPatternUtils.usingBiometricWeak() &&
+                mLockPatternUtils.isBiometricWeakInstalled()) {
             resid = R.xml.security_settings_biometric_weak;
         } else {
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {

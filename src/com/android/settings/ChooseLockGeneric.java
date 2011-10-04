@@ -22,7 +22,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -231,8 +230,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
             final PreferenceScreen entries = getPreferenceScreen();
             final boolean onlyShowFallback = getActivity().getIntent()
                     .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
-            final boolean weakBiometricAvailable = isBiometricSensorAvailable(
-                    DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK);
+            final boolean weakBiometricAvailable =
+                    mChooseLockSettingsHelper.utils().isBiometricWeakInstalled();
             for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
                 Preference pref = entries.getPreference(i);
                 if (pref instanceof PreferenceScreen) {
@@ -273,10 +272,6 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private boolean allowedForFallback(String key) {
             return KEY_UNLOCK_BACKUP_INFO.equals(key)  ||
                     KEY_UNLOCK_SET_PATTERN.equals(key) || KEY_UNLOCK_SET_PIN.equals(key);
-        }
-
-        private boolean isBiometricSensorAvailable(int quality) {
-            return SystemProperties.getBoolean("ro.lockscreen.facelock_enabled", false);
         }
 
         private Intent getBiometricSensorIntent(int quality) {
