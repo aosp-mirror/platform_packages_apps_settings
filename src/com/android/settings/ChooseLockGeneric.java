@@ -325,8 +325,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 if(isFallback) {
                     startActivityForResult(intent, FALLBACK_REQUEST);
                     return;
-                }
-                else {
+                } else {
                     intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     startActivity(intent);
                 }
@@ -343,8 +342,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 if(isFallback) {
                     startActivityForResult(intent, FALLBACK_REQUEST);
                     return;
-                }
-                else {
+                } else {
                     intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     startActivity(intent);
                 }
