@@ -1211,6 +1211,8 @@
                 android:enabled="@bool/has_powercontrol_widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+                <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
