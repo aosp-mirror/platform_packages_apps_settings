@@ -25,8 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
-        android:layout_marginLeft="16dip"
-        android:layout_marginRight="16dip"
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip"
+        android:scrollbarStyle="outsideOverlay"
         android:gravity="top">
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,12 +37,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="16dip">
                 <ImageView android:id="@+id/admin_icon"
                     android:layout_width="@android:dimen/app_icon_size"
                     android:layout_height="@android:dimen/app_icon_size"
-                    android:layout_marginLeft="5dip"
-                    android:layout_marginRight="11dip"
+                    android:layout_marginRight="16dip"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitCenter"/>
                 <TextView android:id="@+id/admin_name"
@@ -101,18 +102,14 @@
     <LinearLayout android:id="@+id/buttonPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="54dip"
         android:orientation="vertical"
         android:divider="?android:attr/dividerHorizontal"
-        android:showDividers="beginning"
-        android:dividerPadding="16dip">
+        android:showDividers="beginning">
         <LinearLayout
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="2dip"
-            android:paddingRight="2dip"
             android:measureWithLargestChild="true">
             <LinearLayout android:id="@+id/leftSpacer"
                 android:layout_weight="0.25"
