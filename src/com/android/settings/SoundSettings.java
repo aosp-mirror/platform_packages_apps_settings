@@ -351,8 +351,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             try {
                 Cursor cursor = context.getContentResolver().query(ringtoneUri,
                         new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
-                if (cursor.moveToFirst()) {
-                    summary = cursor.getString(0);
+                if (cursor != null) {
+                    if (cursor.moveToFirst()) {
+                        summary = cursor.getString(0);
+                    }
+                    cursor.close();
                 }
             } catch (SQLiteException sqle) {
                 // Unknown title for the ringtone
