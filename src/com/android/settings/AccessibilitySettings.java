@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -45,12 +46,15 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.IWindowManager;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -72,6 +76,7 @@ import java.util.Set;
  */
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener {
+    private static final String TAG = "AccessibilitySettings";
 
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
@@ -230,9 +235,17 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void handleToggleAutoRotateScreenPreferenceClick() {
-        Settings.System.putInt(getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION,
-                (mToggleAutoRotateScreenPreference.isChecked() ? 1 : 0));
+        try {
+            IWindowManager wm = IWindowManager.Stub.asInterface(
+                    ServiceManager.getService(Context.WINDOW_SERVICE));
+            if (mToggleAutoRotateScreenPreference.isChecked()) {
+                wm.thawRotation();
+            } else {
+                wm.freezeRotation(Surface.ROTATION_0);
+            }
+        } catch (RemoteException exc) {
+            Log.w(TAG, "Unable to save auto-rotate setting");
+        }
     }
 
     private void initializeAllPreferences() {
