@@ -33,6 +33,7 @@ import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.speech.RecognitionService;
+import android.speech.tts.TtsEngines;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
@@ -54,43 +55,65 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
     private static final String KEY_VOICE_CATEGORY = "voice_category";
     private static final String KEY_RECOGNIZER = "recognizer";
     private static final String KEY_RECOGNIZER_SETTINGS = "recognizer_settings";
-    
+    private static final String KEY_TTS_SETTINGS = "tts_settings";
+
     private PreferenceGroup mParent;
     private PreferenceCategory mVoiceCategory;
     private ListPreference mRecognizerPref;
+    private Preference mRecognizerSettingsPref;
+    private Preference mTtsSettingsPref;
     private PreferenceScreen mSettingsPref;
-    private SettingsPreferenceFragment mFragment;
+    private final SettingsPreferenceFragment mFragment;
+    private final TtsEngines mTtsEngines;
 
     private HashMap<String, ResolveInfo> mAvailableRecognizersMap;
 
     public VoiceInputOutputSettings(SettingsPreferenceFragment fragment) {
         mFragment = fragment;
+        mTtsEngines = new TtsEngines(fragment.getPreferenceScreen().getContext());
     }
 
     public void onCreate() {
 
-        mParent = (PreferenceGroup) mFragment.getPreferenceScreen();
+        mParent = mFragment.getPreferenceScreen();
         mVoiceCategory = (PreferenceCategory) mParent.findPreference(KEY_VOICE_CATEGORY);
         mRecognizerPref = (ListPreference) mVoiceCategory.findPreference(KEY_RECOGNIZER);
+        mRecognizerSettingsPref = mVoiceCategory.findPreference(KEY_RECOGNIZER_SETTINGS);
+        mTtsSettingsPref = mVoiceCategory.findPreference(KEY_TTS_SETTINGS);
         mRecognizerPref.setOnPreferenceChangeListener(this);
         mSettingsPref = (PreferenceScreen)
                 mVoiceCategory.findPreference(KEY_RECOGNIZER_SETTINGS);
 
         mAvailableRecognizersMap = new HashMap<String, ResolveInfo>();
 
-        populateOrRemoveRecognizerPreference();
+        populateOrRemovePreferences();
     }
 
-    private void populateOrRemoveRecognizerPreference() {
+    private void populateOrRemovePreferences() {
+        boolean hasRecognizerPrefs = populateOrRemoveRecognizerPrefs();
+        boolean hasTtsPrefs = populateOrRemoveTtsPrefs();
+        if (!hasRecognizerPrefs && !hasTtsPrefs) {
+            // There were no TTS settings and no recognizer settings,
+            // so it should be safe to hide the preference category
+            // entirely.
+            mFragment.getPreferenceScreen().removePreference(mVoiceCategory);
+        }
+    }
+
+    private boolean populateOrRemoveRecognizerPrefs() {
         List<ResolveInfo> availableRecognitionServices =
                 mFragment.getPackageManager().queryIntentServices(
-                new Intent(RecognitionService.SERVICE_INTERFACE), PackageManager.GET_META_DATA);
+                        new Intent(RecognitionService.SERVICE_INTERFACE),
+                        PackageManager.GET_META_DATA);
         int numAvailable = availableRecognitionServices.size();
-        
+
         if (numAvailable == 0) {
-            // No recognizer available - remove all related preferences.
-            mFragment.getPreferenceScreen().removePreference(mVoiceCategory);
-        } else if (numAvailable == 1) {
+            mVoiceCategory.removePreference(mRecognizerPref);
+            mVoiceCategory.removePreference(mRecognizerSettingsPref);
+            return false;
+        }
+
+        if (numAvailable == 1) {
             // Only one recognizer available, so don't show the list of choices, but do
             // set up the link to settings for the available recognizer.
             mVoiceCategory.removePreference(mRecognizerPref);
@@ -98,11 +121,11 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
             // But first set up the available recognizers map with just the one recognizer.
             ResolveInfo resolveInfo = availableRecognitionServices.get(0);
             String recognizerComponent =
-                    new ComponentName(resolveInfo.serviceInfo.packageName,
-                            resolveInfo.serviceInfo.name).flattenToShortString();
-            
+                new ComponentName(resolveInfo.serviceInfo.packageName,
+                        resolveInfo.serviceInfo.name).flattenToShortString();
+
             mAvailableRecognizersMap.put(recognizerComponent, resolveInfo);
-            
+
             String currentSetting = Settings.Secure.getString(
                     mFragment.getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
             updateSettingsLink(currentSetting);
@@ -110,6 +133,19 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
             // Multiple recognizers available, so show the full list of choices.
             populateRecognizerPreference(availableRecognitionServices);
         }
+
+        // In this case, there was at least one available recognizer so
+        // we populated the settings.
+        return true;
+    }
+
+    private boolean populateOrRemoveTtsPrefs() {
+        if (mTtsEngines.getEngines().isEmpty()) {
+            mVoiceCategory.removePreference(mTtsSettingsPref);
+            return false;
+        }
+
+        return true;
     }
 
     private void populateRecognizerPreference(List<ResolveInfo> recognizers) {
