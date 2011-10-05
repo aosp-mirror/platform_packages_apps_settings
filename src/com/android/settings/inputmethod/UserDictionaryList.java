@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 
 import android.app.Activity;
