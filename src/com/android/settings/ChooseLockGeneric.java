@@ -282,8 +282,11 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     R.string.backup_lock_settings_picker_title);
             fallBackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            Intent intent = new Intent().setClassName("com.android.facelock",
-                    "com.android.facelock.SetupFaceLock");
+            boolean showTutorial = !mChooseLockSettingsHelper.utils().isBiometricWeakEverChosen();
+            Intent intent = new Intent();
+            intent.setClassName("com.android.facelock", showTutorial
+                        ? "com.android.facelock.FaceLockTutorial"
+                        : "com.android.facelock.SetupFaceLock"); 
             PendingIntent pending = PendingIntent.getActivity(getActivity(), 0, fallBackIntent, 0);
             intent.putExtra("PendingIntent", pending);
             return intent;
