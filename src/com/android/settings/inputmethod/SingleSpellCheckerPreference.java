@@ -44,6 +44,7 @@ public class SingleSpellCheckerPreference extends Preference {
     private final SpellCheckersSettings mFragment;
     private final Resources mRes;
     private final TextServicesManager mTsm;
+    private AlertDialog mDialog = null;
     private TextView mTitleText;
     private TextView mSummaryText;
     private View mPrefAll;
@@ -127,6 +128,9 @@ public class SingleSpellCheckerPreference extends Preference {
     }
 
     private void onSubtypeButtonClicked(View arg0) {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
         builder.setTitle(R.string.phone_language);
         final int size = mSpellCheckerInfo.getSubtypeCount();
@@ -167,7 +171,8 @@ public class SingleSpellCheckerPreference extends Preference {
                 dialog.dismiss();
             }
         });
-        builder.show();
+        mDialog = builder.create();
+        mDialog.show();
     }
 
     private void onSettingsButtonClicked(View arg0) {
