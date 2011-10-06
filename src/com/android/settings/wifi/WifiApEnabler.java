@@ -33,14 +33,13 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.preference.Preference;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
+public class WifiApEnabler {
     private final Context mContext;
     private final CheckBoxPreference mCheckBox;
     private final CharSequence mOriginalSummary;
@@ -92,12 +91,10 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
     public void resume() {
         mContext.registerReceiver(mReceiver, mIntentFilter);
         enableWifiCheckBox();
-        mCheckBox.setOnPreferenceChangeListener(this);
     }
 
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
-        mCheckBox.setOnPreferenceChangeListener(null);
     }
 
     private void enableWifiCheckBox() {
@@ -111,11 +108,8 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         }
     }
 
-    public boolean onPreferenceChange(Preference preference, Object value) {
-
+    public void setSoftapEnabled(boolean enable) {
         final ContentResolver cr = mContext.getContentResolver();
-        boolean enable = (Boolean)value;
-
         /**
          * Disable Wifi if enabling tethering
          */
@@ -148,8 +142,6 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
                 Settings.Secure.putInt(cr, Settings.Secure.WIFI_SAVED_STATE, 0);
             }
         }
-
-        return false;
     }
 
     public void updateConfigSummary(WifiConfiguration wifiConfig) {

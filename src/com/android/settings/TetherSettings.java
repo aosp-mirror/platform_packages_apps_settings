@@ -40,6 +40,7 @@ import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebView;
@@ -52,7 +53,7 @@ import java.util.Locale;
  * Displays preferences for Tethering.
  */
 public class TetherSettings extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener {
+        implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener {
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
@@ -70,6 +71,8 @@ public class TetherSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mUsbTether;
 
     private WifiApEnabler mWifiApEnabler;
+    private CheckBoxPreference mEnableWifiAp;
+    private static final int MHS_REQUEST = 0;
 
     private CheckBoxPreference mBluetoothTether;
 
@@ -89,7 +92,6 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     private String[] mSecurityType;
     private Preference mCreateNetwork;
-    private CheckBoxPreference mEnableWifiAp;
 
     private WifiApDialog mDialog;
     private WifiManager mWifiManager;
@@ -112,7 +114,7 @@ public class TetherSettings extends SettingsPreferenceFragment
                     BluetoothProfile.PAN);
         }
 
-        CheckBoxPreference enableWifiAp =
+        mEnableWifiAp =
                 (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
         Preference wifiApSettings = findPreference(WIFI_AP_SSID_AND_SECURITY);
         mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
@@ -135,10 +137,10 @@ public class TetherSettings extends SettingsPreferenceFragment
         }
 
         if (wifiAvailable) {
-            mWifiApEnabler = new WifiApEnabler(activity, enableWifiAp);
+            mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
             initWifiTethering();
         } else {
-            getPreferenceScreen().removePreference(enableWifiAp);
+            getPreferenceScreen().removePreference(mEnableWifiAp);
             getPreferenceScreen().removePreference(wifiApSettings);
         }
 
@@ -162,7 +164,6 @@ public class TetherSettings extends SettingsPreferenceFragment
         mSecurityType = getResources().getStringArray(R.array.wifi_ap_security);
 
         mCreateNetwork = findPreference(WIFI_AP_SSID_AND_SECURITY);
-        mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
 
         if (mWifiConfig == null) {
             final String s = activity.getString(
@@ -315,6 +316,7 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         if (intent != null) mTetherChangeReceiver.onReceive(activity, intent);
         if (mWifiApEnabler != null) {
+            mEnableWifiAp.setOnPreferenceChangeListener(this);
             mWifiApEnabler.resume();
         }
 
@@ -327,6 +329,7 @@ public class TetherSettings extends SettingsPreferenceFragment
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTetherChangeReceiver = null;
         if (mWifiApEnabler != null) {
+            mEnableWifiAp.setOnPreferenceChangeListener(null);
             mWifiApEnabler.pause();
         }
     }
@@ -444,6 +447,35 @@ public class TetherSettings extends SettingsPreferenceFragment
             mBluetoothTether.setEnabled(true);
             mBluetoothTether.setChecked(false);
             mBluetoothTether.setSummary(R.string.bluetooth_tethering_off_subtext);
+        }
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object value) {
+        boolean enable = (Boolean) value;
+
+        if (enable) {
+            //Check if provisioning is needed
+            String intentStr = getActivity().getString(
+                    com.android.internal.R.string.config_mobile_hotspot_provision_intent);
+
+            if (TextUtils.isEmpty(intentStr)) {
+                mWifiApEnabler.setSoftapEnabled(true);
+            } else {
+                Intent intent = new Intent(intentStr);
+                startActivityForResult(intent, MHS_REQUEST);
+            }
+        } else {
+            mWifiApEnabler.setSoftapEnabled(false);
+        }
+        return false;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == MHS_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                mWifiApEnabler.setSoftapEnabled(true);
+            }
         }
     }
 
