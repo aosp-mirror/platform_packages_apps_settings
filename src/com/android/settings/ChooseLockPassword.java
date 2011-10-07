@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceActivity;
 import android.text.Editable;
 import android.text.InputType;
@@ -43,7 +44,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-
 
 public class ChooseLockPassword extends PreferenceActivity {
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
@@ -98,10 +98,19 @@ public class ChooseLockPassword extends PreferenceActivity {
         private boolean mIsAlphaMode;
         private Button mCancelButton;
         private Button mNextButton;
-        private static Handler mHandler = new Handler();
         private static final int CONFIRM_EXISTING_REQUEST = 58;
         static final int RESULT_FINISHED = RESULT_FIRST_USER;
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
+        private static final int MSG_SHOW_ERROR = 1;
+
+        private Handler mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == MSG_SHOW_ERROR) {
+                    updateStage((Stage) msg.obj);
+                }
+            }
+        };
 
         /**
          * Keep track internally of where the user is in choosing a pattern.
@@ -232,6 +241,13 @@ public class ChooseLockPassword extends PreferenceActivity {
             super.onResume();
             updateStage(mUiStage);
             mKeyboardView.requestFocus();
+        }
+
+        @Override
+        public void onPause() {
+            mHandler.removeMessages(MSG_SHOW_ERROR);
+
+            super.onPause();
         }
 
         @Override
@@ -399,11 +415,9 @@ public class ChooseLockPassword extends PreferenceActivity {
 
         private void showError(String msg, final Stage next) {
             mHeaderText.setText(msg);
-            mHandler.postDelayed(new Runnable() {
-                public void run() {
-                    updateStage(next);
-                }
-            }, ERROR_MESSAGE_TIMEOUT);
+            Message mesg = mHandler.obtainMessage(MSG_SHOW_ERROR, next);
+            mHandler.removeMessages(MSG_SHOW_ERROR);
+            mHandler.sendMessageDelayed(mesg, ERROR_MESSAGE_TIMEOUT);
         }
 
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
