@@ -202,8 +202,6 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         switch (sipper.drainType) {
             case APP:
             {
-                // TODO: surface tcpBytesSent/tcpBytesReceived again once
-                // measured separately from uid_stats.
                 Uid uid = sipper.uidObj;
                 types = new int[] {
                     R.string.usage_type_cpu,
@@ -211,6 +209,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     R.string.usage_type_wake_lock,
                     R.string.usage_type_gps,
                     R.string.usage_type_wifi_running,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_recv,
                     R.string.usage_type_audio,
                     R.string.usage_type_video,
                 };
@@ -220,6 +220,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     sipper.wakeLockTime,
                     sipper.gpsTime,
                     sipper.wifiRunningTime,
+                    sipper.tcpBytesSent,
+                    sipper.tcpBytesReceived,
                     0,
                     0
                 };
