@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -511,6 +512,8 @@ public class ChooseLockPattern extends PreferenceActivity {
                 .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
             utils.saveLockPattern(mChosenPattern, isFallback);
             utils.setLockPatternEnabled(true);
+
+            Toast.makeText(getActivity(), R.string.lock_setup, Toast.LENGTH_SHORT).show();
 
             if (lockVirgin) {
                 utils.setVisiblePatternEnabled(true);
