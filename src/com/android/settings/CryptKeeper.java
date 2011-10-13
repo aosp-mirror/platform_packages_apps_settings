@@ -231,7 +231,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 | StatusBarManager.DISABLE_NOTIFICATION_ICONS
                 | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
                 | StatusBarManager.DISABLE_SYSTEM_INFO
-                | StatusBarManager.DISABLE_NAVIGATION
+                | StatusBarManager.DISABLE_HOME
+                | StatusBarManager.DISABLE_RECENT
                 | StatusBarManager.DISABLE_BACK);
 
         // Check for (and recover) retained instance data
