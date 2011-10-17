@@ -33,13 +33,15 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.provider.Telephony;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.internal.telephony.TelephonyProperties;
+import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.RILConstants;
+import com.android.internal.telephony.TelephonyProperties;
 
 
 public class ApnEditor extends PreferenceActivity
@@ -51,6 +53,7 @@ public class ApnEditor extends PreferenceActivity
     private final static String SAVED_POS = "pos";
     private final static String KEY_AUTH_TYPE = "auth_type";
     private final static String KEY_PROTOCOL = "apn_protocol";
+    private final static String KEY_ROAMING_PROTOCOL = "apn_roaming_protocol";
     private final static String KEY_CARRIER_ENABLED = "carrier_enabled";
     private final static String KEY_BEARER = "bearer";
 
@@ -75,6 +78,7 @@ public class ApnEditor extends PreferenceActivity
     private ListPreference mAuthType;
     private EditTextPreference mApnType;
     private ListPreference mProtocol;
+    private ListPreference mRoamingProtocol;
     private CheckBoxPreference mCarrierEnabled;
     private ListPreference mBearer;
 
@@ -110,6 +114,7 @@ public class ApnEditor extends PreferenceActivity
             Telephony.Carriers.PROTOCOL, // 16
             Telephony.Carriers.CARRIER_ENABLED, // 17
             Telephony.Carriers.BEARER, // 18
+            Telephony.Carriers.ROAMING_PROTOCOL // 19
     };
 
     private static final int ID_INDEX = 0;
@@ -130,6 +135,7 @@ public class ApnEditor extends PreferenceActivity
     private static final int PROTOCOL_INDEX = 16;
     private static final int CARRIER_ENABLED_INDEX = 17;
     private static final int BEARER_INDEX = 18;
+    private static final int ROAMING_PROTOCOL_INDEX = 19;
 
 
     @Override
@@ -158,6 +164,17 @@ public class ApnEditor extends PreferenceActivity
 
         mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
         mProtocol.setOnPreferenceChangeListener(this);
+
+        mRoamingProtocol = (ListPreference) findPreference(KEY_ROAMING_PROTOCOL);
+        // Only enable this on CDMA phones for now, since it may cause problems on other phone
+        // types.  (This screen is not normally accessible on CDMA phones, but is useful for
+        // testing.)
+        TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        if (tm.getCurrentPhoneType() == Phone.PHONE_TYPE_CDMA) {
+            mRoamingProtocol.setOnPreferenceChangeListener(this);
+        } else {
+            getPreferenceScreen().removePreference(mRoamingProtocol);
+        }
 
         mCarrierEnabled = (CheckBoxPreference) findPreference(KEY_CARRIER_ENABLED);
 
@@ -261,6 +278,7 @@ public class ApnEditor extends PreferenceActivity
             }
 
             mProtocol.setValue(mCursor.getString(PROTOCOL_INDEX));
+            mRoamingProtocol.setValue(mCursor.getString(ROAMING_PROTOCOL_INDEX));
             mCarrierEnabled.setChecked(mCursor.getInt(CARRIER_ENABLED_INDEX)==1);
             mBearer.setValue(mCursor.getString(BEARER_INDEX));
         }
@@ -291,7 +309,9 @@ public class ApnEditor extends PreferenceActivity
         }
 
         mProtocol.setSummary(
-                checkNull(protocolDescription(mProtocol.getValue())));
+                checkNull(protocolDescription(mProtocol.getValue(), mProtocol)));
+        mRoamingProtocol.setSummary(
+                checkNull(protocolDescription(mRoamingProtocol.getValue(), mRoamingProtocol)));
         mBearer.setSummary(
                 checkNull(bearerDescription(mBearer.getValue())));
     }
@@ -301,8 +321,8 @@ public class ApnEditor extends PreferenceActivity
      * raw value of the protocol preference (e.g., "IPV4V6"). If unknown,
      * return null.
      */
-    private String protocolDescription(String raw) {
-        int protocolIndex = mProtocol.findIndexOfValue(raw);
+    private String protocolDescription(String raw, ListPreference protocol) {
+        int protocolIndex = protocol.findIndexOfValue(raw);
         if (protocolIndex == -1) {
             return null;
         } else {
@@ -341,19 +361,21 @@ public class ApnEditor extends PreferenceActivity
             } catch (NumberFormatException e) {
                 return false;
             }
-            return true;
-        }
-
-        if (KEY_PROTOCOL.equals(key)) {
-            String protocol = protocolDescription((String) newValue);
+        } else if (KEY_PROTOCOL.equals(key)) {
+            String protocol = protocolDescription((String) newValue, mProtocol);
             if (protocol == null) {
                 return false;
             }
             mProtocol.setSummary(protocol);
             mProtocol.setValue((String) newValue);
-        }
-
-        if (KEY_BEARER.equals(key)) {
+        } else if (KEY_ROAMING_PROTOCOL.equals(key)) {
+            String protocol = protocolDescription((String) newValue, mRoamingProtocol);
+            if (protocol == null) {
+                return false;
+            }
+            mRoamingProtocol.setSummary(protocol);
+            mRoamingProtocol.setValue((String) newValue);
+        } else if (KEY_BEARER.equals(key)) {
             String bearer = bearerDescription((String) newValue);
             if (bearer == null) {
                 return false;
@@ -473,11 +495,7 @@ public class ApnEditor extends PreferenceActivity
         }
 
         values.put(Telephony.Carriers.PROTOCOL, checkNotSet(mProtocol.getValue()));
-
-        // Hardcode IPv4 roaming for now until the carriers sort out all the
-        // billing arrangements.
-        values.put(Telephony.Carriers.ROAMING_PROTOCOL,
-                RILConstants.SETUP_DATA_PROTOCOL_IP);
+        values.put(Telephony.Carriers.ROAMING_PROTOCOL, checkNotSet(mRoamingProtocol.getValue()));
 
         values.put(Telephony.Carriers.TYPE, checkNotSet(mApnType.getText()));
 
