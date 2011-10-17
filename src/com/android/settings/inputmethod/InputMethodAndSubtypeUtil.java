@@ -317,9 +317,9 @@ public class InputMethodAndSubtypeUtil {
                     }
                 }
                 setSubtypesPreferenceEnabled(context, inputMethodInfos, imiId, isEnabled);
-                updateSubtypesPreferenceChecked(context, inputMethodInfos, enabledSubtypes);
             }
         }
+        updateSubtypesPreferenceChecked(context, inputMethodInfos, enabledSubtypes);
     }
 
     public static void setSubtypesPreferenceEnabled(SettingsPreferenceFragment context,
@@ -346,7 +346,8 @@ public class InputMethodAndSubtypeUtil {
         PreferenceScreen preferenceScreen = context.getPreferenceScreen();
         for (InputMethodInfo imi : inputMethodProperties) {
             String id = imi.getId();
-            HashSet<String> enabledSubtypesSet = enabledSubtypes.get(id);
+            if (!enabledSubtypes.containsKey(id)) break;
+            final HashSet<String> enabledSubtypesSet = enabledSubtypes.get(id);
             final int subtypeCount = imi.getSubtypeCount();
             for (int i = 0; i < subtypeCount; ++i) {
                 InputMethodSubtype subtype = imi.getSubtypeAt(i);
