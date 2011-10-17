@@ -226,6 +226,7 @@ public class InputMethodPreference extends CheckBoxPreference
     public void setChecked(boolean checked) {
         super.setChecked(checked);
         saveImeSettings();
+        updateSummary();
     }
 
     private void showSecurityWarnDialog(InputMethodInfo imi, final CheckBoxPreference chkPref) {
