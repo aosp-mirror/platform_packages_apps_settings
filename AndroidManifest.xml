@@ -1155,6 +1155,7 @@
         <activity android:name=".CryptKeeper"
                   android:immersive="true"
                   android:launchMode="singleTop"
+                  android:excludeFromRecents="true"
                   android:theme="@android:style/Theme.Holo.NoActionBar"
                   android:configChanges="mcc|mnc|keyboard|keyboardHidden|uiMode"
                   android:windowSoftInputMode="stateVisible|adjustResize">

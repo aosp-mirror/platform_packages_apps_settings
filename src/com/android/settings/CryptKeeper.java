@@ -221,7 +221,20 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // Disable the crypt keeper.
             PackageManager pm = getPackageManager();
             ComponentName name = new ComponentName(this, CryptKeeper.class);
-            pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
+            pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+            // Typically CryptKeeper is launched as the home app.  We didn't
+            // want to be running, so need to finish this activity and re-launch
+            // its intent now that we are not in the way of doing what is really
+            // supposed to happen.
+            // NOTE: This is really grungy.  I think it would be better for the
+            // activity manager to explicitly launch the crypt keeper instead of
+            // home in the situation where we need to decrypt the device
+            finish();
+            Intent intent = getIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setComponent(null);
+            startActivity(intent);
             return;
         }
 
