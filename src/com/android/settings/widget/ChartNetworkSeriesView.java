@@ -181,10 +181,13 @@ public class ChartNetworkSeriesView extends View {
         final int height = getHeight();
 
         boolean started = false;
-        float firstX = 0;
         float lastX = 0;
-        float lastY = 0;
-        long lastTime = Long.MIN_VALUE;
+        float lastY = height;
+        long lastTime = mHoriz.convertToValue(lastX);
+
+        // move into starting position
+        mPathStroke.moveTo(lastX, lastY);
+        mPathFill.moveTo(lastX, lastY);
 
         // TODO: count fractional data from first bucket crossing start;
         // currently it only accepts first full bucket.
@@ -198,36 +201,42 @@ public class ChartNetworkSeriesView extends View {
         for (int i = start; i <= end; i++) {
             entry = mStats.getValues(i, entry);
 
-            lastTime = entry.bucketStart + entry.bucketDuration;
-            final float x = mHoriz.convertToPoint(lastTime);
-            final float y = mVert.convertToPoint(totalData);
+            final long startTime = entry.bucketStart;
+            final long endTime = startTime + entry.bucketDuration;
+
+            final float startX = mHoriz.convertToPoint(startTime);
+            final float endX = mHoriz.convertToPoint(endTime);
 
             // skip until we find first stats on screen
-            if (i > 0 && !started && x > 0) {
-                mPathStroke.moveTo(lastX, lastY);
-                mPathFill.moveTo(lastX, lastY);
-                started = true;
-                firstX = x;
+            if (endX < 0) continue;
+
+            // increment by current bucket total
+            totalData += entry.rxBytes + entry.txBytes;
+
+            final float startY = lastY;
+            final float endY = mVert.convertToPoint(totalData);
+
+            if (lastTime != startTime) {
+                // gap in buckets; line to start of current bucket
+                mPathStroke.lineTo(startX, startY);
+                mPathFill.lineTo(startX, startY);
             }
 
-            if (started) {
-                mPathStroke.lineTo(x, y);
-                mPathFill.lineTo(x, y);
-                totalData += entry.rxBytes + entry.txBytes;
-            }
+            // always draw to end of current bucket
+            mPathStroke.lineTo(endX, endY);
+            mPathFill.lineTo(endX, endY);
 
-            lastX = x;
-            lastY = y;
+            lastX = endX;
+            lastY = endY;
+            lastTime = endTime;
         }
 
         // when data falls short, extend to requested end time
         if (lastTime < mEndTime) {
             lastX = mHoriz.convertToPoint(mEndTime);
 
-            if (started) {
-                mPathStroke.lineTo(lastX, lastY);
-                mPathFill.lineTo(lastX, lastY);
-            }
+            mPathStroke.lineTo(lastX, lastY);
+            mPathFill.lineTo(lastX, lastY);
         }
 
         if (LOGD) {
@@ -239,7 +248,7 @@ public class ChartNetworkSeriesView extends View {
 
         // drop to bottom of graph from current location
         mPathFill.lineTo(lastX, height);
-        mPathFill.lineTo(firstX, height);
+        mPathFill.lineTo(0, height);
 
         mMax = totalData;
 
