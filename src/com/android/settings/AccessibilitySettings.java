@@ -807,11 +807,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 case DialogInterface.BUTTON_POSITIVE:
                     checked = (mShownDialogId == DIALOG_ID_ENABLE_WARNING);
                     mToggleSwitch.setCheckedInternal(checked);
+                    getArguments().putBoolean(EXTRA_CHECKED, checked);
                     onPreferenceToggled(mPreferenceKey, checked);
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     checked = (mShownDialogId == DIALOG_ID_DISABLE_WARNING);
                     mToggleSwitch.setCheckedInternal(checked);
+                    getArguments().putBoolean(EXTRA_CHECKED, checked);
                     onPreferenceToggled(mPreferenceKey, checked);
                     break;
                 default:
@@ -827,6 +829,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     if (checked) {
                         if (!TextUtils.isEmpty(mEnableWarningMessage)) {
                             toggleSwitch.setCheckedInternal(false);
+                            getArguments().putBoolean(EXTRA_CHECKED, false);
                             showDialog(DIALOG_ID_ENABLE_WARNING);
                             return true;
                         }
@@ -834,6 +837,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     } else {
                         if (!TextUtils.isEmpty(mDisableWarningMessage)) {
                             toggleSwitch.setCheckedInternal(true);
+                            getArguments().putBoolean(EXTRA_CHECKED, true);
                             showDialog(DIALOG_ID_DISABLE_WARNING);
                             return true;
                         }
