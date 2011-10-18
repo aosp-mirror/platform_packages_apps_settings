@@ -58,6 +58,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private static final String CONFIRM_CREDENTIALS = "confirm_credentials";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
 
+        private static final boolean ALWAY_SHOW_TUTORIAL = true;
+
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
         private KeyStore mKeyStore;
@@ -282,11 +284,12 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     R.string.backup_lock_settings_picker_title);
             fallBackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            boolean showTutorial = !mChooseLockSettingsHelper.utils().isBiometricWeakEverChosen();
+            boolean showTutorial = ALWAY_SHOW_TUTORIAL ||
+                    !mChooseLockSettingsHelper.utils().isBiometricWeakEverChosen();
             Intent intent = new Intent();
             intent.setClassName("com.android.facelock", showTutorial
                         ? "com.android.facelock.FaceLockTutorial"
-                        : "com.android.facelock.SetupFaceLock"); 
+                        : "com.android.facelock.SetupFaceLock");
             PendingIntent pending = PendingIntent.getActivity(getActivity(), 0, fallBackIntent, 0);
             intent.putExtra("PendingIntent", pending);
             return intent;
