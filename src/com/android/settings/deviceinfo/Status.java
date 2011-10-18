@@ -78,7 +78,7 @@ public class Status extends PreferenceActivity {
     private static final String KEY_SIGNAL_STRENGTH = "signal_strength";
     private static final String KEY_BATTERY_STATUS = "battery_status";
     private static final String KEY_BATTERY_LEVEL = "battery_level";
-    private static final String KEY_WIFI_IP_ADDRESS = "wifi_ip_address";
+    private static final String KEY_IP_ADDRESS = "wifi_ip_address";
     private static final String KEY_WIFI_MAC_ADDRESS = "wifi_mac_address";
     private static final String KEY_BT_ADDRESS = "bt_address";
     private static final String KEY_SERIAL_NUMBER = "serial_number";
@@ -250,6 +250,7 @@ public class Status extends PreferenceActivity {
 
         setWifiStatus();
         setBtStatus();
+        setIpAddressStatus();
 
         String serial = Build.SERIAL;
         if (serial != null && !serial.equals("")) {
@@ -413,16 +414,19 @@ public class Status extends PreferenceActivity {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         Preference wifiMacAddressPref = findPreference(KEY_WIFI_MAC_ADDRESS);
+
         String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
         wifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress
                 : getString(R.string.status_unavailable));
+    }
 
-        Preference wifiIpAddressPref = findPreference(KEY_WIFI_IP_ADDRESS);
-        String ipAddress = Utils.getWifiIpAddresses(this);
+    private void setIpAddressStatus() {
+        Preference ipAddressPref = findPreference(KEY_IP_ADDRESS);
+        String ipAddress = Utils.getDefaultIpAddresses(this);
         if (ipAddress != null) {
-            wifiIpAddressPref.setSummary(ipAddress);
+            ipAddressPref.setSummary(ipAddress);
         } else {
-            wifiIpAddressPref.setSummary(getString(R.string.status_unavailable));
+            ipAddressPref.setSummary(getString(R.string.status_unavailable));
         }
     }
 
