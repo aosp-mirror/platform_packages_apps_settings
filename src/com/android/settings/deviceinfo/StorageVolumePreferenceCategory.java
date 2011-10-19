@@ -416,8 +416,10 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("audio/mp3");
         } else if (preference == mPreferences[DCIM]) {
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/jpeg"); // TODO Create a Videos category, type = video/*
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+            // TODO Create a Videos category, type = vnd.android.cursor.dir/video
+            intent.setType("vnd.android.cursor.dir/image");
         } else if (preference == mPreferences[MISC]) {
             Context context = getContext().getApplicationContext();
             if (mMeasurement.getMiscSize() > 0) {
