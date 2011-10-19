@@ -26,6 +26,10 @@
             android:summary="@string/unlock_set_unlock_mode_biometric_weak"
             android:persistent="false"/>
 
+        <CheckBoxPreference
+            android:key="visiblepattern"
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
+
         <ListPreference
             android:key="lock_after_timeout"
             android:title="@string/lock_after_timeout"
@@ -33,6 +37,10 @@
             android:entries="@array/lock_after_timeout_entries"
             android:entryValues="@array/lock_after_timeout_values"
             android:persistent="false"/>
+
+        <CheckBoxPreference
+            android:key="unlock_tactile_feedback"
+            android:title="@string/lockpattern_settings_enable_tactile_feedback_title"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
