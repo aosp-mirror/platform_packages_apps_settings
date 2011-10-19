@@ -123,7 +123,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     resid = R.xml.security_settings_password;
                     break;
             }
-            // TODO: enable facepass options
         }
         addPreferencesFromResource(resid);
 
@@ -152,6 +151,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
+
+        // don't display visible pattern if biometric and backup is not pattern
+        if (resid == R.xml.security_settings_biometric_weak &&
+                mLockPatternUtils.getKeyguardStoredPasswordQuality() !=
+                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+            PreferenceGroup securityCategory = (PreferenceGroup)
+                    root.findPreference(KEY_SECURITY_CATEGORY);
+            if (securityCategory != null && mVisiblePattern != null) {
+                securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
+            }
+        }
 
         // tactile feedback. Should be common to all unlock preference screens.
         mTactileFeedback = (CheckBoxPreference) root.findPreference(KEY_TACTILE_FEEDBACK_ENABLED);
