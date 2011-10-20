@@ -332,7 +332,7 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ロック解除方法を変更する"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"パターン、PIN、パスワードセキュリティを変更または無効にする"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"画面をロックする方法を選択する"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"顔認証ロック解除ができない場合、ロックをどのように解除しますか？"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"フェイスアンロックができない場合、ロックをどのように解除しますか？"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"なし"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"スライド"</string>
@@ -348,7 +348,7 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"管理者、暗号化ポリシー、または認証情報により無効"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"スライド"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"顔認証ロック解除"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"フェイスアンロック"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"パターンで保護されています"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"PINで保護されています"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"パスワードで保護されています"</string>
@@ -400,9 +400,7 @@
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"キャンセル"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"キャンセル"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"次へ"</string>
-    <!-- no translation found for lock_setup (1759001157415978959) -->
-    <!-- no translation found for lock_setup (5507462851158901718) -->
-    <skip />
+    <string name="lock_setup" msgid="1759001157415978959">"セットアップ完了"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"デバイス管理"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"端末管理者"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"端末管理者を表示または無効にする"</string>
@@ -804,7 +802,7 @@
     <string name="error_apn_empty" msgid="6056233831214537267">"APNは必ず指定してください。"</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCCのフィールドには3桁で指定してください。"</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNCのフィールドには2桁か3桁で指定してください。"</string>
-    <string name="restore_default_apn" msgid="8178010218751639581">"APN設定をリセットしています。"</string>
+    <string name="restore_default_apn" msgid="8178010218751639581">"デフォルトのAPN設定を復元しています。"</string>
     <string name="menu_restore" msgid="8260067415075573273">"初期設定にリセット"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN設定をリセットしました。"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"データの初期化"</string>
@@ -1427,8 +1425,8 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"アカウントを削除しますか？"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"このアカウントを削除すると、メール、連絡先などのすべてのデータもタブレットから削除されます。"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"このアカウントを削除すると、メール、連絡先などのすべてのデータも携帯端末から削除されます。"</string>
-    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"このアカウントは一部のアプリに必要です。アカウントを削除するには、タブレットを出荷時設定にリセットする必要があります（個人データはすべて削除されます）。リセットは[設定] &gt; [バックアップと復元]で行います。"</string>
-    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"このアカウントは一部のアプリに必要です。アカウントを削除するには、携帯端末を出荷時設定にリセットする必要があります（個人データはすべて削除されます）。リセットは[設定] &gt; [バックアップと復元]で行います。"</string>
+    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"このアカウントは一部のアプリに必要です。アカウントを削除するには、タブレットを出荷時設定にリセットする必要があります（個人データはすべて削除されます）。リセットは[設定] &gt; [バックアップとリセット]で行います。"</string>
+    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"このアカウントは一部のアプリに必要です。アカウントを削除するには、携帯端末を出荷時設定にリセットする必要があります（個人データはすべて削除されます）。リセットは[設定] &gt; [バックアップとリセット]で行います。"</string>
     <string name="provider_label" msgid="7724593781904508866">"プッシュ型登録"</string>
     <string name="sync_item_title" msgid="1931551540462877488">"<xliff:g id="AUTHORITY">%s</xliff:g>を同期"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"手動では同期できません"</string>

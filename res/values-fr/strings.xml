@@ -135,7 +135,7 @@
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Aucun appareil Bluetooth détecté."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Demande d\'association Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Demande d\'association"</string>
-    <string name="bluetooth_notif_message" msgid="1931617700075106801">"Appuyez pour associer avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="1931617700075106801">"Appuyez pour associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Afficher les fichiers reçus"</string>
     <string name="device_picker" msgid="8721012448931226323">"Sélecteur de périphérique Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Demande d\'autorisation Bluetooth"</string>
@@ -293,7 +293,7 @@
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Coordonnées du propriétaire sur l\'écran verrouillé"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Infos propriétaire"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
-    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Saisir le texte à afficher sur écran verrouillage"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Saisir texte à afficher sur écran de verrouillage"</string>
     <string name="location_settings_title" msgid="8935806698251432196">"Services de localisation"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sécurité"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Définir les paramètres de l\'option Ma position et de verrouillage"</string>
@@ -330,7 +330,7 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Modifier écran verr."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Modifier ou désactiver la sécurité : schéma, code PIN ou mot de passe"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Choisir une méthode pour verrouiller l\'écran"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Lorsque vous ne pouvez pas utiliser Face Unlock, comment voulez-vous effectuer le déverrouillage ?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Lorsque vous ne pouvez pas utiliser la reconnaissance faciale, comment voulez-vous effectuer le déverrouillage ?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Aucun"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Faire glisser"</string>
@@ -408,19 +408,19 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gérer les connexions, configurer le nom et l\'identification de l\'appareil"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Demande d\'association Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Pour associer avec :{<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisir le code PIN requis de l\'appareil :"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Pour associer avec :<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisir la clé d\'accès requise de l\'appareil :"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Pour l\'association à :{<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisir le code PIN requis de l\'appareil :"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Pour l\'association à :<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisir la clé d\'accès requise de l\'appareil :"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Le code PIN contient des lettres ou des symboles."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Habituellement 0000 ou 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Vous devrez peut-être également saisir ce code PIN sur l\'autre appareil."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Vous devrez peut-être également saisir ce mot de passe sur l\'autre appareil."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que le mot de passe &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Associer à cet appareil ?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Pour associer avec :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur \"Retour\" ou sur \"Entrée\"."</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Pour l\'association à :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur \"Retour\" ou sur \"Entrée\"."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Se connecter"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annuler"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
-    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Impossible d\'associer avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Impossible d\'associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Impossible d\'établir l\'association avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> en raison d\'un code PIN ou d\'une clé d\'accès incorrects."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="7870998403045801381">"Impossible d\'établir la communication avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Association refusée par <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -549,7 +549,7 @@
     <string name="wifi_forget" msgid="8168174695608386644">"Retirer"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Enregistrer"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Annuler"</string>
-    <string name="wifi_wps_overlap_error" msgid="5835556538028547052">"Une autre session protégée Wi-Fi détectée. Réessayez dans quelques minutes."</string>
+    <string name="wifi_wps_overlap_error" msgid="5835556538028547052">"Autre session Wi-Fi protégée détectée. Réessayez dans quelques minutes."</string>
     <string name="wifi_advanced_titlebar" msgid="3900861362094298162">"Wi-Fi avancé"</string>
     <string name="wifi_setting_frequency_band_title" msgid="1691057528105233660">"Plage de fréquences Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Définir la plage de fréquences"</string>
@@ -862,7 +862,7 @@
     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Connexion Internet de la tablette non partagée"</string>
     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Connexion Internet du téléphone non partagée"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"Pas de partage de connexion."</string>
-    <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"Partage de conn. impossible au-delà de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> appareils."</string>
+    <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"Partage connexion impossible au-delà de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> appareils."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Le partage connexion avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être annulé."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Aide"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Réseaux mobiles"</string>
@@ -1220,7 +1220,7 @@
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"UC - Premier plan"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Maintenir activé"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <string name="usage_type_wifi_running" msgid="3333082288047656594">"Wi-Fi en exécution"</string>
+    <string name="usage_type_wifi_running" msgid="3333082288047656594">"Utilisation Wi-Fi"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Tablette"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Téléphone"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Données envoyées"</string>
@@ -1384,7 +1384,7 @@
     <string name="wifi_setup_status_edit_network" msgid="4765340816724760717">"Saisissez la configuration réseau."</string>
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Se connecter à un nouveau réseau"</string>
     <string name="wifi_setup_status_connecting" msgid="4971421484401530740">"Connexion en cours…"</string>
-    <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Aller à l\'étape suivante"</string>
+    <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Passer à l\'étape suivante"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"L\'EAP n\'est pas compatible."</string>
     <string name="wifi_setup_eap_not_supported" msgid="4521956828166347452">"Vous ne pouvez pas configurer de connexion Wi-Fi EAP lors de l\'installation. Une fois celle-ci effectuée, vous pourrez le faire dans Paramètres &gt; Sans fil et réseaux."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"La connexion peut prendre quelques minutes…"</string>
@@ -1457,7 +1457,7 @@
     <string name="debug_applications_category" msgid="4206913653849771549">"Applications"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Ne pas conserver activités"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Supprimer immédiatement les activités abandonnées"</string>
-    <string name="app_process_limit_title" msgid="4280600650253107163">"Limite proces. arrière-plan"</string>
+    <string name="app_process_limit_title" msgid="4280600650253107163">"Limite processus arr.-plan"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Afficher tous les messages \"L\'application ne répond pas\""</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Afficher \"L\'application ne répond plus\" pour applis en arrière-plan"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilisation des données"</string>
