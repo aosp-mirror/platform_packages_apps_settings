@@ -105,7 +105,7 @@
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"다른 블루투스 기기에 표시되지 않음"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"페어링된 기기에만 표시"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"장치를 검색 가능하게 설정"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"표시 설정 시간제한"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"검색 가능 시간제한"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"검색 가능 기간 설정"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"잠금 시 음성 다이얼링"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"화면 잠금 시 블루투스 다이얼러 사용 방지"</string>
@@ -144,10 +144,10 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"휴대전화의 앱이 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 블루투스 기기에서 사용자의 휴대전화를 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"태블릿의 앱이 다른 블루투스 기기에서 사용자의 태블릿을 \'항상 검색\'할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"휴대전화의 앱이 다른 블루투스 기기에서 사용자의 휴대전화를 \'항상 검색\'할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"태블릿의 앱이 블루투스 사용 및 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 기기에서 사용자의 태블릿을 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"휴대전화의 앱이 블루투스 사용 및 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 기기에서 사용자의 휴대전화를 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"태블릿의 앱이 블루투스 사용 및 다른 기기에서 사용자의 태블릿을 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"휴대전화의 앱이 블루투스 사용 및 다른 기기에서 사용자의 휴대전화를 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"태블릿의 앱이 블루투스를 사용 설정하고 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 기기에서 사용자의 태블릿을 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"휴대전화의 앱이 블루투스를 사용 설정하고 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 기기에서 사용자의 휴대전화를 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"태블릿의 앱이 블루투스를 사용 설정하고 다른 기기에서 사용자의 태블릿을 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"휴대전화의 앱이 블루투스를 사용 설정하고 다른 기기에서 사용자의 휴대전화를 검색할 수 있도록 설정하려고 합니다. 허용하시겠습니까?"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"블루투스를 켜는 중"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"블루투스를 사용 중지하는 중"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"자동 연결"</string>
@@ -318,7 +318,7 @@
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"휴대전화 암호화 작업은 되돌릴 수 없으며 중단하면 데이터를 잃게 됩니다. 암호화는 한 시간 이상이 걸리며 그 동안 휴대전화는 몇 번 다시 시작됩니다."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"암호화 중"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"태블릿을 암호화하는 동안 잠시 기다려 주세요. <xliff:g id="PERCENT">^1</xliff:g>% 완료되었습니다."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"전화를 암호화하는 동안 잠시 기다려 주세요. <xliff:g id="PERCENT">^1</xliff:g>% 완료되었습니다."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"휴대전화를 암호화하는 동안 잠시 기다려 주세요. <xliff:g id="PERCENT">^1</xliff:g>% 완료되었습니다."</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"<xliff:g id="DELAY">^1</xliff:g>초 후에 다시 시도하세요."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"비밀번호 입력"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"암호화하지 못했습니다."</string>
@@ -338,11 +338,11 @@
     <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"얼굴 인식 잠금해제"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"낮은 보안(베타)"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"패턴"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"중간 수준 보안"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"중급 보안"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"중간-높은 보안"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"중상급 보안"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"비밀번호"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"높은 보안"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"상급 보안"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"관리자, 암호화 정책 또는 자격증명 저장소로 인해 사용 중지됨"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"없음"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"슬라이드"</string>
@@ -359,7 +359,7 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"잠금해제 비밀번호 변경"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"비밀번호는 %d자 이상이어야 합니다."</string>
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"PIN은 %d자 이상이어야 합니다."</string>
-    <string name="lockpassword_press_continue" msgid="122706614386757182">"완료되면 계속을 터치하세요."</string>
+    <string name="lockpassword_press_continue" msgid="122706614386757182">"계속을 터치하세요."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"계속"</string>
     <string name="lockpassword_password_too_long" msgid="5487426077939378487">"비밀번호는 <xliff:g id="NUMBER">%d</xliff:g>자 미만이어야 합니다."</string>
     <string name="lockpassword_pin_too_long" msgid="6382649850551200693">"PIN은 <xliff:g id="NUMBER">%d</xliff:g>자리 미만이어야 합니다."</string>
@@ -409,7 +409,7 @@
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"연결 관리, 장치 이름 및 검색 가능 여부 설정"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth 페어링 요청"</string>
     <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>와(과) 페어링하려면 기기의 필수 PIN을 입력하세요."</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>와(과) 페어링하려면 기기 필수 패스키를 입력하세요."</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>와(과) 페어링하려면 기기 필수 비밀번호를 입력하세요."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN에 문자나 기호가 포함됩니다."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"일반적으로 0000 또는 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"또한 다른 기기에 이 PIN을 입력해야 할 수도 있습니다."</string>
@@ -499,7 +499,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"개방형 네트워크를 사용할 수 있을 때 알림"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"접속 불량 방지"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="4248686597890494105">"인터넷 연결이 원활하지 않은 경우 WiFi 네트워크를 사용하지 않습니다."</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="391381189748401988">"절전 모드 동안 WiFi 유지"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="391381189748401988">"절전 모드 동안 WiFi 연결 유지"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"설정을 변경하는 중 문제가 발생했습니다."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"네트워크 추가"</string>
     <string name="wifi_access_points" msgid="6623468070878623378">"WiFi 네트워크"</string>
@@ -764,7 +764,7 @@
     <string name="battery_status_title" msgid="9159414319574976203">"배터리 상태"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"배터리 수준"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
-    <string name="apn_edit" msgid="1354715499708424718">"액세스포인트(APN) 편집"</string>
+    <string name="apn_edit" msgid="1354715499708424718">"액세스 포인트(APN) 편집"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"설정되지 않았습니다."</string>
     <string name="apn_name" msgid="4115580098369824123">"이름"</string>
     <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
@@ -974,7 +974,7 @@
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"이 앱을 해당 작업에 대한 기본 프로그램으로 실행하도록 선택했습니다."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"기본값이 설정되지 않았습니다."</string>
     <string name="clear_activities" msgid="7408923511535174430">"기본 작업 지우기"</string>
-    <string name="screen_compatibility_text" msgid="1616155457673106022">"이 앱은 사용 중인 화면에 맞게 개발되지 않았을 수 있습니다. 여기에서 앱이 화면에 조정되는 방식을 선택할 수 있습니다."</string>
+    <string name="screen_compatibility_text" msgid="1616155457673106022">"이 앱은 사용 중인 화면에 맞게 개발되지 않았을 수 있습니다. 여기에서 어떻게 앱을 화면에 맞출지 선택할 수 있습니다."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"설치 시 확인"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"앱 확장"</string>
     <string name="unknown" msgid="1592123443519355854">"알 수 없음"</string>
@@ -1006,8 +1006,8 @@
     <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"업데이트를 제거하시겠습니까?"</string>
     <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"이 Android 시스템 앱에 대한 모든 업데이트가 제거됩니다."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"데이터 지우기"</string>
-    <string name="clear_failed_dlg_text" msgid="1092177570631523106">"앱용 데이터를 지우지 못했습니다."</string>
-    <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"이 앱은 태블릿의 다음 항목에 액세스할 수 있습니다."</string>
+    <string name="clear_failed_dlg_text" msgid="1092177570631523106">"앱 데이터를 지우지 못했습니다."</string>
+    <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"이 앱은 태블릿에서 다음에 액세스할 수 있습니다."</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"이 앱은 휴대전화의 다음 항목에 액세스할 수 있습니다."</string>
     <string name="computing_size" msgid="1599186977475211186">"계산 중..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"패키지 크기를 계산할 수 없습니다."</string>
@@ -1023,13 +1023,13 @@
     <string name="does_not_exist" msgid="3476487214886606748">"앱이 없습니다."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"복제 방지된 앱입니다."</string>
     <string name="invalid_location" msgid="2786030127356312746">"설치 위치가 잘못되었습니다."</string>
-    <string name="system_package" msgid="6222593098063037137">"외부 미디어에 시스템 업데이트를 설치할 수 없습니다."</string>
+    <string name="system_package" msgid="6222593098063037137">"외부 장치에 시스템 업데이트를 설치할 수 없습니다."</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"강제로 종료하시겠습니까?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"강제로 앱을 종료하면 예기치 않은 오류가 발생할 수 있습니다."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="3465267182923054022">"앱을 이동하지 못했습니다. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"기본 설치 위치"</string>
-    <string name="app_install_location_summary" msgid="5155453752692959098">"새 앱에 대한 기본 설치 위치를 변경합니다."</string>
+    <string name="app_install_location_summary" msgid="5155453752692959098">"새 앱의 기본 설치 위치를 변경합니다."</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"내장 앱을 사용중지하시겠습니까?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"내장 앱을 사용중지하면 다른 앱에 예기치 않은 오류가 발생할 수 있습니다."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"저장공간 사용량"</string>
@@ -1058,10 +1058,10 @@
     <string name="service_stop" msgid="6369807553277527248">"중지"</string>
     <string name="service_manage" msgid="1876642087421959194">"설정"</string>
     <string name="service_stop_description" msgid="9146619928198961643">"이 서비스는 해당 앱에서 시작했습니다. 중지할 경우 앱에 장애가 발생할 수 있습니다."</string>
-    <string name="heavy_weight_stop_description" msgid="2979218727598321095">"이 앱을 안전하게 중지할 수 없습니다. 중지할 경우 현재 작업의 일부가 유실될 수 있습니다."</string>
+    <string name="heavy_weight_stop_description" msgid="2979218727598321095">"이 앱을 안전하게 중지할 수 없습니다. 중지할 경우 현재 작업이 일부 유실될 수 있습니다."</string>
     <string name="background_process_stop_description" msgid="5034773197139654588">"향후에 다시 필요할 경우를 위해 계속 실행 중인 이전 앱 프로세스로서 일반적으로 중지할 필요는 없습니다."</string>
     <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>이(가) 현재 사용 중입니다. 조정하려면 설정을 터치하세요."</string>
-    <string name="main_running_process_description" msgid="1130702347066340890">"사용 중인 기본 프로세스입니다."</string>
+    <string name="main_running_process_description" msgid="1130702347066340890">"사용 중인 기본 프로세스"</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"서비스 <xliff:g id="COMP_NAME">%1$s</xliff:g>이(가) 사용 중입니다."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"제공업체(<xliff:g id="COMP_NAME">%1$s</xliff:g>)를 사용 중입니다."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"시스템 서비스를 중지하시겠습니까?"</string>
@@ -1387,7 +1387,7 @@
     <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"다음 단계로 이동"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"EAP는 지원되지 않습니다."</string>
     <string name="wifi_setup_eap_not_supported" msgid="4521956828166347452">"설정하는 동안에는 EAP WiFi 연결을 설정할 수 없습니다. 설정한 후에 설정 &gt; 무선 및 네트워크에서 설정할 수 있습니다."</string>
-    <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"연결에 몇 분 정도 걸릴 수 있습니다."</string>
+    <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"연결 시 몇 분 정도 걸릴 수 있습니다."</string>
     <string name="wifi_setup_description_connected" msgid="1748172546080673171">"설정을 계속하려면 "<b>"다음"</b>"을 터치하세요."\n\n"다른 WiFi 네트워크에 연결하려면 "<b>"뒤로"</b>"를 터치하세요."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"동기화 사용"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"동기화 사용중지됨"</string>
@@ -1494,10 +1494,10 @@
     <string name="data_usage_app_restrict_background_summary" msgid="2942211576678233254">"모바일 데이터 네트워크에서만 백그라운드 데이터를 사용하지 않도록 설정합니다. 가능한 경우 WiFi가 사용됩니다."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"이 앱에 대해 백그라운드 데이터를 제한하려면 먼저 모바일 데이터 제한을 설정하세요."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"백그라운드 데이터 사용 제한"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="7471043848664440826">"이 기능은 WiFi를 사용할 수 없을 때 백그라운드 데이터에 의존하는 앱의 작동을 중지할 수 있습니다."\n\n"앱에서 제공하는 설정에서 적절한 데이터 사용량 제어 기능을 찾을 수 있습니다."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="7471043848664440826">"이 기능은 WiFi를 사용할 수 없을 때 백그라운드 데이터에 의존하는 앱의 작동을 중지할 수 있습니다."\n\n"앱에서 제공하는 설정에서 적절한 데이터 사용량 관리 기능을 찾을 수 있습니다."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"백그라운드 데이터는 모바일 데이터 한도를 설정한 경우에만 제한할 수 있습니다."</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"사용 주기 재설정 날짜"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"매월 날짜:"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"사용 주기 재설정"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"날짜:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"설정"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"데이터 사용 경고 설정"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"데이터 사용 한도 설정"</string>
@@ -1554,7 +1554,7 @@
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"완료"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"안내서 건너뛰기"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"강의 1: 화면 탐색"</string>
-    <string name="accessibility_tutorial_lesson_1_text_1" msgid="477937585801538951">"\'터치하여 탐색\'을 사용하면 화면을 터치하여 손가락 아래에 있는 항목을 파악할 수 있습니다. 예를 들어 현재 화면에 앱 아이콘이 있다면 화면을 터치하고 손가락을 움직여 원하는 앱을 찾아낼 수 있습니다."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="477937585801538951">"\'터치하여 탐색\'을 사용하면 화면을 터치하여 손가락으로 터치하는 항목이 무엇인지 알 수 있습니다. 예를 들어, 현재 화면에 앱 아이콘이 있습니다. 화면을 터치하고 손가락을 움직여 앱을 찾아 보세요."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"최소 하나 이상의 아이콘을 찾을 때까지 화면을 손가락으로 계속 슬라이드합니다."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="3973201880357468747">"터치하고 있는 항목을 활성화하려면 해당 항목을 탭합니다. <xliff:g id="APP_NAME">%s</xliff:g> 아이콘을 찾을 때까지 손가락을 슬라이드합니다. 그런 다음 아이콘을 한 번 탭하여 활성화합니다."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"손가락으로 <xliff:g id="APP_NAME">%s</xliff:g> 아이콘을 터치하고 있습니다. 아이콘을 활성화하려면 한 번 탭하세요."</string>
