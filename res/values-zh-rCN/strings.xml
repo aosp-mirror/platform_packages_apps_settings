@@ -105,7 +105,7 @@
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"不让其他蓝牙设备检测到"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"仅让已配对的设备检测到"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"可以检测到设备"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"检测超时"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"检测超时设置"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"设置可检测到设备的时间"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"锁定语音拨号"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"屏幕锁定时停止使用蓝牙拨号器"</string>
@@ -439,7 +439,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"选项…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"高级"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"高级蓝牙设置"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"要查看设备，请打开蓝牙。"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"要监测设备，请打开蓝牙功能。"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"连接到..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"媒体音频"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"手机音频"</string>
@@ -483,7 +483,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"关"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"无法使用，因为 NFC 已关闭"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="6981652347448777459">"打开此功能后，您只需把两台设备靠在一起，即可将您设备上的应用程序内容发送到另一台支持 NFC 的设备上。例如，您可以发送“浏览器”页面、YouTube 视频、“分享对象”联系人等等。"\n\n"您只需将设备靠在一起（通常是背靠背）然后触摸屏幕即可，发送的内容是由该应用程序确定的。"</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"打开此功能后，您只需将自己的设备与另一台支持 NFC 的设备靠在一起，即可将您设备上的应用程序内容同步分享给对方。例如，您可以发送网页、YouTube 视频、“分享对象”联系人等等。"\n\n"您只需将设备靠在一起（通常是背靠背）然后触摸屏幕即可，所分享的内容是由该应用程序确定的。"</string>
     <string name="wifi_quick_toggle_title" msgid="8900579245913917111">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="7071157039678370553">"打开 Wi-​​Fi"</string>
     <string name="wifi_settings" msgid="80140065298764210">"Wi-Fi"</string>
@@ -497,7 +497,7 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"扫描不到网络"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"网络通知"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"附近有开放网络时通知我"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"关闭状况不佳的连接"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"不采用状况差的连接"</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="4248686597890494105">"仅在 Wi-Fi 互联网连接信号良好时使用 Wi-Fi 网络"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="391381189748401988">"在休眠状态下保持 Wi-Fi 连接"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"更改设置时出现问题"</string>
@@ -766,7 +766,7 @@
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
     <string name="apn_edit" msgid="1354715499708424718">"修改接入点"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"未设置"</string>
-    <string name="apn_name" msgid="4115580098369824123">"姓名"</string>
+    <string name="apn_name" msgid="4115580098369824123">"名称"</string>
     <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"代理"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"端口"</string>
@@ -785,12 +785,11 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP 或 CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN 类型"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"APN 协议"</string>
-    <!-- no translation found for apn_roaming_protocol (3386954381510788422) -->
-    <skip />
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN 漫游协议"</string>
     <string name="carrier_enabled" msgid="407655861175280806">"APN 启用/停用"</string>
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN 已启用"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN 已停用"</string>
-    <string name="bearer" msgid="594270280031923558">"承载信息"</string>
+    <string name="bearer" msgid="594270280031923558">"承载系统"</string>
     <string name="menu_delete" msgid="6981294422841124659">"删除 APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"新建 APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"保存"</string>
@@ -871,7 +870,7 @@
     <string name="location_neighborhood_level" msgid="7473531167475623654">"允许应用程序使用 Wi-Fi 和移动网络等来源的数据确定您的大致位置"</string>
     <string name="location_neighborhood_level_wifi" msgid="1477255106707542972">"通过 Wi-Fi 确定位置"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS 卫星"</string>
-    <string name="location_street_level" msgid="4244496898967415234">"允许应用程序使用 GPS 定位您的位置"</string>
+    <string name="location_street_level" msgid="4244496898967415234">"允许应用程序使用 GPS 对您进行定位"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"使用增强型 GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"使用服务器来辅助 GPS（取消选中可降低网络使用率）"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"使用服务器来辅助 GPS（取消选中可提高 GPS 性能）"</string>
@@ -903,7 +902,7 @@
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"确认您的 PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"密码不匹配"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PIN 不匹配！"</string>
-    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"解锁选择"</string>
+    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"解锁方式选择"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"密码已设置"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN 已设置"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"图案已设置"</string>
@@ -1328,7 +1327,7 @@
     <string name="credentials_erased" msgid="2907836028586342969">"凭据存储已删除。"</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"系统无法清除凭据存储。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"凭证存储已启用。"</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6048426197489058494">"您必须先设置一个锁定屏幕 PIN 或密码，然后才能使用凭据存储。"</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="6048426197489058494">"必须设置一个锁屏 PIN 或密码，然后才能使用凭据存储。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"紧急提示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"备份和重置"</string>
@@ -1460,15 +1459,15 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"后台进程限制"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"显示所有 ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"为后台应用程序显示“应用程序无响应”对话框"</string>
-    <string name="data_usage_summary_title" msgid="3804110657238092929">"数据使用情况"</string>
-    <string name="data_usage_cycle" msgid="5652529796195787949">"数据使用情况周期"</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"流量使用情况"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"流量使用周期"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"数据漫游"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"限制后台数据"</string>
-    <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"单独显示 4G 数据使用情况"</string>
+    <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"单独显示 4G 流量"</string>
     <string name="data_usage_menu_show_wifi" msgid="3872007281231638058">"显示 Wi-Fi 使用情况"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"显示以太网使用情况"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"更改周期..."</string>
-    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"重置数据使用情况周期的日期："</string>
+    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"流量使用周期的日期设置："</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"没有任何应用程序在此期间产生过数据流量。"</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"前台"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"后台"</string>
@@ -1494,12 +1493,12 @@
     <string name="data_usage_app_restrict_background_summary" msgid="2942211576678233254">"仅在使用移动数据网络时停用后台数据。系统会尽量使用 Wi-Fi 连接。"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"要限制此应用程序使用后台数据，请先设置移动数据上限。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"限制后台数据？"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="7471043848664440826">"在没有 Wi-Fi 连接的情况下，此功能可能导致需要后台数据的应用程序停止运行。"\n\n"您可以在该应用程序提供的设置中查找更合适的数据使用情况控制选项。"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="7471043848664440826">"在没有 Wi-Fi 连接的情况下，此功能可能导致需要后台数据的应用程序停止运行。"\n\n"您可以在该应用程序提供的设置中查找更合适的流量使用控制选项。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"您只有在设置移动数据上限后才能限制后台数据。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"使用情况周期重置日期"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"每月日期："</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"确定"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"设置数据使用情况警告"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"设置流量使用量警告"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"设置数据使用限制"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"正在限制数据使用量"</string>
     <string name="data_usage_limit_dialog" product="tablet" msgid="6401600837858297985">"达到指定的数据使用上限时，系统会停用您的<xliff:g id="NETWORKS">%1$s</xliff:g>数据连接。"\n\n"由于数据流量是由您的平板电脑计算而得的，您的运营商对于流量的计算方法可能有所不同，因此请考虑设置一个较低的上限。"</string>

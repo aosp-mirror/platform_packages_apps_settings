@@ -274,8 +274,8 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"날짜 및 시간 설정"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"날짜, 시간, 표준시간대 및 형식 설정"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"날짜/시간 자동설정"</string>
-    <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"인터넷 시간 사용"</string>
-    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"인터넷 시간 사용"</string>
+    <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"네트워크 시간 사용"</string>
+    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"네트워크 시간 사용"</string>
     <string name="zone_auto" msgid="334783869352026648">"시간대 자동설정"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"인터넷 시간대 사용"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"인터넷 시간대 사용"</string>
@@ -283,7 +283,7 @@
     <string name="date_time_set_time" msgid="5716856602742530696">"시간 설정"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"표준시간대 선택"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"날짜 설정"</string>
-    <string name="date_time_date_format" msgid="436706100255870967">"날짜형식 선택"</string>
+    <string name="date_time_date_format" msgid="436706100255870967">"날짜 형식 선택"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"가나다순으로 정렬"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"시간대순 정렬"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
@@ -785,8 +785,7 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP 또는 CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN 유형"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"APN 프로토콜"</string>
-    <!-- no translation found for apn_roaming_protocol (3386954381510788422) -->
-    <skip />
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN 로밍 프로토콜"</string>
     <string name="carrier_enabled" msgid="407655861175280806">"APN 사용/사용 중지"</string>
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN 사용"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN 사용 중지됨"</string>
@@ -806,9 +805,9 @@
     <string name="master_clear_title" msgid="5907939616087039756">"공장 초기화"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"태블릿의 모든 데이터 지우기"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"휴대전화의 모든 데이터 지우기"</string>
-    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"이렇게 하면 태블릿의 "<b>"내부 저장소"</b>"("\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li>" 포함)에서 모든 데이터가 삭제됩니다."</string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"이렇게 하면 휴대전화의 "<b>"내부 저장소"</b>"("\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li>" 포함)에서 모든 데이터가 삭제됩니다."</string>
-    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"현재 다음 계정에 로그인함:"\n</string>
+    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"공장 초기화하면 태블릿의 "<b>"내부 저장소의 모든 데이터가 삭제됩니다."</b>\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li></string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"공장 초기화하면 휴대전화의 "<b>"내부 저장소의 모든 데이터가 삭제됩니다."</b>\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"현재 로그인한 계정:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"음악"</li>\n<li>"사진"</li>\n<li>"기타 사용자 데이터"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"음악이나 사진, 기타 사용자 데이터를 지우려면 "<b>"USB 저장소"</b>"를 삭제해야 합니다."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"음악이나 사진, 기타 사용자 데이터를 지우려면 "<b>"SD 카드"</b>"를 삭제해야 합니다."</string>
@@ -1067,8 +1066,8 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"시스템 서비스를 중지하시겠습니까?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"이 서비스를 중지하면 태블릿의 일부 기능이 올바르게 작동되지 않을 수 있으며 전원을 껐다 켜야 합니다."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"이 서비스를 중지하면 휴대전화의 일부 기능이 올바르게 작동되지 않을 수 있으며 전원을 껐다 켜야 합니다."</string>
-    <string name="language_settings" msgid="5292716747264442359">"언어 및 키보드 설정"</string>
-    <string name="language_keyboard_settings_title" msgid="243220021717425813">"언어 및 키보드 설정"</string>
+    <string name="language_settings" msgid="5292716747264442359">"언어 및 키보드"</string>
+    <string name="language_keyboard_settings_title" msgid="243220021717425813">"언어 및 키보드"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"언어 설정"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"키보드 및 입력 방법"</string>
     <string name="phone_language" msgid="8870144109924299673">"언어"</string>
@@ -1157,7 +1156,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"접근성 설정"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"서비스"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"시스템"</string>
-    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"큰 텍스트"</string>
+    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"텍스트 확대"</string>
     <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"전원 버튼으로 통화 종료"</string>
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"터치하여 탐색"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"터치하여 탐색 기능을 사용하면 손가락 아래에 표시된 항목에 대한 설명을 듣거나 볼 수 있습니다."\n\n"이 기능은 시각 장애인을 위한 것입니다."</string>
@@ -1273,7 +1272,7 @@
     <string name="tts_default_synth_title" msgid="4755558388333117572">"기본 엔진"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"음성 텍스트에 대해 음성 합성 엔진을 사용하도록 설정"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"말하는 속도"</string>
-    <string name="tts_default_rate_summary" msgid="4061815292287182801">"텍스트를 발음하는 속도"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"텍스트를 읽어주는 빠르기"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"피치"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"발음된 텍스트의 톤에 적용"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"언어"</string>
