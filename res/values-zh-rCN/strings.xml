@@ -85,7 +85,7 @@
     <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB 绑定选项)"</string>
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"正在耗电"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"未在充电"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"已满"</string>
+    <string name="battery_info_status_full" msgid="2824614753861462808">"电量充足"</string>
     <string name="battery_info_power_unplugged" msgid="5987246575519551081">"未插电"</string>
     <string name="battery_info_power_ac" msgid="6808516193001604634">"交流电"</string>
     <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
@@ -161,7 +161,7 @@
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"下午 1:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"选择时区"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"区域 (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="normal_date_format" msgid="7636406984925498359">"所在区域 (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"预览:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"字号："</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -266,7 +266,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"漫游时连接到数据服务"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"数据连接已断，因为您已离开本地网络并已关闭数据漫游。"</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"将其启用"</string>
-    <string name="roaming_warning" msgid="1269870211689178511">"是否允许数据漫游？这可能产生大量漫游费！"</string>
+    <string name="roaming_warning" msgid="1269870211689178511">"要允许数据漫游？这可能产生大量漫游费！"</string>
     <string name="roaming_reenable_title" msgid="7626425894611573131">"注意"</string>
     <string name="networks" msgid="6333316876545927039">"运营商选择"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"选择网络运营商"</string>
@@ -336,7 +336,7 @@
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"滑动"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"无安全措施"</string>
     <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"面部解锁"</string>
-    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"低安全性、实验性"</string>
+    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"安全性低、实验性"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"图案"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
@@ -364,7 +364,7 @@
     <string name="lockpassword_password_too_long" msgid="5487426077939378487">"密码必须少于 <xliff:g id="NUMBER">%d</xliff:g> 个字符"</string>
     <string name="lockpassword_pin_too_long" msgid="6382649850551200693">"PIN 必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN 只能由 0-9 的数字组成"</string>
-    <string name="lockpassword_pin_recently_used" msgid="2729073062730842496">"设备管理员不允许使用最近的 PIN"</string>
+    <string name="lockpassword_pin_recently_used" msgid="2729073062730842496">"设备管理器不允许使用最近的 PIN"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"密码包含非法字符"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"密码中至少应包含一个字母"</string>
     <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"密码中至少应包含一个数字"</string>
@@ -393,7 +393,7 @@
     <item quantity="one" msgid="1716355580615489062">"密码中至少应包含 1 个非字母字符"</item>
     <item quantity="other" msgid="5574191164708145973">"密码中至少应包含 %d 个非字母字符"</item>
   </plurals>
-    <string name="lockpassword_password_recently_used" msgid="2739642871806935825">"设备管理员不允许使用最近的密码"</string>
+    <string name="lockpassword_password_recently_used" msgid="2739642871806935825">"设备管理器不允许使用最近的密码"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"取消"</string>
@@ -642,7 +642,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"无操作 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
-    <string name="wallpaper_settings_title" msgid="5449180116365824625">"墙纸"</string>
+    <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁纸"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"选择壁纸来源"</string>
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dream"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"屏幕保护程序和其他待机程序"</string>
@@ -712,7 +712,7 @@
     <string name="status_bt_address" msgid="4195174192087439720">"蓝牙地址"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"序列号"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"不可用"</string>
-    <string name="status_up_time" msgid="7294859476816760399">"开机时间"</string>
+    <string name="status_up_time" msgid="7294859476816760399">"已开机时间"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"唤醒时间"</string>
     <string name="internal_memory" msgid="9129595691484260784">"内部存储空间"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB 存储设备"</string>
@@ -867,7 +867,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"移动网络"</string>
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
     <string name="location_network_based" msgid="5569673665032992664">"Google 的位置服务"</string>
-    <string name="location_neighborhood_level" msgid="7473531167475623654">"允许应用程序使用 Wi-Fi 和移动网络等来源的数据确定您的大致位置"</string>
+    <string name="location_neighborhood_level" msgid="7473531167475623654">"允许应用程序使用来自 Wi-Fi 或移动网络的数据确定您的大致位置"</string>
     <string name="location_neighborhood_level_wifi" msgid="1477255106707542972">"通过 Wi-Fi 确定位置"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS 卫星"</string>
     <string name="location_street_level" msgid="4244496898967415234">"允许应用程序使用 GPS 对您进行定位"</string>
@@ -1066,7 +1066,7 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"要停止系统服务吗？"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"如果停止此服务，您平板电脑上的某些功能也可能会立即停止工作，除非您在将其关闭后重新打开。"</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"如果停止此服务，您手机上的某些功能也可能会立即停止工作，除非您在将其关闭后重新打开。"</string>
-    <string name="language_settings" msgid="5292716747264442359">"语言和输入设备"</string>
+    <string name="language_settings" msgid="5292716747264442359">"语言和输入法"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"语言和输入设备"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"语言设置"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"键盘和输入法"</string>
@@ -1177,9 +1177,9 @@
     <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"触摸“确定”会停用<xliff:g id="SERVICE">%1$s</xliff:g>。"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安装任何服务"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"需要屏幕阅读器吗？"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack 可提供语音反馈以帮助盲人和有视力障碍的用户。您要通过 Android 电子市场免费安装该服务吗？"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"“话语提示”可提供语音反馈以帮助盲人和有视力障碍的用户。您要通过 Android 电子市场免费安装该服务吗？"</string>
     <string name="accessibility_script_injection_security_warning_title" msgid="4158946557435736650">"要安装网页脚本吗？"</string>
-    <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"您要允许应用程序安装来自 Google 的脚本，以方便用户浏览网页内容吗？"</string>
+    <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"您要允许应用程序安装来自 Google 的脚本，以便于您浏览这些应用程序的网页内容吗？"</string>
     <string name="accessibility_touch_exploration_warning" msgid="2442154805472989569">"此功能会更改您的设备对触摸的响应方式。要打开吗？"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"没有提供说明。"</string>
     <string name="settings_button" msgid="3006713718908152930">"设置"</string>
@@ -1444,7 +1444,7 @@
     <string name="pointer_location" msgid="6084434787496938001">"指针位置"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"屏幕叠加层显示当前触摸数据"</string>
     <string name="show_touches" msgid="1356420386500834339">"显示触摸操作"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"显示触摸操作视觉反馈"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"为触摸操作提供视觉提示"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"显示屏幕更新"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"屏幕上的区域更新时闪烁相应区域"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"显示 CPU 使用情况"</string>
@@ -1457,7 +1457,7 @@
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"不保留活动"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"用户离开后即销毁每个活动"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"后台进程限制"</string>
-    <string name="show_all_anrs" msgid="28462979638729082">"显示所有 ANR"</string>
+    <string name="show_all_anrs" msgid="28462979638729082">"显示所有“应用程序无响应”(ANR)"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"为后台应用程序显示“应用程序无响应”对话框"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"流量使用情况"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"流量使用周期"</string>

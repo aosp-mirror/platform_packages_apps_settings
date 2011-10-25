@@ -343,7 +343,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Seguridad media-alta"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contraseña"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Seguridad alta"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desactivado por admin./política encriptación/almacenamiento credenc."</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desactivado por el administrador, política de encriptación o almacenamiento de credenciales"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ninguno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Deslizar"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Desbloqueo facial"</string>
@@ -414,7 +414,7 @@
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Normalmente: 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Es posible que tengas que introducir este PIN en el otro dispositivo."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Es posible que tengas que introducir esta clave en el otro dispositivo."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;, comprueba que se muestre la clave&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Comprueba que se muestre la clave:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;¿Sincronizar con este dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Para sincronizar con:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escribe<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> en el dispositivo y, a continuación, pulsa la tecla Intro o de retorno."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronizar"</string>
@@ -532,7 +532,7 @@
     <string name="wifi_show_password" msgid="6461249871236968884">"Mostrar contraseña"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Ajustes de IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sin modificar)"</string>
-    <string name="wifi_unspecified" msgid="5431501214192991253">"(no especificados)"</string>
+    <string name="wifi_unspecified" msgid="5431501214192991253">"(no especificado)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Guardado"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Inhabilitado"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Mala conexión inhabilitada"</string>
@@ -1265,21 +1265,21 @@
     <string name="recognizer_settings_title" msgid="432493301215113154">"Búsqueda por voz"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Configuración de \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
     <string name="tts_settings" msgid="8186971894801348327">"Configuración síntesis voz"</string>
-    <string name="tts_settings_title" msgid="1237820681016639683">"Salida de síntesis de voz"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"Síntesis de voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Utilizar siempre mi configuración"</string>
     <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"La configuración predeterminada anula la de la aplicación."</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Ajustes predeterminados"</string>
     <string name="tts_default_synth_title" msgid="4755558388333117572">"Motor predeterminado"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"Establece el motor de síntesis de voz utilizado para el texto hablado."</string>
-    <string name="tts_default_rate_title" msgid="6030550998379310088">"Velocidad de voz"</string>
+    <string name="tts_default_rate_title" msgid="6030550998379310088">"Velocidad de la voz"</string>
     <string name="tts_default_rate_summary" msgid="4061815292287182801">"Velocidad a la que se lee el texto"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Tono"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Afecta al tono del texto hablado."</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Idioma"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Establece la voz del idioma específico para el texto hablado."</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Establecer la voz del idioma específico para el texto hablado"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Escuchar un ejemplo"</string>
     <string name="tts_play_example_summary" msgid="8029071615047894486">"Reproducir una breve demostración de síntesis de voz"</string>
-    <string name="tts_install_data_title" msgid="4264378440508149986">"Instalar archivos de datos de voz"</string>
+    <string name="tts_install_data_title" msgid="4264378440508149986">"Instalar archivos de voz"</string>
     <string name="tts_install_data_summary" msgid="5742135732511822589">"Instalar los archivos de datos de voz necesarios para la síntesis de voz"</string>
     <string name="tts_data_installed_summary" msgid="9162111552859972809">"Las voces necesarias para la síntesis de voz ya están instaladas correctamente."</string>
     <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Tu configuración ha cambiado. Este es un ejemplo de cómo suena."</string>
@@ -1392,7 +1392,7 @@
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sincronización inhabilitada"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Error de sincronización"</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Ajustes de sincronización"</string>
-    <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay problemas con la sincronización. Se restablecerá en breve."</string>
+    <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay incidencias con la sincronización. Se restablecerá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Añadir cuenta"</string>
     <string name="background_data" msgid="5779592891375473817">"Datos de referencia"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar datos, enviarlos y recibirlos."</string>
@@ -1457,7 +1457,7 @@
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Eliminar actividades"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Eliminar actividades cuando el usuario las deje"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Límite de procesos en segundo plano"</string>
-    <string name="show_all_anrs" msgid="28462979638729082">"Mostrar errores sin resp"</string>
+    <string name="show_all_anrs" msgid="28462979638729082">"Errores sin respuesta"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Mostrar error de que la aplicación no responde para aplicaciones en segundo plano"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso"</string>
@@ -1524,7 +1524,7 @@
     <string name="vpn_show_options" msgid="7182688955890457003">"Mostrar opciones avanzadas"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"Dominios de búsqueda DNS"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"Servidores DNS (por ejemplo, 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="3818655448226312232">"Desviando rutas (por ejemplo, 10.0.0.0/8)"</string>
+    <string name="vpn_routes" msgid="3818655448226312232">"Rutas de reenvío (por ejemplo, 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="1863901629860867849">"Nombre de usuario"</string>
     <string name="vpn_password" msgid="6756043647233596772">"Contraseña"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"Guardar información de la cuenta"</string>

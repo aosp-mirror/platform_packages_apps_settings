@@ -21,7 +21,7 @@
     <string name="device_info_default" msgid="7847265875578739287">"Неизвестно"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"БЕСПРОВОДНЫЕ СЕТИ"</string>
     <string name="header_category_device" msgid="5781174212691167553">"УСТРОЙСТВО"</string>
-    <string name="header_category_personal" msgid="6225932173498802187">"ЛИЧНОЕ"</string>
+    <string name="header_category_personal" msgid="6225932173498802187">"ЛИЧНЫЕ ДАННЫЕ"</string>
     <string name="header_category_system" msgid="2073558547468647128">"СИСТЕМА"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Включить радио"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Отключить радио"</string>
@@ -294,7 +294,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Сведения о владельце"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Введите текст для показа на экране блокировки"</string>
-    <string name="location_settings_title" msgid="8935806698251432196">"Службы геопозиционирования"</string>
+    <string name="location_settings_title" msgid="8935806698251432196">"Мое местоположение"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Безопасность"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Настройка функции \"Мое местоположение\", разблокировка экрана и блокировка хранилища регистрационных данных"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Настройка функции \"Мое местоположение\", разблокировка экрана и блокировка хранилища регистрационных данных"</string>
@@ -604,7 +604,7 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"Настроить громкость музыки и видео"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Будильник"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Настройки звука для подключенной док-станции"</string>
-    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Звук клавиатуры"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Звук клавиш"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Звук нажатия на экран"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Звук блокировки экрана"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Виброотклик"</string>
@@ -629,7 +629,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Воспроизводить звук при установке или извлечении телефона"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Не воспроизводить звук при установке или извлечении планшетного ПК из док-станции"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Не воспроизводить звук при установке или извлечении телефона"</string>
-    <string name="sync_settings" msgid="9186125469300013491">"Аккаунты и синхронизация"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Аккаунты"</string>
     <string name="search_settings" msgid="1910951467596035063">"Поиск"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Настроить параметры и управлять историей поиска"</string>
     <string name="display_settings" msgid="7965901687241669598">"Экран"</string>
@@ -1128,7 +1128,7 @@
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Настройки экранной клавиатуры"</string>
     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Физическая клавиатура"</string>
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Настройки физической клавиатуры"</string>
-    <string name="development_settings_title" msgid="215179176067683667">"Параметры для разработчиков"</string>
+    <string name="development_settings_title" msgid="215179176067683667">"Для разработчиков"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Настройка параметров для разработчиков"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Отладка по USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Включить режим отладки при подключении к компьютеру по USB"</string>
@@ -1301,7 +1301,7 @@
     <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Модуль синтеза речи установлен"</string>
     <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Включите новый модуль"</string>
     <string name="tts_engine_settings_button" msgid="1030512042040722285">"Настройки синтеза речи"</string>
-    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Предпочтения"</string>
+    <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Система по умолчанию"</string>
     <string name="tts_general_section_title" msgid="4402572014604490502">"Общие"</string>
     <string name="gadget_title" msgid="5519037532720577836">"Управление питанием"</string>
     <string name="gadget_toggle_wifi" msgid="1384149165815685611">"Обновление настроек Wi-Fi"</string>
@@ -1330,8 +1330,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="6048426197489058494">"Прежде чем использовать хранилище учетных данных, необходимо задать PIN-код или пароль для блокировки экрана."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тональный сигнал экстренного вызова"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Настроить режим работы при экстренном вызове"</string>
-    <string name="privacy_settings" msgid="5446972770562918934">"Резервное копирование и сброс"</string>
-    <string name="privacy_settings_title" msgid="4856282165773594890">"Резервное копирование и сброс"</string>
+    <string name="privacy_settings" msgid="5446972770562918934">"Восстановление и сброс"</string>
+    <string name="privacy_settings_title" msgid="4856282165773594890">"Восстановление и сброс"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Резервное копирование и восстановление"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Возврат к заводским настройкам"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Резервное копирование данных"</string>
