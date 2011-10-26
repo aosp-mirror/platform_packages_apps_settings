@@ -148,7 +148,7 @@
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Aplikacija na vašem telefonu želi uključiti Bluetooth i omogućiti prepoznavanje vašeg telefona drugim uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s. Dopustiti?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Aplikacija na vašem tabletnom računalu želi omogućiti otkrivanje vašeg tabletnog računala drugim Bluetooth uređajima. Dopustiti?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Aplikacija na vašem telefonu želi uključiti Bluetooth i omogućiti prepoznavanje vašeg telefona drugim uređajima. Dopustiti?"</string>
-    <string name="bluetooth_turning_on" msgid="4850574877288036646">"Uključivanje Bluetootha???"</string>
+    <string name="bluetooth_turning_on" msgid="4850574877288036646">"Uključivanje Bluetootha…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Isključivanje Bluetootha?"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Automatsko povezivanje"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Zatražena je Bluetooth veza"</string>
@@ -183,7 +183,7 @@
     <string name="proxy_error" msgid="8926675299638611451">"Pažnja"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"U redu"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"Naziv hosta koji ste upisali nije valjan."</string>
-    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"Popis za isključivanje koji ste napisali nije pravilno formatiran. Unesite popis isključenih domena odvojen zarezima."</string>
+    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"Popis za isključivanje koji ste napisali nije pravilno formatiran. Unesite popis isključenih domena odvojenih zarezima."</string>
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Morate dovršiti polje priključka."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Polje priključka mora biti prazno ako je i polje hosta prazno."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Upisani priključak nije valjan."</string>
@@ -330,7 +330,7 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Promjena zaklj. zasl."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Promijenite ili onemogućite sigurnosni uzorak, PIN ili zaporku"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Odaberite metodu za zaključavanje zaslona"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Kada vas Face Unlock ne može vidjeti, kako želite otključati?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Kada vas Otključavanje licem ne može vidjeti, kako želite otključati?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Ništa"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Klizanje"</string>
@@ -398,9 +398,7 @@
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Odustani"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Odustani"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Dalje"</string>
-    <!-- no translation found for lock_setup (1759001157415978959) -->
-    <!-- no translation found for lock_setup (5507462851158901718) -->
-    <skip />
+    <string name="lock_setup" msgid="1759001157415978959">"Postavljanje je dovršeno"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Administracija uređaja"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administratori uređaja"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Administratori za prikaz ili deaktivaciju uređaja"</string>
@@ -492,7 +490,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi postavke"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Postavljanje i upravljanje bežičnim pristupnim točkama"</string>
-    <string name="wifi_starting" msgid="6716593470710880000">"Uključivanje značajke Wi-Fi???"</string>
+    <string name="wifi_starting" msgid="6716593470710880000">"Uključivanje značajke Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Isključivanje Wi-Fi mreže..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Pogreška"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"U načinu rada u zrakoplovu"</string>
@@ -500,8 +498,8 @@
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Mrežna obavijest"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Obavijesti me ako postoji otvorena mreža"</string>
     <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Izbjegavati slabe veze"</string>
-    <!-- outdated translation 4248686597890494105 -->     <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"Ne upotrebljavati WiFi mrežu ako internetska veza nije zadovoljavajuća"</string>
-    <!-- outdated translation 391381189748401988 -->     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Zadržati WiFi uključenim tijekom mirovanja"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"Ne upotrebljavati Wi-Fi mrežu ako internetska veza nije zadovoljavajuća"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Zadrži Wi-Fi tijekom mirovanja"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Pojavio se problem s promjenom postavke"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj mrežu"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi mreže"</string>
@@ -539,7 +537,7 @@
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Onemogućeno"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Izbjegavanje slabe internetske veze"</string>
     <string name="wifi_disabled_heading" msgid="1428050635183875599"></string>
-    <!-- outdated translation 6885722129968401674 -->     <string name="wifi_disabled_help" msgid="5416325603334140666">"Mreža je izbjegnuta zbog loše veze. Isključite to ponašanje na zaslonu Postavke &gt; WiFi, stavka izbornika Napredno."</string>
+    <string name="wifi_disabled_help" msgid="5416325603334140666">"Mreža je izbjegnuta zbog loše veze. Isključite to ponašanje na zaslonu Postavke &gt; Wi-Fi, u stavci izbornika Napredno."</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problem u autentifikaciji"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Nije u rasponu"</string>
     <string name="wifi_wps_available_first_item" msgid="3538912605343585226">"Zaštićena mreža dostupna"</string>
@@ -551,7 +549,7 @@
     <string name="wifi_forget" msgid="8168174695608386644">"Zaboravi"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Spremi"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Odustani"</string>
-    <!-- outdated translation 5835556538028547052 -->     <string name="wifi_wps_overlap_error" msgid="3352261777053283320">"Otkrivena je još jedna WiFi zaštićena sesija. Pokušajte ponovo za nekoliko minuta."</string>
+    <string name="wifi_wps_overlap_error" msgid="3352261777053283320">"Otkrivena je još jedna WiFi zaštićena sesija. Pokušajte za nekoliko minuta."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Napredni Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Wi-Fi pojas frekvencije"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Odredi raspon frekvencije rada"</string>
@@ -569,10 +567,10 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Pristupnik"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Duljina mrežnog prefiksa"</string>
-    <!-- outdated translation 5804421683315066641 -->     <string name="wifi_p2p_settings_title" msgid="5933614000444751775">"WiFi izravno"</string>
+    <string name="wifi_p2p_settings_title" msgid="5933614000444751775">"Izravni Wi-Fi"</string>
     <string name="wifi_p2p_settings_summary" msgid="6653169526746701975">"Postavljanje veze paralelnih uređaja"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"Podaci o uređaju"</string>
-    <!-- outdated translation 5179345428413898188 -->     <string name="wifi_p2p_wps_setup" msgid="1780420204385670531">"Zaštićeno postavljanje WiFi veze"</string>
+    <string name="wifi_p2p_wps_setup" msgid="1780420204385670531">"Zaštićeno postavljanje Wi-Fi mreže"</string>
     <string name="wifi_p2p_wps_pin" msgid="6025317359151049787">"Upišite PIN"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Zapamti tu vezu"</string>
     <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"Pretraži"</string>
@@ -787,8 +785,7 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP ili CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Vrsta APN-a"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"APN protokol"</string>
-    <!-- no translation found for apn_roaming_protocol (3386954381510788422) -->
-    <skip />
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"Protokol APN-a za roaming"</string>
     <string name="carrier_enabled" msgid="407655861175280806">"Omogući/onemogući APN"</string>
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN omogućen"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN onemogućen"</string>
@@ -1245,7 +1242,7 @@
     <string name="battery_desc_display" msgid="5432795282958076557">"Baterija se koristi za prikaz i pozadinsko svjetlo"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Smanjite svjetlinu i/ili privremeni prekid zaslona"</string>
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Baterija iskorištena upotrebom značajke Wi-Fi"</string>
-    <!-- outdated translation 7433556355284798617 -->     <string name="battery_sugg_wifi" msgid="2085605314976704287">"Isključite WiFi ako se ne upotrebljava ili ako nije dostupan"</string>
+    <string name="battery_sugg_wifi" msgid="2085605314976704287">"Isključi Wi-Fi ako se ne upotrebljava ili ako nije dostupan"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Baterija iskorištena upotrebom značajke Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="1942935021750897422">"Isključite Bluetooth ako ga ne upotrebljavate"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Pokušajte se povezati s drugim Bluetooth uređajem"</string>
@@ -1338,7 +1335,7 @@
     <string name="backup_section_title" msgid="7952232291452882740">"Sigurnosna kopija i vraćanje"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Osobni podaci"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Stvori sigurnosnu kopiju mojih podataka"</string>
-    <!-- outdated translation 1362648233661534995 -->     <string name="backup_data_summary" msgid="9157861529438245957">"Stvaranje sigurnosne kopije podataka aplikacije, WiFi zaporki i ostalih postavki na Googleovim poslužiteljima"</string>
+    <string name="backup_data_summary" msgid="9157861529438245957">"Stvaranje sigurnosne kopije podataka aplikacije, Wi-Fi zaporki i ostalih postavki na Googleovim poslužiteljima"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sigurnosni račun"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Nijedan račun trenutno ne stvara sigurnosne kopije podataka"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatska obnova"</string>
@@ -1347,7 +1344,7 @@
     <string name="local_backup_password_summary_none" msgid="4780151366296088113">"Potpune sigurnosne kopije na stolnom računalu trenutačno nisu zaštićene."</string>
     <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Odaberite za promjenu ili uklanjanje zaporke za potpune sigurnosne kopije na stolnom računalu"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
-    <!-- outdated translation 5430882821079142873 -->     <string name="backup_erase_dialog_message" msgid="7218566008912418809">"Zaustaviti stvaranje sigurnosnih kopija WiFi zaporki, oznaka, ostalih postavki i podataka aplikacija te izbrisati sve kopije na Googleovim poslužiteljima?"</string>
+    <string name="backup_erase_dialog_message" msgid="7218566008912418809">"Zaustaviti stvaranje sigurnosnih kopija Wi-Fi zaporki, oznaka, drugih postavki i podataka aplikacije te izbrisati sve kopije na Googleovim poslužiteljima?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Postavke administracije uređaja"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator uređaja"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktiviraj"</string>
@@ -1365,8 +1362,7 @@
     <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sustav"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Postavljanje Wi-Fi mreže"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Povezivanje s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for wifi_setup_title_connecting_network (3747859666621319757) -->
-    <skip />
+    <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Povezivanje s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
     <string name="wifi_setup_title_connected_network" msgid="209755856836003839">"Povezano s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_add_network" msgid="6932651000151032301">"Dodavanje mreže"</string>
     <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Nije povezan"</string>
@@ -1389,7 +1385,7 @@
     <string name="wifi_setup_status_connecting" msgid="4971421484401530740">"Povezivanje…"</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Idite na sljedeći korak"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"EAP nije podržan."</string>
-    <!-- outdated translation 4521956828166347452 -->     <string name="wifi_setup_eap_not_supported" msgid="595556546597351489">"Ne možete konfigurirati EAP WiFi vezu tijekom postavljanja. To možete učiniti nakon postavljanja na zaslonu Postavke &gt; Bežično povezivanje i mreže."</string>
+    <string name="wifi_setup_eap_not_supported" msgid="595556546597351489">"Ne možete konfigurirati EAP Wi-Fi vezu tijekom postavljanja. To možete učiniti nakon postavljanja u Postavkama pod stavkom Bežično povezivanje i mreže."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"Povezivanje može potrajati nekoliko minuta..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Dodirnite "<b>"Dalje"</b>" za nastavak postavljanja."\n\n"Dodirnite "<b>"Natrag"</b>" za povezivanje s drugom Wi-Fi mrežom."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Sinkronizacija je omogućena"</string>
@@ -1497,7 +1493,7 @@
     <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Onemogući poz. pod. samo na mob. mreži. Upot. Wi-Fi ako ga ima."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Za ograničenje poz. podat. za ovu apl. ograničite mob. podatke."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Ograničenje pozadinskih podataka?"</string>
-    <!-- outdated translation 7471043848664440826 -->     <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Ova značajka može uzrokovati prekid rada aplikacije ovisne o pozadinskim podacima kada WiFi mreža nije dostupna."\n\n"U postavkama dostupnim u toj aplikaciji možete pronaći prikladniji način upravljanja upotrebom podataka."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Kada Wi-Fi nije dostupan, ova značajka može prouzročiti prekid rada aplikacije koja ovisi o pozadinskim podacima."\n\n"U postavkama koje su dostupne u aplikaciji možete pronaći prikladniji način upravljanja upotrebom podataka."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Ograničavanje pozadinskih podataka moguće je samo ako ste postavili ograničenje mobilnih podataka."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum poništavanja ciklusa upotrebe"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum svakog mjeseca."</string>
@@ -1508,7 +1504,7 @@
     <string name="data_usage_limit_dialog" product="tablet" msgid="6401600837858297985">"Podatkovna veza s mrežom <xliff:g id="NETWORKS">%1$s</xliff:g> bit će onemogućena kada dosegnete navedeno ograničenje."\n\n"Budući da potrošnju podataka mjeri vaše tabletno računalo, a vaš mobilni operater možda obračunava na neki drugi način, razmislite o postavljanju opreznijeg ograničenja."</string>
     <string name="data_usage_limit_dialog" product="default" msgid="5996407024898469862">"Podatkovna veza s mrežom <xliff:g id="NETWORKS">%1$s</xliff:g> bit će onemogućena kada dosegnete navedeno ograničenje."\n\n"Budući da potrošnju podataka mjeri vaš telefon, a vaš mobilni operater možda obračunava na neki drugi način, razmislite o postavljanju opreznijeg ograničenja."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ograničenje pozadinskih podataka?"</string>
-    <!-- outdated translation 8313061232498519610 -->     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Ako ograničite pozadinske mobilne podatke, neke aplikacije i usluge neće raditi ako niste povezani s WiFi mrežom."</string>
+    <string name="data_usage_restrict_background" msgid="6387252645350792955">"Ako ograničite pozadinske mobilne podatke, neke aplikacije i usluge neće raditi ako niste povezani s Wi-Fi mrežom."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"Upozorenja: <xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12"></font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ograničenje"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Uklonjene aplikacije"</string>
