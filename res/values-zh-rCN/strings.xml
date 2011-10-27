@@ -76,13 +76,13 @@
     <string name="battery_info_temperature_label" msgid="1968383098818648037">"电池温度："</string>
     <string name="battery_info_temperature_units" msgid="9098950587249987550">"° C"</string>
     <string name="battery_info_uptime" msgid="5548545143573527992">"启动后的时间："</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"电池的唤醒时间："</string>
+    <string name="battery_info_awake_battery" msgid="2557725975486185849">"使用电池电量的未休眠时间："</string>
     <string name="battery_info_awake_plugged" msgid="176716874713478188">"充电时的唤醒时间："</string>
     <string name="battery_info_screen_on" msgid="376277447175613889">"屏幕开启时间："</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"未知"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"正在充电"</string>
     <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"（交流电）"</string>
-    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB 绑定选项)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"正在耗电"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"未在充电"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"电量充足"</string>
@@ -432,7 +432,7 @@
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"已配对的设备"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"可用设备"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"连接"</string>
-    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开绑定"</string>
+    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开网络共享"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"配对和连接"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"取消配对"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"断开连接和取消配对"</string>
@@ -595,7 +595,7 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"静音时振动"</string>
     <string name="vibrate_title" msgid="6045820877942801599">"振动"</string>
     <string name="notification_sound_title" msgid="312032901303146002">"默认通知"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"闪动通知指示灯"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"有通知时指示灯闪烁"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"铃声"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"将来电音量用作通知音量"</string>
@@ -606,7 +606,7 @@
     <string name="dock_settings_summary" msgid="455802113668982481">"附加底座的音频设置"</string>
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"拨号键盘触摸音效"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"触摸提示音"</string>
-    <string name="lock_sounds_enable_title" msgid="450098505659399520">"屏幕锁定提示音"</string>
+    <string name="lock_sounds_enable_title" msgid="450098505659399520">"锁屏提示音"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"触摸时振动"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"降噪"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"音乐、视频、游戏和其他媒体"</string>
@@ -839,19 +839,19 @@
     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"您必须绘制解锁图案，以确认对 SD 卡执行格式化操作。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通话设置"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"设置语音信箱、来电转接、来电等待和本机号码显示"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB 绑定"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB 共享网络"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"便携式热点"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"蓝牙绑定"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"绑定"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"绑定与便携式热点"</string>
-    <string name="usb_title" msgid="7483344855356312510">"USB 绑定选项"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 绑定"</string>
-    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB 已连接，选中以绑定"</string>
-    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"已绑定"</string>
-    <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"使用 USB 存储设备时无法绑定"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"蓝牙共享网络"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"网络共享"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"网络共享与便携式热点"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 共享网络"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB 已连接，选中以共享网络"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"已共享网络"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"使用 USB 存储设备时无法共享网络"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB 未连接"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB 绑定出错"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙绑定"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB 共享网络出错"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙共享网络"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"共享该平板电脑的互联网连接"</string>
     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"共享该手机的互联网连接"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"将该平板电脑的互联网连接与 1 台设备共享"</string>
@@ -860,9 +860,9 @@
     <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"将该手机的互联网连接与 <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> 台设备共享"</string>
     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"不共享该平板电脑的互联网连接"</string>
     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"不共享该手机的互联网连接"</string>
-    <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"未绑定"</string>
-    <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"无法绑定到 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 台以上的设备。"</string>
-    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"即将解除与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的绑定。"</string>
+    <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"未共享网络"</string>
+    <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"无法与 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 台以上的设备共享网络。"</string>
+    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"即将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的网络共享。"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"帮助"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"移动网络"</string>
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
@@ -1189,7 +1189,7 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔下电源后的电量消耗情况"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重置后的电量消耗情况"</string>
-    <string name="battery_stats_on_battery" msgid="4970762168505236033">"电量已用时间：<xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"电池电量已用时间：<xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"拔下电源后已过 <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"正在充电"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"屏幕已开启"</string>
