@@ -68,6 +68,9 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mEngineSettingsPreference.setOnPreferenceClickListener(this);
         mInstallVoicesPreference = root.findPreference(KEY_INSTALL_DATA);
         mInstallVoicesPreference.setOnPreferenceClickListener(this);
+        // Remove this preference unless voices are indeed available to install.
+        root.removePreference(mInstallVoicesPreference);
+
 
         root.setTitle(getEngineLabel());
         root.setKey(getEngineName());
@@ -99,6 +102,9 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
 
         if (unavailable.size() > 0) {
             mInstallVoicesPreference.setEnabled(true);
+            getPreferenceScreen().addPreference(mInstallVoicesPreference);
+        } else {
+            getPreferenceScreen().removePreference(mInstallVoicesPreference);
         }
 
         if (available.size() > 0) {
