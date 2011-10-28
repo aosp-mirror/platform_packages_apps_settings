@@ -497,9 +497,9 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Не удалось начать поиск сетей."</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Уведомления о сетях"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Сообщать при обнаружении открытой сети"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Восстанавливать соединение"</string>
-    <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"Использовать Wi-Fi, только когда есть устойчивое интернет-соединение"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Не отключать Wi-Fi в спящем режиме"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Фильтр сетей Wi-Fi"</string>
+    <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"Не использовать сети Wi-Fi с плохим интернет-соединением"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Wi-Fi в спящем режиме"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Не удалось изменить этот параметр"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Добавить сеть"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Сети Wi-Fi"</string>
@@ -537,7 +537,7 @@
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Отключено"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Включено"</string>
     <string name="wifi_disabled_heading" msgid="1428050635183875599"></string>
-    <string name="wifi_disabled_help" msgid="5416325603334140666">"Подключение к сети не установлено из-за низкого качества связи. Соответствующие настройки можно изменить на экране \"Настройки\" &gt; \"Wi-Fi\" (пункт меню \"Дополнительно\")."</string>
+    <string name="wifi_disabled_help" msgid="5416325603334140666">"Сеть отклонена, так как соединение неустойчивое. Чтобы изменить параметры, выберите \"Настройки &gt; Wi-Fi\" и откройте меню \"Дополнительные функции\"."</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Ошибка аутентификации"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Недоступна"</string>
     <string name="wifi_wps_available_first_item" msgid="3538912605343585226">"Доступна защищенная сеть"</string>
@@ -550,7 +550,7 @@
     <string name="wifi_save" msgid="3331121567988522826">"Сохранить"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Отмена"</string>
     <string name="wifi_wps_overlap_error" msgid="3352261777053283320">"Обнаружен другой защищенный сеанс Wi-Fi. Повторите попытку позже."</string>
-    <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Расширенные настройки Wi-Fi"</string>
+    <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Дополнительные функции"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Полоса частот Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Укажите рабочий диапазон частот"</string>
     <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"При настройке полосы частот возникла неполадка."</string>
@@ -570,7 +570,7 @@
     <string name="wifi_p2p_settings_title" msgid="5933614000444751775">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_settings_summary" msgid="6653169526746701975">"Настройка одноранговых подключений"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"Информация об устройстве"</string>
-    <string name="wifi_p2p_wps_setup" msgid="1780420204385670531">"Защищенная настройка Wi-Fi"</string>
+    <string name="wifi_p2p_wps_setup" msgid="1780420204385670531">"WPS"</string>
     <string name="wifi_p2p_wps_pin" msgid="6025317359151049787">"Введите PIN-код"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Запомнить это соединение"</string>
     <string name="wifi_p2p_menu_search" msgid="7189970585393813135">"Поиск"</string>
@@ -785,7 +785,7 @@
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP или CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Тип APN"</string>
     <string name="apn_protocol" msgid="3272222921649348640">"Протокол APN"</string>
-    <string name="apn_roaming_protocol" msgid="3386954381510788422">"Протокол APN при роуминге"</string>
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN для роуминга"</string>
     <string name="carrier_enabled" msgid="407655861175280806">"Включить/выключить APN"</string>
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN вкл."</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN выкл."</string>
@@ -1140,7 +1140,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Разрешить использование фиктивных местоположений"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Разрешить отладку USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Отладка по USB – это режим, который позволяет использовать ваше устройство как внешний накопитель: перемещать файлы (с компьютера и на компьютер), напрямую устанавливать приложения, а также просматривать системные журналы."</string>
-    <string name="gadget_picker_title" msgid="98374951396755811">"Выбор·гаджета"</string>
+    <string name="gadget_picker_title" msgid="98374951396755811">"Выбор гаджета"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Выбор виджета"</string>
     <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> дн. <xliff:g id="HOURS">%2$d</xliff:g> ч. <xliff:g id="MINUTES">%3$d</xliff:g> мин. <xliff:g id="SECONDS">%4$d</xliff:g> с."</string>
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> ч. <xliff:g id="MINUTES">%2$d</xliff:g> мин. <xliff:g id="SECONDS">%3$d</xliff:g> с."</string>
@@ -1362,7 +1362,7 @@
     <string name="sound_category_feedback_title" msgid="6047518536574673606">"Система"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Настройки Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Подключение к сети Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Подключение к сети Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
+    <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Подключение к сети Wi-Fi: <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connected_network" msgid="209755856836003839">"Подключено к сети Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_add_network" msgid="6932651000151032301">"Добавьте сеть"</string>
     <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Не подключено"</string>
@@ -1385,7 +1385,7 @@
     <string name="wifi_setup_status_connecting" msgid="4971421484401530740">"Подключение..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Далее"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"EAP не поддерживается."</string>
-    <string name="wifi_setup_eap_not_supported" msgid="595556546597351489">"Во время установки нельзя настроить подключение к сети Wi-Fi с защитой EAP. Вы можете сделать это позже в меню \"Настройки\" &gt; \"Беспроводные сети\"."</string>
+    <string name="wifi_setup_eap_not_supported" msgid="595556546597351489">"Во время установки нельзя настроить подключение к сети Wi-Fi с защитой EAP. Вы можете сделать это позже в меню \"Настройки &gt; Беспроводные сети\"."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"Подключение может занять несколько минут..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Нажмите "<b>"Далее"</b>" для продолжения установки."\n\n"Нажмите "<b>"Назад"</b>" для подключения к другой сети Wi-Fi."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Синхронизация включена"</string>
@@ -1493,7 +1493,7 @@
     <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Отключить фоновый режим для мобильных сетей. Использовать Wi-Fi."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Сначала установите лимит для мобильного трафика."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Ограничение фонового режима"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Если нет доступа к Wi-Fi, эта функция может приостановить приложения, использующие фоновый режим."\n\n"Более подходящие параметры можно найти в настройках этих приложений."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Если нет доступа к Wi-Fi, эта функция может приостановить приложения, использующие фоновый режим обмена данными."\n\n"Более подходящие параметры можно найти в настройках этих приложений."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Ограничение фонового режима возможно только при лимитировании мобильного трафика."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Дата сброса цикла использования"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Число каждого месяца:"</string>
@@ -1504,7 +1504,7 @@
     <string name="data_usage_limit_dialog" product="tablet" msgid="6401600837858297985">"Когда лимит трафика будет исчерпан, передача данных по сетям <xliff:g id="NETWORKS">%1$s</xliff:g> прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
     <string name="data_usage_limit_dialog" product="default" msgid="5996407024898469862">"Когда лимит трафика будет исчерпан, передача данных по сетям <xliff:g id="NETWORKS">%1$s</xliff:g> прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ограничение фонового режима"</string>
-    <string name="data_usage_restrict_background" msgid="6387252645350792955">"Ограничение фонового обмена мобильными данными может помешать работе приложений и служб при отключенном Wi-Fi."</string>
+    <string name="data_usage_restrict_background" msgid="6387252645350792955">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Внимание!"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит:"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
@@ -1566,9 +1566,9 @@
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Хорошо. Для дальнейшей прокрутки списка продолжайте движение пальцами вверх."</string>
     <string name="accessibility_tutorial_lesson_2_text_4" msgid="3055831259260848004">"Это всё. Чтобы выйти, нажмите кнопку \"<xliff:g id="FINISH">%s</xliff:g>\"."</string>
     <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Проверка правописания"</string>
-    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Введите текущий пароль для полного резервного копирования"</string>
-    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Введите новый пароль для полного резервного копирования"</string>
-    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Подтвердите пароль к полной резервной копии"</string>
+    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Введите текущий пароль"</string>
+    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Введите новый пароль"</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Подтвердите пароль"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Сохранить пароль"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Отмена"</string>
     <!-- String.format failed for translation -->
