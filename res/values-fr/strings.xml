@@ -335,7 +335,7 @@
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Faire glisser"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Aucune sécurité"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Reconnaissance faciale"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Face Unlock"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Sécurité faible, expérimental"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Schéma"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Sécurité moyenne"</string>
@@ -654,7 +654,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de la police"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Taille de police"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres de verrouillage de la SIM"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres verrouillage SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Configurer verrouillage carte SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Verrouillage de la SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Verrouiller la carte SIM"</string>
@@ -866,7 +866,7 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Aide"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Réseaux mobiles"</string>
     <string name="location_title" msgid="1029961368397484576">"Ma position"</string>
-    <string name="location_network_based" msgid="5569673665032992664">"Service de localisation Google"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Service de localisation"</string>
     <string name="location_neighborhood_level" msgid="1337612962522836900">"Utiliser les données des réseaux Wi-Fi et mobiles pour déterminer votre position approximative"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Position déterminée par le Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satellites GPS"</string>
@@ -874,8 +874,8 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Utiliser le GPS assisté"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utiliser le serveur pour assister le GPS (désactiver pour réduire l\'utilisation du réseau)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Utiliser le serveur pour assister le GPS (désactiver pour améliorer les performances du GPS)"</string>
-    <string name="use_location_title" msgid="5206937465504979977">"Localisation et rech. Google"</string>
-    <string name="use_location_summary" msgid="3978805802386162520">"Autoriser Google à utiliser position pour améliorer résultats de recherche et autres services Google"</string>
+    <string name="use_location_title" msgid="5206937465504979977">"Localisation et recherche"</string>
+    <string name="use_location_summary" msgid="3978805802386162520">"Autoriser Google à utiliser votre position pour améliorer vos résultats de recherche et autres services Google"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"À propos de la tablette"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"À propos du téléphone"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Informations légales, état et version du logiciel"</string>
@@ -1132,7 +1132,7 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Définir les options pour le développement de l\'application"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Débogage USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Mode débogage lorsqu\'un câble USB est connecté"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"Numéro de développement de l\'appareil"</string>
+    <string name="verifier_device_identifier" msgid="5079997701152411060">"ID appareil de développement"</string>
     <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Informations sur l\'appareil non disponibles."</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Rester activé"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"L\'écran ne se met jamais en veille lors du chargement"</string>
@@ -1157,10 +1157,10 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Système"</string>
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Grands caractères"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Raccrocher pendant un appel"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Bouton marche/arrêt raccroche"</string>
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"Explorer au toucher"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Lorsque la fonctionnalité \"Explorer au toucher\" est activée, vous pouvez entendre ou voir la description de ce qui se trouve sous vos doigts."\n\n" Celle-ci est destinée aux utilisateurs malvoyants."</string>
-    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Délai de pression prolongée"</string>
+    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Délai de pression"</string>
     <string name="accessibility_script_injection_title" msgid="3264723681038625967">"Installer des scripts Web"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Paramètres"</string>
     <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"Didacticiel"</string>
@@ -1340,9 +1340,9 @@
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Aucun compte ne stocke actuellement des données sauvegardées."</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restaurer automatiquement"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Lors de la réinstallation d\'une application, restaurer les paramètres et les données sauvegardées"</string>
-    <string name="local_backup_password_title" msgid="3860471654439418822">"Mot de passe sauv. bureau"</string>
-    <string name="local_backup_password_summary_none" msgid="4780151366296088113">"Les sauvegardes locales intégrales ne sont actuellement pas protégées."</string>
-    <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Sélectionnez cette option pour modifier ou supprimer le mot de passe utilisé pour les sauvegardes locales complètes."</string>
+    <string name="local_backup_password_title" msgid="3860471654439418822">"M. de passe sauv. ordinateur"</string>
+    <string name="local_backup_password_summary_none" msgid="4780151366296088113">"Les sauvegardes complètes sur ordinateur ne sont actuellement pas protégées."</string>
+    <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Sélectionnez cette option pour modifier ou supprimer le mot de passe utilisé pour les sauvegardes complètes sur ordinateur."</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="7218566008912418809">"Arrêter de sauvegarder vos mots de passe Wi-Fi, vos favoris, ainsi que d\'autres paramètres et données d\'applications, et en effacer toutes les copies des serveurs Google ?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Paramètres de gestion de l\'appareil"</string>
@@ -1443,7 +1443,7 @@
     <string name="strict_mode_summary" msgid="142834318897332338">"Faire clignoter écran en cas de longues opérations"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Emplacement du curseur"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Superposition écran indiquant données actuelles"</string>
-    <string name="show_touches" msgid="1356420386500834339">"Afficher l\'élément sélectionné"</string>
+    <string name="show_touches" msgid="1356420386500834339">"Afficher élément sélectionné"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Afficher repère visuel pour éléments sélectionnés"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Afficher mises à jour écran"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Faire clignoter les mises à jour sur l\'écran"</string>
@@ -1566,9 +1566,9 @@
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Très bien. Continuez à faire glisser vos doigts vers le haut pour faire défiler plus d\'éléments."</string>
     <string name="accessibility_tutorial_lesson_2_text_4" msgid="3055831259260848004">"Vous avez terminé le didacticiel. Pour le quitter, recherchez le bouton \"<xliff:g id="FINISH">%s</xliff:g>\", puis appuyez dessus."</string>
     <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Correction orthographique"</string>
-    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Saisissez ici le mot de passe actuel utilisé pour les sauvegardes intégrales."</string>
+    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Saisissez ici le mot de passe actuel utilisé pour les sauvegardes complètes."</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Saisissez ici un nouveau mot de passe pour les sauvegardes intégrales."</string>
-    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Confirmez ici votre nouveau mot de passe de sauvegarde intégrale."</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Confirmez ici votre nouveau mot de passe de sauvegarde complète."</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Définir le mot de passe de sauvegarde"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annuler"</string>
     <!-- String.format failed for translation -->
