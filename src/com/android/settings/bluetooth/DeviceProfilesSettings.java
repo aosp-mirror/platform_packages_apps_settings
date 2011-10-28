@@ -332,7 +332,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
          * Gray out checkbox while connecting and disconnecting
          */
         profilePref.setEnabled(!mCachedDevice.isBusy());
-        profilePref.setChecked(mCachedDevice.isConnectedProfile(profile));
+        profilePref.setChecked(profile.isPreferred(device));
         profilePref.setSummary(profile.getSummaryResourceForDevice(device));
     }
 
