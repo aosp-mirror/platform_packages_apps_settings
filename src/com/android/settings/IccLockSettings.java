@@ -348,7 +348,8 @@ public class IccLockSettings extends PreferenceActivity
         // reset dialog state. Else inject error message and show dialog again.
         Message callback = Message.obtain(mHandler, MSG_ENABLE_ICC_PIN_COMPLETE);
         mPhone.getIccCard().setIccLockEnabled(mToState, mPin, callback);
-
+        // Disable the setting till the response is received.
+        mPinToggle.setEnabled(false);
     }
 
     private void iccLockChanged(boolean success) {
@@ -358,6 +359,7 @@ public class IccLockSettings extends PreferenceActivity
             Toast.makeText(this, mRes.getString(R.string.sim_lock_failed), Toast.LENGTH_SHORT)
                     .show();
         }
+        mPinToggle.setEnabled(true);
         resetDialogState();
     }
 
