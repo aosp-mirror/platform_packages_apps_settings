@@ -116,8 +116,14 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
             boolean muted = mAudioManager.isStreamMute(streamType);
 
             if (mCheckBoxes[i] != null) {
-                mCheckBoxes[i].setImageResource(
-                        muted ? SEEKBAR_MUTED_RES_ID[i] : SEEKBAR_UNMUTED_RES_ID[i]);
+                if (streamType == AudioManager.STREAM_RING && muted
+                        && mAudioManager.shouldVibrate(AudioManager.VIBRATE_TYPE_RINGER)) {
+                    mCheckBoxes[i].setImageResource(
+                            com.android.internal.R.drawable.ic_audio_ring_notif_vibrate);
+                } else {
+                    mCheckBoxes[i].setImageResource(
+                            muted ? SEEKBAR_MUTED_RES_ID[i] : SEEKBAR_UNMUTED_RES_ID[i]);
+                }
             }
             if (mSeekBars[i] != null) {
                 mSeekBars[i].setEnabled(!muted);
@@ -362,7 +368,11 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
         // Touching any of the mute buttons causes us to get the state from the system and toggle it
         switch(mAudioManager.getRingerMode()) {
             case AudioManager.RINGER_MODE_NORMAL:
-                mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                mAudioManager.setRingerMode(
+                        (Settings.System.getInt(getContext().getContentResolver(),
+                                Settings.System.VIBRATE_IN_SILENT, 1) == 1)
+                        ? AudioManager.RINGER_MODE_VIBRATE
+                        : AudioManager.RINGER_MODE_SILENT);
                 break;
             case AudioManager.RINGER_MODE_VIBRATE:
             case AudioManager.RINGER_MODE_SILENT:
