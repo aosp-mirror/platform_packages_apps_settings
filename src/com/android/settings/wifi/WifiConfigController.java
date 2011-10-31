@@ -575,7 +575,7 @@ public class WifiConfigController implements TextWatcher,
         int pos = mNetworkSetupSpinner.getSelectedItemPosition();
 
         /* Show pin text input if needed */
-        if (pos == WPS_KEYPAD) {
+        if (pos == WPS_DISPLAY) {
             mView.findViewById(R.id.wps_fields).setVisibility(View.VISIBLE);
         } else {
             mView.findViewById(R.id.wps_fields).setVisibility(View.GONE);
