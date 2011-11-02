@@ -455,13 +455,14 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         if (enable) {
             //Check if provisioning is needed
-            String intentStr = getActivity().getString(
-                    com.android.internal.R.string.config_mobile_hotspot_provision_intent);
+            String[] appDetails = getResources().getStringArray(
+                    com.android.internal.R.array.config_mobile_hotspot_provision_app);
 
-            if (TextUtils.isEmpty(intentStr)) {
+            if (appDetails.length != 2) {
                 mWifiApEnabler.setSoftapEnabled(true);
             } else {
-                Intent intent = new Intent(intentStr);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName(appDetails[0], appDetails[1]);
                 startActivityForResult(intent, MHS_REQUEST);
             }
         } else {
