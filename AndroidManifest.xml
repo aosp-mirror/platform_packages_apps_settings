@@ -94,7 +94,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
-                <action android:name="android.settings.NFC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -980,11 +979,11 @@
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.NFCSHARING_SETTINGS" />
+                <action android:name="android.settings.ANDROID_BEAM_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.nfc.AndroidBeam" />
+                android:value="com.android.settings.nfc.NdefPush" />
         </activity>
 
         <!-- Accessibility tutorial -->
