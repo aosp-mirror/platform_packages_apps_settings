@@ -100,8 +100,10 @@ class VpnDialog extends AlertDialog implements TextWatcher,
         mName.setText(mProfile.name);
         mType.setSelection(mProfile.type);
         mServer.setText(mProfile.server);
-        mUsername.setText(mProfile.username);
-        mPassword.setText(mProfile.password);
+        if (mProfile.saveLogin) {
+            mUsername.setText(mProfile.username);
+            mPassword.setText(mProfile.password);
+        }
         mSearchDomains.setText(mProfile.searchDomains);
         mDnsServers.setText(mProfile.dnsServers);
         mRoutes.setText(mProfile.routes);
