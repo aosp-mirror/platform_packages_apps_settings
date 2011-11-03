@@ -67,7 +67,7 @@ public class DreamTesterPreference extends Preference {
                 .setComponent(cn)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                     | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                    | Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    )
                 .putExtra("android.dreams.TEST", true);
             getContext().startActivity(intent);
         }
