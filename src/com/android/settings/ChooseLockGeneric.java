@@ -282,7 +282,6 @@ public class ChooseLockGeneric extends PreferenceActivity {
             fallBackIntent.putExtra(CONFIRM_CREDENTIALS, false);
             fallBackIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE,
                     R.string.backup_lock_settings_picker_title);
-            fallBackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             boolean showTutorial = ALWAY_SHOW_TUTORIAL ||
                     !mChooseLockSettingsHelper.utils().isBiometricWeakEverChosen();
