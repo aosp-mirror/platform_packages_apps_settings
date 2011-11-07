@@ -131,7 +131,7 @@
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Сопряжение..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Bluetooth-устройство без названия"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Поиск"</string>
-    <string name="progress_tap_to_pair" msgid="5655704645616731277">"Устройства"</string>
+    <string name="progress_tap_to_pair" msgid="5655704645616731277">"Выберите устройство"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Устройства Bluetooth не найдены."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Запрос сопряжения Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Запрос на сопряжение"</string>
@@ -256,7 +256,7 @@
     <string name="cancel" msgid="6859253417269739139">"Отмена"</string>
     <string name="settings_label" msgid="1626402585530130914">"Настройки"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Настройки"</string>
-    <string name="settings_shortcut" msgid="3936651951364030415">"Ярлык \"Настройки\""</string>
+    <string name="settings_shortcut" msgid="3936651951364030415">"Ярлык настроек"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Режим полета"</string>
     <string name="radio_controls_title" msgid="6889937359495515769">"Ещё..."</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Беспроводные сети"</string>
@@ -273,10 +273,10 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Дата и время"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"Установить дату и время"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"Установка даты, времени, часового пояса и формата"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"Автонастройка даты и времени"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"Дата и время сети"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Использовать время сети"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Использовать время сети"</string>
-    <string name="zone_auto" msgid="334783869352026648">"Автонастройка часового пояса"</string>
+    <string name="zone_auto" msgid="334783869352026648">"Часовой пояс сети"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Использовать часовой пояс сети"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Использовать часовой пояс сети"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"24-часовой формат"</string>
@@ -430,7 +430,7 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Поиск..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Настройки устройства"</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Подключенные устройства"</string>
-    <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Доступные устройства"</string>
+    <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Список"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Подключить"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Отключить"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Выполнить сопряжение и подключить"</string>
@@ -577,7 +577,7 @@
     <string name="wifi_p2p_menu_create_group" msgid="7595229161883902082">"Создать группу"</string>
     <string name="wifi_p2p_menu_remove_group" msgid="4844634506540667517">"Удалить группу"</string>
     <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"Дополнительно"</string>
-    <string name="wifi_p2p_available_devices" msgid="5943352520059654483">"Поиск"</string>
+    <string name="wifi_p2p_available_devices" msgid="5943352520059654483">"Список"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Точка доступа Wi-Fi"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> активна"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Ошибка подключения"</string>
@@ -683,7 +683,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версия Android"</string>
     <string name="model_number" msgid="3765737700545384794">"Модель"</string>
-    <string name="baseband_version" msgid="1848990160763524801">"Версия ПО модуля связи"</string>
+    <string name="baseband_version" msgid="1848990160763524801">"Прошивка модуля связи"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Версия ядра"</string>
     <string name="build_number" msgid="3075795840572241758">"Номер сборки"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Недоступно"</string>
@@ -839,11 +839,11 @@
     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Для подтверждения очистки SD-карты начертите графический ключ."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Вызовы"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Голосовая почта, АОН, переадресация, параллельный вызов"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Общий USB-модем"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB-модем"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Точка доступа Wi-Fi"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Общий Bluetooth-модем"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Общий модем"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"Общий модем/точка доступа"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth-модем"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Режим модема"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"Режим модема"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-модем"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-связь установлена, установите флажок для подключения"</string>
@@ -851,22 +851,22 @@
     <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"Невозможно подключиться при использовании USB-накопителя"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB-подключения не обнаружено"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Ошибка подключения USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Общий Bluetooth-модем"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth-модем"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Устройство работает в режиме модема"</string>
-    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Режим модема на этом устройстве включен"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Включен"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Интернет-подключение планшетного ПК используется 1 устройством"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Интернет-подключение телефона используется 1 устройством"</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Интернет-подключение планшетного ПК используется <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> устройствами"</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Интернет-подключение телефона используется <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> устройствами"</string>
-    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Режим модема на этом устройстве отключен"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Режим модема на этом устройстве отключен"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Выключен"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Выключен"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"Отсутствует подключение"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"Макс. число подключаемых устройств: <xliff:g id="MAXCONNECTION">%1$d</xliff:g>"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Подключение к <xliff:g id="DEVICE_NAME">%1$s</xliff:g> будет прервано."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Справка"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Мобильная сеть"</string>
     <string name="location_title" msgid="1029961368397484576">"Мое местоположение"</string>
-    <string name="location_network_based" msgid="5569673665032992664">"Геопозиционирование Google"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="1337612962522836900">"Использовать Wi-Fi и мобильные сети для определения местоположения"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Местоположение определяется с помощью Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Спутники GPS"</string>
@@ -874,7 +874,7 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Использовать A-GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Использовать сервер для A-GPS (снимите флажок для менее интенсивного использования сети)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Использовать сервер для A-GPS (снимите флажок для улучшения работы GPS)"</string>
-    <string name="use_location_title" msgid="5206937465504979977">"Местоположение и Поиск Google"</string>
+    <string name="use_location_title" msgid="5206937465504979977">"Учитывать при поиске"</string>
     <string name="use_location_summary" msgid="3978805802386162520">"Разрешить Google использовать данные о местоположении для улучшения поиска и работы других служб"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"О планшетном ПК"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"О телефоне"</string>
@@ -1015,7 +1015,7 @@
     <string name="move_app" msgid="5042838441401731346">"Переместить"</string>
     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Переместить на планшет"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Переместить на телефон"</string>
-    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Перенести на USB-накопитель"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Перенести на USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Переместить на SD-карту"</string>
     <string name="moving" msgid="6431016143218876491">"Перемещение"</string>
     <string name="insufficient_storage" msgid="481763122991093080">"Недостаточно места."</string>
@@ -1206,7 +1206,7 @@
     <string name="history_details_title" msgid="3608240585315506067">"Подробная история"</string>
     <string name="details_title" msgid="3792801565213935385">"Сведения об использовании"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Сведения об использовании"</string>
-    <string name="controls_subtitle" msgid="390468421138288702">"Настроить режим энергопотребления"</string>
+    <string name="controls_subtitle" msgid="390468421138288702">"Режим энергопотребления"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Вложенные пакеты"</string>
     <string name="power_screen" msgid="3023346080675904613">"Экран"</string>
     <string name="power_wifi" msgid="2382791137776486974">"Wi-Fi"</string>
@@ -1214,16 +1214,16 @@
     <string name="power_cell" msgid="6596471490976003056">"Связь с сетью"</string>
     <string name="power_phone" msgid="5392641106474567277">"Голосовые вызовы"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Планшетный ПК в режиме ожидания"</string>
-    <string name="power_idle" product="default" msgid="9055659695602194990">"Телефон в режиме ожидания"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"Режим ожидания"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"ЦП – всего"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"ЦП – активный режим"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Не отключать"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Использование Wi-Fi"</string>
+    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Планшетный ПК"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Телефон"</string>
-    <string name="usage_type_data_send" msgid="2857401966985425427">"Отправлено данных"</string>
-    <string name="usage_type_data_recv" msgid="7251090882025234185">"Получено данных"</string>
+    <string name="usage_type_data_send" msgid="2857401966985425427">"Отправлено"</string>
+    <string name="usage_type_data_recv" msgid="7251090882025234185">"Получено"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Аудио"</string>
     <string name="usage_type_video" msgid="4295357792078579944">"Видео"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"Время работы"</string>
@@ -1303,7 +1303,7 @@
     <string name="tts_engine_settings_button" msgid="1030512042040722285">"Настройки синтеза речи"</string>
     <string name="tts_engine_preference_section_title" msgid="448294500990971413">"Система по умолчанию"</string>
     <string name="tts_general_section_title" msgid="4402572014604490502">"Общие"</string>
-    <string name="gadget_title" msgid="5519037532720577836">"Управление питанием"</string>
+    <string name="gadget_title" msgid="5519037532720577836">"Упр. питанием"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Обновление настроек Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Обновление настроек Bluetooth"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
@@ -1505,8 +1505,8 @@
     <string name="data_usage_limit_dialog" product="default" msgid="5996407024898469862">"Когда лимит трафика будет исчерпан, передача данных по сетям <xliff:g id="NETWORKS">%1$s</xliff:g> прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ограничение фонового режима"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Внимание!"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит:"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Получено: <xliff:g id="RECEIVED">%1$s</xliff:g>; отправлено: <xliff:g id="SENT">%2$s</xliff:g>"</string>
     <string name="data_usage_total_during_range" msgid="441648308264260691">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
