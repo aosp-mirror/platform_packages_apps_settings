@@ -49,6 +49,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
@@ -516,6 +517,15 @@ public class DataUsageSummary extends Fragment {
 
         mUidDetailProvider.clearCache();
         mUidDetailProvider = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        if (this.isRemoving()) {
+            getFragmentManager()
+                    .popBackStack(TAG_APP_DETAILS, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        super.onDestroy();
     }
 
     /**
@@ -1502,7 +1512,6 @@ public class DataUsageSummary extends Fragment {
             final AppDetailsFragment fragment = new AppDetailsFragment();
             fragment.setArguments(args);
             fragment.setTargetFragment(parent, 0);
-
             final FragmentTransaction ft = parent.getFragmentManager().beginTransaction();
             ft.add(fragment, TAG_APP_DETAILS);
             ft.addToBackStack(TAG_APP_DETAILS);
