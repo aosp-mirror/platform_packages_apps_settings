@@ -95,12 +95,15 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         ArrayList<String> unavailable = voiceDataDetails.getStringArrayListExtra(
                 TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES);
 
-        if (available == null || unavailable == null){
+        if (available == null){
             Log.e(TAG, "TTS data check failed (available == null).");
+            final CharSequence[] empty = new CharSequence[0];
+            mLocalePreference.setEntries(empty);
+            mLocalePreference.setEntryValues(empty);
             return;
         }
 
-        if (unavailable.size() > 0) {
+        if (unavailable != null && unavailable.size() > 0) {
             mInstallVoicesPreference.setEnabled(true);
             getPreferenceScreen().addPreference(mInstallVoicesPreference);
         } else {
