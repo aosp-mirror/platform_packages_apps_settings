@@ -44,7 +44,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
 public class ChooseLockPassword extends PreferenceActivity {
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
@@ -388,7 +387,6 @@ public class ChooseLockPassword extends PreferenceActivity {
                             LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
                     mLockPatternUtils.clearLock(isFallback);
                     mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
-                    Toast.makeText(getActivity(), R.string.lock_setup, Toast.LENGTH_SHORT).show();
                     getActivity().finish();
                 } else {
                     updateStage(Stage.ConfirmWrong);
