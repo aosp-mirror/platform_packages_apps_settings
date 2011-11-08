@@ -19,6 +19,7 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -50,12 +51,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+    private static final String KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING =
+            "biometric_weak_improve_matching";
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
+    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_IMPROVE_REQUEST = 124;
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -326,6 +330,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+        } else if (KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING.equals(key)) {
+            ChooseLockSettingsHelper helper =
+                    new ChooseLockSettingsHelper(this.getActivity(), this);
+            if (!helper.launchConfirmationActivity(
+                    CONFIRM_EXISTING_FOR_BIOMETRIC_IMPROVE_REQUEST, null, null)) {
+                startBiometricWeakImprove(); // no password set, so no need to confirm
+            }
         } else if (KEY_LOCK_ENABLED.equals(key)) {
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
@@ -360,6 +371,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_IMPROVE_REQUEST &&
+                resultCode == Activity.RESULT_OK) {
+            startBiometricWeakImprove();
+            return;
+        }
         createPreferenceHierarchy();
     }
 
@@ -375,5 +391,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
             updateLockAfterPreferenceSummary();
         }
         return true;
+    }
+
+    public void startBiometricWeakImprove(){
+        Intent intent = new Intent();
+        intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
+        startActivity(intent);
     }
 }
