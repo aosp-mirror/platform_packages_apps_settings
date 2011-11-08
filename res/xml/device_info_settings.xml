@@ -80,13 +80,7 @@
             <intent android:action="android.settings.TEAM" />
         </PreferenceScreen>
         -->
-        <!-- System Tutorial - launches activity -->
-        <PreferenceScreen android:key="system_tutorial"
-                android:title="@string/system_tutorial_list_item_title" 
-                android:summary="@string/system_tutorial_list_item_summary">
-            <intent android:action="android.intent.action.SYSTEM_TUTORIAL" />
-        </PreferenceScreen>
-        
+
         <!-- Device hardware model -->
         <Preference android:key="device_model" 
                 style="?android:preferenceInformationStyle"
