@@ -68,6 +68,8 @@ public final class DockEventReceiver extends BroadcastReceiver {
                 case Intent.EXTRA_DOCK_STATE_UNDOCKED:
                 case Intent.EXTRA_DOCK_STATE_CAR:
                 case Intent.EXTRA_DOCK_STATE_DESK:
+                case Intent.EXTRA_DOCK_STATE_LE_DESK:
+                case Intent.EXTRA_DOCK_STATE_HE_DESK:
                     Intent i = new Intent(intent);
                     i.setClass(context, DockService.class);
                     beginStartingService(context, i);

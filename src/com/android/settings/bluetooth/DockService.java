@@ -438,6 +438,8 @@ public final class DockService extends Service implements ServiceListener {
                 msgType = MSG_TYPE_UNDOCKED_TEMPORARY;
                 break;
             case Intent.EXTRA_DOCK_STATE_DESK:
+            case Intent.EXTRA_DOCK_STATE_LE_DESK:
+            case Intent.EXTRA_DOCK_STATE_HE_DESK:
             case Intent.EXTRA_DOCK_STATE_CAR:
                 if (DockEventReceiver.ACTION_DOCK_SHOW_UI.equals(intent.getAction())) {
                     msgType = MSG_TYPE_SHOW_UI;
@@ -463,6 +465,8 @@ public final class DockService extends Service implements ServiceListener {
         switch (state) {
             case Intent.EXTRA_DOCK_STATE_CAR:
             case Intent.EXTRA_DOCK_STATE_DESK:
+            case Intent.EXTRA_DOCK_STATE_LE_DESK:
+            case Intent.EXTRA_DOCK_STATE_HE_DESK:
                 break;
             default:
                 return;
@@ -578,6 +582,8 @@ public final class DockService extends Service implements ServiceListener {
         int numOfProfiles;
         switch (state) {
             case Intent.EXTRA_DOCK_STATE_DESK:
+            case Intent.EXTRA_DOCK_STATE_LE_DESK:
+            case Intent.EXTRA_DOCK_STATE_HE_DESK:
                 numOfProfiles = 1;
                 break;
             case Intent.EXTRA_DOCK_STATE_CAR:
@@ -609,6 +615,8 @@ public final class DockService extends Service implements ServiceListener {
                 break;
 
             case Intent.EXTRA_DOCK_STATE_DESK:
+            case Intent.EXTRA_DOCK_STATE_LE_DESK:
+            case Intent.EXTRA_DOCK_STATE_HE_DESK:
                 items[0] = getString(R.string.bluetooth_dock_settings_a2dp);
                 mProfiles[0] = mProfileManager.getA2dpProfile();
                 if (firstTime) {
