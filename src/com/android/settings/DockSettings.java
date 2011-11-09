@@ -107,6 +107,8 @@ public class DockSettings extends SettingsPreferenceFragment {
                     resId = R.string.dock_audio_summary_car;
                     break;
                 case Intent.EXTRA_DOCK_STATE_DESK:
+                case Intent.EXTRA_DOCK_STATE_LE_DESK:
+                case Intent.EXTRA_DOCK_STATE_HE_DESK:
                     resId = R.string.dock_audio_summary_desk;
                     break;
                 case Intent.EXTRA_DOCK_STATE_UNDOCKED:
