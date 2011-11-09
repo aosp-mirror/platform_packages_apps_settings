@@ -43,6 +43,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
+    private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TOGGLE_WIFI_P2P = "toggle_wifi_p2p";
@@ -109,6 +110,20 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
+        //enable/disable wimax depending on the value in config.xml
+        boolean isWimaxEnabled = this.getResources().getBoolean(
+                com.android.internal.R.bool.config_wimaxEnabled);
+        if (!isWimaxEnabled) {
+            PreferenceScreen root = getPreferenceScreen();
+            Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
+            if (ps != null) root.removePreference(ps);
+        } else {
+            if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIMAX )
+                    && isWimaxEnabled) {
+                Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
+                ps.setDependency(KEY_TOGGLE_AIRPLANE);
+            }
+        }
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIFI)) {
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
