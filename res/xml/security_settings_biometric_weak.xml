@@ -26,6 +26,10 @@
             android:summary="@string/unlock_set_unlock_mode_biometric_weak"
             android:persistent="false"/>
 
+        <PreferenceScreen
+            android:key="biometric_weak_improve_matching"
+            android:title="@string/biometric_weak_improve_matching_title"/>
+
         <CheckBoxPreference
             android:key="visiblepattern"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
