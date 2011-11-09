@@ -40,7 +40,7 @@
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"Только экстренные вызовы"</string>
     <string name="radioInfo_service_off" msgid="1434084741785525415">"Радио отключено"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Роуминг"</string>
-    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Роуминг отключен"</string>
+    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Отключен"</string>
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Не работает"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Звонок"</string>
     <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"Посылка вызова"</string>
@@ -1015,7 +1015,7 @@
     <string name="move_app" msgid="5042838441401731346">"Переместить"</string>
     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Переместить на планшет"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Переместить на телефон"</string>
-    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Перенести на USB-накопитель"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Перенести на USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Переместить на SD-карту"</string>
     <string name="moving" msgid="6431016143218876491">"Перемещение"</string>
     <string name="insufficient_storage" msgid="481763122991093080">"Недостаточно места."</string>
@@ -1166,8 +1166,8 @@
     <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"Руководство"</string>
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Вкл."</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Выключено"</string>
-    <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Разрешено"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Запрещено"</string>
+    <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Разрешена"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Запрещена"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Разрешить"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="5697152768523270885">"Запретить"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Использовать <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1505,8 +1505,8 @@
     <string name="data_usage_limit_dialog" product="default" msgid="5996407024898469862">"Когда лимит трафика будет исчерпан, передача данных по сетям <xliff:g id="NETWORKS">%1$s</xliff:g> прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ограничение фонового режима"</string>
     <string name="data_usage_restrict_background" msgid="8313061232498519610">"Если ограничить передачу данных в фоновом режиме по мобильной сети, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Внимание!"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит:"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Получено: <xliff:g id="RECEIVED">%1$s</xliff:g>; отправлено: <xliff:g id="SENT">%2$s</xliff:g>"</string>
     <string name="data_usage_total_during_range" msgid="441648308264260691">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
@@ -1565,7 +1565,7 @@
     <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Приложите два пальца к элементу списка и проведите ими вверх. Когда достигните верхней части экрана, снова приложите пальцы к списку и продолжайте прокручивание."</string>
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Хорошо. Для дальнейшей прокрутки списка продолжайте движение пальцами вверх."</string>
     <string name="accessibility_tutorial_lesson_2_text_4" msgid="3055831259260848004">"Это всё. Чтобы выйти, нажмите кнопку \"<xliff:g id="FINISH">%s</xliff:g>\"."</string>
-    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Проверка правописания"</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Проверка орфографии"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Введите текущий пароль"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Введите новый пароль"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Подтвердите пароль"</string>
