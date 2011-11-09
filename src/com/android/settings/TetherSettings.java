@@ -37,6 +37,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -476,6 +477,9 @@ public class TetherSettings extends SettingsPreferenceFragment
     }
 
     boolean isProvisioningNeeded() {
+        if (SystemProperties.getBoolean("net.tethering.noprovisioning", false)) {
+            return false;
+        }
         return mProvisionApp.length == 2;
     }
 
