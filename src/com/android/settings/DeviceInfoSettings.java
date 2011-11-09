@@ -67,17 +67,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.device_info_settings);
 
-        // If we don't have an IME tutorial, remove that option
-        String currentIme = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.DEFAULT_INPUT_METHOD);
-        ComponentName component = ComponentName.unflattenFromString(currentIme);
-        Intent imeIntent = new Intent(component.getPackageName() + ".tutorial");
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> tutorials = pm.queryIntentActivities(imeIntent, 0);
-        if(tutorials == null || tutorials.isEmpty()) {
-            getPreferenceScreen().removePreference(findPreference("system_tutorial"));
-        }
-
         setStringSummary(KEY_FIRMWARE_VERSION, Build.VERSION.RELEASE);
         findPreference(KEY_FIRMWARE_VERSION).setEnabled(true);
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
