@@ -131,11 +131,11 @@
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Parowanie..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Urządzenie Bluetooth bez nazwy"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Wyszukiwanie"</string>
-    <string name="progress_tap_to_pair" msgid="5655704645616731277">"Dotknij, aby sparować."</string>
+    <string name="progress_tap_to_pair" msgid="5655704645616731277">"Dotknij, by sparować"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Brak urządzeń Bluetooth w pobliżu"</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Żądanie parowania Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Żądanie parowania"</string>
-    <string name="bluetooth_notif_message" msgid="1931617700075106801">"Dotknij, aby sparować z urządzeniem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="1931617700075106801">"Dotknij, by sparować z <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Pokaż odebrane pliki"</string>
     <string name="device_picker" msgid="8721012448931226323">"Selektor urządzenia Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Prośba o pozwolenie na włączenie modułu Bluetooth"</string>
@@ -184,7 +184,7 @@
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"Wpisana nazwa hosta jest nieprawidłowa."</string>
     <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"Wpisana lista wykluczeń jest niepoprawnie sformatowana. Wykluczone domeny muszą być rozdzielone przecinkami."</string>
-    <!-- outdated translation 3525734169948795417 -->     <string name="proxy_error_empty_port" msgid="5539106187558215246">"Należy uzupełnić pole port."</string>
+    <string name="proxy_error_empty_port" msgid="5539106187558215246">"Musisz wypełnić pole portu."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Pole port musi być puste, jeśli pole host jest puste."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Wpisany port jest nieprawidłowy."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Serwer proxy HTTP jest używany przez przeglądarkę, ale inne aplikacje mogą go nie używać."</string>
@@ -288,6 +288,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortuj według strefy czasowej"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Godzina"</string>
+    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
+    <skip />
     <string name="lock_after_timeout" msgid="4590337686681194648">"Blokuj automatycznie"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Po <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> uśpienia"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Pokaż tę informację na ekranie blokady"</string>
@@ -305,14 +307,14 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Wymagaj podania kodu PIN lub hasła w celu odszyfrowania tabletu przy każdym uruchomieniu"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Wymagaj podania kodu PIN lub hasła w celu odszyfrowania telefonu przy każdym uruchomieniu"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Zaszyfrowane"</string>
-    <!-- outdated translation 923629233459331136 -->     <string name="crypt_keeper_desc" product="tablet" msgid="388628691961985052">"Możesz zaszyfrować swoje konta, ustawienia, pobrane aplikacje wraz z danymi oraz pliki multimedialne i inne. Po zaszyfrowaniu konieczne będzie wpisywanie kodu PIN lub hasła przy każdym uruchomieniu tabletu, aby odszyfrować dane. Trwałe odszyfrowanie tabletu jest możliwe jedynie przez przywrócenie danych fabrycznych, a tym samym usunięcie wszystkich danych."\n\n"Szyfrowanie trwa co najmniej godzinę. Przed jego rozpoczęciem naładuj baterię, a w trakcie nie odłączaj tabletu od zasilania. Przerwanie procesu szyfrowania spowoduje utratę części lub wszystkich danych."</string>
-    <!-- outdated translation 923629233459331136 -->     <string name="crypt_keeper_desc" product="default" msgid="7707298558618842459">"Możesz zaszyfrować swoje konta, ustawienia, pobrane aplikacje wraz z danymi oraz pliki multimedialne i inne. Po zaszyfrowaniu konieczne będzie wpisywanie kodu PIN lub hasła przy każdym uruchomieniu tabletu, aby odszyfrować dane. Trwałe odszyfrowanie tabletu jest możliwe jedynie przez przywrócenie danych fabrycznych, a tym samym usunięcie wszystkich danych."\n\n"Szyfrowanie trwa co najmniej godzinę. Przed jego rozpoczęciem naładuj baterię, a w trakcie nie odłączaj tabletu od zasilania. Przerwanie procesu szyfrowania spowoduje utratę części lub wszystkich danych."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="388628691961985052">"Możesz zaszyfrować swoje konta, ustawienia, pobrane aplikacje i ich dane, multimedia oraz inne pliki. Po zaszyfrowaniu tabletu musisz wpisać numeryczny kod PIN lub hasło do odszyfrowania po każdym włączeniu urządzenia: tablet można odszyfrować jedynie przez przywrócenie danych fabrycznych i usunięcie wszystkich swoich danych."\n\n"Szyfrowanie może potrwać godzinę lub dłużej. Rozpocznij, gdy bateria jest w pełni naładowana i nie odłączaj tabletu od zasilania do chwili ukończenia szyfrowania. Jeśli proces szyfrowania zostanie przerwany, utracisz część lub nawet wszystkie swoje dane."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7707298558618842459">"Możesz zaszyfrować swoje konta, ustawienia, pobrane aplikacje i ich dane, multimedia oraz inne pliki. Po zaszyfrowaniu telefonu musisz wpisać numeryczny kod PIN lub hasło do odszyfrowania po każdym włączeniu urządzenia: telefon można odszyfrować jedynie przez przywrócenie danych fabrycznych i usunięcie wszystkich swoich danych."\n\n"Szyfrowanie może potrwać godzinę lub dłużej. Rozpocznij, gdy bateria jest w pełni naładowana i nie odłączaj telefonu od zasilania do chwili ukończenia szyfrowania. Jeśli proces szyfrowania zostanie przerwany, utracisz część lub nawet wszystkie swoje dane."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Zaszyfruj tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Zaszyfruj telefon"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Naładuj baterię i spróbuj ponownie."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Podłącz ładowarkę i spróbuj ponownie."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Brak kodu PIN lub hasła blokowania ekranu"</string>
-    <!-- outdated translation 17076329416977176 -->     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Przed rozpoczęciem szyfrowania musisz ustawić kod PIN lub hasło blokowania ekranu."</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Przed rozpoczęciem szyfrowania musisz ustawić kod PIN lub hasło blokady ekranu."</string>
     <string name="crypt_keeper_confirm_title" msgid="3637925350381905012">"Potwierdź szyfrowanie"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Zaszyfrować tablet? Ta operacja jest nieodwracalna, a jej przerwanie grozi utratą danych. Szyfrowanie potrwa co najmniej godzinę, a tablet w tym czasie kilka razy uruchomi się ponownie."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Zaszyfrować telefon? Ta operacja jest nieodwracalna, a jej przerwanie grozi utratą danych. Szyfrowanie potrwa co najmniej godzinę, a telefon w tym czasie kilka razy uruchomi się ponownie."</string>
@@ -322,15 +324,15 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Spróbuj ponownie za <xliff:g id="DELAY">^1</xliff:g> s."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Wpisz swoje hasło."</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Szyfrowanie zakończone niepowodzeniem"</string>
-    <!-- outdated translation 6891198717505120682 -->     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Szyfrowanie zostało przerwane i nie można go dokończyć. Z tego powodu dane znajdujące się w tablecie nie są już dostępne. "\n\n"Aby dalej używać tabletu, należy przywrócić dane fabryczne. Podczas konfiguracji po resecie będziesz mieć możliwość przywrócenia danych zapisanych na koncie Google."</string>
-    <!-- outdated translation 6891198717505120682 -->     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Szyfrowanie zostało przerwane i nie można go dokończyć. Z tego powodu dane znajdujące się w tablecie nie są już dostępne. "\n\n"Aby dalej używać tabletu, należy przywrócić dane fabryczne. Podczas konfiguracji po resecie będziesz mieć możliwość przywrócenia danych zapisanych na koncie Google."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Szyfrowanie zostało przerwane i nie można go dokończyć. Z tego powodu dane znajdujące się w tablecie nie są już dostępne. "\n\n"Aby dalej używać tabletu, musisz przywrócić dane fabryczne. Podczas konfigurowania po zresetowaniu będziesz mieć możliwość przywrócenia wszelkich danych, których kopia zapasowa została utworzona na koncie Google."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Szyfrowanie zostało przerwane i nie można go dokończyć. Z tego powodu dane znajdujące się w telefonie nie są już dostępne. "\n\n"Aby dalej używać telefonu, musisz przywrócić dane fabryczne. Podczas konfigurowania po zresetowaniu będziesz mieć możliwość przywrócenia wszelkich danych, których kopia zapasowa została utworzona na koncie Google."</string>
     <string name="lock_settings_picker_title" msgid="3332098786253116023">"Wybierz blokadę ekranu"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Wybierz blokadę zapasową"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Blokada ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Zmień blokadę ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Zmień lub wyłącz zabezpieczenie ekranu (wzór, PIN lub hasło)"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Wybierz sposób blokowania ekranu"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Wybierz sposób odblokowywania w przypadku, gdy Face Unlock Cię nie rozpozna."</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Wybierz sposób odblokowania w przypadku, gdy Face Unlock Cię nie rozpozna."</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Brak"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Przesunięcie palcem"</string>
@@ -347,9 +349,9 @@
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Brak"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Przesunięcie palcem"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Face Unlock"</string>
-    <!-- outdated translation 464022606293547390 -->     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Zabezpieczenie wzorem"</string>
-    <!-- outdated translation 1379365142708807163 -->     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Zabezpieczenie kodem PIN"</string>
-    <!-- outdated translation 6955742995327081060 -->     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Zabezpieczenie hasłem"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Wzór"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Kod PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Hasło"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Wyłącz blokadę ekranu"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Usuń wzór odblokowania"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Usuń kod PIN odblokowania"</string>
@@ -622,8 +624,8 @@
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefon niezadokowany"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Ustawienia dla podłączonej podstawki"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Nie znaleziono podstawki"</string>
-    <!-- outdated translation 9015625921245904495 -->     <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Przed skonfigurowaniem dźwięku stacji dokującej musisz zadokować tablet."</string>
-    <!-- outdated translation 9015625921245904495 -->     <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Przed skonfigurowaniem dźwięku stacji dokującej musisz zadokować tablet."</string>
+    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Przed skonfigurowaniem dźwięku stacji dokującej musisz zadokować tablet."</string>
+    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Przed skonfigurowaniem dźwięku stacji dokującej musisz zadokować telefon."</string>
     <string name="dock_sounds_enable_title" msgid="885839627097024110">"Dźwięk włożenia do stacji dokującej"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Odtwarzaj dźwięk podczas umieszczania tabletu w doku i wyjmowania go"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Odtwarzaj dźwięk podczas umieszczania telefonu w podstawce i wyjmowania go"</string>
@@ -820,7 +822,7 @@
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Wymazać wszystkie Twoje informacje osobiste i pobrane aplikacje? Tej czynności nie można cofnąć."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Wymaż wszystko"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Narysuj wzór odblokowania"</string>
-    <!-- outdated translation 2234954758550554549 -->     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Aby potwierdzić przywrócenie danych fabrycznych, musisz narysować wzór odblokowania."</string>
+    <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Aby potwierdzić przywrócenie danych fabrycznych, musisz narysować wzór odblokowania."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Nie wykonano resetowania, ponieważ usługa czyszczenia systemu jest niedostępna."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Zresetować?"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Wyczyść nośnik USB"</string>
@@ -835,8 +837,8 @@
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Wymazać kartę SD, usuwając wszystkie zapisane na niej pliki? Tej czynności nie można cofnąć."</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Wymaż wszystko"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Narysuj wzór odblokowania"</string>
-    <!-- outdated translation 1379736318750958338 -->     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Aby potwierdzić zamiar wyczyszczenia nośnika USB, musisz narysować wzór odblokowania."</string>
-    <!-- outdated translation 1379736318750958338 -->     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Aby potwierdzić zamiar wyczyszczenia nośnika USB, musisz narysować wzór odblokowania."</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Aby potwierdzić zamiar wyczyszczenia nośnika USB, musisz narysować wzór odblokowania."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Aby potwierdzić zamiar wyczyszczenia karty SD, musisz narysować wzór odblokowania."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Ustawienia połączeń"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Poczta głosowa, przekazywanie połączeń, poł. oczekujące, ID rozmówcy"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"Tethering przez USB"</string>
@@ -884,9 +886,6 @@
     <string name="copyright_title" msgid="865906688917260647">"Prawa autorskie"</string>
     <string name="license_title" msgid="1990487604356037871">"Licencja"</string>
     <string name="terms_title" msgid="7697580845616764642">"Warunki i zasady korzystania"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Samouczek systemu"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Dowiedz się, jak korzystać z tabletu"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Dowiedz się, jak korzystać z telefonu"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licencje open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Wystąpił problem podczas ładowania licencji."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Ładowanie..."</string>
@@ -936,7 +935,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Dalej"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Zabezpieczanie tabletu"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Zabezpieczanie telefonu"</string>
-    <!-- outdated translation 1075370160667458122 -->     <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Chroń swój tablet przed nieautoryzowanym użyciem, tworząc osobisty wzór odblokowania ekranu. Na następnym ekranie połącz palcem co najmniej cztery kropki w dowolnej kolejności. "\n\n"Wszystko gotowe? Wybierz Dalej."</string>
+    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Chroń swój tablet przed nieautoryzowanym użyciem, tworząc osobisty wzór odblokowania ekranu. Na następnym ekranie połącz palcem co najmniej cztery kropki w dowolnej kolejności. "\n\n"Wszystko gotowe? Wybierz Dalej."</string>
     <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Chroń swój telefon przed nieautoryzowanym użyciem, tworząc osobisty wzór odblokowania ekranu. Na następnym ekranie połącz palcem co najmniej cztery kropki w dowolnej kolejności. "\n\n"Wszystko gotowe? Wybierz Dalej."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Zarządzaj aplikacjami"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Zarządzaj zainstalowanymi aplikacjami i usuwaj je."</string>
@@ -1326,7 +1325,7 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Wyczyszczono magazyn danych logowania."</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"Nie można wymazać magazynu."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Magazyn danych logowania jest włączony."</string>
-    <!-- outdated translation 6048426197489058494 -->     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Aby korzystać z magazynu danych logowania, musisz ustawić kod PIN lub hasło blokady ekranu."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Aby korzystać z magazynu danych logowania, musisz ustawić kod PIN lub hasło blokady ekranu."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sygnał alarmowy"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Skonfiguruj sposób działania w przypadku połączenia alarmowego"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Kopia i kasowanie danych"</string>
@@ -1427,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"Synchronizuj: <xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Nie można zsynchronizować ręcznie"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Synchronizacja tego elementu jest obecnie wyłączona. Aby zmienić ustawienie, tymczasowo włącz obsługę danych w tle i automatyczną synchronizację."</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"Ustawienia 4G"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"Konfiguruj sieć i modem 4G oraz zarządzaj nimi"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"Adres MAC 4G"</string>
     <string name="enter_password" msgid="4131758584074246224">"Wpisz hasło, aby odszyfrować pamięć masową."</string>
     <string name="try_again" msgid="4272075051293936921">"Spróbuj ponownie."</string>
     <string name="service_busy" msgid="2325014135156127705">"Usługa jest zajęta. Spróbuj ponownie."</string>
@@ -1552,7 +1554,7 @@
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Zakończ"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Pomiń samouczek"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lekcja 1: Poznawanie ekranu"</string>
-    <!-- outdated translation 477937585801538951 -->     <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"Po włączeniu trybu Czytanie dotykiem możesz dotknąć ekranu, aby sprawdzić, co jest pod Twoim palcem. Na przykład bieżący ekran zawiera ikony aplikacji. Znajdź jedną z nich, dotykając ekranu i przesuwając po nim palcem."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"Po włączeniu Czytania dotykiem możesz dotknąć ekranu, aby sprawdzić, co jest pod Twoim palcem. Na przykład bieżący ekran zawiera ikony aplikacji. Znajdź jedną z nich, dotykając ekranu i przesuwając po nim palcem."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Dobrze. Przesuwaj palcem po ekranie, aż znajdziesz jeszcze co najmniej jedną ikonę."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="3973201880357468747">"Aby użyć elementu pod palcem, dotknij go. Przesuwaj palcem, aż znajdziesz ikonę aplikacji <xliff:g id="APP_NAME">%s</xliff:g>. Następnie dotknij jej jeden raz, aby użyć."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Twój palec jest na ikonie aplikacji <xliff:g id="APP_NAME">%s</xliff:g>. Dotknij jej jeden raz, aby użyć."</string>
@@ -1571,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Ustaw hasło"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Anuluj"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Dodatkowe aktualizacje systemu"</string>
 </resources>

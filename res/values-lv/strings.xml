@@ -184,7 +184,7 @@
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"Labi"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"Ierakstītais saimniekdatora nosaukums nav derīgs."</string>
     <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"Ierakstītais izslēgšanas saraksts nav pareizi formatēts. Ierakstiet ar komatiem atdalītu izslēgto domēnu sarakstu."</string>
-    <!-- outdated translation 3525734169948795417 -->     <string name="proxy_error_empty_port" msgid="5539106187558215246">"Aizpildiet porta lauku."</string>
+    <string name="proxy_error_empty_port" msgid="5539106187558215246">"Aizpildiet lauku Ports."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Ja saimniekdatora lauks ir tukšs, porta laukam jābūt tukšam."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Ierakstītais porta numurs nav derīgs."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP starpniekserveris tiek izmantots pārlūkprogrammā, taču, iespējams, netiek izmantots citās lietotnēs."</string>
@@ -288,6 +288,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Kārtot pēc laika joslas"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datums"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Laiks"</string>
+    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
+    <skip />
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automātiski bloķēt"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pēc miega režīma"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Rādīt informāciju par īpašnieku bloķētā ekrānā"</string>
@@ -305,14 +307,14 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Ieslēdzot planšetdatoru, ikreiz tiek pieprasīts skaitlisks PIN kods vai parole šifra noņemšanai."</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Ieslēdzot tālruni, ikreiz tiek pieprasīts skaitlisks PIN kods vai parole šifra noņemšanai."</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Šifrēts"</string>
-    <!-- outdated translation 923629233459331136 -->     <string name="crypt_keeper_desc" product="tablet" msgid="388628691961985052">"Varat šifrēt savus kontus, iestatījumus, lejupielādētās lietotnes un ar tām saistītos datus, multivides failus un citus failus. Ja planšetdators ir šifrēts, ikreiz, kad to ieslēdzat, ir jāveic atšifrēšana, ievadot ciparu PIN kodu vai paroli. Planšetdatora šifrējumu var noņemt, tikai atiestatot rūpnīcas datus un dzēšot visus ierīces datus."\n\n"Šifrēšana ilgst vienu stundu vai ilgāk. Pirms šifrēšanas ir jāuzlādē akumulators un planšetdators ir jāpievieno barošanas avotam līdz brīdim, kad šifrēšana ir pabeigta. Pārtraucot šifrēšanas procesu, tiks zaudēti visi dati vai daļa no tiem."</string>
-    <!-- outdated translation 923629233459331136 -->     <string name="crypt_keeper_desc" product="default" msgid="7707298558618842459">"Varat šifrēt savus kontus, iestatījumus, lejupielādētās lietotnes un ar tām saistītos datus, multivides failus un citus failus. Ja planšetdators ir šifrēts, ikreiz, kad to ieslēdzat, ir jāveic atšifrēšana, ievadot ciparu PIN kodu vai paroli. Planšetdatora šifrējumu var noņemt, tikai atiestatot rūpnīcas datus un dzēšot visus ierīces datus."\n\n"Šifrēšana ilgst vienu stundu vai ilgāk. Pirms šifrēšanas ir jāuzlādē akumulators un planšetdators ir jāpievieno barošanas avotam līdz brīdim, kad šifrēšana ir pabeigta. Pārtraucot šifrēšanas procesu, tiks zaudēti visi dati vai daļa no tiem."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="388628691961985052">"Varat šifrēt kontus, iestatījumus, lejupielādētās lietotnes un tajās esošos datus, multivides un cita veida failus. Ja šifrēsiet planšetdatoru, katru reizi ieslēdzot planšetdatoru, būs jāievada ciparu PIN vai parole, lai datoru atšifrētu. Planšetdatora šifrējumu var noņemt, tikai veicot datu atiestatīšanu uz rūpnīcas iestatījumiem. To darot, tiek dzēsti arī visi dati."\n\n"Atšifrēšana ilgst stundu vai vairāk. Akumulatoram ir jābūt pilnībā uzlādētam un datoram jābūt pievienotam elektrotīklam, līdz šifrēšana tiek pabeigta. Ja šifrēšanas process tiks pārtraukts, tiks zaudēti visi dati vai kāda to daļa."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7707298558618842459">"Varat šifrēt kontus, iestatījumus, lejupielādētās lietotnes un tajās esošos datus, multivides un cita veida failus. Ja šifrēsiet tālruni, katru reizi to ieslēdzot, būs jāievada ciparu PIN vai parole, lai tālruni atšifrētu. Tālruņa šifrējumu var noņemt, tikai veicot datu atiestatīšanu uz rūpnīcas iestatījumiem. To darot, tiek dzēsti arī visi dati."\n\n"Atšifrēšana ilgst stundu vai vairāk. Akumulatoram ir jābūt pilnībā uzlādētam un tālrunim ir jābūt pievienotam elektrotīklam, līdz šifrēšana tiek pabeigta. Ja šifrēšanas process tiks pārtraukts, tiks zaudēti visi dati vai kāda to daļa."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Šifrēt planšetdatoru"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Šifrēt tālruni"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Uzlādējiet akumulatoru un mēģiniet vēlreiz."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Pievienojiet lādētāju un mēģiniet vēlreiz."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Nav ekrāna bloķēšanas PIN vai paroles"</string>
-    <!-- outdated translation 17076329416977176 -->     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Lai sāktu šifrēšanu, ir jāiestata ekrāna bloķēšanas PIN kods vai parole."</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Lai varētu sākt šifrēšanu, ir jāiestata bloķēšanas ekrāna PIN vai parole."</string>
     <string name="crypt_keeper_confirm_title" msgid="3637925350381905012">"Šifrēšanas apstiprinājums"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Vai šifrēt planšetdatoru? Šī darbība nav atgriezeniska; to pārtraucot, dati tiks zaudēti. Šifrēšana ilgst vienu stundu vai ilgāk, tās laikā planšetdators vairākas reizes tiks restartēts."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Vai šifrēt tālruni? Šī darbība nav atgriezeniska; to pārtraucot, dati tiks zaudēti. Šifrēšana ilgst vienu stundu vai ilgāk, tās laikā tālrunis vairākas reizes tiks restartēts."</string>
@@ -322,20 +324,20 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Mēģiniet vēlreiz pēc <xliff:g id="DELAY">^1</xliff:g> sekundēm."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Ierakstiet paroli"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Šifrēšana neizdevās."</string>
-    <!-- outdated translation 6891198717505120682 -->     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Tādējādi planšetdatora dati vairs nav pieejami."\n\n"Lai atsāktu lietot planšetdatoru, ir jāveic atiestatīšana uz rūpnīcas iestatījumiem. Kad esat veicis atiestatīšanu, varat atjaunot jebkādus datus, kas tika dublēti jūsu Google kontā."</string>
-    <!-- outdated translation 6891198717505120682 -->     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Tādējādi planšetdatora dati vairs nav pieejami."\n\n"Lai atsāktu lietot planšetdatoru, ir jāveic atiestatīšana uz rūpnīcas iestatījumiem. Kad esat veicis atiestatīšanu, varat atjaunot jebkādus datus, kas tika dublēti jūsu Google kontā."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Planšetdatora dati vairs nav pieejami."\n\n"Lai atsāktu lietot planšetdatoru, ir jāveic rūpnīcas iestatījumu atiestatīšana. Kad pēc atiestatīšanas esat pabeidzis planšetdatora iestatīšanu, varat atjaunot visus datus, kas tika dublēti jūsu Google kontā."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Tālruņa dati vairs nav pieejami."\n\n"Lai atsāktu lietot tālruni, ir jāveic rūpnīcas iestatījumu atiestatīšana. Kad pēc atiestatīšanas esat pabeidzis tālruņa iestatīšanu, varat atjaunot visus datus, kas tika dublēti jūsu Google kontā."</string>
     <string name="lock_settings_picker_title" msgid="3332098786253116023">"Ekrāna bloķēš. atlase"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Rezerves bloķ. izvēle"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrāna bloķēšana"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Bloķ. ekr. izmaiņas"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Kombinācijas, PIN koda vai paroles drošības maiņa vai atspējošana"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Izvēlieties ekrāna bloķēšanas veidu"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Kā vēlaties atbloķēt ierīci, kad nevar lietot Face Unlock?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Kā vēlaties atbloķēt ierīci, kad nevar lietot autorizāciju pēc sejas?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Nav"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Vilkt ar pirkstu"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Aizsardzība nav iespējota"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Atbloķēšana, izm. seju"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Autorizācija pēc sejas"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Zems drošības līmenis, eksperimentāls"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Kombinācija"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Vidējs drošības līmenis"</string>
@@ -346,10 +348,10 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Atspēj. admin., šifr. polit. vai akred. datu krāt."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nav"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Vilkt ar pirkstu"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Atbloķēšana, izmantojot seju"</string>
-    <!-- outdated translation 464022606293547390 -->     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Aizsargāts ar kombināciju"</string>
-    <!-- outdated translation 1379365142708807163 -->     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Aizsargāts ar PIN"</string>
-    <!-- outdated translation 6955742995327081060 -->     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Aizsargāts ar paroli"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Autorizācija pēc sejas"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Shēma"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Parole"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Izslēgt ekrāna bloķēšanu"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Noņemt atbloķēšanas kombināciju"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Noņemt atbloķēšanas PIN"</string>
@@ -622,8 +624,8 @@
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Tālrunis nav dokots"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Pievienotā doka iestatījumi"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Doks nav atrasts"</string>
-    <!-- outdated translation 9015625921245904495 -->     <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Pirms doka audio iestatīšanas planšetdators ir jāpievieno dokam."</string>
-    <!-- outdated translation 9015625921245904495 -->     <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Pirms doka audio iestatīšanas planšetdators ir jāpievieno dokam."</string>
+    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Pirms dokošanas skaņas iestatīšanas veiciet planšetdatora dokošanu."</string>
+    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Pirms dokošanas skaņas iestatīšanas veiciet tālruņa dokošanu."</string>
     <string name="dock_sounds_enable_title" msgid="885839627097024110">"Dokā ievietošanas skaņa"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Atskaņot skaņu, ievietojot planšetdatoru dokā vai noņemot to no doka"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Atskaņot skaņu, kad tālrunis tiek ievietots dokā vai tiek izņemts no tā"</string>
@@ -820,7 +822,7 @@
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Vai dzēst visu jūsu personīgo informāciju un visas lejupielādētās lietotnes? Šo darbību nevar atcelt!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Dzēst visu"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Zīmējiet atbloķēšanas kombināciju."</string>
-    <!-- outdated translation 2234954758550554549 -->     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Ir jāuzzīmē atbloķēšanas shēma, lai apstiprinātu rūpnīcas datu atiestatīšanu."</string>
+    <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Lai apstiprinātu rūpnīcas datu atiestatīšanu, norādiet grafisko atslēgu."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Atiestatīšana netika veikta, jo nav pieejams pakalpojums Sistēmas tīrīšana."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Vai atiestatīt?"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Dzēst USB krātuvi"</string>
@@ -835,8 +837,8 @@
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Vai izdzēst SD kartes saturu, tostarp visus tajā saglabātos failus? Šo darbību nevar atcelt!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Dzēst visu"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Zīmējiet atbloķēšanas kombināciju."</string>
-    <!-- outdated translation 1379736318750958338 -->     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Ir jāuzzīmē atbloķēšanas shēma, lai apstiprinātu, ka vēlaties dzēst USB krātuvi."</string>
-    <!-- outdated translation 1379736318750958338 -->     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Ir jāuzzīmē atbloķēšanas shēma, lai apstiprinātu, ka vēlaties dzēst USB krātuvi."</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Lai apstiprinātu USB atmiņas satura dzēšanu, norādiet grafisko atslēgu."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Lai apstiprinātu SD kartes satura dzēšanu, norādiet grafisko atslēgu."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Zvanu iestatījumi"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Balss pasta, zvanu pāradresācijas, zvana gaidīšanas, zvanītāja ID iestatīšana"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB saistīšana"</string>
@@ -884,9 +886,6 @@
     <string name="copyright_title" msgid="865906688917260647">"Autortiesības"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
     <string name="terms_title" msgid="7697580845616764642">"Pakalpojumu sniegšanas noteikumi"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Apmācība par sistēmu"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Uzziniet, kā izmantot planšetdatoru"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Uzziniet, kā izmantot tālruni"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Atklātā pirmkoda licences"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Radās ar licenču ielādi saistīta problēma."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Notiek ielāde…"</string>
@@ -936,7 +935,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Tālāk"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Planšetdatora drošība"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Tālruņa nodrošināšana"</string>
-    <!-- outdated translation 1075370160667458122 -->     <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Aizsargājiet savu planšetdatoru pret neatļautu lietošanu, izveidojot personalizētu ekrāna atbloķēšanas rakstu. Velkot ar pirkstu, jebkurā secībā savienojiet nākamajā ekrānā redzamos punktus. Ir jāsavieno vismaz četri punkti. "\n\n"Vai esat gatavs sākt? Pieskarieties vienumam Tālāk."</string>
+    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Aizsargājiet savu planšetdatoru pret neatļautu lietošanu, izveidojot personalizētu ekrāna grafisko atslēgu. Velkot ar pirkstu, jebkurā secībā savienojiet nākamajā ekrānā redzamos punktus. Ir jāsavieno vismaz četri punkti. "\n\n"Vai esat gatavs sākt? Pieskarieties vienumam Tālāk."</string>
     <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Aizsargājiet savu tālruni pret neatļautu lietošanu, izveidojot personalizētu ekrāna atbloķēšanas rakstu. Velkot ar pirkstu, jebkurā secībā savienojiet vismaz četrus no nākamajā ekrānā redzamajiem punktiem. "\n\n"Vai esat gatavs sākt? Pieskarieties vienumam Tālāk."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Pārvaldīt lietotnes"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Pārvaldiet un noņemiet instalētās lietotnes"</string>
@@ -1326,7 +1325,7 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Akreditācijas datu krātuve ir izdzēsta."</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"Akred. datus nevarēja izdzēst"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Akreditācijas datu krātuve ir iespējota."</string>
-    <!-- outdated translation 6048426197489058494 -->     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Lai varētu izmantot akreditācijas datu atmiņu, ir jāiestata ekrāna bloķēšanas PIN kods vai parole."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Lai varētu izmantot akreditācijas datu atmiņu, ir jāiestata bloķēšanas ekrāna PIN vai parole."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ārkārtas signāls"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Iestatīt uzvedību, kad tiek veikts ārkārtas zvans"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Dublēt un atiestatīt"</string>
@@ -1427,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"Sinhronizācija: <xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Nevar sinhronizēt manuāli"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Pašlaik ir atspējota šī vienuma sinhronizācija. Lai mainītu šo iestatījumu, īslaicīgi ieslēdziet fona datu lietojumu un automātisko sinhronizāciju."</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G iestatījumi"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"4G tīkla un modema pārvaldība un iestatīšana"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC adrese"</string>
     <string name="enter_password" msgid="4131758584074246224">"Ierakstiet paroli, lai atšifrētu atmiņu"</string>
     <string name="try_again" msgid="4272075051293936921">"Mēģiniet vēlreiz."</string>
     <string name="service_busy" msgid="2325014135156127705">"Pakalpojums ir aizņemts. Mēģiniet vēlreiz."</string>
@@ -1552,7 +1554,7 @@
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Pabeigt"</string>
     <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Izl. māc."</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"1. nodarbība: ekrāna izpēte"</string>
-    <!-- outdated translation 477937585801538951 -->     <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"Kad ir ieslēgta iespēja Atklāt pieskaroties, varat pieskarties ekrānam, lai uzzinātu vairāk par vienumu, virs kura atrodas jūsu pirksts. Piemēram, pašreizējā ekrānā ir redzamas lietotņu ikonas. Atrodiet kādu no tām, pieskaroties ekrānam un velkot pa to ar pirkstu."</string>
+    <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"Ja ir ieslēgta funkcija Atklāt pieskaroties, varat pieskarties ekrānam, lai uzzinātu vairāk par vienumu, virs kura atrodas jūsu pirksts. Piemēram, pašreizējā ekrānā ir redzamas lietotņu ikonas. Atrodiet kādu no tām, pieskaroties ekrānam un velkot pa to ar pirkstu."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Turpiniet vilkt ar pirkstu pa ekrānu, līdz atrodat vismaz vēl vienu ikonu."</string>
     <string name="accessibility_tutorial_lesson_1_text_3" msgid="3973201880357468747">"Lai aktivizētu vienumu, pie kura atrodas jūsu pirksts, pieskarieties šim vienumam. Velciet ar pirkstu, līdz atrodat lietotnes <xliff:g id="APP_NAME">%s</xliff:g> ikonu. Pēc tam vienreiz pieskarieties ikonai, lai to aktivizētu."</string>
     <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Jūsu pirksts ir virs lietotnes <xliff:g id="APP_NAME">%s</xliff:g> ikonas. Pieskarieties vienreiz, lai aktivizētu ikonu."</string>
@@ -1571,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Iestatīt dublējuma paroli"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Atcelt"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Papildu sistēmas atjauninājumi"</string>
 </resources>
