@@ -662,6 +662,7 @@ public class ManageApplications extends Fragment implements
         mActivityResumed = true;
         showCurrentTab();
         updateOptionsMenu();
+        mTabHost.getTabWidget().setEnabled(true);
     }
 
     @Override
@@ -684,6 +685,7 @@ public class ManageApplications extends Fragment implements
             mRunningProcessesView.doPause();
             mResumedRunning = false;
         }
+        mTabHost.getTabWidget().setEnabled(false);
     }
 
     @Override
