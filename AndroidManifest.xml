@@ -126,6 +126,19 @@
                 android:resource="@id/wifi_settings" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".wifi.WifiSettings"
+                android:label="@string/wifi_settings"
+                android:targetActivity="Settings$WifiSettingsActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:exported="true"
+                android:clearTaskOnLaunch="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.WifiSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wifi_settings" />
+        </activity-alias>
+
         <activity android:name=".wifi.WifiPickerActivity"
                   android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -234,6 +247,18 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/bluetooth_settings" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".bluetooth.BluetoothSettings"
+                android:label="@string/bluetooth_settings_title"
+                android:targetActivity="Settings$BluetoothSettingsActivity"
+                android:exported="true"
+                android:clearTaskOnLaunch="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.BluetoothSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/bluetooth_settings" />
+        </activity-alias>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
@@ -371,6 +396,18 @@
                 android:resource="@id/language_settings" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="LanguageSettings"
+                android:label="@string/language_keyboard_settings_title"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$InputMethodAndLanguageSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.InputMethodAndLanguageSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+        </activity-alias>
+
         <activity android:name="Settings$SpellCheckersSettingsActivity"
                 android:label="@string/spellcheckers_settings_title"
                 android:clearTaskOnLaunch="true">
@@ -427,6 +464,22 @@
                 android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="UserDictionarySettings"
+                android:label="@string/user_dict_settings_titlebar"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$UserDictionarySettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.UserDictionarySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/language_keyboard_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
+        </activity-alias>
+
         <activity android:name="Settings$SoundSettingsActivity"
                 android:label="@string/sound_settings"
                 android:clearTaskOnLaunch="true">
@@ -443,6 +496,18 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/sound_settings" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="SoundSettings"
+                android:label="@string/sound_settings"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$SoundSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.SoundSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/sound_settings" />
+        </activity-alias>
 
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
@@ -461,6 +526,18 @@
                 android:resource="@id/display_settings" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="DisplaySettings"
+                android:label="@string/display_settings"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$DisplaySettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DisplaySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/display_settings" />
+        </activity-alias>
+
         <activity android:name="Settings$DockSettingsActivity"
                 android:label="@string/dock_settings_title"
                 android:enabled="@bool/has_dock_settings"
@@ -476,6 +553,19 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/dock_settings" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="DockSettings"
+                android:label="@string/dock_settings_title"
+                android:enabled="@bool/has_dock_settings"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$DockSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DockSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/dock_settings" />
+        </activity-alias>
 
         <activity android:name="Settings$DeviceInfoSettingsActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
@@ -530,11 +620,49 @@
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".applications.ManageApplications"
+                android:label="@string/applications_settings"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$ManageApplicationsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity-alias>
+
+        <!-- Keep compatibility with old shortcuts. Pre-gingerbread. -->
         <activity-alias android:name=".ManageApplications"
                   android:label="@string/manageapplications_settings_title"
                   android:clearTaskOnLaunch="true"
                   android:exported="true"
                   android:targetActivity="Settings$ManageApplicationsActivity">
+        </activity-alias>
+
+        <!-- Provide direct entry into manage apps showing running services.
+             This is for compatibility with old shortcuts. -->
+        <activity-alias android:name=".RunningServices"
+                android:label="@string/runningservices_settings_title"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$ManageApplicationsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity-alias>
+        
+        <!-- Provide direct entry into manage apps showing storage usage for apps.
+             This is for compatibility with old shortcuts. -->
+        <activity-alias android:name=".applications.StorageUse"
+                android:label="@string/storageuse_settings_title"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$ManageApplicationsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
         </activity-alias>
 
         <!-- Still need a top-level activity for showing app details.  Aliasing
@@ -545,9 +673,11 @@
                   android:exported="true">
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".applications.InstalledAppDetails"
-                  android:label="@string/application_info_label"
-                  android:targetActivity=".applications.InstalledAppDetailsTop">
+                android:label="@string/application_info_label"
+                android:exported="true"
+                android:targetActivity=".applications.InstalledAppDetailsTop">
             <intent-filter>
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -570,7 +700,7 @@
                 android:resource="@id/application_settings" />
         </activity>
 
-        <!-- Provide direct entry into manage apps showing running services. -->
+        <!-- Provide direct entry into manage apps showing storage usage of apps. -->
         <activity android:name="Settings$StorageUseActivity"
                 android:label="@string/storageuse_settings_title">
             <intent-filter>
@@ -620,6 +750,19 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/security_settings" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="SecuritySettings"
+                android:label="@string/security_settings_title"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$SecuritySettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.SecuritySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/security_settings" />
+        </activity-alias>
 
         <activity android:name="Settings$PrivacySettingsActivity"
                 android:label="@string/privacy_settings_title"
@@ -672,6 +815,22 @@
             <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
                 android:value="com.android.settings.Settings$SecuritySettingsActivity" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="DeviceAdminSettings"
+                android:label="@string/device_admin_settings_title"
+                android:clearTaskOnLaunch="true"
+                android:exported="true"
+                android:targetActivity="Settings$DeviceAdminSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DeviceAdminSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/security_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/security_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$SecuritySettingsActivity" />
+        </activity-alias>
 
         <activity android:name="DeviceAdminAdd"
                 android:label="@string/device_admin_add_title"
@@ -835,6 +994,7 @@
                 android:resource="@id/development_settings" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="DevelopmentSettings"
                   android:clearTaskOnLaunch="true"
                   android:exported="true"
@@ -865,17 +1025,12 @@
                 android:value="com.android.settings.Settings$StorageSettingsActivity" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="UsbSettings"
                   android:clearTaskOnLaunch="true"
                   android:exported="true"
                   android:label="@string/storage_title_usb"
                   android:targetActivity="Settings$DevelopmentSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.STORAGE_USB_SETTINGS" />
-                <action android:name="com.android.settings.STORAGE_USB_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.deviceinfo.UsbSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
@@ -1111,6 +1266,17 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/battery_settings" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".fuelgauge.PowerUsageSummary"
+                android:label="@string/power_usage_summary_title"
+                android:exported="true"
+                android:targetActivity="Settings$PowerUsageSummaryActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/battery_settings" />
+        </activity-alias>
 
         <activity
                 android:name="Settings$ManageAccountsSettingsActivity"
