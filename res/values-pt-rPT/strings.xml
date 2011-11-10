@@ -184,7 +184,7 @@
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"O nome de anfitrião que introduziu não é válido."</string>
     <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"A lista de exclusão introduzida não está formatada corretamente. Introduza uma lista de domínios excluídos separados por vírgulas."</string>
-    <!-- outdated translation 3525734169948795417 -->     <string name="proxy_error_empty_port" msgid="5539106187558215246">"É necessário preencher o campo referente à porta."</string>
+    <string name="proxy_error_empty_port" msgid="5539106187558215246">"É necessário preencher o campo referente à porta."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"O campo referente à porta tem de estar vazio se o campo do anfitrião estiver vazio."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"A porta introduzida não é válida."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"O proxy HTTP é utilizado pelo navegador, mas não pode ser utilizado por outras aplicações."</string>
@@ -288,6 +288,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordenar por fuso horário"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
+    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
+    <skip />
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automaticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após suspensão"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar info. do proprietário no ecrã de bloqueio"</string>
@@ -305,14 +307,14 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Necessita de um PIN numérico ou de palavra-passe para desencriptar o tablet sempre que o ligar"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Necessita de um PIN numérico ou de palavra-passe para desencriptar o telefone sempre que o ligar"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Encriptado"</string>
-    <!-- outdated translation 923629233459331136 -->     <string name="crypt_keeper_desc" product="tablet" msgid="388628691961985052">"É possível encriptar as suas contas, definições, aplicações transferidas e respetivos dados, multimédia e outros ficheiros. Após encriptar o tablet, deverá introduzir um PIN numérico ou palavra-passe para o desencriptar sempre que o ligar: não é possível desencriptar o tablet, exceto se executar uma reposição de dados de fábrica, o que apagará todos os seus dados."\n\n"A encriptação demora uma hora ou mais. Deve iniciar com uma bateria carregada e manter o tablet ligado até que a encriptação fique concluída. Caso interrompa o processo de encriptação, perderá alguns ou todos os seus dados."</string>
-    <!-- outdated translation 923629233459331136 -->     <string name="crypt_keeper_desc" product="default" msgid="7707298558618842459">"É possível encriptar as suas contas, definições, aplicações transferidas e respetivos dados, multimédia e outros ficheiros. Após encriptar o tablet, deverá introduzir um PIN numérico ou palavra-passe para o desencriptar sempre que o ligar: não é possível desencriptar o tablet, exceto se executar uma reposição de dados de fábrica, o que apagará todos os seus dados."\n\n"A encriptação demora uma hora ou mais. Deve iniciar com uma bateria carregada e manter o tablet ligado até que a encriptação fique concluída. Caso interrompa o processo de encriptação, perderá alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="388628691961985052">"Pode encriptar contas, definições, aplicações e dados transferidos, multimédia e outros ficheiros. Após encriptar o tablet, é necessário introduzir um PIN numérico ou palavra-passe para o desencriptar cada vez que o ligar: não é possível desencriptar o tablet, exceto através da realização de uma reposição de dados de fábrica, apagando todos os seus dados."\n\n"A encriptação demora uma hora ou mais. Deve iniciar com uma bateria carregada e manter o tablet ligado até a encriptação estar concluída. Se interromper o processo de encriptação, irá perder alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7707298558618842459">"Pode encriptar contas, definições, aplicações e dados transferidos, multimédia e outros ficheiros. Após encriptar o telemóvel, é necessário introduzir um PIN numérico ou palavra-passe para o desencriptar cada vez que o ligar: não é possível desencriptar o telemóvel, exceto através da realização de uma reposição de dados de fábrica, apagando todos os seus dados."\n" "\n"A encriptação demora uma hora ou mais. Deve iniciar com uma bateria carregada e manter o telemóvel ligado até a encriptação estar concluída. Se interromper o processo de encriptação, irá perder alguns ou todos os seus dados."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Encriptar tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Encriptar telefone"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Carregue a bateria e tente novamente."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Ligue o carregador e tente novamente."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Sem PIN nem palavra-passe de bloqueio de ecrã"</string>
-    <!-- outdated translation 17076329416977176 -->     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Deve definir um PIN ou palavra-passe de bloqueio de ecrã antes de poder iniciar a encriptação."</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"É necessário configurar um PIN ou palavra-passe de bloqueio de ecrã antes de iniciar a encriptação."</string>
     <string name="crypt_keeper_confirm_title" msgid="3637925350381905012">"Confirmar encriptação"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Encriptar tablet? Esta operação é irreversível e, se a interromper, perderá dados. A encriptação demora uma hora ou mais, durante a qual o tablet reiniciará várias vezes."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Encriptar telefone? Esta operação é irreversível e se a interromper, perderá dados. A encriptação demora uma hora ou mais, durante a qual o telefone reiniciará várias vezes."</string>
@@ -322,20 +324,20 @@
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Tente novamente dentro de <xliff:g id="DELAY">^1</xliff:g> segundos."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Introduza a palavra-passe"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Encriptação sem êxito"</string>
-    <!-- outdated translation 6891198717505120682 -->     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"A encriptação foi interrompida e não é possível concluí-la. Como resultado, os dados no seu tablet já não estão acessíveis. "\n\n"Para voltar a utilizar o tablet, tem de efetuar uma reposição para os valores de fábrica. Quando configurar o tablet após a reposição, poderá restaurar todos os dados dos quais tenha cópias de segurança na sua Conta Google."</string>
-    <!-- outdated translation 6891198717505120682 -->     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"A encriptação foi interrompida e não é possível concluí-la. Como resultado, os dados no seu tablet já não estão acessíveis. "\n\n"Para voltar a utilizar o tablet, tem de efetuar uma reposição para os valores de fábrica. Quando configurar o tablet após a reposição, poderá restaurar todos os dados dos quais tenha cópias de segurança na sua Conta Google."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"A encriptação foi interrompida e não é possível concluí-la. Como resultado, os dados no tablet já não estão acessíveis. "\n\n"Para voltar a utilizar o tablet, é necessário efetuar uma reposição para os valores de fábrica. Quando configurar o tablet após a reposição, poderá restaurar todos os dados dos quais tenha cópias de segurança na Conta Google."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"A encriptação foi interrompida e não é possível concluí-la. Como resultado, os dados no seu telemóvel já não estão acessíveis. "\n\n"Para voltar a utilizar o telemóvel, é necessário efetuar uma reposição para os valores de fábrica. Quando configurar o telemóvel após a reposição, poderá restaurar todos os dados dos quais tenha cópias de segurança na sua Conta Google."</string>
     <string name="lock_settings_picker_title" msgid="3332098786253116023">"Selec. bloqueio do ecrã"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Escolher bloq. cópia seg."</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueio de ecrã"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Alterar ecrã de bloq."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Alterar ou desactivar segurança de padrão, PIN ou palavra-passe"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Escolha um método para bloquear o ecrã"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Quando o Desbloqueio por Rosto não o consegue detetar, como pretende desbloquear?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Quando o Desbloqueio Através do Rosto não o consegue detetar, como pretende desbloquear?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Nenhum"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Deslizar"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Sem segurança"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Desbloqueio de Rosto"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Desbloqueio Através do Rosto"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Segurança reduzida; experimental"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Padrão"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Segurança média"</string>
@@ -346,10 +348,10 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desativado p/ admin., política de encript. ou armazen. de credenciais"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nenhum"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Deslizar"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Desbloqueio de Rosto"</string>
-    <!-- outdated translation 464022606293547390 -->     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Protegido com sequência"</string>
-    <!-- outdated translation 1379365142708807163 -->     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Protegido com PIN"</string>
-    <!-- outdated translation 6955742995327081060 -->     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Protegido com palavra-passe"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Desbloqueio Através do Rosto"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Sequência"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Palavra-passe"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactivar bloqueio do ecrã"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Remover padrão de desbloqueio"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Remover PIN de desbloqueio"</string>
@@ -622,8 +624,8 @@
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefone não ancorado"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Definições da estação de ancoragem acoplada"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Estação de ancoragem não encontrada"</string>
-    <!-- outdated translation 9015625921245904495 -->     <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Deve ancorar o tablet antes de configurar o áudio da estação de ancoragem."</string>
-    <!-- outdated translation 9015625921245904495 -->     <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Deve ancorar o tablet antes de configurar o áudio da estação de ancoragem."</string>
+    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"É necessário ancorar o tablet antes de configurar o áudio da estação de ancoragem."</string>
+    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"É necessário ancorar o telemóvel antes de configurar o áudio da estação de ancoragem."</string>
     <string name="dock_sounds_enable_title" msgid="885839627097024110">"Som de inserção da estação de ancoragem"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Reproduzir som ao inserir ou remover o tablet da estação de ancoragem"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
@@ -820,7 +822,7 @@
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Apagar todas as informações pessoais e aplicações transferidas? Não é possível reverter esta ação!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Apagar tudo"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Desenhe o seu padrão de desbloqueio"</string>
-    <!-- outdated translation 2234954758550554549 -->     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Tem de desenhar a sua sequência de desbloqueio para confirmar uma reposição dos dados de fábrica."</string>
+    <string name="master_clear_gesture_explanation" msgid="826193821455182780">"É necessário desenhar a sequência de desbloqueio para confirmar uma reposição de dados de fábrica."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Não foi efetuada nenhuma reposição porque o serviço System Clear não está disponível."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Repor?"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Apagar armazenamento USB"</string>
@@ -835,8 +837,8 @@
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Apagar o cartão SD, eliminando todos os ficheiros armazenados? Não é possível reverter esta ação!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Apagar tudo"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Desenhe o seu padrão de desbloqueio"</string>
-    <!-- outdated translation 1379736318750958338 -->     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Tem de desenhar a sequência de desbloqueio para confirmar que pretende formatar o armazenamento USB."</string>
-    <!-- outdated translation 1379736318750958338 -->     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Tem de desenhar a sequência de desbloqueio para confirmar que pretende formatar o armazenamento USB."</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"É necessário desenhar a sequência de desbloqueio para confirmar que pretende apagar a memória de armazenamento USB."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"É necessário desenhar a sequência de desbloqueio para confirmar que pretende apagar o cartão SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Definições de chamadas"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurar correio de voz, reencaminhamento de chamadas, chamada em espera, ID do autor da chamada"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"Ligação USB"</string>
@@ -884,9 +886,6 @@
     <string name="copyright_title" msgid="865906688917260647">"Direitos de autor"</string>
     <string name="license_title" msgid="1990487604356037871">"Licença"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termos e condições"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Tutorial do sistema"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Saiba como utilizar o seu tablet"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Saiba como utilizar o seu telefone"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenças open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Ocorreu um problema ao carregar as licenças."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"A carregar..."</string>
@@ -936,7 +935,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Seguinte"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Manter a segurança do tablet"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Manter o telefone seguro"</string>
-    <!-- outdated translation 1075370160667458122 -->     <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Proteja o tablet contra a utilização não autorizada, criando uma sequência de desbloqueio do ecrã pessoal. Deslize lentamente o dedo para ligar os pontos por qualquer ordem no ecrã seguinte. Tem de ligar, pelo menos, quatro pontos. "\n\n"Pronto para começar? Toque em Seguinte."</string>
+    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Proteja o tablet contra a utilização não autorizada, criando uma sequência pessoal de desbloqueio do ecrã. Deslize lentamente o dedo para ligar os pontos por qualquer ordem no ecrã seguinte. É necessário ligar, pelo menos, quatro pontos. "\n\n"Pronto para começar? Toque em Seguinte."</string>
     <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Proteja o telemóvel contra a utilização não autorizada, criando uma sequência de desbloqueio do ecrã pessoal. Deslize lentamente o dedo para ligar, pelo menos, quatro pontos por qualquer ordem no ecrã seguinte. "\n\n"Pronto para começar? Toque em Seguinte."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gerir aplicações"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gerir e remover aplicações instaladas"</string>
@@ -1326,7 +1325,7 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Armaz. credenciais apagado."</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"Não foi possível apagar o armazenamento de credenciais."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais está activado."</string>
-    <!-- outdated translation 6048426197489058494 -->     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Para poder utilizar o armazenamento de credenciais, tem de definir primeiro um PIN ou palavra-passe do ecrã de bloqueio."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Para poder utilizar o armazenamento de credenciais, é necessário definir primeiro um PIN ou palavra-passe do ecrã de bloqueio."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir o comportamento quando é efectuada uma chamada de emergência"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Cópia de segurança e reposição"</string>
@@ -1427,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"Sincronizar <xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Não é possível sincronizar manualmente"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"A sincronização deste item está atualmente desativada. Para alterar esta definição, ative temporariamente os dados de segundo plano e a sincronização automática."</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"Definições de 4G"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"Configurar e gerir modem e rede 4G"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"Endereço MAC de 4G"</string>
     <string name="enter_password" msgid="4131758584074246224">"Introduzir palavra-passe para desencriptar armazenamento"</string>
     <string name="try_again" msgid="4272075051293936921">"Tente novamente."</string>
     <string name="service_busy" msgid="2325014135156127705">"O serviço está ocupado. Tente novamente."</string>
@@ -1471,7 +1473,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Primeiro plano"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Fundo"</string>
     <string name="data_usage_disclaimer" product="tablet" msgid="2591250607795265503">"Calculado pelo tablet. A utiliz. de dados calculada pela operadora pode diferir."</string>
-    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Calculado pelo telemóvel. A utiliz. de dados calculada pela operad.pode diferir."</string>
+    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Calculado pelo telemóvel. A utiliz. de dados calcul. pela operad. pode diferir."</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Desativar dados móveis?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Definir limite de dados móveis"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Definir limite de dados 4G"</string>
@@ -1571,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Definir palavra-passe de cópia de segurança"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Cancelar"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Atualizações adicionais do sistema"</string>
 </resources>
