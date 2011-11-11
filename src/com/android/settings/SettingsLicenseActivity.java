@@ -173,10 +173,13 @@ public class SettingsLicenseActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (mTextDlg != null) {
+        if (mTextDlg != null && mTextDlg.isShowing()) {
             mTextDlg.dismiss();
         }
+        if (mSpinnerDlg != null && mSpinnerDlg.isShowing()) {
+            mSpinnerDlg.dismiss();
+        }
+        super.onDestroy();
     }
 
     private void showPageOfText(String text) {
@@ -200,9 +203,7 @@ public class SettingsLicenseActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 mSpinnerDlg.dismiss();
-                mSpinnerDlg = null;
                 mTextDlg.show();
-                mTextDlg = null;
             }
         });
 
