@@ -18,6 +18,7 @@ package com.android.settings;
 
 import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_MOBILE;
+import static android.net.ConnectivityManager.TYPE_WIFI;
 import static android.net.ConnectivityManager.TYPE_WIMAX;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
@@ -143,7 +144,7 @@ import libcore.util.Objects;
  */
 public class DataUsageSummary extends Fragment {
     private static final String TAG = "DataUsage";
-    private static final boolean LOGD = true;
+    private static final boolean LOGD = false;
 
     // TODO: remove this testing code
     private static final boolean TEST_ANIM = false;
@@ -343,6 +344,7 @@ public class DataUsageSummary extends Fragment {
 
         mChart = (ChartDataUsageView) mHeader.findViewById(R.id.chart);
         mChart.setListener(mChartListener);
+        mChart.bindNetworkPolicy(null);
 
         {
             // bind app detail controls
@@ -430,7 +432,7 @@ public class DataUsageSummary extends Fragment {
         mMenuDataRoaming.setChecked(getDataRoaming());
 
         mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
-        mMenuRestrictBackground.setVisible(!appDetailMode);
+        mMenuRestrictBackground.setVisible(hasMobileRadio(context) && !appDetailMode);
         mMenuRestrictBackground.setChecked(getRestrictBackground());
 
         final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
@@ -759,7 +761,8 @@ public class DataUsageSummary extends Fragment {
         updateDetailData();
 
         if (NetworkPolicyManager.isUidValidForPolicy(context, primaryUid)
-                && !getRestrictBackground() && isBandwidthControlEnabled()) {
+                && !getRestrictBackground() && isBandwidthControlEnabled()
+                && hasMobileRadio(context)) {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
             if (hasLimitedNetworks()) {
                 setPreferenceSummary(mAppRestrictView,
@@ -2042,10 +2045,7 @@ public class DataUsageSummary extends Fragment {
 
         final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
-
-        // mobile devices should have MOBILE network tracker regardless of
-        // connection status.
-        return conn.getNetworkInfo(TYPE_MOBILE) != null;
+        return conn.isNetworkSupported(TYPE_MOBILE);
     }
 
     /**
@@ -2064,9 +2064,7 @@ public class DataUsageSummary extends Fragment {
         final TelephonyManager telephony = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
 
-        // WiMAX devices should have WiMAX network tracker regardless of
-        // connection status.
-        final boolean hasWimax = conn.getNetworkInfo(TYPE_WIMAX) != null;
+        final boolean hasWimax = conn.isNetworkSupported(TYPE_WIMAX);
         final boolean hasLte = telephony.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
         return hasWimax || hasLte;
     }
@@ -2079,7 +2077,9 @@ public class DataUsageSummary extends Fragment {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("wifi");
         }
 
-        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
+        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        return conn.isNetworkSupported(TYPE_WIFI);
     }
 
     /**
@@ -2092,7 +2092,7 @@ public class DataUsageSummary extends Fragment {
 
         final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
-        return conn.getNetworkInfo(TYPE_ETHERNET) != null;
+        return conn.isNetworkSupported(TYPE_ETHERNET);
     }
 
     /**
