@@ -39,14 +39,14 @@ public class UidDetailProvider {
         mUidDetailCache = new SparseArray<UidDetail>();
     }
 
-    public void clearCache() {
+    public synchronized void clearCache() {
         mUidDetailCache.clear();
     }
 
     /**
      * Resolve best descriptive label for the given UID.
      */
-    public UidDetail getUidDetail(int uid, boolean blocking) {
+    public synchronized UidDetail getUidDetail(int uid, boolean blocking) {
         final UidDetail cached = mUidDetailCache.get(uid);
         if (cached != null) {
             return cached;
