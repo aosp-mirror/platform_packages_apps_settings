@@ -105,7 +105,7 @@
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nie sigbaar vir ander Bluetooth-toestelle nie"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Net sigbaar vir saamgebinde toestelle"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Maak toestel opspoorbaar"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Uittelling van sigbaarheid"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Sigbaarheid-tydperk"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Stel hoe lank die toestel opspoorbaar moet wees"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sluit stembellery"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Voorkom die gebruik van die Bluetooth-beller wanneer die skerm gesluit is"</string>
@@ -312,7 +312,7 @@
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Laai jou battery en probeer weer."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Prop jou laaier in en probeer weer."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Geen skermslot-PIN of -wagwoord nie"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="17076329416977176">"Jy moet \'n PIN of wagwoord vir die skermslot stel, voordat jy met enkripsie kan begin."</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="17076329416977176">"Jy moet \'n PIN of wagwoord vir die sluitskerm stel voordat jy met enkripsie kan begin."</string>
     <string name="crypt_keeper_confirm_title" msgid="3637925350381905012">"Bevestig enkripsie"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Enkripteer tablet? Hierdie handeling kan nie ontdoen word nie, en as jy dit onderbreek, sal jy data verloor. Enkripsie duur \'n uur of meer, waartydens die tablet \'n paar keer sal herbegin."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Enkripteer foon? Hierdie handeling kan nie ontdoen word nie, en as jy dit onderbreek, sal jy data verloor. Enkripsie duur \'n uur of meer, waartydens die foon \'n paar keer sal herbegin."</string>
@@ -417,7 +417,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Om saam te bind met:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;maak seker dit wys hierdie geheimsleutel:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Van:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Bind met hierdie toestel saam?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Om saam te bind met:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Voer daarop in:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, druk dan Return of Enter."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Saambind"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Bind saam"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Kanselleer"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Kon nie saambind met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nie."</string>
@@ -477,13 +477,13 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Vir musiek en media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Onthou instellings"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Laat data-ruilprogram toe wanneer die foon aan \'n ander toestel raak"</string>
+    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Laat dataruiling toe wanneer die foon aan \'n ander toestel raak"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Gereed om program-inhoud te stuur via NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Af"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Onbeskikbaar omdat NFC afgeskakel is"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="6981652347448777459">"Wanneer hierdie funksie aangeskakel is, kan jy app-inhoud na \'n ander NFC-aanpasbare toestel oorsein deur die toestelle naby aan mekaar te hou. Jy kan byvoorbeeld Webblaaier-bladsye, You Tube-video\'s, People-kontakte en meer oorsein. "\n" "\n"Bring bloot die toestelle bymekaar (gewoonlik rug teen rug) en raak dan aan jou skerm. Die app bepaal wat oorgesein word."</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"Wanneer hierdie funksie aangeskakel is, kan jy programinhoud na \'n ander NFC-toestel oorsein deur die toestelle naby aan mekaar te hou. Jy kan byvoorbeeld blaaierbladsye, YouTube-video\'s, Mense-kontakte en meer oorsein. "\n" "\n"Bring bloot die toestelle bymekaar (gewoonlik rug teen rug) en raak dan aan jou skerm. Die program bepaal wat oorgesein word."</string>
     <string name="wifi_quick_toggle_title" msgid="8900579245913917111">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="7071157039678370553">"Skakel WiFi aan"</string>
     <string name="wifi_settings" msgid="80140065298764210">"WiFi"</string>
@@ -584,7 +584,7 @@
     <string name="wifi_tether_configure_ap_text" msgid="7163376477399687419">"Stel WiFi-warmkol op"</string>
     <string name="wifi_tether_configure_subtext" msgid="1168351091215556844">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> losstaande WiFi-warmkol"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <string name="display_settings_title" msgid="1708697328627382561">"Wys"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Skerm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Klank"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Stilmodus"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Foon-luitoon"</string>
@@ -632,7 +632,7 @@
     <string name="sync_settings" msgid="9186125469300013491">"Rekeninge en sinkronisasie"</string>
     <string name="search_settings" msgid="1910951467596035063">"Soek"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Bestuur soekinstellings en geskiedenis"</string>
-    <string name="display_settings" msgid="7965901687241669598">"Wys"</string>
+    <string name="display_settings" msgid="7965901687241669598">"Skerm"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Outodraai skerm"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Wissel oriëntasie outomaties wanneer tablet gedraai word"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Verwissel outomaties van oriëntasie wanneer foon draai"</string>
@@ -763,18 +763,18 @@
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Installeer lêeroordrag-hulpmiddels"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batterystatus"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batteryvlak"</string>
-    <string name="apn_settings" msgid="3743170484827528406">"APN\'s"</string>
+    <string name="apn_settings" msgid="3743170484827528406">"Toegangspuntname"</string>
     <string name="apn_edit" msgid="1354715499708424718">"Redigeer toegangspunt"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"Nie gestel nie"</string>
     <string name="apn_name" msgid="4115580098369824123">"Naam"</string>
-    <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"Toegangspuntnaam"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"Volmag"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"Poort"</string>
     <string name="apn_user" msgid="455637547356117761">"Gebruikernaam"</string>
     <string name="apn_password" msgid="5412301994998250968">"Wagwoord"</string>
     <string name="apn_server" msgid="2436185314756372858">"Bediener"</string>
     <string name="apn_mmsc" msgid="3670124402105585737">"MMSC"</string>
-    <string name="apn_mms_proxy" msgid="5374082621073999275">"MMS volmag"</string>
+    <string name="apn_mms_proxy" msgid="5374082621073999275">"MMS-volmag"</string>
     <string name="apn_mms_port" msgid="4074188088199243040">"MMS-poort"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
@@ -783,15 +783,15 @@
     <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP of CHAP"</string>
-    <string name="apn_type" msgid="469613123902220544">"APN-tipe"</string>
-    <string name="apn_protocol" msgid="3272222921649348640">"APN-protokol"</string>
+    <string name="apn_type" msgid="469613123902220544">"Toegangspunt-tipe"</string>
+    <string name="apn_protocol" msgid="3272222921649348640">"Toegangspunt-protokol"</string>
     <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN-swerwingsprotokol"</string>
-    <string name="carrier_enabled" msgid="407655861175280806">"APN aktiveer/deaktiveer"</string>
-    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN is geaktiveer"</string>
+    <string name="carrier_enabled" msgid="407655861175280806">"Aktiveer/deaktiveer toegangspunt"</string>
+    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Toegangspunt is geaktiveer"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN gedeaktiveer"</string>
     <string name="bearer" msgid="594270280031923558">"Draer"</string>
-    <string name="menu_delete" msgid="6981294422841124659">"Vee APN uit"</string>
-    <string name="menu_new" msgid="3014205883303921729">"Nuwe APN"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Vee toegangspunt uit"</string>
+    <string name="menu_new" msgid="3014205883303921729">"Nuwe toegangspunt"</string>
     <string name="menu_save" msgid="8109345640668285399">"Stoor"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"Gooi weg"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
@@ -848,7 +848,7 @@
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-verbinding"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB gekoppel, merk om te verbind"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Verbind"</string>
-    <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"Kan nie verbind wanneer USB-geheue gebruik word nie"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"Kan nie verbind wanneer USB-berging gebruik word nie"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB nie gekoppel nie"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB-verbindingsfout"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth-verbinding"</string>
@@ -902,7 +902,7 @@
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Bevestig jou PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"Wagwoorde stem nie ooreen nie"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PIN\'e stem nie ooreen nie"</string>
-    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Ontsluit keuse"</string>
+    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Ontsluitmetode"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Wagwoord is gestel"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN is gestel"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Patroon is ingestel"</string>
@@ -937,7 +937,7 @@
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Beveilig jou tablet"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Beveilig jou foon"</string>
     <string name="lock_intro_message" product="tablet" msgid="1075370160667458122">"Beskerm jou tablet teen ongemagtigde gebruik deur \'n persoonlike skermontsluitpatroon te skep. Gly met jou vinger om die kolletjies in enige volgorde te verbind op die volgende skerm. Jy moet ten minste vier kolletjies verbind. "\n\n"Reg om te begin? Raak “Volgende”."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Beskerm jou foon teen ongemagtigde gebruik deur \'n persoonlike skermontsluit-patroon te skep. Gly met jou vinger om ten minste vier kolletjies in enige volgorde op die volgende skerm te verbind. "\n\n"Gereed? Raak \"Volgende\"."</string>
+    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Beskerm jou foon teen ongemagtigde gebruik deur \'n persoonlike skermontsluitpatroon te skep. Gly met jou vinger om ten minste vier kolletjies in enige volgorde op die volgende skerm te verbind. "\n\n"Gereed? Raak \"Volgende\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Bestuur programme"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Bestuur en verwyder geïnstalleerde programme"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programme"</string>
@@ -963,7 +963,7 @@
     <string name="application_size_label" msgid="8494609207373874267">"Program"</string>
     <string name="external_code_size_label" msgid="3459343140355961335">"USB-geheueprogram"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Data"</string>
-    <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB-geheue-data"</string>
+    <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB-berging-data"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD-kaart"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Verwyder"</string>
     <string name="disable_text" msgid="6544054052049395202">"Deaktiveer"</string>
@@ -1327,7 +1327,7 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Eiebewysberging is uitgevee."</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"Eiebewysberging kon nie uitgevee word nie."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Eiebewysberging is geaktiveer."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6048426197489058494">"Jy moet \'n sluitskerm se PIN of wagwoord stel voordat jy eiebewysberging kan gebruik."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="6048426197489058494">"Jy moet \'n PIN of wagwoord vir die sluitskerm stel voordat jy eiebewysberging kan gebruik."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Noodtoon"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Stel gedrag wanneer \'n noodoproep gemaak word"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Rugsteun en stel terug"</string>
@@ -1391,7 +1391,7 @@
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Sinkronisasie geaktiveer"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sinkronisasie gedeaktiveer"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Sinkroniseerfout."</string>
-    <string name="account_sync_settings_title" msgid="4578227872921044660">"Sinkroniseer instellings"</string>
+    <string name="account_sync_settings_title" msgid="4578227872921044660">"Sinkroniseer-instellings"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Sinkronisering ondervind tans probleme. Dit sal binnekort terug wees."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Voeg rekening by"</string>
     <string name="background_data" msgid="5779592891375473817">"Agtergronddata"</string>
@@ -1460,13 +1460,13 @@
     <string name="show_all_anrs" msgid="28462979638729082">"Wys alle ANRe"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Wys Program reageer nie-dialoog vir agtergrond programme"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datagebruik"</string>
-    <string name="data_usage_cycle" msgid="5652529796195787949">"Dataverbruiksiklus"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"Datagebruiksiklus"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Dataswerwing"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Beperk agtergronddata"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Aparte 4G-gebruik"</string>
     <string name="data_usage_menu_show_wifi" msgid="3872007281231638058">"Wys WiFi-gebruik"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Wys Ethernet-gebruik"</string>
-    <string name="data_usage_change_cycle" msgid="7776556448920114866">"Verander tans siklus..."</string>
+    <string name="data_usage_change_cycle" msgid="7776556448920114866">"Verander siklus..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Dag van maand om dataverbruiksiklus terug te stel:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Geen programme het gedurende hierdie tydperk data gebruik nie."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Voorgrond"</string>
@@ -1495,7 +1495,7 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Beperk agtergronddata?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="7471043848664440826">"Hierdie funksie kan veroorsaak dat \'n program wat afhanklik is van agtergronddata ophou werk as WiFi nie beskikbaar is nie."\n\n"Jy kan meer geskikte datagebruik-kontroles vind in die instellings wat beskikbaar is in die program."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Beperking van agtergronddata is moontlik slegs as jy \'n mobieldatalimiet gestel het."</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Gebruiksiklus se terugsteldatum"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Gebruiksiklus-terugsteldatum"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum van elke maand:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Stel"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Stel dataverbruik-waarskuwing"</string>
@@ -1509,7 +1509,7 @@
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limiet"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Verwyderde programme"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> ontvang, <xliff:g id="SENT">%2$s</xliff:g> gestuur"</string>
-    <string name="data_usage_total_during_range" msgid="441648308264260691">"<xliff:g id="RANGE">%2$s</xliff:g> : ongeveer <xliff:g id="TOTAL">%1$s</xliff:g> gebruik"</string>
+    <string name="data_usage_total_during_range" msgid="441648308264260691">"<xliff:g id="RANGE">%2$s</xliff:g>: ongeveer <xliff:g id="TOTAL">%1$s</xliff:g> gebruik"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Noodoproep"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Keer terug na oproep"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Naam"</string>
@@ -1521,7 +1521,7 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"IPSec voorafgedeelde sleutel"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec-gebruikersertifikaat"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA-sertifikaat"</string>
-    <string name="vpn_show_options" msgid="7182688955890457003">"vertoon gevorderde opsies"</string>
+    <string name="vpn_show_options" msgid="7182688955890457003">"Wys gevorderde opsies"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS-soekdomeine"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-bedieners (bv. 8.8.8.8)"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"Aanstuurroetes (bv. 10.0.0.0/8)"</string>
