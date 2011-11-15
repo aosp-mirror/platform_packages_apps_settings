@@ -74,7 +74,14 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onStart() {
         super.onStart();
-        AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, true);
+        Activity activity = getActivity();
+        AccountManager.get(activity).addOnAccountsUpdatedListener(this, null, true);
+        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(mAutoSyncSwitch, new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.RIGHT));
     }
 
     @Override
@@ -100,12 +107,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mAutoSyncSwitch.setPadding(0, 0, padding, 0);
-        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(mAutoSyncSwitch, new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.RIGHT));
         mAutoSyncSwitch.setChecked(ContentResolver.getMasterSyncAutomatically());
         mAutoSyncSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -123,7 +124,10 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onStop() {
         super.onStop();
-        AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
+        final Activity activity = getActivity();
+        AccountManager.get(activity).removeOnAccountsUpdatedListener(this);
+        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(null);
     }
 
     @Override
