@@ -155,7 +155,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3687933246423942977">"Zum Herstellen einer Verbindung mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" berühren"</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Möchten Sie eine Verbindung mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" herstellen?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Telefonbuchanfrage"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="5203107624986011263">"%1$s möchte auf Ihre Kontakte und Ihr Anrufprotokoll zugreifen. Möchten Sie %2$s den Zugriff erlauben?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="5203107624986011263">"%1$s möchte auf Ihre Kontakte und Ihre Anrufliste zugreifen. Möchten Sie %2$s den Zugriff erlauben?"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Nicht mehr fragen"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Einstellungen für Datum &amp; Uhrzeit"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00"</string>
@@ -288,6 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Nach Zeitzone sortieren"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Uhrzeit"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Gesichtervergleich verbessern"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatisch sperren"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Nach <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> im Ruhezustand"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Inhaberinformationen auf Sperrbildschirm anzeigen"</string>
@@ -309,7 +310,7 @@
     <string name="crypt_keeper_desc" product="default" msgid="3504519024884099702">"Sie können Ihre Konten, Einstellungen, heruntergeladenen Apps und die entsprechenden Daten, Medien und sonstigen Dateien verschlüsseln. Nach einer Verschlüsselung Ihres Telefons müssen Sie bei jedem Einschalten des Geräts eine numerische PIN oder ein Passwort eingeben. Sie können die Verschlüsselung Ihres Telefons nur durch Zurücksetzen auf die Werkseinstellungen aufheben, wobei alle auf ihm befindlichen Daten gelöscht werden."\n\n"Die Verschlüsselung dauert mindestens eine Stunde. Der Akku muss beim Start des Vorgangs aufgeladen sein und das Gerät muss eingesteckt bleiben, bis die Verschlüsselung abgeschlossen ist. Wenn Sie den Verschlüsselungsvorgang unterbrechen, gehen einige oder alle Daten verloren."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Tablet verschlüsseln"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Telefon verschlüsseln"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Laden Sie Ihren Akku auf und versuchen Sie es noch einmal."</string>
+    <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Laden Sie Ihren Akku auf und versuchen Sie es erneut."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Schließen Sie Ihr Ladegerät an und versuchen Sie es erneut."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Keine PIN oder kein Passwort für Bildschirmsperre"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="17076329416977176">"Sie müssen eine PIN oder ein Passwort für die Bildschirmspeere festlegen, bevor Sie die Verschlüsselung starten können."</string>
@@ -330,12 +331,12 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Bildschirmsperre ändern"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Sperre (Muster, PIN, Passwort) ändern oder deaktivieren"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Methode zum Sperren des Bildschirms wählen"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Wie soll die Entsperrung erfolgen, wenn Face Unlock außerhalb Ihres Gesichtsfeldes liegt?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Wie soll die Entsperrung erfolgen, wenn Sie für Face Unlock nicht erkennbar sind?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Keine"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Finger bewegen"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Keine Sicherheit"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Gesichtsentsperrung"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Face Unlock"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Geringe Sicherheit, experimentell"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Muster"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Mittlere Sicherheit"</string>
@@ -414,7 +415,7 @@
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"In der Regel 0000 oder 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Möglicherweise müssen Sie diese PIN auch auf dem anderen Gerät eingeben."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Möglicherweise müssen Sie diesen Schlüssel auch auf dem anderen Gerät eingeben."</string>
-    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:241 in java.io.StringReader@771c8a71)  -->
+    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:241 in java.io.StringReader@4d20a47e)  -->
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pairing mit diesem Gerät durchführen?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Geben Sie zum Pairing mit <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> ein und drücken Sie anschließend die Eingabetaste."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Kopplung durchführen"</string>
@@ -747,8 +748,8 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"Wenn Sie die SD-Karte entfernen, werden einige von Ihnen verwendete Apps angehalten und sind nicht mehr verfügbar, bis Sie die SD-Karte wieder einsetzen."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="4642742385125426529"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="4642742385125426529"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="4346280469528260684">"USB-Speicher kann nicht getrennt werden. Bitte versuchen Sie es später noch einmal."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="3073562815631781894">"SD-Karte kann nicht entfernt werden. Bitte versuchen Sie es später noch einmal."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="4346280469528260684">"USB-Speicher kann nicht getrennt werden. Bitte versuchen Sie es später erneut."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="3073562815631781894">"SD-Karte kann nicht entfernt werden. Bitte versuchen Sie es später erneut."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"USB-Speicher wird getrennt."</string>
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD-Karte wird getrennt."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Trennen..."</string>
@@ -884,9 +885,6 @@
     <string name="copyright_title" msgid="865906688917260647">"Urheberrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Lizenz"</string>
     <string name="terms_title" msgid="7697580845616764642">"Nutzungsbedingungen"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Systemanleitung"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"So verwenden Sie Ihr Tablet"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"So verwenden Sie Ihr Telefon"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open-Source-Lizenzen"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Beim Laden der Lizenzen ist ein Problem aufgetreten."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Wird geladen..."</string>
@@ -1392,7 +1390,7 @@
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Synchronisierung deaktiviert"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Synchronisierungsfehler"</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Synchronisierungseinstellungen"</string>
-    <string name="sync_is_failing" msgid="1591561768344128377">"Bei der Synchronisierung treten zurzeit Probleme auf. Sie wird in Kürze fortgesetzt."</string>
+    <string name="sync_is_failing" msgid="1591561768344128377">"Bei der Synchronisierung treten momentan Probleme auf. Sie wird in Kürze fortgesetzt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Konto hinzufügen"</string>
     <string name="background_data" msgid="5779592891375473817">"Hintergrunddaten"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Daten können jederzeit synchronisiert, gesendet und empfangen werden."</string>
@@ -1428,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"<xliff:g id="AUTHORITY">%s</xliff:g> synchronisieren"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Manuelle Synchronisierung nicht möglich"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Die Synchronisierung hierfür ist deaktiviert. Zur Änderung dieser Einstellung aktivieren Sie vorübergehend Hintergrunddaten und automatische Synchronisierung."</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G-Einstellungen"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"4G-Netzwerk einrichten &amp; verwalten"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G-MAC-Adresse"</string>
     <string name="enter_password" msgid="4131758584074246224">"Passwort zum Entschlüsseln des Speichers eingeben"</string>
     <string name="try_again" msgid="4272075051293936921">"Erneut versuchen"</string>
     <string name="service_busy" msgid="2325014135156127705">"Der Dienst ist ausgelastet. Versuchen Sie es erneut."</string>
@@ -1572,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Passwort für Sicherung festlegen"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Abbrechen"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Zusätzliche Systemupdates"</string>
 </resources>

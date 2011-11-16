@@ -273,7 +273,7 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"日期與時間"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"設定日期和時間"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"設定日期、時間、時區及時間格式"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"自動判定日期和時間"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"自動判斷日期和時間"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"使用網路提供的時間"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"使用網路提供的時間"</string>
     <string name="zone_auto" msgid="334783869352026648">"自動判定時區"</string>
@@ -288,6 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"依時區排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"提升臉部配對精準度"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動鎖定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
@@ -330,12 +331,12 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"變更鎖定畫面"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"變更或停用圖案、PIN 或密碼安全性"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"選擇您要鎖定螢幕的方式"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"「臉孔辨識解鎖服務」無法順利辨識時，您要如何解鎖？"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"「臉部辨識解鎖」無法順利辨識時，您要如何解鎖？"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"無"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"滑動"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"無安全性設定"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"臉孔辨識解鎖"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"臉部辨識解鎖"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"安全性低的實驗性設定"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"圖形"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性設定"</string>
@@ -346,7 +347,7 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已由管理員、加密政策或認證儲存空間停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"無"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"滑動"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"臉孔辨識解鎖"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"臉部辨識解鎖"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"以解鎖圖形設定安全保護"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"以 PIN 設定安全保護"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"以密碼設定安全保護"</string>
@@ -693,7 +694,7 @@
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"電話號碼、訊號等。"</string>
     <string name="storage_settings" msgid="4211799979832404953">"儲存空間"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"儲存設定"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"卸載 USB 儲存裝置，瀏覽可用的儲存裝置"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"卸載 USB 儲存裝置、查看可用的儲存空間"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"卸載 SD 卡，檢視可用儲存媒體。"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"我的電話號碼"</string>
@@ -884,9 +885,6 @@
     <string name="copyright_title" msgid="865906688917260647">"版權"</string>
     <string name="license_title" msgid="1990487604356037871">"授權"</string>
     <string name="terms_title" msgid="7697580845616764642">"條款及細則"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"系統教學課程"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"瞭解如何使用您的平板電腦"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"瞭解如何使用您的手機"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"開放原始碼授權"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"載入授權時發生問題"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"載入中..."</string>
@@ -1034,7 +1032,7 @@
     <string name="storageuse_settings_title" msgid="5657014373502630403">"儲存空間使用量"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"查看應用程式的儲存空間使用量"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"正在運作的服務"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"查看並控制目前正在運作的服務"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"查看並管理目前正在執行的服務"</string>
     <string name="service_restarting" msgid="2242747937372354306">"重新啟動中"</string>
     <string name="cached" msgid="1059590879740175019">"快取背景處理程序"</string>
     <string name="no_running_services" msgid="2059536495597645347">"沒有正在執行中的服務。"</string>
@@ -1272,7 +1270,7 @@
     <string name="tts_default_synth_title" msgid="4755558388333117572">"預設引擎"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"將語音合成引擎設為處理語音"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"語音速率"</string>
-    <string name="tts_default_rate_summary" msgid="4061815292287182801">"文字轉換成語音後的播放速度"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"文字轉語音的播放速度"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"音調"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"影響文字轉語音功能的播放音調"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"語言"</string>
@@ -1428,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"同步處理<xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"無法手動同步處理"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"這個項目的同步處理功能已停用。如要變更這項設定，請暫時開啟背景資料與自動同步處理功能。"</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G 設定"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"設定與管理 4G 網路及數據機"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC 位址"</string>
     <string name="enter_password" msgid="4131758584074246224">"輸入密碼即可為儲存裝置解密"</string>
     <string name="try_again" msgid="4272075051293936921">"請再試一次。"</string>
     <string name="service_busy" msgid="2325014135156127705">"服務忙碌中，請再試一次。"</string>
@@ -1572,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"設定備份密碼"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"取消"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"其他系統更新"</string>
 </resources>
