@@ -40,7 +40,7 @@
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"Только экстренные вызовы"</string>
     <string name="radioInfo_service_off" msgid="1434084741785525415">"Радио отключено"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Роуминг"</string>
-    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Роуминг отключен"</string>
+    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Отключен"</string>
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Не работает"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Звонок"</string>
     <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"Посылка вызова"</string>
@@ -288,6 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Упорядочить по часовому поясу"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Время"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Улучшить распознавание лиц"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоблокировка"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"После <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> спящего режима"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Показывать данные о владельце на экране блокировки"</string>
@@ -476,7 +477,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Для громкой связи"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
-    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"Включить NFC"</string>
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Можно обмениваться контентом по NFC"</string>
@@ -607,7 +608,7 @@
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Звук клавиш"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Звук нажатия на экран"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Звук блокировки экрана"</string>
-    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Виброотклик"</string>
+    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Включить виброотклик"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Подавление шума"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"Музыка, видео, игры и другие медиафайлы"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"Рингтон и уведомления"</string>
@@ -869,7 +870,7 @@
     <string name="location_network_based" msgid="5569673665032992664">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="1337612962522836900">"Использовать Wi-Fi и мобильные сети для определения местоположения"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Местоположение определяется с помощью Wi-Fi"</string>
-    <string name="location_gps" msgid="8392461023569708478">"Спутники GPS"</string>
+    <string name="location_gps" msgid="8392461023569708478">"По спутникам GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Разрешить приложениям использовать GPS для точного определения вашего местоположения"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Использовать A-GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Использовать сервер для A-GPS (снимите флажок для менее интенсивного использования сети)"</string>
@@ -884,9 +885,6 @@
     <string name="copyright_title" msgid="865906688917260647">"Авторские права"</string>
     <string name="license_title" msgid="1990487604356037871">"Лицензия"</string>
     <string name="terms_title" msgid="7697580845616764642">"Условия использования"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Обучение"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Узнайте, как пользоваться планшетным ПК"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Узнайте, как пользоваться телефоном"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Лицензии открытого ПО"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"При загрузке лицензий возникла неполадка."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Идет загрузка…"</string>
@@ -925,8 +923,8 @@
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Графический ключ разблокировки"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Запрашивать ключ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Использовать графический ключ для защиты телефона"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Показывать графический ключ"</string>
-    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Вибрировать при касании"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Показывать ключ"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Включить виброотклик"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Установить ключ"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Изменить ключ"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Как начертить графический ключ разблокировки"</string>
@@ -1166,8 +1164,8 @@
     <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"Руководство"</string>
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Вкл."</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Выключено"</string>
-    <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Разрешено"</string>
-    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Запрещено"</string>
+    <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Разрешена"</string>
+    <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Запрещена"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Разрешить"</string>
     <string name="accessibility_script_injection_button_disallow" msgid="5697152768523270885">"Запретить"</string>
     <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Использовать <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1428,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"<xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Не удалось синхронизировать данные"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Синхронизация отключена. Чтобы включить ее, временно разрешите передачу данных в фоновом режиме и автоматическую синхронизацию."</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"Настройки 4G"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"Подключение и настройка сети и модема 4G"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"МАС-адрес для 4G"</string>
     <string name="enter_password" msgid="4131758584074246224">"Введите пароль для расшифровки данных хранилища"</string>
     <string name="try_again" msgid="4272075051293936921">"Повторите попытку."</string>
     <string name="service_busy" msgid="2325014135156127705">"Служба занята. Повторите попытку."</string>
@@ -1444,7 +1445,7 @@
     <string name="pointer_location" msgid="6084434787496938001">"Местоположение указателя"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Экран, показывающий данные о прикосновении"</string>
     <string name="show_touches" msgid="1356420386500834339">"Показывать нажатия"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"Показывать графический ключ разблокировки экрана"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Показывать графический ключ"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Показать обновления"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Подсвечивать области экрана при обновлении"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показывать загрузку ЦП"</string>
@@ -1462,7 +1463,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Передача данных"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Цикл использования данных"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Интернет-роуминг"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ограничить исходные данные"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ограничить фон. режим"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Только по каналу 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Показать трафик Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Показывать загрузку Ethernet"</string>
@@ -1485,11 +1486,11 @@
     <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G/3G"</string>
     <string name="data_usage_list_mobile" msgid="8285167120931486089">"моб. сети"</string>
     <string name="data_usage_list_none" msgid="2899530183512542206">"нет"</string>
-    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Мобильная передача данных"</string>
+    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Моб. трафик"</string>
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Передача данных по сетям 2G/3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Передача данных 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Настройки приложения"</string>
-    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ограничить фоновый режим"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ограничить фон. режим"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Отключить фоновый режим для мобильных сетей. Использовать Wi-Fi."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Сначала установите лимит для мобильного трафика."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Ограничение фонового режима"</string>
@@ -1565,7 +1566,7 @@
     <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Приложите два пальца к элементу списка и проведите ими вверх. Когда достигните верхней части экрана, снова приложите пальцы к списку и продолжайте прокручивание."</string>
     <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Хорошо. Для дальнейшей прокрутки списка продолжайте движение пальцами вверх."</string>
     <string name="accessibility_tutorial_lesson_2_text_4" msgid="3055831259260848004">"Это всё. Чтобы выйти, нажмите кнопку \"<xliff:g id="FINISH">%s</xliff:g>\"."</string>
-    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Проверка правописания"</string>
+    <string name="spellcheckers_settings_title" msgid="8843785708050235008">"Проверка орфографии"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Введите текущий пароль"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Введите новый пароль"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Подтвердите пароль"</string>
@@ -1574,4 +1575,5 @@
     <!-- String.format failed for translation -->
     <!-- no translation found for percentage (5866131581207788624) -->
     <skip />
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Дополнительные обновления системы"</string>
 </resources>
