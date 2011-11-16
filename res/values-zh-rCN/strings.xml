@@ -288,6 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"按时区排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"改善面部匹配"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示拥有者信息"</string>
@@ -330,12 +331,12 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改锁定屏幕"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"更改或停用图案、PIN 或密码保护"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"选择锁定屏幕的方法"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"当“认脸解锁 ”识别不出您时，您希望如何解锁？"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"当人脸解锁识别不出您时，您希望如何解锁？"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"无"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"滑动"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"无安全措施"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"认脸解锁"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"人脸解锁"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"安全性低、实验性"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"图案"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性"</string>
@@ -346,7 +347,7 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已被管理员、加密政策或凭据存储停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"滑动"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"认脸解锁"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"人脸解锁"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"使用图案设置安全保护"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"使用 PIN 进行保护"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"通过密码设置安全保护"</string>
@@ -884,9 +885,6 @@
     <string name="copyright_title" msgid="865906688917260647">"版权"</string>
     <string name="license_title" msgid="1990487604356037871">"许可"</string>
     <string name="terms_title" msgid="7697580845616764642">"条款"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"系统辅导手册"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"了解如何使用您的平板电脑"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"了解如何使用手机"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"开放源代码许可"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"载入许可时出现问题。"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"正在载入..."</string>
@@ -1428,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"同步<xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"无法手动同步"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"目前，此条目的同步功能已停用。要更改此设置，请暂时启用后台数据和自动同步功能。"</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G 设置"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"设置和管理 4G 网络与调制解调器"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC 地址"</string>
     <string name="enter_password" msgid="4131758584074246224">"键入密码以解密存储设备"</string>
     <string name="try_again" msgid="4272075051293936921">"请重试。"</string>
     <string name="service_busy" msgid="2325014135156127705">"该服务正忙，请重试。"</string>
@@ -1572,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"设置备份密码"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"取消"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"其他系统更新"</string>
 </resources>

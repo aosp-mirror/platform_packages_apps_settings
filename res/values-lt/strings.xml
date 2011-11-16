@@ -288,6 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Rūšiuoti pagal laiko zoną"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Laikas"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Patobulinti veido atitikimą"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatiškai užrakinti"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po miego režimo"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Rodyti savininko informaciją užrakinimo ekrane"</string>
@@ -330,12 +331,12 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Pakeisti užrak. ekraną"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Keisti ar išjungti modelio, PIN kodo ar slaptažodžio saugą"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Pasirinkite ekrano užrakinimo metodą"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Kai nepavyksta atrakinti pagal veidą, kaip norite atrakinti?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Kai Atrakinimo pagal veidą programa nemato jūsų, kaip norite atrakinti?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Nėra"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Slinkti"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Nesaugoma"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Atrak. pagal veidą"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Atrakinimas pgl. veidą"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Žemas saugos lygis, bandomasis"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Modelis"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Vidutinis saugos lygis"</string>
@@ -346,7 +347,7 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Neleido: administr., šifrav. polit. ar įgalioj. atmint."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nėra"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Slinkti"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Atrakinama pagal veidą"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Atrakinimas pagal veidą"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Apsaugota taikant modelį"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Apsaugota taikant PIN kodą"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Apsaugota taikant slaptažodį"</string>
@@ -884,9 +885,6 @@
     <string name="copyright_title" msgid="865906688917260647">"Autorių teisės"</string>
     <string name="license_title" msgid="1990487604356037871">"Licencija"</string>
     <string name="terms_title" msgid="7697580845616764642">"Taisyklės ir nuostatos"</string>
-    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Sistemos mokymo programa"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Sužinokite, kaip naudoti planšetinį kompiuterį"</string>
-    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Sužinokite, kaip naudotis telefonu"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Atvirojo šaltinio licencijos"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Įkeliant licencijas iškilo problema."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Įkeliama…"</string>
@@ -1428,6 +1426,9 @@
     <string name="sync_item_title" msgid="1931551540462877488">"„<xliff:g id="AUTHORITY">%s</xliff:g>“ sinchronizavimas"</string>
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Negalima sinchronizuoti rankiniu būdu"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Šiuo metu šio elemento sinchronizavimas neleidžiamas. Jei norite pakeisti šį nustatymą, laikinai įjunkite foninius duomenis ir automatinį sinchronizavimą."</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G nustatymai"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"Nustatyti ir valdyti 4G tinklą ir modemą"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC adresas"</string>
     <string name="enter_password" msgid="4131758584074246224">"Kad iššifruotumėte atmintinę, įveskite slaptažodį"</string>
     <string name="try_again" msgid="4272075051293936921">"Bandykite dar kartą."</string>
     <string name="service_busy" msgid="2325014135156127705">"Paslauga užimta. Bandykite dar kartą."</string>
@@ -1572,4 +1573,5 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Nustatyti atsarginės kopijos slaptažodį"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Atšaukti"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Papildomi sistemos naujiniai"</string>
 </resources>
