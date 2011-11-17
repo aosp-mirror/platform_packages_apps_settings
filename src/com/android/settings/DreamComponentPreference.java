@@ -16,7 +16,7 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.DREAM_COMPONENT;
+import static android.provider.Settings.Secure.SCREENSAVER_COMPONENT;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -65,7 +65,7 @@ public class DreamComponentPreference extends Preference {
     }
 
     private void refreshFromSettings() {
-        String component = Settings.Secure.getString(resolver, DREAM_COMPONENT);
+        String component = Settings.Secure.getString(resolver, SCREENSAVER_COMPONENT);
         if (component == null) {
             component = getContext().getResources().getString(
                 com.android.internal.R.string.config_defaultDreamComponent);
@@ -168,7 +168,7 @@ public class DreamComponentPreference extends Preference {
                         setSummary(ri.loadLabel(pm));
                         //getContext().startActivity(intent);
                         
-                        Settings.Secure.putString(resolver, DREAM_COMPONENT, cn.flattenToString());
+                        Settings.Secure.putString(resolver, SCREENSAVER_COMPONENT, cn.flattenToString());
                     }
                 })
             .create();
