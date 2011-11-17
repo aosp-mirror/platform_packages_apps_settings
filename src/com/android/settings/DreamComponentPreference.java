@@ -44,10 +44,14 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DreamComponentPreference extends Preference {
     private static final String TAG = "DreamComponentPreference";
+
+    private static final boolean SHOW_DOCK_APPS_TOO = true;
     
     private final PackageManager pm;
     private final ContentResolver resolver;
@@ -62,6 +66,10 @@ public class DreamComponentPreference extends Preference {
 
     private void refreshFromSettings() {
         String component = Settings.Secure.getString(resolver, DREAM_COMPONENT);
+        if (component == null) {
+            component = getContext().getResources().getString(
+                com.android.internal.R.string.config_defaultDreamComponent);
+        }
         if (component != null) {
             ComponentName cn = ComponentName.unflattenFromString(component);
             try {
@@ -72,6 +80,18 @@ public class DreamComponentPreference extends Preference {
         }
     }
 
+    final static Comparator<ResolveInfo> sResolveInfoComparator = new Comparator<ResolveInfo>() {
+        @Override
+        public int compare(ResolveInfo a, ResolveInfo b) {
+            int cmp = a.activityInfo.applicationInfo.packageName.compareTo(
+                    b.activityInfo.applicationInfo.packageName);
+            if (cmp == 0) {
+                cmp = a.activityInfo.name.compareTo(b.activityInfo.name);
+            }
+            return cmp;
+        }
+    };
+
     public class DreamListAdapter extends BaseAdapter implements ListAdapter {
         private ArrayList<ResolveInfo> results;
         private final LayoutInflater inflater;
@@ -81,7 +101,25 @@ public class DreamComponentPreference extends Preference {
                         .addCategory("android.intent.category.DREAM");
 
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             results = new ArrayList<ResolveInfo>(pm.queryIntentActivities(choosy, 0));
+
+            // Group by package
+            Collections.sort(results, sResolveInfoComparator);
+
+            if (SHOW_DOCK_APPS_TOO) {
+                choosy = new Intent(Intent.ACTION_MAIN)
+                            .addCategory(Intent.CATEGORY_DESK_DOCK);
+
+                List<ResolveInfo> dockApps = pm.queryIntentActivities(choosy, 0);
+                for (ResolveInfo app : dockApps) {
+                    // do not insert duplicate packages
+                    int pos = Collections.binarySearch(results, app, sResolveInfoComparator);
+                    if (pos < 0) {
+                        results.add(-1-pos, app);
+                    }
+                }
+            }
         }
 
         @Override
