@@ -16,7 +16,7 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.DREAM_COMPONENT;
+import static android.provider.Settings.Secure.SCREENSAVER_COMPONENT;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -60,13 +60,15 @@ public class DreamTesterPreference extends Preference {
 
     @Override
     protected void onClick() {
-        String component = Settings.Secure.getString(resolver, DREAM_COMPONENT);
+        String component = Settings.Secure.getString(resolver, SCREENSAVER_COMPONENT);
+        Log.v(TAG, "component=" + component);
         if (component != null) {
             ComponentName cn = ComponentName.unflattenFromString(component);
+            Log.v(TAG, "cn=" + cn);
             Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setComponent(cn)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                     )
                 .putExtra("android.dreams.TEST", true);
             getContext().startActivity(intent);
