@@ -40,9 +40,9 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
-        <PreferenceScreen 
-                android:title="@string/dream_settings_title" 
-                android:summary="@string/dream_settings_summary"
+        <PreferenceScreen
+                android:key="screensaver"
+                android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
 
         <ListPreference

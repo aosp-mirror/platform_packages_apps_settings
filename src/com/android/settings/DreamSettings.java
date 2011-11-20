@@ -16,8 +16,11 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.DREAM_TIMEOUT;
+import static android.provider.Settings.Secure.SCREENSAVER_ENABLED;
+import static android.provider.Settings.Secure.SCREENSAVER_ACTIVATE_ON_DOCK;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
@@ -31,98 +34,125 @@ import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.IWindowManager;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 
-public class DreamSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class DreamSettings extends SettingsPreferenceFragment {
     private static final String TAG = "DreamSettings";
 
-    private static final String KEY_DREAM_TIMEOUT = "dream_timeout";
+    private static final String KEY_ACTIVATE_ON_DOCK = "activate_on_dock";
 
-    private ListPreference mScreenTimeoutPreference;
-    private ListPreference mDreamTimeoutPreference;
+    private CheckBoxPreference mActivateOnDockPreference;
+
+    private Switch mEnableSwitch;
+    private Enabler mEnabler;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ContentResolver resolver = getActivity().getContentResolver();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         addPreferencesFromResource(R.xml.dream_settings);
 
-        mDreamTimeoutPreference = (ListPreference) findPreference(KEY_DREAM_TIMEOUT);
-        final long currentSaverTimeout = Settings.Secure.getLong(resolver, DREAM_TIMEOUT,
-                0);
-        mDreamTimeoutPreference.setValue(String.valueOf(currentSaverTimeout));
-        mDreamTimeoutPreference.setOnPreferenceChangeListener(this);
-        updateTimeoutPreferenceDescription(resolver, mDreamTimeoutPreference,
-                R.string.dream_timeout_summary,
-                R.string.dream_timeout_zero_summary,
-                currentSaverTimeout);
+        mActivateOnDockPreference = (CheckBoxPreference) findPreference(KEY_ACTIVATE_ON_DOCK);
+
+        final Activity activity = getActivity();
+
+        mEnableSwitch = new Switch(activity);
+
+        if (activity instanceof PreferenceActivity) {
+            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
+                final int padding = activity.getResources().getDimensionPixelSize(
+                        R.dimen.action_bar_switch_padding);
+                mEnableSwitch.setPadding(0, 0, padding, 0);
+                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                        ActionBar.DISPLAY_SHOW_CUSTOM);
+                activity.getActionBar().setCustomView(mEnableSwitch, new ActionBar.LayoutParams(
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                activity.getActionBar().setTitle(R.string.screensaver_settings_title);
+            }
+        }
+
+        mEnabler = new Enabler(activity, mEnableSwitch);
     }
 
-    private void updateTimeoutPreferenceDescription(
-            ContentResolver resolver,
-            ListPreference pref, 
-            int summaryStrings,
-            long currentTimeout) {
-        updateTimeoutPreferenceDescription(resolver, pref, summaryStrings, 0, currentTimeout);
+    public static boolean isScreenSaverEnabled(Context context) {
+        return 0 != Settings.Secure.getInt(
+                    context.getContentResolver(), SCREENSAVER_ENABLED, 1);
     }
-    private void updateTimeoutPreferenceDescription(
-            ContentResolver resolver,
-            ListPreference pref, 
-            int summaryStrings,
-            int zeroString,
-            long currentTimeout) {
-        String summary;
-        if (currentTimeout == 0) {
-            summary = pref.getContext().getString(zeroString);
-        } else {
-            final CharSequence[] entries = pref.getEntries();
-            final CharSequence[] values = pref.getEntryValues();
-            int best = 0;
-            for (int i = 0; i < values.length; i++) {
-                long timeout = Long.valueOf(values[i].toString());
-                if (currentTimeout >= timeout) {
-                    best = i;
-                }
-            }
-            summary = pref.getContext().getString(summaryStrings, entries[best]);
+
+    public static void setScreenSaverEnabled(Context context, boolean enabled) {
+        Settings.Secure.putInt(
+                context.getContentResolver(), SCREENSAVER_ENABLED, enabled ? 1 : 0);
+    }
+
+    public static class Enabler implements CompoundButton.OnCheckedChangeListener  {
+        private final Context mContext;
+        private Switch mSwitch;
+
+        public Enabler(Context context, Switch switch_) {
+            mContext = context;
+            setSwitch(switch_);
         }
-        pref.setSummary(summary);
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setScreenSaverEnabled(mContext, isChecked);
+        }
+        public void setSwitch(Switch switch_) {
+            if (mSwitch == switch_) return;
+            if (mSwitch != null) mSwitch.setOnCheckedChangeListener(null);
+            mSwitch = switch_;
+            mSwitch.setOnCheckedChangeListener(this);
+
+            final boolean enabled = isScreenSaverEnabled(mContext);
+            mSwitch.setChecked(enabled);
+        }
+        public void pause() {
+            mSwitch.setOnCheckedChangeListener(null);
+        }
+        public void resume() {
+            mSwitch.setOnCheckedChangeListener(this);
+        }
     }
 
     @Override
     public void onResume() {
+        if (mEnabler != null) {
+            mEnabler.resume();
+        }
+
+        final boolean currentActivateOnDock = 0 != Settings.Secure.getInt(getContentResolver(),
+                SCREENSAVER_ACTIVATE_ON_DOCK, 1);
+        mActivateOnDockPreference.setChecked(currentActivateOnDock);
         super.onResume();
     }
 
     @Override
     public void onPause() {
+        if (mEnabler != null) {
+            mEnabler.pause();
+        }
+
         super.onPause();
     }
 
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        if (KEY_DREAM_TIMEOUT.equals(key)) {
-            int value = Integer.parseInt((String) objValue);
-            try {
-                Settings.Secure.putInt(getContentResolver(),
-                        DREAM_TIMEOUT, value);
-                updateTimeoutPreferenceDescription(getContentResolver(),
-                        mDreamTimeoutPreference,
-                        R.string.dream_timeout_summary, 
-                        R.string.dream_timeout_zero_summary, 
-                        value);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist dream timeout setting", e);
-            }
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mActivateOnDockPreference) {
+            Settings.Secure.putInt(getContentResolver(),
+                    SCREENSAVER_ACTIVATE_ON_DOCK, 
+                    mActivateOnDockPreference.isChecked() ? 1 : 0);
         }
-
-        return true;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 }
