@@ -88,10 +88,8 @@ public class DateTimeSettingsSetupWizard extends Activity
         // not present in the standard layout
         mUsingXLargeLayout = findViewById(R.id.time_zone_button) != null;
         if (mUsingXLargeLayout) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
             initUiForXl();
         } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
             findViewById(R.id.next_button).setOnClickListener(this);
         }
         mTimeZoneAdapter = ZonePicker.constructTimezoneAdapter(this, false,
