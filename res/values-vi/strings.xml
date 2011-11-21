@@ -108,7 +108,7 @@
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Hết thời gian chờ khả năng hiển thị"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Đặt thời gian thiết bị có thể phát hiện được"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Khoá quay số bằng giọng nói"</string>
-    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Ngăn việc sử dụng trình quay số bluetooth khi màn hình bị khoá."</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Ngăn việc sử dụng trình quay số bluetooth khi màn hình bị khóa."</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Thiết bị Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Tên thiết bị"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Không có loạt tên, đang sử dụng tên tài khoản"</string>
@@ -172,7 +172,7 @@
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Tài khoản:"</string>
     <string name="proxy_settings_title" msgid="5912878565897294401">"Cài đặt proxy"</string>
-    <string name="proxy_clear_text" msgid="5555400754952012657">"Xoá"</string>
+    <string name="proxy_clear_text" msgid="5555400754952012657">"Xóa"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Cổng proxy"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Bỏ qua proxy cho"</string>
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
@@ -297,8 +297,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Nhập văn bản để hiển thị trên màn hình khóa"</string>
     <string name="location_settings_title" msgid="8935806698251432196">"Dịch vụ vị trí"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Bảo mật"</string>
-    <string name="security_settings_summary" msgid="967393342537986570">"Đặt Vị trí của tôi, mở khoá màn hình, khoá thẻ SIM, khoá bộ nhớ thông tin xác thực"</string>
-    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Đặt Vị trí của tôi, mở khoá màn hình, khoá bộ nhớ thông tin xác thực"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"Đặt Vị trí của tôi, mở khóa màn hình, khóa thẻ SIM, khóa bộ nhớ thông tin xác thực"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Đặt Vị trí của tôi, mở khóa màn hình, khóa bộ nhớ thông tin xác thực"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Mật khẩu"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Mã hóa"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Mã hóa máy tính bảng"</string>
@@ -329,7 +329,7 @@
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Chọn khóa dự phòng"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Khóa màn hình"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Thay đổi màn hình khóa"</string>
-    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Thay đổi hoặc vô hiệu hoá hình, mã PIN hoặc bảo mật mật khẩu"</string>
+    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Thay đổi hoặc vô hiệu hóa hình, mã PIN hoặc bảo mật mật khẩu"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Chọn phương thức khóa màn hình"</string>
     <string name="unlock_backup_info_summary" msgid="108524727803788172">"Khi Mở khóa bằng khuôn mặt không thể nhìn thấy bạn, bạn muốn mở khóa bằng cách nào?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Không"</string>
@@ -351,13 +351,13 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Được bảo mật bằng hình"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Được bảo mật bằng PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Được bảo mật bằng mật khẩu"</string>
-    <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Tắt khoá màn hình"</string>
-    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Xoá hình mở khoá"</string>
-    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Xoá mã PIN mở khoá"</string>
-    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Xoá mật khẩu mở khoá"</string>
-    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Thay đổi hình mở khoá"</string>
-    <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Thay đổi mã PIN mở khoá"</string>
-    <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Thay đổi mật khẩu mở khoá"</string>
+    <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Tắt khóa màn hình"</string>
+    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Xóa hình mở khóa"</string>
+    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Xóa mã PIN mở khóa"</string>
+    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Xóa mật khẩu mở khóa"</string>
+    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Thay đổi hình mở khóa"</string>
+    <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Thay đổi mã PIN mở khóa"</string>
+    <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Thay đổi mật khẩu mở khóa"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Mật khẩu phải có ít nhất %d ký tự"</string>
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"Mã PIN phải có ít nhất %d ký tự"</string>
     <string name="lockpassword_press_continue" msgid="122706614386757182">"Chạm vào Tiếp tục khi hoàn tất"</string>
@@ -655,8 +655,8 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Độ sáng tự động"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Kích thước phông chữ"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Kích thước phông chữ"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Cài đặt khoá thẻ SIM"</string>
-    <string name="sim_lock_settings_category" msgid="5136244267576697004">"Thiết lập khoá thẻ SIM"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Cài đặt khóa thẻ SIM"</string>
+    <string name="sim_lock_settings_category" msgid="5136244267576697004">"Thiết lập khóa thẻ SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Khoá thẻ SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Khoá thẻ SIM"</string>
     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Yêu cầu PIN để sử dụng máy tính bảng"</string>
@@ -666,7 +666,7 @@
     <string name="sim_pin_change" msgid="6311414184279932368">"Thay đổi mã PIN của SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"Mã PIN của SIM"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Khoá thẻ SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Mở khoá thẻ SIM"</string>
+    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Mở khóa thẻ SIM"</string>
     <string name="sim_enter_old" msgid="6074196344494634348">"Mã PIN cũ của SIM"</string>
     <string name="sim_enter_new" msgid="8742727032729243562">"Mã PIN mới của SIM"</string>
     <string name="sim_reenter_new" msgid="3178510434642201544">"Nhập lại mã PIN mới"</string>
@@ -791,7 +791,7 @@
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Đã bật APN"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"Đã tắt APN"</string>
     <string name="bearer" msgid="594270280031923558">"Trình chuyển"</string>
-    <string name="menu_delete" msgid="6981294422841124659">"Xoá APN"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Xóa APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"APN mới"</string>
     <string name="menu_save" msgid="8109345640668285399">"Lưu"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"Hủy"</string>
@@ -805,7 +805,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Đặt lại cài đặt APN mặc định đã hoàn tất."</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Đặt lại về dữ liệu gốc"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Xóa tất cả dữ liệu trên máy tính bảng"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Xoá tất cả dữ liệu trên điện thoại"</string>
+    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Xóa tất cả dữ liệu trên điện thoại"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Tác vụ này sẽ xóa tất cả dữ liệu từ "<b>"bộ nhớ trong"</b>" của máy tính bảng, bao gồm:"\n\n<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Tác vụ này sẽ xóa tất cả dữ liệu từ "<b>"bộ nhớ trong"</b>" của điện thoại, bao gồm:"\n\n<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Bạn hiện đã đăng nhập vào các tài khoản sau đây:"\n</string>
@@ -819,23 +819,23 @@
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Đặt lại máy tính bảng"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Đặt lại điện thoại"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Xóa tất cả thông tin cá nhân và ứng dụng đã tải xuống của bạn? Bạn không thể hoàn nguyên tác vụ này!"</string>
-    <string name="master_clear_final_button_text" msgid="5390908019019242910">"Xoá mọi thứ"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Vẽ hình mở khoá của bạn"</string>
+    <string name="master_clear_final_button_text" msgid="5390908019019242910">"Xóa mọi thứ"</string>
+    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Vẽ hình mở khóa của bạn"</string>
     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Bạn phải vẽ hình mở khóa của mình để xác nhận đặt lại về dữ liệu gốc."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Không có tác vụ đặt lại nào được thực hiện vì dịch vụ Xóa hệ thống không khả dụng."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Đặt lại?"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Xóa bộ nhớ USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Xóa thẻ SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Xóa t.cả dữ liệu trong b.nhớ USB"</string>
-    <string name="media_format_summary" product="default" msgid="3805714639375830120">"Xoá tất cả dữ liệu trên thẻ SD"</string>
+    <string name="media_format_summary" product="default" msgid="3805714639375830120">"Xóa tất cả dữ liệu trên thẻ SD"</string>
     <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"Xóa tất cả bộ lưu trữ USB? Bạn sẽ mất "<b>"tất cả"</b>" dữ liệu đã lưu trữ!"</string>
     <string name="media_format_desc" product="default" msgid="8764037252319942415">"Xóa thẻ SD? Bạn sẽ mất "<b>"tất cả"</b>" dữ liệu trên thẻ!"</string>
     <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Xóa bộ nhớ USB"</string>
     <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Xóa thẻ SD"</string>
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"Xóa bộ lưu trữ USB, xóa tất cả các tệp được lưu trữ ở đó? Bạn không thể hoàn nguyên tác vụ này!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Xóa thẻ SD, xóa tất cả các tệp được lưu trữ ở đó? Bạn không thể hoàn nguyên tác vụ này!"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"Xoá mọi thứ"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Vẽ hình mở khoá của bạn"</string>
+    <string name="media_format_final_button_text" msgid="4881713344315923175">"Xóa mọi thứ"</string>
+    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Vẽ hình mở khóa của bạn"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"Bạn phải vẽ hình mở khóa của mình để xác nhận rằng bạn muốn xóa bộ nhớ USB."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Bạn phải vẽ hình mở khóa của mình để xác nhận rằng bạn muốn xóa thẻ SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Cài đặt cuộc gọi"</string>
@@ -905,29 +905,29 @@
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Mã PIN đã được đặt"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Hình đã được đặt"</string>
     <string name="lock_settings_title" msgid="335025124489630932">"Bảo mật màn hình"</string>
-    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Thay đổi hình mở khoá"</string>
-    <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Thay đổi mã PIN mở khoá"</string>
+    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Thay đổi hình mở khóa"</string>
+    <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Thay đổi mã PIN mở khóa"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Xác nhận hình đã lưu"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Thử lại:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Vẽ hình mở khoá"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Vẽ hình mở khóa"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Nhấn vào Trình đơn để được trợ giúp."</string>
     <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Thả ngón tay khi xong."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Kết nối ít nhất <xliff:g id="NUMBER">%d</xliff:g> điểm. Hãy thử lại:"</string>
     <string name="lockpattern_pattern_entered_header" msgid="5012716272001299362">"Hình đã được ghi lại!"</string>
     <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Vẽ lại hình để xác nhận:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Hình mở khoá mới của bạn:"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Hình mở khóa mới của bạn:"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Xác nhận"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Vẽ lại"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Thử lại"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Tiếp tục"</string>
-    <string name="lockpattern_settings_title" msgid="3207750489460466680">"Hình mở khoá"</string>
+    <string name="lockpattern_settings_title" msgid="3207750489460466680">"Hình mở khóa"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Yêu cầu hình"</string>
-    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Phải vẽ hình để mở khoá màn hình"</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Phải vẽ hình để mở khóa màn hình"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Hiển thị hình"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Rung khi chạm"</string>
-    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Đặt hình mở khoá"</string>
-    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Thay đổi hình mở khoá"</string>
-    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Cách vẽ hình mở khoá"</string>
+    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Đặt hình mở khóa"</string>
+    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Thay đổi hình mở khóa"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Cách vẽ hình mở khóa"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Quá nhiều lần không chính xác!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Hãy thử lại sau <xliff:g id="NUMBER">%d</xliff:g> giây."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Hủy"</string>
@@ -953,7 +953,7 @@
     <string name="screen_compatibility_label" msgid="663250687205465394">"Khả năng tương thích với màn hình"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Quyền"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Bộ nhớ cache"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Xoá bộ nhớ cache"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Xóa bộ nhớ cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Bộ nhớ cache"</string>
     <string name="controls_label" msgid="7611113077086853799">"Các điều khiển"</string>
     <string name="force_stop" msgid="7435006169872876756">"Buộc dừng"</string>
@@ -966,11 +966,11 @@
     <string name="uninstall_text" msgid="3644892466144802466">"Gỡ cài đặt"</string>
     <string name="disable_text" msgid="6544054052049395202">"Tắt"</string>
     <string name="enable_text" msgid="9217362512327828987">"Bật"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"Xoá dữ liệu"</string>
+    <string name="clear_user_data_text" msgid="5597622864770098388">"Xóa dữ liệu"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Gỡ cài đặt cập nhật"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"Bạn đã chọn khởi chạy ứng dụng này theo mặc định cho một số tác vụ."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Chưa đặt mặc định."</string>
-    <string name="clear_activities" msgid="7408923511535174430">"Xoá mặc định"</string>
+    <string name="clear_activities" msgid="7408923511535174430">"Xóa mặc định"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Có thể ứng dụng này không được thiết kế cho màn hình của bạn. Bạn có thể kiểm soát cách ứng dụng điều chỉnh phù hợp với màn hình của mình tại đây."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"Hỏi khi chạy"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"Chia tỷ lệ ứng dụng"</string>
@@ -1002,7 +1002,7 @@
     <string name="clear_data_failed" msgid="1907582169616856698">"Không thể xóa dữ liệu ứng dụng."</string>
     <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Gỡ cài đặt bản cập nhật"</string>
     <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Tất cả các bản cập nhật cho ứng dụng hệ thống Android này sẽ được gỡ cài đặt."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Xoá dữ liệu"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Xóa dữ liệu"</string>
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Không thể xóa dữ liệu cho ứng dụng."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Ứng dụng này có thể truy cập các mục sau trên máy tính bảng của bạn:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Ứng dụng này có thể truy cập các mục sau trên điện thoại của bạn:"</string>
@@ -1091,7 +1091,7 @@
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Thêm vào từ điển"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Chỉnh sửa từ"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Chỉnh sửa"</string>
-    <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Xoá"</string>
+    <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Xóa"</string>
     <string name="user_dict_settings_empty_text" msgid="8165273379942105271">"Bạn không có bất kỳ từ nào trong từ điển người dùng. Bạn có thể thêm từ bằng cách chạm vào nút Thêm (+)."</string>
     <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"Tất cả ngôn ngữ"</string>
     <string name="testing" msgid="6584352735303604146">"Đang kiểm tra"</string>
@@ -1103,8 +1103,8 @@
     <string name="quick_launch_assign_application" msgid="6240064079456617501">"Gán ứng dụng"</string>
     <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"Không có lối tắt nào"</string>
     <string name="quick_launch_shortcut" msgid="5090405067413522300">"Tìm kiếm + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
-    <string name="quick_launch_clear_dialog_title" msgid="5546543501250320220">"Xoá"</string>
-    <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"Lối tắt của bạn cho <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) sẽ bị xoá."</string>
+    <string name="quick_launch_clear_dialog_title" msgid="5546543501250320220">"Xóa"</string>
+    <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"Lối tắt của bạn cho <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) sẽ bị xóa."</string>
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"OK"</string>
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"Hủy"</string>
     <string name="quick_launch_display_mode_applications" msgid="1734058461846126775">"Ứng dụng"</string>
@@ -1132,7 +1132,7 @@
     <string name="enable_adb_summary" msgid="4881186971746056635">"Chế độ gỡ lỗi khi USB được kết nối"</string>
     <string name="verifier_device_identifier" msgid="5079997701152411060">"ID thiết bị phát triển"</string>
     <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Thông tin thiết bị chưa sẵn có"</string>
-    <string name="keep_screen_on" msgid="1146389631208760344">"Không khoá màn hình"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"Không khóa màn hình"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Màn hình sẽ không bao giờ chuyển sang chế độ ngủ khi sạc"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Cho phép vị trí mô phỏng"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Cho phép vị trí mô phỏng"</string>
@@ -1238,7 +1238,7 @@
     <string name="battery_desc_radio" msgid="5479196477223185367">"Pin được vô tuyến tế bào sử dụng"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Chuyển sang chế độ trên máy bay để tiết kiệm pin trong khu vực không có phủ sóng điện thoại di động"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Pin được màn hình và đèn nền sử dụng"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"Giảm độ sáng màn hình và/hoặc thời gian chờ khoá màn hình"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Giảm độ sáng màn hình và/hoặc thời gian chờ khóa màn hình"</string>
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Pin được Wi-Fi sử dụng"</string>
     <string name="battery_sugg_wifi" msgid="2085605314976704287">"Tắt Wi-Fi khi không sử dụng hoặc khi không có Wi-Fi"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Pin do Bluetooth sử dụng"</string>
@@ -1288,7 +1288,7 @@
     <string name="tts_engines_section" msgid="7515470972378742429">"Công cụ"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Cài đặt <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> đã được bật"</string>
-    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> đã bị vô hiệu hoá"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> đã bị vô hiệu hóa"</string>
     <string name="tts_engine_settings_section" msgid="2346105138448751893">"Cài đặt công cụ"</string>
     <string name="tts_engine_settings_title" msgid="3499112142425680334">"Cài đặt cho <xliff:g id="TTS_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"Ngôn ngữ và giọng nói"</string>
@@ -1539,7 +1539,7 @@
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="8966010925994175306">"Thêm mạng VPN"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Chỉnh sửa mạng"</string>
-    <string name="vpn_menu_delete" msgid="3326527392609513129">"Xoá mạng"</string>
+    <string name="vpn_menu_delete" msgid="3326527392609513129">"Xóa mạng"</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"Hệ thống"</string>
     <string name="trusted_credentials_user_tab" msgid="2244732111398939475">"Người dùng"</string>
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Tắt"</string>
