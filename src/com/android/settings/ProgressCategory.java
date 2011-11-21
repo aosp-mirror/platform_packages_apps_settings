@@ -36,14 +36,14 @@ public class ProgressCategory extends ProgressCategoryBase {
     @Override
     public void onBindView(View view) {
         super.onBindView(view);
-        final TextView textView = (TextView) view.findViewById(R.id.scanning_text);
+        final TextView scanning = (TextView) view.findViewById(R.id.scanning_text);
         final View progressBar = view.findViewById(R.id.scanning_progress);
 
-        textView.setText(mProgress ? R.string.progress_scanning : R.string.progress_tap_to_pair);
+        scanning.setText(mProgress ? R.string.progress_scanning : R.string.progress_tap_to_pair);
         boolean noDeviceFound = (getPreferenceCount() == 0 ||
                 (getPreferenceCount() == 1 && getPreference(0) == mNoDeviceFoundPreference));
-        textView.setVisibility(noDeviceFound ? View.INVISIBLE : View.VISIBLE);
-        progressBar.setVisibility(mProgress ? View.VISIBLE : View.INVISIBLE);
+        scanning.setVisibility(noDeviceFound ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(mProgress ? View.VISIBLE : View.GONE);
 
         if (mProgress || !noDeviceFound) {
             if (mNoDeviceFoundAdded) {
