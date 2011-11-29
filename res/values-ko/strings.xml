@@ -244,7 +244,7 @@
     <string name="skip_label" msgid="47510779345218297">"건너뛰기"</string>
     <string name="next_label" msgid="4693520878012668114">"다음"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"언어"</string>
-    <string name="activity_picker_label" msgid="6295660302548177109">"활동 선택"</string>
+    <string name="activity_picker_label" msgid="6295660302548177109">"작업 선택"</string>
     <string name="device_info_label" msgid="6551553813651711205">"장치정보"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"배터리 정보"</string>
     <string name="display_label" msgid="8074070940506840792">"화면"</string>
@@ -288,8 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"시간대순 정렬"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
     <string name="time_picker_title" msgid="483460752287255019">"시간"</string>
-    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
-    <skip />
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"얼굴 인식 잠금해제 개선"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"자동 잠김"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"절전 모드 후 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"화면 잠금에 소유자 정보 표시"</string>
@@ -646,13 +645,15 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 이상 동작이 없을 때"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"배경화면"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"배경화면 선택"</string>
-    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
-    <string name="dream_settings_summary" msgid="6809871648071408259">"화면 보호기 및 기타 유휴 상태 전환"</string>
-    <string name="dream_component_title" msgid="505229894674572578">"선택한 드림"</string>
-    <string name="dream_timeout_title" msgid="1385909618566514628">"활성화 시기"</string>
-    <string name="dream_timeout_summary" msgid="6721955887728454226">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 후 유휴 상태"</string>
-    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"사용 안함"</string>
-    <string name="dream_test" msgid="5968002644622194481">"직접 사용해 보세요!"</string>
+    <string name="screensaver_settings_title" msgid="3848608373818910549">"스크린 캔디"</string>
+    <string name="screensaver_settings_summary_on" msgid="433728808047613634">"전원에 연결된 경우 절전 모드 시 시작"</string>
+    <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"사용 안함"</string>
+    <string name="screensaver_component_title" msgid="8596216100441725363">"선택한 캔디"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"활성화 시기"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 이상 유휴 상태일 때"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"안함"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"사용해 보기"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="3753003388633168862">"도킹할 때도 시작"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"글꼴 크기"</string>
@@ -939,7 +940,7 @@
     <string name="lock_intro_message" product="default" msgid="8393155371327584659">"나만의 화면 잠금해제 패턴을 만들어서 인증되지 않은 사람이 휴대전화를 사용하지 못하게 할 수 있습니다. 다음 화면에서 손가락을 슬라이드하여 원하는 순서로 최소한 4개의 점을 연결하세요. "\n\n"시작할 준비가 되었으면 \'다음\'을 터치합니다."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"앱 관리"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"설치된 앱 관리 및 제거"</string>
-    <string name="applications_settings" msgid="1721442176406964682">"앱"</string>
+    <string name="applications_settings" msgid="1721442176406964682">"애플리케이션"</string>
     <string name="applications_settings_summary" msgid="6683465446264515367">"앱 관리, 빠른실행 바로가기 설정"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"앱 설정"</string>
     <string name="install_applications" msgid="4872012136210802181">"알 수 없는 소스"</string>
@@ -1456,7 +1457,7 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"전환 애니메이션 배율"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"앱"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"액티비티 유지 안함"</string>
-    <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"사용자가 액티비티에서 떠나는 즉시 바로 제거"</string>
+    <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"사용자가 종료하는 즉시 바로 제거"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"백그라운드 프로세스 수 제한"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"모든 ANR 보기"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"백그라운드 앱에 대해 앱 응답 없음 대화상자 표시"</string>

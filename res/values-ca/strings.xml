@@ -55,8 +55,8 @@
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
     <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
-    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Desinstal·la emmag. USB"</string>
-    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desmunta la targeta SD"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Desactiva USB"</string>
+    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desactiva la targeta SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Esborra l\'emmagatzematge USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Esborra la targeta SD"</string>
     <string name="small_font" msgid="2295331917424072635">"Petita"</string>
@@ -103,7 +103,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visible per a tots els dispositius Bluetooth propers (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visible per a tots els dispositius Bluetooth propers"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"No visible per a altres dispositius Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Només visible per als dispositius vinculats"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Només visible per als dispositius sincronitzats"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Fes que el dispositiu es pugui detectar"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Temps d\'espera de la visibilitat"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Defineix durant quanta estona podrà detectar-se el dispositiu"</string>
@@ -128,13 +128,13 @@
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"S\'està desconnectant..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"S\'està connectant…"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_pairing" msgid="1426882272690346242">"S\'està emparellant..."</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"S\'està sincronitzant..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Dispositiu Bluetooth sense nom"</string>
     <string name="progress_scanning" msgid="192587958424295789">"S\'està cercant"</string>
     <string name="progress_tap_to_pair" msgid="5655704645616731277">"Toca per aparellar"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"No s\'ha trobat cap dispositiu Bluetooth a prop."</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Sol·licitud d\'emparellament de Bluetooth"</string>
-    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sol·licitud d\'emparellament"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Sol·licitud de sincronització de Bluetooth"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sol·licitud de sincronització"</string>
     <string name="bluetooth_notif_message" msgid="1931617700075106801">"Toca per aparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostra els fitxers rebuts"</string>
     <string name="device_picker" msgid="8721012448931226323">"Selector de dispositiu Bluetooth"</string>
@@ -237,8 +237,8 @@
     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"Emmag. USB retirat durant ús."</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"La targeta SD s\'ha extret mentre s\'utilitzava."</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Bytes utilitzats:"</string>
-    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Escaneig mitjans a emmag. USB"</string>
-    <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"S\'estan cercant fitxers multimèdia a la targeta SD..."</string>
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Cercant fitxers a USB..."</string>
+    <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"S\'estan cercant mitjans a la targeta SD..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"Emmag. USB instal·lat només lectura"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"Targeta SD muntada com a només de lectura."</string>
     <string name="skip_label" msgid="47510779345218297">"Omet"</string>
@@ -288,8 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordena per fus horari"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
-    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
-    <skip />
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Millora la coincidència facial"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloqueja automàticament"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> després d\'entrar en repòs"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra informació del propietari a la pantalla de bloqueig"</string>
@@ -409,7 +408,7 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la detecció del dispositiu"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud d\'emparellament de Bluetooth"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud de sincronització de Bluetooth"</string>
     <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Per enllaçar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu el PIN que el dispositiu sol·licita:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per aparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN conté lletres o símbols"</string>
@@ -425,19 +424,19 @@
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut aparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"No s\'ha pogut aparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g> a causa d\'un PIN o d\'una contrasenya incorrecta."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="7870998403045801381">"No es pot comunicar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Emparellament rebutjat per <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Sincronització rebutjada per <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"S\'ha produït un problema en connectar-se a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Cerca dispositius"</string>
     <string name="bluetooth_search_for_devices" msgid="5957007154213560390">"Cerca dispositius"</string>
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"S\'està cercant..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Configuració del dispositiu"</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositius emparellats"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositius sincronitzats"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispositius disponibles"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connecta"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Desconnecta"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Emparella\'l i connecta-t\'hi"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Desemparella"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Desconnecta\'t i desemparella\'l"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Dessincronitza"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Desconnecta i dessincronitza"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opcions…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avançades"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth avançat"</string>
@@ -455,20 +454,20 @@
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accés a Internet mitjançant <xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà de la compartició de la connexió a Internet de la tauleta."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà de la compartició de la connexió a Internet del telèfon."</string>
-    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositiu amb Bluetooth emparellat"</string>
+    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositiu Bluetooth sincronitzat"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connecta"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connecta\'t al dispositiu Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Perfils"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Canvia el nom"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Permet transf. fitxers entrants"</string>
-    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connectat a àudio d\'un suport"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connectat a l\'àudio del mitjà"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Connectat a àudio del telèfon"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Connectat al servidor de transferència de fitxers"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"No està connectat al servidor de transferència de fitxers"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Connectat a dispositiu d\'entrada"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Connectat al dispositiu per a accés a Internet"</string>
     <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Compartint la connexió local a Internet amb el dispositiu"</string>
-    <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utilitza-ho per a l\'àudio dels fitxers multimèdia"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utilitza per a l\'àudio del mitjà"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Utilitza-ho per a l\'àudio del telèfon"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Utilitza per a la transferència de fitxers"</string>
     <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utilitza per a entrada"</string>
@@ -476,7 +475,7 @@
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Configuració de la base"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Utilitza la base per a l\'àudio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Com a telèfon amb altaveu"</string>
-    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per a música i fitxers multimèdia"</string>
+    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per a música i contingut multimèdia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recorda la configuració"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Permet l\'intercanvi de dades quan el telèfon toqui un altre dispositiu"</string>
@@ -646,13 +645,15 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fons de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecciona fons de pantalla de"</string>
-    <string name="dream_settings_title" msgid="6536876013377446805">"Somnis d\'Android"</string>
-    <string name="dream_settings_summary" msgid="6809871648071408259">"Estalvis de pantalla i altres diversions per a la inactivitat"</string>
-    <string name="dream_component_title" msgid="505229894674572578">"Somni seleccionat"</string>
-    <string name="dream_timeout_title" msgid="1385909618566514628">"Moment de l\'activació"</string>
-    <string name="dream_timeout_summary" msgid="6721955887728454226">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'estat inactiu"</string>
-    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Mai"</string>
-    <string name="dream_test" msgid="5968002644622194481">"Prova-ho"</string>
+    <string name="screensaver_settings_title" msgid="3848608373818910549">"Pantalla de caramel"</string>
+    <string name="screensaver_settings_summary_on" msgid="433728808047613634">"Es posarà en repòs quan estigui connectat a l\'alimentació elèctrica"</string>
+    <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Desactivat"</string>
+    <string name="screensaver_component_title" msgid="8596216100441725363">"Caramels seleccionats"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Moment de l\'activació"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'estat inactiu"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Mai"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Prova-ho!"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="3753003388633168862">"Inicia\'l també quan estigui connectat"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillantor automàtica"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Mida del tipus de lletra"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Mida de la lletra"</string>
@@ -695,8 +696,8 @@
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Número de telèfon, senyal, etc."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Emmagatzematge"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Configuració d\'emmagatzematge"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desmunta l\'emmagatzematge USB, mostra l\'emmagatzematge disponible"</string>
-    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmunta la targeta SD, visualitza l\'emmagatzematge disponible"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desactiva l\'emmagatzematge USB, mostra l\'emmagatzematge disponible"</string>
+    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desactiva la targeta SD, visualitza l\'emmagatzematge disponible"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"El meu número de telèfon"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -728,14 +729,14 @@
     <string name="memory_dcim_usage" msgid="558887013613822577">"Imatges, vídeos"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"Àudio (música, tons, podcasts, etc.)"</string>
     <string name="memory_media_misc_usage" msgid="235452944021647124">"Varis"</string>
-    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Desmunta emmag. compartit"</string>
-    <string name="sd_eject" product="default" msgid="6915293408836853020">"Desmunta la targeta SD"</string>
-    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desinstal·la emmag. USB intern"</string>
-    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Desmunta la targeta SD per retirar-la de forma segura"</string>
+    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Desactiva emmagatzematge"</string>
+    <string name="sd_eject" product="default" msgid="6915293408836853020">"Desactiva la targeta SD"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desactiva emmagatzematge USB intern"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Desactiva la targeta SD per retirar-la de forma segura"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Insereix emmagatzematge USB per instal·lar-lo"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Inseriu una targeta SD per muntar-la"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Instal·la emmagatzematge USB"</string>
-    <string name="sd_mount" product="default" msgid="5940523765187704135">"Munta la targeta SD"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Activa l\'emmagatzematge USB"</string>
+    <string name="sd_mount" product="default" msgid="5940523765187704135">"Activa la targeta SD"</string>
     <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
     <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Esborra l\'emmagatzematge USB"</string>
@@ -743,22 +744,22 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Esborra totes les dades de l\'emmagatzematge USB intern, com música i fotos."</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Esborra totes les dades de la targeta SD, com ara la música i les fotos"</string>
     <string name="read_only" msgid="6702420168629076340">" (Només de lectura)"</string>
-    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Vols retirar l\'emmagatzematge USB?"</string>
-    <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Vols retirar la targeta SD?"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"Si retires l\'emmagatzematge USB, algunes aplicacions que estàs utilitzant s\'aturaran i és possible que no estiguin disponibles fins que tornis a instal·lar l\'emmagatzematge USB."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"Si retires la targeta SD, algunes de les aplicacions que utilitzes s\'aturaran i pot ser que no estiguin disponibles fins que no tornis a muntar la targeta SD."</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Vols desactivar l\'emmagatzematge USB?"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Vols desactivar la targeta SD?"</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"Si desactives l\'emmagatzematge USB, algunes aplicacions que estàs utilitzant s\'aturaran i és possible que no estiguin disponibles fins que tornis a activar-lo."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"Si desactives la targeta SD, algunes de les aplicacions que utilitzes s\'aturaran i pot ser que no estiguin disponibles fins que no tornis a activar-la."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="4642742385125426529"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="4642742385125426529"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="4346280469528260684">"No es pot retirar l\'emmagatzematge USB. Torna-ho a provar més tard."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="3073562815631781894">"No es pot retirar la targeta SD. Torna-ho a provar més tard."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="4346280469528260684">"No s\'ha pogut desactivar l\'USB. Torna-ho a provar més tard."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="3073562815631781894">"No es pot activar la targeta SD. Torna-ho a provar més tard."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"L\'emmagatzematge USB es desinstal·larà."</string>
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"La targeta SD es desinstal·larà."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"S\'està desmuntant"</string>
-    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Desmuntatge en curs"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Desactivació en procés"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Connexió USB de l\'equip"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Connexió USB de l\'equip"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Connexió com a"</string>
-    <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositiu de mitjans de comunicació (MTP)"</string>
+    <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositiu multimèdia (MTP)"</string>
     <string name="usb_mtp_summary" msgid="4617321473211391236">"Et permet transferir fitxers multimèdia a Windows o utilitzant l\'aplicació de transferència de fitxers d\'Android a Mac (consulta www.android.com/filetransfer)"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"Càmera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Et permet transferir fotos amb programari de la càmera i transferir qualsevol fitxer en els equips que no són compatibles amb MTP"</string>
@@ -1262,8 +1263,8 @@
     <string name="recognizer_title" msgid="3231385184559054457">"Reconeixedor de la veu"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"Cerca per veu"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Configuració de \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Configuració de text a veu"</string>
-    <string name="tts_settings_title" msgid="1237820681016639683">"Sortida de text a veu"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Configuració de síntesi de veu"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"Síntesi de veu"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Utilitza sempre la meva configuració"</string>
     <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"La configuració predeterminada que hi ha a continuació substitueix la configuració d\'aplicacions"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Configuració predeterminada"</string>
@@ -1446,8 +1447,8 @@
     <string name="pointer_location_summary" msgid="840819275172753713">"Superposició de pantalla mostra dades actuals toc"</string>
     <string name="show_touches" msgid="1356420386500834339">"Mostra els tocs"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostra comentaris visuals per tocs"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"Mostra actual. pantalla"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"Centelleig de les àrees de pant. quan s\'actualitzen"</string>
+    <string name="show_screen_updates" msgid="8282711794220426931">"Mostra canvis pantalla"</string>
+    <string name="show_screen_updates_summary" msgid="1716122382094924596">"Centelleja àrees de la pantalla en actualitzar-se"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostra l\'ús de la CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Superposició de pantalla mostra ús actual de CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Força representac. GPU"</string>
@@ -1490,11 +1491,11 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Dades 2G-3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Dades 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Mostra la configuració de l\'aplicació"</string>
-    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringeix les dades de fons"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Desact. dades de fons només a xarxa de dades mòbils. S\'utilitzarà Wi-Fi si està disp."</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringeix les dades de referència"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Desactiva dades de referència en xarxes mòbils. S\'utilitzarà Wi-Fi si està disponible."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Per restringir dades de referència, estableix un límit de dades mòbils."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Vols restringir les dades referència?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Aquesta funció pot provocar que una aplicació que depèn de les dades de fons deixi de funcionar quan no hi hagi Wi-Fi disponible."\n\n"Pots trobar més controls d\'ús de les dades que s\'hi adeqüin a la configuració disponible dins de l\'aplicació."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Aquesta funció pot provocar que una aplicació que depèn de les dades de referència deixi de funcionar quan no hi hagi Wi-Fi disponible."\n\n"Pots trobar més controls d\'ús de les dades que s\'hi adeqüin a la configuració disponible dins de l\'aplicació."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Només pots restringir les dades de referència si has establert un límit de dades mòbils."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data de restabliment del cicle d\'ús"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Data de cada mes:"</string>
@@ -1552,7 +1553,7 @@
     <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Següent"</string>
     <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Enrere"</string>
     <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Finalitza"</string>
-    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Omet tut."</string>
+    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Omet"</string>
     <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lliçó 1: Exploració de la pantalla"</string>
     <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"Quan l\'opció Explora amb el tacte està activada, pots tocar la pantalla per saber què hi ha sota el teu dit. Per exemple, la pantalla actual conté icones d\'aplicacions. Per trobar-ne una, toca la pantalla i fes lliscar el dit."</string>
     <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Bé, mantén el dit a la pantalla i continua fent-lo lliscar per trobar com a mínim una altra icona."</string>
