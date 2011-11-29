@@ -288,8 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Упорядочить по часовому поясу"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Время"</string>
-    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
-    <skip />
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Настройка распознавания"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоблокировка"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"После <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> спящего режима"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Показывать данные о владельце на экране блокировки"</string>
@@ -478,7 +477,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Для громкой связи"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
-    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"Включить NFC"</string>
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Можно обмениваться контентом по NFC"</string>
@@ -511,7 +510,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Удалить эту сеть"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Изменить сеть"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"Чтобы просмотреть доступные сети, включите Wi-Fi."</string>
-    <string name="wifi_show_advanced" msgid="1793703023711426246">"Расширенные параметры"</string>
+    <string name="wifi_show_advanced" msgid="1793703023711426246">"Дополнительно"</string>
     <string name="wifi_network_setup" msgid="2243277654809358812">"WPS"</string>
     <string name="wifi_wps_pin" msgid="8242979682530043184">"Введите PIN-код точки доступа"</string>
     <string name="wifi_wps_setup_title" msgid="2301524571580808871">"Настройка WPS"</string>
@@ -609,7 +608,7 @@
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Звук клавиш"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Звук нажатия на экран"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Звук блокировки экрана"</string>
-    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Виброотклик"</string>
+    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Включить виброотклик"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Подавление шума"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"Музыка, видео, игры и другие медиафайлы"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"Рингтон и уведомления"</string>
@@ -646,13 +645,15 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Обои"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Установка обоев"</string>
-    <string name="dream_settings_title" msgid="6536876013377446805">"Экранные заставки"</string>
-    <string name="dream_settings_summary" msgid="6809871648071408259">"Экранные заставки и другие настройки режима ожидания"</string>
-    <string name="dream_component_title" msgid="505229894674572578">"Выбранная заставка"</string>
-    <string name="dream_timeout_title" msgid="1385909618566514628">"Время до активации"</string>
-    <string name="dream_timeout_summary" msgid="6721955887728454226">"После простоя (<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>)"</string>
-    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Никогда"</string>
-    <string name="dream_test" msgid="5968002644622194481">"Попробуйте!"</string>
+    <string name="screensaver_settings_title" msgid="3848608373818910549">"Экранные заставки"</string>
+    <string name="screensaver_settings_summary_on" msgid="433728808047613634">"Активация в спящем режиме при зарядке"</string>
+    <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Выключено"</string>
+    <string name="screensaver_component_title" msgid="8596216100441725363">"Выбранная заставка"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Время до активации"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Выкл."</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Пробный запуск"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="3753003388633168862">"Активировать при подключении к док-станции"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автонастройка"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер шрифта"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Размер шрифта"</string>
@@ -871,7 +872,7 @@
     <string name="location_network_based" msgid="5569673665032992664">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="1337612962522836900">"Использовать Wi-Fi и мобильные сети для определения местоположения"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Местоположение определяется с помощью Wi-Fi"</string>
-    <string name="location_gps" msgid="8392461023569708478">"Спутники GPS"</string>
+    <string name="location_gps" msgid="8392461023569708478">"По спутникам GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Разрешить приложениям использовать GPS для точного определения вашего местоположения"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Использовать A-GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Использовать сервер для A-GPS (снимите флажок для менее интенсивного использования сети)"</string>
@@ -924,8 +925,8 @@
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Графический ключ разблокировки"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Запрашивать ключ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Использовать графический ключ для защиты телефона"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Показывать графический ключ"</string>
-    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Вибрировать при касании"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Показывать ключ"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Включить виброотклик"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Установить ключ"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Изменить ключ"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Как начертить графический ключ разблокировки"</string>
@@ -1202,7 +1203,7 @@
     <string name="bluetooth_on_time" msgid="6157799524996162271">"Время работы Wi-Fi"</string>
     <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> – <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Подробная история"</string>
-    <string name="details_title" msgid="3792801565213935385">"Сведения об использовании"</string>
+    <string name="details_title" msgid="3792801565213935385">"Расход батареи"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Сведения об использовании"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Режим энергопотребления"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Вложенные пакеты"</string>
@@ -1332,9 +1333,9 @@
     <string name="privacy_settings_title" msgid="4856282165773594890">"Восстановление и сброс"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Резервное копирование и восстановление"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Возврат к заводским настройкам"</string>
-    <string name="backup_data_title" msgid="1239105919852668016">"Резервное копирование данных"</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"Копирование данных"</string>
     <string name="backup_data_summary" msgid="9157861529438245957">"Сохранять резервные копии данных приложений, паролей точек доступа Wi-Fi и настроек на серверах Google"</string>
-    <string name="backup_configure_account_title" msgid="3790872965773196615">"Резервное копирование"</string>
+    <string name="backup_configure_account_title" msgid="3790872965773196615">"Резервный аккаунт"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Не найдены аккаунты с резервными копиями данных"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Автовосстановление"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"При переустановке приложения восстановить резервную копию настроек и данных"</string>
@@ -1445,7 +1446,7 @@
     <string name="pointer_location" msgid="6084434787496938001">"Местоположение указателя"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Экран, показывающий данные о прикосновении"</string>
     <string name="show_touches" msgid="1356420386500834339">"Показывать нажатия"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"Показывать графический ключ разблокировки экрана"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Показывать графический ключ"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Показать обновления"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Подсвечивать области экрана при обновлении"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показывать загрузку ЦП"</string>
@@ -1461,13 +1462,13 @@
     <string name="show_all_anrs" msgid="28462979638729082">"Все ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Уведомлять о том, что приложение не отвечает"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Передача данных"</string>
-    <string name="data_usage_cycle" msgid="5652529796195787949">"Цикл использования данных"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"Период статистики"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Интернет-роуминг"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ограничить исходные данные"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ограничить фон. режим"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Только по каналу 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Показать трафик Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Показывать загрузку Ethernet"</string>
-    <string name="data_usage_change_cycle" msgid="7776556448920114866">"Изменить цикл…"</string>
+    <string name="data_usage_change_cycle" msgid="7776556448920114866">"Изменить…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"День месяца, когда сбрасывается цикл использования данных:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"В этот период не было трафика от приложений."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Активный режим"</string>
@@ -1475,7 +1476,7 @@
     <string name="data_usage_disclaimer" product="tablet" msgid="2591250607795265503">"Определено устройством. Объем трафика, учтенный оператором, может отличаться."</string>
     <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Определено устройством. Объем трафика, учтенный оператором, может отличаться."</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Отключить мобильную передачу данных?"</string>
-    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Лимитировать моб. трафик"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Установить лимит"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Лимитировать трафик 4G"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Лимитировать трафик 2G и 3G"</string>
     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Лимитировать трафик Wi-Fi"</string>
@@ -1486,18 +1487,18 @@
     <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G/3G"</string>
     <string name="data_usage_list_mobile" msgid="8285167120931486089">"моб. сети"</string>
     <string name="data_usage_list_none" msgid="2899530183512542206">"нет"</string>
-    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Мобильная передача данных"</string>
+    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Моб. трафик"</string>
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Передача данных по сетям 2G/3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Передача данных 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Настройки приложения"</string>
-    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ограничить фоновый режим"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ограничить фон. режим"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Отключить фоновый режим для мобильных сетей. Использовать Wi-Fi."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Сначала установите лимит для мобильного трафика."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Ограничение фонового режима"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Если нет доступа к Wi-Fi, эта функция может приостановить приложения, использующие фоновый режим обмена данными."\n\n"Более подходящие параметры можно найти в настройках этих приложений."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Ограничение фонового режима возможно только при лимитировании мобильного трафика."</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Дата сброса цикла использования"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Число каждого месяца:"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Удаление статистики"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"День месяца:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Сохранить"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Настройка предупреждения"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Лимитирование трафика"</string>
@@ -1522,7 +1523,7 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"Общий ключ IPSec"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"Сертификат пользователя IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"Сертификат ЦС IPSec"</string>
-    <string name="vpn_show_options" msgid="7182688955890457003">"Показать расширенные параметры"</string>
+    <string name="vpn_show_options" msgid="7182688955890457003">"Дополнительно"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"Домены для поиска DNS"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-серверы (например, 8.8.8.8)"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"Маршруты пересылки (например, 10.0.0.0/8)"</string>

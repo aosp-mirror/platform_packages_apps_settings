@@ -288,8 +288,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"按时区排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
-    <!-- no translation found for biometric_weak_improve_matching_title (8754080894393195194) -->
-    <skip />
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"改善面部匹配"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示拥有者信息"</string>
@@ -646,13 +645,15 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"无操作 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁纸"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"选择壁纸来源"</string>
-    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dream"</string>
-    <string name="dream_settings_summary" msgid="6809871648071408259">"屏幕保护程序和其他待机程序"</string>
-    <string name="dream_component_title" msgid="505229894674572578">"所选 Dream"</string>
-    <string name="dream_timeout_title" msgid="1385909618566514628">"激活时间"</string>
-    <string name="dream_timeout_summary" msgid="6721955887728454226">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
-    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"从不"</string>
-    <string name="dream_test" msgid="5968002644622194481">"试试看！"</string>
+    <string name="screensaver_settings_title" msgid="3848608373818910549">"屏幕模块"</string>
+    <string name="screensaver_settings_summary_on" msgid="433728808047613634">"连接电源后在进入休眠模式时启动"</string>
+    <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"已停用"</string>
+    <string name="screensaver_component_title" msgid="8596216100441725363">"所选模块"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"激活时间"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"永不"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"试试看！"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="3753003388633168862">"插入基座时也启动"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"字体大小"</string>
@@ -1063,8 +1064,8 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"正在使用服务<xliff:g id="COMP_NAME">%1$s</xliff:g>。"</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"正在使用提供商<xliff:g id="COMP_NAME">%1$s</xliff:g>。"</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"要停止系统服务吗？"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"如果停止此服务，您平板电脑上的某些功能也可能会立即停止工作，除非您在将其关闭后重新打开。"</string>
-    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"如果停止此服务，您手机上的某些功能也可能会立即停止工作，除非您在将其关闭后重新打开。"</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"如果停止此服务，您平板电脑上的某些功能也将随之停止工作，并在您将平板电脑关机然后再重新打开后才能使用。"</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"如果停止此服务，您手机上的某些功能也将随之停止工作，并在您将手机关机然后再重新打开后才能使用。"</string>
     <string name="language_settings" msgid="5292716747264442359">"语言和输入法"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"语言和输入设备"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"语言设置"</string>
@@ -1395,7 +1396,7 @@
     <string name="background_data" msgid="5779592891375473817">"后台数据"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"应用程序可以随时同步、发送和接收数据"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"要停用后台数据吗？"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"停用后台数据可延长电池使用时间并减少数据使用量。但某些应用程序可能仍会使用后台数据连接。"</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"停用后台数据可延长电池待机时间并减少数据流量的使用，但某些应用程序可能仍会使用后台数据连接。"</string>
     <string name="sync_automatically" msgid="1682730255435062059">"自动同步应用程序数据"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"同步功能已开启"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"同步功能已关闭"</string>
