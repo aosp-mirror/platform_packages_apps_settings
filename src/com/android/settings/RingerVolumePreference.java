@@ -53,7 +53,7 @@ import android.widget.TextView;
  * Special preference type that allows configuration of both the ring volume and
  * notification volume.
  */
-public class RingerVolumePreference extends VolumePreference implements OnClickListener {
+public class RingerVolumePreference extends VolumePreference {
     private static final String TAG = "RingerVolumePreference";
     private static final int MSG_RINGER_MODE_CHANGED = 101;
 
@@ -126,7 +126,6 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
                 }
             }
             if (mSeekBars[i] != null) {
-                mSeekBars[i].setEnabled(!muted);
                 final int volume = muted ? mAudioManager.getLastAudibleStreamVolume(streamType)
                         : mAudioManager.getStreamVolume(streamType);
                 mSeekBars[i].setProgress(volume);
@@ -176,9 +175,6 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
         // Register callbacks for mute/unmute buttons
         for (int i = 0; i < mCheckBoxes.length; i++) {
             ImageView checkbox = (ImageView) view.findViewById(CHECKBOX_VIEW_ID[i]);
-            if ((silentableStreams & (1 << SEEKBAR_TYPE[i])) != 0) {
-                checkbox.setOnClickListener(this);
-            }
             mCheckBoxes[i] = checkbox;
         }
 
@@ -362,22 +358,5 @@ public class RingerVolumePreference extends VolumePreference implements OnClickL
                 return new SavedState[size];
             }
         };
-    }
-
-    public void onClick(View v) {
-        // Touching any of the mute buttons causes us to get the state from the system and toggle it
-        switch(mAudioManager.getRingerMode()) {
-            case AudioManager.RINGER_MODE_NORMAL:
-                mAudioManager.setRingerMode(
-                        (Settings.System.getInt(getContext().getContentResolver(),
-                                Settings.System.VIBRATE_IN_SILENT, 1) == 1)
-                        ? AudioManager.RINGER_MODE_VIBRATE
-                        : AudioManager.RINGER_MODE_SILENT);
-                break;
-            case AudioManager.RINGER_MODE_VIBRATE:
-            case AudioManager.RINGER_MODE_SILENT:
-                mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-            break;
-        }
     }
 }

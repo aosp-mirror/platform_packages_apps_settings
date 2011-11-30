@@ -27,16 +27,10 @@
             android:streamType="ring" />
 
     <ListPreference
-            android:key="vibrate"
-            android:title="@string/vibrate_title"
-            android:entries="@array/vibrate_entries"
-            android:entryValues="@array/vibrate_values" />
-
-    <CheckBoxPreference
-            android:key="silent"
+            android:key="silent_mode"
             android:title="@string/silent_mode_title"
-            android:persistent="false"
-            />
+            android:entries="@array/silent_mode_entries"
+            android:entryValues="@array/silent_mode_values" />
 
     <Preference
             android:key="musicfx"
@@ -63,6 +57,11 @@
             android:dialogTitle="@string/notification_sound_dialog_title"
             android:persistent="false"
             android:ringtoneType="notification" />
+
+    <CheckBoxPreference
+            android:key="vibrate_on_ring"
+            android:title="@string/vibrate_on_ring_title"
+            android:defaultValue="false" />
 
     <PreferenceCategory
             android:title="@string/sound_category_feedback_title"/>
