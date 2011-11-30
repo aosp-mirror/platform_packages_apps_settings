@@ -69,18 +69,19 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
         if (activity instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                mEnableSwitch.setPadding(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(mEnableSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-                activity.getActionBar().setTitle(R.string.screensaver_settings_title);
-            }
+            // note: we do not check onIsHidingHeaders() or onIsMultiPane() because there's no
+            // switch in the left-hand pane to control this; we need to show the ON/OFF in our
+            // fragment every time
+            final int padding = activity.getResources().getDimensionPixelSize(
+                    R.dimen.action_bar_switch_padding);
+            mEnableSwitch.setPadding(0, 0, padding, 0);
+            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                    ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(mEnableSwitch, new ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+            activity.getActionBar().setTitle(R.string.screensaver_settings_title);
         }
 
         mEnabler = new Enabler(activity, mEnableSwitch);
