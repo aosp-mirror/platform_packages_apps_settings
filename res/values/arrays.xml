@@ -550,20 +550,18 @@
         <item>auto</item>
     </string-array>
 
-    <!-- New incoming call vibrate options. -->
-    <string-array name="vibrate_entries">
-        <item>Always</item>
-        <item>Never</item>
-        <item>Only in Silent mode</item>
-        <item>Only when not in Silent mode</item>
+    <!-- Silent mode options. -->
+    <string-array name="silent_mode_entries">
+        <item>Off</item>
+        <item>Vibrate</item>
+        <item>Mute</item>
     </string-array>
 
-    <!-- Values for vibrate_entries matching constants in SoundSettings. Do not translate. -->
-    <string-array name="vibrate_values" translatable="false">
-        <item>always</item>
-        <item>never</item>
-        <item>silent</item>
-        <item>notsilent</item>
+    <!-- Values for Silent mode. Do not translate. -->
+    <string-array name="silent_mode_values" translatable="false">
+        <item>off</item>
+        <item>vibrate</item>
+        <item>mute</item>
     </string-array>
 
     <!-- Titles for the list of long press timeout options. -->
