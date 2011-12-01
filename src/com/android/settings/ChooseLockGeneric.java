@@ -33,6 +33,8 @@ import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
 
+import libcore.util.MutableBoolean;
+
 public class ChooseLockGeneric extends PreferenceActivity {
 
     @Override
@@ -167,23 +169,37 @@ public class ChooseLockGeneric extends PreferenceActivity {
             if (quality == -1) {
                 // If caller didn't specify password quality, show UI and allow the user to choose.
                 quality = intent.getIntExtra(MINIMUM_QUALITY_KEY, -1);
-                quality = upgradeQuality(quality);
+                MutableBoolean allowBiometric = new MutableBoolean(false);
+                quality = upgradeQuality(quality, allowBiometric);
                 final PreferenceScreen prefScreen = getPreferenceScreen();
                 if (prefScreen != null) {
                     prefScreen.removeAll();
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
-                disableUnusablePreferences(quality);
+                disableUnusablePreferences(quality, allowBiometric);
             } else {
                 updateUnlockMethodAndFinish(quality, false);
             }
         }
 
-        private int upgradeQuality(int quality) {
+        /** increases the quality if necessary, and returns whether biometric is allowed */
+        private int upgradeQuality(int quality, MutableBoolean allowBiometric) {
             quality = upgradeQualityForDPM(quality);
-            quality = upgradeQualityForEncryption(quality);
             quality = upgradeQualityForKeyStore(quality);
-            return quality;
+            int encryptionQuality = upgradeQualityForEncryption(quality);
+            if (encryptionQuality > quality) {
+                //The first case checks whether biometric is allowed, prior to the user making
+                //their selection from the list
+                if (allowBiometric != null) {
+                    allowBiometric.value = quality <=
+                            DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK;
+                } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK) {
+                    //When the user has selected biometric we shouldn't change that due to
+                    //encryption
+                    return quality;
+                }
+            }
+            return encryptionQuality;
         }
 
         private int upgradeQualityForDPM(int quality) {
@@ -228,7 +244,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
          *
          * @param quality the requested quality.
          */
-        private void disableUnusablePreferences(final int quality) {
+        private void disableUnusablePreferences(final int quality, MutableBoolean allowBiometric) {
             final PreferenceScreen entries = getPreferenceScreen();
             final boolean onlyShowFallback = getActivity().getIntent()
                     .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
@@ -245,7 +261,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK;
+                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK ||
+                                allowBiometric.value;
                         visible = weakBiometricAvailable; // If not available, then don't show it.
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
@@ -311,7 +328,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
             final boolean isFallback = getActivity().getIntent()
                 .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
 
-            quality = upgradeQuality(quality);
+            quality = upgradeQuality(quality, null);
 
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null);
