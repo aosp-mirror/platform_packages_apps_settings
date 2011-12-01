@@ -40,11 +40,6 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
-        <PreferenceScreen
-                android:key="screensaver"
-                android:title="@string/screensaver_settings_title"
-                android:fragment="com.android.settings.DreamSettings" />
-
         <ListPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
