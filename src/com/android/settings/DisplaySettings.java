@@ -39,8 +39,6 @@ import android.util.Log;
 import android.view.IWindowManager;
 import android.view.Surface;
 
-import com.android.settings.DreamSettings;
-
 import java.util.ArrayList;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
@@ -54,7 +52,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
-    private static final String KEY_SCREEN_SAVER = "screensaver";
 
     private CheckBoxPreference mAccelerometer;
     private ListPreference mFontSizePref;
@@ -63,7 +60,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private final Configuration mCurConfig = new Configuration();
     
     private ListPreference mScreenTimeoutPreference;
-    private Preference mScreenSaverPreference;
 
     private ContentObserver mAccelerometerRotationObserver = new ContentObserver(new Handler()) {
         @Override
@@ -81,8 +77,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
-
-        mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
 
         mScreenTimeoutPreference = (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
         final long currentTimeout = Settings.System.getLong(resolver, SCREEN_OFF_TIMEOUT,
@@ -219,14 +213,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private void updateState() {
         updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
-        updateScreenSaverSummary();
-    }
-
-    private void updateScreenSaverSummary() {
-        mScreenSaverPreference.setSummary(
-            DreamSettings.isScreenSaverEnabled(mScreenSaverPreference.getContext())
-                ? R.string.screensaver_settings_summary_on
-                : R.string.screensaver_settings_summary_off);
     }
 
     private void updateAccelerometerRotationCheckbox() {
