@@ -159,7 +159,14 @@ public class CryptKeeperSettings extends Fragment {
      */
     private boolean runKeyguardConfirmation(int request) {
         // 1.  Confirm that we have a sufficient PIN/Password to continue
-        int quality = new LockPatternUtils(getActivity()).getActivePasswordQuality();
+        LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+        int quality = lockPatternUtils.getActivePasswordQuality();
+        if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK
+            && lockPatternUtils.isLockPasswordEnabled()) {
+            // Use the alternate as the quality. We expect this to be
+            // PASSWORD_QUALITY_SOMETHING(pattern) or PASSWORD_QUALITY_NUMERIC(PIN).
+            quality = lockPatternUtils.getKeyguardStoredPasswordQuality();
+        }
         if (quality < MIN_PASSWORD_QUALITY) {
             return false;
         }
