@@ -541,11 +541,11 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
         // Override the fragment title for Wallpaper settings
-        CharSequence title = pref.getTitle();
+        int titleRes = pref.getTitleRes();
         if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
-            title = getString(R.string.wallpaper_settings_fragment_title);
+            titleRes = R.string.wallpaper_settings_fragment_title;
         }
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), 0, title, null, 0);
+        startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, null, null, 0);
         return true;
     }
 
