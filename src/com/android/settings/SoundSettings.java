@@ -243,6 +243,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         int vibrateMode = vibeOnRing ? AudioManager.VIBRATE_SETTING_ON
                 : AudioManager.VIBRATE_SETTING_ONLY_SILENT;
         mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, vibrateMode);
+        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, vibrateMode);
     }
 
     private void setPhoneSilentSettingValue(String value) {
