@@ -37,7 +37,6 @@ import android.widget.Switch;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
-import com.android.settings.wifi.p2p.WifiP2pEnabler;
 
 public class WirelessSettings extends SettingsPreferenceFragment {
 
@@ -46,7 +45,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
-    private static final String KEY_TOGGLE_WIFI_P2P = "toggle_wifi_p2p";
     private static final String KEY_WIFI_P2P_SETTINGS = "wifi_p2p_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
@@ -59,8 +57,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private CheckBoxPreference mAirplaneModePreference;
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
-
-    private WifiP2pEnabler mWifiP2pEnabler;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -101,8 +97,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
-
-        CheckBoxPreference wifiP2p = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI_P2P);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
@@ -156,11 +150,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         WifiP2pManager p2p = (WifiP2pManager) activity.getSystemService(Context.WIFI_P2P_SERVICE);
 
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)) {
-            getPreferenceScreen().removePreference(wifiP2p);
-        } else {
-            mWifiP2pEnabler = new WifiP2pEnabler(activity, wifiP2p);
+            getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
         }
-        getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
 
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
@@ -189,10 +180,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
-
-        if (mWifiP2pEnabler != null) {
-            mWifiP2pEnabler.resume();
-        }
     }
 
     @Override
@@ -202,10 +189,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         mAirplaneModeEnabler.pause();
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
-        }
-
-        if (mWifiP2pEnabler != null) {
-            mWifiP2pEnabler.pause();
         }
     }
 

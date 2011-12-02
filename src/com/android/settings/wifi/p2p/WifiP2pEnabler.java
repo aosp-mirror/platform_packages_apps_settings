@@ -27,18 +27,21 @@ import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.provider.Settings;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.util.Log;
 
 /**
  * WifiP2pEnabler is a helper to manage the Wifi p2p on/off
  */
-public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
+public class WifiP2pEnabler implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "WifiP2pEnabler";
 
     private final Context mContext;
-    private final CheckBoxPreference mCheckBox;
     private final IntentFilter mIntentFilter;
+    private Switch mSwitch;
     private WifiP2pManager mWifiP2pManager;
+    private boolean mStateMachineEvent;
     private WifiP2pManager.Channel mChannel;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -53,9 +56,9 @@ public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
         }
     };
 
-    public WifiP2pEnabler(Context context, CheckBoxPreference checkBox) {
+    public WifiP2pEnabler(Context context, Switch switch_) {
         mContext = context;
-        mCheckBox = checkBox;
+        mSwitch = switch_;
 
         mWifiP2pManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         if (mWifiP2pManager != null) {
@@ -64,7 +67,7 @@ public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");
                 mWifiP2pManager = null;
-                mCheckBox.setEnabled(false);
+                mSwitch.setEnabled(false);
             }
         } else {
             Log.e(TAG, "mWifiP2pManager is null!");
@@ -76,41 +79,53 @@ public class WifiP2pEnabler implements Preference.OnPreferenceChangeListener {
     public void resume() {
         if (mWifiP2pManager == null) return;
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        mCheckBox.setOnPreferenceChangeListener(this);
+        mSwitch.setOnCheckedChangeListener(this);
     }
 
     public void pause() {
         if (mWifiP2pManager == null) return;
         mContext.unregisterReceiver(mReceiver);
-        mCheckBox.setOnPreferenceChangeListener(null);
+        mSwitch.setOnCheckedChangeListener(null);
     }
 
-    public boolean onPreferenceChange(Preference preference, Object value) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        if (mWifiP2pManager == null) return false;
+        if (mStateMachineEvent) return;
 
-        mCheckBox.setEnabled(false);
-        final boolean enable = (Boolean) value;
-        if (enable) {
+        if (mWifiP2pManager == null) return;
+
+        mSwitch.setEnabled(false);
+        if (isChecked) {
             mWifiP2pManager.enableP2p(mChannel);
         } else {
             mWifiP2pManager.disableP2p(mChannel);
         }
-        return false;
     }
 
     private void handleP2pStateChanged(int state) {
-        mCheckBox.setEnabled(true);
+        setSwitchChecked(true);
         switch (state) {
             case WifiP2pManager.WIFI_P2P_STATE_ENABLED:
-                mCheckBox.setChecked(true);
+                setSwitchChecked(true);
+                mSwitch.setEnabled(true);
                 break;
             case WifiP2pManager.WIFI_P2P_STATE_DISABLED:
-                mCheckBox.setChecked(false);
+                setSwitchChecked(false);
+                mSwitch.setEnabled(true);
                 break;
             default:
+                mSwitch.setEnabled(false);
+                setSwitchChecked(false);
                 Log.e(TAG,"Unhandled wifi state " + state);
                 break;
+        }
+    }
+
+    private void setSwitchChecked(boolean checked) {
+        if (checked != mSwitch.isChecked()) {
+            mStateMachineEvent = true;
+            mSwitch.setChecked(checked);
+            mStateMachineEvent = false;
         }
     }
 

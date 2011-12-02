@@ -54,17 +54,10 @@
         android:key="android_beam_settings"
         android:title="@string/android_beam_settings_title" />
 
-    <CheckBoxPreference
-        android:key="toggle_wifi_p2p"
-        android:title="@string/wifi_p2p_settings_title"
-        android:persistent="false" />
-
     <PreferenceScreen
         android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings"
         android:key="wifi_p2p_settings"
-        android:title="@string/wifi_p2p_settings_title"
-        android:summary="@string/wifi_p2p_settings_summary">
-    </PreferenceScreen>
+        android:title="@string/wifi_p2p_settings_title" />
 
     <PreferenceScreen
         android:key="mobile_network_settings"
