@@ -815,7 +815,7 @@ public class RunningState {
         // Build the chains from client processes to the process they are
         // dependent on; also remove any old running processes.
         int NRP = mRunningProcesses.size();
-        for (int i=0; i<NRP; i++) {
+        for (int i = 0; i < NRP;) {
             ProcessItem proc = mRunningProcesses.valueAt(i);
             if (proc.mRunningSeq == mSequence) {
                 int clientPid = proc.mRunningProcessInfo.importanceReasonPid;
@@ -833,9 +833,11 @@ public class RunningState {
                     // we will detect the change.
                     proc.mClient = null;
                 }
+                i++;
             } else {
                 changed = true;
                 mRunningProcesses.remove(mRunningProcesses.keyAt(i));
+                NRP--;
             }
         }
         
