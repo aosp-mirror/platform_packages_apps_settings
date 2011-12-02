@@ -1375,23 +1375,25 @@
 
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
-    <string name="wifi_p2p_settings_title">Wi-Fi direct</string>
-    <!-- Summary for Wi-fi Direct settings item in the 1st-level settings screen [CHAR LIMIT=50]-->
-    <string name="wifi_p2p_settings_summary">Set up peer-to-peer connectivity</string>
+    <string name="wifi_p2p_settings_title">Wi-Fi Direct</string>
     <string name="wifi_p2p_device_info">Device information</string>
-    <string name="wifi_p2p_wps_setup">Wi-Fi protected setup</string>
-    <string name="wifi_p2p_wps_pin">Type PIN</string>
     <string name="wifi_p2p_persist_network">Remember this connection</string>
     <!-- Menu option to discover peers-->
-    <string name="wifi_p2p_menu_search">Search</string>
-    <!-- Menu option to create a group-->
-    <string name="wifi_p2p_menu_create_group">Create group</string>
-    <!-- Menu option to remove a group-->
-    <string name="wifi_p2p_menu_remove_group">Remove group</string>
-    <!-- Menu option to Wi-Fi p2p advanced settings -->
-    <string name="wifi_p2p_menu_advanced">Advanced</string>
+    <string name="wifi_p2p_menu_search">SEARCH FOR DEVICES</string>
+    <!-- Menu option when discovery is in progress-->
+    <string name="wifi_p2p_menu_searching">SEARCHING</string>
+    <!-- Menu option to Rename-->
+    <string name="wifi_p2p_menu_rename">Rename device</string>
     <!-- Title for available p2p devices -->
-    <string name="wifi_p2p_available_devices">Available devices</string>
+    <string name="wifi_p2p_peer_devices">PEER DEVICES</string>
+    <!-- Toast text for a failed connection initiation -->
+    <string name="wifi_p2p_failed_connect_message">Connect failed</string>
+    <!-- Title for disconnect dialog -->
+    <string name="wifi_p2p_disconnect_title">Disconnect?</string>
+    <!-- Message test for disconnection from one device-->
+    <string name="wifi_p2p_disconnect_message">Touching Disconnect will end your connection with <xliff:g id="peer_name">%1$s</xliff:g></string>
+    <!-- Message test for disconnection from multiple devices-->
+    <string name="wifi_p2p_disconnect_multiple_message">Touching Disconnect will end your connection with <xliff:g id="peer_name">%1$s</xliff:g> and <xliff:g id="peer_count">%2$s</xliff:g> other devices</string>
 
     <!-- Wifi AP settings-->
     <!-- Label for wifi tether checkbox. Toggles Access Point on/off -->
