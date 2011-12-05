@@ -27,17 +27,20 @@ import java.util.Set;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class UserDictionaryAddWordActivity extends Activity {
+public class UserDictionaryAddWordActivity extends Activity
+        implements AdapterView.OnItemSelectedListener {
     public static final String EXTRA_WORD = "word";
     public static final String EXTRA_LOCALE = "locale";
     private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
@@ -124,9 +127,30 @@ public class UserDictionaryAddWordActivity extends Activity {
         finish();
     }
 
-    private static void addLocaleDisplayNameToList(final List<String> list, final String locale) {
+    private static class LocaleRenderer {
+        private final String mLocaleString;
+        private final String mDescription;
+        // LocaleString may NOT be null.
+        public LocaleRenderer(final Context context, final String localeString) {
+            mLocaleString = localeString;
+            if ("".equals(localeString)) {
+                mDescription = context.getString(R.string.user_dict_settings_all_languages);
+            } else {
+                mDescription = Utils.createLocaleFromString(localeString).getDisplayName();
+            }
+        }
+        public String toString() {
+            return mDescription;
+        }
+        public String getLocaleString() {
+            return mLocaleString;
+        }
+    }
+
+    private static void addLocaleDisplayNameToList(final Context context,
+            final List<LocaleRenderer> list, final String locale) {
         if (null != locale) {
-            list.add(Utils.createLocaleFromString(locale).getDisplayName());
+            list.add(new LocaleRenderer(context, locale));
         }
     }
 
@@ -147,21 +171,36 @@ public class UserDictionaryAddWordActivity extends Activity {
             // The system locale should be inside. We want it at the 2nd spot.
             locales.remove(systemLocale);
         }
-        final ArrayList<String> localesList = new ArrayList<String>();
+        final ArrayList<LocaleRenderer> localesList = new ArrayList<LocaleRenderer>();
         // Add the passed locale, then the system locale at the top of the list. Add an
         // "all languages" entry at the bottom of the list.
-        addLocaleDisplayNameToList(localesList, mLocale);
-        addLocaleDisplayNameToList(localesList, systemLocale);
+        addLocaleDisplayNameToList(this, localesList, mLocale);
+        addLocaleDisplayNameToList(this, localesList, systemLocale);
         for (final String l : locales) {
             // TODO: sort in unicode order
-            addLocaleDisplayNameToList(localesList, l);
+            addLocaleDisplayNameToList(this, localesList, l);
         }
-        localesList.add(getString(R.string.user_dict_settings_all_languages));
+        localesList.add(new LocaleRenderer(this, ""));
+        //TODO: Do we need an option "more..." to show all locales in the world?
         final Spinner localeSpinner =
                 (Spinner)findViewById(R.id.user_dictionary_settings_add_dialog_locale);
-        final ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, localesList);
+        final ArrayAdapter<LocaleRenderer> adapter = new ArrayAdapter<LocaleRenderer>(this,
+                android.R.layout.simple_spinner_item, localesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         localeSpinner.setAdapter(adapter);
+        localeSpinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
+            final long id) {
+        final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
+        mLocale = locale.getLocaleString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // I'm not sure we can come here, but if we do, that's the right thing to do.
+        mLocale = null;
     }
 }
