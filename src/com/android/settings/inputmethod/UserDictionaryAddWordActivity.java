@@ -83,47 +83,6 @@ public class UserDictionaryAddWordActivity extends Activity {
         finish();
     }
 
-    private static void addLocaleDisplayNameToList(final List<String> list, final String locale) {
-        if (null != locale) {
-            list.add(Utils.createLocaleFromString(locale).getDisplayName());
-        }
-    }
-
-    public void onClickOptions(final View v) {
-        final View moreOptionsView =
-                findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
-        moreOptionsView.setVisibility(View.VISIBLE);
-        findViewById(R.id.user_dictionary_settings_add_dialog_options).setVisibility(View.GONE);
-        findViewById(R.id.user_dictionary_settings_add_dialog_manage).setVisibility(View.VISIBLE);
-
-        final Set<String> locales = UserDictionaryList.getUserDictionaryLocalesList(this);
-        if (null != mLocale && locales.contains(mLocale)) {
-            // Remove our locale if it's in, because we're always gonna put it at the top
-            locales.remove(mLocale);
-        }
-        final String systemLocale = Locale.getDefault().toString();
-        if (null != systemLocale && locales.contains(systemLocale)) {
-            // The system locale should be inside. We want it at the 2nd spot.
-            locales.remove(systemLocale);
-        }
-        final ArrayList<String> localesList = new ArrayList<String>();
-        // Add the passed locale, then the system locale at the top of the list. Add an
-        // "all languages" entry at the bottom of the list.
-        addLocaleDisplayNameToList(localesList, mLocale);
-        addLocaleDisplayNameToList(localesList, systemLocale);
-        for (final String l : locales) {
-            // TODO: sort in unicode order
-            addLocaleDisplayNameToList(localesList, l);
-        }
-        localesList.add(getString(R.string.user_dict_settings_all_languages));
-        final Spinner localeSpinner =
-                (Spinner)findViewById(R.id.user_dictionary_settings_add_dialog_locale);
-        final ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, localesList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        localeSpinner.setAdapter(adapter);
-    }
-
     public void onClickManage(final View v) {
         final Intent intent = new Intent(v.getContext(), UserDictionarySettings.class);
         startActivity(intent);
@@ -163,5 +122,46 @@ public class UserDictionaryAddWordActivity extends Activity {
             Locale.setDefault(prevLocale);
         }
         finish();
+    }
+
+    private static void addLocaleDisplayNameToList(final List<String> list, final String locale) {
+        if (null != locale) {
+            list.add(Utils.createLocaleFromString(locale).getDisplayName());
+        }
+    }
+
+    public void onClickOptions(final View v) {
+        final View moreOptionsView =
+                findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
+        moreOptionsView.setVisibility(View.VISIBLE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_options).setVisibility(View.GONE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_manage).setVisibility(View.VISIBLE);
+
+        final Set<String> locales = UserDictionaryList.getUserDictionaryLocalesList(this);
+        if (null != mLocale && locales.contains(mLocale)) {
+            // Remove our locale if it's in, because we're always gonna put it at the top
+            locales.remove(mLocale);
+        }
+        final String systemLocale = Locale.getDefault().toString();
+        if (null != systemLocale && locales.contains(systemLocale)) {
+            // The system locale should be inside. We want it at the 2nd spot.
+            locales.remove(systemLocale);
+        }
+        final ArrayList<String> localesList = new ArrayList<String>();
+        // Add the passed locale, then the system locale at the top of the list. Add an
+        // "all languages" entry at the bottom of the list.
+        addLocaleDisplayNameToList(localesList, mLocale);
+        addLocaleDisplayNameToList(localesList, systemLocale);
+        for (final String l : locales) {
+            // TODO: sort in unicode order
+            addLocaleDisplayNameToList(localesList, l);
+        }
+        localesList.add(getString(R.string.user_dict_settings_all_languages));
+        final Spinner localeSpinner =
+                (Spinner)findViewById(R.id.user_dictionary_settings_add_dialog_locale);
+        final ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, localesList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        localeSpinner.setAdapter(adapter);
     }
 }
