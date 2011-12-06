@@ -45,11 +45,17 @@
                 android:persistent="false"
                 android:order="3"/>
 
+        <CheckBoxPreference
+                android:key="toggle_speak_password_preference"
+                android:title="@string/accessibility_speak_password_title"
+                android:persistent="false"
+                android:order="4"/>
+
         <PreferenceScreen
                 android:key="toggle_touch_exploration_preference"
                 android:title="@string/accessibility_touch_exploration_title"
                 android:fragment="com.android.settings.AccessibilitySettings$ToggleTouchExplorationFragment"
-                android:order="4" >
+                android:order="5" >
                 <extra android:name="title" android:value="@string/accessibility_touch_exploration_title" />
                 <extra android:name="summary" android:value="@string/accessibility_touch_exploration_summary" />
                 <extra android:name="enable_warning_title" android:value="@android:string/dialog_alert_title" />
@@ -63,7 +69,7 @@
                 android:entries="@array/long_press_timeout_selector_titles"
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"
-                android:order="5"/>
+                android:order="6"/>
 
         <!-- We want a dialog with no title, so use an empty string to avoid a fall back to the preference title. -->
         <com.android.settings.AccessibilityEnableScriptInjectionPreference
@@ -75,7 +81,7 @@
                 android:positiveButtonText="@string/accessibility_script_injection_button_allow"
                 android:negativeButtonText="@string/accessibility_script_injection_button_disallow"
                 android:persistent="false"
-                android:order="6"/>
+                android:order="7"/>
 
     </PreferenceCategory>
 
