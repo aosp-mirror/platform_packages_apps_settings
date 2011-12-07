@@ -80,7 +80,7 @@
                         android:prompt="@string/vpn_ipsec_user_cert" />
             </LinearLayout>
 
-            <LinearLayout android:id="@+id/ipsec_ca"
+            <LinearLayout android:id="@+id/ipsec_peer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -88,6 +88,9 @@
                 <TextView style="@style/vpn_label" android:text="@string/vpn_ipsec_ca_cert"/>
                 <Spinner style="@style/vpn_value" android:id="@+id/ipsec_ca_cert"
                         android:prompt="@string/vpn_ipsec_ca_cert" />
+                <TextView style="@style/vpn_label" android:text="@string/vpn_ipsec_server_cert"/>
+                <Spinner style="@style/vpn_value" android:id="@+id/ipsec_server_cert"
+                        android:prompt="@string/vpn_ipsec_server_cert" />
             </LinearLayout>
 
             <CheckBox style="@style/vpn_value" android:id="@+id/show_options"

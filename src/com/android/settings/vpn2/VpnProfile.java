@@ -51,6 +51,7 @@ class VpnProfile implements Cloneable {
     String ipsecSecret = "";    // 11
     String ipsecUserCert = "";  // 12
     String ipsecCaCert = "";    // 13
+    String ipsecServerCert = "";// 14
 
     // Helper fields.
     boolean saveLogin = false;
@@ -66,8 +67,8 @@ class VpnProfile implements Cloneable {
             }
 
             String[] values = new String(value, Charsets.UTF_8).split("\0", -1);
-            // Currently it always has 14 fields.
-            if (values.length < 14) {
+            // There can be 14 or 15 values in ICS MR1.
+            if (values.length < 14 || values.length > 15) {
                 return null;
             }
 
@@ -89,6 +90,7 @@ class VpnProfile implements Cloneable {
             profile.ipsecSecret = values[11];
             profile.ipsecUserCert = values[12];
             profile.ipsecCaCert = values[13];
+            profile.ipsecServerCert = (values.length > 14) ? values[14] : "";
 
             profile.saveLogin = !profile.username.isEmpty() || !profile.password.isEmpty();
             return profile;
@@ -113,6 +115,7 @@ class VpnProfile implements Cloneable {
         builder.append('\0').append(ipsecSecret);
         builder.append('\0').append(ipsecUserCert);
         builder.append('\0').append(ipsecCaCert);
+        builder.append('\0').append(ipsecServerCert);
         return builder.toString().getBytes(Charsets.UTF_8);
     }
 }

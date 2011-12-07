@@ -61,6 +61,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
     private TextView mIpsecSecret;
     private Spinner mIpsecUserCert;
     private Spinner mIpsecCaCert;
+    private Spinner mIpsecServerCert;
     private CheckBox mSaveLogin;
 
     VpnDialog(Context context, DialogInterface.OnClickListener listener,
@@ -94,6 +95,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
         mIpsecSecret = (TextView) mView.findViewById(R.id.ipsec_secret);
         mIpsecUserCert = (Spinner) mView.findViewById(R.id.ipsec_user_cert);
         mIpsecCaCert = (Spinner) mView.findViewById(R.id.ipsec_ca_cert);
+        mIpsecServerCert = (Spinner) mView.findViewById(R.id.ipsec_server_cert);
         mSaveLogin = (CheckBox) mView.findViewById(R.id.save_login);
 
         // Second, copy values from the profile.
@@ -115,6 +117,8 @@ class VpnDialog extends AlertDialog implements TextWatcher,
                 0, mProfile.ipsecUserCert);
         loadCertificates(mIpsecCaCert, Credentials.CA_CERTIFICATE,
                 R.string.vpn_no_ca_cert, mProfile.ipsecCaCert);
+        loadCertificates(mIpsecServerCert, Credentials.USER_CERTIFICATE,
+                R.string.vpn_no_server_cert, mProfile.ipsecServerCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
 
         // Third, add listeners to required fields.
@@ -217,7 +221,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
         mView.findViewById(R.id.l2tp).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_psk).setVisibility(View.GONE);
         mView.findViewById(R.id.ipsec_user).setVisibility(View.GONE);
-        mView.findViewById(R.id.ipsec_ca).setVisibility(View.GONE);
+        mView.findViewById(R.id.ipsec_peer).setVisibility(View.GONE);
 
         // Then, unhide type-specific fields.
         switch (type) {
@@ -239,7 +243,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
                 mView.findViewById(R.id.ipsec_user).setVisibility(View.VISIBLE);
                 // fall through
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
-                mView.findViewById(R.id.ipsec_ca).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.ipsec_peer).setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -364,6 +368,9 @@ class VpnDialog extends AlertDialog implements TextWatcher,
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
                 if (mIpsecCaCert.getSelectedItemPosition() != 0) {
                     profile.ipsecCaCert = (String) mIpsecCaCert.getSelectedItem();
+                }
+                if (mIpsecServerCert.getSelectedItemPosition() != 0) {
+                    profile.ipsecServerCert = (String) mIpsecServerCert.getSelectedItem();
                 }
                 break;
         }
