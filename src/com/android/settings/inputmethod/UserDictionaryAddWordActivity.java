@@ -21,6 +21,7 @@ import com.android.settings.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 public class UserDictionaryAddWordActivity extends Activity {
@@ -37,5 +38,9 @@ public class UserDictionaryAddWordActivity extends Activity {
         mEditText = (EditText)findViewById(R.id.user_dictionary_add_word_text);
         mEditText.setText(word);
         mEditText.setSelection(word.length());
+    }
+
+    public void onClickCancel(final View v) {
+        finish();
     }
 }
