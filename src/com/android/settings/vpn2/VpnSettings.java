@@ -354,6 +354,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         String privateKey = "";
         String userCert = "";
         String caCert = "";
+        String serverCert = "";
         if (!profile.ipsecUserCert.isEmpty()) {
             byte[] value = mKeyStore.get(Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert);
             privateKey = (value == null) ? null : new String(value, Charsets.UTF_8);
@@ -364,7 +365,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             byte[] value = mKeyStore.get(Credentials.CA_CERTIFICATE + profile.ipsecCaCert);
             caCert = (value == null) ? null : new String(value, Charsets.UTF_8);
         }
-        if (privateKey == null || userCert == null || caCert == null) {
+        if (!profile.ipsecServerCert.isEmpty()) {
+            byte[] value = mKeyStore.get(Credentials.USER_CERTIFICATE + profile.ipsecServerCert);
+            serverCert = (value == null) ? null : new String(value, Charsets.UTF_8);
+        }
+        if (privateKey == null || userCert == null || caCert == null || serverCert == null) {
             // TODO: find out a proper way to handle this. Delete these keys?
             throw new IllegalStateException("Cannot load credentials");
         }
@@ -380,7 +385,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
                 racoon = new String[] {
-                    interfaze, profile.server, "udprsa", privateKey, userCert, caCert, "1701",
+                    interfaze, profile.server, "udprsa", privateKey, userCert,
+                    caCert, serverCert, "1701",
                 };
                 break;
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
@@ -391,14 +397,14 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                 break;
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
                 racoon = new String[] {
-                    interfaze, profile.server, "xauthrsa", privateKey, userCert, caCert,
-                    profile.username, profile.password, "", gateway,
+                    interfaze, profile.server, "xauthrsa", privateKey, userCert,
+                    caCert, serverCert, profile.username, profile.password, "", gateway,
                 };
                 break;
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
                 racoon = new String[] {
-                    interfaze, profile.server, "hybridrsa", caCert,
-                    profile.username, profile.password, "", gateway,
+                    interfaze, profile.server, "hybridrsa",
+                    caCert, serverCert, profile.username, profile.password, "", gateway,
                 };
                 break;
         }
