@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListFragment;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,15 +45,12 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+import com.android.settings.inputmethod.UserDictionaryAddWordActivity;
 
 import java.util.Locale;
 
-public class UserDictionarySettings extends ListFragment implements DialogCreatable {
+public class UserDictionarySettings extends ListFragment {
     private static final String TAG = "UserDictionarySettings";
-
-    private static final String INSTANCE_KEY_DIALOG_EDITING_WORD = "DIALOG_EDITING_WORD";
-    private static final String INSTANCE_KEY_ADDED_WORD = "DIALOG_ADDED_WORD";
 
     private static final String[] QUERY_PROJECTION = {
         UserDictionary.Words._ID, UserDictionary.Words.WORD
@@ -70,25 +68,11 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
 
     private static final String DELETE_SELECTION = UserDictionary.Words.WORD + "=?";
 
-    private static final String EXTRA_WORD = "word";
-
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
-
-    private static final int DIALOG_ADD_OR_EDIT = 0;
-
-    private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
-
-    /** The word being edited in the dialog (null means the user is adding a word). */
-    private String mDialogEditingWord;
 
     private Cursor mCursor;
 
     protected String mLocale;
-
-    private boolean mAddedWordAlready;
-    private boolean mAutoReturn;
-
-    private SettingsDialogFragment mDialogFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -135,31 +119,6 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
 
         setHasOptionsMenu(true);
 
-        if (savedInstanceState != null) {
-            mDialogEditingWord = savedInstanceState.getString(INSTANCE_KEY_DIALOG_EDITING_WORD);
-            mAddedWordAlready = savedInstanceState.getBoolean(INSTANCE_KEY_ADDED_WORD, false);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        final Intent intent = getActivity().getIntent();
-        if (!mAddedWordAlready
-                && intent.getAction().equals("com.android.settings.USER_DICTIONARY_INSERT")) {
-            final String word = intent.getStringExtra(EXTRA_WORD);
-            mAutoReturn = true;
-            if (word != null) {
-                showAddOrEditDialog(word);
-            }
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(INSTANCE_KEY_DIALOG_EDITING_WORD, mDialogEditingWord);
-        outState.putBoolean(INSTANCE_KEY_ADDED_WORD, mAddedWordAlready);
     }
 
     private Cursor createCursor(final String locale) {
@@ -216,9 +175,18 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
         return true;
     }
 
-    private void showAddOrEditDialog(String editingWord) {
-        mDialogEditingWord = editingWord;
-        showDialog(DIALOG_ADD_OR_EDIT);
+    /**
+     * Add or edit a word. If editingWord is null, it's an add; otherwise, it's an edit.
+     * @param editingWord the word to edit, or null if it's an add.
+     */
+    private void showAddOrEditDialog(final String editingWord) {
+        final Intent intent = new Intent(null == editingWord
+                ? UserDictionaryAddWordActivity.MODE_INSERT_ACTION
+                : UserDictionaryAddWordActivity.MODE_EDIT_ACTION);
+        // The following are fine if they are null
+        intent.putExtra(UserDictionaryAddWordActivity.EXTRA_WORD, editingWord);
+        intent.putExtra(UserDictionaryAddWordActivity.EXTRA_LOCALE, mLocale);
+        startActivity(intent);
     }
 
     private String getWord(int position) {
@@ -231,81 +199,8 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
                 mCursor.getColumnIndexOrThrow(UserDictionary.Words.WORD));
     }
 
-    @Override
-    public Dialog onCreateDialog(int id) {
-        final Activity activity = getActivity();
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-        final LayoutInflater inflater = LayoutInflater.from(dialogBuilder.getContext());
-        final View content = inflater.inflate(R.layout.dialog_edittext, null);
-        final EditText editText = (EditText) content.findViewById(R.id.edittext);
-        editText.setText(mDialogEditingWord);
-        // No prediction in soft keyboard mode. TODO: Create a better way to disable prediction
-        editText.setInputType(InputType.TYPE_CLASS_TEXT 
-                | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-
-        AlertDialog dialog = dialogBuilder
-                .setTitle(mDialogEditingWord != null 
-                        ? R.string.user_dict_settings_edit_dialog_title 
-                        : R.string.user_dict_settings_add_dialog_title)
-                .setView(content)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        onAddOrEditFinished(editText.getText().toString());
-                        if (mAutoReturn) activity.onBackPressed();
-                    }})
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (mAutoReturn) activity.onBackPressed();
-                    }})
-                .create();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN |
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        return dialog;
-    }
-
-    private void showDialog(int dialogId) {
-        if (mDialogFragment != null) {
-            Log.e(TAG, "Old dialog fragment not null!");
-        }
-        mDialogFragment = new SettingsDialogFragment(this, dialogId);
-        mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
-    }
-
-    private void onAddOrEditFinished(String word) {
-        if (mDialogEditingWord != null) {
-            // The user was editing a word, so do a delete/add
-            deleteWord(mDialogEditingWord);
-        }
-
-        // Disallow duplicates
-        deleteWord(word);
-
-        // TODO: present UI for picking whether to add word to all locales, or current.
-        if (null == mLocale) {
-            // Null means insert with the default system locale.
-            UserDictionary.Words.addWord(getActivity(), word.toString(),
-                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
-        } else if ("".equals(mLocale)) {
-            // Empty string means insert for all languages.
-            UserDictionary.Words.addWord(getActivity(), word.toString(),
-                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_ALL);
-        } else {
-            // TODO: fix the framework so that it can accept a locale when we add a word
-            // to the user dictionary instead of querying the system locale.
-            final Locale prevLocale = Locale.getDefault();
-            Locale.setDefault(Utils.createLocaleFromString(mLocale));
-            UserDictionary.Words.addWord(getActivity(), word.toString(),
-                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
-            Locale.setDefault(prevLocale);
-        }
-        if (null != mCursor && !mCursor.requery()) {
-            throw new IllegalStateException("can't requery on already-closed cursor.");
-        }
-        mAddedWordAlready = true;
-    }
-
-    private void deleteWord(String word) {
-        getActivity().getContentResolver().delete(
+    public static void deleteWord(final String word, final ContentResolver resolver) {
+        resolver.delete(
                 UserDictionary.Words.CONTENT_URI, DELETE_SELECTION, new String[] { word });
     }
 
@@ -355,7 +250,8 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
         }
 
         public void onClick(View v) {
-            mSettings.deleteWord((String) v.getTag());
+            UserDictionarySettings.deleteWord((String) v.getTag(),
+                    mSettings.getActivity().getContentResolver());
         }
     }
 }
