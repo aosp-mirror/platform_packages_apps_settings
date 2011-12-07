@@ -450,7 +450,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.USER_DICTIONARY_SETTINGS" />
-                <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -462,6 +461,16 @@
                 android:resource="@string/language_keyboard_settings_title" />
             <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
                 android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
+        </activity>
+
+        <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
+                  android:label="@string/user_dict_settings_titlebar"
+                  android:theme="@android:style/Theme.Holo.Dialog.NoActionBar">
+            <intent-filter>
+                <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
