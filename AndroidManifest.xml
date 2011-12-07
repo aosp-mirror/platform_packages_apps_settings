@@ -465,7 +465,9 @@
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
                   android:label="@string/user_dict_settings_titlebar"
-                  android:theme="@android:style/Theme.Holo.Dialog.NoActionBar">
+                  android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
+                  android:windowSoftInputMode="stateVisible"
+                  android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
                 <category android:name="android.intent.category.DEFAULT" />

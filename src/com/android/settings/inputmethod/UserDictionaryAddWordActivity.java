@@ -19,12 +19,23 @@ package com.android.settings.inputmethod;
 import com.android.settings.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 
 public class UserDictionaryAddWordActivity extends Activity {
+    private static final String EXTRA_WORD = "word";
+
+    private EditText mEditText;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_edittext);
+        setContentView(R.layout.user_dictionary_add_word);
+        final Intent intent = getIntent();
+        final String word = intent.getStringExtra(EXTRA_WORD);
+        mEditText = (EditText)findViewById(R.id.user_dictionary_add_word_text);
+        mEditText.setText(word);
+        mEditText.setSelection(word.length());
     }
 }
