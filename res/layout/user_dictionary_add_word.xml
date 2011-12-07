@@ -67,7 +67,8 @@
               style="?android:attr/buttonBarButtonStyle"
               android:textSize="14sp"
               android:text="@string/cancel"
-              android:layout_height="wrap_content" />
+              android:layout_height="wrap_content"
+              android:onClick="onClickCancel" />
       <Button android:layout_width="0dip"
               android:layout_gravity="center_horizontal"
               android:layout_weight="1"
