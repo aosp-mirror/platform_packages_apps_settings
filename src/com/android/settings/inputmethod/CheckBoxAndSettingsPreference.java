@@ -34,8 +34,7 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
     private SettingsPreferenceFragment mFragment;
     private TextView mTitleText;
     private TextView mSummaryText;
-    private View mCheckBox;
-    private ImageView mSetingsButton;
+    private ImageView mSettingsButton;
     private Intent mSettingsIntent;
 
     public CheckBoxAndSettingsPreference(Context context, AttributeSet attrs) {
@@ -47,27 +46,27 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-        mCheckBox = view.findViewById(R.id.inputmethod_pref);
-        mCheckBox.setOnClickListener(
+        View textLayout = view.findViewById(R.id.inputmethod_pref);
+        textLayout.setOnClickListener(
                 new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
                         onCheckBoxClicked();
                     }
                 });
-        mSetingsButton = (ImageView)view.findViewById(R.id.inputmethod_settings);
+
+        mSettingsButton = (ImageView) view.findViewById(R.id.inputmethod_settings);
         mTitleText = (TextView)view.findViewById(android.R.id.title);
         mSummaryText = (TextView)view.findViewById(android.R.id.summary);
-        mSetingsButton.setOnClickListener(
+        mSettingsButton.setOnClickListener(
                 new OnClickListener() {
                     @Override
-                    public void onClick(View arg0) {
-                        onSettingsButtonClicked(arg0);
+                    public void onClick(View clickedView) {
+                        onSettingsButtonClicked();
                     }
                 });
         enableSettingsButton();
     }
-
 
     @Override
     public void setEnabled(boolean enabled) {
@@ -88,23 +87,23 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
         }
     }
 
-    protected void onSettingsButtonClicked(View arg0) {
+    protected void onSettingsButtonClicked() {
         if (mFragment != null && mSettingsIntent != null) {
             mFragment.startActivity(mSettingsIntent);
         }
     }
 
     private void enableSettingsButton() {
-        if (mSetingsButton != null) {
+        if (mSettingsButton != null) {
             if (mSettingsIntent == null) {
-                mSetingsButton.setVisibility(View.GONE);
+                mSettingsButton.setVisibility(View.GONE);
             } else {
                 final boolean checked = isChecked();
-                mSetingsButton.setEnabled(checked);
-                mSetingsButton.setClickable(checked);
-                mSetingsButton.setFocusable(checked);
+                mSettingsButton.setEnabled(checked);
+                mSettingsButton.setClickable(checked);
+                mSettingsButton.setFocusable(checked);
                 if (!checked) {
-                    mSetingsButton.setAlpha(DISABLED_ALPHA);
+                    mSettingsButton.setAlpha(DISABLED_ALPHA);
                 }
             }
         }
