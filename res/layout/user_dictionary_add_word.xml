@@ -14,6 +14,7 @@
      limitations under the License.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/user_dict_settings_add_dialog_top"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
@@ -36,7 +37,6 @@
           android:background="@android:color/holo_blue_light" />
   </LinearLayout>
 
-
   <EditText android:id="@+id/user_dictionary_add_word_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,6 +48,32 @@
             android:visibility="visible">
     <requestFocus/>
   </EditText>
+
+  <LinearLayout android:id="@+id/user_dict_settings_add_dialog_shortcut_interface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+    <TextView style="?android:attr/textAppearanceSmall"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="8dip"
+              android:text="@string/user_dict_settings_add_shortcut_option_name" />
+    <EditText android:id="@+id/user_dictionary_settings_add_dialog_shortcut"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="8dip"
+              android:layout_marginRight="8dip"
+              android:inputType="textNoSuggestions" />
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="8dip"
+              android:text="@string/user_dict_settings_add_locale_option_name" />
+    <Spinner  android:id="@+id/user_dictionary_settings_add_dialog_locale"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="8dip" />
+  </LinearLayout>
 
   <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,14 +95,27 @@
               android:text="@string/cancel"
               android:layout_height="wrap_content"
               android:onClick="onClickCancel" />
-      <Button android:layout_width="0dip"
+      <Button android:id="@+id/user_dictionary_settings_add_dialog_options"
+              android:layout_width="0dip"
               android:layout_gravity="center_horizontal"
               android:layout_weight="1"
               android:maxLines="2"
               style="?android:attr/buttonBarButtonStyle"
               android:textSize="14sp"
               android:text="@string/user_dict_settings_add_dialog_options"
-              android:layout_height="wrap_content" />
+              android:layout_height="wrap_content"
+              android:onClick="onClickOptions" />
+      <Button android:id="@+id/user_dictionary_settings_add_dialog_manage"
+              android:layout_width="0dip"
+              android:layout_gravity="center_horizontal"
+              android:layout_weight="1"
+              android:maxLines="2"
+              style="?android:attr/buttonBarButtonStyle"
+              android:textSize="14sp"
+              android:text="@string/user_dict_settings_add_dialog_manage"
+              android:layout_height="wrap_content"
+              android:visibility="gone"
+              android:onClick="onClickManage" />
       <Button android:layout_width="0dip"
               android:layout_gravity="right"
               android:layout_weight="1"
