@@ -22,12 +22,14 @@ import com.android.settings.Utils;
 
 import java.util.Locale;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 public class UserDictionaryAddWordActivity extends Activity {
@@ -66,9 +68,27 @@ public class UserDictionaryAddWordActivity extends Activity {
             mEditText.setText(mOldWord);
             mEditText.setSelection(mOldWord.length());
         }
+        final ViewGroup v = (ViewGroup)findViewById(R.id.user_dict_settings_add_dialog_top);
+        final LayoutTransition transition = new LayoutTransition();
+        transition.setStartDelay(LayoutTransition.APPEARING, 0);
+        v.setLayoutTransition(transition);
     }
 
     public void onClickCancel(final View v) {
+        finish();
+    }
+
+    public void onClickOptions(final View v) {
+        final View moreOptionsView =
+                findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
+        moreOptionsView.setVisibility(View.VISIBLE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_options).setVisibility(View.GONE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_manage).setVisibility(View.VISIBLE);
+    }
+
+    public void onClickManage(final View v) {
+        final Intent intent = new Intent(v.getContext(), UserDictionarySettings.class);
+        startActivity(intent);
         finish();
     }
 
