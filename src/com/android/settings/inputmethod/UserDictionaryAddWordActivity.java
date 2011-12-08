@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -53,7 +54,7 @@ public class UserDictionaryAddWordActivity extends Activity
     private EditText mEditText;
     private int mMode; // Either MODE_EDIT or MODE_INSERT
     private String mOldWord;
-    private String mLocale; // may be null
+    private String mLocale; // may not be null: will be converted to default locale if received null
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -70,7 +71,8 @@ public class UserDictionaryAddWordActivity extends Activity
             throw new RuntimeException("Unsupported action: " + action);
         }
         mOldWord = intent.getStringExtra(EXTRA_WORD);
-        mLocale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
+        final String locale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
+        mLocale = null == locale ? Locale.getDefault().toString() : locale;
         mEditText = (EditText)findViewById(R.id.user_dictionary_add_word_text);
         if (null != mOldWord) {
             mEditText.setText(mOldWord);
@@ -107,11 +109,7 @@ public class UserDictionaryAddWordActivity extends Activity
         // TODO: Redefine the logic when we support shortcuts.
         UserDictionarySettings.deleteWord(newWord, this.getContentResolver());
 
-        if (null == mLocale) {
-            // Null means insert with the default system locale.
-            UserDictionary.Words.addWord(this, newWord.toString(),
-                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
-        } else if ("".equals(mLocale)) {
+        if (TextUtils.isEmpty(mLocale)) {
             // Empty string means insert for all languages.
             UserDictionary.Words.addWord(this, newWord.toString(),
                     FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_ALL);
@@ -133,7 +131,9 @@ public class UserDictionaryAddWordActivity extends Activity
         // LocaleString may NOT be null.
         public LocaleRenderer(final Context context, final String localeString) {
             mLocaleString = localeString;
-            if ("".equals(localeString)) {
+            if (null == localeString) {
+                mDescription = context.getString(R.string.user_dict_settings_more_languages);
+            } else if ("".equals(localeString)) {
                 mDescription = context.getString(R.string.user_dict_settings_all_languages);
             } else {
                 mDescription = Utils.createLocaleFromString(localeString).getDisplayName();
@@ -162,26 +162,25 @@ public class UserDictionaryAddWordActivity extends Activity
         findViewById(R.id.user_dictionary_settings_add_dialog_manage).setVisibility(View.VISIBLE);
 
         final Set<String> locales = UserDictionaryList.getUserDictionaryLocalesList(this);
-        if (null != mLocale && locales.contains(mLocale)) {
-            // Remove our locale if it's in, because we're always gonna put it at the top
-            locales.remove(mLocale);
-        }
+        // Remove our locale if it's in, because we're always gonna put it at the top
+        locales.remove(mLocale); // mLocale may not be null
         final String systemLocale = Locale.getDefault().toString();
-        if (null != systemLocale && locales.contains(systemLocale)) {
-            // The system locale should be inside. We want it at the 2nd spot.
-            locales.remove(systemLocale);
-        }
+        // The system locale should be inside. We want it at the 2nd spot.
+        locales.remove(systemLocale); // system locale may not be null
+        locales.remove(""); // Remove the empty string if it's there
         final ArrayList<LocaleRenderer> localesList = new ArrayList<LocaleRenderer>();
         // Add the passed locale, then the system locale at the top of the list. Add an
         // "all languages" entry at the bottom of the list.
         addLocaleDisplayNameToList(this, localesList, mLocale);
-        addLocaleDisplayNameToList(this, localesList, systemLocale);
+        if (!systemLocale.equals(mLocale)) {
+            addLocaleDisplayNameToList(this, localesList, systemLocale);
+        }
         for (final String l : locales) {
             // TODO: sort in unicode order
             addLocaleDisplayNameToList(this, localesList, l);
         }
-        localesList.add(new LocaleRenderer(this, ""));
-        //TODO: Do we need an option "more..." to show all locales in the world?
+        localesList.add(new LocaleRenderer(this, "")); // meaning: all languages
+        localesList.add(new LocaleRenderer(this, null)); // meaning: select another locale
         final Spinner localeSpinner =
                 (Spinner)findViewById(R.id.user_dictionary_settings_add_dialog_locale);
         final ArrayAdapter<LocaleRenderer> adapter = new ArrayAdapter<LocaleRenderer>(this,
@@ -201,6 +200,8 @@ public class UserDictionaryAddWordActivity extends Activity
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // I'm not sure we can come here, but if we do, that's the right thing to do.
-        mLocale = null;
+        final Intent intent = getIntent();
+        final String locale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
+        mLocale = null == locale ? Locale.getDefault().toString() : locale;
     }
 }
