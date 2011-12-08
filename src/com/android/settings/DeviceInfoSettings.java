@@ -58,6 +58,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
+    private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
 
     long[] mHits = new long[3];
 
@@ -106,6 +107,13 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+
+        // Read platform settings for additional system update setting
+        boolean isUpdateSettingAvailable =
+                getResources().getBoolean(R.bool.config_additional_system_update_setting_enable);
+        if (isUpdateSettingAvailable == false) {
+            getPreferenceScreen().removePreference(findPreference(KEY_UPDATE_SETTING));
+        }
     }
 
     @Override
