@@ -282,12 +282,12 @@
     <!-- Notification title when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
-    <string name="bluetooth_notif_message">Touch to pair with <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="bluetooth_notif_message">Touch to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Bluetooth settings screen, menu to show the list of received files [CHAR LIMIT=30] -->
     <string name="bluetooth_show_received_files">Show received files</string>
 
     <!-- Strings for BluetoothDevicePicker -->
-    <string name="device_picker">Bluetooth device picker</string>
+    <string name="device_picker">Bluetooth device chooser</string>
 
     <!-- Strings for dialog title when asking to the user whether to allow an app to enable discovery mode -->
     <string name="bluetooth_permission_request">"Bluetooth permission request"</string>
@@ -335,7 +335,7 @@
     <string name="bluetooth_phonebook_request">"Phone book request"</string>
 
     <!-- Bluetooth phone book permission Alert Activity text [CHAR LIMIT=none] -->
-    <string name="bluetooth_pb_acceptance_dialog_text">%1$s would like to access your contacts and call history. Give access to %2$s?</string>
+    <string name="bluetooth_pb_acceptance_dialog_text">%1$s wants to access your contacts and call history. Give access to %2$s?</string>
 
     <!-- Bluetooth phone book permission Alert Activity checkbox text [CHAR LIMIT=none] -->
     <string name="bluetooth_pb_remember_choice">Don\'t ask again</string>
@@ -487,25 +487,25 @@
     <string name="band_mode_succeeded">Successful</string>
 
     <!-- Instructions after the user changes the mass storage settings -->
-    <string name="sdcard_changes_instructions">Changes take effect when USB cable is reconnected</string>
+    <string name="sdcard_changes_instructions">Changes take effect when USB cable is reconnected.</string>
     <!-- Enable USB mass storage mode checkbox title -->
     <string name="sdcard_settings_screen_mass_storage_text">Enable USB mass storage</string>
     <!-- The label for total bytes on SD card -->
     <string name="sdcard_settings_total_bytes_label">Total bytes:</string>
     <!-- Message when there is no SD card present [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_not_present_status" product="nosdcard">USB storage not mounted</string>
+    <string name="sdcard_settings_not_present_status" product="nosdcard">USB storage not mounted.</string>
     <!-- Message when there is no SD card present -->
-    <string name="sdcard_settings_not_present_status" product="default">No SD card</string>
+    <string name="sdcard_settings_not_present_status" product="default">No SD card.</string>
     <!-- Th label for the available (free) sapce on the SD card -->
     <string name="sdcard_settings_available_bytes_label">Available bytes:</string>
     <!-- Message when the SD card is being used by the computer as mass storage [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_mass_storage_status" product="nosdcard">USB storage is being used as a mass storage device</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard">USB storage is being used as a mass storage device.</string>
     <!-- Message when the SD card is being used by the computer as mass storage -->
-    <string name="sdcard_settings_mass_storage_status" product="default">SD card is being used as a mass storage device</string>
+    <string name="sdcard_settings_mass_storage_status" product="default">SD card is being used as a mass storage device.</string>
     <!-- Message when it is safe to remove the SD card [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_unmounted_status" product="nosdcard">It\'s now safe to remove the USB storage</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard">It\'s now safe to remove the USB storage.</string>
     <!-- Message when it is safe to remove the SD card -->
-    <string name="sdcard_settings_unmounted_status" product="default">It\'s now safe to remove the SD card</string>
+    <string name="sdcard_settings_unmounted_status" product="default">It\'s now safe to remove the SD card.</string>
     <!-- Error message when the SD card was removed without properly unmounting [CHAR LIMIT=30] -->
     <string name="sdcard_settings_bad_removal_status" product="nosdcard">USB storage was removed while still in use!</string>
     <!-- Error message when the SD card was removed without properly unmounting -->
@@ -517,9 +517,9 @@
     <!-- Message when it is scanning the SD card for new files -->
     <string name="sdcard_settings_scanning_status" product="default">Scanning SD card for media\u2026</string>
     <!-- Message when the SD card is mounted as read only [CHAR LIMIT=30] -->
-    <string name="sdcard_settings_read_only_status" product="nosdcard">USB storage mounted read-only</string>
+    <string name="sdcard_settings_read_only_status" product="nosdcard">USB storage mounted read-only.</string>
     <!-- Message when the SD card is mounted as read only -->
-    <string name="sdcard_settings_read_only_status" product="default">SD card mounted read-only</string>
+    <string name="sdcard_settings_read_only_status" product="default">SD card mounted read-only.</string>
     <!-- SetupWizard strings used by DateTimeSettingsSetupWizard.  The button label for going to the next screen without storing the setting. [CHAR LIMIT=5] -->
     <string name="skip_label">Skip</string>
     <!-- SetupWizard strings used by DateTimeSettingsSetupWizard.  The button label for going to the next screen. -->
@@ -583,9 +583,9 @@
     <!-- mobile network settings screen, button on dialog box that appears when you are roaming and clear the "Data roaming" check box -->
     <string name="roaming_turn_it_on_button">Turn it on</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
-    <string name="roaming_warning">Allow data roaming? You may incur significant roaming charges!</string>
+    <string name="roaming_warning">When you allow data roaming, you may incur significant roaming charges!</string>
     <!-- mobile network settings screen, title of dialog box that appears when you select the "Data roaming" check box -->
-    <string name="roaming_reenable_title">Attention</string>
+    <string name="roaming_reenable_title">Allow data roaming?</string>
     <!-- mobile network settings screen, setting option name -->
     <string name="networks">Operator selection</string>
     <!-- mobile network settings screen, setting option summary text -->
@@ -623,7 +623,7 @@
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_date">Set date</string>
     <!-- Date & time setting screen setting option title.  This setting allows the user to choose how the date should be displayed in apps (what ordering for month and day, etc.) -->
-    <string name="date_time_date_format">Select date format</string>
+    <string name="date_time_date_format">Choose date format</string>
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_alphabetically">Sort alphabetically</string>
     <!-- Menu item on Select time zone screen -->
@@ -686,7 +686,7 @@
     <string name="crypt_keeper_desc" product="tablet">
     You can encrypt your accounts, settings, downloaded apps and their data,
     media, and other files. Once you encrypt your tablet, you need to type a numeric PIN
-    or password to decrypt it each time you power it on: you can\'t unencrypt your tablet
+    or password to decrypt it each time you power it on. You can\'t decrypt your tablet
     except by performing a factory data reset, erasing all your data.\n\nEncryption takes
     an hour or more. You must start with a charged battery and keep your tablet plugged in
     until encryption is complete. If you interrupt the encryption process, you will lose
@@ -695,7 +695,7 @@
     <string name="crypt_keeper_desc" product="default">
     You can encrypt your accounts, settings, downloaded apps and their data,
     media, and other files. Once you encrypt your phone, you need to type a numeric PIN or
-    password to decrypt it each time you power it on: you can\'t unencrypt your phone
+    password to decrypt it each time you power it on. You can\'t decrypt your phone
     except by performing a factory data reset, erasing all your data.\n\nEncryption takes
     an hour or more. You must start with a charged battery and keep your phone plugged in
     until encryption is complete. If you interrupt the encryption process, you will lose
@@ -718,15 +718,15 @@
     password before you can start encryption.</string>
 
     <!-- Title of the final confirmation screen before starting device encryption -->
-    <string name="crypt_keeper_confirm_title">Confirm encryption</string>
+    <string name="crypt_keeper_confirm_title">Encrypt?</string>
     <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="tablet">
-    Encrypt tablet? This operation is irreversible and if you interrupt it, you will lose data.
+    The encryption operation is irreversible and if you interrupt it, you\'ll lose data.
     Encryption takes an hour or more, during which the tablet will restart several times.
     </string>
     <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="default">
-    Encrypt phone? This operation is irreversible and if you interrupt it, you will lose data.
+    The encryption operation is irreversible and if you interrupt it, you\'ll lose data.
     Encryption takes an hour or more, during which the phone will restart several times.
     </string>
 
@@ -772,7 +772,7 @@
 
     <!-- Security Picker --><skip />
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="lock_settings_picker_title">Select screen lock</string>
+    <string name="lock_settings_picker_title">Choose screen lock</string>
 
     <!--  Title for security picker when choosing a facelock's backup unlock method: Pattern/PIN [CHAR LIMIT=22] -->
     <string name="backup_lock_settings_picker_title">Choose backup lock</string>
@@ -868,66 +868,66 @@
     <string name="lockpassword_continue_label">Continue</string>
 
     <!-- Error shown in popup when password is too long -->
-    <string name="lockpassword_password_too_long">Password must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters</string>
+    <string name="lockpassword_password_too_long">Password must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters.</string>
     <!-- Error shown in popup when PIN is too long -->
-    <string name="lockpassword_pin_too_long">PIN must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</string>
+    <string name="lockpassword_pin_too_long">PIN must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits.</string>
 
     <!-- Error shown when in PIN mode and user enters a non-digit -->
-    <string name="lockpassword_pin_contains_non_digits">PIN must contain only digits 0-9</string>
+    <string name="lockpassword_pin_contains_non_digits">PIN must contain only digits 0-9.</string>
 
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
-    <string name="lockpassword_pin_recently_used">Device administrator disallows using a recent PIN</string>
+    <string name="lockpassword_pin_recently_used">Device administrator doesn\'t allow using a recent PIN.</string>
 
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
-    <string name="lockpassword_illegal_character">Password contains an illegal character</string>
+    <string name="lockpassword_illegal_character">Password contains an illegal character.</string>
 
     <!-- Error shown when in PASSWORD mode and password is all digits -->
-    <string name="lockpassword_password_requires_alpha">Password must contain at least one letter</string>
+    <string name="lockpassword_password_requires_alpha">Password must contain at least one letter.</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain any digits -->
-    <string name="lockpassword_password_requires_digit">Password must contain at least one digit</string>
+    <string name="lockpassword_password_requires_digit">Password must contain at least one digit.</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain any symbols -->
-    <string name="lockpassword_password_requires_symbol">Password must contain at least one symbol</string>
+    <string name="lockpassword_password_requires_symbol">Password must contain at least one symbol.</string>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of letters -->
     <plurals name="lockpassword_password_requires_letters">
-        <item quantity="one">Password must contain at least 1 letter</item>
-        <item quantity="other">Password must contain at least %d letters</item>
+        <item quantity="one">Password must contain at least 1 letter.</item>
+        <item quantity="other">Password must contain at least %d letters.</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of lowercase letters -->
     <plurals name="lockpassword_password_requires_lowercase">
-        <item quantity="one">Password must contain at least 1 lowercase letter</item>
-        <item quantity="other">Password must contain at least %d lowercase letters</item>
+        <item quantity="one">Password must contain at least 1 lowercase letter.</item>
+        <item quantity="other">Password must contain at least %d lowercase letters.</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of uppercase letters -->
     <plurals name="lockpassword_password_requires_uppercase">
-        <item quantity="one">Password must contain at least 1 uppercase letter</item>
-        <item quantity="other">Password must contain at least %d uppercase letters</item>
+        <item quantity="one">Password must contain at least 1 uppercase letter.</item>
+        <item quantity="other">Password must contain at least %d uppercase letters.</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of numerical digits -->
     <plurals name="lockpassword_password_requires_numeric">
-        <item quantity="one">Password must contain at least 1 numerical digit</item>
-        <item quantity="other">Password must contain at least %d numerical digits</item>
+        <item quantity="one">Password must contain at least 1 numerical digit.</item>
+        <item quantity="other">Password must contain at least %d numerical digits.</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of special symbols -->
     <plurals name="lockpassword_password_requires_symbols">
-        <item quantity="one">Password must contain at least 1 special symbol</item>
-        <item quantity="other">Password must contain at least %d special symbols</item>
+        <item quantity="one">Password must contain at least 1 special symbol.</item>
+        <item quantity="other">Password must contain at least %d special symbols.</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-letter characters -->
     <plurals name="lockpassword_password_requires_nonletter">
-        <item quantity="one">Password must contain at least 1 non-letter character</item>
-        <item quantity="other">Password must contain at least %d non-letter characters</item>
+        <item quantity="one">Password must contain at least 1 non-letter character.</item>
+        <item quantity="other">Password must contain at least %d non-letter characters.</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
-    <string name="lockpassword_password_recently_used">Device administrator disallows using a recent password</string>
+    <string name="lockpassword_password_recently_used">Device administrator doesn\'t allow using a recent password.</string>
 
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_ok_label">OK</string>
@@ -942,7 +942,7 @@
     <string name="lockpattern_tutorial_continue_label">Next</string>
 
     <!-- Toast shown when lock pattern or password successfully setup. [CHAR LIMIT=64] -->
-    <string name="lock_setup" msgid="5507462851158901718">Setup complete</string>
+    <string name="lock_setup" msgid="5507462851158901718">Setup is complete.</string>
 
     <!-- In the security screen, the header title for settings related to device admins -->
     <string name="device_admin_title">Device administration</string>
@@ -987,9 +987,9 @@
     <string name="bluetooth_pin_values_hint">Usually 0000 or 1234</string>
 
     <!-- Pairing dialog text to remind user to enter the PIN on the other device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_enter_pin_other_device">You may also need to enter this PIN on the other device.</string>
+    <string name="bluetooth_enter_pin_other_device">You may also need to type this PIN on the other device.</string>
     <!-- Pairing dialog text to remind user to enter the passkey on the other device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_enter_passkey_other_device">You may also need to enter this passkey on the other device.</string>
+    <string name="bluetooth_enter_passkey_other_device">You may also need to type this passkey on the other device.</string>
 
     <!-- Message for confirmation of passkey to complete pairing. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_confirm_passkey_msg">To pair with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Make sure it is showing this passkey:&lt;br>&lt;b><xliff:g id="passkey">%2$s</xliff:g>&lt;/b></string>
@@ -1018,7 +1018,7 @@
     <string name="bluetooth_pairing_rejected_error_message">Pairing rejected by <xliff:g id="device_name">%1$s</xliff:g>.</string>
 
     <!-- Message for the error dialog when BT connecting operation fails generically. -->
-    <string name="bluetooth_connecting_error_message">There was a problem connecting to <xliff:g id="device_name">%1$s</xliff:g>.</string>
+    <string name="bluetooth_connecting_error_message">Couldn\'t connect to <xliff:g id="device_name">%1$s</xliff:g>.</string>
 
     <!-- Bluetooth settings: The title of the preference (list item) that initiates a scan for devices -->
     <string name="bluetooth_preference_scan_title">Scan for devices</string>
@@ -1218,7 +1218,7 @@
     <!-- Text displayed when WPS setup is in progress [CHAR LIMIT=75] -->
     <string name="wifi_wps_in_progress">WPS is already in progress and can take tens of seconds to complete</string>
     <!-- Text displayed when WPS fails to start [CHAR LIMIT=75] -->
-    <string name="wifi_wps_failed">Couldn\'t start WPS, try again.</string>
+    <string name="wifi_wps_failed">Couldn\'t start WPS. Try again.</string>
     <!-- Label for the SSID of the network -->
     <string name="wifi_ssid">Network SSID</string>
     <!-- Label for the security of the connection -->
@@ -1387,13 +1387,13 @@
     <!-- Title for available p2p devices -->
     <string name="wifi_p2p_peer_devices">PEER DEVICES</string>
     <!-- Toast text for a failed connection initiation -->
-    <string name="wifi_p2p_failed_connect_message">Connect failed</string>
+    <string name="wifi_p2p_failed_connect_message">Couldn\'t connect.</string>
     <!-- Title for disconnect dialog -->
     <string name="wifi_p2p_disconnect_title">Disconnect?</string>
     <!-- Message test for disconnection from one device-->
-    <string name="wifi_p2p_disconnect_message">Touching Disconnect will end your connection with <xliff:g id="peer_name">%1$s</xliff:g></string>
+    <string name="wifi_p2p_disconnect_message">If you disconnect, your connection with <xliff:g id="peer_name">%1$s</xliff:g> will end.</string>
     <!-- Message test for disconnection from multiple devices-->
-    <string name="wifi_p2p_disconnect_multiple_message">Touching Disconnect will end your connection with <xliff:g id="peer_name">%1$s</xliff:g> and <xliff:g id="peer_count">%2$s</xliff:g> other devices</string>
+    <string name="wifi_p2p_disconnect_multiple_message">If you disconnect, your connection with <xliff:g id="peer_name">%1$s</xliff:g> and <xliff:g id="peer_count">%2$s</xliff:g> other devices will end.</string>
 
     <!-- Wifi AP settings-->
     <!-- Label for wifi tether checkbox. Toggles Access Point on/off -->
@@ -1403,7 +1403,7 @@
     <!-- Subtext for wifi tether checkbox on failure -->
     <string name="wifi_tether_failed_subtext">Portable Wi-Fi hotspot error</string>
     <!-- Used to open the ssid and security dialog for Wifi Access Point -->
-    <string name="wifi_tether_configure_ap_text">Configure Wi-Fi hotspot</string>
+    <string name="wifi_tether_configure_ap_text">Set up Wi-Fi hotspot</string>
     <!-- Subtext on configuration preference to indicate SSID and security chosen -->
     <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> portable Wi-Fi hotspot</string>
     <!-- Default access point SSID used for tethering -->
@@ -1746,7 +1746,7 @@
     <!-- About phone, status item title.  The phone MSID number of the current device.-->
     <string name="status_msid_number">MSID</string>
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
-    <string name="status_prl_version">PRL Version</string>
+    <string name="status_prl_version">PRL version</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -1786,7 +1786,7 @@
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
     <string name="memory_size">Total space</string>
     <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
-    <string name="memory_calculating_size">Calculating…</string>
+    <string name="memory_calculating_size">Calculating\u2026</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_apps_usage">Apps</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
@@ -2206,7 +2206,7 @@
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen if user doesn't connect enough dots -->
     <string name="lockpattern_recording_incorrect_too_short">Connect at least <xliff:g id="number">%d</xliff:g> dots. Try again:</string>
     <!-- Security & location settings screen, change unlock pattern screen message on top of screen after drawing pattern -->
-    <string name="lockpattern_pattern_entered_header">Pattern recorded!</string>
+    <string name="lockpattern_pattern_entered_header">Pattern recorded.</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen to confirm pattern -->
     <string name="lockpattern_need_to_confirm">Draw pattern again to confirm:</string>
     <string name="lockpattern_pattern_confirmed_header">Your new unlock pattern:</string>
@@ -2395,8 +2395,7 @@
     <!-- Manage applications, individual application dialog box title. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
-    <string name="app_not_found_dlg_text"> The app wasn\'t
-found in the list of installed apps.</string>
+    <string name="app_not_found_dlg_text"> The app wasn\'t found in the list of installed apps.</string>
     <!-- Manage applications, individual application dialog box message. Shown when there was an error trying to clear the data. -->
     <string name="clear_data_failed">Couldn\'t clear app data.</string>
     <!-- Manage applications, factory reset dialog title for system applications. -->
@@ -2412,7 +2411,7 @@ found in the list of installed apps.</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
     <string name="security_settings_desc" product="default">This app can access the following on your phone:</string>
     <string name="computing_size">Computing\u2026</string>
-    <string name="invalid_size_value">Unable to compute package size</string>
+    <string name="invalid_size_value">Couldn\'t compute package size.</string>
     <!-- String displayed when list is empty -->
     <string name="empty_list_msg">You don\'t have any third-party apps installed.</string>
     <!-- Manage applications, version string displayed in app snippet -->
@@ -2851,7 +2850,7 @@ found in the list of installed apps.</string>
 
     <!-- Warning message that the interaction model changes on enabling touch exploration. [CHAR LIMIT=NONE] -->
     <string name="accessibility_touch_exploration_warning">This feature changes the
-        way your device responds to touch. Turn on?</string>
+        way your device responds to touch. Turn it on?</string>
     <!-- Default description for an accessibility serivice if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_default_description">No description provided.</string>
 
@@ -2866,7 +2865,7 @@ found in the list of installed apps.</string>
     <!-- Activity title summary for App Fuel Gauge summary -->
     <string name="power_usage_summary">What has been using the battery</string>
     <!-- Message to show when battery usage data is not available [CHAR LIMIT=30] -->
-    <string name="power_usage_not_available">Battery usage data not available</string>
+    <string name="power_usage_not_available">Battery usage data isn\'t available.</string>
     <!-- Display the battery level and status [CHAR_LIMIT=30] -->
     <string name="power_usage_level_and_status"><xliff:g id="level">%1$s</xliff:g> - <xliff:g id="status">%2$s</xliff:g></string>
     <!-- Battery usage since unplugged -->
@@ -3079,7 +3078,7 @@ found in the list of installed apps.</string>
     <!-- Text spoken by the TTS engine when TTS settings (other than language) have been changed -->
     <string name="tts_settings_changed_demo">Your settings have changed. This is an example of how they sound.</string>
     <!-- Error screen when a selected TTS engine can't run because it's missing components -->
-    <string name="tts_engine_error">The engine you selected is unable to run</string>
+    <string name="tts_engine_error">The engine you chose can\'t run.</string>
     <!-- Button text for error screen when a selected TTS engine can't run because it's missing components -->
     <string name="tts_engine_error_config">Configure</string>
     <!-- Button text for error screen when a selected TTS engine can't run because it's missing components -->
@@ -3121,7 +3120,7 @@ found in the list of installed apps.</string>
     <!-- [CHAR LIMIT=30] Notification message that appears after the user has installed a new TTS engine,
          to warn the user that this engine cannot be used before the checkbox for that engine
          in TTS settings is checked. -->
-    <string name="tts_notif_engine_install_message">Enable new engine before use</string>
+    <string name="tts_notif_engine_install_message">Enable new engine before use.</string>
     <!-- [CHAR LIMIT=150] Text for screen readers / accessibility programs for
          the image that launches the TTS engine settings when clicked. -->
     <string name="tts_engine_settings_button">Launch engine settings</string>
@@ -3213,9 +3212,9 @@ found in the list of installed apps.</string>
     <!-- Local (desktop) backup password menu title [CHAR LIMIT=25] -->
     <string name="local_backup_password_title">Desktop backup password</string>
     <!-- Summary text of the "local backup password" setting when the user has not supplied a password -->
-    <string name="local_backup_password_summary_none">Desktop full backups aren\'t currently protected.</string>
+    <string name="local_backup_password_summary_none">Desktop full backups aren\'t currently protected</string>
     <!-- Summary text of the "local backup password" setting when the user has already supplied a password -->
-    <string name="local_backup_password_summary_change">Select to change or remove the password for desktop full backups</string>
+    <string name="local_backup_password_summary_change">Touch to change or remove the password for desktop full backups</string>
 
     <!-- Dialog title for confirmation to erase backup data from server -->
     <string name="backup_erase_dialog_title"></string>
@@ -3409,7 +3408,7 @@ found in the list of installed apps.</string>
     <string name="sync_contacts">Contacts</string>
     <!-- Message introducing the user to Google Sync. -->
     <string name="sync_plug"><font fgcolor="#ffffffff">Welcome to Google sync!</font>
-    \nA Google approach to synchronizing data to allow access to your contacts, appointments, and more from wherever you are.
+    \nA Google approach to syncing data to allow access to your contacts, appointments, and more from wherever you are.
     </string>
 
     <!-- Header title for those settings relating to application syncing. -->
@@ -3584,9 +3583,9 @@ found in the list of installed apps.</string>
     <string name="data_usage_tab_3g">2G-3G</string>
 
     <!-- Title shown when current operation applies to mobile networks. [CHAR LIMIT=10] -->
-    <string name="data_usage_list_mobile">mobile</string>
+    <string name="data_usage_list_mobile">Mobile</string>
     <!-- Title shown when current operation applies to no networks. [CHAR LIMIT=10] -->
-    <string name="data_usage_list_none">none</string>
+    <string name="data_usage_list_none">None</string>
 
     <!-- Toggle switch title for enabling all mobile data network connections. [CHAR LIMIT=32] -->
     <string name="data_usage_enable_mobile">Mobile data</string>
