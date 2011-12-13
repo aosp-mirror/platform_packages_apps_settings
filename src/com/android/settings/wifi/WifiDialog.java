@@ -56,6 +56,9 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
         setInverseBackgroundForced(true);
         mController = new WifiConfigController(this, mView, mAccessPoint, mEdit);
         super.onCreate(savedInstanceState);
+        /* During creation, the submit button can be unavailable to determine
+         * visibility. Right after creation, update button visibility */
+        mController.enableSubmitIfAppropriate();
     }
 
     @Override
