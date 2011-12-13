@@ -271,7 +271,7 @@ public class WifiConfigController implements TextWatcher,
     }
 
     /* show submit button if password, ip and proxy settings are valid */
-    private void enableSubmitIfAppropriate() {
+    void enableSubmitIfAppropriate() {
         Button submit = mConfigUi.getSubmitButton();
         if (submit == null) return;
         boolean enabled = false;
