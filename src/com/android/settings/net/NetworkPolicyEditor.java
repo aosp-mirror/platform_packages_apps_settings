@@ -146,7 +146,7 @@ public class NetworkPolicyEditor {
         final int cycleDay = time.monthDay;
 
         return new NetworkPolicy(
-                template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, SNOOZE_NEVER);
+                template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, SNOOZE_NEVER, true);
     }
 
     public int getPolicyCycleDay(NetworkTemplate template) {
@@ -251,7 +251,7 @@ public class NetworkPolicyEditor {
             mPolicies.remove(policy4g);
             mPolicies.add(
                     new NetworkPolicy(templateAll, restrictive.cycleDay, restrictive.warningBytes,
-                            restrictive.limitBytes, SNOOZE_NEVER));
+                            restrictive.limitBytes, SNOOZE_NEVER, restrictive.metered));
             return true;
 
         } else if (!beforeSplit && split) {
@@ -260,10 +260,10 @@ public class NetworkPolicyEditor {
             mPolicies.remove(policyAll);
             mPolicies.add(
                     new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,
-                            policyAll.limitBytes, SNOOZE_NEVER));
+                            policyAll.limitBytes, SNOOZE_NEVER, policyAll.metered));
             mPolicies.add(
                     new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.warningBytes,
-                            policyAll.limitBytes, SNOOZE_NEVER));
+                            policyAll.limitBytes, SNOOZE_NEVER, policyAll.metered));
             return true;
         } else {
             return false;

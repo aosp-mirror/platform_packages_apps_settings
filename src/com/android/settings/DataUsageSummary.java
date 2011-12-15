@@ -474,11 +474,7 @@ public class DataUsageSummary extends Fragment {
             case R.id.data_usage_menu_restrict_background: {
                 final boolean restrictBackground = !item.isChecked();
                 if (restrictBackground) {
-                    if (hasLimitedNetworks()) {
-                        ConfirmRestrictFragment.show(this);
-                    } else {
-                        DeniedRestrictFragment.show(this);
-                    }
+                    ConfirmRestrictFragment.show(this);
                 } else {
                     // no confirmation to drop restriction
                     setRestrictBackground(false);
@@ -764,13 +760,8 @@ public class DataUsageSummary extends Fragment {
                 && !getRestrictBackground() && isBandwidthControlEnabled()
                 && hasMobileRadio(context)) {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
-            if (hasLimitedNetworks()) {
-                setPreferenceSummary(mAppRestrictView,
-                        getString(R.string.data_usage_app_restrict_background_summary));
-            } else {
-                setPreferenceSummary(mAppRestrictView,
-                        getString(R.string.data_usage_app_restrict_background_summary_disabled));
-            }
+            setPreferenceSummary(mAppRestrictView,
+                    getString(R.string.data_usage_app_restrict_background_summary));
 
             mAppRestrictView.setVisibility(View.VISIBLE);
             mAppRestrict.setChecked(getAppRestrictBackground());
@@ -1037,16 +1028,10 @@ public class DataUsageSummary extends Fragment {
             final boolean restrictBackground = !mAppRestrict.isChecked();
 
             if (restrictBackground) {
-                if (hasLimitedNetworks()) {
-                    // enabling restriction; show confirmation dialog which
-                    // eventually calls setRestrictBackground() once user
-                    // confirms.
-                    ConfirmAppRestrictFragment.show(DataUsageSummary.this);
-                } else {
-                    // no limited networks; show dialog to guide user towards
-                    // setting a network limit. doesn't mutate restrict state.
-                    DeniedRestrictFragment.show(DataUsageSummary.this);
-                }
+                // enabling restriction; show confirmation dialog which
+                // eventually calls setRestrictBackground() once user
+                // confirms.
+                ConfirmAppRestrictFragment.show(DataUsageSummary.this);
             } else {
                 setAppRestrictBackground(false);
             }
