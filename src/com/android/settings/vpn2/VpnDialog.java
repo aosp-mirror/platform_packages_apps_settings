@@ -113,7 +113,7 @@ class VpnDialog extends AlertDialog implements TextWatcher,
         mL2tpSecret.setText(mProfile.l2tpSecret);
         mIpsecIdentifier.setText(mProfile.ipsecIdentifier);
         mIpsecSecret.setText(mProfile.ipsecSecret);
-        loadCertificates(mIpsecUserCert, Credentials.USER_CERTIFICATE,
+        loadCertificates(mIpsecUserCert, Credentials.USER_PRIVATE_KEY,
                 0, mProfile.ipsecUserCert);
         loadCertificates(mIpsecCaCert, Credentials.CA_CERTIFICATE,
                 R.string.vpn_no_ca_cert, mProfile.ipsecCaCert);
