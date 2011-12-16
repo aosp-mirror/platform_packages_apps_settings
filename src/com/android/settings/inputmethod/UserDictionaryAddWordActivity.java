@@ -88,12 +88,6 @@ public class UserDictionaryAddWordActivity extends Activity
         finish();
     }
 
-    public void onClickManage(final View v) {
-        final Intent intent = new Intent(v.getContext(), UserDictionarySettings.class);
-        startActivity(intent);
-        finish();
-    }
-
     public void onClickConfirm(final View v) {
         if (MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
             UserDictionarySettings.deleteWord(mOldWord, this.getContentResolver());
@@ -154,12 +148,14 @@ public class UserDictionaryAddWordActivity extends Activity
         }
     }
 
-    public void onClickOptions(final View v) {
+    public void onClickMoreOptions(final View v) {
         final View moreOptionsView =
                 findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
         moreOptionsView.setVisibility(View.VISIBLE);
-        findViewById(R.id.user_dictionary_settings_add_dialog_options).setVisibility(View.GONE);
-        findViewById(R.id.user_dictionary_settings_add_dialog_manage).setVisibility(View.VISIBLE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_more_options)
+                .setVisibility(View.GONE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
+                .setVisibility(View.VISIBLE);
 
         final Set<String> locales = UserDictionaryList.getUserDictionaryLocalesList(this);
         // Remove our locale if it's in, because we're always gonna put it at the top
@@ -188,6 +184,16 @@ public class UserDictionaryAddWordActivity extends Activity
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         localeSpinner.setAdapter(adapter);
         localeSpinner.setOnItemSelectedListener(this);
+    }
+
+    public void onClickLessOptions(final View v) {
+        final View moreOptionsView =
+                findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
+        moreOptionsView.setVisibility(View.GONE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_more_options)
+                .setVisibility(View.VISIBLE);
+        findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
+                .setVisibility(View.GONE);
     }
 
     @Override
