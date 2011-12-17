@@ -579,11 +579,12 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         if (osApp != null) {
             long wakeTimeMillis = mStats.computeBatteryUptime(
                     SystemClock.uptimeMillis() * 1000, which) / 1000;
-            wakeTimeMillis -= appWakelockTime - (mStats.getScreenOnTime(
+            wakeTimeMillis -= appWakelockTime + (mStats.getScreenOnTime(
                     SystemClock.elapsedRealtime(), which) / 1000);
             if (wakeTimeMillis > 0) {
                 double power = (wakeTimeMillis
                         * mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_AWAKE)) / 1000;
+                if (DEBUG) Log.i(TAG, "OS wakeLockTime " + wakeTimeMillis + " power " + power);
                 osApp.wakeLockTime += wakeTimeMillis;
                 osApp.value += power;
                 osApp.values[0] += power;
