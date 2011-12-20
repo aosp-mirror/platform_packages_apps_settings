@@ -35,6 +35,7 @@ import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
@@ -259,13 +260,21 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             } else {
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = mSelectedWifiPeer.device.deviceAddress;
-                if (mSelectedWifiPeer.device.wpsPbcSupported()) {
-                    config.wps.setup = WpsInfo.PBC;
-                } else if (mSelectedWifiPeer.device.wpsKeypadSupported()) {
-                    config.wps.setup = WpsInfo.KEYPAD;
+
+                int forceWps = SystemProperties.getInt("wifidirect.wps", -1);
+
+                if (forceWps != -1) {
+                    config.wps.setup = forceWps;
                 } else {
-                    config.wps.setup = WpsInfo.DISPLAY;
+                    if (mSelectedWifiPeer.device.wpsPbcSupported()) {
+                        config.wps.setup = WpsInfo.PBC;
+                    } else if (mSelectedWifiPeer.device.wpsKeypadSupported()) {
+                        config.wps.setup = WpsInfo.KEYPAD;
+                    } else {
+                        config.wps.setup = WpsInfo.DISPLAY;
+                    }
                 }
+
                 mWifiP2pManager.connect(mChannel, config,
                         new WifiP2pManager.ActionListener() {
                             public void onSuccess() {
