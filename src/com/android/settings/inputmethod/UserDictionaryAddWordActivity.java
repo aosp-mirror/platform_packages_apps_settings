@@ -46,6 +46,10 @@ public class UserDictionaryAddWordActivity extends Activity
     public static final String EXTRA_LOCALE = "locale";
     private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
 
+    private static final String STATE_KEY_IS_OPEN = "isOpen";
+    private static final String STATE_KEY_WORD = "word";
+    private static final String STATE_KEY_LOCALE = "locale";
+
     public static final String MODE_EDIT_ACTION = "com.android.settings.USER_DICTIONARY_EDIT";
     public static final String MODE_INSERT_ACTION = "com.android.settings.USER_DICTIONARY_INSERT";
     private static final int MODE_EDIT = 0;
@@ -55,6 +59,8 @@ public class UserDictionaryAddWordActivity extends Activity
     private int mMode; // Either MODE_EDIT or MODE_INSERT
     private String mOldWord;
     private String mLocale; // may not be null: will be converted to default locale if received null
+
+    private boolean mIsShowingMoreOptions = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -70,18 +76,47 @@ public class UserDictionaryAddWordActivity extends Activity
             // Can never come here because we only support these two actions in the manifest
             throw new RuntimeException("Unsupported action: " + action);
         }
+
+        String savedWord = null;
+        String savedLocale = null;
+        if (null != savedInstanceState) {
+            mIsShowingMoreOptions =
+                    savedInstanceState.getBoolean(STATE_KEY_IS_OPEN, mIsShowingMoreOptions);
+            savedWord = savedInstanceState.getString(STATE_KEY_WORD);
+            savedLocale = savedInstanceState.getString(STATE_KEY_LOCALE);
+        }
+
         mOldWord = intent.getStringExtra(EXTRA_WORD);
-        final String locale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
-        mLocale = null == locale ? Locale.getDefault().toString() : locale;
+        if (null != savedLocale) {
+            mLocale = savedLocale;
+        } else {
+            final String locale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
+            mLocale = null == locale ? Locale.getDefault().toString() : locale;
+        }
         mEditText = (EditText)findViewById(R.id.user_dictionary_add_word_text);
-        if (null != mOldWord) {
+        if (null != savedWord) {
+            mEditText.setText(savedWord);
+            mEditText.setSelection(savedWord.length());
+        } else if (null != mOldWord) {
             mEditText.setText(mOldWord);
             mEditText.setSelection(mOldWord.length());
         }
+
+        if (mIsShowingMoreOptions) {
+            onClickMoreOptions(findViewById(R.id.user_dictionary_settings_add_dialog_more_options));
+        }
+
         final ViewGroup v = (ViewGroup)findViewById(R.id.user_dict_settings_add_dialog_top);
         final LayoutTransition transition = new LayoutTransition();
         transition.setStartDelay(LayoutTransition.APPEARING, 0);
         v.setLayoutTransition(transition);
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        outState.putBoolean(STATE_KEY_IS_OPEN, mIsShowingMoreOptions);
+        outState.putString(STATE_KEY_WORD, mEditText.getText().toString());
+        outState.putString(STATE_KEY_LOCALE, mLocale);
     }
 
     public void onClickCancel(final View v) {
@@ -184,6 +219,7 @@ public class UserDictionaryAddWordActivity extends Activity
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         localeSpinner.setAdapter(adapter);
         localeSpinner.setOnItemSelectedListener(this);
+        mIsShowingMoreOptions = true;
     }
 
     public void onClickLessOptions(final View v) {
@@ -194,6 +230,7 @@ public class UserDictionaryAddWordActivity extends Activity
                 .setVisibility(View.VISIBLE);
         findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
                 .setVisibility(View.GONE);
+        mIsShowingMoreOptions = false;
     }
 
     @Override
