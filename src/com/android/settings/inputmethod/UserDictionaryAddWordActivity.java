@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -54,6 +53,14 @@ public class UserDictionaryAddWordActivity extends Activity
     public static final String MODE_INSERT_ACTION = "com.android.settings.USER_DICTIONARY_INSERT";
     private static final int MODE_EDIT = 0;
     private static final int MODE_INSERT = 1;
+
+    private static final int[] IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE = {
+        R.id.user_dictionary_add_word_label,
+        R.id.user_dictionary_add_shortcut_label,
+        R.id.user_dictionary_add_locale_label,
+        R.id.user_dictionary_settings_add_dialog_shortcut,
+        R.id.user_dictionary_settings_add_dialog_locale,
+    };
 
     private EditText mEditText;
     private int mMode; // Either MODE_EDIT or MODE_INSERT
@@ -106,7 +113,10 @@ public class UserDictionaryAddWordActivity extends Activity
             onClickMoreOptions(findViewById(R.id.user_dictionary_settings_add_dialog_more_options));
         }
 
-        final ViewGroup v = (ViewGroup)findViewById(R.id.user_dict_settings_add_dialog_top);
+        // TODO: The following code enables layout transition for eye-candy, but there is still
+        // a jankiness issue with the window moving on one frame, resizing suddenly on the next,
+        // and animation only starting afterwards on children.
+        final ViewGroup v = (ViewGroup)findViewById(R.id.user_dictionary_add_word_grid);
         final LayoutTransition transition = new LayoutTransition();
         transition.setStartDelay(LayoutTransition.APPEARING, 0);
         v.setLayoutTransition(transition);
@@ -168,6 +178,7 @@ public class UserDictionaryAddWordActivity extends Activity
                 mDescription = Utils.createLocaleFromString(localeString).getDisplayName();
             }
         }
+        @Override
         public String toString() {
             return mDescription;
         }
@@ -184,9 +195,10 @@ public class UserDictionaryAddWordActivity extends Activity
     }
 
     public void onClickMoreOptions(final View v) {
-        final View moreOptionsView =
-                findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
-        moreOptionsView.setVisibility(View.VISIBLE);
+        for (final int idToShow : IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE) {
+            final View viewToShow = findViewById(idToShow);
+            viewToShow.setVisibility(View.VISIBLE);
+        }
         findViewById(R.id.user_dictionary_settings_add_dialog_more_options)
                 .setVisibility(View.GONE);
         findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
@@ -223,9 +235,10 @@ public class UserDictionaryAddWordActivity extends Activity
     }
 
     public void onClickLessOptions(final View v) {
-        final View moreOptionsView =
-                findViewById(R.id.user_dict_settings_add_dialog_shortcut_interface);
-        moreOptionsView.setVisibility(View.GONE);
+        for (final int idToHide : IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE) {
+            final View viewToHide = findViewById(idToHide);
+            viewToHide.setVisibility(View.GONE);
+        }
         findViewById(R.id.user_dictionary_settings_add_dialog_more_options)
                 .setVisibility(View.VISIBLE);
         findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
