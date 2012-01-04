@@ -360,7 +360,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             extras.putBoolean(EXTRA_CHECKED, serviceEnabled);
             extras.putString(EXTRA_TITLE, title);
 
-            String description = info.getDescription();
+            String description = info.loadDescription(getPackageManager());
             if (TextUtils.isEmpty(description)) {
                 description = getString(R.string.accessibility_service_default_description);
             }
