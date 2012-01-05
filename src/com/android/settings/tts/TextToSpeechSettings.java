@@ -192,23 +192,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         checkVoiceData(mCurrentEngine);
     }
 
-    private void maybeUpdateTtsLanguage(String currentEngine) {
-        if (currentEngine != null && mTts != null) {
-            final String localeString = mEnginesHelper.getLocalePrefForEngine(
-                    currentEngine);
-            if (localeString != null) {
-                final String[] locale = TtsEngines.parseLocalePref(localeString);
-                final Locale newLocale = new Locale(locale[0], locale[1], locale[2]);
-                final Locale engineLocale = mTts.getLanguage();
-
-                if (!newLocale.equals(engineLocale)) {
-                    if (DBG) Log.d(TAG, "Loading language ahead of sample check : " + locale);
-                    mTts.setLanguage(newLocale);
-                }
-            }
-        }
-    }
-
     /**
      * Ask the current default engine to return a string of sample text to be
      * spoken to the user.
@@ -218,7 +201,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         if (TextUtils.isEmpty(currentEngine)) currentEngine = mTts.getDefaultEngine();
 
-        maybeUpdateTtsLanguage(currentEngine);
         Locale currentLocale = mTts.getLanguage();
 
         // TODO: This is currently a hidden private API. The intent extras
