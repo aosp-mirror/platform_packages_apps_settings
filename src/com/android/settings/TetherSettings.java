@@ -147,7 +147,7 @@ public class TetherSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(mUsbTether);
         }
 
-        if (wifiAvailable) {
+        if (wifiAvailable && !Utils.isMonkeyRunning()) {
             mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
             initWifiTethering();
         } else {
