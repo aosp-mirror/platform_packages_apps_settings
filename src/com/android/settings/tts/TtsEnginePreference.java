@@ -155,12 +155,21 @@ public class TtsEnginePreference extends Preference {
             }
         });
 
+        if (mVoiceCheckData != null) {
+            mSettingsIcon.setEnabled(mRadioButton.isChecked());
+        }
+
         return view;
     }
 
     public void setVoiceDataDetails(Intent data) {
         mVoiceCheckData = data;
-        mSettingsIcon.setEnabled(mRadioButton.isChecked());
+        // This might end up running before getView aboive, in which
+        // case mSettingsIcon && mRadioButton will be null. In this case
+        // getView will set the right values.
+        if (mSettingsIcon != null && mRadioButton != null) {
+            mSettingsIcon.setEnabled(mRadioButton.isChecked());
+        }
     }
 
     private void onRadioButtonClicked(CompoundButton buttonView, boolean isChecked) {
