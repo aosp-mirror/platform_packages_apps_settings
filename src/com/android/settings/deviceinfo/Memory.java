@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -65,12 +66,16 @@ public class Memory extends SettingsPreferenceFragment {
 
     private StorageManager mStorageManager = null;
 
+    private UsbManager mUsbManager = null;
+
     private StorageVolumePreferenceCategory mInternalStorageVolumePreferenceCategory;
     private StorageVolumePreferenceCategory[] mStorageVolumePreferenceCategories;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        mUsbManager = (UsbManager)getSystemService(Context.USB_SERVICE);
 
         if (mStorageManager == null) {
             mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
@@ -117,6 +122,10 @@ public class Memory extends SettingsPreferenceFragment {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");
+        getActivity().registerReceiver(mMediaScannerReceiver, intentFilter);
+
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(UsbManager.ACTION_USB_STATE);
         getActivity().registerReceiver(mMediaScannerReceiver, intentFilter);
 
         if (mInternalStorageVolumePreferenceCategory != null) {
@@ -237,9 +246,18 @@ public class Memory extends SettingsPreferenceFragment {
     private final BroadcastReceiver mMediaScannerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // mInternalStorageVolumePreferenceCategory is not affected by the media scanner
-            for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
-                mStorageVolumePreferenceCategories[i].onMediaScannerFinished();
+            String action = intent.getAction();
+            if (action.equals(UsbManager.ACTION_USB_STATE)) {
+               boolean isUsbConnected = intent.getBooleanExtra(UsbManager.USB_CONNECTED, false);
+               String usbFunction = mUsbManager.getDefaultFunction();
+               for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+                   mStorageVolumePreferenceCategories[i].onUsbStateChanged(isUsbConnected, usbFunction);
+               }
+            } else if (action.equals(Intent.ACTION_MEDIA_SCANNER_FINISHED)) {
+                // mInternalStorageVolumePreferenceCategory is not affected by the media scanner
+                for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+                    mStorageVolumePreferenceCategories[i].onMediaScannerFinished();
+                }
             }
         }
     };

@@ -24,6 +24,7 @@ import android.content.pm.IPackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -68,6 +69,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     private StorageMeasurement mMeasurement;
 
     private boolean mAllowFormat;
+
+    private boolean mUsbConnected;
+    private String mUsbFunction;
 
     static class CategoryInfo {
         final int mTitle;
@@ -305,6 +309,23 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
                 removePreference(mFormatPreference);
             }
         }
+
+        if (mUsbConnected && (UsbManager.USB_FUNCTION_MTP.equals(mUsbFunction) ||
+                UsbManager.USB_FUNCTION_PTP.equals(mUsbFunction))) {
+            mMountTogglePreference.setEnabled(false);
+            if (Environment.MEDIA_MOUNTED.equals(state)) {
+                mMountTogglePreference.setSummary(mResources.getString(R.string.mtp_ptp_mode_summary));
+            }
+
+            if (mFormatPreference != null) {
+                mFormatPreference.setEnabled(false);
+                mFormatPreference.setSummary(mResources.getString(R.string.mtp_ptp_mode_summary));
+            }
+        } else if (mFormatPreference != null) {
+            mFormatPreference.setEnabled(true);
+            mFormatPreference.setSummary(mResources.getString(R.string.sd_format_summary));
+        }
+
     }
 
     public void updateApproximate(long totalSize, long availSize) {
@@ -376,6 +397,11 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         measure();
     }
 
+    public void onUsbStateChanged(boolean isUsbConnected, String usbFunction) {
+        mUsbConnected = isUsbConnected;
+        mUsbFunction = usbFunction;
+        measure();
+    }
     public void onMediaScannerFinished() {
         measure();
     }
