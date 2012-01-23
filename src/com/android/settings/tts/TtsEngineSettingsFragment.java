@@ -168,7 +168,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
             if (loc != null){
                 entries[i] = loc.getDisplayName();
                 entryValues[i] = availableLangs.get(i);
-                if (entryValues[i].equals(currentLocale)) {
+                if (availableLangs.get(i).equalsIgnoreCase(currentLocale)) {
                     selectedLanguageIndex = i;
                 }
             }
