@@ -45,6 +45,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     private int mOldAutomatic;
 
     private boolean mAutomaticAvailable;
+    private boolean mAutomaticMode;
 
     private boolean mRestoredOldState;
 
@@ -97,24 +98,23 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         super.onBindDialogView(view);
 
         mSeekBar = getSeekBar(view);
-        mSeekBar.setMax(MAXIMUM_BACKLIGHT - mScreenBrightnessDim);
-        mOldBrightness = getBrightness(0);
-        mSeekBar.setProgress(mOldBrightness - mScreenBrightnessDim);
+        mSeekBar.setMax(10000);
+        mOldBrightness = getBrightness();
+        mSeekBar.setProgress(mOldBrightness);
 
         mCheckBox = (CheckBox)view.findViewById(R.id.automatic_mode);
         if (mAutomaticAvailable) {
             mCheckBox.setOnCheckedChangeListener(this);
             mOldAutomatic = getBrightnessMode(0);
-            mCheckBox.setChecked(mOldAutomatic != 0);
-        } else {
-            mCheckBox.setVisibility(View.GONE);
+            mAutomaticMode = mOldAutomatic == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+            mCheckBox.setChecked(mAutomaticMode);
         }
         mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress,
             boolean fromTouch) {
-        setBrightness(progress + mScreenBrightnessDim);
+        setBrightness(progress, false);
     }
 
     public void onStartTrackingTouch(SeekBar seekBar) {
@@ -128,19 +128,27 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         setMode(isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
                 : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-        if (!isChecked) {
-            setBrightness(mSeekBar.getProgress() + mScreenBrightnessDim);
-        }
+        mSeekBar.setProgress(getBrightness());
     }
 
-    private int getBrightness(int defaultValue) {
-        int brightness = defaultValue;
+    private int getBrightness() {
+        int mode = getBrightnessMode(0);
+        float brightness = 0;
         try {
-            brightness = Settings.System.getInt(getContext().getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS);
+            if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                brightness = Settings.System.getFloat(getContext().getContentResolver(),
+                        Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ);
+                brightness = (brightness+1)/2;
+            } else {
+                brightness = Settings.System.getInt(getContext().getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS);
+                brightness = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim)
+                        / (brightness - mScreenBrightnessDim);
+                
+            }
         } catch (SettingNotFoundException snfe) {
         }
-        return brightness;
+        return (int)(brightness*10000);
     }
 
     private int getBrightnessMode(int defaultValue) {
@@ -154,13 +162,14 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     }
 
     private void onBrightnessChanged() {
-        int brightness = getBrightness(MAXIMUM_BACKLIGHT);
-        mSeekBar.setProgress(brightness - mScreenBrightnessDim);
+        mSeekBar.setProgress(getBrightness());
     }
 
     private void onBrightnessModeChanged() {
-        boolean checked = getBrightnessMode(0) != 0;
+        boolean checked = getBrightnessMode(0)
+                == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
         mCheckBox.setChecked(checked);
+        mSeekBar.setProgress(getBrightness());
     }
 
     @Override
@@ -170,9 +179,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         final ContentResolver resolver = getContext().getContentResolver();
 
         if (positiveResult) {
-            Settings.System.putInt(resolver,
-                    Settings.System.SCREEN_BRIGHTNESS,
-                    mSeekBar.getProgress() + mScreenBrightnessDim);
+            setBrightness(mSeekBar.getProgress(), true);
         } else {
             restoreOldState();
         }
@@ -187,30 +194,47 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         if (mAutomaticAvailable) {
             setMode(mOldAutomatic);
         }
-        if (!mAutomaticAvailable || mOldAutomatic == 0) {
-            setBrightness(mOldBrightness);
-        }
+        setBrightness(mOldBrightness, false);
         mRestoredOldState = true;
     }
 
-    private void setBrightness(int brightness) {
-        try {
-            IPowerManager power = IPowerManager.Stub.asInterface(
-                    ServiceManager.getService("power"));
-            if (power != null) {
-                power.setBacklightBrightness(brightness);
+    private void setBrightness(int brightness, boolean write) {
+        if (mAutomaticMode) {
+            float valf = (((float)brightness*2)/10000) - 1.0f;
+            try {
+                IPowerManager power = IPowerManager.Stub.asInterface(
+                        ServiceManager.getService("power"));
+                if (power != null) {
+                    power.setAutoBrightnessAdjustment(valf);
+                }
+                if (write) {
+                    final ContentResolver resolver = getContext().getContentResolver();
+                    Settings.System.putFloat(resolver,
+                            Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, valf);
+                }
+            } catch (RemoteException doe) {
             }
-        } catch (RemoteException doe) {
-            
+        } else {
+            int range = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim);
+            brightness = (brightness*range)/10000 + mScreenBrightnessDim;
+            try {
+                IPowerManager power = IPowerManager.Stub.asInterface(
+                        ServiceManager.getService("power"));
+                if (power != null) {
+                    power.setBacklightBrightness(brightness);
+                }
+                if (write) {
+                    final ContentResolver resolver = getContext().getContentResolver();
+                    Settings.System.putInt(resolver,
+                            Settings.System.SCREEN_BRIGHTNESS, brightness);
+                }
+            } catch (RemoteException doe) {
+            }
         }
     }
 
     private void setMode(int mode) {
-        if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-            mSeekBar.setVisibility(View.GONE);
-        } else {
-            mSeekBar.setVisibility(View.VISIBLE);
-        }
+        mAutomaticMode = mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
         Settings.System.putInt(getContext().getContentResolver(),
                 Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
     }
@@ -245,7 +269,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         mOldBrightness = myState.oldProgress;
         mOldAutomatic = myState.oldAutomatic ? 1 : 0;
         setMode(myState.automatic ? 1 : 0);
-        setBrightness(myState.progress + mScreenBrightnessDim);
+        setBrightness(myState.progress, false);
     }
 
     private static class SavedState extends BaseSavedState {
