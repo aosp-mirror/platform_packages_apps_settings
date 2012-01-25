@@ -115,7 +115,7 @@ public class Status extends PreferenceActivity {
     private Preference mSignalStrength;
     private Preference mUptime;
 
-    private static String sUnknown;
+    private String sUnknown;
 
     private Preference mBatteryStatus;
     private Preference mBatteryLevel;
@@ -188,9 +188,7 @@ public class Status extends PreferenceActivity {
         mBatteryStatus = findPreference(KEY_BATTERY_STATUS);
 
         mRes = getResources();
-        if (sUnknown == null) {
-            sUnknown = mRes.getString(R.string.device_info_default);
-        }
+        sUnknown = mRes.getString(R.string.device_info_default);
 
         mPhone = PhoneFactory.getDefaultPhone();
         // Note - missing in zaku build, be careful later...
