@@ -301,15 +301,15 @@
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Настройка функции \"Мое местоположение\", разблокировка экрана и блокировка хранилища регистрационных данных"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Пароли"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифрование"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Зашифровать планшет"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Зашифровать телефон"</string>
+    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Зашифровать данные"</string>
+    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Зашифровать данные"</string>
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Запрос числового PIN-кода или пароля для дешифрования при каждом включении планшетного ПК"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Запрос числового PIN-кода или пароля для дешифрования при каждом включении телефона"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Зашифровано"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Можно зашифровать данные различных типов: аккаунты, настройки, загруженные приложения и их контент, мультимедийные и другие файлы. После этого при каждом включении устройства потребуется вводить PIN-код или пароль. Шифрование снимается только путем сброса настроек, в результате которого удаляются все данные."\n\n"Шифрование занимает не менее часа. Батарея должна быть полностью заряжена, а устройство подключено к источнику питания, пока шифрование не завершится. Если прервать его, данные будут частично или полностью потеряны."</string>
     <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Можно зашифровать данные различных типов: аккаунты, настройки, загруженные приложения и их контент, мультимедийные и другие файлы. После этого при каждом включении устройства потребуется вводить PIN-код или пароль. Шифрование снимается только путем сброса настроек, в результате которого удаляются все данные."\n\n"Шифрование занимает не менее часа. Батарея должна быть полностью заряжена, а устройство подключено к источнику питания, пока шифрование не завершится. Если прервать его, данные на устройстве будут частично или полностью потеряны."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Зашифровать планшет"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Зашифровать телефон"</string>
+    <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Зашифровать данные"</string>
+    <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Зашифровать данные"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Зарядите батарею и повторите попытку."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Подключите зарядное устройство и повторите попытку."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Не указан PIN-код или пароль блокировки экрана"</string>
@@ -480,7 +480,7 @@
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
-    <string name="android_beam_on_summary" msgid="3618057099355636830">"Можно обмениваться контентом по NFC"</string>
+    <string name="android_beam_on_summary" msgid="3618057099355636830">"Обмен данными по NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Выключено"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Недоступно, так как отключена связь малого радиуса действия"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
@@ -532,7 +532,7 @@
     <string name="wifi_password" msgid="5948219759936151048">"Пароль"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Показывать пароль"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Настройки IP"</string>
-    <string name="wifi_unchanged" msgid="3410422020930397102">"(не изменялось)"</string>
+    <string name="wifi_unchanged" msgid="3410422020930397102">"(без изменений)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(не указано)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Сохранено"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Отключено"</string>
@@ -596,7 +596,7 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Виброзвонок без звука"</string>
     <string name="vibrate_on_ring_title" msgid="40343855247989536">"Вибросигнал и рингтон"</string>
     <string name="notification_sound_title" msgid="312032901303146002">"Уведомление по умолчанию"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"Мигание трекбола"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Индикатор событий"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Мелодия"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Уведомление"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Использовать этот уровень громкости также для уведомлений"</string>
@@ -608,7 +608,7 @@
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Звук клавиш"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Звук нажатия на экран"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Звук блокировки экрана"</string>
-    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Включить виброотклик"</string>
+    <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Виброотклик"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Подавление шума"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"Музыка, видео, игры и другие медиафайлы"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"Рингтон и уведомления"</string>
@@ -920,13 +920,14 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Новый графический ключ разблокировки:"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Подтвердить"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Воспроизвести повторно"</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Повторить"</string>
+    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Повтор"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Продолжить"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Графический ключ разблокировки"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Запрашивать ключ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Использовать графический ключ для защиты телефона"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Показывать ключ"</string>
-    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Включить виброотклик"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Виброотклик"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Блокировка кнопкой питания"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Установить ключ"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Изменить ключ"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Как начертить графический ключ разблокировки"</string>
@@ -951,7 +952,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Включить дополнительные настройки"</string>
     <string name="application_info_label" msgid="5736524913065714880">"О приложении"</string>
     <string name="storage_label" msgid="8700867073480107253">"Память"</string>
-    <string name="auto_launch_label" msgid="3012617472833815382">"Запускать по умолчанию"</string>
+    <string name="auto_launch_label" msgid="3012617472833815382">"Запуск по умолчанию"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Совместимость с экраном"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Разрешения"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Кэш"</string>
@@ -991,7 +992,7 @@
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"На SD-карте"</string>
     <string name="disabled" msgid="9206776641295849915">"Отключено"</string>
     <string name="no_applications" msgid="7336588977497084921">"Нет приложений"</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Внутренний накопитель"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Внутр. память"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB-память"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD-карта"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Повторное вычисление размера..."</string>
@@ -1091,11 +1092,10 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Добавить"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Добавление в словарь"</string>
-    <!-- no translation found for user_dict_settings_add_dialog_more_options (8848798370746019825) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_less_options (2441785268726036101) -->
-    <skip />
+    <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Больше настроек"</string>
+    <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Меньше настроек"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"ОК"</string>
+    <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Слово:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Сочетание клавиш:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Язык:"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Изменение слова"</string>
@@ -1150,9 +1150,9 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Отладка по USB – это режим, который позволяет использовать ваше устройство как внешний накопитель: перемещать файлы (с компьютера и на компьютер), напрямую устанавливать приложения, а также просматривать системные журналы."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Выбор гаджета"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Выбор виджета"</string>
-    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> дн. <xliff:g id="HOURS">%2$d</xliff:g> ч. <xliff:g id="MINUTES">%3$d</xliff:g> мин. <xliff:g id="SECONDS">%4$d</xliff:g> с."</string>
-    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> ч. <xliff:g id="MINUTES">%2$d</xliff:g> мин. <xliff:g id="SECONDS">%3$d</xliff:g> с."</string>
-    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> мин. <xliff:g id="SECONDS">%2$d</xliff:g> с."</string>
+    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> д. <xliff:g id="HOURS">%2$d</xliff:g> ч. <xliff:g id="MINUTES">%3$d</xliff:g> м. <xliff:g id="SECONDS">%4$d</xliff:g> с."</string>
+    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> ч. <xliff:g id="MINUTES">%2$d</xliff:g> м. <xliff:g id="SECONDS">%3$d</xliff:g> с."</string>
+    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> м. <xliff:g id="SECONDS">%2$d</xliff:g> с."</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> с."</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Статистика использования"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Статистика использования"</string>
@@ -1224,8 +1224,8 @@
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Планшетный ПК в режиме ожидания"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Режим ожидания"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"ЦП – всего"</string>
-    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"ЦП – активный режим"</string>
-    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Активный режим"</string>
+    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"ЦП – акт. режим"</string>
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Акт. режим"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Планшетный ПК"</string>
@@ -1315,7 +1315,7 @@
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Обновление настроек Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Обновление настроек Bluetooth"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
-    <string name="credentials_title" msgid="4446234003860769883">"Хранилище регистрационных данных"</string>
+    <string name="credentials_title" msgid="4446234003860769883">"Хранилище учетных данных"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Установить с карты памяти"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Установка с SD-карты"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Установить сертификаты с карты памяти"</string>
@@ -1367,7 +1367,7 @@
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Общие"</string>
     <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Рингтон и уведомления"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Оповещения"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Система"</string>
+    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Отклик на действия"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Настройки Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Подключение к сети Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Подключение к сети Wi-Fi: <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1475,7 +1475,7 @@
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Интернет-роуминг"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ограничить фон. режим"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Только по каналу 4G"</string>
-    <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Показать трафик Wi-Fi"</string>
+    <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Трафик Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Показывать загрузку Ethernet"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Изменить…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"День месяца, когда сбрасывается цикл использования данных:"</string>
@@ -1491,7 +1491,7 @@
     <string name="data_usage_disable_wifi_limit" msgid="8575537650560665657">"Лимитировать трафик Wi-Fi"</string>
     <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"Ethernet"</string>
-    <string name="data_usage_tab_mobile" msgid="454140350007299045">"Мобильный"</string>
+    <string name="data_usage_tab_mobile" msgid="454140350007299045">"Моб. сети"</string>
     <string name="data_usage_tab_4g" msgid="1301978716067512235">"Трафик 4G"</string>
     <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G/3G"</string>
     <string name="data_usage_list_mobile" msgid="5588685410495019866">"Моб. сети"</string>
@@ -1500,7 +1500,7 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Передача данных по сетям 2G/3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Передача данных 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Настройки приложения"</string>
-    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Ограничить фон. режим"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Лимит фон. данных"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Отключить фоновый режим для мобильных сетей. Использовать Wi-Fi."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Сначала установите лимит для мобильного трафика."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Ограничение фонового режима"</string>
@@ -1520,7 +1520,7 @@
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Получено: <xliff:g id="RECEIVED">%1$s</xliff:g>; отправлено: <xliff:g id="SENT">%2$s</xliff:g>"</string>
-    <string name="data_usage_total_during_range" msgid="441648308264260691">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="data_usage_total_during_range" msgid="441648308264260691">"<xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Вызов службы экстренной помощи"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Вернуться к вызову"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Название сети"</string>
