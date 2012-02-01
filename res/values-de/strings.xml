@@ -83,7 +83,7 @@
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Wird geladen"</string>
     <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
     <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
-    <string name="battery_info_status_discharging" msgid="6222697503392774475">"Entlädt"</string>
+    <string name="battery_info_status_discharging" msgid="6222697503392774475">"Akkubetrieb"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Wird nicht geladen"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Voll"</string>
     <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Nicht angeschlossen"</string>
@@ -92,7 +92,7 @@
     <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
     <string name="battery_info_power_unknown" msgid="7344115502868899881">"Unbekannt"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Unbekannt"</string>
-    <string name="battery_info_health_good" msgid="8070356565806711806">"OK"</string>
+    <string name="battery_info_health_good" msgid="8070356565806711806">"Okay"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Überhitzung"</string>
     <string name="battery_info_health_dead" msgid="1725917445762829059">"Leer"</string>
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Überspannung"</string>
@@ -415,7 +415,7 @@
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"In der Regel 0000 oder 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="3617812138113586885">"Möglicherweise müssen Sie diese PIN auch auf dem anderen Gerät eingeben."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="1808735246794073465">"Möglicherweise müssen Sie diesen Schlüssel auch auf dem anderen Gerät eingeben."</string>
-    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:241 in java.io.StringReader@446b7920)  -->
+    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:241 in java.io.StringReader@2b21cc40)  -->
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pairing mit diesem Gerät durchführen?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Geben Sie zum Pairing mit <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> ein und drücken Sie anschließend die Eingabetaste."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Kopplung durchführen"</string>
@@ -760,7 +760,7 @@
     <string name="storage_title_usb" msgid="679612779321689418">"USB-Verbindung (PC)"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Verbinden als"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Mediengerät (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="4617321473211391236">"Ermöglicht die Übertragung von Mediendateien auf Windows- oder, mithilfe der Anwendung zur Dateiübertragung für Android, auf Mac-Computer (siehe www.android.com/filetransfer)"</string>
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"Ermöglicht die Übertragung von Mediendateien auf Windows- oder, mithilfe von Android File Transfer, auf Mac-Computer (siehe www.android.com/filetransfer)"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"Kamera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Ermöglicht die Übertragung von Fotos mithilfe der Kamera-Software sowie die Übertragung von Dateien auf Computer, die MTP nicht unterstützen"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Dateiübertragungstools installieren"</string>
@@ -927,6 +927,7 @@
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Zum Entsperren muss ein Muster gezeichnet werden"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Muster sichtbar machen"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Bei Berührung vibrieren"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Ein-/Aus sperrt Gerät sofort"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Entsperrungsmuster"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Muster ändern"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Zeichnen eines Entsperrungsmusters"</string>
@@ -1264,7 +1265,7 @@
     <string name="voice_category" msgid="1430370497125803904">"Sprache"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Spracherkennung"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"Sprachsuche"</string>
-    <string name="recognizer_settings_summary" msgid="4472287934134546902">"Einstellungen für \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"Einstellungen für \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
     <string name="tts_settings" msgid="8186971894801348327">"Text-in-Sprache"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Text-in-Sprache-Ausgabe"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Immer meine Einstellungen verwenden"</string>
@@ -1476,7 +1477,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Vordergrund"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Hintergrund"</string>
     <string name="data_usage_disclaimer" product="tablet" msgid="2591250607795265503">"Abrechnung des Datenverbrauchs durch Tablet, kann von Mobilfunkanbieter abweichen."</string>
-    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Abrechnung des Datenverbrauchs durch Telefon, kann von Mobilfunkanbieter abweichen."</string>
+    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Abrechnung des Datenverbrauchs durch Telefon. Kann von Mobilfunkanbieter abweichen."</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Mobile Daten deaktivieren?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Limit für mobile Daten festlegen"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G-Datenlimit festlegen"</string>
@@ -1525,8 +1526,7 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"Vorinstallierter IPSec-Schlüssel"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec-Nutzerzertifikat"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec-CA-Zertifikat"</string>
-    <!-- no translation found for vpn_ipsec_server_cert (6599276718456935010) -->
-    <skip />
+    <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec-Serverzertifikat"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"Erweiterte Optionen einblenden"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS-Suchdomains"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS-Server (z. B. 8.8.8.8)"</string>
@@ -1536,8 +1536,7 @@
     <string name="vpn_save_login" msgid="6350322456427484881">"Kontoinformationen speichern"</string>
     <string name="vpn_not_used" msgid="9094191054524660891">"(nicht verwendet)"</string>
     <string name="vpn_no_ca_cert" msgid="2095005387500126113">"(Server nicht überprüfen)"</string>
-    <!-- no translation found for vpn_no_server_cert (2167487440231913330) -->
-    <skip />
+    <string name="vpn_no_server_cert" msgid="2167487440231913330">"(vom Server erhalten)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"Abbrechen"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Speichern"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Verbinden"</string>
