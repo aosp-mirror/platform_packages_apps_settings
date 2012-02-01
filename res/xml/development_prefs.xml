@@ -104,6 +104,13 @@
             android:entries="@array/transition_animation_scale_entries"
             android:entryValues="@array/transition_animation_scale_values" />
 
+        <ListPreference
+            android:key="animator_duration_scale"
+            android:title="@string/animator_duration_scale_title"
+            android:persistent="false"
+            android:entries="@array/animator_duration_scale_entries"
+            android:entryValues="@array/animator_duration_scale_values" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_applications_category"
