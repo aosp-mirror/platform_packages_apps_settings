@@ -25,11 +25,17 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.preference.Preference;
 import android.provider.Settings;
+import android.service.dreams.IDreamManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,6 +49,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,10 +58,13 @@ import java.util.List;
 public class DreamComponentPreference extends Preference {
     private static final String TAG = "DreamComponentPreference";
 
-    private static final boolean SHOW_DOCK_APPS_TOO = true;
-    
+    private static final boolean SHOW_DOCK_APPS = false;
+    private static final boolean SHOW_DREAM_SERVICES = true;
+    private static final boolean SHOW_DREAM_ACTIVITIES = false;
+
     private final PackageManager pm;
     private final ContentResolver resolver;
+    private final Collator   sCollator = Collator.getInstance();
 
     public DreamComponentPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -65,30 +75,50 @@ public class DreamComponentPreference extends Preference {
     }
 
     private void refreshFromSettings() {
-        String component = Settings.Secure.getString(resolver, SCREENSAVER_COMPONENT);
-        if (component == null) {
-            component = getContext().getResources().getString(
-                com.android.internal.R.string.config_defaultDreamComponent);
+        ComponentName cn = null;
+        IDreamManager dm = IDreamManager.Stub.asInterface(
+                ServiceManager.getService("dreams"));
+        try {
+            cn = dm.getDreamComponent();
+        } catch (RemoteException ex) {
+            setSummary("(unknown)");
+            return;
         }
-        if (component != null) {
-            ComponentName cn = ComponentName.unflattenFromString(component);
+
+        try {
+            setSummary(pm.getActivityInfo(cn, 0).loadLabel(pm));
+        } catch (PackageManager.NameNotFoundException ex) {
             try {
-                setSummary(pm.getActivityInfo(cn, 0).loadLabel(pm));
-            } catch (PackageManager.NameNotFoundException ex) {
+                setSummary(pm.getServiceInfo(cn, 0).loadLabel(pm));
+            } catch (PackageManager.NameNotFoundException ex2) {
                 setSummary("(unknown)");
             }
         }
     }
 
-    final static Comparator<ResolveInfo> sResolveInfoComparator = new Comparator<ResolveInfo>() {
+    // Group by package, then by name.
+    Comparator<ResolveInfo> sResolveInfoComparator = new Comparator<ResolveInfo>() {
         @Override
         public int compare(ResolveInfo a, ResolveInfo b) {
-            int cmp = a.activityInfo.applicationInfo.packageName.compareTo(
-                    b.activityInfo.applicationInfo.packageName);
-            if (cmp == 0) {
-                cmp = a.activityInfo.name.compareTo(b.activityInfo.name);
+            CharSequence sa, sb;
+            
+            ApplicationInfo aia = a.activityInfo != null ? a.activityInfo.applicationInfo : a.serviceInfo.applicationInfo;
+            ApplicationInfo aib = b.activityInfo != null ? b.activityInfo.applicationInfo : b.serviceInfo.applicationInfo;
+            
+            if (!aia.equals(aib)) {
+                sa = pm.getApplicationLabel(aia);
+                sb = pm.getApplicationLabel(aib);
+            } else {
+                sa = a.loadLabel(pm);
+                if (sa == null) {
+                    sa = (a.activityInfo != null) ? a.activityInfo.name : a.serviceInfo.name;
+                }
+                sb = b.loadLabel(pm);
+                if (sb == null) {
+                    sb = (b.activityInfo != null) ? b.activityInfo.name : b.serviceInfo.name;
+                }
             }
-            return cmp;
+            return sCollator.compare(sa.toString(), sb.toString());
         }
     };
 
@@ -102,12 +132,20 @@ public class DreamComponentPreference extends Preference {
 
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            results = new ArrayList<ResolveInfo>(pm.queryIntentActivities(choosy, 0));
+            results = new ArrayList<ResolveInfo>();
+            
+            if (SHOW_DREAM_ACTIVITIES) {
+                results.addAll(pm.queryIntentActivities(choosy, PackageManager.GET_META_DATA));
+            }
+            
+            if (SHOW_DREAM_SERVICES) {
+                results.addAll(pm.queryIntentServices(choosy, PackageManager.GET_META_DATA));
+            }
 
             // Group by package
             Collections.sort(results, sResolveInfoComparator);
 
-            if (SHOW_DOCK_APPS_TOO) {
+            if (SHOW_DOCK_APPS) {
                 choosy = new Intent(Intent.ACTION_MAIN)
                             .addCategory(Intent.CATEGORY_DESK_DOCK);
 
@@ -137,6 +175,22 @@ public class DreamComponentPreference extends Preference {
             return (long) position;
         }
 
+        private CharSequence loadDescription(ResolveInfo ri) {
+            CharSequence desc = null;
+            if (ri != null) {
+                Bundle metaData = (ri.activityInfo != null) ? ri.activityInfo.metaData : ri.serviceInfo.metaData;
+                Log.d(TAG, "loadDescription: ri=" + ri + " metaData=" + metaData);
+                if (metaData != null) {
+                    desc = metaData.getCharSequence("android.screensaver.description");
+                    Log.d(TAG, "loadDescription: desc=" + desc);
+                    if (desc != null) {
+                        desc = desc.toString().trim();
+                    }
+                }
+            }
+            return desc;
+        }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = (convertView != null) 
@@ -159,16 +213,21 @@ public class DreamComponentPreference extends Preference {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ResolveInfo ri = (ResolveInfo)list.getItem(which);
-                        ActivityInfo act = ri.activityInfo;
-                        ComponentName cn = new ComponentName(
-                            act.applicationInfo.packageName,
-                            act.name);
-                        Intent intent = new Intent(Intent.ACTION_MAIN).setComponent(cn);
-                        
+                        String pn = (ri.activityInfo != null) ? ri.activityInfo.applicationInfo.packageName
+                                : ri.serviceInfo.applicationInfo.packageName;
+                        String n = (ri.activityInfo != null) ? ri.activityInfo.name : ri.serviceInfo.name;
+                        ComponentName cn = new ComponentName(pn, n);
+
                         setSummary(ri.loadLabel(pm));
                         //getContext().startActivity(intent);
                         
-                        Settings.Secure.putString(resolver, SCREENSAVER_COMPONENT, cn.flattenToString());
+                        IDreamManager dm = IDreamManager.Stub.asInterface(
+                                ServiceManager.getService("dreams"));
+                        try {
+                            dm.setDreamComponent(cn);
+                        } catch (RemoteException ex) {
+                            // too bad, so sad, oh mom, oh dad
+                        }
                     }
                 })
             .create();

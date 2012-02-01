@@ -83,7 +83,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mAccelerometer.setPersistent(false);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
-
+        if (mScreenSaverPreference != null
+                && getResources().getBoolean(
+                        com.android.internal.R.bool.config_enableDreams) == false) {
+            getPreferenceScreen().removePreference(mScreenSaverPreference);
+        }
+        
         mScreenTimeoutPreference = (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
         final long currentTimeout = Settings.System.getLong(resolver, SCREEN_OFF_TIMEOUT,
                 FALLBACK_SCREEN_TIMEOUT_VALUE);
@@ -108,6 +113,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
+
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {

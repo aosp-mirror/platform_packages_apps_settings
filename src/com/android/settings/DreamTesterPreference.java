@@ -28,8 +28,11 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.preference.Preference;
 import android.provider.Settings;
+import android.service.dreams.IDreamManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -65,13 +68,20 @@ public class DreamTesterPreference extends Preference {
         if (component != null) {
             ComponentName cn = ComponentName.unflattenFromString(component);
             Log.v(TAG, "cn=" + cn);
-            Intent intent = new Intent(Intent.ACTION_MAIN)
-                .setComponent(cn)
-                .addFlags(
-                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                    )
-                .putExtra("android.dreams.TEST", true);
-            getContext().startActivity(intent);
+//            Intent intent = new Intent(Intent.ACTION_MAIN)
+//                .setComponent(cn)
+//                .addFlags(
+//                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+//                    )
+//                .putExtra("android.dreams.TEST", true);
+//            getContext().startService(intent);
+            IDreamManager dm = IDreamManager.Stub.asInterface(
+                    ServiceManager.getService("dreams"));
+            try {
+                dm.testDream(cn);
+            } catch (RemoteException ex) {
+                // too bad, so sad, oh mom, oh dad
+            }
         }
     }
 }
