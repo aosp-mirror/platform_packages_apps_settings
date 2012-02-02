@@ -594,7 +594,7 @@
     <string name="musicfx_title" msgid="3415566786340790345">"音樂效果"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"鈴聲音量"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"靜音時震動"</string>
-    <string name="vibrate_on_ring_title" msgid="40343855247989536">"震動和鈴聲"</string>
+    <string name="vibrate_on_ring_title" msgid="40343855247989536">"震動並響鈴"</string>
     <string name="notification_sound_title" msgid="312032901303146002">"預設通知"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"閃爍燈光通知"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"鈴聲"</string>
@@ -760,7 +760,7 @@
     <string name="storage_title_usb" msgid="679612779321689418">"USB 電腦連線"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"已連結為"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"媒體裝置 (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="4617321473211391236">"讓您在 Windows 上使用 Explorer 或 Windows Media Player 傳輸媒體檔案，或是在 Mac 上使用「Android 檔案傳輸」應用程式傳輸媒體檔案 (下載網址：www.android.com/filetransfer)"</string>
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"讓您用 Windows 或 Mac 上的「Android 檔案傳輸」來傳輸媒體檔案 (下載網址：www.android.com/filetransfer)"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"相機 (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"讓您使用相機軟體傳輸相片，並在任何不支援 MTP 的電腦上傳輸檔案"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"安裝檔案傳輸工具"</string>
@@ -927,6 +927,7 @@
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"必須畫出解鎖圖形以解鎖螢幕"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"顯示解鎖圖形"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"觸控時震動"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"按下電源按鈕立即鎖定"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"設定解鎖圖形"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"變更解鎖圖形"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何畫出解鎖圖形"</string>
@@ -1158,8 +1159,7 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"系統"</string>
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"大字體"</string>
     <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"電源鍵可結束通話"</string>
-    <!-- no translation found for accessibility_speak_password_title (3344423945644925355) -->
-    <skip />
+    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"朗讀密碼"</string>
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"輕觸探索"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"開啟 [輕觸探索] 時，您就能聽到或看到您手指觸碰到的描述。"\n\n"這項功能是專為視力不佳的使用者而設計的。"</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"輕觸並按住的延遲時間"</string>
@@ -1526,8 +1526,7 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"IPSec 預先共用金鑰"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec 使用者憑證"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA 憑證"</string>
-    <!-- no translation found for vpn_ipsec_server_cert (6599276718456935010) -->
-    <skip />
+    <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec 伺服器憑證"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"顯示進階選項"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS 搜尋網域"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS 伺服器 (例如 8.8.8.8)"</string>
@@ -1537,8 +1536,7 @@
     <string name="vpn_save_login" msgid="6350322456427484881">"儲存帳戶資訊"</string>
     <string name="vpn_not_used" msgid="9094191054524660891">"(未使用)"</string>
     <string name="vpn_no_ca_cert" msgid="2095005387500126113">"(不要驗證伺服器)"</string>
-    <!-- no translation found for vpn_no_server_cert (2167487440231913330) -->
-    <skip />
+    <string name="vpn_no_server_cert" msgid="2167487440231913330">"(從伺服器接收)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"取消"</string>
     <string name="vpn_save" msgid="4233484051644764510">"儲存"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"連線"</string>
