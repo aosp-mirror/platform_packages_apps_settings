@@ -16,6 +16,10 @@
 
 package com.android.settings;
 
+import java.util.ArrayList;
+
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -38,19 +42,23 @@ import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.IWindowManager;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 /*
  * Displays preferences for application developers.
  */
 public class DevelopmentSettings extends PreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
-                OnPreferenceChangeListener {
+                OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
     private static final String ENABLE_ADB = "enable_adb";
 
@@ -81,6 +89,9 @@ public class DevelopmentSettings extends PreferenceFragment
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
 
+    private Switch mEnabledSwitch;
+    private boolean mLastEnabledState;
+
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
@@ -101,10 +112,14 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private CheckBoxPreference mShowAllANRs;
 
-    // To track whether Yes was clicked in the adb warning dialog
-    private boolean mOkClicked;
+    private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
+    private final ArrayList<CheckBoxPreference> mResetCbPrefs
+            = new ArrayList<CheckBoxPreference>();
 
-    private Dialog mOkDialog;
+    // To track whether a confirmation dialog was clicked.
+    private boolean mDialogClicked;
+    private Dialog mEnableDialog;
+    private Dialog mAdbDialog;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -117,30 +132,58 @@ public class DevelopmentSettings extends PreferenceFragment
         addPreferencesFromResource(R.xml.development_prefs);
 
         mEnableAdb = (CheckBoxPreference) findPreference(ENABLE_ADB);
+        mAllPrefs.add(mEnableAdb);
+        mResetCbPrefs.add(mEnableAdb);
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
+        mAllPrefs.add(mKeepScreenOn);
+        mResetCbPrefs.add(mKeepScreenOn);
         mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
+        mAllPrefs.add(mAllowMockLocation);
+        mResetCbPrefs.add(mAllowMockLocation);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
+        mAllPrefs.add(mPassword);
 
         mStrictMode = (CheckBoxPreference) findPreference(STRICT_MODE_KEY);
+        mAllPrefs.add(mStrictMode);
+        mResetCbPrefs.add(mStrictMode);
+        mResetCbPrefs.add(mAllowMockLocation);
         mPointerLocation = (CheckBoxPreference) findPreference(POINTER_LOCATION_KEY);
+        mAllPrefs.add(mPointerLocation);
+        mResetCbPrefs.add(mPointerLocation);
         mShowTouches = (CheckBoxPreference) findPreference(SHOW_TOUCHES_KEY);
+        mAllPrefs.add(mShowTouches);
+        mResetCbPrefs.add(mShowTouches);
         mShowScreenUpdates = (CheckBoxPreference) findPreference(SHOW_SCREEN_UPDATES_KEY);
+        mAllPrefs.add(mShowScreenUpdates);
+        mResetCbPrefs.add(mShowScreenUpdates);
         mShowCpuUsage = (CheckBoxPreference) findPreference(SHOW_CPU_USAGE_KEY);
+        mAllPrefs.add(mShowCpuUsage);
+        mResetCbPrefs.add(mShowCpuUsage);
         mForceHardwareUi = (CheckBoxPreference) findPreference(FORCE_HARDWARE_UI_KEY);
+        mAllPrefs.add(mForceHardwareUi);
+        mResetCbPrefs.add(mForceHardwareUi);
         mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
+        mAllPrefs.add(mWindowAnimationScale);
         mWindowAnimationScale.setOnPreferenceChangeListener(this);
         mTransitionAnimationScale = (ListPreference) findPreference(TRANSITION_ANIMATION_SCALE_KEY);
+        mAllPrefs.add(mTransitionAnimationScale);
         mTransitionAnimationScale.setOnPreferenceChangeListener(this);
         mAnimatorDurationScale = (ListPreference) findPreference(ANIMATOR_DURATION_SCALE_KEY);
+        mAllPrefs.add(mAnimatorDurationScale);
         mAnimatorDurationScale.setOnPreferenceChangeListener(this);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
+        mAllPrefs.add(mImmediatelyDestroyActivities);
+        mResetCbPrefs.add(mImmediatelyDestroyActivities);
         mAppProcessLimit = (ListPreference) findPreference(APP_PROCESS_LIMIT_KEY);
+        mAllPrefs.add(mAppProcessLimit);
         mAppProcessLimit.setOnPreferenceChangeListener(this);
 
         mShowAllANRs = (CheckBoxPreference) findPreference(
                 SHOW_ALL_ANRS_KEY);
+        mAllPrefs.add(mShowAllANRs);
+        mResetCbPrefs.add(mShowAllANRs);
 
         final Preference verifierDeviceIdentifier = findPreference(VERIFIER_DEVICE_IDENTIFIER);
         final PackageManager pm = getActivity().getPackageManager();
@@ -149,7 +192,44 @@ public class DevelopmentSettings extends PreferenceFragment
             verifierDeviceIdentifier.setSummary(verifierIndentity.toString());
         }
 
+        Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
+        if (hdcpChecking != null) {
+            mAllPrefs.add(hdcpChecking);
+        }
         removeHdcpOptionsForProduction();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Activity activity = getActivity();
+        mEnabledSwitch = new Switch(activity);
+
+        final int padding = activity.getResources().getDimensionPixelSize(
+                R.dimen.action_bar_switch_padding);
+        mEnabledSwitch.setPadding(0, 0, padding, 0);
+        mEnabledSwitch.setOnCheckedChangeListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        final Activity activity = getActivity();
+        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(mEnabledSwitch, new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        final Activity activity = getActivity();
+        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(null);
     }
 
     private void removeHdcpOptionsForProduction() {
@@ -158,7 +238,14 @@ public class DevelopmentSettings extends PreferenceFragment
             if (hdcpChecking != null) {
                 // Remove the preference
                 getPreferenceScreen().removePreference(hdcpChecking);
+                mAllPrefs.remove(hdcpChecking);
             }
+        }
+    }
+
+    private void setPrefsEnabledState(boolean enabled) {
+        for (int i=0; i<mAllPrefs.size(); i++) {
+            mAllPrefs.get(i).setEnabled(enabled);
         }
     }
 
@@ -166,6 +253,15 @@ public class DevelopmentSettings extends PreferenceFragment
     public void onResume() {
         super.onResume();
 
+        final ContentResolver cr = getActivity().getContentResolver();
+        mLastEnabledState = Settings.Secure.getInt(cr,
+                Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+        mEnabledSwitch.setChecked(mLastEnabledState);
+        setPrefsEnabledState(mLastEnabledState);
+        updateAllOptions();
+    }
+
+    private void updateAllOptions() {
         final ContentResolver cr = getActivity().getContentResolver();
         mEnableAdb.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ADB_ENABLED, 0) != 0);
@@ -185,6 +281,21 @@ public class DevelopmentSettings extends PreferenceFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
+    }
+
+    private void resetDangerousOptions() {
+        for (int i=0; i<mResetCbPrefs.size(); i++) {
+            CheckBoxPreference cb = mResetCbPrefs.get(i);
+            if (cb.isChecked()) {
+                cb.setChecked(false);
+                onPreferenceTreeClick(null, cb);
+            }
+        }
+        writeAnimationScaleOption(0, mWindowAnimationScale, null);
+        writeAnimationScaleOption(1, mTransitionAnimationScale, null);
+        writeAnimationScaleOption(2, mAnimatorDurationScale, null);
+        writeAppProcessLimitOptions(null);
+        updateAllOptions();
     }
 
     private void updateHdcpValues() {
@@ -368,7 +479,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private void writeAnimationScaleOption(int which, ListPreference pref, Object newValue) {
         try {
-            float scale = Float.parseFloat(newValue.toString());
+            float scale = newValue != null ? Float.parseFloat(newValue.toString()) : 1;
             mWindowManager.setAnimationScale(which, scale);
             updateAnimationScaleValue(which, pref);
         } catch (RemoteException e) {
@@ -395,7 +506,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private void writeAppProcessLimitOptions(Object newValue) {
         try {
-            int limit = Integer.parseInt(newValue.toString());
+            int limit = newValue != null ? Integer.parseInt(newValue.toString()) : -1;
             ActivityManagerNative.getDefault().setProcessLimit(limit);
             updateAppProcessLimitOptions();
         } catch (RemoteException e) {
@@ -414,6 +525,33 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView == mEnabledSwitch) {
+            if (isChecked != mLastEnabledState) {
+                if (isChecked) {
+                    mDialogClicked = false;
+                    if (mEnableDialog != null) dismissDialogs();
+                    mEnableDialog = new AlertDialog.Builder(getActivity()).setMessage(
+                            getActivity().getResources().getString(
+                                    R.string.dev_settings_warning_message))
+                            .setTitle(R.string.dev_settings_warning_title)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, this)
+                            .setNegativeButton(android.R.string.no, this)
+                            .show();
+                    mEnableDialog.setOnDismissListener(this);
+                } else {
+                    resetDangerousOptions();
+                    Settings.Secure.putInt(getActivity().getContentResolver(),
+                            Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 0);
+                    mLastEnabledState = isChecked;
+                    setPrefsEnabledState(mLastEnabledState);
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
         if (Utils.isMonkeyRunning()) {
@@ -422,16 +560,16 @@ public class DevelopmentSettings extends PreferenceFragment
 
         if (preference == mEnableAdb) {
             if (mEnableAdb.isChecked()) {
-                mOkClicked = false;
-                if (mOkDialog != null) dismissDialog();
-                mOkDialog = new AlertDialog.Builder(getActivity()).setMessage(
+                mDialogClicked = false;
+                if (mAdbDialog != null) dismissDialogs();
+                mAdbDialog = new AlertDialog.Builder(getActivity()).setMessage(
                         getActivity().getResources().getString(R.string.adb_warning_message))
                         .setTitle(R.string.adb_warning_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, this)
                         .setNegativeButton(android.R.string.no, this)
                         .show();
-                mOkDialog.setOnDismissListener(this);
+                mAdbDialog.setOnDismissListener(this);
             } else {
                 Settings.Secure.putInt(getActivity().getContentResolver(),
                         Settings.Secure.ADB_ENABLED, 0);
@@ -488,33 +626,59 @@ public class DevelopmentSettings extends PreferenceFragment
         return false;
     }
 
-    private void dismissDialog() {
-        if (mOkDialog == null) return;
-        mOkDialog.dismiss();
-        mOkDialog = null;
+    private void dismissDialogs() {
+        if (mAdbDialog != null) {
+            mAdbDialog.dismiss();
+            mAdbDialog = null;
+        }
+        if (mEnableDialog != null) {
+            mEnableDialog.dismiss();
+            mEnableDialog = null;
+        }
     }
 
     public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            mOkClicked = true;
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 1);
-        } else {
-            // Reset the toggle
-            mEnableAdb.setChecked(false);
+        if (dialog == mAdbDialog) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                mDialogClicked = true;
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.ADB_ENABLED, 1);
+            } else {
+                // Reset the toggle
+                mEnableAdb.setChecked(false);
+            }
+        } else if (dialog == mEnableDialog) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                mDialogClicked = true;
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 1);
+                mLastEnabledState = true;
+                setPrefsEnabledState(mLastEnabledState);
+            } else {
+                // Reset the toggle
+                mEnabledSwitch.setChecked(false);
+            }
         }
     }
 
     public void onDismiss(DialogInterface dialog) {
         // Assuming that onClick gets called first
-        if (!mOkClicked) {
-            mEnableAdb.setChecked(false);
+        if (dialog == mAdbDialog) {
+            if (!mDialogClicked) {
+                mEnableAdb.setChecked(false);
+            }
+            mAdbDialog = null;
+        } else if (dialog == mEnableDialog) {
+            if (!mDialogClicked) {
+                mEnabledSwitch.setChecked(false);
+            }
+            mEnableDialog = null;
         }
     }
 
     @Override
     public void onDestroy() {
-        dismissDialog();
+        dismissDialogs();
         super.onDestroy();
     }
 }
