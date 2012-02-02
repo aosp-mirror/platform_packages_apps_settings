@@ -579,10 +579,10 @@
     <string name="wifi_p2p_menu_remove_group" msgid="4844634506540667517">"Remover grupo"</string>
     <string name="wifi_p2p_menu_advanced" msgid="2578792521809265949">"Avançado"</string>
     <string name="wifi_p2p_available_devices" msgid="5943352520059654483">"Dispositivos disponíveis"</string>
-    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Ponto de acesso Wi-Fi portátil"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Wi-Fi portátil"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Ponto de acesso portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> ativo"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Erro de ponto de acesso Wi-Fi portátil"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurar ponto de acesso Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Config. ponto de acesso Wi-Fi"</string>
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Ponto de acesso Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Ponto de acesso Android"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Tela"</string>
@@ -634,7 +634,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Pesquisar"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gerenciar configurações e histórico de pesquisa"</string>
     <string name="display_settings" msgid="7965901687241669598">"Exibir"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Girar tela autom."</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Girar tela"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Alternar orientação automaticamente ao girar o tablet"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Alternar orientação automaticamente ao girar o telefone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Alternar orientação automaticamente ao girar o tablet"</string>
@@ -842,19 +842,19 @@
     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Você deve desenhar sua sequência de desbloqueio para confirmar que deseja apagar o cartão SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Conf. de chamada"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurar correio voz, encaminhamento, espera etc."</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Vínculo USB"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Tethering USB"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Ponto de acesso portátil"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Vínculo Bluetooth"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Vínculo"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"Vínculo e acesso portátil"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Tethering Bluetooth"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Tethering"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"Tethering e acesso portátil"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Vínculo USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB conectado, marque para vincular"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Vinculado"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"Não é possível vincular quando o armazenamento USB está em uso"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB não conectado"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erro de vínculo de USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Vínculo Bluetooth"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erro de tethering de USB"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Tethering Bluetooth"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Compartilhando a conexão de Internet deste tablet"</string>
     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Compartilhando a conexão à Internet deste telefone"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Compart. a conexão de Internet deste tablet com um disp."</string>
@@ -862,23 +862,23 @@
     <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Compart. a conexão de Internet deste tablet com <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> disp."</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Compart. a conexão de Internet deste telefone com <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> disp."</string>
     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"A conexão de Internet não está compartilhada"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Não está compart. a conexão de Internet deste tel."</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Conexão de Internet não compartilhada"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"Não vinculado"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"Não é possível vincular a mais de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivos."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será vinculado."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Ajuda"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móveis"</string>
     <string name="location_title" msgid="1029961368397484576">"Meu Local"</string>
-    <string name="location_network_based" msgid="5569673665032992664">"Serviço de localiz. do Google"</string>
-    <string name="location_neighborhood_level" msgid="1337612962522836900">"Permita que os aplicativos usem dados de fontes como redes Wi-Fi e móveis para determinar sua localização aproximada"</string>
+    <string name="location_network_based" msgid="5569673665032992664">"Serv. de loc. do Google"</string>
+    <string name="location_neighborhood_level" msgid="1337612962522836900">"Permite que os aplicativos usem dados de fontes como redes Wi-Fi e móveis para determinar sua localização aproximada"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Localização determinada por Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satélites de GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Permitir que o aplicativo use o GPS para localizar sua posição"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Usar GPS associado"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Usar servidor para auxiliar GPS (desmarque para reduzir o uso da rede)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Usar servidor para auxiliar GPS (desmarque para aprimorar o desempenho do GPS)"</string>
-    <string name="use_location_title" msgid="5206937465504979977">"Localização e pesquisa do Google"</string>
-    <string name="use_location_summary" msgid="3978805802386162520">"Deixe que o Google use sua localização para melhorar os resultados de busca e outros serviços"</string>
+    <string name="use_location_title" msgid="5206937465504979977">"Local. e pesq. do Google"</string>
+    <string name="use_location_summary" msgid="3978805802386162520">"Permitir que o Google use sua localização para melhorar os resultados de pesquisa e outros serviços"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Sobre o tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Sobre o telefone"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Ver informações legais, status, versão do software"</string>
@@ -927,6 +927,7 @@
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"É necessário desenhar o padrão para desbloquear a tela"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Tornar o padrão visível"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Vibrar ao tocar"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bloq. c/ botão liga/desliga"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Padrão de desbloqueio"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Alterar padrão"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Como desenhar um padrão de desbloqueio"</string>
@@ -1157,7 +1158,7 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Serviços"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Texto grande"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Botão Liga/desliga encerra a chamada"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Botão de ligar encerra a chamada"</string>
     <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Falar senhas"</string>
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"Explorar pelo toque"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Quando a opção Explorar pelo toque está ativada, você pode ouvir ou ver as descrições do que está sob seu dedo."\n\n" Esse recurso é para usuários com pouca visão."</string>
@@ -1266,7 +1267,7 @@
     <string name="recognizer_settings_title" msgid="432493301215113154">"Pesquisa por voz"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Configurações para \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Configurações da conversão de texto em voz"</string>
-    <string name="tts_settings_title" msgid="1237820681016639683">"Saída de conversão de texto em voz"</string>
+    <string name="tts_settings_title" msgid="1237820681016639683">"Conversão de texto em voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Usar minhas config."</string>
     <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"As configurações padrão abaixo substituem as configurações do aplicativo"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Configurações padrão"</string>
@@ -1341,7 +1342,7 @@
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Nenhuma conta está armazenando o backup dos dados"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restauração automática"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Ao reinstalar um aplicativo, restaura as configurações de backup e dados"</string>
-    <string name="local_backup_password_title" msgid="3860471654439418822">"Senha backup do comput."</string>
+    <string name="local_backup_password_title" msgid="3860471654439418822">"Senha do backup local"</string>
     <string name="local_backup_password_summary_none" msgid="4780151366296088113">"Os backups completos do computador não estão protegidos no momento."</string>
     <string name="local_backup_password_summary_change" msgid="3615162467655442441">"Selecione para alterar ou remover a senha de backups completos do desktop"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
@@ -1444,9 +1445,9 @@
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Config. a verificação HDCP"</string>
     <string name="debug_ui_category" msgid="9023948280291055349">"Interface do usuário"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Modo estrito ativado"</string>
-    <string name="strict_mode_summary" msgid="142834318897332338">"T. Flash q/ aplic. fazem oper. longas conv. princ."</string>
+    <string name="strict_mode_summary" msgid="142834318897332338">"Piscar tela se aplic. demorarem na sequência princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Localização do ponteiro"</string>
-    <string name="pointer_location_summary" msgid="840819275172753713">"Sobrepos. de tela que mostra dados de toque atual"</string>
+    <string name="pointer_location_summary" msgid="840819275172753713">"Exibir dados de toque"</string>
     <string name="show_touches" msgid="1356420386500834339">"Mostrar toques"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostrar feedback visual para toques"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Mostrar atualiz. de tela"</string>
@@ -1455,14 +1456,14 @@
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Sobreposição de tela que mostra o uso da CPU atual"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forçar renderização GPU"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"Usar aceleração de hardware 2D nos aplicativos"</string>
-    <string name="window_animation_scale_title" msgid="6162587588166114700">"Esc. anim. em janel."</string>
-    <string name="transition_animation_scale_title" msgid="387527540523595875">"Escala de anim. de trans."</string>
+    <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de anim. da janela"</string>
+    <string name="transition_animation_scale_title" msgid="387527540523595875">"Escala anim. de transição"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplicativos"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Não manter atividades"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destruir todas as atividades quando o usuário sair"</string>
-    <string name="app_process_limit_title" msgid="4280600650253107163">"Limite proc. seg. plano"</string>
+    <string name="app_process_limit_title" msgid="4280600650253107163">"Limite do proc. 2o plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Mostrar todos os ANRS"</string>
-    <string name="show_all_anrs_summary" msgid="641908614413544127">"Exib. caixa Aplic. não responde p/ aplic. 2º plano"</string>
+    <string name="show_all_anrs_summary" msgid="641908614413544127">"Exibir \"App não responde\" para aplic. em 2o plano"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de dados"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo do uso de dados"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de dados"</string>
@@ -1476,7 +1477,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Primeiro plano"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Plano de fundo"</string>
     <string name="data_usage_disclaimer" product="tablet" msgid="2591250607795265503">"Calcul. pelo tablet. O cálculo da operadora sobre uso de dados pode ser diferente."</string>
-    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Calcul. pelo telefone. O cálculo da operadora sobre uso de dados pode ser difer."</string>
+    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Calculado pelo telefone. O cálculo da operadora pode ser diferente."</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Desativar dados móveis?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Definir limite de dados móveis"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Definir limite de dados 4G"</string>
@@ -1495,7 +1496,7 @@
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver configurações do aplicativo"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir dados de 2º plano"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="6236080762898226645">"Desat. dados de seg. plano na rede móvel. Usar Wi-Fi se disp."</string>
-    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Def. lim. de dados móv. p/ restr. dados de seg. plano no aplic."</string>
+    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Definir um limite de dados para restringir dados em 2o plano"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Restringir dados de segundo plano?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5651588785118290771">"Este recurso pode fazer com que um aplicativo que depende de dados de segundo plano pare de funcionar quando o Wi-Fi não estiver disponível."\n\n"Mais controles adequados de uso de dados podem ser encontrados nas configurações disponíveis no aplicativo."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Restringir dados de segundo plano só é possível quando você define um limite de dados móveis."</string>
@@ -1525,8 +1526,7 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"Chave pré-compartilhada IPSec"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"Certificado de usuário IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"Certificado CA IPSec"</string>
-    <!-- no translation found for vpn_ipsec_server_cert (6599276718456935010) -->
-    <skip />
+    <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"Certificado de servidor IPSec"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"Mostrar opções avançadas"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"Domínios de pesquisa de DNS"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"Servidores de DNS (por exemplo, 8.8.8.8)"</string>
@@ -1536,8 +1536,7 @@
     <string name="vpn_save_login" msgid="6350322456427484881">"Salvar informações sobre a conta"</string>
     <string name="vpn_not_used" msgid="9094191054524660891">"Não utilizado"</string>
     <string name="vpn_no_ca_cert" msgid="2095005387500126113">"(não verificar servidor)"</string>
-    <!-- no translation found for vpn_no_server_cert (2167487440231913330) -->
-    <skip />
+    <string name="vpn_no_server_cert" msgid="2167487440231913330">"(recebido de um servidor)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"Cancelar"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Salvar"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Conectar"</string>

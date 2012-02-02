@@ -83,7 +83,7 @@
     <string name="battery_info_status_charging" msgid="1705179948350365604">"กำลังชาร์จ"</string>
     <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
     <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
-    <string name="battery_info_status_discharging" msgid="6222697503392774475">"กำลังคายประจุ"</string>
+    <string name="battery_info_status_discharging" msgid="6222697503392774475">"ไม่ได้กำลังชาร์จแบต"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"ไม่ได้ชาร์จ"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"เต็ม"</string>
     <string name="battery_info_power_unplugged" msgid="5987246575519551081">"ไม่ได้เสียบปลั๊ก"</string>
@@ -927,6 +927,7 @@
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"ต้องวาดรูปแบบเพื่อปลดล็อกหน้าจอ"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"กำหนดให้เห็นลวดลายได้"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"สั่นเมื่อแตะ"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"ล็อกทันทีที่กดปุ่มเปิด/ปิด"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"ตั้งค่ารูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"เปลี่ยนรูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"วิธีวาดรูปแบบการปลดล็อก"</string>
@@ -1525,8 +1526,7 @@
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"คีย์ IPSec ที่แบ่งปันไว้ล่วงหน้า"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"ใบรับรองผู้ใช้ IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"ใบรับรอง IPSec CA"</string>
-    <!-- no translation found for vpn_ipsec_server_cert (6599276718456935010) -->
-    <skip />
+    <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"ใบรับรองเซิร์ฟเวอร์ IPSec"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"แสดงตัวเลือกขั้นสูง"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"โดเมนการค้นหา DNS"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"เซิร์ฟเวอร์ DNS (เช่น 8.8.8.8)"</string>
@@ -1536,8 +1536,7 @@
     <string name="vpn_save_login" msgid="6350322456427484881">"บันทึกข้อมูลบัญชี"</string>
     <string name="vpn_not_used" msgid="9094191054524660891">"(ไม่ใช้)"</string>
     <string name="vpn_no_ca_cert" msgid="2095005387500126113">"(ไม่ตรวจสอบเซิร์ฟเวอร์)"</string>
-    <!-- no translation found for vpn_no_server_cert (2167487440231913330) -->
-    <skip />
+    <string name="vpn_no_server_cert" msgid="2167487440231913330">"(ได้รับจากเซิร์ฟเวอร์)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"ยกเลิก"</string>
     <string name="vpn_save" msgid="4233484051644764510">"บันทึก"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"เชื่อมต่อ"</string>
