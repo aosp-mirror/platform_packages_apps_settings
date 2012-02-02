@@ -70,6 +70,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
+    private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
             = "immediately_destroy_activities";
@@ -93,6 +94,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mForceHardwareUi;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
+    private ListPreference mAnimatorDurationScale;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
@@ -129,6 +131,8 @@ public class DevelopmentSettings extends PreferenceFragment
         mWindowAnimationScale.setOnPreferenceChangeListener(this);
         mTransitionAnimationScale = (ListPreference) findPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale.setOnPreferenceChangeListener(this);
+        mAnimatorDurationScale = (ListPreference) findPreference(ANIMATOR_DURATION_SCALE_KEY);
+        mAnimatorDurationScale.setOnPreferenceChangeListener(this);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -359,6 +363,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void updateAnimationScaleOptions() {
         updateAnimationScaleValue(0, mWindowAnimationScale);
         updateAnimationScaleValue(1, mTransitionAnimationScale);
+        updateAnimationScaleValue(2, mAnimatorDurationScale);
     }
 
     private void writeAnimationScaleOption(int which, ListPreference pref, Object newValue) {
@@ -472,6 +477,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mTransitionAnimationScale) {
             writeAnimationScaleOption(1, mTransitionAnimationScale, newValue);
+            return true;
+        } else if (preference == mAnimatorDurationScale) {
+            writeAnimationScaleOption(2, mAnimatorDurationScale, newValue);
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
