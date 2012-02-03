@@ -145,8 +145,7 @@ public class NetworkPolicyEditor {
         time.setToNow();
         final int cycleDay = time.monthDay;
 
-        return new NetworkPolicy(
-                template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, SNOOZE_NEVER, true);
+        return new NetworkPolicy(template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, true);
     }
 
     public int getPolicyCycleDay(NetworkTemplate template) {
@@ -156,7 +155,7 @@ public class NetworkPolicyEditor {
     public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.cycleDay = cycleDay;
-        policy.lastSnooze = SNOOZE_NEVER;
+        policy.clearSnooze();
         writeAsync();
     }
 
@@ -167,7 +166,7 @@ public class NetworkPolicyEditor {
     public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.warningBytes = warningBytes;
-        policy.lastSnooze = SNOOZE_NEVER;
+        policy.clearSnooze();
         writeAsync();
     }
 
@@ -178,7 +177,7 @@ public class NetworkPolicyEditor {
     public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.limitBytes = limitBytes;
-        policy.lastSnooze = SNOOZE_NEVER;
+        policy.clearSnooze();
         writeAsync();
     }
 
@@ -249,21 +248,18 @@ public class NetworkPolicyEditor {
                     : policy4g;
             mPolicies.remove(policy3g);
             mPolicies.remove(policy4g);
-            mPolicies.add(
-                    new NetworkPolicy(templateAll, restrictive.cycleDay, restrictive.warningBytes,
-                            restrictive.limitBytes, SNOOZE_NEVER, restrictive.metered));
+            mPolicies.add(new NetworkPolicy(templateAll, restrictive.cycleDay,
+                    restrictive.warningBytes, restrictive.limitBytes, restrictive.metered));
             return true;
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
             final NetworkPolicy policyAll = getPolicy(templateAll);
             mPolicies.remove(policyAll);
-            mPolicies.add(
-                    new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,
-                            policyAll.limitBytes, SNOOZE_NEVER, policyAll.metered));
-            mPolicies.add(
-                    new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.warningBytes,
-                            policyAll.limitBytes, SNOOZE_NEVER, policyAll.metered));
+            mPolicies.add(new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,
+                    policyAll.limitBytes, policyAll.metered));
+            mPolicies.add(new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.warningBytes,
+                    policyAll.limitBytes, policyAll.metered));
             return true;
         } else {
             return false;
