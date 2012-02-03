@@ -16,6 +16,9 @@
 
 package com.android.settings.widget;
 
+import static android.net.TrafficStats.GB_IN_BYTES;
+import static android.net.TrafficStats.MB_IN_BYTES;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
@@ -39,10 +42,6 @@ import com.android.settings.widget.ChartSweepView.OnSweepListener;
  * with {@link ChartSweepView} for inspection ranges and warning/limits.
  */
 public class ChartDataUsageView extends ChartView {
-
-    private static final long KB_IN_BYTES = 1024;
-    private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
-    private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
     private static final int MSG_UPDATE_AXIS = 100;
     private static final long DELAY_MILLIS = 250;
