@@ -283,7 +283,7 @@
     <string name="date_time_set_time" msgid="5716856602742530696">"Setha isikhathi"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Khetha umkhawulo wesikhathi"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Setha idethi"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Vala isakhiwo sosuku"</string>
+    <string name="date_time_date_format" msgid="6951498879879281102">"Khetha ifomethi yedethi"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Hlunga ngama-alfabethi"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Hlunga ngesikhathi somkhawulo"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Idethi"</string>
@@ -306,7 +306,7 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Dinga i-PIN yenombolo noma iphasiwedi ukubonisa umbhalo wemfihlo kwithebhulethi ngazo zonke izikhathi lapho uyivula"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Dinga i-PIN yenombolo noma iphasiwedi ukungabhali ngemfihlo ifoni yakho njalo lapho uyivula"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Betheliwe"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Ungabhala ngekhodi ama-akhawunti wakho, izilungiselelo, ulande ama-apps nadatha yawo, imidiya, namanye amafayela. Uma usubhale ngekhodi ikhompyutha yakho, udinga ukuthayipha i-PIN yenombolo noma iphasiwedi ukususa ukubhala ngekhodi ngaso isikathi ukhanyisa: awukwazi ukususa ukubhala ngakhodi ikhompyutha yakho ngaphandle kokwenza kabusha idatha yakho yenkampani, sula yonke idatha yakho."\n\n"Ukubhala ngekhodi kuthatha ihora noma ngaphezulu. Kufanele uqale ngebhtri elishajiwe futhi ugcine ikhompyutha yakho iplakiwe kuze kuphele ukubhala ngakhodi. Uma uphazamisa inqubo yokubhala ngekhodi, uzolahlekelwa enye noma yonke idatha yakho."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Ungabethela ama-akhawunti wakho, izilungiselelo, ulande izinhlelo zokusebenza nedatha yazo, imidiya, namanye amafayela. Uma usubethele ikhompyutha yakho, udinga ukuthayipha i-PIN yenombolo noma iphasiwedi ukususa ukubhala ngekhodi ngaso isikathi ukhanyisa: awukwazi ukususa ukubhala ngakhodi ikhompyutha yakho ngaphandle kokwenza kabusha idatha yakho yenkampani, sula yonke idatha yakho."\n\n"Ukubhala ngekhodi kuthatha ihora noma ngaphezulu. Kufanele uqale ngebhtri elishajiwe futhi ugcine ikhompyutha yakho iplakiwe kuze kuphele ukubethela. Uma uphazamisa inqubo yokubethela, uzolahlekelwa enye noma yonke idatha yakho."</string>
     <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Ungabhala ngakhodi ama-akhawunti wakho, izilungiselelo, ulande ama-apps nedatha yawo, imidiya namanye amafayela. Uma usubhale ngekhodi ucingo lakho, udinga ukuthayipha i-PIN yezinombolo noma iphasiwedi ukususa ukubhala ngakhodi ngaso sonke isikhathi uma uyikhanyisa: awukwazi ukususa ukubhala ngekhodi ucingo lakho ngaphandle kokwenza ukusetha kabusha idatha yenkampani, ususe yonke idatha yakho."\n\n"Ukubhala ngekhodi kuthatha ihora noma ngaphezulu. Kufanele uqale ngebhitri elishajiwe futhi ugcine ucingo lakho luplakiwe kuze ukubhala ngekhodi kuqedele. Uma uphazamisa inqubo yokubhala ngekhodi, uzolahlekelwa enye noma yonke idatha yakho."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Bethela ithebhulethi"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Bethela ifoni"</string>
@@ -720,7 +720,7 @@
     <string name="internal_memory" msgid="9129595691484260784">"Isitoreji sangaphakathi"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Isitoreji se-USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Ikhadi le-SD"</string>
-    <string name="memory_available" msgid="5052397223077021181">"Yatholakala"</string>
+    <string name="memory_available" msgid="5052397223077021181">"Tholakalayo"</string>
     <string name="memory_size" msgid="6629067715017232195">"Inani lesikhala"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Iyabala..."</string>
     <string name="memory_apps_usage" msgid="7064506641121346242">"Izinsiza"</string>
@@ -1149,6 +1149,10 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Vumela izindawo mbumbulu"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Vumela ukulungisa iphutha le-USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Ukulungisa iphutha le-USB kuhloselwe izinjongo zokuthuthukisa kuphela. Ingasebenziselwa ukukopisha idatha phakathi kwekhompyutha yakho nedivaysi yakho, faka izinhlelo zokusebenza kwidivaysi yakho ngaphandle kwesaziso, bese ufunda idatha yefayela lokungena."</string>
+    <!-- no translation found for dev_settings_warning_title (7244607768088540165) -->
+    <skip />
+    <!-- no translation found for dev_settings_warning_message (2298337781139097964) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Khetha igajethi"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Khetha iwijethi"</string>
     <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g>usuku <xliff:g id="HOURS">%2$d</xliff:g>ihora <xliff:g id="MINUTES">%3$d</xliff:g>iminithi <xliff:g id="SECONDS">%4$d</xliff:g>isekhondi"</string>
@@ -1487,7 +1491,7 @@
     <string name="data_usage_label_background" msgid="3225844085975764519">"Ingemuva"</string>
     <string name="data_usage_disclaimer" product="tablet" msgid="2591250607795265503">"Ikalwe ikhompyutha yakho yepeni. I-akhawuntingi Yokusetshenziswa kwe-data kwesiphathi sakho ingehluka."</string>
     <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"Ikalwe ucingo lwakho. I-akhawuntingi Yokusetshenziswa kwe-data kwesiphathi sakho ingehluka."</string>
-    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Yenza imininingwane kamakhalekhukhwini ingasebenzi?"</string>
+    <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Khubaza idatha yeselula?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Setha umkhawulo wedatha yeselula"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Setha umkhawulo wedatha ye-4G"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Setha umkhawulo wedatha ube ye-2G-3G"</string>
