@@ -36,6 +36,8 @@ import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
 import static android.net.NetworkTemplate.buildTemplateMobile4g;
 import static android.net.NetworkTemplate.buildTemplateMobileAll;
 import static android.net.NetworkTemplate.buildTemplateWifi;
+import static android.net.TrafficStats.GB_IN_BYTES;
+import static android.net.TrafficStats.MB_IN_BYTES;
 import static android.net.TrafficStats.UID_REMOVED;
 import static android.net.TrafficStats.UID_TETHERING;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
@@ -170,10 +172,6 @@ public class DataUsageSummary extends Fragment {
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
-
-    private static final long KB_IN_BYTES = 1024;
-    private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
-    private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
     private INetworkManagementService mNetworkService;
     private INetworkStatsService mStatsService;
