@@ -22,6 +22,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.TrafficStats;
 import android.text.TextUtils;
@@ -39,21 +40,42 @@ public class UidDetailProvider {
         mUidDetailCache = new SparseArray<UidDetail>();
     }
 
-    public synchronized void clearCache() {
-        mUidDetailCache.clear();
+    public void clearCache() {
+        synchronized (mUidDetailCache) {
+            mUidDetailCache.clear();
+        }
     }
 
     /**
      * Resolve best descriptive label for the given UID.
      */
-    public synchronized UidDetail getUidDetail(int uid, boolean blocking) {
-        final UidDetail cached = mUidDetailCache.get(uid);
-        if (cached != null) {
-            return cached;
+    public UidDetail getUidDetail(int uid, boolean blocking) {
+        UidDetail detail;
+
+        synchronized (mUidDetailCache) {
+            detail = mUidDetailCache.get(uid);
+        }
+
+        if (detail != null) {
+            return detail;
         } else if (!blocking) {
             return null;
         }
 
+        detail = buildUidDetail(uid);
+
+        synchronized (mUidDetailCache) {
+            mUidDetailCache.put(uid, detail);
+        }
+
+        return detail;
+    }
+
+    /**
+     * Build {@link UidDetail} object, blocking until all {@link Drawable}
+     * lookup is finished.
+     */
+    private UidDetail buildUidDetail(int uid) {
         final Resources res = mContext.getResources();
         final PackageManager pm = mContext.getPackageManager();
 
@@ -66,19 +88,16 @@ public class UidDetailProvider {
             case android.os.Process.SYSTEM_UID:
                 detail.label = res.getString(R.string.process_kernel_label);
                 detail.icon = pm.getDefaultActivityIcon();
-                mUidDetailCache.put(uid, detail);
                 return detail;
             case TrafficStats.UID_REMOVED:
                 detail.label = res.getString(R.string.data_usage_uninstalled_apps);
                 detail.icon = pm.getDefaultActivityIcon();
-                mUidDetailCache.put(uid, detail);
                 return detail;
             case TrafficStats.UID_TETHERING:
                 final ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(
                         Context.CONNECTIVITY_SERVICE);
                 detail.label = res.getString(Utils.getTetheringLabel(cm));
                 detail.icon = pm.getDefaultActivityIcon();
-                mUidDetailCache.put(uid, detail);
                 return detail;
         }
 
@@ -113,7 +132,6 @@ public class UidDetailProvider {
             detail.label = Integer.toString(uid);
         }
 
-        mUidDetailCache.put(uid, detail);
         return detail;
     }
 }
