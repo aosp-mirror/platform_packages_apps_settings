@@ -29,6 +29,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +37,9 @@ import android.view.View;
 import com.android.internal.util.Objects;
 import com.android.settings.R;
 import com.android.settings.widget.ChartSweepView.OnSweepListener;
+
+import java.util.Arrays;
+import java.util.Calendar;
 
 /**
  * Specific {@link ChartView} that displays {@link ChartNetworkSeriesView} along
@@ -449,7 +453,7 @@ public class ChartDataUsageView extends ChartView {
     }
 
     public static class TimeAxis implements ChartAxis {
-        private static final long TICK_INTERVAL = DateUtils.DAY_IN_MILLIS * 7;
+        private static final int FIRST_DAY_OF_WEEK = Calendar.getInstance().getFirstDayOfWeek() - 1;
 
         private long mMin;
         private long mMax;
@@ -505,13 +509,27 @@ public class ChartDataUsageView extends ChartView {
 
         /** {@inheritDoc} */
         public float[] getTickPoints() {
-            // tick mark for every week
-            final int tickCount = (int) ((mMax - mMin) / TICK_INTERVAL);
-            final float[] tickPoints = new float[tickCount];
-            for (int i = 0; i < tickCount; i++) {
-                tickPoints[i] = convertToPoint(mMax - (TICK_INTERVAL * (i + 1)));
+            final float[] ticks = new float[32];
+            int i = 0;
+
+            // tick mark for first day of each week
+            final Time time = new Time();
+            time.set(mMax);
+            time.monthDay -= time.weekDay - FIRST_DAY_OF_WEEK;
+            time.hour = time.minute = time.second = 0;
+
+            time.normalize(true);
+            long timeMillis = time.toMillis(true);
+            while (timeMillis > mMin) {
+                if (timeMillis <= mMax) {
+                    ticks[i++] = convertToPoint(timeMillis);
+                }
+                time.monthDay -= 7;
+                time.normalize(true);
+                timeMillis = time.toMillis(true);
             }
-            return tickPoints;
+
+            return Arrays.copyOf(ticks, i);
         }
 
         /** {@inheritDoc} */
@@ -525,6 +543,8 @@ public class ChartDataUsageView extends ChartView {
         private long mMin;
         private long mMax;
         private float mSize;
+
+        private static final boolean LOG_SCALE = false;
 
         @Override
         public int hashCode() {
@@ -554,19 +574,27 @@ public class ChartDataUsageView extends ChartView {
 
         /** {@inheritDoc} */
         public float convertToPoint(long value) {
-            // derived polynomial fit to make lower values more visible
-            final double normalized = ((double) value - mMin) / (mMax - mMin);
-            final double fraction = Math.pow(
-                    10, 0.36884343106175121463 * Math.log10(normalized) + -0.04328199452018252624);
-            return (float) (fraction * mSize);
+            if (LOG_SCALE) {
+                // derived polynomial fit to make lower values more visible
+                final double normalized = ((double) value - mMin) / (mMax - mMin);
+                final double fraction = Math.pow(10,
+                        0.36884343106175121463 * Math.log10(normalized) + -0.04328199452018252624);
+                return (float) (fraction * mSize);
+            } else {
+                return (mSize * (value - mMin)) / (mMax - mMin);
+            }
         }
 
         /** {@inheritDoc} */
         public long convertToValue(float point) {
-            final double normalized = point / mSize;
-            final double fraction = 1.3102228476089056629
-                    * Math.pow(normalized, 2.7111774693164631640);
-            return (long) (mMin + (fraction * (mMax - mMin)));
+            if (LOG_SCALE) {
+                final double normalized = point / mSize;
+                final double fraction = 1.3102228476089056629
+                        * Math.pow(normalized, 2.7111774693164631640);
+                return (long) (mMin + (fraction * (mMax - mMin)));
+            } else {
+                return (long) (mMin + ((point * (mMax - mMin)) / mSize));
+            }
         }
 
         private static final Object sSpanSize = new Object();
