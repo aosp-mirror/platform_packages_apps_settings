@@ -151,7 +151,9 @@ public class DataUsageSummary extends Fragment {
     // TODO: remove this testing code
     private static final boolean TEST_ANIM = false;
     private static final boolean TEST_RADIOS = false;
+
     private static final String TEST_RADIOS_PROP = "test.radios";
+    private static final String TEST_SUBSCRIBER_PROP = "test.subscriberid";
 
     private static final String TAB_3G = "3g";
     private static final String TAB_4G = "4g";
@@ -1217,7 +1219,8 @@ public class DataUsageSummary extends Fragment {
     private static String getActiveSubscriberId(Context context) {
         final TelephonyManager telephony = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
-        return telephony.getSubscriberId();
+        final String actualSubscriberId = telephony.getSubscriberId();
+        return SystemProperties.get(TEST_SUBSCRIBER_PROP, actualSubscriberId);
     }
 
     private DataUsageChartListener mChartListener = new DataUsageChartListener() {
