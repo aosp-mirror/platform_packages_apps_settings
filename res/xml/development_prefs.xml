@@ -81,6 +81,11 @@
             android:summary="@string/show_screen_updates_summary"/>
 
         <CheckBoxPreference
+            android:key="disable_overlays"
+            android:title="@string/disable_overlays"
+            android:summary="@string/disable_overlays_summary"/>
+
+        <CheckBoxPreference
             android:key="show_cpu_usage"
             android:title="@string/show_cpu_usage"
             android:summary="@string/show_cpu_usage_summary"/>
