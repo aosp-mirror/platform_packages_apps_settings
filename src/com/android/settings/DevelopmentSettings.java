@@ -42,7 +42,6 @@ import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -74,6 +73,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String POINTER_LOCATION_KEY = "pointer_location";
     private static final String SHOW_TOUCHES_KEY = "show_touches";
     private static final String SHOW_SCREEN_UPDATES_KEY = "show_screen_updates";
+    private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
@@ -101,6 +101,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mPointerLocation;
     private CheckBoxPreference mShowTouches;
     private CheckBoxPreference mShowScreenUpdates;
+    private CheckBoxPreference mDisableOverlays;
     private CheckBoxPreference mShowCpuUsage;
     private CheckBoxPreference mForceHardwareUi;
     private ListPreference mWindowAnimationScale;
@@ -156,6 +157,9 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowScreenUpdates = (CheckBoxPreference) findPreference(SHOW_SCREEN_UPDATES_KEY);
         mAllPrefs.add(mShowScreenUpdates);
         mResetCbPrefs.add(mShowScreenUpdates);
+        mDisableOverlays = (CheckBoxPreference) findPreference(DISABLE_OVERLAYS_KEY);
+        mAllPrefs.add(mDisableOverlays);
+        mResetCbPrefs.add(mDisableOverlays);
         mShowCpuUsage = (CheckBoxPreference) findPreference(SHOW_CPU_USAGE_KEY);
         mAllPrefs.add(mShowCpuUsage);
         mResetCbPrefs.add(mShowCpuUsage);
@@ -391,6 +395,8 @@ public class DevelopmentSettings extends PreferenceFragment
                 mShowScreenUpdates.setChecked(showUpdates != 0);
                 @SuppressWarnings("unused")
                 int showBackground = reply.readInt();
+                int disableOverlays = reply.readInt();
+                mDisableOverlays.setChecked(disableOverlays != 0);
                 reply.recycle();
                 data.recycle();
             }
@@ -398,14 +404,32 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
-    private void writeFlingerOptions() {
+    private void writeShowUpdatesOption() {
         try {
             IBinder flinger = ServiceManager.getService("SurfaceFlinger");
             if (flinger != null) {
                 Parcel data = Parcel.obtain();
                 data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                data.writeInt(mShowScreenUpdates.isChecked() ? 1 : 0);
+                final int showUpdates = mShowScreenUpdates.isChecked() ? 1 : 0; 
+                data.writeInt(showUpdates);
                 flinger.transact(1002, data, null, 0);
+                data.recycle();
+
+                updateFlingerOptions();
+            }
+        } catch (RemoteException ex) {
+        }
+    }
+
+    private void writeDisableOverlaysOption() {
+        try {
+            IBinder flinger = ServiceManager.getService("SurfaceFlinger");
+            if (flinger != null) {
+                Parcel data = Parcel.obtain();
+                data.writeInterfaceToken("android.ui.ISurfaceComposer");
+                final int disableOverlays = mDisableOverlays.isChecked() ? 1 : 0; 
+                data.writeInt(disableOverlays);
+                flinger.transact(1008, data, null, 0);
                 data.recycle();
 
                 updateFlingerOptions();
@@ -590,7 +614,9 @@ public class DevelopmentSettings extends PreferenceFragment
         } else if (preference == mShowTouches) {
             writeShowTouchesOptions();
         } else if (preference == mShowScreenUpdates) {
-            writeFlingerOptions();
+            writeShowUpdatesOption();
+        } else if (preference == mDisableOverlays) {
+            writeDisableOverlaysOption();
         } else if (preference == mShowCpuUsage) {
             writeCpuUsageOptions();
         } else if (preference == mImmediatelyDestroyActivities) {
