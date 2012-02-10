@@ -62,6 +62,12 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
         }
 
         createDialog();
+
+        if (getResources().getBoolean(R.bool.auto_confirm_bluetooth_activation_dialog) == true) {
+            // dismiss dialog immediately if settings say so
+            onClick(null, BUTTON_POSITIVE);
+            dismiss();
+        }
     }
 
     void createDialog() {
