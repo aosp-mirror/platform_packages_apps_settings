@@ -148,7 +148,7 @@ public class ManageApplications extends Fragment implements
     private ApplicationsAdapter mApplicationsAdapter;
     
     // Size resource used for packages whose size computation failed for some reason
-    private CharSequence mInvalidSizeStr;
+    CharSequence mInvalidSizeStr;
     private CharSequence mComputingSizeStr;
     
     // layout inflater object used to inflate views
@@ -205,36 +205,6 @@ public class ManageApplications extends Fragment implements
         }
     };
 
-    // View Holder used when displaying views
-    static class AppViewHolder {
-        ApplicationsState.AppEntry entry;
-        TextView appName;
-        ImageView appIcon;
-        TextView appSize;
-        TextView disabled;
-        CheckBox checkBox;
-        
-        void updateSizeText(ManageApplications ma, int whichSize) {
-            if (DEBUG) Log.i(TAG, "updateSizeText of " + entry.label + " " + entry
-                    + ": " + entry.sizeStr);
-            if (entry.sizeStr != null) {
-                switch (whichSize) {
-                    case SIZE_INTERNAL:
-                        appSize.setText(entry.internalSizeStr);
-                        break;
-                    case SIZE_EXTERNAL:
-                        appSize.setText(entry.externalSizeStr);
-                        break;
-                    default:
-                        appSize.setText(entry.sizeStr);
-                        break;
-                }
-            } else if (entry.size == ApplicationsState.SIZE_INVALID) {
-                appSize.setText(ma.mInvalidSizeStr);
-            }
-        }
-    }
-    
     /*
      * Custom adapter implementation for the ListView
      * This adapter maintains a map for each displayed application and its properties
@@ -477,28 +447,8 @@ public class ManageApplications extends Fragment implements
         public View getView(int position, View convertView, ViewGroup parent) {
             // A ViewHolder keeps references to children views to avoid unnecessary calls
             // to findViewById() on each row.
-            AppViewHolder holder;
-
-            // When convertView is not null, we can reuse it directly, there is no need
-            // to reinflate it. We only inflate a new View when the convertView supplied
-            // by ListView is null.
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.manage_applications_item, null);
-
-                // Creates a ViewHolder and store references to the two children views
-                // we want to bind data to.
-                holder = new AppViewHolder();
-                holder.appName = (TextView) convertView.findViewById(R.id.app_name);
-                holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
-                holder.appSize = (TextView) convertView.findViewById(R.id.app_size);
-                holder.disabled = (TextView) convertView.findViewById(R.id.app_disabled);
-                holder.checkBox = (CheckBox) convertView.findViewById(R.id.app_on_sdcard);
-                convertView.setTag(holder);
-            } else {
-                // Get the ViewHolder back to get fast access to the TextView
-                // and the ImageView.
-                holder = (AppViewHolder) convertView.getTag();
-            }
+            AppViewHolder holder = AppViewHolder.createOrRecycle(mInflater, convertView);
+            convertView = holder.rootView;
 
             // Bind the data efficiently with the holder
             ApplicationsState.AppEntry entry = mEntries.get(position);

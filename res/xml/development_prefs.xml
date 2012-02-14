@@ -16,11 +16,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/development_settings_title">
-        
-    <CheckBoxPreference 
-        android:key="enable_adb" 
-        android:title="@string/enable_adb" 
-        android:summary="@string/enable_adb_summary"/>
 
     <Preference
         android:key="verifier_device_identifier"
@@ -28,23 +23,6 @@
         android:title="@string/verifier_device_identifier"
         android:summary="@string/verifier_device_identifier_not_available"
         android:persistent="false" />
-
-    <CheckBoxPreference 
-        android:key="keep_screen_on" 
-        android:title="@string/keep_screen_on" 
-        android:summary="@string/keep_screen_on_summary"/>
-
-    <CheckBoxPreference 
-        android:key="allow_mock_location" 
-        android:title="@string/allow_mock_location" 
-        android:summary="@string/allow_mock_location_summary"/>
-
-    <ListPreference
-        android:key="hdcp_checking"
-        android:title="@string/hdcp_checking_title"
-        android:dialogTitle="@string/hdcp_checking_dialog_title"
-        android:entries="@array/hdcp_checking_titles"
-        android:entryValues="@array/hdcp_checking_values" />
 
     <PreferenceScreen
             android:key="local_backup_password"
@@ -56,6 +34,41 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
     </PreferenceScreen>
+
+    <CheckBoxPreference 
+        android:key="keep_screen_on" 
+        android:title="@string/keep_screen_on" 
+        android:summary="@string/keep_screen_on_summary"/>
+
+    <ListPreference
+        android:key="hdcp_checking"
+        android:title="@string/hdcp_checking_title"
+        android:dialogTitle="@string/hdcp_checking_dialog_title"
+        android:entries="@array/hdcp_checking_titles"
+        android:entryValues="@array/hdcp_checking_values" />
+
+    <PreferenceCategory android:key="debug_debugging_category"
+            android:title="@string/debug_debugging_category">
+
+        <CheckBoxPreference
+            android:key="enable_adb"
+            android:title="@string/enable_adb"
+            android:summary="@string/enable_adb_summary"/>
+
+        <CheckBoxPreference
+            android:key="allow_mock_location"
+            android:title="@string/allow_mock_location"
+            android:summary="@string/allow_mock_location_summary"/>
+
+        <PreferenceScreen android:key="debug_app"
+                android:title="@string/debug_app" />
+
+        <CheckBoxPreference
+            android:key="wait_for_debugger"
+            android:title="@string/wait_for_debugger"
+            android:summary="@string/wait_for_debugger_summary"/>
+
+    </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_ui_category"
             android:title="@string/debug_ui_category">

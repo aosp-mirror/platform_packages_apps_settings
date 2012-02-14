@@ -3480,6 +3480,27 @@
     <!-- HDCP checking dialog title, used for debug purposes only. [CHAR LIMIT=25] -->
     <string name="hdcp_checking_dialog_title">Set HDCP checking behavior</string>
 
+    <!-- Preference category for app debugging development settings. [CHAR LIMIT=50] -->
+    <string name="debug_debugging_category">Debugging</string>
+
+    <!-- UI debug setting: select current app to debug [CHAR LIMIT=50] -->
+    <string name="debug_app">Select debug app</string>
+    <!-- UI debug setting: no debug app has been set [CHAR LIMIT=50] -->
+    <string name="debug_app_not_set">No debug application set</string>
+    <!-- UI debug setting: debug app has been set [CHAR LIMIT=50] -->
+    <string name="debug_app_set">Debugging application: <xliff:g id="app_name">%1$s</xliff:g></string>
+
+    <!-- UI debug setting: title for app picker dialog [CHAR LIMIT=50] -->
+    <string name="select_application">Select application</string>
+    <!-- UI debug setting: label for app picker to select no applicatiojn [CHAR LIMIT=50] -->
+    <string name="no_application">Nothing</string>
+
+    <!-- UI debug setting: wait for debugger to attach to debugging process? [CHAR LIMIT=50] -->
+    <string name="wait_for_debugger">Wait for debugger</string>
+    <!-- UI debug setting: wait for debugger to attach to debugging process summary [CHAR LIMIT=50] -->
+    <string name="wait_for_debugger_summary">Debugged application waits for debugger to
+            attach before executing</string>
+
     <!-- Preference category for user interface debugging development settings. [CHAR LIMIT=25] -->
     <string name="debug_ui_category">User interface</string>
 

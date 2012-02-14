@@ -1019,6 +1019,9 @@
                 android:resource="@id/development_settings" />
         </activity-alias>
 
+        <activity android:name=".AppPicker" android:label="@string/select_application"
+                android:theme="@android:style/Theme.Holo.Dialog" />
+
         <activity android:name="Settings$UsbSettingsActivity"
                 android:label="@string/storage_title_usb"
                 android:clearTaskOnLaunch="true">

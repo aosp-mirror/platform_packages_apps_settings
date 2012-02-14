@@ -28,6 +28,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.VerifierDeviceIdentity;
 import android.os.BatteryManager;
@@ -69,6 +70,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
 
+    private static final String DEBUG_APP_KEY = "debug_app";
+    private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
     private static final String SHOW_TOUCHES_KEY = "show_touches";
@@ -86,6 +89,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final int RESULT_DEBUG_APP = 1000;
+
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
 
@@ -96,6 +101,10 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
+
+    private String mDebugApp;
+    private Preference mDebugAppPref;
+    private CheckBoxPreference mWaitForDebugger;
 
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
@@ -144,10 +153,15 @@ public class DevelopmentSettings extends PreferenceFragment
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
+        mDebugAppPref = findPreference(DEBUG_APP_KEY);
+        mAllPrefs.add(mDebugAppPref);
+        mWaitForDebugger = (CheckBoxPreference) findPreference(WAIT_FOR_DEBUGGER_KEY);
+        mAllPrefs.add(mWaitForDebugger);
+        mResetCbPrefs.add(mWaitForDebugger);
+
         mStrictMode = (CheckBoxPreference) findPreference(STRICT_MODE_KEY);
         mAllPrefs.add(mStrictMode);
         mResetCbPrefs.add(mStrictMode);
-        mResetCbPrefs.add(mAllowMockLocation);
         mPointerLocation = (CheckBoxPreference) findPreference(POINTER_LOCATION_KEY);
         mAllPrefs.add(mPointerLocation);
         mResetCbPrefs.add(mPointerLocation);
@@ -251,6 +265,7 @@ public class DevelopmentSettings extends PreferenceFragment
         for (int i=0; i<mAllPrefs.size(); i++) {
             mAllPrefs.get(i).setEnabled(enabled);
         }
+        updateAllOptions();
     }
 
     @Override
@@ -262,7 +277,6 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
         mEnabledSwitch.setChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
-        updateAllOptions();
     }
 
     private void updateAllOptions() {
@@ -275,6 +289,7 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
         updatePasswordSummary();
+        updateDebuggerOptions();
         updateStrictModeVisualOptions();
         updatePointerLocationOptions();
         updateShowTouchesOptions();
@@ -295,6 +310,7 @@ public class DevelopmentSettings extends PreferenceFragment
                 onPreferenceTreeClick(null, cb);
             }
         }
+        resetDebuggerOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -330,6 +346,45 @@ public class DevelopmentSettings extends PreferenceFragment
             }
         } catch (RemoteException e) {
             // Not much we can do here
+        }
+    }
+
+    private void writeDebuggerOptions() {
+        try {
+            ActivityManagerNative.getDefault().setDebugApp(
+                mDebugApp, mWaitForDebugger.isChecked(), true);
+        } catch (RemoteException ex) {
+        }
+    }
+
+    private void resetDebuggerOptions() {
+        try {
+            ActivityManagerNative.getDefault().setDebugApp(
+                    null, false, true);
+        } catch (RemoteException ex) {
+        }
+    }
+
+    private void updateDebuggerOptions() {
+        mDebugApp = Settings.System.getString(
+                getActivity().getContentResolver(), Settings.System.DEBUG_APP);
+        mWaitForDebugger.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(), Settings.System.WAIT_FOR_DEBUGGER, 0) != 0);
+        if (mDebugApp != null && mDebugApp.length() > 0) {
+            String label;
+            try {
+                ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(mDebugApp,
+                        PackageManager.GET_DISABLED_COMPONENTS);
+                CharSequence lab = getActivity().getPackageManager().getApplicationLabel(ai);
+                label = lab != null ? lab.toString() : mDebugApp;
+            } catch (PackageManager.NameNotFoundException e) {
+                label = mDebugApp;
+            }
+            mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_set, label));
+            mWaitForDebugger.setEnabled(true);
+        } else {
+            mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_not_set));
+            mWaitForDebugger.setEnabled(false);
         }
     }
 
@@ -576,6 +631,19 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RESULT_DEBUG_APP) {
+            if (resultCode == Activity.RESULT_OK) {
+                mDebugApp = data.getAction();
+                writeDebuggerOptions();
+                updateDebuggerOptions();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
         if (Utils.isMonkeyRunning()) {
@@ -607,6 +675,10 @@ public class DevelopmentSettings extends PreferenceFragment
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
+        } else if (preference == mDebugAppPref) {
+            startActivityForResult(new Intent(getActivity(), AppPicker.class), RESULT_DEBUG_APP);
+        } else if (preference == mWaitForDebugger) {
+            writeDebuggerOptions();
         } else if (preference == mStrictMode) {
             writeStrictModeVisualOptions();
         } else if (preference == mPointerLocation) {
