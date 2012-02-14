@@ -77,10 +77,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             (CheckBoxPreference) findPreference(KEY_ENABLE_WIFI_WATCHDOG);
         if (watchdogEnabled != null) {
             watchdogEnabled.setChecked(Secure.getInt(getContentResolver(),
-                        Secure.WIFI_WATCHDOG_ON, 1) == 1);
-
-            //TODO: Bring this back after changing watchdog behavior
-            getPreferenceScreen().removePreference(watchdogEnabled);
+                        Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
         }
 
         ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
@@ -145,7 +142,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else if (KEY_ENABLE_WIFI_WATCHDOG.equals(key)) {
             Secure.putInt(getContentResolver(),
-                    Secure.WIFI_WATCHDOG_ON,
+                    Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);
