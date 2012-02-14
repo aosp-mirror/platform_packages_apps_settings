@@ -274,8 +274,9 @@ public class WifiConfigController implements TextWatcher,
     void enableSubmitIfAppropriate() {
         Button submit = mConfigUi.getSubmitButton();
         if (submit == null) return;
-        boolean enabled = false;
+        if (mPasswordView == null) return;
 
+        boolean enabled = false;
         boolean passwordInvalid = false;
 
         /* Check password invalidity for manual network set up alone */
