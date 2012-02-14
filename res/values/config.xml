@@ -22,4 +22,11 @@
     <string name="additional_system_update" translatable="false"></string>
     <string name="additional_system_update_menu" translatable="false"></string>
 
+    <!-- TODO: This is purely enforced by the interface, and does not affect what
+         strings may be inserted into the actual content provider.
+         With the addition of shortcuts, it seems more likely that users will
+         find this limiting; it would be good to have the interface work with
+         very long strings too. -->
+    <integer name="maximum_user_dictionary_word_length" translatable="false">48</integer>
+
 </resources>
