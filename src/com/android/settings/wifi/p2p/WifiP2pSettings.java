@@ -74,7 +74,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private OnClickListener mDisconnectListener;
     private WifiP2pPeer mSelectedWifiPeer;
 
-    private WifiP2pEnabler mWifiP2pEnabler;
     private boolean mWifiP2pEnabled;
     private boolean mWifiP2pSearching;
     private int mConnectedDevices;
@@ -162,25 +161,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             }
         };
 
-        Switch actionBarSwitch = new Switch(activity);
-
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPadding(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-            }
-        }
-
-        mWifiP2pEnabler = new WifiP2pEnabler(activity, actionBarSwitch);
-
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
 
@@ -194,7 +174,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mWifiP2pEnabler.resume();
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         startSearch();
     }
@@ -202,7 +181,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
-        mWifiP2pEnabler.pause();
+        mWifiP2pManager.stopPeerDiscovery(mChannel, null);
         getActivity().unregisterReceiver(mReceiver);
     }
 
