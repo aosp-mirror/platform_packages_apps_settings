@@ -46,6 +46,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -744,10 +745,12 @@ public class WifiConfigController implements TextWatcher,
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.show_password) {
+            int pos = mPasswordView.getSelectionEnd();
             mPasswordView.setInputType(
                     InputType.TYPE_CLASS_TEXT | (((CheckBox) view).isChecked() ?
                             InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
                                 InputType.TYPE_TEXT_VARIATION_PASSWORD));
+            ((EditText)mPasswordView).setSelection(pos);
         } else if (view.getId() == R.id.wifi_advanced_togglebox) {
             if (((CheckBox) view).isChecked()) {
                 mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
