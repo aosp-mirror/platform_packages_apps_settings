@@ -81,7 +81,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
     private static final int MSG_UPDATE_NOTIFICATION_SUMMARY = 2;
 
-    private CheckBoxPreference mVibrateOnRing;
     private ListPreference mSilentMode;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
@@ -142,9 +141,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             mSilentMode.setOnPreferenceChangeListener(this);
         }
 
-        mVibrateOnRing = (CheckBoxPreference) findPreference(KEY_VIBRATE);
-        mVibrateOnRing.setOnPreferenceChangeListener(this);
-
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
         mDtmfTone.setPersistent(false);
         mDtmfTone.setChecked(Settings.System.getInt(resolver,
@@ -166,7 +162,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
 
         if (!((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
-            getPreferenceScreen().removePreference(mVibrateOnRing);
             getPreferenceScreen().removePreference(mHapticFeedback);
         }
 
@@ -234,18 +229,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         getActivity().unregisterReceiver(mReceiver);
     }
 
-    /**
-     * Put the audio system into the correct vibrate setting
-     */
-    private void setPhoneVibrateSettingValue(boolean vibeOnRing) {
-        // If vibrate-on-ring is checked, use VIBRATE_SETTING_ON
-        // Otherwise vibrate is off when ringer is silent
-        int vibrateMode = vibeOnRing ? AudioManager.VIBRATE_SETTING_ON
-                : AudioManager.VIBRATE_SETTING_ONLY_SILENT;
-        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, vibrateMode);
-        mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION, vibrateMode);
-    }
-
     private void setPhoneSilentSettingValue(String value) {
         int ringerMode = AudioManager.RINGER_MODE_NORMAL;
         if (value.equals(SILENT_MODE_MUTE)) {
@@ -273,9 +256,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private void updateState(boolean force) {
         if (getActivity() == null) return;
 
-        final int vibrateMode = mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER);
-
-        mVibrateOnRing.setChecked(vibrateMode == AudioManager.VIBRATE_SETTING_ON);
         mSilentMode.setValue(getPhoneSilentModeSettingValue());
 
         mSilentMode.setSummary(mSilentMode.getEntry());
@@ -353,8 +333,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
-        } else if (preference == mVibrateOnRing) {
-            setPhoneVibrateSettingValue((Boolean) objValue);
         } else if (preference == mSilentMode) {
             setPhoneSilentSettingValue(objValue.toString());
         }
