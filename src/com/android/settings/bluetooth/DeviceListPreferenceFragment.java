@@ -96,6 +96,7 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onResume() {
         super.onResume();
+        if (mLocalManager == null) return;
 
         mLocalManager.setForegroundActivity(getActivity());
         mLocalManager.getEventManager().registerCallback(this);
@@ -106,6 +107,8 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onPause() {
         super.onPause();
+        if (mLocalManager == null) return;
+
         removeAllDevices();
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
