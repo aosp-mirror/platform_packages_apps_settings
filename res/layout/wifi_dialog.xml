@@ -179,35 +179,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
-            <LinearLayout android:id="@+id/setup_fields"
-                    style="@style/wifi_item"
-                    android:visibility="gone">
-
-                <TextView
-                        style="@style/wifi_item_label"
-                        android:text="@string/wifi_network_setup" />
-
-                <Spinner android:id="@+id/network_setup"
-                        style="@style/wifi_item_content"
-                        android:prompt="@string/wifi_network_setup"
-                        android:entries="@array/wifi_network_setup" />
-
-            </LinearLayout>
-
-            <LinearLayout android:id="@+id/wps_fields"
-                    style="@style/wifi_item"
-                    android:visibility="gone">
-
-                <TextView
-                        style="@style/wifi_item_label"
-                        android:text="@string/wifi_wps_pin" />
-
-                <EditText android:id="@+id/wps_pin"
-                        style="@style/wifi_item_content"
-                        android:singleLine="true"
-                        android:inputType="textPassword" />
-
-            </LinearLayout>
 
             <LinearLayout android:id="@+id/proxy_settings_fields"
                     style="@style/wifi_item"

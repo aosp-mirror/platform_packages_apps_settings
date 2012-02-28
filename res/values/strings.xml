@@ -1191,6 +1191,10 @@
     <string name="wifi_add_network">Add network</string>
     <!-- Header for the list of wifi networks-->
     <string name="wifi_access_points">Wi-Fi networks</string>
+    <!-- Menu option to do WPS Push Button [CHAR LIMIT=20]-->
+    <string name="wifi_menu_wps_pbc">WPS Push Button</string>
+    <!-- Menu option to do WPS Pin Entry [CHAR LIMIT=20]-->
+    <string name="wifi_menu_wps_pin">WPS Pin Entry</string>
     <!-- Menu option to scan Wi-Fi networks -->
     <string name="wifi_menu_scan">Scan</string>
     <!-- Menu option to Wi-Fi advanced settings -->
@@ -1207,18 +1211,30 @@
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options -->
     <string name="wifi_show_advanced">Show advanced options</string>
-    <!-- Label for network setup [CHAR LIMIT=50] -->
-    <string name="wifi_network_setup">WPS</string>
-    <!-- Label for the text view for WPS pin input [CHAR LIMIT=50] -->
-    <string name="wifi_wps_pin">Type PIN from access point</string>
     <!-- Title for the WPS setup dialog [CHAR LIMIT=50] -->
-    <string name="wifi_wps_setup_title">WPS setup</string>
-    <!-- Text displayed in the WPS pin display dialog [CHAR LIMIT=75] -->
-    <string name="wifi_wps_pin_output">Type the PIN <xliff:g id="wps_pin">%1$s</xliff:g> on the access point</string>
-    <!-- Text displayed when WPS setup is in progress [CHAR LIMIT=75] -->
-    <string name="wifi_wps_in_progress">WPS is already in progress and can take tens of seconds to complete</string>
-    <!-- Text displayed when WPS fails to start [CHAR LIMIT=75] -->
-    <string name="wifi_wps_failed">Couldn\'t start WPS. Try again.</string>
+    <string name="wifi_wps_setup_title">Wi-Fi Protected Setup</string>
+    <!-- Message in WPS dialog at start up [CHAR LIMIT=150] -->
+    <string name="wifi_wps_setup_msg">Starting WPS\u2026</string>
+    <!-- Message in WPS dialog for PBC after start up [CHAR LIMIT=150] -->
+    <string name="wifi_wps_onstart_pbc">Push the WPS button on your Wi-Fi router. The setup can take upto two minutes to complete.</string>
+    <!-- Message in WPS dialog for PIN after start up [CHAR LIMIT=150] -->
+    <string name="wifi_wps_onstart_pin">Enter pin <xliff:g id="pin">%1$s</xliff:g> on your Wi-Fi router. The setup can take upto two minutes to complete.</string>
+    <!-- Text displayed when WPS succeeds [CHAR LIMIT=150] -->
+    <string name="wifi_wps_complete">WPS succeeded. Connecting to the network\u2026</string>
+    <!-- Text displayed when Wi-Fi is connected through WPS [CHAR LIMIT=150] -->
+    <string name="wifi_wps_connected">Connected to Wi-Fi network <xliff:g id="network_name">%s</xliff:g></string>
+    <!-- Text displayed when WPS setup is in progress [CHAR LIMIT=150] -->
+    <string name="wifi_wps_in_progress">WPS is already in progress and can take upto two minutes to complete</string>
+    <!-- Text displayed when WPS fails to start [CHAR LIMIT=150] -->
+    <string name="wifi_wps_failed_generic">WPS failed. Please try again in a few minutes.</string>
+    <!-- Text displayed when WPS fails due to WEP [CHAR LIMIT=150] -->
+    <string name="wifi_wps_failed_wep">The wireless router security setting (WEP) is not supported</string>
+     <!-- Text displayed when WPS fails to TKIP [CHAR LIMIT=150] -->
+    <string name="wifi_wps_failed_tkip">The wireless router security setting (TKIP) is not supported</string>
+     <!-- Text displayed when WPS fails due to authentication issues [CHAR LIMIT=150] -->
+    <string name="wifi_wps_failed_auth">Authentication failure. Please try again.</string>
+     <!-- Text displayed when WPS fails due to another session [CHAR LIMIT=150] -->
+    <string name="wifi_wps_failed_overlap">Another WPS session was detected. Please try again in a few minutes.</string>
     <!-- Label for the SSID of the network -->
     <string name="wifi_ssid">Network SSID</string>
     <!-- Label for the security of the connection -->
@@ -1271,8 +1287,8 @@
     <!-- Summary for the remembered network but currently not in range. -->
     <string name="wifi_not_in_range">Not in range</string>
     <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
-         string is listed first -->
-    <string name="wifi_wps_available_first_item">Protected network available</string>
+         string is listed first [CHAR LIMIT=20]-->
+    <string name="wifi_wps_available_first_item">WPS available</string>
     <!-- Substring of wifi status when Wi-Fi Protected Setup (WPS) is available and
          string is listed after a wifi_secured_* string-->
     <string name="wifi_wps_available_second_item">\u0020(protected network available)</string>
@@ -1327,10 +1343,6 @@
     <string name="wifi_failed_save_message">Failed to save network</string>
     <!-- Button label to dismiss the dialog -->
     <string name="wifi_cancel">Cancel</string>
-
-    <!-- Errors reported on wifi settings page -->
-    <!-- Toast message indicating WPS overlap detection [CHAR LIMIT=75] -->
-    <string name="wifi_wps_overlap_error">Another Wi-Fi protected session was detected. Try again in a few minutes.</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. -->
