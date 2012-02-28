@@ -138,21 +138,26 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     public void onResume() {
         // resume BluetoothEnabler before calling super.onResume() so we don't get
         // any onDeviceAdded() callbacks before setting up view in updateContent()
-        mBluetoothEnabler.resume();
+        if (mBluetoothEnabler != null) {
+            mBluetoothEnabler.resume();
+        }
         super.onResume();
 
         if (mDiscoverableEnabler != null) {
             mDiscoverableEnabler.resume();
         }
         getActivity().registerReceiver(mReceiver, mIntentFilter);
-
-        updateContent(mLocalAdapter.getBluetoothState(), mActivityStarted);
+        if (mLocalAdapter != null) {
+            updateContent(mLocalAdapter.getBluetoothState(), mActivityStarted);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mBluetoothEnabler.pause();
+        if (mBluetoothEnabler != null) {
+            mBluetoothEnabler.pause();
+        }
         getActivity().unregisterReceiver(mReceiver);
         if (mDiscoverableEnabler != null) {
             mDiscoverableEnabler.pause();
@@ -161,6 +166,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (mLocalAdapter == null) return;
         boolean bluetoothIsEnabled = mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON;
         boolean isDiscovering = mLocalAdapter.isDiscovering();
         int textId = isDiscovering ? R.string.bluetooth_searching_for_devices :
