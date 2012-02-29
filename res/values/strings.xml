@@ -3458,8 +3458,6 @@
     <string name="enter_password">Type password to decrypt storage</string>
     <!-- This is displayed when the password is entered incorrectly -->
     <string name="try_again">Try again.</string>
-    <!-- This error message is displayed when the vpn profile is going to be saved but the vpn service is busy [CHAR LIMIT=NONE] -->
-    <string name="service_busy">The service is busy. Try again.</string>
 
     <!-- the following are for Settings Storage screen -->
     <!-- Menu item/button 'delete' -->
@@ -3685,66 +3683,66 @@
     <!-- Button at the bottom of the CryptKeeper screen that lets the user return to a call -->
     <string name="cryptkeeper_return_to_call">Return to call</string>
 
-    <!-- Input label for the name of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the name of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_name">Name</string>
-    <!-- Input label for the type of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the type of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_type">Type</string>
-    <!-- Input label for the server address of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the server address of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_server">Server address</string>
-    <!-- Checkbox label to enable PPP encryption for a VPN network. [CHAR LIMIT=40] -->
+    <!-- Checkbox label to enable PPP encryption for a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_mppe">PPP encryption (MPPE)</string>
-    <!-- Input label for the L2TP secret of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the L2TP secret of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_l2tp_secret">L2TP secret</string>
-    <!-- Input label for the IPSec identifier of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the IPSec identifier of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_identifier">IPSec identifier</string>
-    <!-- Input label for the IPSec pre-shared key of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the IPSec pre-shared key of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_secret">IPSec pre-shared key</string>
-    <!-- Selection label for the IPSec user certificate of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Selection label for the IPSec user certificate of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_user_cert">IPSec user certificate</string>
-    <!-- Selection label for the IPSec CA certificate of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Selection label for the IPSec CA certificate of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_ca_cert">IPSec CA certificate</string>
-    <!-- Selection label for the IPSec server certificate of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Selection label for the IPSec server certificate of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_server_cert">IPSec server certificate</string>
-    <!-- Checkbox label to show advanced options of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Checkbox label to show advanced options of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_show_options">Show advanced options</string>
-    <!-- Input label for the DNS search domains of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the DNS search domains of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_search_domains">DNS search domains</string>
-    <!-- Input label for the DNS servers of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the DNS servers of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_dns_servers">DNS servers (e.g. 8.8.8.8)</string>
-    <!-- Input label for the forwarding routes of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the forwarding routes of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_routes">Forwarding routes (e.g. 10.0.0.0/8)</string>
-    <!-- Input label for the username of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the username of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_username">Username</string>
-    <!-- Input label for the password of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Input label for the password of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_password">Password</string>
-    <!-- Checkbox label to save the username and the password for a VPN network. [CHAR LIMIT=40] -->
+    <!-- Checkbox label to save the username and the password in a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_save_login">Save account information</string>
-    <!-- Hint for not using an optional feature of a VPN network. [CHAR LIMIT=40] -->
+    <!-- Hint for not using an optional feature in a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_not_used">(not used)</string>
     <!-- Option to not use a CA certificate to verify the VPN server. [CHAR LIMIT=40] -->
     <string name="vpn_no_ca_cert">(don\'t verify server)</string>
     <!-- Option to use the server certificate received from the VPN server. [CHAR LIMIT=40] -->
     <string name="vpn_no_server_cert">(received from server)</string>
 
-    <!-- Button label to cancel chaning a VPN network. [CHAR LIMIT=40] -->
+    <!-- Button label to cancel changing a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_cancel">Cancel</string>
-    <!-- Button label to save a VPN network. [CHAR LIMIT=40] -->
+    <!-- Button label to save a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_save">Save</string>
-    <!-- Button label to connect to a VPN network. [CHAR LIMIT=40] -->
+    <!-- Button label to connect to a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_connect">Connect</string>
-    <!-- Dialog title to edit a VPN network. [CHAR LIMIT=40] -->
-    <string name="vpn_edit">Edit VPN network</string>
-    <!-- Dialog title to connect to a VPN network. [CHAR LIMIT=40] -->
-    <string name="vpn_connect_to">Connect to <xliff:g id="network" example="School">%s</xliff:g></string>
+    <!-- Dialog title to edit a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_edit">Edit VPN profile</string>
+    <!-- Dialog title to connect to a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_connect_to">Connect to <xliff:g id="profile" example="School">%s</xliff:g></string>
 
     <!-- Preference title for VPN settings. [CHAR LIMIT=40] -->
     <string name="vpn_title">VPN</string>
-    <!-- Preference title to create a new VPN network. [CHAR LIMIT=40] -->
-    <string name="vpn_create">Add VPN network</string>
-    <!-- Menu item to edit a VPN network. [CHAR LIMIT=40] -->
-    <string name="vpn_menu_edit">Edit network</string>
-    <!-- Menu item to delete a VPN network. [CHAR LIMIT=40] -->
-    <string name="vpn_menu_delete">Delete network</string>
+    <!-- Preference title to create a new VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_create">Add VPN profile</string>
+    <!-- Menu item to edit a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_menu_edit">Edit profile</string>
+    <!-- Menu item to delete a VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_menu_delete">Delete profile</string>
 
     <!-- Tab label for built-in system CA certificates. -->
     <string name="trusted_credentials_system_tab">System</string>
