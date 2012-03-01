@@ -565,9 +565,10 @@ public class WifiSettings extends SettingsPreferenceFragment
             //network state change events so the apps dont have to worry about
             //ignoring supplicant state change when network is connected
             //to get more fine grained information.
-            if (!mConnected.get()) {
-                updateConnectionState(WifiInfo.getDetailedStateOf((SupplicantState)
-                        intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
+            SupplicantState state = (SupplicantState) intent.getParcelableExtra(
+                    WifiManager.EXTRA_NEW_STATE);
+            if (!mConnected.get() && SupplicantState.isHandshakeState(state)) {
+                updateConnectionState(WifiInfo.getDetailedStateOf(state));
             }
 
             if (mInXlSetupWizard) {
