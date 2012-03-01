@@ -38,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Toast;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
@@ -324,10 +325,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     private String[] getDefaultNetwork() throws Exception {
         LinkProperties network = mService.getActiveLinkProperties();
         if (network == null) {
+            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
             throw new IllegalStateException("Network is not available");
         }
         String interfaze = network.getInterfaceName();
         if (interfaze == null) {
+            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
             throw new IllegalStateException("Cannot get the default interface");
         }
         String gateway = null;
@@ -339,6 +342,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             }
         }
         if (gateway == null) {
+            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
             throw new IllegalStateException("Cannot get the default gateway");
         }
         return new String[] {interfaze, gateway};
@@ -370,7 +374,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             serverCert = (value == null) ? null : new String(value, Charsets.UTF_8);
         }
         if (privateKey == null || userCert == null || caCert == null || serverCert == null) {
-            // TODO: find out a proper way to handle this. Delete these keys?
+            Toast.makeText(getActivity(), R.string.vpn_missing_cert, Toast.LENGTH_LONG).show();
             throw new IllegalStateException("Cannot load credentials");
         }
 
