@@ -63,7 +63,8 @@
                     style="@style/wifi_section"
                     android:visibility="gone">
 
-                <LinearLayout
+                <LinearLayout android:id="@+id/l_method"
+                        android:visibility="gone"
                         style="@style/wifi_item" >
                     <TextView
                             style="@style/wifi_item_label"
@@ -75,7 +76,8 @@
                             android:entries="@array/wifi_eap_method" />
                 </LinearLayout>
                 
-                <LinearLayout
+                <LinearLayout android:id="@+id/l_phase2"
+                        android:visibility="gone"
                         style="@style/wifi_item" >
                     <TextView
                             style="@style/wifi_item_label"
@@ -87,7 +89,8 @@
                             android:entries="@array/wifi_phase2_entries" />
                 </LinearLayout>
 
-                <LinearLayout
+                <LinearLayout android:id="@+id/l_ca_cert"
+                        android:visibility="gone"
                         style="@style/wifi_item" >
                     <TextView
                             style="@style/wifi_item_label"
@@ -98,7 +101,8 @@
                             android:prompt="@string/wifi_eap_ca_cert" />
                 </LinearLayout>
 
-                <LinearLayout
+                <LinearLayout android:id="@+id/l_user_cert"
+                        android:visibility="gone"
                         style="@style/wifi_item" >
                     <TextView
                             style="@style/wifi_item_label"
@@ -109,7 +113,8 @@
                             android:prompt="@string/wifi_eap_user_cert" />
                 </LinearLayout>
 
-                <LinearLayout
+                <LinearLayout android:id="@+id/l_identity"
+                        android:visibility="gone"
                         style="@style/wifi_item" >
                     <TextView
                             style="@style/wifi_item_label"
@@ -121,7 +126,8 @@
                             android:inputType="textNoSuggestions" />
                 </LinearLayout>
 
-                <LinearLayout
+                <LinearLayout android:id="@+id/l_anonymous"
+                        android:visibility="gone"
                         style="@style/wifi_item" >
                     <TextView
                             style="@style/wifi_item_label"
