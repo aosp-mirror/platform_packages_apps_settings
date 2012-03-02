@@ -98,6 +98,12 @@ public class WifiConfigController implements TextWatcher,
     public static final int PROXY_NONE = 0;
     public static final int PROXY_STATIC = 1;
 
+    /* These values from from "wifi_eap_method" resource array */
+    public static final int WIFI_EAP_METHOD_PEAP = 0;
+    public static final int WIFI_EAP_METHOD_TLS  = 1;
+    public static final int WIFI_EAP_METHOD_TTLS = 2;
+    public static final int WIFI_EAP_METHOD_PWD  = 3;
+
     private static final String TAG = "WifiConfigController";
 
     private Spinner mNetworkSetupSpinner;
@@ -539,6 +545,7 @@ public class WifiConfigController implements TextWatcher,
 
         if (mEapMethodSpinner == null) {
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
+            mEapMethodSpinner.setOnItemSelectedListener(this);
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapUserCertSpinner = (Spinner) mView.findViewById(R.id.user_cert);
@@ -559,6 +566,21 @@ public class WifiConfigController implements TextWatcher,
                 mEapIdentityView.setText(config.identity.value());
                 mEapAnonymousView.setText(config.anonymous_identity.value());
             }
+        }
+
+        mView.findViewById(R.id.l_method).setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.l_identity).setVisibility(View.VISIBLE);
+
+        if (mEapMethodSpinner.getSelectedItemPosition() == WIFI_EAP_METHOD_PWD){
+            mView.findViewById(R.id.l_phase2).setVisibility(View.GONE);
+            mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
+            mView.findViewById(R.id.l_user_cert).setVisibility(View.GONE);
+            mView.findViewById(R.id.l_anonymous).setVisibility(View.GONE);
+        } else {
+            mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.l_user_cert).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
         }
     }
     
@@ -760,6 +782,8 @@ public class WifiConfigController implements TextWatcher,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mSecuritySpinner) {
             mAccessPointSecurity = position;
+            showSecurityFields();
+        } else if (parent == mEapMethodSpinner) {
             showSecurityFields();
         } else if (parent == mNetworkSetupSpinner) {
             showNetworkSetupFields();
