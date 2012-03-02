@@ -504,10 +504,6 @@ public class WifiConfigController implements TextWatcher,
         }
         config.pin = ((TextView) mView.findViewById(R.id.wps_pin)).getText().toString();
         config.BSSID = (mAccessPoint != null) ? mAccessPoint.bssid : null;
-
-        config.proxySettings = mProxySettings;
-        config.ipAssignment = mIpAssignment;
-        config.linkProperties = new LinkProperties(mLinkProperties);
         return config;
     }
 

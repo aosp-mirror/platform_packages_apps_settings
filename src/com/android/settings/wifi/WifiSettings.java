@@ -58,7 +58,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.internal.util.AsyncChannel;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -104,6 +103,12 @@ public class WifiSettings extends SettingsPreferenceFragment
     private final Scanner mScanner;
 
     private WifiManager mWifiManager;
+    private WifiManager.Channel mChannel;
+    private WifiManager.ActionListener mConnectListener;
+    private WifiManager.ActionListener mSaveListener;
+    private WifiManager.ActionListener mForgetListener;
+    private WifiManager.WpsListener mWpsListener;
+
     private WifiEnabler mWifiEnabler;
     // An access point being editted is stored here.
     private AccessPoint mSelectedAccessPoint;
@@ -145,7 +150,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         mFilter.addAction(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
-        mFilter.addAction(WifiManager.ERROR_ACTION);
 
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -171,7 +175,76 @@ public class WifiSettings extends SettingsPreferenceFragment
         // this method.
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        mWifiManager.asyncConnect(getActivity(), new WifiServiceHandler());
+        mChannel = mWifiManager.initialize(getActivity(), getActivity().getMainLooper(), null);
+
+        mConnectListener = new WifiManager.ActionListener() {
+                                   public void onSuccess() {
+                                   }
+                                   public void onFailure(int reason) {
+                                        Toast.makeText(getActivity(),
+                                            R.string.wifi_failed_connect_message,
+                                            Toast.LENGTH_SHORT).show();
+                                   }
+                               };
+
+        mSaveListener = new WifiManager.ActionListener() {
+                                public void onSuccess() {
+                                }
+                                public void onFailure(int reason) {
+                                    Toast.makeText(getActivity(),
+                                        R.string.wifi_failed_save_message,
+                                        Toast.LENGTH_SHORT).show();
+                                }
+                            };
+
+        mForgetListener = new WifiManager.ActionListener() {
+                                   public void onSuccess() {
+                                   }
+                                   public void onFailure(int reason) {
+                                        Toast.makeText(getActivity(),
+                                            R.string.wifi_failed_forget_message,
+                                            Toast.LENGTH_SHORT).show();
+                                   }
+                               };
+
+        class WpsListener implements WifiManager.WpsListener {
+            public void onStartSuccess(String pin) {
+                //TODO: Add progress bar instead
+                if (pin != null) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.wifi_wps_setup_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                    dialog.setMessage(getResources().getString(
+                                R.string.wifi_wps_pin_output, pin));
+                    dialog.show();
+                }
+            }
+            public void onCompletion() {
+                //TODO: Dismiss progress bar
+            }
+            public void onFailure(int reason) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.wifi_wps_setup_title)
+                    .setPositiveButton(android.R.string.ok, null);
+                switch (reason) {
+                    case WifiManager.IN_PROGRESS:
+                        dialog.setMessage(R.string.wifi_wps_in_progress);
+                        dialog.show();
+                        break;
+                    case WifiManager.WPS_OVERLAP_ERROR:
+                        Toast.makeText(getActivity(), R.string.wifi_wps_overlap_error,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        dialog.setMessage(R.string.wifi_wps_failed);
+                        dialog.show();
+                        break;
+                }
+            }
+        }
+
+       mWpsListener = new WpsListener();
+
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
             mDlgEdit = savedInstanceState.getBoolean(SAVE_DIALOG_EDIT_MODE);
@@ -242,7 +315,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         getActivity().registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != INVALID_NETWORK_ID &&
                 KeyStore.getInstance().state() == KeyStore.State.UNLOCKED) {
-            mWifiManager.connectNetwork(mKeyStoreNetworkId);
+            mWifiManager.connect(mChannel, mKeyStoreNetworkId, mConnectListener);
         }
         mKeyStoreNetworkId = INVALID_NETWORK_ID;
 
@@ -353,19 +426,21 @@ public class WifiSettings extends SettingsPreferenceFragment
             case MENU_ID_CONNECT: {
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                     if (!requireKeyStore(mSelectedAccessPoint.getConfig())) {
-                        mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
+                        mWifiManager.connect(mChannel, mSelectedAccessPoint.networkId,
+                                mConnectListener);
                     }
                 } else if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
-                    mWifiManager.connectNetwork(mSelectedAccessPoint.getConfig());
+                    mWifiManager.connect(mChannel, mSelectedAccessPoint.getConfig(),
+                            mConnectListener);
                 } else {
                     showConfigUi(mSelectedAccessPoint, true);
                 }
                 return true;
             }
             case MENU_ID_FORGET: {
-                mWifiManager.forgetNetwork(mSelectedAccessPoint.networkId);
+                mWifiManager.forget(mChannel, mSelectedAccessPoint.networkId, mForgetListener);
                 return true;
             }
             case MENU_ID_MODIFY: {
@@ -384,7 +459,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE &&
                     mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
-                mWifiManager.connectNetwork(mSelectedAccessPoint.getConfig());
+                mWifiManager.connect(mChannel, mSelectedAccessPoint.getConfig(), mConnectListener);
             } else {
                 showConfigUi(mSelectedAccessPoint, false);
             }
@@ -583,14 +658,6 @@ public class WifiSettings extends SettingsPreferenceFragment
             updateConnectionState(info.getDetailedState());
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
             updateConnectionState(null);
-        } else if (WifiManager.ERROR_ACTION.equals(action)) {
-            int errorCode = intent.getIntExtra(WifiManager.EXTRA_ERROR_CODE, 0);
-            switch (errorCode) {
-                case WifiManager.WPS_OVERLAP_ERROR:
-                    Toast.makeText(context, R.string.wifi_wps_overlap_error,
-                            Toast.LENGTH_SHORT).show();
-                    break;
-            }
         }
     }
 
@@ -681,51 +748,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
     }
 
-    private class WifiServiceHandler extends Handler {
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case AsyncChannel.CMD_CHANNEL_HALF_CONNECTED:
-                    if (msg.arg1 == AsyncChannel.STATUS_SUCCESSFUL) {
-                        //AsyncChannel in msg.obj
-                    } else {
-                        //AsyncChannel set up failure, ignore
-                        Log.e(TAG, "Failed to establish AsyncChannel connection");
-                    }
-                    break;
-                case WifiManager.CMD_WPS_COMPLETED:
-                    WpsResult result = (WpsResult) msg.obj;
-                    if (result == null) break;
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.wifi_wps_setup_title)
-                        .setPositiveButton(android.R.string.ok, null);
-                    switch (result.status) {
-                        case FAILURE:
-                            dialog.setMessage(R.string.wifi_wps_failed);
-                            dialog.show();
-                            break;
-                        case IN_PROGRESS:
-                            dialog.setMessage(R.string.wifi_wps_in_progress);
-                            dialog.show();
-                            break;
-                        default:
-                            if (result.pin != null) {
-                                dialog.setMessage(getResources().getString(
-                                        R.string.wifi_wps_pin_output, result.pin));
-                                dialog.show();
-                            }
-                            break;
-                    }
-                    break;
-                //TODO: more connectivity feedback
-                default:
-                    //Ignore
-                    break;
-            }
-        }
-    }
-
     /**
      * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
      * Wifi setup screens, not in usual wifi settings screen.
@@ -763,7 +785,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             case WifiConfigController.WPS_PBC:
             case WifiConfigController.WPS_DISPLAY:
             case WifiConfigController.WPS_KEYPAD:
-                mWifiManager.startWps(configController.getWpsConfig());
+                mWifiManager.startWps(mChannel, configController.getWpsConfig(), mWpsListener);
                 break;
             case WifiConfigController.MANUAL:
                 final WifiConfiguration config = configController.getConfig();
@@ -772,7 +794,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                     if (mSelectedAccessPoint != null
                             && !requireKeyStore(mSelectedAccessPoint.getConfig())
                             && mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                        mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
+                        mWifiManager.connect(mChannel, mSelectedAccessPoint.networkId,
+                                mConnectListener);
                     }
                 } else if (config.networkId != INVALID_NETWORK_ID) {
                     if (mSelectedAccessPoint != null) {
@@ -782,7 +805,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     if (configController.isEdit() || requireKeyStore(config)) {
                         saveNetwork(config);
                     } else {
-                        mWifiManager.connectNetwork(config);
+                        mWifiManager.connect(mChannel, config, mConnectListener);
                     }
                 }
                 break;
@@ -798,12 +821,12 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (mInXlSetupWizard) {
             ((WifiSettingsForSetupWizardXL)getActivity()).onSaveNetwork(config);
         } else {
-            mWifiManager.saveNetwork(config);
+            mWifiManager.save(mChannel, config, mSaveListener);
         }
     }
 
     /* package */ void forget() {
-        mWifiManager.forgetNetwork(mSelectedAccessPoint.networkId);
+        mWifiManager.forget(mChannel, mSelectedAccessPoint.networkId, mForgetListener);
 
         if (mWifiManager.isWifiEnabled()) {
             mScanner.resume();

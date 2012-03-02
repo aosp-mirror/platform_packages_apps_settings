@@ -74,6 +74,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private WifiSettings mWifiSettings;
     private WifiManager mWifiManager;
+    private WifiManager.Channel mChannel;
 
     /** Used for resizing a padding above title. Hiden when software keyboard is shown. */
     private View mTopPadding;
@@ -142,10 +143,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         setContentView(R.layout.wifi_settings_for_setup_wizard_xl);
 
         mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        mChannel = mWifiManager.initialize(this, getMainLooper(), null);
         // There's no button here enabling wifi network, so we need to enable it without
         // users' request.
         mWifiManager.setWifiEnabled(true);
-        mWifiManager.asyncConnect(this, new WifiServiceHandler());
 
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
@@ -199,25 +200,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mWifiSettingsFragmentLayout = findViewById(R.id.wifi_settings_fragment_layout);
         mConnectingStatusLayout = findViewById(R.id.connecting_status_layout);
         mConnectingStatusView = (TextView) findViewById(R.id.connecting_status);
-    }
-
-    private class WifiServiceHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case AsyncChannel.CMD_CHANNEL_HALF_CONNECTED:
-                    if (msg.arg1 == AsyncChannel.STATUS_SUCCESSFUL) {
-                        //AsyncChannel in msg.obj
-                    } else {
-                        //AsyncChannel set up failure, ignore
-                        Log.e(TAG, "Failed to establish AsyncChannel connection");
-                    }
-                    break;
-                default:
-                    //Ignore
-                    break;
-            }
-        }
     }
 
     private void restoreFirstVisibilityState() {
@@ -614,7 +596,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                     Log.d(TAG, String.format("forgeting Wi-Fi network \"%s\" (id: %d)",
                             config.SSID, config.networkId));
                 }
-                mWifiManager.forgetNetwork(config.networkId);
+                mWifiManager.forget(mChannel, config.networkId, new WifiManager.ActionListener() {
+                        public void onSuccess() {
+                        }
+                        public void onFailure(int reason) {
+                            //TODO: Add failure UI
+                        }
+                        });
             }
 
             mWifiSettingsFragmentLayout.setVisibility(View.GONE);
@@ -773,6 +761,12 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      */
     /* package */ void onSaveNetwork(WifiConfiguration config) {
         // We want to both save and connect a network. connectNetwork() does both.
-        mWifiManager.connectNetwork(config);
+        mWifiManager.connect(mChannel, config, new WifiManager.ActionListener() {
+                public void onSuccess() {
+                }
+                public void onFailure(int reason) {
+                //TODO: Add failure UI
+                }
+                });
     }
 }
