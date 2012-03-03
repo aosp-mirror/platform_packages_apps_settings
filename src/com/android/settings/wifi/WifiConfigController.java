@@ -33,7 +33,6 @@ import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiConfiguration.Status;
 import android.net.wifi.WifiInfo;
-import android.net.wifi.WpsInfo;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -88,12 +87,6 @@ public class WifiConfigController implements TextWatcher,
     private static final int DHCP = 0;
     private static final int STATIC_IP = 1;
 
-    /* These values come from "wifi_network_setup" resource array */
-    public static final int MANUAL = 0;
-    public static final int WPS_PBC = 1;
-    public static final int WPS_KEYPAD = 2;
-    public static final int WPS_DISPLAY = 3;
-
     /* These values come from "wifi_proxy_settings" resource array */
     public static final int PROXY_NONE = 0;
     public static final int PROXY_STATIC = 1;
@@ -106,7 +99,6 @@ public class WifiConfigController implements TextWatcher,
 
     private static final String TAG = "WifiConfigController";
 
-    private Spinner mNetworkSetupSpinner;
     private Spinner mIpSettingsSpinner;
     private TextView mIpAddressView;
     private TextView mGatewayView;
@@ -232,11 +224,6 @@ public class WifiConfigController implements TextWatcher,
 
             }
 
-            /* Show network setup options only for a new network */
-            if (mAccessPoint.networkId == INVALID_NETWORK_ID && mAccessPoint.wpsAvailable) {
-                showNetworkSetupFields();
-            }
-
             if (mAccessPoint.networkId == INVALID_NETWORK_ID || mEdit) {
                 showSecurityFields();
                 showIpConfigFields();
@@ -286,10 +273,8 @@ public class WifiConfigController implements TextWatcher,
         boolean enabled = false;
         boolean passwordInvalid = false;
 
-        /* Check password invalidity for manual network set up alone */
-        if (chosenNetworkSetupMethod() == MANUAL &&
-            ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
-            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8))) {
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
+            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8)) {
             passwordInvalid = true;
         }
 
@@ -484,35 +469,6 @@ public class WifiConfigController implements TextWatcher,
         return 0;
     }
 
-    int chosenNetworkSetupMethod() {
-        if (mNetworkSetupSpinner != null) {
-            return mNetworkSetupSpinner.getSelectedItemPosition();
-        }
-        return MANUAL;
-    }
-
-    WpsInfo getWpsConfig() {
-        WpsInfo config = new WpsInfo();
-        switch (mNetworkSetupSpinner.getSelectedItemPosition()) {
-            case WPS_PBC:
-                config.setup = WpsInfo.PBC;
-                break;
-            case WPS_KEYPAD:
-                config.setup = WpsInfo.KEYPAD;
-                break;
-            case WPS_DISPLAY:
-                config.setup = WpsInfo.DISPLAY;
-                break;
-            default:
-                config.setup = WpsInfo.INVALID;
-                Log.e(TAG, "WPS not selected type");
-                return config;
-        }
-        config.pin = ((TextView) mView.findViewById(R.id.wps_pin)).getText().toString();
-        config.BSSID = (mAccessPoint != null) ? mAccessPoint.bssid : null;
-        return config;
-    }
-
     private void showSecurityFields() {
         if (mInXlSetupWizard) {
             // Note: XL SetupWizard won't hide "EAP" settings here.
@@ -582,33 +538,6 @@ public class WifiConfigController implements TextWatcher,
             mView.findViewById(R.id.l_user_cert).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
         }
-    }
-    
-    private void showNetworkSetupFields() {
-        mView.findViewById(R.id.setup_fields).setVisibility(View.VISIBLE);
-
-        if (mNetworkSetupSpinner == null) {
-            mNetworkSetupSpinner = (Spinner) mView.findViewById(R.id.network_setup);
-            mNetworkSetupSpinner.setOnItemSelectedListener(this);
-        }
-
-        int pos = mNetworkSetupSpinner.getSelectedItemPosition();
-
-        /* Show pin text input if needed */
-        if (pos == WPS_KEYPAD) {
-            mView.findViewById(R.id.wps_fields).setVisibility(View.VISIBLE);
-        } else {
-            mView.findViewById(R.id.wps_fields).setVisibility(View.GONE);
-        }
-
-        /* show/hide manual security fields appropriately */
-        if ((pos == WPS_DISPLAY) || (pos == WPS_KEYPAD)
-                || (pos == WPS_PBC)) {
-            mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
-        } else {
-            mView.findViewById(R.id.security_fields).setVisibility(View.VISIBLE);
-        }
-
     }
 
     private void showIpConfigFields() {
@@ -785,8 +714,6 @@ public class WifiConfigController implements TextWatcher,
             showSecurityFields();
         } else if (parent == mEapMethodSpinner) {
             showSecurityFields();
-        } else if (parent == mNetworkSetupSpinner) {
-            showNetworkSetupFields();
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
         } else {
