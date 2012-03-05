@@ -297,8 +297,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"በተቆለፈ ማያ ላይ ለማሳየት ፅሁፍ አስገባ"</string>
     <string name="location_settings_title" msgid="8935806698251432196">"የስፍራ አገልግሎቶች"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"ደህንነት"</string>
-    <string name="security_settings_summary" msgid="967393342537986570">"የኔን ስፍራ፣ማያ ክፈት፣SIM ካርድ ሽንጉር፣ መረጃ ማከማቻ ሽንጉር አዘጋጅ።"</string>
-    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"የኔን ስፍራ፣ማያ ክፈት፣ መረጃ ማከማቻ ሽንጉር አዘጋጅ።"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"የእኔን ስፍራ፣ማያ ክፈት፣SIM ካርድ ሽንጉር፣ መረጃ ማከማቻ ሽንጉር አዘጋጅ።"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"የእኔን ስፍራ፣ማያ ክፈት፣ መረጃ ማከማቻ ሽንጉር አዘጋጅ።"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"የይለፍ ቃሎች"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"ማመስጠር"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"ጡባዊ አመስጥር"</string>
@@ -504,6 +504,10 @@
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"ቅንብሮቹን ለመለወጥ ችግር ነበር።"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"አውታረ መረብ አክል"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"የWi-Fi  አውታረመረቦች"</string>
+    <!-- no translation found for wifi_menu_wps_pbc (2668564692207863017) -->
+    <skip />
+    <!-- no translation found for wifi_menu_wps_pin (6426448256268695933) -->
+    <skip />
     <string name="wifi_menu_scan" msgid="1470911530412095868">"ቃኝ"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"ከፍተኛ"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"ወደ አውታረ መረብ አያይዝ"</string>
@@ -511,12 +515,30 @@
     <string name="wifi_menu_modify" msgid="2068554918652440105">"አውታረ መረብ ቀይር"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"ያሉ አውታረመረቦች ለማየት፣Wi-Fi አብራ።"</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"የላቁ አማራጮችን አሳይ"</string>
-    <string name="wifi_network_setup" msgid="2243277654809358812">"WPS"</string>
-    <string name="wifi_wps_pin" msgid="8242979682530043184">"ፒን ከመድረሻ ነጥብ ተይብ"</string>
-    <string name="wifi_wps_setup_title" msgid="2301524571580808871">"WPS አዘጋጅ"</string>
-    <string name="wifi_wps_pin_output" msgid="7773693032190962123">"<xliff:g id="WPS_PIN">%1$s</xliff:g> ፒን ከመድረሻ ነጥብ አስገባ"</string>
-    <string name="wifi_wps_in_progress" msgid="2776555137392461525">"WPS አስቀድሞ ሂደት ላይ ነው እና ለማጠናቀቅ 10 ሰከንዶች ሊወስድ ይችላል።"</string>
-    <string name="wifi_wps_failed" msgid="1034868466481449492">"WPS ማስጀመር አልተቻለም። እንደገና ሞክር።"</string>
+    <!-- no translation found for wifi_wps_setup_title (6034518116333042484) -->
+    <skip />
+    <!-- no translation found for wifi_wps_setup_msg (315174329121275092) -->
+    <skip />
+    <!-- no translation found for wifi_wps_onstart_pbc (1054681318528153733) -->
+    <skip />
+    <!-- no translation found for wifi_wps_onstart_pin (8177854490806936836) -->
+    <skip />
+    <!-- no translation found for wifi_wps_complete (2388138550456729134) -->
+    <skip />
+    <!-- no translation found for wifi_wps_connected (5754399645462924103) -->
+    <skip />
+    <!-- no translation found for wifi_wps_in_progress (2944576520214787628) -->
+    <skip />
+    <!-- no translation found for wifi_wps_failed_generic (5668775022238832527) -->
+    <skip />
+    <!-- no translation found for wifi_wps_failed_wep (2702820087105284461) -->
+    <skip />
+    <!-- no translation found for wifi_wps_failed_tkip (4282401586860713349) -->
+    <skip />
+    <!-- no translation found for wifi_wps_failed_auth (1174614355181181958) -->
+    <skip />
+    <!-- no translation found for wifi_wps_failed_overlap (5159533685596844778) -->
+    <skip />
     <string name="wifi_ssid" msgid="641393708309146745">"አውታረ መረብ SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"ደህንነት"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"የሲግናል ጥንካሬ"</string>
@@ -541,22 +563,18 @@
     <string name="wifi_disabled_help" msgid="5416325603334140666">"በደካማ ግንኙነት የተነሳ አውታረመረቡ እንዳይቀርብ ተደርጓል:: ይህን ባህሪ ከቅንጅቶች &gt; Wi-Fi ማያ ገጽ የላቀ ምናሌ ንጥል ላይ አጥፋው::"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"የማረጋገጫ ችግር"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"በክልል ውስጥ የለም"</string>
-    <string name="wifi_wps_available_first_item" msgid="3538912605343585226">"ጥበቃ የሚደረግለት አውታረመረብ ማግኘት ይቻላል"</string>
+    <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS አለ"</string>
     <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" (ጥበቃ የሚደረግለት አውታረመረብ ማግኘት ይቻላል)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"በ <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> የተጠበቀ"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">"፣ በ<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> የተጠበቀ"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"የለም"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"አያይዝ"</string>
-    <!-- no translation found for wifi_failed_connect_message (8491902558970292871) -->
-    <skip />
+    <string name="wifi_failed_connect_message" msgid="8491902558970292871">"ከአውታረ መረቡ ጋር መገናኘት አልተሳካም"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"እርሳ"</string>
-    <!-- no translation found for wifi_failed_forget_message (1348172929201654986) -->
-    <skip />
+    <string name="wifi_failed_forget_message" msgid="1348172929201654986">"አውታረ መረብ መርሳት አልተሳካም"</string>
     <string name="wifi_save" msgid="3331121567988522826">"አስቀምጥ"</string>
-    <!-- no translation found for wifi_failed_save_message (6650004874143815692) -->
-    <skip />
+    <string name="wifi_failed_save_message" msgid="6650004874143815692">"አውታረ መረብ ማስቀመጥ አልተሳካም"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"ይቅር"</string>
-    <string name="wifi_wps_overlap_error" msgid="3352261777053283320">"ሌላ WiFi ደህንነቱ የተጠበቀ ክፍለጊዜ እንዳለ በፍለጋ ተደርሶበታል:: በትንሽ ደቂቃ ውስጥ እባክህ እንደገና ሞክር::"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"የላቀ Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"ተደጋጋሚ Wi-Fi  ድግ"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"የክወና ድግግሞሽ ጊዜ ርዝመት ግለፅ"</string>
@@ -704,7 +722,7 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"የUSB  ማከማቻ ንቀል፣የቀረማከማቻ እይ"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"የSD ካርድ ንቀል፣ የሚገኝ ማከማቻ ዕይ"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
-    <string name="status_number" product="default" msgid="5123197324870153205">"የኔ ስልክ ቁጥር"</string>
+    <string name="status_number" product="default" msgid="5123197324870153205">"የእኔ  ስልክ ቁጥር"</string>
     <string name="status_min_number" msgid="3519504522179420597">"ዝቅተኛ"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"PRL ስሪት"</string>
@@ -813,8 +831,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"የፋብሪካ ውሂብ ዳግም አስጀምር"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"በስልኩ ላይ ያለ ውሂብ ሁሉ ያጠፋል"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"በስልኩ ላይ ያለውን ውሂብ ሁሉ አጥፋ"</string>
-    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"ይህ ካንተ ጡባዊ "<b>"ውስጣዊ ማከማቻ"</b>" የሚከተሉትን ጨምሮ:"\n\n<li>"ያንተ Google መለያ"</li>\n<li>"ሥርዓት እና መተግበሪያ ውሂብ እና ቅንጅቶች"</li>\n<li>"የወረዱ መተግበሪያዎች"</li>" ላይ ያሉ ሁሉንም ውሂብ ይሰርዛል::"</string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"ይህ ካንተ ጡባዊ "<b>"ውስጣዊ ማከማቻ"</b>" የሚከተሉትን ጨምሮ:"\n\n<li>"ያንተ Google መለያ"</li>\n<li>"ሥርዓት እና መተግበሪያ ውሂብ እና ቅንጅቶች"</li>\n<li>"የወረዱ መተግበሪያዎች"</li>" ላይ ያሉ ሁሉንም ውሂብ ይሰርዛል::"</string>
+    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"ይህ ከአንተ ጡባዊ "<b>"ውስጣዊ ማከማቻ"</b>" የሚከተሉትን ጨምሮ:"\n\n<li>"ያንተ Google መለያ"</li>\n<li>"ሥርዓት እና መተግበሪያ ውሂብ እና ቅንጅቶች"</li>\n<li>"የወረዱ መተግበሪያዎች"</li>" ላይ ያሉ ሁሉንም ውሂብ ይሰርዛል::"</string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"ይህ ከአንተ ጡባዊ "<b>"ውስጣዊ ማከማቻ"</b>" የሚከተሉትን ጨምሮ:"\n\n<li>"ያንተ Google መለያ"</li>\n<li>"ሥርዓት እና መተግበሪያ ውሂብ እና ቅንጅቶች"</li>\n<li>"የወረዱ መተግበሪያዎች"</li>" ላይ ያሉ ሁሉንም ውሂብ ይሰርዛል::"</string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n" እርስዎ በአሁን ጊዜ የሚከተለው መለያዎች ውስጥ ገብተዋል፡"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"ሙዚቃ"</li>\n<li>"ፎቶዎች"</li>\n<li>"ሌላ የተጠቃሚ ውሂብ"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">"ሙዚቃ፣ ምስሎች፣ እና ሌላ ተጠቃሚ ውሂብ "\n\n"ለማጥራት፣"<b>"USBማከማቻ"</b>" መጥፋት ያስፈልገዋል።"</string>
@@ -873,7 +891,7 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> አይያያዝም።"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"እገዛ"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"የተንቀሳቃሽ ስልክአውታረመረብ"</string>
-    <string name="location_title" msgid="1029961368397484576">"የኔ ሥፍራ"</string>
+    <string name="location_title" msgid="1029961368397484576">"የእኔ  ሥፍራ"</string>
     <string name="location_network_based" msgid="5569673665032992664">"የGoogle ሥፍራ አገልግሎት"</string>
     <string name="location_neighborhood_level" msgid="1337612962522836900">"የተጠጋጋ ሥፍራህን ለመወሰን እንደ Wi-Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦች ያሉትን የውሂብ ምንጮች ትግበራዎች ተጠቀምባቸው።"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"ሥፍራ በWi-Fi ይወሰናል"</string>
@@ -1281,7 +1299,7 @@
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"የ \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\" ቅንብሮች"</string>
     <string name="tts_settings" msgid="8186971894801348327">"ፅሁፍ-ወደ-ንግግር ቅንብሮች"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"የፅሁፍ- ወደ- ንግግር ውፅዓት"</string>
-    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"ሁልጊዜም የኔን ቅንብሮች ተጠቀም"</string>
+    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"ሁልጊዜም የእኔን ቅንብሮች ተጠቀም"</string>
     <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"ከስር ያሉ ነባሪ ቅንብሮች የመተግበሪያ  ቅንጅቶችን ያግዳሉ"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"ነባሪ ቅንብሮች"</string>
     <string name="tts_default_synth_title" msgid="4755558388333117572">"ነባሪ አንቀሳቃሽ"</string>
@@ -1359,7 +1377,7 @@
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"ዴስክቶፕ ሙሉ ምትኬዎች በአሁኑ ሰዓት አልተጠበቁም"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"ለዴስክቶፕ ሙሉ ምትኬዎች የይለፍ ቃል ለመለወጥ ወይም ለማስወገድ ንካ"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
-    <string name="backup_erase_dialog_message" msgid="7218566008912418809">"ያንተን  Wi-Fi ይለፍቃሎችን መጠባበቂያ ማቆም ዕልባቶች ሌሎች ቅንጅቶች  እና መተግበሪያ ውሂብ ብሎም ሁሉም Google አገልጋዮች ቅጂዎች ይሰረዙ?"</string>
+    <string name="backup_erase_dialog_message" msgid="7218566008912418809">"የአንተን  Wi-Fi ይለፍቃሎችን መጠባበቂያ ማቆም ዕልባቶች ሌሎች ቅንጅቶች  እና መተግበሪያ ውሂብ ብሎም ሁሉም Google አገልጋዮች ቅጂዎች ይሰረዙ?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"መሣሪያ አስተዳደር ቅንብሮች"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"የመሳሪያ አስተዳደር"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"አቦዝን"</string>
@@ -1563,21 +1581,14 @@
     <string name="vpn_cancel" msgid="1979937976123659332">"ይቅር"</string>
     <string name="vpn_save" msgid="4233484051644764510">"አስቀምጥ"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"አያይዝ"</string>
-    <!-- no translation found for vpn_edit (8647191407179996943) -->
-    <skip />
-    <!-- no translation found for vpn_connect_to (5965299358485793260) -->
-    <skip />
+    <string name="vpn_edit" msgid="8647191407179996943">"የVPN መገለጫ አርትዕ"</string>
+    <string name="vpn_connect_to" msgid="5965299358485793260">"ከ<xliff:g id="PROFILE">%s</xliff:g> ጋር ተገናኝ"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
-    <!-- no translation found for vpn_create (5628219087569761496) -->
-    <skip />
-    <!-- no translation found for vpn_menu_edit (408275284159243490) -->
-    <skip />
-    <!-- no translation found for vpn_menu_delete (8098021690546891414) -->
-    <skip />
-    <!-- no translation found for vpn_no_network (3050233675132726155) -->
-    <skip />
-    <!-- no translation found for vpn_missing_cert (7972907102570411501) -->
-    <skip />
+    <string name="vpn_create" msgid="5628219087569761496">"የVPN መገለጫ አክል"</string>
+    <string name="vpn_menu_edit" msgid="408275284159243490">"መገለጫ አርትዕ"</string>
+    <string name="vpn_menu_delete" msgid="8098021690546891414">"መገለጫ ሰርዝ"</string>
+    <string name="vpn_no_network" msgid="3050233675132726155">"ምንም የአውታረ መረብ ግኑኝነት የለም። እባክህ ቆይተህ እንደገና ሞክር።"</string>
+    <string name="vpn_missing_cert" msgid="7972907102570411501">"የዕውቅና ማረጋገጫ ይጎድላል። እባክህ መገለጫውን አርትዕ።"</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"ስርዓት"</string>
     <string name="trusted_credentials_user_tab" msgid="2244732111398939475">"ተጠቃሚ"</string>
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"አቦዝን"</string>
