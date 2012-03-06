@@ -605,9 +605,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
+        Class clazz = com.android.settings.widget.SettingsAppWidgetProvider.class;
         PackageManager pm = context.getPackageManager();
         pm.setComponentEnabledSetting(
-                new ComponentName("com.android.settings", ".widget.SettingsAppWidgetProvider"),
+                new ComponentName(context.getPackageName(), clazz.getName()),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
         checkObserver(context);
@@ -618,7 +619,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         Class clazz = com.android.settings.widget.SettingsAppWidgetProvider.class;
         PackageManager pm = context.getPackageManager();
         pm.setComponentEnabledSetting(
-                new ComponentName("com.android.settings", ".widget.SettingsAppWidgetProvider"),
+                new ComponentName(context.getPackageName(), clazz.getName()),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
         if (sSettingsObserver != null) {
