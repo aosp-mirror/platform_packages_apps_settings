@@ -60,6 +60,7 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,12 +85,13 @@ public class WifiSettings extends SettingsPreferenceFragment
     private static final String TAG = "WifiSettings";
     private static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
-    private static final int MENU_ID_ADD_NETWORK = Menu.FIRST + 2;
-    private static final int MENU_ID_ADVANCED = Menu.FIRST + 3;
-    private static final int MENU_ID_SCAN = Menu.FIRST + 4;
-    private static final int MENU_ID_CONNECT = Menu.FIRST + 5;
-    private static final int MENU_ID_FORGET = Menu.FIRST + 6;
-    private static final int MENU_ID_MODIFY = Menu.FIRST + 7;
+    private static final int MENU_ID_P2P = Menu.FIRST + 2;
+    private static final int MENU_ID_ADD_NETWORK = Menu.FIRST + 3;
+    private static final int MENU_ID_ADVANCED = Menu.FIRST + 4;
+    private static final int MENU_ID_SCAN = Menu.FIRST + 5;
+    private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
+    private static final int MENU_ID_FORGET = Menu.FIRST + 7;
+    private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
 
     private static final int WIFI_DIALOG_ID = 1;
     private static final int WPS_PBC_DIALOG_ID = 2;
@@ -306,6 +308,9 @@ public class WifiSettings extends SettingsPreferenceFragment
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menu.add(Menu.NONE, MENU_ID_P2P, 0, R.string.wifi_menu_p2p)
+                    .setEnabled(wifiIsEnabled)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -343,6 +348,17 @@ public class WifiSettings extends SettingsPreferenceFragment
         switch (item.getItemId()) {
             case MENU_ID_WPS_PBC:
                 showDialog(WPS_PBC_DIALOG_ID);
+                return true;
+            case MENU_ID_P2P:
+                if (getActivity() instanceof PreferenceActivity) {
+                    ((PreferenceActivity) getActivity()).startPreferencePanel(
+                            WifiP2pSettings.class.getCanonicalName(),
+                            null,
+                            R.string.wifi_p2p_settings_title, null,
+                            this, 0);
+                } else {
+                    startFragment(this, WifiP2pSettings.class.getCanonicalName(), -1, null);
+                }
                 return true;
             case MENU_ID_WPS_PIN:
                 showDialog(WPS_PIN_DIALOG_ID);
