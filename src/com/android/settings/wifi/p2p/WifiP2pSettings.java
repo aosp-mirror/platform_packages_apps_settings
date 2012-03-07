@@ -175,7 +175,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         getActivity().registerReceiver(mReceiver, mIntentFilter);
-        startSearch();
+        mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
     }
 
     @Override
@@ -296,9 +296,11 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         mPeers = peers;
         mConnectedDevices = 0;
         for (WifiP2pDevice peer: peers.getDeviceList()) {
+            if (DBG) Log.d(TAG, " peer " + peer);
             mPeersGroup.addPreference(new WifiP2pPeer(getActivity(), peer));
             if (peer.status == WifiP2pDevice.CONNECTED) mConnectedDevices++;
         }
+        if (DBG) Log.d(TAG, " mConnectedDevices " + mConnectedDevices);
     }
 
     private void handleP2pStateChanged() {
@@ -316,7 +318,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             mPeersGroup.setEnabled(true);
             preferenceScreen.addPreference(mPeersGroup);
 
-            startSearch();
+            if (mConnectedDevices == 0) startSearch();
         }
     }
 
