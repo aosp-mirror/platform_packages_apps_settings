@@ -45,7 +45,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
-    private static final String KEY_WIFI_P2P_SETTINGS = "wifi_p2p_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
@@ -145,12 +144,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Remove Mobile Network Settings if it's a wifi-only device.
         if (Utils.isWifiOnly(getActivity())) {
             getPreferenceScreen().removePreference(findPreference(KEY_MOBILE_NETWORK_SETTINGS));
-        }
-
-        WifiP2pManager p2p = (WifiP2pManager) activity.getSystemService(Context.WIFI_P2P_SERVICE);
-
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)) {
-            getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
         }
 
         // Enable Proxy selector settings if allowed.
