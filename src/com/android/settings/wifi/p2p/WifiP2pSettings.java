@@ -161,6 +161,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             }
         };
 
+        setHasOptionsMenu(true);
+
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
 
@@ -168,7 +170,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         mThisDevicePref = new Preference(getActivity());
         preferenceScreen.addPreference(mThisDevicePref);
 
-        setHasOptionsMenu(true);
+        mPeersGroup = new PreferenceCategory(getActivity());
+        mPeersGroup.setTitle(R.string.wifi_p2p_peer_devices);
     }
 
     @Override
@@ -310,11 +313,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             preferenceScreen.removeAll();
 
             preferenceScreen.setOrderingAsAdded(true);
-            mThisDevicePref = new Preference(getActivity());
             preferenceScreen.addPreference(mThisDevicePref);
 
-            mPeersGroup = new PreferenceCategory(getActivity());
-            mPeersGroup.setTitle(R.string.wifi_p2p_peer_devices);
             mPeersGroup.setEnabled(true);
             preferenceScreen.addPreference(mPeersGroup);
 
