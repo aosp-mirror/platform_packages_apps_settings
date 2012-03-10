@@ -42,7 +42,6 @@ import static android.net.TrafficStats.UID_REMOVED;
 import static android.net.TrafficStats.UID_TETHERING;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
-import static android.text.format.Time.TIMEZONE_UTC;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.android.internal.util.Preconditions.checkNotNull;
 import static com.android.settings.Utils.prepareCustomPreferencesList;
@@ -86,6 +85,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
+import android.text.format.Time;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -1139,7 +1139,7 @@ public class DataUsageSummary extends Fragment {
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
         final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
-        final String rangePhrase = formatDateRange(context, start, end, false);
+        final String rangePhrase = formatDateRange(context, start, end);
 
         mUsageSummary.setText(
                 getString(R.string.data_usage_total_during_range, totalPhrase, rangePhrase));
@@ -1264,7 +1264,7 @@ public class DataUsageSummary extends Fragment {
         }
 
         public CycleItem(Context context, long start, long end) {
-            this.label = formatDateRange(context, start, end, true);
+            this.label = formatDateRange(context, start, end);
             this.start = start;
             this.end = end;
         }
@@ -1293,14 +1293,13 @@ public class DataUsageSummary extends Fragment {
     private static final java.util.Formatter sFormatter = new java.util.Formatter(
             sBuilder, Locale.getDefault());
 
-    public static String formatDateRange(Context context, long start, long end, boolean utcTime) {
+    public static String formatDateRange(Context context, long start, long end) {
         final int flags = FORMAT_SHOW_DATE | FORMAT_ABBREV_MONTH;
-        final String timezone = utcTime ? TIMEZONE_UTC : null;
 
         synchronized (sBuilder) {
             sBuilder.setLength(0);
-            return DateUtils
-                    .formatDateRange(context, sFormatter, start, end, flags, timezone).toString();
+            return DateUtils.formatDateRange(context, sFormatter, start, end, flags, null)
+                    .toString();
         }
     }
 
@@ -1641,7 +1640,8 @@ public class DataUsageSummary extends Fragment {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             final int cycleDay = cycleDayPicker.getValue();
-                            editor.setPolicyCycleDay(template, cycleDay);
+                            final String cycleTimezone = new Time().timezone;
+                            editor.setPolicyCycleDay(template, cycleDay, cycleTimezone);
                             target.updatePolicy(true);
                         }
                     });
