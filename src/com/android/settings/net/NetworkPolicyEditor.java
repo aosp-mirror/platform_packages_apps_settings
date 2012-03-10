@@ -144,17 +144,20 @@ public class NetworkPolicyEditor {
         final Time time = new Time();
         time.setToNow();
         final int cycleDay = time.monthDay;
+        final String cycleTimezone = time.timezone;
 
-        return new NetworkPolicy(template, cycleDay, WARNING_DISABLED, LIMIT_DISABLED, true);
+        return new NetworkPolicy(
+                template, cycleDay, cycleTimezone, WARNING_DISABLED, LIMIT_DISABLED, true);
     }
 
     public int getPolicyCycleDay(NetworkTemplate template) {
         return getPolicy(template).cycleDay;
     }
 
-    public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
+    public void setPolicyCycleDay(NetworkTemplate template, int cycleDay, String cycleTimezone) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.cycleDay = cycleDay;
+        policy.cycleTimezone = cycleTimezone;
         policy.clearSnooze();
         writeAsync();
     }
@@ -197,6 +200,7 @@ public class NetworkPolicyEditor {
         return modified;
     }
 
+    @Deprecated
     public boolean isMobilePolicySplit(String subscriberId) {
         boolean has3g = false;
         boolean has4g = false;
@@ -216,6 +220,7 @@ public class NetworkPolicyEditor {
         return has3g && has4g;
     }
 
+    @Deprecated
     public void setMobilePolicySplit(String subscriberId, boolean split) {
         if (setMobilePolicySplitInternal(subscriberId, split)) {
             writeAsync();
@@ -228,6 +233,7 @@ public class NetworkPolicyEditor {
      *
      * @return {@code true} when any {@link NetworkPolicy} was mutated.
      */
+    @Deprecated
     private boolean setMobilePolicySplitInternal(String subscriberId, boolean split) {
         final boolean beforeSplit = isMobilePolicySplit(subscriberId);
 
@@ -248,7 +254,8 @@ public class NetworkPolicyEditor {
                     : policy4g;
             mPolicies.remove(policy3g);
             mPolicies.remove(policy4g);
-            mPolicies.add(new NetworkPolicy(templateAll, restrictive.cycleDay,
+            mPolicies.add(new NetworkPolicy(
+                    templateAll, restrictive.cycleDay, restrictive.cycleTimezone,
                     restrictive.warningBytes, restrictive.limitBytes, restrictive.metered));
             return true;
 
@@ -256,9 +263,11 @@ public class NetworkPolicyEditor {
             // duplicate existing policy into two rules
             final NetworkPolicy policyAll = getPolicy(templateAll);
             mPolicies.remove(policyAll);
-            mPolicies.add(new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.warningBytes,
+            mPolicies.add(new NetworkPolicy(
+                    template3g, policyAll.cycleDay, policyAll.cycleTimezone, policyAll.warningBytes,
                     policyAll.limitBytes, policyAll.metered));
-            mPolicies.add(new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.warningBytes,
+            mPolicies.add(new NetworkPolicy(
+                    template4g, policyAll.cycleDay, policyAll.cycleTimezone, policyAll.warningBytes,
                     policyAll.limitBytes, policyAll.metered));
             return true;
         } else {

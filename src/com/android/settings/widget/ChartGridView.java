@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import static com.android.settings.DataUsageSummary.formatDateRange;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -30,7 +32,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.android.settings.DataUsageSummary;
 import com.android.settings.R;
 import com.google.common.base.Preconditions;
 
@@ -82,8 +83,8 @@ public class ChartGridView extends View {
 
     void setBounds(long start, long end) {
         final Context context = getContext();
-        mLayoutStart = makeLayout(DataUsageSummary.formatDateRange(context, start, start, true));
-        mLayoutEnd = makeLayout(DataUsageSummary.formatDateRange(context, end, end, true));
+        mLayoutStart = makeLayout(formatDateRange(context, start, start));
+        mLayoutEnd = makeLayout(formatDateRange(context, end, end));
         invalidate();
     }
 
