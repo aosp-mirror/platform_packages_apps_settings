@@ -38,6 +38,7 @@ import android.security.KeyStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -422,6 +423,8 @@ public class WifiConfigController implements TextWatcher,
 
     private int validateIpConfigFields(LinkProperties linkProperties) {
         String ipAddr = mIpAddressView.getText().toString();
+        if (TextUtils.isEmpty(ipAddr)) return R.string.wifi_ip_settings_invalid_ip_address;
+
         InetAddress inetAddr = null;
         try {
             inetAddr = NetworkUtils.numericToInetAddress(ipAddr);
@@ -433,7 +436,9 @@ public class WifiConfigController implements TextWatcher,
         try {
             networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText().toString());
         } catch (NumberFormatException e) {
-            // Use -1
+            // Set the hint as default after user types in ip address
+            mNetworkPrefixLengthView.setText(mConfigUi.getContext().getString(
+                    R.string.wifi_network_prefix_length_hint));
         }
         if (networkPrefixLength < 0 || networkPrefixLength > 32) {
             return R.string.wifi_ip_settings_invalid_network_prefix_length;
@@ -441,6 +446,18 @@ public class WifiConfigController implements TextWatcher,
         linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
 
         String gateway = mGatewayView.getText().toString();
+        if (TextUtils.isEmpty(gateway)) {
+            try {
+                //Extract a default gateway from IP address
+                InetAddress netPart = NetworkUtils.getNetworkPart(inetAddr, networkPrefixLength);
+                byte[] addr = netPart.getAddress();
+                addr[addr.length-1] = 1;
+                mGatewayView.setText(InetAddress.getByAddress(addr).getHostAddress());
+            } catch (RuntimeException ee) {
+            } catch (java.net.UnknownHostException u) {
+            }
+        }
+
         InetAddress gatewayAddr = null;
         try {
             gatewayAddr = NetworkUtils.numericToInetAddress(gateway);
@@ -450,6 +467,10 @@ public class WifiConfigController implements TextWatcher,
         linkProperties.addRoute(new RouteInfo(gatewayAddr));
 
         String dns = mDns1View.getText().toString();
+        if (TextUtils.isEmpty(dns)) {
+            //If everything else is valid, provide hint as a default option
+            mDns1View.setText(mConfigUi.getContext().getString(R.string.wifi_dns1_hint));
+        }
         InetAddress dnsAddr = null;
         try {
             dnsAddr = NetworkUtils.numericToInetAddress(dns);
