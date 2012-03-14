@@ -30,10 +30,14 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.settings.R;
 
@@ -94,17 +98,21 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
                 .setPositiveButton(R.string.bluetooth_rename_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                if (mLocalAdapter != null) {
-                                    String deviceName = mDeviceNameView.getText().toString();
-                                    Log.d(TAG, "Setting device name to " + deviceName);
-                                    mLocalAdapter.setName(deviceName);
-                                }
+                                String deviceName = mDeviceNameView.getText().toString();
+                                setDeviceName(deviceName);
                             }
                         })
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
+        mAlertDialog.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
         return mAlertDialog;
+    }
+
+    private void setDeviceName(String deviceName) {
+        Log.d(TAG, "Setting device name to " + deviceName);
+        mLocalAdapter.setName(deviceName);
     }
 
     @Override
@@ -123,6 +131,18 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
         });
         mDeviceNameView.setText(deviceName);    // set initial value before adding listener
         mDeviceNameView.addTextChangedListener(this);
+        mDeviceNameView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    setDeviceName(v.getText().toString());
+                    mAlertDialog.dismiss();
+                    return true;    // action handled
+                } else {
+                    return false;   // not handled
+                }
+            }
+        });
         return view;
     }
 
