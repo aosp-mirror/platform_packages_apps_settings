@@ -1504,7 +1504,7 @@ public class DataUsageSummary extends Fragment {
             ft.add(fragment, TAG_APP_DETAILS);
             ft.addToBackStack(TAG_APP_DETAILS);
             ft.setBreadCrumbTitle(label);
-            ft.commit();
+            ft.commitAllowingStateLoss();
         }
 
         @Override
