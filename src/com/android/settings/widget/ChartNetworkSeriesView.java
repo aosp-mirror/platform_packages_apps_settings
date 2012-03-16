@@ -44,6 +44,8 @@ public class ChartNetworkSeriesView extends View {
     private static final String TAG = "ChartNetworkSeriesView";
     private static final boolean LOGD = false;
 
+    private static final boolean ESTIMATE_ENABLED = false;
+
     private ChartAxis mHoriz;
     private ChartAxis mVert;
 
@@ -252,36 +254,38 @@ public class ChartNetworkSeriesView extends View {
 
         mMax = totalData;
 
-        // build estimated data
-        mPathEstimate.moveTo(lastX, lastY);
+        if (ESTIMATE_ENABLED) {
+            // build estimated data
+            mPathEstimate.moveTo(lastX, lastY);
 
-        final long now = System.currentTimeMillis();
-        final long bucketDuration = mStats.getBucketDuration();
+            final long now = System.currentTimeMillis();
+            final long bucketDuration = mStats.getBucketDuration();
 
-        // long window is average over two weeks
-        entry = mStats.getValues(lastTime - WEEK_IN_MILLIS * 2, lastTime, now, entry);
-        final long longWindow = (entry.rxBytes + entry.txBytes) * bucketDuration
-                / entry.bucketDuration;
-
-        long futureTime = 0;
-        while (lastX < width) {
-            futureTime += bucketDuration;
-
-            // short window is day average last week
-            final long lastWeekTime = lastTime - WEEK_IN_MILLIS + (futureTime % WEEK_IN_MILLIS);
-            entry = mStats.getValues(lastWeekTime - DAY_IN_MILLIS, lastWeekTime, now, entry);
-            final long shortWindow = (entry.rxBytes + entry.txBytes) * bucketDuration
+            // long window is average over two weeks
+            entry = mStats.getValues(lastTime - WEEK_IN_MILLIS * 2, lastTime, now, entry);
+            final long longWindow = (entry.rxBytes + entry.txBytes) * bucketDuration
                     / entry.bucketDuration;
 
-            totalData += (longWindow * 7 + shortWindow * 3) / 10;
+            long futureTime = 0;
+            while (lastX < width) {
+                futureTime += bucketDuration;
 
-            lastX = mHoriz.convertToPoint(lastTime + futureTime);
-            lastY = mVert.convertToPoint(totalData);
+                // short window is day average last week
+                final long lastWeekTime = lastTime - WEEK_IN_MILLIS + (futureTime % WEEK_IN_MILLIS);
+                entry = mStats.getValues(lastWeekTime - DAY_IN_MILLIS, lastWeekTime, now, entry);
+                final long shortWindow = (entry.rxBytes + entry.txBytes) * bucketDuration
+                        / entry.bucketDuration;
 
-            mPathEstimate.lineTo(lastX, lastY);
+                totalData += (longWindow * 7 + shortWindow * 3) / 10;
+
+                lastX = mHoriz.convertToPoint(lastTime + futureTime);
+                lastY = mVert.convertToPoint(totalData);
+
+                mPathEstimate.lineTo(lastX, lastY);
+            }
+
+            mMaxEstimate = totalData;
         }
-
-        mMaxEstimate = totalData;
 
         invalidate();
     }
@@ -291,7 +295,7 @@ public class ChartNetworkSeriesView extends View {
     }
 
     public void setEstimateVisible(boolean estimateVisible) {
-        mEstimateVisible = estimateVisible;
+        mEstimateVisible = ESTIMATE_ENABLED ? estimateVisible : false;
         invalidate();
     }
 
