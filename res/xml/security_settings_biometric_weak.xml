@@ -31,6 +31,11 @@
             android:title="@string/biometric_weak_improve_matching_title"/>
 
         <CheckBoxPreference
+            android:key="biometric_weak_liveliness"
+            android:title="@string/biometric_weak_liveliness_title"
+            android:summary="@string/biometric_weak_liveliness_summary"/>
+
+        <CheckBoxPreference
             android:key="visiblepattern"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
 

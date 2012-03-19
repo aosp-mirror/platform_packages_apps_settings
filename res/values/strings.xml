@@ -639,6 +639,13 @@
 
     <!-- Security settings screen when using face unlock, setting option name to start an activity that allows the user to improve accuracy by adding additional enrollment faces -->
     <string name="biometric_weak_improve_matching_title">Improve face matching</string>
+    <!-- On the security settings screen when using face unlock.  This checkbox is used to toggle whether liveliness detection is required.  If it is checked the user must blink during unlock to prove it's not a photo  -->
+    <string name="biometric_weak_liveliness_title">Require eye blink</string>
+    <!-- On the security settings screen when using face unlock.  The summary of the liveliness checkbox -->
+    <string name="biometric_weak_liveliness_summary" product="default">Prevent others from using a photo of you to unlock your phone</string>
+    <!-- On the security settings screen when using face unlock.  The summary of the liveliness checkbox -->
+    <string name="biometric_weak_liveliness_summary" product="tablet">Prevent others from using a photo of you to unlock your tablet</string>
+
 
     <!-- Security settings screen, setting option name to change screen timeout -->
     <string name="lock_after_timeout">Automatically lock</string>
