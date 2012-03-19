@@ -18,6 +18,7 @@ package com.android.settings;
 
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.wifi.WifiEnabler;
 
@@ -294,7 +295,8 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         if (DataUsageSummary.class.getName().equals(fragmentName) ||
                 PowerUsageSummary.class.getName().equals(fragmentName) ||
                 AccountSyncSettings.class.getName().equals(fragmentName) ||
-                UserDictionarySettings.class.getName().equals(fragmentName)) {
+                UserDictionarySettings.class.getName().equals(fragmentName) ||
+                Memory.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 
