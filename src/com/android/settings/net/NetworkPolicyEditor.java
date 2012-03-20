@@ -139,6 +139,7 @@ public class NetworkPolicyEditor {
         return null;
     }
 
+    @Deprecated
     private static NetworkPolicy buildDefaultPolicy(NetworkTemplate template) {
         // TODO: move this into framework to share with NetworkPolicyManagerService
         final Time time = new Time();
@@ -146,8 +147,8 @@ public class NetworkPolicyEditor {
         final int cycleDay = time.monthDay;
         final String cycleTimezone = time.timezone;
 
-        return new NetworkPolicy(
-                template, cycleDay, cycleTimezone, WARNING_DISABLED, LIMIT_DISABLED, true);
+        return new NetworkPolicy(template, cycleDay, cycleTimezone, WARNING_DISABLED,
+                LIMIT_DISABLED, SNOOZE_NEVER, SNOOZE_NEVER, true, false);
     }
 
     public int getPolicyCycleDay(NetworkTemplate template) {
@@ -158,6 +159,7 @@ public class NetworkPolicyEditor {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.cycleDay = cycleDay;
         policy.cycleTimezone = cycleTimezone;
+        policy.inferred = false;
         policy.clearSnooze();
         writeAsync();
     }
@@ -169,6 +171,7 @@ public class NetworkPolicyEditor {
     public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.warningBytes = warningBytes;
+        policy.inferred = false;
         policy.clearSnooze();
         writeAsync();
     }
@@ -180,6 +183,7 @@ public class NetworkPolicyEditor {
     public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {
         final NetworkPolicy policy = getOrCreatePolicy(template);
         policy.limitBytes = limitBytes;
+        policy.inferred = false;
         policy.clearSnooze();
         writeAsync();
     }
@@ -254,21 +258,21 @@ public class NetworkPolicyEditor {
                     : policy4g;
             mPolicies.remove(policy3g);
             mPolicies.remove(policy4g);
-            mPolicies.add(new NetworkPolicy(
-                    templateAll, restrictive.cycleDay, restrictive.cycleTimezone,
-                    restrictive.warningBytes, restrictive.limitBytes, restrictive.metered));
+            mPolicies.add(new NetworkPolicy(templateAll, restrictive.cycleDay,
+                    restrictive.cycleTimezone, restrictive.warningBytes, restrictive.limitBytes,
+                    SNOOZE_NEVER, SNOOZE_NEVER, restrictive.metered, restrictive.inferred));
             return true;
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
             final NetworkPolicy policyAll = getPolicy(templateAll);
             mPolicies.remove(policyAll);
-            mPolicies.add(new NetworkPolicy(
-                    template3g, policyAll.cycleDay, policyAll.cycleTimezone, policyAll.warningBytes,
-                    policyAll.limitBytes, policyAll.metered));
-            mPolicies.add(new NetworkPolicy(
-                    template4g, policyAll.cycleDay, policyAll.cycleTimezone, policyAll.warningBytes,
-                    policyAll.limitBytes, policyAll.metered));
+            mPolicies.add(new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.cycleTimezone,
+                    policyAll.warningBytes, policyAll.limitBytes, SNOOZE_NEVER, SNOOZE_NEVER,
+                    policyAll.metered, policyAll.inferred));
+            mPolicies.add(new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.cycleTimezone,
+                    policyAll.warningBytes, policyAll.limitBytes, SNOOZE_NEVER, SNOOZE_NEVER,
+                    policyAll.metered, policyAll.inferred));
             return true;
         } else {
             return false;
