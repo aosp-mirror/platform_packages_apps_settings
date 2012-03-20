@@ -16,6 +16,11 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.ENFORCEMENT_DEFAULT;
+import static android.content.pm.PackageManager.ENFORCEMENT_YES;
+
+import android.app.ActivityThread;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -23,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.IPackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
@@ -51,8 +57,6 @@ public class Memory extends SettingsPreferenceFragment {
     private static final int DLG_CONFIRM_UNMOUNT = 1;
     private static final int DLG_ERROR_UNMOUNT = 2;
 
-    private static final int MENU_ID_USB = Menu.FIRST;
-
     private Resources mResources;
 
     // The mountToggle Preference that has last been clicked.
@@ -65,6 +69,7 @@ public class Memory extends SettingsPreferenceFragment {
     private IMountService mMountService = null;
 
     private StorageManager mStorageManager = null;
+    private IPackageManager mPackageService;
 
     private StorageVolumePreferenceCategory mInternalStorageVolumePreferenceCategory;
     private StorageVolumePreferenceCategory[] mStorageVolumePreferenceCategories;
@@ -77,6 +82,8 @@ public class Memory extends SettingsPreferenceFragment {
             mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
             mStorageManager.registerListener(mStorageListener);
         }
+
+        mPackageService = ActivityThread.getPackageManager();
 
         addPreferencesFromResource(R.xml.device_info_memory);
 
@@ -92,9 +99,6 @@ public class Memory extends SettingsPreferenceFragment {
         }
 
         StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
-        // mass storage is enabled if primary volume supports it
-        boolean massStorageEnabled = (storageVolumes.length > 0
-                && storageVolumes[0].allowMassStorage());
         int length = storageVolumes.length;
         mStorageVolumePreferenceCategories = new StorageVolumePreferenceCategory[length];
         for (int i = 0; i < length; i++) {
@@ -106,8 +110,13 @@ public class Memory extends SettingsPreferenceFragment {
             mStorageVolumePreferenceCategories[i].init();
         }
 
-        // only show options menu if we are not using the legacy USB mass storage support
-        setHasOptionsMenu(!massStorageEnabled);
+        setHasOptionsMenu(true);
+    }
+
+    private boolean isMassStorageEnabled() {
+        // mass storage is enabled if primary volume supports it
+        final StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
+        return (storageVolumes.length > 0 && storageVolumes[0].allowMassStorage());
     }
 
     @Override
@@ -163,15 +172,29 @@ public class Memory extends SettingsPreferenceFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, MENU_ID_USB, 0, R.string.storage_menu_usb)
-                //.setIcon(com.android.internal.R.drawable.stat_sys_data_usb)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        inflater.inflate(R.menu.storage, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        final MenuItem usb = menu.findItem(R.id.storage_usb);
+        usb.setVisible(!isMassStorageEnabled());
+
+        final int enforcement;
+        try {
+            enforcement = mPackageService.getPermissionEnforcement(READ_EXTERNAL_STORAGE);
+        } catch (RemoteException e) {
+            throw new RuntimeException("Problem talking with PackageManager", e);
+        }
+
+        final MenuItem enforceReadExternal = menu.findItem(R.id.storage_enforce_read_external);
+        enforceReadExternal.setChecked(enforcement == ENFORCEMENT_YES);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_ID_USB:
+            case R.id.storage_usb:
                 if (getActivity() instanceof PreferenceActivity) {
                     ((PreferenceActivity) getActivity()).startPreferencePanel(
                             UsbSettings.class.getCanonicalName(),
@@ -182,6 +205,19 @@ public class Memory extends SettingsPreferenceFragment {
                     startFragment(this, UsbSettings.class.getCanonicalName(), -1, null);
                 }
                 return true;
+            case R.id.storage_enforce_read_external: {
+                final boolean checked = !item.isChecked();
+                item.setChecked(checked);
+
+                final int enforcement = checked ? ENFORCEMENT_YES : ENFORCEMENT_DEFAULT;
+                try {
+                    // TODO: offload to background thread
+                    mPackageService.setPermissionEnforcement(READ_EXTERNAL_STORAGE, enforcement);
+                } catch (RemoteException e) {
+                    throw new RuntimeException("Problem talking with PackageManager", e);
+                }
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
