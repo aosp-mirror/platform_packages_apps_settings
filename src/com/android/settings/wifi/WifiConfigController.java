@@ -33,6 +33,7 @@ import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiConfiguration.Status;
 import android.net.wifi.WifiInfo;
+import android.os.Handler;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -119,6 +120,8 @@ public class WifiConfigController implements TextWatcher,
     // True when this instance is used in SetupWizard XL context.
     private final boolean mInXlSetupWizard;
 
+    private final Handler mTextViewChangedHandler;
+
     static boolean requireKeyStore(WifiConfiguration config) {
         if (config == null) {
             return false;
@@ -144,8 +147,14 @@ public class WifiConfigController implements TextWatcher,
                 accessPoint.security;
         mEdit = edit;
 
+        mTextViewChangedHandler = new Handler();
         final Context context = mConfigUi.getContext();
         final Resources resources = context.getResources();
+
+        mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
+        mIpSettingsSpinner.setOnItemSelectedListener(this);
+        mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
+        mProxySettingsSpinner.setOnItemSelectedListener(this);
 
         if (mAccessPoint == null) { // new network
             mConfigUi.setTitle(R.string.wifi_add_network);
@@ -166,14 +175,15 @@ public class WifiConfigController implements TextWatcher,
             } else {
                 mView.findViewById(R.id.type).setVisibility(View.VISIBLE);
             }
+
+            showIpConfigFields();
+            showProxyFields();
+            mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.wifi_advanced_togglebox).setOnClickListener(this);
+
             mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
         } else {
             mConfigUi.setTitle(mAccessPoint.ssid);
-
-            mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
-            mIpSettingsSpinner.setOnItemSelectedListener(this);
-            mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
-            mProxySettingsSpinner.setOnItemSelectedListener(this);
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 
@@ -216,13 +226,6 @@ public class WifiConfigController implements TextWatcher,
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
                 }
-
-                if (config.status == Status.DISABLED &&
-                        config.disableReason == WifiConfiguration.DISABLED_DNS_FAILURE) {
-                    addRow(group, R.string.wifi_disabled_heading,
-                            context.getString(R.string.wifi_disabled_help));
-                }
-
             }
 
             if (mAccessPoint.networkId == INVALID_NETWORK_ID || mEdit) {
@@ -269,13 +272,13 @@ public class WifiConfigController implements TextWatcher,
     void enableSubmitIfAppropriate() {
         Button submit = mConfigUi.getSubmitButton();
         if (submit == null) return;
-        if (mPasswordView == null) return;
 
         boolean enabled = false;
         boolean passwordInvalid = false;
 
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
-            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8)) {
+        if (mPasswordView != null &&
+            ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
+            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8))) {
             passwordInvalid = true;
         }
 
@@ -399,7 +402,7 @@ public class WifiConfigController implements TextWatcher,
                 mProxySettingsSpinner.getSelectedItemPosition() == PROXY_STATIC) ?
                 ProxySettings.STATIC : ProxySettings.NONE;
 
-        if (mProxySettings == ProxySettings.STATIC) {
+        if (mProxySettings == ProxySettings.STATIC && mProxyHostView != null) {
             String host = mProxyHostView.getText().toString();
             String portStr = mProxyPortView.getText().toString();
             String exclusionList = mProxyExclusionListView.getText().toString();
@@ -422,6 +425,8 @@ public class WifiConfigController implements TextWatcher,
     }
 
     private int validateIpConfigFields(LinkProperties linkProperties) {
+        if (mIpAddressView == null) return 0;
+
         String ipAddr = mIpAddressView.getText().toString();
         if (TextUtils.isEmpty(ipAddr)) return R.string.wifi_ip_settings_invalid_ip_address;
 
@@ -435,15 +440,15 @@ public class WifiConfigController implements TextWatcher,
         int networkPrefixLength = -1;
         try {
             networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText().toString());
+            if (networkPrefixLength < 0 || networkPrefixLength > 32) {
+                return R.string.wifi_ip_settings_invalid_network_prefix_length;
+            }
+            linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
         } catch (NumberFormatException e) {
             // Set the hint as default after user types in ip address
             mNetworkPrefixLengthView.setText(mConfigUi.getContext().getString(
                     R.string.wifi_network_prefix_length_hint));
         }
-        if (networkPrefixLength < 0 || networkPrefixLength > 32) {
-            return R.string.wifi_ip_settings_invalid_network_prefix_length;
-        }
-        linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
 
         String gateway = mGatewayView.getText().toString();
         if (TextUtils.isEmpty(gateway)) {
@@ -456,28 +461,31 @@ public class WifiConfigController implements TextWatcher,
             } catch (RuntimeException ee) {
             } catch (java.net.UnknownHostException u) {
             }
+        } else {
+            InetAddress gatewayAddr = null;
+            try {
+                gatewayAddr = NetworkUtils.numericToInetAddress(gateway);
+            } catch (IllegalArgumentException e) {
+                return R.string.wifi_ip_settings_invalid_gateway;
+            }
+            linkProperties.addRoute(new RouteInfo(gatewayAddr));
         }
-
-        InetAddress gatewayAddr = null;
-        try {
-            gatewayAddr = NetworkUtils.numericToInetAddress(gateway);
-        } catch (IllegalArgumentException e) {
-            return R.string.wifi_ip_settings_invalid_gateway;
-        }
-        linkProperties.addRoute(new RouteInfo(gatewayAddr));
 
         String dns = mDns1View.getText().toString();
+        InetAddress dnsAddr = null;
+
         if (TextUtils.isEmpty(dns)) {
             //If everything else is valid, provide hint as a default option
             mDns1View.setText(mConfigUi.getContext().getString(R.string.wifi_dns1_hint));
+        } else {
+            try {
+                dnsAddr = NetworkUtils.numericToInetAddress(dns);
+            } catch (IllegalArgumentException e) {
+                return R.string.wifi_ip_settings_invalid_dns;
+            }
+            linkProperties.addDns(dnsAddr);
         }
-        InetAddress dnsAddr = null;
-        try {
-            dnsAddr = NetworkUtils.numericToInetAddress(dns);
-        } catch (IllegalArgumentException e) {
-            return R.string.wifi_ip_settings_invalid_dns;
-        }
-        linkProperties.addDns(dnsAddr);
+
         if (mDns2View.length() > 0) {
             dns = mDns2View.getText().toString();
             try {
@@ -697,7 +705,11 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void afterTextChanged(Editable s) {
-        enableSubmitIfAppropriate();
+        mTextViewChangedHandler.post(new Runnable() {
+                public void run() {
+                    enableSubmitIfAppropriate();
+                }
+            });
     }
 
     @Override
