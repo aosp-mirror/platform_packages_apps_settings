@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.security.Credentials;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyChain;
 import android.security.KeyStore;
@@ -187,13 +188,38 @@ public final class CredentialStorage extends Activity {
         if (mInstallBundle != null && !mInstallBundle.isEmpty()) {
             Bundle bundle = mInstallBundle;
             mInstallBundle = null;
-            for (String key : bundle.keySet()) {
-                byte[] value = bundle.getByteArray(key);
-                if (value != null && !mKeyStore.put(key, value)) {
+
+            if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
+                String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
+                byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
+
+                if (!mKeyStore.importKey(key, value)) {
                     Log.e(TAG, "Failed to install " + key);
                     return;
                 }
             }
+
+            if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
+                String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
+                byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
+
+                if (!mKeyStore.put(certName, certData)) {
+                    Log.e(TAG, "Failed to install " + certName);
+                    return;
+                }
+            }
+
+            if (bundle.containsKey(Credentials.EXTRA_CA_CERTIFICATES_NAME)) {
+                String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
+                byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
+
+                if (!mKeyStore.put(caListName, caListData)) {
+                    Log.e(TAG, "Failed to install " + caListName);
+                    return;
+                }
+
+            }
+
             setResult(RESULT_OK);
         }
     }
