@@ -360,9 +360,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         String caCert = "";
         String serverCert = "";
         if (!profile.ipsecUserCert.isEmpty()) {
-            byte[] value = mKeyStore.get(Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert);
-            privateKey = (value == null) ? null : new String(value, Charsets.UTF_8);
-            value = mKeyStore.get(Credentials.USER_CERTIFICATE + profile.ipsecUserCert);
+            /*
+             * VPN has a special exception in keystore to allow it to use system
+             * UID certs.
+             */
+            privateKey = Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert;
+            byte[] value = mKeyStore.get(Credentials.USER_CERTIFICATE + profile.ipsecUserCert);
             userCert = (value == null) ? null : new String(value, Charsets.UTF_8);
         }
         if (!profile.ipsecCaCert.isEmpty()) {
