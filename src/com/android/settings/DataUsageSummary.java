@@ -76,9 +76,12 @@ import android.net.NetworkTemplate;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.os.UserId;
 import android.preference.Preference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -88,6 +91,7 @@ import android.text.format.Formatter;
 import android.text.format.Time;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -133,7 +137,6 @@ import com.android.settings.widget.PieChartView;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -230,7 +233,7 @@ public class DataUsageSummary extends Fragment {
     private NetworkTemplate mTemplate;
     private ChartData mChartData;
 
-    private int[] mAppDetailUids = null;
+    private AppItem mCurrentApp = null;
 
     private Intent mAppSettingsIntent;
 
@@ -684,7 +687,7 @@ public class DataUsageSummary extends Fragment {
         // TODO: consider chaining two loaders together instead of reloading
         // network history when showing app detail.
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoader.buildArgs(mTemplate, mAppDetailUids), mChartDataCallbacks);
+                ChartDataLoader.buildArgs(mTemplate, mCurrentApp), mChartDataCallbacks);
 
         // detail mode can change visible menus, invalidate
         getActivity().invalidateOptionsMenu();
@@ -693,15 +696,11 @@ public class DataUsageSummary extends Fragment {
     }
 
     private boolean isAppDetailMode() {
-        return mAppDetailUids != null;
-    }
-
-    private int getAppDetailPrimaryUid() {
-        return mAppDetailUids[0];
+        return mCurrentApp != null;
     }
 
     /**
-     * Update UID details panels to match {@link #mAppDetailUids}, showing or
+     * Update UID details panels to match {@link #mCurrentApp}, showing or
      * hiding them depending on {@link #isAppDetailMode()}.
      */
     private void updateAppDetail() {
@@ -725,8 +724,8 @@ public class DataUsageSummary extends Fragment {
         mChart.bindNetworkPolicy(null);
 
         // show icon and all labels appearing under this app
-        final int primaryUid = getAppDetailPrimaryUid();
-        final UidDetail detail = mUidDetailProvider.getUidDetail(primaryUid, true);
+        final int appId = mCurrentApp.appId;
+        final UidDetail detail = mUidDetailProvider.getUidDetail(appId, true);
         mAppIcon.setImageDrawable(detail.icon);
 
         mAppTitles.removeAllViews();
@@ -740,7 +739,7 @@ public class DataUsageSummary extends Fragment {
 
         // enable settings button when package provides it
         // TODO: target torwards entire UID instead of just first package
-        final String[] packageNames = pm.getPackagesForUid(primaryUid);
+        final String[] packageNames = pm.getPackagesForUid(appId);
         if (packageNames != null && packageNames.length > 0) {
             mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
             mAppSettingsIntent.setPackage(packageNames[0]);
@@ -756,8 +755,7 @@ public class DataUsageSummary extends Fragment {
 
         updateDetailData();
 
-        if (NetworkPolicyManager.isUidValidForPolicy(context, primaryUid)
-                && !getRestrictBackground() && isBandwidthControlEnabled()
+        if (UserId.isApp(appId) && !getRestrictBackground() && isBandwidthControlEnabled()
                 && hasMobileRadio(context)) {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
             setPreferenceSummary(mAppRestrictView,
@@ -851,10 +849,10 @@ public class DataUsageSummary extends Fragment {
     }
 
     private boolean getAppRestrictBackground() {
-        final int primaryUid = getAppDetailPrimaryUid();
+        final int appId = mCurrentApp.appId;
         final int uidPolicy;
         try {
-            uidPolicy = mPolicyService.getUidPolicy(primaryUid);
+            uidPolicy = mPolicyService.getAppPolicy(appId);
         } catch (RemoteException e) {
             // since we can't do much without policy, we bail hard.
             throw new RuntimeException("problem reading network policy", e);
@@ -865,9 +863,9 @@ public class DataUsageSummary extends Fragment {
 
     private void setAppRestrictBackground(boolean restrictBackground) {
         if (LOGD) Log.d(TAG, "setAppRestrictBackground()");
-        final int primaryUid = getAppDetailPrimaryUid();
+        final int appId = mCurrentApp.appId;
         try {
-            mPolicyService.setUidPolicy(primaryUid,
+            mPolicyService.setAppPolicy(appId,
                     restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
         } catch (RemoteException e) {
             throw new RuntimeException("unable to save policy", e);
@@ -1050,9 +1048,9 @@ public class DataUsageSummary extends Fragment {
         /** {@inheritDoc} */
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final Context context = view.getContext();
-            final AppUsageItem app = (AppUsageItem) parent.getItemAtPosition(position);
-            final UidDetail detail = mUidDetailProvider.getUidDetail(app.uids[0], true);
-            AppDetailsFragment.show(DataUsageSummary.this, app.uids, detail.label);
+            final AppItem app = (AppItem) parent.getItemAtPosition(position);
+            final UidDetail detail = mUidDetailProvider.getUidDetail(app.appId, true);
+            AppDetailsFragment.show(DataUsageSummary.this, app, detail.label);
         }
     };
 
@@ -1362,25 +1360,53 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
-    private static class AppUsageItem implements Comparable<AppUsageItem> {
-        public int[] uids;
+    public static class AppItem implements Comparable<AppItem>, Parcelable {
+        public final int appId;
+        public SparseBooleanArray uids = new SparseBooleanArray();
         public long total;
 
-        public AppUsageItem(int uid) {
-            uids = new int[] { uid };
+        public AppItem(int appId) {
+            this.appId = appId;
+        }
+
+        public AppItem(Parcel parcel) {
+            appId = parcel.readInt();
+            uids = parcel.readSparseBooleanArray();
+            total = parcel.readLong();
         }
 
         public void addUid(int uid) {
-            if (contains(uids, uid)) return;
-            final int length = uids.length;
-            uids = Arrays.copyOf(uids, length + 1);
-            uids[length] = uid;
+            uids.put(uid, true);
         }
 
-        /** {@inheritDoc} */
-        public int compareTo(AppUsageItem another) {
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(appId);
+            dest.writeSparseBooleanArray(uids);
+            dest.writeLong(total);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public int compareTo(AppItem another) {
             return Long.compare(another.total, total);
         }
+
+        public static final Creator<AppItem> CREATOR = new Creator<AppItem>() {
+            @Override
+            public AppItem createFromParcel(Parcel in) {
+                return new AppItem(in);
+            }
+
+            @Override
+            public AppItem[] newArray(int size) {
+                return new AppItem[size];
+            }
+        };
     }
 
     /**
@@ -1390,7 +1416,7 @@ public class DataUsageSummary extends Fragment {
         private final UidDetailProvider mProvider;
         private final int mInsetSide;
 
-        private ArrayList<AppUsageItem> mItems = Lists.newArrayList();
+        private ArrayList<AppItem> mItems = Lists.newArrayList();
         private long mLargest;
 
         public DataUsageAdapter(UidDetailProvider provider, int insetSide) {
@@ -1404,29 +1430,29 @@ public class DataUsageSummary extends Fragment {
         public void bindStats(NetworkStats stats) {
             mItems.clear();
 
-            final AppUsageItem systemItem = new AppUsageItem(android.os.Process.SYSTEM_UID);
-            final SparseArray<AppUsageItem> knownUids = new SparseArray<AppUsageItem>();
+            final AppItem systemItem = new AppItem(android.os.Process.SYSTEM_UID);
+            final SparseArray<AppItem> knownUids = new SparseArray<AppItem>();
 
             NetworkStats.Entry entry = null;
             final int size = stats != null ? stats.size() : 0;
             for (int i = 0; i < size; i++) {
                 entry = stats.getValues(i, entry);
 
-                final int uid = entry.uid;
-                final boolean isApp = uid >= android.os.Process.FIRST_APPLICATION_UID
-                        && uid <= android.os.Process.LAST_APPLICATION_UID;
-                if (isApp || uid == UID_REMOVED || uid == UID_TETHERING) {
-                    AppUsageItem item = knownUids.get(uid);
+                final boolean isApp = UserId.isApp(entry.uid);
+                final int appId = isApp ? UserId.getAppId(entry.uid) : entry.uid;
+                if (isApp || appId == UID_REMOVED || appId == UID_TETHERING) {
+                    AppItem item = knownUids.get(appId);
                     if (item == null) {
-                        item = new AppUsageItem(uid);
-                        knownUids.put(uid, item);
+                        item = new AppItem(appId);
+                        knownUids.put(appId, item);
                         mItems.add(item);
                     }
 
                     item.total += entry.rxBytes + entry.txBytes;
+                    item.addUid(entry.uid);
                 } else {
                     systemItem.total += entry.rxBytes + entry.txBytes;
-                    systemItem.addUid(uid);
+                    systemItem.addUid(entry.uid);
                 }
             }
 
@@ -1451,7 +1477,7 @@ public class DataUsageSummary extends Fragment {
 
         @Override
         public long getItemId(int position) {
-            return mItems.get(position).uids[0];
+            return mItems.get(position).appId;
         }
 
         @Override
@@ -1472,7 +1498,7 @@ public class DataUsageSummary extends Fragment {
                     android.R.id.progress);
 
             // kick off async load of app details
-            final AppUsageItem item = mItems.get(position);
+            final AppItem item = mItems.get(position);
             UidDetailTask.bindView(mProvider, item, convertView);
 
             text1.setText(Formatter.formatFileSize(context, item.total));
@@ -1489,13 +1515,13 @@ public class DataUsageSummary extends Fragment {
      * {@link DataUsageSummary}.
      */
     public static class AppDetailsFragment extends Fragment {
-        private static final String EXTRA_UIDS = "uids";
+        private static final String EXTRA_APP = "app";
 
-        public static void show(DataUsageSummary parent, int[] uids, CharSequence label) {
+        public static void show(DataUsageSummary parent, AppItem app, CharSequence label) {
             if (!parent.isAdded()) return;
 
             final Bundle args = new Bundle();
-            args.putIntArray(EXTRA_UIDS, uids);
+            args.putParcelable(EXTRA_APP, app);
 
             final AppDetailsFragment fragment = new AppDetailsFragment();
             fragment.setArguments(args);
@@ -1511,7 +1537,7 @@ public class DataUsageSummary extends Fragment {
         public void onStart() {
             super.onStart();
             final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-            target.mAppDetailUids = getArguments().getIntArray(EXTRA_UIDS);
+            target.mCurrentApp = getArguments().getParcelable(EXTRA_APP);
             target.updateBody();
         }
 
@@ -1519,7 +1545,7 @@ public class DataUsageSummary extends Fragment {
         public void onStop() {
             super.onStop();
             final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-            target.mAppDetailUids = null;
+            target.mCurrentApp = null;
             target.updateBody();
         }
     }
@@ -1967,23 +1993,23 @@ public class DataUsageSummary extends Fragment {
      */
     private static class UidDetailTask extends AsyncTask<Void, Void, UidDetail> {
         private final UidDetailProvider mProvider;
-        private final AppUsageItem mItem;
+        private final AppItem mItem;
         private final View mTarget;
 
-        private UidDetailTask(UidDetailProvider provider, AppUsageItem item, View target) {
+        private UidDetailTask(UidDetailProvider provider, AppItem item, View target) {
             mProvider = checkNotNull(provider);
             mItem = checkNotNull(item);
             mTarget = checkNotNull(target);
         }
 
         public static void bindView(
-                UidDetailProvider provider, AppUsageItem item, View target) {
+                UidDetailProvider provider, AppItem item, View target) {
             final UidDetailTask existing = (UidDetailTask) target.getTag();
             if (existing != null) {
                 existing.cancel(false);
             }
 
-            final UidDetail cachedDetail = provider.getUidDetail(item.uids[0], false);
+            final UidDetail cachedDetail = provider.getUidDetail(item.appId, false);
             if (cachedDetail != null) {
                 bindView(cachedDetail, target);
             } else {
@@ -2012,7 +2038,7 @@ public class DataUsageSummary extends Fragment {
 
         @Override
         protected UidDetail doInBackground(Void... params) {
-            return mProvider.getUidDetail(mItem.uids[0], true);
+            return mProvider.getUidDetail(mItem.appId, true);
         }
 
         @Override
@@ -2187,14 +2213,5 @@ public class DataUsageSummary extends Fragment {
         final TextView summary = (TextView) parent.findViewById(android.R.id.summary);
         summary.setVisibility(View.VISIBLE);
         summary.setText(string);
-    }
-
-    private static boolean contains(int[] haystack, int needle) {
-        for (int value : haystack) {
-            if (value == needle) {
-                return true;
-            }
-        }
-        return false;
     }
 }
