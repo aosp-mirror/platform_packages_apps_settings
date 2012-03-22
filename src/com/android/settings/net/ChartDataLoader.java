@@ -30,25 +30,27 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.RemoteException;
 
+import com.android.settings.DataUsageSummary.AppItem;
+
 /**
  * Loader for historical chart data for both network and UID details.
  */
 public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
     private static final String KEY_TEMPLATE = "template";
-    private static final String KEY_UIDS = "uids";
+    private static final String KEY_APP = "app";
     private static final String KEY_FIELDS = "fields";
 
     private final INetworkStatsService mStatsService;
     private final Bundle mArgs;
 
-    public static Bundle buildArgs(NetworkTemplate template, int[] uids) {
-        return buildArgs(template, uids, FIELD_RX_BYTES | FIELD_TX_BYTES);
+    public static Bundle buildArgs(NetworkTemplate template, AppItem app) {
+        return buildArgs(template, app, FIELD_RX_BYTES | FIELD_TX_BYTES);
     }
 
-    public static Bundle buildArgs(NetworkTemplate template, int[] uids, int fields) {
+    public static Bundle buildArgs(NetworkTemplate template, AppItem app, int fields) {
         final Bundle args = new Bundle();
         args.putParcelable(KEY_TEMPLATE, template);
-        args.putIntArray(KEY_UIDS, uids);
+        args.putParcelable(KEY_APP, app);
         args.putInt(KEY_FIELDS, fields);
         return args;
     }
@@ -68,11 +70,11 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
     @Override
     public ChartData loadInBackground() {
         final NetworkTemplate template = mArgs.getParcelable(KEY_TEMPLATE);
-        final int[] uids = mArgs.getIntArray(KEY_UIDS);
+        final AppItem app = mArgs.getParcelable(KEY_APP);
         final int fields = mArgs.getInt(KEY_FIELDS);
 
         try {
-            return loadInBackground(template, uids, fields);
+            return loadInBackground(template, app, fields);
         } catch (RemoteException e) {
             // since we can't do much without history, and we don't want to
             // leave with half-baked UI, we bail hard.
@@ -80,17 +82,19 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
         }
     }
 
-    private ChartData loadInBackground(NetworkTemplate template, int[] uids, int fields)
+    private ChartData loadInBackground(NetworkTemplate template, AppItem app, int fields)
             throws RemoteException {
         final ChartData data = new ChartData();
         data.network = mStatsService.getHistoryForNetwork(template, fields);
 
-        if (uids != null) {
+        if (app != null) {
             data.detailDefault = null;
             data.detailForeground = null;
 
             // load stats for current uid and template
-            for (int uid : uids) {
+            final int size = app.uids.size();
+            for (int i = 0; i < size; i++) {
+                final int uid = app.uids.keyAt(i);
                 data.detailDefault = collectHistoryForUid(
                         template, uid, SET_DEFAULT, data.detailDefault);
                 data.detailForeground = collectHistoryForUid(
