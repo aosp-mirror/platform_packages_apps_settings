@@ -60,7 +60,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
-    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_IMPROVE_REQUEST = 124;
+    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
+    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -361,11 +362,33 @@ public class SecuritySettings extends SettingsPreferenceFragment
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
             if (!helper.launchConfirmationActivity(
-                    CONFIRM_EXISTING_FOR_BIOMETRIC_IMPROVE_REQUEST, null, null)) {
-                startBiometricWeakImprove(); // no password set, so no need to confirm
+                    CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST, null, null)) {
+                // If this returns false, it means no password confirmation is required, so
+                // go ahead and start improve.
+                // Note: currently a backup is required for biometric_weak so this code path
+                // can't be reached, but is here in case things change in the future
+                startBiometricWeakImprove();
             }
         } else if (KEY_BIOMETRIC_WEAK_LIVELINESS.equals(key)) {
-            lockPatternUtils.setBiometricWeakLivelinessEnabled(isToggled(preference));
+            if (isToggled(preference)) {
+                lockPatternUtils.setBiometricWeakLivelinessEnabled(true);
+            } else {
+                // In this case the user has just unchecked the checkbox, but this action requires
+                // them to confirm their password.  We need to re-check the checkbox until
+                // they've confirmed their password
+                mBiometricWeakLiveliness.setChecked(true);
+                ChooseLockSettingsHelper helper =
+                        new ChooseLockSettingsHelper(this.getActivity(), this);
+                if (!helper.launchConfirmationActivity(
+                        CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF, null, null)) {
+                    // If this returns false, it means no password confirmation is required, so
+                    // go ahead and uncheck it here.
+                    // Note: currently a backup is required for biometric_weak so this code path
+                    // can't be reached, but is here in case things change in the future
+                    lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
+                    mBiometricWeakLiveliness.setChecked(false);
+                }
+            }
         } else if (KEY_LOCK_ENABLED.equals(key)) {
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
@@ -402,9 +425,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_IMPROVE_REQUEST &&
+        if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST &&
                 resultCode == Activity.RESULT_OK) {
             startBiometricWeakImprove();
+            return;
+        } else if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF &&
+                resultCode == Activity.RESULT_OK) {
+            final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+            lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
+            mBiometricWeakLiveliness.setChecked(false);
             return;
         }
         createPreferenceHierarchy();
