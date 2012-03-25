@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserId;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -140,15 +141,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        switch (dpm.getStorageEncryptionStatus()) {
-        case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
-            // The device is currently encrypted.
-            addPreferencesFromResource(R.xml.security_settings_encrypted);
-            break;
-        case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
-            // This device supports encryption but isn't encrypted.
-            addPreferencesFromResource(R.xml.security_settings_unencrypted);
-            break;
+        if (UserId.myUserId() == 0) {
+            switch (dpm.getStorageEncryptionStatus()) {
+            case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
+                // The device is currently encrypted.
+                addPreferencesFromResource(R.xml.security_settings_encrypted);
+                break;
+            case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
+                // This device supports encryption but isn't encrypted.
+                addPreferencesFromResource(R.xml.security_settings_unencrypted);
+                break;
+            }
         }
 
         // lock after preference
@@ -189,6 +192,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 securityCategory.removePreference(mTactileFeedback);
             }
         }
+
+        if (UserId.myUserId() > 0) {
+            return root;
+        }
+        // Rest are for primary user...
 
         // Append the rest of the settings
         addPreferencesFromResource(R.xml.security_settings_misc);
@@ -246,7 +254,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
     public void onClick(DialogInterface dialog, int which) {
         if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON_POSITIVE) {
             setNonMarketAppsAllowed(true);
-            mToggleAppInstallation.setChecked(true);
+            if (mToggleAppInstallation != null) {
+                mToggleAppInstallation.setChecked(true);
+            }
         }
     }
 
@@ -343,11 +353,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks());
         }
 
-        mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
+        if (mShowPassword != null) {
+            mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
+        }
 
         KeyStore.State state = KeyStore.getInstance().state();
-        mResetCredentials.setEnabled(state != KeyStore.State.UNINITIALIZED);
+        if (mResetCredentials != null) {
+            mResetCredentials.setEnabled(state != KeyStore.State.UNINITIALIZED);
+        }
     }
 
     @Override
