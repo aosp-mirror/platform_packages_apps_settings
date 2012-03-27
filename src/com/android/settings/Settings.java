@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.deviceinfo.Memory;
@@ -29,6 +30,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.UserId;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -75,6 +77,17 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
+
+    // Show only these settings for restricted users
+    private int[] SETTINGS_FOR_RESTRICTED = {
+            R.id.wifi_settings,
+            R.id.bluetooth_settings,
+            R.id.sound_settings,
+            R.id.display_settings,
+            //R.id.security_settings,
+            R.id.sync_settings,
+            R.id.about_settings
+    };
 
     // TODO: Update Call Settings based on airplane mode state.
 
@@ -337,6 +350,16 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
                     target.remove(header);
                 }
+            } else if (id == R.id.user_settings) {
+                if (!UserId.MU_ENABLED || UserId.myUserId() != 0
+                        || !getResources().getBoolean(R.bool.enable_user_management)
+                        || Utils.isMonkeyRunning()) {
+                    target.remove(header);
+                }
+            }
+            if (UserId.MU_ENABLED && UserId.myUserId() != 0
+                    && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
+                target.remove(header);
             }
 
             // Increment if the current one wasn't removed by the Utils code.
