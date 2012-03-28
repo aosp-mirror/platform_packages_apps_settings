@@ -89,6 +89,8 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             R.id.about_settings
     };
 
+    private boolean mEnableUserManagement = false;
+
     // TODO: Update Call Settings based on airplane mode state.
 
     protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
@@ -98,6 +100,11 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().getBooleanExtra(EXTRA_CLEAR_UI_OPTIONS, false)) {
             getWindow().setUiOptions(0);
+        }
+
+        if (android.provider.Settings.Secure.getInt(getContentResolver(), "multiuser_enabled", -1)
+                > 0) {
+            mEnableUserManagement = true;
         }
 
         getMetaData();
@@ -351,7 +358,8 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                     target.remove(header);
                 }
             } else if (id == R.id.user_settings) {
-                if (!UserId.MU_ENABLED || UserId.myUserId() != 0
+                if (!mEnableUserManagement
+                        || !UserId.MU_ENABLED || UserId.myUserId() != 0
                         || !getResources().getBoolean(R.bool.enable_user_management)
                         || Utils.isMonkeyRunning()) {
                     target.remove(header);
