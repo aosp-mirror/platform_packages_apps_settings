@@ -78,8 +78,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private boolean mWifiP2pSearching;
     private int mConnectedDevices;
 
-    private Handler mUiHandler;
-
     private PreferenceGroup mPeersGroup;
     private Preference mThisDevicePref;
 
@@ -107,12 +105,24 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                         WifiP2pManager.EXTRA_NETWORK_INFO);
                 if (networkInfo.isConnected()) {
                     if (DBG) Log.d(TAG, "Connected");
+                } else {
+                    //start a search when we are disconnected
+                    startSearch();
                 }
             } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
                 mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
                 if (DBG) Log.d(TAG, "Update device info: " + mThisDevice);
                 updateDevicePref();
+            } else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
+                int discoveryState = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE,
+                    WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED);
+                if (DBG) Log.d(TAG, "Discovery state changed: " + discoveryState);
+                if (discoveryState == WifiP2pManager.WIFI_P2P_DISCOVERY_STARTED) {
+                    updateSearchMenu(true);
+                } else {
+                    updateSearchMenu(false);
+                }
             }
         }
     };
@@ -126,8 +136,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
-
-        mUiHandler = new Handler();
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);
 
         final Activity activity = getActivity();
         mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
@@ -317,8 +326,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
             mPeersGroup.setEnabled(true);
             preferenceScreen.addPreference(mPeersGroup);
-
-            if (mConnectedDevices == 0) startSearch();
         }
     }
 
@@ -332,16 +339,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         if (mWifiP2pManager != null && !mWifiP2pSearching) {
             mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
                 public void onSuccess() {
-                    updateSearchMenu(true);
-                    //Allow 20s to discover devices
-                    mUiHandler.postDelayed(new Runnable() {
-                            public void run() {
-                                updateSearchMenu(false);
-                            }}, 20000);
                 }
                 public void onFailure(int reason) {
                     if (DBG) Log.d(TAG, " discover fail " + reason);
-                    updateSearchMenu(false);
                 }
             });
         }
