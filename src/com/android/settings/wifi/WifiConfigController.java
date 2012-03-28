@@ -63,7 +63,7 @@ import java.util.Iterator;
  */
 public class WifiConfigController implements TextWatcher,
         View.OnClickListener, AdapterView.OnItemSelectedListener {
-    private static final String KEYSTORE_SPACE = "keystore://";
+    private static final String KEYSTORE_SPACE = WifiConfiguration.KEYSTORE_URI;
 
     private final WifiConfigUiBase mConfigUi;
     private final View mView;
@@ -126,8 +126,10 @@ public class WifiConfigController implements TextWatcher,
         if (config == null) {
             return false;
         }
-        String values[] = {config.ca_cert.value(), config.client_cert.value(),
-                config.private_key.value()};
+        if (config.key_id.value() != null) {
+            return true;
+        }
+        String values[] = { config.ca_cert.value(), config.client_cert.value() };
         for (String value : values) {
             if (value != null && value.startsWith(KEYSTORE_SPACE)) {
                 return true;
@@ -362,8 +364,10 @@ public class WifiConfigController implements TextWatcher,
                 config.client_cert.setValue((mEapUserCertSpinner.getSelectedItemPosition() == 0) ?
                         "" : KEYSTORE_SPACE + Credentials.USER_CERTIFICATE +
                         (String) mEapUserCertSpinner.getSelectedItem());
-                config.private_key.setValue((mEapUserCertSpinner.getSelectedItemPosition() == 0) ?
-                        "" : KEYSTORE_SPACE + Credentials.USER_PRIVATE_KEY +
+                config.engine.setValue(WifiConfiguration.ENGINE_ENABLE);
+                config.engine_id.setValue(WifiConfiguration.KEYSTORE_ENGINE_ID);
+                config.key_id.setValue((mEapUserCertSpinner.getSelectedItemPosition() == 0) ?
+                        "" : Credentials.USER_PRIVATE_KEY +
                         (String) mEapUserCertSpinner.getSelectedItem());
                 config.identity.setValue((mEapIdentityView.length() == 0) ? "" :
                         mEapIdentityView.getText().toString());
@@ -544,10 +548,10 @@ public class WifiConfigController implements TextWatcher,
                 WifiConfiguration config = mAccessPoint.getConfig();
                 setSelection(mEapMethodSpinner, config.eap.value());
                 setSelection(mPhase2Spinner, config.phase2.value());
-                setCertificate(mEapCaCertSpinner, Credentials.CA_CERTIFICATE,
+                setCertificate(mEapCaCertSpinner, KEYSTORE_SPACE + Credentials.CA_CERTIFICATE,
                         config.ca_cert.value());
                 setCertificate(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY,
-                        config.private_key.value());
+                        config.key_id.value());
                 mEapIdentityView.setText(config.identity.value());
                 mEapAnonymousView.setText(config.anonymous_identity.value());
             }
@@ -680,7 +684,6 @@ public class WifiConfigController implements TextWatcher,
     }
 
     private void setCertificate(Spinner spinner, String prefix, String cert) {
-        prefix = KEYSTORE_SPACE + prefix;
         if (cert != null && cert.startsWith(prefix)) {
             setSelection(spinner, cert.substring(prefix.length()));
         }
