@@ -83,10 +83,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final String EXTRA_FORCE_VIEW =
             "com.android.settings.CryptKeeper.DEBUG_FORCE_VIEW";
     private static final String FORCE_VIEW_PROGRESS = "progress";
-    private static final String FORCE_VIEW_ENTRY = "entry";
     private static final String FORCE_VIEW_ERROR = "error";
 
-    /** When encryption is detected, this flag indivates whether or not we've checked for erros. */
+    /** When encryption is detected, this flag indicates whether or not we've checked for errors. */
     private boolean mValidationComplete;
     private boolean mValidationRequested;
     /** A flag to indicate that the volume is in a bad state (e.g. partially encrypted). */
@@ -107,8 +106,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
-    // This activity is used to fade the screen to black after the password is entered.
-    public static class Blank extends Activity {
+    /**
+     * Activity used to fade the screen to black after the password is entered.
+     */
+    private static class FadeToBlack extends Activity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -135,7 +136,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 // so this activity animates to black before the devices starts. Note
                 // It has 1 second to complete the animation or it will be frozen
                 // until the boot animation comes back up.
-                Intent intent = new Intent(CryptKeeper.this, Blank.class);
+                Intent intent = new Intent(CryptKeeper.this, FadeToBlack.class);
                 finish();
                 startActivity(intent);
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
@@ -145,9 +146,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 mCooldown = COOL_DOWN_INTERVAL;
                 cooldown();
             } else {
-                TextView tv = (TextView) findViewById(R.id.status);
-                tv.setText(R.string.try_again);
-                tv.setVisibility(View.VISIBLE);
+                final TextView status = (TextView) findViewById(R.id.status);
+                status.setText(R.string.try_again);
+                status.setVisibility(View.VISIBLE);
 
                 // Reenable the password entry
                 mPasswordEntry.setEnabled(true);
@@ -293,7 +294,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     @Override
     public void onStop() {
         super.onStop();
-
         mHandler.removeMessages(COOLDOWN);
         mHandler.removeMessages(UPDATE_PROGRESS);
     }
@@ -335,9 +335,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mWakeLock.acquire();
         }
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        progressBar.setIndeterminate(true);
-
+        ((ProgressBar) findViewById(R.id.progress_bar)).setIndeterminate(true);
         updateProgress();
     }
 
@@ -346,29 +344,29 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         findViewById(R.id.encroid).setVisibility(View.GONE);
 
         // Show the reset button, failure text, and a divider
-        Button button = (Button) findViewById(R.id.factory_reset);
+        final Button button = (Button) findViewById(R.id.factory_reset);
         button.setVisibility(View.VISIBLE);
         button.setOnClickListener(new OnClickListener() {
+                @Override
             public void onClick(View v) {
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
             }
         });
 
-        TextView tv = (TextView) findViewById(R.id.title);
-        tv.setText(R.string.crypt_keeper_failed_title);
+        // Alert the user of the failure.
+        ((TextView) findViewById(R.id.title)).setText(R.string.crypt_keeper_failed_title);
+        ((TextView) findViewById(R.id.status)).setText(R.string.crypt_keeper_failed_summary);
 
-        tv = (TextView) findViewById(R.id.status);
-        tv.setText(R.string.crypt_keeper_failed_summary);
-
-        View view = findViewById(R.id.bottom_divider);
+        final View view = findViewById(R.id.bottom_divider);
+        // TODO(viki): Why would the bottom divider be missing in certain layouts? Investigate.
         if (view != null) {
             view.setVisibility(View.VISIBLE);
         }
     }
 
     private void updateProgress() {
-        String state = SystemProperties.get("vold.encrypt_progress");
+        final String state = SystemProperties.get("vold.encrypt_progress");
 
         if ("error_partially_encrypted".equals(state)) {
             showFactoryReset();
@@ -383,9 +381,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             Log.w(TAG, "Error parsing progress: " + e.toString());
         }
 
-        CharSequence status = getText(R.string.crypt_keeper_setup_description);
+        final CharSequence status = getText(R.string.crypt_keeper_setup_description);
         Log.v(TAG, "Encryption progress: " + progress);
-        TextView tv = (TextView) findViewById(R.id.status);
+        final TextView tv = (TextView) findViewById(R.id.status);
         tv.setText(TextUtils.expandTemplate(status, Integer.toString(progress)));
 
         // Check the progress every 5 seconds
@@ -394,18 +392,18 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void cooldown() {
-        TextView tv = (TextView) findViewById(R.id.status);
+        final TextView status = (TextView) findViewById(R.id.status);
 
         if (mCooldown <= 0) {
             // Re-enable the password entry
             mPasswordEntry.setEnabled(true);
 
-            tv.setVisibility(View.GONE);
+            status.setVisibility(View.GONE);
         } else {
             CharSequence template = getText(R.string.crypt_keeper_cooldown);
-            tv.setText(TextUtils.expandTemplate(template, Integer.toString(mCooldown)));
+            status.setText(TextUtils.expandTemplate(template, Integer.toString(mCooldown)));
 
-            tv.setVisibility(View.VISIBLE);
+            status.setVisibility(View.VISIBLE);
 
             mCooldown--;
             mHandler.removeMessages(COOLDOWN);
@@ -418,12 +416,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         mPasswordEntry.setOnEditorActionListener(this);
         mPasswordEntry.requestFocus();
 
-        View imeSwitcher = findViewById(R.id.switch_ime_button);
+        final View imeSwitcher = findViewById(R.id.switch_ime_button);
         final InputMethodManager imm = (InputMethodManager) getSystemService(
                 Context.INPUT_METHOD_SERVICE);
         if (imeSwitcher != null && hasMultipleEnabledIMEsOrSubtypes(imm, false)) {
             imeSwitcher.setVisibility(View.VISIBLE);
             imeSwitcher.setOnClickListener(new OnClickListener() {
+                    @Override
                 public void onClick(View v) {
                     imm.showInputMethodPicker();
                 }
@@ -490,7 +489,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private IMountService getMountService() {
-        IBinder service = ServiceManager.getService("mount");
+        final IBinder service = ServiceManager.getService("mount");
         if (service != null) {
             return IMountService.Stub.asInterface(service);
         }
@@ -501,7 +500,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_DONE) {
             // Get the password
-            String password = v.getText().toString();
+            final String password = v.getText().toString();
 
             if (TextUtils.isEmpty(password)) {
                 return true;
@@ -511,7 +510,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             v.setText(null);
 
             // Disable the password entry while checking the password. This
-            // we either be reenabled if the password was wrong or after the
+            // we either be re-enabled if the password was wrong or after the
             // cooldown period.
             mPasswordEntry.setEnabled(false);
 
@@ -523,43 +522,45 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         return false;
     }
 
-    //
-    // Code to update the state of, and handle clicks from, the "Emergency call" button.
-    //
-    // This code is mostly duplicated from the corresponding code in
-    // LockPatternUtils and LockPatternKeyguardView under frameworks/base.
-    //
-
+    /**
+     * Code to update the state of, and handle clicks from, the "Emergency call" button.
+     *
+     * This code is mostly duplicated from the corresponding code in
+     * LockPatternUtils and LockPatternKeyguardView under frameworks/base.
+     */
     private void updateEmergencyCallButtonState() {
-        Button button = (Button) findViewById(R.id.emergencyCallButton);
+        final Button emergencyCall = (Button) findViewById(R.id.emergencyCallButton);
         // The button isn't present at all in some configurations.
-        if (button == null) return;
+        if (emergencyCall == null)
+            return;
 
         if (isEmergencyCallCapable()) {
-            button.setVisibility(View.VISIBLE);
-            button.setOnClickListener(new View.OnClickListener() {
+            emergencyCall.setVisibility(View.VISIBLE);
+            emergencyCall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+
                     public void onClick(View v) {
                         takeEmergencyCallAction();
                     }
                 });
         } else {
-            button.setVisibility(View.GONE);
+            emergencyCall.setVisibility(View.GONE);
             return;
         }
 
-        int newState = TelephonyManager.getDefault().getCallState();
+        final int newState = TelephonyManager.getDefault().getCallState();
         int textId;
         if (newState == TelephonyManager.CALL_STATE_OFFHOOK) {
-            // show "return to call" text and show phone icon
+            // Show "return to call" text and show phone icon
             textId = R.string.cryptkeeper_return_to_call;
-            int phoneCallIcon = R.drawable.stat_sys_phone_call;
-            button.setCompoundDrawablesWithIntrinsicBounds(phoneCallIcon, 0, 0, 0);
+            final int phoneCallIcon = R.drawable.stat_sys_phone_call;
+            emergencyCall.setCompoundDrawablesWithIntrinsicBounds(phoneCallIcon, 0, 0, 0);
         } else {
             textId = R.string.cryptkeeper_emergency_call;
-            int emergencyIcon = R.drawable.ic_emergency;
-            button.setCompoundDrawablesWithIntrinsicBounds(emergencyIcon, 0, 0, 0);
+            final int emergencyIcon = R.drawable.ic_emergency;
+            emergencyCall.setCompoundDrawablesWithIntrinsicBounds(emergencyIcon, 0, 0, 0);
         }
-        button.setText(textId);
+        emergencyCall.setText(textId);
     }
 
     private boolean isEmergencyCallCapable() {
@@ -575,7 +576,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void resumeCall() {
-        ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
+        final ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
         if (phone != null) {
             try {
                 phone.showCallScreen();
@@ -586,7 +587,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void launchEmergencyDialer() {
-        Intent intent = new Intent(ACTION_EMERGENCY_DIAL);
+        final Intent intent = new Intent(ACTION_EMERGENCY_DIAL);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         startActivity(intent);
