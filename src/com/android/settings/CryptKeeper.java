@@ -109,7 +109,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     /**
      * Activity used to fade the screen to black after the password is entered.
      */
-    private static class FadeToBlack extends Activity {
+    public static class FadeToBlack extends Activity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
