@@ -84,7 +84,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             R.id.bluetooth_settings,
             R.id.sound_settings,
             R.id.display_settings,
-            //R.id.security_settings,
+            R.id.security_settings,
             R.id.sync_settings,
             R.id.about_settings
     };
