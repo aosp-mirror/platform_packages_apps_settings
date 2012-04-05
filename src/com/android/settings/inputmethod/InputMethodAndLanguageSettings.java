@@ -17,6 +17,7 @@
 package com.android.settings.inputmethod;
 
 import com.android.settings.R;
+import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 import com.android.settings.Settings.SpellCheckersSettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -29,6 +30,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
+import android.hardware.input.InputManager;
+import android.hardware.input.InputManager.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -40,11 +43,15 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.text.TextUtils;
+import android.view.InputDevice;
+import android.view.KeyCharacterMap;
+import android.view.KeyCharacterMap.UnavailableException;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -68,11 +75,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private int mDefaultInputMethodSelectorVisibility = 0;
     private ListPreference mShowInputMethodSelectorPref;
-    private Preference mLanguagePref;
-    private ArrayList<InputMethodPreference> mInputMethodPreferenceList =
-            new ArrayList<InputMethodPreference>();
-    private boolean mHaveHardKeyboard;
+    private PreferenceCategory mKeyboardSettingsCategory;
     private PreferenceCategory mHardKeyboardCategory;
+    private Preference mLanguagePref;
+    private final ArrayList<InputMethodPreference> mInputMethodPreferenceList =
+            new ArrayList<InputMethodPreference>();
+    private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList =
+            new ArrayList<PreferenceScreen>();
     private InputMethodManager mImm;
     private List<InputMethodInfo> mImis;
     private boolean mIsOnlyImeSettings;
@@ -108,18 +117,55 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         new VoiceInputOutputSettings(this).onCreate();
 
-        // Hard keyboard
-        final Configuration config = getResources().getConfiguration();
-        mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
+        // Get references to dynamically constructed categories.
+        mHardKeyboardCategory = (PreferenceCategory)findPreference("hard_keyboard");
+        mKeyboardSettingsCategory = (PreferenceCategory)findPreference(
+                "keyboard_settings_category");
 
-        // IME
+        // Filter out irrelevant features if invoked from IME settings button.
         mIsOnlyImeSettings = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
                 getActivity().getIntent().getAction());
         getActivity().getIntent().setAction(null);
+        if (mIsOnlyImeSettings) {
+            getPreferenceScreen().removeAll();
+            getPreferenceScreen().addPreference(mHardKeyboardCategory);
+            if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
+                getPreferenceScreen().addPreference(mShowInputMethodSelectorPref);
+            }
+            getPreferenceScreen().addPreference(mKeyboardSettingsCategory);
+        }
+
+        // Build IME preference category.
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mImis = mImm.getInputMethodList();
-        createImePreferenceHierarchy((PreferenceGroup)findPreference("keyboard_settings_category"));
 
+        mKeyboardSettingsCategory.removeAll();
+        if (!mIsOnlyImeSettings) {
+            final PreferenceScreen currentIme = new PreferenceScreen(getActivity(), null);
+            currentIme.setKey(KEY_CURRENT_INPUT_METHOD);
+            currentIme.setTitle(getResources().getString(R.string.current_input_method));
+            mKeyboardSettingsCategory.addPreference(currentIme);
+        }
+
+        mInputMethodPreferenceList.clear();
+        final int N = (mImis == null ? 0 : mImis.size());
+        for (int i = 0; i < N; ++i) {
+            final InputMethodInfo imi = mImis.get(i);
+            final InputMethodPreference pref = getInputMethodPreference(imi, N);
+            mInputMethodPreferenceList.add(pref);
+        }
+
+        if (!mInputMethodPreferenceList.isEmpty()) {
+            Collections.sort(mInputMethodPreferenceList);
+            for (int i = 0; i < N; ++i) {
+                mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+            }
+        }
+
+        // Build hard keyboard preference category.
+        updateHardKeyboards();
+
+        // Spell Checker
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), SpellCheckersSettingsActivity.class);
         final SpellCheckersPreference scp = ((SpellCheckersPreference)findPreference(
@@ -189,7 +235,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
 
         // Hard keyboard
-        if (mHaveHardKeyboard) {
+        if (!mHardKeyboardPreferenceList.isEmpty()) {
             for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
                 CheckBoxPreference chkPref = (CheckBoxPreference)
                         mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i]);
@@ -197,6 +243,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         System.getInt(getContentResolver(), sSystemSettingNames[i], 1) > 0);
             }
         }
+
+        updateHardKeyboards();
 
         // IME
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
@@ -211,7 +259,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
         }
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(
-                this, getContentResolver(), mImis, mHaveHardKeyboard);
+                this, getContentResolver(), mImis, !mHardKeyboardPreferenceList.isEmpty());
     }
 
     @Override
@@ -230,7 +278,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         } else if (preference instanceof CheckBoxPreference) {
             final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-            if (mHaveHardKeyboard) {
+            if (!mHardKeyboardPreferenceList.isEmpty()) {
                 for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
                     if (chkPref == mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i])) {
                         System.putInt(getContentResolver(), sSystemSettingNames[i],
@@ -315,46 +363,57 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return pref;
     }
 
-    private void createImePreferenceHierarchy(PreferenceGroup root) {
-        final Preference hardKeyPref = findPreference("hard_keyboard");
-        if (mIsOnlyImeSettings) {
-            getPreferenceScreen().removeAll();
-            if (hardKeyPref != null && mHaveHardKeyboard) {
-                getPreferenceScreen().addPreference(hardKeyPref);
-            }
-            if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
-                getPreferenceScreen().addPreference(mShowInputMethodSelectorPref);
-            }
-            getPreferenceScreen().addPreference(root);
-        }
-        if (hardKeyPref != null) {
-            if (mHaveHardKeyboard) {
-                mHardKeyboardCategory = (PreferenceCategory) hardKeyPref;
-            } else {
-                getPreferenceScreen().removePreference(hardKeyPref);
-            }
-        }
-        root.removeAll();
-        mInputMethodPreferenceList.clear();
+    private void updateHardKeyboards() {
+        mHardKeyboardPreferenceList.clear();
+        if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY) {
+            final InputManager im =
+                    (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
 
-        if (!mIsOnlyImeSettings) {
-            // Current IME selection
-            final PreferenceScreen currentIme = new PreferenceScreen(getActivity(), null);
-            currentIme.setKey(KEY_CURRENT_INPUT_METHOD);
-            currentIme.setTitle(getResources().getString(R.string.current_input_method));
-            root.addPreference(currentIme);
-        }
+            final int[] devices = InputDevice.getDeviceIds();
+            for (int i = 0; i < devices.length; i++) {
+                InputDevice device = InputDevice.getDevice(devices[i]);
+                if (device != null
+                        && (device.getSources() & InputDevice.SOURCE_KEYBOARD) != 0
+                        && device.getKeyboardType() == InputDevice.KEYBOARD_TYPE_ALPHABETIC) {
+                    final String inputDeviceDescriptor = device.getDescriptor();
+                    final String keyboardLayoutDescriptor =
+                            im.getInputDeviceKeyboardLayoutDescriptor(inputDeviceDescriptor);
+                    final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
+                            im.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 
-        final int N = (mImis == null ? 0 : mImis.size());
-        for (int i = 0; i < N; ++i) {
-            final InputMethodInfo imi = mImis.get(i);
-            final InputMethodPreference pref = getInputMethodPreference(imi, N);
-            mInputMethodPreferenceList.add(pref);
+                    final Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setClass(getActivity(), KeyboardLayoutPickerActivity.class);
+                    intent.putExtra(KeyboardLayoutPicker.EXTRA_INPUT_DEVICE_DESCRIPTOR,
+                            inputDeviceDescriptor);
+
+                    final PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
+                    pref.setTitle(device.getName());
+                    if (keyboardLayout != null) {
+                        pref.setSummary(keyboardLayout.getLabel());
+                    }
+                    pref.setIntent(intent);
+                    mHardKeyboardPreferenceList.add(pref);
+                }
+            }
         }
 
-        Collections.sort(mInputMethodPreferenceList);
-        for (int i = 0; i < N; ++i) {
-            root.addPreference(mInputMethodPreferenceList.get(i));
+        if (!mHardKeyboardPreferenceList.isEmpty()) {
+            for (int i = mHardKeyboardCategory.getPreferenceCount(); i-- > 0; ) {
+                final Preference pref = mHardKeyboardCategory.getPreference(i);
+                if (pref.getOrder() < 1000) {
+                    mHardKeyboardCategory.removePreference(pref);
+                }
+            }
+
+            Collections.sort(mHardKeyboardPreferenceList);
+            final int count = mHardKeyboardPreferenceList.size();
+            for (int i = 0; i < count; i++) {
+                final Preference pref = mHardKeyboardPreferenceList.get(i);
+                pref.setOrder(i);
+                mHardKeyboardCategory.addPreference(pref);
+            }
+        } else {
+            getPreferenceScreen().removePreference(mHardKeyboardCategory);
         }
     }
 

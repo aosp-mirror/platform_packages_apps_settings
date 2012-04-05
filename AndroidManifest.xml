@@ -396,6 +396,19 @@
                 android:resource="@id/language_settings" />
         </activity>
 
+        <activity android:name="Settings$KeyboardLayoutPickerActivity"
+                android:label="@string/keyboard_layout_picker_title"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.KeyboardLayoutPicker" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="LanguageSettings"
                 android:label="@string/language_keyboard_settings_title"
