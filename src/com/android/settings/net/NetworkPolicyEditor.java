@@ -16,6 +16,7 @@
 
 package com.android.settings.net;
 
+import static android.net.NetworkPolicy.CYCLE_NONE;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.SNOOZE_NEVER;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
@@ -27,11 +28,10 @@ import static android.net.NetworkTemplate.buildTemplateMobile4g;
 import static android.net.NetworkTemplate.buildTemplateMobileAll;
 import static com.android.internal.util.Preconditions.checkNotNull;
 
-import android.net.INetworkPolicyManager;
 import android.net.NetworkPolicy;
+import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.AsyncTask;
-import android.os.RemoteException;
 import android.text.format.Time;
 
 import com.android.internal.util.Objects;
@@ -43,27 +43,23 @@ import java.util.HashSet;
 
 /**
  * Utility class to modify list of {@link NetworkPolicy}. Specifically knows
- * about which policies can coexist. Not thread safe.
+ * about which policies can coexist. This editor offers thread safety when
+ * talking with {@link NetworkPolicyManager}.
  */
 public class NetworkPolicyEditor {
     // TODO: be more robust when missing policies from service
 
     public static final boolean ENABLE_SPLIT_POLICIES = false;
 
-    private INetworkPolicyManager mPolicyService;
+    private NetworkPolicyManager mPolicyManager;
     private ArrayList<NetworkPolicy> mPolicies = Lists.newArrayList();
 
-    public NetworkPolicyEditor(INetworkPolicyManager policyService) {
-        mPolicyService = checkNotNull(policyService);
+    public NetworkPolicyEditor(NetworkPolicyManager policyManager) {
+        mPolicyManager = checkNotNull(policyManager);
     }
 
     public void read() {
-        final NetworkPolicy[] policies;
-        try {
-            policies = mPolicyService.getNetworkPolicies();
-        } catch (RemoteException e) {
-            throw new RuntimeException("problem reading policies", e);
-        }
+        final NetworkPolicy[] policies = mPolicyManager.getNetworkPolicies();
 
         boolean modified = false;
         mPolicies.clear();
@@ -76,12 +72,6 @@ public class NetworkPolicyEditor {
             if (policy.warningBytes < -1) {
                 policy.warningBytes = WARNING_DISABLED;
                 modified = true;
-            }
-
-            // drop any WIFI policies that were defined
-            if (policy.template.getMatchRule() == MATCH_WIFI) {
-                modified = true;
-                continue;
             }
 
             mPolicies.add(policy);
@@ -109,11 +99,7 @@ public class NetworkPolicyEditor {
     }
 
     public void write(NetworkPolicy[] policies) {
-        try {
-            mPolicyService.setNetworkPolicies(policies);
-        } catch (RemoteException e) {
-            throw new RuntimeException("problem writing policies", e);
-        }
+        mPolicyManager.setNetworkPolicies(policies);
     }
 
     public boolean hasLimitedPolicy(NetworkTemplate template) {
@@ -142,13 +128,24 @@ public class NetworkPolicyEditor {
     @Deprecated
     private static NetworkPolicy buildDefaultPolicy(NetworkTemplate template) {
         // TODO: move this into framework to share with NetworkPolicyManagerService
-        final Time time = new Time();
-        time.setToNow();
-        final int cycleDay = time.monthDay;
-        final String cycleTimezone = time.timezone;
+        final int cycleDay;
+        final String cycleTimezone;
+        final boolean metered;
+
+        if (template.getMatchRule() == MATCH_WIFI) {
+            cycleDay = CYCLE_NONE;
+            cycleTimezone = Time.TIMEZONE_UTC;
+            metered = false;
+        } else {
+            final Time time = new Time();
+            time.setToNow();
+            cycleDay = time.monthDay;
+            cycleTimezone = time.timezone;
+            metered = true;
+        }
 
         return new NetworkPolicy(template, cycleDay, cycleTimezone, WARNING_DISABLED,
-                LIMIT_DISABLED, SNOOZE_NEVER, SNOOZE_NEVER, true, false);
+                LIMIT_DISABLED, SNOOZE_NEVER, SNOOZE_NEVER, metered, true);
     }
 
     public int getPolicyCycleDay(NetworkTemplate template) {
@@ -186,6 +183,52 @@ public class NetworkPolicyEditor {
         policy.inferred = false;
         policy.clearSnooze();
         writeAsync();
+    }
+
+    public boolean getPolicyMetered(NetworkTemplate template) {
+        final NetworkPolicy policy = getPolicy(template);
+        if (policy != null) {
+            return policy.metered;
+        } else {
+            return false;
+        }
+    }
+
+    public void setPolicyMetered(NetworkTemplate template, boolean metered) {
+        boolean modified = false;
+
+        NetworkPolicy policy = getPolicy(template);
+        if (metered) {
+            if (policy == null) {
+                policy = buildDefaultPolicy(template);
+                policy.metered = true;
+                policy.inferred = false;
+                mPolicies.add(policy);
+                modified = true;
+            } else if (!policy.metered) {
+                policy.metered = true;
+                policy.inferred = false;
+                modified = true;
+            }
+
+        } else {
+            if (policy == null) {
+                // ignore when policy doesn't exist
+            } else if (policy.template.getMatchRule() == MATCH_WIFI
+                    && policy.warningBytes == WARNING_DISABLED
+                    && policy.limitBytes == LIMIT_DISABLED) {
+                // when WIFI goes unmetered, and no other warning/limit for
+                // policy, clean it up.
+                mPolicies.remove(policy);
+                modified = true;
+            } else if (policy.metered) {
+                policy.metered = false;
+                policy.inferred = false;
+                modified = true;
+            }
+        }
+
+        if (modified) writeAsync();
     }
 
     /**

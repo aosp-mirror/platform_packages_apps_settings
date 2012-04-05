@@ -35,11 +35,12 @@ import static android.net.NetworkTemplate.buildTemplateEthernet;
 import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
 import static android.net.NetworkTemplate.buildTemplateMobile4g;
 import static android.net.NetworkTemplate.buildTemplateMobileAll;
-import static android.net.NetworkTemplate.buildTemplateWifi;
+import static android.net.NetworkTemplate.buildTemplateWifiWildcard;
 import static android.net.TrafficStats.GB_IN_BYTES;
 import static android.net.TrafficStats.MB_IN_BYTES;
 import static android.net.TrafficStats.UID_REMOVED;
 import static android.net.TrafficStats.UID_TETHERING;
+import static android.telephony.TelephonyManager.SIM_STATE_READY;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -83,6 +84,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserId;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -127,6 +129,7 @@ import com.android.internal.telephony.Phone;
 import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.ChartData;
 import com.android.settings.net.ChartDataLoader;
+import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.net.UidDetail;
@@ -144,8 +147,8 @@ import java.util.Locale;
 import libcore.util.Objects;
 
 /**
- * Panel show data usage history across various networks, including options to
- * inspect based on usage cycle and control through {@link NetworkPolicy}.
+ * Panel showing data usage history across various networks, including options
+ * to inspect based on usage cycle and control through {@link NetworkPolicy}.
  */
 public class DataUsageSummary extends Fragment {
     private static final String TAG = "DataUsage";
@@ -180,7 +183,7 @@ public class DataUsageSummary extends Fragment {
 
     private INetworkManagementService mNetworkService;
     private INetworkStatsService mStatsService;
-    private INetworkPolicyManager mPolicyService;
+    private NetworkPolicyManager mPolicyManager;
     private ConnectivityManager mConnService;
 
     private static final String PREF_FILE = "data_usage";
@@ -253,19 +256,18 @@ public class DataUsageSummary extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Context context = getActivity();
 
         mNetworkService = INetworkManagementService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
         mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-        mPolicyService = INetworkPolicyManager.Stub.asInterface(
-                ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
-        mConnService = (ConnectivityManager) getActivity().getSystemService(
-                Context.CONNECTIVITY_SERVICE);
+        mPolicyManager = NetworkPolicyManager.from(context);
+        mConnService = ConnectivityManager.from(context);
 
         mPrefs = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
-        mPolicyEditor = new NetworkPolicyEditor(mPolicyService);
+        mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
         mPolicyEditor.read();
 
         mShowWifi = mPrefs.getBoolean(PREF_SHOW_WIFI, false);
@@ -431,19 +433,19 @@ public class DataUsageSummary extends Fragment {
         final boolean appDetailMode = isAppDetailMode();
 
         mMenuDataRoaming = menu.findItem(R.id.data_usage_menu_roaming);
-        mMenuDataRoaming.setVisible(hasMobileRadio(context) && !appDetailMode);
+        mMenuDataRoaming.setVisible(hasReadyMobileRadio(context) && !appDetailMode);
         mMenuDataRoaming.setChecked(getDataRoaming());
 
         mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
-        mMenuRestrictBackground.setVisible(hasMobileRadio(context) && !appDetailMode);
-        mMenuRestrictBackground.setChecked(getRestrictBackground());
+        mMenuRestrictBackground.setVisible(hasReadyMobileRadio(context) && !appDetailMode);
+        mMenuRestrictBackground.setChecked(mPolicyManager.getRestrictBackground());
 
         final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
         split4g.setVisible(hasMobile4gRadio(context) && !appDetailMode);
         split4g.setChecked(isMobilePolicySplit());
 
         final MenuItem showWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
-        if (hasWifiRadio(context) && hasMobileRadio(context)) {
+        if (hasWifiRadio(context) && hasReadyMobileRadio(context)) {
             showWifi.setVisible(!appDetailMode);
             showWifi.setChecked(mShowWifi);
         } else {
@@ -452,12 +454,19 @@ public class DataUsageSummary extends Fragment {
         }
 
         final MenuItem showEthernet = menu.findItem(R.id.data_usage_menu_show_ethernet);
-        if (hasEthernet(context) && hasMobileRadio(context)) {
+        if (hasEthernet(context) && hasReadyMobileRadio(context)) {
             showEthernet.setVisible(!appDetailMode);
             showEthernet.setChecked(mShowEthernet);
         } else {
             showEthernet.setVisible(false);
             mShowEthernet = true;
+        }
+
+        final MenuItem metered = menu.findItem(R.id.data_usage_menu_metered);
+        if (hasReadyMobileRadio(context) || hasWifiRadio(context)) {
+            metered.setVisible(!appDetailMode);
+        } else {
+            metered.setVisible(false);
         }
     }
 
@@ -503,6 +512,12 @@ public class DataUsageSummary extends Fragment {
                 mPrefs.edit().putBoolean(PREF_SHOW_ETHERNET, mShowEthernet).apply();
                 item.setChecked(mShowEthernet);
                 updateTabs();
+                return true;
+            }
+            case R.id.data_usage_menu_metered: {
+                final PreferenceActivity activity = (PreferenceActivity) getActivity();
+                activity.startPreferencePanel(DataUsageMeteredSettings.class.getCanonicalName(), null,
+                        R.string.data_usage_metered_title, null, this, 0);
                 return true;
             }
         }
@@ -572,7 +587,7 @@ public class DataUsageSummary extends Fragment {
         if (mobileSplit && hasMobile4gRadio(context)) {
             mTabHost.addTab(buildTabSpec(TAB_3G, R.string.data_usage_tab_3g));
             mTabHost.addTab(buildTabSpec(TAB_4G, R.string.data_usage_tab_4g));
-        } else if (hasMobileRadio(context)) {
+        } else if (hasReadyMobileRadio(context)) {
             mTabHost.addTab(buildTabSpec(TAB_MOBILE, R.string.data_usage_tab_mobile));
         }
         if (mShowWifi && hasWifiRadio(context)) {
@@ -650,6 +665,9 @@ public class DataUsageSummary extends Fragment {
 
         mDataEnabledView.setVisibility(View.VISIBLE);
 
+        // TODO: remove mobile tabs when SIM isn't ready
+        final TelephonyManager tele = TelephonyManager.from(context);
+
         if (TAB_MOBILE.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_mobile_limit);
@@ -671,7 +689,7 @@ public class DataUsageSummary extends Fragment {
             // wifi doesn't have any controls
             mDataEnabledView.setVisibility(View.GONE);
             mDisableAtLimitView.setVisibility(View.GONE);
-            mTemplate = buildTemplateWifi();
+            mTemplate = buildTemplateWifiWildcard();
 
         } else if (TAB_ETHERNET.equals(currentTab)) {
             // ethernet doesn't have any controls
@@ -755,8 +773,8 @@ public class DataUsageSummary extends Fragment {
 
         updateDetailData();
 
-        if (UserId.isApp(appId) && !getRestrictBackground() && isBandwidthControlEnabled()
-                && hasMobileRadio(context)) {
+        if (UserId.isApp(appId) && !mPolicyManager.getRestrictBackground()
+                && isBandwidthControlEnabled() && hasReadyMobileRadio(context)) {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
             setPreferenceSummary(mAppRestrictView,
                     getString(R.string.data_usage_app_restrict_background_summary));
@@ -829,48 +847,22 @@ public class DataUsageSummary extends Fragment {
         mMenuDataRoaming.setChecked(enabled);
     }
 
-    private boolean getRestrictBackground() {
-        try {
-            return mPolicyService.getRestrictBackground();
-        } catch (RemoteException e) {
-            Log.w(TAG, "problem talking with policy service: " + e);
-            return false;
-        }
-    }
-
-    private void setRestrictBackground(boolean restrictBackground) {
-        if (LOGD) Log.d(TAG, "setRestrictBackground()");
-        try {
-            mPolicyService.setRestrictBackground(restrictBackground);
-            mMenuRestrictBackground.setChecked(restrictBackground);
-        } catch (RemoteException e) {
-            Log.w(TAG, "problem talking with policy service: " + e);
-        }
+    public void setRestrictBackground(boolean restrictBackground) {
+        mPolicyManager.setRestrictBackground(restrictBackground);
+        mMenuRestrictBackground.setChecked(restrictBackground);
     }
 
     private boolean getAppRestrictBackground() {
         final int appId = mCurrentApp.appId;
-        final int uidPolicy;
-        try {
-            uidPolicy = mPolicyService.getAppPolicy(appId);
-        } catch (RemoteException e) {
-            // since we can't do much without policy, we bail hard.
-            throw new RuntimeException("problem reading network policy", e);
-        }
-
+        final int uidPolicy = mPolicyManager.getAppPolicy(appId);
         return (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
     }
 
     private void setAppRestrictBackground(boolean restrictBackground) {
         if (LOGD) Log.d(TAG, "setAppRestrictBackground()");
         final int appId = mCurrentApp.appId;
-        try {
-            mPolicyService.setAppPolicy(appId,
-                    restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
-        } catch (RemoteException e) {
-            throw new RuntimeException("unable to save policy", e);
-        }
-
+        mPolicyManager.setAppPolicy(appId,
+                restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
         mAppRestrict.setChecked(restrictBackground);
     }
 
@@ -1201,23 +1193,25 @@ public class DataUsageSummary extends Fragment {
 
     private boolean isMobilePolicySplit() {
         final Context context = getActivity();
-        if (hasMobileRadio(context)) {
-            final String subscriberId = getActiveSubscriberId(context);
-            return mPolicyEditor.isMobilePolicySplit(subscriberId);
+        if (hasReadyMobileRadio(context)) {
+            final TelephonyManager tele = TelephonyManager.from(context);
+            return mPolicyEditor.isMobilePolicySplit(getActiveSubscriberId(context));
         } else {
             return false;
         }
     }
 
     private void setMobilePolicySplit(boolean split) {
-        final String subscriberId = getActiveSubscriberId(getActivity());
-        mPolicyEditor.setMobilePolicySplit(subscriberId, split);
+        final Context context = getActivity();
+        if (hasReadyMobileRadio(context)) {
+            final TelephonyManager tele = TelephonyManager.from(context);
+            mPolicyEditor.setMobilePolicySplit(getActiveSubscriberId(context), split);
+        }
     }
 
     private static String getActiveSubscriberId(Context context) {
-        final TelephonyManager telephony = (TelephonyManager) context.getSystemService(
-                Context.TELEPHONY_SERVICE);
-        final String actualSubscriberId = telephony.getSubscriberId();
+        final TelephonyManager tele = TelephonyManager.from(context);
+        final String actualSubscriberId = tele.getSubscriberId();
         return SystemProperties.get(TEST_SUBSCRIBER_PROP, actualSubscriberId);
     }
 
@@ -2048,22 +2042,24 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
-     * Test if device has a mobile data radio.
+     * Test if device has a mobile data radio with SIM in ready state.
      */
-    private static boolean hasMobileRadio(Context context) {
+    public static boolean hasReadyMobileRadio(Context context) {
         if (TEST_RADIOS) {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("mobile");
         }
 
-        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        return conn.isNetworkSupported(TYPE_MOBILE);
+        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final TelephonyManager tele = TelephonyManager.from(context);
+
+        // require both supported network and ready SIM
+        return conn.isNetworkSupported(TYPE_MOBILE) && tele.getSimState() == SIM_STATE_READY;
     }
 
     /**
      * Test if device has a mobile 4G data radio.
      */
-    private static boolean hasMobile4gRadio(Context context) {
+    public static boolean hasMobile4gRadio(Context context) {
         if (!NetworkPolicyEditor.ENABLE_SPLIT_POLICIES) {
             return false;
         }
@@ -2071,39 +2067,35 @@ public class DataUsageSummary extends Fragment {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("4g");
         }
 
-        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        final TelephonyManager telephony = (TelephonyManager) context.getSystemService(
-                Context.TELEPHONY_SERVICE);
+        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final TelephonyManager tele = TelephonyManager.from(context);
 
         final boolean hasWimax = conn.isNetworkSupported(TYPE_WIMAX);
-        final boolean hasLte = telephony.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
+        final boolean hasLte = tele.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
         return hasWimax || hasLte;
     }
 
     /**
      * Test if device has a Wi-Fi data radio.
      */
-    private static boolean hasWifiRadio(Context context) {
+    public static boolean hasWifiRadio(Context context) {
         if (TEST_RADIOS) {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("wifi");
         }
 
-        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
+        final ConnectivityManager conn = ConnectivityManager.from(context);
         return conn.isNetworkSupported(TYPE_WIFI);
     }
 
     /**
      * Test if device has an ethernet network connection.
      */
-    private static boolean hasEthernet(Context context) {
+    public static boolean hasEthernet(Context context) {
         if (TEST_RADIOS) {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("ethernet");
         }
 
-        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
+        final ConnectivityManager conn = ConnectivityManager.from(context);
         return conn.isNetworkSupported(TYPE_ETHERNET);
     }
 
@@ -2138,6 +2130,7 @@ public class DataUsageSummary extends Fragment {
      * Build string describing currently limited networks, which defines when
      * background data is restricted.
      */
+    @Deprecated
     private CharSequence buildLimitedNetworksString() {
         final List<CharSequence> limited = buildLimitedNetworksList();
 
@@ -2153,22 +2146,28 @@ public class DataUsageSummary extends Fragment {
      * Build list of currently limited networks, which defines when background
      * data is restricted.
      */
+    @Deprecated
     private List<CharSequence> buildLimitedNetworksList() {
         final Context context = getActivity();
-        final String subscriberId = getActiveSubscriberId(context);
 
         // build combined list of all limited networks
         final ArrayList<CharSequence> limited = Lists.newArrayList();
-        if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobileAll(subscriberId))) {
-            limited.add(getText(R.string.data_usage_list_mobile));
+
+        final TelephonyManager tele = TelephonyManager.from(context);
+        if (tele.getSimState() == SIM_STATE_READY) {
+            final String subscriberId = getActiveSubscriberId(context);
+            if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobileAll(subscriberId))) {
+                limited.add(getText(R.string.data_usage_list_mobile));
+            }
+            if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobile3gLower(subscriberId))) {
+                limited.add(getText(R.string.data_usage_tab_3g));
+            }
+            if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobile4g(subscriberId))) {
+                limited.add(getText(R.string.data_usage_tab_4g));
+            }
         }
-        if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobile3gLower(subscriberId))) {
-            limited.add(getText(R.string.data_usage_tab_3g));
-        }
-        if (mPolicyEditor.hasLimitedPolicy(buildTemplateMobile4g(subscriberId))) {
-            limited.add(getText(R.string.data_usage_tab_4g));
-        }
-        if (mPolicyEditor.hasLimitedPolicy(buildTemplateWifi())) {
+
+        if (mPolicyEditor.hasLimitedPolicy(buildTemplateWifiWildcard())) {
             limited.add(getText(R.string.data_usage_tab_wifi));
         }
         if (mPolicyEditor.hasLimitedPolicy(buildTemplateEthernet())) {
