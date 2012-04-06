@@ -19,31 +19,26 @@ package com.android.settings;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.preference.SeekBarDialogPreference;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.util.AttributeSet;
-import android.view.IWindowManager;
 import android.view.View;
 import android.widget.SeekBar;
 
 public class PointerSpeedPreference extends SeekBarDialogPreference implements
         SeekBar.OnSeekBarChangeListener {
+    private final InputManager mIm;
     private SeekBar mSeekBar;
 
     private int mOldSpeed;
     private boolean mRestoredOldState;
 
     private boolean mTouchInProgress;
-
-    private static final int MIN_SPEED = -7;
-    private static final int MAX_SPEED = 7;
 
     private ContentObserver mSpeedObserver = new ContentObserver(new Handler()) {
         @Override
@@ -54,6 +49,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
 
     public PointerSpeedPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mIm = (InputManager)getContext().getSystemService(Context.INPUT_SERVICE);
     }
 
     @Override
@@ -72,15 +68,15 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         super.onBindDialogView(view);
 
         mSeekBar = getSeekBar(view);
-        mSeekBar.setMax(MAX_SPEED - MIN_SPEED);
-        mOldSpeed = getSpeed(0);
-        mSeekBar.setProgress(mOldSpeed - MIN_SPEED);
+        mSeekBar.setMax(InputManager.MAX_POINTER_SPEED - InputManager.MIN_POINTER_SPEED);
+        mOldSpeed = mIm.getPointerSpeed();
+        mSeekBar.setProgress(mOldSpeed - InputManager.MIN_POINTER_SPEED);
         mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
         if (!mTouchInProgress) {
-            setSpeed(progress + MIN_SPEED);
+            mIm.tryPointerSpeed(progress + InputManager.MIN_POINTER_SPEED);
         }
     }
 
@@ -90,22 +86,12 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
 
     public void onStopTrackingTouch(SeekBar seekBar) {
         mTouchInProgress = false;
-        setSpeed(seekBar.getProgress() + MIN_SPEED);
-    }
-
-    private int getSpeed(int defaultValue) {
-        int speed = defaultValue;
-        try {
-            speed = Settings.System.getInt(getContext().getContentResolver(),
-                    Settings.System.POINTER_SPEED);
-        } catch (SettingNotFoundException snfe) {
-        }
-        return speed;
+        mIm.tryPointerSpeed(seekBar.getProgress() + InputManager.MIN_POINTER_SPEED);
     }
 
     private void onSpeedChanged() {
-        int speed = getSpeed(0);
-        mSeekBar.setProgress(speed - MIN_SPEED);
+        int speed = mIm.getPointerSpeed();
+        mSeekBar.setProgress(speed - InputManager.MIN_POINTER_SPEED);
     }
 
     @Override
@@ -115,8 +101,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         final ContentResolver resolver = getContext().getContentResolver();
 
         if (positiveResult) {
-            Settings.System.putInt(resolver, Settings.System.POINTER_SPEED,
-                    mSeekBar.getProgress() + MIN_SPEED);
+            mIm.setPointerSpeed(mSeekBar.getProgress() + InputManager.MIN_POINTER_SPEED);
         } else {
             restoreOldState();
         }
@@ -127,19 +112,8 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
     private void restoreOldState() {
         if (mRestoredOldState) return;
 
-        setSpeed(mOldSpeed);
+        mIm.tryPointerSpeed(mOldSpeed);
         mRestoredOldState = true;
-    }
-
-    private void setSpeed(int speed) {
-        try {
-            IWindowManager wm = IWindowManager.Stub.asInterface(
-                    ServiceManager.getService("window"));
-            if (wm != null) {
-                wm.setPointerSpeed(speed);
-            }
-        } catch (RemoteException e) {
-        }
     }
 
     @Override
@@ -169,7 +143,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         super.onRestoreInstanceState(myState.getSuperState());
         mOldSpeed = myState.oldSpeed;
         mSeekBar.setProgress(myState.progress);
-        setSpeed(myState.progress + MIN_SPEED);
+        mIm.tryPointerSpeed(myState.progress + InputManager.MIN_POINTER_SPEED);
     }
 
     private static class SavedState extends BaseSavedState {
