@@ -18,7 +18,7 @@ package com.android.settings.net;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.net.INetworkStatsService;
+import android.net.INetworkStatsSession;
 import android.net.NetworkStats;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ public class SummaryForAllUidLoader extends AsyncTaskLoader<NetworkStats> {
     private static final String KEY_START = "start";
     private static final String KEY_END = "end";
 
-    private final INetworkStatsService mStatsService;
+    private final INetworkStatsSession mSession;
     private final Bundle mArgs;
 
     public static Bundle buildArgs(NetworkTemplate template, long start, long end) {
@@ -40,10 +40,9 @@ public class SummaryForAllUidLoader extends AsyncTaskLoader<NetworkStats> {
         return args;
     }
 
-    public SummaryForAllUidLoader(
-            Context context, INetworkStatsService statsService, Bundle args) {
+    public SummaryForAllUidLoader(Context context, INetworkStatsSession session, Bundle args) {
         super(context);
-        mStatsService = statsService;
+        mSession = session;
         mArgs = args;
     }
 
@@ -60,7 +59,7 @@ public class SummaryForAllUidLoader extends AsyncTaskLoader<NetworkStats> {
         final long end = mArgs.getLong(KEY_END);
 
         try {
-            return mStatsService.getSummaryForAllUid(template, start, end, false);
+            return mSession.getSummaryForAllUid(template, start, end, false);
         } catch (RemoteException e) {
             return null;
         }
