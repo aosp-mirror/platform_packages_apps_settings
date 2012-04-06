@@ -69,11 +69,13 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
+import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
@@ -186,6 +188,8 @@ public class DataUsageSummary extends Fragment {
     private NetworkPolicyManager mPolicyManager;
     private ConnectivityManager mConnService;
 
+    private INetworkStatsSession mStatsSession;
+
     private static final String PREF_FILE = "data_usage";
     private static final String PREF_SHOW_WIFI = "show_wifi";
     private static final String PREF_SHOW_ETHERNET = "show_ethernet";
@@ -284,6 +288,12 @@ public class DataUsageSummary extends Fragment {
         final View view = inflater.inflate(R.layout.data_usage_summary, container, false);
 
         mUidDetailProvider = new UidDetailProvider(context);
+
+        try {
+            mStatsSession = mStatsService.openSession();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
 
         mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
         mTabsContainer = (ViewGroup) view.findViewById(R.id.tabs_container);
@@ -533,6 +543,8 @@ public class DataUsageSummary extends Fragment {
 
         mUidDetailProvider.clearCache();
         mUidDetailProvider = null;
+
+        TrafficStats.closeQuietly(mStatsSession);
     }
 
     @Override
@@ -1139,7 +1151,7 @@ public class DataUsageSummary extends Fragment {
             ChartData>() {
         /** {@inheritDoc} */
         public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoader(getActivity(), mStatsService, args);
+            return new ChartDataLoader(getActivity(), mStatsSession, args);
         }
 
         /** {@inheritDoc} */
@@ -1170,7 +1182,7 @@ public class DataUsageSummary extends Fragment {
             NetworkStats>() {
         /** {@inheritDoc} */
         public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
-            return new SummaryForAllUidLoader(getActivity(), mStatsService, args);
+            return new SummaryForAllUidLoader(getActivity(), mStatsSession, args);
         }
 
         /** {@inheritDoc} */

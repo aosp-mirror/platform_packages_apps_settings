@@ -24,7 +24,7 @@ import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.net.INetworkStatsService;
+import android.net.INetworkStatsSession;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -40,7 +40,7 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
     private static final String KEY_APP = "app";
     private static final String KEY_FIELDS = "fields";
 
-    private final INetworkStatsService mStatsService;
+    private final INetworkStatsSession mSession;
     private final Bundle mArgs;
 
     public static Bundle buildArgs(NetworkTemplate template, AppItem app) {
@@ -55,9 +55,9 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
         return args;
     }
 
-    public ChartDataLoader(Context context, INetworkStatsService statsService, Bundle args) {
+    public ChartDataLoader(Context context, INetworkStatsSession session, Bundle args) {
         super(context);
-        mStatsService = statsService;
+        mSession = session;
         mArgs = args;
     }
 
@@ -85,7 +85,7 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
     private ChartData loadInBackground(NetworkTemplate template, AppItem app, int fields)
             throws RemoteException {
         final ChartData data = new ChartData();
-        data.network = mStatsService.getHistoryForNetwork(template, fields);
+        data.network = mSession.getHistoryForNetwork(template, fields);
 
         if (app != null) {
             data.detailDefault = null;
@@ -128,7 +128,7 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
     private NetworkStatsHistory collectHistoryForUid(
             NetworkTemplate template, int uid, int set, NetworkStatsHistory existing)
             throws RemoteException {
-        final NetworkStatsHistory history = mStatsService.getHistoryForUid(
+        final NetworkStatsHistory history = mSession.getHistoryForUid(
                 template, uid, set, TAG_NONE, FIELD_RX_BYTES | FIELD_TX_BYTES);
 
         if (existing != null) {
