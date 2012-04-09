@@ -72,6 +72,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
     private OnClickListener mDisconnectListener;
+    private OnClickListener mCancelConnectListener;
     private WifiP2pPeer mSelectedWifiPeer;
 
     private boolean mWifiP2pEnabled;
@@ -82,6 +83,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private Preference mThisDevicePref;
 
     private static final int DIALOG_DISCONNECT  = 1;
+    private static final int DIALOG_CANCEL_CONNECT = 2;
 
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
@@ -170,6 +172,26 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             }
         };
 
+        //cancel connect dialog listener
+        mCancelConnectListener = new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    if (mWifiP2pManager != null) {
+                        mWifiP2pManager.cancelConnect(mChannel,
+                                new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                if (DBG) Log.d(TAG, " cancel connect success");
+                            }
+                            public void onFailure(int reason) {
+                                if (DBG) Log.d(TAG, " cancel connect fail " + reason);
+                            }
+                        });
+                    }
+                }
+            }
+        };
+
         setHasOptionsMenu(true);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
@@ -248,6 +270,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             mSelectedWifiPeer = (WifiP2pPeer) preference;
             if (mSelectedWifiPeer.device.status == WifiP2pDevice.CONNECTED) {
                 showDialog(DIALOG_DISCONNECT);
+            } else if (mSelectedWifiPeer.device.status == WifiP2pDevice.INVITED) {
+                showDialog(DIALOG_CANCEL_CONNECT);
             } else {
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = mSelectedWifiPeer.device.deviceAddress;
@@ -295,6 +319,19 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 .setTitle(R.string.wifi_p2p_disconnect_title)
                 .setMessage(getActivity().getString(stringId, deviceName))
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mDisconnectListener)
+                .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
+                .create();
+            return dialog;
+        } else if (id == DIALOG_CANCEL_CONNECT) {
+            int stringId = R.string.wifi_p2p_cancel_connect_message;
+            String deviceName = TextUtils.isEmpty(mSelectedWifiPeer.device.deviceName) ?
+                    mSelectedWifiPeer.device.deviceAddress :
+                    mSelectedWifiPeer.device.deviceName;
+
+            AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.wifi_p2p_cancel_connect_title)
+                .setMessage(getActivity().getString(stringId, deviceName))
+                .setPositiveButton(getActivity().getString(R.string.dlg_ok), mCancelConnectListener)
                 .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
                 .create();
             return dialog;
