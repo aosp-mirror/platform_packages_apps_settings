@@ -296,7 +296,7 @@ public class ChartDataUsageView extends ChartView {
     }
 
     private OnSweepListener mHorizListener = new OnSweepListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
             updatePrimaryRange();
 
@@ -306,7 +306,7 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void requestEdit(ChartSweepView sweep) {
             // ignored
         }
@@ -324,7 +324,7 @@ public class ChartDataUsageView extends ChartView {
     }
 
     private OnSweepListener mVertListener = new OnSweepListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
             if (sweepDone) {
                 clearUpdateAxisDelayed(sweep);
@@ -341,7 +341,7 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void requestEdit(ChartSweepView sweep) {
             if (sweep == mSweepWarning && mListener != null) {
                 mListener.requestWarningEdit();
@@ -469,7 +469,7 @@ public class ChartDataUsageView extends ChartView {
             return Objects.hashCode(mMin, mMax, mSize);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public boolean setBounds(long min, long max) {
             if (mMin != min || mMax != max) {
                 mMin = min;
@@ -480,7 +480,7 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public boolean setSize(float size) {
             if (mSize != size) {
                 mSize = size;
@@ -490,24 +490,24 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public float convertToPoint(long value) {
             return (mSize * (value - mMin)) / (mMax - mMin);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public long convertToValue(float point) {
             return (long) (mMin + ((point * (mMax - mMin)) / mSize));
         }
 
-        /** {@inheritDoc} */
+        @Override
         public long buildLabel(Resources res, SpannableStringBuilder builder, long value) {
             // TODO: convert to better string
             builder.replace(0, builder.length(), Long.toString(value));
             return value;
         }
 
-        /** {@inheritDoc} */
+        @Override
         public float[] getTickPoints() {
             final float[] ticks = new float[32];
             int i = 0;
@@ -532,7 +532,7 @@ public class ChartDataUsageView extends ChartView {
             return Arrays.copyOf(ticks, i);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public int shouldAdjustAxis(long value) {
             // time axis never adjusts
             return 0;
@@ -551,7 +551,7 @@ public class ChartDataUsageView extends ChartView {
             return Objects.hashCode(mMin, mMax, mSize);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public boolean setBounds(long min, long max) {
             if (mMin != min || mMax != max) {
                 mMin = min;
@@ -562,7 +562,7 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public boolean setSize(float size) {
             if (mSize != size) {
                 mSize = size;
@@ -572,7 +572,7 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public float convertToPoint(long value) {
             if (LOG_SCALE) {
                 // derived polynomial fit to make lower values more visible
@@ -585,7 +585,7 @@ public class ChartDataUsageView extends ChartView {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public long convertToValue(float point) {
             if (LOG_SCALE) {
                 final double normalized = point / mSize;
@@ -600,7 +600,7 @@ public class ChartDataUsageView extends ChartView {
         private static final Object sSpanSize = new Object();
         private static final Object sSpanUnit = new Object();
 
-        /** {@inheritDoc} */
+        @Override
         public long buildLabel(Resources res, SpannableStringBuilder builder, long value) {
 
             final CharSequence unit;
@@ -633,7 +633,7 @@ public class ChartDataUsageView extends ChartView {
             return (long) resultRounded;
         }
 
-        /** {@inheritDoc} */
+        @Override
         public float[] getTickPoints() {
             final long range = mMax - mMin;
 
@@ -650,7 +650,7 @@ public class ChartDataUsageView extends ChartView {
             return tickPoints;
         }
 
-        /** {@inheritDoc} */
+        @Override
         public int shouldAdjustAxis(long value) {
             final float point = convertToPoint(value);
             if (point < mSize * 0.1) {

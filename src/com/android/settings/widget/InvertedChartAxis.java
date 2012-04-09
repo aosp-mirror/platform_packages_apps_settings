@@ -30,33 +30,33 @@ public class InvertedChartAxis implements ChartAxis {
         mWrapped = wrapped;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean setBounds(long min, long max) {
         return mWrapped.setBounds(min, max);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean setSize(float size) {
         mSize = size;
         return mWrapped.setSize(size);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public float convertToPoint(long value) {
         return mSize - mWrapped.convertToPoint(value);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public long convertToValue(float point) {
         return mWrapped.convertToValue(mSize - point);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public long buildLabel(Resources res, SpannableStringBuilder builder, long value) {
         return mWrapped.buildLabel(res, builder, value);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public float[] getTickPoints() {
         final float[] points = mWrapped.getTickPoints();
         for (int i = 0; i < points.length; i++) {
@@ -65,7 +65,7 @@ public class InvertedChartAxis implements ChartAxis {
         return points;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public int shouldAdjustAxis(long value) {
         return mWrapped.shouldAdjustAxis(value);
     }

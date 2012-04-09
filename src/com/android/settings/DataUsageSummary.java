@@ -560,9 +560,9 @@ public class DataUsageSummary extends Fragment {
      * Listener to setup {@link LayoutTransition} after first layout pass.
      */
     private OnGlobalLayoutListener mFirstLayoutListener = new OnGlobalLayoutListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onGlobalLayout() {
-            mListView.getViewTreeObserver().removeGlobalOnLayoutListener(mFirstLayoutListener);
+            mListView.getViewTreeObserver().removeOnGlobalLayoutListener(mFirstLayoutListener);
 
             mTabsContainer.setLayoutTransition(buildLayoutTransition());
             mHeader.setLayoutTransition(buildLayoutTransition());
@@ -628,7 +628,7 @@ public class DataUsageSummary extends Fragment {
      * Factory that provide empty {@link View} to make {@link TabHost} happy.
      */
     private TabContentFactory mEmptyTabContent = new TabContentFactory() {
-        /** {@inheritDoc} */
+        @Override
         public View createTabContent(String tag) {
             return new View(mTabHost.getContext());
         }
@@ -643,7 +643,7 @@ public class DataUsageSummary extends Fragment {
     }
 
     private OnTabChangeListener mTabListener = new OnTabChangeListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onTabChanged(String tabId) {
             // user changed tab; update body
             updateBody();
@@ -990,7 +990,7 @@ public class DataUsageSummary extends Fragment {
     }
 
     private OnCheckedChangeListener mDataEnabledListener = new OnCheckedChangeListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (mBinding) return;
 
@@ -1011,7 +1011,7 @@ public class DataUsageSummary extends Fragment {
     };
 
     private View.OnClickListener mDisableAtLimitListener = new View.OnClickListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onClick(View v) {
             final boolean disableAtLimit = !mDisableAtLimit.isChecked();
             if (disableAtLimit) {
@@ -1025,7 +1025,7 @@ public class DataUsageSummary extends Fragment {
     };
 
     private View.OnClickListener mAppRestrictListener = new View.OnClickListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onClick(View v) {
             final boolean restrictBackground = !mAppRestrict.isChecked();
 
@@ -1041,7 +1041,7 @@ public class DataUsageSummary extends Fragment {
     };
 
     private OnClickListener mAppSettingsListener = new OnClickListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onClick(View v) {
             // TODO: target torwards entire UID instead of just first package
             startActivity(mAppSettingsIntent);
@@ -1049,7 +1049,7 @@ public class DataUsageSummary extends Fragment {
     };
 
     private OnItemClickListener mListListener = new OnItemClickListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final Context context = view.getContext();
             final AppItem app = (AppItem) parent.getItemAtPosition(position);
@@ -1059,7 +1059,7 @@ public class DataUsageSummary extends Fragment {
     };
 
     private OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             final CycleItem cycle = (CycleItem) parent.getItemAtPosition(position);
             if (cycle instanceof CycleChangeItem) {
@@ -1084,7 +1084,7 @@ public class DataUsageSummary extends Fragment {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onNothingSelected(AdapterView<?> parent) {
             // ignored
         }
@@ -1149,12 +1149,12 @@ public class DataUsageSummary extends Fragment {
 
     private final LoaderCallbacks<ChartData> mChartDataCallbacks = new LoaderCallbacks<
             ChartData>() {
-        /** {@inheritDoc} */
+        @Override
         public Loader<ChartData> onCreateLoader(int id, Bundle args) {
             return new ChartDataLoader(getActivity(), mStatsSession, args);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
             mChartData = data;
             mChart.bindNetworkStats(mChartData.network);
@@ -1170,7 +1170,7 @@ public class DataUsageSummary extends Fragment {
             }
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onLoaderReset(Loader<ChartData> loader) {
             mChartData = null;
             mChart.bindNetworkStats(null);
@@ -1180,18 +1180,18 @@ public class DataUsageSummary extends Fragment {
 
     private final LoaderCallbacks<NetworkStats> mSummaryCallbacks = new LoaderCallbacks<
             NetworkStats>() {
-        /** {@inheritDoc} */
+        @Override
         public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
             return new SummaryForAllUidLoader(getActivity(), mStatsSession, args);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onLoadFinished(Loader<NetworkStats> loader, NetworkStats data) {
             mAdapter.bindStats(data);
             updateEmptyVisible();
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onLoaderReset(Loader<NetworkStats> loader) {
             mAdapter.bindStats(null);
             updateEmptyVisible();
@@ -1203,6 +1203,7 @@ public class DataUsageSummary extends Fragment {
         }
     };
 
+    @Deprecated
     private boolean isMobilePolicySplit() {
         final Context context = getActivity();
         if (hasReadyMobileRadio(context)) {
@@ -1213,6 +1214,7 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
+    @Deprecated
     private void setMobilePolicySplit(boolean split) {
         final Context context = getActivity();
         if (hasReadyMobileRadio(context)) {
@@ -1228,28 +1230,28 @@ public class DataUsageSummary extends Fragment {
     }
 
     private DataUsageChartListener mChartListener = new DataUsageChartListener() {
-        /** {@inheritDoc} */
+        @Override
         public void onInspectRangeChanged() {
             if (LOGD) Log.d(TAG, "onInspectRangeChanged()");
             updateDetailData();
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onWarningChanged() {
             setPolicyWarningBytes(mChart.getWarningBytes());
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void onLimitChanged() {
             setPolicyLimitBytes(mChart.getLimitBytes());
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void requestWarningEdit() {
             WarningEditorFragment.show(DataUsageSummary.this);
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void requestLimitEdit() {
             LimitEditorFragment.show(DataUsageSummary.this);
         }
@@ -1287,7 +1289,7 @@ public class DataUsageSummary extends Fragment {
             return false;
         }
 
-        /** {@inheritDoc} */
+        @Override
         public int compareTo(CycleItem another) {
             return Long.compare(start, another.start);
         }
@@ -1615,6 +1617,7 @@ public class DataUsageSummary extends Fragment {
             builder.setMessage(message);
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
                     if (target != null) {
@@ -1670,6 +1673,7 @@ public class DataUsageSummary extends Fragment {
 
             builder.setPositiveButton(R.string.data_usage_cycle_editor_positive,
                     new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final int cycleDay = cycleDayPicker.getValue();
                             final String cycleTimezone = new Time().timezone;
@@ -1730,6 +1734,7 @@ public class DataUsageSummary extends Fragment {
 
             builder.setPositiveButton(R.string.data_usage_cycle_editor_positive,
                     new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // clear focus to finish pending text edits
                             bytesPicker.clearFocus();
@@ -1792,6 +1797,7 @@ public class DataUsageSummary extends Fragment {
 
             builder.setPositiveButton(R.string.data_usage_cycle_editor_positive,
                     new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // clear focus to finish pending text edits
                             bytesPicker.clearFocus();
@@ -1825,6 +1831,7 @@ public class DataUsageSummary extends Fragment {
             builder.setMessage(R.string.data_usage_disable_mobile);
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
                     if (target != null) {
@@ -1841,7 +1848,7 @@ public class DataUsageSummary extends Fragment {
 
     /**
      * Dialog to request user confirmation before setting
-     * {@link Settings.Secure#DATA_ROAMING}.
+     * {@link android.provider.Settings.Secure#DATA_ROAMING}.
      */
     public static class ConfirmDataRoamingFragment extends DialogFragment {
         public static void show(DataUsageSummary parent) {
@@ -1861,6 +1868,7 @@ public class DataUsageSummary extends Fragment {
             builder.setMessage(R.string.roaming_warning);
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
                     if (target != null) {
@@ -1896,6 +1904,7 @@ public class DataUsageSummary extends Fragment {
             builder.setMessage(getString(R.string.data_usage_restrict_background));
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
                     if (target != null) {
@@ -1958,6 +1967,7 @@ public class DataUsageSummary extends Fragment {
             builder.setMessage(R.string.data_usage_app_restrict_dialog);
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
                     if (target != null) {
