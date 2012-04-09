@@ -31,27 +31,23 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.hardware.input.InputManager;
-import android.hardware.input.InputManager.KeyboardLayout;
+import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 import android.view.InputDevice;
-import android.view.KeyCharacterMap;
-import android.view.KeyCharacterMap.UnavailableException;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -373,11 +369,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             for (int i = 0; i < devices.length; i++) {
                 InputDevice device = InputDevice.getDevice(devices[i]);
                 if (device != null
+                        && !device.isVirtual()
                         && (device.getSources() & InputDevice.SOURCE_KEYBOARD) != 0
                         && device.getKeyboardType() == InputDevice.KEYBOARD_TYPE_ALPHABETIC) {
                     final String inputDeviceDescriptor = device.getDescriptor();
                     final String keyboardLayoutDescriptor =
-                            im.getInputDeviceKeyboardLayoutDescriptor(inputDeviceDescriptor);
+                            im.getKeyboardLayoutForInputDevice(inputDeviceDescriptor);
                     final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
                             im.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 

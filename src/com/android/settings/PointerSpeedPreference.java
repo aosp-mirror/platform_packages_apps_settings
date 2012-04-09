@@ -69,7 +69,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
 
         mSeekBar = getSeekBar(view);
         mSeekBar.setMax(InputManager.MAX_POINTER_SPEED - InputManager.MIN_POINTER_SPEED);
-        mOldSpeed = mIm.getPointerSpeed();
+        mOldSpeed = mIm.getPointerSpeed(getContext());
         mSeekBar.setProgress(mOldSpeed - InputManager.MIN_POINTER_SPEED);
         mSeekBar.setOnSeekBarChangeListener(this);
     }
@@ -90,7 +90,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
     }
 
     private void onSpeedChanged() {
-        int speed = mIm.getPointerSpeed();
+        int speed = mIm.getPointerSpeed(getContext());
         mSeekBar.setProgress(speed - InputManager.MIN_POINTER_SPEED);
     }
 
@@ -101,7 +101,8 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         final ContentResolver resolver = getContext().getContentResolver();
 
         if (positiveResult) {
-            mIm.setPointerSpeed(mSeekBar.getProgress() + InputManager.MIN_POINTER_SPEED);
+            mIm.setPointerSpeed(getContext(),
+                    mSeekBar.getProgress() + InputManager.MIN_POINTER_SPEED);
         } else {
             restoreOldState();
         }

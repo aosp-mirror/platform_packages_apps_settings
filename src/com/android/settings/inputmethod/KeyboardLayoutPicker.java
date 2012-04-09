@@ -24,19 +24,17 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Loader;
 import android.hardware.input.InputManager;
-import android.hardware.input.InputManager.KeyboardLayout;
+import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class KeyboardLayoutPicker extends ListFragment
-        implements LoaderCallbacks<List<KeyboardLayout>> {
+        implements LoaderCallbacks<KeyboardLayout[]> {
     private static final String TAG = "KeyboardLayoutPicker";
 
     private String mInputDeviceDescriptor;
@@ -73,46 +71,46 @@ public class KeyboardLayoutPicker extends ListFragment
         if (mInputDeviceDescriptor != null) {
             KeyboardLayout c = (KeyboardLayout)l.getItemAtPosition(position);
             InputManager im = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
-            im.setInputDeviceKeyboardLayoutDescriptor(mInputDeviceDescriptor, c.getDescriptor());
+            im.setKeyboardLayoutForInputDevice(mInputDeviceDescriptor, c.getDescriptor());
         }
 
         getActivity().finish();
     }
 
     @Override
-    public Loader<List<KeyboardLayout>> onCreateLoader(int id, Bundle args) {
+    public Loader<KeyboardLayout[]> onCreateLoader(int id, Bundle args) {
         return new KeyboardLayoutLoader(getActivity());
     }
 
     @Override
-    public void onLoadFinished(Loader<List<KeyboardLayout>> loader,
-            List<KeyboardLayout> data) {
+    public void onLoadFinished(Loader<KeyboardLayout[]> loader,
+            KeyboardLayout[] data) {
         setListAdapter(new KeyboardLayoutAdapter(getActivity(), data));
     }
 
     @Override
-    public void onLoaderReset(Loader<List<KeyboardLayout>> loader) {
+    public void onLoaderReset(Loader<KeyboardLayout[]> loader) {
         setListAdapter(null);
     }
 
     private static final class KeyboardLayoutAdapter
             extends ArrayAdapter<KeyboardLayout> {
-        public KeyboardLayoutAdapter(Context context, List<KeyboardLayout> list) {
+        public KeyboardLayoutAdapter(Context context, KeyboardLayout[] list) {
             super(context, android.R.layout.simple_list_item_1, list);
         }
     }
 
     private static final class KeyboardLayoutLoader
-            extends AsyncTaskLoader<List<KeyboardLayout>> {
+            extends AsyncTaskLoader<KeyboardLayout[]> {
         public KeyboardLayoutLoader(Context context) {
             super(context);
         }
 
         @Override
-        public List<KeyboardLayout> loadInBackground() {
+        public KeyboardLayout[] loadInBackground() {
             InputManager im = (InputManager)getContext().getSystemService(Context.INPUT_SERVICE);
-            List<KeyboardLayout> list = im.getKeyboardLayouts();
-            Collections.sort(list);
+            KeyboardLayout[] list = im.getKeyboardLayouts();
+            Arrays.sort(list);
             return list;
         }
 
