@@ -1464,7 +1464,7 @@
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
-                android:exported="false"
+                android:exported="true"
                 android:enabled="@bool/has_powercontrol_widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
