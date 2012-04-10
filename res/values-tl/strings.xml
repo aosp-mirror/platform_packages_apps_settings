@@ -591,6 +591,10 @@
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Idiskonekta?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"Kung magdiskonekta ka, magtatapos ang iyong koneksyon kay <xliff:g id="PEER_NAME">%1$s</xliff:g>."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Kung magdiskonekta ka, magtatapos ang iyong koneksyon kay <xliff:g id="PEER_NAME">%1$s</xliff:g> at <xliff:g id="PEER_COUNT">%2$s</xliff:g> (na) iba pang mga device."</string>
+    <!-- no translation found for wifi_p2p_cancel_connect_title (255267538099324413) -->
+    <skip />
+    <!-- no translation found for wifi_p2p_cancel_connect_message (7477756213423749402) -->
+    <skip />
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Portable na Wi-Fi hotspot"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Ang Portable na hotspot na <xliff:g id="NETWORK_SSID">%1$s</xliff:g> ay aktibo"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Error sa portable na hotspot ng Wi-Fi"</string>
@@ -1098,10 +1102,8 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Maaaring magawa ng spell checker na ito na makolekta ang lahat ng tektong iyong tina-type, kabilang ang personal na data katulad ng mga password at mga numero ng credit card. Nagmumula ito sa app na <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Gamitin ang spell checker na ito?"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Bilis ng pointer"</string>
-    <!-- no translation found for keyboard_layout_picker_title (2980668240678577691) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_picker_empty_text (3104781634456597547) -->
-    <skip />
+    <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"Pumili ng layout ng keyboard"</string>
+    <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"Walang available na mga layout ng keyboard."</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Diksyunaryo ng user"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Personal na diksyunaryo"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Personal na mga diksyunaryo"</string>
@@ -1505,8 +1507,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Hiwalay na paggamit ng 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Ipakita ang paggamit ng Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Ipakita ang paggamit ng Ethernet"</string>
-    <!-- no translation found for data_usage_menu_metered (6373223066892765423) -->
-    <skip />
+    <string name="data_usage_menu_metered" msgid="6373223066892765423">"Mga mahal na network"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Baguhin ang cycle…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Araw ng buwan pang i-reset ang ikot ng paggamit ng data:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Walang apps ang gumamit ng data sa panahong ito."</string>
@@ -1551,14 +1552,10 @@
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Mga inalis na app"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> ang natanggap, <xliff:g id="SENT">%2$s</xliff:g> ang naipadala"</string>
     <string name="data_usage_total_during_range" msgid="441648308264260691">"<xliff:g id="RANGE">%2$s</xliff:g>: mga <xliff:g id="TOTAL">%1$s</xliff:g> ang nagamit"</string>
-    <!-- no translation found for data_usage_metered_title (7521278446526606838) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_body (1805251707096571387) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_mobile (5423305619126978393) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_wifi (4151511616349458705) -->
-    <skip />
+    <string name="data_usage_metered_title" msgid="7521278446526606838">"Mga mahal na network"</string>
+    <string name="data_usage_metered_body" msgid="1805251707096571387">"Piliin ang mga network kung saan mahal ang paggamit ng data. Maaaring paghigpitan ang apps na gamitin ang mga network na ito kapag nasa background. Maaari ring magbabala ang apps bago gamitin ang mga network na ito para sa malalaking download."</string>
+    <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mga mobile network"</string>
+    <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Mga Wi-Fi network"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Emergency na tawag"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Balikan ang tawag"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Pangalan"</string>
@@ -1633,13 +1630,10 @@
     <string name="user_information_heading" msgid="8728151075759863162">"Impormasyon ng user"</string>
     <string name="user_name_title" msgid="7563724675699398319">"Pangalan"</string>
     <string name="user_restrictions_heading" msgid="4426403050397418553">"Mga paghihigpit sa nilalaman"</string>
-    <!-- no translation found for user_market_requires_pin (3260702297207279414) -->
-    <skip />
+    <string name="user_market_requires_pin" msgid="3260702297207279414">"Humiling ng PIN"</string>
     <string name="user_max_content_rating" msgid="8297759970216482772">"Rating ng nilalaman"</string>
-    <!-- no translation found for user_system_apps_heading (2408331798732183682) -->
-    <skip />
-    <!-- no translation found for user_market_apps_heading (4657387297168308251) -->
-    <skip />
+    <string name="user_system_apps_heading" msgid="2408331798732183682">"Apps ng system"</string>
+    <string name="user_market_apps_heading" msgid="4657387297168308251">"Mga naka-install na apps"</string>
     <string name="user_discard_user_menu" msgid="6638388031088461242">"Itapon"</string>
     <string name="user_remove_user_menu" msgid="3210146886949340574">"Alisin ang user"</string>
     <string name="user_new_user_name" msgid="7603010274765911161">"Magulong bata"</string>
