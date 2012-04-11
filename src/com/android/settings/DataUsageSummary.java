@@ -451,7 +451,7 @@ public class DataUsageSummary extends Fragment {
         mMenuRestrictBackground.setChecked(mPolicyManager.getRestrictBackground());
 
         final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
-        split4g.setVisible(hasMobile4gRadio(context) && !appDetailMode);
+        split4g.setVisible(hasReadyMobile4gRadio(context) && !appDetailMode);
         split4g.setChecked(isMobilePolicySplit());
 
         final MenuItem showWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
@@ -596,7 +596,7 @@ public class DataUsageSummary extends Fragment {
         mTabHost.clearAllTabs();
 
         final boolean mobileSplit = isMobilePolicySplit();
-        if (mobileSplit && hasMobile4gRadio(context)) {
+        if (mobileSplit && hasReadyMobile4gRadio(context)) {
             mTabHost.addTab(buildTabSpec(TAB_3G, R.string.data_usage_tab_3g));
             mTabHost.addTab(buildTabSpec(TAB_4G, R.string.data_usage_tab_4g));
         } else if (hasReadyMobileRadio(context)) {
@@ -609,6 +609,7 @@ public class DataUsageSummary extends Fragment {
             mTabHost.addTab(buildTabSpec(TAB_ETHERNET, R.string.data_usage_tab_ethernet));
         }
 
+        final boolean noTabs = mTabWidget.getTabCount() == 0;
         final boolean multipleTabs = mTabWidget.getTabCount() > 1;
         mTabWidget.setVisibility(multipleTabs ? View.VISIBLE : View.GONE);
         if (mIntentTab != null) {
@@ -619,6 +620,9 @@ public class DataUsageSummary extends Fragment {
                 mTabHost.setCurrentTabByTag(mIntentTab);
             }
             mIntentTab = null;
+        } else if (noTabs) {
+            // no usable tabs, so hide body
+            updateBody();
         } else {
             // already hit updateBody() when added; ignore
         }
@@ -2081,7 +2085,7 @@ public class DataUsageSummary extends Fragment {
     /**
      * Test if device has a mobile 4G data radio.
      */
-    public static boolean hasMobile4gRadio(Context context) {
+    public static boolean hasReadyMobile4gRadio(Context context) {
         if (!NetworkPolicyEditor.ENABLE_SPLIT_POLICIES) {
             return false;
         }
@@ -2093,7 +2097,8 @@ public class DataUsageSummary extends Fragment {
         final TelephonyManager tele = TelephonyManager.from(context);
 
         final boolean hasWimax = conn.isNetworkSupported(TYPE_WIMAX);
-        final boolean hasLte = tele.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
+        final boolean hasLte = (tele.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE)
+                && hasReadyMobileRadio(context);
         return hasWimax || hasLte;
     }
 
