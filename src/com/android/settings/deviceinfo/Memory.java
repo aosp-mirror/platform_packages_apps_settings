@@ -17,8 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.content.pm.PackageManager.ENFORCEMENT_DEFAULT;
-import static android.content.pm.PackageManager.ENFORCEMENT_YES;
 
 import android.app.ActivityThread;
 import android.app.AlertDialog;
@@ -180,15 +178,15 @@ public class Memory extends SettingsPreferenceFragment {
         final MenuItem usb = menu.findItem(R.id.storage_usb);
         usb.setVisible(!isMassStorageEnabled());
 
-        final int enforcement;
+        final boolean enforced;
         try {
-            enforcement = mPackageService.getPermissionEnforcement(READ_EXTERNAL_STORAGE);
+            enforced = mPackageService.isPermissionEnforced(READ_EXTERNAL_STORAGE);
         } catch (RemoteException e) {
             throw new RuntimeException("Problem talking with PackageManager", e);
         }
 
         final MenuItem enforceReadExternal = menu.findItem(R.id.storage_enforce_read_external);
-        enforceReadExternal.setChecked(enforcement == ENFORCEMENT_YES);
+        enforceReadExternal.setChecked(enforced);
     }
 
     @Override
@@ -209,10 +207,9 @@ public class Memory extends SettingsPreferenceFragment {
                 final boolean checked = !item.isChecked();
                 item.setChecked(checked);
 
-                final int enforcement = checked ? ENFORCEMENT_YES : ENFORCEMENT_DEFAULT;
                 try {
                     // TODO: offload to background thread
-                    mPackageService.setPermissionEnforcement(READ_EXTERNAL_STORAGE, enforcement);
+                    mPackageService.setPermissionEnforced(READ_EXTERNAL_STORAGE, checked);
                 } catch (RemoteException e) {
                     throw new RuntimeException("Problem talking with PackageManager", e);
                 }
