@@ -88,8 +88,7 @@ final class CanBeOnSdCardChecker {
         if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
             canBe = true;
         } else {
-            if ((info.flags & ApplicationInfo.FLAG_FORWARD_LOCK) == 0 &&
-                    (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+            if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                 if (info.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL ||
                         info.installLocation == PackageInfo.INSTALL_LOCATION_AUTO) {
                     canBe = true;
