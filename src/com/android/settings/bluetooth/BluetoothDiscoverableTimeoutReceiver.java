@@ -23,8 +23,51 @@ import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
 import android.util.Log;
 
+/* Required to handle timeout notification when phone is suspended */
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+
 public class BluetoothDiscoverableTimeoutReceiver extends BroadcastReceiver {
     private static final String TAG = "BluetoothDiscoverableTimeoutReceiver";
+
+    private static final String INTENT_DISCOVERABLE_TIMEOUT = "android.bluetooth.intent.DISCOVERABLE_TIMEOUT";
+
+    static void setDiscoverableAlarm(Context context, long alarmTime) {
+        Log.d(TAG, "setDiscoverableAlarm(): alarmTime = " + alarmTime);
+
+        Intent intent = new Intent(INTENT_DISCOVERABLE_TIMEOUT);
+        intent.setClass(context, BluetoothDiscoverableTimeoutReceiver.class);
+        PendingIntent pending = PendingIntent.getBroadcast(
+            context, 0, intent, 0);
+        AlarmManager alarmManager =
+              (AlarmManager) context.getSystemService (Context.ALARM_SERVICE);
+
+        if (pending != null) {
+            // Cancel any previous alarms that do the same thing.
+            alarmManager.cancel(pending);
+            Log.d(TAG, "setDiscoverableAlarm(): cancel prev alarm");
+        }
+        pending = PendingIntent.getBroadcast(
+            context, 0, intent, 0);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pending);
+    }
+
+    static void cancelDiscoverableAlarm(Context context) {
+        Log.d(TAG, "cancelDiscoverableAlarm(): Enter");
+
+        Intent intent = new Intent(INTENT_DISCOVERABLE_TIMEOUT);
+        intent.setClass(context, BluetoothDiscoverableTimeoutReceiver.class);
+        PendingIntent pending = PendingIntent.getBroadcast(
+            context, 0, intent, PendingIntent.FLAG_NO_CREATE);
+        if (pending != null) {
+            // Cancel any previous alarms that do the same thing.
+            AlarmManager alarmManager =
+              (AlarmManager) context.getSystemService (Context.ALARM_SERVICE);
+
+            alarmManager.cancel(pending);
+        }
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {

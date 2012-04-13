@@ -29,9 +29,6 @@ import android.text.format.DateUtils;
 
 import com.android.settings.R;
 
-/* Required to handle timeout notification when phone is suspended */
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.text.format.Time;
 import android.util.Log;
 
@@ -51,7 +48,6 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
     private static final int DISCOVERABLE_TIMEOUT_FIVE_MINUTES = 300;
     private static final int DISCOVERABLE_TIMEOUT_ONE_HOUR = 3600;
     static final int DISCOVERABLE_TIMEOUT_NEVER = 0;
-    private static final String INTENT_DISCOVERABLE_TIMEOUT = "android.bluetooth.intent.DISCOVERABLE_TIMEOUT";
 
     // Bluetooth advanced settings screen was replaced with action bar items.
     // Use the same preference key for discoverable timeout as the old ListPreference.
@@ -76,8 +72,6 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
     private int mNumberOfPairedDevices;
 
     private int mTimeoutSecs = -1;
-
-    private AlarmManager mAlarmManager = null;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -106,8 +100,6 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         mDiscoveryPreference = discoveryPreference;
         mSharedPreferences = discoveryPreference.getSharedPreferences();
         discoveryPreference.setPersistent(false);
-
-        mAlarmManager = (AlarmManager) mContext.getSystemService (Context.ALARM_SERVICE);
     }
 
     public void resume() {
@@ -147,12 +139,14 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
             mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, timeout);
             updateCountdownSummary();
 
+            Log.d(TAG, "setEnabled(): enabled = " + enable + "timeout = " + timeout);
+
             if (0 < timeout) {
-                setDiscoverableAlarm(endTimestamp);
+                BluetoothDiscoverableTimeoutReceiver.setDiscoverableAlarm(mContext, endTimestamp);
             }
         } else {
             mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
-            cancelDiscoverableAlarm();
+            BluetoothDiscoverableTimeoutReceiver.cancelDiscoverableAlarm(mContext);
         }
     }
 
@@ -254,6 +248,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
     }
 
     void handleModeChanged(int mode) {
+        Log.d(TAG, "handleModeChanged(): mode = " + mode);
         if (mode == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             mDiscoverable = true;
             updateCountdownSummary();
@@ -292,36 +287,6 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         synchronized (this) {
             mUiHandler.removeCallbacks(mUpdateCountdownSummaryRunnable);
             mUiHandler.postDelayed(mUpdateCountdownSummaryRunnable, 1000);
-        }
-    }
-
-    private void setDiscoverableAlarm(long alarmTime) {
-        Log.d(TAG, "setDiscoverableAlarm(): alarmTime = " + alarmTime);
-
-        Intent intent = new Intent(INTENT_DISCOVERABLE_TIMEOUT);
-        intent.setClass(mContext, BluetoothDiscoverableTimeoutReceiver.class);
-        PendingIntent pending = PendingIntent.getBroadcast(
-            mContext, 0, intent, 0);
-        if (pending != null) {
-            // Cancel any previous alarms that do the same thing.
-            mAlarmManager.cancel(pending);
-        }
-        pending = PendingIntent.getBroadcast(
-            mContext, 0, intent, 0);
-
-        mAlarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pending);
-    }
-
-    private void cancelDiscoverableAlarm() {
-        Log.d(TAG, "cancelDiscoverableAlarm(): Enter");
-
-        Intent intent = new Intent(INTENT_DISCOVERABLE_TIMEOUT);
-        intent.setClass(mContext, BluetoothDiscoverableTimeoutReceiver.class);
-        PendingIntent pending = PendingIntent.getBroadcast(
-            mContext, 0, intent, PendingIntent.FLAG_NO_CREATE);
-        if (pending != null) {
-            // Cancel any previous alarms that do the same thing.
-            mAlarmManager.cancel(pending);
         }
     }
 }
