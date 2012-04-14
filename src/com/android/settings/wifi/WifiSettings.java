@@ -538,6 +538,9 @@ public class WifiSettings extends SettingsPreferenceFragment
                     ((WifiSettingsForSetupWizardXL)getActivity()).onAccessPointsUpdated(
                             getPreferenceScreen(), accessPoints);
                 } else {
+                    if(accessPoints.size() == 0) {
+                        addMessagePreference(R.string.wifi_empty_list_wifi_on);
+                    }
                     for (AccessPoint accessPoint : accessPoints) {
                         getPreferenceScreen().addPreference(accessPoint);
                     }
