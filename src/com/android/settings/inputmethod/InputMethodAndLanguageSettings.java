@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Set;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener{
+        implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener {
 
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
@@ -78,6 +78,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             new ArrayList<InputMethodPreference>();
     private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList =
             new ArrayList<PreferenceScreen>();
+    private InputManager mIm;
     private InputMethodManager mImm;
     private List<InputMethodInfo> mImis;
     private boolean mIsOnlyImeSettings;
@@ -159,6 +160,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
 
         // Build hard keyboard preference category.
+        mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
         updateHardKeyboards();
 
         // Spell Checker
@@ -214,6 +216,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+
+        mIm.registerInputDeviceListener(this, null);
+
         if (!mIsOnlyImeSettings) {
             if (mLanguagePref != null) {
                 Configuration conf = getResources().getConfiguration();
@@ -251,11 +256,29 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
+
+        mIm.unregisterInputDeviceListener(this);
+
         if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
             mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
         }
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(
                 this, getContentResolver(), mImis, !mHardKeyboardPreferenceList.isEmpty());
+    }
+
+    @Override
+    public void onInputDeviceAdded(int deviceId) {
+        updateHardKeyboards();
+    }
+
+    @Override
+    public void onInputDeviceChanged(int deviceId) {
+        updateHardKeyboards();
+    }
+
+    @Override
+    public void onInputDeviceRemoved(int deviceId) {
+        updateHardKeyboards();
     }
 
     @Override
@@ -362,9 +385,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private void updateHardKeyboards() {
         mHardKeyboardPreferenceList.clear();
         if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY) {
-            final InputManager im =
-                    (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
-
             final int[] devices = InputDevice.getDeviceIds();
             for (int i = 0; i < devices.length; i++) {
                 InputDevice device = InputDevice.getDevice(devices[i]);
@@ -374,9 +394,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         && device.getKeyboardType() == InputDevice.KEYBOARD_TYPE_ALPHABETIC) {
                     final String inputDeviceDescriptor = device.getDescriptor();
                     final String keyboardLayoutDescriptor =
-                            im.getKeyboardLayoutForInputDevice(inputDeviceDescriptor);
+                            mIm.getKeyboardLayoutForInputDevice(inputDeviceDescriptor);
                     final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
-                            im.getKeyboardLayout(keyboardLayoutDescriptor) : null;
+                            mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 
                     final Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.setClass(getActivity(), KeyboardLayoutPickerActivity.class);
@@ -409,6 +429,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 pref.setOrder(i);
                 mHardKeyboardCategory.addPreference(pref);
             }
+
+            getPreferenceScreen().addPreference(mHardKeyboardCategory);
         } else {
             getPreferenceScreen().removePreference(mHardKeyboardCategory);
         }
