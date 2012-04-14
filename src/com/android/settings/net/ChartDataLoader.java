@@ -21,6 +21,7 @@ import static android.net.NetworkStats.SET_FOREGROUND;
 import static android.net.NetworkStats.TAG_NONE;
 import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
 import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
+import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -88,9 +89,6 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
         data.network = mSession.getHistoryForNetwork(template, fields);
 
         if (app != null) {
-            data.detailDefault = null;
-            data.detailForeground = null;
-
             // load stats for current uid and template
             final int size = app.uids.size();
             for (int i = 0; i < size; i++) {
@@ -101,9 +99,15 @@ public class ChartDataLoader extends AsyncTaskLoader<ChartData> {
                         template, uid, SET_FOREGROUND, data.detailForeground);
             }
 
-            data.detail = new NetworkStatsHistory(data.detailForeground.getBucketDuration());
-            data.detail.recordEntireHistory(data.detailDefault);
-            data.detail.recordEntireHistory(data.detailForeground);
+            if (size > 0) {
+                data.detail = new NetworkStatsHistory(data.detailForeground.getBucketDuration());
+                data.detail.recordEntireHistory(data.detailDefault);
+                data.detail.recordEntireHistory(data.detailForeground);
+            } else {
+                data.detailDefault = new NetworkStatsHistory(HOUR_IN_MILLIS);
+                data.detailForeground = new NetworkStatsHistory(HOUR_IN_MILLIS);
+                data.detail = new NetworkStatsHistory(HOUR_IN_MILLIS);
+            }
         }
 
         return data;

@@ -3626,10 +3626,8 @@
     <!-- Label for data usage occuring while application in background. [CHAR LIMIT=48] -->
     <string name="data_usage_label_background">Background</string>
 
-    <!-- Disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
-    <string name="data_usage_disclaimer" product="tablet">Measured by your tablet. Your carrier\'s data usage accounting may differ.</string>
-    <!-- Disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
-    <string name="data_usage_disclaimer" product="default">Measured by your phone. Your carrier\'s data usage accounting may differ.</string>
+    <!-- Label for application which has its data usage restricted. [CHAR LIMIT=16] -->
+    <string name="data_usage_app_restricted">restricted</string>
 
     <!-- Body of dialog shown to request confirmation that mobile data will be disabled. [CHAR LIMIT=NONE] -->
     <string name="data_usage_disable_mobile">Disable mobile data?</string>
@@ -3695,9 +3693,9 @@
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog" product="tablet">Your <xliff:g id="networks" example="mobile">%1$s</xliff:g> data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider using a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider using a conservative limit.</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog" product="default">Your <xliff:g id="networks" example="mobile">%1$s</xliff:g> data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider using a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="default">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider using a conservative limit.</string>
 
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_restrict_background_title">Restrict background data?</string>
@@ -3714,7 +3712,12 @@
     <!-- Combination of total network bytes sent and received by an application. [CHAR LIMIT=NONE] -->
     <string name="data_usage_received_sent"><xliff:g id="received" example="128KB">%1$s</xliff:g> received, <xliff:g id="sent" example="1.3GB">%2$s</xliff:g> sent</string>
     <!-- Label displaying total network data transferred during a specific time period. [CHAR LIMIT=64] -->
-    <string name="data_usage_total_during_range"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used</string>
+    <string name="data_usage_total_during_range"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used.</string>
+
+    <!-- Label displaying total network data transferred during a specific time period, including a disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
+    <string name="data_usage_total_during_range_mobile" product="tablet"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your tablet. Your carrier\'s data usage accounting may differ.</string>
+    <!-- Label displaying total network data transferred during a specific time period, including a disclaimer that contrasts device versus carrier reporting. [CHAR LIMIT=80] -->
+    <string name="data_usage_total_during_range_mobile" product="default"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ.</string>
 
     <!-- Dialog title for selecting paid networks. [CHAR LIMIT=25] -->
     <string name="data_usage_metered_title">Expensive networks</string>

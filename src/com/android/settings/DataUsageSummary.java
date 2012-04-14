@@ -1147,8 +1147,15 @@ public class DataUsageSummary extends Fragment {
         final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
         final String rangePhrase = formatDateRange(context, start, end);
 
-        mUsageSummary.setText(
-                getString(R.string.data_usage_total_during_range, totalPhrase, rangePhrase));
+        final int summaryRes;
+        if (TAB_MOBILE.equals(mCurrentTab) || TAB_3G.equals(mCurrentApp)
+                || TAB_4G.equals(mCurrentApp)) {
+            summaryRes = R.string.data_usage_total_during_range_mobile;
+        } else {
+            summaryRes = R.string.data_usage_total_during_range;
+        }
+
+        mUsageSummary.setText(getString(summaryRes, totalPhrase, rangePhrase));
     }
 
     private final LoaderCallbacks<ChartData> mChartDataCallbacks = new LoaderCallbacks<
@@ -1191,13 +1198,15 @@ public class DataUsageSummary extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<NetworkStats> loader, NetworkStats data) {
-            mAdapter.bindStats(data);
+            final int[] restrictedAppIds = mPolicyManager.getAppsWithPolicy(
+                    POLICY_REJECT_METERED_BACKGROUND);
+            mAdapter.bindStats(data, restrictedAppIds);
             updateEmptyVisible();
         }
 
         @Override
         public void onLoaderReset(Loader<NetworkStats> loader) {
-            mAdapter.bindStats(null);
+            mAdapter.bindStats(null, new int[0]);
             updateEmptyVisible();
         }
 
@@ -1374,6 +1383,7 @@ public class DataUsageSummary extends Fragment {
 
     public static class AppItem implements Comparable<AppItem>, Parcelable {
         public final int appId;
+        public boolean restricted;
         public SparseBooleanArray uids = new SparseBooleanArray();
         public long total;
 
@@ -1439,7 +1449,7 @@ public class DataUsageSummary extends Fragment {
         /**
          * Bind the given {@link NetworkStats}, or {@code null} to clear list.
          */
-        public void bindStats(NetworkStats stats) {
+        public void bindStats(NetworkStats stats, int[] restrictedAppIds) {
             mItems.clear();
 
             final AppItem systemItem = new AppItem(android.os.Process.SYSTEM_UID);
@@ -1466,6 +1476,16 @@ public class DataUsageSummary extends Fragment {
                     systemItem.total += entry.rxBytes + entry.txBytes;
                     systemItem.addUid(entry.uid);
                 }
+            }
+
+            for (int appId : restrictedAppIds) {
+                AppItem item = knownUids.get(appId);
+                if (item == null) {
+                    item = new AppItem(appId);
+                    item.total = -1;
+                    mItems.add(item);
+                }
+                item.restricted = true;
             }
 
             if (systemItem.total > 0) {
@@ -1513,7 +1533,13 @@ public class DataUsageSummary extends Fragment {
             final AppItem item = mItems.get(position);
             UidDetailTask.bindView(mProvider, item, convertView);
 
-            text1.setText(Formatter.formatFileSize(context, item.total));
+            if (item.restricted && item.total <= 0) {
+                text1.setText(R.string.data_usage_app_restricted);
+                progress.setVisibility(View.GONE);
+            } else {
+                text1.setText(Formatter.formatFileSize(context, item.total));
+                progress.setVisibility(View.VISIBLE);
+            }
 
             final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
             progress.setProgress(percentTotal);
@@ -1580,16 +1606,13 @@ public class DataUsageSummary extends Fragment {
             // TODO: customize default limits based on network template
             final String currentTab = parent.mCurrentTab;
             if (TAB_3G.equals(currentTab)) {
-                message = buildDialogMessage(res, R.string.data_usage_tab_3g);
+                message = res.getString(R.string.data_usage_limit_dialog_mobile);
                 limitBytes = 5 * GB_IN_BYTES;
             } else if (TAB_4G.equals(currentTab)) {
-                message = buildDialogMessage(res, R.string.data_usage_tab_4g);
+                message = res.getString(R.string.data_usage_limit_dialog_mobile);
                 limitBytes = 5 * GB_IN_BYTES;
             } else if (TAB_MOBILE.equals(currentTab)) {
-                message = buildDialogMessage(res, R.string.data_usage_list_mobile);
-                limitBytes = 5 * GB_IN_BYTES;
-            } else if (TAB_WIFI.equals(currentTab)) {
-                message = buildDialogMessage(res, R.string.data_usage_tab_wifi);
+                message = res.getString(R.string.data_usage_limit_dialog_mobile);
                 limitBytes = 5 * GB_IN_BYTES;
             } else {
                 throw new IllegalArgumentException("unknown current tab: " + currentTab);
@@ -1603,10 +1626,6 @@ public class DataUsageSummary extends Fragment {
             dialog.setArguments(args);
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_LIMIT);
-        }
-
-        private static CharSequence buildDialogMessage(Resources res, int networkResId) {
-            return res.getString(R.string.data_usage_limit_dialog, res.getString(networkResId));
         }
 
         @Override
