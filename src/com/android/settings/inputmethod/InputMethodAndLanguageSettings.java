@@ -73,6 +73,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private ListPreference mShowInputMethodSelectorPref;
     private PreferenceCategory mKeyboardSettingsCategory;
     private PreferenceCategory mHardKeyboardCategory;
+    private PreferenceCategory mGameControllerCategory;
     private Preference mLanguagePref;
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList =
             new ArrayList<InputMethodPreference>();
@@ -118,6 +119,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mHardKeyboardCategory = (PreferenceCategory)findPreference("hard_keyboard");
         mKeyboardSettingsCategory = (PreferenceCategory)findPreference(
                 "keyboard_settings_category");
+        mGameControllerCategory = (PreferenceCategory)findPreference(
+                "game_controller_settings_category");
 
         // Filter out irrelevant features if invoked from IME settings button.
         mIsOnlyImeSettings = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
@@ -159,9 +162,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
 
-        // Build hard keyboard preference category.
+        // Build hard keyboard and game controller preference categories.
         mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
-        updateHardKeyboards();
+        updateInputDevices();
 
         // Spell Checker
         final Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -245,7 +248,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
 
-        updateHardKeyboards();
+        updateInputDevices();
 
         // IME
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
@@ -268,17 +271,17 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     @Override
     public void onInputDeviceAdded(int deviceId) {
-        updateHardKeyboards();
+        updateInputDevices();
     }
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        updateHardKeyboards();
+        updateInputDevices();
     }
 
     @Override
     public void onInputDeviceRemoved(int deviceId) {
-        updateHardKeyboards();
+        updateInputDevices();
     }
 
     @Override
@@ -305,6 +308,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         return true;
                     }
                 }
+            }
+            if (chkPref == mGameControllerCategory.findPreference("vibrate_input_devices")) {
+                System.putInt(getContentResolver(), Settings.System.VIBRATE_INPUT_DEVICES,
+                        chkPref.isChecked() ? 1 : 0);
+                return true;
             }
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -382,6 +390,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return pref;
     }
 
+    private void updateInputDevices() {
+        updateHardKeyboards();
+        updateGameControllers();
+    }
+
     private void updateHardKeyboards() {
         mHardKeyboardPreferenceList.clear();
         if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY) {
@@ -434,6 +447,30 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         } else {
             getPreferenceScreen().removePreference(mHardKeyboardCategory);
         }
+    }
+
+    private void updateGameControllers() {
+        if (haveInputDeviceWithVibrator()) {
+            getPreferenceScreen().addPreference(mGameControllerCategory);
+
+            CheckBoxPreference chkPref = (CheckBoxPreference)
+                    mGameControllerCategory.findPreference("vibrate_input_devices");
+            chkPref.setChecked(System.getInt(getContentResolver(),
+                    Settings.System.VIBRATE_INPUT_DEVICES, 1) > 0);
+        } else {
+            getPreferenceScreen().removePreference(mGameControllerCategory);
+        }
+    }
+
+    private boolean haveInputDeviceWithVibrator() {
+        final int[] devices = InputDevice.getDeviceIds();
+        for (int i = 0; i < devices.length; i++) {
+            InputDevice device = InputDevice.getDevice(devices[i]);
+            if (device != null && !device.isVirtual() && device.getVibrator().hasVibrator()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private class SettingsObserver extends ContentObserver {
