@@ -49,12 +49,14 @@ import android.webkit.WebView;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
-
+import android.util.Log;
 /*
  * Displays preferences for Tethering.
  */
 public class TetherSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener {
+    private static final String TAG = "TetherSettings";
+    private static final boolean DBG = false;
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
@@ -234,8 +236,10 @@ public class TetherSettings extends SettingsPreferenceFragment
                     switch (intent
                             .getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)) {
                         case BluetoothAdapter.STATE_ON:
-                            mBluetoothPan.setBluetoothTethering(true);
-                            mBluetoothEnableForTether = false;
+                            if(mBluetoothPan != null) {
+                                mBluetoothPan.setBluetoothTethering(true);
+                                mBluetoothEnableForTether = false;
+                            }
                             break;
 
                         case BluetoothAdapter.STATE_OFF:
@@ -392,7 +396,8 @@ public class TetherSettings extends SettingsPreferenceFragment
         } else if (btState == BluetoothAdapter.STATE_TURNING_ON) {
             mBluetoothTether.setEnabled(false);
             mBluetoothTether.setSummary(R.string.bluetooth_turning_on);
-        } else if (btState == BluetoothAdapter.STATE_ON && mBluetoothPan.isTetheringOn()) {
+        } else if (btState == BluetoothAdapter.STATE_ON &&
+                    mBluetoothPan != null && mBluetoothPan.isTetheringOn()) {
             mBluetoothTether.setChecked(true);
             mBluetoothTether.setEnabled(true);
             if (bluetoothTethered > 1) {
