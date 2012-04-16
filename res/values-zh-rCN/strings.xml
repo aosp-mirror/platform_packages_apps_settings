@@ -516,6 +516,8 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"不保存网络"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"修改网络"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"要查看可用网络，请打开 Wi-Fi。"</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (8154957451723367795) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"显示高级选项"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Wi-Fi 保护设置"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"正在启动 WPS..."</string>
@@ -1100,6 +1102,12 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"此拼写检查工具可能会收集您键入的所有文字，包括密码和信用卡号等个人数据。它源自应用“<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>”。要使用此拼写检查工具吗？"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"鼠标/触控板"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"指针速度"</string>
+    <!-- no translation found for game_controller_settings_category (8794508575329923718) -->
+    <skip />
+    <!-- no translation found for vibrate_input_devices (2599591466928793082) -->
+    <skip />
+    <!-- no translation found for vibrate_input_devices_summary (4595570516865299153) -->
+    <skip />
     <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"选择键盘布局"</string>
     <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"没有可以使用的键盘布局。"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"用户词典"</string>
@@ -1511,8 +1519,8 @@
     <string name="data_usage_empty" msgid="8621855507876539282">"没有任何应用在此期间产生过数据流量。"</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"前台"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"后台"</string>
-    <string name="data_usage_disclaimer" product="tablet" msgid="2591250607795265503">"由您的平板电脑计算而得。您的运营商对于数据流量的计算可能有所不同。"</string>
-    <string name="data_usage_disclaimer" product="default" msgid="4735170480663491977">"由您的手机计算而得。您的运营商对于数据流量的计算可能有所不同。"</string>
+    <!-- no translation found for data_usage_app_restricted (3568465218866589705) -->
+    <skip />
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"要停用移动数据吗？"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"设置移动数据流量限制"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"设置 4G 数据流量限制"</string>
@@ -1541,15 +1549,22 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"设置流量使用量警告"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"设置数据使用限制"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"正在限制数据使用量"</string>
-    <string name="data_usage_limit_dialog" product="tablet" msgid="6401600837858297985">"达到指定的数据使用上限时，系统会停用您的<xliff:g id="NETWORKS">%1$s</xliff:g>数据连接。"\n\n"由于数据流量是由您的平板电脑计算而得的，您的运营商对于流量的计算方法可能有所不同，因此请考虑设置一个较低的上限。"</string>
-    <string name="data_usage_limit_dialog" product="default" msgid="5996407024898469862">"达到指定的数据使用上限时，系统会停用您的<xliff:g id="NETWORKS">%1$s</xliff:g>数据连接。"\n\n"由于数据流量是由您的手机计算而得的，您的运营商对于流量的计算方法可能有所不同，因此请考虑设置一个较低的上限。"</string>
+    <!-- no translation found for data_usage_limit_dialog_mobile (3893348029612821262) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_mobile (7962145861903746827) -->
+    <skip />
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"限制后台数据？"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"如果限制后台移动数据，那么除非您已连接到 Wi-Fi 网络，否则部分应用和服务会无法运行。"</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"警告"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"限制"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"已删除的应用"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"已接收 <xliff:g id="RECEIVED">%1$s</xliff:g>，已发送 <xliff:g id="SENT">%2$s</xliff:g>"</string>
-    <string name="data_usage_total_during_range" msgid="441648308264260691">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用约 <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <!-- no translation found for data_usage_total_during_range (4091294280619255237) -->
+    <skip />
+    <!-- no translation found for data_usage_total_during_range_mobile (5961720793603268572) -->
+    <skip />
+    <!-- no translation found for data_usage_total_during_range_mobile (1625833170144610767) -->
+    <skip />
     <string name="data_usage_metered_title" msgid="7521278446526606838">"高收费网络"</string>
     <string name="data_usage_metered_body" msgid="1805251707096571387">"选择数据使用费较高的网络。这样可限制应用在后台使用这些网络。应用在使用这些网络下载较大的文件时，还会发出警告。"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"移动网络"</string>
