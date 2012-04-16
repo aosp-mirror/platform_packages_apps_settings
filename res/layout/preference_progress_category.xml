@@ -21,7 +21,7 @@
     android:orientation="horizontal"
     >
 
-    <!-- This and the other text view have the style of the list separator text view without the background and padding -->
+    <!-- This text view has the style of the list separator text view without the background and padding. -->
     <TextView
         style="?android:attr/listSeparatorTextViewStyle"
         android:background="@null"
@@ -32,18 +32,6 @@
         android:layout_weight="1"
         android:layout_gravity="left|bottom"
     />
-
-    <TextView
-        style="?android:attr/listSeparatorTextViewStyle"
-        android:background="@null"
-        android:paddingLeft="0dip"
-        android:id="@+id/scanning_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="right|bottom"
-        android:text="@string/progress_scanning"
-        />
 
     <ProgressBar
         android:id="@+id/scanning_progress"
