@@ -420,6 +420,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                     pref.setTitle(device.getName());
                     if (keyboardLayout != null) {
                         pref.setSummary(keyboardLayout.getLabel());
+                    } else {
+                        pref.setSummary(R.string.keyboard_layout_default_label);
                     }
                     pref.setIntent(intent);
                     mHardKeyboardPreferenceList.add(pref);
