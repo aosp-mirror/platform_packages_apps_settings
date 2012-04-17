@@ -110,8 +110,12 @@ public class KeyboardLayoutPicker extends ListFragment
         public KeyboardLayout[] loadInBackground() {
             InputManager im = (InputManager)getContext().getSystemService(Context.INPUT_SERVICE);
             KeyboardLayout[] list = im.getKeyboardLayouts();
-            Arrays.sort(list);
-            return list;
+            KeyboardLayout[] listWithDefault = new KeyboardLayout[list.length + 1];
+            listWithDefault[0] = new KeyboardLayout(null,
+                    getContext().getString(R.string.keyboard_layout_default_label));
+            System.arraycopy(list, 0, listWithDefault, 1, list.length);
+            Arrays.sort(listWithDefault);
+            return listWithDefault;
         }
 
         @Override
