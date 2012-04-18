@@ -106,13 +106,6 @@
     <!-- PERSONAL -->
     <header android:title="@string/header_category_personal" />
 
-    <!-- Manage users -->
-    <header
-        android:fragment="com.android.settings.users.UserSettings"
-        android:icon="@drawable/ic_settings_sync"
-        android:title="@string/user_settings_title"
-        android:id="@+id/user_settings" />
-
     <!-- Location -->
     <header
         android:fragment="com.android.settings.LocationSettings"
@@ -145,6 +138,13 @@
     <header
             android:id="@+id/account_settings"
             android:title="@string/account_settings" />
+
+    <!-- Manage users -->
+    <header
+        android:fragment="com.android.settings.users.UserSettings"
+        android:icon="@drawable/ic_settings_sync"
+        android:title="@string/user_settings_title"
+        android:id="@+id/user_settings" />
 
     <header
             android:id="@+id/account_add"

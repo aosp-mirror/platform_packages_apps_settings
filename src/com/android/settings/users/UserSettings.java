@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.content.pm.UserInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -83,13 +84,21 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mUserListCategory.removeAll();
         for (UserInfo user : users) {
-            if (user.id == 0) continue;
             Preference pref = new Preference(getActivity());
             pref.setTitle(user.name);
             pref.setOnPreferenceClickListener(this);
             pref.setKey("id=" + user.id);
+            if (user.iconPath != null) {
+                setPhotoId(pref, user.iconPath);
+            }
             mUserListCategory.addPreference(pref);
         }
+    }
+
+    private void setPhotoId(Preference pref, String realPath) {
+        Drawable d = Drawable.createFromPath(realPath);
+        if (d == null) return;
+        pref.setIcon(d);
     }
 
     @Override

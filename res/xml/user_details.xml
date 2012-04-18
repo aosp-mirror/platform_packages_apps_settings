@@ -26,11 +26,22 @@
                 android:title="@string/user_name_title"
                 android:persistent="false"
                 />
+        <Preference
+                android:key="user_picture"
+                android:title="@string/user_picture_title"
+                android:persistent="false"
+                />
     </PreferenceCategory>
 
     <PreferenceCategory
             android:key="restrictions_category"
             android:title="@string/user_restrictions_heading">
+        <Preference
+                android:key="associated_account"
+                android:title="@string/user_account_title"
+                android:enabled="false"
+                android:persistent="false"
+                />
         <CheckBoxPreference
                 android:key="market_requires_pin"
                 android:title="@string/user_market_requires_pin"

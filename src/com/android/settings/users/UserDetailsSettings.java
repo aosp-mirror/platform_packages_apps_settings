@@ -16,6 +16,7 @@
 
 package com.android.settings.users;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -26,12 +27,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -50,7 +53,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UserDetailsSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener, DialogCreatable {
+        implements Preference.OnPreferenceChangeListener, DialogCreatable,
+                   Preference.OnPreferenceClickListener {
 
     private static final String TAG = "UserDetailsSettings";
 
@@ -58,15 +62,16 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_REMOVE = 1;
 
     private static final String KEY_USER_NAME = "user_name";
+    private static final String KEY_USER_PICTURE = "user_picture";
     private static final String KEY_INSTALLED_APPS = "market_apps_category";
     private static final String KEY_SYSTEM_APPS = "system_apps_category";
+    private static final String KEY_ACCOUNT = "associated_account";
+    private static final String KEY_RESTRICTIONS = "restrictions_category";
+
     public static final String EXTRA_USER_ID = "user_id";
 
-    private static final String[] SYSTEM_APPS = {
-            "com.google.android.browser",
-            "com.google.android.gm",
-            "com.google.android.youtube"
-    };
+    private static final int RESULT_PICK_IMAGE = 1;
+    private static final int RESULT_CROP_IMAGE = 2;
 
     static class AppState {
         boolean dirty;
@@ -81,6 +86,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private PreferenceGroup mSystemAppGroup;
     private PreferenceGroup mInstalledAppGroup;
     private EditTextPreference mNamePref;
+    private Preference mPicturePref;
+    private Preference mAccountPref;
 
     private IPackageManager mIPm;
     private PackageManager mPm;
@@ -106,7 +113,16 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mInstalledAppGroup = (PreferenceGroup) findPreference(KEY_INSTALLED_APPS);
         mNamePref = (EditTextPreference) findPreference(KEY_USER_NAME);
         mNamePref.setOnPreferenceChangeListener(this);
+        mPicturePref = findPreference(KEY_USER_PICTURE);
+        mPicturePref.setOnPreferenceClickListener(this);
+        mAccountPref = findPreference(KEY_ACCOUNT);
+        mAccountPref.setOnPreferenceClickListener(this);
 
+        if (mUserId == 0) {
+            getPreferenceScreen().removePreference(mSystemAppGroup);
+            getPreferenceScreen().removePreference(mInstalledAppGroup);
+            getPreferenceScreen().removePreference(findPreference(KEY_RESTRICTIONS));
+        }
         setHasOptionsMenu(true);
     }
 
@@ -114,7 +130,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mPm = getActivity().getPackageManager();
-        if (mUserId > 0) {
+        if (mUserId >= 0) {
             initExistingUser();
         } else {
             initNewUser();
@@ -124,6 +140,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (mUserId == 0) {
+            return;
+        }
         MenuItem addAccountItem = menu.add(0, MENU_REMOVE_USER, 0,
                 mNewUser ? R.string.user_discard_user_menu : R.string.user_remove_user_menu);
         addAccountItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
@@ -153,6 +172,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (foundUser != null) {
             mNamePref.setSummary(foundUser.name);
             mNamePref.setText(foundUser.name);
+            if (foundUser.iconPath != null) {
+                setPhotoId(foundUser.iconPath);
+            }
         }
     }
 
@@ -200,6 +222,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void refreshApps() {
+        if (mUserId == 0) return;
         mSystemAppGroup.removeAll();
         mInstalledAppGroup.removeAll();
 
@@ -254,7 +277,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return false;
             }
             try {
-                mIPm.updateUserName(mUserId, (String) newValue);
+                mIPm.setUserName(mUserId, (String) newValue);
                 mNamePref.setSummary((String) newValue);
             } catch (RemoteException re) {
                 return false;
@@ -281,5 +304,73 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             default:
                 return null;
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference == mAccountPref) {
+//            Intent launch = AccountManager.newChooseAccountsIntent(null, null, new String[]{"com.google"}, false, null,
+//                    null, null, null);
+        } else if (preference == mPicturePref) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+
+            startActivityForResult(intent, RESULT_PICK_IMAGE);
+        }
+        return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+        case RESULT_PICK_IMAGE:
+            if (data.getData() != null) {
+                Uri imageUri = data.getData();
+                System.err.println("imageUri = " + imageUri);
+                cropImage(imageUri);
+            }
+            break;
+        case RESULT_CROP_IMAGE:
+            saveCroppedImage(data);
+            break;
+        }
+    }
+
+    private void cropImage(Uri imageUri) {
+        final Uri inputPhotoUri = imageUri;
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(inputPhotoUri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 96);
+        intent.putExtra("outputY", 96);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, RESULT_CROP_IMAGE);
+    }
+
+    private void saveCroppedImage(Intent data) {
+        try {
+            if (data.hasExtra("data")) {
+                Bitmap bitmap = (Bitmap) data.getParcelableExtra("data");
+                ParcelFileDescriptor fd = mIPm.setUserIcon(mUserId);
+                if (fd != null) {
+                    bitmap.compress(CompressFormat.PNG, 100,
+                            new ParcelFileDescriptor.AutoCloseOutputStream(fd));
+                    setPhotoId(mPm.getUser(mUserId).iconPath);
+                }
+            }
+        } catch (RemoteException re) {
+        }
+    }
+
+    private void setPhotoId(String realPath) {
+        Drawable d = Drawable.createFromPath(realPath);
+        if (d == null) return;
+        mPicturePref.setIcon(d);
     }
 }
