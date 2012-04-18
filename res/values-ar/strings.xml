@@ -130,8 +130,6 @@
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"جارٍ الاقتران..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"جهاز بلوتوث بدون اسم"</string>
-    <string name="progress_scanning" msgid="192587958424295789">"البحث"</string>
-    <string name="progress_tap_to_pair" msgid="5655704645616731277">"المس للإقران"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"لم يتم العثور على أجهزة بلوتوث بالجوار."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"طلب اقتران البلوتوث"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"طلب اقتران"</string>
@@ -516,8 +514,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"حذف الشبكة"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"تعديل الشبكة"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"لمشاهدة الشبكات المتاحة، شغّل Wi-Fi."</string>
-    <!-- no translation found for wifi_empty_list_wifi_on (8154957451723367795) -->
-    <skip />
+    <string name="wifi_empty_list_wifi_on" msgid="8154957451723367795">"Wi-Fi قيد التشغيل، إلا أنه لا تتوفر شبكات Wi-Fi في الجوار."</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"عرض الخيارات المتقدمة"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"إعداد Wi-Fi المحمي"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"جارٍ بدء WPS…"</string>
@@ -1102,14 +1099,13 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"يمكن أن يكون المدقق الإملائي هذا قادرًا على جمع كل النص الذي كتبته، بما في ذلك البيانات الشخصية مثل كلمات المرور وأرقام بطاقات الائتمان. يتم إحضار ذلك من التطبيق <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. هل تريد استخدام هذا المدقق الإملائي؟"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"الماوس/لوحة اللمس"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"سرعة المؤشر"</string>
-    <!-- no translation found for game_controller_settings_category (8794508575329923718) -->
-    <skip />
-    <!-- no translation found for vibrate_input_devices (2599591466928793082) -->
-    <skip />
-    <!-- no translation found for vibrate_input_devices_summary (4595570516865299153) -->
-    <skip />
+    <string name="game_controller_settings_category" msgid="8794508575329923718">"وحدة التحكم في الألعاب"</string>
+    <string name="vibrate_input_devices" msgid="2599591466928793082">"استخدام الاهتزاز"</string>
+    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"إعادة توجيه الاهتزاز إلى وحدة التحكم في الألعاب عند الاتصال."</string>
     <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"اختيار تنسيق لوحة مفاتيح"</string>
     <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"ليست هناك تنسيقات لوحة مفاتيح متاحة."</string>
+    <!-- no translation found for keyboard_layout_default_label (2952672513543482165) -->
+    <skip />
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"قاموس المستخدم"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"قاموس شخصي"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"القواميس الشخصية"</string>
@@ -1519,8 +1515,7 @@
     <string name="data_usage_empty" msgid="8621855507876539282">"لم يستخدم أي تطبيق البيانات خلال هذه الفترة."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"المقدمة"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"الخلفية"</string>
-    <!-- no translation found for data_usage_app_restricted (3568465218866589705) -->
-    <skip />
+    <string name="data_usage_app_restricted" msgid="3568465218866589705">"مقيَّد"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"هل تريد تعطيل بيانات الجوال؟"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"تعيين حد لبيانات الجوال"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"تعيين حد بيانات لـ 4G"</string>
@@ -1549,22 +1544,17 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"تعيين تحذير استخدام البيانات"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"تعيين حد استخدام البيانات"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"وضع حد لاستخدام البيانات"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (3893348029612821262) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (7962145861903746827) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"سيتم تعطيل اتصال بيانات الجوال عند الوصول إلى الحد المحدد."\n\n"نظرًا لأنه يتم حساب استخدام البيانات بواسطة جهازك اللوحي، وقد يحسب مشغل شبكة الجوال الاستخدام بشكل مختلف، يمكنك استخدام حد معتدل."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"سيتم تعطيل اتصال بيانات الجوال عند الوصول إلى الحد المحدد."\n\n"نظرًا لأنه يتم حساب استخدام البيانات بواسطة الهاتف، وقد يحسب مشغل شبكة الجوال الاستخدام بشكل مختلف، يمكنك استخدام حد معتدل."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"هل تريد تقييد بيانات الخلفية؟"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"في حال تقييد بيانات الجوال للخلفية، لن تعمل بعض التطبيقات والخدمات ما لم تكن متصلاً بشبكة Wi-Fi."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"تحذير"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"الحد"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"التطبيقات المزالة"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"تم استلام <xliff:g id="RECEIVED">%1$s</xliff:g>، تم إرسال <xliff:g id="SENT">%2$s</xliff:g>"</string>
-    <!-- no translation found for data_usage_total_during_range (4091294280619255237) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range_mobile (5961720793603268572) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range_mobile (1625833170144610767) -->
-    <skip />
+    <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: تم استخدام <xliff:g id="TOTAL">%1$s</xliff:g> تقريبًا."</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: تم استخدام <xliff:g id="TOTAL">%1$s</xliff:g> تقريبًا، وفقًا لحساب الجهاز اللوحي. قد يختلف حساب استخدام البيانات لدى مشغل شبكة الجوال."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: تم استخدام <xliff:g id="TOTAL">%1$s</xliff:g> تقريبًا، وفقًا لحساب الهاتف. قد يختلف حساب استخدام البيانات لدى مشغل شبكة الجوال."</string>
     <string name="data_usage_metered_title" msgid="7521278446526606838">"الشبكات مرتفعة التكلفة"</string>
     <string name="data_usage_metered_body" msgid="1805251707096571387">"حدد الشبكات التي ترتفع فيها تكلفة استخدام البيانات. ويمكن تقييد التطبيقات من استخدام هذه الشبكات عندما تعمل في الخلفية. كما يمكن أن تعرض التطبيقات تحذيرًا قبل استخدام هذه الشبكات للتنزيلات كبيرة الحجم."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"شبكات الجوال"</string>

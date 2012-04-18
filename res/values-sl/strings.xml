@@ -130,8 +130,6 @@
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Seznanjanje ..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Neimenovana naprava Bluetooth"</string>
-    <string name="progress_scanning" msgid="192587958424295789">"Iskanje"</string>
-    <string name="progress_tap_to_pair" msgid="5655704645616731277">"Dotaknite se, da vzpostavite povezavo"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"V bližini ni naprav Bluetooth."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Zahteva za seznanitev Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Zahteva za seznanitev"</string>
@@ -516,8 +514,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Pozabi omrežje"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Spremeni omrežje"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"Če si želite ogledati razpoložljiva omrežja, vklopite Wi-Fi."</string>
-    <!-- no translation found for wifi_empty_list_wifi_on (8154957451723367795) -->
-    <skip />
+    <string name="wifi_empty_list_wifi_on" msgid="8154957451723367795">"Omrežje Wi-Fi je omogočeno; v bližini ni nobenega."</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Prikaz dodatnih možnosti"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Zaščitena nastavitev Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Zagon nastavitve WPS ..."</string>
@@ -1102,14 +1099,13 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Ta pregledovalnik črkovanja bo morda lahko zbral vse besedilo, ki ga vnesete, vključno z osebnimi podatki, kot so gesla in številke kreditnih kartic. Pregledovalnik je iz programa <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Ga želite uporabiti?"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Miška/sledilna ploščica"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Hitrost kazalca"</string>
-    <!-- no translation found for game_controller_settings_category (8794508575329923718) -->
-    <skip />
-    <!-- no translation found for vibrate_input_devices (2599591466928793082) -->
-    <skip />
-    <!-- no translation found for vibrate_input_devices_summary (4595570516865299153) -->
-    <skip />
+    <string name="game_controller_settings_category" msgid="8794508575329923718">"Krmilnik za igre"</string>
+    <string name="vibrate_input_devices" msgid="2599591466928793082">"Uporaba vibriranja"</string>
+    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Preusmeritev vibriranja v krmilnik za igre, ko je povezan."</string>
     <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"Izbira razporeditve tipkovnice"</string>
     <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"Razporeditev tipkovnice ni na voljo."</string>
+    <!-- no translation found for keyboard_layout_default_label (2952672513543482165) -->
+    <skip />
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Uporabniški slovar"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Osebni slovar"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Osebni slovarji"</string>
@@ -1519,8 +1515,7 @@
     <string name="data_usage_empty" msgid="8621855507876539282">"V tem obdobju ni podatkov uporabljal noben program."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Ospredje"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Ozadje"</string>
-    <!-- no translation found for data_usage_app_restricted (3568465218866589705) -->
-    <skip />
+    <string name="data_usage_app_restricted" msgid="3568465218866589705">"omejeno"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Želite onemogočiti mobilne podatke?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Nast. omejitev mobilnih podatkov"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Nastavi omejitev podatkov za 4G"</string>
@@ -1549,22 +1544,17 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Nastavi opozorilo o uporabi podatkov"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Nastavitev omejitve količine prenesenih podatkov"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Omejitev porabe podatkov"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (3893348029612821262) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (7962145861903746827) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"Vaša mobilna podatkovna povezava bo onemogočena, ko dosežete omejitev."\n\n"Ker uporabo podatkov meri tablični računalnik, operater pa jo lahko obračunava drugače, priporočamo, da uporabite nekoliko manjšo omejitev."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"Vaša mobilna podatkovna povezava bo onemogočena, ko dosežete omejitev."\n\n"Ker uporabo podatkov meri telefon, operater pa jo lahko obračunava drugače, priporočamo, da uporabite nekoliko manjšo omejitev."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Želite omejiti podatke v ozadju?"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Če omejite prenos mobilnih podatkov v ozadju, nekateri programi in storitve ne bodo delovali, kadar niste povezani v omrežje Wi-Fi."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">" <xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"opozorilo"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"omejitev"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Odstranjeni programi"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"prejeto: <xliff:g id="RECEIVED">%1$s</xliff:g>, poslano: <xliff:g id="SENT">%2$s</xliff:g>"</string>
-    <!-- no translation found for data_usage_total_during_range (4091294280619255237) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range_mobile (5961720793603268572) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range_mobile (1625833170144610767) -->
-    <skip />
+    <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: približna količina prenesenih podatkov: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: približna količina prenesenih podatkov, merjena s tabličnim računalnikom: <xliff:g id="TOTAL">%1$s</xliff:g>. Operater jo lahko obračunava drugače."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: približna količina prenesenih podatkov, merjena s telefonom: <xliff:g id="TOTAL">%1$s</xliff:g>. Operater jo lahko obračunava drugače."</string>
     <string name="data_usage_metered_title" msgid="7521278446526606838">"Draga omrežja"</string>
     <string name="data_usage_metered_body" msgid="1805251707096571387">"Izberite omrežja z dragim prenosom podatkov. Aplikacijam lahko preprečite uporabo teh omrežij, ko so v ozadju, za velike prenose pa lahko pred uporabo teh omrežij tudi prikažejo opozorilo."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobilna omrežja"</string>

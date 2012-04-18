@@ -130,8 +130,6 @@
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Сопряжение..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Bluetooth-устройство без названия"</string>
-    <string name="progress_scanning" msgid="192587958424295789">"Поиск"</string>
-    <string name="progress_tap_to_pair" msgid="5655704645616731277">"Выберите устройство"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Устройства Bluetooth не найдены."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Запрос сопряжения Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Запрос на сопряжение"</string>
@@ -516,8 +514,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Удалить эту сеть"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Изменить сеть"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"Чтобы просмотреть доступные сети, включите Wi-Fi."</string>
-    <!-- no translation found for wifi_empty_list_wifi_on (8154957451723367795) -->
-    <skip />
+    <string name="wifi_empty_list_wifi_on" msgid="8154957451723367795">"Модуль Wi-Fi включен, но сеть не обнаружена."</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Дополнительно"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Безопасная настройка Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Запуск WPS…"</string>
@@ -1102,14 +1099,13 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Для проверки орфографии будет использоваться приложение <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>, которое может собирать все вводимые данные, в том числе пароли и номера кредитных карт. Продолжить?"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Мышь и сенсорная панель"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Скорость указателя"</string>
-    <!-- no translation found for game_controller_settings_category (8794508575329923718) -->
-    <skip />
-    <!-- no translation found for vibrate_input_devices (2599591466928793082) -->
-    <skip />
-    <!-- no translation found for vibrate_input_devices_summary (4595570516865299153) -->
-    <skip />
+    <string name="game_controller_settings_category" msgid="8794508575329923718">"Игровые контроллеры"</string>
+    <string name="vibrate_input_devices" msgid="2599591466928793082">"Виброотклик"</string>
+    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Перенаправлять виброотклик на игровой контроллер"</string>
     <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"Выбор раскладки клавиатуры"</string>
     <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"Пока нельзя выбрать раскладку клавиатуры."</string>
+    <!-- no translation found for keyboard_layout_default_label (2952672513543482165) -->
+    <skip />
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Словарь пользователя"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Пользовательский словарь"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Пользовательские словари"</string>
@@ -1519,8 +1515,7 @@
     <string name="data_usage_empty" msgid="8621855507876539282">"В этот период не было трафика от приложений."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Активный режим"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Фоновый режим"</string>
-    <!-- no translation found for data_usage_app_restricted (3568465218866589705) -->
-    <skip />
+    <string name="data_usage_app_restricted" msgid="3568465218866589705">"доступ ограничен"</string>
     <string name="data_usage_disable_mobile" msgid="5211007048880167438">"Отключить мобильную передачу данных?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Установить лимит"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Лимитировать трафик 4G"</string>
@@ -1549,22 +1544,17 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Настройка предупреждения"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Лимитирование трафика"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Объем трафика ограничен"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (3893348029612821262) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (7962145861903746827) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"Когда лимит трафика будет исчерпан, передача данных прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"Когда лимит трафика будет исчерпан, передача данных прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ограничение фонового режима"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Получено: <xliff:g id="RECEIVED">%1$s</xliff:g>; отправлено: <xliff:g id="SENT">%2$s</xliff:g>"</string>
-    <!-- no translation found for data_usage_total_during_range (4091294280619255237) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range_mobile (5961720793603268572) -->
-    <skip />
-    <!-- no translation found for data_usage_total_during_range_mobile (1625833170144610767) -->
-    <skip />
+    <string name="data_usage_total_during_range" msgid="4091294280619255237">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g> (по данным устройства). Данные оператора могут отличаться."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g> (по данным устройства). Данные оператора могут отличаться."</string>
     <string name="data_usage_metered_title" msgid="7521278446526606838">"Сети с высокими тарифами"</string>
     <string name="data_usage_metered_body" msgid="1805251707096571387">"Укажите сети с высокой платой за передачу данных. Выбранные сети не будут использоваться приложениями в фоновом режиме. Кроме того, перед загрузкой больших файлов может появляться предупреждение."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Мобильные сети"</string>
