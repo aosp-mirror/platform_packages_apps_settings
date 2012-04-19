@@ -25,6 +25,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.INotificationManager;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -65,6 +67,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 /**
@@ -115,7 +118,8 @@ public class InstalledAppDetails extends Fragment
     private Button mForceStopButton;
     private Button mClearDataButton;
     private Button mMoveAppButton;
-    
+    private Switch mNotificationSwitch;
+
     private PackageMoveObserver mPackageMoveObserver;
     
     private boolean mHaveSizes = false;
@@ -319,6 +323,19 @@ public class InstalledAppDetails extends Fragment
         }
     }
 
+    private void initNotificationButton() {
+        INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        boolean enabled = true; // default on
+        try {
+            enabled = nm.areNotificationsEnabledForPackage(mAppEntry.info.packageName);
+        } catch (android.os.RemoteException ex) {
+            // this does not bode well
+        }
+        mNotificationSwitch.setChecked(enabled);
+        mNotificationSwitch.setOnCheckedChangeListener(this);
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle icicle) {
@@ -368,6 +385,8 @@ public class InstalledAppDetails extends Fragment
         mScreenCompatSection = view.findViewById(R.id.screen_compatibility_section);
         mAskCompatibilityCB = (CheckBox)view.findViewById(R.id.ask_compatibility_cb);
         mEnableCompatibilityCB = (CheckBox)view.findViewById(R.id.enable_compatibility_cb);
+        
+        mNotificationSwitch = (Switch) view.findViewById(R.id.notification_switch);
 
         return view;
     }
@@ -614,6 +633,7 @@ public class InstalledAppDetails extends Fragment
             initUninstallButtons();
             initDataButtons();
             initMoveButton();
+            initNotificationButton();
         } else {
             mMoveAppButton.setText(R.string.moving);
             mMoveAppButton.setEnabled(false);
@@ -925,6 +945,14 @@ public class InstalledAppDetails extends Fragment
         } else if (buttonView == mEnableCompatibilityCB) {
             am.setPackageScreenCompatMode(packageName, isChecked ?
                     ActivityManager.COMPAT_MODE_ENABLED : ActivityManager.COMPAT_MODE_DISABLED);
+        } else if (buttonView == mNotificationSwitch) {
+            INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            try {
+                nm.setNotificationsEnabledForPackage(packageName, isChecked);
+            } catch (android.os.RemoteException ex) {
+                mNotificationSwitch.setChecked(!isChecked); // revert
+            }
         }
     }
 }
