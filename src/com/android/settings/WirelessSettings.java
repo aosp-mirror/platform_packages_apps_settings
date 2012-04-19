@@ -37,6 +37,7 @@ import android.widget.Switch;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
+import com.android.settings.NsdEnabler;
 
 public class WirelessSettings extends SettingsPreferenceFragment {
 
@@ -48,6 +49,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -56,6 +58,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private CheckBoxPreference mAirplaneModePreference;
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
+    private NsdEnabler mNsdEnabler;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -96,9 +99,11 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
+        CheckBoxPreference nsd = (CheckBoxPreference) findPreference(KEY_TOGGLE_NSD);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
+        mNsdEnabler = new NsdEnabler(activity, nsd);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -173,6 +178,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
+        mNsdEnabler.resume();
     }
 
     @Override
@@ -183,6 +189,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
+        mNsdEnabler.pause();
     }
 
     @Override

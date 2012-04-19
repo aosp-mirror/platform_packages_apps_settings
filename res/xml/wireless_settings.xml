@@ -64,6 +64,12 @@
             android:targetClass="com.android.phone.MobileNetworkSettings" />
     </PreferenceScreen>
 
+    <CheckBoxPreference
+        android:key="toggle_nsd"
+        android:title="@string/nsd_quick_toggle_title"
+        android:summary="@string/nsd_quick_toggle_summary"
+        android:persistent="false" />
+
     <PreferenceScreen
         android:fragment="com.android.settings.ProxySelector"
         android:key="proxy_settings"
