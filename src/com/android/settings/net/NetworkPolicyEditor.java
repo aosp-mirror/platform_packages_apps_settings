@@ -214,13 +214,6 @@ public class NetworkPolicyEditor {
         } else {
             if (policy == null) {
                 // ignore when policy doesn't exist
-            } else if (policy.template.getMatchRule() == MATCH_WIFI
-                    && policy.warningBytes == WARNING_DISABLED
-                    && policy.limitBytes == LIMIT_DISABLED) {
-                // when WIFI goes unmetered, and no other warning/limit for
-                // policy, clean it up.
-                mPolicies.remove(policy);
-                modified = true;
             } else if (policy.metered) {
                 policy.metered = false;
                 policy.inferred = false;

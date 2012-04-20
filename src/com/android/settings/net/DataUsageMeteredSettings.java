@@ -16,6 +16,7 @@
 
 package com.android.settings.net;
 
+import static android.net.wifi.WifiInfo.removeDoubleQuotes;
 import static com.android.settings.DataUsageSummary.hasReadyMobileRadio;
 import static com.android.settings.DataUsageSummary.hasWifiRadio;
 
@@ -120,14 +121,4 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
             mPolicyEditor.setPolicyMetered(mTemplate, isChecked());
         }
     }
-
-
-    private static String removeDoubleQuotes(String string) {
-        final int length = string.length();
-        if ((length > 1) && (string.charAt(0) == '"') && (string.charAt(length - 1) == '"')) {
-            return string.substring(1, length - 1);
-        }
-        return string;
-    }
-
 }
