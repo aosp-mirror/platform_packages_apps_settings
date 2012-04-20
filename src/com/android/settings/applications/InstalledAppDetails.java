@@ -29,7 +29,9 @@ import android.app.Fragment;
 import android.app.INotificationManager;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,13 +54,15 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.PreferenceActivity;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.style.BulletSpan;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import android.content.ComponentName;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,6 +95,7 @@ public class InstalledAppDetails extends Fragment
 
     private PackageManager mPm;
     private IUsbManager mUsbManager;
+    private AppWidgetManager mAppWidgetManager;
     private DevicePolicyManager mDpm;
     private ApplicationsState mState;
     private ApplicationsState.AppEntry mAppEntry;
@@ -346,6 +351,7 @@ public class InstalledAppDetails extends Fragment
         mPm = getActivity().getPackageManager();
         IBinder b = ServiceManager.getService(Context.USB_SERVICE);
         mUsbManager = IUsbManager.Stub.asInterface(b);
+        mAppWidgetManager = AppWidgetManager.getInstance(getActivity());
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
@@ -493,20 +499,55 @@ public class InstalledAppDetails extends Fragment
         // Intent list cannot be null. so pass empty list
         List<IntentFilter> intentList = new ArrayList<IntentFilter>();
         mPm.getPreferredActivities(intentList, prefActList, packageName);
-        if(localLOGV) Log.i(TAG, "Have "+prefActList.size()+" number of activities in prefered list");
+        if (localLOGV)
+            Log.i(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
         boolean hasUsbDefaults = false;
         try {
             hasUsbDefaults = mUsbManager.hasDefaults(packageName);
         } catch (RemoteException e) {
             Log.e(TAG, "mUsbManager.hasDefaults", e);
         }
-        TextView autoLaunchView = (TextView)mRootView.findViewById(R.id.auto_launch);
-        if (prefActList.size() <= 0 && !hasUsbDefaults) {
-            // Disable clear activities button
-            autoLaunchView.setText(R.string.auto_launch_disable_text);
-            mActivitiesButton.setEnabled(false);
+        boolean hasBindAppWidgetPermission =
+                mAppWidgetManager.hasBindAppWidgetPermission(mAppEntry.info.packageName);
+
+        TextView autoLaunchTitleView = (TextView) mRootView.findViewById(R.id.auto_launch_title);
+        TextView autoLaunchView = (TextView) mRootView.findViewById(R.id.auto_launch);
+        boolean autoLaunchEnabled = prefActList.size() > 0 || hasUsbDefaults;
+        if (!autoLaunchEnabled && !hasBindAppWidgetPermission) {
+            resetLaunchDefaultsUi(autoLaunchTitleView, autoLaunchView);
         } else {
-            autoLaunchView.setText(R.string.auto_launch_enable_text);
+            boolean useBullets = hasBindAppWidgetPermission && autoLaunchEnabled;
+
+            if (hasBindAppWidgetPermission) {
+                autoLaunchTitleView.setText(R.string.auto_launch_label_generic);
+            } else {
+                autoLaunchTitleView.setText(R.string.auto_launch_label);
+            }
+
+            CharSequence text = null;
+            int bulletIndent = getResources()
+                    .getDimensionPixelSize(R.dimen.installed_app_details_bullet_offset);
+            if (autoLaunchEnabled) {
+                CharSequence autoLaunchEnableText = getText(R.string.auto_launch_enable_text);
+                SpannableString s = new SpannableString(autoLaunchEnableText);
+                if (useBullets) {
+                    s.setSpan(new BulletSpan(bulletIndent), 0, autoLaunchEnableText.length(), 0);
+                }
+                text = (text == null) ?
+                        TextUtils.concat(s, "\n") : TextUtils.concat(text, "\n", s, "\n");
+            }
+            if (hasBindAppWidgetPermission) {
+                CharSequence alwaysAllowBindAppWidgetsText =
+                        getText(R.string.always_allow_bind_appwidgets_text);
+                SpannableString s = new SpannableString(alwaysAllowBindAppWidgetsText);
+                if (useBullets) {
+                    s.setSpan(new BulletSpan(bulletIndent),
+                            0, alwaysAllowBindAppWidgetsText.length(), 0);
+                }
+                text = (text == null) ?
+                        TextUtils.concat(s, "\n") : TextUtils.concat(text, "\n", s, "\n");
+            }
+            autoLaunchView.setText(text);
             mActivitiesButton.setEnabled(true);
             mActivitiesButton.setOnClickListener(this);
         }
@@ -549,6 +590,13 @@ public class InstalledAppDetails extends Fragment
         return true;
     }
     
+    private void resetLaunchDefaultsUi(TextView title, TextView autoLaunchView) {
+        title.setText(R.string.auto_launch_label);
+        autoLaunchView.setText(R.string.auto_launch_disable_text);
+        // Disable clear activities button
+        mActivitiesButton.setEnabled(false);
+    }
+
     private void setIntentAndFinish(boolean finish, boolean appChanged) {
         if(localLOGV) Log.i(TAG, "appChanged="+appChanged);
         Intent intent = new Intent();
@@ -905,7 +953,11 @@ public class InstalledAppDetails extends Fragment
             } catch (RemoteException e) {
                 Log.e(TAG, "mUsbManager.clearDefaults", e);
             }
-            mActivitiesButton.setEnabled(false);
+            mAppWidgetManager.setBindAppWidgetPermission(packageName, false);
+            TextView autoLaunchTitleView =
+                    (TextView) mRootView.findViewById(R.id.auto_launch_title);
+            TextView autoLaunchView = (TextView) mRootView.findViewById(R.id.auto_launch);
+            resetLaunchDefaultsUi(autoLaunchTitleView, autoLaunchView);
         } else if(v == mClearDataButton) {
             if (mAppEntry.info.manageSpaceActivityName != null) {
                 if (!Utils.isMonkeyRunning()) {

@@ -20,6 +20,9 @@
     <!-- Strings for Dialog no button -->
     <string name="no">"No"</string>
 
+    <!-- Strings for Dialog create button -->
+    <string name="create">Create</string>
+
     <!-- Device Info --> <skip />
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
@@ -2328,6 +2331,8 @@
     <string name="storage_label">Storage</string>
     <!-- Manage applications, individual application info screen,  heading for settings related to controlling whether this app is the default for some actions -->
     <string name="auto_launch_label">Launch by default</string>
+    <!-- Manage applications, individual application info screen,  heading for settings related to controlling whether this app is the default for some actions *and* whether the app was given permission by the user to create widgets -->
+    <string name="auto_launch_label_generic">Defaults</string>
     <!-- Manage applications, individual application info screen,  heading for settings related to controlling application screen compatibility -->
     <string name="screen_compatibility_label">Screen compatibility</string>
     <!-- Manage applications, individual application info screen, heading for settings related to the app's permissions. for example, it may list all the permissions the app has. -->
@@ -2366,6 +2371,8 @@
     <string name="app_factory_reset">Uninstall updates</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
     <string name="auto_launch_enable_text">You\'ve chosen to launch this app by default for some actions.</string>
+    <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
+    <string name="always_allow_bind_appwidgets_text">You\'ve chosen to allow this app to create widgets and access their data.</string>
     <!-- Manage applications, individual application screen, text under Launch by default heading if the app is NOT a default for actions -->
     <string name="auto_launch_disable_text">No defaults set.</string>
     <!-- Manage applications, individual application screen, button label under Launch by default heading.  This is used to clear any default actions that may be assigned to this app.  -->
@@ -2787,6 +2794,15 @@
          (or other screens that can host widgets).  Note to translators: we're still determining
          the final name for Gadgets/Widgets, so please translate both for now. -->
     <string name="widget_picker_title">Choose widget</string>
+
+    <!-- Title in dialog that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
+    <string name="allow_bind_app_widget_activity_allow_bind_title">Create widget and allow access?</string>
+
+    <!-- Message in dialog that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
+    <string name="allow_bind_app_widget_activity_allow_bind">After you create the widget, <xliff:g id="widget_host_name">%1$s</xliff:g> can access all data it displays.</string>
+
+    <!-- Text for checkbox that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
+    <string name="allow_bind_app_widget_activity_always_allow_bind">Always allow <xliff:g id="widget_host_name">%1$s</xliff:g> to create widgets and access their data</string>
 
     <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
     <string name="battery_history_days"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m <xliff:g id="seconds">%4$d</xliff:g>s</string>
