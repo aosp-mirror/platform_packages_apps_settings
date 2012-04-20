@@ -625,10 +625,8 @@ public class ChartDataUsageView extends ChartView {
                 resultRounded = unitFactor * Math.round(result);
             }
 
-            final int[] sizeBounds = findOrCreateSpan(builder, sSpanSize, "^1");
-            builder.replace(sizeBounds[0], sizeBounds[1], size);
-            final int[] unitBounds = findOrCreateSpan(builder, sSpanUnit, "^2");
-            builder.replace(unitBounds[0], unitBounds[1], unit);
+            setText(builder, sSpanSize, size, "^1");
+            setText(builder, sSpanUnit, unit, "^2");
 
             return (long) resultRounded;
         }
@@ -663,16 +661,26 @@ public class ChartDataUsageView extends ChartView {
         }
     }
 
-    private static int[] findOrCreateSpan(
-            SpannableStringBuilder builder, Object key, CharSequence bootstrap) {
+    private static void setText(
+            SpannableStringBuilder builder, Object key, CharSequence text, String bootstrap) {
         int start = builder.getSpanStart(key);
         int end = builder.getSpanEnd(key);
         if (start == -1) {
             start = TextUtils.indexOf(builder, bootstrap);
             end = start + bootstrap.length();
             builder.setSpan(key, start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+            // Fix the AbsoluteSizeSpan created from html. Its flags must be set to
+            // SPAN_INCLUSIVE_INCLUSIVE so that it survives a removal of its entire content
+            Object[] spans = builder.getSpans(start, end, Object.class);
+            for (int i = 0; i < spans.length; i++) {
+                Object span = spans[i];
+                if (builder.getSpanStart(span) == start && builder.getSpanEnd(span) == end) {
+                    builder.setSpan(span, start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                }
+            }
         }
-        return new int[] { start, end };
+        builder.replace(start, end, text);
     }
 
     private static long roundUpToPowerOfTwo(long i) {
