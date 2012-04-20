@@ -1106,11 +1106,10 @@
     <string name="pointer_speed" msgid="1221342330217861616">"Скорость указателя"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Игровые контроллеры"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Виброотклик"</string>
-    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Перенаправлять виброотклик на игровой контроллер"</string>
+    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Включать виброотклик на игровом контроллере"</string>
     <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"Выбор раскладки клавиатуры"</string>
     <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"Пока нельзя выбрать раскладку клавиатуры."</string>
-    <!-- no translation found for keyboard_layout_default_label (2952672513543482165) -->
-    <skip />
+    <string name="keyboard_layout_default_label" msgid="2952672513543482165">"По умолчанию"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Словарь пользователя"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Пользовательский словарь"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Пользовательские словари"</string>
@@ -1549,17 +1548,17 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Настройка предупреждения"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Лимитирование трафика"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Объем трафика ограничен"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"Когда лимит трафика будет исчерпан, передача данных прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"Когда лимит трафика будет исчерпан, передача данных прекратится."\n\n"Старайтесь не достигать лимита, так как оператор и устройство могут учитывать трафик по-разному."</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"По достижении лимита трафика передача данных по мобильной сети будет отключена."\n\n"Во избежание дополнительных расходов старайтесь не достигать этого лимита, так как оператор и ваше устройство могут по-разному учитывать трафик."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"По достижении лимита трафика передача данных по мобильной сети будет отключена."\n\n"Во избежание дополнительных расходов старайтесь не достигать этого лимита, так как оператор и ваше устройство могут по-разному учитывать трафик."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ограничение фонового режима"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Получено: <xliff:g id="RECEIVED">%1$s</xliff:g>; отправлено: <xliff:g id="SENT">%2$s</xliff:g>"</string>
-    <string name="data_usage_total_during_range" msgid="4091294280619255237">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g> (по данным устройства). Данные оператора могут отличаться."</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"Трафик за период <xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g> (по данным устройства). Данные оператора могут отличаться."</string>
+    <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g> (трафик, определенный устройством). Данные оператора могут отличаться."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: <xliff:g id="TOTAL">%1$s</xliff:g> (трафик, определенный устройством). Данные оператора могут отличаться."</string>
     <string name="data_usage_metered_title" msgid="7521278446526606838">"Сети с высокими тарифами"</string>
     <string name="data_usage_metered_body" msgid="1805251707096571387">"Укажите сети с высокой платой за передачу данных. Выбранные сети не будут использоваться приложениями в фоновом режиме. Кроме того, перед загрузкой больших файлов может появляться предупреждение."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Мобильные сети"</string>
