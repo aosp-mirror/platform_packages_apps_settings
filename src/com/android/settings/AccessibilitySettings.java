@@ -184,7 +184,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (mServicesCategory.getPreference(0) == mNoServicesMessagePreference) {
             offerInstallAccessibilitySerivceOnce();
         }
-        mSettingsPackageMonitor.register(getActivity(), false);
+        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
     }
 
     @Override
