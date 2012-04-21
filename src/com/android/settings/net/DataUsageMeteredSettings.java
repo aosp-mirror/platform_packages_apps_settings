@@ -16,6 +16,7 @@
 
 package com.android.settings.net;
 
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.wifi.WifiInfo.removeDoubleQuotes;
 import static com.android.settings.DataUsageSummary.hasReadyMobileRadio;
 import static com.android.settings.DataUsageSummary.hasWifiRadio;
@@ -106,19 +107,35 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
 
     private class MeteredPreference extends CheckBoxPreference {
         private final NetworkTemplate mTemplate;
+        private boolean mBinding;
 
         public MeteredPreference(Context context, NetworkTemplate template) {
             super(context);
             mTemplate = template;
 
             setPersistent(false);
-            setChecked(mPolicyEditor.getPolicyMetered(mTemplate));
+
+            mBinding = true;
+            final NetworkPolicy policy = mPolicyEditor.getPolicy(template);
+            if (policy != null) {
+                if (policy.limitBytes != LIMIT_DISABLED) {
+                    setChecked(true);
+                    setEnabled(false);
+                } else {
+                    setChecked(policy.metered);
+                }
+            } else {
+                setChecked(false);
+            }
+            mBinding = false;
         }
 
         @Override
         protected void notifyChanged() {
             super.notifyChanged();
-            mPolicyEditor.setPolicyMetered(mTemplate, isChecked());
+            if (!mBinding) {
+                mPolicyEditor.setPolicyMetered(mTemplate, isChecked());
+            }
         }
     }
 }

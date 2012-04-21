@@ -784,7 +784,7 @@ public class DataUsageSummary extends Fragment {
 
         } else {
             mAppSettingsIntent = null;
-            mAppSettings.setEnabled(false);
+            mAppSettings.setVisibility(View.GONE);
         }
 
         updateDetailData();
@@ -1601,19 +1601,21 @@ public class DataUsageSummary extends Fragment {
 
             final Resources res = parent.getResources();
             final CharSequence message;
+            final long minLimitBytes = (long) (
+                    parent.mPolicyEditor.getPolicy(parent.mTemplate).warningBytes * 1.2f);
             final long limitBytes;
 
             // TODO: customize default limits based on network template
             final String currentTab = parent.mCurrentTab;
             if (TAB_3G.equals(currentTab)) {
                 message = res.getString(R.string.data_usage_limit_dialog_mobile);
-                limitBytes = 5 * GB_IN_BYTES;
+                limitBytes = Math.max(5 * GB_IN_BYTES, minLimitBytes);
             } else if (TAB_4G.equals(currentTab)) {
                 message = res.getString(R.string.data_usage_limit_dialog_mobile);
-                limitBytes = 5 * GB_IN_BYTES;
+                limitBytes = Math.max(5 * GB_IN_BYTES, minLimitBytes);
             } else if (TAB_MOBILE.equals(currentTab)) {
                 message = res.getString(R.string.data_usage_limit_dialog_mobile);
-                limitBytes = 5 * GB_IN_BYTES;
+                limitBytes = Math.max(5 * GB_IN_BYTES, minLimitBytes);
             } else {
                 throw new IllegalArgumentException("unknown current tab: " + currentTab);
             }
