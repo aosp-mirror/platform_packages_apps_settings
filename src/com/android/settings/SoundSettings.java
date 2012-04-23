@@ -339,4 +339,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         return true;
     }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_sound;
+    }
 }
