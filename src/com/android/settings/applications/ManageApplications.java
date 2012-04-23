@@ -20,16 +20,18 @@ import static com.android.settings.Utils.prepareCustomPreferencesList;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.StatFs;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.format.Formatter;
@@ -46,19 +48,19 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.internal.app.IMediaContainerService;
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
 import com.android.settings.Settings.RunningServicesActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settings.deviceinfo.StorageMeasurement;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -179,8 +181,6 @@ public class ManageApplications extends Fragment implements
     private boolean mResumedRunning;
     private boolean mActivityResumed;
     
-    private StatFs mDataFileStats;
-    private StatFs mSDCardFileStats;
     private boolean mLastShowedInternalStorage = true;
     private long mLastUsedStorage, mLastAppStorage, mLastFreeStorage;
 
@@ -534,8 +534,9 @@ public class ManageApplications extends Fragment implements
         
         mDefaultTab = defaultTabTag;
         
-        mDataFileStats = new StatFs("/data");
-        mSDCardFileStats = new StatFs(Environment.getExternalStorageDirectory().toString());
+        final Intent containerIntent = new Intent().setComponent(
+                StorageMeasurement.DEFAULT_CONTAINER_COMPONENT);
+        getActivity().bindService(containerIntent, mContainerConnection, Context.BIND_AUTO_CREATE);
 
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
         mComputingSizeStr = getActivity().getText(R.string.computing_size);
@@ -686,7 +687,13 @@ public class ManageApplications extends Fragment implements
     public void onDestroyOptionsMenu() {
         mOptionsMenu = null;
     }
-    
+
+    @Override
+    public void onDestroy() {
+        getActivity().unbindService(mContainerConnection);
+        super.onDestroy();
+    }
+
     void updateOptionsMenu() {
         if (mOptionsMenu == null) {
             return;
@@ -760,15 +767,18 @@ public class ManageApplications extends Fragment implements
                 mLastShowedInternalStorage = false;
             }
             newLabel = getActivity().getText(R.string.sd_card_storage);
-            mSDCardFileStats.restat(Environment.getExternalStorageDirectory().toString());
-            try {
-                totalStorage = (long)mSDCardFileStats.getBlockCount() *
-                        mSDCardFileStats.getBlockSize();
-                freeStorage = (long) mSDCardFileStats.getAvailableBlocks() *
-                mSDCardFileStats.getBlockSize();
-            } catch (IllegalArgumentException e) {
-                // use the old value of mFreeMem
+
+            if (mContainerService != null) {
+                try {
+                    final long[] stats = mContainerService.getFileSystemStats(
+                            Environment.getExternalStorageDirectory().getPath());
+                    totalStorage = stats[0];
+                    freeStorage = stats[1];
+                } catch (RemoteException e) {
+                    Log.w(TAG, "Problem in container service", e);
+                }
             }
+
             final int N = mApplicationsAdapter.getCount();
             for (int i=0; i<N; i++) {
                 ApplicationsState.AppEntry ae = mApplicationsAdapter.getAppEntry(i);
@@ -779,14 +789,18 @@ public class ManageApplications extends Fragment implements
                 mLastShowedInternalStorage = true;
             }
             newLabel = getActivity().getText(R.string.internal_storage);
-            mDataFileStats.restat("/data");
-            try {
-                totalStorage = (long)mDataFileStats.getBlockCount() *
-                        mDataFileStats.getBlockSize();
-                freeStorage = (long) mDataFileStats.getAvailableBlocks() *
-                    mDataFileStats.getBlockSize();
-            } catch (IllegalArgumentException e) {
+
+            if (mContainerService != null) {
+                try {
+                    final long[] stats = mContainerService.getFileSystemStats(
+                            Environment.getDataDirectory().getPath());
+                    totalStorage = stats[0];
+                    freeStorage = stats[1];
+                } catch (RemoteException e) {
+                    Log.w(TAG, "Problem in container service", e);
+                }
             }
+
             final boolean emulatedStorage = Environment.isExternalStorageEmulated();
             final int N = mApplicationsAdapter.getCount();
             for (int i=0; i<N; i++) {
@@ -912,4 +926,19 @@ public class ManageApplications extends Fragment implements
     public void onTabChanged(String tabId) {
         showCurrentTab();
     }
+
+    private volatile IMediaContainerService mContainerService;
+
+    private final ServiceConnection mContainerConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mContainerService = IMediaContainerService.Stub.asInterface(service);
+            updateStorageUsage();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mContainerService = null;
+        }
+    };
 }

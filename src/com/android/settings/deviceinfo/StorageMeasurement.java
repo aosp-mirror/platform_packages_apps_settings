@@ -31,7 +31,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.os.StatFs;
+import android.os.RemoteException;
 import android.os.storage.StorageVolume;
 import android.util.Log;
 
@@ -53,7 +53,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * know about by just keeping an array of measurement types of the following
  * properties:
  *
- *   Filesystem stats (using StatFs)
+ *   Filesystem stats (using DefaultContainerService)
  *   Directory measurements (using DefaultContainerService.measureDir)
  *   Application measurements (using PackageManager)
  *
@@ -81,7 +81,7 @@ public class StorageMeasurement {
 
     private static final String DEFAULT_CONTAINER_PACKAGE = "com.android.defcontainer";
 
-    private static final ComponentName DEFAULT_CONTAINER_COMPONENT = new ComponentName(
+    public static final ComponentName DEFAULT_CONTAINER_COMPONENT = new ComponentName(
             DEFAULT_CONTAINER_PACKAGE, "com.android.defcontainer.DefaultContainerService");
 
     private final MeasurementHandler mHandler;
@@ -258,8 +258,6 @@ public class StorageMeasurement {
                         return;
                     }
 
-                    measureApproximateStorage();
-
                     synchronized (mLock) {
                         if (mBound) {
                             removeMessages(MSG_DISCONNECT);
@@ -274,6 +272,7 @@ public class StorageMeasurement {
                 }
                 case MSG_CONNECTED: {
                     IMediaContainerService imcs = (IMediaContainerService) msg.obj;
+                    measureApproximateStorage(imcs);
                     measureExactStorage(imcs);
                     break;
                 }
@@ -367,15 +366,16 @@ public class StorageMeasurement {
             sendEmptyMessage(MSG_COMPLETED);
         }
 
-        private void measureApproximateStorage() {
-            final StatFs stat = new StatFs(mStorageVolume != null
-                    ? mStorageVolume.getPath() : Environment.getDataDirectory().getPath());
-            final long blockSize = stat.getBlockSize();
-            final long totalBlocks = stat.getBlockCount();
-            final long availableBlocks = stat.getAvailableBlocks();
-
-            mTotalSize = totalBlocks * blockSize;
-            mAvailSize = availableBlocks * blockSize;
+        private void measureApproximateStorage(IMediaContainerService imcs) {
+            final String path = mStorageVolume != null ? mStorageVolume.getPath()
+                    : Environment.getDataDirectory().getPath();
+            try {
+                final long[] stats = imcs.getFileSystemStats(path);
+                mTotalSize = stats[0];
+                mAvailSize = stats[1];
+            } catch (RemoteException e) {
+                Log.w(TAG, "Problem in container service", e);
+            }
 
             sendInternalApproximateUpdate();
         }
