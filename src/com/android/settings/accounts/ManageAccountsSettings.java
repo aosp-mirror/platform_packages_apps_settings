@@ -163,6 +163,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         MenuItem addAccountItem = menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label);
         addAccountItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                 | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -294,5 +295,10 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         Intent intent = new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
         intent.putExtra(AUTHORITIES_FILTER_KEY, mAuthorities);
         startActivity(intent);
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_accounts;
     }
 }

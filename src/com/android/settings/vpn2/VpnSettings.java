@@ -464,6 +464,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_vpn;
+    }
+
     private class VpnPreference extends Preference {
         private VpnProfile mProfile;
         private int mState = -1;

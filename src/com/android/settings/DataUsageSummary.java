@@ -76,6 +76,7 @@ import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
@@ -477,6 +478,18 @@ public class DataUsageSummary extends Fragment {
             metered.setVisible(!appDetailMode);
         } else {
             metered.setVisible(false);
+        }
+
+        final MenuItem help = menu.findItem(R.id.data_usage_menu_help);
+        String helpUrl;
+        if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_data_usage))) {
+            Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(helpUrl));
+            helpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            help.setIntent(helpIntent);
+            help.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        } else {
+            help.setVisible(false);
         }
     }
 

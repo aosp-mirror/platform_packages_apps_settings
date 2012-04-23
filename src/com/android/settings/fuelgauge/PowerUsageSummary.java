@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.BatteryStats.Uid;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.telephony.SignalStrength;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -72,6 +74,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
+    private static final int MENU_HELP = Menu.FIRST + 2;
 
     private static BatteryStatsImpl sStatsXfer;
 
@@ -318,6 +321,16 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 .setAlphabeticShortcut('r');
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        String helpUrl;
+        if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
+            final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
+            Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(helpUrl));
+            helpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            help.setIntent(helpIntent);
+            help.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
     }
 
     @Override

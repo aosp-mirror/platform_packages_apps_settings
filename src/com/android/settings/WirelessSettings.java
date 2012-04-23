@@ -201,4 +201,9 @@ public class WirelessSettings extends SettingsPreferenceFragment {
                     mAirplaneModePreference.isChecked());
         }
     }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_more_networks;
+    }
 }

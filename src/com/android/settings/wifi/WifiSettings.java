@@ -879,4 +879,9 @@ public class WifiSettings extends SettingsPreferenceFragment
             mScanner.resume();
         }
     }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_wifi;
+    }
 }

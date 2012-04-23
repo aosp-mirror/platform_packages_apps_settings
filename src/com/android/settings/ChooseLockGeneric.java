@@ -377,5 +377,11 @@ public class ChooseLockGeneric extends PreferenceActivity {
             }
             finish();
         }
+
+        @Override
+        protected int getHelpResource() {
+            return R.string.help_url_choose_lockscreen;
+        }
+
     }
 }

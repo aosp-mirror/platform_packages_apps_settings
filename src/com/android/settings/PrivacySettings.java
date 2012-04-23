@@ -203,4 +203,9 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mAutoRestore.setEnabled(enable);
         mConfigure.setEnabled(enable);
     }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_backup_reset;
+    }
 }
