@@ -29,6 +29,8 @@ public class WifiPickerActivity extends PreferenceActivity implements ButtonBarH
     private static final String EXTRA_PREFS_SHOW_BUTTON_BAR = "extra_prefs_show_button_bar";
     private static final String EXTRA_PREFS_SET_NEXT_TEXT = "extra_prefs_set_next_text";
     private static final String EXTRA_PREFS_SET_BACK_TEXT = "extra_prefs_set_back_text";
+    private static final String EXTRA_WIFI_SHOW_ACTION_BAR = "wifi_show_action_bar";
+    private static final String EXTRA_WIFI_SHOW_MENUS = "wifi_show_menus";
 
     @Override
     public Intent getIntent() {
@@ -66,6 +68,14 @@ public class WifiPickerActivity extends PreferenceActivity implements ButtonBarH
         if (orgIntent.hasExtra(EXTRA_PREFS_SET_BACK_TEXT)) {
             intent.putExtra(EXTRA_PREFS_SET_BACK_TEXT,
                     orgIntent.getStringExtra(EXTRA_PREFS_SET_BACK_TEXT));
+        }
+        if (orgIntent.hasExtra(EXTRA_WIFI_SHOW_ACTION_BAR)) {
+            intent.putExtra(EXTRA_WIFI_SHOW_ACTION_BAR,
+                    orgIntent.getBooleanExtra(EXTRA_WIFI_SHOW_ACTION_BAR, true));
+        }
+        if (orgIntent.hasExtra(EXTRA_WIFI_SHOW_MENUS)) {
+            intent.putExtra(EXTRA_WIFI_SHOW_MENUS,
+                    orgIntent.getBooleanExtra(EXTRA_WIFI_SHOW_MENUS, true));
         }
 
         if (resultTo == null) {

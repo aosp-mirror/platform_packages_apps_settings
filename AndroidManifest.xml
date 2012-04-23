@@ -144,8 +144,9 @@
         </activity-alias>
 
         <activity android:name=".wifi.WifiPickerActivity"
+                  android:label="@string/wifi_setup_wizard_title"
                   android:clearTaskOnLaunch="true"
-                  android:parentActivityName="Settings">
+                  android:icon="@drawable/empty_icon">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />

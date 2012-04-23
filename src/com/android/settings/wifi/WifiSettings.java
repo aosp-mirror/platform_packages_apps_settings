@@ -70,15 +70,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * This currently provides three types of UI.
+ * Two types of UI are provided here.
  *
- * Two are for phones with relatively small screens: "for SetupWizard" and "for usual Settings".
- * Users just need to launch WifiSettings Activity as usual. The request will be appropriately
- * handled by ActivityManager, and they will have appropriate look-and-feel with this fragment.
+ * The first is for "usual Settings", appearing as any other Setup fragment.
  *
- * Third type is for Setup Wizard with X-Large, landscape UI. Users need to launch
- * {@link WifiSettingsForSetupWizardXL} Activity, which contains this fragment but also has
- * other decorations specific to that screen.
+ * The second is for Setup Wizard, with a simplified interface that hides the action bar
+ * and menus.
  */
 public class WifiSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener  {
@@ -135,14 +132,19 @@ public class WifiSettings extends SettingsPreferenceFragment
     // this boolean extra specifies whether to disable the Next button when not connected
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
 
+    private static final String EXTRA_WIFI_SHOW_ACTION_BAR = "wifi_show_action_bar";
+    private static final String EXTRA_WIFI_SHOW_MENUS = "wifi_show_menus";
+
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
-    private boolean mInXlSetupWizard;
 
     // Save the dialog details
     private boolean mDlgEdit;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
+
+    // Menus are not shown by Setup Wizard
+    private boolean mShowMenu;
 
     /* End of "used in Wifi Setup context" */
 
@@ -165,13 +167,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         };
 
         mScanner = new Scanner();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        mInXlSetupWizard = (activity instanceof WifiSettingsForSetupWizardXL);
     }
 
     @Override
@@ -238,11 +233,11 @@ public class WifiSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (mInXlSetupWizard) {
-            addPreferencesFromResource(R.xml.wifi_access_points_for_wifi_setup_xl);
-        } else {
-            addPreferencesFromResource(R.xml.wifi_settings);
+        addPreferencesFromResource(R.xml.wifi_settings);
 
+        // Action bar is hidden for Setup Wizard
+        final boolean showActionBar = intent.getBooleanExtra(EXTRA_WIFI_SHOW_ACTION_BAR, true);
+        if (showActionBar) {
             Switch actionBarSwitch = new Switch(activity);
 
             if (activity instanceof PreferenceActivity) {
@@ -266,8 +261,12 @@ public class WifiSettings extends SettingsPreferenceFragment
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
 
-        registerForContextMenu(getListView());
-        setHasOptionsMenu(true);
+        // Menu is hidden for Setup Wizard
+        mShowMenu = intent.getBooleanExtra(EXTRA_WIFI_SHOW_MENUS, true);
+        if (mShowMenu) {
+            registerForContextMenu(getListView());
+        }
+        setHasOptionsMenu(mShowMenu);
 
         // After confirming PreferenceScreen is available, we call super.
         super.onActivityCreated(savedInstanceState);
@@ -302,8 +301,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // We don't want menus in Setup Wizard XL.
-        if (!mInXlSetupWizard) {
+        if (mShowMenu) {
             final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setEnabled(wifiIsEnabled)
@@ -324,7 +322,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                     //.setIcon(android.R.drawable.ic_menu_manage)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-       }
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -390,9 +388,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo info) {
-        if (mInXlSetupWizard) {
-            ((WifiSettingsForSetupWizardXL)getActivity()).onCreateContextMenu(menu, view, info);
-        } else if (info instanceof AdapterContextMenuInfo) {
+        if (info instanceof AdapterContextMenuInfo) {
             Preference preference = (Preference) getListView().getItemAtPosition(
                     ((AdapterContextMenuInfo) info).position);
 
@@ -429,7 +425,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     mWifiManager.connect(mChannel, mSelectedAccessPoint.getConfig(),
                             mConnectListener);
                 } else {
-                    showConfigUi(mSelectedAccessPoint, true);
+                    showDialog(mSelectedAccessPoint, true);
                 }
                 return true;
             }
@@ -438,7 +434,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 return true;
             }
             case MENU_ID_MODIFY: {
-                showConfigUi(mSelectedAccessPoint, true);
+                showDialog(mSelectedAccessPoint, true);
                 return true;
             }
         }
@@ -455,24 +451,12 @@ public class WifiSettings extends SettingsPreferenceFragment
                 mSelectedAccessPoint.generateOpenNetworkConfig();
                 mWifiManager.connect(mChannel, mSelectedAccessPoint.getConfig(), mConnectListener);
             } else {
-                showConfigUi(mSelectedAccessPoint, false);
+                showDialog(mSelectedAccessPoint, false);
             }
         } else {
             return super.onPreferenceTreeClick(screen, preference);
         }
         return true;
-    }
-
-    /**
-     * Shows an appropriate Wifi configuration component.
-     * Called when a user clicks "Add network" preference or one of available networks is selected.
-     */
-    private void showConfigUi(AccessPoint accessPoint, boolean edit) {
-        if (mInXlSetupWizard) {
-            ((WifiSettingsForSetupWizardXL)getActivity()).showConfigUi(accessPoint, edit);
-        } else {
-            showDialog(accessPoint, edit);
-        }
     }
 
     private void showDialog(AccessPoint accessPoint, boolean edit) {
@@ -537,16 +521,11 @@ public class WifiSettings extends SettingsPreferenceFragment
                 // AccessPoints are automatically sorted with TreeSet.
                 final Collection<AccessPoint> accessPoints = constructAccessPoints();
                 getPreferenceScreen().removeAll();
-                if (mInXlSetupWizard) {
-                    ((WifiSettingsForSetupWizardXL)getActivity()).onAccessPointsUpdated(
-                            getPreferenceScreen(), accessPoints);
-                } else {
-                    if(accessPoints.size() == 0) {
-                        addMessagePreference(R.string.wifi_empty_list_wifi_on);
-                    }
-                    for (AccessPoint accessPoint : accessPoints) {
-                        getPreferenceScreen().addPreference(accessPoint);
-                    }
+                if(accessPoints.size() == 0) {
+                    addMessagePreference(R.string.wifi_empty_list_wifi_on);
+                }
+                for (AccessPoint accessPoint : accessPoints) {
+                    getPreferenceScreen().addPreference(accessPoint);
                 }
                 break;
 
@@ -653,10 +632,6 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (!mConnected.get() && SupplicantState.isHandshakeState(state)) {
                 updateConnectionState(WifiInfo.getDetailedStateOf(state));
             }
-
-            if (mInXlSetupWizard) {
-                ((WifiSettingsForSetupWizardXL)getActivity()).onSupplicantStateChanged(intent);
-            }
         } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);
@@ -694,10 +669,6 @@ public class WifiSettings extends SettingsPreferenceFragment
                 final AccessPoint accessPoint = (AccessPoint) preference;
                 accessPoint.update(mLastInfo, mLastState);
             }
-        }
-
-        if (mInXlSetupWizard) {
-            ((WifiSettingsForSetupWizardXL)getActivity()).updateConnectionState(mLastState);
         }
     }
 
@@ -763,28 +734,17 @@ public class WifiSettings extends SettingsPreferenceFragment
      * @param connected true when the device is connected to a wifi network.
      */
     private void changeNextButtonState(boolean connected) {
-        if (mInXlSetupWizard) {
-            ((WifiSettingsForSetupWizardXL)getActivity()).changeNextButtonState(connected);
-        } else if (mEnableNextOnConnection && hasNextButton()) {
+        if (mEnableNextOnConnection && hasNextButton()) {
             getNextButton().setEnabled(connected);
         }
     }
 
     public void onClick(DialogInterface dialogInterface, int button) {
-        if (mInXlSetupWizard) {
-            if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
-                forget();
-            } else if (button == WifiDialog.BUTTON_SUBMIT) {
-                ((WifiSettingsForSetupWizardXL)getActivity()).onConnectButtonPressed();
-            }
-        } else {
-            if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
-                forget();
-            } else if (button == WifiDialog.BUTTON_SUBMIT) {
-                submit(mDialog.getController());
-            }
+        if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
+            forget();
+        } else if (button == WifiDialog.BUTTON_SUBMIT) {
+            submit(mDialog.getController());
         }
-
     }
 
     /* package */ void submit(WifiConfigController configController) {
@@ -800,11 +760,11 @@ public class WifiSettings extends SettingsPreferenceFragment
             }
         } else if (config.networkId != INVALID_NETWORK_ID) {
             if (mSelectedAccessPoint != null) {
-                saveNetwork(config);
+                mWifiManager.save(mChannel, config, mSaveListener);
             }
         } else {
             if (configController.isEdit() || requireKeyStore(config)) {
-                saveNetwork(config);
+                mWifiManager.save(mChannel, config, mSaveListener);
             } else {
                 mWifiManager.connect(mChannel, config, mConnectListener);
             }
@@ -814,14 +774,6 @@ public class WifiSettings extends SettingsPreferenceFragment
             mScanner.resume();
         }
         updateAccessPoints();
-    }
-
-    private void saveNetwork(WifiConfiguration config) {
-        if (mInXlSetupWizard) {
-            ((WifiSettingsForSetupWizardXL)getActivity()).onSaveNetwork(config);
-        } else {
-            mWifiManager.save(mChannel, config, mSaveListener);
-        }
     }
 
     /* package */ void forget() {
@@ -853,7 +805,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     /* package */ void onAddNetworkPressed() {
         // No exact access point is selected.
         mSelectedAccessPoint = null;
-        showConfigUi(null, true);
+        showDialog(null, true);
     }
 
     /* package */ int getAccessPointsCount() {
@@ -885,6 +837,10 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     protected int getHelpResource() {
-        return R.string.help_url_wifi;
+        // Setup Wizard has different help content
+        if (mShowMenu) {
+            return R.string.help_url_wifi;
+        }
+        return 0;
     }
 }
