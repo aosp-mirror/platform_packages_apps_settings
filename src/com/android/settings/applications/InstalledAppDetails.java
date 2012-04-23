@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import android.app.Activity;
@@ -907,10 +908,12 @@ public class InstalledAppDetails extends Fragment
             mActivitiesButton.setEnabled(false);
         } else if(v == mClearDataButton) {
             if (mAppEntry.info.manageSpaceActivityName != null) {
-                Intent intent = new Intent(Intent.ACTION_DEFAULT);
-                intent.setClassName(mAppEntry.info.packageName,
-                        mAppEntry.info.manageSpaceActivityName);
-                startActivityForResult(intent, -1);
+                if (!Utils.isMonkeyRunning()) {
+                    Intent intent = new Intent(Intent.ACTION_DEFAULT);
+                    intent.setClassName(mAppEntry.info.packageName,
+                            mAppEntry.info.manageSpaceActivityName);
+                    startActivityForResult(intent, -1);
+                }
             } else {
                 showDialogInner(DLG_CLEAR_DATA, 0);
             }

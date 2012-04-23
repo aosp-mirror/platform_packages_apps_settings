@@ -48,6 +48,7 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 public class Memory extends SettingsPreferenceFragment {
     private static final String TAG = "MemorySettings";
@@ -237,7 +238,10 @@ public class Memory extends SettingsPreferenceFragment {
             StorageVolumePreferenceCategory svpc = mStorageVolumePreferenceCategories[i];
             Intent intent = svpc.intentForClick(preference);
             if (intent != null) {
-                startActivity(intent);
+                // Don't go across app boundary if monkey is running
+                if (!Utils.isMonkeyRunning()) {
+                    startActivity(intent);
+                }
                 return true;
             }
 
