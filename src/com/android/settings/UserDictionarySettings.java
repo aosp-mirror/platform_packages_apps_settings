@@ -171,8 +171,11 @@ public class UserDictionarySettings extends ListFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        showAddOrEditDialog(null);
-        return true;
+        if (item.getItemId() == OPTIONS_MENU_ADD) {
+            showAddOrEditDialog(null);
+            return true;
+        }
+        return false;
     }
 
     /**
