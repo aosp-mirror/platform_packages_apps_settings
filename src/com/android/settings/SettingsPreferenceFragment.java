@@ -55,15 +55,15 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         int helpResource = getHelpResource();
         if (helpResource != 0) {
             mHelpUrl = getResources().getString(helpResource);
-            if (!TextUtils.isEmpty(mHelpUrl)) {
-                setHasOptionsMenu(true);
-            }
         }
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (!TextUtils.isEmpty(mHelpUrl)) {
+            setHasOptionsMenu(true);
+        }
     }
 
     /**
