@@ -134,19 +134,16 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     private int getBrightness() {
         int mode = getBrightnessMode(0);
         float brightness = 0;
-        try {
-            if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                brightness = Settings.System.getFloat(getContext().getContentResolver(),
-                        Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ);
-                brightness = (brightness+1)/2;
-            } else {
-                brightness = Settings.System.getInt(getContext().getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS);
-                brightness = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim)
-                        / (brightness - mScreenBrightnessDim);
-                
-            }
-        } catch (SettingNotFoundException snfe) {
+        if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+            brightness = Settings.System.getFloat(getContext().getContentResolver(),
+                    Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0);
+            brightness = (brightness+1)/2;
+        } else {
+            brightness = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS, 100);
+            brightness = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim)
+                    / (brightness - mScreenBrightnessDim);
+            
         }
         return (int)(brightness*10000);
     }
