@@ -33,7 +33,6 @@ import java.util.List;
  */
 final class PanProfile implements LocalBluetoothProfile {
     private BluetoothPan mService;
-
     // Tethering direction for each device
     private final HashMap<BluetoothDevice, Integer> mDeviceRoleMap =
             new HashMap<BluetoothDevice, Integer>();
@@ -52,7 +51,7 @@ final class PanProfile implements LocalBluetoothProfile {
         }
 
         public void onServiceDisconnected(int profile) {
-            mService = null;
+
         }
     }
 
