@@ -527,6 +527,9 @@ public class WifiSettings extends SettingsPreferenceFragment
      * the strength of network and the security for it.
      */
     private void updateAccessPoints() {
+        // Safeguard from some delayed event handling
+        if (getActivity() == null) return;
+
         final int wifiState = mWifiManager.getWifiState();
 
         switch (wifiState) {
