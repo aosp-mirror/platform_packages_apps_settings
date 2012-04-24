@@ -781,6 +781,7 @@ public class DataUsageSummary extends Fragment {
 
             final boolean matchFound = pm.resolveActivity(mAppSettingsIntent, 0) != null;
             mAppSettings.setEnabled(matchFound);
+            mAppSettings.setVisibility(View.VISIBLE);
 
         } else {
             mAppSettingsIntent = null;
@@ -1047,6 +1048,8 @@ public class DataUsageSummary extends Fragment {
     private OnClickListener mAppSettingsListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            if (!isAdded()) return;
+
             // TODO: target torwards entire UID instead of just first package
             startActivity(mAppSettingsIntent);
         }
