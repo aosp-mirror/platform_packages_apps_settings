@@ -47,6 +47,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -71,9 +72,11 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private final IntentFilter mIntentFilter = new IntentFilter();
     private WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
+    private OnClickListener mRenameListener;
     private OnClickListener mDisconnectListener;
     private OnClickListener mCancelConnectListener;
     private WifiP2pPeer mSelectedWifiPeer;
+    private EditText mDeviceNameText;
 
     private boolean mWifiP2pEnabled;
     private boolean mWifiP2pSearching;
@@ -84,6 +87,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
     private static final int DIALOG_DISCONNECT  = 1;
     private static final int DIALOG_CANCEL_CONNECT = 2;
+    private static final int DIALOG_RENAME = 3;
 
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
@@ -152,6 +156,28 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         } else {
             Log.e(TAG, "mWifiP2pManager is null !");
         }
+
+        mRenameListener = new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    if (mWifiP2pManager != null) {
+                        mWifiP2pManager.setDeviceName(mChannel,
+                                mDeviceNameText.getText().toString(),
+                                new WifiP2pManager.ActionListener() {
+                            public void onSuccess() {
+                                if (DBG) Log.d(TAG, " device rename success");
+                            }
+                            public void onFailure(int reason) {
+                                Toast.makeText(getActivity(),
+                                        R.string.wifi_p2p_failed_rename_message,
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+            }
+        };
 
         //disconnect dialog listener
         mDisconnectListener = new OnClickListener() {
@@ -258,7 +284,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 startSearch();
                 return true;
             case MENU_ID_RENAME:
-                //TODO: handle rename
+                showDialog(DIALOG_RENAME);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -332,6 +358,15 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 .setTitle(R.string.wifi_p2p_cancel_connect_title)
                 .setMessage(getActivity().getString(stringId, deviceName))
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mCancelConnectListener)
+                .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
+                .create();
+            return dialog;
+        } else if (id == DIALOG_RENAME) {
+            mDeviceNameText = new EditText(getActivity());
+            AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.wifi_p2p_menu_rename)
+                .setView(mDeviceNameText)
+                .setPositiveButton(getActivity().getString(R.string.dlg_ok), mRenameListener)
                 .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
                 .create();
             return dialog;
