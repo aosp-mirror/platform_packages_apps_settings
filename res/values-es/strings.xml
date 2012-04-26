@@ -18,6 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"Sí"</string>
     <string name="no" msgid="6731231425810196216">"No"</string>
+    <string name="create" msgid="3578857613172647409">"Crear"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Desconocido"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"CONEXIONES INALÁMBRICAS Y REDES"</string>
     <string name="header_category_device" msgid="5781174212691167553">"DISPOSITIVO"</string>
@@ -969,6 +970,7 @@
     <string name="application_info_label" msgid="5736524913065714880">"Información de la aplicación"</string>
     <string name="storage_label" msgid="8700867073480107253">"Almacenamiento"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Abrir de forma predeterminada"</string>
+    <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valores predeterminados"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidad de la pantalla"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permisos"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Caché"</string>
@@ -988,6 +990,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"Borrar datos"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Desinstalar actualizaciones"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"Has elegido iniciar esta aplicación de forma predeterminada para algunas acciones."</string>
+    <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"Has permitido que esta aplicación pueda crear widgets y acceder a sus datos."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"No se han establecido valores predeterminados"</string>
     <string name="clear_activities" msgid="7408923511535174430">"Borrar valores predeterminados"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Es posible que esta aplicación no se haya diseñado para tu pantalla. Aquí puedes controlar cómo se ajusta a la pantalla."</string>
@@ -1174,6 +1177,9 @@
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Estos ajustes están destinados únicamente a los desarrolladores. Pueden provocar que el dispositivo o las aplicaciones del mismo no funcionen correctamente."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Seleccionar gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Seleccionar widget"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"¿Crear widget y permitir acceso?"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"Después de crear el widget, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> podrá acceder a todos los datos que muestre."</string>
+    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"Permitir siempre que <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> pueda crear widgets y acceder a sus datos"</string>
     <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> d <xliff:g id="HOURS">%2$d</xliff:g> h <xliff:g id="MINUTES">%3$d</xliff:g> min <xliff:g id="SECONDS">%4$d</xliff:g> s"</string>
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> min <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
@@ -1511,8 +1517,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Dividir uso de 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostrar uso de Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar uso de Ethernet"</string>
-    <!-- no translation found for data_usage_menu_metered (8386567111915152271) -->
-    <skip />
+    <string name="data_usage_menu_metered" msgid="8386567111915152271">"Redes sin tarifa plana"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Día del mes para restablecer ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación ha usado datos en este período."</string>
@@ -1536,12 +1541,10 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver ajustes de la aplicación"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir datos de referencia"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (7414394653383835260) -->
-    <skip />
+    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"Inhabilitar datos de referencia en redes sin tarifa plana. Se usarán redes con tarifa si están disponibles."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir los datos de referencia, establece un límite de datos móviles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir datos de referencia?"</string>
-    <!-- no translation found for data_usage_app_restrict_dialog (1551946513417839948) -->
-    <skip />
+    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo haya disponibles redes sin tarifa plana."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo puedes restringir los datos de referencia si estableces un límite de datos móviles."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Elige el día en el que empezará cada ciclo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Día de cada mes:"</string>
@@ -1560,10 +1563,8 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas (según el cálculo del tablet). El cálculo del uso de datos del operador puede variar."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas (según el cálculo del teléfono). El cálculo del uso de datos del operador puede variar."</string>
-    <!-- no translation found for data_usage_metered_title (311250454694217878) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_body (1616820728096597564) -->
-    <skip />
+    <string name="data_usage_metered_title" msgid="311250454694217878">"Redes sin tarifa plana"</string>
+    <string name="data_usage_metered_body" msgid="1616820728096597564">"Selecciona las redes que no tienen tarifa plana de datos. Se puede impedir que las aplicaciones utilicen estas redes cuando se ejecuten en segundo plano. Las aplicaciones también pueden mostrar un mensaje de advertencia antes de utilizar estas redes para descargas de gran tamaño."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Redes móviles"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Redes Wi-Fi"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Llamada de emergencia"</string>
@@ -1649,12 +1650,8 @@
     <string name="user_new_user_name" msgid="7603010274765911161">"Pesado"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"¿Eliminar usuario?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"¿Seguro que quieres eliminar el usuario y todos los datos asociados del dispositivo?"</string>
-    <!-- no translation found for app_notifications_switch_label (8235636095795328068) -->
-    <skip />
-    <!-- no translation found for app_notifications_switch_on (6878397294545561241) -->
-    <skip />
-    <!-- no translation found for app_notifications_switch_off (2206641347875395316) -->
-    <skip />
-    <!-- no translation found for help_label (1107174367904110532) -->
-    <skip />
+    <string name="app_notifications_switch_label" msgid="8235636095795328068">"Notificaciones"</string>
+    <string name="app_notifications_switch_on" msgid="6878397294545561241">"Habilitadas"</string>
+    <string name="app_notifications_switch_off" msgid="2206641347875395316">"Inhabilitadas"</string>
+    <string name="help_label" msgid="1107174367904110532">"Ayuda"</string>
 </resources>
