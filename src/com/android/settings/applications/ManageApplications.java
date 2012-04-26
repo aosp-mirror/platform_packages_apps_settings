@@ -116,12 +116,18 @@ final class CanBeOnSdCardChecker {
 public class ManageApplications extends Fragment implements
         OnItemClickListener,
         TabHost.TabContentFactory, TabHost.OnTabChangeListener {
+
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
-    
+
+    private static final String EXTRA_FILTER_APPS = "filterApps";
+    private static final String EXTRA_SORT_ORDER = "sortOrder";
+    private static final String EXTRA_SHOW_BACKGROUND = "showBackground";
+    private static final String EXTRA_DEFAULT_TAB_TAG = "defaultTabTag";
+
     // attributes used as keys when passing values to InstalledAppDetails activity
     public static final String APP_CHG = "chg";
-    
+
     // constant value that can be used to check return code from sub activity.
     private static final int INSTALLED_APP_DETAILS = 1;
 
@@ -525,11 +531,11 @@ public class ManageApplications extends Fragment implements
         }
         
         if (savedInstanceState != null) {
-            mSortOrder = savedInstanceState.getInt("sortOrder", mSortOrder);
-            mFilterApps = savedInstanceState.getInt("filterApps", mFilterApps);
-            String tmp = savedInstanceState.getString("defaultTabTag");
+            mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
+            mFilterApps = savedInstanceState.getInt(EXTRA_FILTER_APPS, mFilterApps);
+            String tmp = savedInstanceState.getString(EXTRA_DEFAULT_TAB_TAG);
             if (tmp != null) defaultTabTag = tmp;
-            mShowBackground = savedInstanceState.getBoolean("showBackground", false);
+            mShowBackground = savedInstanceState.getBoolean(EXTRA_SHOW_BACKGROUND, false);
         }
         
         mDefaultTab = defaultTabTag;
@@ -621,12 +627,12 @@ public class ManageApplications extends Fragment implements
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("sortOrder", mSortOrder);
-        outState.putInt("filterApps", mFilterApps);
+        outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
+        outState.putInt(EXTRA_FILTER_APPS, mFilterApps);
         if (mDefaultTab != null) {
-            outState.putString("defautTabTag", mDefaultTab);
+            outState.putString(EXTRA_DEFAULT_TAB_TAG, mDefaultTab);
         }
-        outState.putBoolean("showBackground", mShowBackground);
+        outState.putBoolean(EXTRA_SHOW_BACKGROUND, mShowBackground);
     }
 
     @Override
