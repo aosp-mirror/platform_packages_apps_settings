@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * LocalBluetoothProfileManager provides access to the LocalBluetoothProfile
@@ -77,6 +78,8 @@ final class LocalBluetoothProfileManager {
     private final HidProfile mHidProfile;
     private OppProfile mOppProfile;
     private final PanProfile mPanProfile;
+    private boolean isHfServiceUp;
+    private boolean isA2dpServiceUp;
 
     /**
      * Mapping from profile name, e.g. "HEADSET" to profile object.
@@ -128,7 +131,7 @@ final class LocalBluetoothProfileManager {
         if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.AudioSource)) {
             if (mA2dpProfile == null) {
                 Log.d(TAG, "Adding local A2DP profile");
-                mA2dpProfile = new A2dpProfile(mContext);
+                mA2dpProfile = new A2dpProfile(mContext, this);
                 addProfile(mA2dpProfile, A2dpProfile.NAME,
                         BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
             }
@@ -262,6 +265,51 @@ final class LocalBluetoothProfileManager {
         for (ServiceListener listener : mServiceListeners) {
             listener.onServiceDisconnected();
         }
+    }
+
+    synchronized void setHfServiceUp(boolean isUp) {
+        isHfServiceUp = isUp;
+        if (isHfServiceUp && isA2dpServiceUp) {
+            // connect hf and then a2dp
+            // this order is maintained as per the white paper
+                handleAutoConnect(mHeadsetProfile);
+                handleAutoConnect(mA2dpProfile);
+        }
+    }
+
+    synchronized void setA2dpServiceUp(boolean isUp) {
+        isA2dpServiceUp= isUp;
+        if (isHfServiceUp && isA2dpServiceUp) {
+            // connect hf and then a2dp
+            // this order is maintained as per the white paper
+                handleAutoConnect(mHeadsetProfile);
+                handleAutoConnect(mA2dpProfile);
+        }
+    }
+
+    private void handleAutoConnect(LocalBluetoothProfile profile) {
+        Set<BluetoothDevice> bondedDevices = mLocalAdapter.getBondedDevices();
+        for (BluetoothDevice device : bondedDevices) {
+            if (profile.getPreferred(device) ==
+                      BluetoothProfile.PRIORITY_AUTO_CONNECT) {
+                  Log.d(TAG,"handleAutoConnect for device");
+                  CachedBluetoothDevice cacheDevice = mDeviceManager.findDevice(device);
+                  if (null != cacheDevice) {
+                        cacheDevice.connectInt(profile);
+                        break;
+                    }
+                  else
+                    Log.e(TAG,"Bluetooth cache devices mismatch with actual");
+            }
+        }
+    }
+
+    public void enableAutoConnectForHf(BluetoothDevice device,boolean enable) {
+        mHeadsetProfile.enableAutoConnect(device,enable);
+    }
+
+    public void enableAutoConnectForA2dp(BluetoothDevice device,boolean enable) {
+        mA2dpProfile.enableAutoConnect(device,enable);
     }
 
     // This is called by DockService, so check Headset and A2DP.

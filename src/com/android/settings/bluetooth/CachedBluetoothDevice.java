@@ -25,6 +25,7 @@ import android.os.ParcelUuid;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
+import android.bluetooth.BluetoothAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -117,6 +118,29 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         if (Utils.D) {
             Log.d(TAG, "onProfileStateChanged: profile " + profile +
                     " newProfileState " + newProfileState);
+        }
+        if (profile instanceof HeadsetProfile) {
+            if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
+                if (BluetoothProfile.PRIORITY_AUTO_CONNECT != profile.getPreferred(mDevice))
+                    mProfileManager.enableAutoConnectForHf(mDevice, true);
+            } else if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
+                // dont reset auto connect priority when bluetooth turned off
+                if ((BluetoothAdapter.STATE_ON == mLocalAdapter.getBluetoothState())
+                    || (BluetoothAdapter.STATE_TURNING_ON == mLocalAdapter.getBluetoothState())) {
+                        mProfileManager.enableAutoConnectForHf(mDevice, false);
+                }
+            }
+        } else if (profile instanceof A2dpProfile ) {
+            if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
+                if (BluetoothProfile.PRIORITY_AUTO_CONNECT != profile.getPreferred(mDevice))
+                    mProfileManager.enableAutoConnectForA2dp(mDevice,true);
+            } else if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
+                // dont reset auto connect priority when bluetooth turned off
+                if ((BluetoothAdapter.STATE_ON == mLocalAdapter.getBluetoothState())
+                    || (BluetoothAdapter.STATE_TURNING_ON == mLocalAdapter.getBluetoothState())) {
+                        mProfileManager.enableAutoConnectForA2dp(mDevice, false);
+                }
+            }
         }
 
         mProfileConnectionState.put(profile, newProfileState);
@@ -238,7 +262,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         connectInt(profile);
     }
 
-    private void connectInt(LocalBluetoothProfile profile) {
+    synchronized void connectInt(LocalBluetoothProfile profile) {
         if (!ensurePaired()) {
             return;
         }

@@ -42,6 +42,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     };
 
     static final String NAME = "A2DP";
+    private final LocalBluetoothProfileManager mProfileManager;
 
     // Order of this profile in device profiles list
     private static final int ORDINAL = 1;
@@ -52,14 +53,18 @@ final class A2dpProfile implements LocalBluetoothProfile {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             mService = (BluetoothA2dp) proxy;
+            mProfileManager.setA2dpServiceUp(true);
         }
 
         public void onServiceDisconnected(int profile) {
             mService = null;
+            mProfileManager.setA2dpServiceUp(false);
         }
     }
 
-    A2dpProfile(Context context) {
+    A2dpProfile(Context context, LocalBluetoothProfileManager profileManager) {
+
+        mProfileManager = profileManager;
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         adapter.getProfileProxy(context, new A2dpServiceListener(),
                 BluetoothProfile.A2DP);
@@ -92,6 +97,19 @@ final class A2dpProfile implements LocalBluetoothProfile {
 
     public boolean disconnect(BluetoothDevice device) {
         return mService.disconnect(device);
+    }
+
+    // This function is added as the AUTO CONNECT priority could not be set by using setPreferred(),
+    // as setPreferred() takes only boolean input but getPreferred() supports interger output.
+    // Also this need not implemented by all profiles so this has been added here.
+    public void enableAutoConnect(BluetoothDevice device, boolean enable) {
+        if (enable) {
+             mService.setPriority(device, BluetoothProfile.PRIORITY_AUTO_CONNECT);
+        } else {
+             if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
+                 mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
+             }
+        }
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
