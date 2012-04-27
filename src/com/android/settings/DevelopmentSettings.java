@@ -49,7 +49,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.HardwareRenderer;
 import android.view.IWindowManager;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -79,6 +81,9 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
+    private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
+    private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
+    private static final String DEBUG_LAYOUT_KEY = "debug_layout";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
@@ -113,6 +118,9 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mDisableOverlays;
     private CheckBoxPreference mShowCpuUsage;
     private CheckBoxPreference mForceHardwareUi;
+    private CheckBoxPreference mTrackFrameTime;
+    private CheckBoxPreference mShowHwScreenUpdates;
+    private CheckBoxPreference mDebugLayout;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
@@ -141,45 +149,25 @@ public class DevelopmentSettings extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.development_prefs);
 
-        mEnableAdb = (CheckBoxPreference) findPreference(ENABLE_ADB);
-        mAllPrefs.add(mEnableAdb);
-        mResetCbPrefs.add(mEnableAdb);
-        mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
-        mAllPrefs.add(mKeepScreenOn);
-        mResetCbPrefs.add(mKeepScreenOn);
-        mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
-        mAllPrefs.add(mAllowMockLocation);
-        mResetCbPrefs.add(mAllowMockLocation);
+        mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
+        mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
+        mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
         mAllPrefs.add(mDebugAppPref);
-        mWaitForDebugger = (CheckBoxPreference) findPreference(WAIT_FOR_DEBUGGER_KEY);
-        mAllPrefs.add(mWaitForDebugger);
-        mResetCbPrefs.add(mWaitForDebugger);
-
-        mStrictMode = (CheckBoxPreference) findPreference(STRICT_MODE_KEY);
-        mAllPrefs.add(mStrictMode);
-        mResetCbPrefs.add(mStrictMode);
-        mPointerLocation = (CheckBoxPreference) findPreference(POINTER_LOCATION_KEY);
-        mAllPrefs.add(mPointerLocation);
-        mResetCbPrefs.add(mPointerLocation);
-        mShowTouches = (CheckBoxPreference) findPreference(SHOW_TOUCHES_KEY);
-        mAllPrefs.add(mShowTouches);
-        mResetCbPrefs.add(mShowTouches);
-        mShowScreenUpdates = (CheckBoxPreference) findPreference(SHOW_SCREEN_UPDATES_KEY);
-        mAllPrefs.add(mShowScreenUpdates);
-        mResetCbPrefs.add(mShowScreenUpdates);
-        mDisableOverlays = (CheckBoxPreference) findPreference(DISABLE_OVERLAYS_KEY);
-        mAllPrefs.add(mDisableOverlays);
-        mResetCbPrefs.add(mDisableOverlays);
-        mShowCpuUsage = (CheckBoxPreference) findPreference(SHOW_CPU_USAGE_KEY);
-        mAllPrefs.add(mShowCpuUsage);
-        mResetCbPrefs.add(mShowCpuUsage);
-        mForceHardwareUi = (CheckBoxPreference) findPreference(FORCE_HARDWARE_UI_KEY);
-        mAllPrefs.add(mForceHardwareUi);
-        mResetCbPrefs.add(mForceHardwareUi);
+        mWaitForDebugger = findAndInitCheckboxPref(WAIT_FOR_DEBUGGER_KEY);
+        mStrictMode = findAndInitCheckboxPref(STRICT_MODE_KEY);
+        mPointerLocation = findAndInitCheckboxPref(POINTER_LOCATION_KEY);
+        mShowTouches = findAndInitCheckboxPref(SHOW_TOUCHES_KEY);
+        mShowScreenUpdates = findAndInitCheckboxPref(SHOW_SCREEN_UPDATES_KEY);
+        mDisableOverlays = findAndInitCheckboxPref(DISABLE_OVERLAYS_KEY);
+        mShowCpuUsage = findAndInitCheckboxPref(SHOW_CPU_USAGE_KEY);
+        mForceHardwareUi = findAndInitCheckboxPref(FORCE_HARDWARE_UI_KEY);
+        mTrackFrameTime = findAndInitCheckboxPref(TRACK_FRAME_TIME_KEY);
+        mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
+        mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
         mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
         mAllPrefs.add(mWindowAnimationScale);
         mWindowAnimationScale.setOnPreferenceChangeListener(this);
@@ -215,6 +203,16 @@ public class DevelopmentSettings extends PreferenceFragment
             mAllPrefs.add(hdcpChecking);
         }
         removeHdcpOptionsForProduction();
+    }
+
+    private CheckBoxPreference findAndInitCheckboxPref(String key) {
+        CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+        if (pref == null) {
+            throw new IllegalArgumentException("Cannot find preference with key = " + key);
+        }
+        mAllPrefs.add(pref);
+        mResetCbPrefs.add(pref);
+        return pref;
     }
 
     @Override
@@ -262,7 +260,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void setPrefsEnabledState(boolean enabled) {
-        for (int i=0; i<mAllPrefs.size(); i++) {
+        for (int i = 0; i < mAllPrefs.size(); i++) {
             mAllPrefs.get(i).setEnabled(enabled);
         }
         updateAllOptions();
@@ -296,6 +294,9 @@ public class DevelopmentSettings extends PreferenceFragment
         updateFlingerOptions();
         updateCpuUsageOptions();
         updateHardwareUiOptions();
+        updateTrackFrameTimeOptions();
+        updateShowHwScreenUpdatesOptions();
+        updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
@@ -357,7 +358,7 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
-    private void resetDebuggerOptions() {
+    private static void resetDebuggerOptions() {
         try {
             ActivityManagerNative.getDefault().setDebugApp(
                     null, false, true);
@@ -393,7 +394,7 @@ public class DevelopmentSettings extends PreferenceFragment
     //    0: not explicitly set one way or another
     //    1: on
     //    2: off
-    private int currentStrictModeActiveIndex() {
+    private static int currentStrictModeActiveIndex() {
         if (TextUtils.isEmpty(SystemProperties.get(StrictMode.VISUAL_PROPERTY))) {
             return 0;
         }
@@ -499,6 +500,36 @@ public class DevelopmentSettings extends PreferenceFragment
     
     private void writeHardwareUiOptions() {
         SystemProperties.set(HARDWARE_UI_PROPERTY, mForceHardwareUi.isChecked() ? "true" : "false");
+    }
+
+    private void updateTrackFrameTimeOptions() {
+        mTrackFrameTime.setChecked(
+                SystemProperties.getBoolean(HardwareRenderer.PROFILE_PROPERTY, false));
+    }
+
+    private void writeTrackFrameTimeOptions() {
+        SystemProperties.set(HardwareRenderer.PROFILE_PROPERTY,
+                mTrackFrameTime.isChecked() ? "true" : "false");
+    }
+
+    private void updateShowHwScreenUpdatesOptions() {
+        mShowHwScreenUpdates.setChecked(
+                SystemProperties.getBoolean(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false));
+    }
+
+    private void writeShowHwScreenUpdatesOptions() {
+        SystemProperties.set(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
+                mShowHwScreenUpdates.isChecked() ? "true" : "false");
+    }
+
+    private void updateDebugLayoutOptions() {
+        mDebugLayout.setChecked(
+                SystemProperties.getBoolean(View.DEBUG_LAYOUT_PROPERTY, false));
+    }
+
+    private void writeDebugLayoutOptions() {
+        SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY,
+                mDebugLayout.isChecked() ? "true" : "false");
     }
 
     private void updateCpuUsageOptions() {
@@ -697,6 +728,12 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowAllANRsOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
+        } else if (preference == mTrackFrameTime) {
+            writeTrackFrameTimeOptions();
+        } else if (preference == mShowHwScreenUpdates) {
+            writeShowHwScreenUpdatesOptions();
+        } else if (preference == mDebugLayout) {
+            writeDebugLayoutOptions();
         }
 
         return false;

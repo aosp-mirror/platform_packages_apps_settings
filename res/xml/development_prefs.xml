@@ -89,6 +89,11 @@
             android:summary="@string/show_touches_summary"/>
 
         <CheckBoxPreference
+            android:key="debug_layout"
+            android:title="@string/debug_layout"
+            android:summary="@string/debug_layout_summary"/>
+
+        <CheckBoxPreference
             android:key="show_screen_updates"
             android:title="@string/show_screen_updates"
             android:summary="@string/show_screen_updates_summary"/>
@@ -107,6 +112,16 @@
             android:key="force_hw_ui"
             android:title="@string/force_hw_ui"
             android:summary="@string/force_hw_ui_summary"/>
+
+        <CheckBoxPreference
+            android:key="show_hw_screen_udpates"
+            android:title="@string/show_hw_screen_updates"
+            android:summary="@string/show_hw_screen_updates_summary"/>
+
+        <CheckBoxPreference
+            android:key="track_frame_time"
+            android:title="@string/track_frame_time"
+            android:summary="@string/track_frame_time_summary"/>
 
         <ListPreference
             android:key="window_animation_scale"
