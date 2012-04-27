@@ -3593,10 +3593,20 @@
     <!-- UI debug setting: show screen updates summary [CHAR LIMIT=50] -->
     <string name="show_screen_updates_summary">Flash areas of screen when they update</string>
 
+    <!-- UI debug setting: show where screen updates happen with GPU rendering? [CHAR LIMIT=25] -->
+    <string name="show_hw_screen_updates">Show GPU screen updates</string>
+    <!-- UI debug setting: show GPU rendering screen updates summary [CHAR LIMIT=50] -->
+    <string name="show_hw_screen_updates_summary">Flash areas of screen when they update with the GPU</string>
+
     <!-- UI debug setting: disable use of overlays? [CHAR LIMIT=25] -->
     <string name="disable_overlays">Disable overlays</string>
     <!-- UI debug setting: disable use of overlays summary [CHAR LIMIT=50] -->
     <string name="disable_overlays_summary">Don\'t use overlays for screen compositing</string>
+
+    <!-- UI debug setting: show layout bounds information [CHAR LIMIT=25] -->
+    <string name="debug_layout">Show layout bounds</string>
+    <!-- UI debug setting: show layout bounds information summary [CHAR LIMIT=50] -->
+    <string name="debug_layout_summary">Display information about boumds, padding, etc.</string>
 
     <!-- UI debug setting: show how CPU is being used? [CHAR LIMIT=25] -->
     <string name="show_cpu_usage">Show CPU usage</string>
@@ -3607,6 +3617,11 @@
     <string name="force_hw_ui">Force GPU rendering</string>
     <!-- UI debug setting: force hardware acceleration summary [CHAR LIMIT=50] -->
     <string name="force_hw_ui_summary">Use 2D hardware acceleration in applications</string>
+
+    <!-- UI debug setting: profile time taken by hardware acceleration to render apps [CHAR LIMIT=25] -->
+    <string name="track_frame_time">Profile GPU rendering</string>
+    <!-- UI debug setting: profile hardware acceleration summary [CHAR LIMIT=50] -->
+    <string name="track_frame_time_summary">Measure rendering time in adb shell dumpsys gfxinfo</string>
 
     <!-- UI debug setting: scaling factor for window animations [CHAR LIMIT=25] -->
     <string name="window_animation_scale_title">Window animation scale</string>
