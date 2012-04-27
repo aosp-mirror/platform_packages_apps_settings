@@ -777,6 +777,12 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     /* package */ void forget() {
+        if (mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
+            // Should not happen, but a monkey seems to triger it
+            Log.e(TAG, "Failed to forget invalid network " + mSelectedAccessPoint.getConfig());
+            return;
+        }
+
         mWifiManager.forget(mChannel, mSelectedAccessPoint.networkId, mForgetListener);
 
         if (mWifiManager.isWifiEnabled()) {
