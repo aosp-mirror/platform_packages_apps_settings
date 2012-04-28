@@ -58,6 +58,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private static final int FALLBACK_REQUEST = 101;
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String CONFIRM_CREDENTIALS = "confirm_credentials";
+        private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
 
         private static final boolean ALWAY_SHOW_TUTORIAL = true;
@@ -66,6 +67,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private DevicePolicyManager mDPM;
         private KeyStore mKeyStore;
         private boolean mPasswordConfirmed = false;
+        private boolean mWaitingForConfirmation = false;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -82,19 +84,24 @@ public class ChooseLockGeneric extends PreferenceActivity {
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
+                mWaitingForConfirmation = savedInstanceState.getBoolean(WAITING_FOR_CONFIRMATION);
             }
 
-            if (!mPasswordConfirmed) {
+            if (mPasswordConfirmed) {
+                updatePreferencesOrFinish();
+            } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
                 if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST, null, null)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish();
+                } else {
+                    mWaitingForConfirmation = true;
                 }
-            } else {
-                updatePreferencesOrFinish();
             }
         }
+
+
 
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -143,6 +150,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
+            mWaitingForConfirmation = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 updatePreferencesOrFinish();
@@ -161,6 +169,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
             super.onSaveInstanceState(outState);
             // Saved so we don't force user to re-enter their password if configuration changes
             outState.putBoolean(PASSWORD_CONFIRMED, mPasswordConfirmed);
+            outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
         }
 
         private void updatePreferencesOrFinish() {
