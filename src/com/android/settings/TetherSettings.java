@@ -59,14 +59,8 @@ public class TetherSettings extends SettingsPreferenceFragment
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final String ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
-    private static final String TETHERING_HELP = "tethering_help";
-    private static final String USB_HELP_MODIFIER = "usb_";
-    private static final String WIFI_HELP_MODIFIER = "wifi_";
-    private static final String HELP_URL = "file:///android_asset/html/%y%z/tethering_%xhelp.html";
-    private static final String HELP_PATH = "html/%y%z/tethering_help.html";
 
-    private static final int DIALOG_TETHER_HELP = 1;
-    private static final int DIALOG_AP_SETTINGS = 2;
+    private static final int DIALOG_AP_SETTINGS = 1;
 
     private WebView mView;
     private CheckBoxPreference mUsbTether;
@@ -75,8 +69,6 @@ public class TetherSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mEnableWifiAp;
 
     private CheckBoxPreference mBluetoothTether;
-
-    private PreferenceScreen mTetherHelp;
 
     private BroadcastReceiver mTetherChangeReceiver;
 
@@ -131,7 +123,6 @@ public class TetherSettings extends SettingsPreferenceFragment
         Preference wifiApSettings = findPreference(WIFI_AP_SSID_AND_SECURITY);
         mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
         mBluetoothTether = (CheckBoxPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
-        mTetherHelp = (PreferenceScreen) findPreference(TETHERING_HELP);
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -205,50 +196,7 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     @Override
     public Dialog onCreateDialog(int id) {
-        if (id == DIALOG_TETHER_HELP) {
-            Locale locale = Locale.getDefault();
-
-            // check for the full language + country resource, if not there, try just language
-            final AssetManager am = getActivity().getAssets();
-            String path = HELP_PATH.replace("%y", locale.getLanguage().toLowerCase());
-            path = path.replace("%z", '_'+locale.getCountry().toLowerCase());
-            boolean useCountry = true;
-            InputStream is = null;
-            try {
-                is = am.open(path);
-            } catch (Exception ignored) {
-                useCountry = false;
-            } finally {
-                if (is != null) {
-                    try {
-                        is.close();
-                    } catch (Exception ignored) {}
-                }
-            }
-            String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
-            url = url.replace("%z", useCountry ? '_'+locale.getCountry().toLowerCase() : "");
-            if ((mUsbRegexs.length != 0) && (mWifiRegexs.length == 0)) {
-                url = url.replace("%x", USB_HELP_MODIFIER);
-            } else if ((mWifiRegexs.length != 0) && (mUsbRegexs.length == 0)) {
-                url = url.replace("%x", WIFI_HELP_MODIFIER);
-            } else {
-                // could assert that both wifi and usb have regexs, but the default
-                // is to use this anyway so no check is needed
-                url = url.replace("%x", "");
-            }
-
-            mView.loadUrl(url);
-            // Detach from old parent first
-            ViewParent parent = mView.getParent();
-            if (parent != null && parent instanceof ViewGroup) {
-                ((ViewGroup) parent).removeView(mView);
-            }
-            return new AlertDialog.Builder(getActivity())
-                .setCancelable(true)
-                .setTitle(R.string.tethering_help_button_text)
-                .setView(mView)
-                .create();
-        } else if (id == DIALOG_AP_SETTINGS) {
+        if (id == DIALOG_AP_SETTINGS) {
             final Activity activity = getActivity();
             mDialog = new WifiApDialog(activity, this, mWifiConfig);
             return mDialog;
@@ -588,9 +536,6 @@ public class TetherSettings extends SettingsPreferenceFragment
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_off_subtext);
                 }
             }
-        } else if (preference == mTetherHelp) {
-            showDialog(DIALOG_TETHER_HELP);
-            return true;
         } else if (preference == mCreateNetwork) {
             showDialog(DIALOG_AP_SETTINGS);
         }
@@ -630,5 +575,10 @@ public class TetherSettings extends SettingsPreferenceFragment
                         mSecurityType[index]));
             }
         }
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_tether;
     }
 }
