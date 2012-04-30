@@ -496,8 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Configuración Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configurar y administrar los puntos de acceso de teléfonos inalámbricos"</string>
-    <!-- no translation found for wifi_setup_wizard_title (8794440659600351945) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Selecciona la red Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"¿Activar Wi-Fi?"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Apagando Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
@@ -557,7 +556,7 @@
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problema de autenticación"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Fuera de alcance"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WSP disponible"</string>
-    <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" (red protegida disponible)"</string>
+    <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WSP disponible)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Protegida con <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", protegida con <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ninguna"</string>
@@ -593,6 +592,8 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Cambiar el nombre del dispositivo"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Otros dispositivos"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"No se pudo establecer conexión."</string>
+    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
+    <skip />
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"¿Deseas desconectarte?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"Si te desconectas, tu conexión con <xliff:g id="PEER_NAME">%1$s</xliff:g> finalizará."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Si te desconectas, tu conexión con <xliff:g id="PEER_NAME">%1$s</xliff:g> y con otros <xliff:g id="PEER_COUNT">%2$s</xliff:g> dispositivos finalizará."</string>
@@ -1497,12 +1498,24 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostrar información visual para toques"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Mostrar actualizaciones de pantalla"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Destello de áreas de la pantalla cuando se actualicen"</string>
+    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
+    <skip />
     <string name="disable_overlays" msgid="3645736086368449005">"Desactivar superposición"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"No usar superposiciones para el montaje de pant."</string>
+    <!-- no translation found for debug_layout (5981361776594526155) -->
+    <skip />
+    <!-- no translation found for debug_layout_summary (978411395294379156) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar el uso de CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Superposición de pantalla que muestre el uso actual de la CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forzar representación GPU"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"Usar aceleración por hardware 2D en aplicaciones"</string>
+    <!-- no translation found for track_frame_time (6146354853663863443) -->
+    <skip />
+    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
+    <skip />
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Ventana de escala de animación"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Transición de escala de animación"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala duración animador"</string>
@@ -1543,10 +1556,10 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos de 4 GB"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver config. de la aplicación"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir los datos de referencia"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"Desacti. datos refe. en redes c/medi. Se usarán sin medi. dispo."</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"Desactivar datos ref. en redes con med. Se usarán redes sin med."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para limitar datos de ref. de esta aplic., limita datos móviles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir el uso de datos de referencia?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"Debido a esta función, una aplicación que depende de datos de referencia puede dejar de funcionar cuando solo se dispone de redes con medición."\n\n" Puedes encontrar controles de uso de datos más adecuados en la configuración disponible dentro de la aplicación."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"Debido a esta función, una aplicación que depende de datos de referencia puede dejar de funcionar cuando solo se dispone de redes con medición."\n\n"Puedes encontrar controles de uso de datos más adecuados en la configuración disponible dentro de la aplicación."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo se pueden restringir los datos de referencia si estableciste un límite de datos móviles."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Fecha de restablecimiento del ciclo de uso"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Fecha de cada mes:"</string>
@@ -1566,7 +1579,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: se usaron unos <xliff:g id="TOTAL">%1$s</xliff:g> según tu tableta. La medición de tu proveedor puede diferir."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: se usaron unos <xliff:g id="TOTAL">%1$s</xliff:g> según tu teléfono. La medición de tu proveedor puede diferir."</string>
     <string name="data_usage_metered_title" msgid="311250454694217878">"Redes con medición"</string>
-    <string name="data_usage_metered_body" msgid="1616820728096597564">"Selecciona las redes que miden el uso de datos. Puede restringirse el uso de esas redes por parte de las aplicaciones que se encuentran en segundo plano. Además, puede que las aplicaciones envíen una advertencia antes de usar estas redes para descargas grandes."</string>
+    <string name="data_usage_metered_body" msgid="1616820728096597564">"Selecciona las redes que miden el uso de datos. Puede restringirse el uso de estas redes por parte de las aplicaciones que se encuentran en segundo plano. Además, puede que las aplicaciones envíen una advertencia antes de usar estas redes para descargas grandes."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Redes móviles"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Redes Wi-Fi"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Llamada de emergencia"</string>

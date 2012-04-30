@@ -496,8 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi-instellings"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Stel en beheer draadlose toegangspunte"</string>
-    <!-- no translation found for wifi_setup_wizard_title (8794440659600351945) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Kies Wi-Fi-netwerk"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Skakel tans Wi-Fi aan…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Skakel tans Wi-Fi af…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Fout"</string>
@@ -557,7 +556,7 @@
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Stawingsprobleem"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Nie binne ontvangs nie"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS beskikbaar"</string>
-    <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" (beskermde netwerk beskikbaar)"</string>
+    <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS beskikbaar)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Beveilig met <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", beveilig met <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Geen"</string>
@@ -593,6 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Hernoem toestel"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Portuurtoestelle"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Kon nie koppel nie."</string>
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Kon nie toestel hernoem nie."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Ontkoppel?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"As jy ontkoppel, sal jou verbinding met <xliff:g id="PEER_NAME">%1$s</xliff:g> ophou."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"As jy ontkoppel, sal jou verbinding met <xliff:g id="PEER_NAME">%1$s</xliff:g> en <xliff:g id="PEER_COUNT">%2$s</xliff:g> ander toestelle ophou."</string>
@@ -1497,12 +1497,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"Toon visuele terugvoer vir aanrakings"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Wys skermopdaterings"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Flits areas van die skerm wanneer hulle opdateer"</string>
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Wys GPU-skermopdaterings"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Flits dele van skerm wanneer met die GPU opdateer"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"Deaktiveer oorleggers"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"Moenie oorleggers vir skermsamestelling gebruik nie"</string>
+    <string name="debug_layout" msgid="5981361776594526155">"Wys uitleg se grense"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"Wys inligting oor grense, bladvulling ens."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Wys CPU-verbruik"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Skermlaag wys huidige CPU-gebruik"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forseer GPU-lewering"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"Gebruik 2D-hardewareversnelling in programme"</string>
+    <string name="track_frame_time" msgid="6146354853663863443">"Profiel se GPU-lewering"</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"Meet leweringstyd in die adb-dop dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Vensteranimasieskaal"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Oorganganimasieskaal"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator-tydsduurskaal"</string>

@@ -496,8 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi 설정"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"무선 액세스포인트(AP) 설정 및 관리"</string>
-    <!-- no translation found for wifi_setup_wizard_title (8794440659600351945) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Wi-Fi 네트워크 선택"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"무선인터넷을 켜는 중"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Wi-Fi 사용 중지 중..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"오류"</string>
@@ -557,7 +556,7 @@
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"인증 문제"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"범위 내에 없음"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS 사용 가능"</string>
-    <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" (Protected 네트워크 사용 가능)"</string>
+    <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS 사용 가능)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>(으)로 보안"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>(으)로 보안"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"없음"</string>
@@ -593,6 +592,8 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"기기 이름 변경"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"P2P 기기"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"연결할 수 없습니다."</string>
+    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
+    <skip />
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"연결을 해제하시겠습니까?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"연결을 중단하면 <xliff:g id="PEER_NAME">%1$s</xliff:g>와(과)의 연결이 끊어집니다."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"연결을 중단하면 <xliff:g id="PEER_NAME">%1$s</xliff:g> 외 다른 <xliff:g id="PEER_COUNT">%2$s</xliff:g>개 기기와의 연결이 끊어집니다."</string>
@@ -1497,12 +1498,24 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"터치한 항목에 대해 시각적으로 표시"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"화면 업데이트 표시"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"업데이트 되고 있는 화면 영역을 깜박이기"</string>
+    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
+    <skip />
     <string name="disable_overlays" msgid="3645736086368449005">"오버레이 사용 안함"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"화면 합성 목적으로 오버레이 사용 안함"</string>
+    <!-- no translation found for debug_layout (5981361776594526155) -->
+    <skip />
+    <!-- no translation found for debug_layout_summary (978411395294379156) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU 사용량 표시"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"현재 CPU 사용량 오버레이 표시"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU 렌더링 강제 설정"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"애플리케이션에서 2D 하드웨어 가속 사용"</string>
+    <!-- no translation found for track_frame_time (6146354853663863443) -->
+    <skip />
+    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
+    <skip />
     <string name="window_animation_scale_title" msgid="6162587588166114700">"창 애니메이션 배율"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"전환 애니메이션 배율"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 길이 배율"</string>
@@ -1546,7 +1559,7 @@
     <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"요금이 부과되는 네트워크에서 백그라운드 데이터를 사용하지 않도록 설정합니다. 가능한 경우 무제한 네트워크가 사용됩니다."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"이 앱에 대해 백그라운드 데이터를 제한하려면 먼저 모바일 데이터 제한을 설정하세요."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"백그라운드 데이터 사용 제한"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"요금이 부과되는 네트워크만 사용할 수 있는 경우 백그라운드 데이터에 의존하는 앱이 중단될 수 있습니다. "\n\n"앱의 사용 가능한 설정에서 데이터 사용을 더 적절하게 관리할 수 있는 컨트롤을 찾아 볼 수 있습니다."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"요금이 부과되는 네트워크만 사용할 수 있는 경우 백그라운드 데이터에 의존하는 앱이 중단될 수 있습니다. "\n\n"앱 설정에서 데이터 사용을 더 적절하게 관리할 수 있는 컨트롤을 찾아 볼 수 있습니다."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"백그라운드 데이터는 모바일 데이터 한도를 설정한 경우에만 제한할 수 있습니다."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"사용 주기 재설정"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"날짜:"</string>

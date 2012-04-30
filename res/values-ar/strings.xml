@@ -496,8 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"إعدادات Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"إعداد وإدارة نقاط الدخول اللاسلكية"</string>
-    <!-- no translation found for wifi_setup_wizard_title (8794440659600351945) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"تحديد شبكة Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"جارٍ تشغيل Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"إيقاف Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"خطأ"</string>
@@ -557,7 +556,7 @@
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"حدثت مشكلة في المصادقة"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"ليست في النطاق"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS متاح"</string>
-    <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" (الشبكة المحمية متاحة)"</string>
+    <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS متاح)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"محمي باستخدام <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">"، محمي باستخدام <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"لا شيء"</string>
@@ -593,6 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"إعادة تسمية الجهاز"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"أجهزة النظراء"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"تعذر الاتصال."</string>
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"أخفقت إعادة تسمية الجهاز."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"هل تريد قطع الاتصال؟"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"في حالة قطع الاتصال، سيتم إنهاء اتصالك بـ <xliff:g id="PEER_NAME">%1$s</xliff:g>."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"في حالة قطع الاتصال، سيتم إنهاء اتصالك بـ <xliff:g id="PEER_NAME">%1$s</xliff:g> و<xliff:g id="PEER_COUNT">%2$s</xliff:g> من الأجهزة الأخرى."</string>
@@ -1497,12 +1497,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"عرض تعليقات مرئية لمرات اللمس"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"عرض تحديثات الشاشة"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"وميض مناطق من الشاشة عند التحديث"</string>
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"عرض تحديثات شاشة GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"إظهار وميض على مناطق من الشاشة عند التحديث بـ GPU"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"تعطيل التراكبات"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"عدم استخدام التراكبات لتركيب الشاشة"</string>
+    <string name="debug_layout" msgid="5981361776594526155">"عرض حدود المخطط"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"عرض معلومات حول الحدود والمساحة المتروكة وما إلى ذلك"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"عرض استخدام CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"عرض تراكب الشاشة لاستخدام CPU الحالي"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"فرض عرض وحدة معالجة الرسومات"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"استخدام تسارع الأجهزة ثنائي الأبعاد في التطبيقات"</string>
+    <string name="track_frame_time" msgid="6146354853663863443">"رسم مخطط لعرض GPU"</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"قياس عرض الوقت بـ adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"حجم الرسوم المتحركة للنافذة"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"حجم الرسوم المتحركة للنقل"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"طول مدة الرسوم المتحركة"</string>

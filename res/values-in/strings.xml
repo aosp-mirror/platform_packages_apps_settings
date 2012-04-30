@@ -496,8 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Setelan Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Siapkan &amp; kelola titik akses nirkabel"</string>
-    <!-- no translation found for wifi_setup_wizard_title (8794440659600351945) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Pilih jaringan Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Hidupkan Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Mematikan Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Kesalahan"</string>
@@ -557,7 +556,7 @@
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Masalah autentikasi"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Tidak dalam jangkauan"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS tersedia"</string>
-    <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" (jaringan yang dilindungi tersedia)"</string>
+    <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS tersedia)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Diamankan dengan <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", diamankan dengan <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Tidak Ada"</string>
@@ -593,6 +592,8 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Ganti nama perangkat"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Perangkat P2P"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Tidak dapat menyambung."</string>
+    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
+    <skip />
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Putuskan sambungan?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> akan berakhir."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> dan <xliff:g id="PEER_COUNT">%2$s</xliff:g> perangkat lain akan berakhir."</string>
@@ -975,9 +976,9 @@
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Default"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Kompatibilitas layar"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Izin"</string>
-    <string name="cache_header_label" msgid="1877197634162461830">"Tembolok"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Hapus tembolok"</string>
-    <string name="cache_size_label" msgid="7505481393108282913">"Tembolok"</string>
+    <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Hapus cache"</string>
+    <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
     <string name="controls_label" msgid="7611113077086853799">"Kontrol"</string>
     <string name="force_stop" msgid="7435006169872876756">"Paksa berhenti"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
@@ -1058,7 +1059,7 @@
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Layanan yang sedang berjalan"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Melihat dan mengontrol layanan yang sedang berjalan"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Memulai kembali"</string>
-    <string name="cached" msgid="1059590879740175019">"Proses latar belakang dalam tembolok"</string>
+    <string name="cached" msgid="1059590879740175019">"Proses latar belakang dalam cache"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Tidak ada yang berjalan."</string>
     <string name="service_started_by_app" msgid="818675099014723551">"Dimulai oleh apl."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
@@ -1497,12 +1498,24 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"Tampilkan masukan visual untuk sentuhan"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Tampilkan pembaruan layar"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Kedipkan area layar saat diperbarui"</string>
+    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
+    <skip />
     <string name="disable_overlays" msgid="3645736086368449005">"Nonaktifkan hamparan"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"Jangan gunakan hamparan untuk pengomposisian layar"</string>
+    <!-- no translation found for debug_layout (5981361776594526155) -->
+    <skip />
+    <!-- no translation found for debug_layout_summary (978411395294379156) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Tampilkan penggunaan CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Hamparan layar menampilkan penggunaan CPU saat ini"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Paksa perenderan GPU"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"Gunakan akselerasi perangkat keras 2D dlm aplikasi"</string>
+    <!-- no translation found for track_frame_time (6146354853663863443) -->
+    <skip />
+    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
+    <skip />
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animasi jendela"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Skala animasi transisi"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Skala durasi animator"</string>
