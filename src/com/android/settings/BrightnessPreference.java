@@ -55,6 +55,8 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
 	    getContext().getResources().getInteger(com.android.internal.R.integer.config_screenBrightnessDim);
     private static final int MAXIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_ON;
 
+    private static final int SEEK_BAR_RANGE = 10000;
+
     private ContentObserver mBrightnessObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
@@ -98,7 +100,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         super.onBindDialogView(view);
 
         mSeekBar = getSeekBar(view);
-        mSeekBar.setMax(10000);
+        mSeekBar.setMax(SEEK_BAR_RANGE);
         mOldBrightness = getBrightness();
         mSeekBar.setProgress(mOldBrightness);
 
@@ -141,11 +143,10 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         } else {
             brightness = Settings.System.getInt(getContext().getContentResolver(),
                     Settings.System.SCREEN_BRIGHTNESS, 100);
-            brightness = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim)
-                    / (brightness - mScreenBrightnessDim);
-            
+            brightness = (brightness - mScreenBrightnessDim)
+                    / (MAXIMUM_BACKLIGHT - mScreenBrightnessDim);
         }
-        return (int)(brightness*10000);
+        return (int)(brightness*SEEK_BAR_RANGE);
     }
 
     private int getBrightnessMode(int defaultValue) {
@@ -197,7 +198,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
 
     private void setBrightness(int brightness, boolean write) {
         if (mAutomaticMode) {
-            float valf = (((float)brightness*2)/10000) - 1.0f;
+            float valf = (((float)brightness*2)/SEEK_BAR_RANGE) - 1.0f;
             try {
                 IPowerManager power = IPowerManager.Stub.asInterface(
                         ServiceManager.getService("power"));
@@ -213,7 +214,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
             }
         } else {
             int range = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim);
-            brightness = (brightness*range)/10000 + mScreenBrightnessDim;
+            brightness = (brightness*range)/SEEK_BAR_RANGE + mScreenBrightnessDim;
             try {
                 IPowerManager power = IPowerManager.Stub.asInterface(
                         ServiceManager.getService("power"));
