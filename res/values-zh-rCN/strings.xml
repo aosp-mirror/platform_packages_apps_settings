@@ -18,8 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"是"</string>
     <string name="no" msgid="6731231425810196216">"无"</string>
-    <!-- no translation found for create (3578857613172647409) -->
-    <skip />
+    <string name="create" msgid="3578857613172647409">"创建"</string>
     <string name="device_info_default" msgid="7847265875578739287">"未知"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"无线和网络"</string>
     <string name="header_category_device" msgid="5781174212691167553">"设备"</string>
@@ -497,8 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi 设置"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"设置和管理无线接入点"</string>
-    <!-- no translation found for wifi_setup_wizard_title (8794440659600351945) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"选择 Wi-Fi 网络"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"正在打开 Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"正在关闭 Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"出错"</string>
@@ -558,7 +556,7 @@
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"身份验证出现问题"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"不在范围内"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
-    <string name="wifi_wps_available_second_item" msgid="6121307881706347616">" （受保护的网络可用）"</string>
+    <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （可使用 WPS）"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"通过<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>进行保护"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">"，通过<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>进行保护"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"无"</string>
@@ -594,6 +592,8 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"重命名设备"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"对等设备"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"无法连接。"</string>
+    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
+    <skip />
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"断开连接？"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"如果断开连接，您与<xliff:g id="PEER_NAME">%1$s</xliff:g>的连接将中断。"</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"如果断开连接，您与<xliff:g id="PEER_NAME">%1$s</xliff:g>和另外 <xliff:g id="PEER_COUNT">%2$s</xliff:g> 台设备的连接将中断。"</string>
@@ -973,8 +973,7 @@
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
     <string name="storage_label" msgid="8700867073480107253">"存储"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"默认启动"</string>
-    <!-- no translation found for auto_launch_label_generic (3230569852551968694) -->
-    <skip />
+    <string name="auto_launch_label_generic" msgid="3230569852551968694">"默认设置"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"权限"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"缓存"</string>
@@ -994,8 +993,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"清除数据"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"卸载更新"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"您已选择在默认情况下对某些操作启动此应用。"</string>
-    <!-- no translation found for always_allow_bind_appwidgets_text (3368654672141202604) -->
-    <skip />
+    <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"您已选择允许该应用创建窗口小部件并访问其数据。"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"无默认设置。"</string>
     <string name="clear_activities" msgid="7408923511535174430">"清除默认设置"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"此应用可能不是针对您的屏幕设计的。您可以在此处调整其显示尺寸/比例，让它适合您的屏幕。"</string>
@@ -1182,12 +1180,9 @@
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"这些设置仅适用于开发工作。一旦启用，会导致您的设备以及设备上的应用崩溃或出现异常。"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"选择小工具"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"选择窗口小部件"</string>
-    <!-- no translation found for allow_bind_app_widget_activity_allow_bind_title (2538303018392590627) -->
-    <skip />
-    <!-- no translation found for allow_bind_app_widget_activity_allow_bind (1584388129273282080) -->
-    <skip />
-    <!-- no translation found for allow_bind_app_widget_activity_always_allow_bind (7037503685859688034) -->
-    <skip />
+    <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"是否允许该应用创建并访问窗口小部件？"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"当您创建窗口小部件后，<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>能够访问其显示的所有数据。"</string>
+    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"始终允许<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>创建窗口小部件并访问其数据"</string>
     <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> 天 <xliff:g id="HOURS">%2$d</xliff:g> 小时 <xliff:g id="MINUTES">%3$d</xliff:g> 分 <xliff:g id="SECONDS">%4$d</xliff:g> 秒"</string>
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> 小时 <xliff:g id="MINUTES">%2$d</xliff:g> 分 <xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> 分 <xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
@@ -1503,12 +1498,24 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"为触摸操作提供视觉提示"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"显示屏幕更新"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"屏幕上的区域更新时闪烁相应区域"</string>
+    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
+    <skip />
     <string name="disable_overlays" msgid="3645736086368449005">"停用叠加层"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"不要将重叠层用于屏幕合成"</string>
+    <!-- no translation found for debug_layout (5981361776594526155) -->
+    <skip />
+    <!-- no translation found for debug_layout_summary (978411395294379156) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"显示 CPU 使用情况"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"屏幕叠加层显示当前 CPU 使用情况"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"强制进行 GPU 渲染"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"在应用中使用 2D 硬件加速"</string>
+    <!-- no translation found for track_frame_time (6146354853663863443) -->
+    <skip />
+    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
+    <skip />
     <string name="window_animation_scale_title" msgid="6162587588166114700">"窗口动画缩放"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"过渡动画缩放"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"动画程序时长调整"</string>
