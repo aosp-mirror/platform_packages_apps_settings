@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
@@ -110,6 +111,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
+    private boolean mP2pSupported;
 
 
     private WifiEnabler mWifiEnabler;
@@ -175,6 +177,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         // Preference (probably in onCreate()), while WifiSettings exceptionally set it up in
         // this method.
 
+        mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         mChannel = mWifiManager.initialize(getActivity(), getActivity().getMainLooper(), null);
 
@@ -306,9 +309,11 @@ public class WifiSettings extends SettingsPreferenceFragment
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            menu.add(Menu.NONE, MENU_ID_P2P, 0, R.string.wifi_menu_p2p)
-                    .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            if (mP2pSupported) {
+                menu.add(Menu.NONE, MENU_ID_P2P, 0, R.string.wifi_menu_p2p)
+                        .setEnabled(wifiIsEnabled)
+                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            }
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
