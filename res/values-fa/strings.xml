@@ -592,8 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"تغییر نام دستگاه"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"دستگاه‌های مشابه"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"متصل نشد."</string>
-    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
-    <skip />
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"تغییر نام دستگاه انجام نشد."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"اتصال قطع شود؟"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"اگر اتصال شما قطع شود، اتصال شما با <xliff:g id="PEER_NAME">%1$s</xliff:g> به پایان خواهد رسید."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"اگر اتصال شما قطع شود، اتصال شما با <xliff:g id="PEER_NAME">%1$s</xliff:g> و سایر دستگاه‌های <xliff:g id="PEER_COUNT">%2$s</xliff:g> به پایان خواهد رسید."</string>
@@ -1498,24 +1497,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"نمایش بازخورد دیداری برای لمسها"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"نمایش به روزرسانی های صفحه"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"چشمک زدن مناطقی از صفحه هنگامی که به روز می شوند"</string>
-    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
-    <skip />
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"نمایش به‌روزرسانی‌های صفحه GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"نواحی Flash صفحه وقتی با GPU به‌روزرسانی می‌شوند"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"غیرفعال کردن همپوشانی‌ها"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"از همپوشانی‌ها برای ترکیب صفحه استفاده نشود"</string>
-    <!-- no translation found for debug_layout (5981361776594526155) -->
-    <skip />
-    <!-- no translation found for debug_layout_summary (978411395294379156) -->
-    <skip />
+    <string name="debug_layout" msgid="5981361776594526155">"نمایش محدوده‌های طرح‌بندی"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"نمایش اطلاعات مربوط به محدوده‌ها، لایه و موارد دیگر."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"نمایش میزان استفاده از CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"همپوشانی صفحه نمایش میزان استفاده از CPU فعلی"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"اجبار به تفسیر و اجرای GPU"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"استفاده از شتاب‌دهنده سخت‌افزار 2D در برنامه‌ها"</string>
-    <!-- no translation found for track_frame_time (6146354853663863443) -->
-    <skip />
-    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
-    <skip />
+    <string name="track_frame_time" msgid="6146354853663863443">"اجرای GPU نمایه"</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"اندازه‌گیری زمان اجرا در لایه adb dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"مقیاس انیمیشن انتقال"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"مقیاس طول مدت انیماتور"</string>
@@ -1579,7 +1572,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: در حدود <xliff:g id="TOTAL">%1$s</xliff:g>، براساس محاسبه رایانه لوحی شما، استفاده شده است. ممکن است روش محاسبه مقدار استفاده از داده توسط شرکت مخابراتی شما متفاوت باشد."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: در حدود <xliff:g id="TOTAL">%1$s</xliff:g>، براساس محاسبه گوشی شما، استفاده شده است. ممکن است روش محاسبه مقدار استفاده از داده توسط شرکت مخابراتی شما متفاوت باشد."</string>
     <string name="data_usage_metered_title" msgid="311250454694217878">"شبکه‌های اندازه‌گیری شده"</string>
-    <string name="data_usage_metered_body" msgid="1616820728096597564">"شبکه‌هایی را انتخاب کنید که اشتفاده داده در آنها اندازه‌گیری شده است. می‌توانید برنامه‌ها را محدود کنید تا زمانی که در پس‌زمینه فعال هستند، از این شبکه‌ها استفاده نکنند. همچنین قبل از استفاده از این شبکه‌ها برای دانلودهای بزرگ، برنامه‌ها به شما هشدار می‌دهند."</string>
+    <string name="data_usage_metered_body" msgid="1616820728096597564">"شبکه‌هایی را انتخاب کنید که استفاده داده در آنها اندازه‌گیری شده است. می‌توانید برنامه‌ها را محدود کنید تا زمانی که در پس‌زمینه فعال هستند، از این شبکه‌ها استفاده نکنند. همچنین قبل از استفاده از این شبکه‌ها برای دانلودهای بزرگ، برنامه‌ها به شما هشدار می‌دهند."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"شبکه‌های تلفن همراه"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"شبکه‌های Wi-Fi"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"تماس اضطراری"</string>
