@@ -539,7 +539,7 @@ public class ManageApplications extends Fragment implements
         }
         
         mDefaultTab = defaultTabTag;
-        
+
         final Intent containerIntent = new Intent().setComponent(
                 StorageMeasurement.DEFAULT_CONTAINER_COMPONENT);
         getActivity().bindService(containerIntent, mContainerConnection, Context.BIND_AUTO_CREATE);
@@ -759,6 +759,9 @@ public class ManageApplications extends Fragment implements
     static final int VIEW_RUNNING = 2;
 
     void updateStorageUsage() {
+        // Fragment view not yet created?
+        if (mRootView == null) return;
+
         if (mCurView == VIEW_RUNNING) {
             return;
         }
@@ -939,6 +942,8 @@ public class ManageApplications extends Fragment implements
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mContainerService = IMediaContainerService.Stub.asInterface(service);
+            // Make sure this callback didn't come at an inopportune time.
+            if (getActivity() == null) return;
             updateStorageUsage();
         }
 
