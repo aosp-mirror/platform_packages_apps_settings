@@ -235,15 +235,15 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return;
         }
 
-        // Disable the status bar
+        // Disable the status bar, but do NOT disable back because the user needs a way to go
+        // from keyboard settings and back to the password screen.
         StatusBarManager sbm = (StatusBarManager) getSystemService(Context.STATUS_BAR_SERVICE);
         sbm.disable(StatusBarManager.DISABLE_EXPAND
                 | StatusBarManager.DISABLE_NOTIFICATION_ICONS
                 | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
                 | StatusBarManager.DISABLE_SYSTEM_INFO
                 | StatusBarManager.DISABLE_HOME
-                | StatusBarManager.DISABLE_RECENT
-                | StatusBarManager.DISABLE_BACK);
+                | StatusBarManager.DISABLE_RECENT);
 
         // Check for (and recover) retained instance data
         Object lastInstance = getLastNonConfigurationInstance();
