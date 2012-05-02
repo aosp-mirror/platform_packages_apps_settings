@@ -155,7 +155,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3687933246423942977">"Sentuh untuk menyambung ke \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Sambungkan ke \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Permintaan buku telepon"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s ingin mengakses kenalan dan riwayat panggilan Anda. Berikan akses ke %2$s?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s ingin mengakses kontak dan riwayat panggilan Anda. Berikan akses ke %2$s?"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Jangan tanya lagi"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Setelan tanggal &amp; waktu"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1.00 pm"</string>
@@ -487,7 +487,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Mati"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Tidak tersedia karena NFC dimatikan"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="6981652347448777459">"Jika fitur ini dihidupkan, Anda dapat memancarkan konten apl ke perangkat berkemampuan NFC lainnya dengan mendekatkan kedua perangkat. Contohnya, Anda dapat memancarkan laman Browser, video YouTube, data kenalan Orang, dan lain-lain."\n\n"Cukup dekatkan kedua perangkat (biasanya saling membelakangi) lalu sentuh layar Anda. Apl ini akan menentukan apa yang dipancarkan."</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"Jika fitur ini dihidupkan, Anda dapat memancarkan konten apl ke perangkat berkemampuan NFC lainnya dengan mendekatkan kedua perangkat. Contohnya, Anda dapat memancarkan laman Browser, video YouTube, kontak Orang, dan lain-lain."\n\n"Cukup dekatkan kedua perangkat (biasanya saling membelakangi) lalu sentuh layar Anda. Apl ini akan menentukan apa yang dipancarkan."</string>
     <string name="nsd_quick_toggle_title" msgid="3125572815278848258">"Penemuan layanan jaringan"</string>
     <string name="nsd_quick_toggle_summary" msgid="155692215972781276">"Izinkan aplikasi di perangkat lain menemukan aplikasi di perangkat ini"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
@@ -592,8 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Ganti nama perangkat"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Perangkat P2P"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Tidak dapat menyambung."</string>
-    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
-    <skip />
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Gagal mengubah nama perangkat."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Putuskan sambungan?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> akan berakhir."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> dan <xliff:g id="PEER_COUNT">%2$s</xliff:g> perangkat lain akan berakhir."</string>
@@ -1357,6 +1356,10 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Hapus semua sertifikat"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Kredensial tepercaya"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Tampilkan sertifikat CA tepercaya"</string>
+    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
+    <skip />
+    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
+    <skip />
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Ketik sandi untuk penyimpanan kredensial."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Sandi saat ini:"</string>
@@ -1451,8 +1454,8 @@
 %1$s</xliff:g>"</string>
     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
     <string name="sync_calendar" msgid="9056527206714733735">"Kalender"</string>
-    <string name="sync_contacts" msgid="9174914394377828043">"Kenalan"</string>
-    <string name="sync_plug" msgid="3905078969081888738"><font fgcolor="#ffffffff">"Selamat datang di Google sync!"</font>" "\n"Pendekatan Google untuk menyinkronkan data guna memungkinkan akses ke kenalan, janji temu, dan lain-lain dari mana saja."</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Kontak"</string>
+    <string name="sync_plug" msgid="3905078969081888738"><font fgcolor="#ffffffff">"Selamat datang di Google sync!"</font>" "\n"Pendekatan Google untuk menyinkronkan data guna memungkinkan akses ke kontak, janji temu, dan lain-lain dari mana saja."</string>
     <string name="header_application_sync_settings" msgid="6205903695598000286">"Setelan sinkronisasi apl"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Data &amp; sinkronisasi"</string>
     <string name="preference_change_password_title" msgid="8955581790270130056">"Ubah sandi"</string>
@@ -1461,8 +1464,8 @@
     <string name="header_add_an_account" msgid="756108499532023798">"Tambah akun"</string>
     <string name="finish_button_label" msgid="481587707657751116">"Selesai"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Hapus akun?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Menghapus akun ini akan menghapus semua pesan, data kenalan, dan data lain akun tersebut dari tablet!"</string>
-    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Menghapus akun ini akan menghapus semua pesan, data kenalan, dan data lainnya akun tersebut dari ponsel!"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Menghapus akun ini akan menghapus semua pesan, kontak, dan data lain akun tersebut dari tablet!"</string>
+    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Menghapus akun ini akan menghapus semua pesan, kontak, dan data lainnya akun tersebut dari ponsel!"</string>
     <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"Akun ini diperlukan oleh beberapa apl. Anda hanya dapat menghapusnya dengan menyetel ulang tablet ke default pabrik (yang menghapus semua data pribadi Anda) di Setelan &gt; Cadangan &amp; setel ulang."</string>
     <string name="remove_account_failed" product="default" msgid="6217238709175617517">"Akun ini diperlukan oleh beberapa apl. Anda hanya dapat menghapusnya dengan menyetel ulang ponsel ke default pabrik (yang menghapus semua data pribadi Anda) dalam Setelan &gt; Cadangan &amp; setel ulang."</string>
     <string name="provider_label" msgid="7724593781904508866">"Langganan push"</string>
@@ -1498,24 +1501,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"Tampilkan masukan visual untuk sentuhan"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Tampilkan pembaruan layar"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Kedipkan area layar saat diperbarui"</string>
-    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
-    <skip />
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Lihat pembaruan layar GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Sorot area layar saat diperbarui dengan GPU"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"Nonaktifkan hamparan"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"Jangan gunakan hamparan untuk pengomposisian layar"</string>
-    <!-- no translation found for debug_layout (5981361776594526155) -->
-    <skip />
-    <!-- no translation found for debug_layout_summary (978411395294379156) -->
-    <skip />
+    <string name="debug_layout" msgid="5981361776594526155">"Tampilkan batas tata letak"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"Menampilkan informasi tentang batas, padding, dll."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Tampilkan penggunaan CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Hamparan layar menampilkan penggunaan CPU saat ini"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Paksa perenderan GPU"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"Gunakan akselerasi perangkat keras 2D dlm aplikasi"</string>
-    <!-- no translation found for track_frame_time (6146354853663863443) -->
-    <skip />
-    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
-    <skip />
+    <string name="track_frame_time" msgid="6146354853663863443">"Penguraian GPU profil"</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"Ukur waktu penguraian di adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animasi jendela"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Skala animasi transisi"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Skala durasi animator"</string>

@@ -592,8 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"重新命名裝置"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"對端裝置"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"無法連線。"</string>
-    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
-    <skip />
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"無法重新命名裝置。"</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"中斷連線？"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"如果您中斷連線，即會結束您與「<xliff:g id="PEER_NAME">%1$s</xliff:g>」的連線。"</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"如果您中斷連線，即會結束您與「<xliff:g id="PEER_NAME">%1$s</xliff:g>」和其他 <xliff:g id="PEER_COUNT">%2$s</xliff:g> 個裝置的連線。"</string>
@@ -1107,7 +1106,7 @@
     <string name="ime_security_warning" msgid="4135828934735934248">"此輸入法可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。此輸入法來自「<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>」應用程式。是否要使用此輸入法？"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"這個拼字檢查程式可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。該程式是由應用程式「<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>」所提供，要使用這個拼字檢查程式嗎？"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"滑鼠/觸控板"</string>
-    <string name="pointer_speed" msgid="1221342330217861616">"指標速度"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"游標速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"遊戲控制器"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"使用震動"</string>
     <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"連接時使遊戲控制器產生震動。"</string>
@@ -1357,6 +1356,10 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"移除所有憑證"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"信任的憑證"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"顯示信任的 CA 憑證"</string>
+    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
+    <skip />
+    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
+    <skip />
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"輸入認證儲存空間的密碼。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"目前的密碼："</string>
@@ -1498,24 +1501,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"顯示觸控位置的視覺回應"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"顯示螢幕更新"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"更新畫面區域時，讓畫面區域閃爍"</string>
-    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
-    <skip />
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"顯示 GPU 畫面更新"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"GPU 更新時讓畫面區域閃爍"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"停用重疊功能"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"不要在合成畫面上使用重疊功能"</string>
-    <!-- no translation found for debug_layout (5981361776594526155) -->
-    <skip />
-    <!-- no translation found for debug_layout_summary (978411395294379156) -->
-    <skip />
+    <string name="debug_layout" msgid="5981361776594526155">"顯示版面配置界限"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"顯示界限、間距等相關資訊。"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"顯示 CPU 使用量"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"在螢幕上方顯示目前的 CPU 使用量"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"強制使用 GPU 轉譯"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"在應用程式中使用 2D 硬體加速"</string>
-    <!-- no translation found for track_frame_time (6146354853663863443) -->
-    <skip />
-    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
-    <skip />
+    <string name="track_frame_time" msgid="6146354853663863443">"剖析 GPU 轉譯"</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"測量「adb shell dumpsys gfxinfo」指令中的轉譯時間"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"視窗動畫比例"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"轉場動畫比例"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 影片長度比例"</string>
