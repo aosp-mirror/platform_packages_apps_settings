@@ -98,7 +98,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private boolean mEncryptionGoneBad;
     /** A flag to indicate when the back event should be ignored */
     private boolean mIgnoreBack = false;
-
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
     private EditText mPasswordEntry;
@@ -248,9 +247,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 Log.w(TAG, "notifyUser: Exception while playing sound: " + e);
             }
         }
-        // Notify the user again in 30 seconds.
+        // Notify the user again in 5 seconds.
         mHandler.removeMessages(MESSAGE_NOTIFY);
-        mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 30 * 1000);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 5 * 1000);
     }
 
     /**
@@ -510,9 +509,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }, 0);
 
         updateEmergencyCallButtonState();
-        // Notify the user that we are waiting for him to enter the password to get the device
-        // out of this completely dead state.
-        notifyUser();
+        // Notify the user in 30 seconds that we are waiting for him to enter the password.
+        mHandler.removeMessages(MESSAGE_NOTIFY);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 30 * 1000);
     }
 
     /**
