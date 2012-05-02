@@ -476,6 +476,16 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         mPasswordEntry.setOnEditorActionListener(this);
         mPasswordEntry.requestFocus();
 
+        // Disable the Emergency call button if the device has no voice telephone capability
+        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (!tm.isVoiceCapable()) {
+            final View emergencyCall = findViewById(R.id.emergencyCallButton);
+            if (emergencyCall != null) {
+                Log.d(TAG, "Removing the emergency Call button");
+                emergencyCall.setVisibility(View.GONE);
+            }
+        }
+
         final View imeSwitcher = findViewById(R.id.switch_ime_button);
         final InputMethodManager imm = (InputMethodManager) getSystemService(
                 Context.INPUT_METHOD_SERVICE);
