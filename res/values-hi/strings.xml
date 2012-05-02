@@ -592,8 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"उपकरण का नाम बदलें"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"पीयर उपकरण"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"कनेक्‍ट नहीं किया जा सका."</string>
-    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
-    <skip />
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"उपकरण का नाम बदलने में विफल रहा."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"डिस्‍कनेक्‍ट करें?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"यदि आप डिस्‍कनेक्‍ट करते हैं, तो <xliff:g id="PEER_NAME">%1$s</xliff:g> के साथ आपका कनेक्‍शन समाप्त हो जाएगा."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"यदि आप डिस्‍कनेक्‍ट करते हैं, तो <xliff:g id="PEER_NAME">%1$s</xliff:g> और <xliff:g id="PEER_COUNT">%2$s</xliff:g> अन्‍य उपकरणों के साथ आपका कनेक्‍शन समाप्त हो जाएगा."</string>
@@ -1357,6 +1356,10 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"सभी प्रमाणपत्र निकालें"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"विश्वस्त क्रेडेंशियल"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"विश्वस्त CA प्रमाणपत्र प्रदर्शित करें"</string>
+    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
+    <skip />
+    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
+    <skip />
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"क्रेडेंशियल संग्रहण के लिए पासवर्ड लिखें."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"वर्तमान पासवर्ड:"</string>
@@ -1499,24 +1502,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"स्पर्श के लिए दृश्यमान फ़ीडबैक दिखाएं"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"स्‍क्रीन अपडेट दिखाएं"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"अपडेट करते समय स्‍क्रीन के क्षेत्र फ़्लैश करें"</string>
-    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
-    <skip />
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"GPU स्‍क्रीन अपडेट दिखाएं"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"स्क्रीन के फ़्लैश क्षेत्र, जब वे GPU के साथ अपडेट हों"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"ओवरले अक्षम करें"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"स्‍क्रीन संयोजन के लिए ओवरले का उपयोग न करें"</string>
-    <!-- no translation found for debug_layout (5981361776594526155) -->
-    <skip />
-    <!-- no translation found for debug_layout_summary (978411395294379156) -->
-    <skip />
+    <string name="debug_layout" msgid="5981361776594526155">"लेआउट सीमाएं दिखाएं"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"सीमाओं, पैडिंग, आदि के बारे में जानकारी दिखाएं."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU उपयोग दिखाएं"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"स्‍क्रीन ओवरले वर्तमान CPU उपयोग को दिखा रहा है"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"बलपूर्वक GPU रेंडर करें"</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"एप्लिकेशन में 2D हार्डवेयर त्वरण का उपयोग करें"</string>
-    <!-- no translation found for track_frame_time (6146354853663863443) -->
-    <skip />
-    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
-    <skip />
+    <string name="track_frame_time" msgid="6146354853663863443">"प्रोफ़ाइल GPU रेंडरिंग"</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"adb shell dumpsys gfxinfo में रेंडरिंग समय मापें"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"विंडो एनिमेशन स्‍केल"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"संक्रमण एनिमेशन स्‍केल"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"एनिमेटर अवधि स्केल"</string>
