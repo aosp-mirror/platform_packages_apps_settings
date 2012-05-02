@@ -592,8 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Pervardyti įrenginį"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Lygiaverčiai įrenginiai"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Nepavyko prijungti."</string>
-    <!-- no translation found for wifi_p2p_failed_rename_message (2562182284946936380) -->
-    <skip />
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Nepavyko pervardyti įrenginio."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Atsijungti?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"Atsijungus, bus nutrauktas ryšys su „<xliff:g id="PEER_NAME">%1$s</xliff:g>“."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Atsijungus, bus nutrauktas ryšys su „<xliff:g id="PEER_NAME">%1$s</xliff:g>“ ir <xliff:g id="PEER_COUNT">%2$s</xliff:g> kitais (-ų) įrenginiais (-ių)."</string>
@@ -993,7 +992,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"Išvalyti duomenis"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Pašalinti naujinius"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"Pasirinkote pagal numatytuosius nustatymus paleisti šią programą atliekant tam tikrus veiksmus."</string>
-    <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"Pasirinkote leisti šiai programai kurti valdilklius ir pasiekti jų duomenis."</string>
+    <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"Pasirinkote leisti šiai programai kurti valdiklius ir pasiekti jų duomenis."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nenustatyti jokie numatytieji nustatymai."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Išvalyti numatytuosius nustatymus"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Ši programa gali būti nepritaikyta jūsų ekranui. Čia galite valdyti jos pritaikymą pagal ekraną."</string>
@@ -1357,6 +1356,10 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Pašalinti visus sertifikatus"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Patikimi įgaliojimai"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Rodyti patikimus CA sertifikatus"</string>
+    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
+    <skip />
+    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
+    <skip />
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Įveskite kredencialų atmintinės slaptažodį."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Dabartinis slaptažodis:"</string>
@@ -1498,24 +1501,18 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"Rodyti vaizdinius palietimų atsiliepimus"</string>
     <string name="show_screen_updates" msgid="8282711794220426931">"Rodyti ekrano naujinius"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"Ekrano sritys blyksės, kai jos atsinaujins"</string>
-    <!-- no translation found for show_hw_screen_updates (1066779731201521925) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (5280716513731970663) -->
-    <skip />
+    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Rodyti GPU ekrano naujin."</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Mirginti su GPU naujinamas ekrano sritis"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"Neleisti perdangų"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"Nenaudoti perdangų atliekant ekran. komponavimą."</string>
-    <!-- no translation found for debug_layout (5981361776594526155) -->
-    <skip />
-    <!-- no translation found for debug_layout_summary (978411395294379156) -->
-    <skip />
+    <string name="debug_layout" msgid="5981361776594526155">"Rodyti išdėstymo ribas"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"Rodyti ribų, užpildymo ir pan. informaciją"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Rodyti centr. proc. naud."</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Ekrano perdanga rodo dabartinį centr. proc. naud."</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Priverst. GPU atvaizd."</string>
     <string name="force_hw_ui_summary" msgid="8642000962902609976">"Programose naudoti 2D aparat. įrang. spartinimą"</string>
-    <!-- no translation found for track_frame_time (6146354853663863443) -->
-    <skip />
-    <!-- no translation found for track_frame_time_summary (447577515813970287) -->
-    <skip />
+    <string name="track_frame_time" msgid="6146354853663863443">"Profiliuotas GPU atvaizd."</string>
+    <string name="track_frame_time_summary" msgid="447577515813970287">"Skaič. atvaizd. laiką „adb shell dumpsys gfxinfo“"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Lango animacijos mast."</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Animuoto perėjimo mast."</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator. trukmės skalė"</string>
