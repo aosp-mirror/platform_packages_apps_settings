@@ -278,6 +278,12 @@ public class DataUsageSummary extends Fragment {
         mShowWifi = mPrefs.getBoolean(PREF_SHOW_WIFI, false);
         mShowEthernet = mPrefs.getBoolean(PREF_SHOW_ETHERNET, false);
 
+        // override preferences when no mobile radio
+        if (!hasReadyMobileRadio(context)) {
+            mShowWifi = hasWifiRadio(context);
+            mShowEthernet = hasEthernet(context);
+        }
+
         setHasOptionsMenu(true);
     }
 
@@ -461,7 +467,6 @@ public class DataUsageSummary extends Fragment {
             showWifi.setChecked(mShowWifi);
         } else {
             showWifi.setVisible(false);
-            mShowWifi = true;
         }
 
         final MenuItem showEthernet = menu.findItem(R.id.data_usage_menu_show_ethernet);
@@ -470,7 +475,6 @@ public class DataUsageSummary extends Fragment {
             showEthernet.setChecked(mShowEthernet);
         } else {
             showEthernet.setVisible(false);
-            mShowEthernet = true;
         }
 
         final MenuItem metered = menu.findItem(R.id.data_usage_menu_metered);
