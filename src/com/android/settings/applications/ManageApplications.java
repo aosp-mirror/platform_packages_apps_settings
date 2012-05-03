@@ -36,6 +36,7 @@ import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,11 +48,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.TabHost;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.app.IMediaContainerService;
@@ -113,8 +116,7 @@ final class CanBeOnSdCardChecker {
  * intent.
  */
 public class ManageApplications extends Fragment implements
-        OnItemClickListener,
-        TabHost.TabContentFactory, TabHost.OnTabChangeListener {
+        OnItemClickListener {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
@@ -122,7 +124,7 @@ public class ManageApplications extends Fragment implements
     private static final String EXTRA_FILTER_APPS = "filterApps";
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_BACKGROUND = "showBackground";
-    private static final String EXTRA_DEFAULT_TAB_TAG = "defaultTabTag";
+    private static final String EXTRA_DEFAULT_LIST_TYPE = "defaultListType";
 
     // attributes used as keys when passing values to InstalledAppDetails activity
     public static final String APP_CHG = "chg";
@@ -178,8 +180,8 @@ public class ManageApplications extends Fragment implements
     TextView mFreeStorageText;
 
     private Menu mOptionsMenu;
-    
-    // These are for keeping track of activity and tab switch state.
+
+    // These are for keeping track of activity and spinner switch state.
     private int mCurView;
     private boolean mCreatedRunning;
 
@@ -189,26 +191,33 @@ public class ManageApplications extends Fragment implements
     private boolean mLastShowedInternalStorage = true;
     private long mLastUsedStorage, mLastAppStorage, mLastFreeStorage;
 
-    static final String TAB_DOWNLOADED = "Downloaded";
-    static final String TAB_RUNNING = "Running";
-    static final String TAB_ALL = "All";
-    static final String TAB_SDCARD = "OnSdCard";
+    static final int LIST_TYPE_DOWNLOADED = 0;
+    static final int LIST_TYPE_RUNNING = 1;
+    static final int LIST_TYPE_SDCARD = 2;
+    static final int LIST_TYPE_ALL = 3;
     private View mRootView;
 
     private boolean mShowBackground = false;
     
-    // -------------- Copied from TabActivity --------------
+    private int mDefaultListType = -1;
+    private SparseIntArray mIndexToType = new SparseIntArray(4);
 
-    private TabHost mTabHost;
-    private String mDefaultTab = null;
-
-    // -------------- Copied from TabActivity --------------
+    private Spinner mSpinner;
+    private FrameLayout mSpinnerContent;
 
     final Runnable mRunningProcessesAvail = new Runnable() {
         public void run() {
             handleRunningProcessesAvail();
         }
     };
+
+    static class AppFilterAdapter extends ArrayAdapter<String> {
+
+        public AppFilterAdapter(Context context) {
+            super(context, R.layout.apps_spinner_item);
+            setDropDownViewResource(R.layout.apps_spinner_dropdown_item);
+        }
+    }
 
     /*
      * Custom adapter implementation for the ListView
@@ -509,7 +518,7 @@ public class ManageApplications extends Fragment implements
         mApplicationsAdapter = new ApplicationsAdapter(mApplicationsState);
         Intent intent = getActivity().getIntent();
         String action = intent.getAction();
-        String defaultTabTag = TAB_DOWNLOADED;
+        int defaultListType = LIST_TYPE_DOWNLOADED;
         String className = getArguments() != null
                 ? getArguments().getString("classname") : null;
         if (className == null) {
@@ -517,27 +526,27 @@ public class ManageApplications extends Fragment implements
         }
         if (className.equals(RunningServicesActivity.class.getName())
                 || className.endsWith(".RunningServices")) {
-            defaultTabTag = TAB_RUNNING;
+            defaultListType = LIST_TYPE_RUNNING;
         } else if (className.equals(StorageUseActivity.class.getName())
                 || Intent.ACTION_MANAGE_PACKAGE_STORAGE.equals(action)
                 || className.endsWith(".StorageUse")) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
-            defaultTabTag = TAB_ALL;
+            defaultListType = LIST_TYPE_ALL;
         } else if (Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS.equals(action)) {
-            // Select the all-apps tab, with the default sorting
-            defaultTabTag = TAB_ALL;
+            // Select the all-apps list, with the default sorting
+            defaultListType = LIST_TYPE_ALL;
         }
-        
+
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
             mFilterApps = savedInstanceState.getInt(EXTRA_FILTER_APPS, mFilterApps);
-            String tmp = savedInstanceState.getString(EXTRA_DEFAULT_TAB_TAG);
-            if (tmp != null) defaultTabTag = tmp;
+            int tmp = savedInstanceState.getInt(EXTRA_DEFAULT_LIST_TYPE, -1);
+            if (tmp != -1) defaultListType = tmp;
             mShowBackground = savedInstanceState.getBoolean(EXTRA_SHOW_BACKGROUND, false);
         }
-        
-        mDefaultTab = defaultTabTag;
+
+        mDefaultListType = defaultListType;
 
         final Intent containerIntent = new Intent().setComponent(
                 StorageMeasurement.DEFAULT_CONTAINER_COMPONENT);
@@ -579,34 +588,44 @@ public class ManageApplications extends Fragment implements
         mCreatedRunning = mResumedRunning = false;
         mCurView = VIEW_NOTHING;
 
-        mTabHost = (TabHost) mInflater.inflate(R.layout.manage_apps_tab_content, container, false);
-        mTabHost.setup();
-        final TabHost tabHost = mTabHost;
-        tabHost.addTab(tabHost.newTabSpec(TAB_DOWNLOADED)
-                .setIndicator(getActivity().getString(R.string.filter_apps_third_party),
-                        getActivity().getResources().getDrawable(R.drawable.ic_tab_download))
-                .setContent(this));
+        View spinnerHost = mInflater.inflate(R.layout.manage_apps_spinner_content,
+                container, false);
+
+        mSpinner = (Spinner) spinnerHost.findViewById(R.id.spinner);
+        mSpinnerContent = (FrameLayout) spinnerHost.findViewById(R.id.spinner_content);
+        mSpinnerContent.addView(mRootView);
+
+        AppFilterAdapter sa = new AppFilterAdapter(getActivity());
+        mIndexToType.append(sa.getCount(), LIST_TYPE_DOWNLOADED);
+        sa.add(getActivity().getString(R.string.filter_apps_third_party));
         if (!Environment.isExternalStorageEmulated()) {
-            tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
-                    .setIndicator(getActivity().getString(R.string.filter_apps_onsdcard),
-                            getActivity().getResources().getDrawable(R.drawable.ic_tab_sdcard))
-                    .setContent(this));
+            mIndexToType.append(sa.getCount(), LIST_TYPE_SDCARD);
+            sa.add(getActivity().getString(R.string.filter_apps_onsdcard));
         }
-        tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
-                .setIndicator(getActivity().getString(R.string.filter_apps_running),
-                        getActivity().getResources().getDrawable(R.drawable.ic_tab_running))
-                .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
-                .setIndicator(getActivity().getString(R.string.filter_apps_all),
-                        getActivity().getResources().getDrawable(R.drawable.ic_tab_all))
-                .setContent(this));
-        tabHost.setCurrentTabByTag(mDefaultTab);
-        tabHost.setOnTabChangedListener(this);
+        mIndexToType.append(sa.getCount(), LIST_TYPE_RUNNING);
+        sa.add(getActivity().getString(R.string.filter_apps_running));
+        mIndexToType.append(sa.getCount(), LIST_TYPE_ALL);
+        sa.add(getActivity().getString(R.string.filter_apps_all));
 
-        // adjust padding around tabwidget as needed
-        prepareCustomPreferencesList(container, mTabHost, mListView, false);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent,
+                    View view, int position, long id) {
+                showCurrentList();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Nothing
+            }
 
-        return mTabHost;
+        });
+
+        mSpinner.setSelection(getIndex(mDefaultListType));
+        mSpinner.setAdapter(sa);
+
+        prepareCustomPreferencesList(container, spinnerHost, mListView, false);
+
+        return spinnerHost;
     }
 
     @Override
@@ -618,9 +637,10 @@ public class ManageApplications extends Fragment implements
     public void onResume() {
         super.onResume();
         mActivityResumed = true;
-        showCurrentTab();
+        showCurrentList();
         updateOptionsMenu();
-        mTabHost.getTabWidget().setEnabled(true);
+        mSpinner.setEnabled(true);
+        mSpinnerContent.setEnabled(true);
     }
 
     @Override
@@ -628,8 +648,8 @@ public class ManageApplications extends Fragment implements
         super.onSaveInstanceState(outState);
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
         outState.putInt(EXTRA_FILTER_APPS, mFilterApps);
-        if (mDefaultTab != null) {
-            outState.putString(EXTRA_DEFAULT_TAB_TAG, mDefaultTab);
+        if (mDefaultListType != -1) {
+            outState.putInt(EXTRA_DEFAULT_LIST_TYPE, mDefaultListType);
         }
         outState.putBoolean(EXTRA_SHOW_BACKGROUND, mShowBackground);
     }
@@ -643,7 +663,8 @@ public class ManageApplications extends Fragment implements
             mRunningProcessesView.doPause();
             mResumedRunning = false;
         }
-        mTabHost.getTabWidget().setEnabled(false);
+        mSpinner.setEnabled(false);
+        mSpinnerContent.setEnabled(false);
     }
 
     @Override
@@ -652,7 +673,14 @@ public class ManageApplications extends Fragment implements
             mApplicationsState.requestSize(mCurrentPkgName);
         }
     }
-    
+
+    private int getIndex(int listType) {
+        for (int i = 0; i < mIndexToType.size(); i++) {
+            if (listType == mIndexToType.get(i)) return i;
+        }
+        return 0;
+    }
+
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
         // start new fragment to display extended information
@@ -750,10 +778,6 @@ public class ManageApplications extends Fragment implements
         ApplicationsState.AppEntry entry = mApplicationsAdapter.getAppEntry(position);
         mCurrentPkgName = entry.info.packageName;
         startApplicationDetailsActivity();
-    }
-    
-    public View createTabContent(String tag) {
-        return mRootView;
     }
 
     static final int VIEW_NOTHING = 0;
@@ -910,16 +934,17 @@ public class ManageApplications extends Fragment implements
         }
     }
 
-    public void showCurrentTab() {
-        String tabId = mDefaultTab = mTabHost.getCurrentTabTag();
+    public void showCurrentList() {
+        int listType = mIndexToType.get(mSpinner.getSelectedItemPosition());
+
         int newOption;
-        if (TAB_DOWNLOADED.equalsIgnoreCase(tabId)) {
+        if (LIST_TYPE_DOWNLOADED == listType) {
             newOption = FILTER_APPS_THIRD_PARTY;
-        } else if (TAB_ALL.equalsIgnoreCase(tabId)) {
+        } else if (LIST_TYPE_ALL == listType) {
             newOption = FILTER_APPS_ALL;
-        } else if (TAB_SDCARD.equalsIgnoreCase(tabId)) {
+        } else if (LIST_TYPE_SDCARD == listType) {
             newOption = FILTER_APPS_SDCARD;
-        } else if (TAB_RUNNING.equalsIgnoreCase(tabId)) {
+        } else if (LIST_TYPE_RUNNING == listType) {
             ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
                     .hideSoftInputFromWindow(
                             getActivity().getWindow().getDecorView().getWindowToken(), 0);
@@ -929,15 +954,11 @@ public class ManageApplications extends Fragment implements
             // Invalid option. Do nothing
             return;
         }
-        
+
         mFilterApps = newOption;
         selectView(VIEW_LIST);
         updateStorageUsage();
         updateOptionsMenu();
-    }
-
-    public void onTabChanged(String tabId) {
-        showCurrentTab();
     }
 
     private volatile IMediaContainerService mContainerService;
