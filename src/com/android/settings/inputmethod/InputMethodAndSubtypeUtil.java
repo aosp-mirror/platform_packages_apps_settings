@@ -22,6 +22,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -36,6 +37,7 @@ import android.view.inputmethod.InputMethodSubtype;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class InputMethodAndSubtypeUtil {
@@ -46,6 +48,7 @@ public class InputMethodAndSubtypeUtil {
     private static final char INPUT_METHOD_SEPARATER = ':';
     private static final char INPUT_METHOD_SUBTYPE_SEPARATER = ';';
     private static final int NOT_A_SUBTYPE_ID = -1;
+    private static final Locale ENGLISH_LOCALE = new Locale("en");
 
     private static final TextUtils.SimpleStringSplitter sStringInputMethodSplitter
             = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SEPARATER);
@@ -183,7 +186,7 @@ public class InputMethodAndSubtypeUtil {
                 getEnabledInputMethodsAndSubtypeList(resolver);
         HashSet<String> disabledSystemIMEs = getDisabledSystemIMEs(resolver);
 
-        final boolean onlyOneIME = inputMethodInfos.size() == 1;
+        final int imiCount = inputMethodInfos.size();
         boolean needsToResetSelectedSubtype = false;
         for (InputMethodInfo imi : inputMethodInfos) {
             final String imiId = imi.getId();
@@ -193,11 +196,11 @@ public class InputMethodAndSubtypeUtil {
             // pref is instance of CheckBoxPreference in the Configure input method screen.
             final boolean isImeChecked = (pref instanceof CheckBoxPreference) ?
                     ((CheckBoxPreference) pref).isChecked()
-                            : enabledIMEAndSubtypesMap.containsKey(imiId);
+                    : enabledIMEAndSubtypesMap.containsKey(imiId);
             final boolean isCurrentInputMethod = imiId.equals(currentInputMethodId);
-            final boolean auxIme = isAuxiliaryIme(imi);
             final boolean systemIme = isSystemIme(imi);
-            if (((onlyOneIME || (systemIme && !auxIme)) && !hasHardKeyboard) || isImeChecked) {
+            if ((!hasHardKeyboard && isAlwaysCheckedIme(imi, context.getActivity(), imiCount))
+                    || isImeChecked) {
                 if (!enabledIMEAndSubtypesMap.containsKey(imiId)) {
                     // imiId has just been enabled
                     enabledIMEAndSubtypesMap.put(imiId, new HashSet<String>());
@@ -372,5 +375,48 @@ public class InputMethodAndSubtypeUtil {
 
     public static boolean isAuxiliaryIme(InputMethodInfo imi) {
         return imi.isAuxiliaryIme();
+    }
+
+    public static boolean isAlwaysCheckedIme(InputMethodInfo imi, Context context, int imiCount) {
+        if (imiCount <= 1) {
+            return true;
+        }
+        if (!isSystemIme(imi)) {
+            return false;
+        }
+        if (isAuxiliaryIme(imi)) {
+            return false;
+        }
+        if (isValidDefaultIme(imi, context)) {
+            return true;
+        }
+        return containsSubtypeOf(imi, ENGLISH_LOCALE.getLanguage());
+    }
+
+    private static boolean isValidDefaultIme(InputMethodInfo imi, Context context) {
+        if (imi.getIsDefaultResourceId() != 0) {
+            try {
+                Resources res = context.createPackageContext(
+                        imi.getPackageName(), 0).getResources();
+                if (res.getBoolean(imi.getIsDefaultResourceId())
+                        && containsSubtypeOf(imi, context.getResources().getConfiguration().
+                                locale.getLanguage())) {
+                    return true;
+                }
+            } catch (PackageManager.NameNotFoundException ex) {
+            } catch (Resources.NotFoundException ex) {
+            }
+        }
+        return false;
+    }
+
+    private static boolean containsSubtypeOf(InputMethodInfo imi, String language) {
+        final int N = imi.getSubtypeCount();
+        for (int i = 0; i < N; ++i) {
+            if (imi.getSubtypeAt(i).getLocale().startsWith(language)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
