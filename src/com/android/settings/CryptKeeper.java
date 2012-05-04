@@ -33,6 +33,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IMountService;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -628,6 +629,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 TelephonyManager.getDefault().getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
         if (!isLteDevice) {
             Log.d(TAG, "Going into airplane mode.");
+            Settings.System.putInt(getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 1);
             final Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
             intent.putExtra("state", true);
             sendBroadcast(intent);
