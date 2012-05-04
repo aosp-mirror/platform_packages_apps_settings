@@ -20,8 +20,8 @@
     android:layout_height="40dip"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:paddingLeft="@*android:dimen/preference_item_padding_side"
-    android:paddingRight="@*android:dimen/preference_item_padding_side">
+    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight">
 
     <TextView
         android:layout_width="wrap_content"

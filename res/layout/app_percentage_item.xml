@@ -18,8 +18,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="@*android:dimen/preference_item_padding_side"
-    android:paddingRight="@*android:dimen/preference_item_padding_side"
+    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight"
     android:paddingTop="8dip"
     android:paddingBottom="8dip"
     android:columnCount="3">
