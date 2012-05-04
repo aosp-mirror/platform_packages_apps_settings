@@ -49,6 +49,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.Phone;
 
 import java.util.List;
 
@@ -296,6 +297,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 | StatusBarManager.DISABLE_HOME
                 | StatusBarManager.DISABLE_RECENT);
 
+        setAirplaneModeIfNecessary();
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         // Check for (and recover) retained instance data
         final Object lastInstance = getLastNonConfigurationInstance();
@@ -604,6 +606,32 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return true;
         }
         return false;
+    }
+
+    /**
+     * Set airplane mode on the device if it isn't an LTE device.
+     * Full story: In minimal boot mode, we cannot save any state. In particular, we cannot save
+     * any incoming SMS's. So SMSs that are received here will be silently dropped to the floor.
+     * That is bad. Also, we cannot receive any telephone calls in this state. So to avoid
+     * both these problems, we turn the radio off. However, on certain networks turning on and
+     * off the radio takes a long time. In such cases, we are better off leaving the radio
+     * running so the latency of an E911 call is short.
+     * The behavior after this is:
+     * 1. Emergency dialing: the emergency dialer has logic to force the device out of
+     *    airplane mode and restart the radio.
+     * 2. Full boot: we read the persistent settings from the previous boot and restore the
+     *    radio to whatever it was before it restarted. This also happens when rebooting a
+     *    phone that has no encryption.
+     */
+    private final void setAirplaneModeIfNecessary() {
+        final boolean isLteDevice =
+                TelephonyManager.getDefault().getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
+        if (!isLteDevice) {
+            Log.d(TAG, "Going into airplane mode.");
+            final Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+            intent.putExtra("state", true);
+            sendBroadcast(intent);
+        }
     }
 
     /**
