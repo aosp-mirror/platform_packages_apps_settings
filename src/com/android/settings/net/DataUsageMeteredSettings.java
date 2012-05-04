@@ -48,6 +48,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
 
     private PreferenceCategory mMobileCategory;
     private PreferenceCategory mWifiCategory;
+    private Preference mWifiDisabled;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -63,9 +64,9 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.data_usage_metered_prefs);
         mMobileCategory = (PreferenceCategory) findPreference("mobile");
         mWifiCategory = (PreferenceCategory) findPreference("wifi");
+        mWifiDisabled = findPreference("wifi_disabled");
 
         updateNetworks(context);
-
     }
 
     private void updateNetworks(Context context) {
@@ -76,15 +77,15 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
             getPreferenceScreen().removePreference(mMobileCategory);
         }
 
-        if (hasWifiRadio(context)) {
-            mWifiCategory.removeAll();
+        mWifiCategory.removeAll();
+        if (hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
             for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
                 if (config.SSID != null) {
                     mWifiCategory.addPreference(buildWifiPref(context, config));
                 }
             }
         } else {
-            getPreferenceScreen().removePreference(mWifiCategory);
+            mWifiCategory.addPreference(mWifiDisabled);
         }
     }
 
