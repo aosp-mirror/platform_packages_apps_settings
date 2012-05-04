@@ -51,7 +51,7 @@ public class InputMethodPreference extends CheckBoxPreference
     private final InputMethodInfo mImi;
     private final InputMethodManager mImm;
     private final Intent mSettingsIntent;
-    private final boolean mIsSystemIme;
+    private final boolean mAlwaysChecked;
 
     private AlertDialog mDialog = null;
     private ImageView mInputMethodSettingsButton;
@@ -68,7 +68,7 @@ public class InputMethodPreference extends CheckBoxPreference
             if (isChecked()) {
                 setChecked(false);
             } else {
-                if (mIsSystemIme) {
+                if (mAlwaysChecked) {
                     setChecked(true);
                 } else {
                     showSecurityWarnDialog(mImi, InputMethodPreference.this);
@@ -87,9 +87,9 @@ public class InputMethodPreference extends CheckBoxPreference
         mImm = imm;
         mImi = imi;
         updateSummary();
-        mIsSystemIme = InputMethodAndSubtypeUtil.isSystemIme(imi);
-        final boolean isAuxIme = InputMethodAndSubtypeUtil.isAuxiliaryIme(imi);
-        if (imiCount <= 1 || (mIsSystemIme && !isAuxIme)) {
+        mAlwaysChecked = InputMethodAndSubtypeUtil.isAlwaysCheckedIme(
+                imi, fragment.getActivity(), imiCount);
+        if (mAlwaysChecked) {
             setEnabled(false);
         }
     }
