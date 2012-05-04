@@ -761,6 +761,8 @@ public class ManageApplications extends Fragment implements
     void updateStorageUsage() {
         // Fragment view not yet created?
         if (mRootView == null) return;
+        // Make sure a callback didn't come at an inopportune time.
+        if (getActivity() == null) return;
 
         if (mCurView == VIEW_RUNNING) {
             return;
@@ -942,8 +944,6 @@ public class ManageApplications extends Fragment implements
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mContainerService = IMediaContainerService.Stub.asInterface(service);
-            // Make sure this callback didn't come at an inopportune time.
-            if (getActivity() == null) return;
             updateStorageUsage();
         }
 
