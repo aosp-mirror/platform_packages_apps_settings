@@ -29,6 +29,14 @@
     <PreferenceCategory
         android:key="wifi"
         android:title="@string/data_usage_metered_wifi"
-        android:persistent="false" />
+        android:persistent="false">
+
+        <Preference
+            android:key="wifi_disabled"
+            android:summary="@string/data_usage_metered_wifi_disabled"
+            android:persistent="false"
+            android:selectable="false" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
