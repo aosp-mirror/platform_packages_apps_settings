@@ -41,8 +41,8 @@
         android:id="@+id/usage_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@*android:dimen/preference_item_padding_side"
-        android:paddingRight="@*android:dimen/preference_item_padding_side"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
         android:paddingTop="8dip"
         android:paddingBottom="8dip"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -52,8 +52,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:paddingLeft="@*android:dimen/preference_item_padding_side"
-        android:paddingRight="@*android:dimen/preference_item_padding_side"
+        android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
         android:paddingBottom="8dip"
         android:text="@string/data_usage_empty"
         android:textAppearance="?android:attr/textAppearanceSmall" />

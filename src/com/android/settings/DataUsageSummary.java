@@ -394,9 +394,6 @@ public class DataUsageSummary extends Fragment {
         mUsageSummary = (TextView) mHeader.findViewById(R.id.usage_summary);
         mEmpty = (TextView) mHeader.findViewById(android.R.id.empty);
 
-        // only assign layout transitions once first layout is finished
-        mListView.getViewTreeObserver().addOnGlobalLayoutListener(mFirstLayoutListener);
-
         mAdapter = new DataUsageAdapter(mUidDetailProvider, mInsetSide);
         mListView.setOnItemClickListener(mListListener);
         mListView.setAdapter(mAdapter);
@@ -574,25 +571,22 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
-     * Listener to setup {@link LayoutTransition} after first layout pass.
+     * Build and assign {@link LayoutTransition} to various containers. Should
+     * only be assigned after initial layout is complete.
      */
-    private OnGlobalLayoutListener mFirstLayoutListener = new OnGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout() {
-            mListView.getViewTreeObserver().removeOnGlobalLayoutListener(mFirstLayoutListener);
+    private void ensureLayoutTransitions() {
+        // skip when already setup
+        if (mChart.getLayoutTransition() != null) return;
 
-            mTabsContainer.setLayoutTransition(buildLayoutTransition());
-            mHeader.setLayoutTransition(buildLayoutTransition());
-            mNetworkSwitchesContainer.setLayoutTransition(buildLayoutTransition());
+        mTabsContainer.setLayoutTransition(buildLayoutTransition());
+        mHeader.setLayoutTransition(buildLayoutTransition());
+        mNetworkSwitchesContainer.setLayoutTransition(buildLayoutTransition());
 
-            final LayoutTransition chartTransition = buildLayoutTransition();
-            chartTransition.setStartDelay(LayoutTransition.APPEARING, 0);
-            chartTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0);
-            chartTransition.setAnimator(LayoutTransition.APPEARING, null);
-            chartTransition.setAnimator(LayoutTransition.DISAPPEARING, null);
-            mChart.setLayoutTransition(chartTransition);
-        }
-    };
+        final LayoutTransition chartTransition = buildLayoutTransition();
+        chartTransition.disableTransitionType(LayoutTransition.APPEARING);
+        chartTransition.disableTransitionType(LayoutTransition.DISAPPEARING);
+        mChart.setLayoutTransition(chartTransition);
+    }
 
     private static LayoutTransition buildLayoutTransition() {
         final LayoutTransition transition = new LayoutTransition();
@@ -1176,6 +1170,9 @@ public class DataUsageSummary extends Fragment {
         }
 
         mUsageSummary.setText(getString(summaryRes, totalPhrase, rangePhrase));
+
+        // initial layout is finished above, ensure we have transitions
+        ensureLayoutTransitions();
     }
 
     private final LoaderCallbacks<ChartData> mChartDataCallbacks = new LoaderCallbacks<
