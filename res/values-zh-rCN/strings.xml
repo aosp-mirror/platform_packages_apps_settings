@@ -592,7 +592,7 @@
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"重命名设备"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"对等设备"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"无法连接。"</string>
-    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"无法对设备进行重命名。"</string>
+    <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"无法重命名设备。"</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"断开连接？"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"如果断开连接，您与<xliff:g id="PEER_NAME">%1$s</xliff:g>的连接将中断。"</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"如果断开连接，您与<xliff:g id="PEER_NAME">%1$s</xliff:g>和另外 <xliff:g id="PEER_COUNT">%2$s</xliff:g> 台设备的连接将中断。"</string>
@@ -1356,10 +1356,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"删除所有证书"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"受信任的凭据"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"显示受信任的 CA 证书"</string>
-    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
-    <skip />
-    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
-    <skip />
+    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"绘制您的解锁图案"</string>
+    <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"您需要绘制解锁图案，以确认凭据安装操作。"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"键入凭据存储的密码。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"当前密码："</string>
@@ -1502,11 +1500,11 @@
     <string name="show_screen_updates" msgid="8282711794220426931">"显示屏幕更新"</string>
     <string name="show_screen_updates_summary" msgid="1716122382094924596">"屏幕上的区域更新时闪烁相应区域"</string>
     <string name="show_hw_screen_updates" msgid="1066779731201521925">"显示 GPU 屏幕更新"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"更新 GPU 时闪烁显示屏幕区域"</string>
+    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"GPU 更新屏幕区域时闪烁显示相应区域"</string>
     <string name="disable_overlays" msgid="3645736086368449005">"停用叠加层"</string>
     <string name="disable_overlays_summary" msgid="7111098018524381234">"不要将重叠层用于屏幕合成"</string>
     <string name="debug_layout" msgid="5981361776594526155">"显示布局边界"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"显示关于边界、边距等数据的信息"</string>
+    <string name="debug_layout_summary" msgid="978411395294379156">"显示边界、边距等相关信息"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"显示 CPU 使用情况"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"屏幕叠加层显示当前 CPU 使用情况"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"强制进行 GPU 渲染"</string>
@@ -1579,6 +1577,8 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"选择按数据流量计费的网络。这样可限制应用在后台使用这些网络。应用在使用这些网络下载较大的文件时，还可能会发出警告。"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"移动网络"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Wi-Fi 网络"</string>
+    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
+    <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"紧急呼救"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"返回通话"</string>
     <string name="vpn_name" msgid="4689699885361002297">"名称"</string>
