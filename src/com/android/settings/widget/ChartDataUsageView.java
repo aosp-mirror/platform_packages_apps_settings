@@ -669,16 +669,6 @@ public class ChartDataUsageView extends ChartView {
             start = TextUtils.indexOf(builder, bootstrap);
             end = start + bootstrap.length();
             builder.setSpan(key, start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
-            // Fix the AbsoluteSizeSpan created from html. Its flags must be set to
-            // SPAN_INCLUSIVE_INCLUSIVE so that it survives a removal of its entire content
-            Object[] spans = builder.getSpans(start, end, Object.class);
-            for (int i = 0; i < spans.length; i++) {
-                Object span = spans[i];
-                if (builder.getSpanStart(span) == start && builder.getSpanEnd(span) == end) {
-                    builder.setSpan(span, start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                }
-            }
         }
         builder.replace(start, end, text);
     }
