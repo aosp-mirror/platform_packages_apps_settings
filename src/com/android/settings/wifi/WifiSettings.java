@@ -269,7 +269,9 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (mShowMenu) {
             registerForContextMenu(getListView());
         }
-        setHasOptionsMenu(mShowMenu);
+        // FIXME: When WPS image button is implemented, use mShowMenu instead of always showing
+        // the options menu
+        setHasOptionsMenu(true);
 
         // After confirming PreferenceScreen is available, we call super.
         super.onActivityCreated(savedInstanceState);
@@ -304,8 +306,8 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
         if (mShowMenu) {
-            final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -327,6 +329,11 @@ public class WifiSettings extends SettingsPreferenceFragment
             menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                     //.setIcon(android.R.drawable.ic_menu_manage)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        } else {
+            // FIXME: Interim support for WPS, until ImageButton is available
+            menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
+                    .setEnabled(wifiIsEnabled)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
