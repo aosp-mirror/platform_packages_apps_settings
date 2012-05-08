@@ -30,7 +30,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.VerifierDeviceIdentity;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -63,8 +62,6 @@ public class DevelopmentSettings extends PreferenceFragment
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
     private static final String ENABLE_ADB = "enable_adb";
-
-    private static final String VERIFIER_DEVICE_IDENTIFIER = "verifier_device_identifier";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
@@ -190,13 +187,6 @@ public class DevelopmentSettings extends PreferenceFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetCbPrefs.add(mShowAllANRs);
-
-        final Preference verifierDeviceIdentifier = findPreference(VERIFIER_DEVICE_IDENTIFIER);
-        final PackageManager pm = getActivity().getPackageManager();
-        final VerifierDeviceIdentity verifierIndentity = pm.getVerifierDeviceIdentity();
-        if (verifierIndentity != null) {
-            verifierDeviceIdentifier.setSummary(verifierIndentity.toString());
-        }
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
