@@ -41,6 +41,7 @@ import android.widget.Spinner;
 
 public class UserDictionaryAddWordActivity extends Activity
         implements AdapterView.OnItemSelectedListener {
+    public static final String EXTRA_MODE = "mode";
     public static final String EXTRA_WORD = "word";
     public static final String EXTRA_LOCALE = "locale";
     private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
