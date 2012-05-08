@@ -133,9 +133,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     // this boolean extra specifies whether to disable the Next button when not connected
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
-
     private static final String EXTRA_WIFI_SHOW_ACTION_BAR = "wifi_show_action_bar";
     private static final String EXTRA_WIFI_SHOW_MENUS = "wifi_show_menus";
+    private static final String EXTRA_WIFI_DISABLE_BACK = "wifi_disable_back";
 
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
@@ -237,6 +237,11 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
 
         addPreferencesFromResource(R.xml.wifi_settings);
+
+        // Back key is disabled if requested
+        if (intent.getBooleanExtra(EXTRA_WIFI_DISABLE_BACK, false)) {
+            getView().setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        }
 
         // Action bar is hidden for Setup Wizard
         final boolean showActionBar = intent.getBooleanExtra(EXTRA_WIFI_SHOW_ACTION_BAR, true);
