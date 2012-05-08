@@ -3576,8 +3576,14 @@
     <string name="wait_for_debugger_summary">Debugged application waits for debugger to
             attach before executing</string>
 
-    <!-- Preference category for user interface debugging development settings. [CHAR LIMIT=25] -->
-    <string name="debug_ui_category">User interface</string>
+    <!-- Preference category for input debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_input_category">Input</string>
+
+    <!-- Preference category for drawing debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_drawing_category">Drawing</string>
+
+    <!-- Preference category for monitoring debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_monitoring_category">Monitoring</string>
 
     <!-- UI debug setting: always enable strict mode? [CHAR LIMIT=25] -->
     <string name="strict_mode">Strict mode enabled</string>
@@ -3595,20 +3601,32 @@
     <!-- UI debug setting: show touches location summary [CHAR LIMIT=50] -->
     <string name="show_touches_summary">Show visual feedback for touches</string>
 
-    <!-- UI debug setting: show where screen updates happen? [CHAR LIMIT=25] -->
-    <string name="show_screen_updates">Show screen updates</string>
-    <!-- UI debug setting: show screen updates summary [CHAR LIMIT=50] -->
-    <string name="show_screen_updates_summary">Flash areas of screen when they update</string>
+    <!-- UI debug setting: show where surface updates happen? [CHAR LIMIT=25] -->
+    <string name="show_screen_updates">Show surface updates</string>
+    <!-- UI debug setting: show surface updates summary [CHAR LIMIT=50] -->
+    <string name="show_screen_updates_summary">Flash entire window surfaces when they update</string>
 
-    <!-- UI debug setting: show where screen updates happen with GPU rendering? [CHAR LIMIT=25] -->
-    <string name="show_hw_screen_updates">Show GPU screen updates</string>
+    <!-- UI debug setting: show where window updates happen with GPU rendering? [CHAR LIMIT=25] -->
+    <string name="show_hw_screen_updates">Show GPU view updates</string>
     <!-- UI debug setting: show GPU rendering screen updates summary [CHAR LIMIT=50] -->
-    <string name="show_hw_screen_updates_summary">Flash areas of screen when they update with the GPU</string>
+    <string name="show_hw_screen_updates_summary">Flash views inside windows when drawn with the GPU</string>
 
     <!-- UI debug setting: disable use of overlays? [CHAR LIMIT=25] -->
-    <string name="disable_overlays">Disable overlays</string>
+    <string name="disable_overlays">Disable HW overlays</string>
     <!-- UI debug setting: disable use of overlays summary [CHAR LIMIT=50] -->
-    <string name="disable_overlays_summary">Don\'t use overlays for screen compositing</string>
+    <string name="disable_overlays_summary">Always use GPU for screen compositing</string>
+
+    <!-- UI debug setting: enable low-level traces? [CHAR LIMIT=25] -->
+    <string name="enable_traces_title">Enable traces</string>
+    <!-- UI debug setting: title for dialog to enable low-level traces [CHAR LIMIT=25] -->
+    <string name="enable_traces_dialog_title">Select enabled traces</string>
+
+    <!-- UI debug setting: enable low-level traces, none enabled summary [CHAR LIMIT=NONE] -->
+    <string name="enable_traces_summary_none">No traces currently enabled</string>
+    <!-- UI debug setting: enable low-level traces, some number enabled summary [CHAR LIMIT=NONE] -->
+    <string name="enable_traces_summary_num"><xliff:g id="num">%1$d</xliff:g> traces currently enabled</string>
+    <!-- UI debug setting: enable low-level traces, all enabled summary [CHAR LIMIT=NONE] -->
+    <string name="enable_traces_summary_all">All traces currently enabled</string>
 
     <!-- UI debug setting: show layout bounds information [CHAR LIMIT=25] -->
     <string name="debug_layout">Show layout bounds</string>
@@ -3623,7 +3641,7 @@
     <!-- UI debug setting: force hardware acceleration to render apps [CHAR LIMIT=25] -->
     <string name="force_hw_ui">Force GPU rendering</string>
     <!-- UI debug setting: force hardware acceleration summary [CHAR LIMIT=50] -->
-    <string name="force_hw_ui_summary">Use 2D hardware acceleration in applications</string>
+    <string name="force_hw_ui_summary">Force use of GPU for 2d drawing</string>
 
     <!-- UI debug setting: profile time taken by hardware acceleration to render apps [CHAR LIMIT=25] -->
     <string name="track_frame_time">Profile GPU rendering</string>

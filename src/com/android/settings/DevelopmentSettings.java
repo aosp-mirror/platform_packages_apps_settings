@@ -40,8 +40,10 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
+import android.os.Trace;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.preference.MultiCheckPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -88,6 +90,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
 
+    private static final String ENABLE_TRACES_KEY = "enable_traces";
+
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
             = "immediately_destroy_activities";
     private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
@@ -101,6 +105,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private Switch mEnabledSwitch;
     private boolean mLastEnabledState;
+    private boolean mHaveDebugSettings;
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
@@ -124,6 +129,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
+    private MultiCheckPreference mEnableTracesPref;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
@@ -177,6 +183,15 @@ public class DevelopmentSettings extends PreferenceFragment
         mAnimatorDurationScale = (ListPreference) findPreference(ANIMATOR_DURATION_SCALE_KEY);
         mAllPrefs.add(mAnimatorDurationScale);
         mAnimatorDurationScale.setOnPreferenceChangeListener(this);
+        mEnableTracesPref = (MultiCheckPreference)findPreference(ENABLE_TRACES_KEY);
+        String[] traceValues = new String[Trace.TRACE_TAGS.length];
+        for (int i=Trace.TRACE_FLAGS_START_BIT; i<traceValues.length; i++) {
+            traceValues[i] = Integer.toString(1<<i);
+        }
+        mEnableTracesPref.setEntries(Trace.TRACE_TAGS);
+        mEnableTracesPref.setEntryValues(traceValues);
+        mAllPrefs.add(mEnableTracesPref);
+        mEnableTracesPref.setOnPreferenceChangeListener(this);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -275,15 +290,32 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
         mEnabledSwitch.setChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
+
+        if (mHaveDebugSettings && !mLastEnabledState) {
+            // Overall debugging is disabled, but there are some debug
+            // settings that are enabled.  This is an invalid state.  Switch
+            // to debug settings being enabled, so the user knows there is
+            // stuff enabled and can turn it all off if they want.
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 1);
+            mLastEnabledState = true;
+            setPrefsEnabledState(mLastEnabledState);
+        }
+    }
+
+    void updateCheckBox(CheckBoxPreference checkBox, boolean value) {
+        checkBox.setChecked(value);
+        mHaveDebugSettings |= value;
     }
 
     private void updateAllOptions() {
         final ContentResolver cr = getActivity().getContentResolver();
-        mEnableAdb.setChecked(Settings.Secure.getInt(cr,
+        mHaveDebugSettings = false;
+        updateCheckBox(mEnableAdb, Settings.Secure.getInt(cr,
                 Settings.Secure.ADB_ENABLED, 0) != 0);
-        mKeepScreenOn.setChecked(Settings.System.getInt(cr,
+        updateCheckBox(mKeepScreenOn, Settings.System.getInt(cr,
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
-        mAllowMockLocation.setChecked(Settings.Secure.getInt(cr,
+        updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
         updatePasswordSummary();
@@ -298,6 +330,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateShowHwScreenUpdatesOptions();
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
+        updateEnableTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
@@ -315,7 +348,9 @@ public class DevelopmentSettings extends PreferenceFragment
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
+        writeEnableTracesOptions(0);
         writeAppProcessLimitOptions(null);
+        mHaveDebugSettings = false;
         updateAllOptions();
     }
 
@@ -369,7 +404,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void updateDebuggerOptions() {
         mDebugApp = Settings.System.getString(
                 getActivity().getContentResolver(), Settings.System.DEBUG_APP);
-        mWaitForDebugger.setChecked(Settings.System.getInt(
+        updateCheckBox(mWaitForDebugger, Settings.System.getInt(
                 getActivity().getContentResolver(), Settings.System.WAIT_FOR_DEBUGGER, 0) != 0);
         if (mDebugApp != null && mDebugApp.length() > 0) {
             String label;
@@ -383,6 +418,7 @@ public class DevelopmentSettings extends PreferenceFragment
             }
             mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_set, label));
             mWaitForDebugger.setEnabled(true);
+            mHaveDebugSettings = true;
         } else {
             mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_not_set));
             mWaitForDebugger.setEnabled(false);
@@ -411,7 +447,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateStrictModeVisualOptions() {
-        mStrictMode.setChecked(currentStrictModeActiveIndex() == 1);
+        updateCheckBox(mStrictMode, currentStrictModeActiveIndex() == 1);
     }
 
     private void writePointerLocationOptions() {
@@ -420,7 +456,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updatePointerLocationOptions() {
-        mPointerLocation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+        updateCheckBox(mPointerLocation, Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.POINTER_LOCATION, 0) != 0);
     }
 
@@ -430,7 +466,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateShowTouchesOptions() {
-        mShowTouches.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+        updateCheckBox(mShowTouches, Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_TOUCHES, 0) != 0);
     }
 
@@ -448,11 +484,11 @@ public class DevelopmentSettings extends PreferenceFragment
                 @SuppressWarnings("unused")
                 int enableGL = reply.readInt();
                 int showUpdates = reply.readInt();
-                mShowScreenUpdates.setChecked(showUpdates != 0);
+                updateCheckBox(mShowScreenUpdates, showUpdates != 0);
                 @SuppressWarnings("unused")
                 int showBackground = reply.readInt();
                 int disableOverlays = reply.readInt();
-                mDisableOverlays.setChecked(disableOverlays != 0);
+                updateCheckBox(mDisableOverlays, disableOverlays != 0);
                 reply.recycle();
                 data.recycle();
             }
@@ -495,7 +531,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateHardwareUiOptions() {
-        mForceHardwareUi.setChecked(SystemProperties.getBoolean(HARDWARE_UI_PROPERTY, false));
+        updateCheckBox(mForceHardwareUi, SystemProperties.getBoolean(HARDWARE_UI_PROPERTY, false));
     }
     
     private void writeHardwareUiOptions() {
@@ -503,7 +539,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateTrackFrameTimeOptions() {
-        mTrackFrameTime.setChecked(
+        updateCheckBox(mTrackFrameTime,
                 SystemProperties.getBoolean(HardwareRenderer.PROFILE_PROPERTY, false));
     }
 
@@ -513,7 +549,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateShowHwScreenUpdatesOptions() {
-        mShowHwScreenUpdates.setChecked(
+        updateCheckBox(mShowHwScreenUpdates,
                 SystemProperties.getBoolean(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false));
     }
 
@@ -523,7 +559,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateDebugLayoutOptions() {
-        mDebugLayout.setChecked(
+        updateCheckBox(mDebugLayout,
                 SystemProperties.getBoolean(View.DEBUG_LAYOUT_PROPERTY, false));
     }
 
@@ -533,7 +569,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateCpuUsageOptions() {
-        mShowCpuUsage.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+        updateCheckBox(mShowCpuUsage, Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_PROCESSES, 0) != 0);
     }
     
@@ -559,13 +595,16 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateImmediatelyDestroyActivitiesOptions() {
-        mImmediatelyDestroyActivities.setChecked(Settings.System.getInt(
+        updateCheckBox(mImmediatelyDestroyActivities, Settings.System.getInt(
             getActivity().getContentResolver(), Settings.System.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
     }
 
     private void updateAnimationScaleValue(int which, ListPreference pref) {
         try {
             float scale = mWindowManager.getAnimationScale(which);
+            if (scale != 1) {
+                mHaveDebugSettings = true;
+            }
             CharSequence[] values = pref.getEntryValues();
             for (int i=0; i<values.length; i++) {
                 float val = Float.parseFloat(values[i].toString());
@@ -603,6 +642,9 @@ public class DevelopmentSettings extends PreferenceFragment
             for (int i=0; i<values.length; i++) {
                 int val = Integer.parseInt(values[i].toString());
                 if (val >= limit) {
+                    if (i != 0) {
+                        mHaveDebugSettings = true;
+                    }
                     mAppProcessLimit.setValueIndex(i);
                     mAppProcessLimit.setSummary(mAppProcessLimit.getEntries()[i]);
                     return;
@@ -630,8 +672,49 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateShowAllANRsOptions() {
-        mShowAllANRs.setChecked(Settings.Secure.getInt(
+        updateCheckBox(mShowAllANRs, Settings.Secure.getInt(
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
+    }
+
+    private void updateEnableTracesOptions() {
+        String strValue = SystemProperties.get(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS);
+        long flags = SystemProperties.getLong(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS, 0);
+        String[] values = mEnableTracesPref.getEntryValues();
+        int numSet = 0;
+        for (int i=Trace.TRACE_FLAGS_START_BIT; i<values.length; i++) {
+            boolean set = (flags&(1<<i)) != 0;
+            mEnableTracesPref.setValue(i-Trace.TRACE_FLAGS_START_BIT, set);
+            if (set) {
+                numSet++;
+            }
+        }
+        if (numSet == 0) {
+            mEnableTracesPref.setSummary(R.string.enable_traces_summary_none);
+        } else if (numSet == values.length) {
+            mHaveDebugSettings = true;
+            mEnableTracesPref.setSummary(R.string.enable_traces_summary_all);
+        } else {
+            mHaveDebugSettings = true;
+            mEnableTracesPref.setSummary(getString(R.string.enable_traces_summary_num, numSet));
+        }
+    }
+
+    private void writeEnableTracesOptions() {
+        long value = 0;
+        String[] values = mEnableTracesPref.getEntryValues();
+        for (int i=Trace.TRACE_FLAGS_START_BIT; i<values.length; i++) {
+            if (mEnableTracesPref.getValue(i-Trace.TRACE_FLAGS_START_BIT)) {
+                value |= 1<<i;
+            }
+        }
+        writeEnableTracesOptions(value);
+        // Make sure summary is updated.
+        updateEnableTracesOptions();
+    }
+
+    private void writeEnableTracesOptions(long value) {
+        SystemProperties.set(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS,
+                "0x" + Long.toString(value, 16));
     }
 
     @Override
@@ -753,6 +836,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mAnimatorDurationScale) {
             writeAnimationScaleOption(2, mAnimatorDurationScale, newValue);
+            return true;
+        } else if (preference == mEnableTracesPref) {
+            writeEnableTracesOptions();
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
