@@ -41,19 +41,12 @@ import android.widget.Spinner;
 
 public class UserDictionaryAddWordActivity extends Activity
         implements AdapterView.OnItemSelectedListener {
-    public static final String EXTRA_MODE = "mode";
-    public static final String EXTRA_WORD = "word";
-    public static final String EXTRA_LOCALE = "locale";
     private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
 
     private static final String STATE_KEY_IS_OPEN = "isOpen";
-    private static final String STATE_KEY_WORD = "word";
-    private static final String STATE_KEY_LOCALE = "locale";
 
     public static final String MODE_EDIT_ACTION = "com.android.settings.USER_DICTIONARY_EDIT";
     public static final String MODE_INSERT_ACTION = "com.android.settings.USER_DICTIONARY_INSERT";
-    private static final int MODE_EDIT = 0;
-    private static final int MODE_INSERT = 1;
 
     private static final int[] IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE = {
         R.id.user_dictionary_add_word_label,
@@ -63,10 +56,8 @@ public class UserDictionaryAddWordActivity extends Activity
         R.id.user_dictionary_settings_add_dialog_locale,
     };
 
-    private EditText mEditText;
-    private int mMode; // Either MODE_EDIT or MODE_INSERT
+    private UserDictionaryAddWordContents mContents;
     private String mOldWord;
-    private String mLocale; // may not be null: will be converted to default locale if received null
 
     private boolean mIsShowingMoreOptions = false;
 
@@ -76,39 +67,32 @@ public class UserDictionaryAddWordActivity extends Activity
         setContentView(R.layout.user_dictionary_add_word);
         final Intent intent = getIntent();
         final String action = intent.getAction();
+        final int mode;
         if (MODE_EDIT_ACTION.equals(action)) {
-            mMode = MODE_EDIT;
+            mode = UserDictionaryAddWordContents.MODE_EDIT;
         } else if (MODE_INSERT_ACTION.equals(action)) {
-            mMode = MODE_INSERT;
+            mode = UserDictionaryAddWordContents.MODE_INSERT;
         } else {
             // Can never come here because we only support these two actions in the manifest
             throw new RuntimeException("Unsupported action: " + action);
         }
 
-        String savedWord = null;
-        String savedLocale = null;
+        // The following will get the EXTRA_WORD and EXTRA_LOCALE fields that are in the intent.
+        // We do need to add the action by hand, because UserDictionaryAddWordContents expects
+        // it to be in the bundle, in the EXTRA_MODE key.
+        final Bundle args = intent.getExtras();
+        args.putInt(UserDictionaryAddWordContents.EXTRA_MODE, mode);
+
         if (null != savedInstanceState) {
             mIsShowingMoreOptions =
                     savedInstanceState.getBoolean(STATE_KEY_IS_OPEN, mIsShowingMoreOptions);
-            savedWord = savedInstanceState.getString(STATE_KEY_WORD);
-            savedLocale = savedInstanceState.getString(STATE_KEY_LOCALE);
+            // Override options if we have a saved state.
+            args.putAll(savedInstanceState);
         }
 
-        mOldWord = intent.getStringExtra(EXTRA_WORD);
-        if (null != savedLocale) {
-            mLocale = savedLocale;
-        } else {
-            final String locale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
-            mLocale = null == locale ? Locale.getDefault().toString() : locale;
-        }
-        mEditText = (EditText)findViewById(R.id.user_dictionary_add_word_text);
-        if (null != savedWord) {
-            mEditText.setText(savedWord);
-            mEditText.setSelection(savedWord.length());
-        } else if (null != mOldWord) {
-            mEditText.setText(mOldWord);
-            mEditText.setSelection(mOldWord.length());
-        }
+        mOldWord = intent.getStringExtra(UserDictionaryAddWordContents.EXTRA_WORD);
+
+        mContents = new UserDictionaryAddWordContents(getWindow().getDecorView(), args);
 
         if (mIsShowingMoreOptions) {
             onClickMoreOptions(findViewById(R.id.user_dictionary_settings_add_dialog_more_options));
@@ -126,8 +110,9 @@ public class UserDictionaryAddWordActivity extends Activity
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         outState.putBoolean(STATE_KEY_IS_OPEN, mIsShowingMoreOptions);
-        outState.putString(STATE_KEY_WORD, mEditText.getText().toString());
-        outState.putString(STATE_KEY_LOCALE, mLocale);
+        outState.putString(
+                UserDictionaryAddWordContents.EXTRA_WORD, mContents.mEditText.getText().toString());
+        outState.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mContents.mLocale);
     }
 
     public void onClickCancel(final View v) {
@@ -135,10 +120,11 @@ public class UserDictionaryAddWordActivity extends Activity
     }
 
     public void onClickConfirm(final View v) {
-        if (MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
+        if (UserDictionaryAddWordContents.MODE_EDIT == mContents.mMode
+                && !TextUtils.isEmpty(mOldWord)) {
             UserDictionarySettings.deleteWord(mOldWord, this.getContentResolver());
         }
-        final String newWord = mEditText.getText().toString();
+        final String newWord = mContents.mEditText.getText().toString();
         if (TextUtils.isEmpty(newWord)) {
             // If the word is somehow empty, don't insert it.
             // TODO: grey out the Ok button when the text is empty?
@@ -149,7 +135,7 @@ public class UserDictionaryAddWordActivity extends Activity
         // TODO: Redefine the logic when we support shortcuts.
         UserDictionarySettings.deleteWord(newWord, this.getContentResolver());
 
-        if (TextUtils.isEmpty(mLocale)) {
+        if (TextUtils.isEmpty(mContents.mLocale)) {
             // Empty string means insert for all languages.
             UserDictionary.Words.addWord(this, newWord.toString(),
                     FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_ALL);
@@ -157,7 +143,7 @@ public class UserDictionaryAddWordActivity extends Activity
             // TODO: fix the framework so that it can accept a locale when we add a word
             // to the user dictionary instead of querying the system locale.
             final Locale prevLocale = Locale.getDefault();
-            Locale.setDefault(Utils.createLocaleFromString(mLocale));
+            Locale.setDefault(Utils.createLocaleFromString(mContents.mLocale));
             UserDictionary.Words.addWord(this, newWord.toString(),
                     FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
             Locale.setDefault(prevLocale);
@@ -207,7 +193,7 @@ public class UserDictionaryAddWordActivity extends Activity
 
         final Set<String> locales = UserDictionaryList.getUserDictionaryLocalesList(this);
         // Remove our locale if it's in, because we're always gonna put it at the top
-        locales.remove(mLocale); // mLocale may not be null
+        locales.remove(mContents.mLocale); // mLocale may not be null
         final String systemLocale = Locale.getDefault().toString();
         // The system locale should be inside. We want it at the 2nd spot.
         locales.remove(systemLocale); // system locale may not be null
@@ -215,8 +201,8 @@ public class UserDictionaryAddWordActivity extends Activity
         final ArrayList<LocaleRenderer> localesList = new ArrayList<LocaleRenderer>();
         // Add the passed locale, then the system locale at the top of the list. Add an
         // "all languages" entry at the bottom of the list.
-        addLocaleDisplayNameToList(this, localesList, mLocale);
-        if (!systemLocale.equals(mLocale)) {
+        addLocaleDisplayNameToList(this, localesList, mContents.mLocale);
+        if (!systemLocale.equals(mContents.mLocale)) {
             addLocaleDisplayNameToList(this, localesList, systemLocale);
         }
         for (final String l : locales) {
@@ -251,14 +237,13 @@ public class UserDictionaryAddWordActivity extends Activity
     public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
             final long id) {
         final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
-        mLocale = locale.getLocaleString();
+        mContents.updateLocale(locale.getLocaleString());
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // I'm not sure we can come here, but if we do, that's the right thing to do.
         final Intent intent = getIntent();
-        final String locale = intent.getStringExtra(EXTRA_LOCALE); // this may be null
-        mLocale = null == locale ? Locale.getDefault().toString() : locale;
+        mContents.updateLocale(intent.getStringExtra(UserDictionaryAddWordContents.EXTRA_LOCALE));
     }
 }
