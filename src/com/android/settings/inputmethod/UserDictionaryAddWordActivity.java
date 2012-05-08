@@ -21,7 +21,6 @@ import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import android.animation.LayoutTransition;
@@ -33,13 +32,9 @@ import android.provider.UserDictionary;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 
-public class UserDictionaryAddWordActivity extends Activity
-        implements AdapterView.OnItemSelectedListener {
+public class UserDictionaryAddWordActivity extends Activity {
 
     private static final String STATE_KEY_IS_OPEN = "isOpen";
 
@@ -129,15 +124,6 @@ public class UserDictionaryAddWordActivity extends Activity
         findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
                 .setVisibility(View.VISIBLE);
 
-        final ArrayList<LocaleRenderer> localesList = mContents.getLocalesList(this);
-
-        final Spinner localeSpinner =
-                (Spinner)findViewById(R.id.user_dictionary_settings_add_dialog_locale);
-        final ArrayAdapter<LocaleRenderer> adapter = new ArrayAdapter<LocaleRenderer>(this,
-                android.R.layout.simple_spinner_item, localesList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        localeSpinner.setAdapter(adapter);
-        localeSpinner.setOnItemSelectedListener(this);
         mIsShowingMoreOptions = true;
     }
 
@@ -151,19 +137,5 @@ public class UserDictionaryAddWordActivity extends Activity
         findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
                 .setVisibility(View.GONE);
         mIsShowingMoreOptions = false;
-    }
-
-    @Override
-    public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
-            final long id) {
-        final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
-        mContents.updateLocale(locale.getLocaleString());
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // I'm not sure we can come here, but if we do, that's the right thing to do.
-        final Intent intent = getIntent();
-        mContents.updateLocale(intent.getStringExtra(UserDictionaryAddWordContents.EXTRA_LOCALE));
     }
 }
