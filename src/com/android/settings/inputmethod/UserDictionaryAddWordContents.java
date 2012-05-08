@@ -47,10 +47,10 @@ public class UserDictionaryAddWordContents {
 
     private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
 
-    /* package */ final int mMode; // Either MODE_EDIT or MODE_INSERT
-    /* package */ final EditText mEditText;
-    /* package */ String mLocale;
-    /* package */ String mOldWord;
+    private final int mMode; // Either MODE_EDIT or MODE_INSERT
+    private final EditText mEditText;
+    private String mLocale;
+    private final String mOldWord;
 
     /* package */ UserDictionaryAddWordContents(final View view, final Bundle args) {
         mEditText = (EditText)view.findViewById(R.id.user_dictionary_add_word_text);
