@@ -321,7 +321,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 AccountSyncSettings.class.getName().equals(fragmentName) ||
                 UserDictionarySettings.class.getName().equals(fragmentName) ||
                 Memory.class.getName().equals(fragmentName) ||
-                ManageApplications.class.getName().equals(fragmentName)) {
+                ManageApplications.class.getName().equals(fragmentName) ||
+                WirelessSettings.class.getName().equals(fragmentName) ||
+                SoundSettings.class.getName().equals(fragmentName) ||
+                PrivacySettings.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 
