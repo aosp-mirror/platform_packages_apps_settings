@@ -19,11 +19,10 @@ package com.android.settings.inputmethod;
 import com.android.settings.R;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
+import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
@@ -120,36 +119,6 @@ public class UserDictionaryAddWordActivity extends Activity
         finish();
     }
 
-    private static class LocaleRenderer {
-        private final String mLocaleString;
-        private final String mDescription;
-        // LocaleString may NOT be null.
-        public LocaleRenderer(final Context context, final String localeString) {
-            mLocaleString = localeString;
-            if (null == localeString) {
-                mDescription = context.getString(R.string.user_dict_settings_more_languages);
-            } else if ("".equals(localeString)) {
-                mDescription = context.getString(R.string.user_dict_settings_all_languages);
-            } else {
-                mDescription = Utils.createLocaleFromString(localeString).getDisplayName();
-            }
-        }
-        @Override
-        public String toString() {
-            return mDescription;
-        }
-        public String getLocaleString() {
-            return mLocaleString;
-        }
-    }
-
-    private static void addLocaleDisplayNameToList(final Context context,
-            final List<LocaleRenderer> list, final String locale) {
-        if (null != locale) {
-            list.add(new LocaleRenderer(context, locale));
-        }
-    }
-
     public void onClickMoreOptions(final View v) {
         for (final int idToShow : IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE) {
             final View viewToShow = findViewById(idToShow);
@@ -160,26 +129,8 @@ public class UserDictionaryAddWordActivity extends Activity
         findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
                 .setVisibility(View.VISIBLE);
 
-        final Set<String> locales = UserDictionaryList.getUserDictionaryLocalesList(this);
-        // Remove our locale if it's in, because we're always gonna put it at the top
-        locales.remove(mContents.mLocale); // mLocale may not be null
-        final String systemLocale = Locale.getDefault().toString();
-        // The system locale should be inside. We want it at the 2nd spot.
-        locales.remove(systemLocale); // system locale may not be null
-        locales.remove(""); // Remove the empty string if it's there
-        final ArrayList<LocaleRenderer> localesList = new ArrayList<LocaleRenderer>();
-        // Add the passed locale, then the system locale at the top of the list. Add an
-        // "all languages" entry at the bottom of the list.
-        addLocaleDisplayNameToList(this, localesList, mContents.mLocale);
-        if (!systemLocale.equals(mContents.mLocale)) {
-            addLocaleDisplayNameToList(this, localesList, systemLocale);
-        }
-        for (final String l : locales) {
-            // TODO: sort in unicode order
-            addLocaleDisplayNameToList(this, localesList, l);
-        }
-        localesList.add(new LocaleRenderer(this, "")); // meaning: all languages
-        localesList.add(new LocaleRenderer(this, null)); // meaning: select another locale
+        final ArrayList<LocaleRenderer> localesList = mContents.getLocalesList(this);
+
         final Spinner localeSpinner =
                 (Spinner)findViewById(R.id.user_dictionary_settings_add_dialog_locale);
         final ArrayAdapter<LocaleRenderer> adapter = new ArrayAdapter<LocaleRenderer>(this,

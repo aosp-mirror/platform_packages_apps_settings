@@ -29,7 +29,6 @@ import android.preference.PreferenceGroup;
 import android.provider.UserDictionary;
 
 import java.util.Locale;
-import java.util.Set;
 import java.util.TreeSet;
 
 public class UserDictionaryList extends SettingsPreferenceFragment {
@@ -43,12 +42,12 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getActivity()));
     }
 
-    static Set<String> getUserDictionaryLocalesList(Activity activity) {
+    static TreeSet<String> getUserDictionaryLocalesSet(Activity activity) {
         @SuppressWarnings("deprecation")
         final Cursor cursor = activity.managedQuery(UserDictionary.Words.CONTENT_URI,
                 new String[] { UserDictionary.Words.LOCALE },
                 null, null, null);
-        final Set<String> localeList = new TreeSet<String>();
+        final TreeSet<String> localeList = new TreeSet<String>();
         if (null == cursor) {
             // The user dictionary service is not present or disabled. Return null.
             return null;
@@ -70,7 +69,8 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     protected void createUserDictSettings(PreferenceGroup userDictGroup) {
         final Activity activity = getActivity();
         userDictGroup.removeAll();
-        final Set<String> localeList = UserDictionaryList.getUserDictionaryLocalesList(activity);
+        final TreeSet<String> localeList =
+                UserDictionaryList.getUserDictionaryLocalesSet(activity);
 
         if (localeList.isEmpty()) {
             userDictGroup.addPreference(createUserDictionaryPreference(null, activity));

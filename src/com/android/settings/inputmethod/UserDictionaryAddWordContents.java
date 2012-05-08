@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,7 +29,9 @@ import com.android.settings.R;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.TreeSet;
 
 /**
  * A container class to factor common code to UserDictionaryAddWordFragment
@@ -86,5 +89,60 @@ public class UserDictionaryAddWordContents {
         UserDictionary.Words.addWord(context, newWord.toString(),
                 FREQUENCY_FOR_USER_DICTIONARY_ADDS, null /* shortcut */,
                 TextUtils.isEmpty(mLocale) ? null : Utils.createLocaleFromString(mLocale));
+    }
+
+    public static class LocaleRenderer {
+        private final String mLocaleString;
+        private final String mDescription;
+        // LocaleString may NOT be null.
+        public LocaleRenderer(final Context context, final String localeString) {
+            mLocaleString = localeString;
+            if (null == localeString) {
+                mDescription = context.getString(R.string.user_dict_settings_more_languages);
+            } else if ("".equals(localeString)) {
+                mDescription = context.getString(R.string.user_dict_settings_all_languages);
+            } else {
+                mDescription = Utils.createLocaleFromString(localeString).getDisplayName();
+            }
+        }
+        @Override
+        public String toString() {
+            return mDescription;
+        }
+        public String getLocaleString() {
+            return mLocaleString;
+        }
+    }
+
+    private static void addLocaleDisplayNameToList(final Context context,
+            final ArrayList<LocaleRenderer> list, final String locale) {
+        if (null != locale) {
+            list.add(new LocaleRenderer(context, locale));
+        }
+    }
+
+    // Helper method to get the list of locales to display for this word
+    public ArrayList<LocaleRenderer> getLocalesList(final Activity activity) {
+        final TreeSet<String> locales = UserDictionaryList.getUserDictionaryLocalesSet(activity);
+        // Remove our locale if it's in, because we're always gonna put it at the top
+        locales.remove(mLocale); // mLocale may not be null
+        final String systemLocale = Locale.getDefault().toString();
+        // The system locale should be inside. We want it at the 2nd spot.
+        locales.remove(systemLocale); // system locale may not be null
+        locales.remove(""); // Remove the empty string if it's there
+        final ArrayList<LocaleRenderer> localesList = new ArrayList<LocaleRenderer>();
+        // Add the passed locale, then the system locale at the top of the list. Add an
+        // "all languages" entry at the bottom of the list.
+        addLocaleDisplayNameToList(activity, localesList, mLocale);
+        if (!systemLocale.equals(mLocale)) {
+            addLocaleDisplayNameToList(activity, localesList, systemLocale);
+        }
+        for (final String l : locales) {
+            // TODO: sort in unicode order
+            addLocaleDisplayNameToList(activity, localesList, l);
+        }
+        localesList.add(new LocaleRenderer(activity, "")); // meaning: all languages
+        localesList.add(new LocaleRenderer(activity, null)); // meaning: select another locale
+        return localesList;
     }
 }
