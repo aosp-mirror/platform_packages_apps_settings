@@ -41,7 +41,6 @@ import android.widget.Spinner;
 
 public class UserDictionaryAddWordActivity extends Activity
         implements AdapterView.OnItemSelectedListener {
-    private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
 
     private static final String STATE_KEY_IS_OPEN = "isOpen";
 
@@ -57,7 +56,6 @@ public class UserDictionaryAddWordActivity extends Activity
     };
 
     private UserDictionaryAddWordContents mContents;
-    private String mOldWord;
 
     private boolean mIsShowingMoreOptions = false;
 
@@ -90,8 +88,6 @@ public class UserDictionaryAddWordActivity extends Activity
             args.putAll(savedInstanceState);
         }
 
-        mOldWord = intent.getStringExtra(UserDictionaryAddWordContents.EXTRA_WORD);
-
         mContents = new UserDictionaryAddWordContents(getWindow().getDecorView(), args);
 
         if (mIsShowingMoreOptions) {
@@ -120,34 +116,7 @@ public class UserDictionaryAddWordActivity extends Activity
     }
 
     public void onClickConfirm(final View v) {
-        if (UserDictionaryAddWordContents.MODE_EDIT == mContents.mMode
-                && !TextUtils.isEmpty(mOldWord)) {
-            UserDictionarySettings.deleteWord(mOldWord, this.getContentResolver());
-        }
-        final String newWord = mContents.mEditText.getText().toString();
-        if (TextUtils.isEmpty(newWord)) {
-            // If the word is somehow empty, don't insert it.
-            // TODO: grey out the Ok button when the text is empty?
-            finish();
-            return;
-        }
-        // Disallow duplicates.
-        // TODO: Redefine the logic when we support shortcuts.
-        UserDictionarySettings.deleteWord(newWord, this.getContentResolver());
-
-        if (TextUtils.isEmpty(mContents.mLocale)) {
-            // Empty string means insert for all languages.
-            UserDictionary.Words.addWord(this, newWord.toString(),
-                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_ALL);
-        } else {
-            // TODO: fix the framework so that it can accept a locale when we add a word
-            // to the user dictionary instead of querying the system locale.
-            final Locale prevLocale = Locale.getDefault();
-            Locale.setDefault(Utils.createLocaleFromString(mContents.mLocale));
-            UserDictionary.Words.addWord(this, newWord.toString(),
-                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
-            Locale.setDefault(prevLocale);
-        }
+        mContents.apply(this);
         finish();
     }
 
