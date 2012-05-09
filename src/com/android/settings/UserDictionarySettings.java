@@ -183,13 +183,17 @@ public class UserDictionarySettings extends ListFragment {
      * @param editingWord the word to edit, or null if it's an add.
      */
     private void showAddOrEditDialog(final String editingWord) {
-        final Intent intent = new Intent(null == editingWord
+        final Bundle args = new Bundle();
+        args.putString(UserDictionaryAddWordActivity.EXTRA_MODE, null == editingWord
                 ? UserDictionaryAddWordActivity.MODE_INSERT_ACTION
                 : UserDictionaryAddWordActivity.MODE_EDIT_ACTION);
-        // The following are fine if they are null
-        intent.putExtra(UserDictionaryAddWordActivity.EXTRA_WORD, editingWord);
-        intent.putExtra(UserDictionaryAddWordActivity.EXTRA_LOCALE, mLocale);
-        startActivity(intent);
+        args.putString(UserDictionaryAddWordActivity.EXTRA_WORD, editingWord);
+        args.putString(UserDictionaryAddWordActivity.EXTRA_LOCALE, mLocale);
+        android.preference.PreferenceActivity pa =
+                (android.preference.PreferenceActivity)getActivity();
+        pa.startPreferencePanel(
+                com.android.settings.inputmethod.UserDictionaryAddWordFragment.class.getName(),
+                args, R.string.details_title, null, null, 0);
     }
 
     private String getWord(int position) {
