@@ -75,9 +75,7 @@ public class UserDictionaryAddWordActivity extends Activity {
 
     @Override
     public void onSaveInstanceState(final Bundle outState) {
-        outState.putString(
-                UserDictionaryAddWordContents.EXTRA_WORD, mContents.mEditText.getText().toString());
-        outState.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mContents.mLocale);
+        mContents.saveStateIntoBundle(outState);
     }
 
     public void onClickCancel(final View v) {
