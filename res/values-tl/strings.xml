@@ -523,11 +523,14 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Ipakita ang mga advanced na pagpipilian"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Protektadong Setup ng Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Sinisimulan ang WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"Pindutin ang button na WPS sa iyong router ng Wi-Fi. Maaaring tumagal nang hanggang dalawang minuto upang makumpleto ang pag-setup."</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"Ilagay ang pin na <xliff:g id="NUMBER">%1$s</xliff:g> ng iyong Wi-Fi router. Maaaring tumagal nang hanggang dalawang minuto ang pag-setup upang matapos."</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (5857132470998175154) -->
+    <skip />
+    <!-- no translation found for wifi_wps_onstart_pin (8067502591043979939) -->
+    <skip />
     <string name="wifi_wps_complete" msgid="2388138550456729134">"Nagtagumpay ang WPS. Kumokonekta sa network…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Nakakonekta sa Wi-Fi na network na <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="2944576520214787628">"Umuusad na ang WPS at maaaring tumagal nang dalawang minuto upang makumpleto"</string>
+    <!-- no translation found for wifi_wps_in_progress (3372311348221357944) -->
+    <skip />
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"Nabigo ang WPS. Pakisubukang muli sa loob ng ilang minuto."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Hindi sinusuportahan ang setting ng seguridad ng wireless na router (WEP)"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Hindi sinusuportahan ang setting ng seguridad ng wireless na router (TKIP)"</string>
@@ -1119,6 +1122,8 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Magdagdag"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Idagdag sa diksyunaryo"</string>
+    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
+    <skip />
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Higit pang mga pagpipilian"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Mas kaunting pagpipilian"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
@@ -1167,8 +1172,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Magtakda ng mga pagpipilian para sa pagbuo ng app"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Debugging ng USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode kapag nakakonekta ang USB"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"ID ng device sa pagpapahusay"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Hindi available ang impormasyon ng device"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Manatiling gumagana"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Hindi kailanman hihinto ang screen kapag kinakargahan"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Payagan ang mga kunwaring lokasyon"</string>
@@ -1490,25 +1493,47 @@
     <string name="no_application" msgid="2813387563129153880">"Wala"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Maghintay ng debugger"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Hinihintay ng na-debug na application na ma-attach ang debugger bago magsagawa"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"User interface"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"Pinagana ang istriktong mode"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"I-flash screen pag gawa app ng haba takbo sa una thread"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Lokasyon ng pointer"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Overlay ng screen na pakita data pag-touch ngayon"</string>
     <string name="show_touches" msgid="1356420386500834339">"Ipakita ang mga pagpindot"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Ipakita ang visual na feedback para sa mga pagpindot"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"Ipakita update sa screen"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"I-flash lugar ng screen kapag nag-a-update iyon"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Pakita update GPU screen"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"I-flash lugar sa screen kapag nag-update sa GPU"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"Wag paganahin mga overlay"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"Huwag gumamit ng overlay sa pagsasama ng screen"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Ipakita mga layout bound"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Ipakita impo tungkol sa mga bound, padding, atbp."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Ipakita paggamit ng CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Overlay ng screen pakita paggamit ngayon ng CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Ipilit ang pag-render ng GPU"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"Gumamit ng 2D hardware acceleration sa mga application"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"Pag-render GPU ng Profile"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Sukat oras pag-render sa adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Scale ng animation window"</string>
@@ -1577,8 +1602,7 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"Piliin ang mga network kung saan nakametro ang paggamit ng data. Maaaring paghigpitan ang apps sa paggamit sa mga network na ito kapag nasa background. Maaari ring magbabala ang apps bago gamitin ang mga network na ito para sa malalaking download."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mga mobile network"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Mga Wi-Fi network"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"Para pumili ng mga may metrong network ng Wi-Fi, i-on ang Wi-FI."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Emergency na tawag"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Balikan ang tawag"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Pangalan"</string>

@@ -523,11 +523,11 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"نمایش گزینه‌های پیشرفته"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"نصب Wi-Fi حفاظت شده"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"راه‌اندازی WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"دکمه WPS را از روتر Wi-Fi فشار دهید. تکمیل نصب حداکثر دو دقیقه طول می‌کشد."</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"پین <xliff:g id="NUMBER">%1$s</xliff:g> را در مسیریاب Wi-Fi خود وارد کنید. تکمیل نصب ممکن است چند دقیقه طول بکشد."</string>
+    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"دکمه WPS را از روتر Wi-Fi فشار دهید. تکمیل نصب حداکثر دو دقیقه طول می‌کشد."</string>
+    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"پین <xliff:g id="NUMBER">%1$s</xliff:g> را در روتر Wi-Fi خود وارد کنید. تکمیل نصب ممکن است حداکثر دو دقیقه طول بکشد."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS انجام شد. درحال اتصال به شبکه…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"به شبکه Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g> متصل شد"</string>
-    <string name="wifi_wps_in_progress" msgid="2944576520214787628">"WPS در حال انجام کار است و تکمیل آن حداکثر دو دقیقه طول می‌کشد"</string>
+    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS در حال انجام عملیات است و ممکن است حداکثر دو دقیقه طول بکشد تا کاملاْ انجام شود."</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS انجام نشد. لطفاً چند دقیقه دیگر دوباره امتحان کنید."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"تنظیمات امنیتی روتر بیسیم (WEP) پشتیبانی نمی‌شود"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"تنظیمات امنیتی روتر بیسیم (TKIP) پشتیبانی نمی‌شود"</string>
@@ -1119,6 +1119,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"افزودن"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"افزودن به فرهنگ لغت"</string>
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"عبارت"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"گزینه‌های بیشتر"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"گزینه‌های کمتر"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"تأیید"</string>
@@ -1167,8 +1168,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"تنظیم گزینه‌های مربوط به طراحی برنامه"</string>
     <string name="enable_adb" msgid="7982306934419797485">"رفع عیب USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"با اتصال USB حالت رفع عیب فعال شود"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"شناسه برنامه‌نویسی دستگاه"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"اطلاعات دستگاه در دسترس نیست"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"بیدار ماندن"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"صفحه هرگز در حین شارژ شدن به حالت خواب نمی رود"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"مکان های کاذب مجاز هستند"</string>
@@ -1356,10 +1355,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"حذف تمام گواهی ها"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"اطلاعات کاربری قابل اطمینان"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"نمایش گواهی های CA قابل اطمینان"</string>
-    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
-    <skip />
-    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
-    <skip />
+    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"رسم الگوی بازگشایی"</string>
+    <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"باید الگوی بازگشایی را رسم کنید تا نصب مدارک صلاحیت تأیید شود."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"گذرواژه را برای حافظه اطلاعات کاربری تایپ کنید."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"رمز ورود فعلی:"</string>
@@ -1492,25 +1489,47 @@
     <string name="no_application" msgid="2813387563129153880">"هیچ چیز"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"انتظار برای اشکال‌زدا"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"برنامه اشکال‌زدایی شده منتظر پیوست شدن اشکال‌زدا قبل از اجرا است"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"رابط کاربری"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"حالت شدید فعال شد"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"چشمک زدن صفحه هنگام انجام عملیات طولانی توسط برنامه ها در رشته اصلی"</string>
     <string name="pointer_location" msgid="6084434787496938001">"محل اشاره گر"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"همپوشانی صفحه نمایش با نمایش داده لمسی فعلی"</string>
     <string name="show_touches" msgid="1356420386500834339">"نمایش تعداد لمسها"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"نمایش بازخورد دیداری برای لمسها"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"نمایش به روزرسانی های صفحه"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"چشمک زدن مناطقی از صفحه هنگامی که به روز می شوند"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"نمایش به‌روزرسانی‌های صفحه GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"نواحی Flash صفحه وقتی با GPU به‌روزرسانی می‌شوند"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"غیرفعال کردن همپوشانی‌ها"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"از همپوشانی‌ها برای ترکیب صفحه استفاده نشود"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"نمایش محدوده‌های طرح‌بندی"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"نمایش اطلاعات مربوط به محدوده‌ها، لایه و موارد دیگر"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"نمایش میزان استفاده از CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"همپوشانی صفحه نمایش میزان استفاده از CPU فعلی"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"اجبار به تفسیر و اجرای GPU"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"استفاده از شتاب‌دهنده سخت‌افزار 2D در برنامه‌ها"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"اجرای GPU نمایه"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"اندازه‌گیری زمان اجرا در adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>
@@ -1579,8 +1598,7 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"شبکه‌هایی را انتخاب کنید که استفاده داده در آنها اندازه‌گیری شده است. می‌توانید برنامه‌ها را محدود کنید تا زمانی که در پس‌زمینه فعال هستند، از این شبکه‌ها استفاده نکنند. همچنین قبل از استفاده از این شبکه‌ها برای دانلودهای بزرگ، برنامه‌ها به شما هشدار می‌دهند."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"شبکه‌های تلفن همراه"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"شبکه‌های Wi-Fi"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"برای انتخاب شبکه‌های Wi_Fi غیررایگان٬ Wi-Fi را روشن کنید."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"تماس اضطراری"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"بازگشت به تماس"</string>
     <string name="vpn_name" msgid="4689699885361002297">"نام"</string>

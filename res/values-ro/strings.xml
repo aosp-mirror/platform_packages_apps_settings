@@ -523,11 +523,14 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Afişaţi opţiunile avansate"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configurare protejată Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Se porneşte WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"Apăsaţi pe butonul WPS de pe routerul Wi-Fi. Configurarea poate dura până la două minute pentru a se finaliza."</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"Introduceţi codul PIN <xliff:g id="NUMBER">%1$s</xliff:g> pe routerul Wi-Fi. Finalizarea configurării poate dura până la două minute."</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (5857132470998175154) -->
+    <skip />
+    <!-- no translation found for wifi_wps_onstart_pin (8067502591043979939) -->
+    <skip />
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS finalizată. Se conectează la reţea…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Conectat la reţeaua Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="2944576520214787628">"Configurarea WPS este deja în desfăşurare şi poate dura până la două minute pentru a se finaliza"</string>
+    <!-- no translation found for wifi_wps_in_progress (3372311348221357944) -->
+    <skip />
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS eşuată. Încercaţi din nou peste câteva minute."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Setarea de securitate pentru routerul wireless (WEP) nu este acceptată"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Setarea de securitate pentru routerul wireless (TKIP) nu este acceptată"</string>
@@ -1120,6 +1123,8 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Adăugaţi"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Adăugaţi în dicţionar"</string>
+    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
+    <skip />
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Mai multe opţ."</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Mai puţine opţ."</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
@@ -1168,8 +1173,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Setaţi opţiuni pentru dezvoltarea aplicaţiei"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depanare USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Mod de depanare când este conectat USB"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"ID-ul dispozitivului de dezvoltare"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Nu sunt disponibile informaţii despre dispozitiv"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Activ permanent"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Ecranul nu va fi inactiv pe durata încărcării"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Permiteţi locaţiile fictive"</string>
@@ -1491,25 +1494,47 @@
     <string name="no_application" msgid="2813387563129153880">"Niciuna"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Aşteptaţi depanatorul"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Înaintea executării, aplicaţia aşteaptă ataşarea depanatorului"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"Interfaţa de utilizare"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"Modul Strict activat"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Ilum. intermit. la operaţii lungi pe firul princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Locaţia indicatorului"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Suprap. pe ecran indic. date curente pt. atingeri"</string>
     <string name="show_touches" msgid="1356420386500834339">"Afişaţi atingerile"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Afişaţi feedback vizual pentru atingeri"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"Afiş. actualiz. ecranului"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"Iluminare intermitentă a ecranului la actualizare"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Actualizări ecran cu GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Iluminează zonele ecranului la actualizarea cu GPU"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"Dezactivaţi suprapunerile"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"Nu utilizaţi suprapuneri pt. compunerea ecranului"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Afişaţi limite aspect"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Afişaţi informaţii despre limite, spaţiere etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Afişaţi utiliz. procesor."</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Suprap. pe ecran indic. util. curentă a procesor."</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forţaţi redarea cu GPU"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"Utilizaţi accelerarea hardware 2D în aplicaţii"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"Profil redare cu GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Măsurare timp redare în adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Scara anim. în fereastră"</string>
@@ -1578,8 +1603,7 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"Selectaţi reţelele pentru care utilizarea de date este contorizată. Utilizarea acestor reţele de către aplicaţii poate fi restricţionată când ele se află în fundal. De asemenea, aplicaţiile pot emite o avertizare înainte de a utiliza aceste reţele pentru descărcări mari."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Reţele mobile"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Reţele Wi-Fi"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"Pentru a selecta reţelele Wi-Fi contorizate, porniţi Wi-Fi."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Apel de urgenţă"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Reveniţi la apel"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nume"</string>

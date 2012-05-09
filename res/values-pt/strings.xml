@@ -523,11 +523,14 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Mostrar opções avançadas"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configuração protegida do Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Iniciando WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"Pressione o botão WPS em seu roteador Wi-Fi. A configuração pode levar até dois minutos para ser concluída."</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"Insira o pin <xliff:g id="NUMBER">%1$s</xliff:g> em seu roteador Wi-Fi. A configuração pode levar até dois minutos para ser concluída."</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (5857132470998175154) -->
+    <skip />
+    <!-- no translation found for wifi_wps_onstart_pin (8067502591043979939) -->
+    <skip />
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS realizada. Conectando-se à rede…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Conectado à rede Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="2944576520214787628">"A WPS já está em andamento e pode levar até dois minutos para ser concluída"</string>
+    <!-- no translation found for wifi_wps_in_progress (3372311348221357944) -->
+    <skip />
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"Falha na WPS. Tente novamente em alguns minutos."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"A configuração de segurança do roteador sem fio (WEP) não é suportada"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"A configuração de segurança do roteador sem fio (TKIP) não é suportada"</string>
@@ -1119,6 +1122,8 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Adicionar"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Adicionar ao dicionário"</string>
+    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
+    <skip />
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Mais opções"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Menos opções"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
@@ -1167,8 +1172,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Define as opções para o desenvolvimento do aplicativo"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depuração USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Modo de depuração quando o USB estiver conectado"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"ID do dispositivo de desenvolvimento"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Informações não disponíveis sobre o dispositivo"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Permanecer ativo"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"A tela nunca entrará em inatividade enquanto estiver carregando."</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
@@ -1490,25 +1493,47 @@
     <string name="no_application" msgid="2813387563129153880">"Nada"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Aguardar depurador"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Aplic. que sofreu dep. aguarda que depur. seja anex. antes da exec."</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"Interface do usuário"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"Modo estrito ativado"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Piscar tela se aplic. demorarem na sequência princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Localização do ponteiro"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Exibir dados de toque"</string>
     <string name="show_touches" msgid="1356420386500834339">"Mostrar toques"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostrar feedback visual para toques"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"Mostrar atualiz. de tela"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"Áreas Flash de tela quando eles atualizam"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Mostrar atualiz. tela GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Destacar áreas da tela quando atualizar com GPU"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"Desativar sobreposições"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"Não usar sobreposições para composição de tela"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar limites de layout"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Exibir informações de limites, preenchimento etc"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar o uso da CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Sobreposição de tela que mostra o uso da CPU atual"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forçar renderização GPU"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"Usar aceleração de hardware 2D nos aplicativos"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"Classific. render. GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Medir tempo render. em adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de anim. da janela"</string>
