@@ -49,7 +49,7 @@ import android.view.inputmethod.InputMethodManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener {
@@ -190,7 +190,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private void updateUserDictionaryPreference(Preference userDictionaryPreference) {
         final Activity activity = getActivity();
-        final Set<String> localeList = UserDictionaryList.getUserDictionaryLocalesList(activity);
+        final TreeSet<String> localeList = UserDictionaryList.getUserDictionaryLocalesSet(activity);
         if (null == localeList) {
             // The locale list is null if and only if the user dictionary service is
             // not present or disabled. In this case we need to remove the preference.
@@ -205,9 +205,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // If the size of localeList is 0, we don't set the locale parameter in the
             // extras. This will be interpreted by the UserDictionarySettings class as
             // meaning "the current locale".
-            // Note that with the current code for UserDictionaryList#getUserDictionaryLocalesList()
+            // Note that with the current code for UserDictionaryList#getUserDictionaryLocalesSet()
             // the locale list always has at least one element, since it always includes the current
-            // locale explicitly. @see UserDictionaryList.getUserDictionaryLocalesList().
+            // locale explicitly. @see UserDictionaryList.getUserDictionaryLocalesSet().
             if (localeList.size() == 1) {
                 final String locale = (String)localeList.toArray()[0];
                 userDictionaryPreference.getExtras().putString("locale", locale);
