@@ -133,12 +133,19 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     // this boolean extra specifies whether to disable the Next button when not connected
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+
+    // this boolean extra specifies whether to auto finish when connection is established
+    private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
+
     private static final String EXTRA_WIFI_SHOW_ACTION_BAR = "wifi_show_action_bar";
     private static final String EXTRA_WIFI_SHOW_MENUS = "wifi_show_menus";
     private static final String EXTRA_WIFI_DISABLE_BACK = "wifi_disable_back";
 
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
+
+    // should activity finish once we have a connection?
+    private boolean mAutoFinishOnConnection;
 
     // Save the dialog details
     private boolean mDlgEdit;
@@ -219,6 +226,24 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
+
+        // first if we're supposed to finish once we have a connection
+        mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
+
+        if (mAutoFinishOnConnection) {
+            // Hide the next button
+            if (hasNextButton()) {
+                getNextButton().setVisibility(View.GONE);
+            }
+
+            final ConnectivityManager connectivity = (ConnectivityManager)
+                    getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity != null
+                    && connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                activity.finish();
+                return;
+            }
+        }
 
         // if we're supposed to enable/disable the Next button based on our current connection
         // state, start it off in the right state
@@ -656,6 +681,10 @@ public class WifiSettings extends SettingsPreferenceFragment
             changeNextButtonState(info.isConnected());
             updateAccessPoints();
             updateConnectionState(info.getDetailedState());
+            if (mAutoFinishOnConnection && info.isConnected()) {
+                getActivity().finish();
+                return;
+            }
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
             updateConnectionState(null);
         }
