@@ -49,7 +49,9 @@
                 android:paddingTop="30dp"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
-                android:paddingBottom="1dp">
+                android:paddingBottom="1dp"
+                android:layout_marginLeft="@*android:dimen/preference_fragment_padding_side"
+                android:layout_marginRight="@*android:dimen/preference_fragment_padding_side">
             <TextView android:id="@+id/usedStorageText"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -91,6 +93,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@*android:dimen/preference_fragment_padding_side"
+            android:layout_marginRight="@*android:dimen/preference_fragment_padding_side"
             android:visibility="gone"
             android:gravity="center">
 

@@ -737,6 +737,9 @@ public class ManageApplications extends Fragment implements
         } else if (menuId == SHOW_BACKGROUND_PROCESSES) {
             mShowBackground = true;
             mRunningProcessesView.mAdapter.setShowBackground(true);
+        } else {
+            // Handle the home button
+            return false;
         }
         updateOptionsMenu();
         return true;
