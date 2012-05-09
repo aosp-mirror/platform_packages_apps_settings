@@ -200,6 +200,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                     new Intent(UserDictionaryList.USER_DICTIONARY_SETTINGS_INTENT_ACTION);
             userDictionaryPreference.setTitle(R.string.user_dict_single_settings_title);
             userDictionaryPreference.setIntent(intent);
+            userDictionaryPreference.setFragment(
+                    com.android.settings.UserDictionarySettings.class.getName());
             // If the size of localeList is 0, we don't set the locale parameter in the
             // extras. This will be interpreted by the UserDictionarySettings class as
             // meaning "the current locale".
