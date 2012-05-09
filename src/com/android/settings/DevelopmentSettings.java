@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
@@ -103,6 +105,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private Switch mEnabledSwitch;
     private boolean mLastEnabledState;
     private boolean mHaveDebugSettings;
+    private boolean mDontPokeProperties;
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
@@ -327,6 +330,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void resetDangerousOptions() {
+        mDontPokeProperties = true;
         for (int i=0; i<mResetCbPrefs.size(); i++) {
             CheckBoxPreference cb = mResetCbPrefs.get(i);
             if (cb.isChecked()) {
@@ -342,6 +346,8 @@ public class DevelopmentSettings extends PreferenceFragment
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
         updateAllOptions();
+        mDontPokeProperties = false;
+        pokeSystemProperties();
     }
 
     private void updateHdcpValues() {
@@ -526,6 +532,7 @@ public class DevelopmentSettings extends PreferenceFragment
     
     private void writeHardwareUiOptions() {
         SystemProperties.set(HARDWARE_UI_PROPERTY, mForceHardwareUi.isChecked() ? "true" : "false");
+        pokeSystemProperties();
     }
 
     private void updateTrackFrameTimeOptions() {
@@ -536,6 +543,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void writeTrackFrameTimeOptions() {
         SystemProperties.set(HardwareRenderer.PROFILE_PROPERTY,
                 mTrackFrameTime.isChecked() ? "true" : "false");
+        pokeSystemProperties();
     }
 
     private void updateShowHwScreenUpdatesOptions() {
@@ -546,6 +554,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void writeShowHwScreenUpdatesOptions() {
         SystemProperties.set(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
                 mShowHwScreenUpdates.isChecked() ? "true" : "false");
+        pokeSystemProperties();
     }
 
     private void updateDebugLayoutOptions() {
@@ -556,6 +565,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void writeDebugLayoutOptions() {
         SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY,
                 mDebugLayout.isChecked() ? "true" : "false");
+        pokeSystemProperties();
     }
 
     private void updateCpuUsageOptions() {
@@ -705,6 +715,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void writeEnableTracesOptions(long value) {
         SystemProperties.set(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS,
                 "0x" + Long.toString(value, 16));
+        pokeSystemProperties();
     }
 
     @Override
@@ -817,6 +828,7 @@ public class DevelopmentSettings extends PreferenceFragment
         if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
             SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
             updateHdcpValues();
+            pokeSystemProperties();
             return true;
         } else if (preference == mWindowAnimationScale) {
             writeAnimationScaleOption(0, mWindowAnimationScale, newValue);
@@ -891,5 +903,35 @@ public class DevelopmentSettings extends PreferenceFragment
     public void onDestroy() {
         dismissDialogs();
         super.onDestroy();
+    }
+
+    void pokeSystemProperties() {
+        if (!mDontPokeProperties) {
+            (new SystemPropPoker()).execute();
+        }
+    }
+
+    static class SystemPropPoker extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            String[] services;
+            try {
+                services = ServiceManager.listServices();
+            } catch (RemoteException e) {
+                return null;
+            }
+            for (String service : services) {
+                IBinder obj = ServiceManager.checkService(service);
+                if (obj != null) {
+                    Parcel data = Parcel.obtain();
+                    try {
+                        obj.transact(IBinder.SYSPROPS_TRANSACTION, data, null, 0);
+                    } catch (RemoteException e) {
+                    }
+                    data.recycle();
+                }
+            }
+            return null;
+        }
     }
 }
