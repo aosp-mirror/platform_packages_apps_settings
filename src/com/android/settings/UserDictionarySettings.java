@@ -28,6 +28,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,11 +54,11 @@ public class UserDictionarySettings extends ListFragment {
     private static final String TAG = "UserDictionarySettings";
 
     private static final String[] QUERY_PROJECTION = {
-        UserDictionary.Words._ID, UserDictionary.Words.WORD
+        UserDictionary.Words._ID, UserDictionary.Words.WORD, UserDictionary.Words.SHORTCUT
     };
 
-    private static final int INDEX_ID = 0;
-    private static final int INDEX_WORD = 1;
+    // The index of the shortcut in the above array.
+    private static final int INDEX_SHORTCUT = 2;
 
     // Either the locale is empty (means the word is applicable to all locales)
     // or the word equals our current locale
@@ -148,8 +149,8 @@ public class UserDictionarySettings extends ListFragment {
     private ListAdapter createAdapter() {
         return new MyAdapter(getActivity(),
                 R.layout.user_dictionary_item, mCursor,
-                new String[] { UserDictionary.Words.WORD, UserDictionary.Words._ID },
-                new int[] { android.R.id.text1, R.id.delete_button }, this);
+                new String[] { UserDictionary.Words.WORD, UserDictionary.Words.SHORTCUT },
+                new int[] { android.R.id.text1, android.R.id.text2 }, this);
     }
 
     @Override
@@ -211,18 +212,22 @@ public class UserDictionarySettings extends ListFragment {
                 UserDictionary.Words.CONTENT_URI, DELETE_SELECTION, new String[] { word });
     }
 
-    private static class MyAdapter extends SimpleCursorAdapter implements SectionIndexer,
-            View.OnClickListener {
+    private static class MyAdapter extends SimpleCursorAdapter implements SectionIndexer {
 
         private AlphabetIndexer mIndexer;
-        private UserDictionarySettings mSettings;
 
         private ViewBinder mViewBinder = new ViewBinder() {
 
             public boolean setViewValue(View v, Cursor c, int columnIndex) {
-                if (v instanceof ImageView && columnIndex == INDEX_ID) {
-                    v.setOnClickListener(MyAdapter.this);
-                    v.setTag(c.getString(INDEX_WORD));
+                if (columnIndex == INDEX_SHORTCUT) {
+                    final String shortcut = c.getString(INDEX_SHORTCUT);
+                    if (TextUtils.isEmpty(shortcut)) {
+                        v.setVisibility(View.GONE);
+                    } else {
+                        ((TextView)v).setText(shortcut);
+                        v.setVisibility(View.VISIBLE);
+                    }
+                    v.invalidate();
                     return true;
                 }
 
@@ -234,7 +239,6 @@ public class UserDictionarySettings extends ListFragment {
                 UserDictionarySettings settings) {
             super(context, layout, c, from, to);
 
-            mSettings = settings;
             if (null != c) {
                 final String alphabet = context.getString(
                         com.android.internal.R.string.fast_scroll_alphabet);
@@ -254,11 +258,6 @@ public class UserDictionarySettings extends ListFragment {
 
         public Object[] getSections() {
             return null == mIndexer ? null : mIndexer.getSections();
-        }
-
-        public void onClick(View v) {
-            UserDictionarySettings.deleteWord((String) v.getTag(),
-                    mSettings.getActivity().getContentResolver());
         }
     }
 }
