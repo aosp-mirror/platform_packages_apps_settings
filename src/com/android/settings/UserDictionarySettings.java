@@ -155,9 +155,10 @@ public class UserDictionarySettings extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        String word = getWord(position);
+        final String word = getWord(position);
+        final String shortcut = getShortcut(position);
         if (word != null) {
-            showAddOrEditDialog(word);
+            showAddOrEditDialog(word, shortcut);
         }
     }
 
@@ -173,7 +174,7 @@ public class UserDictionarySettings extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == OPTIONS_MENU_ADD) {
-            showAddOrEditDialog(null);
+            showAddOrEditDialog(null, null);
             return true;
         }
         return false;
@@ -182,13 +183,15 @@ public class UserDictionarySettings extends ListFragment {
     /**
      * Add or edit a word. If editingWord is null, it's an add; otherwise, it's an edit.
      * @param editingWord the word to edit, or null if it's an add.
+     * @param editingShortcut the shortcut for this entry, or null if none.
      */
-    private void showAddOrEditDialog(final String editingWord) {
+    private void showAddOrEditDialog(final String editingWord, final String editingShortcut) {
         final Bundle args = new Bundle();
         args.putInt(UserDictionaryAddWordContents.EXTRA_MODE, null == editingWord
                 ? UserDictionaryAddWordContents.MODE_INSERT
                 : UserDictionaryAddWordContents.MODE_EDIT);
         args.putString(UserDictionaryAddWordContents.EXTRA_WORD, editingWord);
+        args.putString(UserDictionaryAddWordContents.EXTRA_SHORTCUT, editingShortcut);
         args.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mLocale);
         android.preference.PreferenceActivity pa =
                 (android.preference.PreferenceActivity)getActivity();
@@ -197,7 +200,7 @@ public class UserDictionarySettings extends ListFragment {
                 args, R.string.details_title, null, null, 0);
     }
 
-    private String getWord(int position) {
+    private String getWord(final int position) {
         if (null == mCursor) return null;
         mCursor.moveToPosition(position);
         // Handle a possible race-condition
@@ -205,6 +208,16 @@ public class UserDictionarySettings extends ListFragment {
 
         return mCursor.getString(
                 mCursor.getColumnIndexOrThrow(UserDictionary.Words.WORD));
+    }
+
+    private String getShortcut(final int position) {
+        if (null == mCursor) return null;
+        mCursor.moveToPosition(position);
+        // Handle a possible race-condition
+        if (mCursor.isAfterLast()) return null;
+
+        return mCursor.getString(
+                mCursor.getColumnIndexOrThrow(UserDictionary.Words.SHORTCUT));
     }
 
     public static void deleteWord(final String word, final ContentResolver resolver) {

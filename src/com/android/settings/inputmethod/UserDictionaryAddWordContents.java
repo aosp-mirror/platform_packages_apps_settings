@@ -40,6 +40,7 @@ import java.util.TreeSet;
 public class UserDictionaryAddWordContents {
     public static final String EXTRA_MODE = "mode";
     public static final String EXTRA_WORD = "word";
+    public static final String EXTRA_SHORTCUT = "shortcut";
     public static final String EXTRA_LOCALE = "locale";
 
     public static final int MODE_EDIT = 0;
@@ -48,19 +49,27 @@ public class UserDictionaryAddWordContents {
     private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
 
     private final int mMode; // Either MODE_EDIT or MODE_INSERT
-    private final EditText mEditText;
+    private final EditText mWordEditText;
+    private final EditText mShortcutEditText;
     private String mLocale;
     private final String mOldWord;
+    private final String mOldShortcut;
 
     /* package */ UserDictionaryAddWordContents(final View view, final Bundle args) {
-        mEditText = (EditText)view.findViewById(R.id.user_dictionary_add_word_text);
+        mWordEditText = (EditText)view.findViewById(R.id.user_dictionary_add_word_text);
+        mShortcutEditText = (EditText)view.findViewById(R.id.user_dictionary_add_shortcut);
         final String word = args.getString(EXTRA_WORD);
         if (null != word) {
-            mEditText.setText(word);
-            mEditText.setSelection(word.length());
+            mWordEditText.setText(word);
+            mWordEditText.setSelection(word.length());
+        }
+        final String shortcut = args.getString(EXTRA_SHORTCUT);
+        if (null != shortcut && null != mShortcutEditText) {
+            mShortcutEditText.setText(shortcut);
         }
         mMode = args.getInt(EXTRA_MODE); // default return value for #getInt() is 0 = MODE_EDIT
         mOldWord = args.getString(EXTRA_WORD);
+        mOldShortcut = args.getString(EXTRA_SHORTCUT);
         updateLocale(args.getString(EXTRA_LOCALE));
     }
 
@@ -71,7 +80,10 @@ public class UserDictionaryAddWordContents {
     }
 
     /* package */ void saveStateIntoBundle(final Bundle outState) {
-        outState.putString(EXTRA_WORD, mEditText.getText().toString());
+        outState.putString(EXTRA_WORD, mWordEditText.getText().toString());
+        if (null != mShortcutEditText) {
+            outState.putString(EXTRA_SHORTCUT, mShortcutEditText.getText().toString());
+        }
         outState.putString(EXTRA_LOCALE, mLocale);
     }
 
@@ -80,7 +92,7 @@ public class UserDictionaryAddWordContents {
         if (UserDictionaryAddWordContents.MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
             UserDictionarySettings.deleteWord(mOldWord, resolver);
         }
-        final String newWord = mEditText.getText().toString();
+        final String newWord = mWordEditText.getText().toString();
         if (TextUtils.isEmpty(newWord)) {
             // If the word is somehow empty, don't insert it.
             return;
@@ -92,7 +104,8 @@ public class UserDictionaryAddWordContents {
         // In this class we use the empty string to represent 'all locales' and mLocale cannot
         // be null. However the addWord method takes null to mean 'all locales'.
         UserDictionary.Words.addWord(context, newWord.toString(),
-                FREQUENCY_FOR_USER_DICTIONARY_ADDS, null /* shortcut */,
+                FREQUENCY_FOR_USER_DICTIONARY_ADDS,
+                null == mShortcutEditText ? null : mShortcutEditText.getText().toString(),
                 TextUtils.isEmpty(mLocale) ? null : Utils.createLocaleFromString(mLocale));
     }
 
