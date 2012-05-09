@@ -70,6 +70,11 @@ public class UserDictionaryAddWordContents {
         mLocale = null == locale ? Locale.getDefault().toString() : locale;
     }
 
+    /* package */ void saveStateIntoBundle(final Bundle outState) {
+        outState.putString(EXTRA_WORD, mEditText.getText().toString());
+        outState.putString(EXTRA_LOCALE, mLocale);
+    }
+
     /* package */ void apply(final Context context) {
         final ContentResolver resolver = context.getContentResolver();
         if (UserDictionaryAddWordContents.MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
