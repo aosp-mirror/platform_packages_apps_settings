@@ -67,7 +67,11 @@ public class UserDictionarySettings extends ListFragment {
     private static final String QUERY_SELECTION_ALL_LOCALES =
             UserDictionary.Words.LOCALE + " is null";
 
-    private static final String DELETE_SELECTION = UserDictionary.Words.WORD + "=?";
+    private static final String DELETE_SELECTION_WITH_SHORTCUT = UserDictionary.Words.WORD
+            + "=? AND " + UserDictionary.Words.SHORTCUT + "=?";
+    private static final String DELETE_SELECTION_WITHOUT_SHORTCUT = UserDictionary.Words.WORD
+            + "=? AND " + UserDictionary.Words.SHORTCUT + " is null OR "
+            + UserDictionary.Words.SHORTCUT + "=''";
 
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
 
@@ -220,9 +224,17 @@ public class UserDictionarySettings extends ListFragment {
                 mCursor.getColumnIndexOrThrow(UserDictionary.Words.SHORTCUT));
     }
 
-    public static void deleteWord(final String word, final ContentResolver resolver) {
-        resolver.delete(
-                UserDictionary.Words.CONTENT_URI, DELETE_SELECTION, new String[] { word });
+    public static void deleteWord(final String word, final String shortcut,
+            final ContentResolver resolver) {
+        if (TextUtils.isEmpty(shortcut)) {
+            resolver.delete(
+                    UserDictionary.Words.CONTENT_URI, DELETE_SELECTION_WITHOUT_SHORTCUT,
+                    new String[] { word });
+        } else {
+            resolver.delete(
+                    UserDictionary.Words.CONTENT_URI, DELETE_SELECTION_WITH_SHORTCUT,
+                    new String[] { word, shortcut });
+        }
     }
 
     private static class MyAdapter extends SimpleCursorAdapter implements SectionIndexer {
