@@ -16,14 +16,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/development_settings_title">
-
-    <Preference
-        android:key="verifier_device_identifier"
-        style="?android:attr/preferenceInformationStyle"
-        android:title="@string/verifier_device_identifier"
-        android:summary="@string/verifier_device_identifier_not_available"
-        android:persistent="false" />
-
     <PreferenceScreen
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
