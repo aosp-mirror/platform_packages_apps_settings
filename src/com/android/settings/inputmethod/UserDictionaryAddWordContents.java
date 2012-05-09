@@ -90,22 +90,38 @@ public class UserDictionaryAddWordContents {
     /* package */ void apply(final Context context) {
         final ContentResolver resolver = context.getContentResolver();
         if (UserDictionaryAddWordContents.MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
-            UserDictionarySettings.deleteWord(mOldWord, resolver);
+            // Mode edit: remove the old entry.
+            UserDictionarySettings.deleteWord(mOldWord, mOldShortcut, resolver);
         }
         final String newWord = mWordEditText.getText().toString();
+        final String newShortcut;
+        if (null == mShortcutEditText) {
+            newShortcut = null;
+        } else {
+            final String tmpShortcut = mShortcutEditText.getText().toString();
+            if (TextUtils.isEmpty(tmpShortcut)) {
+                newShortcut = null;
+            } else {
+                newShortcut = tmpShortcut;
+            }
+        }
         if (TextUtils.isEmpty(newWord)) {
             // If the word is somehow empty, don't insert it.
             return;
         }
-        // Disallow duplicates.
-        // TODO: Redefine the logic when we support shortcuts.
-        UserDictionarySettings.deleteWord(newWord, resolver);
+        // Disallow duplicates. If the same word with no shortcut is defined, remove it; if
+        // the same word with the same shortcut is defined, remove it; but we don't mind if
+        // there is the same word with a different, non-empty shortcut.
+        UserDictionarySettings.deleteWord(newWord, null, resolver);
+        if (!TextUtils.isEmpty(newShortcut)) {
+            // If newShortcut is empty we just deleted this, no need to do it again
+            UserDictionarySettings.deleteWord(newWord, newShortcut, resolver);
+        }
 
         // In this class we use the empty string to represent 'all locales' and mLocale cannot
         // be null. However the addWord method takes null to mean 'all locales'.
         UserDictionary.Words.addWord(context, newWord.toString(),
-                FREQUENCY_FOR_USER_DICTIONARY_ADDS,
-                null == mShortcutEditText ? null : mShortcutEditText.getText().toString(),
+                FREQUENCY_FOR_USER_DICTIONARY_ADDS, newShortcut,
                 TextUtils.isEmpty(mLocale) ? null : Utils.createLocaleFromString(mLocale));
     }
 
