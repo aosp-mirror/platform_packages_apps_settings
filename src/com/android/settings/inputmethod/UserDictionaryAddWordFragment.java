@@ -68,6 +68,7 @@ public class UserDictionaryAddWordFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        mContents.apply(getActivity());
         // We are being hidden: commit changes to the user dictionary
     }
 }
