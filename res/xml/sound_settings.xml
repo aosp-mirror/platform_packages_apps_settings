@@ -58,6 +58,11 @@
             android:persistent="false"
             android:ringtoneType="notification" />
 
+    <CheckBoxPreference
+         android:key="vibrate_when_ringing"
+         android:title="@string/vibrate_when_ringing_title"
+         android:persistent="false" />
+
     <PreferenceCategory
             android:title="@string/sound_category_feedback_title"/>
 
