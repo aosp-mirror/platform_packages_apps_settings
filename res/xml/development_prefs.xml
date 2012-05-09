@@ -62,18 +62,8 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:key="debug_ui_category"
-            android:title="@string/debug_ui_category">
-
-        <CheckBoxPreference
-            android:key="strict_mode"
-            android:title="@string/strict_mode"
-            android:summary="@string/strict_mode_summary"/>
-
-        <CheckBoxPreference
-            android:key="pointer_location"
-            android:title="@string/pointer_location"
-            android:summary="@string/pointer_location_summary"/>
+    <PreferenceCategory android:key="debug_input_category"
+            android:title="@string/debug_input_category">
 
         <CheckBoxPreference
             android:key="show_touches"
@@ -81,29 +71,19 @@
             android:summary="@string/show_touches_summary"/>
 
         <CheckBoxPreference
+            android:key="pointer_location"
+            android:title="@string/pointer_location"
+            android:summary="@string/pointer_location_summary"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="debug_drawing_category"
+            android:title="@string/debug_drawing_category">
+
+        <CheckBoxPreference
             android:key="debug_layout"
             android:title="@string/debug_layout"
             android:summary="@string/debug_layout_summary"/>
-
-        <CheckBoxPreference
-            android:key="show_screen_updates"
-            android:title="@string/show_screen_updates"
-            android:summary="@string/show_screen_updates_summary"/>
-
-        <CheckBoxPreference
-            android:key="disable_overlays"
-            android:title="@string/disable_overlays"
-            android:summary="@string/disable_overlays_summary"/>
-
-        <CheckBoxPreference
-            android:key="show_cpu_usage"
-            android:title="@string/show_cpu_usage"
-            android:summary="@string/show_cpu_usage_summary"/>
-
-        <CheckBoxPreference
-            android:key="force_hw_ui"
-            android:title="@string/force_hw_ui"
-            android:summary="@string/force_hw_ui_summary"/>
 
         <CheckBoxPreference
             android:key="show_hw_screen_udpates"
@@ -111,9 +91,9 @@
             android:summary="@string/show_hw_screen_updates_summary"/>
 
         <CheckBoxPreference
-            android:key="track_frame_time"
-            android:title="@string/track_frame_time"
-            android:summary="@string/track_frame_time_summary"/>
+            android:key="show_screen_updates"
+            android:title="@string/show_screen_updates"
+            android:summary="@string/show_screen_updates_summary"/>
 
         <ListPreference
             android:key="window_animation_scale"
@@ -135,6 +115,41 @@
             android:persistent="false"
             android:entries="@array/animator_duration_scale_entries"
             android:entryValues="@array/animator_duration_scale_values" />
+
+        <CheckBoxPreference
+            android:key="disable_overlays"
+            android:title="@string/disable_overlays"
+            android:summary="@string/disable_overlays_summary"/>
+
+        <CheckBoxPreference
+            android:key="force_hw_ui"
+            android:title="@string/force_hw_ui"
+            android:summary="@string/force_hw_ui_summary"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="debug_monitoring_category"
+            android:title="@string/debug_monitoring_category">
+
+        <CheckBoxPreference
+            android:key="strict_mode"
+            android:title="@string/strict_mode"
+            android:summary="@string/strict_mode_summary"/>
+
+        <CheckBoxPreference
+            android:key="show_cpu_usage"
+            android:title="@string/show_cpu_usage"
+            android:summary="@string/show_cpu_usage_summary"/>
+
+        <CheckBoxPreference
+            android:key="track_frame_time"
+            android:title="@string/track_frame_time"
+            android:summary="@string/track_frame_time_summary"/>
+
+        <MultiCheckPreference
+            android:key="enable_traces"
+            android:title="@string/enable_traces_title"
+            android:dialogTitle="@string/enable_traces_dialog_title" />
 
     </PreferenceCategory>
 
