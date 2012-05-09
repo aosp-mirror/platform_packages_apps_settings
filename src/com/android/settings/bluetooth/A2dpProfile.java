@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.os.ParcelUuid;
+import android.util.Log;
 
 import com.android.settings.R;
 
@@ -34,7 +35,11 @@ import java.util.List;
  * TODO: add null checks around calls to mService object.
  */
 final class A2dpProfile implements LocalBluetoothProfile {
+    private static final String TAG = "A2dpProfile";
+    private static boolean V = true;
+
     private BluetoothA2dp mService;
+    private boolean mIsProfileReady;
 
     static final ParcelUuid[] SINK_UUIDS = {
         BluetoothUuid.AudioSink,
@@ -52,16 +57,22 @@ final class A2dpProfile implements LocalBluetoothProfile {
             implements BluetoothProfile.ServiceListener {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            if (V) Log.d(TAG,"Bluetooth service disconnected");
             mService = (BluetoothA2dp) proxy;
             mProfileManager.setA2dpServiceUp(true);
+            mIsProfileReady=true;
         }
 
         public void onServiceDisconnected(int profile) {
-            mService = null;
+            if (V) Log.d(TAG,"Bluetooth service disconnected");
             mProfileManager.setA2dpServiceUp(false);
+            mIsProfileReady=false;
         }
     }
 
+    public boolean isProfileReady() {
+        return mIsProfileReady;
+    }
     A2dpProfile(Context context, LocalBluetoothProfileManager profileManager) {
 
         mProfileManager = profileManager;
@@ -144,10 +155,6 @@ final class A2dpProfile implements LocalBluetoothProfile {
         return false;
     }
 
-    public boolean isProfileReady() {
-        return mService != null;
-    }
-
     public String toString() {
         return NAME;
     }
@@ -176,5 +183,17 @@ final class A2dpProfile implements LocalBluetoothProfile {
 
     public int getDrawableResource(BluetoothClass btClass) {
         return R.drawable.ic_bt_headphones_a2dp;
+    }
+
+    protected void finalize() {
+        if (V) Log.d(TAG, "finalize()");
+        if (mService != null) {
+            try {
+                BluetoothAdapter.getDefaultAdapter().closeProfileProxy(BluetoothProfile.A2DP, mService);
+                mService = null;
+            }catch (Throwable t) {
+                Log.w(TAG, "Error cleaning up A2DP proxy", t);
+            }
+        }
     }
 }

@@ -16,11 +16,13 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothInputDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.settings.R;
 
@@ -30,8 +32,11 @@ import java.util.List;
  * HidProfile handles Bluetooth HID profile.
  */
 final class HidProfile implements LocalBluetoothProfile {
+    private static final String TAG = "HidProfile";
+    private static boolean V = true;
+
     private BluetoothInputDevice mService;
-    private boolean mProfileReady;
+    private boolean mIsProfileReady;
 
     static final String NAME = "HID";
 
@@ -43,14 +48,19 @@ final class HidProfile implements LocalBluetoothProfile {
             implements BluetoothProfile.ServiceListener {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothInputDevice) proxy;
-            mProfileReady = true;
+            mIsProfileReady=true;
         }
 
         public void onServiceDisconnected(int profile) {
-            mProfileReady = false;
-            mService = null;
+            if (V) Log.d(TAG,"Bluetooth service disconnected");
+            mIsProfileReady=false;
         }
+    }
+
+    public boolean isProfileReady() {
+        return mIsProfileReady;
     }
 
     HidProfile(Context context, LocalBluetoothAdapter adapter) {
@@ -100,10 +110,6 @@ final class HidProfile implements LocalBluetoothProfile {
         }
     }
 
-    public boolean isProfileReady() {
-        return mProfileReady;
-    }
-
     public String toString() {
         return NAME;
     }
@@ -147,6 +153,18 @@ final class HidProfile implements LocalBluetoothProfile {
                 return R.drawable.ic_bt_pointing_hid;
             default:
                 return R.drawable.ic_bt_misc_hid;
+        }
+    }
+
+    protected void finalize() {
+        if (V) Log.d(TAG, "finalize()");
+        if (mService != null) {
+            try {
+                BluetoothAdapter.getDefaultAdapter().closeProfileProxy(BluetoothProfile.INPUT_DEVICE, mService);
+                mService = null;
+            }catch (Throwable t) {
+                Log.w(TAG, "Error cleaning up HID proxy", t);
+            }
         }
     }
 }

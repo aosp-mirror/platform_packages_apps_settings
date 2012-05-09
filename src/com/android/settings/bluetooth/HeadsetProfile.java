@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
@@ -34,9 +35,10 @@ import java.util.List;
  */
 final class HeadsetProfile implements LocalBluetoothProfile {
     private static final String TAG = "HeadsetProfile";
+    private static boolean V = true;
 
     private BluetoothHeadset mService;
-    private boolean mProfileReady;
+    private boolean mIsProfileReady;
 
     private final LocalBluetoothAdapter mLocalAdapter;
     private final CachedBluetoothDeviceManager mDeviceManager;
@@ -57,8 +59,8 @@ final class HeadsetProfile implements LocalBluetoothProfile {
             implements BluetoothProfile.ServiceListener {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothHeadset) proxy;
-            mProfileReady = true;
             // We just bound to the service, so refresh the UI of the
             // headset device.
             List<BluetoothDevice> deviceList = mService.getConnectedDevices();
@@ -78,14 +80,19 @@ final class HeadsetProfile implements LocalBluetoothProfile {
 
             mProfileManager.callServiceConnectedListeners();
             mProfileManager.setHfServiceUp(true);
+            mIsProfileReady=true;
         }
 
         public void onServiceDisconnected(int profile) {
-            mProfileReady = false;
-            mService = null;
+            if (V) Log.d(TAG,"Bluetooth service disconnected");
             mProfileManager.callServiceDisconnectedListeners();
             mProfileManager.setHfServiceUp(false);
+            mIsProfileReady=false;
         }
+    }
+
+    public boolean isProfileReady() {
+        return mIsProfileReady;
     }
 
     // TODO(): The calls must get queued if mService becomes null.
@@ -174,10 +181,6 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         }
     }
 
-    public synchronized boolean isProfileReady() {
-        return mProfileReady;
-    }
-
     public String toString() {
         return NAME;
     }
@@ -206,5 +209,17 @@ final class HeadsetProfile implements LocalBluetoothProfile {
 
     public int getDrawableResource(BluetoothClass btClass) {
         return R.drawable.ic_bt_headset_hfp;
+    }
+
+    protected void finalize() {
+        if (V) Log.d(TAG, "finalize()");
+        if (mService != null) {
+            try {
+                BluetoothAdapter.getDefaultAdapter().closeProfileProxy(BluetoothProfile.HEADSET, mService);
+                mService = null;
+            }catch (Throwable t) {
+                Log.w(TAG, "Error cleaning up HID proxy", t);
+            }
+        }
     }
 }
