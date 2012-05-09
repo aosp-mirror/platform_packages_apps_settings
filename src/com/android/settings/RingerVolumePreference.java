@@ -117,7 +117,7 @@ public class RingerVolumePreference extends VolumePreference {
 
             if (mCheckBoxes[i] != null) {
                 if (streamType == AudioManager.STREAM_RING && muted
-                        && mAudioManager.shouldVibrate(AudioManager.VIBRATE_TYPE_RINGER)) {
+                        && !(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT)) {
                     mCheckBoxes[i].setImageResource(
                             com.android.internal.R.drawable.ic_audio_ring_notif_vibrate);
                 } else {
