@@ -36,6 +36,8 @@ public class UserDictionaryAddWordFragment extends Fragment {
 
     private static final int OPTIONS_MENU_DELETE = Menu.FIRST;
 
+    private UserDictionaryAddWordContents mContents;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -44,7 +46,9 @@ public class UserDictionaryAddWordFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        return inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
+        final View view = inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
+        mContents = new UserDictionaryAddWordContents(view, getArguments());
+        return view;
     }
 
     @Override

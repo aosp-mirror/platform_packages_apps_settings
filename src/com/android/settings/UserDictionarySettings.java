@@ -45,7 +45,7 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.android.settings.inputmethod.UserDictionaryAddWordActivity;
+import com.android.settings.inputmethod.UserDictionaryAddWordContents;
 
 import java.util.Locale;
 
@@ -184,11 +184,11 @@ public class UserDictionarySettings extends ListFragment {
      */
     private void showAddOrEditDialog(final String editingWord) {
         final Bundle args = new Bundle();
-        args.putString(UserDictionaryAddWordActivity.EXTRA_MODE, null == editingWord
-                ? UserDictionaryAddWordActivity.MODE_INSERT_ACTION
-                : UserDictionaryAddWordActivity.MODE_EDIT_ACTION);
-        args.putString(UserDictionaryAddWordActivity.EXTRA_WORD, editingWord);
-        args.putString(UserDictionaryAddWordActivity.EXTRA_LOCALE, mLocale);
+        args.putInt(UserDictionaryAddWordContents.EXTRA_MODE, null == editingWord
+                ? UserDictionaryAddWordContents.MODE_INSERT
+                : UserDictionaryAddWordContents.MODE_EDIT);
+        args.putString(UserDictionaryAddWordContents.EXTRA_WORD, editingWord);
+        args.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mLocale);
         android.preference.PreferenceActivity pa =
                 (android.preference.PreferenceActivity)getActivity();
         pa.startPreferencePanel(
