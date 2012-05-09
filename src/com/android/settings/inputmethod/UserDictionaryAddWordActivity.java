@@ -17,22 +17,11 @@
 package com.android.settings.inputmethod;
 
 import com.android.settings.R;
-import com.android.settings.UserDictionarySettings;
-import com.android.settings.Utils;
-import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
 
-import java.util.Locale;
-
-import android.animation.LayoutTransition;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.UserDictionary;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 
 public class UserDictionaryAddWordActivity extends Activity {
 
