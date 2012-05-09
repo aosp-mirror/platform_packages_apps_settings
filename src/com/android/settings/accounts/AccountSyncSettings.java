@@ -208,11 +208,13 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 new SyncStateCheckBoxPreference(getActivity(), account, authority);
         item.setPersistent(false);
         final ProviderInfo providerInfo = getPackageManager().resolveContentProvider(authority, 0);
-        CharSequence providerLabel = providerInfo != null
-                ? providerInfo.loadLabel(getPackageManager()) : null;
+        if (providerInfo == null) {
+            return;
+        }
+        CharSequence providerLabel = providerInfo.loadLabel(getPackageManager());
         if (TextUtils.isEmpty(providerLabel)) {
             Log.e(TAG, "Provider needs a label for authority '" + authority + "'");
-            providerLabel = authority;
+            return;
         }
         String title = getString(R.string.sync_item_title, providerLabel);
         item.setTitle(title);
