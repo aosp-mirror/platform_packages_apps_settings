@@ -73,11 +73,17 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                 Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
         notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
 
-        CheckBoxPreference watchdogEnabled =
+        boolean watchdogEnabled = Secure.getInt(getContentResolver(),
+                Secure.WIFI_WATCHDOG_ON, 1) != 0;
+        CheckBoxPreference watchdog =
             (CheckBoxPreference) findPreference(KEY_ENABLE_WIFI_WATCHDOG);
-        if (watchdogEnabled != null) {
-            watchdogEnabled.setChecked(Secure.getInt(getContentResolver(),
+        if (watchdog != null) {
+            if (watchdogEnabled) {
+                watchdog.setChecked(Secure.getInt(getContentResolver(),
                         Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
+            } else {
+                getPreferenceScreen().removePreference(watchdog);
+            }
         }
 
         ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
