@@ -41,17 +41,7 @@ public class UserDictionaryAddWordActivity extends Activity {
     public static final String MODE_EDIT_ACTION = "com.android.settings.USER_DICTIONARY_EDIT";
     public static final String MODE_INSERT_ACTION = "com.android.settings.USER_DICTIONARY_INSERT";
 
-    private static final int[] IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE = {
-        R.id.user_dictionary_add_word_label,
-        R.id.user_dictionary_add_shortcut_label,
-        R.id.user_dictionary_add_locale_label,
-        R.id.user_dictionary_settings_add_dialog_shortcut,
-        R.id.user_dictionary_settings_add_dialog_locale,
-    };
-
     private UserDictionaryAddWordContents mContents;
-
-    private boolean mIsShowingMoreOptions = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -76,30 +66,15 @@ public class UserDictionaryAddWordActivity extends Activity {
         args.putInt(UserDictionaryAddWordContents.EXTRA_MODE, mode);
 
         if (null != savedInstanceState) {
-            mIsShowingMoreOptions =
-                    savedInstanceState.getBoolean(STATE_KEY_IS_OPEN, mIsShowingMoreOptions);
             // Override options if we have a saved state.
             args.putAll(savedInstanceState);
         }
 
         mContents = new UserDictionaryAddWordContents(getWindow().getDecorView(), args);
-
-        if (mIsShowingMoreOptions) {
-            onClickMoreOptions(findViewById(R.id.user_dictionary_settings_add_dialog_more_options));
-        }
-
-        // TODO: The following code enables layout transition for eye-candy, but there is still
-        // a jankiness issue with the window moving on one frame, resizing suddenly on the next,
-        // and animation only starting afterwards on children.
-        final ViewGroup v = (ViewGroup)findViewById(R.id.user_dictionary_add_word_grid);
-        final LayoutTransition transition = new LayoutTransition();
-        transition.setStartDelay(LayoutTransition.APPEARING, 0);
-        v.setLayoutTransition(transition);
     }
 
     @Override
     public void onSaveInstanceState(final Bundle outState) {
-        outState.putBoolean(STATE_KEY_IS_OPEN, mIsShowingMoreOptions);
         outState.putString(
                 UserDictionaryAddWordContents.EXTRA_WORD, mContents.mEditText.getText().toString());
         outState.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mContents.mLocale);
@@ -112,30 +87,5 @@ public class UserDictionaryAddWordActivity extends Activity {
     public void onClickConfirm(final View v) {
         mContents.apply(this);
         finish();
-    }
-
-    public void onClickMoreOptions(final View v) {
-        for (final int idToShow : IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE) {
-            final View viewToShow = findViewById(idToShow);
-            viewToShow.setVisibility(View.VISIBLE);
-        }
-        findViewById(R.id.user_dictionary_settings_add_dialog_more_options)
-                .setVisibility(View.GONE);
-        findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
-                .setVisibility(View.VISIBLE);
-
-        mIsShowingMoreOptions = true;
-    }
-
-    public void onClickLessOptions(final View v) {
-        for (final int idToHide : IDS_SHOWN_ONLY_IN_MORE_OPTIONS_MODE) {
-            final View viewToHide = findViewById(idToHide);
-            viewToHide.setVisibility(View.GONE);
-        }
-        findViewById(R.id.user_dictionary_settings_add_dialog_more_options)
-                .setVisibility(View.VISIBLE);
-        findViewById(R.id.user_dictionary_settings_add_dialog_less_options)
-                .setVisibility(View.GONE);
-        mIsShowingMoreOptions = false;
     }
 }
