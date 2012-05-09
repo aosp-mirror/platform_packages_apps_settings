@@ -523,11 +523,14 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"顯示進階選項"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"WiFi 保護設定"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"正在啟動 WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"按下 WiFi 路由器上的 WPS 按鈕，最多需要兩分鐘可完成設定。"</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"請在 WiFi 路由器上輸入 PIN 碼：<xliff:g id="NUMBER">%1$s</xliff:g>。設定程序最多可能需要兩分鐘完成。"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (5857132470998175154) -->
+    <skip />
+    <!-- no translation found for wifi_wps_onstart_pin (8067502591043979939) -->
+    <skip />
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS 成功，正在連線至網路…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"已連線至 WiFi 網路 <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="2944576520214787628">"WPS 已開始執行，最多需要兩分鐘可完成"</string>
+    <!-- no translation found for wifi_wps_in_progress (3372311348221357944) -->
+    <skip />
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS 失敗，請稍候再試。"</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"不支援無線路由器安全性設定 (WEP)"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"不支援無線路由器安全性設定 (TKIP)"</string>
@@ -1119,6 +1122,8 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"新增"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"新增至字典"</string>
+    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
+    <skip />
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"更多選項"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"顯示較少選項"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"確定"</string>
@@ -1167,8 +1172,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"設定應用程式開發選項"</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB 偵錯"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"連接 USB 時進入偵錯模式"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"開發裝置 ID"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"無法取得裝置資訊"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"保持清醒"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"充電時螢幕不會進入休眠"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"允許模擬位置"</string>
@@ -1490,25 +1493,47 @@
     <string name="no_application" msgid="2813387563129153880">"無"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"等待偵錯程式"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"先等待偵錯程式附加至偵錯程序，再對要接受偵錯的應用程式開始執行"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"使用者介面"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"嚴格模式已啟用"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"當應用程式在主執行緒中進行長時間作業時，讓螢幕閃爍"</string>
     <string name="pointer_location" msgid="6084434787496938001">"指標位置"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"觸控時在螢幕上方顯示相關資料"</string>
     <string name="show_touches" msgid="1356420386500834339">"顯示觸控回應"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"顯示觸控位置的視覺回應"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"顯示螢幕更新"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"更新畫面區域時，讓畫面區域閃爍"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"顯示 GPU 畫面更新"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"GPU 更新時讓畫面區域閃爍"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"停用重疊功能"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"不要在合成畫面上使用重疊功能"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"顯示版面配置界限"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"顯示界限、間距等相關資訊。"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"顯示 CPU 使用量"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"在螢幕上方顯示目前的 CPU 使用量"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"強制使用 GPU 轉譯"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"在應用程式中使用 2D 硬體加速"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"剖析 GPU 轉譯"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"測量「adb shell dumpsys gfxinfo」指令中的轉譯時間"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"視窗動畫比例"</string>
@@ -1577,8 +1602,7 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"請選取按傳輸量計費網路。背景應用程式可能無法使用這些網路；如要透過這些網路下載大量資料，應用程式可能會先發出警告。"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"行動網路"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"WiFi 網路"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"如要選取按傳輸量計費的 WiFi 網路，請開啟 WiFi。"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"緊急電話"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"返回通話"</string>
     <string name="vpn_name" msgid="4689699885361002297">"名稱"</string>

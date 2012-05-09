@@ -523,11 +523,11 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"הצג אפשרויות מתקדמות"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"התקנה מוגנת של Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"מפעיל WPS..."</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"לחץ על לחצן ה-WPS בנתב ה-Wi-Fi שלך. ההתקנה יכולה להימשך עד שתי דקות."</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"הזן את מספר PIN <xliff:g id="NUMBER">%1$s</xliff:g> בנתב ה-Wi-Fi שלך. השלמת ההתקנה עשויה להימשך עד שתי דקות."</string>
+    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"לחץ על לחצן ה-WPS בנתב ה-Wi-Fi שלך. השלמת ההתקנה עשויה להימשך עד שתי דקות."</string>
+    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"הזן את מספר ה-PIN <xliff:g id="NUMBER">%1$s</xliff:g> בנתב ה-Wi-Fi שלך. השלמת ההתקנה עשויה להימשך עד שתי דקות."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS הצליח. מתחבר לרשת..."</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"מחובר לרשת Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="2944576520214787628">"WPS כבר מתבצע, והפעולה יכולה להימשך עד שתי דקות"</string>
+    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"התקנת WPS כבר מתבצעת, והשלמת הפעולה עשויה להימשך עד שתי דקות"</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS נכשל. נסה שוב בעוד מספר דקות."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"הגדרת האבטחה של הנתב האלחוטי (WEP) אינה נתמכת"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"הגדרת האבטחה של הנתב האלחוטי (TKIP) אינה נתמכת"</string>
@@ -1119,6 +1119,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"הוסף"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"הוסף למילון"</string>
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"ביטוי"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"יותר אפשרויות"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"פחות אפשרויות"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"אישור"</string>
@@ -1167,8 +1168,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"הגדרת אפשרויות לפיתוח יישומים"</string>
     <string name="enable_adb" msgid="7982306934419797485">"ניקוי באגים ב-USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"מצב תיקון באגים כאשר USB מחובר"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"מזהה פיתוח של המכשיר"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"מידע על המכשיר אינו זמין."</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"השאר פועל"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"המסך לעולם לא יהיה במצב שינה במהלך טעינה"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"אפשר מיקומים מדומים"</string>
@@ -1490,25 +1489,47 @@
     <string name="no_application" msgid="2813387563129153880">"כלום"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"המתן למנקה באגים"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"יישום שנוקו בו הבאגים ממתין למנקה הבאגים לצירוף לפני ביצוע"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"ממשק משתמש"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"מצב קפדני מופעל"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"גרום למסך להבהב כאשר יישומים מבצעים פעולות ארוכות בשרשור הראשי"</string>
     <string name="pointer_location" msgid="6084434787496938001">"מיקום מצביע"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"שכבת על של המסך המציגה את נתוני המגע הנוכחיים"</string>
     <string name="show_touches" msgid="1356420386500834339">"הצג נגיעות"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"הצג משוב חזותי עבור נגיעות"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"הצג עדכוני מסך"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"גרום לאזורים במסך להבהב כאשר הם מתעדכנים"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"הצג עדכוני מסך של GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"האר אזורים במסך כשהם מתעדכנים עם ה-GPU"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"השבת שכבות על"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"אל תשתמש בשכבות על להרכבת מסך"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"הצג את גבולות הפריסה"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"הצג מידע על גבולות, מרווחים וכדומה"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"הצג את השימוש ב-CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"שכבת על של מסך שמציגה את השימוש הנוכחי ב-CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"אלץ עיבוד ב-GPU"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"השתמש בהאצת חומרה מסוג 2D ביישומים"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"עיבוד פרופיל ב-GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"מדוד את משך העיבוד ב-adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"קנה מידה להנפשה של חלון"</string>
@@ -1577,8 +1598,7 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"בחר את הרשתות שבהן נמדד השימוש בנתונים. ניתן להגביל את השימוש שעושים יישומים ברשתות אלה כשהם פועלים ברקע. קיימת גם אפשרות שיישומים יציגו אזהרה לפני שימוש באחת מרשתות אלה לביצוע הורדות בנפח גדול."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"רשתות לנייד"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"רשתות Wi-Fi"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"כדי לבחור רשתות Wi-Fi מנוהלות, הפעל את ה-Wi-Fi."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"שיחת חירום"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"חזור לשיחה"</string>
     <string name="vpn_name" msgid="4689699885361002297">"שם"</string>
