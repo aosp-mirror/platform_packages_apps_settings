@@ -407,7 +407,7 @@ public class Utils {
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
-            final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingBottom;
+            final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
             list.setPadding(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
         }
     }
