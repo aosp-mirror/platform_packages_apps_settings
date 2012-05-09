@@ -103,7 +103,10 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
-        mNsdEnabler = new NsdEnabler(activity, nsd);
+
+        // Remove NSD checkbox by default
+        getPreferenceScreen().removePreference(nsd);
+        //mNsdEnabler = new NsdEnabler(activity, nsd);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -178,7 +181,9 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
-        mNsdEnabler.resume();
+        if (mNsdEnabler != null) {
+            mNsdEnabler.resume();
+        }
     }
 
     @Override
@@ -189,7 +194,9 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
-        mNsdEnabler.pause();
+        if (mNsdEnabler != null) {
+            mNsdEnabler.pause();
+        }
     }
 
     @Override
