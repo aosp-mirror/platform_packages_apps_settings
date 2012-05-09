@@ -95,10 +95,6 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         return mIsProfileReady;
     }
 
-    // TODO(): The calls must get queued if mService becomes null.
-    // It can happen when the phone app crashes for some reason.
-    // All callers should have service listeners. Dock Service is the only
-    // one right now.
     HeadsetProfile(Context context, LocalBluetoothAdapter adapter,
             CachedBluetoothDeviceManager deviceManager,
             LocalBluetoothProfileManager profileManager) {
@@ -167,6 +163,14 @@ final class HeadsetProfile implements LocalBluetoothProfile {
             mService.setPriority(device, BluetoothProfile.PRIORITY_OFF);
         }
     }
+
+    public List<BluetoothDevice> getConnectedDevices() {
+        return mService.getDevicesMatchingConnectionStates(
+              new int[] {BluetoothProfile.STATE_CONNECTED,
+                         BluetoothProfile.STATE_CONNECTING,
+                         BluetoothProfile.STATE_DISCONNECTING});
+    }
+
 
 // This function is added as the AUTO CONNECT priority could not be set by using setPreferred(),
 // as setPreferred() takes only boolean input but getPreferred() supports interger output.

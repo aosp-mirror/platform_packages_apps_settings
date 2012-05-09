@@ -30,10 +30,6 @@ import com.android.settings.R;
 
 import java.util.List;
 
-/**
- * A2dpProfile handles Bluetooth A2DP.
- * TODO: add null checks around calls to mService object.
- */
 final class A2dpProfile implements LocalBluetoothProfile {
     private static final String TAG = "A2dpProfile";
     private static boolean V = true;
@@ -89,7 +85,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
         return true;
     }
 
-    private List<BluetoothDevice> getConnectedDevices() {
+    public List<BluetoothDevice> getConnectedDevices() {
         return mService.getDevicesMatchingConnectionStates(
               new int[] {BluetoothProfile.STATE_CONNECTED,
                          BluetoothProfile.STATE_CONNECTING,

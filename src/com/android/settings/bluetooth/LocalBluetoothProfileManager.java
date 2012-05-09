@@ -27,12 +27,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.ParcelUuid;
 import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.List;
 
 /**
  * LocalBluetoothProfileManager provides access to the LocalBluetoothProfile
@@ -40,6 +43,12 @@ import java.util.Set;
  */
 final class LocalBluetoothProfileManager {
     private static final String TAG = "LocalBluetoothProfileManager";
+    private static final int CONNECT_HF_OR_A2DP = 1;
+    // If either a2dp or hf is connected and if the other profile conneciton is not
+    // happening with the timeout , the other profile(a2dp or hf) will be inititate connection.
+    // Give reasonable timeout for the device to initiate the other profile connection.
+    private static final int CONNECT_HF_OR_A2DP_TIMEOUT = 6000;
+
 
     /** Singleton instance. */
     private static LocalBluetoothProfileManager sInstance;
@@ -80,6 +89,21 @@ final class LocalBluetoothProfileManager {
     private final PanProfile mPanProfile;
     private boolean isHfServiceUp;
     private boolean isA2dpServiceUp;
+    private boolean isHfA2dpConnectMessagePosted;
+    private final Handler hfA2dpConnectHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+        synchronized (this) {
+            if (isA2dpConnectRequired((BluetoothDevice)msg.obj)) {
+                mA2dpProfile.connect((BluetoothDevice)msg.obj);
+            } else if (isHfConnectRequired((BluetoothDevice)msg.obj)) {
+                mHeadsetProfile.connect((BluetoothDevice)msg.obj);
+            }
+            isHfA2dpConnectMessagePosted =false;
+        }
+    }
+};
 
     /**
      * Mapping from profile name, e.g. "HEADSET" to profile object.
@@ -224,6 +248,21 @@ final class LocalBluetoothProfileManager {
 
             cachedDevice.onProfileStateChanged(mProfile, newState);
             cachedDevice.refresh();
+
+            if ((mProfile instanceof HeadsetProfile)||(mProfile instanceof A2dpProfile)) {
+                if ((BluetoothProfile.STATE_CONNECTED == newState)&&
+                    (!isHfA2dpConnectMessagePosted)) {
+                    Message mes = hfA2dpConnectHandler.obtainMessage(CONNECT_HF_OR_A2DP);
+                    mes.obj = device;
+                    hfA2dpConnectHandler.sendMessageDelayed(mes,CONNECT_HF_OR_A2DP_TIMEOUT);
+                    Log.i(TAG,"Message posted for hf/a2dp connection");
+                    isHfA2dpConnectMessagePosted = true;
+                } else if (isHfA2dpConnectMessagePosted) {
+                    hfA2dpConnectHandler.removeMessages(CONNECT_HF_OR_A2DP);
+                    Log.i(TAG,"Message removed for hf/a2dp connection");
+                    isHfA2dpConnectMessagePosted =false;
+                }
+            }
         }
     }
 
@@ -390,4 +429,35 @@ final class LocalBluetoothProfileManager {
             removedProfiles.remove(mPanProfile);
         }
     }
+
+    private boolean isHfConnectRequired(BluetoothDevice device) {
+        List<BluetoothDevice> a2dpConnDevList= mA2dpProfile.getConnectedDevices();
+        List<BluetoothDevice> hfConnDevList= mHeadsetProfile.getConnectedDevices();
+
+        // If both hf and a2dp is connected hf connection is not required
+        // Hf connection is required only when a2dp is connected but
+        // hf connect did no happen untill CONNECT_HF_OR_A2DP_TIMEOUT
+        if (!a2dpConnDevList.isEmpty() && !hfConnDevList.isEmpty())
+            return false;
+        if (hfConnDevList.isEmpty() && mHeadsetProfile.isPreferred(device))
+            return true;
+
+        return false;
+    }
+
+    private boolean isA2dpConnectRequired(BluetoothDevice device) {
+        List<BluetoothDevice> a2dpConnDevList= mA2dpProfile.getConnectedDevices();
+        List<BluetoothDevice> hfConnDevList= mHeadsetProfile.getConnectedDevices();
+
+        // If both hf and a2dp is connected a2dp connection is not required
+        // A2dp connection is required only when hf is connected but
+        // a2dp connect did no happen until CONNECT_HF_OR_A2DP_TIMEOUT
+        if (!a2dpConnDevList.isEmpty() && !hfConnDevList.isEmpty())
+            return false;
+        if (a2dpConnDevList.isEmpty() && mA2dpProfile.isPreferred(device))
+            return true;
+
+        return false;
+    }
+
 }
