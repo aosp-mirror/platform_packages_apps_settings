@@ -87,9 +87,18 @@ public class UserDictionaryAddWordContents {
         outState.putString(EXTRA_LOCALE, mLocale);
     }
 
+    /* package */ void delete(final Context context) {
+        if (MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
+            // Mode edit: remove the old entry.
+            final ContentResolver resolver = context.getContentResolver();
+            UserDictionarySettings.deleteWord(mOldWord, mOldShortcut, resolver);
+        }
+        // If we are in add mode, nothing was added, so we don't need to do anything.
+    }
+
     /* package */ void apply(final Context context) {
         final ContentResolver resolver = context.getContentResolver();
-        if (UserDictionaryAddWordContents.MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
+        if (MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
             // Mode edit: remove the old entry.
             UserDictionarySettings.deleteWord(mOldWord, mOldShortcut, resolver);
         }
