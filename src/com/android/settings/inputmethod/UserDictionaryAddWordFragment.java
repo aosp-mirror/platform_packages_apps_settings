@@ -23,8 +23,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.android.settings.R;
+import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
+
+import java.util.ArrayList;
 
 /**
  * Fragment to add a word/shortcut to the user dictionary.
@@ -32,11 +38,13 @@ import com.android.settings.R;
  * As opposed to the UserDictionaryActivity, this is only invoked within Settings
  * from the UserDictionarySettings.
  */
-public class UserDictionaryAddWordFragment extends Fragment {
+public class UserDictionaryAddWordFragment extends Fragment
+        implements AdapterView.OnItemSelectedListener {
 
     private static final int OPTIONS_MENU_DELETE = Menu.FIRST;
 
     private UserDictionaryAddWordContents mContents;
+    private View mRootView;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -46,9 +54,8 @@ public class UserDictionaryAddWordFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        final View view = inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
-        mContents = new UserDictionaryAddWordContents(view, getArguments());
-        return view;
+        mRootView = inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
+        return mRootView;
     }
 
     @Override
@@ -63,6 +70,16 @@ public class UserDictionaryAddWordFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // We are being shown: display the word
+        mContents = new UserDictionaryAddWordContents(mRootView, getArguments());
+        final ArrayList<LocaleRenderer> localesList = mContents.getLocalesList(getActivity());
+
+        final Spinner localeSpinner =
+                (Spinner)mRootView.findViewById(R.id.user_dictionary_settings_add_dialog_locale);
+        final ArrayAdapter<LocaleRenderer> adapter = new ArrayAdapter<LocaleRenderer>(getActivity(),
+                android.R.layout.simple_spinner_item, localesList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        localeSpinner.setAdapter(adapter);
+        localeSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -70,5 +87,19 @@ public class UserDictionaryAddWordFragment extends Fragment {
         super.onPause();
         mContents.apply(getActivity());
         // We are being hidden: commit changes to the user dictionary
+    }
+
+    @Override
+    public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
+            final long id) {
+        final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
+        mContents.updateLocale(locale.getLocaleString());
+    }
+
+    @Override
+    public void onNothingSelected(final AdapterView<?> parent) {
+        // I'm not sure we can come here, but if we do, that's the right thing to do.
+        final Bundle args = getArguments();
+        mContents.updateLocale(args.getString(UserDictionaryAddWordContents.EXTRA_LOCALE));
     }
 }
