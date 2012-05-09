@@ -66,10 +66,10 @@ public class InputMethodPreference extends CheckBoxPreference
                 return;
             }
             if (isChecked()) {
-                setChecked(false);
+                setChecked(false, true /* save */);
             } else {
                 if (mAlwaysChecked) {
-                    setChecked(true);
+                    setChecked(true, true /* save */);
                 } else {
                     showSecurityWarnDialog(mImi, InputMethodPreference.this);
                 }
@@ -222,14 +222,25 @@ public class InputMethodPreference extends CheckBoxPreference
         setSummary(summary);
     }
 
-    @Override
-    public void setChecked(boolean checked) {
+    /**
+     * Sets the checkbox state and optionally saves the settings.
+     * @param checked whether to check the box
+     * @param save whether to save IME settings
+     */
+    public void setChecked(boolean checked, boolean save) {
         super.setChecked(checked);
-        saveImeSettings();
+        if (save) {
+            saveImeSettings();
+        }
         updateSummary();
     }
 
-    private void showSecurityWarnDialog(InputMethodInfo imi, final CheckBoxPreference chkPref) {
+    @Override
+    public void setChecked(boolean checked) {
+        setChecked(checked, false);
+    }
+
+    private void showSecurityWarnDialog(InputMethodInfo imi, final InputMethodPreference chkPref) {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
@@ -241,7 +252,7 @@ public class InputMethodPreference extends CheckBoxPreference
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        chkPref.setChecked(true);
+                        chkPref.setChecked(true, true);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel,
