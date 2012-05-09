@@ -35,11 +35,16 @@ import android.os.SystemProperties;
 import android.os.storage.IMountService;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -67,7 +72,8 @@ import java.util.List;
  *     -n com.android.settings/.CryptKeeper
  * </pre>
  */
-public class CryptKeeper extends Activity implements TextView.OnEditorActionListener {
+public class CryptKeeper extends Activity implements TextView.OnEditorActionListener,
+        OnKeyListener, OnTouchListener, TextWatcher {
     private static final String TAG = "CryptKeeper";
 
     private static final String DECRYPT_STATE = "trigger_restart_framework";
@@ -103,6 +109,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
     private EditText mPasswordEntry;
+    /** Number of calls to {@link #notifyUser()} to ignore before notifying. */
+    private int mNotificationCountdown = 0;
 
     /**
      * Used to propagate state through configuration changes (e.g. screen rotation)
@@ -236,8 +244,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      * Notify the user that we are awaiting input. Currently this sends an audio alert.
      */
     private void notifyUser() {
-        Log.d(TAG, "Notifying user that we are waiting for input...");
-        if (mAudioManager != null) {
+        if (mNotificationCountdown > 0) {
+            Log.d(TAG, "Counting down to notify user..." + mNotificationCountdown);
+            --mNotificationCountdown;
+        } else if (mAudioManager != null) {
+            Log.d(TAG, "Notifying user that we are waiting for input...");
             try {
                 // Play the standard keypress sound at full volume. This should be available on
                 // every device. We cannot play a ringtone here because media services aren't
@@ -478,6 +489,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
         mPasswordEntry.setOnEditorActionListener(this);
         mPasswordEntry.requestFocus();
+        // Become quiet when the user interacts with the Edit text screen.
+        mPasswordEntry.setOnKeyListener(this);
+        mPasswordEntry.setOnTouchListener(this);
+        mPasswordEntry.addTextChangedListener(this);
 
         // Disable the Emergency call button if the device has no voice telephone capability
         final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -522,9 +537,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }, 0);
 
         updateEmergencyCallButtonState();
-        // Notify the user in 30 seconds that we are waiting for him to enter the password.
+        // Notify the user in 120 seconds that we are waiting for him to enter the password.
         mHandler.removeMessages(MESSAGE_NOTIFY);
-        mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 30 * 1000);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 120 * 1000);
     }
 
     /**
@@ -705,5 +720,40 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         startActivity(intent);
+    }
+
+    /**
+     * Listen to key events so we can disable sounds when we get a keyinput in EditText.
+     */
+    private void delayAudioNotification() {
+        Log.d(TAG, "User entering password: delay audio notification");
+        mNotificationCountdown = 20;
+    }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        delayAudioNotification();
+        return false;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        delayAudioNotification();
+        return false;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        return;
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        delayAudioNotification();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        return;
     }
 }
