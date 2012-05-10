@@ -17,6 +17,7 @@ package com.android.settings.inputmethod;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Fragment to add a word/shortcut to the user dictionary.
@@ -39,7 +41,8 @@ import java.util.ArrayList;
  * from the UserDictionarySettings.
  */
 public class UserDictionaryAddWordFragment extends Fragment
-        implements AdapterView.OnItemSelectedListener {
+        implements AdapterView.OnItemSelectedListener,
+        com.android.internal.app.LocalePicker.LocaleSelectionListener {
 
     private static final int OPTIONS_MENU_DELETE = Menu.FIRST;
 
@@ -57,6 +60,9 @@ public class UserDictionaryAddWordFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         mRootView = inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
         mIsDeleting = false;
+        if (null == mContents) {
+            mContents = new UserDictionaryAddWordContents(mRootView, getArguments());
+        }
         return mRootView;
     }
 
@@ -80,7 +86,7 @@ public class UserDictionaryAddWordFragment extends Fragment
         if (item.getItemId() == OPTIONS_MENU_DELETE) {
             mContents.delete(getActivity());
             mIsDeleting = true;
-            getFragmentManager().popBackStack();
+            getActivity().onBackPressed();
             return true;
         }
         return false;
@@ -90,7 +96,10 @@ public class UserDictionaryAddWordFragment extends Fragment
     public void onResume() {
         super.onResume();
         // We are being shown: display the word
-        mContents = new UserDictionaryAddWordContents(mRootView, getArguments());
+        updateSpinner();
+    }
+
+    private void updateSpinner() {
         final ArrayList<LocaleRenderer> localesList = mContents.getLocalesList(getActivity());
 
         final Spinner localeSpinner =
@@ -115,7 +124,12 @@ public class UserDictionaryAddWordFragment extends Fragment
     public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
             final long id) {
         final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
-        mContents.updateLocale(locale.getLocaleString());
+        if (locale.isMoreLanguages()) {
+            PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
+            preferenceActivity.startPreferenceFragment(new UserDictionaryLocalePicker(this), true);
+        } else {
+            mContents.updateLocale(locale.getLocaleString());
+        }
     }
 
     @Override
@@ -123,5 +137,12 @@ public class UserDictionaryAddWordFragment extends Fragment
         // I'm not sure we can come here, but if we do, that's the right thing to do.
         final Bundle args = getArguments();
         mContents.updateLocale(args.getString(UserDictionaryAddWordContents.EXTRA_LOCALE));
+    }
+
+    // Called by the locale picker
+    @Override
+    public void onLocaleSelected(final Locale locale) {
+        mContents.updateLocale(locale.toString());
+        getActivity().onBackPressed();
     }
 }
