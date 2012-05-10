@@ -496,7 +496,8 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Brezžične nastavitve"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Nastavi in upravljaj brezžične dostopne točke"</string>
-    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Izbira omrežja Wi-Fi"</string>
+    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Vklop omrežja Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Izklapljanje vmesnika za Wi-Fi ..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Napaka"</string>
@@ -632,6 +633,8 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Zvonjenje in obvestila"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Obvestila"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmi"</string>
+    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
+    <skip />
     <string name="dock_settings" msgid="1820107306693002541">"Stojalo"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Nastavitvebn stojala"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Zvok"</string>
@@ -1119,6 +1122,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Dodaj"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Dodaj v slovar"</string>
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"Besedna zveza"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Več možnosti"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Manj možnosti"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"V redu"</string>
@@ -1167,8 +1171,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Nastavi možnosti za razvoj programov"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Odpravljanje težav s povezavo USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Način za odpravljanje težav, ko je vzpostavljena povezava USB"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"ID razvojne naprave"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Podatki o napravi niso na voljo"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Brez zaklepanja"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Med polnjenjem se zaslon ne bo nikoli zaklenil"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Dovoli lažne lokacije"</string>
@@ -1356,10 +1358,8 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Odstrani vsa potrdila"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Preverjene poverilnice"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Prikaži zaupanja vredna potrdila overiteljev"</string>
-    <!-- no translation found for credentials_install_gesture_prompt (2207390278112395082) -->
-    <skip />
-    <!-- no translation found for credentials_install_gesture_explanation (7408921172253634829) -->
-    <skip />
+    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Narišite vzorec za odklepanje"</string>
+    <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Če želite potrditi ponastavitev na tovarniške nastavitve, morate narisati vzorec za odklepanje."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Vnesite geslo za shrambo poverilnic."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Trenutno geslo:"</string>
@@ -1492,25 +1492,47 @@
     <string name="no_application" msgid="2813387563129153880">"Nič"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Počakajte na iskalnik napak"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Progr, kjer se išče nap., čaka isk. nap. pred izv."</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"Uporabniški vmesnik"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"Strog način je omogočen"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Osveži zaslon pri dolgih oper. progr. v gl. niti"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Mesto kazalca"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Prekriv. zaslona prikazuje tren. podatke za dotik"</string>
     <string name="show_touches" msgid="1356420386500834339">"Pokaži dotike"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Pokaži vizualne povratne informacije za dotike"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"Prikaži posodobitve zaslona"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"Osveži področja zaslona pri posodabljanju"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Prikaz posod. zasl. z GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Ob posodobitvi z GPU-jem področja zaslona utripajo"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"Onemogoči prekrivanja"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"Ne uporabi prekrivanj za sestavljanje zaslona"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Prikaz mej postavitve"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Prikaz informacij o mejah, odmikih ipd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Prikaži uporabo CPE-ja"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Prekrivanje zaslona prikazuje tren. uporabo CPE-ja"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Vsili upodabljanje z GPU-jem"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"Uporabi 2D-strojno pospeševanje v programih"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"Upod. profilov z GPU-jem"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Merjenje časa upodab. v dumpsys gfxinfo lupine adb"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Merilo animacije okna"</string>
