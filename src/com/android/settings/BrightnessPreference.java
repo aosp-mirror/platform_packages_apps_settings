@@ -110,6 +110,9 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
             mOldAutomatic = getBrightnessMode(0);
             mAutomaticMode = mOldAutomatic == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
             mCheckBox.setChecked(mAutomaticMode);
+            mSeekBar.setEnabled(!mAutomaticMode);
+        } else {
+            mSeekBar.setEnabled(true);
         }
         mSeekBar.setOnSeekBarChangeListener(this);
     }
@@ -131,12 +134,13 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         setMode(isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
                 : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         mSeekBar.setProgress(getBrightness());
+        mSeekBar.setEnabled(!mAutomaticMode);
     }
 
     private int getBrightness() {
         int mode = getBrightnessMode(0);
         float brightness = 0;
-        if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+        if (false && mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
             brightness = Settings.System.getFloat(getContext().getContentResolver(),
                     Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0);
             brightness = (brightness+1)/2;
@@ -168,6 +172,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
                 == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
         mCheckBox.setChecked(checked);
         mSeekBar.setProgress(getBrightness());
+        mSeekBar.setEnabled(!checked);
     }
 
     @Override
@@ -198,19 +203,21 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
 
     private void setBrightness(int brightness, boolean write) {
         if (mAutomaticMode) {
-            float valf = (((float)brightness*2)/SEEK_BAR_RANGE) - 1.0f;
-            try {
-                IPowerManager power = IPowerManager.Stub.asInterface(
-                        ServiceManager.getService("power"));
-                if (power != null) {
-                    power.setAutoBrightnessAdjustment(valf);
+            if (false) {
+                float valf = (((float)brightness*2)/SEEK_BAR_RANGE) - 1.0f;
+                try {
+                    IPowerManager power = IPowerManager.Stub.asInterface(
+                            ServiceManager.getService("power"));
+                    if (power != null) {
+                        power.setAutoBrightnessAdjustment(valf);
+                    }
+                    if (write) {
+                        final ContentResolver resolver = getContext().getContentResolver();
+                        Settings.System.putFloat(resolver,
+                                Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, valf);
+                    }
+                } catch (RemoteException doe) {
                 }
-                if (write) {
-                    final ContentResolver resolver = getContext().getContentResolver();
-                    Settings.System.putFloat(resolver,
-                            Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, valf);
-                }
-            } catch (RemoteException doe) {
             }
         } else {
             int range = (MAXIMUM_BACKLIGHT - mScreenBrightnessDim);
