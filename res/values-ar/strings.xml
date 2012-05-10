@@ -496,7 +496,8 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"إعدادات Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"إعداد وإدارة نقاط الدخول اللاسلكية"</string>
-    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"تحديد شبكة Wi-Fi"</string>
+    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"جارٍ تشغيل Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"إيقاف Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"خطأ"</string>
@@ -632,6 +633,8 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"نغمة الرنين والتنبيهات"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"تنبيهات"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"التنبيهات"</string>
+    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
+    <skip />
     <string name="dock_settings" msgid="1820107306693002541">"إرساء"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"إعدادات الإرساء"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"صوتي"</string>
@@ -1119,6 +1122,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"إضافة"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"إضافة إلى القاموس"</string>
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"عبارة"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"خيارات أكثر"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"خيارات أقل"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"موافق"</string>
@@ -1167,8 +1171,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"تعيين خيارات تطوير التطبيق"</string>
     <string name="enable_adb" msgid="7982306934419797485">"تصحيح أخطاء USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"وضع تصحيح الأخطاء عند توصيل USB"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"معرف جهاز التطوير"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"معلومات الجهاز غير متاحة"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"البقاء في الوضع النشط"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"لا يتم مطلقًا دخول الشاشة في وضع السكون أثناء الشحن"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"السماح بمواقع وهمية"</string>
@@ -1490,25 +1492,47 @@
     <string name="no_application" msgid="2813387563129153880">"لا شيء"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"انتظار برنامج التصحيح"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"ينتظر التطبيق قيد التصحيح انضمام برنامج التصحيح قبل التنفيذ"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"واجهة المستخدم"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"تم تمكين الوضع المتشدد"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"وميض الشاشة عند إجراء التطبيقات عمليات طويلة في سلسلة المحادثات الرئيسية"</string>
     <string name="pointer_location" msgid="6084434787496938001">"موقع المؤشر"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"عرض تراكب الشاشة لبيانات اللمس الحالية"</string>
     <string name="show_touches" msgid="1356420386500834339">"عرض مرات اللمس"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"عرض تعليقات مرئية لمرات اللمس"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"عرض تحديثات الشاشة"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"وميض مناطق من الشاشة عند التحديث"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"عرض تحديثات شاشة GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"إظهار وميض على مناطق من الشاشة عند التحديث بـ GPU"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"تعطيل التراكبات"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"عدم استخدام التراكبات لتركيب الشاشة"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"عرض حدود المخطط"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"عرض معلومات حول الحدود والمساحة المتروكة وما إلى ذلك"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"عرض استخدام CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"عرض تراكب الشاشة لاستخدام CPU الحالي"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"فرض عرض وحدة معالجة الرسومات"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"استخدام تسارع الأجهزة ثنائي الأبعاد في التطبيقات"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"رسم مخطط لعرض GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"قياس وقت العرض بـ adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"حجم الرسوم المتحركة للنافذة"</string>

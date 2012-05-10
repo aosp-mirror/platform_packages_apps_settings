@@ -496,7 +496,8 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Ajustes de Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configurar y administrar puntos de acceso inalámbricos"</string>
-    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Selecciona la red Wi-Fi"</string>
+    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Activando Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Desactivando Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
@@ -632,6 +633,8 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Tono y notificaciones"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificaciones"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmas"</string>
+    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
+    <skip />
     <string name="dock_settings" msgid="1820107306693002541">"Conector"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Ajustes del conector"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
@@ -643,7 +646,7 @@
     <string name="dock_not_found_title" msgid="3290961741828952424">"No se ha encontrado el conector"</string>
     <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Para configurar el audio del conector, debes insertar el tablet en el conector."</string>
     <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Para configurar el audio del conector, debes insertar el teléfono en el conector."</string>
-    <string name="dock_sounds_enable_title" msgid="885839627097024110">"Sonido al insertar dispositivo en conector"</string>
+    <string name="dock_sounds_enable_title" msgid="885839627097024110">"Sonido al insertar dispositivo"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Reproducir sonido al insertar o extraer el tablet del conector"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reproducir sonido al insertar o extraer el teléfono del conector"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"No reproducir sonido al insertar o extraer el tablet del conector"</string>
@@ -1119,6 +1122,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Añadir"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Añadir al diccionario"</string>
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"Frase"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Más opciones"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Menos opciones"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"Aceptar"</string>
@@ -1167,8 +1171,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Establecer opciones de desarrollo de aplicaciones"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depuración USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Modo de depuración cuando el dispositivo está conectado por USB"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"ID del dispositivo de desarrollo"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"Información de dispositivo no disponible"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Pantalla activa"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"La pantalla nunca entra en modo de suspensión durante la carga"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Ubicaciones simuladas"</string>
@@ -1490,25 +1492,32 @@
     <string name="no_application" msgid="2813387563129153880">"Ninguna"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Esperar al depurador"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"La aplicación de depuración espera a que se conecte el depurador para ejecutarse."</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"Interfaz de usuario"</string>
+    <string name="debug_input_category" msgid="1811069939601180246">"Entrada"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Dibujo"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Supervisión"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Modo estricto"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Destellar si las aplicaciones tardan mucho en el proceso principal"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Ubicación del puntero"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Superponer los datos de las pulsaciones en la pantalla"</string>
     <string name="show_touches" msgid="1356420386500834339">"Mostrar toques"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostrar la ubicación de las pulsaciones en la pantalla"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"Ver cambios pantalla"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"Destellar zonas de la pantalla al actualizarse"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"Mostrar actualizaciones pantalla GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"Actualizar áreas de pantalla al actualizarse con GPU"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"Inhabilitar superposiciones"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"No usar superposiciones para combinar pantallas"</string>
+    <string name="show_screen_updates" msgid="5470814345876056420">"Mostrar actualizaciones de superficie"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Actualizar superficies de ventana al actualizarse"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Mostrar actualiz vista GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Actualizar vistas de las ventanas creadas con GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Inhabilitar superposiciones HW"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Usar siempre GPU para combinar pantallas"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Habilitar seguimientos"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Elegir seguimientos habilitados"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"No hay seguimientos habilitados en este momento."</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> seguimientos habilitados en este momento"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Todos los seguimientos habilitados"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar límites de diseño"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Mostrar información sobre límites, espaciado, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar uso de CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Suporponer el uso de la CPU en la pantalla"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forzar aceleración GPU"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"Usar aceleración de hardware 2D en aplicaciones"</string>
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forzar uso de GPU para dibujos en 2D"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Representación GPU perfil"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Medir tiempo representación en adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de animación ventana"</string>
