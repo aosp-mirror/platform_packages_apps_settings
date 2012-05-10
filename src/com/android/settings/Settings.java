@@ -597,7 +597,8 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
             titleRes = R.string.wallpaper_settings_fragment_title;
         }
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, null, null, 0);
+        startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
+                null, 0);
         return true;
     }
 
