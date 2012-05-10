@@ -201,7 +201,7 @@ public class UserDictionarySettings extends ListFragment {
                 (android.preference.PreferenceActivity)getActivity();
         pa.startPreferencePanel(
                 com.android.settings.inputmethod.UserDictionaryAddWordFragment.class.getName(),
-                args, R.string.details_title, null, null, 0);
+                args, R.string.user_dict_settings_add_dialog_title, null, null, 0);
     }
 
     private String getWord(final int position) {
