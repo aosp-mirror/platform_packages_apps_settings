@@ -45,6 +45,7 @@ public class UserDictionaryAddWordFragment extends Fragment
 
     private UserDictionaryAddWordContents mContents;
     private View mRootView;
+    private boolean mIsDeleting = false;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class UserDictionaryAddWordFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         mRootView = inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
+        mIsDeleting = false;
         return mRootView;
     }
 
@@ -64,6 +66,24 @@ public class UserDictionaryAddWordFragment extends Fragment
                 .setIcon(android.R.drawable.ic_menu_delete);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+    }
+
+    /**
+     * Callback for the framework when a menu option is pressed.
+     *
+     * This class only supports the delete menu item.
+     * @param MenuItem the item that was pressed
+     * @return false to allow normal menu processing to proceed, true to consume it here
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == OPTIONS_MENU_DELETE) {
+            mContents.delete(getActivity());
+            mIsDeleting = true;
+            getFragmentManager().popBackStack();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -85,8 +105,10 @@ public class UserDictionaryAddWordFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
-        mContents.apply(getActivity());
-        // We are being hidden: commit changes to the user dictionary
+        // We are being hidden: commit changes to the user dictionary, unless we were deleting it
+        if (!mIsDeleting) {
+            mContents.apply(getActivity());
+        }
     }
 
     @Override
