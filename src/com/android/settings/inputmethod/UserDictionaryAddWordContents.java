@@ -184,7 +184,10 @@ public class UserDictionaryAddWordContents {
             // TODO: sort in unicode order
             addLocaleDisplayNameToList(activity, localesList, l);
         }
-        localesList.add(new LocaleRenderer(activity, "")); // meaning: all languages
+        if (!"".equals(mLocale)) {
+            // If mLocale is "", then we already inserted the "all languages" item, so don't do it
+            addLocaleDisplayNameToList(activity, localesList, ""); // meaning: all languages
+        }
         localesList.add(new LocaleRenderer(activity, null)); // meaning: select another locale
         return localesList;
     }
