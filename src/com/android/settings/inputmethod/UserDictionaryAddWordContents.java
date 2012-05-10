@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.TextUtils;
@@ -118,6 +119,12 @@ public class UserDictionaryAddWordContents {
             // If the word is somehow empty, don't insert it.
             return;
         }
+        // If there is no shortcut, and the word already exists in the database, then we
+        // should not insert, because either A. the word exists with no shortcut, in which
+        // case the exact same thing we want to insert is already there, or B. the word
+        // exists with at least one shortcut, in which case it has priority on our word.
+        if (hasWord(newWord, context)) return;
+
         // Disallow duplicates. If the same word with no shortcut is defined, remove it; if
         // the same word with the same shortcut is defined, remove it; but we don't mind if
         // there is the same word with a different, non-empty shortcut.
@@ -132,6 +139,32 @@ public class UserDictionaryAddWordContents {
         UserDictionary.Words.addWord(context, newWord.toString(),
                 FREQUENCY_FOR_USER_DICTIONARY_ADDS, newShortcut,
                 TextUtils.isEmpty(mLocale) ? null : Utils.createLocaleFromString(mLocale));
+    }
+
+    private static final String[] HAS_WORD_PROJECTION = { UserDictionary.Words.WORD };
+    private static final String HAS_WORD_SELECTION_ONE_LOCALE = UserDictionary.Words.WORD
+            + "=? AND " + UserDictionary.Words.LOCALE + "=?";
+    private static final String HAS_WORD_SELECTION_ALL_LOCALES = UserDictionary.Words.WORD
+            + "=? AND " + UserDictionary.Words.LOCALE + " is null";
+    private boolean hasWord(final String word, final Context context) {
+        final Cursor cursor;
+        // mLocale == "" indicates this is an entry for all languages. Here, mLocale can't
+        // be null at all (it's ensured by the updateLocale method).
+        if ("".equals(mLocale)) {
+            cursor = context.getContentResolver().query(UserDictionary.Words.CONTENT_URI,
+                      HAS_WORD_PROJECTION, HAS_WORD_SELECTION_ALL_LOCALES,
+                      new String[] { word }, null /* sort order */);
+        } else {
+            cursor = context.getContentResolver().query(UserDictionary.Words.CONTENT_URI,
+                      HAS_WORD_PROJECTION, HAS_WORD_SELECTION_ONE_LOCALE,
+                      new String[] { word, mLocale }, null /* sort order */);
+        }
+        try {
+            if (null == cursor) return false;
+            return cursor.getCount() > 0;
+        } finally {
+            if (null != cursor) cursor.close();
+        }
     }
 
     public static class LocaleRenderer {
