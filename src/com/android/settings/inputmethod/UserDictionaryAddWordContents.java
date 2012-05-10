@@ -155,6 +155,10 @@ public class UserDictionaryAddWordContents {
         public String getLocaleString() {
             return mLocaleString;
         }
+        // "More languages..." is null ; "All languages" is the empty string.
+        public boolean isMoreLanguages() {
+            return null == mLocaleString;
+        }
     }
 
     private static void addLocaleDisplayNameToList(final Context context,
