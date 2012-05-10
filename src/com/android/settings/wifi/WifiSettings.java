@@ -137,8 +137,9 @@ public class WifiSettings extends SettingsPreferenceFragment
     // this boolean extra specifies whether to auto finish when connection is established
     private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
 
-    private static final String EXTRA_WIFI_SHOW_ACTION_BAR = "wifi_show_action_bar";
-    private static final String EXTRA_WIFI_SHOW_MENUS = "wifi_show_menus";
+    // this boolean extra is set if we are being invoked by the Setup Wizard
+    private static final String EXTRA_IS_FIRST_RUN = "firstRun";
+
     private static final String EXTRA_WIFI_DISABLE_BACK = "wifi_disable_back";
 
     // should Next button only be enabled when we have a connection?
@@ -152,8 +153,8 @@ public class WifiSettings extends SettingsPreferenceFragment
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
 
-    // Menus are not shown by Setup Wizard
-    private boolean mShowMenu;
+    // the action bar uses a different set of controls for Setup Wizard
+    private boolean mSetupWizardMode;
 
     /* End of "used in Wifi Setup context" */
 
@@ -176,6 +177,14 @@ public class WifiSettings extends SettingsPreferenceFragment
         };
 
         mScanner = new Scanner();
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        // Set this flag early, as it's needed by getHelpResource(), which is called by super
+        mSetupWizardMode = getActivity().getIntent().getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
+
+        super.onCreate(icicle);
     }
 
     @Override
@@ -268,9 +277,8 @@ public class WifiSettings extends SettingsPreferenceFragment
             getView().setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
         }
 
-        // Action bar is hidden for Setup Wizard
-        final boolean showActionBar = intent.getBooleanExtra(EXTRA_WIFI_SHOW_ACTION_BAR, true);
-        if (showActionBar) {
+        // On/off switch is hidden for Setup Wizard
+        if (!mSetupWizardMode) {
             Switch actionBarSwitch = new Switch(activity);
 
             if (activity instanceof PreferenceActivity) {
@@ -294,13 +302,9 @@ public class WifiSettings extends SettingsPreferenceFragment
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
 
-        // Menu is hidden for Setup Wizard
-        mShowMenu = intent.getBooleanExtra(EXTRA_WIFI_SHOW_MENUS, true);
-        if (mShowMenu) {
+        if (!mSetupWizardMode) {
             registerForContextMenu(getListView());
         }
-        // FIXME: When WPS image button is implemented, use mShowMenu instead of always showing
-        // the options menu
         setHasOptionsMenu(true);
 
         // After confirming PreferenceScreen is available, we call super.
@@ -337,7 +341,15 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
-        if (mShowMenu) {
+        if (mSetupWizardMode) {
+            // FIXME: add setIcon() when graphics are available
+            menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
+                    .setEnabled(wifiIsEnabled)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
+                    .setEnabled(wifiIsEnabled)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        } else {
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -359,11 +371,6 @@ public class WifiSettings extends SettingsPreferenceFragment
             menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                     //.setIcon(android.R.drawable.ic_menu_manage)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        } else {
-            // FIXME: Interim support for WPS, until ImageButton is available
-            menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                    .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -889,10 +896,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     protected int getHelpResource() {
-        // Setup Wizard has different help content
-        if (mShowMenu) {
-            return R.string.help_url_wifi;
+        if (mSetupWizardMode) {
+            return 0;
         }
-        return 0;
+        return R.string.help_url_wifi;
     }
 }
