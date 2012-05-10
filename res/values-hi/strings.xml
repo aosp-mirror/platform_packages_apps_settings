@@ -496,7 +496,8 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi सेटिंग"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"वायरलेस पहुंच बिंदुओं को सेट अप और प्रबंधित करें"</string>
-    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Wi-Fi नेटवर्क का चयन करें"</string>
+    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Wi-Fi चालू कर रहे हैं…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Wi-Fi बंद कर रहा है…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"त्रुटि"</string>
@@ -632,6 +633,8 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"रिंगटोन और सूचनाएं"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"सूचनाएं"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"अलार्म"</string>
+    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
+    <skip />
     <string name="dock_settings" msgid="1820107306693002541">"डॉक"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"डॉक सेटिंग"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"ऑडियो"</string>
@@ -1119,6 +1122,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"जोड़ें"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"शब्‍दकोश में जोड़ें"</string>
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"वाक्यांश"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"अधिक विकल्प"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"कम विकल्‍प"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"ठीक"</string>
@@ -1167,8 +1171,6 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"एप्‍लिकेशन विकास के लिए विकल्‍प सेट करें"</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB डीबग करना"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"डीबग मोड जब USB कनेक्‍ट किया गया हो"</string>
-    <string name="verifier_device_identifier" msgid="5079997701152411060">"विकास उपकरण ID"</string>
-    <string name="verifier_device_identifier_not_available" msgid="1272065992066977324">"उपकरण की जानकारी उपलब्‍ध नहीं है"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"सचेत रहें"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"चार्ज होने के दौरान स्‍क्रीन कभी निष्‍क्रिय नहीं होगी"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"कृत्रिम स्‍थानों को अनुमति दें"</string>
@@ -1491,25 +1493,47 @@
     <string name="no_application" msgid="2813387563129153880">"कुछ भी नहीं"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"डीबगर की प्रतीक्षा करें"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"डीबग किया गया एप्लि. निष्पादन के पहले अनुलग्न करने हेतु डीबगर की प्रतीक्षा करता है"</string>
-    <string name="debug_ui_category" msgid="9023948280291055349">"उपयोगकर्ता इंटरफ़ेस"</string>
+    <!-- no translation found for debug_input_category (1811069939601180246) -->
+    <skip />
+    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
+    <skip />
+    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
+    <skip />
     <string name="strict_mode" msgid="1938795874357830695">"सख्‍त मोड सक्षम किया गया"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"जब एप्लि. मुख्‍य थ्रेड पर लंबी कार्यवाही करते हैं तो स्‍क्रीन फ़्लैश करें"</string>
     <string name="pointer_location" msgid="6084434787496938001">"सूचक स्थान"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"वर्तमान स्‍पर्श डेटा दिखाने वाला स्‍क्रीन ओवरले"</string>
     <string name="show_touches" msgid="1356420386500834339">"स्पर्श दिखाएं"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"स्पर्श के लिए दृश्यमान फ़ीडबैक दिखाएं"</string>
-    <string name="show_screen_updates" msgid="8282711794220426931">"स्‍क्रीन अपडेट दिखाएं"</string>
-    <string name="show_screen_updates_summary" msgid="1716122382094924596">"अपडेट करते समय स्‍क्रीन के क्षेत्र फ़्लैश करें"</string>
-    <string name="show_hw_screen_updates" msgid="1066779731201521925">"GPU स्‍क्रीन अपडेट दिखाएं"</string>
-    <string name="show_hw_screen_updates_summary" msgid="5280716513731970663">"स्क्रीन के फ़्लैश क्षेत्र, जब वे GPU के साथ अपडेट हों"</string>
-    <string name="disable_overlays" msgid="3645736086368449005">"ओवरले अक्षम करें"</string>
-    <string name="disable_overlays_summary" msgid="7111098018524381234">"स्‍क्रीन संयोजन के लिए ओवरले का उपयोग न करें"</string>
+    <!-- no translation found for show_screen_updates (5470814345876056420) -->
+    <skip />
+    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
+    <skip />
+    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
+    <skip />
+    <!-- no translation found for disable_overlays (2074488440505934665) -->
+    <skip />
+    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
+    <skip />
+    <!-- no translation found for enable_traces_title (7448835465859512430) -->
+    <skip />
+    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
+    <skip />
+    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"लेआउट सीमाएं दिखाएं"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"सीमाओं, पैडिंग, आदि के बारे में जानकारी दिखाएं."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU उपयोग दिखाएं"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"स्‍क्रीन ओवरले वर्तमान CPU उपयोग को दिखा रहा है"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"बलपूर्वक GPU रेंडर करें"</string>
-    <string name="force_hw_ui_summary" msgid="8642000962902609976">"एप्लिकेशन में 2D हार्डवेयर त्वरण का उपयोग करें"</string>
+    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"प्रोफ़ाइल GPU रेंडरिंग"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"adb shell dumpsys gfxinfo में रेंडरिंग समय मापें"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"विंडो एनिमेशन स्‍केल"</string>
@@ -1578,8 +1602,7 @@
     <string name="data_usage_metered_body" msgid="1616820728096597564">"उन नेटवर्क का चयन करें जिनके लिए डेटा उपयोग मापा जाता है. पृष्ठभूमि में होने पर एप्‍लिकेशन को इन नेटवर्क का उपयोग करने से प्रतिबंधित किया जा सकता है. बड़े डाउनलोड के लिए इन नेटवर्क का उपयोग करने से पहले एप्‍लिकेशन चेतावनी भी दे सकते हैं."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"मोबाइल नेटवर्क"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Wi-Fi नेटवर्क"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (3656830919281429036) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"मीटर किए जाने वाले Wi-Fi नेटवर्क को चुनने हेतु, Wi-Fi चालू करें."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"आपातकालीन कॉल"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"कॉल पर वापस लौटें"</string>
     <string name="vpn_name" msgid="4689699885361002297">"नाम"</string>
