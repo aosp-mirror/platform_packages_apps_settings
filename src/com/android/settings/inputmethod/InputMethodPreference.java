@@ -39,6 +39,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Comparator;
 import java.util.List;
@@ -126,8 +127,12 @@ public class InputMethodPreference extends CheckBoxPreference
                                 mFragment.startActivity(mSettingsIntent);
                             } catch (ActivityNotFoundException e) {
                                 Log.d(TAG, "IME's Settings Activity Not Found: " + e);
-                                // If the IME's settings activity does not exist, we can just
-                                // do nothing...
+                                final String msg = mFragment.getString(
+                                        R.string.failed_to_open_app_settings_toast,
+                                        mImi.loadLabel(
+                                                mFragment.getActivity().getPackageManager()));
+                                Toast.makeText(
+                                        mFragment.getActivity(), msg, Toast.LENGTH_LONG).show();
                             }
                         }
                     });

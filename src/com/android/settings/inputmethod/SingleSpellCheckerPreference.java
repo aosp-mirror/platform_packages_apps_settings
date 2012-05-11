@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import com.android.settings.R;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -33,6 +34,7 @@ import android.view.textservice.TextServicesManager;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SingleSpellCheckerPreference extends Preference {
     private static final float DISABLED_ALPHA = 0.4f;
@@ -177,7 +179,13 @@ public class SingleSpellCheckerPreference extends Preference {
 
     private void onSettingsButtonClicked(View arg0) {
         if (mFragment != null && mSettingsIntent != null) {
-            mFragment.startActivity(mSettingsIntent);
+            try {
+                mFragment.startActivity(mSettingsIntent);
+            } catch (ActivityNotFoundException e) {
+                final String msg = mFragment.getString(R.string.failed_to_open_app_settings_toast,
+                        mSpellCheckerInfo.loadLabel(mFragment.getActivity().getPackageManager()));
+                Toast.makeText(mFragment.getActivity(), msg, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
