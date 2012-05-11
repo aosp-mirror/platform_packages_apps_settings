@@ -498,7 +498,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi設定"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"ワイヤレスアクセスポイントを設定する"</string>
-    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
     <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Wi-FiをONにしています..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Wi-FiをOFFにします..."</string>
@@ -1110,6 +1110,8 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"この入力方法を選択すると、すべての入力内容の収集をアプリ（<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>）に許可することになります。これにはパスワードやクレジットカード番号などの個人情報も含まれます。この入力方法を使用しますか？"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"このスペルチェッカーを選択すると、入力する全文字列の収集をアプリ（<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>）に許可することになります。これにはパスワードやクレジットカード番号などの個人情報も含まれます。このスペルチェッカーを使用しますか？"</string>
+    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"マウス/トラックパッド"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"ゲーム用コントローラ"</string>
@@ -1494,47 +1496,32 @@
     <string name="no_application" msgid="2813387563129153880">"なし"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"デバッガを待機"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"アプリは実行前にデバッガのアタッチを待機します"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"入力"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"描画"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"監視"</string>
     <string name="strict_mode" msgid="1938795874357830695">"厳格モードを有効にする"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"メインスレッドの処理が長引く場合は画面を点滅させる"</string>
     <string name="pointer_location" msgid="6084434787496938001">"ポインタの位置"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"現在のタップデータをオーバーレイ表示する"</string>
     <string name="show_touches" msgid="1356420386500834339">"タップを表示"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"タップを視覚表示する"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"表示面の更新を表示"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"更新時にウィンドウの表示面全体を点滅させる"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"GPU表示の更新を表示"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"GPUでの描画時にウィンドウ内の表示を点滅させる"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"HWオーバーレイを無効"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"画面合成に常にGPUを使用する"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"トレースを有効にする"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"有効なトレースを選択"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"現在有効なトレースはない"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"現在<xliff:g id="NUM">%1$d</xliff:g>件のトレースが有効"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"現在トレースはすべて有効"</string>
     <string name="debug_layout" msgid="5981361776594526155">"レイアウト境界を表示"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"境界やパディングなどについての情報を表示"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU使用状況を表示"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"現在のCPU使用状況をオーバーレイ表示する"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPUレンダリングを使用"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"2D描画にGPUを常に使用する"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"GPUレンダリングのプロフィール作成"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"adb shell dumpsys gfxinfoでレンダリング時間を測定"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"ウィンドウアニメスケール"</string>
