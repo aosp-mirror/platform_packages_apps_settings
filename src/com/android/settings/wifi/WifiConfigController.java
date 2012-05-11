@@ -65,6 +65,8 @@ public class WifiConfigController implements TextWatcher,
         View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final String KEYSTORE_SPACE = WifiConfiguration.KEYSTORE_URI;
 
+    private static final String PHASE2_PREFIX = "auth=";
+
     private final WifiConfigUiBase mConfigUi;
     private final View mView;
     private final AccessPoint mAccessPoint;
@@ -357,7 +359,7 @@ public class WifiConfigController implements TextWatcher,
                 config.eap.setValue((String) mEapMethodSpinner.getSelectedItem());
 
                 config.phase2.setValue((mPhase2Spinner.getSelectedItemPosition() == 0) ? "" :
-                        "auth=" + mPhase2Spinner.getSelectedItem());
+                        PHASE2_PREFIX + mPhase2Spinner.getSelectedItem());
                 config.ca_cert.setValue((mEapCaCertSpinner.getSelectedItemPosition() == 0) ? "" :
                         KEYSTORE_SPACE + Credentials.CA_CERTIFICATE +
                         (String) mEapCaCertSpinner.getSelectedItem());
@@ -547,7 +549,14 @@ public class WifiConfigController implements TextWatcher,
             if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
                 WifiConfiguration config = mAccessPoint.getConfig();
                 setSelection(mEapMethodSpinner, config.eap.value());
-                setSelection(mPhase2Spinner, config.phase2.value());
+
+                final String phase2Method = config.phase2.value();
+                if (phase2Method != null && phase2Method.startsWith(PHASE2_PREFIX)) {
+                    setSelection(mPhase2Spinner, phase2Method.substring(PHASE2_PREFIX.length()));
+                } else {
+                    setSelection(mPhase2Spinner, phase2Method);
+                }
+
                 setCertificate(mEapCaCertSpinner, KEYSTORE_SPACE + Credentials.CA_CERTIFICATE,
                         config.ca_cert.value());
                 setCertificate(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY,
