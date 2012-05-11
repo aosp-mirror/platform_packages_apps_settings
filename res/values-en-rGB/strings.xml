@@ -496,7 +496,8 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi settings"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Set up &amp; manage wireless access points"</string>
-    <string name="wifi_setup_wizard_title" msgid="8794440659600351945">"Select Wi-Fi network"</string>
+    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Turning Wi-Fi on…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Turning off Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
@@ -632,6 +633,8 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Ringtone &amp; notifications"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notifications"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarms"</string>
+    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
+    <skip />
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Dock settings"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
@@ -1489,47 +1492,32 @@
     <string name="no_application" msgid="2813387563129153880">"Nothing"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Wait for debugger"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Debugged application waits for debugger to attach before executing"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Input"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Drawing"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitoring"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Strict mode enabled"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Flash screen when apps do long operations on main thread"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Pointer location"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Screen overlay showing current touch data"</string>
     <string name="show_touches" msgid="1356420386500834339">"Show touches"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Show visual feedback for touches"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Show surface updates"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Flash entire window surfaces when they update"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Show GPU view updates"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Flash views inside windows when drawn with the GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Disable HW overlays"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Always use GPU for screen compositing"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Enable tracing"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Select enabled traces"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"No traces currently enabled"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> traces currently enabled"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"All traces currently enabled"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Show layout bounds"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Display information about bounds, padding, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Show CPU usage"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Screen overlay showing current CPU usage"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Force GPU rendering"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Force use of GPU for 2d drawing"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profile GPU rendering"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Measure rendering time in adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Window animation scale"</string>
