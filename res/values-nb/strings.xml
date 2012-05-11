@@ -496,7 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Innstillinger for trådløst nett"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Sett opp og styr trådløse aksesspunkt"</string>
-    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
     <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Slår på Wi-Fi …"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Slår av Wi-Fi …"</string>
@@ -524,14 +524,11 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Vis avanserte alternativer"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Beskyttet Wi-Fi-konfigurasjon (WPS)"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Starter WPS …"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (5857132470998175154) -->
-    <skip />
-    <!-- no translation found for wifi_wps_onstart_pin (8067502591043979939) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"Trykk på WPS-knappen på den trådløse ruteren din. Det kan kan opptil to minutter å fullføre konfigurasjonen."</string>
+    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Skriv inn koden <xliff:g id="NUMBER">%1$s</xliff:g> på Wi-Fi-ruteren din. Det kan ta inntil to minutter å fullføre konfigurasjonen."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS var vellykket. Kobler til nettverket …"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Koblet til Wi-Fi-nettverket <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for wifi_wps_in_progress (3372311348221357944) -->
-    <skip />
+    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS har allerede startet, og det kan ta opptil to minutter før den fullføres"</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS mislyktes. Prøv igjen om noen minutter."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Sikkerhetsinnstillingen (WEP) for trådløse rutere støttes ikke"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Sikkerhetsinnstillingen (TKIP) for trådløse rutere støttes ikke"</string>
@@ -1111,6 +1108,8 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Denne inndatametoden har tilgang til all tekst du skriver, blant annet personlige opplysninger som for eksempel passord og kredittkortnumre. Den kommer fra appen <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruke denne inndatametoden?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Denne stavekontrollen kan være i stand til å samle all tekst du skriver, herunder personlige opplysninger som passord og kredittkortnumre. Den kommer fra appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruke denne stavekontrollen?"</string>
+    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mus/styreflate"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Pekerhastighet"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Spillkontroller"</string>
@@ -1125,8 +1124,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Legg til"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Legg til ordliste"</string>
-    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
-    <skip />
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"Uttrykk"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Flere alt."</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Færre alt."</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
@@ -1496,47 +1494,32 @@
     <string name="no_application" msgid="2813387563129153880">"Ingen"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Vent på feilsøkingsappen"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Feilsøkt app venter til feilsøkingsapp er lagt til før den kjører"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Inndata"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Tegning"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Overvåking"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Streng modus er aktivert"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Skjermblink når apper utfører lang handling på hovedtråd"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Pekerplassering"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Skjermoverlegg viser aktuelle berøringsdata"</string>
     <string name="show_touches" msgid="1356420386500834339">"Vis berøringer"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Vis visuelle tilbakemeldinger for berøringer"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Vis overflateoppdateringer"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Fremhev hele vinduer når de oppdateres"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Vis GPU-visningsoppdateringer"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Fremhev visninger i vinduer når tegnet med GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Deaktiver HW-overlegg"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Bruk alltid GPU for skjermsammensetting"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Aktiver spor"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Velg aktiverte spor"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Ingen aktiverte spor for øyeblikket"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> spor er aktivert for øyeblikket"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"For øyeblikket er alle sporene er aktiverte"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Vis kantene i utformingen"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Vis informasjon om kanter, ytterkanter osv."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Vis CPU-bruk"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Skjermoverlegg viser gjeldende CPU-bruk"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Tving GPU-gjengivelse"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Tving bruk av GPU for 2D-tegning"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"GPU-gjengivelse av profil"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mål gjengivelsestid i adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Animasjonsskala for vindu"</string>

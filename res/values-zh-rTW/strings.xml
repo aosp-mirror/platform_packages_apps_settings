@@ -496,7 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi 設定"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"設定、管理無線網路存取點"</string>
-    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
     <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Wi-Fi 開啟中…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"正在關閉 Wi-Fi…"</string>
@@ -1108,6 +1108,8 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"此輸入法可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。此輸入法來自「<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>」應用程式。是否要使用此輸入法？"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"這個拼字檢查程式可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。該程式是由應用程式「<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>」所提供，要使用這個拼字檢查程式嗎？"</string>
+    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"滑鼠/觸控板"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"游標速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"遊戲控制器"</string>
@@ -1492,47 +1494,32 @@
     <string name="no_application" msgid="2813387563129153880">"無"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"等待偵錯程式"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"先等待偵錯程式附加至偵錯程序，再對要接受偵錯的應用程式開始執行"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"輸入"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"繪圖"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"監控"</string>
     <string name="strict_mode" msgid="1938795874357830695">"嚴格模式已啟用"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"當應用程式在主執行緒中進行長時間作業時，讓螢幕閃爍"</string>
     <string name="pointer_location" msgid="6084434787496938001">"指標位置"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"觸控時在螢幕上方顯示相關資料"</string>
     <string name="show_touches" msgid="1356420386500834339">"顯示觸控回應"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"顯示觸控位置的視覺回應"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"顯示表層更新"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"更新表層時閃爍顯示整個視窗表層"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"顯示 GPU 畫面更新"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"使用 GPU 繪圖時在視窗中閃爍顯示畫面"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"停用 HW 重疊效果"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"一律使用 GPU 進行畫面合成"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"啟用追蹤"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"選取已啟用的追蹤"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"目前未啟用任何追蹤"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"目前已啟用 <xliff:g id="NUM">%1$d</xliff:g> 個追蹤"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"目前已啟用所有追蹤"</string>
     <string name="debug_layout" msgid="5981361776594526155">"顯示版面配置界限"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"顯示界限、間距等相關資訊。"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"顯示 CPU 使用量"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"在螢幕上方顯示目前的 CPU 使用量"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"強制使用 GPU 轉譯"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"強制使用 GPU 進行 2D 繪圖"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"剖析 GPU 轉譯"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"測量「adb shell dumpsys gfxinfo」指令中的轉譯時間"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"視窗動畫比例"</string>

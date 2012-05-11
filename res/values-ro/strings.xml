@@ -496,7 +496,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Setări Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configuraţi şi gestionaţi punctele de acces wireless"</string>
-    <!-- no translation found for wifi_setup_wizard_title (3191013493913744154) -->
+    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
     <skip />
     <string name="wifi_starting" msgid="6716593470710880000">"Se activează Wi-Fi?"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Se dezactivează Wi-Fi..."</string>
@@ -524,14 +524,11 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Afişaţi opţiunile avansate"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configurare protejată Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Se porneşte WPS…"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (5857132470998175154) -->
-    <skip />
-    <!-- no translation found for wifi_wps_onstart_pin (8067502591043979939) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"Apăsaţi pe butonul WPS de pe routerul Wi-Fi. Finalizarea configurării poate dura până la două minute."</string>
+    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Introduceţi codul PIN <xliff:g id="NUMBER">%1$s</xliff:g> pe routerul Wi-Fi. Finalizarea configurării poate dura până la două minute."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS finalizată. Se conectează la reţea…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Conectat la reţeaua Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <!-- no translation found for wifi_wps_in_progress (3372311348221357944) -->
-    <skip />
+    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS este deja în desfăşurare. Finalizarea poate dura până la două minute."</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS eşuată. Încercaţi din nou peste câteva minute."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Setarea de securitate pentru routerul wireless (WEP) nu este acceptată"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Setarea de securitate pentru routerul wireless (TKIP) nu este acceptată"</string>
@@ -1111,6 +1108,8 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Această metodă de introducere poate culege în întregime textul introdus, inclusiv datele personale, cum ar fi parolele şi numerele cardurilor de credit. Aceasta provine de la aplicaţia <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Utilizaţi această metodă de introducere?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Acest instrument de verificare a ortografiei poate, de asemenea, să culeagă în întregime textul pe care îl introduceţi, inclusiv datele personale, cum ar fi parolele şi numerele cardurilor de credit. Instrumentul provine de la aplicaţia <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utilizaţi acest instrument de verificare ortografică?"</string>
+    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
+    <skip />
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Viteza indicatorului"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Controler de joc"</string>
@@ -1126,8 +1125,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Adăugaţi"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Adăugaţi în dicţionar"</string>
-    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
-    <skip />
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"Expresie"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Mai multe opţ."</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Mai puţine opţ."</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
@@ -1497,47 +1495,32 @@
     <string name="no_application" msgid="2813387563129153880">"Niciuna"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Aşteptaţi depanatorul"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Înaintea executării, aplicaţia aşteaptă ataşarea depanatorului"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Intrare"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Desen"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitorizare"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Modul Strict activat"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Ilum. intermit. la operaţii lungi pe firul princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Locaţia indicatorului"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Suprap. pe ecran indic. date curente pt. atingeri"</string>
     <string name="show_touches" msgid="1356420386500834339">"Afişaţi atingerile"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Afişaţi feedback vizual pentru atingeri"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Actualizări suprafeţe"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Iluminare suprafeţe toată fereastra la actualizare"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Actualizări ecran cu GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Iluminare ecrane din ferestre la desenarea cu GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Dezactivaţi suprapun. HW"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Utilizaţi mereu GPU pentru compunerea ecranului"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Activaţi monitorizările"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Select. monitoriz. activ."</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"În prezent nu există monitorizări activate"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> (de) monitorizări activate în prezent"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Toate monitorizările activate în prezent"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afişaţi limite aspect"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Afişaţi informaţii despre limite, spaţiere etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Afişaţi utiliz. procesor."</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Suprap. pe ecran indic. util. curentă a procesor."</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forţaţi redarea cu GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forţaţi utilizarea GPU pentru desen în 2D"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil redare cu GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Măsurare timp redare în adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Scara anim. în fereastră"</string>
