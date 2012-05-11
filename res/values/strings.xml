@@ -1145,8 +1145,11 @@
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
-    <!-- Description of NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
-    <string name="nfc_quick_toggle_summary">Allow data exchange when the phone touches another device</string>
+    <!-- Description of NFC in the 1st level settings screen, for a tablet. [CHAR LIMIT=NONE] -->
+    <string name="nfc_quick_toggle_summary" product="tablet">Allow data exchange when the tablet touches another device</string>
+    <!-- Description of NFC in the 1st level settings screen, for a phone. [CHAR LIMIT=NONE] -->
+    <string name="nfc_quick_toggle_summary" product="default">Allow data exchange when the phone touches another device</string>
+
     <!-- Used to enter the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_settings_title">Android Beam</string>
     <!-- Used to describe the on state of the Android Beam feature [CHAR LIMIT=NONE] -->
