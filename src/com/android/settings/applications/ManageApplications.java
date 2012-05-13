@@ -16,19 +16,30 @@
 
 package com.android.settings.applications;
 
+import static android.net.NetworkPolicyManager.POLICY_NONE;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static com.android.settings.Utils.prepareCustomPreferencesList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.INotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.NetworkPolicyManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -67,6 +78,7 @@ import com.android.settings.deviceinfo.StorageMeasurement;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 final class CanBeOnSdCardChecker {
     final IPackageManager mPm;
@@ -116,7 +128,8 @@ final class CanBeOnSdCardChecker {
  * intent.
  */
 public class ManageApplications extends Fragment implements
-        OnItemClickListener {
+        OnItemClickListener, DialogInterface.OnClickListener,
+        DialogInterface.OnDismissListener {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
@@ -125,6 +138,7 @@ public class ManageApplications extends Fragment implements
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_BACKGROUND = "showBackground";
     private static final String EXTRA_DEFAULT_LIST_TYPE = "defaultListType";
+    private static final String EXTRA_RESET_DIALOG = "resetDialog";
 
     // attributes used as keys when passing values to InstalledAppDetails activity
     public static final String APP_CHG = "chg";
@@ -148,6 +162,7 @@ public class ManageApplications extends Fragment implements
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
     public static final int SHOW_RUNNING_SERVICES = MENU_OPTIONS_BASE + 6;
     public static final int SHOW_BACKGROUND_PROCESSES = MENU_OPTIONS_BASE + 7;
+    public static final int RESET_APP_PREFERENCES = MENU_OPTIONS_BASE + 8;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
@@ -204,6 +219,8 @@ public class ManageApplications extends Fragment implements
 
     private Spinner mSpinner;
     private FrameLayout mSpinnerContent;
+
+    AlertDialog mResetDialog;
 
     final Runnable mRunningProcessesAvail = new Runnable() {
         public void run() {
@@ -625,6 +642,10 @@ public class ManageApplications extends Fragment implements
 
         prepareCustomPreferencesList(container, spinnerHost, mListView, false);
 
+        if (savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_RESET_DIALOG)) {
+            buildResetDialog();
+        }
+
         return spinnerHost;
     }
 
@@ -652,6 +673,9 @@ public class ManageApplications extends Fragment implements
             outState.putInt(EXTRA_DEFAULT_LIST_TYPE, mDefaultListType);
         }
         outState.putBoolean(EXTRA_SHOW_BACKGROUND, mShowBackground);
+        if (mResetDialog != null) {
+            outState.putBoolean(EXTRA_RESET_DIALOG, true);
+        }
     }
 
     @Override
@@ -665,6 +689,15 @@ public class ManageApplications extends Fragment implements
         }
         mSpinner.setEnabled(false);
         mSpinnerContent.setEnabled(false);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mResetDialog != null) {
+            mResetDialog.dismiss();
+            mResetDialog = null;
+        }
     }
 
     @Override
@@ -708,6 +741,8 @@ public class ManageApplications extends Fragment implements
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(0, RESET_APP_PREFERENCES, 4, R.string.reset_app_preferences)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         updateOptionsMenu();
     }
     
@@ -743,11 +778,97 @@ public class ManageApplications extends Fragment implements
             mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(false);
             mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
             mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
+            mOptionsMenu.findItem(RESET_APP_PREFERENCES).setVisible(false);
         } else {
             mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
             mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
             mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(false);
             mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(false);
+            mOptionsMenu.findItem(RESET_APP_PREFERENCES).setVisible(true);
+        }
+    }
+
+    void buildResetDialog() {
+        if (mResetDialog == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.reset_app_preferences_title);
+            builder.setMessage(R.string.reset_app_preferences_desc);
+            builder.setPositiveButton(R.string.reset_app_preferences_button, this);
+            builder.setNegativeButton(R.string.cancel, null);
+            mResetDialog = builder.show();
+            mResetDialog.setOnDismissListener(this);
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        if (mResetDialog == dialog) {
+            mResetDialog = null;
+        }
+    }
+
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if (mResetDialog == dialog) {
+            final PackageManager pm = getActivity().getPackageManager();
+            final INotificationManager nm = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            final NetworkPolicyManager npm = NetworkPolicyManager.from(getActivity());
+            final Handler handler = new Handler(getActivity().getMainLooper());
+            (new AsyncTask<Void, Void, Void>() {
+                @Override protected Void doInBackground(Void... params) {
+                    List<ApplicationInfo> apps = pm.getInstalledApplications(
+                            PackageManager.GET_DISABLED_COMPONENTS);
+                    for (int i=0; i<apps.size(); i++) {
+                        ApplicationInfo app = apps.get(i);
+                        try {
+                            if (DEBUG) Log.v(TAG, "Enabling notifications: " + app.packageName);
+                            nm.setNotificationsEnabledForPackage(app.packageName, true);
+                        } catch (android.os.RemoteException ex) {
+                        }
+                        if (DEBUG) Log.v(TAG, "Clearing preferred: " + app.packageName);
+                        pm.clearPackagePreferredActivities(app.packageName);
+                        if (!app.enabled) {
+                            if (DEBUG) Log.v(TAG, "Enabling app: " + app.packageName);
+                            if (pm.getApplicationEnabledSetting(app.packageName)
+                                    == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
+                                pm.setApplicationEnabledSetting(app.packageName,
+                                        PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+                                        PackageManager.DONT_KILL_APP);
+                            }
+                        }
+                    }
+                    // We should have cleared all of the preferred apps above;
+                    // just in case some may be lingering, retrieve whatever is
+                    // still set and remove it.
+                    ArrayList<IntentFilter> filters = new ArrayList<IntentFilter>();
+                    ArrayList<ComponentName> prefActivities = new ArrayList<ComponentName>();
+                    pm.getPreferredActivities(filters, prefActivities, null);
+                    for (int i=0; i<prefActivities.size(); i++) {
+                        if (DEBUG) Log.v(TAG, "Clearing preferred: "
+                                + prefActivities.get(i).getPackageName());
+                        pm.clearPackagePreferredActivities(prefActivities.get(i).getPackageName());
+                    }
+                    final int[] restrictedAppIds = npm.getAppsWithPolicy(
+                            POLICY_REJECT_METERED_BACKGROUND);
+                    for (int i : restrictedAppIds) {
+                        if (DEBUG) Log.v(TAG, "Clearing data policy: " + i);
+                        npm.setAppPolicy(i, POLICY_NONE);
+                    }
+                    handler.post(new Runnable() {
+                        @Override public void run() {
+                            if (DEBUG) Log.v(TAG, "Done clearing");
+                            if (getActivity() != null && mActivityResumed) {
+                                if (DEBUG) Log.v(TAG, "Updating UI!");
+                                mApplicationsAdapter.pause();
+                                showCurrentList();
+                            }
+                        }
+                    });
+                    return null;
+                }
+            }).execute();
         }
     }
 
@@ -765,6 +886,8 @@ public class ManageApplications extends Fragment implements
         } else if (menuId == SHOW_BACKGROUND_PROCESSES) {
             mShowBackground = true;
             mRunningProcessesView.mAdapter.setShowBackground(true);
+        } else if (menuId == RESET_APP_PREFERENCES) {
+            buildResetDialog();
         } else {
             // Handle the home button
             return false;
