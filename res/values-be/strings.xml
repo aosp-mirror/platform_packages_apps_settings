@@ -481,7 +481,8 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыкі і мультымедыя"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомніць налады"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Дазволіць абмен дадзенымі, калі тэлефон закранае іншыя прылады"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Дазволіць абмен дадзенымі, калі планшэт дакранаецца да іншай прылады"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Дазволіць абмен дадзенымі, калі тэлефон закранае іншыя прылады"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Гатовы перадаваць змесцiва прыкладанняў з дапамогай прылад NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Адключана"</string>
@@ -496,8 +497,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Налады Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Усталяванне бесправадных кропак доступу і кіраванне iмi"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Вылучыце Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Уключэнне Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Адключэнне Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Памылка"</string>
@@ -633,8 +633,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Мелодыі і апавяшчэнні"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Паведамленні"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Будзільнікі"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Вібрацыя падчас выкліка"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Вобласць паведамлення"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Налады док-станцыі"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Аўдыё"</string>
@@ -1006,6 +1005,14 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Сартаваць па памеры"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Паказаць запушчаныя службы"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Паказаць кэшаваныя працэсы"</string>
+    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
+    <skip />
     <string name="manage_space_text" msgid="8852711522447794676">"Кіраванне вольным месцам"</string>
     <string name="filter" msgid="2018011724373033887">"Фільтр"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Выберыце параметры фільтра"</string>
@@ -1108,8 +1115,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Гэты метад уводу можа збіраць увесь тэкст, які ўводзіцца, у тым лiку такiя персанальныя дадзеныя, як паролі і нумары крэдытных карт. Ён выкарыстоўваецца прыкладаннем <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Выкарыстоўваць гэты метад уводу?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Гэты iнструмент праверкi арфаграфіі можа збiраць увесь ўводзімы тэкст, у тым ліку асабістыя дадзеныя, такія як паролі і нумары крэдытных карт. Яно паходзіць ад прыкладання <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Выкарыстоўваць гэты iнструмент?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Не атрымалася адкрыць параметры <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Мыш/трэкпад"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Хуткасць указальніка"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Прылада кiравання гульнёй"</string>
@@ -1494,47 +1500,32 @@
     <string name="no_application" msgid="2813387563129153880">"Нічога"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Пачакайце адладчык"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Адладжанае прыкладанне чакае далучэння да iнструмента для адладкi перад працай"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Увод"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Чарцёж"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Маніторынг"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Уключаны строгі рэжым"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Міг. экр., калі пр.. вык. працяг. апер. ў асн. пат."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Пазіцыя паказальніка"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Наклад на экран з бягучым выкар. сэнсар. дадзеных"</string>
     <string name="show_touches" msgid="1356420386500834339">"Паказваць дакрананні"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Паказаць візуальную справаздачу аб дакрананнях"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Паказ. абнаўл. паверхні"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Мігаць ўсёй паверхней акна пры абнаўленні"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Паказ. абн. выгляду GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Мігнуць вакном пры чарчэнні з дапамогай GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Адкл. апаратн. накладання"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Заўсёды выкарыстоўваць GPU для экраннай кампаноўкі"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Уключыць сляды"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Вылучыць укл. сляды"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Зараз ніякія сляды не ўключаны"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Зараз уключана наступная колькасць слядоў: <xliff:g id="NUM">%1$d</xliff:g>"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Зараз усе сляды ўключаны"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Паказаць межы размяшчэння"</string>
     <string name="debug_layout_summary" msgid="978411395294379156">"Адлюстраванне інфармацыі аб межах, водступах і г. д."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Паказаць выкарыстанне ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Наклад на экран з бягучым выкарыстаннем працэсара"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Прымусовае адлюстраванне GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Прымусовае выкарыстанне GPU для 2-мерных чарцяжоў"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Апрацоўка профілю GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Вымерыць час рэндэрынгу ў абалонцы adb dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Маштаб анімацыі акна"</string>
