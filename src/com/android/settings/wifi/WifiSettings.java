@@ -20,7 +20,6 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,13 +27,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
@@ -46,15 +45,21 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -185,6 +190,37 @@ public class WifiSettings extends SettingsPreferenceFragment
         mSetupWizardMode = getActivity().getIntent().getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
 
         super.onCreate(icicle);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        if (mSetupWizardMode) {
+            View view = inflater.inflate(R.layout.setup_preference, container, false);
+            ImageButton b1 = (ImageButton) view.findViewById(R.id.wps_push);
+            if (b1 != null) {
+                b1.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDialog(WPS_PBC_DIALOG_ID);
+                    }
+                });
+            }
+            ImageButton b2 = (ImageButton) view.findViewById(R.id.add_network);
+            if (b2 != null) {
+                b2.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mWifiManager.isWifiEnabled()) {
+                            onAddNetworkPressed();
+                        }
+                    }
+                });
+            }
+            return view;
+        } else {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
     }
 
     @Override
@@ -904,4 +940,44 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
         return R.string.help_url_wifi;
     }
+
+    /**
+     * Used as the outer frame of all setup wizard pages that need to adjust their margins based
+     * on the total size of the available display. (e.g. side margins set to 10% of total width.)
+     */
+    public static class ProportionalOuterFrame extends RelativeLayout {
+        public ProportionalOuterFrame(Context context) {
+            super(context);
+        }
+        public ProportionalOuterFrame(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+        public ProportionalOuterFrame(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+        }
+
+        /**
+         * Set our margins and title area height proportionally to the available display size
+         */
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+            int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+            final Resources resources = getContext().getResources();
+            float titleHeight = resources.getFraction(R.dimen.setup_title_height, 1, 1);
+            float sideMargin = resources.getFraction(R.dimen.setup_border_width, 1, 1);
+            int bottom = resources.getDimensionPixelSize(R.dimen.setup_margin_bottom);
+            setPadding(
+                    (int) (parentWidth * sideMargin),
+                    0,
+                    (int) (parentWidth * sideMargin),
+                    bottom);
+            View title = findViewById(R.id.title_area);
+            if (title != null) {
+                title.setMinimumHeight((int) (parentHeight * titleHeight));
+            }
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+    }
+
 }
