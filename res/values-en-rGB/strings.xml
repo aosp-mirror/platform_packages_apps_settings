@@ -481,7 +481,8 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For music and media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Remember settings"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Allow data exchange when the phone touches another device"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Allow data exchange when the tablet touches another device"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Allow data exchange when the phone touches another device"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Ready to transmit app content via NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Off"</string>
@@ -496,8 +497,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi settings"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Set up &amp; manage wireless access points"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Select Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Turning Wi-Fi on…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Turning off Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
@@ -1107,8 +1107,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"This input method may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the app <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Use this input method?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"This spell checker may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Use this spell checker?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Failed to open settings for <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/track pad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Pointer speed"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Game Controller"</string>
