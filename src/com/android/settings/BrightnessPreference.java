@@ -53,7 +53,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     // doesn't set the backlight to 0 and get stuck
     private int mScreenBrightnessDim =
 	    getContext().getResources().getInteger(com.android.internal.R.integer.config_screenBrightnessDim);
-    private static final int MAXIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_ON;
+    private static final int MAXIMUM_BACKLIGHT = android.os.PowerManager.BRIGHTNESS_ON;
 
     private static final int SEEK_BAR_RANGE = 10000;
 
