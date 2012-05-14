@@ -128,7 +128,7 @@ public class WifiConfigController implements TextWatcher,
         if (config == null) {
             return false;
         }
-        if (config.key_id.value() != null) {
+        if (!TextUtils.isEmpty(config.key_id.value())) {
             return true;
         }
         String values[] = { config.ca_cert.value(), config.client_cert.value() };
@@ -366,11 +366,12 @@ public class WifiConfigController implements TextWatcher,
                 config.client_cert.setValue((mEapUserCertSpinner.getSelectedItemPosition() == 0) ?
                         "" : KEYSTORE_SPACE + Credentials.USER_CERTIFICATE +
                         (String) mEapUserCertSpinner.getSelectedItem());
-                config.engine.setValue(WifiConfiguration.ENGINE_ENABLE);
-                config.engine_id.setValue(WifiConfiguration.KEYSTORE_ENGINE_ID);
-                config.key_id.setValue((mEapUserCertSpinner.getSelectedItemPosition() == 0) ?
-                        "" : Credentials.USER_PRIVATE_KEY +
+                final boolean isEmptyKeyId = (mEapUserCertSpinner.getSelectedItemPosition() == 0);
+                config.key_id.setValue(isEmptyKeyId ? "" : Credentials.USER_PRIVATE_KEY +
                         (String) mEapUserCertSpinner.getSelectedItem());
+                config.engine.setValue(isEmptyKeyId ? WifiConfiguration.ENGINE_DISABLE :
+                        WifiConfiguration.ENGINE_ENABLE);
+                config.engine_id.setValue(isEmptyKeyId ? "" : WifiConfiguration.KEYSTORE_ENGINE_ID);
                 config.identity.setValue((mEapIdentityView.length() == 0) ? "" :
                         mEapIdentityView.getText().toString());
                 config.anonymous_identity.setValue((mEapAnonymousView.length() == 0) ? "" :
