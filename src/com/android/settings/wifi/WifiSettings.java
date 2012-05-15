@@ -353,21 +353,21 @@ public class WifiSettings extends SettingsPreferenceFragment
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            if (mP2pSupported) {
-                menu.add(Menu.NONE, MENU_ID_P2P, 0, R.string.wifi_menu_p2p)
-                        .setEnabled(wifiIsEnabled)
-                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            }
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
                     //.setIcon(R.drawable.ic_menu_scan_network)
                     .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
             menu.add(Menu.NONE, MENU_ID_WPS_PIN, 0, R.string.wifi_menu_wps_pin)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            if (mP2pSupported) {
+                menu.add(Menu.NONE, MENU_ID_P2P, 0, R.string.wifi_menu_p2p)
+                        .setEnabled(wifiIsEnabled)
+                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            }
             menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                     //.setIcon(android.R.drawable.ic_menu_manage)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
