@@ -549,9 +549,7 @@ public class DataUsageSummary extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
+    public void onDestroy() {
         mDataEnabledView = null;
         mDisableAtLimitView = null;
 
@@ -559,14 +557,12 @@ public class DataUsageSummary extends Fragment {
         mUidDetailProvider = null;
 
         TrafficStats.closeQuietly(mStatsSession);
-    }
 
-    @Override
-    public void onDestroy() {
         if (this.isRemoving()) {
             getFragmentManager()
                     .popBackStack(TAG_APP_DETAILS, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+
         super.onDestroy();
     }
 
