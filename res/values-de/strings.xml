@@ -306,8 +306,8 @@
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Verschlüsselung"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Tablet verschlüsseln"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Telefon verschlüsseln"</string>
-    <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Numerische PIN oder Passwort festlegen, mit dem das Tablet beim Einschalten entschlüsselt werden muss."</string>
-    <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Numerische PIN oder Passwort festlegen, mit dem das Telefon beim Einschalten entschlüsselt werden muss."</string>
+    <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Numerische PIN oder Passwort festlegen, mit dem das Tablet beim Einschalten entschlüsselt werden muss"</string>
+    <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Numerische PIN oder Passwort festlegen, mit dem das Telefon beim Einschalten entschlüsselt werden muss"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Verschlüsselt"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Sie können Ihre Konten, Einstellungen, heruntergeladenen Apps mit den dazugehörigen Daten sowie Multimedia- und andere Dateien verschlüsseln. Nach der Verschlüsselung Ihres Tablets ist bei jedem Einschalten die Eingabe einer PIN-Nummer oder eines Passworts erforderlich. Sie können die Verschlüsselung Ihres Tablets nur aufheben, indem Sie das Gerät auf die Werkseinstellungen zurücksetzen. Dabei werden alle Ihre Daten gelöscht."\n\n"Die Verschlüsselung dauert mindestens eine Stunde. Vergewissern Sie sich zu Beginn, dass Ihr Akku vollständig geladen ist, und lassen Sie Ihr Tablet angeschlossen, bis die Verschlüsselung abgeschlossen ist. Eine Unterbrechung dieses Vorgangs kann zu teilweisem oder vollständigem Datenverlust führen."</string>
     <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Sie können Ihre Konten, Einstellungen, heruntergeladenen Apps mit den dazugehörigen Daten sowie Multimedia- und andere Dateien verschlüsseln. Nach der Verschlüsselung Ihres Telefons ist bei jedem Einschalten die Eingabe einer PIN-Nummer oder eines Passworts erforderlich. Sie können die Verschlüsselung Ihres Telefons nur aufheben, indem Sie das Gerät auf die Werkseinstellungen zurücksetzen. Dabei werden alle Ihre Daten gelöscht."\n\n"Die Verschlüsselung dauert mindestens eine Stunde. Vergewissern Sie sich zu Beginn, dass Ihr Akku vollständig geladen ist, und lassen Sie Ihr Telefon angeschlossen, bis die Verschlüsselung abgeschlossen ist. Eine Unterbrechung dieses Vorgangs kann zu teilweisem oder vollständigem Datenverlust führen."</string>
@@ -482,14 +482,15 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Für Musik und Medien"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Einstellungen speichern"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Datenaustausch bei Kontakt mit anderen Geräten zulassen"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Datenaustausch bei Kontakt mit anderen Geräten zulassen"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Datenaustausch bei Kontakt mit anderen Geräten zulassen"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Bereit zur Übertragung von App-Inhalten über NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Aus"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Nicht verfügbar, da NFC deaktiviert ist"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
     <string name="android_beam_explained" msgid="6981652347448777459">"Wenn diese Funktion aktiviert ist, können Sie App-Inhalte auf ein anderes NFC-fähiges Gerät beamen, indem Sie die Geräte dicht nebeneinander halten. Sie können beispielsweise Browserseiten, YouTube-Videos und Kontakte beamen."\n\n"Halten Sie die Geräte einfach dicht nebeneinander, am besten Rückseite an Rückseite, und berühren Sie den Bildschirm. Die App bestimmt, was übertragen wird."</string>
-    <string name="nsd_quick_toggle_title" msgid="3125572815278848258">"Network Service Discovery"</string>
+    <string name="nsd_quick_toggle_title" msgid="3125572815278848258">"Diensterkennung"</string>
     <string name="nsd_quick_toggle_summary" msgid="155692215972781276">"Ermöglicht Apps auf anderen Geräten, Apps auf diesem Gerät zu erkennen"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WLAN"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"WLAN aktivieren"</string>
@@ -497,8 +498,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"WLAN-Einstellungen"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"WLAN"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"WLAN-Zugangspunkte festlegen und verwalten"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"WLAN auswählen"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"WLAN aktivieren?"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"WLAN wird deaktiviert..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Fehler"</string>
@@ -512,7 +512,7 @@
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Beim Ändern der Einstellung ist ein Problem aufgetreten."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Netzwerk hinzufügen"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"WLAN-Netzwerke"</string>
-    <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-Push-Schaltfläche"</string>
+    <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-Push-Taste"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS-PIN-Eingabe"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Scannen"</string>
@@ -634,8 +634,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Klingelton &amp; Benachrichtigungen"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Benachrichtigungen"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Wecker"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Beim Klingeln vibrieren"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Dock-Einstellungen"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
@@ -749,7 +748,7 @@
     <string name="memory_media_usage" msgid="3738830697707880405">"Medien"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"Downloads"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"Bilder, Videos"</string>
-    <string name="memory_music_usage" msgid="1363785144783011606">"Audio (Musik, Klingeltöne, Podcasts usw.)"</string>
+    <string name="memory_music_usage" msgid="1363785144783011606">"Audio (Musik, Töne, usw.)"</string>
     <string name="memory_media_misc_usage" msgid="235452944021647124">"Sonstiges"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Gem. Speicher trennen"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"SD-Karte entnehmen"</string>
@@ -779,7 +778,7 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Trennen..."</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Trennung..."</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB-Verbindung (PC)"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Externes Lesen erzwingen"</string>
+    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Ext. Lesen erzwingen"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB-Verbindung (PC)"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Verbinden als"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Mediengerät (MTP)"</string>
@@ -831,8 +830,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Auf Werkszustand zurück"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Löscht alle Daten auf dem Tablet"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Löscht alle Daten auf dem Telefon"</string>
-    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Tablets gelöscht, u. a."\n\n<li>"Ihr Google-Konto,"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>" und heruntergeladene Apps"</li>"."</string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Telefons gelöscht, u. a."\n\n<li>"Ihr Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>" und heruntergeladene Apps"</li>"."</string>
+    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Tablets gelöscht, u. a."\n\n<li>"Ihr Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>"Heruntergeladene Apps"</li></string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Telefons gelöscht, u. a."\n\n<li>"Ihr Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>"Heruntergeladene Apps"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Sie sind zurzeit in folgenden Konten angemeldet:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, muss der "<b>"USB-Speicher"</b>" gelöscht werden."</string>
@@ -853,7 +852,7 @@
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD-Karte löschen"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Löscht alles im USB-Speicher."</string>
     <string name="media_format_summary" product="default" msgid="3805714639375830120">"Löscht alle Daten auf der SD-Karte"</string>
-    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"Alle USB-Speicher löschen? "<b>"Alle"</b>" darin gespeicherten Daten gehen damit verloren!"</string>
+    <string name="media_format_desc" product="nosdcard" msgid="4557243156946319034">"USB-Speicher ganz löschen? "<b>"Alle"</b>" darin gespeicherten Daten gehen damit verloren!"</string>
     <string name="media_format_desc" product="default" msgid="8764037252319942415">"SD-Karte löschen? Sie verlieren damit "<b>"alle"</b>" Daten auf der Karte!"</string>
     <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"USB-Speicher löschen"</string>
     <string name="media_format_button_text" product="default" msgid="6721544380069373626">"SD-Karte löschen"</string>
@@ -893,7 +892,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilfunknetze"</string>
     <string name="location_title" msgid="1029961368397484576">"Mein Standort"</string>
     <string name="location_network_based" msgid="5569673665032992664">"Standortdienst von Google"</string>
-    <string name="location_neighborhood_level" msgid="2948129720516513300">"Anonyme Standortdaten dürfen an Google gesendet werden. Außerdem können bestimmte Apps Daten aus Quellen wie WLAN und Mobilfunknetzen für die Ermittlung des ungefähren Standorts nutzen."</string>
+    <string name="location_neighborhood_level" msgid="2948129720516513300">"Anonyme Standortdaten dürfen an Google gesendet werden. Außerdem können bestimmte Apps Daten aus Quellen wie WLAN und Mobilfunknetzen für die Bestimmung des ungefähren Standorts nutzen."</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Standort per WLAN bestimmt"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS-Satelliten"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Apps dürfen meinen Standort mithilfe von GPS bestimmen."</string>
@@ -950,7 +949,7 @@
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Zum Entsperren muss ein Muster gezeichnet werden"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Muster sichtbar machen"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Bei Berührung vibrieren"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Ein-/Aus sperrt Gerät sofort"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Ein/Aus sperrt Gerät"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Entsperrungsmuster"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Muster ändern"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Zeichnen eines Entsperrungsmusters"</string>
@@ -1007,6 +1006,14 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Nach Größe sortieren"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Aktive Dienste anzeigen"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Prozesse im Cache anzeigen"</string>
+    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
+    <skip />
     <string name="manage_space_text" msgid="8852711522447794676">"Speicherplatz verwalten"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Filteroptionen auswählen"</string>
@@ -1068,7 +1075,7 @@
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
     <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> frei"</string>
-    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> verw."</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> belegt"</string>
     <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
@@ -1095,7 +1102,7 @@
     <string name="language_settings" msgid="5292716747264442359">"Sprache &amp; Eingabe"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Sprache &amp; Eingabe"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Spracheinstellungen"</string>
-    <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatur und Eingabemethoden"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatur &amp; Eingabemethoden"</string>
     <string name="phone_language" msgid="8870144109924299673">"Sprache"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Autom. Ersetzung"</string>
@@ -1109,8 +1116,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Diese Eingabemethode kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Passwörter und Kreditkartennummern. Sie ist Teil der App <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Möchten Sie diese Eingabemethode verwenden?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Diese Rechtschreibprüfung kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Passwörter und Kreditkartennummern. Sie ist Teil der App <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Möchten Sie die Rechtschreibprüfung verwenden?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Einstellungen für <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> konnten nicht geöffnet werden."</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Maus/Touchpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Zeigergeschwindigkeit"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Gamecontroller"</string>
@@ -1120,7 +1126,7 @@
     <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"Keine Tastaturlayouts verfügbar"</string>
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"Standard"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Mein Wörterbuch"</string>
-    <string name="user_dict_single_settings_title" msgid="524997218433540614">"Persönliches Wörterbuch"</string>
+    <string name="user_dict_single_settings_title" msgid="524997218433540614">"Mein Wörterbuch"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Persönliche Wörterbücher"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Hinzufügen"</string>
@@ -1135,7 +1141,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Wort bearbeiten"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Bearbeiten"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Löschen"</string>
-    <string name="user_dict_settings_empty_text" msgid="8165273379942105271">"Es sind keine Wörter in Ihrem Wörterbuch vorhanden. Sie können durch Berühren der Schaltfläche \"+\" ein Wort hinzufügen."</string>
+    <string name="user_dict_settings_empty_text" msgid="8165273379942105271">"Es sind noch keine Wörter in Ihrem Wörterbuch vorhanden. Sie können Wörter hinzufügen, indem Sie das \"+\"-Symbol berühren."</string>
     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"Für alle Sprachen"</string>
     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"Weitere Sprachen..."</string>
     <string name="testing" msgid="6584352735303604146">"Test"</string>
@@ -1207,7 +1213,7 @@
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"Tippen &amp; Entdecken"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Wenn die Funktion \"Tippen und Entdecken\" aktiviert ist, hören oder sehen Sie Beschreibungen Ihrer Aktionen."\n\n" Diese Funktion ist für Nutzer mit geringem Sehvermögen."</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Reaktionszeit Berühren/Halten"</string>
-    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Web-Bedienungshilfen verbessern"</string>
+    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Web-Bedienung verbessern"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Einstellungen"</string>
     <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"Anleitung"</string>
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"An"</string>
@@ -1359,7 +1365,7 @@
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Zertifikate von SD-Karte installieren"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Anmeldedaten löschen"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Alle Zertifikate entfernen"</string>
-    <string name="trusted_credentials" msgid="4266945289534242402">"Vertrauenswürdige Anmeldedaten"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"Vertrauensw. Anmeldedaten"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vertrauenswürdige CA-Zertifikate anzeigen"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Bitte zeichnen Sie Ihr Entsperrungsmuster."</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Sie müssen Ihr Entsperrungsmuster eingeben, um das Installieren der Anmeldedaten zu bestätigen."</string>
@@ -1379,14 +1385,14 @@
     <string name="emergency_tone_summary" msgid="722259232924572153">"Verhalten bei einem Notruf festlegen"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Sichern &amp; zurücksetzen"</string>
     <string name="privacy_settings_title" msgid="4856282165773594890">"Sichern &amp; zurücksetzen"</string>
-    <string name="backup_section_title" msgid="7952232291452882740">"Backup und Wiederherstellung"</string>
+    <string name="backup_section_title" msgid="7952232291452882740">"Sicherung &amp; Wiederherstellung"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Persönliche Daten"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Meine Daten sichern"</string>
     <string name="backup_data_summary" msgid="9157861529438245957">"App-Daten, WLAN-Passwörter und andere Einstellungen auf Google-Servern sichern"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sicherungskonto"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Zurzeit werden in keinem Konto gesicherte Daten gespeichert."</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Autom. Wiederherstellung"</string>
-    <string name="auto_restore_summary" msgid="4235615056371993807">"Stellen Sie nach der Neuinstallation einer App gesicherte Einstellungen und Daten wieder her."</string>
+    <string name="auto_restore_summary" msgid="4235615056371993807">"Nach der Neuinstallation einer App gesicherte Einstellungen und Daten wiederherstellen"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Desktop-Sicherungspasswort"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Vollständige Desktop-Sicherungen sind momentan nicht passwortgeschützt."</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Zum Ändern oder Entfernen des Passworts für vollständige Desktop-Sicherungen berühren"</string>

@@ -481,7 +481,8 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pro hudbu a média"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamatovat nastavení"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Povolit výměnu dat, pokud se telefon dotkne jiného zařízení"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Povolit výměnu dat, pokud se tablet dotkne jiného zařízení"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Povolit výměnu dat, pokud se telefon dotkne jiného zařízení"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Přenos obsahu aplikace prostřednictvím NFC je připraven"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Vypnuto"</string>
@@ -496,8 +497,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Nastavení WiFi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Umožňuje nastavit a spravovat přístupové body bezdrátové sítě"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Vybrat síť Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Zapnout Wi-Fi?"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Vypínání Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Chyba"</string>
@@ -1005,6 +1005,14 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Řadit podle velikosti"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Zobrazit spuštěné služby"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Zobrazit mezipaměť"</string>
+    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
+    <skip />
     <string name="manage_space_text" msgid="8852711522447794676">"Správa paměti"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Vyberte možnosti filtru"</string>
@@ -1107,8 +1115,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Prostřednictvím této metody zadávání dat lze shromažďovat zadaný text včetně osobních údajů, jako jsou hesla a čísla platebních karet. Metoda je poskytována aplikací <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Chcete tuto metodu zadávání dat použít?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Prostřednictvím této kontroly pravopisu lze shromažďovat zadaný text včetně osobních údajů, jako jsou hesla a čísla kreditních karet. Kontrola pravopisu je součástí aplikace <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Chcete tuto kontrolu pravopisu použít?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Nastavení aplikace <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> se nepodařilo otevřít"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Myš/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Rychlost kurzoru"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Herní ovladače"</string>
@@ -1296,7 +1303,7 @@
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> od odpojení"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Při posledním odpojení pro <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Využití baterie celkem"</string>
-    <string name="menu_stats_refresh" msgid="1676215433344981075">"Obnovit"</string>
+    <string name="menu_stats_refresh" msgid="1676215433344981075">"Aktualizovat"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"OS Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Hlasový vstup a výstup"</string>

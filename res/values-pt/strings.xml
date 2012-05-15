@@ -421,7 +421,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para parear com:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Verifique se ele está mostrando a seguinte senha:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Parear com este dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Para parear com:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Digite no dispositivo:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>. Em seguida, pressione Voltar ou Entrar."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Emparelhar"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Parear"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancelar"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Não foi possível parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -481,7 +481,8 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música e mídia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Lembrar configurações"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="5237208142892767592">"Permitir troca de dados quando o telefone tocar em  outro dispositivo"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permitir troca de dados quando o tablet tocar em outro dispositivo"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permitir troca de dados quando o telefone tocar em  outro dispositivo"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Pronto para transmitir conteúdo de aplicativos via NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Desativado"</string>
@@ -496,8 +497,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Configurações de Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configurar e gerenciar pontos de acesso sem fio"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Selecionar Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Ativar Wi-Fi?"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Desativando Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Erro"</string>
@@ -505,7 +505,7 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Não é possível verificar a existência de redes"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notificação de rede"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Receber notificação quando uma rede aberta estiver disponível"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Evitar conexões de baixa qualidade"</string>
+    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Evit. conexões de baixa qual."</string>
     <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"Não usar uma rede Wi-Fi, a menos que tenha uma boa conexão com a Internet"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Manter Wi-Fi durante inatividade"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Ocorreu um problema com a mudança de configuração"</string>
@@ -633,8 +633,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Ringtones e notificações"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificações"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmes"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrar ao tocar"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Configurações de dock"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Áudio"</string>
@@ -1006,6 +1005,14 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Classificar por tamanho"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Mostrar serviços em exec."</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar processo em cache"</string>
+    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
+    <skip />
     <string name="manage_space_text" msgid="8852711522447794676">"Gerenciar espaço"</string>
     <string name="filter" msgid="2018011724373033887">"Filtro"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Selecione as opções de filtro"</string>
@@ -1108,8 +1115,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Este método de entrada pode coletar todo o texto que você digita, incluindo dados pessoais, como senhas e números de cartão de crédito. É um método do aplicativo <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Usar este método de entrada?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Este corretor ortográfico pode coletar todo o texto que você digita, incluindo dados pessoais, como senhas e números de cartão de crédito. É um corretor do aplicativo <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utilizar este corretor ortográfico?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Falha ao abrir as configurações de <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocidade do ponteiro"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Controlador de jogos"</string>
