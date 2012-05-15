@@ -1904,8 +1904,6 @@
 
     <!-- Storage setting.  Menu option for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_menu_usb">USB computer connection</string>
-    <!-- Storage setting.  Menu option to enforce read external storage permission. [CHAR LIMIT=30]-->
-    <string name="storage_menu_enforce_read_external">Enforce read external</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -2805,6 +2803,24 @@
     <string name="dev_settings_warning_title">Allow development settings?</string>
     <!-- Warning text to user about the implications of enabling USB debugging -->
     <string name="dev_settings_warning_message">These settings are intended for development use only.  They can cause your device and the applications on it to break or misbehave.</string>
+
+    <!-- Title of checkbox setting that protects external storage. [CHAR LIMIT=32] -->
+    <string name="enforce_read_external_title" product="nosdcard">Protect USB storage</string>
+    <!-- Summary of checkbox setting that protects external storage. [CHAR LIMIT=64] -->
+    <string name="enforce_read_external_summary" product="nosdcard">Apps must request permission to read USB storage</string>
+    <!-- Title of dialog confirming that user wants to protect external storage. [CHAR LIMIT=32] -->
+    <string name="enforce_read_external_confirm_title" product="nosdcard">Protect USB storage?</string>
+    <!-- Message of dialog confirming that user wants to protect external storage. [CHAR LIMIT=NONE] -->
+    <string name="enforce_read_external_confirm_message" product="nosdcard">When USB storage is protected, apps must request permission to read data from external storage.\n\nSome apps may not work until updated by their developers.</string>
+
+    <!-- Title of checkbox setting that protects external storage. [CHAR LIMIT=32] -->
+    <string name="enforce_read_external_title" product="default">Protect SD card</string>
+    <!-- Summary of checkbox setting that protects external storage. [CHAR LIMIT=64] -->
+    <string name="enforce_read_external_summary" product="default">Apps must request permission to read SD card</string>
+    <!-- Title of dialog confirming that user wants to protect external storage. [CHAR LIMIT=32] -->
+    <string name="enforce_read_external_confirm_title" product="default">Protect SD card?</string>
+    <!-- Message of dialog confirming that user wants to protect external storage. [CHAR LIMIT=NONE] -->
+    <string name="enforce_read_external_confirm_message" product="default">When SD card is protected, apps must request permission to read data from external storage.\n\nSome apps may not work until updated by their developers.</string>
 
     <!-- Title for the screen that lets the user choose a gadget to add to the home screen
          (or other screens that can host gadgets).  Note to translators: we're still determining

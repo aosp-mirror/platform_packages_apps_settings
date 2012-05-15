@@ -39,6 +39,11 @@
         android:entries="@array/hdcp_checking_titles"
         android:entryValues="@array/hdcp_checking_values" />
 
+    <CheckBoxPreference
+        android:key="enforce_read_external"
+        android:title="@string/enforce_read_external_title"
+        android:summary="@string/enforce_read_external_summary" />
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
