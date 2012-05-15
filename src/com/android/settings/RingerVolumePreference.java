@@ -116,8 +116,8 @@ public class RingerVolumePreference extends VolumePreference {
             boolean muted = mAudioManager.isStreamMute(streamType);
 
             if (mCheckBoxes[i] != null) {
-                if (streamType == AudioManager.STREAM_RING && muted
-                        && !(mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_SILENT)) {
+                if ((streamType == AudioManager.STREAM_RING) &&
+                        (mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE)) {
                     mCheckBoxes[i].setImageResource(
                             com.android.internal.R.drawable.ic_audio_ring_notif_vibrate);
                 } else {
@@ -126,9 +126,13 @@ public class RingerVolumePreference extends VolumePreference {
                 }
             }
             if (mSeekBars[i] != null) {
-                final int volume = muted ? mAudioManager.getLastAudibleStreamVolume(streamType)
-                        : mAudioManager.getStreamVolume(streamType);
+                final int volume = mAudioManager.getStreamVolume(streamType);
                 mSeekBars[i].setProgress(volume);
+                if (streamType != mAudioManager.getMasterStreamType() && muted) {
+                    mSeekBars[i].setEnabled(false);
+                } else {
+                    mSeekBars[i].setEnabled(true);
+                }
             }
         }
     }
@@ -169,9 +173,6 @@ public class RingerVolumePreference extends VolumePreference {
             }
         }
 
-        final int silentableStreams = System.getInt(getContext().getContentResolver(),
-                System.MODE_RINGER_STREAMS_AFFECTED,
-                ((1 << AudioSystem.STREAM_NOTIFICATION) | (1 << AudioSystem.STREAM_RING)));
         // Register callbacks for mute/unmute buttons
         for (int i = 0; i < mCheckBoxes.length; i++) {
             ImageView checkbox = (ImageView) view.findViewById(CHECKBOX_VIEW_ID[i]);
