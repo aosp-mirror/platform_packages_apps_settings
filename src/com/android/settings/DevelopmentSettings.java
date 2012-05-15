@@ -16,17 +16,20 @@
 
 package com.android.settings;
 
-import java.util.ArrayList;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
+import android.app.ActivityThread;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -45,18 +48,19 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.MultiCheckPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+
+import java.util.ArrayList;
 
 /*
  * Displays preferences for application developers.
@@ -70,6 +74,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
+    private static final String ENFORCE_READ_EXTERNAL = "enforce_read_external";
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
 
@@ -97,6 +102,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
+
     private static final int RESULT_DEBUG_APP = 1000;
 
     private IWindowManager mWindowManager;
@@ -109,6 +116,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
+    private CheckBoxPreference mEnforceReadExternal;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
 
@@ -157,6 +165,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
+        mEnforceReadExternal = findAndInitCheckboxPref(ENFORCE_READ_EXTERNAL);
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
@@ -302,12 +311,14 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateAllOptions() {
-        final ContentResolver cr = getActivity().getContentResolver();
+        final Context context = getActivity();
+        final ContentResolver cr = context.getContentResolver();
         mHaveDebugSettings = false;
         updateCheckBox(mEnableAdb, Settings.Secure.getInt(cr,
                 Settings.Secure.ADB_ENABLED, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.System.getInt(cr,
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
+        updateCheckBox(mEnforceReadExternal, isPermissionEnforced(context, READ_EXTERNAL_STORAGE));
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
@@ -786,6 +797,12 @@ public class DevelopmentSettings extends PreferenceFragment
                     Settings.System.STAY_ON_WHILE_PLUGGED_IN, 
                     mKeepScreenOn.isChecked() ? 
                     (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
+        } else if (preference == mEnforceReadExternal) {
+            if (mEnforceReadExternal.isChecked()) {
+                ConfirmEnforceFragment.show(this);
+            } else {
+                setPermissionEnforced(getActivity(), READ_EXTERNAL_STORAGE, false);
+            }
         } else if (preference == mAllowMockLocation) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
@@ -932,6 +949,61 @@ public class DevelopmentSettings extends PreferenceFragment
                 }
             }
             return null;
+        }
+    }
+
+    /**
+     * Dialog to confirm enforcement of {@link #READ_EXTERNAL_STORAGE}.
+     */
+    public static class ConfirmEnforceFragment extends DialogFragment {
+        public static void show(DevelopmentSettings parent) {
+            final ConfirmEnforceFragment dialog = new ConfirmEnforceFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_ENFORCE);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.enforce_read_external_confirm_title);
+            builder.setMessage(R.string.enforce_read_external_confirm_message);
+
+            builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    setPermissionEnforced(context, READ_EXTERNAL_STORAGE, true);
+                    ((DevelopmentSettings) getTargetFragment()).updateAllOptions();
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ((DevelopmentSettings) getTargetFragment()).updateAllOptions();
+                }
+            });
+
+            return builder.create();
+        }
+    }
+
+    private static boolean isPermissionEnforced(Context context, String permission) {
+        try {
+            return ActivityThread.getPackageManager().isPermissionEnforced(READ_EXTERNAL_STORAGE);
+        } catch (RemoteException e) {
+            throw new RuntimeException("Problem talking with PackageManager", e);
+        }
+    }
+
+    private static void setPermissionEnforced(
+            Context context, String permission, boolean enforced) {
+        try {
+            // TODO: offload to background thread
+            ActivityThread.getPackageManager()
+                    .setPermissionEnforced(READ_EXTERNAL_STORAGE, enforced);
+        } catch (RemoteException e) {
+            throw new RuntimeException("Problem talking with PackageManager", e);
         }
     }
 }
