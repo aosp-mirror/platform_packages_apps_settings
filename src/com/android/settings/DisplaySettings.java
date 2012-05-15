@@ -236,6 +236,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateAccelerometerRotationCheckbox() {
+        if (getActivity() == null) return;
         mAccelerometer.setChecked(Settings.System.getInt(
                 getContentResolver(),
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
