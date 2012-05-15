@@ -16,9 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-
-import android.app.ActivityThread;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -26,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.IPackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
@@ -68,7 +64,6 @@ public class Memory extends SettingsPreferenceFragment {
     private IMountService mMountService = null;
 
     private StorageManager mStorageManager = null;
-    private IPackageManager mPackageService;
 
     private StorageVolumePreferenceCategory mInternalStorageVolumePreferenceCategory;
     private StorageVolumePreferenceCategory[] mStorageVolumePreferenceCategories;
@@ -81,8 +76,6 @@ public class Memory extends SettingsPreferenceFragment {
             mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
             mStorageManager.registerListener(mStorageListener);
         }
-
-        mPackageService = ActivityThread.getPackageManager();
 
         addPreferencesFromResource(R.xml.device_info_memory);
 
@@ -178,16 +171,6 @@ public class Memory extends SettingsPreferenceFragment {
     public void onPrepareOptionsMenu(Menu menu) {
         final MenuItem usb = menu.findItem(R.id.storage_usb);
         usb.setVisible(!isMassStorageEnabled());
-
-        final boolean enforced;
-        try {
-            enforced = mPackageService.isPermissionEnforced(READ_EXTERNAL_STORAGE);
-        } catch (RemoteException e) {
-            throw new RuntimeException("Problem talking with PackageManager", e);
-        }
-
-        final MenuItem enforceReadExternal = menu.findItem(R.id.storage_enforce_read_external);
-        enforceReadExternal.setChecked(enforced);
     }
 
     @Override
@@ -204,18 +187,6 @@ public class Memory extends SettingsPreferenceFragment {
                     startFragment(this, UsbSettings.class.getCanonicalName(), -1, null);
                 }
                 return true;
-            case R.id.storage_enforce_read_external: {
-                final boolean checked = !item.isChecked();
-                item.setChecked(checked);
-
-                try {
-                    // TODO: offload to background thread
-                    mPackageService.setPermissionEnforced(READ_EXTERNAL_STORAGE, checked);
-                } catch (RemoteException e) {
-                    throw new RuntimeException("Problem talking with PackageManager", e);
-                }
-                return true;
-            }
         }
         return super.onOptionsItemSelected(item);
     }
