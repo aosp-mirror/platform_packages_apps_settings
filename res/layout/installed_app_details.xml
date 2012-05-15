@@ -50,35 +50,12 @@
                 android:id="@+id/control_buttons_panel"/>
 
             <!-- Ban notifications for this package -->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+            <CheckBox android:id="@+id/notification_switch"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:paddingLeft="6dip"
-                android:paddingTop="8dip"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="14dip"
-                    android:text="@string/app_notifications_switch_label"
-                    android:singleLine="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal" />
-                <Switch android:id="@+id/notification_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dip"
-                    android:switchTextAppearance="@style/TextAppearance.Switch"
-                    android:textOn="@string/app_notifications_switch_on"
-                    android:textOff="@string/app_notifications_switch_off"
-                    android:focusable="false"
-                    android:clickable="true" />
-            </LinearLayout>
+                android:layout_marginLeft="12dip"
+                android:layout_gravity="left"
+                android:text="@string/app_notifications_switch_label" />
 
         </LinearLayout>
 
