@@ -143,9 +143,11 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             });
         }
 
-        // TODO Add support for android.R.id.home in all Setting's onOptionsItemSelected
-        // getActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP,
-        // ActionBar.DISPLAY_HOME_AS_UP);
+        // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
+        if (onIsMultiPane()) {
+            getActionBar().setDisplayHomeAsUpEnabled(false);
+            getActionBar().setHomeButtonEnabled(false);
+        }
     }
 
     @Override
@@ -600,6 +602,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
                 null, 0);
         return true;
+    }
+
+    public boolean shouldUpRecreateTask(Intent targetIntent) {
+        return super.shouldUpRecreateTask(new Intent(this, Settings.class));
     }
 
     @Override

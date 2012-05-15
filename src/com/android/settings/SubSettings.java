@@ -21,4 +21,10 @@ package com.android.settings;
  * since for our app it is a special singleTask class.
  */
 public class SubSettings extends Settings {
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
+    }
 }
