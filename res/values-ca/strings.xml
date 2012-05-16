@@ -632,8 +632,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"To i notificacions"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificacions"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmes"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibra quan soni"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Base"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Configuració de la base"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Àudio"</string>
@@ -654,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Cerca"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gestiona la configuració i l\'historial de cerca"</string>
     <string name="display_settings" msgid="7965901687241669598">"Visualització"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Gira la pantalla automàticament"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Canvia l\'orientació automàticament en girar la tauleta"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Canvia d\'orientació automàticament en girar el telèfon"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Canvia l\'orientació automàticament en girar la tauleta"</string>
@@ -1187,22 +1187,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"La finalitat de la depuració d\'USB és només el desenvolupament. Fes-la servir per copiar dades entre l\'equip i el dispositiu, per instal·lar aplicacions al dispositiu sense notificacions i per llegir les dades del registre."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vols permetre la configuració de desenvolupament?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Aquesta configuració només està prevista per a usos de desenvolupament. Pot fer que el dispositiu i que les aplicacions s\'interrompin o tinguin un comportament inadequat."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Protecció de l\'emmagatz. USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"L\'aplicació ha de sol·licitar permís per llegir l\'emmagatz. USB"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Vols protegir l\'emmagatz. USB?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Si l\'emmagatzematge USB està protegit, les aplicacions han de sol·licitar permís per llegir les dades de l\'emmagatzematge extern."\n\n"És possible que algunes aplicacions no funcionin fins que els desenvolupadors no les actualitzin."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Protecció de la targeta SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"L\'aplicació ha de sol·licitar permís per llegir la targeta SD"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Vols protegir la targeta SD?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Si la targeta SD està protegida, les aplicacions han de sol·licitar permís per llegir les dades de l\'emmagatzematge extern."\n\n"És possible que algunes aplicacions no funcionin fins que els desenvolupadors no les actualitzin."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Selecció de gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Selecció de widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Vols crear el widget i permetre l\'accés?"</string>
@@ -1527,10 +1519,10 @@
     <string name="pointer_location_summary" msgid="840819275172753713">"Superposició de pantalla mostra dades actuals toc"</string>
     <string name="show_touches" msgid="1356420386500834339">"Mostra els tocs"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostra comentaris visuals per tocs"</string>
-    <string name="show_screen_updates" msgid="5470814345876056420">"Mostra act. superfície"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Apl. Flash a superf. de finestres senceres en act."</string>
+    <string name="show_screen_updates" msgid="5470814345876056420">"Mostra actual. superfície"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Flash a superf. de finestres sencer. en act."</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"Mostra act. vis. de GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Apl. Flash a vis. dins de fines. en pres. amb GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Flash visual. dins de finestres en pres. amb GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Desact. superposicions HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Usa sempre GPU per a la composició de la pantalla"</string>
     <string name="enable_traces_title" msgid="7448835465859512430">"Activa les traces"</string>
