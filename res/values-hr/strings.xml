@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vrijeme"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Poboljšanje podudaranja lica"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Zahtijevaj treptaj"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Spriječite da netko drugi upotrijebi vašu fotografiju za otključavanje vašeg tabletnog računala"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Spriječite da netko drugi upotrijebi vašu fotografiju za otključavanje vašeg telefona"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatsko zaključavanje"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nakon mirovanja"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Prikaži vlasniku informacije o zaključanom zaslonu"</string>
@@ -481,8 +478,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Za glazbu i medije"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamti postavke"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Dopusti razmjenu podataka kada tabletno računalo dodiruje drugi uređaj"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Dopusti razmjenu podataka kada telefon dodiruje drugi uređaj"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Spreman za prijenos sadržaja aplikacije NFC-om"</string>
@@ -498,8 +494,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi postavke"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Postavljanje i upravljanje bežičnim pristupnim točkama"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Odaberite Wi-Fi mrežu"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Uključivanje značajke Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Isključivanje Wi-Fi mreže..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Pogreška"</string>
@@ -779,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Isključivanje"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Isključivanje u tijeku"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Povezivanje USB-a i računala"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Pojačanje čitanja vanjskog"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Povezivanje USB-a i računala"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Poveži kao"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Uređaj za medije (MTP)"</string>
@@ -1117,8 +1111,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Ovaj način unosa možda može prikupljati sav tekst koji unosite, uključujući osobne podatke poput zaporki i brojeva kreditnih kartica. To omogućuje aplikacija <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Upotrijebiti taj način unosa?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Ovaj alat za provjeru pravopisa može prikupljati sav tekst koji upisujete, uključujući osobne podatke kao što su zaporke i brojevi kreditnih kartica. Dolazi s aplikacije <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Upotrebljavati taj alat za provjeru pravopisa?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Otvaranje postavki za aplikaciju <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> nije uspjelo"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Miš/dodirna površina"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Brzina pokazivača"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Upravljač igrama"</string>
@@ -1190,6 +1183,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Rješavanje programske pogreške USB-a namijenjeno je samo u razvojne svrhe. Može se upotrijebiti za kopiranje podataka s računala na uređaj i obrnuto, instalaciju aplikacija na uređaju bez obavijesti i za čitanje dnevničkih zapisa."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Dopustiti postavke razvojnih programera?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Ove su postavke namijenjene samo razvojnim programerima. One mogu uzrokovati kvar ili neželjeno ponašanje vašeg uređaja i aplikacija na njemu."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Odaberi gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Odaberite widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Želite izraditi widget i dozvoliti pristup?"</string>
@@ -1412,9 +1421,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Ovaj je administrator aktivan i aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> dopušta izvođenje sljedećih postupaka:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Bez naslova"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Općenito"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Melodija zvona i obavijesti"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Obavijesti"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sustav"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Postavljanje Wi-Fi mreže"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Povezivanje s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Povezivanje s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1534,7 +1545,8 @@
     <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
     <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Prikaži granice izgleda"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Prikaži informacije o granicama, razmaku itd."</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Prikaži upotrebu procesora"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Prekrivanje zaslona prikazuje trenutačnu upotrebu procesora"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Prisilno GPU renderiranje"</string>

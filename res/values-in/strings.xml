@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Tanggal"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Waktu"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Menyempurnakan pencocokan wajah"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Perlu kedipan mata"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Mencegah orang lain menggunakan foto Anda untuk membuka kunci tablet Anda"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Mencegah orang lain menggunakan foto Anda untuk membuka kunci ponsel Anda"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Menggembok secara otomatis"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> setelah tidur"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Tampilkan info pemilik pada layar pengunci"</string>
@@ -777,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Melepaskan"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Pelepasan sedang berlangsung"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Koneksi komputer USB"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Terapkan pembacaan eksternal"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Koneksi komputer USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Sambungkan sebagai"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Perangkat media (MTP)"</string>
@@ -1187,6 +1183,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Debugging USB dimaksudkan untuk tujuan pengembangan saja. Gunakan untuk menyalin data antara komputer dan perangkat Anda, memasang apl pada perangkat tanpa pemberitahuan, dan membaca data log."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Izinkan setelan pengembangan?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Setelan ini hanya dimaksudkan untuk penggunaan pengembangan. Setelan dapat menyebabkan perangkat dan aplikasi yang menerapkannya rusak atau tidak berfungsi semestinya."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Pilih gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Pilih widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Buat widget dan izinkan akses?"</string>
@@ -1409,9 +1421,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Administrator ini aktif dan mengizinkan apl <xliff:g id="APP_NAME">%1$s</xliff:g> melakukan operasi berikut:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Tak Berjudul"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Produk"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Nada Dering &amp; pemberitahuan"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Pemberitahuan"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sistem"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Penyiapan Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Sambungkan ke jaringan Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Menyambung ke jaringan Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1509,31 +1523,24 @@
     <string name="pointer_location_summary" msgid="840819275172753713">"Hamparan layar menampilkan data sentuhan saat ini"</string>
     <string name="show_touches" msgid="1356420386500834339">"Tampilkan sentuhan"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Tampilkan masukan visual untuk sentuhan"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Tmpilkn pmbaruan prmukaan"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Menyorot seluruh permukaan jendela saat diperbarui"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Tampilkan pembaruan tampilan GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Menyorot tmpilan dlm jendela saat digambar dgn GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Nonaktifkan lapisan HW"</string>
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Selalu gunakan GPU untuk pengomposisian layar"</string>
     <string name="enable_traces_title" msgid="7448835465859512430">"Aktifkan jejak"</string>
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Pilih jejak diaktifkan"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Tidak ada jejak yang saat ini diaktifkan"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> jejak saat ini diaktifkan"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Semua jejak saat ini diaktifkan"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Tampilkan batas tata letak"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Menampilkan informasi tentang batas, padding, dll."</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Tampilkan penggunaan CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Hamparan layar menampilkan penggunaan CPU saat ini"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Paksa perenderan GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Paksa penggunaan GPU untuk gambar 2d"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Penguraian GPU profil"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Ukur waktu penguraian di adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animasi jendela"</string>

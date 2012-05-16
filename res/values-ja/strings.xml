@@ -291,9 +291,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"日付"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"顔認識の精度を改善"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"まばたきが必要"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"他人があなたの画像を使用してタブレットのロックを解除するのを防ぎます"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"他人があなたの画像を使用して携帯電話のロックを解除するのを防ぎます"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動ロック"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"スリープ開始から<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"ロック画面に所有者情報を表示"</string>
@@ -637,8 +634,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"着信音と通知音"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"通知"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"アラーム"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"着信時のバイブレーション"</string>
     <string name="dock_settings" msgid="1820107306693002541">"ホルダー"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"ホルダーの設定"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"音声"</string>
@@ -782,7 +778,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"マウント解除中"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"マウントを解除中"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USBでパソコンに接続"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"外部ストレージを読み込む"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USBでパソコンに接続"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"次で接続:"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"メディアデバイス（MTP）"</string>
@@ -1193,6 +1188,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USBデバッグは開発専用に設計されています。パソコンと端末の間でデータをコピーする場合や、アプリを通知なしで端末にインストールする場合、ログデータを読み取る場合に使用できます。"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"開発用の設定を許可しますか？"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"これらの設定は開発専用に設計されています。そのため端末や端末上のアプリが故障したり正常に動作しなくなったりするおそれがあります。"</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"ガジェットを選択"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"ウィジェットを選択"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"ウィジェットの作成とアクセスの許可"</string>
@@ -1415,9 +1426,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"この管理者は有効であり、アプリ<xliff:g id="APP_NAME">%1$s</xliff:g>に次の操作を許可します:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"無題"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"全般"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"着信音と通知音"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"通知"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"システム"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Wi-Fi設定"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Wi-Fiネットワーク「<xliff:g id="NETWORK_NAME">%s</xliff:g>」に接続"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Wi-Fiネットワーク「<xliff:g id="NETWORK_NAME">%s</xliff:g>」に接続中..."</string>
@@ -1527,7 +1540,8 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"現在<xliff:g id="NUM">%1$d</xliff:g>件のトレースが有効"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"現在トレースはすべて有効"</string>
     <string name="debug_layout" msgid="5981361776594526155">"レイアウト境界を表示"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"境界やパディングなどについての情報を表示"</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU使用状況を表示"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"現在のCPU使用状況をオーバーレイ表示する"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPUレンダリングを使用"</string>

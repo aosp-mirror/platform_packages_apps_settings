@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"ቀን"</string>
     <string name="time_picker_title" msgid="483460752287255019">"ጊዜ"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"የፊት ማመሳሰልን አሻሽል"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"የአይን ጥቅሻ ያስፈልጋል"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"ሌሎች የአንተን ፎቶ ተጠቅመው ጡባዊ ቱኮህን እንዳይፈቱ አግዳቸው"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"ሌሎች የአንተን ፎቶ ተጠቅመው ስልክህን እንዳይፈቱ አግዳቸው"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"በራስ ሰር ቆልፍ"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ከእንቅልፍ በኋላ"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"በተቆለፈ ማያ የባለቤት መረጃ አሳይ"</string>
@@ -777,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"በመንቀል ላይ"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"ንቀል በሂደት ላይ"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"የUSB ኮምፒዩተር ትይይዝ"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"የውጭ ንባብ አስገድድ"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"የUSB ኮምፒዩተር ትይይዝ"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"እንደ.... ያግኙን"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"የማህደረ መረጃ መሣሪያ (MTP)"</string>
@@ -1187,6 +1183,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"የUSB አድስ ለግንባታ አላማ ብቻ የታሰበ ነው። ከኮምፒዩተርህ ወደ መሳሪያህ ውሂብ ለመገልበጥ፣ መሣሪያህ ላይ ያለ ማሳወቂያ መተግበሪያዎችን መጫን፣ እና ማስታወሻ ውሂብ ማንበብ ለመጠቀም ይቻላል።"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"የግንባታ ቅንጅቶችን ፍቀድ?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"እነዚህ ቅንብሮች  የታሰቡት ለግንባታ አጠቃቀም ብቻ ናቸው። መሳሪያህን እና በሱ ላይ ያሉትን መተግበሪያዎች እንዲበለሹ ወይም በትክክል እንዳይሰሩ ሊያደርጉ ይችላሉ።"</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"መሣሪያ ምረጥ"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"ፍርግም ምረጥ"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"አዲስ ምግብር ፍጠር አና መዳረሻ ፍቀድለት?"</string>
@@ -1409,9 +1421,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"ይህ አስተዳዳሪ ንቁ እና የሚከተሉትን ክንውኖች ለማካሄድ <xliff:g id="APP_NAME">%1$s</xliff:g> መተግበሪያን ይፈቅዳል።"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"ርዕስ አልባ"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"አጠቃላይ"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"የጥሪ ድምፅ &amp; ማሳወቂያዎች"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"ማሳወቂያዎች"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"ስርዓት"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Wi-Fi ጫን"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"ወደ Wi-Fi አውታረመረብ <xliff:g id="NETWORK_NAME">%s</xliff:g> አያይዝ"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"ወደ Wi-Fi አውታረመረብ <xliff:g id="NETWORK_NAME">%s</xliff:g> በማገናኘት ላይ..."</string>
@@ -1521,7 +1535,8 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"በአሁኑ ጊዜ <xliff:g id="NUM">%1$d</xliff:g> ፍንጮች ነቅተዋል"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"ሁሉም ፍንጮች በአሁኑ ጊዜ ነቅተዋል"</string>
     <string name="debug_layout" msgid="5981361776594526155">"የአቀማመጥ ገደቦችን አሳይ"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"ስለገደቦች፣ ንጣፎች፣ ወዘተ. መረጃ አሳይ"</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"የCPU አጠቃቀም አሳይ"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"የማያ ተደራቢ የአሁኑን የCPU አጠቃቀም  እያሳየ ነው።"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU ምላሽ መስጠትን አስገድድ"</string>
