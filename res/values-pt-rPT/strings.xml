@@ -632,8 +632,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Toque e notificações"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificações"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmes"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrar ao tocar"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Estação de ancoragem"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Definições da estação de ancoragem"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Áudio"</string>
@@ -654,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Pesquisar"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gerir definições e histórico de pesquisa"</string>
     <string name="display_settings" msgid="7965901687241669598">"Visualização"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Rodar ecrã automaticamente"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Mudar orientação automaticamente ao rodar o tablet"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Mudar orientação automaticamente ao rodar o telefone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Mudar orientação automaticamente ao rodar o tablet"</string>
@@ -1004,14 +1004,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Ordenar por tamanho"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Mostrar serv. em execução"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar proc. em cache"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Repor pref. de aplic."</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Repor pref. de aplic.?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Esta ação irá repor todas as preferências para:"\n\n" "<li>"Aplicações desativadas"</li>\n" "<li>"Notificações de aplicações desativadas"</li>\n" "<li>"Aplicações predefinidas para ações"</li>\n" "<li>"Restrições de dados em segundo plano para aplicações"</li>\n\n" Não perderá quaisquer dados de aplicações."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Repor aplicações"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gerir espaço"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Escolher opções de filtro"</string>
@@ -1130,8 +1126,7 @@
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Adicionar"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Adicionar ao dicionário"</string>
-    <!-- no translation found for user_dict_settings_add_screen_title (742580720124344291) -->
-    <skip />
+    <string name="user_dict_settings_add_screen_title" msgid="742580720124344291">"Expressão"</string>
     <string name="user_dict_settings_add_dialog_more_options" msgid="8848798370746019825">"Mais opções"</string>
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Menos opções"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
@@ -1188,22 +1183,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"A depuração USB é utilizada apenas para fins de programação. Utilize-a para copiar dados entre o computador e o aparelho, instalar aplicações no aparelho sem notificação e ler dados de registo."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Permitir definições de programação?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Estas definições destinam-se apenas a programação. Podem fazer com que o seu aparelho e as aplicações nele existentes falhem ou funcionem mal."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Proteger memória USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"As aplicações têm de pedir permissão para ler a memória USB"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Proteger memória USB?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Quando o armazenamento USB estiver protegido, as aplicações têm de pedir permissão para ler os dados do armazenamento externo."\n\n"Algumas aplicações podem não funcionar até serem atualizadas pelos respetivos programadores."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Proteger cartão SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"As aplicações têm de pedir permissão para ler o cartão SD"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Proteger cartão SD?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Quando o cartão SD estiver protegido, as aplicações têm de pedir permissão para ler os dados do armazenamento externo."\n\n"Algumas aplicações podem não funcionar até serem atualizadas pelos respetivos programadores."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Escolher miniaplicação"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Escolher widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Criar widget e permitir o acesso?"</string>
@@ -1427,10 +1414,8 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Sem título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Geral"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Notificações"</string>
-    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
-    <skip />
-    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
-    <skip />
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Toque e vibração das chamadas"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"Sistema"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Configuração Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Ligar à rede Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"A ligar à rede Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1519,48 +1504,32 @@
     <string name="no_application" msgid="2813387563129153880">"Nenhuma"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Aguarde pelo depurador"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"A aplicação depurada aguarda a anexação do depurador antes da execução"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Introdução"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Desenho"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitorização"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Modo rigoroso ativado"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Piscar ecrã qd aplic. fazem oper. prolong. no tópico princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Localização do ponteiro"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Sobrep. de ecrã que mostra a dados atuais de toque"</string>
     <string name="show_touches" msgid="1356420386500834339">"Apresentar toques"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Apresentar feedback visual para toques"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Most. atualiz. superfície"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Destacar todas as superf. janelas quando atualizam"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Most.atualiz. visual. GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Dest. visualiz. dentro janelas quando desenh.c/GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Desativ. sobreposições HW"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Utilizar sempre GPU para a composição do ecrã"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Ativar rastreios"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Selec. rastreios ativados"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Sem rastreios ativados atualmente"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> rastreios ativados atualmente"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Todos os rastreios ativados atualmente"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar limit. do esquema"</string>
-    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Mostrar informações sobre limites, preench., etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar utilização da CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Sobrep. de ecrã que mostra a utiliz. atual da CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forçar composição GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forçar a utilização de GPU para desenho 2D"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Conversão GPU do perfil"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Medir tempo de conv. em adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de anim. da janela"</string>
