@@ -19,8 +19,7 @@ package com.android.settings;
 import android.app.Dialog;
 import android.content.Context;
 import android.preference.EditTextPreference;
-import android.text.method.DigitsKeyListener;
-import android.text.method.PasswordTransformationMethod;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
@@ -52,12 +51,11 @@ class EditPinPreference extends EditTextPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        final EditText editText = (EditText) view.findViewById(android.R.id.edit);
+        final EditText editText = getEditText();
 
         if (editText != null) {
-            editText.setSingleLine(true);
-            editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-            editText.setKeyListener(DigitsKeyListener.getInstance());
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER |
+                InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         }
     }
 
