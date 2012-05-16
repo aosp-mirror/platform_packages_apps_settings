@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Fecha"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Mejorar el reconocimiento facial"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Solicitar parpadeo"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Evitar que otros usuarios usen una foto para desbloquear tu tablet"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Evitar que otros usuarios usen una foto para desbloquear tu teléfono"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automáticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> tras suspender"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar datos del propietario en la pantalla de bloqueo"</string>
@@ -481,8 +478,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música y contenido multimedia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ajustes de recordatorio"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permitir intercambio de datos cuando el tablet toque otro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permitir el intercambio de datos cuando el teléfono toque otro dispositivo"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Listo para compartir contenido de aplicaciones por NFC"</string>
@@ -498,8 +494,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Ajustes de Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configurar y administrar puntos de acceso inalámbricos"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Seleccionar Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Activando Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Desactivando Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
@@ -779,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Desactivando"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"La tarjeta SD se está desactivando."</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Conexión de ordenador USB"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Ejecutar lectura externa"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Conexión de ordenador USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectar como"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositivo multimedia (MTP)"</string>
@@ -1007,14 +1001,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Ordenar por tamaño"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Mostrar servicios en ejecución"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar procesos en caché"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablecer preferencias?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Se restablecerán todas las preferencias de:"\n\n" "<li>"aplicaciones inhabilitadas,"</li>\n" "<li>"notificaciones de aplicaciones inhabilitadas,"</li>\n" "<li>"aplicaciones para acciones predeterminadas,"</li>\n" "<li>"restricciones de datos en segundo plano para aplicaciones."</li>\n\n" No perderás los datos de las aplicaciones."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer aplicaciones"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrar espacio"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Seleccionar opciones de filtrado"</string>
@@ -1117,8 +1107,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Este método de introducción puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este método de introducción?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Este corrector ortográfico puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este corrector ortográfico?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Error al abrir los ajustes de <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Ratón/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocidad del puntero"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Mandos de videojuegos"</string>
@@ -1190,6 +1179,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"La depuración USB solo está indicada para actividades de desarrollo. Puedes utilizarla para intercambiar datos entre el ordenador y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"¿Permitir ajustes de desarrollo?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Estos ajustes están destinados únicamente a los desarrolladores. Pueden provocar que el dispositivo o las aplicaciones del mismo no funcionen correctamente."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Seleccionar gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Seleccionar widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"¿Crear widget y permitir acceso?"</string>
@@ -1412,9 +1417,9 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Este administrador está activo y permite que la aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> realice las siguientes operaciones:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sin título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Tono y notificaciones"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Notificaciones"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sistema"</string>
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Tono de llamada y vibración"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"Sistema"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Configuración de Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Establecer conexión con la red Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Estableciendo conexión con la red Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1524,7 +1529,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> seguimientos habilitados en este momento"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Todos los seguimientos habilitados"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar límites de diseño"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Mostrar información sobre límites, espaciado, etc."</string>
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Mostrar información sobre límites, espaciado, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar uso de CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Suporponer el uso de la CPU en la pantalla"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forzar aceleración GPU"</string>

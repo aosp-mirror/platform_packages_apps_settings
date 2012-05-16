@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Päiväys"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Aika"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Paranna kasvojen tunnistusta"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Vaadi silmänräpäys"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Estä muita poistamasta tablet-laitteesi lukitusta oman kuvasi avulla"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Estä muita poistamasta puhelimesi lukitusta oman kuvasi avulla"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Lukitse automaattisesti"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> virransäästötilan jälkeen"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Näytä omistajan tiedot lukitusruudulla"</string>
@@ -481,8 +478,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Musiikille ja medialle"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Muista asetukset"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Salli tiedonsiirto, kun tablet-laite koskettaa toista laitetta"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Valmis lähettämään sovelluksen sisältöä NFC:n kautta"</string>
@@ -498,8 +494,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wifi-asetukset"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wifi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Ota käyttöön ja hallinnoi langattoman yhteyden tukiasemia"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Valitse wifi-verkko"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Wifiä otetaan käyttöön..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Sammutetaan wifi-yhteyttä…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Virhe"</string>
@@ -779,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Poistetaan käytöstä"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Poistetaan käytöstä"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB-tietokoneyhteys"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Lue ulkoista tallennustilaa"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB-tietokoneyhteys"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Yhdistä tyyppinä"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Medialaite (MTP)"</string>
@@ -1117,8 +1111,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Tämä syöttötapa saattaa kerätä kaiken kirjoittamasi tekstin, mukaan luettuna henkilökohtaiset tiedot kuten salasanat ja luottokortin numerot. Se on lähtöisin sovelluksesta <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Käytetäänkö tätä syöttötapaa?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Tämä oikoluku voi ehkä kerätä kaiken kirjoittamasi tekstin, mukaan lukien henkilötiedot, kuten salasanat ja luottokorttien numerot. Se on lähtöisin sovelluksesta <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Käytetäänkö tätä oikolukua?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Sovelluksen <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> asetuksia ei voi avata"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Hiiri/ohjauslevy"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Osoittimen nopeus"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Peliohjaimet"</string>
@@ -1190,6 +1183,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-vianetsintä on tarkoitettu vain kehittäjien käyttöön. Sen avulla voidaan kopioida tietoja tietokoneesi ja laitteesi välillä, asentaa laitteeseesi sovelluksia ilmoittamatta siitä sinulle ja lukea lokitietoja."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Sallitaanko kehittäjäasetukset?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Nämä asetukset on tarkoitettu vain kehityskäyttöön, ja ne voivat aiheuttaa haittaa laitteellesi tai sen sovelluksille."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Valitse gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Valitse widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Luo widget ja salli käyttö?"</string>
@@ -1412,9 +1421,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Tämä järjestelmänvalvoja on aktiivinen ja sallii sovelluksen <xliff:g id="APP_NAME">%1$s</xliff:g> suorittaa seuraavat toiminnot:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Nimetön"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Yleiset"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Soittoääni ja ilmoitukset"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Ilmoitukset"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Järjestelmä"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Wifi-asetukset"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Yhdistä wifi-verkkoon <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Yhdistetään wifi-verkkoon <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1524,7 +1535,8 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> jäljitystä tällä hetkellä käytössä"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Kaikki jäljitykset käytössä"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Näytä asettelun rajat"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Näytä tietoa rajoista, reunuksista jne."</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Näytä suorittimen käyttö"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Näytön peittokuva näyttää nykyisen suoritinkäytön"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Pakota GPU-hahmonnus"</string>

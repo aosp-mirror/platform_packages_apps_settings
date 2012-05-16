@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Подобряване на лицевотосъответствие"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Да изисква премигване"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Предотвратява използването на ваша снимка от други хора за отключване на таблета ви"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Предотвратява използването на ваша снимка от други хора за отключване на телефона ви"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматично заключване"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след спящ режим"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"С информацията за собственика на заключения екран"</string>
@@ -481,8 +478,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"За музика и медийни файлове"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомняне на настройки"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Разрешаване на обмен на данни, когато таблетът докосва друго устройство"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Разрешаване на обмен на данни, когато телефонът докосва друго устройство"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"В готовност за предаване на съдържание на приложения чрез КБП"</string>
@@ -498,8 +494,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Настройки за Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Задаване и управление на безжични точки за достъп"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Избиране на Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Wi-Fi се включва..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Wi-Fi се изключва…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Грешка"</string>
@@ -779,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Деактивиране"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Извършва се активиране"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB връзка с компютър"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Принуд. четене от външно хран."</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB връзка с компютър"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Свързване като"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Мултимедийно устройство (MTP)"</string>
@@ -1117,8 +1111,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Този метод за въвеждане може да събира целия въведен от вас текст, включително лични данни като пароли и номера на кредитни карти. Той произлиза от приложението <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Искате ли да го използвате?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Тази програма за проверка на правописа може да събира целия въвеждан от вас текст, включително лични данни, като пароли и номера на кредитни карти. Тя произлиза от приложението <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Искате ли да я активирате?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Отварянето на настройките за <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> не бе успешно"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Мишка/тракпад"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Скорост на курсора"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Контролер за игри"</string>
@@ -1190,6 +1183,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Отстраняването на грешки през USB е предназначено само за програмни цели. Използвайте го за копиране на данни между компютъра и устройството си, за инсталиране на приложения на устройството си без известяване и за четене на регистрационни данни."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Да се разрешат ли настройките за програмиране?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Тези настройки са предназначени само за програмиране. Те могат да доведат до прекъсване на работата или неправилно функциониране на устройството ви и приложенията в него."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Избор на притурка"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Избор на приспособление"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Да се създаде ли приспособлението и да се разреши ли достъп?"</string>
@@ -1412,9 +1421,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Този администратор е активен и разрешава на приложението <xliff:g id="APP_NAME">%1$s</xliff:g> да изпълнява следните действия:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Без заглавие"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Общи"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Мелодия и известия"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Известия"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Система"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Настройка на Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Свържете се с Wi-Fi мрежата <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Свързвате се с Wi-Fi мрежата <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1524,7 +1535,8 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Понастоящем са активирани <xliff:g id="NUM">%1$d</xliff:g> трасирания"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Понастоящем всички трасирания са активирани"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Граници на оформлението"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Показване на информ. за граници, отстояния и др."</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Употреба на процесора"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Наслагване на екрана показва употр. на процесора"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Принудително изобразяване"</string>

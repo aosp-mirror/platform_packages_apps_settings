@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Dato"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tid"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Gør ansigtsregistreringen bedre"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Kræv blink med øjnene"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Undgå, at andre bruger et billede af dig til at låse din tablet op"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Undgå, at andre bruger et billede af dig til at låse din telefon op"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Lås automatisk"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter dvale"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Vis ejeroplysninger på låst skærm"</string>
@@ -633,8 +630,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Ringetone og meddelelser"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Underretninger"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmer"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrer ved opringning"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dockingstation"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Indstillinger for dockingstation"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Lyd"</string>
@@ -778,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Demontering"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Demontering i gang"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB-tilslutning til computer"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Håndhæv ekstern læsning"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB-tilslutning til computer"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Tilslut som"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Medieenhed (MTP)"</string>
@@ -1006,14 +1001,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Sorter efter størrelse"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Vis kørende tjenester"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Cachelagrede processer"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Nulstil app-præferencer"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Nulstille app-præf.?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Dette vil nulstille alle præferencer for:"\n\n<li>"deaktiverede apps"</li>\n<li>"underretninger om deaktiverede apps"</li>\n<li>"standardapplikationer til handlinger"</li>\n<li>"begrænsninger for baggrundsdata for apps"</li>\n\n"Du vil ikke miste nogen appdata."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Nulstil apps"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrer plads"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Vælg filtreringsmuligheder"</string>
@@ -1188,6 +1179,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-fejlretning er kun beregnet til udvikling og kan bruges til at kopiere data mellem din computer og enheden, installere apps på enheden uden meddelelser og læse logdata."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vil du tillade udviklingsindstillinger?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Disse indstillinger er kun beregnet til brug i forbindelse med udvikling. De kan forårsage, at din enhed og dens applikationer går ned eller ikke fungerer korrekt."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Vælg gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Vælg widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Vil du oprette en widget og tillade adgang?"</string>
@@ -1410,9 +1417,9 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Denne administrator er aktiv og tillader, at appen <xliff:g id="APP_NAME">%1$s</xliff:g> kan foretage disse handlinger:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Ikke-navngivet"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Generelt"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Ringetone og meddelelser"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Underretninger"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"System"</string>
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Ringetone og vibration ved opkald"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"System"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Konfiguration af Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Opret forbindelse til Wi-Fi-netværket <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Opretter forbindelse til Wi-Fi-netværket <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1531,7 +1538,7 @@
     <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
     <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Vis layoutgrænser"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Vis oplysninger om grænser, margen osv."</string>
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Få vist oplysninger om grænser, margen osv."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Vis CPU-forbrug"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Skærmoverlejring viser det aktuelle CPU-forbrug"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Tving gengivelse af GPU"</string>

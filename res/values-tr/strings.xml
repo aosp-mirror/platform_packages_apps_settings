@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Tarih"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Saat"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Yüz eşlemeyi iyileştir"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Göz kırpma gerektir"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Diğer kişilerin tabletinizin kilidini açmak için fotoğraf kullanması engelleyin"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Diğer kişilerin telefonunuzun kilidini açmak için fotoğraf kullanması engelleyin"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Otomatik olarak kilitle"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Uykudan <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Kilitli ekranda sahip bilgilerini göster"</string>
@@ -780,7 +777,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Kaldırılıyor"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Kaldırma işlemi devam ediyor"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB bilgisayar bağlantısı"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Hariciden okumaya zorla"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB bilgisayar bağlantısı"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Şu şekilde bağlan:"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Medya cihazı (MTP)"</string>
@@ -1192,6 +1188,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB hata ayıklaması yalnızca geliştirme amaçlıdır. Verileri bilgisayarınızla cihazınız arasında kopyalamak, bildirim göndermeksizin uygulamaları cihazınıza yüklemek ve günlük verilerini okumak için kullanın."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Geliştirme amaçlı ayarlara izin verilsin mi?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Bu ayarlar yalnızca geliştirme amaçlıdır. Cihazınızın veya cihazdaki uygulamaların bozulmasına veya hatalı çalışmasına neden olabilir."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Gadget seç"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Widget seç"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Widget\'ı oluşturup erişime izin vermek istiyor musunuz?"</string>
@@ -1414,9 +1426,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Bu yönetici etkin ve <xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasının şu işlemleri gerçekleştirmesine izin veriyor:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Başlıksız"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Genel"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Zil sesi ve bildirimler"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Bildirimler"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sistem"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Kablosuz ayarı"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"<xliff:g id="NETWORK_NAME">%s</xliff:g> Kablosuz ağına bağlan"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"<xliff:g id="NETWORK_NAME">%s</xliff:g> kablosuz ağına bağlanıyor..."</string>
@@ -1540,7 +1554,8 @@
     <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
     <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Düzen sınırlarını göster"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Sınırlar, dolgu vb. ile ilgili bilgileri göster"</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU kullanımını göster"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Mevcut CPU kullanımını gösteren yer paylaşımı"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU oluşturmayı zorla"</string>
