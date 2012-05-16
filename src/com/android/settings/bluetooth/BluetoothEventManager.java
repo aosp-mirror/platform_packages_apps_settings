@@ -163,6 +163,8 @@ final class BluetoothEventManager {
                     callback.onBluetoothStateChanged(state);
                 }
             }
+            // Inform CachedDeviceManager that the adapter state has changed
+            mDeviceManager.onBluetoothStateChanged(state);
         }
     }
 
