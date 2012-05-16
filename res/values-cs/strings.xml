@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Zlepšit přiřazování tváří"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Vyžadovat mrknutí"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Zabránit ostatním odemykat tablet pomocí vaší fotografie"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Zabránit ostatním odemykat telefon pomocí vaší fotografie"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky zamknout"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"po spánku <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovat vlastníka na zamčené obrazovce"</string>
@@ -777,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Odpojování"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Probíhá odpojování"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Připojení USB k počítači"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Vynutit externí čtení"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Připojení USB k počítači"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Připojit jako"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Zařízení pro média (MTP)"</string>
@@ -1005,14 +1001,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Řadit podle velikosti"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Zobrazit spuštěné služby"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Zobrazit mezipaměť"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Obnovit nastavení apl."</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Obnovit nastavení apl.?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Touto akcí obnovíte všechna nastavení pro:"\n\n" "<li>"deaktivované aplikace,"</li>\n" "<li>"deaktivovaná oznámení aplikací,"</li>\n" "<li>"výchozí aplikace k provádění akcí,"</li>\n" "<li>"omezení dat na pozadí pro aplikace."</li>\n\n" O žádná data aplikací nepřijdete."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Obnovit aplikace"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Správa paměti"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Vyberte možnosti filtru"</string>
@@ -1187,6 +1179,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Ladění prostřednictvím rozhraní USB je určeno pouze pro účely vývoje. Použijte je ke kopírování dat mezi počítačem a zařízením, instalaci aplikací do zařízení bez upozornění a čtení dat protokolů."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Povolit nastavení pro vývojáře?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Tato nastavení jsou určena pouze pro vývojáře. Mohou způsobit rozbití nebo nesprávné fungování zařízení a nainstalovaných aplikací."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Zvolte gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Zvolte widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Vytvořit widget a povolit přístup?"</string>
@@ -1409,9 +1417,9 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Správce je aktivní a umožňuje aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> provádět následující operace:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Bez názvu"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Obecné"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Vyzvánění a oznámení"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Oznámení"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Systém"</string>
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Tón vyzvánění a vibrace"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"Systém"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Nastavení připojení k síti Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Připojit k síti Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Připojování k síti Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1521,7 +1529,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Momentálně povolená sledování: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Všechna sledování jsou momentálně povolena."</string>
     <string name="debug_layout" msgid="5981361776594526155">"Zobrazit ohraničení"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Zobrazit informace o ohraničení, okrajích atd."</string>
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Zobrazit informace o ohraničení, okrajích atd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Zobrazit využití CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Překryvná vrstva s aktuálním využitím procesoru"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Vykreslování pomocí GPU"</string>

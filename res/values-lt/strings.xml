@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Laikas"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Patobulinti veido atitikimą"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Reikia sumirksėti akimis"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Neleisti kitiems naudoti nuotraukos su jumis planšetiniam kompiuteriui atrakinti"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Neleisti kitiems naudoti nuotraukos su jumis telefonui atrakinti"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatiškai užrakinti"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po miego režimo"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Rodyti savininko informaciją užrakinimo ekrane"</string>
@@ -780,7 +777,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Išėmimas"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Vykdomas išėmimas"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB kompiuterio jungtis"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Nust. išor. atm. skait. leid."</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB kompiuterio jungtis"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Prisijungti kaip"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Medijos įrenginys (MTP)"</string>
@@ -1192,6 +1188,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB derinimas skirtas naudoti tik kūrimo tikslais. Jis gali būti naudojamas norint kopijuoti duomenis iš kompiuterio į įrenginį ir atvirkščiai, įdiegti programas įrenginyje be pranešimo ir skaityti žurnalo duomenis."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Leisti kūrėjų nustatymus?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Šie nustatymai skirti tik kūrėjams. Nustačius juos įrenginys ir jame naudojamos programos gali nustoti veikti arba veikti netinkamai."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Pasirinkti programėlę"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Pasirinkti valdiklį"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Sukurti valdiklį ir leisti prieigą?"</string>
@@ -1414,9 +1426,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Administratorius aktyvus ir leidžia programai „<xliff:g id="APP_NAME">%1$s</xliff:g>“ atlikti šias operacijas:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Be pavadinimo"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Bendras"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Skambėjimo tonas ir pranešimai"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Įspėjimai"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Sistema"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"„Wi-Fi“ sąranka"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Prisijungti prie „Wi-Fi“ tinklo „<xliff:g id="NETWORK_NAME">%s</xliff:g>“"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Jungiamasi prie „Wi-Fi“ tinklo „<xliff:g id="NETWORK_NAME">%s</xliff:g>“..."</string>
@@ -1540,7 +1554,8 @@
     <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
     <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Rodyti išdėstymo ribas"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Rodyti ribų, užpildymo ir pan. informaciją"</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Rodyti centr. proc. naud."</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Ekrano perdanga rodo dabartinį centr. proc. naud."</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Priverst. GPU atvaizd."</string>

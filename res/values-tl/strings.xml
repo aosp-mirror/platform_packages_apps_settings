@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Petsa"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Oras"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Pahusayin ang pagtutugma ng mukha"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Hilingin ang pagkurap ng mata"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Pigilan ang iba na gumamit ng larawan mo upang ma-unlock ang iyong tablet"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Pigilan ang iba na gumamit ng larawan mo upang ma-unlock ang iyong telepono"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Awtomatikong nagla-lock"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos ng sleep"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Ipakita impo ng may-ari sa naka-lock na screen"</string>
@@ -780,7 +777,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Pag-unmount"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Nagaganap ang pag-unmount"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"Koneksyon ng computer ng USB"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Ipatupad ang pagbabasa sa panloob"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Koneksyon ng computer ng USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Kumonekta bilang"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Media na device (MTP)"</string>
@@ -1191,6 +1187,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Ang pag-debug ng USB ay nilalayon para sa mga layuning pagpapabuti lamang. Gamitin ito upang kumopya ng data sa pagitan ng iyong computer at iyong device, mag-install ng apps sa iyong device nang walang notification, at magbasa ng data ng log."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Payagan ang mga setting ng pag-develop?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Nilalayon ang mga setting na ito para sa paggamit sa pag-develop lamang. Maaaring magsanhi ang mga ito ng pagkasira o hindi paggana nang maayos ng iyong device at mga application na nandito."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Pumili ng gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Pumili ng widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Likhain ang widget at payagan ang access?"</string>
@@ -1413,9 +1425,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Aktibo ang administrator na ito at pinapayagan ang app na <xliff:g id="APP_NAME">%1$s</xliff:g> upang isagawa ang sumusunod na mga pagpapatakbo:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Walang pamagat"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Pangkalahatan"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Ringtone &amp; mga notification"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Mga Notification"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"System"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Pag-set up ng Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Kumonekta sa Wi-Fi network <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Kumokonekta sa Wi-Fi network na <xliff:g id="NETWORK_NAME">%s</xliff:g>…"</string>
@@ -1539,7 +1553,8 @@
     <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
     <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Ipakita mga layout bound"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Ipakita impo tungkol sa mga bound, padding, atbp."</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Ipakita paggamit ng CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Overlay ng screen pakita paggamit ngayon ng CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Ipilit ang pag-render ng GPU"</string>
