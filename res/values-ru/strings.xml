@@ -289,9 +289,6 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Время"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Настройка распознавания"</string>
-    <string name="biometric_weak_liveliness_title" msgid="7980026533493781616">"Моргать обязательно"</string>
-    <string name="biometric_weak_liveliness_summary" product="tablet" msgid="6367838154211928954">"Запретить использовать мое фото для разблокировки планшетного ПК"</string>
-    <string name="biometric_weak_liveliness_summary" product="default" msgid="2694191231783245799">"Запретить использовать мое фото для разблокировки телефона"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоблокировка"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"После <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> спящего режима"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Показывать данные о владельце на экране блокировки"</string>
@@ -481,8 +478,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Обмен данными по NFC"</string>
@@ -498,8 +494,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Настройки Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Настройка и управление точками доступа беспроводной сети"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"Включение Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="244864762599017659">"Отключение Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Ошибка"</string>
@@ -565,7 +560,7 @@
     <string name="wifi_security_none" msgid="7985461072596594400">"Нет"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Подключить"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Не удалось подключиться к сети."</string>
-    <string name="wifi_forget" msgid="8168174695608386644">"Не подключаться"</string>
+    <string name="wifi_forget" msgid="8168174695608386644">"Удалить"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Не удалось удалить сеть."</string>
     <string name="wifi_save" msgid="3331121567988522826">"Сохранить"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Не удалось сохранить сеть."</string>
@@ -779,7 +774,6 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Извлечение"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Выполняется извлечение"</string>
     <string name="storage_menu_usb" msgid="5708207885333243384">"USB-подключение к компьютеру"</string>
-    <string name="storage_menu_enforce_read_external" msgid="1056191049645563747">"Чтение с внешних устройств"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB-подключение к компьютеру"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Подключить как"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Медиа-устройство (MTP)"</string>
@@ -1007,6 +1001,14 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Упорядочить по размеру"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Показать активные службы"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Показать процессы в кэше"</string>
+    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
+    <skip />
     <string name="manage_space_text" msgid="8852711522447794676">"Управление местом"</string>
     <string name="filter" msgid="2018011724373033887">"Фильтр"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Выберите параметры фильтра"</string>
@@ -1109,8 +1111,7 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"При использовании этого способа могут собираться все вводимые данные, в том числе пароли и номера кредитных карт. Способ ввода запрашиваетя приложением \"<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>\". Использовать этот способ ввода?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Для проверки орфографии будет использоваться приложение <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>, которое может собирать все вводимые данные, в том числе пароли и номера кредитных карт. Продолжить?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
-    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Не удалось открыть настройки приложения \"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>\"."</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Мышь и сенсорная панель"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Скорость указателя"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Игровые контроллеры"</string>
@@ -1174,7 +1175,7 @@
     <string name="development_settings_summary" msgid="1815795401632854041">"Настройка параметров для разработчиков"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Отладка по USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Включить режим отладки при подключении к компьютеру по USB"</string>
-    <string name="keep_screen_on" msgid="1146389631208760344">"Оставить включенным"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"Не выключать экран"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Во время зарядки экран будет всегда включен"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Фиктивные местоположения"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Разрешить использование фиктивных местоположений"</string>
@@ -1182,6 +1183,22 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Отладка по USB – это режим, который позволяет использовать ваше устройство как внешний накопитель: перемещать файлы (с компьютера и на компьютер), напрямую устанавливать приложения, а также просматривать системные журналы."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Изменение настроек"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Только для разработчиков. Изменение этих настроек может привести к сбоям или неправильной работе устройства и приложений."</string>
+    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
+    <skip />
+    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
+    <skip />
     <string name="gadget_picker_title" msgid="98374951396755811">"Выбор гаджета"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Выбор виджета"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Создать виджет и разрешить доступ?"</string>
@@ -1404,9 +1421,11 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Администратор активирован и разрешает приложению <xliff:g id="APP_NAME">%1$s</xliff:g> выполнять следующие операции:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Без названия"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Общие"</string>
-    <string name="sound_category_calls_and_notification_title" msgid="4703470169010662085">"Рингтон и уведомления"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Оповещения"</string>
-    <string name="sound_category_feedback_title" msgid="6047518536574673606">"Отклик на действия"</string>
+    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
+    <skip />
+    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
+    <skip />
     <string name="wifi_setup_title" msgid="661074868726906436">"Настройки Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Подключение к сети Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Подключение к сети Wi-Fi: <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1420,7 +1439,7 @@
     <string name="wifi_setup_back" msgid="144777383739164044">"Назад"</string>
     <string name="wifi_setup_detail" msgid="2336990478140503605">"Сведения о сети"</string>
     <string name="wifi_setup_connect" msgid="7954456989590237049">"Подключить"</string>
-    <string name="wifi_setup_forget" msgid="2562847595567347526">"Не подключаться"</string>
+    <string name="wifi_setup_forget" msgid="2562847595567347526">"Удалить"</string>
     <string name="wifi_setup_save" msgid="3659235094218508211">"Сохранить"</string>
     <string name="wifi_setup_cancel" msgid="3185216020264410239">"Отмена"</string>
     <string name="wifi_setup_status_scanning" msgid="5317003416385428036">"Поиск доступных сетей..."</string>
@@ -1500,10 +1519,10 @@
     <string name="debug_monitoring_category" msgid="7640508148375798343">"Мониторинг"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Включен строгий режим"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Подсвечивать экран во время длительных операций"</string>
-    <string name="pointer_location" msgid="6084434787496938001">"Местоположение указателя"</string>
-    <string name="pointer_location_summary" msgid="840819275172753713">"Экран, показывающий данные о прикосновении"</string>
+    <string name="pointer_location" msgid="6084434787496938001">"Отображать касания"</string>
+    <string name="pointer_location_summary" msgid="840819275172753713">"Визуализировать на экране нажатия и жесты"</string>
     <string name="show_touches" msgid="1356420386500834339">"Показывать нажатия"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"Показывать графический ключ"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"Отображать точки в местах нажатия на экран"</string>
     <string name="show_screen_updates" msgid="5470814345876056420">"Показ. обнов. поверхности"</string>
     <string name="show_screen_updates_summary" msgid="2569622766672785529">"Подсвечивать окна полностью при их обновлении"</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"Показывать обнов. экрана"</string>
@@ -1516,7 +1535,8 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Включено трассировок: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Все трассировки включены"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показывать границы макета"</string>
-    <string name="debug_layout_summary" msgid="978411395294379156">"Показывать данные о границах, заполнении и др."</string>
+    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показывать загрузку ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Экран, показывающий текущую загрузку ЦП"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Ускорить работу GPU"</string>
