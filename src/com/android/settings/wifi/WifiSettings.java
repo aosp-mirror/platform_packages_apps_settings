@@ -344,6 +344,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (mSetupWizardMode) {
             // FIXME: add setIcon() when graphics are available
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
+                    .setIcon(R.drawable.ic_wps)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
