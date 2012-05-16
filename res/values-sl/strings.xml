@@ -632,8 +632,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Zvonjenje in obvestila"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Obvestila"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmi"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibriranje ob zvonjenju"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Stojalo"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Nastavitvebn stojala"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Zvok"</string>
@@ -654,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Iskanje"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Upravljaj nastavitve iskanja in zgodovine"</string>
     <string name="display_settings" msgid="7965901687241669598">"Prikaz"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Samodejno zasuči zaslon"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Samodejno spremeni usmerjenost ob zasuku tabličnega računalnika"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Samodejno preklopi usmeritev ob zasuku telefona"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Samodejno spremeni usmerjenost ob zasuku tabličnega računalnika"</string>
@@ -1004,14 +1004,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Razvrsti po velikosti"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Pokaži storitve, ki se izvajajo"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Pokaži predpom. procese"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Ponast. nast. aplikacije"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Ponastavitev nastavitev?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Ponastavili boste vse nastavitve za:"\n\n" "<li>"Onemogočene aplikacije"</li>\n" "<li>"Obvestila o onemogočenih aplikacijah"</li>\n" "<li>"Privzete aplikacije za dejanja"</li>\n" "<li>"Omejitve podatkov v ozadju za aplikacije"</li>\n\n" Podatkov aplikacij ne boste izgubili."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Ponastav. aplikacij"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Upravljaj prostor"</string>
     <string name="filter" msgid="2018011724373033887">"Filtriraj"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Izberite možnosti filtriranja"</string>
@@ -1187,22 +1183,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Odpravljanje težav s povezavo USB je namenjeno samo za razvoj. Lahko ga uporabljate za kopiranje podatkov med računalnikom in napravo, nameščanje programov v napravo brez obveščanja in branje podatkov v dnevniku."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Ali želite omogočiti nastavitve za razvijanje?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Te nastavitve so namenjene samo za razvijanje in lahko povzročijo prekinitev ali napačno delovanje naprave in programov v njej."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Zaščiti shrambo USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Aplikacije morajo zahtevati dovoljenje za branje shrambe USB"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Želite zaščititi shrambo USB?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Če je shramba USB zaščitena, morajo aplikacije zahtevati dovoljenje za branje podatkov iz zunanje shrambe."\n\n"Nekatere aplikacije morda ne bodo delovale, dokler jih njihovi razvijalci ne posodobijo."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Zaščiti kartico SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Aplikacije morajo zahtevati dovoljenje za branje kartice SD"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Želite zaščititi kartico SD?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Če je kartica SD zaščitena, morajo aplikacije zahtevati dovoljenje za branje podatkov iz zunanje shrambe."\n\n"Nekatere aplikacije morda ne bodo delovale, dokler jih njihovi razvijalci ne posodobijo."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Izberi pripomoček"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Izberite pripomoček"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Želite ustvariti pripomoček in dovoliti dostop?"</string>
@@ -1426,10 +1414,8 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Brez naslova"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Splošno"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Obvestila"</string>
-    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
-    <skip />
-    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
-    <skip />
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Ton zvonjenja in vibriranje"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"Sistem"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Nastavitev Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Vzpostavi povezavo z omrežjem Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Vzpostavljanje povezave z omrežjem Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g> ..."</string>
@@ -1518,48 +1504,32 @@
     <string name="no_application" msgid="2813387563129153880">"Nič"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Počakajte na iskalnik napak"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Progr, kjer se išče nap., čaka isk. nap. pred izv."</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Vnos"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Risba"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Spremljanje"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Strog način je omogočen"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Osveži zaslon pri dolgih oper. progr. v gl. niti"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Mesto kazalca"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Prekriv. zaslona prikazuje tren. podatke za dotik"</string>
     <string name="show_touches" msgid="1356420386500834339">"Pokaži dotike"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Pokaži vizualne povratne informacije za dotike"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Pokaži posodob. površine"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Ob posodobitvi osvetli celotne površine oken"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Pokaži posod. pogleda GPE"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Osvetli poglede v oknih pri risanju z GPE"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Onemogoči strojni medpomnilnik"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Za sestavljanje slike vedno uporabi graf. procesor"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Omogoči sledi"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Izbira omogočenih sledi"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Trenutno ni omogočenih sledi"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Št. trenutno omogočenih sledi: <xliff:g id="NUM">%1$d</xliff:g>"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Vse sledi so trenutno omogočene"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Prikaz mej postavitve"</string>
-    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Prikaz informacij o mejah, odmikih ipd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Prikaži uporabo CPE-ja"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Prekrivanje zaslona prikazuje tren. uporabo CPE-ja"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Vsili upodabljanje z GPU-jem"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Za risanje 2D vsili uporabo grafičnega procesorja"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Upod. profilov z GPU-jem"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Merjenje časa upodab. v dumpsys gfxinfo lupine adb"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Merilo animacije okna"</string>
