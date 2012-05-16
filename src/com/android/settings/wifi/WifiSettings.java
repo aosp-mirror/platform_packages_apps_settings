@@ -352,9 +352,11 @@ public class WifiSettings extends SettingsPreferenceFragment
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         } else {
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
+                    .setIcon(R.drawable.ic_wps)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
+                    .setIcon(R.drawable.ic_menu_add)
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
