@@ -651,7 +651,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Recherche"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Configurer les paramètres et l\'historique de recherche"</string>
     <string name="display_settings" msgid="7965901687241669598">"Affichage"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Rotation auto écran"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Changer automatiquement d\'orientation lors de la rotation du téléphone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
@@ -1179,22 +1180,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Le débogage USB est conçu uniquement pour le développement. Utilisez-le pour copier des données entre votre ordinateur et votre appareil, installer des applications sur votre appareil sans notification et lire les données de journal."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Activer les paramètres de développement ?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Ces paramètres sont en cours de développement. Ils peuvent endommager votre appareil et les applications qui s\'y trouvent, ou provoquer leur dysfonctionnement."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Protéger mémoire de stockage USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Applis doivent demander autorisation lire mémoire stockage USB."</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Protéger mémoire stockage USB ?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Lorsque la mémoire de stockage USB est protégée, les applications doivent demander l\'autorisation de lire les données de la mémoire de stockage externe."\n\n"Certaines applications peuvent ne pas fonctionner jusqu\'à ce que leurs développeurs les mettent à jour."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Protéger la carte SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Les applications doivent demander autorisation de lire carte SD."</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Protéger la carte SD ?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Lorsque la carte SD est protégée, les applications doivent demander l\'autorisation de lire les données de la mémoire de stockage externe."\n\n"Certaines applications peuvent ne pas fonctionner jusqu\'à ce que leurs développeurs les mettent à jour."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Choisir un gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Choisir un widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Créer un widget et autoriser l\'accès ?"</string>
@@ -1215,8 +1208,8 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Système"</string>
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Grands caractères"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Bouton marche/arrêt raccroche"</string>
-    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Énoncer les mots de passe"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Marche/arrêt pour raccrocher"</string>
+    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Énoncer mots de passe"</string>
     <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"Explorer au toucher"</string>
     <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Lorsque la fonctionnalité \"Explorer au toucher\" est activée, vous pouvez entendre ou voir la description de ce qui se trouve sous vos doigts."\n\n" Celle-ci est destinée aux utilisateurs malvoyants."</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Délai de pression"</string>
@@ -1509,7 +1502,7 @@
     <string name="wait_for_debugger" msgid="1202370874528893091">"Attendre l\'intervention du débogueur"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Avant de s\'exécuter, l\'application déboguée doit attendre que le débogueur soit attaché."</string>
     <string name="debug_input_category" msgid="1811069939601180246">"Saisie"</string>
-    <string name="debug_drawing_category" msgid="6755716469267367852">"Dessin"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Tracé"</string>
     <string name="debug_monitoring_category" msgid="7640508148375798343">"Suivi"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Mode Strict activé"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Faire clignoter écran en cas de longues opérations"</string>
@@ -1517,10 +1510,10 @@
     <string name="pointer_location_summary" msgid="840819275172753713">"Superposition écran indiquant données actuelles"</string>
     <string name="show_touches" msgid="1356420386500834339">"Afficher élément sélectionné"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Afficher repère visuel pour éléments sélectionnés"</string>
-    <string name="show_screen_updates" msgid="5470814345876056420">"Affich. mises à jour surface"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Affich. rapide de toute surface fenêtre lors de mise à jour"</string>
+    <string name="show_screen_updates" msgid="5470814345876056420">"Affich. mise à jour surface"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Surbrillance surfaces entières durant mise à jour"</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"Afficher mises à jour GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Affich. rapide dans fenêtres si conçues avec GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Surbrillance dans les fenêtres si conçues avec GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Désact. superpos. matér."</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Toujours utiliser GPU pour composition graphique"</string>
     <string name="enable_traces_title" msgid="7448835465859512430">"Activer les traces"</string>

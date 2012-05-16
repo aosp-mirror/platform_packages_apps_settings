@@ -653,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Sök"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Hantera sökinställningar och historik"</string>
     <string name="display_settings" msgid="7965901687241669598">"Visning"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Rotera skärmen automatiskt"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Växla riktning automatiskt när du roterar pekdatorn"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Växla riktning automatiskt när du roterar telefonen"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Växla riktning automatiskt när du roterar pekdatorn"</string>
@@ -1003,14 +1004,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Sortera efter storlek"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Visa tjänster som körs"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Visa cachade processer"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Återställ inställningarna"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Vill du återställa?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Detta återställer alla inställningar för:"\n\n" "<li>"inaktiverade appar"</li>\n" "<li>"meddelanden om inaktiverade appar"</li>\n" "<li>"standardappar för olika åtgärder"</li>\n" "<li>"begränsningar för bakgrundsdata i appar."</li>\n\n" Inga appdata går förlorade."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Återställ appar"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Hantera utrymme"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrera"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Välj filteralternativ"</string>
@@ -1186,22 +1183,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-felsökning ska endast användas i utvecklingssyfte. Använd den för att kopiera data mellan datorn och enheten, installera appar på enheten utan meddelanden och läsa loggdata."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Tillåt utvecklarinställningar?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Inställningarna är endast avsedda att användas för utvecklingsändamål. De kan orsaka problem med enheten eller apparna som finns installerade på den."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Skydda USB-lagringsenheten"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Apparmåste få tillstånd för att kunna läsa USB-enheten"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Vill du skydda USB-enheten?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"När USB-lagringsenheten är skyddad måste apparna begära tillstånd för att kunna läsa data som lagras externt."\n\n"En del appar måste eventuellt uppdateras av utvecklaren för att fungera."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Skydda SD-kortet"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Appar måste få tillstånd för att kunna läsa SD-kortet"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Vill du skydda SD-kortet?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"När SD-kortet är skyddat måste apparna begära tillstånd för att kunna läsa data som lagras externt."\n\n"En del appar måste eventuellt uppdateras av utvecklaren för att fungera."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Välj gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Välj widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Skapa widget och tillåta åtkomst?"</string>
@@ -1425,10 +1414,8 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Namnlös"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Allmänt"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Aviseringar"</string>
-    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
-    <skip />
-    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
-    <skip />
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Ringsignal och vibration"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"System"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"WiFi-konfiguration"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Anslut till Wi-Fi-nätverk <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Ansluter till Wi-Fi-nätverket <xliff:g id="NETWORK_NAME">%s</xliff:g> ..."</string>
@@ -1517,48 +1504,32 @@
     <string name="no_application" msgid="2813387563129153880">"Ingen"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Vänta på felsökningen"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Felsökaren måste ansluta till appen först"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Indata"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Ritning"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Övervakning"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Strikt läge aktiverat"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Tänd skärm när app gör omfattande åtgärd på huvudtråd"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Pekarens plats"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Överlägg på skärmen med aktuella skärmtryck"</string>
     <string name="show_touches" msgid="1356420386500834339">"Visa tryckningar"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Visa visuell feedback för tryckningar"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Visa ytuppdateringar"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Hela fönstret blinkar vid uppdatering"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Visa GPU-visningsuppdateringar"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Visningar blinkar i fönster vid GPU-ritningar"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Inaktivera HW-överlagringar"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Använd alltid GPU för skärmsammansättning"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Aktivera spår"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Välj aktiverade spår"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Inga spår är aktiverade för närvarande"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> spår är aktiverade för närvarande"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Alla spår är aktiverade för närvarande"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Visa layoutgränser"</string>
-    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Visa information om begränsningar, utfyllnad m.m."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Visa CPU-användning"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Överlägg på skärmen med aktuell CPU-användning"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Framtvinga GPU-rendering"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Tvingad användning av GPU för 2D-ritning"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profilens GPU-rendering"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mät tid för rendering i adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala, fönsteranimering"</string>

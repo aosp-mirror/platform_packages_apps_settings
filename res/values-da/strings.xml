@@ -651,7 +651,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Søg"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrer søgeindstillinger og -oversigt"</string>
     <string name="display_settings" msgid="7965901687241669598">"Skærm"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Roter skærm automatisk"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Skift automatisk retning, når tabletcomputeren drejes"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Skift automatisk retning, når telefonen drejes"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Skift automatisk retning, når tabletcomputeren drejes"</string>
@@ -1179,22 +1180,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-fejlretning er kun beregnet til udvikling og kan bruges til at kopiere data mellem din computer og enheden, installere apps på enheden uden meddelelser og læse logdata."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vil du tillade udviklingsindstillinger?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Disse indstillinger er kun beregnet til brug i forbindelse med udvikling. De kan forårsage, at din enhed og dens applikationer går ned eller ikke fungerer korrekt."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Beskyt USB-lageret"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Apps skal anmode om tilladelse til at læse USB-lageret"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Vil du beskytte USB-lageret?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Når USB-lageret er beskyttet, skal apps anmode om tilladelse til at læse data fra et eksternt lager."\n\n" Nogle apps fungerer muligvis ikke, før de opdateres af deres udviklere."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Beskyt SD-kortet"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Apps skal anmode om tilladelse til at læse SD-kortet"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Vil du beskytte SD-kortet?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Når SD-kortet er beskyttet, skal apps anmode om tilladelse til at læse data fra et eksternt lager."\n\n"Nogle apps fungerer muligvis ikke, før de opdateres af deres udviklere."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Vælg gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Vælg widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Vil du oprette en widget og tillade adgang?"</string>
@@ -1517,33 +1510,23 @@
     <string name="pointer_location_summary" msgid="840819275172753713">"Skærmoverlejringen viser de aktuelle berøringsdata"</string>
     <string name="show_touches" msgid="1356420386500834339">"Vis tryk"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Vis visuel feedback for tryk"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Vis overfladeopdateringer"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Fremhæv hele vinduesoverflader, når de opdateres"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Vis opdat. af GPU-visn."</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Fremhæv visninger i vinduer, når de tegnes med GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Deaktiver HW-overlejring"</string>
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Brug altid GPU til skærmsammensætning"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Aktivér spor"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Vælg aktiverede spor"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Der er i øjeblikket ingen aktiverede spor"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g>"</string>
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Alle spor er i øjeblikket aktiveret"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Vis layoutgrænser"</string>
     <string name="debug_layout_summary" msgid="5933073202403744387">"Få vist oplysninger om grænser, margen osv."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Vis CPU-forbrug"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Skærmoverlejring viser det aktuelle CPU-forbrug"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Tving gengivelse af GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Gennemtving brug af GPU til 2D-tegning"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"GPU-profilgengivelse"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mål gengivelsestiden i adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Animationsskala for vindue"</string>

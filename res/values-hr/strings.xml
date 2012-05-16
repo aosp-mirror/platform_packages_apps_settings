@@ -521,8 +521,8 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Prikaži napredne opcije"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Postavljanje zaštićene mreže Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Pokretanje WPS-a..."</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"Pritisnite gumb WPS na svojem Wi-Fi usmjerivaču. Do završetka postavljanja može proteći do dvije minute."</string>
-    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Unesite PIN <xliff:g id="NUMBER">%1$s</xliff:g> na svoj Wi-Fi usmjerivač. Do završetka postavljanja može proteći do dvije minute."</string>
+    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"Pritisnite gumb WPS na svojem Wi-Fi usmjerivaču. Postavljanje može potrajati do dvije minute."</string>
+    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Unesite PIN <xliff:g id="NUMBER">%1$s</xliff:g> na svoj Wi-Fi usmjerivač. Postavljanje može potrajati do dvije minute."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS uspio. Povezivanje s mrežom…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Povezano s mrežom Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS je već u tijeku, a do završetka može proteći do dvije minute"</string>
@@ -651,7 +651,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Pretraži"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Upravljajte postavkama pretraživanja i poviješću"</string>
     <string name="display_settings" msgid="7965901687241669598">"Prikaz"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Automatski zakreni zaslon"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Prebaci orijentaciju automatski pri rotaciji tabletnog uređaja"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Promijeni orijentaciju automatski kod rotacije telefona"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Prebaci orijentaciju automatski pri rotaciji tabletnog uređaja"</string>
@@ -1001,14 +1002,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Poredaj po veličini"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Prikaži pokrenute usluge"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Prikaži procese iz predmemorije"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Poništi postavke"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Poništiti postavke?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"To će poništiti sve postavke za:"\n\n" "<li>"onemogućene aplikacije"</li>\n" "<li>"onemogućene obavijesti aplikacija"</li>\n" "<li>"zadane aplikacije za radnje"</li>\n" "<li>"ograničenja pozadinskih podataka za aplikacije"</li>\n\n" Nećete izgubiti podatke iz aplikacija."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Poništi aplikacije"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Upravljaj prostorom"</string>
     <string name="filter" msgid="2018011724373033887">"Filtar"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Odabir opcije filtra"</string>
@@ -1422,10 +1419,8 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Bez naslova"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Općenito"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Obavijesti"</string>
-    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
-    <skip />
-    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
-    <skip />
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Melodija zvona i vibriranje za poziv"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"Sustav"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Postavljanje Wi-Fi mreže"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Povezivanje s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Povezivanje s Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1523,35 +1518,23 @@
     <string name="pointer_location_summary" msgid="840819275172753713">"Prekrivanje zaslona prikazuje trenutačne podatke o dodirivanju"</string>
     <string name="show_touches" msgid="1356420386500834339">"Prikaži dodire"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Prikaži vizualne povratne informacije za dodire"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Prikaži ažur. površine"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Bljeskanje cijele površine prozora pri ažuriranju"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Prikaži GPU ažur. prikaza"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Bljeskanje prikaza u prozorima pri crtanju GPU-om"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Onemogući HW preklapanja"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Uvijek upotrijebi GPU kod slaganja zaslona"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Omogući tragove"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Odaberi omogućene tragove"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Trenutačno nema omogućenih tragova"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Broj trenutačno omogućenih tragova: <xliff:g id="NUM">%1$d</xliff:g>"</string>
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Svi su tragovi trenutačno omogućeni"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Prikaži granice izgleda"</string>
-    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Prikaz informacija o granicama, ispuni itd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Prikaži upotrebu procesora"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Prekrivanje zaslona prikazuje trenutačnu upotrebu procesora"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Prisilno GPU renderiranje"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Prisilna upotreba GPU-a za 2D crteže"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil GPU prikazivanja"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mjeri vrijeme prikaza u adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Razmjer animacije prozora"</string>

@@ -632,8 +632,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Ringetone og varslinger"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Varslinger"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmer"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrering når det ringer"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Forankringstasjon"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Innstillinger for forankringsstasjon"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Lyd"</string>
@@ -654,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Søk"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Søkeinnstillinger og -logg"</string>
     <string name="display_settings" msgid="7965901687241669598">"Skjerm"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Roter skjerm automatisk"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Bytt retning automatisk når nettbrettet roteres"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Bytt orientering automatisk når telefonen blir snudd"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Bytt retning automatisk når nettbrettet roteres"</string>
@@ -1187,22 +1187,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-feilsøking er bare ment for utviklingsformål. Bruk det til å kopiere data mellom datamaskinen og enheten, installere apper på enheten uten varsel og lese loggdata."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vil du aktivere utviklingsinnstillingene?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Disse innstillingene er bare beregnet for bruk under programutvikling. De kan forårsake problemer med enheten din og tilhørende apper."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Beskytt USB-lagring"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Apper må be om tillatelse til å lese USB-lagring"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Vil du beskytte USB-lagringen?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Når USB-lagring er beskyttet, må apper be om tillatelse til å lese data fra ekstern lagring."\n\n"Enkelte apper fungerer ikke før utviklerne har oppdatert dem."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Beskytt SD-kort"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Apper må be om tillatelse til å lese SD-kort"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Vil du beskytte SD-kortet?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Når SD-kortet er beskyttet, må apper be om tillatelse til å lese data fra ekstern lagring."\n\n"Enkelte apper fungerer ikke før utviklerne har oppdatert dem."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Velg gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Velg skrivebordselement"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Vil du opprette modulen og gi tilgang?"</string>

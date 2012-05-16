@@ -174,7 +174,7 @@
     <string name="proxy_settings_title" msgid="5912878565897294401">"Ustawienia serwera proxy"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Wyczyść"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Numer portu serwera proxy"</string>
-    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Omiń serwer proxy w przypadku"</string>
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Pomiń proxy dla"</string>
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mojkomputer.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Przywróć domyślne"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Gotowe"</string>
@@ -632,8 +632,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Dzwonek i powiadomienia"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Powiadomienia"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmy"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Wibracje i dzwonek"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Podstawka"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Ustawienia podstawki"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Dźwięk"</string>
@@ -654,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Wyszukiwanie"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Zarządzaj ustawieniami i historią wyszukiwania"</string>
     <string name="display_settings" msgid="7965901687241669598">"Wyświetlacz"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Autoobracanie ekranu"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Automatycznie przełącz orientację przy obracaniu tabletu"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Automatycznie przełącz orientację przy obracaniu telefonu"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Automatycznie przełącz orientację przy obracaniu tabletu"</string>
@@ -1004,14 +1004,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Sortuj według rozmiaru"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Pokaż działające usługi"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Pokaż procesy z pamięci podręcznej"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Resetuj opcje aplikacji"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Zresetować opcje aplikacji?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Wszystkie te ustawienia zostaną zresetowane:"\n\n" "<li>"wyłączone aplikacje,"</li>\n" "<li>"wyłączone powiadomienia aplikacji,"</li>\n" "<li>"aplikacje używane domyślnie do wykonania czynności,"</li>\n" "<li>"ograniczenia użycia danych w tle w aplikacjach."</li>\n\n" Nie utracisz żadnych danych aplikacji."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Resetuj aplikacje"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Zarządzaj rozmiarem"</string>
     <string name="filter" msgid="2018011724373033887">"Filtr"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Wybierz opcje filtru"</string>
@@ -1426,10 +1422,8 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Bez nazwy"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Ogólne"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Powiadomienia"</string>
-    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
-    <skip />
-    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
-    <skip />
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Dzwonek i wibracje przy połączeniu"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"System"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Konfiguracja sieci Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Połącz z siecią Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"Łączenie z siecią Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1518,48 +1512,32 @@
     <string name="no_application" msgid="2813387563129153880">"Brak"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"Poczekaj na debugera"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"Aplikacja do debugowania czeka na przyłączenie debugera."</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"Wprowadzanie"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"Rysowanie"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitorowanie"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Tryb ścisły włączony"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Miganie ekranu podczas długich operacji w wątku głównym"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Lokalizacja wskaźnika"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Nakładka na ekranie pokazująca dane o dotyku"</string>
     <string name="show_touches" msgid="1356420386500834339">"Pokaż dotknięcia"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Potwierdzenia wizualne po dotknięciu"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"Pokaż zmiany powierzchni"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Podświetlaj całe aktualizowane powierzchnie okien"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Pokaż zmiany widoku z GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Podświetlaj widoki w oknach rysowane przez GPU"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"Wyłącz nakładki HW"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"Zawsze używaj GPU do komponowania ekranu"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"Włącz ślady"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Wybierz włączone ślady"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Brak włączonych śladów"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Włączone ślady: <xliff:g id="NUM">%1$d</xliff:g>"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Wszystkie ślady są włączone"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Pokaż granice układu"</string>
-    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Wyświetl informacje o granicach, dopełnieniu itp."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Pokaż użycie procesora"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Nakładka na ekranie pokazująca użycie procesora"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Wymuś renderowanie na GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Wymuszaj użycie GPU do rysowania 2D"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Ustaw renderowanie w GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mierz czas renderowania w adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animacji okna"</string>

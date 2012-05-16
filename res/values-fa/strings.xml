@@ -632,8 +632,7 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"آهنگ‌های زنگ و اعلان‌ها"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"اعلان‌ها"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"هشدارها"</string>
-    <!-- no translation found for vibrate_when_ringing_title (3885857358303178029) -->
-    <skip />
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"لرزش هنگام زنگ زدن"</string>
     <string name="dock_settings" msgid="1820107306693002541">"جایگاه"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"تنظیمات جایگاه"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"صوتی"</string>
@@ -654,7 +653,8 @@
     <string name="search_settings" msgid="1910951467596035063">"جستجو"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"مدیریت تنظیمات جستجو و سابقه"</string>
     <string name="display_settings" msgid="7965901687241669598">"نمایش"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"چرخش خودکار صفحه"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"هنگام چرخاندن رایانه لوحی، جهت به طور خودکار تغییر می کند"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"هنگام چرخاندن تلفن، جهت به طور خودکار تغییر می کند"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"هنگام چرخاندن رایانه لوحی، جهت به طور خودکار تغییر می کند"</string>
@@ -1518,48 +1518,33 @@
     <string name="no_application" msgid="2813387563129153880">"هیچ چیز"</string>
     <string name="wait_for_debugger" msgid="1202370874528893091">"انتظار برای اشکال‌زدا"</string>
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"برنامه اشکال‌زدایی شده منتظر پیوست شدن اشکال‌زدا قبل از اجرا است"</string>
-    <!-- no translation found for debug_input_category (1811069939601180246) -->
-    <skip />
-    <!-- no translation found for debug_drawing_category (6755716469267367852) -->
-    <skip />
-    <!-- no translation found for debug_monitoring_category (7640508148375798343) -->
-    <skip />
+    <string name="debug_input_category" msgid="1811069939601180246">"ورودی"</string>
+    <string name="debug_drawing_category" msgid="6755716469267367852">"طراحی"</string>
+    <string name="debug_monitoring_category" msgid="7640508148375798343">"نظارت"</string>
     <string name="strict_mode" msgid="1938795874357830695">"حالت شدید فعال شد"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"چشمک زدن صفحه هنگام انجام عملیات طولانی توسط برنامه ها در رشته اصلی"</string>
     <string name="pointer_location" msgid="6084434787496938001">"محل اشاره گر"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"همپوشانی صفحه نمایش با نمایش داده لمسی فعلی"</string>
     <string name="show_touches" msgid="1356420386500834339">"نمایش تعداد لمسها"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"نمایش بازخورد دیداری برای لمسها"</string>
-    <!-- no translation found for show_screen_updates (5470814345876056420) -->
-    <skip />
-    <!-- no translation found for show_screen_updates_summary (2569622766672785529) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates (5036904558145941590) -->
-    <skip />
-    <!-- no translation found for show_hw_screen_updates_summary (1115593565980196197) -->
-    <skip />
-    <!-- no translation found for disable_overlays (2074488440505934665) -->
-    <skip />
-    <!-- no translation found for disable_overlays_summary (3578941133710758592) -->
-    <skip />
-    <!-- no translation found for enable_traces_title (7448835465859512430) -->
-    <skip />
-    <!-- no translation found for enable_traces_dialog_title (5026490474669452929) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_none (1867562808503494163) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_num (8978230237777454269) -->
-    <skip />
-    <!-- no translation found for enable_traces_summary_all (3950139649125158247) -->
-    <skip />
+    <string name="show_screen_updates" msgid="5470814345876056420">"نمایش به روز رسانی سطح"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"هنگام به روزرسانی سطوح پنجره همه فلش شوند"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"نمایش به روزرسانی‌های نمای GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"هنگام طراحی با GPU٬ نماها در داخل پنجره‌ها فلش شوند"</string>
+    <string name="disable_overlays" msgid="2074488440505934665">"غیر فعال کردن پوشش HW"</string>
+    <string name="disable_overlays_summary" msgid="3578941133710758592">"همیشه از GPU در ترکیب صفحه استفاده شود"</string>
+    <string name="enable_traces_title" msgid="7448835465859512430">"فعال کردن ردیابی"</string>
+    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"انتخاب ردیابی‌های فعال"</string>
+    <string name="enable_traces_summary_none" msgid="1867562808503494163">"هیچ ردیابی در حال حاضر فعال نیست"</string>
+    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> ردیابی در حال حاضر فعال است"</string>
+    <string name="enable_traces_summary_all" msgid="3950139649125158247">"همه ردیابی‌ها در حال حاضر فعال هستند"</string>
     <string name="debug_layout" msgid="5981361776594526155">"نمایش محدوده‌های طرح‌بندی"</string>
     <!-- no translation found for debug_layout_summary (5933073202403744387) -->
     <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"نمایش میزان استفاده از CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"همپوشانی صفحه نمایش میزان استفاده از CPU فعلی"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"اجبار به تفسیر و اجرای GPU"</string>
-    <!-- no translation found for force_hw_ui_summary (5535991166074861515) -->
-    <skip />
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"استفاده اجباری از GPU برای طراحی دوم"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"اجرای GPU نمایه"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"اندازه‌گیری زمان اجرا در adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>

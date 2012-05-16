@@ -651,7 +651,8 @@
     <string name="search_settings" msgid="1910951467596035063">"Búsqueda"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrar historial y configuración de búsqueda"</string>
     <string name="display_settings" msgid="7965901687241669598">"Pantalla"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Pantalla giratoria"</string>
+    <!-- no translation found for accelerometer_title (4930458565568936210) -->
+    <skip />
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Cambiar orientación al girar el tablet"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Cambiar orientación automáticamente al girar el teléfono"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Cambiar orientación al girar el tablet"</string>
@@ -1179,22 +1180,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"La depuración USB solo está indicada para actividades de desarrollo. Puedes utilizarla para intercambiar datos entre el ordenador y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"¿Permitir ajustes de desarrollo?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Estos ajustes están destinados únicamente a los desarrolladores. Pueden provocar que el dispositivo o las aplicaciones del mismo no funcionen correctamente."</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Proteger almacenamiento USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Las aplicaciones deben solicitar permiso para leer el USB."</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"¿Proteger almacenamiento USB?"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Cuando el almacenamiento USB está protegido, las aplicaciones deben solicitar permiso para leer los datos del almacenamiento externo."\n\n"Es posible que algunas aplicaciones no funcionen hasta que los desarrolladores las actualicen."</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Proteger tarjeta SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Las aplicaciones deben solicitar permiso para leer la tarjeta SD."</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"¿Proteger tarjeta SD?"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Cuando la tarjeta SD está protegida, las aplicaciones deben solicitar permiso para leer los datos del almacenamiento externo."\n\n"Es posible que algunas aplicaciones no funcionen hasta que los desarrolladores las actualicen."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Seleccionar gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Seleccionar widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"¿Crear widget y permitir acceso?"</string>
