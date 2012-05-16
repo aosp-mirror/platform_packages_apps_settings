@@ -67,7 +67,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_LOCK_SOUNDS = "lock_sounds";
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
-    private static final String KEY_CATEGORY_CALLS = "category_calls";
+    private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
 
     private static final String SILENT_MODE_OFF = "off";
     private static final String SILENT_MODE_VIBRATE = "vibrate";
