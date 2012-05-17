@@ -42,7 +42,7 @@ public class AppViewHolder {
         }
     }
 
-    void updateSizeText(ManageApplications ma, int whichSize) {
+    void updateSizeText(CharSequence invalidSizeStr, int whichSize) {
         if (ManageApplications.DEBUG) Log.i(ManageApplications.TAG, "updateSizeText of " + entry.label + " " + entry
                 + ": " + entry.sizeStr);
         if (entry.sizeStr != null) {
@@ -58,7 +58,7 @@ public class AppViewHolder {
                     break;
             }
         } else if (entry.size == ApplicationsState.SIZE_INVALID) {
-            appSize.setText(ma.mInvalidSizeStr);
+            appSize.setText(invalidSizeStr);
         }
     }
 }
