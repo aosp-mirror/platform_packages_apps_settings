@@ -125,7 +125,7 @@ public class InstalledAppDetails extends Fragment
     private Button mForceStopButton;
     private Button mClearDataButton;
     private Button mMoveAppButton;
-    private Switch mNotificationSwitch;
+    private CompoundButton mNotificationSwitch;
 
     private PackageMoveObserver mPackageMoveObserver;
     
@@ -161,6 +161,7 @@ public class InstalledAppDetails extends Fragment
     private static final int DLG_FORCE_STOP = DLG_BASE + 5;
     private static final int DLG_MOVE_FAILED = DLG_BASE + 6;
     private static final int DLG_DISABLE = DLG_BASE + 7;
+    private static final int DLG_DISABLE_NOTIFICATIONS = DLG_BASE + 8;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -279,6 +280,16 @@ public class InstalledAppDetails extends Fragment
         }
     }
 
+    private boolean isThisASystemPackage() {
+        try {
+            PackageInfo sys = mPm.getPackageInfo("android", PackageManager.GET_SIGNATURES);
+            return (mPackageInfo != null && mPackageInfo.signatures != null &&
+                    sys.signatures[0].equals(mPackageInfo.signatures[0]));
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
     private void initUninstallButtons() {
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         boolean enabled = true;
@@ -298,9 +309,7 @@ public class InstalledAppDetails extends Fragment
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setPackage(mAppEntry.info.packageName);
                         List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
-                        if ((homes != null && homes.size() > 0) ||
-                                (mPackageInfo != null && mPackageInfo.signatures != null &&
-                                        sys.signatures[0].equals(mPackageInfo.signatures[0]))) {
+                        if ((homes != null && homes.size() > 0) || isThisASystemPackage()) {
                             // Disable button for core system applications.
                             mUninstallButton.setText(R.string.disable_text);
                         } else if (mAppEntry.info.enabled) {
@@ -340,7 +349,12 @@ public class InstalledAppDetails extends Fragment
             // this does not bode well
         }
         mNotificationSwitch.setChecked(enabled);
-        mNotificationSwitch.setOnCheckedChangeListener(this);
+        if (isThisASystemPackage()) {
+            mNotificationSwitch.setEnabled(false);
+        } else {
+            mNotificationSwitch.setEnabled(true);
+            mNotificationSwitch.setOnCheckedChangeListener(this);
+        }
     }
 
     /** Called when the activity is first created. */
@@ -395,7 +409,7 @@ public class InstalledAppDetails extends Fragment
         mAskCompatibilityCB = (CheckBox)view.findViewById(R.id.ask_compatibility_cb);
         mEnableCompatibilityCB = (CheckBox)view.findViewById(R.id.enable_compatibility_cb);
         
-        mNotificationSwitch = (Switch) view.findViewById(R.id.notification_switch);
+        mNotificationSwitch = (CompoundButton) view.findViewById(R.id.notification_switch);
 
         return view;
     }
@@ -851,6 +865,26 @@ public class InstalledAppDetails extends Fragment
                     })
                     .setNegativeButton(R.string.dlg_cancel, null)
                     .create();
+                case DLG_DISABLE_NOTIFICATIONS:
+                    return new AlertDialog.Builder(getActivity())
+                    .setTitle(getActivity().getText(R.string.app_disable_notifications_dlg_title))
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(getActivity().getText(R.string.app_disable_notifications_dlg_text))
+                    .setPositiveButton(R.string.dlg_ok,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Disable the package's notifications
+                            getOwner().setNotificationsEnabled(false);
+                        }
+                    })
+                    .setNegativeButton(R.string.dlg_cancel,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Re-enable the checkbox
+                            getOwner().mNotificationSwitch.setChecked(true);
+                        }
+                    })
+                    .create();
             }
             throw new IllegalArgumentException("unknown id " + id);
         }
@@ -905,7 +939,7 @@ public class InstalledAppDetails extends Fragment
                     Activity.RESULT_CANCELED, null, null);
         }
     }
-    
+
     static class DisableChanger extends AsyncTask<Object, Object, Object> {
         final PackageManager mPm;
         final WeakReference<InstalledAppDetails> mActivity;
@@ -923,6 +957,18 @@ public class InstalledAppDetails extends Fragment
         protected Object doInBackground(Object... params) {
             mPm.setApplicationEnabledSetting(mInfo.packageName, mState, 0);
             return null;
+        }
+    }
+
+    private void setNotificationsEnabled(boolean enabled) {
+        String packageName = mAppEntry.info.packageName;
+        INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        try {
+            final boolean enable = mNotificationSwitch.isChecked();
+            nm.setNotificationsEnabledForPackage(packageName, enabled);
+        } catch (android.os.RemoteException ex) {
+            mNotificationSwitch.setChecked(!enabled); // revert
         }
     }
 
@@ -1003,12 +1049,10 @@ public class InstalledAppDetails extends Fragment
             am.setPackageScreenCompatMode(packageName, isChecked ?
                     ActivityManager.COMPAT_MODE_ENABLED : ActivityManager.COMPAT_MODE_DISABLED);
         } else if (buttonView == mNotificationSwitch) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-            try {
-                nm.setNotificationsEnabledForPackage(packageName, isChecked);
-            } catch (android.os.RemoteException ex) {
-                mNotificationSwitch.setChecked(!isChecked); // revert
+            if (!isChecked) {
+                showDialogInner(DLG_DISABLE_NOTIFICATIONS, 0);
+            } else {
+                setNotificationsEnabled(true);
             }
         }
     }
