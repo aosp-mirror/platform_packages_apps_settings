@@ -98,6 +98,7 @@ public class InstalledAppDetails extends Fragment
     private AppWidgetManager mAppWidgetManager;
     private DevicePolicyManager mDpm;
     private ApplicationsState mState;
+    private ApplicationsState.Session mSession;
     private ApplicationsState.AppEntry mAppEntry;
     private PackageInfo mPackageInfo;
     private CanBeOnSdCardChecker mCanBeOnSdCardChecker;
@@ -348,6 +349,7 @@ public class InstalledAppDetails extends Fragment
         super.onCreate(icicle);
         
         mState = ApplicationsState.getInstance(getActivity().getApplication());
+        mSession = mState.newSession(this);
         mPm = getActivity().getPackageManager();
         IBinder b = ServiceManager.getService(Context.USB_SERVICE);
         mUsbManager = IUsbManager.Stub.asInterface(b);
@@ -423,7 +425,7 @@ public class InstalledAppDetails extends Fragment
     public void onResume() {
         super.onResume();
         
-        mState.resume(this);
+        mSession.resume();
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
         }
@@ -432,7 +434,7 @@ public class InstalledAppDetails extends Fragment
     @Override
     public void onPause() {
         super.onPause();
-        mState.pause();
+        mSession.pause();
     }
 
     @Override

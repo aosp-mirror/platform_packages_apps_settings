@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -82,12 +82,6 @@
                 android:singleLine="true" />
         </view>
     </LinearLayout>
-
-    <view class="com.android.settings.applications.RunningProcessesView"
-            android:id="@+id/running_processes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
 
     <LinearLayout android:id="@+id/loading_container"
             android:orientation="vertical"
