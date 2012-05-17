@@ -27,9 +27,12 @@ import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -95,8 +98,26 @@ public class KeyboardLayoutPicker extends ListFragment
 
     private static final class KeyboardLayoutAdapter
             extends ArrayAdapter<KeyboardLayout> {
+        private LayoutInflater mInflater;
+
         public KeyboardLayoutAdapter(Context context, KeyboardLayout[] list) {
-            super(context, android.R.layout.simple_list_item_1, list);
+            super(context, android.R.layout.simple_list_item_2, list);
+            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            if (view == null) {
+                view = mInflater.inflate(android.R.layout.simple_list_item_2, parent, false);
+            }
+
+            KeyboardLayout item = getItem(position);
+            TextView headline = (TextView) view.findViewById(android.R.id.text1);
+            TextView subText = (TextView) view.findViewById(android.R.id.text2);
+            headline.setText(item.getLabel());
+            subText.setText(item.getCollection());
+            return view;
         }
     }
 
@@ -112,7 +133,7 @@ public class KeyboardLayoutPicker extends ListFragment
             KeyboardLayout[] list = im.getKeyboardLayouts();
             KeyboardLayout[] listWithDefault = new KeyboardLayout[list.length + 1];
             listWithDefault[0] = new KeyboardLayout(null,
-                    getContext().getString(R.string.keyboard_layout_default_label));
+                    getContext().getString(R.string.keyboard_layout_default_label), "");
             System.arraycopy(list, 0, listWithDefault, 1, list.length);
             Arrays.sort(listWithDefault);
             return listWithDefault;
