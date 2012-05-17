@@ -82,6 +82,30 @@
     <style name="Theme.CreateShortCut" parent="android:Theme.Holo.DialogWhenLarge">
     </style>
 
+    <style name="setup_wizard_theme" parent="android:Theme.Holo.NoActionBar">
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+
+    <!-- We'd like to have this as 16dip hight including paddingTop/paddingBottom to
+         be consistent with ProgressBar -->
+    <style name="TopDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/divider_height</item>
+        <item name="android:background">@color/setup_divider_color</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:layout_marginTop">@dimen/divider_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/divider_margin_bottom</item>
+    </style>
+
+    <style name="SetupTitle">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/setup_title_size</item>
+        <item name="android:textColor">@color/title_color</item>
+        <item name="android:clickable">false</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
     <style name="wifi_item">
         <item name="android:layout_width">200dip</item>
         <item name="android:layout_height">wrap_content</item>
