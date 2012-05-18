@@ -1067,6 +1067,10 @@ public class DataUsageSummary extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final Context context = view.getContext();
             final AppItem app = (AppItem) parent.getItemAtPosition(position);
+
+            // TODO: sigh, remove this hack once we understand 6450986
+            if (mUidDetailProvider == null || app == null) return;
+
             final UidDetail detail = mUidDetailProvider.getUidDetail(app.appId, true);
             AppDetailsFragment.show(DataUsageSummary.this, app, detail.label);
         }
