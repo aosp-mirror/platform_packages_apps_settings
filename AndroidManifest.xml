@@ -144,13 +144,23 @@
         </activity-alias>
 
         <activity android:name=".wifi.WifiPickerActivity"
-                  android:label="@string/wifi_setup_wizard_title"
-                  android:theme="@style/setup_wizard_theme"
-                  android:icon="@drawable/empty_icon"
-                  android:clearTaskOnLaunch="true">
+                android:parentActivityName="Settings"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".wifi.WifiSetupActivity"
+            android:theme="@style/setup_wizard_theme"
+            android:label="@string/wifi_setup_wizard_title"
+                android:icon="@drawable/empty_icon"
+            android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.net.wifi.SETUP_WIFI_NETWORK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
