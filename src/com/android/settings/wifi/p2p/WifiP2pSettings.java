@@ -89,6 +89,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CANCEL_CONNECT = 2;
     private static final int DIALOG_RENAME = 3;
 
+    private static final String SAVE_DIALOG_PEER = "PEER_STATE";
+
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
 
@@ -134,8 +136,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     };
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onActivityCreated(Bundle savedInstanceState) {
         addPreferencesFromResource(R.xml.wifi_p2p_settings);
 
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
@@ -155,6 +156,11 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             }
         } else {
             Log.e(TAG, "mWifiP2pManager is null !");
+        }
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DIALOG_PEER)) {
+            WifiP2pDevice device = savedInstanceState.getParcelable(SAVE_DIALOG_PEER);
+            mSelectedWifiPeer = new WifiP2pPeer(getActivity(), device);
         }
 
         mRenameListener = new OnClickListener() {
@@ -229,6 +235,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
         mPeersGroup = new PreferenceCategory(getActivity());
         mPeersGroup.setTitle(R.string.wifi_p2p_peer_devices);
+
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -336,14 +344,19 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     @Override
     public Dialog onCreateDialog(int id) {
         if (id == DIALOG_DISCONNECT) {
-            int stringId = (mConnectedDevices > 1) ? R.string.wifi_p2p_disconnect_multiple_message :
-                    R.string.wifi_p2p_disconnect_message;
             String deviceName = TextUtils.isEmpty(mSelectedWifiPeer.device.deviceName) ?
                     mSelectedWifiPeer.device.deviceAddress :
                     mSelectedWifiPeer.device.deviceName;
+            String msg;
+            if (mConnectedDevices > 1) {
+                msg = getActivity().getString(R.string.wifi_p2p_disconnect_multiple_message,
+                        deviceName, mConnectedDevices - 1);
+            } else {
+                msg = getActivity().getString(R.string.wifi_p2p_disconnect_message, deviceName);
+            }
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.wifi_p2p_disconnect_title)
-                .setMessage(getActivity().getString(stringId, deviceName))
+                .setMessage(msg)
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mDisconnectListener)
                 .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
                 .create();
@@ -372,6 +385,13 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             return dialog;
         }
         return null;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mSelectedWifiPeer != null) {
+            outState.putParcelable(SAVE_DIALOG_PEER, mSelectedWifiPeer.device);
+        }
     }
 
     public void onPeersAvailable(WifiP2pDeviceList peers) {
