@@ -47,18 +47,6 @@
                 android:title="@string/accessibility_speak_password_title"
                 android:persistent="false"/>
 
-        <PreferenceScreen
-                android:key="toggle_touch_exploration_preference"
-                android:title="@string/accessibility_touch_exploration_title"
-                android:fragment="com.android.settings.AccessibilitySettings$ToggleTouchExplorationFragment" >
-                <extra android:name="title" android:value="@string/accessibility_touch_exploration_title" />
-                <extra android:name="summary" android:value="@string/accessibility_touch_exploration_summary" />
-                <extra android:name="enable_warning_title" android:value="@android:string/dialog_alert_title" />
-                <extra android:name="enable_warning_message" android:value="@string/accessibility_touch_exploration_warning" />
-                <extra android:name="settings_title" android:value="@string/accessibility_menu_item_tutorial" />
-                <extra android:name="settings_component_name" android:value="com.android.settings/com.android.settings.AccessibilityTutorialActivity" />
-        </PreferenceScreen>
-
         <PreferenceScreen android:key="tts_settings"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
                 android:title="@string/tts_settings_title" />
