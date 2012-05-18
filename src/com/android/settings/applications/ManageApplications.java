@@ -42,6 +42,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFrameLayout;
 import android.provider.Settings;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
@@ -55,17 +56,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.app.IMediaContainerService;
@@ -122,6 +119,11 @@ final class CanBeOnSdCardChecker {
     }
 }
 
+interface AppClickListener {
+    void onItemClick(ManageApplications.TabInfo tab, AdapterView<?> parent,
+            View view, int position, long id);
+}
+
 /**
  * Activity to pick an application that will be used to display installation information and
  * options to uninstall/delete user data for system applications. This activity
@@ -129,7 +131,7 @@ final class CanBeOnSdCardChecker {
  * intent.
  */
 public class ManageApplications extends Fragment implements
-        OnItemClickListener, DialogInterface.OnClickListener,
+        AppClickListener, DialogInterface.OnClickListener,
         DialogInterface.OnDismissListener {
 
     static final String TAG = "ManageApplications";
@@ -174,11 +176,10 @@ public class ManageApplications extends Fragment implements
     public static class TabInfo implements OnItemClickListener {
         public final ManageApplications mOwner;
         public final ApplicationsState mApplicationsState;
-        public final IMediaContainerService mContainerService;
         public final CharSequence mLabel;
         public final int mListType;
         public final int mFilter;
-        public final OnItemClickListener mClickListener;
+        public final AppClickListener mClickListener;
         public final CharSequence mInvalidSizeStr;
         public final CharSequence mComputingSizeStr;
         private final Bundle mSavedInstanceState;
@@ -186,6 +187,8 @@ public class ManageApplications extends Fragment implements
         public ApplicationsAdapter mApplications;
         public LayoutInflater mInflater;
         public View mRootView;
+
+        private IMediaContainerService mContainerService;
 
         private View mLoadingContainer;
 
@@ -200,6 +203,7 @@ public class ManageApplications extends Fragment implements
         private TextView mStorageChartLabel;
         private TextView mUsedStorageText;
         private TextView mFreeStorageText;
+        private long mFreeStorage = 0, mAppStorage = 0, mTotalStorage = 0;
         private long mLastUsedStorage, mLastAppStorage, mLastFreeStorage;
 
         final Runnable mRunningProcessesAvail = new Runnable() {
@@ -209,12 +213,10 @@ public class ManageApplications extends Fragment implements
         };
 
         public TabInfo(ManageApplications owner, ApplicationsState apps,
-                IMediaContainerService containerService,
-                CharSequence label, int listType, OnItemClickListener clickListener,
+                CharSequence label, int listType, AppClickListener clickListener,
                 Bundle savedInstanceState) {
             mOwner = owner;
             mApplicationsState = apps;
-            mContainerService = containerService;
             mLabel = label;
             mListType = listType;
             switch (listType) {
@@ -226,6 +228,11 @@ public class ManageApplications extends Fragment implements
             mInvalidSizeStr = owner.getActivity().getText(R.string.invalid_size_value);
             mComputingSizeStr = owner.getActivity().getText(R.string.computing_size);
             mSavedInstanceState = savedInstanceState;
+        }
+
+        public void setContainerService(IMediaContainerService containerService) {
+            mContainerService = containerService;
+            updateStorageUsage();
         }
 
         public View build(LayoutInflater inflater, ViewGroup contentParent, View contentChild) {
@@ -260,6 +267,14 @@ public class ManageApplications extends Fragment implements
                 mUsedStorageText = (TextView)mListContainer.findViewById(R.id.usedStorageText);
                 mFreeStorageText = (TextView)mListContainer.findViewById(R.id.freeStorageText);
                 Utils.prepareCustomPreferencesList(contentParent, contentChild, mListView, false);
+                if (mFilter == FILTER_APPS_SDCARD) {
+                    mStorageChartLabel.setText(mOwner.getActivity().getText(
+                            R.string.sd_card_storage));
+                } else {
+                    mStorageChartLabel.setText(mOwner.getActivity().getText(
+                            R.string.internal_storage));
+                }
+                applyCurrentStorage();
             }
             mRunningProcessesView = (RunningProcessesView)mRootView.findViewById(
                     R.id.running_processes);
@@ -268,6 +283,15 @@ public class ManageApplications extends Fragment implements
             }
 
             return mRootView;
+        }
+
+        public void detachView() {
+            if (mRootView != null) {
+                ViewGroup group = (ViewGroup)mRootView.getParent();
+                if (group != null) {
+                    group.removeView(mRootView);
+                }
+            }
         }
 
         public void resume(int sortOrder) {
@@ -295,27 +319,22 @@ public class ManageApplications extends Fragment implements
         }
 
         void updateStorageUsage() {
-            // Fragment view not yet created?
-            if (mRootView == null) return;
             // Make sure a callback didn't come at an inopportune time.
             if (mOwner.getActivity() == null) return;
             // Doesn't make sense for stuff that is not an app list.
             if (mApplications == null) return;
 
-            long freeStorage = 0;
-            long appStorage = 0;
-            long totalStorage = 0;
-            CharSequence newLabel = null;
+            mFreeStorage = 0;
+            mAppStorage = 0;
+            mTotalStorage = 0;
 
             if (mFilter == FILTER_APPS_SDCARD) {
-                newLabel = mOwner.getActivity().getText(R.string.sd_card_storage);
-
                 if (mContainerService != null) {
                     try {
                         final long[] stats = mContainerService.getFileSystemStats(
                                 Environment.getExternalStorageDirectory().getPath());
-                        totalStorage = stats[0];
-                        freeStorage = stats[1];
+                        mTotalStorage = stats[0];
+                        mFreeStorage = stats[1];
                     } catch (RemoteException e) {
                         Log.w(TAG, "Problem in container service", e);
                     }
@@ -325,18 +344,16 @@ public class ManageApplications extends Fragment implements
                     final int N = mApplications.getCount();
                     for (int i=0; i<N; i++) {
                         ApplicationsState.AppEntry ae = mApplications.getAppEntry(i);
-                        appStorage += ae.externalCodeSize + ae.externalDataSize;
+                        mAppStorage += ae.externalCodeSize + ae.externalDataSize;
                     }
                 }
             } else {
-                newLabel = mOwner.getActivity().getText(R.string.internal_storage);
-
                 if (mContainerService != null) {
                     try {
                         final long[] stats = mContainerService.getFileSystemStats(
                                 Environment.getDataDirectory().getPath());
-                        totalStorage = stats[0];
-                        freeStorage = stats[1];
+                        mTotalStorage = stats[0];
+                        mFreeStorage = stats[1];
                     } catch (RemoteException e) {
                         Log.w(TAG, "Problem in container service", e);
                     }
@@ -347,21 +364,27 @@ public class ManageApplications extends Fragment implements
                     final int N = mApplications.getCount();
                     for (int i=0; i<N; i++) {
                         ApplicationsState.AppEntry ae = mApplications.getAppEntry(i);
-                        appStorage += ae.codeSize + ae.dataSize;
+                        mAppStorage += ae.codeSize + ae.dataSize;
                         if (emulatedStorage) {
-                            appStorage += ae.externalCodeSize + ae.externalDataSize;
+                            mAppStorage += ae.externalCodeSize + ae.externalDataSize;
                         }
                     }
                 }
-                freeStorage += mApplicationsState.sumCacheSizes();
+                mFreeStorage += mApplicationsState.sumCacheSizes();
             }
-            if (newLabel != null) {
-                mStorageChartLabel.setText(newLabel);
+
+            applyCurrentStorage();
+        }
+
+        void applyCurrentStorage() {
+            // If view hierarchy is not yet created, no views to update.
+            if (mRootView == null) {
+                return;
             }
-            if (totalStorage > 0) {
-                mColorBar.setRatios((totalStorage-freeStorage-appStorage)/(float)totalStorage,
-                        appStorage/(float)totalStorage, freeStorage/(float)totalStorage);
-                long usedStorage = totalStorage - freeStorage;
+            if (mTotalStorage > 0) {
+                mColorBar.setRatios((mTotalStorage-mFreeStorage-mAppStorage)/(float)mTotalStorage,
+                        mAppStorage/(float)mTotalStorage, mFreeStorage/(float)mTotalStorage);
+                long usedStorage = mTotalStorage - mFreeStorage;
                 if (mLastUsedStorage != usedStorage) {
                     mLastUsedStorage = usedStorage;
                     String sizeStr = Formatter.formatShortFileSize(
@@ -369,10 +392,10 @@ public class ManageApplications extends Fragment implements
                     mUsedStorageText.setText(mOwner.getActivity().getResources().getString(
                             R.string.service_foreground_processes, sizeStr));
                 }
-                if (mLastFreeStorage != freeStorage) {
-                    mLastFreeStorage = freeStorage;
+                if (mLastFreeStorage != mFreeStorage) {
+                    mLastFreeStorage = mFreeStorage;
                     String sizeStr = Formatter.formatShortFileSize(
-                            mOwner.getActivity(), freeStorage);
+                            mOwner.getActivity(), mFreeStorage);
                     mFreeStorageText.setText(mOwner.getActivity().getResources().getString(
                             R.string.service_background_processes, sizeStr));
                 }
@@ -391,7 +414,7 @@ public class ManageApplications extends Fragment implements
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            mClickListener.onItemClick(parent, view, position, id);
+            mClickListener.onItemClick(this, parent, view, position, id);
         }
 
         void handleRunningProcessesAvail() {
@@ -711,6 +734,7 @@ public class ManageApplications extends Fragment implements
             if (mLastSortMode == SORT_ORDER_SIZE) {
                 rebuild(false);
             }
+            mTab.updateStorageUsage();
         }
         
         public int getCount() {
@@ -825,24 +849,24 @@ public class ManageApplications extends Fragment implements
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
         mComputingSizeStr = getActivity().getText(R.string.computing_size);
 
-        TabInfo tab = new TabInfo(this, mApplicationsState, mContainerService,
+        TabInfo tab = new TabInfo(this, mApplicationsState,
                 getActivity().getString(R.string.filter_apps_third_party),
                 LIST_TYPE_DOWNLOADED, this, savedInstanceState);
         mTabs.add(tab);
 
         if (!Environment.isExternalStorageEmulated()) {
-            tab = new TabInfo(this, mApplicationsState, mContainerService,
+            tab = new TabInfo(this, mApplicationsState,
                     getActivity().getString(R.string.filter_apps_onsdcard),
                     LIST_TYPE_SDCARD, this, savedInstanceState);
             mTabs.add(tab);
         }
 
-        tab = new TabInfo(this, mApplicationsState, mContainerService,
+        tab = new TabInfo(this, mApplicationsState,
                 getActivity().getString(R.string.filter_apps_running),
                 LIST_TYPE_RUNNING, this, savedInstanceState);
         mTabs.add(tab);
 
-        tab = new TabInfo(this, mApplicationsState, mContainerService,
+        tab = new TabInfo(this, mApplicationsState,
                 getActivity().getString(R.string.filter_apps_all),
                 LIST_TYPE_ALL, this, savedInstanceState);
         mTabs.add(tab);
@@ -865,6 +889,12 @@ public class ManageApplications extends Fragment implements
         mViewPager.setOnPageChangeListener(adapter);
         PagerTabStrip tabs = (PagerTabStrip) rootView.findViewById(R.id.tabs);
         tabs.setTabIndicatorColorResource(android.R.color.holo_blue_light);
+
+        // We have to do this now because PreferenceFrameLayout looks at it
+        // only when the view is added.
+        if (container instanceof PreferenceFrameLayout) {
+            ((PreferenceFrameLayout.LayoutParams) rootView.getLayoutParams()).removeBorders = true;
+        }
 
         if (savedInstanceState != null && savedInstanceState.getBoolean(EXTRA_RESET_DIALOG)) {
             buildResetDialog();
@@ -915,6 +945,17 @@ public class ManageApplications extends Fragment implements
         if (mResetDialog != null) {
             mResetDialog.dismiss();
             mResetDialog = null;
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        // We are going to keep the tab data structures around, but they
+        // are no longer attached to their view hierarchy.
+        for (int i=0; i<mTabs.size(); i++) {
+            mTabs.get(i).detachView();
         }
     }
 
@@ -1129,10 +1170,10 @@ public class ManageApplications extends Fragment implements
         return true;
     }
     
-    public void onItemClick(AdapterView<?> parent, View view, int position,
+    public void onItemClick(TabInfo tab, AdapterView<?> parent, View view, int position,
             long id) {
-        if (mCurTab != null && mCurTab.mApplications != null) {
-            ApplicationsState.AppEntry entry = mCurTab.mApplications.getAppEntry(position);
+        if (tab.mApplications != null && tab.mApplications.getCount() > position) {
+            ApplicationsState.AppEntry entry = tab.mApplications.getAppEntry(position);
             mCurrentPkgName = entry.info.packageName;
             startApplicationDetailsActivity();
         }
@@ -1170,8 +1211,8 @@ public class ManageApplications extends Fragment implements
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mContainerService = IMediaContainerService.Stub.asInterface(service);
-            if (mCurTab != null) {
-                mCurTab.updateStorageUsage();
+            for (int i=0; i<mTabs.size(); i++) {
+                mTabs.get(i).setContainerService(mContainerService);
             }
         }
 
