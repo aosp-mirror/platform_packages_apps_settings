@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import android.accounts.Account;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.util.Log;
@@ -36,25 +35,20 @@ public class AccountPreference extends Preference {
     public static final int SYNC_ENABLED = 0; // all know sync adapters are enabled and OK
     public static final int SYNC_DISABLED = 1; // no sync adapters are enabled
     public static final int SYNC_ERROR = 2; // one or more sync adapters have a problem
+    public static final int SYNC_IN_PROGRESS = 3; // currently syncing
     private int mStatus;
     private Account mAccount;
     private ArrayList<String> mAuthorities;
-    private Drawable mProviderIcon;
-    private ImageView mSyncStatusIcon;
-    private ImageView mProviderIconView;
 
     public AccountPreference(Context context, Account account, Drawable icon,
             ArrayList<String> authorities) {
         super(context);
         mAccount = account;
         mAuthorities = authorities;
-        mProviderIcon = icon;
-        setWidgetLayoutResource(R.layout.account_preference);
         setTitle(mAccount.name);
         setSummary("");
         setPersistent(false);
         setSyncStatus(SYNC_DISABLED);
-        setIcon(mProviderIcon);
     }
 
     public Account getAccount() {
@@ -69,23 +63,14 @@ public class AccountPreference extends Preference {
     protected void onBindView(View view) {
         super.onBindView(view);
         setSummary(getSyncStatusMessage(mStatus));
-        mSyncStatusIcon = (ImageView) view.findViewById(R.id.syncStatusIcon);
-        mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));
-        mSyncStatusIcon.setContentDescription(getSyncContentDescription(mStatus));
-    }
-
-    public void setProviderIcon(Drawable icon) {
-        mProviderIcon = icon;
-        if (mProviderIconView != null) {
-            mProviderIconView.setImageDrawable(icon);
-        }
+        ImageView iconView = (ImageView) view.findViewById(android.R.id.icon);
+        iconView.setImageResource(getSyncStatusIcon(mStatus));
+        iconView.setContentDescription(getSyncContentDescription(mStatus));
     }
 
     public void setSyncStatus(int status) {
         mStatus = status;
-        if (mSyncStatusIcon != null) {
-            mSyncStatusIcon.setImageResource(getSyncStatusIcon(status));
-        }
+        setIcon(getSyncStatusIcon(status));
         setSummary(getSyncStatusMessage(status));
     }
 
@@ -100,6 +85,9 @@ public class AccountPreference extends Preference {
                 break;
             case SYNC_ERROR:
                 res = R.string.sync_error;
+                break;
+            case SYNC_IN_PROGRESS:
+                res = R.string.sync_in_progress;
                 break;
             default:
                 res = R.string.sync_error;
@@ -120,6 +108,9 @@ public class AccountPreference extends Preference {
             case SYNC_ERROR:
                 res = R.drawable.ic_sync_red_holo;
                 break;
+            case SYNC_IN_PROGRESS:
+                res = R.drawable.ic_sync_grey_holo;
+                break;
             default:
                 res = R.drawable.ic_sync_red_holo;
                 Log.e(TAG, "Unknown sync status: " + status);
@@ -139,14 +130,5 @@ public class AccountPreference extends Preference {
                 Log.e(TAG, "Unknown sync status: " + status);
                 return getContext().getString(R.string.accessibility_sync_error);
         }
-    }
-
-    @Override
-    public int compareTo(Preference other) {
-        if (!(other instanceof AccountPreference)) {
-            // Put other preference types above us
-            return 1;
-        }
-        return mAccount.name.compareTo(((AccountPreference) other).mAccount.name);
     }
 }
