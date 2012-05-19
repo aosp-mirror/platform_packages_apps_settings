@@ -103,8 +103,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String TOGGLE_LARGE_TEXT_PREFERENCE = "toggle_large_text_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
         "toggle_power_button_ends_call_preference";
-    private static final String TOGGLE_AUTO_ROTATE_SCREEN_PREFERENCE =
-        "toggle_auto_rotate_screen_preference";
+    private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
+        "toggle_lock_screen_rotation_preference";
     private static final String TOGGLE_SPEAK_PASSWORD_PREFERENCE =
         "toggle_speak_password_preference";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
@@ -155,7 +155,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mToggleLargeTextPreference;
     private CheckBoxPreference mTogglePowerButtonEndsCallPreference;
-    private CheckBoxPreference mToggleAutoRotateScreenPreference;
+    private CheckBoxPreference mToggleLockScreenRotationPreference;
     private CheckBoxPreference mToggleSpeakPasswordPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private AccessibilityEnableScriptInjectionPreference mToggleScriptInjectionPreference;
@@ -207,8 +207,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mTogglePowerButtonEndsCallPreference == preference) {
             handleTogglePowerButtonEndsCallPreferenceClick();
             return true;
-        } else if (mToggleAutoRotateScreenPreference == preference) {
-            handleToggleAutoRotateScreenPreferenceClick();
+        } else if (mToggleLockScreenRotationPreference == preference) {
+            handleLockScreenRotationPreferenceClick();
             return true;
         } else if (mToggleSpeakPasswordPreference == preference) {
             handleToggleSpeakPasswordPreferenceClick();
@@ -233,11 +233,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
     }
 
-    private void handleToggleAutoRotateScreenPreferenceClick() {
+    private void handleLockScreenRotationPreferenceClick() {
         try {
             IWindowManager wm = IWindowManager.Stub.asInterface(
                     ServiceManager.getService(Context.WINDOW_SERVICE));
-            if (mToggleAutoRotateScreenPreference.isChecked()) {
+            if (!mToggleLockScreenRotationPreference.isChecked()) {
                 wm.thawRotation();
             } else {
                 wm.freezeRotation(Surface.ROTATION_0);
@@ -269,9 +269,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mSystemsCategory.removePreference(mTogglePowerButtonEndsCallPreference);
         }
 
-        // Auto-rotate screen
-        mToggleAutoRotateScreenPreference =
-            (CheckBoxPreference) findPreference(TOGGLE_AUTO_ROTATE_SCREEN_PREFERENCE);
+        // Lock screen rotation.
+        mToggleLockScreenRotationPreference =
+            (CheckBoxPreference) findPreference(TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
 
         // Speak passwords.
         mToggleSpeakPasswordPreference =
@@ -429,9 +429,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
 
         // Auto-rotate screen
-        final boolean autoRotationEnabled = Settings.System.getInt(getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION, 0) != 0;
-        mToggleAutoRotateScreenPreference.setChecked(autoRotationEnabled);
+        final boolean lockRotationEnabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) != 1;
+        mToggleLockScreenRotationPreference.setChecked(lockRotationEnabled);
 
         // Speak passwords.
         final boolean speakPasswordEnabled = Settings.Secure.getInt(getContentResolver(),
