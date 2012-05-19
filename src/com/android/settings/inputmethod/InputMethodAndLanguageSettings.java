@@ -172,6 +172,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        mSettingsObserver.resume();
         if (!mIsOnlyImeSettings) {
             if (mLanguagePref != null) {
                 Configuration conf = getResources().getConfiguration();
@@ -207,6 +208,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
+        mSettingsObserver.pause();
         if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
             mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
         }
@@ -359,17 +361,27 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     private class SettingsObserver extends ContentObserver {
+        private Context mContext;
+
         public SettingsObserver(Handler handler, Context context) {
             super(handler);
-            final ContentResolver cr = context.getContentResolver();
+            mContext = context;
+        }
+
+        @Override public void onChange(boolean selfChange) {
+            updateCurrentImeName();
+        }
+
+        public void resume() {
+            final ContentResolver cr = mContext.getContentResolver();
             cr.registerContentObserver(
                     Settings.Secure.getUriFor(Settings.Secure.DEFAULT_INPUT_METHOD), false, this);
             cr.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE), false, this);
         }
 
-        @Override public void onChange(boolean selfChange) {
-            updateCurrentImeName();
+        public void pause() {
+            mContext.getContentResolver().unregisterContentObserver(this);
         }
     }
 }
