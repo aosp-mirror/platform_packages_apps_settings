@@ -28,6 +28,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 final class A2dpProfile implements LocalBluetoothProfile {
@@ -53,7 +54,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
             implements BluetoothProfile.ServiceListener {
 
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            if (V) Log.d(TAG,"Bluetooth service disconnected");
+            if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothA2dp) proxy;
             mProfileManager.setA2dpServiceUp(true);
             mIsProfileReady=true;
@@ -70,7 +71,6 @@ final class A2dpProfile implements LocalBluetoothProfile {
         return mIsProfileReady;
     }
     A2dpProfile(Context context, LocalBluetoothProfileManager profileManager) {
-
         mProfileManager = profileManager;
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         adapter.getProfileProxy(context, new A2dpServiceListener(),
@@ -86,6 +86,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     }
 
     public List<BluetoothDevice> getConnectedDevices() {
+        if (mService == null) return new ArrayList<BluetoothDevice>(0);
         return mService.getDevicesMatchingConnectionStates(
               new int[] {BluetoothProfile.STATE_CONNECTED,
                          BluetoothProfile.STATE_CONNECTING,
@@ -93,6 +94,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     }
 
     public boolean connect(BluetoothDevice device) {
+        if (mService == null) return false;
         List<BluetoothDevice> sinks = getConnectedDevices();
         if (sinks != null) {
             for (BluetoothDevice sink : sinks) {
@@ -103,6 +105,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     }
 
     public boolean disconnect(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.disconnect(device);
     }
 
@@ -110,6 +113,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     // as setPreferred() takes only boolean input but getPreferred() supports interger output.
     // Also this need not implemented by all profiles so this has been added here.
     public void enableAutoConnect(BluetoothDevice device, boolean enable) {
+        if (mService == null) return;
         if (enable) {
              mService.setPriority(device, BluetoothProfile.PRIORITY_AUTO_CONNECT);
         } else {
@@ -120,18 +124,24 @@ final class A2dpProfile implements LocalBluetoothProfile {
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
+        if (mService == null) {
+            return BluetoothProfile.STATE_DISCONNECTED;
+        }
         return mService.getConnectionState(device);
     }
 
     public boolean isPreferred(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.getPriority(device) > BluetoothProfile.PRIORITY_OFF;
     }
 
     public int getPreferred(BluetoothDevice device) {
+        if (mService == null) return BluetoothProfile.PRIORITY_OFF;
         return mService.getPriority(device);
     }
 
     public void setPreferred(BluetoothDevice device, boolean preferred) {
+        if (mService == null) return;
         if (preferred) {
             if (mService.getPriority(device) < BluetoothProfile.PRIORITY_ON) {
                 mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
@@ -142,6 +152,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     }
 
     boolean isA2dpPlaying() {
+        if (mService == null) return false;
         List<BluetoothDevice> sinks = mService.getConnectedDevices();
         if (!sinks.isEmpty()) {
             if (mService.isA2dpPlaying(sinks.get(0))) {
@@ -164,7 +175,7 @@ final class A2dpProfile implements LocalBluetoothProfile {
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {
-        int state = mService.getConnectionState(device);
+        int state = getConnectionStatus(device);
         switch (state) {
             case BluetoothProfile.STATE_DISCONNECTED:
             {

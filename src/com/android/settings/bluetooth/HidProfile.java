@@ -77,14 +77,19 @@ final class HidProfile implements LocalBluetoothProfile {
     }
 
     public boolean connect(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.connect(device);
     }
 
     public boolean disconnect(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.disconnect(device);
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
+        if (mService == null) {
+            return BluetoothProfile.STATE_DISCONNECTED;
+        }
         List<BluetoothDevice> deviceList = mService.getConnectedDevices();
 
         return !deviceList.isEmpty() && deviceList.get(0).equals(device)
@@ -93,14 +98,17 @@ final class HidProfile implements LocalBluetoothProfile {
     }
 
     public boolean isPreferred(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.getPriority(device) > BluetoothProfile.PRIORITY_OFF;
     }
 
     public int getPreferred(BluetoothDevice device) {
+        if (mService == null) return BluetoothProfile.PRIORITY_OFF;
         return mService.getPriority(device);
     }
 
     public void setPreferred(BluetoothDevice device, boolean preferred) {
+        if (mService == null) return;
         if (preferred) {
             if (mService.getPriority(device) < BluetoothProfile.PRIORITY_ON) {
                 mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
@@ -124,7 +132,7 @@ final class HidProfile implements LocalBluetoothProfile {
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {
-        int state = mService.getConnectionState(device);
+        int state = getConnectionStatus(device);
         switch (state) {
             case BluetoothProfile.STATE_DISCONNECTED:
                 return R.string.bluetooth_hid_profile_summary_use_for;

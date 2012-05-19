@@ -28,6 +28,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -114,6 +115,7 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
     public boolean connect(BluetoothDevice device) {
+        if (mService == null) return false;
         List<BluetoothDevice> sinks = mService.getConnectedDevices();
         if (sinks != null) {
             for (BluetoothDevice sink : sinks) {
@@ -124,6 +126,7 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
     public boolean disconnect(BluetoothDevice device) {
+        if (mService == null) return false;
         List<BluetoothDevice> deviceList = mService.getConnectedDevices();
         if (!deviceList.isEmpty() && deviceList.get(0).equals(device)) {
             // Downgrade priority as user is disconnecting the headset.
@@ -138,7 +141,6 @@ final class HeadsetProfile implements LocalBluetoothProfile {
 
     public int getConnectionStatus(BluetoothDevice device) {
         if (mService == null) return BluetoothProfile.STATE_DISCONNECTED;
-
         List<BluetoothDevice> deviceList = mService.getConnectedDevices();
 
         return !deviceList.isEmpty() && deviceList.get(0).equals(device)
@@ -147,14 +149,17 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
     public boolean isPreferred(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.getPriority(device) > BluetoothProfile.PRIORITY_OFF;
     }
 
     public int getPreferred(BluetoothDevice device) {
+        if (mService == null) return BluetoothProfile.PRIORITY_OFF;
         return mService.getPriority(device);
     }
 
     public void setPreferred(BluetoothDevice device, boolean preferred) {
+        if (mService == null) return;
         if (preferred) {
             if (mService.getPriority(device) < BluetoothProfile.PRIORITY_ON) {
                 mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
@@ -165,6 +170,7 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
     public List<BluetoothDevice> getConnectedDevices() {
+        if (mService == null) return new ArrayList<BluetoothDevice>(0);
         return mService.getDevicesMatchingConnectionStates(
               new int[] {BluetoothProfile.STATE_CONNECTED,
                          BluetoothProfile.STATE_CONNECTING,
@@ -176,6 +182,7 @@ final class HeadsetProfile implements LocalBluetoothProfile {
 // as setPreferred() takes only boolean input but getPreferred() supports interger output.
 // Also this need not implemented by all profiles so this has been added here.
     public void enableAutoConnect(BluetoothDevice device, boolean enable) {
+        if (mService == null) return;
         if (enable) {
             mService.setPriority(device, BluetoothProfile.PRIORITY_AUTO_CONNECT);
         } else {
@@ -198,7 +205,7 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {
-        int state = mService.getConnectionState(device);
+        int state = getConnectionStatus(device);
         switch (state) {
             case BluetoothProfile.STATE_DISCONNECTED:
                 return R.string.bluetooth_headset_profile_summary_use_for;

@@ -83,6 +83,7 @@ final class PanProfile implements LocalBluetoothProfile {
     }
 
     public boolean connect(BluetoothDevice device) {
+        if (mService == null) return false;
         List<BluetoothDevice> sinks = mService.getConnectedDevices();
         if (sinks != null) {
             for (BluetoothDevice sink : sinks) {
@@ -93,10 +94,14 @@ final class PanProfile implements LocalBluetoothProfile {
     }
 
     public boolean disconnect(BluetoothDevice device) {
+        if (mService == null) return false;
         return mService.disconnect(device);
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
+        if (mService == null) {
+            return BluetoothProfile.STATE_DISCONNECTED;
+        }
         return mService.getConnectionState(device);
     }
 
@@ -129,7 +134,7 @@ final class PanProfile implements LocalBluetoothProfile {
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {
-        int state = mService.getConnectionState(device);
+        int state = getConnectionStatus(device);
         switch (state) {
             case BluetoothProfile.STATE_DISCONNECTED:
                 return R.string.bluetooth_pan_profile_summary_use_for;
