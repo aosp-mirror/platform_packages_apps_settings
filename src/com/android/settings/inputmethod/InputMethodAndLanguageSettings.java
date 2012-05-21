@@ -52,7 +52,8 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener {
+        implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener,
+        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
 
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
@@ -86,6 +87,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private Handler mHandler;
     @SuppressWarnings("unused")
     private SettingsObserver mSettingsObserver;
+    private Intent mIntentWaitingForResult;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -409,14 +411,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         && device.getKeyboardType() == InputDevice.KEYBOARD_TYPE_ALPHABETIC) {
                     final String inputDeviceDescriptor = device.getDescriptor();
                     final String keyboardLayoutDescriptor =
-                            mIm.getKeyboardLayoutForInputDevice(inputDeviceDescriptor);
+                            mIm.getCurrentKeyboardLayoutForInputDevice(inputDeviceDescriptor);
                     final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
                             mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
-
-                    final Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.setClass(getActivity(), KeyboardLayoutPickerActivity.class);
-                    intent.putExtra(KeyboardLayoutPicker.EXTRA_INPUT_DEVICE_DESCRIPTOR,
-                            inputDeviceDescriptor);
 
                     final PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
                     pref.setTitle(device.getName());
@@ -425,7 +422,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                     } else {
                         pref.setSummary(R.string.keyboard_layout_default_label);
                     }
-                    pref.setIntent(intent);
+                    pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                        @Override
+                        public boolean onPreferenceClick(Preference preference) {
+                            showKeyboardLayoutDialog(inputDeviceDescriptor);
+                            return true;
+                        }
+                    });
                     mHardKeyboardPreferenceList.add(pref);
                 }
             }
@@ -450,6 +453,35 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             getPreferenceScreen().addPreference(mHardKeyboardCategory);
         } else {
             getPreferenceScreen().removePreference(mHardKeyboardCategory);
+        }
+    }
+
+    private void showKeyboardLayoutDialog(String inputDeviceDescriptor) {
+        KeyboardLayoutDialogFragment fragment =
+                new KeyboardLayoutDialogFragment(inputDeviceDescriptor);
+        fragment.setTargetFragment(this, 0);
+        fragment.show(getActivity().getFragmentManager(), "keyboardLayout");
+    }
+
+    @Override
+    public void onSetupKeyboardLayouts(String inputDeviceDescriptor) {
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClass(getActivity(), KeyboardLayoutPickerActivity.class);
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_DESCRIPTOR,
+                inputDeviceDescriptor);
+        mIntentWaitingForResult = intent;
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (mIntentWaitingForResult != null) {
+            String inputDeviceDescriptor = mIntentWaitingForResult.getStringExtra(
+                    KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_DESCRIPTOR);
+            mIntentWaitingForResult = null;
+            showKeyboardLayoutDialog(inputDeviceDescriptor);
         }
     }
 
