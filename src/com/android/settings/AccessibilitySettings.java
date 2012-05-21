@@ -92,9 +92,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private static final char ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ':';
 
-    private static final String KEY_ACCESSIBILITY_TUTORIAL_LAUNCHED_ONCE =
-        "key_accessibility_tutorial_launched_once";
-
     private static final String KEY_INSTALL_ACCESSIBILITY_SERVICE_OFFERED_ONCE =
         "key_install_accessibility_service_offered_once";
 
@@ -110,8 +107,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         "toggle_auto_rotate_screen_preference";
     private static final String TOGGLE_SPEAK_PASSWORD_PREFERENCE =
         "toggle_speak_password_preference";
-    private static final String TOGGLE_TOUCH_EXPLORATION_PREFERENCE =
-        "toggle_touch_exploration_preference";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
         "select_long_press_timeout_preference";
     private static final String TOGGLE_SCRIPT_INJECTION_PREFERENCE =
@@ -162,7 +157,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mTogglePowerButtonEndsCallPreference;
     private CheckBoxPreference mToggleAutoRotateScreenPreference;
     private CheckBoxPreference mToggleSpeakPasswordPreference;
-    private Preference mToggleTouchExplorationPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private AccessibilityEnableScriptInjectionPreference mToggleScriptInjectionPreference;
     private Preference mNoServicesMessagePreference;
@@ -283,9 +277,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mToggleSpeakPasswordPreference =
             (CheckBoxPreference) findPreference(TOGGLE_SPEAK_PASSWORD_PREFERENCE);
 
-        // Touch exploration enabled.
-        mToggleTouchExplorationPreference = findPreference(TOGGLE_TOUCH_EXPLORATION_PREFERENCE);
-
         // Long press timeout.
         mSelectLongPressTimeoutPreference =
             (ListPreference) findPreference(SELECT_LONG_PRESS_TIMEOUT_PREFERENCE);
@@ -352,7 +343,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
 
             preference.setOrder(i);
-            preference.setFragment(ToggleAccessibilityServiceFragment.class.getName());
+            preference.setFragment(ToggleAccessibilityServicePreferenceFragment.class.getName());
             preference.setPersistent(true);
 
             Bundle extras = preference.getExtras();
@@ -446,25 +437,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         final boolean speakPasswordEnabled = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_SPEAK_PASSWORD, 0) != 0;
         mToggleSpeakPasswordPreference.setChecked(speakPasswordEnabled);
-
-        // Touch exploration enabled.
-        if (AccessibilityManager.getInstance(getActivity()).isEnabled()) {
-            mSystemsCategory.addPreference(mToggleTouchExplorationPreference);
-            final boolean touchExplorationEnabled = (Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.TOUCH_EXPLORATION_ENABLED, 0) == 1);
-            if (touchExplorationEnabled) {
-                mToggleTouchExplorationPreference.setSummary(
-                        getString(R.string.accessibility_service_state_on));
-                mToggleTouchExplorationPreference.getExtras().putBoolean(EXTRA_CHECKED, true);
-            } else {
-                mToggleTouchExplorationPreference.setSummary(
-                        getString(R.string.accessibility_service_state_off));
-                mToggleTouchExplorationPreference.getExtras().putBoolean(EXTRA_CHECKED, false);
-            }
-
-        } else {
-            mSystemsCategory.removePreference(mToggleTouchExplorationPreference);
-        }
 
         // Long press timeout.
         final int longPressTimeout = Settings.Secure.getInt(getContentResolver(),
@@ -632,79 +604,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    public static class ToggleAccessibilityServiceFragment extends TogglePreferenceFragment {
-        @Override
-        public void onPreferenceToggled(String preferenceKey, boolean enabled) {
-            // Parse the enabled services.
-            Set<ComponentName> enabledServices = getEnabledServicesFromSettings(getActivity());
-
-            // Determine enabled services and accessibility state.
-            ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
-            final boolean accessibilityEnabled;
-            if (enabled) {
-                // Enabling at least one service enables accessibility.
-                accessibilityEnabled = true;
-                enabledServices.add(toggledService);
-            } else {
-                // Check how many enabled and installed services are present.
-                int enabledAndInstalledServiceCount = 0;
-                Set<ComponentName> installedServices = sInstalledServices;
-                for (ComponentName enabledService : enabledServices) {
-                    if (installedServices.contains(enabledService)) {
-                        enabledAndInstalledServiceCount++;
-                    }
-                }
-                // Disabling the last service disables accessibility.
-                accessibilityEnabled = enabledAndInstalledServiceCount > 1
-                    || (enabledAndInstalledServiceCount == 1
-                            && !installedServices.contains(toggledService));
-                enabledServices.remove(toggledService);
-            }
-
-            // Update the enabled services setting.
-            StringBuilder enabledServicesBuilder = new StringBuilder();
-            // Keep the enabled services even if they are not installed since we have
-            // no way to know whether the application restore process has completed.
-            // In general the system should be responsible for the clean up not settings.
-            for (ComponentName enabledService : enabledServices) {
-                enabledServicesBuilder.append(enabledService.flattenToString());
-                enabledServicesBuilder.append(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
-            }
-            final int enabledServicesBuilderLength = enabledServicesBuilder.length();
-            if (enabledServicesBuilderLength > 0) {
-                enabledServicesBuilder.deleteCharAt(enabledServicesBuilderLength - 1);
-            }
-            Settings.Secure.putString(getContentResolver(),
-                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-                    enabledServicesBuilder.toString());
-
-            // Update accessibility enabled.
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_ENABLED, accessibilityEnabled ? 1 : 0);
-        }
-    }
-
-    public static class ToggleTouchExplorationFragment extends TogglePreferenceFragment {
-        @Override
-        public void onPreferenceToggled(String preferenceKey, boolean enabled) {
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.TOUCH_EXPLORATION_ENABLED, enabled ? 1 : 0);
-            if (enabled) {
-                SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-                final boolean launchAccessibilityTutorial = !preferences.getBoolean(
-                        KEY_ACCESSIBILITY_TUTORIAL_LAUNCHED_ONCE, false);
-                if (launchAccessibilityTutorial) {
-                    preferences.edit().putBoolean(KEY_ACCESSIBILITY_TUTORIAL_LAUNCHED_ONCE,
-                            true).commit();
-                    Intent intent = new Intent(AccessibilityTutorialActivity.ACTION);
-                    getActivity().startActivity(intent);
-                }
-            }
-        }
-    }
-
-    private abstract static class TogglePreferenceFragment extends SettingsPreferenceFragment
-            implements DialogInterface.OnClickListener {
+    public static class ToggleAccessibilityServicePreferenceFragment
+            extends SettingsPreferenceFragment implements DialogInterface.OnClickListener {
 
         private static final int DIALOG_ID_ENABLE_WARNING = 1;
         private static final int DIALOG_ID_DISABLE_WARNING = 2;
@@ -717,6 +618,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         private CharSequence mEnableWarningMessage;
         private CharSequence mDisableWarningTitle;
         private CharSequence mDisableWarningMessage;
+
         private Preference mSummaryPreference;
 
         private CharSequence mSettingsTitle;
@@ -782,7 +684,54 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             super.onDestroyView();
         }
 
-        public abstract void onPreferenceToggled(String preferenceKey, boolean value);
+        public void onPreferenceToggled(String preferenceKey, boolean enabled) {
+             // Parse the enabled services.
+            Set<ComponentName> enabledServices = getEnabledServicesFromSettings(getActivity());
+
+            // Determine enabled services and accessibility state.
+            ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
+            final boolean accessibilityEnabled;
+            if (enabled) {
+                // Enabling at least one service enables accessibility.
+                accessibilityEnabled = true;
+                enabledServices.add(toggledService);
+            } else {
+                // Check how many enabled and installed services are present.
+                int enabledAndInstalledServiceCount = 0;
+                Set<ComponentName> installedServices = sInstalledServices;
+                for (ComponentName enabledService : enabledServices) {
+                    if (installedServices.contains(enabledService)) {
+                        enabledAndInstalledServiceCount++;
+                    }
+                }
+                // Disabling the last service disables accessibility.
+                accessibilityEnabled = enabledAndInstalledServiceCount > 1
+                    || (enabledAndInstalledServiceCount == 1
+                            && !installedServices.contains(toggledService));
+                enabledServices.remove(toggledService);
+            }
+
+            // Update the enabled services setting.
+            StringBuilder enabledServicesBuilder = new StringBuilder();
+            // Keep the enabled services even if they are not installed since we have
+            // no way to know whether the application restore process has completed.
+            // In general the system should be responsible for the clean up not settings.
+            for (ComponentName enabledService : enabledServices) {
+                enabledServicesBuilder.append(enabledService.flattenToString());
+                enabledServicesBuilder.append(ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR);
+            }
+            final int enabledServicesBuilderLength = enabledServicesBuilder.length();
+            if (enabledServicesBuilderLength > 0) {
+                enabledServicesBuilder.deleteCharAt(enabledServicesBuilderLength - 1);
+            }
+            Settings.Secure.putString(getContentResolver(),
+                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+                    enabledServicesBuilder.toString());
+
+            // Update accessibility enabled.
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_ENABLED, accessibilityEnabled ? 1 : 0);
+        }
 
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
