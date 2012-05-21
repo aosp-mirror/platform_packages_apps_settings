@@ -2508,6 +2508,12 @@
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling apps -->
     <string name="app_disable_dlg_text">If you disable a built-in app, other apps
         may misbehave.</string>
+    <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
+    <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
+    <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling notifications for an app -->
+    <string name="app_disable_notifications_dlg_text">
+        If you turn off notifications for this app, you may miss important alerts and updates.
+    </string>
 
     <!-- [CHAR LIMIT=25] Services settings screen, setting option name for the user to go to the screen to view app storage use -->
     <string name="storageuse_settings_title">Storage use</string>
@@ -4025,13 +4031,8 @@
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_message">Are you sure you want to remove the user and all associated data from the device?</string>
 
-    <!-- Label for "notifications enabled" switch in app details [CHAR LIMIT=20] -->
-    <string name="app_notifications_switch_label">Notifications</string>
-    <!-- Label for enabled state of "notifications enabled" switch in app details [CHAR LIMIT=10] -->
-    <string name="app_notifications_switch_on">Enabled</string>
-    <!-- Label for disabled state "notifications enabled" switch in app details [CHAR LIMIT=10] -->
-    <string name="app_notifications_switch_off">Disabled</string>
-
+    <!-- Label for are-notifications-enabled checkbox in app details [CHAR LIMIT=20] -->
+    <string name="app_notifications_switch_label">Show notifications</string>
 
     <!--  Help URLs for some screens. Not specified here. Specified in product overlays --><skip/>
     <!-- Help menu label [CHAR LIMIT=20] -->
