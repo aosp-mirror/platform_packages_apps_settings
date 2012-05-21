@@ -421,7 +421,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                     final PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
                     pref.setTitle(device.getName());
                     if (keyboardLayout != null) {
-                        pref.setSummary(keyboardLayout.getLabel());
+                        pref.setSummary(keyboardLayout.toString());
                     } else {
                         pref.setSummary(R.string.keyboard_layout_default_label);
                     }
