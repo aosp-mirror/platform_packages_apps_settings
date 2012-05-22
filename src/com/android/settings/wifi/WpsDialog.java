@@ -133,7 +133,6 @@ public class WpsDialog extends AlertDialog {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle(R.string.wifi_wps_setup_title);
         mView = getLayoutInflater().inflate(R.layout.wifi_wps_dialog, null);
 
         mTextView = (TextView) mView.findViewById(R.id.wps_dialog_txt);
