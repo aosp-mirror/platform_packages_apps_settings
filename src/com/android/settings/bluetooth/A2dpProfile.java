@@ -178,15 +178,11 @@ final class A2dpProfile implements LocalBluetoothProfile {
         int state = getConnectionStatus(device);
         switch (state) {
             case BluetoothProfile.STATE_DISCONNECTED:
-            {
-                setPreferred(device, false);
                 return R.string.bluetooth_a2dp_profile_summary_use_for;
-            }
+
             case BluetoothProfile.STATE_CONNECTED:
-            {
-                setPreferred(device, true);
                 return R.string.bluetooth_a2dp_profile_summary_connected;
-            }
+
             default:
                 return Utils.getConnectionStateSummary(state);
         }

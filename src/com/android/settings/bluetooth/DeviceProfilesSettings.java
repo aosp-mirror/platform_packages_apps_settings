@@ -332,8 +332,8 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
          * Gray out checkbox while connecting and disconnecting
          */
         profilePref.setEnabled(!mCachedDevice.isBusy());
-        profilePref.setSummary(profile.getSummaryResourceForDevice(device));
         profilePref.setChecked(profile.isPreferred(device));
+        profilePref.setSummary(profile.getSummaryResourceForDevice(device));
     }
 
     private LocalBluetoothProfile getProfileOf(Preference pref) {
