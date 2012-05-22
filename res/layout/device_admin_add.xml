@@ -44,7 +44,8 @@
                     android:layout_height="@android:dimen/app_icon_size"
                     android:layout_marginRight="16dip"
                     android:layout_gravity="center_vertical"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@null" />
                 <TextView android:id="@+id/admin_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,7 +75,8 @@
                     <ImageView android:id="@+id/add_msg_expander"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:contentDescription="@null" />
                     <TextView android:id="@+id/add_msg"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"

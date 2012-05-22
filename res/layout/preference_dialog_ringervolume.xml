@@ -30,7 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dip"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:contentDescription="@null" />
 
         <!-- Dummy -->
         <SeekBar android:id="@*android:id/seekbar"
@@ -61,6 +62,7 @@
                         android:layout_height="wrap_content"
                         android:padding="16dip"
                         android:background="?android:attr/selectableItemBackground"
+                        android:contentDescription="@string/volume_media_mute"
                     />
 
                 <SeekBar android:id="@+id/media_volume_seekbar"
@@ -101,6 +103,7 @@
                             android:layout_height="wrap_content"
                             android:padding="16dip"
                             android:background="?android:attr/selectableItemBackground"
+                            android:contentDescription="@string/volume_ring_mute"
                         />
 
                     <SeekBar android:id="@+id/ringer_volume_seekbar"
@@ -143,6 +146,7 @@
                             android:layout_height="wrap_content"
                             android:padding="16dip"
                             android:background="?android:attr/selectableItemBackground"
+                            android:contentDescription="@string/volume_notification_mute"
                         />
 
                     <SeekBar android:id="@+id/notification_volume_seekbar"
@@ -178,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:padding="16dip"
                         android:background="?android:attr/selectableItemBackground"
-                    />
+                        android:contentDescription="@string/volume_alarm_mute" />
                 <SeekBar android:id="@+id/alarm_volume_seekbar"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"

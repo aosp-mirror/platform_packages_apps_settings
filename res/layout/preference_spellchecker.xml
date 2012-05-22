@@ -70,7 +70,8 @@
         android:gravity="center_vertical"
         android:clickable="true"
         android:focusable="true"
-        android:background="?android:attr/selectableItemBackground" >
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/spellchecker_quick_settings" >
         <View
             android:layout_width="2dip"
             android:layout_height="match_parent"
@@ -83,7 +84,8 @@
             android:paddingLeft="5dip"
             android:paddingRight="5dip"
             android:src="@drawable/ic_sysbar_quicksettings"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:contentDescription="@string/spellchecker_quick_settings" />
     </LinearLayout>
     <View
         android:id="@+id/pref_right_separator2"
@@ -102,5 +104,6 @@
         android:layout_gravity="right"
         android:clickable="true"
         android:focusable="true"
-        android:background="?android:attr/selectableItemBackground" />
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/spellchecker_language" />
 </LinearLayout>
