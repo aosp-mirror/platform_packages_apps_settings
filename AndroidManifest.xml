@@ -1416,8 +1416,8 @@
                   android:launchMode="singleTop"
                   android:excludeFromRecents="true"
                   android:theme="@android:style/Theme.Holo.NoActionBar"
-                  android:configChanges="mcc|mnc|keyboard|keyboardHidden|uiMode"
-                  android:windowSoftInputMode="stateVisible|adjustResize">
+                  android:configChanges="keyboard|keyboardHidden|uiMode"
+                  android:windowSoftInputMode="adjustResize">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
