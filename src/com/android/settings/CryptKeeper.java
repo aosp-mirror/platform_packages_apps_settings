@@ -170,8 +170,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } else {
                 final TextView status = (TextView) findViewById(R.id.status);
                 status.setText(R.string.try_again);
-                status.setVisibility(View.VISIBLE);
-
                 // Reenable the password entry
                 mPasswordEntry.setEnabled(true);
             }
@@ -472,12 +470,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // Re-enable the password entry and back presses.
             mPasswordEntry.setEnabled(true);
             mIgnoreBack = false;
-            status.setVisibility(View.GONE);
+            status.setText(R.string.enter_password);
         } else {
             CharSequence template = getText(R.string.crypt_keeper_cooldown);
             status.setText(TextUtils.expandTemplate(template, Integer.toString(mCooldown)));
-
-            status.setVisibility(View.VISIBLE);
 
             mCooldown--;
             mHandler.removeMessages(MESSAGE_COOLDOWN);
