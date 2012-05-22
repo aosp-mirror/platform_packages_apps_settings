@@ -52,7 +52,8 @@
                 android:layout_marginLeft="8dip"
                 android:layout_marginBottom="8dip"
                 android:src="@drawable/ic_menu_add"
-                android:background="?android:attr/actionBarItemBackground" />
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/wifi_add_network" />
 
             <ImageButton
                 android:id="@+id/wps_push"
@@ -62,7 +63,8 @@
                 android:layout_marginRight="8dip"
                 android:layout_marginBottom="8dip"
                 android:src="@drawable/ic_wps"
-                android:background="?android:attr/actionBarItemBackground" />
+                android:background="?android:attr/actionBarItemBackground"
+                android:contentDescription="@string/wifi_menu_wps_pbc" />
 
         </LinearLayout>
 

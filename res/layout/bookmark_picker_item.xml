@@ -26,7 +26,8 @@
     <ImageView android:id="@+id/icon"
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:contentDescription="@null" />
 
     <TextView android:id="@+id/title"
         android:layout_width="match_parent"
