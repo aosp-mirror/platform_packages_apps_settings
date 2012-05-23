@@ -98,6 +98,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                                 .removeAccount(mAccount,
                                 new AccountManagerCallback<Boolean>() {
                             public void run(AccountManagerFuture<Boolean> future) {
+                                // If already out of this screen, don't proceed.
+                                if (!AccountSyncSettings.this.isResumed()) {
+                                    return;
+                                }
                                 boolean failed = true;
                                 try {
                                     if (future.getResult() == true) {
