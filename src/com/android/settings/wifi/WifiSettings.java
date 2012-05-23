@@ -59,6 +59,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -193,26 +195,38 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         if (mSetupWizardMode) {
             View view = inflater.inflate(R.layout.setup_preference, container, false);
-            ImageButton b1 = (ImageButton) view.findViewById(R.id.wps_push);
-            if (b1 != null) {
-                b1.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showDialog(WPS_PBC_DIALOG_ID);
+            View other = view.findViewById(R.id.other_network);
+            other.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mWifiManager.isWifiEnabled()) {
+                        onAddNetworkPressed();
                     }
-                });
-            }
-            ImageButton b2 = (ImageButton) view.findViewById(R.id.add_network);
-            if (b2 != null) {
-                b2.setOnClickListener(new OnClickListener() {
+                }
+            });
+            final ImageButton b = (ImageButton) view.findViewById(R.id.more);
+            if (b != null) {
+                b.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (mWifiManager.isWifiEnabled()) {
-                            onAddNetworkPressed();
+                            PopupMenu pm = new PopupMenu(inflater.getContext(), b);
+                            pm.inflate(R.menu.wifi_setup);
+                            pm.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                                @Override
+                                public boolean onMenuItemClick(MenuItem item) {
+                                    if (R.id.wifi_wps == item.getItemId()) {
+                                        showDialog(WPS_PBC_DIALOG_ID);
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            });
+                            pm.show();
                         }
                     }
                 });
