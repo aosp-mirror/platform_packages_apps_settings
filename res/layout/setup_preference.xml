@@ -46,23 +46,13 @@
                 android:gravity="bottom" />
 
             <ImageButton
-                android:id="@+id/add_network"
-                android:layout_width="@dimen/setup_button_size"
-                android:layout_height="@dimen/setup_button_size"
-                android:layout_marginLeft="8dip"
-                android:layout_marginBottom="8dip"
-                android:src="@drawable/ic_menu_add"
-                android:background="?android:attr/actionBarItemBackground"
-                android:contentDescription="@string/wifi_add_network" />
-
-            <ImageButton
-                android:id="@+id/wps_push"
+                android:id="@+id/more"
                 android:layout_width="@dimen/setup_button_size"
                 android:layout_height="@dimen/setup_button_size"
                 android:layout_marginLeft="8dip"
                 android:layout_marginRight="8dip"
                 android:layout_marginBottom="8dip"
-                android:src="@drawable/ic_wps"
+                android:src="@*android:drawable/ic_menu_moreoverflow_holo_dark"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/wifi_menu_wps_pbc" />
 
@@ -101,6 +91,47 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setup_item_margin"
+            android:background="@*android:drawable/list_divider_holo_dark" />
+
+        <LinearLayout
+            android:id="@+id/other_network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/setup_item_margin"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:paddingRight="?android:attr/scrollbarSize" >
+
+            <ImageView
+                android:id="@+id/add_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_menu_add" />
+
+            <TextView
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dip"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="6dip"
+                android:layout_marginTop="6dip"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/wifi_other_network" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/button_bar"
