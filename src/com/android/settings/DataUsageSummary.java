@@ -2155,13 +2155,25 @@ public class DataUsageSummary extends Fragment {
     /**
      * Test if device has an ethernet network connection.
      */
-    public static boolean hasEthernet(Context context) {
+    public boolean hasEthernet(Context context) {
         if (TEST_RADIOS) {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("ethernet");
         }
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
-        return conn.isNetworkSupported(TYPE_ETHERNET);
+        final boolean hasEthernet = conn.isNetworkSupported(TYPE_ETHERNET);
+
+        final long ethernetBytes;
+        try {
+            ethernetBytes = mStatsSession.getSummaryForNetwork(
+                    NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
+                    .getTotalBytes();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+        // suppress ethernet unless traffic has occurred
+        return hasEthernet && ethernetBytes > 0;
     }
 
     /**
