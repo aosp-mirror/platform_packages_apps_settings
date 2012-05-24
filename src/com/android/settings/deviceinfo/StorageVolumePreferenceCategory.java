@@ -162,7 +162,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         mResources = resources;
         mStorageVolume = storageVolume;
         mStorageManager = storageManager;
-        setTitle(storageVolume != null ? storageVolume.getDescription()
+        setTitle(storageVolume != null ? storageVolume.getDescription(context)
                 : resources.getText(R.string.internal_storage));
         mMeasurement = StorageMeasurement.getInstance(context, storageVolume, isPrimary);
         mMeasurement.setReceiver(this);
