@@ -112,6 +112,10 @@
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Impedeix l\'ús del marcador Bluetooth quan la pantalla estigui bloquejada"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Dispositius Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Nom del dispositiu"</string>
+    <!-- no translation found for bluetooth_device_details (4594773497930028085) -->
+    <skip />
+    <!-- no translation found for bluetooth_profile_details (6823621790324933337) -->
+    <skip />
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No s\'ha definit cap nom; s\'utilitza el nom del compte"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Cerca dispositius"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Canvia el nom de la tauleta"</string>
@@ -135,7 +139,7 @@
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"No s\'ha trobat cap dispositiu Bluetooth a prop."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Sol·licitud de sincronització de Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sol·licitud de sincronització"</string>
-    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca per aparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca per sincronitzar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostra els fitxers rebuts"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selector de dispositiu Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Sol·licitud de permís de Bluetooth"</string>
@@ -325,6 +329,8 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"S\'ha produït un error en encriptar"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"S\'ha interromput l\'encriptació i no es pot completar. A conseqüència d\'això, ja no es pot accedir a les dades de la tauleta. "\n\n"Per reprendre l\'ús de la tauleta, cal que duguis a terme un restabliment de fàbrica. Quan configuris la tauleta després del restabliment, tindràs l\'oportunitat de restaurar les dades de les quals s\'hagi fet una còpia de seguretat al teu compte de Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"S\'ha interromput l\'encriptació i no es pot completar. A conseqüència d\'això, ja no es pot accedir a les dades del telèfon. "\n\n"Per reprendre l\'ús del telèfon, cal que duguis a terme un restabliment de fàbrica. Quan configuris el telèfon després del restabliment, tindràs l\'oportunitat de restaurar les dades de les quals s\'hagi fet una còpia de seguretat al teu compte de Google."</string>
+    <!-- no translation found for crypt_keeper_switch_input_method (4168332125223483198) -->
+    <skip />
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Tria bloq. de pantalla"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Tria bloq. còpia seg."</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueig de pantalla"</string>
@@ -410,19 +416,19 @@
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la detecció del dispositiu"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud de sincronització de Bluetooth"</string>
     <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Per enllaçar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu el PIN que el dispositiu sol·licita:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per aparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per sincronitzar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN conté lletres o símbols"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"En general, 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Pot ser que també hagis d\'introduir aquest PIN a l\'altre dispositiu."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Pot ser que també hagis d\'introduir aquesta contrasenya a l\'altre dispositiu."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per emparellar-te amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assegura\'t que apareix aquesta contrasenya:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Des de:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vols emparellar-lo amb aquest dispositiu?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per aparellar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu-hi:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> i, a continuació, prem la tecla de retorn."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Emparella"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per sincronitzar  amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assegura\'t que apareix aquesta contrasenya:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vols sincronitzar  amb aquest dispositiu?"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per sincronitzar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu-hi:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> i, a continuació, prem la tecla de retorn."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronitza"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancel·la"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
-    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut aparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"No s\'ha pogut aparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g> a causa d\'un PIN o d\'una contrasenya incorrecta."</string>
+    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut sincronitzar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"No s\'ha pogut sincronitzar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, perquè el PIN o la contrasenya són incorrectes."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="7870998403045801381">"No es pot comunicar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Sincronització rebutjada per <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="229861986106185022">"No s\'ha pogut connectar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -434,7 +440,7 @@
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispositius disponibles"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connecta"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Desconnecta"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Emparella\'l i connecta-t\'hi"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Sincronitza i connecta"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Dessincronitza"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Desconnecta i dessincronitza"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opcions…"</string>
@@ -478,8 +484,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per a música i contingut multimèdia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recorda la configuració"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permet l\'intercanvi de dades quan el telèfon toqui un altre dispositiu"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permet l\'intercanvi de dades quan el telèfon toqui un altre dispositiu"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Preparat per transmetre el contingut de l\'aplicació mitjançant NFC"</string>
@@ -495,8 +500,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Configuració de Wi-fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configura i gestiona els punts d\'accés sense fil"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"Selecciona la Wi-Fi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"S\'està activant la Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"S\'està desactivant la Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
@@ -519,11 +523,19 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Esborra la xarxa"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modifica la xarxa"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"Per veure les xarxes disponibles, activa la Wi-Fi."</string>
-    <string name="wifi_empty_list_wifi_on" msgid="8154957451723367795">"Wi-Fi activat, però no hi ha xarxes Wi-Fi."</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (3354911729026237372) -->
+    <skip />
+    <!-- no translation found for wifi_other_network (1048006316504242214) -->
+    <skip />
+    <!-- no translation found for wifi_more (3195296805089107950) -->
+    <skip />
+    <!-- no translation found for wifi_setup_wps (8128702488486283957) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Mostra les opcions avançades"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configuració protegida de Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"S\'està iniciant WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5857132470998175154">"Prem el botó WPS de l\'encaminador Wi-Fi. La configuració pot trigar fins a dos minuts a completar-se."</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7204827509934892103) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Introdueix el PIN <xliff:g id="NUMBER">%1$s</xliff:g> a l\'encaminador Wi-Fi. La configuració pot trigar fins a dos minuts a completar-se."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"La configuració de WPS s\'ha dut a terme correctament. S\'està connectant a la xarxa..."</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Connectat a la xarxa Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -606,7 +618,6 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Visualització"</string>
     <string name="sound_settings" msgid="5534671337768745343">"So"</string>
-    <string name="silent_mode_title" msgid="3181479108593217704">"Mode silenciós"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"To del telèfon"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volums"</string>
@@ -632,6 +643,14 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"To i notificacions"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificacions"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmes"</string>
+    <!-- no translation found for volume_ring_mute (3018992671608737202) -->
+    <skip />
+    <!-- no translation found for volume_media_mute (3399059928695998166) -->
+    <skip />
+    <!-- no translation found for volume_notification_mute (7955193480006444159) -->
+    <skip />
+    <!-- no translation found for volume_alarm_mute (4452239420351035936) -->
+    <skip />
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibra quan soni"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Base"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Configuració de la base"</string>
@@ -653,8 +672,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Cerca"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gestiona la configuració i l\'historial de cerca"</string>
     <string name="display_settings" msgid="7965901687241669598">"Visualització"</string>
-    <!-- no translation found for accelerometer_title (4930458565568936210) -->
-    <skip />
+    <string name="accelerometer_title" msgid="4930458565568936210">"Bloqueig de rotació"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Canvia l\'orientació automàticament en girar la tauleta"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Canvia d\'orientació automàticament en girar el telèfon"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Canvia l\'orientació automàticament en girar la tauleta"</string>
@@ -1004,14 +1022,10 @@
     <string name="sort_order_size" msgid="7024513286636502362">"Ordena per mida"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Mostra els serveis que s\'estan executant"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Mostra processos cau"</string>
-    <!-- no translation found for reset_app_preferences (1321050641018356925) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
-    <skip />
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Restableix prefer. aplic."</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Vols rest. pref. aplic.?"</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Es restabliran totes les preferències per a:"\n\n" "<li>"Aplicacions desactivades"</li>\n" "<li>"Notificacions de l\'aplicació desactivades"</li>\n" "<li>"Aplicacions predeterminades per a accions"</li>\n" "<li>"Restriccions de dades de fons per a les aplicacions"</li>\n\n" No perdràs cap dada de l\'aplicació."</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restableix les aplicac."</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gestiona l\'espai"</string>
     <string name="filter" msgid="2018011724373033887">"Filtre"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Selecció d\'opcions de filtre"</string>
@@ -1062,6 +1076,10 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Canvia la ubicació d\'instal·lació preferida per a les aplicacions noves"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Vols desact. aplic. integr.?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Si desactives una aplicació integrada, és possible que altres aplicacions no funcionin correctament."</string>
+    <!-- no translation found for app_disable_notifications_dlg_title (7669264654851761857) -->
+    <skip />
+    <!-- no translation found for app_disable_notifications_dlg_text (5088484670924769845) -->
+    <skip />
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Ús d\'emmagatzematge"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Mostra l\'emmagatzematge que utilitzen les aplicacions"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Serveis en execució"</string>
@@ -1114,16 +1132,25 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Pot ser que aquest mètode d\'entrada pugui recopilar tot el text que escrius, incloses dades personals, com ara contrasenyes i números de targetes de crèdit. Ve de l\'aplicació <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Vols utilitzar aquest mètode d\'entrada?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"És possible que aquest corrector ortogràfic pugui recopilar tot el text que escrius, la qual cosa inclou dades personals com ara les contrasenyes i els números de les targetes de crèdit. Prové de l\'aplicació <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vols fer servir aquest corrector ortogràfic?"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
+    <!-- no translation found for spellchecker_quick_settings (246728645150092058) -->
     <skip />
+    <!-- no translation found for spellchecker_language (6041050114690541437) -->
+    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"No s\'ha pogut obrir la configuració de: <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Ratolí/ratolí tàctil"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocitat del punter"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Controlador de joc"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Utilitza el vibrador"</string>
     <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Redirecciona el vibrador al controlador de joc quan estigui connectat."</string>
-    <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"Tria una disposició de teclat"</string>
-    <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"No hi ha disposicions de teclat disponibles."</string>
+    <!-- no translation found for keyboard_layout_dialog_title (8030087214949381372) -->
+    <skip />
+    <!-- no translation found for keyboard_layout_dialog_setup_button (8514583747236476384) -->
+    <skip />
+    <!-- no translation found for keyboard_layout_dialog_switch_hint (3889961090676293795) -->
+    <skip />
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"Predeterminat"</string>
+    <!-- no translation found for keyboard_layout_picker_title (556081931972771610) -->
+    <skip />
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Diccionari de l\'usuari"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Diccionari personal"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Diccionaris personals"</string>
@@ -1188,11 +1215,11 @@
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vols permetre la configuració de desenvolupament?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Aquesta configuració només està prevista per a usos de desenvolupament. Pot fer que el dispositiu i que les aplicacions s\'interrompin o tinguin un comportament inadequat."</string>
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Protecció de l\'emmagatz. USB"</string>
-    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"L\'aplicació ha de sol·licitar permís per llegir l\'emmagatz. USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Les aplicacions han de sol·licitar permís per llegir l\'emmagatz. USB"</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Vols protegir l\'emmagatz. USB?"</string>
     <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Si l\'emmagatzematge USB està protegit, les aplicacions han de sol·licitar permís per llegir les dades de l\'emmagatzematge extern."\n\n"És possible que algunes aplicacions no funcionin fins que els desenvolupadors no les actualitzin."</string>
     <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Protecció de la targeta SD"</string>
-    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"L\'aplicació ha de sol·licitar permís per llegir la targeta SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"Les aplicacions han de sol·licitar permís per llegir la targeta SD"</string>
     <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"Vols protegir la targeta SD?"</string>
     <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"Si la targeta SD està protegida, les aplicacions han de sol·licitar permís per llegir les dades de l\'emmagatzematge extern."\n\n"És possible que algunes aplicacions no funcionin fins que els desenvolupadors no les actualitzin."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Selecció de gadget"</string>
@@ -1217,12 +1244,9 @@
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Text gran"</string>
     <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"El botó d\'engegada finalitza la trucada"</string>
     <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Pronuncia contrasenyes"</string>
-    <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"Explora amb el tacte"</string>
-    <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"Quan Explore by Touch està activat, pots escoltar o veure les descripcions del que hi ha sota el dit."\n\n" Aquesta funció és per a usuaris amb visió reduïda."</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Retard de Toca i mantén premut"</string>
     <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Millora l\'accessibilitat web"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configuració"</string>
-    <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"Tutorial"</string>
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"Activat"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"Desactivat"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Permeses"</string>
@@ -1238,7 +1262,6 @@
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Necessites un lector de pantalla?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack proporciona comentaris per veu per ajudar usuaris invidents i amb visió disminuïda. Vols instal·lar-lo de manera gratuïta des d\'Android Market?"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"Vols que les aplicacions instal·lin scripts de Google que faran que el seu contingut sigui més accessible?"</string>
-    <string name="accessibility_touch_exploration_warning" msgid="5474167409993309316">"Aquesta funció canvia la manera com el teu dispositiu respon a l\'exploració tàctil. Vols activar-la?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"No s\'ha proporcionat cap descripció."</string>
     <string name="settings_button" msgid="3006713718908152930">"Configuració"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Bateria"</string>
@@ -1418,10 +1441,8 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Sense títol"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Notificacions"</string>
-    <!-- no translation found for sound_category_call_ringtone_vibrate_title (1543777228646645163) -->
-    <skip />
-    <!-- no translation found for sound_category_system_title (1480844520622721141) -->
-    <skip />
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"To i vibració de trucada"</string>
+    <string name="sound_category_system_title" msgid="1480844520622721141">"Sistema"</string>
     <string name="wifi_setup_title" msgid="661074868726906436">"Configuració de Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Connecta a una xarxa Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="3747859666621319757">"S\'està connectant a la xarxa Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
@@ -1453,6 +1474,10 @@
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Sincronització activada"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sincronització desactivada"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Error de sincronització"</string>
+    <!-- no translation found for sync_failed (1696499856374109647) -->
+    <skip />
+    <!-- no translation found for sync_active (8476943765960863040) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Configuració de sincronització"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"La sincronització té problemes. Es tornarà a activar aviat."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Afegeix un compte"</string>
@@ -1531,8 +1556,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> traces activades actualment"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Totes les traces activades actualment"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostra límits de format"</string>
-    <!-- no translation found for debug_layout_summary (5933073202403744387) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="5933073202403744387">"Mostra la informació sobre límits, separació, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostra l\'ús de la CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Superposició de pantalla mostra ús actual de CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Força representac. GPU"</string>
@@ -1647,24 +1671,6 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Vols activar el certificat de CA del sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vols desactivar el certificat de CA del sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vols eliminar de forma permanent el certificat de CA d\'usuari?"</string>
-    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"Tutorial sobre accessibilitat"</string>
-    <string name="accessibility_tutorial_next" msgid="5079911515520801099">"Següent"</string>
-    <string name="accessibility_tutorial_back" msgid="2583933084111712540">"Enrere"</string>
-    <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"Finalitza"</string>
-    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"Omet"</string>
-    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"Lliçó 1: Exploració de la pantalla"</string>
-    <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"Quan l\'opció Explora amb el tacte està activada, pots tocar la pantalla per saber què hi ha sota el teu dit. Per exemple, la pantalla actual conté icones d\'aplicacions. Per trobar-ne una, toca la pantalla i fes lliscar el dit."</string>
-    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"Bé, mantén el dit a la pantalla i continua fent-lo lliscar per trobar com a mínim una altra icona."</string>
-    <string name="accessibility_tutorial_lesson_1_text_3" msgid="3973201880357468747">"Per activar una cosa que estàs tocant, fes lliscar el dit fins a trobar la icona de <xliff:g id="APP_NAME">%s</xliff:g>. A continuació, prem la icona una vegada per activar-la."</string>
-    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"Tens el dit sobre la icona de <xliff:g id="APP_NAME">%s</xliff:g>. Pica-la una vegada per activar-la."</string>
-    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"El teu dit s\'ha mogut per sobre de la icona de <xliff:g id="APP_NAME">%s</xliff:g> i després s\'ha allunyat. Fes lliscar el dit lentament per la pantalla de nou fins que tornis a trobar la icona del navegador."</string>
-    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"Molt bé. Per passar a la lliçó següent, cerca i activa el botó <xliff:g id="NEXT">%s</xliff:g> que hi ha a prop de l\'extrem inferior dret de la pantalla."</string>
-    <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"Lliçó 2: Desplaçament amb dos dits"</string>
-    <string name="accessibility_tutorial_lesson_2_text_1" msgid="8764686624055084454">"Per desplaçar-te per una llista, pots fer lliscar dos dits per la pantalla. Per exemple, la pantalla actual conté una llista de noms d\'aplicacions que es pot desplaçar cap amunt o cap avall. En primer lloc, intenta identificar alguns elements de la llista fent lliscar un dit per la pantalla."</string>
-    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"Bé, continua fent lliscar el dit pertot arreu per cercar com a mínim un element més de la llista."</string>
-    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"Ara posa dos dits sobre un element de la llista i fes lliscar els dos dits cap amunt. Si arribes a la part superior de la pantalla, aixeca els dits, posa\'ls a la part inferior de la llista i continua fent-los lliscar cap amunt."</string>
-    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"Bé, continua fent lliscar els dits cap amunt per continuar desplaçant-te."</string>
-    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3055831259260848004">"Has completat el tutorial. Per sortir-ne, cerca el botó <xliff:g id="FINISH">%s</xliff:g> i toca\'l."</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Corrector ortogràfic"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Introdueix la contrasenya actual per a còpies de seguretat completes aquí"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Introdueix una contrasenya nova per a còpies de seguretat completes aquí"</string>
@@ -1689,8 +1695,7 @@
     <string name="user_new_user_name" msgid="7603010274765911161">"Nen trapella"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Vols eliminar l\'usuari?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Estàs segur que vols eliminar l\'usuari i totes les dades associades del dispositiu?"</string>
-    <string name="app_notifications_switch_label" msgid="8235636095795328068">"Notificacions"</string>
-    <string name="app_notifications_switch_on" msgid="6878397294545561241">"Activat"</string>
-    <string name="app_notifications_switch_off" msgid="2206641347875395316">"Desactivat"</string>
+    <!-- no translation found for app_notifications_switch_label (9124072219553687583) -->
+    <skip />
     <string name="help_label" msgid="1107174367904110532">"Ajuda"</string>
 </resources>
