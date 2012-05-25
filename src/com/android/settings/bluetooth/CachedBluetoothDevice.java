@@ -260,6 +260,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
         connectInt(profile);
+        // Refresh the UI based on profile.connect() call
+        refresh();
     }
 
     synchronized void connectInt(LocalBluetoothProfile profile) {
