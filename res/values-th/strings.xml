@@ -112,6 +112,10 @@
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"ป้องกันการใช้โปรแกรมโทรออกผ่านบลูทูธเมื่อล็อกหน้าจอไว้"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"อุปกรณ์บลูทูธ"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"ชื่ออุปกรณ์"</string>
+    <!-- no translation found for bluetooth_device_details (4594773497930028085) -->
+    <skip />
+    <!-- no translation found for bluetooth_profile_details (6823621790324933337) -->
+    <skip />
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"ไม่ได้ตั้งชื่อ ใช้ชื่อบัญชี"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"สแกนหาอุปกรณ์"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"เปลี่ยนชื่อแท็บเล็ต"</string>
@@ -325,6 +329,8 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสไม่สำเร็จ"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป"\n\n"ในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป"\n\n"ในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
+    <!-- no translation found for crypt_keeper_switch_input_method (4168332125223483198) -->
+    <skip />
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"เลือกการล็อกหน้าจอ"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"เลือกการล็อกข้อมูลสำรอง"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"ล็อกหน้าจอ"</string>
@@ -478,8 +484,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"สำหรับเพลงและสื่อ"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"จำการตั้งค่า"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (8302974395787498915) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"อนุญาตให้มีการแลกเปลี่ยนข้อมูลเมื่อแตะแท็บเล็ตกับอุปกรณ์อื่น"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"อนุญาตให้มีการแลกเปลี่ยนข้อมูลเมื่อแตะโทรศัพท์กับอุปกรณ์อื่น"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"พร้อมที่จะส่งเนื้อหาแอปพลิเคชันผ่านทาง NFC"</string>
@@ -495,8 +500,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"การตั้งค่า Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="4351120897298124250">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"ตั้งค่าและจัดการจุดเข้าใช้งานระบบไร้สาย"</string>
-    <!-- no translation found for wifi_setup_wizard_title (70277346338812325) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="70277346338812325">"เลือก WiFi"</string>
     <string name="wifi_starting" msgid="6716593470710880000">"เปิด Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="244864762599017659">"กำลังปิด Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"ข้อผิดพลาด"</string>
@@ -519,11 +523,19 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"ไม่จำเครือข่าย"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"แก้ไขเครือข่าย"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"หากต้องการดูเครือข่ายที่ใช้ได้ ให้เปิด Wi-Fi"</string>
-    <string name="wifi_empty_list_wifi_on" msgid="8154957451723367795">"เปิด WiFi แล้วแต่ไม่มีเครือข่าย WiFi บริเวณนี้"</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (3354911729026237372) -->
+    <skip />
+    <!-- no translation found for wifi_other_network (1048006316504242214) -->
+    <skip />
+    <!-- no translation found for wifi_more (3195296805089107950) -->
+    <skip />
+    <!-- no translation found for wifi_setup_wps (8128702488486283957) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"แสดงตัวเลือกขั้นสูง"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"การตั้งค่าการป้องกัน WiFi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"กำลังเริ่มต้น WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="1054681318528153733">"กดปุ่ม WPS บนเราเตอร์ WiFi ของคุณ การตั้งค่าอาจใช้เวลานานถึงสองนาทีจึงจะเสร็จสิ้น"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7204827509934892103) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"ป้อน PIN <xliff:g id="NUMBER">%1$s</xliff:g> บนเราเตอร์ WiFi ของคุณ การตั้งค่าอาจใช้เวลานานถึงสองนาทีจึงจะเสร็จสิ้น"</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS สำเร็จแล้ว กำลังเชื่อมต่อกับเครือข่าย…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"เชื่อมต่อกับเครือข่าย WiFi <xliff:g id="NETWORK_NAME">%s</xliff:g> แล้ว"</string>
@@ -606,7 +618,6 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"แสดง"</string>
     <string name="sound_settings" msgid="5534671337768745343">"เสียง"</string>
-    <string name="silent_mode_title" msgid="3181479108593217704">"โหมดปิดเสียง"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"เสียงเรียกเข้า"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"ระดับเสียง"</string>
@@ -632,6 +643,14 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"เสียงเรียกเข้าและการแจ้งเตือน"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"การแจ้งเตือน"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"การปลุก"</string>
+    <!-- no translation found for volume_ring_mute (3018992671608737202) -->
+    <skip />
+    <!-- no translation found for volume_media_mute (3399059928695998166) -->
+    <skip />
+    <!-- no translation found for volume_notification_mute (7955193480006444159) -->
+    <skip />
+    <!-- no translation found for volume_alarm_mute (4452239420351035936) -->
+    <skip />
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"สั่นเมื่อมีสายเข้า"</string>
     <string name="dock_settings" msgid="1820107306693002541">"แท่นชาร์จ"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"การตั้งค่าแท่นชาร์จ"</string>
@@ -653,8 +672,7 @@
     <string name="search_settings" msgid="1910951467596035063">"ค้นหา"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"จัดการการตั้งค่าและประวัติการค้นหา"</string>
     <string name="display_settings" msgid="7965901687241669598">"การแสดงผล"</string>
-    <!-- no translation found for accelerometer_title (4930458565568936210) -->
-    <skip />
+    <string name="accelerometer_title" msgid="4930458565568936210">"ล็อกการหมุน"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"เปลี่ยนการวางแนวโดยอัตโนมัติเมื่อหมุนแท็บเล็ต"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"สลับแนวหน้าจออัตโนมัติเมื่อหมุนโทรศัพท์"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"เปลี่ยนการวางแนวโดยอัตโนมัติเมื่อหมุนแท็บเล็ต"</string>
@@ -1058,6 +1076,10 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"เปลี่ยนตำแหน่งติดตั้งที่ต้องการสำหรับแอปพลิเคชันใหม่"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"ปิดแอปพลิเคชันในตัวหรือไม่"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"หากคุณปิดใช้งานแอปพลิเคชันในตัว แอปพลิเคชันอื่นๆ อาจทำงานผิดปกติได้"</string>
+    <!-- no translation found for app_disable_notifications_dlg_title (7669264654851761857) -->
+    <skip />
+    <!-- no translation found for app_disable_notifications_dlg_text (5088484670924769845) -->
+    <skip />
     <string name="storageuse_settings_title" msgid="5657014373502630403">"การใช้ที่เก็บข้อมูล"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"ดูที่จัดเก็บข้อมูลที่แอปพลิเคชันใช้"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"บริการที่ทำงานอยู่"</string>
@@ -1110,16 +1132,25 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"วิธีการป้อนข้อมูลนี้อาจเก็บข้อความทั้งหมดที่คุณพิมพ์ รวมถึงข้อมูลส่วนบุคคล เช่น รหัสผ่านและหมายเลขบัตรเครดิต โดยมาจากแอปพลิเคชัน <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> ใช้วิธีการป้อนข้อมูลนี้หรือไม่"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"เครื่องตวรจตัวสะกดซึ่งมาจากแอปพลิเคชัน <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> นี้อาจเก็บข้อความทั้งหมดที่คุณพิมพ์ รวมถึงข้อมูลส่วนบุคคล เช่น รหัสผ่านและหมายเลขบัตรเครดิต ต้องการใช้เครื่องตวรจตัวสะกดนี้หรือไม่"</string>
-    <!-- no translation found for failed_to_open_app_settings_toast (1251067459298072462) -->
+    <!-- no translation found for spellchecker_quick_settings (246728645150092058) -->
     <skip />
+    <!-- no translation found for spellchecker_language (6041050114690541437) -->
+    <skip />
+    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"ไม่สามารถเปิดการตั้งค่าสำหรับ <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"เมาส์/แทร็กแพด"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ความเร็วของตัวชี้"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"อุปกรณ์ควบคุมเกม"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"ใช้การสั่นเตือน"</string>
     <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"เปลี่ยนการสั่นเตือนไปที่อุปกรณ์ควบคุมเกมเมื่อมีการเชื่อมต่อ"</string>
-    <string name="keyboard_layout_picker_title" msgid="2980668240678577691">"เลือกการจัดวางแป้นพิมพ์"</string>
-    <string name="keyboard_layout_picker_empty_text" msgid="3104781634456597547">"ไม่มีการจัดวางแป้นพิมพ์ที่สามารถใช้ได้"</string>
+    <!-- no translation found for keyboard_layout_dialog_title (8030087214949381372) -->
+    <skip />
+    <!-- no translation found for keyboard_layout_dialog_setup_button (8514583747236476384) -->
+    <skip />
+    <!-- no translation found for keyboard_layout_dialog_switch_hint (3889961090676293795) -->
+    <skip />
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"ค่าเริ่มต้น"</string>
+    <!-- no translation found for keyboard_layout_picker_title (556081931972771610) -->
+    <skip />
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"พจนานุกรมของผู้ใช้"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"พจนานุกรมส่วนบุคคล"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"พจนานุกรมส่วนบุคคล"</string>
@@ -1183,22 +1214,14 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"การแก้ไขข้อบกพร่อง USB มีไว้เพื่อการพัฒนาเท่านั้น ให้ใช้การแก้ไขนี้เพื่อคัดลอกข้อมูลระหว่างคอมพิวเตอร์และอุปกรณ์ ติดตั้งแอปพลิเคชันบนอุปกรณ์โดยไม่มีการแจ้งเตือน และอ่านข้อมูลบันทึก"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"อนุญาตการตั้งค่าสำหรับการพัฒนาหรือไม่"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"การตั้งค่าเหล่านี้มีไว้สำหรับการพัฒนาเท่านั้น ซึ่งอาจทำให้อุปกรณ์และแอปพลิเคชันที่มีอยู่เสียหายหรือทำงานผิดพลาดได้"</string>
-    <!-- no translation found for enforce_read_external_title (7733257271454664956) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (1798088409346660567) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (2112813067171502209) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (605444326545922054) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_title (2226662853797940829) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_summary (2750027486786530064) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_title (273220585729800783) -->
-    <skip />
-    <!-- no translation found for enforce_read_external_confirm_message (3858482712337574407) -->
-    <skip />
+    <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"ปกป้องที่จัดเก็บข้อมูล USB"</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"แอปพลิเคชันต้องขออนุญาตในการอ่านที่จัดเก็บข้อมูล USB"</string>
+    <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"ปกป้อง USB หรือไม่"</string>
+    <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"เมื่อที่จัดเก็บข้อมูล USB ได้รับการปกป้อง แอปพลิเคชันจะต้องขออนุญาตในการอ่านข้อมูลจากที่จัดเก็บข้อมูลภายนอก"\n\n"แอปพลิเคชันบางรายการอาจไม่ทำงานจนกว่าจะได้รับการอัปเดตโดยนักพัฒนาซอฟต์แวร์ของแอปพลิเคชันนั้นๆ"</string>
+    <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"ปกป้องการ์ด SD"</string>
+    <string name="enforce_read_external_summary" product="default" msgid="2750027486786530064">"แอปพลิเคชันต้องขออนุญาตในการอ่านการ์ด SD"</string>
+    <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"ปกป้องการ์ด SD หรือไม่"</string>
+    <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"เมื่อการ์ด SD ได้รับการปกป้อง แอปพลิเคชันจะต้องขออนุญาตในการอ่านข้อมูลจากที่จัดเก็บข้อมูลภายนอก"\n\n"แอปพลิเคชันบางรายการอาจไม่ทำงานจนกว่าจะได้รับการอัปเดตโดยนักพัฒนาซอฟต์แวร์ของแอปพลิเคชันนั้นๆ"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"เลือกแกดเจ็ต"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"เลือกวิดเจ็ต"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"สร้างวิดเจ็ตและอนุญาตการเข้าถึงหรือไม่"</string>
@@ -1221,12 +1244,9 @@
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"ข้อความขนาดใหญ่"</string>
     <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"กดปุ่มเปิด/ปิดเพื่อวางสาย"</string>
     <string name="accessibility_speak_password_title" msgid="3344423945644925355">"พูดรหัสผ่าน"</string>
-    <string name="accessibility_touch_exploration_title" msgid="4171477646863806078">"สำรวจโดยการแตะ"</string>
-    <string name="accessibility_touch_exploration_summary" msgid="1163951209315238103">"เมื่อ \"สำรวจด้วยการแตะ\" เปิดอยู่ คุณจะได้ยินหรือฟังคำอธิบายสำหรับสิ่งที่คุณแตะอยู่"\n\n" คุณลักษณะนี้สำหรับผู้ใช้ที่มีปัญหาด้านสายตา"</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"การหน่วงเวลาด้วยการแตะค้างไว้"</string>
     <string name="accessibility_script_injection_title" msgid="7921388904564822855">"ปรับปรุงการเข้าถึงเว็บให้ดียิ่งขึ้น"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"การตั้งค่า"</string>
-    <string name="accessibility_menu_item_tutorial" msgid="567989492004682307">"บทแนะนำ"</string>
     <string name="accessibility_service_state_on" msgid="8791337599927106344">"เปิด"</string>
     <string name="accessibility_service_state_off" msgid="2458594460762620776">"ปิด"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"อนุญาต"</string>
@@ -1242,7 +1262,6 @@
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"ต้องใช้โปรแกรมอ่านหน้าจอหรือไม่"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack มีการตอบสนองด้วยเสียงเพื่อช่วยเหลือผู้พิการทางสายตาและผู้มีปัญหาทางสายตา คุณต้องการติดตั้งแอปพลิเคชันฟรีนี้จาก Android Market หรือไม่"</string>
     <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"คุณต้องการให้แอปพลิเคชันติดตั้งสคริปต์จาก Google เพื่อให้เข้าถึงเนื้อหาเว็บได้มากขึ้นหรือไม่"</string>
-    <string name="accessibility_touch_exploration_warning" msgid="5474167409993309316">"คุณลักษณะนี้จะเปลี่ยนวิธีการที่อุปกรณ์ของคุณตอบสนองต่อการแตะ เปิดใช้งานหรือไม่"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"ไม่มีคำอธิบาย"</string>
     <string name="settings_button" msgid="3006713718908152930">"การตั้งค่า"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"แบตเตอรี่"</string>
@@ -1455,6 +1474,10 @@
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"เปิดใช้งานการซิงค์แล้ว"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"ปิดใช้งานการซิงค์แล้ว"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"ข้อผิดพลาดในการซิงค์"</string>
+    <!-- no translation found for sync_failed (1696499856374109647) -->
+    <skip />
+    <!-- no translation found for sync_active (8476943765960863040) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"การตั้งค่าการซิงค์"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"การซิงค์กำลังประสบปัญหา อีกสักครู่จะกลับมาอีกครั้ง"</string>
     <string name="add_account_label" msgid="7811707265834013767">"เพิ่มบัญชี"</string>
@@ -1648,24 +1671,6 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"เปิดใช้งานระบบใบรับรอง CA หรือไม่"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"ปิดใช้งานระบบใบรับรอง CA หรือไม่"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"นำใบรับรอง CA ของผู้ใช้ออกถาวรหรือไม่"</string>
-    <string name="accessibility_tutorial_title" msgid="5163147830174854622">"บทแนะนำสำหรับการเข้าถึง"</string>
-    <string name="accessibility_tutorial_next" msgid="5079911515520801099">"ถัดไป"</string>
-    <string name="accessibility_tutorial_back" msgid="2583933084111712540">"ย้อนกลับ"</string>
-    <string name="accessibility_tutorial_finish" msgid="3964330895719289570">"เสร็จสิ้น"</string>
-    <string name="accessibility_tutorial_skip" msgid="3635250542851027317">"ข้ามคู่มือ"</string>
-    <string name="accessibility_tutorial_lesson_1_title" msgid="1358771359529627110">"บทที่ 1: การสำรวจหน้าจอ"</string>
-    <string name="accessibility_tutorial_lesson_1_text_1" msgid="8363960677225836782">"หลังจากที่เปิดใช้งาน \"สำรวจโดยการแตะ\" คุณสามารถแตะหน้าจอเพื่อเรียนรู้สิ่งต่างๆ ที่อยู่ใต้นิ้วมือของคุณได้ ตัวอย่างเช่น หน้าจอปัจจุบันมีไอคอนของแอปพลิเคชันต่างๆ ลองมองหาสักไอคอนหนึ่งด้วยการแตะหน้าจอและเลื่อนนิ้วของคุณไปรอบๆ"</string>
-    <string name="accessibility_tutorial_lesson_1_text_2_more" msgid="7849927882225521983">"ดี ให้เลื่อนนิ้วของคุณไปเรื่อยๆ ทั่วหน้าจอจนกว่าคุณจะพบไอคอนอีกอย่างน้อยหนึ่งไอคอน"</string>
-    <string name="accessibility_tutorial_lesson_1_text_3" msgid="3973201880357468747">"หากต้องการเปิดใช้งานสิ่งที่คุณแตะอยู่ ให้แตะสิ่งนั้น เลื่อนนิ้วของคุณไปจนพบไอคอน <xliff:g id="APP_NAME">%s</xliff:g> จากนั้นแตะที่ไอคอนหนึ่งครั้งเพื่อเปิดใช้งาน"</string>
-    <string name="accessibility_tutorial_lesson_1_text_4" msgid="1032496840167920946">"นิ้วของคุณแตะอยู่ที่ไอคอน <xliff:g id="APP_NAME">%s</xliff:g> แตะหนึ่งครั้งเพื่อเปิดใช้งานไอคอน"</string>
-    <string name="accessibility_tutorial_lesson_1_text_4_exited" msgid="4950620030782545150">"คุณเลื่อนนิ้วไปที่ไอคอน <xliff:g id="APP_NAME">%s</xliff:g> แล้วเลื่อนผ่านไป ให้เลื่อนนิ้วไปรอบๆ หน้าจอช้าๆ จนกว่าคุณจะเจอไอคอนเบราว์เซอร์อีกครั้ง"</string>
-    <string name="accessibility_tutorial_lesson_1_text_5" msgid="9010294007210301008">"ดี หากต้องการไปยังบทเรียนต่อไป ให้ค้นหาและกดปุ่ม <xliff:g id="NEXT">%s</xliff:g> ซึ่งอยู่ใกล้กับมุมขวาล่างของหน้าจอ"</string>
-    <string name="accessibility_tutorial_lesson_2_title" msgid="5970537388562569614">"บทเรียนที่ 2: การเลื่อนโดยใช้สองนิ้ว"</string>
-    <string name="accessibility_tutorial_lesson_2_text_1" msgid="8764686624055084454">"หากต้องการเลื่อนดูรายการ คุณสามารถเลื่อนสองนิ้วบนหน้าจอ ตัวอย่างเช่น หน้าจอในตอนนี้มีรายการชื่อแอปพลิเคชันต่างๆ ที่สามารถเลื่อนขึ้นลงได้ ขั้นแรก ให้พยายามหาชื่อสองสามชื่อในรายการโดยใช้นิ้วหนึ่งนิ้วเลื่อนไปรอบๆ"</string>
-    <string name="accessibility_tutorial_lesson_2_text_2_more" msgid="2052918502757226679">"ดี เลื่อนนิ้วของคุณต่อไปเพื่อหารายการเพิ่มอีกอย่างน้อยหนึ่งรายการ"</string>
-    <string name="accessibility_tutorial_lesson_2_text_3" msgid="1326501593438442305">"ตอนนี้วางสองนิ้วบนรายการในรายชื่อและเลื่อนทั้งสองนิ้วขึ้น หากคุณเลื่อนถึงด้านบนสุดของหน้าจอ ให้ยกนิ้วขึ้น วางนิ้วที่ส่วนล่างของรายการ และเลื่อนขึ้นต่อไป"</string>
-    <string name="accessibility_tutorial_lesson_2_text_3_more" msgid="2223814499106104083">"ดี เลื่อนนิ้วของคุณขึ้นเรื่อยๆ เพื่อเลื่อนขึ้นไปอีก"</string>
-    <string name="accessibility_tutorial_lesson_2_text_4" msgid="3055831259260848004">"คุณดูบทแนะนำจบแล้ว หากต้องการออก ให้แตะปุ่ม <xliff:g id="FINISH">%s</xliff:g>"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"เครื่องมือตรวจสอบการสะกด"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"ป้อนรหัสผ่านปัจจุบันสำหรับการสำรองข้อมูลเต็มรูปแบบที่นี่"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"พิมพ์รหัสผ่านใหม่สำหรับการสำรองข้อมูลเต็มรูปแบบที่นี่"</string>
@@ -1690,8 +1695,7 @@
     <string name="user_new_user_name" msgid="7603010274765911161">"เด็กงอแง"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"นำผู้ใช้ออกหรือไม่"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"คุณแน่ใจหรือไม่ว่าต้องการนำผู้ใช้นี้และข้อมูลทั้งหมดที่เกี่ยวข้องออกจากอุปกรณ์"</string>
-    <string name="app_notifications_switch_label" msgid="8235636095795328068">"การแจ้งเตือน"</string>
-    <string name="app_notifications_switch_on" msgid="6878397294545561241">"เปิดใช้งาน"</string>
-    <string name="app_notifications_switch_off" msgid="2206641347875395316">"ปิดใช้งาน"</string>
+    <!-- no translation found for app_notifications_switch_label (9124072219553687583) -->
+    <skip />
     <string name="help_label" msgid="1107174367904110532">"ความช่วยเหลือ"</string>
 </resources>
