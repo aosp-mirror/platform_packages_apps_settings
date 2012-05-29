@@ -41,6 +41,8 @@ import com.android.settings.SettingsPreferenceFragment;
  */
 public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
 
+    private static final boolean SHOW_MOBILE_CATEGORY = false;
+
     private NetworkPolicyManager mPolicyManager;
     private WifiManager mWifiManager;
 
@@ -70,7 +72,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
     }
 
     private void updateNetworks(Context context) {
-        if (hasReadyMobileRadio(context)) {
+        if (SHOW_MOBILE_CATEGORY && hasReadyMobileRadio(context)) {
             mMobileCategory.removeAll();
             mMobileCategory.addPreference(buildMobilePref(context));
         } else {

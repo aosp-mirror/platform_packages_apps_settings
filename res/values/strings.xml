@@ -3749,7 +3749,7 @@
     <!-- Title for checkbox menu option to show Ethernet data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_show_ethernet">Show Ethernet usage</string>
     <!-- Title for menu option to configure metered networks. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_metered">Metered networks</string>
+    <string name="data_usage_menu_metered">Mobile hotspots</string>
 
     <!-- Title for option to change data usage cycle day. [CHAR LIMIT=32] -->
     <string name="data_usage_change_cycle">Change cycle\u2026</string>
@@ -3804,13 +3804,13 @@
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
     <string name="data_usage_app_restrict_background">Restrict background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary">Disable background data on metered networks. Unmetered networks will be used if available.</string>
+    <string name="data_usage_app_restrict_background_summary">Disable background data on mobile networks. Non-mobile networks will be used if available.</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=64] -->
     <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a mobile data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
     <string name="data_usage_app_restrict_dialog_title">Restrict background data?</string>
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only metered networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
+    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
     <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
     <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\'ve set a mobile data limit.</string>
 
@@ -3856,15 +3856,15 @@
     <string name="data_usage_total_during_range_mobile" product="default"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ.</string>
 
     <!-- Dialog title for selecting metered networks. [CHAR LIMIT=25] -->
-    <string name="data_usage_metered_title">Metered networks</string>
+    <string name="data_usage_metered_title">Mobile hotspots</string>
     <!-- Dialog body for selecting paid networks. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_metered_body">Select the networks for which data usage is metered.  Apps can be restricted from using these networks when in the background.  Apps may also warn before using these networks for large downloads.</string>
+    <string name="data_usage_metered_body">Select the Wi-Fi networks which are mobile hotspots.  Apps can be restricted from using these networks when in the background.  Apps may also warn before using these networks for large downloads.</string>
     <!-- Header for list of mobile networks. [CHAR LIMIT=32] -->
     <string name="data_usage_metered_mobile">Mobile networks</string>
     <!-- Header for list of Wi-Fi networks. [CHAR LIMIT=32] -->
     <string name="data_usage_metered_wifi">Wi-Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
-    <string name="data_usage_metered_wifi_disabled">To select metered Wi-Fi networks, turn Wi-Fi on.</string>
+    <string name="data_usage_metered_wifi_disabled">To select mobile hotspots, turn Wi-Fi on.</string>
 
     <!-- Button at the bottom of the CryptKeeper screen to make an emergency call. -->
     <string name="cryptkeeper_emergency_call">Emergency call</string>
