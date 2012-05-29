@@ -104,7 +104,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -2164,15 +2163,19 @@ public class DataUsageSummary extends Fragment {
         final boolean hasEthernet = conn.isNetworkSupported(TYPE_ETHERNET);
 
         final long ethernetBytes;
-        try {
-            ethernetBytes = mStatsSession.getSummaryForNetwork(
-                    NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
-                    .getTotalBytes();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        if (mStatsSession != null) {
+            try {
+                ethernetBytes = mStatsSession.getSummaryForNetwork(
+                        NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
+                        .getTotalBytes();
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            ethernetBytes = 0;
         }
 
-        // suppress ethernet unless traffic has occurred
+        // only show ethernet when both hardware present and traffic has occurred
         return hasEthernet && ethernetBytes > 0;
     }
 
