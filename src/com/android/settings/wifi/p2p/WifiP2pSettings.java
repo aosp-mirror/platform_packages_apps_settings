@@ -90,9 +90,12 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private static final int DIALOG_RENAME = 3;
 
     private static final String SAVE_DIALOG_PEER = "PEER_STATE";
+    private static final String SAVE_DEVICE_NAME = "DEV_NAME";
 
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
+
+    private String mSavedDeviceName;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -161,6 +164,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DIALOG_PEER)) {
             WifiP2pDevice device = savedInstanceState.getParcelable(SAVE_DIALOG_PEER);
             mSelectedWifiPeer = new WifiP2pPeer(getActivity(), device);
+        }
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DEVICE_NAME)) {
+            mSavedDeviceName = savedInstanceState.getString(SAVE_DEVICE_NAME);
         }
 
         mRenameListener = new OnClickListener() {
@@ -376,6 +382,14 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             return dialog;
         } else if (id == DIALOG_RENAME) {
             mDeviceNameText = new EditText(getActivity());
+            if (mSavedDeviceName != null) {
+                mDeviceNameText.setText(mSavedDeviceName);
+                mDeviceNameText.setSelection(mSavedDeviceName.length());
+            } else if (mThisDevice != null && !TextUtils.isEmpty(mThisDevice.deviceName)) {
+                mDeviceNameText.setText(mThisDevice.deviceName);
+                mDeviceNameText.setSelection(0, mThisDevice.deviceName.length());
+            }
+            mSavedDeviceName = null;
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.wifi_p2p_menu_rename)
                 .setView(mDeviceNameText)
@@ -391,6 +405,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     public void onSaveInstanceState(Bundle outState) {
         if (mSelectedWifiPeer != null) {
             outState.putParcelable(SAVE_DIALOG_PEER, mSelectedWifiPeer.device);
+        }
+        if (mDeviceNameText != null) {
+            outState.putString(SAVE_DEVICE_NAME, mDeviceNameText.getText().toString());
         }
     }
 
