@@ -141,7 +141,7 @@ final class CachedBluetoothDeviceManager {
         if (bluetoothState == BluetoothAdapter.STATE_TURNING_OFF) {
             for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
                 CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
-                if (cachedDevice.getBondState() == BluetoothDevice.BOND_NONE) {
+                if (cachedDevice.getBondState() != BluetoothDevice.BOND_BONDED) {
                    cachedDevice.setVisible(false);
                    mCachedDevices.remove(i);
                 }
