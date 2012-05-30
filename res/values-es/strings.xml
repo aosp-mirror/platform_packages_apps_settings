@@ -112,10 +112,8 @@
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Evitar el uso del marcador a través de Bluetooth cuando la pantalla esté bloqueada"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Dispositivos Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Nombre del dispositivo"</string>
-    <!-- no translation found for bluetooth_device_details (4594773497930028085) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_details (6823621790324933337) -->
-    <skip />
+    <string name="bluetooth_device_details" msgid="4594773497930028085">"Ajustes del dispositivo"</string>
+    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Ajustes de perfil"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No se ha establecido ningún nombre; se utiliza el nombre de cuenta."</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Buscar dispositivos"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Cambiar nombre del tablet"</string>
@@ -139,7 +137,7 @@
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"No hay dispositivos Bluetooth cercanos."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Solicitud de sincronización de Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitud de sincronización"</string>
-    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca para sincronizar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca para sincronizar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar archivos recibidos"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selector de dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitud de permiso de Bluetooth"</string>
@@ -329,8 +327,7 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Error en la encriptación"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"El proceso de encriptación se ha interrumpido y no se puede completar. Por tanto, no podrás volver a acceder a los datos del tablet. "\n\n"Debes restablecer los datos de fábrica para volver a usar el tablet. Cuando configures el tablet después de este proceso, podrás restaurar los datos de los que hayas hecho una copia de seguridad en tu cuenta de Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"La encriptación se ha interrumpido y no se puede completar. Por tanto, no podrás volver a acceder a los datos del teléfono. "\n\n"Debes restablecer los datos de fábrica para volver a usar el teléfono. Cuando configures el teléfono después de este proceso, podrás restaurar los datos de los que hayas hecho una copia de seguridad en tu cuenta de Google."</string>
-    <!-- no translation found for crypt_keeper_switch_input_method (4168332125223483198) -->
-    <skip />
+    <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Cambiar método de entrada"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Elegir pantalla de bloqueo"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Bloqueo alternativo"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueo de pantalla"</string>
@@ -421,7 +418,7 @@
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Normalmente: 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Es posible que tengas que introducir este PIN en el otro dispositivo."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Es posible que tengas que introducir la clave de acceso en el otro dispositivo."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Comprueba que se muestre la clave:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Comprueba que se muestre la clave:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;¿Sincronizar con este dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Para sincronizar con:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escribe<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> en el dispositivo y, a continuación, pulsa la tecla Intro o de retorno."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronizar"</string>
@@ -523,23 +520,18 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Borrar red"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modificar red"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"Para ver redes disponibles, activa la conexión Wi-Fi."</string>
-    <!-- no translation found for wifi_empty_list_wifi_on (3354911729026237372) -->
-    <skip />
-    <!-- no translation found for wifi_other_network (1048006316504242214) -->
-    <skip />
-    <!-- no translation found for wifi_more (3195296805089107950) -->
-    <skip />
-    <!-- no translation found for wifi_setup_wps (8128702488486283957) -->
-    <skip />
+    <string name="wifi_empty_list_wifi_on" msgid="3354911729026237372">"Buscando redes Wi-Fi…"</string>
+    <string name="wifi_other_network" msgid="1048006316504242214">"Otra red…"</string>
+    <string name="wifi_more" msgid="3195296805089107950">"Más"</string>
+    <string name="wifi_setup_wps" msgid="8128702488486283957">"Configuración automática (WPS)"</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Mostrar opciones avanzadas"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configuración WPS"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Iniciando configuración WPS…"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (7204827509934892103) -->
-    <skip />
-    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Introduce el código PIN <xliff:g id="NUMBER">%1$s</xliff:g> en el router Wi-Fi. El proceso de configuración puede tardar unos dos minutos."</string>
+    <string name="wifi_wps_onstart_pbc" msgid="7204827509934892103">"Pulsa el botón Configuración WPS del router. Es posible que se llame WPS o que incluya este símbolo:"</string>
+    <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Introduce el código PIN <xliff:g id="NUMBER">%1$s</xliff:g> en el router Wi-Fi. El proceso de configuración puede tardar hasta dos minutos."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"La configuración WPS se ha iniciado correctamente. Estableciendo conexión con la red…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Conexión establecida con la red Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"El proceso de configuración de WPS está en curso y puede tardar unos dos minutos."</string>
+    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"El proceso de configuración de WPS está en curso y puede tardar hasta dos minutos."</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"Se ha producido un error en la configuración WPS. Inténtalo de nuevo en unos minutos."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"No se admite el ajuste de seguridad del router inalámbrico (protocolo WEP)."</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"No se admite el ajuste de seguridad del router inalámbrico (protocolo TKIP)."</string>
@@ -643,14 +635,10 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Tono y notificaciones"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificaciones"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmas"</string>
-    <!-- no translation found for volume_ring_mute (3018992671608737202) -->
-    <skip />
-    <!-- no translation found for volume_media_mute (3399059928695998166) -->
-    <skip />
-    <!-- no translation found for volume_notification_mute (7955193480006444159) -->
-    <skip />
-    <!-- no translation found for volume_alarm_mute (4452239420351035936) -->
-    <skip />
+    <string name="volume_ring_mute" msgid="3018992671608737202">"Silenciar tono y notificaciones"</string>
+    <string name="volume_media_mute" msgid="3399059928695998166">"Silenciar música y otros archivos multimedia"</string>
+    <string name="volume_notification_mute" msgid="7955193480006444159">"Silenciar notificaciones"</string>
+    <string name="volume_alarm_mute" msgid="4452239420351035936">"Silenciar alarmas"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrar al sonar"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Conector"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Ajustes del conector"</string>
@@ -1076,10 +1064,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Modificar la ubicación de instalación preferida para nuevas aplicaciones"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"¿Inhabilitar aplicación integrada?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Si inhabilitas una aplicación integrada, es posible que otras aplicaciones no funcionen correctamente."</string>
-    <!-- no translation found for app_disable_notifications_dlg_title (7669264654851761857) -->
-    <skip />
-    <!-- no translation found for app_disable_notifications_dlg_text (5088484670924769845) -->
-    <skip />
+    <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"¿Desactivar notificaciones?"</string>
+    <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Si desactivas las notificaciones de esta aplicación, es posible que no recibas actualizaciones y alertas importantes."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Uso de almacenamiento"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Ver almacenamiento usado por aplicaciones"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Servicios en ejecución"</string>
@@ -1132,25 +1118,19 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Este método de introducción puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este método de introducción?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Este corrector ortográfico puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este corrector ortográfico?"</string>
-    <!-- no translation found for spellchecker_quick_settings (246728645150092058) -->
-    <skip />
-    <!-- no translation found for spellchecker_language (6041050114690541437) -->
-    <skip />
+    <string name="spellchecker_quick_settings" msgid="246728645150092058">"Ajustes"</string>
+    <string name="spellchecker_language" msgid="6041050114690541437">"Idioma"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Error al abrir los ajustes de <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Ratón/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Velocidad del puntero"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Mandos de videojuegos"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Usar vibración"</string>
     <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Redireccionar vibración al controlador de videojuego cuando esté conectado"</string>
-    <!-- no translation found for keyboard_layout_dialog_title (8030087214949381372) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_dialog_setup_button (8514583747236476384) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_dialog_switch_hint (3889961090676293795) -->
-    <skip />
+    <string name="keyboard_layout_dialog_title" msgid="8030087214949381372">"Elige un tipo de teclado"</string>
+    <string name="keyboard_layout_dialog_setup_button" msgid="8514583747236476384">"Configurar diseños de teclado"</string>
+    <string name="keyboard_layout_dialog_switch_hint" msgid="3889961090676293795">"Para cambiar, pulsa Ctrl+espacio."</string>
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"Predeterminado"</string>
-    <!-- no translation found for keyboard_layout_picker_title (556081931972771610) -->
-    <skip />
+    <string name="keyboard_layout_picker_title" msgid="556081931972771610">"Diseños de teclado"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Diccionario del usuario"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Diccionario personal"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Diccionarios personales"</string>
@@ -1474,10 +1454,8 @@
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Sincronización habilitada"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sincronización inhabilitada"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Error de sincronización"</string>
-    <!-- no translation found for sync_failed (1696499856374109647) -->
-    <skip />
-    <!-- no translation found for sync_active (8476943765960863040) -->
-    <skip />
+    <string name="sync_failed" msgid="1696499856374109647">"Error de sincronización"</string>
+    <string name="sync_active" msgid="8476943765960863040">"Sincronización activa"</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Ajustes de sincronización"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay incidencias con la sincronización. Se restablecerá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Añadir cuenta"</string>
@@ -1579,7 +1557,8 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Dividir uso de 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostrar uso de Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar uso de Ethernet"</string>
-    <string name="data_usage_menu_metered" msgid="8386567111915152271">"Redes sin tarifa plana"</string>
+    <!-- no translation found for data_usage_menu_metered (5056695223222541863) -->
+    <skip />
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Día del mes para restablecer ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación ha usado datos en este período."</string>
@@ -1603,10 +1582,12 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver ajustes de la aplicación"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir datos de referencia"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"Inhabilitar datos de referencia en redes sin tarifa plana. Se usarán redes con tarifa si están disponibles."</string>
+    <!-- no translation found for data_usage_app_restrict_background_summary (518658001418490405) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir los datos de referencia, establece un límite de datos móviles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir datos de referencia?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo haya disponibles redes sin tarifa plana."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
+    <!-- no translation found for data_usage_app_restrict_dialog (1466689968707308512) -->
+    <skip />
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo puedes restringir los datos de referencia si estableces un límite de datos móviles."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Elige el día en el que empezará cada ciclo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Día de cada mes:"</string>
@@ -1625,11 +1606,14 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas (según el cálculo del tablet). El cálculo del uso de datos del operador puede variar."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas (según el cálculo del teléfono). El cálculo del uso de datos del operador puede variar."</string>
-    <string name="data_usage_metered_title" msgid="311250454694217878">"Redes sin tarifa plana"</string>
-    <string name="data_usage_metered_body" msgid="1616820728096597564">"Selecciona las redes que no tienen tarifa plana de datos. Se puede impedir que las aplicaciones utilicen estas redes cuando se ejecuten en segundo plano. Las aplicaciones también pueden mostrar un mensaje de advertencia antes de utilizar estas redes para descargas de gran tamaño."</string>
+    <!-- no translation found for data_usage_metered_title (6204750602856383278) -->
+    <skip />
+    <!-- no translation found for data_usage_metered_body (2446827764036316131) -->
+    <skip />
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Redes móviles"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Redes Wi-Fi"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"Para seleccionar redes Wi-Fi sin tarifa plana, activa el Wi-Fi."</string>
+    <!-- no translation found for data_usage_metered_wifi_disabled (7566012564261138417) -->
+    <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Llamada de emergencia"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Volver a llamada"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nombre"</string>
@@ -1695,7 +1679,6 @@
     <string name="user_new_user_name" msgid="7603010274765911161">"Pesado"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"¿Eliminar usuario?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"¿Seguro que quieres eliminar el usuario y todos los datos asociados del dispositivo?"</string>
-    <!-- no translation found for app_notifications_switch_label (9124072219553687583) -->
-    <skip />
+    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Mostrar notificaciones"</string>
     <string name="help_label" msgid="1107174367904110532">"Ayuda"</string>
 </resources>
