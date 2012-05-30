@@ -539,7 +539,7 @@
     <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"请在 Wi-Fi 路由器上输入 PIN <xliff:g id="NUMBER">%1$s</xliff:g>。设置过程最多可能需要两分钟时间才能完成。"</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS 已成功启动。正在连接网络..."</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"已连接到 Wi-Fi 网络 <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
-    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"正在设置 WPS，此过程最多可能需要两分钟时间才能完成"</string>
+    <string name="wifi_wps_in_progress" msgid="3372311348221357944">"正在设置 WPS，此过程最多可能需要两分钟时间才能完成。"</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS 未能成功启动。请过几分钟后重试。"</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"无线路由器安全设置 (WEP) 不受支持"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"无线路由器安全设置 (TKIP) 不受支持"</string>
@@ -910,7 +910,7 @@
     <string name="location_network_based" msgid="5569673665032992664">"Google 的位置服务"</string>
     <string name="location_neighborhood_level" msgid="2948129720516513300">"允许系统向 Google 发送匿名位置数据。同时允许具有权限的应用使用来自 Wi-Fi 和移动网络等来源的数据，以便确定您所在的大概位置。"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"通过 Wi-Fi 确定位置"</string>
-    <string name="location_gps" msgid="8392461023569708478">"GPS 卫星"</string>
+    <string name="location_gps" msgid="8392461023569708478">"GPS 卫星定位"</string>
     <string name="location_street_level" msgid="4244496898967415234">"允许应用使用 GPS 对您进行定位"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"使用增强型 GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"使用服务器来辅助 GPS（取消选中可降低网络使用率）"</string>
@@ -1128,7 +1128,7 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"自动加标点"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"物理键盘设置"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"按空格键两次可插入句号"</string>
-    <string name="show_password" msgid="3001113966880559611">"使密码可见"</string>
+    <string name="show_password" msgid="3001113966880559611">"显示密码"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"此输入法可能会收集您输入的所有文字，包括密码和信用卡号等个人数据。它源自应用“<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>”。要使用此输入法吗？"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"此拼写检查工具可能会收集您键入的所有文字，包括密码和信用卡号等个人数据。它源自应用“<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>”。要使用此拼写检查工具吗？"</string>
@@ -1579,7 +1579,8 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"单独显示 4G 流量"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"显示 Wi-Fi 使用情况"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"显示以太网使用情况"</string>
-    <string name="data_usage_menu_metered" msgid="8386567111915152271">"按流量计费的网络"</string>
+    <!-- no translation found for data_usage_menu_metered (5056695223222541863) -->
+    <skip />
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"更改周期..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"流量使用周期的日期设置："</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"没有任何应用在此期间产生过数据流量。"</string>
@@ -1603,10 +1604,12 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G 数据"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"查看应用设置"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"限制后台数据"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"在使用按流量计费的网络时停用后台数据。如果可连接到不按流量计费的网络，则使用此类网络。"</string>
+    <!-- no translation found for data_usage_app_restrict_background_summary (518658001418490405) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"要限制此应用使用后台数据，请先设置移动数据上限。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"限制后台数据？"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"当您只能连接到按流量计费的网络时，此功能可能导致需要后台数据的应用停止运行。"\n\n"您可以在相关应用的设置中查找更合适的数据流量控制选项。"</string>
+    <!-- no translation found for data_usage_app_restrict_dialog (1466689968707308512) -->
+    <skip />
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"您只有在设置移动数据上限后才能限制后台数据。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"使用情况周期重置日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"日期："</string>
@@ -1625,11 +1628,14 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用约 <xliff:g id="TOTAL">%1$s</xliff:g>。"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用约 <xliff:g id="TOTAL">%1$s</xliff:g>，由您的平板电脑计算得出。您的运营商对于流量的计算方法可能有所不同。"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用约 <xliff:g id="TOTAL">%1$s</xliff:g>，由您的手机计算得出。您的运营商对于流量的计算方法可能有所不同。"</string>
-    <string name="data_usage_metered_title" msgid="311250454694217878">"按流量计费的网络"</string>
-    <string name="data_usage_metered_body" msgid="1616820728096597564">"选择按数据流量计费的网络。这样可限制应用在后台使用这些网络。应用在使用这些网络下载较大的文件时，还可能会发出警告。"</string>
+    <!-- no translation found for data_usage_metered_title (6204750602856383278) -->
+    <skip />
+    <!-- no translation found for data_usage_metered_body (2446827764036316131) -->
+    <skip />
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"移动网络"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Wi-Fi 网络"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"要选择按流量计费的 Wi-Fi 网络，请打开 Wi-Fi。"</string>
+    <!-- no translation found for data_usage_metered_wifi_disabled (7566012564261138417) -->
+    <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"紧急呼救"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"返回通话"</string>
     <string name="vpn_name" msgid="4689699885361002297">"名称"</string>
@@ -1687,7 +1693,7 @@
     <string name="user_name_title" msgid="7563724675699398319">"用户名"</string>
     <string name="user_restrictions_heading" msgid="4426403050397418553">"内容限制"</string>
     <string name="user_market_requires_pin" msgid="3260702297207279414">"需要 PIN"</string>
-    <string name="user_max_content_rating" msgid="8297759970216482772">"内容评级"</string>
+    <string name="user_max_content_rating" msgid="8297759970216482772">"内容分级"</string>
     <string name="user_system_apps_heading" msgid="2408331798732183682">"系统应用"</string>
     <string name="user_market_apps_heading" msgid="4657387297168308251">"已安装的应用"</string>
     <string name="user_discard_user_menu" msgid="6638388031088461242">"舍弃"</string>
