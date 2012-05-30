@@ -137,7 +137,6 @@ public class ManageApplications extends Fragment implements
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
 
-    private static final String EXTRA_FILTER_APPS = "filterApps";
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_BACKGROUND = "showBackground";
     private static final String EXTRA_DEFAULT_LIST_TYPE = "defaultListType";
@@ -168,8 +167,6 @@ public class ManageApplications extends Fragment implements
     public static final int RESET_APP_PREFERENCES = MENU_OPTIONS_BASE + 8;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
-    // Filter value
-    private int mFilterApps = FILTER_APPS_THIRD_PARTY;
     
     private ApplicationsState mApplicationsState;
 
@@ -825,7 +822,6 @@ public class ManageApplications extends Fragment implements
                 || Intent.ACTION_MANAGE_PACKAGE_STORAGE.equals(action)
                 || className.endsWith(".StorageUse")) {
             mSortOrder = SORT_ORDER_SIZE;
-            mFilterApps = FILTER_APPS_ALL;
             defaultListType = LIST_TYPE_ALL;
         } else if (Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS.equals(action)) {
             // Select the all-apps list, with the default sorting
@@ -834,7 +830,6 @@ public class ManageApplications extends Fragment implements
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
-            mFilterApps = savedInstanceState.getInt(EXTRA_FILTER_APPS, mFilterApps);
             int tmp = savedInstanceState.getInt(EXTRA_DEFAULT_LIST_TYPE, -1);
             if (tmp != -1) defaultListType = tmp;
             mShowBackground = savedInstanceState.getBoolean(EXTRA_SHOW_BACKGROUND, false);
@@ -900,6 +895,17 @@ public class ManageApplications extends Fragment implements
             buildResetDialog();
         }
 
+        if (savedInstanceState == null) {
+            // First time init: make sure view pager is showing the correct tab.
+            for (int i = 0; i < mTabs.size(); i++) {
+                TabInfo tab = mTabs.get(i);
+                if (tab.mListType == mDefaultListType) {
+                    mViewPager.setCurrentItem(i);
+                    break;
+                }
+            }
+        }
+
         return rootView;
     }
 
@@ -920,7 +926,6 @@ public class ManageApplications extends Fragment implements
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
-        outState.putInt(EXTRA_FILTER_APPS, mFilterApps);
         if (mDefaultListType != -1) {
             outState.putInt(EXTRA_DEFAULT_LIST_TYPE, mDefaultListType);
         }
