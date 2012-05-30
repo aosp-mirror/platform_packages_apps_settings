@@ -30,6 +30,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +45,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
 import android.util.Log;
@@ -149,6 +151,25 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     };
 
+    private final Uri mLockScreenRotationUri = Uri.withAppendedPath(Settings.System.CONTENT_URI,
+            Settings.System.ACCELEROMETER_ROTATION);
+
+    private final ContentObserver mSettingsContentObserver = new ContentObserver(mHandler) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (mLockScreenRotationUri.equals(uri)) {
+                try {
+                    final boolean lockRotationEnabled = (Settings.System.getInt(
+                            getActivity().getContentResolver(),
+                            Settings.System.ACCELEROMETER_ROTATION) == 0);
+                    mToggleLockScreenRotationPreference.setChecked(lockRotationEnabled);
+                } catch (SettingNotFoundException e) {
+                    /* ignore */
+                }
+            }
+        }
+    };
+
     // Preference controls.
     private PreferenceCategory mServicesCategory;
     private PreferenceCategory mSystemsCategory;
@@ -179,11 +200,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             offerInstallAccessibilitySerivceOnce();
         }
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
+        getActivity().getContentResolver().registerContentObserver(mLockScreenRotationUri, false,
+                mSettingsContentObserver);
     }
 
     @Override
     public void onPause() {
         mSettingsPackageMonitor.unregister();
+        getContentResolver().unregisterContentObserver(mSettingsContentObserver);
         super.onPause();
     }
 
