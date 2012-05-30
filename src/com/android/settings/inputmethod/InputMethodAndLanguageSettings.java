@@ -407,8 +407,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 InputDevice device = InputDevice.getDevice(devices[i]);
                 if (device != null
                         && !device.isVirtual()
-                        && (device.getSources() & InputDevice.SOURCE_KEYBOARD) != 0
-                        && device.getKeyboardType() == InputDevice.KEYBOARD_TYPE_ALPHABETIC) {
+                        && device.isFullKeyboard()) {
                     final String inputDeviceDescriptor = device.getDescriptor();
                     final String keyboardLayoutDescriptor =
                             mIm.getCurrentKeyboardLayoutForInputDevice(inputDeviceDescriptor);
