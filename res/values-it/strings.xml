@@ -1074,7 +1074,7 @@
     <string name="move_app_failed_dlg_text" msgid="3465267182923054022">"Impossibile spostare l\'applicazione. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Percorso di installazione"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Cambia il percorso preferito per l\'installazione di nuove applicazioni"</string>
-    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Disattivare applic. integrata?"</string>
+    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Disattivare app integrata?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Se disattivi un\'applicazione integrata, le altre applicazioni potrebbero funzionare in modo anomalo."</string>
     <!-- no translation found for app_disable_notifications_dlg_title (7669264654851761857) -->
     <skip />
@@ -1579,7 +1579,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Separa utilizzo 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostra utilizzo Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostra utilizzo Ethernet"</string>
-    <string name="data_usage_menu_metered" msgid="8386567111915152271">"Reti metered"</string>
+    <string name="data_usage_menu_metered" msgid="5056695223222541863">"Hotspot mobili"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambia ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Giorno del mese in cui reimpostare ciclo di utilizzo dei dati:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Dati non usati da applicazioni in questo periodo."</string>
@@ -1603,10 +1603,10 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Dati 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Visualizza impostazioni applicaz."</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Limita dati in background"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"Disabilita dati in background sulle reti metered. Verranno utilizzate le reti unmetered, se disponibili."</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Disattiva dati in background su reti mobili. Reti non mobili usate se disponibili."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Per limitare i dati in background, imposta un limite dati mobili."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Limitare i dati in background?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"Questa funzione può causare l\'interruzione del funzionamento di un\'applicazione che dipende dai dati in background quando sono disponibili solo le reti metered."\n\n"Puoi trovare controlli di utilizzo dei dati più appropriati nelle impostazioni disponibili all\'interno dell\'applicazione."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Questa funzione può causare l\'interruzione del funzionamento di un\'applicazione che dipende dai dati in background quando sono disponibili solo le reti mobili."\n\n"Puoi trovare controlli di utilizzo dei dati più appropriati nelle impostazioni disponibili all\'interno dell\'applicazione."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"La limitazione dei dati in background è possibile solo se hai impostato un limite per i dati mobili."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data reimpostazione ciclo utilizzo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Data di ogni mese:"</string>
@@ -1625,11 +1625,11 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: utilizzati circa <xliff:g id="TOTAL">%1$s</xliff:g>."</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: utilizzati quasi <xliff:g id="TOTAL">%1$s</xliff:g>, misurati dal tablet. I dati possono differire da quelli dell\'operatore."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: utilizzati quasi <xliff:g id="TOTAL">%1$s</xliff:g>, misurati dal tel. I dati possono differire da quelli dell\'operatore."</string>
-    <string name="data_usage_metered_title" msgid="311250454694217878">"Reti metered"</string>
-    <string name="data_usage_metered_body" msgid="1616820728096597564">"Seleziona le reti per le quali l\'utilizzo dei dati è misurato. L\'utilizzo di tali reti può essere impedito alle applicazioni quando in background. Le applicazioni potrebbero anche mostrare un avviso prima di utilizzare tali reti per download di grandi dimensioni."</string>
+    <string name="data_usage_metered_title" msgid="6204750602856383278">"Hotspot mobili"</string>
+    <string name="data_usage_metered_body" msgid="2446827764036316131">"Seleziona le reti Wi-Fi che che sono hotspot mobili. Alle applicazioni può essere impedito l\'uso di queste reti quando in background. Le applicazioni potrebbero inoltre avvisarti prima che utilizzi queste reti per download di grandi dimensioni."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Reti mobili"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Reti Wi-Fi"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"Per selezionare le reti Wi-Fi metered, attiva il Wi-Fi."</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="7566012564261138417">"Per selezionare hotspot mobili, attiva il Wi-Fi."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Chiamata di emergenza"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Torna a chiamata"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nome"</string>

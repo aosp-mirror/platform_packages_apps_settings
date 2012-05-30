@@ -137,7 +137,7 @@
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"No hay dispositivos Bluetooth cercanos."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Solicitud de sincronización de Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitud de sincronización"</string>
-    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca para sincronizar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca para sincronizar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar archivos recibidos"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selector de dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitud de permiso de Bluetooth"</string>
@@ -418,7 +418,7 @@
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Normalmente: 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Es posible que tengas que introducir este PIN en el otro dispositivo."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Es posible que tengas que introducir la clave de acceso en el otro dispositivo."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Comprueba que se muestre la clave:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Para sincronizar con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Comprueba que se muestre la clave:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;¿Sincronizar con este dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Para sincronizar con:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escribe<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> en el dispositivo y, a continuación, pulsa la tecla Intro o de retorno."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronizar"</string>
@@ -527,8 +527,8 @@
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Mostrar opciones avanzadas"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configuración WPS"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Iniciando configuración WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="7204827509934892103">"Pulsa el botón Configuración WPS del router. Es posible que se denomine WPS o que incluya este símbolo:"</string>
-    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"Introduce el código PIN <xliff:g id="NUMBER">%1$s</xliff:g> en el router Wi-Fi. El proceso de configuración puede tardar unos dos minutos."</string>
+    <string name="wifi_wps_onstart_pbc" msgid="7204827509934892103">"Pulsa el botón Configuración WPS del router. Es posible que se llame WPS o que incluya este símbolo:"</string>
+    <string name="wifi_wps_onstart_pin" msgid="8116564886303972764">"Introduce el código PIN <xliff:g id="NUMBER">%1$s</xliff:g> en el router Wi-Fi. El proceso de configuración puede tardar hasta dos minutos."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"La configuración WPS se ha iniciado correctamente. Estableciendo conexión con la red…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Conexión establecida con la red Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_wps_in_progress" msgid="2944576520214787628">"El proceso WPS ya se ha iniciado y tiene una duración aproximada de dos minutos."</string>
@@ -1557,7 +1557,8 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Dividir uso de 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostrar uso de Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar uso de Ethernet"</string>
-    <string name="data_usage_menu_metered" msgid="8386567111915152271">"Redes sin tarifa plana"</string>
+    <!-- no translation found for data_usage_menu_metered (5056695223222541863) -->
+    <skip />
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Día del mes para restablecer ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación ha usado datos en este período."</string>
@@ -1581,10 +1582,12 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver ajustes de la aplicación"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir datos de referencia"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="7414394653383835260">"Inhabilitar datos de referencia en redes sin tarifa plana. Se usarán redes con tarifa si están disponibles."</string>
+    <!-- no translation found for data_usage_app_restrict_background_summary (518658001418490405) -->
+    <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir los datos de referencia, establece un límite de datos móviles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir datos de referencia?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1551946513417839948">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo haya disponibles redes sin tarifa plana."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
+    <!-- no translation found for data_usage_app_restrict_dialog (1466689968707308512) -->
+    <skip />
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo puedes restringir los datos de referencia si estableces un límite de datos móviles."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Elige el día en el que empezará cada ciclo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Día de cada mes:"</string>
@@ -1603,11 +1606,14 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas (según el cálculo del tablet). El cálculo del uso de datos del operador puede variar."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: unas <xliff:g id="TOTAL">%1$s</xliff:g> usadas (según el cálculo del teléfono). El cálculo del uso de datos del operador puede variar."</string>
-    <string name="data_usage_metered_title" msgid="311250454694217878">"Redes sin tarifa plana"</string>
-    <string name="data_usage_metered_body" msgid="1616820728096597564">"Selecciona las redes que no tienen tarifa plana de datos. Se puede impedir que las aplicaciones utilicen estas redes cuando se ejecuten en segundo plano. Las aplicaciones también pueden mostrar un mensaje de advertencia antes de utilizar estas redes para descargas de gran tamaño."</string>
+    <!-- no translation found for data_usage_metered_title (6204750602856383278) -->
+    <skip />
+    <!-- no translation found for data_usage_metered_body (2446827764036316131) -->
+    <skip />
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Redes móviles"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Redes Wi-Fi"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="3656830919281429036">"Para seleccionar redes Wi-Fi sin tarifa plana, activa el Wi-Fi."</string>
+    <!-- no translation found for data_usage_metered_wifi_disabled (7566012564261138417) -->
+    <skip />
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Llamada de emergencia"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Volver a llamada"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nombre"</string>
