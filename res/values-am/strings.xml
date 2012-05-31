@@ -291,6 +291,16 @@
     <string name="date_picker_title" msgid="1338210036394128512">"ቀን"</string>
     <string name="time_picker_title" msgid="483460752287255019">"ጊዜ"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"የፊት ማመሳሰልን አሻሽል"</string>
+    <!-- no translation found for biometric_weak_liveliness_title (1218584997572155648) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_on_summary (5767141844508925360) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_off_summary (6574236717160830358) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_explained (2394796634681878989) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_explained (5110573888313019236) -->
+    <skip />
     <string name="lock_after_timeout" msgid="4590337686681194648">"በራስ ሰር ቆልፍ"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ከእንቅልፍ በኋላ"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"በተቆለፈ ማያ የባለቤት መረጃ አሳይ"</string>
@@ -1557,8 +1567,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"የ4G አጠቃቀም ለያይ"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"የWi-Fi አጠቃቀም አሳይ"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"የEthernet አጠቃቀም አሳይ"</string>
-    <!-- no translation found for data_usage_menu_metered (5056695223222541863) -->
-    <skip />
+    <string name="data_usage_menu_metered" msgid="5056695223222541863">"የተንቀሳቃሽ መገናኛ ነጥቦች"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"ዑደት ለውጥ..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"የውሂብ አጠቃቀም ዑደትን ዳግም ለማስጀመር ከወር ውስጥ፡ ቀን"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"በዚህ ጊዜ ውስጥ ምንም መተግበሪያዎች ውሂብ ጥቅም ላይ አልዋሉም።"</string>
@@ -1582,12 +1591,10 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G ውሂብ"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"መተግበሪያ ቅንጅቶችን እይ"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"በስተጀርባ ውሂብ አግድ?"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (518658001418490405) -->
-    <skip />
+    <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"የጀርባ ውሂብ በተንቀሳቃሽ ስልክ አውታረ መረብ ላይ አሰናክል። ከተገኙ የተንቀሳቃሽ ስልክ ያልሆኑ አውታረ መረቦች ስራ ላይ ይውላሉ።"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"ለዚህ ትግበራ የዳራ ውሂብ ለመገደብ፣ መጀመሪያ የተንቀሳቃሽ ውሂብ ወሰን አዘጋጅ።"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"በስተጀርባ ውሂብ አግድ?"</string>
-    <!-- no translation found for data_usage_app_restrict_dialog (1466689968707308512) -->
-    <skip />
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"ይሄ ባህሪ የተንቀሳቃሽ ስልክ አውታረ መረቦች ብቻ የሚገኙ ከሆኑ በጀርባ ውሂብ ላይ የሚወሰኑ መተግበሪያዎች ስራቸውን እንዲያቆሙ ሊያደርግ ይችላል።"\n\n"በመተግበሪያው ቅንብሮች ውስጥ ተገቢ የሆኑ ተጨማሪ የአጠቃቀም መቆጣጠሪያዎችን ልታገኝ ትችላለህ።"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"የተንቀሳቃሽ ስልክ ውሂብ ወሰን ሲያዘጋጁ ብቻ ነው የዳራ ውሂብ መገደብ የሚቻለው።"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"የአጠቃቀም ዑደት ቀን ዳግም ያስጀምራል"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"የእያንዳንዱ ወር ቀን፡"</string>
@@ -1606,14 +1613,11 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>፦ <xliff:g id="TOTAL">%1$s</xliff:g> ገደማ ጥቅም ላይ ውሏል።"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>፦ <xliff:g id="TOTAL">%1$s</xliff:g> ገደማ ስራ ላይ ውሏል፣ በጡባዊ ቱኮህ በተለካው መሠረት። የድምጸ ተያያዥህ ውሂብ አጠቃቀም ሒሳብ አያያዝ ሊለይ ይችላል።"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>፦ <xliff:g id="TOTAL">%1$s</xliff:g> ገደማ ስራ ላይ ውሏል፣ በስልክህ በተለካው መሠረት። የድምጸ ተያያዥህ ውሂብ አጠቃቀም ሒሳብ አያያዝ ሊለይ ይችላል።"</string>
-    <!-- no translation found for data_usage_metered_title (6204750602856383278) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_body (2446827764036316131) -->
-    <skip />
+    <string name="data_usage_metered_title" msgid="6204750602856383278">"የተንቀሳቃሽ መገናኛ ነጥቦች"</string>
+    <string name="data_usage_metered_body" msgid="2446827764036316131">"የተንቀሳቃሽ መገናኛ ነጥቦች የሆኑ የገመድ አልባ አውታረ መረቦችን ምረጥ። መተግበሪያዎች ጀርባ ውስጥ ሲሆኑ እነዚህን አውታረ መረቦች እንዳይጠቀሙ ሊገደቡ ይችላሉ። መተግበሪያዎች እነዚህን አውታረ መረቦች ለትልልቅ ውርዶች ከመጠቀማቸው በፊት ሊያስጠናቅቁም ይችላሉ።"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"የተንቀሳቃሽ ስልክ አውታረ መረብ"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"የገመድ አልባ አውታረ መረቦች"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (7566012564261138417) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="7566012564261138417">"የተንቀሳቃሽ መገናኛ ነጥቦችን ለመምረጥ ገመድ አልባን አንቃ።"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"የአደጋ ጊዜ ጥሪ"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"ወደ ስልክ ጥሪ ተመለስ"</string>
     <string name="vpn_name" msgid="4689699885361002297">"ስም"</string>
