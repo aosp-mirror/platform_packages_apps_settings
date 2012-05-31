@@ -293,6 +293,16 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Date"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Heure"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Améliorer la correspondance faciale"</string>
+    <!-- no translation found for biometric_weak_liveliness_title (1218584997572155648) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_on_summary (5767141844508925360) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_off_summary (6574236717160830358) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_explained (2394796634681878989) -->
+    <skip />
+    <!-- no translation found for biometric_weak_liveliness_explained (5110573888313019236) -->
+    <skip />
     <string name="lock_after_timeout" msgid="4590337686681194648">"Verrouiller automatiquement"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Après <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> de veille"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Coordonnées du propriétaire sur l\'écran verrouillé"</string>
@@ -1579,8 +1589,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Utilisation 4G séparée"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Afficher conso en Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Afficher l\'utilisation Ethernet"</string>
-    <!-- no translation found for data_usage_menu_metered (5056695223222541863) -->
-    <skip />
+    <string name="data_usage_menu_metered" msgid="5056695223222541863">"Point d\'accès mobiles"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Changer le cycle..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Jour du mois de réinitialisation du cycle utilisation données :"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Aucune donnée utilisée par les applications pendant cette période."</string>
@@ -1604,12 +1613,10 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Données 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Afficher paramètres application"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Limiter données en arrière-plan"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (518658001418490405) -->
-    <skip />
+    <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Désactiver données arrière-plan sur réseaux mobiles. Utiliser autres réseaux si dispos."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Pour restreindre les données en arrière-plan, définissez un quota de données mobiles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Limiter les données en arrière-plan ?"</string>
-    <!-- no translation found for data_usage_app_restrict_dialog (1466689968707308512) -->
-    <skip />
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Cette fonctionnalité peut empêcher certaines applications de s\'exécuter lorsque celles-ci sont dépendantes des données en arrière-plan et que seuls des réseaux mobiles sont disponibles."\n\n"Vous trouverez des options plus adaptées en matière de contrôle de la consommation des données dans les paramètres de l\'application."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"La limitation des données en arrière-plan n\'est disponible que lorsque vous avez défini un plafond de données mobiles."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Date de réinitialisation du cycle de consommation"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Jour du mois :"</string>
@@ -1628,14 +1635,11 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g> : environ <xliff:g id="TOTAL">%1$s</xliff:g> utilisés"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g> : env. <xliff:g id="TOTAL">%1$s</xliff:g> utilisés,  selon votre tablette. Le suivi conso de votre opérateur peut différer."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g> : env. <xliff:g id="TOTAL">%1$s</xliff:g> utilisés, selon votre téléphone. Le suivi conso de votre opérateur peut différer."</string>
-    <!-- no translation found for data_usage_metered_title (6204750602856383278) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_body (2446827764036316131) -->
-    <skip />
+    <string name="data_usage_metered_title" msgid="6204750602856383278">"Point d\'accès mobiles"</string>
+    <string name="data_usage_metered_body" msgid="2446827764036316131">"Sélectionnez les réseaux Wi-Fi qui sont des points d\'accès mobiles. Il est possible que les applications qui s\'exécutent en arrière-plan ne soient pas autorisées à utiliser ces réseaux. Les applications peuvent également vous avertir avant de les utiliser pour les téléchargements volumineux."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Réseaux mobiles"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"Réseaux Wi-Fi"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (7566012564261138417) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="7566012564261138417">"Pour sélectionner des points d\'accès mobiles, activez le Wi-Fi."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Appel d\'urgence"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Retour à l\'appel"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nom"</string>
