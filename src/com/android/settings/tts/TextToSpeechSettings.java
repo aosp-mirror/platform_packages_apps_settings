@@ -347,7 +347,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         Log.i(TAG, "Displaying data alert for :" + key);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(android.R.string.dialog_alert_title);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setIconAttribute(android.R.attr.alertDialogIcon);
         builder.setMessage(getActivity().getString(
                 R.string.tts_engine_security_warning, mEnginesHelper.getEngineInfo(key).label));
         builder.setCancelable(true);

@@ -91,7 +91,7 @@ public class CryptKeeperSettings extends Fragment {
                 // TODO replace (or follow) this dialog with an explicit launch into password UI
                 new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.crypt_keeper_dialog_need_password_title)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(R.string.crypt_keeper_dialog_need_password_message)
                     .setPositiveButton(android.R.string.ok, null)
                     .create()

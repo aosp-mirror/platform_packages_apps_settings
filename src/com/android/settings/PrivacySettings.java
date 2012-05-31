@@ -119,7 +119,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         // TODO: DialogFragment?
         mConfirmDialog = new AlertDialog.Builder(getActivity()).setMessage(msg)
                 .setTitle(R.string.backup_erase_dialog_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setPositiveButton(android.R.string.ok, this)
                 .setNegativeButton(android.R.string.cancel, this)
                 .show();
