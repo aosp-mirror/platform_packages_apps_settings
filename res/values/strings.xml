@@ -644,6 +644,16 @@
 
     <!-- Security settings screen when using face unlock, setting option name to start an activity that allows the user to improve accuracy by adding additional enrollment faces -->
     <string name="biometric_weak_improve_matching_title">Improve face matching</string>
+    <!-- On the security settings screen when using face unlock.  This goes to a screen that explains liveliness detection and allows for it to be turned on/off -->
+    <string name="biometric_weak_liveliness_title">Require head turn</string>
+    <!-- Used to describe the on state of the face unlock liveliness feature -->
+    <string name="biometric_weak_liveliness_on_summary">On</string>
+    <!-- Used to describe the off state of the face unlock liveliness feature -->
+    <string name="biometric_weak_liveliness_off_summary">Off</string>
+    <!-- Explanation of the Face Unlock liveliness feature. It's displayed on a screen with an on/off toggle switch. -->
+    <string name="biometric_weak_liveliness_explained" product="tablet">When this feature is turned on, other people can\'t use a photo of you to fool Face Unlock.  While unlocking your tablet, you\'ll be asked to turn your head.  You can turn it slightly to the left or right.</string>
+    <!-- Explanation of the Face Unlock liveliness feature. It's displayed on a screen with an on/off toggle switch. -->
+    <string name="biometric_weak_liveliness_explained" product="default">When this feature is turned on, other people can\'t use a photo of you to fool Face Unlock.  While unlocking your phone, you\'ll be asked to turn your head.  You can turn it slightly to the left or right.</string>
 
     <!-- Security settings screen, setting option name to change screen timeout -->
     <string name="lock_after_timeout">Automatically lock</string>
