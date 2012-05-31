@@ -243,7 +243,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         getActivity().registerReceiver(mReceiver, mIntentFilter);
-        mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
     }
 
     @Override
@@ -418,6 +417,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
             mPeersGroup.setEnabled(true);
             preferenceScreen.addPreference(mPeersGroup);
+
+            /* Request latest set of peers */
+            mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
         }
     }
 
