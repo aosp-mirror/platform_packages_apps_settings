@@ -43,7 +43,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_FREQUENCY_BAND = "frequency_band";
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
-    private static final String KEY_ENABLE_WIFI_WATCHDOG = "wifi_enable_watchdog_service";
+    private static final String KEY_POOR_NETWORK_DETECTION = "wifi_poor_network_detection";
 
     private WifiManager mWifiManager;
 
@@ -73,16 +73,14 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                 Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
         notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
 
-        boolean watchdogEnabled = Secure.getInt(getContentResolver(),
-                Secure.WIFI_WATCHDOG_ON, 1) != 0;
-        CheckBoxPreference watchdog =
-            (CheckBoxPreference) findPreference(KEY_ENABLE_WIFI_WATCHDOG);
-        if (watchdog != null) {
-            if (watchdogEnabled) {
-                watchdog.setChecked(Secure.getInt(getContentResolver(),
-                        Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
+        CheckBoxPreference poorNetworkDetection =
+            (CheckBoxPreference) findPreference(KEY_POOR_NETWORK_DETECTION);
+        if (poorNetworkDetection != null) {
+            if (Utils.isWifiOnly(getActivity())) {
+                getPreferenceScreen().removePreference(poorNetworkDetection);
             } else {
-                getPreferenceScreen().removePreference(watchdog);
+                poorNetworkDetection.setChecked(Secure.getInt(getContentResolver(),
+                        Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
             }
         }
 
@@ -146,7 +144,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             Secure.putInt(getContentResolver(),
                     Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-        } else if (KEY_ENABLE_WIFI_WATCHDOG.equals(key)) {
+        } else if (KEY_POOR_NETWORK_DETECTION.equals(key)) {
             Secure.putInt(getContentResolver(),
                     Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
