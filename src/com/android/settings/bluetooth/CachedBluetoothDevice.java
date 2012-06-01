@@ -208,12 +208,15 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     private void connectWithoutResettingTimer(boolean connectAllProfiles) {
         // Try to initialize the profiles if they were not.
         if (mProfiles.isEmpty()) {
-            if (!updateProfiles()) {
-                // If UUIDs are not available yet, connect will be happen
-                // upon arrival of the ACTION_UUID intent.
-                if (DEBUG) Log.d(TAG, "No profiles. Maybe we will connect later");
-                return;
-            }
+            // if mProfiles is empty, then do not invoke updateProfiles. This causes a race
+            // condition with carkits during pairing, wherein RemoteDevice.UUIDs have been updated
+            // from bluetooth stack but ACTION.uuid is not sent yet.
+            // Eventually ACTION.uuid will be received which shall trigger the connection of the
+            // various profiles
+            // If UUIDs are not available yet, connect will be happen
+            // upon arrival of the ACTION_UUID intent.
+            Log.d(TAG, "No profiles. Maybe we will connect later");
+            return;
         }
 
         // Reset the only-show-one-error-dialog tracking variable
