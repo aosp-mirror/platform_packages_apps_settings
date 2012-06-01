@@ -33,6 +33,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.telephony.CellInfo;
 import android.telephony.CellLocation;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
@@ -111,6 +112,7 @@ public class RadioInfo extends Activity {
     private TextView mCfi;
     private TextView mLocation;
     private TextView mNeighboringCids;
+    private TextView mCellInfo;
     private TextView resets;
     private TextView attempts;
     private TextView successes;
@@ -140,6 +142,7 @@ public class RadioInfo extends Activity {
     private String mHttpClientTestResult;
     private boolean mMwiValue = false;
     private boolean mCfiValue = false;
+    private List<CellInfo> mCellInfoValue;
 
     private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         @Override
@@ -170,6 +173,13 @@ public class RadioInfo extends Activity {
         public void onCallForwardingIndicatorChanged(boolean cfi) {
             mCfiValue = cfi;
             updateCallRedirect();
+        }
+
+        @Override
+        public void onCellInfoChanged(List<CellInfo> arrayCi) {
+            Log.d(TAG, "[RadioInfo] onCellInfoChanged: arrayCi=" + arrayCi);
+            mCellInfoValue = arrayCi;
+            updateCellInfoTv();
         }
     };
 
@@ -263,6 +273,7 @@ public class RadioInfo extends Activity {
         mCfi = (TextView) findViewById(R.id.cfi);
         mLocation = (TextView) findViewById(R.id.location);
         mNeighboringCids = (TextView) findViewById(R.id.neighboring);
+        mCellInfo = (TextView) findViewById(R.id.cellinfo);
 
         resets = (TextView) findViewById(R.id.resets);
         attempts = (TextView) findViewById(R.id.attempts);
@@ -326,6 +337,10 @@ public class RadioInfo extends Activity {
                 mHandler.obtainMessage(EVENT_QUERY_NEIGHBORING_CIDS_DONE));
 
         CellLocation.requestLocationUpdate();
+
+        // Get current cell info
+        mCellInfoValue = mTelephonyManager.getAllCellInfo();
+        Log.d(TAG, "[RadioInfo] onCreate: mCellInfoValue=" + mCellInfoValue);
     }
 
     @Override
@@ -356,7 +371,8 @@ public class RadioInfo extends Activity {
                 | PhoneStateListener.LISTEN_DATA_ACTIVITY
                 | PhoneStateListener.LISTEN_CELL_LOCATION
                 | PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR
-                | PhoneStateListener.LISTEN_CALL_FORWARDING_INDICATOR);
+                | PhoneStateListener.LISTEN_CALL_FORWARDING_INDICATOR
+                | PhoneStateListener.LISTEN_CELL_INFO);
     }
 
     @Override
@@ -506,6 +522,23 @@ public class RadioInfo extends Activity {
             sb.append("unknown");
         }
         mNeighboringCids.setText(sb.toString());
+    }
+
+    private final void updateCellInfoTv() {
+        StringBuilder value = new StringBuilder();
+        if (mCellInfoValue != null) {
+            int index = 0;
+            for (CellInfo ci : mCellInfoValue) {
+                value.append('[');
+                value.append(index);
+                value.append("]=");
+                value.append(ci.toString());
+                if (++index < mCellInfoValue.size()) {
+                    value.append("\n");
+                }
+            }
+        }
+        mCellInfo.setText(value.toString());
     }
 
     private final void

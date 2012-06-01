@@ -84,6 +84,13 @@
             <TextView android:id="@+id/neighboring" style="@style/info_value" />
         </LinearLayout>
 
+        <!-- CellInfo -->
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/radio_info_cellinfo_label"
+                      style="@style/info_label" />
+            <TextView android:id="@+id/cellinfo" style="@style/info_value" />
+        </LinearLayout>
+
         <!-- Roaming -->
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_roaming_label" style="@style/info_label" />
