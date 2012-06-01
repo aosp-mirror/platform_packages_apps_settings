@@ -291,16 +291,11 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Fecha"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Mejorar el reconocimiento facial"</string>
-    <!-- no translation found for biometric_weak_liveliness_title (1218584997572155648) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_on_summary (5767141844508925360) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_off_summary (6574236717160830358) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_explained (2394796634681878989) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_explained (5110573888313019236) -->
-    <skip />
+    <string name="biometric_weak_liveliness_title" msgid="1218584997572155648">"Pedir que gires la cabeza"</string>
+    <string name="biometric_weak_liveliness_on_summary" msgid="5767141844508925360">"Activado"</string>
+    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Desactivado"</string>
+    <string name="biometric_weak_liveliness_explained" product="tablet" msgid="2394796634681878989">"Cuando esta función está activada, otros usuarios no pueden usar tu foto para engañar al sistema de desbloqueo facial. Mientras desbloqueas el tablet, tendrás que girar la cabeza (puedes hacerlo hacia la derecha o hacia la izquierda)."</string>
+    <string name="biometric_weak_liveliness_explained" product="default" msgid="5110573888313019236">"Cuando esta función está activada, otros usuarios no pueden usar tu foto para engañar al sistema de desbloqueo facial. Mientras desbloqueas el teléfono, tendrás que girar la cabeza (puedes hacerlo hacia la derecha o hacia la izquierda)."</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automáticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Tras <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de suspender"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar datos del propietario en la pantalla de bloqueo"</string>
@@ -515,8 +510,10 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"No se puede buscar redes."</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notificación de red"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Notificarme cuando haya una red abierta disponible"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Solo conexiones buenas"</string>
-    <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
+    <!-- no translation found for wifi_poor_network_detection (4925789238170207169) -->
+    <skip />
+    <!-- no translation found for wifi_poor_network_detection_summary (2466956369738047669) -->
+    <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Usar Wi-Fi en suspensión"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Error al cambiar la configuración"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Añadir red"</string>
@@ -981,7 +978,8 @@
     <string name="applications_settings_summary" msgid="6683465446264515367">"Administrar aplicaciones y configurar accesos directos de inicio rápido"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"Ajustes de aplicación"</string>
     <string name="install_applications" msgid="4872012136210802181">"Orígenes desconocidos"</string>
-    <string name="install_unknown_applications" msgid="8149117044297868948">"Permitir instalar aplicaciones que no estén en Google Play"</string>
+    <!-- no translation found for install_unknown_applications (176855644862942064) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"El tablet y los datos personales son más vulnerables a los ataques de aplicaciones de origen desconocido. El usuario acepta ser el único responsable de cualquier daño en el tablet o pérdida de datos que se pueda derivar del uso de estas aplicaciones."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"El teléfono y los datos personales son más vulnerables a los ataques de aplicaciones de origen desconocido. El usuario acepta ser el único responsable de cualquier daño en el teléfono o pérdida de datos que se pueda derivar del uso de estas aplicaciones."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Ajustes avanzados"</string>
@@ -1205,7 +1203,7 @@
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"¿Permitir ajustes de desarrollo?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Estos ajustes están destinados únicamente a los desarrolladores. Pueden provocar que el dispositivo o las aplicaciones no funcionen correctamente."</string>
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Proteger almacenamiento USB"</string>
-    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Las aplicaciones deben solicitar permiso para leer el USB."</string>
+    <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Las aplicaciones deben solicitar permiso para leer el almacenamiento USB."</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"¿Proteger almacenamiento USB?"</string>
     <string name="enforce_read_external_confirm_message" product="nosdcard" msgid="605444326545922054">"Cuando el almacenamiento USB está protegido, las aplicaciones deben solicitar permiso para leer los datos del almacenamiento externo."\n\n"Es posible que algunas aplicaciones no funcionen hasta que los desarrolladores las actualicen."</string>
     <string name="enforce_read_external_title" product="default" msgid="2226662853797940829">"Proteger tarjeta SD"</string>
@@ -1534,7 +1532,7 @@
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostrar la ubicación de las pulsaciones en la pantalla"</string>
     <string name="show_screen_updates" msgid="5470814345876056420">"Cambios de superficie"</string>
     <string name="show_screen_updates_summary" msgid="2569622766672785529">"Actualizar superficies de ventana al actualizarse"</string>
-    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Mostrar actualiz vista GPU"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Actualizaciones GPU"</string>
     <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Actualizar vistas de las ventanas creadas con GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Inhabilitar superposiciones HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Usar siempre GPU para combinar pantallas"</string>

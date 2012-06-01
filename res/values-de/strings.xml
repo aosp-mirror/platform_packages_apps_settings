@@ -112,10 +112,8 @@
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Verwendung des Bluetooth-Dialers bei gesperrtem Bildschirm verhindern"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-Geräte"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Gerätename"</string>
-    <!-- no translation found for bluetooth_device_details (4594773497930028085) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_details (6823621790324933337) -->
-    <skip />
+    <string name="bluetooth_device_details" msgid="4594773497930028085">"Geräteeinstellungen"</string>
+    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Profileinstellungen"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Kein Name festgelegt, Kontoname wird verwendet"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Scannen nach Geräten"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Tablet umbenennen"</string>
@@ -293,16 +291,11 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Uhrzeit"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Gesichtserkennung verbessern"</string>
-    <!-- no translation found for biometric_weak_liveliness_title (1218584997572155648) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_on_summary (5767141844508925360) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_off_summary (6574236717160830358) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_explained (2394796634681878989) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_explained (5110573888313019236) -->
-    <skip />
+    <string name="biometric_weak_liveliness_title" msgid="1218584997572155648">"Drehen des Kopfes erforderlich"</string>
+    <string name="biometric_weak_liveliness_on_summary" msgid="5767141844508925360">"An"</string>
+    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Aus"</string>
+    <string name="biometric_weak_liveliness_explained" product="tablet" msgid="2394796634681878989">"Wenn diese Funktion aktiviert ist, können andere Personen nicht mit einem Foto von Ihnen Face Unlock täuschen. Beim Entsperren Ihres Tablets werden Sie aufgefordert, den Kopf zu drehen. Sie können ihn leicht nach links oder rechts drehen."</string>
+    <string name="biometric_weak_liveliness_explained" product="default" msgid="5110573888313019236">"Wenn diese Funktion aktiviert ist, können andere Personen nicht mit einem Foto von Ihnen Face Unlock täuschen. Beim Entsperren Ihres Telefons werden Sie aufgefordert, den Kopf zu drehen. Sie können ihn leicht nach links oder rechts drehen."</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatisch sperren"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Nach <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> im Ruhezustand"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Inhaberinformationen auf Sperrbildschirm anzeigen"</string>
@@ -339,8 +332,7 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Verschlüsselung fehlgeschlagen"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Daher ist der Zugriff auf die Daten auf Ihrem Tablet nicht mehr möglich. "\n\n"Damit Sie Ihr Tablet wieder verwenden können, müssen Sie es auf die Werkseinstellungen zurücksetzen. Wenn Sie Ihr Tablet nach dem Zurücksetzen wieder einrichten, können Sie gegebenenfalls Daten, die gesichert wurden, in Ihrem Google-Konto wiederherstellen."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Daher ist der Zugriff auf die Daten auf Ihrem Telefon nicht mehr möglich. "\n\n"Damit Sie Ihr Telefon wieder verwenden können, müssen Sie es auf die Werkseinstellungen zurücksetzen. Wenn Sie Ihr Telefon nach dem Zurücksetzen wieder einrichten, können Sie gegebenenfalls Daten, die gesichert wurden, in Ihrem Google-Konto wiederherstellen."</string>
-    <!-- no translation found for crypt_keeper_switch_input_method (4168332125223483198) -->
-    <skip />
+    <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Eingabemethode wechseln"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Display-Sperre wählen"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Ersatzsperre wählen"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bildschirmsperre"</string>
@@ -519,8 +511,10 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Netzwerkscan nicht möglich"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Netzwerkhinweis"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Benachrichtigen, wenn ein offenes Netzwerk verfügbar ist"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Schlechte Internetverbindungen vermeiden"</string>
-    <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"WLAN nur bei guter Internetverbindung verwenden"</string>
+    <!-- no translation found for wifi_poor_network_detection (4925789238170207169) -->
+    <skip />
+    <!-- no translation found for wifi_poor_network_detection_summary (2466956369738047669) -->
+    <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"WLAN im Standby-Modus aktiviert lassen"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Beim Ändern der Einstellung ist ein Problem aufgetreten."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Netzwerk hinzufügen"</string>
@@ -534,19 +528,14 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Netzwerk entfernen"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Netzwerk ändern"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"WLAN aktivieren, um verfügbare Netze abzurufen"</string>
-    <!-- no translation found for wifi_empty_list_wifi_on (3354911729026237372) -->
-    <skip />
-    <!-- no translation found for wifi_other_network (1048006316504242214) -->
-    <skip />
-    <!-- no translation found for wifi_more (3195296805089107950) -->
-    <skip />
-    <!-- no translation found for wifi_setup_wps (8128702488486283957) -->
-    <skip />
+    <string name="wifi_empty_list_wifi_on" msgid="3354911729026237372">"Suche nach WLAN-Netzwerken läuft…"</string>
+    <string name="wifi_other_network" msgid="1048006316504242214">"Anderes Netzwerk…"</string>
+    <string name="wifi_more" msgid="3195296805089107950">"Mehr"</string>
+    <string name="wifi_setup_wps" msgid="8128702488486283957">"Automatisches Setup (WPS)"</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Erweiterte Optionen einblenden"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Geschützte WLAN-Einrichtung"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS wird gestartet…"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (7204827509934892103) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="7204827509934892103">"Wählen Sie die Schaltfläche \"Wi-Fi Protected Setup\" auf Ihrem Router aus. Eventuell lautet sie auch \"WPS\" oder enthält dieses Symbol:"</string>
     <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Geben Sie die PIN <xliff:g id="NUMBER">%1$s</xliff:g> auf Ihrem WLAN-Router ein. Die Einrichtung kann bis zu 2 Minuten dauern."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS erfolgreich. Netzwerkverbindung wird hergestellt…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Mit WLAN-Netzwerk <xliff:g id="NETWORK_NAME">%s</xliff:g> verbunden"</string>
@@ -654,14 +643,10 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Klingelton &amp; Benachrichtigungen"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Benachrichtigungen"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Wecker"</string>
-    <!-- no translation found for volume_ring_mute (3018992671608737202) -->
-    <skip />
-    <!-- no translation found for volume_media_mute (3399059928695998166) -->
-    <skip />
-    <!-- no translation found for volume_notification_mute (7955193480006444159) -->
-    <skip />
-    <!-- no translation found for volume_alarm_mute (4452239420351035936) -->
-    <skip />
+    <string name="volume_ring_mute" msgid="3018992671608737202">"Klingelton &amp; Benachrichtigungen stummschalten"</string>
+    <string name="volume_media_mute" msgid="3399059928695998166">"Musik &amp; andere Medien stummschalten"</string>
+    <string name="volume_notification_mute" msgid="7955193480006444159">"Benachrichtigungen stummschalten"</string>
+    <string name="volume_alarm_mute" msgid="4452239420351035936">"Wecker stummschalten"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Beim Klingeln vibrieren"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Dock-Einstellungen"</string>
@@ -994,7 +979,8 @@
     <string name="applications_settings_summary" msgid="6683465446264515367">"Apps verwalten, Tastenkombinationen für Schnellstart festlegen"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"App-Einstellungen"</string>
     <string name="install_applications" msgid="4872012136210802181">"Unbekannte Herkunft"</string>
-    <string name="install_unknown_applications" msgid="8149117044297868948">"Installation von Nicht-Market-Apps zulassen"</string>
+    <!-- no translation found for install_unknown_applications (176855644862942064) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Apps mit unbekannter Herkunft können gefährlich für Ihr Tablet und Ihre persönlichen Daten sein. Sie stimmen zu, dass Sie die Verantwortung für alle Schäden an Ihrem Tablet und jegliche Datenverluste tragen, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Apps mit unbekannter Herkunft können gefährlich für Ihr Telefon und Ihre persönlichen Daten sein. Sie stimmen zu, dass Sie die Verantwortung für alle Schäden an Ihrem Telefon und jegliche Datenverluste tragen, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Erweiterte Einstellungen"</string>
@@ -1087,10 +1073,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Bevorzugten Installationspfad für neue Apps ändern"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Integrierte App deaktivieren?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Durch das Deaktivieren einer integrierten App kommt es möglicherweise zu unerwünschtem Verhalten anderer Apps."</string>
-    <!-- no translation found for app_disable_notifications_dlg_title (7669264654851761857) -->
-    <skip />
-    <!-- no translation found for app_disable_notifications_dlg_text (5088484670924769845) -->
-    <skip />
+    <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Benachrichtigungen deaktivieren?"</string>
+    <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Wenn Sie die Benachrichtigungen für diese App deaktivieren, verpassen Sie eventuell wichtige Warnmeldungen und Updates."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Speichernutzung"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Von Apps verwendeten Speicher anzeigen"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktive Dienste"</string>
@@ -1143,25 +1127,19 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Diese Eingabemethode kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Passwörter und Kreditkartennummern. Sie ist Teil der App \"<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>\". Möchten Sie diese Eingabemethode verwenden?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Diese Rechtschreibprüfung kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Passwörter und Kreditkartennummern. Sie ist Teil der App \"<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>\". Möchten Sie die Rechtschreibprüfung verwenden?"</string>
-    <!-- no translation found for spellchecker_quick_settings (246728645150092058) -->
-    <skip />
-    <!-- no translation found for spellchecker_language (6041050114690541437) -->
-    <skip />
+    <string name="spellchecker_quick_settings" msgid="246728645150092058">"Einstellungen"</string>
+    <string name="spellchecker_language" msgid="6041050114690541437">"Sprache"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Einstellungen für <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> konnten nicht geöffnet werden."</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Maus/Touchpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Zeigergeschwindigkeit"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Gamecontroller"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Vibration verwenden"</string>
     <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Vibration zu Gamecontroller weiterleiten, sofern eine Verbindung besteht"</string>
-    <!-- no translation found for keyboard_layout_dialog_title (8030087214949381372) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_dialog_setup_button (8514583747236476384) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_dialog_switch_hint (3889961090676293795) -->
-    <skip />
+    <string name="keyboard_layout_dialog_title" msgid="8030087214949381372">"Tastaturlayout wählen"</string>
+    <string name="keyboard_layout_dialog_setup_button" msgid="8514583747236476384">"Tastaturlayouts einrichten"</string>
+    <string name="keyboard_layout_dialog_switch_hint" msgid="3889961090676293795">"Drücken Sie zum Wechseln Strg+Leertaste."</string>
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"Standard"</string>
-    <!-- no translation found for keyboard_layout_picker_title (556081931972771610) -->
-    <skip />
+    <string name="keyboard_layout_picker_title" msgid="556081931972771610">"Tastaturlayouts"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Mein Wörterbuch"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Mein Wörterbuch"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Persönliche Wörterbücher"</string>
@@ -1485,10 +1463,8 @@
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synchronisierung aktiviert"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Synchronisierung deaktiviert"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Synchronisierungsfehler"</string>
-    <!-- no translation found for sync_failed (1696499856374109647) -->
-    <skip />
-    <!-- no translation found for sync_active (8476943765960863040) -->
-    <skip />
+    <string name="sync_failed" msgid="1696499856374109647">"Fehler bei der Synchronisierung"</string>
+    <string name="sync_active" msgid="8476943765960863040">"Synchronisierung aktiv"</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Synchronisierungseinstellungen"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Bei der Synchronisierung treten momentan Probleme auf. Sie wird in Kürze fortgesetzt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Konto hinzufügen"</string>
@@ -1590,8 +1566,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"4G-Nutzung separat anzeigen"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"WLAN anzeigen"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Ethernet-Nutzung anzeigen"</string>
-    <!-- no translation found for data_usage_menu_metered (5056695223222541863) -->
-    <skip />
+    <string name="data_usage_menu_metered" msgid="5056695223222541863">"Mobile Hotspots"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Zyklus ändern..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Tag, an dem Datenverbrauchszyklus zurückgesetzt wird:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Kein Datenverbrauch in diesem Zeitraum"</string>
@@ -1615,12 +1590,10 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G-Daten"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"App-Einstellungen anzeigen"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Hintergrunddaten beschränken"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (518658001418490405) -->
-    <skip />
+    <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Hintergrunddaten in Mobilfunknetzen deaktivieren und sofern verfügbar andere als Mobilfunknetze verwenden"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Legen Sie zur Beschränkung der App-Hintergrunddaten zuerst ein Mobildatenlimit fest."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Hintergrunddaten beschränken?"</string>
-    <!-- no translation found for data_usage_app_restrict_dialog (1466689968707308512) -->
-    <skip />
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Diese Funktion kann dazu führen, dass eine auf Hintergrunddaten basierende App nicht mehr funktioniert, wenn nur Mobilfunknetze verfügbar sind."\n\n"Geeignetere Kontrollmechanismen für den Datenverbrauch finden Sie in den Einstellungen der App."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Hintergrunddaten können nur beschränkt werden, wenn Sie ein Limit für mobile Daten festgelegt haben."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum für Zurücksetzung der Nutzungszyklen"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum (monatlich):"</string>
@@ -1639,14 +1612,11 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: ca. <xliff:g id="TOTAL">%1$s</xliff:g> verwendet"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: ca. <xliff:g id="TOTAL">%1$s</xliff:g> verwendet. Abrechnung des Datenverbrauchs durch Tablet. Kann von Mobilfunkanbieter abweichen."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: ca. <xliff:g id="TOTAL">%1$s</xliff:g> verwendet. Abrechnung des Datenverbrauchs durch Telefon. Kann von Mobilfunkanbieter abweichen."</string>
-    <!-- no translation found for data_usage_metered_title (6204750602856383278) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_body (2446827764036316131) -->
-    <skip />
+    <string name="data_usage_metered_title" msgid="6204750602856383278">"Mobile Hotspots"</string>
+    <string name="data_usage_metered_body" msgid="2446827764036316131">"Wählen Sie die WLAN-Netzwerke aus, die mobile Hotspots sind. Die Verwendung dieser Netzwerke kann für Apps im Hintergrund eingeschränkt werden. Eventuell senden Apps auch eine Warnung, bevor diese Netzwerke für umfangreiche Downloads verwendet werden."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobilfunknetze"</string>
     <string name="data_usage_metered_wifi" msgid="4151511616349458705">"WLAN-Netzwerke"</string>
-    <!-- no translation found for data_usage_metered_wifi_disabled (7566012564261138417) -->
-    <skip />
+    <string name="data_usage_metered_wifi_disabled" msgid="7566012564261138417">"Aktivieren Sie WLAN, um mobile Hotspots auszuwählen."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Notruf"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Zurück zum Anruf"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Name"</string>
@@ -1712,7 +1682,6 @@
     <string name="user_new_user_name" msgid="7603010274765911161">"Nervensäge"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Nutzer entfernen?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Möchten Sie den Nutzer und alle mit ihm verbundenen Daten wirklich von Ihrem Gerät löschen?"</string>
-    <!-- no translation found for app_notifications_switch_label (9124072219553687583) -->
-    <skip />
+    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Benachrichtigungen zeigen"</string>
     <string name="help_label" msgid="1107174367904110532">"Hilfe"</string>
 </resources>

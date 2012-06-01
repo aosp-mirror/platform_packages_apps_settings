@@ -112,10 +112,8 @@
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Désactiver les appels via le Bluetooth lorsque l\'écran est verrouillé"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Appareils Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Nom de l\'appareil"</string>
-    <!-- no translation found for bluetooth_device_details (4594773497930028085) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_details (6823621790324933337) -->
-    <skip />
+    <string name="bluetooth_device_details" msgid="4594773497930028085">"Paramètres de l\'appareil"</string>
+    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Paramètres du profil"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Aucun nom n\'a été défini. Utilisation du nom du compte..."</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Recherche d\'appareils"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Renommer la tablette"</string>
@@ -293,16 +291,11 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Date"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Heure"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Améliorer la correspondance faciale"</string>
-    <!-- no translation found for biometric_weak_liveliness_title (1218584997572155648) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_on_summary (5767141844508925360) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_off_summary (6574236717160830358) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_explained (2394796634681878989) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_explained (5110573888313019236) -->
-    <skip />
+    <string name="biometric_weak_liveliness_title" msgid="1218584997572155648">"Exiger un mouvement de la tête"</string>
+    <string name="biometric_weak_liveliness_on_summary" msgid="5767141844508925360">"Activée"</string>
+    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Désactivée"</string>
+    <string name="biometric_weak_liveliness_explained" product="tablet" msgid="2394796634681878989">"Lorsque cette fonctionnalité est activée, personne ne peut utiliser une photo de vous pour tromper Face Unlock. Lorsque vous déverrouillez votre tablette, vous êtes invité à faire un léger mouvement de tête vers la gauche ou vers la droite."</string>
+    <string name="biometric_weak_liveliness_explained" product="default" msgid="5110573888313019236">"Lorsque cette fonctionnalité est activée, personne ne peut utiliser une photo de vous pour tromper Face Unlock. Lorsque vous déverrouillez votre téléphone, vous êtes invité à faire un léger mouvement de tête vers la gauche ou vers la droite."</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Verrouiller automatiquement"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"Après <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> de veille"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Coordonnées du propriétaire sur l\'écran verrouillé"</string>
@@ -339,8 +332,7 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Échec du chiffrement"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Impossible de terminer le chiffrement, car celui-ci a été interrompu. Par conséquent, les données de votre tablette ne sont plus accessibles."\n\n"Pour continuer d\'utiliser votre tablette, vous devez rétablir la configuration d\'usine. Une fois cette opération terminée, vous pourrez restaurer toutes les données sauvegardées sur votre compte Google lors de la nouvelle configuration de votre tablette."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Impossible de terminer le chiffrement, car celui-ci a été interrompu. Par conséquent, les données de votre téléphone ne sont plus accessibles."\n\n"Pour continuer d\'utiliser votre téléphone, vous devez rétablir la configuration d\'usine. Une fois cette opération terminée, vous pourrez restaurer toutes les données sauvegardées sur votre compte Google lors de la nouvelle configuration de votre téléphone."</string>
-    <!-- no translation found for crypt_keeper_switch_input_method (4168332125223483198) -->
-    <skip />
+    <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Changer le mode de saisie"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Sélect. verr. écran"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Verrouillage secondaire"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Verrouillage de l\'écran"</string>
@@ -518,8 +510,10 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Impossible de rechercher des réseaux."</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notification de réseau"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Me notifier lorsqu\'un réseau ouvert est disponible"</string>
-    <string name="wifi_enable_watchdog_service" msgid="3808826765041243874">"Éviter mauvaises connexions"</string>
-    <string name="wifi_enable_watchdog_service_summary" msgid="4227430628962787616">"Ne pas utiliser de réseau Wi-Fi, sauf en cas de connexion Internet de bonne qualité"</string>
+    <!-- no translation found for wifi_poor_network_detection (4925789238170207169) -->
+    <skip />
+    <!-- no translation found for wifi_poor_network_detection_summary (2466956369738047669) -->
+    <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Wi-Fi actif en veille"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Un problème est survenu lors de la modification des paramètres."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Ajouter un réseau"</string>
@@ -533,19 +527,14 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Retirer le réseau"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modifier le réseau"</string>
     <string name="wifi_empty_list_wifi_off" msgid="4722299515264875943">"Activez le Wi-Fi pour voir les réseaux disponibles."</string>
-    <!-- no translation found for wifi_empty_list_wifi_on (3354911729026237372) -->
-    <skip />
-    <!-- no translation found for wifi_other_network (1048006316504242214) -->
-    <skip />
-    <!-- no translation found for wifi_more (3195296805089107950) -->
-    <skip />
-    <!-- no translation found for wifi_setup_wps (8128702488486283957) -->
-    <skip />
+    <string name="wifi_empty_list_wifi_on" msgid="3354911729026237372">"Recherche de réseaux Wi-Fi en cours…"</string>
+    <string name="wifi_other_network" msgid="1048006316504242214">"Autre réseau…"</string>
+    <string name="wifi_more" msgid="3195296805089107950">"Plus"</string>
+    <string name="wifi_setup_wps" msgid="8128702488486283957">"Configuration auto (WPS)"</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Afficher les options avancées"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configuration Wi-Fi protégée"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Démarrage de la configuration WPS…"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (7204827509934892103) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="7204827509934892103">"Appuyez sur le bouton \"Configuration Wi-Fi protégée\" de votre routeur. Celui-ci peut s\'appeler \"WPS\" ou contenir ce symbole :"</string>
     <string name="wifi_wps_onstart_pin" msgid="8067502591043979939">"Saisissez le code <xliff:g id="NUMBER">%1$s</xliff:g> sur votre routeur Wi-Fi. La configuration peut prendre jusqu\'à deux minutes."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"Configuration WPS réussie. Connexion au réseau en cours…"</string>
     <string name="wifi_wps_connected" msgid="5754399645462924103">"Connecté au réseau Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -653,14 +642,10 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Sonnerie et notifications"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notifications"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmes"</string>
-    <!-- no translation found for volume_ring_mute (3018992671608737202) -->
-    <skip />
-    <!-- no translation found for volume_media_mute (3399059928695998166) -->
-    <skip />
-    <!-- no translation found for volume_notification_mute (7955193480006444159) -->
-    <skip />
-    <!-- no translation found for volume_alarm_mute (4452239420351035936) -->
-    <skip />
+    <string name="volume_ring_mute" msgid="3018992671608737202">"Couper la sonnerie et le son des notifications"</string>
+    <string name="volume_media_mute" msgid="3399059928695998166">"Couper le son de la musique et des autres médias"</string>
+    <string name="volume_notification_mute" msgid="7955193480006444159">"Couper le son des notifications"</string>
+    <string name="volume_alarm_mute" msgid="4452239420351035936">"Couper le son des alarmes"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibreur quand téléphone sonne"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Station d\'accueil"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Paramètres station d\'accueil"</string>
@@ -993,7 +978,8 @@
     <string name="applications_settings_summary" msgid="6683465446264515367">"Gérer les applications, configurer des raccourcis de lancement rapide"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"Paramètres de l\'application"</string>
     <string name="install_applications" msgid="4872012136210802181">"Sources inconnues"</string>
-    <string name="install_unknown_applications" msgid="8149117044297868948">"Autoriser l\'installation d\'applications ne provenant pas de Google Play"</string>
+    <!-- no translation found for install_unknown_applications (176855644862942064) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Votre tablette et vos données personnelles sont plus vulnérables face aux attaques d\'applications provenant de sources inconnues. Vous reconnaissez être seul responsable de tout dommage subi par votre tablette ou de toute perte de données pouvant découler de l\'utilisation de ces applications."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Votre téléphone et vos données personnelles sont plus vulnérables face aux attaques d\'applications provenant de sources inconnues. Vous reconnaissez être seul responsable de tout dommage subi par votre téléphone ou de toute perte de données pouvant découler de l\'utilisation de ces applications."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Paramètres avancés"</string>
@@ -1086,10 +1072,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Modifier l\'emplacement d\'installation par défaut pour les nouvelles applications"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Désactiver appli intégrée ?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Si vous désactivez une application intégrée, cela peut provoquer des dysfonctionnements d\'autres applications."</string>
-    <!-- no translation found for app_disable_notifications_dlg_title (7669264654851761857) -->
-    <skip />
-    <!-- no translation found for app_disable_notifications_dlg_text (5088484670924769845) -->
-    <skip />
+    <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Désactiver les notifications ?"</string>
+    <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Si vous désactivez les notifications de cette application, vous risquez de manquer des alertes et des mises à jour importantes."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Utilisation du stockage"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Afficher l\'espace de stockage utilisé par les applications"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Services en cours d\'exécution"</string>
@@ -1142,25 +1126,19 @@
     <string name="show_password_summary" msgid="7345931695292850058"></string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Ce mode de saisie est susceptible d\'enregistrer le texte que vous saisissez, y compris vos données personnelles, telles que les mots de passe et les numéros de carte de paiement. Il provient de l\'application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Voulez-vous vraiment l\'activer ?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'application <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique ?"</string>
-    <!-- no translation found for spellchecker_quick_settings (246728645150092058) -->
-    <skip />
-    <!-- no translation found for spellchecker_language (6041050114690541437) -->
-    <skip />
+    <string name="spellchecker_quick_settings" msgid="246728645150092058">"Paramètres"</string>
+    <string name="spellchecker_language" msgid="6041050114690541437">"Langue"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Échec de l\'ouverture des paramètres de l\'application <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>."</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"Souris/Pavé tactile"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Vitesse du pointeur"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Manette de jeu"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Utiliser le vibreur"</string>
     <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"Rediriger le vibreur vers la manette de jeu lorsque vous êtes connecté"</string>
-    <!-- no translation found for keyboard_layout_dialog_title (8030087214949381372) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_dialog_setup_button (8514583747236476384) -->
-    <skip />
-    <!-- no translation found for keyboard_layout_dialog_switch_hint (3889961090676293795) -->
-    <skip />
+    <string name="keyboard_layout_dialog_title" msgid="8030087214949381372">"Sélectionner disposition du clavier"</string>
+    <string name="keyboard_layout_dialog_setup_button" msgid="8514583747236476384">"Configurer dispositions clavier"</string>
+    <string name="keyboard_layout_dialog_switch_hint" msgid="3889961090676293795">"Appuyez sur Ctrl+Espace pour changer disposition"</string>
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"Par défaut"</string>
-    <!-- no translation found for keyboard_layout_picker_title (556081931972771610) -->
-    <skip />
+    <string name="keyboard_layout_picker_title" msgid="556081931972771610">"Dispositions du clavier"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Dictionnaire personnel"</string>
     <string name="user_dict_single_settings_title" msgid="524997218433540614">"Dictionnaire personnel"</string>
     <string name="user_dict_multiple_settings_title" msgid="3735224433307996276">"Dictionnaires personnels"</string>
@@ -1484,10 +1462,8 @@
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synchronisation activée"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Synchronisation désactivée"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Erreur de synchronisation."</string>
-    <!-- no translation found for sync_failed (1696499856374109647) -->
-    <skip />
-    <!-- no translation found for sync_active (8476943765960863040) -->
-    <skip />
+    <string name="sync_failed" msgid="1696499856374109647">"Échec de la synchronisation"</string>
+    <string name="sync_active" msgid="8476943765960863040">"Synchronisation activée"</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Paramètres de synchronisation"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"La synchronisation rencontre des problèmes et sera bientôt rétablie."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Ajouter un compte"</string>
@@ -1707,7 +1683,6 @@
     <string name="user_new_user_name" msgid="7603010274765911161">"Enfant turbulent"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Supprimer l\'utilisateur ?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Voulez-vous vraiment supprimer le compte utilisateur ainsi que toutes les données associées de l\'appareil ?"</string>
-    <!-- no translation found for app_notifications_switch_label (9124072219553687583) -->
-    <skip />
+    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Afficher notifications"</string>
     <string name="help_label" msgid="1107174367904110532">"Aide"</string>
 </resources>
