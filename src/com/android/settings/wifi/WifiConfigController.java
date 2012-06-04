@@ -743,7 +743,9 @@ public class WifiConfigController implements TextWatcher,
                     InputType.TYPE_CLASS_TEXT | (((CheckBox) view).isChecked() ?
                             InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
                                 InputType.TYPE_TEXT_VARIATION_PASSWORD));
-            ((EditText)mPasswordView).setSelection(pos);
+            if (pos >= 0) {
+                ((EditText)mPasswordView).setSelection(pos);
+            }
         } else if (view.getId() == R.id.wifi_advanced_togglebox) {
             if (((CheckBox) view).isChecked()) {
                 mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
