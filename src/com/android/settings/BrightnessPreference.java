@@ -47,6 +47,8 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     private boolean mAutomaticAvailable;
     private boolean mAutomaticMode;
 
+    private int mCurBrightness = -1;
+
     private boolean mRestoredOldState;
 
     // Backlight range is from 0 - 255. Need to make sure that user
@@ -60,6 +62,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     private ContentObserver mBrightnessObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
+            mCurBrightness = -1;
             onBrightnessChanged();
         }
     };
@@ -135,6 +138,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
                 : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         mSeekBar.setProgress(getBrightness());
         mSeekBar.setEnabled(!mAutomaticMode);
+        setBrightness(mSeekBar.getProgress(), false);
     }
 
     private int getBrightness() {
@@ -145,8 +149,12 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
                     Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0);
             brightness = (brightness+1)/2;
         } else {
-            brightness = Settings.System.getInt(getContext().getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS, 100);
+            if (mCurBrightness < 0) {
+                brightness = Settings.System.getInt(getContext().getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS, 100);
+            } else {
+                brightness = mCurBrightness;
+            }
             brightness = (brightness - mScreenBrightnessDim)
                     / (MAXIMUM_BACKLIGHT - mScreenBrightnessDim);
         }
@@ -199,6 +207,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         }
         setBrightness(mOldBrightness, false);
         mRestoredOldState = true;
+        mCurBrightness = -1;
     }
 
     private void setBrightness(int brightness, boolean write) {
@@ -229,9 +238,12 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
                     power.setBacklightBrightness(brightness);
                 }
                 if (write) {
+                    mCurBrightness = -1;
                     final ContentResolver resolver = getContext().getContentResolver();
                     Settings.System.putInt(resolver,
                             Settings.System.SCREEN_BRIGHTNESS, brightness);
+                } else {
+                    mCurBrightness = brightness;
                 }
             } catch (RemoteException doe) {
             }
@@ -255,6 +267,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         myState.progress = mSeekBar.getProgress();
         myState.oldAutomatic = mOldAutomatic == 1;
         myState.oldProgress = mOldBrightness;
+        myState.curBrightness = mCurBrightness;
 
         // Restore the old state when the activity or dialog is being paused
         restoreOldState();
@@ -275,6 +288,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         mOldAutomatic = myState.oldAutomatic ? 1 : 0;
         setMode(myState.automatic ? 1 : 0);
         setBrightness(myState.progress, false);
+        mCurBrightness = myState.curBrightness;
     }
 
     private static class SavedState extends BaseSavedState {
@@ -283,6 +297,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         boolean oldAutomatic;
         int progress;
         int oldProgress;
+        int curBrightness;
 
         public SavedState(Parcel source) {
             super(source);
@@ -290,6 +305,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
             progress = source.readInt();
             oldAutomatic = source.readInt() == 1;
             oldProgress = source.readInt();
+            curBrightness = source.readInt();
         }
 
         @Override
@@ -299,6 +315,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
             dest.writeInt(progress);
             dest.writeInt(oldAutomatic ? 1 : 0);
             dest.writeInt(oldProgress);
+            dest.writeInt(curBrightness);
         }
 
         public SavedState(Parcelable superState) {
