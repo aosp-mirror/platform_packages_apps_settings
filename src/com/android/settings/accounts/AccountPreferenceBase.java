@@ -17,6 +17,7 @@
 package com.android.settings.accounts;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.accounts.OnAccountsUpdateListener;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncAdapterType;
@@ -38,6 +40,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 class AccountPreferenceBase extends SettingsPreferenceFragment
@@ -46,12 +49,12 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     protected static final String TAG = "AccountSettings";
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";
-    private Map<String, AuthenticatorDescription> mTypeToAuthDescription
-            = new HashMap<String, AuthenticatorDescription>();
-    protected AuthenticatorDescription[] mAuthDescs;
     private final Handler mHandler = new Handler();
     private Object mStatusChangeListenerHandle;
     private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
+    private AuthenticatorHelper mAuthenticatorHelper = new AuthenticatorHelper();
+    private java.text.DateFormat mDateFormat;
+    private java.text.DateFormat mTimeFormat;
 
     /**
      * Overload to handle account updates.
@@ -75,6 +78,16 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Activity activity = getActivity();
+
+        mDateFormat = DateFormat.getDateFormat(activity);
+        mTimeFormat = DateFormat.getTimeFormat(activity);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         mStatusChangeListenerHandle = ContentResolver.addStatusChangeListener(
@@ -90,7 +103,6 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
         super.onPause();
         ContentResolver.removeStatusChangeListener(mStatusChangeListenerHandle);
     }
-
 
     private SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
         public void onStatusChanged(int which) {
@@ -124,64 +136,21 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     }
 
     /**
-     * Gets an icon associated with a particular account type. If none found, return null.
-     * @param accountType the type of account
-     * @return a drawable for the icon or null if one cannot be found.
-     */
-    protected Drawable getDrawableForType(final String accountType) {
-        Drawable icon = null;
-        if (mTypeToAuthDescription.containsKey(accountType)) {
-            try {
-                AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = getActivity().createPackageContext(desc.packageName, 0);
-                icon = authContext.getResources().getDrawable(desc.iconId);
-            } catch (PackageManager.NameNotFoundException e) {
-                // TODO: place holder icon for missing account icons?
-                Log.w(TAG, "No icon name for account type " + accountType);
-            } catch (Resources.NotFoundException e) {
-                // TODO: place holder icon for missing account icons?
-                Log.w(TAG, "No icon resource for account type " + accountType);
-            }
-        }
-        return icon;
-    }
-
-    /**
-     * Gets the label associated with a particular account type. If none found, return null.
-     * @param accountType the type of account
-     * @return a CharSequence for the label or null if one cannot be found.
-     */
-    protected CharSequence getLabelForType(final String accountType) {
-        CharSequence label = null;
-        if (mTypeToAuthDescription.containsKey(accountType)) {
-            try {
-                AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = getActivity().createPackageContext(desc.packageName, 0);
-                label = authContext.getResources().getText(desc.labelId);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "No label name for account type " + accountType);
-            } catch (Resources.NotFoundException e) {
-                Log.w(TAG, "No label icon for account type " + accountType);
-            }
-        }
-        return label;
-    }
-
-    /**
      * Gets the preferences.xml file associated with a particular account type.
      * @param accountType the type of account
      * @return a PreferenceScreen inflated from accountPreferenceId.
      */
-    protected PreferenceScreen addPreferencesForType(final String accountType) {
+    public PreferenceScreen addPreferencesForType(final String accountType,
+            PreferenceScreen parent) {
         PreferenceScreen prefs = null;
-        if (mTypeToAuthDescription.containsKey(accountType)) {
+        if (mAuthenticatorHelper.containsAccountType(accountType)) {
             AuthenticatorDescription desc = null;
             try {
-                desc = mTypeToAuthDescription.get(accountType);
+                desc = mAuthenticatorHelper.getAccountTypeDescription(accountType);
                 if (desc != null && desc.accountPreferencesId != 0) {
                     Context authContext = getActivity().createPackageContext(desc.packageName, 0);
                     prefs = getPreferenceManager().inflateFromResource(authContext,
-                            desc.accountPreferencesId, getPreferenceScreen());
+                            desc.accountPreferencesId, parent);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
@@ -192,15 +161,21 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
         return prefs;
     }
 
-    /**
-     * Updates provider icons. Subclasses should call this in onCreate()
-     * and update any UI that depends on AuthenticatorDescriptions in onAuthDescriptionsUpdated().
-     */
-    protected void updateAuthDescriptions() {
-        mAuthDescs = AccountManager.get(getActivity()).getAuthenticatorTypes();
-        for (int i = 0; i < mAuthDescs.length; i++) {
-            mTypeToAuthDescription.put(mAuthDescs[i].type, mAuthDescs[i]);
-        }
+    public void updateAuthDescriptions() {
+        mAuthenticatorHelper.updateAuthDescriptions(getActivity());
         onAuthDescriptionsUpdated();
+    }
+
+    protected Drawable getDrawableForType(final String accountType) {
+        return mAuthenticatorHelper.getDrawableForType(getActivity(), accountType);
+    }
+
+    protected CharSequence getLabelForType(final String accountType) {
+        return mAuthenticatorHelper.getLabelForType(getActivity(), accountType);
+    }
+
+    protected String formatSyncDate(Date date) {
+        // TODO: Switch to using DateUtils.formatDateTime
+        return mDateFormat.format(date) + " " + mTimeFormat.format(date);
     }
 }

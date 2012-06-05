@@ -63,9 +63,9 @@ import java.util.List;
 public class AccountSyncSettings extends AccountPreferenceBase {
 
     public static final String ACCOUNT_KEY = "account";
-    protected static final int MENU_REMOVE_ACCOUNT_ID = Menu.FIRST;
-    private static final int MENU_SYNC_NOW_ID = Menu.FIRST + 1;
-    private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 2;
+    private static final int MENU_SYNC_NOW_ID       = Menu.FIRST;
+    private static final int MENU_SYNC_CANCEL_ID    = Menu.FIRST + 1;
+    private static final int MENU_REMOVE_ACCOUNT_ID = Menu.FIRST + 2;
     private static final int REALLY_REMOVE_DIALOG = 100;
     private static final int FAILED_REMOVAL_DIALOG = 101;
     private static final int CANT_DO_ONETIME_SYNC_DIALOG = 102;
@@ -73,8 +73,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private TextView mProviderId;
     private ImageView mProviderIcon;
     private TextView mErrorInfoView;
-    private java.text.DateFormat mDateFormat;
-    private java.text.DateFormat mTimeFormat;
     private Account mAccount;
     // List of all accounts, updated when accounts are added/removed
     // We need to re-scan the accounts on sync events, in case sync state changes.
@@ -172,11 +170,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final Activity activity = getActivity();
-
-        mDateFormat = DateFormat.getDateFormat(activity);
-        mTimeFormat = DateFormat.getTimeFormat(activity);
-
         Bundle arguments = getArguments();
         if (arguments == null) {
             Log.e(TAG, "No arguments provided when starting intent. ACCOUNT_KEY needed.");
@@ -228,17 +221,16 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
 
-        MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
-                                          getString(R.string.remove_account_label))
-                .setIcon(R.drawable.ic_menu_delete_holo_dark);
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
-                                          getString(R.string.sync_menu_sync_now))
+                getString(R.string.sync_menu_sync_now))
                 .setIcon(R.drawable.ic_menu_refresh_holo_dark);
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
-                                       getString(R.string.sync_menu_sync_cancel))
+                getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
+        MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
+                getString(R.string.remove_account_label))
+                .setIcon(R.drawable.ic_menu_delete_holo_dark);
 
         removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -246,6 +238,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -397,11 +391,14 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             }
 
             final long successEndTime = (status == null) ? 0 : status.lastSuccessTime;
-            if (successEndTime != 0) {
+            if (!syncEnabled) {
+                syncPref.setSummary(R.string.sync_disabled);
+            } else if (activelySyncing) {
+                syncPref.setSummary(R.string.sync_in_progress);
+            } else if (successEndTime != 0) {
                 date.setTime(successEndTime);
-                final String timeString = mDateFormat.format(date) + " "
-                        + mTimeFormat.format(date);
-                syncPref.setSummary(timeString);
+                final String timeString = formatSyncDate(date);
+                syncPref.setSummary(getResources().getString(R.string.last_synced, timeString));
             } else {
                 syncPref.setSummary("");
             }
@@ -501,25 +498,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         if (mAccount != null) {
             mProviderIcon.setImageDrawable(getDrawableForType(mAccount.type));
             mProviderId.setText(getLabelForType(mAccount.type));
-            PreferenceScreen prefs = addPreferencesForType(mAccount.type);
-            if (prefs != null) {
-                updatePreferenceIntents(prefs);
-            }
         }
         addPreferencesFromResource(R.xml.account_sync_settings);
     }
 
-    private void updatePreferenceIntents(PreferenceScreen prefs) {
-        for (int i = 0; i < prefs.getPreferenceCount(); i++) {
-            Intent intent = prefs.getPreference(i).getIntent();
-            if (intent != null) {
-                intent.putExtra(ACCOUNT_KEY, mAccount);
-                // This is somewhat of a hack. Since the preference screen we're accessing comes
-                // from another package, we need to modify the intent to launch it with
-                // FLAG_ACTIVITY_NEW_TASK.
-                // TODO: Do something smarter if we ever have PreferenceScreens of our own.
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-        }
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_accounts;
     }
 }
