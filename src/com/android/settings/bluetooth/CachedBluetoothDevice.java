@@ -507,6 +507,10 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                         .elapsedRealtime()) {
             connectWithoutResettingTimer(false);
         }
+        // On an incoming pairing, set all the available profiles as preferred.
+        for (LocalBluetoothProfile profile : mProfiles) {
+                profile.setPreferred(mDevice, true);
+        }
         dispatchAttributesChanged();
     }
 
