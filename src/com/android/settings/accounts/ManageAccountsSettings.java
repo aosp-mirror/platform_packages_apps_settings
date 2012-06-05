@@ -60,6 +60,7 @@ import java.util.HashSet;
 public class ManageAccountsSettings extends AccountPreferenceBase
         implements OnAccountsUpdateListener {
 
+    private static final String ACCOUNT_KEY = "account"; // to pass to auth settings
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ACCOUNT_LABEL = "account_label";
 
@@ -74,6 +75,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private SettingsDialogFragment mDialogFragment;
     // If an account type is set, then show only accounts of that type
     private String mAccountType;
+    // Temporary hack, to deal with backward compatibility 
+    private Account mFirstAccount;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -299,6 +302,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public void onAccountsUpdated(Account[] accounts) {
         if (getActivity() == null) return;
         getPreferenceScreen().removeAll();
+        mFirstAccount = null;
         addPreferencesFromResource(R.xml.manage_accounts_settings);
         for (int i = 0, n = accounts.length; i < n; i++) {
             final Account account = accounts[i];
@@ -322,6 +326,9 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 final AccountPreference preference =
                         new AccountPreference(getActivity(), account, icon, auths);
                 getPreferenceScreen().addPreference(preference);
+                if (mFirstAccount == null) {
+                    mFirstAccount = account;
+                }
             }
         }
         if (mAccountType != null) {
@@ -347,6 +354,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                     prefs.removePreference(prefs.getPreference(i));
                     continue;
                 } else {
+                    intent.putExtra(ACCOUNT_KEY, mFirstAccount);
                     intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
             }
