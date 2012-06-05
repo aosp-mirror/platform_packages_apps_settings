@@ -26,6 +26,9 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.wifi.WifiEnabler;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.OnAccountsUpdateListener;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -64,7 +67,8 @@ import java.util.List;
 /**
  * Top-level settings activity to handle single pane and double pane UI layout.
  */
-public class Settings extends PreferenceActivity implements ButtonBarHandler {
+public class Settings extends PreferenceActivity
+        implements ButtonBarHandler, OnAccountsUpdateListener {
 
     private static final String LOG_TAG = "Settings";
     private static final String META_DATA_KEY_HEADER_ID =
@@ -183,6 +187,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).resume();
+            AccountManager.get(this).addOnAccountsUpdatedListener(this, null, true);
         }
     }
 
@@ -193,6 +198,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).pause();
+            AccountManager.get(this).removeOnAccountsUpdatedListener(this);
         }
     }
 
@@ -709,6 +715,12 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
         // Ignore the adapter provided by PreferenceActivity and substitute ours instead
         super.setListAdapter(new HeaderAdapter(this, mHeaders, mAuthenticatorHelper));
+    }
+
+    @Override
+    public void onAccountsUpdated(Account[] accounts) {
+        mAuthenticatorHelper.onAccountsUpdated(this, accounts);
+        invalidateHeaders();
     }
 
     /*
