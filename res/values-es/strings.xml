@@ -480,7 +480,7 @@
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utilizar para audio de medio"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Utilizar para audio del teléfono"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Uso de la transferencia de archivos"</string>
-    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Usar para introducción"</string>
+    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Usar para entrada"</string>
     <string name="bluetooth_pan_profile_summary_use_for" msgid="5664884523822068653">"Usar para acceder a Internet"</string>
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Ajustes del conector"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Uso del conector para audio"</string>
@@ -663,7 +663,8 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reproducir sonido al insertar o extraer el teléfono del conector"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"No reproducir sonido al insertar o extraer el tablet del conector"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"No reproducir sonido al insertar o extraer el teléfono del conector"</string>
-    <string name="sync_settings" msgid="9186125469300013491">"Cuentas y sincronización"</string>
+    <!-- no translation found for account_settings (6403589284618783461) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"Búsqueda"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrar historial y configuración de búsqueda"</string>
     <string name="display_settings" msgid="7965901687241669598">"Pantalla"</string>
@@ -1083,8 +1084,8 @@
     <string name="service_started_by_app" msgid="818675099014723551">"Iniciado por aplicación"</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <string name="service_background_processes" msgid="6844156253576174488">"Libre: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
-    <string name="service_foreground_processes" msgid="7583975676795574276">"Uso: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> libre"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> usado"</string>
     <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
@@ -1111,7 +1112,7 @@
     <string name="language_settings" msgid="5292716747264442359">"Idioma y entrada de texto"</string>
     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Idioma y entrada de texto"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Ajustes de idioma"</string>
-    <string name="keyboard_settings_category" msgid="8275523930352487827">"Teclado y métodos de introducción"</string>
+    <string name="keyboard_settings_category" msgid="8275523930352487827">"Teclado y métodos de entrada"</string>
     <string name="phone_language" msgid="8870144109924299673">"Idioma"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Corrección automática"</string>
@@ -1123,7 +1124,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Pulsa la barra espaciadora dos veces para insertar el carácter \".\""</string>
     <string name="show_password" msgid="3001113966880559611">"Mostrar las contraseñas"</string>
     <string name="show_password_summary" msgid="7345931695292850058"></string>
-    <string name="ime_security_warning" msgid="4135828934735934248">"Este método de introducción puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este método de introducción?"</string>
+    <string name="ime_security_warning" msgid="4135828934735934248">"Este método de entrada puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este método de entrada?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Este corrector ortográfico puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este corrector ortográfico?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Ajustes"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Idioma"</string>
@@ -1172,20 +1173,20 @@
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"Cancelar"</string>
     <string name="quick_launch_display_mode_applications" msgid="1734058461846126775">"Aplicaciones"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Accesos directos"</string>
-    <string name="input_methods_settings_title" msgid="6800066636850553887">"Introducción de texto"</string>
-    <string name="input_method" msgid="5434026103176856164">"Introducción de texto"</string>
+    <string name="input_methods_settings_title" msgid="6800066636850553887">"Entrada de texto"</string>
+    <string name="input_method" msgid="5434026103176856164">"Entrada de texto"</string>
     <string name="current_input_method" msgid="234072873286056438">"Predeterminado"</string>
-    <string name="input_method_selector" msgid="4311213129681430709">"Selector de método de introducción"</string>
+    <string name="input_method_selector" msgid="4311213129681430709">"Selector de método de entrada"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automáticamente"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Mostrar siempre"</string>
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"Ocultar siempre"</string>
-    <string name="configure_input_method" msgid="1317429869771850228">"Configurar métodos de introducción"</string>
+    <string name="configure_input_method" msgid="1317429869771850228">"Configurar métodos de entrada"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"Configuración"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Ajustes"</string>
-    <string name="active_input_method_subtypes" msgid="3596398805424733238">"Métodos de introducción activos"</string>
+    <string name="active_input_method_subtypes" msgid="3596398805424733238">"Métodos de entrada activos"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"Usar idioma del sistema"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Ajustes de <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
-    <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Seleccionar métodos introducción activos"</string>
+    <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Elegir métodos entrada activos"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Ajustes de teclado en pantalla"</string>
     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Teclado físico"</string>
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Ajustes del teclado físico"</string>
@@ -1463,7 +1464,8 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Error de sincronización"</string>
     <string name="sync_failed" msgid="1696499856374109647">"Error de sincronización"</string>
     <string name="sync_active" msgid="8476943765960863040">"Sincronización activa"</string>
-    <string name="account_sync_settings_title" msgid="4578227872921044660">"Ajustes de sincronización"</string>
+    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
+    <skip />
     <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay incidencias con la sincronización. Se restablecerá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Añadir cuenta"</string>
     <string name="background_data" msgid="5779592891375473817">"Datos de referencia"</string>
@@ -1474,6 +1476,10 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Sincronización activa"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"La sincronización está desactivada"</string>
     <string name="sync_error" msgid="5060969083117872149">"Error de sincronización"</string>
+    <!-- no translation found for last_synced (4242919465367022234) -->
+    <skip />
+    <!-- no translation found for sync_in_progress (5151314196536070569) -->
+    <skip />
     <string name="settings_backup" msgid="2274732978260797031">"Hacer copia de seguridad de configuración"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Hacer copia de seguridad de mi configuración"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sincronizar ahora"</string>
@@ -1497,7 +1503,8 @@
     <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"Algunas aplicaciones necesitan esta cuenta. Para eliminarla, debes restablecer los valores de fábrica del tablet (esta acción elimina todos tus datos personales). Para ello, accede a Ajustes &gt; Copia de seguridad."</string>
     <string name="remove_account_failed" product="default" msgid="6217238709175617517">"Algunas aplicaciones necesitan esta cuenta. Para eliminarla debes restablecer los valores de fábrica del teléfono (esta acción elimina todos tus datos personales). Para ello, accede a Ajustes &gt; Copia de seguridad."</string>
     <string name="provider_label" msgid="7724593781904508866">"Enviar suscripciones"</string>
-    <string name="sync_item_title" msgid="1931551540462877488">"Sincronizar <xliff:g id="AUTHORITY">%s</xliff:g>"</string>
+    <!-- no translation found for sync_item_title (4782834606909853006) -->
+    <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"No se puede hacer la sincronización de forma manual."</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento no está disponible en este momento. Para modificar tu preferencia, activa temporalmente los datos de referencia y la sincronización automática."</string>
     <string name="wimax_settings" msgid="1574837328738396794">"Ajustes de 4G"</string>
@@ -1565,6 +1572,8 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostrar uso de Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar uso de Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"Puntos de acceso móviles"</string>
+    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
+    <skip />
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Día del mes para restablecer ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación ha usado datos en este período."</string>
@@ -1593,6 +1602,16 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir datos de referencia?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo haya disponibles redes móviles."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo puedes restringir los datos de referencia si estableces un límite de datos móviles."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
+    <skip />
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Elige el día en el que empezará cada ciclo"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Día de cada mes:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Establecer"</string>
