@@ -178,6 +178,7 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
     private static final String TAG_DENIED_RESTRICT = "deniedRestrict";
     private static final String TAG_CONFIRM_APP_RESTRICT = "confirmAppRestrict";
+    private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";
     private static final String TAG_APP_DETAILS = "appDetails";
 
     private static final int LOADER_CHART_DATA = 2;
@@ -251,6 +252,7 @@ public class DataUsageSummary extends Fragment {
 
     private MenuItem mMenuDataRoaming;
     private MenuItem mMenuRestrictBackground;
+    private MenuItem mMenuAutoSync;
 
     /** Flag used to ignore listeners during binding. */
     private boolean mBinding;
@@ -453,6 +455,9 @@ public class DataUsageSummary extends Fragment {
         mMenuRestrictBackground.setVisible(hasReadyMobileRadio(context) && !appDetailMode);
         mMenuRestrictBackground.setChecked(mPolicyManager.getRestrictBackground());
 
+        mMenuAutoSync = menu.findItem(R.id.data_usage_menu_auto_sync);
+        mMenuAutoSync.setChecked(ContentResolver.getMasterSyncAutomatically());
+
         final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
         split4g.setVisible(hasReadyMobile4gRadio(context) && !appDetailMode);
         split4g.setChecked(isMobilePolicySplit());
@@ -541,6 +546,10 @@ public class DataUsageSummary extends Fragment {
                 final PreferenceActivity activity = (PreferenceActivity) getActivity();
                 activity.startPreferencePanel(DataUsageMeteredSettings.class.getCanonicalName(), null,
                         R.string.data_usage_metered_title, null, this, 0);
+                return true;
+            }
+            case R.id.data_usage_menu_auto_sync: {
+                ConfirmAutoSyncChangeFragment.show(this, !item.isChecked());
                 return true;
             }
         }
@@ -2014,6 +2023,46 @@ public class DataUsageSummary extends Fragment {
                     if (target != null) {
                         target.setAppRestrictBackground(true);
                     }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Dialog to inform user about changing auto-sync setting
+     */
+    public static class ConfirmAutoSyncChangeFragment extends DialogFragment {
+        private boolean mEnabling;
+
+        public static void show(DataUsageSummary parent, boolean enabling) {
+            if (!parent.isAdded()) return;
+
+            final ConfirmAutoSyncChangeFragment dialog = new ConfirmAutoSyncChangeFragment();
+            dialog.mEnabling = enabling;
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_AUTO_SYNC_CHANGE);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            if (!mEnabling) {
+                builder.setTitle(R.string.data_usage_auto_sync_off_dialog_title);
+                builder.setMessage(R.string.data_usage_auto_sync_off_dialog);
+            } else {
+                builder.setTitle(R.string.data_usage_auto_sync_on_dialog_title);
+                builder.setMessage(R.string.data_usage_auto_sync_on_dialog);
+            }
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ContentResolver.setMasterSyncAutomatically(mEnabling);
                 }
             });
             builder.setNegativeButton(android.R.string.cancel, null);
