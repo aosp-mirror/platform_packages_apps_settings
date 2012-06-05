@@ -512,10 +512,8 @@
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Verkkoja ei voi etsiä."</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Verkkoilmoitus"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Ilmoita, kun avoin verkko on käytettävissä"</string>
-    <!-- no translation found for wifi_poor_network_detection (4925789238170207169) -->
-    <skip />
-    <!-- no translation found for wifi_poor_network_detection_summary (2466956369738047669) -->
-    <skip />
+    <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Vältä huonoja yhteyksiä"</string>
+    <string name="wifi_poor_network_detection_summary" msgid="2466956369738047669">"Älä käytä wifi-verkkoa, jos sillä on huono internetyhteys."</string>
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Wifi käytössä lepotilassa"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Asetuksen vaihtaminen epäonnistui"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Lisää verkko"</string>
@@ -665,7 +663,8 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Toista ääni, kun puhelinta liitetään telakkaan tai irrotetaan telakasta"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Älä toista ääntä, kun tablet-laite asetetaan telakkaan tai poistetaan telakasta"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Älä toista ääntä, kun puhelinta liitetään telakkaan tai irrotetaan telakasta"</string>
-    <string name="sync_settings" msgid="9186125469300013491">"Tilit ja synkronointi"</string>
+    <!-- no translation found for account_settings (6403589284618783461) -->
+    <skip />
     <string name="search_settings" msgid="1910951467596035063">"Haku"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Hallinnoi hakuasetuksia ja historiaa"</string>
     <string name="display_settings" msgid="7965901687241669598">"Ruutu"</string>
@@ -980,8 +979,7 @@
     <string name="applications_settings_summary" msgid="6683465446264515367">"Hallinnoi sovelluksia, ota käyttöön pikakuvakkeita"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"Sovellusasetukset"</string>
     <string name="install_applications" msgid="4872012136210802181">"Tuntemattomat lähteet"</string>
-    <!-- no translation found for install_unknown_applications (176855644862942064) -->
-    <skip />
+    <string name="install_unknown_applications" msgid="176855644862942064">"Salli tuntemattomista lähteistä tulevien sovelluksien asentaminen"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Tablet-laite ja henkilötiedot ovat alttiimpia tuntemattomista lähteistä tulevien sovelluksien kautta tapahtuville hyökkäyksille. Hyväksyt, että olet itse vastuussa mahdollisista tablet-laitteelle aiheutuvista vahingoista tai tietojen menetyksestä, joka voi johtua näiden sovelluksien käytöstä."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Puhelimesi ja henkilötiedot ovat alttiimpia tuntemattomista lähteistä tulevien sovelluksien kautta tapahtuville hyökkäyksille. Hyväksyt, että olet itse vastuussa mahdollisista puhelimelle aiheutuvista vahingoista tai tietojen menetyksestä, joka voi johtua näiden sovelluksien käytöstä."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Lisäasetukset"</string>
@@ -1466,7 +1464,8 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Synkronointivirhe."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Synkronointi epäonnistui"</string>
     <string name="sync_active" msgid="8476943765960863040">"Synkronointi käytössä"</string>
-    <string name="account_sync_settings_title" msgid="4578227872921044660">"Synkronointiasetukset"</string>
+    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
+    <skip />
     <string name="sync_is_failing" msgid="1591561768344128377">"Synkronoinnissa on tällä hetkellä ongelmia. Palvelu palaa käyttöön hetken kuluttua."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Lisää tili"</string>
     <string name="background_data" msgid="5779592891375473817">"Taustatiedot"</string>
@@ -1477,6 +1476,10 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Synkronointi on käytössä"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synkronointi ei käyt."</string>
     <string name="sync_error" msgid="5060969083117872149">"Synkronointivirhe"</string>
+    <!-- no translation found for last_synced (4242919465367022234) -->
+    <skip />
+    <!-- no translation found for sync_in_progress (5151314196536070569) -->
+    <skip />
     <string name="settings_backup" msgid="2274732978260797031">"Varmuuskopioi asetukset"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Varmuuskopioi asetukseni"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Synkronoi nyt"</string>
@@ -1500,7 +1503,8 @@
     <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"Jotkut sovellukset käyttävät tätä tiliä. Voit poistaa tilin vain palauttamalla tablet-laitteeseen tehdasasetukset (tällöin kaikki henkilökohtaistet tietosi poistetaan) kohdassa Asetukset &gt; Varmuuskopiointi &amp; palautus."</string>
     <string name="remove_account_failed" product="default" msgid="6217238709175617517">"Jotkut sovellukset käyttävät tätä tiliä. Voit poistaa tilin vain palauttamalla puhelimeen tehdasasetukset (tällöin kaikki henkilökohtaistet tietosi poistetaan) kohdassa Asetukset &gt; Varmuuskopiointi &amp; palautus."</string>
     <string name="provider_label" msgid="7724593781904508866">"Push-tilaukset"</string>
-    <string name="sync_item_title" msgid="1931551540462877488">"Synkronoi <xliff:g id="AUTHORITY">%s</xliff:g>"</string>
+    <!-- no translation found for sync_item_title (4782834606909853006) -->
+    <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Manuaalinen synkronointi epäonnistui"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Tämän kohteen synkronointi on tällä hetkellä pois käytöstä. Voit muuttaa asetuksia ottamalla taustatiedot ja automaattisen synkronoinnin väliaikaisesti käyttöön."</string>
     <string name="wimax_settings" msgid="1574837328738396794">"4G-asetukset"</string>
@@ -1568,6 +1572,8 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Näytä wifi-tiedonsiirto"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Näytä Ethernet-käyttö"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"Mobiiliyhteyden hotspotit"</string>
+    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
+    <skip />
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Muuta jaksoa…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Tiedonsiirtojakson nollauspäivä (kk):"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Sovellukset eivät käyttäneet tiedonsiirtoa."</string>
@@ -1596,6 +1602,16 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Rajoitetaanko taustatiedonsiirtoa?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Toiminto saattaa estää taustatiedonsiirrosta riippuvaisten sovellusten toiminnan, jos käytettävissä on vain mobiiliverkkoja."\n\n"Voit säätää tiedonsiirron asetuksia tarkemmin sovelluksessa."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Taustatiedonsiirron rajoittaminen on mahdollista vain, jos olet asettanut mobiilitiedonsiirtorajan."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
+    <skip />
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Käyttöjakson nollauspäivä"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Kuukauden päivä:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Aseta"</string>
