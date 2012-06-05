@@ -1652,8 +1652,8 @@
     <!-- Sound settings screen, setting option summary text when check box is clear -->
     <string name="dock_sounds_enable_summary_off" product="default">Don\'t play sound when inserting or removing phone from dock</string>
 
-    <!-- Acounts & Sync settings screen setting title. This screen will list the different accounts (mail, gmail...) used on that phone and their sync settings -->
-    <string name="sync_settings">Accounts &amp; sync</string>
+    <!-- Account settings header. [CHAR LIMIT=30] -->
+    <string name="account_settings">Accounts</string>
 
     <!-- Main Settings screen, setting option name to go into search settings -->
     <string name="search_settings">Search</string>
@@ -3519,7 +3519,7 @@
     <string name="sync_active">Sync active</string>
 
     <!-- Account specific sync settings title [CHAR LIMIT=35] -->
-    <string name="account_sync_settings_title">Sync settings</string>
+    <string name="account_sync_settings_title">Sync</string>
     <!-- Message when sync is currently failing [CHAR LIMIT=100] -->
     <string name="sync_is_failing">Sync is currently experiencing problems. It will be back shortly.</string>
     <!-- Button label to add an account [CHAR LIMIT=20] -->
@@ -3542,6 +3542,10 @@
     <string name="sync_disabled">Sync is OFF</string>
     <!-- Sync status shown when last sync resulted in an error [CHAR LIMIT=25] -->
     <string name="sync_error">Sync error</string>
+    <!-- Last synced date/time for accounts that synced [CHAR LIMIT=none] -->
+    <string name="last_synced">Last synced <xliff:g id="last_sync_time">%1$s</xliff:g></string>
+    <!-- Sync status shown when sync is disabled [CHAR LIMIT=30] -->
+    <string name="sync_in_progress">Syncing now\u2026</string>
 
     <!-- Data synchronization settings screen, setting option name -->
     <string name="settings_backup">Back up settings</string>
@@ -3592,7 +3596,7 @@
     <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
     <string name="provider_label">Push subscriptions</string>
     <!-- Formatter in AccountSyncSettings for each application we wish to synchronize, e.g. "Sync Calendar" -->
-    <string name="sync_item_title">Sync <xliff:g id="authority" example="Calendar">%s</xliff:g></string>
+    <string name="sync_item_title"><xliff:g id="authority" example="Calendar">%s</xliff:g></string>
     <!-- Title of dialog shown when you can't manually sync an item because it's disabled -->
     <string name="cant_sync_dialog_title">Can\'t manually sync</string>
     <!-- Messaage shown in dialog when you can't manually sync -->
@@ -3759,6 +3763,8 @@
     <string name="data_usage_menu_show_ethernet">Show Ethernet usage</string>
     <!-- Title for menu option to configure metered networks. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_metered">Mobile hotspots</string>
+    <!--  Title for menu option to enable global auto-sync of account data -->
+    <string name="data_usage_menu_auto_sync">Auto-sync data</string>
 
     <!-- Title for option to change data usage cycle day. [CHAR LIMIT=32] -->
     <string name="data_usage_change_cycle">Change cycle\u2026</string>
@@ -3822,6 +3828,16 @@
     <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
     <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
     <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\'ve set a mobile data limit.</string>
+    <!--  Title of dialog shown when user enables global auto sync [CHAR LIMIT=32] -->
+    <string name="data_usage_auto_sync_on_dialog_title">Turn auto-sync data on?</string>
+    <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
+    <string name="data_usage_auto_sync_on_dialog" product="tablet">Any changes you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes you make on the tablet to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts.</string>
+    <!--  Body of dialog shown when user enables global auto sync [CHAR LIMIT=none] -->
+    <string name="data_usage_auto_sync_on_dialog" product="default">Any changes you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes you make on the phone to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts.</string>
+    <!--  Title of dialog shown when user disables global auto sync [CHAR LIMIT=32] -->
+    <string name="data_usage_auto_sync_off_dialog_title">Turn auto-sync data off?</string>
+    <!--  Body of dialog shown when user disables global auto sync [CHAR LIMIT=none] -->
+    <string name="data_usage_auto_sync_off_dialog">This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information. And you won\'t receive notifications when updates occur.</string>
 
     <!-- Title of dialog for editing data usage cycle reset date. [CHAR LIMIT=48] -->
     <string name="data_usage_cycle_editor_title">Usage cycle reset date</string>

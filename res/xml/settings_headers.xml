@@ -113,15 +113,6 @@
         android:title="@string/user_settings_title"
         android:id="@+id/user_settings" />
 
-    <!-- Data Sync. The settings activity will ensure this is resolved to an
-         activity on the system image, otherwise it will remove this
-         preference. -->
-    <header
-        android:fragment="com.android.settings.accounts.ManageAccountsSettings"
-        android:icon="@drawable/ic_settings_sync"
-        android:title="@string/sync_settings"
-        android:id="@+id/sync_settings" />
-
     <!-- Location -->
     <header
         android:fragment="com.android.settings.LocationSettings"
@@ -150,6 +141,18 @@
         android:title="@string/privacy_settings"
         android:id="@+id/privacy_settings" />
 
+    <!--  ACCOUNTS section -->
+    <header
+            android:id="@+id/account_settings"
+            android:title="@string/account_settings" />
+
+    <header
+            android:id="@+id/account_add"
+            android:title="@string/add_account_label"
+            android:icon="@drawable/ic_menu_add">
+        <intent
+            android:action="android.settings.ADD_ACCOUNT_SETTINGS"/>
+    </header>
 
     <!-- SYSTEM -->
     <header android:title="@string/header_category_system" />
