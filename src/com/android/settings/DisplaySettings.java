@@ -24,11 +24,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -36,9 +33,8 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
-import android.view.IWindowManager;
-import android.view.Surface;
 
+import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
 
 import java.util.ArrayList;
@@ -65,9 +61,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
 
-    private ContentObserver mAccelerometerRotationObserver = new ContentObserver(new Handler()) {
+    private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
+            new RotationPolicy.RotationPolicyListener() {
         @Override
-        public void onChange(boolean selfChange) {
+        public void onChange() {
             updateAccelerometerRotationCheckbox();
         }
     };
@@ -81,6 +78,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
+        if (RotationPolicy.isRotationLockToggleSupported(getActivity())) {
+            // If rotation lock is supported, then we do not provide this option in
+            // Display settings.  However, is still available in Accessibility settings.
+            getPreferenceScreen().removePreference(mAccelerometer);
+        }
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
@@ -210,16 +212,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         updateState();
-        getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
-                mAccelerometerRotationObserver);
+
+        RotationPolicy.registerRotationPolicyListener(getActivity(),
+                mRotationPolicyListener);
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
-        getContentResolver().unregisterContentObserver(mAccelerometerRotationObserver);
+        RotationPolicy.unregisterRotationPolicyListener(getActivity(),
+                mRotationPolicyListener);
     }
 
     private void updateState() {
@@ -237,9 +240,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private void updateAccelerometerRotationCheckbox() {
         if (getActivity() == null) return;
-        mAccelerometer.setChecked(Settings.System.getInt(
-                getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
+
+        mAccelerometer.setChecked(!RotationPolicy.isRotationLocked(getActivity()));
     }
 
     public void writeFontSizePreference(Object objValue) {
@@ -254,17 +256,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mAccelerometer) {
-            try {
-                IWindowManager wm = IWindowManager.Stub.asInterface(
-                        ServiceManager.getService(Context.WINDOW_SERVICE));
-                if (mAccelerometer.isChecked()) {
-                    wm.thawRotation();
-                } else {
-                    wm.freezeRotation(Surface.ROTATION_0);
-                }
-            } catch (RemoteException exc) {
-                Log.w(TAG, "Unable to save auto-rotate setting");
-            }
+            RotationPolicy.setRotationLockForAccessibility(
+                    getActivity(), !mAccelerometer.isChecked());
         } else if (preference == mNotificationPulse) {
             boolean value = mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
