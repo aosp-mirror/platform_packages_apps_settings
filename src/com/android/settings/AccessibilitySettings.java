@@ -36,7 +36,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -45,18 +44,14 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.IWindowManager;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Surface;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -65,6 +60,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
+import com.android.internal.view.RotationPolicy;
 import com.android.settings.AccessibilitySettings.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 import java.util.HashMap;
@@ -78,8 +74,6 @@ import java.util.Set;
  */
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "AccessibilitySettings";
-
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
@@ -151,22 +145,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     };
 
-    private final Uri mLockScreenRotationUri = Uri.withAppendedPath(Settings.System.CONTENT_URI,
-            Settings.System.ACCELEROMETER_ROTATION);
-
-    private final ContentObserver mSettingsContentObserver = new ContentObserver(mHandler) {
+    private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
+            new RotationPolicy.RotationPolicyListener() {
         @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            if (mLockScreenRotationUri.equals(uri)) {
-                try {
-                    final boolean lockRotationEnabled = (Settings.System.getInt(
-                            getActivity().getContentResolver(),
-                            Settings.System.ACCELEROMETER_ROTATION) == 0);
-                    mToggleLockScreenRotationPreference.setChecked(lockRotationEnabled);
-                } catch (SettingNotFoundException e) {
-                    /* ignore */
-                }
-            }
+        public void onChange() {
+            updateLockScreenRotationCheckbox();
         }
     };
 
@@ -200,14 +183,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             offerInstallAccessibilitySerivceOnce();
         }
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
-        getActivity().getContentResolver().registerContentObserver(mLockScreenRotationUri, false,
-                mSettingsContentObserver);
+        RotationPolicy.registerRotationPolicyListener(getActivity(),
+                mRotationPolicyListener);
     }
 
     @Override
     public void onPause() {
         mSettingsPackageMonitor.unregister();
-        getContentResolver().unregisterContentObserver(mSettingsContentObserver);
+        RotationPolicy.unregisterRotationPolicyListener(getActivity(),
+                mRotationPolicyListener);
         super.onPause();
     }
 
@@ -258,17 +242,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void handleLockScreenRotationPreferenceClick() {
-        try {
-            IWindowManager wm = IWindowManager.Stub.asInterface(
-                    ServiceManager.getService(Context.WINDOW_SERVICE));
-            if (!mToggleLockScreenRotationPreference.isChecked()) {
-                wm.thawRotation();
-            } else {
-                wm.freezeRotation(Surface.ROTATION_0);
-            }
-        } catch (RemoteException exc) {
-            Log.w(TAG, "Unable to save auto-rotate setting");
-        }
+        RotationPolicy.setRotationLockForAccessibility(getActivity(),
+                !mToggleLockScreenRotationPreference.isChecked());
     }
 
     private void handleToggleSpeakPasswordPreferenceClick() {
@@ -453,9 +428,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
 
         // Auto-rotate screen
-        final boolean lockRotationEnabled = Settings.System.getInt(getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION, 0) != 1;
-        mToggleLockScreenRotationPreference.setChecked(lockRotationEnabled);
+        updateLockScreenRotationCheckbox();
 
         // Speak passwords.
         final boolean speakPasswordEnabled = Settings.Secure.getInt(getContentResolver(),
@@ -473,6 +446,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         final boolean  scriptInjectionAllowed = (Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0) == 1);
         mToggleScriptInjectionPreference.setInjectionAllowed(scriptInjectionAllowed);
+    }
+
+    private void updateLockScreenRotationCheckbox() {
+        mToggleLockScreenRotationPreference.setChecked(
+                !RotationPolicy.isRotationLocked(getActivity()));
     }
 
     private void offerInstallAccessibilitySerivceOnce() {
