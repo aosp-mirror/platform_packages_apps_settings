@@ -55,7 +55,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
 
-    private CheckBoxPreference mRotationLock;
+    private CheckBoxPreference mAccelerometer;
     private ListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
 
@@ -67,7 +67,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ContentObserver mAccelerometerRotationObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
-            updateRotationLockCheckbox();
+            updateAccelerometerRotationCheckbox();
         }
     };
 
@@ -78,8 +78,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.display_settings);
 
-        mRotationLock = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
-        mRotationLock.setPersistent(false);
+        mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
+        mAccelerometer.setPersistent(false);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
@@ -222,7 +222,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateState() {
-        updateRotationLockCheckbox();
+        updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
     }
@@ -234,11 +234,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 : R.string.screensaver_settings_summary_off);
     }
 
-    private void updateRotationLockCheckbox() {
+    private void updateAccelerometerRotationCheckbox() {
         if (getActivity() == null) return;
-        mRotationLock.setChecked(Settings.System.getInt(
+        mAccelerometer.setChecked(Settings.System.getInt(
                 getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION, 0) == 0);
+                Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
     public void writeFontSizePreference(Object objValue) {
@@ -252,11 +252,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mRotationLock) {
+        if (preference == mAccelerometer) {
             try {
                 IWindowManager wm = IWindowManager.Stub.asInterface(
                         ServiceManager.getService(Context.WINDOW_SERVICE));
-                if (!mRotationLock.isChecked()) {
+                if (mAccelerometer.isChecked()) {
                     wm.thawRotation();
                 } else {
                     wm.freezeRotation(-1);
