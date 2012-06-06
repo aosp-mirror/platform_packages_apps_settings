@@ -160,7 +160,7 @@
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"Zariadenie %1$s žiada o prístup k vašim kontaktom a histórii hovorov. Povoliť zariadeniu %2$s prístup?"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Nabudúce sa nepýtať"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Nastavenia dátumu a času"</string>
-    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
+    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pop."</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Zvoľte časové pásmo"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Miestne nastavenie (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -291,13 +291,10 @@
     <string name="date_picker_title" msgid="1338210036394128512">"Dátum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Zlepšiť priraďovanie tvárí"</string>
-    <!-- no translation found for biometric_weak_liveliness_title (2661613702124561096) -->
-    <skip />
-    <!-- no translation found for biometric_weak_liveliness_on_summary (3894889144189386005) -->
-    <skip />
+    <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Kontrola živosti"</string>
+    <string name="biometric_weak_liveliness_on_summary" msgid="3894889144189386005">"Zapnuté – odomknutie vyžaduje pootočenie hlavou"</string>
     <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Vypnuté"</string>
-    <!-- no translation found for biometric_weak_liveliness_explained (8855501413521583415) -->
-    <skip />
+    <string name="biometric_weak_liveliness_explained" product="default" msgid="8855501413521583415">"Z bezpečnostných dôvodov vás systém vyzve, aby ste pri odomykaní pootočili hlavou. Na pokyn pootočte hlavou doľava alebo doprava."</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky uzamknúť"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po režime spánku"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovať vlastníka na uzamknutej obrazovke"</string>
@@ -419,7 +416,7 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Správa pripojenia, nastavenie názvu zariadenia a viditeľnosti"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Žiadosť o párovanie zariadenia Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Ak chcete svoje zariadenie spárovať so zariadením <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, zadajte tento kód PIN požadovaný zariadením:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Ak chcete svoje zariadenie spárovať so zariadením <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, zadajte kód PIN požadovaný zariadením:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Ak chcete svoje zariadenie spárovať so zariadením <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, zadajte tento prístupový kľúč vyžadovaný zariadením:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Kód PIN obsahuje písmená alebo symboly"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Obvykle 0000 alebo 1234"</string>
@@ -668,7 +665,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Hľadať"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Správa nastavení a histórie vyhľadávaní"</string>
     <string name="display_settings" msgid="7965901687241669598">"Zobrazenie"</string>
-    <string name="accelerometer_title" msgid="4930458565568936210">"Uzamknutie otáčania"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Automatické otočenie obrazovky"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Pri otáčaní tabletu automaticky prepínať orientáciu"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Pri otáčaní telefónu automaticky prepínať orientáciu"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Pri otáčaní tabletu automaticky prepínať orientáciu"</string>
@@ -1084,7 +1081,7 @@
     <string name="service_started_by_app" msgid="818675099014723551">"Spustené aplikáciou."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> voľná"</string>
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> voľnej"</string>
     <string name="service_foreground_processes" msgid="7583975676795574276">"Využité: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
