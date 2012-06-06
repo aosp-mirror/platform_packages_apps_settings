@@ -62,6 +62,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
+    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -76,7 +77,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
 
-    private PreferenceScreen mBiometricWeakLiveliness;
+    private CheckBoxPreference mBiometricWeakLiveliness;
     private CheckBoxPreference mVisiblePattern;
     private CheckBoxPreference mTactileFeedback;
 
@@ -162,7 +163,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // biometric weak liveliness
         mBiometricWeakLiveliness =
-                (PreferenceScreen) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
+                (CheckBoxPreference) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
 
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
@@ -338,9 +339,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (mBiometricWeakLiveliness != null) {
-            mBiometricWeakLiveliness.setSummary(lockPatternUtils.isBiometricWeakLivelinessEnabled()?
-                    R.string.biometric_weak_liveliness_on_summary:
-                    R.string.biometric_weak_liveliness_off_summary);
+            mBiometricWeakLiveliness.setChecked(
+                    lockPatternUtils.isBiometricWeakLivelinessEnabled());
         }
         if (mVisiblePattern != null) {
             mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
@@ -382,6 +382,26 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 // can't be reached, but is here in case things change in the future
                 startBiometricWeakImprove();
             }
+        } else if (KEY_BIOMETRIC_WEAK_LIVELINESS.equals(key)) {
+            if (isToggled(preference)) {
+                lockPatternUtils.setBiometricWeakLivelinessEnabled(true);
+            } else {
+                // In this case the user has just unchecked the checkbox, but this action requires
+                // them to confirm their password.  We need to re-check the checkbox until
+                // they've confirmed their password
+                mBiometricWeakLiveliness.setChecked(true);
+                ChooseLockSettingsHelper helper =
+                        new ChooseLockSettingsHelper(this.getActivity(), this);
+                if (!helper.launchConfirmationActivity(
+                                CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF, null, null)) {
+                    // If this returns false, it means no password confirmation is required, so
+                    // go ahead and uncheck it here.
+                    // Note: currently a backup is required for biometric_weak so this code path
+                    // can't be reached, but is here in case things change in the future
+                    lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
+                    mBiometricWeakLiveliness.setChecked(false);
+                }
+            }
         } else if (KEY_LOCK_ENABLED.equals(key)) {
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
@@ -421,6 +441,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST &&
                 resultCode == Activity.RESULT_OK) {
             startBiometricWeakImprove();
+            return;
+        } else if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF &&
+                resultCode == Activity.RESULT_OK) {
+            final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+            lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
+            mBiometricWeakLiveliness.setChecked(false);
             return;
         }
         createPreferenceHierarchy();
