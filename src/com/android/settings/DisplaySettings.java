@@ -37,6 +37,7 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 import android.view.IWindowManager;
+import android.view.Surface;
 
 import com.android.settings.DreamSettings;
 
@@ -259,7 +260,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 if (mAccelerometer.isChecked()) {
                     wm.thawRotation();
                 } else {
-                    wm.freezeRotation(-1);
+                    wm.freezeRotation(Surface.ROTATION_0);
                 }
             } catch (RemoteException exc) {
                 Log.w(TAG, "Unable to save auto-rotate setting");
