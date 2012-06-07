@@ -147,8 +147,6 @@ public class WifiSettings extends SettingsPreferenceFragment
     // this boolean extra is set if we are being invoked by the Setup Wizard
     private static final String EXTRA_IS_FIRST_RUN = "firstRun";
 
-    private static final String EXTRA_WIFI_DISABLE_BACK = "wifi_disable_back";
-
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
 
@@ -322,9 +320,13 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.wifi_settings);
 
-        // Back key is disabled if requested
-        if (intent.getBooleanExtra(EXTRA_WIFI_DISABLE_BACK, false)) {
-            getView().setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        if (mSetupWizardMode) {
+            getView().setSystemUiVisibility(
+                    View.STATUS_BAR_DISABLE_BACK |
+                    View.STATUS_BAR_DISABLE_HOME |
+                    View.STATUS_BAR_DISABLE_RECENT |
+                    View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
+                    View.STATUS_BAR_DISABLE_CLOCK);
         }
 
         // On/off switch is hidden for Setup Wizard
