@@ -1366,6 +1366,7 @@
 
         <activity android:name="Settings$AccountSyncSettingsActivity"
             android:label="@string/account_sync_settings_title"
+            android:parentActivityName="Settings"
             android:uiOptions="none">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1376,6 +1377,16 @@
                 android:value="com.android.settings.accounts.AccountSyncSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/account_settings" />
+        </activity>
+
+        <activity android:name=".accounts.SyncSettingsActivity"
+            android:label="@string/account_sync_settings_title"
+            android:theme="@android:style/Theme.Holo.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.SYNC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name="com.android.settings.accounts.AddAccountSettings"
@@ -1441,7 +1452,6 @@
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>

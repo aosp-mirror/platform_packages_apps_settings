@@ -112,6 +112,7 @@ public class Settings extends PreferenceActivity
 
     private AuthenticatorHelper mAuthenticatorHelper;
     private Header mLastHeader;
+    private boolean mListeningToAccountUpdates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +188,6 @@ public class Settings extends PreferenceActivity
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).resume();
-            AccountManager.get(this).addOnAccountsUpdatedListener(this, null, true);
         }
     }
 
@@ -198,6 +198,13 @@ public class Settings extends PreferenceActivity
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).pause();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mListeningToAccountUpdates) {
             AccountManager.get(this).removeOnAccountsUpdatedListener(this);
         }
     }
@@ -461,6 +468,10 @@ public class Settings extends PreferenceActivity
 
         for (Header header : accountHeaders) {
             target.add(headerIndex++, header);
+        }
+        if (!mListeningToAccountUpdates) {
+            AccountManager.get(this).addOnAccountsUpdatedListener(this, null, true);
+            mListeningToAccountUpdates = true;
         }
         return headerIndex;
     }
