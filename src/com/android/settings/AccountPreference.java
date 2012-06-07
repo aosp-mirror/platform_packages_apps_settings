@@ -39,16 +39,24 @@ public class AccountPreference extends Preference {
     private int mStatus;
     private Account mAccount;
     private ArrayList<String> mAuthorities;
+    private ImageView mSyncStatusIcon;
+    private boolean mShowTypeIcon;
 
     public AccountPreference(Context context, Account account, Drawable icon,
-            ArrayList<String> authorities) {
+            ArrayList<String> authorities, boolean showTypeIcon) {
         super(context);
         mAccount = account;
         mAuthorities = authorities;
+        mShowTypeIcon = showTypeIcon;
+        if (showTypeIcon) {
+            setIcon(icon);
+        } else {
+            setIcon(getSyncStatusIcon(SYNC_DISABLED));
+        }
         setTitle(mAccount.name);
         setSummary("");
         setPersistent(false);
-        setSyncStatus(SYNC_DISABLED);
+        setSyncStatus(SYNC_DISABLED, false);
     }
 
     public Account getAccount() {
@@ -62,16 +70,22 @@ public class AccountPreference extends Preference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-        setSummary(getSyncStatusMessage(mStatus));
-        ImageView iconView = (ImageView) view.findViewById(android.R.id.icon);
-        iconView.setImageResource(getSyncStatusIcon(mStatus));
-        iconView.setContentDescription(getSyncContentDescription(mStatus));
+        if (!mShowTypeIcon) {
+            mSyncStatusIcon = (ImageView) view.findViewById(android.R.id.icon);
+            mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));
+            mSyncStatusIcon.setContentDescription(getSyncContentDescription(mStatus));
+        }
     }
 
-    public void setSyncStatus(int status) {
+    public void setSyncStatus(int status, boolean updateSummary) {
         mStatus = status;
-        setIcon(getSyncStatusIcon(status));
-        setSummary(getSyncStatusMessage(status));
+        if (!mShowTypeIcon && mSyncStatusIcon != null) {
+            mSyncStatusIcon.setImageResource(getSyncStatusIcon(status));
+            mSyncStatusIcon.setContentDescription(getSyncContentDescription(mStatus));
+        }
+        if (updateSummary) {
+            setSummary(getSyncStatusMessage(status));
+        }
     }
 
     private int getSyncStatusMessage(int status) {
@@ -109,7 +123,7 @@ public class AccountPreference extends Preference {
                 res = R.drawable.ic_sync_red_holo;
                 break;
             case SYNC_IN_PROGRESS:
-                res = R.drawable.ic_sync_grey_holo;
+                res = R.drawable.ic_sync_green_holo;
                 break;
             default:
                 res = R.drawable.ic_sync_red_holo;
