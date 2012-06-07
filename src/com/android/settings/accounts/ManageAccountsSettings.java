@@ -166,8 +166,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         boolean syncActive = ContentResolver.getCurrentSync() != null;
-        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
-        menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
+        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive && mFirstAccount != null);
+        menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive && mFirstAccount != null);
     }
 
     @Override
@@ -274,16 +274,16 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 }
             }
             if (syncIsFailing) {
-                accountPref.setSyncStatus(AccountPreference.SYNC_ERROR);
+                accountPref.setSyncStatus(AccountPreference.SYNC_ERROR, true);
             } else if (syncCount == 0) {
-                accountPref.setSyncStatus(AccountPreference.SYNC_DISABLED);
+                accountPref.setSyncStatus(AccountPreference.SYNC_DISABLED, true);
             } else if (syncCount > 0) {
                 if (syncingNow) {
-                    accountPref.setSyncStatus(AccountPreference.SYNC_IN_PROGRESS);
+                    accountPref.setSyncStatus(AccountPreference.SYNC_IN_PROGRESS, true);
                 } else {
-                    accountPref.setSyncStatus(AccountPreference.SYNC_ENABLED);
+                    accountPref.setSyncStatus(AccountPreference.SYNC_ENABLED, true);
                     if (lastSuccessTime > 0) {
-                        accountPref.setSyncStatus(AccountPreference.SYNC_ENABLED);
+                        accountPref.setSyncStatus(AccountPreference.SYNC_ENABLED, false);
                         date.setTime(lastSuccessTime);
                         final String timeString = formatSyncDate(date);
                         accountPref.setSummary(getResources().getString(
@@ -291,7 +291,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                     }
                 }
             } else {
-                accountPref.setSyncStatus(AccountPreference.SYNC_DISABLED);
+                accountPref.setSyncStatus(AccountPreference.SYNC_DISABLED, true);
             }
         }
 
@@ -324,14 +324,14 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             if (showAccount) {
                 final Drawable icon = getDrawableForType(account.type);
                 final AccountPreference preference =
-                        new AccountPreference(getActivity(), account, icon, auths);
+                        new AccountPreference(getActivity(), account, icon, auths, false);
                 getPreferenceScreen().addPreference(preference);
                 if (mFirstAccount == null) {
                     mFirstAccount = account;
                 }
             }
         }
-        if (mAccountType != null) {
+        if (mAccountType != null && mFirstAccount != null) {
             addAuthenticatorSettings();
         }
         onSyncStateUpdated();
