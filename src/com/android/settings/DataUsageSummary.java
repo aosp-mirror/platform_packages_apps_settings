@@ -2035,6 +2035,7 @@ public class DataUsageSummary extends Fragment {
      * Dialog to inform user about changing auto-sync setting
      */
     public static class ConfirmAutoSyncChangeFragment extends DialogFragment {
+        private static final String SAVE_ENABLING = "enabling";
         private boolean mEnabling;
 
         public static void show(DataUsageSummary parent, boolean enabling) {
@@ -2049,6 +2050,9 @@ public class DataUsageSummary extends Fragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
+            if (savedInstanceState != null) {
+                mEnabling = savedInstanceState.getBoolean(SAVE_ENABLING);
+            }
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             if (!mEnabling) {
@@ -2068,6 +2072,12 @@ public class DataUsageSummary extends Fragment {
             builder.setNegativeButton(android.R.string.cancel, null);
 
             return builder.create();
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putBoolean(SAVE_ENABLING, mEnabling);
         }
     }
 
