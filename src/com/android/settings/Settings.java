@@ -439,21 +439,36 @@ public class Settings extends PreferenceActivity
         List<Header> accountHeaders = new ArrayList<Header>(accountTypes.length);
         for (String accountType : accountTypes) {
             CharSequence label = mAuthenticatorHelper.getLabelForType(this, accountType);
+            Account[] accounts = AccountManager.get(this).getAccountsByType(accountType);
+            boolean skipToAccount = accounts.length == 1
+                    && !mAuthenticatorHelper.hasAccountPreferences(accountType);
             Header accHeader = new Header();
             accHeader.title = label;
             if (accHeader.extras == null) {
                 accHeader.extras = new Bundle();
             }
-            accHeader.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
-            accHeader.breadCrumbTitle = label;
-            accHeader.breadCrumbShortTitle = label;
-            accHeader.fragment = ManageAccountsSettings.class.getName();
-            accHeader.fragmentArguments = new Bundle();
-            accHeader.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE,
-                    accountType);
-            if (!isMultiPane()) {
-                accHeader.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
-                        label.toString());
+            if (skipToAccount) {
+                accHeader.breadCrumbTitleRes = R.string.account_sync_settings_title;
+                accHeader.breadCrumbShortTitleRes = R.string.account_sync_settings_title;
+                accHeader.fragment = AccountSyncSettings.class.getName();
+                accHeader.fragmentArguments = new Bundle();
+                // Need this for the icon
+                accHeader.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
+                accHeader.extras.putParcelable(AccountSyncSettings.ACCOUNT_KEY, accounts[0]);
+                accHeader.fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
+                        accounts[0]);
+            } else {
+                accHeader.breadCrumbTitle = label;
+                accHeader.breadCrumbShortTitle = label;
+                accHeader.fragment = ManageAccountsSettings.class.getName();
+                accHeader.fragmentArguments = new Bundle();
+                accHeader.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
+                accHeader.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE,
+                        accountType);
+                if (!isMultiPane()) {
+                    accHeader.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
+                            label.toString());
+                }
             }
             accountHeaders.add(accHeader);
         }
@@ -642,8 +657,8 @@ public class Settings extends PreferenceActivity
 
                     //$FALL-THROUGH$
                 case HEADER_TYPE_NORMAL:
-                    if (header.extras != null && header.extras.containsKey(
-                            ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
+                    if (header.extras != null
+                            && header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
                         String accType = header.extras.getString(
                                 ManageAccountsSettings.KEY_ACCOUNT_TYPE);
                         ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
