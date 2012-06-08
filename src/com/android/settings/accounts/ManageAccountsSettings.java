@@ -333,6 +333,11 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         }
         if (mAccountType != null && mFirstAccount != null) {
             addAuthenticatorSettings();
+        } else {
+            // There's no account, reset to top-level of settings
+            Intent settingsTop = new Intent(android.provider.Settings.ACTION_SETTINGS);
+            settingsTop.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            getActivity().startActivity(settingsTop);
         }
         onSyncStateUpdated();
     }
