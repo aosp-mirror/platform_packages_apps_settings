@@ -30,10 +30,10 @@
             android:key="biometric_weak_improve_matching"
             android:title="@string/biometric_weak_improve_matching_title"/>
 
-        <PreferenceScreen
+        <CheckBoxPreference
            android:key="biometric_weak_liveliness"
-           android:fragment="com.android.settings.BiometricWeakLiveliness"
-           android:title="@string/biometric_weak_liveliness_title"/>
+           android:title="@string/biometric_weak_liveliness_title"
+           android:summary="@string/biometric_weak_liveliness_summary"/>
 
         <CheckBoxPreference
             android:key="visiblepattern"
