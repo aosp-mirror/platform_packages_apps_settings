@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ import java.util.Map;
 
 public class AuthenticatorHelper {
 
-    private static final String TAG = "AccountTypesHelper";
+    private static final String TAG = "AuthenticatorHelper";
     private Map<String, AuthenticatorDescription> mTypeToAuthDescription
             = new HashMap<String, AuthenticatorDescription>();
     private AuthenticatorDescription[] mAuthDescs;
