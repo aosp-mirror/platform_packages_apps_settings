@@ -124,4 +124,14 @@ public class AuthenticatorHelper {
     public AuthenticatorDescription getAccountTypeDescription(String accountType) {
         return mTypeToAuthDescription.get(accountType);
     }
+
+    public boolean hasAccountPreferences(final String accountType) {
+        if (containsAccountType(accountType)) {
+            AuthenticatorDescription desc = getAccountTypeDescription(accountType);
+            if (desc != null && desc.accountPreferencesId != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
