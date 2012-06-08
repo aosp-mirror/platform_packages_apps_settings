@@ -291,10 +291,8 @@
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"改善面部匹配"</string>
-    <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"活性判别"</string>
-    <string name="biometric_weak_liveliness_on_summary" msgid="3894889144189386005">"开启 - 需要转动头部进行解锁"</string>
-    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"关闭"</string>
-    <string name="biometric_weak_liveliness_explained" product="default" msgid="8855501413521583415">"为了提高安全性，您需要在解锁时转动头部。请在收到提示时向左或向右转动。"</string>
+    <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"真人判断"</string>
+    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"需要眨眼"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示机主信息"</string>
@@ -479,9 +477,9 @@
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"用于文件传输"</string>
     <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"用于输入"</string>
     <string name="bluetooth_pan_profile_summary_use_for" msgid="5664884523822068653">"用于访问互联网"</string>
-    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"底座设置"</string>
-    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"底座用于音频"</string>
-    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"将底座用作免提电话"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"基座设置"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"将基座用于音频"</string>
+    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"将基座用作免提电话"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用于音乐和媒体"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
@@ -629,7 +627,7 @@
     <string name="media_volume_title" msgid="3576565767317118106">"媒体"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"设置音乐和视频的音量"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"闹钟"</string>
-    <string name="dock_settings_summary" msgid="455802113668982481">"附加底座的音频设置"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"附加基座的音频设置"</string>
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"拨号键盘触摸音效"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"触摸提示音"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"锁屏提示音"</string>
@@ -644,24 +642,23 @@
     <string name="volume_notification_mute" msgid="7955193480006444159">"使通知静音"</string>
     <string name="volume_alarm_mute" msgid="4452239420351035936">"使闹钟静音"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"响铃时振动"</string>
-    <string name="dock_settings" msgid="1820107306693002541">"底座"</string>
-    <string name="dock_settings_title" msgid="9161438664257429372">"底座设置"</string>
+    <string name="dock_settings" msgid="1820107306693002541">"基座"</string>
+    <string name="dock_settings_title" msgid="9161438664257429372">"基座设置"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"音频"</string>
-    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"附加桌面底座的设置"</string>
-    <string name="dock_audio_summary_car" msgid="6740897586006248450">"附加车载底座的设置"</string>
-    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"平板电脑未插入底座"</string>
-    <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"手机未插入底座"</string>
-    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"附加底座的设置"</string>
-    <string name="dock_not_found_title" msgid="3290961741828952424">"未找到底座"</string>
-    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"您需要先将平板电脑插入底座，才能设置底座音频。"</string>
-    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"您需要先将手机插入底座，才能设置底座音频。"</string>
-    <string name="dock_sounds_enable_title" msgid="885839627097024110">"插入底座提示音"</string>
-    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"平板电脑插入底座或拔出时发出声音"</string>
-    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"手机插入底座或拔出时发出声音"</string>
-    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"平板电脑插入底座或拔出时不发出声音"</string>
-    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"手机插入底座或拔出时不发出声音"</string>
-    <!-- no translation found for account_settings (6403589284618783461) -->
-    <skip />
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"附加桌面基座的设置"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"附加车载基座的设置"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"平板电脑未插入基座"</string>
+    <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"手机未插入基座"</string>
+    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"附加基座的设置"</string>
+    <string name="dock_not_found_title" msgid="3290961741828952424">"未找到基座"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"您需要先将平板电脑插入基座，才能设置基座音频。"</string>
+    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"您需要先将手机插入基座，才能设置基座音频。"</string>
+    <string name="dock_sounds_enable_title" msgid="885839627097024110">"插入基座提示音"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"平板电脑插入基座或拔出时发出声音"</string>
+    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"手机插入基座或拔出时发出声音"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"平板电脑插入基座或拔出时不发出声音"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"手机插入基座或拔出时不发出声音"</string>
+    <string name="account_settings" msgid="6403589284618783461">"帐户"</string>
     <string name="search_settings" msgid="1910951467596035063">"搜索"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"管理搜索设置和历史记录"</string>
     <string name="display_settings" msgid="7965901687241669598">"显示"</string>
@@ -684,7 +681,7 @@
     <string name="screensaver_timeout_summary" msgid="7717201094598701673">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"永不"</string>
     <string name="screensaver_test" msgid="3048249263811694128">"试试看！"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="3753003388633168862">"插入底座时也启动"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="3753003388633168862">"插入基座时也启动"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"字体大小"</string>
