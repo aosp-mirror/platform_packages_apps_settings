@@ -160,7 +160,7 @@
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s хоче отримати доступ до ваших контактів й історії викликів. Надати %2$s доступ?"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Не запитувати знову"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Налаштування дати та часу"</string>
-    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
+    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 пп"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Вибрати часовий пояс"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Регіональний (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -292,9 +292,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Покращити розпізнавання облич"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Перевірка на справжність"</string>
-    <string name="biometric_weak_liveliness_on_summary" msgid="3894889144189386005">"Увімкнено – щоб розблокувати, потрібно повернути голову"</string>
-    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Вимкнено"</string>
-    <string name="biometric_weak_liveliness_explained" product="default" msgid="8855501413521583415">"Щоб забезпечити кращий захист, під час розблокування потрібно буде повернути голову. Коли буде запропоновано, поверніть голову ліворуч або праворуч."</string>
+    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Просити покліпати очима"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматичне блокування"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> після режиму сну"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Показувати інф-цію про власника на заблок. екрані"</string>
@@ -416,7 +414,7 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Кер. підключ. і встан. назву пристрою та його видимість."</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Запит Bluetooth на ств. пари"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Щоб створити пару з пристроєм: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Введіть потрібний PIN-код пристрою:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Для підключення до пристрою <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> введіть потрібний PIN-код:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Щоб створити пару з пристроєм: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Введіть потрібний ключ доступу пристрою:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN-код містить літери чи символи"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Зазвичай 0000 або 1234"</string>
@@ -630,7 +628,7 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"Устан. гучн. для музики та відео"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Сповіщ."</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Налашт-ня звуку для підключ. станції"</string>
-    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Тон під час дотику номеронабирача"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"Звук клавіш"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"Звуки під час дотику"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"Звук під час блокування екрана"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Вібрація під час дотику"</string>
@@ -660,8 +658,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Грати звук під час вставл. чи виймання тел. зі станції"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Не грати звук під час вставл. чи виймання пристрою зі станції"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Не грати звук під час вставл. чи виймання тел. зі станції"</string>
-    <!-- no translation found for account_settings (6403589284618783461) -->
-    <skip />
+    <string name="account_settings" msgid="6403589284618783461">"Облікові записи"</string>
     <string name="search_settings" msgid="1910951467596035063">"Пошук"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Керуйте налаштув. пошуку та історією"</string>
     <string name="display_settings" msgid="7965901687241669598">"Екран"</string>
@@ -937,7 +934,7 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Пароль установлено"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-код установлено"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Ключ установлено"</string>
-    <string name="lock_settings_title" msgid="335025124489630932">"Безпека екрана"</string>
+    <string name="lock_settings_title" msgid="335025124489630932">"Блокування екрана"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Змінити ключ розблокув."</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Змініть PIN розблок."</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Підтвердьте збереж. ключ"</string>
@@ -951,7 +948,7 @@
     <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Ваш новий ключ розблокув.:"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Підтверд."</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Перемал."</string>
-    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Повтор."</string>
+    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Повтор"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Продовжити"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Ключ розблокув."</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Потрібний ключ"</string>
@@ -1461,8 +1458,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Помилка синхронізації"</string>
     <string name="sync_failed" msgid="1696499856374109647">"Помилка синхронізації"</string>
     <string name="sync_active" msgid="8476943765960863040">"Синхронізація активна"</string>
-    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
-    <skip />
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"Синхронізація"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Наразі виникли проблеми із синхронізацією. Незабаром вона відновиться."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Додати облік. запис"</string>
     <string name="background_data" msgid="5779592891375473817">"Фонові дані"</string>
@@ -1473,10 +1469,8 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Синхроніз. ВВІМКНЕНО"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхроніз. ВИМКНЕНО"</string>
     <string name="sync_error" msgid="5060969083117872149">"Помилка синхр-ції"</string>
-    <!-- no translation found for last_synced (4242919465367022234) -->
-    <skip />
-    <!-- no translation found for sync_in_progress (5151314196536070569) -->
-    <skip />
+    <string name="last_synced" msgid="4242919465367022234">"Востаннє синхронізовано: <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"Синхронізація…"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Налаштування резервного копіювання"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Створити резервну копію налаштувань"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Синхронізувати зараз"</string>
@@ -1545,8 +1539,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Зараз увімкнено стільки трасувань: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Усі трасування зараз увімкнено"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показувати межі макета"</string>
-    <!-- no translation found for debug_layout_summary (2001775315258637682) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="2001775315258637682">"Показувати межі роликів, поля тощо"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показати використання ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Наклад-ня на екрані, яке показ.поточне використ.ЦП"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Примусова візуалізація GPU"</string>
@@ -1570,8 +1563,7 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Показувати використання Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Показати використання Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"Мобільні точки доступу"</string>
-    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
-    <skip />
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Автосинхронізація даних"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Змінити цикл..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"День місяця для скидання циклу використання даних:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Програми не використовували дані в цей час."</string>
@@ -1600,16 +1592,11 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Обмежити використання фонових даних?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Якщо доступні лише мобільні мережі, програми, що використовують фонові дані, можуть не працювати."\n\n"Відповідніші елементи керування використанням даних можна знайти в налаштуваннях цієї програми."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Обмеження фонових даних можливе, лише якщо встановлено ліміт мобільних даних."</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Увімкнути автосинхроніз-ю даних?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Будь-які зміни до облікових записів, внесені в Інтернеті, автоматично копіюватимуться на ваш планшетний ПК."\n\n"Деякі облікові записи також можуть автоматично копіювати в Інтернет зміни, внесені на планшетному ПК. Так працює обліковий запис Google."\n\n"Щоб вибрати типи інформації, які потрібно синхронізувати з обліковими записами, перейдіть у Налаштування &gt; Облікові записи."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Будь-які зміни до облікових записів, внесені в Інтернеті, автоматично копіюватимуться на ваш телефон."\n\n"Деякі облікові записи також можуть автоматично копіювати в Інтернет зміни, внесені на телефоні. Так працює обліковий запис Google."\n\n"Щоб вибрати типи інформації, які потрібно синхронізувати з обліковими записами, перейдіть у Налаштування &gt; Облікові записи."</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Вимкнути автосинхроніз-ю даних?"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Це заощаджуватиме використання даних і заряду акумулятора. Проте вам доведеться вручну синхронізувати кожен обліковий запис, щоб зібрати останні відомості. Ви також не отримуватимете сповіщення про оновлення."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Дата скидання циклу використання даних"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Дата кожного місяця:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Установити"</string>

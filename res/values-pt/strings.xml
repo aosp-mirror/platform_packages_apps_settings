@@ -150,7 +150,7 @@
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Um aplicativo em seu telefone quer ativar o Bluetooth e tornar seu telefone detectável por outros dispositivos por <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Permitir?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Um aplicativo no seu tablet quer ativar o Bluetooth e tornar seu tablet detectável por outros dispositivos. Permitir?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Um aplicativo em seu telefone quer ativar o Bluetooth e tornar o telefone detectável por outros dispositivos. Permitir?"</string>
-    <string name="bluetooth_turning_on" msgid="4850574877288036646">"Ativar Bluetooth?"</string>
+    <string name="bluetooth_turning_on" msgid="4850574877288036646">"Ativando Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Desligar o Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Conexão automática"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Solicitação de conexão Bluetooth"</string>
@@ -257,7 +257,7 @@
     <string name="proxy_settings_label" msgid="3271174136184391743">"Configurações de proxy"</string>
     <string name="cancel" msgid="6859253417269739139">"Cancelar"</string>
     <string name="settings_label" msgid="1626402585530130914">"Configurações"</string>
-    <string name="settings_label_launcher" msgid="8344735489639482340">"Configurações"</string>
+    <string name="settings_label_launcher" msgid="8344735489639482340">"Config."</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Atalho para as configurações"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Modo para avião"</string>
     <string name="radio_controls_title" msgid="6889937359495515769">"Mais..."</string>
@@ -292,9 +292,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Melhorar a correspondência de rosto"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Verificação de presença viva"</string>
-    <string name="biometric_weak_liveliness_on_summary" msgid="3894889144189386005">"Ativado - rotação de cabeça necessária para desbloquear"</string>
-    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Desativado"</string>
-    <string name="biometric_weak_liveliness_explained" product="default" msgid="8855501413521583415">"Para aumentar a segurança, será solicitado que você vire a cabeça ao desbloquear. Quando solicitado, vire-a para a esquerda ou direita."</string>
+    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Exigir piscada de olhos"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automaticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após modo de espera"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar inf. do proprietário ao bloquear a tela"</string>
@@ -660,8 +658,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reproduzir sons ao inserir ou remover o telefone do dock."</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Não reproduzir sons ao inserir ou remover o tablet do dock"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Não reproduzir sons ao inserir ou remover o telefone do dock."</string>
-    <!-- no translation found for account_settings (6403589284618783461) -->
-    <skip />
+    <string name="account_settings" msgid="6403589284618783461">"Contas"</string>
     <string name="search_settings" msgid="1910951467596035063">"Pesquisar"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gerenciar configurações e histórico de pesquisa"</string>
     <string name="display_settings" msgid="7965901687241669598">"Tela"</string>
@@ -1461,8 +1458,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Erro de sincronização."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Falha na sincronização"</string>
     <string name="sync_active" msgid="8476943765960863040">"Sincronização ativa"</string>
-    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
-    <skip />
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"Sincronização"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"A sincronização está enfrentando problemas no momento. Ela retornará em breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Adicionar conta"</string>
     <string name="background_data" msgid="5779592891375473817">"Dados de segundo plano"</string>
@@ -1473,10 +1469,8 @@
     <string name="sync_enabled" msgid="4551148952179416813">"A sinc. está ATIVADA"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"A sincronização está DESATIVADA"</string>
     <string name="sync_error" msgid="5060969083117872149">"Erro na sinc."</string>
-    <!-- no translation found for last_synced (4242919465367022234) -->
-    <skip />
-    <!-- no translation found for sync_in_progress (5151314196536070569) -->
-    <skip />
+    <string name="last_synced" msgid="4242919465367022234">"Última sincronização em <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"Sincronizando agora..."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Fazer backup das configurações"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Fazer backup de minhas configurações"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sincronizar agora"</string>
@@ -1545,8 +1539,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> traços ativados"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Todos os traços ativados"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar limites de layout"</string>
-    <!-- no translation found for debug_layout_summary (2001775315258637682) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="2001775315258637682">"Mostrar limites de corte, margens, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar o uso da CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Sobreposição de tela que mostra o uso da CPU atual"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forçar renderização GPU"</string>
@@ -1570,8 +1563,7 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostrar uso do Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar o uso da Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"Pontos de acesso móveis"</string>
-    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
-    <skip />
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sincronizar dados automaticamente"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Alterar ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Dia do mês para redefinir o ciclo de uso dos dados:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Nenhum aplicativo usou dados durante o período."</string>
@@ -1600,16 +1592,11 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Restringir dados de segundo plano?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Este recurso pode fazer com que um aplicativo que depende de dados de segundo plano pare de funcionar quando somente redes de acesso limitado estiverem disponíveis."\n\n"Você pode encontrar controles de uso de dados mais apropriados nas configurações disponíveis no aplicativo."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Restringir dados de segundo plano só é possível quando você define um limite de dados móveis."</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Ativar sincronização automática?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"As alterações feitas em suas contas na web serão automaticamente copiadas para o tablet."\n\n"Algumas contas, como Contas do Google, também poderão copiar automaticamente as alterações feitas no tablet para a web."\n" "\n"Para determinar as informações a sincronizar em cada conta, acesse Configurações &gt; Contas."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"As alterações feitas em suas contas na web serão automaticamente copiadas para o telefone."\n\n"Algumas contas, como Contas do Google, também poderão copiar automaticamente as alterações feitas no telefone para a web."\n" "\n"Para determinar as informações a sincronizar em cada conta, acesse Configurações &gt; Contas."</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Desativar sincroniz. automática?"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Isto preservará o uso de dados e da bateria, mas será necessário sincronizar manualmente cada conta para obter as informações mais recentes, e você não será informado de novas atualizações."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data de redefinição do ciclo de uso"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Data de cada mês:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Definidas"</string>

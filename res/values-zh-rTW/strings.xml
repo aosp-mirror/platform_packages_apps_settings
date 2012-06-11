@@ -150,7 +150,7 @@
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"您手機中的某個應用程式要求開啟藍牙功能 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒鐘，讓其他藍牙裝置可在這段時間內搜尋到您的手機。您要允許這項要求嗎？"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"平板電腦上的某個應用程式要求將平板電腦設成開放其他藍牙裝置搜尋，您要允許這項要求嗎？"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"您手機中的某個應用程式要求開啟藍牙功能，讓其他藍牙裝置可在這段時間內搜尋到您的手機。您要允許這項要求嗎？"</string>
-    <string name="bluetooth_turning_on" msgid="4850574877288036646">"開啟藍牙？"</string>
+    <string name="bluetooth_turning_on" msgid="4850574877288036646">"藍牙開啟中…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"正在關閉藍牙…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"自動連線"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"藍牙連線要求"</string>
@@ -292,9 +292,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"加強臉部辨識精準度"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"生動度檢查"</string>
-    <string name="biometric_weak_liveliness_on_summary" msgid="3894889144189386005">"開啟 - 需轉動頭部進行解鎖"</string>
-    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"關閉"</string>
-    <string name="biometric_weak_liveliness_explained" product="default" msgid="8855501413521583415">"為提升安全性，系統會要求您在解鎖時轉動頭部。系統提示時，請向左或向右轉頭。"</string>
+    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"解鎖時需眨眼"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動鎖定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在鎖定畫面上顯示擁有者資訊"</string>
@@ -660,8 +658,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"手機插入底座或離開底座時播放音效"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"將平板電腦置入座架或移出座架時，不要播放音效"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"手機插入底座或離開底座時，不要播放音效"</string>
-    <!-- no translation found for account_settings (6403589284618783461) -->
-    <skip />
+    <string name="account_settings" msgid="6403589284618783461">"帳戶"</string>
     <string name="search_settings" msgid="1910951467596035063">"搜尋"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"管理搜尋設定和記錄"</string>
     <string name="display_settings" msgid="7965901687241669598">"顯示"</string>
@@ -1461,8 +1458,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"同步處理錯誤。"</string>
     <string name="sync_failed" msgid="1696499856374109647">"同步處理失敗"</string>
     <string name="sync_active" msgid="8476943765960863040">"同步處理已啟用"</string>
-    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
-    <skip />
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"同步處理"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"目前同步處理發生問題。稍後會回復正常。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"新增帳戶"</string>
     <string name="background_data" msgid="5779592891375473817">"背景資料"</string>
@@ -1473,10 +1469,8 @@
     <string name="sync_enabled" msgid="4551148952179416813">"已開啟同步處理功能"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"已關閉同步處理功能"</string>
     <string name="sync_error" msgid="5060969083117872149">"同步處理錯誤"</string>
-    <!-- no translation found for last_synced (4242919465367022234) -->
-    <skip />
-    <!-- no translation found for sync_in_progress (5151314196536070569) -->
-    <skip />
+    <string name="last_synced" msgid="4242919465367022234">"上次同步處理時間：<xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"目前正在同步處理..."</string>
     <string name="settings_backup" msgid="2274732978260797031">"備份設定"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"備份我的設定"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"現在進行同步處理"</string>
@@ -1545,8 +1539,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"目前已啟用 <xliff:g id="NUM">%1$d</xliff:g> 個追蹤項目"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"目前已啟用所有追蹤項目"</string>
     <string name="debug_layout" msgid="5981361776594526155">"顯示版面配置界限"</string>
-    <!-- no translation found for debug_layout_summary (2001775315258637682) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="2001775315258637682">"顯示剪輯範圍、邊界等。"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"顯示 CPU 使用量"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"在螢幕上方顯示目前的 CPU 使用量"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"強制使用 GPU 轉譯"</string>
@@ -1570,8 +1563,7 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"顯示 Wi-Fi 用量"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"顯示乙太網路使用量"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"行動熱點"</string>
-    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
-    <skip />
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"自動同步處理資料"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"變更週期..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"資料用量週期的重設日期："</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"沒有任何應用程式在這段期間產生資料用量。"</string>
@@ -1598,18 +1590,13 @@
     <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"停用行動網路的背景資料。系統將使用非行動網路 (可連上時)。"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"您必須設定行動數據限制，才能限制這個應用程式的背景資料。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"限制背景資料？"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"如果採用這項功能，當只有行動網路可供使用時，需要背景數據傳輸的應用程式可能會停止運作。"\n\n"您可以前往應用程式內的設定，找出更多適當的數據用量控制項。"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"如果採用這項功能，當只有行動網路可供使用時，需要背景數據傳輸的應用程式可能會停止運作。"\n\n"您可以在應用程式的設定選單中，找出更多適當的數據用量的選項。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"您必須設定行動數據限制，才能限制背景資料。"</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"開啟自動同步處理資料？"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"您在網路上對帳戶進行的任何變更都會自動複製到您的平板電腦。"\n\n"部分帳戶也可能自動將您在平板電腦上進行的所有變更複製到網路上。Google 帳戶會按照這種方式運作。"\n\n"如要選擇每個帳戶要同步處理的資訊類型，請前往 [設定] &gt; [帳戶]。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"您在網路上對帳戶進行的任何變更都會自動複製到您的手機。"\n\n"部分帳戶也可能自動將您在手機上進行的所有變更複製到網路上。Google 帳戶會按照這種方式運作。"\n\n"如要選擇每個帳戶要同步處理的資訊類型，請前往 [設定] &gt; [帳戶]。"</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"關閉自動同步處理資料？"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"這樣可以節省資料用量和電池用量，但您必須手動同步處理每個帳戶才能收集最新資訊。此外，系統進行更新時不會通知您。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"用量週期重設日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"每月固定日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"儲存設定"</string>
