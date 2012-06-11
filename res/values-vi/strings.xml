@@ -106,7 +106,7 @@
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Không hiển thị với các thiết bị Bluetooth khác"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Chỉ hiển thị với các thiết bị được ghép nối"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Đặt thiết bị ở chế độ có thể phát hiện"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Thời gian hiển thị"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Hết thời gian hiển thị"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Đặt thời gian thiết bị có thể phát hiện được"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Khoá quay số bằng giọng nói"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Ngăn việc sử dụng trình quay số bluetooth khi màn hình bị khóa."</string>
@@ -292,9 +292,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"Thời gian"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Cải tiến khớp khuôn mặt"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Kiểm tra tính sống động"</string>
-    <string name="biometric_weak_liveliness_on_summary" msgid="3894889144189386005">"Bật - Yêu cầu quay đầu để mở khóa"</string>
-    <string name="biometric_weak_liveliness_off_summary" msgid="6574236717160830358">"Tắt"</string>
-    <string name="biometric_weak_liveliness_explained" product="default" msgid="8855501413521583415">"Để cải thiện tính bảo mật, bạn sẽ được yêu cầu quay đầu trong khi mở khóa. Khi được nhắc, hãy quay sang trái hoặc phải."</string>
+    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Yêu cầu nháy mắt khi mở khóa"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Tự động khóa"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi ngủ"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Hiển thị th.tin chủ sở hữu trên màn hình khóa"</string>
@@ -660,8 +658,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Không phát âm thanh khi lắp hoặc tháo máy tính bảng khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Không phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
-    <!-- no translation found for account_settings (6403589284618783461) -->
-    <skip />
+    <string name="account_settings" msgid="6403589284618783461">"Tài khoản"</string>
     <string name="search_settings" msgid="1910951467596035063">"Tìm kiếm"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Quản lý cài đặt và lịch sử tìm kiếm"</string>
     <string name="display_settings" msgid="7965901687241669598">"Hiển thị"</string>
@@ -1197,7 +1194,7 @@
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Cho phép vị trí mô phỏng"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Cho phép gỡ lỗi USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Gỡ lỗi USB chỉ dành cho mục đích phát triển. Hãy sử dụng tính năng này để sao chép dữ liệu giữa máy tính và thiết bị của bạn, cài đặt ứng dụng trên thiết bị của bạn mà không thông báo và đọc dữ liệu nhật ký."</string>
-    <string name="dev_settings_warning_title" msgid="7244607768088540165">"Cho phép cài đặt dành cho phát triển?"</string>
+    <string name="dev_settings_warning_title" msgid="7244607768088540165">"Cho phép cài đặt phát triển?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Những cài đặt này chỉ dành cho mục đích phát triển. Chúng có thể làm cho thiết bị và ứng dụng trên thiết bị của bạn bị lỗi và hoạt động sai."</string>
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Bảo vệ bộ lưu trữ USB"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Các ứng dụng phải yêu cầu quyền đọc bộ lưu trữ USB"</string>
@@ -1461,8 +1458,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Lỗi đồng bộ hóa"</string>
     <string name="sync_failed" msgid="1696499856374109647">"Đồng bộ hóa không thành công"</string>
     <string name="sync_active" msgid="8476943765960863040">"Đồng bộ hóa hoạt động"</string>
-    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
-    <skip />
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"Đồng bộ hóa"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Đồng bộ hóa hiện đang gặp sự cố. Đồng bộ hóa sẽ sớm hoạt động trở lại."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Thêm tài khoản"</string>
     <string name="background_data" msgid="5779592891375473817">"Dữ liệu nền"</string>
@@ -1473,10 +1469,8 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Đồng bộ hóa BẬT"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Đồng bộ hóa TẮT"</string>
     <string name="sync_error" msgid="5060969083117872149">"Lỗi đồng bộ hóa"</string>
-    <!-- no translation found for last_synced (4242919465367022234) -->
-    <skip />
-    <!-- no translation found for sync_in_progress (5151314196536070569) -->
-    <skip />
+    <string name="last_synced" msgid="4242919465367022234">"Đồng bộ hóa sau cùng <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"Đang đồng bộ hóa..."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Sao lưu cài đặt"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Sao lưu cài đặt của tôi"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Đồng bộ hóa ngay bây giờ"</string>
@@ -1545,8 +1539,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> dấu vết hiện đang được bật"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Tất cả dấu vết hiện đang được bật"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Hiển thị ranh giới bố cục"</string>
-    <!-- no translation found for debug_layout_summary (2001775315258637682) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="2001775315258637682">"Hiển thị giới hạn đoạn video, lề, v.v.."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Hiển thị mức sử dụng CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Lớp phủ màn hình hiển thị mức sử dụng CPU hiện tại"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Bắt buộc kết xuất GPU"</string>
@@ -1570,8 +1563,7 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Hiển thị sử dụng Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Hiển thị t.tin sử dụng Ethernet"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"Điểm phát sóng di động"</string>
-    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
-    <skip />
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Tự động đồng bộ hóa dữ liệu"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Thay đổi chu kỳ..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Ngày trong tháng để đặt lại chu kỳ sử dụng dữ liệu:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ko ứng dụng nào s.dụng dữ liệu trong t.gian này."</string>
@@ -1600,16 +1592,11 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Giới hạn dữ liệu nền?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Tính năng này có thể khiến ứng dụng phụ thuộc vào dữ liệu nền ngừng hoạt động chỉ khi có mạng di động."\n\n"Bạn có thể tìm thấy biện pháp kiểm soát mức sử dụng dữ liệu thích hợp khác trong các cài đặt có trong ứng dụng."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Chỉ có thể giới hạn dữ liệu nền khi bạn đặt giới hạn dữ liệu di động."</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Bật tính năng tự động đồng bộ hóa dữ liệu?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Mọi thay đổi bạn thực hiện cho các tài khoản của bạn trên web sẽ tự động được sao chép sang máy tính bảng của bạn."\n\n"Một số tài khoản cũng có thể tự động sao chép mọi thay đổi bạn thực hiện trên máy tính bảng lên web. Tài khoản Google hoạt động theo cách này."\n\n"Để chọn loại thông tin sẽ đồng bộ hóa với từng tài khoản, truy cập Cài đặt và tài khoản."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Mọi thay đổi bạn thực hiện cho các tài khoản của bạn trên web sẽ được tự động sao chép sang điện thoại của bạn."\n\n"Một số tài khoản cũng có thể tự động đồng bộ hóa mọi thay đổi bạn thực hiện trên điện thoại với web. Tài khoản Google hoạt động theo cách này."\n\n"Để chọn loại thông tin sẽ đồng bộ hóa trong từng tài khoản, truy cập Cài đặt và tài khoản."</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Tắt tính năng tự động đồng bộ hóa dữ liệu?"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Việc này sẽ bảo toàn mức sử dụng dữ liệu và pin, tuy nhiên bạn sẽ cần phải đồng bộ hóa từng tài khoản theo cách thủ công để thu thập thông tin gần đây. Và bạn sẽ không nhận được thông báo khi có cập nhật."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Ngày đặt lại chu kỳ sử dụng"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Ngày của từng tháng:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Thiết lập"</string>
