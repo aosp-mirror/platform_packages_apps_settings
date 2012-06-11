@@ -1458,8 +1458,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"同步错误。"</string>
     <string name="sync_failed" msgid="1696499856374109647">"同步失败"</string>
     <string name="sync_active" msgid="8476943765960863040">"正在同步"</string>
-    <!-- no translation found for account_sync_settings_title (5131314922423053588) -->
-    <skip />
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"同步"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"同步操作当前遇到了一些问题，很快便可恢复。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"添加帐户"</string>
     <string name="background_data" msgid="5779592891375473817">"后台数据"</string>
@@ -1470,10 +1469,8 @@
     <string name="sync_enabled" msgid="4551148952179416813">"同步功能已开启"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"同步功能已关闭"</string>
     <string name="sync_error" msgid="5060969083117872149">"同步出错"</string>
-    <!-- no translation found for last_synced (4242919465367022234) -->
-    <skip />
-    <!-- no translation found for sync_in_progress (5151314196536070569) -->
-    <skip />
+    <string name="last_synced" msgid="4242919465367022234">"上次同步时间：<xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"正在同步…"</string>
     <string name="settings_backup" msgid="2274732978260797031">"备份设置"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"备份我的设置"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"立即同步"</string>
@@ -1542,8 +1539,7 @@
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"当前已启用 <xliff:g id="NUM">%1$d</xliff:g> 项跟踪"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"当前已启用所有跟踪"</string>
     <string name="debug_layout" msgid="5981361776594526155">"显示布局边界"</string>
-    <!-- no translation found for debug_layout_summary (2001775315258637682) -->
-    <skip />
+    <string name="debug_layout_summary" msgid="2001775315258637682">"显示剪辑边界、边距等。"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"显示 CPU 使用情况"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"屏幕叠加层显示当前 CPU 使用情况"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"强制进行 GPU 渲染"</string>
@@ -1567,8 +1563,7 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"显示 Wi-Fi 使用情况"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"显示以太网使用情况"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"移动热点"</string>
-    <!-- no translation found for data_usage_menu_auto_sync (8203999775948778560) -->
-    <skip />
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"自动同步数据"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"更改周期..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"流量使用周期的日期设置："</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"没有任何应用在此期间产生过数据流量。"</string>
@@ -1597,16 +1592,11 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"限制后台数据？"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"只能连接到移动网络时，此功能可能会导致需要使用后台数据的应用停止运行。"\n\n"您可以在相关应用的设置中查找更合适的数据流量控制选项。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"您只有在设置移动数据上限后才能限制后台数据。"</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog_title (2438617846762244389) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (7312283529426636845) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (2374996799819303283) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog_title (9013139130490125793) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_off_dialog (4744145757533455623) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"要打开自动同步数据功能吗？"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"您在网络上对您的帐户进行的所有更改都会自动同步到您的平板电脑。"\n\n"有些帐户还可以将您在平板电脑上进行的所有更改自动同步到网络上。这就是 Google 帐户的精彩之处。"\n\n"要选择每个帐户中要同步哪些类型的信息，请转到“设置 &gt; 帐户”。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"您在网络上对您的帐户进行的所有更改都会自动同步到您的手机。"\n\n"有些帐户还可以将您在手机上进行的所有更改自动同步到网络上。这就是 Google 帐户的精彩之处。"\n\n"要选择每个帐户中要同步哪些类型的信息，请转到“设置 &gt; 帐户”。"</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"要关闭自动同步数据功能吗？"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"这样可以节省数据流量和电池电量，但您需要手动同步每个帐户才能收集最新信息，并且在有更新时不会收到通知。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"使用情况周期重置日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"确定"</string>
