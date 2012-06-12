@@ -224,8 +224,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
 
-        mIm.registerInputDeviceListener(this, null);
         mSettingsObserver.resume();
+        mIm.registerInputDeviceListener(this, null);
 
         if (!mIsOnlyImeSettings) {
             if (mLanguagePref != null) {
@@ -265,8 +265,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
 
-        mSettingsObserver.pause();
         mIm.unregisterInputDeviceListener(this);
+        mSettingsObserver.pause();
 
         if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
             mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
