@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
@@ -229,10 +230,23 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (!mIsOnlyImeSettings) {
             if (mLanguagePref != null) {
                 Configuration conf = getResources().getConfiguration();
-                String locale = conf.locale.getDisplayName(conf.locale);
-                if (locale != null && locale.length() > 1) {
-                    locale = Character.toUpperCase(locale.charAt(0)) + locale.substring(1);
-                    mLanguagePref.setSummary(locale);
+                String language = conf.locale.getLanguage();
+                String localeString;
+                // TODO: This is not an accurate way to display the locale, as it is
+                // just working around the fact that we support limited dialects
+                // and want to pretend that the language is valid for all locales.
+                // We need a way to support languages that aren't tied to a particular
+                // locale instead of hiding the locale qualifier.
+                if (hasOnlyOneLanguageInstance(language,
+                        Resources.getSystem().getAssets().getLocales())) {
+                    localeString = conf.locale.getDisplayLanguage(conf.locale);
+                } else {
+                    localeString = conf.locale.getDisplayName(conf.locale);
+                }
+                if (localeString.length() > 1) {
+                    localeString = Character.toUpperCase(localeString.charAt(0))
+                            + localeString.substring(1);
+                    mLanguagePref.setSummary(localeString);
                 }
             }
 
@@ -320,6 +334,20 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    private boolean hasOnlyOneLanguageInstance(String languageCode, String[] locales) {
+        int count = 0;
+        for (String localeCode : locales) {
+            if (localeCode.length() > 2
+                    && localeCode.startsWith(languageCode)) {
+                count++;
+                if (count > 1) {
+                    return false;
+                }
+            }
+        }
+        return count == 1;
     }
 
     private void saveInputMethodSelectorVisibility(String value) {
