@@ -16,9 +16,11 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.ActivityThread;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.IPackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
@@ -26,6 +28,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.RemoteException;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.Preference;
@@ -53,6 +56,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     private Preference[] mPreferences;
     private Preference mMountTogglePreference;
     private Preference mFormatPreference;
+    private Preference mStorageLow;
     private int[] mColors;
 
     private Resources mResources;
@@ -204,6 +208,18 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             mFormatPreference.setTitle(R.string.sd_format);
             mFormatPreference.setSummary(R.string.sd_format_summary);
         }
+
+        final IPackageManager pm = ActivityThread.getPackageManager();
+        try {
+            if (pm.isStorageLow()) {
+                mStorageLow = new Preference(getContext());
+                mStorageLow.setTitle(R.string.storage_low_title);
+                mStorageLow.setSummary(R.string.storage_low_summary);
+            } else {
+                mStorageLow = null;
+            }
+        } catch (RemoteException e) {
+        }
     }
 
     public StorageVolume getStorageVolume() {
@@ -227,6 +243,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         }
 
         addPreference(mUsageBarPreference);
+        if (mStorageLow != null) {
+            addPreference(mStorageLow);
+        }
         for (int i = 0; i < numberOfCategories; i++) {
             addPreference(mPreferences[i]);
         }
