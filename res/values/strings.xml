@@ -1848,7 +1848,7 @@
     <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
     <string name="memory_calculating_size">Calculating\u2026</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_apps_usage">Apps</string>
+    <string name="memory_apps_usage">Apps (app data &amp; media content)</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_media_usage">Media</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of /sdcard/Download on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
@@ -1917,6 +1917,11 @@
     <string name="sd_ejecting_title">Unmounting</string>
     <!-- SD card eject progress text   -->
     <string name="sd_ejecting_summary">Unmount in progress</string>
+
+    <!-- Settings item title when storage is running low [CHAR LIMIT=32] -->
+    <string name="storage_low_title">Storage space is running out</string>
+    <!-- Settings item summary when storage is running low [CHAR LIMIT=NONE] -->
+    <string name="storage_low_summary">Some system functions, such as syncing, may not work correctly. Try to free space by deleting or unpinning items, such as apps or media content.</string>
 
     <!-- Storage setting.  Menu option for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_menu_usb">USB computer connection</string>
