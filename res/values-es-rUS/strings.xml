@@ -292,7 +292,7 @@
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Mejorar el reconocimiento facial"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Reconocimiento facial"</string>
-    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Solicitar parpadeo"</string>
+    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Solicitar parpadeo durante desbloqueo"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automáticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de la suspensión"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar datos de propietario en pantalla de bloqueo"</string>
@@ -508,7 +508,7 @@
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notificación de red"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Notificarme cuando se encuentre disponible una red abierta"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Evitar malas conexiones"</string>
-    <string name="wifi_poor_network_detection_summary" msgid="2466956369738047669">"No usar una red Wi-Fi a menos que cuente con una buena conexión a Internet"</string>
+    <string name="wifi_poor_network_detection_summary" msgid="2466956369738047669">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Mantener Wi-Fi durante la suspensión"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Hubo un problema mientras se cambiaba la configuración"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Agregar red"</string>
@@ -751,7 +751,8 @@
     <string name="memory_available" msgid="5052397223077021181">"Disponible"</string>
     <string name="memory_size" msgid="6629067715017232195">"Espacio total"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Calculando…"</string>
-    <string name="memory_apps_usage" msgid="7064506641121346242">"Aplicaciones"</string>
+    <!-- no translation found for memory_apps_usage (2348501997988663688) -->
+    <skip />
     <string name="memory_media_usage" msgid="3738830697707880405">"Medios"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"Descargas"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"Imágenes, videos"</string>
@@ -784,6 +785,10 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"Se desactivará la tarjeta SD."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Desmontando"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Desmontaje en progreso"</string>
+    <!-- no translation found for storage_low_title (1388569749716225155) -->
+    <skip />
+    <!-- no translation found for storage_low_summary (7737465774892563129) -->
+    <skip />
     <string name="storage_menu_usb" msgid="5708207885333243384">"Conexión de computadora USB"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Conexión de computadora USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectarse como"</string>
@@ -1470,7 +1475,7 @@
     <string name="sync_disabled" msgid="8511659877596511991">"Sincronización desactivada"</string>
     <string name="sync_error" msgid="5060969083117872149">"Error de sincronización"</string>
     <string name="last_synced" msgid="4242919465367022234">"Última sincronización: <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
-    <string name="sync_in_progress" msgid="5151314196536070569">"Sincronizando..."</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"Sincronizando…"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Hacer una copia de seguridad de configuraciones"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Realizar copia de seguridad de mi configuración"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sincronizar ahora"</string>
@@ -1592,10 +1597,10 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir el uso de datos de referencia?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo estén disponibles redes móviles."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo se pueden restringir los datos de referencia si estableciste un límite de datos móviles."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"¿Activar sincro. automática?"</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"¿Activar sinc. automática?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Cualquier cambio que sufran tus cuentas en la Web se copiará automáticamente en tu tableta."\n\n"Algunas cuentas también pueden copiar automáticamente en la Web los cambios que sufre tu tableta. Una cuenta de Google funciona de esta manera."\n\n"Para elegir qué tipo de información sincronizar dentro de cada cuenta, ve a Configuración &gt; Cuentas."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Cualquier cambio que sufran tus cuentas en la Web se copiará automáticamente en tu dispositivo."\n\n"Algunas cuentas también pueden copiar automáticamente en la Web los cambios que sufre tu dispositivo. Una cuenta de Google funciona de esta manera."\n\n"Para elegir qué tipo de información sincronizar dentro de cada cuenta, ve a Configuración &gt; Cuentas."</string>
-    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"¿Desactivar sincro. automática?"</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"¿Desactivar sinc. automática?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Así ahorrarás datos y energía, pero tendrás que sincronizar cada cuenta manualmente para recopilar la información reciente. Por otro lado, no se te notificarán las actualizaciones."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Fecha de restablecimiento del ciclo de uso"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Fecha de cada mes:"</string>
