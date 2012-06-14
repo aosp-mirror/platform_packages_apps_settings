@@ -128,6 +128,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.ChartData;
 import com.android.settings.net.ChartDataLoader;
@@ -2193,7 +2194,7 @@ public class DataUsageSummary extends Fragment {
         final TelephonyManager tele = TelephonyManager.from(context);
 
         final boolean hasWimax = conn.isNetworkSupported(TYPE_WIMAX);
-        final boolean hasLte = (tele.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE)
+        final boolean hasLte = (tele.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE)
                 && hasReadyMobileRadio(context);
         return hasWimax || hasLte;
     }
