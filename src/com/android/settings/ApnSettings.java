@@ -43,6 +43,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 
@@ -90,7 +91,7 @@ public class ApnSettings extends PreferenceActivity implements
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(
                     TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED)) {
-                Phone.DataState state = getMobileDataState(intent);
+                PhoneConstants.DataState state = getMobileDataState(intent);
                 switch (state) {
                 case CONNECTED:
                     if (!mRestoreDefaultApnMode) {
@@ -104,12 +105,12 @@ public class ApnSettings extends PreferenceActivity implements
         }
     };
 
-    private static Phone.DataState getMobileDataState(Intent intent) {
-        String str = intent.getStringExtra(Phone.STATE_KEY);
+    private static PhoneConstants.DataState getMobileDataState(Intent intent) {
+        String str = intent.getStringExtra(PhoneConstants.STATE_KEY);
         if (str != null) {
-            return Enum.valueOf(Phone.DataState.class, str);
+            return Enum.valueOf(PhoneConstants.DataState.class, str);
         } else {
-            return Phone.DataState.DISCONNECTED;
+            return PhoneConstants.DataState.DISCONNECTED;
         }
     }
 

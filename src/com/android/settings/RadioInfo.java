@@ -55,6 +55,7 @@ import android.widget.EditText;
 
 import com.android.internal.telephony.DataConnection;
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
@@ -551,7 +552,7 @@ public class RadioInfo extends Activity {
 
     private final void
     updatePhoneState() {
-        Phone.State state = mPhoneStateReceiver.getPhoneState();
+        PhoneConstants.State state = mPhoneStateReceiver.getPhoneState();
         Resources r = getResources();
         String display = r.getString(R.string.radioInfo_unknown);
 
