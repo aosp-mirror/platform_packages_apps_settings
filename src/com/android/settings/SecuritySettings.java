@@ -446,7 +446,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 resultCode == Activity.RESULT_OK) {
             final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
             lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
-            mBiometricWeakLiveliness.setChecked(false);
+	    // Setting the mBiometricWeakLiveliness checked value to false is handled when onResume
+	    // is called by grabbing the value from lockPatternUtils.  We can't set it here
+	    // because mBiometricWeakLiveliness could be null
             return;
         }
         createPreferenceHierarchy();
