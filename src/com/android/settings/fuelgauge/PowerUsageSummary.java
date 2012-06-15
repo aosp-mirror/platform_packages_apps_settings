@@ -436,6 +436,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         final int NU = uidStats.size();
         for (int iu = 0; iu < NU; iu++) {
             Uid u = uidStats.valueAt(iu);
+            double p;
             double power = 0;
             double highestDrain = 0;
             String packageWithHighestDrain = null;
@@ -445,11 +446,11 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             long cpuFgTime = 0;
             long wakelockTime = 0;
             long gpsTime = 0;
+            if (DEBUG) Log.i(TAG, "UID " + u.getUid());
             if (processStats.size() > 0) {
                 // Process CPU time
                 for (Map.Entry<String, ? extends BatteryStats.Uid.Proc> ent
                         : processStats.entrySet()) {
-                    if (DEBUG) Log.i(TAG, "Process name = " + ent.getKey());
                     Uid.Proc ps = ent.getValue();
                     final long userTime = ps.getUserTime(which);
                     final long systemTime = ps.getSystemTime(which);
@@ -470,6 +471,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                         processPower += ratio * tmpCpuTime * powerCpuNormal[step];
                     }
                     cpuTime += tmpCpuTime;
+                    if (DEBUG && processPower != 0) {
+                        Log.i(TAG, String.format("process %s, cpu power=%.2f",
+                                ent.getKey(), processPower / 1000));
+                    }
                     power += processPower;
                     if (packageWithHighestDrain == null
                             || packageWithHighestDrain.startsWith("*")) {
@@ -481,8 +486,6 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                         packageWithHighestDrain = ent.getKey();
                     }
                 }
-                if (DEBUG) Log.i(TAG, "Max drain of " + highestDrain 
-                        + " by " + packageWithHighestDrain);
             }
             if (cpuFgTime > cpuTime) {
                 if (DEBUG && cpuFgTime > cpuTime + 10000) {
@@ -491,6 +494,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 cpuTime = cpuFgTime; // Statistics may not have been gathered yet.
             }
             power /= 1000;
+            if (DEBUG && power != 0) Log.i(TAG, String.format("total cpu power=%.2f", power));
 
             // Process wake lock usage
             Map<String, ? extends BatteryStats.Uid.Wakelock> wakelockStats = u.getWakelockStats();
@@ -508,19 +512,32 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             appWakelockTime += wakelockTime;
 
             // Add cost of holding a wake lock
-            power += (wakelockTime
+            p = (wakelockTime
                     * mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_AWAKE)) / 1000;
+            power += p;
+            if (DEBUG && p != 0) Log.i(TAG, String.format("wakelock power=%.2f", p));
             
             // Add cost of data traffic
             long tcpBytesReceived = u.getTcpBytesReceived(mStatsType);
             long tcpBytesSent = u.getTcpBytesSent(mStatsType);
-            power += (tcpBytesReceived+tcpBytesSent) * averageCostPerByte;
+            p = (tcpBytesReceived+tcpBytesSent) * averageCostPerByte;
+            power += p;
+            if (DEBUG && p != 0) Log.i(TAG, String.format("tcp power=%.2f", p));
 
             // Add cost of keeping WIFI running.
             long wifiRunningTimeMs = u.getWifiRunningTime(uSecTime, which) / 1000;
             mAppWifiRunning += wifiRunningTimeMs;
-            power += (wifiRunningTimeMs
+            p = (wifiRunningTimeMs
                     * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)) / 1000;
+            power += p;
+            if (DEBUG && p != 0) Log.i(TAG, String.format("wifi running power=%.2f", p));
+
+            // Add cost of WIFI scans
+            long wifiScanTimeMs = u.getWifiScanTime(uSecTime, which) / 1000;
+            p = (wifiScanTimeMs
+                    * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_SCAN)) / 1000;
+            power += p;
+            if (DEBUG && p != 0) Log.i(TAG, String.format("wifi scanning power=%.2f", p));
 
             // Process Sensor usage
             Map<Integer, ? extends BatteryStats.Uid.Sensor> sensorStats = u.getSensorStats();
@@ -541,16 +558,16 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                                 sensorManager.getDefaultSensor(sensorType);
                         if (sensorData != null) {
                             multiplier = sensorData.getPower();
-                            if (DEBUG) {
-                                Log.i(TAG, "Got sensor " + sensorData.getName() + " with power = "
-                                        + multiplier);
-                            }
                         }
                 }
-                power += (multiplier * sensorTime) / 1000;
+                p = (multiplier * sensorTime) / 1000;
+                power += p;
+                if (DEBUG && p != 0) {
+                    Log.i(TAG, String.format("sensor %s power=%.2f", sensor.toString(), p));
+                }
             }
 
-            if (DEBUG) Log.i(TAG, "UID " + u.getUid() + ": power=" + power);
+            if (DEBUG) Log.i(TAG, String.format("UID %d total power=%.2f", u.getUid(), power));
 
             // Add the app to the list if it is consuming power
             if (power != 0 || u.getUid() == 0) {
@@ -583,7 +600,6 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 if (power > mMaxPower) mMaxPower = power;
                 mTotalPower += power;
             }
-            if (DEBUG) Log.i(TAG, "Added power = " + power);
         }
 
         // The device has probably been awake for longer than the screen on
