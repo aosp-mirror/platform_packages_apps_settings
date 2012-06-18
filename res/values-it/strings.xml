@@ -349,7 +349,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Protezione medio-alta"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Protezione alta"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Disattivata da amministr., norma crittografia o archivio credenziali"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Disattivata da amministratore, norma crittografia o archivio credenziali"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nessuno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Scorrimento"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Sblocco col sorriso"</string>
@@ -557,7 +557,7 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"(invariati)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(non specificati)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Salvata"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"Disattivate"</string>
+    <string name="wifi_disabled_generic" msgid="4259794910584943386">"Disattivata"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Connessione Internet debole evitata"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problema di autenticazione"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Fuori portata"</string>
@@ -1045,6 +1045,18 @@
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Impossibile cancellare i dati dell\'applicazione."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Contenuti a cui può accedere l\'applicazione sul tablet:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Contenuti a cui può accedere l\'applicazione sul telefono:"</string>
+    <!-- no translation found for security_settings_desc_multi (7300932212437084403) -->
+    <skip />
+    <!-- no translation found for security_settings_desc_multi (6610268420793984752) -->
+    <skip />
+    <!-- no translation found for join_two_items (1336880355987539064) -->
+    <skip />
+    <!-- no translation found for join_many_items_last (5925635036718502724) -->
+    <skip />
+    <!-- no translation found for join_many_items_first (4333907712038448660) -->
+    <skip />
+    <!-- no translation found for join_many_items_middle (7556692394478220814) -->
+    <skip />
     <string name="computing_size" msgid="1599186977475211186">"Elaborazione..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"Impossibile calcolare le dimensioni del pacchetto."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"Nessuna applicazione di terze parti installata."</string>
@@ -1226,7 +1238,7 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Servizi"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Testo grande"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Il pulsante di accensione termina la chiamata"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Chiudi chiamata con pulsante ON/OFF"</string>
     <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Pronuncia le password"</string>
     <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Ritardo tocco e pressione"</string>
     <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Migliora l\'accessibilità web"</string>
@@ -1524,15 +1536,15 @@
     <string name="debug_drawing_category" msgid="6755716469267367852">"Disegno"</string>
     <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitoraggio"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Attiva StrictMode"</string>
-    <string name="strict_mode_summary" msgid="142834318897332338">"Fai lampeggiare lo schermo in caso di lunghe operazioni sul thread principale"</string>
+    <string name="strict_mode_summary" msgid="142834318897332338">"Flash dello schermo in caso di lunghe operazioni sul thread principale"</string>
     <string name="pointer_location" msgid="6084434787496938001">"Posizione puntatore"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"Overlay schermo che mostra i dati touch correnti"</string>
     <string name="show_touches" msgid="1356420386500834339">"Mostra tocchi"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Mostra feedback visivi per i tocchi"</string>
-    <string name="show_screen_updates" msgid="5470814345876056420">"Mostra agg. superficie"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Flash delle superfici delle finestre all\'aggiornam."</string>
-    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Mostra agg. visualizz. GPU"</string>
-    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Flash delle visual. in finestre se disegnate con GPU"</string>
+    <string name="show_screen_updates" msgid="5470814345876056420">"Aggiornamenti superficie"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Flash delle superfici delle finestre all\'aggiornamento"</string>
+    <string name="show_hw_screen_updates" msgid="5036904558145941590">"Aggiornamenti visualizz. GPU"</string>
+    <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Flash delle visualizzazioni dentro le finestre se disegnate con GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Disabilita overlay HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Usa sempre GPU per la composizione dello schermo"</string>
     <string name="enable_traces_title" msgid="7448835465859512430">"Abilita tracce"</string>
@@ -1546,7 +1558,7 @@
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Overlay schermo che mostra l\'uso corrente della CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forza rendering GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forza l\'uso della GPU per i disegni 2D"</string>
-    <string name="track_frame_time" msgid="6146354853663863443">"Traccia prof. render. GPU"</string>
+    <string name="track_frame_time" msgid="6146354853663863443">"Rendering GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Misura tempi rendering in adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Scala animazione finestra"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Scala animazione transizione"</string>
