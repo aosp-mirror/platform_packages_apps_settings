@@ -27,7 +27,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.INotificationManager;
-import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -43,6 +42,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.hardware.usb.IUsbManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -72,7 +72,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 /**
@@ -595,6 +594,46 @@ public class InstalledAppDetails extends Fragment
                     R.id.security_settings_list);
             securityList.removeAllViews();
             securityList.addView(asp.getPermissionsView());
+            // If this app is running under a shared user ID with other apps,
+            // update the description to explain this.
+            String[] packages = mPm.getPackagesForUid(mPackageInfo.applicationInfo.uid);
+            if (packages != null && packages.length > 1) {
+                ArrayList<CharSequence> pnames = new ArrayList<CharSequence>();
+                for (int i=0; i<packages.length; i++) {
+                    String pkg = packages[i];
+                    if (mPackageInfo.packageName.equals(pkg)) {
+                        continue;
+                    }
+                    try {
+                        ApplicationInfo ainfo = mPm.getApplicationInfo(pkg, 0);
+                        pnames.add(ainfo.loadLabel(mPm));
+                    } catch (PackageManager.NameNotFoundException e) {
+                    }
+                }
+                final int N = pnames.size();
+                if (N > 0) {
+                    final Resources res = getActivity().getResources();
+                    String appListStr;
+                    if (N == 1) {
+                        appListStr = pnames.get(0).toString();
+                    } else if (N == 2) {
+                        appListStr = res.getString(R.string.join_two_items, pnames.get(0),
+                                pnames.get(1));
+                    } else {
+                        appListStr = pnames.get(N-2).toString();
+                        for (int i=N-3; i>=0; i--) {
+                            appListStr = res.getString(i == 0 ? R.string.join_many_items_first
+                                    : R.string.join_many_items_middle, pnames.get(i), appListStr);
+                        }
+                        appListStr = res.getString(R.string.join_many_items_last,
+                                appListStr, pnames.get(N-1));
+                    }
+                    TextView descr = (TextView) mRootView.findViewById(
+                            R.id.security_settings_desc);
+                    descr.setText(res.getString(R.string.security_settings_desc_multi,
+                            mPackageInfo.applicationInfo.loadLabel(mPm), appListStr));
+                }
+            }
         } else {
             permsView.setVisibility(View.GONE);
         }

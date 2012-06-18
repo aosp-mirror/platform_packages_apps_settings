@@ -393,7 +393,7 @@
                 style="?android:attr/listSeparatorTextViewStyle"
                 android:layout_marginTop="8dip"
                 android:text="@string/permissions_label" />
-            <TextView
+            <TextView android:id="@+id/security_settings_desc"
                 android:text="@string/security_settings_desc"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:paddingTop="6dip"
