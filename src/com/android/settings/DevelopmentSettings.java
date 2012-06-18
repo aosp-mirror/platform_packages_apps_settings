@@ -25,6 +25,7 @@ import android.app.ActivityThread;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -61,6 +62,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /*
  * Displays preferences for application developers.
@@ -108,6 +110,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
+    private DevicePolicyManager mDpm;
 
     private Switch mEnabledSwitch;
     private boolean mLastEnabledState;
@@ -148,6 +151,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
             = new ArrayList<CheckBoxPreference>();
 
+    private final HashSet<Preference> mDisabledPrefs = new HashSet<Preference>();
+
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
     private Dialog mEnableDialog;
@@ -160,6 +165,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
+        mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         addPreferencesFromResource(R.xml.development_prefs);
 
@@ -278,7 +284,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private void setPrefsEnabledState(boolean enabled) {
         for (int i = 0; i < mAllPrefs.size(); i++) {
-            mAllPrefs.get(i).setEnabled(enabled);
+            Preference pref = mAllPrefs.get(i);
+            pref.setEnabled(enabled && !mDisabledPrefs.contains(pref));
         }
         updateAllOptions();
     }
@@ -286,6 +293,16 @@ public class DevelopmentSettings extends PreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+
+        if (mDpm.getMaximumTimeToLock(null) > 0) {
+            // A DeviceAdmin has specified a maximum time until the device
+            // will lock...  in this case we can't allow the user to turn
+            // on "stay awake when plugged in" because that would defeat the
+            // restriction.
+            mDisabledPrefs.add(mKeepScreenOn);
+        } else {
+            mDisabledPrefs.remove(mKeepScreenOn);
+        }
 
         final ContentResolver cr = getActivity().getContentResolver();
         mLastEnabledState = Settings.Secure.getInt(cr,
