@@ -3381,6 +3381,13 @@
     <!-- Summary text of the "local backup password" setting when the user has already supplied a password -->
     <string name="local_backup_password_summary_change">Touch to change or remove the password for desktop full backups</string>
 
+    <!-- Toast message shown when the user successfully sets a new local backup password [CHAR LIMIT=80] -->
+    <string name="local_backup_password_toast_success">New backup password set</string>
+    <!-- Toast message shown when setting a new local backup password fails due to the user not correctly typing the password again for confirmation [CHAR LIMIT=80] -->
+    <string name="local_backup_password_toast_confirmation_mismatch">New password and confirmation don\'t match</string>
+    <!-- Toast message shown when setting a new local backup password fails due to the user not supplying the correct existing password. The phrasing here is deliberately quite general. [CHAR LIMIT=80] -->
+    <string name="local_backup_password_toast_validation_failure">Failure setting backup password</string>
+
     <!-- Dialog title for confirmation to erase backup data from server -->
     <string name="backup_erase_dialog_title"></string>
     <!-- Dialog title for confirmation to erase backup data from server -->
