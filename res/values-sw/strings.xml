@@ -1037,18 +1037,12 @@
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Haikuweza kufuta data ya programu."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Programu hii haiwezi kufikia inayofuata kwa kompyuta yako ndogo:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Programu hii ya kompyuta inaweza kufikia ifuatayo kwenye simu yako:"</string>
-    <!-- no translation found for security_settings_desc_multi (7300932212437084403) -->
-    <skip />
-    <!-- no translation found for security_settings_desc_multi (6610268420793984752) -->
-    <skip />
-    <!-- no translation found for join_two_items (1336880355987539064) -->
-    <skip />
-    <!-- no translation found for join_many_items_last (5925635036718502724) -->
-    <skip />
-    <!-- no translation found for join_many_items_first (4333907712038448660) -->
-    <skip />
-    <!-- no translation found for join_many_items_middle (7556692394478220814) -->
-    <skip />
+    <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Programu hii inaweza kufikia yafuatayo kwenye kompyuta yako kibao. Ili kuboresha utendaji na kupunguza matumizi ya kumbukumbu, baadhi ya vibali hivi vinapatikana katika <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> kwa sababu vinaendeshwa kwa mchakato sawia kama <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Programu hii inaweza kufikia yafuatayo kwenye simu yako. Ili kuboresha utendaji na kupunguza matumizi ya kumbukumbu, baadhi ya vibali hivi vinapatikana katika <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> kwa sababu vinaendeshwa kwa mchakato sawia kama <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> na  <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> na <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
+    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="computing_size" msgid="1599186977475211186">"Inahesabu..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"Haikuweza kuhesabu ukubwa wa furushi."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"Hauna programu za wahusika wengine zilizosakinishwa."</string>
@@ -1414,6 +1408,12 @@
     <string name="local_backup_password_title" msgid="3860471654439418822">"Nenosiri la chelezo ya eneo kazi"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Chelezo kamili za eneo kazi hazijalindwa kwa sasa"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Gusa ili kubadilisha au kuondoa nenosiri la chelezo kamili za eneo kazi"</string>
+    <!-- no translation found for local_backup_password_toast_success (582016086228434290) -->
+    <skip />
+    <!-- no translation found for local_backup_password_toast_confirmation_mismatch (3495167398824569524) -->
+    <skip />
+    <!-- no translation found for local_backup_password_toast_validation_failure (5646377234895626531) -->
+    <skip />
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="7218566008912418809">"Wacha kucheleza manenosiri, vialamisho, mipangilio mingine na data ya programu ya Wi-Fi, na ufute kumbukumbu zote katika seva ya Google?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Mipangilio za usimamizi wa kifaa"</string>
@@ -1464,7 +1464,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Hitilafu ya usawazishaji."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Usawazishaji haukuwezekana"</string>
     <string name="sync_active" msgid="8476943765960863040">"Usawazishaji amilifu"</string>
-    <string name="account_sync_settings_title" msgid="5131314922423053588">"Landanisha"</string>
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"Sawazisha"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Kwa sasa usawazishaji una shida. Utarudi baada ya muda mfupi."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Ongeza akaunti"</string>
     <string name="background_data" msgid="5779592891375473817">"Data ya maandhari nyuma"</string>
@@ -1475,8 +1475,8 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Kusawazishwa Kumewezeshwa"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Sawazisha Kumezimwa"</string>
     <string name="sync_error" msgid="5060969083117872149">"Hitilafu ya usawazishaji"</string>
-    <string name="last_synced" msgid="4242919465367022234">"Ililandanishwa mwisho <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
-    <string name="sync_in_progress" msgid="5151314196536070569">"Inalandanisha sasa..."</string>
+    <string name="last_synced" msgid="4242919465367022234">"Ilisawazishwa mwisho <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="sync_in_progress" msgid="5151314196536070569">"Inasawazisha sasa..."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Mipangilio ya chelezo"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Cheleza mipangilio yangu"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sawazisha sasa"</string>
@@ -1569,7 +1569,7 @@
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Onyesha matumizi ya Mtandao hewa"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Onyesha matumizi ya Etherneti"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"Mitandao-hewa ya simu za mkononi"</string>
-    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Data ya Kulandanisha Oto"</string>
+    <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Usawazishaji Data Kiotomatiki"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"badilisha mzunguko..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Siku ya mwezi ya kuweka upya msururu wa matumizi ya data:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Hakuna programu zilizotumia data wakati wa kipindi hiki."</string>
@@ -1598,11 +1598,11 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Zuia data ya mandhari nyuma?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Kipengee hiki kinaweza kusababisha programu inayotegemea data ya usuli kuacha kufanya kazi wakati ni mitandao ya simu tu inayopatikana."\n\n"Unaweza kupata vidhibiti faafu zaidi vya matumizi ya data katika mipangilio inayopatikana ndani ya programu."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Kuzuia data za usuli inawezekana tu wakati umeweka kikomo cha data ya simu ya mkono."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Je, washa data ya kulandanisha oto?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Mabadiliko yote unayoyafanya katika akaunti zako kwenye wavuti yatanakiliwa otomatiki katika kompyuta kibao yako."\n\n"Baadhi ya akaunti pia zinaweza kunakili otomatiki mabadiliko yoyote unayoyafanya kwenye kompyuta kibao hadi katika wavuti. Akaunti ya Google hufanyakazi kwa namna hii."\n\n"Ili kuchagua aina zipi za taarifa za kulandanisha katika kila akaunti, nenda kwenye Mipangilio &gt; Akaunti."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Mabadiliko yote unayoyafanya katika akaunti zako kwenye wavuti yatanakiliwa otomatiki katika simu yako."\n\n"Baadhi ya akaunti pia zinaweza kunakili otomatiki mabadiliko yoyote unayoyafanya kwenye simu hadi katika wavuti. Akaunti ya Google hufanyakazi kwa namna hii."\n\n"Ili kuchagua aina zipi za taarifa za kulandanisha katika kila akaunti, nenda kwenye Mipangilio &gt; Akaunti."</string>
-    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Je, zima data ya kulandanisha otomatiki?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Hii itahifadhi data na matumizi ya betri, lakini utahitajika kulandanisha kila akaunti kwa mkono ili kukusanya taarifa ya hivi karibuni. Na hutapokea arifa sasishi zinapotokea."</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Je, usawazishaji data kiotomatiki uwashwe?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Mabadiliko yote unayoyafanya katika akaunti zako kwenye wavuti yatanakiliwa kiotomatiki katika kompyuta kibao yako."\n\n"Baadhi ya akaunti pia zinaweza kunakili kiotomatiki mabadiliko yoyote unayoyafanya kwenye kompyuta kibao hadi kwenye wavuti. Akaunti ya Google hufanyakazi kwa namna hii."\n\n"Ili kuchagua ni aina zipi za taarifa za kusawazisha katika kila akaunti, nenda kwenye Mipangilio &gt; Akaunti."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Mabadiliko yote unayoyafanya katika akaunti zako kwenye wavuti yatanakiliwa kiotomatiki katika simu yako."\n\n"Baadhi ya akaunti pia zinaweza kunakili kiotomatiki mabadiliko yoyote unayoyafanya kwenye simu hadi katika wavuti. Akaunti ya Google hufanyakazi kwa namna hii."\n\n"Ili kuchagua aina zipi za taarifa za kusawazisha katika kila akaunti, nenda kwenye Mipangilio &gt; Akaunti."</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Je, usawazishaji data kiotomatiki uzimwe?"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Hii itahifadhi data na matumizi ya betri, lakini utahitajika kusawazisha kila akaunti wewe mwenyewe ili kukusanya taarifa ya hivi karibuni. Na hutapokea arifa wakati sasisho zinapotokea."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Tarehe iliyowekwa upya ya msururu wa matumizi"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Tarehe ya kila mwezi:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Weka"</string>
