@@ -52,6 +52,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -71,6 +72,7 @@ public class Settings extends PreferenceActivity
         implements ButtonBarHandler, OnAccountsUpdateListener {
 
     private static final String LOG_TAG = "Settings";
+
     private static final String META_DATA_KEY_HEADER_ID =
         "com.android.settings.TOP_LEVEL_HEADER_ID";
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
@@ -108,7 +110,6 @@ public class Settings extends PreferenceActivity
     // TODO: Update Call Settings based on airplane mode state.
 
     protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
-    private List<Header> mHeaders;
 
     private AuthenticatorHelper mAuthenticatorHelper;
     private Header mLastHeader;
@@ -189,6 +190,7 @@ public class Settings extends PreferenceActivity
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).resume();
         }
+        invalidateHeaders();
     }
 
     @Override
@@ -360,7 +362,7 @@ public class Settings extends PreferenceActivity
         intent.setClass(this, SubSettings.class);
         return intent;
     }
-    
+
     /**
      * Populate the activity with the top-level headers.
      */
@@ -369,8 +371,6 @@ public class Settings extends PreferenceActivity
         loadHeadersFromResource(R.xml.settings_headers, headers);
 
         updateHeaderList(headers);
-
-        mHeaders = headers;
     }
 
     private void updateHeaderList(List<Header> target) {
@@ -730,17 +730,11 @@ public class Settings extends PreferenceActivity
 
     @Override
     public void setListAdapter(ListAdapter adapter) {
-        if (mHeaders == null) {
-            mHeaders = new ArrayList<Header>();
-            // When the saved state provides the list of headers, onBuildHeaders is not called
-            // Copy the list of Headers from the adapter, preserving their order
-            for (int i = 0; i < adapter.getCount(); i++) {
-                mHeaders.add((Header) adapter.getItem(i));
-            }
+        if (adapter == null) {
+            super.setListAdapter(null);
+        } else {
+            super.setListAdapter(new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper));
         }
-
-        // Ignore the adapter provided by PreferenceActivity and substitute ours instead
-        super.setListAdapter(new HeaderAdapter(this, mHeaders, mAuthenticatorHelper));
     }
 
     @Override
