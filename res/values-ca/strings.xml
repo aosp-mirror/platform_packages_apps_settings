@@ -900,7 +900,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Xarxes mòbils"</string>
     <string name="location_title" msgid="1029961368397484576">"La meva ubicació"</string>
     <string name="location_network_based" msgid="5569673665032992664">"Servei d\'ubicació de Google"</string>
-    <string name="location_neighborhood_level" msgid="2948129720516513300">"Permet que s\'enviïn dades d\'ubicació anònimes a Google. Permet també que les aplicacions que tinguin permís facin servir dades d\'orígens com ara les xarxes de Wi-Fi i mòbils per determinar la ubicació aproximada."</string>
+    <string name="location_neighborhood_level" msgid="2948129720516513300">"Permet que s\'enviïn dades d\'ubicació anònimes a Google. Permet també que les aplicacions permeses facin servir dades d\'orígens com ara xarxes Wi-Fi i mòbils per determinar la ubicació aproximada."</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Ubicació determinada per Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satèl·lits GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Permet que les aplicacions usin GPS per determinar la teva ubicació"</string>
@@ -1045,18 +1045,12 @@
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"No s\'han pogut esborrar les dades de l\'aplicació."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Aquesta aplicació pot accedir a les dades següents de la teva tauleta:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Aquesta aplicació pot accedir als elements següents del telèfon:"</string>
-    <!-- no translation found for security_settings_desc_multi (7300932212437084403) -->
-    <skip />
-    <!-- no translation found for security_settings_desc_multi (6610268420793984752) -->
-    <skip />
-    <!-- no translation found for join_two_items (1336880355987539064) -->
-    <skip />
-    <!-- no translation found for join_many_items_last (5925635036718502724) -->
-    <skip />
-    <!-- no translation found for join_many_items_first (4333907712038448660) -->
-    <skip />
-    <!-- no translation found for join_many_items_middle (7556692394478220814) -->
-    <skip />
+    <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Aquesta aplicació pot accedir als elements següents de la tauleta. Per tal de millorar el rendiment i reduir l\'ús de la memòria, alguns d\'aquests permisos estan disponibles per a <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> perquè s\'executa amb el mateix procés que <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Aquesta aplicació pot accedir als elements següents del telèfon. Per millorar el rendiment i per reduir l\'ús de la memòria, alguns d\'aquests permisos estan disponibles per a <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> perquè s\'executa amb el mateix procés que <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> i <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> i <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
+    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="computing_size" msgid="1599186977475211186">"S\'està calculant..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"No s\'ha pogut calcular la mida del paquet."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"No tens cap aplicació de tercers instal·lada."</string>
@@ -1101,7 +1095,7 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procés i <xliff:g id="NUMSERVICES">%2$d</xliff:g> serveis"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processos i <xliff:g id="NUMSERVICES">%2$d</xliff:g> servei"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processos <xliff:g id="NUMSERVICES">%2$d</xliff:g> serveis"</string>
-    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Aplicacions en execució"</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Aplicació en execució"</string>
     <string name="no_services" msgid="7133900764462288263">"No actiu"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Serveis"</string>
     <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Processos"</string>
