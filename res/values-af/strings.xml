@@ -1045,18 +1045,12 @@
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Kon nie data vir program uitvee nie."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Hierdie program het toegang tot die volgende op jou tablet:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Hierdie program kan by die volgende op jou foon ingaan:"</string>
-    <!-- no translation found for security_settings_desc_multi (7300932212437084403) -->
-    <skip />
-    <!-- no translation found for security_settings_desc_multi (6610268420793984752) -->
-    <skip />
-    <!-- no translation found for join_two_items (1336880355987539064) -->
-    <skip />
-    <!-- no translation found for join_many_items_last (5925635036718502724) -->
-    <skip />
-    <!-- no translation found for join_many_items_first (4333907712038448660) -->
-    <skip />
-    <!-- no translation found for join_many_items_middle (7556692394478220814) -->
-    <skip />
+    <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Hierdie program kan by die volgende inligting op jou tablet ingaan. Om prestasie te verbeter en geheuegebruik te verminder, is sommige van hierdie regte vir <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> beskikbaar, want dit loop in dieselfde proses as <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Hierdie program kan by die volgende inligting op jou foon ingaan. Om prestasie te verbeter en geheuegebruik te verminder, is sommige van hierdie regte vir <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> beskikbaar, want dit loop in dieselfde proses as <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> en <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> en <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
+    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="computing_size" msgid="1599186977475211186">"Bereken tans..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"Kon nie pakketgrootte bereken nie."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"Jy het geen geïnstalleerde derdeparty-programme nie."</string>
@@ -1489,7 +1483,7 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Sinkronisering is AAN"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Sinkronisering is AF"</string>
     <string name="sync_error" msgid="5060969083117872149">"Sinkroniseerfout"</string>
-    <string name="last_synced" msgid="4242919465367022234">"Die laaste keer om <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g> gesinkroniseer"</string>
+    <string name="last_synced" msgid="4242919465367022234">"Laas gesinkroniseer om <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="5151314196536070569">"Sinkroniseer tans..."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Rugsteun instellings"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Rugsteun my instellings"</string>
@@ -1613,10 +1607,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Hierdie funksie kan veroorsaak dat \'n program wat afhanklik is van agtergronddata, ophou werk wanneer slegs mobiele netwerke beskikbaar is."\n\n"Jy kan meer geskikte datagebruik-kontroles vind in die instellings wat in die program self beskikbaar is."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Beperking van agtergronddata is moontlik slegs as jy \'n mobieldatalimiet gestel het."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Moet die outomatiese sinkronisering van data aangeskakel word?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Enige veranderings wat jy aan jou rekeninge op die web maak, sal outomaties na jou tablet gekopieer word."\n\n"Sommige rekeninge kan ook moontlik outomaties enige veranderinge wat jy op die tablet maak, na die web kopieer. \'n Google-rekening werk op hierdie manier."\n\n"Om te kies watter soort inligting binne elke rekening gesinkroniseer moet word, gaan na Instellings &gt; Rekeninge."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Enige veranderings wat jy aan jou rekeninge op die web maak, sal outomaties na jou foon gekopieer word."\n\n"Sommige rekeninge kan ook moontlik outomaties enige veranderinge wat jy op die foon maak, na die web kopieer. \'n Google-rekening werk op hierdie manier."\n\n"Om te kies watter soort inligting binne elke rekening gesinkroniseer moet word, gaan na Instellings &gt; Rekeninge."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Enige veranderings wat jy aan jou rekeninge op die web maak, sal outomaties na jou tablet gekopieer word."\n\n"Sommige rekeninge kan ook moontlik outomaties enige veranderinge wat jy op die tablet maak, na die web kopieer. \'n Google-rekening werk so."\n\n"Om te kies watter soort inligting binne elke rekening gesinkroniseer moet word, gaan na Instellings en Rekeninge."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Enige veranderings wat jy aan jou rekeninge op die web maak, sal outomaties na jou foon gekopieer word."\n\n"Sommige rekeninge kan ook moontlik outomaties enige veranderinge wat jy op die foon maak, na die web kopieer. \'n Google-rekening werk so."\n\n"Om te kies watter soort inligting binne elke rekening gesinkroniseer moet word, gaan na Instellings en Rekeninge."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Moet die outomatiese sinkronisering van data afgeskakel word?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Dit sal data en batteryverbruik bespaar, maar jy sal elke rekening self moet sinkroniseer om onlangse inligting in te samel  En jy sal geen kennisgewings ontvang wanneer opdaterings plaasvind nie."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Dit sal data- en batteryverbruik bespaar, maar jy sal elke rekening self moet sinkroniseer om onlangse inligting in te samel.  En jy sal geen kennisgewings ontvang wanneer opdaterings plaasvind nie."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Gebruiksiklus-terugsteldatum"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum van elke maand:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Stel"</string>
