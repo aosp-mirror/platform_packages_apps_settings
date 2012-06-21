@@ -117,7 +117,7 @@
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No se ha establecido ningún nombre; se utiliza el nombre de cuenta"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Buscar dispositivos"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Cambiar el nombre de tableta"</string>
-    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"Cambiar el nombre del dispositivo"</string>
+    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"Cambiar nombre del dispositivo"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Cambiar nombre"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"¿Desconectar?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Esto pondrá fin a tu conexión con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
@@ -310,8 +310,8 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Necesitas un PIN numérico o contraseña para descifrar tu tableta cada vez que la enciendes"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Se necesita un PIN numérico o contraseña para descifrar tu dispositivo cada vez que lo enciendes"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Encriptado"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Puedes encriptar tus cuentas, medios, parámetros de configuración, las aplicaciones que descargaste y sus datos y otros archivos. Luego de encriptar tu tableta, tienes que escribir un PIN o contraseña numéricos cada vez que la enciendes para desencriptarla. No puedes desencriptar tu tableta a menos que restablezcas su configuración de fábrica y borres, así, todos tus datos."\n\n"La encriptación demora al menos una hora. La batería debe estar cargada y tu tableta debe permanecer enchufada hasta que la encriptación se complete. Si interrumpes el proceso de encriptación, perderás algunos o todos tus datos."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Puedes encriptar tus cuentas, medios, parámetros de configuración, las aplicaciones que descargaste y sus datos y otros archivos. Luego de encriptar tu dispositivo, tienes que escribir un PIN o contraseña numéricos cada vez que lo enciendes para desencriptarlo. No puedes desencriptar tu dispositivo a menos que restablezcas su configuración de fábrica y borres, así, todos tus datos."\n\n"La encriptación demora al menos una hora. La batería debe estar cargada y tu dispositivo debe permanecer enchufado hasta que la encriptación se complete. Si interrumpes el proceso de encriptación, perderás algunos o todos tus datos."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Puedes encriptar tus cuentas, tus parámetros de configuración, las aplicaciones descargadas y sus datos, archivos multimedia y otros tipos de archivos. Una vez que hayas encriptado la tableta, debes ingresar un PIN o una contraseña numérica para desencriptarla cada vez que la enciendas. No puedes desencriptar tu tableta a menos que restablezcas su configuración de fábrica y borres, así, todos tus datos."\n\n"El proceso de encriptación tarda aproximadamente una hora. Debes iniciar este proceso con la batería cargada y mantener la tableta conectada hasta que finalice. Si se interrumpe el proceso de encriptación, perderás tus datos total o parcialmente."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Puedes encriptar tus cuentas, tus parámetros de configuración, las aplicaciones descargadas y sus datos, archivos multimedia y otros tipos de archivos. Luego de encriptar tu dispositivo, tienes que escribir un PIN o contraseña numéricos cada vez que lo enciendes para desencriptarlo. No puedes desencriptar tu dispositivo a menos que restablezcas su configuración de fábrica y borres, así, todos tus datos."\n\n"El proceso de encriptación tarda aproximadamente una hora. Debes iniciar este proceso con la batería cargada y mantener el dispositivo conectado hasta que finalice. Si se interrumpe el proceso de encriptación, perderás tus datos total o parcialmente."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Encriptar tableta"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Encriptar dispositivo"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Carga tu batería e inténtalo nuevamente."</string>
@@ -900,7 +900,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móviles"</string>
     <string name="location_title" msgid="1029961368397484576">"Mi ubicación"</string>
     <string name="location_network_based" msgid="5569673665032992664">"Servicio ubicación de Google"</string>
-    <string name="location_neighborhood_level" msgid="2948129720516513300">"Permite que los datos anónimos de ubicación se envíen a Google. Permite también que las aplicaciones utilicen datos de fuentes como Wi-Fi y redes móviles para determinar tu ubicación aproximada."</string>
+    <string name="location_neighborhood_level" msgid="2948129720516513300">"Permitir enviar datos anónimos de ubicación a Google y que aplic. usen datos de Wi-Fi y redes móviles para determinar tu ubicación"</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Ubicación determinada por Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satélites de GPS"</string>
     <string name="location_street_level" msgid="4244496898967415234">"Permitir que las aplicaciones utilicen el GPS para indicar tu ubicación"</string>
@@ -1095,7 +1095,7 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicios"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicio"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicios"</string>
-    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Aplic. en ejecución"</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Aplicación en ejecución"</string>
     <string name="no_services" msgid="7133900764462288263">"Inactivo"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Servicios"</string>
     <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Procesos"</string>
