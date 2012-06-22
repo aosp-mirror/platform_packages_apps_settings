@@ -311,7 +311,7 @@
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Memerlukan PIN atau sandi angka untuk mengurai enkripsi ponsel tiap kali Anda menyalakannya"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Dienkripsi"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"Anda dapat mengenkripsi akun, setelan, apl yang diunduh dan datanya, media, serta file lainnya. Setelah mengenkripsi tablet, Anda perlu memasukkan PIN numerik atau sandi untuk mendekripsinya setiap kali Anda menyalakannya. Anda tidak dapat membatalkan enkripsi tablet kecuali dengan mengembalikannya ke setelan pabrik yang akan menghapus seluruh data Anda."\n\n"Enkripsi memakan waktu satu jam atau lebih. Anda harus memulainya dengan baterai yang terisi penuh dan terus menghubungkan tablet dengan sumber daya hingga enkripsi selesai. Jika Anda menghentikan proses enkripsi, Anda akan kehilangan sebagian atau seluruh data Anda."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Anda dapat mengenkripsi akun, setelan, apl yang diunduh dan datanya, media, serta file lainnya. Setelah mengenkripsi ponsel, Anda perlu memasukkan PIN numerik atau sandi untuk mendekripsinya setiap kali Anda menghidupkannya: Anda tidak dapat membatalkan enkripsi ponsel kecuali dengan mengembalikan ke setelan pabrik dan akan menghapus seluruh data Anda."\n\n"Enkripsi memakan waktu satu jam atau lebih. Anda harus memulainya dengan baterai yang terisi penuh dan terus menghubungkan ponsel dengan sumber daya hingga enkripsi selesai. Jika Anda menghentikan proses enkripsi, Anda akan kehilangan sebagian atau seluruh data Anda."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Anda dapat mengenkripsi akun, setelan, apl yang diunduh dan datanya, media, serta file lainnya. Setelah mengenkripsi ponsel, Anda perlu memasukkan PIN numerik atau sandi untuk mendekripsinya setiap kali Anda menghidupkannya. Anda tidak dapat membatalkan enkripsi ponsel kecuali dengan mengembalikan ke setelan pabrik dan akan menghapus seluruh data Anda."\n\n"Enkripsi memakan waktu satu jam atau lebih. Anda harus memulainya dengan baterai yang terisi penuh dan terus menghubungkan ponsel dengan sumber daya hingga enkripsi selesai. Jika Anda menghentikan proses enkripsi, Anda akan kehilangan sebagian atau seluruh data Anda."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Enkripsi tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Enkripsi ponsel"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Isi daya baterai Anda dan coba lagi."</string>
@@ -1045,18 +1045,12 @@
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Tidak dapat menghapus data untuk apl."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Apl ini dapat mengakses hal berikut pada tablet Anda:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Apl ini dapat mengakses hal berikut dari ponsel Anda:"</string>
-    <!-- no translation found for security_settings_desc_multi (7300932212437084403) -->
-    <skip />
-    <!-- no translation found for security_settings_desc_multi (6610268420793984752) -->
-    <skip />
-    <!-- no translation found for join_two_items (1336880355987539064) -->
-    <skip />
-    <!-- no translation found for join_many_items_last (5925635036718502724) -->
-    <skip />
-    <!-- no translation found for join_many_items_first (4333907712038448660) -->
-    <skip />
-    <!-- no translation found for join_many_items_middle (7556692394478220814) -->
-    <skip />
+    <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Aplikasi ini dapat mengakses yang berikut pada tablet Anda. Untuk meningkatkan kinerja dan mengurangi penggunaan memori, beberapa izin ini tersedia untuk <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> karena berjalan dalam proses yang sama seperti <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Aplikasi ini dapat mengakses yang berikut pada ponsel Anda. Untuk meningkatkan kinerja dan mengurangi penggunaan memori, beberapa izin ini tersedia untuk <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> karena berjalan dalam proses yang sama seperti <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> dan <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> dan <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
+    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="computing_size" msgid="1599186977475211186">"Menghitung..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"Tidak dapat menghitung ukuran paket."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"Anda tidak memiliki apl pihak ketiga yang terpasang."</string>
@@ -1101,7 +1095,7 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proses dan <xliff:g id="NUMSERVICES">%2$d</xliff:g> layanan"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proses dan <xliff:g id="NUMSERVICES">%2$d</xliff:g> layanan"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proses dan <xliff:g id="NUMSERVICES">%2$d</xliff:g> layanan"</string>
-    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Apl yang berjalan"</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Aplikasi yang berjalan"</string>
     <string name="no_services" msgid="7133900764462288263">"Tidak aktif"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Layanan"</string>
     <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Proses"</string>
@@ -1422,12 +1416,9 @@
     <string name="local_backup_password_title" msgid="3860471654439418822">"Sandi cadangan desktop"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Saat ini cadangan desktop penuh tidak dilindungi"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Sentuh guna mengubah atau menghapus sandi untuk cadangan lengkap desktop"</string>
-    <!-- no translation found for local_backup_password_toast_success (582016086228434290) -->
-    <skip />
-    <!-- no translation found for local_backup_password_toast_confirmation_mismatch (3495167398824569524) -->
-    <skip />
-    <!-- no translation found for local_backup_password_toast_validation_failure (5646377234895626531) -->
-    <skip />
+    <string name="local_backup_password_toast_success" msgid="582016086228434290">"Sandi cadangan baru telah disetel"</string>
+    <string name="local_backup_password_toast_confirmation_mismatch" msgid="3495167398824569524">"Sandi dan konfirmasi baru tidak cocok."</string>
+    <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"Gagal saat menyetel sandi cadangan"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="7218566008912418809">"Hentikan mencadangkan sandi Wi-Fi, bookmark, setelan lainnya, dan data apl, serta menghapus semua salinan di server Google?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Setelan administrasi perangkat"</string>
