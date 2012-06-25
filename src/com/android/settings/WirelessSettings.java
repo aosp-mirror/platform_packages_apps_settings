@@ -50,6 +50,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
+    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -170,6 +171,26 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         } else {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(Utils.getTetheringLabel(cm));
+        }
+
+        // Enable link to CMAS app settings depending on the value in config.xml.
+        boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
+                com.android.internal.R.bool.config_cellBroadcastAppLinks);
+        try {
+            if (isCellBroadcastAppLinkEnabled) {
+                PackageManager pm = getPackageManager();
+                if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                    isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+                }
+            }
+        } catch (IllegalArgumentException ignored) {
+            isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
+        }
+        if (!isCellBroadcastAppLinkEnabled) {
+            PreferenceScreen root = getPreferenceScreen();
+            Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
+            if (ps != null) root.removePreference(ps);
         }
     }
 
