@@ -112,7 +112,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                                 } catch (AuthenticatorException e) {
                                     // handled below
                                 }
-                                if (failed) {
+                                if (failed && getActivity() != null &&
+                                        !getActivity().isFinishing()) {
                                     showDialog(FAILED_REMOVAL_DIALOG);
                                 } else {
                                     finish();
