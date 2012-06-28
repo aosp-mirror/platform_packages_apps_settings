@@ -439,6 +439,10 @@ public class Settings extends PreferenceActivity
         List<Header> accountHeaders = new ArrayList<Header>(accountTypes.length);
         for (String accountType : accountTypes) {
             CharSequence label = mAuthenticatorHelper.getLabelForType(this, accountType);
+            if (label == null) {
+                continue;
+            }
+
             Account[] accounts = AccountManager.get(this).getAccountsByType(accountType);
             boolean skipToAccount = accounts.length == 1
                     && !mAuthenticatorHelper.hasAccountPreferences(accountType);
@@ -689,7 +693,7 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
         }
-        
+
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
