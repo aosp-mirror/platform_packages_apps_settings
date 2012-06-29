@@ -394,8 +394,8 @@ public class InstalledAppDetails extends Fragment
         
         // Initialize clear data and move install location buttons
         View data_buttons_panel = view.findViewById(R.id.data_buttons_panel);
-        mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
-        mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
+        mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
+        mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
         
         // Cache section
         mCacheSize = (TextView) view.findViewById(R.id.cache_size_text);
@@ -687,26 +687,28 @@ public class InstalledAppDetails extends Fragment
                 mLastExternalCodeSize = mAppEntry.externalCodeSize;
                 mExternalCodeSize.setText(getSizeStr(mAppEntry.externalCodeSize));
             }
-            if (mLastExternalDataSize != mAppEntry.externalDataSize) {
-                mLastExternalDataSize = mAppEntry.externalDataSize;
-                mExternalDataSize.setText(getSizeStr(mAppEntry.externalDataSize));
+            long nonCacheExtDataSize = mAppEntry.externalDataSize - mAppEntry.externalCacheSize;
+            if (mLastExternalDataSize != nonCacheExtDataSize) {
+                mLastExternalDataSize = nonCacheExtDataSize;
+                mExternalDataSize.setText(getSizeStr(nonCacheExtDataSize));
             }
-            if (mLastCacheSize != mAppEntry.cacheSize) {
-                mLastCacheSize = mAppEntry.cacheSize;
-                mCacheSize.setText(getSizeStr(mAppEntry.cacheSize));
+            long cacheSize = mAppEntry.cacheSize + mAppEntry.externalCacheSize;
+            if (mLastCacheSize != cacheSize) {
+                mLastCacheSize = cacheSize;
+                mCacheSize.setText(getSizeStr(cacheSize));
             }
             if (mLastTotalSize != mAppEntry.size) {
                 mLastTotalSize = mAppEntry.size;
                 mTotalSize.setText(getSizeStr(mAppEntry.size));
             }
             
-            if (mAppEntry.dataSize <= 0 || !mCanClearData) {
+            if ((mAppEntry.dataSize+nonCacheExtDataSize) <= 0 || !mCanClearData) {
                 mClearDataButton.setEnabled(false);
             } else {
                 mClearDataButton.setEnabled(true);
                 mClearDataButton.setOnClickListener(this);
             }
-            if (mAppEntry.cacheSize <= 0) {
+            if (cacheSize <= 0) {
                 mClearCacheButton.setEnabled(false);
             } else {
                 mClearCacheButton.setEnabled(true);
