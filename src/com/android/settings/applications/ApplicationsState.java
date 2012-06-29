@@ -73,6 +73,16 @@ public class ApplicationsState {
         long dataSize;
         long externalCodeSize;
         long externalDataSize;
+
+        // This is the part of externalDataSize that is in the cache
+        // section of external storage.  Note that we don't just combine
+        // this with cacheSize because currently the platform can't
+        // automatically trim this data when needed, so it is something
+        // the user may need to manage.  The externalDataSize also includes
+        // this value, since what this is here is really the part of
+        // externalDataSize that we can just consider to be "cache" files
+        // for purposes of cleaning them up in the app details UI.
+        long externalCacheSize;
     }
     
     public static class AppEntry extends SizeInfo {
@@ -820,13 +830,15 @@ public class ApplicationsState {
                                     entry.codeSize != stats.codeSize ||
                                     entry.dataSize != stats.dataSize ||
                                     entry.externalCodeSize != externalCodeSize ||
-                                    entry.externalDataSize != externalDataSize) {
+                                    entry.externalDataSize != externalDataSize ||
+                                    entry.externalCacheSize != stats.externalCacheSize) {
                                 entry.size = newSize;
                                 entry.cacheSize = stats.cacheSize;
                                 entry.codeSize = stats.codeSize;
                                 entry.dataSize = stats.dataSize;
                                 entry.externalCodeSize = externalCodeSize;
                                 entry.externalDataSize = externalDataSize;
+                                entry.externalCacheSize = stats.externalCacheSize;
                                 entry.sizeStr = getSizeStr(entry.size);
                                 entry.internalSize = getTotalInternalSize(stats);
                                 entry.internalSizeStr = getSizeStr(entry.internalSize);
