@@ -167,6 +167,12 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         }
     }
 
+    public void setUnbonded(BluetoothDevice device)
+    {
+        if (mService == null) return;
+        mService.setPriority(device, BluetoothProfile.PRIORITY_UNDEFINED);
+    }
+
     public List<BluetoothDevice> getConnectedDevices() {
         if (mService == null) return new ArrayList<BluetoothDevice>(0);
         return mService.getDevicesMatchingConnectionStates(
