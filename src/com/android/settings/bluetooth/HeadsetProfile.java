@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2012 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -176,9 +176,9 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
 
-// This function is added as the AUTO CONNECT priority could not be set by using setPreferred(),
-// as setPreferred() takes only boolean input but getPreferred() supports interger output.
-// Also this need not implemented by all profiles so this has been added here.
+    // This function is added as the AUTO CONNECT priority could not be set by using setPreferred(),
+    // as setPreferred() takes only boolean input but getPreferred() supports interger output.
+    // Also this need not implemented by all profiles so this has been added here.
     public void enableAutoConnect(BluetoothDevice device, boolean enable) {
         if (mService == null) return;
         if (enable) {
@@ -224,7 +224,8 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         if (V) Log.d(TAG, "finalize()");
         if (mService != null) {
             try {
-                BluetoothAdapter.getDefaultAdapter().closeProfileProxy(BluetoothProfile.HEADSET, mService);
+                BluetoothAdapter.getDefaultAdapter().closeProfileProxy(BluetoothProfile.HEADSET,
+                                                                       mService);
                 mService = null;
             }catch (Throwable t) {
                 Log.w(TAG, "Error cleaning up HID proxy", t);

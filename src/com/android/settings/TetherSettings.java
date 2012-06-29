@@ -49,14 +49,13 @@ import android.webkit.WebView;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
-import android.util.Log;
+
 /*
  * Displays preferences for Tethering.
  */
 public class TetherSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener {
     private static final String TAG = "TetherSettings";
-    private static final boolean DBG = false;
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";

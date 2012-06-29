@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2012 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,23 @@
 
 package com.android.settings.bluetooth;
 
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.bluetooth.BluetoothAdapter;
-import android.util.Log;
-
 /* Required to handle timeout notification when phone is suspended */
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+
 public class BluetoothDiscoverableTimeoutReceiver extends BroadcastReceiver {
     private static final String TAG = "BluetoothDiscoverableTimeoutReceiver";
 
-    private static final String INTENT_DISCOVERABLE_TIMEOUT = "android.bluetooth.intent.DISCOVERABLE_TIMEOUT";
+    private static final String INTENT_DISCOVERABLE_TIMEOUT =
+        "android.bluetooth.intent.DISCOVERABLE_TIMEOUT";
 
     static void setDiscoverableAlarm(Context context, long alarmTime) {
         Log.d(TAG, "setDiscoverableAlarm(): alarmTime = " + alarmTime);
@@ -73,7 +75,8 @@ public class BluetoothDiscoverableTimeoutReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         LocalBluetoothAdapter localBluetoothAdapter = LocalBluetoothAdapter.getInstance();
 
-         if(null != localBluetoothAdapter && localBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+         if(localBluetoothAdapter != null  &&
+            localBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
             Log.d(TAG, "Disable discoverable...");
 
             localBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
@@ -82,4 +85,3 @@ public class BluetoothDiscoverableTimeoutReceiver extends BroadcastReceiver {
         }
     }
 };
-

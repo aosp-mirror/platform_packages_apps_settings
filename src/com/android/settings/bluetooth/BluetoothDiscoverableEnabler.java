@@ -141,7 +141,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
 
             Log.d(TAG, "setEnabled(): enabled = " + enable + "timeout = " + timeout);
 
-            if (0 < timeout) {
+            if (timeout > 0) {
                 BluetoothDiscoverableTimeoutReceiver.setDiscoverableAlarm(mContext, endTimestamp);
             }
         } else {
