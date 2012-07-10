@@ -114,7 +114,6 @@ public class WifiSettings extends SettingsPreferenceFragment
     private final Scanner mScanner;
 
     private WifiManager mWifiManager;
-    private WifiManager.Channel mChannel;
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
@@ -243,7 +242,6 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        mChannel = mWifiManager.initialize(getActivity(), getActivity().getMainLooper(), null);
 
         mConnectListener = new WifiManager.ActionListener() {
                                    public void onSuccess() {
@@ -373,7 +371,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         getActivity().registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != INVALID_NETWORK_ID &&
                 KeyStore.getInstance().state() == KeyStore.State.UNLOCKED) {
-            mWifiManager.connect(mChannel, mKeyStoreNetworkId, mConnectListener);
+            mWifiManager.connect(mKeyStoreNetworkId, mConnectListener);
         }
         mKeyStoreNetworkId = INVALID_NETWORK_ID;
 
@@ -520,13 +518,13 @@ public class WifiSettings extends SettingsPreferenceFragment
             case MENU_ID_CONNECT: {
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                     if (!requireKeyStore(mSelectedAccessPoint.getConfig())) {
-                        mWifiManager.connect(mChannel, mSelectedAccessPoint.networkId,
+                        mWifiManager.connect(mSelectedAccessPoint.networkId,
                                 mConnectListener);
                     }
                 } else if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
-                    mWifiManager.connect(mChannel, mSelectedAccessPoint.getConfig(),
+                    mWifiManager.connect(mSelectedAccessPoint.getConfig(),
                             mConnectListener);
                 } else {
                     showDialog(mSelectedAccessPoint, true);
@@ -534,7 +532,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 return true;
             }
             case MENU_ID_FORGET: {
-                mWifiManager.forget(mChannel, mSelectedAccessPoint.networkId, mForgetListener);
+                mWifiManager.forget(mSelectedAccessPoint.networkId, mForgetListener);
                 return true;
             }
             case MENU_ID_MODIFY: {
@@ -553,7 +551,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE &&
                     mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
-                mWifiManager.connect(mChannel, mSelectedAccessPoint.getConfig(), mConnectListener);
+                mWifiManager.connect(mSelectedAccessPoint.getConfig(), mConnectListener);
             } else {
                 showDialog(mSelectedAccessPoint, false);
             }
@@ -863,18 +861,18 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (mSelectedAccessPoint != null
                     && !requireKeyStore(mSelectedAccessPoint.getConfig())
                     && mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                mWifiManager.connect(mChannel, mSelectedAccessPoint.networkId,
+                mWifiManager.connect(mSelectedAccessPoint.networkId,
                         mConnectListener);
             }
         } else if (config.networkId != INVALID_NETWORK_ID) {
             if (mSelectedAccessPoint != null) {
-                mWifiManager.save(mChannel, config, mSaveListener);
+                mWifiManager.save(config, mSaveListener);
             }
         } else {
             if (configController.isEdit() || requireKeyStore(config)) {
-                mWifiManager.save(mChannel, config, mSaveListener);
+                mWifiManager.save(config, mSaveListener);
             } else {
-                mWifiManager.connect(mChannel, config, mConnectListener);
+                mWifiManager.connect(config, mConnectListener);
             }
         }
 
@@ -891,7 +889,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             return;
         }
 
-        mWifiManager.forget(mChannel, mSelectedAccessPoint.networkId, mForgetListener);
+        mWifiManager.forget(mSelectedAccessPoint.networkId, mForgetListener);
 
         if (mWifiManager.isWifiEnabled()) {
             mScanner.resume();
