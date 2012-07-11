@@ -463,7 +463,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         ParcelUuid[] localUuids = mLocalAdapter.getUuids();
         if (localUuids == null) return false;
 
-        mProfileManager.updateProfiles(uuids, localUuids, mProfiles, mRemovedProfiles);
+        mProfileManager.updateProfiles(uuids, localUuids, mProfiles, mRemovedProfiles, mLocalNapRoleConnected);
 
         if (DEBUG) {
             Log.e(TAG, "updating profiles for " + mDevice.getAliasName());
