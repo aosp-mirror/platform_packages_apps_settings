@@ -786,7 +786,10 @@ public class ApplicationsState {
 
     private long getTotalExternalSize(PackageStats ps) {
         if (ps != null) {
+            // We also include the cache size here because for non-emulated
+            // we don't automtically clean cache files.
             return ps.externalCodeSize + ps.externalDataSize
+                    + ps.externalCacheSize
                     + ps.externalMediaSize + ps.externalObbSize;
         }
         return SIZE_INVALID;
@@ -822,7 +825,7 @@ public class ApplicationsState {
                             long externalCodeSize = stats.externalCodeSize
                                     + stats.externalObbSize;
                             long externalDataSize = stats.externalDataSize
-                                    + stats.externalMediaSize + stats.externalCacheSize;
+                                    + stats.externalMediaSize;
                             long newSize = externalCodeSize + externalDataSize
                                     + getTotalInternalSize(stats);
                             if (entry.size != newSize ||
