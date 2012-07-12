@@ -384,7 +384,12 @@ public class InstalledAppDetails extends Fragment
         mDataSize = (TextView)view.findViewById(R.id.data_size_text);
         mExternalCodeSize = (TextView)view.findViewById(R.id.external_code_size_text);
         mExternalDataSize = (TextView)view.findViewById(R.id.external_data_size_text);
-        
+
+        if (Environment.isExternalStorageEmulated()) {
+            ((View)mExternalCodeSize.getParent()).setVisibility(View.GONE);
+            ((View)mExternalDataSize.getParent()).setVisibility(View.GONE);
+        }
+
         // Get Control button panel
         View btnPanel = view.findViewById(R.id.control_buttons_panel);
         mForceStopButton = (Button) btnPanel.findViewById(R.id.left_button);
@@ -675,22 +680,28 @@ public class InstalledAppDetails extends Fragment
             
         } else {
             mHaveSizes = true;
-            if (mLastCodeSize != mAppEntry.codeSize) {
-                mLastCodeSize = mAppEntry.codeSize;
-                mAppSize.setText(getSizeStr(mAppEntry.codeSize));
+            long codeSize = mAppEntry.codeSize;
+            long dataSize = mAppEntry.dataSize;
+            if (Environment.isExternalStorageEmulated()) {
+                codeSize += mAppEntry.externalCodeSize;
+                dataSize +=  mAppEntry.externalDataSize;
+            } else {
+                if (mLastExternalCodeSize != mAppEntry.externalCodeSize) {
+                    mLastExternalCodeSize = mAppEntry.externalCodeSize;
+                    mExternalCodeSize.setText(getSizeStr(mAppEntry.externalCodeSize));
+                }
+                if (mLastExternalDataSize !=  mAppEntry.externalDataSize) {
+                    mLastExternalDataSize =  mAppEntry.externalDataSize;
+                    mExternalDataSize.setText(getSizeStr( mAppEntry.externalDataSize));
+                }
             }
-            if (mLastDataSize != mAppEntry.dataSize) {
-                mLastDataSize = mAppEntry.dataSize;
-                mDataSize.setText(getSizeStr(mAppEntry.dataSize));
+            if (mLastCodeSize != codeSize) {
+                mLastCodeSize = codeSize;
+                mAppSize.setText(getSizeStr(codeSize));
             }
-            if (mLastExternalCodeSize != mAppEntry.externalCodeSize) {
-                mLastExternalCodeSize = mAppEntry.externalCodeSize;
-                mExternalCodeSize.setText(getSizeStr(mAppEntry.externalCodeSize));
-            }
-            long nonCacheExtDataSize = mAppEntry.externalDataSize - mAppEntry.externalCacheSize;
-            if (mLastExternalDataSize != nonCacheExtDataSize) {
-                mLastExternalDataSize = nonCacheExtDataSize;
-                mExternalDataSize.setText(getSizeStr(nonCacheExtDataSize));
+            if (mLastDataSize != dataSize) {
+                mLastDataSize = dataSize;
+                mDataSize.setText(getSizeStr(dataSize));
             }
             long cacheSize = mAppEntry.cacheSize + mAppEntry.externalCacheSize;
             if (mLastCacheSize != cacheSize) {
@@ -702,7 +713,7 @@ public class InstalledAppDetails extends Fragment
                 mTotalSize.setText(getSizeStr(mAppEntry.size));
             }
             
-            if ((mAppEntry.dataSize+nonCacheExtDataSize) <= 0 || !mCanClearData) {
+            if ((mAppEntry.dataSize+ mAppEntry.externalDataSize) <= 0 || !mCanClearData) {
                 mClearDataButton.setEnabled(false);
             } else {
                 mClearDataButton.setEnabled(true);

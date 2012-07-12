@@ -341,7 +341,8 @@ public class ManageApplications extends Fragment implements
                     final int N = mApplications.getCount();
                     for (int i=0; i<N; i++) {
                         ApplicationsState.AppEntry ae = mApplications.getAppEntry(i);
-                        mAppStorage += ae.externalCodeSize + ae.externalDataSize;
+                        mAppStorage += ae.externalCodeSize + ae.externalDataSize
+                                + ae.externalCacheSize;
                     }
                 }
             } else {
