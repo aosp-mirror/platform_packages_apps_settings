@@ -100,6 +100,12 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
+
+        <!-- Device FCC equipment id -->
+        <Preference android:key="fcc_equipment_id"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/fcc_equipment_id"
+                android:summary="@string/device_info_default"/>
                 
         <!-- Device Baseband version -->
         <Preference android:key="baseband_version" 
