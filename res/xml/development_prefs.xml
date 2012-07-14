@@ -16,6 +16,11 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/development_settings_title">
+    <com.android.settings.BugreportPreference
+            android:key="bugreport"
+            android:title="@string/bugreport_title"
+            android:dialogTitle="@string/bugreport_title" />
+
     <PreferenceScreen
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
