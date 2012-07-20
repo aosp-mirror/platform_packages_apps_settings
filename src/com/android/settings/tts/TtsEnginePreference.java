@@ -16,8 +16,6 @@
 
 package com.android.settings.tts;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +27,9 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
+
+
+import com.android.settings.R;
 
 
 public class TtsEnginePreference extends Preference {
@@ -173,7 +174,8 @@ public class TtsEnginePreference extends Preference {
     }
 
     private void onRadioButtonClicked(CompoundButton buttonView, boolean isChecked) {
-        if (mPreventRadioButtonCallbacks) {
+        if (mPreventRadioButtonCallbacks ||
+                (mSharedState.getCurrentChecked() == buttonView)) {
             return;
         }
 

@@ -63,7 +63,6 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
                     @Override
                     public void run() {
                         mLocalePreference.setEnabled(true);
-                        updateVoiceDetails();
                     }
                 });
             }
@@ -103,6 +102,9 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mInstallVoicesPreference.setEnabled(false);
 
         mLocalePreference.setEnabled(false);
+
+        updateVoiceDetails();
+
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mTtsInitListener,
                 getEngineName());
     }
@@ -117,9 +119,10 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         final Intent voiceDataDetails = getArguments().getParcelable(
                 TtsEnginePreference.FRAGMENT_ARGS_VOICES);
         if (DBG) Log.d(TAG, "Parsing voice data details, data: " + voiceDataDetails.toUri(0));
-        ArrayList<String> available = voiceDataDetails.getStringArrayListExtra(
+
+        final ArrayList<String> available = voiceDataDetails.getStringArrayListExtra(
                 TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
-        ArrayList<String> unavailable = voiceDataDetails.getStringArrayListExtra(
+        final ArrayList<String> unavailable = voiceDataDetails.getStringArrayListExtra(
                 TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES);
 
         if (available == null){
