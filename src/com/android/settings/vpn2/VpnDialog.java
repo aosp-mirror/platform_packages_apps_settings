@@ -16,6 +16,7 @@
 
 package com.android.settings.vpn2;
 
+import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
 import android.app.AlertDialog;

@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
+import com.android.internal.net.VpnProfile;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.net.Inet4Address;
