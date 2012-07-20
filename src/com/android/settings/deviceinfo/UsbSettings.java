@@ -49,9 +49,15 @@ public class UsbSettings extends SettingsPreferenceFragment {
     private UsbManager mUsbManager;
     private CheckBoxPreference mMtp;
     private CheckBoxPreference mPtp;
+    private boolean mUsbAccessoryMode;
 
     private final BroadcastReceiver mStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context content, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(UsbManager.ACTION_USB_STATE)) {
+               mUsbAccessoryMode = intent.getBooleanExtra(UsbManager.USB_FUNCTION_ACCESSORY, false);
+               Log.e(TAG, "UsbAccessoryMode " + mUsbAccessoryMode);
+            }
             updateToggles(mUsbManager.getDefaultFunction());
         }
     };
@@ -106,6 +112,18 @@ public class UsbSettings extends SettingsPreferenceFragment {
             mMtp.setChecked(false);
             mPtp.setChecked(false);
         }
+
+        if (!mUsbAccessoryMode) {
+            //Enable MTP and PTP switch while USB is not in Accessory Mode, otherwise disable it
+            Log.e(TAG, "USB Normal Mode");
+            mMtp.setEnabled(true);
+            mPtp.setEnabled(true);
+        } else {
+            Log.e(TAG, "USB Accessory Mode");
+            mMtp.setEnabled(false);
+            mPtp.setEnabled(false);
+        }
+
     }
 
     @Override
