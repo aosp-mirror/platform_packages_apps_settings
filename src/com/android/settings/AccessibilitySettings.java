@@ -575,7 +575,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         activity.getActionBar().setCustomView(toggleSwitch,
                 new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                        Gravity.CENTER_VERTICAL | Gravity.END));
         return toggleSwitch;
     }
 

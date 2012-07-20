@@ -260,7 +260,7 @@ public class DevelopmentSettings extends PreferenceFragment
         activity.getActionBar().setCustomView(mEnabledSwitch, new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                Gravity.CENTER_VERTICAL | Gravity.END));
     }
 
     @Override

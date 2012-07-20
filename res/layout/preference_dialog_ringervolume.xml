@@ -44,8 +44,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dip"
-                android:layout_gravity="left"
+                android:paddingStart="16dip"
+                android:layout_gravity="start"
                 android:text="@string/volume_media_description"
             />
 
@@ -53,7 +53,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dip"
+                android:paddingStart="8dip"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingTop="2dip"
-                        android:layout_marginRight="@dimen/volume_seekbar_side_margin" />
+                        android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
         </LinearLayout>
 
         <!-- Used for the ringer/notification volume -->
@@ -86,15 +86,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dip"
-                    android:paddingLeft="16dip"
-                    android:layout_gravity="left"
+                    android:paddingStart="16dip"
+                    android:layout_gravity="start"
                     android:text="@string/volume_ring_description"
                 />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dip"
+                    android:paddingStart="8dip"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
@@ -111,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingTop="2dip"
-                            android:layout_marginRight="@dimen/volume_seekbar_side_margin" />
+                            android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
             </LinearLayout>
 
         </LinearLayout>
@@ -129,15 +129,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dip"
-                    android:paddingLeft="16dip"
-                    android:layout_gravity="left"
+                    android:paddingStart="16dip"
+                    android:layout_gravity="start"
                     android:text="@string/volume_notification_description"
                 />
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dip"
+                    android:paddingStart="8dip"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
@@ -154,7 +154,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingTop="2dip"
-                            android:layout_marginRight="@dimen/volume_seekbar_side_margin" />
+                            android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
             </LinearLayout>
 
         </LinearLayout>
@@ -164,8 +164,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dip"
-                android:paddingLeft="16dip"
-                android:layout_gravity="left"
+                android:paddingStart="16dip"
+                android:layout_gravity="start"
                 android:text="@string/volume_alarm_description"
             />
 
@@ -173,7 +173,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dip"
+                android:paddingStart="8dip"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingTop="2dip"
-                        android:layout_marginRight="@dimen/volume_seekbar_side_margin" />
+                        android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
         </LinearLayout>
 
     </LinearLayout>

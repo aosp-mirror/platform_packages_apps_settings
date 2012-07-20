@@ -47,11 +47,11 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:paddingTop="30dp"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:paddingBottom="1dp"
-                android:layout_marginLeft="@*android:dimen/preference_fragment_padding_side"
-                android:layout_marginRight="@*android:dimen/preference_fragment_padding_side">
+                android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+                android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side">
             <TextView android:id="@+id/usedStorageText"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -72,11 +72,11 @@
                 android:singleLine="true"
                 android:text="@string/internal_storage" />
             <TextView android:id="@+id/freeStorageText"
-                android:layout_gravity="center_vertical|right"
+                android:layout_gravity="center_vertical|end"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
+                android:gravity="end"
                 android:textAppearance="?android:attr/textAppearanceSmallInverse"
                 android:textColor="#000"
                 android:singleLine="true" />
@@ -87,8 +87,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@*android:dimen/preference_fragment_padding_side"
-            android:layout_marginRight="@*android:dimen/preference_fragment_padding_side"
+            android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+            android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side"
             android:visibility="gone"
             android:gravity="center">
 

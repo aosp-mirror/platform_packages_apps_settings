@@ -38,7 +38,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="6dip"
+            android:layout_marginEnd="6dip"
             android:layout_marginTop="6dip"
             android:layout_marginBottom="6dip"
             android:layout_weight="1">
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@android:id/title"
-                android:layout_alignLeft="@android:id/title"
+                android:layout_alignStart="@android:id/title"
                 android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="13sp"
@@ -81,8 +81,8 @@
         <ImageView
             android:layout_width="40dip"
             android:layout_height="fill_parent"
-            android:paddingLeft="5dip"
-            android:paddingRight="5dip"
+            android:paddingStart="5dip"
+            android:paddingEnd="5dip"
             android:src="@drawable/ic_sysbar_quicksettings"
             android:layout_gravity="center"
             android:contentDescription="@string/spellchecker_quick_settings" />
@@ -98,10 +98,10 @@
         android:id="@+id/pref_right_button2"
         android:layout_width="40dip"
         android:layout_height="fill_parent"
-        android:paddingLeft="5dip"
-        android:paddingRight="5dip"
+        android:paddingStart="5dip"
+        android:paddingEnd="5dip"
         android:src="@drawable/ic_menu_3d_globe"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:clickable="true"
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground"

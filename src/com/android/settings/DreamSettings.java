@@ -80,7 +80,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
             activity.getActionBar().setCustomView(mEnableSwitch, new ActionBar.LayoutParams(
                     ActionBar.LayoutParams.WRAP_CONTENT,
                     ActionBar.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                    Gravity.CENTER_VERTICAL | Gravity.END));
             activity.getActionBar().setTitle(R.string.screensaver_settings_title);
         }
 

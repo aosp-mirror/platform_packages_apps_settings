@@ -25,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
-        android:paddingLeft="16dip"
-        android:paddingRight="16dip"
+        android:paddingStart="16dip"
+        android:paddingEnd="16dip"
         android:scrollbarStyle="outsideOverlay"
         android:gravity="top">
         <LinearLayout
@@ -42,7 +42,7 @@
                 <ImageView android:id="@+id/admin_icon"
                     android:layout_width="@android:dimen/app_icon_size"
                     android:layout_height="@android:dimen/app_icon_size"
-                    android:layout_marginRight="16dip"
+                    android:layout_marginEnd="16dip"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitCenter"
                     android:contentDescription="@null" />
@@ -94,8 +94,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:paddingLeft="16dip"
-                    android:paddingRight="12dip" />
+                    android:paddingStart="16dip"
+                    android:paddingEnd="12dip" />
             </LinearLayout>
 
         </LinearLayout>
@@ -121,7 +121,7 @@
                 android:visibility="gone" />
             <Button android:id="@+id/cancel_button"
                 android:layout_width="0dip"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:text="@string/cancel"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content" />
             <Button android:id="@+id/action_button"
                 android:layout_width="0dip"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_weight="1"
                 android:maxLines="2"
                 style="?android:attr/buttonBarButtonStyle"

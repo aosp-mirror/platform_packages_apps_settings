@@ -344,7 +344,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
                             ActionBar.LayoutParams.WRAP_CONTENT,
                             ActionBar.LayoutParams.WRAP_CONTENT,
-                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                            Gravity.CENTER_VERTICAL | Gravity.END));
                 }
             }
 
