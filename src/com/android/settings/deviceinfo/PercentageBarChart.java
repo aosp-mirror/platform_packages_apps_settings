@@ -71,29 +71,56 @@ public class PercentageBarChart extends View {
 
         final int width = right - left;
 
-        float lastX = left;
+        final boolean isLayoutRtl = isLayoutRtl();
+        if (isLayoutRtl) {
+            float nextX = right;
 
-        if (mEntries != null) {
-            for (final Entry e : mEntries) {
-                final float entryWidth;
-                if (e.percentage == 0.0f) {
-                    entryWidth = 0.0f;
-                } else {
-                    entryWidth = Math.max(mMinTickWidth, width * e.percentage);
+            if (mEntries != null) {
+                for (final Entry e : mEntries) {
+                    final float entryWidth;
+                    if (e.percentage == 0.0f) {
+                        entryWidth = 0.0f;
+                    } else {
+                        entryWidth = Math.max(mMinTickWidth, width * e.percentage);
+                    }
+
+                    final float lastX = nextX - entryWidth;
+                    if (lastX < left) {
+                        canvas.drawRect(left, top, nextX, bottom, e.paint);
+                        return;
+                    }
+
+                    canvas.drawRect(lastX, top, nextX, bottom, e.paint);
+                    nextX = lastX;
                 }
-
-                final float nextX = lastX + entryWidth;
-                if (nextX > right) {
-                    canvas.drawRect(lastX, top, right, bottom, e.paint);
-                    return;
-                }
-
-                canvas.drawRect(lastX, top, nextX, bottom, e.paint);
-                lastX = nextX;
             }
-        }
 
-        canvas.drawRect(lastX, top, right, bottom, mEmptyPaint);
+            canvas.drawRect(left, top, nextX, bottom, mEmptyPaint);
+        } else {
+            float lastX = left;
+
+            if (mEntries != null) {
+                for (final Entry e : mEntries) {
+                    final float entryWidth;
+                    if (e.percentage == 0.0f) {
+                        entryWidth = 0.0f;
+                    } else {
+                        entryWidth = Math.max(mMinTickWidth, width * e.percentage);
+                    }
+
+                    final float nextX = lastX + entryWidth;
+                    if (nextX > right) {
+                        canvas.drawRect(lastX, top, right, bottom, e.paint);
+                        return;
+                    }
+
+                    canvas.drawRect(lastX, top, nextX, bottom, e.paint);
+                    lastX = nextX;
+                }
+            }
+
+            canvas.drawRect(lastX, top, right, bottom, mEmptyPaint);
+        }
     }
 
     /**
