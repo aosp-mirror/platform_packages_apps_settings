@@ -21,7 +21,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:paddingRight="?android:attr/scrollbarSize"
+    android:paddingEnd="?android:attr/scrollbarSize"
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:focusable="true">
@@ -29,26 +29,26 @@
     <CheckBox android:id="@+id/misc_checkbox"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
-              android:layout_alignParentLeft="true"
-              android:paddingLeft="16dip"
+              android:layout_alignParentStart="true"
+              android:paddingStart="16dip"
               android:scaleType="fitCenter"
               android:layout_centerVertical="true"/>
 
     <TextView android:id="@+id/misc_filename"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_toRightOf="@id/misc_checkbox"
+              android:layout_toEndOf="@id/misc_checkbox"
               android:maxLines="1"
-              android:paddingLeft="16dip"
+              android:paddingStart="16dip"
               android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <TextView android:id="@+id/misc_filesize"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_toRightOf="@id/misc_checkbox"
+              android:layout_toEndOf="@id/misc_checkbox"
               android:layout_below="@id/misc_filename"
               android:maxLines="1"
-              android:paddingLeft="16dip"
+              android:paddingStart="16dip"
               android:textStyle="bold"
               android:textAppearance="?android:attr/textAppearanceSmall" />
 </com.android.settings.deviceinfo.FileItemInfoLayout>

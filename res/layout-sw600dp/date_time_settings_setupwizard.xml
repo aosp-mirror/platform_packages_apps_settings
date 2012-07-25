@@ -19,16 +19,16 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:paddingTop="96dip"
-        android:paddingLeft="40dip"
-        android:paddingRight="40dip"
+        android:paddingStart="40dip"
+        android:paddingEnd="40dip"
         android:paddingBottom="96dip"
         android:orientation="vertical">
 
     <FrameLayout android:id="@+id/timezone_dropdown_anchor"
             android:layout_height="0px"
             android:layout_width="match_parent"
-            android:layout_marginLeft="40dip"
-            android:layout_marginRight="40dip"/>
+            android:layout_marginStart="40dip"
+            android:layout_marginEnd="40dip"/>
 
     <LinearLayout android:layout_height="0px"
                   android:layout_weight="1"
@@ -60,7 +60,7 @@
             android:minWidth="208dip"
             android:layout_height="48dip"
             android:layout_marginTop="10dip"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:text="@string/next_label"/>
 
     </RelativeLayout>

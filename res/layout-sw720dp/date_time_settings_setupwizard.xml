@@ -20,8 +20,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/datetime_margin_top"
-    android:paddingLeft="@dimen/screen_margin_sides"
-    android:paddingRight="@dimen/screen_margin_sides"
+    android:paddingStart="@dimen/screen_margin_sides"
+    android:paddingEnd="@dimen/screen_margin_sides"
     android:paddingBottom="@dimen/datetime_margin_bottom">
 
     <!-- Title: Set date & time-->
@@ -30,8 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dip"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dip"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dip"
         android:layout_alignParentTop="true"
         android:textSize="32dip"
         android:textColor="@color/title_color"
@@ -60,9 +60,9 @@
             style="?android:attr/dropDownSpinnerStyle"
             android:layout_width="304dip"
             android:layout_height="48dip"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/date_time_auto"
-            android:gravity="left|center_vertical"
+            android:gravity="start|center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="20dip" />
 
@@ -71,16 +71,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/time_zone_button"
-            android:layout_marginLeft="32dip"
-            android:layout_alignParentRight="true">
+            android:layout_toEndOf="@id/time_zone_button"
+            android:layout_marginStart="32dip"
+            android:layout_alignParentEnd="true">
 
             <Switch
                 android:id="@+id/date_time_auto_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:layout_marginLeft="16dip"
+                android:layout_marginStart="16dip"
                 android:text="@string/date_time_auto"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20dip" />
@@ -154,7 +154,7 @@
         android:id="@+id/bottom_divider"
         android:layout_width="match_parent"
         android:layout_height="3dip"
-        android:layout_alignLeft="@id/timezone_auto_time"
+        android:layout_alignStart="@id/timezone_auto_time"
         android:layout_above="@+id/next_button"
         android:layout_marginBottom="16dip"
         android:background="@color/divider_color" />
@@ -163,6 +163,6 @@
         android:id="@+id/next_button"
         style="@style/setup_wizard_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:text="@string/next_label" />
 </RelativeLayout>

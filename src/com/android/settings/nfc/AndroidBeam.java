@@ -58,7 +58,7 @@ public class AndroidBeam extends Fragment
                 activity.getActionBar().setCustomView(mActionBarSwitch, new ActionBar.LayoutParams(
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                        Gravity.CENTER_VERTICAL | Gravity.END));
                 activity.getActionBar().setTitle(R.string.android_beam_settings_title);
             }
         }

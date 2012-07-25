@@ -21,8 +21,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingTop="60dip"
-    android:paddingLeft="@dimen/screen_margin_sides"
-    android:paddingRight="@dimen/screen_margin_sides"
+    android:paddingStart="@dimen/screen_margin_sides"
+    android:paddingEnd="@dimen/screen_margin_sides"
     android:paddingBottom="0dip" >
 
     <FrameLayout
@@ -42,9 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dip"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dip"
+        android:layout_marginStart="16dip"
         android:layout_below="@id/top_padding_layout"
         android:textSize="32dip"
         android:textColor="@color/title_color"
@@ -88,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/top_divider"
-        android:layout_alignLeft="@id/dummy_for_left_edge"
+        android:layout_alignStart="@id/dummy_for_left_edge"
         android:layout_centerHorizontal="true">
 
         <!-- Padding for @id/content shown when keyboard isn't available -->
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:minHeight="160dip"
             android:layout_marginTop="10dip"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:visibility="gone" />
         <LinearLayout
             android:id="@+id/connecting_status_layout"
@@ -174,7 +174,7 @@
         android:layout_height="3dip"
         android:layout_marginBottom="16dip"
         android:layout_below="@id/bottom_padding_layout"
-        android:layout_alignLeft="@id/content"
+        android:layout_alignStart="@id/content"
         android:background="@color/divider_color" />  <!-- TODO: fix this -->
 
     <RelativeLayout
@@ -182,21 +182,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/bottom_divider"
-        android:layout_alignLeft="@id/bottom_divider"
-        android:layout_alignParentRight="true"
+        android:layout_alignStart="@id/bottom_divider"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/wifi_setup_add_network"
             style="@style/setup_wizard_button"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:text="@string/wifi_setup_add_network"
             android:enabled="false" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:orientation="horizontal">
 
             <!-- This misleading name is for keeping consistency between non-XL
@@ -208,20 +208,20 @@
 
             <Button android:id="@+id/wifi_setup_connect"
                     style="@style/setup_wizard_button"
-                    android:layout_marginLeft="16dip"
+                    android:layout_marginStart="16dip"
                     android:text="@string/wifi_setup_connect"
                     android:enabled="false"
                     android:visibility="gone" />
 
             <Button android:id="@+id/wifi_setup_refresh_list"
                     style="@style/setup_wizard_button"
-                    android:layout_marginLeft="16dip"
+                    android:layout_marginStart="16dip"
                     android:text="@string/wifi_setup_refresh_list"
                     android:enabled="false" />
 
             <Button android:id="@+id/wifi_setup_skip_or_next"
                     style="@style/setup_wizard_button"
-                    android:layout_marginLeft="16dip"
+                    android:layout_marginStart="16dip"
                     android:text="@string/wifi_setup_skip" />
         </LinearLayout>
     </RelativeLayout>

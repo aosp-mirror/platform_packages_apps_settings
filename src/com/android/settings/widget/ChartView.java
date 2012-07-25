@@ -38,7 +38,7 @@ import com.android.settings.R;
 public class ChartView extends FrameLayout {
     // TODO: extend something that supports two-dimensional scrolling
 
-    private static final int SWEEP_GRAVITY = Gravity.TOP | Gravity.LEFT;
+    private static final int SWEEP_GRAVITY = Gravity.TOP | Gravity.START;
 
     ChartAxis mHoriz;
     ChartAxis mVert;

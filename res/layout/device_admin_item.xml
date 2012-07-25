@@ -22,8 +22,8 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:paddingRight="6dip"
-    android:paddingLeft="6dip"
+    android:paddingEnd="6dip"
+    android:paddingStart="6dip"
     android:gravity="center_vertical" >
 
     <LinearLayout
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
             android:layout_below="@id/name"
-            android:layout_alignLeft="@id/name"
+            android:layout_alignStart="@id/name"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
             android:maxLines="4" />
@@ -75,8 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginRight="16dip"
-        android:layout_marginLeft="16dip"
+        android:layout_marginEnd="16dip"
+        android:layout_marginStart="16dip"
         android:focusable="false"
         android:clickable="false" />
 

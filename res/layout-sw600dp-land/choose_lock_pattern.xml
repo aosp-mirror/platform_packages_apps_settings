@@ -49,15 +49,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/headerText"
             android:layout_marginTop="16dip"
-            android:layout_toRightOf="@id/lockPattern"
-            android:layout_marginLeft="100dip"
+            android:layout_toEndOf="@id/lockPattern"
+            android:layout_marginStart="100dip"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:visibility="gone"/>
 
         <!-- confirm / restart buttons -->
         <LinearLayout android:id="@+id/buttonContainer"
             style="@style/SecurityPreferenceButtonContainer"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="20dip"
-            android:layout_marginLeft="20dip"
+            android:layout_marginStart="20dip"
             android:layout_above="@id/buttonContainer"
             android:gravity="center_vertical|center_horizontal">
 

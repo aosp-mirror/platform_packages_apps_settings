@@ -18,8 +18,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-    android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:paddingTop="8dip"
     android:paddingBottom="8dip"
     android:columnCount="3">
@@ -29,7 +29,7 @@
         android:layout_width="48dip"
         android:layout_height="48dip"
         android:layout_rowSpan="3"
-        android:layout_marginRight="8dip"
+        android:layout_marginEnd="8dip"
         android:scaleType="centerInside"
         android:contentDescription="@null" />
 
@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@android:id/text1"
-        android:layout_marginLeft="8dip"
+        android:layout_marginStart="8dip"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ProgressBar

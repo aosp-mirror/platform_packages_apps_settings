@@ -20,8 +20,8 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical"
-    android:paddingRight="?android:attr/scrollbarSize"
-    android:paddingLeft="@*android:dimen/preference_widget_width">
+    android:paddingEnd="?android:attr/scrollbarSize"
+    android:paddingStart="@*android:dimen/preference_widget_width">
 
     <com.android.settings.deviceinfo.PercentageBarChart
         android:id="@+id/percentage_bar_chart"

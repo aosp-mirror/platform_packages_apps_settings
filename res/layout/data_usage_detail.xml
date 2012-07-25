@@ -24,8 +24,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="?android:attr/listPreferredItemPaddingLeft"
-        android:layout_marginRight="?android:attr/listPreferredItemPaddingRight"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginTop="8dip"
-            android:layout_marginRight="8dip"
+            android:layout_marginEnd="8dip"
             android:orientation="vertical">
 
             <ImageView
@@ -85,8 +85,8 @@
         android:id="@+id/app_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="?android:attr/listPreferredItemPaddingLeft"
-        android:layout_marginRight="?android:attr/listPreferredItemPaddingRight"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
         android:layout_marginTop="16dip"
         android:layout_marginBottom="16dip"
         android:text="@string/data_usage_app_settings" />

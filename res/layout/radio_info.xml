@@ -233,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_info_smsc_refresh_label"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     />
             <Button android:id="@+id/update_smsc"
                     android:textSize="14sp"
@@ -241,14 +241,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_info_smsc_update_label"
-                    android:layout_toLeftOf="@+id/refresh_smsc"
+                    android:layout_toStartOf="@+id/refresh_smsc"
                     android:layout_alignBaseline="@+id/refresh_smsc"
                     />
             <EditText android:id="@+id/smsc"
                       style="@style/form_value"
                       android:layout_alignBaseline="@+id/refresh_smsc"
-                      android:layout_toLeftOf="@id/update_smsc"
-                      android:layout_toRightOf="@id/smsc_label" />
+                      android:layout_toStartOf="@id/update_smsc"
+                      android:layout_toEndOf="@id/smsc_label" />
         </RelativeLayout>
 
         <!-- Test setting to ignore bad DNS, useful in lab environments -->
