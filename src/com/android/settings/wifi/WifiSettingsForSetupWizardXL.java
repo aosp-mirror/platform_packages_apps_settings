@@ -38,7 +38,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.util.AsyncChannel;
 import com.android.settings.R;
 
 import java.util.Collection;
@@ -74,7 +73,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private WifiSettings mWifiSettings;
     private WifiManager mWifiManager;
-    private WifiManager.Channel mChannel;
 
     /** Used for resizing a padding above title. Hiden when software keyboard is shown. */
     private View mTopPadding;
@@ -143,7 +141,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         setContentView(R.layout.wifi_settings_for_setup_wizard_xl);
 
         mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
-        mChannel = mWifiManager.initialize(this, getMainLooper(), null);
         // There's no button here enabling wifi network, so we need to enable it without
         // users' request.
         mWifiManager.setWifiEnabled(true);
@@ -596,7 +593,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                     Log.d(TAG, String.format("forgeting Wi-Fi network \"%s\" (id: %d)",
                             config.SSID, config.networkId));
                 }
-                mWifiManager.forget(mChannel, config.networkId, new WifiManager.ActionListener() {
+                mWifiManager.forget(config.networkId, new WifiManager.ActionListener() {
                         public void onSuccess() {
                         }
                         public void onFailure(int reason) {
@@ -761,7 +758,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      */
     /* package */ void onSaveNetwork(WifiConfiguration config) {
         // We want to both save and connect a network. connectNetwork() does both.
-        mWifiManager.connect(mChannel, config, new WifiManager.ActionListener() {
+        mWifiManager.connect(config, new WifiManager.ActionListener() {
                 public void onSuccess() {
                 }
                 public void onFailure(int reason) {
