@@ -17,15 +17,29 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/location_settings_title">
 
-        <CheckBoxPreference
-            android:key="location_network"
-            android:title="@string/location_network_based"
-            android:summary="@string/location_neighborhood_level"/>
+        <com.android.settings.WrappingSwitchPreference
+            android:key="location_toggle"
+            android:title="@string/location_access_title"
+            android:summary="@string/location_access_summary"
+            android:persistent="true"/>
+
+        <PreferenceCategory
+            android:key="location_sources"
+            android:title="@string/location_sources_heading" />
 
         <CheckBoxPreference
             android:key="location_gps"
             android:title="@string/location_gps"
-            android:summary="@string/location_street_level"/>
+            android:summary="@string/location_street_level"
+            android:dependency="location_toggle"
+            android:persistent="false" />
+
+        <com.android.settings.WrappingCheckBoxPreference
+            android:key="location_network"
+            android:title="@string/location_network_based"
+            android:summary="@string/location_neighborhood_level"
+            android:dependency="location_toggle"
+            android:persistent="false" />
 
 <!-- Disabled to avoid confusion on devices with no AGPS
      For Google experience devices we want AGPS on by default (if supported) so we don't really need this.
