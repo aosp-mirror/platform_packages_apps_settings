@@ -35,6 +35,21 @@
             android:summary="@string/lockscreen_notifications_summary">
         </PreferenceScreen>
 
+        <ListPreference
+            android:key="lockscreen_battery_status"
+            android:persistent="false"
+            android:dialogTitle="@string/lockscreen_battery_status_title"
+            android:title="@string/lockscreen_battery_status_title"
+            android:entries="@array/lockscreen_battery_status_entries"
+            android:entryValues="@array/lockscreen_battery_status_values"
+            android:defaultValue="0" />
+
+        <CheckBoxPreference
+            android:key="battery_around_lockscreen_ring"
+            android:title="@string/battery_around_lockscreen_ring"
+      	    android:summary="@string/battery_around_lockscreen_ring_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -46,12 +61,6 @@
             android:key="lockscreen_targets"
             android:summary="@string/lockscreen_target_summary"
             android:title="@string/lockscreen_target_title" />
-
-	<CheckBoxPreference
-            android:key="battery_around_lockscreen_ring"
-            android:title="@string/battery_around_lockscreen_ring"
-      	    android:summary="@string/battery_around_lockscreen_ring_summary"
-            android:defaultValue="true" />
 
         <PreferenceScreen
             android:fragment="com.android.settings.mahdi.LockscreenButtons"
