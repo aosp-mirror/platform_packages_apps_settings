@@ -16,72 +16,33 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.SCREENSAVER_COMPONENT;
-
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
+import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.Preference;
-import android.provider.Settings;
 import android.service.dreams.IDreamManager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DreamTesterPreference extends Preference {
     private static final String TAG = "DreamTesterPreference";
-    
-    private final PackageManager pm;
-    private final ContentResolver resolver;
 
     public DreamTesterPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        pm = getContext().getPackageManager();
-        resolver = getContext().getContentResolver();
     }
 
     @Override
     protected void onClick() {
-        String component = Settings.Secure.getString(resolver, SCREENSAVER_COMPONENT);
-        Log.v(TAG, "component=" + component);
-        if (component != null) {
-            ComponentName cn = ComponentName.unflattenFromString(component);
-            Log.v(TAG, "cn=" + cn);
-//            Intent intent = new Intent(Intent.ACTION_MAIN)
-//                .setComponent(cn)
-//                .addFlags(
-//                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-//                    )
-//                .putExtra("android.dreams.TEST", true);
-//            getContext().startService(intent);
-            IDreamManager dm = IDreamManager.Stub.asInterface(
-                    ServiceManager.getService("dreams"));
-            try {
-                dm.testDream(cn);
-            } catch (RemoteException ex) {
-                // too bad, so sad, oh mom, oh dad
-            }
+        IDreamManager dm = IDreamManager.Stub.asInterface(ServiceManager.getService("dreams"));
+        try {
+            ComponentName cn = dm.getDreamComponent();
+            Log.v(TAG, "DreamComponent cn=" + cn);
+            dm.testDream(cn);
+        } catch (RemoteException ex) {
+            Log.w(TAG, "error testing dream", ex);
+            // too bad, so sad, oh mom, oh dad
         }
     }
+
 }
