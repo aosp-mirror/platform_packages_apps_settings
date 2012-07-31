@@ -119,30 +119,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             Log.d(TAG, "onProfileStateChanged: profile " + profile +
                     " newProfileState " + newProfileState);
         }
-        if (profile instanceof HeadsetProfile) {
-            if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
-                if (BluetoothProfile.PRIORITY_AUTO_CONNECT != profile.getPreferred(mDevice))
-                    mProfileManager.enableAutoConnectForHf(mDevice, true);
-            } else if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
-                // dont reset auto connect priority when bluetooth turned off
-                if ((BluetoothAdapter.STATE_ON == mLocalAdapter.getBluetoothState())
-                    || (BluetoothAdapter.STATE_TURNING_ON == mLocalAdapter.getBluetoothState())) {
-                        mProfileManager.enableAutoConnectForHf(mDevice, false);
-                }
-            }
-        } else if (profile instanceof A2dpProfile ) {
-            if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
-                if (BluetoothProfile.PRIORITY_AUTO_CONNECT != profile.getPreferred(mDevice))
-                    mProfileManager.enableAutoConnectForA2dp(mDevice,true);
-            } else if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
-                // dont reset auto connect priority when bluetooth turned off
-                if ((BluetoothAdapter.STATE_ON == mLocalAdapter.getBluetoothState())
-                    || (BluetoothAdapter.STATE_TURNING_ON == mLocalAdapter.getBluetoothState())) {
-                        mProfileManager.enableAutoConnectForA2dp(mDevice, false);
-                }
-            }
-        }
-
         mProfileConnectionState.put(profile, newProfileState);
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
@@ -179,6 +155,14 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     void disconnect() {
         for (LocalBluetoothProfile profile : mProfiles) {
             disconnect(profile);
+        }
+        // Disconnect  PBAP server in case its connected
+        // This is to ensure all the profiles are disconnected as some CK/Hs do not
+        // disconnect  PBAP connection when HF connection is brought down
+        PbapServerProfile PbapProfile = mProfileManager.getPbapProfile();
+        if (PbapProfile.getConnectionStatus(mDevice) == BluetoothProfile.STATE_CONNECTED)
+        {
+            PbapProfile.disconnect(mDevice);
         }
     }
 
@@ -507,23 +491,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                         .elapsedRealtime()) {
             connectWithoutResettingTimer(false);
         }
-        // On an incoming pairing, set all the available profiles as preferred.
-        for (LocalBluetoothProfile profile : mProfiles) {
-                profile.setPreferred(mDevice, true);
-        }
         dispatchAttributesChanged();
-    }
-
-    // Clear service priority of Hid, A2DP and Headset profiles on unbond
-    private void clearProfilePriorities() {
-        for (LocalBluetoothProfile profile : mProfiles) {
-            profile.setUnbonded(mDevice);
-        }
     }
 
     void onBondingStateChanged(int bondState) {
         if (bondState == BluetoothDevice.BOND_NONE) {
-            clearProfilePriorities();
             mProfiles.clear();
             mConnectAfterPairing = false;  // cancel auto-connect
             setPhonebookPermissionChoice(PHONEBOOK_ACCESS_UNKNOWN);

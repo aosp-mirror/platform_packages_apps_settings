@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothInputDevice;
 import android.bluetooth.BluetoothPan;
+import android.bluetooth.BluetoothPbap;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothUuid;
 import android.content.Context;
@@ -43,13 +44,6 @@ import java.util.List;
  */
 final class LocalBluetoothProfileManager {
     private static final String TAG = "LocalBluetoothProfileManager";
-    private static final int CONNECT_HF_OR_A2DP = 1;
-    private static final int CONNECT_OTHER_PROFILES = 2;
-    // If either a2dp or hf is connected and if the other profile conneciton is not
-    // happening with the timeout , the other profile(a2dp or hf) will be inititate connection.
-    // Give reasonable timeout for the device to initiate the other profile connection.
-    private static final int CONNECT_HF_OR_A2DP_TIMEOUT = 6000;
-
 
     /** Singleton instance. */
     private static LocalBluetoothProfileManager sInstance;
@@ -88,47 +82,7 @@ final class LocalBluetoothProfileManager {
     private final HidProfile mHidProfile;
     private OppProfile mOppProfile;
     private final PanProfile mPanProfile;
-    private boolean isHfServiceUp;
-    private boolean isA2dpServiceUp;
-    private boolean isHfA2dpConnectMessagePosted;
-    private final Handler hfA2dpConnectHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-        synchronized (this) {
-            if (isA2dpConnectRequired((BluetoothDevice)msg.obj)) {
-                mA2dpProfile.connect((BluetoothDevice)msg.obj);
-            } else if (isHfConnectRequired((BluetoothDevice)msg.obj)) {
-                mHeadsetProfile.connect((BluetoothDevice)msg.obj);
-            }
-            isHfA2dpConnectMessagePosted =false;
-        }
-    }
-};
-
-        private final Handler connectOtherProfilesHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-            synchronized (this) {
-                // Connect all the profiles which are enabled
-                // Right now hf/a2dp profiles connect is handled here
-                List<BluetoothDevice> hfConnDevList= mHeadsetProfile.getConnectedDevices();
-
-                if (hfConnDevList.isEmpty() && mHeadsetProfile.isPreferred((BluetoothDevice)msg.obj))
-                    mHeadsetProfile.connect((BluetoothDevice)msg.obj);
-                else
-                    Log.d(TAG,"Hf device is not preferred or already Hf connected device exist");
-
-                List<BluetoothDevice> a2dpConnDevList= mA2dpProfile.getConnectedDevices();
-
-                if (a2dpConnDevList.isEmpty() && mA2dpProfile.isPreferred((BluetoothDevice)msg.obj))
-                    mA2dpProfile.connect((BluetoothDevice)msg.obj);
-                else
-                    Log.d(TAG,"A2dp device is not preferred or already a2dp connected device exist");
-
-            }
-        }
-    };
+    private final PbapServerProfile mPbapProfile;
 
     /**
      * Mapping from profile name, e.g. "HEADSET" to profile object.
@@ -164,6 +118,10 @@ final class LocalBluetoothProfileManager {
         mPanProfile = new PanProfile(context);
         addPanProfile(mPanProfile, PanProfile.NAME,
                 BluetoothPan.ACTION_CONNECTION_STATE_CHANGED);
+
+       //Create PBAP server profile, but do not add it to list of profiles
+       // as we do not need to monitor the profile as part of profile list
+        mPbapProfile = new PbapServerProfile(context);
 
         Log.d(TAG, "LocalBluetoothProfileManager construction complete");
     }
@@ -273,21 +231,6 @@ final class LocalBluetoothProfileManager {
 
             cachedDevice.onProfileStateChanged(mProfile, newState);
             cachedDevice.refresh();
-
-            if ((mProfile instanceof HeadsetProfile)||(mProfile instanceof A2dpProfile)) {
-                if ((BluetoothProfile.STATE_CONNECTED == newState)&&
-                    (!isHfA2dpConnectMessagePosted)) {
-                    Message mes = hfA2dpConnectHandler.obtainMessage(CONNECT_HF_OR_A2DP);
-                    mes.obj = device;
-                    hfA2dpConnectHandler.sendMessageDelayed(mes,CONNECT_HF_OR_A2DP_TIMEOUT);
-                    Log.i(TAG,"Message posted for hf/a2dp connection");
-                    isHfA2dpConnectMessagePosted = true;
-                } else if (isHfA2dpConnectMessagePosted) {
-                    hfA2dpConnectHandler.removeMessages(CONNECT_HF_OR_A2DP);
-                    Log.i(TAG,"Message removed for hf/a2dp connection");
-                    isHfA2dpConnectMessagePosted =false;
-                }
-            }
         }
     }
 
@@ -331,66 +274,6 @@ final class LocalBluetoothProfileManager {
         }
     }
 
-    synchronized void setHfServiceUp(boolean isUp) {
-        isHfServiceUp = isUp;
-        if (isHfServiceUp && isA2dpServiceUp) {
-            // connect hf and then a2dp
-            // this order is maintained as per the white paper
-                handleAutoConnect(mHeadsetProfile);
-                handleAutoConnect(mA2dpProfile);
-        }
-    }
-
-    synchronized void setA2dpServiceUp(boolean isUp) {
-        isA2dpServiceUp= isUp;
-        if (isHfServiceUp && isA2dpServiceUp) {
-            // connect hf and then a2dp
-            // this order is maintained as per the white paper
-                handleAutoConnect(mHeadsetProfile);
-                handleAutoConnect(mA2dpProfile);
-        }
-    }
-
-    private void handleAutoConnect(LocalBluetoothProfile profile) {
-        Set<BluetoothDevice> bondedDevices = mLocalAdapter.getBondedDevices();
-        for (BluetoothDevice device : bondedDevices) {
-            if (profile.getPreferred(device) ==
-                      BluetoothProfile.PRIORITY_AUTO_CONNECT) {
-                  Log.d(TAG,"handleAutoConnect for device");
-                  CachedBluetoothDevice cacheDevice = mDeviceManager.findDevice(device);
-                  if (null == cacheDevice)
-                  {
-                      Log.w(TAG,"Dev not found in cached dev list. Adding the dev to cached list");
-                      cacheDevice = mDeviceManager.addDevice(mLocalAdapter,
-                                       LocalBluetoothProfileManager.this, device);
-                  }
-                  cacheDevice.connectInt(profile);
-                  break;
-            }
-        }
-    }
-
-    public void enableAutoConnectForHf(BluetoothDevice device,boolean enable) {
-        mHeadsetProfile.enableAutoConnect(device,enable);
-    }
-
-    public void enableAutoConnectForA2dp(BluetoothDevice device,boolean enable) {
-        mA2dpProfile.enableAutoConnect(device,enable);
-    }
-
-    public void handleConnectOtherProfiles(BluetoothDevice device) {
-        if (device != null){
-            // Remove previous messages if any
-            connectOtherProfilesHandler.removeMessages(CONNECT_OTHER_PROFILES);
-            Message mes = connectOtherProfilesHandler.obtainMessage(CONNECT_OTHER_PROFILES);
-            mes.obj = device;
-            connectOtherProfilesHandler.sendMessageDelayed(mes,CONNECT_HF_OR_A2DP_TIMEOUT);
-            Log.i(TAG,"Message posted for connection other Profiles ");
-        } else {
-            Log.e(TAG,"Device = Null received in handleConnectOtherProfiles ");
-        }
-    }
-
     // This is called by DockService, so check Headset and A2DP.
     public synchronized boolean isManagerReady() {
         // Getting just the headset profile is fine for now. Will need to deal with A2DP
@@ -413,6 +296,11 @@ final class LocalBluetoothProfileManager {
     HeadsetProfile getHeadsetProfile() {
         return mHeadsetProfile;
     }
+
+    PbapServerProfile getPbapProfile(){
+        return mPbapProfile;
+    }
+
 
     /**
      * Fill in a list of LocalBluetoothProfile objects that are supported by
@@ -471,36 +359,6 @@ final class LocalBluetoothProfileManager {
             profiles.add(mPanProfile);
             removedProfiles.remove(mPanProfile);
         }
-    }
-
-    private boolean isHfConnectRequired(BluetoothDevice device) {
-        List<BluetoothDevice> a2dpConnDevList= mA2dpProfile.getConnectedDevices();
-        List<BluetoothDevice> hfConnDevList= mHeadsetProfile.getConnectedDevices();
-
-        // If both hf and a2dp is connected hf connection is not required
-        // Hf connection is required only when a2dp is connected but
-        // hf connect did no happen untill CONNECT_HF_OR_A2DP_TIMEOUT
-        if (!a2dpConnDevList.isEmpty() && !hfConnDevList.isEmpty())
-            return false;
-        if (hfConnDevList.isEmpty() && mHeadsetProfile.isPreferred(device))
-            return true;
-
-        return false;
-    }
-
-    private boolean isA2dpConnectRequired(BluetoothDevice device) {
-        List<BluetoothDevice> a2dpConnDevList= mA2dpProfile.getConnectedDevices();
-        List<BluetoothDevice> hfConnDevList= mHeadsetProfile.getConnectedDevices();
-
-        // If both hf and a2dp is connected a2dp connection is not required
-        // A2dp connection is required only when hf is connected but
-        // a2dp connect did no happen until CONNECT_HF_OR_A2DP_TIMEOUT
-        if (!a2dpConnDevList.isEmpty() && !hfConnDevList.isEmpty())
-            return false;
-        if (a2dpConnDevList.isEmpty() && mA2dpProfile.isPreferred(device))
-            return true;
-
-        return false;
     }
 
 }
