@@ -118,6 +118,12 @@ final class HidProfile implements LocalBluetoothProfile {
         }
     }
 
+    public void setUnbonded(BluetoothDevice device)
+    {
+        if (mService == null) return;
+        mService.setPriority(device, BluetoothProfile.PRIORITY_UNDEFINED);
+    }
+
     public String toString() {
         return NAME;
     }

@@ -151,6 +151,12 @@ final class A2dpProfile implements LocalBluetoothProfile {
         }
     }
 
+    public void setUnbonded(BluetoothDevice device)
+    {
+        if (mService == null) return;
+        mService.setPriority(device, BluetoothProfile.PRIORITY_UNDEFINED);
+    }
+
     boolean isA2dpPlaying() {
         if (mService == null) return false;
         List<BluetoothDevice> sinks = mService.getConnectedDevices();
