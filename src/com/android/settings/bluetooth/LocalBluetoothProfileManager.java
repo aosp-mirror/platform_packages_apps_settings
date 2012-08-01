@@ -333,12 +333,14 @@ final class LocalBluetoothProfileManager {
                       BluetoothProfile.PRIORITY_AUTO_CONNECT) {
                   Log.d(TAG,"handleAutoConnect for device");
                   CachedBluetoothDevice cacheDevice = mDeviceManager.findDevice(device);
-                  if (null != cacheDevice) {
-                        cacheDevice.connectInt(profile);
-                        break;
-                    }
-                  else
-                    Log.e(TAG,"Bluetooth cache devices mismatch with actual");
+                  if (null == cacheDevice)
+                  {
+                      Log.w(TAG,"Dev not found in cached dev list. Adding the dev to cached list");
+                      cacheDevice = mDeviceManager.addDevice(mLocalAdapter,
+                                       LocalBluetoothProfileManager.this, device);
+                  }
+                  cacheDevice.connectInt(profile);
+                  break;
             }
         }
     }
