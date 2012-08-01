@@ -514,8 +514,16 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         dispatchAttributesChanged();
     }
 
+    // Clear service priority of Hid, A2DP and Headset profiles on unbond
+    private void clearProfilePriorities() {
+        for (LocalBluetoothProfile profile : mProfiles) {
+            profile.setUnbonded(mDevice);
+        }
+    }
+
     void onBondingStateChanged(int bondState) {
         if (bondState == BluetoothDevice.BOND_NONE) {
+            clearProfilePriorities();
             mProfiles.clear();
             mConnectAfterPairing = false;  // cancel auto-connect
             setPhonebookPermissionChoice(PHONEBOOK_ACCESS_UNKNOWN);

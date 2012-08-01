@@ -117,6 +117,11 @@ final class PanProfile implements LocalBluetoothProfile {
         // ignore: isPreferred is always true for PAN
     }
 
+    public void setUnbonded(BluetoothDevice device)
+    {
+        // ignore: PAN profile cannot be disabled
+    }
+
     public String toString() {
         return NAME;
     }

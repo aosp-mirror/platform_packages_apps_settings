@@ -47,6 +47,8 @@ interface LocalBluetoothProfile {
 
     void setPreferred(BluetoothDevice device, boolean preferred);
 
+    void setUnbonded(BluetoothDevice device);
+
     boolean isProfileReady();
 
     /** Display order for device profile settings. */
