@@ -44,6 +44,7 @@ import java.util.List;
 final class LocalBluetoothProfileManager {
     private static final String TAG = "LocalBluetoothProfileManager";
     private static final int CONNECT_HF_OR_A2DP = 1;
+    private static final int CONNECT_OTHER_PROFILES = 2;
     // If either a2dp or hf is connected and if the other profile conneciton is not
     // happening with the timeout , the other profile(a2dp or hf) will be inititate connection.
     // Give reasonable timeout for the device to initiate the other profile connection.
@@ -104,6 +105,30 @@ final class LocalBluetoothProfileManager {
         }
     }
 };
+
+        private final Handler connectOtherProfilesHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+            synchronized (this) {
+                // Connect all the profiles which are enabled
+                // Right now hf/a2dp profiles connect is handled here
+                List<BluetoothDevice> hfConnDevList= mHeadsetProfile.getConnectedDevices();
+
+                if (hfConnDevList.isEmpty() && mHeadsetProfile.isPreferred((BluetoothDevice)msg.obj))
+                    mHeadsetProfile.connect((BluetoothDevice)msg.obj);
+                else
+                    Log.d(TAG,"Hf device is not preferred or already Hf connected device exist");
+
+                List<BluetoothDevice> a2dpConnDevList= mA2dpProfile.getConnectedDevices();
+
+                if (a2dpConnDevList.isEmpty() && mA2dpProfile.isPreferred((BluetoothDevice)msg.obj))
+                    mA2dpProfile.connect((BluetoothDevice)msg.obj);
+                else
+                    Log.d(TAG,"A2dp device is not preferred or already a2dp connected device exist");
+
+            }
+        }
+    };
 
     /**
      * Mapping from profile name, e.g. "HEADSET" to profile object.
@@ -351,6 +376,19 @@ final class LocalBluetoothProfileManager {
 
     public void enableAutoConnectForA2dp(BluetoothDevice device,boolean enable) {
         mA2dpProfile.enableAutoConnect(device,enable);
+    }
+
+    public void handleConnectOtherProfiles(BluetoothDevice device) {
+        if (device != null){
+            // Remove previous messages if any
+            connectOtherProfilesHandler.removeMessages(CONNECT_OTHER_PROFILES);
+            Message mes = connectOtherProfilesHandler.obtainMessage(CONNECT_OTHER_PROFILES);
+            mes.obj = device;
+            connectOtherProfilesHandler.sendMessageDelayed(mes,CONNECT_HF_OR_A2DP_TIMEOUT);
+            Log.i(TAG,"Message posted for connection other Profiles ");
+        } else {
+            Log.e(TAG,"Device = Null received in handleConnectOtherProfiles ");
+        }
     }
 
     // This is called by DockService, so check Headset and A2DP.
