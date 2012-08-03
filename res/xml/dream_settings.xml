@@ -15,25 +15,28 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/screensaver_settings_title"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-
-    <com.android.settings.DreamComponentPreference
-            android:key="screensaver_component"
-            android:title="@string/screensaver_component_title"
-            android:persistent="false"
-            />
-
-    <com.android.settings.DreamTesterPreference
-            android:key="test"
-            android:title="@string/screensaver_test"
-            android:persistent="false"
-            />
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/screensaver_settings_title" >
 
     <CheckBoxPreference
-            android:key="activate_on_dock"
-            android:persistent="false"
-            android:title="@string/screensaver_activate_on_dock_title"
-            android:defaultValue="true" />
+        android:key="activate_on_sleep"
+        android:persistent="false"
+        android:title="@string/screensaver_activate_on_sleep_title" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="activate_on_dock"
+        android:persistent="false"
+        android:title="@string/screensaver_activate_on_dock_title" />
+
+    <com.android.settings.DreamComponentPreference
+        android:key="screensaver_component"
+        android:persistent="false"
+        android:title="@string/screensaver_component_title" />
+
+    <com.android.settings.DreamTesterPreference
+        android:key="test"
+        android:persistent="false"
+        android:title="@string/screensaver_test" />
 
 </PreferenceScreen>
