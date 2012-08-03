@@ -16,11 +16,11 @@
 
 package com.android.settings.tts;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -31,6 +31,9 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -45,11 +48,14 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     private static final String KEY_ENGINE_SETTINGS = "tts_engine_settings";
     private static final String KEY_INSTALL_DATA = "tts_install_data";
 
+    private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
+
     private TtsEngines mEnginesHelper;
     private ListPreference mLocalePreference;
     private Preference mEngineSettingsPreference;
     private Preference mInstallVoicesPreference;
     private Intent mEngineSettingsIntent;
+    private Intent mVoiceDataDetails;
 
     private TextToSpeech mTts;
 
@@ -65,6 +71,16 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
                         mLocalePreference.setEnabled(true);
                     }
                 });
+            }
+        }
+    };
+
+    private final BroadcastReceiver mLanguagesChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Installed or uninstalled some data packs
+            if (TextToSpeech.Engine.ACTION_TTS_DATA_INSTALLED.equals(intent.getAction())) {
+                checkTtsData();
             }
         }
     };
@@ -103,26 +119,52 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
 
         mLocalePreference.setEnabled(false);
 
+        mVoiceDataDetails = getArguments().getParcelable(TtsEnginePreference.FRAGMENT_ARGS_VOICES);
+
         updateVoiceDetails();
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mTtsInitListener,
                 getEngineName());
+
+        // Check if data packs changed
+        checkTtsData();
+
+        getActivity().registerReceiver(mLanguagesChangedReceiver,
+                new IntentFilter(TextToSpeech.Engine.ACTION_TTS_DATA_INSTALLED));
     }
 
     @Override
     public void onDestroy() {
+        getActivity().unregisterReceiver(mLanguagesChangedReceiver);
         mTts.shutdown();
         super.onDestroy();
     }
 
-    private void updateVoiceDetails() {
-        final Intent voiceDataDetails = getArguments().getParcelable(
-                TtsEnginePreference.FRAGMENT_ARGS_VOICES);
-        if (DBG) Log.d(TAG, "Parsing voice data details, data: " + voiceDataDetails.toUri(0));
+    private final void checkTtsData() {
+        Intent intent = new Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        intent.setPackage(getEngineName());
+        try {
+            if (DBG) Log.d(TAG, "Updating engine: Checking voice data: " + intent.toUri(0));
+            startActivityForResult(intent, VOICE_DATA_INTEGRITY_CHECK);
+        } catch (ActivityNotFoundException ex) {
+            Log.e(TAG, "Failed to check TTS data, no activity found for " + intent + ")");
+        }
+    }
 
-        final ArrayList<String> available = voiceDataDetails.getStringArrayListExtra(
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == VOICE_DATA_INTEGRITY_CHECK) {
+            mVoiceDataDetails = data;
+            updateVoiceDetails();
+        }
+    }
+
+    private void updateVoiceDetails() {
+        if (DBG) Log.d(TAG, "Parsing voice data details, data: " + mVoiceDataDetails.toUri(0));
+
+        final ArrayList<String> available = mVoiceDataDetails.getStringArrayListExtra(
                 TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
-        final ArrayList<String> unavailable = voiceDataDetails.getStringArrayListExtra(
+        final ArrayList<String> unavailable = mVoiceDataDetails.getStringArrayListExtra(
                 TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES);
 
         if (available == null){
