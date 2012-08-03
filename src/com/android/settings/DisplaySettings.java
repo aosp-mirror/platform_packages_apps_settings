@@ -232,10 +232,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateScreenSaverSummary() {
+        boolean activatedOnSleep = DreamSettings.isScreenSaverActivatedOnSleep(getActivity());
+        boolean activatedOnDock = DreamSettings.isScreenSaverActivatedOnDock(getActivity());
         mScreenSaverPreference.setSummary(
-            DreamSettings.isScreenSaverEnabled(mScreenSaverPreference.getContext())
-                ? R.string.screensaver_settings_summary_on
-                : R.string.screensaver_settings_summary_off);
+                activatedOnSleep && activatedOnDock ? R.string.screensaver_settings_summary_both :
+                activatedOnSleep ? R.string.screensaver_settings_summary_sleep :
+                activatedOnDock ? R.string.screensaver_settings_summary_dock :
+                R.string.screensaver_settings_summary_off);
     }
 
     private void updateAccelerometerRotationCheckbox() {
