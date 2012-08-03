@@ -48,12 +48,19 @@ import java.util.ArrayList;
 public class DreamSettings extends SettingsPreferenceFragment {
     private static final String TAG = "DreamSettings";
 
+    private static final String KEY_ACTIVATE_ON_SLEEP = "activate_on_sleep";
     private static final String KEY_ACTIVATE_ON_DOCK = "activate_on_dock";
+    private static final String KEY_COMPONENT = "screensaver_component";
+    private static final String KEY_TEST = "test";
 
-    private CheckBoxPreference mActivateOnDockPreference;
+    private static final int DEFAULT_SLEEP = 0;
+    private static final int DEFAULT_DOCK = 1;
 
-    private Switch mEnableSwitch;
-    private Enabler mEnabler;
+    private ActivationSetting mActivateOnSleep;
+    private ActivationSetting mActivateOnDock;
+
+    private Preference mComponentPref;
+    private Preference mTestPref;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -61,99 +68,76 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.dream_settings);
 
-        mActivateOnDockPreference = (CheckBoxPreference) findPreference(KEY_ACTIVATE_ON_DOCK);
+        mComponentPref = findPreference(KEY_COMPONENT);
+        mTestPref = findPreference(KEY_TEST);
 
-        final Activity activity = getActivity();
-
-        mEnableSwitch = new Switch(activity);
-
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            // note: we do not check onIsHidingHeaders() or onIsMultiPane() because there's no
-            // switch in the left-hand pane to control this; we need to show the ON/OFF in our
-            // fragment every time
-            final int padding = activity.getResources().getDimensionPixelSize(
-                    R.dimen.action_bar_switch_padding);
-            mEnableSwitch.setPadding(0, 0, padding, 0);
-            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                    ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(mEnableSwitch, new ActionBar.LayoutParams(
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_VERTICAL | Gravity.END));
-            activity.getActionBar().setTitle(R.string.screensaver_settings_title);
-        }
-
-        mEnabler = new Enabler(activity, mEnableSwitch);
+        mActivateOnSleep = new ActivationSetting(getActivity(),
+                SCREENSAVER_ENABLED, DEFAULT_SLEEP,
+                (CheckBoxPreference) findPreference(KEY_ACTIVATE_ON_SLEEP));
+        mActivateOnDock = new ActivationSetting(getActivity(),
+                SCREENSAVER_ACTIVATE_ON_DOCK, DEFAULT_DOCK,
+                (CheckBoxPreference) findPreference(KEY_ACTIVATE_ON_DOCK));
     }
 
-    public static boolean isScreenSaverEnabled(Context context) {
+    public static boolean isScreenSaverActivatedOnSleep(Context context) {
         return 0 != Settings.Secure.getInt(
-                    context.getContentResolver(), SCREENSAVER_ENABLED, 1);
+                    context.getContentResolver(), SCREENSAVER_ENABLED, DEFAULT_SLEEP);
     }
 
-    public static void setScreenSaverEnabled(Context context, boolean enabled) {
-        Settings.Secure.putInt(
-                context.getContentResolver(), SCREENSAVER_ENABLED, enabled ? 1 : 0);
-    }
-
-    public static class Enabler implements CompoundButton.OnCheckedChangeListener  {
-        private final Context mContext;
-        private Switch mSwitch;
-
-        public Enabler(Context context, Switch switch_) {
-            mContext = context;
-            setSwitch(switch_);
-        }
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            setScreenSaverEnabled(mContext, isChecked);
-        }
-        public void setSwitch(Switch switch_) {
-            if (mSwitch == switch_) return;
-            if (mSwitch != null) mSwitch.setOnCheckedChangeListener(null);
-            mSwitch = switch_;
-            mSwitch.setOnCheckedChangeListener(this);
-
-            final boolean enabled = isScreenSaverEnabled(mContext);
-            mSwitch.setChecked(enabled);
-        }
-        public void pause() {
-            mSwitch.setOnCheckedChangeListener(null);
-        }
-        public void resume() {
-            mSwitch.setOnCheckedChangeListener(this);
-        }
+    public static boolean isScreenSaverActivatedOnDock(Context context) {
+        return 0 != Settings.Secure.getInt(
+                    context.getContentResolver(), SCREENSAVER_ACTIVATE_ON_DOCK, DEFAULT_DOCK);
     }
 
     @Override
     public void onResume() {
-        if (mEnabler != null) {
-            mEnabler.resume();
-        }
-
-        final boolean currentActivateOnDock = 0 != Settings.Secure.getInt(getContentResolver(),
-                SCREENSAVER_ACTIVATE_ON_DOCK, 1);
-        mActivateOnDockPreference.setChecked(currentActivateOnDock);
+        mActivateOnSleep.onResume();
+        mActivateOnDock.onResume();
+        refreshDependents();
         super.onResume();
     }
 
     @Override
-    public void onPause() {
-        if (mEnabler != null) {
-            mEnabler.pause();
-        }
-
-        super.onPause();
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mActivateOnDockPreference) {
-            Settings.Secure.putInt(getContentResolver(),
-                    SCREENSAVER_ACTIVATE_ON_DOCK, 
-                    mActivateOnDockPreference.isChecked() ? 1 : 0);
-        }
+        mActivateOnSleep.onClick(preference);
+        mActivateOnDock.onClick(preference);
+        refreshDependents();
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
+
+    private void refreshDependents() {
+        boolean enabled = mActivateOnSleep.isSelected() || mActivateOnDock.isSelected();
+        mComponentPref.setEnabled(enabled);
+        mTestPref.setEnabled(enabled);
+    }
+
+    private static class ActivationSetting {
+        private final Context mContext;
+        private final String mName;
+        private final int mDefaultValue;
+        private final CheckBoxPreference mPref;
+
+        ActivationSetting(Context context, String name, int defaultValue, CheckBoxPreference pref) {
+            mContext = context;
+            mName = name;
+            mDefaultValue = defaultValue;
+            mPref = pref;
+        }
+        public boolean isSelected() {
+            return mPref.isChecked();
+        }
+        void onClick(Preference preference) {
+            if (preference == mPref) {
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        mName,
+                        mPref.isChecked() ? 1 : 0);
+            }
+        }
+        void onResume() {
+            boolean currentActivated = 0 != Settings.Secure.getInt(mContext.getContentResolver(),
+                    mName, mDefaultValue);
+            mPref.setChecked(currentActivated);
+        }
+    }
+
 }
