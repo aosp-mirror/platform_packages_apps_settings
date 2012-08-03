@@ -57,8 +57,8 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                 try {
                     mAppWidgetManager.bindAppWidgetId(mAppWidgetId, mComponentName);
                     Intent result = new Intent();
-                    result.putExtra("EXTRA_APPWIDGET_ID", mAppWidgetId);
-                    setResult(RESULT_OK);
+                    result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+                    setResult(RESULT_OK, result);
                 } catch (Exception e) {
                     Log.v("BIND_APPWIDGET", "Error binding widget with id "
                             + mAppWidgetId + " and component " + mComponentName);
