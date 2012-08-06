@@ -91,6 +91,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
+    private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
@@ -136,6 +137,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mForceHardwareUi;
     private CheckBoxPreference mTrackFrameTime;
     private CheckBoxPreference mShowHwScreenUpdates;
+    private CheckBoxPreference mShowHwLayersUpdates;
     private CheckBoxPreference mDebugLayout;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
@@ -188,6 +190,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mForceHardwareUi = findAndInitCheckboxPref(FORCE_HARDWARE_UI_KEY);
         mTrackFrameTime = findAndInitCheckboxPref(TRACK_FRAME_TIME_KEY);
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
+        mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
         mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
         mAllPrefs.add(mWindowAnimationScale);
@@ -335,7 +338,7 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.Secure.ADB_ENABLED, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.System.getInt(cr,
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
-        updateCheckBox(mEnforceReadExternal, isPermissionEnforced(context, READ_EXTERNAL_STORAGE));
+        updateCheckBox(mEnforceReadExternal, isPermissionEnforced(READ_EXTERNAL_STORAGE));
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
@@ -349,6 +352,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateHardwareUiOptions();
         updateTrackFrameTimeOptions();
         updateShowHwScreenUpdatesOptions();
+        updateShowHwLayersUpdatesOptions();
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateEnableTracesOptions();
@@ -581,7 +585,18 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private void writeShowHwScreenUpdatesOptions() {
         SystemProperties.set(HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
-                mShowHwScreenUpdates.isChecked() ? "true" : "false");
+                mShowHwScreenUpdates.isChecked() ? "true" : null);
+        pokeSystemProperties();
+    }
+
+    private void updateShowHwLayersUpdatesOptions() {
+        updateCheckBox(mShowHwLayersUpdates, SystemProperties.getBoolean(
+                HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY, false));
+    }
+
+    private void writeShowHwLayersUpdatesOptions() {
+        SystemProperties.set(HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY,
+                mShowHwLayersUpdates.isChecked() ? "true" : null);
         pokeSystemProperties();
     }
 
@@ -705,7 +720,6 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateEnableTracesOptions() {
-        String strValue = SystemProperties.get(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS);
         long flags = SystemProperties.getLong(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS, 0);
         String[] values = mEnableTracesPref.getEntryValues();
         int numSet = 0;
@@ -850,6 +864,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeTrackFrameTimeOptions();
         } else if (preference == mShowHwScreenUpdates) {
             writeShowHwScreenUpdatesOptions();
+        } else if (preference == mShowHwLayersUpdates) {
+            writeShowHwLayersUpdatesOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
         }
@@ -941,6 +957,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     void pokeSystemProperties() {
         if (!mDontPokeProperties) {
+            //noinspection unchecked
             (new SystemPropPoker()).execute();
         }
     }
@@ -970,7 +987,7 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     /**
-     * Dialog to confirm enforcement of {@link #READ_EXTERNAL_STORAGE}.
+     * Dialog to confirm enforcement of {@link android.Manifest.permission#READ_EXTERNAL_STORAGE}.
      */
     public static class ConfirmEnforceFragment extends DialogFragment {
         public static void show(DevelopmentSettings parent) {
@@ -1005,9 +1022,9 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
-    private static boolean isPermissionEnforced(Context context, String permission) {
+    private static boolean isPermissionEnforced(String permission) {
         try {
-            return ActivityThread.getPackageManager().isPermissionEnforced(READ_EXTERNAL_STORAGE);
+            return ActivityThread.getPackageManager().isPermissionEnforced(permission);
         } catch (RemoteException e) {
             throw new RuntimeException("Problem talking with PackageManager", e);
         }
