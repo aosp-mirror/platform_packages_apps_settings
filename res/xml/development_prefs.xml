@@ -18,8 +18,8 @@
         android:title="@string/development_settings_title">
     <com.android.settings.BugreportPreference
             android:key="bugreport"
-            android:title="@string/bugreport_title"
-            android:dialogTitle="@string/bugreport_title" />
+            android:title="@*android:string/bugreport_title"
+            android:dialogTitle="@*android:string/bugreport_title" />
 
     <PreferenceScreen
             android:key="local_backup_password"
@@ -56,6 +56,11 @@
             android:key="enable_adb"
             android:title="@string/enable_adb"
             android:summary="@string/enable_adb_summary"/>
+
+        <CheckBoxPreference
+            android:key="bugreport_in_power"
+            android:title="@string/bugreport_in_power"
+            android:summary="@string/bugreport_in_power_summary"/>
 
         <CheckBoxPreference
             android:key="allow_mock_location"
