@@ -425,7 +425,8 @@ final class LocalBluetoothProfileManager {
      */
     synchronized void updateProfiles(ParcelUuid[] uuids, ParcelUuid[] localUuids,
             Collection<LocalBluetoothProfile> profiles,
-            Collection<LocalBluetoothProfile> removedProfiles) {
+            Collection<LocalBluetoothProfile> removedProfiles,
+            boolean isPanNapConnected) {
         // Copy previous profile list into removedProfiles
         removedProfiles.clear();
         removedProfiles.addAll(profiles);
@@ -463,8 +464,10 @@ final class LocalBluetoothProfileManager {
             removedProfiles.remove(mHidProfile);
         }
 
-        if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.NAP) &&
-            mPanProfile != null) {
+        if(isPanNapConnected)
+            Log.d(TAG, "Valid PAN-NAP connection exists.");
+        if ((BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.NAP) &&
+            mPanProfile != null) || isPanNapConnected) {
             profiles.add(mPanProfile);
             removedProfiles.remove(mPanProfile);
         }
