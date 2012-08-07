@@ -33,8 +33,8 @@ public class BugreportPreference extends DialogPreference {
     @Override
     protected void onPrepareDialogBuilder(Builder builder) {
         super.onPrepareDialogBuilder(builder);
-        builder.setPositiveButton(R.string.report, this);
-        builder.setMessage(R.string.bugreport_message);
+        builder.setPositiveButton(com.android.internal.R.string.report, this);
+        builder.setMessage(com.android.internal.R.string.bugreport_message);
     }
 
     @Override
