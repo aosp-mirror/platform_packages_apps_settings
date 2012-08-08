@@ -56,13 +56,11 @@ final class A2dpProfile implements LocalBluetoothProfile {
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothA2dp) proxy;
-            mProfileManager.setA2dpServiceUp(true);
             mIsProfileReady=true;
         }
 
         public void onServiceDisconnected(int profile) {
             if (V) Log.d(TAG,"Bluetooth service disconnected");
-            mProfileManager.setA2dpServiceUp(false);
             mIsProfileReady=false;
         }
     }
@@ -106,21 +104,11 @@ final class A2dpProfile implements LocalBluetoothProfile {
 
     public boolean disconnect(BluetoothDevice device) {
         if (mService == null) return false;
-        return mService.disconnect(device);
-    }
-
-    // This function is added as the AUTO CONNECT priority could not be set by using setPreferred(),
-    // as setPreferred() takes only boolean input but getPreferred() supports interger output.
-    // Also this need not implemented by all profiles so this has been added here.
-    public void enableAutoConnect(BluetoothDevice device, boolean enable) {
-        if (mService == null) return;
-        if (enable) {
-             mService.setPriority(device, BluetoothProfile.PRIORITY_AUTO_CONNECT);
-        } else {
-             if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
-                 mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
-             }
+        // Downgrade priority as user is disconnecting the headset.
+        if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON){
+            mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
         }
+        return mService.disconnect(device);
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
@@ -150,13 +138,6 @@ final class A2dpProfile implements LocalBluetoothProfile {
             mService.setPriority(device, BluetoothProfile.PRIORITY_OFF);
         }
     }
-
-    public void setUnbonded(BluetoothDevice device)
-    {
-        if (mService == null) return;
-        mService.setPriority(device, BluetoothProfile.PRIORITY_UNDEFINED);
-    }
-
     boolean isA2dpPlaying() {
         if (mService == null) return false;
         List<BluetoothDevice> sinks = mService.getConnectedDevices();
