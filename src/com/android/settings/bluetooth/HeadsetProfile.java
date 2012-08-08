@@ -78,14 +78,12 @@ final class HeadsetProfile implements LocalBluetoothProfile {
             }
 
             mProfileManager.callServiceConnectedListeners();
-            mProfileManager.setHfServiceUp(true);
             mIsProfileReady=true;
         }
 
         public void onServiceDisconnected(int profile) {
             if (V) Log.d(TAG,"Bluetooth service disconnected");
             mProfileManager.callServiceDisconnectedListeners();
-            mProfileManager.setHfServiceUp(false);
             mIsProfileReady=false;
         }
     }
@@ -167,33 +165,12 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         }
     }
 
-    public void setUnbonded(BluetoothDevice device)
-    {
-        if (mService == null) return;
-        mService.setPriority(device, BluetoothProfile.PRIORITY_UNDEFINED);
-    }
-
     public List<BluetoothDevice> getConnectedDevices() {
         if (mService == null) return new ArrayList<BluetoothDevice>(0);
         return mService.getDevicesMatchingConnectionStates(
               new int[] {BluetoothProfile.STATE_CONNECTED,
                          BluetoothProfile.STATE_CONNECTING,
                          BluetoothProfile.STATE_DISCONNECTING});
-    }
-
-
-    // This function is added as the AUTO CONNECT priority could not be set by using setPreferred(),
-    // as setPreferred() takes only boolean input but getPreferred() supports interger output.
-    // Also this need not implemented by all profiles so this has been added here.
-    public void enableAutoConnect(BluetoothDevice device, boolean enable) {
-        if (mService == null) return;
-        if (enable) {
-            mService.setPriority(device, BluetoothProfile.PRIORITY_AUTO_CONNECT);
-        } else {
-            if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
-                mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
-            }
-        }
     }
 
     public String toString() {

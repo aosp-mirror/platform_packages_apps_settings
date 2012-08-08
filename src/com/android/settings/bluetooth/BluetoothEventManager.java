@@ -101,9 +101,6 @@ final class BluetoothEventManager {
         // Dock event broadcasts
         addHandler(Intent.ACTION_DOCK_EVENT, new DockEventHandler());
 
-        // Connect other profiles broadcast
-        addHandler(BluetoothProfile.ACTION_CONNECT_OTHER_PROFILES, new ConnectOtherProfilesHandler());
-
         mContext.registerReceiver(mBroadcastReceiver, mAdapterIntentFilter);
     }
 
@@ -372,13 +369,6 @@ final class BluetoothEventManager {
             }
         }
     }
-
-    private class ConnectOtherProfilesHandler implements Handler {
-        public void onReceive(Context context, Intent intent, BluetoothDevice device) {
-            mProfileManager.handleConnectOtherProfiles(device);
-        }
-    }
-
     boolean readPairedDevices() {
         Set<BluetoothDevice> bondedDevices = mLocalAdapter.getBondedDevices();
         if (bondedDevices == null) {

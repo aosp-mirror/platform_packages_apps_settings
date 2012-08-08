@@ -63,10 +63,6 @@ final class OppProfile implements LocalBluetoothProfile {
     public void setPreferred(BluetoothDevice device, boolean preferred) {
     }
 
-    public void setUnbonded(BluetoothDevice device) {
-        // Settings app doesn't handle OPP
-    }
-
     public boolean isProfileReady() {
         return true;
     }
