@@ -167,15 +167,7 @@ public class ApnEditor extends PreferenceActivity
         mProtocol.setOnPreferenceChangeListener(this);
 
         mRoamingProtocol = (ListPreference) findPreference(KEY_ROAMING_PROTOCOL);
-        // Only enable this on CDMA phones for now, since it may cause problems on other phone
-        // types.  (This screen is not normally accessible on CDMA phones, but is useful for
-        // testing.)
-        TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        if (tm.getCurrentPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
-            mRoamingProtocol.setOnPreferenceChangeListener(this);
-        } else {
-            getPreferenceScreen().removePreference(mRoamingProtocol);
-        }
+        mRoamingProtocol.setOnPreferenceChangeListener(this);
 
         mCarrierEnabled = (CheckBoxPreference) findPreference(KEY_CARRIER_ENABLED);
 
