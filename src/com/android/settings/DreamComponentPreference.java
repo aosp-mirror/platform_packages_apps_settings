@@ -80,7 +80,9 @@ public class DreamComponentPreference extends Preference {
                 ServiceManager.getService("dreams"));
         try {
             cn = dm.getDreamComponent();
-        } catch (RemoteException ex) {
+        } catch (RemoteException ex) { }
+
+        if (cn == null) {
             setSummary("(unknown)");
             return;
         }
