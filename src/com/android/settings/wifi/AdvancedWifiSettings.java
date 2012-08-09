@@ -44,6 +44,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
     private static final String KEY_POOR_NETWORK_DETECTION = "wifi_poor_network_detection";
+    private static final String KEY_SUSPEND_OPTIMIZATIONS = "suspend_optimizations";
 
     private WifiManager mWifiManager;
 
@@ -83,6 +84,11 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                         Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
             }
         }
+
+        CheckBoxPreference suspendOptimizations =
+            (CheckBoxPreference) findPreference(KEY_SUSPEND_OPTIMIZATIONS);
+        suspendOptimizations.setChecked(Secure.getInt(getContentResolver(),
+                Secure.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED, 1) == 1);
 
         ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
 
@@ -147,6 +153,10 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         } else if (KEY_POOR_NETWORK_DETECTION.equals(key)) {
             Secure.putInt(getContentResolver(),
                     Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+        } else if (KEY_SUSPEND_OPTIMIZATIONS.equals(key)) {
+            Secure.putInt(getContentResolver(),
+                    Secure.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);

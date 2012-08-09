@@ -47,6 +47,12 @@
             android:entries="@array/wifi_frequency_band_entries"
             android:entryValues="@array/wifi_frequency_band_values"
             />
+
+    <CheckBoxPreference
+            android:key="suspend_optimizations"
+            android:title="@string/wifi_suspend_optimizations"
+            android:summary="@string/wifi_suspend_optimizations_summary"
+            android:persistent="false" />
     
     <Preference android:key="mac_address" 
         style="?android:attr/preferenceInformationStyle" 
