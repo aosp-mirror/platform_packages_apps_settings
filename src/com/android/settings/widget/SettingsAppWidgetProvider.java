@@ -34,6 +34,7 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IPowerManager;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
@@ -94,16 +95,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         R.drawable.appwidget_settings_ind_on_r_holo
     };
 
-    /**
-     * Minimum and maximum brightnesses.  Don't go to 0 since that makes the display unusable
-     */
-    private static final int MINIMUM_BACKLIGHT = android.os.PowerManager.BRIGHTNESS_DIM + 10;
-    private static final int MAXIMUM_BACKLIGHT = android.os.PowerManager.BRIGHTNESS_ON;
-    private static final int DEFAULT_BACKLIGHT = (int) (android.os.PowerManager.BRIGHTNESS_ON * 0.4f);
     /** Minimum brightness at which the indicator is shown at half-full and ON */
-    private static final int HALF_BRIGHTNESS_THRESHOLD = (int) (0.3 * MAXIMUM_BACKLIGHT);
+    private static final float HALF_BRIGHTNESS_THRESHOLD = 0.3f;
     /** Minimum brightness at which the indicator is shown at full */
-    private static final int FULL_BRIGHTNESS_THRESHOLD = (int) (0.8 * MAXIMUM_BACKLIGHT);
+    private static final float FULL_BRIGHTNESS_THRESHOLD = 0.8f;
 
     private static final StateTracker sWifiState = new WifiStateTracker();
     private static final StateTracker sBluetoothState = new BluetoothStateTracker();
@@ -684,11 +679,16 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     R.drawable.appwidget_settings_ind_on_r_holo);
         } else {
             final int brightness = getBrightness(context);
+            final PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
             // Set the icon
-            if (brightness > FULL_BRIGHTNESS_THRESHOLD) {
+            final int full = (int)(pm.getMaximumScreenBrightnessSetting()
+                    * FULL_BRIGHTNESS_THRESHOLD);
+            final int half = (int)(pm.getMaximumScreenBrightnessSetting()
+                    * HALF_BRIGHTNESS_THRESHOLD);
+            if (brightness > full) {
                 views.setImageViewResource(R.id.img_brightness,
                         R.drawable.ic_appwidget_settings_brightness_full_holo);
-            } else if (brightness > HALF_BRIGHTNESS_THRESHOLD) {
+            } else if (brightness > half) {
                 views.setImageViewResource(R.id.img_brightness,
                         R.drawable.ic_appwidget_settings_brightness_half_holo);
             } else {
@@ -696,7 +696,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                         R.drawable.ic_appwidget_settings_brightness_off_holo);
             }
             // Set the ON state
-            if (brightness > HALF_BRIGHTNESS_THRESHOLD) {
+            if (brightness > half) {
                 views.setImageViewResource(R.id.ind_brightness,
                         R.drawable.appwidget_settings_ind_on_r_holo);
             } else {
@@ -775,13 +775,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private static int getBrightness(Context context) {
         try {
-            IPowerManager power = IPowerManager.Stub.asInterface(
-                    ServiceManager.getService("power"));
-            if (power != null) {
-                int brightness = Settings.System.getInt(context.getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS);
-                return brightness;
-            }
+            int brightness = Settings.System.getInt(context.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS);
+            return brightness;
         } catch (Exception e) {
         }
         return 0;
@@ -795,13 +791,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private static boolean getBrightnessMode(Context context) {
         try {
-            IPowerManager power = IPowerManager.Stub.asInterface(
-                    ServiceManager.getService("power"));
-            if (power != null) {
-                int brightnessMode = Settings.System.getInt(context.getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS_MODE);
-                return brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-            }
+            int brightnessMode = Settings.System.getInt(context.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE);
+            return brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
         } catch (Exception e) {
             Log.d(TAG, "getBrightnessMode: " + e);
         }
@@ -818,6 +810,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             IPowerManager power = IPowerManager.Stub.asInterface(
                     ServiceManager.getService("power"));
             if (power != null) {
+                PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+
                 ContentResolver cr = context.getContentResolver();
                 int brightness = Settings.System.getInt(cr,
                         Settings.System.SCREEN_BRIGHTNESS);
@@ -832,15 +826,15 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 // Rotate AUTO -> MINIMUM -> DEFAULT -> MAXIMUM
                 // Technically, not a toggle...
                 if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                    brightness = MINIMUM_BACKLIGHT;
+                    brightness = pm.getMinimumScreenBrightnessSetting();
                     brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
-                } else if (brightness < DEFAULT_BACKLIGHT) {
-                    brightness = DEFAULT_BACKLIGHT;
-                } else if (brightness < MAXIMUM_BACKLIGHT) {
-                    brightness = MAXIMUM_BACKLIGHT;
+                } else if (brightness < pm.getDefaultScreenBrightnessSetting()) {
+                    brightness = pm.getDefaultScreenBrightnessSetting();
+                } else if (brightness < pm.getMaximumScreenBrightnessSetting()) {
+                    brightness = pm.getMaximumScreenBrightnessSetting();
                 } else {
                     brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-                    brightness = MINIMUM_BACKLIGHT;
+                    brightness = pm.getMinimumScreenBrightnessSetting();
                 }
 
                 if (context.getResources().getBoolean(
@@ -854,7 +848,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
                 }
                 if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) {
-                    power.setBacklightBrightness(brightness);
+                    power.setTemporaryScreenBrightnessSettingOverride(brightness);
                     Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
                 }
             }
