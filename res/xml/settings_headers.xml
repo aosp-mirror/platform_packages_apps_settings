@@ -19,7 +19,8 @@
 
 
     <!-- WIRELESS and NETWORKS -->
-    <header android:title="@string/header_category_wireless_networks" />
+    <header android:id="@+id/wireless_section"
+        android:title="@string/header_category_wireless_networks" />
 
     <!-- Wifi -->
     <header
@@ -58,7 +59,8 @@
         android:icon="@drawable/empty_icon" />
 
     <!-- DEVICE -->
-    <header android:title="@string/header_category_device" />
+    <header android:id="@+id/device_section"
+        android:title="@string/header_category_device" />
 
     <!-- Sound -->
     <header
@@ -95,6 +97,13 @@
         android:title="@string/applications_settings"
         android:id="@+id/application_settings" />
 
+    <!-- Manage users -->
+    <header
+        android:fragment="com.android.settings.users.UserSettings"
+        android:icon="@drawable/ic_settings_sync"
+        android:title="@string/user_settings_title"
+        android:id="@+id/user_settings" />
+
     <!-- Manufacturer hook -->
     <header
         android:fragment="com.android.settings.WirelessSettings"
@@ -104,7 +113,8 @@
 
 
     <!-- PERSONAL -->
-    <header android:title="@string/header_category_personal" />
+    <header android:id="@+id/personal_section"
+        android:title="@string/header_category_personal" />
 
     <!-- Location -->
     <header
@@ -139,13 +149,6 @@
             android:id="@+id/account_settings"
             android:title="@string/account_settings" />
 
-    <!-- Manage users -->
-    <header
-        android:fragment="com.android.settings.users.UserSettings"
-        android:icon="@drawable/ic_settings_sync"
-        android:title="@string/user_settings_title"
-        android:id="@+id/user_settings" />
-
     <header
             android:id="@+id/account_add"
             android:title="@string/add_account_label"
@@ -155,7 +158,8 @@
     </header>
 
     <!-- SYSTEM -->
-    <header android:title="@string/header_category_system" />
+    <header android:id="@+id/system_section"
+        android:title="@string/header_category_system" />
 
     <!-- Dock -->
     <header
