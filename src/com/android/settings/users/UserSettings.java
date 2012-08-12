@@ -16,9 +16,11 @@
 
 package com.android.settings.users;
 
+import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -80,7 +82,8 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void updateUserList() {
-        List<UserInfo> users = getActivity().getPackageManager().getUsers();
+        List<UserInfo> users = ((UserManager) getActivity().getSystemService(Context.USER_SERVICE))
+                .getUsers();
 
         mUserListCategory.removeAll();
         for (UserInfo user : users) {
