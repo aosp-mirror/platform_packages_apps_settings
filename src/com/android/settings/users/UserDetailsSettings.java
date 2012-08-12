@@ -19,6 +19,7 @@ package com.android.settings.users;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -35,6 +36,7 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -91,6 +93,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private IPackageManager mIPm;
     private PackageManager mPm;
+    private UserManager mUm;
     private int mUserId;
     private boolean mNewUser;
 
@@ -102,12 +105,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mNewUser = args == null || args.getInt(EXTRA_USER_ID, -1) == -1;
         mUserId = mNewUser ? -1 : args.getInt(EXTRA_USER_ID, -1);
         mIPm = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
+        mUm = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
 
         if (mUserId == -1) {
-            try {
-                mUserId = mIPm.createUser(getString(R.string.user_new_user_name), 0).id;
-            } catch (RemoteException re) {
-            }
+            mUserId = mUm.createUser(getString(R.string.user_new_user_name), 0).id;
         }
         mSystemAppGroup = (PreferenceGroup) findPreference(KEY_SYSTEM_APPS);
         mInstalledAppGroup = (PreferenceGroup) findPreference(KEY_INSTALLED_APPS);
@@ -161,7 +162,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void initExistingUser() {
-        List<UserInfo> users = mPm.getUsers();
+        List<UserInfo> users = mUm.getUsers();
         UserInfo foundUser = null;
         for (UserInfo user : users) {
             if (user.id == mUserId) {
@@ -193,12 +194,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void removeUserNow() {
-        try {
-            mIPm.removeUser(mUserId);
-        } catch (RemoteException re) {
-            // Couldn't remove user. Shouldn't happen
-            Log.e(TAG, "Couldn't remove user " + mUserId + "\n" + re);
-        }
+        mUm.removeUser(mUserId);
         finish();
     }
 
@@ -276,12 +272,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (TextUtils.isEmpty(name)) {
                 return false;
             }
-            try {
-                mIPm.setUserName(mUserId, (String) newValue);
-                mNamePref.setSummary((String) newValue);
-            } catch (RemoteException re) {
-                return false;
-            }
+            mUm.setUserName(mUserId, (String) newValue);
+            mNamePref.setSummary((String) newValue);
         }
         return true;
     }
@@ -354,17 +346,14 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void saveCroppedImage(Intent data) {
-        try {
-            if (data.hasExtra("data")) {
-                Bitmap bitmap = (Bitmap) data.getParcelableExtra("data");
-                ParcelFileDescriptor fd = mIPm.setUserIcon(mUserId);
-                if (fd != null) {
-                    bitmap.compress(CompressFormat.PNG, 100,
-                            new ParcelFileDescriptor.AutoCloseOutputStream(fd));
-                    setPhotoId(mPm.getUser(mUserId).iconPath);
-                }
+        if (data.hasExtra("data")) {
+            Bitmap bitmap = (Bitmap) data.getParcelableExtra("data");
+            ParcelFileDescriptor fd = mUm.setUserIcon(mUserId);
+            if (fd != null) {
+                bitmap.compress(CompressFormat.PNG, 100,
+                        new ParcelFileDescriptor.AutoCloseOutputStream(fd));
+                setPhotoId(mUm.getUserInfo(mUserId).iconPath);
             }
-        } catch (RemoteException re) {
         }
     }
 
