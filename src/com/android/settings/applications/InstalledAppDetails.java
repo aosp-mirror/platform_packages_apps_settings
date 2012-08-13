@@ -826,7 +826,7 @@ public class InstalledAppDetails extends Fragment
                 case DLG_CLEAR_DATA:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.clear_data_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.clear_data_dlg_text))
                     .setPositiveButton(R.string.dlg_ok,
                             new DialogInterface.OnClickListener() {
@@ -840,7 +840,7 @@ public class InstalledAppDetails extends Fragment
                 case DLG_FACTORY_RESET:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.app_factory_reset_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.app_factory_reset_dlg_text))
                     .setPositiveButton(R.string.dlg_ok,
                             new DialogInterface.OnClickListener() {
@@ -854,7 +854,7 @@ public class InstalledAppDetails extends Fragment
                 case DLG_APP_NOT_FOUND:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.app_not_found_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.app_not_found_dlg_title))
                     .setNeutralButton(getActivity().getText(R.string.dlg_ok),
                             new DialogInterface.OnClickListener() {
@@ -867,7 +867,7 @@ public class InstalledAppDetails extends Fragment
                 case DLG_CANNOT_CLEAR_DATA:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.clear_failed_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.clear_failed_dlg_text))
                     .setNeutralButton(R.string.dlg_ok,
                             new DialogInterface.OnClickListener() {
@@ -881,7 +881,7 @@ public class InstalledAppDetails extends Fragment
                 case DLG_FORCE_STOP:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.force_stop_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.force_stop_dlg_text))
                     .setPositiveButton(R.string.dlg_ok,
                         new DialogInterface.OnClickListener() {
@@ -897,14 +897,14 @@ public class InstalledAppDetails extends Fragment
                             getOwner().getMoveErrMsg(moveErrorCode));
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.move_app_failed_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(msg)
                     .setNeutralButton(R.string.dlg_ok, null)
                     .create();
                 case DLG_DISABLE:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.app_disable_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.app_disable_dlg_text))
                     .setPositiveButton(R.string.dlg_ok,
                         new DialogInterface.OnClickListener() {
