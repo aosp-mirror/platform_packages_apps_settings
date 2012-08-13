@@ -122,7 +122,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         }
         mDialog = (new AlertDialog.Builder(getActivity()))
                 .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
