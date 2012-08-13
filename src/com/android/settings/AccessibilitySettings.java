@@ -766,7 +766,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
             return new AlertDialog.Builder(getActivity())
                 .setTitle(title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setMessage(message)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, this)
