@@ -104,7 +104,8 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mInstallVoicesPreference.setOnPreferenceClickListener(this);
         // Remove this preference unless voices are indeed available to install.
         root.removePreference(mInstallVoicesPreference);
-
+        // Remove this preference unless locales are indeed available.
+        root.removePreference(mLocalePreference);
 
         root.setTitle(getEngineLabel());
         root.setKey(getEngineName());
@@ -120,8 +121,6 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mLocalePreference.setEnabled(false);
 
         mVoiceDataDetails = getArguments().getParcelable(TtsEnginePreference.FRAGMENT_ARGS_VOICES);
-
-        updateVoiceDetails();
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mTtsInitListener,
                 getEngineName());
@@ -169,9 +168,8 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
 
         if (available == null){
             Log.e(TAG, "TTS data check failed (available == null).");
-            final CharSequence[] empty = new CharSequence[0];
-            mLocalePreference.setEntries(empty);
-            mLocalePreference.setEntryValues(empty);
+            mLocalePreference.setEnabled(false);
+            getPreferenceScreen().removePreference(mLocalePreference);
             return;
         }
 
@@ -183,11 +181,12 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         }
 
         if (available.size() > 0) {
+            mLocalePreference.setEnabled(true);
+            getPreferenceScreen().addPreference(mLocalePreference);
             updateDefaultLocalePref(available);
         } else {
-            final CharSequence[] empty = new CharSequence[0];
-            mLocalePreference.setEntries(empty);
-            mLocalePreference.setEntryValues(empty);
+            mLocalePreference.setEnabled(false);
+            getPreferenceScreen().removePreference(mLocalePreference);
         }
     }
 
