@@ -909,7 +909,7 @@ public class InstalledAppDetails extends Fragment
                 case DLG_DISABLE_NOTIFICATIONS:
                     return new AlertDialog.Builder(getActivity())
                     .setTitle(getActivity().getText(R.string.app_disable_notifications_dlg_title))
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setMessage(getActivity().getText(R.string.app_disable_notifications_dlg_text))
                     .setPositiveButton(R.string.dlg_ok,
                         new DialogInterface.OnClickListener() {
