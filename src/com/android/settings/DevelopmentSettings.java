@@ -757,7 +757,7 @@ public class DevelopmentSettings extends PreferenceFragment
                             getActivity().getResources().getString(
                                     R.string.dev_settings_warning_message))
                             .setTitle(R.string.dev_settings_warning_title)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setIconAttribute(android.R.attr.alertDialogIcon)
                             .setPositiveButton(android.R.string.yes, this)
                             .setNegativeButton(android.R.string.no, this)
                             .show();
