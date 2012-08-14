@@ -102,6 +102,9 @@ public class BatteryInfo extends Activity {
                     case BatteryManager.BATTERY_PLUGGED_USB:
                         mPower.setText(getString(R.string.battery_info_power_usb));
                         break;
+                    case BatteryManager.BATTERY_PLUGGED_WIRELESS:
+                        mPower.setText(getString(R.string.battery_info_power_wireless));
+                        break;
                     case (BatteryManager.BATTERY_PLUGGED_AC|BatteryManager.BATTERY_PLUGGED_USB):
                         mPower.setText(getString(R.string.battery_info_power_ac_usb));
                         break;
