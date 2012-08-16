@@ -26,7 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserId;
+import android.os.UserHandle;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -141,7 +141,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        if (UserId.myUserId() == 0) {
+        if (UserHandle.myUserId() == 0) {
             switch (dpm.getStorageEncryptionStatus()) {
             case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
                 // The device is currently encrypted.
@@ -193,7 +193,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        if (UserId.myUserId() > 0) {
+        if (UserHandle.myUserId() > 0) {
             return root;
         }
         // Rest are for primary user...
