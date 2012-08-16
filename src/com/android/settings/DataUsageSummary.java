@@ -85,7 +85,7 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
-import android.os.UserId;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
@@ -806,7 +806,7 @@ public class DataUsageSummary extends Fragment {
 
         updateDetailData();
 
-        if (UserId.isApp(appId) && !mPolicyManager.getRestrictBackground()
+        if (UserHandle.isApp(appId) && !mPolicyManager.getRestrictBackground()
                 && isBandwidthControlEnabled() && hasReadyMobileRadio(context)) {
             setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
             setPreferenceSummary(mAppRestrictView,
@@ -1486,8 +1486,8 @@ public class DataUsageSummary extends Fragment {
             for (int i = 0; i < size; i++) {
                 entry = stats.getValues(i, entry);
 
-                final boolean isApp = UserId.isApp(entry.uid);
-                final int appId = isApp ? UserId.getAppId(entry.uid) : entry.uid;
+                final boolean isApp = UserHandle.isApp(entry.uid);
+                final int appId = isApp ? UserHandle.getAppId(entry.uid) : entry.uid;
                 if (isApp || appId == UID_REMOVED || appId == UID_TETHERING) {
                     AppItem item = knownUids.get(appId);
                     if (item == null) {

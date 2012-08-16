@@ -40,7 +40,7 @@ import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserId;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceActivity.Header;
@@ -415,13 +415,13 @@ public class Settings extends PreferenceActivity
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.user_settings) {
                 if (!mEnableUserManagement
-                        || !UserId.MU_ENABLED || UserId.myUserId() != 0
+                        || !UserHandle.MU_ENABLED || UserHandle.myUserId() != 0
                         || !getResources().getBoolean(R.bool.enable_user_management)
                         || Utils.isMonkeyRunning()) {
                     target.remove(header);
                 }
             }
-            if (UserId.MU_ENABLED && UserId.myUserId() != 0
+            if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
                     && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
                 target.remove(header);
             }
