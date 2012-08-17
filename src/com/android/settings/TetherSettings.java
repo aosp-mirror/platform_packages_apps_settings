@@ -497,8 +497,8 @@ public class TetherSettings extends SettingsPreferenceFragment
     private void setUsbTethering(boolean enabled) {
         ConnectivityManager cm =
             (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        mUsbTether.setChecked(false);
         if (cm.setUsbTethering(enabled) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-            mUsbTether.setChecked(false);
             mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
             return;
         }
