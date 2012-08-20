@@ -371,11 +371,15 @@ public class Utils {
         if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
             statusString = res.getString(R.string.battery_info_status_charging);
             if (plugType > 0) {
-                statusString = statusString
-                        + " "
-                        + res.getString((plugType == BatteryManager.BATTERY_PLUGGED_AC)
-                                ? R.string.battery_info_status_charging_ac
-                                : R.string.battery_info_status_charging_usb);
+                int resId;
+                if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
+                    resId = R.string.battery_info_status_charging_ac;
+                } else if (plugType == BatteryManager.BATTERY_PLUGGED_USB) {
+                    resId = R.string.battery_info_status_charging_usb;
+                } else {
+                    resId = R.string.battery_info_status_charging_wireless;
+                }
+                statusString = statusString + " " + res.getString(resId);
             }
         } else if (status == BatteryManager.BATTERY_STATUS_DISCHARGING) {
             statusString = res.getString(R.string.battery_info_status_discharging);
