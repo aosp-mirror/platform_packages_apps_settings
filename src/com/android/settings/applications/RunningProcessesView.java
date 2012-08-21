@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
@@ -42,6 +43,7 @@ import android.widget.TextView;
 import android.widget.AbsListView.RecyclerListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -49,10 +51,12 @@ public class RunningProcessesView extends FrameLayout
         implements AdapterView.OnItemClickListener, RecyclerListener,
         RunningState.OnRefreshUiListener {
     
+    final int mMyUserId;
+
     long SECONDARY_SERVER_MEM;
     
     final HashMap<View, ActiveItem> mActiveItems = new HashMap<View, ActiveItem>();
-    
+
     ActivityManager mAm;
     
     RunningState mState;
@@ -167,9 +171,12 @@ public class RunningProcessesView extends FrameLayout
                 if (item.mPackageInfo == null && item instanceof RunningState.MergedItem) {
                     // Items for background processes don't normally load
                     // their labels for performance reasons.  Do it now.
-                    ((RunningState.MergedItem)item).mProcess.ensureLabel(pm);
-                    item.mPackageInfo = ((RunningState.MergedItem)item).mProcess.mPackageInfo;
-                    item.mDisplayLabel = ((RunningState.MergedItem)item).mProcess.mDisplayLabel;
+                    RunningState.MergedItem mergedItem = (RunningState.MergedItem)item;
+                    if (mergedItem.mProcess != null) {
+                        ((RunningState.MergedItem)item).mProcess.ensureLabel(pm);
+                        item.mPackageInfo = ((RunningState.MergedItem)item).mProcess.mPackageInfo;
+                        item.mDisplayLabel = ((RunningState.MergedItem)item).mProcess.mDisplayLabel;
+                    }
                 }
                 name.setText(item.mDisplayLabel);
                 ActiveItem ai = new ActiveItem();
@@ -183,9 +190,7 @@ public class RunningProcessesView extends FrameLayout
                     description.setText(item.mDescription);
                 }
                 item.mCurSizeStr = null;
-                if (item.mPackageInfo != null) {
-                    icon.setImageDrawable(item.mPackageInfo.loadIcon(pm));
-                }
+                icon.setImageDrawable(item.loadIcon(rootView.getContext(), state));
                 icon.setVisibility(View.VISIBLE);
                 ai.updateTime(rootView.getContext(), builder);
                 return ai;
@@ -203,7 +208,9 @@ public class RunningProcessesView extends FrameLayout
         final RunningState mState;
         final LayoutInflater mInflater;
         boolean mShowBackground;
-        ArrayList<RunningState.MergedItem> mItems;
+        ArrayList<RunningState.MergedItem> mOrigItems;
+        final ArrayList<RunningState.MergedItem> mItems
+                = new ArrayList<RunningState.MergedItem>();
         
         ServiceListAdapter(RunningState state) {
             mState = state;
@@ -230,11 +237,17 @@ public class RunningProcessesView extends FrameLayout
             ArrayList<RunningState.MergedItem> newItems =
                 mShowBackground ? mState.getCurrentBackgroundItems()
                         : mState.getCurrentMergedItems();
-            if (mItems != newItems) {
-                mItems = newItems;
-            }
-            if (mItems == null) {
-                mItems = new ArrayList<RunningState.MergedItem>();
+            if (mOrigItems != newItems) {
+                mOrigItems = newItems;
+                if (newItems == null) {
+                    mItems.clear();
+                } else {
+                    mItems.clear();
+                    mItems.addAll(newItems);
+                    if (mShowBackground) {
+                        Collections.sort(mItems, mState.mBackgroundComparator);
+                    }
+                }
             }
         }
         
@@ -374,8 +387,11 @@ public class RunningProcessesView extends FrameLayout
         if (mOwner != null) {
             // start new fragment to display extended information
             Bundle args = new Bundle();
-            args.putInt(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
-            args.putString(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
+            if (mi.mProcess != null) {
+                args.putInt(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
+                args.putString(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
+            }
+            args.putInt(RunningServiceDetails.KEY_USER_ID, mi.mUserId);
             args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
     
             PreferenceActivity pa = (PreferenceActivity)mOwner.getActivity();
@@ -390,6 +406,7 @@ public class RunningProcessesView extends FrameLayout
 
     public RunningProcessesView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mMyUserId = UserHandle.myUserId();
     }
     
     public void doCreate(Bundle savedInstanceState) {
