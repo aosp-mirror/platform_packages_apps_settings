@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,35 +40,38 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RunningServiceDetails extends Fragment
         implements RunningState.OnRefreshUiListener {
     static final String TAG = "RunningServicesDetails";
-    
+
     static final String KEY_UID = "uid";
+    static final String KEY_USER_ID = "user_id";
     static final String KEY_PROCESS = "process";
     static final String KEY_BACKGROUND = "background";
-    
+
     static final int DIALOG_CONFIRM_STOP = 1;
-    
+
     ActivityManager mAm;
     LayoutInflater mInflater;
-    
+
     RunningState mState;
     boolean mHaveData;
-    
+
     int mUid;
+    int mUserId;
     String mProcessName;
     boolean mShowBackground;
-    
+
     RunningState.MergedItem mMergedItem;
-    
+
     View mRootView;
     ViewGroup mAllDetails;
     ViewGroup mSnippet;
     RunningProcessesView.ActiveItem mSnippetActiveItem;
     RunningProcessesView.ViewHolder mSnippetViewHolder;
-    
+
     int mNumServices, mNumProcesses;
     
     TextView mServicesHeader;
@@ -195,8 +199,14 @@ public class RunningServiceDetails extends Fragment
         if (newItems != null) {
             for (int i=0; i<newItems.size(); i++) {
                 RunningState.MergedItem mi = newItems.get(i);
-                if (mi.mProcess.mUid == mUid
-                        && mi.mProcess.mProcessName.equals(mProcessName)) {
+                if (mi.mUserId != mUserId) {
+                    continue;
+                }
+                if (mUid >= 0 && mi.mProcess != null && mi.mProcess.mUid != mUid) {
+                    continue;
+                }
+                if (mProcessName == null || (mi.mProcess != null
+                        && mProcessName.equals(mi.mProcess.mProcessName))) {
                     item = mi;
                     break;
                 }
@@ -209,8 +219,8 @@ public class RunningServiceDetails extends Fragment
         }
         return false;
     }
-    
-    void addServiceDetailsView(RunningState.ServiceItem si, RunningState.MergedItem mi) {
+
+    void addServicesHeader() {
         if (mNumServices == 0) {
             mServicesHeader = (TextView)mInflater.inflate(R.layout.separator_label,
                     mAllDetails, false);
@@ -218,7 +228,30 @@ public class RunningServiceDetails extends Fragment
             mAllDetails.addView(mServicesHeader);
         }
         mNumServices++;
-        
+    }
+
+    void addProcessesHeader() {
+        if (mNumProcesses == 0) {
+            mProcessesHeader = (TextView)mInflater.inflate(R.layout.separator_label,
+                    mAllDetails, false);
+            mProcessesHeader.setText(R.string.runningservicedetails_processes_title);
+            mAllDetails.addView(mProcessesHeader);
+        }
+        mNumProcesses++;
+    }
+
+    void addServiceDetailsView(RunningState.ServiceItem si, RunningState.MergedItem mi,
+            boolean isService, boolean inclDetails) {
+        if (isService) {
+            addServicesHeader();
+        } else if (mi.mUserId != UserHandle.myUserId()) {
+            // This is being called for another user, and is not a service...
+            // That is, it is a background processes, being added for the
+            // details of a user.  In this case we want a header for processes,
+            // since the top subject line is for the user.
+            addProcessesHeader();
+        }
+
         RunningState.BaseItem bi = si != null ? si : mi;
         
         ActiveDetail detail = new ActiveDetail();
@@ -229,68 +262,74 @@ public class RunningServiceDetails extends Fragment
         detail.mServiceItem = si;
         detail.mViewHolder = new RunningProcessesView.ViewHolder(root);
         detail.mActiveItem = detail.mViewHolder.bind(mState, bi, mBuilder);
-        
+
+        if (!inclDetails) {
+            root.findViewById(R.id.service).setVisibility(View.GONE);
+        }
+
         if (si != null && si.mRunningService.clientLabel != 0) {
             detail.mManageIntent = mAm.getRunningServiceControlPanel(
                     si.mRunningService.service);
         }
         
         TextView description = (TextView)root.findViewById(R.id.comp_description);
-        if (si != null && si.mServiceInfo.descriptionRes != 0) {
-            description.setText(getActivity().getPackageManager().getText(
-                    si.mServiceInfo.packageName, si.mServiceInfo.descriptionRes,
-                    si.mServiceInfo.applicationInfo));
+        detail.mStopButton = (Button)root.findViewById(R.id.left_button);
+        detail.mReportButton = (Button)root.findViewById(R.id.right_button);
+
+        if (isService && mi.mUserId != UserHandle.myUserId()) {
+            // For services from other users, we don't show any description or
+            // controls, because the current user can not perform
+            // actions on them.
+            description.setVisibility(View.GONE);
+            root.findViewById(R.id.control_buttons_panel).setVisibility(View.GONE);
         } else {
-            if (mi.mBackground) {
-                description.setText(R.string.background_process_stop_description);
-            } else if (detail.mManageIntent != null) {
-                try {
-                    Resources clientr = getActivity().getPackageManager().getResourcesForApplication(
-                            si.mRunningService.clientPackage);
-                    String label = clientr.getString(si.mRunningService.clientLabel);
-                    description.setText(getActivity().getString(R.string.service_manage_description,
-                            label));
-                } catch (PackageManager.NameNotFoundException e) {
-                }
+            if (si != null && si.mServiceInfo.descriptionRes != 0) {
+                description.setText(getActivity().getPackageManager().getText(
+                        si.mServiceInfo.packageName, si.mServiceInfo.descriptionRes,
+                        si.mServiceInfo.applicationInfo));
             } else {
-                description.setText(getActivity().getText(si != null
-                        ? R.string.service_stop_description
-                        : R.string.heavy_weight_stop_description));
+                if (mi.mBackground) {
+                    description.setText(R.string.background_process_stop_description);
+                } else if (detail.mManageIntent != null) {
+                    try {
+                        Resources clientr = getActivity().getPackageManager().getResourcesForApplication(
+                                si.mRunningService.clientPackage);
+                        String label = clientr.getString(si.mRunningService.clientLabel);
+                        description.setText(getActivity().getString(R.string.service_manage_description,
+                                label));
+                    } catch (PackageManager.NameNotFoundException e) {
+                    }
+                } else {
+                    description.setText(getActivity().getText(si != null
+                            ? R.string.service_stop_description
+                            : R.string.heavy_weight_stop_description));
+                }
+            }
+
+            detail.mStopButton.setOnClickListener(detail);
+            detail.mStopButton.setText(getActivity().getText(detail.mManageIntent != null
+                    ? R.string.service_manage : R.string.service_stop));
+            detail.mReportButton.setOnClickListener(detail);
+            detail.mReportButton.setText(com.android.internal.R.string.report);
+            // check if error reporting is enabled in secure settings
+            int enabled = Settings.Secure.getInt(getActivity().getContentResolver(),
+                    Settings.Secure.SEND_ACTION_APP_ERROR, 0);
+            if (enabled != 0 && si != null) {
+                detail.mInstaller = ApplicationErrorReport.getErrorReportReceiver(
+                        getActivity(), si.mServiceInfo.packageName,
+                        si.mServiceInfo.applicationInfo.flags);
+                detail.mReportButton.setEnabled(detail.mInstaller != null);
+            } else {
+                detail.mReportButton.setEnabled(false);
             }
         }
-        
-        detail.mStopButton = (Button)root.findViewById(R.id.left_button);
-        detail.mStopButton.setOnClickListener(detail);
-        detail.mStopButton.setText(getActivity().getText(detail.mManageIntent != null
-                ? R.string.service_manage : R.string.service_stop));
 
-        detail.mReportButton = (Button)root.findViewById(R.id.right_button);
-        detail.mReportButton.setOnClickListener(detail);
-        detail.mReportButton.setText(com.android.internal.R.string.report);
-        // check if error reporting is enabled in secure settings
-        int enabled = Settings.Secure.getInt(getActivity().getContentResolver(),
-                Settings.Secure.SEND_ACTION_APP_ERROR, 0);
-        if (enabled != 0 && si != null) {
-            detail.mInstaller = ApplicationErrorReport.getErrorReportReceiver(
-                    getActivity(), si.mServiceInfo.packageName,
-                    si.mServiceInfo.applicationInfo.flags);
-            detail.mReportButton.setEnabled(detail.mInstaller != null);
-        } else {
-            detail.mReportButton.setEnabled(false);
-        }
-        
         mActiveDetails.add(detail);
     }
-    
+
     void addProcessDetailsView(RunningState.ProcessItem pi, boolean isMain) {
-        if (mNumProcesses == 0) {
-            mProcessesHeader = (TextView)mInflater.inflate(R.layout.separator_label,
-                    mAllDetails, false);
-            mProcessesHeader.setText(R.string.runningservicedetails_processes_title);
-            mAllDetails.addView(mProcessesHeader);
-        }
-        mNumProcesses++;
-        
+        addProcessesHeader();
+
         ActiveDetail detail = new ActiveDetail();
         View root = mInflater.inflate(R.layout.running_service_details_process,
                 mAllDetails, false);
@@ -300,7 +339,11 @@ public class RunningServiceDetails extends Fragment
         detail.mActiveItem = detail.mViewHolder.bind(mState, pi, mBuilder);
         
         TextView description = (TextView)root.findViewById(R.id.comp_description);
-        if (isMain) {
+        if (pi.mUserId != UserHandle.myUserId()) {
+            // Processes for another user are all shown batched together; there is
+            // no reason to have a description.
+            description.setVisibility(View.GONE);
+        } else if (isMain) {
             description.setText(R.string.main_running_process_description);
         } else {
             int textid = 0;
@@ -342,7 +385,39 @@ public class RunningServiceDetails extends Fragment
         
         mActiveDetails.add(detail);
     }
+
+    void addDetailsViews(RunningState.MergedItem item, boolean inclServices,
+            boolean inclProcesses) {
+        if (item != null) {
+            if (inclServices) {
+                for (int i=0; i<item.mServices.size(); i++) {
+                    addServiceDetailsView(item.mServices.get(i), item, true, true);
+                }
+            }
+
+            if (inclProcesses) {
+                if (item.mServices.size() <= 0) {
+                    // This item does not have any services, so it must be
+                    // another interesting process...  we will put a fake service
+                    // entry for it, to allow the user to "stop" it.
+                    addServiceDetailsView(null, item, false, item.mUserId != UserHandle.myUserId());
+                } else {
+                    // This screen is actually showing services, so also show
+                    // the process details.
+                    for (int i=-1; i<item.mOtherProcesses.size(); i++) {
+                        RunningState.ProcessItem pi = i < 0 ? item.mProcess
+                                : item.mOtherProcesses.get(i);
+                        if (pi != null && pi.mPid <= 0) {
+                            continue;
+                        }
     
+                        addProcessDetailsView(pi, i < 0);
+                    }
+                }
+            }
+        }
+    }
+
     void addDetailViews() {
         for (int i=mActiveDetails.size()-1; i>=0; i--) {
             mAllDetails.removeView(mActiveDetails.get(i).mRootView);
@@ -358,30 +433,25 @@ public class RunningServiceDetails extends Fragment
             mAllDetails.removeView(mProcessesHeader);
             mProcessesHeader = null;
         }
-        
+
         mNumServices = mNumProcesses = 0;
-        
-        if (mMergedItem != null) {
-            for (int i=0; i<mMergedItem.mServices.size(); i++) {
-                addServiceDetailsView(mMergedItem.mServices.get(i), mMergedItem);
+
+        if (mMergedItem.mUser != null) {
+            ArrayList<RunningState.MergedItem> items;
+            if (mShowBackground) {
+                items = new ArrayList<RunningState.MergedItem>(mMergedItem.mChildren);
+                Collections.sort(items, mState.mBackgroundComparator);
+            } else {
+                items = mMergedItem.mChildren;
             }
-            
-            if (mMergedItem.mServices.size() <= 0) {
-                // This item does not have any services, so it must be
-                // another interesting process...  we will put a fake service
-                // entry for it, to allow the user to "stop" it.
-                addServiceDetailsView(null, mMergedItem);
+            for (int i=0; i<items.size(); i++) {
+                addDetailsViews(items.get(i), true, false);
             }
-            
-            for (int i=-1; i<mMergedItem.mOtherProcesses.size(); i++) {
-                RunningState.ProcessItem pi = i < 0 ? mMergedItem.mProcess
-                        : mMergedItem.mOtherProcesses.get(i);
-                if (pi.mPid <= 0) {
-                    continue;
-                }
-                
-                addProcessDetailsView(pi, i < 0);
+            for (int i=0; i<items.size(); i++) {
+                addDetailsViews(items.get(i), false, true);
             }
+        } else {
+            addDetailsViews(mMergedItem, true, true);
         }
     }
     
@@ -423,8 +493,9 @@ public class RunningServiceDetails extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mUid = getArguments().getInt(KEY_UID, 0);
-        mProcessName = getArguments().getString(KEY_PROCESS);
+        mUid = getArguments().getInt(KEY_UID, -1);
+        mUserId = getArguments().getInt(KEY_USER_ID, 0);
+        mProcessName = getArguments().getString(KEY_PROCESS, null);
         mShowBackground = getArguments().getBoolean(KEY_BACKGROUND, false);
         
         mAm = (ActivityManager)getActivity().getSystemService(Context.ACTIVITY_SERVICE);

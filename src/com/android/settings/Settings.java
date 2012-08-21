@@ -102,6 +102,7 @@ public class Settings extends PreferenceActivity
             R.id.device_section,
             R.id.sound_settings,
             R.id.display_settings,
+            R.id.application_settings,
             R.id.personal_section,
             R.id.security_settings,
             R.id.account_settings,
