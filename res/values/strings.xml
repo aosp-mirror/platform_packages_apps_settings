@@ -1702,29 +1702,25 @@
     <!-- Display settings screen, trigger for screen saver options -->
     <string name="screensaver_settings_title">Dream</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated on sleep or docked -->
-    <string name="screensaver_settings_summary_both">When docked or asleep and charging</string>
+    <string name="screensaver_settings_summary_either_long">When docked or asleep and charging</string>
+    <!-- Dream settings screen, dialog option, activated on sleep or docked -->
+    <string name="screensaver_settings_summary_either_short">Either</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated on sleep -->
-    <string name="screensaver_settings_summary_sleep">When asleep and charging</string>
+    <string name="screensaver_settings_summary_sleep">While asleep and charging</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked  -->
-    <string name="screensaver_settings_summary_dock">When docked</string>
+    <string name="screensaver_settings_summary_dock">While docked</string>
     <!-- Display settings screen, summary for screen saver options, screen saver is turned off -->
     <string name="screensaver_settings_summary_off">Disabled</string>
-    <!-- Screen saver settings, setting option name to select a module -->
-    <string name="screensaver_component_title">Selected dream</string>
-    <!-- Screen saver settings, setting option name to change activation timeout -->
-    <string name="screensaver_timeout_title">When to activate</string>
-    <!-- Screen saver settings, setting option summary to change activation timeout -->
-    <string name="screensaver_timeout_summary">After <xliff:g id="timeout_description">%1$s</xliff:g> spent idle</string>
-    <!-- Screen saver settings, setting option summary to change activation timeout, shown when disabled -->
-    <string name="screensaver_timeout_zero_summary">Never</string>
-    <!-- Screen saver settings, button allowing the user to test/try the current module -->
-    <string name="screensaver_test">Try it!</string>
-    <!-- Screen saver settings, checkbox allowing the screen saver to activate automatically when
-         the device sleeps -->
-    <string name="screensaver_activate_on_sleep_title">Start on sleep</string>
-    <!-- Screen saver settings, checkbox allowing the screen saver to activate automatically when
-         the device is docked -->
-    <string name="screensaver_activate_on_dock_title">Start when docked</string>
+    <!-- Dream settings screen, caption for when dreams are disabled -->
+    <string name="screensaver_settings_disabled_prompt">To control what happens when the phone is docked and/or sleeping, turn Dreams on.</string>
+    <!-- Dream settings screen, action label, start dreaming -->
+    <string name="screensaver_settings_start_dreaming">Start dreaming now</string>
+    <!-- Dream settings screen, action label, when to dream -->
+    <string name="screensaver_settings_when_to_dream">When to dream</string>
+    <!-- Dream settings screen, button label to launch dream settings -->
+    <string name="screensaver_settings_dream_settings">Settings</string>
+    <!-- Dream settings screen, button label to preview dream -->
+    <string name="screensaver_settings_dream_preview">Preview</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
     <string name="automatic_brightness">Automatic brightness</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
