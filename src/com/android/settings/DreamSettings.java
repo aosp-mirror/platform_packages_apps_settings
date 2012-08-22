@@ -18,6 +18,7 @@ package com.android.settings;
 
 import static android.provider.Settings.Secure.SCREENSAVER_ENABLED;
 import static android.provider.Settings.Secure.SCREENSAVER_ACTIVATE_ON_DOCK;
+import static android.provider.Settings.Secure.SCREENSAVER_ACTIVATE_ON_SLEEP;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -53,7 +54,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
     private static final String KEY_COMPONENT = "screensaver_component";
     private static final String KEY_TEST = "test";
 
-    private static final int DEFAULT_SLEEP = 0;
+    private static final int DEFAULT_SLEEP = 1;
     private static final int DEFAULT_DOCK = 1;
 
     private ActivationSetting mActivateOnSleep;
@@ -72,7 +73,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
         mTestPref = findPreference(KEY_TEST);
 
         mActivateOnSleep = new ActivationSetting(getActivity(),
-                SCREENSAVER_ENABLED, DEFAULT_SLEEP,
+                SCREENSAVER_ACTIVATE_ON_SLEEP, DEFAULT_SLEEP,
                 (CheckBoxPreference) findPreference(KEY_ACTIVATE_ON_SLEEP));
         mActivateOnDock = new ActivationSetting(getActivity(),
                 SCREENSAVER_ACTIVATE_ON_DOCK, DEFAULT_DOCK,
@@ -81,7 +82,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
     public static boolean isScreenSaverActivatedOnSleep(Context context) {
         return 0 != Settings.Secure.getInt(
-                    context.getContentResolver(), SCREENSAVER_ENABLED, DEFAULT_SLEEP);
+                    context.getContentResolver(), SCREENSAVER_ACTIVATE_ON_SLEEP, DEFAULT_SLEEP);
     }
 
     public static boolean isScreenSaverActivatedOnDock(Context context) {
@@ -101,6 +102,13 @@ public class DreamSettings extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         mActivateOnSleep.onClick(preference);
         mActivateOnDock.onClick(preference);
+
+        // FIXME: infer enabled (until the next rev of the dream settings ui)
+        boolean enabled = mActivateOnSleep.isSelected() || mActivateOnDock.isSelected();
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                SCREENSAVER_ENABLED,
+                enabled ? 1 : 0);
+
         refreshDependents();
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
