@@ -38,6 +38,9 @@ import android.widget.SeekBar;
 
 public class BrightnessPreference extends SeekBarDialogPreference implements
         SeekBar.OnSeekBarChangeListener, CheckBox.OnCheckedChangeListener {
+    // If true, enables the use of the screen auto-brightness adjustment setting.
+    private static final boolean USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT = false;
+
     private final int mScreenBrightnessMinimum;
     private final int mScreenBrightnessMaximum;
 
@@ -114,7 +117,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
             mOldAutomatic = getBrightnessMode(0);
             mAutomaticMode = mOldAutomatic == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
             mCheckBox.setChecked(mAutomaticMode);
-            mSeekBar.setEnabled(!mAutomaticMode);
+            mSeekBar.setEnabled(!mAutomaticMode || USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT);
         } else {
             mSeekBar.setEnabled(true);
         }
@@ -138,14 +141,15 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
         setMode(isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
                 : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         mSeekBar.setProgress(getBrightness());
-        mSeekBar.setEnabled(!mAutomaticMode);
+        mSeekBar.setEnabled(!mAutomaticMode || USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT);
         setBrightness(mSeekBar.getProgress(), false);
     }
 
     private int getBrightness() {
         int mode = getBrightnessMode(0);
         float brightness = 0;
-        if (false && mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+        if (USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT
+                && mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
             brightness = Settings.System.getFloat(getContext().getContentResolver(),
                     Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0);
             brightness = (brightness+1)/2;
@@ -181,7 +185,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
                 == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
         mCheckBox.setChecked(checked);
         mSeekBar.setProgress(getBrightness());
-        mSeekBar.setEnabled(!checked);
+        mSeekBar.setEnabled(!checked || USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT);
     }
 
     @Override
@@ -213,7 +217,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
 
     private void setBrightness(int brightness, boolean write) {
         if (mAutomaticMode) {
-            if (false) {
+            if (USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT) {
                 float valf = (((float)brightness*2)/SEEK_BAR_RANGE) - 1.0f;
                 try {
                     IPowerManager power = IPowerManager.Stub.asInterface(
