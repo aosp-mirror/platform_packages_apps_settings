@@ -63,7 +63,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
             "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
     private static final Pattern HOSTNAME_PATTERN;
     private static final String EXCLUSION_REGEXP =
-            "$|^(.?[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*)+$";
+            "$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
     private static final Pattern EXCLUSION_PATTERN;
     static {
         HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
