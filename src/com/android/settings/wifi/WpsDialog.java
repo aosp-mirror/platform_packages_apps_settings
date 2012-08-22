@@ -201,31 +201,36 @@ public class WpsDialog extends AlertDialog {
         }
     }
 
-    private void updateDialog(DialogState state, String msg) {
+    private void updateDialog(final DialogState state, final String msg) {
         if (mDialogState.ordinal() >= state.ordinal()) {
             //ignore.
             return;
         }
         mDialogState = state;
 
-        switch(state) {
-            case WPS_COMPLETE:
-                mTimeoutBar.setVisibility(View.GONE);
-                mProgressBar.setVisibility(View.VISIBLE);
-                break;
-            case CONNECTED:
-            case WPS_FAILED:
-                mButton.setText(mContext.getString(R.string.dlg_ok));
-                mTimeoutBar.setVisibility(View.GONE);
-                mProgressBar.setVisibility(View.GONE);
-                if (mReceiver != null) {
-                    mContext.unregisterReceiver(mReceiver);
-                    mReceiver = null;
+        mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    switch(state) {
+                        case WPS_COMPLETE:
+                            mTimeoutBar.setVisibility(View.GONE);
+                            mProgressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case CONNECTED:
+                        case WPS_FAILED:
+                            mButton.setText(mContext.getString(R.string.dlg_ok));
+                            mTimeoutBar.setVisibility(View.GONE);
+                            mProgressBar.setVisibility(View.GONE);
+                            if (mReceiver != null) {
+                                mContext.unregisterReceiver(mReceiver);
+                                mReceiver = null;
+                            }
+                            break;
+                    }
+                    mTextView.setText(msg);
                 }
-                break;
-        }
-        mTextView.setText(msg);
-    }
+            });
+   }
 
     private void handleEvent(Context context, Intent intent) {
         String action = intent.getAction();
