@@ -36,7 +36,10 @@ public class DreamTesterPreference extends Preference {
     protected void onClick() {
         IDreamManager dm = IDreamManager.Stub.asInterface(ServiceManager.getService("dreams"));
         try {
-            ComponentName cn = dm.getDreamComponent();
+            ComponentName[] dreams = dm.getDreamComponents();
+            if (dreams == null || dreams.length == 0)
+                return;
+            ComponentName cn = dreams[0];
             Log.v(TAG, "DreamComponent cn=" + cn);
             dm.testDream(cn);
         } catch (RemoteException ex) {

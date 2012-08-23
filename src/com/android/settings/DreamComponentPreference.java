@@ -16,7 +16,7 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.SCREENSAVER_COMPONENT;
+import static android.provider.Settings.Secure.SCREENSAVER_COMPONENTS;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -79,7 +79,9 @@ public class DreamComponentPreference extends Preference {
         IDreamManager dm = IDreamManager.Stub.asInterface(
                 ServiceManager.getService("dreams"));
         try {
-            cn = dm.getDreamComponent();
+            ComponentName[] dreams = dm.getDreamComponents();
+            if (dreams != null && dreams.length > 0)
+                cn = dreams[0];
         } catch (RemoteException ex) { }
 
         if (cn == null) {
@@ -226,7 +228,8 @@ public class DreamComponentPreference extends Preference {
                         IDreamManager dm = IDreamManager.Stub.asInterface(
                                 ServiceManager.getService("dreams"));
                         try {
-                            dm.setDreamComponent(cn);
+                            ComponentName[] dreams = { cn };
+                            dm.setDreamComponents(dreams);
                         } catch (RemoteException ex) {
                             // too bad, so sad, oh mom, oh dad
                         }
