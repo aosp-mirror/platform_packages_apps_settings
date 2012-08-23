@@ -65,31 +65,14 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_PICTURE = "user_picture";
-    private static final String KEY_INSTALLED_APPS = "market_apps_category";
-    private static final String KEY_SYSTEM_APPS = "system_apps_category";
-    private static final String KEY_ACCOUNT = "associated_account";
-    private static final String KEY_RESTRICTIONS = "restrictions_category";
 
     public static final String EXTRA_USER_ID = "user_id";
 
     private static final int RESULT_PICK_IMAGE = 1;
     private static final int RESULT_CROP_IMAGE = 2;
 
-    static class AppState {
-        boolean dirty;
-        boolean enabled;
-
-        AppState(boolean enabled) {
-            this.enabled = enabled;
-        }
-    }
-
-    private HashMap<String, AppState> mAppStates = new HashMap<String, AppState>();
-    private PreferenceGroup mSystemAppGroup;
-    private PreferenceGroup mInstalledAppGroup;
     private EditTextPreference mNamePref;
     private Preference mPicturePref;
-    private Preference mAccountPref;
 
     private IPackageManager mIPm;
     private PackageManager mPm;
@@ -110,20 +93,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (mUserId == -1) {
             mUserId = mUm.createUser(getString(R.string.user_new_user_name), 0).id;
         }
-        mSystemAppGroup = (PreferenceGroup) findPreference(KEY_SYSTEM_APPS);
-        mInstalledAppGroup = (PreferenceGroup) findPreference(KEY_INSTALLED_APPS);
         mNamePref = (EditTextPreference) findPreference(KEY_USER_NAME);
         mNamePref.setOnPreferenceChangeListener(this);
         mPicturePref = findPreference(KEY_USER_PICTURE);
         mPicturePref.setOnPreferenceClickListener(this);
-        mAccountPref = findPreference(KEY_ACCOUNT);
-        mAccountPref.setOnPreferenceClickListener(this);
-
-        if (mUserId == 0) {
-            getPreferenceScreen().removePreference(mSystemAppGroup);
-            getPreferenceScreen().removePreference(mInstalledAppGroup);
-            getPreferenceScreen().removePreference(findPreference(KEY_RESTRICTIONS));
-        }
         setHasOptionsMenu(true);
     }
 
@@ -136,7 +109,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         } else {
             initNewUser();
         }
-        refreshApps();
     }
 
     @Override
@@ -198,63 +170,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         finish();
     }
 
-    private void insertAppInfo(PreferenceGroup group, HashMap<String, AppState> appStateMap,
-            PackageInfo info, boolean defaultState) {
-        if (info != null) {
-            String pkgName = info.packageName;
-            String name = info.applicationInfo.loadLabel(mPm).toString();
-            Drawable icon = info.applicationInfo.loadIcon(mPm);
-            AppState appState = appStateMap.get(info.packageName);
-            boolean enabled = appState == null ? defaultState : appState.enabled;
-            CheckBoxPreference appPref = new CheckBoxPreference(getActivity());
-            appPref.setTitle(name != null ? name : pkgName);
-            appPref.setIcon(icon);
-            appPref.setChecked(enabled);
-            appPref.setKey(pkgName);
-            appPref.setPersistent(false);
-            appPref.setOnPreferenceChangeListener(this);
-            group.addPreference(appPref);
-        }
-    }
-
-    private void refreshApps() {
-        if (mUserId == 0) return;
-        mSystemAppGroup.removeAll();
-        mInstalledAppGroup.removeAll();
-
-        boolean firstTime = mAppStates.isEmpty();
-
-        final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> apps = mPm.queryIntentActivities(mainIntent, 0);
-
-        for (ResolveInfo resolveInfo : apps) {
-            PackageInfo info;
-            try {
-                info = mIPm.getPackageInfo(resolveInfo.activityInfo.packageName,
-                        0 /* flags */,
-                    mUserId < 0 ? 0 : mUserId);
-            } catch (RemoteException re) {
-                continue;
-            }
-            if (firstTime) {
-                mAppStates.put(resolveInfo.activityInfo.packageName,
-                        new AppState(info.applicationInfo.enabled));
-            }
-            if ((info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                if (mSystemAppGroup.findPreference(info.packageName) != null) {
-                    continue;
-                }
-                insertAppInfo(mSystemAppGroup, mAppStates, info, false);
-            } else {
-                if (mInstalledAppGroup.findPreference(info.packageName) != null) {
-                    continue;
-                }
-                insertAppInfo(mInstalledAppGroup, mAppStates, info, false);
-            }
-        }
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference instanceof CheckBoxPreference) {
@@ -300,10 +215,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference == mAccountPref) {
-//            Intent launch = AccountManager.newChooseAccountsIntent(null, null, new String[]{"com.google"}, false, null,
-//                    null, null, null);
-        } else if (preference == mPicturePref) {
+        if (preference == mPicturePref) {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
