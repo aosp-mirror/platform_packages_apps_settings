@@ -203,7 +203,9 @@ public class SettingsLicenseActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 mSpinnerDlg.dismiss();
-                mTextDlg.show();
+                if (SettingsLicenseActivity.this.isResumed()) {
+                    mTextDlg.show();
+                }
             }
         });
 
