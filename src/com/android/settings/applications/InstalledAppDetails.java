@@ -322,6 +322,9 @@ public class InstalledAppDetails extends Fragment
                         Log.w(TAG, "Unable to get package info", e);
                     }
                 }
+            } else if ((mPackageInfo.applicationInfo.flags
+                    & ApplicationInfo.FLAG_INSTALLED) == 0) {
+                mUninstallButton.setText(R.string.install_text);
             } else {
                 mUninstallButton.setText(R.string.uninstall_text);
             }
@@ -1041,6 +1044,12 @@ public class InstalledAppDetails extends Fragment
                         new DisableChanger(this, mAppEntry.info,
                                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
                         .execute((Object)null);
+                    }
+                } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+                    try {
+                        mPm.installExistingPackage(packageName);
+                        refreshUi();
+                    } catch (NameNotFoundException e) {
                     }
                 } else {
                     uninstallPkg(packageName);
