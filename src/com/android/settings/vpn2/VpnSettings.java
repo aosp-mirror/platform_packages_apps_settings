@@ -16,13 +16,9 @@
 
 package com.android.settings.vpn2;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.IConnectivityManager;
-import android.net.LinkProperties;
-import android.net.RouteInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -43,11 +39,9 @@ import android.widget.Toast;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import java.net.Inet4Address;
-import java.nio.charset.Charsets;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class VpnSettings extends SettingsPreferenceFragment implements
@@ -323,136 +317,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
-    private String[] getDefaultNetwork() throws Exception {
-        LinkProperties network = mService.getActiveLinkProperties();
-        if (network == null) {
-            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
-            throw new IllegalStateException("Network is not available");
-        }
-        String interfaze = network.getInterfaceName();
-        if (interfaze == null) {
-            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
-            throw new IllegalStateException("Cannot get the default interface");
-        }
-        String gateway = null;
-        for (RouteInfo route : network.getRoutes()) {
-            // Currently legacy VPN only works on IPv4.
-            if (route.isDefaultRoute() && route.getGateway() instanceof Inet4Address) {
-                gateway = route.getGateway().getHostAddress();
-                break;
-            }
-        }
-        if (gateway == null) {
-            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
-            throw new IllegalStateException("Cannot get the default gateway");
-        }
-        return new String[] {interfaze, gateway};
-    }
-
     private void connect(VpnProfile profile) throws Exception {
-        // Get the default interface and the default gateway.
-        String[] network = getDefaultNetwork();
-        String interfaze = network[0];
-        String gateway = network[1];
-
-        // Load certificates.
-        String privateKey = "";
-        String userCert = "";
-        String caCert = "";
-        String serverCert = "";
-        if (!profile.ipsecUserCert.isEmpty()) {
-            /*
-             * VPN has a special exception in keystore to allow it to use system
-             * UID certs.
-             */
-            privateKey = Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert;
-            byte[] value = mKeyStore.get(Credentials.USER_CERTIFICATE + profile.ipsecUserCert);
-            userCert = (value == null) ? null : new String(value, Charsets.UTF_8);
+        try {
+            mService.startLegacyVpn(profile);
+        } catch (IllegalStateException e) {
+            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
         }
-        if (!profile.ipsecCaCert.isEmpty()) {
-            byte[] value = mKeyStore.get(Credentials.CA_CERTIFICATE + profile.ipsecCaCert);
-            caCert = (value == null) ? null : new String(value, Charsets.UTF_8);
-        }
-        if (!profile.ipsecServerCert.isEmpty()) {
-            byte[] value = mKeyStore.get(Credentials.USER_CERTIFICATE + profile.ipsecServerCert);
-            serverCert = (value == null) ? null : new String(value, Charsets.UTF_8);
-        }
-        if (privateKey == null || userCert == null || caCert == null || serverCert == null) {
-            Toast.makeText(getActivity(), R.string.vpn_missing_cert, Toast.LENGTH_LONG).show();
-            throw new IllegalStateException("Cannot load credentials");
-        }
-
-        // Prepare arguments for racoon.
-        String[] racoon = null;
-        switch (profile.type) {
-            case VpnProfile.TYPE_L2TP_IPSEC_PSK:
-                racoon = new String[] {
-                    interfaze, profile.server, "udppsk", profile.ipsecIdentifier,
-                    profile.ipsecSecret, "1701",
-                };
-                break;
-            case VpnProfile.TYPE_L2TP_IPSEC_RSA:
-                racoon = new String[] {
-                    interfaze, profile.server, "udprsa", privateKey, userCert,
-                    caCert, serverCert, "1701",
-                };
-                break;
-            case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
-                racoon = new String[] {
-                    interfaze, profile.server, "xauthpsk", profile.ipsecIdentifier,
-                    profile.ipsecSecret, profile.username, profile.password, "", gateway,
-                };
-                break;
-            case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
-                racoon = new String[] {
-                    interfaze, profile.server, "xauthrsa", privateKey, userCert,
-                    caCert, serverCert, profile.username, profile.password, "", gateway,
-                };
-                break;
-            case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
-                racoon = new String[] {
-                    interfaze, profile.server, "hybridrsa",
-                    caCert, serverCert, profile.username, profile.password, "", gateway,
-                };
-                break;
-        }
-
-        // Prepare arguments for mtpd.
-        String[] mtpd = null;
-        switch (profile.type) {
-            case VpnProfile.TYPE_PPTP:
-                mtpd = new String[] {
-                    interfaze, "pptp", profile.server, "1723",
-                    "name", profile.username, "password", profile.password,
-                    "linkname", "vpn", "refuse-eap", "nodefaultroute",
-                    "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
-                    (profile.mppe ? "+mppe" : "nomppe"),
-                };
-                break;
-            case VpnProfile.TYPE_L2TP_IPSEC_PSK:
-            case VpnProfile.TYPE_L2TP_IPSEC_RSA:
-                mtpd = new String[] {
-                    interfaze, "l2tp", profile.server, "1701", profile.l2tpSecret,
-                    "name", profile.username, "password", profile.password,
-                    "linkname", "vpn", "refuse-eap", "nodefaultroute",
-                    "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
-                };
-                break;
-        }
-
-        VpnConfig config = new VpnConfig();
-        config.user = profile.key;
-        config.interfaze = interfaze;
-        config.session = profile.name;
-        config.routes = profile.routes;
-        if (!profile.dnsServers.isEmpty()) {
-            config.dnsServers = Arrays.asList(profile.dnsServers.split(" +"));
-        }
-        if (!profile.searchDomains.isEmpty()) {
-            config.searchDomains = Arrays.asList(profile.searchDomains.split(" +"));
-        }
-
-        mService.startLegacyVpn(config, racoon, mtpd);
     }
 
     private void disconnect(String key) {
