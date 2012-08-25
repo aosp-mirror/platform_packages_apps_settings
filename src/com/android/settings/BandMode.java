@@ -207,7 +207,9 @@ public class BandMode extends Activity {
                             Window.FEATURE_INDETERMINATE_PROGRESS,
                             Window.PROGRESS_VISIBILITY_OFF);
 
-                    displayBandSelectionResult(ar.exception);
+                    if (!isFinishing()) {
+                        displayBandSelectionResult(ar.exception);
+                    }
                     break;
             }
         }
