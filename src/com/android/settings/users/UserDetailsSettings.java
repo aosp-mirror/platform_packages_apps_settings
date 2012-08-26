@@ -90,6 +90,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mIPm = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
         mUm = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
 
+        if (icicle != null && icicle.containsKey(EXTRA_USER_ID)) {
+            mUserId = icicle.getInt(EXTRA_USER_ID);
+            mNewUser = false;
+        }
+
         if (mUserId == -1) {
             mUserId = mUm.createUser(getString(R.string.user_new_user_name), 0).id;
         }
@@ -109,6 +114,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         } else {
             initNewUser();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(EXTRA_USER_ID, mUserId);
     }
 
     @Override
