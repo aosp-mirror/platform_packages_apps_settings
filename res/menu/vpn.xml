@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2011 The Android Open Source Project
+<!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +14,14 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/vpn_title">
-</PreferenceScreen>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/vpn_create"
+        android:title="@string/vpn_create"
+        android:icon="@drawable/ic_menu_add"
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/vpn_lockdown"
+        android:title="@string/vpn_menu_lockdown"
+        android:showAsAction="never" />
+</menu>

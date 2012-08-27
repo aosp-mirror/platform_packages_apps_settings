@@ -24,6 +24,7 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wifi.WifiEnabler;
 
 import android.accounts.Account;
@@ -361,7 +362,8 @@ public class Settings extends PreferenceActivity
                 WirelessSettings.class.getName().equals(fragmentName) ||
                 SoundSettings.class.getName().equals(fragmentName) ||
                 PrivacySettings.class.getName().equals(fragmentName) ||
-                ManageAccountsSettings.class.getName().equals(fragmentName)) {
+                ManageAccountsSettings.class.getName().equals(fragmentName) ||
+                VpnSettings.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 

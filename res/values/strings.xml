@@ -4034,6 +4034,15 @@
     <string name="vpn_menu_edit">Edit profile</string>
     <!-- Menu item to delete a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_menu_delete">Delete profile</string>
+    <!-- Menu item to select always-on VPN profile. [CHAR LIMIT=40] -->
+    <string name="vpn_menu_lockdown">Always-on VPN</string>
+
+    <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
+    <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
+    <!-- List item indicating that no always-on VPN is selected. [CHAR LIMIT=64] -->
+    <string name="vpn_lockdown_none">None</string>
+    <!-- Error indicating that the selected VPN doesn't meet requirements. [CHAR LIMIT=NONE] -->
+    <string name="vpn_lockdown_config_error">Always-on VPN requires an IP address for both server and DNS.</string>
 
     <!-- Toast message when there is no network connection to start VPN. [CHAR LIMIT=100] -->
     <string name="vpn_no_network">There is no network connection. Please try again later.</string>
