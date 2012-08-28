@@ -300,8 +300,8 @@ public class ChooseLockPassword extends PreferenceActivity {
             int nonletter = 0;
             for (int i = 0; i < password.length(); i++) {
                 char c = password.charAt(i);
-                // allow non white space Latin-1 characters only
-                if (c <= 32 || c > 127) {
+                // allow non control Latin-1 characters only
+                if (c < 32 || c > 127) {
                     return getString(R.string.lockpassword_illegal_character);
                 }
                 if (c >= '0' && c <= '9') {
