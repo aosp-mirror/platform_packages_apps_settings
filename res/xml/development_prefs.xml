@@ -146,6 +146,13 @@
             android:title="@string/force_hw_ui"
             android:summary="@string/force_hw_ui_summary"/>
 
+        <ListPreference
+            android:key="overlay_display_devices"
+            android:title="@string/overlay_display_devices_title"
+            android:persistent="false"
+            android:entries="@array/overlay_display_devices_entries"
+            android:entryValues="@array/overlay_display_devices_values" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_monitoring_category"

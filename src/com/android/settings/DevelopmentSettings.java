@@ -97,6 +97,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
+    private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
 
     private static final String ENABLE_TRACES_KEY = "enable_traces";
 
@@ -144,6 +145,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
+    private ListPreference mOverlayDisplayDevices;
     private MultiCheckPreference mEnableTracesPref;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
@@ -204,6 +206,9 @@ public class DevelopmentSettings extends PreferenceFragment
         mAnimatorDurationScale = (ListPreference) findPreference(ANIMATOR_DURATION_SCALE_KEY);
         mAllPrefs.add(mAnimatorDurationScale);
         mAnimatorDurationScale.setOnPreferenceChangeListener(this);
+        mOverlayDisplayDevices = (ListPreference) findPreference(OVERLAY_DISPLAY_DEVICES_KEY);
+        mAllPrefs.add(mOverlayDisplayDevices);
+        mOverlayDisplayDevices.setOnPreferenceChangeListener(this);
         mEnableTracesPref = (MultiCheckPreference)findPreference(ENABLE_TRACES_KEY);
         String[] traceValues = new String[Trace.TRACE_TAGS.length];
         for (int i=Trace.TRACE_FLAGS_START_BIT; i<traceValues.length; i++) {
@@ -360,6 +365,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateShowHwLayersUpdatesOptions();
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
+        updateOverlayDisplayDevicesOptions();
         updateEnableTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
@@ -379,6 +385,7 @@ public class DevelopmentSettings extends PreferenceFragment
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
+        writeOverlayDisplayDevicesOptions(null);
         writeEnableTracesOptions(0);
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
@@ -683,6 +690,31 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
+    private void updateOverlayDisplayDevicesOptions() {
+        String value = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.Secure.OVERLAY_DISPLAY_DEVICES);
+        if (value == null) {
+            value = "";
+        }
+
+        CharSequence[] values = mOverlayDisplayDevices.getEntryValues();
+        for (int i = 0; i < values.length; i++) {
+            if (value.contentEquals(values[i])) {
+                mOverlayDisplayDevices.setValueIndex(i);
+                mOverlayDisplayDevices.setSummary(mOverlayDisplayDevices.getEntries()[i]);
+                return;
+            }
+        }
+        mOverlayDisplayDevices.setValueIndex(0);
+        mOverlayDisplayDevices.setSummary(mOverlayDisplayDevices.getEntries()[0]);
+    }
+
+    private void writeOverlayDisplayDevicesOptions(Object newValue) {
+        Settings.System.putString(getActivity().getContentResolver(),
+                Settings.Secure.OVERLAY_DISPLAY_DEVICES, (String)newValue);
+        updateOverlayDisplayDevicesOptions();
+    }
+
     private void updateAppProcessLimitOptions() {
         try {
             int limit = ActivityManagerNative.getDefault().getProcessLimit();
@@ -897,6 +929,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mAnimatorDurationScale) {
             writeAnimationScaleOption(2, mAnimatorDurationScale, newValue);
+            return true;
+        } else if (preference == mOverlayDisplayDevices) {
+            writeOverlayDisplayDevicesOptions(newValue);
             return true;
         } else if (preference == mEnableTracesPref) {
             writeEnableTracesOptions();
