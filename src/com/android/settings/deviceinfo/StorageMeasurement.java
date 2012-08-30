@@ -32,18 +32,21 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.storage.StorageVolume;
 import android.util.Log;
+import android.util.Pair;
 
 import com.android.internal.app.IMediaContainerService;
+import com.android.internal.util.Preconditions;
+import com.google.android.collect.Maps;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Measure the memory for various systems.
@@ -86,9 +89,8 @@ public class StorageMeasurement {
 
     private final MeasurementHandler mHandler;
 
-    private static Map<StorageVolume, StorageMeasurement> sInstances =
-        new ConcurrentHashMap<StorageVolume, StorageMeasurement>();
-    private static StorageMeasurement sInternalInstance;
+    private static HashMap<Pair<StorageVolume, UserHandle>, StorageMeasurement>
+            sInstances = Maps.newHashMap();
 
     private volatile WeakReference<MeasurementReceiver> mReceiver;
 
@@ -99,19 +101,24 @@ public class StorageMeasurement {
     private long mMiscSize;
     private long[] mMediaSizes = new long[StorageVolumePreferenceCategory.sMediaCategories.length];
 
-    final private StorageVolume mStorageVolume;
-    final private boolean mIsPrimary;
-    final private boolean mIsInternal;
+    private final StorageVolume mStorageVolume;
+    private final UserHandle mUser;
+    private final boolean mIsPrimary;
+    private final boolean mIsInternal;
+
+    private boolean mIncludeAppCodeSize = true;
 
     List<FileInfo> mFileInfoForMisc;
 
     public interface MeasurementReceiver {
-        public void updateApproximate(Bundle bundle);
-        public void updateExact(Bundle bundle);
+        public void updateApproximate(StorageMeasurement meas, Bundle bundle);
+        public void updateExact(StorageMeasurement meas, Bundle bundle);
     }
 
-    private StorageMeasurement(Context context, StorageVolume storageVolume, boolean isPrimary) {
+    private StorageMeasurement(
+            Context context, StorageVolume storageVolume, UserHandle user, boolean isPrimary) {
         mStorageVolume = storageVolume;
+        mUser = Preconditions.checkNotNull(user);
         mIsInternal = storageVolume == null;
         mIsPrimary = !mIsInternal && isPrimary;
 
@@ -121,29 +128,33 @@ public class StorageMeasurement {
         mHandler = new MeasurementHandler(context, handlerThread.getLooper());
     }
 
+    public void setIncludeAppCodeSize(boolean include) {
+        mIncludeAppCodeSize = include;
+    }
+
     /**
      * Get the singleton of the StorageMeasurement class. The application
      * context is used to avoid leaking activities.
      * @param storageVolume The {@link StorageVolume} that will be measured
      * @param isPrimary true when this storage volume is the primary volume
      */
-    public static StorageMeasurement getInstance(Context context, StorageVolume storageVolume,
-            boolean isPrimary) {
-        if (storageVolume == null) {
-            if (sInternalInstance == null) {
-                sInternalInstance =
-                    new StorageMeasurement(context.getApplicationContext(), storageVolume, isPrimary);
+    public static StorageMeasurement getInstance(
+            Context context, StorageVolume storageVolume, UserHandle user, boolean isPrimary) {
+        final Pair<StorageVolume, UserHandle> key = new Pair<StorageVolume, UserHandle>(
+                storageVolume, user);
+        synchronized (sInstances) {
+            StorageMeasurement value = sInstances.get(key);
+            if (value == null) {
+                value = new StorageMeasurement(
+                        context.getApplicationContext(), storageVolume, user, isPrimary);
+                sInstances.put(key, value);
             }
-            return sInternalInstance;
+            return value;
         }
-        if (sInstances.containsKey(storageVolume)) {
-            return sInstances.get(storageVolume);
-        } else {
-            StorageMeasurement storageMeasurement =
-                new StorageMeasurement(context.getApplicationContext(), storageVolume, isPrimary);
-            sInstances.put(storageVolume, storageMeasurement);
-            return storageMeasurement;
-        }
+    }
+
+    public UserHandle getUser() {
+        return mUser;
     }
 
     public void setReceiver(MeasurementReceiver receiver) {
@@ -178,7 +189,7 @@ public class StorageMeasurement {
         bundle.putLong(TOTAL_SIZE, mTotalSize);
         bundle.putLong(AVAIL_SIZE, mAvailSize);
 
-        receiver.updateApproximate(bundle);
+        receiver.updateApproximate(this, bundle);
     }
 
     private void sendExactUpdate() {
@@ -198,7 +209,7 @@ public class StorageMeasurement {
         bundle.putLong(MISC_SIZE, mMiscSize);
         bundle.putLongArray(MEDIA_SIZES, mMediaSizes);
 
-        receiver.updateExact(bundle);
+        receiver.updateExact(this, bundle);
     }
 
     private class MeasurementHandler extends Handler {
@@ -265,7 +276,7 @@ public class StorageMeasurement {
                         } else {
                             Intent service = new Intent().setComponent(DEFAULT_CONTAINER_COMPONENT);
                             context.bindService(service, mDefContainerConn,
-                                    Context.BIND_AUTO_CREATE);
+                                    Context.BIND_AUTO_CREATE, mUser.getIdentifier());
                         }
                     }
                     break;
@@ -327,13 +338,19 @@ public class StorageMeasurement {
 
                 if (succeeded) {
                     if (mIsInternal) {
-                        mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize;
+                        if (mIncludeAppCodeSize) {
+                            mAppsSizeForThisStatsObserver += stats.codeSize;
+                        }
+                        mAppsSizeForThisStatsObserver += stats.dataSize;
                     } else if (!Environment.isExternalStorageEmulated()) {
                         mAppsSizeForThisStatsObserver += stats.externalObbSize +
                                 stats.externalCodeSize + stats.externalDataSize +
                                 stats.externalCacheSize + stats.externalMediaSize;
                     } else {
-                        mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize +
+                        if (mIncludeAppCodeSize) {
+                            mAppsSizeForThisStatsObserver += stats.codeSize;
+                        }
+                        mAppsSizeForThisStatsObserver += stats.dataSize +
                                 stats.externalCodeSize + stats.externalDataSize +
                                 stats.externalCacheSize + stats.externalMediaSize +
                                 stats.externalObbSize;
