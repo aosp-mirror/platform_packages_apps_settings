@@ -16,19 +16,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dream_info_bg"
-    android:orientation="vertical" >
+    android:background="?android:attr/selectableItemBackground"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="vertical"
+    android:showDividers="middle" >
 
     <RelativeLayout
+        android:id="@android:id/summary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
 
         <ImageView
             android:id="@android:id/icon"
             android:layout_width="@android:dimen/app_icon_size"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_centerVertical="true"
-            android:layout_margin="8dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="10dp"
             android:contentDescription="@null"
             android:scaleType="fitCenter" />
 
@@ -38,7 +45,6 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_margin="8dp"
             android:duplicateParentState="true" />
 
         <TextView
@@ -49,33 +55,42 @@
             android:layout_toLeftOf="@android:id/button1"
             android:layout_toRightOf="@android:id/icon"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-light"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@android:id/widget_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:divider="?android:attr/dividerVertical"
+            android:dividerPadding="12dp"
+            android:showDividers="middle" >
 
             <Button
                 android:id="@android:id/button2"
+                style="@android:style/Widget.ActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/screensaver_settings_dream_settings" />
+                android:text="@string/screensaver_settings_dream_settings"
+                android:textAllCaps="true"
+                android:textSize="12dp" />
 
             <Button
                 android:id="@android:id/button3"
+                style="@android:style/Widget.ActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/screensaver_settings_dream_preview" />
+                android:text="@string/screensaver_settings_dream_preview"
+                android:textAllCaps="true"
+                android:textSize="12dp" />
         </LinearLayout>
     </RelativeLayout>
 
