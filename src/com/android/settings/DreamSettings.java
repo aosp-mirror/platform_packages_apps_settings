@@ -20,11 +20,15 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,24 +55,35 @@ import com.android.settings.DreamBackend.DreamInfo;
 import java.util.List;
 
 public class DreamSettings extends SettingsPreferenceFragment {
+    private static final String TAG = DreamSettings.class.getSimpleName();
+    static final boolean DEBUG = false;
     private static final int DIALOG_WHEN_TO_DREAM = 1;
-    private static final int DIVIDER_HEIGHT = 15;
+    private static final String PACKAGE_SCHEME = "package";
+
+    private final PackageReceiver mPackageReceiver = new PackageReceiver();
 
     private Context mContext;
     private DreamBackend mBackend;
     private DreamInfoAdapter mAdapter;
     private Switch mSwitch;
-    private MenuItem[] mDependentMenuItems;
+    private MenuItem mWhenToDream;
     private boolean mRefreshing;
 
     @Override
+    public int getHelpResource() {
+        return R.string.help_url_dreams;
+    }
+
+    @Override
     public void onAttach(Activity activity) {
+        logd("onAttach(%s)", activity.getClass().getSimpleName());
         super.onAttach(activity);
         mContext = activity;
     }
 
     @Override
     public void onCreate(Bundle icicle) {
+        logd("onCreate(%s)", icicle);
         super.onCreate(icicle);
         Activity activity = getActivity();
 
@@ -102,6 +117,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        logd("onActivityCreated(%s)", savedInstanceState);
         super.onActivityCreated(savedInstanceState);
 
         ListView listView = getListView();
@@ -112,48 +128,24 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
         mAdapter = new DreamInfoAdapter(mContext);
         listView.setAdapter(mAdapter);
-        listView.setDivider(null);
-        listView.setDividerHeight(DIVIDER_HEIGHT);
-        listView.setBackgroundColor(Color.BLACK);
-        listView.setPadding(0, DIVIDER_HEIGHT, 0, DIVIDER_HEIGHT);
-        listView.setHeaderDividersEnabled(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        logd("onCreateOptionsMenu()");
+        super.onCreateOptionsMenu(menu, inflater);
+
         boolean isEnabled = mBackend.isEnabled();
 
-        MenuItem whenToDream = createMenuItem(menu,
+        mWhenToDream = createMenuItem(menu,
                 R.string.screensaver_settings_when_to_dream,
-                MenuItem.SHOW_AS_ACTION_NEVER,
+                MenuItem.SHOW_AS_ACTION_ALWAYS,
                 isEnabled,
                 new Runnable() {
                     @Override
                     public void run() {
                         showDialog(DIALOG_WHEN_TO_DREAM);
                     }});
-
-        createMenuItem(menu,
-                R.string.help_label,
-                MenuItem.SHOW_AS_ACTION_NEVER,
-                true,
-                new Runnable() {
-                    @Override
-                    public void run() {
-                       // TODO show help url
-                    }});
-
-        MenuItem startDreaming = createMenuItem(menu,
-                R.string.screensaver_settings_start_dreaming,
-                MenuItem.SHOW_AS_ACTION_ALWAYS,
-                isEnabled,
-                new Runnable(){
-                    @Override
-                    public void run() {
-                        mBackend.startDreamingNow();
-                    }});
-
-        mDependentMenuItems = new MenuItem[] { whenToDream, startDreaming };
     }
 
     private MenuItem createMenuItem(Menu menu,
@@ -173,6 +165,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        logd("onCreateDialog(%s)", dialogId);
         if (dialogId == DIALOG_WHEN_TO_DREAM)
             return createWhenToDreamDialog();
         return super.onCreateDialog(dialogId);
@@ -202,9 +195,26 @@ public class DreamSettings extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onPause() {
+        logd("onPause()");
+        super.onPause();
+        mContext.unregisterReceiver(mPackageReceiver);
+    }
+
+    @Override
     public void onResume() {
+        logd("onResume()");
         super.onResume();
         refreshFromBackend();
+
+        // listen for package changes
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+        filter.addDataScheme(PACKAGE_SCHEME);
+        mContext.registerReceiver(mPackageReceiver , filter);
     }
 
     public static int getSummaryResource(Context context) {
@@ -221,6 +231,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
     }
 
     private void refreshFromBackend() {
+        logd("refreshFromBackend()");
         mRefreshing = true;
         boolean dreamsEnabled = mBackend.isEnabled();
         if (mSwitch.isChecked() != dreamsEnabled)
@@ -231,11 +242,16 @@ public class DreamSettings extends SettingsPreferenceFragment {
             List<DreamInfo> dreamInfos = mBackend.getDreamInfos();
             mAdapter.addAll(dreamInfos);
         }
-        if (mDependentMenuItems != null)
-            for (MenuItem item : mDependentMenuItems)
-                item.setEnabled(dreamsEnabled);
+        if (mWhenToDream != null)
+            mWhenToDream.setEnabled(dreamsEnabled);
         mRefreshing = false;
     }
+
+    private static void logd(String msg, Object... args) {
+        if (DEBUG)
+            Log.d(TAG, args == null || args.length == 0 ? msg : String.format(msg, args));
+    }
+
 
     private class DreamInfoAdapter extends ArrayAdapter<DreamInfo> {
         private final LayoutInflater mInflater;
@@ -248,6 +264,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             DreamInfo dreamInfo = getItem(position);
+            logd("getView(%s)", dreamInfo.caption);
             final View row = convertView != null ? convertView : createDreamInfoRow(parent);
             row.setTag(dreamInfo);
 
@@ -258,8 +275,9 @@ public class DreamSettings extends SettingsPreferenceFragment {
             ((TextView) row.findViewById(android.R.id.text1)).setText(dreamInfo.caption);
 
             // bind radio button
-            ((RadioButton) row.findViewById(android.R.id.button1)).setChecked(dreamInfo.isActive);
-            ((RadioButton) row.findViewById(android.R.id.button1)).setOnTouchListener(new OnTouchListener() {
+            RadioButton radioButton = (RadioButton) row.findViewById(android.R.id.button1);
+            radioButton.setChecked(dreamInfo.isActive);
+            radioButton.setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     row.onTouchEvent(event);
@@ -267,11 +285,13 @@ public class DreamSettings extends SettingsPreferenceFragment {
                 }});
 
             // bind button container
-            row.findViewById(android.R.id.widget_frame).setVisibility(dreamInfo.isActive ? View.VISIBLE : View.GONE);
+            View widgetFrame = row.findViewById(android.R.id.widget_frame);
+            widgetFrame.setVisibility(dreamInfo.isActive ? View.VISIBLE : View.GONE);
 
             // bind settings button
-            ((Button) row.findViewById(android.R.id.button2)).setEnabled(dreamInfo.settingsComponentName != null);
-            ((Button) row.findViewById(android.R.id.button2)).setOnClickListener(new OnClickListener(){
+            Button settingsButton = (Button) row.findViewById(android.R.id.button2);
+            settingsButton.setVisibility(dreamInfo.settingsComponentName != null ? View.VISIBLE : View.GONE);
+            settingsButton.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     mBackend.launchSettings((DreamInfo)row.getTag());
@@ -298,13 +318,31 @@ public class DreamSettings extends SettingsPreferenceFragment {
             return row;
         }
 
+        private DreamInfo getCurrentSelection() {
+            for (int i = 0; i < getCount(); i++) {
+                DreamInfo dreamInfo = getItem(i);
+                if (dreamInfo.isActive)
+                    return dreamInfo;
+            }
+            return null;
+        }
         private void activate(DreamInfo dreamInfo) {
+            if (dreamInfo.equals(getCurrentSelection()))
+                return;
             for (int i = 0; i < getCount(); i++) {
                 getItem(i).isActive = false;
             }
             dreamInfo.isActive = true;
             mBackend.setActiveDream(dreamInfo.componentName);
             notifyDataSetChanged();
+        }
+    }
+
+    private class PackageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            logd("PackageReceiver.onReceive");
+            refreshFromBackend();
         }
     }
 }
