@@ -161,6 +161,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         }
 
         /**
+         * Return the ID of the clickable container for the setting.
+         */
+        public abstract int getContainerId();
+
+        /**
          * Return the ID of the main large image button for the setting.
          */
         public abstract int getButtonId();
@@ -169,6 +174,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
          * Returns the small indicator image ID underneath the setting.
          */
         public abstract int getIndicatorId();
+
+        /**
+         * Returns the resource ID of the setting's content description.
+         */
+        public abstract int getButtonDescription();
 
         /**
          * Returns the resource ID of the image to show as a function of
@@ -186,16 +196,21 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
          * turning off, turning on) of the setting.
          */
         public final void setImageViewResources(Context context, RemoteViews views) {
+            int containerId = getContainerId();
             int buttonId = getButtonId();
             int indicatorId = getIndicatorId();
             int pos = getPosition();
             switch (getTriState(context)) {
                 case STATE_DISABLED:
+                    views.setContentDescription(containerId,
+                        getContentDescription(context, R.string.gadget_state_off));
                     views.setImageViewResource(buttonId, getButtonImageId(false));
                     views.setImageViewResource(
                         indicatorId, IND_DRAWABLE_OFF[pos]);
                     break;
                 case STATE_ENABLED:
+                    views.setContentDescription(containerId,
+                        getContentDescription(context, R.string.gadget_state_on));
                     views.setImageViewResource(buttonId, getButtonImageId(true));
                     views.setImageViewResource(
                         indicatorId, IND_DRAWABLE_ON[pos]);
@@ -207,16 +222,30 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     // user's intent.  This is much easier to see in
                     // sunlight.
                     if (isTurningOn()) {
+                        views.setContentDescription(containerId,
+                            getContentDescription(context, R.string.gadget_state_turning_on));
                         views.setImageViewResource(buttonId, getButtonImageId(true));
                         views.setImageViewResource(
                             indicatorId, IND_DRAWABLE_MID[pos]);
                     } else {
+                        views.setContentDescription(containerId,
+                            getContentDescription(context, R.string.gadget_state_turning_off));
                         views.setImageViewResource(buttonId, getButtonImageId(false));
                         views.setImageViewResource(
                             indicatorId, IND_DRAWABLE_OFF[pos]);
                     }
                     break;
             }
+        }
+
+        /**
+         * Returns the gadget state template populated with the gadget
+         * description and state.
+         */
+        private final String getContentDescription(Context context, int stateResId) {
+            final String gadget = context.getString(getButtonDescription());
+            final String state = context.getString(stateResId);
+            return context.getString(R.string.gadget_state_template, gadget, state);
         }
 
         /**
@@ -322,8 +351,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * Subclass of StateTracker to get/set Wifi state.
      */
     private static final class WifiStateTracker extends StateTracker {
+        public int getContainerId() { return R.id.btn_wifi; }
         public int getButtonId() { return R.id.img_wifi; }
         public int getIndicatorId() { return R.id.ind_wifi; }
+        public int getButtonDescription() { return R.string.gadget_wifi; }
         public int getButtonImageId(boolean on) {
             return on ? R.drawable.ic_appwidget_settings_wifi_on_holo
                     : R.drawable.ic_appwidget_settings_wifi_off_holo;
@@ -405,8 +436,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * Subclass of StateTracker to get/set Bluetooth state.
      */
     private static final class BluetoothStateTracker extends StateTracker {
+        public int getContainerId() { return R.id.btn_bluetooth; }
         public int getButtonId() { return R.id.img_bluetooth; }
         public int getIndicatorId() { return R.id.ind_bluetooth; }
+        public int getButtonDescription() { return R.string.gadget_bluetooth; }
         public int getButtonImageId(boolean on) {
             return on ? R.drawable.ic_appwidget_settings_bluetooth_on_holo
                     : R.drawable.ic_appwidget_settings_bluetooth_off_holo;
@@ -476,8 +509,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * Subclass of StateTracker for GPS state.
      */
     private static final class GpsStateTracker extends StateTracker {
+        public int getContainerId() { return R.id.btn_gps; }
         public int getButtonId() { return R.id.img_gps; }
         public int getIndicatorId() { return R.id.ind_gps; }
+        public int getButtonDescription() { return R.string.gadget_gps; }
         public int getButtonImageId(boolean on) {
             return on ? R.drawable.ic_appwidget_settings_gps_on_holo
                     : R.drawable.ic_appwidget_settings_gps_off_holo;
@@ -526,8 +561,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * Subclass of StateTracker for sync state.
      */
     private static final class SyncStateTracker extends StateTracker {
+        public int getContainerId() { return R.id.btn_sync; }
         public int getButtonId() { return R.id.img_sync; }
         public int getIndicatorId() { return R.id.ind_sync; }
+        public int getButtonDescription() { return R.string.gadget_sync; }
         public int getButtonImageId(boolean on) {
             return on ? R.drawable.ic_appwidget_settings_sync_on_holo
                     : R.drawable.ic_appwidget_settings_sync_off_holo;
@@ -673,6 +710,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         sSyncState.setImageViewResources(context, views);
 
         if (getBrightnessMode(context)) {
+            views.setContentDescription(R.id.btn_brightness,
+                    context.getString(R.string.gadget_brightness_template,
+                            context.getString(R.string.gadget_brightness_state_auto)));
             views.setImageViewResource(R.id.img_brightness,
                     R.drawable.ic_appwidget_settings_brightness_auto_holo);
             views.setImageViewResource(R.id.ind_brightness,
@@ -686,12 +726,21 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             final int half = (int)(pm.getMaximumScreenBrightnessSetting()
                     * HALF_BRIGHTNESS_THRESHOLD);
             if (brightness > full) {
+                views.setContentDescription(R.id.btn_brightness,
+                        context.getString(R.string.gadget_brightness_template,
+                                context.getString(R.string.gadget_brightness_state_full)));
                 views.setImageViewResource(R.id.img_brightness,
                         R.drawable.ic_appwidget_settings_brightness_full_holo);
             } else if (brightness > half) {
+                views.setContentDescription(R.id.btn_brightness,
+                        context.getString(R.string.gadget_brightness_template,
+                                context.getString(R.string.gadget_brightness_state_half)));
                 views.setImageViewResource(R.id.img_brightness,
                         R.drawable.ic_appwidget_settings_brightness_half_holo);
             } else {
+                views.setContentDescription(R.id.btn_brightness,
+                        context.getString(R.string.gadget_brightness_template,
+                                context.getString(R.string.gadget_brightness_state_off)));
                 views.setImageViewResource(R.id.img_brightness,
                         R.drawable.ic_appwidget_settings_brightness_off_holo);
             }
