@@ -687,25 +687,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fons de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecciona fons de pantalla de"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Somni"</string>
-    <!-- no translation found for screensaver_settings_summary_either_long (2458481525925378465) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_either_short (6140527286137331478) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_sleep (3642352561593337637) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_dock (2072657401664633283) -->
-    <skip />
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Quan estigui connectat o inactiu i carregant-se"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Quan estigui inactiu i carregant-se"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Quan estigui connectat"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Desactivat"</string>
-    <!-- no translation found for screensaver_settings_disabled_prompt (2060724968623677666) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_start_dreaming (1695787491111862810) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_when_to_dream (9110320844270942351) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_dream_settings (7895367391368911582) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_dream_preview (2690543899036878396) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Somni seleccionat"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Moment de l\'activació"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'estat inactiu"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Mai"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Prova-ho!"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Inicia quan estigui inactiu"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Inicia quan estigui connectat"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillantor automàtica"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Mida del tipus de lletra"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Mida de la lletra"</string>
@@ -1029,7 +1021,8 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Dades de l\'emmagatzematge USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"Targeta SD"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Desinstal·la"</string>
-    <string name="install_text" msgid="884360662922471113">"Instal·la"</string>
+    <!-- no translation found for install_text (884360662922471113) -->
+    <skip />
     <string name="disable_text" msgid="6544054052049395202">"Desactiva"</string>
     <string name="enable_text" msgid="9217362512327828987">"Activa"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Esborra les dades"</string>
@@ -1597,8 +1590,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Finestra escala animació"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Transició escala animació"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala durada d\'animació"</string>
-    <!-- no translation found for overlay_display_devices_title (5364176287998398539) -->
-    <skip />
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplicacions"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"No conservis les activitats"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destrueix activitats tan aviat com usuari en surt"</string>
@@ -1700,10 +1691,14 @@
     <string name="vpn_create" msgid="5628219087569761496">"Addició d\'un perfil de VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Edita el perfil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Suprimeix el perfil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN sempre activada"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Selecciona un perfil de VPN per estar-hi sempre connectat. El trànsit de la xarxa només es permetrà quan estigui connectada a aquesta VPN."</string>
-    <string name="vpn_lockdown_none" msgid="9214462857336483711">"Cap"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Per tenir la VPN sempre activada cal una adreça IP per al servidor i per al DNS."</string>
+    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
+    <skip />
     <string name="vpn_no_network" msgid="3050233675132726155">"No hi ha cap connexió de xarxa. Torna-ho a provar més tard."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Falta un certificat. Edita el perfil."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"Sistema"</string>
