@@ -31,11 +31,15 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 
 
@@ -119,11 +123,14 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mInstallVoicesPreference.setEnabled(false);
 
         mLocalePreference.setEnabled(false);
+        mLocalePreference.setEntries(new CharSequence[0]);
+        mLocalePreference.setEntryValues(new CharSequence[0]);
 
         mVoiceDataDetails = getArguments().getParcelable(TtsEnginePreference.FRAGMENT_ARGS_VOICES);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mTtsInitListener,
                 getEngineName());
+
 
         // Check if data packs changed
         checkTtsData();
@@ -194,10 +201,8 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         String currentLocale = mEnginesHelper.getLocalePrefForEngine(
                 getEngineName());
 
-        CharSequence[] entries = new CharSequence[availableLangs.size()];
-        CharSequence[] entryValues = new CharSequence[availableLangs.size()];
-
-        int selectedLanguageIndex = -1;
+        ArrayList<Pair<String, String>> entryPairs =
+                Lists.newArrayListWithCapacity(availableLangs.size());
         for (int i = 0; i < availableLangs.size(); i++) {
             String[] langCountryVariant = availableLangs.get(i).split("-");
             Locale loc = null;
@@ -210,12 +215,30 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
                                  langCountryVariant[2]);
             }
             if (loc != null){
-                entries[i] = loc.getDisplayName();
-                entryValues[i] = availableLangs.get(i);
-                if (availableLangs.get(i).equalsIgnoreCase(currentLocale)) {
-                    selectedLanguageIndex = i;
-                }
+                entryPairs.add(new Pair<String, String>(
+                        loc.getDisplayName(), availableLangs.get(i)));
             }
+        }
+
+        // Sort it
+        Collections.sort(entryPairs, new Comparator<Pair<String, String>>() {
+            @Override
+            public int compare(Pair<String, String> lhs, Pair<String, String> rhs) {
+                return lhs.first.compareToIgnoreCase(rhs.first);
+            }
+        });
+
+        // Get two arrays out of one of pairs
+        int selectedLanguageIndex = -1;
+        CharSequence[] entries = new CharSequence[availableLangs.size()];
+        CharSequence[] entryValues = new CharSequence[availableLangs.size()];
+        int i = 0;
+        for (Pair<String, String> entry : entryPairs) {
+            if (entry.second.equalsIgnoreCase(currentLocale)) {
+                selectedLanguageIndex = i;
+            }
+            entries[i] = entry.first;
+            entryValues[i++] = entry.second;
         }
 
         mLocalePreference.setEntries(entries);
