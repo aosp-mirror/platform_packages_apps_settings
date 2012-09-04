@@ -119,6 +119,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             Log.d(TAG, "onProfileStateChanged: profile " + profile +
                     " newProfileState " + newProfileState);
         }
+        if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_TURNING_OFF)
+        {
+            if (Utils.D) Log.d(TAG, " BT Turninig Off...Profile conn state change ignored...");
+            return;
+        }
         mProfileConnectionState.put(profile, newProfileState);
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
@@ -326,6 +331,16 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             mProfileConnectionState.put(profile, state);
         }
         return mProfileConnectionState.get(profile);
+    }
+
+    public void clearProfileConnectionState ()
+    {
+        if (Utils.D) {
+            Log.d(TAG," Clearing all connection state for dev:" + mDevice.getName());
+        }
+        for (LocalBluetoothProfile profile :getProfiles()) {
+            mProfileConnectionState.put(profile, BluetoothProfile.STATE_DISCONNECTED);
+        }
     }
 
     // TODO: do any of these need to run async on a background thread?
