@@ -144,6 +144,11 @@ final class CachedBluetoothDeviceManager {
                 if (cachedDevice.getBondState() != BluetoothDevice.BOND_BONDED) {
                    cachedDevice.setVisible(false);
                    mCachedDevices.remove(i);
+                } else {
+                    // For bonded devices, we need to clear the connection status so that
+                    // when BT is enabled next time, device connection status shall be retrieved
+                    // by making a binder call.
+                    cachedDevice.clearProfileConnectionState();
                 }
             }
         }
