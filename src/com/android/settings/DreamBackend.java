@@ -16,9 +16,9 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.SCREENSAVER_ENABLED;
 import static android.provider.Settings.Secure.SCREENSAVER_ACTIVATE_ON_DOCK;
 import static android.provider.Settings.Secure.SCREENSAVER_ACTIVATE_ON_SLEEP;
+import static android.provider.Settings.Secure.SCREENSAVER_ENABLED;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -180,6 +180,17 @@ public class DreamBackend {
             mDreamManager.testDream(dreamInfo.componentName);
         } catch (RemoteException e) {
             Log.w(TAG, "Failed to preview " + dreamInfo, e);
+        }
+    }
+
+    public void startDreaming() {
+        logd("startDreaming()");
+        if (mDreamManager == null)
+            return;
+        try {
+            mDreamManager.dream();
+        } catch (RemoteException e) {
+            Log.w(TAG, "Failed to dream", e);
         }
     }
 
