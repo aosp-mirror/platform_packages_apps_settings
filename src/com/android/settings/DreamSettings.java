@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -41,7 +40,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -66,7 +64,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
     private DreamBackend mBackend;
     private DreamInfoAdapter mAdapter;
     private Switch mSwitch;
-    private MenuItem mWhenToDream;
+    private MenuItem[] mMenuItemsWhenEnabled;
     private boolean mRefreshing;
 
     @Override
@@ -133,19 +131,33 @@ public class DreamSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         logd("onCreateOptionsMenu()");
-        super.onCreateOptionsMenu(menu, inflater);
 
         boolean isEnabled = mBackend.isEnabled();
 
-        mWhenToDream = createMenuItem(menu,
-                R.string.screensaver_settings_when_to_dream,
+        // create "start" action
+        MenuItem start = createMenuItem(menu, R.string.screensaver_settings_dream_start,
                 MenuItem.SHOW_AS_ACTION_ALWAYS,
+                isEnabled, new Runnable(){
+                    @Override
+                    public void run() {
+                        mBackend.startDreaming();
+                    }});
+
+        // create "when to dream" overflow menu item
+        MenuItem whenToDream = createMenuItem(menu,
+                R.string.screensaver_settings_when_to_dream,
+                MenuItem.SHOW_AS_ACTION_NEVER,
                 isEnabled,
                 new Runnable() {
                     @Override
                     public void run() {
                         showDialog(DIALOG_WHEN_TO_DREAM);
                     }});
+
+        // create "help" overflow menu item (make sure it appears last)
+        super.onCreateOptionsMenu(menu, inflater);
+
+        mMenuItemsWhenEnabled = new MenuItem[] { start, whenToDream };
     }
 
     private MenuItem createMenuItem(Menu menu,
@@ -242,8 +254,9 @@ public class DreamSettings extends SettingsPreferenceFragment {
             List<DreamInfo> dreamInfos = mBackend.getDreamInfos();
             mAdapter.addAll(dreamInfos);
         }
-        if (mWhenToDream != null)
-            mWhenToDream.setEnabled(dreamsEnabled);
+        if (mMenuItemsWhenEnabled != null)
+            for (MenuItem menuItem : mMenuItemsWhenEnabled)
+                menuItem.setEnabled(dreamsEnabled);
         mRefreshing = false;
     }
 
@@ -251,7 +264,6 @@ public class DreamSettings extends SettingsPreferenceFragment {
         if (DEBUG)
             Log.d(TAG, args == null || args.length == 0 ? msg : String.format(msg, args));
     }
-
 
     private class DreamInfoAdapter extends ArrayAdapter<DreamInfo> {
         private final LayoutInflater mInflater;
@@ -272,7 +284,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
             ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(dreamInfo.icon);
 
             // bind caption
-            ((TextView) row.findViewById(android.R.id.text1)).setText(dreamInfo.caption);
+            ((TextView) row.findViewById(android.R.id.title)).setText(dreamInfo.caption);
 
             // bind radio button
             RadioButton radioButton = (RadioButton) row.findViewById(android.R.id.button1);
@@ -284,24 +296,17 @@ public class DreamSettings extends SettingsPreferenceFragment {
                     return false;
                 }});
 
-            // bind button container
-            View widgetFrame = row.findViewById(android.R.id.widget_frame);
-            widgetFrame.setVisibility(dreamInfo.isActive ? View.VISIBLE : View.GONE);
+            // bind settings button + divider
+            boolean showSettings = dreamInfo.settingsComponentName != null;
+            View settingsDivider = row.findViewById(R.id.divider);
+            settingsDivider.setVisibility(showSettings ? View.VISIBLE : View.INVISIBLE);
 
-            // bind settings button
-            Button settingsButton = (Button) row.findViewById(android.R.id.button2);
-            settingsButton.setVisibility(dreamInfo.settingsComponentName != null ? View.VISIBLE : View.GONE);
+            ImageView settingsButton = (ImageView) row.findViewById(android.R.id.button2);
+            settingsButton.setVisibility(showSettings ? View.VISIBLE : View.INVISIBLE);
             settingsButton.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    mBackend.launchSettings((DreamInfo)row.getTag());
-                }});
-
-            // bind preview button
-            ((Button) row.findViewById(android.R.id.button3)).setOnClickListener(new OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    mBackend.preview((DreamInfo)row.getTag());
+                    mBackend.launchSettings((DreamInfo) row.getTag());
                 }});
 
             return row;

@@ -13,19 +13,20 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    android:divider="?android:attr/dividerHorizontal"
-    android:orientation="vertical"
-    android:showDividers="middle" >
+    android:layout_height="wrap_content" >
+
+    <!-- Dream selectable row (icon, caption, radio button) -->
 
     <RelativeLayout
-        android:id="@android:id/summary"
+        android:id="@android:id/widget_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" >
+        android:layout_toLeftOf="@+id/divider"
+        android:background="?android:attr/selectableItemBackground" >
+
+        <!-- Dream icon -->
 
         <ImageView
             android:id="@android:id/icon"
@@ -37,18 +38,14 @@
             android:layout_marginRight="6dp"
             android:layout_marginTop="10dp"
             android:contentDescription="@null"
+            android:maxHeight="@android:dimen/app_icon_size"
+            android:maxWidth="@android:dimen/app_icon_size"
             android:scaleType="fitCenter" />
 
-        <RadioButton
-            android:id="@android:id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:duplicateParentState="true" />
+        <!-- Dream caption -->
 
         <TextView
-            android:id="@android:id/text1"
+            android:id="@android:id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -57,41 +54,43 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <!-- Dream radio button -->
+
+        <RadioButton
+            android:id="@android:id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:duplicateParentState="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@android:id/widget_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" >
+    <!-- Divider -->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="?android:attr/dividerVertical"
-            android:dividerPadding="12dp"
-            android:showDividers="middle" >
+    <ImageView
+        android:id="@id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@android:id/button2"
+        android:contentDescription="@null"
+        android:src="@drawable/nav_divider" />
 
-            <Button
-                android:id="@android:id/button2"
-                style="@android:style/Widget.ActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/screensaver_settings_dream_settings"
-                android:textAllCaps="true"
-                android:textSize="12dp" />
+    <!-- Settings icon -->
 
-            <Button
-                android:id="@android:id/button3"
-                style="@android:style/Widget.ActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/screensaver_settings_dream_preview"
-                android:textAllCaps="true"
-                android:textSize="12dp" />
-        </LinearLayout>
-    </RelativeLayout>
+    <ImageView
+        android:id="@android:id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@android:id/widget_frame"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@android:id/widget_frame"
+        android:layout_centerVertical="true"
+        android:layout_margin="0dip"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@null"
+        android:padding="8dip"
+        android:src="@drawable/ic_bt_config" />
 
-</LinearLayout>
+</RelativeLayout>
