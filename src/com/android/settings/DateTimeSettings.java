@@ -171,12 +171,15 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
         final Calendar now = Calendar.getInstance();
         mDummyDate.setTimeZone(now.getTimeZone());
+        // We use December 31st because it's unambiguous when demonstrating the date format.
+        // We use 13:00 so we can demonstrate the 12/24 hour options.
         mDummyDate.set(now.get(Calendar.YEAR), 11, 31, 13, 0, 0);
         Date dummyDate = mDummyDate.getTime();
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
         mTimeZone.setSummary(getTimeZoneText(now.getTimeZone()));
         mDatePref.setSummary(shortDateFormat.format(now.getTime()));
         mDateFormat.setSummary(shortDateFormat.format(dummyDate));
+        mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
     }
 
     @Override
