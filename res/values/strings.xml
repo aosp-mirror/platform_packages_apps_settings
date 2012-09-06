@@ -3339,6 +3339,34 @@
     <string name="gadget_title">Power control</string>
     <string name="gadget_toggle_wifi">Updating Wi-Fi setting</string>
     <string name="gadget_toggle_bluetooth">Updating Bluetooth setting</string>
+    <!-- Template for gadget toggle button description. Populated examples are "Wi-Fi off" or "Wi-Fi turning on". -->
+    <string name="gadget_state_template"><xliff:g name="feature" example="Wi-Fi">%1$s</xliff:g> <xliff:g name="state" example="off">%2$s</xliff:g></string>
+    <!-- Gadget value used to describe on state. -->
+    <string name="gadget_state_on">on</string>
+    <!-- Gadget value used to describe off state. -->
+    <string name="gadget_state_off">off</string>
+    <!-- Gadget value used to describe turning on state. -->
+    <string name="gadget_state_turning_on">turning on</string>
+    <!-- Gadget value used to describe turning off state. -->
+    <string name="gadget_state_turning_off">turning off</string>
+    <!-- Spoken description for the Wi-Fi power control gadget. -->
+    <string name="gadget_wifi">Wi-Fi</string>
+    <!-- Spoken description for the Bluetooth power control gadget. -->
+    <string name="gadget_bluetooth">Bluetooth</string>
+    <!-- Spoken description for the GPS power control gadget. -->
+    <string name="gadget_gps">GPS</string>
+    <!-- Spoken description for the data synchronization gadget. -->
+    <string name="gadget_sync">Sync</string>
+    <!-- Template for brightness gadget toggle button description. -->
+    <string name="gadget_brightness_template">Brightness <xliff:g name="state" example="half">%1$s</xliff:g></string>
+    <!-- Brightness gadget value used to describe automatic brightness state. -->
+    <string name="gadget_brightness_state_auto">auto</string>
+    <!-- Brightness gadget value used to describe maximum brightness state. -->
+    <string name="gadget_brightness_state_full">full</string>
+    <!-- Brightness gadget value used to describe half brightness state. -->
+    <string name="gadget_brightness_state_half">half</string>
+    <!-- Brightness gadget value used to describe minimum brightness state. -->
+    <string name="gadget_brightness_state_off">off</string>
 
     <!-- Title of preference to enter the VPN settings activity -->
     <string name="vpn_settings_title">VPN</string>
