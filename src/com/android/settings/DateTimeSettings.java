@@ -337,8 +337,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
-    /*  Helper routines to format timezone */
-
     /* package */ static void setDate(int year, int month, int day) {
         Calendar c = Calendar.getInstance();
 
@@ -366,45 +364,40 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
+    /*  Helper routines to format timezone */
+
     /* package */ static String getTimeZoneText(TimeZone tz) {
-        boolean daylight = tz.inDaylightTime(new Date());
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(formatOffset(tz.getRawOffset() +
-                               (daylight ? tz.getDSTSavings() : 0))).
+        // Similar to new SimpleDateFormat("'GMT'Z, zzzz").format(new Date()), but
+        // we want "GMT-03:00" rather than "GMT-0300".
+        Date now = new Date();
+        return formatOffset(new StringBuilder(), tz, now).
             append(", ").
-            append(tz.getDisplayName(daylight, TimeZone.LONG));
-
-        return sb.toString();
+            append(tz.getDisplayName(tz.inDaylightTime(now), TimeZone.LONG)).toString();
     }
 
-    private static char[] formatOffset(int off) {
-        off = off / 1000 / 60;
+    private static StringBuilder formatOffset(StringBuilder sb, TimeZone tz, Date d) {
+        int off = tz.getOffset(d.getTime()) / 1000 / 60;
 
-        char[] buf = new char[9];
-        buf[0] = 'G';
-        buf[1] = 'M';
-        buf[2] = 'T';
-
+        sb.append("GMT");
         if (off < 0) {
-            buf[3] = '-';
+            sb.append('-');
             off = -off;
         } else {
-            buf[3] = '+';
+            sb.append('+');
         }
 
         int hours = off / 60;
         int minutes = off % 60;
 
-        buf[4] = (char) ('0' + hours / 10);
-        buf[5] = (char) ('0' + hours % 10);
+        sb.append((char) ('0' + hours / 10));
+        sb.append((char) ('0' + hours % 10));
 
-        buf[6] = ':';
+        sb.append(':');
 
-        buf[7] = (char) ('0' + minutes / 10);
-        buf[8] = (char) ('0' + minutes % 10);
+        sb.append((char) ('0' + minutes / 10));
+        sb.append((char) ('0' + minutes % 10));
 
-        return buf;
+        return sb;
     }
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
