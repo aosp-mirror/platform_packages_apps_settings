@@ -602,7 +602,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"검색 중…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"기기 이름 변경"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"P2P 기기"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"저장된 그룹"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"연결할 수 없습니다."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"기기 이름을 바꾸지 못했습니다."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"연결을 해제하시겠습니까?"</string>
@@ -610,8 +609,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"연결을 중단하면 <xliff:g id="PEER_NAME">%1$s</xliff:g> 외 다른 <xliff:g id="PEER_COUNT">%2$s</xliff:g>개 기기와의 연결이 끊어집니다."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"초대를 취소하시겠습니까?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g>와(과) 연결하려는 초대를 취소하시겠습니까?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"그룹을 삭제하시겠습니까?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"<xliff:g id="GROUP_NAME">%1$s</xliff:g> 그룹을 삭제하시겠습니까?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"휴대용 Wi-Fi 핫스팟"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"핫스팟 켜는 중…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"핫스팟 끄는 중…"</string>
@@ -684,16 +681,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"배경화면"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"배경화면 선택"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"스크린 세이버 모듈"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"도킹할 때 또는 대기상태이거나 충전할 때"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"어느 한쪽인 경우"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"대기상태이거나 충전할 때"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"도킹할 때"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"도킹할 때 또는 대기상태이거나 충전할 때"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"대기상태이거나 충전할 때"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"도킹할 때"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"사용 안함"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"휴대전화가 도킹 또는 절전 모드일 때 작동 방식을 조정하려면 화면 보호기를 사용하도록 설정합니다."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"지금 화면 보호기 시작"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"화면 보호기로 전환 시점"</string>
-    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"선택한 모듈"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"활성화 시기"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 이상 유휴 상태일 때"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"안함"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"사용해 보기"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"절전 모드 시 시작"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"도킹할 때 시작"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"글꼴 크기"</string>
@@ -1585,7 +1583,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"창 애니메이션 배율"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"전환 애니메이션 배율"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 길이 배율"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"보조 디스플레이 효과를 적용"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"앱"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"액티비티 유지 안함"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"사용자가 종료하는 즉시 바로 제거"</string>
@@ -1712,7 +1709,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"사용 안함"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"허가"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"시행"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"사용자"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"사용자"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"사용자 추가"</string>
     <string name="user_details_title" msgid="3037625632127241370">"세부정보 수정"</string>

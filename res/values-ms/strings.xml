@@ -602,7 +602,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Mencari..."</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Namakan semula peranti"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Peranti setara"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Kumpulan diingati"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Tidak boleh menyambung."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Gagal menamakan semula peranti."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Putuskan sambungan?"</string>
@@ -610,8 +609,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Jika anda menyahsambung, sambungan anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> dan <xliff:g id="PEER_COUNT">%2$s</xliff:g> peranti lain akan berakhir."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Batalkan jemputan?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Adakah anda mahu membatalkan jemputan untuk berhubung dengan <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Padam kumpulan?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Adakah anda mahu memadam kumpulan <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Titik panas Wi-Fi mudah alih"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Menghidupkan tempat liputan..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Mematikan tempat liputan..."</string>
@@ -684,16 +681,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Kertas dinding"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pilih kertas dinding dari"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Impian"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Apabila didok atau tidur dan dicas"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Salah satu"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Walaupun tidur dan dicaj"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Semasa didok"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Apabila didok atau tidur dan dicas"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Apabila tidur dan dicas"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Apabila didok"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Dilumpuhkan"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Untuk mengawal apa yang berlaku semasa telefon didok dan/atau tidur, hidupkan Mimpi."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Mula bermimpi sekarang"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Bila untuk bermimpi"</string>
-    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Mimpi pilihan"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Bila hendak diaktifkan"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Selepas <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> terbiar melahu"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Tidak sekali-kali"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Cubalah!"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Mula pada status tidur"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Bermula apabila didok"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Kecerahan automatik"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Saiz fon"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Saiz fon"</string>
@@ -1585,7 +1583,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animasi tetingkap"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Skala animasi peralihan"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Skala tempoh juruanimasi"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simulasikan paparan kedua"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplikasi"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Jangan simpan aktiviti"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Musnahkn setiap aktviti slps pengguna mengglkannya"</string>
@@ -1690,7 +1687,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN sentiasa dihidupkan"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Pilih profil VPN untuk sentiasa kekal bersambung kepada VPN itu. Trafik rangkaian hanya akan dibenarkan apabila bersambung ke VPN ini."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Tiada"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN yang sentiasa dihidupkan memerlukan alamat IP untuk kedua-dua pelayan dan DNS."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN sentiasa dihidupkan memerlukan alamat IP untuk kedua-dua pelayan dan DNS."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Tiada sambungan rangkaian. Sila cuba sebentar lagi."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Ada sijil yang hilang. Sila edit profil."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"Sistem"</string>
@@ -1712,7 +1709,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Dilumpuhkan"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permisif"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Menguatkuasakan"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Pengguna"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"Pengguna"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Tambah pengguna"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Edit butiran"</string>
