@@ -602,6 +602,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Menelusuri…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Ganti nama perangkat"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Perangkat P2P"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Grup yang diingat"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Tidak dapat menyambung."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Gagal mengubah nama perangkat."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Putuskan sambungan?"</string>
@@ -609,6 +610,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> dan <xliff:g id="PEER_COUNT">%2$s</xliff:g> perangkat lain akan berakhir."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Batalkan undangan?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Apakah Anda ingin membatalkan undangan untuk tersambung dengan <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Hapus grup?"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Ingin menghapus grup <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Hotspot Wi-Fi portabel"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Menyalakan hotspot..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Mematikan hotspot..."</string>
@@ -681,17 +684,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pilih wallpaper dari"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Mimpi"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Saat di dok atau tidur dan mengisi baterai"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Saat tidur dan mengisi baterai"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Saat di dok"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Saat di dok atau tidur dan mengisi baterai"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Salah satu"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Selagi tidur dan mengisi baterai"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Selagi di dok"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Nonaktif"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"Mimpi terpilih"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Waktu pengaktifan"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Setelah menganggur selama <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Tidak akan"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"Cobalah!"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Mulai saat tidur"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Mulai saat di dok"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Untuk mengontrol apa yang terjadi saat ponsel di dok dan/atau sedang tidur, nyalakan Mimpi."</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Mulai bermimpi sekarang"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Ketika bermimpi"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"Kecerahan otomatis"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Ukuran font"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Ukuran font"</string>
@@ -912,7 +914,7 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"Bantuan"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Jaringan seluler"</string>
     <string name="location_title" msgid="1029961368397484576">"Lokasiku"</string>
-    <string name="location_network_based" msgid="7472814266821714527">"Wi-Fi &amp; lokasi jaringan"</string>
+    <string name="location_network_based" msgid="7472814266821714527">"Lokasi jaringan Wi-Fi &amp; seluler"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Izinkan aplikasi menggunakan layanan lokasi Google untuk memperkirakan lokasi Anda dengan lebih cepat. Data lokasi anonim akan dikumpulkan dan dikirim ke Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Lokasi yang dipastikan oleh Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satelit GPS"</string>
@@ -1583,6 +1585,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animasi jendela"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Skala animasi transisi"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Skala durasi animator"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Menyimulasikan tampilan sekunder"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Apl"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Jangan simpan kegiatan"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Hancurkan tiap kgiatan setelah ditinggal pengguna"</string>
@@ -1709,8 +1712,7 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Nonaktif"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Tidak Wajib"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Wajib"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
-    <skip />
+    <string name="user_settings_title" msgid="6151874007858148344">"Pengguna"</string>
     <string name="user_list_title" msgid="2152311434413878709">"Pengguna"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Tambahkan pengguna"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Edit detail"</string>

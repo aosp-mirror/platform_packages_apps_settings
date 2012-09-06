@@ -602,6 +602,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"กำลังค้นหา…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"เปลี่ยนชื่ออุปกรณ์"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"อุปกรณ์สำหรับ Peer"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"กลุ่มที่จดจำ"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"ไม่สามารถเชื่อมต่อ"</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"ไม่สามารถเปลี่ยนชื่ออุปกรณ์"</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"ตัดการเชื่อมต่อหรือไม่"</string>
@@ -609,6 +610,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"หากคุณตัดการเชื่อมต่อ จะเป็นการสิ้นสุดการเชื่อมต่อของคุณกับ <xliff:g id="PEER_NAME">%1$s</xliff:g> และอุปกรณ์อื่นอีก <xliff:g id="PEER_COUNT">%2$s</xliff:g> รายการ"</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"ยกเลิกข้อความเชิญหรือไม่"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"คุณต้องการยกเลิกข้อความเชิญเพื่อเชื่อมต่อกับ <xliff:g id="PEER_NAME">%1$s</xliff:g> หรือไม่"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"ลบกลุ่มหรือไม่"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"คุณต้องการลบกลุ่ม <xliff:g id="GROUP_NAME">%1$s</xliff:g> หรือไม่"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Wi-Fi ฮอตสปอตแบบพกพา"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"กำลังเปิดฮอตสปอต…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"กำลังปิดฮอตสปอต…"</string>
@@ -681,17 +684,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"วอลเปเปอร์"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"เลือกวอลเปเปอร์จาก"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Dream"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"เมื่อวางบนแท่นชาร์จหรืออยู่ในโหมดสลีปและกำลังชาร์จ"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"เมื่ออยู่ในโหมดสลีปและกำลังชาร์จ"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"เมื่อวางบนแท่นชาร์จ"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"เมื่อวางบนแท่นชาร์จหรืออยู่ในโหมดสลีปและกำลังชาร์จ"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"แบบใดก็ได้"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"ในขณะอยู่ในโหมดสลีปและกำลังชาร์จ"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ในขณะวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"ปิดใช้งานแล้ว"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"Dream ที่เลือก"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"เวลาที่เปิดใช้งาน"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"หลังจากไม่มีกิจกรรมเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"ไม่เลย"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"ลองใช้!"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"เริ่มต้นเมื่ออยู่ในโหมดสลีป"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"เริ่มต้นเมื่อวางบนแท่นชาร์จ"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"หากต้องการควบคุมสิ่งที่จะเกิดขึ้นเมื่อโทรศัพท์วางอยู่บนแท่นชาร์จและ/หรืออยู่ในโหมดสลีป ให้เิปิด Dreams เอาไว้"</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"เริ่ม Dream ทันที"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Dream เมื่อใด"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="title_font_size" msgid="4405544325522105222">"ขนาดอักษร"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"ขนาดตัวอักษร"</string>
@@ -1583,6 +1585,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"ขนาดหน้าต่างภาพเคลื่อนไหว"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"อัตราการสลับภาพเคลื่อนไหว"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"ความเร็วตามผู้สร้างกำหนด"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"จำลองจอแสดงผลที่สอง"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"แอปพลิเคชัน"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"ไม่เก็บกิจกรรม"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"ล้างทุกกิจกรรมทันทีที่ผู้ใช้ออกไป"</string>
@@ -1709,8 +1712,7 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"ปิดใช้งานแล้ว"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"อนุญาต"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"บังคับใช้งาน"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
-    <skip />
+    <string name="user_settings_title" msgid="6151874007858148344">"ผู้ใช้"</string>
     <string name="user_list_title" msgid="2152311434413878709">"ผู้ใช้"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"เพิ่มผู้ใช้"</string>
     <string name="user_details_title" msgid="3037625632127241370">"แก้ไขรายละเอียด"</string>
