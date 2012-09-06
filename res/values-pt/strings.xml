@@ -602,7 +602,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Pesquisando…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Renomear dispositivo"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Dispositivos pareados"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Grupos lembrados"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Não foi possível conectar."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Falha ao renomear dispositivo."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Desconectar?"</string>
@@ -610,8 +609,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Se você se desconectar, sua conexão com <xliff:g id="PEER_NAME">%1$s</xliff:g> e <xliff:g id="PEER_COUNT">%2$s</xliff:g> outros dispositivos serão encerrados."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Cancelar convite?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Deseja cancelar o convite para se conectar com <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Excluir o grupo?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Deseja excluir o grupo <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Wi-Fi portátil"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Ativando o ponto de acesso..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Desativando o ponto de acesso..."</string>
@@ -684,16 +681,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Plano de fundo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecionar plano de fundo de"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Sonho"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Quando encaixado ou suspenso e carregando"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Ou"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Quando suspenso e carregando"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Quando encaixado"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Quando encaixado ou em suspensão e carregamento"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Quando em suspensão e carregamento"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Quando encaixado"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Desativada"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Para controlar o que acontece quando o telefone está encaixado e/ou suspenso, ative o Dreams."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Começar a sonhar agora"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Quando sonhar"</string>
-    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Sonho selecionado"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Quando ativar"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inativo"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Nunca"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Teste-o!"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Iniciar em suspensão"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Iniciar quando encaixado"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brilho automático"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamanho da fonte"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Tamanho da fonte"</string>
@@ -1585,7 +1583,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de anim. da janela"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Escala anim. de transição"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala de duração do Animator"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simular displays secund."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplicativos"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Não manter atividades"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destruir todas as atividades quando o usuário sair"</string>
@@ -1712,7 +1709,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desativado"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissivo"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Impondo"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Usuários"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"Usuários"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Adicionar usuário"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Editar detalhes"</string>

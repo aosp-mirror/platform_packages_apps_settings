@@ -602,7 +602,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Keresés..."</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Eszköz átnevezése"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Partnereszközök"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Megjegyzett csoportok"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"A kapcsolódás sikertelen."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Nem sikerült átnevezni az eszközt."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Megszakítja?"</string>
@@ -610,8 +609,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Ha bontja a kapcsolatot, akkor megszakad a kapcsolat a következőkkel: <xliff:g id="PEER_NAME">%1$s</xliff:g> és <xliff:g id="PEER_COUNT">%2$s</xliff:g> további eszköz."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Törli a meghívást?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Szeretné törölni a(z) <xliff:g id="PEER_NAME">%1$s</xliff:g> eszközhöz való csatlakozásra vonatkozó meghívást?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Törli a csoportot?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Szeretné törölni a(z) <xliff:g id="GROUP_NAME">%1$s</xliff:g> csoportot?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Hordozható Wi-Fi hotspot"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Hotspot bekapcsolása..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Hotspot kikapcsolása..."</string>
@@ -684,16 +681,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Háttérkép"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Válasszon tapétát innen:"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Álom"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Dokkolt vagy alvó állapotban, töltés közben"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Mindegy"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Alvó állapotban, töltés közben"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Dokkolt állapotban"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Dokkolt vagy alvó állapotban, amikor tölt."</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Alvó állapotban, amikor tölt"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Dokkolt állapotban"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Letiltva"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Az Álmok bekapcsolásával vezérelheti hogy mi történik, ha a telefon dokkolva és/vagy alvó állapotban van."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Alvás indítása most"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Mikor álmodjon"</string>
-    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Kiválasztott álom"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Mikor aktiválódjon"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> tétlenség után"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Soha"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Próbálja ki!"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Alvó üzemmódban induljon el."</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Dokkolt állapotban induljon el."</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatikus fényerő"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Betűméret"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Betűméret"</string>
@@ -1585,7 +1583,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Ablakanimáció mérete"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Áttűnési animáció mérete"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animáció léptéke"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Másodlagos kijelzők szim."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Alkalmazások"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Törölje a tevékenységeket"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Tevékenységek törlése, amint elhagyják azokat"</string>
@@ -1690,7 +1687,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Mindig bekapcsolt VPN"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Válasszon ki egy VPN-profilt, amelyhez mindig csatlakozni szeretne. A hálózati forgalom csak akkor lesz engedélyezve, ha ehhez a VPN-hez csatlakozik."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Egyik sem"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"A mindig bekapcsolt VPN-hez a szerver és a DNS IP-címe is szükséges."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"A mindig bekapcsolt VPN-hez a kiszolgáló és a DNS IP-címe is szükséges."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Nincs hálózati kapcsolat. Próbálja újra később."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Egy tanúsítvány hiányzik. Kérjük, módosítsa a profilt."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"Rendszer"</string>
@@ -1714,7 +1711,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Letiltva"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Engedélyezve"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Kényszerítve"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Felhasználók"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"Felhasználók"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Felhasználó hozzáad."</string>
     <string name="user_details_title" msgid="3037625632127241370">"Részletek szerkesztése"</string>
