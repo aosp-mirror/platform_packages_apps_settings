@@ -117,7 +117,7 @@ public class WifiApEnabler {
         if (enable && ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
                     (wifiState == WifiManager.WIFI_STATE_ENABLED))) {
             mWifiManager.setWifiEnabled(false);
-            Settings.Secure.putInt(cr, Settings.Secure.WIFI_SAVED_STATE, 1);
+            Settings.Global.putInt(cr, Settings.Global.WIFI_SAVED_STATE, 1);
         }
 
         if (mWifiManager.setWifiApEnabled(null, enable)) {
@@ -133,13 +133,13 @@ public class WifiApEnabler {
         if (!enable) {
             int wifiSavedState = 0;
             try {
-                wifiSavedState = Settings.Secure.getInt(cr, Settings.Secure.WIFI_SAVED_STATE);
+                wifiSavedState = Settings.Global.getInt(cr, Settings.Global.WIFI_SAVED_STATE);
             } catch (Settings.SettingNotFoundException e) {
                 ;
             }
             if (wifiSavedState == 1) {
                 mWifiManager.setWifiEnabled(true);
-                Settings.Secure.putInt(cr, Settings.Secure.WIFI_SAVED_STATE, 0);
+                Settings.Global.putInt(cr, Settings.Global.WIFI_SAVED_STATE, 0);
             }
         }
     }
