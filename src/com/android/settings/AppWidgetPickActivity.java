@@ -129,12 +129,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
         }
 
         if (LOGD) Log.d(TAG, "Using " + customInfo.size() + " custom items");
-        // We don't filter out any widgets.
-        int categoryFilter = AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN |
-                AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD;
-        // We don't require any features.
-        int featuresFilter = AppWidgetProviderInfo.WIDGET_FEATURES_NONE;
-        putAppWidgetItems(customInfo, customExtras, items, categoryFilter, featuresFilter);
+        putAppWidgetItems(customInfo, customExtras, items, 0, 0, true);
     }
     
     /**
@@ -172,7 +167,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
      */
     void putAppWidgetItems(List<AppWidgetProviderInfo> appWidgets,
             List<Bundle> customExtras, List<PickAdapter.Item> items, int categoryFilter,
-            int featuresFilter) {
+            int featuresFilter, boolean ignoreFilters) {
         if (appWidgets == null) return;
         final int size = appWidgets.size();
         for (int i = 0; i < size; i++) {
@@ -199,12 +194,12 @@ public class AppWidgetPickActivity extends ActivityPicker {
             }
 
             // We remove any widgets whose category isn't included in the filter
-            if ((info.widgetCategory & categoryFilter) == 0) {
+            if (!ignoreFilters && (info.widgetCategory & categoryFilter) == 0) {
                 continue;
             }
 
             // We remove any widgets who don't have all the features in the features filter
-            if ((info.widgetFeatures & featuresFilter) != featuresFilter) {
+            if (!ignoreFilters && (info.widgetFeatures & featuresFilter) != featuresFilter) {
                 continue;
             }
 
@@ -219,9 +214,12 @@ public class AppWidgetPickActivity extends ActivityPicker {
      */
     @Override
     protected List<PickAdapter.Item> getItems() {
+        final Intent intent = getIntent();
+        boolean sortCustomAppWidgets =
+                intent.getBooleanExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, true);
+
         List<PickAdapter.Item> items = new ArrayList<PickAdapter.Item>();
 
-        final Intent intent = getIntent();
         int categoryFilter = AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN;
         if (intent.getExtras().containsKey(AppWidgetManager.EXTRA_CATEGORY_FILTER)) {
             categoryFilter = intent.getExtras().getInt(AppWidgetManager.EXTRA_CATEGORY_FILTER);
@@ -234,16 +232,23 @@ public class AppWidgetPickActivity extends ActivityPicker {
         }
 
         putInstalledAppWidgets(items, categoryFilter, featuresFilter);
-        putCustomAppWidgets(items);
-        
-        // Sort all items together by label
-        Collections.sort(items, new Comparator<PickAdapter.Item>() {
-                Collator mCollator = Collator.getInstance();
-                public int compare(PickAdapter.Item lhs, PickAdapter.Item rhs) {
-                    return mCollator.compare(lhs.label, rhs.label);
-                }
-            });
 
+        // Sort all items together by label
+        if (sortCustomAppWidgets) {
+            putCustomAppWidgets(items);
+        }
+        Collections.sort(items, new Comparator<PickAdapter.Item>() {
+            Collator mCollator = Collator.getInstance();
+
+            public int compare(PickAdapter.Item lhs, PickAdapter.Item rhs) {
+                return mCollator.compare(lhs.label, rhs.label);
+            }
+        });
+        if (!sortCustomAppWidgets) {
+            List<PickAdapter.Item> customItems = new ArrayList<PickAdapter.Item>();
+            putCustomAppWidgets(customItems);
+            items.addAll(0, customItems);
+        }
         return items;
     }
 
@@ -252,7 +257,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
      */
     void putInstalledAppWidgets(List<PickAdapter.Item> items, int categoryFilter, int featuresFilter) {
         List<AppWidgetProviderInfo> installed = mAppWidgetManager.getInstalledProviders();
-        putAppWidgetItems(installed, null, items, categoryFilter, featuresFilter);
+        putAppWidgetItems(installed, null, items, categoryFilter, featuresFilter, false);
     }
 
     /**
