@@ -316,8 +316,8 @@ public class DevelopmentSettings extends PreferenceFragment
         }
 
         final ContentResolver cr = getActivity().getContentResolver();
-        mLastEnabledState = Settings.Secure.getInt(cr,
-                Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+        mLastEnabledState = Settings.Global.getInt(cr,
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
         mEnabledSwitch.setChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
 
@@ -326,8 +326,8 @@ public class DevelopmentSettings extends PreferenceFragment
             // settings that are enabled.  This is an invalid state.  Switch
             // to debug settings being enabled, so the user knows there is
             // stuff enabled and can turn it all off if they want.
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 1);
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
             mLastEnabledState = true;
             setPrefsEnabledState(mLastEnabledState);
         }
@@ -342,12 +342,12 @@ public class DevelopmentSettings extends PreferenceFragment
         final Context context = getActivity();
         final ContentResolver cr = context.getContentResolver();
         mHaveDebugSettings = false;
-        updateCheckBox(mEnableAdb, Settings.Secure.getInt(cr,
-                Settings.Secure.ADB_ENABLED, 0) != 0);
+        updateCheckBox(mEnableAdb, Settings.Global.getInt(cr,
+                Settings.Global.ADB_ENABLED, 0) != 0);
         updateCheckBox(mBugreportInPower, Settings.Secure.getInt(cr,
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
-        updateCheckBox(mKeepScreenOn, Settings.System.getInt(cr,
-                Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
+        updateCheckBox(mKeepScreenOn, Settings.Global.getInt(cr,
+                Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateCheckBox(mEnforceReadExternal, isPermissionEnforced(READ_EXTERNAL_STORAGE));
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
@@ -815,8 +815,8 @@ public class DevelopmentSettings extends PreferenceFragment
                     mEnableDialog.setOnDismissListener(this);
                 } else {
                     resetDangerousOptions();
-                    Settings.Secure.putInt(getActivity().getContentResolver(),
-                            Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 0);
+                    Settings.Global.putInt(getActivity().getContentResolver(),
+                            Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
                     mLastEnabledState = isChecked;
                     setPrefsEnabledState(mLastEnabledState);
                 }
@@ -857,16 +857,16 @@ public class DevelopmentSettings extends PreferenceFragment
                         .show();
                 mAdbDialog.setOnDismissListener(this);
             } else {
-                Settings.Secure.putInt(getActivity().getContentResolver(),
-                        Settings.Secure.ADB_ENABLED, 0);
+                Settings.Global.putInt(getActivity().getContentResolver(),
+                        Settings.Global.ADB_ENABLED, 0);
             }
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.BUGREPORT_IN_POWER_MENU, 
                     mBugreportInPower.isChecked() ? 1 : 0);
         } else if (preference == mKeepScreenOn) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STAY_ON_WHILE_PLUGGED_IN, 
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                     mKeepScreenOn.isChecked() ? 
                     (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
         } else if (preference == mEnforceReadExternal) {
@@ -958,8 +958,8 @@ public class DevelopmentSettings extends PreferenceFragment
         if (dialog == mAdbDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 mDialogClicked = true;
-                Settings.Secure.putInt(getActivity().getContentResolver(),
-                        Settings.Secure.ADB_ENABLED, 1);
+                Settings.Global.putInt(getActivity().getContentResolver(),
+                        Settings.Global.ADB_ENABLED, 1);
             } else {
                 // Reset the toggle
                 mEnableAdb.setChecked(false);
@@ -967,8 +967,8 @@ public class DevelopmentSettings extends PreferenceFragment
         } else if (dialog == mEnableDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 mDialogClicked = true;
-                Settings.Secure.putInt(getActivity().getContentResolver(),
-                        Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 1);
+                Settings.Global.putInt(getActivity().getContentResolver(),
+                        Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
                 mLastEnabledState = true;
                 setPrefsEnabledState(mLastEnabledState);
             } else {
