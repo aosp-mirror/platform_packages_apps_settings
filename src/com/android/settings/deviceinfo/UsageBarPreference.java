@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import com.android.settings.R;
+import com.google.common.collect.Lists;
 
 import android.content.Context;
 import android.preference.Preference;
@@ -25,6 +26,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Creates a percentage bar chart inside a preference.
@@ -32,7 +35,7 @@ import java.util.Collection;
 public class UsageBarPreference extends Preference {
     private PercentageBarChart mChart = null;
 
-    private final Collection<PercentageBarChart.Entry> mEntries = new ArrayList<PercentageBarChart.Entry>();
+    private final List<PercentageBarChart.Entry> mEntries = Lists.newArrayList();
 
     public UsageBarPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -49,8 +52,9 @@ public class UsageBarPreference extends Preference {
         setLayoutResource(R.layout.preference_memoryusage);
     }
 
-    public void addEntry(float percentage, int color) {
-        mEntries.add(PercentageBarChart.createEntry(percentage, color));
+    public void addEntry(int order, float percentage, int color) {
+        mEntries.add(PercentageBarChart.createEntry(order, percentage, color));
+        Collections.sort(mEntries);
     }
 
     @Override
@@ -58,7 +62,6 @@ public class UsageBarPreference extends Preference {
         super.onBindView(view);
 
         mChart = (PercentageBarChart) view.findViewById(R.id.percentage_bar_chart);
-
         mChart.setEntries(mEntries);
     }
 

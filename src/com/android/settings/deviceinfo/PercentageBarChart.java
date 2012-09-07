@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -26,10 +24,13 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.settings.R;
+
 import java.util.Collection;
 
 /**
- * 
+ * Draws a horizontal bar chart with colored slices, each represented by
+ * {@link Entry}.
  */
 public class PercentageBarChart extends View {
     private final Paint mEmptyPaint = new Paint();
@@ -38,13 +39,20 @@ public class PercentageBarChart extends View {
 
     private int mMinTickWidth = 1;
 
-    public static class Entry {
+    public static class Entry implements Comparable<Entry> {
+        public final int order;
         public final float percentage;
         public final Paint paint;
 
-        protected Entry(float percentage, Paint paint) {
+        protected Entry(int order, float percentage, Paint paint) {
+            this.order = order;
             this.percentage = percentage;
             this.paint = paint;
+        }
+
+        @Override
+        public int compareTo(Entry another) {
+            return order - another.order;
         }
     }
 
@@ -139,12 +147,11 @@ public class PercentageBarChart extends View {
      * @param percentage the total width that
      * @param color the color to draw the entry
      */
-    public static Entry createEntry(float percentage, int color) {
+    public static Entry createEntry(int order, float percentage, int color) {
         final Paint p = new Paint();
         p.setColor(color);
         p.setStyle(Paint.Style.FILL);
-
-        return new Entry(percentage, p);
+        return new Entry(order, percentage, p);
     }
 
     public void setEntries(Collection<Entry> entries) {
