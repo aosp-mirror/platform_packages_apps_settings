@@ -202,4 +202,14 @@
 
     </PreferenceCategory>
 
+        <PreferenceCategory android:key="debug_accessibility_category"
+            android:title="@string/debug_accessibility_category">
+
+        <CheckBoxPreference
+            android:key="accessibility_display_magnification_auto_update"
+            android:title="@string/display_magnification_auto_update"
+            android:summary="@string/display_magnification_auto_update_summary"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

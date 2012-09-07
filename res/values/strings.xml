@@ -2976,30 +2976,52 @@
     <string name="accessibility_settings">Accessibility</string>
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
-
     <!--  Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
     <string name="accessibility_services_title">Services</string>
-
     <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
     <string name="accessibility_system_title">System</string>
+    <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_title">Screen magnification</string>
+    <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_summary">
+        When screen magnification is on, you can:\n
+        \n
+        Temporary zoom-in: Triple-tap &amp; hold.\n
+        Toggle permanent zoom state: Triple-tap &amp; release.\n
+        \n
+        Adjust zoomed area: Triple-tap &amp; hold to zoom, then drag your finger across the screen.\n
+        Pan when zoomed-in: Drag two or more fingers across the screen.\n
+        \n
+        Adjust zoom level when zoomed-out: Triple-tap &amp; hold to zoom, then drag one or more fingers.\n
+        Adjust zoom level when zoomed-in: Pinch with two or more fingers.\n
+    </string>
+
     <!-- Title for the accessibility preference to enable large text. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_large_text_title">Large text</string>
+    <string name="accessibility_toggle_large_text_preference_title">Large text</string>
+    <!-- Title for the accessibility preference to enable screen magnification. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_screen_magnification_preference_title">Screen magnification</string>
+    <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
+        update screen magnification</string>
+    <!-- Summary for the accessibility preference to auto update screen magnification. [CHAR LIMIT=50] -->
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary">Update
+        screen magnification on app transitions</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
-    <string name="accessibility_power_button_ends_call_title">Power button ends call</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
     <!-- Title for the accessibility preference to speak passwords. [CHAR LIMIT=35] -->
-    <string name="accessibility_speak_password_title">Speak passwords</string>
+    <string name="accessibility_toggle_speak_password_preference_title">Speak passwords</string>
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
-    <string name="accessibility_long_press_timeout_title">Touch &amp; hold delay</string>
+    <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
     <!-- Title for accessibility preference to install accessibility scripts from Google. [CHAR LIMIT=35] -->
-    <string name="accessibility_script_injection_title">Enhance web accessibility</string>
+    <string name="accessibility_toggle_script_injection_preference_title">Enhance web accessibility</string>
 
     <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
 
-    <!-- Summary for the enabled state of an accessiblity serivce. [CHAR LIMIT=10] -->
-    <string name="accessibility_service_state_on">On</string>
-    <!-- Summary for the disabled state of an accessiblity serivce. [CHAR LIMIT=10] -->
-    <string name="accessibility_service_state_off">Off</string>
+    <!-- Summary for the enabled state of an accessiblity feature. [CHAR LIMIT=10] -->
+    <string name="accessibility_feature_state_on">On</string>
+    <!-- Summary for the disabled state of an accessiblity feature. [CHAR LIMIT=10] -->
+    <string name="accessibility_feature_state_off">Off</string>
 
     <!-- Summary for the allowed state of script injection. [CHAR LIMIT=15] -->
     <string name="accessibility_script_injection_allowed">Allowed</string>
@@ -3854,6 +3876,15 @@
     <!-- UI debug setting: show all ANRs summary [CHAR LIMIT=50] -->
     <string name="show_all_anrs_summary">Show App Not Responding dialog
         for background apps</string>
+
+    <!-- Preference category for accessibility debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_accessibility_category">Accessibility</string>
+
+    <!-- Accessibility debug setting: automatically update magnification state [CHAR LIMIT=50] -->
+    <string name="display_magnification_auto_update">Auto update magnification</string>
+    <!-- Accessibility debug setting: automatically update magnification state summary [CHAR LIMIT=100] -->
+    <string name="display_magnification_auto_update_summary">Zoom out on rotation or activity
+        start and pan to popped up windows.</string>
 
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
