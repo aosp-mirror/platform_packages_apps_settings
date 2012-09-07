@@ -107,13 +107,12 @@ public class Settings extends PreferenceActivity
             R.id.application_settings,
             R.id.personal_section,
             R.id.security_settings,
+            R.id.user_settings,
             R.id.account_settings,
             R.id.account_add,
             R.id.system_section,
             R.id.about_settings
     };
-
-    private boolean mEnableUserManagement = false;
 
     // TODO: Update Call Settings based on airplane mode state.
 
@@ -127,11 +126,6 @@ public class Settings extends PreferenceActivity
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().getBooleanExtra(EXTRA_CLEAR_UI_OPTIONS, false)) {
             getWindow().setUiOptions(0);
-        }
-
-        if (android.provider.Settings.Secure.getInt(getContentResolver(), "multiuser_enabled", -1)
-                > 0) {
-            mEnableUserManagement = true;
         }
 
         mAuthenticatorHelper = new AuthenticatorHelper();
@@ -418,8 +412,7 @@ public class Settings extends PreferenceActivity
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.user_settings) {
-                if (!mEnableUserManagement
-                        || !UserHandle.MU_ENABLED || UserHandle.myUserId() != 0
+                if (!UserHandle.MU_ENABLED
                         || !getResources().getBoolean(R.bool.enable_user_management)
                         || Utils.isMonkeyRunning()) {
                     target.remove(header);

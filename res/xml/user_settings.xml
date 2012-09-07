@@ -18,6 +18,19 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/user_settings_title">
 
+    <Preference
+            android:key="user_me"
+            android:summary="@string/user_owner" />
+    <EditTextPreference
+            android:key="user_nickname"
+            android:title="@string/user_nickname"
+            android:icon="@drawable/empty_icon" />
+    <Preference
+            android:key="user_owner_info"
+            android:title="@string/owner_info_settings_title"
+            android:icon="@drawable/empty_icon"
+            android:fragment="com.android.settings.OwnerInfoSettings" />
+
     <PreferenceCategory
             android:key="user_list"
             android:title="@string/user_list_title">
