@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import com.android.internal.telephony.ISms;
+import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
@@ -66,12 +68,15 @@ import java.util.List;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AppSecurityPermissions;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -96,6 +101,7 @@ public class InstalledAppDetails extends Fragment
     private IUsbManager mUsbManager;
     private AppWidgetManager mAppWidgetManager;
     private DevicePolicyManager mDpm;
+    private ISms mSmsManager;
     private ApplicationsState mState;
     private ApplicationsState.Session mSession;
     private ApplicationsState.AppEntry mAppEntry;
@@ -371,6 +377,7 @@ public class InstalledAppDetails extends Fragment
         mUsbManager = IUsbManager.Stub.asInterface(b);
         mAppWidgetManager = AppWidgetManager.getInstance(getActivity());
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mSmsManager = ISms.Stub.asInterface(ServiceManager.getService("isms"));
 
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
     }
@@ -595,8 +602,43 @@ public class InstalledAppDetails extends Fragment
         // Security permissions section
         LinearLayout permsView = (LinearLayout) mRootView.findViewById(R.id.permissions_section);
         AppSecurityPermissions asp = new AppSecurityPermissions(getActivity(), packageName);
-        if (asp.getPermissionCount() > 0) {
+        int premiumSmsPermission = getPremiumSmsPermission(packageName);
+        // Premium SMS permission implies the app also has SEND_SMS permission, so the original
+        // application permissions list doesn't have to be shown/hidden separately. The premium
+        // SMS subsection should only be visible if the app has tried to send to a premium SMS.
+        if (asp.getPermissionCount() > 0
+                || premiumSmsPermission != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN) {
             permsView.setVisibility(View.VISIBLE);
+        } else {
+            permsView.setVisibility(View.GONE);
+        }
+        // Premium SMS permission subsection
+        TextView securityBillingDesc = (TextView) permsView.findViewById(
+                R.id.security_settings_billing_desc);
+        LinearLayout securityBillingList = (LinearLayout) permsView.findViewById(
+                R.id.security_settings_billing_list);
+        if (premiumSmsPermission != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN) {
+            // Show the premium SMS permission selector
+            securityBillingDesc.setVisibility(View.VISIBLE);
+            securityBillingList.setVisibility(View.VISIBLE);
+            Spinner spinner = (Spinner) permsView.findViewById(
+                    R.id.security_settings_premium_sms_list);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                    R.array.security_settings_premium_sms_values,
+                    android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            // List items are in the same order as SmsUsageMonitor constants, offset by 1.
+            spinner.setSelection(premiumSmsPermission - 1);
+            spinner.setOnItemSelectedListener(new PremiumSmsSelectionListener(
+                    packageName, mSmsManager));
+        } else {
+            // Hide the premium SMS permission selector
+            securityBillingDesc.setVisibility(View.GONE);
+            securityBillingList.setVisibility(View.GONE);
+        }
+        // App permissions subsection
+        if (asp.getPermissionCount() > 0) {
             // Make the security sections header visible
             LinearLayout securityList = (LinearLayout) permsView.findViewById(
                     R.id.security_settings_list);
@@ -642,8 +684,6 @@ public class InstalledAppDetails extends Fragment
                             mPackageInfo.applicationInfo.loadLabel(mPm), appListStr));
                 }
             }
-        } else {
-            permsView.setVisibility(View.GONE);
         }
         
         checkForceStop();
@@ -651,6 +691,42 @@ public class InstalledAppDetails extends Fragment
         refreshButtons();
         refreshSizeInfo();
         return true;
+    }
+
+    private static class PremiumSmsSelectionListener implements AdapterView.OnItemSelectedListener {
+        private final String mPackageName;
+        private final ISms mSmsManager;
+
+        PremiumSmsSelectionListener(String packageName, ISms smsManager) {
+            mPackageName = packageName;
+            mSmsManager = smsManager;
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position,
+                long id) {
+            if (position >= 0 && position < 3) {
+                Log.d(TAG, "Selected premium SMS policy " + position);
+                setPremiumSmsPermission(mPackageName, (position + 1));
+            } else {
+                Log.e(TAG, "Error: unknown premium SMS policy " + position);
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Ignored
+        }
+
+        private void setPremiumSmsPermission(String packageName, int permission) {
+            try {
+                if (mSmsManager != null) {
+                    mSmsManager.setPremiumSmsPermission(packageName, permission);
+                }
+            } catch (RemoteException ex) {
+                // ignored
+            }
+        }
     }
     
     private void resetLaunchDefaultsUi(TextView title, TextView autoLaunchView) {
@@ -1025,6 +1101,17 @@ public class InstalledAppDetails extends Fragment
         } catch (android.os.RemoteException ex) {
             mNotificationSwitch.setChecked(!enabled); // revert
         }
+    }
+
+    private int getPremiumSmsPermission(String packageName) {
+        try {
+            if (mSmsManager != null) {
+                return mSmsManager.getPremiumSmsPermission(packageName);
+            }
+        } catch (RemoteException ex) {
+            // ignored
+        }
+        return SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
     }
 
     /*
