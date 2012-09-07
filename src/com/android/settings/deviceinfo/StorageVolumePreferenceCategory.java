@@ -166,16 +166,20 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         }
     };
 
-    public StorageVolumePreferenceCategory(Context context, Resources resources,
-            StorageVolume storageVolume, StorageManager storageManager, boolean isPrimary) {
+    public StorageVolumePreferenceCategory(
+            Context context, StorageVolume volume, StorageManager storageManager) {
         super(context);
-        mResources = resources;
-        mStorageVolume = storageVolume;
+        mResources = context.getResources();
+
+        mStorageVolume = volume;
         mStorageManager = storageManager;
-        setTitle(storageVolume != null ? storageVolume.getDescription(context)
-                : resources.getText(R.string.internal_storage));
-        mLocalMeasure = StorageMeasurement.getInstance(
-                context, storageVolume, new UserHandle(UserHandle.USER_CURRENT), isPrimary);
+
+        final boolean isPrimary = volume != null ? volume.isPrimary() : false;
+
+        setTitle(volume != null ? volume.getDescription(context)
+                : context.getText(R.string.internal_storage));
+
+        mLocalMeasure = StorageMeasurement.getInstance(context, volume, UserHandle.CURRENT);
         mAllMeasures.add(mLocalMeasure);
 
         // Cannot format emulated storage
@@ -233,7 +237,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
                 final String key = buildUserKey(user);
 
                 final StorageMeasurement measure = StorageMeasurement.getInstance(
-                        context, mStorageVolume, user, true);
+                        context, mStorageVolume, user);
                 measure.setIncludeAppCodeSize(false);
                 mAllMeasures.add(measure);
 
@@ -448,6 +452,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         mUsbFunction = usbFunction;
         measure();
     }
+
     public void onMediaScannerFinished() {
         measure();
     }

@@ -115,12 +115,11 @@ public class StorageMeasurement {
         public void updateExact(StorageMeasurement meas, Bundle bundle);
     }
 
-    private StorageMeasurement(
-            Context context, StorageVolume storageVolume, UserHandle user, boolean isPrimary) {
-        mStorageVolume = storageVolume;
+    private StorageMeasurement(Context context, StorageVolume volume, UserHandle user) {
+        mStorageVolume = volume;
         mUser = Preconditions.checkNotNull(user);
-        mIsInternal = storageVolume == null;
-        mIsPrimary = !mIsInternal && isPrimary;
+        mIsInternal = volume == null;
+        mIsPrimary = volume != null ? volume.isPrimary() : false;
 
         // Start the thread that will measure the disk usage.
         final HandlerThread handlerThread = new HandlerThread("MemoryMeasurement");
@@ -139,14 +138,14 @@ public class StorageMeasurement {
      * @param isPrimary true when this storage volume is the primary volume
      */
     public static StorageMeasurement getInstance(
-            Context context, StorageVolume storageVolume, UserHandle user, boolean isPrimary) {
+            Context context, StorageVolume storageVolume, UserHandle user) {
         final Pair<StorageVolume, UserHandle> key = new Pair<StorageVolume, UserHandle>(
                 storageVolume, user);
         synchronized (sInstances) {
             StorageMeasurement value = sInstances.get(key);
             if (value == null) {
                 value = new StorageMeasurement(
-                        context.getApplicationContext(), storageVolume, user, isPrimary);
+                        context.getApplicationContext(), storageVolume, user);
                 sInstances.put(key, value);
             }
             return value;

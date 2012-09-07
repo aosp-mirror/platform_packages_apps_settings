@@ -195,7 +195,7 @@ public class MiscFilesHandler extends ListActivity {
             final StorageVolume storageVolume = activity.getIntent().getParcelableExtra(
                     StorageVolume.EXTRA_STORAGE_VOLUME);
             StorageMeasurement mMeasurement = StorageMeasurement.getInstance(
-                    activity, storageVolume, new UserHandle(UserHandle.USER_CURRENT), false);
+                    activity, storageVolume, UserHandle.CURRENT);
             if (mMeasurement == null) return;
             mData = (ArrayList<StorageMeasurement.FileInfo>) mMeasurement.mFileInfoForMisc;
             if (mData != null) {
