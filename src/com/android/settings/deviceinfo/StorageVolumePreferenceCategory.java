@@ -43,6 +43,7 @@ import com.android.settings.deviceinfo.StorageMeasurement.MeasurementReceiver;
 import com.google.android.collect.Lists;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -65,10 +66,14 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     private Preference mFormatPreference;
     private Preference mStorageLow;
 
-    private final Resources mResources;
+    private final StorageVolume mVolume;
 
-    private final StorageVolume mStorageVolume;
+    private final boolean mIsEmulated;
+    private final boolean mIsPrimary;
+
+    private final Resources mResources;
     private final StorageManager mStorageManager;
+    private final UserManager mUserManager;
 
     /** Measurement for local user. */
     private StorageMeasurement mLocalMeasure;
@@ -76,7 +81,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     private List<StorageMeasurement> mAllMeasures = Lists.newArrayList();
 
     private boolean mAllowFormat;
-    private final boolean mMeasureUsers;
 
     private boolean mUsbConnected;
     private String mUsbFunction;
@@ -166,15 +170,17 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         }
     };
 
-    public StorageVolumePreferenceCategory(
-            Context context, StorageVolume volume, StorageManager storageManager) {
+    public StorageVolumePreferenceCategory(Context context, StorageVolume volume) {
         super(context);
+
+        mVolume = volume;
+
+        mIsPrimary = volume != null ? volume.isPrimary() : false;
+        mIsEmulated = volume != null ? volume.isEmulated() : false;
+
         mResources = context.getResources();
-
-        mStorageVolume = volume;
-        mStorageManager = storageManager;
-
-        final boolean isPrimary = volume != null ? volume.isPrimary() : false;
+        mStorageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
 
         setTitle(volume != null ? volume.getDescription(context)
                 : context.getText(R.string.internal_storage));
@@ -183,13 +189,11 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         mAllMeasures.add(mLocalMeasure);
 
         // Cannot format emulated storage
-        mAllowFormat = mStorageVolume != null && !mStorageVolume.isEmulated();
+        mAllowFormat = mVolume != null && !mVolume.isEmulated();
+
         // For now we are disabling reformatting secondary external storage
         // until some interoperability problems with MTP are fixed
-        if (!isPrimary) mAllowFormat = false;
-
-        // Measure other users when showing primary emulated storage
-        mMeasureUsers = (mStorageVolume != null && mStorageVolume.isEmulated()) && isPrimary;
+        if (!mIsPrimary) mAllowFormat = false;
     }
 
     private void addStorageItem(String key, int titleRes, int colorRes) {
@@ -203,41 +207,43 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     public void init() {
         final Context context = getContext();
 
+        final UserInfo currentUser;
+        try {
+            currentUser = ActivityManagerNative.getDefault().getCurrentUser();
+        } catch (RemoteException e) {
+            throw new RuntimeException("Failed to get current user");
+        }
+
+        final List<UserInfo> otherUsers = getUsersExcluding(currentUser);
+        final boolean measureUsers = mIsEmulated && mIsPrimary && otherUsers.size() > 0;
+
         mUsageBarPreference = new UsageBarPreference(context);
         mUsageBarPreference.setOrder(ORDER_USAGE_BAR);
         addPreference(mUsageBarPreference);
 
         addStorageItem(KEY_TOTAL_SIZE, R.string.memory_size, 0);
+        addStorageItem(KEY_AVAILABLE, R.string.memory_available, R.color.memory_avail);
+
+        if (measureUsers) {
+            addPreference(new PreferenceHeader(context, currentUser.name));
+        }
+
         addStorageItem(KEY_APPLICATIONS, R.string.memory_apps_usage, R.color.memory_apps_usage);
         addStorageItem(KEY_DCIM, R.string.memory_dcim_usage, R.color.memory_dcim);
         addStorageItem(KEY_MUSIC, R.string.memory_music_usage, R.color.memory_music);
         addStorageItem(KEY_DOWNLOADS, R.string.memory_downloads_usage, R.color.memory_downloads);
         addStorageItem(KEY_MISC, R.string.memory_media_misc_usage, R.color.memory_misc);
-        addStorageItem(KEY_AVAILABLE, R.string.memory_available, R.color.memory_avail);
 
-        if (mMeasureUsers) {
-            final UserManager userManager = (UserManager) context.getSystemService(
-                    Context.USER_SERVICE);
-
-            final UserInfo currentUser;
-            try {
-                currentUser = ActivityManagerNative.getDefault().getCurrentUser();
-            } catch (RemoteException e) {
-                throw new RuntimeException("Failed to get current user");
-            }
+        if (measureUsers) {
+            addPreference(new PreferenceHeader(context, R.string.storage_other_users));
 
             int count = 0;
-            for (UserInfo info : userManager.getUsers()) {
-                // Only measure other users
-                if (info.id == currentUser.id) {
-                    continue;
-                }
-
+            for (UserInfo info : otherUsers) {
                 final UserHandle user = new UserHandle(info.id);
                 final String key = buildUserKey(user);
 
                 final StorageMeasurement measure = StorageMeasurement.getInstance(
-                        context, mStorageVolume, user);
+                        context, mVolume, user);
                 measure.setIncludeAppCodeSize(false);
                 mAllMeasures.add(measure);
 
@@ -276,14 +282,14 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     }
 
     public StorageVolume getStorageVolume() {
-        return mStorageVolume;
+        return mVolume;
     }
 
     private void updatePreferencesFromState() {
         mMountTogglePreference.setEnabled(true);
 
-        String state = mStorageVolume != null
-                ? mStorageManager.getVolumeState(mStorageVolume.getPath())
+        String state = mVolume != null
+                ? mStorageManager.getVolumeState(mVolume.getPath())
                 : Environment.MEDIA_MOUNTED;
 
         String readOnly = "";
@@ -295,7 +301,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             }
         }
 
-        if ((mStorageVolume == null || !mStorageVolume.isRemovable())
+        if ((mVolume == null || !mVolume.isRemovable())
                 && !Environment.MEDIA_UNMOUNTED.equals(state)) {
             // This device has built-in storage that is not removable.
             // There is no reason for the user to unmount it.
@@ -354,7 +360,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         final long usedSize = totalSize - availSize;
 
         mUsageBarPreference.clear();
-        mUsageBarPreference.addEntry(usedSize / (float) totalSize, android.graphics.Color.GRAY);
+        mUsageBarPreference.addEntry(0, usedSize / (float) totalSize, android.graphics.Color.GRAY);
         mUsageBarPreference.commit();
         mShowingApprox = true;
 
@@ -373,7 +379,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         if (mLocalMeasure.isExternalSDCard()) {
             // TODO FIXME: external SD card will not report any size. Show used space in bar graph
             final long usedSize = totalSize - availSize;
-            mUsageBarPreference.addEntry(usedSize / (float) totalSize, android.graphics.Color.GRAY);
+            mUsageBarPreference.addEntry(
+                    0, usedSize / (float) totalSize, android.graphics.Color.GRAY);
         }
 
         updatePreference(appsSize, totalSize, KEY_APPLICATIONS);
@@ -415,13 +422,15 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         updatePreference(size, totalSize, category, true);
     }
 
-    private void updatePreference(long size, long totalSize, String category, boolean showBar) {
+    private void updatePreference(long size, long totalSize, String category, boolean addBar) {
         final StorageItemPreference pref = (StorageItemPreference) findPreference(category);
+
         if (pref != null) {
             if (size > 0) {
                 pref.setSummary(formatSize(size));
-                if (showBar) {
-                    mUsageBarPreference.addEntry(size / (float) totalSize, pref.getColor());
+                if (addBar) {
+                    final int order = pref.getOrder();
+                    mUsageBarPreference.addEntry(order, size / (float) totalSize, pref.getColor());
                 }
             } else {
                 removePreference(pref);
@@ -497,7 +506,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         if (pref == mFormatPreference) {
             intent = new Intent(Intent.ACTION_VIEW);
             intent.setClass(getContext(), com.android.settings.MediaFormat.class);
-            intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mStorageVolume);
+            intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mVolume);
         } else if (KEY_APPLICATIONS.equals(key)) {
             intent = new Intent(Intent.ACTION_MANAGE_PACKAGE_STORAGE);
             intent.setClass(getContext(),
@@ -517,10 +526,42 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             Context context = getContext().getApplicationContext();
             if (mLocalMeasure.getMiscSize() > 0) {
                 intent = new Intent(context, MiscFilesHandler.class);
-                intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mStorageVolume);
+                intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mVolume);
             }
         }
 
         return intent;
+    }
+
+    public static class PreferenceHeader extends Preference {
+        public PreferenceHeader(Context context, int titleRes) {
+            super(context, null, com.android.internal.R.attr.preferenceCategoryStyle);
+            setTitle(titleRes);
+        }
+
+        public PreferenceHeader(Context context, CharSequence title) {
+            super(context, null, com.android.internal.R.attr.preferenceCategoryStyle);
+            setTitle(title);
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return false;
+        }
+    }
+
+
+    /**
+     * Return list of other users, excluding the current user.
+     */
+    private List<UserInfo> getUsersExcluding(UserInfo excluding) {
+        final List<UserInfo> users = mUserManager.getUsers();
+        final Iterator<UserInfo> i = users.iterator();
+        while (i.hasNext()) {
+            if (i.next().id == excluding.id) {
+                i.remove();
+            }
+        }
+        return users;
     }
 }

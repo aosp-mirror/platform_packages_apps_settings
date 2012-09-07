@@ -101,8 +101,7 @@ public class Memory extends SettingsPreferenceFragment {
 
     private void addCategoryForVolume(StorageVolume volume) {
         final StorageVolumePreferenceCategory category = new StorageVolumePreferenceCategory(
-                getActivity(), volume, mStorageManager);
-        // TODO: if primary emulated storage, then insert split items
+                getActivity(), volume);
         mCategories.add(category);
         getPreferenceScreen().addPreference(category);
         category.init();
