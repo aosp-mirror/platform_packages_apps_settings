@@ -22,6 +22,7 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.provider.Settings;
@@ -75,7 +76,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         mPhoneStateReceiver.registerIntent();
         mCheckBoxPref.setOnPreferenceChangeListener(this);
         mContext.getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.AIRPLANE_MODE_ON), true,
+                Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON), true,
                 mAirplaneModeObserver);
     }
     
@@ -86,13 +87,13 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
     }
 
     public static boolean isAirplaneModeOn(Context context) {
-        return Settings.System.getInt(context.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+        return Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 
     private void setAirplaneModeOn(boolean enabling) {
         // Change the system setting
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 
                                 enabling ? 1 : 0);
         // Update the UI to reflect system setting
         mCheckBoxPref.setChecked(enabling);
@@ -100,7 +101,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         // Post the intent
         Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         intent.putExtra("state", enabling);
-        mContext.sendBroadcast(intent);
+        mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
     }
 
     /**

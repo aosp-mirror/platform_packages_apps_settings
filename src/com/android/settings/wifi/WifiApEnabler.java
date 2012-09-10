@@ -98,8 +98,8 @@ public class WifiApEnabler {
     }
 
     private void enableWifiCheckBox() {
-        boolean isAirplaneMode = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+        boolean isAirplaneMode = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
         if(!isAirplaneMode) {
             mCheckBox.setEnabled(true);
         } else {
