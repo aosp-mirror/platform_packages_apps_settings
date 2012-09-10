@@ -600,7 +600,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Buscando…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Cambiar nombre del dispositivo"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Otros dispositivos"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Grupos recordados"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"No se ha podido conectar."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Error al cambiar nombre del dispositivo"</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"¿Desconectar?"</string>
@@ -608,8 +607,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Si desconectas el dispositivo, finalizará la conexión con <xliff:g id="PEER_NAME">%1$s</xliff:g> y con otros dispositivos de <xliff:g id="PEER_COUNT">%2$s</xliff:g>."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"¿Quieres cancelar la invitación?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"¿Quieres cancelar la invitación para establecer conexión con <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"¿Eliminar grupo?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"¿Quieres eliminar el grupo <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Zona Wi-Fi portátil"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Activando zona Wi-Fi en…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Desactivando zona Wi-Fi…"</string>
@@ -682,16 +679,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fondo de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Seleccionar fondo de pantalla de..."</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Dream"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Cuando el dispositivo esté conectado o inactivo y cargando"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Siempre"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Cuando el dispositivo esté inactivo y cargando"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Cuando el dispositivo esté conectado"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Cuando el dispositivo esté conectado o inactivo y cargando"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Cuando el dispositivo esté inactivo y cargando"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Cuando el dispositivo esté conectado"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Inhabilitado"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Para controlar lo que ocurre cuando el teléfono está conectado o inactivo, debes activar Android Dreams."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Iniciar Android Dreams"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Cuándo activar Android Dreams"</string>
-    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Módulo dream seleccionado"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Cuándo activar"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Nunca"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Probar"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Iniciar cuando se suspenda el dispositivo"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Iniciar cuando el dispositivo esté conectado"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Tamaño de fuente"</string>
@@ -1398,34 +1396,6 @@
     <string name="gadget_title" msgid="5519037532720577836">"Control de energía"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Actualización de la configuración de la conexión Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Actualización de la configuración de la conexión Bluetooth"</string>
-    <!-- no translation found for gadget_state_template (5156935629902649932) -->
-    <skip />
-    <!-- no translation found for gadget_state_on (6909119593004937688) -->
-    <skip />
-    <!-- no translation found for gadget_state_off (5220212352953066317) -->
-    <skip />
-    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
-    <skip />
-    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
-    <skip />
-    <!-- no translation found for gadget_wifi (5960290421313061434) -->
-    <skip />
-    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
-    <skip />
-    <!-- no translation found for gadget_gps (1558173602059236567) -->
-    <skip />
-    <!-- no translation found for gadget_sync (858895763714222152) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
-    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Almacenamiento de credenciales"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde almacenamiento"</string>
@@ -1611,7 +1581,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de animación ventana"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Escala de transición-animación"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala duración animador"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simular pantallas secundarias"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplicaciones"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Destruir actividades"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destruir actividades cuando el usuario deje de usarlas"</string>
@@ -1738,7 +1707,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Inhabilitado"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permisivo"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Obligatorio"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Usuarios"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"Usuarios"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Añadir usuario"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Editar detalles"</string>

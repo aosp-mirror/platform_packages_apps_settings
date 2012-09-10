@@ -600,7 +600,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Wyszukiwanie…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Zmień nazwę urządzenia"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Urządzenia Peer"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Zapamiętane grupy"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Nie udało się połączyć."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Zmiana nazwy urządzenia nie powiodła się."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Rozłączyć?"</string>
@@ -608,8 +607,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Po rozłączeniu Twoje połączenie z <xliff:g id="PEER_NAME">%1$s</xliff:g> i <xliff:g id="PEER_COUNT">%2$s</xliff:g> innymi urządzeniami zostanie zakończone."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Anulować zaproszenie?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Czy chcesz anulować zaproszenie do połączenia z <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Usunąć grupę?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Czy chcesz usunąć grupę <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Przenośny punkt Wi-Fi"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Włączanie punktu dostępu…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Wyłączanie punktu dostępu…"</string>
@@ -682,16 +679,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Tapeta"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Wybierz tapetę z..."</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Sen"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Podczas zadokowania lub uśpienia i ładowania"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Albo"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Podczas uśpienia i ładowania"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Podczas zadokowania"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Gdy zadokowane lub uśpione i podczas ładowania"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Gdy uśpione i podczas ładowania"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Gdy zadokowane"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Wyłączone"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Aby kontrolować to, co dzieje się, gdy telefon jest zadokowany lub w trybie uśpienia, włącz Sny."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Zacznij śnić"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Kiedy włączyć sny"</string>
-    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
-    <skip />
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Wybrany sen"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Włączenie wygaszacza"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> bezczynności"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Nigdy"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Wypróbuj"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Uruchamiaj, gdy uśpione"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Uruchamiaj, gdy zadokowane"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatyczna"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Rozmiar czcionki"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Rozmiar czcionki"</string>
@@ -919,8 +917,8 @@
     <string name="location_street_level" product="tablet" msgid="1669562198260860802">"Zezwalaj aplikacjom na określanie mojej lokalizacji przez GPS tabletu"</string>
     <string name="location_street_level" product="default" msgid="4617445745492014203">"Zezwalaj aplikacjom na określanie mojej lokalizacji przez GPS telefonu"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Użyj wspomaganego systemu GPS"</string>
-    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Użyj serwera do wspomagania systemu GPS (odznacz, aby zmniejszyć ruch sieciowy)"</string>
-    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Użyj serwera do wspomagania systemu GPS (odznacz, aby zwiększyć wydajność systemu GPS)"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Użyj serwera do wspomagania systemu GPS (usuń zaznaczenie, aby zmniejszyć ruch sieciowy)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Użyj serwera do wspomagania systemu GPS (usuń zaznaczenie, aby zwiększyć wydajność systemu GPS)"</string>
     <string name="use_location_title" msgid="5206937465504979977">"Lokalizacja w sieci"</string>
     <string name="use_location_summary" msgid="3978805802386162520">"Zezwalaj Google na użycie danych o mojej lokalizacji, aby poprawić wyszukiwanie i inne usługi"</string>
     <string name="location_access_title" msgid="7064108942964081243">"Dostęp do mojej lokalizacji"</string>
@@ -1015,7 +1013,8 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Dane w pamięci USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"Karta SD"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Odinstaluj"</string>
-    <string name="install_text" msgid="884360662922471113">"Zainstaluj"</string>
+    <!-- no translation found for install_text (884360662922471113) -->
+    <skip />
     <string name="disable_text" msgid="6544054052049395202">"Dezaktywuj"</string>
     <string name="enable_text" msgid="9217362512327828987">"Włącz"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Wyczyść dane"</string>
@@ -1184,7 +1183,7 @@
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Informacje o telefonie"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Informacje o baterii"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Szybkie uruchamianie"</string>
-    <string name="quick_launch_summary" msgid="8101133819188001190">"Ustaw skróty klawiszowe, aby uruchamiać aplikacje."</string>
+    <string name="quick_launch_summary" msgid="8101133819188001190">"Ustaw skróty klawiaturowe, aby uruchamiać aplikacje."</string>
     <string name="quick_launch_assign_application" msgid="6240064079456617501">"Przypisz aplikację"</string>
     <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"Brak skrótu"</string>
     <string name="quick_launch_shortcut" msgid="5090405067413522300">"Szukaj + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
@@ -1398,34 +1397,6 @@
     <string name="gadget_title" msgid="5519037532720577836">"Zarządzanie energią"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Aktualizowanie ustawień Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Aktualizowanie ustawień Bluetooth"</string>
-    <!-- no translation found for gadget_state_template (5156935629902649932) -->
-    <skip />
-    <!-- no translation found for gadget_state_on (6909119593004937688) -->
-    <skip />
-    <!-- no translation found for gadget_state_off (5220212352953066317) -->
-    <skip />
-    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
-    <skip />
-    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
-    <skip />
-    <!-- no translation found for gadget_wifi (5960290421313061434) -->
-    <skip />
-    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
-    <skip />
-    <!-- no translation found for gadget_gps (1558173602059236567) -->
-    <skip />
-    <!-- no translation found for gadget_sync (858895763714222152) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
-    <skip />
-    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
-    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Magazyn danych logowania"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Zainstaluj z nośnika"</string>
@@ -1611,7 +1582,6 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animacji okna"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Skala animacji przejścia"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Skala długości animacji"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Symuluj ekrany dodatkowe"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplikacje"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Nie zachowuj działań"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Przerwij każde działanie, gdy użytkownik je porzuci"</string>
@@ -1713,10 +1683,14 @@
     <string name="vpn_create" msgid="5628219087569761496">"Dodaj profil VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Edytuj profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Usuń profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Zawsze włączona sieć VPN"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Wybierz profil VPN, który będzie zawsze podłączony. Ruch w sieci będzie dopuszczalny tylko podczas połączenia z tą siecią VPN."</string>
-    <string name="vpn_lockdown_none" msgid="9214462857336483711">"Brak"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"W przypadku zawsze włączonej sieci VPN wymagany jest adres IP zarówno dla serwera, jak i dla DNS."</string>
+    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
+    <skip />
     <string name="vpn_no_network" msgid="3050233675132726155">"Brak połączenia sieciowego. Spróbuj ponownie później."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Brak certyfikatu. Edytuj profil."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"System"</string>
@@ -1738,7 +1712,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Wyłączony"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Pobłażliwy"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Restrykcyjny"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Użytkownicy"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"Użytkownicy"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj użytkownika"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Edytuj szczegóły"</string>
