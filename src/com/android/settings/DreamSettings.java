@@ -303,6 +303,8 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
             ImageView settingsButton = (ImageView) row.findViewById(android.R.id.button2);
             settingsButton.setVisibility(showSettings ? View.VISIBLE : View.INVISIBLE);
+            settingsButton.setAlpha(dreamInfo.isActive ? 1f : 0.7f);
+            settingsButton.setEnabled(dreamInfo.isActive);
             settingsButton.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {
