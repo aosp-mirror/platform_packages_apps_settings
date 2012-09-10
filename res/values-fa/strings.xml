@@ -600,6 +600,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"در حال جستجو…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"تغییر نام دستگاه"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"دستگاه‌های مشابه"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"گروه‌های به خاطر سپرده شده"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"متصل نشد."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"تغییر نام دستگاه انجام نشد."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"اتصال قطع شود؟"</string>
@@ -607,6 +608,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"اگر اتصال شما قطع شود، اتصال شما با <xliff:g id="PEER_NAME">%1$s</xliff:g> و سایر دستگاه‌های <xliff:g id="PEER_COUNT">%2$s</xliff:g> به پایان خواهد رسید."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"دعوتنامه لغو شود؟"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"آیا می‌خواهید دعوت برای ارتباط با <xliff:g id="PEER_NAME">%1$s</xliff:g> را لغو کنید؟"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"گروه حذف شود؟"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"آیا می‌خواهید گروه <xliff:g id="GROUP_NAME">%1$s</xliff:g> را حذف کنید؟"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"نقطه اتصال Wi-Fi قابل حمل"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"در حال روشن کردن نقطه اتصال…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"در حال خاموش کردن نقطه اتصال…"</string>
@@ -679,17 +682,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"تصویر زمینه"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"انتخاب تصویر زمینه از"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"رؤیا"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"هنگام قرار گرفتن در جایگاه یا خواب و شارژ شدن"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"هنگام خواب و شارژ شدن"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"هنگام قرار گرفتن در جایگاه"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"هنگام قرار گرفتن در جایگاه یا خواب و شارژ شدن"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"هرکدام از این موارد"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"هنگام خواب و شارژ شدن"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"هنگامی که در جایگاه قرار می‌گیرد"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"غیرفعال شد"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"رؤیای انتخابی"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"چه وقت فعال شود"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"پس از <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> عدم استفاده"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"هرگز"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"امتحان کنید!"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"شروع در زمان خواب"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"شروع هنگام قرار گرفتن در جایگاه"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"برای کنترل آنچه زمان قرار دادن تلفن در جایگاه و یا زمان خواب رفتن آن روی می‌دهد، Dreams را روشن کنید."</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"شروع خواب اکنون"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"زمان خواب"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"روشنایی خودکار"</string>
     <string name="title_font_size" msgid="4405544325522105222">"اندازهٔ قلم"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"اندازهٔ قلم"</string>
@@ -1396,6 +1398,34 @@
     <string name="gadget_title" msgid="5519037532720577836">"کنترل نیرو"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"به‌روزرسانی تنظیمات Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"به‌روزرسانی تنظیمات بلوتوث"</string>
+    <!-- no translation found for gadget_state_template (5156935629902649932) -->
+    <skip />
+    <!-- no translation found for gadget_state_on (6909119593004937688) -->
+    <skip />
+    <!-- no translation found for gadget_state_off (5220212352953066317) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
+    <skip />
+    <!-- no translation found for gadget_wifi (5960290421313061434) -->
+    <skip />
+    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
+    <skip />
+    <!-- no translation found for gadget_gps (1558173602059236567) -->
+    <skip />
+    <!-- no translation found for gadget_sync (858895763714222152) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
+    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"ذخیره اطلاعات کاربری"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"نصب از حافظه"</string>
@@ -1581,6 +1611,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"مقیاس انیمیشن انتقال"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"مقیاس طول مدت انیماتور"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"شبیه‌سازی نمایش‌های ثانویه"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"برنامه‌ها"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"فعالیت‌ها را ادامه ندهید"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"از بین بردن هر فعالیت به محض خروج کاربر از آن"</string>
@@ -1707,8 +1738,7 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"غیرفعال"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"مجاز"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"در حال اعمال"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
-    <skip />
+    <string name="user_settings_title" msgid="6151874007858148344">"کاربران"</string>
     <string name="user_list_title" msgid="2152311434413878709">"کاربران"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"افزودن کاربر"</string>
     <string name="user_details_title" msgid="3037625632127241370">"ویرایش جزئیات"</string>

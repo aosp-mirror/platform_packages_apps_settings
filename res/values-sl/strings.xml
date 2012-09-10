@@ -600,6 +600,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Iskanje …"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Preimenovanje naprave"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Enakovredne naprave"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Shranjene skupine"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Povezava ni mogoča."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Naprave ni bilo mogoče preimenovati."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Želite prekiniti povezavo?"</string>
@@ -607,6 +608,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Če prekinete povezavo, bo prekinjena povezava z napravo <xliff:g id="PEER_NAME">%1$s</xliff:g> in še toliko drugimi: <xliff:g id="PEER_COUNT">%2$s</xliff:g>."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Želite preklicati povabilo?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Ali želite preklicati povabilo za povezavo z napravo <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Izbris skupine?"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Ali želite izbrisati skupino <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Prenosna brezžična dostopna točka"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Vklop dostopne točke  ..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Izklop dostopne točke ..."</string>
@@ -679,17 +682,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Ozadje"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Izberite ozadje iz"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Sanje"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"V stojalu ali v stanju pripravljenosti in se polni"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"V stanju pripravljenosti in se polni"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"V stojalu"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"V stojalu ali v stanju pripravljenosti in med polnjenjem"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Eno ali drugo"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"V stanju pripravljenosti in med polnjenjem"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"V stojalu"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Onemogočeno"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"Izbrane sanje"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Kdaj aktivirati"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nedejavnosti"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Nikoli"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"Poskusite!"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Zaženi v stanju pripravljenosti"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Zaženi, ko je v stojalu"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Če želite nadzorovati, kaj se dogaja, ko je telefon v stojalu in/ali v stanju pripravljenosti, vklopite »Sanje«."</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Začni sanjati"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Kdaj pride do preklopa v sanje"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"Samodejna svetlost"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Velikost pisave"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Velikost pisave"</string>
@@ -1396,6 +1398,34 @@
     <string name="gadget_title" msgid="5519037532720577836">"Nadzor porabe"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Posodabljanje brezžične nastavitve"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Posodabljanje nastavitev Bluetooth"</string>
+    <!-- no translation found for gadget_state_template (5156935629902649932) -->
+    <skip />
+    <!-- no translation found for gadget_state_on (6909119593004937688) -->
+    <skip />
+    <!-- no translation found for gadget_state_off (5220212352953066317) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
+    <skip />
+    <!-- no translation found for gadget_wifi (5960290421313061434) -->
+    <skip />
+    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
+    <skip />
+    <!-- no translation found for gadget_gps (1558173602059236567) -->
+    <skip />
+    <!-- no translation found for gadget_sync (858895763714222152) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
+    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Shramba poverilnic"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Namesti iz shrambe"</string>
@@ -1581,6 +1611,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Merilo animacije okna"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Merilo animacije prehoda"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Lestvica trajanja animacije"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simul. sekund. prikazov."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Programi"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Ne obdrži dejavnosti"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Uniči vsako dejavnost, ko uporabnik preneha z njo"</string>
@@ -1707,8 +1738,7 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Onemogočeno"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Dopuščajoče"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Uveljavljajoče"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
-    <skip />
+    <string name="user_settings_title" msgid="6151874007858148344">"Uporabniki"</string>
     <string name="user_list_title" msgid="2152311434413878709">"Uporabniki"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj uporabnika"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Urejanje podrobnosti"</string>

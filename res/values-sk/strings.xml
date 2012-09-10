@@ -600,6 +600,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Prebieha vyhľadávanie..."</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Premenovať zariadenie"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Partnerské zariadenia"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Zapamätané skupiny"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Nepodarilo sa pripojiť."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Premenovanie zariadenia zlyhalo."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Odpojiť?"</string>
@@ -607,6 +608,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Ak sa odpojíte, ukončíte spojenie so zariadením <xliff:g id="PEER_NAME">%1$s</xliff:g> a ďalšími zariadeniami (<xliff:g id="PEER_COUNT">%2$s</xliff:g>)."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Zrušiť pozvánku?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Chcete zrušiť pozvánku na spojenie s klientom <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Odstrániť skupinu?"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Chcete odstrániť skupinu <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Prenosný prístupový bod Wi-Fi"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Prebieha zapínanie hotspotu..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Prebieha vypínanie hotspotu..."</string>
@@ -679,17 +682,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Tapeta"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vybrať tapetu z"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Sen"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Pri vložení do doku alebo pri nabíjaní v režime spánku"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Pri nabíjaní v režime spánku"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Pri vložení do doku"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Pri vložení do doku alebo pri nabíjaní v režime spánku"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Oboje"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Pri nabíjaní a v režime spánku"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Počas prítomnosti zariadenia v doku"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Zakázané"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"Vybratý sen"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Čas aktivácie"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Po nečinnosti <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Nikdy"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"Vyskúšať"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Spustiť v režime spánku"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Spustiť pri vložení do doku"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Ak chcete nastaviť, čo sa stane, keď sa telefón vloží do doku alebo je v režime spánku, zapnite funkciu Sny."</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Začať snívať"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Kedy snívať"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatický jas"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veľkosť písma"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Veľkosť písma"</string>
@@ -1396,6 +1398,34 @@
     <string name="gadget_title" msgid="5519037532720577836">"Ovládanie napájania"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Prebieha aktualizácia nastavenia Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Prebieha aktualizácia nastavenia Bluetooth"</string>
+    <!-- no translation found for gadget_state_template (5156935629902649932) -->
+    <skip />
+    <!-- no translation found for gadget_state_on (6909119593004937688) -->
+    <skip />
+    <!-- no translation found for gadget_state_off (5220212352953066317) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
+    <skip />
+    <!-- no translation found for gadget_wifi (5960290421313061434) -->
+    <skip />
+    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
+    <skip />
+    <!-- no translation found for gadget_gps (1558173602059236567) -->
+    <skip />
+    <!-- no translation found for gadget_sync (858895763714222152) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
+    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Ukladací priestor poverení"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Inštalovať z uklad. priestoru"</string>
@@ -1581,6 +1611,7 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Mierka animácie okna"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Mierka animácie premeny"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Mierka dĺžky animácie"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simulovať sek. displeje"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplikácie"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Neuchovávať aktivity"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Zničiť každú aktivitu, hneď ako ju používateľ ukončí"</string>
@@ -1683,7 +1714,7 @@
     <string name="vpn_menu_edit" msgid="408275284159243490">"Upraviť profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Odstrániť profil"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Vždy zapnutá sieť VPN"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Vyberte profil siete VPN, ku ktorej chcete byť vždy pripojení. Prenos údajov bude povolený len pri pripojení k tejto sieti VPN."</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Vyberte profil siete VPN, ku ktorej chcete mať vždy pripojenie. Prenos údajov bude povolený len pri pripojení k tejto sieti VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Žiadna"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Vždy zapnutá sieť VPN vyžaduje adresu IP pre server aj DNS."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Nie je k dispozícii žiadne sieťové pripojenie. Skúste to znova neskôr."</string>
@@ -1707,8 +1738,7 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Zakázané"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Mierne"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Prísne"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
-    <skip />
+    <string name="user_settings_title" msgid="6151874007858148344">"Používatelia"</string>
     <string name="user_list_title" msgid="2152311434413878709">"Používatelia"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pridať používateľa"</string>
     <string name="user_details_title" msgid="3037625632127241370">"Upraviť podrobnosti"</string>
