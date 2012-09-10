@@ -85,8 +85,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             return true;
         }
         // Here we use the same logic in onCreate().
-        String toggleable = Settings.System.getString(context.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        String toggleable = Settings.Global.getString(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
         return toggleable != null && toggleable.contains(type);
     }
 
@@ -109,8 +109,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         getPreferenceScreen().removePreference(nsd);
         //mNsdEnabler = new NsdEnabler(activity, nsd);
 
-        String toggleable = Settings.System.getString(activity.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        String toggleable = Settings.Global.getString(activity.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
         //enable/disable wimax depending on the value in config.xml
         boolean isWimaxEnabled = this.getResources().getBoolean(
@@ -120,24 +120,24 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
             if (ps != null) root.removePreference(ps);
         } else {
-            if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIMAX )
+            if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIMAX )
                     && isWimaxEnabled) {
                 Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
                 ps.setDependency(KEY_TOGGLE_AIRPLANE);
             }
         }
         // Manually set dependencies for Wifi when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIFI)) {
+        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
         // Manually set dependencies for Bluetooth when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.System.RADIO_BLUETOOTH)) {
+        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_BLUETOOTH)) {
             // No bluetooth-dependent items in the list. Code kept in case one is added later.
         }
 
         // Manually set dependencies for NFC when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.System.RADIO_NFC)) {
+        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
             findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
