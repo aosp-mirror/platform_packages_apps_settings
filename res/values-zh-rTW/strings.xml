@@ -111,7 +111,7 @@
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"偵測時限設定"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"設定裝置可供偵測的開放時間"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"鎖定語音撥號"</string>
-    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"螢幕鎖定時不要使用藍芽撥號"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"螢幕鎖定時不要使用藍牙撥號"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"藍牙裝置"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"裝置名稱"</string>
     <string name="bluetooth_device_details" msgid="4594773497930028085">"裝置設定"</string>
@@ -153,7 +153,7 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"平板電腦上的某個應用程式要求將平板電腦設成開放其他藍牙裝置搜尋，您要允許這項要求嗎？"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"您手機中的某個應用程式要求開啟藍牙功能，讓其他藍牙裝置可在這段時間內搜尋到您的手機。您要允許這項要求嗎？"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"藍牙開啟中…"</string>
-    <string name="bluetooth_turning_off" msgid="2337747302892025192">"正在關閉藍牙…"</string>
+    <string name="bluetooth_turning_off" msgid="2337747302892025192">"正在關閉藍牙..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"自動連線"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"藍牙連線要求"</string>
     <string name="bluetooth_connection_notif_message" msgid="3687933246423942977">"輕觸即可連線至「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
@@ -600,8 +600,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"搜尋中..."</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"重新命名裝置"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"對端裝置"</string>
-    <!-- no translation found for wifi_p2p_remembered_groups (3847022927914068230) -->
-    <skip />
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"已記住的群組"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"無法連線。"</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"無法重新命名裝置。"</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"中斷連線？"</string>
@@ -609,10 +608,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"如果您中斷連線，即會結束您與「<xliff:g id="PEER_NAME">%1$s</xliff:g>」和其他 <xliff:g id="PEER_COUNT">%2$s</xliff:g> 個裝置的連線。"</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"取消邀請？"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"您要取消 <xliff:g id="PEER_NAME">%1$s</xliff:g> 的連線邀請？"</string>
-    <!-- no translation found for wifi_p2p_delete_group_title (8049872630241986374) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_delete_group_message (5521624017163200215) -->
-    <skip />
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"刪除群組？"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"您要刪除群組「<xliff:g id="GROUP_NAME">%1$s</xliff:g>」嗎？"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"可攜式 Wi-Fi 無線基地台"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"正在開啟無線基地台…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"正在關閉無線基地台…"</string>
@@ -685,17 +682,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"桌布"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"選擇桌布來源"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Dream"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"安置於座架上、休眠及充電時"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"休眠及充電時"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"安置於座架上時"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"安置於座架上或休眠及充電時"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"皆可"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"休眠及充電時"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"安置於座架上時"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"已停用"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"選取的 Dream"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"啟動時間"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"永遠不要"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"試試看！"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"休眠時啟動"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"安置於座架上時啟動"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"如要控制手機安置於座架上和/或休眠時的設定，請開啟 Dream。"</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"開始啟用 Dream"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Dream 的開啟時間"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"字型大小"</string>
@@ -811,6 +807,8 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"相機 (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"讓您使用相機軟體傳輸相片，並在任何不支援 MTP 的電腦上傳輸檔案"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"安裝檔案傳輸工具"</string>
+    <!-- no translation found for storage_other_users (808708845102611856) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"電池狀態"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電池存量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -999,6 +997,10 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"允許安裝來源不明的應用程式"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"來歷不明的應用程式可能會損害您的平板電腦及個人資料，如因使用這些應用程式導致平板電腦受損或資料遺失，請自行負責。"</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"來歷不明的應用程式可能會損害您的手機及個人資料。如因使用這些應用程式導致手機受損或資料遺失，請自行負責。"</string>
+    <!-- no translation found for verify_applications (3532112158501736577) -->
+    <skip />
+    <!-- no translation found for verify_applications_summary (6737505521913263792) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"啟用更多設定選項"</string>
     <string name="application_info_label" msgid="5736524913065714880">"應用程式資訊"</string>
@@ -1019,8 +1021,7 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB 儲存裝置資料"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD 卡"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"解除安裝"</string>
-    <!-- no translation found for install_text (884360662922471113) -->
-    <skip />
+    <string name="install_text" msgid="884360662922471113">"安裝"</string>
     <string name="disable_text" msgid="6544054052049395202">"停用"</string>
     <string name="enable_text" msgid="9217362512327828987">"啟用"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"清除資料"</string>
@@ -1257,14 +1258,31 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"協助工具設定"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"服務"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"系統"</string>
-    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"大字體"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"電源鍵可結束通話"</string>
-    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"說出密碼"</string>
-    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"輕觸並按住的延遲時間"</string>
-    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"強化網頁協助工具"</string>
+    <!-- no translation found for accessibility_screen_magnification_title (159538947700130120) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary (3349112911447101716) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_large_text_preference_title (6307247527580207161) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_screen_magnification_preference_title (2472285215737820469) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_screen_magnification_auto_update_preference_title (7218498768415430963) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_screen_magnification_auto_update_preference_summary (4392059334816220155) -->
+    <skip />
+    <!-- no translation found for accessibility_power_button_ends_call_prerefence_title (6673851944175874235) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_speak_password_preference_title (5986628515113204844) -->
+    <skip />
+    <!-- no translation found for accessibility_long_press_timeout_preference_title (6708467774619266508) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_script_injection_preference_title (7950932054266694403) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"設定"</string>
-    <string name="accessibility_service_state_on" msgid="8791337599927106344">"開啟"</string>
-    <string name="accessibility_service_state_off" msgid="2458594460762620776">"關閉"</string>
+    <!-- no translation found for accessibility_feature_state_on (2864292320042673806) -->
+    <skip />
+    <!-- no translation found for accessibility_feature_state_off (4172584906487070211) -->
+    <skip />
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"允許"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"不允許"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"允許"</string>
@@ -1403,6 +1421,34 @@
     <string name="gadget_title" msgid="5519037532720577836">"電源控制"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"正在更新 Wi-Fi 設定"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"正在更新藍牙設定"</string>
+    <!-- no translation found for gadget_state_template (5156935629902649932) -->
+    <skip />
+    <!-- no translation found for gadget_state_on (6909119593004937688) -->
+    <skip />
+    <!-- no translation found for gadget_state_off (5220212352953066317) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
+    <skip />
+    <!-- no translation found for gadget_wifi (5960290421313061434) -->
+    <skip />
+    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
+    <skip />
+    <!-- no translation found for gadget_gps (1558173602059236567) -->
+    <skip />
+    <!-- no translation found for gadget_sync (858895763714222152) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
+    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"憑證儲存空間"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"從儲存裝置安裝"</string>
@@ -1588,12 +1634,19 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"視窗動畫比例"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"轉場動畫比例"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 影片長度比例"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"模擬次要顯示器"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"應用程式"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"不要保留活動"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"使用者離開活動後立刻刪除所有活動內容"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"背景處理程序限制"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"顯示所有無回應程式"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"為背景應用程式顯示「應用程式無回應」對話方塊"</string>
+    <!-- no translation found for debug_accessibility_category (3417643359072054409) -->
+    <skip />
+    <!-- no translation found for display_magnification_auto_update (4236067240516003515) -->
+    <skip />
+    <!-- no translation found for display_magnification_auto_update_summary (5022668486882658025) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"資料用量"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"資料用量週期"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"漫遊服務"</string>
@@ -1689,14 +1742,10 @@
     <string name="vpn_create" msgid="5628219087569761496">"新增 VPN 設定檔"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"編輯設定檔"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"刪除設定檔"</string>
-    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
-    <skip />
-    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
-    <skip />
-    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
-    <skip />
-    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
-    <skip />
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"永久連線的 VPN"</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"選取要永久連線的 VPN 設定檔。只在連線到這個 VPN 時才允許網路流量。"</string>
+    <string name="vpn_lockdown_none" msgid="9214462857336483711">"無"</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"永久連線的 VPN 需要同時具備伺服器和 DNS 的 IP 位址。"</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"沒有網路連線，請稍後再試。"</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"找不到憑證，請編輯設定檔。"</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"系統"</string>
@@ -1718,7 +1767,7 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"已停用"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"許可"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"執行中"</string>
-    <string name="user_settings_title" msgid="5189224330534906766">"使用者與限制"</string>
+    <string name="user_settings_title" msgid="6151874007858148344">"使用者"</string>
     <string name="user_list_title" msgid="2152311434413878709">"使用者"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"新增使用者"</string>
     <string name="user_details_title" msgid="3037625632127241370">"編輯詳細資訊"</string>
