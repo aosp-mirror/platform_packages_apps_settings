@@ -25,6 +25,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.Vibrator;
@@ -43,6 +46,7 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Gesture lock pattern settings.
@@ -71,6 +75,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
+    private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     DevicePolicyManager mDPM;
 
@@ -228,9 +233,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
         // Package verification
-        mToggleVerifyApps = (CheckBoxPreference) findPreference(
-            KEY_TOGGLE_VERIFY_APPLICATIONS);
-        mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
+        mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
+        if (isVerifierInstalled()) {
+            mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
+        } else {
+            mToggleVerifyApps.setChecked(false);
+            mToggleVerifyApps.setEnabled(false);
+        }
 
         return root;
     }
@@ -249,6 +258,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private boolean isVerifyAppsEnabled() {
         return Settings.Global.getInt(getContentResolver(),
                                       Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) > 0;
+    }
+
+    private boolean isVerifierInstalled() {
+        final PackageManager pm = getPackageManager();
+        final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
+        verification.setType(PACKAGE_MIME_TYPE);
+        verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(verification, 0);
+        return (receivers.size() > 0) ? true : false;
     }
 
     private void warnAppInstallation() {
