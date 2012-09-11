@@ -172,9 +172,11 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            MenuItem addUserItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
-            addUserItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
-                    | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            if (mUserManager.getMaxSupportedUsers() > mUserManager.getUsers().size()) {
+                MenuItem addUserItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
+                addUserItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                        | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            }
         } else {
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, 0, R.string.user_remove_user_menu);
             removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
@@ -338,6 +340,7 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setIcon(R.drawable.ic_user);
             mUserListCategory.addPreference(pref);
         }
+        getActivity().invalidateOptionsMenu();
     }
 
     /* TODO: Put this in an AsyncTask */
