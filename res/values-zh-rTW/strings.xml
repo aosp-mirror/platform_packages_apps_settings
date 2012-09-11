@@ -111,7 +111,7 @@
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"偵測時限設定"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"設定裝置可供偵測的開放時間"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"鎖定語音撥號"</string>
-    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"螢幕鎖定時不要使用藍芽撥號"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"螢幕鎖定時不要使用藍牙撥號"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"藍牙裝置"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"裝置名稱"</string>
     <string name="bluetooth_device_details" msgid="4594773497930028085">"裝置設定"</string>
@@ -600,8 +600,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"搜尋中..."</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"重新命名裝置"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"對端裝置"</string>
-    <!-- no translation found for wifi_p2p_remembered_groups (3847022927914068230) -->
-    <skip />
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"無法連線。"</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"無法重新命名裝置。"</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"中斷連線？"</string>
@@ -609,10 +607,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"如果您中斷連線，即會結束您與「<xliff:g id="PEER_NAME">%1$s</xliff:g>」和其他 <xliff:g id="PEER_COUNT">%2$s</xliff:g> 個裝置的連線。"</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"取消邀請？"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"您要取消 <xliff:g id="PEER_NAME">%1$s</xliff:g> 的連線邀請？"</string>
-    <!-- no translation found for wifi_p2p_delete_group_title (8049872630241986374) -->
-    <skip />
-    <!-- no translation found for wifi_p2p_delete_group_message (5521624017163200215) -->
-    <skip />
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"可攜式 Wi-Fi 無線基地台"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"正在開啟無線基地台…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"正在關閉無線基地台…"</string>
@@ -1019,8 +1013,7 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB 儲存裝置資料"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD 卡"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"解除安裝"</string>
-    <!-- no translation found for install_text (884360662922471113) -->
-    <skip />
+    <string name="install_text" msgid="884360662922471113">"安裝"</string>
     <string name="disable_text" msgid="6544054052049395202">"停用"</string>
     <string name="enable_text" msgid="9217362512327828987">"啟用"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"清除資料"</string>
@@ -1689,14 +1682,10 @@
     <string name="vpn_create" msgid="5628219087569761496">"新增 VPN 設定檔"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"編輯設定檔"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"刪除設定檔"</string>
-    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
-    <skip />
-    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
-    <skip />
-    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
-    <skip />
-    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
-    <skip />
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"永久連線的 VPN"</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"選取要永久連線的 VPN 設定檔。只在連線至這個 VPN 時才允許網路流量。"</string>
+    <string name="vpn_lockdown_none" msgid="9214462857336483711">"無"</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"永久連線的 VPN 需要同時具備伺服器和 DNS 的 IP 位址。"</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"沒有網路連線，請稍後再試。"</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"找不到憑證，請編輯設定檔。"</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"系統"</string>
@@ -1718,7 +1707,8 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"已停用"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"許可"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"執行中"</string>
-    <string name="user_settings_title" msgid="5189224330534906766">"使用者與限制"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
     <string name="user_list_title" msgid="2152311434413878709">"使用者"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"新增使用者"</string>
     <string name="user_details_title" msgid="3037625632127241370">"編輯詳細資訊"</string>

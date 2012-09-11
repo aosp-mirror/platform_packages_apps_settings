@@ -38,6 +38,7 @@ public class AndroidBeam extends Fragment
     private ImageView mImageView;
     private NfcAdapter mNfcAdapter;
     private Switch mActionBarSwitch;
+    private CharSequence mOldActivityTitle;
 
 
     @Override
@@ -49,7 +50,6 @@ public class AndroidBeam extends Fragment
 
         if (activity instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
                 final int padding = activity.getResources().getDimensionPixelSize(
                         R.dimen.action_bar_switch_padding);
                 mActionBarSwitch.setPadding(0, 0, padding, 0);
@@ -59,8 +59,10 @@ public class AndroidBeam extends Fragment
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         Gravity.CENTER_VERTICAL | Gravity.END));
-                activity.getActionBar().setTitle(R.string.android_beam_settings_title);
-            }
+                if (!preferenceActivity.onIsMultiPane() || preferenceActivity.onIsHidingHeaders()) {
+                    mOldActivityTitle = getActivity().getTitle();
+                    activity.getActionBar().setTitle(R.string.android_beam_settings_title);
+                }
         }
 
         mActionBarSwitch.setOnCheckedChangeListener(this);
@@ -75,6 +77,14 @@ public class AndroidBeam extends Fragment
         mView = inflater.inflate(R.layout.android_beam, container, false);
         initView(mView);
         return mView;
+    }
+    @Override
+    public void onDestroyView() {
+        getActivity().getActionBar().setCustomView(null);
+        if (mOldActivityTitle != null) {
+            getActivity().getActionBar().setTitle(mOldActivityTitle);
+        }
+        super.onDestroyView();
     }
 
     private void initView(View view) {
