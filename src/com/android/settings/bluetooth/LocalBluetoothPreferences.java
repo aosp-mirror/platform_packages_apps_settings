@@ -64,15 +64,15 @@ final class LocalBluetoothPreferences {
             return false;
         }
 
+        // If Bluetooth Settings is visible
+        if (manager.isForegroundActivity()) {
+            return true;
+        }
+
         // If in appliance mode, do not show dialog in foreground.
         if ((context.getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_TYPE_APPLIANCE) == Configuration.UI_MODE_TYPE_APPLIANCE) {
             return false;
-        }
-
-        // If Bluetooth Settings is visible
-        if (manager.isForegroundActivity()) {
-            return true;
         }
 
         long currentTimeMillis = System.currentTimeMillis();
