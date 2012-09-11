@@ -189,7 +189,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
      * @return the first line, if any.
      * @throws IOException if the file couldn't be read
      */
-    private String readLine(String filename) throws IOException {
+    private static String readLine(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename), 256);
         try {
             return reader.readLine();
@@ -198,37 +198,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         }
     }
 
-    private String getFormattedKernelVersion() {
-        String procVersionStr;
-
+    public static String getFormattedKernelVersion() {
         try {
-            procVersionStr = readLine(FILENAME_PROC_VERSION);
+            return formatKernelVersion(readLine(FILENAME_PROC_VERSION));
 
-            final String PROC_VERSION_REGEX =
-                "\\w+\\s+" + /* ignore: Linux */
-                "\\w+\\s+" + /* ignore: version */
-                "([^\\s]+)\\s+" + /* group 1: 2.6.22-omap1 */
-                "\\(([^\\s@]+(?:@[^\\s.]+)?)[^)]*\\)\\s+" + /* group 2: (xxxxxx@xxxxx.constant) */
-                "\\((?:[^(]*\\([^)]*\\))?[^)]*\\)\\s+" + /* ignore: (gcc ..) */
-                "([^\\s]+)\\s+" + /* group 3: #26 */
-                "(?:PREEMPT\\s+)?" + /* ignore: PREEMPT (optional) */
-                "(.+)"; /* group 4: date */
-
-            Pattern p = Pattern.compile(PROC_VERSION_REGEX);
-            Matcher m = p.matcher(procVersionStr);
-
-            if (!m.matches()) {
-                Log.e(LOG_TAG, "Regex did not match on /proc/version: " + procVersionStr);
-                return "Unavailable";
-            } else if (m.groupCount() < 4) {
-                Log.e(LOG_TAG, "Regex match on /proc/version only returned " + m.groupCount()
-                        + " groups");
-                return "Unavailable";
-            } else {
-                return (new StringBuilder(m.group(1)).append("\n").append(
-                        m.group(2)).append(" ").append(m.group(3)).append("\n")
-                        .append(m.group(4))).toString();
-            }
         } catch (IOException e) {
             Log.e(LOG_TAG,
                 "IO Exception when getting kernel version for Device Info screen",
@@ -236,6 +209,34 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
             return "Unavailable";
         }
+    }
+
+    public static String formatKernelVersion(String rawKernelVersion) {
+        // Example (see tests for more):
+        // Linux version 3.0.31-g6fb96c9 (android-build@xxx.xxx.xxx.xxx.com) \
+        //     (gcc version 4.6.x-xxx 20120106 (prerelease) (GCC) ) #1 SMP PREEMPT \
+        //     Thu Jun 28 11:02:39 PDT 2012
+
+        final String PROC_VERSION_REGEX =
+            "Linux version (\\S+) " + /* group 1: "3.0.31-g6fb96c9" */
+            "\\((\\S+?)\\) " +        /* group 2: "x@y.com" (kernel builder) */
+            "(?:\\(gcc.+? \\)) " +    /* ignore: GCC version information */
+            "(#\\d+) " +              /* group 3: "#1" */
+            "(?:.*?)?" +              /* ignore: optional SMP, PREEMPT, and any CONFIG_FLAGS */
+            "((Sun|Mon|Tue|Wed|Thu|Fri|Sat).+)"; /* group 4: "Thu Jun 28 11:02:39 PDT 2012" */
+
+        Matcher m = Pattern.compile(PROC_VERSION_REGEX).matcher(rawKernelVersion);
+        if (!m.matches()) {
+            Log.e(LOG_TAG, "Regex did not match on /proc/version: " + rawKernelVersion);
+            return "Unavailable";
+        } else if (m.groupCount() < 4) {
+            Log.e(LOG_TAG, "Regex match on /proc/version only returned " + m.groupCount()
+                    + " groups");
+            return "Unavailable";
+        }
+        return m.group(1) + "\n" +                 // 3.0.31-g6fb96c9
+            m.group(2) + " " + m.group(3) + "\n" + // x@y.com #1
+            m.group(4);                            // Thu Jun 28 11:02:39 PDT 2012
     }
 
     /**
