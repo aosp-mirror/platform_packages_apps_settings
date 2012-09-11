@@ -39,7 +39,8 @@ import android.widget.SeekBar;
 public class BrightnessPreference extends SeekBarDialogPreference implements
         SeekBar.OnSeekBarChangeListener, CheckBox.OnCheckedChangeListener {
     // If true, enables the use of the screen auto-brightness adjustment setting.
-    private static final boolean USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT = false;
+    private static final boolean USE_SCREEN_AUTO_BRIGHTNESS_ADJUSTMENT =
+            PowerManager.useScreenAutoBrightnessAdjustmentFeature();
 
     private final int mScreenBrightnessMinimum;
     private final int mScreenBrightnessMaximum;
