@@ -16,52 +16,170 @@
 
 package com.android.settings.users;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.UserInfo;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Profile;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class UserSettings extends SettingsPreferenceFragment
-        implements OnPreferenceClickListener {
+        implements OnPreferenceClickListener, OnClickListener, DialogInterface.OnDismissListener,
+        Preference.OnPreferenceChangeListener {
 
+    private static final String TAG = "UserSettings";
+
+    private static final String KEY_USER_NICKNAME = "user_nickname";
     private static final String KEY_USER_LIST = "user_list";
+    private static final String KEY_USER_ME = "user_me";
+
     private static final int MENU_ADD_USER = Menu.FIRST;
+    private static final int MENU_REMOVE_USER = Menu.FIRST+1;
+
+    private static final int DIALOG_CONFIRM_REMOVE = 1;
+    private static final int DIALOG_ADD_USER = 2;
+
+    private static final int MESSAGE_UPDATE_LIST = 1;
+
+    private static final int[] USER_DRAWABLES = {
+        R.drawable.ic_user,
+        R.drawable.ic_user_cyan,
+        R.drawable.ic_user_green,
+        R.drawable.ic_user_purple,
+        R.drawable.ic_user_red,
+        R.drawable.ic_user_yellow
+    };
+
+    private static final String[] CONTACT_PROJECTION = new String[] {
+        Phone._ID,                      // 0
+        Phone.DISPLAY_NAME,             // 1
+    };
 
     private PreferenceGroup mUserListCategory;
+    private Preference mMePreference;
+    private EditTextPreference mNicknamePreference;
+    private int mRemovingUserId = -1;
+    private boolean mAddingUser;
+
+    private final Object mUserLock = new Object();
+    private UserManager mUserManager;
+    private boolean mProfileChanged;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+            case MESSAGE_UPDATE_LIST:
+                updateUserList();
+                break;
+            }
+        }
+    };
+
+    private ContentObserver mProfileObserver = new ContentObserver(mHandler) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mProfileChanged = true;
+        }
+    };
+
+    private BroadcastReceiver mUserChangeReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+        }
+    };
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
-
+        mMePreference = (Preference) findPreference(KEY_USER_ME);
+        mMePreference.setOnPreferenceClickListener(this);
+        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+            mMePreference.setSummary(null);
+        }
+        mNicknamePreference = (EditTextPreference) findPreference(KEY_USER_NICKNAME);
+        mNicknamePreference.setOnPreferenceChangeListener(this);
+        mNicknamePreference.setSummary(mUserManager.getUserInfo(UserHandle.myUserId()).name);
+        loadProfile(false);
         setHasOptionsMenu(true);
+        // Register to watch for profile changes
+        getActivity().getContentResolver().registerContentObserver(
+                ContactsContract.Profile.CONTENT_URI, false, mProfileObserver);
+        getActivity().registerReceiver(mUserChangeReceiver,
+                new IntentFilter(Intent.ACTION_USER_REMOVED));
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (mProfileChanged) {
+            loadProfile(true);
+            mProfileChanged = false;
+        }
         updateUserList();
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().getContentResolver().unregisterContentObserver(mProfileObserver);
+        getActivity().unregisterReceiver(mUserChangeReceiver);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem addAccountItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
-        addAccountItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
-                | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
+            MenuItem addUserItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
+            addUserItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                    | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        } else {
+            MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, 0, R.string.user_remove_user_menu);
+            removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                    | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        }
     }
 
     @Override
@@ -70,52 +188,270 @@ public class UserSettings extends SettingsPreferenceFragment
         if (itemId == MENU_ADD_USER) {
             onAddUserClicked();
             return true;
+        } else if (itemId == MENU_REMOVE_USER) {
+            onRemoveUserClicked(UserHandle.myUserId());
+            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
     }
 
+    private void loadProfile(boolean force) {
+        UserInfo user = mUserManager.getUserInfo(UserHandle.myUserId());
+        if (force || user.iconPath == null || user.iconPath.equals("")) {
+            assignProfilePhoto(user);
+        }
+        String profileName = getProfileName();
+        mMePreference.setTitle(profileName);
+    }
+
     private void onAddUserClicked() {
-        ((PreferenceActivity) getActivity()).startPreferencePanel(
-                UserDetailsSettings.class.getName(), null, R.string.user_details_title,
-                null, this, 0);
+        synchronized (mUserLock) {
+            if (mRemovingUserId == -1 && !mAddingUser) {
+                showDialog(DIALOG_ADD_USER);
+                setOnDismissListener(this);
+            }
+        }
+    }
+
+    private void onRemoveUserClicked(int userId) {
+        synchronized (mUserLock) {
+            if (mRemovingUserId == -1 && !mAddingUser) {
+                mRemovingUserId = userId;
+                showDialog(DIALOG_CONFIRM_REMOVE);
+                setOnDismissListener(this);
+            }
+        }
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_CONFIRM_REMOVE:
+                return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.user_confirm_remove_title)
+                    .setMessage(R.string.user_confirm_remove_message)
+                    .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                removeUserNow();
+                            }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+            case DIALOG_ADD_USER:
+                return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.user_add_user_title)
+                .setMessage(R.string.user_add_user_message)
+                .setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            addUserNow();
+                        }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+            default:
+                return null;
+        }
+    }
+
+    private void removeUserNow() {
+        if (mRemovingUserId == UserHandle.myUserId()) {
+            removeThisUser();
+        } else {
+            new Thread() {
+                public void run() {
+                    synchronized (mUserLock) {
+                        // TODO: Show some progress while removing the user
+                        mUserManager.removeUser(mRemovingUserId);
+                        mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+                        mRemovingUserId = -1;
+                    }
+                }
+            }.start();
+        }
+    }
+
+    private void removeThisUser() {
+        // TODO:
+        Toast.makeText(getActivity(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
+
+        synchronized (mUserLock) {
+            mRemovingUserId = -1;
+        }
+    }
+
+    private void addUserNow() {
+        synchronized (mUserLock) {
+            mAddingUser = true;
+            updateUserList();
+            new Thread() {
+                public void run() {
+                    // Could take a few seconds
+                    UserInfo user = mUserManager.createUser(
+                            getActivity().getResources().getString(R.string.user_new_user_name), 0);
+                    if (user != null) {
+                        assignDefaultPhoto(user);
+                    }
+                    synchronized (mUserLock) {
+                        mAddingUser = false;
+                        mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+                    }
+                }
+            }.start();
+        }
     }
 
     private void updateUserList() {
-        List<UserInfo> users = ((UserManager) getActivity().getSystemService(Context.USER_SERVICE))
-                .getUsers();
+        List<UserInfo> users = mUserManager.getUsers();
 
         mUserListCategory.removeAll();
+        mUserListCategory.setOrderingAsAdded(false);
+
         for (UserInfo user : users) {
-            Preference pref = new Preference(getActivity());
-            pref.setTitle(user.name);
-            pref.setOnPreferenceClickListener(this);
-            pref.setKey("id=" + user.id);
-            if (user.iconPath != null) {
-                setPhotoId(pref, user.iconPath);
+            Preference pref;
+            if (user.id == UserHandle.myUserId()) {
+                pref = mMePreference;
+            } else {
+                pref = new UserPreference(getActivity(), null, user.id,
+                        UserHandle.myUserId() == UserHandle.USER_OWNER, this);
+                pref.setOnPreferenceClickListener(this);
+                pref.setKey("id=" + user.id);
+                mUserListCategory.addPreference(pref);
+                if (user.id == UserHandle.USER_OWNER) {
+                    pref.setSummary(R.string.user_owner);
+                }
+                pref.setTitle(user.name);
             }
+            if (user.iconPath != null) {
+                setPhotoId(pref, user);
+            }
+        }
+        // Add a temporary entry for the user being created
+        if (mAddingUser) {
+            Preference pref = new UserPreference(getActivity(), null, UserPreference.USERID_UNKNOWN,
+                    false, null);
+            pref.setEnabled(false);
+            pref.setTitle(R.string.user_new_user_name);
+            pref.setSummary(R.string.user_adding_new_user);
+            pref.setIcon(R.drawable.ic_user);
             mUserListCategory.addPreference(pref);
         }
     }
 
-    private void setPhotoId(Preference pref, String realPath) {
-        Drawable d = Drawable.createFromPath(realPath);
+    /* TODO: Put this in an AsyncTask */
+    private void assignProfilePhoto(final UserInfo user) {
+        // If the contact is "me", then use my local profile photo. Otherwise, build a
+        // uri to get the avatar of the contact.
+        Uri contactUri = Profile.CONTENT_URI;
+
+        InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
+                    getActivity().getContentResolver(),
+                    contactUri, true);
+        // If there's no profile photo, assign a default avatar
+        if (avatarDataStream == null) {
+            assignDefaultPhoto(user);
+            setPhotoId(mMePreference, user);
+            return;
+        }
+
+        ParcelFileDescriptor fd = mUserManager.setUserIcon(user.id);
+        FileOutputStream os = new ParcelFileDescriptor.AutoCloseOutputStream(fd);
+        byte[] buffer = new byte[4096];
+        int readSize;
+        try {
+            while ((readSize = avatarDataStream.read(buffer)) > 0) {
+                os.write(buffer, 0, readSize);
+            }
+            os.close();
+            avatarDataStream.close();
+        } catch (IOException ioe) {
+            Log.e(TAG, "Error copying profile photo " + ioe);
+        }
+
+        setPhotoId(mMePreference, user);
+    }
+
+    private String getProfileName() {
+        Cursor cursor = getActivity().getContentResolver().query(
+                    Profile.CONTENT_URI, CONTACT_PROJECTION, null, null, null);
+        if (cursor == null) {
+            Log.w(TAG, "getProfileName() returned NULL cursor!"
+                    + " contact uri used " + Profile.CONTENT_URI);
+            return null;
+        }
+
+        try {
+            if (cursor.moveToFirst()) {
+                return cursor.getString(cursor.getColumnIndex(Phone.DISPLAY_NAME));
+            }
+        } finally {
+            cursor.close();
+        }
+        return null;
+    }
+
+    private void assignDefaultPhoto(UserInfo user) {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                USER_DRAWABLES[user.id % USER_DRAWABLES.length]);
+        ParcelFileDescriptor fd = mUserManager.setUserIcon(user.id);
+        if (fd != null) {
+            bitmap.compress(CompressFormat.PNG, 100,
+                    new ParcelFileDescriptor.AutoCloseOutputStream(fd));
+        }
+    }
+
+    private void setPhotoId(Preference pref, UserInfo user) {
+        ParcelFileDescriptor fd = mUserManager.setUserIcon(user.id);
+        Drawable d = Drawable.createFromStream(new ParcelFileDescriptor.AutoCloseInputStream(fd),
+                user.iconPath);
         if (d == null) return;
         pref.setIcon(d);
     }
 
+    private void setUserName(String name) {
+        mUserManager.setUserName(UserHandle.myUserId(), name);
+        mNicknamePreference.setSummary(name);
+    }
+
     @Override
     public boolean onPreferenceClick(Preference pref) {
-        String sid = pref.getKey();
-        if (sid != null && sid.startsWith("id=")) {
-            int id = Integer.parseInt(sid.substring(3));
-            Bundle args = new Bundle();
-            args.putInt(UserDetailsSettings.EXTRA_USER_ID, id);
-            ((PreferenceActivity) getActivity()).startPreferencePanel(
-                    UserDetailsSettings.class.getName(),
-                    args, 0, pref.getTitle(), this, 0);
+        if (pref == mMePreference) {
+            Intent editProfile = new Intent(Intent.ACTION_EDIT);
+            editProfile.setData(ContactsContract.Profile.CONTENT_URI);
+            startActivity(editProfile);
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getTag() instanceof UserPreference) {
+            int userId = ((UserPreference) v.getTag()).getUserId();
+            onRemoveUserClicked(userId);
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        synchronized (mUserLock) {
+            mAddingUser = false;
+            mRemovingUserId = -1;
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mNicknamePreference) {
+            String value = (String) newValue;
+            if (preference == mNicknamePreference && value != null
+                    && value.length() > 0) {
+                setUserName(value);
+            }
             return true;
         }
         return false;
     }
+
 }
