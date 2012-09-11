@@ -69,6 +69,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_SHOW_PASSWORD = "show_password";
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
+    private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
 
     DevicePolicyManager mDPM;
@@ -87,6 +88,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private CheckBoxPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
+    private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
 
     @Override
@@ -225,6 +227,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
+        // Package verification
+        mToggleVerifyApps = (CheckBoxPreference) findPreference(
+            KEY_TOGGLE_VERIFY_APPLICATIONS);
+        mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
+
         return root;
     }
 
@@ -237,6 +244,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Change the system setting
         Settings.Global.putInt(getContentResolver(), Settings.Global.INSTALL_NON_MARKET_APPS,
                                 enabled ? 1 : 0);
+    }
+
+    private boolean isVerifyAppsEnabled() {
+        return Settings.Global.getInt(getContentResolver(),
+                                      Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) > 0;
     }
 
     private void warnAppInstallation() {
@@ -420,6 +432,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 setNonMarketAppsAllowed(false);
             }
+        } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
+            Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
+                    mToggleVerifyApps.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
