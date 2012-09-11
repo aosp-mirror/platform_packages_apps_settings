@@ -251,6 +251,13 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         CachedBluetoothDeviceManager cachedDeviceManager =
             bluetoothManager.getCachedDeviceManager();
         CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
-        cachedDevice.setPhonebookPermissionChoice(permissionChoice);
+        if (cachedDevice != null ) {
+            cachedDevice.setPhonebookPermissionChoice(permissionChoice);
+        } else {
+            cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
+                                                         bluetoothManager.getProfileManager(),
+                                                         mDevice);
+            cachedDevice.setPhonebookPermissionChoice(permissionChoice);
+        }
     }
 }
