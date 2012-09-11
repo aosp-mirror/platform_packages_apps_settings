@@ -229,13 +229,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private boolean isNonMarketAppsAllowed() {
-        return Settings.Secure.getInt(getContentResolver(),
-                                      Settings.Secure.INSTALL_NON_MARKET_APPS, 0) > 0;
+        return Settings.Global.getInt(getContentResolver(),
+                                      Settings.Global.INSTALL_NON_MARKET_APPS, 0) > 0;
     }
 
     private void setNonMarketAppsAllowed(boolean enabled) {
         // Change the system setting
-        Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS,
+        Settings.Global.putInt(getContentResolver(), Settings.Global.INSTALL_NON_MARKET_APPS,
                                 enabled ? 1 : 0);
     }
 
