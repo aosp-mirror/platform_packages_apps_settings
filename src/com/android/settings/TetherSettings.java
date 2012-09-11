@@ -374,12 +374,6 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     private void updateBluetoothState(String[] available, String[] tethered,
             String[] errored) {
-        int bluetoothTethered = 0;
-        for (String s : tethered) {
-            for (String regex : mBluetoothRegexs) {
-                if (s.matches(regex)) bluetoothTethered++;
-            }
-        }
         boolean bluetoothErrored = false;
         for (String s: errored) {
             for (String regex : mBluetoothRegexs) {
@@ -399,6 +393,7 @@ public class TetherSettings extends SettingsPreferenceFragment
                     mBluetoothPan != null && mBluetoothPan.isTetheringOn()) {
             mBluetoothTether.setChecked(true);
             mBluetoothTether.setEnabled(true);
+            int bluetoothTethered = mBluetoothPan.getConnectedDevices().size();
             if (bluetoothTethered > 1) {
                 String summary = getString(
                         R.string.bluetooth_tethering_devices_connected_subtext, bluetoothTethered);
