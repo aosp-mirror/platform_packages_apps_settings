@@ -100,6 +100,7 @@ public class Memory extends SettingsPreferenceFragment {
     }
 
     private void addCategoryForVolume(StorageVolume volume) {
+        // TODO: Cluster multi-user emulated volumes into single category
         final StorageVolumePreferenceCategory category = new StorageVolumePreferenceCategory(
                 getActivity(), volume);
         mCategories.add(category);
@@ -108,9 +109,10 @@ public class Memory extends SettingsPreferenceFragment {
     }
 
     private boolean isMassStorageEnabled() {
-        // mass storage is enabled if primary volume supports it
-        final StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
-        return (storageVolumes.length > 0 && storageVolumes[0].allowMassStorage());
+        // Mass storage is enabled if primary volume supports it
+        final StorageVolume[] volumes = mStorageManager.getVolumeList();
+        final StorageVolume primary = StorageManager.getPrimaryVolume(volumes);
+        return primary != null && primary.allowMassStorage();
     }
 
     @Override
