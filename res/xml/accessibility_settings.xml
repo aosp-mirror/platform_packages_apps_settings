@@ -27,14 +27,19 @@
             android:key="system_category"
             android:title="@string/accessibility_system_title">
 
+        <PreferenceScreen
+            android:fragment="com.android.settings.AccessibilitySettings$ToggleScreenMagnificationPreferenceFragment"
+            android:key="screen_magnification_preference_screen"
+            android:title="@string/accessibility_screen_magnification_title"/>
+
         <CheckBoxPreference
                 android:key="toggle_large_text_preference"
-                android:title="@string/accessibility_toggle_large_text_title"
+                android:title="@string/accessibility_toggle_large_text_preference_title"
                 android:persistent="false"/>
 
         <CheckBoxPreference
                 android:key="toggle_power_button_ends_call_preference"
-                android:title="@string/accessibility_power_button_ends_call_title"
+                android:title="@string/accessibility_power_button_ends_call_prerefence_title"
                 android:persistent="false"/>
 
         <CheckBoxPreference
@@ -44,15 +49,15 @@
 
         <CheckBoxPreference
                 android:key="toggle_speak_password_preference"
-                android:title="@string/accessibility_speak_password_title"
+                android:title="@string/accessibility_toggle_speak_password_preference_title"
                 android:persistent="false"/>
 
-        <PreferenceScreen android:key="tts_settings"
+        <PreferenceScreen android:key="tts_settings_preference"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
-                android:title="@string/tts_settings_title" />
+                android:title="@string/tts_settings_title"/>
 
         <ListPreference android:key="select_long_press_timeout_preference"
-                android:title="@string/accessibility_long_press_timeout_title"
+                android:title="@string/accessibility_long_press_timeout_preference_title"
                 android:entries="@array/long_press_timeout_selector_titles"
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"/>
@@ -60,7 +65,7 @@
         <!-- We want a dialog with no title, so use an empty string to avoid a fall back to the preference title. -->
         <com.android.settings.AccessibilityEnableScriptInjectionPreference
                 android:key="toggle_script_injection_preference"
-                android:title="@string/accessibility_script_injection_title"
+                android:title="@string/accessibility_toggle_script_injection_preference_title"
                 android:dialogTitle=""
                 android:dialogIcon="@android:drawable/ic_dialog_alert"
                 android:dialogMessage="@string/accessibility_script_injection_security_warning_summary"
