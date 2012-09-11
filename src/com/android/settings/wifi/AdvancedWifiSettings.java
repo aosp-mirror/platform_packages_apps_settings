@@ -113,9 +113,9 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                 sleepPolicyPref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
             }
             sleepPolicyPref.setOnPreferenceChangeListener(this);
-            int value = Settings.System.getInt(getContentResolver(),
-                    Settings.System.WIFI_SLEEP_POLICY,
-                    Settings.System.WIFI_SLEEP_POLICY_NEVER);
+            int value = Settings.Global.getInt(getContentResolver(),
+                    Settings.Global.WIFI_SLEEP_POLICY,
+                    Settings.Global.WIFI_SLEEP_POLICY_NEVER);
             String stringValue = String.valueOf(value);
             sleepPolicyPref.setValue(stringValue);
             updateSleepPolicySummary(sleepPolicyPref, stringValue);
@@ -181,7 +181,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         if (KEY_SLEEP_POLICY.equals(key)) {
             try {
                 String stringValue = (String) newValue;
-                Settings.System.putInt(getContentResolver(), Settings.System.WIFI_SLEEP_POLICY,
+                Settings.Global.putInt(getContentResolver(), Settings.Global.WIFI_SLEEP_POLICY,
                         Integer.parseInt(stringValue));
                 updateSleepPolicySummary(preference, stringValue);
             } catch (NumberFormatException e) {
