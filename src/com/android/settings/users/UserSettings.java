@@ -423,6 +423,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (pref == mMePreference) {
             Intent editProfile = new Intent(Intent.ACTION_EDIT);
             editProfile.setData(ContactsContract.Profile.CONTENT_URI);
+            // To make sure that it returns back here when done
+            // TODO: Make this a proper API
+            editProfile.putExtra("finishActivityOnSaveCompleted", true);
             startActivity(editProfile);
         }
         return false;
