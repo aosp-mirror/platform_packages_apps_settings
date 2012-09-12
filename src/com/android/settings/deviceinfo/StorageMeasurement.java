@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Environment.UserEnvironment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -103,6 +104,7 @@ public class StorageMeasurement {
 
     private final StorageVolume mStorageVolume;
     private final UserHandle mUser;
+    private final UserEnvironment mUserEnv;
     private final boolean mIsPrimary;
     private final boolean mIsInternal;
 
@@ -118,6 +120,7 @@ public class StorageMeasurement {
     private StorageMeasurement(Context context, StorageVolume volume, UserHandle user) {
         mStorageVolume = volume;
         mUser = Preconditions.checkNotNull(user);
+        mUserEnv = new UserEnvironment(mUser.getIdentifier());
         mIsInternal = volume == null;
         mIsPrimary = volume != null ? volume.isPrimary() : false;
 
@@ -389,7 +392,7 @@ public class StorageMeasurement {
                 final long[] stats = imcs.getFileSystemStats(path);
                 mTotalSize = stats[0];
                 mAvailSize = stats[1];
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 Log.w(TAG, "Problem in container service", e);
             }
 
@@ -450,7 +453,7 @@ public class StorageMeasurement {
 
             // Downloads (primary volume only)
             if (mIsPrimary) {
-                final String downloadsPath = Environment.getExternalStoragePublicDirectory(
+                final String downloadsPath = mUserEnv.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
                 mDownloadsSize = getDirectorySize(imcs, downloadsPath);
             } else {
