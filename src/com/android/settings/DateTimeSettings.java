@@ -81,8 +81,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     }
 
     private void initUI() {
-        boolean autoTimeEnabled = getAutoState(Settings.System.AUTO_TIME);
-        boolean autoTimeZoneEnabled = getAutoState(Settings.System.AUTO_TIME_ZONE);
+        boolean autoTimeEnabled = getAutoState(Settings.Global.AUTO_TIME);
+        boolean autoTimeZoneEnabled = getAutoState(Settings.Global.AUTO_TIME_ZONE);
 
         Intent intent = getActivity().getIntent();
         boolean isFirstRun = intent.getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
@@ -214,14 +214,14 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             updateTimeAndDateDisplay(getActivity());
         } else if (key.equals(KEY_AUTO_TIME)) {
             boolean autoEnabled = preferences.getBoolean(key, true);
-            Settings.System.putInt(getContentResolver(), Settings.System.AUTO_TIME,
+            Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
                     autoEnabled ? 1 : 0);
             mTimePref.setEnabled(!autoEnabled);
             mDatePref.setEnabled(!autoEnabled);
         } else if (key.equals(KEY_AUTO_TIME_ZONE)) {
             boolean autoZoneEnabled = preferences.getBoolean(key, true);
-            Settings.System.putInt(
-                    getContentResolver(), Settings.System.AUTO_TIME_ZONE, autoZoneEnabled ? 1 : 0);
+            Settings.Global.putInt(
+                    getContentResolver(), Settings.Global.AUTO_TIME_ZONE, autoZoneEnabled ? 1 : 0);
             mTimeZone.setEnabled(!autoZoneEnabled);
         }
     }
@@ -331,7 +331,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     private boolean getAutoState(String name) {
         try {
-            return Settings.System.getInt(getContentResolver(), name) > 0;
+            return Settings.Global.getInt(getContentResolver(), name) > 0;
         } catch (SettingNotFoundException snfe) {
             return false;
         }
