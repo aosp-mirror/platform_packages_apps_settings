@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Environment.UserEnvironment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
@@ -50,16 +51,20 @@ import java.util.Set;
 public class StorageVolumePreferenceCategory extends PreferenceCategory
         implements MeasurementReceiver {
     private static final String KEY_TOTAL_SIZE = "total_size";
+    private static final String KEY_AVAILABLE = "available";
+
     private static final String KEY_APPLICATIONS = "applications";
     private static final String KEY_DCIM = "dcim"; // Pictures and Videos
     private static final String KEY_MUSIC = "music";
     private static final String KEY_DOWNLOADS = "downloads";
     private static final String KEY_MISC = "misc";
-    private static final String KEY_AVAILABLE = "available";
     private static final String KEY_USER_PREFIX = "user";
 
     private static final int ORDER_USAGE_BAR = -2;
     private static final int ORDER_STORAGE_LOW = -1;
+
+    private Preference mItemTotal;
+    private Preference mItemAvailable;
 
     private UsageBarPreference mUsageBarPreference;
     private Preference mMountTogglePreference;
@@ -74,6 +79,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     private final Resources mResources;
     private final StorageManager mStorageManager;
     private final UserManager mUserManager;
+
+    @Deprecated
+    private static final UserEnvironment sOwnerEnv = new UserEnvironment(UserHandle.USER_OWNER);
 
     /** Measurement for local user. */
     private StorageMeasurement mLocalMeasure;
@@ -98,7 +106,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             mDirPaths = new String[length];
             for (int i = 0; i < length; i++) {
                 final String name = directories[i];
-                final String path = Environment.getExternalStoragePublicDirectory(name).
+                final String path = sOwnerEnv.getExternalStoragePublicDirectory(name).
                         getAbsolutePath();
                 mDirPaths[i] = path;
                 sPathsExcludedForMisc.add(path);
@@ -116,10 +124,10 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
 
     static {
         // Downloads
-        sPathsExcludedForMisc.add(Environment.getExternalStoragePublicDirectory(
+        sPathsExcludedForMisc.add(sOwnerEnv.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
         // Apps
-        sPathsExcludedForMisc.add(Environment.getExternalStorageDirectory().getAbsolutePath() +
+        sPathsExcludedForMisc.add(sOwnerEnv.getExternalStorageDirectory().getAbsolutePath() +
                 "/Android");
     }
 
@@ -196,8 +204,11 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         if (!mIsPrimary) mAllowFormat = false;
     }
 
-    private void addStorageItem(String key, int titleRes, int colorRes) {
-        addPreference(new StorageItemPreference(getContext(), key, titleRes, colorRes));
+    private StorageItemPreference addStorageItem(String key, int titleRes, int colorRes) {
+        final StorageItemPreference pref = new StorageItemPreference(
+                getContext(), key, titleRes, colorRes);
+        addPreference(pref);
+        return pref;
     }
 
     private static String buildUserKey(UserHandle user) {
@@ -221,8 +232,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         mUsageBarPreference.setOrder(ORDER_USAGE_BAR);
         addPreference(mUsageBarPreference);
 
-        addStorageItem(KEY_TOTAL_SIZE, R.string.memory_size, 0);
-        addStorageItem(KEY_AVAILABLE, R.string.memory_available, R.color.memory_avail);
+        mItemTotal = addStorageItem(KEY_TOTAL_SIZE, R.string.memory_size, 0);
+        mItemAvailable = addStorageItem(
+                KEY_AVAILABLE, R.string.memory_available, R.color.memory_avail);
 
         if (measureUsers) {
             addPreference(new PreferenceHeader(context, currentUser.name));
@@ -309,8 +321,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         }
 
         if (Environment.MEDIA_MOUNTED.equals(state)) {
-            final Preference pref = findPreference(KEY_AVAILABLE);
-            pref.setSummary(pref.getSummary() + readOnly);
+            // TODO: create better i18n strings here; we might end up appending
+            // multiple times
+            mItemAvailable.setSummary(mItemAvailable.getSummary() + readOnly);
 
             mMountTogglePreference.setEnabled(true);
             mMountTogglePreference.setTitle(mResources.getString(R.string.sd_eject));
@@ -328,8 +341,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             }
 
             removePreference(mUsageBarPreference);
-            removePreference(findPreference(KEY_TOTAL_SIZE));
-            removePreference(findPreference(KEY_AVAILABLE));
+            removePreference(mItemTotal);
+            removePreference(mItemAvailable);
             if (mFormatPreference != null) {
                 removePreference(mFormatPreference);
             }
@@ -354,8 +367,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     }
 
     public void updateApproximate(long totalSize, long availSize) {
-        findPreference(KEY_TOTAL_SIZE).setSummary(formatSize(totalSize));
-        findPreference(KEY_AVAILABLE).setSummary(formatSize(availSize));
+        mItemTotal.setSummary(formatSize(totalSize));
+        mItemAvailable.setSummary(formatSize(availSize));
 
         final long usedSize = totalSize - availSize;
 
@@ -374,7 +387,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             mShowingApprox = false;
         }
 
-        findPreference(KEY_TOTAL_SIZE).setSummary(formatSize(totalSize));
+        mItemTotal.setSummary(formatSize(totalSize));
 
         if (mLocalMeasure.isExternalSDCard()) {
             // TODO FIXME: external SD card will not report any size. Show used space in bar graph
@@ -399,7 +412,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         // Block size is taken into account. That can be extra space from folders. TODO Investigate
         updatePreference(miscSize, totalSize, KEY_MISC);
 
-        updatePreference(availSize, totalSize, KEY_AVAILABLE, false);
+        mItemAvailable.setSummary(formatSize(availSize));
 
         mUsageBarPreference.commit();
     }
@@ -419,19 +432,13 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
     }
 
     private void updatePreference(long size, long totalSize, String category) {
-        updatePreference(size, totalSize, category, true);
-    }
-
-    private void updatePreference(long size, long totalSize, String category, boolean addBar) {
         final StorageItemPreference pref = (StorageItemPreference) findPreference(category);
 
         if (pref != null) {
             if (size > 0) {
                 pref.setSummary(formatSize(size));
-                if (addBar) {
-                    final int order = pref.getOrder();
-                    mUsageBarPreference.addEntry(order, size / (float) totalSize, pref.getColor());
-                }
+                final int order = pref.getOrder();
+                mUsageBarPreference.addEntry(order, size / (float) totalSize, pref.getColor());
             } else {
                 removePreference(pref);
             }
@@ -549,7 +556,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             return false;
         }
     }
-
 
     /**
      * Return list of other users, excluding the current user.
