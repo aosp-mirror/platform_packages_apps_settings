@@ -239,7 +239,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         // We don't call super.onActivityCreated() here, since it assumes we already set up
         // Preference (probably in onCreate()), while WifiSettings exceptionally set it up in
         // this method.
-
         mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
@@ -295,6 +294,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null
                     && connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                super.onActivityCreated(savedInstanceState);
                 activity.finish();
                 return;
             }
