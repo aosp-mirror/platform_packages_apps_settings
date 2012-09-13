@@ -20,6 +20,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.UserInfo;
+import android.graphics.drawable.Drawable;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.BatteryStats;
@@ -32,6 +34,8 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -79,10 +83,14 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     private static BatteryStatsImpl sStatsXfer;
 
     IBatteryStats mBatteryInfo;
+    UserManager mUm;
     BatteryStatsImpl mStats;
     private final List<BatterySipper> mUsageList = new ArrayList<BatterySipper>();
     private final List<BatterySipper> mWifiSippers = new ArrayList<BatterySipper>();
     private final List<BatterySipper> mBluetoothSippers = new ArrayList<BatterySipper>();
+    private final SparseArray<List<BatterySipper>> mUserSippers
+            = new SparseArray<List<BatterySipper>>();
+    private final SparseArray<Double> mUserPower = new SparseArray<Double>();
 
     private PreferenceGroup mAppListGroup;
     private Preference mBatteryStatusPref;
@@ -134,6 +142,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         addPreferencesFromResource(R.xml.power_usage_summary);
         mBatteryInfo = IBatteryStats.Stub.asInterface(
                 ServiceManager.getService("batteryinfo"));
+        mUm = (UserManager)getActivity().getSystemService(Context.USER_SERVICE);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mBatteryStatusPref = mAppListGroup.findPreference(KEY_BATTERY_STATUS);
         mPowerProfile = new PowerProfile(getActivity());
@@ -204,6 +213,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         double[] values;
         switch (sipper.drainType) {
             case APP:
+            case USER:
             {
                 Uid uid = sipper.uidObj;
                 types = new int[] {
@@ -229,15 +239,18 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     0
                 };
 
-                Writer result = new StringWriter();
-                PrintWriter printWriter = new PrintWriter(result);
-                mStats.dumpLocked(printWriter, "", mStatsType, uid.getUid());
-                args.putString(PowerUsageDetail.EXTRA_REPORT_DETAILS, result.toString());
-                
-                result = new StringWriter();
-                printWriter = new PrintWriter(result);
-                mStats.dumpCheckinLocked(printWriter, mStatsType, uid.getUid());
-                args.putString(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS, result.toString());
+                if (sipper.drainType == DrainType.APP) {
+                    Writer result = new StringWriter();
+                    PrintWriter printWriter = new PrintWriter(result);
+                    mStats.dumpLocked(printWriter, "", mStatsType, uid.getUid());
+                    args.putString(PowerUsageDetail.EXTRA_REPORT_DETAILS, result.toString());
+
+                    result = new StringWriter();
+                    printWriter = new PrintWriter(result);
+                    mStats.dumpCheckinLocked(printWriter, mStatsType, uid.getUid());
+                    args.putString(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS,
+                            result.toString());
+                }
             }
             break;
             case CELL:
@@ -373,6 +386,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         mUsageList.clear();
         mWifiSippers.clear();
         mBluetoothSippers.clear();
+        mUserSippers.clear();
+        mUserPower.clear();
         mAppListGroup.setOrderingAsAdded(false);
 
         mBatteryStatusPref.setOrder(-2);
@@ -570,6 +585,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             if (DEBUG) Log.i(TAG, String.format("UID %d total power=%.2f", u.getUid(), power));
 
             // Add the app to the list if it is consuming power
+            boolean isOtherUser = false;
+            final int userId = UserHandle.getUserId(u.getUid());
             if (power != 0 || u.getUid() == 0) {
                 BatterySipper app = new BatterySipper(getActivity(), mRequestQueue, mHandler,
                         packageWithHighestDrain, DrainType.APP, 0, u,
@@ -585,6 +602,15 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     mWifiSippers.add(app);
                 } else if (u.getUid() == Process.BLUETOOTH_GID) {
                     mBluetoothSippers.add(app);
+                } else if (userId != UserHandle.myUserId()
+                        && UserHandle.getAppId(u.getUid()) >= Process.FIRST_APPLICATION_UID) {
+                    isOtherUser = true;
+                    List<BatterySipper> list = mUserSippers.get(userId);
+                    if (list == null) {
+                        list = new ArrayList<BatterySipper>();
+                        mUserSippers.put(userId, list);
+                    }
+                    list.add(app);
                 } else {
                     mUsageList.add(app);
                 }
@@ -592,13 +618,23 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     osApp = app;
                 }
             }
-            if (u.getUid() == Process.WIFI_UID) {
-                mWifiPower += power;
-            } else if (u.getUid() == Process.BLUETOOTH_GID) {
-                mBluetoothPower += power;
-            } else {
-                if (power > mMaxPower) mMaxPower = power;
-                mTotalPower += power;
+            if (power != 0) {
+                if (u.getUid() == Process.WIFI_UID) {
+                    mWifiPower += power;
+                } else if (u.getUid() == Process.BLUETOOTH_GID) {
+                    mBluetoothPower += power;
+                } else if (isOtherUser) {
+                    Double userPower = mUserPower.get(userId);
+                    if (userPower == null) {
+                        userPower = power;
+                    } else {
+                        userPower += power;
+                    }
+                    mUserPower.put(userId, userPower);
+                } else {
+                    if (power > mMaxPower) mMaxPower = power;
+                    mTotalPower += power;
+                }
             }
         }
 
@@ -725,6 +761,32 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         aggregateSippers(bs, mBluetoothSippers, "Bluetooth");
     }
 
+    private void addUserUsage() {
+        for (int i=0; i<mUserSippers.size(); i++) {
+            final int userId = mUserSippers.keyAt(i);
+            final List<BatterySipper> sippers = mUserSippers.valueAt(i);
+            UserInfo info = mUm.getUserInfo(userId);
+            Drawable icon = null;
+            if (info != null && info.iconPath != null) {
+                try {
+                    icon = Drawable.createFromPath(info.iconPath);
+                } catch (Exception e) {
+                    Log.w(TAG, "Failure loading user picture " + info.iconPath, e);
+                }
+            }
+            String name = info != null ? info.name : null;
+            if (name == null) {
+                name = Integer.toString(info.id);
+            }
+            double power = mUserPower.get(userId);
+            String label = getActivity().getResources().getString(
+                    R.string.running_process_item_user_label, name);
+            BatterySipper bs = addEntry(label, DrainType.USER, 0, 0, power);
+            bs.icon = icon;
+            aggregateSippers(bs, sippers, "User");
+        }
+    }
+
     private double getAverageDataCost() {
         final long WIFI_BPS = 1000000; // TODO: Extract average bit rates from system 
         final long MOBILE_BPS = 200000; // TODO: Extract average bit rates from system
@@ -760,6 +822,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             Log.i(TAG, "Uptime since last unplugged = " + (timeSinceUnplugged / 1000));
         }
 
+        addUserUsage();
         addPhoneUsage(uSecNow);
         addScreenUsage(uSecNow);
         addWiFiUsage(uSecNow);
