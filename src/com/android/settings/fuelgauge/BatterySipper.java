@@ -107,7 +107,6 @@ class BatterySipper implements Comparable<BatterySipper> {
             return;
         }
         PackageManager pm = mContext.getPackageManager();
-        final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
         String[] packages = pm.getPackagesForUid(uid);
         icon = pm.getDefaultActivityIcon();
         if (packages == null) {
