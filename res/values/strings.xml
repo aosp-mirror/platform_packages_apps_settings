@@ -1863,6 +1863,8 @@
     <string name="sd_memory" product="default">SD card</string>
     <!-- SD card & phone storage settings title. The amount of free space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section. -->
     <string name="memory_available">Available</string>
+    <!-- SD card & phone storage settings title. The amount of free space for some storage partition when the volume is read-only. [CHAR LIMIT=64] -->
+    <string name="memory_available_read_only">Available (read-only)</string>
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
     <string name="memory_size">Total space</string>
     <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
@@ -1916,7 +1918,6 @@
     <!-- SD card & phone storage settings item summary that will result in the phone connected to PC and MTP/PTP enabled.   [CHAR LIMIT=80] -->
     <string name="mtp_ptp_mode_summary">MTP or PTP function is active</string>
 
-    <string name="read_only">\u0020(Read-only)</string>
     <!-- SD card eject confirmation dialog title   [CHAR LIMIT=25] -->
     <string name="dlg_confirm_unmount_title" product="nosdcard">Unmount USB storage?</string>
     <!-- SD card eject confirmation dialog title   -->
