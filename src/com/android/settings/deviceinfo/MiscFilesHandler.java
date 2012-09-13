@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.os.storage.StorageVolume;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -195,7 +194,7 @@ public class MiscFilesHandler extends ListActivity {
             final StorageVolume storageVolume = activity.getIntent().getParcelableExtra(
                     StorageVolume.EXTRA_STORAGE_VOLUME);
             StorageMeasurement mMeasurement = StorageMeasurement.getInstance(
-                    activity, storageVolume, UserHandle.CURRENT);
+                    activity, storageVolume);
             if (mMeasurement == null) return;
             mData = (ArrayList<StorageMeasurement.FileInfo>) mMeasurement.mFileInfoForMisc;
             if (mData != null) {
