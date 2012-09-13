@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +25,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
-import android.os.Bundle;
+import android.content.pm.UserInfo;
 import android.os.Environment;
 import android.os.Environment.UserEnvironment;
 import android.os.Handler;
@@ -32,15 +33,15 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.storage.StorageVolume;
 import android.util.Log;
-import android.util.Pair;
+import android.util.SparseLongArray;
 
 import com.android.internal.app.IMediaContainerService;
-import com.android.internal.util.Preconditions;
 import com.google.android.collect.Maps;
+import com.google.common.collect.Sets;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -48,22 +49,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
+import javax.annotation.concurrent.GuardedBy;
 
 /**
- * Measure the memory for various systems.
- *
- * TODO: This class should ideally have less knowledge about what the context
- * it's measuring is. In the future, reduce the amount of stuff it needs to
- * know about by just keeping an array of measurement types of the following
- * properties:
- *
- *   Filesystem stats (using DefaultContainerService)
- *   Directory measurements (using DefaultContainerService.measureDir)
- *   Application measurements (using PackageManager)
- *
- * Then the calling application would just specify the type and an argument.
- * This class would keep track of it while the calling application would
- * decide on how to use it.
+ * Utility for measuring the disk usage of internal storage or a physical
+ * {@link StorageVolume}. Connects with a remote {@link IMediaContainerService}
+ * and delivers results to {@link MeasurementReceiver}.
  */
 public class StorageMeasurement {
     private static final String TAG = "StorageMeasurement";
@@ -71,56 +64,99 @@ public class StorageMeasurement {
     private static final boolean LOCAL_LOGV = true;
     static final boolean LOGV = LOCAL_LOGV && Log.isLoggable(TAG, Log.VERBOSE);
 
-    public static final String TOTAL_SIZE = "total_size";
-
-    public static final String AVAIL_SIZE = "avail_size";
-
-    public static final String APPS_USED = "apps_used";
-
-    public static final String DOWNLOADS_SIZE = "downloads_size";
-
-    public static final String MISC_SIZE = "misc_size";
-
-    public static final String MEDIA_SIZES = "media_sizes";
-
     private static final String DEFAULT_CONTAINER_PACKAGE = "com.android.defcontainer";
 
     public static final ComponentName DEFAULT_CONTAINER_COMPONENT = new ComponentName(
             DEFAULT_CONTAINER_PACKAGE, "com.android.defcontainer.DefaultContainerService");
 
-    private final MeasurementHandler mHandler;
+    /** Media types to measure on external storage. */
+    private static final Set<String> sMeasureMediaTypes = Sets.newHashSet(
+            Environment.DIRECTORY_DCIM, Environment.DIRECTORY_MOVIES,
+            Environment.DIRECTORY_PICTURES, Environment.DIRECTORY_MUSIC,
+            Environment.DIRECTORY_ALARMS, Environment.DIRECTORY_NOTIFICATIONS,
+            Environment.DIRECTORY_RINGTONES, Environment.DIRECTORY_PODCASTS,
+            Environment.DIRECTORY_DOWNLOADS, Environment.DIRECTORY_ANDROID);
 
-    private static HashMap<Pair<StorageVolume, UserHandle>, StorageMeasurement>
-            sInstances = Maps.newHashMap();
+    @GuardedBy("sInstances")
+    private static HashMap<StorageVolume, StorageMeasurement> sInstances = Maps.newHashMap();
+
+    /**
+     * Obtain shared instance of {@link StorageMeasurement} for given physical
+     * {@link StorageVolume}, or internal storage if {@code null}.
+     */
+    public static StorageMeasurement getInstance(Context context, StorageVolume volume) {
+        synchronized (sInstances) {
+            StorageMeasurement value = sInstances.get(volume);
+            if (value == null) {
+                value = new StorageMeasurement(context.getApplicationContext(), volume);
+                sInstances.put(volume, value);
+            }
+            return value;
+        }
+    }
+
+    public static class MeasurementDetails {
+        /**
+         * Total apps disk usage.
+         * <p>
+         * When measuring internal storage, this value includes the code size of
+         * all apps (regardless of install status for current user), and
+         * internal disk used by the current user's apps. When the device
+         * emulates external storage, this value also includes emulated storage
+         * used by the current user's apps.
+         * <p>
+         * When measuring a physical {@link StorageVolume}, this value includes
+         * usage by all apps on that volume.
+         */
+        public long appsSize;
+
+        /**
+         * Total media disk usage, categorized by types such as
+         * {@link Environment#DIRECTORY_MUSIC}.
+         * <p>
+         * When measuring internal storage, this reflects media on emulated
+         * storage for the current user.
+         * <p>
+         * When measuring a physical {@link StorageVolume}, this reflects media
+         * on that volume.
+         */
+        public HashMap<String, Long> mediaSize = Maps.newHashMap();
+
+        /**
+         * Misc external disk usage for the current user, unaccounted in
+         * {@link #mediaSize}.
+         */
+        public long miscSize;
+
+        /**
+         * Total disk usage for users, which is only meaningful for emulated
+         * internal storage. Key is {@link UserHandle}.
+         */
+        public SparseLongArray usersSize = new SparseLongArray();
+    }
+
+    public interface MeasurementReceiver {
+        public void updateApproximate(StorageMeasurement meas, long totalSize, long availSize);
+        public void updateDetails(StorageMeasurement meas, MeasurementDetails details);
+    }
 
     private volatile WeakReference<MeasurementReceiver> mReceiver;
 
+    /** Physical volume being measured, or {@code null} for internal. */
+    private final StorageVolume mVolume;
+
+    private final boolean mIsInternal;
+    private final boolean mIsPrimary;
+
+    private final MeasurementHandler mHandler;
+
     private long mTotalSize;
     private long mAvailSize;
-    private long mAppsSize;
-    private long mDownloadsSize;
-    private long mMiscSize;
-    private long[] mMediaSizes = new long[StorageVolumePreferenceCategory.sMediaCategories.length];
-
-    private final StorageVolume mStorageVolume;
-    private final UserHandle mUser;
-    private final UserEnvironment mUserEnv;
-    private final boolean mIsPrimary;
-    private final boolean mIsInternal;
-
-    private boolean mIncludeAppCodeSize = true;
 
     List<FileInfo> mFileInfoForMisc;
 
-    public interface MeasurementReceiver {
-        public void updateApproximate(StorageMeasurement meas, Bundle bundle);
-        public void updateExact(StorageMeasurement meas, Bundle bundle);
-    }
-
-    private StorageMeasurement(Context context, StorageVolume volume, UserHandle user) {
-        mStorageVolume = volume;
-        mUser = Preconditions.checkNotNull(user);
-        mUserEnv = new UserEnvironment(mUser.getIdentifier());
+    private StorageMeasurement(Context context, StorageVolume volume) {
+        mVolume = volume;
         mIsInternal = volume == null;
         mIsPrimary = volume != null ? volume.isPrimary() : false;
 
@@ -128,35 +164,6 @@ public class StorageMeasurement {
         final HandlerThread handlerThread = new HandlerThread("MemoryMeasurement");
         handlerThread.start();
         mHandler = new MeasurementHandler(context, handlerThread.getLooper());
-    }
-
-    public void setIncludeAppCodeSize(boolean include) {
-        mIncludeAppCodeSize = include;
-    }
-
-    /**
-     * Get the singleton of the StorageMeasurement class. The application
-     * context is used to avoid leaking activities.
-     * @param storageVolume The {@link StorageVolume} that will be measured
-     * @param isPrimary true when this storage volume is the primary volume
-     */
-    public static StorageMeasurement getInstance(
-            Context context, StorageVolume storageVolume, UserHandle user) {
-        final Pair<StorageVolume, UserHandle> key = new Pair<StorageVolume, UserHandle>(
-                storageVolume, user);
-        synchronized (sInstances) {
-            StorageMeasurement value = sInstances.get(key);
-            if (value == null) {
-                value = new StorageMeasurement(
-                        context.getApplicationContext(), storageVolume, user);
-                sInstances.put(key, value);
-            }
-            return value;
-        }
-    }
-
-    public UserHandle getUser() {
-        return mUser;
     }
 
     public void setReceiver(MeasurementReceiver receiver) {
@@ -186,15 +193,10 @@ public class StorageMeasurement {
         if (receiver == null) {
             return;
         }
-
-        Bundle bundle = new Bundle();
-        bundle.putLong(TOTAL_SIZE, mTotalSize);
-        bundle.putLong(AVAIL_SIZE, mAvailSize);
-
-        receiver.updateApproximate(this, bundle);
+        receiver.updateApproximate(this, mTotalSize, mAvailSize);
     }
 
-    private void sendExactUpdate() {
+    private void sendExactUpdate(MeasurementDetails details) {
         MeasurementReceiver receiver = (mReceiver != null) ? mReceiver.get() : null;
         if (receiver == null) {
             if (LOGV) {
@@ -202,27 +204,76 @@ public class StorageMeasurement {
             }
             return;
         }
+        receiver.updateDetails(this, details);
+    }
 
-        Bundle bundle = new Bundle();
-        bundle.putLong(TOTAL_SIZE, mTotalSize);
-        bundle.putLong(AVAIL_SIZE, mAvailSize);
-        bundle.putLong(APPS_USED, mAppsSize);
-        bundle.putLong(DOWNLOADS_SIZE, mDownloadsSize);
-        bundle.putLong(MISC_SIZE, mMiscSize);
-        bundle.putLongArray(MEDIA_SIZES, mMediaSizes);
+    private static class StatsObserver extends IPackageStatsObserver.Stub {
+        private final boolean mIsInternal;
+        private final MeasurementDetails mDetails;
+        private final int mCurrentUser;
+        private final Message mFinished;
 
-        receiver.updateExact(this, bundle);
+        private int mRemaining;
+
+        public StatsObserver(boolean isInternal, MeasurementDetails details, int currentUser,
+                Message finished, int remaining) {
+            mIsInternal = isInternal;
+            mDetails = details;
+            mCurrentUser = currentUser;
+            mFinished = finished;
+            mRemaining = remaining;
+        }
+
+        @Override
+        public void onGetStatsCompleted(PackageStats stats, boolean succeeded) {
+            synchronized (mDetails) {
+                if (succeeded) {
+                    addStatsLocked(stats);
+                }
+                if (--mRemaining == 0) {
+                    mFinished.sendToTarget();
+                }
+            }
+        }
+
+        private void addStatsLocked(PackageStats stats) {
+            final long externalSize = stats.externalCodeSize + stats.externalDataSize
+                    + stats.externalCacheSize + stats.externalMediaSize;
+
+            if (mIsInternal) {
+                final long codeSize;
+                final long dataSize;
+                if (Environment.isExternalStorageEmulated()) {
+                    // OBB is shared on emulated storage, so count once as code,
+                    // and data includes emulated storage.
+                    codeSize = stats.codeSize + stats.externalObbSize;
+                    dataSize = stats.dataSize + externalSize;
+                } else {
+                    codeSize = stats.codeSize;
+                    dataSize = stats.dataSize;
+                }
+
+                // Include code and combined data for current user
+                if (stats.userHandle == mCurrentUser) {
+                    mDetails.appsSize += codeSize;
+                    mDetails.appsSize += dataSize;
+                }
+
+                // Include combined data for user summary
+                addValue(mDetails.usersSize, stats.userHandle, dataSize);
+
+            } else {
+                // Physical storage; only count external sizes
+                mDetails.appsSize += externalSize + stats.externalObbSize;
+            }
+        }
     }
 
     private class MeasurementHandler extends Handler {
         public static final int MSG_MEASURE = 1;
-
         public static final int MSG_CONNECTED = 2;
-
         public static final int MSG_DISCONNECT = 3;
-
         public static final int MSG_COMPLETED = 4;
-
         public static final int MSG_INVALIDATE = 5;
 
         private Object mLock = new Object();
@@ -231,21 +282,21 @@ public class StorageMeasurement {
 
         private volatile boolean mBound = false;
 
-        private volatile boolean mMeasured = false;
-
-        private StatsObserver mStatsObserver;
+        private MeasurementDetails mCached;
 
         private final WeakReference<Context> mContext;
 
-        final private ServiceConnection mDefContainerConn = new ServiceConnection() {
+        private final ServiceConnection mDefContainerConn = new ServiceConnection() {
+            @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                final IMediaContainerService imcs = IMediaContainerService.Stub
-                .asInterface(service);
+                final IMediaContainerService imcs = IMediaContainerService.Stub.asInterface(
+                        service);
                 mDefaultContainer = imcs;
                 mBound = true;
                 sendMessage(obtainMessage(MSG_CONNECTED, imcs));
             }
 
+            @Override
             public void onServiceDisconnected(ComponentName name) {
                 mBound = false;
                 removeMessages(MSG_CONNECTED);
@@ -261,8 +312,8 @@ public class StorageMeasurement {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_MEASURE: {
-                    if (mMeasured) {
-                        sendExactUpdate();
+                    if (mCached != null) {
+                        sendExactUpdate(mCached);
                         break;
                     }
 
@@ -277,8 +328,8 @@ public class StorageMeasurement {
                             sendMessage(obtainMessage(MSG_CONNECTED, mDefaultContainer));
                         } else {
                             Intent service = new Intent().setComponent(DEFAULT_CONTAINER_COMPONENT);
-                            context.bindService(service, mDefContainerConn,
-                                    Context.BIND_AUTO_CREATE, mUser.getIdentifier());
+                            context.bindService(service, mDefContainerConn, Context.BIND_AUTO_CREATE,
+                                    UserHandle.USER_OWNER);
                         }
                     }
                     break;
@@ -304,89 +355,19 @@ public class StorageMeasurement {
                     break;
                 }
                 case MSG_COMPLETED: {
-                    mMeasured = true;
-                    sendExactUpdate();
+                    mCached = (MeasurementDetails) msg.obj;
+                    sendExactUpdate(mCached);
                     break;
                 }
                 case MSG_INVALIDATE: {
-                    mMeasured = false;
+                    mCached = null;
                     break;
                 }
             }
         }
 
-        /**
-         * Request measurement of each package.
-         *
-         * @param pm PackageManager instance to query
-         */
-        public void requestQueuedMeasurementsLocked(PackageManager pm) {
-            final String[] appsList = mStatsObserver.getAppsList();
-            final int N = appsList.length;
-            for (int i = 0; i < N; i++) {
-                pm.getPackageSizeInfo(appsList[i], mStatsObserver);
-            }
-        }
-
-        private class StatsObserver extends IPackageStatsObserver.Stub {
-            private long mAppsSizeForThisStatsObserver = 0;
-            private final List<String> mAppsList = new ArrayList<String>();
-
-            public void onGetStatsCompleted(PackageStats stats, boolean succeeded) {
-                if (!mStatsObserver.equals(this)) {
-                    // this callback's class object is no longer in use. ignore this callback.
-                    return;
-                }
-
-                if (succeeded) {
-                    if (mIsInternal) {
-                        if (mIncludeAppCodeSize) {
-                            mAppsSizeForThisStatsObserver += stats.codeSize;
-                        }
-                        mAppsSizeForThisStatsObserver += stats.dataSize;
-                    } else if (!Environment.isExternalStorageEmulated()) {
-                        mAppsSizeForThisStatsObserver += stats.externalObbSize +
-                                stats.externalCodeSize + stats.externalDataSize +
-                                stats.externalCacheSize + stats.externalMediaSize;
-                    } else {
-                        if (mIncludeAppCodeSize) {
-                            mAppsSizeForThisStatsObserver += stats.codeSize;
-                        }
-                        mAppsSizeForThisStatsObserver += stats.dataSize +
-                                stats.externalCodeSize + stats.externalDataSize +
-                                stats.externalCacheSize + stats.externalMediaSize +
-                                stats.externalObbSize;
-                    }
-                }
-
-                synchronized (mAppsList) {
-                    mAppsList.remove(stats.packageName);
-                    if (mAppsList.size() > 0) return;
-                }
-
-                mAppsSize = mAppsSizeForThisStatsObserver;
-                onInternalMeasurementComplete();
-            }
-
-            public void queuePackageMeasurementLocked(String packageName) {
-                synchronized (mAppsList) {
-                    mAppsList.add(packageName);
-                }
-            }
-
-            public String[] getAppsList() {
-                synchronized (mAppsList) {
-                    return mAppsList.toArray(new String[mAppsList.size()]);
-                }
-            }
-        }
-
-        private void onInternalMeasurementComplete() {
-            sendEmptyMessage(MSG_COMPLETED);
-        }
-
         private void measureApproximateStorage(IMediaContainerService imcs) {
-            final String path = mStorageVolume != null ? mStorageVolume.getPath()
+            final String path = mVolume != null ? mVolume.getPath()
                     : Environment.getDataDirectory().getPath();
             try {
                 final long[] stats = imcs.getFileSystemStats(path);
@@ -400,146 +381,116 @@ public class StorageMeasurement {
         }
 
         private void measureExactStorage(IMediaContainerService imcs) {
-            Context context = mContext != null ? mContext.get() : null;
+            final Context context = mContext != null ? mContext.get() : null;
             if (context == null) {
                 return;
             }
 
-            // Media
-            for (int i = 0; i < StorageVolumePreferenceCategory.sMediaCategories.length; i++) {
-                if (mIsPrimary) {
-                    String[] dirs = StorageVolumePreferenceCategory.sMediaCategories[i].mDirPaths;
-                    final int length = dirs.length;
-                    mMediaSizes[i] = 0;
-                    for (int d = 0; d < length; d++) {
-                        final String path = dirs[d];
-                        mMediaSizes[i] += getDirectorySize(imcs, path);
-                    }
-                } else {
-                    // TODO Compute sizes using the MediaStore
-                    mMediaSizes[i] = 0;
+            final MeasurementDetails details = new MeasurementDetails();
+            final Message finished = obtainMessage(MSG_COMPLETED, details);
+
+            final UserManager userManager = (UserManager) context.getSystemService(
+                    Context.USER_SERVICE);
+            final List<UserInfo> users = userManager.getUsers();
+
+            final int currentUser = ActivityManager.getCurrentUser();
+            final UserEnvironment currentEnv = new UserEnvironment(currentUser);
+
+            // Measure media types for emulated storage, or for primary physical
+            // external volume
+            final boolean measureMedia = (mIsInternal && Environment.isExternalStorageEmulated())
+                    || mIsPrimary;
+            if (measureMedia) {
+                for (String type : sMeasureMediaTypes) {
+                    final File path = currentEnv.getExternalStoragePublicDirectory(type);
+                    final long size = getDirectorySize(imcs, path);
+                    details.mediaSize.put(type, size);
                 }
             }
 
-            /* Compute sizes using the media provider
-            // Media sizes are measured by the MediaStore. Query database.
-            ContentResolver contentResolver = context.getContentResolver();
-            // TODO "external" as a static String from MediaStore?
-            Uri audioUri = MediaStore.Files.getContentUri("external");
-            final String[] projection =
-                new String[] { "sum(" + MediaStore.Files.FileColumns.SIZE + ")" };
-            final String selection =
-                MediaStore.Files.FileColumns.STORAGE_ID + "=" +
-                Integer.toString(mStorageVolume.getStorageId()) + " AND " +
-                MediaStore.Files.FileColumns.MEDIA_TYPE + "=?";
-
-            for (int i = 0; i < StorageVolumePreferenceCategory.sMediaCategories.length; i++) {
-                mMediaSizes[i] = 0;
-                int mediaType = StorageVolumePreferenceCategory.sMediaCategories[i].mediaType;
-                Cursor c = null;
-                try {
-                    c = contentResolver.query(audioUri, projection, selection,
-                            new String[] { Integer.toString(mediaType) } , null);
-
-                    if (c != null && c.moveToNext()) {
-                        long size = c.getLong(0);
-                        mMediaSizes[i] = size;
-                    }
-                } finally {
-                    if (c != null) c.close();
-                }
-            }
-             */
-
-            // Downloads (primary volume only)
-            if (mIsPrimary) {
-                final String downloadsPath = mUserEnv.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-                mDownloadsSize = getDirectorySize(imcs, downloadsPath);
-            } else {
-                mDownloadsSize = 0;
+            // Measure misc files not counted under media
+            if (mIsInternal || mIsPrimary) {
+                final File path = mIsInternal ? currentEnv.getExternalStorageDirectory()
+                        : mVolume.getPathFile();
+                details.miscSize = measureMisc(imcs, path);
             }
 
-            // Misc
-            mMiscSize = 0;
-            if (mIsPrimary) {
-                measureSizesOfMisc(imcs);
+            // Measure total emulated storage of all users; internal apps data
+            // will be spliced in later
+            for (UserInfo user : users) {
+                final UserEnvironment userEnv = new UserEnvironment(user.id);
+                final long size = getDirectorySize(imcs, userEnv.getExternalStorageDirectory());
+                addValue(details.usersSize, user.id, size);
             }
 
-            // Apps
-            // We have to get installd to measure the package sizes.
-            PackageManager pm = context.getPackageManager();
-            if (pm == null) {
-                return;
-            }
-            final List<ApplicationInfo> apps;
-            if (mIsPrimary || mIsInternal) {
-                apps = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES |
-                        PackageManager.GET_DISABLED_COMPONENTS);
-            } else {
-                // TODO also measure apps installed on the SD card
-                apps = Collections.emptyList();
-            }
+            // Measure all apps for all users
+            final PackageManager pm = context.getPackageManager();
+            if (mIsInternal || mIsPrimary) {
+                final List<ApplicationInfo> apps = pm.getInstalledApplications(
+                        PackageManager.GET_UNINSTALLED_PACKAGES
+                        | PackageManager.GET_DISABLED_COMPONENTS);
 
-            if (apps != null && apps.size() > 0) {
-                // initiate measurement of all package sizes. need new StatsObserver object.
-                mStatsObserver = new StatsObserver();
-                synchronized (mStatsObserver.mAppsList) {
-                    for (int i = 0; i < apps.size(); i++) {
-                        final ApplicationInfo info = apps.get(i);
-                        mStatsObserver.queuePackageMeasurementLocked(info.packageName);
+                final int count = users.size() * apps.size();
+                final StatsObserver observer = new StatsObserver(
+                        mIsInternal, details, currentUser, finished, count);
+
+                for (UserInfo user : users) {
+                    for (ApplicationInfo app : apps) {
+                        pm.getPackageSizeInfo(app.packageName, user.id, observer);
                     }
                 }
 
-                requestQueuedMeasurementsLocked(pm);
-                // Sending of the message back to the MeasurementReceiver is
-                // completed in the PackageObserver
             } else {
-                onInternalMeasurementComplete();
+                finished.sendToTarget();
             }
         }
     }
 
-    private long getDirectorySize(IMediaContainerService imcs, String dir) {
+    private static long getDirectorySize(IMediaContainerService imcs, File path) {
         try {
-            return imcs.calculateDirectorySize(dir);
+            final long size = imcs.calculateDirectorySize(path.toString());
+            Log.d(TAG, "getDirectorySize(" + path + ") returned " + size);
+            return size;
         } catch (Exception e) {
-            Log.w(TAG, "Could not read memory from default container service for " + dir, e);
+            Log.w(TAG, "Could not read memory from default container service for " + path, e);
             return 0;
         }
     }
 
-    long getMiscSize() {
-        return mMiscSize;
-    }
-
-    private void measureSizesOfMisc(IMediaContainerService imcs) {
-        File top = new File(mStorageVolume.getPath());
+    private long measureMisc(IMediaContainerService imcs, File dir) {
         mFileInfoForMisc = new ArrayList<FileInfo>();
-        File[] files = top.listFiles();
-        if (files == null) return;
-        final int len = files.length;
-        // Get sizes of all top level nodes except the ones already computed...
+
+        final File[] files = dir.listFiles();
+        if (files == null) return 0;
+
+        // Get sizes of all top level nodes except the ones already computed
         long counter = 0;
-        for (int i = 0; i < len; i++) {
-            String path = files[i].getAbsolutePath();
-            if (StorageVolumePreferenceCategory.sPathsExcludedForMisc.contains(path)) {
+        long miscSize = 0;
+
+        for (File file : files) {
+            final String path = file.getAbsolutePath();
+            final String name = file.getName();
+            if (sMeasureMediaTypes.contains(name)) {
                 continue;
             }
-            if (files[i].isFile()) {
-                final long fileSize = files[i].length();
+
+            if (file.isFile()) {
+                final long fileSize = file.length();
                 mFileInfoForMisc.add(new FileInfo(path, fileSize, counter++));
-                mMiscSize += fileSize;
-            } else if (files[i].isDirectory()) {
-                final long dirSize = getDirectorySize(imcs, path);
+                miscSize += fileSize;
+            } else if (file.isDirectory()) {
+                final long dirSize = getDirectorySize(imcs, file);
                 mFileInfoForMisc.add(new FileInfo(path, dirSize, counter++));
-                mMiscSize += dirSize;
+                miscSize += dirSize;
             } else {
                 // Non directory, non file: not listed
             }
         }
+
         // sort the list of FileInfo objects collected above in descending order of their sizes
         Collections.sort(mFileInfoForMisc);
+
+        return miscSize;
     }
 
     static class FileInfo implements Comparable<FileInfo> {
@@ -565,10 +516,7 @@ public class StorageMeasurement {
         }
     }
 
-    /**
-     * TODO remove this method, only used because external SD Card needs a special treatment.
-     */
-    boolean isExternalSDCard() {
-        return !mIsPrimary && !mIsInternal;
+    private static void addValue(SparseLongArray array, int key, long value) {
+        array.put(key, array.get(key) + value);
     }
 }
