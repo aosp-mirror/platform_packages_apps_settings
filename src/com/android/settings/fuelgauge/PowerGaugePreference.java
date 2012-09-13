@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.view.View;
@@ -37,7 +38,7 @@ public class PowerGaugePreference extends Preference {
     public PowerGaugePreference(Context context, Drawable icon, BatterySipper info) {
         super(context);
         setLayoutResource(R.layout.app_percentage_item);
-        setIcon(icon);
+        setIcon(icon != null ? icon : new ColorDrawable(0));
         mInfo = info;
     }
 
