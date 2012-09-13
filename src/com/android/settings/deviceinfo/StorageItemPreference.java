@@ -21,34 +21,38 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.os.UserHandle;
 import android.preference.Preference;
 
 import com.android.settings.R;
 
 public class StorageItemPreference extends Preference {
+    public final int color;
+    public final int userHandle;
 
-    private int mColor = Color.MAGENTA;
-
-    public StorageItemPreference(Context context, String key, int titleRes, int colorRes) {
-        this(context, key, context.getText(titleRes), colorRes);
+    public StorageItemPreference(Context context, int titleRes, int colorRes) {
+        this(context, context.getText(titleRes), colorRes, UserHandle.USER_NULL);
     }
 
-    public StorageItemPreference(Context context, String key, CharSequence title, int colorRes) {
+    public StorageItemPreference(
+            Context context, CharSequence title, int colorRes, int userHandle) {
         super(context);
-        //setLayoutResource(R.layout.app_percentage_item);
 
         if (colorRes != 0) {
-            mColor = context.getResources().getColor(colorRes);
+            this.color = context.getResources().getColor(colorRes);
 
             final Resources res = context.getResources();
             final int width = res.getDimensionPixelSize(R.dimen.device_memory_usage_button_width);
             final int height = res.getDimensionPixelSize(R.dimen.device_memory_usage_button_height);
-            setIcon(createRectShape(width, height, mColor));
+            setIcon(createRectShape(width, height, this.color));
+        } else {
+            this.color = Color.MAGENTA;
         }
 
-        setKey(key);
         setTitle(title);
         setSummary(R.string.memory_calculating_size);
+
+        this.userHandle = userHandle;
     }
 
     private static ShapeDrawable createRectShape(int width, int height, int color) {
@@ -57,9 +61,5 @@ public class StorageItemPreference extends Preference {
         shape.setIntrinsicWidth(width);
         shape.getPaint().setColor(color);
         return shape;
-    }
-
-    public int getColor() {
-        return mColor;
     }
 }
