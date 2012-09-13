@@ -185,7 +185,7 @@ public class DateTimeSettingsSetupWizard extends Activity
                 }
             }
             if (mAutoDateTimeButton != null) {
-                Settings.System.putInt(getContentResolver(), Settings.System.AUTO_TIME,
+                Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
                       mAutoDateTimeButton.isChecked() ? 1 : 0);
                 if (!mAutoDateTimeButton.isChecked()) {
                     DateTimeSettings.setDate(mDatePicker.getYear(), mDatePicker.getMonth(),
@@ -209,8 +209,8 @@ public class DateTimeSettingsSetupWizard extends Activity
         /*if (buttonView == mAutoTimeZoneButton) {
             // In XL screen, we save all the state only when the next button is pressed.
             if (!mUsingXLargeLayout) {
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.AUTO_TIME_ZONE,
+                Settings.Global.putInt(getContentResolver(),
+                        Settings.Global.AUTO_TIME_ZONE,
                         isChecked ? 1 : 0);
             }
             mTimeZone.setEnabled(!autoEnabled);
@@ -220,8 +220,8 @@ public class DateTimeSettingsSetupWizard extends Activity
             }
         } else */
         if (buttonView == mAutoDateTimeButton) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.AUTO_TIME,
+            Settings.Global.putInt(getContentResolver(),
+                    Settings.Global.AUTO_TIME,
                     isChecked ? 1 : 0);
             mTimePicker.setEnabled(!autoEnabled);
             mDatePicker.setEnabled(!autoEnabled);
@@ -296,7 +296,7 @@ public class DateTimeSettingsSetupWizard extends Activity
 
     private boolean isAutoDateTimeEnabled() {
         try {
-            return Settings.System.getInt(getContentResolver(), Settings.System.AUTO_TIME) > 0;
+            return Settings.Global.getInt(getContentResolver(), Settings.Global.AUTO_TIME) > 0;
         } catch (SettingNotFoundException e) {
             return true;
         }
@@ -305,8 +305,8 @@ public class DateTimeSettingsSetupWizard extends Activity
     /*
     private boolean isAutoTimeZoneEnabled() {
         try {
-            return Settings.System.getInt(getContentResolver(),
-                    Settings.System.AUTO_TIME_ZONE) > 0;
+            return Settings.Global.getInt(getContentResolver(),
+                    Settings.Global.AUTO_TIME_ZONE) > 0;
         } catch (SettingNotFoundException e) {
             return true;
         }
