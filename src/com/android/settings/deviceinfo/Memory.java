@@ -66,9 +66,9 @@ public class Memory extends SettingsPreferenceFragment {
     private static String sClickedMountPoint;
 
     // Access using getMountService()
-    private IMountService mMountService = null;
-    private StorageManager mStorageManager = null;
-    private UsbManager mUsbManager = null;
+    private IMountService mMountService;
+    private StorageManager mStorageManager;
+    private UsbManager mUsbManager;
 
     private ArrayList<StorageVolumePreferenceCategory> mCategories = Lists.newArrayList();
 
@@ -76,33 +76,28 @@ public class Memory extends SettingsPreferenceFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mUsbManager = (UsbManager)getSystemService(Context.USB_SERVICE);
+        final Context context = getActivity();
 
-        if (mStorageManager == null) {
-            mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
-            mStorageManager.registerListener(mStorageListener);
-        }
+        mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+
+        mStorageManager = StorageManager.from(context);
+        mStorageManager.registerListener(mStorageListener);
 
         addPreferencesFromResource(R.xml.device_info_memory);
 
-        if (!Environment.isExternalStorageEmulated()) {
-            // External storage is separate from internal storage; need to
-            // show internal storage as a separate item.
-            addCategoryForVolume(null);
-        }
+        addCategory(StorageVolumePreferenceCategory.buildForInternal(context));
 
         final StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
         for (StorageVolume volume : storageVolumes) {
-            addCategoryForVolume(volume);
+            if (!volume.isEmulated()) {
+                addCategory(StorageVolumePreferenceCategory.buildForPhysical(context, volume));
+            }
         }
 
         setHasOptionsMenu(true);
     }
 
-    private void addCategoryForVolume(StorageVolume volume) {
-        // TODO: Cluster multi-user emulated volumes into single category
-        final StorageVolumePreferenceCategory category = new StorageVolumePreferenceCategory(
-                getActivity(), volume);
+    private void addCategory(StorageVolumePreferenceCategory category) {
         mCategories.add(category);
         getPreferenceScreen().addPreference(category);
         category.init();
