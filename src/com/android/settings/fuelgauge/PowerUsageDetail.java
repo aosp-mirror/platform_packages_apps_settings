@@ -62,7 +62,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         WIFI,
         BLUETOOTH,
         SCREEN,
-        APP
+        APP,
+        USER
     }
 
     // Note: Must match the sequence of the DrainType
@@ -73,7 +74,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         R.string.battery_desc_wifi,
         R.string.battery_desc_bluetooth,
         R.string.battery_desc_display,
-        R.string.battery_desc_apps
+        R.string.battery_desc_apps,
+        R.string.battery_desc_users,
     };
 
     public static final int ACTION_DISPLAY_SETTINGS = 1;
