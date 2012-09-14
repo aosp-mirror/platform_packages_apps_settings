@@ -312,6 +312,10 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
         final boolean showDetails = mVolume == null || mVolume.isPrimary();
         if (!showDetails) return;
 
+        // Count caches as available space, since system manages them
+        mItemTotal.setSummary(formatSize(details.totalSize));
+        mItemAvailable.setSummary(formatSize(details.availSize + details.cacheSize));
+
         mUsageBarPreference.clear();
 
         updatePreference(mItemApps, details.appsSize);
@@ -326,7 +330,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
         updatePreference(mItemMusic, musicSize);
 
         final long downloadsSize = totalValues(details.mediaSize, Environment.DIRECTORY_DOWNLOADS);
-        updatePreference(mItemDownloads, musicSize);
+        updatePreference(mItemDownloads, downloadsSize);
 
         updatePreference(mItemMisc, details.miscSize);
 
