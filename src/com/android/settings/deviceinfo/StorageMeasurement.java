@@ -96,6 +96,9 @@ public class StorageMeasurement {
     }
 
     public static class MeasurementDetails {
+        public long totalSize;
+        public long availSize;
+
         /**
          * Total apps disk usage.
          * <p>
@@ -109,6 +112,11 @@ public class StorageMeasurement {
          * usage by all apps on that volume.
          */
         public long appsSize;
+
+        /**
+         * Total cache disk usage by apps.
+         */
+        public long cacheSize;
 
         /**
          * Total media disk usage, categorized by types such as
@@ -237,34 +245,36 @@ public class StorageMeasurement {
         }
 
         private void addStatsLocked(PackageStats stats) {
-            final long externalSize = stats.externalCodeSize + stats.externalDataSize
-                    + stats.externalCacheSize + stats.externalMediaSize;
-
             if (mIsInternal) {
-                final long codeSize;
-                final long dataSize;
+                long codeSize = stats.codeSize;
+                long dataSize = stats.dataSize;
+                long cacheSize = stats.cacheSize;
                 if (Environment.isExternalStorageEmulated()) {
-                    // OBB is shared on emulated storage, so count once as code,
-                    // and data includes emulated storage.
-                    codeSize = stats.codeSize + stats.externalObbSize;
-                    dataSize = stats.dataSize + externalSize;
-                } else {
-                    codeSize = stats.codeSize;
-                    dataSize = stats.dataSize;
+                    // Include emulated storage when measuring internal. OBB is
+                    // shared on emulated storage, so treat as code.
+                    codeSize += stats.externalCodeSize + stats.externalObbSize;
+                    dataSize += stats.externalDataSize + stats.externalMediaSize;
+                    cacheSize += stats.externalCacheSize;
                 }
 
-                // Include code and combined data for current user
+                // Count code and data for current user
                 if (stats.userHandle == mCurrentUser) {
                     mDetails.appsSize += codeSize;
                     mDetails.appsSize += dataSize;
                 }
 
-                // Include combined data for user summary
+                // User summary only includes data (code is only counted once
+                // for the current user)
                 addValue(mDetails.usersSize, stats.userHandle, dataSize);
+
+                // Include cache for all users
+                mDetails.cacheSize += cacheSize;
 
             } else {
                 // Physical storage; only count external sizes
-                mDetails.appsSize += externalSize + stats.externalObbSize;
+                mDetails.appsSize += stats.externalCodeSize + stats.externalDataSize
+                        + stats.externalMediaSize + stats.externalObbSize;
+                mDetails.cacheSize += stats.externalCacheSize;
             }
         }
     }
@@ -388,6 +398,9 @@ public class StorageMeasurement {
 
             final MeasurementDetails details = new MeasurementDetails();
             final Message finished = obtainMessage(MSG_COMPLETED, details);
+
+            details.totalSize = mTotalSize;
+            details.availSize = mAvailSize;
 
             final UserManager userManager = (UserManager) context.getSystemService(
                     Context.USER_SERVICE);
