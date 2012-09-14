@@ -254,19 +254,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         mUserSelectedWidget = root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
-        int appWidgetId = -1;
-        String appWidgetIdString = Settings.Secure.getString(
-                getContentResolver(), Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID);
-        if (appWidgetIdString != null) {;
-            appWidgetId = (int) Integer.decode(appWidgetIdString);
-        }
-        if (appWidgetId == -1) {
-            mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_none));
-        } else {
-            AppWidgetProviderInfo appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
-            if (appWidget != null) {
-                mUserSelectedWidget.setSummary(appWidget.label);
+        if (mUserSelectedWidget != null) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
+            int appWidgetId = -1;
+            String appWidgetIdString = Settings.Secure.getString(
+                    getContentResolver(), Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID);
+            if (appWidgetIdString != null) {;
+                appWidgetId = (int) Integer.decode(appWidgetIdString);
+            }
+            if (appWidgetId == -1) {
+                mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_none));
+            } else {
+                AppWidgetProviderInfo appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
+                if (appWidget != null) {
+                    mUserSelectedWidget.setSummary(appWidget.label);
+                }
             }
         }
 
