@@ -21,13 +21,18 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.appwidget.AppWidgetHost;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.Vibrator;
@@ -41,8 +46,8 @@ import android.provider.Settings;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.android.internal.telephony.Phone;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.ArrayList;
@@ -53,9 +58,12 @@ import java.util.List;
  */
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener {
+    static final String TAG = "SecuritySettings";
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+    private static final String KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET =
+            "choose_user_selected_lockscreen_widget";
     private static final String KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING =
             "biometric_weak_improve_matching";
     private static final String KEY_BIOMETRIC_WEAK_LIVELINESS = "biometric_weak_liveliness";
@@ -64,9 +72,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
+    private static final String EXTRA_NO_WIDGET = "com.android.settings.NO_WIDGET";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
+    private static final int REQUEST_PICK_APPWIDGET = 126;
+    private static final int REQUEST_CREATE_APPWIDGET = 127;
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -80,6 +91,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     DevicePolicyManager mDPM;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+    private Preference mUserSelectedWidget;
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
 
@@ -241,6 +253,23 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mToggleVerifyApps.setEnabled(false);
         }
 
+        mUserSelectedWidget = root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
+        int appWidgetId = -1;
+        String appWidgetIdString = Settings.Secure.getString(
+                getContentResolver(), Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID);
+        if (appWidgetIdString != null) {;
+            appWidgetId = (int) Integer.decode(appWidgetIdString);
+        }
+        if (appWidgetId == -1) {
+            mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_none));
+        } else {
+            AppWidgetProviderInfo appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
+            if (appWidget != null) {
+                mUserSelectedWidget.setSummary(appWidget.label);
+            }
+        }
+
         return root;
     }
 
@@ -393,6 +422,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
     }
 
+    void startActivityForResultSafely(Intent intent, int requestCode) {
+        try {
+            startActivityForResult(intent, requestCode);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getActivity(), R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+        } catch (SecurityException e) {
+            Toast.makeText(getActivity(), R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Settings does not have the permission to launch " + intent, e);
+        }
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
@@ -401,6 +441,38 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+        } else if (KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET.equals(key)) {
+            // Create intent to pick widget
+            Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+            // Found in KeyguardHostView.java
+            final int KEYGUARD_HOST_ID = 0x4B455947;
+            int appWidgetId = AppWidgetHost.allocateAppWidgetIdForHost(
+                    "com.android.internal.policy.impl.keyguard", KEYGUARD_HOST_ID);
+            if (appWidgetId != -1) {
+                pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
+                        AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+
+                // Add an entry for "none" to let someone select no widget
+                AppWidgetProviderInfo noneInfo = new AppWidgetProviderInfo();
+                ArrayList<AppWidgetProviderInfo> extraInfos = new ArrayList<AppWidgetProviderInfo>();
+                noneInfo.label = getResources().getString(R.string.widget_none);
+                noneInfo.provider = new ComponentName("", "");
+                extraInfos.add(noneInfo);
+
+                ArrayList<Bundle> extraExtras = new ArrayList<Bundle>();
+                Bundle b = new Bundle();
+                b.putBoolean(EXTRA_NO_WIDGET, true);
+                extraExtras.add(b);
+
+                // Launch the widget picker
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
+                startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
+            } else {
+                Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
+            }
         } else if (KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
@@ -479,10 +551,45 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 resultCode == Activity.RESULT_OK) {
             final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
             lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
-	    // Setting the mBiometricWeakLiveliness checked value to false is handled when onResume
-	    // is called by grabbing the value from lockPatternUtils.  We can't set it here
-	    // because mBiometricWeakLiveliness could be null
+            // Setting the mBiometricWeakLiveliness checked value to false is handled when onResume
+            // is called by grabbing the value from lockPatternUtils.  We can't set it here
+            // because mBiometricWeakLiveliness could be null
             return;
+        } else if (requestCode == REQUEST_PICK_APPWIDGET ||
+                requestCode == REQUEST_CREATE_APPWIDGET) {
+            int appWidgetId = (data == null) ? -1 : data.getIntExtra(
+                    AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+            if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == Activity.RESULT_OK) {
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
+                boolean noWidget = data.getBooleanExtra(EXTRA_NO_WIDGET, false);
+
+                AppWidgetProviderInfo appWidget = null;
+                if (!noWidget) {
+                    appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
+                }
+
+                if (!noWidget && appWidget.configure != null) {
+                    // Launch over to configure widget, if needed
+                    Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
+                    intent.setComponent(appWidget.configure);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+
+                    startActivityForResultSafely(intent, REQUEST_CREATE_APPWIDGET);
+                } else {
+                    // Otherwise just add it
+                    if (noWidget) {
+                        data.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+                    }
+                    onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
+                }
+            } else if (requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
+                Settings.Secure.putString(getContentResolver(),
+                        Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID,
+                        Integer.toString(appWidgetId));
+
+            } else {
+                AppWidgetHost.deleteAppWidgetIdForHost(appWidgetId);
+            }
         }
         createPreferenceHierarchy();
     }

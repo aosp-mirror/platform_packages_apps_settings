@@ -794,6 +794,12 @@
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title">Screen lock</string>
 
+    <!--  Title for PreferenceScreen to launch picker for a user-selected widget that will live on lock screen [CHAR LIMIT=22] -->
+    <string name="choose_user_selected_lockscreen_widget_picker_title">Widget</string>
+
+    <!--  String to display if there is no user-selected widget on lock screen [CHAR LIMIT=22] -->
+    <string name="widget_none">None</string>
+
     <!--  Title for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_change_title">Change lock screen</string>
 
@@ -2342,6 +2348,8 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">Too many incorrect attempts!</string>
     <!-- Security & location settings screen, change unlock pattern screen countdown hint on bottom of screen after too many incorrect attempts -->
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">Try again in <xliff:g id="number">%d</xliff:g> seconds.</string>
+    <!-- Displayed when user launches a widget configuration activity that was uninstalled -->
+    <string name="activity_not_found">Application is not installed on your phone.</string>
 
     <!-- ChooseLockPatternTutorial --> <skip />
     <!-- ChooseLockPatternTutorial, button labels: This is to cancel the tutorial -->
