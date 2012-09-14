@@ -31,6 +31,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -98,10 +99,10 @@ public class UserSettings extends SettingsPreferenceFragment
     private EditTextPreference mNicknamePreference;
     private int mRemovingUserId = -1;
     private boolean mAddingUser;
+    private boolean mProfileExists;
 
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
-    private boolean mProfileChanged;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -111,13 +112,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 updateUserList();
                 break;
             }
-        }
-    };
-
-    private ContentObserver mProfileObserver = new ContentObserver(mHandler) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mProfileChanged = true;
         }
     };
 
@@ -143,11 +137,8 @@ public class UserSettings extends SettingsPreferenceFragment
         mNicknamePreference = (EditTextPreference) findPreference(KEY_USER_NICKNAME);
         mNicknamePreference.setOnPreferenceChangeListener(this);
         mNicknamePreference.setSummary(mUserManager.getUserInfo(UserHandle.myUserId()).name);
-        loadProfile(false);
+        loadProfile();
         setHasOptionsMenu(true);
-        // Register to watch for profile changes
-        getActivity().getContentResolver().registerContentObserver(
-                ContactsContract.Profile.CONTENT_URI, false, mProfileObserver);
         getActivity().registerReceiver(mUserChangeReceiver,
                 new IntentFilter(Intent.ACTION_USER_REMOVED));
     }
@@ -155,17 +146,13 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        if (mProfileChanged) {
-            loadProfile(true);
-            mProfileChanged = false;
-        }
+        loadProfile();
         updateUserList();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().getContentResolver().unregisterContentObserver(mProfileObserver);
         getActivity().unregisterReceiver(mUserChangeReceiver);
     }
 
@@ -198,13 +185,29 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void loadProfile(boolean force) {
-        UserInfo user = mUserManager.getUserInfo(UserHandle.myUserId());
-        if (force || user.iconPath == null || user.iconPath.equals("")) {
-            assignProfilePhoto(user);
-        }
-        String profileName = getProfileName();
+    private void loadProfile() {
+        mProfileExists = false;
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected void onPostExecute(String result) {
+                finishLoadProfile(result);
+            }
+
+            @Override
+            protected String doInBackground(Void... values) {
+                UserInfo user = mUserManager.getUserInfo(UserHandle.myUserId());
+                if (user.iconPath == null || user.iconPath.equals("")) {
+                    assignProfilePhoto(user);
+                }
+                String profileName = getProfileName();
+                return profileName;
+            }
+        }.execute();
+    }
+
+    private void finishLoadProfile(String profileName) {
         mMePreference.setTitle(profileName);
+        setPhotoId(mMePreference, mUserManager.getUserInfo(UserHandle.myUserId()));
     }
 
     private void onAddUserClicked() {
@@ -343,37 +346,10 @@ public class UserSettings extends SettingsPreferenceFragment
         getActivity().invalidateOptionsMenu();
     }
 
-    /* TODO: Put this in an AsyncTask */
     private void assignProfilePhoto(final UserInfo user) {
-        // If the contact is "me", then use my local profile photo. Otherwise, build a
-        // uri to get the avatar of the contact.
-        Uri contactUri = Profile.CONTENT_URI;
-
-        InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
-                    getActivity().getContentResolver(),
-                    contactUri, true);
-        // If there's no profile photo, assign a default avatar
-        if (avatarDataStream == null) {
+        if (!ProfileUpdateReceiver.copyProfilePhoto(getActivity(), user)) {
             assignDefaultPhoto(user);
-            setPhotoId(mMePreference, user);
-            return;
         }
-
-        ParcelFileDescriptor fd = mUserManager.setUserIcon(user.id);
-        FileOutputStream os = new ParcelFileDescriptor.AutoCloseOutputStream(fd);
-        byte[] buffer = new byte[4096];
-        int readSize;
-        try {
-            while ((readSize = avatarDataStream.read(buffer)) > 0) {
-                os.write(buffer, 0, readSize);
-            }
-            os.close();
-            avatarDataStream.close();
-        } catch (IOException ioe) {
-            Log.e(TAG, "Error copying profile photo " + ioe);
-        }
-
-        setPhotoId(mMePreference, user);
     }
 
     private String getProfileName() {
@@ -387,6 +363,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
         try {
             if (cursor.moveToFirst()) {
+                mProfileExists = true;
                 return cursor.getString(cursor.getColumnIndex(Phone.DISPLAY_NAME));
             }
         } finally {
@@ -421,8 +398,14 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
-            Intent editProfile = new Intent(Intent.ACTION_EDIT);
-            editProfile.setData(ContactsContract.Profile.CONTENT_URI);
+            Intent editProfile;
+            if (!mProfileExists) {
+                editProfile = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
+                // TODO: Make this a proper API
+                editProfile.putExtra("newLocalProfile", true);
+            } else {
+                editProfile = new Intent(Intent.ACTION_EDIT, ContactsContract.Profile.CONTENT_URI);
+            }
             // To make sure that it returns back here when done
             // TODO: Make this a proper API
             editProfile.putExtra("finishActivityOnSaveCompleted", true);
