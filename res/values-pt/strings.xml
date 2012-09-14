@@ -600,6 +600,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Pesquisando…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Renomear dispositivo"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Dispositivos pareados"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Grupos lembrados"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Não foi possível conectar."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Falha ao renomear dispositivo."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Desconectar?"</string>
@@ -607,6 +608,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Se você se desconectar, sua conexão com <xliff:g id="PEER_NAME">%1$s</xliff:g> e <xliff:g id="PEER_COUNT">%2$s</xliff:g> outros dispositivos serão encerrados."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Cancelar convite?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Deseja cancelar o convite para se conectar com <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Excluir o grupo?"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Deseja excluir o grupo <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Wi-Fi portátil"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Ativando o ponto de acesso..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Desativando o ponto de acesso..."</string>
@@ -679,17 +682,16 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Plano de fundo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecionar plano de fundo de"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Sonho"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Quando encaixado ou em suspensão e carregamento"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Quando em suspensão e carregamento"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Quando encaixado"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Quando encaixado ou suspenso e carregando"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Ou"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Quando suspenso e carregando"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Quando encaixado"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Desativada"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"Sonho selecionado"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Quando ativar"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inativo"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Nunca"</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"Teste-o!"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Iniciar em suspensão"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Iniciar quando encaixado"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Para controlar o que acontece quando o telefone está encaixado e/ou suspenso, ative o Dreams."</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Começar a sonhar agora"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Quando sonhar"</string>
+    <!-- no translation found for screensaver_settings_dream_start (1265346994126658796) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"Brilho automático"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamanho da fonte"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Tamanho da fonte"</string>
@@ -759,6 +761,8 @@
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Armaz. USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Cartão SD"</string>
     <string name="memory_available" msgid="5052397223077021181">"Disponível"</string>
+    <!-- no translation found for memory_available_read_only (6497534390167920206) -->
+    <skip />
     <string name="memory_size" msgid="6629067715017232195">"Espaço total"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Calculando..."</string>
     <string name="memory_apps_usage" msgid="2348501997988663688">"Aplicativos (dados de aplic. e conteúdo de mídia)"</string>
@@ -782,7 +786,6 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Apaga todos os dados do armazenamento USB interno, como músicas e fotos"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Apaga todos os dados do cartão SD, como músicas e fotos"</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"A função MTP ou PTP está ativa"</string>
-    <string name="read_only" msgid="6702420168629076340">" (Somente leitura)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Desconectar armazenamento USB?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Desconectar cartão SD?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"Se você desconectar o armazenamento USB, alguns aplicativos que estão em uso serão interrompidos e podem não estar disponíveis até você conectar o armazenamento USB novamente."</string>
@@ -805,6 +808,8 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"Câmera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Permite a transferência de fotos usando o software da câmera e transfere todos os arquivos em computadores que não suportam MTP"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Instalar ferramentas de transferência de arquivos"</string>
+    <!-- no translation found for storage_other_users (808708845102611856) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"Status da bateria"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nível da bateria"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -993,6 +998,10 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"Permitir a instalação de aplicativos de fontes desconhecidas"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Seu tablet e seus dados pessoais são mais vulneráveis ​​a ataques de aplicativos de fontes desconhecidas. Você concorda que é o único responsável por qualquer dano a seu tablet ou perda de dados decorrentes do uso desses aplicativos."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Seu telefone e seus dados pessoais são mais vulneráveis ​​a ataques de aplicativos de fontes desconhecidas. Você concorda que é o único responsável por qualquer dano ao seu telefone ou perda de dados decorrentes do uso desses aplicativos."</string>
+    <!-- no translation found for verify_applications (3532112158501736577) -->
+    <skip />
+    <!-- no translation found for verify_applications_summary (6737505521913263792) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"Configurações avançadas"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Ativa mais opções de configuração"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informações do aplicativo"</string>
@@ -1250,14 +1259,31 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Configurações de acessibilidade"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Serviços"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
-    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Texto grande"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Botão de ligar encerra a chamada"</string>
-    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Falar senhas"</string>
-    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Atraso ao tocar e pressionar"</string>
-    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Melhorar a acessibilidade na web"</string>
+    <!-- no translation found for accessibility_screen_magnification_title (159538947700130120) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary (3349112911447101716) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_large_text_preference_title (6307247527580207161) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_screen_magnification_preference_title (2472285215737820469) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_screen_magnification_auto_update_preference_title (7218498768415430963) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_screen_magnification_auto_update_preference_summary (4392059334816220155) -->
+    <skip />
+    <!-- no translation found for accessibility_power_button_ends_call_prerefence_title (6673851944175874235) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_speak_password_preference_title (5986628515113204844) -->
+    <skip />
+    <!-- no translation found for accessibility_long_press_timeout_preference_title (6708467774619266508) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_script_injection_preference_title (7950932054266694403) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configurações"</string>
-    <string name="accessibility_service_state_on" msgid="8791337599927106344">"Ativado"</string>
-    <string name="accessibility_service_state_off" msgid="2458594460762620776">"Desativado"</string>
+    <!-- no translation found for accessibility_feature_state_on (2864292320042673806) -->
+    <skip />
+    <!-- no translation found for accessibility_feature_state_off (4172584906487070211) -->
+    <skip />
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Permitido"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Não permitido"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Permitir"</string>
@@ -1340,6 +1366,8 @@
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Parar ou desinstalar o aplicativo"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Controlar o GPS manualmente para evitar sua utilização pelo aplicativo"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"O aplicativo pode oferecer configurações para reduzir o uso da bateria"</string>
+    <!-- no translation found for battery_desc_users (7682989161885027823) -->
+    <skip />
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que foi desconectado"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Quando foi desconectado pela última vez para <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Total de uso"</string>
@@ -1396,6 +1424,34 @@
     <string name="gadget_title" msgid="5519037532720577836">"Controle de energia"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Atualizando configuração Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Atualizando configuração Bluetooth"</string>
+    <!-- no translation found for gadget_state_template (5156935629902649932) -->
+    <skip />
+    <!-- no translation found for gadget_state_on (6909119593004937688) -->
+    <skip />
+    <!-- no translation found for gadget_state_off (5220212352953066317) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_on (3395992057029439039) -->
+    <skip />
+    <!-- no translation found for gadget_state_turning_off (2395546048102176157) -->
+    <skip />
+    <!-- no translation found for gadget_wifi (5960290421313061434) -->
+    <skip />
+    <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
+    <skip />
+    <!-- no translation found for gadget_gps (1558173602059236567) -->
+    <skip />
+    <!-- no translation found for gadget_sync (858895763714222152) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_template (930541920933123603) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_auto (6667967252426515446) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
+    <skip />
+    <!-- no translation found for gadget_brightness_state_off (946382262872753084) -->
+    <skip />
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Armazenamento de credenciais"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar do armazenamento"</string>
@@ -1581,12 +1637,19 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de anim. da janela"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Escala anim. de transição"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala de duração do Animator"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simular displays secund."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplicativos"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Não manter atividades"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destruir todas as atividades quando o usuário sair"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite do proc. 2o plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Mostrar todos os ANRS"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Exibir \"App não responde\" para aplic. em 2o plano"</string>
+    <!-- no translation found for debug_accessibility_category (3417643359072054409) -->
+    <skip />
+    <!-- no translation found for display_magnification_auto_update (4236067240516003515) -->
+    <skip />
+    <!-- no translation found for display_magnification_auto_update_summary (5022668486882658025) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de dados"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo do uso de dados"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de dados"</string>
@@ -1707,23 +1770,31 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desativado"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissivo"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Impondo"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <string name="user_settings_title" msgid="6151874007858148344">"Usuários"</string>
+    <!-- no translation found for user_list_title (8866161687358773982) -->
     <skip />
-    <string name="user_list_title" msgid="2152311434413878709">"Usuários"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Adicionar usuário"</string>
-    <string name="user_details_title" msgid="3037625632127241370">"Editar detalhes"</string>
-    <string name="user_information_heading" msgid="8728151075759863162">"Informações do usuário"</string>
-    <string name="user_name_title" msgid="7563724675699398319">"Nome"</string>
-    <string name="user_restrictions_heading" msgid="4426403050397418553">"Restrições de conteúdo"</string>
-    <string name="user_market_requires_pin" msgid="3260702297207279414">"Solicitar PIN"</string>
-    <string name="user_max_content_rating" msgid="8297759970216482772">"Classificação do conteúdo"</string>
-    <string name="user_system_apps_heading" msgid="2408331798732183682">"Aplicativos do sistema"</string>
-    <string name="user_market_apps_heading" msgid="4657387297168308251">"Aplicativos instalados"</string>
-    <string name="user_discard_user_menu" msgid="6638388031088461242">"Descartar"</string>
+    <!-- no translation found for user_summary_active (4740649452346004418) -->
+    <skip />
+    <!-- no translation found for user_summary_inactive (3758296246095054572) -->
+    <skip />
+    <!-- no translation found for user_owner (3879126011135546571) -->
+    <skip />
+    <!-- no translation found for user_nickname (5148818000228994488) -->
+    <skip />
+    <!-- no translation found for user_add_user_title (3961861593718285403) -->
+    <skip />
+    <!-- no translation found for user_add_user_message (140543405860254208) -->
+    <skip />
     <string name="user_remove_user_menu" msgid="3210146886949340574">"Remover usuário"</string>
-    <string name="user_new_user_name" msgid="7603010274765911161">"Criança travessa"</string>
+    <!-- no translation found for user_new_user_name (369856859816028856) -->
+    <skip />
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Remover usuário?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Tem certeza que deseja remover o usuário e todos os dados associados do dispositivo?"</string>
+    <!-- no translation found for user_adding_new_user (1521674650874241407) -->
+    <skip />
+    <!-- no translation found for user_delete_user_description (3158592592118767056) -->
+    <skip />
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Mostrar notificações"</string>
     <string name="help_label" msgid="1107174367904110532">"Ajuda"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Conta para conteúdo"</string>
