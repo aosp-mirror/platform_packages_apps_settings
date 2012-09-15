@@ -100,6 +100,7 @@ public class Settings extends PreferenceActivity
             R.id.wireless_section,
             R.id.wifi_settings,
             R.id.bluetooth_settings,
+            R.id.data_usage_settings,
             R.id.device_section,
             R.id.sound_settings,
             R.id.display_settings,

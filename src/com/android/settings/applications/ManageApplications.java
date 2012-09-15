@@ -20,6 +20,7 @@ import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.INotificationManager;
@@ -41,6 +42,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFrameLayout;
 import android.provider.Settings;
@@ -1119,11 +1121,15 @@ public class ManageApplications extends Fragment implements
                                 + prefActivities.get(i).getPackageName());
                         pm.clearPackagePreferredActivities(prefActivities.get(i).getPackageName());
                     }
-                    final int[] restrictedAppIds = npm.getAppsWithPolicy(
+                    final int[] restrictedUids = npm.getUidsWithPolicy(
                             POLICY_REJECT_METERED_BACKGROUND);
-                    for (int i : restrictedAppIds) {
-                        if (DEBUG) Log.v(TAG, "Clearing data policy: " + i);
-                        npm.setAppPolicy(i, POLICY_NONE);
+                    final int currentUserId = ActivityManager.getCurrentUser();
+                    for (int uid : restrictedUids) {
+                        // Only reset for current user
+                        if (UserHandle.getUserId(uid) == currentUserId) {
+                            if (DEBUG) Log.v(TAG, "Clearing data policy: " + uid);
+                            npm.setUidPolicy(uid, POLICY_NONE);
+                        }
                     }
                     handler.post(new Runnable() {
                         @Override public void run() {
