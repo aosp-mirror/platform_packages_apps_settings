@@ -245,12 +245,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
         // Package verification
-        mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
-        if (isVerifierInstalled()) {
-            mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
-        } else {
-            mToggleVerifyApps.setChecked(false);
-            mToggleVerifyApps.setEnabled(false);
+        if (showVerifierSetting()) {
+            mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
+            if (isVerifierInstalled()) {
+                mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
+            } else {
+                mToggleVerifyApps.setChecked(false);
+                mToggleVerifyApps.setEnabled(false);
+            }
         }
 
         mUserSelectedWidget = root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
@@ -298,6 +300,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(verification, 0);
         return (receivers.size() > 0) ? true : false;
+    }
+
+    private boolean showVerifierSetting() {
+        return Settings.Global.getInt(getContentResolver(),
+                                      Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
     }
 
     private void warnAppInstallation() {
