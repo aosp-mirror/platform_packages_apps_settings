@@ -79,7 +79,7 @@ public class TetherSettings extends SettingsPreferenceFragment
     private String[] mWifiRegexs;
 
     private String[] mBluetoothRegexs;
-    private AtomicReference<BluetoothPan> mBluetoothPan;
+    private AtomicReference<BluetoothPan> mBluetoothPan = new AtomicReference<BluetoothPan>();
 
     private static final String WIFI_AP_SSID_AND_SECURITY = "wifi_ap_ssid_and_security";
     private static final int CONFIG_SUBTEXT = R.string.wifi_tether_configure_subtext;
