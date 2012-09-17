@@ -23,25 +23,41 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor.AutoCloseOutputStream;
 import android.os.SystemProperties;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity.Header;
 import android.preference.PreferenceFrameLayout;
 import android.preference.PreferenceGroup;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Profile;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import com.android.settings.users.ProfileUpdateReceiver;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
@@ -444,5 +460,56 @@ public class Utils {
         } else {
             return R.string.tether_settings_title_bluetooth;
         }
+    }
+
+    /* Used by UserSettings as well. Call this on a non-ui thread. */
+    public static boolean copyMeProfilePhoto(Context context, UserInfo user) {
+        Uri contactUri = Profile.CONTENT_URI;
+
+        InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
+                    context.getContentResolver(),
+                    contactUri, true);
+        // If there's no profile photo, assign a default avatar
+        if (avatarDataStream == null) {
+            return false;
+        }
+        int userId = user != null ? user.id : UserHandle.myUserId();
+        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        ParcelFileDescriptor fd = um.setUserIcon(userId);
+        FileOutputStream os = new ParcelFileDescriptor.AutoCloseOutputStream(fd);
+        byte[] buffer = new byte[4096];
+        int readSize;
+        try {
+            while ((readSize = avatarDataStream.read(buffer)) > 0) {
+                os.write(buffer, 0, readSize);
+            }
+            return true;
+        } catch (IOException ioe) {
+            Log.e("copyProfilePhoto", "Error copying profile photo " + ioe);
+        } finally {
+            try {
+                os.close();
+                avatarDataStream.close();
+            } catch (IOException ioe) { }
+        }
+        return false;
+    }
+
+    public static String getMeProfileName(Context context) {
+        Cursor cursor = context.getContentResolver().query(
+                    Profile.CONTENT_URI, new String[] {Phone._ID, Phone.DISPLAY_NAME},
+                    null, null, null);
+        if (cursor == null) {
+            return null;
+        }
+
+        try {
+            if (cursor.moveToFirst()) {
+                return cursor.getString(cursor.getColumnIndex(Phone.DISPLAY_NAME));
+            }
+        } finally {
+            cursor.close();
+        }
+        return null;
     }
 }
