@@ -74,7 +74,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
             finish();
         }
     }
-    
+
     /**
      * Create list entries for any custom widgets requested through
      * {@link AppWidgetManager#EXTRA_CUSTOM_INFO}.
@@ -129,7 +129,12 @@ public class AppWidgetPickActivity extends ActivityPicker {
         }
 
         if (LOGD) Log.d(TAG, "Using " + customInfo.size() + " custom items");
-        putAppWidgetItems(customInfo, customExtras, items);
+        // We don't filter out any widgets.
+        int categoryFilter = AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN |
+                AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD;
+        // We don't require any features.
+        int featuresFilter = AppWidgetProviderInfo.WIDGET_FEATURES_NONE;
+        putAppWidgetItems(customInfo, customExtras, items, categoryFilter, featuresFilter);
     }
     
     /**
@@ -166,12 +171,13 @@ public class AppWidgetPickActivity extends ActivityPicker {
      * inserting extras if provided.
      */
     void putAppWidgetItems(List<AppWidgetProviderInfo> appWidgets,
-            List<Bundle> customExtras, List<PickAdapter.Item> items) {
+            List<Bundle> customExtras, List<PickAdapter.Item> items, int categoryFilter,
+            int featuresFilter) {
         if (appWidgets == null) return;
         final int size = appWidgets.size();
         for (int i = 0; i < size; i++) {
             AppWidgetProviderInfo info = appWidgets.get(i);
-            
+
             CharSequence label = info.label;
             Drawable icon = null;
 
@@ -184,18 +190,28 @@ public class AppWidgetPickActivity extends ActivityPicker {
             }
             
             PickAdapter.Item item = new PickAdapter.Item(this, label, icon);
-            
+
             item.packageName = info.provider.getPackageName();
             item.className = info.provider.getClassName();
             
             if (customExtras != null) {
                 item.extras = customExtras.get(i);
             }
-            
+
+            // We remove any widgets whose category isn't included in the filter
+            if ((info.widgetCategory & categoryFilter) == 0) {
+                continue;
+            }
+
+            // We remove any widgets who don't have all the features in the features filter
+            if ((info.widgetFeatures & featuresFilter) != featuresFilter) {
+                continue;
+            }
+
             items.add(item);
         }
     }
-    
+
     /**
      * Build and return list of items to be shown in dialog. This will mix both
      * installed {@link AppWidgetProviderInfo} and those provided through
@@ -204,8 +220,20 @@ public class AppWidgetPickActivity extends ActivityPicker {
     @Override
     protected List<PickAdapter.Item> getItems() {
         List<PickAdapter.Item> items = new ArrayList<PickAdapter.Item>();
-        
-        putInstalledAppWidgets(items);
+
+        final Intent intent = getIntent();
+        int categoryFilter = AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN;
+        if (intent.getExtras().containsKey(AppWidgetManager.EXTRA_CATEGORY_FILTER)) {
+            categoryFilter = intent.getExtras().getInt(AppWidgetManager.EXTRA_CATEGORY_FILTER);
+        }
+
+        // If not specified, we don't filter on any specific
+        int featuresFilter = AppWidgetProviderInfo.WIDGET_FEATURES_NONE;
+        if (intent.getExtras().containsKey(AppWidgetManager.EXTRA_FEATURES_FILTER)) {
+            featuresFilter = intent.getExtras().getInt(AppWidgetManager.EXTRA_CATEGORY_FILTER);
+        }
+
+        putInstalledAppWidgets(items, categoryFilter, featuresFilter);
         putCustomAppWidgets(items);
         
         // Sort all items together by label
@@ -222,9 +250,9 @@ public class AppWidgetPickActivity extends ActivityPicker {
     /**
      * Create list entries for installed {@link AppWidgetProviderInfo} widgets.
      */
-    void putInstalledAppWidgets(List<PickAdapter.Item> items) {
+    void putInstalledAppWidgets(List<PickAdapter.Item> items, int categoryFilter, int featuresFilter) {
         List<AppWidgetProviderInfo> installed = mAppWidgetManager.getInstalledProviders();
-        putAppWidgetItems(installed, null, items);
+        putAppWidgetItems(installed, null, items, categoryFilter, featuresFilter);
     }
 
     /**
