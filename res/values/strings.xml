@@ -4191,6 +4191,8 @@
     <string name="user_summary_active">Active</string>
     <!-- User summary to indicate that user is currently inactive in the background [CHAR LIMIT=100] -->
     <string name="user_summary_inactive">Not active</string>
+    <!-- User summary to indicate that user is currently not set up [CHAR LIMIT=100] -->
+    <string name="user_summary_not_set_up">Not set up</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
     <string name="user_owner">Owner</string>
     <!-- Title for the preference to enter the nickname of the userto display in the user switcher [CHAR LIMIT=25]-->
@@ -4198,14 +4200,26 @@
     <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
     <string name="user_add_user_title">Add new user</string>
     <!-- Message for add user confirmation dialog [CHAR LIMIT=none] -->
-    <string name="user_add_user_message">Adding a user to this device will take them through guided setup.\n\nEach user will have their own apps and personal space on this device.\nUsers can accept permissions for updates on behalf of other users of this device.\nYou can switch between users on the lock screen.</string>
+    <string name="user_add_user_message">Each user you add can go to their own space from the lock screen and perform most routine tasks such as installing, updating, or uninstalling apps. After you create a new user, that person needs to go through a setup process.</string>
+    <!-- Title of dialog to setup a new user [CHAR LIMIT=30] -->
+    <string name="user_setup_dialog_title">Set up user now?</string>
+    <!-- Message in dialog to setup a new user after creation [CHAR LIMIT=none] -->
+    <string name="user_setup_dialog_message">Make sure the person is available to take the tablet and set up their space</string>
+    <!-- Button text to setup the new user now [CHAR LIMIT=25] -->
+    <string name="user_setup_button_setup_now">Set up now</string>
+    <!-- Button text to setup the new user later [CHAR LIMIT=25] -->
+    <string name="user_setup_button_setup_later">Not now</string>
 
     <!-- User details remove user menu [CHAR LIMIT=20] -->
     <string name="user_remove_user_menu">Remove user</string>
     <!-- User details new user name [CHAR LIMIT=30] -->
     <string name="user_new_user_name">New user</string>
+    <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
+    <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
     <string name="user_confirm_remove_title">Remove user?</string>
+    <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_confirm_remove_self_message">You will lose your space and data on this delete. Are you sure you want to remove the user and all associated data from the device?</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_message">Are you sure you want to remove the user and all associated data from the device?</string>
     <!-- Setting label to show that a new user is being added [CHAR LIMIT=30] -->
