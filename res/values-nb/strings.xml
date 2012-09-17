@@ -600,7 +600,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Søker …"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Gi enheten nytt navn"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Motpartsenheter"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Lagrede grupper"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Kunne ikke koble til."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Kunne ikke gi enheten nytt navn."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Vil du koble fra?"</string>
@@ -608,8 +607,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Hvis du kobler fra, kommer tilkoblingen med <xliff:g id="PEER_NAME">%1$s</xliff:g> og <xliff:g id="PEER_COUNT">%2$s</xliff:g> andre enheter til å avsluttes."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Vil du avbryte invitasjonen?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Vil du avbryte invitasjonen til å koble til <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Vil du slette gruppen?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Ønsker du å slette gruppen <xliff:g id="GROUP_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Flyttbar trådløs sone"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Slår på Wi-Fi-sone …"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Slår av trådløs sone …"</string>
@@ -682,15 +679,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Bakgrunnsbilde"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Velg bakgrunnsbilde fra"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Drøm"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Når enheten er plassert i dokken eller under lading i hvilemodus"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Enten eller"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Når enheten er i hvilemodus og lader"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Når enheten er plassert i dokken"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Når enheten er plassert i dokken eller under lading i hvilemodus"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Når enheten lades i hvilemodus"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Når enheten er plassert i dokken"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Deaktivert"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Hvis du vil kontrollere når telefonen er plassert i dokken og/eller i hvilemodus, slår du på Drømmer."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Sett på drømmemodus"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Bruk av drømmemodus"</string>
-    <string name="screensaver_settings_dream_start" msgid="1265346994126658796">"Start"</string>
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Valgt drøm"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Aktiveringstidspunkt"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Etter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> i uvirksomhet"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Aldri"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Prøv den!"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Start når enheten går i hvilemodus"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Start når enheten er plassert i dokken"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Skriftstørrelse"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Skriftstørrelse"</string>
@@ -760,7 +759,6 @@
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB-lagring"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Minnekort"</string>
     <string name="memory_available" msgid="5052397223077021181">"Tilgjengelig"</string>
-    <string name="memory_available_read_only" msgid="6497534390167920206">"Tilgjengelig (skrivebeskyttet)"</string>
     <string name="memory_size" msgid="6629067715017232195">"Total plass"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Beregner …"</string>
     <string name="memory_apps_usage" msgid="2348501997988663688">"Apper (appdata og mediainnhold)"</string>
@@ -784,6 +782,7 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Sletter intern USB-lagring, som musikk og bilder"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Sletter alle data på SD-kortet, for eksempel musikk og bilder"</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"MTP- eller PTP-funksjonen er aktiv"</string>
+    <string name="read_only" msgid="6702420168629076340">" (skrivebeskyttet)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Vil du koble fra USB-lagring?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Vil du koble fra SD-kortet?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"Hvis du kobler fra USB-lagring, virker ikke lenger alle appene slik de skal, og de kan være utilgjengelige inntil du kobler til USB-lagring på nytt."</string>
@@ -806,7 +805,6 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"Kamera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Gjør at du kan overføre bilder ved hjelp av kameraets programvare samt overføre alle slags filer på datamaskiner som ikke støtter MTP"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Installer filoverføringsverktøy"</string>
-    <string name="storage_other_users" msgid="808708845102611856">"Andre brukere"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batteristatus"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batterinivå"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -995,8 +993,6 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"Tillat installasjon av apper fra ukjente kilder"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Nettbrettet og personopplysningene dine er mer sårbare for angrep fra apper fra ukjente kilder. Du godtar at du alene er ansvarlig for enhver skade på nettbrettet eller tap av data som kan oppstå fra bruk av disse appene."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Telefonen og personopplysninger er mer sårbare for angrep av apper fra ukjente kilder. Du godtar at du selv er ansvarlig for enhver skade på telefonen eller tap av data som kan skje ved å bruke disse appene."</string>
-    <string name="verify_applications" msgid="3532112158501736577">"App-kontroll"</string>
-    <string name="verify_applications_summary" msgid="6737505521913263792">"Forby eller advar før installasjon av apper som kan være skadelig"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Avanserte innstillinger"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Aktiver flere innstillingsalternativer"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Info om app"</string>
@@ -1017,7 +1013,8 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB-lagringsvolum for data"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD-kort"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Avinstaller"</string>
-    <string name="install_text" msgid="884360662922471113">"Installer"</string>
+    <!-- no translation found for install_text (884360662922471113) -->
+    <skip />
     <string name="disable_text" msgid="6544054052049395202">"Deaktiver"</string>
     <string name="enable_text" msgid="9217362512327828987">"Aktiver"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Fjern data"</string>
@@ -1254,19 +1251,14 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Tilgjengelighetsinnstillinger"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Tjenester"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
-    <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Skjermforstørrelse"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="3349112911447101716">"Når skjermforstørrelse er på kan du:"\n" "\n" zoome inn midlertidig: trykk tre ganger og hold."\n" skifte permanent zoom-tilstand: trykk tre ganger og slipp."\n" "\n" justere innzoomet område: trykk tre ganger, hold for å zoome og dra fingrene over skjermen."\n" panorere når du zoomer: dra to eller flere fingre over skjermen."\n" "\n" justere zoom-nivået når du har zoomet ut: trykk tre ganger og hold for å zoome – dra én eller flere fingre."\n"  justere zoom-nivået når du har zoomet inn: klyp med to eller flere fingre."\n</string>
-    <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Stor tekst"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Skjermforstørrelse"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Automatisk oppdatering av skjermforstørrelsen"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Oppdater skjermforstørrelsen ved appbytter"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Legg på med På-/Av-knappen"</string>
-    <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Les inn passord"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"«Trykk på og hold inne»-forsinkelse"</string>
-    <string name="accessibility_toggle_script_injection_preference_title" msgid="7950932054266694403">"Forbedre nettilgjengelighet"</string>
+    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Stor tekst"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Legg på med På-/Av-knapp"</string>
+    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Les inn passord"</string>
+    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Forsinkelse på trykk-og-hold-inne"</string>
+    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Forbedre tilgj. på nettet"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Innstillinger"</string>
-    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"På"</string>
-    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Av"</string>
+    <string name="accessibility_service_state_on" msgid="8791337599927106344">"På"</string>
+    <string name="accessibility_service_state_off" msgid="2458594460762620776">"Av"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Tillatt"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Ikke tillatt"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Tillat"</string>
@@ -1349,7 +1341,6 @@
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Stopp eller avinstaller appen"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Kontroller GPS manuelt for å forhindre at appen bruker den"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Appen kan ha innstillinger som kan redusere batteribruken"</string>
-    <string name="battery_desc_users" msgid="7682989161885027823">"Batteri brukt av brukeren"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> siden strømmen ble frakoblet"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Siste gang uten strøm i <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Total bruk"</string>
@@ -1406,20 +1397,6 @@
     <string name="gadget_title" msgid="5519037532720577836">"Strømkontroll"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Oppdaterer innstilling for Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Oppdatere Bluetooth-innstilling"</string>
-    <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"på"</string>
-    <string name="gadget_state_off" msgid="5220212352953066317">"av"</string>
-    <string name="gadget_state_turning_on" msgid="3395992057029439039">"slår på"</string>
-    <string name="gadget_state_turning_off" msgid="2395546048102176157">"slår av"</string>
-    <string name="gadget_wifi" msgid="5960290421313061434">"Wi-Fi"</string>
-    <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
-    <string name="gadget_sync" msgid="858895763714222152">"Synkronisering"</string>
-    <string name="gadget_brightness_template" msgid="930541920933123603">"Lysstyrke <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automatisk"</string>
-    <string name="gadget_brightness_state_full" msgid="6814570109772137631">"full"</string>
-    <string name="gadget_brightness_state_half" msgid="3696671957608774204">"halv"</string>
-    <string name="gadget_brightness_state_off" msgid="946382262872753084">"av"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Legitimasjonslager"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installer fra lagringsenhet"</string>
@@ -1605,16 +1582,12 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Animasjonsskala for vindu"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Overgangsanimasjonsskala"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Varighetsskala, animatør"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simulering av sekundærskjermer"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Apper"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Ikke behold aktiviteter"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Fjern hver aktivitet så fort brukeren forlater den"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Bakgrunnsprosessgrense"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Vis alle ANR-er"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Vis dialogruten App svarer ikke for bakgr.apper."</string>
-    <string name="debug_accessibility_category" msgid="3417643359072054409">"Tilgjengelighet"</string>
-    <string name="display_magnification_auto_update" msgid="4236067240516003515">"Automatisk oppdatering av forstørrelse"</string>
-    <string name="display_magnification_auto_update_summary" msgid="5022668486882658025">"Zoom ut ved rotasjon eller aktivitetsstart og panorer til vinduer som dukker opp."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Databruk"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Databruksyklus"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Datastreifing"</string>
@@ -1710,10 +1683,14 @@
     <string name="vpn_create" msgid="5628219087569761496">"Legg til VPN-profil"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediger profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Slett profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Alltid på-VPN"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Velg en VPN-profil du vil forbli tilkoblet til. Nettverkstrafikk blir bare tillatt når du er tilkoblet denne VPN-en."</string>
-    <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ingen"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Alltid på-VPN krever en IP-adresse for både tjener og DNS."</string>
+    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
+    <skip />
     <string name="vpn_no_network" msgid="3050233675132726155">"Finner ingen nettverkstilkobling. Prøv på nytt senere."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Et sertifikat mangler. Rediger profilen."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"System"</string>
@@ -1735,21 +1712,23 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Deaktivert"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Valgfri"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Håndhevende"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Brukere"</string>
-    <string name="user_list_title" msgid="8866161687358773982">"Andre brukere"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
+    <string name="user_list_title" msgid="2152311434413878709">"Brukere"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Legg til bruker"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Aktiv"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Ikke aktiv"</string>
-    <string name="user_owner" msgid="3879126011135546571">"Eier"</string>
-    <string name="user_nickname" msgid="5148818000228994488">"Kallenavn"</string>
-    <string name="user_add_user_title" msgid="3961861593718285403">"Legg til ny bruker"</string>
-    <string name="user_add_user_message" msgid="140543405860254208">"Hvis en bruker legges til for denne enheten, tas vedkommende gjennom en veiledet konfigurering."\n\n"Hver bruker får sine egne apper og sitt personlige område på denne enheten."\n"Brukere kan godta tillatelser til oppdateringer på vegne av andre som bruker enheten."\n"Du kan bytte bruker på låseskjermen."</string>
+    <string name="user_details_title" msgid="3037625632127241370">"Rediger detaljer"</string>
+    <string name="user_information_heading" msgid="8728151075759863162">"Brukerinformasjon"</string>
+    <string name="user_name_title" msgid="7563724675699398319">"Navn"</string>
+    <string name="user_restrictions_heading" msgid="4426403050397418553">"Innholdsbegrensninger"</string>
+    <string name="user_market_requires_pin" msgid="3260702297207279414">"PIN-kode kreves"</string>
+    <string name="user_max_content_rating" msgid="8297759970216482772">"Innholdsvurdering"</string>
+    <string name="user_system_apps_heading" msgid="2408331798732183682">"System-apper"</string>
+    <string name="user_market_apps_heading" msgid="4657387297168308251">"Installerte apper"</string>
+    <string name="user_discard_user_menu" msgid="6638388031088461242">"Forkast"</string>
     <string name="user_remove_user_menu" msgid="3210146886949340574">"Slett brukeren"</string>
-    <string name="user_new_user_name" msgid="369856859816028856">"Ny bruker"</string>
+    <string name="user_new_user_name" msgid="7603010274765911161">"Rakkerunge"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Vil du slette brukeren?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Er du sikker på at du vil slette brukeren og alle tilhørende data fra enheten?"</string>
-    <string name="user_adding_new_user" msgid="1521674650874241407">"Legger til ny bruker …"</string>
-    <string name="user_delete_user_description" msgid="3158592592118767056">"Slett bruker"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Vis varsler"</string>
     <string name="help_label" msgid="1107174367904110532">"Hjelp"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Konto for innhold"</string>
