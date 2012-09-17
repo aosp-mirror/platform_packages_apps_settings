@@ -300,7 +300,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Infos propriétaire"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Saisir texte à afficher sur écran de verrouillage"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Données de localisation"</string>
+    <string name="location_settings_title" msgid="4483843407328665068">"Accès aux données de localisation"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sécurité"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Définir les paramètres de l\'option Ma position et de verrouillage"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Définir les paramètres de la fonction Ma position, de déverrouillage de l\'écran et de verrouillage du stockage des identifiants"</string>
@@ -600,7 +600,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Recherche en cours…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Renommer l\'appareil"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Appareils associés"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Groupes mémorisés"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Impossible de se connecter."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Échec du changement de nom de l\'appareil."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Déconnecter ?"</string>
@@ -608,8 +607,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"Si vous vous déconnectez, votre connexion avec <xliff:g id="PEER_NAME">%1$s</xliff:g> et <xliff:g id="PEER_COUNT">%2$s</xliff:g> autres appareils prendra fin."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Annuler l\'invitation ?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Voulez-vous annuler l\'invitation à se connecter avec <xliff:g id="PEER_NAME">%1$s</xliff:g> ?"</string>
-    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Supprimer le groupe ?"</string>
-    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Voulez-vous supprimer le groupe <xliff:g id="GROUP_NAME">%1$s</xliff:g> ?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Point d\'accès Wi-Fi"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Activation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Désactivation du point d\'accès Wi-Fi en cours…"</string>
@@ -682,15 +679,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fond d\'écran"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Sélectionner fond d\'écran dans"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Rêve"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Lorsque l\'appareil est installé sur la station d\'accueil ou lorsqu\'il est en veille et en charge"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Les deux"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"En veille et en charge"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Sur la station d\'accueil"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"Lorsque l\'appareil est installé sur la station d\'accueil ou lorsqu\'il est en veille et en charge"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"Lorsque l\'appareil est en veille et en charge"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"Lorsque l\'appareil est installé sur la station d\'accueil"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Désactivé"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Pour contrôler le comportement du téléphone lorsqu\'il se trouve sur une station d\'accueil et/ou lorsqu\'il est en veille, activez la fonctionnalité Rêves."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Activer la fonctionnalité Rêves"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Quand activer la fonctionnalité Rêves"</string>
-    <string name="screensaver_settings_dream_start" msgid="1265346994126658796">"Lancer"</string>
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Rêve sélectionné"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Délai d\'activation"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"Après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Jamais"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Essayer"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Activer lorsque l\'appareil est en veille"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Activer lorsque l\'appareil est installé sur la station d\'accueil"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de la police"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Taille de police"</string>
@@ -760,8 +759,6 @@
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Mémoire de stockage USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Carte SD"</string>
     <string name="memory_available" msgid="5052397223077021181">"Disponible"</string>
-    <!-- no translation found for memory_available_read_only (6497534390167920206) -->
-    <skip />
     <string name="memory_size" msgid="6629067715017232195">"Espace total"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Calcul en cours"</string>
     <string name="memory_apps_usage" msgid="2348501997988663688">"Applis (données des applis et contenu multimédia)"</string>
@@ -785,6 +782,7 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Effacer les données de la mémoire de stockage USB interne (ex. : musique, photos)"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Effacer toutes les données de la carte SD, telles que la musique et les photos"</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"La fonctionnalité MTP ou PTP est active."</string>
+    <string name="read_only" msgid="6702420168629076340">" (Lecture seule)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Désinstaller mémoire USB ?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Désinstaller la carte SD ?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"Si vous désinstallez la mémoire de stockage USB, certaines applications en cours d\'utilisation seront fermées. Elles risquent de rester indisponibles jusqu\'à ce que la mémoire de stockage USB soit réinstallée."</string>
@@ -807,7 +805,6 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"Appareil photo (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Permet de transférer des photos à l\'aide du logiciel photo et de transférer des fichiers sur les ordinateurs non compatibles avec le protocole MTP."</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Installer des outils de transfert de fichiers"</string>
-    <string name="storage_other_users" msgid="808708845102611856">"Autres utilisateurs"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"État de la batterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Niveau de la batterie"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -996,8 +993,6 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"Autoriser l\'installation d\'applications issues de sources inconnues"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Votre tablette et vos données personnelles sont plus vulnérables face aux attaques d\'applications provenant de sources inconnues. Vous reconnaissez être seul responsable de tout dommage subi par votre tablette ou de toute perte de données pouvant découler de l\'utilisation de ces applications."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Votre téléphone et vos données personnelles sont plus vulnérables face aux attaques d\'applications provenant de sources inconnues. Vous reconnaissez être seul responsable de tout dommage subi par votre téléphone ou de toute perte de données pouvant découler de l\'utilisation de ces applications."</string>
-    <string name="verify_applications" msgid="3532112158501736577">"Vérification de l\'application"</string>
-    <string name="verify_applications_summary" msgid="6737505521913263792">"Ne pas autoriser l\'installation d\'applications potentiellement dangereuses ou afficher un avertissement"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Paramètres avancés"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activer d\'autres paramètres"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informations sur l\'application"</string>
@@ -1018,7 +1013,8 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"Données sur USB"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"Carte SD"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Désinstaller"</string>
-    <string name="install_text" msgid="884360662922471113">"Installer"</string>
+    <!-- no translation found for install_text (884360662922471113) -->
+    <skip />
     <string name="disable_text" msgid="6544054052049395202">"Désactiver"</string>
     <string name="enable_text" msgid="9217362512327828987">"Activer"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Effacer les données"</string>
@@ -1255,19 +1251,14 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Paramètres d\'accessibilité"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Système"</string>
-    <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Agrandissement de l\'écran"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="3349112911447101716">"Lorsque l\'agrandissement du contenu à l\'écran est activé, vous pouvez réaliser les opérations suivantes :"\n" "\n" Faire un zoom avant temporaire : appuyez trois fois en prolongeant la troisième pression."\n" Activer/Désactiver le mode de zoom permanent : appuyez trois fois et relâchez."\n" "\n" Ajuster la zone faisant l\'objet d\'un zoom : appuyez trois fois en prolongeant la troisième pression pour faire un zoom, puis faites glisser votre doigt sur l\'écran."\n" Faire un panoramique en mode zoom avant : faites glisser deux doigts ou plus sur l\'écran."\n" "\n" Ajuster le niveau de zoom lorsqu\'aucun zoom n\'est appliqué : appuyez trois fois en prolongeant la troisième pression pour faire un zoom, puis faites glisser un ou plusieurs doigts sur l\'écran."\n" Ajuster le niveau de zoom en mode zoom avant : pincez deux doigts ou plus."\n</string>
-    <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Grands caractères"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Agrandissement de l\'écran"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Mise à jour auto de l\'agrand. écran"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Mettre à jour agrand. écran si transition entre applis"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Marche/arrêt pour raccrocher"</string>
-    <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Énoncer les mots de passe"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Délai de pression"</string>
-    <string name="accessibility_toggle_script_injection_preference_title" msgid="7950932054266694403">"Améliorer l\'accessibilité Web"</string>
+    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Grands caractères"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Marche/arrêt pour raccrocher"</string>
+    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Énoncer mots de passe"</string>
+    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Délai de pression"</string>
+    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Améliorer l\'accessibilité du Web"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Paramètres"</string>
-    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Activé"</string>
-    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Désactivé"</string>
+    <string name="accessibility_service_state_on" msgid="8791337599927106344">"Activé"</string>
+    <string name="accessibility_service_state_off" msgid="2458594460762620776">"Désactivé"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Autorisé"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Non autorisé"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Autoriser"</string>
@@ -1350,8 +1341,6 @@
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Arrêter ou désinstaller l\'application"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Contrôler manuellement le GPS pour éviter que l\'application ne l\'utilise"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"L\'application dispose peut-être de paramètres permettant de réduire l\'utilisation de la batterie."</string>
-    <!-- no translation found for battery_desc_users (7682989161885027823) -->
-    <skip />
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Depuis le dernier débranchement (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Utilisation totale"</string>
@@ -1408,20 +1397,6 @@
     <string name="gadget_title" msgid="5519037532720577836">"Contrôle de l\'alimentation"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Mise à jour des paramètres Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Mise à jour des paramètres Bluetooth"</string>
-    <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"activé"</string>
-    <string name="gadget_state_off" msgid="5220212352953066317">"désactivé"</string>
-    <string name="gadget_state_turning_on" msgid="3395992057029439039">"activation"</string>
-    <string name="gadget_state_turning_off" msgid="2395546048102176157">"désactivation"</string>
-    <string name="gadget_wifi" msgid="5960290421313061434">"Wi-Fi"</string>
-    <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
-    <string name="gadget_sync" msgid="858895763714222152">"Synchronisation"</string>
-    <string name="gadget_brightness_template" msgid="930541920933123603">"Luminosité <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automatique"</string>
-    <string name="gadget_brightness_state_full" msgid="6814570109772137631">"maximale"</string>
-    <string name="gadget_brightness_state_half" msgid="3696671957608774204">"partielle (moitié)"</string>
-    <string name="gadget_brightness_state_off" msgid="946382262872753084">"désactivée"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Stockage des identifiants"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installer depuis la mémoire"</string>
@@ -1607,16 +1582,12 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Échelle animation fenêtres"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Échelle anim. transitions"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Échelle durée animation"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simul. affich. secondaires"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Applications"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Ne pas conserver activités"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Supprimer immédiatement les activités abandonnées"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite processus arr.-plan"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Afficher tous les messages \"L\'application ne répond pas\""</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Afficher \"L\'application ne répond plus\" pour applis en arrière-plan"</string>
-    <string name="debug_accessibility_category" msgid="3417643359072054409">"Accessibilité"</string>
-    <string name="display_magnification_auto_update" msgid="4236067240516003515">"Mettre à jour automatiquement l\'agrandissement"</string>
-    <string name="display_magnification_auto_update_summary" msgid="5022668486882658025">"Faire un zoom arrière si rotation ou début d\'activité, puis faire un panoramique sur les pop-up"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Consommation des données"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cycle de consommation"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Autoriser itinérance"</string>
@@ -1712,10 +1683,14 @@
     <string name="vpn_create" msgid="5628219087569761496">"Ajouter un profil VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Modifier le profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Supprimer le profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN permanent"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Sélectionnez un profil VPN auquel rester connecté en permanence. Le trafic réseau ne sera autorisé que lorsque vous serez connecté à ce VPN."</string>
-    <string name="vpn_lockdown_none" msgid="9214462857336483711">"Aucun"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Le VPN permanent nécessite une adresse IP pour le serveur et le DNS."</string>
+    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
+    <skip />
     <string name="vpn_no_network" msgid="3050233675132726155">"Aucune connexion réseau. Veuillez réessayer ultérieurement."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Certificat manquant. Veuillez modifier le profil."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"Système"</string>
@@ -1739,21 +1714,23 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Désactivé"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissif"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Application"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Utilisateurs"</string>
-    <string name="user_list_title" msgid="8866161687358773982">"Autres utilisateurs"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
+    <string name="user_list_title" msgid="2152311434413878709">"Utilisateurs"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Ajouter utilisateur"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Actif"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Inactif"</string>
-    <string name="user_owner" msgid="3879126011135546571">"Propriétaire"</string>
-    <string name="user_nickname" msgid="5148818000228994488">"Pseudonyme"</string>
-    <string name="user_add_user_title" msgid="3961861593718285403">"Ajouter un utilisateur"</string>
-    <string name="user_add_user_message" msgid="140543405860254208">"Si vous ajoutez un utilisateur à cet appareil, celui-ci sera invité à suivre la procédure de configuration interactive."\n\n"Chaque utilisateur disposera de ses propres applications et d\'un espace personnel sur cet appareil."\n"Les utilisateurs peuvent autoriser les mises à jour pour le compte d\'autres utilisateurs de l\'appareil."\n"Vous pouvez passer d\'un utilisateur à l\'autre depuis l\'écran de verrouillage."</string>
+    <string name="user_details_title" msgid="3037625632127241370">"Modifier les informations"</string>
+    <string name="user_information_heading" msgid="8728151075759863162">"Informations sur l\'utilisateur"</string>
+    <string name="user_name_title" msgid="7563724675699398319">"Nom"</string>
+    <string name="user_restrictions_heading" msgid="4426403050397418553">"Restrictions liées au contenu"</string>
+    <string name="user_market_requires_pin" msgid="3260702297207279414">"Exiger un code PIN"</string>
+    <string name="user_max_content_rating" msgid="8297759970216482772">"Classification du contenu"</string>
+    <string name="user_system_apps_heading" msgid="2408331798732183682">"Applications système"</string>
+    <string name="user_market_apps_heading" msgid="4657387297168308251">"Applications installées"</string>
+    <string name="user_discard_user_menu" msgid="6638388031088461242">"Supprimer"</string>
     <string name="user_remove_user_menu" msgid="3210146886949340574">"Suppr. l\'utilisateur"</string>
-    <string name="user_new_user_name" msgid="369856859816028856">"Nouvel utilisateur"</string>
+    <string name="user_new_user_name" msgid="7603010274765911161">"Enfant turbulent"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Supprimer l\'utilisateur ?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Voulez-vous vraiment supprimer le compte utilisateur ainsi que toutes les données associées de l\'appareil ?"</string>
-    <string name="user_adding_new_user" msgid="1521674650874241407">"Ajout de l\'utilisateur…"</string>
-    <string name="user_delete_user_description" msgid="3158592592118767056">"Supprimer le profil utilisateur"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Afficher notifications"</string>
     <string name="help_label" msgid="1107174367904110532">"Aide"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Compte pour contenu"</string>
