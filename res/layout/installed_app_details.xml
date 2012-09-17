@@ -393,6 +393,27 @@
                 style="?android:attr/listSeparatorTextViewStyle"
                 android:layout_marginTop="8dip"
                 android:text="@string/permissions_label" />
+            <TextView android:id="@+id/security_settings_billing_desc"
+                android:text="@string/security_settings_billing_desc"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:paddingTop="6dip"
+                android:paddingStart="6dip"
+                android:paddingBottom="6dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/security_settings_billing_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:text="@string/security_settings_premium_sms_desc" />
+                <Spinner
+                    android:id="@+id/security_settings_premium_sms_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
             <TextView android:id="@+id/security_settings_desc"
                 android:text="@string/security_settings_desc"
                 android:textAppearance="?android:attr/textAppearanceSmall"
