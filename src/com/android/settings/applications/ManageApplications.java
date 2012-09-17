@@ -774,8 +774,12 @@ public class ManageApplications extends Fragment implements
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
                 holder.updateSizeText(mTab.mInvalidSizeStr, mWhichSize);
-                if (InstalledAppDetails.SUPPORT_DISABLE_APPS) {
-                    holder.disabled.setVisibility(entry.info.enabled ? View.GONE : View.VISIBLE);
+                if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+                    holder.disabled.setVisibility(View.VISIBLE);
+                    holder.disabled.setText(R.string.not_installed);
+                } else if (!entry.info.enabled) {
+                    holder.disabled.setVisibility(View.VISIBLE);
+                    holder.disabled.setText(R.string.disabled);
                 } else {
                     holder.disabled.setVisibility(View.GONE);
                 }
@@ -997,7 +1001,6 @@ public class ManageApplications extends Fragment implements
     
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.i(TAG, "onCreateOptionsMenu in " + this + ": " + menu);
         mOptionsMenu = menu;
         // note: icons removed for now because the cause the new action
         // bar UI to be very confusing.
