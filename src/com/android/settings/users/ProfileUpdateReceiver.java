@@ -19,64 +19,45 @@ package com.android.settings.users;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
-import android.net.Uri;
-import android.os.ParcelFileDescriptor;
+import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Profile;
-import android.util.Log;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.android.settings.Utils;
+
 
 /**
  * Watches for changes to Me Profile in Contacts and writes the photo to the User Manager.
  */
 public class ProfileUpdateReceiver extends BroadcastReceiver {
 
+    private static final String KEY_PROFILE_NAME_COPIED_ONCE = "name_copied_once";
+
     @Override
     public void onReceive(final Context context, Intent intent) {
         // Profile changed, lets get the photo and write to user manager
         new Thread() {
             public void run() {
-                copyProfilePhoto(context, null);
+                Utils.copyMeProfilePhoto(context, null);
+                copyProfileName(context);
             }
         }.start();
     }
 
-    /* Used by UserSettings as well. Call this on a non-ui thread. */
-    static boolean copyProfilePhoto(Context context, UserInfo user) {
-        Uri contactUri = Profile.CONTENT_URI;
+    static void copyProfileName(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("profile", Context.MODE_PRIVATE);
+        if (prefs.contains(KEY_PROFILE_NAME_COPIED_ONCE)) {
+            return;
+        }
 
-        InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
-                    context.getContentResolver(),
-                    contactUri, true);
-        // If there's no profile photo, assign a default avatar
-        if (avatarDataStream == null) {
-            return false;
-        }
-        int userId = user != null ? user.id : UserHandle.myUserId();
+        int userId = UserHandle.myUserId();
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        ParcelFileDescriptor fd = um.setUserIcon(userId);
-        FileOutputStream os = new ParcelFileDescriptor.AutoCloseOutputStream(fd);
-        byte[] buffer = new byte[4096];
-        int readSize;
-        try {
-            while ((readSize = avatarDataStream.read(buffer)) > 0) {
-                os.write(buffer, 0, readSize);
-            }
-            return true;
-        } catch (IOException ioe) {
-            Log.e("copyProfilePhoto", "Error copying profile photo " + ioe);
-        } finally {
-            try {
-                os.close();
-                avatarDataStream.close();
-            } catch (IOException ioe) { }
+        String profileName = Utils.getMeProfileName(context);
+        if (profileName != null && profileName.length() > 0) {
+            um.setUserName(userId, profileName);
+            // Flag that we've written the profile one time at least. No need to do it in the future.
+            prefs.edit().putBoolean(KEY_PROFILE_NAME_COPIED_ONCE, true).commit();
         }
-        return false;
     }
 }

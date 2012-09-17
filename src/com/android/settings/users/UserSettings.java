@@ -16,6 +16,7 @@
 
 package com.android.settings.users;
 
+import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -36,6 +37,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.EditTextPreference;
@@ -46,6 +48,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,8 +57,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.android.internal.telephony.MccTable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -77,8 +82,10 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
+    private static final int DIALOG_SETUP_USER = 3;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
+    private static final int MESSAGE_SETUP_USER = 2;
 
     private static final int[] USER_DRAWABLES = {
         R.drawable.ic_user,
@@ -98,6 +105,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private Preference mMePreference;
     private EditTextPreference mNicknamePreference;
     private int mRemovingUserId = -1;
+    private int mAddedUserId = 0;
     private boolean mAddingUser;
     private boolean mProfileExists;
 
@@ -110,6 +118,9 @@ public class UserSettings extends SettingsPreferenceFragment
             switch (msg.what) {
             case MESSAGE_UPDATE_LIST:
                 updateUserList();
+                break;
+            case MESSAGE_SETUP_USER:
+                onUserCreated(msg.arg1);
                 break;
             }
         }
@@ -136,7 +147,8 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mNicknamePreference = (EditTextPreference) findPreference(KEY_USER_NICKNAME);
         mNicknamePreference.setOnPreferenceChangeListener(this);
-        mNicknamePreference.setSummary(mUserManager.getUserInfo(UserHandle.myUserId()).name);
+        mNicknamePreference.getEditText().setInputType(
+                InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         loadProfile();
         setHasOptionsMenu(true);
         getActivity().registerReceiver(mUserChangeReceiver,
@@ -229,13 +241,22 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    private void onUserCreated(int userId) {
+        mAddedUserId = userId;
+        showDialog(DIALOG_SETUP_USER);
+    }
+
     @Override
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
                 return new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.user_confirm_remove_title)
-                    .setMessage(R.string.user_confirm_remove_message)
+                    .setTitle(UserHandle.myUserId() == mRemovingUserId
+                            ? R.string.user_confirm_remove_self_title
+                            : R.string.user_confirm_remove_title)
+                    .setMessage(UserHandle.myUserId() == mRemovingUserId
+                            ? R.string.user_confirm_remove_self_message
+                            : R.string.user_confirm_remove_message)
                     .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -256,6 +277,19 @@ public class UserSettings extends SettingsPreferenceFragment
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
+            case DIALOG_SETUP_USER:
+                return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.user_setup_dialog_title)
+                .setMessage(R.string.user_setup_dialog_message)
+                .setPositiveButton(R.string.user_setup_button_setup_now,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            switchUserNow(mAddedUserId);
+                        }
+                })
+                .setNegativeButton(R.string.user_setup_button_setup_later, null)
+                .create();
+
             default:
                 return null;
         }
@@ -279,11 +313,12 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void removeThisUser() {
-        // TODO:
-        Toast.makeText(getActivity(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
-
-        synchronized (mUserLock) {
-            mRemovingUserId = -1;
+        try {
+            ActivityManagerNative.getDefault().switchUser(UserHandle.USER_OWNER);
+            ((UserManager) getActivity().getSystemService(Context.USER_SERVICE))
+                    .removeUser(UserHandle.myUserId());
+        } catch (RemoteException re) {
+            Log.e(TAG, "Unable to remove self user");
         }
     }
 
@@ -302,9 +337,19 @@ public class UserSettings extends SettingsPreferenceFragment
                     synchronized (mUserLock) {
                         mAddingUser = false;
                         mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+                        mHandler.sendMessage(mHandler.obtainMessage(
+                                MESSAGE_SETUP_USER, user.id, user.serialNumber));
                     }
                 }
             }.start();
+        }
+    }
+
+    private void switchUserNow(int userId) {
+        try {
+            ActivityManagerNative.getDefault().switchUser(userId);
+        } catch (RemoteException re) {
+            // Nothing to do
         }
     }
 
@@ -318,6 +363,8 @@ public class UserSettings extends SettingsPreferenceFragment
             Preference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
+                mNicknamePreference.setText(user.name);
+                mNicknamePreference.setSummary(user.name);
             } else {
                 pref = new UserPreference(getActivity(), null, user.id,
                         UserHandle.myUserId() == UserHandle.USER_OWNER, this);
@@ -347,29 +394,17 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void assignProfilePhoto(final UserInfo user) {
-        if (!ProfileUpdateReceiver.copyProfilePhoto(getActivity(), user)) {
+        if (!Utils.copyMeProfilePhoto(getActivity(), user)) {
             assignDefaultPhoto(user);
         }
     }
 
     private String getProfileName() {
-        Cursor cursor = getActivity().getContentResolver().query(
-                    Profile.CONTENT_URI, CONTACT_PROJECTION, null, null, null);
-        if (cursor == null) {
-            Log.w(TAG, "getProfileName() returned NULL cursor!"
-                    + " contact uri used " + Profile.CONTENT_URI);
-            return null;
+        String name = Utils.getMeProfileName(getActivity());
+        if (name != null) {
+            mProfileExists = true;
         }
-
-        try {
-            if (cursor.moveToFirst()) {
-                mProfileExists = true;
-                return cursor.getString(cursor.getColumnIndex(Phone.DISPLAY_NAME));
-            }
-        } finally {
-            cursor.close();
-        }
-        return null;
+        return name;
     }
 
     private void assignDefaultPhoto(UserInfo user) {
