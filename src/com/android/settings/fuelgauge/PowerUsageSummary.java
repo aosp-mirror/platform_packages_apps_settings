@@ -54,6 +54,7 @@ import com.android.internal.os.BatteryStatsImpl;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
+import com.android.settings.users.UserUtils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -768,11 +769,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             UserInfo info = mUm.getUserInfo(userId);
             Drawable icon = null;
             if (info != null && info.iconPath != null) {
-                try {
-                    icon = Drawable.createFromPath(info.iconPath);
-                } catch (Exception e) {
-                    Log.w(TAG, "Failure loading user picture " + info.iconPath, e);
-                }
+                icon = UserUtils.getUserIcon(mUm, info);
             }
             String name = info != null ? info.name : null;
             if (name == null) {
