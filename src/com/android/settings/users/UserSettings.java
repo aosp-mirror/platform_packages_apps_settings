@@ -418,11 +418,10 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void setPhotoId(Preference pref, UserInfo user) {
-        ParcelFileDescriptor fd = mUserManager.setUserIcon(user.id);
-        Drawable d = Drawable.createFromStream(new ParcelFileDescriptor.AutoCloseInputStream(fd),
-                user.iconPath);
-        if (d == null) return;
-        pref.setIcon(d);
+        Drawable icon = UserUtils.getUserIcon(mUserManager, user);
+        if (icon != null) {
+            pref.setIcon(icon);
+        }
     }
 
     private void setUserName(String name) {
