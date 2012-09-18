@@ -17,6 +17,8 @@
 package com.android.settings.users;
 
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.ParcelFileDescriptor;
 import android.os.UserManager;
@@ -25,10 +27,8 @@ public class UserUtils {
 
     public static Drawable getUserIcon(UserManager um, UserInfo user) {
         if (user.iconPath == null) return null;
-        ParcelFileDescriptor fd = um.getUserIcon(user.id);
-        if (fd == null) return null;
-        Drawable d = Drawable.createFromStream(new ParcelFileDescriptor.AutoCloseInputStream(fd),
-                user.iconPath);
-        return d;
+        Bitmap icon = um.getUserIcon(user.id);
+        if (icon == null) return null;
+        return new BitmapDrawable(icon);
     }
 }

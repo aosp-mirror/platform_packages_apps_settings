@@ -27,6 +27,8 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
@@ -473,24 +475,12 @@ public class Utils {
         }
         int userId = user != null ? user.id : UserHandle.myUserId();
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        ParcelFileDescriptor fd = um.setUserIcon(userId);
-        FileOutputStream os = new ParcelFileDescriptor.AutoCloseOutputStream(fd);
-        byte[] buffer = new byte[4096];
-        int readSize;
+        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+        um.setUserIcon(userId, icon);
         try {
-            while ((readSize = avatarDataStream.read(buffer)) > 0) {
-                os.write(buffer, 0, readSize);
-            }
-            return true;
-        } catch (IOException ioe) {
-            Log.e("copyProfilePhoto", "Error copying profile photo " + ioe);
-        } finally {
-            try {
-                os.close();
-                avatarDataStream.close();
-            } catch (IOException ioe) { }
-        }
-        return false;
+            avatarDataStream.close();
+        } catch (IOException ioe) { }
+        return true;
     }
 
     public static String getMeProfileName(Context context) {
