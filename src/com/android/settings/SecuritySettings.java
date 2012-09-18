@@ -455,8 +455,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
             // Found in KeyguardHostView.java
             final int KEYGUARD_HOST_ID = 0x4B455947;
-            int appWidgetId = AppWidgetHost.allocateAppWidgetIdForHost(
-                    "com.android.internal.policy.impl.keyguard", KEYGUARD_HOST_ID);
+            int appWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
             if (appWidgetId != -1) {
                 pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
@@ -597,7 +596,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         Integer.toString(appWidgetId));
 
             } else {
-                AppWidgetHost.deleteAppWidgetIdForHost(appWidgetId);
+                AppWidgetHost.deleteAppWidgetIdForSystem(appWidgetId);
             }
         }
         createPreferenceHierarchy();
