@@ -436,22 +436,24 @@ public class RunningServiceDetails extends Fragment
 
         mNumServices = mNumProcesses = 0;
 
-        if (mMergedItem.mUser != null) {
-            ArrayList<RunningState.MergedItem> items;
-            if (mShowBackground) {
-                items = new ArrayList<RunningState.MergedItem>(mMergedItem.mChildren);
-                Collections.sort(items, mState.mBackgroundComparator);
+        if (mMergedItem != null) {
+            if (mMergedItem.mUser != null) {
+                ArrayList<RunningState.MergedItem> items;
+                if (mShowBackground) {
+                    items = new ArrayList<RunningState.MergedItem>(mMergedItem.mChildren);
+                    Collections.sort(items, mState.mBackgroundComparator);
+                } else {
+                    items = mMergedItem.mChildren;
+                }
+                for (int i=0; i<items.size(); i++) {
+                    addDetailsViews(items.get(i), true, false);
+                }
+                for (int i=0; i<items.size(); i++) {
+                    addDetailsViews(items.get(i), false, true);
+                }
             } else {
-                items = mMergedItem.mChildren;
+                addDetailsViews(mMergedItem, true, true);
             }
-            for (int i=0; i<items.size(); i++) {
-                addDetailsViews(items.get(i), true, false);
-            }
-            for (int i=0; i<items.size(); i++) {
-                addDetailsViews(items.get(i), false, true);
-            }
-        } else {
-            addDetailsViews(mMergedItem, true, true);
         }
     }
     
