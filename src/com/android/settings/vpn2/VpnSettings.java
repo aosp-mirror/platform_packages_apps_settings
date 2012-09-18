@@ -49,6 +49,7 @@ import android.widget.Toast;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.google.android.collect.Lists;
@@ -463,7 +464,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         private void initProfiles(KeyStore keyStore, Resources res) {
             final String lockdownKey = getStringOrNull(keyStore, Credentials.LOCKDOWN_VPN);
 
-            mProfiles = loadVpnProfiles(keyStore);
+            mProfiles = loadVpnProfiles(keyStore, VpnProfile.TYPE_PPTP);
             mTitles = Lists.newArrayList();
             mTitles.add(res.getText(R.string.vpn_lockdown_none));
             mCurrentIndex = 0;
@@ -523,14 +524,14 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private static List<VpnProfile> loadVpnProfiles(KeyStore keyStore) {
+    private static List<VpnProfile> loadVpnProfiles(KeyStore keyStore, int... excludeTypes) {
         final ArrayList<VpnProfile> result = Lists.newArrayList();
         final String[] keys = keyStore.saw(Credentials.VPN);
         if (keys != null) {
             for (String key : keys) {
                 final VpnProfile profile = VpnProfile.decode(
                         key, keyStore.get(Credentials.VPN + key));
-                if (profile != null) {
+                if (profile != null && !ArrayUtils.contains(excludeTypes, profile.type)) {
                     result.add(profile);
                 }
             }
