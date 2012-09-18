@@ -461,7 +461,7 @@ public class DataUsageSummary extends Fragment {
 
         mMenuAutoSync = menu.findItem(R.id.data_usage_menu_auto_sync);
         mMenuAutoSync.setChecked(ContentResolver.getMasterSyncAutomatically());
-        mMenuAutoSync.setVisible(isOwner && !appDetailMode);
+        mMenuAutoSync.setVisible(!appDetailMode);
 
         final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
         split4g.setVisible(hasReadyMobile4gRadio(context) && isOwner && !appDetailMode);
