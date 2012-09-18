@@ -89,6 +89,10 @@
         </PreferenceScreen>
         -->
 
+        <Preference android:key="regulatory_info"
+                android:title="@string/regulatory_information"
+                android:fragment="com.android.settings.RegulatoryInfoFragment"/>
+
         <!-- Device hardware model -->
         <Preference android:key="device_model" 
                 style="?android:preferenceInformationStyle"
@@ -106,7 +110,7 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/fcc_equipment_id"
                 android:summary="@string/device_info_default"/>
-                
+
         <!-- Device Baseband version -->
         <Preference android:key="baseband_version" 
                 style="?android:preferenceInformationStyle"
