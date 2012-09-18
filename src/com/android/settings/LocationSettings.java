@@ -185,6 +185,10 @@ public class LocationSettings extends SettingsPreferenceFragment
         return true;
     }
 
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_location_access;
+    }
 }
 
 class WrappingSwitchPreference extends SwitchPreference {
