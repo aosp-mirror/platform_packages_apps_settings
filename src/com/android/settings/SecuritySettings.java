@@ -21,7 +21,6 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetManager;
@@ -258,12 +257,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mUserSelectedWidget = root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
         if (mUserSelectedWidget != null) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
-            int appWidgetId = -1;
-            String appWidgetIdString = Settings.Secure.getString(
-                    getContentResolver(), Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID);
-            if (appWidgetIdString != null) {;
-                appWidgetId = (int) Integer.decode(appWidgetIdString);
-            }
+            int appWidgetId = getUserSelectedAppWidgetId();
             if (appWidgetId == -1) {
                 mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_none));
             } else {
@@ -275,6 +269,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         return root;
+    }
+
+    private int getUserSelectedAppWidgetId() {
+        int appWidgetId = -1;
+        String appWidgetIdString = Settings.Secure.getString(
+                getContentResolver(), Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID);
+        if (appWidgetIdString != null) {;
+            appWidgetId = (int) Integer.decode(appWidgetIdString);
+        }
+        return appWidgetId;
     }
 
     private boolean isNonMarketAppsAllowed() {
@@ -587,15 +591,23 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 } else {
                     // Otherwise just add it
                     if (noWidget) {
+                        // If we selected "none", delete the allocated id
+                        AppWidgetHost.deleteAppWidgetIdForHost(appWidgetId);
                         data.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
+                    } else {
+                        onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
                     }
-                    onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
                 }
-            } else if (requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
+            } else if (
+                    requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
+                // If a widget existed before, delete it
+                int oldAppWidgetId = getUserSelectedAppWidgetId();
+                if (oldAppWidgetId != -1) {
+                    AppWidgetHost.deleteAppWidgetIdForHost(oldAppWidgetId);
+                }
                 Settings.Secure.putString(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID,
                         Integer.toString(appWidgetId));
-
             } else {
                 AppWidgetHost.deleteAppWidgetIdForHost(appWidgetId);
             }
