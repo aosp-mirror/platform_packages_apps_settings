@@ -194,6 +194,7 @@ public class UserSettings extends SettingsPreferenceFragment
             removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                     | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         }
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -524,4 +525,8 @@ public class UserSettings extends SettingsPreferenceFragment
         return false;
     }
 
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_users;
+    }
 }
