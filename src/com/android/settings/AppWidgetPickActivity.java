@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import java.text.Collator;
@@ -54,7 +55,11 @@ public class AppWidgetPickActivity extends ActivityPicker {
      * activity is binding.
      */
     private int mAppWidgetId;
-    
+
+    // Enable testing launcher widgets in keyguard.  For testing purposes only.
+    private final boolean mIgnoreFilter = false || SystemProperties.getBoolean(
+            "ro.keyguard_ignore_filter", false);
+
     @Override
     public void onCreate(Bundle icicle) {
         mPackageManager = getPackageManager();
@@ -257,7 +262,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
      */
     void putInstalledAppWidgets(List<PickAdapter.Item> items, int categoryFilter, int featuresFilter) {
         List<AppWidgetProviderInfo> installed = mAppWidgetManager.getInstalledProviders();
-        putAppWidgetItems(installed, null, items, categoryFilter, featuresFilter, false);
+        putAppWidgetItems(installed, null, items, categoryFilter, featuresFilter, mIgnoreFilter );
     }
 
     /**
