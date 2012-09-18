@@ -49,6 +49,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
     private static final String KEY_CONTAINER = "container";
     private static final String KEY_TEAM = "team";
     private static final String KEY_CONTRIBUTORS = "contributors";
+    private static final String KEY_REGULATORY_INFO = "regulatory_info";
     private static final String KEY_TERMS = "terms";
     private static final String KEY_LICENSE = "license";
     private static final String KEY_COPYRIGHT = "copyright";
@@ -132,11 +133,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
 
         // Read platform settings for additional system update setting
-        boolean isUpdateSettingAvailable =
-                getResources().getBoolean(R.bool.config_additional_system_update_setting_enable);
-        if (isUpdateSettingAvailable == false) {
-            getPreferenceScreen().removePreference(findPreference(KEY_UPDATE_SETTING));
-        }
+        removePreferenceIfBoolFalse(KEY_UPDATE_SETTING,
+                R.bool.config_additional_system_update_setting_enable);
+
+        // Remove regulatory information if not enabled.
+        removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,
+                R.bool.config_show_regulatory_info);
     }
 
     @Override
@@ -160,8 +162,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
     private void removePreferenceIfPropertyMissing(PreferenceGroup preferenceGroup,
             String preference, String property ) {
-        if (SystemProperties.get(property).equals(""))
-        {
+        if (SystemProperties.get(property).equals("")) {
             // Property is missing so remove preference from group
             try {
                 preferenceGroup.removePreference(findPreference(preference));
@@ -169,6 +170,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 Log.d(LOG_TAG, "Property '" + property + "' missing and no '"
                         + preference + "' preference");
             }
+        }
+    }
+
+    private void removePreferenceIfBoolFalse(String preference, int resId) {
+        if (!getResources().getBoolean(resId)) {
+            getPreferenceScreen().removePreference(findPreference(preference));
         }
     }
 
