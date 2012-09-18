@@ -30,6 +30,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -50,6 +51,7 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.InputType;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -65,6 +67,7 @@ import com.android.settings.Utils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserSettings extends SettingsPreferenceFragment
@@ -111,6 +114,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
+    private SparseArray<Drawable> mUserIcons = new SparseArray<Drawable>();
 
     private Handler mHandler = new Handler() {
         @Override
@@ -127,9 +131,16 @@ public class UserSettings extends SettingsPreferenceFragment
     };
 
     private BroadcastReceiver mUserChangeReceiver = new BroadcastReceiver() {
-
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_USER_REMOVED)) {
+                mRemovingUserId = -1;
+            } else if (intent.getAction().equals(Intent.ACTION_USER_INFO_CHANGED)) {
+                int userHandle = intent.getIntExtra(Intent.EXTRA_USER_HANDLE, -1);
+                if (userHandle != -1) {
+                    mUserIcons.remove(userHandle);
+                }
+            }
             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
         }
     };
@@ -151,8 +162,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
         loadProfile();
         setHasOptionsMenu(true);
-        getActivity().registerReceiver(mUserChangeReceiver,
-                new IntentFilter(Intent.ACTION_USER_REMOVED));
+        IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
+        filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
+        getActivity().registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
+                mHandler);
     }
 
     @Override
@@ -219,7 +232,13 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void finishLoadProfile(String profileName) {
         mMePreference.setTitle(profileName);
-        setPhotoId(mMePreference, mUserManager.getUserInfo(UserHandle.myUserId()));
+        int myUserId = UserHandle.myUserId();
+        Bitmap b = mUserManager.getUserIcon(myUserId);
+        if (b != null) {
+            Drawable d = new BitmapDrawable(b);
+            mMePreference.setIcon(d);
+            mUserIcons.put(myUserId, d);
+        }
     }
 
     private void onAddUserClicked() {
@@ -302,10 +321,8 @@ public class UserSettings extends SettingsPreferenceFragment
             new Thread() {
                 public void run() {
                     synchronized (mUserLock) {
-                        // TODO: Show some progress while removing the user
                         mUserManager.removeUser(mRemovingUserId);
                         mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                        mRemovingUserId = -1;
                     }
                 }
             }.start();
@@ -354,14 +371,18 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void updateUserList() {
+        if (getActivity() == null) return;
         List<UserInfo> users = mUserManager.getUsers();
 
         mUserListCategory.removeAll();
         mUserListCategory.setOrderingAsAdded(false);
 
+        final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
         for (UserInfo user : users) {
             Preference pref;
-            if (user.id == UserHandle.myUserId()) {
+            if (user.id == mRemovingUserId) {
+                continue;
+            } else if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
                 mNicknamePreference.setText(user.name);
                 mNicknamePreference.setSummary(user.name);
@@ -377,7 +398,12 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref.setTitle(user.name);
             }
             if (user.iconPath != null) {
-                setPhotoId(pref, user);
+                if (mUserIcons.get(user.id) == null) {
+                    missingIcons.add(user.id);
+                    pref.setIcon(R.drawable.ic_user);
+                } else {
+                    setPhotoId(pref, user);
+                }
             }
         }
         // Add a temporary entry for the user being created
@@ -391,8 +417,33 @@ public class UserSettings extends SettingsPreferenceFragment
             mUserListCategory.addPreference(pref);
         }
         getActivity().invalidateOptionsMenu();
+
+        // Load the icons
+        if (missingIcons.size() > 0) {
+            loadIconsAsync(missingIcons);
+        }
     }
 
+    private void loadIconsAsync(List<Integer> missingIcons) {
+        new AsyncTask<List<Integer>, Void, Void>() {
+            @Override
+            protected void onPostExecute(Void result) {
+                updateUserList();
+            }
+
+            @Override
+            protected Void doInBackground(List<Integer>... values) {
+                if (getActivity() == null) return null;
+                for (int userId : values[0]) {
+                    Bitmap bitmap = mUserManager.getUserIcon(userId);
+                    Drawable d = new BitmapDrawable(getResources(), bitmap);
+                    mUserIcons.append(userId, d);
+                }
+                return null;
+            }
+        }.execute(missingIcons);
+
+    }
     private void assignProfilePhoto(final UserInfo user) {
         if (!Utils.copyMeProfilePhoto(getActivity(), user)) {
             assignDefaultPhoto(user);
@@ -410,17 +461,13 @@ public class UserSettings extends SettingsPreferenceFragment
     private void assignDefaultPhoto(UserInfo user) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 USER_DRAWABLES[user.id % USER_DRAWABLES.length]);
-        ParcelFileDescriptor fd = mUserManager.setUserIcon(user.id);
-        if (fd != null) {
-            bitmap.compress(CompressFormat.PNG, 100,
-                    new ParcelFileDescriptor.AutoCloseOutputStream(fd));
-        }
+        mUserManager.setUserIcon(user.id, bitmap);
     }
 
     private void setPhotoId(Preference pref, UserInfo user) {
-        Drawable icon = UserUtils.getUserIcon(mUserManager, user);
-        if (icon != null) {
-            pref.setIcon(icon);
+        Drawable d = mUserIcons.get(user.id); // UserUtils.getUserIcon(mUserManager, user);
+        if (d != null) {
+            pref.setIcon(d);
         }
     }
 
