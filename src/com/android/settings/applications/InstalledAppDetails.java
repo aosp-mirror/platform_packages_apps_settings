@@ -379,8 +379,6 @@ public class InstalledAppDetails extends Fragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        
-        setHasOptionsMenu(true);
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
         mSession = mState.newSession(this);
@@ -393,6 +391,10 @@ public class InstalledAppDetails extends Fragment
         mSmsManager = ISms.Stub.asInterface(ServiceManager.getService("isms"));
 
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
+
+        retrieveAppEntry();
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -451,6 +453,8 @@ public class InstalledAppDetails extends Fragment
     public void onPrepareOptionsMenu(Menu menu) {
         boolean showIt = true;
         if (mUpdatedSysApp) {
+            showIt = false;
+        } else if (mAppEntry == null) {
             showIt = false;
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
             showIt = false;
@@ -549,10 +553,7 @@ public class InstalledAppDetails extends Fragment
     public void onRunningStateChanged(boolean running) {
     }
 
-    private boolean refreshUi() {
-        if (mMoveInProgress) {
-            return true;
-        }
+    private String retrieveAppEntry() {
         final Bundle args = getArguments();
         String packageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (packageName == null) {
@@ -563,7 +564,15 @@ public class InstalledAppDetails extends Fragment
             }
         }
         mAppEntry = mState.getEntry(packageName);
-        
+        return packageName;
+    }
+
+    private boolean refreshUi() {
+        if (mMoveInProgress) {
+            return true;
+        }
+        final String packageName = retrieveAppEntry();
+
         if (mAppEntry == null) {
             return false; // onCreate must have failed, make sure to exit
         }
