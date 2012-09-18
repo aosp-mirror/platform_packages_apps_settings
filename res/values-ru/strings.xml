@@ -334,6 +334,10 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокировка экрана"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Доп. способ блокировки"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Блокировка экрана"</string>
+    <!-- no translation found for choose_user_selected_lockscreen_widget_picker_title (1940107966974191330) -->
+    <skip />
+    <!-- no translation found for widget_none (2708702293215501854) -->
+    <skip />
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Изменение блок. экрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Смена или отключение графического ключа, PIN-кода и пароля"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Выбрать метод блокировки экрана"</string>
@@ -600,6 +604,7 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Поиск…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Переименовать устройство"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Обнаруженные устройства"</string>
+    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Сохраненные группы"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Не удалось подключиться."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Не удалось переименовать устройство."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Отключиться?"</string>
@@ -607,6 +612,8 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"После отключения соединение с \"<xliff:g id="PEER_NAME">%1$s</xliff:g>\" и другими устройствами (<xliff:g id="PEER_COUNT">%2$s</xliff:g>) будет прервано."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Отмена приглашения"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Вы собираетесь отменить приглашение на подключение к устройству \"<xliff:g id="PEER_NAME">%1$s</xliff:g>\". Продолжить?"</string>
+    <string name="wifi_p2p_delete_group_title" msgid="8049872630241986374">"Удалить группу?"</string>
+    <string name="wifi_p2p_delete_group_message" msgid="5521624017163200215">"Удалить группу \"<xliff:g id="GROUP_NAME">%1$s</xliff:g>\"?"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Точка доступа Wi-Fi"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Включение точки доступа…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Выключение точки доступа…"</string>
@@ -679,17 +686,15 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Обои"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Установка обоев"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Заставка"</string>
-    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"При подключении к док-станции, при переходе в спящий режим и во время зарядки"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"При переходе в спящий режим и во время зарядки"</string>
-    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"При подключении к док-станции"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"При подключении к док-станции, при переходе в спящий режим и во время зарядки"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Либо"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"При переходе в спящий режим и во время зарядки"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"При подключении к док-станции"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Выключено"</string>
-    <string name="screensaver_component_title" msgid="5786117148360329058">"Заставка"</string>
-    <string name="screensaver_timeout_title" msgid="4882666970355550822">"Время до активации"</string>
-    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
-    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Выкл."</string>
-    <string name="screensaver_test" msgid="3048249263811694128">"Попробовать"</string>
-    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Активировать при переходе в спящий режим"</string>
-    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Активировать при подключении к док-станции"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Чтобы знать, что происходит с телефоном, когда он подключен к док-станции или находится в спящем режиме, включите заставку."</string>
+    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Включить заставку"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"При включенной заставке"</string>
+    <string name="screensaver_settings_dream_start" msgid="1265346994126658796">"Начать"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автонастройка"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер шрифта"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Размер шрифта"</string>
@@ -759,6 +764,7 @@
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB-накопитель"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD-карта"</string>
     <string name="memory_available" msgid="5052397223077021181">"Доступно"</string>
+    <string name="memory_available_read_only" msgid="6497534390167920206">"Доступно (только для чтения)"</string>
     <string name="memory_size" msgid="6629067715017232195">"Всего места"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Идет подсчет..."</string>
     <string name="memory_apps_usage" msgid="2348501997988663688">"Данные приложений и файлы мультимедиа"</string>
@@ -781,9 +787,7 @@
     <string name="sd_format" product="default" msgid="2576054280507119870">"Очистить SD-карту"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Удаление с внутреннего USB-накопителя телефона всех данных, включая музыку и фотографии."</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Удаляет все данные с SD-карты, например музыку и фотографии"</string>
-    <!-- no translation found for mtp_ptp_mode_summary (3710436114807789270) -->
-    <skip />
-    <string name="read_only" msgid="6702420168629076340">" (только для чтения)"</string>
+    <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"Функция MTP или PTP активирована"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Отключить USB-накопитель?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Отключить SD-карту?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"Если отключить USB-накопитель, некоторые приложения перестанут работать. Чтобы снова получить к ним доступ, нужно подключить накопитель."</string>
@@ -806,6 +810,7 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"Камера (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Позволяет передавать фотографии с помощью программного обеспечения камеры, а также передавать любые файлы на компьютеры, которые не поддерживают MTP"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Установить инструменты передачи файлов"</string>
+    <string name="storage_other_users" msgid="808708845102611856">"Другие пользователи"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Состояние батареи"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Уровень заряда батареи"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Точки доступа (APN)"</string>
@@ -979,6 +984,8 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Как начертить графический ключ разблокировки"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Слишком много неудачных попыток!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Повторите попытку через <xliff:g id="NUMBER">%d</xliff:g> с."</string>
+    <!-- no translation found for activity_not_found (5551664692991605325) -->
+    <skip />
     <string name="skip_button_label" msgid="8680422740354436943">"Отмена"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Далее"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Безопасность планшетного ПК"</string>
@@ -994,6 +1001,9 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"Разрешить установку приложений из неизвестных источников"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Ваши личные данные и данные планшетного ПК более уязвимы для атак приложений из неизвестных источников. Вы соглашаетесь с тем, что несете полную ответственность за любой ущерб, нанесенный планшетному ПК, и потерю данных, связанные с использованием этих приложений."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Ваши личные данные и данные телефона более уязвимы для атак приложений из неизвестных источников. Вы соглашаетесь с тем, что несете полную ответственность за любой ущерб, нанесенный телефону, и потерю данных, связанные с использованием этих приложений."</string>
+    <!-- no translation found for verify_applications (2959359554974828518) -->
+    <skip />
+    <string name="verify_applications_summary" msgid="6737505521913263792">"Запрещать установку приложений, которые могут нанести вред устройству, или предупреждать о них"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Расширенные настройки"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Включить дополнительные настройки"</string>
     <string name="application_info_label" msgid="5736524913065714880">"О приложении"</string>
@@ -1014,6 +1024,8 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"на USB-накопителе"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD-карта"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Удалить"</string>
+    <!-- no translation found for uninstall_all_users_text (851857393177950340) -->
+    <skip />
     <string name="install_text" msgid="884360662922471113">"Установить"</string>
     <string name="disable_text" msgid="6544054052049395202">"Отключить"</string>
     <string name="enable_text" msgid="9217362512327828987">"Включить"</string>
@@ -1044,6 +1056,8 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-накопитель"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"На SD-карте"</string>
     <string name="disabled" msgid="9206776641295849915">"Отключено"</string>
+    <!-- no translation found for not_installed (1475144352069281880) -->
+    <skip />
     <string name="no_applications" msgid="7336588977497084921">"Нет приложений"</string>
     <string name="internal_storage" msgid="1584700623164275282">"Внутр. память"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB-память"</string>
@@ -1068,6 +1082,10 @@
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> и <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
+    <!-- no translation found for security_settings_billing_desc (8061019011821282358) -->
+    <skip />
+    <!-- no translation found for security_settings_premium_sms_desc (8734171334263713717) -->
+    <skip />
     <string name="computing_size" msgid="1599186977475211186">"Вычисление..."</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"Не удалось определить размер пакета."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"Нет приложений сторонних разработчиков."</string>
@@ -1251,14 +1269,20 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Настройки специальных возможностей"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Службы"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Система"</string>
-    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Большой текст"</string>
-    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Кнопка питания завершает вызов"</string>
-    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Озвучивать пароли"</string>
-    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Задержка при нажатии и удержании"</string>
-    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Расширение доступности"</string>
+    <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Увеличение"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (7705945119921468241) -->
+    <skip />
+    <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Крупный текст"</string>
+    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Масштаб"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Сохранять масштаб"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Сохранять масштаб при переходе между приложениями"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Кнопка питания завершает вызов"</string>
+    <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Озвучивать пароли"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Задержка при нажатии и удержании"</string>
+    <string name="accessibility_toggle_script_injection_preference_title" msgid="7950932054266694403">"Специальные веб-скрипты"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Настройки"</string>
-    <string name="accessibility_service_state_on" msgid="8791337599927106344">"Вкл."</string>
-    <string name="accessibility_service_state_off" msgid="2458594460762620776">"Выключено"</string>
+    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Включено"</string>
+    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Выключено"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Разрешена"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Запрещена"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Разрешить"</string>
@@ -1341,6 +1365,7 @@
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Остановите или удалите приложение"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Включайте и выключайте GPS вручную, чтобы приложения не могли использовать эту функцию"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"В программе могут быть настройки режима энергосбережения"</string>
+    <string name="battery_desc_users" msgid="7682989161885027823">"Использование заряда батареи пользователями"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> с момента отключения от питания"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"С последнего отключения <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Всего"</string>
@@ -1397,6 +1422,20 @@
     <string name="gadget_title" msgid="5519037532720577836">"Упр. питанием"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Обновление настроек Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Обновление настроек Bluetooth"</string>
+    <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g>: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="gadget_state_on" msgid="6909119593004937688">"включено"</string>
+    <string name="gadget_state_off" msgid="5220212352953066317">"отключено"</string>
+    <string name="gadget_state_turning_on" msgid="3395992057029439039">"включение…"</string>
+    <string name="gadget_state_turning_off" msgid="2395546048102176157">"выключение…"</string>
+    <string name="gadget_wifi" msgid="5960290421313061434">"Wi-Fi"</string>
+    <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
+    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_sync" msgid="858895763714222152">"Синхронизация"</string>
+    <string name="gadget_brightness_template" msgid="930541920933123603">"Яркость: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"автонастройка"</string>
+    <string name="gadget_brightness_state_full" msgid="6814570109772137631">"максимум"</string>
+    <string name="gadget_brightness_state_half" msgid="3696671957608774204">"средняя"</string>
+    <string name="gadget_brightness_state_off" msgid="946382262872753084">"минимум"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Хранилище учетных данных"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Установить с карты памяти"</string>
@@ -1582,12 +1621,16 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Окно: масштаб"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Переход: масштаб"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Скорость анимации"</string>
+    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Эмуляция доп. экранов"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Приложения"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Не сохранять действия"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Удалять сводку действий после их завершения"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Лимит фоновых процессов"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Все ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Уведомлять о том, что приложение не отвечает"</string>
+    <string name="debug_accessibility_category" msgid="3417643359072054409">"Специальные возможности"</string>
+    <string name="display_magnification_auto_update" msgid="4236067240516003515">"Сохранять увеличение"</string>
+    <string name="display_magnification_auto_update_summary" msgid="5022668486882658025">"Уменьшать при повороте или каком-либо действии и помещать во всплывающее окно"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Передача данных"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Период статистики"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Интернет-роуминг"</string>
@@ -1710,23 +1753,36 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Отключено"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Только предупреждение"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Блокировка"</string>
-    <!-- no translation found for user_settings_title (6151874007858148344) -->
-    <skip />
-    <string name="user_list_title" msgid="2152311434413878709">"Пользователи"</string>
+    <string name="user_settings_title" msgid="6151874007858148344">"Пользователи"</string>
+    <string name="user_list_title" msgid="8866161687358773982">"Другие пользователи"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Добавить пользователя"</string>
-    <string name="user_details_title" msgid="3037625632127241370">"Изменить сведения"</string>
-    <string name="user_information_heading" msgid="8728151075759863162">"Информация о пользователе"</string>
-    <string name="user_name_title" msgid="7563724675699398319">"Имя"</string>
-    <string name="user_restrictions_heading" msgid="4426403050397418553">"Ограничения на контент"</string>
-    <string name="user_market_requires_pin" msgid="3260702297207279414">"Требуется PIN-код"</string>
-    <string name="user_max_content_rating" msgid="8297759970216482772">"Рейтинг контента"</string>
-    <string name="user_system_apps_heading" msgid="2408331798732183682">"Системные приложения"</string>
-    <string name="user_market_apps_heading" msgid="4657387297168308251">"Установленные приложения"</string>
-    <string name="user_discard_user_menu" msgid="6638388031088461242">"Отменить"</string>
+    <string name="user_summary_active" msgid="4740649452346004418">"Активен"</string>
+    <string name="user_summary_inactive" msgid="3758296246095054572">"Неактивен"</string>
+    <!-- no translation found for user_summary_not_set_up (8778205026866794909) -->
+    <skip />
+    <string name="user_owner" msgid="3879126011135546571">"Владелец"</string>
+    <string name="user_nickname" msgid="5148818000228994488">"Псевдоним"</string>
+    <string name="user_add_user_title" msgid="3961861593718285403">"Добавить пользователя"</string>
+    <!-- no translation found for user_add_user_message (3377558288873957951) -->
+    <skip />
+    <!-- no translation found for user_setup_dialog_title (1765794166801864563) -->
+    <skip />
+    <!-- no translation found for user_setup_dialog_message (614037943337008555) -->
+    <skip />
+    <!-- no translation found for user_setup_button_setup_now (3391388430158437629) -->
+    <skip />
+    <!-- no translation found for user_setup_button_setup_later (3068729597269172401) -->
+    <skip />
     <string name="user_remove_user_menu" msgid="3210146886949340574">"Удалить"</string>
-    <string name="user_new_user_name" msgid="7603010274765911161">"Pesky kid"</string>
+    <string name="user_new_user_name" msgid="369856859816028856">"Новый пользователь"</string>
+    <!-- no translation found for user_confirm_remove_self_title (8432050170899479556) -->
+    <skip />
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Удалить аккаунт?"</string>
+    <!-- no translation found for user_confirm_remove_self_message (9068129506438051992) -->
+    <skip />
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Действительно удалить с устройства аккаунт пользователя и все его данные?"</string>
+    <string name="user_adding_new_user" msgid="1521674650874241407">"Добавление…"</string>
+    <string name="user_delete_user_description" msgid="3158592592118767056">"Удалить пользователя"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Включить уведомления"</string>
     <string name="help_label" msgid="1107174367904110532">"Справка"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Аккаунт для контента"</string>
