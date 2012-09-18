@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *PBAPServer Profile
+ * PBAPServer Profile
  */
 final class PbapServerProfile implements LocalBluetoothProfile {
     private static final String TAG = "PbapServerProfile";
