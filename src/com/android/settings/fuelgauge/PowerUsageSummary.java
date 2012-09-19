@@ -767,10 +767,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             final int userId = mUserSippers.keyAt(i);
             final List<BatterySipper> sippers = mUserSippers.valueAt(i);
             UserInfo info = mUm.getUserInfo(userId);
-            Drawable icon = null;
-            if (info != null && info.iconPath != null) {
-                icon = UserUtils.getUserIcon(mUm, info);
-            }
+            Drawable icon = UserUtils.getUserIcon(mUm, info, getResources());
             String name = info != null ? info.name : null;
             if (name == null) {
                 name = Integer.toString(info.id);
