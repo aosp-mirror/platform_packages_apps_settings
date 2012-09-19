@@ -593,9 +593,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         // If we selected "none", delete the allocated id
                         AppWidgetHost.deleteAppWidgetIdForSystem(appWidgetId);
                         data.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-                    } else {
-                        onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
                     }
+                    onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
                 }
             } else if (
                     requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
