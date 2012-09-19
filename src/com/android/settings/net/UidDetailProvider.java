@@ -101,7 +101,9 @@ public class UidDetailProvider {
                 detail.icon = pm.getDefaultActivityIcon();
                 return detail;
             case TrafficStats.UID_REMOVED:
-                detail.label = res.getString(R.string.data_usage_uninstalled_apps);
+                detail.label = res.getString(UserManager.supportsMultipleUsers()
+                        ? R.string.data_usage_uninstalled_apps_users
+                        : R.string.data_usage_uninstalled_apps);
                 detail.icon = pm.getDefaultActivityIcon();
                 return detail;
             case TrafficStats.UID_TETHERING:
