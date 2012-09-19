@@ -17,18 +17,17 @@
 package com.android.settings.users;
 
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.ParcelFileDescriptor;
 import android.os.UserManager;
 
 public class UserUtils {
-
-    public static Drawable getUserIcon(UserManager um, UserInfo user) {
+    public static Drawable getUserIcon(UserManager um, UserInfo user, Resources res) {
         if (user.iconPath == null) return null;
         Bitmap icon = um.getUserIcon(user.id);
         if (icon == null) return null;
-        return new BitmapDrawable(icon);
+        return new BitmapDrawable(res, icon);
     }
 }
