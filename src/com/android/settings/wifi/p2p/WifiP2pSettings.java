@@ -444,8 +444,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             int stringId = R.string.wifi_p2p_delete_group_message;
 
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.wifi_p2p_delete_group_title)
-                .setMessage(getActivity().getString(stringId, mSelectedGroup.getGroupName()))
+                .setMessage(getActivity().getString(stringId))
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mDeleteGroupListener)
                 .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
                 .create();
