@@ -16,24 +16,19 @@
 
 package com.android.settings;
 
-import android.app.DialogFragment;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.android.settings.R;
+import android.content.Context;
+import android.preference.DialogPreference;
+import android.util.AttributeSet;
 
 /**
- * {@link DialogFragment} that displays regulatory information.
- * "About phone" will show a preference that displays this fragment when
- * clicked if R.bool.config_show_regulatory_info is true.
+ * {@link DialogPreference} that displays regulatory information. "About phone"
+ * will show a "Regulatory information" preference if
+ * R.bool.config_show_regulatory_info is true.
  */
-public class RegulatoryInfoFragment extends DialogFragment {
+public class RegulatoryInfoPreference extends DialogPreference {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.regulatory_info, container, false);
+    public RegulatoryInfoPreference(Context context, AttributeSet attrs) {
+        super(context, attrs, com.android.internal.R.attr.preferenceStyle);
+        setDialogLayoutResource(R.layout.regulatory_info);
     }
 }
