@@ -42,6 +42,7 @@ import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceActivity.Header;
@@ -415,7 +416,7 @@ public class Settings extends PreferenceActivity
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.user_settings) {
                 if (!UserHandle.MU_ENABLED
-                        || !getResources().getBoolean(R.bool.enable_user_management)
+                        || !UserManager.supportsMultipleUsers()
                         || Utils.isMonkeyRunning()) {
                     target.remove(header);
                 }
