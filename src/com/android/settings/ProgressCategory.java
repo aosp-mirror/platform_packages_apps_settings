@@ -20,17 +20,19 @@ import android.content.Context;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
 
 public class ProgressCategory extends ProgressCategoryBase {
 
+    private final int mEmptyTextRes;
     private boolean mProgress = false;
     private Preference mNoDeviceFoundPreference;
     private boolean mNoDeviceFoundAdded;
 
-    public ProgressCategory(Context context, AttributeSet attrs) {
+    public ProgressCategory(Context context, AttributeSet attrs,
+            int emptyTextRes) {
         super(context, attrs);
         setLayoutResource(R.layout.preference_progress_category);
+        mEmptyTextRes = emptyTextRes;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class ProgressCategory extends ProgressCategoryBase {
                 if (mNoDeviceFoundPreference == null) {
                     mNoDeviceFoundPreference = new Preference(getContext());
                     mNoDeviceFoundPreference.setLayoutResource(R.layout.preference_empty_list);
-                    mNoDeviceFoundPreference.setTitle(R.string.bluetooth_no_devices_found);
+                    mNoDeviceFoundPreference.setTitle(mEmptyTextRes);
                     mNoDeviceFoundPreference.setSelectable(false);
                 }
                 addPreference(mNoDeviceFoundPreference);

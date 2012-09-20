@@ -18,19 +18,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="?android:attr/listSeparatorTextViewStyle"
     android:gravity="center_vertical"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
 
     <!-- This text view has the style of the list separator text view without the background and padding. -->
     <TextView
         style="?android:attr/listSeparatorTextViewStyle"
         android:background="@null"
-        android:paddingStart="16dip"
         android:id="@+android:id/title"
+        android:paddingStart="0dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_gravity="start|bottom"
+        android:layout_gravity="start|center"
     />
 
     <ProgressBar
@@ -40,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dip"
-        android:layout_marginEnd="16dip"
         style="?android:attr/progressBarStyleSmallTitle"
         />
 
