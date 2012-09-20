@@ -114,7 +114,7 @@ public class Settings extends PreferenceActivity
             R.id.account_settings,
             R.id.account_add,
             R.id.system_section,
-            R.id.about_settings
+            R.id.about_settings,
     };
 
     // TODO: Update Call Settings based on airplane mode state.
@@ -792,4 +792,5 @@ public class Settings extends PreferenceActivity
     public static class AdvancedWifiSettingsActivity extends Settings { /* empty */ }
     public static class TextToSpeechSettingsActivity extends Settings { /* empty */ }
     public static class AndroidBeamSettingsActivity extends Settings { /* empty */ }
+    public static class WifiDisplaySettingsActivity extends Settings { /* empty */ }
 }

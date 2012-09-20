@@ -282,7 +282,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
                 // Available devices category
                 if (mAvailableDevicesCategory == null) {
-                    mAvailableDevicesCategory = new ProgressCategory(getActivity(), null);
+                    mAvailableDevicesCategory = new ProgressCategory(getActivity(), null,
+                            R.string.bluetooth_no_devices_found);
                 } else {
                     mAvailableDevicesCategory.removeAll();
                 }
