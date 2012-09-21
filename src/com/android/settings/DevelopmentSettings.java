@@ -98,8 +98,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
-    private static final String ACCESSIBILITY_DISPLAY_MAGNIFICATION_AUTO_UPDATE_KEY =
-            "accessibility_display_magnification_auto_update";
 
     private static final String ENABLE_TRACES_KEY = "enable_traces";
 
@@ -144,7 +142,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mShowHwScreenUpdates;
     private CheckBoxPreference mShowHwLayersUpdates;
     private CheckBoxPreference mDebugLayout;
-    private CheckBoxPreference mDisplayMangificationAutoUpdate;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
@@ -240,9 +237,6 @@ public class DevelopmentSettings extends PreferenceFragment
             mAllPrefs.add(hdcpChecking);
         }
         removeHdcpOptionsForProduction();
-
-        mDisplayMangificationAutoUpdate = findAndInitCheckboxPref(
-                ACCESSIBILITY_DISPLAY_MAGNIFICATION_AUTO_UPDATE_KEY);
     }
 
     private CheckBoxPreference findAndInitCheckboxPref(String key) {
@@ -376,7 +370,6 @@ public class DevelopmentSettings extends PreferenceFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
-        updateDisplayMagnificationAutoUpdate();
     }
 
     private void resetDangerousOptions() {
@@ -630,12 +623,6 @@ public class DevelopmentSettings extends PreferenceFragment
         pokeSystemProperties();
     }
 
-    private void writeDisplayMagnificationAutoUpdate() {
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_AUTO_UPDATE,
-                mDisplayMangificationAutoUpdate.isChecked() ?  1 : 0);
-    }
-
     private void updateCpuUsageOptions() {
         updateCheckBox(mShowCpuUsage, Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_PROCESSES, 0) != 0);
@@ -767,12 +754,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private void updateShowAllANRsOptions() {
         updateCheckBox(mShowAllANRs, Settings.Secure.getInt(
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
-    }
-
-    private void updateDisplayMagnificationAutoUpdate() {
-        updateCheckBox(mDisplayMangificationAutoUpdate,
-                Settings.Secure.getInt(getActivity().getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_AUTO_UPDATE, 0) != 0);
     }
 
     private void updateEnableTracesOptions() {
@@ -928,8 +909,6 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowHwLayersUpdatesOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
-        } else if (preference == mDisplayMangificationAutoUpdate) {
-            writeDisplayMagnificationAutoUpdate();
         }
 
         return false;
