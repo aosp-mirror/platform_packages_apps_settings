@@ -184,7 +184,7 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            if (mUserManager.getMaxSupportedUsers() > mUserManager.getUsers().size()) {
+            if (mUserManager.getMaxSupportedUsers() > mUserManager.getUsers(false).size()) {
                 MenuItem addUserItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
                 addUserItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                         | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -373,7 +373,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateUserList() {
         if (getActivity() == null) return;
-        List<UserInfo> users = mUserManager.getUsers();
+        List<UserInfo> users = mUserManager.getUsers(true);
 
         mUserListCategory.removeAll();
         mUserListCategory.setOrderingAsAdded(false);
