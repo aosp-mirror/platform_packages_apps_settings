@@ -27,6 +27,18 @@
             android:persistent="false"/>
 
         <PreferenceScreen
+           android:key="choose_lockscreen_status_widget"
+           android:title="@string/choose_lockscreen_status_widget_picker_title"
+           android:summary=""
+           android:persistent="false"/>
+
+        <PreferenceScreen
+           android:key="choose_user_selected_lockscreen_widget"
+           android:title="@string/choose_user_selected_lockscreen_widget_picker_title"
+           android:summary=""
+           android:persistent="false"/>
+
+        <PreferenceScreen
             android:key="biometric_weak_improve_matching"
             android:title="@string/biometric_weak_improve_matching_title"/>
 

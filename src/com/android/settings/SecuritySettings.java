@@ -61,6 +61,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+    private static final String KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET =
+            "choose_lockscreen_status_widget";
     private static final String KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET =
             "choose_user_selected_lockscreen_widget";
     private static final String KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING =
@@ -72,11 +74,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String EXTRA_NO_WIDGET = "com.android.settings.NO_WIDGET";
+    private static final String EXTRA_DEFAULT_WIDGET = "com.android.settings.DEFAULT_WIDGET";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
-    private static final int REQUEST_PICK_APPWIDGET = 126;
-    private static final int REQUEST_CREATE_APPWIDGET = 127;
+    private static final int REQUEST_PICK_USER_SELECTED_APPWIDGET = 126;
+    private static final int REQUEST_PICK_STATUS_APPWIDGET = 127;
+    private static final int REQUEST_CREATE_USER_SELECTED_APPWIDGET = 128;
+    private static final int REQUEST_CREATE_STATUS_APPWIDGET = 129;
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -254,6 +259,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
+        mUserSelectedWidget = root.findPreference(KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET);
+        if (mUserSelectedWidget != null) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
+            int appWidgetId = getStatusAppWidgetId();
+            if (appWidgetId == -1) {
+                mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_default));
+            } else {
+                AppWidgetProviderInfo appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
+                if (appWidget != null) {
+                    mUserSelectedWidget.setSummary(appWidget.label);
+                }
+            }
+        }
+
         mUserSelectedWidget = root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
         if (mUserSelectedWidget != null) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
@@ -269,6 +288,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         return root;
+    }
+
+    private int getStatusAppWidgetId() {
+        int appWidgetId = -1;
+        String appWidgetIdString = Settings.Secure.getString(
+                getContentResolver(), Settings.Secure.LOCK_SCREEN_STATUS_APPWIDGET_ID);
+        if (appWidgetIdString != null) {;
+            appWidgetId = (int) Integer.decode(appWidgetIdString);
+        }
+        return appWidgetId;
     }
 
     private int getUserSelectedAppWidgetId() {
@@ -457,6 +486,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET.equals(key)) {
             // Create intent to pick widget
             Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+
             // Found in KeyguardHostView.java
             final int KEYGUARD_HOST_ID = 0x4B455947;
             int appWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
@@ -481,7 +511,41 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 // Launch the widget picker
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
-                startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
+                startActivityForResult(pickIntent, REQUEST_PICK_USER_SELECTED_APPWIDGET);
+            } else {
+                Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
+            }
+        } else if (KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET.equals(key)) {
+            // Create intent to pick widget
+            Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+
+            // Found in KeyguardHostView.java
+            final int KEYGUARD_HOST_ID = 0x4B455947;
+            int appWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
+            if (appWidgetId != -1) {
+                pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
+                        AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_FEATURES_FILTER,
+                        AppWidgetProviderInfo.WIDGET_FEATURES_STATUS);
+
+                // Add an entry for "none" to let someone select no widget
+                AppWidgetProviderInfo noneInfo = new AppWidgetProviderInfo();
+                ArrayList<AppWidgetProviderInfo> extraInfos = new ArrayList<AppWidgetProviderInfo>();
+                noneInfo.label = getResources().getString(R.string.widget_default);
+                noneInfo.provider = new ComponentName("", "");
+                extraInfos.add(noneInfo);
+
+                ArrayList<Bundle> extraExtras = new ArrayList<Bundle>();
+                Bundle b = new Bundle();
+                b.putBoolean(EXTRA_DEFAULT_WIDGET, true);
+                extraExtras.add(b);
+
+                // Launch the widget picker
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
+                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
+                startActivityForResult(pickIntent, REQUEST_PICK_STATUS_APPWIDGET);
             } else {
                 Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
             }
@@ -567,44 +631,56 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // is called by grabbing the value from lockPatternUtils.  We can't set it here
             // because mBiometricWeakLiveliness could be null
             return;
-        } else if (requestCode == REQUEST_PICK_APPWIDGET ||
-                requestCode == REQUEST_CREATE_APPWIDGET) {
+        } else if (requestCode == REQUEST_PICK_USER_SELECTED_APPWIDGET ||
+                requestCode == REQUEST_PICK_STATUS_APPWIDGET ||
+                requestCode == REQUEST_CREATE_USER_SELECTED_APPWIDGET ||
+                requestCode == REQUEST_CREATE_STATUS_APPWIDGET) {
             int appWidgetId = (data == null) ? -1 : data.getIntExtra(
                     AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-            if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == Activity.RESULT_OK) {
+            if ((requestCode == REQUEST_PICK_USER_SELECTED_APPWIDGET ||
+                 requestCode == REQUEST_PICK_STATUS_APPWIDGET) &&
+                resultCode == Activity.RESULT_OK) {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
-                boolean noWidget = data.getBooleanExtra(EXTRA_NO_WIDGET, false);
+                boolean defaultOrNoWidget = data.getBooleanExtra(EXTRA_NO_WIDGET, false) ||
+                        data.getBooleanExtra(EXTRA_DEFAULT_WIDGET, false);
 
                 AppWidgetProviderInfo appWidget = null;
-                if (!noWidget) {
+                if (!defaultOrNoWidget) {
                     appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
                 }
 
-                if (!noWidget && appWidget.configure != null) {
+                int newRequestCode = requestCode == REQUEST_PICK_USER_SELECTED_APPWIDGET ?
+                    REQUEST_CREATE_USER_SELECTED_APPWIDGET :
+                    REQUEST_CREATE_STATUS_APPWIDGET;
+                if (!defaultOrNoWidget && appWidget.configure != null) {
                     // Launch over to configure widget, if needed
                     Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
                     intent.setComponent(appWidget.configure);
                     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 
-                    startActivityForResultSafely(intent, REQUEST_CREATE_APPWIDGET);
+                    startActivityForResultSafely(intent, newRequestCode);
                 } else {
                     // Otherwise just add it
-                    if (noWidget) {
+                    if (defaultOrNoWidget) {
                         // If we selected "none", delete the allocated id
                         AppWidgetHost.deleteAppWidgetIdForSystem(appWidgetId);
                         data.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
                     }
-                    onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
+                    onActivityResult(newRequestCode, Activity.RESULT_OK, data);
                 }
-            } else if (
-                    requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
+            } else if ((requestCode == REQUEST_CREATE_USER_SELECTED_APPWIDGET ||
+                        requestCode == REQUEST_CREATE_STATUS_APPWIDGET) &&
+                       resultCode == Activity.RESULT_OK) {
                 // If a widget existed before, delete it
-                int oldAppWidgetId = getUserSelectedAppWidgetId();
+                int oldAppWidgetId = requestCode == REQUEST_CREATE_USER_SELECTED_APPWIDGET ?
+                        getUserSelectedAppWidgetId() : getStatusAppWidgetId();
                 if (oldAppWidgetId != -1) {
                     AppWidgetHost.deleteAppWidgetIdForSystem(oldAppWidgetId);
                 }
                 Settings.Secure.putString(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID,
+                        (requestCode == REQUEST_CREATE_USER_SELECTED_APPWIDGET ?
+                                Settings.Secure.LOCK_SCREEN_USER_SELECTED_APPWIDGET_ID :
+                                Settings.Secure.LOCK_SCREEN_STATUS_APPWIDGET_ID),
                         Integer.toString(appWidgetId));
             } else {
                 AppWidgetHost.deleteAppWidgetIdForSystem(appWidgetId);
