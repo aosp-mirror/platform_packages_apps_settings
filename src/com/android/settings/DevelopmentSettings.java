@@ -93,6 +93,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
+    private static final String SHOW_HW_OVERDRAW_KEY = "show_hw_overdraw";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
@@ -143,6 +144,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mTrackFrameTime;
     private CheckBoxPreference mShowHwScreenUpdates;
     private CheckBoxPreference mShowHwLayersUpdates;
+    private CheckBoxPreference mShowHwOverdraw;
     private CheckBoxPreference mDebugLayout;
     private CheckBoxPreference mDisplayMangificationAutoUpdate;
     private ListPreference mWindowAnimationScale;
@@ -199,6 +201,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mTrackFrameTime = findAndInitCheckboxPref(TRACK_FRAME_TIME_KEY);
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
+        mShowHwOverdraw = findAndInitCheckboxPref(SHOW_HW_OVERDRAW_KEY);
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
         mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
         mAllPrefs.add(mWindowAnimationScale);
@@ -369,6 +372,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateTrackFrameTimeOptions();
         updateShowHwScreenUpdatesOptions();
         updateShowHwLayersUpdatesOptions();
+        updateShowHwOverdrawOptions();
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
@@ -616,6 +620,17 @@ public class DevelopmentSettings extends PreferenceFragment
     private void writeShowHwLayersUpdatesOptions() {
         SystemProperties.set(HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY,
                 mShowHwLayersUpdates.isChecked() ? "true" : null);
+        pokeSystemProperties();
+    }
+
+    private void updateShowHwOverdrawOptions() {
+        updateCheckBox(mShowHwOverdraw, SystemProperties.getBoolean(
+                HardwareRenderer.DEBUG_SHOW_OVERDRAW_PROPERTY, false));
+    }
+
+    private void writeShowHwOverdrawOptions() {
+        SystemProperties.set(HardwareRenderer.DEBUG_SHOW_OVERDRAW_PROPERTY,
+                mShowHwOverdraw.isChecked() ? "true" : null);
         pokeSystemProperties();
     }
 
@@ -926,6 +941,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowHwScreenUpdatesOptions();
         } else if (preference == mShowHwLayersUpdates) {
             writeShowHwLayersUpdatesOptions();
+        } else if (preference == mShowHwOverdraw) {
+            writeShowHwOverdrawOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
         } else if (preference == mDisplayMangificationAutoUpdate) {
