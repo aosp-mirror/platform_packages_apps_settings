@@ -334,8 +334,6 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Choose screen lock"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Choose backup lock"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Screen lock"</string>
-    <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="1940107966974191330">"Widget"</string>
-    <string name="widget_none" msgid="2708702293215501854">"None"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Change lock screen"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Change or disable pattern, PIN or password security"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Choose a method to lock the screen"</string>
@@ -485,48 +483,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"As speaker phone"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For music and media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Remember settings"</string>
-    <!-- no translation found for wifi_display_settings_title (564299108014609382) -->
-    <skip />
-    <!-- no translation found for wifi_display_settings_empty_list_wifi_display_off (1225626898926363100) -->
-    <skip />
-    <!-- no translation found for wifi_display_settings_empty_list_wifi_display_disabled (7363832031876872257) -->
-    <skip />
-    <!-- no translation found for wifi_display_search_for_devices (5065526281193354502) -->
-    <skip />
-    <!-- no translation found for wifi_display_searching_for_devices (5172373825348672137) -->
-    <skip />
-    <!-- no translation found for wifi_display_no_devices_found (8180582698282377626) -->
-    <skip />
-    <!-- no translation found for wifi_display_paired_devices (7395326840730024303) -->
-    <skip />
-    <!-- no translation found for wifi_display_available_devices (4558314642853513487) -->
-    <skip />
-    <!-- no translation found for wifi_display_status_connecting (5688608834000748607) -->
-    <skip />
-    <!-- no translation found for wifi_display_status_connected (8364125226376985558) -->
-    <skip />
-    <!-- no translation found for wifi_display_status_available (1924167525172207067) -->
-    <skip />
-    <!-- no translation found for wifi_display_details (7791118209992162698) -->
-    <skip />
-    <!-- no translation found for wifi_display_disconnect_title (1543715924639003599) -->
-    <skip />
-    <!-- no translation found for wifi_display_disconnect_text (4824860802264489088) -->
-    <skip />
-    <!-- no translation found for wifi_display_options_title (5740656401635054838) -->
-    <skip />
-    <!-- no translation found for wifi_display_options_forget (9119048225398894580) -->
-    <skip />
-    <!-- no translation found for wifi_display_options_done (5703116500357822557) -->
-    <skip />
-    <!-- no translation found for wifi_display_options_name (4756080222307467898) -->
-    <skip />
-    <!-- no translation found for wifi_display_summary_on (3695429596604962531) -->
-    <skip />
-    <!-- no translation found for wifi_display_summary_off (2445210133184740611) -->
-    <skip />
-    <!-- no translation found for wifi_display_summary_disabled (5318394806146587849) -->
-    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Allow data exchange when the tablet touches another device"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Allow data exchange when the phone touches another device"</string>
@@ -556,10 +512,8 @@
     <string name="wifi_poor_network_detection_summary" msgid="2466956369738047669">"Don\'t use a WiFi network unless it has a good Internet connection"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Keep Wi-Fi on during sleep"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"There was a problem while changing the setting"</string>
-    <!-- no translation found for wifi_suspend_optimizations (387215679583759376) -->
-    <skip />
-    <!-- no translation found for wifi_suspend_optimizations_summary (7774946457510541054) -->
-    <skip />
+    <string name="wifi_suspend_optimizations" msgid="7104856682836591734">"Power save"</string>
+    <string name="wifi_suspend_optimizations_summary" msgid="2696244454434564259">"Save power when screen is turned off"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Add network"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi networks"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS Push Button"</string>
@@ -646,7 +600,6 @@
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Searching…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Rename device"</string>
     <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Peer devices"</string>
-    <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Remembered groups"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Could not connect."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Failed to rename device."</string>
     <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"Disconnect?"</string>
@@ -654,8 +607,6 @@
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"If you disconnect, your connection with <xliff:g id="PEER_NAME">%1$s</xliff:g> and <xliff:g id="PEER_COUNT">%2$s</xliff:g> other devices will end."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Cancel invitation"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Do you want to cancel invitation to connect with <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for wifi_p2p_delete_group_message (834559380069647086) -->
-    <skip />
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Portable Wi-Fi hotspot"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Turning hotspot on…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Turning off hotspot…"</string>
@@ -728,15 +679,17 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Choose wallpaper from"</string>
     <string name="screensaver_settings_title" msgid="4458091032540874366">"Dream"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"When docked or asleep and charging"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Either"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"While asleep and charging"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"While docked"</string>
+    <string name="screensaver_settings_summary_both" msgid="1175671101656240599">"When docked or asleep and charging"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="7231274537626605107">"When asleep and charging"</string>
+    <string name="screensaver_settings_summary_dock" msgid="4450616262936082466">"When docked"</string>
     <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Disabled"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"To control what happens when the phone is docked and/or sleeping, turn Dreams on."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Start dreaming now"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"When to dream"</string>
-    <string name="screensaver_settings_dream_start" msgid="1265346994126658796">"Start"</string>
+    <string name="screensaver_component_title" msgid="5786117148360329058">"Selected dream"</string>
+    <string name="screensaver_timeout_title" msgid="4882666970355550822">"When to activate"</string>
+    <string name="screensaver_timeout_summary" msgid="7717201094598701673">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> spent idle"</string>
+    <string name="screensaver_timeout_zero_summary" msgid="1274235565189071582">"Never"</string>
+    <string name="screensaver_test" msgid="3048249263811694128">"Try it!"</string>
+    <string name="screensaver_activate_on_sleep_title" msgid="5463857907577089065">"Start on sleep"</string>
+    <string name="screensaver_activate_on_dock_title" msgid="5594601783697028555">"Start when docked"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatic brightness"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Font size"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Font size"</string>
@@ -806,7 +759,6 @@
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB storage"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD card"</string>
     <string name="memory_available" msgid="5052397223077021181">"Available"</string>
-    <string name="memory_available_read_only" msgid="6497534390167920206">"Available (read-only)"</string>
     <string name="memory_size" msgid="6629067715017232195">"Total space"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Calculating..."</string>
     <string name="memory_apps_usage" msgid="2348501997988663688">"Apps (app data &amp; media content)"</string>
@@ -830,6 +782,7 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Erases all data on the internal USB storage, such as music and photos"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Erases all data on the SD card, such as music and photos"</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"MTP or PTP function is active"</string>
+    <string name="read_only" msgid="6702420168629076340">" (Read-only)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Unmount USB storage"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Unmount SD card?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="4322636662873269018">"If you unmount the USB storage, some apps that you are using will stop and may be unavailable until you remount the USB storage."</string>
@@ -852,7 +805,6 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"Camera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Lets you transfer photos using camera software and transfer any files on computers that don\'t support MTP"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Install file-transfer tools"</string>
-    <string name="storage_other_users" msgid="808708845102611856">"Other users"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Battery status"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Battery level"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -977,7 +929,6 @@
     <string name="about_settings_summary" msgid="3371517697156165959">"View legal info, status, software version"</string>
     <string name="legal_information" msgid="5769301644270604095">"Legal information"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Contributors"</string>
-    <string name="regulatory_information" msgid="5695464367088752150">"Regulatory information"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
     <string name="terms_title" msgid="7697580845616764642">"Terms and conditions"</string>
@@ -1027,7 +978,6 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"How to draw an unlock pattern"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Too many incorrect attempts!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Try again in <xliff:g id="NUMBER">%d</xliff:g> seconds."</string>
-    <string name="activity_not_found" msgid="5551664692991605325">"Application is not installed on your phone."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Cancel"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Next"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Securing your tablet"</string>
@@ -1043,8 +993,6 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"Allow installation of apps from unknown sources"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Your tablet and personal data are more vulnerable to attack by apps from unknown sources. You agree that you are solely responsible for any damage to your tablet or loss of data that may result from using these apps."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Your phone and personal data are more vulnerable to attack by apps from unknown sources. You agree that you are solely responsible for any damage to your phone or loss of data that may result from using these apps."</string>
-    <string name="verify_applications" msgid="2959359554974828518">"Verify apps"</string>
-    <string name="verify_applications_summary" msgid="6737505521913263792">"Disallow or warn before installation of apps that may cause harm"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Advanced settings"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Enable more settings options"</string>
     <string name="application_info_label" msgid="5736524913065714880">"App info"</string>
@@ -1065,8 +1013,8 @@
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB storage data"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD card"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Uninstall"</string>
-    <string name="uninstall_all_users_text" msgid="851857393177950340">"Uninstall for all users"</string>
-    <string name="install_text" msgid="884360662922471113">"Install"</string>
+    <!-- no translation found for install_text (884360662922471113) -->
+    <skip />
     <string name="disable_text" msgid="6544054052049395202">"Disable"</string>
     <string name="enable_text" msgid="9217362512327828987">"Enable"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Clear data"</string>
@@ -1096,7 +1044,6 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB storage"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"On SD card"</string>
     <string name="disabled" msgid="9206776641295849915">"Disabled"</string>
-    <string name="not_installed" msgid="1475144352069281880">"Not installed"</string>
     <string name="no_applications" msgid="7336588977497084921">"No apps."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Internal storage"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB storage"</string>
@@ -1121,8 +1068,6 @@
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> and <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
-    <string name="security_settings_billing_desc" msgid="8061019011821282358">"This app may charge you money:"</string>
-    <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"Send premium SMS"</string>
     <string name="computing_size" msgid="1599186977475211186">"Computing…"</string>
     <string name="invalid_size_value" msgid="7563537715280712285">"Couldn\'t compute the package size."</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"You don\'t have any third-party apps installed."</string>
@@ -1306,19 +1251,14 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Accessibility settings"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
-    <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Screen magnification"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"When screen magnification is on, you can"\n\n" Zoom: Triple-tap &amp; hold."\n" Zoom &amp; pan: Triple-tap &amp; hold, then drag your finger."\n" Toggle zoom in or out: Triple tap &amp; release."\n\n" While you\'re zoomed in, you can:"\n" Pan: Drag two or more fingers across the screen."\n" Adjust zoom level: Pinch or expand using two or more fingers."</string>
-    <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Large text"</string>
-    <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Screen magnification"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Auto update screen magnification"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Update screen magnification on app transitions"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Power button ends call"</string>
-    <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Speak passwords"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Touch &amp; hold delay"</string>
-    <string name="accessibility_toggle_script_injection_preference_title" msgid="7950932054266694403">"Enhance web accessibility"</string>
+    <string name="accessibility_toggle_large_text_title" msgid="6618674985313017711">"Large text"</string>
+    <string name="accessibility_power_button_ends_call_title" msgid="5468375366375940894">"Power button ends call"</string>
+    <string name="accessibility_speak_password_title" msgid="3344423945644925355">"Speak passwords"</string>
+    <string name="accessibility_long_press_timeout_title" msgid="2373216941395035306">"Touch &amp; hold delay"</string>
+    <string name="accessibility_script_injection_title" msgid="7921388904564822855">"Enhance web accessibility"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Settings"</string>
-    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"On"</string>
-    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Off"</string>
+    <string name="accessibility_service_state_on" msgid="8791337599927106344">"On"</string>
+    <string name="accessibility_service_state_off" msgid="2458594460762620776">"Off"</string>
     <string name="accessibility_script_injection_allowed" msgid="7624804397748427621">"Allowed"</string>
     <string name="accessibility_script_injection_disallowed" msgid="8639525487720429182">"Not allowed"</string>
     <string name="accessibility_script_injection_button_allow" msgid="2201503285877102870">"Allow"</string>
@@ -1401,7 +1341,6 @@
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Stop or uninstall the app"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Manually control GPS to prevent app from using it"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"The application may offer settings to reduce battery use"</string>
-    <string name="battery_desc_users" msgid="7682989161885027823">"Battery used by user"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> since unplugged"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"While last for unplugged for <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Usage totals"</string>
@@ -1458,20 +1397,6 @@
     <string name="gadget_title" msgid="5519037532720577836">"Power control"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Updating WiFi setting"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Updating Bluetooth setting"</string>
-    <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"on"</string>
-    <string name="gadget_state_off" msgid="5220212352953066317">"off"</string>
-    <string name="gadget_state_turning_on" msgid="3395992057029439039">"turning on"</string>
-    <string name="gadget_state_turning_off" msgid="2395546048102176157">"turning off"</string>
-    <string name="gadget_wifi" msgid="5960290421313061434">"Wi-Fi"</string>
-    <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
-    <string name="gadget_sync" msgid="858895763714222152">"Sync"</string>
-    <string name="gadget_brightness_template" msgid="930541920933123603">"Brightness <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"auto"</string>
-    <string name="gadget_brightness_state_full" msgid="6814570109772137631">"full"</string>
-    <string name="gadget_brightness_state_half" msgid="3696671957608774204">"half"</string>
-    <string name="gadget_brightness_state_off" msgid="946382262872753084">"off"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Credential storage"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Install from storage"</string>
@@ -1657,16 +1582,12 @@
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Window animation scale"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Transition animation scale"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator duration scale"</string>
-    <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simulate secondary displays"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Apps"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Don\'t keep activities"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Destroy every activity as soon as the user leaves it"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Background process limit"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Show all ANRs"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Show App Not Responding dialogue for background apps"</string>
-    <string name="debug_accessibility_category" msgid="3417643359072054409">"Accessibility"</string>
-    <string name="display_magnification_auto_update" msgid="4236067240516003515">"Auto update magnification"</string>
-    <string name="display_magnification_auto_update_summary" msgid="5022668486882658025">"Zoom out on rotation or activity start and pan to popped up windows."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Data usage"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Data usage cycle"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Data roaming"</string>
@@ -1722,8 +1643,6 @@
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"warning"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limit"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Removed apps"</string>
-    <!-- no translation found for data_usage_uninstalled_apps_users (7986294489899813194) -->
-    <skip />
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> received, <xliff:g id="SENT">%2$s</xliff:g> sent"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used."</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your carrier\'s data usage accounting may differ."</string>
@@ -1764,10 +1683,14 @@
     <string name="vpn_create" msgid="5628219087569761496">"Add VPN profile"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Edit profile"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Delete profile"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Always-on VPN"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN."</string>
-    <string name="vpn_lockdown_none" msgid="9214462857336483711">"None"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Always-on VPN requires an IP address for both server and DNS."</string>
+    <!-- no translation found for vpn_menu_lockdown (7863024538064268139) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_summary (2200032066376720339) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_none (9214462857336483711) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_config_error (3898576754914217248) -->
+    <skip />
     <string name="vpn_no_network" msgid="3050233675132726155">"There is no network connection. Please try again later."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"A certificate is missing. Please edit the profile."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"System"</string>
@@ -1789,28 +1712,23 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Enforcing"</string>
-    <string name="user_settings_title" msgid="6151874007858148344">"Users"</string>
-    <string name="user_list_title" msgid="8866161687358773982">"Other users"</string>
+    <!-- no translation found for user_settings_title (6151874007858148344) -->
+    <skip />
+    <string name="user_list_title" msgid="2152311434413878709">"Users"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Add user"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Active"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Not active"</string>
-    <string name="user_summary_not_set_up" msgid="8778205026866794909">"Not set up"</string>
-    <string name="user_owner" msgid="3879126011135546571">"Owner"</string>
-    <string name="user_nickname" msgid="5148818000228994488">"Nickname"</string>
-    <string name="user_add_user_title" msgid="3961861593718285403">"Add new user"</string>
-    <string name="user_add_user_message" msgid="3377558288873957951">"Each user you add can go to their own space from the lock screen and perform most routine tasks such as installing, updating or uninstalling apps. After you create a new user, that person needs to go through a setup process."</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Set up user now?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Make sure the person is available to take the tablet and set up their space"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Set up now"</string>
-    <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Not now"</string>
+    <string name="user_details_title" msgid="3037625632127241370">"Edit details"</string>
+    <string name="user_information_heading" msgid="8728151075759863162">"User information"</string>
+    <string name="user_name_title" msgid="7563724675699398319">"Name"</string>
+    <string name="user_restrictions_heading" msgid="4426403050397418553">"Content restrictions"</string>
+    <string name="user_market_requires_pin" msgid="3260702297207279414">"Require PIN"</string>
+    <string name="user_max_content_rating" msgid="8297759970216482772">"Content rating"</string>
+    <string name="user_system_apps_heading" msgid="2408331798732183682">"System app"</string>
+    <string name="user_market_apps_heading" msgid="4657387297168308251">"Installed apps"</string>
+    <string name="user_discard_user_menu" msgid="6638388031088461242">"Discard"</string>
     <string name="user_remove_user_menu" msgid="3210146886949340574">"Remove user"</string>
-    <string name="user_new_user_name" msgid="369856859816028856">"New user"</string>
-    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Delete yourself?"</string>
+    <string name="user_new_user_name" msgid="7603010274765911161">"Pesky kid"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Remove user?"</string>
-    <string name="user_confirm_remove_self_message" msgid="9068129506438051992">"You will lose your space and data on this delete. Are you sure you want to remove the user and all associated data from the device?"</string>
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Are you sure you want to remove the user and all associated data from the device?"</string>
-    <string name="user_adding_new_user" msgid="1521674650874241407">"Adding new user…"</string>
-    <string name="user_delete_user_description" msgid="3158592592118767056">"Delete user"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Show notifications"</string>
     <string name="help_label" msgid="1107174367904110532">"Help"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Account for content"</string>
