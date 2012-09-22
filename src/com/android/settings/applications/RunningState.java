@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import com.android.settings.R;
+import com.android.settings.users.UserUtils;
 
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
@@ -377,7 +378,8 @@ public class RunningState {
             }
             
             try {
-                ApplicationInfo ai = pm.getApplicationInfo(mProcessName, 0);
+                ApplicationInfo ai = pm.getApplicationInfo(mProcessName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
                 if (ai.uid == mUid) {
                     mDisplayLabel = ai.loadLabel(pm);
                     mLabel = mDisplayLabel.toString();
@@ -394,7 +396,8 @@ public class RunningState {
             // If there is one package with this uid, that is what we want.
             if (pkgs.length == 1) {
                 try {
-                    ApplicationInfo ai = pm.getApplicationInfo(pkgs[0], 0);
+                    ApplicationInfo ai = pm.getApplicationInfo(pkgs[0],
+                            PackageManager.GET_UNINSTALLED_PACKAGES);
                     mDisplayLabel = ai.loadLabel(pm);
                     mLabel = mDisplayLabel.toString();
                     mPackageInfo = ai;
@@ -435,7 +438,8 @@ public class RunningState {
             
             // Finally... whatever, just pick the first package's name.
             try {
-                ApplicationInfo ai = pm.getApplicationInfo(pkgs[0], 0);
+                ApplicationInfo ai = pm.getApplicationInfo(pkgs[0],
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
                 mDisplayLabel = ai.loadLabel(pm);
                 mLabel = mDisplayLabel.toString();
                 mPackageInfo = ai;
@@ -455,7 +459,8 @@ public class RunningState {
                 si = new ServiceItem(mUserId);
                 si.mRunningService = service;
                 try {
-                    si.mServiceInfo = pm.getServiceInfo(service.service, 0);
+                    si.mServiceInfo = pm.getServiceInfo(service.service,
+                            PackageManager.GET_UNINSTALLED_PACKAGES);
                 } catch (PackageManager.NameNotFoundException e) {
                 }
                 si.mDisplayLabel = makeLabel(pm,
@@ -818,12 +823,9 @@ public class RunningState {
                 userItem.mUser = new UserState();
                 UserInfo info = mUm.getUserInfo(newItem.mUserId);
                 userItem.mUser.mInfo = info;
-                if (info != null && info.iconPath != null) {
-                    try {
-                        userItem.mUser.mIcon = Drawable.createFromPath(info.iconPath);
-                    } catch (Exception e) {
-                        Log.w(TAG, "Failure loading user picture " + info.iconPath, e);
-                    }
+                if (info != null) {
+                    userItem.mUser.mIcon = UserUtils.getUserIcon(mUm, info,
+                            context.getResources());
                 }
                 String name = info != null ? info.name : null;
                 if (name == null) {

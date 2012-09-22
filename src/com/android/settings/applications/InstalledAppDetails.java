@@ -340,7 +340,8 @@ public class InstalledAppDetails extends Fragment
                 }
             } else if ((mPackageInfo.applicationInfo.flags
                     & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                mUninstallButton.setText(R.string.install_text);
+                mUninstallButton.setText(R.string.uninstall_text);
+                enabled = false;
             } else {
                 mUninstallButton.setText(R.string.uninstall_text);
             }
@@ -391,6 +392,9 @@ public class InstalledAppDetails extends Fragment
         mSmsManager = ISms.Stub.asInterface(ServiceManager.getService("isms"));
 
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
+
+        // Need to make sure we have loaded applications at this point.
+        mSession.resume();
 
         retrieveAppEntry();
 
@@ -1134,6 +1138,7 @@ public class InstalledAppDetails extends Fragment
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
+            intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
             getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
                     Activity.RESULT_CANCELED, null, null);
         }
