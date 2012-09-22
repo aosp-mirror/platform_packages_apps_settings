@@ -18,6 +18,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.text.format.Formatter;
 import android.util.Log;
 
@@ -238,6 +239,7 @@ public class ApplicationsState {
 
     final Context mContext;
     final PackageManager mPm;
+    final int mRetrieveFlags;
     PackageIntentReceiver mPackageIntentReceiver;
 
     boolean mResumed;
@@ -401,7 +403,15 @@ public class ApplicationsState {
                 Process.THREAD_PRIORITY_BACKGROUND);
         mThread.start();
         mBackgroundHandler = new BackgroundHandler(mThread.getLooper());
-        
+
+        // Only the owner can see all apps.
+        if (UserHandle.myUserId() == 0) {
+            mRetrieveFlags = PackageManager.GET_UNINSTALLED_PACKAGES |
+                    PackageManager.GET_DISABLED_COMPONENTS;
+        } else {
+            mRetrieveFlags = PackageManager.GET_DISABLED_COMPONENTS;
+        }
+
         /**
          * This is a trick to prevent the foreground thread from being delayed.
          * The problem is that Dalvik monitors are initially spin locks, to keep
@@ -591,9 +601,7 @@ public class ApplicationsState {
             mPackageIntentReceiver = new PackageIntentReceiver();
             mPackageIntentReceiver.registerReceiver();
         }
-        mApplications = mPm.getInstalledApplications(
-                PackageManager.GET_UNINSTALLED_PACKAGES |
-                PackageManager.GET_DISABLED_COMPONENTS);
+        mApplications = mPm.getInstalledApplications(mRetrieveFlags);
         if (mApplications == null) {
             mApplications = new ArrayList<ApplicationInfo>();
         }
@@ -723,9 +731,7 @@ public class ApplicationsState {
                     if (DEBUG_LOCKING) Log.v(TAG, "addPackage release lock: already exists");
                     return;
                 }
-                ApplicationInfo info = mPm.getApplicationInfo(pkgName,
-                        PackageManager.GET_UNINSTALLED_PACKAGES |
-                        PackageManager.GET_DISABLED_COMPONENTS);
+                ApplicationInfo info = mPm.getApplicationInfo(pkgName, mRetrieveFlags);
                 mApplications.add(info);
                 if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_LOAD_ENTRIES)) {
                     mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ENTRIES);

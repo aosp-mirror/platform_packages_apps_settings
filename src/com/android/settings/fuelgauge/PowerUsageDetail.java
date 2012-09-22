@@ -34,6 +34,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -455,6 +456,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 Uri.fromParts("package", mPackages[0], null));
         intent.putExtra(Intent.EXTRA_PACKAGES, mPackages);
         intent.putExtra(Intent.EXTRA_UID, mUid);
+        intent.putExtra(Intent.EXTRA_USER_HANDLE, mUid);
         getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
                 Activity.RESULT_CANCELED, null, null);
     }

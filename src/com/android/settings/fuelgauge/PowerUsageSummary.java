@@ -767,15 +767,23 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             final int userId = mUserSippers.keyAt(i);
             final List<BatterySipper> sippers = mUserSippers.valueAt(i);
             UserInfo info = mUm.getUserInfo(userId);
-            Drawable icon = UserUtils.getUserIcon(mUm, info, getResources());
-            String name = info != null ? info.name : null;
-            if (name == null) {
-                name = Integer.toString(info.id);
+            Drawable icon;
+            String name;
+            if (info != null) {
+                icon = UserUtils.getUserIcon(mUm, info, getResources());
+                name = info != null ? info.name : null;
+                if (name == null) {
+                    name = Integer.toString(info.id);
+                }
+                name = getActivity().getResources().getString(
+                        R.string.running_process_item_user_label, name);
+            } else {
+                icon = null;
+                name = getActivity().getResources().getString(
+                        R.string.running_process_item_removed_user_label);
             }
             double power = mUserPower.get(userId);
-            String label = getActivity().getResources().getString(
-                    R.string.running_process_item_user_label, name);
-            BatterySipper bs = addEntry(label, DrainType.USER, 0, 0, power);
+            BatterySipper bs = addEntry(name, DrainType.USER, 0, 0, power);
             bs.icon = icon;
             aggregateSippers(bs, sippers, "User");
         }
