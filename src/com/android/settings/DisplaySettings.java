@@ -19,6 +19,7 @@ package com.android.settings;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.ActivityManagerNative;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -35,9 +36,11 @@ import android.os.RemoteException;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.util.AttributeSet;
 import android.util.Log;
 
 import com.android.internal.view.RotationPolicy;
@@ -46,7 +49,7 @@ import com.android.settings.DreamSettings;
 import java.util.ArrayList;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, OnPreferenceClickListener {
     private static final String TAG = "DisplaySettings";
 
     /** If there is no setting in the provider, use this. */
@@ -59,10 +62,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
 
+    private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
+
     private DisplayManager mDisplayManager;
 
     private CheckBoxPreference mAccelerometer;
-    private ListPreference mFontSizePref;
+    private WarnedListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
 
     private final Configuration mCurConfig = new Configuration();
@@ -111,8 +116,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
 
-        mFontSizePref = (ListPreference) findPreference(KEY_FONT_SIZE);
+        mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
+        mFontSizePref.setOnPreferenceClickListener(this);
         mNotificationPulse = (CheckBoxPreference) findPreference(KEY_NOTIFICATION_PULSE);
         if (mNotificationPulse != null
                 && getResources().getBoolean(
@@ -256,6 +262,20 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        if (dialogId == DLG_GLOBAL_CHANGE_WARNING) {
+            return Utils.buildGlobalChangeWarningDialog(getActivity(),
+                    R.string.global_font_change_title,
+                    new Runnable() {
+                        public void run() {
+                            mFontSizePref.click();
+                        }
+                    });
+        }
+        return null;
+    }
+
     private void updateState() {
         updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
@@ -345,4 +365,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
     };
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference == mFontSizePref) {
+            if (Utils.hasMultipleUsers(getActivity())) {
+                showDialog(DLG_GLOBAL_CHANGE_WARNING);
+                return true;
+            } else {
+                mFontSizePref.click();
+            }
+        }
+        return false;
+    }
 }

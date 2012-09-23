@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.SELinux;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -126,9 +127,14 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
         // These are contained by the root preference screen
         parentPreference = getPreferenceScreen();
-        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
-                KEY_SYSTEM_UPDATE_SETTINGS,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
+            Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
+                    KEY_SYSTEM_UPDATE_SETTINGS,
+                    Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+        } else {
+            // Remove for secondary users
+            removePreference(KEY_SYSTEM_UPDATE_SETTINGS);
+        }
         Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
 

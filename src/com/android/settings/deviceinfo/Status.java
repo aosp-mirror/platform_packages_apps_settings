@@ -33,6 +33,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -190,13 +191,14 @@ public class Status extends PreferenceActivity {
 
         mRes = getResources();
         sUnknown = mRes.getString(R.string.device_info_default);
-
-        mPhone = PhoneFactory.getDefaultPhone();
+        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
+            mPhone = PhoneFactory.getDefaultPhone();
+        }
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
         mUptime = findPreference("up_time");
 
-        if (Utils.isWifiOnly(getApplicationContext())) {
+        if (mPhone == null || Utils.isWifiOnly(getApplicationContext())) {
             for (String key : PHONE_RELATED_ENTRIES) {
                 removePreferenceFromScreen(key);
             }
@@ -267,7 +269,7 @@ public class Status extends PreferenceActivity {
     protected void onResume() {
         super.onResume();
 
-        if (!Utils.isWifiOnly(getApplicationContext())) {
+        if (mPhone != null && !Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.registerIntent();
 
             updateSignalStrength();
@@ -285,7 +287,7 @@ public class Status extends PreferenceActivity {
     public void onPause() {
         super.onPause();
 
-        if (!Utils.isWifiOnly(getApplicationContext())) {
+        if (mPhone != null && !Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.unregisterIntent();
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
