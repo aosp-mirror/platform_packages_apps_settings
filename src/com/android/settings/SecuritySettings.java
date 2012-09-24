@@ -475,6 +475,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
     }
 
+    private Intent getBaseIntent() {
+        Intent baseIntent = new Intent(Intent.ACTION_MAIN, null);
+        baseIntent.addCategory(Intent.CATEGORY_DEFAULT);
+
+        Bundle options = new Bundle();
+        options.putInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY,
+                AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+        baseIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, options);
+        return baseIntent;
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
@@ -511,6 +522,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 // Launch the widget picker
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
+                pickIntent.putExtra(Intent.EXTRA_INTENT, getBaseIntent());
                 startActivityForResult(pickIntent, REQUEST_PICK_USER_SELECTED_APPWIDGET);
             } else {
                 Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
@@ -545,6 +557,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 // Launch the widget picker
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
                 pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
+                pickIntent.putExtra(Intent.EXTRA_INTENT, getBaseIntent());
                 startActivityForResult(pickIntent, REQUEST_PICK_STATUS_APPWIDGET);
             } else {
                 Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
