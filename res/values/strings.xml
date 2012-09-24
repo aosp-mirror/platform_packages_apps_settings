@@ -1937,6 +1937,8 @@
     <string name="memory_music_usage">Audio (music, ringtones, podcasts, etc.)</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of misc files on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_media_misc_usage">Misc.</string>
+    <!-- Storage item representing all cached data on device. [CHAR LIMIT=48] -->
+    <string name="memory_media_cache_usage">Cached data</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
     <string name="sd_eject" product="nosdcard">Unmount shared storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
@@ -1970,6 +1972,11 @@
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=80] -->
     <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
     <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
+
+    <!-- Title of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
+    <string name="memory_clear_cache_title">Clear cached data?</string>
+    <!-- Message of dialog asking user to confirm before clearing all caches. [CHAR LIMIT=48] -->
+    <string name="memory_clear_cache_message">This will clear cached data for all apps.</string>
 
     <!-- SD card & phone storage settings item summary that will result in the phone connected to PC and MTP/PTP enabled.   [CHAR LIMIT=80] -->
     <string name="mtp_ptp_mode_summary">MTP or PTP function is active</string>

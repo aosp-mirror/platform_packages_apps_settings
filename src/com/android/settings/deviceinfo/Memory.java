@@ -18,11 +18,15 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.IPackageDataObserver;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,6 +52,7 @@ import com.android.settings.Utils;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Panel showing storage usage on disk for known {@link StorageVolume} returned
@@ -55,6 +60,8 @@ import java.util.ArrayList;
  */
 public class Memory extends SettingsPreferenceFragment {
     private static final String TAG = "MemorySettings";
+
+    private static final String TAG_CONFIRM_CLEAR_CACHE = "confirmClearCache";
 
     private static final int DLG_CONFIRM_UNMOUNT = 1;
     private static final int DLG_ERROR_UNMOUNT = 2;
@@ -202,6 +209,11 @@ public class Memory extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (StorageVolumePreferenceCategory.KEY_CACHE.equals(preference.getKey())) {
+            ConfirmClearCacheFragment.show(this);
+            return true;
+        }
+
         for (StorageVolumePreferenceCategory category : mCategories) {
             Intent intent = category.intentForClick(preference);
             if (intent != null) {
@@ -337,6 +349,70 @@ public class Memory extends SettingsPreferenceFragment {
             }
         } catch (RemoteException ex) {
             // Not much can be done
+        }
+    }
+
+    private void onCacheCleared() {
+        for (StorageVolumePreferenceCategory category : mCategories) {
+            category.onCacheCleared();
+        }
+    }
+
+    private static class ClearCacheObserver extends IPackageDataObserver.Stub {
+        private final Memory mTarget;
+        private int mRemaining;
+
+        public ClearCacheObserver(Memory target, int remaining) {
+            mTarget = target;
+            mRemaining = remaining;
+        }
+
+        @Override
+        public void onRemoveCompleted(final String packageName, final boolean succeeded) {
+            synchronized (this) {
+                if (--mRemaining == 0) {
+                    mTarget.onCacheCleared();
+                }
+            }
+        }
+    }
+
+    /**
+     * Dialog to request user confirmation before clearing all cache data.
+     */
+    public static class ConfirmClearCacheFragment extends DialogFragment {
+        public static void show(Memory parent) {
+            if (!parent.isAdded()) return;
+
+            final ConfirmClearCacheFragment dialog = new ConfirmClearCacheFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_CLEAR_CACHE);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.memory_clear_cache_title);
+            builder.setMessage(getString(R.string.memory_clear_cache_message));
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final Memory target = (Memory) getTargetFragment();
+                    final PackageManager pm = context.getPackageManager();
+                    final List<PackageInfo> infos = pm.getInstalledPackages(0);
+                    final ClearCacheObserver observer = new ClearCacheObserver(
+                            target, infos.size());
+                    for (PackageInfo info : infos) {
+                        pm.deleteApplicationCacheFiles(info.packageName, observer);
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
         }
     }
 }
