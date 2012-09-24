@@ -16,9 +16,16 @@
 
 package com.android.settings;
 
+import com.android.settings.bluetooth.DockEventReceiver;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -47,6 +54,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SoundSettings";
 
+    private static final int DIALOG_NOT_DOCKED = 1;
+
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
 
@@ -62,6 +71,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
+    private static final String KEY_DOCK_CATEGORY = "dock_category";
+    private static final String KEY_AUDIO_SETTINGS = "dock_audio";
+    private static final String KEY_DOCK_SOUNDS = "dock_sounds";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -84,6 +96,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private AudioManager mAudioManager;
 
+    private Preference mDockAudioSettings;
+    private CheckBoxPreference mDockSounds;
+    private Intent mDockIntent;
+
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -93,6 +109,15 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             case MSG_UPDATE_NOTIFICATION_SUMMARY:
                 mNotificationPreference.setSummary((CharSequence) msg.obj);
                 break;
+            }
+        }
+    };
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_DOCK_EVENT)) {
+                handleDockChange(intent);
             }
         }
     };
@@ -193,6 +218,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 }
             }
         };
+
+        initDockSettings();
     }
 
     @Override
@@ -200,6 +227,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         lookupRingtoneNames();
+
+        IntentFilter filter = new IntentFilter(Intent.ACTION_DOCK_EVENT);
+        getActivity().registerReceiver(mReceiver, filter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     private void updateRingtoneName(int type, Preference preference, int msg) {
@@ -262,8 +299,22 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
+        } else if (preference == mDockAudioSettings) {
+            int dockState = mDockIntent != null
+                    ? mDockIntent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0)
+                    : Intent.EXTRA_DOCK_STATE_UNDOCKED;
+            if (dockState == Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                showDialog(DIALOG_NOT_DOCKED);
+            } else {
+                Intent i = new Intent(mDockIntent);
+                i.setAction(DockEventReceiver.ACTION_DOCK_SHOW_UI);
+                i.setClass(getActivity(), DockEventReceiver.class);
+                getActivity().sendBroadcast(i);
+            }
+        } else if (preference == mDockSounds) {
+            Settings.System.putInt(getContentResolver(), Settings.System.DOCK_SOUNDS_ENABLED,
+                    mDockSounds.isChecked() ? 1 : 0);
         }
-
         return true;
     }
 
@@ -286,4 +337,68 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     protected int getHelpResource() {
         return R.string.help_url_sound;
     }
+
+    private boolean needsDockSettings() {
+        return getResources().getBoolean(R.bool.has_dock_settings);
+    }
+
+    private void initDockSettings() {
+        if (needsDockSettings()) {
+
+            ContentResolver resolver = getContentResolver();
+
+            mDockAudioSettings = findPreference(KEY_AUDIO_SETTINGS);
+
+            mDockSounds = (CheckBoxPreference) findPreference(KEY_DOCK_SOUNDS);
+            mDockSounds.setPersistent(false);
+            mDockSounds.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.DOCK_SOUNDS_ENABLED, 0) != 0);
+        } else {
+            getPreferenceScreen().removePreference(findPreference(KEY_DOCK_CATEGORY));
+            getPreferenceScreen().removePreference(findPreference(KEY_AUDIO_SETTINGS));
+            getPreferenceScreen().removePreference(findPreference(KEY_DOCK_SOUNDS));
+        }
+    }
+
+    private void handleDockChange(Intent intent) {
+        if (mDockAudioSettings != null) {
+            int dockState = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0);
+
+            boolean isBluetooth = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) != null;
+
+            if (!isBluetooth) {
+                // No dock audio if not on Bluetooth.
+                mDockAudioSettings.setEnabled(false);
+            } else {
+                mDockAudioSettings.setEnabled(true);
+                mDockIntent = intent;
+            }
+
+            if (dockState != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                // remove undocked dialog if currently showing.
+                try {
+                    removeDialog(DIALOG_NOT_DOCKED);
+                } catch (IllegalArgumentException iae) {
+                    // Maybe it was already dismissed
+                }
+            }
+        }
+    }
+
+    @Override
+    public Dialog onCreateDialog(int id) {
+        if (id == DIALOG_NOT_DOCKED) {
+            return createUndockedMessage();
+        }
+        return null;
+    }
+
+    private Dialog createUndockedMessage() {
+        final AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
+        ab.setTitle(R.string.dock_not_found_title);
+        ab.setMessage(R.string.dock_not_found_text);
+        ab.setPositiveButton(android.R.string.ok, null);
+        return ab.create();
+    }
 }
+
