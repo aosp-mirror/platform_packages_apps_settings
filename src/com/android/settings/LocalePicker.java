@@ -16,18 +16,87 @@
 
 package com.android.settings;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.UserManager;
+import android.util.Log;
+
+import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+
 import java.util.Locale;
 
 public class LocalePicker extends com.android.internal.app.LocalePicker
-        implements com.android.internal.app.LocalePicker.LocaleSelectionListener {
+        implements com.android.internal.app.LocalePicker.LocaleSelectionListener,
+        DialogCreatable {
+
+    private static final String TAG = "LocalePicker";
+
+    private SettingsDialogFragment mDialogFragment;
+    private static final int DLG_SHOW_GLOBAL_WARNING = 1;
+    private static final String SAVE_TARGET_LOCALE = "locale";
+
+    private Locale mTargetLocale;
+
     public LocalePicker() {
         super();
         setLocaleSelectionListener(this);
     }
 
     @Override
-    public void onLocaleSelected(Locale locale) {
-        getActivity().onBackPressed();
-        LocalePicker.updateLocale(locale);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_TARGET_LOCALE)) {
+            mTargetLocale = new Locale(savedInstanceState.getString(SAVE_TARGET_LOCALE));
+        }
+    }
+
+    @Override
+    public void onLocaleSelected(final Locale locale) {
+        if (Utils.hasMultipleUsers(getActivity())) {
+            mTargetLocale = locale;
+            showDialog(DLG_SHOW_GLOBAL_WARNING);
+        } else {
+            LocalePicker.updateLocale(locale);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mTargetLocale != null) {
+            outState.putString(SAVE_TARGET_LOCALE, mTargetLocale.toString());
+        }
+    }
+
+    protected void showDialog(int dialogId) {
+        if (mDialogFragment != null) {
+            Log.e(TAG, "Old dialog fragment not null!");
+        }
+        mDialogFragment = new SettingsDialogFragment(this, dialogId);
+        mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
+    }
+
+    public Dialog onCreateDialog(int dialogId) {
+        return Utils.buildGlobalChangeWarningDialog(getActivity(),
+                R.string.global_locale_change_title,
+                new Runnable() {
+                    public void run() {
+                        getActivity().onBackPressed();
+                        LocalePicker.updateLocale(mTargetLocale);
+                    }
+                }
+        );
+    }
+
+    protected void removeDialog(int dialogId) {
+        // mDialogFragment may not be visible yet in parent fragment's onResume().
+        // To be able to dismiss dialog at that time, don't check
+        // mDialogFragment.isVisible().
+        if (mDialogFragment != null && mDialogFragment.getDialogId() == dialogId) {
+            mDialogFragment.dismiss();
+        }
+        mDialogFragment = null;
     }
 }
