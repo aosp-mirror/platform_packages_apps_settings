@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.security.Credentials;
@@ -102,6 +103,16 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.vpn, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        // Hide lockdown VPN on devices that require IMS authentication
+        if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {
+            menu.findItem(R.id.vpn_lockdown).setVisible(false);
+        }
     }
 
     @Override
