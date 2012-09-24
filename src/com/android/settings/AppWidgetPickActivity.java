@@ -143,15 +143,22 @@ public class AppWidgetPickActivity extends ActivityPicker {
     @Override
     public void onClick(DialogInterface dialog, int which) {
         Intent intent = getIntentForPosition(which);
-        
+
         int result;
-        if (intent.getExtras() != null) {
-            // If there are any extras, it's because this entry is custom.
+        if (intent.getExtras() != null && 
+                (intent.getExtras().containsKey(AppWidgetManager.EXTRA_CUSTOM_INFO) ||
+                 intent.getExtras().containsKey(AppWidgetManager.EXTRA_CUSTOM_EXTRAS))) {
+            // If these extras are present it's because this entry is custom.
             // Don't try to bind it, just pass it back to the app.
             setResultData(RESULT_OK, intent);
         } else {
             try {
-                mAppWidgetManager.bindAppWidgetId(mAppWidgetId, intent.getComponent());
+                Bundle options = null;
+                if (intent.getExtras() != null) {
+                    options = intent.getExtras().getBundle(
+                            AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
+                }
+                mAppWidgetManager.bindAppWidgetId(mAppWidgetId, intent.getComponent(), options);
                 result = RESULT_OK;
             } catch (IllegalArgumentException e) {
                 // This is thrown if they're already bound, or otherwise somehow
