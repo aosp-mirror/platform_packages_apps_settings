@@ -590,6 +590,10 @@
     <string name="roaming_turn_it_on_button">Turn it on</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
     <string name="roaming_warning">When you allow data roaming, you may incur significant roaming charges!</string>
+    <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser tablets [CHAR LIMIT=none] -->
+    <string name="roaming_warning_multiuser" product="tablet">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this tablet.</string>
+    <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser phones [CHAR LIMIT=none] -->
+    <string name="roaming_warning_multiuser" product="default">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this phone.</string>
     <!-- mobile network settings screen, title of dialog box that appears when you select the "Data roaming" check box -->
     <string name="roaming_reenable_title">Allow data roaming?</string>
     <!-- mobile network settings screen, setting option name -->
@@ -4081,6 +4085,10 @@
     <string name="data_usage_restrict_background_title">Restrict background data?</string>
     <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
     <string name="data_usage_restrict_background">If you restrict background mobile data, some apps and services won\'t work unless you\'re connected to a Wi-Fi network.</string>
+    <!-- Body of dialog shown before user restricts background data usage. This is for multiuser tablets. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background mobile data, some apps and services won\'t work unless you\'re connected to a Wi-Fi network.\n\nThis setting affects all users on this tablet.</string>
+    <!-- Body of dialog shown before user restricts background data usage. This is for multiuser phones. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background mobile data, some apps and services won\'t work unless you\'re connected to a Wi-Fi network.\n\nThis setting affects all users on this phone.</string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="21"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>
@@ -4285,6 +4293,15 @@
     <string name="user_adding_new_user">Adding new user\u2026</string>
     <!-- Spoken content description for delete icon beside a user [CHAR LIMIT=none] -->
     <string name="user_delete_user_description">Delete user</string>
+
+    <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
+    <string name="global_change_warning" product="tablet">This setting affects all users on this tablet.</string>
+    <!-- Warning message when changing a global setting for a phone.[CHAR LIMIT=none] -->
+    <string name="global_change_warning" product="default">This setting affects all users on this phone.</string>
+    <!-- Warning message title for global locale change [CHAR LIMIT=40] -->
+    <string name="global_locale_change_title">Change language</string>
+    <!-- Warning message title for global font change [CHAR LIMIT=40] -->
+    <string name="global_font_change_title">Change font size</string>
 
     <!-- Label for are-notifications-enabled checkbox in app details [CHAR LIMIT=20] -->
     <string name="app_notifications_switch_label">Show notifications</string>

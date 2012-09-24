@@ -16,8 +16,12 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -499,5 +503,27 @@ public class Utils {
             cursor.close();
         }
         return null;
+    }
+
+    /** Not global warming, it's global change warning. */
+    public static Dialog buildGlobalChangeWarningDialog(final Context context, int titleResId,
+            final Runnable positiveAction) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(titleResId);
+        builder.setMessage(R.string.global_change_warning);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                positiveAction.run();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+
+        return builder.create();
+    }
+
+    public static boolean hasMultipleUsers(Context context) {
+        return ((UserManager) context.getSystemService(Context.USER_SERVICE))
+                .getUsers().size() > 1;
     }
 }
