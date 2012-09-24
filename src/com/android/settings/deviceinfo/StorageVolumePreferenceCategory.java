@@ -46,6 +46,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class StorageVolumePreferenceCategory extends PreferenceCategory {
+    public static final String KEY_CACHE = "cache";
+
     private static final int ORDER_USAGE_BAR = -2;
     private static final int ORDER_STORAGE_LOW = -1;
 
@@ -68,6 +70,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
     private StorageItemPreference mItemDcim;
     private StorageItemPreference mItemMusic;
     private StorageItemPreference mItemDownloads;
+    private StorageItemPreference mItemCache;
     private StorageItemPreference mItemMisc;
     private List<StorageItemPreference> mItemUsers = Lists.newArrayList();
 
@@ -157,7 +160,10 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
         mItemDcim = buildItem(R.string.memory_dcim_usage, R.color.memory_dcim);
         mItemMusic = buildItem(R.string.memory_music_usage, R.color.memory_music);
         mItemDownloads = buildItem(R.string.memory_downloads_usage, R.color.memory_downloads);
+        mItemCache = buildItem(R.string.memory_media_cache_usage, R.color.memory_cache);
         mItemMisc = buildItem(R.string.memory_media_misc_usage, R.color.memory_misc);
+
+        mItemCache.setKey(KEY_CACHE);
 
         final boolean showDetails = mVolume == null || mVolume.isPrimary();
         if (showDetails) {
@@ -169,6 +175,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
             addPreference(mItemDcim);
             addPreference(mItemMusic);
             addPreference(mItemDownloads);
+            addPreference(mItemCache);
             addPreference(mItemMisc);
 
             if (showUsers) {
@@ -314,7 +321,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
 
         // Count caches as available space, since system manages them
         mItemTotal.setSummary(formatSize(details.totalSize));
-        mItemAvailable.setSummary(formatSize(details.availSize + details.cacheSize));
+        mItemAvailable.setSummary(formatSize(details.availSize));
 
         mUsageBarPreference.clear();
 
@@ -332,6 +339,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
         final long downloadsSize = totalValues(details.mediaSize, Environment.DIRECTORY_DOWNLOADS);
         updatePreference(mItemDownloads, downloadsSize);
 
+        updatePreference(mItemCache, details.cacheSize);
         updatePreference(mItemMisc, details.miscSize);
 
         for (StorageItemPreference userPref : mItemUsers) {
@@ -373,6 +381,10 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
     }
 
     public void onMediaScannerFinished() {
+        measure();
+    }
+
+    public void onCacheCleared() {
         measure();
     }
 
