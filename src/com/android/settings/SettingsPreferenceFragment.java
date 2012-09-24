@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
@@ -63,6 +64,13 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         super.onActivityCreated(savedInstanceState);
         if (!TextUtils.isEmpty(mHelpUrl)) {
             setHasOptionsMenu(true);
+        }
+    }
+
+    protected void removePreference(String key) {
+        Preference pref = findPreference(key);
+        if (pref != null) {
+            getPreferenceScreen().removePreference(pref);
         }
     }
 

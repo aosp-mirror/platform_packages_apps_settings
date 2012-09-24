@@ -452,7 +452,6 @@ public class DataUsageSummary extends Fragment {
         mMenuDataRoaming = menu.findItem(R.id.data_usage_menu_roaming);
         mMenuDataRoaming.setVisible(hasReadyMobileRadio(context) && !appDetailMode);
         mMenuDataRoaming.setChecked(getDataRoaming());
-        mMenuDataRoaming.setVisible(isOwner);
 
         mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
         mMenuRestrictBackground.setVisible(hasReadyMobileRadio(context) && !appDetailMode);
@@ -485,7 +484,7 @@ public class DataUsageSummary extends Fragment {
 
         final MenuItem metered = menu.findItem(R.id.data_usage_menu_metered);
         if (hasReadyMobileRadio(context) || hasWifiRadio(context)) {
-            metered.setVisible(isOwner && !appDetailMode);
+            metered.setVisible(!appDetailMode);
         } else {
             metered.setVisible(false);
         }
@@ -1936,7 +1935,11 @@ public class DataUsageSummary extends Fragment {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.roaming_reenable_title);
-            builder.setMessage(R.string.roaming_warning);
+            if (Utils.hasMultipleUsers(context)) {
+                builder.setMessage(R.string.roaming_warning_multiuser);
+            } else {
+                builder.setMessage(R.string.roaming_warning);
+            }
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
@@ -1972,7 +1975,11 @@ public class DataUsageSummary extends Fragment {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.data_usage_restrict_background_title);
-            builder.setMessage(getString(R.string.data_usage_restrict_background));
+            if (Utils.hasMultipleUsers(context)) {
+                builder.setMessage(R.string.data_usage_restrict_background_multiuser);
+            } else {
+                builder.setMessage(R.string.data_usage_restrict_background);
+            }
 
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override

@@ -25,29 +25,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
-import android.database.ContentObserver;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.InputType;
 import android.util.Log;
@@ -57,16 +50,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
+import android.widget.EditText;
 
-import com.android.internal.telephony.MccTable;
 import com.android.settings.R;
+import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,14 +89,9 @@ public class UserSettings extends SettingsPreferenceFragment
         R.drawable.ic_user_yellow
     };
 
-    private static final String[] CONTACT_PROJECTION = new String[] {
-        Phone._ID,                      // 0
-        Phone.DISPLAY_NAME,             // 1
-    };
-
     private PreferenceGroup mUserListCategory;
     private Preference mMePreference;
-    private EditTextPreference mNicknamePreference;
+    private SelectableEditTextPreference mNicknamePreference;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -156,10 +141,12 @@ public class UserSettings extends SettingsPreferenceFragment
         if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
             mMePreference.setSummary(null);
         }
-        mNicknamePreference = (EditTextPreference) findPreference(KEY_USER_NICKNAME);
+        mNicknamePreference = (SelectableEditTextPreference) findPreference(KEY_USER_NICKNAME);
         mNicknamePreference.setOnPreferenceChangeListener(this);
         mNicknamePreference.getEditText().setInputType(
                 InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        mNicknamePreference.setInitialSelectionMode(
+                SelectableEditTextPreference.SELECTION_SELECT_ALL);
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -385,7 +372,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 continue;
             } else if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
-                mNicknamePreference.setText(user.name);
+                mNicknamePreference.getEditText().setText(user.name);
                 mNicknamePreference.setSummary(user.name);
             } else {
                 pref = new UserPreference(getActivity(), null, user.id,

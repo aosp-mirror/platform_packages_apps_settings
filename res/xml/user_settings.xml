@@ -21,7 +21,7 @@
     <Preference
             android:key="user_me"
             android:summary="@string/user_owner" />
-    <EditTextPreference
+    <com.android.settings.SelectableEditTextPreference
             android:key="user_nickname"
             android:title="@string/user_nickname"
             android:icon="@drawable/empty_icon" />

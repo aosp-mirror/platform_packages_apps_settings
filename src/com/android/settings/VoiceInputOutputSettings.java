@@ -183,6 +183,8 @@ public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
     
     private void updateSettingsLink(String currentSetting) {
         ResolveInfo currentRecognizer = mAvailableRecognizersMap.get(currentSetting);
+        if (currentRecognizer == null) return;
+
         ServiceInfo si = currentRecognizer.serviceInfo;
         XmlResourceParser parser = null;
         String settingsActivity = null;
