@@ -26,6 +26,7 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -96,6 +97,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
+        final boolean isSecondaryUser = UserHandle.myUserId() != UserHandle.USER_OWNER;
+
         final Activity activity = getActivity();
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
@@ -113,7 +116,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
         //enable/disable wimax depending on the value in config.xml
-        boolean isWimaxEnabled = this.getResources().getBoolean(
+        boolean isWimaxEnabled = !isSecondaryUser && this.getResources().getBoolean(
                 com.android.internal.R.bool.config_wimaxEnabled);
         if (!isWimaxEnabled) {
             PreferenceScreen root = getPreferenceScreen();
@@ -129,6 +132,9 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+        }
+        if (isSecondaryUser) { // Disable VPN
+            removePreference(KEY_VPN_SETTINGS);
         }
 
         // Manually set dependencies for Bluetooth when not toggleable.
@@ -151,8 +157,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         }
 
         // Remove Mobile Network Settings if it's a wifi-only device.
-        if (Utils.isWifiOnly(getActivity())) {
-            getPreferenceScreen().removePreference(findPreference(KEY_MOBILE_NETWORK_SETTINGS));
+        if (isSecondaryUser || Utils.isWifiOnly(getActivity())) {
+            removePreference(KEY_MOBILE_NETWORK_SETTINGS);
         }
 
         // Enable Proxy selector settings if allowed.
@@ -166,7 +172,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Disable Tethering if it's not allowed or if it's a wifi-only device
         ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (!cm.isTetheringSupported()) {
+        if (isSecondaryUser || !cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
@@ -187,7 +193,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         } catch (IllegalArgumentException ignored) {
             isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
         }
-        if (!isCellBroadcastAppLinkEnabled) {
+        if (isSecondaryUser || !isCellBroadcastAppLinkEnabled) {
             PreferenceScreen root = getPreferenceScreen();
             Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
             if (ps != null) root.removePreference(ps);

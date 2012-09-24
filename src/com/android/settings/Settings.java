@@ -100,6 +100,7 @@ public class Settings extends PreferenceActivity
             R.id.wifi_settings,
             R.id.bluetooth_settings,
             R.id.data_usage_settings,
+            R.id.wireless_settings,
             R.id.device_section,
             R.id.sound_settings,
             R.id.display_settings,
@@ -107,11 +108,14 @@ public class Settings extends PreferenceActivity
             R.id.application_settings,
             R.id.battery_settings,
             R.id.personal_section,
+            R.id.location_settings,
             R.id.security_settings,
+            R.id.language_settings,
             R.id.user_settings,
             R.id.account_settings,
             R.id.account_add,
             R.id.system_section,
+            R.id.date_time_settings,
             R.id.about_settings,
             R.id.accessibility_settings
     };
