@@ -45,7 +45,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceActivity.Header;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -54,7 +53,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -115,6 +113,7 @@ public class Settings extends PreferenceActivity
             R.id.account_add,
             R.id.system_section,
             R.id.about_settings,
+            R.id.accessibility_settings
     };
 
     // TODO: Update Call Settings based on airplane mode state.
