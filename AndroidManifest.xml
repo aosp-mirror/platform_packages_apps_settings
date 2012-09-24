@@ -603,35 +603,6 @@
                 android:resource="@id/display_settings" />
         </activity-alias>
 
-        <activity android:name="Settings$DockSettingsActivity"
-                android:label="@string/dock_settings_title"
-                android:enabled="@bool/has_dock_settings"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.DOCK_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DockSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/dock_settings" />
-        </activity>
-
-        <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias android:name="DockSettings"
-                android:label="@string/dock_settings_title"
-                android:enabled="@bool/has_dock_settings"
-                android:exported="true"
-                android:targetActivity="Settings$DockSettingsActivity">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DockSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/dock_settings" />
-        </activity-alias>
-
         <activity android:name="Settings$DeviceInfoSettingsActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
                 android:label="@string/device_info_settings"
