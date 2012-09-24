@@ -88,4 +88,19 @@
             android:entries="@array/emergency_tone_entries"
             android:entryValues="@array/emergency_tone_values" />
 
+    <!-- Dock -->
+    <PreferenceCategory
+        android:key="dock_category"
+        android:title="@string/dock_settings"/>
+
+    <!-- Do not nest these, or removals in code will break -->
+    <PreferenceScreen
+        android:key="dock_audio"
+        android:title="@string/dock_audio_settings_title" />
+
+    <CheckBoxPreference
+        android:key="dock_sounds"
+        android:title="@string/dock_sounds_enable_title"
+        android:defaultValue="false" />
+
 </PreferenceScreen>
