@@ -37,7 +37,8 @@
                 android:persistent="false"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/device_admin_title"
+    <PreferenceCategory android:key="device_admin_category"
+            android:title="@string/device_admin_title"
             android:persistent="false">
 
         <Preference android:title="@string/manage_device_admin"

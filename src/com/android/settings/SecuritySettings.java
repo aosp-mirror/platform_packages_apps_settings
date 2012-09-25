@@ -72,6 +72,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
+    private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String EXTRA_NO_WIDGET = "com.android.settings.NO_WIDGET";
     private static final String EXTRA_DEFAULT_WIDGET = "com.android.settings.DEFAULT_WIDGET";
@@ -289,8 +290,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mToggleVerifyApps.setChecked(false);
                 mToggleVerifyApps.setEnabled(false);
             }
-        } else if (mToggleVerifyApps != null) {
-            mToggleVerifyApps.setEnabled(false);
+        } else {
+            PreferenceGroup deviceAdminCategory= (PreferenceGroup)
+                    root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
+            if (deviceAdminCategory != null) {
+                deviceAdminCategory.removePreference(mToggleVerifyApps);
+            } else {
+                mToggleVerifyApps.setEnabled(false);
+            }
         }
 
         return root;
