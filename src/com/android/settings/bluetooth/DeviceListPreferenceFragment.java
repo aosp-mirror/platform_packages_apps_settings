@@ -193,8 +193,8 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     private void updateProgressUi(boolean start) {
-        if (mDeviceListGroup instanceof ProgressCategory) {
-            ((ProgressCategory) mDeviceListGroup).setProgress(start);
+        if (mDeviceListGroup instanceof BluetoothProgressCategory) {
+            ((BluetoothProgressCategory) mDeviceListGroup).setProgress(start);
         }
     }
 
