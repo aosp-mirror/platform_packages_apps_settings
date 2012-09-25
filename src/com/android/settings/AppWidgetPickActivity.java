@@ -21,17 +21,20 @@ import android.appwidget.AppWidgetProviderInfo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.SystemProperties;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.Collator;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Displays a list of {@link AppWidgetProviderInfo} widgets, along with any
@@ -49,6 +52,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
 
     private PackageManager mPackageManager;
     private AppWidgetManager mAppWidgetManager;
+    List<PickAdapter.Item> mItems;
     
     /**
      * The allocated {@link AppWidgetManager#EXTRA_APPWIDGET_ID} that this
@@ -143,11 +147,10 @@ public class AppWidgetPickActivity extends ActivityPicker {
     @Override
     public void onClick(DialogInterface dialog, int which) {
         Intent intent = getIntentForPosition(which);
+        PickAdapter.Item item = (PickAdapter.Item) mItems.get(which);
 
         int result;
-        if (intent.getExtras() != null && 
-                (intent.getExtras().containsKey(AppWidgetManager.EXTRA_CUSTOM_INFO) ||
-                 intent.getExtras().containsKey(AppWidgetManager.EXTRA_CUSTOM_EXTRAS))) {
+        if (item.extras != null) {
             // If these extras are present it's because this entry is custom.
             // Don't try to bind it, just pass it back to the app.
             setResultData(RESULT_OK, intent);
@@ -185,11 +188,47 @@ public class AppWidgetPickActivity extends ActivityPicker {
         for (int i = 0; i < size; i++) {
             AppWidgetProviderInfo info = appWidgets.get(i);
 
+            // We remove any widgets whose category isn't included in the filter
+            if (!ignoreFilters && (info.widgetCategory & categoryFilter) == 0) {
+                continue;
+            }
+
+            // We remove any widgets who don't have all the features in the features filter
+            if (!ignoreFilters && (info.widgetFeatures & featuresFilter) != featuresFilter) {
+                continue;
+            }
+
             CharSequence label = info.label;
             Drawable icon = null;
 
             if (info.icon != 0) {
-                icon = mPackageManager.getDrawable(info.provider.getPackageName(), info.icon, null);
+                try {
+                    final Resources res = getResources();
+                    final int density = res.getDisplayMetrics().densityDpi;
+                    int iconDensity;
+                    switch (density) {
+                        case DisplayMetrics.DENSITY_MEDIUM:
+                            iconDensity = DisplayMetrics.DENSITY_LOW;
+                        case DisplayMetrics.DENSITY_TV:
+                            iconDensity = DisplayMetrics.DENSITY_MEDIUM;
+                        case DisplayMetrics.DENSITY_HIGH:
+                            iconDensity = DisplayMetrics.DENSITY_MEDIUM;
+                        case DisplayMetrics.DENSITY_XHIGH:
+                            iconDensity = DisplayMetrics.DENSITY_HIGH;
+                        case DisplayMetrics.DENSITY_XXHIGH:
+                            iconDensity = DisplayMetrics.DENSITY_XHIGH;
+                        default:
+                            // The density is some abnormal value.  Return some other
+                            // abnormal value that is a reasonable scaling of it.
+                            iconDensity = (int)((density*0.75f)+.5f);
+                    }
+                    Resources packageResources = mPackageManager.
+                            getResourcesForApplication(info.provider.getPackageName());
+                    icon = packageResources.getDrawableForDensity(info.icon, iconDensity);
+                } catch (NameNotFoundException e) {
+                    Log.w(TAG, "Can't load icon drawable 0x" + Integer.toHexString(info.icon)
+                            + " for provider: " + info.provider);
+                }
                 if (icon == null) {
                     Log.w(TAG, "Can't load icon drawable 0x" + Integer.toHexString(info.icon)
                             + " for provider: " + info.provider);
@@ -203,16 +242,6 @@ public class AppWidgetPickActivity extends ActivityPicker {
             
             if (customExtras != null) {
                 item.extras = customExtras.get(i);
-            }
-
-            // We remove any widgets whose category isn't included in the filter
-            if (!ignoreFilters && (info.widgetCategory & categoryFilter) == 0) {
-                continue;
-            }
-
-            // We remove any widgets who don't have all the features in the features filter
-            if (!ignoreFilters && (info.widgetFeatures & featuresFilter) != featuresFilter) {
-                continue;
             }
 
             items.add(item);
@@ -259,8 +288,9 @@ public class AppWidgetPickActivity extends ActivityPicker {
         if (!sortCustomAppWidgets) {
             List<PickAdapter.Item> customItems = new ArrayList<PickAdapter.Item>();
             putCustomAppWidgets(customItems);
-            items.addAll(0, customItems);
+            items.addAll(customItems);
         }
+        mItems = items;
         return items;
     }
 
