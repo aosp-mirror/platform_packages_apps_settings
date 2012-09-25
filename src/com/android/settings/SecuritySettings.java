@@ -475,6 +475,46 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
     }
 
+    private void launchPickActivityIntent(int featuresFilter, int defaultLabelId, int defaultIconId,
+            ComponentName defaultComponentName, String defaultTag) {
+        // Create intent to pick widget
+        Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+
+        // Found in KeyguardHostView.java
+        final int KEYGUARD_HOST_ID = 0x4B455947;
+        int appWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
+        if (appWidgetId != -1) {
+            pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
+            pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
+                    AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+            if (featuresFilter != AppWidgetProviderInfo.WIDGET_FEATURES_NONE) {
+                pickIntent.putExtra(AppWidgetManager.EXTRA_FEATURES_FILTER, featuresFilter);
+            }
+
+            // Add an entry for "none" to let someone select no widget
+            AppWidgetProviderInfo defaultInfo = new AppWidgetProviderInfo();
+            ArrayList<AppWidgetProviderInfo> extraInfos = new ArrayList<AppWidgetProviderInfo>();
+            defaultInfo.label = getResources().getString(defaultLabelId);
+            defaultInfo.icon = defaultIconId;
+            defaultInfo.provider = defaultComponentName;
+            extraInfos.add(defaultInfo);
+
+            ArrayList<Bundle> extraExtras = new ArrayList<Bundle>();
+            Bundle b = new Bundle();
+            b.putBoolean(defaultTag, true);
+            extraExtras.add(b);
+
+            // Launch the widget picker
+            pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
+            pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
+            pickIntent.putExtra(Intent.EXTRA_INTENT, getBaseIntent());
+            startActivityForResult(pickIntent, REQUEST_PICK_USER_SELECTED_APPWIDGET);
+        } else {
+            Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
+        }
+    }
+
     private Intent getBaseIntent() {
         Intent baseIntent = new Intent(Intent.ACTION_MAIN, null);
         baseIntent.addCategory(Intent.CATEGORY_DEFAULT);
@@ -495,73 +535,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET.equals(key)) {
-            // Create intent to pick widget
-            Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
-
-            // Found in KeyguardHostView.java
-            final int KEYGUARD_HOST_ID = 0x4B455947;
-            int appWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
-            if (appWidgetId != -1) {
-                pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
-                        AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
-
-                // Add an entry for "none" to let someone select no widget
-                AppWidgetProviderInfo noneInfo = new AppWidgetProviderInfo();
-                ArrayList<AppWidgetProviderInfo> extraInfos = new ArrayList<AppWidgetProviderInfo>();
-                noneInfo.label = getResources().getString(R.string.widget_none);
-                noneInfo.provider = new ComponentName("", "");
-                extraInfos.add(noneInfo);
-
-                ArrayList<Bundle> extraExtras = new ArrayList<Bundle>();
-                Bundle b = new Bundle();
-                b.putBoolean(EXTRA_NO_WIDGET, true);
-                extraExtras.add(b);
-
-                // Launch the widget picker
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
-                pickIntent.putExtra(Intent.EXTRA_INTENT, getBaseIntent());
-                startActivityForResult(pickIntent, REQUEST_PICK_USER_SELECTED_APPWIDGET);
-            } else {
-                Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
-            }
+            launchPickActivityIntent(AppWidgetProviderInfo.WIDGET_FEATURES_NONE,
+                    R.string.widget_none, 0, new ComponentName("", ""), EXTRA_NO_WIDGET);
         } else if (KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET.equals(key)) {
-            // Create intent to pick widget
-            Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
-
-            // Found in KeyguardHostView.java
-            final int KEYGUARD_HOST_ID = 0x4B455947;
-            int appWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
-            if (appWidgetId != -1) {
-                pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
-                        AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_FEATURES_FILTER,
-                        AppWidgetProviderInfo.WIDGET_FEATURES_STATUS);
-
-                // Add an entry for "none" to let someone select no widget
-                AppWidgetProviderInfo noneInfo = new AppWidgetProviderInfo();
-                ArrayList<AppWidgetProviderInfo> extraInfos = new ArrayList<AppWidgetProviderInfo>();
-                noneInfo.label = getResources().getString(R.string.widget_default);
-                noneInfo.provider = new ComponentName("", "");
-                extraInfos.add(noneInfo);
-
-                ArrayList<Bundle> extraExtras = new ArrayList<Bundle>();
-                Bundle b = new Bundle();
-                b.putBoolean(EXTRA_DEFAULT_WIDGET, true);
-                extraExtras.add(b);
-
-                // Launch the widget picker
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
-                pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
-                pickIntent.putExtra(Intent.EXTRA_INTENT, getBaseIntent());
-                startActivityForResult(pickIntent, REQUEST_PICK_STATUS_APPWIDGET);
-            } else {
-                Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
+            int defaultIconId;
+            ComponentName clock = new ComponentName(
+                    "com.google.android.deskclock", "com.android.deskclock.DeskClock");
+            try {
+                defaultIconId = getActivity().getPackageManager().getActivityInfo(clock, 0).icon;
+            } catch (PackageManager.NameNotFoundException e) {
+                defaultIconId = 0;
             }
+            launchPickActivityIntent(AppWidgetProviderInfo.WIDGET_FEATURES_STATUS,
+                    R.string.widget_default, defaultIconId, clock, EXTRA_DEFAULT_WIDGET);
         } else if (KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
