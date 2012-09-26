@@ -77,7 +77,8 @@ public class DreamBackend {
 
     public DreamBackend(Context context) {
         mContext = context;
-        mDreamManager = IDreamManager.Stub.asInterface(ServiceManager.getService("dreams"));
+        mDreamManager = IDreamManager.Stub.asInterface(
+                ServiceManager.getService(Dream.DREAM_SERVICE));
         mComparator = new DreamInfoComparator(getDefaultDream());
     }
 
@@ -86,7 +87,7 @@ public class DreamBackend {
         ComponentName activeDream = getActiveDream();
         PackageManager pm = mContext.getPackageManager();
         Intent dreamIntent = new Intent(Intent.ACTION_MAIN)
-                .addCategory("android.intent.category.DREAM");
+                .addCategory(Dream.CATEGORY_DREAM);
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(dreamIntent,
                 PackageManager.GET_META_DATA);
         List<DreamInfo> dreamInfos = new ArrayList<DreamInfo>(resolveInfos.size());
