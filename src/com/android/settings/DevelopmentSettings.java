@@ -706,8 +706,8 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateOverlayDisplayDevicesOptions() {
-        String value = Settings.System.getString(getActivity().getContentResolver(),
-                Settings.Secure.OVERLAY_DISPLAY_DEVICES);
+        String value = Settings.Global.getString(getActivity().getContentResolver(),
+                Settings.Global.OVERLAY_DISPLAY_DEVICES);
         if (value == null) {
             value = "";
         }
@@ -725,8 +725,8 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void writeOverlayDisplayDevicesOptions(Object newValue) {
-        Settings.System.putString(getActivity().getContentResolver(),
-                Settings.Secure.OVERLAY_DISPLAY_DEVICES, (String)newValue);
+        Settings.Global.putString(getActivity().getContentResolver(),
+                Settings.Global.OVERLAY_DISPLAY_DEVICES, (String)newValue);
         updateOverlayDisplayDevicesOptions();
     }
 
