@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
-import android.service.dreams.Dream;
 import android.service.dreams.IDreamManager;
 import android.util.Log;
 
@@ -40,6 +39,11 @@ import java.util.List;
 
 public class DreamBackend {
     private static final String TAG = DreamSettings.class.getSimpleName() + ".Backend";
+
+    // avoid breaking when the api changes.
+    // FIXME: use the new xml file when available
+    private static final String OLD_METADATA_NAME_CONFIG_ACTIVITY =
+            "android.service.dreams.config_activity";
 
     public static class DreamInfo {
         CharSequence caption;
@@ -205,7 +209,7 @@ public class DreamBackend {
                 || resolveInfo.serviceInfo == null
                 || resolveInfo.serviceInfo.metaData == null)
             return null;
-        String cn = resolveInfo.serviceInfo.metaData.getString(Dream.METADATA_NAME_CONFIG_ACTIVITY);
+        String cn = resolveInfo.serviceInfo.metaData.getString(OLD_METADATA_NAME_CONFIG_ACTIVITY);
         return cn == null ? null : ComponentName.unflattenFromString(cn);
     }
 
