@@ -90,6 +90,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
+    private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     DevicePolicyManager mDPM;
@@ -111,6 +112,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private DialogInterface mWarnInstallApps;
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
+
+    private boolean mIsPrimary;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,7 +167,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        if (UserHandle.myUserId() == 0) {
+        mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+
+        if (mIsPrimary) {
             switch (dpm.getStorageEncryptionStatus()) {
             case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
                 // The device is currently encrypted.
@@ -216,49 +221,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        if (UserHandle.myUserId() > 0) {
-            return root;
-        }
-        // Rest are for primary user...
-
-        // Append the rest of the settings
-        addPreferencesFromResource(R.xml.security_settings_misc);
-
-        // Do not display SIM lock for devices without an Icc card
-        TelephonyManager tm = TelephonyManager.getDefault();
-        if (!tm.hasIccCard()) {
-            root.removePreference(root.findPreference(KEY_SIM_LOCK));
-        } else {
-            // Disable SIM lock if sim card is missing or unknown
-            if ((TelephonyManager.getDefault().getSimState() ==
-                                 TelephonyManager.SIM_STATE_ABSENT) ||
-                (TelephonyManager.getDefault().getSimState() ==
-                                 TelephonyManager.SIM_STATE_UNKNOWN)) {
-                root.findPreference(KEY_SIM_LOCK).setEnabled(false);
-            }
-        }
-
-        // Show password
-        mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
-
-        // Credential storage
-        mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
-
-        mToggleAppInstallation = (CheckBoxPreference) findPreference(
-                KEY_TOGGLE_INSTALL_APPLICATIONS);
-        mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
-
-        // Package verification
-        if (showVerifierSetting()) {
-            mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
-            if (isVerifierInstalled()) {
-                mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
-            } else {
-                mToggleVerifyApps.setChecked(false);
-                mToggleVerifyApps.setEnabled(false);
-            }
-        }
-
         mUserSelectedWidget = root.findPreference(KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET);
         if (mUserSelectedWidget != null) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
@@ -285,6 +247,50 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     mUserSelectedWidget.setSummary(appWidget.label);
                 }
             }
+        }
+
+        // Append the rest of the settings
+        addPreferencesFromResource(R.xml.security_settings_misc);
+
+        // Do not display SIM lock for devices without an Icc card
+        TelephonyManager tm = TelephonyManager.getDefault();
+        if (!mIsPrimary || !tm.hasIccCard()) {
+            root.removePreference(root.findPreference(KEY_SIM_LOCK));
+        } else {
+            // Disable SIM lock if sim card is missing or unknown
+            if ((TelephonyManager.getDefault().getSimState() ==
+                                 TelephonyManager.SIM_STATE_ABSENT) ||
+                (TelephonyManager.getDefault().getSimState() ==
+                                 TelephonyManager.SIM_STATE_UNKNOWN)) {
+                root.findPreference(KEY_SIM_LOCK).setEnabled(false);
+            }
+        }
+
+        // Show password
+        mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
+
+        // Credential storage, only for primary user
+        if (mIsPrimary) {
+            mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
+        } else {
+            removePreference(KEY_CREDENTIALS_MANAGER);
+        }
+
+        mToggleAppInstallation = (CheckBoxPreference) findPreference(
+                KEY_TOGGLE_INSTALL_APPLICATIONS);
+        mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
+
+        // Package verification, only visible to primary user and if enabled
+        mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
+        if (mIsPrimary && showVerifierSetting()) {
+            if (isVerifierInstalled()) {
+                mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
+            } else {
+                mToggleVerifyApps.setChecked(false);
+                mToggleVerifyApps.setEnabled(false);
+            }
+        } else if (mToggleVerifyApps != null) {
+            mToggleVerifyApps.setEnabled(false);
         }
 
         return root;
