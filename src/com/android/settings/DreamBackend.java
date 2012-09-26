@@ -25,13 +25,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
+import android.service.dreams.Dream;
 import android.service.dreams.IDreamManager;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Xml;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,11 +50,6 @@ import java.util.List;
 
 public class DreamBackend {
     private static final String TAG = DreamSettings.class.getSimpleName() + ".Backend";
-
-    // avoid breaking when the api changes.
-    // FIXME: use the new xml file when available
-    private static final String OLD_METADATA_NAME_CONFIG_ACTIVITY =
-            "android.service.dreams.config_activity";
 
     public static class DreamInfo {
         CharSequence caption;
@@ -92,7 +98,7 @@ public class DreamBackend {
             dreamInfo.icon = resolveInfo.loadIcon(pm);
             dreamInfo.componentName = getDreamComponentName(resolveInfo);
             dreamInfo.isActive = dreamInfo.componentName.equals(activeDream);
-            dreamInfo.settingsComponentName = getSettingsComponentName(resolveInfo);
+            dreamInfo.settingsComponentName = getSettingsComponentName(pm, resolveInfo);
             dreamInfos.add(dreamInfo);
         }
         Collections.sort(dreamInfos, mComparator);
@@ -204,12 +210,47 @@ public class DreamBackend {
         return new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
     }
 
-    private static ComponentName getSettingsComponentName(ResolveInfo resolveInfo) {
+    private static ComponentName getSettingsComponentName(PackageManager pm, ResolveInfo resolveInfo) {
         if (resolveInfo == null
                 || resolveInfo.serviceInfo == null
                 || resolveInfo.serviceInfo.metaData == null)
             return null;
-        String cn = resolveInfo.serviceInfo.metaData.getString(OLD_METADATA_NAME_CONFIG_ACTIVITY);
+        String cn = null;
+        XmlResourceParser parser = null;
+        Exception caughtException = null;
+        try {
+            parser = resolveInfo.serviceInfo.loadXmlMetaData(pm, Dream.DREAM_META_DATA);
+            if (parser == null) {
+                Log.w(TAG, "No " + Dream.DREAM_META_DATA + " meta-data");
+                return null;
+            }
+            Resources res = pm.getResourcesForApplication(resolveInfo.serviceInfo.applicationInfo);
+            AttributeSet attrs = Xml.asAttributeSet(parser);
+            int type;
+            while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
+                    && type != XmlPullParser.START_TAG) {
+            }
+            String nodeName = parser.getName();
+            if (!"dream".equals(nodeName)) {
+                Log.w(TAG, "Meta-data does not start with dream tag");
+                return null;
+            }
+            TypedArray sa = res.obtainAttributes(attrs, com.android.internal.R.styleable.Dream);
+            cn = sa.getString(com.android.internal.R.styleable.Dream_settingsActivity);
+            sa.recycle();
+        } catch (NameNotFoundException e) {
+            caughtException = e;
+        } catch (IOException e) {
+            caughtException = e;
+        } catch (XmlPullParserException e) {
+            caughtException = e;
+        } finally {
+            if (parser != null) parser.close();
+        }
+        if (caughtException != null) {
+            Log.w(TAG, "Error parsing : " + resolveInfo.serviceInfo.packageName, caughtException);
+            return null;
+        }
         return cn == null ? null : ComponentName.unflattenFromString(cn);
     }
 
