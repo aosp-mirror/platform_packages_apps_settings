@@ -60,7 +60,8 @@
                 android:persistent="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/credentials_title"
+    <PreferenceCategory android:key="credentials_management"
+            android:title="@string/credentials_title"
             android:persistent="false">
         <Preference android:title="@string/trusted_credentials"
                 android:summary="@string/trusted_credentials_summary"
