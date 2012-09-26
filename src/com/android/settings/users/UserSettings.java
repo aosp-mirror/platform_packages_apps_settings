@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,7 +42,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.InputType;
 import android.util.Log;
 import android.util.SparseArray;
@@ -50,7 +50,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 
 import com.android.settings.R;
 import com.android.settings.SelectableEditTextPreference;
@@ -79,6 +78,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_SETUP_USER = 2;
+
+    private static final String KEY_ADD_USER_LONG_MESSAGE_DISPLAYED =
+            "key_add_user_long_message_displayed";
 
     private static final int[] USER_DRAWABLES = {
         R.drawable.ic_user,
@@ -171,7 +173,7 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            if (mUserManager.getMaxSupportedUsers() > mUserManager.getUsers(false).size()) {
+            if (UserManager.getMaxSupportedUsers() > mUserManager.getUsers(false).size()) {
                 MenuItem addUserItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
                 addUserItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                         | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -273,13 +275,24 @@ public class UserSettings extends SettingsPreferenceFragment
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
             case DIALOG_ADD_USER:
+                final SharedPreferences preferences = getActivity().getPreferences(
+                        Context.MODE_PRIVATE);
+                final boolean longMessageDisplayed = preferences.getBoolean(
+                        KEY_ADD_USER_LONG_MESSAGE_DISPLAYED, false);
+                final int messageResId = longMessageDisplayed
+                        ? R.string.user_add_user_message_short
+                        : R.string.user_add_user_message_long;
                 return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.user_add_user_title)
-                .setMessage(R.string.user_add_user_message)
+                .setMessage(messageResId)
                 .setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             addUserNow();
+                            if (!longMessageDisplayed) {
+                                preferences.edit().putBoolean(KEY_ADD_USER_LONG_MESSAGE_DISPLAYED,
+                                        true).commit();
+                            }
                         }
                 })
                 .setNegativeButton(android.R.string.cancel, null)
