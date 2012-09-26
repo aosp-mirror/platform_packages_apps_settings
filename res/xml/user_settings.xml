@@ -18,6 +18,9 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/user_settings_title">
 
+    <PreferenceCategory
+            android:key="user_you"
+            android:title="@string/user_you_section"/>
     <Preference
             android:key="user_me"
             android:summary="@string/user_owner" />
