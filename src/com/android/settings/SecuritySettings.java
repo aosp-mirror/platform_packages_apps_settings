@@ -482,7 +482,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private void launchPickActivityIntent(int featuresFilter, int defaultLabelId, int defaultIconId,
-            ComponentName defaultComponentName, String defaultTag) {
+            ComponentName defaultComponentName, String defaultTag, int widgetType) {
         // Create intent to pick widget
         Intent pickIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
 
@@ -515,7 +515,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_INFO, extraInfos);
             pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_EXTRAS, extraExtras);
             pickIntent.putExtra(Intent.EXTRA_INTENT, getBaseIntent());
-            startActivityForResult(pickIntent, REQUEST_PICK_USER_SELECTED_APPWIDGET);
+            startActivityForResult(pickIntent, widgetType);
         } else {
             Log.e(TAG, "Unable to allocate an AppWidget id in lock screen");
         }
@@ -542,7 +542,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET.equals(key)) {
             launchPickActivityIntent(AppWidgetProviderInfo.WIDGET_FEATURES_NONE,
-                    R.string.widget_none, 0, new ComponentName("", ""), EXTRA_NO_WIDGET);
+                    R.string.widget_none, 0, new ComponentName("", ""), EXTRA_NO_WIDGET,
+                    REQUEST_PICK_USER_SELECTED_APPWIDGET);
         } else if (KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET.equals(key)) {
             int defaultIconId;
             ComponentName clock = new ComponentName(
@@ -553,7 +554,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 defaultIconId = 0;
             }
             launchPickActivityIntent(AppWidgetProviderInfo.WIDGET_FEATURES_STATUS,
-                    R.string.widget_default, defaultIconId, clock, EXTRA_DEFAULT_WIDGET);
+                    R.string.widget_default, defaultIconId, clock, EXTRA_DEFAULT_WIDGET,
+                    REQUEST_PICK_STATUS_APPWIDGET);
         } else if (KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
