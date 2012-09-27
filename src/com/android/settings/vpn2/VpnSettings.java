@@ -73,7 +73,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     private final KeyStore mKeyStore = KeyStore.getInstance();
     private boolean mUnlocking = false;
 
-    private HashMap<String, VpnPreference> mPreferences;
+    private HashMap<String, VpnPreference> mPreferences = new HashMap<String, VpnPreference>();
     private VpnDialog mDialog;
 
     private Handler mUpdater;
@@ -173,8 +173,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         // Currently we are the only user of profiles in KeyStore.
         // Assuming KeyStore and KeyGuard do the right thing, we can
         // safely cache profiles in the memory.
-        if (mPreferences == null) {
-            mPreferences = new HashMap<String, VpnPreference>();
+        if (mPreferences.size() == 0) {
             PreferenceGroup group = getPreferenceScreen();
 
             final Context context = getActivity();
