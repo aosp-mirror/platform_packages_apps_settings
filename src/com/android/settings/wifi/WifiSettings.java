@@ -246,9 +246,12 @@ public class WifiSettings extends SettingsPreferenceFragment
                                    public void onSuccess() {
                                    }
                                    public void onFailure(int reason) {
-                                        Toast.makeText(getActivity(),
-                                            R.string.wifi_failed_connect_message,
-                                            Toast.LENGTH_SHORT).show();
+                                       Activity activity = getActivity();
+                                       if (activity != null) {
+                                           Toast.makeText(activity,
+                                                R.string.wifi_failed_connect_message,
+                                                Toast.LENGTH_SHORT).show();
+                                       }
                                    }
                                };
 
@@ -256,9 +259,12 @@ public class WifiSettings extends SettingsPreferenceFragment
                                 public void onSuccess() {
                                 }
                                 public void onFailure(int reason) {
-                                    Toast.makeText(getActivity(),
-                                        R.string.wifi_failed_save_message,
-                                        Toast.LENGTH_SHORT).show();
+                                    Activity activity = getActivity();
+                                    if (activity != null) {
+                                        Toast.makeText(activity,
+                                            R.string.wifi_failed_save_message,
+                                            Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             };
 
@@ -266,9 +272,12 @@ public class WifiSettings extends SettingsPreferenceFragment
                                    public void onSuccess() {
                                    }
                                    public void onFailure(int reason) {
-                                        Toast.makeText(getActivity(),
-                                            R.string.wifi_failed_forget_message,
-                                            Toast.LENGTH_SHORT).show();
+                                       Activity activity = getActivity();
+                                       if (activity != null) {
+                                           Toast.makeText(activity,
+                                               R.string.wifi_failed_forget_message,
+                                               Toast.LENGTH_SHORT).show();
+                                       }
                                    }
                                };
 
@@ -291,7 +300,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             }
 
             final ConnectivityManager connectivity = (ConnectivityManager)
-                    getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    activity.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null
                     && connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
                 super.onActivityCreated(savedInstanceState);
@@ -307,7 +316,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (mEnableNextOnConnection) {
             if (hasNextButton()) {
                 final ConnectivityManager connectivity = (ConnectivityManager)
-                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                        activity.getSystemService(Context.CONNECTIVITY_SERVICE);
                 if (connectivity != null) {
                     NetworkInfo info = connectivity.getNetworkInfo(
                             ConnectivityManager.TYPE_WIFI);
@@ -742,7 +751,10 @@ public class WifiSettings extends SettingsPreferenceFragment
             updateAccessPoints();
             updateConnectionState(info.getDetailedState());
             if (mAutoFinishOnConnection && info.isConnected()) {
-                getActivity().finish();
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.finish();
+                }
                 return;
             }
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
@@ -779,7 +791,10 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     private void updateWifiState(int state) {
-        getActivity().invalidateOptionsMenu();
+        Activity activity = getActivity();
+        if (activity != null) {
+            activity.invalidateOptionsMenu();
+        }
 
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -825,8 +840,11 @@ public class WifiSettings extends SettingsPreferenceFragment
                 mRetry = 0;
             } else if (++mRetry >= 3) {
                 mRetry = 0;
-                Toast.makeText(getActivity(), R.string.wifi_fail_to_scan,
-                        Toast.LENGTH_LONG).show();
+                Activity activity = getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, R.string.wifi_fail_to_scan,
+                            Toast.LENGTH_LONG).show();
+                }
                 return;
             }
             sendEmptyMessageDelayed(0, WIFI_RESCAN_INTERVAL_MS);
