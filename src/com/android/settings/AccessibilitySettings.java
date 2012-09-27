@@ -108,6 +108,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "select_long_press_timeout_preference";
     private static final String TOGGLE_SCRIPT_INJECTION_PREFERENCE =
             "toggle_script_injection_preference";
+    private static final String ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN =
+            "enable_global_gesture_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "screen_magnification_preference_screen";
 
@@ -168,6 +170,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private AccessibilityEnableScriptInjectionPreference mToggleScriptInjectionPreference;
     private Preference mNoServicesMessagePreference;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
+    private PreferenceScreen mGlobalGesturePreferenceScreen;
 
     private int mLongPressTimeoutDefault;
 
@@ -210,12 +213,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
         return false;
     }
-
-
-    
-    
-    
-    
     
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -230,6 +227,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         } else if (mToggleSpeakPasswordPreference == preference) {
             handleToggleSpeakPasswordPreferenceClick();
+            return true;
+        } else if (mGlobalGesturePreferenceScreen == preference) {
+            handleTogglEnableAccessibilityGesturePreferenceClick();
             return true;
         } else if (mDisplayMagnificationPreferenceScreen == preference) {
             handleDisplayMagnificationPreferenceScreenClick();
@@ -264,6 +264,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_SPEAK_PASSWORD,
                 mToggleSpeakPasswordPreference.isChecked() ? 1 : 0);
+    }
+
+    private void handleTogglEnableAccessibilityGesturePreferenceClick() {
+        Bundle extras = mGlobalGesturePreferenceScreen.getExtras();
+        extras.putString(EXTRA_TITLE, getString(
+                R.string.accessibility_global_gesture_preference_title));
+        extras.putString(EXTRA_SUMMARY, getString(
+                R.string.accessibility_global_gesture_preference_summary));
+        extras.putBoolean(EXTRA_CHECKED, Settings.Global.getInt(getContentResolver(),
+                Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1);
+        super.onPreferenceTreeClick(mGlobalGesturePreferenceScreen,
+                mGlobalGesturePreferenceScreen);
     }
 
     private void handleDisplayMagnificationPreferenceScreenClick() {
@@ -325,6 +337,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
+
+        // Global gesture.
+        mGlobalGesturePreferenceScreen =
+                (PreferenceScreen) findPreference(ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN);
     }
 
     private void updateAllPreferences() {
@@ -485,6 +501,17 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     R.string.accessibility_feature_state_on);            
         } else {
             mDisplayMagnificationPreferenceScreen.setSummary(
+                    R.string.accessibility_feature_state_off);
+        }
+
+        // Global gesture
+        final boolean globalGestureEnabled = Settings.Global.getInt(getContentResolver(),
+                Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1;
+        if (globalGestureEnabled) {
+            mGlobalGesturePreferenceScreen.setSummary(
+                    R.string.accessibility_feature_state_on);
+        } else {
+            mGlobalGesturePreferenceScreen.setSummary(
                     R.string.accessibility_feature_state_off);
         }
     }
@@ -827,6 +854,29 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, enabled? 1 : 0);
+        }
+
+        @Override
+        protected void onInstallActionBarToggleSwitch() {
+            super.onInstallActionBarToggleSwitch();
+            mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
+                @Override
+                public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
+                    toggleSwitch.setCheckedInternal(checked);
+                    getArguments().putBoolean(EXTRA_CHECKED, checked);
+                    onPreferenceToggled(mPreferenceKey, checked);
+                    return false;
+                }
+            });
+        }
+    }
+
+    public static class ToggleGlobalGesturePreferenceFragment
+            extends ToggleFeaturePreferenceFragment {
+        @Override
+        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+            Settings.Global.putInt(getContentResolver(),
+                    Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, enabled ? 1 : 0);
         }
 
         @Override
