@@ -25,7 +25,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.Secure;
+import android.provider.Settings.Global;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -80,15 +80,15 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             if (Utils.isWifiOnly(getActivity())) {
                 getPreferenceScreen().removePreference(poorNetworkDetection);
             } else {
-                poorNetworkDetection.setChecked(Secure.getInt(getContentResolver(),
-                        Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
+                poorNetworkDetection.setChecked(Global.getInt(getContentResolver(),
+                        Global.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
             }
         }
 
         CheckBoxPreference suspendOptimizations =
             (CheckBoxPreference) findPreference(KEY_SUSPEND_OPTIMIZATIONS);
-        suspendOptimizations.setChecked(Secure.getInt(getContentResolver(),
-                Secure.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED, 1) == 1);
+        suspendOptimizations.setChecked(Global.getInt(getContentResolver(),
+                Global.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED, 1) == 1);
 
         ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
 
@@ -147,16 +147,16 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         String key = preference.getKey();
 
         if (KEY_NOTIFY_OPEN_NETWORKS.equals(key)) {
-            Secure.putInt(getContentResolver(),
+            Global.putInt(getContentResolver(),
                     Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else if (KEY_POOR_NETWORK_DETECTION.equals(key)) {
-            Secure.putInt(getContentResolver(),
-                    Secure.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED,
+            Global.putInt(getContentResolver(),
+                    Global.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else if (KEY_SUSPEND_OPTIMIZATIONS.equals(key)) {
-            Secure.putInt(getContentResolver(),
-                    Secure.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED,
+            Global.putInt(getContentResolver(),
+                    Global.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);
