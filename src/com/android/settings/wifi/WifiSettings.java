@@ -20,6 +20,8 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -45,6 +47,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -58,6 +61,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
@@ -101,6 +105,8 @@ public class WifiSettings extends SettingsPreferenceFragment
     private static final int WIFI_DIALOG_ID = 1;
     private static final int WPS_PBC_DIALOG_ID = 2;
     private static final int WPS_PIN_DIALOG_ID = 3;
+    private static final int WIFI_SKIPPED_DIALOG_ID = 4;
+    private static final int WIFI_AND_MOBILE_SKIPPED_DIALOG_ID = 5;
 
     // Combo scans can take 5-6s to complete - set to 10s.
     private static final int WIFI_RESCAN_INTERVAL_MS = 10 * 1000;
@@ -142,6 +148,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     // this boolean extra specifies whether to auto finish when connection is established
     private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
+
+    // this boolean extra shows a custom button that we can control
+    protected static final String EXTRA_SHOW_CUSTOM_BUTTON = "wifi_show_custom_button";
 
     // this boolean extra is set if we are being invoked by the Setup Wizard
     private static final String EXTRA_IS_FIRST_RUN = "firstRun";
@@ -228,6 +237,27 @@ public class WifiSettings extends SettingsPreferenceFragment
                     }
                 });
             }
+
+            if (getActivity().getIntent().getBooleanExtra(EXTRA_SHOW_CUSTOM_BUTTON, false)) {
+                view.findViewById(R.id.button_bar).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.back_button).setVisibility(View.INVISIBLE);
+                view.findViewById(R.id.skip_button).setVisibility(View.INVISIBLE);
+                view.findViewById(R.id.next_button).setVisibility(View.INVISIBLE);
+
+                Button customButton = (Button) view.findViewById(R.id.custom_button);
+                customButton.setVisibility(View.VISIBLE);
+                customButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isPhone() && !hasSimProblem()) {
+                            showDialog(WIFI_SKIPPED_DIALOG_ID);
+                        } else {
+                            showDialog(WIFI_AND_MOBILE_SKIPPED_DIALOG_ID);
+                        }
+                    }
+                });
+            }
+
             return view;
         } else {
             return super.onCreateView(inflater, container, savedInstanceState);
@@ -598,9 +628,68 @@ public class WifiSettings extends SettingsPreferenceFragment
                 return new WpsDialog(getActivity(), WpsInfo.PBC);
             case WPS_PIN_DIALOG_ID:
                 return new WpsDialog(getActivity(), WpsInfo.DISPLAY);
+            case WIFI_SKIPPED_DIALOG_ID:
+                return new AlertDialog.Builder(getActivity())
+                            .setMessage(R.string.wifi_skipped_message)
+                            .setCancelable(false)
+                            .setNegativeButton(R.string.wifi_skip_anyway,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    getActivity().setResult(Activity.RESULT_CANCELED);
+                                    getActivity().finish();
+                                }
+                            })
+                            .setPositiveButton(R.string.wifi_dont_skip,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                }
+                            })
+                            .create();
+            case WIFI_AND_MOBILE_SKIPPED_DIALOG_ID:
+                return new AlertDialog.Builder(getActivity())
+                            .setMessage(R.string.wifi_and_mobile_skipped_message)
+                            .setCancelable(false)
+                            .setNegativeButton(R.string.wifi_skip_anyway,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    getActivity().setResult(Activity.RESULT_CANCELED);
+                                    getActivity().finish();
+                                }
+                            })
+                            .setPositiveButton(R.string.wifi_dont_skip,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                }
+                            })
+                            .create();
+
         }
         return super.onCreateDialog(dialogId);
     }
+
+    private boolean isPhone() {
+        final TelephonyManager telephonyManager = (TelephonyManager)this.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        return telephonyManager != null
+                && telephonyManager.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
+    }
+
+    /**
+    * Return true if there's any SIM related impediment to connectivity.
+    * Treats Unknown as OK. (Only returns true if we're sure of a SIM problem.)
+    */
+   protected boolean hasSimProblem() {
+       final TelephonyManager telephonyManager = (TelephonyManager)this.getSystemService(
+               Context.TELEPHONY_SERVICE);
+       return telephonyManager != null
+               && telephonyManager.getCurrentPhoneType() == TelephonyManager.PHONE_TYPE_GSM
+               && telephonyManager.getSimState() != TelephonyManager.SIM_STATE_READY
+               && telephonyManager.getSimState() != TelephonyManager.SIM_STATE_UNKNOWN;
+   }
 
     private boolean requireKeyStore(WifiConfiguration config) {
         if (WifiConfigController.requireKeyStore(config) &&
