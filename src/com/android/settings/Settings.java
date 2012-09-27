@@ -723,6 +723,9 @@ public class Settings extends PreferenceActivity
         int titleRes = pref.getTitleRes();
         if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
             titleRes = R.string.wallpaper_settings_fragment_title;
+        } else if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
+                && UserHandle.myUserId() != UserHandle.USER_OWNER) {
+            titleRes = R.string.user_info_settings_title;
         }
         startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
                 null, 0);
