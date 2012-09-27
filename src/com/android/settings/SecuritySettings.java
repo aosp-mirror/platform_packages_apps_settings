@@ -57,6 +57,7 @@ import java.util.List;
  */
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener {
+
     static final String TAG = "SecuritySettings";
 
     // Lock Settings
@@ -73,6 +74,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
+    private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String EXTRA_NO_WIDGET = "com.android.settings.NO_WIDGET";
     private static final String EXTRA_DEFAULT_WIDGET = "com.android.settings.DEFAULT_WIDGET";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
@@ -168,6 +170,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+
+        if (!mIsPrimary) {
+            // Rename owner info settings
+            Preference ownerInfoPref = findPreference(KEY_OWNER_INFO_SETTINGS);
+            if (ownerInfoPref != null) {
+                ownerInfoPref.setTitle(R.string.user_info_settings_title);
+            }
+        }
 
         if (mIsPrimary) {
             switch (dpm.getStorageEncryptionStatus()) {

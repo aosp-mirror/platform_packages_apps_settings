@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Fragment;
 import android.content.ContentResolver;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,9 @@ public class OwnerInfoSettings extends Fragment {
         mEditText.setText(info);
         mEditText.setEnabled(enabled != 0);
         mCheckbox.setChecked(enabled != 0);
+        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+            mCheckbox.setText(R.string.show_user_info_on_lockscreen_label);
+        }
         mCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Settings.Secure.putInt(res, Settings.Secure.LOCK_SCREEN_OWNER_INFO_ENABLED,
