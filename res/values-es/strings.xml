@@ -339,8 +339,7 @@
     <string name="choose_lockscreen_status_widget_picker_title" msgid="441723074728339356">"Widget de estado"</string>
     <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="8722165189176138931">"Otro widget"</string>
     <string name="widget_none" msgid="2708702293215501854">"Ninguno"</string>
-    <!-- no translation found for widget_default (8269383575996003796) -->
-    <skip />
+    <string name="widget_default" msgid="8269383575996003796">"Reloj"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Cambiar pantalla de bloqueo"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Cambia o inhabilit seguridad contraseña, PIN o patrón"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Elige un método para bloquear la pantalla."</string>
@@ -1557,6 +1556,10 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Inhabilitar datos de referencia?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas los datos de referencia, aumentarás la duración de la batería y reducirás el uso de datos. Es posible que algunas aplicaciones sigan usando la conexión de datos de referencia."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Sincronizar datos aplicaciones autom."</string>
+    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
+    <skip />
+    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
+    <skip />
     <string name="sync_enabled" msgid="4551148952179416813">"Sincronización activa"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"La sincronización está desactivada"</string>
     <string name="sync_error" msgid="5060969083117872149">"Error de sincronización"</string>
@@ -1624,7 +1627,7 @@
     <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Actualizar vistas de las ventanas creadas con GPU"</string>
     <string name="show_hw_layers_updates" msgid="5645728765605699821">"Ver actualizaciones capas"</string>
     <string name="show_hw_layers_updates_summary" msgid="5296917233236661465">"Iluminar capas de hardware en verde al actualizarse"</string>
-    <string name="show_hw_overdraw" msgid="1136884304711318251">"Mostrar superposición GPU"</string>
+    <string name="show_hw_overdraw" msgid="1136884304711318251">"Mostrar superación de GPU"</string>
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"De mejor a peor: azul, verde, rojo claro, rojo"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Inhabilitar superposiciones HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Usar siempre GPU para combinar pantallas"</string>
@@ -1703,8 +1706,8 @@
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"Tu conexión de datos se inhabilitará cuando se alcance el límite especificado."\n\n"Como el teléfono es el que calcula los datos y el cálculo del operador puede ser diferente, te recomendamos que uses un límite moderado."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir datos de referencia?"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Si restringes los datos móviles de referencia, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="2609163428726042269">"Si restringes los datos móviles de referencia, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de este tablet."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="8025473178302056174">"Si restringes los datos móviles de referencia, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de este teléfono."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="2609163428726042269">"Si restringes los datos móviles en segundo plano, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de este tablet."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="8025473178302056174">"Si restringes los datos móviles en segundo plano, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de este teléfono."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"aviso"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicaciones eliminadas"</string>
@@ -1775,20 +1778,17 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permisivo"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Obligatorio"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Usuarios"</string>
-    <!-- no translation found for user_you_section (6247838798859425408) -->
-    <skip />
+    <string name="user_you_section" msgid="6247838798859425408">"Tú"</string>
     <string name="user_list_title" msgid="8866161687358773982">"Otros usuarios"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Añadir usuario"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Activo"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Inactivo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Sin configurar"</string>
     <string name="user_owner" msgid="3879126011135546571">"Propietario"</string>
-    <string name="user_nickname" msgid="5148818000228994488">"Alias"</string>
+    <string name="user_nickname" msgid="5148818000228994488">"Apodo"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Añadir nuevo usuario"</string>
-    <!-- no translation found for user_add_user_message_long (2278524063301283723) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_short (3310933423737035428) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="2278524063301283723">"Puedes crear más usuarios para compartir este dispositivo con otras personas. Cada usuario tiene su propio espacio y puede personalizarlo con sus propias aplicaciones, fondos de pantalla y muchas otras cosas. Asimismo, los usuarios pueden modificar las opciones de configuración del tablet, como la conexión Wi-Fi, que afectan a todos los usuarios."\n\n"Después de crear un nuevo usuario, este debe completar un proceso de configuración."\n\n"Cualquier usuario puede aceptar permisos de aplicaciones actualizados en nombre del resto de los usuarios."</string>
+    <string name="user_add_user_message_short" msgid="3310933423737035428">"Después de crear un nuevo usuario, este debe completar un proceso de configuración."\n\n"Cualquier usuario puede aceptar permisos de aplicaciones actualizados en nombre del resto de usuarios."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"¿Configurar usuario ahora?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Comprueba que el usuario tiene acceso al tablet y puede configurar su espacio."</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Configurar ahora"</string>

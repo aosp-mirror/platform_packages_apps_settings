@@ -270,8 +270,8 @@
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Передача данных прекращена, потому что телефон находится за пределами домашней сети, а интернет-роуминг выключен."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Включить"</string>
     <string name="roaming_warning" msgid="7625933694709170887">"Возможны высокие расходы на использование роуминга."</string>
-    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Использование интернет-роуминга может повлечь за собой высокие расходы."\n\n"Эта настройка будет установлена для всех пользователей устройства."</string>
-    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Использование интернет-роуминга может повлечь за собой высокие расходы."\n\n"Эта настройка будет установлена для всех пользователей устройства."</string>
+    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Использование роуминга может повлечь за собой непредвиденные расходы."\n\n"Настройки будут изменены для всех пользователей устройства."</string>
+    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Использование роуминга может повлечь за собой непредвиденные расходы."\n\n"Настройки будут изменены для всех пользователей устройства."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"Разрешить интернет-роуминг?"</string>
     <string name="networks" msgid="6333316876545927039">"Выбор оператора"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"Выберите оператора связи"</string>
@@ -812,7 +812,7 @@
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Удаление с внутреннего USB-накопителя телефона всех данных, включая музыку и фотографии."</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Удаляет все данные с SD-карты, например музыку и фотографии"</string>
     <string name="memory_clear_cache_title" msgid="5423840272171286191">"Очистить кэш?"</string>
-    <string name="memory_clear_cache_message" msgid="4550262490807415948">"Данные кэша для всех приложений будут удалены."</string>
+    <string name="memory_clear_cache_message" msgid="4550262490807415948">"Будут удалены данные всех приложений."</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"Функция MTP или PTP активирована"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"Отключить USB-накопитель?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"Отключить SD-карту?"</string>
@@ -1557,6 +1557,10 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Откл. фоновый режим?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"Отключение фонового режима обмена данными экономит заряд батареи и уменьшает объем трафика, однако некоторые приложения могут использовать этот режим даже после его отключения."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Cинхронизировать данные приложений"</string>
+    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
+    <skip />
+    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
+    <skip />
     <string name="sync_enabled" msgid="4551148952179416813">"Синхронизация включена"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхронизация выключена"</string>
     <string name="sync_error" msgid="5060969083117872149">"Ошибка синхронизации"</string>
@@ -1703,8 +1707,8 @@
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"По достижении лимита трафика передача данных по мобильной сети будет отключена."\n\n"Во избежание дополнительных расходов старайтесь не достигать этого лимита, так как оператор и ваше устройство могут по-разному учитывать трафик."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Ограничение фонового режима"</string>
     <string name="data_usage_restrict_background" msgid="6387252645350792955">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="2609163428726042269">"Если вы запретите использовать данные мобильной сети, некоторые приложения и службы смогут работать только при подключенной сети Wi-Fi."\n\n"Эта настройка будет установлена для всех пользователей устройства."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="8025473178302056174">"Если вы запретите использовать данные мобильной сети, некоторые приложения и службы смогут работать только при подключенной сети Wi-Fi."\n\n"Эта настройка будет установлена для всех пользователей устройства."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="2609163428726042269">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."\n\n"Настройки будут изменены для всех пользователей устройства."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="8025473178302056174">"Если ограничить передачу данных в фоновом режиме, некоторые приложения и службы не будут работать без подключения к сети Wi-Fi."\n\n"Настройки будут изменены для всех пользователей устройства."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
@@ -1803,8 +1807,8 @@
     <string name="user_confirm_remove_message" msgid="5284111415714437285">"Действительно удалить с устройства аккаунт пользователя и все его данные?"</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Добавление…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Удалить пользователя"</string>
-    <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Эта настройка будет установлена для всех пользователей устройства."</string>
-    <string name="global_change_warning" product="default" msgid="2461264421590324675">"Эта настройка будет установлена для всех пользователей устройства."</string>
+    <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Настройки будут изменены для всех пользователей устройства."</string>
+    <string name="global_change_warning" product="default" msgid="2461264421590324675">"Настройки будут изменены для всех пользователей устройства."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Измените язык"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Измените размер шрифта"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Включить уведомления"</string>
