@@ -38,6 +38,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
@@ -75,6 +76,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
     private static final int DIALOG_SETUP_USER = 3;
+    private static final int DIALOG_USER_CANNOT_MANAGE = 4;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_SETUP_USER = 2;
@@ -186,9 +188,10 @@ public class UserSettings extends SettingsPreferenceFragment
                         | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
             }
         } else {
-            MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, 0, R.string.user_remove_user_menu);
-            removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
-                    | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            String nickname = mUserManager.getUserName();
+            MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, 0,
+                    getResources().getString(R.string.user_remove_user_menu, nickname));
+            removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -273,13 +276,18 @@ public class UserSettings extends SettingsPreferenceFragment
                     .setMessage(UserHandle.myUserId() == mRemovingUserId
                             ? R.string.user_confirm_remove_self_message
                             : R.string.user_confirm_remove_message)
-                    .setPositiveButton(android.R.string.ok,
+                    .setPositiveButton(R.string.user_delete_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 removeUserNow();
                             }
                     })
                     .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+            case DIALOG_USER_CANNOT_MANAGE:
+                return new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.user_cannot_manage_message)
+                    .setPositiveButton(android.R.string.ok, null)
                     .create();
             case DIALOG_ADD_USER:
                 final SharedPreferences preferences = getActivity().getPreferences(
@@ -392,7 +400,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 continue;
             } else if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
-                mNicknamePreference.getEditText().setText(user.name);
+                mNicknamePreference.setText(user.name);
                 mNicknamePreference.setSummary(user.name);
             } else {
                 pref = new UserPreference(getActivity(), null, user.id,
@@ -404,6 +412,9 @@ public class UserSettings extends SettingsPreferenceFragment
                     pref.setSummary(R.string.user_owner);
                 }
                 pref.setTitle(user.name);
+                if (!isInitialized(user)) {
+                    pref.setSummary(R.string.user_summary_not_set_up);
+                }
             }
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
@@ -482,6 +493,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private void setUserName(String name) {
         mUserManager.setUserName(UserHandle.myUserId(), name);
         mNicknamePreference.setSummary(name);
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -499,8 +511,24 @@ public class UserSettings extends SettingsPreferenceFragment
             // TODO: Make this a proper API
             editProfile.putExtra("finishActivityOnSaveCompleted", true);
             startActivity(editProfile);
+        } else if (pref instanceof UserPreference) {
+            int userId = ((UserPreference) pref).getUserId();
+            // Get the latest status of the user
+            UserInfo user = mUserManager.getUserInfo(userId);
+            if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+                showDialog(DIALOG_USER_CANNOT_MANAGE);
+            } else {
+                if (!isInitialized(user)) {
+                    mHandler.sendMessage(mHandler.obtainMessage(
+                            MESSAGE_SETUP_USER, user.id, user.serialNumber));
+                }
+            }
         }
         return false;
+    }
+
+    private boolean isInitialized(UserInfo user) {
+        return (user.flags & UserInfo.FLAG_INITIALIZED) != 0;
     }
 
     @Override
