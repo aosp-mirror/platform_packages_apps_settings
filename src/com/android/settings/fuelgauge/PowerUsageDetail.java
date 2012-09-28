@@ -228,8 +228,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
             mReportButton.setOnClickListener(this);
             
             // check if error reporting is enabled in secure settings
-            int enabled = Settings.Secure.getInt(getActivity().getContentResolver(),
-                    Settings.Secure.SEND_ACTION_APP_ERROR, 0);
+            int enabled = Settings.Global.getInt(getActivity().getContentResolver(),
+                    Settings.Global.SEND_ACTION_APP_ERROR, 0);
             if (enabled != 0) {
                 if (mPackages != null && mPackages.length > 0) {
                     try {
