@@ -50,8 +50,6 @@ public class UserPreference extends Preference {
 
     @Override
     protected void onBindView(View view) {
-        view.setClickable(true);
-        view.setFocusable(true);
         View deleteView = view.findViewById(R.id.trash_user);
         if (deleteView != null) {
             deleteView.setOnClickListener(mDeleteClickListener);
