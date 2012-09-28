@@ -270,8 +270,8 @@
     <string name="roaming_reenable_message" msgid="9141007271031717369">"由於您不在主要網路蓋涵範圍，且已關閉漫遊服務，資料連線已中斷。"</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"開啟"</string>
     <string name="roaming_warning" msgid="7625933694709170887">"允許漫遊服務時，您可能需要支付龐大的漫遊費用！"</string>
-    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"允許漫遊服務時，您可能需要支付龐大的漫遊費用！"\n\n"這項設定會影響這台平板電腦的所有使用者。"</string>
-    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"允許漫遊服務時，您可能需要支付龐大的漫遊費用！"\n\n"這項設定會影響這支手機的所有使用者。"</string>
+    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"允許使用數據漫遊服務時，您可能需要支付龐大的漫遊費用！"\n\n"這項設定會影響這台平板電腦的所有使用者。"</string>
+    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"允許使用數據漫遊服務時，您可能需要支付龐大的漫遊費用！"\n\n"這項設定會影響這支手機的所有使用者。"</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"允許漫遊服務？"</string>
     <string name="networks" msgid="6333316876545927039">"選取電信業者"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"選擇網路業者"</string>
@@ -302,6 +302,10 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"擁有者資訊"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"輸入要在鎖定畫面上顯示的文字"</string>
+    <!-- no translation found for show_user_info_on_lockscreen_label (8408914624925608365) -->
+    <skip />
+    <!-- no translation found for user_info_settings_title (1195015434996724736) -->
+    <skip />
     <string name="location_settings_title" msgid="4483843407328665068">"位置資訊存取"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"安全性"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
@@ -1263,6 +1267,10 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB 偵錯是針對應用程式開發而設計的功能，可讓您複製電腦和裝置中的資料、不需經由通知即可在裝置上安裝應用程式，以及讀取記錄資料。"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"允許開發設定？"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"這些設定僅供開發之用，可能導致您的裝置及裝置中的應用程式毀損或運作異常。"</string>
+    <!-- no translation found for verify_apps_over_usb_title (4177086489869041953) -->
+    <skip />
+    <!-- no translation found for verify_apps_over_usb_summary (9164096969924529200) -->
+    <skip />
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"保護 USB 儲存裝置"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"應用程式必須取得權限，才能讀取 USB 儲存裝置"</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"保護 USB 儲存裝置？"</string>
@@ -1797,14 +1805,27 @@
     <string name="user_setup_dialog_message" msgid="614037943337008555">"請把平板電腦交由這位使用者自行設定個人空間"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"立即設定"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"暫時不要"</string>
-    <string name="user_remove_user_menu" msgid="3210146886949340574">"移除使用者"</string>
+    <!-- no translation found for user_cannot_manage_message (8440449301994432789) -->
+    <skip />
+    <!-- no translation found for user_cannot_manage_message (1133251987818014757) -->
+    <skip />
+    <!-- no translation found for user_remove_user_menu (6897150520686691355) -->
+    <skip />
     <string name="user_new_user_name" msgid="369856859816028856">"新使用者"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"您要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"移除使用者？"</string>
-    <string name="user_confirm_remove_self_message" msgid="9068129506438051992">"刪除後您會失去自己的空間與資料。您確定要將使用者及所有相關聯的資料從裝置上移除嗎？"</string>
-    <string name="user_confirm_remove_message" msgid="5284111415714437285">"您確定要將使用者和所有相關聯的資料從裝置上移除嗎？"</string>
+    <!-- no translation found for user_confirm_remove_self_message (8167855311779740207) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_self_message (5391888073786090274) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_message (4610106937214870034) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_message (8130264611683731142) -->
+    <skip />
     <string name="user_adding_new_user" msgid="1521674650874241407">"正在新增使用者…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"刪除使用者"</string>
+    <!-- no translation found for user_delete_button (5131259553799403201) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"這項設定會影響這台平板電腦的所有使用者。"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"這項設定會影響這支手機的所有使用者。"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"變更語言"</string>

@@ -302,6 +302,10 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"פרטי בעלים"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"הקלד טקסט להצגה בנעילת המסך"</string>
+    <!-- no translation found for show_user_info_on_lockscreen_label (8408914624925608365) -->
+    <skip />
+    <!-- no translation found for user_info_settings_title (1195015434996724736) -->
+    <skip />
     <string name="location_settings_title" msgid="4483843407328665068">"גישה למיקום"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"אבטחה"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"הגדר את \'המיקום שלי\', ביטול נעילת מסך, נעילת כרטיס SIM, נעילת אחסון אישורים"</string>
@@ -1263,6 +1267,10 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"ניקוי באגים באמצעות USB מיועד למטרות פיתוח בלבד. השתמש בו להעתקת נתונים בין המחשב והמכשיר שלך, להתקנת יישומים במכשיר ללא התראה ולקריאת נתוני יומן."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"האם להתיר הגדרות פיתוח?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"הגדרות אלה מיועדות לשימוש בפיתוח בלבד. הן עלולות לגרום למכשיר או ליישומים המותקנים בו לקרוס או לפעול באופן לא תקין."</string>
+    <!-- no translation found for verify_apps_over_usb_title (4177086489869041953) -->
+    <skip />
+    <!-- no translation found for verify_apps_over_usb_summary (9164096969924529200) -->
+    <skip />
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"הגנה על אחסון USB"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"על יישומים לבקש רשות כדי לקרוא אחסון USB"</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"האם להגן על אחסון USB?"</string>
@@ -1556,10 +1564,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"להשבית נתוני רקע?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"השבתה של נתוני הרקע מאריכה את חיי הסוללה ומצמצמת את השימוש בנתונים. ייתכן שיישומים מסוימים עדיין ישתמשו בחיבור נתוני הרקע."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"סנכרן אוטומטית נתונים של יישומים"</string>
-    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
-    <skip />
-    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
-    <skip />
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"תזכורת: כמו בכל מחשב משותף, יש סיכון מסוים שמשתמשים אחרים ימצאו דרך לגשת לנתונים שלך בטאבלט הזה."</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"תזכורת: כמו בכל מחשב משותף, יש סיכון מסוים שמשתמשים אחרים ימצאו דרך לגשת לנתונים שלך בטלפון הזה."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"סינכרון מופעל"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"סינכרון כבוי"</string>
     <string name="sync_error" msgid="5060969083117872149">"שגיאת סינכרון"</string>
@@ -1793,14 +1799,27 @@
     <string name="user_setup_dialog_message" msgid="614037943337008555">"ודא שהאדם זמין לקחת את הטאבלט ולהגדיר את השטח שלו"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"הגדר עכשיו"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"לא עכשיו"</string>
-    <string name="user_remove_user_menu" msgid="3210146886949340574">"הסר משתמש"</string>
+    <!-- no translation found for user_cannot_manage_message (8440449301994432789) -->
+    <skip />
+    <!-- no translation found for user_cannot_manage_message (1133251987818014757) -->
+    <skip />
+    <!-- no translation found for user_remove_user_menu (6897150520686691355) -->
+    <skip />
     <string name="user_new_user_name" msgid="369856859816028856">"משתמש חדש"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"האם למחוק אותך?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"האם להסיר משתמש?"</string>
-    <string name="user_confirm_remove_self_message" msgid="9068129506438051992">"לאחר מחיקה זו תאבד את השטח שהוקצה לך ואת הנתונים שבו. האם אתה בטוח שאתה רוצה להסיר מהמכשיר את המשתמש ואת כל הנתונים המשויכים?"</string>
-    <string name="user_confirm_remove_message" msgid="5284111415714437285">"האם אתה בטוח שאתה רוצה להסיר את המשתמש ואת כל הנתונים המשויכים מהמכשיר?"</string>
+    <!-- no translation found for user_confirm_remove_self_message (8167855311779740207) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_self_message (5391888073786090274) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_message (4610106937214870034) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_message (8130264611683731142) -->
+    <skip />
     <string name="user_adding_new_user" msgid="1521674650874241407">"מוסיף משתמשים חדשים…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"מחק משתמש"</string>
+    <!-- no translation found for user_delete_button (5131259553799403201) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"הגדרה זו משפיעה על כל המשתמשים בטאבלט הזה."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"הגדרה זו משפיעה על כל המשתמשים בטלפון הזה."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"שנה שפה"</string>
