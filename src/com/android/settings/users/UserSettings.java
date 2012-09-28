@@ -102,6 +102,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
     private SparseArray<Drawable> mUserIcons = new SparseArray<Drawable>();
+    private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
+
 
     private Handler mHandler = new Handler() {
         @Override
@@ -135,13 +137,18 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
         mMePreference = (Preference) findPreference(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+        if (!mIsOwner) {
             mMePreference.setSummary(null);
+        }
+        Preference ownerInfo = findPreference("user_owner_info");
+        if (ownerInfo != null && !mIsOwner) {
+            ownerInfo.setTitle(R.string.user_info_settings_title);
         }
         mNicknamePreference = (SelectableEditTextPreference) findPreference(KEY_USER_NICKNAME);
         mNicknamePreference.setOnPreferenceChangeListener(this);
@@ -172,7 +179,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
+        if (mIsOwner) {
             if (UserManager.getMaxSupportedUsers() > mUserManager.getUsers(false).size()) {
                 MenuItem addUserItem = menu.add(0, MENU_ADD_USER, 0, R.string.user_add_user_menu);
                 addUserItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
