@@ -1443,6 +1443,23 @@
     <string name="wifi_failed_save_message">Failed to save network</string>
     <!-- Button label to dismiss the dialog -->
     <string name="wifi_cancel">Cancel</string>
+    <!-- Button for skipping a step after having been warned of a potential concern [CHAR LIMIT=30] -->
+    <string name="wifi_skip_anyway" msgid="5205612884736051138">Skip anyway</string>
+    <!-- Button for going to the previous screen or step [CHAR LIMIT=20] -->
+    <string name="wifi_dont_skip">Don\'t skip</string>
+
+    <!-- Text warning about skipping Wi-Fi with a mobile connect (tablet) [CHAR LIMIT=NONE]-->
+    <string name="wifi_skipped_message" product="tablet" msgid="6518433975501257341">WARNING: You may incur extra carrier data charges.\n\nTablet setup can require significant network activity.</string>
+    <!-- Text warning about skipping Wi-Fi with a mobile connect (phone) [CHAR LIMIT=NONE]-->
+    <string name="wifi_skipped_message" product="default" msgid="4376150150678208848">WARNING: You may incur extra carrier data charges.\n\nPhone setup can require significant network activity.</string>
+    <!-- Text warning about skipping Wi-Fi without a mobile connect (tablet) [CHAR LIMIT=NONE] -->
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5647058314212144925">WARNING: The tablet won\'t be able to verify that your software is up to date.</string>
+    <!-- Text warning about skipping Wi-Fi without a mobile connect (phone) [CHAR LIMIT=NONE] -->
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="1288483646141987070">WARNING: The phone won\'t be able to verify that your software is up to date.</string>
+    <!-- Text alerting that Wi-Fi couldn't connect (tablet) [CHAR LIMIT=NONE] -->
+    <string name="wifi_connect_failed_message" product="tablet" msgid="2006689630582761529">The tablet was unable to connect to this Wi-Fi network.</string>
+    <!-- Text alerting that Wi-Fi couldn't connect (phone) [CHAR LIMIT=NONE] -->
+    <string name="wifi_connect_failed_message" product="default" msgid="8220901976514642385">The phone was unable to connect to this Wi-Fi network.</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. -->
@@ -1489,7 +1506,6 @@
     <string name="wifi_network_prefix_length">Network prefix length</string>
     <!-- Hint text for network prefix length -->
     <string name="wifi_network_prefix_length_hint" translatable="false">24</string>
-
 
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
