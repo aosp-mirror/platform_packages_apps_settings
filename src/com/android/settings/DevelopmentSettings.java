@@ -34,6 +34,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
@@ -51,6 +52,7 @@ import android.preference.MultiCheckPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -63,6 +65,7 @@ import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /*
  * Displays preferences for application developers.
@@ -83,6 +86,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
+    private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
     private static final String SHOW_TOUCHES_KEY = "show_touches";
@@ -99,6 +103,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
+    private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
 
     private static final String ENABLE_TRACES_KEY = "enable_traces";
 
@@ -109,6 +114,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
+
+    private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private static final int RESULT_DEBUG_APP = 1000;
 
@@ -131,6 +138,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private String mDebugApp;
     private Preference mDebugAppPref;
     private CheckBoxPreference mWaitForDebugger;
+    private CheckBoxPreference mVerifyAppsOverUsb;
 
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
@@ -188,6 +196,16 @@ public class DevelopmentSettings extends PreferenceFragment
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
         mAllPrefs.add(mDebugAppPref);
         mWaitForDebugger = findAndInitCheckboxPref(WAIT_FOR_DEBUGGER_KEY);
+        mVerifyAppsOverUsb = findAndInitCheckboxPref(VERIFY_APPS_OVER_USB_KEY);
+        if (!showVerifierSetting()) {
+            PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
+                    findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
+            if (debugDebuggingCategory != null) {
+                debugDebuggingCategory.removePreference(mVerifyAppsOverUsb);
+            } else {
+                mVerifyAppsOverUsb.setEnabled(false);
+            }
+        }
         mStrictMode = findAndInitCheckboxPref(STRICT_MODE_KEY);
         mPointerLocation = findAndInitCheckboxPref(POINTER_LOCATION_KEY);
         mShowTouches = findAndInitCheckboxPref(SHOW_TOUCHES_KEY);
@@ -374,6 +392,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
+        updateVerifyAppsOverUsbOptions();
     }
 
     private void resetDangerousOptions() {
@@ -467,6 +486,42 @@ public class DevelopmentSettings extends PreferenceFragment
             mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_not_set));
             mWaitForDebugger.setEnabled(false);
         }
+    }
+
+    private void updateVerifyAppsOverUsbOptions() {
+        updateCheckBox(mVerifyAppsOverUsb, Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1) != 0);
+        mVerifyAppsOverUsb.setEnabled(enableVerifierSetting());
+    }
+
+    private void writeVerifyAppsOverUsbOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+              Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, mVerifyAppsOverUsb.isChecked() ? 1 : 0);
+    }
+
+    private boolean enableVerifierSetting() {
+        final ContentResolver cr = getActivity().getContentResolver();
+        if (Settings.Global.getInt(cr, Settings.Global.ADB_ENABLED, 0) == 0) {
+            return false;
+        }
+        if (Settings.Global.getInt(cr, Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) == 0) {
+            return false;
+        } else {
+            final PackageManager pm = getActivity().getPackageManager();
+            final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
+            verification.setType(PACKAGE_MIME_TYPE);
+            verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(verification, 0);
+            if (receivers.size() == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean showVerifierSetting() {
+        return Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
     }
 
     // Returns the current state of the system property that controls
@@ -874,6 +929,8 @@ public class DevelopmentSettings extends PreferenceFragment
             } else {
                 Settings.Global.putInt(getActivity().getContentResolver(),
                         Settings.Global.ADB_ENABLED, 0);
+                mVerifyAppsOverUsb.setEnabled(false);
+                mVerifyAppsOverUsb.setChecked(false);
             }
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
@@ -898,6 +955,8 @@ public class DevelopmentSettings extends PreferenceFragment
             startActivityForResult(new Intent(getActivity(), AppPicker.class), RESULT_DEBUG_APP);
         } else if (preference == mWaitForDebugger) {
             writeDebuggerOptions();
+        } else if (preference == mVerifyAppsOverUsb) {
+            writeVerifyAppsOverUsbOptions();
         } else if (preference == mStrictMode) {
             writeStrictModeVisualOptions();
         } else if (preference == mPointerLocation) {
@@ -977,6 +1036,8 @@ public class DevelopmentSettings extends PreferenceFragment
                 mDialogClicked = true;
                 Settings.Global.putInt(getActivity().getContentResolver(),
                         Settings.Global.ADB_ENABLED, 1);
+                mVerifyAppsOverUsb.setEnabled(true);
+                updateVerifyAppsOverUsbOptions();
             } else {
                 // Reset the toggle
                 mEnableAdb.setChecked(false);
