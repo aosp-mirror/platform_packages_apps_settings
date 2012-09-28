@@ -312,8 +312,8 @@ public class RunningServiceDetails extends Fragment
             detail.mReportButton.setOnClickListener(detail);
             detail.mReportButton.setText(com.android.internal.R.string.report);
             // check if error reporting is enabled in secure settings
-            int enabled = Settings.Secure.getInt(getActivity().getContentResolver(),
-                    Settings.Secure.SEND_ACTION_APP_ERROR, 0);
+            int enabled = Settings.Global.getInt(getActivity().getContentResolver(),
+                    Settings.Global.SEND_ACTION_APP_ERROR, 0);
             if (enabled != 0 && si != null) {
                 detail.mInstaller = ApplicationErrorReport.getErrorReportReceiver(
                         getActivity(), si.mServiceInfo.packageName,
