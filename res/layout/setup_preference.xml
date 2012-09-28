@@ -30,7 +30,7 @@
         android:gravity="bottom">
 
         <LinearLayout
-            android:id="@+id/button_bar"
+            android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/title"
@@ -62,7 +62,7 @@
         <View
             android:id="@+id/top_divider"
             style="@style/TopDivider"
-            android:layout_below="@id/button_bar" />
+            android:layout_below="@id/title_bar" />
 
     </RelativeLayout>
 
@@ -148,6 +148,14 @@
                 android:layout_margin="5dip"
                 android:text="@string/wifi_setup_back" />
 
+            <Button
+                android:id="@+id/custom_button"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="5dip"
+                android:text="@string/wifi_setup_skip" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,8 +175,9 @@
                     android:layout_width="150dip"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
-                    android:text="@string/wifi_setup_next" />
-            </LinearLayout>
+                    android:text="@string/wifi_setup_next"
+                    android:visibility="gone" />
+                </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 </view>
