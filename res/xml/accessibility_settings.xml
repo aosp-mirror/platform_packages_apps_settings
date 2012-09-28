@@ -52,6 +52,11 @@
                 android:title="@string/accessibility_toggle_speak_password_preference_title"
                 android:persistent="false"/>
 
+        <PreferenceScreen
+                android:fragment="com.android.settings.AccessibilitySettings$ToggleGlobalGesturePreferenceFragment"
+                android:key="enable_global_gesture_preference_screen"
+                android:title="@string/accessibility_global_gesture_preference_title"/>
+
         <PreferenceScreen android:key="tts_settings_preference"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
                 android:title="@string/tts_settings_title"/>
