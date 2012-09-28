@@ -4283,9 +4283,13 @@
     <string name="user_setup_button_setup_now">Set up now</string>
     <!-- Button text to setup the new user later [CHAR LIMIT=25] -->
     <string name="user_setup_button_setup_later">Not now</string>
+    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+    <string name="user_cannot_manage_message" product="tablet">Only the tablet\'s owner can manage users.</string>
+    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+    <string name="user_cannot_manage_message" product="default">Only the phone\'s owner can manage users.</string>
 
     <!-- User details remove user menu [CHAR LIMIT=20] -->
-    <string name="user_remove_user_menu">Remove user</string>
+    <string name="user_remove_user_menu">Delete <xliff:g id="user_name">%1$s</xliff:g> from this device</string>
     <!-- User details new user name [CHAR LIMIT=30] -->
     <string name="user_new_user_name">New user</string>
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
@@ -4293,13 +4297,19 @@
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
     <string name="user_confirm_remove_title">Remove user?</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_self_message">You will lose your space and data on this delete. Are you sure you want to remove the user and all associated data from the device?</string>
+    <string name="user_confirm_remove_self_message" product="tablet">You will lose your space and data on this tablet. You can\'t undo this action.</string>
+    <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_confirm_remove_self_message" product="default">You will lose your space and data on this phone. You can\'t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_message">Are you sure you want to remove the user and all associated data from the device?</string>
+    <string name="user_confirm_remove_message" product="tablet">This user\'s space and data will disappear from this tablet. You can\'t undo this action.</string>
+    <!-- User removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_confirm_remove_message" product="default">This user\'s space and data will disappear from this phone. You can\'t undo this action.</string>
     <!-- Setting label to show that a new user is being added [CHAR LIMIT=30] -->
     <string name="user_adding_new_user">Adding new user\u2026</string>
     <!-- Spoken content description for delete icon beside a user [CHAR LIMIT=none] -->
     <string name="user_delete_user_description">Delete user</string>
+    <!-- Delete button text [CHAR LIMIT=25] -->
+    <string name="user_delete_button">Delete</string>
 
     <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
     <string name="global_change_warning" product="tablet">This setting affects all users on this tablet.</string>
