@@ -33,7 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
-import android.service.dreams.Dream;
+import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -78,7 +78,7 @@ public class DreamBackend {
     public DreamBackend(Context context) {
         mContext = context;
         mDreamManager = IDreamManager.Stub.asInterface(
-                ServiceManager.getService(Dream.DREAM_SERVICE));
+                ServiceManager.getService(DreamService.DREAM_SERVICE));
         mComparator = new DreamInfoComparator(getDefaultDream());
     }
 
@@ -86,8 +86,7 @@ public class DreamBackend {
         logd("getDreamInfos()");
         ComponentName activeDream = getActiveDream();
         PackageManager pm = mContext.getPackageManager();
-        Intent dreamIntent = new Intent(Intent.ACTION_MAIN)
-                .addCategory(Dream.CATEGORY_DREAM);
+        Intent dreamIntent = new Intent(DreamService.SERVICE_INTERFACE);
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(dreamIntent,
                 PackageManager.GET_META_DATA);
         List<DreamInfo> dreamInfos = new ArrayList<DreamInfo>(resolveInfos.size());
@@ -220,9 +219,9 @@ public class DreamBackend {
         XmlResourceParser parser = null;
         Exception caughtException = null;
         try {
-            parser = resolveInfo.serviceInfo.loadXmlMetaData(pm, Dream.DREAM_META_DATA);
+            parser = resolveInfo.serviceInfo.loadXmlMetaData(pm, DreamService.DREAM_META_DATA);
             if (parser == null) {
-                Log.w(TAG, "No " + Dream.DREAM_META_DATA + " meta-data");
+                Log.w(TAG, "No " + DreamService.DREAM_META_DATA + " meta-data");
                 return null;
             }
             Resources res = pm.getResourcesForApplication(resolveInfo.serviceInfo.applicationInfo);
