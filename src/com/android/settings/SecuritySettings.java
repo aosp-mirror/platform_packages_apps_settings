@@ -727,6 +727,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return true;
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_security;
+    }
+
     public void startBiometricWeakImprove(){
         Intent intent = new Intent();
         intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
