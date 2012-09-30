@@ -364,7 +364,8 @@ public class Settings extends PreferenceActivity
                 SoundSettings.class.getName().equals(fragmentName) ||
                 PrivacySettings.class.getName().equals(fragmentName) ||
                 ManageAccountsSettings.class.getName().equals(fragmentName) ||
-                VpnSettings.class.getName().equals(fragmentName)) {
+                VpnSettings.class.getName().equals(fragmentName) ||
+                SecuritySettings.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 
