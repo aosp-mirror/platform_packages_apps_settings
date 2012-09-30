@@ -85,7 +85,7 @@ public class UserSettings extends SettingsPreferenceFragment
             "key_add_user_long_message_displayed";
 
     private static final int[] USER_DRAWABLES = {
-        R.drawable.ic_user,
+        R.drawable.ic_user_orange,
         R.drawable.ic_user_cyan,
         R.drawable.ic_user_green,
         R.drawable.ic_user_purple,
