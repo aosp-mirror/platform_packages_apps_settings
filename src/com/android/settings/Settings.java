@@ -20,6 +20,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.deviceinfo.Memory;
@@ -365,7 +366,8 @@ public class Settings extends PreferenceActivity
                 PrivacySettings.class.getName().equals(fragmentName) ||
                 ManageAccountsSettings.class.getName().equals(fragmentName) ||
                 VpnSettings.class.getName().equals(fragmentName) ||
-                SecuritySettings.class.getName().equals(fragmentName)) {
+                SecuritySettings.class.getName().equals(fragmentName) ||
+                InstalledAppDetails.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 
