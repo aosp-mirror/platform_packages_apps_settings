@@ -302,6 +302,10 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Eierinformasjon"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Skriv inn teksten som skal vises på låseskjermen"</string>
+    <!-- no translation found for show_user_info_on_lockscreen_label (8408914624925608365) -->
+    <skip />
+    <!-- no translation found for user_info_settings_title (1195015434996724736) -->
+    <skip />
     <string name="location_settings_title" msgid="4483843407328665068">"Posisjonstilgang"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sikkerhet"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Posisjon, skjermlås, SIM-kort-lås"</string>
@@ -339,8 +343,7 @@
     <string name="choose_lockscreen_status_widget_picker_title" msgid="441723074728339356">"Statusmodul"</string>
     <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="8722165189176138931">"Annen modul"</string>
     <string name="widget_none" msgid="2708702293215501854">"Ingen"</string>
-    <!-- no translation found for widget_default (8269383575996003796) -->
-    <skip />
+    <string name="widget_default" msgid="8269383575996003796">"Klokke"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Endre skjermlås"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Endre eller deaktiver mønster, personlig kode eller passordsikkerhet"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Velg en metode for å låse skjermen"</string>
@@ -1264,6 +1267,10 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-feilsøking er bare ment for utviklingsformål. Bruk det til å kopiere data mellom datamaskinen og enheten, installere apper på enheten uten varsel og lese loggdata."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vil du aktivere utviklingsinnstillingene?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Disse innstillingene er bare beregnet for bruk under programutvikling. De kan forårsake problemer med enheten din og tilhørende apper."</string>
+    <!-- no translation found for verify_apps_over_usb_title (4177086489869041953) -->
+    <skip />
+    <!-- no translation found for verify_apps_over_usb_summary (9164096969924529200) -->
+    <skip />
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Beskytt USB-lagring"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Apper må be om tillatelse til å lese USB-lagring"</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Vil du beskytte USB-lagringen?"</string>
@@ -1557,10 +1564,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Vil du deaktivere bakgrunnsdata?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"Deaktivering av bakgrunnsdata sparer batteri og reduserer datatrafikken. Det kan hende enkelte apper fortsatt bruker tilkoblingen for bakgrunnsdata."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Auto-synkronisering av appdata"</string>
-    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
-    <skip />
-    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
-    <skip />
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"Påminnelse: Som med alle delte datamaskiner, er det en viss sjanse for at andre brukere kan greie å åpne dataene dine på dette nettbrettet."</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"Påminnelse: Som med alle delte datamaskiner, er det en viss sjanse for at andre brukere kan greie å åpne dataene dine på denne telefonen."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synkronisering er på"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synkronisering er av"</string>
     <string name="sync_error" msgid="5060969083117872149">"Synkroniseringsfeil"</string>
@@ -1779,8 +1784,7 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Valgfri"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Håndhevende"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Brukere"</string>
-    <!-- no translation found for user_you_section (6247838798859425408) -->
-    <skip />
+    <string name="user_you_section" msgid="6247838798859425408">"Deg"</string>
     <string name="user_list_title" msgid="8866161687358773982">"Andre brukere"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Legg til bruker"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktiv"</string>
@@ -1789,22 +1793,33 @@
     <string name="user_owner" msgid="3879126011135546571">"Eier"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Kallenavn"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Legg til ny bruker"</string>
-    <!-- no translation found for user_add_user_message_long (2278524063301283723) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_short (3310933423737035428) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="2278524063301283723">"Du kan dele denne enheten med andre personer ved å opprette flere brukere. Hver bruker får sitt eget område som de kan tilpasse med egne apper, bakgrunner osv. Brukere kan også tilpasse innstillinger på nettbrettet som påvirker alle, for eksempel for Wi-Fi."\n\n"Når du oppretter nye brukere, må de gå gjennom en konfigureringsprosess."\n\n"Alle brukere kan godta oppdaterte apptillatelser på vegne av de andre brukerne."</string>
+    <string name="user_add_user_message_short" msgid="3310933423737035428">"Når du oppretter nye brukere, må de gå gjennom en konfigureringsprosess."\n\n"Alle brukere kan godta oppdaterte apptillatelser på vegne av de andre brukerne."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Konfigurere brukeren nå?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Sørg for at personen er tilgjengelig for å bruke nettbrettet og konfigurere området sitt"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Konfigurer nå"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ikke nå"</string>
-    <string name="user_remove_user_menu" msgid="3210146886949340574">"Slett brukeren"</string>
+    <!-- no translation found for user_cannot_manage_message (8440449301994432789) -->
+    <skip />
+    <!-- no translation found for user_cannot_manage_message (1133251987818014757) -->
+    <skip />
+    <!-- no translation found for user_remove_user_menu (6897150520686691355) -->
+    <skip />
     <string name="user_new_user_name" msgid="369856859816028856">"Ny bruker"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Vil du slette brukeren?"</string>
-    <string name="user_confirm_remove_self_message" msgid="9068129506438051992">"Du mister området ditt og dataene dine ved denne slettingen. Er du sikker på at du vil fjerne brukeren og alle tilknyttede data fra enheten?"</string>
-    <string name="user_confirm_remove_message" msgid="5284111415714437285">"Er du sikker på at du vil slette brukeren og alle tilhørende data fra enheten?"</string>
+    <!-- no translation found for user_confirm_remove_self_message (8167855311779740207) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_self_message (5391888073786090274) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_message (4610106937214870034) -->
+    <skip />
+    <!-- no translation found for user_confirm_remove_message (8130264611683731142) -->
+    <skip />
     <string name="user_adding_new_user" msgid="1521674650874241407">"Legger til ny bruker …"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Slett bruker"</string>
+    <!-- no translation found for user_delete_button (5131259553799403201) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Denne innstillingen påvirker alle brukerne på dette nettbrettet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Denne innstillingen påvirker alle brukerne på denne telefonen."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Bytt språk"</string>
