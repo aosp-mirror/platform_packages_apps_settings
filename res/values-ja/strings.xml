@@ -495,12 +495,12 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"スピーカーフォン"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"音楽とメディア"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"設定を保存"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"無線ディスプレイ"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"デバイスを表示するには無線ディスプレイをONにしてください。"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="7363832031876872257">"Wi-FiがOFFになっているため無線ディスプレイは無効になっています。"</string>
+    <string name="wifi_display_settings_title" msgid="564299108014609382">"ワイヤレスディスプレイ"</string>
+    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"デバイスを表示するにはワイヤレスディスプレイをONにしてください。"</string>
+    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="7363832031876872257">"Wi-FiがOFFになっているためワイヤレスディスプレイは無効になっています。"</string>
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"ディスプレイを検索"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"検索中…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"付近に無線ディスプレイは見つかりません。"</string>
+    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"付近にワイヤレスディスプレイは見つかりません。"</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"ペア設定されたディスプレイ"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"使用可能なデバイス"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"接続中"</string>
@@ -509,7 +509,7 @@
     <string name="wifi_display_details" msgid="7791118209992162698">"ディスプレイの設定"</string>
     <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"切断しますか？"</string>
     <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"この操作を行うと、次のデバイスとの接続が切断されます:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="wifi_display_options_title" msgid="5740656401635054838">"無線ディスプレイのオプション"</string>
+    <string name="wifi_display_options_title" msgid="5740656401635054838">"ワイヤレスディスプレイのオプション"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"切断"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"完了"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"名前"</string>
@@ -609,6 +609,15 @@
     <string name="wifi_save" msgid="3331121567988522826">"保存"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"ネットワークを保存できませんでした"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"キャンセル"</string>
+    <string name="wifi_skip_anyway" msgid="6965361454438011190">"無視してスキップ"</string>
+    <!-- no translation found for wifi_dont_skip (7350341524881124808) -->
+    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"警告: 追加のデータ通信料が発生する可能性があります。"\n\n"タブレットのセットアップでは大量のネットワーク処理が必要となる場合があります。"</string>
+    <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"警告: 追加のデータ通信料が発生する可能性があります。"\n\n"携帯端末のセットアップでは大量のネットワーク処理が必要となる場合があります。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"警告: タブレットは、ソフトウェアが最新の状態かどうかを確認できません。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"警告: 携帯端末は、ソフトウェアが最新の状態かどうかを確認できません。"</string>
+    <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"タブレットからこのWi-Fiネットワークに接続できませんでした。"</string>
+    <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"携帯端末からこのWi-Fiネットワークに接続できませんでした。"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Wi-Fi詳細設定"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Wi-Fi周波数帯域"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"使用する周波数帯域を指定する"</string>
@@ -1302,6 +1311,10 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"システム"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"画面の拡大"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"画面の拡大がONになっている場合は、次のことを実行できます"\n\n" ズーム: ダブルタップして押し続ける。"\n" ズームしてパン: ダブルタップして押し続けた状態で指をドラッグする。"\n" 拡大/縮小の切り替え: トリプルタップして離す。"\n\n" 拡大表示時には次のことを実行できます:"\n" パン: 画面上で2本以上の指をドラッグする。"\n" ズームレベルを調整: 2本以上の指でピンチイン/アウトする。"</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (3550195523659370451) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_summary (8651729928325162013) -->
+    <skip />
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"大きい文字サイズ"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"画面の拡大"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"画面の拡大を自動更新"</string>
@@ -1570,10 +1583,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"バックグラウンドを無効化"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"バックグラウンドデータを無効にすると、データの使用量が減るため電池を節約できます。一部のアプリでは引き続きバックグラウンドデータの接続を使用します。"</string>
     <string name="sync_automatically" msgid="1682730255435062059">"アプリのデータを自動同期する"</string>
-    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
-    <skip />
-    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
-    <skip />
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"注: 共有パソコンの場合と同様、他のユーザーがあなたのタブレット上のデータにアクセスする恐れがあります。"</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"注: 共有パソコンの場合と同様、他のユーザーがあなたの携帯端末上のデータにアクセスする恐れがあります。"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"同期ON"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"同期OFF"</string>
     <string name="sync_error" msgid="5060969083117872149">"同期エラー"</string>
