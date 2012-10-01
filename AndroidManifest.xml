@@ -121,7 +121,7 @@
         <!-- Top-level settings -->
 
         <activity android:name="Settings$WifiSettingsActivity"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings">
@@ -264,7 +264,7 @@
 
         <activity android:name="Settings$BluetoothSettingsActivity"
                 android:label="@string/bluetooth_settings_title"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -303,7 +303,7 @@
 
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings$WirelessSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -358,7 +358,7 @@
 
         <activity android:name="Settings$VpnSettingsActivity"
                 android:label="@string/vpn_settings_title"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings$WirelessSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -547,7 +547,7 @@
 
         <activity android:name="Settings$SoundSettingsActivity"
                 android:label="@string/sound_settings"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -576,7 +576,7 @@
 
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -641,7 +641,7 @@
 
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings"
                 android:uiOptions="none">
             <intent-filter>
@@ -707,7 +707,7 @@
         <activity android:name=".applications.InstalledAppDetailsTop"
                   android:label="@string/application_info_label"
                   android:exported="true"
-                  android:taskAffinity="com.android.settings"
+                  android:taskAffinity=""
                   android:parentActivityName="Settings$ManageApplicationsActivity">
         </activity>
 
@@ -743,7 +743,7 @@
         <!-- Provide direct entry into manage apps showing storage usage of apps. -->
         <activity android:name="Settings$StorageUseActivity"
                 android:label="@string/storageuse_settings_title"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -761,7 +761,7 @@
         <activity android:name="Settings$LocationSettingsActivity"
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -780,7 +780,7 @@
         <activity android:name="Settings$SecuritySettingsActivity"
                 android:label="@string/security_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -900,7 +900,7 @@
         <activity android:name="Settings$AccessibilitySettingsActivity"
                 android:label="@string/accessibility_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1325,7 +1325,7 @@
         <activity android:name="Settings$PowerUsageSummaryActivity"
                 android:label="@string/power_usage_summary_title"
                 android:uiOptions="none"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1352,7 +1352,7 @@
 
         <activity android:name="Settings$AccountSyncSettingsActivity"
             android:label="@string/account_sync_settings_title"
-            android:taskAffinity="com.android.settings"
+            android:taskAffinity=""
             android:parentActivityName="Settings"
             android:uiOptions="none">
             <intent-filter>
@@ -1437,7 +1437,7 @@
         <activity android:name="Settings$DataUsageSummaryActivity"
                 android:label="@string/data_usage_summary_title"
                 android:uiOptions="none"
-                android:taskAffinity="com.android.settings"
+                android:taskAffinity=""
                 android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
