@@ -115,7 +115,7 @@
     <string name="bluetooth_devices" msgid="1886018064039454227">"Vifaa vya Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Jina la kifaa"</string>
     <string name="bluetooth_device_details" msgid="4594773497930028085">"Mipangilio ya kifaa"</string>
-    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Mipangilio ya maelezo mafupi"</string>
+    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Mipangilio ya wasifu"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Hakuna jina lililowekwa, inatumia jina la akaunti"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Chuja kupata vifaa"</string>
     <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Ipe jina jipya kompyuta ndoto"</string>
@@ -123,7 +123,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Ipe jina jipya"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Tenganisha?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Hii ikakata muunganisho wako na:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Lemaza maelezo mafupi?"</string>
+    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Wasifu ulemazwe?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Hii italemaza:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Kutoka:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Umeunganishwa"</string>
     <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"Imeunganishwa (hakuna simu)"</string>
@@ -485,10 +485,10 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Kama simu ya spika"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Kwa muziki na midia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Kumbuka mipangilio"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Onyesho la pasiwaya"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Ili kuona vifaa, washa onyesho la pasiwaya."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="7363832031876872257">"Onyesho la pasiwaya limelemazwa kwa sababu ya Wi-Fi imezima."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Tafuta kwa ajili ya maonyesho"</string>
+    <string name="wifi_display_settings_title" msgid="564299108014609382">"Onyesho pasiwaya"</string>
+    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Ili kuona vifaa, washa onyesho pasiwaya."</string>
+    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="7363832031876872257">"Onyesho la pasiwaya limelemazwa kwa sababu Wi-Fi imezima."</string>
+    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Tafuta maonyesho"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Inatafuta…"</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Hakuna maonyesho ya karibu ya pasiwaya yalipatikana."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Maonyesho yaliyooanishwa"</string>
@@ -499,7 +499,7 @@
     <string name="wifi_display_details" msgid="7791118209992162698">"Onyesha mipangilio"</string>
     <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Kata muunganisho?"</string>
     <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Hii itaukata muunganisho wako kwa:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="wifi_display_options_title" msgid="5740656401635054838">"Chaguo pasiwaya za kunaonyesha"</string>
+    <string name="wifi_display_options_title" msgid="5740656401635054838">"Chaguo za mionekano ya pasiwaya"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Sahau"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Imekamilika"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Jina"</string>
@@ -599,6 +599,15 @@
     <string name="wifi_save" msgid="3331121567988522826">"Hifadhi"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Imeshindwa kuhifadhi mtandao"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Ghairi"</string>
+    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Ruka tu"</string>
+    <!-- no translation found for wifi_dont_skip (7350341524881124808) -->
+    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ONYO: Huenda ukatozwa gharama ya ziada ya data."\n\n"Usanidi wa kompyuta ndogo unaweza kuhitaji shughuli muhimu ya mtandao."</string>
+    <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ONYO: Huenda ukatozwa gharama ya ziada ya data."\n\n"Usanidi wa simu unaweza kuhitaji shughuli muhimu ya mtandao."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ONYO: Kompyuta ndogo haitaweza kuthibitisha kuwa programu yako imesasishwa."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ONYO: Simu haitaweza kuthibitisha kuwa programu yako imesasishwa."</string>
+    <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Kompyuta ndogo haikuweza kuunganika kwenye mtandao huu wa Wi-Fi."</string>
+    <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Simu haikuweza kuunganika kwenye mtandao huu wa Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Mtandao hewa mahiri"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Bendi ya masafa ya mtandao-hewa"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Bainisha masafa ya mazoea ya shughuli"</string>
@@ -1292,6 +1301,10 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"Mfumo"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Ukuzaji wa skrini"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"Wakati ukuzaji umewashwa, unaweza"\n\n" Kuvuta: Gonga mara tatu &amp; shikilia."\n" Vuta &amp; pindua: Gonga mara tatu &amp; shikilia, halafu buruta kidole chako."\n" Togoa kuza karibu au fifiza: Gonga mara tatu &amp; achilia."\n\n" Unapokuwa umekuza karibu, unaweza:"\n" Kupindua: Buruta vidole viwili au zaidi kwenye skrini."\n" Rekebisha kiwango cha kuvuta: Bana au panua kwa kutumia vidole viwili au zaidi."</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (3550195523659370451) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_summary (8651729928325162013) -->
+    <skip />
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Maandishi makubwa"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ukuzaji wa skrini"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Sasisha otomatiki ukuzaji wa skrini"</string>
@@ -1640,7 +1653,7 @@
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Kuegeshwa kwa skrini ikionyesha matumizi ya sasa ya CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Lazimisha kutungiliza  GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Lazimisha matumizi ya GPU kwa uchoraji wa 2d"</string>
-    <string name="track_frame_time" msgid="6146354853663863443">"Utungilizaji wa GPU ya maelezo mafupi"</string>
+    <string name="track_frame_time" msgid="6146354853663863443">"Utungilizaji wa GPU ya wasifu"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Pima muda wa kutungiliza katika adp shell dumpys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Kipimo cha uhiani wa Window"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Mageuzi ya kipimo cha huiani"</string>
@@ -1744,14 +1757,14 @@
     <string name="vpn_cancel" msgid="1979937976123659332">"Ghairi"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Hifadhi"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Unganisha"</string>
-    <string name="vpn_edit" msgid="8647191407179996943">"Hariri maelezo mafupi kuhusu VPN"</string>
+    <string name="vpn_edit" msgid="8647191407179996943">"Hariri wasifu kuhusu VPN"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Unganisha kwa <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Ongeza wasifu wa VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Hariri wasifu"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Futa wasifu"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN Iliyowashwa kila mara"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Teua maelezo mafupi ya VPN ambayo yatasalia kuunganishwa kila mara. Trafiki ya mtandao itaruhusiwa tu unapounganishwa kwenye VPN."</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Chagua wasifu wa VPN ambapo utakuwa umeunganishwa kila mara. Trafiki ya mtandao itaruhusiwa tu unapounganishwa kwenye VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Hamna"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Kila mara VPN iliyowashwa inahitaji anwani ya Itifaki Wavuti za seva na DNS."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Hakuna muunganisho wa mtandao. Tafadhali jaribu tena baadaye."</string>

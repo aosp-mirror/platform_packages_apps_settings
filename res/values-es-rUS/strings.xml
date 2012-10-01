@@ -607,6 +607,15 @@
     <string name="wifi_save" msgid="3331121567988522826">"Guardar"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"No se pudo guardar la red."</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Cancelar"</string>
+    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Omitir de todas maneras"</string>
+    <!-- no translation found for wifi_dont_skip (7350341524881124808) -->
+    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ADVERTENCIA: Posiblemente se generen cargos adicionales por los datos de tu proveedor."\n\n"La configuración de la tableta puede requerir una significativa actividad de la red."</string>
+    <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ADVERTENCIA: Posiblemente se generen cargos extras por los datos de tu proveedor."\n\n"La configuración del teléfono puede requerir una significativa actividad de la red."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ADVERTENCIA: No podrás usar tu tableta para verificar si tu software está actualizado."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ADVERTENCIA: No podrás usar tu teléfono para verificar si tu software está actualizado."</string>
+    <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"No se puede establecer la conexión entre tu tableta y la red Wi-Fi"</string>
+    <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"No se puede establecer la conexión entre tu teléfono y la red Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Wi-Fi avanzada"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Banda de frecuencia Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Especificar el rango de frecuencia de la operación"</string>
@@ -1014,7 +1023,7 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Cómo se debe extraer un patrón de desbloqueo"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"¡Demasiados intentos incorrectos!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Vuelve a intentarlo en <xliff:g id="NUMBER">%d</xliff:g> segundos."</string>
-    <string name="activity_not_found" msgid="5551664692991605325">"La aplicación no está instalada en tu teléfono."</string>
+    <string name="activity_not_found" msgid="5551664692991605325">"La aplicación no está instalada en tu dispositivo."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Cancelar"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Siguiente"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Protección de tu tablet"</string>
@@ -1299,7 +1308,11 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Servicios"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Ampliación de pantalla"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"Cuando la ampliación de la pantalla está activada, puedes usar"\n\n"Zoom: toca tres veces y presiona"\n" Zoom y arrastrar: toca tres veces y presiona, luego arrastra el dedo."\n" Activar y desactivar el zoom: toca tres veces y suelta."\n\n" Mientras has acercado el zoom, puedes:"\n" Arrastrar: arrastra dos o más dedos en la pantalla."\n" Ajustar el nivel de zoom: reduce o amplíalo usando dos o más dedos."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"Cuando la ampliación de la pantalla está activada, puedes usar las siguientes funciones:"\n\n"Zoom: toca tres veces y presiona"\n" Zoom y obtener una vista panorámica: toca tres veces y presiona, luego arrastra el dedo."\n" Activar y desactivar el zoom: toca tres veces y suelta."\n\n" Una vez que ampliaste la pantalla, puedes:"\n" Arrastrar: arrastra dos o más dedos en la pantalla."\n" Ajustar el nivel de zoom: une o separa dos o más dedos."</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (3550195523659370451) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_summary (8651729928325162013) -->
+    <skip />
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Texto grande"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ampliación de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Actualizar automáticamente la ampliación de pantalla"</string>
@@ -1564,10 +1577,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Deseas desactivar los datos de referencia?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas los datos de referencia, aumenta la duración de la batería y se reduce el uso de datos. Algunas aplicaciones tal vez sigan usando la conexión de datos de referencia."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Autosincronizar datos de aplic."</string>
-    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
-    <skip />
-    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
-    <skip />
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"Recordatorio: Como ocurre con todos los equipos compartidos, existe la posibilidad de que otros usuarios encuentren la forma de acceder a tus datos guardados en esta tableta."</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"Recordatorio: Como ocurre con todos los equipos compartidos, existe la posibilidad de que otros usuarios encuentren la forma de acceder a tus datos guardados en este teléfono."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sincronización activada"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Sincronización desactivada"</string>
     <string name="sync_error" msgid="5060969083117872149">"Error de sincronización"</string>
@@ -1798,7 +1809,7 @@
     <string name="user_add_user_message_long" msgid="2278524063301283723">"Puedes crear usuarios adicionales para compartir este dispositivo con otras personas. Cada usuario cuenta con su propio espacio y puede personalizarlo con sus propios fondos de pantalla, aplicaciones, etc. Los usuarios también pueden ajustar parámetros de configuración de la tableta como la tecnología Wi-Fi."\n\n"Luego de que crees un usuario nuevo, este tiene que pasar por un proceso de configuración."\n\n"Cualquier usuario puede aceptar permisos de aplicaciones actualizados en nombre del resto de los usuarios."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"Luego de que crees un usuario nuevo, este tiene que pasar por un proceso de configuración."\n\n"Cualquier usuario puede aceptar permisos de aplicaciones actualizados en nombre del resto de los usuarios."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"¿Configurar el usuario ahora?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Asegúrate de que la persona esté disponible para aceptar la tableta y crear su espacio."</string>
+    <string name="user_setup_dialog_message" msgid="614037943337008555">"Asegúrate de que la persona esté disponible para aceptar la tableta y configurar su espacio."</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Configurar ahora"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ahora no"</string>
     <!-- no translation found for user_cannot_manage_message (8440449301994432789) -->
@@ -1808,7 +1819,7 @@
     <!-- no translation found for user_remove_user_menu (6897150520686691355) -->
     <skip />
     <string name="user_new_user_name" msgid="369856859816028856">"Usuario nuevo"</string>
-    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"¿Deseas borrarlos tú mismo?"</string>
+    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"¿Deseas eliminarte a ti mismo?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"¿Eliminar usuario?"</string>
     <!-- no translation found for user_confirm_remove_self_message (8167855311779740207) -->
     <skip />
