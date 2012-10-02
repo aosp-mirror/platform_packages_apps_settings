@@ -170,8 +170,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator == null || !vibrator.hasVibrator()) {
-            getPreferenceScreen().removePreference(mVibrateWhenRinging);
-            getPreferenceScreen().removePreference(mHapticFeedback);
+            removePreference(KEY_VIBRATE);
+            removePreference(KEY_HAPTIC_FEEDBACK);
+        }
+        if (!Utils.isVoiceCapable(getActivity())) {
+            removePreference(KEY_VIBRATE);
         }
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
