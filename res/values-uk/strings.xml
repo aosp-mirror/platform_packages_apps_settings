@@ -321,7 +321,7 @@
     <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Ви можете шифрувати свої облікові записи, налаштування, завантажені програми та їх дані, медіа-файли й інші файли. Щойно ви зашифруєте свій телефон, потрібно буде вводити цифровий PIN-код чи пароль для розшифрування телефону щоразу під час його ввімкнення. Ви зможете скасувати шифрування, лише відновивши заводські налаштування, що призведе до видалення всіх ваших даних."\n\n"Шифрування триває не менше години. Перш ніж розпочати процес шифрування, переконайтеся, що акумулятор заряджено. Телефон має перебувати в підключеному стані до завершення шифрування. Переривання процесу шифрування призведе до втрати частини чи всіх ваших даних."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Шифрувати пристрій"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Шифрувати телефон"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Зарядіть акумулятор і повторіть спробу."</string>
+    <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Зарядіть батарею й повторіть спробу."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Підключіть зарядний пристрій і повторіть спробу."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Потрібно ввести PIN-код або пароль для блокування екрана"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Щоб почати шифрування, потрібно встановити PIN-код або пароль для блокування екрана."</string>
@@ -544,7 +544,7 @@
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Не від’єднуватися від мережі WiFi у режимі сну"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Виникла проблема зі зміною налаштувань"</string>
     <string name="wifi_suspend_optimizations" msgid="387215679583759376">"Оптимізація Wi-Fi"</string>
-    <string name="wifi_suspend_optimizations_summary" msgid="7774946457510541054">"Мінімізувати використання заряду акумулятора, коли ввімкнено Wi-Fi"</string>
+    <string name="wifi_suspend_optimizations_summary" msgid="7774946457510541054">"Мінімізувати використання заряду батареї, коли ввімкнено Wi-Fi"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Додати мережу"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi мережі"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
@@ -607,6 +607,15 @@
     <string name="wifi_save" msgid="3331121567988522826">"Зберег."</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Помилка збереження мережі"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Скасувати"</string>
+    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Усе ж пропустити"</string>
+    <!-- no translation found for wifi_dont_skip (7350341524881124808) -->
+    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ЗАСТЕРЕЖЕННЯ. Оператор може стягувати з вас додаткову плату."\n\n"Налаштування планшетного ПК може потребувати тривалого користування мережею."</string>
+    <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ЗАСТЕРЕЖЕННЯ. Оператор може стягувати з вас додаткову плату."\n\n"Налаштування телефону може потребувати тривалого користування мережею."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ЗАСТЕРЕЖЕННЯ. Планшетний ПК не зможе перевірити, чи оновлено ваше програмне забезпечення."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ЗАСТЕРЕЖЕННЯ. Телефон не зможе перевірити, чи оновлено ваше програмне забезпечення."</string>
+    <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Планшетний ПК не зміг під’єднатися до цієї мережі Wi-Fi."</string>
+    <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Телефон не зміг під’єднатися до цієї мережі Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Розширені налаштування Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Діапазон частот Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Укажіть діапазон частот операції"</string>
@@ -1300,6 +1309,10 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"Система"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Збільшення екрана"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"Коли збільшення ввімкнено, можна:"\n\n" масштабувати – тричі торкніться й утримуйте;"\n" масштабувати та панорамувати – тричі торкніться й утримуйте та проведіть пальцем;"\n" наближувати та віддаляти – тричі торкніться й відпустіть."\n\n" Наблизивши, можна:"\n" панорамувати – проведіть пальцями;"\n" налаштовувати масштаб – стисніть або розведіть пальці."</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (3550195523659370451) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_summary (8651729928325162013) -->
+    <skip />
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Великий текст"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Збільшення екрана"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Автоматично оновлювати збільшення"</string>
@@ -1326,7 +1339,7 @@
     <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"Дозволити програмам установлювати сценарії від Google, які зроблять веб-вміст більш доступним?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Немає опису."</string>
     <string name="settings_button" msgid="3006713718908152930">"Налаштування"</string>
-    <string name="power_usage_summary_title" msgid="7190304207330319919">"Акумулятор"</string>
+    <string name="power_usage_summary_title" msgid="7190304207330319919">"Батарея"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"На що було використано батарею"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Статист. викор. батареї недост."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
@@ -1386,14 +1399,14 @@
     <string name="battery_sugg_display" msgid="3370202402045141760">"Зменште яскравість і/чи час очікування екрана"</string>
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Викор. батареї Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="2085605314976704287">"Вимкніть Wi-Fi, якщо з’єднання не використовується чи не доступне"</string>
-    <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Як Bluetooth використовує акумулятор"</string>
+    <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Як Bluetooth використовує батарею"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="1942935021750897422">"Вимкніть Bluetooth, якщо він не використовується"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Спробуйте з’єднатися з іншим пристроєм Bluetooth"</string>
-    <string name="battery_desc_apps" msgid="8530418792605735226">"Як програма використовує акумулятор"</string>
+    <string name="battery_desc_apps" msgid="8530418792605735226">"Як програма використовує батарею"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Зупиніть або видаліть цю програму"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Контролювати GPS вручну, щоб запобігти її використанню програмою"</string>
-    <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Програма може пропонувати налаштування, щоб зменшити використання акумулятора"</string>
-    <string name="battery_desc_users" msgid="7682989161885027823">"Акумулятор користувача"</string>
+    <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Програма може пропонувати налаштування, щоб зменшити використання батареї"</string>
+    <string name="battery_desc_users" msgid="7682989161885027823">"Батарея користувача"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> з часу відключ."</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"З часу ост. відключ. для <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Заг. використ."</string>
@@ -1562,12 +1575,10 @@
     <string name="background_data" msgid="5779592891375473817">"Фонові дані"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Програми можуть будь-коли синхроніз., надсил. й отрим. дані"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Вимкн. фонові дані?"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"Вимкнення фонових даних продовжує час роботи акумулятора та зменшує використання даних. Деякі програми все ще можуть використовувати передавання даних у фоновому режимі."</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"Вимкнення фонових даних продовжує час роботи батареї та зменшує використання даних. Деякі програми все ще можуть використовувати передавання даних у фоновому режимі."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Автомат. синхронізув. дані програми"</string>
-    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
-    <skip />
-    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
-    <skip />
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"Нагадування. Як і на будь-якому спільному комп’ютері, інші користувачі можуть знайти спосіб отримати доступ до ваших даних на цьому планшетному ПК."</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"Нагадування. Як і на будь-якому спільному комп’ютері, інші користувачі можуть знайти спосіб отримати доступ до ваших даних на цьому телефоні."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Синхроніз. ВВІМКНЕНО"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхроніз. ВИМКНЕНО"</string>
     <string name="sync_error" msgid="5060969083117872149">"Помилка синхр-ції"</string>
