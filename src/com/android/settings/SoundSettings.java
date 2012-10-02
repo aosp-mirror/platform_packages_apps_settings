@@ -177,8 +177,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
             ListPreference emergencyTonePreference =
                 (ListPreference) findPreference(KEY_EMERGENCY_TONE);
-            emergencyTonePreference.setValue(String.valueOf(Settings.System.getInt(
-                resolver, Settings.System.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE)));
+            emergencyTonePreference.setValue(String.valueOf(Settings.Global.getInt(
+                resolver, Settings.Global.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE)));
             emergencyTonePreference.setOnPreferenceChangeListener(this);
         }
 
@@ -323,8 +323,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (KEY_EMERGENCY_TONE.equals(key)) {
             try {
                 int value = Integer.parseInt((String) objValue);
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.EMERGENCY_TONE, value);
+                Settings.Global.putInt(getContentResolver(),
+                        Settings.Global.EMERGENCY_TONE, value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
