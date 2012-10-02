@@ -271,7 +271,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         extras.putString(EXTRA_TITLE, getString(
                 R.string.accessibility_global_gesture_preference_title));
         extras.putString(EXTRA_SUMMARY, getString(
-                R.string.accessibility_global_gesture_preference_summary));
+                R.string.accessibility_global_gesture_preference_description));
         extras.putBoolean(EXTRA_CHECKED, Settings.Global.getInt(getContentResolver(),
                 Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1);
         super.onPreferenceTreeClick(mGlobalGesturePreferenceScreen,
@@ -509,10 +509,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1;
         if (globalGestureEnabled) {
             mGlobalGesturePreferenceScreen.setSummary(
-                    R.string.accessibility_feature_state_on);
+                    R.string.accessibility_global_gesture_preference_summary_on);
         } else {
             mGlobalGesturePreferenceScreen.setSummary(
-                    R.string.accessibility_feature_state_off);
+                    R.string.accessibility_global_gesture_preference_summary_off);
         }
     }
 

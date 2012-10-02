@@ -3105,12 +3105,14 @@
         Pan: Drag two or more fingers across the screen.\n
         Adjust zoom level: Pinch or expand using two or more fingers.
     </string>
-    <!-- Title for the accessibility preference screen to enable the global geture to enable accessibility. [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_title">Global enable gesture</string>
-    <!--  Summary for the accessibility preference screen to enable the global geture to enable accessibility. [CHAR LIMIT=none] -->
-    <string name="accessibility_global_gesture_preference_summary">
-        To enable accessibility long press the power button, after a vibration or a beep long press with two fingers.
-    </string>
+    <!-- Title for the preference to enable the global geture that turns on accessibility. [CHAR LIMIT=35] -->
+    <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
+    <!-- Summary for the preference to enable the global geture that turns on accessibility (on state). [CHAR LIMIT=60] -->
+    <string name="accessibility_global_gesture_preference_summary_on">Press and hold power, then touch and hold two fingers</string>
+    <!-- Summary for the preference screen to enable the global geture that turns on accessibility (off state). [CHAR LIMIT=35] -->
+    <string name="accessibility_global_gesture_preference_summary_off">Off</string>
+    <!--  Description for the preference screen to enable the global geture taht turns on accessibility. [CHAR LIMIT=none] -->
+    <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly enable accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\nStep 2: Touch and hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked or the user is changed.</string>
     <!-- Title for the accessibility preference to enable large text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_large_text_preference_title">Large text</string>
     <!-- Title for the accessibility preference to enable screen magnification. [CHAR LIMIT=35] -->
