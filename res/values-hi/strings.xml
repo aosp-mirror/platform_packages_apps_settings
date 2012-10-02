@@ -607,6 +607,15 @@
     <string name="wifi_save" msgid="3331121567988522826">"सहेजें"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"नेटवर्क सहेजने में विफल रहा"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"रद्द करें"</string>
+    <string name="wifi_skip_anyway" msgid="6965361454438011190">"फिर भी छोड़ें"</string>
+    <!-- no translation found for wifi_dont_skip (7350341524881124808) -->
+    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"चेतावनी: आपको अतिरिक्त वाहक डेटा शुल्क लग सकते हैं."\n\n"टेबलेट सेटअप के लिए महत्वपूर्ण नेटवर्क गतिविधि की आवश्यकता हो सकती है."</string>
+    <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"चेतावनी: आपको अतिरिक्त वाहक डेटा शुल्क लग सकते हैं."\n\n"फ़ोन सेटअप के लिए महत्वपूर्ण नेटवर्क गतिविधि की आवश्यकता हो सकती है."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"चेतावनी: टेबलेट यह सत्यापित नहीं कर सकेगा कि आपका सॉफ़्टवेयर अद्यतित है."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"चेतावनी: फ़ोन यह सत्यापित नहीं कर सकेगा कि आपका सॉफ़्टवेयर अद्यतित है."</string>
+    <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"टेबलेट इस Wi-Fi नेटवर्क से कनेक्ट नहीं कर सका."</string>
+    <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"फ़ोन इस Wi-Fi नेटवर्क से कनेक्ट नहीं कर सका."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"उन्‍नत Wi-Fi"</string>
     <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Wi-Fi फ़्रीक्वेंसी बैंड"</string>
     <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"संचालन की फ़्रीक्‍वेंसी रेंज निर्दिष्ट करें"</string>
@@ -1300,6 +1309,10 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"सिस्‍टम"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"स्क्रीन आवर्धन"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"जब स्क्रीन आवर्धन चालू हो, तो आप "\n\n" ज़ूम कर सकते हैं: ट्रिपल-टैप करके रखें."\n" ज़ूम और पैन कर सकते हैं: ट्रिपल-टैप करके रखें, फिर अपनी अंगुली खींचें."\n" ज़ूम इन और आउट को टॉगल कर सकते हैं: ट्रिपल-टैप करके रखें."\n\n" जब आप ज़ूम इन हों, तब आप:"\n" पैन कर सकते हैं: स्क्रीन पर दो या अधिक अंगुलियों को खींचें."\n" ज़ूम स्तर एडजस्ट कर सकते हैं: दो या अधिक अंगुलियों के उपयोग से पास लाएं या विस्तृत करें."</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (3550195523659370451) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_summary (8651729928325162013) -->
+    <skip />
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"बड़ा पाठ"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"स्क्रीन आवर्धन"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"स्क्रीन आवर्धन को स्वतः अपडेट करें"</string>
@@ -1565,10 +1578,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"पृष्ठभू. डेटा अक्षम करें?"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"पृष्ठभूमि डेटा को अक्षम करने से बैटरी का जीवनकाल बढ़ जाता है और डेटा उपयोग कम होता है. हो सकता है कि कुछ एप्लिकेशन अब भी पृष्ठभूमि डेटा कनेक्शन का उपयोग करते हों."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"एप्लिकेशन डेटा स्‍वत: समन्‍वयित करें"</string>
-    <!-- no translation found for add_account_shared_system_warning (3385757125975372772) -->
-    <skip />
-    <!-- no translation found for add_account_shared_system_warning (2481548364278168869) -->
-    <skip />
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"अनुस्मारक: जैसा कि साझा किए गए कंप्यूटर में होता है, इसमें ऐसा जोखिम है कि अन्य उपयोगकर्ताओं को इस टेबलेट पर आपके डेटा तक पहुंचने का तरीका मिल जाए."</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"अनुस्मारक: जैसा कि साझा किए गए कंप्यूटर में होता है, इसमें ऐसा जोखिम है कि अन्य उपयोगकर्ताओं को इस फ़ोन पर आपके डेटा तक पहुंचने का तरीका मिल जाए."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"सिंक चालू है"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"सिंक बंद है"</string>
     <string name="sync_error" msgid="5060969083117872149">"सिंक त्रुटि"</string>
