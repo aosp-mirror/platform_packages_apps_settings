@@ -55,7 +55,7 @@ import java.io.IOException;
  */
 public class AddAccountSettings extends Activity {
     /**
-     * 
+     *
      */
     private static final String KEY_ADD_CALLED = "AddAccountCalled";
 
@@ -70,6 +70,9 @@ public class AddAccountSettings extends Activity {
     private static final String TAG = "AccountSettings";
 
     /* package */ static final String EXTRA_SELECTED_ACCOUNT = "selected_account";
+
+    // show additional info regarding the use of a device with multiple users
+    static final String EXTRA_HAS_MULTIPLE_USERS = "hasMultipleUsers";
 
     private static final int CHOOSE_ACCOUNT_REQUEST = 1;
 
@@ -193,6 +196,7 @@ public class AddAccountSettings extends Activity {
         Bundle addAccountOptions = new Bundle();
         mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(), 0);
         addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
+        addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS, Utils.hasMultipleUsers(this));
         AccountManager.get(this).addAccount(
                 accountType,
                 null, /* authTokenType */
