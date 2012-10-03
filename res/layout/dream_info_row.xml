@@ -54,7 +54,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textDirection="locale" />
+            android:textDirection="locale"
+            android:labelFor="@android:id/button2" />
 
         <!-- Dream radio button -->
 
@@ -64,7 +65,9 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:duplicateParentState="true" />
+            android:duplicateParentState="true"
+            android:clickable="false"
+            android:focusable="false" />
     </RelativeLayout>
 
     <!-- Divider -->
@@ -90,7 +93,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="0dip"
         android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="@null"
+        android:contentDescription="@string/screensaver_settings_button"
         android:padding="8dip"
         android:src="@drawable/ic_bt_config" />
 
