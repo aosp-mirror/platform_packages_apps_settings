@@ -605,7 +605,7 @@ public class InstalledAppDetails extends Fragment
             Log.i(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
         boolean hasUsbDefaults = false;
         try {
-            hasUsbDefaults = mUsbManager.hasDefaults(packageName);
+            hasUsbDefaults = mUsbManager.hasDefaults(packageName, UserHandle.myUserId());
         } catch (RemoteException e) {
             Log.e(TAG, "mUsbManager.hasDefaults", e);
         }
@@ -1218,7 +1218,7 @@ public class InstalledAppDetails extends Fragment
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
             try {
-                mUsbManager.clearDefaults(packageName);
+                mUsbManager.clearDefaults(packageName, UserHandle.myUserId());
             } catch (RemoteException e) {
                 Log.e(TAG, "mUsbManager.clearDefaults", e);
             }
