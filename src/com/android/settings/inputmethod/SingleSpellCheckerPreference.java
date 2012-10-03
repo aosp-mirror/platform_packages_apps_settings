@@ -17,6 +17,7 @@
 package com.android.settings.inputmethod;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -37,7 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SingleSpellCheckerPreference extends Preference {
-    private static final float DISABLED_ALPHA = 0.4f;
     private static final String TAG = SingleSpellCheckerPreference.class.getSimpleName();
     private static final boolean DBG = false;
 
@@ -198,7 +198,7 @@ public class SingleSpellCheckerPreference extends Preference {
                 mSettingsButton.setClickable(enabled);
                 mSettingsButton.setFocusable(enabled);
                 if (!enabled) {
-                    mSettingsButton.setAlpha(DISABLED_ALPHA);
+                    mSettingsButton.setAlpha(Utils.DISABLED_ALPHA);
                 }
             }
         }
@@ -210,7 +210,7 @@ public class SingleSpellCheckerPreference extends Preference {
                 mSubtypeButton.setClickable(enabled);
                 mSubtypeButton.setFocusable(enabled);
                 if (!enabled) {
-                    mSubtypeButton.setAlpha(DISABLED_ALPHA);
+                    mSubtypeButton.setAlpha(Utils.DISABLED_ALPHA);
                 }
             }
         }

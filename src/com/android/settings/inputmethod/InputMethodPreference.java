@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -47,7 +48,6 @@ import java.util.List;
 public class InputMethodPreference extends CheckBoxPreference
         implements Comparator<InputMethodPreference> {
     private static final String TAG = InputMethodPreference.class.getSimpleName();
-    private static final float DISABLED_ALPHA = 0.4f;
     private final SettingsPreferenceFragment mFragment;
     private final InputMethodInfo mImi;
     private final InputMethodManager mImm;
@@ -172,7 +172,7 @@ public class InputMethodPreference extends CheckBoxPreference
             mInputMethodSettingsButton.setClickable(checked);
             mInputMethodSettingsButton.setFocusable(checked);
             if (!checked) {
-                mInputMethodSettingsButton.setAlpha(DISABLED_ALPHA);
+                mInputMethodSettingsButton.setAlpha(Utils.DISABLED_ALPHA);
             }
         }
         if (mTitleText != null) {
