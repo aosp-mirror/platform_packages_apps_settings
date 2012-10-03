@@ -750,6 +750,8 @@ public class Settings extends PreferenceActivity
 
     @Override
     public void onAccountsUpdated(Account[] accounts) {
+        // TODO: watch for package upgrades to invalidate cache; see 7206643
+        mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, accounts);
         invalidateHeaders();
     }
