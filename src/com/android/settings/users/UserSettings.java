@@ -85,12 +85,14 @@ public class UserSettings extends SettingsPreferenceFragment
             "key_add_user_long_message_displayed";
 
     private static final int[] USER_DRAWABLES = {
-        R.drawable.ic_user_orange,
-        R.drawable.ic_user_cyan,
-        R.drawable.ic_user_green,
-        R.drawable.ic_user_purple,
-        R.drawable.ic_user_red,
-        R.drawable.ic_user_yellow
+        R.drawable.avatar_default_1,
+        R.drawable.avatar_default_2,
+        R.drawable.avatar_default_3,
+        R.drawable.avatar_default_4,
+        R.drawable.avatar_default_5,
+        R.drawable.avatar_default_6,
+        R.drawable.avatar_default_7,
+        R.drawable.avatar_default_8
     };
 
     private PreferenceGroup mUserListCategory;
@@ -419,7 +421,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
                     missingIcons.add(user.id);
-                    pref.setIcon(R.drawable.ic_user);
+                    pref.setIcon(R.drawable.avatar_default_1);
                 } else {
                     setPhotoId(pref, user);
                 }
@@ -432,7 +434,7 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
             pref.setSummary(R.string.user_adding_new_user);
-            pref.setIcon(R.drawable.ic_user);
+            pref.setIcon(R.drawable.avatar_default_1);
             mUserListCategory.addPreference(pref);
         }
         getActivity().invalidateOptionsMenu();
