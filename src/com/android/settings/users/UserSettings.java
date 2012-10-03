@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,11 @@ public class UserSettings extends SettingsPreferenceFragment
         Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "UserSettings";
+
+    /** UserId of the user being removed */
+    private static final String SAVE_REMOVING_USER = "removing_user";
+    /** UserId of the user that was just added */
+    private static final String SAVE_ADDING_USER = "adding_user";
 
     private static final String KEY_USER_NICKNAME = "user_nickname";
     private static final String KEY_USER_LIST = "user_list";
@@ -140,6 +146,15 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        if (icicle != null) {
+            if (icicle.containsKey(SAVE_ADDING_USER)) {
+                mAddedUserId = icicle.getInt(SAVE_ADDING_USER);
+            }
+            if (icicle.containsKey(SAVE_REMOVING_USER)) {
+                mRemovingUserId = icicle.getInt(SAVE_REMOVING_USER);
+            }
+        }
+
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
@@ -177,6 +192,14 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(mUserChangeReceiver);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(SAVE_ADDING_USER, mAddedUserId);
+        outState.putInt(SAVE_REMOVING_USER, mRemovingUserId);
     }
 
     @Override
@@ -245,7 +268,6 @@ public class UserSettings extends SettingsPreferenceFragment
         synchronized (mUserLock) {
             if (mRemovingUserId == -1 && !mAddingUser) {
                 showDialog(DIALOG_ADD_USER);
-                setOnDismissListener(this);
             }
         }
     }
@@ -255,7 +277,6 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mRemovingUserId == -1 && !mAddingUser) {
                 mRemovingUserId = userId;
                 showDialog(DIALOG_CONFIRM_REMOVE);
-                setOnDismissListener(this);
             }
         }
     }
@@ -266,10 +287,17 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onDialogShowing() {
+        super.onDialogShowing();
+
+        setOnDismissListener(this);
+    }
+
+    @Override
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
-            case DIALOG_CONFIRM_REMOVE:
-                return new AlertDialog.Builder(getActivity())
+            case DIALOG_CONFIRM_REMOVE: {
+                Dialog dlg = new AlertDialog.Builder(getActivity())
                     .setTitle(UserHandle.myUserId() == mRemovingUserId
                             ? R.string.user_confirm_remove_self_title
                             : R.string.user_confirm_remove_title)
@@ -284,12 +312,14 @@ public class UserSettings extends SettingsPreferenceFragment
                     })
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
+                return dlg;
+            }
             case DIALOG_USER_CANNOT_MANAGE:
                 return new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.user_cannot_manage_message)
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
-            case DIALOG_ADD_USER:
+            case DIALOG_ADD_USER: {
                 final SharedPreferences preferences = getActivity().getPreferences(
                         Context.MODE_PRIVATE);
                 final boolean longMessageDisplayed = preferences.getBoolean(
@@ -297,7 +327,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 final int messageResId = longMessageDisplayed
                         ? R.string.user_add_user_message_short
                         : R.string.user_add_user_message_long;
-                return new AlertDialog.Builder(getActivity())
+                Dialog dlg = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.user_add_user_title)
                 .setMessage(messageResId)
                 .setPositiveButton(android.R.string.ok,
@@ -312,8 +342,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
-            case DIALOG_SETUP_USER:
-                return new AlertDialog.Builder(getActivity())
+                return dlg;
+            }
+            case DIALOG_SETUP_USER: {
+                Dialog dlg = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.user_setup_dialog_title)
                 .setMessage(R.string.user_setup_dialog_message)
                 .setPositiveButton(R.string.user_setup_button_setup_now,
@@ -324,7 +356,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 })
                 .setNegativeButton(R.string.user_setup_button_setup_later, null)
                 .create();
-
+                return dlg;
+            }
             default:
                 return null;
         }
@@ -396,9 +429,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
         for (UserInfo user : users) {
             Preference pref;
-            if (user.id == mRemovingUserId) {
-                continue;
-            } else if (user.id == UserHandle.myUserId()) {
+            if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
                 mNicknamePreference.setText(user.name);
                 mNicknamePreference.setSummary(user.name);
@@ -544,6 +575,7 @@ public class UserSettings extends SettingsPreferenceFragment
         synchronized (mUserLock) {
             mAddingUser = false;
             mRemovingUserId = -1;
+            updateUserList();
         }
     }
 
