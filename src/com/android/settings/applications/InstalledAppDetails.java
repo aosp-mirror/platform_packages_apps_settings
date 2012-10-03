@@ -568,14 +568,19 @@ public class InstalledAppDetails extends Fragment
             }
         }
         mAppEntry = mState.getEntry(packageName);
-        // Get application info again to refresh changed properties of application
-        try {
-            mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
-                    PackageManager.GET_DISABLED_COMPONENTS |
-                    PackageManager.GET_UNINSTALLED_PACKAGES |
-                    PackageManager.GET_SIGNATURES);
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
+        if (mAppEntry != null) {
+            // Get application info again to refresh changed properties of application
+            try {
+                mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
+                        PackageManager.GET_DISABLED_COMPONENTS |
+                        PackageManager.GET_UNINSTALLED_PACKAGES |
+                        PackageManager.GET_SIGNATURES);
+            } catch (NameNotFoundException e) {
+                Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
+            }
+        } else {
+            Log.w(TAG, "Missing AppEntry; maybe reinstalling?");
+            mPackageInfo = null;
         }
 
         return packageName;
