@@ -182,6 +182,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         }
     }
 
+    public void onDialogShowing() {
+        // override in subclass to attach a dismiss listener, for instance
+    }
+
     public static class SettingsDialogFragment extends DialogFragment {
         private static final String KEY_DIALOG_ID = "key_dialog_id";
         private static final String KEY_PARENT_FRAGMENT_ID = "key_parent_fragment_id";
@@ -212,6 +216,15 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
             if (mParentFragment != null) {
                 outState.putInt(KEY_DIALOG_ID, mDialogId);
                 outState.putInt(KEY_PARENT_FRAGMENT_ID, mParentFragment.getId());
+            }
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+
+            if (mParentFragment != null && mParentFragment instanceof SettingsPreferenceFragment) {
+                ((SettingsPreferenceFragment) mParentFragment).onDialogShowing();
             }
         }
 
