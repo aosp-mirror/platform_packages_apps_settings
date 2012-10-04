@@ -717,21 +717,15 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"桌布"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"選擇桌布來源"</string>
-    <!-- no translation found for screensaver_settings_title (830579400192185646) -->
-    <skip />
+    <string name="screensaver_settings_title" msgid="830579400192185646">"休眠模式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"安置於座架上或休眠及充電時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"皆可"</string>
-    <!-- no translation found for screensaver_settings_summary_sleep (9086186698140423493) -->
-    <skip />
+    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"安置於座架上時"</string>
-    <!-- no translation found for screensaver_settings_summary_off (2481581696365146473) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_disabled_prompt (8842133053691392237) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_when_to_dream (5319285293085224663) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_dream_start (3897751480634598243) -->
-    <skip />
+    <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"關閉"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="8842133053691392237">"如要控制手機安置於座架上和/或休眠時的設定，請開啟休眠模式。"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="5319285293085224663">"休眠時機"</string>
+    <string name="screensaver_settings_dream_start" msgid="3897751480634598243">"立即休眠"</string>
     <!-- no translation found for screensaver_settings_button (7292214707625717013) -->
     <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
@@ -1311,14 +1305,10 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"系統"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"螢幕放大"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"開啟螢幕放大功能時，您可以："\n\n" 縮放：輕按三下並按住。"\n" 縮放並平移：輕按三下並按住，然後拖曳手指。"\n" 切換縮放：輕按三下，然後放開手指。"\n\n" 螢幕放大時，您可以："\n" 平移：使用兩根以上手指在螢幕上拖曳。"\n" 調整縮放等級：使用兩根以上手指在螢幕上撥動或展開。"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (6752037184140789970) -->
-    <skip />
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (5107177518892413423) -->
-    <skip />
-    <!-- no translation found for accessibility_global_gesture_preference_summary_off (8102103337813609849) -->
-    <skip />
-    <!-- no translation found for accessibility_global_gesture_preference_description (7636553304145674166) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"協助工具捷徑"</string>
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="5107177518892413423">"持續按住電源按鈕，然後使用兩指輕觸並按住"</string>
+    <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"關閉"</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="7636553304145674166">"開啟這項功能時，您可以透過兩個步驟快速啟用協助工具功能："\n\n"步驟 1：持續按住電源按鈕，直到聽見音效或感到震動。"\n"步驟 2：使用兩指輕觸並按住，直到聽見確認音效。"\n\n"如有多位使用者共用裝置，在鎖定畫面上使用這個捷徑會暫時啟用協助工具，直到裝置遭到解鎖或使用者發生變更為止。"</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"大字體"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"螢幕放大"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"自動更新螢幕放大設定"</string>
@@ -1587,8 +1577,8 @@
     <string name="background_data_dialog_title" msgid="6059217698124786537">"您要停用背景資料嗎？"</string>
     <string name="background_data_dialog_message" msgid="6981661606680941633">"停用背景資料可延長電池使用時間，並減少資料的傳輸量。但某些應用程式可能仍會使用背景資料連線。"</string>
     <string name="sync_automatically" msgid="1682730255435062059">"自動同步處理應用程式的資料"</string>
-    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"提醒：共用平板電腦就像共用電腦一樣，有一定程度的風險，其他使用者可能找到方法存取您儲存在這部平板電腦上的資料。"</string>
-    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"提醒：共用手機就像共用電腦一樣，有一定程度的風險，其他使用者可能找到方法存取您儲存在這支手機上的資料。"</string>
+    <string name="add_account_shared_system_warning" product="tablet" msgid="3385757125975372772">"提醒：共用平板電腦就像共用電腦一樣，都有一定程度的風險，其他使用者可能會找出方法存取您儲存在這部平板電腦上的資料。"</string>
+    <string name="add_account_shared_system_warning" product="default" msgid="2481548364278168869">"提醒：共用手機就像共用電腦一樣，都有一定程度的風險，其他使用者可能會找出方法存取您儲存在這支手機上的資料。"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"已開啟同步處理功能"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"已關閉同步處理功能"</string>
     <string name="sync_error" msgid="5060969083117872149">"同步處理錯誤"</string>
@@ -1828,10 +1818,10 @@
     <string name="user_new_user_name" msgid="369856859816028856">"新使用者"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"您要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"移除使用者？"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您將會失去自己在這部平板電腦上的空間和資料，這個動作無法復原。"</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"您將會失去自己在這支手機上的空間和資料，這個動作無法復原。"</string>
-    <string name="user_confirm_remove_message" product="tablet" msgid="4610106937214870034">"這位使用者在這台平板電腦上的空間和資料將會消失，這個動作無法復原。"</string>
-    <string name="user_confirm_remove_message" product="default" msgid="8130264611683731142">"這位使用者在這支手機上的空間和資料將會消失，這個動作無法復原。"</string>
+    <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您在這台平板電腦上的可用空間和資料將會消失，這個動作無法復原。"</string>
+    <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"您在這支手機上的可用空間和資料將會消失，這個動作無法復原。"</string>
+    <string name="user_confirm_remove_message" product="tablet" msgid="4610106937214870034">"這位使用者在這台平板電腦上的可用空間和資料將會消失，這個動作無法復原。"</string>
+    <string name="user_confirm_remove_message" product="default" msgid="8130264611683731142">"這位使用者在這支手機上的可用空間和資料將會消失，這個動作無法復原。"</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"正在新增使用者…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"刪除使用者"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"刪除"</string>
