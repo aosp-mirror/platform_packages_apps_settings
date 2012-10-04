@@ -84,6 +84,7 @@
 
     <style name="setup_wizard_theme" parent="android:Theme.Holo.NoActionBar">
         <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
     </style>
 
     <!-- We'd like to have this as 16dip hight including paddingTop/paddingBottom to
