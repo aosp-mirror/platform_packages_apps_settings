@@ -124,7 +124,7 @@
                 android:taskAffinity=""
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_SETTINGS" />
@@ -265,7 +265,7 @@
         <activity android:name="Settings$BluetoothSettingsActivity"
                 android:label="@string/bluetooth_settings_title"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
@@ -304,7 +304,7 @@
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
                 android:taskAffinity=""
-                android:parentActivityName="Settings$WirelessSettingsActivity">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -359,7 +359,7 @@
         <activity android:name="Settings$VpnSettingsActivity"
                 android:label="@string/vpn_settings_title"
                 android:taskAffinity=""
-                android:parentActivityName="Settings$WirelessSettingsActivity">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -379,7 +379,8 @@
 
         <activity android:name="Settings$DateTimeSettingsActivity"
                 android:label="@string/date_and_time"
-                android:parentActivityName="Settings">
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DATE_SETTINGS" />
@@ -549,7 +550,7 @@
         <activity android:name="Settings$SoundSettingsActivity"
                 android:label="@string/sound_settings"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
@@ -578,7 +579,7 @@
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
@@ -643,7 +644,7 @@
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
                 android:taskAffinity=""
-                android:parentActivityName="Settings"
+                android:excludeFromRecents="true"
                 android:uiOptions="none">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -763,7 +764,7 @@
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
@@ -902,7 +903,7 @@
                 android:label="@string/accessibility_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
@@ -1201,8 +1202,8 @@
 
         <activity android:name="Settings$WifiDisplaySettingsActivity"
                 android:label="@string/wifi_display_settings_title"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$DisplaySettingsActivity">
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_DISPLAY_SETTINGS" />
@@ -1327,7 +1328,7 @@
                 android:label="@string/power_usage_summary_title"
                 android:uiOptions="none"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
@@ -1439,7 +1440,7 @@
                 android:label="@string/data_usage_summary_title"
                 android:uiOptions="none"
                 android:taskAffinity=""
-                android:parentActivityName="Settings">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
