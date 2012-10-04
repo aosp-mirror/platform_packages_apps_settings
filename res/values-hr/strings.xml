@@ -302,10 +302,8 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Info o vlasniku"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Unesite tekst za prikaz na zaključanom zaslonu"</string>
-    <!-- no translation found for show_user_info_on_lockscreen_label (8408914624925608365) -->
-    <skip />
-    <!-- no translation found for user_info_settings_title (1195015434996724736) -->
-    <skip />
+    <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Prikaži podatke o korisniku na zaključanom zaslonu"</string>
+    <string name="user_info_settings_title" msgid="1195015434996724736">"Podaci o korisniku"</string>
     <string name="location_settings_title" msgid="4483843407328665068">"Pristup lokaciji"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sigurnost"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Postavi Moju lokaciju, otključavanje zaslona, zaključavanje SIM kartice, zaključavanje spremnika za vjerodajnice"</string>
@@ -493,9 +491,9 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Kao telefonski zvučnik"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Za glazbu i medije"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamti postavke"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Bežični zaslon"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Da biste vidjeli uređaje, uključite bežični zaslon."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="7363832031876872257">"Bežični zaslon onemogućen je jer je Wi-Fi isključen."</string>
+    <string name="wifi_display_settings_title" msgid="564299108014609382">"Bežični prikaz"</string>
+    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Da biste vidjeli uređaje, uključite bežični prikaz."</string>
+    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="7363832031876872257">"Bežični prikaz onemogućen je jer je Wi-Fi isključen."</string>
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Traži zaslone"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Pretraživanje..."</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Nije pronađen nijedan bežični zaslon u blizini."</string>
@@ -507,7 +505,7 @@
     <string name="wifi_display_details" msgid="7791118209992162698">"Postavke zaslona"</string>
     <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Isključiti?"</string>
     <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"To će prekinuti vašu vezu s uređajem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="wifi_display_options_title" msgid="5740656401635054838">"Opcije bežičnog zaslona"</string>
+    <string name="wifi_display_options_title" msgid="5740656401635054838">"Opcije bežičnog prikaza"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Zaboravi"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Gotovo"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Naziv"</string>
@@ -608,8 +606,7 @@
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Spremanje mreže nije uspjelo"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Odustani"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"Svejedno preskoči"</string>
-    <!-- no translation found for wifi_dont_skip (7350341524881124808) -->
-    <skip />
+    <string name="wifi_dont_skip" msgid="7350341524881124808">"Nemoj preskočiti"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"UPOZORENJE: mogući su dodatni troškovi za promet podataka."\n\n"Za postavljanje tabletnog računala može biti potrebna značajna mrežna aktivnost."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"UPOZORENJE: mogući su dodatni troškovi za promet podataka."\n\n"Za postavljanje telefona može biti potrebna značajna mrežna aktivnost."</string>
     <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"UPOZORENJE: tabletno računalo neće moći potvrditi da je vaš softver ažuriran."</string>
@@ -720,16 +717,23 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"Nakon <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivnosti"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Pozadinska slika"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Odabir pozadinske slike iz"</string>
-    <string name="screensaver_settings_title" msgid="4458091032540874366">"San"</string>
+    <!-- no translation found for screensaver_settings_title (830579400192185646) -->
+    <skip />
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Kada je uređaj na priključnoj stanici ili kada miruje i puni se"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Ili"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="3642352561593337637">"Dok uređaj miruje i puni se"</string>
+    <!-- no translation found for screensaver_settings_summary_sleep (9086186698140423493) -->
+    <skip />
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Kada je na priključnoj stanici"</string>
-    <string name="screensaver_settings_summary_off" msgid="7019248565878953105">"Onemogućeno"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="2060724968623677666">"Da biste kontrolirali događaje dok je telefon na priključnoj stanici i/ili dok miruje, uključite značajku Snovi."</string>
-    <string name="screensaver_settings_start_dreaming" msgid="1695787491111862810">"Počni sanjati sad"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="9110320844270942351">"Kad sanjati"</string>
-    <string name="screensaver_settings_dream_start" msgid="1265346994126658796">"Početak"</string>
+    <!-- no translation found for screensaver_settings_summary_off (2481581696365146473) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_disabled_prompt (8842133053691392237) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_when_to_dream (5319285293085224663) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_dream_start (3897751480634598243) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_button (7292214707625717013) -->
+    <skip />
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatska svjetlina"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veličina fonta"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Veličina fonta"</string>
@@ -1276,10 +1280,8 @@
     <string name="adb_warning_message" msgid="7316799925425402244">"Rješavanje programske pogreške USB-a namijenjeno je samo u razvojne svrhe. Može se upotrijebiti za kopiranje podataka s računala na uređaj i obrnuto, instalaciju aplikacija na uređaju bez obavijesti i za čitanje dnevničkih zapisa."</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Dopustiti postavke razvojnih programera?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Ove su postavke namijenjene samo razvojnim programerima. One mogu uzrokovati kvar ili neželjeno ponašanje vašeg uređaja i aplikacija na njemu."</string>
-    <!-- no translation found for verify_apps_over_usb_title (4177086489869041953) -->
-    <skip />
-    <!-- no translation found for verify_apps_over_usb_summary (9164096969924529200) -->
-    <skip />
+    <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"Potvrdi aplikacije putem USB-a"</string>
+    <string name="verify_apps_over_usb_summary" msgid="9164096969924529200">"Provjerite uzrokuju li aplikacije instalirane putem ADB-a/ADT-a poteškoće."</string>
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Zaštiti USB pohranu"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Aplikacije moraju tražiti dozvolu za čitanje USB pohrane"</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"Zaštititi USB pohranu?"</string>
@@ -1309,9 +1311,13 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sustav"</string>
     <string name="accessibility_screen_magnification_title" msgid="159538947700130120">"Uvećanje zaslona"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7705945119921468241">"Kada je uvećanje zaslona uključeno, možete"\n\n" Zumirati: dodirnite triput i zadržite."\n" Zumirati i panirati: dodirnite triput i zadržite pa povucite prstom."\n" Izmjenjivati povećavanje i smanjivanje: dodirnite triput i otpustite."\n\n" Dok je prikaz povećan, možete:"\n" Panirati: povucite prstima po zaslonu."\n" Podesiti razinu zumiranja: spojite ili raširite prste."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (3550195523659370451) -->
+    <!-- no translation found for accessibility_global_gesture_preference_title (6752037184140789970) -->
     <skip />
-    <!-- no translation found for accessibility_global_gesture_preference_summary (8651729928325162013) -->
+    <!-- no translation found for accessibility_global_gesture_preference_summary_on (5107177518892413423) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_summary_off (8102103337813609849) -->
+    <skip />
+    <!-- no translation found for accessibility_global_gesture_preference_description (7636553304145674166) -->
     <skip />
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Veliki tekst"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Uvećanje zaslona"</string>
@@ -1812,27 +1818,19 @@
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Provjerite može li osoba uzeti tabletno računalo i postaviti svoj prostor"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Postavi sada"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ne sad"</string>
-    <!-- no translation found for user_cannot_manage_message (8440449301994432789) -->
-    <skip />
-    <!-- no translation found for user_cannot_manage_message (1133251987818014757) -->
-    <skip />
-    <!-- no translation found for user_remove_user_menu (6897150520686691355) -->
-    <skip />
+    <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Samo vlasnik tabletnog računala može upravljati korisnicima."</string>
+    <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Samo vlasnik telefona može upravljati korisnicima."</string>
+    <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g>: brisanje s uređaja"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novi korisnik"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Ukloniti korisnika?"</string>
-    <!-- no translation found for user_confirm_remove_self_message (8167855311779740207) -->
-    <skip />
-    <!-- no translation found for user_confirm_remove_self_message (5391888073786090274) -->
-    <skip />
-    <!-- no translation found for user_confirm_remove_message (4610106937214870034) -->
-    <skip />
-    <!-- no translation found for user_confirm_remove_message (8130264611683731142) -->
-    <skip />
+    <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Izgubit ćete svoj prostor i podatke na ovom tabletnom računalu. Ta se radnja ne može poništiti."</string>
+    <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Izgubit ćete svoj prostor i podatke na ovom telefonu. Ta se radnja ne može poništiti."</string>
+    <string name="user_confirm_remove_message" product="tablet" msgid="4610106937214870034">"Prostor i podaci tog korisnika nestat će s ovog tabletnog računala. Ta se radnja ne može poništiti."</string>
+    <string name="user_confirm_remove_message" product="default" msgid="8130264611683731142">"Prostor i podaci tog korisnika nestat će s ovog telefona. Ta se radnja ne može poništiti."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Dodavanje novog korisnika…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Izbriši korisnika"</string>
-    <!-- no translation found for user_delete_button (5131259553799403201) -->
-    <skip />
+    <string name="user_delete_button" msgid="5131259553799403201">"Izbriši"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Ova postavka utječe na sve korisnike na ovom tabletu."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Ova postavka utječe na sve korisnike na ovom telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Promjena jezika"</string>
