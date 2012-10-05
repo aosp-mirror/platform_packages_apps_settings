@@ -462,6 +462,12 @@ public class RunningState {
                     si.mServiceInfo = ActivityThread.getPackageManager().getServiceInfo(
                             service.service, PackageManager.GET_UNINSTALLED_PACKAGES,
                             UserHandle.getUserId(service.uid));
+
+                    if (si.mServiceInfo == null) {
+                        Log.d("RunningService", "getServiceInfo returned null for: "
+                                + service.service);
+                        return false;
+                    }
                 } catch (RemoteException e) {
                 }
                 si.mDisplayLabel = makeLabel(pm,
