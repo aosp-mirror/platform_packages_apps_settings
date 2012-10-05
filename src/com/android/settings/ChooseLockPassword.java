@@ -40,6 +40,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
@@ -272,8 +273,15 @@ public class ChooseLockPassword extends PreferenceActivity {
         }
 
         protected void updateStage(Stage stage) {
+            final Stage previousStage = mUiStage;
             mUiStage = stage;
             updateUi();
+
+            // If the stage changed, announce the header for accessibility. This
+            // is a no-op when accessibility is disabled.
+            if (previousStage != stage) {
+                mHeaderText.announceForAccessibility(mHeaderText.getText());
+            }
         }
 
         /**
@@ -378,8 +386,8 @@ public class ChooseLockPassword extends PreferenceActivity {
                 errorMsg = validatePassword(pin);
                 if (errorMsg == null) {
                     mFirstPin = pin;
-                    updateStage(Stage.NeedToConfirm);
                     mPasswordEntry.setText("");
+                    updateStage(Stage.NeedToConfirm);
                 }
             } else if (mUiStage == Stage.NeedToConfirm) {
                 if (mFirstPin.equals(pin)) {
@@ -389,11 +397,11 @@ public class ChooseLockPassword extends PreferenceActivity {
                     mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
                     getActivity().finish();
                 } else {
-                    updateStage(Stage.ConfirmWrong);
                     CharSequence tmp = mPasswordEntry.getText();
                     if (tmp != null) {
                         Selection.setSelection((Spannable) tmp, 0, tmp.length());
                     }
+                    updateStage(Stage.ConfirmWrong);
                 }
             }
             if (errorMsg != null) {
@@ -415,6 +423,7 @@ public class ChooseLockPassword extends PreferenceActivity {
 
         private void showError(String msg, final Stage next) {
             mHeaderText.setText(msg);
+            mHeaderText.announceForAccessibility(mHeaderText.getText());
             Message mesg = mHandler.obtainMessage(MSG_SHOW_ERROR, next);
             mHandler.removeMessages(MSG_SHOW_ERROR);
             mHandler.sendMessageDelayed(mesg, ERROR_MESSAGE_TIMEOUT);
