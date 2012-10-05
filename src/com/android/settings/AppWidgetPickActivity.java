@@ -269,7 +269,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
         // If not specified, we don't filter on any specific
         int featuresFilter = AppWidgetProviderInfo.WIDGET_FEATURES_NONE;
         if (intent.getExtras().containsKey(AppWidgetManager.EXTRA_FEATURES_FILTER)) {
-            featuresFilter = intent.getExtras().getInt(AppWidgetManager.EXTRA_CATEGORY_FILTER);
+            featuresFilter = intent.getExtras().getInt(AppWidgetManager.EXTRA_FEATURES_FILTER);
         }
 
         putInstalledAppWidgets(items, categoryFilter, featuresFilter);
