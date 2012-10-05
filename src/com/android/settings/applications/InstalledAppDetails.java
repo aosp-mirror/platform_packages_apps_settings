@@ -464,7 +464,7 @@ public class InstalledAppDetails extends Fragment
             showIt = false;
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
             showIt = false;
-        } else if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+        } else if (mPackageInfo == null || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             showIt = false;
         } else if (UserHandle.myUserId() != 0) {
             showIt = false;
