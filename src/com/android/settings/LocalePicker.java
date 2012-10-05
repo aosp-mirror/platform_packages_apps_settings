@@ -76,7 +76,7 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
         mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
     }
 
-    public Dialog onCreateDialog(int dialogId) {
+    public Dialog onCreateDialog(final int dialogId) {
         return Utils.buildGlobalChangeWarningDialog(getActivity(),
                 R.string.global_locale_change_title,
                 new Runnable() {
