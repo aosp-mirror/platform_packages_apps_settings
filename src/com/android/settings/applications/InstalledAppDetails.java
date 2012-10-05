@@ -110,6 +110,8 @@ public class InstalledAppDetails extends Fragment
     private ApplicationsState mState;
     private ApplicationsState.Session mSession;
     private ApplicationsState.AppEntry mAppEntry;
+    private boolean mInitialized;
+    private boolean mShowUninstalled;
     private PackageInfo mPackageInfo;
     private CanBeOnSdCardChecker mCanBeOnSdCardChecker;
     private View mRootView;
@@ -767,6 +769,17 @@ public class InstalledAppDetails extends Fragment
         setAppLabelAndIcon(mPackageInfo);
         refreshButtons();
         refreshSizeInfo();
+
+        if (!mInitialized) {
+            // First time init: are we displaying an uninstalled app?
+            mInitialized = true;
+            mShowUninstalled = (mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0;
+        } else if (!mShowUninstalled) {
+            // All other times: if we did not start out with the app uninstalled,
+            // then if it becomes uninstalled we want to go away.
+            return (mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0;
+        }
+
         return true;
     }
 
