@@ -26,18 +26,6 @@
             android:summary="@string/unlock_set_unlock_mode_pattern"
             android:persistent="false"/>
 
-        <PreferenceScreen
-           android:key="choose_lockscreen_status_widget"
-           android:title="@string/choose_lockscreen_status_widget_picker_title"
-           android:summary=""
-           android:persistent="false"/>
-
-        <PreferenceScreen
-           android:key="choose_user_selected_lockscreen_widget"
-           android:title="@string/choose_user_selected_lockscreen_widget_picker_title"
-           android:summary=""
-           android:persistent="false"/>
-
         <CheckBoxPreference
             android:key="visiblepattern"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
@@ -57,6 +45,18 @@
         <CheckBoxPreference
             android:key="unlock_tactile_feedback"
             android:title="@string/lockpattern_settings_enable_tactile_feedback_title"/>
+
+        <PreferenceScreen
+           android:key="choose_lockscreen_status_widget"
+           android:title="@string/choose_lockscreen_status_widget_picker_title"
+           android:summary=""
+           android:persistent="false"/>
+
+        <PreferenceScreen
+           android:key="choose_user_selected_lockscreen_widget"
+           android:title="@string/choose_user_selected_lockscreen_widget_picker_title"
+           android:summary=""
+           android:persistent="false"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
