@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
@@ -173,6 +174,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
 
         private void showError(int msg) {
             mHeaderText.setText(msg);
+            mHeaderText.announceForAccessibility(mHeaderText.getText());
             mPasswordEntry.setText(null);
             mHandler.postDelayed(new Runnable() {
                 public void run() {
