@@ -17,9 +17,7 @@
 package com.android.settings;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
@@ -83,6 +81,7 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
                 R.string.global_locale_change_title,
                 new Runnable() {
                     public void run() {
+                        removeDialog(dialogId);
                         getActivity().onBackPressed();
                         LocalePicker.updateLocale(mTargetLocale);
                     }
