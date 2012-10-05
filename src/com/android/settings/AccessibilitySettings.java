@@ -282,7 +282,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Bundle extras = mDisplayMagnificationPreferenceScreen.getExtras();
         extras.putString(EXTRA_TITLE, getString(
                 R.string.accessibility_screen_magnification_title));
-        extras.putString(EXTRA_SUMMARY, getString(
+        extras.putCharSequence(EXTRA_SUMMARY, getActivity().getResources().getText(
                 R.string.accessibility_screen_magnification_summary));
         extras.putBoolean(EXTRA_CHECKED, Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
@@ -1005,7 +1005,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 getActivity().getActionBar().setTitle(title);
             }
             // Summary.
-            String summary = arguments.getString(EXTRA_SUMMARY);
+            CharSequence summary = arguments.getCharSequence(EXTRA_SUMMARY);
             mSummaryPreference.setSummary(summary);
         }
     }
