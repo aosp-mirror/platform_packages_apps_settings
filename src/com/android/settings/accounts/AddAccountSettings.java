@@ -22,25 +22,18 @@ import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.android.settings.Utils;
-import com.android.settings.R;
 
 import java.io.IOException;
 
 /**
  * Entry point Actiivty for account setup. Works as follows
- * 0) If it is a multi-user system with multiple users, it shows a warning dialog first.
- *    If the user accepts this warning, it moves on to step 1.
+ *
  * 1) When the other Activities launch this Activity, it launches {@link ChooseAccountActivity}
  *    without showing anything.
  * 2) After receiving an account type from ChooseAccountActivity, this Activity launches the
@@ -65,7 +58,6 @@ public class AddAccountSettings extends Activity {
      * application.
      */
     private static final String KEY_CALLER_IDENTITY = "pendingIntent";
-    private static final String KEY_SHOWED_WARNING = "showedWarning";
 
     private static final String TAG = "AccountSettings";
 
@@ -75,8 +67,6 @@ public class AddAccountSettings extends Activity {
     static final String EXTRA_HAS_MULTIPLE_USERS = "hasMultipleUsers";
 
     private static final int CHOOSE_ACCOUNT_REQUEST = 1;
-
-    private static final int DLG_MULTIUSER_WARNING = 1;
 
     private PendingIntent mPendingIntent;
 
@@ -105,57 +95,21 @@ public class AddAccountSettings extends Activity {
     };
 
     private boolean mAddAccountCalled = false;
-    private boolean mShowedMultiuserWarning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mShowedMultiuserWarning = savedInstanceState.getBoolean(KEY_SHOWED_WARNING);
             mAddAccountCalled = savedInstanceState.getBoolean(KEY_ADD_CALLED);
             if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "restored");
         }
 
-        if (!Utils.hasMultipleUsers(this)) {
-            mShowedMultiuserWarning = true;
+        if (mAddAccountCalled) {
+            // We already called add account - maybe the callback was lost.
+            finish();
+            return;
         }
-
-        // Show the multiuser warning dialog first. If that was already shown and accepted,
-        // then show the account type chooser.
-        if (!mShowedMultiuserWarning) {
-            showMultiuserWarning();
-        } else {
-            if (mAddAccountCalled) {
-                // We already called add account - maybe the callback was lost.
-                finish();
-                return;
-            }
-            showChooseAccount();
-        }
-    }
-
-    private void showMultiuserWarning() {
-        showDialog(DLG_MULTIUSER_WARNING);
-    }
-
-    public Dialog onCreateDialog(int dlgId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.add_account_shared_system_warning);
-        builder.setPositiveButton(android.R.string.ok, mDialogClickListener);
-        builder.setNegativeButton(android.R.string.cancel, mDialogClickListener);
-        builder.setOnDismissListener(new OnDismissListener() {
-            public void onDismiss(DialogInterface di) {
-                if (!mShowedMultiuserWarning) {
-                    setResult(RESULT_CANCELED);
-                    finish();
-                }
-            }
-        });
-        return builder.create();
-    }
-
-    private void showChooseAccount() {
         final String[] authorities =
                 getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
         final String[] accountTypes =
@@ -188,7 +142,6 @@ public class AddAccountSettings extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_ADD_CALLED, mAddAccountCalled);
-        outState.putBoolean(KEY_SHOWED_WARNING, mShowedMultiuserWarning);
         if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "saved");
     }
 
@@ -207,17 +160,4 @@ public class AddAccountSettings extends Activity {
                 null /* handler */);
         mAddAccountCalled  = true;
     }
-
-    private OnClickListener mDialogClickListener = new OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            if (which == Dialog.BUTTON_POSITIVE) {
-                mShowedMultiuserWarning = true;
-                showChooseAccount();
-            } else if (which == Dialog.BUTTON_NEGATIVE) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        }
-    };
 }
