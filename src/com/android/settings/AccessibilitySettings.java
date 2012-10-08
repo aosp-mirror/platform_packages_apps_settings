@@ -30,6 +30,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -150,6 +151,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     };
 
+    private final SettingsContentObserver mSettingsContentObserver =
+            new SettingsContentObserver(mHandler);
+
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
                 @Override
@@ -190,6 +194,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         offerInstallAccessibilitySerivceOnce();
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
+        mSettingsContentObserver.register();
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
     }
@@ -199,6 +204,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSettingsPackageMonitor.unregister();
         RotationPolicy.unregisterRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
+        mSettingsContentObserver.unregister();
         super.onPause();
     }
 
@@ -1007,6 +1013,30 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // Summary.
             CharSequence summary = arguments.getCharSequence(EXTRA_SUMMARY);
             mSummaryPreference.setSummary(summary);
+        }
+    }
+
+    private final class SettingsContentObserver extends ContentObserver {
+
+        public SettingsContentObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void register() {
+            getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.ACCESSIBILITY_ENABLED), false, this);
+            getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES), false, this);
+        }
+
+        public void unregister() {
+            getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            loadInstalledServices();
+            updateServicesPreferences();
         }
     }
 }
