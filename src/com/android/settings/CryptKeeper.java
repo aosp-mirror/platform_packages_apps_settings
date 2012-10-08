@@ -245,7 +245,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      */
     private void notifyUser() {
         if (mNotificationCountdown > 0) {
-            Log.d(TAG, "Counting down to notify user..." + mNotificationCountdown);
             --mNotificationCountdown;
         } else if (mAudioManager != null) {
             Log.d(TAG, "Notifying user that we are waiting for input...");
@@ -724,7 +723,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      * Listen to key events so we can disable sounds when we get a keyinput in EditText.
      */
     private void delayAudioNotification() {
-        Log.d(TAG, "User entering password: delay audio notification");
         mNotificationCountdown = 20;
     }
 
