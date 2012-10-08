@@ -241,7 +241,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             mCachedDevice.setName((String) newValue);
         } else if (preference instanceof CheckBoxPreference) {
             LocalBluetoothProfile prof = getProfileOf(preference);
-            onProfileClicked(prof);
+            onProfileClicked(prof, (CheckBoxPreference) preference);
             return false;   // checkbox will update from onDeviceAttributesChanged() callback
         } else {
             return false;
@@ -250,7 +250,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         return true;
     }
 
-    private void onProfileClicked(LocalBluetoothProfile profile) {
+    private void onProfileClicked(LocalBluetoothProfile profile, CheckBoxPreference profilePref) {
         BluetoothDevice device = mCachedDevice.getDevice();
 
         int status = profile.getConnectionStatus(device);
@@ -260,8 +260,14 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         if (isConnected) {
             askDisconnect(getActivity(), profile);
         } else {
-            profile.setPreferred(device, true);
-            mCachedDevice.connectProfile(profile);
+            if (profile.isPreferred(device)) {
+                // profile is preferred but not connected: disable auto-connect
+                profile.setPreferred(device, false);
+                refreshProfilePreference(profilePref, profile);
+            } else {
+                profile.setPreferred(device, true);
+                mCachedDevice.connectProfile(profile);
+            }
         }
     }
 
@@ -356,9 +362,5 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
 
     private void unpairDevice() {
         mCachedDevice.unpair();
-    }
-
-    private boolean getAutoConnect(LocalBluetoothProfile prof) {
-        return prof.isPreferred(mCachedDevice.getDevice());
     }
 }
