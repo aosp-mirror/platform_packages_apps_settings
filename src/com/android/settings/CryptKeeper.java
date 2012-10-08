@@ -247,7 +247,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (mNotificationCountdown > 0) {
             --mNotificationCountdown;
         } else if (mAudioManager != null) {
-            Log.d(TAG, "Notifying user that we are waiting for input...");
             try {
                 // Play the standard keypress sound at full volume. This should be available on
                 // every device. We cannot play a ringtone here because media services aren't
