@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiWatchdogStateMachine;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -81,7 +82,9 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                 getPreferenceScreen().removePreference(poorNetworkDetection);
             } else {
                 poorNetworkDetection.setChecked(Global.getInt(getContentResolver(),
-                        Global.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED, 1) == 1);
+                        Global.WIFI_WATCHDOG_POOR_NETWORK_TEST_ENABLED,
+                        WifiWatchdogStateMachine.DEFAULT_POOR_NETWORK_AVOIDANCE_ENABLED ?
+                        1 : 0) == 1);
             }
         }
 
