@@ -29,6 +29,7 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -447,11 +448,10 @@ public class RunningState {
             } catch (PackageManager.NameNotFoundException e) {
             }
         }
-        
-        boolean updateService(Context context,
-                ActivityManager.RunningServiceInfo service) {
-            final PackageManager pm = context.getPackageManager();
-            
+
+        boolean updateService(Context userContext, ActivityManager.RunningServiceInfo service) {
+            final PackageManager pm = userContext.getPackageManager();
+
             boolean changed = false;
             ServiceItem si = mServices.get(service.service);
             if (si == null) {
@@ -484,7 +484,7 @@ public class RunningState {
                 try {
                     Resources clientr = pm.getResourcesForApplication(service.clientPackage);
                     String label = clientr.getString(service.clientLabel);
-                    si.mDescription = context.getResources().getString(
+                    si.mDescription = userContext.getResources().getString(
                             R.string.service_client_name, label);
                 } catch (PackageManager.NameNotFoundException e) {
                     si.mDescription = null;
@@ -494,7 +494,7 @@ public class RunningState {
                     si.mShownAsStarted = true;
                     changed = true;
                 }
-                si.mDescription = context.getResources().getString(
+                si.mDescription = userContext.getResources().getString(
                         R.string.service_started_by_app);
             }
             
@@ -903,6 +903,15 @@ public class RunningState {
         for (int i=0; i<NS; i++) {
             ActivityManager.RunningServiceInfo si = services.get(i);
 
+            final Context userContext;
+            try {
+                userContext = context.createPackageContextAsUser(
+                        "android", 0, new UserHandle(UserHandle.getUserId(si.uid)));
+            } catch (NameNotFoundException e) {
+                // Should always have "android" package
+                throw new RuntimeException(e);
+            }
+
             // If this service's process is in use at a higher importance
             // due to another process bound to one of its services, then we
             // won't put it in the top-level list of services.  Instead we
@@ -944,7 +953,7 @@ public class RunningState {
             ProcessItem proc = procs.get(si.process);
             if (proc == null) {
                 changed = true;
-                proc = new ProcessItem(context, si.uid, si.process);
+                proc = new ProcessItem(userContext, si.uid, si.process);
                 procs.put(si.process, proc);
             }
             
@@ -965,7 +974,7 @@ public class RunningState {
                 proc.mDependentProcesses.clear();
                 proc.mCurSeq = mSequence;
             }
-            changed |= proc.updateService(context, si);
+            changed |= proc.updateService(userContext, si);
         }
         
         // Now update the map of other processes that are running (but
