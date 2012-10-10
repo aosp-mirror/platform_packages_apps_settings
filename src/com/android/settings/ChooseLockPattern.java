@@ -521,7 +521,6 @@ public class ChooseLockPattern extends PreferenceActivity {
 
             if (lockVirgin) {
                 utils.setVisiblePatternEnabled(true);
-                utils.setTactileFeedbackEnabled(false);
             }
 
             getActivity().setResult(RESULT_FINISHED);
