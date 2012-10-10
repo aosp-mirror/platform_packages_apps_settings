@@ -74,6 +74,16 @@ public class DevelopmentSettings extends PreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
+    /**
+     * Preference file were development settings prefs are stored.
+     */
+    public static final String PREF_FILE = "development";
+
+    /**
+     * Whether to show the development settings to the user.  Default is false.
+     */
+    public static final String PREF_SHOW = "show";
+
     private static final String ENABLE_ADB = "enable_adb";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
@@ -350,6 +360,7 @@ public class DevelopmentSettings extends PreferenceFragment
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
             mLastEnabledState = true;
+            mEnabledSwitch.setChecked(mLastEnabledState);
             setPrefsEnabledState(mLastEnabledState);
         }
     }
