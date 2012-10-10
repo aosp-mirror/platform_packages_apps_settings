@@ -39,6 +39,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -99,7 +100,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     DevicePolicyManager mDPM;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
-    private Preference mUserSelectedWidget;
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
 
@@ -232,31 +232,44 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        mUserSelectedWidget = root.findPreference(KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET);
-        if (mUserSelectedWidget != null) {
+        Preference pickStatusWidget = root.findPreference(KEY_CHOOSE_LOCKSCREEN_STATUS_WIDGET);
+        if (pickStatusWidget != null) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
             int appWidgetId = getStatusAppWidgetId();
             if (appWidgetId == -1) {
-                mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_default));
+                pickStatusWidget.setSummary(getResources().getString(R.string.widget_default));
             } else {
                 AppWidgetProviderInfo appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
                 if (appWidget != null) {
-                    mUserSelectedWidget.setSummary(appWidget.label);
+                    pickStatusWidget.setSummary(appWidget.label);
                 }
+            }
+            // TEMP: disable this for now
+            PreferenceCategory security =
+                    (PreferenceCategory) root.findPreference(KEY_SECURITY_CATEGORY);
+            if (security != null) {
+                security.removePreference(pickStatusWidget);
             }
         }
 
-        mUserSelectedWidget = root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
-        if (mUserSelectedWidget != null) {
+        Preference pickLockscreenWidget =
+                root.findPreference(KEY_CHOOSE_USER_SELECTED_LOCKSCREEN_WIDGET);
+        if (pickLockscreenWidget != null) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
             int appWidgetId = getUserSelectedAppWidgetId();
             if (appWidgetId == -1) {
-                mUserSelectedWidget.setSummary(getResources().getString(R.string.widget_none));
+                pickLockscreenWidget.setSummary(getResources().getString(R.string.widget_none));
             } else {
                 AppWidgetProviderInfo appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
                 if (appWidget != null) {
-                    mUserSelectedWidget.setSummary(appWidget.label);
+                    pickLockscreenWidget.setSummary(appWidget.label);
                 }
+            }
+            // TEMP: disable this for now
+            PreferenceCategory security =
+                    (PreferenceCategory) root.findPreference(KEY_SECURITY_CATEGORY);
+            if (security != null) {
+                security.removePreference(pickLockscreenWidget);
             }
         }
 
