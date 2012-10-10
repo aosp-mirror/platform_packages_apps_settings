@@ -71,7 +71,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_BIOMETRIC_WEAK_LIVELINESS = "biometric_weak_liveliness";
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
-    private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
@@ -105,7 +104,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private CheckBoxPreference mBiometricWeakLiveliness;
     private CheckBoxPreference mVisiblePattern;
-    private CheckBoxPreference mTactileFeedback;
 
     private CheckBoxPreference mShowPassword;
 
@@ -219,16 +217,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     root.findPreference(KEY_SECURITY_CATEGORY);
             if (securityCategory != null && mVisiblePattern != null) {
                 securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
-            }
-        }
-
-        // tactile feedback. Should be common to all unlock preference screens.
-        mTactileFeedback = (CheckBoxPreference) root.findPreference(KEY_TACTILE_FEEDBACK_ENABLED);
-        if (!((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
-            PreferenceGroup securityCategory = (PreferenceGroup)
-                    root.findPreference(KEY_SECURITY_CATEGORY);
-            if (securityCategory != null && mTactileFeedback != null) {
-                securityCategory.removePreference(mTactileFeedback);
             }
         }
 
@@ -469,9 +457,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (mVisiblePattern != null) {
             mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
         }
-        if (mTactileFeedback != null) {
-            mTactileFeedback.setChecked(lockPatternUtils.isTactileFeedbackEnabled());
-        }
         if (mPowerButtonInstantlyLocks != null) {
             mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks());
         }
@@ -608,8 +593,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
             lockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
-        } else if (KEY_TACTILE_FEEDBACK_ENABLED.equals(key)) {
-            lockPatternUtils.setTactileFeedbackEnabled(isToggled(preference));
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
         } else if (preference == mShowPassword) {
