@@ -34,6 +34,7 @@ import android.accounts.OnAccountsUpdateListener;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -121,6 +122,9 @@ public class Settings extends PreferenceActivity
             R.id.accessibility_settings
     };
 
+    private SharedPreferences mDevelopmentPreferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener mDevelopmentPreferencesListener;
+
     // TODO: Update Call Settings based on airplane mode state.
 
     protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
@@ -138,6 +142,9 @@ public class Settings extends PreferenceActivity
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, null);
+
+        mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                Context.MODE_PRIVATE);
 
         getMetaData();
         mInLocalHeaderSwitch = true;
@@ -195,6 +202,15 @@ public class Settings extends PreferenceActivity
     public void onResume() {
         super.onResume();
 
+        mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                invalidateHeaders();
+            }
+        };
+        mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
+                mDevelopmentPreferencesListener);
+
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).resume();
@@ -210,6 +226,10 @@ public class Settings extends PreferenceActivity
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).pause();
         }
+
+        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
+                mDevelopmentPreferencesListener);
+        mDevelopmentPreferencesListener = null;
     }
 
     @Override
@@ -390,7 +410,12 @@ public class Settings extends PreferenceActivity
     }
 
     private void updateHeaderList(List<Header> target) {
+        final boolean showDev = mDevelopmentPreferences.getBoolean(
+                DevelopmentSettings.PREF_SHOW,
+                android.os.Build.TYPE.equals("eng"));
         int i = 0;
+
+        mHeaderIndexMap.clear();
         while (i < target.size()) {
             Header header = target.get(i);
             // Ids are integers, so downcasting
@@ -400,12 +425,12 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
-                    target.remove(header);
+                    target.remove(i);
                 }
             } else if (id == R.id.bluetooth_settings) {
                 // Remove Bluetooth Settings if Bluetooth service is not available.
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
-                    target.remove(header);
+                    target.remove(i);
                 }
             } else if (id == R.id.data_usage_settings) {
                 // Remove data usage when kernel module not enabled
@@ -413,7 +438,7 @@ public class Settings extends PreferenceActivity
                         .asInterface(ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
                 try {
                     if (!netManager.isBandwidthControlEnabled()) {
-                        target.remove(header);
+                        target.remove(i);
                     }
                 } catch (RemoteException e) {
                     // ignored
@@ -425,12 +450,17 @@ public class Settings extends PreferenceActivity
                 if (!UserHandle.MU_ENABLED
                         || !UserManager.supportsMultipleUsers()
                         || Utils.isMonkeyRunning()) {
-                    target.remove(header);
+                    target.remove(i);
+                }
+            } else if (id == R.id.development_settings) {
+                if (!showDev) {
+                    target.remove(i);
                 }
             }
+
             if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
                     && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
-                target.remove(header);
+                target.remove(i);
             }
 
             // Increment if the current one wasn't removed by the Utils code.
