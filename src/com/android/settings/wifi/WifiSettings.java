@@ -332,6 +332,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     activity.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null
                     && connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                activity.setResult(Activity.RESULT_OK);
                 activity.finish();
                 return;
             }
@@ -837,6 +838,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (mAutoFinishOnConnection && info.isConnected()) {
                 Activity activity = getActivity();
                 if (activity != null) {
+                    activity.setResult(Activity.RESULT_OK);
                     activity.finish();
                 }
                 return;
