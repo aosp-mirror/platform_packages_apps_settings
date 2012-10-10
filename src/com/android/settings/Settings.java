@@ -271,9 +271,11 @@ public class Settings extends PreferenceActivity
         super.onNewIntent(intent);
 
         // If it is not launched from history, then reset to top-level
-        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
-                && mFirstHeader != null && !onIsHidingHeaders() && onIsMultiPane()) {
-            switchToHeaderLocal(mFirstHeader);
+        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0) {
+            if (mFirstHeader != null && !onIsHidingHeaders() && onIsMultiPane()) {
+                switchToHeaderLocal(mFirstHeader);
+            }
+            getListView().setSelectionFromTop(0, 0);
         }
     }
 
@@ -282,7 +284,9 @@ public class Settings extends PreferenceActivity
             Integer index = mHeaderIndexMap.get(id);
             if (index != null) {
                 getListView().setItemChecked(index, true);
-                getListView().smoothScrollToPosition(index);
+                if (isMultiPane()) {
+                    getListView().smoothScrollToPosition(index);
+                }
             }
         }
     }
