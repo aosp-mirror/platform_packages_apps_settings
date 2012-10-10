@@ -23,6 +23,7 @@ import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -125,6 +126,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String EXTRA_DISABLE_WARNING_MESSAGE = "disable_warning_message";
     private static final String EXTRA_SETTINGS_TITLE = "settings_title";
     private static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
+    private static final String EXTRA_SERVICE_COMPONENT_NAME = "service_component_name";
 
     // Dialog IDs.
     private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 1;
@@ -152,7 +154,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     };
 
     private final SettingsContentObserver mSettingsContentObserver =
-            new SettingsContentObserver(mHandler);
+            new SettingsContentObserver(mHandler) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            loadInstalledServices();
+            updateServicesPreferences();
+        }
+    };
 
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
@@ -194,7 +202,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         offerInstallAccessibilitySerivceOnce();
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
-        mSettingsContentObserver.register();
+        mSettingsContentObserver.register(getContentResolver());
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
     }
@@ -204,7 +212,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSettingsPackageMonitor.unregister();
         RotationPolicy.unregisterRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
-        mSettingsContentObserver.unregister();
+        mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
     }
 
@@ -430,6 +438,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         new ComponentName(info.getResolveInfo().serviceInfo.packageName,
                                 settingsClassName).flattenToString());
             }
+
+            extras.putString(EXTRA_SERVICE_COMPONENT_NAME, componentName.flattenToString());
 
             mServicesCategory.addPreference(preference);
         }
@@ -689,12 +699,37 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         private static final int DIALOG_ID_ENABLE_WARNING = 1;
         private static final int DIALOG_ID_DISABLE_WARNING = 2;
 
+        private final SettingsContentObserver mSettingsContentObserver =
+                new SettingsContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                String settingValue = Settings.Secure.getString(getContentResolver(),
+                        Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+                final boolean enabled = settingValue.contains(mComponentName);
+                mToggleSwitch.setCheckedInternal(enabled);
+            }
+        };
+
         private CharSequence mEnableWarningTitle;
         private CharSequence mEnableWarningMessage;
         private CharSequence mDisableWarningTitle;
         private CharSequence mDisableWarningMessage;
 
+        private String mComponentName;
+
         private int mShownDialogId;
+
+        @Override
+        public void onResume() {
+            mSettingsContentObserver.register(getContentResolver());
+            super.onResume();
+        }
+
+        @Override
+        public void onPause() {
+            mSettingsContentObserver.unregister(getContentResolver());
+            super.onPause();
+        }
 
         @Override
         public void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -851,6 +886,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // Disable warning message.
             mDisableWarningMessage = arguments.getString(
                     AccessibilitySettings.EXTRA_DISABLE_WARNING_MESSAGE);
+            // Component name.
+            mComponentName = arguments.getString(EXTRA_SERVICE_COMPONENT_NAME);
         }
     }
 
@@ -1016,27 +1053,24 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private final class SettingsContentObserver extends ContentObserver {
+    private static abstract class SettingsContentObserver extends ContentObserver {
 
         public SettingsContentObserver(Handler handler) {
             super(handler);
         }
 
-        public void register() {
-            getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
+        public void register(ContentResolver contentResolver) {
+            contentResolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.ACCESSIBILITY_ENABLED), false, this);
-            getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
+            contentResolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES), false, this);
         }
 
-        public void unregister() {
-            getContentResolver().unregisterContentObserver(this);
+        public void unregister(ContentResolver contentResolver) {
+            contentResolver.unregisterContentObserver(this);
         }
 
         @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            loadInstalledServices();
-            updateServicesPreferences();
-        }
+        public abstract void onChange(boolean selfChange, Uri uri);
     }
 }
