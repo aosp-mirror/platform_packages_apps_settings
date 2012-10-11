@@ -458,7 +458,8 @@ public class Settings extends PreferenceActivity
                 }
             }
 
-            if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
+            if (target.get(i) == header
+                    && UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
                     && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
                 target.remove(i);
             }
