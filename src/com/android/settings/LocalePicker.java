@@ -55,6 +55,7 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
             mTargetLocale = locale;
             showDialog(DLG_SHOW_GLOBAL_WARNING);
         } else {
+            getActivity().onBackPressed();
             LocalePicker.updateLocale(locale);
         }
     }
