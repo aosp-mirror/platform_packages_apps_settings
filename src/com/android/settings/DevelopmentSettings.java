@@ -56,6 +56,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
@@ -1111,6 +1112,9 @@ public class DevelopmentSettings extends PreferenceFragment
                     try {
                         obj.transact(IBinder.SYSPROPS_TRANSACTION, data, null, 0);
                     } catch (RemoteException e) {
+                    } catch (Exception e) {
+                        Log.i("DevSettings", "Somone wrote a bad service '" + service
+                                + "' that doesn't like to be poked: " + e);
                     }
                     data.recycle();
                 }
