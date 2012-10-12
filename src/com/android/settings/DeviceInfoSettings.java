@@ -64,6 +64,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
 
+    static final int TAPS_TO_BE_A_DEVELOPER = 7;
+
     long[] mHits = new long[3];
     int mDevHitCountdown;
     Toast mDevHitToast;
@@ -152,7 +154,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         super.onResume();
         mDevHitCountdown = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
-                        android.os.Build.TYPE.equals("eng")) ? -1 : 7;
+                        android.os.Build.TYPE.equals("eng")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
         mDevHitToast = null;
     }
 
@@ -184,7 +186,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                     mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_on,
                             Toast.LENGTH_LONG);
                     mDevHitToast.show();
-                } else if (mDevHitCountdown > 0) {
+                } else if (mDevHitCountdown > 0
+                        && mDevHitCountdown < (TAPS_TO_BE_A_DEVELOPER-2)) {
                     if (mDevHitToast != null) {
                         mDevHitToast.cancel();
                     }
