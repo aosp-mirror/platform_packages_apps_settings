@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
@@ -391,7 +392,8 @@ public class Settings extends PreferenceActivity
                 ManageAccountsSettings.class.getName().equals(fragmentName) ||
                 VpnSettings.class.getName().equals(fragmentName) ||
                 SecuritySettings.class.getName().equals(fragmentName) ||
-                InstalledAppDetails.class.getName().equals(fragmentName)) {
+                InstalledAppDetails.class.getName().equals(fragmentName) ||
+                ChooseLockGenericFragment.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
         }
 
