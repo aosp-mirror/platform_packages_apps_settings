@@ -116,6 +116,8 @@ public class InstalledAppDetails extends Fragment
     private CanBeOnSdCardChecker mCanBeOnSdCardChecker;
     private View mRootView;
     private Button mUninstallButton;
+    private View mMoreControlButtons;
+    private Button mSpecialDisableButton;
     private boolean mMoveInProgress = false;
     private boolean mUpdatedSysApp = false;
     private Button mActivitiesButton;
@@ -140,7 +142,9 @@ public class InstalledAppDetails extends Fragment
     private CompoundButton mNotificationSwitch;
 
     private PackageMoveObserver mPackageMoveObserver;
-    
+
+    private boolean mDisableAfterUninstall;
+
     private boolean mHaveSizes = false;
     private long mLastCodeSize = -1;
     private long mLastDataSize = -1;
@@ -174,6 +178,7 @@ public class InstalledAppDetails extends Fragment
     private static final int DLG_MOVE_FAILED = DLG_BASE + 6;
     private static final int DLG_DISABLE = DLG_BASE + 7;
     private static final int DLG_DISABLE_NOTIFICATIONS = DLG_BASE + 8;
+    private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 9;
 
     // Menu identifiers
     public static final int UNINSTALL_ALL_USERS_MENU = 1;
@@ -309,37 +314,49 @@ public class InstalledAppDetails extends Fragment
         }
     }
 
+    private boolean handleDisableable(Button button) {
+        boolean disableable = false;
+        try {
+            // Try to prevent the user from bricking their phone
+            // by not allowing disabling of apps signed with the
+            // system cert and any launcher app in the system.
+            PackageInfo sys = mPm.getPackageInfo("android",
+                    PackageManager.GET_SIGNATURES);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setPackage(mAppEntry.info.packageName);
+            List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
+            if ((homes != null && homes.size() > 0) || isThisASystemPackage()) {
+                // Disable button for core system applications.
+                button.setText(R.string.disable_text);
+            } else if (mAppEntry.info.enabled) {
+                button.setText(R.string.disable_text);
+                disableable = true;
+            } else {
+                button.setText(R.string.enable_text);
+                disableable = true;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Unable to get package info", e);
+        }
+        return disableable;
+    }
+
     private void initUninstallButtons() {
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         boolean enabled = true;
         if (mUpdatedSysApp) {
             mUninstallButton.setText(R.string.app_factory_reset);
-        } else {
+            boolean specialDisable = false;
             if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                enabled = false;
-                try {
-                    // Try to prevent the user from bricking their phone
-                    // by not allowing disabling of apps signed with the
-                    // system cert and any launcher app in the system.
-                    PackageInfo sys = mPm.getPackageInfo("android",
-                            PackageManager.GET_SIGNATURES);
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setPackage(mAppEntry.info.packageName);
-                    List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
-                    if ((homes != null && homes.size() > 0) || isThisASystemPackage()) {
-                        // Disable button for core system applications.
-                        mUninstallButton.setText(R.string.disable_text);
-                    } else if (mAppEntry.info.enabled) {
-                        mUninstallButton.setText(R.string.disable_text);
-                        enabled = true;
-                    } else {
-                        mUninstallButton.setText(R.string.enable_text);
-                        enabled = true;
-                    }
-                } catch (PackageManager.NameNotFoundException e) {
-                    Log.w(TAG, "Unable to get package info", e);
-                }
+                specialDisable = handleDisableable(mSpecialDisableButton);
+                mSpecialDisableButton.setOnClickListener(this);
+            }
+            mMoreControlButtons.setVisibility(specialDisable ? View.VISIBLE : View.GONE);
+        } else {
+            mMoreControlButtons.setVisibility(View.GONE);
+            if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                enabled = handleDisableable(mUninstallButton);
             } else if ((mPackageInfo.applicationInfo.flags
                     & ApplicationInfo.FLAG_INSTALLED) == 0) {
                 mUninstallButton.setText(R.string.uninstall_text);
@@ -428,6 +445,12 @@ public class InstalledAppDetails extends Fragment
         mUninstallButton = (Button)btnPanel.findViewById(R.id.right_button);
         mForceStopButton.setEnabled(false);
         
+        // Get More Control button panel
+        mMoreControlButtons = view.findViewById(R.id.more_control_buttons_panel);
+        mMoreControlButtons.findViewById(R.id.left_button).setVisibility(View.INVISIBLE);
+        mSpecialDisableButton = (Button)mMoreControlButtons.findViewById(R.id.right_button);
+        mMoreControlButtons.setVisibility(View.GONE);
+        
         // Initialize clear data and move install location buttons
         View data_buttons_panel = view.findViewById(R.id.data_buttons_panel);
         mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
@@ -478,7 +501,7 @@ public class InstalledAppDetails extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
         if (menuId == UNINSTALL_ALL_USERS_MENU) {
-            uninstallPkg(mAppEntry.info.packageName, true);
+            uninstallPkg(mAppEntry.info.packageName, true, false);
             return true;
         }
         return false;
@@ -488,6 +511,20 @@ public class InstalledAppDetails extends Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_UNINSTALL) {
+            if (mDisableAfterUninstall) {
+                mDisableAfterUninstall = false;
+                try {
+                    ApplicationInfo ainfo = getActivity().getPackageManager().getApplicationInfo(
+                            mAppEntry.info.packageName, PackageManager.GET_UNINSTALLED_PACKAGES
+                            | PackageManager.GET_DISABLED_COMPONENTS);
+                    if ((ainfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
+                        new DisableChanger(this, mAppEntry.info,
+                                PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
+                                .execute((Object)null);
+                    }
+                } catch (NameNotFoundException e) {
+                }
+            }
             if (!refreshUi()) {
                 setIntentAndFinish(true, true);
             }
@@ -777,7 +814,14 @@ public class InstalledAppDetails extends Fragment
         } else if (!mShowUninstalled) {
             // All other times: if we did not start out with the app uninstalled,
             // then if it becomes uninstalled we want to go away.
-            return (mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0;
+            try {
+                ApplicationInfo ainfo = getActivity().getPackageManager().getApplicationInfo(
+                        mAppEntry.info.packageName, PackageManager.GET_UNINSTALLED_PACKAGES
+                        | PackageManager.GET_DISABLED_COMPONENTS);
+                return (ainfo.flags&ApplicationInfo.FLAG_INSTALLED) != 0;
+            } catch (NameNotFoundException e) {
+                return false;
+            }
         }
 
         return true;
@@ -924,6 +968,7 @@ public class InstalledAppDetails extends Fragment
             mMoveAppButton.setText(R.string.moving);
             mMoveAppButton.setEnabled(false);
             mUninstallButton.setEnabled(false);
+            mSpecialDisableButton.setEnabled(false);
         }
     }
 
@@ -1015,7 +1060,8 @@ public class InstalledAppDetails extends Fragment
                             new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Clear user data here
-                            getOwner().uninstallPkg(getOwner().mAppEntry.info.packageName, false);
+                            getOwner().uninstallPkg(getOwner().mAppEntry.info.packageName,
+                                    false, false);
                         }
                     })
                     .setNegativeButton(R.string.dlg_cancel, null)
@@ -1106,17 +1152,33 @@ public class InstalledAppDetails extends Fragment
                         }
                     })
                     .create();
+                case DLG_SPECIAL_DISABLE:
+                    return new AlertDialog.Builder(getActivity())
+                    .setTitle(getActivity().getText(R.string.app_special_disable_dlg_title))
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
+                    .setMessage(getActivity().getText(R.string.app_special_disable_dlg_text))
+                    .setPositiveButton(R.string.dlg_ok,
+                            new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Clear user data here
+                            getOwner().uninstallPkg(getOwner().mAppEntry.info.packageName,
+                                    false, true);
+                        }
+                    })
+                    .setNegativeButton(R.string.dlg_cancel, null)
+                    .create();
             }
             throw new IllegalArgumentException("unknown id " + id);
         }
     }
 
-    private void uninstallPkg(String packageName, boolean allUsers) {
+    private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
          // Create new intent to launch Uninstaller activity
         Uri packageURI = Uri.parse("package:"+packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         startActivityForResult(uninstallIntent, REQUEST_UNINSTALL);
+        mDisableAfterUninstall = andDisable;
     }
 
     private void forceStopPackage(String pkgName) {
@@ -1230,9 +1292,11 @@ public class InstalledAppDetails extends Fragment
                     } catch (NameNotFoundException e) {
                     }
                 } else {
-                    uninstallPkg(packageName, false);
+                    uninstallPkg(packageName, false, false);
                 }
             }
+        } else if(v == mSpecialDisableButton) {
+            showDialogInner(DLG_SPECIAL_DISABLE, 0);
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
             try {
