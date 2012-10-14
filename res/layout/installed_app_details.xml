@@ -49,6 +49,11 @@
                 layout="@layout/two_buttons_panel"
                 android:id="@+id/control_buttons_panel"/>
 
+            <!-- Force stop and uninstall buttons -->
+            <include
+                layout="@layout/two_buttons_panel"
+                android:id="@+id/more_control_buttons_panel"/>
+
             <!-- Ban notifications for this package -->
             <CheckBox android:id="@+id/notification_switch"
                 android:layout_width="wrap_content"
