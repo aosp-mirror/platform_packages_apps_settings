@@ -25,44 +25,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
 >
-
-    <com.android.internal.widget.DigitalClock android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dip"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dip"
-        >
-
-        <!-- Because we can't have multi-tone fonts, we render two TextViews, one on
-        top of the other. Hence the redundant layout... -->
-        <TextView android:id="@*android:id/timeDisplayBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:ellipsize="none"
-            android:textSize="@dimen/crypt_clock_size"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/crypt_keeper_clock_background"
-            android:layout_marginBottom="6dip"
-            />
-
-        <TextView android:id="@*android:id/timeDisplayForeground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:ellipsize="none"
-            android:textSize="@dimen/crypt_clock_size"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/crypt_keeper_clock_foreground"
-            android:layout_alignStart="@*android:id/timeDisplayBackground"
-            android:layout_alignTop="@*android:id/timeDisplayBackground"
-            android:layout_marginBottom="6dip"
-            />
-
-    </com.android.internal.widget.DigitalClock>
-
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
