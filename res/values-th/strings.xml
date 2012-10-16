@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"ไม่"</string>
     <string name="create" msgid="3578857613172647409">"สร้าง"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ไม่ทราบ"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"คุณเหลืออีกเพียง <xliff:g id="STEP_COUNT">%1$d</xliff:g> ขั้นตอนเพื่อเป็นนักพัฒนาซอฟต์แวร์"</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"ตอนนี้คุณเป็นนักพัฒนาซอฟต์แวร์แล้ว!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"ไม่จำเป็น คุณเป็นนักพัฒนาซอฟต์แวร์อยู่แล้ว"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"ระบบไร้สายและเครือข่าย"</string>
     <string name="header_category_device" msgid="5781174212691167553">"อุปกรณ์"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"ส่วนบุคคล"</string>
@@ -1145,6 +1142,10 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"เปลี่ยนตำแหน่งติดตั้งที่ต้องการสำหรับแอปพลิเคชันใหม่"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"ปิดแอปพลิเคชันในตัวหรือไม่"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"หากคุณปิดใช้งานแอปพลิเคชันในตัว แอปพลิเคชันอื่นๆ อาจทำงานผิดปกติได้"</string>
+    <!-- no translation found for app_special_disable_dlg_title (2690148680327142674) -->
+    <skip />
+    <!-- no translation found for app_special_disable_dlg_text (3447657419284854195) -->
+    <skip />
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"ปิดการแจ้งเตือนหรือไม่"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"หากคุณปิดการแจ้งเตือนสำหรับแอปพลิเคชันนี้ คุณอาจพลาดการแจ้งเตือนและการอัปเดตที่สำคัญ"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"การใช้ที่เก็บข้อมูล"</string>
@@ -1311,8 +1312,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"ท่าทางสัมผัสการขยาย"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"เมื่อเปิดคุณลักษณะนี้ คุณสามารถย่อและขยายด้วยการแตะสามครั้งบนหน้าจอ"\n\n"ขณะที่ขยายอยู่ คุณสามารถ:"\n<ul><li>"แพน: ใช้อย่างน้อยสองนิ้วลากผ่านหน้าจอ"</li>\n<li>"ปรับระดับการย่อ/ขยาย: บีบหรือแยกอย่างน้อยสองนิ้วเพื่อปรับระดับ"</li></ul>\n\n"คุณยังสามารถขยายสิ่งที่นิ้วคุณแตะอยู่ชั่วคราวได้ด้วยการแตะสามครั้งค้างไว้ เมื่อขยายแล้ว คุณสามารถใช้นิ้วลากเพื่อดูส่วนต่างๆ ของหน้าจอได้ด้วย ยกนิ้วขึ้นเพื่อกลับไปยังสถานะก่อนหน้า"\n\n"หมายเหตุ: การแตะสามครั้งเพื่อขยายใช้ได้กับทุกส่วนยกเว้นแป้นพิมพ์และแถบนำทาง"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"ทางลัดสำหรับการเข้าถึง"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"เปิด"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"ปิด"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"เมื่อเปิดคุณลักษณะนี้ไว้ คุณจะสามารถเปิดใช้งานคุณลักษณะการเข้าถึงได้อย่างรวดเร็วในสองขั้นตอน:"\n\n"ขั้นตอนที่ 1: กดปุ่มเปิด/ปิดค้างไว้จนกว่าจะได้ยินเสียงหรือรู้สึกว่าอุปกรณ์สั่น"\n\n"ขั้นตอนที่ 2: ใช้สองนิ้วแตะค้างไว้จนกว่าจะได้ยินเสียงยืนยัน"\n\n"หากมีผู้ใช้อุปกรณ์หลายคน การใช้ทางลัดนี้ในหน้าจอล็อกจะเป็นการเปิดใช้งานการเข้าถึงชั่วคราวจนกว่าจะปลดล็อกอุปกรณ์"</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"ข้อความขนาดใหญ่"</string>
@@ -1661,6 +1661,10 @@
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"การวางซ้อนหน้าจอที่แสดงการใช้ CPU ในปัจจุบัน"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"เร่งการแสดงผลของ GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"ต้องใช้ GPU สำหรับการวาดภาพ 2 มิติ"</string>
+    <!-- no translation found for force_msaa (7920323238677284387) -->
+    <skip />
+    <!-- no translation found for force_msaa_summary (9123553203895817537) -->
+    <skip />
     <string name="track_frame_time" msgid="6146354853663863443">"การแสดงผล GPU ตามโปรไฟล์"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"วัดเวลาที่ใช้แสดงผลใน adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"ขนาดหน้าต่างภาพเคลื่อนไหว"</string>
