@@ -93,6 +93,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String ENFORCE_READ_EXTERNAL = "enforce_read_external";
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
+    private static final String MSAA_PROPERTY = "debug.egl.force_msaa";
     private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
 
     private static final String DEBUG_APP_KEY = "debug_app";
@@ -105,6 +106,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
+    private static final String FORCE_MSAA_KEY = "force_msaa";
     private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
@@ -158,6 +160,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mDisableOverlays;
     private CheckBoxPreference mShowCpuUsage;
     private CheckBoxPreference mForceHardwareUi;
+    private CheckBoxPreference mForceMsaa;
     private CheckBoxPreference mTrackFrameTime;
     private CheckBoxPreference mShowHwScreenUpdates;
     private CheckBoxPreference mShowHwLayersUpdates;
@@ -224,6 +227,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mDisableOverlays = findAndInitCheckboxPref(DISABLE_OVERLAYS_KEY);
         mShowCpuUsage = findAndInitCheckboxPref(SHOW_CPU_USAGE_KEY);
         mForceHardwareUi = findAndInitCheckboxPref(FORCE_HARDWARE_UI_KEY);
+        mForceMsaa = findAndInitCheckboxPref(FORCE_MSAA_KEY);
         mTrackFrameTime = findAndInitCheckboxPref(TRACK_FRAME_TIME_KEY);
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
@@ -393,6 +397,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateFlingerOptions();
         updateCpuUsageOptions();
         updateHardwareUiOptions();
+        updateMsaaOptions();
         updateTrackFrameTimeOptions();
         updateShowHwScreenUpdatesOptions();
         updateShowHwLayersUpdatesOptions();
@@ -647,6 +652,15 @@ public class DevelopmentSettings extends PreferenceFragment
     
     private void writeHardwareUiOptions() {
         SystemProperties.set(HARDWARE_UI_PROPERTY, mForceHardwareUi.isChecked() ? "true" : "false");
+        pokeSystemProperties();
+    }
+
+    private void updateMsaaOptions() {
+        updateCheckBox(mForceMsaa, SystemProperties.getBoolean(MSAA_PROPERTY, false));
+    }
+
+    private void writeMsaaOptions() {
+        SystemProperties.set(MSAA_PROPERTY, mForceMsaa.isChecked() ? "true" : "false");
         pokeSystemProperties();
     }
 
@@ -987,6 +1001,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowAllANRsOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
+        } else if (preference == mForceMsaa) {
+            writeMsaaOptions();
         } else if (preference == mTrackFrameTime) {
             writeTrackFrameTimeOptions();
         } else if (preference == mShowHwScreenUpdates) {
