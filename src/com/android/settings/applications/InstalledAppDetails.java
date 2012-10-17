@@ -491,7 +491,7 @@ public class InstalledAppDetails extends Fragment
             showIt = false;
         } else if (UserHandle.myUserId() != 0) {
             showIt = false;
-        } else if (mUserManager.getUsers().size() < 1) {
+        } else if (mUserManager.getUsers().size() < 2) {
             showIt = false;
         }
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
