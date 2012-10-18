@@ -284,11 +284,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateScreenSaverSummary() {
-        int summaryResId = DreamSettings.getSummaryResource(getActivity());
-        if (summaryResId > 0)
-            mScreenSaverPreference.setSummary(summaryResId);
-        else
-            mScreenSaverPreference.setSummary("");
+        if (mScreenSaverPreference != null) {
+            mScreenSaverPreference.setSummary(
+                    DreamSettings.getSummaryTextWithDreamName(getActivity()));
+        }
     }
 
     private void updateWifiDisplaySummary() {

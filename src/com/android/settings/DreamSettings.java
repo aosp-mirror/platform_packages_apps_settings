@@ -149,7 +149,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
         // create "when to dream" overflow menu item
         MenuItem whenToDream = createMenuItem(menu,
                 R.string.screensaver_settings_when_to_dream,
-                MenuItem.SHOW_AS_ACTION_NEVER,
+                MenuItem.SHOW_AS_ACTION_IF_ROOM,
                 isEnabled,
                 new Runnable() {
                     @Override
@@ -245,6 +245,16 @@ public class DreamSettings extends SettingsPreferenceFragment {
                 : 0;
     }
 
+    public static CharSequence getSummaryTextWithDreamName(Context context) {
+        DreamBackend backend = new DreamBackend(context);
+        boolean isEnabled = backend.isEnabled();
+        if (!isEnabled) {
+            return context.getString(R.string.screensaver_settings_summary_off);
+        } else {
+            return backend.getActiveDreamName();
+        }
+    }
+
     private void refreshFromBackend() {
         logd("refreshFromBackend()");
         mRefreshing = true;
@@ -306,7 +316,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
             ImageView settingsButton = (ImageView) row.findViewById(android.R.id.button2);
             settingsButton.setVisibility(showSettings ? View.VISIBLE : View.INVISIBLE);
-            settingsButton.setAlpha(dreamInfo.isActive ? 1f : 0.7f);
+            settingsButton.setAlpha(dreamInfo.isActive ? 1f : 0.33f);
             settingsButton.setEnabled(dreamInfo.isActive);
             settingsButton.setOnClickListener(new OnClickListener(){
                 @Override

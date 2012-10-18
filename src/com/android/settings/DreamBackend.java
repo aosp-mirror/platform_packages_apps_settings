@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
@@ -114,6 +115,22 @@ public class DreamBackend {
             Log.w(TAG, "Failed to get default dream", e);
             return null;
         }
+    }
+
+    public CharSequence getActiveDreamName() {
+        ComponentName cn = getActiveDream();
+        if (cn != null) {
+            PackageManager pm = mContext.getPackageManager();
+            try {
+                ServiceInfo ri = pm.getServiceInfo(cn, 0);
+                if (ri != null) {
+                    return ri.loadLabel(pm);
+                }
+            } catch (PackageManager.NameNotFoundException exc) {
+                return null; // uninstalled?
+            }
+        }
+        return null;
     }
 
     public boolean isEnabled() {
