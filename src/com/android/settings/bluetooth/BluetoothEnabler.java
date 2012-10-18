@@ -37,7 +37,7 @@ import com.android.settings.WirelessSettings;
 public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeListener {
     private final Context mContext;
     private Switch mSwitch;
-    private boolean mValidListener;
+
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
 
@@ -52,7 +52,6 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
     public BluetoothEnabler(Context context, Switch switch_) {
         mContext = context;
         mSwitch = switch_;
-        mValidListener = false;
 
         LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
         if (manager == null) {
@@ -75,10 +74,7 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         handleStateChanged(mLocalAdapter.getBluetoothState());
 
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        synchronized(this) {
-            mSwitch.setOnCheckedChangeListener(this);
-            mValidListener = true;
-        }
+        mSwitch.setOnCheckedChangeListener(this);
     }
 
     public void pause() {
@@ -87,26 +83,20 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         }
 
         mContext.unregisterReceiver(mReceiver);
-        synchronized(this) {
-            mSwitch.setOnCheckedChangeListener(null);
-            mValidListener = false;
-        }
+        mSwitch.setOnCheckedChangeListener(null);
     }
 
     public void setSwitch(Switch switch_) {
         if (mSwitch == switch_) return;
+        mSwitch.setOnCheckedChangeListener(null);
+        mSwitch = switch_;
+        mSwitch.setOnCheckedChangeListener(this);
 
         int bluetoothState = BluetoothAdapter.STATE_OFF;
         if (mLocalAdapter != null) bluetoothState = mLocalAdapter.getBluetoothState();
         boolean isOn = bluetoothState == BluetoothAdapter.STATE_ON;
         boolean isOff = bluetoothState == BluetoothAdapter.STATE_OFF;
-
-        synchronized(this) {
-            mSwitch.setOnCheckedChangeListener(null);
-            mSwitch = switch_;
-            mSwitch.setOnCheckedChangeListener(null);
-        }
-        setChecked(isOn);
+        mSwitch.setChecked(isOn);
         mSwitch.setEnabled(isOn || isOff);
     }
 
@@ -131,31 +121,19 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
                 mSwitch.setEnabled(false);
                 break;
             case BluetoothAdapter.STATE_ON:
-                setChecked(true);
+                mSwitch.setChecked(true);
                 mSwitch.setEnabled(true);
                 break;
             case BluetoothAdapter.STATE_TURNING_OFF:
                 mSwitch.setEnabled(false);
                 break;
             case BluetoothAdapter.STATE_OFF:
-                setChecked(false);
+                mSwitch.setChecked(false);
                 mSwitch.setEnabled(true);
                 break;
             default:
-                setChecked(false);
+                mSwitch.setChecked(false);
                 mSwitch.setEnabled(true);
-        }
-    }
-
-    private synchronized void setChecked(boolean isChecked) {
-        // set listener to null, so onCheckedChanged won't be called
-        // if the checked status on Switch isn't changed by user click
-        if (mValidListener) {
-            mSwitch.setOnCheckedChangeListener(null);
-        }
-        mSwitch.setChecked(isChecked);
-        if (mValidListener) {
-            mSwitch.setOnCheckedChangeListener(this);
         }
     }
 }
