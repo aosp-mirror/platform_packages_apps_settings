@@ -104,7 +104,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
                 && getResources().getBoolean(
-                        com.android.internal.R.bool.config_enableDreams) == false) {
+                        com.android.internal.R.bool.config_dreamsSupported) == false) {
             getPreferenceScreen().removePreference(mScreenSaverPreference);
         }
         
