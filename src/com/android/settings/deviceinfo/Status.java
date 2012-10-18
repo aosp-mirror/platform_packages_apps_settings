@@ -332,8 +332,11 @@ public class Status extends PreferenceActivity {
 
     private void updateNetworkType() {
         // Whether EDGE, UMTS, etc...
-        setSummaryText(KEY_NETWORK_TYPE, mTelephonyManager.getNetworkTypeName() +
-                ":" + mTelephonyManager.getNetworkType());
+        String networktype = null;
+        if (TelephonyManager.NETWORK_TYPE_UNKNOWN != mTelephonyManager.getNetworkType()) {
+            networktype = mTelephonyManager.getNetworkTypeName();
+        }
+        setSummaryText(KEY_NETWORK_TYPE, networktype);
     }
 
     private void updateDataState() {
