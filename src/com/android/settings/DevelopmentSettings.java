@@ -482,10 +482,10 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateDebuggerOptions() {
-        mDebugApp = Settings.System.getString(
-                getActivity().getContentResolver(), Settings.System.DEBUG_APP);
-        updateCheckBox(mWaitForDebugger, Settings.System.getInt(
-                getActivity().getContentResolver(), Settings.System.WAIT_FOR_DEBUGGER, 0) != 0);
+        mDebugApp = Settings.Global.getString(
+                getActivity().getContentResolver(), Settings.Global.DEBUG_APP);
+        updateCheckBox(mWaitForDebugger, Settings.Global.getInt(
+                getActivity().getContentResolver(), Settings.Global.WAIT_FOR_DEBUGGER, 0) != 0);
         if (mDebugApp != null && mDebugApp.length() > 0) {
             String label;
             try {
@@ -720,14 +720,14 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateCpuUsageOptions() {
-        updateCheckBox(mShowCpuUsage, Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.SHOW_PROCESSES, 0) != 0);
+        updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.SHOW_PROCESSES, 0) != 0);
     }
     
     private void writeCpuUsageOptions() {
         boolean value = mShowCpuUsage.isChecked();
-        Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.SHOW_PROCESSES, value ? 1 : 0);
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.SHOW_PROCESSES, value ? 1 : 0);
         Intent service = (new Intent())
                 .setClassName("com.android.systemui", "com.android.systemui.LoadAverageService");
         if (value) {
@@ -746,8 +746,8 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateImmediatelyDestroyActivitiesOptions() {
-        updateCheckBox(mImmediatelyDestroyActivities, Settings.System.getInt(
-            getActivity().getContentResolver(), Settings.System.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
+        updateCheckBox(mImmediatelyDestroyActivities, Settings.Global.getInt(
+            getActivity().getContentResolver(), Settings.Global.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
     }
 
     private void updateAnimationScaleValue(int which, ListPreference pref) {

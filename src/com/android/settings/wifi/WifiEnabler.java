@@ -104,7 +104,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
             return;
         }
         // Show toast message if Wi-Fi is not allowed in airplane mode
-        if (isChecked && !WirelessSettings.isRadioAllowed(mContext, Settings.System.RADIO_WIFI)) {
+        if (isChecked && !WirelessSettings.isRadioAllowed(mContext, Settings.Global.RADIO_WIFI)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off. No infinite check/listenenr loop.
             buttonView.setChecked(false);

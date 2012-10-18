@@ -103,7 +103,7 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         // Show toast message if Bluetooth is not allowed in airplane mode
         if (isChecked &&
-                !WirelessSettings.isRadioAllowed(mContext, Settings.System.RADIO_BLUETOOTH)) {
+                !WirelessSettings.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off
             buttonView.setChecked(false);
