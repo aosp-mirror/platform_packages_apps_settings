@@ -48,29 +48,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dip"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:textAlignment="viewStart" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dip"
                 android:textColor="#d88d3a"
-                android:text="@string/data_usage_label_foreground" />
+                android:text="@string/data_usage_label_foreground"
+                android:textAlignment="viewStart" />
+
             <TextView
                 android:id="@+id/app_foreground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#d88d3a" />
+                android:textColor="#d88d3a"
+                android:textAlignment="viewStart" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dip"
-                android:text="@string/data_usage_label_background" />
+                android:text="@string/data_usage_label_background"
+                android:textAlignment="viewStart" />
+
             <TextView
                 android:id="@+id/app_background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart" />
 
         </LinearLayout>
 
