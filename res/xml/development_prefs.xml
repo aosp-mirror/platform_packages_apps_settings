@@ -188,6 +188,13 @@
             android:title="@string/track_frame_time"
             android:summary="@string/track_frame_time_summary"/>
 
+        <ListPreference
+            android:key="enable_opengl_traces"
+            android:title="@string/enable_opengl_traces_title"
+            android:persistent="false"
+            android:entries="@array/enable_opengl_traces_entries"
+            android:entryValues="@array/enable_opengl_traces_values" />
+
         <MultiCheckPreference
             android:key="enable_traces"
             android:title="@string/enable_traces_title"

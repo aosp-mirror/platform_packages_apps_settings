@@ -95,6 +95,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
     private static final String MSAA_PROPERTY = "debug.egl.force_msaa";
     private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
+    private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
 
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
@@ -117,6 +118,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
+    private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
     private static final String ENABLE_TRACES_KEY = "enable_traces";
 
@@ -170,6 +172,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
+    private ListPreference mOpenGLTraces;
     private MultiCheckPreference mEnableTracesPref;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
@@ -245,6 +248,9 @@ public class DevelopmentSettings extends PreferenceFragment
         mOverlayDisplayDevices = (ListPreference) findPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mAllPrefs.add(mOverlayDisplayDevices);
         mOverlayDisplayDevices.setOnPreferenceChangeListener(this);
+        mOpenGLTraces = (ListPreference) findPreference(OPENGL_TRACES_KEY);
+        mAllPrefs.add(mOpenGLTraces);
+        mOpenGLTraces.setOnPreferenceChangeListener(this);
         mEnableTracesPref = (MultiCheckPreference)findPreference(ENABLE_TRACES_KEY);
         String[] traceValues = new String[Trace.TRACE_TAGS.length];
         for (int i=Trace.TRACE_FLAGS_START_BIT; i<traceValues.length; i++) {
@@ -405,6 +411,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
+        updateOpenGLTracesOptions();
         updateEnableTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
@@ -811,6 +818,30 @@ public class DevelopmentSettings extends PreferenceFragment
         updateOverlayDisplayDevicesOptions();
     }
 
+    private void updateOpenGLTracesOptions() {
+        String value = SystemProperties.get(OPENGL_TRACES_PROPERTY);
+        if (value == null) {
+            value = "";
+        }
+
+        CharSequence[] values = mOpenGLTraces.getEntryValues();
+        for (int i = 0; i < values.length; i++) {
+            if (value.contentEquals(values[i])) {
+                mOpenGLTraces.setValueIndex(i);
+                mOpenGLTraces.setSummary(mOpenGLTraces.getEntries()[i]);
+                return;
+            }
+        }
+        mOpenGLTraces.setValueIndex(0);
+        mOpenGLTraces.setSummary(mOpenGLTraces.getEntries()[0]);
+    }
+
+    private void writeOpenGLTracesOptions(Object newValue) {
+        SystemProperties.set(OPENGL_TRACES_PROPERTY, newValue == null ? "" : newValue.toString());
+        pokeSystemProperties();
+        updateOpenGLTracesOptions();
+    }
+
     private void updateAppProcessLimitOptions() {
         try {
             int limit = ActivityManagerNative.getDefault().getProcessLimit();
@@ -1036,6 +1067,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mOverlayDisplayDevices) {
             writeOverlayDisplayDevicesOptions(newValue);
+            return true;
+        } else if (preference == mOpenGLTraces) {
+            writeOpenGLTracesOptions(newValue);
             return true;
         } else if (preference == mEnableTracesPref) {
             writeEnableTracesOptions();
