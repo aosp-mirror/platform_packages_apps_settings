@@ -75,12 +75,21 @@ public class DreamBackend {
     private final Context mContext;
     private final IDreamManager mDreamManager;
     private final DreamInfoComparator mComparator;
+    private final boolean mDreamsEnabledByDefault;
+    private final boolean mDreamsActivatedOnSleepByDefault;
+    private final boolean mDreamsActivatedOnDockByDefault;
 
     public DreamBackend(Context context) {
         mContext = context;
         mDreamManager = IDreamManager.Stub.asInterface(
                 ServiceManager.getService(DreamService.DREAM_SERVICE));
         mComparator = new DreamInfoComparator(getDefaultDream());
+        mDreamsEnabledByDefault = context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_dreamsEnabledByDefault);
+        mDreamsActivatedOnSleepByDefault = context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_dreamsActivatedOnSleepByDefault);
+        mDreamsActivatedOnDockByDefault = context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_dreamsActivatedOnDockByDefault);
     }
 
     public List<DreamInfo> getDreamInfos() {
@@ -134,7 +143,7 @@ public class DreamBackend {
     }
 
     public boolean isEnabled() {
-        return getBoolean(SCREENSAVER_ENABLED);
+        return getBoolean(SCREENSAVER_ENABLED, mDreamsEnabledByDefault);
     }
 
     public void setEnabled(boolean value) {
@@ -143,7 +152,7 @@ public class DreamBackend {
     }
 
     public boolean isActivatedOnDock() {
-        return getBoolean(SCREENSAVER_ACTIVATE_ON_DOCK);
+        return getBoolean(SCREENSAVER_ACTIVATE_ON_DOCK, mDreamsActivatedOnDockByDefault);
     }
 
     public void setActivatedOnDock(boolean value) {
@@ -152,7 +161,7 @@ public class DreamBackend {
     }
 
     public boolean isActivatedOnSleep() {
-        return getBoolean(SCREENSAVER_ACTIVATE_ON_SLEEP);
+        return getBoolean(SCREENSAVER_ACTIVATE_ON_SLEEP, mDreamsActivatedOnSleepByDefault);
     }
 
     public void setActivatedOnSleep(boolean value) {
@@ -160,8 +169,8 @@ public class DreamBackend {
         setBoolean(SCREENSAVER_ACTIVATE_ON_SLEEP, value);
     }
 
-    private boolean getBoolean(String key) {
-        return Settings.Secure.getInt(mContext.getContentResolver(), key, 1) == 1;
+    private boolean getBoolean(String key, boolean def) {
+        return Settings.Secure.getInt(mContext.getContentResolver(), key, def ? 1 : 0) == 1;
     }
 
     private void setBoolean(String key, boolean value) {
