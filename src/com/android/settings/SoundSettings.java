@@ -315,7 +315,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 getActivity().sendBroadcast(i);
             }
         } else if (preference == mDockSounds) {
-            Settings.System.putInt(getContentResolver(), Settings.System.DOCK_SOUNDS_ENABLED,
+            Settings.Global.putInt(getContentResolver(), Settings.Global.DOCK_SOUNDS_ENABLED,
                     mDockSounds.isChecked() ? 1 : 0);
         }
         return true;
@@ -354,8 +354,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
             mDockSounds = (CheckBoxPreference) findPreference(KEY_DOCK_SOUNDS);
             mDockSounds.setPersistent(false);
-            mDockSounds.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.DOCK_SOUNDS_ENABLED, 0) != 0);
+            mDockSounds.setChecked(Settings.Global.getInt(resolver,
+                    Settings.Global.DOCK_SOUNDS_ENABLED, 0) != 0);
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_DOCK_CATEGORY));
             getPreferenceScreen().removePreference(findPreference(KEY_AUDIO_SETTINGS));
