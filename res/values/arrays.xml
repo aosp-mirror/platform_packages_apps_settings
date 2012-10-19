@@ -670,6 +670,22 @@
         <item>1280x720/213;1920x1080/320</item>
     </string-array>
 
+    <!-- Titles for OpenGL traces preference. [CHAR LIMIT=35] -->
+    <string-array name="enable_opengl_traces_entries">
+        <item>None</item>
+        <item>Logcat</item>
+        <item>Systrace (Graphics)</item>
+        <item>Call stack on glGetError</item>
+    </string-array>
+
+    <!-- Values for OpenGL traces preference. -->
+    <string-array name="enable_opengl_traces_values" translatable="false" >
+        <item>0</item>
+        <item>1</item>
+        <item>systrace</item>
+        <item>error</item>
+    </string-array>
+
     <!-- Titles for app process limit preference. [CHAR LIMIT=35] -->
     <string-array name="app_process_limit_entries">
         <item>Standard limit</item>
