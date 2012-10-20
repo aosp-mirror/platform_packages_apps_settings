@@ -20,6 +20,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -56,7 +57,11 @@ public class SyncSettings extends AccountPreferenceBase
         mAutoSyncPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                ContentResolver.setMasterSyncAutomatically((Boolean) newValue);
+                if (ActivityManager.isUserAMonkey()) {
+                    Log.d("SyncSettings", "ignoring monkey's attempt to flip sync state");
+                } else {
+                    ContentResolver.setMasterSyncAutomatically((Boolean) newValue);
+                }
                 return true;
             }
         });
