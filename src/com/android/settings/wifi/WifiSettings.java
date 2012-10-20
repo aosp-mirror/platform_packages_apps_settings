@@ -152,6 +152,9 @@ public class WifiSettings extends SettingsPreferenceFragment
     // this boolean extra shows a custom button that we can control
     protected static final String EXTRA_SHOW_CUSTOM_BUTTON = "wifi_show_custom_button";
 
+    // show a text regarding data charges when wifi connection is required during setup wizard
+    protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
+
     // this boolean extra is set if we are being invoked by the Setup Wizard
     private static final String EXTRA_IS_FIRST_RUN = "firstRun";
 
@@ -238,7 +241,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                 });
             }
 
-            if (getActivity().getIntent().getBooleanExtra(EXTRA_SHOW_CUSTOM_BUTTON, false)) {
+            Intent intent = getActivity().getIntent();
+            if (intent.getBooleanExtra(EXTRA_SHOW_CUSTOM_BUTTON, false)) {
                 view.findViewById(R.id.button_bar).setVisibility(View.VISIBLE);
                 view.findViewById(R.id.back_button).setVisibility(View.INVISIBLE);
                 view.findViewById(R.id.skip_button).setVisibility(View.INVISIBLE);
@@ -256,6 +260,10 @@ public class WifiSettings extends SettingsPreferenceFragment
                         }
                     }
                 });
+            }
+
+            if (intent.getBooleanExtra(EXTRA_SHOW_WIFI_REQUIRED_INFO, false)) {
+                view.findViewById(R.id.wifi_required_info).setVisibility(View.VISIBLE);
             }
 
             return view;
