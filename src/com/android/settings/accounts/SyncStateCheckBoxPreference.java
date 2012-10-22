@@ -17,9 +17,11 @@
 package com.android.settings.accounts;
 
 import android.accounts.Account;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.preference.CheckBoxPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -131,7 +133,11 @@ public class SyncStateCheckBoxPreference extends CheckBoxPreference {
         // When we're in one-time sync mode, we don't want a click to change the
         // checkbox state
         if (!mOneTimeSyncMode) {
-            super.onClick();
+            if (ActivityManager.isUserAMonkey()) {
+                Log.d("SyncState", "ignoring monkey's attempt to flip sync state");
+            } else {
+                super.onClick();
+            }
         }
     }
 
