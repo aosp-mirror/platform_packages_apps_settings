@@ -549,6 +549,8 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Hálózat hozzáadása"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi hálózatok"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS gomb"</string>
+    <!-- no translation found for wifi_menu_more_options (2448097861752719396) -->
+    <skip />
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS PIN kód megadása"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Keresés"</string>
@@ -561,6 +563,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Másik hálózat..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Egyebek"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automat. beállítás (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Speciális beállítások megjelenítése"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"WPS"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS indítása..."</string>
@@ -1142,10 +1146,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Az új alkalmazások telepítése során előnyben részesített hely módosítása"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Beépített alkalmazás letiltása?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Ha letiltja a beépített alkalmazást, más alkalmazások hibásan működhetnek."</string>
-    <!-- no translation found for app_special_disable_dlg_title (2690148680327142674) -->
-    <skip />
-    <!-- no translation found for app_special_disable_dlg_text (3447657419284854195) -->
-    <skip />
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Szeretné törölni az adatokat és letiltani az alkalmazást?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Ha letilt egy beépített alkalmazást, lehet, hogy más alkalmazások sem fognak megfelelően működni. Az adatok is törlődnek."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Kikapcsolja az értesítéseket?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Ha kikapcsolja az erre az alkalmazásra vonatkozó értesítéseket, akkor lemaradhat fontos figyelmeztetésekről és a frissítésekről."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Tárhely-használat"</string>
@@ -1371,7 +1373,7 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Cella készenlét"</string>
     <string name="power_phone" msgid="5392641106474567277">"Hanghívások"</string>
-    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tétlen táblagép esetén"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Táblagép - tétlen"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon - tétlen"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU teljes"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU-használat az előtérben"</string>
@@ -1655,16 +1657,16 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Jelenleg nincs engedélyezett nyomkövetés."</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Jelenleg <xliff:g id="NUM">%1$d</xliff:g> nyomkövetés engedélyezett."</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Jelenleg minden nyomkövetés engedélyezve van."</string>
+    <!-- no translation found for enable_opengl_traces_title (6790444011053219871) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Elrendezéshatár mutatása"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Kliphatárok, margók stb. megjelenítése."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU-használat mutatása"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Képernyőfedvény a jelenlegi CPU-használattal"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU-megjelenítés"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"GPU használatának kényszerítése 2D rajzhoz"</string>
-    <!-- no translation found for force_msaa (7920323238677284387) -->
-    <skip />
-    <!-- no translation found for force_msaa_summary (9123553203895817537) -->
-    <skip />
+    <string name="force_msaa" msgid="7920323238677284387">"4x MSAA kényszerítése"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"A 4x MSAA engedélyezése az OpenGL ES 2.0-nál"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil GPU-renderelésről"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Renderelési idő mérés ADB shell dumpsys gfxinfoban"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Ablakanimáció mérete"</string>
