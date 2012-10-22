@@ -553,7 +553,11 @@ public class DataUsageSummary extends Fragment {
                 return true;
             }
             case R.id.data_usage_menu_auto_sync: {
-                ConfirmAutoSyncChangeFragment.show(this, !item.isChecked());
+                if (ActivityManager.isUserAMonkey()) {
+                    Log.d("SyncState", "ignoring monkey's attempt to flip global sync state");
+                } else {
+                    ConfirmAutoSyncChangeFragment.show(this, !item.isChecked());
+                }
                 return true;
             }
         }
