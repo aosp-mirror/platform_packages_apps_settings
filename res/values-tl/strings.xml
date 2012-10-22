@@ -549,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Magdagdag ng network"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Mga Wi-Fi network"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Push Button ng WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Higit pang mga pagpipilian"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Entry ng Pin ng WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Direkta sa Wi-Fi"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"I-scan"</string>
@@ -561,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Iba pang network..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Higit pa"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Awtomatikong setup (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Ipakita ang mga advanced na pagpipilian"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Protektadong Setup ng Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Sinisimulan ang WPS…"</string>
@@ -1142,10 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Baguhin ang ninanais na lokasyon ng pag-install para sa bagong apps"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Huwag paganahin built-in app?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Kung hindi mo papaganahin ang isang built-in na app, maaaring hindi kumilos nang tama ang iba pang apps."</string>
-    <!-- no translation found for app_special_disable_dlg_title (2690148680327142674) -->
-    <skip />
-    <!-- no translation found for app_special_disable_dlg_text (3447657419284854195) -->
-    <skip />
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Tanggalin ang data at huwag paganahin ang app?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Kung hindi mo papaganahin ang isang built-in na app, maaaring hindi gumana nang maayos ang iba pang apps. Matatanggal din ang iyong data."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"I-off ang mga notification?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Kung i-o-off mo ang mga notification para sa app na ito, maaari mong makaligtaan ang mahahalagang alerto at update."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Paggamit ng imbakan"</string>
@@ -1655,16 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Walang mga trace na kasalukuyang pinapagana"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> (na) trace ang kasalukuyang pinapagana"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Kasalukuyang pinapagana ang lahat ng trace"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Paganahin trace ng OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Ipakita mga layout bound"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Ipakita ang mga hangganan ng clip, margin, atbp."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Ipakita paggamit ng CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Overlay ng screen pakita paggamit ngayon ng CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Ipilit ang pag-render ng GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Sapilitang paggamit sa GPU para sa 2d na pagguhit"</string>
-    <!-- no translation found for force_msaa (7920323238677284387) -->
-    <skip />
-    <!-- no translation found for force_msaa_summary (9123553203895817537) -->
-    <skip />
+    <string name="force_msaa" msgid="7920323238677284387">"Puwersahin ang 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Paganahin ang 4x MSAA sa OpenGL ES 2.0 na apps"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Pag-render GPU ng Profile"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Sukat oras pag-render sa adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Scale ng animation window"</string>
