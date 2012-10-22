@@ -549,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"네트워크 추가"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi 네트워크"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 푸시 버튼"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"추가 옵션"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS PIN 입력"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"검색"</string>
@@ -561,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"다른 네트워크…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"더보기"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"자동 설정(WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"고급 옵션 표시"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"WPS(Wi-Fi 간편 설정)"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS을 시작하는 중…"</string>
@@ -1142,10 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"새 앱의 기본 설치 위치를 변경합니다."</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"내장 앱을 사용중지하시겠습니까?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"내장 앱을 사용중지하면 다른 앱에 예기치 않은 오류가 발생할 수 있습니다."</string>
-    <!-- no translation found for app_special_disable_dlg_title (2690148680327142674) -->
-    <skip />
-    <!-- no translation found for app_special_disable_dlg_text (3447657419284854195) -->
-    <skip />
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"데이터를 삭제하고 앱을 사용 중지하시겠습니까?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"내장 앱을 사용 중지할 경우, 다른 앱에 오류가 발생할 수 있으며 데이터도 삭제될 수 있습니다."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"알림을 사용 중지하시겠습니까?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"이 앱에서 알림을 사용하도록 설정하지 않으면 중요한 알리미와 업데이트를 놓칠 수 있습니다."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"저장공간 사용량"</string>
@@ -1655,16 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"현재 사용하도록 설정된 추적 없음"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"현재 추적 <xliff:g id="NUM">%1$d</xliff:g>개를 사용할 수 있습니다."</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"현재 모든 추적을 사용할 수 있습니다."</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL 추적 사용 설정"</string>
     <string name="debug_layout" msgid="5981361776594526155">"레이아웃 범위 표시"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"클립 경계, 여백 등을 표시"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU 사용량 표시"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"현재 CPU 사용량 오버레이 표시"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU 렌더링 강제 설정"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"2D 드로잉용으로 GPU 강제 사용"</string>
-    <!-- no translation found for force_msaa (7920323238677284387) -->
-    <skip />
-    <!-- no translation found for force_msaa_summary (9123553203895817537) -->
-    <skip />
+    <string name="force_msaa" msgid="7920323238677284387">"4x MSAA 강제 사용"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"OpenGL ES 2.0 앱에서 4x MSAA 사용"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"프로필 GPU 렌더링"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"adb shell dumpsys gfxinfo에서 렌더링 시간 측정"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"창 애니메이션 배율"</string>
