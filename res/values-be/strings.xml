@@ -549,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Дадаць сетку"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Сеткі Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Больш параметраў"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Увод PIN-кода WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Сканаваць"</string>
@@ -561,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Іншая сетка..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Дадатковая інфармацыя"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Аўтаматычная ўсталёўка (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Паказаць дадатковыя параметры"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Абароненая ўсталёўка Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Запускаецца WPS..."</string>
@@ -973,8 +976,7 @@
     <string name="about_settings_summary" msgid="3371517697156165959">"Прагледзець юрыдычную інфармацыю, стан, вэрсіі праграмнага забяспечання"</string>
     <string name="legal_information" msgid="5769301644270604095">"Юрыдычная інфармацыя"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Удзельнікі"</string>
-    <!-- no translation found for regulatory_information (5695464367088752150) -->
-    <skip />
+    <string name="regulatory_information" msgid="5695464367088752150">"Нарматыўныя звесткi"</string>
     <string name="copyright_title" msgid="865906688917260647">"Аўтарскія правы"</string>
     <string name="license_title" msgid="1990487604356037871">"Ліцэнзія"</string>
     <string name="terms_title" msgid="7697580845616764642">"Правілы і ўмовы"</string>
@@ -1143,10 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Змяніць пераважнае месца ўсталявання новых прыкладанняў"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Адключыць убудаванае прыкладанне?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Пасля адключэння ўбудаванага прыкладання іншыя прыкладанні могуць дрэнна працаваць."</string>
-    <!-- no translation found for app_special_disable_dlg_title (2690148680327142674) -->
-    <skip />
-    <!-- no translation found for app_special_disable_dlg_text (3447657419284854195) -->
-    <skip />
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Выдаліць дадзеныя і адключыць прыкладанне?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Калі вы адключыце ўбудаванае прыкладанне, іншыя прыкладанні могуць дрэнна працаваць. Вашы дадзеныя таксама будуць выдаленыя."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Адключыць апавяшчэнні?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Калі адключыць паведамлення для гэтага прыкладання, вы можаце прапусціць важныя сігналы і абнаўленні."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Выкарыстанне сховішча"</string>
@@ -1656,16 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Зараз ніякія сляды не ўключаны"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Зараз уключана наступная колькасць слядоў: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Зараз усе сляды ўключаны"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Уключэнне слядоў OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Паказаць межы размяшчэння"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Паказаць межы кліпу, палі і г. д."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Паказаць выкарыстанне ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Наклад на экран з бягучым выкарыстаннем працэсара"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Прымусовае адлюстраванне GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Прымусовае выкарыстанне GPU для 2-мерных чарцяжоў"</string>
-    <!-- no translation found for force_msaa (7920323238677284387) -->
-    <skip />
-    <!-- no translation found for force_msaa_summary (9123553203895817537) -->
-    <skip />
+    <string name="force_msaa" msgid="7920323238677284387">"Прымусовае выкананне 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Уключыць 4x MSAA у прыкладаннях з OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Апрацоўка профілю GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Вымерыць час рэндэрынгу ў абалонцы adb dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Маштаб анімацыі акна"</string>
