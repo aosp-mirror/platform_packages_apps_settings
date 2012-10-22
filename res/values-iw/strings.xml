@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"לא"</string>
     <string name="create" msgid="3578857613172647409">"צור"</string>
     <string name="device_info_default" msgid="7847265875578739287">"לא ידוע"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"אתה כעת במרחק של <xliff:g id="STEP_COUNT">%1$d</xliff:g> צעדים מלהיות מפתח."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"אתה כעת מפתח!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"אין צורך, אתה כבר מפתח."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"אלחוטי ורשתות"</string>
     <string name="header_category_device" msgid="5781174212691167553">"מכשיר"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"אישי"</string>
@@ -552,8 +549,9 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"הוסף רשת"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"רשתות Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"לחצן WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"אפשרויות נוספות"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"הזנת PIN ‏של WPS"</string>
-    <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi ישיר"</string>
+    <string name="wifi_menu_p2p" msgid="2575893749303670353">"‫Wi-Fi ישיר"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"סרוק"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"מתקדם"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"התחבר לרשת"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"רשת אחרת..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"עוד"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"התקנה אוטומטית (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"הצג אפשרויות מתקדמות"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"התקנה מוגנת של Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"מפעיל WPS..."</string>
@@ -636,7 +636,7 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"שער"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"אורך קידומת של רשת"</string>
-    <string name="wifi_p2p_settings_title" msgid="400503541488064638">"Wi-Fi ישיר"</string>
+    <string name="wifi_p2p_settings_title" msgid="400503541488064638">"‫Wi-Fi ישיר"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"פרטי מכשיר"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"זכור חיבור זה"</string>
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"חיפוש מכשירים"</string>
@@ -1035,7 +1035,7 @@
     <string name="lock_intro_message" product="default" msgid="8393155371327584659">"הגן על הטלפון שלך מפני שימוש לא מורשה על ידי יצירת קו ביטול נעילה אישי במסך. השתמש באצבע כדי לחבר לפחות ארבע נקודות בכל סדר שהוא במסך הבא."\n\n"מוכן להתחיל? גע באפשרות \'הבא\'."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"נהל יישומים"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"נהל והסר יישומים מותקנים"</string>
-    <string name="applications_settings" msgid="1721442176406964682">"Google Apps"</string>
+    <string name="applications_settings" msgid="1721442176406964682">"Apps"</string>
     <string name="applications_settings_summary" msgid="6683465446264515367">"ניהול יישומים, הגדרת קיצורי דרך להפעלה מהירה"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"הגדרות יישום"</string>
     <string name="install_applications" msgid="4872012136210802181">"מקורות לא ידועים"</string>
@@ -1145,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"שנה את מיקום ההתקנה המועדף עבור יישומים חדשים."</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"להשבית יישום מובנה?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"אם תשבית יישום מובנה, יישומים אחרים עשויים שלא לפעול כהלכה."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"האם למחוק נתונים ולהשבית את היישום?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"אם תשבית יישום מובנה, ייתכן שיישומים אחרים יתנהגו באופן בעייתי. גם הנתונים שלך יימחקו."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"האם לבטל התראות?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"אם תבטל התראות עבור יישום זה, אתה עלול להחמיץ התראות ועדכונים חשובים."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"שימוש בשטח אחסון"</string>
@@ -1246,7 +1248,7 @@
     <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"קיצור הדרך של <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> ‏(<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) יוסר."</string>
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"אישור"</string>
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"ביטול"</string>
-    <string name="quick_launch_display_mode_applications" msgid="1734058461846126775">"Google Apps"</string>
+    <string name="quick_launch_display_mode_applications" msgid="1734058461846126775">"Apps"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"קיצורי דרך"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"קלט טקסט"</string>
     <string name="input_method" msgid="5434026103176856164">"שיטת קלט"</string>
@@ -1311,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"מחוות הגדלה"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"כשתכונה זו מופעלת, ניתן להתקרב ולהתרחק באמצעות הקשה משולשת על המסך."\n\n"בזמן שההצגה מוגדלת ניתן:"\n<ul><li>"להזיז לצדדים: גרור שתי אצבעות או יותר לאורך המסך."</li>\n<li>"לשנות את מידת ההגדלה: עשה תנועת צביטה באמצעות שתי אצבעות או הרחק אותן אחת מהשנייה."</li></ul>\n\n"ניתן גם להגדיל באופן זמני את הפריט שמתחת לאצבע על ידי הקשה משולשת והחזקה. במצב הגדלה זה ניתן לגרור את האצבע על מנת להציג כך חלקים שונים במסך. הרם את האצבע כדי לחזור למצב הקודם."\n\n"שים לב: הקשה משולשת להגדלה פועלת בכל מקום מלבד במקלדת ובסרגל הניווט."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"קיצור נגישות"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"פועל"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"כבוי"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"כאשר תכונה זו מופעלת, ניתן לאפשר במהירות תכונות של גישה על ידי ביצוע שני שלבים:"\n\n"שלב 1: לחץ על לחצן ההפעלה לחיצה מתמשכת עד שתשמע צליל או תרגיש רטט."\n\n"שלב 2: גע עם שתי אצבעות והחזק עד שתשמע אישור קולי."\n\n"אם יש למכשיר מספר משתמשים, שימוש בקיצור דרך זה במסך הנעילה יאפשר גישה באופן זמני, עד שתבוטל נעילת המכשיר."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"טקסט גדול"</string>
@@ -1655,19 +1656,22 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"אין עקבות פעילים כעת"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"יש כעת <xliff:g id="NUM">%1$d</xliff:g> עקבות פעילים"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"כל העקבות הפעילים כעת"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"הפעל מעקבי OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"הצג את גבולות הפריסה"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"הצג גבולות קליפ, שוליים וכו\'"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"הצג את השימוש ב-CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"שכבת על של מסך שמציגה את השימוש הנוכחי ב-CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"אלץ עיבוד ב-GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"אכוף שימוש ב-GPU לציור דו-מימדי"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"אלץ הפעלת 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"הפעל 4x MSAA ביישומי OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"עיבוד פרופיל ב-GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"מדוד את משך העיבוד ב-adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"קנה מידה להנפשה של חלון"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"קנה מידה של הנפשת מעבר"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"קנה מידת משך זמן למנפיש"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"צור הדמיית תצוגות משניות"</string>
-    <string name="debug_applications_category" msgid="4206913653849771549">"Google Apps"</string>
+    <string name="debug_applications_category" msgid="4206913653849771549">"Apps"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"אל תשמור פעילויות"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"השמד כל פעילות ברגע שהמשתמש עוזב אותה"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"מגבלה של תהליך ברקע"</string>

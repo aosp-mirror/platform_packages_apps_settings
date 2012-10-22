@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"خیر"</string>
     <string name="create" msgid="3578857613172647409">"ایجاد"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ناشناس"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"شما در حال حاضر، <xliff:g id="STEP_COUNT">%1$d</xliff:g> قدم تا برنامه‌نویس شدن فاصله دارید."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"شما اکنون یک برنامه‌نویس هستید!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"نیازی نیست، شما در حال حاضر یک برنامه‌نویس هستید."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"بی‌سیم و شبکه‌ها"</string>
     <string name="header_category_device" msgid="5781174212691167553">"دستگاه"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"شخصی"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"افزودن شبکه"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"شبکه‌های Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"دکمه ارسال WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"گزینه‌های بیشتر"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"ورودی پین WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"اسکن"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"شبکه‌ای دیگر…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"بیشتر"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"تنظیم خودکار (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"نمایش گزینه‌های پیشرفته"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"نصب Wi-Fi حفاظت شده"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"راه‌اندازی WPS…"</string>
@@ -1145,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"تغییر مکان نصب دلخواه برای برنامه‌های جدید"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"برنامه داخلی غیرفعال شود؟"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"در صورت غیر فعال کردن یک برنامه داخلی، سایر برنامه‌ها ممکن است عملکرد نادرستی از خود نشان دهند."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"حذف داده‌ها و غیر فعال کردن برنامه؟"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"در صورتی که یک برنامه داخلی را غیرفعال کنید، سایر برنامه‌ها ممکن است عملکرد نادرستی از خود نشان دهند. داده‌های شما همچنین حذف خواهند شد."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"خاموش کردن اعلان‌ها؟"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"اگر اعلانی را برای این برنامه خاموش کنید، ممکن است هشدارها و به‌روزرسانی‌های مهم را از دست بدهید."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"استفاده از حافظه"</string>
@@ -1311,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"حرکات بزرگنمایی"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"وقتی این ویژگی فعال است، شما می‌توانید با سه ضربه روی صفحه بزرگنمایی یا کوچکنمایی کنید."\n\n"هنگام بزرگنمایی می‌توانید:"\n<ul><li>"حرکت کنید: دو یا چند انگشت خود را روی صفحه بکشید."</li>\n<li>"تنظیم سطح بزرگنمایی: دو یا چند انگشت خود را به هم نزدیک کنید یا از هم دور کنید."</li></ul>\n\n"همچنین می‌توانید به صورت موقت آنچه را که در زیر انگشتان شما قرار دارد با سه بار ضربه روی صفحه و نگهداشتن آن بزرگ کنید. در این حالت بزرگنمایی شده، می‌توانید انگشت خود را برای کاوش قسمت‌های مختلف صفحه بکشید. برای بازگشت به حالت قبلی خود، انگشت خود را بردارید."\n\n"توجه: سه بار ضربه برای بزرگنمایی همه جا به غیر از صفحه کلید و نوار پیمایش کار می‌کند."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"میانبرهای قابلیت دسترسی"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"روشن"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"خاموش"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"وقتی این ویژگی روشن است، شما می‌توانید به سرعت ویژگی‌های قابلیت دسترسی را در دو مرحله فعال کنید:"\n\n"مرحله ۱: دکمه روشن/خاموش را فشار داده و نگهدارید تا صدایی را بشنوید یا لرزشی را احساس کنید."\n\n"مرحله ۲: با دو انگشت لمس کرده و فشار دهید تا تأیید صوتی را بشنوید."\n\n"در صورتی که دستگاه چند کاربر دارد، استفاده از این میانبر در صفحه قفل، به طور موقت قابلیت دسترسی را تا زمانی که قفل دستگاه باز شود فعال می‌کند."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"نوشتار بزرگ"</string>
@@ -1655,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"هیچ ردیابی در حال حاضر فعال نیست"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> ردیابی در حال حاضر فعال است"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"همه ردیابی‌ها در حال حاضر فعال هستند"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"فعال کردن ردیابی‌های OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"نمایش محدوده‌های طرح‌بندی"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"نمایش مرزها، حاشیه‌ها و ویژگی‌های دیگر کلیپ."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"نمایش میزان استفاده از CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"همپوشانی صفحهٔ نمایش میزان استفاده از CPU فعلی"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"اجبار به تفسیر و اجرای GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"استفاده اجباری از GPU برای طراحی دوم"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"اجرای 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"فعال کردن 4X MSAA در برنامه‌های OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"اجرای GPU نمایه"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"اندازه‌گیری زمان اجرا در adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>

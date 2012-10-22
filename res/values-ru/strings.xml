@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Нет"</string>
     <string name="create" msgid="3578857613172647409">"Создать"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Неизвестно"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Вы почти у цели. Осталось несколько шагов: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Вы стали разработчиком!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Не нужно, вы уже разработчик."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"БЕСПРОВОДНЫЕ СЕТИ"</string>
     <string name="header_category_device" msgid="5781174212691167553">"УСТРОЙСТВО"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"ЛИЧНЫЕ ДАННЫЕ"</string>
@@ -552,6 +549,8 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Добавить сеть"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Сети Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
+    <!-- no translation found for wifi_menu_more_options (2448097861752719396) -->
+    <skip />
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Вход по PIN-коду WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Поиск"</string>
@@ -564,6 +563,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Другие сети…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Ещё"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Автонастройка (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Дополнительно"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Безопасная настройка Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Запуск WPS…"</string>
@@ -1145,6 +1146,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Изменить папку для установки приложений"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Отключить приложение?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Отключение встроенной службы может нарушить работу других приложений."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Отключить?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Если отключить встроенное приложение, другие приложения могут работать неправильно. Кроме того, будут удалены все данные."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Отключить уведомления?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Если в настройках этого приложения отключены уведомления, вы можете пропустить важные оповещения и обновления."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Использование памяти"</string>
@@ -1311,8 +1314,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Жесты для увеличения"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Эта функция позволяет увеличивать и уменьшать изображение, трижды нажав на экран."\n\n"При увеличенном масштабе можно:"\n<ul><li>"панорамировать – проведите пальцами по экрану;"</li>\n<li>"изменять масштаб – сведите или разведите пальцы."</li></ul>\n\n"Чтобы временно увеличить изображение под пальцем, трижды нажмите на экран и удерживайте его. Проведя пальцем, вы можете посмотреть на другие области экрана. Чтобы вернуть экран в прежнее состояние, уберите палец."\n\n"Примечание. Тройным нажатием увеличиваются все области, кроме клавиатуры и панели навигации."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Быстрое включение"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Вкл."</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"ВЫКЛ"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Вы сможете быстро включать специальные возможности. Вот как это сделать."\n\n"1. Нажмите кнопку питания и удерживайте ее, пока не раздастся звуковой сигнал или вибросигнал."\n\n"2. Нажмите на экран двумя пальцами и не отпускайте их, пока не услышите сообщение о том, что команда выполнена."\n\n"Если устройством пользуется несколько человек, специальные возможности будут включены до тех пор, пока устройство не будет разблокировано или не будет выбран другой пользователь."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Крупный текст"</string>
@@ -1655,12 +1657,16 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Все трассировки отключены"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Включено трассировок: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Все трассировки включены"</string>
+    <!-- no translation found for enable_opengl_traces_title (6790444011053219871) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Показывать границы макета"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показывать границы клипа, поля и т. д."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показывать загрузку ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Экран, показывающий текущую загрузку ЦП"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Ускорить работу GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Всегда использовать GPU для двухмерного рисования"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Включить 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Включить 4x MSAA в приложениях OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Запись времени работы GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Измерение времени для adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Окно: масштаб"</string>

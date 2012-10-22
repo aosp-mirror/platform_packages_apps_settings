@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Tidak"</string>
     <string name="create" msgid="3578857613172647409">"Buat"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Tidak diketahui"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Anda kini <xliff:g id="STEP_COUNT">%1$d</xliff:g> langkah daripada menjadi pemaju."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Anda kini pemaju!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Tidak perlu, anda sudah pun menjadi pemaju."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"WAYARLES &amp; RANGKAIAN"</string>
     <string name="header_category_device" msgid="5781174212691167553">"PERANTI"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"PERIBADI"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Tambah rangkaian"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Rangkaian Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Butang Tekan WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Lagi pilihan"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Masukan Pin WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Langsung"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Imbas"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Rangkaian lain..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Lagi"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Persediaan automatik (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Tunjukkan pilihan terperinci"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Persediaan Terlindung Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Memulakan WPS…"</string>
@@ -1145,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Tukar lokasi pemasangan pilihan untuk aplikasi baru"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Lumpuhkan aplikasi terbina dalam?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Jika anda melumpuhkan aplikasi terbina-dalam, aplikasi lain mungkin berfungsi secara salah."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Padam data dan lumpuhkan apl?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Jika anda melumpuhkan apl terbina dalam, apl lain mungkin tidak berfungsi dengan betul. Data anda juga akan dipadamkan."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Matikan pemberitahuan"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Jika anda mematikan pemberitahuan untuk apl ini, anda mungkin terlepas amaran dan kemas kini penting."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Penggunaan storan"</string>
@@ -1311,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gerak isyarat pembesaran"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Apabila ciri ini dihidupkan, anda boleh mengezum masuk dan keluar dengan mengetik skrin tiga kali."\n\n"Semasa dizum masuk, anda boleh:"\n<ul><li>"Menyorot: Seret menggunakan dua atau lebih jari merentasi skrin."</li>\n<li>"Melaraskan tahap zum: Rapatkan atau jarakkan dua atau lebih jari."</li></ul>\n\n"Anda juga boleh membesarkan item di bawah jari anda untuk sementara waktu dengan mengetik tiga kali dan menahannya. Dalam keadaan zum besar ini, anda boleh menyeret jari anda untuk meneroka bahagian-bahagian lain pada skrin. Angkat jari anda untuk kembali kepada keadaan sebelumnya."\n\n"Nota: Ketik tiga kali untuk pembesaran berfungsi di semua tempat kecuali pada papan kekunci dan bar navigasi."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Pintasan kebolehcapaian"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Hidupkan"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Matikan"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Apabila ciri ini dihidupkan, anda boleh mendayakan ciri kebolehaksesan dengan cepat dalam dua langkah:"\n\n"Langkah 1: Tekan dan tahan butang kuasa sehingga anda mendengar bunyi atau merasai getaran."\n\n"Langkah 2: Sentuh terus menggunakan dua jari sehingga anda mendengar pengesahan audio."\n\n"Jika peranti digunakan oleh beberapa orang pengguna, menggunakan pintasan ini pada skrin kunci akan mendayakan kebolehaksesan untuk sementara waktu sehingga peranti dibuka kuncinya."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Teks besar"</string>
@@ -1655,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Tiada kesan didayakan"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> kesan kini didayakan"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Semua kesan kini didayakan"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Dayakan kesan OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Tunjukkan batas reka letak"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Tunjukkan batas klip, margin dll."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Tunjukkan penggunaan CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Tindihan atas skrin menunjukkan penggunaan semasa CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Paksa penyerahan GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Paksa penggunaan GPU untuk lukisan 2d"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Paksa 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Dayakan 4x MSAA dalam apl OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Penyerahan GPU profil"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Ukur masa penyerahan dalam adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animasi tetingkap"</string>

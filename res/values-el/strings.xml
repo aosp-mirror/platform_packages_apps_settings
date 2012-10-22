@@ -549,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Προσθήκη δικτύου"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Δίκτυα Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Κουμπί WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Περισσότερες επιλογές"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Εισαγ. κωδ. Pin WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Σάρωση"</string>
@@ -561,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Άλλο δίκτυο…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Περισσότερα"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Αυτόματη ρύθμιση (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Εμφάνιση σύνθετων επιλογών"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Ρύθμιση προστατευόμενου Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Έναρξη WPS…"</string>
@@ -1142,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Αλλαγή της προτιμώμενης θέσης εγκατάστασης για νέες εφαρμογές"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Απενεργ. ενσωματωμ. εφαρμογής;"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Αν απενεργοποιήσετε μια ενσωματωμένη εφαρμογή, ενδέχεται να μην εκτελούνται σωστά κάποιες άλλες εφαρμογές."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Διαγραφή δεδομένων και απενεργοποίηση εφαρμογής;"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Εάν απενεργοποιήσετε μια ενσωματωμένη εφαρμογή, οι άλλες εφαρμογές ενδέχεται να μην λειτουργούν σωστά. Τα δεδομένα σας θα διαγραφούν επίσης."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Απενεργοποίηση ειδοποιήσεων;"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Εάν απενεργοποιήσετε τις ειδοποιήσεις για αυτήν την εφαρμογή, ενδέχεται να χάσετε σημαντικές ειδοποιήσεις και ενημερώσεις."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Αποθηκευτικός χώρος"</string>
@@ -1651,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Δεν υπάρχουν ενεργοποιημένα ίχνη την τρέχουσα στιγμή"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> ίχνη είναι ενεργοποιημένα την τρέχουσα στιγμή"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Όλα τα ίχνη είναι επί του παρόντος ενεργοποιημένα"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ενεργοποίηση ιχνών OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Εμφάνιση ορίων διάταξης"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Εμφάνιση ορίων κλιπ, περιθωρίων, κλπ."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Προβολή χρήσης CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Επικάλυψη οθόνης για προβολή τρέχουσας χρήσης CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Αναγκαστική απόδοση GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Αναγκαστική χρήση του GPU για σχέδιο 2D"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Αναγκαστικά 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Ενεργοποίηση 4x MSAA σε εφαρμογές OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Απόδοση GPU προφίλ"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Μέτρ. χρόνου απόδοσης σε adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Κλίμακα κίνησης παραθύρου"</string>

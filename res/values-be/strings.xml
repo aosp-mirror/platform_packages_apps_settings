@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Не"</string>
     <string name="create" msgid="3578857613172647409">"Стварыць"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Невядома"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Зараз вы ў некалькіх (<xliff:g id="STEP_COUNT">%1$d</xliff:g>) кроках ад таго, каб стаць распрацоўшчыкам."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Цяпер вы - распрацоўшчык!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Не трэба, вы ўжо з\'яўляецеся распрацоўшчыкам."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"БЕСПРАВАДНАЯ ПЕРАДАЧА І СЕТКІ"</string>
     <string name="header_category_device" msgid="5781174212691167553">"ПРЫЛАДА"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"АСАБІСТЫЯ"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Дадаць сетку"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Сеткі Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Больш параметраў"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Увод PIN-кода WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Сканаваць"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Іншая сетка..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Дадатковая інфармацыя"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Аўтаматычная ўсталёўка (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Паказаць дадатковыя параметры"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Абароненая ўсталёўка Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Запускаецца WPS..."</string>
@@ -976,8 +976,7 @@
     <string name="about_settings_summary" msgid="3371517697156165959">"Прагледзець юрыдычную інфармацыю, стан, вэрсіі праграмнага забяспечання"</string>
     <string name="legal_information" msgid="5769301644270604095">"Юрыдычная інфармацыя"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Удзельнікі"</string>
-    <!-- no translation found for regulatory_information (5695464367088752150) -->
-    <skip />
+    <string name="regulatory_information" msgid="5695464367088752150">"Нарматыўныя звесткi"</string>
     <string name="copyright_title" msgid="865906688917260647">"Аўтарскія правы"</string>
     <string name="license_title" msgid="1990487604356037871">"Ліцэнзія"</string>
     <string name="terms_title" msgid="7697580845616764642">"Правілы і ўмовы"</string>
@@ -1146,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Змяніць пераважнае месца ўсталявання новых прыкладанняў"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Адключыць убудаванае прыкладанне?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Пасля адключэння ўбудаванага прыкладання іншыя прыкладанні могуць дрэнна працаваць."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Выдаліць дадзеныя і адключыць прыкладанне?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Калі вы адключыце ўбудаванае прыкладанне, іншыя прыкладанні могуць дрэнна працаваць. Вашы дадзеныя таксама будуць выдаленыя."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Адключыць апавяшчэнні?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Калі адключыць паведамлення для гэтага прыкладання, вы можаце прапусціць важныя сігналы і абнаўленні."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Выкарыстанне сховішча"</string>
@@ -1312,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Жэсты павелiчэння"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Калi гэта функцыя ўключана, можна наблiжаць i аддаляць, тройчы нацiснуўшы на экран."\n\n"Наблiзiйшы, можна:"\n<ul><li>"Панарама: працягнiце два цi больш пальцаў па экране."</li>\n<li>"Дадаць узровень наблiжэння: звядзiце пальцы або развядзiце ў розныя бакi."</li></ul>\n\n"Таксама можна часова павялiчыць тое, што пад пальцам, тройчы нацiснуўшы i ўтрымлiваючы. У павялiчаным стане можна працягнуць палец, каб адкрыць iншыя часткi экрана. Паднiмiце палец, каб вярнуцца да папярэдняга."\n\n"Майце на ўвазе: патройнае нацiсканне працуе паўсюль, акрамя клавiятуры i панэлi навiгацыi."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Цэтлiк даступнасцi"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Укл."</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Адключана"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Калі гэта функцыя ўключана, вы можаце хутка ўключыць функцыі доступу ў два крокі:"\n\n".Крок 1: Націсніце і ўтрымлівайце кнопку сілкавання, пакуль не пачуеце гук ці не адчуце вібрацыю."\n\n"Крок 2: Дакраніцеся да экрану двума пальцамі і ўтрымлівайце іх, пакуль не пачуеце гук пацверджання."\n\n"Калі прылада мае некалькіх карыстальнікаў, скарыстайцеся гэтым цэтлiкам на экране блакіроўкi, каб часова дазволіць доступ, пакуль прылада не будзе разблакіравана."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Вялікі шрыфт"</string>
@@ -1656,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Зараз ніякія сляды не ўключаны"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Зараз уключана наступная колькасць слядоў: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Зараз усе сляды ўключаны"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Уключэнне слядоў OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Паказаць межы размяшчэння"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Паказаць межы кліпу, палі і г. д."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Паказаць выкарыстанне ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Наклад на экран з бягучым выкарыстаннем працэсара"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Прымусовае адлюстраванне GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Прымусовае выкарыстанне GPU для 2-мерных чарцяжоў"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Прымусовае выкананне 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Уключыць 4x MSAA у прыкладаннях з OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Апрацоўка профілю GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Вымерыць час рэндэрынгу ў абалонцы adb dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Маштаб анімацыі акна"</string>

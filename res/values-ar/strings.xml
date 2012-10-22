@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"لا"</string>
     <string name="create" msgid="3578857613172647409">"إنشاء"</string>
     <string name="device_info_default" msgid="7847265875578739287">"غير معروف"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT">%1$d</xliff:g> من الخطوات."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"لقد أصبحت الآن مطور برامج!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"لا حاجة لذلك، فأنت مطور برامج فعلاً."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"اللاسلكي والشبكات"</string>
     <string name="header_category_device" msgid="5781174212691167553">"الجهاز"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"شخصي"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"إضافة شبكة"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"شبكات Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"زر دفع WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"مزيد من الخيارات"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"إدخال رقم تعريف شخصي في WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"اتصال Wi-Fi مباشر"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"فحص"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"شبكة أخرى..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"المزيد"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"الإعداد التلقائي (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"عرض الخيارات المتقدمة"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"إعداد Wi-Fi المحمي"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"جارٍ بدء WPS…"</string>
@@ -1145,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"تغيير موقع التثبيت المفضل للتطبيقات الجديدة"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"هل تريد تعطيل التطبيق المضمن؟"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"إذا تم تعطيل التطبيق المضمن، فقد تعمل التطبيقات الأخرى بشكل غير صحيح."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"هل تريد حذف البيانات وتعطيل التطبيق؟"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"عند تعطيل تطبيق مضمن، قد تحدث مشكلات في عمل تطبيقات أخرى. سيتم حذف بياناتك أيضًا."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"هل تريد إيقاف الإشعارات؟"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"إذا كنت قد أجريت إيقافًا للإشعارات حول هذا التطبيق، فقد تفوتك تنبيهات وتحديثات مهمة."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"استخدام وحدة التخزين"</string>
@@ -1311,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"إيماءات التكبير"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"عند تشغيل هذه الميزة، يمكنك التكبير والتصغير بالنقر نقرًا ثلاثيًا على الشاشة."\n\n"أثناء التكبير، يمكنك إجراء التالي:"\n<ul><li>"التدوير: اسحب إصبعين أو أكثر على الشاشة."</li>\n<li>"ضبط مستوى التكبير/التصغير: اضغط بإصبعين أو أكثر معًا أو باعد بينهم."</li></ul>\n\n"كما يمكنك أيضًا التكبير المؤقت لما يقع تحت إصبعك بالنقر نقرًا ثلاثيًا مع الاستمرار. في حالة التكبير هذه، يمكنك سحب إصبعك لاستكشاف الأجزاء المختلفة من الشاشة. ارفع إصبعك للعودة إلى الحالة السابقة."\n\n"ملاحظة: يعمل النقر نقرًا ثلاثيًا للتكبير في أي مكان ماعدا لوحة المفاتيح وشريط التنقل."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"اختصارات تسهيل الدخول"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"تشغيل"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"إيقاف"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"عندما يتم تشغيل هذه الميزة، يمكنك بسرعة تمكين ميزات إمكانية الدخول بخطوتين:"\n\n"الخطوة الأولى: اضغط مع الاستمرار على زر التشغيل إلى أن تسمع صوتًا أو تشعر باهتزاز."\n\n"الخطوة الثانية: المس مع الاستمرار إصبعين إلى أن تسمع تأكيدًا صوتيًا."\n\n"إذا كان الجهاز لديه مستخدمون متعددون، فإن استخدام هذا الاختصار على شاشة القفل سيؤدي مؤقتًا إلى تمكين إمكانية الدخول إلى أن يتم إلغاء قفل الجهاز."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"نص كبير"</string>
@@ -1655,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"ليست هناك آثار ممكنة حاليًا"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"تم تمكين <xliff:g id="NUM">%1$d</xliff:g> من الآثار حاليًا"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"تم تمكين جميع الآثار حاليًا"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"تمكين عمليات تتبع OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"عرض حدود المخطط"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"عرض حدود وهوامش المقطع وما إلى ذلك."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"عرض استخدام CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"عرض تراكب الشاشة لاستخدام CPU الحالي"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"فرض عرض رسومات GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"فرض استخدام وحدة معالجة الرسومات للرسم ثنائي الأبعاد"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"فرض 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"تمكين 4x MSAA في تطبيقات OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"رسم مخطط لعرض GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"قياس وقت العرض بـ adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"حجم الرسوم المتحركة للنافذة"</string>

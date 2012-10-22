@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Nie"</string>
     <string name="create" msgid="3578857613172647409">"Utwórz"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nieznany"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Od zostania programistą dzieli Cię już tylko tyle kroków: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Jesteś teraz programistą!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"W porządku, już jesteś programistą."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"SIECI ZWYKŁE I BEZPRZEWODOWE"</string>
     <string name="header_category_device" msgid="5781174212691167553">"URZĄDZENIE"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"OSOBISTE"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj sieć"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Sieci Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Przycisk WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Więcej opcji"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Kod PIN dla WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Skanuj"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Inna sieć…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Więcej"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Autokonfiguracja (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Opcje zaawansowane"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Konfiguracja zabezpieczonej sieci Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Uruchamianie WPS..."</string>
@@ -976,8 +976,7 @@
     <string name="about_settings_summary" msgid="3371517697156165959">"Wyświetl informacje prawne, stan, wersję oprogramowania"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informacje prawne"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Współautorzy"</string>
-    <!-- no translation found for regulatory_information (5695464367088752150) -->
-    <skip />
+    <string name="regulatory_information" msgid="5695464367088752150">"Informacje prawne"</string>
     <string name="copyright_title" msgid="865906688917260647">"Prawa autorskie"</string>
     <string name="license_title" msgid="1990487604356037871">"Licencja"</string>
     <string name="terms_title" msgid="7697580845616764642">"Warunki i zasady korzystania"</string>
@@ -1146,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Zmień preferowaną lokalizację instalacji nowych aplikacji."</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Wyłączyć wbudowaną aplikację?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Jeśli wyłączysz wbudowaną aplikację, inne aplikacje mogą działać nieprawidłowo."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Usunąć dane i wyłączyć aplikację?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Jeśli wyłączysz wbudowaną aplikację, pozostałe programy mogą działać nieprawidłowo. Zostaną też usunięte Twoje dane."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Wyłączyć powiadomienia?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Jeśli wyłączysz powiadomienia tej aplikacji, możesz przeoczyć ważne alerty i aktualizacje."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Użycie pamięci"</string>
@@ -1312,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesty powiększania"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Kiedy ta funkcja jest włączona, możesz powiększyć i pomniejszyć obraz, trzykrotnie klikając ekran."\n\n"W trybie powiększenia możesz:"\n<ul><li>"Przesuwać: przeciągnij palcami po ekranie."</li>\n<li>"Regulować powiększenie: ściągnij lub rozsuń palce."</li></ul>\n\n"Możesz też tymczasowo powiększyć miejsce pod palcem, klikając trzykrotnie i przytrzymując palec na ekranie. W takim widoku „lupy” możesz przesuwać palcem po ekranie i powiększać różne miejsca. Podniesienie palca spowoduje powrót do poprzedniego widoku."\n\n"Uwaga: trzykrotne kliknięcie powiększające działa wszędzie poza klawiaturą i paskiem nawigacji."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Skrót ułatwień dostępu"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Wł."</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Wył."</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Kiedy ta funkcja jest aktywna, możesz szybko włączyć ułatwienia dostępu w dwóch krokach:"\n\n"Krok 1: naciśnij i przytrzymaj przycisk zasilania, aż usłyszysz sygnał lub poczujesz wibracje."\n\n"Krok 2: naciśnij i przytrzymaj ekran dwoma palcami, aż usłyszysz potwierdzenie dźwiękowe."\n\n"Jeśli z tego urządzenia korzysta kilka osób, użycie tego skrótu na zablokowanym ekranie spowoduje tymczasowe włączenie ułatwień dostępu do momentu zablokowania urządzenia."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Duży tekst"</string>
@@ -1656,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Brak włączonych śladów"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Włączone ślady: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Wszystkie ślady są włączone"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Włącz śledzenia OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Pokaż granice układu"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Pokaż granice przycięcia, marginesy itd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Pokaż użycie procesora"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Nakładka na ekranie pokazująca użycie procesora"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Renderowanie na GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Wymuszaj użycie GPU do rysowania 2D"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Wymuś 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Włącz 4x MSAA w aplikacjach OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil renderowania GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mierz czas renderowania w adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Skala animacji okna"</string>
