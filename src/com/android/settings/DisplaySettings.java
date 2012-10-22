@@ -154,15 +154,19 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             final CharSequence[] entries = preference.getEntries();
             final CharSequence[] values = preference.getEntryValues();
-            int best = 0;
-            for (int i = 0; i < values.length; i++) {
-                long timeout = Long.parseLong(values[i].toString());
-                if (currentTimeout >= timeout) {
-                    best = i;
+            if (entries == null || entries.length == 0) {
+                summary = "";
+            } else {
+                int best = 0;
+                for (int i = 0; i < values.length; i++) {
+                    long timeout = Long.parseLong(values[i].toString());
+                    if (currentTimeout >= timeout) {
+                        best = i;
+                    }
                 }
+                summary = preference.getContext().getString(R.string.screen_timeout_summary,
+                        entries[best]);
             }
-            summary = preference.getContext().getString(R.string.screen_timeout_summary,
-                    entries[best]);
         }
         preference.setSummary(summary);
     }
