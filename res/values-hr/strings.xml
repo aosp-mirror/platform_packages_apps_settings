@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Ne"</string>
     <string name="create" msgid="3578857613172647409">"Izradi"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nepoznato"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Postat ćete razvojni programer za ovoliko koraka: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Sad ste razvojni programer!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Nema potrebe, već ste razvojni programer."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"BEŽIČNO POVEZIVANJE i MREŽE"</string>
     <string name="header_category_device" msgid="5781174212691167553">"UREĐAJ"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"OSOBNO"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj mrežu"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi mreže"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS gumb"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Više opcija"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Unos WPS PIN-a"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Izravni Wi-Fi"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Skeniraj"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Ostale mreže…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Više"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Autom. postavljanje (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Prikaži napredne opcije"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Postavljanje zaštićene mreže Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Pokretanje WPS-a..."</string>
@@ -1145,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Promijenite željenu lokaciju instalacije za nove aplikacije."</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Onemogući ugrađenu aplikaciju?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Ako onemogućite ugrađenu aplikaciju, druge će se aplikacije možda ponašati nepredviđeno."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Izbrisati podatke i onemogućiti aplikaciju?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Ako onemogućite ugrađenu aplikaciju, druge aplikacije mogu se ponašati nepredviđeno. Također će se izbrisati vaši podaci."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Isključiti obavijesti?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Ako isključite obavijesti za ovu aplikaciju, možda ćete propustiti važna upozorenja i ažuriranja."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Upotreba pohrane"</string>
@@ -1311,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Pokret povećavanja"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Ako je ova značajka uključena, možete povećati ili smanjiti prikaz ako triput dodirnete zaslon."\n\n"Nakon povećanja prikaza možete sljedeće:"\n<ul><li>"Pomicati: pomoću dva prsta ili više prstiju povlačite prikaz na zaslonu."</li>\n<li>"Podesiti razinu zumiranja: stisnite dva prsta ili više prstiju ili ih raširite."</li></ul>\n\n"Također možete privremeno povećati stavku ispod prsta ako je triput dodirnete i držite. U tom slučaju možete povlačiti prst kako biste istražili različite dijelove zaslona. Podignite prst kako biste se vratili na prijašnje stanje."\n\n"Napomena: povećanje trostrukim dodirom moguće je svuda osim na tipkovnici i traci za navigaciju."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Prečac pristupačnosti"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Uključeno"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Isključeno"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Kada je ova značajka uključena, možete brzo omogućiti značajke pristupačnosti u dva koraka:"\n\n"1. korak: pritisnite i držite gumb za uključivanje/isključivanje dok ne začujete zvuk ili osjetite vibraciju."\n\n"2. korak: dodirnite i držite s dva prsta dok ne začujete zvučnu potvrdu."\n\n"Ako uređaj ima više korisnika, ovaj prečac na zaključanom zaslonu omogućuje pristupačnost dok se uređaj ne otključa."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Veliki tekst"</string>
@@ -1655,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Trenutačno nema omogućenih tragova"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Broj trenutačno omogućenih tragova: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Svi su tragovi trenutačno omogućeni"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Omogući OpenGL praćenja"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Prikaži granice izgleda"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Za isječak prikaži granice, margine itd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Prikaži upotrebu procesora"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Prekrivanje zaslona prikazuje trenutačnu upotrebu procesora"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Prisilno GPU renderiranje"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Prisilna upotreba GPU-a za 2D crteže"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Nametni 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Omogući 4x MSAA u aplikacijama OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil GPU prikazivanja"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Mjeri vrijeme prikaza u adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Razmjer animacije prozora"</string>

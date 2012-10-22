@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"无"</string>
     <string name="create" msgid="3578857613172647409">"创建"</string>
     <string name="device_info_default" msgid="7847265875578739287">"未知"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"只需执行 <xliff:g id="STEP_COUNT">%1$d</xliff:g> 步操作即可进入开发者模式。"</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"您现在处于开发者模式！"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"您已处于开发者模式，无需进行此操作。"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"无线和网络"</string>
     <string name="header_category_device" msgid="5781174212691167553">"设备"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"个人"</string>
@@ -44,7 +41,7 @@
     <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"获取 PDP 列表"</string>
     <string name="radioInfo_service_in" msgid="1915416319177520020">"正在使用中"</string>
     <string name="radioInfo_service_out" msgid="5238736759641916278">"不在服务区"</string>
-    <string name="radioInfo_service_emergency" msgid="2485604591272668370">"仅限于急救或报警电话"</string>
+    <string name="radioInfo_service_emergency" msgid="2485604591272668370">"只能拨打紧急呼救电话"</string>
     <string name="radioInfo_service_off" msgid="1434084741785525415">"关闭无线通信"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"漫游"</string>
     <string name="radioInfo_roaming_not" msgid="2851853244069662307">"非漫游"</string>
@@ -552,6 +549,8 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"添加网络"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi 网络"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按钮"</string>
+    <!-- no translation found for wifi_menu_more_options (2448097861752719396) -->
+    <skip />
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS PIN 输入"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"扫描"</string>
@@ -564,6 +563,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"其他网络…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"更多"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自动设置 (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"显示高级选项"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Wi-Fi 保护设置"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"正在启动 WPS..."</string>
@@ -1145,6 +1146,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"更改安装新应用时使用的首选安装位置"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"要停用内置应用吗？"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"如果停用内置应用，其他应用可能会出现异常。"</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"确定要删除数据并停用应用吗？"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"如果您停用内置应用，其他应用可能无法运行。您的数据也将会删除。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"要关闭通知吗？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"如果关闭此应用的通知，您可能会错过重要提醒和最新动态信息。"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"存储空间使用情况"</string>
@@ -1311,8 +1314,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"放大手势"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"启用此功能后，您可以通过点按屏幕三次进行缩放。"\n\n"放大时，您可以："\n<ul><li>"平移：在屏幕上拖动两根或更多根手指。"</li>\n<li>"调整缩放级别：开合两根或更多根手指。"</li></ul>\n\n"同时，您还可以通过点按三次并按住的方法来暂时性地放大手指触摸到的内容。在此放大状态下，您可以拖动手指查看屏幕上的各个部分。松开手指即可返回之前的状态。"\n\n"请注意：点按屏幕三次进行放大的方法适用于除键盘和导航栏外的所有情况。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"辅助功能快捷方式"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"启用"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"已关闭"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"启用该功能后，您只需两步即可迅速启用辅助功能："\n\n"步骤 1：持续按住电源按钮，直到您听到提示音或感觉到震动。"\n\n"步骤 2：用两根手指触摸屏幕并按住，直到您听到确认提示音。"\n\n"如果该设备有多个用户，在锁定屏幕上进行此快捷操作可暂时启用辅助功能，直到该设备解锁。"</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"大号字体"</string>
@@ -1655,12 +1657,16 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"当前未启用任何跟踪"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"当前已启用 <xliff:g id="NUM">%1$d</xliff:g> 项跟踪"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"当前已启用所有跟踪"</string>
+    <!-- no translation found for enable_opengl_traces_title (6790444011053219871) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"显示布局边界"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"显示剪辑边界、边距等。"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"显示 CPU 使用情况"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"屏幕叠加层显示当前 CPU 使用情况"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"强制进行 GPU 渲染"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"强制使用 GPU 进行 2D 绘图"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"强制启用 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"在 OpenGL ES 2.0 应用中启用 4x MSAA"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"GPU 呈现模式分析"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"计算 adb shell dumpsys gfxinfo 中的呈现时间"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"窗口动画缩放"</string>

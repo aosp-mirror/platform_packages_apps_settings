@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Não"</string>
     <string name="create" msgid="3578857613172647409">"Criar"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Desconhecido"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Faltam <xliff:g id="STEP_COUNT">%1$d</xliff:g> etapas para você se tornar um desenvolvedor."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Você agora é um desenvolvedor!"</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Não é necessário. Você já é um desenvolvedor."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"REDES SEM FIO E OUTRAS"</string>
     <string name="header_category_device" msgid="5781174212691167553">"DISPOSITIVO"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"PESSOAL"</string>
@@ -552,6 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Adicionar rede"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Redes Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Botão de pressão WPS"</string>
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Mais opções"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Entrada de PIN WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Verificar"</string>
@@ -564,6 +562,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Outra rede..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Mais"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Configuração automática (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Mostrar opções avançadas"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Config. protegida do Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Iniciando WPS…"</string>
@@ -1145,6 +1145,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Alterar o local de instalação preferido para novos aplicativos"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Desativar aplicat. integrado?"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Se você desativar um aplicativo integrado, outros aplicativos podem apresentar mau funcionamento."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Excluir os dados e desativar o aplicativo?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Se você desativar um aplicativo integrado, outros aplicativos poderão apresentar problemas. Seus dados também serão excluídos."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Desativar notificações?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Se você desativar as notificações para este aplicativo, poderá perder alertas e atualizações importantes."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Uso do armazenamento"</string>
@@ -1311,8 +1313,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestos de ampliação"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Quando este recurso está ativado, você pode aumentar e diminuir o zoom com um toque triplo na tela."\n\n"Quando o zoom é aplicado, você pode:"\n<ul><li>"Deslocar: arraste dois ou mais dedos pela tela."</li>\n<li>"Ajustar o nível de zoom: use o gesto de pinçagem ou expanda usando dois ou mais dedos."</li></ul>\n\n"Você também pode ampliar temporariamente o que estiver sob seu dedo dando um toque triplo e segurando. No estado ampliado, arraste o dedo para explorar as diferentes partes da tela. Levante o dedo para voltar ao estado anterior."\n\n"Observação: o toque triplo para ampliar funciona em qualquer parte da tela, exceto no teclado e na barra de navegação."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Atalho de acessibilidade"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Ligado"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desativado"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Quando este recurso está ativado, você pode ativar rapidamente os recursos de acessibilidade em duas etapas:"\n\n"Etapa 1: pressione e segure o botão liga/desliga até ouvir um som ou sentir uma vibração."\n\n"Etapa 2: toque e segure com dois dedos até ouvir a confirmação de áudio."\n\n"Caso o dispositivo tenha vários usuários, este atalho na tela de bloqueio pode ativar temporariamente a acessibilidade até que o dispositivo seja desbloqueado."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Texto grande"</string>
@@ -1655,12 +1656,15 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Nenhum traço ativado"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> traços ativados"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Todos os traços ativados"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ativar rastream. OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar limites de layout"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Mostrar limites de corte, margens, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar o uso da CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Sobreposição de tela que mostra o uso da CPU atual"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forçar renderização GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forçar uso da GPU para desenho em 2D"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Forçar 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Ativar 4x MSAA em aplicativos OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Classific. render. GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Medir tempo render. em adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de anim. da janela"</string>

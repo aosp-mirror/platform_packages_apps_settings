@@ -20,12 +20,9 @@
     <string name="no" msgid="6731231425810196216">"Ne"</string>
     <string name="create" msgid="3578857613172647409">"Vytvořit"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Neznámé"</string>
-    <!-- no translation found for show_dev_countdown (5521163114237004821) -->
-    <skip />
-    <!-- no translation found for show_dev_on (1110711554982716293) -->
-    <skip />
-    <!-- no translation found for show_dev_already (2151632240145446227) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="5521163114237004821">"Nyní jste <xliff:g id="STEP_COUNT">%1$d</xliff:g> klepnutí od toho, abyste se stali vývojářem."</string>
+    <string name="show_dev_on" msgid="1110711554982716293">"Nyní jste vývojář."</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Není potřeba, již jste vývojář."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"BEZDRÁTOVÁ PŘIPOJENÍ A SÍTĚ"</string>
     <string name="header_category_device" msgid="5781174212691167553">"ZAŘÍZENÍ"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"OSOBNÍ"</string>
@@ -552,6 +549,8 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Přidat síť"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Sítě WiFi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Tlačítko WPS"</string>
+    <!-- no translation found for wifi_menu_more_options (2448097861752719396) -->
+    <skip />
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Zadání kódu WPS PIN"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Přímé přip. Wi-Fi"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Vyhledávání"</string>
@@ -564,6 +563,8 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Jiná síť…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Další"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automat. nastavení (WPS)"</string>
+    <!-- no translation found for wifi_required_info_text (9014073093293520112) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Zobrazit pokročilé možnosti"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Chráněné nastavení Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Spouštění WPS…"</string>
@@ -1145,6 +1146,8 @@
     <string name="app_install_location_summary" msgid="5155453752692959098">"Změna preferovaného umístění pro instalaci nových aplikací"</string>
     <string name="app_disable_dlg_title" msgid="3916469657537695436">"Zakázat integrovanou aplikaci"</string>
     <string name="app_disable_dlg_text" msgid="3562567756362627323">"Pokud zakážete integrovanou aplikaci, může se stát, že ostatní aplikace přestanou fungovat správně."</string>
+    <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Smazat data a deaktivovat aplikaci?"</string>
+    <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Pokud deaktivujete integrovanou aplikaci, mohou se ostatní aplikace chovat nestandardně. Budou také smazána vaše data."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Vypnout oznámení?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Pokud v této aplikaci vypnete oznámení, můžete přijít o důležitá upozornění a aktuality."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Využití úložiště"</string>
@@ -1311,8 +1314,7 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesta pro přiblížení obrazovky"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Je-li tato funkce zapnutá, můžete zobrazení přibližovat a oddalovat tak, že třikrát klepnete na obrazovku."\n\n"Při přiblížení můžete provádět tyto činnosti:"\n<ul><li>"Posunutí: táhněte po obrazovce minimálně dvěma prsty."</li>\n<li>"Změna úrovně přiblížení: alespoň dva prsty stáhněte k sobě, nebo roztáhněte od sebe."</li></ul>\n\n"Také je možné dočasně zvětšit oblast pod prstem. Stačí na ni třikrát klepnout a podržet ji. V takto zvětšeném náhledu můžete přetáhnutím prstu prohlížet libovolné části obrazovky. Do předchozího zobrazení se vrátíte zdvihnutím prstu."\n\n"Poznámka: Zvětšení trojitým klepnutím funguje ve všech částech obrazovky s výjimkou klávesnice a navigační lišty."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Zkratka usnadnění"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_summary_on (6180927399052022181) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Zapnuto"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Vyp."</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Je-li tato funkce zapnutá, můžete rychle ve dvou krocích aktivovat funkce usnadnění přístupu:"\n\n"Krok 1: Stiskněte tlačítko napájení a držte jej, dokud neuslyšíte zvuk nebo neucítíte vibraci."\n\n"Krok 2: Dotkněte se obrazovky dvěma prsty a držte ji, dokud neuslyšíte potvrzovací zvuk."\n\n"Má-li zařízení více uživatelů, pomocí této zkratky lze na uzamčené obrazovce dočasně aktivovat usnadnění přístupu, dokud zařízení nebude odemčeno."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Velký text"</string>
@@ -1655,12 +1657,16 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Žádná sledování nejsou momentálně povolena."</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Momentálně povolená sledování: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Všechna sledování jsou momentálně povolena."</string>
+    <!-- no translation found for enable_opengl_traces_title (6790444011053219871) -->
+    <skip />
     <string name="debug_layout" msgid="5981361776594526155">"Zobrazit ohraničení"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Zobrazit u klipu ohraničení, okraje atd."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Zobrazit využití CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Překryvná vrstva s aktuálním využitím procesoru"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Vykreslování pomocí GPU"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Vynutit použití GPU pro 2D vykreslování"</string>
+    <string name="force_msaa" msgid="7920323238677284387">"Vynutit 4x MSAA"</string>
+    <string name="force_msaa_summary" msgid="9123553203895817537">"Povolit 4x MSAA v aplikacích OpenGL ES 2.0"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil – vykreslování GPU"</string>
     <string name="track_frame_time_summary" msgid="447577515813970287">"Měřit čas vykreslování v adb shell dumpsys gfxinfo"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Měřítko animace okna"</string>
