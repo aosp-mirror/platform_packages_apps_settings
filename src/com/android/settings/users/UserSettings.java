@@ -503,7 +503,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private String getProfileName() {
-        String name = Utils.getMeProfileName(getActivity());
+        String name = Utils.getMeProfileName(getActivity(), true);
         if (name != null) {
             mProfileExists = true;
         }

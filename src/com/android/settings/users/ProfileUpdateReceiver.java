@@ -53,7 +53,7 @@ public class ProfileUpdateReceiver extends BroadcastReceiver {
 
         int userId = UserHandle.myUserId();
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        String profileName = Utils.getMeProfileName(context);
+        String profileName = Utils.getMeProfileName(context, false /* partial name */);
         if (profileName != null && profileName.length() > 0) {
             um.setUserName(userId, profileName);
             // Flag that we've written the profile one time at least. No need to do it in the future.

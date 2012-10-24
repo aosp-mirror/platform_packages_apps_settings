@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,9 +47,13 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity.Header;
 import android.preference.PreferenceFrameLayout;
 import android.preference.PreferenceGroup;
+import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
+import android.provider.ContactsContract.RawContacts;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -487,22 +492,78 @@ public class Utils {
         return true;
     }
 
-    public static String getMeProfileName(Context context) {
-        Cursor cursor = context.getContentResolver().query(
-                    Profile.CONTENT_URI, new String[] {Phone._ID, Phone.DISPLAY_NAME},
-                    null, null, null);
-        if (cursor == null) {
-            return null;
+    public static String getMeProfileName(Context context, boolean full) {
+        if (full) {
+            return getProfileDisplayName(context);
+        } else {
+            return getShorterNameIfPossible(context);
         }
+    }
+
+    private static String getShorterNameIfPossible(Context context) {
+        final String given = getLocalProfileGivenName(context);
+        return !TextUtils.isEmpty(given) ? given : getProfileDisplayName(context);
+    }
+
+    private static String getLocalProfileGivenName(Context context) {
+        final ContentResolver cr = context.getContentResolver();
+
+        // Find the raw contact ID for the local ME profile raw contact.
+        final long localRowProfileId;
+        final Cursor localRawProfile = cr.query(
+                Profile.CONTENT_RAW_CONTACTS_URI,
+                new String[] {RawContacts._ID},
+                RawContacts.ACCOUNT_TYPE + " IS NULL AND " +
+                        RawContacts.ACCOUNT_NAME + " IS NULL",
+                null, null);
+        if (localRawProfile == null) return null;
 
         try {
-            if (cursor.moveToFirst()) {
-                return cursor.getString(cursor.getColumnIndex(Phone.DISPLAY_NAME));
+            if (!localRawProfile.moveToFirst()) {
+                return null;
             }
+            localRowProfileId = localRawProfile.getLong(0);
         } finally {
-            cursor.close();
+            localRawProfile.close();
         }
-        return null;
+
+        // Find the structured name for the raw contact.
+        final Cursor structuredName = cr.query(
+                Profile.CONTENT_URI.buildUpon().appendPath(Contacts.Data.CONTENT_DIRECTORY).build(),
+                new String[] {CommonDataKinds.StructuredName.GIVEN_NAME,
+                    CommonDataKinds.StructuredName.FAMILY_NAME},
+                Data.RAW_CONTACT_ID + "=" + localRowProfileId,
+                null, null);
+        if (structuredName == null) return null;
+
+        try {
+            if (!structuredName.moveToFirst()) {
+                return null;
+            }
+            String partialName = structuredName.getString(0);
+            if (TextUtils.isEmpty(partialName)) {
+                partialName = structuredName.getString(1);
+            }
+            return partialName;
+        } finally {
+            structuredName.close();
+        }
+    }
+
+    private static final String getProfileDisplayName(Context context) {
+        final ContentResolver cr = context.getContentResolver();
+        final Cursor profile = cr.query(Profile.CONTENT_URI,
+                new String[] {Profile.DISPLAY_NAME}, null, null, null);
+        if (profile == null) return null;
+
+        try {
+            if (!profile.moveToFirst()) {
+                return null;
+            }
+            return profile.getString(0);
+        } finally {
+            profile.close();
+        }
     }
 
     /** Not global warming, it's global change warning. */
