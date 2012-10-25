@@ -301,11 +301,11 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Solicitar parpadeo durante desbloqueo"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automáticamente"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de la suspensión"</string>
-    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar datos de propietario en pantalla de bloqueo"</string>
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostrar datos de propietario en pantalla bloqueada"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Datos de propietario"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
-    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Escribe el texto para la pantalla de bloqueo."</string>
-    <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostrar datos de usuario en la pantalla de bloqueo"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Ingresa el texto para la pantalla bloqueada."</string>
+    <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostrar datos de usuario en pantalla bloqueada"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Datos de usuario"</string>
     <string name="location_settings_title" msgid="4483843407328665068">"Acceso a la ubicación"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Seguridad"</string>
@@ -345,7 +345,7 @@
     <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="8722165189176138931">"Otro widget"</string>
     <string name="widget_none" msgid="2708702293215501854">"Ninguno"</string>
     <string name="widget_default" msgid="8269383575996003796">"Reloj"</string>
-    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Cambiar pant. de bloq."</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Cambiar pant. bloqueada"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Cambiar/inhab. patrón/PIN/contraseña"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Elige un método para bloquear la pantalla."</string>
     <string name="unlock_backup_info_summary" msgid="108524727803788172">"Si el desbloqueo facial no te reconoce, ¿cómo quieres desbloquear la pantalla?"</string>
@@ -549,8 +549,7 @@
     <string name="wifi_add_network" msgid="6234851776910938957">"Agregar red"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Redes Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Pulsador WPS"</string>
-    <!-- no translation found for wifi_menu_more_options (2448097861752719396) -->
-    <skip />
+    <string name="wifi_menu_more_options" msgid="2448097861752719396">"Más opciones"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"Ingreso PIN WPS"</string>
     <string name="wifi_menu_p2p" msgid="2575893749303670353">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Buscar"</string>
@@ -563,7 +562,7 @@
     <string name="wifi_other_network" msgid="1048006316504242214">"Otra red…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Más"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Configuración automática (WPS)"</string>
-    <string name="wifi_required_info_text" msgid="9014073093293520112">""</string>
+    <string name="wifi_required_info_text" msgid="9014073093293520112">"Necesitas conexión Wi-Fi para completar la configuración. Una vez finalizada, podrás alternar entre Wi-Fi y conexión de datos móviles."</string>
     <string name="wifi_show_advanced" msgid="1793703023711426246">"Mostrar las opciones avanzadas"</string>
     <string name="wifi_wps_setup_title" msgid="6034518116333042484">"Configuración Wi-Fi protegida"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Iniciando la WPS…"</string>
@@ -723,15 +722,18 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"Después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fondo de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Elegir fondo de pantalla de"</string>
-    <string name="screensaver_settings_title" msgid="830579400192185646">"Modo de suspensión"</string>
+    <!-- no translation found for screensaver_settings_title (3625638436771775594) -->
+    <skip />
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Cuando esté conectado o cuando se encuentre inactivo y cargándose"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Cualquiera de las dos opciones"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Durante la carga"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Cuando esté conectado"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Apagado"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="8842133053691392237">"Para controlar qué sucede cuando el dispositivo está conectado o inactivo, activa el modo de suspensión."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="5319285293085224663">"Cuándo activar el modo de suspensión"</string>
-    <string name="screensaver_settings_dream_start" msgid="3897751480634598243">"Activar modo de suspensión ahora"</string>
+    <!-- no translation found for screensaver_settings_when_to_dream (8352267826043957746) -->
+    <skip />
+    <!-- no translation found for screensaver_settings_dream_start (4998187847985120168) -->
+    <skip />
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Configuración"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
@@ -1315,7 +1317,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Acceso directo a la accesibilidad"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Encendido"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactivada"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Cuando esta función está activada, puedes activar las funciones de accesibilidad rápidamente en dos pasos."\n\n"Paso 1: mantén presionado el botón de encendido hasta que oigas un sonido o notes una vibración."\n\n"Paso 2: mantén la pantalla presionada con dos dedos hasta que oigas una confirmación."\n\n"Si el dispositivo tiene varios usuarios, este acceso directo en la pantalla de bloqueo permite habilitar la accesibilidad de forma temporal hasta que el dispositivo se desbloquea."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Cuando esta función está activada, puedes activar las funciones de accesibilidad rápidamente en dos pasos."\n\n"Paso 1: mantén presionado el botón de encendido hasta que oigas un sonido o notes una vibración."\n\n"Paso 2: mantén la pantalla presionada con dos dedos hasta que oigas una confirmación."\n\n"Si el dispositivo tiene varios usuarios, este acceso directo en la pantalla bloqueada permite habilitar la accesibilidad de forma temporal hasta que el dispositivo se desbloquea."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Texto grande"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ampliación de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Actualizar automáticamente la ampliación de pantalla"</string>
@@ -1656,8 +1658,7 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"No se activó ningún seguimiento."</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Se activaron <xliff:g id="NUM">%1$d</xliff:g> seguimientos."</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Se activaron todos los seguimientos."</string>
-    <!-- no translation found for enable_opengl_traces_title (6790444011053219871) -->
-    <skip />
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Seguimientos de OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar límites de diseño"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Mostrar márgenes, límites de clips, etc."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar el uso de CPU"</string>
