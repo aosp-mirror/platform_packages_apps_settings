@@ -59,6 +59,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String CONFIRM_CREDENTIALS = "confirm_credentials";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
+        private static final String FINISH_PENDING = "finish_pending";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
 
         private static final boolean ALWAY_SHOW_TUTORIAL = true;
@@ -68,6 +69,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
         private KeyStore mKeyStore;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
+        private boolean mFinishPending = false;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
                 mWaitingForConfirmation = savedInstanceState.getBoolean(WAITING_FOR_CONFIRMATION);
+                mFinishPending = savedInstanceState.getBoolean(FINISH_PENDING);
             }
 
             if (mPasswordConfirmed) {
@@ -101,7 +104,14 @@ public class ChooseLockGeneric extends PreferenceActivity {
             }
         }
 
-
+        @Override
+        public void onResume() {
+            super.onResume();
+            if (mFinishPending) {
+                mFinishPending = false;
+                finish();
+            }
+        }
 
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -170,6 +180,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
             // Saved so we don't force user to re-enter their password if configuration changes
             outState.putBoolean(PASSWORD_CONFIRMED, mPasswordConfirmed);
             outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
+            outState.putBoolean(FINISH_PENDING, mFinishPending);
         }
 
         private void updatePreferencesOrFinish() {
@@ -352,10 +363,11 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 intent.putExtra(CONFIRM_CREDENTIALS, false);
                 intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK,
                         isFallback);
-                if(isFallback) {
+                if (isFallback) {
                     startActivityForResult(intent, FALLBACK_REQUEST);
                     return;
                 } else {
+                    mFinishPending = true;
                     intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     startActivity(intent);
                 }
@@ -369,22 +381,26 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 intent.putExtra(CONFIRM_CREDENTIALS, false);
                 intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK,
                         isFallback);
-                if(isFallback) {
+                if (isFallback) {
                     startActivityForResult(intent, FALLBACK_REQUEST);
                     return;
                 } else {
+                    mFinishPending = true;
                     intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                     startActivity(intent);
                 }
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK) {
                 Intent intent = getBiometricSensorIntent();
+                mFinishPending = true;
                 startActivity(intent);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mChooseLockSettingsHelper.utils().clearLock(false);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
                 getActivity().setResult(Activity.RESULT_OK);
+                finish();
+            } else {
+                finish();
             }
-            finish();
         }
 
         @Override
