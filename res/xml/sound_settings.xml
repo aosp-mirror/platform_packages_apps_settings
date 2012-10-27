@@ -96,7 +96,13 @@
     <!-- Do not nest these, or removals in code will break -->
     <PreferenceScreen
         android:key="dock_audio"
-        android:title="@string/dock_audio_settings_title" />
+        android:title="@string/dock_audio_settings_title">
+        <CheckBoxPreference
+            android:title="@string/bluetooth_dock_settings_a2dp"
+            android:key="dock_audio_media_enabled"
+            android:enabled="true"
+            />
+    </PreferenceScreen>
 
     <CheckBoxPreference
         android:key="dock_sounds"

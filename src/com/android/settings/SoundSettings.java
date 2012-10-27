@@ -72,8 +72,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
     private static final String KEY_DOCK_CATEGORY = "dock_category";
-    private static final String KEY_AUDIO_SETTINGS = "dock_audio";
+    private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
+    private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -99,6 +100,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Preference mDockAudioSettings;
     private CheckBoxPreference mDockSounds;
     private Intent mDockIntent;
+    private CheckBoxPreference mDockAudioMediaEnabled;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -306,17 +308,32 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             int dockState = mDockIntent != null
                     ? mDockIntent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0)
                     : Intent.EXTRA_DOCK_STATE_UNDOCKED;
+
             if (dockState == Intent.EXTRA_DOCK_STATE_UNDOCKED) {
                 showDialog(DIALOG_NOT_DOCKED);
             } else {
-                Intent i = new Intent(mDockIntent);
-                i.setAction(DockEventReceiver.ACTION_DOCK_SHOW_UI);
-                i.setClass(getActivity(), DockEventReceiver.class);
-                getActivity().sendBroadcast(i);
+                boolean isBluetooth = mDockIntent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) != null;
+
+                if (isBluetooth) {
+                    Intent i = new Intent(mDockIntent);
+                    i.setAction(DockEventReceiver.ACTION_DOCK_SHOW_UI);
+                    i.setClass(getActivity(), DockEventReceiver.class);
+                    getActivity().sendBroadcast(i);
+                } else {
+                    PreferenceScreen ps = (PreferenceScreen)mDockAudioSettings;
+                    Bundle extras = ps.getExtras();
+                    extras.putBoolean("checked",
+                            Settings.Global.getInt(getContentResolver(),
+                                    Settings.Global.DOCK_AUDIO_MEDIA_ENABLED, 0) == 1);
+                    super.onPreferenceTreeClick(ps, ps);
+                }
             }
         } else if (preference == mDockSounds) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.DOCK_SOUNDS_ENABLED,
                     mDockSounds.isChecked() ? 1 : 0);
+        } else if (preference == mDockAudioMediaEnabled) {
+            Settings.Global.putInt(getContentResolver(), Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
+                    mDockAudioMediaEnabled.isChecked() ? 1 : 0);
         }
         return true;
     }
@@ -346,20 +363,20 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     }
 
     private void initDockSettings() {
+        ContentResolver resolver = getContentResolver();
+
         if (needsDockSettings()) {
-
-            ContentResolver resolver = getContentResolver();
-
-            mDockAudioSettings = findPreference(KEY_AUDIO_SETTINGS);
-
             mDockSounds = (CheckBoxPreference) findPreference(KEY_DOCK_SOUNDS);
             mDockSounds.setPersistent(false);
             mDockSounds.setChecked(Settings.Global.getInt(resolver,
                     Settings.Global.DOCK_SOUNDS_ENABLED, 0) != 0);
+            mDockAudioSettings = findPreference(KEY_DOCK_AUDIO_SETTINGS);
+            mDockAudioSettings.setEnabled(false);
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_DOCK_CATEGORY));
-            getPreferenceScreen().removePreference(findPreference(KEY_AUDIO_SETTINGS));
+            getPreferenceScreen().removePreference(findPreference(KEY_DOCK_AUDIO_SETTINGS));
             getPreferenceScreen().removePreference(findPreference(KEY_DOCK_SOUNDS));
+            Settings.Global.putInt(resolver, Settings.Global.DOCK_AUDIO_MEDIA_ENABLED, 1);
         }
     }
 
@@ -367,15 +384,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (mDockAudioSettings != null) {
             int dockState = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0);
 
-            boolean isBluetooth = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) != null;
+            boolean isBluetooth =
+                    intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) != null;
 
-            if (!isBluetooth) {
-                // No dock audio if not on Bluetooth.
-                mDockAudioSettings.setEnabled(false);
-            } else {
-                mDockAudioSettings.setEnabled(true);
-                mDockIntent = intent;
-            }
+            mDockIntent = intent;
 
             if (dockState != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
                 // remove undocked dialog if currently showing.
@@ -384,6 +396,30 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 } catch (IllegalArgumentException iae) {
                     // Maybe it was already dismissed
                 }
+
+                if (isBluetooth) {
+                    mDockAudioSettings.setEnabled(true);
+                } else {
+                    if (dockState == Intent.EXTRA_DOCK_STATE_LE_DESK) {
+                        ContentResolver resolver = getContentResolver();
+                        mDockAudioSettings.setEnabled(true);
+                        if (Settings.Global.getInt(resolver,
+                                Settings.Global.DOCK_AUDIO_MEDIA_ENABLED, -1) == -1) {
+                            Settings.Global.putInt(resolver,
+                                    Settings.Global.DOCK_AUDIO_MEDIA_ENABLED, 0);
+                        }
+                        mDockAudioMediaEnabled =
+                                (CheckBoxPreference) findPreference(KEY_DOCK_AUDIO_MEDIA_ENABLED);
+                        mDockAudioMediaEnabled.setPersistent(false);
+                        mDockAudioMediaEnabled.setChecked(
+                                Settings.Global.getInt(resolver,
+                                        Settings.Global.DOCK_AUDIO_MEDIA_ENABLED, 0) != 0);
+                    } else {
+                        mDockAudioSettings.setEnabled(false);
+                    }
+                }
+            } else {
+                mDockAudioSettings.setEnabled(false);
             }
         }
     }
