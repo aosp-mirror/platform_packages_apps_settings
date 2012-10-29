@@ -61,14 +61,14 @@ public class CryptKeeperSettings extends Fragment {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-                int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
-                int invalidCharger = intent.getIntExtra(BatteryManager.EXTRA_INVALID_CHARGER, 0);
+                final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+                final int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                final int invalidCharger = intent.getIntExtra(
+                    BatteryManager.EXTRA_INVALID_CHARGER, 0);
 
-                boolean levelOk = level >= MIN_BATTERY_LEVEL;
-                boolean pluggedOk =
-                    (plugged == BatteryManager.BATTERY_PLUGGED_AC ||
-                     plugged == BatteryManager.BATTERY_PLUGGED_USB) &&
+                final boolean levelOk = level >= MIN_BATTERY_LEVEL;
+                final boolean pluggedOk =
+                    ((plugged & BatteryManager.BATTERY_PLUGGED_ANY) != 0) &&
                      invalidCharger == 0;
 
                 // Update UI elements based on power/battery status
@@ -204,4 +204,3 @@ public class CryptKeeperSettings extends Fragment {
         ((PreferenceActivity) getActivity()).onPreferenceStartFragment(null, preference);
     }
 }
-
