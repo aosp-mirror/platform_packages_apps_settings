@@ -94,6 +94,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
     private static final String MSAA_PROPERTY = "debug.egl.force_msaa";
+    private static final String BUGREPORT = "bugreport";
     private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
     private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
 
@@ -144,6 +145,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private boolean mDontPokeProperties;
 
     private CheckBoxPreference mEnableAdb;
+    private Preference mBugreport;
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mEnforceReadExternal;
@@ -203,6 +205,7 @@ public class DevelopmentSettings extends PreferenceFragment
         addPreferencesFromResource(R.xml.development_prefs);
 
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
+        mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
         mEnforceReadExternal = findAndInitCheckboxPref(ENFORCE_READ_EXTERNAL);
@@ -417,6 +420,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
         updateVerifyAppsOverUsbOptions();
+        updateBugreportOptions();
     }
 
     private void resetDangerousOptions() {
@@ -546,6 +550,25 @@ public class DevelopmentSettings extends PreferenceFragment
     private boolean showVerifierSetting() {
         return Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
+    }
+
+    private void updateBugreportOptions() {
+        if ("user".equals(Build.TYPE)) {
+            final ContentResolver resolver = getActivity().getContentResolver();
+            final boolean adbEnabled = Settings.Global.getInt(
+                    resolver, Settings.Global.ADB_ENABLED, 0) != 0;
+            if (adbEnabled) {
+                mBugreport.setEnabled(true);
+                mBugreportInPower.setEnabled(true);
+            } else {
+                mBugreport.setEnabled(false);
+                mBugreportInPower.setEnabled(false);
+                mBugreportInPower.setChecked(false);
+                Settings.Secure.putInt(resolver, Settings.Secure.BUGREPORT_IN_POWER_MENU, 0);
+            }
+        } else {
+            mBugreportInPower.setEnabled(true);
+        }
     }
 
     // Returns the current state of the system property that controls
@@ -988,6 +1011,7 @@ public class DevelopmentSettings extends PreferenceFragment
                         Settings.Global.ADB_ENABLED, 0);
                 mVerifyAppsOverUsb.setEnabled(false);
                 mVerifyAppsOverUsb.setChecked(false);
+                updateBugreportOptions();
             }
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
@@ -1100,6 +1124,7 @@ public class DevelopmentSettings extends PreferenceFragment
                         Settings.Global.ADB_ENABLED, 1);
                 mVerifyAppsOverUsb.setEnabled(true);
                 updateVerifyAppsOverUsbOptions();
+                updateBugreportOptions();
             } else {
                 // Reset the toggle
                 mEnableAdb.setChecked(false);
