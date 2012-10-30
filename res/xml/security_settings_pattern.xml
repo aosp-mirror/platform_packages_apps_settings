@@ -43,12 +43,6 @@
             android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
 
         <PreferenceScreen
-           android:key="choose_user_selected_lockscreen_widget"
-           android:title="@string/choose_user_selected_lockscreen_widget_picker_title"
-           android:summary=""
-           android:persistent="false"/>
-
-        <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"

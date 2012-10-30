@@ -1315,6 +1315,18 @@
             </intent-filter>
         </activity>
 
+        <!-- Special picker for keyguard widgets -->
+        <activity android:name="KeyguardAppWidgetPickActivity"
+                android:label="@string/widget_picker_title"
+                android:theme="@android:style/Theme.Holo.Wallpaper.NoTitleBar"
+                android:permission="android.permission.BIND_KEYGUARD_APPWIDGET"
+                android:finishOnCloseSystemDialogs="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.KEYGUARD_APPWIDGET_PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="UsageStats" android:label="@string/usage_stats_label"
                   android:taskAffinity="com.android.settings"
                   android:parentActivityName="Settings">
