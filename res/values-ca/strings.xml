@@ -341,10 +341,6 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Tria bloq. de pantalla"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Tria bloq. còpia seg."</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueig de pantalla"</string>
-    <string name="choose_lockscreen_status_widget_picker_title" msgid="441723074728339356">"Widget d\'estat"</string>
-    <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="8722165189176138931">"Un altre widget"</string>
-    <string name="widget_none" msgid="2708702293215501854">"Cap"</string>
-    <string name="widget_default" msgid="8269383575996003796">"Rellotge"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Canvi pantalla bloq."</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Canvia o desactiva la seguretat de contrasenyes, PIN o patrons"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Trieu un mètode per bloquejar la pantalla"</string>
@@ -722,13 +718,13 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fons de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecciona fons de pantalla de"</string>
-    <string name="screensaver_settings_title" msgid="3349790120327233241">"Fantasia"</string>
+    <string name="screensaver_settings_title" msgid="3349790120327233241">"Estalvi de pantalla"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Quan el dispositiu estigui en un connector o inactiu i carregant-se"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Una de les dues"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Mentre es carrega"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Quan el dispositiu estigui en un connector"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Desactivat"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="8842133053691392237">"Per controlar què passa quan el telèfon està connectat o en repòs, activa el mode de repòs."</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Per comprovar què passa quan el telèfon està connectat o en mode de suspensió, activa l\'estalvi de pantalla."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"Quan s\'ha d\'activar l\'estalvi de pantalla"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Comença ara mateix"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Configuració"</string>
@@ -1314,7 +1310,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Drecera d\'accessibilitat"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activada"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactiva"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Quan aquesta funció està activada, pots activar ràpidament les funcions d\'accessibilitat en dos passos."\n\n"Pas 1: mantén premut el botó d\'encesa fins que sentis un so o notis una vibració."\n\n"Pas 2: mantén premut amb dos dits fins que sentis una confirmació d\'àudio."\n\n"Si el dispositiu té diversos usuaris, fer servir aquesta drecera a la pantalla de bloqueig activa temporalment l\'accessibilitat fins que es desbloqueja el dispositiu."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Quan aquesta funció està activada, pots activar ràpidament les funcions d\'accessibilitat en dos passos."\n\n"Pas 1: mantén premut el botó d\'engegada fins que sentis un so o notis una vibració."\n\n"Pas 2: mantén premut amb dos dits fins que sentis una confirmació d\'àudio."\n\n"Si el dispositiu té diversos usuaris, fer servir aquesta drecera a la pantalla de bloqueig activa temporalment l\'accessibilitat fins que es desbloqueja el dispositiu."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Text gran"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ampliació de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Actualitza ampliació automàticament"</string>
@@ -1446,8 +1442,7 @@
     <string name="tts_engine_error_config" msgid="5820525416624637313">"Configura"</string>
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Selecciona un altre motor"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Pot ser que aquest motor de síntesi de la parla pugui recopilar tot el text que es dirà en veu alta, incloses les dades personals, com ara les contrasenyes i els números de les targetes de crèdit. Ve del motor <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Voleu activar l\'ús d\'aquest motor de síntesi de la parla?"</string>
-    <!-- no translation found for tts_engine_network_required (1190837151485314743) -->
-    <skip />
+    <string name="tts_engine_network_required" msgid="1190837151485314743">"Aquest idioma requereix una connexió activa a la xarxa per generar resultats de text a veu."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Motors"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Configuració de: <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> està activat"</string>
