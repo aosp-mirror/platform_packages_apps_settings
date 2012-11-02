@@ -21,7 +21,9 @@ import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -32,6 +34,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
+
+import java.util.List;
 
 import libcore.util.MutableBoolean;
 
@@ -270,6 +274,12 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
             final boolean weakBiometricAvailable =
                     mChooseLockSettingsHelper.utils().isBiometricWeakInstalled();
+
+            // if there are multiple users, disable "None" setting
+            UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+            List<UserInfo> users = mUm.getUsers(true);
+            final boolean singleUser = users.size() == 1;
+
             for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
                 Preference pref = entries.getPreference(i);
                 if (pref instanceof PreferenceScreen) {
@@ -278,6 +288,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
                     boolean visible = true;
                     if (KEY_UNLOCK_SET_OFF.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+                        visible = singleUser; // don't show when there's more than 1 user
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(key)) {
