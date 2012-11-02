@@ -358,7 +358,10 @@ public class InstalledAppDetails extends Fragment
             if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 enabled = handleDisableable(mUninstallButton);
             } else if ((mPackageInfo.applicationInfo.flags
-                    & ApplicationInfo.FLAG_INSTALLED) == 0) {
+                    & ApplicationInfo.FLAG_INSTALLED) == 0
+                    && mUserManager.getUsers().size() >= 2) {
+                // When we have multiple users, there is a separate menu
+                // to uninstall for all users.
                 mUninstallButton.setText(R.string.uninstall_text);
                 enabled = false;
             } else {
@@ -811,14 +814,19 @@ public class InstalledAppDetails extends Fragment
             // First time init: are we displaying an uninstalled app?
             mInitialized = true;
             mShowUninstalled = (mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0;
-        } else if (!mShowUninstalled) {
-            // All other times: if we did not start out with the app uninstalled,
-            // then if it becomes uninstalled we want to go away.
+        } else {
+            // All other times: if the app no longer exists then we want
+            // to go away.
             try {
                 ApplicationInfo ainfo = getActivity().getPackageManager().getApplicationInfo(
                         mAppEntry.info.packageName, PackageManager.GET_UNINSTALLED_PACKAGES
                         | PackageManager.GET_DISABLED_COMPONENTS);
-                return (ainfo.flags&ApplicationInfo.FLAG_INSTALLED) != 0;
+                if (!mShowUninstalled) {
+                    // If we did not start out with the app uninstalled, then
+                    // it transitioning to the uninstalled state for the current
+                    // user means we should go away as well.
+                    return (ainfo.flags&ApplicationInfo.FLAG_INSTALLED) != 0;
+                }
             } catch (NameNotFoundException e) {
                 return false;
             }
@@ -1286,11 +1294,7 @@ public class InstalledAppDetails extends Fragment
                         .execute((Object)null);
                     }
                 } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                    try {
-                        mPm.installExistingPackage(packageName);
-                        refreshUi();
-                    } catch (NameNotFoundException e) {
-                    }
+                    uninstallPkg(packageName, true, false);
                 } else {
                     uninstallPkg(packageName, false, false);
                 }
