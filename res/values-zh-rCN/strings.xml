@@ -341,9 +341,6 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"选择备份锁"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定"</string>
-    <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="2016562665711402130">"添加小部件"</string>
-    <string name="widget_none" msgid="2708702293215501854">"无"</string>
-    <string name="widget_default" msgid="8269383575996003796">"时钟"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改锁定屏幕"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"更改或停用图案、PIN 或密码保护"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"选择锁定屏幕的方法"</string>
@@ -721,14 +718,13 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"无操作 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁纸"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"选择壁纸来源"</string>
-    <!-- no translation found for screensaver_settings_title (3349790120327233241) -->
-    <skip />
+    <string name="screensaver_settings_title" msgid="3349790120327233241">"互动屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"插入基座或休眠且正在充电时"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"任意一种情况"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"充电时"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"插入基座时"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"已关闭"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="8842133053691392237">"要控制手机在插入基座时和/或休眠状态下的行为，请启用“休眠模式”。"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"要控制手机在插入基座时和/或休眠状态下的行为，请启用“互动屏保”。"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"何时启动"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"立即启动"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"设置"</string>
@@ -1070,7 +1066,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"清除数据"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"卸载更新"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"您已选择在默认情况下对某些操作启动此应用。"</string>
-    <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"您已选择允许该应用创建窗口小部件并访问其数据。"</string>
+    <string name="always_allow_bind_appwidgets_text" msgid="3368654672141202604">"您已选择允许该应用创建小部件并访问其数据。"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"无默认设置。"</string>
     <string name="clear_activities" msgid="7408923511535174430">"清除默认设置"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"此应用可能不是针对您的屏幕设计的。您可以在此处调整其显示尺寸/比例，让它适合您的屏幕。"</string>
@@ -1291,10 +1287,10 @@
     <string name="enforce_read_external_confirm_title" product="default" msgid="273220585729800783">"要对 SD 卡进行读写保护吗？"</string>
     <string name="enforce_read_external_confirm_message" product="default" msgid="3858482712337574407">"如果 SD 卡受到读写保护，则应用必须请求相关权限才能读取外部存储设备中的数据。"\n\n"某些应用需要其开发者更新之后才能正常使用。"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"选择小工具"</string>
-    <string name="widget_picker_title" msgid="9130684134213467557">"选择窗口小部件"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"是否允许该应用创建并访问窗口小部件？"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"当您创建窗口小部件后，<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>能够访问其显示的所有数据。"</string>
-    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"始终允许<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>创建窗口小部件并访问其数据"</string>
+    <string name="widget_picker_title" msgid="9130684134213467557">"选择小部件"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"是否允许该应用创建并访问小部件？"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"当您创建小部件后，<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>能够访问其显示的所有数据。"</string>
+    <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"始终允许<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>创建小部件并访问其数据"</string>
     <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> 天 <xliff:g id="HOURS">%2$d</xliff:g> 小时 <xliff:g id="MINUTES">%3$d</xliff:g> 分 <xliff:g id="SECONDS">%4$d</xliff:g> 秒"</string>
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> 小时 <xliff:g id="MINUTES">%2$d</xliff:g> 分 <xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> 分 <xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
@@ -1774,10 +1770,10 @@
     <string name="vpn_create" msgid="5628219087569761496">"添加 VPN 配置文件"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"修改配置文件"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"删除配置文件"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"始终处于打开状态的 VPN"</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"始终开启的 VPN"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"选择要始终保持连接的 VPN 配置文件。只有在连接到此 VPN 之后才可以使用网络。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"无"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"始终处于打开状态的 VPN 需要服务器和 DNS 的 IP 地址。"</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"始终开启的 VPN 需要服务器和 DNS 的 IP 地址。"</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"目前没有网络连接。请稍后重试。"</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"证书缺失。请修改配置文件。"</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"系统"</string>
