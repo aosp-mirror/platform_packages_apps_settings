@@ -27,8 +27,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -120,7 +122,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Add options for lock/unlock screen
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
-            if (mLockPatternUtils.isLockScreenDisabled()) {
+            // if there are multiple users, disable "None" setting
+            UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+            List<UserInfo> users = mUm.getUsers(true);
+            final boolean singleUser = users.size() == 1;
+
+            if (singleUser && mLockPatternUtils.isLockScreenDisabled()) {
                 resid = R.xml.security_settings_lockscreen;
             } else {
                 resid = R.xml.security_settings_chooser;
