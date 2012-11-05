@@ -341,10 +341,6 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокировка экрана"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Доп. способ блокировки"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Блокировка экрана"</string>
-    <string name="choose_lockscreen_status_widget_picker_title" msgid="441723074728339356">"Основной виджет"</string>
-    <string name="choose_user_selected_lockscreen_widget_picker_title" msgid="8722165189176138931">"Дополнительный виджет"</string>
-    <string name="widget_none" msgid="2708702293215501854">"Нет"</string>
-    <string name="widget_default" msgid="8269383575996003796">"Часы"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Изменение блок. экрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Смена или отключение графического ключа, PIN-кода и пароля"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Выбрать метод блокировки экрана"</string>
@@ -722,14 +718,13 @@
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Обои"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Установка обоев"</string>
-    <!-- no translation found for screensaver_settings_title (3349790120327233241) -->
-    <skip />
+    <string name="screensaver_settings_title" msgid="3349790120327233241">"Заставка"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"При подключении к док-станции, при переходе в спящий режим и во время зарядки"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Всегда"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Во время зарядки"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"В док-станции"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"ВЫКЛ"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="8842133053691392237">"Чтобы знать, что происходит с телефоном, когда он подключен к док-станции или находится в спящем режиме, включите заставку."</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Чтобы знать, что происходит с телефоном, когда он подключен к док-станции или находится в спящем режиме, включите заставку."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"Когда включать"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Включить"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Настройки"</string>
@@ -1447,8 +1442,7 @@
     <string name="tts_engine_error_config" msgid="5820525416624637313">"Настроить"</string>
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Выбрать другую систему"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Данная система синтеза речи может записывать произносимые слова, включая личные данные, такие как пароли и номера кредитных карт. Это осуществляет система <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Разрешить использование этой системы синтеза речи?"</string>
-    <!-- no translation found for tts_engine_network_required (1190837151485314743) -->
-    <skip />
+    <string name="tts_engine_network_required" msgid="1190837151485314743">"Чтобы включить синтезатор речи для этого языка, необходимо подключение к Интернету."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Системы"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> вкл."</string>
@@ -1658,7 +1652,7 @@
     <string name="enable_traces_summary_none" msgid="1867562808503494163">"Все трассировки отключены"</string>
     <string name="enable_traces_summary_num" msgid="8978230237777454269">"Включено трассировок: <xliff:g id="NUM">%1$d</xliff:g>"</string>
     <string name="enable_traces_summary_all" msgid="3950139649125158247">"Все трассировки включены"</string>
-    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Разрешить трассировку OpenGL"</string>
+    <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Вкл. трассировку OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показывать границы макета"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показывать границы клипа, поля и т. д."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показывать загрузку ЦП"</string>
