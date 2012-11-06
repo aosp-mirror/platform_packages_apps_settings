@@ -84,6 +84,7 @@ public class KeyguardAppWidgetPickActivity extends Activity
     private Intent mResultData;
     private LockPatternUtils mLockPatternUtils;
     private boolean mSuccess;
+    private Bundle mExtraConfigureOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,7 @@ public class KeyguardAppWidgetPickActivity extends Activity
         } else {
             finish();
         }
+        mExtraConfigureOptions = intent.getBundleExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
 
         mGridView = (GridView) findViewById(R.id.widget_list);
         mAppWidgetManager = AppWidgetManager.getInstance(this);
@@ -466,12 +468,8 @@ public class KeyguardAppWidgetPickActivity extends Activity
             setResultData(result, intent);
         } else {
             try {
-                Bundle options = null;
-                if (intent.getExtras() != null) {
-                    options = intent.getExtras().getBundle(
-                            AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
-                }
-                mAppWidgetManager.bindAppWidgetId(mAppWidgetId, intent.getComponent(), options);
+                mAppWidgetManager.bindAppWidgetId(
+                        mAppWidgetId, intent.getComponent(), mExtraConfigureOptions);
                 result = RESULT_OK;
             } catch (IllegalArgumentException e) {
                 // This is thrown if they're already bound, or otherwise somehow
