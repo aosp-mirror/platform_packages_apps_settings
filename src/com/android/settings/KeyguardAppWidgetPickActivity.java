@@ -594,18 +594,23 @@ public class KeyguardAppWidgetPickActivity extends Activity
             } else if (requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
                 mSuccess = true;
                 mLockPatternUtils.addAppWidget(appWidgetId, 0);
-                finishDelayedAndShowLockScreen();
+                finishDelayedAndShowLockScreen(appWidgetId);
             } else {
-                finishDelayedAndShowLockScreen();
+                finishDelayedAndShowLockScreen(AppWidgetManager.INVALID_APPWIDGET_ID);
             }
         }
     }
 
-    private void finishDelayedAndShowLockScreen() {
+    private void finishDelayedAndShowLockScreen(int appWidgetId) {
         IBinder b = ServiceManager.getService(Context.WINDOW_SERVICE);
         IWindowManager iWm = IWindowManager.Stub.asInterface(b);
+        Bundle opts = null;
+        if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+            opts = new Bundle();
+            opts.putInt(LockPatternUtils.KEYGUARD_SHOW_APPWIDGET, appWidgetId);
+        }
         try {
-            iWm.lockNow(null);
+            iWm.lockNow(opts);
         } catch (RemoteException e) {
         }
 
