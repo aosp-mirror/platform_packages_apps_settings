@@ -89,7 +89,7 @@ public class KeyguardAppWidgetPickActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.keyguard_appwidget_pick_layout);
+        setContentView(R.layout.keyguard_appwidget_picker_layout);
         super.onCreate(savedInstanceState);
 
         // Set default return data
@@ -106,6 +106,14 @@ public class KeyguardAppWidgetPickActivity extends Activity
         mExtraConfigureOptions = intent.getBundleExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
 
         mGridView = (GridView) findViewById(R.id.widget_list);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int maxGridWidth = getResources().getDimensionPixelSize(
+                R.dimen.keyguard_appwidget_picker_max_width);
+
+        if (maxGridWidth < dm.widthPixels) {
+            mGridView.getLayoutParams().width = maxGridWidth;
+        }
         mAppWidgetManager = AppWidgetManager.getInstance(this);
         mAppWidgetLoader = new AppWidgetLoader<Item>(this, mAppWidgetManager, this);
         mItems = mAppWidgetLoader.getItems(getIntent());
