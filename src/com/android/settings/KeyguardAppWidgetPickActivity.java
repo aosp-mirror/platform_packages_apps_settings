@@ -17,26 +17,24 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.LauncherActivity.IconResizer;
 import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.graphics.ColorFilter;
 import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -50,11 +48,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.widget.LockPatternUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -77,6 +77,7 @@ public class KeyguardAppWidgetPickActivity extends Activity
     private AppWidgetLoader<Item> mAppWidgetLoader;
     private List<Item> mItems;
     private GridView mGridView;
+    private AppWidgetAdapter mAppWidgetAdapter;
     private AppWidgetManager mAppWidgetManager;
     private int mAppWidgetId;
     // Might make it possible to make this be false in future
@@ -108,8 +109,8 @@ public class KeyguardAppWidgetPickActivity extends Activity
         mAppWidgetManager = AppWidgetManager.getInstance(this);
         mAppWidgetLoader = new AppWidgetLoader<Item>(this, mAppWidgetManager, this);
         mItems = mAppWidgetLoader.getItems(getIntent());
-        AppWidgetAdapter adapter = new AppWidgetAdapter(this, mItems);
-        mGridView.setAdapter(adapter);
+        mAppWidgetAdapter = new AppWidgetAdapter(this, mItems);
+        mGridView.setAdapter(mAppWidgetAdapter);
         mGridView.setOnItemClickListener(this);
 
         mLockPatternUtils = new LockPatternUtils(this); // TEMP-- we want to delete this
@@ -127,207 +128,40 @@ public class KeyguardAppWidgetPickActivity extends Activity
         setResult(code, result);
     }
 
-    private static class EmptyDrawable extends Drawable {
-        private final int mWidth;
-        private final int mHeight;
-
-        EmptyDrawable(int width, int height) {
-            mWidth = width;
-            mHeight = height;
-        }
-
-        @Override
-        public int getIntrinsicWidth() {
-            return mWidth;
-        }
-
-        @Override
-        public int getIntrinsicHeight() {
-            return mHeight;
-        }
-
-        @Override
-        public int getMinimumWidth() {
-            return mWidth;
-        }
-
-        @Override
-        public int getMinimumHeight() {
-            return mHeight;
-        }
-
-        @Override
-        public void draw(Canvas canvas) {
-        }
-
-        @Override
-        public void setAlpha(int alpha) {
-        }
-
-        @Override
-        public void setColorFilter(ColorFilter cf) {
-        }
-
-        @Override
-        public int getOpacity() {
-            return PixelFormat.TRANSLUCENT;
-        }
-    }
-
-    /**
-     * Utility class to resize icons to match default icon size. Code is mostly
-     * borrowed from Launcher.
-     */
-    private static class IconResizer {
-        private final int mIconWidth;
-        private final int mIconHeight;
-
-        private final DisplayMetrics mMetrics;
-        private final Rect mOldBounds = new Rect();
-        private final Canvas mCanvas = new Canvas();
-
-        public IconResizer(int width, int height, DisplayMetrics metrics) {
-            mCanvas.setDrawFilter(new PaintFlagsDrawFilter(Paint.DITHER_FLAG,
-                    Paint.FILTER_BITMAP_FLAG));
-
-            mMetrics = metrics;
-            mIconWidth = width;
-            mIconHeight = height;
-        }
-
-        /**
-         * Returns a Drawable representing the thumbnail of the specified Drawable.
-         * The size of the thumbnail is defined by the dimension
-         * android.R.dimen.launcher_application_icon_size.
-         *
-         * This method is not thread-safe and should be invoked on the UI thread only.
-         *
-         * @param icon The icon to get a thumbnail of.
-         *
-         * @return A thumbnail for the specified icon or the icon itself if the
-         *         thumbnail could not be created.
-         */
-        public Drawable createIconThumbnail(Drawable icon) {
-            int width = mIconWidth;
-            int height = mIconHeight;
-
-            if (icon == null) {
-                return new EmptyDrawable(width, height);
-            }
-
-            try {
-                if (icon instanceof PaintDrawable) {
-                    PaintDrawable painter = (PaintDrawable) icon;
-                    painter.setIntrinsicWidth(width);
-                    painter.setIntrinsicHeight(height);
-                } else if (icon instanceof BitmapDrawable) {
-                    // Ensure the bitmap has a density.
-                    BitmapDrawable bitmapDrawable = (BitmapDrawable) icon;
-                    Bitmap bitmap = bitmapDrawable.getBitmap();
-                    if (bitmap.getDensity() == Bitmap.DENSITY_NONE) {
-                        bitmapDrawable.setTargetDensity(mMetrics);
-                    }
-                }
-                int iconWidth = icon.getIntrinsicWidth();
-                int iconHeight = icon.getIntrinsicHeight();
-
-                if (iconWidth > 0 && iconHeight > 0) {
-                    if (width < iconWidth || height < iconHeight) {
-                        final float ratio = (float) iconWidth / iconHeight;
-
-                        if (iconWidth > iconHeight) {
-                            height = (int) (width / ratio);
-                        } else if (iconHeight > iconWidth) {
-                            width = (int) (height * ratio);
-                        }
-
-                        final Bitmap.Config c = icon.getOpacity() != PixelFormat.OPAQUE ?
-                                    Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
-                        final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
-                        final Canvas canvas = mCanvas;
-                        canvas.setBitmap(thumb);
-                        // Copy the old bounds to restore them later
-                        // If we were to do oldBounds = icon.getBounds(),
-                        // the call to setBounds() that follows would
-                        // change the same instance and we would lose the
-                        // old bounds
-                        mOldBounds.set(icon.getBounds());
-                        final int x = (mIconWidth - width) / 2;
-                        final int y = (mIconHeight - height) / 2;
-                        icon.setBounds(x, y, x + width, y + height);
-                        icon.draw(canvas);
-                        icon.setBounds(mOldBounds);
-                        //noinspection deprecation
-                        icon = new BitmapDrawable(thumb);
-                        ((BitmapDrawable) icon).setTargetDensity(mMetrics);
-                        canvas.setBitmap(null);
-                    } else if (iconWidth < width && iconHeight < height) {
-                        final Bitmap.Config c = Bitmap.Config.ARGB_8888;
-                        final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
-                        final Canvas canvas = mCanvas;
-                        canvas.setBitmap(thumb);
-                        mOldBounds.set(icon.getBounds());
-                        final int x = (width - iconWidth) / 2;
-                        final int y = (height - iconHeight) / 2;
-                        icon.setBounds(x, y, x + iconWidth, y + iconHeight);
-                        icon.draw(canvas);
-                        icon.setBounds(mOldBounds);
-                        //noinspection deprecation
-                        icon = new BitmapDrawable(thumb);
-                        ((BitmapDrawable) icon).setTargetDensity(mMetrics);
-                        canvas.setBitmap(null);
-                    }
-                }
-
-            } catch (Throwable t) {
-                icon = new EmptyDrawable(width, height);
-            }
-
-            return icon;
-        }
-    }
-
     /**
      * Item that appears in the AppWidget picker grid.
      */
     public static class Item implements AppWidgetLoader.LabelledItem {
         protected static IconResizer sResizer;
 
-        protected IconResizer getResizer(Context context) {
-            if (sResizer == null) {
-                final Resources resources = context.getResources();
-                int size = (int) resources.getDimension(android.R.dimen.app_icon_size);
-                sResizer = new IconResizer(size, size, resources.getDisplayMetrics());
-            }
-            return sResizer;
-        }
+
         CharSequence label;
-        Drawable icon;
+        int appWidgetPreviewId;
+        int iconId;
         String packageName;
         String className;
         Bundle extras;
+        private WidgetPreviewLoader mWidgetPreviewLoader;
+        private Context mContext;
 
         /**
          * Create a list item from given label and icon.
          */
-        Item(Context context, CharSequence label, Drawable icon) {
+        Item(Context context, CharSequence label) {
             this.label = label;
-            this.icon = getResizer(context).createIconThumbnail(icon);
+            mContext = context;
         }
 
-        /**
-         * Create a list item and fill it with details from the given
-         * {@link ResolveInfo} object.
-         */
-        Item(Context context, PackageManager pm, ResolveInfo resolveInfo) {
-            label = resolveInfo.loadLabel(pm);
-            if (label == null && resolveInfo.activityInfo != null) {
-                label = resolveInfo.activityInfo.name;
-            }
+        void loadWidgetPreview(ImageView v) {
+            mWidgetPreviewLoader = new WidgetPreviewLoader(mContext, v);
+            mWidgetPreviewLoader.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, (Void[]) null);
+        }
 
-            icon = getResizer(context).createIconThumbnail(resolveInfo.loadIcon(pm));
-            packageName = resolveInfo.activityInfo.applicationInfo.packageName;
-            className = resolveInfo.activityInfo.name;
+        void cancelLoadingWidgetPreview() {
+            if (mWidgetPreviewLoader != null) {
+                mWidgetPreviewLoader.cancel(false);
+                mWidgetPreviewLoader = null;
+            }
         }
 
         /**
@@ -354,48 +188,264 @@ public class KeyguardAppWidgetPickActivity extends Activity
         public CharSequence getLabel() {
             return label;
         }
+
+        class WidgetPreviewLoader extends AsyncTask<Void, Bitmap, Void> {
+            private Resources mResources;
+            private PackageManager mPackageManager;
+            private int mIconDpi;
+            private ImageView mView;
+            private float mDensityScale;
+            public WidgetPreviewLoader(Context context, ImageView v) {
+                super();
+                mResources = context.getResources();
+                DisplayMetrics metrics = new DisplayMetrics();
+                ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                mDensityScale = metrics.density;
+                mPackageManager = context.getPackageManager();
+                ActivityManager activityManager =
+                        (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                mIconDpi = activityManager.getLauncherLargeIconDensity();
+                mView = v;
+            }
+            public Void doInBackground(Void... params) {
+                if (!isCancelled()) {
+                    int appWidgetPreviewWidth =
+                            mResources.getDimensionPixelSize(R.dimen.appwidget_preview_width);
+                    int appWidgetPreviewHeight =
+                            mResources.getDimensionPixelSize(R.dimen.appwidget_preview_height);
+                    // TODO: fix the hspan, vspan of the default preview
+                    Bitmap b = getWidgetPreview(new ComponentName(packageName, className),
+                            appWidgetPreviewId, iconId,
+                            appWidgetPreviewWidth, appWidgetPreviewHeight);
+                    publishProgress(b);
+                }
+                return null;
+            }
+            public void onProgressUpdate(Bitmap... values) {
+                if (!isCancelled()) {
+                    Bitmap b = values[0];
+                    mView.setImageBitmap(b);
+                }
+            }
+            abstract class WeakReferenceThreadLocal<T> {
+                private ThreadLocal<WeakReference<T>> mThreadLocal;
+                public WeakReferenceThreadLocal() {
+                    mThreadLocal = new ThreadLocal<WeakReference<T>>();
+                }
+
+                abstract T initialValue();
+
+                public void set(T t) {
+                    mThreadLocal.set(new WeakReference<T>(t));
+                }
+
+                public T get() {
+                    WeakReference<T> reference = mThreadLocal.get();
+                    T obj;
+                    if (reference == null) {
+                        obj = initialValue();
+                        mThreadLocal.set(new WeakReference<T>(obj));
+                        return obj;
+                    } else {
+                        obj = reference.get();
+                        if (obj == null) {
+                            obj = initialValue();
+                            mThreadLocal.set(new WeakReference<T>(obj));
+                        }
+                        return obj;
+                    }
+                }
+            }
+
+            class CanvasCache extends WeakReferenceThreadLocal<Canvas> {
+                @Override
+                protected Canvas initialValue() {
+                    return new Canvas();
+                }
+            }
+
+            class PaintCache extends WeakReferenceThreadLocal<Paint> {
+                @Override
+                protected Paint initialValue() {
+                    return null;
+                }
+            }
+
+            class BitmapCache extends WeakReferenceThreadLocal<Bitmap> {
+                @Override
+                protected Bitmap initialValue() {
+                    return null;
+                }
+            }
+
+            class RectCache extends WeakReferenceThreadLocal<Rect> {
+                @Override
+                protected Rect initialValue() {
+                    return new Rect();
+                }
+            }
+
+            // Used for drawing widget previews
+            CanvasCache sCachedAppWidgetPreviewCanvas = new CanvasCache();
+            RectCache sCachedAppWidgetPreviewSrcRect = new RectCache();
+            RectCache sCachedAppWidgetPreviewDestRect = new RectCache();
+            PaintCache sCachedAppWidgetPreviewPaint = new PaintCache();
+            private final float sWidgetPreviewIconPaddingPercentage = 0.25f;
+
+            private Bitmap getWidgetPreview(ComponentName provider, int previewImage,
+                    int iconId, int maxWidth, int maxHeight) {
+                // Load the preview image if possible
+                String packageName = provider.getPackageName();
+                if (maxWidth < 0) maxWidth = Integer.MAX_VALUE;
+                if (maxHeight < 0) maxHeight = Integer.MAX_VALUE;
+
+
+                int appIconSize = mResources.getDimensionPixelSize(R.dimen.app_icon_size);
+
+                Drawable drawable = null;
+                if (previewImage != 0) {
+                    drawable = mPackageManager.getDrawable(packageName, previewImage, null);
+                    if (drawable == null) {
+                        Log.w(TAG, "Can't load widget preview drawable 0x" +
+                                Integer.toHexString(previewImage) + " for provider: " + provider);
+                    }
+                }
+
+                int bitmapWidth;
+                int bitmapHeight;
+                Bitmap defaultPreview = null;
+                boolean widgetPreviewExists = (drawable != null);
+                if (widgetPreviewExists) {
+                    bitmapWidth = drawable.getIntrinsicWidth();
+                    bitmapHeight = drawable.getIntrinsicHeight();
+                } else {
+                    // Generate a preview image if we couldn't load one
+                    bitmapWidth = maxWidth;
+                    bitmapHeight = maxHeight;
+                    defaultPreview = Bitmap.createBitmap(bitmapWidth, bitmapHeight,
+                            Config.ARGB_8888);
+                    final Canvas c = sCachedAppWidgetPreviewCanvas.get();
+                    c.setBitmap(defaultPreview);
+                    c.drawColor(0xFF2D2D2D);
+                    c.setBitmap(null);
+
+                    // Draw the icon in the top left corner
+                    final float marginPercentage = 0.125f;
+                    final float finalIconSize = (bitmapHeight / 2);
+                    float iconScale = finalIconSize / appIconSize;
+
+                    try {
+                        Drawable icon = null;
+                        int hoffset =
+                                (int) (finalIconSize * marginPercentage);
+                        int yoffset =
+                                (int) (finalIconSize * marginPercentage);
+                        if (iconId > 0)
+                            icon = getFullResIcon(packageName, iconId);
+                        if (icon != null) {
+                            renderDrawableToBitmap(icon, defaultPreview, hoffset,
+                                    yoffset, (int) (appIconSize * iconScale),
+                                    (int) (appIconSize * iconScale));
+                        }
+                    } catch (Resources.NotFoundException e) {
+                    }
+                }
+
+                // Scale to fit width only - let the widget preview be clipped in the
+                // vertical dimension
+                float scale = 1f;
+                if (bitmapWidth > maxWidth) {
+                    scale = maxWidth / (float) bitmapWidth;
+                }
+                int finalPreviewWidth = (int) (scale * bitmapWidth);
+                int finalPreviewHeight = (int) (scale * bitmapHeight);
+
+                bitmapWidth = finalPreviewWidth;
+                bitmapHeight = Math.min(finalPreviewHeight, maxHeight);
+
+                Bitmap preview = Bitmap.createBitmap(bitmapWidth, bitmapHeight,
+                        Config.ARGB_8888);
+
+                // Draw the scaled preview into the final bitmap
+                if (widgetPreviewExists) {
+                    renderDrawableToBitmap(drawable, preview, 0, 0, finalPreviewWidth,
+                            finalPreviewHeight);
+                } else {
+                    final Canvas c = sCachedAppWidgetPreviewCanvas.get();
+                    final Rect src = sCachedAppWidgetPreviewSrcRect.get();
+                    final Rect dest = sCachedAppWidgetPreviewDestRect.get();
+                    c.setBitmap(preview);
+                    src.set(0, 0, defaultPreview.getWidth(), defaultPreview.getHeight());
+                    dest.set(0, 0, finalPreviewWidth, finalPreviewHeight);
+
+                    Paint p = sCachedAppWidgetPreviewPaint.get();
+                    if (p == null) {
+                        p = new Paint();
+                        p.setFilterBitmap(true);
+                        sCachedAppWidgetPreviewPaint.set(p);
+                    }
+                    c.drawBitmap(defaultPreview, src, dest, p);
+                    c.setBitmap(null);
+                }
+                return preview;
+            }
+            public Drawable getFullResDefaultActivityIcon() {
+                return getFullResIcon(Resources.getSystem(),
+                        android.R.mipmap.sym_def_app_icon);
+            }
+
+            public Drawable getFullResIcon(Resources resources, int iconId) {
+                Drawable d;
+                try {
+                    d = resources.getDrawableForDensity(iconId, mIconDpi);
+                } catch (Resources.NotFoundException e) {
+                    d = null;
+                }
+
+                return (d != null) ? d : getFullResDefaultActivityIcon();
+            }
+
+            public Drawable getFullResIcon(String packageName, int iconId) {
+                Resources resources;
+                try {
+                    resources = mPackageManager.getResourcesForApplication(packageName);
+                } catch (PackageManager.NameNotFoundException e) {
+                    resources = null;
+                }
+                if (resources != null) {
+                    if (iconId != 0) {
+                        return getFullResIcon(resources, iconId);
+                    }
+                }
+                return getFullResDefaultActivityIcon();
+            }
+
+            private void renderDrawableToBitmap(Drawable d, Bitmap bitmap, int x, int y, int w, int h) {
+                renderDrawableToBitmap(d, bitmap, x, y, w, h, 1f);
+            }
+
+            private void renderDrawableToBitmap(Drawable d, Bitmap bitmap, int x, int y, int w, int h,
+                    float scale) {
+                if (bitmap != null) {
+                    Canvas c = new Canvas(bitmap);
+                    c.scale(scale, scale);
+                    Rect oldBounds = d.copyBounds();
+                    d.setBounds(x, y, x + w, y + h);
+                    d.draw(c);
+                    d.setBounds(oldBounds); // Restore the bounds
+                    c.setBitmap(null);
+                }
+            }
+        }
     }
 
     @Override
     public Item createItem(Context context, AppWidgetProviderInfo info, Bundle extras) {
         CharSequence label = info.label;
-        Drawable icon = null;
 
-        if (info.icon != 0) {
-            try {
-                final Resources res = context.getResources();
-                final int density = res.getDisplayMetrics().densityDpi;
-                int iconDensity;
-                switch (density) {
-                    case DisplayMetrics.DENSITY_MEDIUM:
-                        iconDensity = DisplayMetrics.DENSITY_LOW;
-                    case DisplayMetrics.DENSITY_TV:
-                        iconDensity = DisplayMetrics.DENSITY_MEDIUM;
-                    case DisplayMetrics.DENSITY_HIGH:
-                        iconDensity = DisplayMetrics.DENSITY_MEDIUM;
-                    case DisplayMetrics.DENSITY_XHIGH:
-                        iconDensity = DisplayMetrics.DENSITY_HIGH;
-                    case DisplayMetrics.DENSITY_XXHIGH:
-                        iconDensity = DisplayMetrics.DENSITY_XHIGH;
-                    default:
-                        // The density is some abnormal value.  Return some other
-                        // abnormal value that is a reasonable scaling of it.
-                        iconDensity = (int)((density*0.75f)+.5f);
-                }
-                Resources packageResources = getPackageManager().
-                        getResourcesForApplication(info.provider.getPackageName());
-                icon = packageResources.getDrawableForDensity(info.icon, iconDensity);
-            } catch (NameNotFoundException e) {
-                Log.w(TAG, "Can't load icon drawable 0x" + Integer.toHexString(info.icon)
-                        + " for provider: " + info.provider);
-            }
-            if (icon == null) {
-                Log.w(TAG, "Can't load icon drawable 0x" + Integer.toHexString(info.icon)
-                        + " for provider: " + info.provider);
-            }
-        }
-
-        Item item = new Item(context, label, icon);
+        Item item = new Item(context, label);
+        item.appWidgetPreviewId = info.previewImage;
+        item.iconId = info.icon;
         item.packageName = info.provider.getPackageName();
         item.className = info.provider.getClassName();
         item.extras = extras;
@@ -444,11 +494,18 @@ public class KeyguardAppWidgetPickActivity extends Activity
             }
 
             Item item = (Item) getItem(position);
-            TextView textView = (TextView) convertView.findViewById(R.id.icon_and_label);
+            TextView textView = (TextView) convertView.findViewById(R.id.label);
             textView.setText(item.label);
-            textView.setCompoundDrawablesWithIntrinsicBounds(item.icon, null, null, null);
-
+            ImageView iconView = (ImageView) convertView.findViewById(R.id.icon);
+            iconView.setImageDrawable(null);
+            item.loadWidgetPreview(iconView);
             return convertView;
+        }
+
+        public void cancelAllWidgetPreviewLoaders() {
+            for (int i = 0; i < mItems.size(); i++) {
+                mItems.get(i).cancelLoadingWidgetPreview();
+            }
         }
     }
 
@@ -492,6 +549,9 @@ public class KeyguardAppWidgetPickActivity extends Activity
         if (!mSuccess && mAddingToKeyguard &&
                 mAppWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
             AppWidgetHost.deleteAppWidgetIdForSystem(mAppWidgetId);
+        }
+        if (mAppWidgetAdapter != null) {
+            mAppWidgetAdapter.cancelAllWidgetPreviewLoaders();
         }
         super.onDestroy();
     }
