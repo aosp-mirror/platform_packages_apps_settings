@@ -84,7 +84,6 @@ public class KeyguardAppWidgetPickActivity extends Activity
     private boolean mAddingToKeyguard = true;
     private Intent mResultData;
     private LockPatternUtils mLockPatternUtils;
-    private boolean mSuccess;
     private Bundle mExtraConfigureOptions;
 
     @Override
@@ -202,13 +201,9 @@ public class KeyguardAppWidgetPickActivity extends Activity
             private PackageManager mPackageManager;
             private int mIconDpi;
             private ImageView mView;
-            private float mDensityScale;
             public WidgetPreviewLoader(Context context, ImageView v) {
                 super();
                 mResources = context.getResources();
-                DisplayMetrics metrics = new DisplayMetrics();
-                ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
-                mDensityScale = metrics.density;
                 mPackageManager = context.getPackageManager();
                 ActivityManager activityManager =
                         (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -298,7 +293,6 @@ public class KeyguardAppWidgetPickActivity extends Activity
             RectCache sCachedAppWidgetPreviewSrcRect = new RectCache();
             RectCache sCachedAppWidgetPreviewDestRect = new RectCache();
             PaintCache sCachedAppWidgetPreviewPaint = new PaintCache();
-            private final float sWidgetPreviewIconPaddingPercentage = 0.25f;
 
             private Bitmap getWidgetPreview(ComponentName provider, int previewImage,
                     int iconId, int maxWidth, int maxHeight) {
@@ -533,6 +527,11 @@ public class KeyguardAppWidgetPickActivity extends Activity
             setResultData(result, intent);
         } else {
             try {
+                if (mAddingToKeyguard && mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+                    // Found in KeyguardHostView.java
+                    final int KEYGUARD_HOST_ID = 0x4B455947;
+                    mAppWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID);
+                }
                 mAppWidgetManager.bindAppWidgetId(
                         mAppWidgetId, intent.getComponent(), mExtraConfigureOptions);
                 result = RESULT_OK;
@@ -554,10 +553,6 @@ public class KeyguardAppWidgetPickActivity extends Activity
     }
 
     protected void onDestroy() {
-        if (!mSuccess && mAddingToKeyguard &&
-                mAppWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
-            AppWidgetHost.deleteAppWidgetIdForSystem(mAppWidgetId);
-        }
         if (mAppWidgetAdapter != null) {
             mAppWidgetAdapter.cancelAllWidgetPreviewLoaders();
         }
@@ -568,20 +563,20 @@ public class KeyguardAppWidgetPickActivity extends Activity
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET) {
-            int appWidgetId = (data == null) ? -1 : data.getIntExtra(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-            if ((requestCode == REQUEST_PICK_APPWIDGET) &&
-                resultCode == Activity.RESULT_OK) {
+            int appWidgetId;
+            if  (data == null) {
+                appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID ;
+            } else {
+                appWidgetId = data.getIntExtra(
+                        AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+            }
+            if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == Activity.RESULT_OK) {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-                boolean defaultWidget =
-                        data.getBooleanExtra(LockPatternUtils.EXTRA_DEFAULT_WIDGET, false);
 
                 AppWidgetProviderInfo appWidget = null;
-                if (!defaultWidget) {
-                    appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
-                }
+                appWidget = appWidgetManager.getAppWidgetInfo(appWidgetId);
 
-                if (!defaultWidget && appWidget.configure != null) {
+                if (appWidget.configure != null) {
                     // Launch over to configure widget, if needed
                     Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
                     intent.setComponent(appWidget.configure);
@@ -591,19 +586,16 @@ public class KeyguardAppWidgetPickActivity extends Activity
                     startActivityForResultSafely(intent, REQUEST_CREATE_APPWIDGET);
                 } else {
                     // Otherwise just add it
-                    if (defaultWidget) {
-                        // If we selected "none", delete the allocated id
-                        AppWidgetHost.deleteAppWidgetIdForSystem(appWidgetId);
-                        data.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                LockPatternUtils.ID_DEFAULT_STATUS_WIDGET);
-                    }
                     onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
                 }
             } else if (requestCode == REQUEST_CREATE_APPWIDGET && resultCode == Activity.RESULT_OK) {
-                mSuccess = true;
                 mLockPatternUtils.addAppWidget(appWidgetId, 0);
                 finishDelayedAndShowLockScreen(appWidgetId);
             } else {
+                if (mAddingToKeyguard &&
+                        mAppWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                    AppWidgetHost.deleteAppWidgetIdForSystem(mAppWidgetId);
+                }
                 finishDelayedAndShowLockScreen(AppWidgetManager.INVALID_APPWIDGET_ID);
             }
         }
