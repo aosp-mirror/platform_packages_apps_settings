@@ -216,7 +216,6 @@ public class KeyguardAppWidgetPickActivity extends Activity
                             mResources.getDimensionPixelSize(R.dimen.appwidget_preview_width);
                     int appWidgetPreviewHeight =
                             mResources.getDimensionPixelSize(R.dimen.appwidget_preview_height);
-                    // TODO: fix the hspan, vspan of the default preview
                     Bitmap b = getWidgetPreview(new ComponentName(packageName, className),
                             appWidgetPreviewId, iconId,
                             appWidgetPreviewWidth, appWidgetPreviewHeight);
@@ -322,32 +321,18 @@ public class KeyguardAppWidgetPickActivity extends Activity
                     bitmapHeight = drawable.getIntrinsicHeight();
                 } else {
                     // Generate a preview image if we couldn't load one
-                    bitmapWidth = maxWidth;
-                    bitmapHeight = maxHeight;
+                    bitmapWidth = appIconSize;
+                    bitmapHeight = appIconSize;
                     defaultPreview = Bitmap.createBitmap(bitmapWidth, bitmapHeight,
                             Config.ARGB_8888);
-                    final Canvas c = sCachedAppWidgetPreviewCanvas.get();
-                    c.setBitmap(defaultPreview);
-                    c.drawColor(0xFF2D2D2D);
-                    c.setBitmap(null);
-
-                    // Draw the icon in the top left corner
-                    final float marginPercentage = 0.125f;
-                    final float finalIconSize = (bitmapHeight / 2);
-                    float iconScale = finalIconSize / appIconSize;
 
                     try {
                         Drawable icon = null;
-                        int hoffset =
-                                (int) (finalIconSize * marginPercentage);
-                        int yoffset =
-                                (int) (finalIconSize * marginPercentage);
                         if (iconId > 0)
                             icon = getFullResIcon(packageName, iconId);
                         if (icon != null) {
-                            renderDrawableToBitmap(icon, defaultPreview, hoffset,
-                                    yoffset, (int) (appIconSize * iconScale),
-                                    (int) (appIconSize * iconScale));
+                            renderDrawableToBitmap(icon, defaultPreview, 0,
+                                    0, appIconSize, appIconSize);
                         }
                     } catch (Resources.NotFoundException e) {
                     }
