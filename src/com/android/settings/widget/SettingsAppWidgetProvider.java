@@ -24,8 +24,6 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SyncStorageEngine;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -40,6 +38,7 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.RemoteViews;
+
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothAdapter;
 import com.android.settings.bluetooth.LocalBluetoothManager;
@@ -776,8 +775,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             sBluetoothState.onActualStateChange(context, intent);
         } else if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
             sGpsState.onActualStateChange(context, intent);
-        } else if (SyncStorageEngine.SYNC_CONNECTION_SETTING_CHANGED_INTENT.getAction()
-                .equals(action)) {
+        } else if (ContentResolver.ACTION_SYNC_CONN_STATUS_CHANGED.equals(action)) {
             sSyncState.onActualStateChange(context, intent);
         } else if (intent.hasCategory(Intent.CATEGORY_ALTERNATIVE)) {
             Uri data = intent.getData();
