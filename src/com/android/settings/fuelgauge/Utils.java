@@ -64,21 +64,4 @@ public class Utils {
         }
         return sb.toString();
     }
-
-    /**
-     * Formats data size in KB, MB, from the given bytes.
-     * @param context the application context
-     * @param bytes data size in bytes
-     * @return the formatted size such as 4.52 MB or 245 KB or 332 bytes
-     */
-    public static String formatBytes(Context context, double bytes) {
-        // TODO: I18N
-        if (bytes > 1000 * 1000) {
-            return String.format("%.2f MB", ((int) (bytes / 1000)) / 1000f);
-        } else if (bytes > 1024) {
-            return String.format("%.2f KB", ((int) (bytes / 10)) / 100f);
-        } else {
-            return String.format("%d bytes", (int) bytes);
-        }
-    }
 }
