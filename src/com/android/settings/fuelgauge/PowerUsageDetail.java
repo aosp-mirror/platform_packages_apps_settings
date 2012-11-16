@@ -34,10 +34,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
-import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -310,10 +310,12 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 switch (mTypes[i]) {
                     case R.string.usage_type_data_recv:
                     case R.string.usage_type_data_send:
-                        value = Utils.formatBytes(getActivity(), mValues[i]);
+                        final long bytes = (long) (mValues[i]);
+                        value = Formatter.formatFileSize(getActivity(), bytes);
                         break;
                     case R.string.usage_type_no_coverage:
-                        value = String.format("%d%%", (int) Math.floor(mValues[i]));
+                        final int percentage = (int) Math.floor(mValues[i]);
+                        value = getActivity().getString(R.string.percentage, percentage);
                         break;
                     case R.string.usage_type_gps:
                         mUsesGps = true;
