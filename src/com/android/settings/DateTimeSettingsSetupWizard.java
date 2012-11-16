@@ -188,9 +188,9 @@ public class DateTimeSettingsSetupWizard extends Activity
                 Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
                       mAutoDateTimeButton.isChecked() ? 1 : 0);
                 if (!mAutoDateTimeButton.isChecked()) {
-                    DateTimeSettings.setDate(mDatePicker.getYear(), mDatePicker.getMonth(),
+                    DateTimeSettings.setDate(this, mDatePicker.getYear(), mDatePicker.getMonth(),
                             mDatePicker.getDayOfMonth());
-                    DateTimeSettings.setTime(
+                    DateTimeSettings.setTime(this,
                             mTimePicker.getCurrentHour(), mTimePicker.getCurrentMinute());
                 }
             }
