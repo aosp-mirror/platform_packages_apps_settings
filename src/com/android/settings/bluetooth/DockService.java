@@ -120,6 +120,8 @@ public final class DockService extends Service implements ServiceListener {
     private int mPendingTurnOnStartId = INVALID_STARTID;
     private int mPendingTurnOffStartId = INVALID_STARTID;
 
+    private CheckBox mAudioMediaCheckbox;
+
     @Override
     public void onCreate() {
         if (DEBUG) Log.d(TAG, "onCreate");
@@ -499,6 +501,8 @@ public final class DockService extends Service implements ServiceListener {
         View view;
         LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 
+        mAudioMediaCheckbox = null;
+
         if (device != null) {
             // Device in a new dock.
             boolean firstTime =
@@ -528,14 +532,14 @@ public final class DockService extends Service implements ServiceListener {
             ab.setTitle(getString(R.string.bluetooth_dock_settings_title));
 
             view = inflater.inflate(R.layout.dock_audio_media_enable_dialog, null);
-            CheckBox audioMediaCheckbox =
+            mAudioMediaCheckbox =
                     (CheckBox) view.findViewById(R.id.dock_audio_media_enable_cb);
 
             boolean checked = Settings.Global.getInt(getContentResolver(),
                                     Settings.Global.DOCK_AUDIO_MEDIA_ENABLED, 0) == 1;
 
-            audioMediaCheckbox.setChecked(checked);
-            audioMediaCheckbox.setOnCheckedChangeListener(mCheckedChangeListener);
+            mAudioMediaCheckbox.setChecked(checked);
+            mAudioMediaCheckbox.setOnCheckedChangeListener(mCheckedChangeListener);
         }
 
         float pixelScaleFactor = getResources().getDisplayMetrics().density;
@@ -601,19 +605,24 @@ public final class DockService extends Service implements ServiceListener {
     private final DialogInterface.OnClickListener mClickListener =
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    if (which == DialogInterface.BUTTON_POSITIVE
-                            && mDevice != null) {
-                        if (!LocalBluetoothPreferences
-                                .hasDockAutoConnectSetting(
-                                        DockService.this,
-                                        mDevice.getAddress())) {
-                            LocalBluetoothPreferences
-                                    .saveDockAutoConnectSetting(
+                    if (which == DialogInterface.BUTTON_POSITIVE) {
+                        if (mDevice != null) {
+                            if (!LocalBluetoothPreferences
+                                    .hasDockAutoConnectSetting(
                                             DockService.this,
-                                            mDevice.getAddress(), true);
-                        }
+                                            mDevice.getAddress())) {
+                                LocalBluetoothPreferences
+                                        .saveDockAutoConnectSetting(
+                                                DockService.this,
+                                                mDevice.getAddress(), true);
+                            }
 
-                        applyBtSettings(mDevice, mStartIdAssociatedWithDialog);
+                            applyBtSettings(mDevice, mStartIdAssociatedWithDialog);
+                        } else if (mAudioMediaCheckbox != null) {
+                            Settings.Global.putInt(getContentResolver(),
+                                    Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
+                                    mAudioMediaCheckbox.isChecked() ? 1 : 0);
+                        }
                     }
                 }
             };
