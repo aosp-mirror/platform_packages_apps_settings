@@ -125,6 +125,17 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
+    <!-- DeviceParts Device Specific settings -->
+    <header
+        android:id="@+id/advanced_settings"
+        android:title="@string/advanced_settings_title"
+        android:icon="@drawable/ic_settings_advanced">
+        <intent
+            android:action="com.cyanogenmod.action.LAUNCH_DEVICE_SETTINGS"
+            android:targetPackage="com.cyanogenmod.settings.device"
+            android:targetClass="com.cyanogenmod.settings.device.DeviceSettings" />
+    </header>
+
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
