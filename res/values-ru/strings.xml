@@ -109,7 +109,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Время видимости для устройств Bluetooth: <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Отображать для ближайших устройств Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Не отображать для других Bluetooth-устройств"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Отображать только для подключенных устройств"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Доступно только для подключенных устройств"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Сделать устройство видимым"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Тайм-аут видимости"</string>
     <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Укажите, в течение какого времени устройство будет видимым"</string>
@@ -573,7 +573,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Ошибка аутентификации. Повторите попытку."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Обнаружен другой сеанс WPS. Повторите попытку через несколько минут."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Имя сети (SSID)"</string>
-    <string name="wifi_security" msgid="6603611185592956936">"Безопасность"</string>
+    <string name="wifi_security" msgid="6603611185592956936">"Защита"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Уровень сигнала"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Статус"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"Скорость связи"</string>
@@ -985,7 +985,7 @@
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Выберите пароль"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Создайте графический ключ"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Выберите ПИН-код"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Подтвердите пароль"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Введите новый пароль"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Подтвердите графический ключ"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Подтвердите ПИН-код"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"Пароли не совпадают"</string>
@@ -1482,7 +1482,7 @@
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Установить сертификаты с SD-карты"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Очистить учетные данные"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Удалить все сертификаты"</string>
-    <string name="trusted_credentials" msgid="4266945289534242402">"Надежные учетные данные"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"Надежные сертификаты"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Показывать надежные сертификаты ЦС"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Начертите графический ключ"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Чтобы подтвердить установку учетных данных, начертите графический ключ."</string>
@@ -1504,7 +1504,7 @@
     <string name="privacy_settings_title" msgid="4856282165773594890">"Восстановление и сброс"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Резервное копирование и восстановление"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Возврат к заводским настройкам"</string>
-    <string name="backup_data_title" msgid="1239105919852668016">"Копирование данных"</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"Резервирование данных"</string>
     <string name="backup_data_summary" msgid="9157861529438245957">"Сохранять резервные копии данных приложений, паролей точек доступа Wi-Fi и настроек на серверах Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Аккаунт для резервирования"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Не найдены аккаунты с резервными копиями данных"</string>
@@ -1655,7 +1655,7 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показывать границы клипа, поля и т. д."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Показывать загрузку ЦП"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Экран, показывающий текущую загрузку ЦП"</string>
-    <string name="force_hw_ui" msgid="6426383462520888732">"Ускорить работу GPU"</string>
+    <string name="force_hw_ui" msgid="6426383462520888732">"GPU-ускорение"</string>
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Всегда использовать GPU для двухмерного рисования"</string>
     <string name="force_msaa" msgid="7920323238677284387">"Включить 4x MSAA"</string>
     <string name="force_msaa_summary" msgid="9123553203895817537">"Включить 4x MSAA в приложениях OpenGL ES 2.0"</string>
