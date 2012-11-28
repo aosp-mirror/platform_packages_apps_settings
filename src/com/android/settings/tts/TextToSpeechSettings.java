@@ -26,7 +26,6 @@ import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -358,27 +357,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultRatePref.setEnabled(enable);
     }
 
-    private void displayDataAlert(final String key) {
-        Log.i(TAG, "Displaying data alert for :" + key);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(android.R.string.dialog_alert_title);
-        builder.setIconAttribute(android.R.attr.alertDialogIcon);
-        builder.setMessage(getActivity().getString(
-                R.string.tts_engine_security_warning, mEnginesHelper.getEngineInfo(key).label));
-        builder.setCancelable(true);
-        builder.setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       updateDefaultEngine(key);
-                    }
-                });
-        builder.setNegativeButton(android.R.string.cancel, null);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     private void displayNetworkAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(android.R.string.dialog_alert_title);
@@ -496,11 +474,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         updateWidgetState(true);
     }
 
-    private boolean shouldDisplayDataAlert(String engine) {
-        final EngineInfo info = mEnginesHelper.getEngineInfo(engine);
-        return !info.system;
-    }
-
     @Override
     public Checkable getCurrentChecked() {
         return mCurrentChecked;
@@ -519,11 +492,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     @Override
     public void setCurrentKey(String key) {
         mCurrentEngine = key;
-        if (shouldDisplayDataAlert(mCurrentEngine)) {
-            displayDataAlert(mCurrentEngine);
-        } else {
-            updateDefaultEngine(mCurrentEngine);
-        }
+        updateDefaultEngine(mCurrentEngine);
     }
 
 }

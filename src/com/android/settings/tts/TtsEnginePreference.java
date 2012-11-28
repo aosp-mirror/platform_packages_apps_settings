@@ -16,12 +16,15 @@
 
 package com.android.settings.tts;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.speech.tts.TextToSpeech.EngineInfo;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
@@ -33,6 +36,8 @@ import com.android.settings.R;
 
 
 public class TtsEnginePreference extends Preference {
+
+    private static final String TAG = "TtsEnginePreference";
 
     /**
      * Key for the name of the TTS engine passed in to the engine
@@ -173,22 +178,69 @@ public class TtsEnginePreference extends Preference {
         }
     }
 
-    private void onRadioButtonClicked(CompoundButton buttonView, boolean isChecked) {
+    private boolean shouldDisplayDataAlert() {
+        return !mEngineInfo.system;
+    }
+
+
+    private void displayDataAlert(
+            DialogInterface.OnClickListener positiveOnClickListener,
+            DialogInterface.OnClickListener negativeOnClickListener) {
+        Log.i(TAG, "Displaying data alert for :" + mEngineInfo.name);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(android.R.string.dialog_alert_title);
+        builder.setIconAttribute(android.R.attr.alertDialogIcon);
+        builder.setMessage(getContext().getString(
+                R.string.tts_engine_security_warning, mEngineInfo.label));
+        builder.setCancelable(true);
+        builder.setPositiveButton(android.R.string.ok, positiveOnClickListener);
+        builder.setNegativeButton(android.R.string.cancel, negativeOnClickListener);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+    private void onRadioButtonClicked(final CompoundButton buttonView,
+            boolean isChecked) {
         if (mPreventRadioButtonCallbacks ||
                 (mSharedState.getCurrentChecked() == buttonView)) {
             return;
         }
 
         if (isChecked) {
-            if (mSharedState.getCurrentChecked() != null) {
-                mSharedState.getCurrentChecked().setChecked(false);
+            // Should we alert user? if that's true, delay making engine current one.
+            if (shouldDisplayDataAlert()) {
+                displayDataAlert(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        makeCurrentEngine(buttonView);
+                    }
+                },new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Undo the click.
+                        buttonView.setChecked(false);
+                    }
+                });
+            } else {
+                // Privileged engine, set it current
+                makeCurrentEngine(buttonView);
             }
-            mSharedState.setCurrentChecked(buttonView);
-            mSharedState.setCurrentKey(getKey());
-            callChangeListener(mSharedState.getCurrentKey());
+        } else {
+            mSettingsIcon.setEnabled(false);
         }
+    }
 
-        mSettingsIcon.setEnabled(isChecked);
+    private void makeCurrentEngine(Checkable current) {
+        if (mSharedState.getCurrentChecked() != null) {
+            mSharedState.getCurrentChecked().setChecked(false);
+        }
+        mSharedState.setCurrentChecked(current);
+        mSharedState.setCurrentKey(getKey());
+        callChangeListener(mSharedState.getCurrentKey());
+        mSettingsIcon.setEnabled(true);
     }
 
 
