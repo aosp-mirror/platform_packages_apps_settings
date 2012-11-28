@@ -16,19 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.util.ArrayUtils;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
-import com.android.settings.accounts.AccountSyncSettings;
-import com.android.settings.accounts.AuthenticatorHelper;
-import com.android.settings.accounts.ManageAccountsSettings;
-import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.applications.ManageApplications;
-import com.android.settings.bluetooth.BluetoothEnabler;
-import com.android.settings.deviceinfo.Memory;
-import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.vpn2.VpnSettings;
-import com.android.settings.wifi.WifiEnabler;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
@@ -62,6 +49,17 @@ import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.util.ArrayUtils;
+import com.android.settings.AccessibilitySettings.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accounts.AccountSyncSettings;
+import com.android.settings.accounts.AuthenticatorHelper;
+import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.wifi.WifiEnabler;
+import com.android.settings.wifi.WifiSettings;
+import com.android.settings.wifi.p2p.WifiP2pSettings;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -85,7 +83,7 @@ public class Settings extends PreferenceActivity
     private static final String META_DATA_KEY_PARENT_FRAGMENT_CLASS =
         "com.android.settings.PARENT_FRAGMENT_CLASS";
 
-    private static final String EXTRA_CLEAR_UI_OPTIONS = "settings:remove_ui_options";
+    private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
@@ -136,8 +134,8 @@ public class Settings extends PreferenceActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (getIntent().getBooleanExtra(EXTRA_CLEAR_UI_OPTIONS, false)) {
-            getWindow().setUiOptions(0);
+        if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
+            getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
         mAuthenticatorHelper = new AuthenticatorHelper();
@@ -379,26 +377,14 @@ public class Settings extends PreferenceActivity
         Intent intent = super.onBuildStartFragmentIntent(fragmentName, args,
                 titleRes, shortTitleRes);
 
-        // some fragments want to avoid split actionbar
-        if (DataUsageSummary.class.getName().equals(fragmentName) ||
-                PowerUsageSummary.class.getName().equals(fragmentName) ||
-                AccountSyncSettings.class.getName().equals(fragmentName) ||
-                UserDictionarySettings.class.getName().equals(fragmentName) ||
-                Memory.class.getName().equals(fragmentName) ||
-                ManageApplications.class.getName().equals(fragmentName) ||
-                WirelessSettings.class.getName().equals(fragmentName) ||
-                SoundSettings.class.getName().equals(fragmentName) ||
-                PrivacySettings.class.getName().equals(fragmentName) ||
-                ManageAccountsSettings.class.getName().equals(fragmentName) ||
-                VpnSettings.class.getName().equals(fragmentName) ||
-                SecuritySettings.class.getName().equals(fragmentName) ||
-                InstalledAppDetails.class.getName().equals(fragmentName) ||
-                ChooseLockGenericFragment.class.getName().equals(fragmentName) ||
-                TetherSettings.class.getName().equals(fragmentName) ||
-                ApnSettings.class.getName().equals(fragmentName) ||
-                LocationSettings.class.getName().equals(fragmentName) ||
-                ZonePicker.class.getName().equals(fragmentName)) {
-            intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
+        // Some fragments want split ActionBar; these should stay in sync with
+        // uiOptions for fragments also defined as activities in manifest.
+        if (WifiSettings.class.getName().equals(fragmentName) ||
+                WifiP2pSettings.class.getName().equals(fragmentName) ||
+                BluetoothSettings.class.getName().equals(fragmentName) ||
+                DreamSettings.class.getName().equals(fragmentName) ||
+                ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName)) {
+            intent.putExtra(EXTRA_UI_OPTIONS, ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
 
         intent.setClass(this, SubSettings.class);
