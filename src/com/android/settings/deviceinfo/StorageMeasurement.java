@@ -422,7 +422,7 @@ public class StorageMeasurement {
             }
 
             // Measure misc files not counted under media
-            if (mIsInternal || mIsPrimary) {
+            if (measureMedia) {
                 final File path = mIsInternal ? currentEnv.getExternalStorageDirectory()
                         : mVolume.getPathFile();
                 details.miscSize = measureMisc(imcs, path);
