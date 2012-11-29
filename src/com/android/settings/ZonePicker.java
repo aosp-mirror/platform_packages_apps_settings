@@ -81,7 +81,7 @@ public class ZonePicker extends ListFragment {
     public static SimpleAdapter constructTimezoneAdapter(Context context,
             boolean sortedByName) {
         return constructTimezoneAdapter(context, sortedByName,
-                android.R.layout.simple_list_item_2);
+                R.layout.date_time_setup_custom_list_item_2);
     }
 
     /**
