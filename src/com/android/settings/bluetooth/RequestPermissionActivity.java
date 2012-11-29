@@ -149,8 +149,6 @@ public class RequestPermissionActivity extends Activity implements
 
     private void createDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(android.R.drawable.ic_dialog_info);
-        builder.setTitle(getString(R.string.bluetooth_permission_request));
 
         if (mNeededToEnableBluetooth) {
             // RequestPermissionHelperActivity has gotten confirmation from user
@@ -167,8 +165,8 @@ public class RequestPermissionActivity extends Activity implements
                 builder.setMessage(
                         getString(R.string.bluetooth_ask_discovery, mTimeout));
             }
-            builder.setPositiveButton(getString(R.string.yes), this);
-            builder.setNegativeButton(getString(R.string.no), this);
+            builder.setPositiveButton(getString(R.string.allow), this);
+            builder.setNegativeButton(getString(R.string.deny), this);
         }
 
         mDialog = builder.create();

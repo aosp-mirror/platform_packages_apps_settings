@@ -72,26 +72,20 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
 
     void createDialog() {
         final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
-        p.mTitle = getString(R.string.bluetooth_permission_request);
-
-        View view = getLayoutInflater().inflate(R.layout.bluetooth_discoverable, null);
-        p.mView = view;
-        TextView tv = (TextView) view.findViewById(R.id.message);
 
         if (mEnableOnly) {
-            tv.setText(getString(R.string.bluetooth_ask_enablement));
+            p.mMessage = getString(R.string.bluetooth_ask_enablement);
         } else {
             if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
-                tv.setText(getString(R.string.bluetooth_ask_enablement_and_lasting_discovery));
+                p.mMessage = getString(R.string.bluetooth_ask_enablement_and_lasting_discovery);
             } else {
-                tv.setText(getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+                p.mMessage = getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout);
             }
         }
 
-        p.mPositiveButtonText = getString(R.string.yes);
+        p.mPositiveButtonText = getString(R.string.allow);
         p.mPositiveButtonListener = this;
-        p.mNegativeButtonText = getString(R.string.no);
+        p.mNegativeButtonText = getString(R.string.deny);
         p.mNegativeButtonListener = this;
 
         setupAlert();
