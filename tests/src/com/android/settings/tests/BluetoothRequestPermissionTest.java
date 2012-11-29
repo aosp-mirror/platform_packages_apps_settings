@@ -36,6 +36,9 @@ public class BluetoothRequestPermissionTest extends Activity {
     BluetoothAdapter mAdapter;
     private ArrayAdapter<String> mMsgAdapter;
 
+    // Discoverable button alternates between 20 second timeout and no timeout.
+    private boolean mDiscoveryWithTimeout = true;
+
     private class BtOnClickListener implements OnClickListener {
         final boolean mEnableOnly; // enable or enable + discoverable
 
@@ -103,7 +106,10 @@ public class BluetoothRequestPermissionTest extends Activity {
         } else {
             addMsg("Starting activity to enable bt + discovery");
             i.setAction(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            i.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 20);
+            // Discoverability duration toggles between 20 seconds and no timeout.
+            int timeout = (mDiscoveryWithTimeout ? 20 : 0);
+            i.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, timeout);
+            mDiscoveryWithTimeout = !mDiscoveryWithTimeout;
         }
         startActivityForResult(i, 1);
     }
