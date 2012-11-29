@@ -252,9 +252,11 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="ApnSettings" android:label="@string/apn_settings"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:launchMode="singleTask">
+        <activity android:name="ApnSettings"
+                android:label="@string/apn_settings"
+                android:uiOptions="none"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -304,6 +306,7 @@
 
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
+                android:uiOptions="none"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
             <intent-filter>
@@ -325,6 +328,7 @@
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".TetherSettings"
                   android:label="@string/tether_settings_title_all"
+                  android:uiOptions="none"
                   android:clearTaskOnLaunch="true"
                   android:exported="true"
                   android:targetActivity="Settings$TetherSettingsActivity">
@@ -763,6 +767,7 @@
 
         <activity android:name="Settings$LocationSettingsActivity"
                 android:label="@string/location_settings_title"
+                android:uiOptions="none"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
