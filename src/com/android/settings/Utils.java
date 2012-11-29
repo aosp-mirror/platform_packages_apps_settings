@@ -295,7 +295,7 @@ public class Utils {
         }
 
         // Did not find a matching activity, so remove the preference
-        if (target.remove(header)) System.err.println("Removed " + header.id);
+        target.remove(header);
 
         return false;
     }
