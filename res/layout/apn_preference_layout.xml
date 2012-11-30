@@ -23,15 +23,14 @@
 
     <RelativeLayout
         android:id="@+android:id/text_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16sp"
-        android:layout_marginEnd="6sp"
-        android:layout_marginTop="6sp"
-        android:layout_marginBottom="6sp"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:paddingStart="8dip"
+        android:paddingEnd="8dip"
+        android:gravity="center_vertical"
         android:layout_weight="1"
         android:focusable="true"
-        android:background="@android:drawable/menuitem_background">
+        android:background="?android:attr/selectableItemBackground">
 
         <TextView
             android:id="@+android:id/title"
@@ -39,7 +38,7 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+android:id/summary"
@@ -57,8 +56,8 @@
         android:id="@+android:id/apn_radiobutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dip"
-        android:layout_marginEnd="4dip"
+        android:layout_marginStart="8dip"
+        android:layout_marginEnd="8dip"
         android:layout_gravity="center_vertical"
         android:clickable="true" />
 
