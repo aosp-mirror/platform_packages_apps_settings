@@ -29,9 +29,9 @@
     <TextView android:id="@+id/comp_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:paddingStart="14dip"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

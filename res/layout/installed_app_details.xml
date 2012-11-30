@@ -19,12 +19,14 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle">
+
     <LinearLayout
         android:id="@+id/all_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingEnd="6dip"
         android:paddingBottom="5dip"
         android:orientation="vertical">
 
@@ -33,16 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingEnd="6dip"
-            android:paddingStart="6dip"
-            android:paddingTop="5dip"
-            android:paddingBottom="5dip" >
+            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+            android:orientation="vertical">
 
             <!-- Application snippet label, version and icon -->
             <include
                 layout="@layout/manage_applications_item"
-                android:id="@+id/app_snippet"/>
+                android:id="@+id/app_snippet" />
 
             <!-- Force stop and uninstall buttons -->
             <include
@@ -58,8 +58,8 @@
             <CheckBox android:id="@+id/notification_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dip"
                 android:layout_gravity="start"
+                android:layout_marginTop="4dip"
                 android:text="@string/app_notifications_switch_label" />
 
         </LinearLayout>
@@ -72,8 +72,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="6dip"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,9 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1"
-                    android:paddingTop="6dip"
-                    android:paddingStart="6dip"/>
-
+                    android:paddingTop="6dip" />
                 <ImageView
                     android:id="@+id/info_size_dots"
                     android:src="@drawable/dotted_line_480px"
@@ -105,13 +104,12 @@
                 <TextView
                     android:id="@+id/total_size_text"
                     android:paddingTop="6dip"
-                    android:paddingEnd="6dip"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1" />
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,8 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1"
-                    android:paddingTop="6dip"
-                    android:paddingStart="6dip"/>
+                    android:paddingTop="6dip" />
                 <ImageView
                     android:id="@+id/info_size_dots"
                     android:src="@drawable/dotted_line_480px"
@@ -143,11 +140,9 @@
                     android:id="@+id/application_size_text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingTop="6dip"
-                    android:paddingEnd="6dip"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -163,8 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1"
-                    android:paddingTop="6dip"
-                    android:paddingStart="6dip"/>
+                    android:paddingTop="6dip" />
                 <ImageView
                     android:id="@+id/info_size_dots"
                     android:src="@drawable/dotted_line_480px"
@@ -181,11 +175,9 @@
                     android:id="@+id/external_code_size_text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingTop="6dip"
-                    android:paddingEnd="6dip"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -202,8 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1"
-                    android:paddingTop="6dip"
-                    android:paddingStart="6dip"/>
+                    android:paddingTop="6dip" />
                 <ImageView
                     android:id="@+id/info_size_dots"
                     android:src="@drawable/dotted_line_480px"
@@ -220,11 +211,9 @@
                     android:id="@+id/data_size_text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingTop="6dip"
-                    android:paddingEnd="6dip"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -240,8 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1"
-                    android:paddingTop="6dip"
-                    android:paddingStart="6dip"/>
+                    android:paddingTop="6dip" />
                 <ImageView
                     android:id="@+id/info_size_dots"
                     android:src="@drawable/dotted_line_480px"
@@ -258,11 +246,9 @@
                     android:id="@+id/external_data_size_text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingTop="6dip"
-                    android:paddingEnd="6dip"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1" />
-
             </LinearLayout>
 
             <!-- Clear data and install location buttons  -->
@@ -289,6 +275,8 @@
                 android:orientation="horizontal"
                 android:baselineAligned="true"
                 android:layout_below="@id/cache_header"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:paddingTop="-1dip">
                 <TextView
                     android:text="@string/cache_size_label"
@@ -297,8 +285,7 @@
                     android:maxLines="1"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingTop="6dip"
-                    android:gravity="center_vertical"
-                    android:paddingStart="6dip"/>
+                    android:gravity="center_vertical" />
                 <ImageView
                     android:src="@drawable/dotted_line_480px"
                     android:layout_width="0dip"
@@ -314,19 +301,36 @@
                     android:id="@+id/cache_size_text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingTop="6dip"
-                    android:paddingEnd="6dip"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="1" />
             </LinearLayout>
 
-            <Button android:id="@+id/clear_cache_button"
-                android:layout_alignParentEnd="true"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/cache_size"
-                android:layout_centerHorizontal="true"
-                android:layout_width="200dip"
-                android:text="@string/clear_cache_btn_text"
-                android:layout_height="wrap_content" />
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:paddingTop="4dip"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="120dip"
+                    android:layout_height="0dip"
+                    android:layout_weight="0.4" />
+                <View
+                    android:layout_width="0dip"
+                    android:layout_height="0dip"
+                    android:visibility="invisible"
+                    android:layout_weight="0.2" />
+                <Button
+                    android:id="@+id/clear_cache_button"
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/clear_cache_btn_text" />
+            </LinearLayout>
+
         </RelativeLayout>
 
         <!-- Prefered activities section -->
@@ -338,22 +342,38 @@
         <RelativeLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
             <TextView android:id="@+id/auto_launch"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_alignParentStart="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="6dip"
-                android:paddingEnd="6dip"
-                android:paddingStart="6dip" />
-            <Button android:id="@+id/clear_activities_button"
-                android:layout_alignParentEnd="true"
+                android:paddingTop="6dip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/auto_launch"
-                android:layout_centerHorizontal="true"
-                android:layout_width="200dip"
-                android:text="@string/clear_activities"
-                android:layout_height="wrap_content" />
+                android:paddingTop="4dip"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="120dip"
+                    android:layout_height="0dip"
+                    android:layout_weight="0.4" />
+                <View
+                    android:layout_width="0dip"
+                    android:layout_height="0dip"
+                    android:visibility="invisible"
+                    android:layout_weight="0.2" />
+                <Button
+                    android:id="@+id/clear_activities_button"
+                    android:layout_width="120dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="@string/clear_activities" />
+            </LinearLayout>
         </RelativeLayout>
 
         <!-- Screen compatibility section -->
@@ -371,8 +391,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dip"
-                android:paddingEnd="6dip"
-                android:paddingStart="6dip"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:text="@string/screen_compatibility_text"/>
             <CheckBox android:id="@+id/ask_compatibility_cb"
                 android:layout_width="wrap_content"
@@ -403,8 +423,9 @@
                 android:textColor="#ffffb060"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:paddingTop="6dip"
-                android:paddingStart="6dip"
                 android:paddingBottom="6dip"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
@@ -426,8 +447,9 @@
                 android:text="@string/security_settings_desc"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:paddingTop="6dip"
-                android:paddingStart="6dip"
                 android:paddingBottom="6dip"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
