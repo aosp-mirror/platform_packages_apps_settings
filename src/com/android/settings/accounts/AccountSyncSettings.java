@@ -47,9 +47,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
 
@@ -149,7 +151,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.account_sync_screen, container, false);
-        
+
+        final ListView list = (ListView) view.findViewById(android.R.id.list);
+        Utils.prepareCustomPreferencesList(container, view, list, false);
+
         initializeUi(view);
 
         return view;

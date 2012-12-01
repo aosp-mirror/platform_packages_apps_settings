@@ -22,23 +22,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/title" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+        android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side"
         android:scaleType="fitXY"
         android:src="?android:attr/listDivider" />
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@android:id/list"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:drawSelectorOnTop="false"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-    />
+        android:clipToPadding="false"
+        android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle" />
 
     <TextView android:id="@+id/sync_settings_error_info"
         android:layout_width="match_parent"
@@ -47,32 +47,6 @@
         android:text="@string/sync_is_failing"
         android:drawablePadding="8dip"
         android:drawableLeft="@drawable/ic_sync_error_holo" />
-
-    <!--
-    <LinearLayout android:id="@+id/remove_account_area"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@android:drawable/bottom_bar">
-
-        <View
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <Button android:id="@+id/remove_account_button"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="5dip"
-            android:text="@string/remove_account_label" />
-
-        <View
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    -->
 
     <RelativeLayout android:id="@+id/finish_button_area"
         android:layout_height="wrap_content"

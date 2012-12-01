@@ -19,7 +19,10 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle">
+
     <LinearLayout
         android:id="@+id/all_details"
         android:layout_width="match_parent"
@@ -29,8 +32,8 @@
         <!-- Summary information as per previous screen -->
         <include
             layout="@layout/running_processes_item"
-            android:id="@+id/snippet"/>
+            android:id="@+id/snippet" />
 
     </LinearLayout>
-</ScrollView>
 
+</ScrollView>
