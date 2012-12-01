@@ -1,7 +1,5 @@
 package com.android.settings.applications;
 
-import com.android.settings.R;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -18,9 +16,9 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Debug;
@@ -34,6 +32,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -507,12 +508,14 @@ public class RunningServiceDetails extends Fragment
     }
     
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = mRootView = inflater.inflate(R.layout.running_service_details, null);
-        
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.running_service_details, container, false);
+        Utils.prepareCustomPreferencesList(container, view, view, false);
+
+        mRootView = view;
         mAllDetails = (ViewGroup)view.findViewById(R.id.all_details);
         mSnippet = (ViewGroup)view.findViewById(R.id.snippet);
-        mSnippet.setPadding(0, mSnippet.getPaddingTop(), 0, mSnippet.getPaddingBottom());
         mSnippetViewHolder = new RunningProcessesView.ViewHolder(mSnippet);
         
         // We want to retrieve the data right now, so any active managed

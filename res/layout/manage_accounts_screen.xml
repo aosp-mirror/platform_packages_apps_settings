@@ -27,9 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:drawSelectorOnTop="false"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-    />
+        android:clipToPadding="false"
+        android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle" />
 
     <TextView android:id="@+id/sync_settings_error_info"
         android:layout_width="match_parent"

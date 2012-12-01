@@ -46,12 +46,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.AccountPreference;
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,6 +103,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.manage_accounts_screen, container, false);
+        final ListView list = (ListView) view.findViewById(android.R.id.list);
+        Utils.prepareCustomPreferencesList(container, view, list, false);
         return view;
     }
 
