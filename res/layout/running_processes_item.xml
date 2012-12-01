@@ -17,79 +17,68 @@
 */
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:orientation="vertical"
-    android:gravity="fill" >
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingTop="8dip"
+    android:paddingBottom="8dip"
+    android:columnCount="2">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@android:dimen/app_icon_size"
+        android:layout_height="@android:dimen/app_icon_size"
+        android:layout_rowSpan="2"
+        android:layout_marginEnd="8dip"
+        android:scaleType="centerInside"
+        android:contentDescription="@null" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingEnd="6dip"
-        android:paddingStart="6dip"
-        android:gravity="center_vertical" >
-    
-        <ImageView android:id="@+id/icon"
-            android:layout_width="@android:dimen/app_icon_size"
-            android:layout_height="@android:dimen/app_icon_size"
-            android:layout_marginEnd="11dip"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitCenter"
-            android:contentDescription="@null" />
-    
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-            <LinearLayout
-                android:orientation="horizontal"
-                android:baselineAlignedChildIndex="0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView android:id="@+id/name"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingEnd="4dip"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:layout_marginBottom="2dip" />
-                <TextView android:id="@+id/size"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:singleLine="true"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:baselineAlignedChildIndex="0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView android:id="@+id/description"
-                    android:layout_gravity="center_vertical|start"
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingEnd="4dip"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-                <TextView android:id="@+id/uptime"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:singleLine="true"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </LinearLayout>
-        </LinearLayout>
+        android:layout_width="0dip"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="2dip">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dip"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_gravity="fill_horizontal">
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/uptime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dip"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
+
+</GridLayout>
