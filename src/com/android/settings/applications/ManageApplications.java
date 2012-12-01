@@ -765,9 +765,6 @@ public class ManageApplications extends Fragment implements
                 holder.entry = entry;
                 if (entry.label != null) {
                     holder.appName.setText(entry.label);
-                    holder.appName.setTextColor(mContext.getResources().getColorStateList(
-                            entry.info.enabled ? android.R.color.primary_text_dark
-                                    : android.R.color.secondary_text_dark));
                 }
                 mState.ensureIcon(entry);
                 if (entry.icon != null) {
