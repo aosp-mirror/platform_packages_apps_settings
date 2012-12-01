@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.Utils.prepareCustomPreferencesList;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ApplicationErrorReport;
@@ -141,8 +143,12 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = mRootView = inflater.inflate(R.layout.power_usage_details, null);
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.power_usage_details, container, false);
+        prepareCustomPreferencesList(container, view, view, false);
+
+        mRootView = view;
         createDetails();
         return view;
     }

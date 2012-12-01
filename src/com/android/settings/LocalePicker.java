@@ -19,6 +19,10 @@ package com.android.settings;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
@@ -47,6 +51,15 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_TARGET_LOCALE)) {
             mTargetLocale = new Locale(savedInstanceState.getString(SAVE_TARGET_LOCALE));
         }
+    }
+
+    @Override
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        final ListView list = (ListView) view.findViewById(android.R.id.list);
+        Utils.forcePrepareCustomPreferencesList(container, view, list, false);
+        return view;
     }
 
     @Override
