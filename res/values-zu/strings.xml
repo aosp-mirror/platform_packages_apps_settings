@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Yebo"</string>
     <string name="no" msgid="6731231425810196216">"Cha"</string>
     <string name="create" msgid="3578857613172647409">"Yakha"</string>
+    <string name="allow" msgid="3349662621170855910">"Vumela"</string>
+    <string name="deny" msgid="6947806159746484865">"Nqaba"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Akwaziwa"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Manje usalelwe yizinyathelo ezingu-<xliff:g id="STEP_COUNT">%1$d</xliff:g> ukuthi ube ngunjiniyela."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Manje usalelwe yizinyathelo ezingu-<xliff:g id="STEP_COUNT">%1$d</xliff:g> ukuthi ube ngunjiniyela."</item>
+    <item quantity="other" msgid="6722953419953594148">"Manje usalelwe yizinyathelo ezingu-<xliff:g id="STEP_COUNT">%1$d</xliff:g> ukuthi ube ngunjiniyela."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Manje ungunjiniyela!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Asikho isidingo, usuvele ungunjiniyela."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"AMANETHIWEKHI NOKUNGENANTAMBO"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Iphutha elingaziwa"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Kuyabanda"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Iyatholakala"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Ibonakala kuwo wonke amadivayisi e-Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Iyabonakala kuwo wonke amadivaysi aseduze we-Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Ayibonakali kwamanye amadivayisi e-Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Ibonakala kuphela kumadivayisi apheyiwe"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Yenza idivaysi itholakale"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Ukubonakala kuphelelwe isikhathi"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Hlela ukuthi idivaysi izotholakala isikhathi esingakanani"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Vala ukudayela ngezwi"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Gwema ukusebenzisa isidayeli se-bluetooth lapho isikrini sivaliwe"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Amadivaysi e-Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Bonisa amafayili atholiwe"</string>
     <string name="device_picker" msgid="8398232791303186677">"Isikhethi sedivayisi ye-Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Isicelo semvume ye-Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Zonke izinhlelo zokulungiselela ukusebenza zifuna ukuvula i-Bluetooth. Ngabe uyakuvumela lokhu?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Uhlelo lokusebenza olukwi-tablet yakho lufuna ukwenza ukuthi i-tablet yakho ibonwe ngamanye amadivayisi e-Bluetooth  <xliff:g id="TIMEOUT">%1$d</xliff:g> imizuzwana. Ngabe uyakuvumela lokhu?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Kukhona uhlelo lokusebenza kwiselula yakho olufuna ukuvula i-Bluetooth bese lwenza ukuthi iselula yakho itholwe ngamanye amadivayisi <xliff:g id="TIMEOUT">%1$d</xliff:g> imizuzwana. Kuvunyelwe na?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Uhlelo lokusebenza olukwi-tablet yakho lufuna ukwenza ukuthi i-tablet yakho \"ibonwe ngaso sonke isikhathi\" ngamanye amadivayisi e-Bluetooth . Ngabe uyakuvumela lokhu?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Kukhona uhlelo lokusebenza kwiselula yakho olufuna ukuthi iselula yakho \"ihlale itholwe\" ngamanye amadivayisi e-Bluetooth. Kuvunyelwe na?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Uhlelo lokusebenza olukwi-tablet yakho lufuna ukwenza ukuthi i-tablet yakho ibonwe ngamanye amadivayisi e-Bluetooth  <xliff:g id="TIMEOUT">%1$d</xliff:g> imizuzwana. Ngabe uyakuvumela lokhu?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Kukhona uhlelo lokusebenza kwiselula yakho olufuna ukuvula i-Bluetooth bese lwenza ukuthi iselula yakho itholwe ngamanye amadivayisi <xliff:g id="TIMEOUT">%1$d</xliff:g> imizuzwana. Kuvunyelwe na?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Uhlelo lokusebenza olukwi-tablet yakho lufuna ukwenza ukuthi i-tablet yakho ibonwe ngamanye amadivayisi e-Bluetooth  {0}TIMEOUT{/0} imizuzwana. Ngabe uyakuvumela lokhu?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Kukhona uhlelo lokusebenza kwiselula yakho olufuna ukuvula i-Bluetooth bese lwenza ukuthi iselula yakho itholwe ngamanye amadivayisi {0}TIMEOUT{/0} imizuzwana. Kuvunyelwe na?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Uhlelo lokusebenza oluthile lufuna ukwenza ithebulethi yakho ibonakale kwamanye amadivayisi we-Bluetooth kumasekhondi angu-<xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Uhlelo lokusebenza oluthile lufuna ukwenza ifoni yakho ibonakale kwamanye amadivayisi we-Bluetooth kumasekhondi angu-<xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth futhi lenze ithebulethi yakho ibonakale kwamanye amadivayisi we-Bluetooth. Ungakushintsha lokhu emuva kwesikhathi kuzilungiselelo ze-Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth futhi lenze ifoni yakho ibonakale kwamanye amadivayisi we-Bluetooth. Ungakushintsha lokhu emuva kwesikhathi kuzilungiselelo ze-Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth futhi lenze ithebulethi yakho ibonakale kwamanye amadivayisi kumasekhondi angu-<xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth futhi lenze ifoni yakho ibonakale kwamanye amadivayisi kumasekhondi angu-<xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth futhi lenze ithebulethi yakho ibonakale kwamanye amadivayisi. Ungakushintsha lokhu emuva kwesikhathi kuzilungiselelo ze-Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Uhlelo lokusebenza lifuna ukuvula i-Bluetooth futhi lenze ifoni yakho ibonakale kwamanye amadivayisi. Ungakushintsha lokhu emuva kwesikhathi kuzilungiselelo ze-Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Ivula i-Bluetooth"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Ivala i-Bluetooth"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Ukuxhuma okuzenzakalelayo"</string>
@@ -1023,12 +1025,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Kunemizamo engalungile eminingi kakhulu!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Zama futhi emaminithini angu- <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Uhlelo lokusebenza alufakiwe efonini yakho."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Khansela"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Okulandelayo"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Ivikela ithebhulethi yakho"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Ukuphepha kwefoni yakho"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Vikela ithebhulethi yakho ekusetshenzisweni okungavumelekile ngokwenza iphathini yokuvula isikrini. Sebenzisa umunwe wakho ukuxhuma amachashazi nganoma yikuphi ukuhleleka kwsikrini esilandelayo. Kumele uxhume okungenani amachashazi amane. "\n\n"Ukulungele ukuqalisa? Thinta \"Okulandelayo\"."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Vikela ifoni yakho ekusetshenzisweni okungemthotho ngokwakha iphethini yakho siqu yokuvula isikrini. Sebenzisa umunwe wakho ukuxhuma okungenani amadothi amane kusikrini sombhalo. "\n\n"Usukulungele ukuqala? Thinta Okulandelayo."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Phatha izinhlelo zokusebenza"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Phatha futhi ukhiphe izinhlelo zokusebenza ezifakiwe"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Izinhlelo zokusebenza"</string>
