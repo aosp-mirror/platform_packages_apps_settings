@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Có"</string>
     <string name="no" msgid="6731231425810196216">"Không"</string>
     <string name="create" msgid="3578857613172647409">"Tạo"</string>
+    <string name="allow" msgid="3349662621170855910">"Cho phép"</string>
+    <string name="deny" msgid="6947806159746484865">"Từ chối"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Không xác định"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Bây giờ, bạn giờ chỉ cần thực hiện <xliff:g id="STEP_COUNT">%1$d</xliff:g> bước nữa là sẽ trở thành nhà phát triển."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Bây giờ, bạn giờ chỉ cần thực hiện <xliff:g id="STEP_COUNT">%1$d</xliff:g> bước nữa là sẽ trở thành nhà phát triển."</item>
+    <item quantity="other" msgid="6722953419953594148">"Bây giờ, bạn giờ chỉ cần thực hiện <xliff:g id="STEP_COUNT">%1$d</xliff:g> bước nữa là sẽ trở thành nhà phát triển."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Bạn đã là nhà phát triển!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Không cần, bạn đã là nhà phát triển."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"KHÔNG DÂY &amp; MẠNG"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Lỗi không xác định"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Không hoạt động"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Có thể phát hiện"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Hiển thị với tất cả th.bị Bluetooth gần đó (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Hiển thị với tất cả các thiết bị Bluetooth gần đó"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Không hiển thị với các thiết bị Bluetooth khác"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Chỉ hiển thị với các thiết bị được ghép nối"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Đặt thiết bị ở chế độ có thể phát hiện"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Hết thời gian hiển thị"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Đặt thời gian thiết bị có thể phát hiện được"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Khoá quay số bằng giọng nói"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Ngăn việc sử dụng trình quay số bluetooth khi màn hình bị khóa."</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Thiết bị Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Hiển thị các tệp đã nhận"</string>
     <string name="device_picker" msgid="8398232791303186677">"Trình chọn thiết bị Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Yêu cầu quyền Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Một ứng dụng muốn bật Bluetooth. Cho phép?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Một ứng dụng trên máy tính bảng của bạn muốn đặt máy tính bảng của bạn ở chế độ có thể phát hiện được bởi các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Cho phép?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Một ứng dụng trên điện thoại của bạn muốn đặt điện thoại của bạn ở chế độ có thể phát hiện được bởi các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Cho phép?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Một ứng dụng trên máy tính bảng của bạn muốn đặt máy tính bảng ở chế độ “luôn có thể phát hiện được” bởi các thiết bị Bluetooth khác. Cho phép?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Một ứng dụng trên điện thoại của bạn muốn đặt điện thoại của bạn ở chế độ “luôn phát hiện được” bởi thiết bị Bluetooth khác. Cho phép?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Một ứng dụng trên máy tính bảng của bạn muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ có thể phát hiện được bởi các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Cho phép?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Một ứng dụng trên điện thoại của bạn muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ có thể phát hiện được bởi các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Cho phép?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Một ứng dụng trên máy tính bảng của bạn muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ có thể phát hiện được bởi các thiết bị khác. Cho phép?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Một ứng dụng trên điện thoại của bạn muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ có thể phát hiện được bởi các thiết bị khác. Cho phép?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Một ứng dụng muốn bật Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Đang bật Bluetooth…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Đang tắt Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Tự động kết nối"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Quá nhiều lần không chính xác!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Hãy thử lại sau <xliff:g id="NUMBER">%d</xliff:g> giây."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Ứng dụng chưa được cài đặt trên điện thoại của bạn."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Hủy"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Tiếp theo"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Đang bảo vệ máy tính bảng của bạn"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Đang bảo vệ điện thoại của bạn"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Bảo vệ máy tính bảng của bạn khỏi hành vi sử dụng trái phép bằng cách tạo hình mở khóa màn hình cá nhân. Trượt ngón tay để kết nối các điểm theo thứ tự bất kỳ trên màn hình tiếp theo. Bạn cần kết nối ít nhất bốn điểm. "\n\n"Bạn đã sẵn sàng bắt đầu chưa? Hãy chạm vào Tiếp theo."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Bảo vệ điện thoại của bạn khỏi hành vi sử dụng trái phép bằng cách tạo hình mở khóa màn hình cá nhân. Trượt ngón tay để kết nối ít nhất bốn điểm theo thứ tự bất kỳ trên màn hình tiếp theo. "\n\n"Bạn đã sẵn sàng bắt đầu chưa? Hãy chạm vào Tiếp theo."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Quản lý ứng dụng"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Quản lý và xóa ứng dụng đã cài đặt"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Ứng dụng"</string>

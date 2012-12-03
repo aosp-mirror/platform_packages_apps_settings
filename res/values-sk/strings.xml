@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Áno"</string>
     <string name="no" msgid="6731231425810196216">"Nie"</string>
     <string name="create" msgid="3578857613172647409">"Vytvoriť"</string>
+    <string name="allow" msgid="3349662621170855910">"Povoliť"</string>
+    <string name="deny" msgid="6947806159746484865">"Odmietnuť"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Neznáme"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Počet krokov do získania stavu vývojára: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Počet krokov do získania stavu vývojára: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
+    <item quantity="other" msgid="6722953419953594148">"Počet krokov do získania stavu vývojára: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Teraz ste vývojár!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nie je to potrebné, už ste vývojár."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"BEZDRÔTOVÉ PRIPOJENIE A SIETE"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Neznáma chyba"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Studené"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Viditeľné"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Viditeľné pre všetky okolité zariadenia Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Viditeľné pre všetky okolité zariadenia Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Neviditeľné pre ostatné zariadenia Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Viditeľné len pre spárované zariadenia"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Prepne zariadenie do viditeľného režimu"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Časový limit viditeľnosti"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Nastavte dobu, počas ktorej bude zariadenie vo viditeľnom režime"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Uzamknúť hlasové vytáčanie"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Zabrániť použitiu vytáčania Bluetooth pri uzamknutej obrazovke"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Zariadenia Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Zobraziť prijaté súbory"</string>
     <string name="device_picker" msgid="8398232791303186677">"Výber zariadenia Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Žiadosť o povolenie zariadenia Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Aplikácia chce zapnúť pripojenie Bluetooth. Povoliť?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Aplikácia v tablete chce prepnúť váš tablet do viditeľného režimu pre ostatné zariadenia Bluetooth na <xliff:g id="TIMEOUT">%1$d</xliff:g> sek. Povoliť?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Aplikácia v telefóne chce prepnúť váš telefón do viditeľného režimu pre ostatné zariadenia Bluetooth na <xliff:g id="TIMEOUT">%1$d</xliff:g> sek. Povoliť?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Aplikácia v tablete chce prepnúť váš tablet do trvalo viditeľného režimu pre ostatné zariadenia Bluetooth. Povoliť?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Aplikácia v telefóne chce prepnúť váš telefón do trvalo viditeľného režimu pre ostatné zariadenia Bluetooth. Povoliť?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Aplikácia v tablete chce zapnúť pripojenie Bluetooth a prepnúť váš tablet do viditeľného režimu na <xliff:g id="TIMEOUT">%1$d</xliff:g> sek. Povoliť?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Aplikácia v telefóne chce zapnúť pripojenie Bluetooth a prepnúť váš telefón do viditeľného režimu na <xliff:g id="TIMEOUT">%1$d</xliff:g> sek. Povoliť?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Aplikácia v tablete chce zapnúť pripojenie Bluetooth a prepnúť váš tablet do viditeľného režimu. Povoliť?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Aplikácia v telefóne chce zapnúť pripojenie Bluetooth a prepnúť váš telefón do viditeľného režimu. Povoliť?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Aplikácia chce zapnúť rozhranie Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Aplikácia chce na <xliff:g id="TIMEOUT">%1$d</xliff:g> s prepnúť váš tablet do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Aplikácia chce na <xliff:g id="TIMEOUT">%1$d</xliff:g> s prepnúť váš telefón do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Aplikácia chce váš tablet prepnúť do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth. Toto nastavenie môžete neskôr zmeniť v nastaveniach rozhrania Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Aplikácia chce váš telefón prepnúť do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth. Toto nastavenie môžete neskôr zmeniť v nastaveniach rozhrania Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Aplikácia chce na <xliff:g id="TIMEOUT">%1$d</xliff:g> s zapnúť rozhranie Bluetooth a prepnúť váš tablet do viditeľného režimu."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Aplikácia chce na <xliff:g id="TIMEOUT">%1$d</xliff:g> s zapnúť rozhranie Bluetooth a prepnúť váš telefón do viditeľného režimu."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Aplikácia chce zapnúť rozhranie Bluetooth a prepnúť váš tablet do režimu, v ktorom bude viditeľný pre ostatné zariadenia. Toto nastavenie môžete neskôr zmeniť v nastaveniach rozhrania Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Aplikácia chce zapnúť rozhranie Bluetooth a prepnúť váš telefón do režimu, v ktorom bude viditeľný pre ostatné zariadenia. Toto nastavenie môžete neskôr zmeniť v nastaveniach rozhrania Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Zapnúť Bluetooth?"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Vypínanie Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Automaticky pripojiť"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Príliš veľa chybných pokusov."</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Počet sekúnd zostávajúcich do ďalšieho pokusu: <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikácia nie je v telefóne nainštalovaná."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Zrušiť"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Ďalej"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Zabezpečenie vášho tabletu"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Zabezpečenie telefónu"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Chráňte svoj tablet pred neoprávneným použitím vytvorením osobného vzoru na odomknutie obrazovky. Na ďalšej obrazovke pospájajte prstom body v ľubovoľnom poradí. Musíte spojiť aspoň štyri body. "\n\n"Ak chcete začať, dotknite sa tlačidla Ďalej."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Svoj telefón môžete chrániť pred neautorizovaným použitím pomocou osobného bezpečnostného vzoru obrazovky. Bodky na nasledujúcej obrazovke spojte prejdením prstom v akomkoľvek poradí. Spojiť treba aspoň štyri bodky. "\n\n"Keď chcete začať, dotknite sa tlačidla „Ďalej“."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Spravovať aplikácie"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Správa a odstraňovanie nainštalovaných aplikácií"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikácie"</string>
