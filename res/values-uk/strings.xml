@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Так"</string>
     <string name="no" msgid="6731231425810196216">"Ні"</string>
     <string name="create" msgid="3578857613172647409">"Створити"</string>
+    <string name="allow" msgid="3349662621170855910">"Дозволити"</string>
+    <string name="deny" msgid="6947806159746484865">"Заборонити"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Невідомо"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Щоб стати розробником, залишилося лише стільки кроків: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Щоб стати розробником, залишився лише <xliff:g id="STEP_COUNT">%1$d</xliff:g> крок."</item>
+    <item quantity="other" msgid="6722953419953594148">"Щоб стати розробником, залишилося лише стільки кроків: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Тепер ви – розробник!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Немає потреби, ви вже розробник."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"БЕЗДРОТОВИЙ ЗВ’ЯЗОК І МЕРЕЖІ"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Невідома помилка"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Низька"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Видимий"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Видимий для всіх пристроїв Bluetooth неподалік (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Видимий для всіх пристроїв Bluetooth неподалік"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Невидимий для інших пристроїв Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Видимий лише для спарених пристроїв"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Зробити пристрій видимим"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Час видимості"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Налаштуйте час видимості пристрою"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Заблок. голос. набір"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Запобігає використанню набору bluetooth, коли екран заблоковано"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Пристрої Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Показати отримані файли"</string>
     <string name="device_picker" msgid="8398232791303186677">"Інструмент вибору пристрою Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Запит на дозвіл Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Програма хоче ввімкнути Bluetooth. Дозволити?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Програма у вашому планшетному ПК хоче зробити його видимим для інших пристроїв Bluetooth упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд. Дозволити?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Програма у вашому телефоні хоче зробити його видимим для інших пристроїв Bluetooth упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд. Дозволити?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Програма у вашому планшетному ПК хоче зробити його \"постійно видимим\" для інших пристроїв Bluetooth. Дозволити?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Програма у вашому телефоні хоче зробити його \"постійно видимим\" для інших пристроїв Bluetooth. Дозволити?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Програма у вашому пристрої хоче ввімкнути Bluetooth і зробити планшетний ПК видимим для інших пристроїв упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд. Дозволити?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Програма у вашому телефоні хоче ввімкнути Bluetooth і зробити телефон видимим для інших пристроїв упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд. Дозволити?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Програма у вашому планшетному ПК хоче ввімкнути Bluetooth і зробити планшетний ПК видимим для інших пристроїв. Дозволити?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Програма у вашому телефоні хоче ввімкнути Bluetooth і зробити телефон видимим для інших пристроїв. Дозволити?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Програма хоче ввімкнути Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Програма хоче зробити ваш планшетний ПК видимим для інших пристроїв Bluetooth упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Програма хоче зробити ваш телефон видимим для інших пристроїв Bluetooth упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Програма хоче зробити ваш планшетний ПК видимим для інших пристроїв Bluetooth. Цей параметр можна змінити згодом у налаштуваннях Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Програма хоче зробити ваш телефон видимим для інших пристроїв Bluetooth. Цей параметр можна змінити згодом у налаштуваннях Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Програма хоче ввімкнути Bluetooth і зробити ваш планшетний ПК видимим для інших пристроїв упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Програма хоче ввімкнути Bluetooth і зробити ваш телефон видимим для інших пристроїв упродовж <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Програма хоче ввімкнути Bluetooth і зробити ваш планшетний ПК видимим для інших пристроїв. Цей параметр можна змінити згодом у налаштуваннях Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Програма хоче ввімкнути Bluetooth і зробити ваш телефон видимим для інших пристроїв. Цей параметр можна змінити згодом у налаштуваннях Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Увімкнення Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Вимкнення Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Автоматичне з’єднання"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Забагато неправильних спроб!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Спробуйте ще через <xliff:g id="NUMBER">%d</xliff:g> сек."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Програму не встановлено у вашому телефоні."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Скасувати"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Далі"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Захист вашого пристрою"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Захист вашого телефону"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Захистіть свій планшетний ПК від несанкціонованого використання, створивши особистий ключ розблокування екрана. На наступному екрані пальцем з’єднайте крапки в будь-якому порядку. Потрібно з’єднати принаймні чотири крапки. "\n\n"Готові? Торкніться опції \"Далі\"."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Захистіть свій телефон від несанкціонованого використання, створивши особистий ключ розблокування екрана. На наступному екрані пальцем з’єднайте принаймні чотири крапки в будь-якому порядку. "\n\n"Готові? Торкніться опції \"Далі\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Керувати програмами"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Керувати встановленими програмами та видаляти їх"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Програми"</string>
