@@ -26,7 +26,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +36,7 @@ import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
@@ -47,7 +47,6 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
-import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -60,6 +59,7 @@ import java.lang.ref.WeakReference;
  * # Roaming
  * # Device Id (IMEI in GSM and MEID in CDMA)
  * # Network type
+ * # Operator info (area info cell broadcast for Brazil)
  * # Signal Strength
  * # Battery Strength  : TODO
  * # Uptime
@@ -74,6 +74,7 @@ public class Status extends PreferenceActivity {
     private static final String KEY_OPERATOR_NAME = "operator_name";
     private static final String KEY_ROAMING_STATE = "roaming_state";
     private static final String KEY_NETWORK_TYPE = "network_type";
+    private static final String KEY_LATEST_AREA_INFO = "latest_area_info";
     private static final String KEY_PHONE_NUMBER = "number";
     private static final String KEY_IMEI_SV = "imei_sv";
     private static final String KEY_IMEI = "imei";
@@ -95,6 +96,7 @@ public class Status extends PreferenceActivity {
         KEY_OPERATOR_NAME,
         KEY_ROAMING_STATE,
         KEY_NETWORK_TYPE,
+        KEY_LATEST_AREA_INFO,
         KEY_PHONE_NUMBER,
         KEY_IMEI,
         KEY_IMEI_SV,
@@ -104,6 +106,16 @@ public class Status extends PreferenceActivity {
         KEY_SIGNAL_STRENGTH,
         KEY_ICC_ID
     };
+
+    static final String CB_AREA_INFO_RECEIVED_ACTION =
+            "android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
+
+    static final String GET_LATEST_CB_AREA_INFO_ACTION =
+            "android.cellbroadcastreceiver.GET_LATEST_CB_AREA_INFO";
+
+    // Require the sender to have this permission to prevent third-party spoofing.
+    static final String CB_AREA_INFO_SENDER_PERMISSION =
+            "android.permission.RECEIVE_EMERGENCY_BROADCAST";
 
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
@@ -116,6 +128,7 @@ public class Status extends PreferenceActivity {
     private Resources mRes;
     private Preference mSignalStrength;
     private Preference mUptime;
+    private boolean mShowLatestAreaInfo;
 
     private String sUnknown;
 
@@ -176,10 +189,27 @@ public class Status extends PreferenceActivity {
         }
     };
 
+    private BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (CB_AREA_INFO_RECEIVED_ACTION.equals(action)) {
+                Bundle extras = intent.getExtras();
+                if (extras == null) {
+                    return;
+                }
+                CellBroadcastMessage cbMessage = (CellBroadcastMessage) extras.get("message");
+                if (cbMessage != null && cbMessage.getServiceCategory() == 50) {
+                    String latestAreaInfo = cbMessage.getMessageBody();
+                    updateAreaInfo(latestAreaInfo);
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        Preference removablePref;
 
         mHandler = new MyHandler(this);
 
@@ -237,6 +267,11 @@ public class Status extends PreferenceActivity {
                 removePreferenceFromScreen(KEY_MEID_NUMBER);
                 removePreferenceFromScreen(KEY_MIN_NUMBER);
                 removePreferenceFromScreen(KEY_ICC_ID);
+
+                // only show area info when SIM country is Brazil
+                if ("br".equals(mTelephonyManager.getSimCountryIso())) {
+                    mShowLatestAreaInfo = true;
+                }
             }
 
             String rawNumber = mPhone.getLine1Number();  // may be null or empty
@@ -250,6 +285,10 @@ public class Status extends PreferenceActivity {
             mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
             mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
             mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
+
+            if (!mShowLatestAreaInfo) {
+                removePreferenceFromScreen(KEY_LATEST_AREA_INFO);
+            }
         }
 
         setWimaxStatus();
@@ -275,9 +314,16 @@ public class Status extends PreferenceActivity {
             updateSignalStrength();
             updateServiceState(mPhone.getServiceState());
             updateDataState();
-
             mTelephonyManager.listen(mPhoneStateListener,
-                      PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
+                    PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
+            if (mShowLatestAreaInfo) {
+                registerReceiver(mAreaInfoReceiver, new IntentFilter(CB_AREA_INFO_RECEIVED_ACTION),
+                        CB_AREA_INFO_SENDER_PERMISSION, null);
+                // Ask CellBroadcastReceiver to broadcast the latest area info received
+                Intent getLatestIntent = new Intent(GET_LATEST_CB_AREA_INFO_ACTION);
+                sendBroadcastAsUser(getLatestIntent, UserHandle.ALL,
+                        CB_AREA_INFO_SENDER_PERMISSION);
+            }
         }
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         mHandler.sendEmptyMessage(EVENT_UPDATE_STATS);
@@ -290,6 +336,9 @@ public class Status extends PreferenceActivity {
         if (mPhone != null && !Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.unregisterIntent();
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        }
+        if (mShowLatestAreaInfo) {
+            unregisterReceiver(mAreaInfoReceiver);
         }
         unregisterReceiver(mBatteryInfoReceiver);
         mHandler.removeMessages(EVENT_UPDATE_STATS);
@@ -383,6 +432,12 @@ public class Status extends PreferenceActivity {
             setSummaryText(KEY_ROAMING_STATE, mRes.getString(R.string.radioInfo_roaming_not));
         }
         setSummaryText(KEY_OPERATOR_NAME, serviceState.getOperatorAlphaLong());
+    }
+
+    private void updateAreaInfo(String areaInfo) {
+        if (areaInfo != null) {
+            setSummaryText(KEY_LATEST_AREA_INFO, areaInfo);
+        }
     }
 
     void updateSignalStrength() {
