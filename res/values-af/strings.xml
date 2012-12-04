@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Ja"</string>
     <string name="no" msgid="6731231425810196216">"Nee"</string>
     <string name="create" msgid="3578857613172647409">"Skep"</string>
+    <string name="allow" msgid="3349662621170855910">"Laat toe"</string>
+    <string name="deny" msgid="6947806159746484865">"Weier"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Onbekend"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Jy het nou <xliff:g id="STEP_COUNT">%1$d</xliff:g> stappe oor voor jy \'n ontwikkelaar is."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Jy het nou <xliff:g id="STEP_COUNT">%1$d</xliff:g> stap oor voor jy \'n ontwikkelaar is."</item>
+    <item quantity="other" msgid="6722953419953594148">"Jy het nou <xliff:g id="STEP_COUNT">%1$d</xliff:g> stappe oor voor jy \'n ontwikkelaar is."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Jy is nou \'n ontwikkelaar!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Toemaar, jy is reeds \'n ontwikkelaar."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"DRAADLOOS en NETWERKE"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Onbekende fout"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Koud"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Ontdekbaar"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Sigbaar vir alle nabye Bluetooth-toestelle (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Sigbaar vir alle Bluetooth-toestelle wat naby is"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nie sigbaar vir ander Bluetooth-toestelle nie"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Net sigbaar vir saamgebinde toestelle"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Maak toestel opspoorbaar"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Sigbaarheid-tydperk"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Stel hoe lank die toestel opspoorbaar moet wees"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sluit stembellery"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Voorkom die gebruik van die Bluetooth-beller wanneer die skerm gesluit is"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-toestelle"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Wys ontvangde lêers"</string>
     <string name="device_picker" msgid="8398232791303186677">"Kieser vir Bluetooth-toestelle"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-toestemmingsversoek"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"\'n Program wil Bluetooth aanskakel. Toelaat?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"\'n Program op jou tablet wil jou tablet opspoorbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes . Toelaat?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"\'n Program op jou foon wil jou foon opspoorbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes . Toelaat?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"\'n Program op jou tablet wil jou tablet \"altyd opspoorbaar\" maak vir ander Bluetooth-toestelle. Toelaat?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"\'n Program op jou foon wil jou foon \"altyd opspoorbaar\" maak vir ander Bluetooth-toestelle. Toelaat?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"\'n Program op jou tablet wil Bluetooth aanskakel en jou tablet opspoorbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes. Toelaat?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"\'n Program op jou foon wil Bluetooth aanskakel en jou foon opspoorbar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes. Toelaat?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"\'n Program op jou tablet wil Bluetooth aanskakel en jou tablet opspoorbaar maak vir ander toestelle. Toelaat?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"\'n Program op jou foon wil Bluetooth aanskakel en jou foon opspoorbar maak vir ander toestelle? Toelaat?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"\'n Program wil Bluetooth aanskakel."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"\'n Program wil jou tablet sigbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"\'n Program wil jou foon sigbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"\'n Program wil jou tablet sigbaar maak vir ander Bluetooth-toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"\'n Program wil jou foon sigbaar maak vir ander Bluetooth-toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"\'n Program wil Bluetooth aanskakel en jou tablet sigbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"\'n Program wil Bluetooth aanskakel en jou foon sigbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"\'n Program wil Bluetooth aanskakel en jou tablet sigbaar maak vir ander toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"\'n Progam wil Bluetooth aanskakel en jou foon sigbaar maak vir ander toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Skakel tans Bluetooth af…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Skakel tans Bluetooth af…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Outokoppel"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Te veel verkeerde pogings!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Probeer weer oor <xliff:g id="NUMBER">%d</xliff:g> sekondes."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Die program is nie op jou foon geïnstalleer nie."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Kanselleer"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Volgende"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Beveilig jou tablet"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Beveilig jou foon"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Beskerm jou tablet teen ongemagtigde gebruik deur \'n persoonlike skermontsluitpatroon te skep. Laat gly jou vinger oor die volgende skerm om die kolletjies in enige volgorde te verbind. Jy moet ten minste vier kolletjies verbind. "\n\n"Reg om te begin? Raak Volgende."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Beskerm jou foon teen ongemagtigde gebruik deur \'n persoonlike skermontsluit-patroon te skep. Gly met jou vinger om ten minste vier kolletjies in enige volgorde op die volgende skerm te verbind. "\n\n"Gereed? Raak \"Volgende\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Bestuur programme"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Bestuur en verwyder geïnstalleerde programme"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programme"</string>

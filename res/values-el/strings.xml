@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Ναι"</string>
     <string name="no" msgid="6731231425810196216">"Όχι"</string>
     <string name="create" msgid="3578857613172647409">"Δημιουργία"</string>
+    <string name="allow" msgid="3349662621170855910">"Αποδοχή"</string>
+    <string name="deny" msgid="6947806159746484865">"Απόρριψη"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Άγνωστο"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Απομένουν <xliff:g id="STEP_COUNT">%1$d</xliff:g> βήματα για να γίνετε προγραμματιστής."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Απομένουν <xliff:g id="STEP_COUNT">%1$d</xliff:g> βήματα για να γίνετε προγραμματιστής."</item>
+    <item quantity="other" msgid="6722953419953594148">"Απομένουν <xliff:g id="STEP_COUNT">%1$d</xliff:g> βήματα για να γίνετε προγραμματιστής."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Είστε πλέον προγραμματιστής!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Δεν χρειάζεται, είστε ήδη προγραμματιστής."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"ΑΣΥΡΜΑΤΟ και ΔΙΚΤΥΑ"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Άγνωστο σφάλμα"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Κρύο"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Ανιχνεύσιμο"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Ορατό σε όλες τις κοντινές συσκευές Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Ορατό σε όλες τις κοντινές συσκευές Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Δεν είναι ορατό σε άλλες συσκευές Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Ορατό μόνο σε συζευγμένες συσκευές"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Να γίνει η συσκευή ανιχνεύσιμη"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Λήξη χρονικού ορίου προβολής"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Ρυθμίστε τον χρόνο δυνατότητας ανίχνευσης της συσκευής"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Κλείδωμα της λειτουργίας φωνητικών κλήσεων"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Να μην επιτρέπεται η χρήση του προγράμματος κλήσης bluetooth όταν η οθόνη είναι κλειδωμένη"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Συσκευές Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Εμφάνιση ληφθέντων αρχείων"</string>
     <string name="device_picker" msgid="8398232791303186677">"Επιλογέας συσκευής Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Αίτημα άδειας Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Κάποια εφαρμογή θέλει να ενεργοποιήσει το Bluetooth. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Μια εφαρμογή από το tablet σας θέλει να ενεργοποιήσει τη δυνατότητα ανίχνευσης του tablet σας από άλλες Bluetooth για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Μια εφαρμογή από το τηλέφωνό σας θέλει να ενεργοποιήσει τη δυνατότητα ανίχνευσης του τηλεφώνου σας από άλλες Bluetooth για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Μια εφαρμογή στο tablet σας θέλει να το καταστήσει \"μόνιμα ανιχνεύσιμο\" από άλλες συσκευές Bluetooth. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Μια εφαρμογή στο τηλέφωνό σας θέλει να το καταστήσει \"μόνιμα ανιχνεύσιμο\" από άλλες συσκευές Bluetooth. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Μια εφαρμογή από το tablet σας θέλει να ενεργοποιήσει το Bluetooth και να καταστήσει το tablet σας ανιχνεύσιμο από άλλες συσκευές για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Κάποια εφαρμογή του τηλεφώνου σας απαιτεί την ενεργοποίηση του Bluetooth και τη δυνατότητα ανίχνευσης του τηλεφώνου σας από άλλες συσκευές για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Μια εφαρμογή από το tablet σας θέλει να ενεργοποιήσει το Bluetooth και να καταστήσει το tablet σας ανιχνεύσιμο από άλλες συσκευές. Να επιτραπεί;"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Κάποια εφαρμογή του τηλεφώνου σας απαιτεί την ενεργοποίηση του Bluetooth και τη δυνατότητα ανίχνευσης του τηλεφώνου σας από άλλες συσκευές. Να επιτραπεί;"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Μια εφαρμογή θέλει να ενεργοποιήσει το Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Μια εφαρμογή θέλει να κάνει ορατό το tablet σας σε άλλες συσκευές Bluetooth για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Μια εφαρμογή θέλει να κάνει ορατό το τηλέφωνό σας σε άλλες συσκευές Bluetooth για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Μια εφαρμογή θέλει να κάνει το tablet σας ορατό σε άλλες συσκευές Bluetooth. Μπορείτε να αλλάξετε την επιλογή αργότερα, από τις ρυθμίσεις Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Μια εφαρμογή θέλει να κάνει το τηλέφωνό σας ορατό σε άλλες συσκευές Bluetooth. Μπορείτε να αλλάξετε την επιλογή αργότερα, από τις ρυθμίσεις Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Μια εφαρμογή θέλει να ενεργοποιήσει το Bluetooth και να κάνει το tablet σας ορατό σε άλλες συσκευές για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Μια εφαρμογή θέλει να ενεργοποιήσει το Bluetooth και να κάνει το τηλέφωνό σας ορατό σε άλλες συσκευές για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Μια εφαρμογή θέλει να ενεργοποιήσει το Bluetooth και να κάνει το tablet σας ορατό σε άλλες συσκευές. Μπορείτε να αλλάξετε την επιλογή αργότερα, από τις ρυθμίσεις Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Μια εφαρμογή θέλει να ενεργοποιήσει το Bluetooth και να κάνει το τηλέφωνό σας ορατό σε άλλες συσκευές. Μπορείτε να αλλάξετε την επιλογή αργότερα, από τις ρυθμίσεις Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Ενεργοποίηση του Bluetooth…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Απενεργοποίηση Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Αυτόματη σύνδεση"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Πάρα πολλές ανεπιτυχείς προσπάθειες!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Προσπαθήστε ξανά σε <xliff:g id="NUMBER">%d</xliff:g> δευτερόλεπτα."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Η εφαρμογή δεν έχει εγκατασταθεί στο τηλέφωνό σας."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Ακύρωση"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Επόμενο"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Ασφάλεια του tablet σας"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Ασφάλιση του τηλεφώνου σας"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Προστατέψτε το tablet σας από μη εξουσιοδοτημένη χρήση, δημιουργώντας ένα προσωπικό μοτίβο ξεκλειδώματος οθόνης. Σύρετε το δάχτυλό σας για να συνδέσετε τις τελείες με οποιαδήποτε σειρά στην επόμενη οθόνη. Πρέπει να συνδέσετε τουλάχιστον τέσσερις τελείες. "\n\n"Είστε έτοιμοι να ξεκινήσετε; Αγγίξτε το στοιχείο \"Επόμενο\"."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Προστατέψτε το τηλέφωνό σας από μη εξουσιοδοτημένη χρήση, δημιουργώντας ένα προσωπικό μοτίβο ξεκλειδώματος οθόνης. Σύρετε το δάχτυλό σας για να συνδέσετε τουλάχιστον τέσσερις τελείες με οποιαδήποτε σειρά στην επόμενη οθόνη. "\n\n"Είστε έτοιμοι να ξεκινήσετε; Αγγίξτε το στοιχείο \"Επόμενο\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Διαχείριση εφαρμογών"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Διαχείριση και κατάργηση εγκατεστημένων εφαρμογών"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Εφαρμογές"</string>

@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"نعم"</string>
     <string name="no" msgid="6731231425810196216">"لا"</string>
     <string name="create" msgid="3578857613172647409">"إنشاء"</string>
+    <string name="allow" msgid="3349662621170855910">"سماح"</string>
+    <string name="deny" msgid="6947806159746484865">"رفض"</string>
     <string name="device_info_default" msgid="7847265875578739287">"غير معروف"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT">%1$d</xliff:g> من الخطوات."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT">%1$d</xliff:g> من الخطوات."</item>
+    <item quantity="other" msgid="6722953419953594148">"لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT">%1$d</xliff:g> من الخطوات."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"لقد أصبحت الآن مطور برامج!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"لا حاجة لذلك، فأنت مطور برامج فعلاً."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"اللاسلكي والشبكات"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"خطأ غير معروف"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"بارد"</string>
     <string name="bluetooth" msgid="5549625000628014477">"بلوتوث"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"قابل للاكتشاف"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"مرئي لجميع أجهزة بلوتوث القريبة (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"مرئي لجميع أجهزة بلوتوث القريبة"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"ليس مرئيًا لأجهزة بلوتوث الأخرى"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"مرئي فقط للأجهزة المقترنة"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"جعل الجهاز قابل للاكتشاف"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"مهلة الرؤية"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"تعيين الوقت الذي يكون فيه الجهاز قابلاً للاكتشاف"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"تأمين الطلب الصوتي"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"منع استخدام طالب البلوتوث عندما تكون الشاشة مؤمّنة"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"أجهزة بلوتوث"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"إظهار الملفات المستلمة"</string>
     <string name="device_picker" msgid="8398232791303186677">"منتقي جهاز البلوتوث"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"طلب إذن بلوتوث"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"هل تريد السماح لأي تطبيق يريد تشغيل بلوتوث؟"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"يريد أحد التطبيقات على الجهاز اللوحي جعله قابلاً للاكتشاف بواسطة أجهزة البلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانية. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"يريد أحد التطبيقات على الهاتف جعله قابلاً للاكتشاف بواسطة أجهزة البلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانية. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"يريد أحد التطبيقات على الجهاز اللوحي جعله \"قابلاً للاكتشاف دائمًا\" بواسطة أجهزة البلوتوث الأخرى. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"يريد أحد التطبيقات على الهاتف جعله قابلاً للاكتشاف بواسطة أجهزة البلوتوث الأخرى. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"يريد أحد التطبيقات على الجهاز اللوحي تشغيل بلوتوث وجعله قابلاً للاكتشاف بواسطة الأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانية. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"يريد أحد التطبيقات على الهاتف تشغيل البلوتوث وجعل هاتفك قابلاً للاكتشاف بواسطة الأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانية. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"يريد أحد التطبيقات على الجهاز اللوحي تشغيل بلوتوث وجعله قابلاً للاكتشاف بواسطة الأجهزة الأخرى. هل تريد السماح بذلك؟"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"يريد أحد التطبيقات على الهاتف تشغيل البلوتوث وجعل هاتفك قابلاً للاكتشاف بواسطة الأجهزة الأخرى. هل تريد السماح بذلك؟"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"يريد أحد التطبيقات تشغيل بلوتوث."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"يريد أحد التطبيقات أن يجعل جهازك اللوحي مرئيًا لأجهزة البلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"يريد أحد التطبيقات أن يجعل هاتفك مرئيًا لأجهزة البلوتوث الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"يريد أحد التطبيقات جعل جهازك اللوحي مرئيًا لأجهزة بلوتوث الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"يريد أحد التطبيقات جعل هاتفك مرئيًا لأجهزة بلوتوث الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"يريد أحد التطبيقات تشغيل البلوتوث وجعل جهازك اللوحي مرئيًا للأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"يريد أحد التطبيقات تشغيل البلوتوث وجعل هاتفك مرئيًا للأجهزة الأخرى لمدة <xliff:g id="TIMEOUT">%1$d</xliff:g> من الثواني."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"يريد أحد التطبيقات تشغيل البلوتوث وجعل جهازك اللوحي مرئيًا للأجهزة الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"يريد أحد التطبيقات تشغيل البلوتوث وجعل هاتفك مرئيًا للأجهزة الأخرى. يمكنك تغيير هذا لاحقًا في إعدادات بلوتوث."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"جارٍ تشغيل البلوتوث..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"جارٍ إيقاف تشغيل البلوتوث..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"اتصال تلقائي"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"المحاولات غير الصحيحة كثيرة للغاية!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"حاول مرة أخرى خلال <xliff:g id="NUMBER">%d</xliff:g> ثانية."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"لم يتم تثبيت التطبيق على هاتفك."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"إلغاء"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"التالي"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"تأمين الجهاز اللوحي"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"تأمين الهاتف"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"يمكنك حماية الجهاز اللوحي من الاستخدام غير المصرح به من خلال إنشاء نقش شخصي لإلغاء تأمين الشاشة. استخدم إصبعك لتوصيل النقاط بأي ترتيب في الشاشة التالية. يلزمك توصيل أربع نقاط على الأقل."\n\n"هل أنت مستعد للبدء؟ المس \"التالي\"."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"يمكنك حماية الهاتف من الاستخدام غير المصرح به من خلال إنشاء نقش شخصي لإلغاء تأمين الشاشة. استخدم إصبعك لتوصيل النقاط لتوصيل أربع نقاط على الأقل بأي ترتيب في الشاشة التالية. "\n\n"هل أنت مستعد للبدء؟ المس \"التالي\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"إدارة التطبيقات"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"إدارة التطبيقات المثبتة وإزالتها"</string>
     <string name="applications_settings" msgid="1721442176406964682">"التطبيقات"</string>

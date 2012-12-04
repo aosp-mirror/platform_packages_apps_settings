@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"是"</string>
     <string name="no" msgid="6731231425810196216">"无"</string>
     <string name="create" msgid="3578857613172647409">"创建"</string>
+    <string name="allow" msgid="3349662621170855910">"允许"</string>
+    <string name="deny" msgid="6947806159746484865">"拒绝"</string>
     <string name="device_info_default" msgid="7847265875578739287">"未知"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"只需执行 <xliff:g id="STEP_COUNT">%1$d</xliff:g> 步操作即可进入开发者模式。"</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"只需 <xliff:g id="STEP_COUNT">%1$d</xliff:g> 步操作即可进入开发者模式。"</item>
+    <item quantity="other" msgid="6722953419953594148">"只需 <xliff:g id="STEP_COUNT">%1$d</xliff:g> 步操作即可进入开发者模式。"</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"您现在处于开发者模式！"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"您已处于开发者模式，无需进行此操作。"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"无线和网络"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"未知错误"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"电量低"</string>
     <string name="bluetooth" msgid="5549625000628014477">"蓝牙"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"可检测性"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"让附近所有的蓝牙设备均可检测到（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"让附近所有的蓝牙设备均可检测到"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"不让其他蓝牙设备检测到"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"仅让已配对的设备检测到"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"可以检测到设备"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"检测超时设置"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"设置可检测到设备的时间"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"锁定语音拨号"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"屏幕锁定时停止使用蓝牙拨号器"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"蓝牙设备"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"显示接收到的文件"</string>
     <string name="device_picker" msgid="8398232791303186677">"蓝牙设备选择器"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"蓝牙权限请求"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"某个应用想要打开蓝牙。允许该程序打开蓝牙吗？"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"您平板电脑上的某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的平板电脑。允许该程序执行相应操作吗？"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"您手机上的某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的手机。允许该程序执行相应操作吗？"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"您平板电脑上的某个应用想让其他蓝牙设备“一直可检测到”您的平板电脑。允许该程序执行相应操作吗？"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"您手机上的某个应用想让其他蓝牙设备“一直可检测到”您的手机。允许该程序执行相应操作吗？"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"您平板电脑上的某个应用想要打开蓝牙，以便其他设备可在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的平板电脑。允许该程序打开蓝牙吗？"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"您手机上的某个应用想要打开蓝牙，以便其他设备可在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的手机。允许该程序打开蓝牙吗？"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"您平板电脑上的某个应用想要打开蓝牙，以便其他设备可检测到您的平板电脑。允许该程序打开蓝牙吗？"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"您手机上的某个应用想要打开蓝牙，以便其他设备可检测到您的手机。允许该程序打开蓝牙吗？"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"某个应用想要打开蓝牙。"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的平板电脑。"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的手机。"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"某个应用想让其他蓝牙设备检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"某个应用想让其他蓝牙设备检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"某个应用想要打开蓝牙，以便其他设备可在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的平板电脑。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"某个应用想要打开蓝牙，以便其他设备可在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的手机。"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"某个应用想要打开蓝牙，以便其他设备可检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"某个应用想要打开蓝牙，以便其他设备可检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"正在打开蓝牙..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"正在关闭蓝牙…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"自动连接"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"错误的尝试次数过多！"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"<xliff:g id="NUMBER">%d</xliff:g> 秒后重试。"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"您的手机上未安装相应应用。"</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"取消"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"下一步"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"保护您的平板电脑"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"手机安全设置"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"创建个人屏幕解锁图案可防止他人未经许可使用您的平板电脑。在下一屏幕上用手指以任意顺序连接至少四个点。"\n\n"准备好开始了吗？请触摸“下一步”。"</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"创建个人屏幕解锁图案可防止他人未经许可使用您的手机。在下一屏幕上滑动手指以任意顺序连接至少四个点。"\n\n"准备好开始了吗？请触摸“下一步”。"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理应用"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和删除已安装的应用"</string>
     <string name="applications_settings" msgid="1721442176406964682">"应用"</string>

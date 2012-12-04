@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Sim"</string>
     <string name="no" msgid="6731231425810196216">"Não"</string>
     <string name="create" msgid="3578857613172647409">"Criar"</string>
+    <string name="allow" msgid="3349662621170855910">"Permitir"</string>
+    <string name="deny" msgid="6947806159746484865">"Recusar"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Desconhecido"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Está agora a <xliff:g id="STEP_COUNT">%1$d</xliff:g> passos de se tornar um programador."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Está agora a <xliff:g id="STEP_COUNT">%1$d</xliff:g> passos de se tornar um programador"</item>
+    <item quantity="other" msgid="6722953419953594148">"Está agora a <xliff:g id="STEP_COUNT">%1$d</xliff:g> passos de se tornar um programador."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Agora é um programador!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Não é necessário, já é um programador."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"REDES SEM FIOS E OUTRAS"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Erro desconhecido"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Frio"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Detectável"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visível p/ tds aparelhos Bluetooth próximos (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visível para tds os aparelhos Bluetooth nas prox."</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Não visível a outros aparelhos Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Visível apenas para aparelhos sincronizados"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Tornar o dispositivo detectável"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Tempo limite de visibilidade"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Definir durante quanto tempo ficará o dispositivo detectável"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Bloquear marcação por voz"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Evitar a utilização do telefone Bluetooth quando o ecrã está bloqueado"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Dispositivos Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar ficheiros recebidos"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selecionador de aparelho Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Pedido de emparelhamento de Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Uma aplicação pretende ativar o Bluetooth. Permitir?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Uma aplicação do tablet pretende que outros aparelhos Bluetooth possam detetar o seu tablet durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Permitir?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Uma aplicação do telemóvel pretende que outros aparelhos Bluetooth possam detetar o seu telemóvel durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Permitir?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Uma aplicação do tablet pretende que o tablet possa “sempre ser detetado” por outros aparelhos Bluetooth. Permitir?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Uma aplicação do telemóvel pretende que o telemóvel possa \"sempre ser detetado\" por outros aparelhos Bluetooth. Permitir?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Uma aplicação do tablet pretende ativar o Bluetooth para que o tablet possa ser detetado por outros aparelhos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Permitir?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Uma aplicação do telemóvel pretende ativar o Bluetooth para que o telemóvel possa ser detetado por outros aparelhos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Permitir?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Uma aplicação do tablet pretende ativar o Bluetooth para que o tablet possa ser detetado por outros aparelhos. Permitir?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Uma aplicação do telemóvel pretende ativar o Bluetooth para que o telemóvel possa ser detetado por outros aparelhos. Permitir?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Uma aplicação pretende ativar o Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Uma aplicação pretende tornar o seu tablet visível para outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Uma aplicação pretende tornar o seu telemóvel visível para outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Uma aplicação pretende tornar o seu tablet visível para outros dispositivos Bluetooth. Pode alterar esta opção mais tarde nas definições de Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Uma aplicação pretende tornar o seu telemóvel visível para outros dispositivos Bluetooth. Pode alterar esta opção mais tarde nas definições de Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Uma aplicação pretende ativar o Bluetooth e tornar o seu tablet visível para outros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Uma aplicação pretende ativar o Bluetooth e tornar o seu telemóvel visível para outros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Uma aplicação pretende ativar o Bluetooth e tornar o seu tablet visível para outros dispositivos. Pode alterar esta opção mais tarde nas definições de Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Uma aplicação pretende ativar o Bluetooth e tornar o seu telemóvel visível para outros dispositivos. Pode alterar esta opção mais tarde nas definições de Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"A ligar o Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Desativar o Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Ligação automática"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Demasiadas tentativas incorrectas!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Tente novamente dentro de <xliff:g id="NUMBER">%d</xliff:g> segundos."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"A aplicação não está instalada no telemóvel."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Cancelar"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Seguinte"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Manter a segurança do tablet"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Manter o telefone seguro"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Proteja o tablet contra a utilização não autorizada, criando uma sequência pessoal de desbloqueio do ecrã. Deslize lentamente o dedo para ligar os pontos por qualquer ordem no ecrã seguinte. É necessário ligar, pelo menos, quatro pontos. "\n\n"Pronto para começar? Toque em Seguinte."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Proteja o telemóvel contra a utilização não autorizada, criando uma sequência de desbloqueio do ecrã pessoal. Deslize lentamente o dedo para ligar, pelo menos, quatro pontos por qualquer ordem no ecrã seguinte. "\n\n"Pronto para começar? Toque em Seguinte."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gerir aplicações"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gerir e remover aplicações instaladas"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplicações"</string>
