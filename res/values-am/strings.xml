@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"አዎ"</string>
     <string name="no" msgid="6731231425810196216">"አይ"</string>
     <string name="create" msgid="3578857613172647409">"ፍጠር"</string>
+    <string name="allow" msgid="3349662621170855910">"ይፍቀዱ"</string>
+    <string name="deny" msgid="6947806159746484865">"ይከልክሉ"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ያልታወቀ"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"አሁን ገንቢ ለመሆን <xliff:g id="STEP_COUNT">%1$d</xliff:g> ደረጃዎች ይቀርዎታል።"</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"አሁን ገንቢ ለመሆን <xliff:g id="STEP_COUNT">%1$d</xliff:g> ደረጃ ይቀርዎታል።"</item>
+    <item quantity="other" msgid="6722953419953594148">"አሁን ገንቢ ለመሆን <xliff:g id="STEP_COUNT">%1$d</xliff:g> ደረጃዎች ይቀርዎታል።"</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"አሁን ገንቢ ሆነዋል!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"አያስፈልግም፣ አስቀድሞ ገንቢ ሆነዋል።"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"ገመድ አልባ&amp; አውታረ መረቦች"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"ያልታወቀ ስህተት"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"ቀዝቃዛ"</string>
     <string name="bluetooth" msgid="5549625000628014477">"ብሉቱዝ"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"መገኘት የሚችል"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"ለሁሉም የብሉቱዝ መሣሪያዎች(<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>) የሚታይ"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"ለሁሉም የብሉቱዝ መሣሪያዎች የሚታይ"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"ለሌሎች የብሉቱዝ መሣሪያዎች አይታይም"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"ለተጣመሩ መሣሪያዎች ብቻ የሚታይ"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"መሳሪያው መገኘት የሚችል አድርግ"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"የታይነትጊዜ አብቅቷል"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"መሣሪያ በምን ያህል ጊዜ እንደሚገኝ አዘጋጅ"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"በድምፅ መደወያ ቆልፍ"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"ማያው ሲቆለፍ የብሉቱዝ ደዋዩ እንዳይጠቀምበት ተከላከል።"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"የብሉቱዝመሣሪያዎች"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"የደረሱ ፋይሎችን አሳይ"</string>
     <string name="device_picker" msgid="8398232791303186677">"የብሉቱዝ መሣሪያ መራጭ"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"የብሉቱዝ ፈቃድ ጥየቃ"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"መተግበሪያ ብሉቱዝን ማብራት ይፈልጋል:: ፍቀድ?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"በጡባዊህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ጡባዊህ በሌሎች መሣሪያዎች እንዲገኝ ማድረግ ይፈልጋል:: ፍቀድ?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"በስልክህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ስልክህ በሌሎች መሣሪያዎች እንዲገኝ ማድረግ ይፈልጋል::  ፍቀድ?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"በጡባዊህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ጡባዊህ በሌሎች መሣሪያዎች “ሁልጊዜ እንዲገኝ ማድረግ ይፈልጋል:: ፍቀድ?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"በስልክህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ስልክህ በሌሎች መሣሪያዎች “ሁልጊዜ እንዲገኝ ማድረግ ይፈልጋል::  ፍቀድ?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"በጡባዊህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ጡባዊህ በሌሎች መሣሪያዎች እንዲገኝ ማድረግ ይፈልጋል:: ፍቀድ?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"በስልክህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ስልክህ በሌሎች መሣሪያዎች እንዲገኝ ማድረግ ይፈልጋል::  ፍቀድ?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"በጡባዊህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ጡባዊህ በሌሎች መሣሪያዎች እንዲገኝ ማድረግ ይፈልጋል:: ፍቀድ?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"በስልክህ ላይ ያለ መተግበሪያ ብሉቱዝን አብርቶ ስልክህ በሌሎች መሣሪያዎች እንዲገኝ ማድረግ ይፈልጋል::  ፍቀድ?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"አንድ መተግበሪያ ብሉቱዝን ማብራት ይፈልጋል።"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"አንድ መተግበሪያ ጡባዊዎን ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ለሌሎች የብሉቱዝ መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል።"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"አንድ መተግበሪያ ስልክዎን ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ለሌሎች የብሉቱዝ መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል።"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"አንድ መተግበሪያ ጡባዊዎን ለሌሎች የብሉቱዝ መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል። ይሄን በኋላ ላይ በብሉቱዝ ቅንብሮች ውስጥ ሊቀይሩት ይችላሉ።"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"አንድ መተግበሪያ ስልክዎን ለሌሎች የብሉቱዝ መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል። ይሄን በኋላ ላይ በብሉቱዝ ቅንብሮች ውስጥ ሊቀይሩት ይችላሉ።"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"አንድ መተግበሪያ ብሉቱዝን አብርቶ ጡባዊዎን ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ለሌሎች መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል።"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"አንድ መተግበሪያ ብሉቱዝን አብርቶ ስልክዎን ለ<xliff:g id="TIMEOUT">%1$d</xliff:g> ሰከንዶች ያህል ለሌሎች መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል።"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"አንድ መተግበሪያ ብሉቱዝን አብርቶ ጡባዊዎን ለሌሎች መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል። ይሄን በኋላ ላይ በብሉቱዝ ቅንብሮች ውስጥ ሊቀይሩት ይችላሉ።"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"አንድ መተግበሪያ ብሉቱዝን አብርቶ ስልክዎን ለሌሎች መሣሪያዎች እንዲታይ ሊያደርገው ይፈልጋል። ይሄን በኋላ ላይ በብሉቱዝ ቅንብሮች ውስጥ ሊቀይሩት ይችላሉ።"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"ብሉቱዝ በማብራት ላይ..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"ብሉቱዝ በማጥፋት ላይ..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"በራስ ሰር ተገናኝ"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"በጣም ብዙ የተሳሳቱ ሙከራዎች!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"በ<xliff:g id="NUMBER">%d</xliff:g>ሰከንዶች ውስጥ እንደገና ሞክር።"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"መተግበሪያ በስልክዎ ላይ አልተጫነም።"</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"ይቅር"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"ቀጥል"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"ጡባዊዎን በማስጠበቅ ላይ"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"ስልክዎን በማስጠበቅ ላይ"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"የግል ማያ መክፈቻ ስርዓተ ጥለት በመፍጠር ጡባዊህን ካልተፈቀደ ጥቅም ትከላከላለህ። በሚቀጥለው ማያ ላይ በማንኛውም ስርዓተ ነጥቦቹን ለማገናኘት ጣትህን ተጠቀም። ቢያንስ አራት ነጥቦች ማገናኘት አለብህ።"\n\n" ለመጀመር ዝግጁ ነህ? \"ቀጥል\" ንካ።"</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"የግል የስርዓተ ጥለት ማያ መክፈቻ በመፍጠር ስልክህን ካልተፈቀደ ጥቅም ጠብቅ። በሚቀጥለው ማያ ላይ በማንኛውም መልኩ ቢያንስ አራት ነጥቦች ጣትህን በመጠቀም አገናኝ። "\n\n" ለመጀመር ዝግጁ ነው? \"ቀጥሎ\" የሚለውን ንካ።"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"መተግበሪያዎች አስተዳድር"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"የተጫኑ መተግበራያዎች አስተዳድር እና አስወግድ"</string>
     <string name="applications_settings" msgid="1721442176406964682">"መተግበሪያዎች"</string>

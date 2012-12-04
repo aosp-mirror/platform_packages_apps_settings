@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"ใช่"</string>
     <string name="no" msgid="6731231425810196216">"ไม่"</string>
     <string name="create" msgid="3578857613172647409">"สร้าง"</string>
+    <string name="allow" msgid="3349662621170855910">"อนุญาต"</string>
+    <string name="deny" msgid="6947806159746484865">"ปฏิเสธ"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ไม่ทราบ"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"คุณเหลืออีกเพียง <xliff:g id="STEP_COUNT">%1$d</xliff:g> ขั้นตอนเพื่อเป็นนักพัฒนาซอฟต์แวร์"</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"คุณเหลืออีกเพียง <xliff:g id="STEP_COUNT">%1$d</xliff:g> ขั้นตอนเพื่อเป็นนักพัฒนาซอฟต์แวร์"</item>
+    <item quantity="other" msgid="6722953419953594148">"คุณเหลืออีกเพียง <xliff:g id="STEP_COUNT">%1$d</xliff:g> ขั้นตอนเพื่อเป็นนักพัฒนาซอฟต์แวร์"</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"ตอนนี้คุณเป็นนักพัฒนาซอฟต์แวร์แล้ว!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"ไม่จำเป็น คุณเป็นนักพัฒนาซอฟต์แวร์อยู่แล้ว"</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"ระบบไร้สายและเครือข่าย"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"เย็น"</string>
     <string name="bluetooth" msgid="5549625000628014477">"บลูทูธ"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"ค้นพบได้"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"อุปกรณ์บลูทูธใกล้เคียงทั้งหมดมองเห็นได้ (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"อุปกรณ์บลูทูธใกล้เคียงทั้งหมดมองเห็นได้"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"ไม่ให้อุปกรณ์บลูทูธอื่นเห็น"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"อุปกรณ์ที่จับคู่เท่านั้นที่มองเห็น"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"ทำให้ค้นพบอุปกรณ์ได้"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"ระยะหมดเวลาการมองเห็น"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"ตั้งค่าระยะเวลาที่ให้สามารถค้นพบอุปกรณ์ได้"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ล็อกการโทรด้วยเสียง"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"ป้องกันการใช้โปรแกรมโทรออกผ่านบลูทูธเมื่อล็อกหน้าจอไว้"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"อุปกรณ์บลูทูธ"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"แสดงไฟล์ที่ได้รับ"</string>
     <string name="device_picker" msgid="8398232791303186677">"ตัวเลือกอุปกรณ์บลูทูธ"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"คำขออนุญาตใช้บลูทูธ"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"แอปพลิเคชันต้องการเปิดบลูทูธ อนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"แอปพลิเคชันบนแท็บเล็ตของคุณต้องการทำให้อุปกรณ์บลูทูธอื่นค้นพบแท็บเล็ตของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"แอปพลิเคชันบนโทรศัพท์ของคุณต้องการทำให้อุปกรณ์บลูทูธอื่นค้นพบโทรศัพท์ของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"แอปพลิเคชันบนแท็บเล็ตของคุณต้องการทำให้อุปกรณ์บลูทูธอื่น \"ค้นพบแท็บเล็ตของคุณได้เสมอ\" คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"แอปพลิเคชันบนโทรศัพท์ของคุณต้องการทำให้อุปกรณ์บลูทูธอื่น \"ค้นพบโทรศัพท์ของคุณได้เสมอ\" คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"แอปพลิเคชันบนแท็บเล็ตของคุณต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นค้นพบแท็บเล็ตของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"แอปพลิเคชันบนโทรศัพท์ของคุณต้องการเปิดบลูทูธ และทำให้อุปกรณ์อื่นค้นพบโทรศัพท์ของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"แอปพลิเคชันบนแท็บเล็ตของคุณต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นค้นพบแท็บเล็ตของคุณได้ คุณจะอนุญาตหรือไม่"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"แอปพลิเคชันบนโทรศัพท์ของคุณต้องการเปิดบลูทูธ และทำให้อุปกรณ์อื่นค้นพบโทรศัพท์ของคุณได้ คุณจะอนุญาตหรือไม่"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"แอปพลิเคชันต้องการเปิดบลูทูธ"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นแท็บเล็ตของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นโทรศัพท์ของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นแท็บเล็ตของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นโทรศัพท์ของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"แอปพลิเคชันต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นสามารถมองเห็นแท็บเล็ตของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"แอปพลิเคชันต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นสามารถมองเห็นโทรศัพท์ของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"แอปพลิเคชันต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นสามารถมองเห็นแท็บเล็ตของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"แอปพลิเคชันต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นสามารถมองเห็นโทรศัพท์ของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"กำลังเปิดบลูทูธ..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"กำลังปิดบลูทูธ…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"เชื่อมต่ออัตโนมัติ"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"ลองผิดหลายครั้งมากเกินไป!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"ลองใหม่อีกครั้งใน <xliff:g id="NUMBER">%d</xliff:g> วินาที"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"ไม่ได้ติดตั้งแอปพลิเคชันบนโทรศัพท์ของคุณ"</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"ยกเลิก"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"ถัดไป"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"การรักษาความปลอดภัยแท็บเล็ตของคุณ"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"การป้องกันโทรศัพท์ของคุณ"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"ปกป้องแท็บเล็ตของคุณจากการใช้งานที่ไม่ได้รับอนุญาตด้วยการสร้างรูปแบบการปลดล็อกหน้าจอส่วนบุคคล เลื่อนนิ้วเพื่อเชื่อมต่อจุดต่างๆ ในลำดับใดก็ได้บนหน้าจอถัดไป คุณต้องเชื่อมต่อจุดอย่างน้อยสี่จุด"\n\n"เมื่อพร้อมที่จะเริ่มแล้ว ให้แตะ \"ถัดไป\""</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"ปกป้องโทรศัพท์ของคุณจากการใช้งานที่ไม่ได้รับอนุญาต โดยสร้างรูปแบบการปลดล็อกหน้าจอส่วนบุคคล เลื่อนนิ้วของคุณเพื่อเชื่อมต่อจุดอย่างน้อยสี่จุดในลำดับใดก็ได้ในหน้าจอถัดไป"\n\n"เมื่อพร้อมที่จะเริ่มแล้ว ให้แตะ \"ถัดไป\""</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"จัดการแอปพลิเคชัน"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"จัดการและนำแอปพลิเคชันที่ติดตั้งไว้ออก"</string>
     <string name="applications_settings" msgid="1721442176406964682">"แอปพลิเคชัน"</string>

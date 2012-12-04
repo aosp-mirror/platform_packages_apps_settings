@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Ja"</string>
     <string name="no" msgid="6731231425810196216">"Nein"</string>
     <string name="create" msgid="3578857613172647409">"Erstellen"</string>
+    <string name="allow" msgid="3349662621170855910">"Zulassen"</string>
+    <string name="deny" msgid="6947806159746484865">"Ablehnen"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Unbekannt"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"In <xliff:g id="STEP_COUNT">%1$d</xliff:g> Schritten sind Sie ein Entwickler."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"In <xliff:g id="STEP_COUNT">%1$d</xliff:g> Schritt sind Sie ein Entwickler."</item>
+    <item quantity="other" msgid="6722953419953594148">"In <xliff:g id="STEP_COUNT">%1$d</xliff:g> Schritten sind Sie ein Entwickler."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Sie sind jetzt ein Entwickler!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Okay, sind Sie bereits ein Entwickler."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"Drahtlos &amp; Netzwerke"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Unbekannter Fehler"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Kalt"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Sichtbar"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Sichtbar für alle Bluetooth-Geräte in der Nähe (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Sichtbar für alle Bluetooth-Geräte in der Nähe"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nicht sichtbar für andere Bluetooth-Geräte"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Nur sichtbar für Partnergeräte"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Gerät sichtbar machen"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Timeout für Sichtbarkeit"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Festlegen, wie lange das Gerät sichtbar sein soll"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sprachwahl sperren"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Verwendung des Bluetooth-Dialers bei gesperrtem Bildschirm verhindern"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-Geräte"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Erhaltene Dateien anzeigen"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth-Geräteauswahl"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-Berechtigungsanfrage"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Eine App versucht, Bluetooth zu aktivieren. Zulassen?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Eine App auf Ihrem Tablet versucht, Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen. Möchten Sie dies zulassen?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Eine App auf Ihrem Telefon versucht, Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen. Möchten Sie dies zulassen?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Eine App auf Ihrem Tablet versucht, Ihr Telefon für andere Bluetooth-Geräte dauerhaft sichtbar zu machen. Möchten Sie dies zulassen?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Eine App auf Ihrem Telefon versucht, Ihr Telefon immer für andere Bluetooth-Geräte sichtbar zu machen. Möchten Sie dies zulassen?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Eine App auf Ihrem Tablet versucht, Blueooth zu aktivieren und Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen. Möchten Sie dies zulassen?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Eine App auf Ihrem Telefon versucht, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Telefone sichtbar zu machen. Möchten Sie dies zulassen?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Eine App auf Ihrem Tablet versucht, Bluetooth zu aktivieren und Ihr Tablet für andere Geräte erkennbar zu machen. Zulassen?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Eine App auf Ihrem Telefon versucht, Bluetooth zu aktivieren und Ihr Telefon für andere Geräte sichtbar zu machen. Möchten Sie dies zulassen?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Eine App versucht, Bluetooth zu aktivieren."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Eine App versucht, Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Eine App versucht, Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Eine App versucht, Ihr Tablet für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Eine App versucht, Ihr Telefon für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Eine App versucht, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für andere Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Eine App versucht, Bluetooth zu aktivieren und Ihr Telefon für andere Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Bluetooth wird aktiviert..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Bluetooth wird deaktiviert..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Automatische Verbindung"</string>
@@ -1023,12 +1025,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Zu viele fehlgeschlagene Versuche!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"In <xliff:g id="NUMBER">%d</xliff:g> Sekunden erneut versuchen."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"App ist nicht auf dem Telefon installiert."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Abbrechen"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Weiter"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Sichern Ihres Tablets"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Telefon sichern"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Schützen Sie Ihr Tablet vor unbefugtem Zugriff: Erstellen Sie ein persönliches Entsperrungsmuster für Ihren Bildschirm. Verbinden Sie auf dem nächsten Bildschirm in beliebiger Reihenfolge mindestens vier Punkte mit dem Finger."\n\n"Bereit? Tippen Sie auf \"Weiter\"."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Schützen Sie Ihr Telefon vor unbefugtem Zugriff! Erstellen Sie ein persönliches Entsperrungsmuster für Ihren Bildschirm. Verbinden Sie auf dem nächsten Bildschirm in beliebiger Reihenfolge mindestens vier Punkte mit dem Finger. "\n\n"Bereit? Dann tippen Sie auf \"Weiter\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Apps verwalten"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Installierte Apps verwalten und entfernen"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Apps"</string>
@@ -1560,7 +1556,7 @@
     <string name="wifi_setup_status_connecting" msgid="4971421484401530740">"Verbindung wird hergestellt..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Weiter zum nächsten Schritt"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"EAP wird nicht unterstützt."</string>
-    <string name="wifi_setup_eap_not_supported" msgid="595556546597351489">"Während der Einrichtung können Sie keine EAP-WLAN-Verbindung konfigurieren. Sie können dies anschließend in den Einstellungen unter \"Drahtlos &amp;amp Netzwerke\" vornehmen."</string>
+    <string name="wifi_setup_eap_not_supported" msgid="595556546597351489">"Während der Einrichtung können Sie keine EAP-WLAN-Verbindung konfigurieren. Sie können dies anschließend in den Einstellungen unter \"Drahtlos &amp; Netzwerke\" vornehmen."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"Der Verbindungsaufbau kann einige Minuten dauern..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Tippen Sie auf "<b>"Weiter"</b>", um mit der Einrichtung fortzufahren."\n\n"Tippen Sie auf "<b>"Zurück"</b>", um eine Verbindung zu einem anderen WLAN-Netzwerk herzustellen."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synchronisierung aktiviert"</string>
@@ -1676,7 +1672,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datenverbrauch"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Datenverbrauchszyklus"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Daten-Roaming"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Hintergrunddaten"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Hintergrunddaten beschränken"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"4G-Nutzung separat anzeigen"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"WLAN anzeigen"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Ethernet-Nutzung anzeigen"</string>

@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Ndiyo"</string>
     <string name="no" msgid="6731231425810196216">"Hapana"</string>
     <string name="create" msgid="3578857613172647409">"Unda"</string>
+    <string name="allow" msgid="3349662621170855910">"Ruhusu"</string>
+    <string name="deny" msgid="6947806159746484865">"Kana"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Haijulikani"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Sasa uko katika hatua ya <xliff:g id="STEP_COUNT">%1$d</xliff:g> kuwa msanidi programu."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Sasa uko katika hatua ya <xliff:g id="STEP_COUNT">%1$d</xliff:g> kutoka kuwa msanidi programu."</item>
+    <item quantity="other" msgid="6722953419953594148">"Sasa uko katika hatua ya <xliff:g id="STEP_COUNT">%1$d</xliff:g> kutoka kuwa msanidi programu."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Sasa wewe ni msanidi programu!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Hakuna haja, tayari wewe ni msanidi programu."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"MITANDAO NA MITANDAO-HEWA"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Hitilafu isiyojulikana"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Baridi"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Inagundulika"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Inaonekana kwa zote zilizokaribu na vifaa vya Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Inaonekana kwa zote zilizokaribu na vifaa vya Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"haionekani kwa vifaa vingine vya Bluetooth"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Inaonekana tu kwa vifaa vilivyolinganishwa"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Fanya kifaa kiweze kutambuliwa"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Muda wa kuonekana"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Weka ni kwa muda kiasi gani ambao kifaa kitagundulika"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Funga sauti ya upigaji simu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Zuia matumizi yakibonyezi cha bluetooth wakati skrini imefungwa"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Vifaa vya Bluetooth"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Onyesha faili zilizopokewa"</string>
     <string name="device_picker" msgid="8398232791303186677">"Kichagua kifaa cha Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Ombi la kibali cha Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Programu inataka kuwasha Bluetooth. Kubali?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Programu katika kompyuta yako ndogo inataka kufanya kompyuta yako ndogo igundulike na vifaa vingine vya Bluetooth kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>. Kubali?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Programu katika simu yako inataka kufanya kompyuta yako ndogo igundulike na vifaa vingine vya Bluetooth kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>. Kubali?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Programu katika kompyuta yako ndogo inataka kufanya kompyuta yako ndogo igundulike na vifaa vingine vya Bluetooth. Kubali?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Programu katika simu yako inataka kuwasha Bluetooth na kufanya simu yako \"igundulike daima\" na vifaa vingine. Kubali?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Programu katika kompyuta yako ndogo inataka kufanya kompyuta yako ndogo igundulike na vifaa vingine vya Bluetooth kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>. Kubali?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Programu katika simu yako inataka kuwasha Bluetooth na kufanya simu yako igundulike na vifaa vingine kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>. Kubali?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Programu katika kompyuta yako ndogo inataka kufanya kompyuta yako ndogo igundulike na vifaa vingine vya Bluetooth kwa sekunde. Kubali?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Programu katika simu yako inataka kuwasha Bluetooth na kufanya simu yako igundulike na vifaa vingine. Kubali?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Programu inataka kuwasha Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Programu inataka kufanya kompyuta yako ndogo ionekane kwenye vifaa vingine vya Bluetooth kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Programu inataka kufanya simu yako ionekane kwenye vifaa vingine vya Bluetooth kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Programu inataka kufanya kompyuta yako ndogo ionekane kwenye vifaa vingine vya Bluetooth. Unaweza kubadilisha hii baadaye kwenye mipangilio ya Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Programu inataka kufanya simu yako ionekane kwenye vifaa vingine vya Bluetooth. Unaweza kubadilisha hii baadaye kwenye mipangilio ya Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Programu inataka kuwasha Bluetooth na kufanya kompyuta yako ndogo ionekane kwa vifaa vingine kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Programu inataka kuwasha Bluetooth na kufanya simu yako ionekane kwa vifaa vingine kwa sekunde <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Programu inataka kuwasha Bluetooth na kufanya kompyuta yako ndogo ionekane kwenye vifaa vingine. Unaweza kubadilisha hii baadaye kwenye mipangilio ya Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Programu inataka kuwasha Bluetooth na kufanya simu yako ionekane kwenye vifaa vingine. Unaweza kubadilisha hii baadaye kwenye mipangilio ya Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Inawasha Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Inazima Bluetooth..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Unganisha-kiotomatiki"</string>
@@ -674,10 +676,10 @@
     <string name="volume_ring_description" msgid="5936851631698298989">"Mlio wa simu na taarifa"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Arifa"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Kengele"</string>
-    <string name="volume_ring_mute" msgid="3018992671608737202">"Nyamazisha mlio wa simu &amp; arifa"</string>
-    <string name="volume_media_mute" msgid="3399059928695998166">"Nyamazisha muziki &amp; midia nyingine"</string>
-    <string name="volume_notification_mute" msgid="7955193480006444159">"Nyamazisha arifa"</string>
-    <string name="volume_alarm_mute" msgid="4452239420351035936">"Nyamazisha kengele"</string>
+    <string name="volume_ring_mute" msgid="3018992671608737202">"Zima mlio wa simu na arifa"</string>
+    <string name="volume_media_mute" msgid="3399059928695998166">"Zima sauti ya muziki na midia nyingine"</string>
+    <string name="volume_notification_mute" msgid="7955193480006444159">"Puuza arifa"</string>
+    <string name="volume_alarm_mute" msgid="4452239420351035936">"Zima kengele"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Tetema wakati wa kutoa mlio"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Gati"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Mipangilio ya gati"</string>
@@ -1014,12 +1016,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Mjarabio mengi yasiyo sahihi"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Jaribu tena baada ya sekunde <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Programu haijasakinishwa kwenye simu yako."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Ghairi"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Ifuatayo"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Kulinda kompyuta yako ndogo"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Kulinda simu yako"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Linda kompyuta yako kibao dhidi ya matumizi ambayo hayajaidhinishwa kwa kuunda skrini ya kibinafsi ya mchoro wa kufungua. Sogeza kidole chako ili kuunganisha madoa katika mpangilio wowote kwenye skrini ifuatayo. Lazima uunganishe angalau madoa manne. "\n\n"Uko tayari kuanza? Gusa Ifuatayo."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Linda simu yako na matumizi yasiyoidhinishwa kwa kuunda umbizo la kufungua skrini ya kibinafsi. Tumia kidole chako kuunganisha angalau doti nne kwa mpangilio wowote kwenye skrini ifuatayo "\n\n"Tayari kuanza? Gusa “Ifuatayo”."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Dhibiti programu"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Dhibiti na ondoa programu zilizosakinishwa"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Programu"</string>

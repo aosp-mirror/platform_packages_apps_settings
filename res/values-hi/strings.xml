@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"हां"</string>
     <string name="no" msgid="6731231425810196216">"नहीं"</string>
     <string name="create" msgid="3578857613172647409">"बनाएं"</string>
+    <string name="allow" msgid="3349662621170855910">"अनुमति दें"</string>
+    <string name="deny" msgid="6947806159746484865">"अस्वीकार करें"</string>
     <string name="device_info_default" msgid="7847265875578739287">"अज्ञात"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"अब आप डेवलपर बनने से <xliff:g id="STEP_COUNT">%1$d</xliff:g> चरण दूर हैं."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"अब आप डेवलपर बनने से <xliff:g id="STEP_COUNT">%1$d</xliff:g> चरण दूर हैं"</item>
+    <item quantity="other" msgid="6722953419953594148">"अब आप डेवलपर बनने से <xliff:g id="STEP_COUNT">%1$d</xliff:g> चरण दूर हैं."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"अब आप डेवलपर बन गए हैं!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"आवश्यकता नहीं, आप पहले से ही डेवलपर हैं."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"वायरलेस और नेटवर्क"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"अज्ञात त्रुटि"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"ठंडा"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"खोज योग्‍य"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"आसपास के सब Bluetooth उप. के लि‍ए दृश्‍यमान (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"सभी आस-पास के Bluetooth उपकरणों के लि‍ए दृश्‍यमान"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"अन्‍य Bluetooth उपकरणों के लि‍ए दृश्‍यमान नहीं"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"केवल युग्‍मि‍त उपकरणों के लि‍ए दृश्‍यमान"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"उपकरण को खोज योग्‍य बनाएं"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"दृश्यता समयबाह्य"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"सेट करें कि कितनी देर तक उपकरण खोज योग्‍य रहेगा"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ध्‍वनि डायलिंग लॉक करें"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"जब स्‍क्रीन लॉक हो, तो bluetooth डायलर के उपयोग को रोकें"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth उपकरण"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"प्राप्त फ़ाइलें दिखाएं"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth उपकरण चयनकर्ता"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth अनूमति अनुरोध"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"कोई एप्‍लिकेशन Bluetooth चालू करना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"आपके टेबलेट पर कोई एप्‍लिकेशन <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए अन्‍य Bluetooth उपकरणों द्वारा आपके टेबलेट को खोजने योग्‍य बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"आपके फ़ोन पर कोई एप्‍लिकेशन <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए अन्‍य Bluetooth उपकरणों द्वारा आपके फ़ोन को खोजने योग्‍य बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"आपके टेबलेट पर कोई एप्‍लिकेशन आपके टेबलेट को अन्‍य Bluetooth उपकरणों द्वारा “हमेशा खोजने योग्‍य” बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"आपके फ़ोन पर कोई एप्‍लिकेशन आपके फ़ोन को अन्‍य Bluetooth उपकरणों द्वारा “हमेशा खोजने योग्‍य” बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"आपके टेबलेट पर कोई एप्‍लिकेशन Bluetooth चालू करना चाहता है और आपके टेबलेट को अन्‍य उपकरणों द्वारा <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए खोजने योग्‍य बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"आपके फ़ोन पर कोई एप्‍लिकेशन Bluetooth चालू करना चाहता है और आपके फ़ोन को अन्‍य उपकरणों द्वारा <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए खोजने योग्‍य बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"आपके टेबलेट पर कोई एप्‍लिकेशन Bluetooth चालू करना चाहता है और आपके टेबलेट को अन्‍य उपकरणों द्वारा खोजने योग्‍य बनाना चाहता है. अनुमति दें?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"आपके फ़ोन पर कोई एप्‍लिकेशन Bluetooth चालू करना चाहता है और आपके फ़ोन को अन्‍य उपकरणों द्वारा खोजने योग्‍य बनाना चाहता है. अनुमति दें?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"एक एप्लिकेशन Bluetooth को चालू करना चाहता है."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"एक एप्लिकेशन आपके टेबलेट को <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए अन्य Bluetooth उपकरणों हेतु दृश्यमान बनाना चाहता है."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"एक एप्लिकेशन आपके फ़ोन को <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए अन्य Bluetooth उपकरणों हेतु दृश्यमान बनाना चाहता है."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"एक एप्लिकेशन आपके टेबलेट को अन्य Bluetooth उपकरणों हेतु दृश्यमान बनाना चाहता है. आप इसे बाद में Bluetooth सेटिंग में बदल सकते हैं."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"एक एप्लिकेशन आपके फ़ोन को अन्य Bluetooth उपकरणों हेतु दृश्यमान बनाना चाहता है. आप इसे बाद में Bluetooth सेटिंग में बदल सकते हैं."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"एक एप्लिकेशन Bluetooth को चालू करना और आपके टेबलेट को <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए अन्य उपकरणों हेतु दृश्यमान बनाना चाहता है."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"एक एप्लिकेशन Bluetooth को चालू करना और आपके फ़ोन को <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंड के लिए अन्य उपकरणों हेतु दृश्यमान बनाना चाहता है."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"एक एप्लिकेशन Bluetooth को चालू करना और आपके टेबलेट को अन्य उपकरणों हेतु दृश्यमान बनाना चाहता है. आप इसे बाद में Bluetooth सेटिंग में बदल सकते हैं."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"एक एप्लिकेशन Bluetooth को चालू करना और आपके फ़ोन को अन्य उपकरणों हेतु दृश्यमान बनाना चाहता है. आप इसे बाद में Bluetooth सेटिंग में बदल सकते हैं."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Bluetooth चालू हो रहा है.."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Bluetooth बंद कर रहे हैं…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"स्‍वत: कनेक्‍ट करें"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"बहुत से गलत प्रयास!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"<xliff:g id="NUMBER">%d</xliff:g> सेकंड में पुन: प्रयास करें."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"आपके फ़ोन पर एप्लिकेशन इंस्टॉल नहीं है."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"रद्द करें"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"अगला"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"अपने टेबलेट को सुरक्षित करना"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"आपके फ़ोन को सुरक्षित करना"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"कोई निजी स्‍क्रीन अनलॉक प्रतिमान बनाकर अपने टेबलेट को अनधिकृत उपयोग से बचाएं. बिंदुओं को किसी भी क्रम में जोड़ने के लिए अपनी अंगुली को अगली स्‍क्रीन पर स्लाइड करें. आपको कम से कम चार बिंदुओं को जोड़ना होगा. "\n\n"प्रारंभ करने के लिए तैयार हैं? अगला स्पर्श करें."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"व्यक्तिगत स्‍क्रीन अनलॉक प्रतिमान बनाकर अपने फ़ोन को अनधिकृत उपयोग से बचाएं. कम से कम चार बिंदुओं को किसी भी क्रम में जोड़ने के लिए अपनी अंगुली को अगली स्‍क्रीन पर स्लाइड करें. "\n\n"शुरू करने के लिए तैयार हैं? अगला स्पर्श करें."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"एप्लिकेशन प्रबंधित करें"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"इंस्‍टॉल किए गए एप्‍लिकेशन प्रबंधित करें और निकालें"</string>
     <string name="applications_settings" msgid="1721442176406964682">"एप्लिकेशन"</string>

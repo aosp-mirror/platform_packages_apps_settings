@@ -19,8 +19,13 @@
     <string name="yes" msgid="4676390750360727396">"Da"</string>
     <string name="no" msgid="6731231425810196216">"Ne"</string>
     <string name="create" msgid="3578857613172647409">"Izradi"</string>
+    <string name="allow" msgid="3349662621170855910">"Dopusti"</string>
+    <string name="deny" msgid="6947806159746484865">"Odbij"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nepoznato"</string>
-    <string name="show_dev_countdown" msgid="5521163114237004821">"Postat ćete razvojni programer za ovoliko koraka: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</string>
+  <plurals name="show_dev_countdown">
+    <item quantity="one" msgid="5295687242294085452">"Još <xliff:g id="STEP_COUNT">%1$d</xliff:g> korak i postat ćete razvojni programer."</item>
+    <item quantity="other" msgid="6722953419953594148">"Još <xliff:g id="STEP_COUNT">%1$d</xliff:g> koraka i postat ćete razvojni programer ."</item>
+  </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Sad ste razvojni programer!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nema potrebe, već ste razvojni programer."</string>
     <string name="header_category_wireless_networks" msgid="4944823405420438623">"BEŽIČNO POVEZIVANJE i MREŽE"</string>
@@ -105,14 +110,11 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Nepoznata pogreška"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Hladno"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"Moguće prepoznavanje"</string>
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Vidljivo svim Bluetooth uređajima u blizini (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Vidljivo svim Bluetooth uređajima u blizini"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nije vidljiv drugim Bluetooth uređajima"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Vidljivo samo uparenim uređajima"</string>
-    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Omogući prepoznavanje uređaja"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Vidljivost je istekla"</string>
-    <string name="bluetooth_visibility_timeout_summary" msgid="6483353842671501585">"Odredite koliko će dugo biti moguće otkriti uređaj"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Zaključaj biranje glasom"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Spriječite upotrebu Bluetooth birača ako je zaslon zaključan"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth uređaji"</string>
@@ -146,15 +148,15 @@
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Prikaži primljene datoteke"</string>
     <string name="device_picker" msgid="8398232791303186677">"Birač Bluetooth uređaja"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Zatraženo je Bluetooth dopuštenje"</string>
-    <string name="bluetooth_ask_enablement" msgid="5279027758886569301">"Aplikacija želi uključiti Bluetooth. Dopustiti?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4420151924834278808">"Aplikacija na vašem tabletnom računalu želi omogućiti otkrivanje vašeg tabletnog računala drugim Bluetooth uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s. Dopustiti?"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="4478906085771274647">"Aplikacija na vašem telefonu želi omogućiti otkrivanje vašeg telefona drugim Bluetooth uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s. Dopustiti?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8737516188038252313">"Aplikacija na vašem tabletnom računalu želi omogućiti trajno otkrivanje vašeg tabletnog računala drugim Bluetooth uređajima. Dopustiti?"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="7751530664834149084">"Aplikacija na vašem telefonu želi omogućiti trajno otkrivanje vašeg telefona drugim Bluetooth uređajima. Dopustiti?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="8504403125440086020">"Aplikacija na vašem tabletnom računalu želi uključiti Bluetooth i omogućiti otkrivanje vašeg tabletnog računala drugim uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s. Dopustiti?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="3040361003987241057">"Aplikacija na vašem telefonu želi uključiti Bluetooth i omogućiti prepoznavanje vašeg telefona drugim uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s. Dopustiti?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="7254712987802497615">"Aplikacija na vašem tabletnom računalu želi omogućiti otkrivanje vašeg tabletnog računala drugim Bluetooth uređajima. Dopustiti?"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="3947789545028519103">"Aplikacija na vašem telefonu želi uključiti Bluetooth i omogućiti prepoznavanje vašeg telefona drugim uređajima. Dopustiti?"</string>
+    <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Aplikacija želi uključiti Bluetooth."</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Aplikacija želi vaše tabletno računalo učiniti vidljivim drugim Bluetooth uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Aplikacija želi vaš telefon učiniti vidljivim drugim Bluetooth uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Aplikacija želi učiniti vaše tabletno računalo vidljivim drugim Bluetooth uređajima. To možete kasnije promijeniti u postavkama Bluetootha."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Aplikacija želi učiniti vaš telefon vidljivim drugim Bluetooth uređajima. To možete kasnije promijeniti u postavkama Bluetootha."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Aplikacija želi uključiti Bluetooth i vaše tabletno računalo učiniti vidljivim drugim uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Aplikacija želi uključiti Bluetooth i vaš telefon učiniti vidljivim drugim uređajima u trajanju od <xliff:g id="TIMEOUT">%1$d</xliff:g> s."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Aplikacija želi uključiti Bluetooth i vaše tabletno računalo učiniti vidljivim drugim uređajima. To možete kasnije promijeniti u postavkama Bluetootha."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Aplikacija želi uključiti Bluetooth i vaš telefon učiniti vidljivim drugim uređajima. To možete kasnije promijeniti u postavkama Bluetootha."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Uključivanje Bluetootha…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Isključivanje Bluetootha?"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Automatsko povezivanje"</string>
@@ -1022,12 +1024,6 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Previše netočnih pokušaja!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Pokušajte ponovo za <xliff:g id="NUMBER">%d</xliff:g> s."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikacija nije instalirana na vašem telefonu."</string>
-    <string name="skip_button_label" msgid="8680422740354436943">"Odustani"</string>
-    <string name="next_button_label" msgid="8890792540116568321">"Dalje"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Osiguravanje tabletnog uređaja"</string>
-    <string name="lock_title" product="default" msgid="4059246467204273930">"Osiguravanje telefona"</string>
-    <string name="lock_intro_message" product="tablet" msgid="8616353869251700776">"Zaštitite svoje tabletno računalo od neautorizirane upotrebe stvaranjem osobnog uzorka za otključavanje zaslona. Klizite prstom kako biste točke na zaslonu povezali bilo kojim redoslijedom. Trebate povezati najmanje četiri točke."\n\n"Jeste li spremni? Dodirnite Dalje."</string>
-    <string name="lock_intro_message" product="default" msgid="8393155371327584659">"Zaštitite svoj telefon od neovlaštene upotrebe izradom vlastitog uzorka za otključavanje zaslona. Na sljedećem zaslonu klizite prstom da biste spojili najmanje četiri točke bilo kojim redoslijedom. "\n\n"Spremni za početak? Dodirnite \"Dalje\"."</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Upravljanje aplikacijama"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Upravljanje instaliranim aplikacijama i njihovo uklanjanje"</string>
     <string name="applications_settings" msgid="1721442176406964682">"Aplikacije"</string>
