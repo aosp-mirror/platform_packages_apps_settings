@@ -492,11 +492,7 @@ public class DataUsageSummary extends Fragment {
         final MenuItem help = menu.findItem(R.id.data_usage_menu_help);
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_data_usage))) {
-            Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(helpUrl));
-            helpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-            help.setIntent(helpIntent);
-            help.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            HelpUtils.prepareHelpMenuItem(context, help, helpUrl);
         } else {
             help.setVisible(false);
         }
