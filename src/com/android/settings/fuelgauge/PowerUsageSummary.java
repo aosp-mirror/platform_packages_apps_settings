@@ -52,6 +52,7 @@ import android.view.MenuItem;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.internal.os.PowerProfile;
+import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
 import com.android.settings.users.UserUtils;
@@ -339,11 +340,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
             final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
-            Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(helpUrl));
-            helpIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-            help.setIntent(helpIntent);
-            help.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            HelpUtils.prepareHelpMenuItem(getActivity(), help, helpUrl);
         }
     }
 
