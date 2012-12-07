@@ -149,12 +149,12 @@
     <string name="device_picker" msgid="8398232791303186677">"蓝牙设备选择器"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"蓝牙权限请求"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"某个应用想要打开蓝牙。"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的平板电脑。"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的手机。"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的平板电脑。"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的手机。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"某个应用想让其他蓝牙设备检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"某个应用想让其他蓝牙设备检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"某个应用想要打开蓝牙，以便其他设备可在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的平板电脑。"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"某个应用想要打开蓝牙，以便其他设备可在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内检测到您的手机。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"某个应用想要打开蓝牙，以便其他设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的平板电脑。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"某个应用想要打开蓝牙，以便其他设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的手机。"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"某个应用想要打开蓝牙，以便其他设备可检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"某个应用想要打开蓝牙，以便其他设备可检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"正在打开蓝牙..."</string>
@@ -665,12 +665,12 @@
     <string name="musicfx_title" msgid="3415566786340790345">"音乐效果"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"铃声音量"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"静音时振动"</string>
-    <string name="notification_sound_title" msgid="312032901303146002">"默认通知"</string>
+    <string name="notification_sound_title" msgid="5137483249425507572">"默认通知提示音"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"收到通知时指示灯闪烁"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"铃声"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"将来电音量用作通知音量"</string>
-    <string name="notification_sound_dialog_title" msgid="9052854168612951170">"选择通知铃声"</string>
+    <string name="notification_sound_dialog_title" msgid="3805140135741385667">"默认通知提示音"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"媒体"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"设置音乐和视频的音量"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"闹钟"</string>
@@ -784,6 +784,7 @@
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"手机网络类型"</string>
+    <string name="status_latest_area_info" msgid="7222470836568238054">"运营商信息"</string>
     <string name="status_data_state" msgid="5503181397066522950">"移动网络状态"</string>
     <string name="status_service_state" msgid="2323931627519429503">"服务状态"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"信号强度"</string>
@@ -1001,7 +1002,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"更改解锁 PIN"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"确认已保存的图案"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"请重试："</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"绘制解锁图案"</string>
+    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"绘制解锁图案："</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"按 MENU 获得帮助。"</string>
     <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"完成后松开手指。"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"至少连接 <xliff:g id="NUMBER">%d</xliff:g> 个点，请重试："</string>
