@@ -174,6 +174,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 }
             }
         } else if (preference.getKey().equals(KEY_BUILD_NUMBER)) {
+            // Don't enable developer options for secondary users.
+            if (UserHandle.myUserId() != UserHandle.USER_OWNER) return true;
+
             if (mDevHitCountdown > 0) {
                 mDevHitCountdown--;
                 if (mDevHitCountdown == 0) {
