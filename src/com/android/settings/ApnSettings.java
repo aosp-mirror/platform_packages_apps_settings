@@ -209,7 +209,8 @@ public class ApnSettings extends PreferenceActivity implements
         super.onCreateOptionsMenu(menu);
         menu.add(0, MENU_NEW, 0,
                 getResources().getString(R.string.menu_new))
-                .setIcon(android.R.drawable.ic_menu_add);
+                .setIcon(android.R.drawable.ic_menu_add)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, MENU_RESTORE, 0,
                 getResources().getString(R.string.menu_restore))
                 .setIcon(android.R.drawable.ic_menu_upload);
