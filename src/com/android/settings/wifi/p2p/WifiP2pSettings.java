@@ -34,7 +34,6 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pGroupList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.GroupInfoListener;
-import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ import java.util.Collection;
  * Displays Wi-fi p2p settings UI
  */
 public class WifiP2pSettings extends SettingsPreferenceFragment
-        implements PeerListListener, PersistentGroupInfoListener, GroupInfoListener {
+        implements PersistentGroupInfoListener, GroupInfoListener {
 
     private static final String TAG = "WifiP2pSettings";
     private static final boolean DBG = false;
@@ -116,9 +115,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                     WifiP2pManager.WIFI_P2P_STATE_DISABLED) == WifiP2pManager.WIFI_P2P_STATE_ENABLED;
                 handleP2pStateChanged();
             } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
-                if (mWifiP2pManager != null) {
-                    mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
-                }
+                mPeers = (WifiP2pDeviceList) intent.getParcelableExtra(
+                        WifiP2pManager.EXTRA_P2P_DEVICE_LIST);
+                handlePeersChanged();
             } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
                 if (mWifiP2pManager == null) return;
                 NetworkInfo networkInfo = (NetworkInfo) intent.getParcelableExtra(
@@ -463,13 +462,13 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
     }
 
-    public void onPeersAvailable(WifiP2pDeviceList peers) {
+    private void handlePeersChanged() {
         mPeersGroup.removeAll();
 
-        mPeers = peers;
         mConnectedDevices = 0;
-        for (WifiP2pDevice peer: peers.getDeviceList()) {
-            if (DBG) Log.d(TAG, " peer " + peer);
+        if (DBG) Log.d(TAG, "List of available peers");
+        for (WifiP2pDevice peer: mPeers.getDeviceList()) {
+            if (DBG) Log.d(TAG, "-> " + peer);
             mPeersGroup.addPreference(new WifiP2pPeer(getActivity(), peer));
             if (peer.status == WifiP2pDevice.CONNECTED) mConnectedDevices++;
         }
@@ -505,9 +504,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
             mPersistentGroup.setEnabled(true);
             preferenceScreen.addPreference(mPersistentGroup);
-
-            /* Request latest set of peers */
-            mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
         }
     }
 
