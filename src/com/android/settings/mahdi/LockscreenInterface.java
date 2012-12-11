@@ -48,8 +48,10 @@ OnPreferenceChangeListener {
 
     private static final String TAG = "LockscreenInterface";
 
+    private static final String LOCKSCREEN_SHORTCUTS_CATEGORY = "lockscreen_shortcuts_category";
     private static final String KEY_ADDITIONAL_OPTIONS = "options_group";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
+    private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
         
     private PreferenceCategory mAdditionalOptions;
     private CheckBoxPreference mLockRingBattery;
@@ -60,10 +62,6 @@ OnPreferenceChangeListener {
     private ContentResolver mResolver;
     private File wallpaperImage;
     private File wallpaperTemporary;
-
-    public boolean hasButtons() {
-        return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,9 +81,18 @@ OnPreferenceChangeListener {
         }
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
-        prefs = getPreferenceScreen();
+        prefs = getPreferenceScreen();           
 
-        mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);                
+    // Find categories
+        PreferenceCategory generalCategory = (PreferenceCategory)
+                findPreference(LOCKSCREEN_SHORTCUTS_CATEGORY);
+        mAdditionalOptions = (PreferenceCategory) 
+                prefs.findPreference(KEY_ADDITIONAL_OPTIONS);
+
+    // Remove lockscreen button actions if device doesn't have hardware keys
+        if (!hasButtons()) {
+            generalCategory.removePreference(findPreference(KEY_LOCKSCREEN_BUTTONS));
+        }                
 
         mLockRingBattery = (CheckBoxPreference)findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
         mLockRingBattery.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -114,6 +121,14 @@ OnPreferenceChangeListener {
         super.onPause();        
     }
 
+    /**
+     * Checks if the device has hardware buttons.
+     * @return has Buttons
+     */
+    public boolean hasButtons() {
+        return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {        
         if (preference == mLockRingBattery) {
@@ -126,10 +141,8 @@ OnPreferenceChangeListener {
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (!mCheckPreferences) {
-            return false;
+        return false;
         }
-
      return true;
-                       
     }            
 }

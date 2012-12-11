@@ -18,7 +18,8 @@
     android:title="@string/lock_screen_title" >
 
     <PreferenceCategory
-        android:title="@string/title_general">
+        android:title="@string/title_general"
+        android:key="lockscreen_general_category" >
 
         <PreferenceScreen
             android:key="screen_security"
@@ -37,7 +38,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/title_shortcuts">
+        android:title="@string/title_shortcuts"
+        android:key="lockscreen_shortcuts_category" >
 
 	<PreferenceScreen
             android:fragment="com.android.settings.mahdi.LockscreenTargets"
@@ -50,6 +52,12 @@
             android:title="@string/battery_around_lockscreen_ring"
       	    android:summary="@string/battery_around_lockscreen_ring_summary"
             android:defaultValue="true" />
+
+        <PreferenceScreen
+            android:fragment="com.android.settings.mahdi.LockscreenButtons"
+            android:key="lockscreen_buttons"
+            android:title="@string/lockscreen_buttons_title"
+            android:summary="@string/lockscreen_buttons_summary" />
 
     </PreferenceCategory>
 	    
