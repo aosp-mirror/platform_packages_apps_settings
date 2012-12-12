@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
-    private static final float DISABLED_ALPHA = 0.4f;
 
     private SettingsPreferenceFragment mFragment;
     private TextView mTitleText;
@@ -103,7 +103,7 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
                 mSettingsButton.setClickable(checked);
                 mSettingsButton.setFocusable(checked);
                 if (!checked) {
-                    mSettingsButton.setAlpha(DISABLED_ALPHA);
+                    mSettingsButton.setAlpha(Utils.DISABLED_ALPHA);
                 }
             }
         }
