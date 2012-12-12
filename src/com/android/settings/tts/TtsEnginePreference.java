@@ -30,6 +30,7 @@ import android.widget.RadioButton;
 
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 
 public class TtsEnginePreference extends Preference {
@@ -136,6 +137,9 @@ public class TtsEnginePreference extends Preference {
         // Will be enabled only the engine has passed the voice check, and
         // is currently enabled.
         mSettingsIcon.setEnabled(isChecked && mVoiceCheckData != null);
+        if (!isChecked) {
+            mSettingsIcon.setAlpha(Utils.DISABLED_ALPHA);
+        }
         mSettingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +173,12 @@ public class TtsEnginePreference extends Preference {
         // case mSettingsIcon && mRadioButton will be null. In this case
         // getView will set the right values.
         if (mSettingsIcon != null && mRadioButton != null) {
-            mSettingsIcon.setEnabled(mRadioButton.isChecked());
+            if (mRadioButton.isChecked()) {
+                mSettingsIcon.setEnabled(true);
+            } else {
+                mSettingsIcon.setEnabled(false);
+                mSettingsIcon.setAlpha(Utils.DISABLED_ALPHA);
+            }
         }
     }
 
