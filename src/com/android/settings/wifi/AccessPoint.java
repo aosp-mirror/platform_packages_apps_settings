@@ -224,17 +224,19 @@ class AccessPoint extends Preference {
         }
         AccessPoint other = (AccessPoint) preference;
         // Active one goes first.
-        if (mInfo != other.mInfo) {
-            return (mInfo != null) ? -1 : 1;
-        }
+        if (mInfo != null && other.mInfo == null) return -1;
+        if (mInfo == null && other.mInfo != null) return 1;
+
         // Reachable one goes before unreachable one.
-        if ((mRssi ^ other.mRssi) < 0) {
-            return (mRssi != Integer.MAX_VALUE) ? -1 : 1;
-        }
+        if (mRssi != Integer.MAX_VALUE && other.mRssi == Integer.MAX_VALUE) return -1;
+        if (mRssi == Integer.MAX_VALUE && other.mRssi != Integer.MAX_VALUE) return 1;
+
         // Configured one goes before unconfigured one.
-        if ((networkId ^ other.networkId) < 0) {
-            return (networkId != -1) ? -1 : 1;
-        }
+        if (networkId != WifiConfiguration.INVALID_NETWORK_ID
+                && other.networkId == WifiConfiguration.INVALID_NETWORK_ID) return -1;
+        if (networkId == WifiConfiguration.INVALID_NETWORK_ID
+                && other.networkId != WifiConfiguration.INVALID_NETWORK_ID) return 1;
+
         // Sort by signal strength.
         int difference = WifiManager.compareSignalLevel(other.mRssi, mRssi);
         if (difference != 0) {
@@ -242,6 +244,22 @@ class AccessPoint extends Preference {
         }
         // Sort by ssid.
         return ssid.compareToIgnoreCase(other.ssid);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof AccessPoint)) return false;
+        return (this.compareTo((AccessPoint) other) == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        if (mInfo != null) result += 13 * mInfo.hashCode();
+        result += 19 * mRssi;
+        result += 23 * networkId;
+        result += 29 * ssid.hashCode();
+        return result;
     }
 
     boolean update(ScanResult result) {
