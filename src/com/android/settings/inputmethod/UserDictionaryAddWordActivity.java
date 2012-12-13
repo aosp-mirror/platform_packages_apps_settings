@@ -21,6 +21,9 @@ import com.android.settings.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.view.View;
 
 public class UserDictionaryAddWordActivity extends Activity {
@@ -29,6 +32,9 @@ public class UserDictionaryAddWordActivity extends Activity {
 
     public static final String MODE_EDIT_ACTION = "com.android.settings.USER_DICTIONARY_EDIT";
     public static final String MODE_INSERT_ACTION = "com.android.settings.USER_DICTIONARY_INSERT";
+
+    private static final int CODE_WORD_ADDED = 0;
+    private static final int CODE_CANCEL = 1;
 
     private UserDictionaryAddWordContents mContents;
 
@@ -67,12 +73,29 @@ public class UserDictionaryAddWordActivity extends Activity {
         mContents.saveStateIntoBundle(outState);
     }
 
+    private void reportBackToCaller(final Bundle result) {
+        final Intent senderIntent = getIntent();
+        final Object listener = senderIntent.getExtras().get("listener");
+        if (!(listener instanceof Messenger)) return; // This will work if listener is null too.
+        final Messenger messenger = (Messenger)listener;
+
+        final Message m = Message.obtain();
+        m.obj = result;
+        m.what = (null != result) ? CODE_WORD_ADDED : CODE_CANCEL;
+        try {
+            messenger.send(m);
+        } catch (RemoteException e) {
+            // Couldn't report back, but there is nothing we can do to fix it
+        }
+    }
+
     public void onClickCancel(final View v) {
+        reportBackToCaller(null);
         finish();
     }
 
     public void onClickConfirm(final View v) {
-        mContents.apply(this);
+        reportBackToCaller(mContents.apply(this));
         finish();
     }
 }
