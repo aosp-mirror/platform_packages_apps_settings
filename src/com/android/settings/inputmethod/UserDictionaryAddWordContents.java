@@ -43,6 +43,8 @@ public class UserDictionaryAddWordContents {
     public static final String EXTRA_WORD = "word";
     public static final String EXTRA_SHORTCUT = "shortcut";
     public static final String EXTRA_LOCALE = "locale";
+    public static final String EXTRA_ORIGINAL_WORD = "originalWord";
+    public static final String EXTRA_ORIGINAL_SHORTCUT = "originalShortcut";
 
     public static final int MODE_EDIT = 0;
     public static final int MODE_INSERT = 1;
@@ -82,8 +84,12 @@ public class UserDictionaryAddWordContents {
 
     /* package */ void saveStateIntoBundle(final Bundle outState) {
         outState.putString(EXTRA_WORD, mWordEditText.getText().toString());
+        outState.putString(EXTRA_ORIGINAL_WORD, mOldWord);
         if (null != mShortcutEditText) {
             outState.putString(EXTRA_SHORTCUT, mShortcutEditText.getText().toString());
+        }
+        if (null != mOldShortcut) {
+            outState.putString(EXTRA_ORIGINAL_SHORTCUT, mOldShortcut);
         }
         outState.putString(EXTRA_LOCALE, mLocale);
     }
@@ -97,7 +103,7 @@ public class UserDictionaryAddWordContents {
         // If we are in add mode, nothing was added, so we don't need to do anything.
     }
 
-    /* package */ void apply(final Context context) {
+    /* package */ Bundle apply(final Context context) {
         final ContentResolver resolver = context.getContentResolver();
         if (MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
             // Mode edit: remove the old entry.
@@ -117,13 +123,13 @@ public class UserDictionaryAddWordContents {
         }
         if (TextUtils.isEmpty(newWord)) {
             // If the word is somehow empty, don't insert it.
-            return;
+            return null;
         }
         // If there is no shortcut, and the word already exists in the database, then we
         // should not insert, because either A. the word exists with no shortcut, in which
         // case the exact same thing we want to insert is already there, or B. the word
         // exists with at least one shortcut, in which case it has priority on our word.
-        if (hasWord(newWord, context)) return;
+        if (hasWord(newWord, context)) return null;
 
         // Disallow duplicates. If the same word with no shortcut is defined, remove it; if
         // the same word with the same shortcut is defined, remove it; but we don't mind if
@@ -139,6 +145,10 @@ public class UserDictionaryAddWordContents {
         UserDictionary.Words.addWord(context, newWord.toString(),
                 FREQUENCY_FOR_USER_DICTIONARY_ADDS, newShortcut,
                 TextUtils.isEmpty(mLocale) ? null : Utils.createLocaleFromString(mLocale));
+
+        final Bundle returnValues = new Bundle();
+        saveStateIntoBundle(returnValues);
+        return returnValues;
     }
 
     private static final String[] HAS_WORD_PROJECTION = { UserDictionary.Words.WORD };
