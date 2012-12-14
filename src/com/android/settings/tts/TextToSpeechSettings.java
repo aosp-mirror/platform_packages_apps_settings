@@ -214,7 +214,13 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         if (TextUtils.isEmpty(currentEngine)) currentEngine = mTts.getDefaultEngine();
 
-        Locale currentLocale = mTts.getLanguage();
+
+        Locale defaultLocale = mTts.getDefaultLanguage();
+        if (defaultLocale == null) {
+            Log.e(TAG, "Failed to get default language from engine " + currentEngine);
+            return;
+        }
+        mTts.setLanguage(defaultLocale);
 
         // TODO: This is currently a hidden private API. The intent extras
         // and the intent action should be made public if we intend to make this
@@ -222,11 +228,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         // doesn't work.
         Intent intent = new Intent(TextToSpeech.Engine.ACTION_GET_SAMPLE_TEXT);
 
-        if (currentLocale != null) {
-            intent.putExtra("language", currentLocale.getLanguage());
-            intent.putExtra("country", currentLocale.getCountry());
-            intent.putExtra("variant", currentLocale.getVariant());
-        }
+        intent.putExtra("language", defaultLocale.getLanguage());
+        intent.putExtra("country", defaultLocale.getCountry());
+        intent.putExtra("variant", defaultLocale.getVariant());
         intent.setPackage(currentEngine);
 
         try {
