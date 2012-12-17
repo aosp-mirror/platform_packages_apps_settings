@@ -116,7 +116,7 @@ public class UserDictionaryAddWordFragment extends Fragment
         super.onPause();
         // We are being hidden: commit changes to the user dictionary, unless we were deleting it
         if (!mIsDeleting) {
-            mContents.apply(getActivity());
+            mContents.apply(getActivity(), null);
         }
     }
 
