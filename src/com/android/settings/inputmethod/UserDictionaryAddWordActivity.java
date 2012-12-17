@@ -33,8 +33,9 @@ public class UserDictionaryAddWordActivity extends Activity {
     public static final String MODE_EDIT_ACTION = "com.android.settings.USER_DICTIONARY_EDIT";
     public static final String MODE_INSERT_ACTION = "com.android.settings.USER_DICTIONARY_INSERT";
 
-    private static final int CODE_WORD_ADDED = 0;
-    private static final int CODE_CANCEL = 1;
+    /* package */ static final int CODE_WORD_ADDED = 0;
+    /* package */ static final int CODE_CANCEL = 1;
+    /* package */ static final int CODE_ALREADY_PRESENT = 2;
 
     private UserDictionaryAddWordContents mContents;
 
@@ -73,7 +74,7 @@ public class UserDictionaryAddWordActivity extends Activity {
         mContents.saveStateIntoBundle(outState);
     }
 
-    private void reportBackToCaller(final Bundle result) {
+    private void reportBackToCaller(final int resultCode, final Bundle result) {
         final Intent senderIntent = getIntent();
         final Object listener = senderIntent.getExtras().get("listener");
         if (!(listener instanceof Messenger)) return; // This will work if listener is null too.
@@ -81,7 +82,7 @@ public class UserDictionaryAddWordActivity extends Activity {
 
         final Message m = Message.obtain();
         m.obj = result;
-        m.what = (null != result) ? CODE_WORD_ADDED : CODE_CANCEL;
+        m.what = resultCode;
         try {
             messenger.send(m);
         } catch (RemoteException e) {
@@ -90,12 +91,14 @@ public class UserDictionaryAddWordActivity extends Activity {
     }
 
     public void onClickCancel(final View v) {
-        reportBackToCaller(null);
+        reportBackToCaller(CODE_CANCEL, null);
         finish();
     }
 
     public void onClickConfirm(final View v) {
-        reportBackToCaller(mContents.apply(this));
+        final Bundle parameters = new Bundle();
+        final int resultCode = mContents.apply(this, parameters);
+        reportBackToCaller(resultCode, parameters);
         finish();
     }
 }

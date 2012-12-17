@@ -103,7 +103,8 @@ public class UserDictionaryAddWordContents {
         // If we are in add mode, nothing was added, so we don't need to do anything.
     }
 
-    /* package */ Bundle apply(final Context context) {
+    /* package */ int apply(final Context context, final Bundle outParameters) {
+        if (null != outParameters) saveStateIntoBundle(outParameters);
         final ContentResolver resolver = context.getContentResolver();
         if (MODE_EDIT == mMode && !TextUtils.isEmpty(mOldWord)) {
             // Mode edit: remove the old entry.
@@ -123,13 +124,13 @@ public class UserDictionaryAddWordContents {
         }
         if (TextUtils.isEmpty(newWord)) {
             // If the word is somehow empty, don't insert it.
-            return null;
+            return UserDictionaryAddWordActivity.CODE_CANCEL;
         }
         // If there is no shortcut, and the word already exists in the database, then we
         // should not insert, because either A. the word exists with no shortcut, in which
         // case the exact same thing we want to insert is already there, or B. the word
         // exists with at least one shortcut, in which case it has priority on our word.
-        if (hasWord(newWord, context)) return null;
+        if (hasWord(newWord, context)) return UserDictionaryAddWordActivity.CODE_ALREADY_PRESENT;
 
         // Disallow duplicates. If the same word with no shortcut is defined, remove it; if
         // the same word with the same shortcut is defined, remove it; but we don't mind if
@@ -146,9 +147,7 @@ public class UserDictionaryAddWordContents {
                 FREQUENCY_FOR_USER_DICTIONARY_ADDS, newShortcut,
                 TextUtils.isEmpty(mLocale) ? null : Utils.createLocaleFromString(mLocale));
 
-        final Bundle returnValues = new Bundle();
-        saveStateIntoBundle(returnValues);
-        return returnValues;
+        return UserDictionaryAddWordActivity.CODE_WORD_ADDED;
     }
 
     private static final String[] HAS_WORD_PROJECTION = { UserDictionary.Words.WORD };
