@@ -129,6 +129,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 String batterySummary = context.getResources().getString(
                         R.string.power_usage_level_and_status, batteryLevel, batteryStatus);
                 mBatteryStatusPref.setTitle(batterySummary);
+                mStats = null;
+                refreshStats();
             }
         }
     };
