@@ -101,10 +101,10 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
     }
 
     private Preference buildWifiPref(Context context, WifiConfiguration config) {
-        final String networkId = removeDoubleQuotes(config.SSID);
+        final String networkId = config.SSID;
         final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(networkId);
         final MeteredPreference pref = new MeteredPreference(context, template);
-        pref.setTitle(networkId);
+        pref.setTitle(removeDoubleQuotes(networkId));
         return pref;
     }
 
