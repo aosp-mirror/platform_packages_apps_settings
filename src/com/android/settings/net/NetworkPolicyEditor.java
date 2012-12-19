@@ -127,6 +127,15 @@ public class NetworkPolicyEditor {
         return null;
     }
 
+    public NetworkPolicy getPolicyMaybeUnquoted(NetworkTemplate template) {
+        NetworkPolicy policy = getPolicy(template);
+        if (policy != null) {
+            return policy;
+        } else {
+            return getPolicy(buildUnquotedNetworkTemplate(template));
+        }
+    }
+
     @Deprecated
     private static NetworkPolicy buildDefaultPolicy(NetworkTemplate template) {
         // TODO: move this into framework to share with NetworkPolicyManagerService
@@ -188,7 +197,7 @@ public class NetworkPolicyEditor {
     }
 
     public boolean getPolicyMetered(NetworkTemplate template) {
-        final NetworkPolicy policy = getPolicy(template);
+        NetworkPolicy policy = getPolicy(template);
         if (policy != null) {
             return policy.metered;
         } else {
@@ -223,16 +232,12 @@ public class NetworkPolicyEditor {
             }
         }
 
-        // Remove any oddly escaped policies while we're here
-        final String networkId = template.getNetworkId();
-        final String strippedNetworkId = WifiInfo.removeDoubleQuotes(networkId);
-        if (!TextUtils.equals(strippedNetworkId, networkId)) {
-            policy = getPolicy(new NetworkTemplate(
-                    template.getMatchRule(), template.getSubscriberId(), strippedNetworkId));
-            if (policy != null) {
-                mPolicies.remove(policy);
-                modified = true;
-            }
+        // Remove legacy unquoted policies while we're here
+        final NetworkTemplate unquoted = buildUnquotedNetworkTemplate(template);
+        final NetworkPolicy unquotedPolicy = getPolicy(unquoted);
+        if (unquotedPolicy != null) {
+            mPolicies.remove(unquotedPolicy);
+            modified = true;
         }
 
         if (modified) writeAsync();
@@ -326,6 +331,23 @@ public class NetworkPolicyEditor {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Build a revised {@link NetworkTemplate} that matches the same rule, but
+     * with an unquoted {@link NetworkTemplate#getNetworkId()}. Used to work
+     * around legacy bugs.
+     */
+    private static NetworkTemplate buildUnquotedNetworkTemplate(NetworkTemplate template) {
+        if (template == null) return null;
+        final String networkId = template.getNetworkId();
+        final String strippedNetworkId = WifiInfo.removeDoubleQuotes(networkId);
+        if (!TextUtils.equals(strippedNetworkId, networkId)) {
+            return new NetworkTemplate(
+                    template.getMatchRule(), template.getSubscriberId(), strippedNetworkId);
+        } else {
+            return null;
         }
     }
 }

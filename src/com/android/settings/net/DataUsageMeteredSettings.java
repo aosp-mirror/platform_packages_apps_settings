@@ -119,7 +119,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
             setPersistent(false);
 
             mBinding = true;
-            final NetworkPolicy policy = mPolicyEditor.getPolicy(template);
+            final NetworkPolicy policy = mPolicyEditor.getPolicyMaybeUnquoted(template);
             if (policy != null) {
                 if (policy.limitBytes != LIMIT_DISABLED) {
                     setChecked(true);
