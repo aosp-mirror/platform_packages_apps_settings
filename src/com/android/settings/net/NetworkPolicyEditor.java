@@ -31,7 +31,9 @@ import static com.android.internal.util.Preconditions.checkNotNull;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
+import android.net.wifi.WifiInfo;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.text.format.Time;
 
 import com.android.internal.util.Objects;
@@ -217,6 +219,18 @@ public class NetworkPolicyEditor {
             } else if (policy.metered) {
                 policy.metered = false;
                 policy.inferred = false;
+                modified = true;
+            }
+        }
+
+        // Remove any oddly escaped policies while we're here
+        final String networkId = template.getNetworkId();
+        final String strippedNetworkId = WifiInfo.removeDoubleQuotes(networkId);
+        if (!TextUtils.equals(strippedNetworkId, networkId)) {
+            policy = getPolicy(new NetworkTemplate(
+                    template.getMatchRule(), template.getSubscriberId(), strippedNetworkId));
+            if (policy != null) {
+                mPolicies.remove(policy);
                 modified = true;
             }
         }
