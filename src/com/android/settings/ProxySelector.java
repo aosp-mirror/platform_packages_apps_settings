@@ -58,12 +58,16 @@ public class ProxySelector extends Fragment implements DialogCreatable {
     Button      mClearButton;
     Button      mDefaultButton;
 
+    // Allows underscore char to supports proxies that do not
+    // follow the spec
+    private static final String HC = "a-zA-Z0-9\\_";
+
     // Matches blank input, ips, and domain names
     private static final String HOSTNAME_REGEXP =
-            "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
+            "^$|^[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
     private static final Pattern HOSTNAME_PATTERN;
     private static final String EXCLUSION_REGEXP =
-            "$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
+            "$|^[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
     private static final Pattern EXCLUSION_PATTERN;
     static {
         HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
