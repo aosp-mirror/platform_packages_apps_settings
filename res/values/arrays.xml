@@ -686,6 +686,20 @@
         <item>error</item>
     </string-array>
 
+    <!-- Titles for frame time tracking preference. [CHAR LIMIT=35] -->
+    <string-array name="track_frame_time_entries">
+        <item>Off</item>
+        <item>On screen</item>
+        <item>In adb shell dumpsys gfxinfo</item>
+    </string-array>
+
+    <!-- Values for frame time tracking preference. -->
+    <string-array name="track_frame_time_values" translatable="false" >
+        <item>false</item>
+        <item>visual</item>
+        <item>true</item>
+    </string-array>
+
     <!-- Titles for app process limit preference. [CHAR LIMIT=35] -->
     <string-array name="app_process_limit_entries">
         <item>Standard limit</item>

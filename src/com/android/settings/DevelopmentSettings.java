@@ -166,11 +166,11 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mShowCpuUsage;
     private CheckBoxPreference mForceHardwareUi;
     private CheckBoxPreference mForceMsaa;
-    private CheckBoxPreference mTrackFrameTime;
     private CheckBoxPreference mShowHwScreenUpdates;
     private CheckBoxPreference mShowHwLayersUpdates;
     private CheckBoxPreference mShowHwOverdraw;
     private CheckBoxPreference mDebugLayout;
+    private ListPreference mTrackFrameTime;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
@@ -240,7 +240,9 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowCpuUsage = findAndInitCheckboxPref(SHOW_CPU_USAGE_KEY);
         mForceHardwareUi = findAndInitCheckboxPref(FORCE_HARDWARE_UI_KEY);
         mForceMsaa = findAndInitCheckboxPref(FORCE_MSAA_KEY);
-        mTrackFrameTime = findAndInitCheckboxPref(TRACK_FRAME_TIME_KEY);
+        mTrackFrameTime = (ListPreference) findPreference(TRACK_FRAME_TIME_KEY);
+        mAllPrefs.add(mTrackFrameTime);
+        mTrackFrameTime.setOnPreferenceChangeListener(this);
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
         mShowHwOverdraw = findAndInitCheckboxPref(SHOW_HW_OVERDRAW_KEY);
@@ -708,14 +710,28 @@ public class DevelopmentSettings extends PreferenceFragment
     }
 
     private void updateTrackFrameTimeOptions() {
-        updateCheckBox(mTrackFrameTime,
-                SystemProperties.getBoolean(HardwareRenderer.PROFILE_PROPERTY, false));
+        String value = SystemProperties.get(HardwareRenderer.PROFILE_PROPERTY);
+        if (value == null) {
+            value = "";
+        }
+
+        CharSequence[] values = mTrackFrameTime.getEntryValues();
+        for (int i = 0; i < values.length; i++) {
+            if (value.contentEquals(values[i])) {
+                mTrackFrameTime.setValueIndex(i);
+                mTrackFrameTime.setSummary(mTrackFrameTime.getEntries()[i]);
+                return;
+            }
+        }
+        mTrackFrameTime.setValueIndex(0);
+        mTrackFrameTime.setSummary(mTrackFrameTime.getEntries()[0]);
     }
 
-    private void writeTrackFrameTimeOptions() {
+    private void writeTrackFrameTimeOptions(Object newValue) {
         SystemProperties.set(HardwareRenderer.PROFILE_PROPERTY,
-                mTrackFrameTime.isChecked() ? "true" : "false");
+                newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
+        updateTrackFrameTimeOptions();
     }
 
     private void updateShowHwScreenUpdatesOptions() {
@@ -1071,8 +1087,6 @@ public class DevelopmentSettings extends PreferenceFragment
             writeHardwareUiOptions();
         } else if (preference == mForceMsaa) {
             writeMsaaOptions();
-        } else if (preference == mTrackFrameTime) {
-            writeTrackFrameTimeOptions();
         } else if (preference == mShowHwScreenUpdates) {
             writeShowHwScreenUpdatesOptions();
         } else if (preference == mShowHwLayersUpdates) {
@@ -1107,6 +1121,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mOpenGLTraces) {
             writeOpenGLTracesOptions(newValue);
+            return true;
+        } else if (preference == mTrackFrameTime) {
+            writeTrackFrameTimeOptions(newValue);
             return true;
         } else if (preference == mEnableTracesPref) {
             writeEnableTracesOptions();
