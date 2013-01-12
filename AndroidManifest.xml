@@ -67,7 +67,6 @@
             android:icon="@mipmap/ic_launcher_settings"
             android:taskAffinity=""
             android:theme="@android:style/Theme.Holo"
-            android:uiOptions="splitActionBarWhenNarrow"
             android:hardwareAccelerated="true"
             android:supportsRtl="true">
 
@@ -122,6 +121,7 @@
         <!-- Top-level settings -->
 
         <activity android:name="Settings$WifiSettingsActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity=""
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -141,6 +141,7 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".wifi.WifiSettings"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity="com.android.settings"
                 android:label="@string/wifi_settings"
                 android:targetActivity="Settings$WifiSettingsActivity"
@@ -153,6 +154,7 @@
         </activity-alias>
 
         <activity android:name=".wifi.WifiPickerActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
             <intent-filter>
@@ -163,10 +165,11 @@
         </activity>
 
         <activity android:name=".wifi.WifiSetupActivity"
-            android:theme="@style/setup_wizard_theme"
-            android:label="@string/wifi_setup_wizard_title"
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:theme="@style/setup_wizard_theme"
+                android:label="@string/wifi_setup_wizard_title"
                 android:icon="@drawable/empty_icon"
-            android:clearTaskOnLaunch="true">
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.net.wifi.SETUP_WIFI_NETWORK" />
@@ -175,11 +178,12 @@
         </activity>
 
         <activity android:name=".wifi.WifiSettingsForSetupWizardXL"
-                  android:theme="@android:style/Theme.Holo.NoActionBar"
-                  android:screenOrientation="behind"
-                  android:clearTaskOnLaunch="true"
-                  android:windowSoftInputMode="adjustResize"
-                  android:exported="true" />
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:theme="@android:style/Theme.Holo.NoActionBar"
+                android:screenOrientation="behind"
+                android:clearTaskOnLaunch="true"
+                android:windowSoftInputMode="adjustResize"
+                android:exported="true" />
 
         <activity android:name="Settings$AdvancedWifiSettingsActivity"
                 android:taskAffinity="com.android.settings"
@@ -254,7 +258,6 @@
 
         <activity android:name="ApnSettings"
                 android:label="@string/apn_settings"
-                android:uiOptions="none"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:launchMode="singleTask">
             <intent-filter>
@@ -266,6 +269,7 @@
         </activity>
 
         <activity android:name="Settings$BluetoothSettingsActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/bluetooth_settings_title"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
@@ -284,6 +288,7 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".bluetooth.BluetoothSettings"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/bluetooth_settings_title"
                 android:targetActivity="Settings$BluetoothSettingsActivity"
                 android:exported="true"
@@ -295,6 +300,7 @@
         </activity-alias>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
                 android:label="@string/device_picker"
                 android:clearTaskOnLaunch="true">
@@ -306,7 +312,6 @@
 
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
-                android:uiOptions="none"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
             <intent-filter>
@@ -328,7 +333,6 @@
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".TetherSettings"
                   android:label="@string/tether_settings_title_all"
-                  android:uiOptions="none"
                   android:clearTaskOnLaunch="true"
                   android:exported="true"
                   android:targetActivity="Settings$TetherSettingsActivity">
@@ -343,6 +347,7 @@
         </activity-alias>
 
         <activity android:name="Settings$WifiP2pSettingsActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
@@ -505,7 +510,6 @@
         <activity android:name="Settings$UserDictionarySettingsActivity"
                 android:label="@string/user_dict_settings_titlebar"
                 android:taskAffinity="com.android.settings"
-                android:uiOptions="none"
                 android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -649,8 +653,7 @@
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
                 android:taskAffinity=""
-                android:excludeFromRecents="true"
-                android:uiOptions="none">
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
@@ -767,7 +770,6 @@
 
         <activity android:name="Settings$LocationSettingsActivity"
                 android:label="@string/location_settings_title"
-                android:uiOptions="none"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
@@ -975,7 +977,6 @@
 
         <activity android:name="Settings$StorageSettingsActivity"
                 android:label="@string/storage_settings_title"
-                android:uiOptions="none"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
             <intent-filter>
@@ -1342,7 +1343,6 @@
 
         <activity android:name="Settings$PowerUsageSummaryActivity"
                 android:label="@string/power_usage_summary_title"
-                android:uiOptions="none"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
             <intent-filter>
@@ -1371,8 +1371,7 @@
         <activity android:name="Settings$AccountSyncSettingsActivity"
             android:label="@string/account_sync_settings_title"
             android:taskAffinity=""
-            android:parentActivityName="Settings"
-            android:uiOptions="none">
+            android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCOUNT_SYNC_SETTINGS" />
@@ -1454,7 +1453,6 @@
 
         <activity android:name="Settings$DataUsageSummaryActivity"
                 android:label="@string/data_usage_summary_title"
-                android:uiOptions="none"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
             <intent-filter>
@@ -1469,6 +1467,7 @@
         </activity>
 
         <activity android:name="Settings$DreamSettingsActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/screensaver_settings_title"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
