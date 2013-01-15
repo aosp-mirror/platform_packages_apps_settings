@@ -1076,7 +1076,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar procesos almacenados en la memoria caché"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablec. preferencias?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Se restablecerán las preferencias de:"\n\n" "<li>"aplicaciones desactivadas,"</li>\n" "<li>"notificaciones de aplicaciones desactivadas,"</li>\n" "<li>"aplicaciones predeterminadas para diferentes acciones,"</li>\n" "<li>"restricciones de datos de referencia para las aplicaciones."</li>\n\n" No perderás los datos de ninguna aplicación."</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Se restablecerán las preferencias de:"\n\n" "<li>"aplicaciones desactivadas,"</li>\n" "<li>"notificaciones de aplicaciones desactivadas,"</li>\n" "<li>"aplicaciones predeterminadas para diferentes acciones,"</li>\n" "<li>"restricciones de datos en segundo plano para las aplicaciones."</li>\n\n" No perderás los datos de ninguna aplicación."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer aplicaciones"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrar el espacio"</string>
     <string name="filter" msgid="2018011724373033887">"Filtro"</string>
@@ -1569,8 +1569,8 @@
     <string name="add_account_label" msgid="7811707265834013767">"Agregar cuenta"</string>
     <string name="background_data" msgid="5779592891375473817">"Datos de fondo"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar, enviar y recibir datos."</string>
-    <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Deseas desactivar los datos de referencia?"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas los datos de referencia, aumenta la duración de la batería y se reduce el uso de datos. Algunas aplicaciones tal vez sigan usando la conexión de datos de referencia."</string>
+    <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Deseas desactivar los datos en segundo plano?"</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas los datos en segundo plano, aumenta la duración de la batería y se reduce el uso de datos. Algunas aplicaciones tal vez sigan usando la conexión de datos en segundo plano."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Autosincronizar datos de aplic."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sincronización activada"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Sincronización desactivada"</string>
@@ -1603,7 +1603,7 @@
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"No se puede sincronizar manualmente"</string>
-    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento actualmente está desactivada. Para cambiar tu configuración, activa momentáneamente los datos de referencia y la sincronización automática."</string>
+    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento actualmente está desactivada. Para cambiar tu configuración, activa momentáneamente los datos en segundo plano y la sincronización automática."</string>
     <string name="wimax_settings" msgid="1574837328738396794">"Configuración de 4G"</string>
     <string name="wimax_settings_summary" msgid="3207355006084135453">"Configurar &amp; administrar red 4G y módem"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Dirección MAC de 4G"</string>
@@ -1671,7 +1671,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso de datos"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de datos"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringir datos de ref."</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restr. datos 2.° plano"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Uso aparte de datos móviles 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Mostrar el uso de Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar uso de Ethernet"</string>
@@ -1699,12 +1699,12 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Datos de 2 GB - 3 GB"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos de 4 GB"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver config. de la aplicación"</string>
-    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir los datos de referencia"</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir datos en 2.° plano"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Desactivar datos ref. en redes móviles (usará redes no móviles)"</string>
-    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para limitar datos de ref. de esta aplic., limita datos móviles."</string>
-    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir el uso de datos de referencia?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo estén disponibles redes móviles."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
-    <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo se pueden restringir los datos de referencia si estableciste un límite de datos móviles."</string>
+    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir datos en 2.° plano aquí, limita datos móviles."</string>
+    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir el uso de datos en segundo plano?"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos en segundo plano cuando solo estén disponibles redes móviles."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo se pueden restringir los datos en segundo plano si estableciste un límite de datos móviles."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"¿Activar sinc. automática?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Cualquier cambio que sufran tus cuentas en la Web se copiará automáticamente en tu tableta."\n\n"Algunas cuentas también pueden copiar automáticamente en la Web los cambios que sufre tu tableta. Una cuenta de Google funciona de esta manera."\n\n"Para elegir qué tipo de información sincronizar dentro de cada cuenta, ve a Configuración &gt; Cuentas."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Cualquier cambio que sufran tus cuentas en la Web se copiará automáticamente en tu dispositivo."\n\n"Algunas cuentas también pueden copiar automáticamente en la Web los cambios que sufre tu dispositivo. Una cuenta de Google funciona de esta manera."\n\n"Para elegir qué tipo de información sincronizar dentro de cada cuenta, ve a Configuración &gt; Cuentas."</string>
@@ -1718,10 +1718,10 @@
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitar el uso de datos"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"Tu conexión de datos móvil se desactivará cuando se alcance el límite especificado."\n\n"Debido a que el uso de datos medido por tu tableta puede diferir del cálculo de uso de tu proveedor, considera usar un límite prudente."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"Tu conexión de datos móvil se desactivará cuando se alcance el límite especificado."\n\n"Debido a que el uso de datos medido por tu teléfono puede diferir del cálculo de uso de tu proveedor, considera usar un límite prudente."</string>
-    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir el uso de datos de referencia?"</string>
-    <string name="data_usage_restrict_background" msgid="6387252645350792955">"Si restringes los datos para celulares de referencia, algunas aplicaciones y servicios no funcionarán a menos que te conectes a una red Wi-Fi."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="2609163428726042269">"Si restringes los datos móviles de referencia, algunos servicios y aplicaciones no funcionarán a menos que te conectes a una red Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de esta tableta."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="8025473178302056174">"Si restringes los datos móviles de referencia, algunos servicios y aplicaciones no funcionarán a menos que te conectes a una red Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de este dispositivo."</string>
+    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir el uso de datos en segundo plano?"</string>
+    <string name="data_usage_restrict_background" msgid="6387252645350792955">"Si restringes los datos que usa tu celular en segundo plano, algunos servicios y aplicaciones no funcionarán a menos que estés conectado a una red Wi-Fi."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="2609163428726042269">"Si restringes los datos móviles que se usan en segundo plano, algunos servicios y aplicaciones no funcionarán a menos que estés conectado a una red Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de esta tableta."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="8025473178302056174">"Si restringes los datos que usa tu celular en segundo plano, algunos servicios y aplicaciones no funcionarán a menos que estés conectado a una red Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios de este dispositivo."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"advertencia"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicaciones eliminadas"</string>
