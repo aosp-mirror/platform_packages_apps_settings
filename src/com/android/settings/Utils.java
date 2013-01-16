@@ -449,7 +449,7 @@ public class Utils {
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
             final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
-            list.setPadding(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
+            list.setPaddingRelative(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
         }
     }
 
