@@ -338,8 +338,8 @@ public class StorageMeasurement {
                             sendMessage(obtainMessage(MSG_CONNECTED, mDefaultContainer));
                         } else {
                             Intent service = new Intent().setComponent(DEFAULT_CONTAINER_COMPONENT);
-                            context.bindService(service, mDefContainerConn, Context.BIND_AUTO_CREATE,
-                                    UserHandle.USER_OWNER);
+                            context.bindServiceAsUser(service, mDefContainerConn, Context.BIND_AUTO_CREATE,
+                                    UserHandle.OWNER);
                         }
                     }
                     break;
