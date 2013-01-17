@@ -122,8 +122,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
-    private static final String ENABLE_TRACES_KEY = "enable_traces";
-
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
             = "immediately_destroy_activities";
     private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
@@ -176,7 +174,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
-    private MultiCheckPreference mEnableTracesPref;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
@@ -262,15 +259,6 @@ public class DevelopmentSettings extends PreferenceFragment
         mOpenGLTraces = (ListPreference) findPreference(OPENGL_TRACES_KEY);
         mAllPrefs.add(mOpenGLTraces);
         mOpenGLTraces.setOnPreferenceChangeListener(this);
-        mEnableTracesPref = (MultiCheckPreference)findPreference(ENABLE_TRACES_KEY);
-        String[] traceValues = new String[Trace.TRACE_TAGS.length];
-        for (int i=Trace.TRACE_FLAGS_START_BIT; i<traceValues.length; i++) {
-            traceValues[i] = Integer.toString(1<<i);
-        }
-        mEnableTracesPref.setEntries(Trace.TRACE_TAGS);
-        mEnableTracesPref.setEntryValues(traceValues);
-        mAllPrefs.add(mEnableTracesPref);
-        mEnableTracesPref.setOnPreferenceChangeListener(this);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -430,7 +418,6 @@ public class DevelopmentSettings extends PreferenceFragment
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
         updateOpenGLTracesOptions();
-        updateEnableTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
@@ -452,7 +439,6 @@ public class DevelopmentSettings extends PreferenceFragment
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
         writeOverlayDisplayDevicesOptions(null);
-        writeEnableTracesOptions(0);
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
         updateAllOptions();
@@ -935,47 +921,6 @@ public class DevelopmentSettings extends PreferenceFragment
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
-    private void updateEnableTracesOptions() {
-        long flags = SystemProperties.getLong(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS, 0);
-        String[] values = mEnableTracesPref.getEntryValues();
-        int numSet = 0;
-        for (int i=Trace.TRACE_FLAGS_START_BIT; i<values.length; i++) {
-            boolean set = (flags&(1<<i)) != 0;
-            mEnableTracesPref.setValue(i-Trace.TRACE_FLAGS_START_BIT, set);
-            if (set) {
-                numSet++;
-            }
-        }
-        if (numSet == 0) {
-            mEnableTracesPref.setSummary(R.string.enable_traces_summary_none);
-        } else if (numSet == values.length) {
-            mHaveDebugSettings = true;
-            mEnableTracesPref.setSummary(R.string.enable_traces_summary_all);
-        } else {
-            mHaveDebugSettings = true;
-            mEnableTracesPref.setSummary(getString(R.string.enable_traces_summary_num, numSet));
-        }
-    }
-
-    private void writeEnableTracesOptions() {
-        long value = 0;
-        String[] values = mEnableTracesPref.getEntryValues();
-        for (int i=Trace.TRACE_FLAGS_START_BIT; i<values.length; i++) {
-            if (mEnableTracesPref.getValue(i-Trace.TRACE_FLAGS_START_BIT)) {
-                value |= 1<<i;
-            }
-        }
-        writeEnableTracesOptions(value);
-        // Make sure summary is updated.
-        updateEnableTracesOptions();
-    }
-
-    private void writeEnableTracesOptions(long value) {
-        SystemProperties.set(Trace.PROPERTY_TRACE_TAG_ENABLEFLAGS,
-                "0x" + Long.toString(value, 16));
-        pokeSystemProperties();
-    }
-
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == mEnabledSwitch) {
@@ -1124,9 +1069,6 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mTrackFrameTime) {
             writeTrackFrameTimeOptions(newValue);
-            return true;
-        } else if (preference == mEnableTracesPref) {
-            writeEnableTracesOptions();
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
