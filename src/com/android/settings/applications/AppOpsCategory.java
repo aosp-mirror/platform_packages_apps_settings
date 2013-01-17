@@ -3,6 +3,7 @@ package com.android.settings.applications;
 import android.app.AppOpsManager;
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.app.AppOpsManager.OpEntry;
 import android.content.AsyncTaskLoader;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -112,9 +114,10 @@ public class AppOpsCategory extends ListFragment implements
     public AppOpsCategory() {
     }
 
-    public AppOpsCategory(int[] ops) {
+    public AppOpsCategory(int[] ops, String[] perms) {
         Bundle args = new Bundle();
         args.putIntArray("ops", ops);
+        args.putStringArray("perms", perms);
         setArguments(args);
     }
 
@@ -228,17 +231,19 @@ public class AppOpsCategory extends ListFragment implements
         final AppOpsManager mAppOps;
         final PackageManager mPm;
         final int[] mOps;
+        final String[] mPerms;
 
         final HashMap<String, AppEntry> mAppEntries = new HashMap<String, AppEntry>();
 
         List<AppOpEntry> mApps;
         PackageIntentReceiver mPackageObserver;
 
-        public AppListLoader(Context context, int[] ops) {
+        public AppListLoader(Context context, int[] ops, String[] perms) {
             super(context);
             mAppOps = (AppOpsManager)context.getSystemService(Context.APP_OPS_SERVICE);
             mPm = context.getPackageManager();
             mOps = ops;
+            mPerms = perms;
         }
 
         @Override public List<AppOpEntry> loadInBackground() {
@@ -265,6 +270,26 @@ public class AppOpsCategory extends ListFragment implements
                     AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
                     AppOpEntry entry = new AppOpEntry(pkgOps, opEntry, appEntry);
                     entries.add(entry);
+                }
+            }
+
+            if (mPerms != null) {
+                List<PackageInfo> apps = mPm.getPackagesHoldingPermissions(mPerms, 0);
+                for (int i=0; i<apps.size(); i++) {
+                    PackageInfo appInfo = apps.get(i);
+                    AppEntry appEntry = mAppEntries.get(appInfo.packageName);
+                    if (appEntry == null) {
+                        appEntry = new AppEntry(this, appInfo.applicationInfo);
+                        appEntry.loadLabel(context);
+                        mAppEntries.put(appInfo.packageName, appEntry);
+                        List<AppOpsManager.OpEntry> dummyOps = new ArrayList<AppOpsManager.OpEntry>();
+                        AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(0, 0, 0);
+                        dummyOps.add(opEntry);
+                        AppOpsManager.PackageOps pkgOps = new AppOpsManager.PackageOps(
+                                appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
+                        AppOpEntry entry = new AppOpEntry(pkgOps, opEntry, appEntry);
+                        entries.add(entry);
+                    }
                 }
             }
 
@@ -404,7 +429,7 @@ public class AppOpsCategory extends ListFragment implements
 
         CharSequence opTimeToString(AppOpsManager.OpEntry op) {
             if (op.isRunning()) {
-                return "Running";
+                return mRunningStr;
             }
             return DateUtils.getRelativeTimeSpanString(op.getTime(),
                     System.currentTimeMillis(),
@@ -428,9 +453,14 @@ public class AppOpsCategory extends ListFragment implements
             ((ImageView)view.findViewById(R.id.app_icon)).setImageDrawable(
                     item.getAppEntry().getIcon());
             ((TextView)view.findViewById(R.id.app_name)).setText(item.getAppEntry().getLabel());
-            ((TextView)view.findViewById(R.id.op_name)).setText(
-                    mOpNames[item.getOpEntry().getOp()]);
-            ((TextView)view.findViewById(R.id.op_time)).setText(opTimeToString(item.getOpEntry()));
+            if (item.getOpEntry().getTime() != 0) {
+                ((TextView)view.findViewById(R.id.op_name)).setText(
+                        mOpNames[item.getOpEntry().getOp()]);
+                ((TextView)view.findViewById(R.id.op_time)).setText(opTimeToString(item.getOpEntry()));
+            } else {
+                ((TextView)view.findViewById(R.id.op_name)).setText("");
+                ((TextView)view.findViewById(R.id.op_time)).setText("");
+            }
 
             return view;
         }
@@ -465,7 +495,13 @@ public class AppOpsCategory extends ListFragment implements
 
     @Override public Loader<List<AppOpEntry>> onCreateLoader(int id, Bundle args) {
         Bundle fargs = getArguments();
-        return new AppListLoader(getActivity(), fargs != null ? fargs.getIntArray("ops") : null);
+        int[] ops = null;
+        String[] perms = null;
+        if (fargs != null) {
+            ops = fargs.getIntArray("ops");
+            perms = fargs.getStringArray("perms");
+        }
+        return new AppListLoader(getActivity(), ops, perms);
     }
 
     @Override public void onLoadFinished(Loader<List<AppOpEntry>> loader, List<AppOpEntry> data) {
