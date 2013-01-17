@@ -427,7 +427,14 @@
         <item>PWD</item>
     </string-array>
 
-    <!-- Phase 2 options -->
+    <!-- Phase 2 options for PEAP -->
+    <string-array name="wifi_peap_phase2_entries">
+        <item>None</item>
+        <item>MSCHAPV2</item>
+        <item>GTC</item>
+    </string-array>
+
+    <!-- Phase 2 options for rest of EAP methods -->
     <string-array name="wifi_phase2_entries">
         <item>None</item>
         <item>PAP</item>
