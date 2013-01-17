@@ -1024,7 +1024,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             ToggleSwitch toggleSwitch = new ToggleSwitch(activity);
             final int padding = activity.getResources().getDimensionPixelSize(
                     R.dimen.action_bar_switch_padding);
-            toggleSwitch.setPadding(0, 0, padding, 0);
+            toggleSwitch.setPaddingRelative(0, 0, padding, 0);
             activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                     ActionBar.DISPLAY_SHOW_CUSTOM);
             activity.getActionBar().setCustomView(toggleSwitch,

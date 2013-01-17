@@ -335,7 +335,7 @@ public class DataUsageSummary extends Fragment {
         if (mInsetSide > 0) {
             // inset selector and divider drawables
             insetListViewDrawables(mListView, mInsetSide);
-            mHeader.setPadding(mInsetSide, 0, mInsetSide, 0);
+            mHeader.setPaddingRelative(mInsetSide, 0, mInsetSide, 0);
         }
 
         {
@@ -1564,7 +1564,7 @@ public class DataUsageSummary extends Fragment {
                         R.layout.data_usage_item, parent, false);
 
                 if (mInsetSide > 0) {
-                    convertView.setPadding(mInsetSide, 0, mInsetSide, 0);
+                    convertView.setPaddingRelative(mInsetSide, 0, mInsetSide, 0);
                 }
             }
 

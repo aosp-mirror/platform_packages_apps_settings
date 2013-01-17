@@ -318,7 +318,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
-        mEnabledSwitch.setPadding(0, 0, padding, 0);
+        mEnabledSwitch.setPaddingRelative(0, 0, padding, 0);
         mEnabledSwitch.setOnCheckedChangeListener(this);
     }
 

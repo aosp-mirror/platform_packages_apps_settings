@@ -379,7 +379,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
                     final int padding = activity.getResources().getDimensionPixelSize(
                             R.dimen.action_bar_switch_padding);
-                    actionBarSwitch.setPadding(0, 0, padding, 0);
+                    actionBarSwitch.setPaddingRelative(0, 0, padding, 0);
                     activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                             ActionBar.DISPLAY_SHOW_CUSTOM);
                     activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(

@@ -99,7 +99,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
-        mSwitch.setPadding(0, 0, padding, 0);
+        mSwitch.setPaddingRelative(0, 0, padding, 0);
         activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                 ActionBar.DISPLAY_SHOW_CUSTOM);
         activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(

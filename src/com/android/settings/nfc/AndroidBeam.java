@@ -52,7 +52,7 @@ public class AndroidBeam extends Fragment
             if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
                 final int padding = activity.getResources().getDimensionPixelSize(
                         R.dimen.action_bar_switch_padding);
-                mActionBarSwitch.setPadding(0, 0, padding, 0);
+                mActionBarSwitch.setPaddingRelative(0, 0, padding, 0);
                 activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                         ActionBar.DISPLAY_SHOW_CUSTOM);
                 activity.getActionBar().setCustomView(mActionBarSwitch, new ActionBar.LayoutParams(
