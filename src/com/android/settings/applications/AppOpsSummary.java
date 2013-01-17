@@ -26,7 +26,7 @@ public class AppOpsSummary extends Fragment {
     static int[][] sPageOps = new int[][] {
         // "Location" page.
         new int[] { AppOpsManager.OP_COARSE_LOCATION, AppOpsManager.OP_FINE_LOCATION,
-                AppOpsManager.OP_GPS},
+                AppOpsManager.OP_GPS },
 
         // "Personal" page.
         new int[] { AppOpsManager.OP_READ_CONTACTS, AppOpsManager.OP_WRITE_CONTACTS,
@@ -34,6 +34,20 @@ public class AppOpsSummary extends Fragment {
 
         // "Device" page.
         new int[] { AppOpsManager.OP_VIBRATE },
+    };
+    static String[][] sPagePerms = new String[][] {
+        // "Location" page.
+        new String[] { android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION },
+
+        // "Personal" page.
+        new String[] { android.Manifest.permission.READ_CONTACTS,
+                android.Manifest.permission.WRITE_CONTACTS,
+                android.Manifest.permission.READ_CALL_LOG,
+                android.Manifest.permission.WRITE_CALL_LOG },
+
+        // "Device" page.
+        new String[] { android.Manifest.permission.VIBRATE },
     };
 
     int mCurPos;
@@ -46,7 +60,7 @@ public class AppOpsSummary extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new AppOpsCategory(sPageOps[position]);
+            return new AppOpsCategory(sPageOps[position], sPagePerms[position]);
         }
 
         @Override
