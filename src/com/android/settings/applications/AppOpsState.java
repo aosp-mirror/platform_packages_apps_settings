@@ -148,6 +148,7 @@ public class AppOpsState {
     public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
             new int[] { AppOpsManager.OP_VIBRATE,
                     AppOpsManager.OP_POST_NOTIFICATION,
+                    AppOpsManager.OP_ACCESS_NOTIFICATIONS,
                     AppOpsManager.OP_CALL_PHONE,
                     AppOpsManager.OP_WRITE_SETTINGS,
                     AppOpsManager.OP_SYSTEM_ALERT_WINDOW },
