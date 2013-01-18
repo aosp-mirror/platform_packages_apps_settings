@@ -161,6 +161,7 @@ public class ManageApplications extends Fragment implements
     public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 0;
     public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 1;
     public static final int FILTER_APPS_SDCARD = MENU_OPTIONS_BASE + 2;
+    public static final int FILTER_APPS_DISABLED = MENU_OPTIONS_BASE + 3;
 
     public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
@@ -221,6 +222,7 @@ public class ManageApplications extends Fragment implements
             switch (listType) {
                 case LIST_TYPE_DOWNLOADED: mFilter = FILTER_APPS_THIRD_PARTY; break;
                 case LIST_TYPE_SDCARD: mFilter = FILTER_APPS_SDCARD; break;
+                case LIST_TYPE_DISABLED: mFilter = FILTER_APPS_DISABLED; break;
                 default: mFilter = FILTER_APPS_ALL; break;
             }
             mClickListener = clickListener;
@@ -427,6 +429,7 @@ public class ManageApplications extends Fragment implements
         }
     }
     private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+    private int mNumTabs;
     TabInfo mCurTab = null;
 
     // Size resource used for packages whose size computation failed for some reason
@@ -447,6 +450,7 @@ public class ManageApplications extends Fragment implements
     static final int LIST_TYPE_RUNNING = 1;
     static final int LIST_TYPE_SDCARD = 2;
     static final int LIST_TYPE_ALL = 3;
+    static final int LIST_TYPE_DISABLED = 4;
 
     private boolean mShowBackground = false;
     
@@ -464,7 +468,7 @@ public class ManageApplications extends Fragment implements
 
         @Override
         public int getCount() {
-            return mTabs.size();
+            return mNumTabs;
         }
         
         @Override
@@ -472,6 +476,7 @@ public class ManageApplications extends Fragment implements
             TabInfo tab = mTabs.get(position);
             View root = tab.build(mInflater, mContentContainer, mRootView);
             container.addView(root);
+            root.setTag(R.id.name, tab);
             return root;
         }
 
@@ -483,6 +488,12 @@ public class ManageApplications extends Fragment implements
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return super.getItemPosition(object);
+            //return ((TabInfo)((View)object).getTag(R.id.name)).mListType;
         }
 
         @Override
@@ -607,8 +618,11 @@ public class ManageApplications extends Fragment implements
                         mWhichSize = SIZE_EXTERNAL;
                     }
                     break;
+                case FILTER_APPS_DISABLED:
+                    filterObj = ApplicationsState.DISABLED_FILTER;
+                    break;
                 default:
-                    filterObj = null;
+                    filterObj = ApplicationsState.ALL_ENABLED_FILTER;
                     break;
             }
             switch (mLastSortMode) {
@@ -869,6 +883,13 @@ public class ManageApplications extends Fragment implements
                 getActivity().getString(R.string.filter_apps_all),
                 LIST_TYPE_ALL, this, savedInstanceState);
         mTabs.add(tab);
+
+        tab = new TabInfo(this, mApplicationsState,
+                getActivity().getString(R.string.filter_apps_disabled),
+                LIST_TYPE_DISABLED, this, savedInstanceState);
+        mTabs.add(tab);
+
+        mNumTabs = mTabs.size();
     }
 
 
@@ -922,6 +943,7 @@ public class ManageApplications extends Fragment implements
     public void onResume() {
         super.onResume();
         mActivityResumed = true;
+        updateNumTabs();
         updateCurrentTab(mViewPager.getCurrentItem());
         updateOptionsMenu();
     }
@@ -972,6 +994,16 @@ public class ManageApplications extends Fragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
             mApplicationsState.requestSize(mCurrentPkgName);
+        }
+    }
+
+    private void updateNumTabs() {
+        int newNum = mApplicationsState.haveDisabledApps() ? mTabs.size() : (mTabs.size()-1);
+        if (newNum != mNumTabs) {
+            mNumTabs = newNum;
+            if (mViewPager != null) {
+                mViewPager.getAdapter().notifyDataSetChanged();
+            }
         }
     }
 

@@ -237,12 +237,39 @@ public class ApplicationsState {
         }
     };
 
+    public static final AppFilter DISABLED_FILTER = new AppFilter() {
+        public void init() {
+        }
+        
+        @Override
+        public boolean filterApp(ApplicationInfo info) {
+            if (!info.enabled) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+    public static final AppFilter ALL_ENABLED_FILTER = new AppFilter() {
+        public void init() {
+        }
+        
+        @Override
+        public boolean filterApp(ApplicationInfo info) {
+            if (info.enabled) {
+                return true;
+            }
+            return false;
+        }
+    };
+
     final Context mContext;
     final PackageManager mPm;
     final int mRetrieveFlags;
     PackageIntentReceiver mPackageIntentReceiver;
 
     boolean mResumed;
+    boolean mHaveDisabledApps;
 
     // Information about all applications.  Synchronize on mEntriesMap
     // to protect access to these.
@@ -617,15 +644,18 @@ public class ApplicationsState {
             }
         }
 
+        mHaveDisabledApps = false;
         for (int i=0; i<mApplications.size(); i++) {
             final ApplicationInfo info = mApplications.get(i);
             // Need to trim out any applications that are disabled by
             // something different than the user.
-            if (!info.enabled && info.enabledSetting
-                    != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
-                mApplications.remove(i);
-                i--;
-                continue;
+            if (!info.enabled) {
+                if (info.enabledSetting != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
+                    mApplications.remove(i);
+                    i--;
+                    continue;
+                }
+                mHaveDisabledApps = true;
             }
             final AppEntry entry = mEntriesMap.get(info.packageName);
             if (entry != null) {
@@ -636,6 +666,10 @@ public class ApplicationsState {
         if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_LOAD_ENTRIES)) {
             mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ENTRIES);
         }
+    }
+
+    public boolean haveDisabledApps() {
+        return mHaveDisabledApps;
     }
 
     void doPauseIfNeededLocked() {
@@ -732,6 +766,13 @@ public class ApplicationsState {
                     return;
                 }
                 ApplicationInfo info = mPm.getApplicationInfo(pkgName, mRetrieveFlags);
+                if (!info.enabled) {
+                    if (info.enabledSetting
+                            != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
+                        return;
+                    }
+                    mHaveDisabledApps = true;
+                }
                 mApplications.add(info);
                 if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_LOAD_ENTRIES)) {
                     mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ENTRIES);
@@ -757,7 +798,17 @@ public class ApplicationsState {
                     mEntriesMap.remove(pkgName);
                     mAppEntries.remove(entry);
                 }
+                ApplicationInfo info = mApplications.get(idx);
                 mApplications.remove(idx);
+                if (!info.enabled) {
+                    mHaveDisabledApps = false;
+                    for (int i=0; i<mApplications.size(); i++) {
+                        if (!mApplications.get(i).enabled) {
+                            mHaveDisabledApps = true;
+                            break;
+                        }
+                    }
+                }
                 if (!mMainHandler.hasMessages(MainHandler.MSG_PACKAGE_LIST_CHANGED)) {
                     mMainHandler.sendEmptyMessage(MainHandler.MSG_PACKAGE_LIST_CHANGED);
                 }

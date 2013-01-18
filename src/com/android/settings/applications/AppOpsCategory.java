@@ -1,9 +1,23 @@
+/**
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
 package com.android.settings.applications;
 
-import android.app.AppOpsManager;
 import android.app.ListFragment;
 import android.app.LoaderManager;
-import android.app.AppOpsManager.OpEntry;
 import android.content.AsyncTaskLoader;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,14 +25,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,153 +37,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import com.android.settings.R;
+import com.android.settings.applications.AppOpsState.AppOpEntry;
 
 public class AppOpsCategory extends ListFragment implements
-        LoaderManager.LoaderCallbacks<List<AppOpsCategory.AppOpEntry>> {
+        LoaderManager.LoaderCallbacks<List<AppOpEntry>> {
 
     // This is the Adapter being used to display the list's data.
     AppListAdapter mAdapter;
 
-    /**
-     * This class holds the per-item data in our Loader.
-     */
-    public static class AppEntry {
-        private final AppListLoader mLoader;
-        private final ApplicationInfo mInfo;
-        private final File mApkFile;
-        private String mLabel;
-        private Drawable mIcon;
-        private boolean mMounted;
-
-        public AppEntry(AppListLoader loader, ApplicationInfo info) {
-            mLoader = loader;
-            mInfo = info;
-            mApkFile = new File(info.sourceDir);
-        }
-
-        public ApplicationInfo getApplicationInfo() {
-            return mInfo;
-        }
-
-        public String getLabel() {
-            return mLabel;
-        }
-
-        public Drawable getIcon() {
-            if (mIcon == null) {
-                if (mApkFile.exists()) {
-                    mIcon = mInfo.loadIcon(mLoader.mPm);
-                    return mIcon;
-                } else {
-                    mMounted = false;
-                }
-            } else if (!mMounted) {
-                // If the app wasn't mounted but is now mounted, reload
-                // its icon.
-                if (mApkFile.exists()) {
-                    mMounted = true;
-                    mIcon = mInfo.loadIcon(mLoader.mPm);
-                    return mIcon;
-                }
-            } else {
-                return mIcon;
-            }
-
-            return mLoader.getContext().getResources().getDrawable(
-                    android.R.drawable.sym_def_app_icon);
-        }
-
-        @Override public String toString() {
-            return mLabel;
-        }
-
-        void loadLabel(Context context) {
-            if (mLabel == null || !mMounted) {
-                if (!mApkFile.exists()) {
-                    mMounted = false;
-                    mLabel = mInfo.packageName;
-                } else {
-                    mMounted = true;
-                    CharSequence label = mInfo.loadLabel(context.getPackageManager());
-                    mLabel = label != null ? label.toString() : mInfo.packageName;
-                }
-            }
-        }
-    }
-
     public AppOpsCategory() {
     }
 
-    public AppOpsCategory(int[] ops, String[] perms) {
+    public AppOpsCategory(AppOpsState.OpsTemplate template) {
         Bundle args = new Bundle();
-        args.putIntArray("ops", ops);
-        args.putStringArray("perms", perms);
+        args.putParcelable("template", template);
         setArguments(args);
     }
-
-    /**
-     * This class holds the per-item data in our Loader.
-     */
-    public static class AppOpEntry {
-        private final AppOpsManager.PackageOps mPkgOps;
-        private final AppOpsManager.OpEntry mOp;
-        private final AppEntry mApp;
-
-        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app) {
-            mPkgOps = pkg;
-            mOp = op;
-            mApp = app;
-        }
-
-        public AppEntry getAppEntry() {
-            return mApp;
-        }
-
-        public AppOpsManager.PackageOps getPackageOps() {
-            return mPkgOps;
-        }
-
-        public AppOpsManager.OpEntry getOpEntry() {
-            return mOp;
-        }
-
-        public long getTime() {
-            return mOp.getTime();
-        }
-
-        @Override public String toString() {
-            return mApp.getLabel();
-        }
-    }
-
-    /**
-     * Perform alphabetical comparison of application entry objects.
-     */
-    public static final Comparator<AppOpEntry> APP_OP_COMPARATOR = new Comparator<AppOpEntry>() {
-        private final Collator sCollator = Collator.getInstance();
-        @Override
-        public int compare(AppOpEntry object1, AppOpEntry object2) {
-            if (object1.getOpEntry().isRunning() != object2.getOpEntry().isRunning()) {
-                // Currently running ops go first.
-                return object1.getOpEntry().isRunning() ? -1 : 1;
-            }
-            if (object1.getTime() != object2.getTime()) {
-                // More recent times go first.
-                return object1.getTime() > object2.getTime() ? -1 : 1;
-            }
-            return sCollator.compare(object1.getAppEntry().getLabel(),
-                    object2.getAppEntry().getLabel());
-        }
-    };
 
     /**
      * Helper for determining if the configuration has changed in an interesting
@@ -228,76 +109,20 @@ public class AppOpsCategory extends ListFragment implements
      */
     public static class AppListLoader extends AsyncTaskLoader<List<AppOpEntry>> {
         final InterestingConfigChanges mLastConfig = new InterestingConfigChanges();
-        final AppOpsManager mAppOps;
-        final PackageManager mPm;
-        final int[] mOps;
-        final String[] mPerms;
-
-        final HashMap<String, AppEntry> mAppEntries = new HashMap<String, AppEntry>();
+        final AppOpsState mState;
+        final AppOpsState.OpsTemplate mTemplate;
 
         List<AppOpEntry> mApps;
         PackageIntentReceiver mPackageObserver;
 
-        public AppListLoader(Context context, int[] ops, String[] perms) {
+        public AppListLoader(Context context, AppOpsState.OpsTemplate template) {
             super(context);
-            mAppOps = (AppOpsManager)context.getSystemService(Context.APP_OPS_SERVICE);
-            mPm = context.getPackageManager();
-            mOps = ops;
-            mPerms = perms;
+            mState = new AppOpsState(context);
+            mTemplate = template;
         }
 
         @Override public List<AppOpEntry> loadInBackground() {
-            final Context context = getContext();
-
-            List<AppOpsManager.PackageOps> pkgs = mAppOps.getPackagesForOps(mOps);
-            List<AppOpEntry> entries = new ArrayList<AppOpEntry>(pkgs.size());
-            for (int i=0; i<pkgs.size(); i++) {
-                AppOpsManager.PackageOps pkgOps = pkgs.get(i);
-                AppEntry appEntry = mAppEntries.get(pkgOps.getPackageName());
-                if (appEntry == null) {
-                    ApplicationInfo appInfo = null;
-                    try {
-                        appInfo = mPm.getApplicationInfo(pkgOps.getPackageName(),
-                                PackageManager.GET_DISABLED_COMPONENTS
-                                | PackageManager.GET_UNINSTALLED_PACKAGES);
-                    } catch (PackageManager.NameNotFoundException e) {
-                    }
-                    appEntry = new AppEntry(this, appInfo);
-                    appEntry.loadLabel(context);
-                    mAppEntries.put(pkgOps.getPackageName(), appEntry);
-                }
-                for (int j=0; j<pkgOps.getOps().size(); j++) {
-                    AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
-                    AppOpEntry entry = new AppOpEntry(pkgOps, opEntry, appEntry);
-                    entries.add(entry);
-                }
-            }
-
-            if (mPerms != null) {
-                List<PackageInfo> apps = mPm.getPackagesHoldingPermissions(mPerms, 0);
-                for (int i=0; i<apps.size(); i++) {
-                    PackageInfo appInfo = apps.get(i);
-                    AppEntry appEntry = mAppEntries.get(appInfo.packageName);
-                    if (appEntry == null) {
-                        appEntry = new AppEntry(this, appInfo.applicationInfo);
-                        appEntry.loadLabel(context);
-                        mAppEntries.put(appInfo.packageName, appEntry);
-                        List<AppOpsManager.OpEntry> dummyOps = new ArrayList<AppOpsManager.OpEntry>();
-                        AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(0, 0, 0);
-                        dummyOps.add(opEntry);
-                        AppOpsManager.PackageOps pkgOps = new AppOpsManager.PackageOps(
-                                appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
-                        AppOpEntry entry = new AppOpEntry(pkgOps, opEntry, appEntry);
-                        entries.add(entry);
-                    }
-                }
-            }
-
-            // Sort the list.
-            Collections.sort(entries, APP_OP_COMPARATOR);
-
-            // Done!
-            return entries;
+            return mState.buildState(mTemplate);
         }
 
         /**
@@ -409,15 +234,15 @@ public class AppOpsCategory extends ListFragment implements
     }
 
     public static class AppListAdapter extends ArrayAdapter<AppOpEntry> {
+        private final Resources mResources;
         private final LayoutInflater mInflater;
         private final CharSequence[] mOpNames;
-        private final CharSequence mRunningStr;
 
         public AppListAdapter(Context context) {
             super(context, android.R.layout.simple_list_item_2);
+            mResources = context.getResources();
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mOpNames = context.getResources().getTextArray(R.array.app_ops_names);
-            mRunningStr = context.getResources().getText(R.string.app_ops_running);
+            mOpNames = mResources.getTextArray(R.array.app_ops_names);
         }
 
         public void setData(List<AppOpEntry> data) {
@@ -425,16 +250,6 @@ public class AppOpsCategory extends ListFragment implements
             if (data != null) {
                 addAll(data);
             }
-        }
-
-        CharSequence opTimeToString(AppOpsManager.OpEntry op) {
-            if (op.isRunning()) {
-                return mRunningStr;
-            }
-            return DateUtils.getRelativeTimeSpanString(op.getTime(),
-                    System.currentTimeMillis(),
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.FORMAT_ABBREV_RELATIVE);
         }
 
         /**
@@ -453,14 +268,8 @@ public class AppOpsCategory extends ListFragment implements
             ((ImageView)view.findViewById(R.id.app_icon)).setImageDrawable(
                     item.getAppEntry().getIcon());
             ((TextView)view.findViewById(R.id.app_name)).setText(item.getAppEntry().getLabel());
-            if (item.getOpEntry().getTime() != 0) {
-                ((TextView)view.findViewById(R.id.op_name)).setText(
-                        mOpNames[item.getOpEntry().getOp()]);
-                ((TextView)view.findViewById(R.id.op_time)).setText(opTimeToString(item.getOpEntry()));
-            } else {
-                ((TextView)view.findViewById(R.id.op_name)).setText("");
-                ((TextView)view.findViewById(R.id.op_time)).setText("");
-            }
+            ((TextView)view.findViewById(R.id.op_name)).setText(item.getLabelText(mOpNames));
+            ((TextView)view.findViewById(R.id.op_time)).setText(item.getTimeText(mResources));
 
             return view;
         }
@@ -495,13 +304,11 @@ public class AppOpsCategory extends ListFragment implements
 
     @Override public Loader<List<AppOpEntry>> onCreateLoader(int id, Bundle args) {
         Bundle fargs = getArguments();
-        int[] ops = null;
-        String[] perms = null;
+        AppOpsState.OpsTemplate template = null;
         if (fargs != null) {
-            ops = fargs.getIntArray("ops");
-            perms = fargs.getStringArray("perms");
+            template = (AppOpsState.OpsTemplate)fargs.getParcelable("template");
         }
-        return new AppListLoader(getActivity(), ops, perms);
+        return new AppListLoader(getActivity(), template);
     }
 
     @Override public void onLoadFinished(Loader<List<AppOpEntry>> loader, List<AppOpEntry> data) {

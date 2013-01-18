@@ -1,3 +1,19 @@
+/**
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
 package com.android.settings.applications;
 
 import android.app.AppOpsManager;
@@ -23,31 +39,10 @@ public class AppOpsSummary extends Fragment {
     private ViewPager mViewPager;
 
     CharSequence[] mPageNames;
-    static int[][] sPageOps = new int[][] {
-        // "Location" page.
-        new int[] { AppOpsManager.OP_COARSE_LOCATION, AppOpsManager.OP_FINE_LOCATION,
-                AppOpsManager.OP_GPS },
-
-        // "Personal" page.
-        new int[] { AppOpsManager.OP_READ_CONTACTS, AppOpsManager.OP_WRITE_CONTACTS,
-                AppOpsManager.OP_READ_CALL_LOG, AppOpsManager.OP_WRITE_CALL_LOG },
-
-        // "Device" page.
-        new int[] { AppOpsManager.OP_VIBRATE },
-    };
-    static String[][] sPagePerms = new String[][] {
-        // "Location" page.
-        new String[] { android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                android.Manifest.permission.ACCESS_FINE_LOCATION },
-
-        // "Personal" page.
-        new String[] { android.Manifest.permission.READ_CONTACTS,
-                android.Manifest.permission.WRITE_CONTACTS,
-                android.Manifest.permission.READ_CALL_LOG,
-                android.Manifest.permission.WRITE_CALL_LOG },
-
-        // "Device" page.
-        new String[] { android.Manifest.permission.VIBRATE },
+    static AppOpsState.OpsTemplate[] sPageTemplates = new AppOpsState.OpsTemplate[] {
+        AppOpsState.LOCATION_TEMPLATE,
+        AppOpsState.PERSONAL_TEMPLATE,
+        AppOpsState.DEVICE_TEMPLATE
     };
 
     int mCurPos;
@@ -60,12 +55,12 @@ public class AppOpsSummary extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new AppOpsCategory(sPageOps[position], sPagePerms[position]);
+            return new AppOpsCategory(sPageTemplates[position]);
         }
 
         @Override
         public int getCount() {
-            return sPageOps.length;
+            return sPageTemplates.length;
         }
 
         @Override
