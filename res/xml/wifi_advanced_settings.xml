@@ -62,6 +62,14 @@
             android:entryValues="@array/wifi_countrycode_values"
             />
 
+    <PreferenceScreen
+            android:key="wifi_priority"
+            android:title="@string/wifi_setting_priority_title"
+            android:summary="@string/wifi_setting_priority_summary"
+            android:persistent="false"
+            android:fragment="com.android.settings.wifi.WifiPriority"
+            />
+
     <Preference
             android:key="install_credentials"
             android:title="@string/wifi_install_credentials"
