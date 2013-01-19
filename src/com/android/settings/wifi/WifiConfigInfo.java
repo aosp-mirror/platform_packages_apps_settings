@@ -31,14 +31,8 @@ import com.android.settings.R;
  */
 public class WifiConfigInfo extends Activity {
 
-    private static final String TAG = "WifiConfigInfo";
-
     private TextView mConfigList;
     private WifiManager mWifiManager;
-
-    //============================
-    // Activity lifecycle
-    //============================
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +46,16 @@ public class WifiConfigInfo extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        final List<WifiConfiguration> wifiConfigs = mWifiManager.getConfiguredNetworks();
-        StringBuffer configList  = new StringBuffer();
-        for (int i = wifiConfigs.size() - 1; i >= 0; i--) {
-            configList.append(wifiConfigs.get(i));
+        if (mWifiManager.isWifiEnabled()) {
+            final List<WifiConfiguration> wifiConfigs = mWifiManager.getConfiguredNetworks();
+            StringBuffer configList  = new StringBuffer();
+            for (int i = wifiConfigs.size() - 1; i >= 0; i--) {
+                configList.append(wifiConfigs.get(i));
+            }
+            mConfigList.setText(configList);
+        } else {
+            mConfigList.setText(R.string.wifi_state_disabled);
         }
-        mConfigList.setText(configList);
     }
 
 }
