@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"不要跳过"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"警告：您可能需要额外支付运营商数据费。"\n\n"平板电脑设置过程可能会消耗大量网络流量。"</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"警告：您可能需要额外支付运营商数据费。"\n\n"手机设置过程可能会消耗大量网络流量。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"警告：平板电脑无法验证您的软件是否是最新版本。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"警告：手机无法验证您的软件是否是最新版本。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"警告：您必须连接到互联网，平板电脑才能验证您所使用的软件是否为最新版本。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"警告：您必须连接到互联网，手机才能验证您所使用的软件是否为最新版本。"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"平板电脑无法连接到此 Wi-Fi 网络。"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"手机无法连接到此 Wi-Fi 网络。"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"高级 Wi-Fi 设置"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"过滤"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"选择过滤选项"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"全部"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"已下载"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"正在运行"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB 存储设备"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"如果您停用内置应用，其他应用可能无法运行。您的数据也将会删除。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"要关闭通知吗？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"如果关闭此应用的通知，您可能会错过重要提醒和最新动态信息。"</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"应用操作"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"正在运行"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"存储空间使用情况"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"查看应用使用的存储空间"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"正在运行的服务"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"从最优到最差：蓝、绿、淡红、红"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"停用 HW 叠加层"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"始终使用 GPU 进行屏幕合成"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"启用跟踪"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"选择要启用的跟踪"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"当前未启用任何跟踪"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"当前已启用 <xliff:g id="NUM">%1$d</xliff:g> 项跟踪"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"当前已启用所有跟踪"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"启用 OpenGL 跟踪"</string>
     <string name="debug_layout" msgid="5981361776594526155">"显示布局边界"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"显示剪辑边界、边距等。"</string>

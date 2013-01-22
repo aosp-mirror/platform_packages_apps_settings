@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Ne pas ignorer"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"AVERTISSEMENT : Des frais supplémentaires de connexion à Internet peuvent être appliqués par votre opérateur."\n\n"La configuration de la tablette peut générer une forte activité sur le réseau."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"AVERTISSEMENT : Des frais supplémentaires de connexion à Internet peuvent être appliqués par votre opérateur."\n\n"La configuration du téléphone peut générer une forte activité sur le réseau."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"AVERTISSEMENT : La tablette ne sera pas en mesure de vérifier que votre logiciel est à jour."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"AVERTISSEMENT : Le téléphone ne sera pas en mesure de vérifier que votre logiciel est à jour."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"AVERTISSEMENT : Vous ne pourrez vérifier que vos logiciels sont à jour sur votre tablette que lorsque vous disposerez d\'une connexion à Internet."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"AVERTISSEMENT : Vous ne pourrez vérifier que vos logiciels sont à jour sur votre téléphone que lorsque vous disposerez d\'une connexion à Internet."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Connexion impossible de la tablette à ce réseau Wi-Fi gratuit."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Connexion impossible du téléphone à ce réseau Wi-Fi gratuit."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Paramètres Wi-Fi avancés"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Filtrer"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Sélectionner les options du filtre"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Toutes"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Téléchargées"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En cours"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Stockage USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Si vous désactivez une application intégrée, d\'autres applications peuvent avoir un comportement défaillant. Vos données seront également supprimées."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Désactiver les notifications ?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Si vous désactivez les notifications de cette application, vous risquez de manquer des alertes et des mises à jour importantes."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Fonctionnement des applications"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"En cours d\'exécution"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Utilisation du stockage"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Afficher l\'espace de stockage utilisé par les applications"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Services en cours d\'exécution"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Du mieux au pire : bleu, vert, rouge clair, rouge"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Désact. superpos. matér."</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Toujours utiliser le GPU pour la composition écran"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Activer les traces"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Sélect. traces activées"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Aucune trace n\'est activée actuellement."</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> traces activées actuellement"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Toutes les traces sont actuellement activées."</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Activer les traces OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afficher les contours"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Afficher les limites, les marges de clip, etc."</string>

@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Ikke hopp over"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ADVARSEL: Du kan pådra deg ekstra datakostnader fra operatøren."\n\n"Nettbrettkonfigureringen kan kreve betydelig nettverksaktivitet."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ADVARSEL: Du kan pådra deg ekstra datakostnader fra operatøren."\n\n"Telefonkonfigureringen kan kreve betydelig nettverksaktivitet."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ADVARSEL: Nettbrettet kommer ikke til å kunne bekrefte at programvaren din er oppdatert."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ADVARSEL: Telefonen kommer ikke til å kunne bekrefte at programvaren din er oppdatert."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ADVARSEL: Nettbrettet kan ikke bekrefte at programvaren din er oppdatert uten Internett-tilkobling."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ADVARSEL: Telefonen kan ikke bekrefte at programvaren din er oppdatert uten Internett-tilkobling."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Nettbrettet kunne ikke koble til Wi-Fi-nettverket."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Telefonen kunne ikke koble til Wi-Fi-nettverket."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Avansert Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Velg filteralternativer"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alle"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Tredjeparts"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Kjører"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-lagring"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Hvis du deaktiverer en innebygd app kan det føre til at andre apper ikke fungerer som de skal. Dataene dine blir også slettet."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Vil du deaktivere varsler?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Hvis du deaktiverer varsler for denne appen, kan du gå glipp av viktige beskjeder og oppdateringer."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Appkjøring"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Kjøres"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Bruk av lagringsplass"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Vis lagring som brukes av apper"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Kjørende tjenester"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Fra best til verst: blå, grønn, lyserød, rød"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Deaktiver HW-overlegg"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Bruk alltid GPU for skjermsammensetting"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Aktiver spor"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Velg aktiverte spor"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Ingen aktiverte spor for øyeblikket"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> spor er aktivert for øyeblikket"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"For øyeblikket er alle sporene er aktiverte"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Aktiver OpenGL-spor"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Vis kantene i utformingen"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Vis kanter, marger osv."</string>

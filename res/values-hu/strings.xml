@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Ne hagyja ki"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"FIGYELEM: Előfordulhat, hogy szolgáltatója további adatátviteli díjakat számít fel."\n\n"A táblagép beállításához jelentős hálózati tevékenységre lehet szükség."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"FIGYELEM: Előfordulhat, hogy szolgáltatója további adatátviteli díjakat számít fel."\n\n"A telefon beállításához jelentős hálózati tevékenységre lehet szükség."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"FIGYELEM: A táblagép nem tudja ellenőrizni, hogy a szoftver naprakész-e."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"FIGYELEM: A telefon nem tudja ellenőrizni, hogy a szoftver naprakész-e."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"FIGYELEM: amíg nincs internetkapcsolat, a táblagép nem tudja ellenőrizni, hogy a szoftver naprakész-e."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"FIGYELEM: amíg nincs internetkapcsolat, a telefon nem tudja ellenőrizni, hogy a szoftver naprakész-e."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"A táblagép nem tudott csatlakozni ehhez a Wi-Fi hálózathoz."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"A telefon nem tudott csatlakozni ehhez a Wi-Fi hálózathoz."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Haladó Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Szűrő"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Válasszon szűrési lehetőségeket"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Összes"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Letöltött"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Futó"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-tár"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Ha letilt egy beépített alkalmazást, lehet, hogy más alkalmazások sem fognak megfelelően működni. Az adatok is törlődnek."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Kikapcsolja az értesítéseket?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Ha kikapcsolja az erre az alkalmazásra vonatkozó értesítéseket, akkor lemaradhat fontos figyelmeztetésekről és a frissítésekről."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Alkalmazásműveletek"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Fut"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Tárhely-használat"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Alkalmazások által használt tárhely megtekintése"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Futó szolgáltatások"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Legjobbtól a legrosszabbig: kék, zöld, piros"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW fedvények letiltása"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Mindig a GPU használata képernyő-feldolgozáshoz"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Nyomkövetés engedélyezése"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Eng. nyomkövetés kivál."</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Jelenleg nincs engedélyezett nyomkövetés."</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Jelenleg <xliff:g id="NUM">%1$d</xliff:g> nyomkövetés engedélyezett."</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Jelenleg minden nyomkövetés engedélyezve van."</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL nyomon követése"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Elrendezéshatár mutatása"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Kliphatárok, margók stb. megjelenítése."</string>

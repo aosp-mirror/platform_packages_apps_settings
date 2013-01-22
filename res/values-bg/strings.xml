@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Без пропускане"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"Предупреждение: Това може да доведе до допълнителни таксувания за данни от оператора."\n\n"Настройката на таблета може да изисква значителна активност на мрежата."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"Предупреждение: Това може да доведе до допълнителни таксувания за данни от оператора."\n\n"Настройката на телефона може да изисква значителна активност на мрежата."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ПРЕДУПРЕЖДЕНИЕ: Таблетът няма да може да потвърди, че софтуерът ви е актуален."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ПРЕДУПРЕЖДЕНИЕ: Телефонът няма да може да потвърди, че софтуерът ви е актуален."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ПРЕДУПРЕЖДЕНИЕ: Докато нямате връзка с интернет, таблетът няма да може да потвърди, че софтуерът ви е актуален."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ПРЕДУПРЕЖДЕНИЕ: Докато нямате връзка с интернет, телефонът няма да може да потвърди, че софтуерът ви е актуален."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Таблетът не можа да се свърже с тази Wi-Fi мрежа."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Телефонът не можа да се свърже с тази Wi-Fi мрежа."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Разширени настройки за Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Филтриране"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Избор на филтриращи опции"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Всички"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Изтеглени"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Работещи"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB хранилище"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Ако деактивирате вградено приложение, е възможно други приложения да не работят правилно. Данните ви също ще бъдат изтрити."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Да се изключат ли известията?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Ако изключите известията за това приложение, може да пропуснете важни сигнали и актуализации."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Операции на приложението"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Изпълнява се"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Употреба на хранилището"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Преглед на хранилището, използвано от приложения"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Течащи услуги:"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"От най-добро към най-лошо: синьо, зелено, светло червено, червено"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Хардуерни наслагвания: Деактив."</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Винаги да се използва GPU за изграждане на екрана"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Трасирания: Активиране"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Избиране на акт. трасирания"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Понастоящем няма активирани трасирания"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Понастоящем са активирани <xliff:g id="NUM">%1$d</xliff:g> трасирания"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Понастоящем всички трасирания са активирани"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Трасирания на OpenGL: Акт."</string>
     <string name="debug_layout" msgid="5981361776594526155">"Граници на оформлението"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показв. на границите на изрязване, полетата и др."</string>

@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Не пропускати"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ЗАСТЕРЕЖЕННЯ. Оператор може стягувати з вас додаткову плату."\n\n"Для налаштування планшетного ПК може знадобитися тривале користування мережею."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ЗАСТЕРЕЖЕННЯ. Оператор може стягувати з вас додаткову плату."\n\n"Для налаштування телефону може знадобитися тривале користування мережею."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ЗАСТЕРЕЖЕННЯ: планшетний ПК не зможе перевірити, чи оновлено ваше програмне забезпечення."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ЗАСТЕРЕЖЕННЯ: телефон не зможе перевірити, чи оновлено ваше програмне забезпечення."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ЗАСТЕРЕЖЕННЯ. Якщо немає з’єднання з Інтернетом, планшетний ПК не зможе перевірити, чи оновлено ваше програмне забезпечення."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ЗАСТЕРЕЖЕННЯ. Якщо немає з’єднання з Інтернетом, телефон не зможе перевірити, чи оновлено ваше програмне забезпечення."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Планшетний ПК не зміг під’єднатися до цієї мережі Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Телефон не зміг під’єднатися до цієї мережі Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Розширені налаштування Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Фільтрув."</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Вибрати параметри фільтра"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Усі"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Завантажені"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Запущені"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Носій USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Якщо вимкнути вбудовану програму, інші програми можуть працювати неналежним чином. Ваші дані також буде видалено."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Вимкнути сповіщення?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Якщо вимкнути сповіщення для цієї програми, можна пропустити важливі повідомлення й оновлення."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Робота програми"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Виконується"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Використання пам\'яті"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Переглянути пам’ять, яку використовують програми"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Запущені служби"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Від кращого до гіршого: синій, зелений, світло-червоний, червоний"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Вимк. апаратн. накладання"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Завжди використовувати GPU для компонування екрана"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Увімкнути трасування"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Вибрати ввімкн.трасування"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Усі трасування зараз вимкнено"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Зараз увімкнено стільки трасувань: <xliff:g id="NUM">%1$d</xliff:g>"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Усі трасування зараз увімкнено"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Увімк. трасування OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показувати межі макета"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показувати межі роликів, поля тощо"</string>

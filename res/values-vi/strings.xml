@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Không bỏ qua"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"CẢNH BÁO: Bạn có thể phải trả thêm phí dữ liệu cho nhà cung cấp dịch vụ."\n\n"Thiết lập máy tính bảng có thể yêu cầu hoạt động mạng đáng kể."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"CẢNH BÁO: Bạn có thể phải trả thêm phí dữ liệu cho nhà cung cấp dịch vụ."\n\n"Thiết lập điện thoại có thể yêu cầu hoạt động mạng đáng kể."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"CẢNH BÁO: Máy tính bảng không thể xác minh rằng phần mềm của bạn được cập nhật."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"CẢNH BÁO: Điện thoại không thể xác minh rằng phần mềm của bạn được cập nhật."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"CẢNH BÁO: Máy tính bảng sẽ không thể xác minh rằng phần mềm của bạn đã cập nhật cho đến khi bạn có kết nối internet."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"CẢNH BÁO: Điện thoại sẽ không thể xác minh rằng phần mềm của bạn đã cập nhật cho đến khi bạn có kết nối internet."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Máy tính bảng không thể kết nối với mạng Wi-Fi này."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Điện thoại không thể kết nối với mạng Wi-Fi này."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Wi-Fi nâng cao"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Bộ lọc"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Chọn tùy chọn bộ lọc"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Tất cả"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Đã tải xuống"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Đang hoạt động"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Bộ nhớ USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Nếu bạn tắt ứng dụng được tích hợp sẵn, các ứng dụng khác có thể hoạt động sai. Dữ liệu của bạn cũng sẽ bị xóa."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Tắt thông báo?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Nếu bạn tắt thông báo cho ứng dụng này, bạn có thể bỏ qua cảnh báo và cập nhật quan trọng."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Hoạt động của ứng dụng"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Ðang chạy"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Sử dụng bộ nhớ"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Xem dung lượng lưu trữ mà các ứng dụng sử dụng"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Các dịch vụ đang hoạt động"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Từ tốt nhất đến tồi nhất: lam, lục, đỏ tươi, đỏ"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Vô hiệu hóa các lớp phủ HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Luôn sử dụng GPU để tổng hợp màn hình"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Bật dấu vết"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Chọn các dấu vết đã bật"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Hiện không có dấu vết nào được bật"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> dấu vết hiện đang được bật"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Tất cả dấu vết hiện đang được bật"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Bật theo dõi OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Hiển thị ranh giới bố cục"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Hiển thị viền đoạn video, lề, v.v.."</string>

@@ -613,8 +613,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Nicht überspringen"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"Achtung: Es können zusätzliche Kosten für die Datenübertragung vonseiten des Mobilfunkanbieters anfallen."\n\n"Das Einrichten des Tablets kann eine erhöhte Netzwerkaktivität erfordern."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"Achtung: Es können zusätzliche Kosten für die Datenübertragung vonseiten des Mobilfunkanbieters anfallen."\n\n"Das Einrichten des Telefons kann eine erhöhte Netzwerkaktivität erfordern."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"Achtung: Das Tablet kann nicht prüfen, ob Ihre Software aktuell ist."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"Achtung: Das Telefon kann nicht prüfen, ob Ihre Software aktuell ist."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"Achtung: Das Tablet kann erst überprüfen, ob Ihre Software aktuell ist, wenn eine Internetverbindung besteht."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"Achtung: Das Telefon kann erst überprüfen, ob Ihre Software aktuell ist, wenn eine Internetverbindung besteht."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Das Tablet konnte nicht auf dieses WLAN zugreifen."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Das Telefon konnte nicht auf dieses WLAN zugreifen."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Erweiterte WLAN-Einstellungen"</string>
@@ -1083,6 +1083,8 @@
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Filteroptionen auswählen"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alle"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Heruntergeladen"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Aktiv"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-Speicher"</string>
@@ -1142,6 +1144,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Wenn Sie eine integrierte App deaktivieren, kann dies das Verhalten anderer Apps beeinträchtigen. Außerdem werden Ihre Daten gelöscht."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Benachrichtigungen deaktivieren?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Wenn Sie die Benachrichtigungen für diese App deaktivieren, verpassen Sie eventuell wichtige Warnmeldungen und Updates."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"App-Vorgänge"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Aktiv"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Speichernutzung"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Von Apps verwendeten Speicher anzeigen"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktive Dienste"</string>
@@ -1644,11 +1648,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Niedrig nach hoch: blau, grün, hellrot, rot"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW-Overlays deaktivieren"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"GPU immer für Bildschirmaufbau verwenden"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Tracing aktivieren"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Aktivierte Traces wählen"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Keine Traces aktiviert"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> Traces aktiviert"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Alle Traces aktiviert"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL-Traces aktivieren"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Layoutgrenzen einblenden"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Clip-Begrenzungen, Ränder usw. anzeigen"</string>

@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Nepreskočiť"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"UPOZORNENIE: Operátor môže účtovať ďalšie poplatky za dáta."\n\n"Nastavenie tabletu môže vyžadovať prenos významného množstva dát."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"UPOZORNENIE: Operátor môže účtovať ďalšie poplatky za dáta."\n\n"Nastavenie telefónu môže vyžadovať prenos významného množstva dát."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"UPOZORNENIE: Tablet nebude môcť overiť, či je váš softvér aktuálny."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"UPOZORNENIE: Telefón nebude môcť overiť, či je váš softvér aktuálny."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"UPOZORNENIE: Tablet nebude môcť overiť aktuálnosť vášho softvéru, až kým nebudete mať pripojenie k internetu."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"UPOZORNENIE: Telefón nebude môcť overiť aktuálnosť vášho softvéru, až kým nebudete mať pripojenie k internetu."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Tablet sa k tejto sieti Wi-Fi nedokázal pripojiť."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Telefón sa k tejto sieti Wi-Fi nedokázal pripojiť."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Rozšírené nastavenia Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Filtrovať"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Zvoľte možnosti filtra"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Všetko"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Prevzaté"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Spustené"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Ukladací priestor USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Ak zakážete vstavanú aplikáciu, ostatné aplikácie nemusia fungovať správne. Vaše údaje sa taktiež odstránia."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Vypnúť upozornenia?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Ak v tejto aplikácii vypnete upozornenia, môžete prísť o dôležité upozornenia a aktuálne informácie."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Fungovanie aplikácií"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Spustené"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Využitie ukl. priestoru"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Zobraziť úložisko používané aplikáciami"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Spustené služby"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Od najlepš. k najhorš.: modr., zel., sv. červ., červ."</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Zakázať hardvér. prekrytia"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Vždy používať jednotku GPU na skladanie obrazovky"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Povoliť sledovania"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Vybrať povolené sledovania"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Momentálne nie sú povolené žiadne sledovania"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Počet aktuálne povolených sledovaní: <xliff:g id="NUM">%1$d</xliff:g>"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Všetky sledovania sú v súčasnosti povolené"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Povoliť trasovanie OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Zobraziť hranice rozlož."</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Zobraziť v klipe ohraničenie, okraje a pod."</string>

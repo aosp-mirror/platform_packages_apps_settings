@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"छोड़े नहीं"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"चेतावनी: आपको अतिरिक्त वाहक डेटा शुल्क लग सकते हैं."\n\n"टेबलेट सेटअप के लिए महत्वपूर्ण नेटवर्क गतिविधि की आवश्यकता हो सकती है."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"चेतावनी: आपको अतिरिक्त वाहक डेटा शुल्क लग सकते हैं."\n\n"फ़ोन सेटअप के लिए महत्वपूर्ण नेटवर्क गतिविधि की आवश्यकता हो सकती है."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"चेतावनी: टेबलेट यह सत्यापित नहीं कर सकेगा कि आपका सॉफ़्टवेयर अद्यतित है."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"चेतावनी: फ़ोन यह सत्यापित नहीं कर सकेगा कि आपका सॉफ़्टवेयर अद्यतित है."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"चेतावनी: जब तक आपके पास इंटरनेट कनेक्शन न हो, तब तक टेबलेट सत्यापित नहीं कर पाएगा कि आपका सॉफ़्टवेयर अद्यतित है."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"चेतावनी: जब तक आपके पास इंटरनेट कनेक्शन न हो, तब तक फ़ोन सत्यापित नहीं कर पाएगा कि आपका सॉफ़्टवेयर अद्यतित है."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"टेबलेट इस Wi-Fi नेटवर्क से कनेक्ट नहीं कर सका."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"फ़ोन इस Wi-Fi नेटवर्क से कनेक्ट नहीं कर सका."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"उन्‍नत Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"फ़िल्टर"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"फ़िल्‍टर विकल्‍प चुनें"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"सभी"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"डाउनलोड किए गए"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"चालू"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB संग्रहण"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"यदि आप किसी अंतर्निहित एप्लिकेशन को अक्षम करते हैं, तो अन्य एप्लिकेशन का व्यवहार गड़बड़ा सकता है. आपका डेटा भी हटा दिया जाएगा."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"सूचनाएं बंद करें?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"यदि आप इस एप्‍लिकेशन के लिए सूचनाएं बंद करते हैं, तो आप महत्‍वपूर्ण अलर्ट और अपडेट खो देंगे."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"एप्लिकेशन संचालन"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"चल रहा है"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"संग्रहण उपयोग"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"एप्‍लिकेशन द्वारा उपयोग किया गया संग्रहण देखें"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"चल रही सेवाएं"</string>
@@ -1644,11 +1648,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"सबसे अच्छे से सबसे खराब: नीला, हरा, हल्का लाल, लाल"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW ओवरले अक्षम करें"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"स्‍क्रीन संयोजन के लिए हमेशा GPU का उपयोग करें"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"ट्रेस सक्षम करें"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"सक्षम ट्रेस को चुनें"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"वर्तमान में कोई ट्रेस सक्षम नहीं है"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"वर्तमान में <xliff:g id="NUM">%1$d</xliff:g> ट्रेस सक्षम हैं"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"वर्तमान में सभी ट्रेस सक्षम हैं"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL चिह्न सक्षम करें"</string>
     <string name="debug_layout" msgid="5981361776594526155">"लेआउट सीमाएं दिखाएं"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"क्लिप सीमाएं, मार्जिन, आदि दिखाएं."</string>

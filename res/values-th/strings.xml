@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"ไม่ข้าม"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"คำเตือน: การดำเนินการของคุณอาจมีค่าบริการเพิ่มเติมจากการใช้ข้อมูลของผู้ให้บริการ"\n\n"การตั้งค่าแท็บเล็ตอาจต้องใช้กิจกรรมเครือข่ายที่ใช้ปริมาณข้อมูลสูง"</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"คำเตือน: การดำเนินการของคุณอาจมีค่าบริการเพิ่มเติมจากการใช้ข้อมูลของผู้ให้บริการ"\n\n"การตั้งค่าโทรศัพท์อาจต้องใช้กิจกรรมเครือข่ายที่ใ้ช้ปริมาณข้อมูลสูง"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"คำเตือน: แท็บเล็ตจะไม่สามารถยืนยันว่าซอฟต์แวร์ของคุณเป็นรุ่นปัจจุบัน"</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"คำเตือน: โทรศัพท์จะไม่สามารถยืนยันว่าซอฟต์แวร์ของคุณเป็นรุ่นปัจจุบัน"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"คำเตือน: แท็บเล็ตจะไม่สามารถยืนยันได้ว่าซอฟต์แวร์ของคุณล่าสุดหรือไม่จนกว่าคุณจะมีการเชื่อมต่ออินเทอร์เน็ต"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"คำเตือน: โทรศัพท์จะไม่สามารถยืนยันได้ว่าซอฟต์แวร์ของคุณล่าสุดหรือไม่จนกว่าคุณจะมีการเชื่อมต่ออินเทอร์เน็ต"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"แท็บเล็ตไม่สามารถเชื่อมต่อกับเครือข่าย WiFi นี้"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"โทรศัพท์ไม่สามารถเชื่อมต่อกับเครือข่าย WiFi นี้"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Wi-Fi ขั้นสูง"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"ตัวกรอง"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"เลือกตัวเลือกตัวกรอง"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"ทั้งหมด"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"ดาวน์โหลดแล้ว"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"ที่กำลังใช้งาน"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"ที่เก็บข้อมูล USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"หากคุณปิดใช้งานแอปพลิเคชันในตัว แอปพลิเคชันอื่นๆ อาจทำงานผิดพลาด และข้อมูลของคุณจะถูกลบด้วย"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"ปิดการแจ้งเตือนหรือไม่"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"หากคุณปิดการแจ้งเตือนสำหรับแอปพลิเคชันนี้ คุณอาจพลาดการแจ้งเตือนและการอัปเดตที่สำคัญ"</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"การทำงานของแอป"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"กำลังดำเนินการ"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"การใช้ที่เก็บข้อมูล"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"ดูที่จัดเก็บข้อมูลที่แอปพลิเคชันใช้"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"บริการที่ทำงานอยู่"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"จากดีที่สุดไปหาแย่ที่สุด: ฟ้า เขียว แดงอ่อน แดง"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"ปิดใช้งานการวางซ้อน HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"ใช้ GPU ในการจัดวางองค์ประกอบหน้าจอเสมอ"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"เปิดใช้งานร่องรอย"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"เลือกร่องรอยที่เปิดใช้งาน"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"ไม่มีร่องรอยที่เปิดใช้งานอยู่ในขณะนี้"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"เปิดใช้งานร่องรอย <xliff:g id="NUM">%1$d</xliff:g> รายการอยู่ในขณะนี้"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"ร่องรอยทั้งหมดที่เปิดใช้งานในขณะนี้"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"เปิดใช้ร่องรอยใน OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"แสดงขอบของการจัดวาง"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"แสดงหน้าปกคลิป ขอบ ฯลฯ"</string>

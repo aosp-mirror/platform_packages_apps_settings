@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"عدم التخطي"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"تحذير: ربما يُحصّل مشغل شبكة الجوال رسومًا إضافية منك."\n\n"قد يحتاج إعداد الجهاز اللوحي إلى نشاط كبير بالشبكة."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"تحذير: ربما يحصّل مشغل شبكة الجوال رسومًا إضافية منك."\n\n"قد يحتاج إعداد الهاتف إلى نشاط كبير بالشبكة."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"تحذير: لن يتمكن الجهاز اللوحي من التحقق من أن البرنامج محدث."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"تحذير: لن يتمكن الهاتف من التحقق من أن البرنامج محدث."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"تحذير: ما لم يتوفر لديك اتصال بالإنترنت، لن يتمكن الجهاز اللوحي من التأكد من أن برنامجك محدّث."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"تحذير: ما لم يتوفر لديك اتصال بالإنترنت، لن يتمكن الهاتف من التأكد من أن برنامجك محدّث."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"لم يتمكن الجهاز اللوحي من الاتصال بشبكة Wi-Fi هذه."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"لم يتمكن الهاتف من الاتصال بشبكة Wi-Fi هذه."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"إعدادات Wi-Fi المتقدمة"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"تصفية"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"اختر خيارات التصفية"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"الكل"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"تم التنزيل"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"قيد التشغيل"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"وحدة تخزين USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"عند تعطيل تطبيق مضمن، قد تحدث مشكلات في عمل تطبيقات أخرى. سيتم حذف بياناتك أيضًا."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"هل تريد إيقاف الإشعارات؟"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"إذا كنت قد أجريت إيقافًا للإشعارات حول هذا التطبيق، فقد تفوتك تنبيهات وتحديثات مهمة."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"عمليات التطبيق"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"جارية التنفيذ"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"استخدام وحدة التخزين"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"عرض سعة التخزين المستخدمة بواسطة التطبيقات"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"الخدمات قيد التشغيل"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"من الأفضل إلى الأسوأ: أزرق، أخضر، أحمر فاتح، أحمر"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"تعطيل تراكبات الأجهزة"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"استخدام وحدة معالجة الرسومات دائمًا لتركيب الشاشة"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"تمكين الآثار"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"تحديد الآثار الممكنة"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"ليست هناك آثار ممكنة حاليًا"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"تم تمكين <xliff:g id="NUM">%1$d</xliff:g> من الآثار حاليًا"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"تم تمكين جميع الآثار حاليًا"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"تمكين عمليات تتبع OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"عرض حدود المخطط"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"عرض حدود وهوامش المقطع وما إلى ذلك."</string>

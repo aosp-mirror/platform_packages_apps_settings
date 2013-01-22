@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"No omitir"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ADVERTENCIA: Es posible que tu proveedor te cobre cargos adicionales por el uso de datos."\n\n"La configuración de la tableta puede requerir una significativa actividad de la red."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ADVERTENCIA: Es posible que tu proveedor te cobre cargos adicionales por el uso de datos."\n\n"La configuración del dispositivo puede requerir una significativa actividad de la red."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ADVERTENCIA: Tu tableta no podrá verificar si el software está actualizado."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ADVERTENCIA: Tu dispositivo no podrá verificar si el software está actualizado."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ADVERTENCIA: Hasta que no te conectes a Internet, la tableta no podrá verificar si el software está actualizado."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ADVERTENCIA: Hasta que no te conectes a Internet, el dispositivo no podrá verificar si el software está actualizado."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"La tableta no se ha podido conectar a esta red Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"El dispositivo no se ha podido conectar a esta red Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Wi-Fi avanzada"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Filtro"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Elegir opciones de filtro"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Todos"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Descargado"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En ejecución"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Almacenamiento USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Si desactivas una aplicación integrada, es posible que las otras aplicaciones no funcionen correctamente. También se eliminarán tus datos."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"¿Desactivar notificaciones?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Si desactivas las notificaciones de esta aplicación, es posible que no recibas actualizaciones y alertas importantes."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Operaciones de las aplicaciones"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"En curso"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Uso del almacenamiento"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Ver el almacenamiento que usan las aplicaciones"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Servicios en ejecución"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"De mejor a peor: azul, verde, rojo claro, rojo"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Desactivar superpos. HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Usar GPU para combinar pantallas"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Activar seguimientos"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Selec. seguim. activados"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"No se activó ningún seguimiento."</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Se activaron <xliff:g id="NUM">%1$d</xliff:g> seguimientos."</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Se activaron todos los seguimientos."</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Seguimientos de OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar límites de diseño"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Mostrar márgenes, límites de clips, etc."</string>

@@ -614,8 +614,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"スキップしない"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"警告: 追加のデータ通信料が発生する可能性があります。"\n\n"タブレットのセットアップでは大量のネットワーク処理が必要となる場合があります。"</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"警告: 追加のデータ通信料が発生する可能性があります。"\n\n"タブレットのセットアップでは大量のネットワーク処理が必要となる場合があります。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"警告: タブレットは、ソフトウェアが最新の状態かどうかを確認できません。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"警告: 携帯端末は、ソフトウェアが最新の状態かどうかを確認できません。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"警告: インターネットに接続しないと、タブレットはソフトウェアが最新であることを確認できません。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"警告: インターネットに接続しないと、携帯端末はソフトウェアが最新であることを確認できません。"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"タブレットからこのWi-Fiネットワークに接続できませんでした。"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"携帯端末からこのWi-Fiネットワークに接続できませんでした。"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Wi-Fi詳細設定"</string>
@@ -1084,6 +1084,8 @@
     <string name="filter" msgid="2018011724373033887">"フィルタ"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"フィルタオプションの選択"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"すべて"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"ダウンロード済み"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"実行中"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USBストレージ"</string>
@@ -1143,6 +1145,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"内蔵アプリを無効にすると、他のアプリが正常に動作しなくなることがあります。データも削除されます。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"通知をOFFにしますか？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"このアプリの通知をOFFにすると、重要なアラートや更新を見逃すおそれがあります。"</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"アプリの操作状況"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"実行中"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"ストレージ使用状況"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"アプリのストレージ使用状況を表示する"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"実行中のサービス"</string>
@@ -1649,11 +1653,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"良好な状態から順に: 青、緑、薄い赤、赤"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HWオーバーレイを無効"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"画面合成に常にGPUを使用する"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"トレースを有効にする"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"有効なトレースを選択"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"現在有効なトレースはない"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"現在<xliff:g id="NUM">%1$d</xliff:g>件のトレースが有効"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"現在トレースはすべて有効"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGLトレースを有効化"</string>
     <string name="debug_layout" msgid="5981361776594526155">"レイアウト境界を表示"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"クリップの境界線、マージンなどを表示"</string>

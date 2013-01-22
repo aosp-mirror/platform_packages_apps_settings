@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Χωρίς παράλειψη"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: ενδέχεται να ισχύουν επιπλέον χρεώσεις από την εταιρεία κινητής τηλεφωνίας."\n\n"Η ρύθμιση του tablet μπορεί να προκαλέσει μεγάλη δραστηριότητα δικτύου."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: ενδέχεται να ισχύουν επιπλέον χρεώσεις από την εταιρεία κινητής τηλεφωνίας."\n\n"Η ρύθμιση του τηλεφώνου μπορεί να προκαλέσει μεγάλη δραστηριότητα δικτύου."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: το tablet δεν θα είναι σε θέση να επαληθεύσει ότι το λογισμικό σας είναι ενημερωμένο."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: το τηλέφωνο δεν θα είναι σε θέση να επαληθεύσει ότι το λογισμικό σας είναι ενημερωμένο."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Μέχρι να αποκτήσετε σύνδεση στο διαδίκτυο, το tablet δεν θα μπορεί να ελέγξει αν το λογισμικό είναι ενημερωμένο."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Μέχρι να αποκτήσετε σύνδεση στο διαδίκτυο, το τηλέφωνο δεν θα μπορεί να ελέγξει αν το λογισμικό είναι ενημερωμένο."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Δεν ήταν δυνατή η σύνδεση του tablet σε αυτό το δίκτυο Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Δεν ήταν δυνατή η σύνδεση του τηλεφώνου σε αυτό το δίκτυο Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Σύνθετο Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Φίλτρο"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Επιλογές φίλτρου"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Όλα"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Η λήψη ολοκληρώθηκε"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Εκτελείται"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Αποθ. χώρος USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Εάν απενεργοποιήσετε μια ενσωματωμένη εφαρμογή, οι άλλες εφαρμογές ενδέχεται να μην λειτουργούν σωστά. Τα δεδομένα σας θα διαγραφούν επίσης."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Απενεργοποίηση ειδοποιήσεων;"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Εάν απενεργοποιήσετε τις ειδοποιήσεις για αυτήν την εφαρμογή, ενδέχεται να χάσετε σημαντικές ειδοποιήσεις και ενημερώσεις."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Λειτουργίες εφαρμογών"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Σε εκτέλεση"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Αποθηκευτικός χώρος"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Προβολή χώρου αποθήκευσης που χρησιμοποιείται από τις εφαρμογές"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Υπηρεσίες που εκτελούνται"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Από το καλύτερο στο χειρότερο: μπλε, πράσινο, απαλό κόκκινο, κόκκινο"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Απενεργ. επικαλύψεων HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Να γίνεται πάντα χρήση του GPU για σύνθεση οθόνης"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Ενεργοποίηση ιχνών"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Επιλ. ενεργ. ιχνών"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Δεν υπάρχουν ενεργοποιημένα ίχνη την τρέχουσα στιγμή"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> ίχνη είναι ενεργοποιημένα την τρέχουσα στιγμή"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Όλα τα ίχνη είναι επί του παρόντος ενεργοποιημένα"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ενεργοποίηση ιχνών OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Εμφάνιση ορίων διάταξης"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Εμφάνιση ορίων κλιπ, περιθωρίων, κλπ."</string>

@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Älä ohita"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"VAROITUS: Voit joutua maksamaan ylimääräisiä tiedonsiirtomaksuja."\n\n"Tablet-laitteen asetusten määrittäminen voi vaatia paljon tiedonsiirtoa."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"VAROITUS: Voit joutua maksamaan ylimääräisiä tiedonsiirtomaksuja."\n\n"Puhelimen asetusten määrittäminen voi vaatia paljon tiedonsiirtoa."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"VAROITUS: tablet-laite ei voi tarkistaa, onko ohjelmisto ajan tasalla."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"VAROITUS: puhelin ei voi tarkistaa, onko ohjelmisto ajan tasalla."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"VAROITUS: Tablet-laite ei voi vahvistaa, että ohjelmisto on ajan tasalla, ennen kuin muodostat internetyhteyden."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"VAROITUS: Puhelin ei voi vahvistaa, että ohjelmisto on ajan tasalla, ennen kuin muodostat internetyhteyden."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Tablet-laite ei voi muodostaa yhteyttä tähän wifi-verkkoon."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Puhelin ei voi muodostaa yhteyttä tähän wifi-verkkoon."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Edistynyt wifi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Suodata"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Valitse suodatinvaihtoehdot"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Kaikki"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Ladattu"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Käynnissä"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-tallennustila"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Jos poistat sisäänrakennetun sovelluksen, muiden sovellusten toiminta voi häiriintyä. Myös tietosi poistetaan."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Poista ilmoitukset käytöstä?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Jos poistat tämän sovelluksen ilmoitukset käytöstä, et välttämättä näe tärkeitä ilmoituksia ja päivityksiä."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Sovellusten toiminta"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Käynnissä"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Tallennustilan käyttö"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Näytä sovellusten käyttämä tallennustila."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Käynnissä olevat palvelut"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Paras -&gt; huonoin: sin., vihr., vaal.pun., pun."</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Poista HW-peittok. käyt."</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Käytä GPU:ta ruudun koostamiseen"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Ota jäljitys käyttöön"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Valitse käytettävät jälj."</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Jäljityksiä ei käytössä"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> jäljitystä tällä hetkellä käytössä"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Kaikki jäljitykset käytössä"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ota OpenGL-jälj. käyttöön"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Näytä asettelun rajat"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Näytä leikkeiden rajat, marginaalit jne."</string>

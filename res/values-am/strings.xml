@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"አትዝለል"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ማስጠንቀቂያ፦ ተጨማሪ የድምጸ ሞደም ተያያዥ ውሂብ ክፍያዎች ሊከሰትብዎ ይችላል።"\n\n"ጡባዊን ማዋቀር ጉልህ የሆነ የአውታረ መረብ እንቅስቃሴ ሊያስፈልገው ይችላል።"</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ማስጠንቀቂያ፦ ተጨማሪ የድምጸ ሞደም ተያያዥ ውሂብ ክፍያዎች ሊከሰትብዎ ይችላል።"\n\n"ስልክን ማዋቀር ጉልህ የሆነ የአውታረ መረብ እንቅስቃሴ ሊያስፈልገው ይችላል።"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ማስጠንቀቂያ፦ ጡባዊው ሶፍትዌርዎ የተዘመነ መሆኑን ሊያረጋግጥ አይችልም።"</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ማስጠንቀቂያ፦ ስልኩ ሶፍትዌርዎ የተዘመነ መሆኑን ሊያረጋግጥ አይችልም።"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ማስጠንቀቂያ: የበይነመረብ ግንኙነት እስኪኖርዎት ድረስ ሶፍትዌርዎ የዘመነ መሆኑን ታብሌቱ ማረጋገጥ አይችልም።"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ማስጠንቀቂያ: የበይነመረብ ግንኙነት እስኪኖርዎት ድረስ ሶፍትዌርዎ የዘመነ መሆኑን ስልኩ ማረጋገጥ አይችልም።"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"ጡባዊው ከዚህ የWi-Fi አውታረ መረብ ጋር መገናኘት አልቻለም።"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"ስልኩ ከዚህ የWi-Fi አውታረ መረብ ጋር መገናኘት አልቻለም።"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"የላቀ Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"አጣራ"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"የማጣሪያ አማራጮችን ምረጥ"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"ሁሉም"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"ወርዷል"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"አሂድ"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"የUSB  ማከማቻ"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"አንድ አብሮ የተሰራን መተግበሪያ ካሰናከሉ ሌሎች መተግበሪያዎች ያልተገባ ባህሪ ሊያሳዩ ይችላሉ። ውሂብዎ እንዲሁም ይሰረዛል።"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"ማሳወቂያዎችን አጥፋ?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"ለእዚህ መተግበሪያ ማሳወቂያዎችን አጥፍተህ ከሆነ፣ አስፈላጊ ማንቂያዎችን እና አዘምኖችን ልታጣ ትችላለህ።"</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"መተግበሪያ ops"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"ሩጫ"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"የማከማቻ ጥቅም"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"በመተግበሪያዎች ጥቅም ላይ የዋለ ማከማቻ እይ"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"አሂድ አገልግሎቶች"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"ከምርጡ ወደ መጥፎው፦ ሰማያዊ፣ አረንጓዴ፣ ቀላ ያለ ቀይ፣ ቀይ"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"የHW ተደራቢዎችን አሰናክል"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"ለማያ ገጽ ማቀናበሪያ ሁልጊዜ GPU ተጠቀም"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"ፍንጮችን አንቃ"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"የነቁ ፍንጮችን ምረጥ"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"በአሁኑ ጊዜ ምንም ፍንጮች አልነቁም"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"በአሁኑ ጊዜ <xliff:g id="NUM">%1$d</xliff:g> ፍንጮች ነቅተዋል"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"ሁሉም ፍንጮች በአሁኑ ጊዜ ነቅተዋል"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"የ OpenGL ክትትሎችን ያንቁ"</string>
     <string name="debug_layout" msgid="5981361776594526155">"የአቀማመጥ ገደቦችን አሳይ"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"የቅንጥብ ገደቦች፣ ጠርዞች፣ ወዘተ አሳይ"</string>
