@@ -144,8 +144,8 @@ public class MiscFilesHandler extends ListActivity {
         // Returns true if all deletions were successful.
         // If a deletion fails, the method stops attempting to delete and returns false.
         private boolean deleteDir(File dir) {
-            if (dir.isDirectory()) {
-                String[] children = dir.list();
+            String[] children = dir.list();
+            if (children != null) {
                 for (int i=0; i < children.length; i++) {
                     boolean success = deleteDir(new File(dir, children[i]));
                     if (!success) {
