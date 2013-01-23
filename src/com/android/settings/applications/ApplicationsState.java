@@ -434,9 +434,11 @@ public class ApplicationsState {
         // Only the owner can see all apps.
         if (UserHandle.myUserId() == 0) {
             mRetrieveFlags = PackageManager.GET_UNINSTALLED_PACKAGES |
-                    PackageManager.GET_DISABLED_COMPONENTS;
+                    PackageManager.GET_DISABLED_COMPONENTS |
+                    PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS;
         } else {
-            mRetrieveFlags = PackageManager.GET_DISABLED_COMPONENTS;
+            mRetrieveFlags = PackageManager.GET_DISABLED_COMPONENTS |
+                    PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS;
         }
 
         /**
