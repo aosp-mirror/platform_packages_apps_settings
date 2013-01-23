@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Не пропускать"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"ВНИМАНИЕ! Возможны дополнительные расходы на услуги оператора связи."\n\n"Настройка устройства может потребовать передачи большого объема данных по сети."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ВНИМАНИЕ! Возможны дополнительные расходы на услуги оператора связи."\n\n"Настройка устройства может потребовать передачи большого объема данных по сети."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"ВНИМАНИЕ! Поиск обновлений для программного обеспечения не поддерживается."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"ВНИМАНИЕ! Поиск обновлений для программного обеспечения не поддерживается."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ВНИМАНИЕ! Без подключения к Интернету невозможно проверить наличие обновлений для ПО."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ВНИМАНИЕ! Без подключения к Интернету невозможно проверить наличие обновлений для ПО."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Не удалось подключиться к сети Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Не удалось подключиться к сети Wi-Fi."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Дополнительные функции"</string>
@@ -974,7 +974,7 @@
     <string name="about_settings_summary" msgid="3371517697156165959">"Просмотр юридической информации, состояния планшетного ПК и версии ПО"</string>
     <string name="legal_information" msgid="5769301644270604095">"Юридическая информация"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Участники"</string>
-    <string name="regulatory_information" msgid="5695464367088752150">"Юридическая информация"</string>
+    <string name="regulatory_information" msgid="5695464367088752150">"Сертификация"</string>
     <string name="copyright_title" msgid="865906688917260647">"Авторские права"</string>
     <string name="license_title" msgid="1990487604356037871">"Лицензия"</string>
     <string name="terms_title" msgid="7697580845616764642">"Условия использования"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Фильтр"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Выберите параметры фильтра"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Все"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Сторонние"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Работающие"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-накопитель"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Если отключить встроенное приложение, другие приложения могут работать неправильно. Кроме того, будут удалены все данные."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Отключить уведомления?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Если в настройках этого приложения отключены уведомления, вы можете пропустить важные оповещения и обновления."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Операции в приложениях"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Выполняется"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Использование памяти"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Объем памяти, занимаемый приложениями"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Работающие приложения"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Порядок: синий, зеленый, светло-красный, красный"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Откл. аппарат. наложения"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Всегда использовать GPU при компоновке экрана"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Включить трассировки"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Включение трассировок"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Все трассировки отключены"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"Включено трассировок: <xliff:g id="NUM">%1$d</xliff:g>"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Все трассировки включены"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Вкл. трассировку OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показывать границы элементов"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показывать границы клипа, поля и т. д."</string>

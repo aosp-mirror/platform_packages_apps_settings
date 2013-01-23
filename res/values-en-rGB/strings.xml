@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Don\'t skip"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"WARNING: You may incur extra carrier data charges."\n\n"Tablet setup can require significant network activity."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"WARNING: You may incur extra carrier data charges."\n\n"Phone setup can require significant network activity."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"WARNING: The tablet won\'t be able to verify that your software is up to date."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"WARNING: The phone won\'t be able to verify that your software is up to date."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"WARNING: Until you have an internet connection, the tablet won\'t be able to verify that your software is up to date."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"WARNING: Until you have an internet connection, the phone won\'t be able to verify that your software is up to date."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"The tablet was unable to connect to this Wi-Fi network."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"The phone was unable to connect to this Wi-Fi network."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Advanced Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Choose filter options"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"All"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Downloaded"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Running"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB storage"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"If you disable a built-in app, other apps may misbehave. Your data will also be deleted."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Turn off notifications"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"If you turn off notifications for this app, you may miss important alerts and updates."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"App ops"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Running"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Storage use"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"View storage used by apps"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Running services"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"From best to worst: blue, green, light red, red"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Disable HW overlays"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Always use GPU for screen compositing"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Enable tracing"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Select enabled traces"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"No traces currently enabled"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> traces currently enabled"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"All traces currently enabled"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Enable OpenGL traces"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Show layout bounds"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Show clip bounds, margins, etc."</string>

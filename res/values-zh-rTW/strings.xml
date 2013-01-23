@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"不要略過"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"警告：您可能需支付額外的數據傳輸費用。"\n\n"平板電腦設定程序可能需要佔用大量網路流量。"</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"警告：您可能需支付額外的數據傳輸費用。"\n\n"手機設定程序可能需要佔用大量網路流量。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"警告：無法透過您的平板電腦驗證軟體是否為最新版本。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"警告：無法透過您的手機驗證軟體是否為最新版本。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"警告：您必須連上網際網路，平板電腦才能驗證您所使用的軟體是否為最新版本。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"警告：您必須連上網際網路，手機才能驗證您所使用的軟體是否為最新版本。"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"您的平板電腦無法連線到這個 WiFi 網路。"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"您的手機無法連線到這個 WiFi 網路。"</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"進階 Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"篩選"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"選擇篩選器選項"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"全部"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"已下載"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"執行中"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB 儲存裝置"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"如果您停用內建應用程式，其他應用程式可能無法正常運作，您的資料也會遭到刪除。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"關閉通知？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"如果您關閉這個應用程式的通知，可能會錯失重要的警示與更新。"</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"應用程式作業"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"執行中"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"儲存空間使用量"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"查看應用程式的儲存空間使用量"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"正在運作的服務"</string>
@@ -1647,11 +1651,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"從優到劣依序顯示：藍色、綠色、淺紅色、紅色"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"停用硬體重疊圖層"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"一律使用 GPU 進行畫面合成"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"啟用追蹤項目"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"選取已啟用的追蹤項目"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"目前未啟用任何追蹤項目"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"目前已啟用 <xliff:g id="NUM">%1$d</xliff:g> 個追蹤項目"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"目前已啟用所有追蹤項目"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"啟用 OpenGL 追蹤"</string>
     <string name="debug_layout" msgid="5981361776594526155">"顯示版面配置界限"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"顯示剪輯範圍、邊界等。"</string>

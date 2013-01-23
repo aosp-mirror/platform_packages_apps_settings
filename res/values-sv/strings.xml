@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Hoppa inte över"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"VARNING! Eventuella operatörsavgifter för datatrafik kan tillkomma."\n\n"Konfigurationen kan kräva betydande nätverksaktivitet."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"VARNING! Eventuella operatörsavgifter för datatrafik kan tillkomma."\n\n"Konfigurationen kan kräva betydande nätverksaktivitet."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"VARNING! Surfplattan kommer inte att kunna kontrollera om programvaran är uppdaterad."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"VARNING! Mobilen kommer inte att kunna kontrollera om programvaran är uppdaterad."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"Varning! Om du inte är ansluten till internet kan surfplattan inte verifiera att programvaran är uppdaterad."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"Varning! Om du inte är ansluten till internet kan mobilen inte verifiera att programvaran är uppdaterad."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Surfplattan kunde inte anslutas till Wi-Fi-nätverket."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Mobilen kunde inte anslutas till Wi-Fi-nätverket."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Avancerat för Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"Filtrera"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Välj filteralternativ"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alla"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Hämtade"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Kör"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-lagring"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Om du inaktiverar en inbyggd app kan det hända att andra appar inte fungerar korrekt. Dina uppgifter kommer också att tas bort."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Inaktivera meddelanden?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Om du inaktiverar meddelanden för den här appen kanske du missar viktiga meddelanden och uppdateringar."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Appåtgärder"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Kör"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Använt utrymme"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Visa lagring som används av appar"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktiva tjänster"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Från bäst till sämst: blå, grön, ljusröd, röd"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Inaktivera HW-överlagringar"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Använd alltid GPU för skärmsammansättning"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Aktivera spår"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Välj aktiverade spår"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Inga spår är aktiverade för närvarande"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> spår är aktiverade för närvarande"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Alla spår är aktiverade för närvarande"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Aktivera OpenGL-spår"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Visa layoutgränser"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Visa gränser för videoklipp, marginaler m.m."</string>

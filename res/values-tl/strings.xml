@@ -612,8 +612,8 @@
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Huwag laktawan"</string>
     <string name="wifi_skipped_message" product="tablet" msgid="3335132188969450252">"BABALA: Maaari kang makaipon ng karagdagang mga singil sa data ng carrier."\n\n"Maaaring mangailangan ng malaking aktibidad ng network ang pag-setup ng tablet."</string>
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"BABALA: Maaari kang makaipon ng karagdagang mga singil sa data ng carrier."\n\n"Maaaring mangailangan ng malaking aktibidad ng network ang pag-setup ng telepono."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="7682836089429990118">"BABALA: Hindi mabe-verify ng tablet na napapanahon ang iyong software."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3324261421359832263">"BABALA: Hindi mabe-verify ng telepono na napapanahon ang iyong software."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"BABALA: Hangga\'t wala ka pang koneksyon sa internet, hindi mabe-verify ng tablet na napapanahon ang iyong software."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"BABALA: Hangga\'t wala ka pang koneksyon sa internet, hindi mabe-verify ng telepono na napapanahon ang iyong software."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="6904081070290941807">"Hindi nakakonekta sa Wi-Fi network na ito ang tablet."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="3894921379368046855">"Hindi nakakonekta sa Wi-Fi network na ito ang telepono."</string>
     <string name="wifi_advanced_titlebar" msgid="1627063574532930090">"Advanced na Wi-Fi"</string>
@@ -1082,6 +1082,8 @@
     <string name="filter" msgid="2018011724373033887">"I-filter"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Pumili ng mga opsyon ng filter"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Lahat"</string>
+    <!-- no translation found for filter_apps_disabled (5364447573326472890) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Na-download"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Tumatakbo"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Imbakan na USB"</string>
@@ -1141,6 +1143,8 @@
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Kung hindi mo papaganahin ang isang built-in na app, maaaring hindi gumana nang maayos ang iba pang apps. Matatanggal din ang iyong data."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"I-off ang mga notification?"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Kung i-o-off mo ang mga notification para sa app na ito, maaari mong makaligtaan ang mahahalagang alerto at update."</string>
+    <string name="app_ops_settings" msgid="5108481883575527511">"Pagpapagana ng app"</string>
+    <string name="app_ops_running" msgid="7706949900637284122">"Gumagana"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Paggamit ng imbakan"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Tingnan ang storage na ginagamit ng apps"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Mga tumatakbong serbisyo"</string>
@@ -1643,11 +1647,6 @@
     <string name="show_hw_overdraw_summary" msgid="4295714000923082647">"Maganda-di maganda: asul, berde, light red, pula"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Wag paganahin HW overlay"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Laging gamitin ang GPU para sa screen compositing"</string>
-    <string name="enable_traces_title" msgid="7448835465859512430">"Paganahin ang mga trace"</string>
-    <string name="enable_traces_dialog_title" msgid="5026490474669452929">"Piliin pinapaganang trace"</string>
-    <string name="enable_traces_summary_none" msgid="1867562808503494163">"Walang mga trace na kasalukuyang pinapagana"</string>
-    <string name="enable_traces_summary_num" msgid="8978230237777454269">"<xliff:g id="NUM">%1$d</xliff:g> (na) trace ang kasalukuyang pinapagana"</string>
-    <string name="enable_traces_summary_all" msgid="3950139649125158247">"Kasalukuyang pinapagana ang lahat ng trace"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Paganahin trace ng OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Ipakita mga layout bound"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Ipakita ang mga hangganan ng clip, margin, atbp."</string>
