@@ -100,6 +100,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             int value = mWifiManager.getFrequencyBand();
             if (value != -1) {
                 frequencyPref.setValue(String.valueOf(value));
+                updateFrequencyBandSummary(frequencyPref, value);
             } else {
                 Log.e(TAG, "Failed to fetch frequency band");
             }
@@ -145,6 +146,11 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         Log.e(TAG, "Invalid sleep policy value: " + value);
     }
 
+    private void updateFrequencyBandSummary(Preference frequencyBandPref, int index) {
+        String[] summaries = getResources().getStringArray(R.array.wifi_frequency_band_entries);
+        frequencyBandPref.setSummary(summaries[index]);
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         String key = preference.getKey();
@@ -173,7 +179,9 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
 
         if (KEY_FREQUENCY_BAND.equals(key)) {
             try {
-                mWifiManager.setFrequencyBand(Integer.parseInt((String) newValue), true);
+                int value = Integer.parseInt((String) newValue);
+                mWifiManager.setFrequencyBand(value, true);
+                updateFrequencyBandSummary(preference, value);
             } catch (NumberFormatException e) {
                 Toast.makeText(getActivity(), R.string.wifi_setting_frequency_band_error,
                         Toast.LENGTH_SHORT).show();
