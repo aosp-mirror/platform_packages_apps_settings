@@ -93,7 +93,7 @@ class BatterySipper implements Comparable<BatterySipper> {
 
     public int compareTo(BatterySipper other) {
         // Return the flipped value because we want the items in descending order
-        return (int) (other.getSortValue() - getSortValue());
+        return Double.compare(other.getSortValue(), getSortValue());
     }
 
     void getQuickNameIconForUid(Uid uidObj) {
