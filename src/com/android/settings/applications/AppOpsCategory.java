@@ -28,6 +28,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +46,14 @@ import com.android.settings.applications.AppOpsState.AppOpEntry;
 public class AppOpsCategory extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<AppOpEntry>> {
 
+    private static final int RESULT_APP_DETAILS = 1;
+
+    AppOpsState mState;
+
     // This is the Adapter being used to display the list's data.
     AppListAdapter mAdapter;
+
+    String mCurrentPkgName;
 
     public AppOpsCategory() {
     }
@@ -115,9 +122,9 @@ public class AppOpsCategory extends ListFragment implements
         List<AppOpEntry> mApps;
         PackageIntentReceiver mPackageObserver;
 
-        public AppListLoader(Context context, AppOpsState.OpsTemplate template) {
+        public AppListLoader(Context context, AppOpsState state, AppOpsState.OpsTemplate template) {
             super(context);
-            mState = new AppOpsState(context);
+            mState = state;
             mTemplate = template;
         }
 
@@ -236,13 +243,13 @@ public class AppOpsCategory extends ListFragment implements
     public static class AppListAdapter extends ArrayAdapter<AppOpEntry> {
         private final Resources mResources;
         private final LayoutInflater mInflater;
-        private final CharSequence[] mOpNames;
+        private final AppOpsState mState;
 
-        public AppListAdapter(Context context) {
+        public AppListAdapter(Context context, AppOpsState state) {
             super(context, android.R.layout.simple_list_item_2);
             mResources = context.getResources();
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mOpNames = mResources.getTextArray(R.array.app_ops_names);
+            mState = state;
         }
 
         public void setData(List<AppOpEntry> data) {
@@ -268,11 +275,17 @@ public class AppOpsCategory extends ListFragment implements
             ((ImageView)view.findViewById(R.id.app_icon)).setImageDrawable(
                     item.getAppEntry().getIcon());
             ((TextView)view.findViewById(R.id.app_name)).setText(item.getAppEntry().getLabel());
-            ((TextView)view.findViewById(R.id.op_name)).setText(item.getLabelText(mOpNames));
+            ((TextView)view.findViewById(R.id.op_name)).setText(item.getLabelText(mState));
             ((TextView)view.findViewById(R.id.op_time)).setText(item.getTimeText(mResources));
 
             return view;
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mState = new AppOpsState(getActivity());
     }
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {
@@ -286,7 +299,7 @@ public class AppOpsCategory extends ListFragment implements
         setHasOptionsMenu(true);
 
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new AppListAdapter(getActivity());
+        mAdapter = new AppListAdapter(getActivity(), mState);
         setListAdapter(mAdapter);
 
         // Start out with a progress indicator.
@@ -297,9 +310,23 @@ public class AppOpsCategory extends ListFragment implements
         getLoaderManager().initLoader(0, null, this);
     }
 
+    // utility method used to start sub activity
+    private void startApplicationDetailsActivity() {
+        // start new fragment to display extended information
+        Bundle args = new Bundle();
+        args.putString(AppOpsDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
+
+        PreferenceActivity pa = (PreferenceActivity)getActivity();
+        pa.startPreferencePanel(AppOpsDetails.class.getName(), args,
+                R.string.app_ops_settings, null, this, RESULT_APP_DETAILS);
+    }
+    
     @Override public void onListItemClick(ListView l, View v, int position, long id) {
-        // Insert desired behavior here.
-        Log.i("LoaderCustom", "Item clicked: " + id);
+        AppOpEntry entry = mAdapter.getItem(position);
+        if (entry != null) {
+            mCurrentPkgName = entry.getAppEntry().getApplicationInfo().packageName;
+            startApplicationDetailsActivity();
+        }
     }
 
     @Override public Loader<List<AppOpEntry>> onCreateLoader(int id, Bundle args) {
@@ -308,7 +335,7 @@ public class AppOpsCategory extends ListFragment implements
         if (fargs != null) {
             template = (AppOpsState.OpsTemplate)fargs.getParcelable("template");
         }
-        return new AppListLoader(getActivity(), template);
+        return new AppListLoader(getActivity(), mState, template);
     }
 
     @Override public void onLoadFinished(Loader<List<AppOpEntry>> loader, List<AppOpEntry> data) {

@@ -28,6 +28,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateUtils;
 
+import android.util.Log;
+import android.util.SparseArray;
 import com.android.settings.R;
 
 import java.io.File;
@@ -39,9 +41,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AppOpsState {
+    static final String TAG = "AppOpsState";
+    static final boolean DEBUG = false;
+
     final Context mContext;
     final AppOpsManager mAppOps;
     final PackageManager mPm;
+    final CharSequence[] mOpNames;
 
     List<AppOpEntry> mApps;
 
@@ -49,23 +55,18 @@ public class AppOpsState {
         mContext = context;
         mAppOps = (AppOpsManager)context.getSystemService(Context.APP_OPS_SERVICE);
         mPm = context.getPackageManager();
+        mOpNames = context.getResources().getTextArray(R.array.app_ops_names);
     }
 
     public static class OpsTemplate implements Parcelable {
         public final int[] ops;
-        public final String[] perms;
-        public final int[] permOps;
 
-        public OpsTemplate(int[] _ops, String[] _perms, int[] _permOps) {
+        public OpsTemplate(int[] _ops) {
             ops = _ops;
-            perms = _perms;
-            permOps = _permOps;
         }
 
         OpsTemplate(Parcel src) {
             ops = src.createIntArray();
-            perms = src.createStringArray();
-            permOps = src.createIntArray();
         }
 
         @Override
@@ -76,8 +77,6 @@ public class AppOpsState {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeIntArray(ops);
-            dest.writeStringArray(perms);
-            dest.writeIntArray(permOps);
         }
 
         public static final Creator<OpsTemplate> CREATOR = new Creator<OpsTemplate>() {
@@ -94,33 +93,26 @@ public class AppOpsState {
     public static final OpsTemplate LOCATION_TEMPLATE = new OpsTemplate(
             new int[] { AppOpsManager.OP_COARSE_LOCATION,
                     AppOpsManager.OP_FINE_LOCATION,
-                    AppOpsManager.OP_GPS },
-            new String[] { android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION },
-            new int[] { AppOpsManager.OP_COARSE_LOCATION,
-                    AppOpsManager.OP_FINE_LOCATION }
+                    AppOpsManager.OP_GPS,
+                    AppOpsManager.OP_WIFI_SCAN }
             );
 
     public static final OpsTemplate PERSONAL_TEMPLATE = new OpsTemplate(
             new int[] { AppOpsManager.OP_READ_CONTACTS,
                     AppOpsManager.OP_WRITE_CONTACTS,
                     AppOpsManager.OP_READ_CALL_LOG,
-                    AppOpsManager.OP_WRITE_CALL_LOG },
-            new String[] { android.Manifest.permission.READ_CONTACTS,
-                            android.Manifest.permission.WRITE_CONTACTS,
-                            android.Manifest.permission.READ_CALL_LOG,
-                            android.Manifest.permission.WRITE_CALL_LOG },
-            new int[] { AppOpsManager.OP_READ_CONTACTS,
-                    AppOpsManager.OP_WRITE_CONTACTS,
-                    AppOpsManager.OP_READ_CALL_LOG,
-                    AppOpsManager.OP_WRITE_CALL_LOG }
+                    AppOpsManager.OP_WRITE_CALL_LOG,
+                    AppOpsManager.OP_READ_CALENDAR,
+                    AppOpsManager.OP_WRITE_CALENDAR }
             );
 
     public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
-            new int[] { AppOpsManager.OP_VIBRATE },
-            new String[] { android.Manifest.permission.VIBRATE },
             new int[] { AppOpsManager.OP_VIBRATE }
             );
+
+    public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
+            LOCATION_TEMPLATE, PERSONAL_TEMPLATE, DEVICE_TEMPLATE
+    };
 
     /**
      * This class holds the per-item data in our Loader.
@@ -129,6 +121,8 @@ public class AppOpsState {
         private final AppOpsState mState;
         private final ApplicationInfo mInfo;
         private final File mApkFile;
+        private final SparseArray<AppOpsManager.OpEntry> mOps
+                = new SparseArray<AppOpsManager.OpEntry>();
         private String mLabel;
         private Drawable mIcon;
         private boolean mMounted;
@@ -137,6 +131,14 @@ public class AppOpsState {
             mState = state;
             mInfo = info;
             mApkFile = new File(info.sourceDir);
+        }
+
+        public void addOp(AppOpsManager.OpEntry op) {
+            mOps.put(op.getOp(), op);
+        }
+
+        public boolean hasOp(int op) {
+            return mOps.indexOfKey(op) >= 0;
         }
 
         public ApplicationInfo getApplicationInfo() {
@@ -200,11 +202,13 @@ public class AppOpsState {
 
         public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app) {
             mPkgOps = pkg;
-            mOps.add(op);
             mApp = app;
+            mApp.addOp(op);
+            mOps.add(op);
         }
 
         public void addOp(AppOpsManager.OpEntry op) {
+            mApp.addOp(op);
             for (int i=0; i<mOps.size(); i++) {
                 AppOpsManager.OpEntry pos = mOps.get(i);
                 if (pos.isRunning() != op.isRunning()) {
@@ -212,8 +216,9 @@ public class AppOpsState {
                         mOps.add(i, op);
                         return;
                     }
+                    continue;
                 }
-                if (pos.getTime() > op.getTime()) {
+                if (pos.getTime() < op.getTime()) {
                     mOps.add(i, op);
                     return;
                 }
@@ -237,16 +242,16 @@ public class AppOpsState {
             return mOps.get(pos);
         }
 
-        public CharSequence getLabelText(CharSequence opNames[]) {
+        public CharSequence getLabelText(AppOpsState state) {
             if (getNumOpEntry() == 1) {
-                return opNames[getOpEntry(0).getOp()];
+                return state.mOpNames[getOpEntry(0).getOp()];
             } else {
                 StringBuilder builder = new StringBuilder();
                 for (int i=0; i<getNumOpEntry(); i++) {
                     if (i > 0) {
                         builder.append(", ");
                     }
-                    builder.append(opNames[getOpEntry(i).getOp()]);
+                    builder.append(state.mOpNames[getOpEntry(i).getOp()]);
                 }
                 return builder.toString();
             }
@@ -306,12 +311,16 @@ public class AppOpsState {
                 boolean lastExe = last.getTime() != 0;
                 boolean entryExe = opEntry.getTime() != 0;
                 if (lastExe == entryExe) {
+                    if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
+                            + pkgOps.getPackageName() + ": append to " + last);
                     last.addOp(opEntry);
                     return;
                 }
             }
         }
         AppOpEntry entry = new AppOpEntry(pkgOps, opEntry, appEntry);
+        if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
+                + pkgOps.getPackageName() + ": making new " + entry);
         entries.add(entry);
     }
 
@@ -319,10 +328,42 @@ public class AppOpsState {
         return buildState(tpl, 0, null);
     }
 
+    private AppEntry getAppEntry(final Context context, final HashMap<String, AppEntry> appEntries,
+            final String packageName, ApplicationInfo appInfo) {
+        AppEntry appEntry = appEntries.get(packageName);
+        if (appEntry == null) {
+            if (appInfo == null) {
+                try {
+                    appInfo = mPm.getApplicationInfo(packageName,
+                            PackageManager.GET_DISABLED_COMPONENTS
+                            | PackageManager.GET_UNINSTALLED_PACKAGES);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.w(TAG, "Unable to find info for package " + packageName);
+                    return null;
+                }
+            }
+            appEntry = new AppEntry(this, appInfo);
+            appEntry.loadLabel(context);
+            appEntries.put(packageName, appEntry);
+        }
+        return appEntry;
+    }
+
     public List<AppOpEntry> buildState(OpsTemplate tpl, int uid, String packageName) {
         final Context context = mContext;
 
         final HashMap<String, AppEntry> appEntries = new HashMap<String, AppEntry>();
+        List<AppOpEntry> entries = new ArrayList<AppOpEntry>();
+
+        ArrayList<String> perms = new ArrayList<String>();
+        ArrayList<Integer> permOps = new ArrayList<Integer>();
+        for (int i=0; i<tpl.ops.length; i++) {
+            String perm = AppOpsManager.opToPermission(tpl.ops[i]);
+            if (!perms.contains(perm)) {
+                perms.add(perm);
+                permOps.add(tpl.ops[i]);
+            }
+        }
 
         List<AppOpsManager.PackageOps> pkgs;
         if (packageName != null) {
@@ -330,67 +371,73 @@ public class AppOpsState {
         } else {
             pkgs = mAppOps.getPackagesForOps(tpl.ops);
         }
-        List<AppOpEntry> entries = new ArrayList<AppOpEntry>(pkgs.size());
-        for (int i=0; i<pkgs.size(); i++) {
-            AppOpsManager.PackageOps pkgOps = pkgs.get(i);
-            AppEntry appEntry = appEntries.get(pkgOps.getPackageName());
-            if (appEntry == null) {
-                ApplicationInfo appInfo = null;
-                try {
-                    appInfo = mPm.getApplicationInfo(pkgOps.getPackageName(),
-                            PackageManager.GET_DISABLED_COMPONENTS
-                            | PackageManager.GET_UNINSTALLED_PACKAGES);
-                } catch (PackageManager.NameNotFoundException e) {
+
+        if (pkgs != null) {
+            for (int i=0; i<pkgs.size(); i++) {
+                AppOpsManager.PackageOps pkgOps = pkgs.get(i);
+                AppEntry appEntry = getAppEntry(context, appEntries, pkgOps.getPackageName(), null);
+                if (appEntry == null) {
+                    continue;
                 }
-                appEntry = new AppEntry(this, appInfo);
-                appEntry.loadLabel(context);
-                appEntries.put(pkgOps.getPackageName(), appEntry);
-            }
-            for (int j=0; j<pkgOps.getOps().size(); j++) {
-                AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
-                addOp(entries, pkgOps, appEntry, opEntry);
+                for (int j=0; j<pkgOps.getOps().size(); j++) {
+                    AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
+                    addOp(entries, pkgOps, appEntry, opEntry);
+                }
             }
         }
 
-        if (tpl.perms != null) {
-            List<PackageInfo> apps;
-            if (packageName != null) {
-                apps = new ArrayList<PackageInfo>();
-                try {
-                    PackageInfo pi = mPm.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
-                    apps.add(pi);
-                } catch (NameNotFoundException e) {
-                }
-            } else {
-                apps = mPm.getPackagesHoldingPermissions(tpl.perms, 0);
+        List<PackageInfo> apps;
+        if (packageName != null) {
+            apps = new ArrayList<PackageInfo>();
+            try {
+                PackageInfo pi = mPm.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+                apps.add(pi);
+            } catch (NameNotFoundException e) {
             }
-            for (int i=0; i<apps.size(); i++) {
-                PackageInfo appInfo = apps.get(i);
-                AppEntry appEntry = appEntries.get(appInfo.packageName);
-                if (appEntry == null) {
-                    appEntry = new AppEntry(this, appInfo.applicationInfo);
-                    appEntry.loadLabel(context);
-                    appEntries.put(appInfo.packageName, appEntry);
-                    List<AppOpsManager.OpEntry> dummyOps
-                            = new ArrayList<AppOpsManager.OpEntry>();
-                    AppOpsManager.PackageOps pkgOps = new AppOpsManager.PackageOps(
-                            appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
-                    for (int j=0; j<appInfo.requestedPermissions.length; j++) {
-                        if (appInfo.requestedPermissionsFlags != null) {
-                            if ((appInfo.requestedPermissionsFlags[j]
-                                    & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0) {
-                                break;
-                            }
-                        }
-                        for (int k=0; k<tpl.perms.length; k++) {
-                            if (tpl.perms[k].equals(appInfo.requestedPermissions[j])) {
-                                AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
-                                        tpl.permOps[k], 0, 0);
-                                dummyOps.add(opEntry);
-                                addOp(entries, pkgOps, appEntry, opEntry);
-                            }
-                        }
+        } else {
+            String[] permsArray = new String[perms.size()];
+            perms.toArray(permsArray);
+            apps = mPm.getPackagesHoldingPermissions(permsArray, 0);
+        }
+        for (int i=0; i<apps.size(); i++) {
+            PackageInfo appInfo = apps.get(i);
+            AppEntry appEntry = getAppEntry(context, appEntries, appInfo.packageName,
+                    appInfo.applicationInfo);
+            if (appEntry == null) {
+                continue;
+            }
+            List<AppOpsManager.OpEntry> dummyOps = null;
+            AppOpsManager.PackageOps pkgOps = null;
+            for (int j=0; j<appInfo.requestedPermissions.length; j++) {
+                if (appInfo.requestedPermissionsFlags != null) {
+                    if ((appInfo.requestedPermissionsFlags[j]
+                            & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0) {
+                        if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm "
+                                + appInfo.requestedPermissions[j] + " not granted; skipping");
+                        break;
                     }
+                }
+                if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + ": requested perm "
+                        + appInfo.requestedPermissions[j]);
+                for (int k=0; k<perms.size(); k++) {
+                    if (!perms.get(k).equals(appInfo.requestedPermissions[j])) {
+                        continue;
+                    }
+                    if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm " + perms.get(k)
+                            + " has op " + permOps.get(k) + ": " + appEntry.hasOp(permOps.get(k)));
+                    if (appEntry.hasOp(permOps.get(k))) {
+                        continue;
+                    }
+                    if (dummyOps == null) {
+                        dummyOps = new ArrayList<AppOpsManager.OpEntry>();
+                        pkgOps = new AppOpsManager.PackageOps(
+                                appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
+
+                    }
+                    AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
+                            permOps.get(k), AppOpsManager.MODE_ALLOWED, 0, 0, 0);
+                    dummyOps.add(opEntry);
+                    addOp(entries, pkgOps, appEntry, opEntry);
                 }
             }
         }
@@ -401,4 +448,22 @@ public class AppOpsState {
         // Done!
         return entries;
     }
+
+    public CharSequence getLabelText(AppOpsManager.OpEntry op) {
+        return mOpNames[op.getOp()];
+    }
+
+    public CharSequence getTimeText(AppOpsManager.OpEntry op) {
+        if (op.isRunning()) {
+            return mContext.getResources().getText(R.string.app_ops_running);
+        }
+        if (op.getTime() > 0) {
+            return DateUtils.getRelativeTimeSpanString(op.getTime(),
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS,
+                    DateUtils.FORMAT_ABBREV_RELATIVE);
+        }
+        return mContext.getResources().getText(R.string.app_ops_never_used);
+    }
+
 }
