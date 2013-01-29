@@ -67,17 +67,6 @@
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"/>
 
-        <!-- We want a dialog with no title, so use an empty string to avoid a fall back to the preference title. -->
-        <com.android.settings.AccessibilityEnableScriptInjectionPreference
-                android:key="toggle_script_injection_preference"
-                android:title="@string/accessibility_toggle_script_injection_preference_title"
-                android:dialogTitle=""
-                android:dialogIcon="@android:drawable/ic_dialog_alert"
-                android:dialogMessage="@string/accessibility_script_injection_security_warning_summary"
-                android:positiveButtonText="@string/accessibility_script_injection_button_allow"
-                android:negativeButtonText="@string/accessibility_script_injection_button_disallow"
-                android:persistent="false"/>
-
     </PreferenceCategory>
 
 </PreferenceScreen>
