@@ -1115,6 +1115,8 @@ public class ManageApplications extends Fragment implements
     public void onClick(DialogInterface dialog, int which) {
         if (mResetDialog == dialog) {
             final PackageManager pm = getActivity().getPackageManager();
+            final IPackageManager mIPm = IPackageManager.Stub.asInterface(
+                            ServiceManager.getService("package"));
             final INotificationManager nm = INotificationManager.Stub.asInterface(
                     ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             final NetworkPolicyManager npm = NetworkPolicyManager.from(getActivity());
@@ -1130,8 +1132,6 @@ public class ManageApplications extends Fragment implements
                             nm.setNotificationsEnabledForPackage(app.packageName, true);
                         } catch (android.os.RemoteException ex) {
                         }
-                        if (DEBUG) Log.v(TAG, "Clearing preferred: " + app.packageName);
-                        pm.clearPackagePreferredActivities(app.packageName);
                         if (!app.enabled) {
                             if (DEBUG) Log.v(TAG, "Enabling app: " + app.packageName);
                             if (pm.getApplicationEnabledSetting(app.packageName)
@@ -1142,16 +1142,9 @@ public class ManageApplications extends Fragment implements
                             }
                         }
                     }
-                    // We should have cleared all of the preferred apps above;
-                    // just in case some may be lingering, retrieve whatever is
-                    // still set and remove it.
-                    ArrayList<IntentFilter> filters = new ArrayList<IntentFilter>();
-                    ArrayList<ComponentName> prefActivities = new ArrayList<ComponentName>();
-                    pm.getPreferredActivities(filters, prefActivities, null);
-                    for (int i=0; i<prefActivities.size(); i++) {
-                        if (DEBUG) Log.v(TAG, "Clearing preferred: "
-                                + prefActivities.get(i).getPackageName());
-                        pm.clearPackagePreferredActivities(prefActivities.get(i).getPackageName());
+                    try {
+                        mIPm.resetPreferredActivities(UserHandle.myUserId());
+                    } catch (RemoteException e) {
                     }
                     final int[] restrictedUids = npm.getUidsWithPolicy(
                             POLICY_REJECT_METERED_BACKGROUND);
