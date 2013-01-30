@@ -114,6 +114,9 @@
     <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
     <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -170,9 +173,11 @@
     <item msgid="7182812872984827322">"TTLS"</item>
     <item msgid="2318274046749286642">"ПАРОЛА"</item>
   </string-array>
-    <!-- no translation found for wifi_peap_phase2_entries:0 (2577747762745812488) -->
-    <!-- no translation found for wifi_peap_phase2_entries:1 (937786527870979616) -->
-    <!-- no translation found for wifi_peap_phase2_entries:2 (5302613883318643629) -->
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"Нищо"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
   <string-array name="wifi_phase2_entries">
     <item msgid="1818786254010764570">"Няма"</item>
     <item msgid="6189918678874123056">"PAP"</item>
@@ -219,12 +224,19 @@
     <item msgid="255608127647030286">"Лични"</item>
     <item msgid="4731988992916537734">"Устройство"</item>
   </string-array>
-    <!-- no translation found for app_ops_names:0 (1042289750411525731) -->
-    <!-- no translation found for app_ops_names:1 (1703021487345935608) -->
-    <!-- no translation found for app_ops_names:4 (1502480489983592093) -->
-    <!-- no translation found for app_ops_names:5 (4747300568727144811) -->
-    <!-- no translation found for app_ops_names:6 (1013736950661424537) -->
-    <!-- no translation found for app_ops_names:7 (7387037304984751800) -->
+  <string-array name="app_ops_names">
+    <item msgid="1042289750411525731">"Местоположение с ниска точност"</item>
+    <item msgid="1703021487345935608">"Местоположение с висока точност"</item>
+    <item msgid="7157407322691884471">"GPS"</item>
+    <item msgid="3426584694703459115">"Вибриране"</item>
+    <item msgid="1502480489983592093">"Четене на контактите"</item>
+    <item msgid="4747300568727144811">"Запис на контактите"</item>
+    <item msgid="1013736950661424537">"Четене на обажданията"</item>
+    <item msgid="7387037304984751800">"Запис на обажданията"</item>
+    <item msgid="7345216951370139616">"Четене на календара"</item>
+    <item msgid="876900874062261254">"Запис на календара"</item>
+    <item msgid="8909522250868841456">"Сканиране за Wi-Fi"</item>
+  </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Кратко"</item>
     <item msgid="2560532955514699713">"Средно"</item>

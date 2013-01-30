@@ -74,18 +74,18 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"Носій USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"Карта SD"</string>
-    <string name="battery_info_status_label" msgid="8109155295509700309">"Стан батареї:"</string>
+    <string name="battery_info_status_label" msgid="8109155295509700309">"Стан акумулятора:"</string>
     <string name="battery_info_power_label" msgid="7465140230991349382">"Роз\'єм живл.:"</string>
-    <string name="battery_info_scale_label" msgid="3649763192389778437">"Заряд батареї:"</string>
-    <string name="battery_info_level_label" msgid="8706526709307788737">"Рівень батареї:"</string>
-    <string name="battery_info_health_label" msgid="6416051542741886958">"Працездат. бат.:"</string>
-    <string name="battery_info_technology_label" msgid="788304533220748681">"Технологія батареї:"</string>
-    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Напруга батареї:"</string>
+    <string name="battery_info_scale_label" msgid="3649763192389778437">"Заряд акумулятора:"</string>
+    <string name="battery_info_level_label" msgid="8706526709307788737">"Рівень заряду:"</string>
+    <string name="battery_info_health_label" msgid="6416051542741886958">"Рівень заряду:"</string>
+    <string name="battery_info_technology_label" msgid="788304533220748681">"Технологія акумулятора:"</string>
+    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Напруга акумулятора:"</string>
     <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
-    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Температура батареї:"</string>
+    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Температура акумулятора:"</string>
     <string name="battery_info_temperature_units" msgid="9098950587249987550">"° C"</string>
     <string name="battery_info_uptime" msgid="5548545143573527992">"Час від завантаж.:"</string>
-    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Час активності батареї:"</string>
+    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Час роботи акумулятора:"</string>
     <string name="battery_info_awake_plugged" msgid="176716874713478188">"Час активності при зарядж.:"</string>
     <string name="battery_info_screen_on" msgid="376277447175613889">"Час АКТИВ. екрана:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Невідомо"</string>
@@ -254,7 +254,7 @@
     <string name="language_picker_title" msgid="5349877711342869319">"Мова"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Вибрати дію"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Інф-я пристрою"</string>
-    <string name="battery_info_label" msgid="4132685016148679403">"Інф-я батареї"</string>
+    <string name="battery_info_label" msgid="4132685016148679403">"Інформація про акумулятор"</string>
     <string name="display_label" msgid="8074070940506840792">"Екран"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Інф. про прис."</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Інф-я тел-ну"</string>
@@ -324,7 +324,7 @@
     <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"Ви можете шифрувати свої облікові записи, налаштування, завантажені програми та їх дані, медіа-файли й інші файли. Щойно ви зашифруєте свій телефон, потрібно буде вводити цифровий PIN-код чи пароль для розшифрування телефону щоразу під час його ввімкнення. Ви зможете скасувати шифрування, лише відновивши заводські налаштування, що призведе до видалення всіх ваших даних."\n\n"Шифрування триває не менше години. Перш ніж розпочати процес шифрування, переконайтеся, що акумулятор заряджено. Телефон має перебувати в підключеному стані до завершення шифрування. Переривання процесу шифрування призведе до втрати частини чи всіх ваших даних."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Шифрувати пристрій"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Шифрувати телефон"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Зарядіть батарею й повторіть спробу."</string>
+    <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Зарядіть акумулятор і повторіть спробу."</string>
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Підключіть зарядний пристрій і повторіть спробу."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Потрібно ввести PIN-код або пароль для блокування екрана"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Щоб почати шифрування, потрібно встановити PIN-код або пароль для блокування екрана."</string>
@@ -543,7 +543,7 @@
     <string name="wifi_setting_sleep_policy_title" msgid="9107237003911220057">"Не від’єднуватися від мережі WiFi у режимі сну"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Виникла проблема зі зміною налаштувань"</string>
     <string name="wifi_suspend_optimizations" msgid="387215679583759376">"Оптимізація Wi-Fi"</string>
-    <string name="wifi_suspend_optimizations_summary" msgid="7774946457510541054">"Мінімізувати використання заряду акумулятора, коли ввімкнено Wi-Fi"</string>
+    <string name="wifi_suspend_optimizations_summary" msgid="7774946457510541054">"Заощаджувати споживання заряду акумулятора, коли ввімкнено Wi-Fi"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Додати мережу"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi мережі"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
@@ -770,7 +770,7 @@
     <string name="device_info_not_available" msgid="8062521887156825182">"Недоступний"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Стан"</string>
     <string name="device_status" msgid="607405385799807324">"Стан"</string>
-    <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Стан батареї, мережі та інша інформація"</string>
+    <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Стан акумулятора, мережі та інша інформація"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Номер телефону, сигнал тощо"</string>
     <string name="storage_settings" msgid="4211799979832404953">"Пам\'ять"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Налаштування пам’яті"</string>
@@ -850,8 +850,8 @@
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Дозволяє передавати фото за допомогою програмного забезпечення камери, а також передавати будь-які файли на комп’ютери, які не підтримують MTP"</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Установити інструменти передавання файлів"</string>
     <string name="storage_other_users" msgid="808708845102611856">"Інші користувачі"</string>
-    <string name="battery_status_title" msgid="9159414319574976203">"Стан батареї"</string>
-    <string name="battery_level_title" msgid="2965679202786873272">"Рівень батареї"</string>
+    <string name="battery_status_title" msgid="9159414319574976203">"Стан акумулятора"</string>
+    <string name="battery_level_title" msgid="2965679202786873272">"Рівень заряду акумулятора"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
     <string name="apn_edit" msgid="1354715499708424718">"Редаг. точку доступу"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"Не встановлено"</string>
@@ -1144,6 +1144,7 @@
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Якщо вимкнути сповіщення для цієї програми, можна пропустити важливі повідомлення й оновлення."</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Операції програми"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Виконується"</string>
+    <string name="app_ops_never_used" msgid="9114608022906887802">"(Ніколи не використовується)"</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Використання пам\'яті"</string>
     <string name="storageuse_settings_summary" msgid="3748286507165697834">"Переглянути пам’ять, яку використовують програми"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Запущені служби"</string>
@@ -1232,7 +1233,7 @@
     <string name="testing" msgid="6584352735303604146">"Тестування"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Інф-ція про пристрій"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Інф-я тел-ну"</string>
-    <string name="testing_battery_info" msgid="3497865525976497848">"Інф-я батареї"</string>
+    <string name="testing_battery_info" msgid="3497865525976497848">"Інформація про акумулятор"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Швидкий запуск"</string>
     <string name="quick_launch_summary" msgid="8101133819188001190">"Встановлення комбінацій клавіш для запуску програм"</string>
     <string name="quick_launch_assign_application" msgid="6240064079456617501">"Призначити програму"</string>
@@ -1336,13 +1337,13 @@
     <string name="accessibility_script_injection_security_warning_summary" msgid="7706858873495386310">"Дозволити програмам установлювати сценарії від Google, які зроблять веб-вміст більш доступним?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Немає опису."</string>
     <string name="settings_button" msgid="3006713718908152930">"Налаштування"</string>
-    <string name="power_usage_summary_title" msgid="7190304207330319919">"Батарея"</string>
-    <string name="power_usage_summary" msgid="7237084831082848168">"На що було використано батарею"</string>
-    <string name="power_usage_not_available" msgid="3214000535532434353">"Статист. викор. батареї недост."</string>
+    <string name="power_usage_summary_title" msgid="7190304207330319919">"Акумулятор"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"На що споживається заряд акумулятора"</string>
+    <string name="power_usage_not_available" msgid="3214000535532434353">"Дані використання акумулятора недоступні"</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
-    <string name="battery_since_unplugged" msgid="338073389740738437">"Викор. батареї з часу відключ."</string>
-    <string name="battery_since_reset" msgid="7464546661121187045">"Викор. бат. з часу скид."</string>
-    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> від батареї"</string>
+    <string name="battery_since_unplugged" msgid="338073389740738437">"Споживання акумулятора з часу відключення"</string>
+    <string name="battery_since_reset" msgid="7464546661121187045">"Споживання акумулятора з моменту перезавантаження"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> від акумулятора"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> з часу відключ."</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"Заряджається"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Екран увімкнено"</string>
@@ -1387,23 +1388,23 @@
     <string name="battery_action_display" msgid="7338551244519110831">"Налаштування екрана"</string>
     <string name="battery_action_wifi" msgid="2272741639606146903">"Налашт-ння Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Налашт-ня Bluetooth"</string>
-    <string name="battery_desc_voice" msgid="8980322055722959211">"Викор. бат. голос. дзвінками"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Використ. батареї в режимі очікув."</string>
-    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Викор. батареї в режимі очікув."</string>
-    <string name="battery_desc_radio" msgid="5479196477223185367">"Викор. батареї моб-ним радіо"</string>
+    <string name="battery_desc_voice" msgid="8980322055722959211">"Споживання заряду акумулятора для голосових дзвінків"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Споживання заряду акумулятора в режимі очікування"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Споживання заряду акумулятора в режимі очікування"</string>
+    <string name="battery_desc_radio" msgid="5479196477223185367">"Споживання заряду акумулятора для стільникової мережі"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Переключ. в реж. польоту для збереж. живл. в обл. без мобіл. покриття"</string>
-    <string name="battery_desc_display" msgid="5432795282958076557">"Викор. батареї екраном і підсвічув."</string>
+    <string name="battery_desc_display" msgid="5432795282958076557">"Використання акумулятора для підсвічування екрана"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Зменште яскравість і/чи час очікування екрана"</string>
-    <string name="battery_desc_wifi" msgid="1702486494565080431">"Викор. батареї Wi-Fi"</string>
+    <string name="battery_desc_wifi" msgid="1702486494565080431">"Використання акумулятора модулем Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="2085605314976704287">"Вимкніть Wi-Fi, якщо з’єднання не використовується чи не доступне"</string>
-    <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Як Bluetooth використовує батарею"</string>
+    <string name="battery_desc_bluetooth" msgid="8069070756186680367">"Як Bluetooth використовує акумулятор"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="1942935021750897422">"Вимкніть Bluetooth, якщо він не використовується"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Спробуйте з’єднатися з іншим пристроєм Bluetooth"</string>
-    <string name="battery_desc_apps" msgid="8530418792605735226">"Як програма використовує батарею"</string>
+    <string name="battery_desc_apps" msgid="8530418792605735226">"Як програма використовує акумулятор"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Зупиніть або видаліть цю програму"</string>
     <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Контролювати GPS вручну, щоб запобігти її використанню програмою"</string>
-    <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Програма може пропонувати налаштування, щоб зменшити використання батареї"</string>
-    <string name="battery_desc_users" msgid="7682989161885027823">"Батарея користувача"</string>
+    <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"У програмі можуть бути налаштування режиму енергозбереження"</string>
+    <string name="battery_desc_users" msgid="7682989161885027823">"Використання акумулятора користувачем"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> з часу відключ."</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"З часу ост. відключ. для <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Заг. використ."</string>
@@ -1573,7 +1574,7 @@
     <string name="background_data" msgid="5779592891375473817">"Фонові дані"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Програми можуть будь-коли синхроніз., надсил. й отрим. дані"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Вимкн. фонові дані?"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"Вимкнення фонових даних продовжує час роботи батареї та зменшує використання даних. Деякі програми все ще можуть використовувати передавання даних у фоновому режимі."</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"Вимкнення фонових даних заощаджує споживання акумулятора та зменшує використання даних. Деякі програми все одно можуть використовувати передавання фонових даних."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Автомат. синхронізув. дані програми"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Синхроніз. ВВІМКНЕНО"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхроніз. ВИМКНЕНО"</string>
