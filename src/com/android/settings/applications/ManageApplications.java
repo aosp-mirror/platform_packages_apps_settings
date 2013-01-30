@@ -1129,7 +1129,7 @@ public class ManageApplications extends Fragment implements
                         ApplicationInfo app = apps.get(i);
                         try {
                             if (DEBUG) Log.v(TAG, "Enabling notifications: " + app.packageName);
-                            nm.setNotificationsEnabledForPackage(app.packageName, true);
+                            nm.setNotificationsEnabledForPackage(app.packageName, app.uid, true);
                         } catch (android.os.RemoteException ex) {
                         }
                         if (!app.enabled) {

@@ -107,7 +107,8 @@ public class AppOpsState {
             );
 
     public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
-            new int[] { AppOpsManager.OP_VIBRATE }
+            new int[] { AppOpsManager.OP_VIBRATE,
+                        AppOpsManager.OP_POST_NOTIFICATION }
             );
 
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
