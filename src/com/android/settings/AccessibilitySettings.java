@@ -108,8 +108,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_speak_password_preference";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
             "select_long_press_timeout_preference";
-    private static final String TOGGLE_SCRIPT_INJECTION_PREFERENCE =
-            "toggle_script_injection_preference";
     private static final String ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN =
             "enable_global_gesture_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -179,7 +177,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mToggleLockScreenRotationPreference;
     private CheckBoxPreference mToggleSpeakPasswordPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
-    private AccessibilityEnableScriptInjectionPreference mToggleScriptInjectionPreference;
     private Preference mNoServicesMessagePreference;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
     private PreferenceScreen mGlobalGesturePreferenceScreen;
@@ -344,10 +341,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
         }
 
-        // Script injection.
-        mToggleScriptInjectionPreference = (AccessibilityEnableScriptInjectionPreference)
-                findPreference(TOGGLE_SCRIPT_INJECTION_PREFERENCE);
-
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
@@ -503,11 +496,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         String value = String.valueOf(longPressTimeout);
         mSelectLongPressTimeoutPreference.setValue(value);
         mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValuetoTitleMap.get(value));
-
-        // Script injection.
-        final boolean scriptInjectionAllowed = (Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0) == 1);
-        mToggleScriptInjectionPreference.setInjectionAllowed(scriptInjectionAllowed);
 
         // Screen magnification.
         final boolean magnificationEnabled = Settings.Secure.getInt(getContentResolver(),
