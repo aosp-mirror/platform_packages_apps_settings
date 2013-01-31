@@ -359,7 +359,7 @@ public class AppOpsState {
         ArrayList<Integer> permOps = new ArrayList<Integer>();
         for (int i=0; i<tpl.ops.length; i++) {
             String perm = AppOpsManager.opToPermission(tpl.ops[i]);
-            if (!perms.contains(perm)) {
+            if (perm != null && !perms.contains(perm)) {
                 perms.add(perm);
                 permOps.add(tpl.ops[i]);
             }
@@ -408,36 +408,38 @@ public class AppOpsState {
             }
             List<AppOpsManager.OpEntry> dummyOps = null;
             AppOpsManager.PackageOps pkgOps = null;
-            for (int j=0; j<appInfo.requestedPermissions.length; j++) {
-                if (appInfo.requestedPermissionsFlags != null) {
-                    if ((appInfo.requestedPermissionsFlags[j]
-                            & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0) {
-                        if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm "
-                                + appInfo.requestedPermissions[j] + " not granted; skipping");
-                        break;
+            if (appInfo.requestedPermissions != null) {
+                for (int j=0; j<appInfo.requestedPermissions.length; j++) {
+                    if (appInfo.requestedPermissionsFlags != null) {
+                        if ((appInfo.requestedPermissionsFlags[j]
+                                & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0) {
+                            if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm "
+                                    + appInfo.requestedPermissions[j] + " not granted; skipping");
+                            break;
+                        }
                     }
-                }
-                if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + ": requested perm "
-                        + appInfo.requestedPermissions[j]);
-                for (int k=0; k<perms.size(); k++) {
-                    if (!perms.get(k).equals(appInfo.requestedPermissions[j])) {
-                        continue;
-                    }
-                    if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm " + perms.get(k)
-                            + " has op " + permOps.get(k) + ": " + appEntry.hasOp(permOps.get(k)));
-                    if (appEntry.hasOp(permOps.get(k))) {
-                        continue;
-                    }
-                    if (dummyOps == null) {
-                        dummyOps = new ArrayList<AppOpsManager.OpEntry>();
-                        pkgOps = new AppOpsManager.PackageOps(
-                                appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
+                    if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + ": requested perm "
+                            + appInfo.requestedPermissions[j]);
+                    for (int k=0; k<perms.size(); k++) {
+                        if (!perms.get(k).equals(appInfo.requestedPermissions[j])) {
+                            continue;
+                        }
+                        if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm " + perms.get(k)
+                                + " has op " + permOps.get(k) + ": " + appEntry.hasOp(permOps.get(k)));
+                        if (appEntry.hasOp(permOps.get(k))) {
+                            continue;
+                        }
+                        if (dummyOps == null) {
+                            dummyOps = new ArrayList<AppOpsManager.OpEntry>();
+                            pkgOps = new AppOpsManager.PackageOps(
+                                    appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
 
+                        }
+                        AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
+                                permOps.get(k), AppOpsManager.MODE_ALLOWED, 0, 0, 0);
+                        dummyOps.add(opEntry);
+                        addOp(entries, pkgOps, appEntry, opEntry);
                     }
-                    AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
-                            permOps.get(k), AppOpsManager.MODE_ALLOWED, 0, 0, 0);
-                    dummyOps.add(opEntry);
-                    addOp(entries, pkgOps, appEntry, opEntry);
                 }
             }
         }
