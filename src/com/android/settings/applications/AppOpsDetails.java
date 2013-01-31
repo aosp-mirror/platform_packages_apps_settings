@@ -117,39 +117,41 @@ public class AppOpsDetails extends Fragment {
             List<AppOpsState.AppOpEntry> entries = mState.buildState(tpl,
                     mPackageInfo.applicationInfo.uid, mPackageInfo.packageName);
             for (final AppOpsState.AppOpEntry entry : entries) {
-                for (int i=0; i<entry.getNumOpEntry(); i++) {
-                    final AppOpsManager.OpEntry op = entry.getOpEntry(i);
-                    final View view = mInflater.inflate(R.layout.app_ops_details_item,
-                            mOperationsSection, false);
-                    mOperationsSection.addView(view);
-                    String perm = AppOpsManager.opToPermission(op.getOp());
-                    if (perm != null) {
-                        try {
-                            PermissionInfo pi = mPm.getPermissionInfo(perm, 0);
-                            if (pi.group != null && !lastPermGroup.equals(pi.group)) {
-                                lastPermGroup = pi.group;
-                                PermissionGroupInfo pgi = mPm.getPermissionGroupInfo(pi.group, 0);
-                                if (pgi.icon != 0) {
-                                    ((ImageView)view.findViewById(R.id.op_icon)).setImageDrawable(
-                                            pgi.loadIcon(mPm));
-                                }
+                final AppOpsManager.OpEntry firstOp = entry.getOpEntry(0);
+                final View view = mInflater.inflate(R.layout.app_ops_details_item,
+                        mOperationsSection, false);
+                mOperationsSection.addView(view);
+                String perm = AppOpsManager.opToPermission(firstOp.getOp());
+                if (perm != null) {
+                    try {
+                        PermissionInfo pi = mPm.getPermissionInfo(perm, 0);
+                        if (pi.group != null && !lastPermGroup.equals(pi.group)) {
+                            lastPermGroup = pi.group;
+                            PermissionGroupInfo pgi = mPm.getPermissionGroupInfo(pi.group, 0);
+                            if (pgi.icon != 0) {
+                                ((ImageView)view.findViewById(R.id.op_icon)).setImageDrawable(
+                                        pgi.loadIcon(mPm));
                             }
-                        } catch (NameNotFoundException e) {
                         }
+                    } catch (NameNotFoundException e) {
                     }
-                    ((TextView)view.findViewById(R.id.op_name)).setText(mState.getLabelText(op));
-                    ((TextView)view.findViewById(R.id.op_time)).setText(mState.getTimeText(op));
-                    Switch sw = (Switch)view.findViewById(R.id.switchWidget);
-                    sw.setChecked(op.getMode() == AppOpsManager.MODE_ALLOWED);
-                    sw.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            mAppOps.setMode(op.getOp(), entry.getPackageOps().getUid(),
-                                    entry.getPackageOps().getPackageName(), isChecked
-                                    ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
-                        }
-                    });
                 }
+                ((TextView)view.findViewById(R.id.op_name)).setText(
+                        entry.getBriefLabelText(mState));
+                ((TextView)view.findViewById(R.id.op_time)).setText(
+                        entry.getTimeText(res));
+                Switch sw = (Switch)view.findViewById(R.id.switchWidget);
+                final int switchOp = AppOpsManager.opToSwitch(firstOp.getOp());
+                sw.setChecked(mAppOps.checkOp(switchOp, entry.getPackageOps().getUid(),
+                        entry.getPackageOps().getPackageName()) == AppOpsManager.MODE_ALLOWED);
+                sw.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        mAppOps.setMode(switchOp, entry.getPackageOps().getUid(),
+                                entry.getPackageOps().getPackageName(), isChecked
+                                ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
+                    }
+                });
             }
         }
 

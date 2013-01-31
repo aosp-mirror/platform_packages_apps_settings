@@ -304,10 +304,16 @@ public class AppOpsCategory extends ListFragment implements
 
         // Start out with a progress indicator.
         setListShown(false);
+    }
 
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Prepare the loader.  We don't monitor for changes while stopped,
+        // so want to re-start the loader (retrieving a new data set) each
+        // time we start.
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     // utility method used to start sub activity

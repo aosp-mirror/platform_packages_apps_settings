@@ -60,13 +60,16 @@ public class AppOpsState {
 
     public static class OpsTemplate implements Parcelable {
         public final int[] ops;
+        public final boolean[] showPerms;
 
-        public OpsTemplate(int[] _ops) {
+        public OpsTemplate(int[] _ops, boolean[] _showPerms) {
             ops = _ops;
+            showPerms = _showPerms;
         }
 
         OpsTemplate(Parcel src) {
             ops = src.createIntArray();
+            showPerms = src.createBooleanArray();
         }
 
         @Override
@@ -77,6 +80,7 @@ public class AppOpsState {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeIntArray(ops);
+            dest.writeBooleanArray(showPerms);
         }
 
         public static final Creator<OpsTemplate> CREATOR = new Creator<OpsTemplate>() {
@@ -94,7 +98,13 @@ public class AppOpsState {
             new int[] { AppOpsManager.OP_COARSE_LOCATION,
                     AppOpsManager.OP_FINE_LOCATION,
                     AppOpsManager.OP_GPS,
-                    AppOpsManager.OP_WIFI_SCAN }
+                    AppOpsManager.OP_WIFI_SCAN,
+                    AppOpsManager.OP_NEIGHBORING_CELLS },
+            new boolean[] { true,
+                    true,
+                    false,
+                    false,
+                    false }
             );
 
     public static final OpsTemplate PERSONAL_TEMPLATE = new OpsTemplate(
@@ -103,12 +113,22 @@ public class AppOpsState {
                     AppOpsManager.OP_READ_CALL_LOG,
                     AppOpsManager.OP_WRITE_CALL_LOG,
                     AppOpsManager.OP_READ_CALENDAR,
-                    AppOpsManager.OP_WRITE_CALENDAR }
+                    AppOpsManager.OP_WRITE_CALENDAR },
+            new boolean[] { true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true }
             );
 
     public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
             new int[] { AppOpsManager.OP_VIBRATE,
-                        AppOpsManager.OP_POST_NOTIFICATION }
+                    AppOpsManager.OP_POST_NOTIFICATION,
+                    AppOpsManager.OP_CALL_PHONE },
+            new boolean[] { false,
+                    false,
+                    true }
             );
 
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
@@ -124,6 +144,8 @@ public class AppOpsState {
         private final File mApkFile;
         private final SparseArray<AppOpsManager.OpEntry> mOps
                 = new SparseArray<AppOpsManager.OpEntry>();
+        private final SparseArray<AppOpEntry> mOpSwitches
+                = new SparseArray<AppOpEntry>();
         private String mLabel;
         private Drawable mIcon;
         private boolean mMounted;
@@ -134,12 +156,17 @@ public class AppOpsState {
             mApkFile = new File(info.sourceDir);
         }
 
-        public void addOp(AppOpsManager.OpEntry op) {
+        public void addOp(AppOpEntry entry, AppOpsManager.OpEntry op) {
             mOps.put(op.getOp(), op);
+            mOpSwitches.put(AppOpsManager.opToSwitch(op.getOp()), entry);
         }
 
         public boolean hasOp(int op) {
             return mOps.indexOfKey(op) >= 0;
+        }
+
+        public AppOpEntry getOpSwitch(int op) {
+            return mOpSwitches.get(AppOpsManager.opToSwitch(op));
         }
 
         public ApplicationInfo getApplicationInfo() {
@@ -199,32 +226,45 @@ public class AppOpsState {
         private final AppOpsManager.PackageOps mPkgOps;
         private final ArrayList<AppOpsManager.OpEntry> mOps
                 = new ArrayList<AppOpsManager.OpEntry>();
+        private final ArrayList<AppOpsManager.OpEntry> mBriefOps
+                = new ArrayList<AppOpsManager.OpEntry>();
         private final AppEntry mApp;
 
-        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app) {
+        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app,
+                boolean brief) {
             mPkgOps = pkg;
             mApp = app;
-            mApp.addOp(op);
+            mApp.addOp(this, op);
             mOps.add(op);
+            if (brief) {
+                mBriefOps.add(op);
+            }
         }
 
-        public void addOp(AppOpsManager.OpEntry op) {
-            mApp.addOp(op);
-            for (int i=0; i<mOps.size(); i++) {
-                AppOpsManager.OpEntry pos = mOps.get(i);
+        private static void addOp(ArrayList<AppOpsManager.OpEntry> list, AppOpsManager.OpEntry op) {
+            for (int i=0; i<list.size(); i++) {
+                AppOpsManager.OpEntry pos = list.get(i);
                 if (pos.isRunning() != op.isRunning()) {
                     if (op.isRunning()) {
-                        mOps.add(i, op);
+                        list.add(i, op);
                         return;
                     }
                     continue;
                 }
                 if (pos.getTime() < op.getTime()) {
-                    mOps.add(i, op);
+                    list.add(i, op);
                     return;
                 }
             }
-            mOps.add(op);
+            list.add(op);
+        }
+
+        public void addOp(AppOpsManager.OpEntry op, boolean brief) {
+            mApp.addOp(this, op);
+            addOp(mOps, op);
+            if (brief) {
+                addOp(mBriefOps, op);
+            }
         }
 
         public AppEntry getAppEntry() {
@@ -243,18 +283,31 @@ public class AppOpsState {
             return mOps.get(pos);
         }
 
-        public CharSequence getLabelText(AppOpsState state) {
-            if (getNumOpEntry() == 1) {
-                return state.mOpNames[getOpEntry(0).getOp()];
+        private CharSequence getLabelText(ArrayList<AppOpsManager.OpEntry> ops,
+                AppOpsState state) {
+            if (ops.size() == 1) {
+                return state.mOpNames[ops.get(0).getOp()];
             } else {
                 StringBuilder builder = new StringBuilder();
-                for (int i=0; i<getNumOpEntry(); i++) {
+                for (int i=0; i<ops.size(); i++) {
                     if (i > 0) {
                         builder.append(", ");
                     }
-                    builder.append(state.mOpNames[getOpEntry(i).getOp()]);
+                    builder.append(state.mOpNames[ops.get(i).getOp()]);
                 }
                 return builder.toString();
+            }
+        }
+
+        public CharSequence getLabelText(AppOpsState state) {
+            return getLabelText(mOps, state);
+        }
+
+        public CharSequence getBriefLabelText(AppOpsState state) {
+            if (mBriefOps.size() > 0) {
+                return getLabelText(mBriefOps, state);
+            } else {
+                return getLabelText(mOps, state);
             }
         }
 
@@ -305,8 +358,8 @@ public class AppOpsState {
     };
 
     private void addOp(List<AppOpEntry> entries, AppOpsManager.PackageOps pkgOps,
-            AppEntry appEntry, AppOpsManager.OpEntry opEntry) {
-        if (entries.size() > 0) {
+            AppEntry appEntry, AppOpsManager.OpEntry opEntry, boolean brief, boolean allowMerge) {
+        if (allowMerge && entries.size() > 0) {
             AppOpEntry last = entries.get(entries.size()-1);
             if (last.getAppEntry() == appEntry) {
                 boolean lastExe = last.getTime() != 0;
@@ -314,12 +367,17 @@ public class AppOpsState {
                 if (lastExe == entryExe) {
                     if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
                             + pkgOps.getPackageName() + ": append to " + last);
-                    last.addOp(opEntry);
+                    last.addOp(opEntry, brief);
                     return;
                 }
             }
         }
-        AppOpEntry entry = new AppOpEntry(pkgOps, opEntry, appEntry);
+        AppOpEntry entry = appEntry.getOpSwitch(opEntry.getOp());
+        if (entry != null) {
+            entry.addOp(opEntry, brief);
+            return;
+        }
+        entry = new AppOpEntry(pkgOps, opEntry, appEntry, brief);
         if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
                 + pkgOps.getPackageName() + ": making new " + entry);
         entries.add(entry);
@@ -354,15 +412,19 @@ public class AppOpsState {
         final Context context = mContext;
 
         final HashMap<String, AppEntry> appEntries = new HashMap<String, AppEntry>();
-        List<AppOpEntry> entries = new ArrayList<AppOpEntry>();
+        final List<AppOpEntry> entries = new ArrayList<AppOpEntry>();
 
-        ArrayList<String> perms = new ArrayList<String>();
-        ArrayList<Integer> permOps = new ArrayList<Integer>();
+        final ArrayList<String> perms = new ArrayList<String>();
+        final ArrayList<Integer> permOps = new ArrayList<Integer>();
+        final boolean[] brief = new boolean[AppOpsManager._NUM_OP];
         for (int i=0; i<tpl.ops.length; i++) {
-            String perm = AppOpsManager.opToPermission(tpl.ops[i]);
-            if (perm != null && !perms.contains(perm)) {
-                perms.add(perm);
-                permOps.add(tpl.ops[i]);
+            brief[tpl.ops[i]] = tpl.showPerms[i];
+            if (tpl.showPerms[i]) {
+                String perm = AppOpsManager.opToPermission(tpl.ops[i]);
+                if (perm != null && !perms.contains(perm)) {
+                    perms.add(perm);
+                    permOps.add(tpl.ops[i]);
+                }
             }
         }
 
@@ -382,7 +444,8 @@ public class AppOpsState {
                 }
                 for (int j=0; j<pkgOps.getOps().size(); j++) {
                     AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
-                    addOp(entries, pkgOps, appEntry, opEntry);
+                    addOp(entries, pkgOps, appEntry, opEntry, brief[opEntry.getOp()],
+                            packageName == null);
                 }
             }
         }
@@ -439,7 +502,8 @@ public class AppOpsState {
                         AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
                                 permOps.get(k), AppOpsManager.MODE_ALLOWED, 0, 0, 0);
                         dummyOps.add(opEntry);
-                        addOp(entries, pkgOps, appEntry, opEntry);
+                        addOp(entries, pkgOps, appEntry, opEntry, brief[opEntry.getOp()],
+                                packageName == null);
                     }
                 }
             }
