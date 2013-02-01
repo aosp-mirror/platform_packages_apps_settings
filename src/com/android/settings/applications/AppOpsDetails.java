@@ -123,17 +123,19 @@ public class AppOpsDetails extends Fragment {
                             mOperationsSection, false);
                     mOperationsSection.addView(view);
                     String perm = AppOpsManager.opToPermission(op.getOp());
-                    try {
-                        PermissionInfo pi = mPm.getPermissionInfo(perm, 0);
-                        if (pi.group != null && !lastPermGroup.equals(pi.group)) {
-                            lastPermGroup = pi.group;
-                            PermissionGroupInfo pgi = mPm.getPermissionGroupInfo(pi.group, 0);
-                            if (pgi.icon != 0) {
-                                ((ImageView)view.findViewById(R.id.op_icon)).setImageDrawable(
-                                        pgi.loadIcon(mPm));
+                    if (perm != null) {
+                        try {
+                            PermissionInfo pi = mPm.getPermissionInfo(perm, 0);
+                            if (pi.group != null && !lastPermGroup.equals(pi.group)) {
+                                lastPermGroup = pi.group;
+                                PermissionGroupInfo pgi = mPm.getPermissionGroupInfo(pi.group, 0);
+                                if (pgi.icon != 0) {
+                                    ((ImageView)view.findViewById(R.id.op_icon)).setImageDrawable(
+                                            pgi.loadIcon(mPm));
+                                }
                             }
+                        } catch (NameNotFoundException e) {
                         }
-                    } catch (NameNotFoundException e) {
                     }
                     ((TextView)view.findViewById(R.id.op_name)).setText(mState.getLabelText(op));
                     ((TextView)view.findViewById(R.id.op_time)).setText(mState.getTimeText(op));
