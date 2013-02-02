@@ -35,6 +35,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.hardware.usb.IUsbManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
@@ -75,6 +76,7 @@ import java.util.List;
 public class DevelopmentSettings extends PreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
+    private static final String TAG = "DevelopmentSettings";
 
     /**
      * Preference file were development settings prefs are stored.
@@ -87,6 +89,7 @@ public class DevelopmentSettings extends PreferenceFragment
     public static final String PREF_SHOW = "show";
 
     private static final String ENABLE_ADB = "enable_adb";
+    private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
@@ -144,6 +147,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private boolean mDontPokeProperties;
 
     private CheckBoxPreference mEnableAdb;
+    private Preference mClearAdbKeys;
     private Preference mBugreport;
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
@@ -190,6 +194,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private boolean mDialogClicked;
     private Dialog mEnableDialog;
     private Dialog mAdbDialog;
+    private Dialog mAdbKeysDialog;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -203,6 +208,15 @@ public class DevelopmentSettings extends PreferenceFragment
         addPreferencesFromResource(R.xml.development_prefs);
 
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
+        mClearAdbKeys = findPreference(CLEAR_ADB_KEYS);
+        if (!SystemProperties.getBoolean("ro.adb.secure", false)) {
+            PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
+                    findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
+            if (debugDebuggingCategory != null) {
+                debugDebuggingCategory.removePreference(mClearAdbKeys);
+            }
+        }
+
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
@@ -213,6 +227,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
+            disableForUser(mClearAdbKeys);
             disableForUser(mPassword);
         }
 
@@ -987,6 +1002,13 @@ public class DevelopmentSettings extends PreferenceFragment
                 mVerifyAppsOverUsb.setChecked(false);
                 updateBugreportOptions();
             }
+        } else if (preference == mClearAdbKeys) {
+            if (mAdbKeysDialog != null) dismissDialogs();
+            mAdbKeysDialog = new AlertDialog.Builder(getActivity())
+                        .setMessage(R.string.adb_keys_warning_message)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show();
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.BUGREPORT_IN_POWER_MENU, 
@@ -1082,6 +1104,10 @@ public class DevelopmentSettings extends PreferenceFragment
             mAdbDialog.dismiss();
             mAdbDialog = null;
         }
+        if (mAdbKeysDialog != null) {
+            mAdbKeysDialog.dismiss();
+            mAdbKeysDialog = null;
+        }
         if (mEnableDialog != null) {
             mEnableDialog.dismiss();
             mEnableDialog = null;
@@ -1100,6 +1126,16 @@ public class DevelopmentSettings extends PreferenceFragment
             } else {
                 // Reset the toggle
                 mEnableAdb.setChecked(false);
+            }
+        } else if (dialog == mAdbKeysDialog) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                try {
+                    IBinder b = ServiceManager.getService(Context.USB_SERVICE);
+                    IUsbManager service = IUsbManager.Stub.asInterface(b);
+                    service.clearUsbDebuggingKeys();
+                } catch (RemoteException e) {
+                    Log.e(TAG, "Unable to clear adb keys", e);
+                }
             }
         } else if (dialog == mEnableDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
@@ -1160,7 +1196,7 @@ public class DevelopmentSettings extends PreferenceFragment
                         obj.transact(IBinder.SYSPROPS_TRANSACTION, data, null, 0);
                     } catch (RemoteException e) {
                     } catch (Exception e) {
-                        Log.i("DevSettings", "Somone wrote a bad service '" + service
+                        Log.i(TAG, "Somone wrote a bad service '" + service
                                 + "' that doesn't like to be poked: " + e);
                     }
                     data.recycle();
