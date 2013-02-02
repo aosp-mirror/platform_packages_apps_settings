@@ -29,7 +29,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -259,6 +258,17 @@ public class AppOpsCategory extends ListFragment implements
             }
         }
 
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // XXX need to generate real id.
+            return position;
+        }
+
         /**
          * Populate new items in the list.
          */
@@ -275,8 +285,9 @@ public class AppOpsCategory extends ListFragment implements
             ((ImageView)view.findViewById(R.id.app_icon)).setImageDrawable(
                     item.getAppEntry().getIcon());
             ((TextView)view.findViewById(R.id.app_name)).setText(item.getAppEntry().getLabel());
-            ((TextView)view.findViewById(R.id.op_name)).setText(item.getLabelText(mState));
-            ((TextView)view.findViewById(R.id.op_time)).setText(item.getTimeText(mResources));
+            ((TextView)view.findViewById(R.id.op_name)).setText(item.getSummaryText(mState));
+            ((TextView)view.findViewById(R.id.op_time)).setText(
+                    item.getTimeText(mResources, false));
 
             return view;
         }

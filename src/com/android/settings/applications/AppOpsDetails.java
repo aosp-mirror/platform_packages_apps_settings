@@ -137,9 +137,9 @@ public class AppOpsDetails extends Fragment {
                     }
                 }
                 ((TextView)view.findViewById(R.id.op_name)).setText(
-                        entry.getBriefLabelText(mState));
+                        entry.getSwitchText(mState));
                 ((TextView)view.findViewById(R.id.op_time)).setText(
-                        entry.getTimeText(res));
+                        entry.getTimeText(res, true));
                 Switch sw = (Switch)view.findViewById(R.id.switchWidget);
                 final int switchOp = AppOpsManager.opToSwitch(firstOp.getOp());
                 sw.setChecked(mAppOps.checkOp(switchOp, entry.getPackageOps().getUid(),

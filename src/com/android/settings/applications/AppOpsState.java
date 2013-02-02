@@ -47,7 +47,8 @@ public class AppOpsState {
     final Context mContext;
     final AppOpsManager mAppOps;
     final PackageManager mPm;
-    final CharSequence[] mOpNames;
+    final CharSequence[] mOpSummaries;
+    final CharSequence[] mOpLabels;
 
     List<AppOpEntry> mApps;
 
@@ -55,7 +56,8 @@ public class AppOpsState {
         mContext = context;
         mAppOps = (AppOpsManager)context.getSystemService(Context.APP_OPS_SERVICE);
         mPm = context.getPackageManager();
-        mOpNames = context.getResources().getTextArray(R.array.app_ops_names);
+        mOpSummaries = context.getResources().getTextArray(R.array.app_ops_summaries);
+        mOpLabels = context.getResources().getTextArray(R.array.app_ops_labels);
     }
 
     public static class OpsTemplate implements Parcelable {
@@ -226,19 +228,16 @@ public class AppOpsState {
         private final AppOpsManager.PackageOps mPkgOps;
         private final ArrayList<AppOpsManager.OpEntry> mOps
                 = new ArrayList<AppOpsManager.OpEntry>();
-        private final ArrayList<AppOpsManager.OpEntry> mBriefOps
+        private final ArrayList<AppOpsManager.OpEntry> mSwitchOps
                 = new ArrayList<AppOpsManager.OpEntry>();
         private final AppEntry mApp;
 
-        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app,
-                boolean brief) {
+        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app) {
             mPkgOps = pkg;
             mApp = app;
             mApp.addOp(this, op);
             mOps.add(op);
-            if (brief) {
-                mBriefOps.add(op);
-            }
+            mSwitchOps.add(op);
         }
 
         private static void addOp(ArrayList<AppOpsManager.OpEntry> list, AppOpsManager.OpEntry op) {
@@ -259,11 +258,11 @@ public class AppOpsState {
             list.add(op);
         }
 
-        public void addOp(AppOpsManager.OpEntry op, boolean brief) {
+        public void addOp(AppOpsManager.OpEntry op) {
             mApp.addOp(this, op);
             addOp(mOps, op);
-            if (brief) {
-                addOp(mBriefOps, op);
+            if (mApp.getOpSwitch(AppOpsManager.opToSwitch(op.getOp())) == null) {
+                addOp(mSwitchOps, op);
             }
         }
 
@@ -283,35 +282,35 @@ public class AppOpsState {
             return mOps.get(pos);
         }
 
-        private CharSequence getLabelText(ArrayList<AppOpsManager.OpEntry> ops,
-                AppOpsState state) {
+        private CharSequence getCombinedText(ArrayList<AppOpsManager.OpEntry> ops,
+                CharSequence[] items) {
             if (ops.size() == 1) {
-                return state.mOpNames[ops.get(0).getOp()];
+                return items[ops.get(0).getOp()];
             } else {
                 StringBuilder builder = new StringBuilder();
                 for (int i=0; i<ops.size(); i++) {
                     if (i > 0) {
                         builder.append(", ");
                     }
-                    builder.append(state.mOpNames[ops.get(i).getOp()]);
+                    builder.append(items[ops.get(i).getOp()]);
                 }
                 return builder.toString();
             }
         }
 
-        public CharSequence getLabelText(AppOpsState state) {
-            return getLabelText(mOps, state);
+        public CharSequence getSummaryText(AppOpsState state) {
+            return getCombinedText(mOps, state.mOpSummaries);
         }
 
-        public CharSequence getBriefLabelText(AppOpsState state) {
-            if (mBriefOps.size() > 0) {
-                return getLabelText(mBriefOps, state);
+        public CharSequence getSwitchText(AppOpsState state) {
+            if (mSwitchOps.size() > 0) {
+                return getCombinedText(mSwitchOps, state.mOpLabels);
             } else {
-                return getLabelText(mOps, state);
+                return getCombinedText(mOps, state.mOpLabels);
             }
         }
 
-        public CharSequence getTimeText(Resources res) {
+        public CharSequence getTimeText(Resources res, boolean showEmptyText) {
             if (isRunning()) {
                 return res.getText(R.string.app_ops_running);
             }
@@ -321,7 +320,7 @@ public class AppOpsState {
                         DateUtils.MINUTE_IN_MILLIS,
                         DateUtils.FORMAT_ABBREV_RELATIVE);
             }
-            return "";
+            return showEmptyText ? res.getText(R.string.app_ops_never_used) : "";
         }
 
         public boolean isRunning() {
@@ -358,7 +357,7 @@ public class AppOpsState {
     };
 
     private void addOp(List<AppOpEntry> entries, AppOpsManager.PackageOps pkgOps,
-            AppEntry appEntry, AppOpsManager.OpEntry opEntry, boolean brief, boolean allowMerge) {
+            AppEntry appEntry, AppOpsManager.OpEntry opEntry, boolean allowMerge) {
         if (allowMerge && entries.size() > 0) {
             AppOpEntry last = entries.get(entries.size()-1);
             if (last.getAppEntry() == appEntry) {
@@ -367,17 +366,17 @@ public class AppOpsState {
                 if (lastExe == entryExe) {
                     if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
                             + pkgOps.getPackageName() + ": append to " + last);
-                    last.addOp(opEntry, brief);
+                    last.addOp(opEntry);
                     return;
                 }
             }
         }
         AppOpEntry entry = appEntry.getOpSwitch(opEntry.getOp());
         if (entry != null) {
-            entry.addOp(opEntry, brief);
+            entry.addOp(opEntry);
             return;
         }
-        entry = new AppOpEntry(pkgOps, opEntry, appEntry, brief);
+        entry = new AppOpEntry(pkgOps, opEntry, appEntry);
         if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
                 + pkgOps.getPackageName() + ": making new " + entry);
         entries.add(entry);
@@ -416,9 +415,7 @@ public class AppOpsState {
 
         final ArrayList<String> perms = new ArrayList<String>();
         final ArrayList<Integer> permOps = new ArrayList<Integer>();
-        final boolean[] brief = new boolean[AppOpsManager._NUM_OP];
         for (int i=0; i<tpl.ops.length; i++) {
-            brief[tpl.ops[i]] = tpl.showPerms[i];
             if (tpl.showPerms[i]) {
                 String perm = AppOpsManager.opToPermission(tpl.ops[i]);
                 if (perm != null && !perms.contains(perm)) {
@@ -444,8 +441,7 @@ public class AppOpsState {
                 }
                 for (int j=0; j<pkgOps.getOps().size(); j++) {
                     AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
-                    addOp(entries, pkgOps, appEntry, opEntry, brief[opEntry.getOp()],
-                            packageName == null);
+                    addOp(entries, pkgOps, appEntry, opEntry, packageName == null);
                 }
             }
         }
@@ -502,8 +498,7 @@ public class AppOpsState {
                         AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
                                 permOps.get(k), AppOpsManager.MODE_ALLOWED, 0, 0, 0);
                         dummyOps.add(opEntry);
-                        addOp(entries, pkgOps, appEntry, opEntry, brief[opEntry.getOp()],
-                                packageName == null);
+                        addOp(entries, pkgOps, appEntry, opEntry, packageName == null);
                     }
                 }
             }
@@ -515,22 +510,4 @@ public class AppOpsState {
         // Done!
         return entries;
     }
-
-    public CharSequence getLabelText(AppOpsManager.OpEntry op) {
-        return mOpNames[op.getOp()];
-    }
-
-    public CharSequence getTimeText(AppOpsManager.OpEntry op) {
-        if (op.isRunning()) {
-            return mContext.getResources().getText(R.string.app_ops_running);
-        }
-        if (op.getTime() > 0) {
-            return DateUtils.getRelativeTimeSpanString(op.getTime(),
-                    System.currentTimeMillis(),
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.FORMAT_ABBREV_RELATIVE);
-        }
-        return mContext.getResources().getText(R.string.app_ops_never_used);
-    }
-
 }
