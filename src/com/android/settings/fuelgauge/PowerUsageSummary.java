@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.BatteryStats;
@@ -559,20 +560,23 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             for (Map.Entry<Integer, ? extends BatteryStats.Uid.Sensor> sensorEntry
                     : sensorStats.entrySet()) {
                 Uid.Sensor sensor = sensorEntry.getValue();
-                int sensorType = sensor.getHandle();
+                int sensorHandle = sensor.getHandle();
                 BatteryStats.Timer timer = sensor.getSensorTime();
                 long sensorTime = timer.getTotalTimeLocked(uSecTime, which) / 1000;
                 double multiplier = 0;
-                switch (sensorType) {
+                switch (sensorHandle) {
                     case Uid.Sensor.GPS:
                         multiplier = mPowerProfile.getAveragePower(PowerProfile.POWER_GPS_ON);
                         gpsTime = sensorTime;
                         break;
                     default:
-                        android.hardware.Sensor sensorData =
-                                sensorManager.getDefaultSensor(sensorType);
-                        if (sensorData != null) {
-                            multiplier = sensorData.getPower();
+                        List<Sensor> sensorList = sensorManager.getSensorList(
+                                android.hardware.Sensor.TYPE_ALL);
+                        for (android.hardware.Sensor s : sensorList) {
+                            if (s.getHandle() == sensorHandle) {
+                                multiplier = s.getPower();
+                                break;
+                            }
                         }
                 }
                 p = (multiplier * sensorTime) / 1000;
