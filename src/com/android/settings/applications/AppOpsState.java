@@ -124,6 +124,27 @@ public class AppOpsState {
                     true }
             );
 
+    public static final OpsTemplate MESSAGING_TEMPLATE = new OpsTemplate(
+            new int[] { AppOpsManager.OP_READ_SMS,
+                    AppOpsManager.OP_RECEIVE_SMS,
+                    AppOpsManager.OP_RECEIVE_EMERGECY_SMS,
+                    AppOpsManager.OP_RECEIVE_MMS,
+                    AppOpsManager.OP_RECEIVE_WAP_PUSH,
+                    AppOpsManager.OP_WRITE_SMS,
+                    AppOpsManager.OP_SEND_SMS,
+                    AppOpsManager.OP_READ_ICC_SMS,
+                    AppOpsManager.OP_WRITE_ICC_SMS },
+            new boolean[] { true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true }
+            );
+
     public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
             new int[] { AppOpsManager.OP_VIBRATE,
                     AppOpsManager.OP_POST_NOTIFICATION,
@@ -134,7 +155,7 @@ public class AppOpsState {
             );
 
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
-            LOCATION_TEMPLATE, PERSONAL_TEMPLATE, DEVICE_TEMPLATE
+            LOCATION_TEMPLATE, PERSONAL_TEMPLATE, MESSAGING_TEMPLATE, DEVICE_TEMPLATE
     };
 
     /**

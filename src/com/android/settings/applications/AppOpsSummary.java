@@ -42,6 +42,7 @@ public class AppOpsSummary extends Fragment {
     static AppOpsState.OpsTemplate[] sPageTemplates = new AppOpsState.OpsTemplate[] {
         AppOpsState.LOCATION_TEMPLATE,
         AppOpsState.PERSONAL_TEMPLATE,
+        AppOpsState.MESSAGING_TEMPLATE,
         AppOpsState.DEVICE_TEMPLATE
     };
 
