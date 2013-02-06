@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
+import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pGroup;
@@ -87,6 +88,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private boolean mWifiP2pSearching;
     private int mConnectedDevices;
     private WifiP2pGroup mConnectedGroup;
+    private boolean mLastGroupFormed = false;
 
     private PreferenceGroup mPeersGroup;
     private PreferenceGroup mPersistentGroup;
@@ -122,15 +124,19 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 if (mWifiP2pManager == null) return;
                 NetworkInfo networkInfo = (NetworkInfo) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_NETWORK_INFO);
+                WifiP2pInfo wifip2pinfo = (WifiP2pInfo) intent.getParcelableExtra(
+                        WifiP2pManager.EXTRA_WIFI_P2P_INFO);
                 if (mWifiP2pManager != null) {
                     mWifiP2pManager.requestGroupInfo(mChannel, WifiP2pSettings.this);
                 }
                 if (networkInfo.isConnected()) {
                     if (DBG) Log.d(TAG, "Connected");
-                } else {
+                } else if (mLastGroupFormed != true) {
                     //start a search when we are disconnected
+                    //but not on group removed broadcast event
                     startSearch();
                 }
+                mLastGroupFormed = wifip2pinfo.groupFormed;
             } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
                 mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
