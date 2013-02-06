@@ -814,7 +814,12 @@ public class WifiSettings extends SettingsPreferenceFragment
                     WifiManager.EXTRA_NEW_STATE);
             if (!mConnected.get() && SupplicantState.isHandshakeState(state)) {
                 updateConnectionState(WifiInfo.getDetailedStateOf(state));
-            }
+             } else {
+                 // During a connect, we may have the supplicant
+                 // state change affect the detailed network state.
+                 // Make sure a lost connection is updated as well.
+                 updateConnectionState(null);
+             }
         } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);
