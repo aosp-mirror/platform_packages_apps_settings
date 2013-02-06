@@ -612,6 +612,11 @@ public class WifiConfigController implements TextWatcher,
                 setSelection(mEapUserCertSpinner, config.enterpriseConfig.getClientCertificate());
                 mEapIdentityView.setText(config.enterpriseConfig.getIdentity());
                 mEapAnonymousView.setText(config.enterpriseConfig.getAnonymousIdentity());
+            } else {
+                // Choose a default for a new network and show only appropriate
+                // fields
+                mEapMethodSpinner.setSelection(Eap.PEAP);
+                showEapFieldsByMethod(Eap.PEAP);
             }
         } else {
             showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
