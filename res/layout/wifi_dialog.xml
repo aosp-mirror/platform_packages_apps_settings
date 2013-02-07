@@ -21,7 +21,8 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="8dip">
 
         <LinearLayout android:id="@+id/info"
                 style="@style/wifi_section" />
@@ -38,7 +39,7 @@
                         android:textDirection="locale" />
 
                 <EditText android:id="@+id/ssid"
-                        style="@style/wifi_item_content"
+                        style="@style/wifi_item_edit_content"
                         android:maxLength="32"
                         android:singleLine="true"
                         android:inputType="textNoSuggestions" />
@@ -123,7 +124,7 @@
                             android:text="@string/wifi_eap_identity" />
 
                     <EditText android:id="@+id/identity"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:inputType="textNoSuggestions" />
                 </LinearLayout>
@@ -136,7 +137,7 @@
                             android:text="@string/wifi_eap_anonymous" />
 
                     <EditText android:id="@+id/anonymous"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:inputType="textNoSuggestions" />
                 </LinearLayout>
@@ -149,7 +150,7 @@
                         android:text="@string/wifi_password" />
 
                 <EditText android:id="@+id/password"
-                        style="@style/wifi_item_content"
+                        style="@style/wifi_item_edit_content"
                         android:singleLine="true"
                         android:password="true" />
             </LinearLayout>
@@ -218,7 +219,7 @@
                             android:text="@string/proxy_hostname_label" />
 
                     <EditText android:id="@+id/proxy_hostname"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:hint="@string/proxy_hostname_hint"
                             android:inputType="textNoSuggestions"
                             android:singleLine="true" />
@@ -229,7 +230,7 @@
                             android:text="@string/proxy_port_label" />
 
                     <EditText android:id="@+id/proxy_port"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:hint="@string/proxy_port_hint"
                             android:inputType="number"
                             android:singleLine="true" />
@@ -240,7 +241,7 @@
                             android:text="@string/proxy_exclusionlist_label" />
 
                     <EditText android:id="@+id/proxy_exclusionlist"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:hint="@string/proxy_exclusionlist_hint"
                             android:inputType="textNoSuggestions"
                             android:singleLine="true" />
@@ -272,7 +273,7 @@
                             android:text="@string/wifi_ip_address" />
 
                     <EditText android:id="@+id/ipaddress"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:hint="@string/wifi_ip_address_hint"
                             android:inputType="textNoSuggestions" />
@@ -285,7 +286,7 @@
                             android:text="@string/wifi_gateway" />
 
                     <EditText android:id="@+id/gateway"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:hint="@string/wifi_gateway_hint"
                             android:inputType="textNoSuggestions" />
@@ -298,7 +299,7 @@
                             android:text="@string/wifi_network_prefix_length" />
 
                     <EditText android:id="@+id/network_prefix_length"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:hint="@string/wifi_network_prefix_length_hint"
                             android:inputType="number" />
@@ -310,7 +311,7 @@
                             android:text="@string/wifi_dns1" />
 
                     <EditText android:id="@+id/dns1"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:hint="@string/wifi_dns1_hint"
                             android:inputType="textNoSuggestions" />
@@ -323,7 +324,7 @@
                             android:text="@string/wifi_dns2" />
 
                     <EditText android:id="@+id/dns2"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:singleLine="true"
                             android:hint="@string/wifi_dns2_hint"
                             android:inputType="textNoSuggestions" />
