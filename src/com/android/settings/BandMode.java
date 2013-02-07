@@ -17,18 +17,14 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 
-
 /**
  * Radio Band Mode Selection Class
- *
- * It will query baseband about all available band modes and display them
- * in screen. It will display all six band modes if the query failed.
- *
- * After user select one band, it will send the selection to baseband.
- *
- * It will alter user the result of select operation and exit, no matter success
- * or not.
- *
+ * This will query the device for all available band modes
+ * and display the options on the screen. If however it fails it will then
+ * display all the available band modes that are in the BAND_NAMES array.
+ * After the user selects a band, it will attempt to set the band mode 
+ * regardless of the outcome. However if the bandmode will not work RIL.Java
+ * will catch it and throw a GENERIC_FAILURE or RADIO_NOT_AVAILABLE error
  */
 public class BandMode extends Activity {
     private static final String LOG_TAG = "phone";
@@ -36,14 +32,31 @@ public class BandMode extends Activity {
 
     private static final int EVENT_BAND_SCAN_COMPLETED = 100;
     private static final int EVENT_BAND_SELECTION_DONE = 200;
-
+/*
+* pulled from hardware/ril/include/telephony/ril.h and cleaned up a little
+* there ought to be a better way to do this...
+* make queryAvailableBandMode return something other than just an int array?
+*/
     private static final String[] BAND_NAMES = new String[] {
             "Automatic",
-            "EURO Band",
-            "USA Band",
-            "JAPAN Band",
-            "AUS Band",
-            "AUS2 Band"
+            "EURO Band     (GSM-900/DCS-1800/WCDMA-IMT-2000)",
+            "USA Band      (GSM-850/PCS-1900/WCDMA-850/WCDMA-PCS-1900)",
+            "JAPAN Band    (WCDMA-800/WCDMA-IMT-2000)",
+            "AUS Band      (GSM-900/DCS-1800/WCDMA-850/WCDMA-IMT-2000)",
+            "AUS2 Band     (GSM-900/DCS-1800/WCDMA-850)",
+            "Cellular      (800-MHz)",
+            "PCS           (1900-MHz)",
+            "Band Class 3  (JTACS Band)",
+            "Band Class 4  (Korean PCS Band)",
+            "Band Class 5  (450-MHz Band)",
+            "Band Class 6  (2-GMHz IMT2000 Band)",
+            "Band Class 7  (Upper 700-MHz Band)",
+            "Band Class 8  (1800-MHz Band)",
+            "Band Class 9  (900-MHz Band)",
+            "Band Class 10 (Secondary 800-MHz Band)",
+            "Band Class 11 (400-MHz European PAMR Band)",
+            "Band Class 15 (AWS Band)",
+            "Band Class 16 (US 2.5-GHz Band)"
     };
 
     private ListView mBandList;
@@ -141,21 +154,18 @@ public class BandMode extends Activity {
 
         if (result.result != null) {
             int bands[] = (int[])result.result;
-            int size = bands[0];
 
-            if (size > 0) {
-                for (int i=1; i<size; i++) {
-                    item = new BandListItem(bands[i]);
-                    mBandListAdapter.add(item);
-                    if (DBG) log("Add " + item.toString());
-                }
-                addBandSuccess = true;
+            for (int i=0; i<bands.length; i++) {
+                item = new BandListItem(bands[i]);
+                mBandListAdapter.add(item);
+                if (DBG) log("Add " + item.toString());
             }
+            addBandSuccess = true;
         }
 
         if (addBandSuccess == false) {
             if (DBG) log("Error in query, add default list");
-            for (int i=0; i<Phone.BM_BOUNDARY; i++) {
+            for (int i=0; i<BAND_NAMES.length; i++) {
                 item = new BandListItem(i);
                 mBandListAdapter.add(item);
                 if (DBG) log("Add default " + item.toString());
