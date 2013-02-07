@@ -149,9 +149,11 @@ public class AppOpsState {
             new int[] { AppOpsManager.OP_VIBRATE,
                     AppOpsManager.OP_POST_NOTIFICATION,
                     AppOpsManager.OP_CALL_PHONE,
-                    AppOpsManager.OP_WRITE_SETTINGS },
+                    AppOpsManager.OP_WRITE_SETTINGS,
+                    AppOpsManager.OP_SYSTEM_ALERT_WINDOW },
             new boolean[] { false,
                     false,
+                    true,
                     true,
                     true }
             );
@@ -254,10 +256,13 @@ public class AppOpsState {
         private final ArrayList<AppOpsManager.OpEntry> mSwitchOps
                 = new ArrayList<AppOpsManager.OpEntry>();
         private final AppEntry mApp;
+        private final int mSwitchOrder;
 
-        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app) {
+        public AppOpEntry(AppOpsManager.PackageOps pkg, AppOpsManager.OpEntry op, AppEntry app,
+                int switchOrder) {
             mPkgOps = pkg;
             mApp = app;
+            mSwitchOrder = switchOrder;
             mApp.addOp(this, op);
             mOps.add(op);
             mSwitchOps.add(op);
@@ -291,6 +296,10 @@ public class AppOpsState {
 
         public AppEntry getAppEntry() {
             return mApp;
+        }
+
+        public int getSwitchOrder() {
+            return mSwitchOrder;
         }
 
         public AppOpsManager.PackageOps getPackageOps() {
@@ -366,6 +375,9 @@ public class AppOpsState {
         private final Collator sCollator = Collator.getInstance();
         @Override
         public int compare(AppOpEntry object1, AppOpEntry object2) {
+            if (object1.getSwitchOrder() != object2.getSwitchOrder()) {
+                return object1.getSwitchOrder() < object2.getSwitchOrder() ? -1 : 1;
+            }
             if (object1.isRunning() != object2.isRunning()) {
                 // Currently running ops go first.
                 return object1.isRunning() ? -1 : 1;
@@ -380,7 +392,7 @@ public class AppOpsState {
     };
 
     private void addOp(List<AppOpEntry> entries, AppOpsManager.PackageOps pkgOps,
-            AppEntry appEntry, AppOpsManager.OpEntry opEntry, boolean allowMerge) {
+            AppEntry appEntry, AppOpsManager.OpEntry opEntry, boolean allowMerge, int switchOrder) {
         if (allowMerge && entries.size() > 0) {
             AppOpEntry last = entries.get(entries.size()-1);
             if (last.getAppEntry() == appEntry) {
@@ -399,7 +411,7 @@ public class AppOpsState {
             entry.addOp(opEntry);
             return;
         }
-        entry = new AppOpEntry(pkgOps, opEntry, appEntry);
+        entry = new AppOpEntry(pkgOps, opEntry, appEntry, switchOrder);
         if (DEBUG) Log.d(TAG, "Add op " + opEntry.getOp() + " to package "
                 + pkgOps.getPackageName() + ": making new " + entry);
         entries.add(entry);
@@ -438,12 +450,14 @@ public class AppOpsState {
 
         final ArrayList<String> perms = new ArrayList<String>();
         final ArrayList<Integer> permOps = new ArrayList<Integer>();
+        final int[] opToOrder = new int[AppOpsManager._NUM_OP];
         for (int i=0; i<tpl.ops.length; i++) {
             if (tpl.showPerms[i]) {
                 String perm = AppOpsManager.opToPermission(tpl.ops[i]);
                 if (perm != null && !perms.contains(perm)) {
                     perms.add(perm);
                     permOps.add(tpl.ops[i]);
+                    opToOrder[tpl.ops[i]] = i;
                 }
             }
         }
@@ -464,7 +478,8 @@ public class AppOpsState {
                 }
                 for (int j=0; j<pkgOps.getOps().size(); j++) {
                     AppOpsManager.OpEntry opEntry = pkgOps.getOps().get(j);
-                    addOp(entries, pkgOps, appEntry, opEntry, packageName == null);
+                    addOp(entries, pkgOps, appEntry, opEntry, packageName == null,
+                            packageName == null ? 0 : opToOrder[opEntry.getOp()]);
                 }
             }
         }
@@ -521,7 +536,8 @@ public class AppOpsState {
                         AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
                                 permOps.get(k), AppOpsManager.MODE_ALLOWED, 0, 0, 0);
                         dummyOps.add(opEntry);
-                        addOp(entries, pkgOps, appEntry, opEntry, packageName == null);
+                        addOp(entries, pkgOps, appEntry, opEntry, packageName == null,
+                                packageName == null ? 0 : opToOrder[opEntry.getOp()]);
                     }
                 }
             }
