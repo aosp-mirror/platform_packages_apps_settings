@@ -240,19 +240,24 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
             addPreference(mFormatPreference);
         }
 
-        final IPackageManager pm = ActivityThread.getPackageManager();
-        try {
-            if (pm.isStorageLow()) {
-                mStorageLow = new Preference(context);
-                mStorageLow.setOrder(ORDER_STORAGE_LOW);
-                mStorageLow.setTitle(R.string.storage_low_title);
-                mStorageLow.setSummary(R.string.storage_low_summary);
-                addPreference(mStorageLow);
-            } else if (mStorageLow != null) {
-                removePreference(mStorageLow);
-                mStorageLow = null;
+        // The low storage warning is only valid for the internal memory.
+        // Same condition as for (showDetails) above.
+        final boolean showLowStorage = mVolume == null || mVolume.isPrimary();
+        if (showLowStorage)  {
+            final IPackageManager pm = ActivityThread.getPackageManager();
+            try {
+                if (pm.isStorageLow()) {
+                    mStorageLow = new Preference(context);
+                    mStorageLow.setOrder(ORDER_STORAGE_LOW);
+                    mStorageLow.setTitle(R.string.storage_low_title);
+                    mStorageLow.setSummary(R.string.storage_low_summary);
+                    addPreference(mStorageLow);
+                } else if (mStorageLow != null) {
+                    removePreference(mStorageLow);
+                    mStorageLow = null;
+                }
+            } catch (RemoteException e) {
             }
-        } catch (RemoteException e) {
         }
     }
 
