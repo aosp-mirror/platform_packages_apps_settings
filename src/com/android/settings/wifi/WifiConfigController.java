@@ -395,10 +395,10 @@ public class WifiConfigController implements TextWatcher,
                 }
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
                 if (caCert.equals(unspecifiedCert)) caCert = "";
-                config.enterpriseConfig.setCaCertificate(caCert);
+                config.enterpriseConfig.setCaCertificateAlias(caCert);
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
                 if (clientCert.equals(unspecifiedCert)) clientCert = "";
-                config.enterpriseConfig.setClientCertificate(clientCert);
+                config.enterpriseConfig.setClientCertificateAlias(clientCert);
                 config.enterpriseConfig.setIdentity(mEapIdentityView.getText().toString());
                 config.enterpriseConfig.setAnonymousIdentity(
                         mEapAnonymousView.getText().toString());
@@ -582,9 +582,9 @@ public class WifiConfigController implements TextWatcher,
 
             // Modifying an existing network
             if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
-                WifiConfiguration config = mAccessPoint.getConfig();
-                int eapMethod = config.enterpriseConfig.getEapMethod();
-                int phase2Method = config.enterpriseConfig.getPhase2Method();
+                WifiEnterpriseConfig enterpriseConfig = mAccessPoint.getConfig().enterpriseConfig;
+                int eapMethod = enterpriseConfig.getEapMethod();
+                int phase2Method = enterpriseConfig.getPhase2Method();
                 mEapMethodSpinner.setSelection(eapMethod);
                 showEapFieldsByMethod(eapMethod);
                 switch (eapMethod) {
@@ -608,10 +608,10 @@ public class WifiConfigController implements TextWatcher,
                         mPhase2Spinner.setSelection(phase2Method);
                         break;
                 }
-                setSelection(mEapCaCertSpinner, config.enterpriseConfig.getCaCertificate());
-                setSelection(mEapUserCertSpinner, config.enterpriseConfig.getClientCertificate());
-                mEapIdentityView.setText(config.enterpriseConfig.getIdentity());
-                mEapAnonymousView.setText(config.enterpriseConfig.getAnonymousIdentity());
+                setSelection(mEapCaCertSpinner, enterpriseConfig.getCaCertificateAlias());
+                setSelection(mEapUserCertSpinner, enterpriseConfig.getClientCertificateAlias());
+                mEapIdentityView.setText(enterpriseConfig.getIdentity());
+                mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
             } else {
                 // Choose a default for a new network and show only appropriate
                 // fields
