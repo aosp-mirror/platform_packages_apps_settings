@@ -32,7 +32,7 @@ import android.preference.PreferenceActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -165,6 +165,10 @@ public class AppOpsCategory extends ListFragment implements
          * Handles a request to start the Loader.
          */
         @Override protected void onStartLoading() {
+            // We don't monitor changed when loading is stopped, so need
+            // to always reload at this point.
+            onContentChanged();
+
             if (mApps != null) {
                 // If we currently have a result available, deliver it
                 // immediately.
@@ -239,33 +243,36 @@ public class AppOpsCategory extends ListFragment implements
         }
     }
 
-    public static class AppListAdapter extends ArrayAdapter<AppOpEntry> {
+    public static class AppListAdapter extends BaseAdapter {
         private final Resources mResources;
         private final LayoutInflater mInflater;
         private final AppOpsState mState;
 
+        List<AppOpEntry> mList;
+
         public AppListAdapter(Context context, AppOpsState state) {
-            super(context, android.R.layout.simple_list_item_2);
             mResources = context.getResources();
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mState = state;
         }
 
         public void setData(List<AppOpEntry> data) {
-            clear();
-            if (data != null) {
-                addAll(data);
-            }
+            mList = data;
+            notifyDataSetChanged();
         }
 
         @Override
-        public boolean hasStableIds() {
-            return true;
+        public int getCount() {
+            return mList != null ? mList.size() : 0;
+        }
+
+        @Override
+        public AppOpEntry getItem(int position) {
+            return mList.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            // XXX need to generate real id.
             return position;
         }
 
@@ -315,16 +322,9 @@ public class AppOpsCategory extends ListFragment implements
 
         // Start out with a progress indicator.
         setListShown(false);
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // Prepare the loader.  We don't monitor for changes while stopped,
-        // so want to re-start the loader (retrieving a new data set) each
-        // time we start.
-        getLoaderManager().restartLoader(0, null, this);
+        // Prepare the loader.
+        getLoaderManager().initLoader(0, null, this);
     }
 
     // utility method used to start sub activity
