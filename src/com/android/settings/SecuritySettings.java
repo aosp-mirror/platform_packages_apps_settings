@@ -407,9 +407,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
         }
 
-        KeyStore.State state = KeyStore.getInstance().state();
         if (mResetCredentials != null) {
-            mResetCredentials.setEnabled(state != KeyStore.State.UNINITIALIZED);
+            KeyStore keyStore = KeyStore.getInstance();
+            mResetCredentials.setEnabled(!keyStore.isUnlocked());
         }
     }
 
