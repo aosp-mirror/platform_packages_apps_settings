@@ -155,7 +155,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         // Check KeyStore here, so others do not need to deal with it.
-        if (mKeyStore.state() != KeyStore.State.UNLOCKED) {
+        if (!mKeyStore.isUnlocked()) {
             if (!mUnlocking) {
                 // Let us unlock KeyStore. See you later!
                 Credentials.getInstance().unlock(getActivity());
