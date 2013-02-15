@@ -450,14 +450,14 @@ public class Settings extends PreferenceActivity
                 }
             }
 
-            if (target.get(i) == header
+            if (i < target.size() && target.get(i) == header
                     && UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
                     && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
                 target.remove(i);
             }
 
             // Increment if the current one wasn't removed by the Utils code.
-            if (target.get(i) == header) {
+            if (i < target.size() && target.get(i) == header) {
                 // Hold on to the first header, when we need to reset to the top-level
                 if (mFirstHeader == null &&
                         HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY) {
