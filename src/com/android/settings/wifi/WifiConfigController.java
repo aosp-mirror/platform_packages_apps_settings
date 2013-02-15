@@ -31,7 +31,9 @@ import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration.ProxySettings;
-import android.net.wifi.WifiConfiguration.Status;
+import android.net.wifi.WifiEnterpriseConfig;
+import android.net.wifi.WifiEnterpriseConfig.Eap;
+import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.os.Handler;
 import android.security.Credentials;
@@ -63,10 +65,6 @@ import java.util.Iterator;
  */
 public class WifiConfigController implements TextWatcher,
         View.OnClickListener, AdapterView.OnItemSelectedListener {
-    private static final String KEYSTORE_SPACE = WifiConfiguration.KEYSTORE_URI;
-
-    private static final String PHASE2_PREFIX = "auth=";
-
     private final WifiConfigUiBase mConfigUi;
     private final View mView;
     private final AccessPoint mAccessPoint;
@@ -79,10 +77,20 @@ public class WifiConfigController implements TextWatcher,
     private int mAccessPointSecurity;
     private TextView mPasswordView;
 
+    private String unspecifiedCert = "unspecified";
+    private static final int unspecifiedCertIndex = 0;
+
+    /* Phase2 methods supported by PEAP are limited */
+    private final ArrayAdapter<String> PHASE2_PEAP_ADAPTER;
+    /* Full list of phase2 methods */
+    private final ArrayAdapter<String> PHASE2_FULL_ADAPTER;
+
     private Spinner mSecuritySpinner;
     private Spinner mEapMethodSpinner;
     private Spinner mEapCaCertSpinner;
     private Spinner mPhase2Spinner;
+    // Associated with mPhase2Spinner, one of PHASE2_FULL_ADAPTER or PHASE2_PEAP_ADAPTER
+    private ArrayAdapter<String> mPhase2Adapter;
     private Spinner mEapUserCertSpinner;
     private TextView mEapIdentityView;
     private TextView mEapAnonymousView;
@@ -95,11 +103,16 @@ public class WifiConfigController implements TextWatcher,
     public static final int PROXY_NONE = 0;
     public static final int PROXY_STATIC = 1;
 
-    /* These values from from "wifi_eap_method" resource array */
+    /* These values come from "wifi_eap_method" resource array */
     public static final int WIFI_EAP_METHOD_PEAP = 0;
     public static final int WIFI_EAP_METHOD_TLS  = 1;
     public static final int WIFI_EAP_METHOD_TTLS = 2;
     public static final int WIFI_EAP_METHOD_PWD  = 3;
+
+    /* These values come from "wifi_peap_phase2_entries" resource array */
+    public static final int WIFI_PEAP_PHASE2_NONE 	    = 0;
+    public static final int WIFI_PEAP_PHASE2_MSCHAPV2 	= 1;
+    public static final int WIFI_PEAP_PHASE2_GTC        = 2;
 
     private static final String TAG = "WifiConfigController";
 
@@ -124,22 +137,6 @@ public class WifiConfigController implements TextWatcher,
 
     private final Handler mTextViewChangedHandler;
 
-    static boolean requireKeyStore(WifiConfiguration config) {
-        if (config == null) {
-            return false;
-        }
-        if (!TextUtils.isEmpty(config.key_id.value())) {
-            return true;
-        }
-        String values[] = { config.ca_cert.value(), config.client_cert.value() };
-        for (String value : values) {
-            if (value != null && value.startsWith(KEYSTORE_SPACE)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public WifiConfigController(
             WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit) {
         mConfigUi = parent;
@@ -155,6 +152,17 @@ public class WifiConfigController implements TextWatcher,
         final Context context = mConfigUi.getContext();
         final Resources resources = context.getResources();
 
+        PHASE2_PEAP_ADAPTER = new ArrayAdapter<String>(
+            context, android.R.layout.simple_spinner_item,
+            context.getResources().getStringArray(R.array.wifi_peap_phase2_entries));
+        PHASE2_PEAP_ADAPTER.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        PHASE2_FULL_ADAPTER = new ArrayAdapter<String>(
+                context, android.R.layout.simple_spinner_item,
+                context.getResources().getStringArray(R.array.wifi_phase2_entries));
+        PHASE2_FULL_ADAPTER.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        unspecifiedCert = context.getString(R.string.wifi_unspecified);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
@@ -356,33 +364,58 @@ public class WifiConfigController implements TextWatcher,
             case AccessPoint.SECURITY_EAP:
                 config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
-                config.eap.setValue((String) mEapMethodSpinner.getSelectedItem());
-
-                config.phase2.setValue((mPhase2Spinner.getSelectedItemPosition() == 0) ? "" :
-                        PHASE2_PREFIX + mPhase2Spinner.getSelectedItem());
-                config.ca_cert.setValue((mEapCaCertSpinner.getSelectedItemPosition() == 0) ? "" :
-                        KEYSTORE_SPACE + Credentials.CA_CERTIFICATE +
-                        (String) mEapCaCertSpinner.getSelectedItem());
-                config.client_cert.setValue((mEapUserCertSpinner.getSelectedItemPosition() == 0) ?
-                        "" : KEYSTORE_SPACE + Credentials.USER_CERTIFICATE +
-                        (String) mEapUserCertSpinner.getSelectedItem());
-                final boolean isEmptyKeyId = (mEapUserCertSpinner.getSelectedItemPosition() == 0);
-                config.key_id.setValue(isEmptyKeyId ? "" : Credentials.USER_PRIVATE_KEY +
-                        (String) mEapUserCertSpinner.getSelectedItem());
-                config.engine.setValue(isEmptyKeyId ? WifiConfiguration.ENGINE_DISABLE :
-                        WifiConfiguration.ENGINE_ENABLE);
-                config.engine_id.setValue(isEmptyKeyId ? "" : WifiConfiguration.KEYSTORE_ENGINE_ID);
-                config.identity.setValue((mEapIdentityView.length() == 0) ? "" :
-                        mEapIdentityView.getText().toString());
-                config.anonymous_identity.setValue((mEapAnonymousView.length() == 0) ? "" :
+                config.enterpriseConfig = new WifiEnterpriseConfig();
+                int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
+                int phase2Method = mPhase2Spinner.getSelectedItemPosition();
+                config.enterpriseConfig.setEapMethod(eapMethod);
+                switch (eapMethod) {
+                    case Eap.PEAP:
+                        // PEAP supports limited phase2 values
+                        // Map the index from the PHASE2_PEAP_ADAPTER to the one used
+                        // by the API which has the full list of PEAP methods.
+                        switch(phase2Method) {
+                            case WIFI_PEAP_PHASE2_NONE:
+                                config.enterpriseConfig.setPhase2Method(Phase2.NONE);
+                                break;
+                            case WIFI_PEAP_PHASE2_MSCHAPV2:
+                                config.enterpriseConfig.setPhase2Method(Phase2.MSCHAPV2);
+                                break;
+                            case WIFI_PEAP_PHASE2_GTC:
+                                config.enterpriseConfig.setPhase2Method(Phase2.GTC);
+                                break;
+                            default:
+                                Log.e(TAG, "Unknown phase2 method" + phase2Method);
+                                break;
+                        }
+                        break;
+                    default:
+                        // The default index from PHASE2_FULL_ADAPTER maps to the API
+                        config.enterpriseConfig.setPhase2Method(phase2Method);
+                        break;
+                }
+                String caCert = (String) mEapCaCertSpinner.getSelectedItem();
+                if (caCert.equals(unspecifiedCert)) caCert = "";
+                config.enterpriseConfig.setCaCertificateAlias(caCert);
+                String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
+                if (clientCert.equals(unspecifiedCert)) clientCert = "";
+                config.enterpriseConfig.setClientCertificateAlias(clientCert);
+                config.enterpriseConfig.setIdentity(mEapIdentityView.getText().toString());
+                config.enterpriseConfig.setAnonymousIdentity(
                         mEapAnonymousView.getText().toString());
-                if (mPasswordView.length() != 0) {
-                    config.password.setValue(mPasswordView.getText().toString());
+
+                if (mPasswordView.isShown()) {
+                    // For security reasons, a previous password is not displayed to user.
+                    // Update only if it has been changed.
+                    if (mPasswordView.length() > 0) {
+                        config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
+                    }
+                } else {
+                    // clear password
+                    config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
                 }
                 break;
-
             default:
-                    return null;
+                return null;
         }
 
         config.proxySettings = mProxySettings;
@@ -547,40 +580,142 @@ public class WifiConfigController implements TextWatcher,
             loadCertificates(mEapCaCertSpinner, Credentials.CA_CERTIFICATE);
             loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY);
 
+            // Modifying an existing network
             if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
-                WifiConfiguration config = mAccessPoint.getConfig();
-                setSelection(mEapMethodSpinner, config.eap.value());
-
-                final String phase2Method = config.phase2.value();
-                if (phase2Method != null && phase2Method.startsWith(PHASE2_PREFIX)) {
-                    setSelection(mPhase2Spinner, phase2Method.substring(PHASE2_PREFIX.length()));
-                } else {
-                    setSelection(mPhase2Spinner, phase2Method);
+                WifiEnterpriseConfig enterpriseConfig = mAccessPoint.getConfig().enterpriseConfig;
+                int eapMethod = enterpriseConfig.getEapMethod();
+                int phase2Method = enterpriseConfig.getPhase2Method();
+                mEapMethodSpinner.setSelection(eapMethod);
+                showEapFieldsByMethod(eapMethod);
+                switch (eapMethod) {
+                    case Eap.PEAP:
+                        switch (phase2Method) {
+                            case Phase2.NONE:
+                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_NONE);
+                                break;
+                            case Phase2.MSCHAPV2:
+                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_MSCHAPV2);
+                                break;
+                            case Phase2.GTC:
+                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_GTC);
+                                break;
+                            default:
+                                Log.e(TAG, "Invalid phase 2 method " + phase2Method);
+                                break;
+                        }
+                        break;
+                    default:
+                        mPhase2Spinner.setSelection(phase2Method);
+                        break;
                 }
-
-                setCertificate(mEapCaCertSpinner, KEYSTORE_SPACE + Credentials.CA_CERTIFICATE,
-                        config.ca_cert.value());
-                setCertificate(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY,
-                        config.key_id.value());
-                mEapIdentityView.setText(config.identity.value());
-                mEapAnonymousView.setText(config.anonymous_identity.value());
+                setSelection(mEapCaCertSpinner, enterpriseConfig.getCaCertificateAlias());
+                setSelection(mEapUserCertSpinner, enterpriseConfig.getClientCertificateAlias());
+                mEapIdentityView.setText(enterpriseConfig.getIdentity());
+                mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
+            } else {
+                // Choose a default for a new network and show only appropriate
+                // fields
+                mEapMethodSpinner.setSelection(Eap.PEAP);
+                showEapFieldsByMethod(Eap.PEAP);
             }
+        } else {
+            showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
         }
+    }
 
+    /**
+     * EAP-PWD valid fields include
+     *   identity
+     *   password
+     * EAP-PEAP valid fields include
+     *   phase2: MSCHAPV2, GTC
+     *   ca_cert
+     *   identity
+     *   anonymous_identity
+     *   password
+     * EAP-TLS valid fields include
+     *   user_cert
+     *   ca_cert
+     *   identity
+     * EAP-TTLS valid fields include
+     *   phase2: PAP, MSCHAP, MSCHAPV2, GTC
+     *   ca_cert
+     *   identity
+     *   anonymous_identity
+     *   password
+     */
+    private void showEapFieldsByMethod(int eapMethod) {
+        // Common defaults
         mView.findViewById(R.id.l_method).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.l_identity).setVisibility(View.VISIBLE);
 
-        if (mEapMethodSpinner.getSelectedItemPosition() == WIFI_EAP_METHOD_PWD){
-            mView.findViewById(R.id.l_phase2).setVisibility(View.GONE);
-            mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
-            mView.findViewById(R.id.l_user_cert).setVisibility(View.GONE);
-            mView.findViewById(R.id.l_anonymous).setVisibility(View.GONE);
-        } else {
-            mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
-            mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
-            mView.findViewById(R.id.l_user_cert).setVisibility(View.VISIBLE);
-            mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+        // Defaults for most of the EAP methods and over-riden by
+        // by certain EAP methods
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
+
+        Context context = mConfigUi.getContext();
+        switch (eapMethod) {
+            case WIFI_EAP_METHOD_PWD:
+                setPhase2Invisible();
+                setCaCertInvisible();
+                setAnonymousIdentInvisible();
+                setUserCertInvisible();
+                break;
+            case WIFI_EAP_METHOD_TLS:
+                mView.findViewById(R.id.l_user_cert).setVisibility(View.VISIBLE);
+                setPhase2Invisible();
+                setAnonymousIdentInvisible();
+                setPasswordInvisible();
+                break;
+            case WIFI_EAP_METHOD_PEAP:
+                // Reset adapter if needed
+                if (mPhase2Adapter != PHASE2_PEAP_ADAPTER) {
+                    mPhase2Adapter = PHASE2_PEAP_ADAPTER;
+                    mPhase2Spinner.setAdapter(mPhase2Adapter);
+                }
+                mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+                setUserCertInvisible();
+                break;
+            case WIFI_EAP_METHOD_TTLS:
+                // Reset adapter if needed
+                if (mPhase2Adapter != PHASE2_FULL_ADAPTER) {
+                    mPhase2Adapter = PHASE2_FULL_ADAPTER;
+                    mPhase2Spinner.setAdapter(mPhase2Adapter);
+                }
+                mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+                setUserCertInvisible();
+                break;
         }
+    }
+
+    private void setPhase2Invisible() {
+        mView.findViewById(R.id.l_phase2).setVisibility(View.GONE);
+        mPhase2Spinner.setSelection(Phase2.NONE);
+    }
+
+    private void setCaCertInvisible() {
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
+        mEapCaCertSpinner.setSelection(unspecifiedCertIndex);
+    }
+
+    private void setUserCertInvisible() {
+        mView.findViewById(R.id.l_user_cert).setVisibility(View.GONE);
+        mEapUserCertSpinner.setSelection(unspecifiedCertIndex);
+    }
+
+    private void setAnonymousIdentInvisible() {
+        mView.findViewById(R.id.l_anonymous).setVisibility(View.GONE);
+        mEapAnonymousView.setText("");
+    }
+
+    private void setPasswordInvisible() {
+        mPasswordView.setText("");
+        mView.findViewById(R.id.password_layout).setVisibility(View.GONE);
+        mView.findViewById(R.id.show_password_layout).setVisibility(View.GONE);
     }
 
     private void showIpConfigFields() {
@@ -675,14 +810,13 @@ public class WifiConfigController implements TextWatcher,
 
     private void loadCertificates(Spinner spinner, String prefix) {
         final Context context = mConfigUi.getContext();
-        final String unspecified = context.getString(R.string.wifi_unspecified);
 
         String[] certs = KeyStore.getInstance().saw(prefix);
         if (certs == null || certs.length == 0) {
-            certs = new String[] {unspecified};
+            certs = new String[] {unspecifiedCert};
         } else {
             final String[] array = new String[certs.length + 1];
-            array[0] = unspecified;
+            array[0] = unspecifiedCert;
             System.arraycopy(certs, 0, array, 1, certs.length);
             certs = array;
         }
@@ -691,12 +825,6 @@ public class WifiConfigController implements TextWatcher,
                 context, android.R.layout.simple_spinner_item, certs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-    }
-
-    private void setCertificate(Spinner spinner, String prefix, String cert) {
-        if (cert != null && cert.startsWith(prefix)) {
-            setSelection(spinner, cert.substring(prefix.length()));
-        }
     }
 
     private void setSelection(Spinner spinner, String value) {

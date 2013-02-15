@@ -46,7 +46,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.Credentials;
-import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -134,8 +133,6 @@ public class WifiSettings extends SettingsPreferenceFragment
     private WifiInfo mLastInfo;
 
     private AtomicBoolean mConnected = new AtomicBoolean(false);
-
-    private int mKeyStoreNetworkId = INVALID_NETWORK_ID;
 
     private WifiDialog mDialog;
 
@@ -412,11 +409,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
 
         getActivity().registerReceiver(mReceiver, mFilter);
-        if (mKeyStoreNetworkId != INVALID_NETWORK_ID && KeyStore.getInstance().isUnlocked()) {
-            mWifiManager.connect(mKeyStoreNetworkId, mConnectListener);
-        }
-        mKeyStoreNetworkId = INVALID_NETWORK_ID;
-
         updateAccessPoints();
     }
 
@@ -559,10 +551,8 @@ public class WifiSettings extends SettingsPreferenceFragment
         switch (item.getItemId()) {
             case MENU_ID_CONNECT: {
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                    if (!requireKeyStore(mSelectedAccessPoint.getConfig())) {
-                        mWifiManager.connect(mSelectedAccessPoint.networkId,
-                                mConnectListener);
-                    }
+                    mWifiManager.connect(mSelectedAccessPoint.networkId,
+                            mConnectListener);
                 } else if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
@@ -698,15 +688,6 @@ public class WifiSettings extends SettingsPreferenceFragment
                && telephonyManager.getSimState() != TelephonyManager.SIM_STATE_READY
                && telephonyManager.getSimState() != TelephonyManager.SIM_STATE_UNKNOWN;
    }
-
-    private boolean requireKeyStore(WifiConfiguration config) {
-        if (WifiConfigController.requireKeyStore(config) && !KeyStore.getInstance().isUnlocked()) {
-            mKeyStoreNetworkId = config.networkId;
-            Credentials.getInstance().unlock(getActivity());
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Shows the latest access points available with supplimental information like
@@ -974,7 +955,6 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         if (config == null) {
             if (mSelectedAccessPoint != null
-                    && !requireKeyStore(mSelectedAccessPoint.getConfig())
                     && mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                 mWifiManager.connect(mSelectedAccessPoint.networkId,
                         mConnectListener);
@@ -984,7 +964,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 mWifiManager.save(config, mSaveListener);
             }
         } else {
-            if (configController.isEdit() || requireKeyStore(config)) {
+            if (configController.isEdit()) {
                 mWifiManager.save(config, mSaveListener);
             } else {
                 mWifiManager.connect(config, mConnectListener);
