@@ -19,9 +19,8 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
         <com.android.settings.BrightnessPreference
-                android:key="brightness"
                 android:title="@string/brightness"
-                android:dialogTitle="@string/brightness" />
+                android:persistent="false"/>
 
         <PreferenceScreen
                 android:key="wallpaper"
