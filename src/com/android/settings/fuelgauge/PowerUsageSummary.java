@@ -178,6 +178,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         super.onDestroy();
         if (getActivity().isChangingConfigurations()) {
             sStatsXfer = mStats;
+        } else {
+            BatterySipper.sUidCache.clear();
         }
     }
 
