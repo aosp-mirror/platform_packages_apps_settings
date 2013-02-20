@@ -18,42 +18,32 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.INotificationListener;
 import android.app.INotificationManager;
 import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.provider.*;
 import android.util.Log;
-import android.util.Slog;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import com.android.internal.statusbar.StatusBarNotification;
-import com.android.settings.DreamBackend.DreamInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +55,18 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
     private INotificationManager mNoMan;
+    private INotificationListener.Stub mListener = new INotificationListener.Stub() {
+        @Override
+        public void onNotificationPosted(StatusBarNotification notification) throws RemoteException {
+            Log.v(TAG, "onNotificationPosted: " + notification);
+            getListView().post(new Runnable() { public void run() { refreshList(); }});
+        }
+
+        @Override
+        public void onNotificationRemoved(StatusBarNotification notification) throws RemoteException {
+            // no-op; we're just showing new notifications
+        }
+    };
 
     private NotificationHistoryAdapter mAdapter;
     private Context mContext;
@@ -76,6 +78,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mContext = activity;
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        try {
+            mNoMan.registerListener(mListener, UserHandle.USER_ALL);
+        } catch (RemoteException e) {
+            // well, that didn't work out
+        }
     }
 
     @Override
@@ -116,7 +123,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     public void onResume() {
         logd("onResume()");
         super.onResume();
-        refreshFromBackend();
+        refreshList();
 
         // listen for package changes
         IntentFilter filter = new IntentFilter();
@@ -128,7 +135,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mContext.registerReceiver(mPackageReceiver , filter);
     }
 
-    private void refreshFromBackend() {
+    private void refreshList() {
         List<HistoricalNotificationInfo> infos = loadNotifications();
         if (infos != null) {
             logd("adding %d infos", infos.size());
@@ -315,7 +322,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             logd("PackageReceiver.onReceive");
-            //refreshFromBackend();
+            //refreshList();
         }
     }
 }
