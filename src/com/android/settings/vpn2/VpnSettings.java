@@ -91,12 +91,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.vpn_settings2);
 
-        final boolean pickLockdown = getActivity()
-                .getIntent().getBooleanExtra(EXTRA_PICK_LOCKDOWN, false);
-        if (pickLockdown) {
-            LockdownConfigFragment.show(this);
-        }
-
         if (savedState != null) {
             VpnProfile profile = VpnProfile.decode(savedState.getString("VpnKey"),
                     savedState.getByteArray("VpnProfile"));
@@ -161,6 +155,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+
+        final boolean pickLockdown = getActivity()
+                .getIntent().getBooleanExtra(EXTRA_PICK_LOCKDOWN, false);
+        if (pickLockdown) {
+            LockdownConfigFragment.show(this);
+        }
 
         // Check KeyStore here, so others do not need to deal with it.
         if (!mKeyStore.isUnlocked()) {
