@@ -914,7 +914,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         @Override
         public void handleMessage(Message message) {
-            if (mWifiManager.startScanActive()) {
+            if (mWifiManager.startScan()) {
                 mRetry = 0;
             } else if (++mRetry >= 3) {
                 mRetry = 0;
