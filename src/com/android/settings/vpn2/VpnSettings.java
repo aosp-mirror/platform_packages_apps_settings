@@ -66,6 +66,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG_LOCKDOWN = "lockdown";
 
+    private static final String EXTRA_PICK_LOCKDOWN = "android.net.vpn.PICK_LOCKDOWN";
+
     // TODO: migrate to using DialogFragment when editing
 
     private final IConnectivityManager mService = IConnectivityManager.Stub
@@ -88,6 +90,12 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.vpn_settings2);
+
+        final boolean pickLockdown = getActivity()
+                .getIntent().getBooleanExtra(EXTRA_PICK_LOCKDOWN, false);
+        if (pickLockdown) {
+            LockdownConfigFragment.show(this);
+        }
 
         if (savedState != null) {
             VpnProfile profile = VpnProfile.decode(savedState.getString("VpnKey"),
