@@ -58,13 +58,14 @@
     <TextView
         android:id="@+id/app_size"
         android:layout_width="0dip"
-        android:layout_gravity="fill_horizontal"
+        android:layout_gravity="fill_horizontal|top"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/app_disabled"
         android:layout_marginStart="8dip"
+        android:layout_gravity="top"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </GridLayout>

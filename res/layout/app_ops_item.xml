@@ -50,13 +50,14 @@
     <TextView
         android:id="@+id/op_name"
         android:layout_width="0dip"
-        android:layout_gravity="fill_horizontal"
+        android:layout_gravity="fill_horizontal|top"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/op_time"
         android:layout_marginStart="8dip"
+        android:layout_gravity="top"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </GridLayout>
