@@ -35,6 +35,7 @@ import android.os.IPowerManager;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -538,11 +539,18 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(Void... args) {
-                    Settings.Secure.setLocationProviderEnabled(
-                        resolver,
-                        LocationManager.GPS_PROVIDER,
-                        desiredState);
-                    return desiredState;
+                    final UserManager um =
+                            (UserManager) context.getSystemService(Context.USER_SERVICE);
+                    if (um.isLocationSharingToggleAllowed()) {
+                        Settings.Secure.setLocationProviderEnabled(
+                            resolver,
+                            LocationManager.GPS_PROVIDER,
+                            desiredState);
+                        return desiredState;
+                    }
+                    return Settings.Secure.isLocationProviderEnabled(
+                            resolver,
+                            LocationManager.GPS_PROVIDER);
                 }
 
                 @Override
