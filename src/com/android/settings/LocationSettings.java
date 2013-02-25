@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -92,6 +93,15 @@ public class LocationSettings extends SettingsPreferenceFragment
         mGps = (CheckBoxPreference) root.findPreference(KEY_LOCATION_GPS);
         mAssistedGps = (CheckBoxPreference) root.findPreference(KEY_ASSISTED_GPS);
 
+        // Only enable these controls if this user is allowed to change location
+        // sharing settings.
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        boolean isToggleAllowed = um.isLocationSharingToggleAllowed();
+        if (mLocationAccess != null) mLocationAccess.setEnabled(isToggleAllowed);
+        if (mNetwork != null) mNetwork.setEnabled(isToggleAllowed);
+        if (mGps != null) mGps.setEnabled(isToggleAllowed);
+        if (mAssistedGps != null) mAssistedGps.setEnabled(isToggleAllowed);
+
         mLocationAccess.setOnPreferenceChangeListener(this);
         return root;
     }
@@ -119,15 +129,20 @@ public class LocationSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final ContentResolver cr = getContentResolver();
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         if (preference == mNetwork) {
-            Settings.Secure.setLocationProviderEnabled(cr,
-                    LocationManager.NETWORK_PROVIDER, mNetwork.isChecked());
+            if (um.isLocationSharingToggleAllowed()) {
+                Settings.Secure.setLocationProviderEnabled(cr,
+                        LocationManager.NETWORK_PROVIDER, mNetwork.isChecked());
+            }
         } else if (preference == mGps) {
             boolean enabled = mGps.isChecked();
-            Settings.Secure.setLocationProviderEnabled(cr,
-                    LocationManager.GPS_PROVIDER, enabled);
-            if (mAssistedGps != null) {
-                mAssistedGps.setEnabled(enabled);
+            if (um.isLocationSharingToggleAllowed()) {
+                Settings.Secure.setLocationProviderEnabled(cr,
+                        LocationManager.GPS_PROVIDER, enabled);
+                if (mAssistedGps != null) {
+                    mAssistedGps.setEnabled(enabled);
+                }
             }
         } else if (preference == mAssistedGps) {
             Settings.Global.putInt(cr, Settings.Global.ASSISTED_GPS_ENABLED,
@@ -170,6 +185,10 @@ public class LocationSettings extends SettingsPreferenceFragment
 
     /** Enable or disable all providers when the master toggle is changed. */
     private void onToggleLocationAccess(boolean checked) {
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (! um.isLocationSharingToggleAllowed()) {
+            return;
+        }
         final ContentResolver cr = getContentResolver();
         Settings.Secure.setLocationProviderEnabled(cr,
                 LocationManager.GPS_PROVIDER, checked);
