@@ -49,9 +49,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
@@ -76,6 +78,7 @@ public class WifiConfigController implements TextWatcher,
     // e.g. AccessPoint.SECURITY_NONE
     private int mAccessPointSecurity;
     private TextView mPasswordView;
+    private CheckBox mShowPassword;
 
     private String unspecifiedCert = "unspecified";
     private static final int unspecifiedCertIndex = 0;
@@ -555,8 +558,13 @@ public class WifiConfigController implements TextWatcher,
         if (mPasswordView == null) {
             mPasswordView = (TextView) mView.findViewById(R.id.password);
             mPasswordView.addTextChangedListener(this);
-            ((CheckBox) mView.findViewById(R.id.show_password)).setOnClickListener(this);
-
+            mShowPassword = (CheckBox) mView.findViewById(R.id.show_password);
+            mShowPassword.setOnClickListener(this);
+            mShowPassword.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    updatePasswordVisibility(isChecked);
+                }
+            });
             if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
                 mPasswordView.setHint(R.string.wifi_unchanged);
             }
@@ -866,14 +874,7 @@ public class WifiConfigController implements TextWatcher,
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.show_password) {
-            int pos = mPasswordView.getSelectionEnd();
-            mPasswordView.setInputType(
-                    InputType.TYPE_CLASS_TEXT | (((CheckBox) view).isChecked() ?
-                            InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
-                                InputType.TYPE_TEXT_VARIATION_PASSWORD));
-            if (pos >= 0) {
-                ((EditText)mPasswordView).setSelection(pos);
-            }
+            updatePasswordVisibility(((CheckBox) view).isChecked());
         } else if (view.getId() == R.id.wifi_advanced_togglebox) {
             if (((CheckBox) view).isChecked()) {
                 mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
@@ -901,5 +902,19 @@ public class WifiConfigController implements TextWatcher,
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //
+    }
+
+    /**
+     * Make the characters of the password visible if show_password is checked.
+     */
+    private void updatePasswordVisibility(boolean checked) {
+        int pos = mPasswordView.getSelectionEnd();
+        mPasswordView.setInputType(
+                InputType.TYPE_CLASS_TEXT | (checked ?
+                        InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
+                            InputType.TYPE_TEXT_VARIATION_PASSWORD));
+        if (pos >= 0) {
+            ((EditText)mPasswordView).setSelection(pos);
+        }
     }
 }
