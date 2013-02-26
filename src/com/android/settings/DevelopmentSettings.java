@@ -46,11 +46,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
-import android.os.Trace;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
-import android.preference.MultiCheckPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
@@ -114,6 +112,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String FORCE_MSAA_KEY = "force_msaa";
     private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
+    private static final String SHOW_NON_RECTANGULAR_CLIP_KEY = "show_non_rect_clip";
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
     private static final String SHOW_HW_OVERDRAW_KEY = "show_hw_overdraw";
@@ -173,6 +172,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mShowHwOverdraw;
     private CheckBoxPreference mDebugLayout;
     private ListPreference mTrackFrameTime;
+    private ListPreference mShowNonRectClip;
     private ListPreference mWindowAnimationScale;
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
@@ -252,36 +252,23 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowCpuUsage = findAndInitCheckboxPref(SHOW_CPU_USAGE_KEY);
         mForceHardwareUi = findAndInitCheckboxPref(FORCE_HARDWARE_UI_KEY);
         mForceMsaa = findAndInitCheckboxPref(FORCE_MSAA_KEY);
-        mTrackFrameTime = (ListPreference) findPreference(TRACK_FRAME_TIME_KEY);
-        mAllPrefs.add(mTrackFrameTime);
-        mTrackFrameTime.setOnPreferenceChangeListener(this);
+        mTrackFrameTime = addListPreference(TRACK_FRAME_TIME_KEY);
+        mShowNonRectClip = addListPreference(SHOW_NON_RECTANGULAR_CLIP_KEY);
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
         mShowHwOverdraw = findAndInitCheckboxPref(SHOW_HW_OVERDRAW_KEY);
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
-        mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
-        mAllPrefs.add(mWindowAnimationScale);
-        mWindowAnimationScale.setOnPreferenceChangeListener(this);
-        mTransitionAnimationScale = (ListPreference) findPreference(TRANSITION_ANIMATION_SCALE_KEY);
-        mAllPrefs.add(mTransitionAnimationScale);
-        mTransitionAnimationScale.setOnPreferenceChangeListener(this);
-        mAnimatorDurationScale = (ListPreference) findPreference(ANIMATOR_DURATION_SCALE_KEY);
-        mAllPrefs.add(mAnimatorDurationScale);
-        mAnimatorDurationScale.setOnPreferenceChangeListener(this);
-        mOverlayDisplayDevices = (ListPreference) findPreference(OVERLAY_DISPLAY_DEVICES_KEY);
-        mAllPrefs.add(mOverlayDisplayDevices);
-        mOverlayDisplayDevices.setOnPreferenceChangeListener(this);
-        mOpenGLTraces = (ListPreference) findPreference(OPENGL_TRACES_KEY);
-        mAllPrefs.add(mOpenGLTraces);
-        mOpenGLTraces.setOnPreferenceChangeListener(this);
+        mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
+        mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
+        mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
+        mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
+        mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
         mAllPrefs.add(mImmediatelyDestroyActivities);
         mResetCbPrefs.add(mImmediatelyDestroyActivities);
-        mAppProcessLimit = (ListPreference) findPreference(APP_PROCESS_LIMIT_KEY);
-        mAllPrefs.add(mAppProcessLimit);
-        mAppProcessLimit.setOnPreferenceChangeListener(this);
+        mAppProcessLimit = addListPreference(APP_PROCESS_LIMIT_KEY);
 
         mShowAllANRs = (CheckBoxPreference) findPreference(
                 SHOW_ALL_ANRS_KEY);
@@ -293,6 +280,13 @@ public class DevelopmentSettings extends PreferenceFragment
             mAllPrefs.add(hdcpChecking);
         }
         removeHdcpOptionsForProduction();
+    }
+
+    private ListPreference addListPreference(String prefKey) {
+        ListPreference pref = (ListPreference) findPreference(prefKey);
+        mAllPrefs.add(pref);
+        pref.setOnPreferenceChangeListener(this);
+        return pref;
     }
 
     private void disableForUser(Preference pref) {
@@ -426,6 +420,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateHardwareUiOptions();
         updateMsaaOptions();
         updateTrackFrameTimeOptions();
+        updateShowNonRectClipOptions();
         updateShowHwScreenUpdatesOptions();
         updateShowHwLayersUpdatesOptions();
         updateShowHwOverdrawOptions();
@@ -733,6 +728,32 @@ public class DevelopmentSettings extends PreferenceFragment
                 newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
         updateTrackFrameTimeOptions();
+    }
+
+    private void updateShowNonRectClipOptions() {
+        String value = SystemProperties.get(
+                HardwareRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY);
+        if (value == null) {
+            value = "hide";
+        }
+
+        CharSequence[] values = mShowNonRectClip.getEntryValues();
+        for (int i = 0; i < values.length; i++) {
+            if (value.contentEquals(values[i])) {
+                mShowNonRectClip.setValueIndex(i);
+                mShowNonRectClip.setSummary(mShowNonRectClip.getEntries()[i]);
+                return;
+            }
+        }
+        mShowNonRectClip.setValueIndex(0);
+        mShowNonRectClip.setSummary(mShowNonRectClip.getEntries()[0]);
+    }
+
+    private void writeShowNonRectClipOptions(Object newValue) {
+        SystemProperties.set(HardwareRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY,
+                newValue == null ? "" : newValue.toString());
+        pokeSystemProperties();
+        updateShowNonRectClipOptions();
     }
 
     private void updateShowHwScreenUpdatesOptions() {
@@ -1091,6 +1112,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mTrackFrameTime) {
             writeTrackFrameTimeOptions(newValue);
+            return true;
+        } else if (preference == mShowNonRectClip) {
+            writeShowNonRectClipOptions(newValue);
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);

@@ -104,29 +104,14 @@
             android:title="@string/debug_drawing_category">
 
         <CheckBoxPreference
-            android:key="debug_layout"
-            android:title="@string/debug_layout"
-            android:summary="@string/debug_layout_summary"/>
-
-        <CheckBoxPreference
-            android:key="show_hw_screen_udpates"
-            android:title="@string/show_hw_screen_updates"
-            android:summary="@string/show_hw_screen_updates_summary"/>
-
-        <CheckBoxPreference
-            android:key="show_hw_layers_udpates"
-            android:title="@string/show_hw_layers_updates"
-            android:summary="@string/show_hw_layers_updates_summary"/>
-
-        <CheckBoxPreference
-            android:key="show_hw_overdraw"
-            android:title="@string/show_hw_overdraw"
-            android:summary="@string/show_hw_overdraw_summary"/>
-
-        <CheckBoxPreference
             android:key="show_screen_updates"
             android:title="@string/show_screen_updates"
             android:summary="@string/show_screen_updates_summary"/>
+
+        <CheckBoxPreference
+            android:key="debug_layout"
+            android:title="@string/debug_layout"
+            android:summary="@string/debug_layout_summary"/>
 
         <ListPreference
             android:key="window_animation_scale"
@@ -149,27 +134,54 @@
             android:entries="@array/animator_duration_scale_entries"
             android:entryValues="@array/animator_duration_scale_values" />
 
-        <CheckBoxPreference
-            android:key="disable_overlays"
-            android:title="@string/disable_overlays"
-            android:summary="@string/disable_overlays_summary"/>
-
-        <CheckBoxPreference
-            android:key="force_hw_ui"
-            android:title="@string/force_hw_ui"
-            android:summary="@string/force_hw_ui_summary"/>
-
-        <CheckBoxPreference
-            android:key="force_msaa"
-            android:title="@string/force_msaa"
-            android:summary="@string/force_msaa_summary"/>
-
         <ListPreference
             android:key="overlay_display_devices"
             android:title="@string/overlay_display_devices_title"
             android:persistent="false"
             android:entries="@array/overlay_display_devices_entries"
             android:entryValues="@array/overlay_display_devices_values" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="debug_hw_drawing_category"
+            android:title="@string/debug_hw_drawing_category">
+
+        <CheckBoxPreference
+                android:key="force_hw_ui"
+                android:title="@string/force_hw_ui"
+                android:summary="@string/force_hw_ui_summary"/>
+
+        <CheckBoxPreference
+                android:key="show_hw_screen_udpates"
+                android:title="@string/show_hw_screen_updates"
+                android:summary="@string/show_hw_screen_updates_summary"/>
+
+        <CheckBoxPreference
+                android:key="show_hw_layers_udpates"
+                android:title="@string/show_hw_layers_updates"
+                android:summary="@string/show_hw_layers_updates_summary"/>
+
+        <CheckBoxPreference
+                android:key="show_hw_overdraw"
+                android:title="@string/show_hw_overdraw"
+                android:summary="@string/show_hw_overdraw_summary"/>
+
+        <ListPreference
+                android:key="show_non_rect_clip"
+                android:title="@string/show_non_rect_clip"
+                android:persistent="false"
+                android:entries="@array/show_non_rect_clip_entries"
+                android:entryValues="@array/show_non_rect_clip_values" />
+
+        <CheckBoxPreference
+                android:key="force_msaa"
+                android:title="@string/force_msaa"
+                android:summary="@string/force_msaa_summary"/>
+
+        <CheckBoxPreference
+                android:key="disable_overlays"
+                android:title="@string/disable_overlays"
+                android:summary="@string/disable_overlays_summary"/>
 
     </PreferenceCategory>
 
