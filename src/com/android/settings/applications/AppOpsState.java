@@ -115,13 +115,17 @@ public class AppOpsState {
                     AppOpsManager.OP_READ_CALL_LOG,
                     AppOpsManager.OP_WRITE_CALL_LOG,
                     AppOpsManager.OP_READ_CALENDAR,
-                    AppOpsManager.OP_WRITE_CALENDAR },
+                    AppOpsManager.OP_WRITE_CALENDAR,
+                    AppOpsManager.OP_READ_CLIPBOARD,
+                    AppOpsManager.OP_WRITE_CLIPBOARD },
             new boolean[] { true,
                     true,
                     true,
                     true,
                     true,
-                    true }
+                    true,
+                    false,
+                    false }
             );
 
     public static final OpsTemplate MESSAGING_TEMPLATE = new OpsTemplate(
