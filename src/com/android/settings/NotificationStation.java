@@ -163,7 +163,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         final int currentUserId = ActivityManager.getCurrentUser();
         try {
             StatusBarNotification[] nions = mNoMan.getHistoricalNotifications(
-                    mContext.getPackageName(), 100);
+                    mContext.getPackageName(), 50);
             List<HistoricalNotificationInfo> list
                     = new ArrayList<HistoricalNotificationInfo>(nions.length);
 
