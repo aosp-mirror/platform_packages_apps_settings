@@ -69,6 +69,7 @@
             android:taskAffinity=""
             android:theme="@android:style/Theme.Holo"
             android:hardwareAccelerated="true"
+            android:requiredForAllUsers="true"
             android:supportsRtl="true">
 
         <!-- Settings -->
@@ -82,6 +83,16 @@
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- User Restrictions activity -->
+
+        <activity android:name=".users.UserRestrictionsActivity"
+                android:label="@string/user_restrictions_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -733,6 +744,16 @@
                 <data android:scheme="package" />
             </intent-filter>
         </activity-alias>
+
+        <activity android:name=".users.AppRestrictionsFragment$Activity"
+                android:label="@string/application_info_label"
+                android:exported="true"
+                android:taskAffinity="">
+            <intent-filter>
+                <action android:name="com.android.settings.APP_RESTRICTIONS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
@@ -1516,6 +1537,22 @@
                 android:resource="@id/display_settings" />
         </activity>
 
+        <activity android:name="Settings$UserSettingsActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:label="@string/user_settings_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.USER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.users.UserSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/user_settings" />
+        </activity>
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="true"
@@ -1543,6 +1580,12 @@
         <receiver android:name=".users.ProfileUpdateReceiver">
             <intent-filter>
                 <action android:name="android.provider.Contacts.PROFILE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".users.RestrictionsReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_RESTRICTION_ENTRIES"/>
             </intent-filter>
         </receiver>
 

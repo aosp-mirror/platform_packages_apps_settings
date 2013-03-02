@@ -4273,12 +4273,25 @@
     <string name="user_list_title">Other users</string>
     <!-- User settings add user menu [CHAR LIMIT=20] -->
     <string name="user_add_user_menu">Add user</string>
+    <!-- User settings add restricted user label [CHAR LIMIT=20] -->
+    <string name="user_add_restricted">Add limited user</string>
+    <!-- User settings summary for add restricted user [CHAR LIMIT=100] -->
+    <string name="user_add_restricted_summary">Limited users can only access the apps and content you select</string>
+    <!-- User settings add user label [CHAR LIMIT=20] -->
+    <string name="user_add_trusted">Add trusted user</string>
+    <!-- User settings summary for add trusted user [CHAR LIMIT=100] -->
+    <string name="user_add_trusted_summary">Trusted users have no restrictions</string>
+
     <!-- User summary to indicate that user is currently active in the background [CHAR LIMIT=100] -->
     <string name="user_summary_active">Active</string>
     <!-- User summary to indicate that user is currently inactive in the background [CHAR LIMIT=100] -->
     <string name="user_summary_inactive">Not active</string>
     <!-- User summary to indicate that user is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_not_set_up">Not set up</string>
+    <!-- Summary text for a trusted user [CHAR LIMIT=50] -->
+    <string name="user_trusted">Trusted</string>
+    <!-- Summary text for a limited user [CHAR LIMIT=50] -->
+    <string name="user_limited">Limited</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
     <string name="user_owner">Owner</string>
     <!-- Title for the preference to enter the nickname of the userto display in the user switcher [CHAR LIMIT=25]-->
@@ -4324,6 +4337,13 @@
     <string name="user_delete_user_description">Delete user</string>
     <!-- Delete button text [CHAR LIMIT=25] -->
     <string name="user_delete_button">Delete</string>
+
+    <!-- Application Restrictions screen title [CHAR LIMIT=45] -->
+    <string name="application_restrictions">Allow apps and content</string>
+    <!-- Applications with restrictions header [CHAR LIMIT=45] -->
+    <string name="apps_with_restrictions_header">Applications with restrictions</string>
+    <!-- Applicaitons with restrictions - settings button [CHAR LIMIT=30] -->
+    <string name="apps_with_restrictions_settings_button">Expand settings for application</string>
 
     <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
     <string name="global_change_warning" product="tablet">This setting affects all users on this tablet.</string>
@@ -4380,4 +4400,16 @@
     <string name="cell_broadcast_settings">Cell broadcasts</string>
     <!-- Cell Broadcast settings description [CHAR LIMIT=100] -->
     <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
+
+    <!-- User app limits screen title [CHAR LIMIT=35] -->
+    <string name="user_restrictions_title">Allow apps and content</string>
+    <!-- User limits screen, user name rename text [CHAR LIMIT=15] -->
+    <string name="user_rename">RENAME</string>
+
+    <!-- Wizard back button label [CHAR LIMIT=25] -->
+    <string name="wizard_back">Back</string>
+    <!-- Wizard next button label [CHAR LIMIT=25] -->
+    <string name="wizard_next">Next</string>
+    <!-- Wizard next button label [CHAR LIMIT=25] -->
+    <string name="wizard_finish">Finish</string>
 </resources>

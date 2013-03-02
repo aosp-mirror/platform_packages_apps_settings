@@ -22,6 +22,7 @@ import android.accounts.OnAccountsUpdateListener;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.RestrictionEntry;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -56,6 +57,7 @@ import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.users.RestrictionsReceiver;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
@@ -133,11 +135,15 @@ public class Settings extends PreferenceActivity
     private Header mLastHeader;
     private boolean mListeningToAccountUpdates;
 
+    private List<RestrictionEntry> mAppRestrictions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
+
+        mAppRestrictions = getApplicationRestrictions();
 
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
@@ -408,7 +414,6 @@ public class Settings extends PreferenceActivity
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
         int i = 0;
-
         mHeaderIndexMap.clear();
         while (i < target.size()) {
             Header header = target.get(i);
@@ -449,6 +454,15 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
                     target.remove(i);
+                }
+            } else if (id == R.id.application_settings) {
+                if (mAppRestrictions != null) {
+                    for (RestrictionEntry entry : mAppRestrictions) {
+                        if (entry.key.equals(RestrictionsReceiver.KEY_ENABLE_APPS)
+                                && !entry.getBooleanValue()) {
+                            target.remove(i);
+                        }
+                    }
                 }
             }
 
@@ -828,4 +842,5 @@ public class Settings extends PreferenceActivity
     public static class WifiDisplaySettingsActivity extends Settings { /* empty */ }
     public static class DreamSettingsActivity extends Settings { /* empty */ }
     public static class NotificationStationActivity extends Settings { /* empty */ }
+    public static class UserSettingsActivity extends Settings { /* empty */ }
 }
