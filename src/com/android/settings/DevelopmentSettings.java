@@ -34,6 +34,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.hardware.usb.IUsbManager;
 import android.os.AsyncTask;
@@ -211,16 +212,21 @@ public class DevelopmentSettings extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.development_prefs);
 
+        final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
+                findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
+
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
         mClearAdbKeys = findPreference(CLEAR_ADB_KEYS);
         if (!SystemProperties.getBoolean("ro.adb.secure", false)) {
-            PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
-                    findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
             if (debugDebuggingCategory != null) {
                 debugDebuggingCategory.removePreference(mClearAdbKeys);
             }
         }
         mEnableTerminal = findAndInitCheckboxPref(ENABLE_TERMINAL);
+        if (!isPackageInstalled(getActivity(), TERMINAL_APP_PACKAGE)) {
+            debugDebuggingCategory.removePreference(mEnableTerminal);
+            mEnableTerminal = null;
+        }
 
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
@@ -242,8 +248,6 @@ public class DevelopmentSettings extends PreferenceFragment
         mWaitForDebugger = findAndInitCheckboxPref(WAIT_FOR_DEBUGGER_KEY);
         mVerifyAppsOverUsb = findAndInitCheckboxPref(VERIFY_APPS_OVER_USB_KEY);
         if (!showVerifierSetting()) {
-            PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
-                    findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
             if (debugDebuggingCategory != null) {
                 debugDebuggingCategory.removePreference(mVerifyAppsOverUsb);
             } else {
@@ -408,9 +412,11 @@ public class DevelopmentSettings extends PreferenceFragment
         mHaveDebugSettings = false;
         updateCheckBox(mEnableAdb, Settings.Global.getInt(cr,
                 Settings.Global.ADB_ENABLED, 0) != 0);
-        updateCheckBox(mEnableTerminal,
-                context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
-                == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+        if (mEnableTerminal != null) {
+            updateCheckBox(mEnableTerminal,
+                    context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
+                    == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+        }
         updateCheckBox(mBugreportInPower, Settings.Secure.getInt(cr,
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.Global.getInt(cr,
@@ -1296,6 +1302,14 @@ public class DevelopmentSettings extends PreferenceFragment
                     .setPermissionEnforced(READ_EXTERNAL_STORAGE, enforced);
         } catch (RemoteException e) {
             throw new RuntimeException("Problem talking with PackageManager", e);
+        }
+    }
+
+    private static boolean isPackageInstalled(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getPackageInfo(packageName, 0) != null;
+        } catch (NameNotFoundException e) {
+            return false;
         }
     }
 }
