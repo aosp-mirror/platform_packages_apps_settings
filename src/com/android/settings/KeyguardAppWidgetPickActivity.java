@@ -517,8 +517,8 @@ public class KeyguardAppWidgetPickActivity extends Activity
                     // Found in KeyguardHostView.java
                     final int KEYGUARD_HOST_ID = 0x4B455947;
                     int userId = ActivityManager.getCurrentUser();
-                    mAppWidgetId = AppWidgetHost.allocateAppWidgetIdForSystem(KEYGUARD_HOST_ID,
-                            userId);
+                    mAppWidgetId = AppWidgetHost.allocateAppWidgetIdForPackage(KEYGUARD_HOST_ID,
+                            userId, "com.android.keyguard");
                 }
                 mAppWidgetManager.bindAppWidgetId(
                         mAppWidgetId, intent.getComponent(), mExtraConfigureOptions);
