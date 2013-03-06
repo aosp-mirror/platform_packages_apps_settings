@@ -88,6 +88,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String ENABLE_ADB = "enable_adb";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
+    private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
@@ -134,6 +135,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
+    private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
+
     private static final int RESULT_DEBUG_APP = 1000;
 
     private IWindowManager mWindowManager;
@@ -147,6 +150,7 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private CheckBoxPreference mEnableAdb;
     private Preference mClearAdbKeys;
+    private CheckBoxPreference mEnableTerminal;
     private Preference mBugreport;
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
@@ -216,6 +220,7 @@ public class DevelopmentSettings extends PreferenceFragment
                 debugDebuggingCategory.removePreference(mClearAdbKeys);
             }
         }
+        mEnableTerminal = findAndInitCheckboxPref(ENABLE_TERMINAL);
 
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
@@ -228,6 +233,7 @@ public class DevelopmentSettings extends PreferenceFragment
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
             disableForUser(mClearAdbKeys);
+            disableForUser(mEnableTerminal);
             disableForUser(mPassword);
         }
 
@@ -402,6 +408,9 @@ public class DevelopmentSettings extends PreferenceFragment
         mHaveDebugSettings = false;
         updateCheckBox(mEnableAdb, Settings.Global.getInt(cr,
                 Settings.Global.ADB_ENABLED, 0) != 0);
+        updateCheckBox(mEnableTerminal,
+                context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
+                == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         updateCheckBox(mBugreportInPower, Settings.Secure.getInt(cr,
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.Global.getInt(cr,
@@ -1030,6 +1039,11 @@ public class DevelopmentSettings extends PreferenceFragment
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, null)
                         .show();
+        } else if (preference == mEnableTerminal) {
+            final PackageManager pm = getActivity().getPackageManager();
+            pm.setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
+                    mEnableTerminal.isChecked() ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                            : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.BUGREPORT_IN_POWER_MENU, 

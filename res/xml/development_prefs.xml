@@ -61,6 +61,11 @@
                 android:title="@string/clear_adb_keys" />
 
         <CheckBoxPreference
+            android:key="enable_terminal"
+            android:title="@string/enable_terminal_title"
+            android:summary="@string/enable_terminal_summary" />
+
+        <CheckBoxPreference
             android:key="bugreport_in_power"
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary"/>
