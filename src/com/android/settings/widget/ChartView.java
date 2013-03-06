@@ -16,8 +16,6 @@
 
 package com.android.settings.widget;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
@@ -27,6 +25,7 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.widget.FrameLayout;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 
 /**
@@ -71,8 +70,8 @@ public class ChartView extends FrameLayout {
     }
 
     void init(ChartAxis horiz, ChartAxis vert) {
-        mHoriz = checkNotNull(horiz, "missing horiz");
-        mVert = checkNotNull(vert, "missing vert");
+        mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
+        mVert = Preconditions.checkNotNull(vert, "missing vert");
     }
 
     public void setOptimalWidth(int optimalWidth, float optimalWidthWeight) {

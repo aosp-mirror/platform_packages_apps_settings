@@ -35,8 +35,8 @@ import android.util.MathUtils;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.google.common.base.Preconditions;
 
 /**
  * Sweep across a {@link ChartView} at a specific {@link ChartAxis} value, which
