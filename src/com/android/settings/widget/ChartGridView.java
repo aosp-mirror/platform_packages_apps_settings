@@ -32,8 +32,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.google.common.base.Preconditions;
 
 /**
  * Background of {@link ChartView} that renders grid lines as requested by

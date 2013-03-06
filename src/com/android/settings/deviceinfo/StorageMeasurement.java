@@ -41,7 +41,7 @@ import android.util.SparseLongArray;
 
 import com.android.internal.app.IMediaContainerService;
 import com.google.android.collect.Maps;
-import com.google.common.collect.Sets;
+import com.google.android.collect.Sets;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
