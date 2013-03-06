@@ -33,8 +33,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.google.common.base.Preconditions;
 
 /**
  * {@link NetworkStatsHistory} series to render inside a {@link ChartView},

@@ -32,7 +32,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.google.common.collect.Lists;
+import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 
