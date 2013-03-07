@@ -52,8 +52,10 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
     static final boolean DEBUG = true;
     private static final String PACKAGE_SCHEME = "package";
+    private static final boolean SHOW_HISTORICAL_NOTIFICATIONS = true;
 
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
+
     private INotificationManager mNoMan;
     private INotificationListener.Stub mListener = new INotificationListener.Stub() {
         @Override
@@ -64,7 +66,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
         @Override
         public void onNotificationRemoved(StatusBarNotification notification) throws RemoteException {
-            // no-op; we're just showing new notifications
+            Log.v(TAG, "onNotificationRemoved: " + notification);
+            getListView().post(new Runnable() { public void run() { refreshList(); }});
         }
     };
 
@@ -79,7 +82,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
-            mNoMan.registerListener(mListener, UserHandle.USER_ALL);
+            mNoMan.registerListener(mListener, ActivityManager.getCurrentUser());
         } catch (RemoteException e) {
             // well, that didn't work out
         }
@@ -162,8 +165,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private List<HistoricalNotificationInfo> loadNotifications() {
         final int currentUserId = ActivityManager.getCurrentUser();
         try {
-            StatusBarNotification[] nions = mNoMan.getHistoricalNotifications(
-                    mContext.getPackageName(), 50);
+            StatusBarNotification[] nions;
+            nions = SHOW_HISTORICAL_NOTIFICATIONS
+                    ? mNoMan.getHistoricalNotifications(mContext.getPackageName(), 50)
+                    : mNoMan.getActiveNotifications(mContext.getPackageName());
+
             List<HistoricalNotificationInfo> list
                     = new ArrayList<HistoricalNotificationInfo>(nions.length);
 
