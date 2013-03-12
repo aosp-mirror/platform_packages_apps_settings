@@ -160,35 +160,39 @@ public class NotificationStation extends SettingsPreferenceFragment {
         public int priority;
         public int user;
         public long timestamp;
+        public boolean active;
     }
 
     private List<HistoricalNotificationInfo> loadNotifications() {
         final int currentUserId = ActivityManager.getCurrentUser();
         try {
-            StatusBarNotification[] nions;
-            nions = SHOW_HISTORICAL_NOTIFICATIONS
-                    ? mNoMan.getHistoricalNotifications(mContext.getPackageName(), 50)
-                    : mNoMan.getActiveNotifications(mContext.getPackageName());
+            StatusBarNotification[] active = mNoMan.getActiveNotifications(mContext.getPackageName());
+            StatusBarNotification[] dismissed = mNoMan.getHistoricalNotifications(mContext.getPackageName(), 50);
 
             List<HistoricalNotificationInfo> list
-                    = new ArrayList<HistoricalNotificationInfo>(nions.length);
+                    = new ArrayList<HistoricalNotificationInfo>(active.length + dismissed.length);
 
-            for (StatusBarNotification sbn : nions) {
-                final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
-                info.pkg = sbn.pkg;
-                info.user = sbn.getUserId();
-                info.icon = loadIconDrawable(info.pkg, info.user, sbn.notification.icon);
-                info.pkgicon = loadPackageIconDrawable(info.pkg, info.user);
-                if (sbn.notification.extras != null) {
-                    info.title = sbn.notification.extras.getString(Notification.EXTRA_TITLE);
-                }
-                info.timestamp = sbn.postTime;
-                info.priority = sbn.notification.priority;
-                logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
+            for (StatusBarNotification[] resultset
+                    : new StatusBarNotification[][] { active, dismissed }) {
+                for (StatusBarNotification sbn : resultset) {
+                    final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
+                    info.pkg = sbn.pkg;
+                    info.user = sbn.getUserId();
+                    info.icon = loadIconDrawable(info.pkg, info.user, sbn.notification.icon);
+                    info.pkgicon = loadPackageIconDrawable(info.pkg, info.user);
+                    if (sbn.notification.extras != null) {
+                        info.title = sbn.notification.extras.getString(Notification.EXTRA_TITLE);
+                    }
+                    info.timestamp = sbn.postTime;
+                    info.priority = sbn.notification.priority;
+                    logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
 
-                if (info.user == UserHandle.USER_ALL
-                        || info.user == currentUserId) {
-                    list.add(info);
+                    info.active = (resultset == active);
+
+                    if (info.user == UserHandle.USER_ALL
+                            || info.user == currentUserId) {
+                        list.add(info);
+                    }
                 }
             }
 
@@ -274,6 +278,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
             // bind caption
             ((TextView) row.findViewById(android.R.id.title)).setText(info.title);
+
+            row.setAlpha(info.active ? 1.0f : 0.5f);
 
 //            // bind radio button
 //            RadioButton radioButton = (RadioButton) row.findViewById(android.R.id.button1);
