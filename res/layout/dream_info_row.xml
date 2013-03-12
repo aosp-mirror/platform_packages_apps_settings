@@ -24,6 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/divider"
+        android:clickable="true"
+        android:focusable="true"
         android:background="?android:attr/selectableItemBackground" >
 
         <!-- Dream icon -->
@@ -95,6 +97,8 @@
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/screensaver_settings_button"
         android:padding="8dip"
+        android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_bt_config" />
 
 </RelativeLayout>
