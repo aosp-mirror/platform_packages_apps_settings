@@ -31,6 +31,11 @@
             android:entries="@array/wifi_sleep_policy_entries"
             android:entryValues="@array/wifi_sleep_policy_values"
             />
+    <CheckBoxPreference
+            android:key="wifi_scan_always_available"
+            android:title="@string/wifi_scan_always_available"
+            android:summary="@string/wifi_scan_always_available_summary"
+            android:persistent="false" />
 
     <!-- android:dependency="enable_wifi" -->
     <CheckBoxPreference
