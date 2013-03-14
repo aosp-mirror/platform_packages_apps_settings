@@ -45,6 +45,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
     private static final String KEY_POOR_NETWORK_DETECTION = "wifi_poor_network_detection";
+    private static final String KEY_SCAN_ALWAYS_AVAILABLE = "wifi_scan_always_available";
     private static final String KEY_SUSPEND_OPTIMIZATIONS = "suspend_optimizations";
 
     private WifiManager mWifiManager;
@@ -87,6 +88,11 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                         1 : 0) == 1);
             }
         }
+
+        CheckBoxPreference scanAlwaysAvailable =
+            (CheckBoxPreference) findPreference(KEY_SCAN_ALWAYS_AVAILABLE);
+        scanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
+                    Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
 
         CheckBoxPreference suspendOptimizations =
             (CheckBoxPreference) findPreference(KEY_SUSPEND_OPTIMIZATIONS);
@@ -166,6 +172,10 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         } else if (KEY_SUSPEND_OPTIMIZATIONS.equals(key)) {
             Global.putInt(getContentResolver(),
                     Global.WIFI_SUSPEND_OPTIMIZATIONS_ENABLED,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+        } else if (KEY_SCAN_ALWAYS_AVAILABLE.equals(key)) {
+            Global.putInt(getContentResolver(),
+                    Global.WIFI_SCAN_ALWAYS_AVAILABLE,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);
