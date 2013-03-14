@@ -178,6 +178,7 @@ public class Settings extends PreferenceActivity
 
         if (mParentHeader != null) {
             setParentTitle(mParentHeader.title, null, new OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     switchToParent(mParentHeader.fragment);
                 }
@@ -405,7 +406,6 @@ public class Settings extends PreferenceActivity
     @Override
     public void onBuildHeaders(List<Header> headers) {
         loadHeadersFromResource(R.xml.settings_headers, headers);
-
         updateHeaderList(headers);
     }
 
@@ -414,6 +414,8 @@ public class Settings extends PreferenceActivity
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
         int i = 0;
+
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mHeaderIndexMap.clear();
         while (i < target.size()) {
             Header header = target.get(i);
@@ -463,6 +465,10 @@ public class Settings extends PreferenceActivity
                             target.remove(i);
                         }
                     }
+                }
+            } else if (id == R.id.account_add) {
+                if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+                    target.remove(i);
                 }
             }
 
@@ -778,6 +784,7 @@ public class Settings extends PreferenceActivity
         return true;
     }
 
+    @Override
     public boolean shouldUpRecreateTask(Intent targetIntent) {
         return super.shouldUpRecreateTask(new Intent(this, Settings.class));
     }

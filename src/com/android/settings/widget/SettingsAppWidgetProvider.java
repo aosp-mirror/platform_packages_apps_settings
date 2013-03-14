@@ -541,7 +541,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 protected Boolean doInBackground(Void... args) {
                     final UserManager um =
                             (UserManager) context.getSystemService(Context.USER_SERVICE);
-                    if (um.isLocationSharingToggleAllowed()) {
+                    if (!um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
                         Settings.Secure.setLocationProviderEnabled(
                             resolver,
                             LocationManager.GPS_PROVIDER,
