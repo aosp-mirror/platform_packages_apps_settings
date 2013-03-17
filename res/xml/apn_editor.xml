@@ -141,4 +141,17 @@
         android:entries="@array/bearer_entries"
         android:entryValues="@array/bearer_values"
         />
+    <ListPreference
+        android:title="@string/mvno_type"
+        android:key="mvno_type"
+        android:entries="@array/mvno_type_entries"
+        android:entryValues="@array/mvno_type_values"
+        />
+    <EditTextPreference
+        android:title="@string/mvno_match_data"
+        android:dialogTitle="@string/mvno_match_data"
+        android:key="mvno_match_data"
+        android:singleLine="true"
+        android:inputType="text"
+        />
 </PreferenceScreen>   
