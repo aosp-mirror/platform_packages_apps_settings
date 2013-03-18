@@ -123,7 +123,6 @@ public class UsbSettings extends SettingsPreferenceFragment {
             mMtp.setEnabled(false);
             mPtp.setEnabled(false);
         }
-
     }
 
     @Override
@@ -134,22 +133,17 @@ public class UsbSettings extends SettingsPreferenceFragment {
         if (Utils.isMonkeyRunning()) {
             return true;
         }
-        // temporary hack - using check boxes as radio buttons
-        // don't allow unchecking them
-        if (preference instanceof CheckBoxPreference) {
-            CheckBoxPreference checkBox = (CheckBoxPreference)preference;
-            if (!checkBox.isChecked()) {
-                checkBox.setChecked(true);
-                return true;
-            }
+
+        String function = "none";
+        if (preference == mMtp && mMtp.isChecked()) {
+            function = UsbManager.USB_FUNCTION_MTP;
+        } else if (preference == mPtp && mPtp.isChecked()) {
+            function = UsbManager.USB_FUNCTION_PTP;
         }
-        if (preference == mMtp) {
-            mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, true);
-            updateToggles(UsbManager.USB_FUNCTION_MTP);
-        } else if (preference == mPtp) {
-            mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP, true);
-            updateToggles(UsbManager.USB_FUNCTION_PTP);
-        }
+
+        mUsbManager.setCurrentFunction(function, true);
+        updateToggles(function);
+
         return true;
     }
 }
