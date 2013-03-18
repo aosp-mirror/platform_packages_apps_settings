@@ -557,77 +557,77 @@ public class BatteryHistoryChart extends View {
                             lastX = x;
                             lastY = y;
                         }
+                    }
 
-                        final boolean charging =
-                            (rec.states&HistoryItem.STATE_BATTERY_PLUGGED_FLAG) != 0;
-                        if (charging != lastCharging) {
-                            if (charging) {
-                                mChargingPath.moveTo(x, h-mChargingOffset);
-                            } else {
-                                mChargingPath.lineTo(x, h-mChargingOffset);
-                            }
-                            lastCharging = charging;
+                    final boolean charging =
+                        (rec.states&HistoryItem.STATE_BATTERY_PLUGGED_FLAG) != 0;
+                    if (charging != lastCharging) {
+                        if (charging) {
+                            mChargingPath.moveTo(x, h-mChargingOffset);
+                        } else {
+                            mChargingPath.lineTo(x, h-mChargingOffset);
                         }
+                        lastCharging = charging;
+                    }
 
-                        final boolean screenOn =
-                            (rec.states&HistoryItem.STATE_SCREEN_ON_FLAG) != 0;
-                        if (screenOn != lastScreenOn) {
-                            if (screenOn) {
-                                mScreenOnPath.moveTo(x, h-mScreenOnOffset);
-                            } else {
-                                mScreenOnPath.lineTo(x, h-mScreenOnOffset);
-                            }
-                            lastScreenOn = screenOn;
+                    final boolean screenOn =
+                        (rec.states&HistoryItem.STATE_SCREEN_ON_FLAG) != 0;
+                    if (screenOn != lastScreenOn) {
+                        if (screenOn) {
+                            mScreenOnPath.moveTo(x, h-mScreenOnOffset);
+                        } else {
+                            mScreenOnPath.lineTo(x, h-mScreenOnOffset);
                         }
+                        lastScreenOn = screenOn;
+                    }
 
-                        final boolean gpsOn =
-                            (rec.states&HistoryItem.STATE_GPS_ON_FLAG) != 0;
-                        if (gpsOn != lastGpsOn) {
-                            if (gpsOn) {
-                                mGpsOnPath.moveTo(x, h-mGpsOnOffset);
-                            } else {
-                                mGpsOnPath.lineTo(x, h-mGpsOnOffset);
-                            }
-                            lastGpsOn = gpsOn;
+                    final boolean gpsOn =
+                        (rec.states&HistoryItem.STATE_GPS_ON_FLAG) != 0;
+                    if (gpsOn != lastGpsOn) {
+                        if (gpsOn) {
+                            mGpsOnPath.moveTo(x, h-mGpsOnOffset);
+                        } else {
+                            mGpsOnPath.lineTo(x, h-mGpsOnOffset);
                         }
+                        lastGpsOn = gpsOn;
+                    }
 
-                        final boolean wifiRunning =
-                            (rec.states&HistoryItem.STATE_WIFI_RUNNING_FLAG) != 0;
-                        if (wifiRunning != lastWifiRunning) {
-                            if (wifiRunning) {
-                                mWifiRunningPath.moveTo(x, h-mWifiRunningOffset);
-                            } else {
-                                mWifiRunningPath.lineTo(x, h-mWifiRunningOffset);
-                            }
-                            lastWifiRunning = wifiRunning;
+                    final boolean wifiRunning =
+                        (rec.states&HistoryItem.STATE_WIFI_RUNNING_FLAG) != 0;
+                    if (wifiRunning != lastWifiRunning) {
+                        if (wifiRunning) {
+                            mWifiRunningPath.moveTo(x, h-mWifiRunningOffset);
+                        } else {
+                            mWifiRunningPath.lineTo(x, h-mWifiRunningOffset);
                         }
+                        lastWifiRunning = wifiRunning;
+                    }
 
-                        final boolean wakeLock =
-                            (rec.states&HistoryItem.STATE_WAKE_LOCK_FLAG) != 0;
-                        if (wakeLock != lastWakeLock) {
-                            if (wakeLock) {
-                                mWakeLockPath.moveTo(x, h-mWakeLockOffset);
-                            } else {
-                                mWakeLockPath.lineTo(x, h-mWakeLockOffset);
-                            }
-                            lastWakeLock = wakeLock;
+                    final boolean wakeLock =
+                        (rec.states&HistoryItem.STATE_WAKE_LOCK_FLAG) != 0;
+                    if (wakeLock != lastWakeLock) {
+                        if (wakeLock) {
+                            mWakeLockPath.moveTo(x, h-mWakeLockOffset);
+                        } else {
+                            mWakeLockPath.lineTo(x, h-mWakeLockOffset);
                         }
+                        lastWakeLock = wakeLock;
+                    }
 
-                        if (mLargeMode && mHavePhoneSignal) {
-                            int bin;
-                            if (((rec.states&HistoryItem.STATE_PHONE_STATE_MASK)
-                                    >> HistoryItem.STATE_PHONE_STATE_SHIFT)
-                                    == ServiceState.STATE_POWER_OFF) {
-                                bin = 0;
-                            } else if ((rec.states&HistoryItem.STATE_PHONE_SCANNING_FLAG) != 0) {
-                                bin = 1;
-                            } else {
-                                bin = (rec.states&HistoryItem.STATE_SIGNAL_STRENGTH_MASK)
-                                        >> HistoryItem.STATE_SIGNAL_STRENGTH_SHIFT;
-                                bin += 2;
-                            }
-                            mPhoneSignalChart.addTick(x, bin);
+                    if (mLargeMode && mHavePhoneSignal) {
+                        int bin;
+                        if (((rec.states&HistoryItem.STATE_PHONE_STATE_MASK)
+                                >> HistoryItem.STATE_PHONE_STATE_SHIFT)
+                                == ServiceState.STATE_POWER_OFF) {
+                            bin = 0;
+                        } else if ((rec.states&HistoryItem.STATE_PHONE_SCANNING_FLAG) != 0) {
+                            bin = 1;
+                        } else {
+                            bin = (rec.states&HistoryItem.STATE_SIGNAL_STRENGTH_MASK)
+                                    >> HistoryItem.STATE_SIGNAL_STRENGTH_SHIFT;
+                            bin += 2;
                         }
+                        mPhoneSignalChart.addTick(x, bin);
                     }
 
                 } else if (rec.cmd != BatteryStats.HistoryItem.CMD_OVERFLOW) {
