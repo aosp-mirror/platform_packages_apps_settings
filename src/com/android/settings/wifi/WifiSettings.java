@@ -21,7 +21,6 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -45,7 +44,6 @@ import android.os.Message;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.security.Credentials;
 import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -113,6 +111,9 @@ public class WifiSettings extends SettingsPreferenceFragment
     // Instance state keys
     private static final String SAVE_DIALOG_EDIT_MODE = "edit_mode";
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
+
+    // Activity result when pressing the Skip button
+    private static final int RESULT_SKIP = Activity.RESULT_FIRST_USER;
 
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
@@ -277,8 +278,10 @@ public class WifiSettings extends SettingsPreferenceFragment
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         mConnectListener = new WifiManager.ActionListener() {
+                                   @Override
                                    public void onSuccess() {
                                    }
+                                   @Override
                                    public void onFailure(int reason) {
                                        Activity activity = getActivity();
                                        if (activity != null) {
@@ -290,8 +293,10 @@ public class WifiSettings extends SettingsPreferenceFragment
                                };
 
         mSaveListener = new WifiManager.ActionListener() {
+                                @Override
                                 public void onSuccess() {
                                 }
+                                @Override
                                 public void onFailure(int reason) {
                                     Activity activity = getActivity();
                                     if (activity != null) {
@@ -303,8 +308,10 @@ public class WifiSettings extends SettingsPreferenceFragment
                             };
 
         mForgetListener = new WifiManager.ActionListener() {
+                                   @Override
                                    public void onSuccess() {
                                    }
+                                   @Override
                                    public void onFailure(int reason) {
                                        Activity activity = getActivity();
                                        if (activity != null) {
@@ -363,7 +370,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         if (mSetupWizardMode) {
             getView().setSystemUiVisibility(
-                    View.STATUS_BAR_DISABLE_BACK |
+//                    View.STATUS_BAR_DISABLE_BACK |
                     View.STATUS_BAR_DISABLE_HOME |
                     View.STATUS_BAR_DISABLE_RECENT |
                     View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
@@ -634,7 +641,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                                     new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    getActivity().setResult(Activity.RESULT_CANCELED);
+                                    getActivity().setResult(RESULT_SKIP);
                                     getActivity().finish();
                                 }
                             })
@@ -653,7 +660,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                                     new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    getActivity().setResult(Activity.RESULT_CANCELED);
+                                    getActivity().setResult(RESULT_SKIP);
                                     getActivity().finish();
                                 }
                             })
@@ -941,6 +948,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
     }
 
+    @Override
     public void onClick(DialogInterface dialogInterface, int button) {
         if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
             forget();
