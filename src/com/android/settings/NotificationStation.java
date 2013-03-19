@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -46,6 +47,7 @@ import android.widget.TextView;
 import com.android.internal.statusbar.StatusBarNotification;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class NotificationStation extends SettingsPreferenceFragment {
@@ -57,22 +59,42 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
 
     private INotificationManager mNoMan;
+
+    private Runnable mRefreshListRunnable = new Runnable() {
+        @Override
+        public void run() {
+            refreshList();
+        }
+    };
+
     private INotificationListener.Stub mListener = new INotificationListener.Stub() {
         @Override
         public void onNotificationPosted(StatusBarNotification notification) throws RemoteException {
             Log.v(TAG, "onNotificationPosted: " + notification);
-            getListView().post(new Runnable() { public void run() { refreshList(); }});
+            final Handler h = getListView().getHandler();
+            h.removeCallbacks(mRefreshListRunnable);
+            h.postDelayed(mRefreshListRunnable, 100);
         }
 
         @Override
         public void onNotificationRemoved(StatusBarNotification notification) throws RemoteException {
-            Log.v(TAG, "onNotificationRemoved: " + notification);
-            getListView().post(new Runnable() { public void run() { refreshList(); }});
+            final Handler h = getListView().getHandler();
+            h.removeCallbacks(mRefreshListRunnable);
+            h.postDelayed(mRefreshListRunnable, 100);
         }
     };
 
     private NotificationHistoryAdapter mAdapter;
     private Context mContext;
+
+    private final Comparator<HistoricalNotificationInfo> mNotificationSorter
+            = new Comparator<HistoricalNotificationInfo>() {
+                @Override
+                public int compare(HistoricalNotificationInfo lhs,
+                                   HistoricalNotificationInfo rhs) {
+                    return (int)(rhs.timestamp - lhs.timestamp);
+                }
+            };
 
     @Override
     public void onAttach(Activity activity) {
@@ -146,6 +168,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             logd("adding %d infos", infos.size());
             mAdapter.clear();
             mAdapter.addAll(infos);
+            mAdapter.sort(mNotificationSorter);
         }
     }
 
