@@ -13,84 +13,105 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/widget_frame"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_toStartOf="@+id/divider"
-    android:background="?android:attr/selectableItemBackground" >
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground"
+    >
 
-    <!-- Dream icon -->
-
-    <ImageView
-        android:id="@+id/pkgicon"
-        android:layout_width="@*android:dimen/status_bar_icon_size"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="@*android:dimen/status_bar_icon_size"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginTop="6dp"
-        android:contentDescription="@null"
-        android:adjustViewBounds="true"
-        android:maxHeight="@*android:dimen/status_bar_icon_size"
-        android:maxWidth="@*android:dimen/status_bar_icon_size"
-        android:scaleType="fitCenter" />
+        android:layout_marginBottom="4dp"
+        >
 
-    <ImageView
-        android:id="@android:id/icon"
-        android:layout_width="@*android:dimen/status_bar_icon_size"
-        android:layout_height="@*android:dimen/status_bar_icon_size"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/pkgicon"
-        android:layout_marginBottom="6dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="6dp"
-        android:contentDescription="@null"
-        android:adjustViewBounds="true"
-        android:maxHeight="@*android:dimen/status_bar_icon_size"
-        android:maxWidth="@*android:dimen/status_bar_icon_size"
-        android:scaleType="fitCenter" />
+        <ImageView
+            android:id="@android:id/icon"
+            android:layout_width="@*android:dimen/status_bar_icon_size"
+            android:layout_height="@*android:dimen/status_bar_icon_size"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/pkgicon"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@null"
+            android:adjustViewBounds="true"
+            android:maxHeight="@*android:dimen/status_bar_icon_size"
+            android:maxWidth="@*android:dimen/status_bar_icon_size"
+            android:scaleType="fitCenter" />
 
-    <!-- Dream caption -->
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/timestamp"
+            android:layout_toEndOf="@android:id/icon"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold"
+            android:textAlignment="viewStart"
+            android:labelFor="@android:id/button2" />
+
+        <DateTimeView
+            android:id="@+id/timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@android:id/widget_frame"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@android:id/widget_frame"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAlignment="viewEnd"
+            />
+    </RelativeLayout>
 
     <TextView
-        android:id="@android:id/title"
+        android:id="@+id/extra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/timestamp"
-        android:layout_toEndOf="@android:id/icon"
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textAlignment="viewStart"
-        android:labelFor="@android:id/button2" />
-
-    <!-- Dream radio button -->
-
-    <!--<RadioButton
-        android:id="@android:id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:duplicateParentState="true"
-        android:clickable="false"
-        android:focusable="false" />-->
-
-    <DateTimeView
-        android:id="@+id/timestamp"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@android:id/widget_frame"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@android:id/widget_frame"
-        android:layout_centerVertical="true"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAlignment="viewEnd"
         />
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@*android:dimen/status_bar_icon_size"
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        >
+
+        <ImageView
+            android:id="@+id/pkgicon"
+            android:layout_width="@*android:dimen/status_bar_icon_size"
+            android:layout_height="@*android:dimen/status_bar_icon_size"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="@null"
+            android:adjustViewBounds="true"
+            android:maxHeight="@*android:dimen/status_bar_icon_size"
+            android:maxWidth="@*android:dimen/status_bar_icon_size"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/pkgname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAlignment="viewStart"
+            />
+
+    </LinearLayout>
+</LinearLayout>
