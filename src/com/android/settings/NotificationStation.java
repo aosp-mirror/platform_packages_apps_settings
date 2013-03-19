@@ -82,7 +82,9 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
-            mNoMan.registerListener(mListener, ActivityManager.getCurrentUser());
+            mNoMan.registerListener(mListener,
+                    mContext.getPackageName(),
+                    ActivityManager.getCurrentUser());
         } catch (RemoteException e) {
             // well, that didn't work out
         }
