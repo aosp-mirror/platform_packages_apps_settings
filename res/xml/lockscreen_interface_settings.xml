@@ -32,6 +32,15 @@
             android:key="lockscreen_targets"
             android:summary="@string/lockscreen_target_summary"
             android:title="@string/lockscreen_target_title" />
+	
+        <PreferenceScreen
+        android:key="lock_clock"
+        android:title="@string/lock_clock_title"
+        android:summary="@string/lock_clock_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.cyanogenmod.lockclock"
+                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+        </PreferenceScreen>
 
         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
             android:key="lockscreen_maximize_widgets"
