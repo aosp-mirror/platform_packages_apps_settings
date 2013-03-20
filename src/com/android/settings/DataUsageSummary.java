@@ -277,13 +277,19 @@ public class DataUsageSummary extends Fragment {
         mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
         mPolicyEditor.read();
 
+        try {
+            mStatsSession = mStatsService.openSession();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
         mShowWifi = mPrefs.getBoolean(PREF_SHOW_WIFI, false);
         mShowEthernet = mPrefs.getBoolean(PREF_SHOW_ETHERNET, false);
 
         // override preferences when no mobile radio
         if (!hasReadyMobileRadio(context)) {
-            mShowWifi = hasWifiRadio(context);
-            mShowEthernet = hasEthernet(context);
+            mShowWifi = true;
+            mShowEthernet = true;
         }
 
         setHasOptionsMenu(true);
@@ -297,12 +303,6 @@ public class DataUsageSummary extends Fragment {
         final View view = inflater.inflate(R.layout.data_usage_summary, container, false);
 
         mUidDetailProvider = new UidDetailProvider(context);
-
-        try {
-            mStatsSession = mStatsService.openSession();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
 
         mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
         mTabsContainer = (ViewGroup) view.findViewById(R.id.tabs_container);
