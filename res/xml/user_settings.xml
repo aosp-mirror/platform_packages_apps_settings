@@ -39,4 +39,15 @@
             android:title="@string/user_list_title">
     </PreferenceCategory>
 
+    <Preference
+            android:key="user_add_restricted"
+            android:title="@string/user_add_restricted"
+            android:summary="@string/user_add_restricted_summary"
+            android:icon="@drawable/ic_menu_add" />
+
+    <Preference
+            android:key="user_add_trusted"
+            android:title="@string/user_add_trusted"
+            android:summary="@string/user_add_trusted_summary"
+            android:icon="@drawable/ic_menu_add" />
 </PreferenceScreen>

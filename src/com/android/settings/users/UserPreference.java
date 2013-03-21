@@ -20,6 +20,7 @@ import com.android.internal.util.CharSequences;
 import com.android.settings.R;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -31,21 +32,32 @@ public class UserPreference extends Preference {
     public static final int USERID_UNKNOWN = -10;
 
     private OnClickListener mDeleteClickListener;
+    private OnClickListener mSettingsClickListener;
     private int mSerialNumber = -1;
     private int mUserId = USERID_UNKNOWN;
+    private boolean mRestricted;
+    static final int SETTINGS_ID = R.id.manage_user;
+    static final int DELETE_ID = R.id.trash_user;
 
     public UserPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, USERID_UNKNOWN, false, null);
+        this(context, attrs, USERID_UNKNOWN, false, null, null);
     }
 
-    UserPreference(Context context, AttributeSet attrs, int userId, boolean showDelete,
-            OnClickListener deleteListener) {
+    UserPreference(Context context, AttributeSet attrs, int userId,
+            boolean showOptions, OnClickListener deleteListener,
+            OnClickListener settingsListener) {
         super(context, attrs);
-        if (showDelete) {
+        if (showOptions) {
             setWidgetLayoutResource(R.layout.preference_user_delete_widget);
             mDeleteClickListener = deleteListener;
+            mSettingsClickListener = settingsListener;
         }
         mUserId = userId;
+        if (mUserId > UserHandle.USER_OWNER) {
+            mRestricted = ((UserManager) getContext().getSystemService(Context.USER_SERVICE))
+                    .getUserInfo(mUserId).isRestricted();
+        }
+        setSummary(mRestricted ? R.string.user_limited : R.string.user_trusted);
     }
 
     @Override
@@ -54,6 +66,15 @@ public class UserPreference extends Preference {
         if (deleteView != null) {
             deleteView.setOnClickListener(mDeleteClickListener);
             deleteView.setTag(this);
+        }
+        View settingsView = view.findViewById(R.id.manage_user);
+        if (settingsView != null) {
+            if (mRestricted) {
+                settingsView.setOnClickListener(mSettingsClickListener);
+                settingsView.setTag(this);
+            } else {
+                settingsView.setVisibility(View.INVISIBLE);
+            }
         }
         super.onBindView(view);
     }
