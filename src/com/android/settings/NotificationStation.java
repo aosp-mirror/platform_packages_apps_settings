@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -57,7 +58,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static final boolean SHOW_HISTORICAL_NOTIFICATIONS = true;
 
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
-
+    private PackageManager mPm;
     private INotificationManager mNoMan;
 
     private Runnable mRefreshListRunnable = new Runnable() {
@@ -101,6 +102,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         logd("onAttach(%s)", activity.getClass().getSimpleName());
         super.onAttach(activity);
         mContext = activity;
+        mPm = mContext.getPackageManager();
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
@@ -180,6 +182,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static class HistoricalNotificationInfo {
         public String pkg;
         public Drawable pkgicon;
+        public CharSequence pkgname;
         public Drawable icon;
         public CharSequence title;
         public int priority;
@@ -205,8 +208,19 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     info.user = sbn.getUserId();
                     info.icon = loadIconDrawable(info.pkg, info.user, sbn.notification.icon);
                     info.pkgicon = loadPackageIconDrawable(info.pkg, info.user);
+                    info.pkgname = loadPackageName(info.pkg);
                     if (sbn.notification.extras != null) {
                         info.title = sbn.notification.extras.getString(Notification.EXTRA_TITLE);
+                        if (info.title == null || "".equals(info.title)) {
+                            info.title = sbn.notification.extras.getString(Notification.EXTRA_TEXT);
+                        }
+                    }
+                    if (info.title == null || "".equals(info.title)) {
+                        info.title = sbn.notification.tickerText;
+                    }
+                    // still nothing? come on, give us something!
+                    if (info.title == null || "".equals(info.title)) {
+                        info.title = info.pkgname;
                     }
                     info.timestamp = sbn.postTime;
                     info.priority = sbn.notification.priority;
@@ -236,8 +250,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 if (userId == UserHandle.USER_ALL) {
                     userId = UserHandle.USER_OWNER;
                 }
-                r = mContext.getPackageManager()
-                        .getResourcesForApplicationAsUser(pkg, userId);
+                r = mPm.getResourcesForApplicationAsUser(pkg, userId);
             } catch (PackageManager.NameNotFoundException ex) {
                 Log.e(TAG, "Icon package not found: " + pkg);
                 return null;
@@ -251,11 +264,21 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private Drawable loadPackageIconDrawable(String pkg, int userId) {
         Drawable icon = null;
         try {
-            icon = mContext.getPackageManager().getApplicationIcon(pkg);
+            icon = mPm.getApplicationIcon(pkg);
         } catch (PackageManager.NameNotFoundException e) {
         }
 
         return icon;
+    }
+
+    private CharSequence loadPackageName(String pkg) {
+        try {
+            ApplicationInfo info = mPm.getApplicationInfo(pkg,
+                    PackageManager.GET_UNINSTALLED_PACKAGES);
+            if (info != null) return mPm.getApplicationLabel(info);
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+        return pkg;
     }
 
     private Drawable loadIconDrawable(String pkg, int userId, int resId) {
@@ -286,9 +309,9 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            HistoricalNotificationInfo info = getItem(position);
+            final HistoricalNotificationInfo info = getItem(position);
             logd("getView(%s/%s)", info.pkg, info.title);
-            final View row = convertView != null ? convertView : createRow(parent, info.pkg);
+            final View row = convertView != null ? convertView : createRow(parent);
             row.setTag(info);
 
             // bind icon
@@ -304,7 +327,24 @@ public class NotificationStation extends SettingsPreferenceFragment {
             // bind caption
             ((TextView) row.findViewById(android.R.id.title)).setText(info.title);
 
+            // app name
+            ((TextView) row.findViewById(R.id.pkgname)).setText(info.pkgname);
+
+            // extra goodies -- not implemented yet
+//            ((TextView) row.findViewById(R.id.extra)).setText(
+//              ...
+//            );
+            row.findViewById(R.id.extra).setVisibility(View.GONE);
+
             row.setAlpha(info.active ? 1.0f : 0.5f);
+
+            // set up click handler
+            row.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    v.setPressed(true);
+                    startApplicationDetailsActivity(info.pkg);
+                }});
 
 //            // bind radio button
 //            RadioButton radioButton = (RadioButton) row.findViewById(android.R.id.button1);
@@ -335,14 +375,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
             return row;
         }
 
-        private View createRow(ViewGroup parent, final String pkg) {
+        private View createRow(ViewGroup parent) {
             final View row =  mInflater.inflate(R.layout.notification_log_row, parent, false);
-            row.setOnClickListener(new OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    v.setPressed(true);
-                    startApplicationDetailsActivity(pkg);
-                }});
             return row;
         }
 
@@ -351,7 +385,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private void startApplicationDetailsActivity(String packageName) {
         Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.fromParts("package", packageName, null));
-        intent.setComponent(intent.resolveActivity(mContext.getPackageManager()));
+        intent.setComponent(intent.resolveActivity(mPm));
         startActivity(intent);
     }
 
