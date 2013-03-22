@@ -540,9 +540,13 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Να ειδοποιούμαι όταν υπάρχει διαθέσιμο ανοικτό δίκτυο"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Αποφυγή κακών συνδέσεων"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Να μην γίνεται χρήση δικτύων Wi-Fi, εκτός αν υπάρχει καλή σύνδεση στο Διαδίκτυο"</string>
-    <!-- no translation found for wifi_scan_always_available (3470564139944368030) -->
+    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Σάρωση πάντα διαθέσιμη"</string>
+    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Παροχή στην υπηρεσία εντοπισμού τοποθεσίας της Google και σε άλλες εφαρμογές, της δυνατότητας σάρωσης για δίκτυα, ακόμη και όταν το Wi-Fi είναι απενεργοποιημένο"</string>
+    <!-- no translation found for wifi_scan_notify_text_location_on (8135076005488914200) -->
     <skip />
-    <!-- no translation found for wifi_scan_always_available_summary (7768204638882691453) -->
+    <!-- no translation found for wifi_scan_notify_text_location_off (6323983741393280935) -->
+    <skip />
+    <!-- no translation found for wifi_scan_notify_remember_choice (5340097010842405981) -->
     <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Να παραμένει ενεργοποιημένο το Wi-Fi κατά την αναστολή λειτουργίας"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Προέκυψε κάποιο πρόβλημα κατά την αλλαγή της ρύθμισης"</string>
@@ -605,6 +609,9 @@
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Ασφαλισμένα με <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", ασφαλισμένο με <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Καμία"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Για τη βελτίωση της ακρίβειας της τοποθεσίας σας και για άλλους σκοπούς, η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> επιθυμεί να ενεργοποιήσει τη σάρωση δικτύων, ακόμη και όταν το Wi-Fi είναι απενεργοποιημένο."\n\n"Να επιτρέπεται αυτή η ενέργεια για όλες τις εφαρμογές που επιθυμούν σάρωση;"</string>
+    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Να επιτραπεί"</string>
+    <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Απόρριψη"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Σύνδεση"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Αποτυχία σύνδεσης στο δίκτυο"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Να διαγραφεί από τη μνήμη"</string>
@@ -883,10 +890,8 @@
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Το APN έχει ενεργοποιηθεί"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"Απενεργοποιημένο APN"</string>
     <string name="bearer" msgid="594270280031923558">"Φορέας"</string>
-    <!-- no translation found for mvno_type (2543253857818336421) -->
-    <skip />
-    <!-- no translation found for mvno_match_data (4560671695220540466) -->
-    <skip />
+    <string name="mvno_type" msgid="2543253857818336421">"Τύπος MVNO"</string>
+    <string name="mvno_match_data" msgid="4560671695220540466">"Τιμή MVNO"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Διαγραφή APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Νέο APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Αποθ/ση"</string>
@@ -1802,9 +1807,21 @@
     <string name="user_you_section" msgid="6247838798859425408">"Εσείς"</string>
     <string name="user_list_title" msgid="8866161687358773982">"Άλλοι χρήστες"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Προσθήκη χρήστη"</string>
+    <!-- no translation found for user_add_restricted (2355584640156396901) -->
+    <skip />
+    <!-- no translation found for user_add_restricted_summary (6627956758186349471) -->
+    <skip />
+    <!-- no translation found for user_add_trusted (557634297572871869) -->
+    <skip />
+    <!-- no translation found for user_add_trusted_summary (1118604533072902851) -->
+    <skip />
     <string name="user_summary_active" msgid="4740649452346004418">"Ενεργός"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Μη ενεργός"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Δεν υπάρχει ρύθμιση"</string>
+    <!-- no translation found for user_trusted (6742122083463724471) -->
+    <skip />
+    <!-- no translation found for user_limited (5344145255529624480) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Κάτοχος"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Ψευδώνυμο"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Προσθήκη νέου χρήστη"</string>
@@ -1827,6 +1844,12 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"Προσθήκη νέου χρήστη…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Διαγραφή χρήστη"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Διαγραφή"</string>
+    <!-- no translation found for application_restrictions (8207332020898004394) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_header (3660449891478534440) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Αυτή η ρύθμιση επηρεάζει όλους τους χρήστες στο συγκεκριμένο tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Αυτή η χρήση επηρεάζει όλους τους χρήστες στο συγκεκριμένο τηλέφωνο."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Αλλαγή γλώσσας"</string>
@@ -1837,4 +1860,14 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Αναγνωριστικό φωτογραφίας"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Εκπομπές κινητής τηλεφωνίας"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Επιλέξτε τους τύπους ειδοποιήσεων έκτακτης ανάγκης που θα εμφανίζονται."</string>
+    <!-- no translation found for user_restrictions_title (371835484894400390) -->
+    <skip />
+    <!-- no translation found for user_rename (8523499513614655279) -->
+    <skip />
+    <!-- no translation found for wizard_back (5567007959434765743) -->
+    <skip />
+    <!-- no translation found for wizard_next (3606212602795100640) -->
+    <skip />
+    <!-- no translation found for wizard_finish (3286109692700083252) -->
+    <skip />
 </resources>

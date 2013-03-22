@@ -540,9 +540,13 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Meddela mig när ett öppet nätverk är tillgängligt"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Undvik dåliga anslutningar"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Använd inte Wi-Fi-nätverk som inte har en bra internetanslutning"</string>
-    <!-- no translation found for wifi_scan_always_available (3470564139944368030) -->
+    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Inställningen \"sök alltid\" är tillgänglig"</string>
+    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Tillåt att Googles platstjänst och andra appar söker efter nätverk, även när Wi-Fi inte har aktiverats"</string>
+    <!-- no translation found for wifi_scan_notify_text_location_on (8135076005488914200) -->
     <skip />
-    <!-- no translation found for wifi_scan_always_available_summary (7768204638882691453) -->
+    <!-- no translation found for wifi_scan_notify_text_location_off (6323983741393280935) -->
+    <skip />
+    <!-- no translation found for wifi_scan_notify_remember_choice (5340097010842405981) -->
     <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Behåll Wi-Fi i viloläge"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Ett problem inträffade när inställningen ändrades"</string>
@@ -605,6 +609,9 @@
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Skyddad med <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", skyddad med <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ingen"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"<xliff:g id="APP_NAME">%1$s</xliff:g> vill aktivera nätverkssökning även när Wi-Fi är avstängt för att kunna förbättra positionens exakthet och andra ändamål."\n\n"Vill du tillåta detta för alla appar som vill söka efter nätverk?"</string>
+    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Tillåt"</string>
+    <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Avvisa"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Anslut"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Det gick inte att ansluta till nätverket."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Glöm"</string>
@@ -883,10 +890,8 @@
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN aktiverat"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN inaktiverat"</string>
     <string name="bearer" msgid="594270280031923558">"Bearer"</string>
-    <!-- no translation found for mvno_type (2543253857818336421) -->
-    <skip />
-    <!-- no translation found for mvno_match_data (4560671695220540466) -->
-    <skip />
+    <string name="mvno_type" msgid="2543253857818336421">"MVNO-typ"</string>
+    <string name="mvno_match_data" msgid="4560671695220540466">"MVNO-värde"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Ta bort APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Nytt APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Spara"</string>
@@ -1802,9 +1807,21 @@
     <string name="user_you_section" msgid="6247838798859425408">"Du"</string>
     <string name="user_list_title" msgid="8866161687358773982">"Andra användare"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Lägg till användare"</string>
+    <!-- no translation found for user_add_restricted (2355584640156396901) -->
+    <skip />
+    <!-- no translation found for user_add_restricted_summary (6627956758186349471) -->
+    <skip />
+    <!-- no translation found for user_add_trusted (557634297572871869) -->
+    <skip />
+    <!-- no translation found for user_add_trusted_summary (1118604533072902851) -->
+    <skip />
     <string name="user_summary_active" msgid="4740649452346004418">"Aktiv"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Ej aktiv"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Inte konfigurerad"</string>
+    <!-- no translation found for user_trusted (6742122083463724471) -->
+    <skip />
+    <!-- no translation found for user_limited (5344145255529624480) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Ägare"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Smeknamn"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Lägg till en ny användare"</string>
@@ -1827,6 +1844,12 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"En ny användare läggs till …"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Ta bort användare"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Ta bort"</string>
+    <!-- no translation found for application_restrictions (8207332020898004394) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_header (3660449891478534440) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Den här inställningen påverkar samtliga användare."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Den här inställningen påverkar samtliga användare."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Ändra språk"</string>
@@ -1837,4 +1860,14 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Foto-ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Cell broadcasts"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Välj vilka typer av varningsmeddelanden som ska visas."</string>
+    <!-- no translation found for user_restrictions_title (371835484894400390) -->
+    <skip />
+    <!-- no translation found for user_rename (8523499513614655279) -->
+    <skip />
+    <!-- no translation found for wizard_back (5567007959434765743) -->
+    <skip />
+    <!-- no translation found for wizard_next (3606212602795100640) -->
+    <skip />
+    <!-- no translation found for wizard_finish (3286109692700083252) -->
+    <skip />
 </resources>

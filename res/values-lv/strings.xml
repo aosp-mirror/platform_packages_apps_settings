@@ -540,9 +540,13 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Informēt mani, kad ir pieejams atvērts tīkls"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Nelietot vājus savienojumus"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Nelietot Wi-Fi tīklu, ja vien tam nav labs interneta savienojums"</string>
-    <!-- no translation found for wifi_scan_always_available (3470564139944368030) -->
+    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Meklēšana vienmēr pieejama"</string>
+    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Atļaut Google atrašanās vietas pakalpojumam un citām lietotnēm meklēt tīklus, pat ja Wi-Fi savienojums ir izslēgts"</string>
+    <!-- no translation found for wifi_scan_notify_text_location_on (8135076005488914200) -->
     <skip />
-    <!-- no translation found for wifi_scan_always_available_summary (7768204638882691453) -->
+    <!-- no translation found for wifi_scan_notify_text_location_off (6323983741393280935) -->
+    <skip />
+    <!-- no translation found for wifi_scan_notify_remember_choice (5340097010842405981) -->
     <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Aktivizēt Wi-Fi arī miega režīmā"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Mainot iestatījumu, radās kļūda"</string>
@@ -605,6 +609,9 @@
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Nodrošināts ar <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", nodrošināts ar <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Nav"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Lai uzlabotu atrašanās vietu noteikšanas precizitāti, kā arī citas funkcijas, lietotnē <xliff:g id="APP_NAME">%1$s</xliff:g> tiek pieprasīts ieslēgt tīkla skenēšanu, pat ja Wi-Fi savienojums ir izslēgts."\n\n"Vai atļaut šo darbību visām lietotnēm, kurās tiek pieprasīta skenēšana?"</string>
+    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Atļaut"</string>
+    <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Noraidīt"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Izveidot savienojumu"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Neizdevās izveidot savienojumu ar tīklu."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Neiegaumēt"</string>
@@ -883,10 +890,8 @@
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN ir iespējots"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN ir atspējots"</string>
     <string name="bearer" msgid="594270280031923558">"Nesējs"</string>
-    <!-- no translation found for mvno_type (2543253857818336421) -->
-    <skip />
-    <!-- no translation found for mvno_match_data (4560671695220540466) -->
-    <skip />
+    <string name="mvno_type" msgid="2543253857818336421">"MVNO veids"</string>
+    <string name="mvno_match_data" msgid="4560671695220540466">"MVNO vērtība"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Dzēst APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Jauns APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Saglabāt"</string>
@@ -1802,9 +1807,21 @@
     <string name="user_you_section" msgid="6247838798859425408">"Informācija par jums"</string>
     <string name="user_list_title" msgid="8866161687358773982">"Citi lietotāji"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pievienot lietotāju"</string>
+    <!-- no translation found for user_add_restricted (2355584640156396901) -->
+    <skip />
+    <!-- no translation found for user_add_restricted_summary (6627956758186349471) -->
+    <skip />
+    <!-- no translation found for user_add_trusted (557634297572871869) -->
+    <skip />
+    <!-- no translation found for user_add_trusted_summary (1118604533072902851) -->
+    <skip />
     <string name="user_summary_active" msgid="4740649452346004418">"Aktīvs"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Neaktīvs"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nav iestatīts"</string>
+    <!-- no translation found for user_trusted (6742122083463724471) -->
+    <skip />
+    <!-- no translation found for user_limited (5344145255529624480) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Īpašnieks"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Segvārds"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Lietotāja pievienošana"</string>
@@ -1827,6 +1844,12 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"Jauna lietotāja pievienošana…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Dzēst lietotāju"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Dzēst"</string>
+    <!-- no translation found for application_restrictions (8207332020898004394) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_header (3660449891478534440) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Šis iestatījums ietekmē visus šī planšetdatora lietotājus."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Šis iestatījums ietekmē visus šī tālruņa lietotājus."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Valodas maiņa"</string>
@@ -1837,4 +1860,14 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Dokuments ar foto"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Šūnu apraides"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Atlasiet rādāmos ārkārtas situāciju brīdinājumus."</string>
+    <!-- no translation found for user_restrictions_title (371835484894400390) -->
+    <skip />
+    <!-- no translation found for user_rename (8523499513614655279) -->
+    <skip />
+    <!-- no translation found for wizard_back (5567007959434765743) -->
+    <skip />
+    <!-- no translation found for wizard_next (3606212602795100640) -->
+    <skip />
+    <!-- no translation found for wizard_finish (3286109692700083252) -->
+    <skip />
 </resources>
