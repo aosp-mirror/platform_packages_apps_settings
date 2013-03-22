@@ -1209,6 +1209,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".wifi.WifiNotifyScanModeActivity"
+                  android:excludeFromRecents="true"
+                  android:theme="@style/Transparent">
+            <intent-filter>
+                <action android:name="android.net.wifi.action.NOTIFY_SCAN_ALWAYS_AVAILABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionHelperActivity"
                   android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"
