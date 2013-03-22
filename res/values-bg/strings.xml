@@ -540,9 +540,13 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Известие при налична отворена мрежа"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Да се избягват лоши връзки"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Да не се използва Wi‑Fi мрежа, освен ако няма добра връзка с интернет"</string>
-    <!-- no translation found for wifi_scan_always_available (3470564139944368030) -->
+    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Сканирането е винаги налице"</string>
+    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Услугата за местоположения на Google и другите приложения да сканират за мрежи дори когато Wi-Fi е изключен"</string>
+    <!-- no translation found for wifi_scan_notify_text_location_on (8135076005488914200) -->
     <skip />
-    <!-- no translation found for wifi_scan_always_available_summary (7768204638882691453) -->
+    <!-- no translation found for wifi_scan_notify_text_location_off (6323983741393280935) -->
+    <skip />
+    <!-- no translation found for wifi_scan_notify_remember_choice (5340097010842405981) -->
     <skip />
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"С включен Wi‑Fi при спящ режим"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Възникна проблем при промяна на настройката"</string>
@@ -605,6 +609,9 @@
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Защитено с <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", защитено с <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Няма"</string>
+    <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"За да подобри точността на местоположението и за други цели, <xliff:g id="APP_NAME">%1$s</xliff:g> иска да включи сканирането за мрежи дори когато Wi-Fi е изключен."\n\n"Искате ли да разрешите това за всички приложения, които искат да сканират?"</string>
+    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Разрешаване"</string>
+    <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Отказ"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Свързване"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Свързването с мрежата не бе успешно"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Забравяне"</string>
@@ -883,10 +890,8 @@
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Името на точката за достъп (APN) е активирано"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"Името на точката за достъп (APN) е деактивирано"</string>
     <string name="bearer" msgid="594270280031923558">"Носител"</string>
-    <!-- no translation found for mvno_type (2543253857818336421) -->
-    <skip />
-    <!-- no translation found for mvno_match_data (4560671695220540466) -->
-    <skip />
+    <string name="mvno_type" msgid="2543253857818336421">"Тип MVNO"</string>
+    <string name="mvno_match_data" msgid="4560671695220540466">"Стойност на MVNO"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Изтриване на името на точката за достъп (APN)"</string>
     <string name="menu_new" msgid="3014205883303921729">"Ново име на точка за достъп (APN)"</string>
     <string name="menu_save" msgid="8109345640668285399">"Запазване"</string>
@@ -1800,9 +1805,21 @@
     <string name="user_you_section" msgid="6247838798859425408">"Вие"</string>
     <string name="user_list_title" msgid="8866161687358773982">"Други потребители"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Потребител: Добавяне"</string>
+    <!-- no translation found for user_add_restricted (2355584640156396901) -->
+    <skip />
+    <!-- no translation found for user_add_restricted_summary (6627956758186349471) -->
+    <skip />
+    <!-- no translation found for user_add_trusted (557634297572871869) -->
+    <skip />
+    <!-- no translation found for user_add_trusted_summary (1118604533072902851) -->
+    <skip />
     <string name="user_summary_active" msgid="4740649452346004418">"Активен"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Неактивен"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не е настроен"</string>
+    <!-- no translation found for user_trusted (6742122083463724471) -->
+    <skip />
+    <!-- no translation found for user_limited (5344145255529624480) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Собственик"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Псевдоним"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Добавяне на нов потребител"</string>
@@ -1825,6 +1842,12 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"Новият потребител се добавя…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Изтриване на потребителя"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Изтриване"</string>
+    <!-- no translation found for application_restrictions (8207332020898004394) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_header (3660449891478534440) -->
+    <skip />
+    <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Настройката засяга всички потребители на този таблет."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Настройката засяга всички потребители на този телефон."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Промяна на езика"</string>
@@ -1835,4 +1858,14 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Идент. № на снимката"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Клетъчни излъчвания"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Изберете типовете спешни сигнали, които да се показват."</string>
+    <!-- no translation found for user_restrictions_title (371835484894400390) -->
+    <skip />
+    <!-- no translation found for user_rename (8523499513614655279) -->
+    <skip />
+    <!-- no translation found for wizard_back (5567007959434765743) -->
+    <skip />
+    <!-- no translation found for wizard_next (3606212602795100640) -->
+    <skip />
+    <!-- no translation found for wizard_finish (3286109692700083252) -->
+    <skip />
 </resources>
