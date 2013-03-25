@@ -54,6 +54,7 @@ public class DeviceAdminSettings extends ListFragment {
     DevicePolicyManager mDPM;
     final HashSet<ComponentName> mActiveAdmins = new HashSet<ComponentName>();
     final ArrayList<DeviceAdminInfo> mAvailableAdmins = new ArrayList<DeviceAdminInfo>();
+    String mDeviceOwnerPkg;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -70,6 +71,10 @@ public class DeviceAdminSettings extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mDeviceOwnerPkg = mDPM.getDeviceOwner();
+        if (mDeviceOwnerPkg != null && !mDPM.isDeviceOwner(mDeviceOwnerPkg)) {
+            mDeviceOwnerPkg = null;
+        }
         updateList();
     }
 
@@ -85,7 +90,7 @@ public class DeviceAdminSettings extends ListFragment {
         mAvailableAdmins.clear();
         List<ResolveInfo> avail = getActivity().getPackageManager().queryBroadcastReceivers(
                 new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
-                PackageManager.GET_META_DATA);
+                PackageManager.GET_META_DATA | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS);
         int count = avail == null ? 0 : avail.size();
         for (int i=0; i<count; i++) {
             ResolveInfo ri = avail.get(i);
@@ -149,7 +154,13 @@ public class DeviceAdminSettings extends ListFragment {
         }
 
         public boolean isEnabled(int position) {
-            return true;
+            DeviceAdminInfo info = mAvailableAdmins.get(position);
+            if (mActiveAdmins.contains(info.getComponent())
+                    && info.getPackageName().equals(mDeviceOwnerPkg)) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -181,10 +192,16 @@ public class DeviceAdminSettings extends ListFragment {
             vh.icon.setImageDrawable(item.loadIcon(activity.getPackageManager()));
             vh.name.setText(item.loadLabel(activity.getPackageManager()));
             vh.checkbox.setChecked(mActiveAdmins.contains(item.getComponent()));
+            final boolean activeOwner = vh.checkbox.isChecked()
+                    && item.getPackageName().equals(mDeviceOwnerPkg);
             try {
                 vh.description.setText(item.loadDescription(activity.getPackageManager()));
             } catch (Resources.NotFoundException e) {
             }
+            vh.checkbox.setEnabled(!activeOwner);
+            vh.name.setEnabled(!activeOwner);
+            vh.description.setEnabled(!activeOwner);
+            vh.icon.setEnabled(!activeOwner);
         }
     }
 }
