@@ -1745,6 +1745,9 @@ public class DataUsageSummary extends Fragment {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            // clear focus to finish pending text edits
+                            cycleDayPicker.clearFocus();
+
                             final int cycleDay = cycleDayPicker.getValue();
                             final String cycleTimezone = new Time().timezone;
                             editor.setPolicyCycleDay(template, cycleDay, cycleTimezone);
