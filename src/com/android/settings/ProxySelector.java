@@ -67,7 +67,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
             "^$|^[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
     private static final Pattern HOSTNAME_PATTERN;
     private static final String EXCLUSION_REGEXP =
-            "$|^[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
+            "$|^(\\*)?\\.?[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
     private static final Pattern EXCLUSION_PATTERN;
     static {
         HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
