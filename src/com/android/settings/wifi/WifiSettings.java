@@ -953,7 +953,9 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
             forget();
         } else if (button == WifiDialog.BUTTON_SUBMIT) {
-            submit(mDialog.getController());
+            if (mDialog != null) {
+                submit(mDialog.getController());
+            }
         }
     }
 
