@@ -76,7 +76,7 @@ public class UserRestrictionsActivity extends Activity implements OnClickListene
         if (userId == -1) {
             mNewUser = true;
             mUserInfo = um.createUser(name, UserInfo.FLAG_RESTRICTED);
-            um.setUserRestriction(UserManager.ALLOW_MODIFY_ACCOUNTS, false,
+            um.setUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, true,
                     new UserHandle(mUserInfo.id));
 
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
