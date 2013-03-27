@@ -57,7 +57,7 @@ public class UserPreference extends Preference {
             mRestricted = ((UserManager) getContext().getSystemService(Context.USER_SERVICE))
                     .getUserInfo(mUserId).isRestricted();
         }
-        setSummary(mRestricted ? R.string.user_limited : R.string.user_trusted);
+        //setSummary(mRestricted ? R.string.user_limited : R.string.user_trusted);
     }
 
     @Override

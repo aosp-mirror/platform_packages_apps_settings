@@ -35,8 +35,8 @@
             android:fragment="com.android.settings.OwnerInfoSettings" />
 
     <PreferenceCategory
-            android:key="user_list"
-            android:title="@string/user_list_title">
+            android:key="limited_user_list"
+            android:title="@string/user_limited_list_title">
     </PreferenceCategory>
 
     <Preference
@@ -44,6 +44,11 @@
             android:title="@string/user_add_restricted"
             android:summary="@string/user_add_restricted_summary"
             android:icon="@drawable/ic_menu_add" />
+
+    <PreferenceCategory
+            android:key="trusted_user_list"
+            android:title="@string/user_trusted_list_title">
+    </PreferenceCategory>
 
     <Preference
             android:key="user_add_trusted"
