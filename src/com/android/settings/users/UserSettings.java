@@ -31,6 +31,7 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -76,7 +77,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String SAVE_ADDING_USER = "adding_user";
 
     private static final String KEY_USER_NICKNAME = "user_nickname";
-    private static final String KEY_USER_LIST = "user_list";
+    private static final String KEY_TRUSTED_USER_LIST = "trusted_user_list";
+    private static final String KEY_LIMITED_USER_LIST = "limited_user_list";
     private static final String KEY_USER_ME = "user_me";
     private static final String KEY_ADD_RESTRICTED_USER = "user_add_restricted";
     private static final String KEY_ADD_TRUSTED_USER = "user_add_trusted";
@@ -106,7 +108,8 @@ public class UserSettings extends SettingsPreferenceFragment
         R.drawable.avatar_default_8
     };
 
-    private PreferenceGroup mUserListCategory;
+    private PreferenceGroup mTrustedUserListCategory;
+    private PreferenceGroup mLimitedUserListCategory;
     private Preference mMePreference;
     private SelectableEditTextPreference mNicknamePreference;
     private Preference mAddRestrictedUser;
@@ -118,7 +121,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
-    private SparseArray<Drawable> mUserIcons = new SparseArray<Drawable>();
+    private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
 
@@ -166,7 +169,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.user_settings);
-        mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
+        mTrustedUserListCategory = (PreferenceGroup) findPreference(KEY_TRUSTED_USER_LIST);
+        mLimitedUserListCategory = (PreferenceGroup) findPreference(KEY_LIMITED_USER_LIST);
         mMePreference = (Preference) findPreference(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
         if (!mIsOwner) {
@@ -269,9 +273,8 @@ public class UserSettings extends SettingsPreferenceFragment
         int myUserId = UserHandle.myUserId();
         Bitmap b = mUserManager.getUserIcon(myUserId);
         if (b != null) {
-            Drawable d = new BitmapDrawable(b);
-            mMePreference.setIcon(d);
-            mUserIcons.put(myUserId, d);
+            mMePreference.setIcon(encircle(b));
+            mUserIcons.put(myUserId, b);
         }
     }
 
@@ -441,8 +444,10 @@ public class UserSettings extends SettingsPreferenceFragment
         if (getActivity() == null) return;
         List<UserInfo> users = mUserManager.getUsers(true);
 
-        mUserListCategory.removeAll();
-        mUserListCategory.setOrderingAsAdded(false);
+        mTrustedUserListCategory.removeAll();
+        mTrustedUserListCategory.setOrderingAsAdded(false);
+        mLimitedUserListCategory.removeAll();
+        mLimitedUserListCategory.setOrderingAsAdded(false);
 
         final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
         for (UserInfo user : users) {
@@ -456,19 +461,23 @@ public class UserSettings extends SettingsPreferenceFragment
                         UserHandle.myUserId() == UserHandle.USER_OWNER, this, this);
                 pref.setOnPreferenceClickListener(this);
                 pref.setKey("id=" + user.id);
-                mUserListCategory.addPreference(pref);
+                if (user.isRestricted()) {
+                    mLimitedUserListCategory.addPreference(pref);
+                } else {
+                    mTrustedUserListCategory.addPreference(pref);
+                }
                 if (user.id == UserHandle.USER_OWNER) {
                     pref.setSummary(R.string.user_owner);
                 }
                 pref.setTitle(user.name);
-//                if (!isInitialized(user)) {
-//                    pref.setSummary(R.string.user_summary_not_set_up);
-//                }
+                if (!isInitialized(user)) {
+                    pref.setSummary(R.string.user_summary_not_set_up);
+                }
             }
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
                     missingIcons.add(user.id);
-                    pref.setIcon(R.drawable.avatar_default_1);
+                    pref.setIcon(encircle(R.drawable.avatar_default_1));
                 } else {
                     setPhotoId(pref, user);
                 }
@@ -480,9 +489,8 @@ public class UserSettings extends SettingsPreferenceFragment
                     false, null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
-            //pref.setSummary(R.string.user_adding_new_user);
-            pref.setIcon(R.drawable.avatar_default_1);
-            mUserListCategory.addPreference(pref);
+            pref.setIcon(encircle(R.drawable.avatar_default_1));
+            mTrustedUserListCategory.addPreference(pref);
         }
         getActivity().invalidateOptionsMenu();
 
@@ -490,6 +498,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (missingIcons.size() > 0) {
             loadIconsAsync(missingIcons);
         }
+        boolean moreUsers = mUserManager.getMaxSupportedUsers() > users.size();
+        mAddRestrictedUser.setEnabled(moreUsers);
+        mAddTrustedUser.setEnabled(moreUsers);
     }
 
     private void loadIconsAsync(List<Integer> missingIcons) {
@@ -504,8 +515,7 @@ public class UserSettings extends SettingsPreferenceFragment
             protected Void doInBackground(List<Integer>... values) {
                 for (int userId : values[0]) {
                     Bitmap bitmap = mUserManager.getUserIcon(userId);
-                    Drawable d = new BitmapDrawable(resources, bitmap);
-                    mUserIcons.append(userId, d);
+                    mUserIcons.append(userId, bitmap);
                 }
                 return null;
             }
@@ -533,9 +543,9 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void setPhotoId(Preference pref, UserInfo user) {
-        Drawable d = mUserIcons.get(user.id); // UserUtils.getUserIcon(mUserManager, user);
-        if (d != null) {
-            pref.setIcon(d);
+        Bitmap bitmap = mUserIcons.get(user.id); // UserUtils.getUserIcon(mUserManager, user);
+        if (bitmap != null) {
+            pref.setIcon(encircle(bitmap));
         }
     }
 
@@ -589,6 +599,16 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private boolean isInitialized(UserInfo user) {
         return (user.flags & UserInfo.FLAG_INITIALIZED) != 0;
+    }
+
+    private Drawable encircle(int iconResId) {
+        Bitmap icon = BitmapFactory.decodeResource(getResources(), iconResId);
+        return encircle(icon);
+    }
+
+    private Drawable encircle(Bitmap icon) {
+        Drawable circled = CircleFramedDrawable.getInstance(getActivity(), icon);
+        return circled;
     }
 
     @Override
