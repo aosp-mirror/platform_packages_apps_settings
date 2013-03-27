@@ -25,7 +25,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -197,8 +200,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
         UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
         mUserPreference.setTitle(info.name);
-        mUserPreference.setIcon(
-                new BitmapDrawable(mUserManager.getUserIcon(mUser.getIdentifier())));
+        Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
+        CircleFramedDrawable circularIcon =
+                CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
+        mUserPreference.setIcon(circularIcon);
         mUserPreference.setText(info.name);
     }
 
