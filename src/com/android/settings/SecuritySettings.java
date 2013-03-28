@@ -236,9 +236,25 @@ public class SecuritySettings extends SettingsPreferenceFragment
             removePreference(KEY_CREDENTIALS_MANAGER);
         }
 
+        PreferenceGroup deviceAdminCategory= (PreferenceGroup)
+                root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
         mToggleAppInstallation = (CheckBoxPreference) findPreference(
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
+
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        boolean isSideloadingAllowed =
+                !um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
+        // Side loading of apps.
+        if (isSideloadingAllowed) {
+            mToggleAppInstallation.setEnabled(isSideloadingAllowed);
+        } else {
+            if (deviceAdminCategory != null) {
+                deviceAdminCategory.removePreference(mToggleAppInstallation);
+            } else {
+                mToggleAppInstallation.setEnabled(false);
+            }
+        }
 
         // Package verification, only visible to primary user and if enabled
         mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
@@ -250,8 +266,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mToggleVerifyApps.setEnabled(false);
             }
         } else {
-            PreferenceGroup deviceAdminCategory= (PreferenceGroup)
-                    root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
             if (deviceAdminCategory != null) {
                 deviceAdminCategory.removePreference(mToggleVerifyApps);
             } else {
@@ -268,6 +282,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private void setNonMarketAppsAllowed(boolean enabled) {
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES)) {
+            return;
+        }
         // Change the system setting
         Settings.Global.putInt(getContentResolver(), Settings.Global.INSTALL_NON_MARKET_APPS,
                                 enabled ? 1 : 0);
@@ -303,6 +321,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 .show();
     }
 
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON_POSITIVE) {
             setNonMarketAppsAllowed(true);
@@ -505,6 +524,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         createPreferenceHierarchy();
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         if (preference == mLockAfter) {
             int timeout = Integer.parseInt((String) value);

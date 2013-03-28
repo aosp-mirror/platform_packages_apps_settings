@@ -96,7 +96,7 @@ public class LocationSettings extends SettingsPreferenceFragment
         // Only enable these controls if this user is allowed to change location
         // sharing settings.
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        boolean isToggleAllowed = um.isLocationSharingToggleAllowed();
+        boolean isToggleAllowed = !um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION);
         if (mLocationAccess != null) mLocationAccess.setEnabled(isToggleAllowed);
         if (mNetwork != null) mNetwork.setEnabled(isToggleAllowed);
         if (mGps != null) mGps.setEnabled(isToggleAllowed);
@@ -117,6 +117,7 @@ public class LocationSettings extends SettingsPreferenceFragment
 
         if (mSettingsObserver == null) {
             mSettingsObserver = new Observer() {
+                @Override
                 public void update(Observable o, Object arg) {
                     updateLocationToggles();
                 }
@@ -131,13 +132,13 @@ public class LocationSettings extends SettingsPreferenceFragment
         final ContentResolver cr = getContentResolver();
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         if (preference == mNetwork) {
-            if (um.isLocationSharingToggleAllowed()) {
+            if (!um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
                 Settings.Secure.setLocationProviderEnabled(cr,
                         LocationManager.NETWORK_PROVIDER, mNetwork.isChecked());
             }
         } else if (preference == mGps) {
             boolean enabled = mGps.isChecked();
-            if (um.isLocationSharingToggleAllowed()) {
+            if (!um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
                 Settings.Secure.setLocationProviderEnabled(cr,
                         LocationManager.GPS_PROVIDER, enabled);
                 if (mAssistedGps != null) {
@@ -186,7 +187,7 @@ public class LocationSettings extends SettingsPreferenceFragment
     /** Enable or disable all providers when the master toggle is changed. */
     private void onToggleLocationAccess(boolean checked) {
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        if (! um.isLocationSharingToggleAllowed()) {
+        if (um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
             return;
         }
         final ContentResolver cr = getContentResolver();
