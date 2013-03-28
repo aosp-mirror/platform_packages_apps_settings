@@ -197,12 +197,14 @@ public final class CredentialStorage extends Activity {
             Bundle bundle = mInstallBundle;
             mInstallBundle = null;
 
+            final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, -1);
+
             if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
                 String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
                 byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
 
-                if (!mKeyStore.importKey(key, value)) {
-                    Log.e(TAG, "Failed to install " + key);
+                if (!mKeyStore.importKey(key, value, uid)) {
+                    Log.e(TAG, "Failed to install " + key + " as user " + uid);
                     return;
                 }
             }
@@ -211,8 +213,8 @@ public final class CredentialStorage extends Activity {
                 String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
                 byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
 
-                if (!mKeyStore.put(certName, certData)) {
-                    Log.e(TAG, "Failed to install " + certName);
+                if (!mKeyStore.put(certName, certData, uid)) {
+                    Log.e(TAG, "Failed to install " + certName + " as user " + uid);
                     return;
                 }
             }
@@ -221,11 +223,10 @@ public final class CredentialStorage extends Activity {
                 String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
                 byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
 
-                if (!mKeyStore.put(caListName, caListData)) {
-                    Log.e(TAG, "Failed to install " + caListName);
+                if (!mKeyStore.put(caListName, caListData, uid)) {
+                    Log.e(TAG, "Failed to install " + caListName + " as user " + uid);
                     return;
                 }
-
             }
 
             setResult(RESULT_OK);
