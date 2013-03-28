@@ -23,8 +23,10 @@ import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.util.Log;
 
 import com.android.settings.Utils;
@@ -71,7 +73,8 @@ public class AddAccountSettings extends Activity {
 
     private PendingIntent mPendingIntent;
 
-    private AccountManagerCallback<Bundle> mCallback = new AccountManagerCallback<Bundle>() {
+    private final AccountManagerCallback<Bundle> mCallback = new AccountManagerCallback<Bundle>() {
+        @Override
         public void run(AccountManagerFuture<Bundle> future) {
             boolean done = true;
             try {
@@ -120,8 +123,10 @@ public class AddAccountSettings extends Activity {
             if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "restored");
         }
 
-        if (mAddAccountCalled) {
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+        if (mAddAccountCalled || um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
             // We already called add account - maybe the callback was lost.
+            // Or we aren't allowed to add an account.
             finish();
             return;
         }
@@ -162,6 +167,7 @@ public class AddAccountSettings extends Activity {
         }
     }
 
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_ADD_CALLED, mAddAccountCalled);

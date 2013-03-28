@@ -28,17 +28,16 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -93,10 +92,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.remove_account_label,
                         new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         AccountManager.get(AccountSyncSettings.this.getActivity())
                                 .removeAccount(mAccount,
                                 new AccountManagerCallback<Boolean>() {
+                            @Override
                             public void run(AccountManagerFuture<Boolean> future) {
                                 // If already out of this screen, don't proceed.
                                 if (!AccountSyncSettings.this.isResumed()) {
@@ -233,12 +234,15 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
-        MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
-                getString(R.string.remove_account_label))
-                .setIcon(R.drawable.ic_menu_delete_holo_dark);
 
-        removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
-                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+        if (!um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+            MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
+                    getString(R.string.remove_account_label))
+                    .setIcon(R.drawable.ic_menu_delete_holo_dark);
+            removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
+                    MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        }
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
