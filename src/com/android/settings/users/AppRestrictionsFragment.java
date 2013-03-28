@@ -31,6 +31,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
@@ -90,6 +91,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private boolean mFirstTime = true;
     private boolean mNewUser;
 
+    private int mCustomRequestCode;
+    private HashMap<Integer, AppRestrictionsPreference> mCustomRequestMap =
+            new HashMap<Integer,AppRestrictionsPreference>();
+
     public static class Activity extends PreferenceActivity {
         @Override
         public Intent getIntent() {
@@ -133,7 +138,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         RestrictionEntry getRestriction(String key) {
             if (restrictions == null) return null;
             for (RestrictionEntry entry : restrictions) {
-                if (entry.key.equals(key)) {
+                if (entry.getKey().equals(key)) {
                     return entry;
                 }
             }
@@ -296,7 +301,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         if (v.getTag() instanceof AppRestrictionsPreference) {
             AppRestrictionsPreference pref = (AppRestrictionsPreference) v.getTag();
             if (v.getId() == R.id.app_restrictions_settings) {
-                handleSettingsClick(pref);
+                toggleAppPanel(pref);
             } else if (!pref.isRequired()) {
                 pref.setChecked(!pref.isChecked());
                 mSelectedPackages.put(pref.getKey().substring(PKG_PREFIX.length()),
@@ -317,21 +322,18 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             ArrayList<RestrictionEntry> restrictions = appPref.getRestrictions();
             if (restrictions != null) {
                 for (RestrictionEntry entry : restrictions) {
-                    if (entry.key.equals(restrictionKey)) {
-                        switch (entry.type) {
+                    if (entry.getKey().equals(restrictionKey)) {
+                        switch (entry.getType()) {
                         case RestrictionEntry.TYPE_BOOLEAN:
-                            entry.setValue((Boolean) newValue);
+                            entry.setSelectedState((Boolean) newValue);
                             break;
                         case RestrictionEntry.TYPE_CHOICE:
                         case RestrictionEntry.TYPE_CHOICE_LEVEL:
                             ListPreference listPref = (ListPreference) preference;
-                            entry.setValue((String) newValue);
-                            for (int i = 0; i < listPref.getEntryValues().length; i++) {
-                                if (entry.values[i].equals(newValue)) {
-                                    listPref.setSummary(entry.choices[i]);
-                                    break;
-                                }
-                            }
+                            entry.setSelectedString((String) newValue);
+                            String readable = findInArray(entry.getChoiceEntries(),
+                                    entry.getChoiceValues(), (String) newValue);
+                            listPref.setSummary(readable);
                             break;
                         case RestrictionEntry.TYPE_MULTI_SELECT:
                             MultiSelectListPreference msListPref =
@@ -339,7 +341,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             Set<String> set = (Set<String>) newValue;
                             String [] selectedValues = new String[set.size()];
                             set.toArray(selectedValues);
-                            entry.setMultipleValues(selectedValues);
+                            entry.setAllSelectedStrings(selectedValues);
                             break;
                         default:
                             continue;
@@ -360,7 +362,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return true;
     }
 
-    private void handleSettingsClick(AppRestrictionsPreference preference) {
+    private void toggleAppPanel(AppRestrictionsPreference preference) {
         if (preference.getKey().startsWith(PKG_PREFIX)) {
             if (preference.panelOpen) {
                 for (Preference p : preference.childPreferences) {
@@ -372,6 +374,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 List<RestrictionEntry> oldEntries =
                         mUserManager.getApplicationRestrictions(packageName, mUser);
                 Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
+                intent.setPackage(packageName);
                 intent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS,
                         new ArrayList<RestrictionEntry>(oldEntries));
                 getActivity().sendOrderedBroadcast(intent, null,
@@ -384,6 +387,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     class RestrictionsResultReceiver extends BroadcastReceiver {
 
+        private static final String CUSTOM_RESTRICTIONS_INTENT = Intent.EXTRA_RESTRICTIONS_INTENT;
         String packageName;
         AppRestrictionsPreference preference;
 
@@ -395,39 +399,43 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            ArrayList<RestrictionEntry> restrictions = getResultExtras(true).getParcelableArrayList(
+            Bundle results = getResultExtras(true);
+            final ArrayList<RestrictionEntry> restrictions = results.getParcelableArrayList(
                     Intent.EXTRA_RESTRICTIONS);
-            if (restrictions != null) {
+            Intent restrictionsIntent = (Intent) results.getParcelable(CUSTOM_RESTRICTIONS_INTENT);
+            if (restrictions != null && restrictionsIntent == null) {
+                // Non-custom-activity case - expand the restrictions in-place
                 int count = 1;
                 for (RestrictionEntry entry : restrictions) {
                     Preference p = null;
-                    switch (entry.type) {
+                    switch (entry.getType()) {
                     case RestrictionEntry.TYPE_BOOLEAN:
                         p = new CheckBoxPreference(context);
-                        p.setTitle(entry.title);
-                        p.setSummary(entry.description);
-                        ((CheckBoxPreference)p).setChecked(entry.getBooleanValue());
+                        p.setTitle(entry.getTitle());
+                        p.setSummary(entry.getDescription());
+                        ((CheckBoxPreference)p).setChecked(entry.getSelectedState());
                         break;
                     case RestrictionEntry.TYPE_CHOICE:
                     case RestrictionEntry.TYPE_CHOICE_LEVEL:
                         p = new ListPreference(context);
-                        p.setTitle(entry.title);
-                        String value = entry.getStringValue();
+                        p.setTitle(entry.getTitle());
+                        String value = entry.getSelectedString();
                         if (value == null) {
-                            value = entry.description;
+                            value = entry.getDescription();
                         }
-                        p.setSummary(value);
-                        ((ListPreference)p).setEntryValues(entry.values);
-                        ((ListPreference)p).setEntries(entry.choices);
-                        ((ListPreference)p).setValue(entry.getStringValue());
+                        p.setSummary(findInArray(entry.getChoiceEntries(), entry.getChoiceValues(),
+                                value));
+                        ((ListPreference)p).setEntryValues(entry.getChoiceValues());
+                        ((ListPreference)p).setEntries(entry.getChoiceEntries());
+                        ((ListPreference)p).setValue(value);
                         break;
                     case RestrictionEntry.TYPE_MULTI_SELECT:
                         p = new MultiSelectListPreference(context);
-                        p.setTitle(entry.title);
-                        ((MultiSelectListPreference)p).setEntryValues(entry.values);
-                        ((MultiSelectListPreference)p).setEntries(entry.choices);
+                        p.setTitle(entry.getTitle());
+                        ((MultiSelectListPreference)p).setEntryValues(entry.getChoiceValues());
+                        ((MultiSelectListPreference)p).setEntries(entry.getChoiceEntries());
                         HashSet<String> set = new HashSet<String>();
-                        for (String s : entry.getMultipleValues()) {
+                        for (String s : entry.getAllSelectedStrings()) {
                             set.add(s);
                         }
                         ((MultiSelectListPreference)p).setValues(set);
@@ -440,7 +448,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         p.setOrder(preference.getOrder() + count);
                         // Store the restrictions key string as a key for the preference
                         p.setKey(preference.getKey().substring(PKG_PREFIX.length()) + DELIMITER
-                                + entry.key);
+                                + entry.getKey());
                         mAppList.addPreference(p);
                         p.setOnPreferenceChangeListener(AppRestrictionsFragment.this);
                         preference.childPreferences.add(p);
@@ -448,9 +456,79 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     }
                 }
                 preference.setRestrictions(restrictions);
+                mUserManager.setApplicationRestrictions(packageName, restrictions, mUser);
+            } else if (restrictionsIntent != null) {
+                final Intent customIntent = restrictionsIntent;
+                customIntent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS, restrictions);
+                Preference p = new Preference(context);
+                p.setTitle(R.string.app_restrictions_custom_label);
+                p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        int requestCode = generateCustomActivityRequestCode(
+                                RestrictionsResultReceiver.this.preference);
+                        AppRestrictionsFragment.this.startActivityForResult(
+                                customIntent, requestCode);
+                        return false;
+                    }
+                });
+                p.setPersistent(false);
+                p.setOrder(preference.getOrder() + 1);
+                preference.childPreferences.add(p);
+                mAppList.addPreference(p);
+                preference.setRestrictions(restrictions);
             }
-            mUserManager.setApplicationRestrictions(packageName, restrictions, mUser);
         }
+    }
+
+    /**
+     * Generates a request code that is stored in a map to retrieve the associated
+     * AppRestrictionsPreference.
+     * @param preference
+     * @return
+     */
+    private int generateCustomActivityRequestCode(AppRestrictionsPreference preference) {
+        mCustomRequestCode++;
+        mCustomRequestMap.put(mCustomRequestCode, preference);
+        return mCustomRequestCode;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.i(TAG, "Got activity resultCode=" + resultCode + ", requestCode="
+                + requestCode + ", data=" + data);
+
+        AppRestrictionsPreference pref = mCustomRequestMap.get(requestCode);
+        if (pref == null) {
+            Log.w(TAG, "Unknown requestCode " + requestCode);
+            return;
+        }
+
+        if (resultCode == Activity.RESULT_OK) {
+            ArrayList<RestrictionEntry> list =
+                    data.getParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS);
+            if (list != null) {
+                // If there's a valid result, persist it to the user manager.
+                String packageName = pref.getKey().substring(PKG_PREFIX.length());
+                pref.setRestrictions(list);
+                mUserManager.setApplicationRestrictions(packageName, list, mUser);
+            }
+            toggleAppPanel(pref);
+        }
+        // Remove request from the map
+        mCustomRequestMap.remove(requestCode);
+    }
+
+    private String findInArray(String[] choiceEntries, String[] choiceValues,
+            String selectedString) {
+        for (int i = 0; i < choiceValues.length; i++) {
+            if (choiceValues[i].equals(selectedString)) {
+                return choiceEntries[i];
+            }
+        }
+        return selectedString;
     }
 
     @Override

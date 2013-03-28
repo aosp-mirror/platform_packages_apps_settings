@@ -460,8 +460,8 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.application_settings) {
                 if (mAppRestrictions != null) {
                     for (RestrictionEntry entry : mAppRestrictions) {
-                        if (entry.key.equals(RestrictionsReceiver.KEY_ENABLE_APPS)
-                                && !entry.getBooleanValue()) {
+                        if (entry.getKey().equals(RestrictionsReceiver.KEY_ENABLE_APPS)
+                                && !entry.getSelectedState()) {
                             target.remove(i);
                         }
                     }
