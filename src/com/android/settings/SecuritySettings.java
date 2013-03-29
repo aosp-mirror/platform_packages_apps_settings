@@ -73,6 +73,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
     private static final String KEY_SHOW_PASSWORD = "show_password";
+    private static final String KEY_CREDENTIAL_STORAGE_TYPE = "credential_storage_type";
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
@@ -91,6 +92,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private CheckBoxPreference mShowPassword;
 
+    private KeyStore mKeyStore;
     private Preference mResetCredentials;
 
     private CheckBoxPreference mToggleAppInstallation;
@@ -231,6 +233,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Credential storage, only for primary user
         if (mIsPrimary) {
+            mKeyStore = KeyStore.getInstance();
+            Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
+
+            final int storageSummaryRes =
+                    mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
+                            : R.string.credential_storage_type_software;
+            credentialStorageType.setSummary(storageSummaryRes);
+
             mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
         } else {
             removePreference(KEY_CREDENTIALS_MANAGER);
@@ -408,8 +418,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         if (mResetCredentials != null) {
-            KeyStore keyStore = KeyStore.getInstance();
-            mResetCredentials.setEnabled(!keyStore.isUnlocked());
+            mResetCredentials.setEnabled(!mKeyStore.isUnlocked());
         }
     }
 
