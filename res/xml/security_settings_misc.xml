@@ -63,6 +63,11 @@
     <PreferenceCategory android:key="credentials_management"
             android:title="@string/credentials_title"
             android:persistent="false">
+        <Preference android:key="credential_storage_type"
+                android:title="@string/credential_storage_type"
+                style="?android:attr/preferenceInformationStyle"
+                android:persistent="false" />
+
         <Preference android:title="@string/trusted_credentials"
                 android:summary="@string/trusted_credentials_summary"
                 android:persistent="false"
