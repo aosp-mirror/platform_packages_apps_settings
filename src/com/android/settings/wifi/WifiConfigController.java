@@ -819,7 +819,7 @@ public class WifiConfigController implements TextWatcher,
     private void loadCertificates(Spinner spinner, String prefix) {
         final Context context = mConfigUi.getContext();
 
-        String[] certs = KeyStore.getInstance().saw(prefix);
+        String[] certs = KeyStore.getInstance().saw(prefix, android.os.Process.WIFI_UID);
         if (certs == null || certs.length == 0) {
             certs = new String[] {unspecifiedCert};
         } else {

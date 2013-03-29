@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiWatchdogStateMachine;
@@ -27,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.security.Credentials;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
     private static final String KEY_POOR_NETWORK_DETECTION = "wifi_poor_network_detection";
     private static final String KEY_SCAN_ALWAYS_AVAILABLE = "wifi_scan_always_available";
+    private static final String KEY_INSTALL_CREDENTIALS = "install_credentials";
     private static final String KEY_SUSPEND_OPTIMIZATIONS = "suspend_optimizations";
 
     private WifiManager mWifiManager;
@@ -93,6 +96,13 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             (CheckBoxPreference) findPreference(KEY_SCAN_ALWAYS_AVAILABLE);
         scanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
                     Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
+
+        Intent intent=new Intent(Credentials.INSTALL_AS_USER_ACTION);
+        intent.setClassName("com.android.certinstaller",
+                "com.android.certinstaller.CertInstallerMain");
+        intent.putExtra(Credentials.EXTRA_INSTALL_AS_UID, android.os.Process.WIFI_UID);
+        Preference pref = findPreference(KEY_INSTALL_CREDENTIALS);
+        pref.setIntent(intent);
 
         CheckBoxPreference suspendOptimizations =
             (CheckBoxPreference) findPreference(KEY_SUSPEND_OPTIMIZATIONS);
