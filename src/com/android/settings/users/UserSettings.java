@@ -501,6 +501,12 @@ public class UserSettings extends SettingsPreferenceFragment
         boolean moreUsers = mUserManager.getMaxSupportedUsers() > users.size();
         mAddRestrictedUser.setEnabled(moreUsers);
         mAddTrustedUser.setEnabled(moreUsers);
+        // Remove the limited users category if there aren't other limited users.
+        if (!mIsOwner) {
+            if (mLimitedUserListCategory.getPreferenceCount() == 0) {
+                removePreference(KEY_LIMITED_USER_LIST);
+            }
+        }
     }
 
     private void loadIconsAsync(List<Integer> missingIcons) {
