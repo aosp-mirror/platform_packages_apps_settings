@@ -77,12 +77,12 @@ public class RestrictionsReceiver extends BroadcastReceiver {
         String[] oldEnabledSections = new String[0];
         if (old != null) {
             for (RestrictionEntry r : old) {
-                if (r.key.equals(KEY_ENABLE_APPS)) {
-                    oldEnableApps = r.getBooleanValue();
-                } else if (r.key.equals(KEY_CONTENT_RATING)) {
-                    oldContentRating = r.getStringValue();
-                } else if (r.key.equals(KEY_SECTIONS_TO_SHOW)) {
-                    oldEnabledSections = r.getMultipleValues();
+                if (r.getKey().equals(KEY_ENABLE_APPS)) {
+                    oldEnableApps = r.getSelectedState();
+                } else if (r.getKey().equals(KEY_CONTENT_RATING)) {
+                    oldContentRating = r.getSelectedString();
+                } else if (r.getKey().equals(KEY_SECTIONS_TO_SHOW)) {
+                    oldEnabledSections = r.getAllSelectedStrings();
                 }
             }
         }
@@ -92,17 +92,17 @@ public class RestrictionsReceiver extends BroadcastReceiver {
 
         RestrictionEntry r1 = new RestrictionEntry(KEY_ENABLE_APPS,
                 Boolean.toString(oldEnableApps));
-        r1.title = "Enable apps";
-        r1.description = "Show the Apps section in Settings";
-        r1.type = RestrictionEntry.TYPE_BOOLEAN;
+        r1.setTitle("Enable apps");
+        r1.setDescription("Show the Apps section in Settings");
+        r1.setType(RestrictionEntry.TYPE_BOOLEAN);
         newRestrictions.add(r1);
 
         RestrictionEntry r2 = new RestrictionEntry(KEY_CONTENT_RATING, oldContentRating);
-        r2.title = "Test: Content rating";
-        r2.description = "Limit content to chosen rating and lower";
-        r2.type = RestrictionEntry.TYPE_CHOICE_LEVEL;
-        r2.values = new String[] { "G", "PG", "PG13", "R", "NR" };
-        r2.choices = new String[] { "G", "PG", "PG-13", "Restricted", "Not Rated" };
+        r2.setTitle("Test: Content rating");
+        r2.setDescription("Limit content to chosen rating and lower");
+        r2.setType(RestrictionEntry.TYPE_CHOICE_LEVEL);
+        r2.setChoiceValues(new String[] { "G", "PG", "PG13", "R", "NR"});
+        r2.setChoiceEntries(new String[] { "G", "PG", "PG-13", "Restricted", "Not Rated" });
         newRestrictions.add(r2);
 
         String [] values = new String[SECTION_IDS.length];
@@ -114,10 +114,10 @@ public class RestrictionsReceiver extends BroadcastReceiver {
             i++;
         }
         RestrictionEntry r3 = new RestrictionEntry(KEY_SECTIONS_TO_SHOW, oldEnabledSections);
-        r3.type = RestrictionEntry.TYPE_MULTI_SELECT;
-        r3.choices = choices;
-        r3.values = values;
-        r3.title = "Test: Sections to show";
+        r3.setType(RestrictionEntry.TYPE_MULTI_SELECT);
+        r3.setChoiceEntries(choices);
+        r3.setChoiceValues(values);
+        r3.setTitle("Test: Sections to show");
         newRestrictions.add(r3);
 
         Bundle extras = new Bundle();
