@@ -228,7 +228,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         final List<ResolveInfo> existingApps = pm.queryIntentActivitiesAsUser(launcherIntent,
                 0, mUser.getIdentifier());
         int i = 0;
-        if (receivers != null && receivers.size() > 0) {
+        if (mApps != null && mApps.size() > 0) {
             for (ResolveInfo app : mApps) {
                 if (app.activityInfo == null || app.activityInfo.packageName == null) continue;
                 String packageName = app.activityInfo.packageName;
@@ -238,7 +238,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 p.setIcon(icon);
                 p.setTitle(label);
                 p.setKey(PKG_PREFIX + packageName);
-                p.setSettingsEnabled(hasPackage(receivers, packageName));
+                p.setSettingsEnabled(hasPackage(receivers, packageName)
+                        || packageName.equals(getActivity().getPackageName()));
                 p.setPersistent(false);
                 p.setOnPreferenceChangeListener(this);
                 p.setOnPreferenceClickListener(this);
@@ -346,8 +347,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         default:
                             continue;
                         }
-                        mUserManager.setApplicationRestrictions(packageName, restrictions,
-                                mUser);
+                        if (packageName.equals(getActivity().getPackageName())) {
+                            RestrictionUtils.setRestrictions(getActivity(), restrictions, mUser);
+                        } else {
+                            mUserManager.setApplicationRestrictions(packageName, restrictions,
+                                    mUser);
+                        }
                         break;
                     }
                 }
@@ -371,15 +376,22 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 preference.childPreferences.clear();
             } else {
                 String packageName = preference.getKey().substring(PKG_PREFIX.length());
-                List<RestrictionEntry> oldEntries =
-                        mUserManager.getApplicationRestrictions(packageName, mUser);
-                Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
-                intent.setPackage(packageName);
-                intent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS,
-                        new ArrayList<RestrictionEntry>(oldEntries));
-                getActivity().sendOrderedBroadcast(intent, null,
-                        new RestrictionsResultReceiver(packageName, preference),
-                        null, Activity.RESULT_OK, null, null);
+                if (packageName.equals(getActivity().getPackageName())) {
+                    // Settings, fake it by using user restrictions
+                    ArrayList<RestrictionEntry> restrictions = RestrictionUtils.getRestrictions(
+                            getActivity(), mUser);
+                    onRestrictionsReceived(preference, packageName, restrictions);
+                } else {
+                    List<RestrictionEntry> oldEntries =
+                            mUserManager.getApplicationRestrictions(packageName, mUser);
+                    Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
+                    intent.setPackage(packageName);
+                    intent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS,
+                            new ArrayList<RestrictionEntry>(oldEntries));
+                    getActivity().sendOrderedBroadcast(intent, null,
+                            new RestrictionsResultReceiver(packageName, preference),
+                            null, Activity.RESULT_OK, null, null);
+                }
             }
             preference.panelOpen = !preference.panelOpen;
         }
@@ -404,58 +416,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     Intent.EXTRA_RESTRICTIONS);
             Intent restrictionsIntent = (Intent) results.getParcelable(CUSTOM_RESTRICTIONS_INTENT);
             if (restrictions != null && restrictionsIntent == null) {
-                // Non-custom-activity case - expand the restrictions in-place
-                int count = 1;
-                for (RestrictionEntry entry : restrictions) {
-                    Preference p = null;
-                    switch (entry.getType()) {
-                    case RestrictionEntry.TYPE_BOOLEAN:
-                        p = new CheckBoxPreference(context);
-                        p.setTitle(entry.getTitle());
-                        p.setSummary(entry.getDescription());
-                        ((CheckBoxPreference)p).setChecked(entry.getSelectedState());
-                        break;
-                    case RestrictionEntry.TYPE_CHOICE:
-                    case RestrictionEntry.TYPE_CHOICE_LEVEL:
-                        p = new ListPreference(context);
-                        p.setTitle(entry.getTitle());
-                        String value = entry.getSelectedString();
-                        if (value == null) {
-                            value = entry.getDescription();
-                        }
-                        p.setSummary(findInArray(entry.getChoiceEntries(), entry.getChoiceValues(),
-                                value));
-                        ((ListPreference)p).setEntryValues(entry.getChoiceValues());
-                        ((ListPreference)p).setEntries(entry.getChoiceEntries());
-                        ((ListPreference)p).setValue(value);
-                        break;
-                    case RestrictionEntry.TYPE_MULTI_SELECT:
-                        p = new MultiSelectListPreference(context);
-                        p.setTitle(entry.getTitle());
-                        ((MultiSelectListPreference)p).setEntryValues(entry.getChoiceValues());
-                        ((MultiSelectListPreference)p).setEntries(entry.getChoiceEntries());
-                        HashSet<String> set = new HashSet<String>();
-                        for (String s : entry.getAllSelectedStrings()) {
-                            set.add(s);
-                        }
-                        ((MultiSelectListPreference)p).setValues(set);
-                        break;
-                    case RestrictionEntry.TYPE_NULL:
-                    default:
-                    }
-                    if (p != null) {
-                        p.setPersistent(false);
-                        p.setOrder(preference.getOrder() + count);
-                        // Store the restrictions key string as a key for the preference
-                        p.setKey(preference.getKey().substring(PKG_PREFIX.length()) + DELIMITER
-                                + entry.getKey());
-                        mAppList.addPreference(p);
-                        p.setOnPreferenceChangeListener(AppRestrictionsFragment.this);
-                        preference.childPreferences.add(p);
-                        count++;
-                    }
-                }
-                preference.setRestrictions(restrictions);
+                onRestrictionsReceived(preference, packageName, restrictions);
                 mUserManager.setApplicationRestrictions(packageName, restrictions, mUser);
             } else if (restrictionsIntent != null) {
                 final Intent customIntent = restrictionsIntent;
@@ -479,6 +440,63 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 preference.setRestrictions(restrictions);
             }
         }
+    }
+
+    private void onRestrictionsReceived(AppRestrictionsPreference preference, String packageName,
+            ArrayList<RestrictionEntry> restrictions) {
+        // Non-custom-activity case - expand the restrictions in-place
+        final Context context = preference.getContext();
+        int count = 1;
+        for (RestrictionEntry entry : restrictions) {
+            Preference p = null;
+            switch (entry.getType()) {
+            case RestrictionEntry.TYPE_BOOLEAN:
+                p = new CheckBoxPreference(context);
+                p.setTitle(entry.getTitle());
+                p.setSummary(entry.getDescription());
+                ((CheckBoxPreference)p).setChecked(entry.getSelectedState());
+                break;
+            case RestrictionEntry.TYPE_CHOICE:
+            case RestrictionEntry.TYPE_CHOICE_LEVEL:
+                p = new ListPreference(context);
+                p.setTitle(entry.getTitle());
+                String value = entry.getSelectedString();
+                if (value == null) {
+                    value = entry.getDescription();
+                }
+                p.setSummary(findInArray(entry.getChoiceEntries(), entry.getChoiceValues(),
+                        value));
+                ((ListPreference)p).setEntryValues(entry.getChoiceValues());
+                ((ListPreference)p).setEntries(entry.getChoiceEntries());
+                ((ListPreference)p).setValue(value);
+                break;
+            case RestrictionEntry.TYPE_MULTI_SELECT:
+                p = new MultiSelectListPreference(context);
+                p.setTitle(entry.getTitle());
+                ((MultiSelectListPreference)p).setEntryValues(entry.getChoiceValues());
+                ((MultiSelectListPreference)p).setEntries(entry.getChoiceEntries());
+                HashSet<String> set = new HashSet<String>();
+                for (String s : entry.getAllSelectedStrings()) {
+                    set.add(s);
+                }
+                ((MultiSelectListPreference)p).setValues(set);
+                break;
+            case RestrictionEntry.TYPE_NULL:
+            default:
+            }
+            if (p != null) {
+                p.setPersistent(false);
+                p.setOrder(preference.getOrder() + count);
+                // Store the restrictions key string as a key for the preference
+                p.setKey(preference.getKey().substring(PKG_PREFIX.length()) + DELIMITER
+                        + entry.getKey());
+                mAppList.addPreference(p);
+                p.setOnPreferenceChangeListener(AppRestrictionsFragment.this);
+                preference.childPreferences.add(p);
+                count++;
+            }
+        }
+        preference.setRestrictions(restrictions);
     }
 
     /**
