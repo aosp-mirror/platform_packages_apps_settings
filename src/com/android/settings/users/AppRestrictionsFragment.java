@@ -16,10 +16,12 @@
 
 package com.android.settings.users;
 
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.RestrictionEntry;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -86,7 +88,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private static final int MAX_APP_RESTRICTIONS = 100;
 
     private static final String DELIMITER = ";";
-    private List<ResolveInfo> mApps;
     HashMap<String,Boolean> mSelectedPackages = new HashMap<String,Boolean>();
     private boolean mFirstTime = true;
     private boolean mNewUser;
@@ -212,26 +213,62 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mUserPreference.setText(info.name);
     }
 
+    private void addSystemApps(List<ApplicationInfo> visibleApps, Intent intent) {
+        final PackageManager pm = getActivity().getPackageManager();
+        List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo app : launchableApps) {
+            if (app.activityInfo != null && app.activityInfo.applicationInfo != null) {
+                int flags = app.activityInfo.applicationInfo.flags;
+                if ((flags & ApplicationInfo.FLAG_SYSTEM) != 0
+                        || (flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                    // System app
+                    visibleApps.add(app.activityInfo.applicationInfo);
+                }
+            }
+        }
+    }
+
     private void populateApps() {
         mAppList.setOrderingAsAdded(false);
-
+        List<ApplicationInfo> visibleApps = new ArrayList<ApplicationInfo>();
         // TODO: Do this asynchronously since it can be a long operation
         final Context context = getActivity();
         PackageManager pm = context.getPackageManager();
+
+        // Add launchers
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
         launcherIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        mApps = pm.queryIntentActivities(launcherIntent, 0);
-        Collections.sort(mApps, new AppLabelComparator(pm));
+        addSystemApps(visibleApps, launcherIntent);
 
+        // Add widgets
+        Intent widgetIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        addSystemApps(visibleApps, widgetIntent);
+
+        List<ApplicationInfo> installedApps = pm.getInstalledApplications(0);
+        for (ApplicationInfo app : installedApps) {
+            if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
+                    && (app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
+                // Downloaded app
+                visibleApps.add(app);
+            }
+        }
+        Collections.sort(visibleApps, new AppLabelComparator(pm));
+
+        for (int i = visibleApps.size() - 1; i > 1; i--) {
+            ApplicationInfo appInfo = visibleApps.get(i);
+            if (appInfo.packageName.equals(visibleApps.get(i-1).packageName)) {
+                visibleApps.remove(i);
+            }
+        }
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
         final List<ResolveInfo> existingApps = pm.queryIntentActivitiesAsUser(launcherIntent,
                 0, mUser.getIdentifier());
         int i = 0;
-        if (mApps != null && mApps.size() > 0) {
-            for (ResolveInfo app : mApps) {
-                if (app.activityInfo == null || app.activityInfo.packageName == null) continue;
-                String packageName = app.activityInfo.packageName;
+        if (visibleApps.size() > 0) {
+            for (ApplicationInfo app : visibleApps) {
+                if (app.packageName == null) continue;
+                String packageName = app.packageName;
                 Drawable icon = app.loadIcon(pm);
                 CharSequence label = app.loadLabel(pm);
                 AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
@@ -267,7 +304,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
-    private class AppLabelComparator implements Comparator<ResolveInfo> {
+    private class AppLabelComparator implements Comparator<ApplicationInfo> {
 
         PackageManager pm;
 
@@ -275,13 +312,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             this.pm = pm;
         }
 
-        private CharSequence getLabel(ResolveInfo info) {
+        private CharSequence getLabel(ApplicationInfo info) {
             // TODO: Optimize this with a cache
-            return info.activityInfo.loadLabel(pm);
+            return info.loadLabel(pm);
         }
 
         @Override
-        public int compare(ResolveInfo lhs, ResolveInfo rhs) {
+        public int compare(ApplicationInfo lhs, ApplicationInfo rhs) {
             String lhsLabel = getLabel(lhs).toString();
             String rhsLabel = getLabel(rhs).toString();
             return lhsLabel.compareTo(rhsLabel);
