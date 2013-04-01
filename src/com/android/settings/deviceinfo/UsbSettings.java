@@ -16,20 +16,16 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
-import android.content.ContentQueryMap;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -73,6 +69,12 @@ public class UsbSettings extends SettingsPreferenceFragment {
         mMtp = (CheckBoxPreference)root.findPreference(KEY_MTP);
         mPtp = (CheckBoxPreference)root.findPreference(KEY_PTP);
 
+        UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (um.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
+            mMtp.setEnabled(false);
+            mPtp.setEnabled(false);
+        }
+
         return root;
     }
 
@@ -112,8 +114,12 @@ public class UsbSettings extends SettingsPreferenceFragment {
             mMtp.setChecked(false);
             mPtp.setChecked(false);
         }
-
-        if (!mUsbAccessoryMode) {
+        UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (um.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
+            Log.e(TAG, "USB is locked down");
+            mMtp.setEnabled(false);
+            mPtp.setEnabled(false);
+        } else if (!mUsbAccessoryMode) {
             //Enable MTP and PTP switch while USB is not in Accessory Mode, otherwise disable it
             Log.e(TAG, "USB Normal Mode");
             mMtp.setEnabled(true);
@@ -131,6 +137,12 @@ public class UsbSettings extends SettingsPreferenceFragment {
         // Don't allow any changes to take effect as the USB host will be disconnected, killing
         // the monkeys
         if (Utils.isMonkeyRunning()) {
+            return true;
+        }
+        // If this user is disallowed from using USB, don't handle their attempts to change the
+        // setting.
+        UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (um.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
             return true;
         }
 
