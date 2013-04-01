@@ -1602,11 +1602,5 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".users.RestrictionsReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.GET_RESTRICTION_ENTRIES"/>
-            </intent-filter>
-        </receiver>
-
     </application>
 </manifest>

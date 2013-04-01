@@ -57,7 +57,6 @@ import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.users.RestrictionsReceiver;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
@@ -456,15 +455,6 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
                     target.remove(i);
-                }
-            } else if (id == R.id.application_settings) {
-                if (mAppRestrictions != null) {
-                    for (RestrictionEntry entry : mAppRestrictions) {
-                        if (entry.getKey().equals(RestrictionsReceiver.KEY_ENABLE_APPS)
-                                && !entry.getSelectedState()) {
-                            target.remove(i);
-                        }
-                    }
                 }
             } else if (id == R.id.account_add) {
                 if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
