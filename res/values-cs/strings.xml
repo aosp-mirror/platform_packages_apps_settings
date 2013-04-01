@@ -542,12 +542,11 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Nepoužívat síť Wi-Fi, pokud nemá dostatečně kvalitní internetové připojení"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Hledání vždy zapnuto"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Povolit službě určování polohy Google a ostatním aplikacím hledat sítě, i když je síť Wi-Fi vypnutá"</string>
-    <!-- no translation found for wifi_scan_notify_text_location_on (8135076005488914200) -->
+    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
     <skip />
-    <!-- no translation found for wifi_scan_notify_text_location_off (6323983741393280935) -->
-    <skip />
-    <!-- no translation found for wifi_scan_notify_remember_choice (5340097010842405981) -->
-    <skip />
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Za účelem zvýšení přesnosti a k dalším účelům mohou aplikace Google a další aplikace vyhledávat sítě Wi-Fi v okolí, i když je Wi-Fi vypnuta. Chcete-li to zakázat, přejděte do části Pokročilé &gt; Hledání vždy zapnuto."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikace mohou vyhledávat sítě v okolí i v případě, že je Wi-Fi vypnuta. Chcete-li nastavení změnit, přejděte do části Pokročilé &gt; Hledání vždy zapnuto."</string>
+    <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Tuto zprávu příště nezobrazovat"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Ponechat Wi-Fi aktivní v režimu spánku"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Při změně nastavení se vyskytl problém"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Optimalizace Wi-Fi"</string>
@@ -679,7 +678,7 @@
     <string name="notification_sound_title" msgid="5137483249425507572">"Výchozí zvuk oznámení"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Blikat kontrolkou oznámení"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Vyzváněcí tón"</string>
-    <string name="notification_volume_title" msgid="2012640760341080408">"Upozornění"</string>
+    <string name="notification_volume_title" msgid="2012640760341080408">"Oznámení"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Použije hlasitost příchozích hovorů také pro oznámení"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"Výchozí zvuk oznámení"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"Média"</string>
@@ -1495,6 +1494,12 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Odebrat všechny certifikáty"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Důvěryhodná pověření"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Zobrazit důvěryhodné certifikáty CA"</string>
+    <!-- no translation found for credential_storage_type (8629968543494001364) -->
+    <skip />
+    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
+    <skip />
+    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
+    <skip />
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Proveďte bezpečnostní gesto"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Instalaci pověření je třeba potvrdit provedením bezpečnostního gesta."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1803,23 +1808,20 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Přísné"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Uživatelé"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Vy"</string>
-    <string name="user_list_title" msgid="8866161687358773982">"Další uživatelé"</string>
+    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
+    <skip />
+    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
+    <skip />
     <string name="user_add_user_menu" msgid="1675956975014862382">"Přidat uživatele"</string>
-    <!-- no translation found for user_add_restricted (2355584640156396901) -->
-    <skip />
-    <!-- no translation found for user_add_restricted_summary (6627956758186349471) -->
-    <skip />
-    <!-- no translation found for user_add_trusted (557634297572871869) -->
-    <skip />
-    <!-- no translation found for user_add_trusted_summary (1118604533072902851) -->
-    <skip />
+    <string name="user_add_restricted" msgid="2355584640156396901">"Přidat uživ. s omez."</string>
+    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Uživatelé s omezením přístupu mohou používat pouze aplikace a obsah, které vyberete."</string>
+    <string name="user_add_trusted" msgid="557634297572871869">"Přidat důvěr. uživ."</string>
+    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Důvěryhodní uživatelé nemají žádná omezení"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktivní"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Neaktivní"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Není nastaveno"</string>
-    <!-- no translation found for user_trusted (6742122083463724471) -->
-    <skip />
-    <!-- no translation found for user_limited (5344145255529624480) -->
-    <skip />
+    <string name="user_trusted" msgid="6742122083463724471">"Důvěryhodný"</string>
+    <string name="user_limited" msgid="5344145255529624480">"S omezeným přístupem"</string>
     <string name="user_owner" msgid="3879126011135546571">"Vlastník"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Přezdívka"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Přidat nového uživatele"</string>
@@ -1842,12 +1844,9 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"Přidávání nového uživatele…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Smazat uživatele"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Smazat"</string>
-    <!-- no translation found for application_restrictions (8207332020898004394) -->
-    <skip />
-    <!-- no translation found for apps_with_restrictions_header (3660449891478534440) -->
-    <skip />
-    <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
-    <skip />
+    <string name="application_restrictions" msgid="8207332020898004394">"Povolit aplikace a obsah"</string>
+    <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikace s omezením"</string>
+    <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Rozbalit nastavení aplikace"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Toto nastavení ovlivní všechny uživatele tohoto tabletu."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Toto nastavení ovlivní všechny uživatele tohoto telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Změna jazyka"</string>
@@ -1858,14 +1857,9 @@
     <string name="user_picture_title" msgid="7297782792000291692">"ID fotografie"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Hromadné zasílání zpráv v rámci buňky"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Vyberte typy mimořádných upozornění, která chcete zobrazovat."</string>
-    <!-- no translation found for user_restrictions_title (371835484894400390) -->
-    <skip />
-    <!-- no translation found for user_rename (8523499513614655279) -->
-    <skip />
-    <!-- no translation found for wizard_back (5567007959434765743) -->
-    <skip />
-    <!-- no translation found for wizard_next (3606212602795100640) -->
-    <skip />
-    <!-- no translation found for wizard_finish (3286109692700083252) -->
-    <skip />
+    <string name="user_restrictions_title" msgid="371835484894400390">"Povolit aplikace a obsah"</string>
+    <string name="user_rename" msgid="8523499513614655279">"PŘEJMENOVAT"</string>
+    <string name="wizard_back" msgid="5567007959434765743">"Zpět"</string>
+    <string name="wizard_next" msgid="3606212602795100640">"Další"</string>
+    <string name="wizard_finish" msgid="3286109692700083252">"Dokončit"</string>
 </resources>

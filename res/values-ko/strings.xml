@@ -542,12 +542,11 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"인터넷 연결이 원활하지 않은 경우 Wi-Fi 네트워크를 사용하지 않음"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"네트워크 항상 검색"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Wi-Fi가 껴져 있을 때에도 Google의 위치 서비스 및 기타 앱이 네트워크를 검색하도록 합니다."</string>
-    <!-- no translation found for wifi_scan_notify_text_location_on (8135076005488914200) -->
+    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
     <skip />
-    <!-- no translation found for wifi_scan_notify_text_location_off (6323983741393280935) -->
-    <skip />
-    <!-- no translation found for wifi_scan_notify_remember_choice (5340097010842405981) -->
-    <skip />
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"정확성 개선 등의 목적으로 Google 및 기타 앱이 근처 Wi-Fi 네트워크를 스캔할 수 있습니다. Wi-Fi가 꺼져 있을 때도 작동합니다. 이 기능을 사용하지 않으려면 고급 &gt; 항상 스캔 허용으로 이동하세요."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"앱이 Wi-Fi가 꺼져 있을 때도 근처 네트워크를 스캔할 수 있습니다. 이 기능을 사용하지 않으려면 고급 &gt; 항상 스캔 허용으로 이동하세요."</string>
+    <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"다시 표시 안함"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"절전 모드 동안 Wi-Fi 연결 유지"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"설정을 변경하는 중 문제가 발생했습니다."</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi 최적화"</string>
@@ -1495,6 +1494,12 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"모든 인증서 삭제"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"신뢰할 수 있는 자격증명"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"신뢰할 수 있는 CA 인증서 표시"</string>
+    <!-- no translation found for credential_storage_type (8629968543494001364) -->
+    <skip />
+    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
+    <skip />
+    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
+    <skip />
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"잠금해제 패턴을 그리세요."</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"자격증명 설치를 확인하려면 잠금해제 패턴을 그려야 합니다."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1803,23 +1808,20 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"시행"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"사용자"</string>
     <string name="user_you_section" msgid="6247838798859425408">"나"</string>
-    <string name="user_list_title" msgid="8866161687358773982">"다른 사용자"</string>
+    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
+    <skip />
+    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
+    <skip />
     <string name="user_add_user_menu" msgid="1675956975014862382">"사용자 추가"</string>
-    <!-- no translation found for user_add_restricted (2355584640156396901) -->
-    <skip />
-    <!-- no translation found for user_add_restricted_summary (6627956758186349471) -->
-    <skip />
-    <!-- no translation found for user_add_trusted (557634297572871869) -->
-    <skip />
-    <!-- no translation found for user_add_trusted_summary (1118604533072902851) -->
-    <skip />
+    <string name="user_add_restricted" msgid="2355584640156396901">"제한된 사용자 추가"</string>
+    <string name="user_add_restricted_summary" msgid="6627956758186349471">"제한된 사용자만 내가 선택한 앱과 콘텐츠에 액세스할 수 있습니다."</string>
+    <string name="user_add_trusted" msgid="557634297572871869">"신뢰할 수 있는 사용자 추가"</string>
+    <string name="user_add_trusted_summary" msgid="1118604533072902851">"신뢰할 수 있는 사용자는 제한이 없습니다."</string>
     <string name="user_summary_active" msgid="4740649452346004418">"활성"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"비활성"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"설정되지 않음"</string>
-    <!-- no translation found for user_trusted (6742122083463724471) -->
-    <skip />
-    <!-- no translation found for user_limited (5344145255529624480) -->
-    <skip />
+    <string name="user_trusted" msgid="6742122083463724471">"신뢰할 수 있는 사용자"</string>
+    <string name="user_limited" msgid="5344145255529624480">"제한된 사용자"</string>
     <string name="user_owner" msgid="3879126011135546571">"소유자"</string>
     <string name="user_nickname" msgid="5148818000228994488">"닉네임"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"새 사용자 추가"</string>
@@ -1842,12 +1844,9 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"새 사용자 추가 중..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"사용자 삭제"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"삭제"</string>
-    <!-- no translation found for application_restrictions (8207332020898004394) -->
-    <skip />
-    <!-- no translation found for apps_with_restrictions_header (3660449891478534440) -->
-    <skip />
-    <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
-    <skip />
+    <string name="application_restrictions" msgid="8207332020898004394">"앱 및 콘텐츠 허용"</string>
+    <string name="apps_with_restrictions_header" msgid="3660449891478534440">"애플리케이션 제한"</string>
+    <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"애플리케이션을 위한 설정 확장"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"이 설정은 태블릿의 모든 사용자에게 영향을 줍니다."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"이 설정은 휴대전화의 모든 사용자에게 영향을 줍니다."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"언어 변경"</string>
@@ -1858,14 +1857,9 @@
     <string name="user_picture_title" msgid="7297782792000291692">"사진 ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"셀 브로드캐스트"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"표시할 긴급 알림 유형을 선택합니다."</string>
-    <!-- no translation found for user_restrictions_title (371835484894400390) -->
-    <skip />
-    <!-- no translation found for user_rename (8523499513614655279) -->
-    <skip />
-    <!-- no translation found for wizard_back (5567007959434765743) -->
-    <skip />
-    <!-- no translation found for wizard_next (3606212602795100640) -->
-    <skip />
-    <!-- no translation found for wizard_finish (3286109692700083252) -->
-    <skip />
+    <string name="user_restrictions_title" msgid="371835484894400390">"앱 및 콘텐츠 허용"</string>
+    <string name="user_rename" msgid="8523499513614655279">"이름 바꾸기"</string>
+    <string name="wizard_back" msgid="5567007959434765743">"뒤로"</string>
+    <string name="wizard_next" msgid="3606212602795100640">"다음"</string>
+    <string name="wizard_finish" msgid="3286109692700083252">"완료"</string>
 </resources>
