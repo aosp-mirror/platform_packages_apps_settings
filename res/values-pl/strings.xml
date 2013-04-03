@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Nie używaj sieci Wi-Fi, jeśli połączenie jest słabe"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Skanowanie zawsze dostępne"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Pozwól usłudze lokalizacji Google i innym aplikacjom skanować w poszukiwaniu sieci, nawet gdy sieć Wi-Fi jest wyłączona"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Instaluj certyfikaty"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Aby poprawić dokładność (i w innych celach), aplikacje Google i inne mogą skanować sieci w pobliżu, nawet gdy Wi-Fi jest wyłączone. Jeśli nie chcesz, aby tak się działo, wybierz Zaawansowane &gt; Skanowanie zawsze dostępne."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikacje mogą wyszukiwać sieci w pobliżu, nawet gdy Wi-Fi jest wyłączone. Jeśli nie chcesz, aby tak się działo, wybierz Zaawansowane &gt; Skanowanie zawsze dostępne."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Nie pokazuj ponownie"</string>
@@ -1494,12 +1493,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Usuń wszystkie certyfikaty"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Zaufane dane uwierzytelniające"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Wyświetlanie zaufanych certyfikatów CA"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Typ pamięci"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Wspomagana sprzętowo"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"Tylko programowa"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Narysuj wzór odblokowania"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Aby potwierdzić instalację danych logowania, musisz narysować wzór odblokowania."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1808,10 +1804,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Restrykcyjny"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Użytkownicy"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Ty"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Zaufani użytkownicy"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Użytkownicy z ograniczeniami"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj użytkownika"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Dodaj użytk. z ogr."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Użytkownicy z ograniczeniami mają dostęp tylko do treści i aplikacji wybranych przez Ciebie"</string>
@@ -1859,6 +1853,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Wybierz typy alertów o zagrożeniu, które chcesz wyświetlić."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Zezwól na aplikacje i zawartość"</string>
     <string name="user_rename" msgid="8523499513614655279">"ZMIEŃ NAZWĘ"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Ustaw ograniczenia aplikacji"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Sieć Wi‑Fi i komórkowa"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Zezwalaj na modyfikowanie ustawień sieci Wi‑Fi i komórkowej"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"Zezwalaj na modyfikowanie parowań i ustawień Bluetooth"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"Komunikacja NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Zezwalaj na wymianę danych, gdy tablet dotyka innego urządzenia"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Zezwalaj na wymianę danych, gdy telefon dotyka innego urządzenia"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Dostęp do lokalizacji"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Zezwalaj aplikacji na korzystanie z informacji o lokalizacji"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Wróć"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Dalej"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Zakończ"</string>

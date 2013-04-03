@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"除非 Wi-Fi 網路連線狀態良好，否則不使用"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"一律執行掃描"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"允許 Google 的定位服務和其他應用程式掃描網路 (即使 Wi-Fi 已關閉)"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"為了提升定位精確度及用於其他用途，Google 和其他應用程式可能會掃描附近的 Wi-Fi 網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"應用程式可能會掃描附近的網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"不要再顯示"</string>
@@ -1498,12 +1497,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"移除所有憑證"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"信任的憑證"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"顯示信任的 CA 憑證"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"儲存空間類型"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬體備份"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"僅限軟體"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"畫出解鎖圖形"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"您必須畫出解鎖圖形，才能確認安裝憑證。"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1812,10 +1808,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"執行中"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"使用者"</string>
     <string name="user_you_section" msgid="6247838798859425408">"您"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"信任的使用者"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"受限的使用者"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"新增使用者"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"新增受限的使用者"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"受限的使用者只能存取您選取的應用程式和內容"</string>
@@ -1863,6 +1857,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"選取要顯示的緊急警示類型。"</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"允許應用程式和內容"</string>
     <string name="user_rename" msgid="8523499513614655279">"重新命名"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"設定應用程式限制"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi 與行動網路"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"允許修改 Wi‑Fi 與行動網路設定"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"藍牙"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"允許修改藍牙配對與設定"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"允許平板電腦與其他裝置接觸時交換資料"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"允許手機與其他裝置接觸時交換資料"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"位置資訊存取"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"允許應用程式使用您的位置資訊"</string>
     <string name="wizard_back" msgid="5567007959434765743">"返回"</string>
     <string name="wizard_next" msgid="3606212602795100640">"下一步"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"完成"</string>

@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Да не се използва Wi‑Fi мрежа, освен ако няма добра връзка с интернет"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Сканирането е винаги налице"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Услугата за местоположения на Google и другите приложения да сканират за мрежи дори когато Wi-Fi е изключен"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Инсталиране на сертификати"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"За подобряване на точността на местоположението и за други цели Google и останалите приложения може да сканират за мрежи в района дори когато Wi-Fi е изключен. Ако не искате това да се случва, отворете „Разширени“ &amp;gt „Сканирането винаги да е налице“."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Приложенията може да сканират за мрежи в района дори когато Wi-Fi е изключен. Ако не искате това да се случва, отворете „Разширени“ &gt; „Сканирането винаги да е налице“."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Да не се показва отново"</string>
@@ -1494,12 +1493,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Премахване на всички сертификати"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Надеждни идент. данни"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Показване на надеждни сертификати от сертифициращи органи"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Тип на хранилището"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"С хардуерна поддръжка"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"Само софтуерно"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Начертайте фигурата си за отключване"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Трябва да начертаете фигурата си за отключване, за да потвърдите инсталирането на идентификационни данни."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1808,10 +1804,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Налагане"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Потребители"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Вие"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Доверени потребители"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Ограничени потребители"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Потребител: Добавяне"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Огр. потреб.: Добав."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Ограничените потребители имат достъп само до избраните от вас приложения и съдържание"</string>
@@ -1859,6 +1853,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Изберете типовете спешни сигнали, които да се показват."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Разреш. на приложения и съдържание"</string>
     <string name="user_rename" msgid="8523499513614655279">"ПРЕИМЕНУВАНЕ"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Огранич. за приложението: Задаване"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi и мобилни данни"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Разрешаване на промяна на настройките за Wi‑Fi и мобилни данни"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"Разрешаване на промяна на сдвояванията и настройките на Bluetooth"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"КБП"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Разрешаване на обмен на данни, когато таблетът докосва друго устройство"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Разрешаване на обмен на данни, когато телефонът докосва друго устройство"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Достъп до местоположението"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Разрешаване на приложенията да използват информация за местоположението ви"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Назад"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Напред"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Край"</string>
