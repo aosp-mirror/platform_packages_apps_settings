@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"אל תשתמש ברשת Wi-Fi, אלא אם יש לה חיבור אינטרנט באיכות טובה"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"סריקה זמינה תמיד"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"תן לשירות המיקום של Google וליישומים אחרים לסרוק על מנת למצוא רשתות, גם כש-Wi-Fi כבוי."</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"התקן אישורים"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"כדי לשפר את מידת הדיוק מבחינת מיקום ולהשגת יתרונות נוספים, יישומים של Google ויישומים נוספים עשויים לבצע סריקה לאיתור רשתות קרובות, גם כאשר ה-Wi-Fi כבוי. אם אינך מעוניין בכך, עבור אל \'מתקדם\' &gt; \'סריקה זמינה תמיד\'."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"יישומים עשויים לבצע סריקה לאיתור רשתות קרובות, גם אם ה-Wi-Fi כבוי. אם אינך מעוניין בכך, עבור אל \'מתקדם\' &gt; \'סריקה זמינה תמיד\'."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"אל תציג שוב"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"הסר את כל האישורים"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"אישורים מהימנים"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"הצג אישורי CA מהימנים"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"סוג אחסון"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"מגובה באמצעות חומרה"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"תוכנה בלבד"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"שרטט את קו ביטול הנעילה"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"עליך לשרטט את קו ביטול הנעילה כדי לאשר התקנת הסמכות."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1810,10 +1806,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"אכיפה"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"משתמשים"</string>
     <string name="user_you_section" msgid="6247838798859425408">"אתה"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"משתמשים מהימנים"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"משתמשים מוגבלים"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"הוסף משתמש"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"הוסף משתמש מוגבל"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"משתמשים מוגבלים יכולים לגשת רק ליישומים ולתוכן שאתה בחרת"</string>
@@ -1861,6 +1855,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"בחר את סוגי התראות החירום להצגה."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"אפשר יישומים ותוכן"</string>
     <string name="user_rename" msgid="8523499513614655279">"שנה שם"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"הגדר הגבלות ליישום"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"רשת Wi‑Fi ורשת לנייד"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"אפשר שינוי של הגדרות רשת Wi-Fi ורשת לנייד"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"אפשר שינויים של התאמות והגדרות Bluetooth"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"אפשר חילופי מידע כאשר הטאבלט נוגע במכשיר אחר"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"אפשר חילופי מידע כאשר הטלפון נוגע במכשיר אחר"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"גישה למיקום"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"התר ליישום להשתמש במידע המיקום שלך"</string>
     <string name="wizard_back" msgid="5567007959434765743">"הקודם"</string>
     <string name="wizard_next" msgid="3606212602795100640">"הבא"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"סיום"</string>

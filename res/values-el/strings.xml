@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Να μην γίνεται χρήση δικτύων Wi-Fi, εκτός αν υπάρχει καλή σύνδεση στο Διαδίκτυο"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Σάρωση πάντα διαθέσιμη"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Παροχή στην υπηρεσία εντοπισμού τοποθεσίας της Google και σε άλλες εφαρμογές, της δυνατότητας σάρωσης για δίκτυα, ακόμη και όταν το Wi-Fi είναι απενεργοποιημένο"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Εγκατάσταση πιστοποιητικών"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Για τη βελτίωση της ακρίβειας και για άλλους σκοπούς, το Google και άλλες εφαρμογές ενδέχεται να πραγματοποιούν σάρωση για κοντινά δίκτυα Wi-Fi, ακόμη και αν το Wi-Fi είναι απενεργοποιημένο. Αν δεν επιθυμείτε να συμβαίνει αυτό, μεταβείτε στη ρύθμιση Σύνθετες &gt; Πάντα διαθέσιμη σάρωση."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Οι εφαρμογές ενδέχεται να κάνουν σάρωση για κοντινά δίκτυα, ακόμη και αν το Wi-Fi είναι απενεργοποιημένο. Αν δεν επιθυμείτε να συμβαίνει αυτό, μεταβείτε στη ρύθμιση Σύνθετες &gt; Πάντα διαθέσιμη σάρωση."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Να μην εμφανιστεί ξανά"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Κατάργηση όλων των πιστοποιητικών"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Αξιόπιστα διαπιστευτήρια"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Προβολή αξιόπιστων πιστοποιητικών CA"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Τύπος αποθήκευσης"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Με υποστήριξη εξοπλισμού"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"Μόνο λογισμικό"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Σχεδιάστε το μοτίβο ξεκλειδώματος"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Πρέπει να σχεδιάσετε το μοτίβο ξεκλειδώματος για να επιβεβαιώσετε την εγκατάσταση των διαπιστευτηρίων."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1810,10 +1806,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Επιβολή"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Χρήστες"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Εσείς"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Αξιόπιστοι χρήστες"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Περιορισμένοι χρήστες"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Προσθήκη χρήστη"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Προσθ. περιορ.χρήστη"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Οι περιορισμένοι χρήστες έχουν πρόσβαση μόνο στις εφαρμογές και το περιεχόμενο που επιλέγετε"</string>
@@ -1861,6 +1855,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Επιλέξτε τους τύπους ειδοποιήσεων έκτακτης ανάγκης που θα εμφανίζονται."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Να επιτρ. εφαρμογές και περιεχόμενο"</string>
     <string name="user_rename" msgid="8523499513614655279">"ΜΕΤΟΝΟΜΑΣΙΑ"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Ορισμός ορίων εφαρμογής"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi και κινητά"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Να επιτρέπεται η τροποποίηση των ρυθμίσεων Wi‑Fi και κινητών"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"Να επιτρέπεται η τροποποίηση των συζεύξεων και των ρυθμίσεων Bluetooth"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Να επιτρέπεται η ανταλλαγή δεδομένων όταν το tablet έρχεται σε επαφή με μια άλλη συσκευή"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Να επιτρέπεται η ανταλλαγή δεδομένων όταν το τηλέφωνο έρχεται σε επαφή με μια άλλη συσκευή"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Πρόσβαση τοποθεσίας"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Να επιτρέπεται στις εφαρμογές η χρήση των στοιχείων τοποθεσίας σας"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Πίσω"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Επόμενο"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Τέλος"</string>

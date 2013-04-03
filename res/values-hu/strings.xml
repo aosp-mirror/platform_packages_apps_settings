@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Csak akkor használjon Wi-Fi hálózatot, ha jó internetkapcsolatot tud biztosítani."</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"A keresés mindig elérhető"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"A Google helyszolgáltatása és más alkalmazások akkor is kereshetnek hálózatokat, ha a Wi-Fi ki van kapcsolva"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Tanúsítványok telepítése"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"A hely pontosságának javítása és egyéb célok érdekében a Google és más alkalmazások kereshetnek közeli Wi-Fi hálózatokat még akkor is, ha a Wi-Fi ki van kapcsolva. Ha nem szeretné ezt, állítsa át a Speciális &gt; A keresés mindig elérhető beállítást."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Az alkalmazások még akkor is megkereshetik a közeli hálózatokat, ha a Wi-Fi ki van kapcsolva. Ha nem szeretné ezt, állítsa át a Speciális &gt; A keresés mindig elérhető beállítást."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Ne jelenjen meg többé"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Összes tanúsítvány eltávolítása"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Megbízható hitelesítő adatok"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Megbízható CA tanúsítványok megjelenítése"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Tárhelytípus"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"hardveresen támogatott"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"kizárólag szoftveres"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Rajzolja le a feloldási mintát"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"A hitelesítési adatok telepítésének megerősítéséhez rajzolja le feloldási mintáját."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1812,10 +1808,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Kényszerítve"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Felhasználók"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Ön"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Megbízható felhasználók"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Korlátozott felhasználók"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Felhasználó hozzáad."</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Korl. felhasználó"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"A korlátozott felhasználók csak az Ön által megadott alkalmazásokhoz és tartalmakhoz férnek hozzá"</string>
@@ -1863,6 +1857,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Válassza ki a megjelenítendő vészriasztások típusait."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Alkalmazások és tartalmak engedély."</string>
     <string name="user_rename" msgid="8523499513614655279">"ÁTNEVEZÉS"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Alkalmazáskorlátozások beállítása"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi és mobil"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Lehetővé teszi a Wi‑Fi és mobilbeállítások módosítását."</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"A bluetoothos párosítások és beállítások engedélyezése"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Lehetővé teszi az adatcserét, ha a táblagép érintkezik egy másik eszközzel."</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Lehetővé teszi az adatcserét, ha a telefon érintkezik egy másik készülékkel."</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Helyhozzáférés"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Az alkalmazások használhatják a helyadatokat."</string>
     <string name="wizard_back" msgid="5567007959434765743">"Vissza"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Tovább"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Befejezés"</string>

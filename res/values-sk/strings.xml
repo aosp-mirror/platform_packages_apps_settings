@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Nepoužívať sieť Wi-Fi, pokiaľ nemá dostatočne kvalitné internetové pripojenie"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Vyhľadávanie vždy zapnuté"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Povoliť službe určovania polohy Google a ostatným aplikáciám vyhľadávať siete aj v prípade, že je sieť Wi-Fi vypnutá"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Inštalácia certifikátov"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Služby Google a ďalšie aplikácie môžu s cieľom zvýšenia presnosti a inými cieľmi vyhľadávať siete v blízkosti aj v prípade, že je sieť Wi-Fi vypnutá. Ak chcete nastavenie zmeniť, prejdite do časti Rozšírené &gt; Vyhľadávanie vždy zapnuté"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikácie môžu vyhľadávať siete v blízkosti aj v prípade, že je sieť Wi-Fi vypnutá. Ak chcete nastavenie zmeniť, prejdite do časti Rozšírené &gt; Vyhľadávanie vždy zapnuté."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Túto správu znova nezobrazovať"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Odstrániť všetky certifikáty"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Dôveryhodné poverenia"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Zobraziť dôveryhodné certifikáty CA"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Typ ukladacieho priestoru"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardvérový"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"Iba softvérový"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Nakreslite bezpečnostný vzor"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Inštaláciu poverení je potrebné potvrdiť nakreslením bezpečnostného vzoru."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1810,14 +1806,12 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Prísne"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Používatelia"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Vy"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Dôveryhodní používatelia"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Používatelia s obm. prístupom"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pridať používateľa"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"Pridať použ. s obmedz. príst."</string>
+    <string name="user_add_restricted" msgid="2355584640156396901">"Pridať použ. s obmedz."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Používatelia s obmedzeným prístupom môžu používať iba aplikácie a obsah, ktoré vyberiete"</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Pridať dôveryh. použív."</string>
+    <string name="user_add_trusted" msgid="557634297572871869">"Pridať dôver. použív."</string>
     <string name="user_add_trusted_summary" msgid="1118604533072902851">"Dôveryhodní používatelia nemajú žiadne obmedzenia"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktívne"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Neaktívne"</string>
@@ -1861,6 +1855,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Vyberte typy tiesňových upozornení, ktoré sa majú zobraziť."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Povoliť aplikácie a obsah"</string>
     <string name="user_rename" msgid="8523499513614655279">"PREMENOVAŤ"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Nastaviť obmedzenia aplikácie"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Siete Wi-Fi a mobilné siete"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Povoliť úpravu nastavení sietí Wi-Fi a mobilných sietí"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"Povoliť úpravy párovania a nastavení rozhrania Bluetooth"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Povoliť výmenu údajov, ak sa tablet dotýka iného zariadenia"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Povoliť výmenu údajov, ak sa telefón dotýka iného zariadenia"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Prístup k polohe"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Povoliť aplikáciám používať informácie o polohe"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Späť"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Ďalej"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Dokončiť"</string>

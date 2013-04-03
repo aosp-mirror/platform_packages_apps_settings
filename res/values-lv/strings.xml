@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Nelietot Wi-Fi tīklu, ja vien tam nav labs interneta savienojums"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Meklēšana vienmēr pieejama"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Atļaut Google atrašanās vietas pakalpojumam un citām lietotnēm meklēt tīklus, pat ja Wi-Fi savienojums ir izslēgts"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifikātu instalēšana"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Atrašanās vietas noteikšanas precizitātes uzlabošanai un citiem nolūkiem Google un citas lietotnes var meklēt tuvumā esošos tīklus pat tad, kad Wi-Fi ir izslēgts. Ja to nevēlaties, atveriet Papildu &gt; Meklēšana vienmēr pieejama."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Lietotnes var meklēt tuvumā esošos tīklus pat tad, kad Wi-Fi ir izslēgts. Ja to nevēlaties, atveriet Papildu &gt; Meklēšana vienmēr pieejama."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Vairs nerādīt"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Noņemt visus sertifikātus"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Uzticami akreditācijas dati"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Attēlot uzticamus CA sertifikātus"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Krātuves tips"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Krātuve aparatūrā"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"Tikai programmatūrā"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Norādiet atbloķēšanas kombināciju."</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Lai apstiprinātu akreditācijas datu instalēšanu, norādiet atbloķēšanas kombināciju."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1810,10 +1806,8 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Īstenots"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Lietotāji"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Informācija par jums"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Uzticami lietotāji"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Ierobežoti lietotāji"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pievienot lietotāju"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Piev. ierobež. liet."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Lietotāji ar ierobežotu piekļuvi var piekļūt tikai jūsu atlasītajām lietotnēm un saturam."</string>
@@ -1861,6 +1855,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Atlasiet rādāmos ārkārtas situāciju brīdinājumus."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Lietotņu un satura atļaušana"</string>
     <string name="user_rename" msgid="8523499513614655279">"PĀRDĒVĒT"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Iestatīt lietotņu ierobežojumus"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi un mobilais tīkls"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Atļaut Wi‑Fi un mobilā tīkla iestatījumu pārveidošanu"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"Atļaut Bluetooth savienošanas pārī un iestatījumu pārveidošanu"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"TDLS"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Atļaut datu apmaiņu, kad planšetdators saskaras ar citu ierīci"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Atļaut datu apmaiņu, kad tālrunis saskaras ar citu ierīci"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Piekļuve atrašanās vietai"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Atļaut lietotnēs izmantot informāciju par atrašanās vietu"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Atpakaļ"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Tālāk"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Pabeigt"</string>

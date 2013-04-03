@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Ikke bruk et Wi-Fi-nettverk med mindre det har en brukbar Internett-tilkobling"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Skanning er alltid tilgjengelig"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Tillat at Googles posisjonstjeneste og andre apper skanner etter nettverk, selv når Wi-Fi er slått av"</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer sertifikater"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"For å forbedre posisjonsnøyaktigheten, og for andre formål, kan Google og andre apper søke etter nettverk i nærheten, selv når Wi-Fi er slått av. Hvis du ikke vil at dette skal skje, går du til Avansert &gt; Skanning alltid tilgjengelig."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apper kan søke etter nettverk i nærheten, selv når Wi-Fi er slått av. Hvis du ikke vil at dette skal skje, går du til Avansert &gt; Skanning alltid tilgjengelig."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Ikke vis igjen"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Fjern alle sertifikater"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Pålitelig legitimasjon"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vis pålitelige CA-sertifikater"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"Lagringstype"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Maskinvarebasert"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"Bare programvare"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Tegn opplåsingsmønsteret"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Du må tegne opplåsingsmønsteret for å bekrefte installasjonen av legitimasjon."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1810,15 +1806,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Håndhevende"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Brukere"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Deg"</string>
-    <!-- no translation found for user_trusted_list_title (8841215084164687183) -->
-    <skip />
-    <!-- no translation found for user_limited_list_title (6492625072867292806) -->
-    <skip />
+    <string name="user_trusted_list_title" msgid="8841215084164687183">"Klarerte brukere"</string>
+    <string name="user_limited_list_title" msgid="6492625072867292806">"Begrensede brukere"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Legg til bruker"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Legg til begrenset bruker"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Begrensede brukere får bare tilgang til appene og innholdet du velger ut"</string>
     <string name="user_add_trusted" msgid="557634297572871869">"Legg til pålitelig bruker"</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Pålitelige brukere har ingen begrensninger"</string>
+    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Klarerte brukere har ingen begrensninger"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktiv"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Ikke aktiv"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Ikke konfigurert"</string>
@@ -1861,6 +1855,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Velg hvilke nødvarsler som skal vises."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"Tillat apper og innhold"</string>
     <string name="user_rename" msgid="8523499513614655279">"GI NYTT NAVN"</string>
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Angi appbegrensninger"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi-Fi og mobil"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Tillat endring av Wi-Fi- og mobilinnstillinger"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"Tillat endring av Blutetooth-tilkoblinger og -innstillinger"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Tillat datautveksling når nettbrettet berører en annen enhet"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Tillat utveksling av data når telefonen berører en annen enhet"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Posisjonstilgang"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Lar apper bruke posisjonsinformasjon"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Tilbake"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Neste"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Fullfør"</string>
