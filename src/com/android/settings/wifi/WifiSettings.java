@@ -1086,7 +1086,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             float titleHeight = resources.getFraction(R.dimen.setup_title_height, 1, 1);
             float sideMargin = resources.getFraction(R.dimen.setup_border_width, 1, 1);
             int bottom = resources.getDimensionPixelSize(R.dimen.setup_margin_bottom);
-            setPadding(
+            setPaddingRelative(
                     (int) (parentWidth * sideMargin),
                     0,
                     (int) (parentWidth * sideMargin),
