@@ -23,8 +23,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.content.Context;
 
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+import com.android.settings.DevelopmentSettings;
 
 import java.util.Locale;
 
@@ -43,6 +45,15 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
     public LocalePicker() {
         super();
         setLocaleSelectionListener(this);
+    }
+
+    @Override
+    protected boolean isInDeveloperMode() {
+        final boolean showDev = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                Context.MODE_PRIVATE).getBoolean(
+                DevelopmentSettings.PREF_SHOW,
+                android.os.Build.TYPE.equals("eng"));
+        return showDev;
     }
 
     @Override
