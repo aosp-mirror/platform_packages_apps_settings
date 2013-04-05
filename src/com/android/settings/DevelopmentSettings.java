@@ -58,6 +58,7 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.WebViewFactory;
 import android.view.Gravity;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
@@ -132,6 +133,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final String WEBVIEW_EXPERIMENTAL_KEY = "experimental_webview";
+
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
 
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
@@ -188,6 +191,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
+    private CheckBoxPreference mExperimentalWebView;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
@@ -284,6 +288,15 @@ public class DevelopmentSettings extends PreferenceFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetCbPrefs.add(mShowAllANRs);
+
+        if (WebViewFactory.isExperimentalWebViewAvailable()) {
+            mExperimentalWebView = findAndInitCheckboxPref(WEBVIEW_EXPERIMENTAL_KEY);
+        } else {
+            Preference experimentalWebView = findPreference(WEBVIEW_EXPERIMENTAL_KEY);
+            if (experimentalWebView != null) {
+                getPreferenceScreen().removePreference(experimentalWebView);
+            }
+        }
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
@@ -446,6 +459,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
+        updateExperimentalWebViewOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
     }
@@ -972,6 +986,21 @@ public class DevelopmentSettings extends PreferenceFragment
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
+    private void writeExperimentalWebViewOptions() {
+        if (mExperimentalWebView != null) {
+            SystemProperties.set(WebViewFactory.WEBVIEW_EXPERIMENTAL_PROPERTY,
+                    mExperimentalWebView.isChecked() ? "true" : null);
+            pokeSystemProperties();
+        }
+    }
+
+    private void updateExperimentalWebViewOptions() {
+        if (mExperimentalWebView != null) {
+            updateCheckBox(mExperimentalWebView, SystemProperties.getBoolean(
+                    WebViewFactory.WEBVIEW_EXPERIMENTAL_PROPERTY, false));
+        }
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == mEnabledSwitch) {
@@ -1091,6 +1120,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeImmediatelyDestroyActivitiesOptions();
         } else if (preference == mShowAllANRs) {
             writeShowAllANRsOptions();
+        } else if (preference == mExperimentalWebView) {
+            writeExperimentalWebViewOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
         } else if (preference == mForceMsaa) {
