@@ -18,9 +18,11 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.INotificationListener;
+import android.content.ComponentName;
+import android.service.notification.INotificationListener;
 import android.app.INotificationManager;
 import android.app.Notification;
+import android.service.notification.StatusBarNotification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +47,6 @@ import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.android.internal.statusbar.StatusBarNotification;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -107,7 +108,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
             mNoMan.registerListener(mListener,
-                    mContext.getPackageName(),
+                    new ComponentName(mContext.getPackageName(),
+                            this.getClass().getCanonicalName()),
                     ActivityManager.getCurrentUser());
         } catch (RemoteException e) {
             // well, that didn't work out
