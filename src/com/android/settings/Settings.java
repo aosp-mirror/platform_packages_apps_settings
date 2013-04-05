@@ -840,4 +840,5 @@ public class Settings extends PreferenceActivity
     public static class DreamSettingsActivity extends Settings { /* empty */ }
     public static class NotificationStationActivity extends Settings { /* empty */ }
     public static class UserSettingsActivity extends Settings { /* empty */ }
+    public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
 }

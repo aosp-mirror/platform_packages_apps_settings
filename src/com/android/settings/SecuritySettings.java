@@ -79,6 +79,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
+    private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     DevicePolicyManager mDPM;
@@ -99,6 +100,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private DialogInterface mWarnInstallApps;
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
+
+    private Preference mNotificationAccess;
 
     private boolean mIsPrimary;
 
@@ -283,7 +286,26 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
+        final int n = getNumEnabledNotificationListeners();
+        mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
+        if (n == 0) {
+            mNotificationAccess.setSummary(getResources().getString(
+                    R.string.manage_notification_access_summary_zero));
+        } else {
+            mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
+                    R.plurals.manage_notification_access_summary_nonzero,
+                    n, n)));
+        }
+
         return root;
+    }
+
+    private int getNumEnabledNotificationListeners() {
+        final String flat = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS);
+        if (flat == null || "".equals(flat)) return 0;
+        final String[] components = flat.split(":");
+        return components.length;
     }
 
     private boolean isNonMarketAppsAllowed() {
