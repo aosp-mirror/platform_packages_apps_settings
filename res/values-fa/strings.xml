@@ -542,8 +542,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"از شبکه Wi-Fi استفاده نکنید، مگر آنکه اتصال اینترنتی مناسب باشد"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"اسکن کردن همواره در دسترس باشد"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"به خدمات موقعیت مکانی و دیگر برنامه‌های Google اجازه می‌دهد برای یافتن شبکه‌ها حتی هنگامی که Wi-Fi خاموش است، جستجو کنند."</string>
-    <!-- no translation found for wifi_install_credentials (3551143317298272860) -->
-    <skip />
+    <string name="wifi_install_credentials" msgid="3551143317298272860">"نصب گواهی‌ها"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"برای بهبود میزان دقت موقعیت مکانی و به منظور اهداف دیگر، Google و سایر برنامه‌ها ممکن است شبکه‌های نزدیک را اسکن کنند، حتی وقتی Wi-Fi خاموش است. اگر نمی‌خواهید چنین شود، به پیشرفته &gt; همیشه اسکن موجود باشد، بروید."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"برنامه‌ها ممکن است شبکه‌های نزدیک را اسکن کنند، حتی زمانی که Wi-Fi خاموش است. اگر نمی‌خواهید چنین شود، به پیشرفته &gt; همیشه اسکن موجود باشد، بروید."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"دوباره نشان داده نشود"</string>
@@ -1496,12 +1495,9 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"حذف تمام گواهی‌ها"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"اطلاعات کاربری قابل اطمینان"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"نمایش گواهی‌های CA قابل اطمینان"</string>
-    <!-- no translation found for credential_storage_type (8629968543494001364) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_hardware (6077193544333904427) -->
-    <skip />
-    <!-- no translation found for credential_storage_type_software (4403117271207715378) -->
-    <skip />
+    <string name="credential_storage_type" msgid="8629968543494001364">"نوع ذخیره‌سازی"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"سخت‌افزاری"</string>
+    <string name="credential_storage_type_software" msgid="4403117271207715378">"فقط نرم‌افزاری"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"رسم الگوی بازگشایی"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"باید الگوی بازگشایی را رسم کنید تا نصب مدارک صلاحیت تأیید شود."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1859,26 +1855,16 @@
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"انواع هشدارهای اضطراری را برای نمایش انتخاب کنید."</string>
     <string name="user_restrictions_title" msgid="371835484894400390">"اجازه به برنامه‌ها و محتوا"</string>
     <string name="user_rename" msgid="8523499513614655279">"تغییر نام"</string>
-    <!-- no translation found for app_restrictions_custom_label (4171895848817279538) -->
-    <skip />
-    <!-- no translation found for restriction_wifi_config_title (8889556384136994814) -->
-    <skip />
-    <!-- no translation found for restriction_wifi_config_summary (70888791513065244) -->
-    <skip />
-    <!-- no translation found for restriction_bluetooth_config_title (8871681580962503671) -->
-    <skip />
-    <!-- no translation found for restriction_bluetooth_config_summary (8372319681287562506) -->
-    <skip />
-    <!-- no translation found for restriction_nfc_enable_title (5888100955212267941) -->
-    <skip />
-    <!-- no translation found for restriction_nfc_enable_summary (3891097373396149915) -->
-    <skip />
-    <!-- no translation found for restriction_nfc_enable_summary (825331120501418592) -->
-    <skip />
-    <!-- no translation found for restriction_location_enable_title (8134436816263688497) -->
-    <skip />
-    <!-- no translation found for restriction_location_enable_summary (3489765572281788755) -->
-    <skip />
+    <string name="app_restrictions_custom_label" msgid="4171895848817279538">"تنظیم محدودیت‌های برنامه"</string>
+    <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi و تلفن همراه"</string>
+    <string name="restriction_wifi_config_summary" msgid="70888791513065244">"اجازه برای اعمال تغییرات در تنظیمات Wi‑Fi و تلفن همراه"</string>
+    <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"بلوتوث"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"تغییرات در تنظیمات و مرتبط‌سازی بلوتوث مجاز است"</string>
+    <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
+    <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"اجازه برای تبادل داده‌ها هنگامی که رایانه لوحی دستگاه دیگری را لمس می‌کند"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"اجازه برای تبادل داده‌ها هنگامی که تلفن دستگاه دیگری را لمس می‌کند"</string>
+    <string name="restriction_location_enable_title" msgid="8134436816263688497">"دسترسی به موقعیت مکانی"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"اجازه به برنامه‌ها برای استفاده از اطلاعات موقعیت مکانی شما"</string>
     <string name="wizard_back" msgid="5567007959434765743">"بازگشت"</string>
     <string name="wizard_next" msgid="3606212602795100640">"بعدی"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"پایان"</string>
