@@ -25,7 +25,6 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.security.Credentials;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyChain;
@@ -108,12 +107,6 @@ public final class CredentialStorage extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            Log.i(TAG, "Cannot install to CredentialStorage as non-primary user");
-            finish();
-            return;
-        }
 
         Intent intent = getIntent();
         String action = intent.getAction();
