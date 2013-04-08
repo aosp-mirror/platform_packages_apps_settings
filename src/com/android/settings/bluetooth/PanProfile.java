@@ -106,8 +106,7 @@ final class PanProfile implements LocalBluetoothProfile {
     }
 
     public boolean isPreferred(BluetoothDevice device) {
-        // return current connection status so profile checkbox is set correctly
-        return getConnectionStatus(device) == BluetoothProfile.STATE_CONNECTED;
+        return true;
     }
 
     public int getPreferred(BluetoothDevice device) {
