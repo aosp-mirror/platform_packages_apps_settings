@@ -234,21 +234,18 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Show password
         mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
 
-        // Credential storage, only for primary user
-        if (mIsPrimary) {
-            mKeyStore = KeyStore.getInstance();
-            Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
+        // Credential storage
+        mKeyStore = KeyStore.getInstance();
+        Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
 
-            final int storageSummaryRes =
-                    mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
-                            : R.string.credential_storage_type_software;
-            credentialStorageType.setSummary(storageSummaryRes);
+        final int storageSummaryRes =
+                mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
+                        : R.string.credential_storage_type_software;
+        credentialStorageType.setSummary(storageSummaryRes);
 
-            mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
-        } else {
-            removePreference(KEY_CREDENTIALS_MANAGER);
-        }
+        mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
 
+        // Application install
         PreferenceGroup deviceAdminCategory= (PreferenceGroup)
                 root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
         mToggleAppInstallation = (CheckBoxPreference) findPreference(
