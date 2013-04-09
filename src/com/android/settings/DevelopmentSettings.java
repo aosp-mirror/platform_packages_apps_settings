@@ -125,6 +125,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
+    private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
+
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -293,8 +295,10 @@ public class DevelopmentSettings extends PreferenceFragment
             mExperimentalWebView = findAndInitCheckboxPref(WEBVIEW_EXPERIMENTAL_KEY);
         } else {
             Preference experimentalWebView = findPreference(WEBVIEW_EXPERIMENTAL_KEY);
-            if (experimentalWebView != null) {
-                getPreferenceScreen().removePreference(experimentalWebView);
+            PreferenceGroup debugApplicationsCategory = (PreferenceGroup)
+                    findPreference(DEBUG_APPLICATIONS_CATEGORY_KEY);
+            if (debugApplicationsCategory != null) {
+                debugApplicationsCategory.removePreference(experimentalWebView);
             }
         }
 
