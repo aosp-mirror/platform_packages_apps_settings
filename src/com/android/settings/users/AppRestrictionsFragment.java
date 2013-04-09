@@ -425,6 +425,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     intent.setPackage(packageName);
                     intent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS,
                             new ArrayList<RestrictionEntry>(oldEntries));
+                    intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     getActivity().sendOrderedBroadcast(intent, null,
                             new RestrictionsResultReceiver(packageName, preference),
                             null, Activity.RESULT_OK, null, null);
