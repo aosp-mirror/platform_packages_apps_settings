@@ -47,6 +47,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.SwitchPreference;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
@@ -82,7 +84,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private UserManager mUserManager;
     private UserHandle mUser;
 
-    private EditTextPreference mUserPreference;
+    private SelectableEditTextPreference mUserPreference;
     private PreferenceGroup mAppList;
 
     private static final int MAX_APP_RESTRICTIONS = 100;
@@ -188,8 +190,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getPreferenceScreen();
-        mUserPreference = (EditTextPreference) findPreference(KEY_USER_INFO);
+        mUserPreference = (SelectableEditTextPreference) findPreference(KEY_USER_INFO);
         mUserPreference.setOnPreferenceChangeListener(this);
+        mUserPreference.getEditText().setInputType(
+                InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        mUserPreference.setInitialSelectionMode(
+                SelectableEditTextPreference.SELECTION_SELECT_ALL);
         setHasOptionsMenu(true);
     }
 
