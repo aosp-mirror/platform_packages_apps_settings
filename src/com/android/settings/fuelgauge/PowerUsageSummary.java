@@ -606,7 +606,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 app.tcpBytesSent = tcpBytesSent;
                 if (u.getUid() == Process.WIFI_UID) {
                     mWifiSippers.add(app);
-                } else if (u.getUid() == Process.BLUETOOTH_GID) {
+                } else if (u.getUid() == Process.BLUETOOTH_UID) {
                     mBluetoothSippers.add(app);
                 } else if (userId != UserHandle.myUserId()
                         && UserHandle.getAppId(u.getUid()) >= Process.FIRST_APPLICATION_UID) {
@@ -627,7 +627,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             if (power != 0) {
                 if (u.getUid() == Process.WIFI_UID) {
                     mWifiPower += power;
-                } else if (u.getUid() == Process.BLUETOOTH_GID) {
+                } else if (u.getUid() == Process.BLUETOOTH_UID) {
                     mBluetoothPower += power;
                 } else if (isOtherUser) {
                     Double userPower = mUserPower.get(userId);
