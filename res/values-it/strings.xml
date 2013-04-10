@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Amministrazione dispositivo"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Amministratori dispositivo"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Visualizza o disattiva amministratori dispositivo"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"Accesso alle notifiche"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Le app non possono leggere le notifiche"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"L\'app %d può leggere le notifiche"</item>
+    <item quantity="other" msgid="980049191810249052">"Le app %d possono leggere le notifiche"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"Nessun listener di notifica installato."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Attivare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> sarà in grado di leggere tutte le notifiche pubblicate dal sistema o da qualsiasi app installata, le quali potrebbero includere informazioni personali come i nomi dei contatti e il testo dei messaggi ricevuti. Sarà inoltre in grado di ignorare tali notifiche o di attivare pulsanti di azione al loro interno."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Attiva Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1691,10 +1688,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite processi background"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Mostra tutti errori ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Mostra finestra ANR per applicazioni in background"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"Usa WebView sperimentale"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"Le app utilizzeranno la WebView più recente (Beta)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilizzo dati"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo utilizzo dati"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming dei dati"</string>
