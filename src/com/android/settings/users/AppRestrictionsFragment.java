@@ -16,12 +16,14 @@
 
 package com.android.settings.users;
 
+import android.app.AppGlobals;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.RestrictionEntry;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -34,6 +36,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
@@ -78,6 +81,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private static final String TAG = AppRestrictionsFragment.class.getSimpleName();
 
+    private static final boolean DEBUG = false;
+
     private static final String PKG_PREFIX = "pkg_";
     private static final String KEY_USER_INFO = "user_info";
 
@@ -98,6 +103,20 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private HashMap<Integer, AppRestrictionsPreference> mCustomRequestMap =
             new HashMap<Integer,AppRestrictionsPreference>();
 
+    static class SelectableAppInfo {
+        String packageName;
+        CharSequence appName;
+        CharSequence activityName;
+        Drawable icon;
+        SelectableAppInfo masterEntry;
+
+        @Override
+        public String toString() {
+            return packageName + ": appName=" + appName + "; activityName=" + activityName
+                    + "; icon=" + icon + "; masterEntry=" + masterEntry;
+        }
+    }
+
     public static class Activity extends PreferenceActivity {
         @Override
         public Intent getIntent() {
@@ -113,7 +132,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         private OnClickListener listener;
         private ArrayList<RestrictionEntry> restrictions;
         boolean panelOpen;
-        private boolean required;
+        private boolean immutable;
         List<Preference> childPreferences = new ArrayList<Preference>();
 
         AppRestrictionsPreference(Context context, OnClickListener listener) {
@@ -130,12 +149,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             this.restrictions = restrictions;
         }
 
-        void setRequired(boolean required) {
-            this.required = required;
+        void setImmutable(boolean immutable) {
+            this.immutable = immutable;
         }
 
-        boolean isRequired() {
-            return required;
+        boolean isImmutable() {
+            return immutable;
         }
 
         RestrictionEntry getRestriction(String key) {
@@ -168,10 +187,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             appRestrictionsPref.setTag(this);
 
             ViewGroup widget = (ViewGroup) view.findViewById(android.R.id.widget_frame);
-            widget.setEnabled(!isRequired());
+            widget.setEnabled(!isImmutable());
             if (widget.getChildCount() > 0) {
                 final Switch switchView = (Switch) widget.getChildAt(0);
-                switchView.setEnabled(!isRequired());
+                switchView.setEnabled(!isImmutable());
                 switchView.setTag(this);
                 switchView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                     @Override
@@ -219,7 +238,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mUserPreference.setText(info.name);
     }
 
-    private void addSystemApps(List<ApplicationInfo> visibleApps, Intent intent) {
+    private void addSystemApps(List<SelectableAppInfo> visibleApps, Intent intent) {
         final PackageManager pm = getActivity().getPackageManager();
         List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent, 0);
         for (ResolveInfo app : launchableApps) {
@@ -228,7 +247,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 if ((flags & ApplicationInfo.FLAG_SYSTEM) != 0
                         || (flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
                     // System app
-                    visibleApps.add(app.activityInfo.applicationInfo);
+                    SelectableAppInfo info = new SelectableAppInfo();
+                    info.packageName = app.activityInfo.packageName;
+                    info.appName = app.activityInfo.applicationInfo.loadLabel(pm);
+                    info.icon = app.activityInfo.loadIcon(pm);
+                    info.activityName = app.activityInfo.loadLabel(pm);
+                    if (info.activityName == null) info.activityName = info.appName;
+                    visibleApps.add(info);
                 }
             }
         }
@@ -236,10 +261,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private void populateApps() {
         mAppList.setOrderingAsAdded(false);
-        List<ApplicationInfo> visibleApps = new ArrayList<ApplicationInfo>();
+        List<SelectableAppInfo> visibleApps = new ArrayList<SelectableAppInfo>();
         // TODO: Do this asynchronously since it can be a long operation
         final Context context = getActivity();
         PackageManager pm = context.getPackageManager();
+        IPackageManager ipm = AppGlobals.getPackageManager();
 
         // Add launchers
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
@@ -255,49 +281,101 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
                     && (app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
                 // Downloaded app
-                visibleApps.add(app);
+                SelectableAppInfo info = new SelectableAppInfo();
+                info.packageName = app.packageName;
+                info.appName = app.loadLabel(pm);
+                info.activityName = info.appName;
+                info.icon = app.loadIcon(pm);
+                visibleApps.add(info);
             }
         }
-        Collections.sort(visibleApps, new AppLabelComparator(pm));
 
+        // Now check apps that are installed on target user
+        List<ApplicationInfo> userApps = null;
+        try {
+            userApps = ipm.getInstalledApplications(
+                    0, mUser.getIdentifier()).getList();
+        } catch (RemoteException re) {
+        }
+
+        if (userApps != null) {
+            for (ApplicationInfo app : userApps) {
+                if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
+                        && (app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
+                    // Downloaded app
+                    SelectableAppInfo info = new SelectableAppInfo();
+                    info.packageName = app.packageName;
+                    info.appName = app.loadLabel(pm);
+                    info.activityName = info.appName;
+                    info.icon = app.loadIcon(pm);
+                    visibleApps.add(info);
+                }
+            }
+        }
+        Collections.sort(visibleApps, new AppLabelComparator());
+
+        // Remove dupes
         for (int i = visibleApps.size() - 1; i > 1; i--) {
-            ApplicationInfo appInfo = visibleApps.get(i);
-            if (appInfo.packageName.equals(visibleApps.get(i-1).packageName)) {
+            SelectableAppInfo info = visibleApps.get(i);
+            if (DEBUG) Log.i(TAG, info.toString());
+            if (info.packageName.equals(visibleApps.get(i-1).packageName)
+                    && info.activityName.equals(visibleApps.get(i-1).activityName)) {
                 visibleApps.remove(i);
             }
         }
+
+        // Establish master/slave relationship for entries that share a package name
+        HashMap<String,SelectableAppInfo> packageMap = new HashMap<String,SelectableAppInfo>();
+        for (SelectableAppInfo info : visibleApps) {
+            if (packageMap.containsKey(info.packageName)) {
+                info.masterEntry = packageMap.get(info.packageName);
+            } else {
+                packageMap.put(info.packageName, info);
+            }
+        }
+
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
-        final List<ResolveInfo> existingApps = pm.queryIntentActivitiesAsUser(launcherIntent,
-                0, mUser.getIdentifier());
         int i = 0;
         if (visibleApps.size() > 0) {
-            for (ApplicationInfo app : visibleApps) {
-                if (app.packageName == null) continue;
+            for (SelectableAppInfo app : visibleApps) {
                 String packageName = app.packageName;
-                Drawable icon = app.loadIcon(pm);
-                CharSequence label = app.loadLabel(pm);
+                if (packageName == null) continue;
                 AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
-                p.setIcon(icon);
-                p.setTitle(label);
+                final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
+                p.setIcon(app.icon);
+                p.setTitle(app.activityName);
+                if (app.masterEntry != null) {
+                    p.setSummary(getActivity().getString(R.string.user_restrictions_controlled_by,
+                            app.masterEntry.activityName));
+                }
                 p.setKey(PKG_PREFIX + packageName);
-                p.setSettingsEnabled(hasPackage(receivers, packageName)
+                p.setSettingsEnabled(hasSettings
                         || packageName.equals(getActivity().getPackageName()));
                 p.setPersistent(false);
                 p.setOnPreferenceChangeListener(this);
                 p.setOnPreferenceClickListener(this);
+                PackageInfo pi = null;
                 try {
-                    PackageInfo pi = pm.getPackageInfo(packageName, 0);
-                    if (pi.requiredForAllUsers) {
-                        p.setChecked(true);
-                        p.setRequired(true);
-                    } else if (!mNewUser && hasPackage(existingApps, packageName)) {
-                        p.setChecked(true);
-                    }
+                    pi = pm.getPackageInfo(packageName, 0);
                 } catch (NameNotFoundException re) {
-                    // This would be bad
+                    try {
+                        pi = ipm.getPackageInfo(packageName, 0, mUser.getIdentifier());
+                    } catch (RemoteException e) {
+                    }
                 }
-
+                if (pi != null && pi.requiredForAllUsers) {
+                    p.setChecked(true);
+                    p.setImmutable(true);
+                    // If the app is required and has no restrictions, skip showing it
+                    if (!hasSettings) continue;
+                } else if (!mNewUser && appInfoListHasPackage(userApps, packageName)) {
+                    p.setChecked(true);
+                }
+                if (app.masterEntry != null) {
+                    p.setImmutable(true);
+                    p.setChecked(mSelectedPackages.get(packageName));
+                }
                 mAppList.addPreference(p);
                 if (packageName.equals(getActivity().getPackageName())) {
                     p.setOrder(MAX_APP_RESTRICTIONS * 1);
@@ -310,28 +388,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
-    private class AppLabelComparator implements Comparator<ApplicationInfo> {
-
-        PackageManager pm;
-
-        private AppLabelComparator(PackageManager pm) {
-            this.pm = pm;
-        }
-
-        private CharSequence getLabel(ApplicationInfo info) {
-            // TODO: Optimize this with a cache
-            return info.loadLabel(pm);
-        }
+    private class AppLabelComparator implements Comparator<SelectableAppInfo> {
 
         @Override
-        public int compare(ApplicationInfo lhs, ApplicationInfo rhs) {
-            String lhsLabel = getLabel(lhs).toString();
-            String rhsLabel = getLabel(rhs).toString();
-            return lhsLabel.compareTo(rhsLabel);
+        public int compare(SelectableAppInfo lhs, SelectableAppInfo rhs) {
+            String lhsLabel = lhs.activityName.toString();
+            String rhsLabel = rhs.activityName.toString();
+            return lhsLabel.toLowerCase().compareTo(rhsLabel.toLowerCase());
         }
     }
 
-    private boolean hasPackage(List<ResolveInfo> receivers, String packageName) {
+    private boolean resolveInfoListHasPackage(List<ResolveInfo> receivers, String packageName) {
         for (ResolveInfo info : receivers) {
             if (info.activityInfo.packageName.equals(packageName)) {
                 return true;
@@ -340,16 +407,37 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return false;
     }
 
+    private boolean appInfoListHasPackage(List<ApplicationInfo> apps, String packageName) {
+        for (ApplicationInfo info : apps) {
+            if (info.packageName.equals(packageName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateAllEntries(String prefKey, boolean checked) {
+        for (int i = 0; i < mAppList.getPreferenceCount(); i++) {
+            Preference pref = mAppList.getPreference(i);
+            if (pref instanceof AppRestrictionsPreference) {
+                if (prefKey.equals(pref.getKey())) {
+                    ((AppRestrictionsPreference) pref).setChecked(checked);
+                }
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getTag() instanceof AppRestrictionsPreference) {
             AppRestrictionsPreference pref = (AppRestrictionsPreference) v.getTag();
             if (v.getId() == R.id.app_restrictions_settings) {
                 toggleAppPanel(pref);
-            } else if (!pref.isRequired()) {
+            } else if (!pref.isImmutable()) {
                 pref.setChecked(!pref.isChecked());
                 mSelectedPackages.put(pref.getKey().substring(PKG_PREFIX.length()),
                         pref.isChecked());
+                updateAllEntries(pref.getKey(), pref.isChecked());
             }
         }
     }
@@ -597,9 +685,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().startsWith(PKG_PREFIX)) {
             AppRestrictionsPreference arp = (AppRestrictionsPreference) preference;
-            if (!arp.isRequired()) {
+            if (!arp.isImmutable()) {
                 arp.setChecked(!arp.isChecked());
                 mSelectedPackages.put(arp.getKey().substring(PKG_PREFIX.length()), arp.isChecked());
+                updateAllEntries(arp.getKey(), arp.isChecked());
             }
             return true;
         }
