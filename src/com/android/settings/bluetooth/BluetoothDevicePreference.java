@@ -16,22 +16,22 @@
 
 package com.android.settings.bluetooth;
 
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
+
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.android.settings.R;
@@ -66,7 +66,10 @@ public final class BluetoothDevicePreference extends Preference implements
         mCachedDevice = cachedDevice;
 
         if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
-            setWidgetLayoutResource(R.layout.preference_bluetooth);
+            UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            if (! um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
+                setWidgetLayoutResource(R.layout.preference_bluetooth);
+            }
         }
 
         mCachedDevice.registerCallback(this);
