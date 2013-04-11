@@ -726,25 +726,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
             // Determine enabled services and accessibility state.
             ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
-            final boolean accessibilityEnabled;
+            boolean accessibilityEnabled = false;
             if (enabled) {
+                enabledServices.add(toggledService);
                 // Enabling at least one service enables accessibility.
                 accessibilityEnabled = true;
-                enabledServices.add(toggledService);
             } else {
+                enabledServices.remove(toggledService);
                 // Check how many enabled and installed services are present.
-                int enabledAndInstalledServiceCount = 0;
                 Set<ComponentName> installedServices = sInstalledServices;
                 for (ComponentName enabledService : enabledServices) {
                     if (installedServices.contains(enabledService)) {
-                        enabledAndInstalledServiceCount++;
+                        // Disabling the last service disables accessibility.
+                        accessibilityEnabled = true;
+                        break;
                     }
                 }
-                // Disabling the last service disables accessibility.
-                accessibilityEnabled = enabledAndInstalledServiceCount > 1
-                        || (enabledAndInstalledServiceCount == 1
-                        && !installedServices.contains(toggledService));
-                enabledServices.remove(toggledService);
             }
 
             // Update the enabled services setting.
