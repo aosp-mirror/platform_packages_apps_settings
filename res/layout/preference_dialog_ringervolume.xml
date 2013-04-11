@@ -51,26 +51,34 @@
 
         <!-- Used for the media volume -->
         <LinearLayout
+                android:id="@+id/media_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dip"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical">
 
-                <ImageView android:id="@+id/media_mute_button"
-                        android:layout_width="wrap_content"
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dip"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:contentDescription="@string/volume_media_mute"
-                    />
+                        android:paddingStart="8dip"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-                <SeekBar android:id="@+id/media_volume_seekbar"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="2dip"
-                        android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
+                        <ImageView android:id="@+id/media_mute_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="16dip"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:contentDescription="@string/volume_media_mute"
+                            />
+
+                        <SeekBar android:id="@+id/media_volume_seekbar"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingTop="2dip"
+                                android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
+                </LinearLayout>
+
         </LinearLayout>
 
         <!-- Used for the ringer/notification volume -->
@@ -159,36 +167,45 @@
 
         </LinearLayout>
 
-        <TextView
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dip"
-                android:paddingStart="16dip"
-                android:layout_gravity="start"
-                android:text="@string/volume_alarm_description"
-            />
-
         <!-- Used for the alarm volume -->
         <LinearLayout
+                android:id="@+id/alarm_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dip"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical">
 
-                <ImageView android:id="@+id/alarm_mute_button"
+                <TextView
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="16dip"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:contentDescription="@string/volume_alarm_mute" />
-                <SeekBar android:id="@+id/alarm_volume_seekbar"
-                        android:layout_width="0dip"
+                        android:layout_marginTop="16dip"
+                        android:paddingStart="16dip"
+                        android:layout_gravity="start"
+                        android:text="@string/volume_alarm_description"
+                    />
+
+                <!-- Used for the alarm volume -->
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="2dip"
-                        android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
+                        android:paddingStart="8dip"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView android:id="@+id/alarm_mute_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="16dip"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:contentDescription="@string/volume_alarm_mute" />
+                        <SeekBar android:id="@+id/alarm_volume_seekbar"
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingTop="2dip"
+                                android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
+                </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
