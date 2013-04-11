@@ -341,6 +341,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             for (SelectableAppInfo app : visibleApps) {
                 String packageName = app.packageName;
                 if (packageName == null) continue;
+                final boolean isSettingsApp = packageName.equals(getActivity().getPackageName());
                 AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
                 final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
                 p.setIcon(app.icon);
@@ -350,8 +351,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             app.masterEntry.activityName));
                 }
                 p.setKey(PKG_PREFIX + packageName);
-                p.setSettingsEnabled(hasSettings
-                        || packageName.equals(getActivity().getPackageName()));
+                p.setSettingsEnabled(hasSettings || isSettingsApp);
                 p.setPersistent(false);
                 p.setOnPreferenceChangeListener(this);
                 p.setOnPreferenceClickListener(this);
@@ -368,7 +368,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     p.setChecked(true);
                     p.setImmutable(true);
                     // If the app is required and has no restrictions, skip showing it
-                    if (!hasSettings) continue;
+                    if (!hasSettings && !isSettingsApp) continue;
                 } else if (!mNewUser && appInfoListHasPackage(userApps, packageName)) {
                     p.setChecked(true);
                 }
@@ -377,7 +377,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     p.setChecked(mSelectedPackages.get(packageName));
                 }
                 mAppList.addPreference(p);
-                if (packageName.equals(getActivity().getPackageName())) {
+                if (isSettingsApp) {
                     p.setOrder(MAX_APP_RESTRICTIONS * 1);
                 } else {
                     p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
