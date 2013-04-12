@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Quản lý thiết bị"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Quản trị viên thiết bị"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Xem hoặc hủy kích hoạt quản trị viên điện thoại"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"Quyền quy cập thông báo"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Ứng dụng không thể đọc thông báo"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"%d ứng dụng có thể đọc thông báo"</item>
+    <item quantity="other" msgid="980049191810249052">"%d ứng dụng có thể đọc thông báo"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"Không có trình xử lý thông báo nào được cài đặt."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Bật <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc tất cả thông báo được đăng bởi hệ thống hoặc bất kỳ ứng dụng đã cài đặt nào. Thông báo đó có thể bao gồm thông tin cá nhân như tên liên hệ và văn bản thông báo được gửi tới bạn. Trình xử lý cũng sẽ có thể loại bỏ những thông báo này hoặc chạm vào nút tác vụ trong các thông báo đó."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bật Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1693,10 +1690,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Giới hạn quá trình nền"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Hiển thị tất cả ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"H.thị h.thoại Ư. dụng ko đáp ứng cho ư.dụng nền"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"S.dụng WebView thử nghiệm"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"Ứng dụng sẽ sử dụng WebView (beta) mới nhất"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Sử dụng dữ liệu"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Chu kỳ sử dụng dữ liệu"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Chuyển vùng dữ liệu"</string>
@@ -1872,6 +1867,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"Cho phép ứng dụng và nội dung"</string>
     <string name="user_rename" msgid="8523499513614655279">"ĐỔI TÊN"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Đặt giới hạn ứng dụng"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi và Di động"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Cho phép sửa đổi cài đặt Di động và Wi‑Fi"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>

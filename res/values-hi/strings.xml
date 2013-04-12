@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"उपकरण व्‍यवस्‍थापक"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"उपकरण व्‍यवस्‍थापक"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"उपकरण व्‍यवस्‍थापकों को देखें या निष्‍क्रिय करें"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"सूचना की एक्सेस"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"एप्लिकेशन सूचनाएं नहीं पढ़ सकते"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"%d एप्लिकेशन सूचनाएं पढ़ सकता है"</item>
+    <item quantity="other" msgid="980049191810249052">"%d एप्लिकेशन सूचनाएं पढ़ सकते हैं"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"कोई सूचना श्रवणकर्ता इंस्टॉल नहीं है."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> सक्षम करें?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> सिस्टम द्वारा या इंस्टॉल किए गए किसी भी एप्लिकेशन द्वारा पोस्ट की गई ऐसी सूचनाएं पढ़ सकेगा, जिनमें संपर्क नाम तथा आपको भेजे गए संदेशों की सामग्री जैसी व्यक्तिगत जानकारी शामिल हो सकती है. वह इन सूचनाओं को ख़ारिज भी कर सकेगा या उनमें मौजूद स्पर्श कार्यवाही बटन स्पर्श कर सकेगा."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bluetooth चालू करें"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -574,7 +571,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"नेटवर्क भूलें"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"नेटवर्क बदलें"</string>
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"उपलब्‍ध नेटवर्क देखने के लिए, Wi-Fi चालू करें."</string>
-    <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wi-Fi नेटवर्क खोज रहा है…"</string>
+    <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wi-Fi नेटवर्क की खोज जारी है…"</string>
     <string name="wifi_other_network" msgid="1048006316504242214">"अन्‍य नेटवर्क…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"अधिक"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"स्‍वचालित सेटअप (WPS)"</string>
@@ -1693,10 +1690,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"पृष्ठभूमि प्रक्रिया सीमा"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"सभी ANR दिखाएं"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"पृष्ठभूमि एप्लि. हेतु एप्लि. प्रतिसाद नहीं दे रहा संवाद दिखाएं"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"प्रायोगिक WebView का उपयोग करें"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"एप्लिकेशन, नवीनतम (बीटा) WebView का उपयोग करेंगे"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"डेटा उपयोग"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"डेटा उपयोग चक्र"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"डेटा रोमिंग"</string>
@@ -1872,6 +1867,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"एप्लिकेशन और सामग्री की अनुमति दें"</string>
     <string name="user_rename" msgid="8523499513614655279">"नाम बदलें"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"एप्लिकेशन सीमाएं सेट करें"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi और मोबाइल"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Wi‑Fi और मोबाइल सेटिंग में बदलाव की अनुमति दें"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
