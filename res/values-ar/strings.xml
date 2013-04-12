@@ -351,7 +351,7 @@
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"شريحة"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"بدون تأمين"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"تأمين الجهاز بالوجه"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"بالوجه"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"تأمين منخفض، تجريبي"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"نقش"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"تأمين متوسط"</string>
@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"إدارة الجهاز"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"مشرفو الجهاز"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"عرض مشرفي الأجهزة أو إلغاء تنشيطهم"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"الدخول إلى الإشعارات"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"لا يُمكن للتطبيقات قراءة الإشعارات"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"يُمكن لتطبيق %d قراءة الإشعارات"</item>
+    <item quantity="other" msgid="980049191810249052">"يُمكن لتطبيقات %d قراءة الإشعارات"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"لم يتم تثبيت برامج لتلقّي الإشعارات الصوتية."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"هل ترغب في تمكين <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"سيتمكن <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> من قراءة جميع الإشعارات التي تمّ نشرها من قِبل النظام أو أي من التطبيقات المثبتة، والتي قد تنطوي على معلومات شخصية مثل أسماء جهات الاتصال ونص الرسائل المرسلة إليك. وسيتمكن أيضًا من تجاهل هذه الإشعارات أو لمس أزرار الإجراءات بداخلها."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"بلوتوث"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"تشغيل البلوتوث"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"بلوتوث"</string>
@@ -1691,10 +1688,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"حد العمليات بالخلفية"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"عرض جميع رسائل ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"عرض مربع الحوار \"التطبيق لا يستجيب\" مع تطبيقات الخلفية"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"استخدام WebView التجريبي"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"ستستخدم التطبيقات أحدث إصدار (تجريبي) من WebView"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"استخدام البيانات"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"دورة استخدام البيانات"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"تجوال البيانات"</string>
@@ -1870,6 +1865,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"السماح بالتطبيقات والمحتوى"</string>
     <string name="user_rename" msgid="8523499513614655279">"إعادة تسمية"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"تعيين حدود التطبيقات"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi والجوال"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"السماح بتعديل إعدادات Wi‑Fi والجوال"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"البلوتوث"</string>
