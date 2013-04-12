@@ -16,6 +16,7 @@
 
 package com.android.settings.users;
 
+import android.app.Activity;
 import android.app.AppGlobals;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -37,6 +38,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
@@ -71,6 +73,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -95,9 +98,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private static final int MAX_APP_RESTRICTIONS = 100;
 
     private static final String DELIMITER = ";";
+
+    /** Key for extra passed in from calling fragment for the userId of the user being edited */
+    public static final String EXTRA_USER_ID = "user_id";
+
+    /** Key for extra passed in from calling fragment to indicate if this is a newly created user */
+    public static final String EXTRA_NEW_USER = "new_user";
+
     HashMap<String,Boolean> mSelectedPackages = new HashMap<String,Boolean>();
     private boolean mFirstTime = true;
     private boolean mNewUser;
+    private boolean mAppListChanged;
 
     private int mCustomRequestCode;
     private HashMap<Integer, AppRestrictionsPreference> mCustomRequestMap =
@@ -114,16 +125,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         public String toString() {
             return packageName + ": appName=" + appName + "; activityName=" + activityName
                     + "; icon=" + icon + "; masterEntry=" + masterEntry;
-        }
-    }
-
-    public static class Activity extends PreferenceActivity {
-        @Override
-        public Intent getIntent() {
-            Intent modIntent = new Intent(super.getIntent());
-            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, AppRestrictionsFragment.class.getName());
-            modIntent.putExtra(EXTRA_NO_HEADERS, true);
-            return modIntent;
         }
     }
 
@@ -206,6 +207,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        if (icicle != null) {
+            mNewUser = icicle.getBoolean(EXTRA_NEW_USER, false);
+            mUser = new UserHandle(icicle.getInt(EXTRA_USER_ID));
+        } else {
+            Bundle args = getArguments();
+
+            if (args.containsKey(EXTRA_USER_ID)) {
+                mUser = new UserHandle(args.getInt(EXTRA_USER_ID));
+            }
+            mNewUser = args.getBoolean(EXTRA_NEW_USER, false);
+        }
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getPreferenceScreen();
@@ -218,13 +230,16 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         setHasOptionsMenu(true);
     }
 
-    void setUser(UserHandle user, boolean newUser) {
-        mUser = user;
-        mNewUser = newUser;
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_NEW_USER, mNewUser);
+        outState.putInt(EXTRA_USER_ID, mUser.getIdentifier());
     }
 
     public void onResume() {
         super.onResume();
+        mAppListChanged = false;
         if (mFirstTime) {
             mFirstTime = false;
             populateApps();
@@ -236,6 +251,34 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
         mUserPreference.setIcon(circularIcon);
         mUserPreference.setText(info.name);
+    }
+
+    public void onPause() {
+        super.onPause();
+        if (mAppListChanged) {
+            updateUserAppList();
+        }
+    }
+
+    private void updateUserAppList() {
+        IPackageManager ipm = IPackageManager.Stub.asInterface(
+                ServiceManager.getService("package"));
+        for (Map.Entry<String,Boolean> entry : mSelectedPackages.entrySet()) {
+            if (entry.getValue()) {
+                // Enable selected apps
+                try {
+                    ipm.installExistingPackageAsUser(entry.getKey(), mUser.getIdentifier());
+                } catch (RemoteException re) {
+                }
+            } else {
+                // Blacklist all other apps, system or downloaded
+                try {
+                    ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
+                            PackageManager.DELETE_SYSTEM_APP);
+                } catch (RemoteException re) {
+                }
+            }
+        }
     }
 
     private void addSystemApps(List<SelectableAppInfo> visibleApps, Intent intent) {
@@ -383,6 +426,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
                 }
                 mSelectedPackages.put(packageName, p.isChecked());
+                mAppListChanged = true;
                 i++;
             }
         }
@@ -437,6 +481,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 pref.setChecked(!pref.isChecked());
                 mSelectedPackages.put(pref.getKey().substring(PKG_PREFIX.length()),
                         pref.isChecked());
+                mAppListChanged = true;
                 updateAllEntries(pref.getKey(), pref.isChecked());
             }
         }
@@ -689,6 +734,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 arp.setChecked(!arp.isChecked());
                 mSelectedPackages.put(arp.getKey().substring(PKG_PREFIX.length()), arp.isChecked());
                 updateAllEntries(arp.getKey(), arp.isChecked());
+                mAppListChanged = true;
             }
             return true;
         }
