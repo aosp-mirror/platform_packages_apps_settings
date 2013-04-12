@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"โปรแกรมควบคุมอุปกรณ์"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"โปรแกรมควบคุมอุปกรณ์"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"ดูหรือปิดการใช้งานผู้ดูแลอุปกรณ์"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"การเข้าถึงการแจ้งเตือน"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"แอปไม่สามารถอ่านการแจ้งเตือน"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"%d แอปสามารถอ่านการแจ้งเตือนได้"</item>
+    <item quantity="other" msgid="980049191810249052">"%d แอปสามารถอ่านการแจ้งเตือนได้"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"ไม่มีตัวฟังการแจ้งเตือนติดตั้งอยู่"</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"ต้องการเปิดใช้ <xliff:g id="SERVICE">%1$s</xliff:g> หรือไม่"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะสามารถอ่านการแจ้งเตือนทั้งหมดที่โพสต์โดยระบบหรือแอปใดๆ ที่ติดตั้ง ซึ่งอาจรวมถึงข้อมูลส่วนบุคคล เช่น ชื่อติดต่อและข้อความที่ส่งถึงคุณ นอกจากนี้ยังจะสามารถที่จะยกเลิกการแจ้งเตือนดังกล่าวหรือแตะปุ่มการทำงานภายในตัวฟังก็ได้"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"บลูทูธ"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"เปิดบลูทูธ"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"บลูทูธ"</string>
@@ -1691,10 +1688,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"ขีดจำกัดกระบวนการพื้นหลัง"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"แสดง ANR ทั้งหมด"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"แสดงหน้าต่างแอปฯไม่ตอบสนองสำหรับแอปฯพื้นหลัง"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"ใช้ WebView รุ่นทดลอง"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"แอปจะใช้ WebView ใหม่ล่าสุด (เบต้า)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"การใช้ข้อมูล"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"รอบการใช้ข้อมูล"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"การโรมมิ่งข้อมูล"</string>
@@ -1870,6 +1865,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"อนุญาตแอปและเนื้อหา"</string>
     <string name="user_rename" msgid="8523499513614655279">"เปลี่ยนชื่อ"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"ตั้งค่าขีดจำกัดแอปพลิเคชัน"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi-Fi และมือถือ"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"อนุญาตให้แก้ไขการตั้งค่า Wi-Fi และมือถือ"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"บลูทูธ"</string>
