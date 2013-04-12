@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -41,6 +42,7 @@ import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -125,6 +127,8 @@ public class WifiSettings extends SettingsPreferenceFragment
     private WifiManager.ActionListener mForgetListener;
     private boolean mP2pSupported;
 
+
+    private UserManager mUserManager;
 
     private WifiEnabler mWifiEnabler;
     // An access point being editted is stored here.
@@ -276,6 +280,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
 
         mConnectListener = new WifiManager.ActionListener() {
                                    @Override
@@ -431,6 +436,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // If the user is not allowed to configure wifi, do not show the menu.
+        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)) return;
+
         final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
         if (mSetupWizardMode) {
             // FIXME: add setIcon() when graphics are available
@@ -486,6 +494,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // If the user is not allowed to configure wifi, do not handle menu selections.
+        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)) return false;
+
         switch (item.getItemId()) {
             case MENU_ID_WPS_PBC:
                 showDialog(WPS_PBC_DIALOG_ID);
@@ -704,6 +715,10 @@ public class WifiSettings extends SettingsPreferenceFragment
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
 
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI)) {
+            addMessagePreference(R.string.wifi_display_settings_empty_list_user_restricted);
+            return;
+        }
         final int wifiState = mWifiManager.getWifiState();
 
         switch (wifiState) {
