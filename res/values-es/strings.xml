@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Administración de dispositivos"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administradores de dispositivos"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Ver o desactivar administradores de dispositivo"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"Acceso a notificaciones"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer notificaciones."</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"%d aplicación puede leer notificaciones."</item>
+    <item quantity="other" msgid="980049191810249052">"%d aplicaciones pueden leer notificaciones."</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"No hay detectores de notificaciones instalados."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"¿Quieres habilitar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones que el sistema o cualquier aplicación instalada publiquen. Estas notificaciones pueden incluir información personal, como nombres de contactos y texto de mensajes que hayas recibido. También podrá ignorar estas notificaciones o tocar botones de acción de las mismas."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Ajustes de Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Activar Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1099,7 +1096,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Procesos en caché"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablecer preferencias?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Se restablecerán todas las preferencias de:"\n\n" "<li>"Aplicaciones inhabilitadas"</li>\n" "<li>"Notificaciones de aplicaciones inhabilitadas"</li>\n" "<li>"Aplicaciones para acciones predeterminadas"</li>\n" "<li>"Restricciones de datos en segundo plano para aplicaciones"</li>\n\n"No perderás los datos de las aplicaciones."</string>
+    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Se restablecerán todas las preferencias de:"\n\n" "<li>"Aplicaciones inhabilitadas"</li>\n" "<li>"Notificaciones de aplicaciones inhabilitadas"</li>\n" "<li>"Aplicaciones para acciones predeterminadas"</li>\n" "<li>"Restricciones de conexiones automáticas para aplicaciones"</li>\n\n"No perderás los datos de las aplicaciones."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer aplicaciones"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrar espacio"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrar"</string>
@@ -1595,10 +1592,10 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Sincronización"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay incidencias con la sincronización. Se restablecerá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Añadir cuenta"</string>
-    <string name="background_data" msgid="5779592891375473817">"Datos de referencia"</string>
+    <string name="background_data" msgid="5779592891375473817">"Conexiones automáticas"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar datos, enviarlos y recibirlos."</string>
-    <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Inhabilitar datos de referencia?"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas los datos de referencia, aumentarás la duración de la batería y reducirás el uso de datos. Es posible que algunas aplicaciones sigan usando la conexión de datos de referencia."</string>
+    <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Inhabilitar conexiones automáticas?"</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas las conexiones automáticas, aumentarás la duración de la batería y reducirás el uso de datos. Es posible que algunas aplicaciones sigan usando las conexiones automáticas."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Sincronizar datos aplicaciones autom."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sincronización activa"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"La sincronización está desactivada"</string>
@@ -1631,7 +1628,7 @@
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"No se puede hacer la sincronización de forma manual."</string>
-    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento no está disponible en este momento. Para modificar tu preferencia, activa temporalmente los datos de referencia y la sincronización automática."</string>
+    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento no está disponible en este momento. Para modificar tu preferencia, activa temporalmente las conexiones automáticas y la sincronización automática."</string>
     <string name="wimax_settings" msgid="1574837328738396794">"Ajustes de 4G"</string>
     <string name="wimax_settings_summary" msgid="3207355006084135453">"Configurar y gestionar módem y red 4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Dirección MAC 4G"</string>
@@ -1693,14 +1690,12 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Límitar procesos en 2.º plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Errores sin respuesta"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Informar de que una aplicación en segundo plano no responde"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"Usar vista web experimental"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"Aplicaciones usarán vista web más reciente (beta)."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Itinerancia de datos"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringir datos de referencia"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringir conexiones automáticas"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Dividir uso de 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="5056401102877964564">"Mostrar uso de Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Mostrar uso de Ethernet"</string>
@@ -1728,12 +1723,12 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Datos 2G-3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos 4G"</string>
     <string name="data_usage_app_settings" msgid="8430240158135453271">"Ver ajustes de la aplicación"</string>
-    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir datos de referencia"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Inhabilitar datos referencia en redes móviles (si es posible, se usarán otras)."</string>
-    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir los datos de referencia, establece un límite de datos móviles."</string>
-    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir datos de referencia?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos de referencia cuando solo haya disponibles redes móviles."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
-    <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo puedes restringir los datos de referencia si estableces un límite de datos móviles."</string>
+    <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Restringir conexiones automáticas"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Inhabilitar conexiones automáticas en redes móviles (si es posible, se usarán otras)."</string>
+    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir las conexiones automáticas, establece un límite de datos móviles."</string>
+    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir conexiones automáticas?"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar conexiones automáticas cuando solo haya disponibles redes móviles."\n\n"Puedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Solo puedes restringir las conexiones automáticas si estableces un límite de datos móviles."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"¿Activar sincronización automática?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Los cambios que hagas en tus cuentas en la Web se reflejarán automáticamente en el tablet."\n\n"Algunas cuentas como, por ejemplo, las cuentas de Google, también reflejarán en la Web los cambios que hagas en el tablet. "\n\n"Para seleccionar qué tipo de información se sincronizará con cada cuenta, accede a Ajustes &gt; Cuentas."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Los cambios que hagas en tus cuentas en la Web se reflejarán automáticamente en el teléfono."\n\n"Algunas cuentas como, por ejemplo, las cuentas de Google, también reflejarán en la Web los cambios que hagas en el teléfono. "\n\n"Para seleccionar qué tipo de información se sincronizará con cada cuenta, accede a Ajustes &gt; Cuentas."</string>
@@ -1747,10 +1742,10 @@
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitar uso de datos"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"Tu conexión de datos se inhabilitará cuando se alcance el límite especificado."\n\n"Como el tablet es el que calcula el uso de los datos y el cálculo del operador puede ser diferente, te recomendamos que uses un límite moderado."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"Tu conexión de datos se inhabilitará cuando se alcance el límite especificado."\n\n"Como el teléfono es el que calcula los datos y el cálculo del operador puede ser diferente, te recomendamos que uses un límite moderado."</string>
-    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir datos de referencia?"</string>
-    <string name="data_usage_restrict_background" msgid="8447934953579275363">"Si restringes los datos móviles de referencia, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7132639594296036143">"Si restringes los datos móviles de referencia, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios del tablet."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="2642864376010074543">"Si restringes los datos móviles de referencia, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios del teléfono."</string>
+    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir conexiones automáticas?"</string>
+    <string name="data_usage_restrict_background" msgid="8447934953579275363">"Si restringes las conexiones automáticas, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7132639594296036143">"Si restringes las conexiones automáticas, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios del tablet."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="2642864376010074543">"Si restringes las conexiones automáticas, algunas aplicaciones y algunos servicios no funcionarán sin conexión Wi-Fi."\n\n"Esta configuración afecta a todos los usuarios del teléfono."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"aviso"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicaciones eliminadas"</string>
@@ -1872,6 +1867,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"Permitir aplicaciones y contenido"</string>
     <string name="user_rename" msgid="8523499513614655279">"CAMBIAR NOMBRE"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Establecer límites de aplicación"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi y redes móviles"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Permitir modificar los ajustes de Wi‑Fi y redes móviles"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>

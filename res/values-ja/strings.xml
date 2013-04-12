@@ -420,18 +420,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"デバイス管理"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"端末管理者"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"端末管理者を表示または無効にする"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"通知へのアクセス"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"アプリは通知を読み取ることができません"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"%d件のアプリが通知を読み取ることができます"</item>
+    <item quantity="other" msgid="980049191810249052">"%d件のアプリが通知を読み取ることができます"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"通知リスナーはインストールされていません。"</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g>を有効にしますか？"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>はシステムやインストール済みのアプリが投稿した通知をすべて読み取ることができます。通知には、連絡先名などの個人情報やユーザーに送信されたメールの本文が含まれる場合があります。これらの通知を非表示にしたり、通知内の操作ボタンをタップしたりすることもできます。"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"BluetoothをONにする"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1699,10 +1696,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"バックグラウンドプロセスの上限"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"すべてのANRを表示"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"バックグラウンドアプリが応答しない場合に通知する"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"試験運用版WebViewを使用"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"アプリは最新（ベータ版）のWebViewを使用します"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"データ使用"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"データ使用サイクル"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"データローミング"</string>
@@ -1878,6 +1873,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"アプリとコンテンツの許可"</string>
     <string name="user_rename" msgid="8523499513614655279">"名前を変更"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"アプリの制限を設定"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi-Fiとモバイル"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Wi-Fiとモバイルの設定の変更を許可する"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>

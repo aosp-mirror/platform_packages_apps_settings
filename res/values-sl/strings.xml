@@ -418,18 +418,15 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Skrbništvo naprave"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Skrbniki naprav"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Ogled ali izklop skrbnikov naprave"</string>
-    <!-- no translation found for manage_notification_access (5799781079264981979) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_zero (2409912785614953348) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_summary_nonzero:one (8344183614159211585) -->
-    <!-- no translation found for manage_notification_access_summary_nonzero:other (980049191810249052) -->
-    <!-- no translation found for no_notification_listeners (2767405417723149879) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_title (6494221261778885893) -->
-    <skip />
-    <!-- no translation found for notification_listener_security_warning_summary (2780319203595885564) -->
-    <skip />
+    <string name="manage_notification_access" msgid="5799781079264981979">"Dostop do obvestil"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikacije ne morejo brati obvestil"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"Aplikacija (%d) lahko bere obvestila"</item>
+    <item quantity="other" msgid="980049191810249052">"Aplikacije (%d) lahko berejo obvestila"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"Ni nameščenih poslušalcev obvestil."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Želite omogočiti <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Poslušalec <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bo lahko bral vsa obvestila, ki jih objavi sistem ali katera koli nameščena aplikacija, kar lahko vključuje osebne podatke, kot so imena stikov in besedilo sporočil, poslanih vam. Lahko bo tudi opustil ta obvestila ali se dotikal interaktivnih gumbov v njih."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Vklopi Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1693,10 +1690,8 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Omejitev postopkov v ozadju"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Pokaži okna neodzivanj"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Prikaz pogovornega okna za neodzivanje programa v ozadju"</string>
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
-    <skip />
+    <string name="experimental_webview" msgid="4492200819033780927">"Uporabi poskusni WebView"</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"Aplik. bodo uporabljale najnovejši WebView (beta)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Podatkovni promet"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cikel porabe podatkov"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Podatkovno gostovanje"</string>
@@ -1872,6 +1867,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"Omogočanje aplikacij in vsebine"</string>
     <string name="user_rename" msgid="8523499513614655279">"PREIMENOVANJE"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Nastavitev omejitev za aplikacije"</string>
+    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi-Fi in mobilna omrežja"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Dovoli spreminjanje nastavitev za Wi-Fi in mobilna omrežja"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
