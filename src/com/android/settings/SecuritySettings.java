@@ -235,15 +235,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
 
         // Credential storage
-        mKeyStore = KeyStore.getInstance();
-        Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+            mKeyStore = KeyStore.getInstance();
+            Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
 
-        final int storageSummaryRes =
+            final int storageSummaryRes =
                 mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
                         : R.string.credential_storage_type_software;
-        credentialStorageType.setSummary(storageSummaryRes);
+            credentialStorageType.setSummary(storageSummaryRes);
 
-        mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
+            mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
+        } else {
+            removePreference(KEY_CREDENTIALS_MANAGER);
+        }
 
         // Application install
         PreferenceGroup deviceAdminCategory= (PreferenceGroup)
@@ -252,7 +257,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         boolean isSideloadingAllowed =
                 !um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
         // Side loading of apps.
