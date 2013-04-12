@@ -45,6 +45,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -430,6 +431,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             return dialog;
         } else if (id == DIALOG_RENAME) {
             mDeviceNameText = new EditText(getActivity());
+            mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
             if (mSavedDeviceName != null) {
                 mDeviceNameText.setText(mSavedDeviceName);
                 mDeviceNameText.setSelection(mSavedDeviceName.length());
