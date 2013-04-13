@@ -32,6 +32,9 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -135,15 +138,33 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         boolean panelOpen;
         private boolean immutable;
         List<Preference> childPreferences = new ArrayList<Preference>();
+        private SelectableAppInfo appInfo;
+        private final ColorFilter grayscaleFilter;
 
         AppRestrictionsPreference(Context context, OnClickListener listener) {
             super(context);
             setLayoutResource(R.layout.preference_app_restrictions);
             this.listener = listener;
+
+            ColorMatrix colorMatrix = new ColorMatrix();
+            colorMatrix.setSaturation(0f);
+            float[] matrix = colorMatrix.getArray();
+            matrix[18] = 0.5f;
+            grayscaleFilter = new ColorMatrixColorFilter(colorMatrix);
         }
 
         private void setSettingsEnabled(boolean enable) {
             hasSettings = enable;
+        }
+
+        @Override
+        public void setChecked(boolean checked) {
+            if (checked) {
+                getIcon().setColorFilter(null);
+            } else {
+                getIcon().setColorFilter(grayscaleFilter);
+            }
+            super.setChecked(checked);
         }
 
         void setRestrictions(ArrayList<RestrictionEntry> restrictions) {
@@ -156,6 +177,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
         boolean isImmutable() {
             return immutable;
+        }
+
+        void setSelectableAppInfo(SelectableAppInfo appInfo) {
+            this.appInfo = appInfo;
         }
 
         RestrictionEntry getRestriction(String key) {
@@ -256,7 +281,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onPause() {
         super.onPause();
         if (mAppListChanged) {
-            updateUserAppList();
+            new Thread() {
+                public void run() {
+                    updateUserAppList();
+                }
+            }.start();
         }
     }
 
@@ -388,6 +417,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
                 final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
                 p.setIcon(app.icon);
+                p.setChecked(false);
                 p.setTitle(app.activityName);
                 if (app.masterEntry != null) {
                     p.setSummary(getActivity().getString(R.string.user_restrictions_controlled_by,
@@ -415,6 +445,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 } else if (!mNewUser && appInfoListHasPackage(userApps, packageName)) {
                     p.setChecked(true);
                 }
+                if (pi.requiredAccountType != null && pi.restrictedAccountType == null) {
+                    p.setChecked(false);
+                    p.setImmutable(true);
+                    p.setSummary(R.string.app_not_supported_in_limited);
+                }
                 if (app.masterEntry != null) {
                     p.setImmutable(true);
                     p.setChecked(mSelectedPackages.get(packageName));
@@ -425,6 +460,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 } else {
                     p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
                 }
+                p.setSelectableAppInfo(app);
                 mSelectedPackages.put(packageName, p.isChecked());
                 mAppListChanged = true;
                 i++;
