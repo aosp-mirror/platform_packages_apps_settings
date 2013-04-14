@@ -47,6 +47,7 @@ import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -64,6 +65,7 @@ import android.view.IWindowManager;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -202,6 +204,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private Dialog mAdbDialog;
     private Dialog mAdbKeysDialog;
 
+    private boolean mUnavailable;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -210,6 +214,12 @@ public class DevelopmentSettings extends PreferenceFragment
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+        if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER) {
+            mUnavailable = true;
+            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            return;
+        }
 
         addPreferencesFromResource(R.xml.development_prefs);
 
@@ -333,6 +343,10 @@ public class DevelopmentSettings extends PreferenceFragment
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mEnabledSwitch.setPaddingRelative(0, 0, padding, 0);
+        if (mUnavailable) {
+            mEnabledSwitch.setEnabled(false);
+            return;
+        }
         mEnabledSwitch.setOnCheckedChangeListener(this);
     }
 
@@ -378,6 +392,16 @@ public class DevelopmentSettings extends PreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+
+        if (mUnavailable) {
+            // Show error message
+            TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
+            getListView().setEmptyView(emptyView);
+            if (emptyView != null) {
+                emptyView.setText(R.string.development_settings_not_available);
+            }
+            return;
+        }
 
         if (mDpm.getMaximumTimeToLock(null) > 0) {
             // A DeviceAdmin has specified a maximum time until the device

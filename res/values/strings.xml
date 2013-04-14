@@ -3036,6 +3036,8 @@
     <!-- Development Settings summary.  The summary of the item to take the user to Development settings.  Development settings are settings meant for application developers. -->
     <string name="development_settings_summary">Set options for app development</string>
     <!-- Setting checkbox title for Whether to enable USB debugging support on the phone. -->
+    <!-- Error message for users that aren't allowed to modify developer options [CHAR LIMIT=none] -->
+    <string name="development_settings_not_available">Developer options are not available for this user</string>
     <string name="enable_adb">USB debugging</string>
     <!-- Setting checkbox summary for Whether to enable USB debugging support on the phone -->
     <string name="enable_adb_summary">Debug mode when USB is connected</string>
@@ -4369,6 +4371,8 @@
     <string name="user_cannot_manage_message" product="tablet">Only the tablet\'s owner can manage users.</string>
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="default">Only the phone\'s owner can manage users.</string>
+    <!-- Message to limited users that they cannot add accounts [CHAR LIMIT=100] -->
+    <string name="user_cannot_add_accounts_message">Limited users cannot add accounts</string>
 
     <!-- User details remove user menu [CHAR LIMIT=20] -->
     <string name="user_remove_user_menu">Delete <xliff:g id="user_name">%1$s</xliff:g> from this device</string>
