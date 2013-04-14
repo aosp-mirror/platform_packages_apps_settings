@@ -28,7 +28,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.io.IOException;
@@ -124,9 +126,15 @@ public class AddAccountSettings extends Activity {
         }
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (mAddAccountCalled || um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+        if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+            // We aren't allowed to add an account.
+            Toast.makeText(this, R.string.user_cannot_add_accounts_message, Toast.LENGTH_LONG)
+                    .show();
+            finish();
+            return;
+        }
+        if (mAddAccountCalled) {
             // We already called add account - maybe the callback was lost.
-            // Or we aren't allowed to add an account.
             finish();
             return;
         }
