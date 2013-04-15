@@ -196,7 +196,7 @@ public final class CredentialStorage extends Activity {
                 String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
                 byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
 
-                if (!mKeyStore.importKey(key, value, uid)) {
+                if (!mKeyStore.importKey(key, value, uid, KeyStore.FLAG_ENCRYPTED)) {
                     Log.e(TAG, "Failed to install " + key + " as user " + uid);
                     return;
                 }
@@ -206,7 +206,7 @@ public final class CredentialStorage extends Activity {
                 String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
                 byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
 
-                if (!mKeyStore.put(certName, certData, uid)) {
+                if (!mKeyStore.put(certName, certData, uid, KeyStore.FLAG_ENCRYPTED)) {
                     Log.e(TAG, "Failed to install " + certName + " as user " + uid);
                     return;
                 }
@@ -216,7 +216,7 @@ public final class CredentialStorage extends Activity {
                 String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
                 byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
 
-                if (!mKeyStore.put(caListName, caListData, uid)) {
+                if (!mKeyStore.put(caListName, caListData, uid, KeyStore.FLAG_ENCRYPTED)) {
                     Log.e(TAG, "Failed to install " + caListName + " as user " + uid);
                     return;
                 }

@@ -237,7 +237,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         if (button == DialogInterface.BUTTON_POSITIVE) {
             // Always save the profile.
             VpnProfile profile = mDialog.getProfile();
-            mKeyStore.put(Credentials.VPN + profile.key, profile.encode());
+            mKeyStore.put(Credentials.VPN + profile.key, profile.encode(), KeyStore.UID_SELF,
+                    KeyStore.FLAG_ENCRYPTED);
 
             // Update the preference.
             VpnPreference preference = mPreferences.get(profile.key);
@@ -530,7 +531,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                                     Toast.LENGTH_LONG).show();
                             return;
                         }
-                        keyStore.put(Credentials.LOCKDOWN_VPN, profile.key.getBytes());
+                        keyStore.put(Credentials.LOCKDOWN_VPN, profile.key.getBytes(),
+                                KeyStore.UID_SELF, KeyStore.FLAG_ENCRYPTED);
                     }
 
                     // kick profiles since we changed them
