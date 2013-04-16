@@ -682,6 +682,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 ((ListPreference)p).setEntryValues(entry.getChoiceValues());
                 ((ListPreference)p).setEntries(entry.getChoiceEntries());
                 ((ListPreference)p).setValue(value);
+                ((ListPreference)p).setDialogTitle(entry.getTitle());
                 break;
             case RestrictionEntry.TYPE_MULTI_SELECT:
                 p = new MultiSelectListPreference(context);
@@ -693,6 +694,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     set.add(s);
                 }
                 ((MultiSelectListPreference)p).setValues(set);
+                ((MultiSelectListPreference)p).setDialogTitle(entry.getTitle());
                 break;
             case RestrictionEntry.TYPE_NULL:
             default:

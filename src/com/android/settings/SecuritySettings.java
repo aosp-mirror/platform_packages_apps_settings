@@ -260,15 +260,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         boolean isSideloadingAllowed =
                 !um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
         // Side loading of apps.
-        if (isSideloadingAllowed) {
-            mToggleAppInstallation.setEnabled(isSideloadingAllowed);
-        } else {
-            if (deviceAdminCategory != null) {
-                deviceAdminCategory.removePreference(mToggleAppInstallation);
-            } else {
-                mToggleAppInstallation.setEnabled(false);
-            }
-        }
+        mToggleAppInstallation.setEnabled(isSideloadingAllowed);
 
         // Package verification, only visible to primary user and if enabled
         mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
