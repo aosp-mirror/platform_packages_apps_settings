@@ -31,22 +31,22 @@ import java.util.ArrayList;
 public class RestrictionUtils {
 
     public static final String [] sRestrictionKeys = {
-        UserManager.DISALLOW_CONFIG_WIFI,
-        UserManager.DISALLOW_CONFIG_BLUETOOTH,
+//        UserManager.DISALLOW_CONFIG_WIFI,
+//        UserManager.DISALLOW_CONFIG_BLUETOOTH,
         UserManager.DISALLOW_SHARE_LOCATION,
         UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES
     };
 
     public static final int [] sRestrictionTitles = {
-        R.string.restriction_wifi_config_title,
-        R.string.restriction_bluetooth_config_title,
+//        R.string.restriction_wifi_config_title,
+//        R.string.restriction_bluetooth_config_title,
         R.string.restriction_location_enable_title,
         R.string.install_applications
     };
 
     public static final int [] sRestrictionDescriptions = {
-        R.string.restriction_wifi_config_summary,
-        R.string.restriction_bluetooth_config_summary,
+//        R.string.restriction_wifi_config_summary,
+//        R.string.restriction_bluetooth_config_summary,
         R.string.restriction_location_enable_summary,
         R.string.install_unknown_applications
     };
