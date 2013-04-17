@@ -23,8 +23,8 @@
     <string name="deny" msgid="6947806159746484865">"Odmítnout"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Neznámé"</string>
   <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Jste pouhé <xliff:g id="STEP_COUNT">%1$d</xliff:g> klepnutí od toho, abyste se stali vývojářem."</item>
-    <item quantity="other" msgid="6722953419953594148">"Jste <xliff:g id="STEP_COUNT">%1$d</xliff:g> klepnutí od toho, abyste se stali vývojářem."</item>
+    <item quantity="one" msgid="5295687242294085452">"Ještě <xliff:g id="STEP_COUNT">%1$d</xliff:g> klepnutí a bude z vás vývojář."</item>
+    <item quantity="other" msgid="6722953419953594148">"Ještě <xliff:g id="STEP_COUNT">%1$d</xliff:g> klepnutí a bude z vás vývojář."</item>
   </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Nyní jste vývojář."</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Není potřeba, již jste vývojář."</string>
@@ -557,7 +557,7 @@
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Za účelem zvýšení přesnosti a k dalším účelům mohou aplikace Google a další aplikace vyhledávat sítě Wi-Fi v okolí, i když je Wi-Fi vypnuta. Chcete-li to zakázat, přejděte do části Pokročilé &gt; Hledání vždy zapnuto."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikace mohou vyhledávat sítě v okolí i v případě, že je Wi-Fi vypnuta. Chcete-li nastavení změnit, přejděte do části Pokročilé &gt; Hledání vždy zapnuto."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Tuto zprávu příště nezobrazovat"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Ponechat Wi-Fi aktivní v režimu spánku"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Wi-Fi aktivní i v režimu spánku"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Při změně nastavení se vyskytl problém"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Optimalizace Wi-Fi"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimalizovat využití baterie při zapnuté síti Wi-Fi"</string>
@@ -746,7 +746,7 @@
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Při nabíjení"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Při vložení do doku"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Vyp."</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Chcete-li nastavit, co se stane, když je telefon v doku nebo v režimu spánku, zapněte funkci Spořič obrazovky."</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Chcete-li nastavit, co se má stát, když se telefon ocitne v doku nebo v režimu spánku, zapněte spořič obrazovky."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"Kdy spustit spořič obrazovky"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Začít"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Nastavení"</string>
@@ -1080,8 +1080,8 @@
     <string name="uninstall_text" msgid="3644892466144802466">"Odinstalovat"</string>
     <string name="uninstall_all_users_text" msgid="851857393177950340">"Odinstalovat pro všechny uživatele"</string>
     <string name="install_text" msgid="884360662922471113">"Instalovat"</string>
-    <string name="disable_text" msgid="6544054052049395202">"Vypnout"</string>
-    <string name="enable_text" msgid="9217362512327828987">"Povolit"</string>
+    <string name="disable_text" msgid="6544054052049395202">"Deaktivovat"</string>
+    <string name="enable_text" msgid="9217362512327828987">"Aktivovat"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Vymazat data"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Odinstalovat aktualizace"</string>
     <string name="auto_launch_enable_text" msgid="2652825923953591251">"Aplikace byla nastavena, aby se pro některé akce spouštěla jako výchozí."</string>
@@ -1104,7 +1104,7 @@
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Vyberte možnosti filtru"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Vše"</string>
-    <string name="filter_apps_disabled" msgid="5364447573326472890">"Vypnuto"</string>
+    <string name="filter_apps_disabled" msgid="5364447573326472890">"Deaktivované"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Stažené"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Spuštěné"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Úložiště USB"</string>
@@ -1158,8 +1158,8 @@
     <string name="move_app_failed_dlg_text" msgid="3465267182923054022">"Přesunutí aplikace se nezdařilo. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Preferované umístění pro instalaci"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Změna preferovaného umístění pro instalaci nových aplikací"</string>
-    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Zakázat integrovanou aplikaci"</string>
-    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Pokud zakážete integrovanou aplikaci, může se stát, že ostatní aplikace přestanou fungovat správně."</string>
+    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Deaktivovat integrovanou aplikaci"</string>
+    <string name="app_disable_dlg_text" msgid="3562567756362627323">"Pokud deaktivujete integrovanou aplikaci, může se stát, že ostatní aplikace přestanou fungovat správně."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Vymazat data a deaktivovat aplikaci?"</string>
     <string name="app_special_disable_dlg_text" msgid="3447657419284854195">"Pokud deaktivujete integrovanou aplikaci, mohou se ostatní aplikace chovat nestandardně. Budou také smazána vaše data."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Vypnout oznámení?"</string>
@@ -1873,8 +1873,7 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"Povolit aplikace a obsah"</string>
     <string name="user_rename" msgid="8523499513614655279">"PŘEJMENOVAT"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Nastavit omezení aplikace"</string>
-    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
-    <skip />
+    <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Řízeno aplikací <xliff:g id="APP">%1$s</xliff:g>"</string>
     <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
     <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Sítě Wi‑Fi a mobilní sítě"</string>
