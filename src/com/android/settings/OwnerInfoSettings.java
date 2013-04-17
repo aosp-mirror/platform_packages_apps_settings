@@ -20,7 +20,6 @@ import android.app.Fragment;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,36 +28,40 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import com.android.internal.widget.LockPatternUtils;
+
 public class OwnerInfoSettings extends Fragment {
     private View mView;
     private CheckBox mCheckbox;
     private EditText mEditText;
+    private int mUserId;
+    private LockPatternUtils mLockPatternUtils;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.ownerinfo, container, false);
+        mUserId = UserHandle.myUserId();
+        mLockPatternUtils = new LockPatternUtils(getActivity());
         initView(mView);
         return mView;
     }
 
     private void initView(View view) {
         final ContentResolver res = getActivity().getContentResolver();
-        String info = Settings.Secure.getString(res, Settings.Secure.LOCK_SCREEN_OWNER_INFO);
-        int enabled = Settings.Secure.getInt(res,
-                Settings.Secure.LOCK_SCREEN_OWNER_INFO_ENABLED, 1);
+        String info = mLockPatternUtils.getOwnerInfo(mUserId);
+        boolean enabled = mLockPatternUtils.isOwnerInfoEnabled();
         mCheckbox = (CheckBox) mView.findViewById(R.id.show_owner_info_on_lockscreen_checkbox);
         mEditText = (EditText) mView.findViewById(R.id.owner_info_edit_text);
         mEditText.setText(info);
-        mEditText.setEnabled(enabled != 0);
-        mCheckbox.setChecked(enabled != 0);
+        mEditText.setEnabled(enabled);
+        mCheckbox.setChecked(enabled);
         if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
             mCheckbox.setText(R.string.show_user_info_on_lockscreen_label);
         }
         mCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Settings.Secure.putInt(res, Settings.Secure.LOCK_SCREEN_OWNER_INFO_ENABLED,
-                        isChecked ? 1 : 0);
+                mLockPatternUtils.setOwnerInfoEnabled(isChecked);
                 mEditText.setEnabled(isChecked); // disable text field if not enabled
             }
         });
@@ -71,9 +74,8 @@ public class OwnerInfoSettings extends Fragment {
     }
 
     void saveToDb() {
-        ContentResolver res = getActivity().getContentResolver();
         String info = mEditText.getText().toString();
-        Settings.Secure.putString(res, Settings.Secure.LOCK_SCREEN_OWNER_INFO, info);
+        mLockPatternUtils.setOwnerInfo(info, mUserId);
     }
 
 }
