@@ -134,15 +134,11 @@ public class Settings extends PreferenceActivity
     private Header mLastHeader;
     private boolean mListeningToAccountUpdates;
 
-    private List<RestrictionEntry> mAppRestrictions;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-
-        mAppRestrictions = getApplicationRestrictions();
 
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
