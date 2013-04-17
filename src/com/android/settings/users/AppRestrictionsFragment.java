@@ -562,7 +562,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         if (packageName.equals(getActivity().getPackageName())) {
                             RestrictionUtils.setRestrictions(getActivity(), restrictions, mUser);
                         } else {
-                            mUserManager.setApplicationRestrictions(packageName, restrictions,
+                            mUserManager.setApplicationRestrictions(packageName,
+                                    RestrictionUtils.restrictionsToBundle(restrictions),
                                     mUser);
                         }
                         break;
@@ -594,12 +595,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             getActivity(), mUser);
                     onRestrictionsReceived(preference, packageName, restrictions);
                 } else {
-                    List<RestrictionEntry> oldEntries =
+                    Bundle oldEntries =
                             mUserManager.getApplicationRestrictions(packageName, mUser);
                     Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
                     intent.setPackage(packageName);
-                    intent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS,
-                            new ArrayList<RestrictionEntry>(oldEntries));
+                    intent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE, oldEntries);
                     intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                     getActivity().sendOrderedBroadcast(intent, null,
                             new RestrictionsResultReceiver(packageName, preference),
@@ -626,14 +626,16 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         public void onReceive(Context context, Intent intent) {
             Bundle results = getResultExtras(true);
             final ArrayList<RestrictionEntry> restrictions = results.getParcelableArrayList(
-                    Intent.EXTRA_RESTRICTIONS);
+                    Intent.EXTRA_RESTRICTIONS_LIST);
             Intent restrictionsIntent = (Intent) results.getParcelable(CUSTOM_RESTRICTIONS_INTENT);
             if (restrictions != null && restrictionsIntent == null) {
                 onRestrictionsReceived(preference, packageName, restrictions);
-                mUserManager.setApplicationRestrictions(packageName, restrictions, mUser);
+                mUserManager.setApplicationRestrictions(packageName,
+                        RestrictionUtils.restrictionsToBundle(restrictions), mUser);
             } else if (restrictionsIntent != null) {
                 final Intent customIntent = restrictionsIntent;
-                customIntent.putParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS, restrictions);
+                customIntent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE,
+                        RestrictionUtils.restrictionsToBundle(restrictions));
                 Preference p = new Preference(context);
                 p.setTitle(R.string.app_restrictions_custom_label);
                 p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -741,12 +743,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
         if (resultCode == Activity.RESULT_OK) {
             ArrayList<RestrictionEntry> list =
-                    data.getParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS);
+                    data.getParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS_LIST);
             if (list != null) {
                 // If there's a valid result, persist it to the user manager.
                 String packageName = pref.getKey().substring(PKG_PREFIX.length());
                 pref.setRestrictions(list);
-                mUserManager.setApplicationRestrictions(packageName, list, mUser);
+                mUserManager.setApplicationRestrictions(packageName,
+                        RestrictionUtils.restrictionsToBundle(list), mUser);
             }
             toggleAppPanel(pref);
         }
