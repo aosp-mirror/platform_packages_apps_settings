@@ -346,12 +346,12 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Schermvergr. wijzigen"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Beveiliging via patroon, PIN of wachtwoord wijzigen of uitschakelen"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Kies een methode voor schermvergrendeling"</string>
-    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Hoe wilt u ontgrendelen als Face Unlock niet mogelijk is?"</string>
+    <string name="unlock_backup_info_summary" msgid="108524727803788172">"Hoe wilt u ontgrendelen als Ontgrendelen via gezichtsherkenning niet mogelijk is?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Geen"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Vegen"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Geen beveiliging"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Face Unlock"</string>
+    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Ontgrendelen via gezichtsherkenning"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Lage beveiliging, experimenteel"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Patroon"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Gemiddelde beveiliging"</string>
@@ -362,7 +362,7 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Uitgeschakeld door beheerder, encryptiebeleid of referentieopslag"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Geen"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Vegen"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Face Unlock"</string>
+    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Ontgrendelen via gezichtsherkenning"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Patroon"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"Pincode"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Wachtwoord"</string>
@@ -507,8 +507,7 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Zoeken naar displays"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Zoeken…"</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Geen draadloze displays in de buurt."</string>
-    <!-- no translation found for wifi_display_settings_empty_list_user_restricted (1920080628834632135) -->
-    <skip />
+    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Deze gebruiker mag geen draadloze netwerken configureren."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Gekoppelde displays"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Beschikbare apparaten"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Verbinding maken"</string>
@@ -1286,8 +1285,7 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Instellingen voor vast toetsenbord"</string>
     <string name="development_settings_title" msgid="215179176067683667">"Opties voor ontwikkelaars"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Opties instellen voor appontwikkeling"</string>
-    <!-- no translation found for development_settings_not_available (4308569041701535607) -->
-    <skip />
+    <string name="development_settings_not_available" msgid="4308569041701535607">"Ontwikkelaarsopties zijn niet beschikbaar voor deze gebruiker"</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB-foutopsporing"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Foutopsporingsmodus bij USB-verbinding"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Autorisatie voor USB-foutopsporing intrekken"</string>
@@ -1842,8 +1840,7 @@
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Niet nu"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Alleen de eigenaar van de tablet kan gebruikers beheren."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Alleen de eigenaar van de telefoon kan gebruikers beheren."</string>
-    <!-- no translation found for user_cannot_add_accounts_message (1610930617977321638) -->
-    <skip />
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Gebruikers met beperkte rechten kunnen geen accounts toevoegen"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g> verwijderen van dit apparaat"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nieuwe gebruiker"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Wilt u uzelf verwijderen?"</string>
@@ -1871,10 +1868,8 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"Apps en inhoud toestaan"</string>
     <string name="user_rename" msgid="8523499513614655279">"NAAM WIJZIGEN"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"App-limieten instellen"</string>
-    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
-    <skip />
-    <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
-    <skip />
+    <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Beheerd door <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Deze app wordt niet ondersteund voor gebruikers met beperkte rechten"</string>
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wifi en mobiel"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Aanpassing van mobiele en wifi-instellingen toestaan"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
