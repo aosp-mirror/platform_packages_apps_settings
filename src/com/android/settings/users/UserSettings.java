@@ -31,8 +31,6 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,12 +41,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.text.InputType;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -57,11 +53,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
 import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +73,6 @@ public class UserSettings extends SettingsPreferenceFragment
     /** UserId of the user that was just added */
     private static final String SAVE_ADDING_USER = "adding_user";
 
-    private static final String KEY_USER_NICKNAME = "user_nickname";
     private static final String KEY_TRUSTED_USER_LIST = "trusted_user_list";
     private static final String KEY_LIMITED_USER_LIST = "limited_user_list";
     private static final String KEY_USER_ME = "user_me";
@@ -179,21 +174,13 @@ public class UserSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.user_settings);
         mTrustedUserListCategory = (PreferenceGroup) findPreference(KEY_TRUSTED_USER_LIST);
         mLimitedUserListCategory = (PreferenceGroup) findPreference(KEY_LIMITED_USER_LIST);
-        mMePreference = (Preference) findPreference(KEY_USER_ME);
+        mMePreference = new UserPreference(getActivity(), null, UserHandle.myUserId(),
+                mUserManager.isLinkedUser() ? null : this, null);
+        mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (!mIsOwner) {
-            mMePreference.setSummary(null);
+        if (mIsOwner) {
+            mMePreference.setSummary(R.string.user_owner);
         }
-        Preference ownerInfo = findPreference("user_owner_info");
-        if (ownerInfo != null && !mIsOwner) {
-            ownerInfo.setTitle(R.string.user_info_settings_title);
-        }
-        mNicknamePreference = (SelectableEditTextPreference) findPreference(KEY_USER_NICKNAME);
-        mNicknamePreference.setOnPreferenceChangeListener(this);
-        mNicknamePreference.getEditText().setInputType(
-                InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-        mNicknamePreference.setInitialSelectionMode(
-                SelectableEditTextPreference.SELECTION_SELECT_ALL);
         mAddRestrictedUser = findPreference(KEY_ADD_RESTRICTED_USER);
         mAddTrustedUser = findPreference(KEY_ADD_TRUSTED_USER);
         mAddRestrictedUser.setOnPreferenceClickListener(this);
@@ -269,6 +256,9 @@ public class UserSettings extends SettingsPreferenceFragment
                     assignProfilePhoto(user);
                 }
                 String profileName = getProfileName();
+                if (profileName == null) {
+                    profileName = user.name;
+                }
                 return profileName;
             }
         }.execute();
@@ -341,17 +331,28 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onManageUserClicked(int userId, boolean newUser) {
-        Bundle extras = new Bundle();
-        extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, userId);
-        extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
-        String title = getResources().getString(R.string.user_new_user_name);
-        if (userId > UserHandle.USER_OWNER) {
-            title = mUserManager.getUserInfo(userId).name;
+        UserInfo info = mUserManager.getUserInfo(userId);
+        if (info.isRestricted() && mIsOwner) {
+            Bundle extras = new Bundle();
+            extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, userId);
+            extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
+            String title = getResources().getString(R.string.user_new_user_name);
+            if (userId > UserHandle.USER_OWNER) {
+                title = mUserManager.getUserInfo(userId).name;
+            }
+            ((PreferenceActivity) getActivity()).startPreferencePanel(
+                    AppRestrictionsFragment.class.getName(),
+                    extras, 0, title,
+                    null, 0);
+        } else if (info.id == UserHandle.myUserId()) {
+            // Jump to owner info panel
+            Bundle extras = new Bundle();
+            extras.putBoolean(OwnerInfoSettings.EXTRA_SHOW_NICKNAME, true);
+            ((PreferenceActivity) getActivity()).startPreferencePanel(
+                    OwnerInfoSettings.class.getName(),
+                    extras, R.string.user_info_settings_title, null,
+                    null, 0);
         }
-        ((PreferenceActivity) getActivity()).startPreferencePanel(
-                AppRestrictionsFragment.class.getName(),
-                extras, 0, title,
-                null, 0);
     }
 
     private void onUserCreated(int userId) {
@@ -510,16 +511,17 @@ public class UserSettings extends SettingsPreferenceFragment
         mLimitedUserListCategory.removeAll();
         mLimitedUserListCategory.setOrderingAsAdded(false);
 
+        mTrustedUserListCategory.addPreference(mMePreference);
+
         final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
         for (UserInfo user : users) {
             Preference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
-                mNicknamePreference.setText(user.name);
-                mNicknamePreference.setSummary(user.name);
             } else {
                 pref = new UserPreference(getActivity(), null, user.id,
-                        UserHandle.myUserId() == UserHandle.USER_OWNER, this, this);
+                        mIsOwner && user.isRestricted() ? this : null,
+                        mIsOwner ? this : null);
                 pref.setOnPreferenceClickListener(this);
                 pref.setKey("id=" + user.id);
                 if (user.isRestricted()) {
@@ -547,7 +549,7 @@ public class UserSettings extends SettingsPreferenceFragment
         // Add a temporary entry for the user being created
         if (mAddingUser) {
             Preference pref = new UserPreference(getActivity(), null, UserPreference.USERID_UNKNOWN,
-                    false, null, null);
+                    null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
             pref.setIcon(encircle(R.drawable.avatar_default_1));
@@ -610,7 +612,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void setPhotoId(Preference pref, UserInfo user) {
-        Bitmap bitmap = mUserIcons.get(user.id); // UserUtils.getUserIcon(mUserManager, user);
+        Bitmap bitmap = mUserIcons.get(user.id);
         if (bitmap != null) {
             pref.setIcon(encircle(bitmap));
         }
@@ -636,7 +638,13 @@ public class UserSettings extends SettingsPreferenceFragment
             // To make sure that it returns back here when done
             // TODO: Make this a proper API
             editProfile.putExtra("finishActivityOnSaveCompleted", true);
-            startActivity(editProfile);
+
+            // If this is a limited user, launch the user info settings instead of profile editor
+            if (mUserManager.isLinkedUser()) {
+                onManageUserClicked(UserHandle.myUserId(), false);
+            } else {
+                startActivity(editProfile);
+            }
         } else if (pref instanceof UserPreference) {
             int userId = ((UserPreference) pref).getUserId();
             // Get the latest status of the user
@@ -647,6 +655,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (!isInitialized(user)) {
                     mHandler.sendMessage(mHandler.obtainMessage(
                             MESSAGE_SETUP_USER, user.id, user.serialNumber));
+                } else if (user.isRestricted()) {
+                    onManageUserClicked(user.id, false);
                 }
             }
         } else if (pref == mAddTrustedUser) {

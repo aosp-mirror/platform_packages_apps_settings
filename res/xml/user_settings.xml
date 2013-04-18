@@ -19,20 +19,15 @@
         android:title="@string/user_settings_title">
 
     <PreferenceCategory
-            android:key="user_you"
-            android:title="@string/user_you_section"/>
+            android:key="trusted_user_list"
+            android:title="@string/user_trusted_list_title">
+    </PreferenceCategory>
+
     <Preference
-            android:key="user_me"
-            android:summary="@string/user_owner" />
-    <com.android.settings.SelectableEditTextPreference
-            android:key="user_nickname"
-            android:title="@string/user_nickname"
-            android:icon="@drawable/empty_icon" />
-    <Preference
-            android:key="user_owner_info"
-            android:title="@string/owner_info_settings_title"
-            android:icon="@drawable/empty_icon"
-            android:fragment="com.android.settings.OwnerInfoSettings" />
+            android:key="user_add_trusted"
+            android:title="@string/user_add_trusted"
+            android:summary="@string/user_add_trusted_summary"
+            android:icon="@drawable/ic_menu_add" />
 
     <PreferenceCategory
             android:key="limited_user_list"
@@ -45,14 +40,4 @@
             android:summary="@string/user_add_restricted_summary"
             android:icon="@drawable/ic_menu_add" />
 
-    <PreferenceCategory
-            android:key="trusted_user_list"
-            android:title="@string/user_trusted_list_title">
-    </PreferenceCategory>
-
-    <Preference
-            android:key="user_add_trusted"
-            android:title="@string/user_add_trusted"
-            android:summary="@string/user_add_trusted_summary"
-            android:icon="@drawable/ic_menu_add" />
 </PreferenceScreen>
