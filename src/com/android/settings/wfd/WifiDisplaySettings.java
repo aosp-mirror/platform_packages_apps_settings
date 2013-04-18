@@ -117,6 +117,12 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        getActivity().getActionBar().setCustomView(null);
+        super.onDestroyView();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
