@@ -20,6 +20,9 @@ import android.app.Fragment;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +34,25 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.android.internal.widget.LockPatternUtils;
 
 public class OwnerInfoSettings extends Fragment {
+
+    public static final String EXTRA_SHOW_NICKNAME = "show_nickname";
+
     private View mView;
     private CheckBox mCheckbox;
-    private EditText mEditText;
     private int mUserId;
     private LockPatternUtils mLockPatternUtils;
+    private EditText mOwnerInfo;
+    private EditText mNickname;
+    private boolean mShowNickname;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(EXTRA_SHOW_NICKNAME)) {
+            mShowNickname = args.getBoolean(EXTRA_SHOW_NICKNAME);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,9 +69,16 @@ public class OwnerInfoSettings extends Fragment {
         String info = mLockPatternUtils.getOwnerInfo(mUserId);
         boolean enabled = mLockPatternUtils.isOwnerInfoEnabled();
         mCheckbox = (CheckBox) mView.findViewById(R.id.show_owner_info_on_lockscreen_checkbox);
-        mEditText = (EditText) mView.findViewById(R.id.owner_info_edit_text);
-        mEditText.setText(info);
-        mEditText.setEnabled(enabled);
+        mOwnerInfo = (EditText) mView.findViewById(R.id.owner_info_edit_text);
+        mOwnerInfo.setText(info);
+        mOwnerInfo.setEnabled(enabled);
+        mNickname = (EditText) mView.findViewById(R.id.owner_info_nickname);
+        if (!mShowNickname) {
+            mNickname.setVisibility(View.GONE);
+        } else {
+            mNickname.setText(UserManager.get(getActivity()).getUserName());
+            mNickname.setSelected(true);
+        }
         mCheckbox.setChecked(enabled);
         if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
             mCheckbox.setText(R.string.show_user_info_on_lockscreen_label);
@@ -62,7 +86,7 @@ public class OwnerInfoSettings extends Fragment {
         mCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mLockPatternUtils.setOwnerInfoEnabled(isChecked);
-                mEditText.setEnabled(isChecked); // disable text field if not enabled
+                mOwnerInfo.setEnabled(isChecked); // disable text field if not enabled
             }
         });
     }
@@ -70,12 +94,21 @@ public class OwnerInfoSettings extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        saveToDb();
+        saveChanges();
     }
 
-    void saveToDb() {
-        String info = mEditText.getText().toString();
+    void saveChanges() {
+        ContentResolver res = getActivity().getContentResolver();
+        String info = mOwnerInfo.getText().toString();
         mLockPatternUtils.setOwnerInfo(info, mUserId);
+        if (mShowNickname) {
+            String oldName = UserManager.get(getActivity()).getUserName();
+            CharSequence newName = mNickname.getText();
+            if (!TextUtils.isEmpty(newName) && !newName.equals(oldName)) {
+                UserManager.get(getActivity()).setUserName(UserHandle.myUserId(),
+                        newName.toString());
+            }
+        }
     }
 
 }

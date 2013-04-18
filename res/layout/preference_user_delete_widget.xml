@@ -20,6 +20,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+    <View
+        android:id="@+id/divider_manage"
+        android:layout_width="2dip"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:background="@android:drawable/divider_horizontal_dark" />
     <ImageView
         android:id="@+id/manage_user"
         android:layout_width="wrap_content"
@@ -31,6 +38,7 @@
         android:layout_gravity="center"
         android:background="?android:attr/selectableItemBackground" />
     <View
+        android:id="@+id/divider_delete"
         android:layout_width="2dip"
         android:layout_height="match_parent"
         android:layout_marginTop="5dip"
