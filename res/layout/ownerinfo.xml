@@ -37,10 +37,20 @@
                 android:background="#ff404040"
                 />
 
+            <EditText android:id="@+id/owner_info_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:gravity="top"
+                android:hint="@string/user_nickname"
+                android:inputType="textCapWords"
+            />
+
             <CheckBox android:id="@+id/show_owner_info_on_lockscreen_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="64dip"
                 android:gravity="center_vertical"
+                android:layout_marginTop="8dip"
                 android:text="@string/show_owner_info_on_lockscreen_label"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="?android:attr/textColorSecondary"
