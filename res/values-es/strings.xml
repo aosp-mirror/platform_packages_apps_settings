@@ -23,8 +23,8 @@
     <string name="deny" msgid="6947806159746484865">"Denegar"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Desconocido"</string>
   <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Solo te queda <xliff:g id="STEP_COUNT">%1$d</xliff:g> paso para ser un desarrollador."</item>
-    <item quantity="other" msgid="6722953419953594148">"Solo te quedan <xliff:g id="STEP_COUNT">%1$d</xliff:g> pasos para ser un desarrollador."</item>
+    <item quantity="one" msgid="5295687242294085452">"Ahora estás a <xliff:g id="STEP_COUNT">%1$d</xliff:g> paso de ser un desarrollador"</item>
+    <item quantity="other" msgid="6722953419953594148">"Ahora estás a <xliff:g id="STEP_COUNT">%1$d</xliff:g> pasos de ser un desarrollador"</item>
   </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"¡Ahora están activadas las opciones de desarrollo!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"No es necesario, están activadas las opciones de desarrollo."</string>
@@ -419,7 +419,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Administradores de dispositivos"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Ver o desactivar administradores de dispositivo"</string>
     <string name="manage_notification_access" msgid="5799781079264981979">"Acceso a notificaciones"</string>
-    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer notificaciones."</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer notificaciones"</string>
   <plurals name="manage_notification_access_summary_nonzero">
     <item quantity="one" msgid="8344183614159211585">"%d aplicación puede leer notificaciones."</item>
     <item quantity="other" msgid="980049191810249052">"%d aplicaciones pueden leer notificaciones."</item>
@@ -551,11 +551,11 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Notificarme cuando haya una red abierta disponible"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Solo conexiones estables"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Búsqueda siempre disponible"</string>
+    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Buscar redes siempre"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Permitir que el servicio de ubicación de Google y otras aplicaciones busquen redes, aunque la conexión Wi-Fi esté desactivada"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Con el fin de mejorar la precisión de la ubicación y otros aspectos, Google y otras aplicaciones pueden buscar redes cercanas, aunque la conexión Wi-Fi esté desactivada. Si no quieres que esto ocurra, accede a Avanzadas &gt; Búsqueda siempre disponible."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Las aplicaciones pueden buscar redes cercanas, aunque la conexión Wi-Fi esté desactivada. Si no quieres que esto ocurra, accede a Avanzadas &gt; Búsqueda siempre disponible."</string>
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para mejorar la precisión de la ubicación y otros fines, Google y otras aplicaciones pueden buscar redes cercanas aunque la conexión Wi-Fi esté desactivada. Si no quieres que esto ocurra, accede a Ajustes avanzados &gt; Buscar redes siempre."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Las aplicaciones pueden buscar redes cercanas aunque la conexión Wi-Fi esté desactivada. Si no quieres que esto ocurra, accede a Ajustes avanzados &gt; Buscar redes siempre."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"No volver a mostrar"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Usar Wi-Fi en suspensión"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Error al cambiar la configuración"</string>
@@ -978,7 +978,7 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móviles"</string>
     <string name="location_title" msgid="1029961368397484576">"Mi ubicación"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Ubicación de red móvil y Wi‑Fi"</string>
-    <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que las aplicaciones usen el servicio de ubicación de Google para calcular tu ubicación más rápido. Se recopilarán datos de ubicación anónimos y se enviarán a Google."</string>
+    <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que las aplicaciones usen el servicio de ubicación de Google para calcular tu ubicación más rápido. Se recopilarán datos de ubicación anónimos y se enviarán a Google"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Ubicación determinada por Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satélites GPS"</string>
     <string name="location_street_level" product="tablet" msgid="1669562198260860802">"Permitir que las aplicaciones usen el GPS del tablet para determinar tu ubicación"</string>
@@ -1290,8 +1290,8 @@
     <skip />
     <string name="enable_adb" msgid="7982306934419797485">"Depuración USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Activar el modo de depuración cuando el dispositivo esté conectado por USB"</string>
-    <string name="clear_adb_keys" msgid="4038889221503122743">"Revocar autozaciones de depuración USB"</string>
-    <string name="bugreport_in_power" msgid="4548816486587403971">"Informe de error en menú"</string>
+    <string name="clear_adb_keys" msgid="4038889221503122743">"Revocar autorizaciones depur. USB"</string>
+    <string name="bugreport_in_power" msgid="4548816486587403971">"Informe de error menú encendido"</string>
     <string name="bugreport_in_power_summary" msgid="5764234382355067053">"Incluir opción en el menú de encendido para generar un informe de error"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Pantalla activa"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"La pantalla nunca entra en modo de suspensión si el dispositivo se está cargando"</string>
@@ -1303,7 +1303,7 @@
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"¿Permitir ajustes de desarrollo?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Estos ajustes están destinados únicamente a los desarrolladores. Pueden provocar que el dispositivo o las aplicaciones no funcionen correctamente."</string>
     <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"Verificar aplicaciones por USB"</string>
-    <string name="verify_apps_over_usb_summary" msgid="9164096969924529200">"Comprueba las aplicaciones instaladas mediante ADB/ADT para detectar comportamientos dañinos."</string>
+    <string name="verify_apps_over_usb_summary" msgid="9164096969924529200">"Comprueba las aplicaciones instaladas mediante ADB/ADT para detectar comportamientos dañinos"</string>
     <string name="enforce_read_external_title" product="nosdcard" msgid="7733257271454664956">"Proteger almacenamiento USB"</string>
     <string name="enforce_read_external_summary" product="nosdcard" msgid="1798088409346660567">"Las aplicaciones deben solicitar permiso para leer el almacenamiento USB"</string>
     <string name="enforce_read_external_confirm_title" product="nosdcard" msgid="2112813067171502209">"¿Proteger almacenamiento USB?"</string>
@@ -1655,7 +1655,7 @@
     <string name="wait_for_debugger_summary" msgid="1766918303462746804">"La aplicación de depuración espera a que se conecte el depurador para ejecutarse"</string>
     <string name="debug_input_category" msgid="1811069939601180246">"Entrada"</string>
     <string name="debug_drawing_category" msgid="6755716469267367852">"Dibujo"</string>
-    <string name="debug_hw_drawing_category" msgid="6220174216912308658">"Representación acelerada mediante hardware"</string>
+    <string name="debug_hw_drawing_category" msgid="6220174216912308658">"Renderización acelerada por hardware"</string>
     <string name="debug_monitoring_category" msgid="7640508148375798343">"Supervisión"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Modo estricto"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Destellar si las aplicaciones tardan mucho en el proceso principal"</string>
@@ -1683,10 +1683,10 @@
     <string name="force_msaa" msgid="7920323238677284387">"Forzar MSAA 4x"</string>
     <string name="force_msaa_summary" msgid="9123553203895817537">"Habilitar MSAA 4x en aplicaciones de OpenGL ES 2.0"</string>
     <string name="show_non_rect_clip" msgid="505954950474595172">"Depurar operaciones de recorte no rectangulares"</string>
-    <string name="track_frame_time" msgid="6146354853663863443">"Representación GPU perfil"</string>
+    <string name="track_frame_time" msgid="6146354853663863443">"Perfil de renderización de GPU"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Escala de animación ventana"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Escala de transición-animación"</string>
-    <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala duración animador"</string>
+    <string name="animator_duration_scale_title" msgid="3406722410819934083">"Escala de duración de animador"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simular pantallas secundarias"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Aplicaciones"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Destruir actividades"</string>
@@ -1695,7 +1695,7 @@
     <string name="show_all_anrs" msgid="28462979638729082">"Errores sin respuesta"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Informar de que una aplicación en segundo plano no responde"</string>
     <string name="experimental_webview" msgid="4492200819033780927">"Usar vista web experimental"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Aplicaciones usarán vista web más reciente (beta)."</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"Las aplicaciones usarán vista web más reciente (beta)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Itinerancia de datos"</string>
@@ -1824,10 +1824,10 @@
     <string name="user_trusted_list_title" msgid="8841215084164687183">"Usuarios de confianza"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Usuarios limitados"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Añadir usuario"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"Añadir usuario limit"</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Los usuarios limitados solo pueden acceder a las aplicaciones y al contenido que selecciones."</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Añadir usuario conf"</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Los usuarios de confianza no tienen restricciones."</string>
+    <string name="user_add_restricted" msgid="2355584640156396901">"Añadir usuario limitado"</string>
+    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Los usuarios limitados solo pueden acceder a las aplicaciones y al contenido que selecciones"</string>
+    <string name="user_add_trusted" msgid="557634297572871869">"Añadir usuario de confianza"</string>
+    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Los usuarios de confianza no tienen restricciones"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Activo"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Inactivo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Sin configurar"</string>
@@ -1873,8 +1873,7 @@
     <string name="user_restrictions_title" msgid="371835484894400390">"Permitir aplicaciones y contenido"</string>
     <string name="user_rename" msgid="8523499513614655279">"CAMBIAR NOMBRE"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Establecer límites de aplicación"</string>
-    <!-- no translation found for user_restrictions_controlled_by (3164078767438313899) -->
-    <skip />
+    <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Controladas por <xliff:g id="APP">%1$s</xliff:g>"</string>
     <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
     <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi y redes móviles"</string>
