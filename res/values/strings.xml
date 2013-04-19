@@ -3186,30 +3186,24 @@
     <!-- Summary for the disabled state of an accessiblity feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_off">Off</string>
 
-     <!-- Title for a warning message about security implications of enabling an accessibility service,
-         displayed as a dialog message when the user selects to enable an accessibility service (tablet). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_security_warning_title">Use
+    <!-- Title for a warning about security implications of enabling an accessibility
+         service. [CHAR LIMIT=NONE] -->
+    <string name="enable_service_title">Use
          <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
-    <!-- Summary for a warning message about security implications of enabling an accessibility service,
-         displayed as a dialog message when the user selects to enable an accessibility service (tablet). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_security_warning_summary" product="tablet">
-            <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
-            collect all of the text you type, except passwords. This includes personal data such as credit card
-            numbers. It can also collect data about your interactions with the tablet.</string>
-    <!-- Summary for a warning message about security implications of enabling an accessibility service,
-         displayed as a dialog message when the user selects to enable an accessibility service (phone). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_security_warning_summary" product="default">
-            <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
-            collect all of the text you type, except passwords. This includes personal data such as credit card
-            numbers. It can also collect data about your interactions with the phone.</string>
+    <!-- Title for the list of capabilities of an accessibility service. -->
+    <string name="capabilities_list_title"><xliff:g id="service" example="TalkBack">%1$s</xliff:g>
+        needs to:</string>
 
-    <!-- Title for a warning about disabling an accessibility service displayed as a dialog message when the user
-         selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_disable_warning_title">Stop
-         <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
-    <!-- Summary for a warning about disabling accessibility service displayed as a dialog message when the user
-         selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_disable_warning_summary">Touching OK will
+    <!-- Title for the capability of an accessibility service to receive events and keys. -->
+    <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
+    <!-- Description for the capability of an accessibility service to receive events and keys. -->
+    <string name="capability_desc_receiveAccessibilityEvents">Receive notifications when you\'re
+        interacting with an app.</string>
+
+    <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
+    <string name="disable_service_title">Stop<xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
+    <!-- Message for a warning about disabling accessibility service. [CHAR LIMIT=NONE] -->
+    <string name="disable_service_message">Touching OK will
         stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
 
     <!-- Title for the prompt shown as a placeholder if no accessibility serivices are installed. [CHAR LIMIT=50] -->
