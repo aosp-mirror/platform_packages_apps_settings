@@ -161,6 +161,11 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
         }
 
+        // Remove Airplane Mode settings if it's a stationary device such as a TV.
+        if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
+            removePreference(KEY_TOGGLE_AIRPLANE);
+        }
+
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
         DevicePolicyManager mDPM = (DevicePolicyManager)
