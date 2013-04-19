@@ -50,12 +50,14 @@ import android.text.TextUtils.SimpleStringSplitter;
 import android.view.Gravity;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -118,13 +120,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String EXTRA_CHECKED = "checked";
     private static final String EXTRA_TITLE = "title";
     private static final String EXTRA_SUMMARY = "summary";
-    private static final String EXTRA_ENABLE_WARNING_TITLE = "enable_warning_title";
-    private static final String EXTRA_ENABLE_WARNING_MESSAGE = "enable_warning_message";
-    private static final String EXTRA_DISABLE_WARNING_TITLE = "disable_warning_title";
-    private static final String EXTRA_DISABLE_WARNING_MESSAGE = "disable_warning_message";
     private static final String EXTRA_SETTINGS_TITLE = "settings_title";
     private static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
-    private static final String EXTRA_SERVICE_COMPONENT_NAME = "service_component_name";
+    private static final String EXTRA_ACCESSIBILITY_SERVICE_INFO = "accessibility_service_info";
 
     // Dialog IDs.
     private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 1;
@@ -409,20 +407,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
             extras.putString(EXTRA_SUMMARY, description);
 
-            CharSequence applicationLabel = info.getResolveInfo().loadLabel(getPackageManager());
-
-            extras.putString(EXTRA_ENABLE_WARNING_TITLE, getString(
-                    R.string.accessibility_service_security_warning_title, applicationLabel));
-            extras.putString(EXTRA_ENABLE_WARNING_MESSAGE, getString(
-                    R.string.accessibility_service_security_warning_summary, applicationLabel));
-
-            extras.putString(EXTRA_DISABLE_WARNING_TITLE, getString(
-                    R.string.accessibility_service_disable_warning_title,
-                    applicationLabel));
-            extras.putString(EXTRA_DISABLE_WARNING_MESSAGE, getString(
-                    R.string.accessibility_service_disable_warning_summary,
-                    applicationLabel));
-
             String settingsClassName = info.getSettingsActivityName();
             if (!TextUtils.isEmpty(settingsClassName)) {
                 extras.putString(EXTRA_SETTINGS_TITLE,
@@ -432,7 +416,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                                 settingsClassName).flattenToString());
             }
 
-            extras.putString(EXTRA_SERVICE_COMPONENT_NAME, componentName.flattenToString());
+            extras.putParcelable(EXTRA_ACCESSIBILITY_SERVICE_INFO, info);
 
             mServicesCategory.addPreference(preference);
         }
@@ -698,10 +682,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
         };
 
-        private CharSequence mEnableWarningTitle;
-        private CharSequence mEnableWarningMessage;
-        private CharSequence mDisableWarningTitle;
-        private CharSequence mDisableWarningMessage;
+        private AccessibilityServiceInfo mAccessibilityServiceInfo;
 
         private String mComponentName;
 
@@ -767,32 +748,113 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     Settings.Secure.ACCESSIBILITY_ENABLED, accessibilityEnabled ? 1 : 0);
         }
 
+//        extras.putString(EXTRA_ENABLE_WARNING_TITLE, getString(
+//                R.string.accessibility_service_security_warning_title, applicationLabel));
+//        extras.putString(EXTRA_ENABLE_WARNING_MESSAGE, getString(
+//                R.string.accessibility_service_security_warning_summary, applicationLabel));
+//
+//        extras.putString(EXTRA_DISABLE_WARNING_TITLE, getString(
+//                R.string.accessibility_service_disable_warning_title,
+//                applicationLabel));
+//        extras.putString(EXTRA_DISABLE_WARNING_MESSAGE, getString(
+//                R.string.accessibility_service_disable_warning_summary,
+//                applicationLabel));
+
         @Override
         public Dialog onCreateDialog(int dialogId) {
-            CharSequence title = null;
-            CharSequence message = null;
             switch (dialogId) {
                 case DIALOG_ID_ENABLE_WARNING:
                     mShownDialogId = DIALOG_ID_ENABLE_WARNING;
-                    title = mEnableWarningTitle;
-                    message = mEnableWarningMessage;
-                    break;
+                    return new AlertDialog.Builder(getActivity())
+                        .setTitle(getString(R.string.enable_service_title,
+                                mAccessibilityServiceInfo.getResolveInfo()
+                                .loadLabel(getPackageManager())))
+                        .setIconAttribute(android.R.attr.alertDialogIcon)
+                        .setView(createEnableDialogContentView())
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, this)
+                        .create();
                 case DIALOG_ID_DISABLE_WARNING:
                     mShownDialogId = DIALOG_ID_DISABLE_WARNING;
-                    title = mDisableWarningTitle;
-                    message = mDisableWarningMessage;
-                    break;
+                    return new AlertDialog.Builder(getActivity())
+                        .setTitle(getString(R.string.disable_service_title,
+                                mAccessibilityServiceInfo.getResolveInfo()
+                                .loadLabel(getPackageManager())))
+                        .setIconAttribute(android.R.attr.alertDialogIcon)
+                        .setMessage(getString(R.string.disable_service_message,
+                                mAccessibilityServiceInfo.getResolveInfo()
+                                .loadLabel(getPackageManager())))
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, this)
+                        .create();
                 default:
                     throw new IllegalArgumentException();
             }
-            return new AlertDialog.Builder(getActivity())
-                    .setTitle(title)
-                    .setIconAttribute(android.R.attr.alertDialogIcon)
-                    .setMessage(message)
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
+        }
+
+        private View createEnableDialogContentView() {
+            LayoutInflater inflater = (LayoutInflater) getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE);
+
+            View content = inflater.inflate(R.layout.enable_accessibility_service_dialog_content,
+                    null);
+
+            TextView capabilitiesHeaderView = (TextView) content.findViewById(
+                    R.id.capabilities_header);
+            capabilitiesHeaderView.setText(getString(R.string.capabilities_list_title,
+                    mAccessibilityServiceInfo.getResolveInfo().loadLabel(getPackageManager())));
+
+            LinearLayout capabilitiesView = (LinearLayout) content.findViewById(R.id.capabilities);
+
+            // This capability is implicit for all services.
+            View capabilityView = inflater.inflate(
+                    com.android.internal.R.layout.app_permission_item_old, null);
+
+            ImageView imageView = (ImageView) capabilityView.findViewById(
+                    com.android.internal.R.id.perm_icon);
+            imageView.setImageDrawable(getResources().getDrawable(
+                    com.android.internal.R.drawable.ic_text_dot));
+
+            TextView labelView = (TextView) capabilityView.findViewById(
+                    com.android.internal.R.id.permission_group);
+            labelView.setText(getString(R.string.capability_title_receiveAccessibilityEvents));
+
+            TextView descriptionView = (TextView) capabilityView.findViewById(
+                    com.android.internal.R.id.permission_list);
+            descriptionView.setText(getString(R.string.capability_desc_receiveAccessibilityEvents));
+
+            List<AccessibilityServiceInfo.CapabilityInfo> capabilities =
+                    mAccessibilityServiceInfo.getCapabilityInfos();
+
+            capabilitiesView.addView(capabilityView);
+
+            // Service specific capabilities.
+            final int capabilityCount = capabilities.size();
+            for (int i = 0; i < capabilityCount; i++) {
+                AccessibilityServiceInfo.CapabilityInfo capability = capabilities.get(i);
+
+                capabilityView = inflater.inflate(
+                        com.android.internal.R.layout.app_permission_item_old, null);
+
+                imageView = (ImageView) capabilityView.findViewById(
+                        com.android.internal.R.id.perm_icon);
+                imageView.setImageDrawable(getResources().getDrawable(
+                        com.android.internal.R.drawable.ic_text_dot));
+
+                labelView = (TextView) capabilityView.findViewById(
+                        com.android.internal.R.id.permission_group);
+                labelView.setText(getString(capability.titleResId));
+
+                descriptionView = (TextView) capabilityView.findViewById(
+                        com.android.internal.R.id.permission_list);
+                descriptionView.setText(getString(capability.descResId));
+
+                capabilitiesView.addView(capabilityView);
+            }
+
+            return content;
         }
 
         @Override
@@ -823,23 +885,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 @Override
                 public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
                     if (checked) {
-                        if (!TextUtils.isEmpty(mEnableWarningMessage)) {
-                            toggleSwitch.setCheckedInternal(false);
-                            getArguments().putBoolean(EXTRA_CHECKED, false);
-                            showDialog(DIALOG_ID_ENABLE_WARNING);
-                            return true;
-                        }
-                        onPreferenceToggled(mPreferenceKey, true);
+                        toggleSwitch.setCheckedInternal(false);
+                        getArguments().putBoolean(EXTRA_CHECKED, false);
+                        showDialog(DIALOG_ID_ENABLE_WARNING);
                     } else {
-                        if (!TextUtils.isEmpty(mDisableWarningMessage)) {
-                            toggleSwitch.setCheckedInternal(true);
-                            getArguments().putBoolean(EXTRA_CHECKED, true);
-                            showDialog(DIALOG_ID_DISABLE_WARNING);
-                            return true;
-                        }
-                        onPreferenceToggled(mPreferenceKey, false);
+                        toggleSwitch.setCheckedInternal(true);
+                        getArguments().putBoolean(EXTRA_CHECKED, true);
+                        showDialog(DIALOG_ID_DISABLE_WARNING);
                     }
-                    return false;
+                    return true;
                 }
             });
         }
@@ -859,20 +913,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     setHasOptionsMenu(true);
                 }
             }
-            // Enable warning title.
-            mEnableWarningTitle = arguments.getCharSequence(
-                    AccessibilitySettings.EXTRA_ENABLE_WARNING_TITLE);
-            // Enable warning message.
-            mEnableWarningMessage = arguments.getCharSequence(
-                    AccessibilitySettings.EXTRA_ENABLE_WARNING_MESSAGE);
-            // Disable warning title.
-            mDisableWarningTitle = arguments.getString(
-                    AccessibilitySettings.EXTRA_DISABLE_WARNING_TITLE);
-            // Disable warning message.
-            mDisableWarningMessage = arguments.getString(
-                    AccessibilitySettings.EXTRA_DISABLE_WARNING_MESSAGE);
-            // Component name.
-            mComponentName = arguments.getString(EXTRA_SERVICE_COMPONENT_NAME);
+
+            mAccessibilityServiceInfo = arguments.getParcelable(EXTRA_ACCESSIBILITY_SERVICE_INFO);
+
+            ServiceInfo serviceInfo = mAccessibilityServiceInfo.getResolveInfo().serviceInfo;
+            mComponentName = new ComponentName(serviceInfo.packageName,
+                    serviceInfo.name).flattenToString();
         }
     }
 
