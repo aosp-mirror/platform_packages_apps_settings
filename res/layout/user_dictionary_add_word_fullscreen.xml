@@ -33,6 +33,7 @@
             android:layout_marginStart="8dip"
             android:layout_marginBottom="8dip"
             android:layout_marginTop="8dip"
+            android:hint="@string/user_dict_settings_add_word_hint"
             android:inputType="textNoSuggestions"
             android:imeOptions="flagNoFullscreen">
     <requestFocus />
@@ -56,6 +57,7 @@
               android:layout_marginStart="8dip"
               android:layout_marginBottom="8dip"
               android:layout_marginTop="8dip"
+              android:hint="@string/user_dict_settings_add_shortcut_hint"
               android:inputType="textNoSuggestions"
               android:imeOptions="flagNoFullscreen" />
     <TextView android:id="@+id/user_dictionary_add_locale_label"
