@@ -38,6 +38,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.RemoteException;
@@ -116,6 +117,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private int mCustomRequestCode;
     private HashMap<Integer, AppRestrictionsPreference> mCustomRequestMap =
             new HashMap<Integer,AppRestrictionsPreference>();
+
+    private List<SelectableAppInfo> mVisibleApps;
+    private List<ApplicationInfo> mUserApps;
 
     static class SelectableAppInfo {
         String packageName;
@@ -265,10 +269,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onResume() {
         super.onResume();
         mAppListChanged = false;
-        if (mFirstTime) {
-            mFirstTime = false;
-            populateApps();
-        }
+        new AppLoadingTask().execute((Void[]) null);
+
         UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
         mUserPreference.setTitle(info.name);
         Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
@@ -292,18 +294,30 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private void updateUserAppList() {
         IPackageManager ipm = IPackageManager.Stub.asInterface(
                 ServiceManager.getService("package"));
+        final int userId = mUser.getIdentifier();
+        if (!mUserManager.getUserInfo(userId).isRestricted()) {
+            Log.e(TAG, "Cannot apply application restrictions on a regular user!");
+            return;
+        }
         for (Map.Entry<String,Boolean> entry : mSelectedPackages.entrySet()) {
+            String packageName = entry.getKey();
             if (entry.getValue()) {
                 // Enable selected apps
                 try {
-                    ipm.installExistingPackageAsUser(entry.getKey(), mUser.getIdentifier());
+                    ApplicationInfo info = ipm.getApplicationInfo(packageName, 0, userId);
+                    if (info == null || info.enabled == false) {
+                        ipm.installExistingPackageAsUser(packageName, mUser.getIdentifier());
+                    }
                 } catch (RemoteException re) {
                 }
             } else {
                 // Blacklist all other apps, system or downloaded
                 try {
-                    ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
-                            PackageManager.DELETE_SYSTEM_APP);
+                    ApplicationInfo info = ipm.getApplicationInfo(packageName, 0, userId);
+                    if (info != null) {
+                        ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
+                                PackageManager.DELETE_SYSTEM_APP);
+                    }
                 } catch (RemoteException re) {
                 }
             }
@@ -331,10 +345,27 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
-    private void populateApps() {
+    private class AppLoadingTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            fetchAndMergeApps();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            populateApps();
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+    }
+
+    private void fetchAndMergeApps() {
         mAppList.setOrderingAsAdded(false);
-        List<SelectableAppInfo> visibleApps = new ArrayList<SelectableAppInfo>();
-        // TODO: Do this asynchronously since it can be a long operation
+        mVisibleApps = new ArrayList<SelectableAppInfo>();
         final Context context = getActivity();
         PackageManager pm = context.getPackageManager();
         IPackageManager ipm = AppGlobals.getPackageManager();
@@ -342,11 +373,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         // Add launchers
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
         launcherIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        addSystemApps(visibleApps, launcherIntent);
+        addSystemApps(mVisibleApps, launcherIntent);
 
         // Add widgets
         Intent widgetIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        addSystemApps(visibleApps, widgetIntent);
+        addSystemApps(mVisibleApps, widgetIntent);
 
         List<ApplicationInfo> installedApps = pm.getInstalledApplications(0);
         for (ApplicationInfo app : installedApps) {
@@ -358,20 +389,19 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 info.appName = app.loadLabel(pm);
                 info.activityName = info.appName;
                 info.icon = app.loadIcon(pm);
-                visibleApps.add(info);
+                mVisibleApps.add(info);
             }
         }
 
-        // Now check apps that are installed on target user
-        List<ApplicationInfo> userApps = null;
+        mUserApps = null;
         try {
-            userApps = ipm.getInstalledApplications(
+            mUserApps = ipm.getInstalledApplications(
                     0, mUser.getIdentifier()).getList();
         } catch (RemoteException re) {
         }
 
-        if (userApps != null) {
-            for (ApplicationInfo app : userApps) {
+        if (mUserApps != null) {
+            for (ApplicationInfo app : mUserApps) {
                 if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
                         && (app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
                     // Downloaded app
@@ -380,25 +410,30 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     info.appName = app.loadLabel(pm);
                     info.activityName = info.appName;
                     info.icon = app.loadIcon(pm);
-                    visibleApps.add(info);
+                    mVisibleApps.add(info);
                 }
             }
         }
-        Collections.sort(visibleApps, new AppLabelComparator());
+        Collections.sort(mVisibleApps, new AppLabelComparator());
 
         // Remove dupes
-        for (int i = visibleApps.size() - 1; i > 1; i--) {
-            SelectableAppInfo info = visibleApps.get(i);
+        Set<String> dedupPackageSet = new HashSet<String>();
+        for (int i = mVisibleApps.size() - 1; i >= 0; i--) {
+            SelectableAppInfo info = mVisibleApps.get(i);
             if (DEBUG) Log.i(TAG, info.toString());
-            if (info.packageName.equals(visibleApps.get(i-1).packageName)
-                    && info.activityName.equals(visibleApps.get(i-1).activityName)) {
-                visibleApps.remove(i);
+            String both = info.packageName + "+" + info.activityName;
+            if (!TextUtils.isEmpty(info.packageName)
+                    && !TextUtils.isEmpty(info.activityName)
+                    && dedupPackageSet.contains(both)) {
+                mVisibleApps.remove(i);
+            } else {
+                dedupPackageSet.add(both);
             }
         }
 
         // Establish master/slave relationship for entries that share a package name
         HashMap<String,SelectableAppInfo> packageMap = new HashMap<String,SelectableAppInfo>();
-        for (SelectableAppInfo info : visibleApps) {
+        for (SelectableAppInfo info : mVisibleApps) {
             if (packageMap.containsKey(info.packageName)) {
                 info.masterEntry = packageMap.get(info.packageName);
             } else {
@@ -406,11 +441,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             }
         }
 
+    }
+
+    private void populateApps() {
+        final Context context = getActivity();
+        PackageManager pm = context.getPackageManager();
+        IPackageManager ipm = AppGlobals.getPackageManager();
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
         int i = 0;
-        if (visibleApps.size() > 0) {
-            for (SelectableAppInfo app : visibleApps) {
+        if (mVisibleApps.size() > 0) {
+            for (SelectableAppInfo app : mVisibleApps) {
                 String packageName = app.packageName;
                 if (packageName == null) continue;
                 final boolean isSettingsApp = packageName.equals(getActivity().getPackageName());
@@ -442,13 +483,16 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     p.setImmutable(true);
                     // If the app is required and has no restrictions, skip showing it
                     if (!hasSettings && !isSettingsApp) continue;
-                } else if (!mNewUser && appInfoListHasPackage(userApps, packageName)) {
+                } else if (!mNewUser && appInfoListHasPackage(mUserApps, packageName)) {
                     p.setChecked(true);
                 }
                 if (pi.requiredAccountType != null && pi.restrictedAccountType == null) {
                     p.setChecked(false);
                     p.setImmutable(true);
                     p.setSummary(R.string.app_not_supported_in_limited);
+                }
+                if (pi.restrictedAccountType != null) {
+                    p.setSummary(R.string.app_sees_restricted_accounts);
                 }
                 if (app.masterEntry != null) {
                     p.setImmutable(true);
@@ -634,8 +678,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         RestrictionUtils.restrictionsToBundle(restrictions), mUser);
             } else if (restrictionsIntent != null) {
                 final Intent customIntent = restrictionsIntent;
-                customIntent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE,
-                        RestrictionUtils.restrictionsToBundle(restrictions));
+                if (restrictions != null) {
+                    customIntent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE,
+                            RestrictionUtils.restrictionsToBundle(restrictions));
+                }
                 Preference p = new Preference(context);
                 p.setTitle(R.string.app_restrictions_custom_label);
                 p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -732,9 +778,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.i(TAG, "Got activity resultCode=" + resultCode + ", requestCode="
-                + requestCode + ", data=" + data);
-
         AppRestrictionsPreference pref = mCustomRequestMap.get(requestCode);
         if (pref == null) {
             Log.w(TAG, "Unknown requestCode " + requestCode);
@@ -742,14 +785,18 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
 
         if (resultCode == Activity.RESULT_OK) {
+            String packageName = pref.getKey().substring(PKG_PREFIX.length());
             ArrayList<RestrictionEntry> list =
                     data.getParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS_LIST);
+            Bundle bundle = data.getBundleExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE);
             if (list != null) {
                 // If there's a valid result, persist it to the user manager.
-                String packageName = pref.getKey().substring(PKG_PREFIX.length());
                 pref.setRestrictions(list);
                 mUserManager.setApplicationRestrictions(packageName,
                         RestrictionUtils.restrictionsToBundle(list), mUser);
+            } else if (bundle != null) {
+                // If there's a valid result, persist it to the user manager.
+                mUserManager.setApplicationRestrictions(packageName, bundle, mUser);
             }
             toggleAppPanel(pref);
         }
