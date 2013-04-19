@@ -43,6 +43,8 @@ import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import android.view.KeyEvent;
 
+import java.util.Locale;
+
 /**
  * BluetoothPairingDialog asks the user to enter a PIN / Passkey / simple confirmation
  * for pairing with a remote Bluetooth device. It is an activity that appears as a dialog.
@@ -120,7 +122,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
                     Log.e(TAG, "Invalid Confirmation Passkey received, not showing any dialog");
                     return;
                 }
-                mPairingKey = String.format("%06d", passkey);
+                mPairingKey = String.format(Locale.US, "%06d", passkey);
                 createConfirmationDialog(deviceManager);
                 break;
 
