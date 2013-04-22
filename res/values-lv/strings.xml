@@ -507,8 +507,7 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Meklēt displejus"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Notiek meklēšana..."</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Tuvumā netika atrasti bezvadu displeji."</string>
-    <!-- no translation found for wifi_display_settings_empty_list_user_restricted (1920080628834632135) -->
-    <skip />
+    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Šim lietotājam nav atļauts konfigurēt bezvadu tīklus."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Pārī savienoti displeji"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Pieejamās ierīces"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Notiek savienojuma izveide."</string>
@@ -592,6 +591,8 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentificēšana neizdevās. Lūdzu, mēģiniet vēlreiz."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Tika noteikta cita WPS sesija. Lūdzu, pēc dažām minūtēm mēģiniet vēlreiz."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Tīkla SSID"</string>
+    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
+    <skip />
     <string name="wifi_security" msgid="6603611185592956936">"Drošība"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signāla stiprums"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Statuss"</string>
@@ -1246,6 +1247,10 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Vārds:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Saīsne:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Valoda:"</string>
+    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
+    <skip />
+    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
+    <skip />
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Vārda rediģēšana"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Rediģēt"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Dzēst"</string>
@@ -1286,8 +1291,7 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Fiziskās tastatūras iestatījumi"</string>
     <string name="development_settings_title" msgid="215179176067683667">"Izstrādātājiem paredzētas opcijas"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Iestatīt lietotņu izstrādes opcijas"</string>
-    <!-- no translation found for development_settings_not_available (4308569041701535607) -->
-    <skip />
+    <string name="development_settings_not_available" msgid="4308569041701535607">"Šim lietotājam nav pieejamas izstrādātāja opcijas."</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB atkļūdošana"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Atkļūdošanas režīms, kad ir pievienota kopne USB"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Atsaukt piekļuvi USB atkļūdošanai"</string>
@@ -1347,11 +1351,12 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Iestatījumi"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ieslēgta"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Izslēgta"</string>
-    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Vai izmantot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Pakalpojumā <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> var tikt apkopots viss jūsu rakstītais teksts, izņemot paroles. Tas attiecas arī uz personas datiem, piemēram, kredītkaršu numuriem. Pakalpojumā var tikt apkopoti arī dati par jūsu darbībām ar planšetdatoru."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Pakalpojumā <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> var tikt apkopots viss jūsu rakstītais teksts, izņemot paroles. Tas attiecas arī uz personas datiem, piemēram, kredītkaršu numuriem. Pakalpojumā var tikt apkopoti arī dati par jūsu darbībām ar tālruni."</string>
-    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Vai apturēt pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> darbību?"</string>
-    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Pieskaroties pogai Labi, tiks apturēta pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> darbība."</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"Vai izmantot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"Pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> nepieciešams:"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Novērot jūsu darbības."</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Saņemt paziņojumus, kad mijiedarbojaties ar lietotni."</string>
+    <string name="disable_service_title" msgid="9190688088562277761">"Vai apturēt pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> darbību?"</string>
+    <string name="disable_service_message" msgid="2012273739481042318">"Pieskaroties pogai Labi, tiks apturēta pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> darbība."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nav instalēts neviens pakalpojums."</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Vai jums ir nepieciešams ekrāna lasītājs?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Lietotne TalkBack par ekrānā notiekošo informē balss komentāru veidā, lai palīdzētu neredzīgiem un vājredzīgiem lietotājiem. Vai vēlaties to instalēt bez maksas no vietnes Android Market?"</string>
@@ -1819,13 +1824,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Īstenots"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Lietotāji"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Informācija par jums"</string>
-    <string name="user_trusted_list_title" msgid="8841215084164687183">"Uzticami lietotāji"</string>
+    <string name="user_trusted_list_title" msgid="8914231890576711934">"Lietotāji"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Ierobežoti lietotāji"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pievienot lietotāju"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Piev. ierobež. liet."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Lietotāji ar ierobežotu piekļuvi var piekļūt tikai jūsu atlasītajām lietotnēm un saturam."</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Piev. uztic. lietot."</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Uzticamajiem lietotājiem nav ierobežojumu."</string>
+    <string name="user_add_trusted" msgid="7920950049308074671">"Pievienot standarta lietotāju"</string>
+    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Standarta lietotājiem ir savas lietotnes un saturs."</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktīvs"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Neaktīvs"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nav iestatīts"</string>
@@ -1842,8 +1847,7 @@
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Vēlāk"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Lietotājus var pārvaldīt tikai planšetdatora īpašnieks."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Lietotājus var pārvaldīt tikai tālruņa īpašnieks."</string>
-    <!-- no translation found for user_cannot_add_accounts_message (1610930617977321638) -->
-    <skip />
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Ierobežoti lietotāji nevar pievienot kontus."</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Dzēst šajā ierīcē: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Jauns lietotājs"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vai dzēst jūsu kontu?"</string>
@@ -1872,7 +1876,8 @@
     <string name="user_rename" msgid="8523499513614655279">"PĀRDĒVĒT"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Iestatīt lietotņu ierobežojumus"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Pārvalda lietotne <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Ierobežotiem lietotājiem netiek atbalstīta šī lietotne."</string>
+    <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
     <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi un mobilais tīkls"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Atļaut Wi‑Fi un mobilā tīkla iestatījumu pārveidošanu"</string>
