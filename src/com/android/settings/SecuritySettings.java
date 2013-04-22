@@ -452,7 +452,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         if (mResetCredentials != null) {
-            mResetCredentials.setEnabled(!mKeyStore.isUnlocked());
+            mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
     }
 
