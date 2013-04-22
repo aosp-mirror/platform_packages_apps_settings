@@ -507,8 +507,7 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Pesquisar ecrãs"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"A pesquisar..."</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Não foram encont. ecrãs sem fios próx."</string>
-    <!-- no translation found for wifi_display_settings_empty_list_user_restricted (1920080628834632135) -->
-    <skip />
+    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Este utilizador não tem permissão para configurar redes sem fios."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Ecrãs sincronizados"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Dispositivos disponíveis"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"A ligar"</string>
@@ -554,7 +553,7 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Procura de redes sempre disponível"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Permitir que o serviço de localização da Google e outras aplicações procurem redes, mesmo quando a ligação Wi-Fi está desativada"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para melhorar a precisão de localização e para outros fins, a Google e outras aplicações poderão procurar redes nas proximidades, mesmo com o Wi-Fi desligado. Se não pretender que isto aconteça, aceda a Avançadas &gt; Procura sempre disponível."</string>
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para melhorar a precisão de localização e para outros fins, a Google e outras aplicações poderão procurar redes nas proximidades, mesmo com o Wi-Fi desligado. Se não pretender que isto aconteça, aceda a Avançadas &gt; Procura de redes sempre disponível."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"As aplicações poderão procurar redes nas proximidades, mesmo com o Wi-Fi desligado. Se não pretender que isto aconteça, aceda a Avançadas &gt; Procura sempre disponível."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Não mostrar de novo"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Manter Wi-Fi ligada durante suspensão"</string>
@@ -592,6 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Falha na autenticação. Tente novamente."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Foi detetada outra sessão do WPS. Tente novamente dentro de alguns minutos."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"SSID da rede"</string>
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Introduza o SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Segurança"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Intensidade do sinal"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Estado"</string>
@@ -674,7 +674,7 @@
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"A desativar zona Wi-Fi..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Hotspot portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activo"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Erro da zona Wi-Fi portátil"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar zona Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar ponto de acesso Wi-Fi"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Zona Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Visor"</string>
@@ -1080,7 +1080,7 @@
     <string name="uninstall_text" msgid="3644892466144802466">"Desinstalar"</string>
     <string name="uninstall_all_users_text" msgid="851857393177950340">"Desinstalar para todos os utilizadores"</string>
     <string name="install_text" msgid="884360662922471113">"Instalar"</string>
-    <string name="disable_text" msgid="6544054052049395202">"Desactivar"</string>
+    <string name="disable_text" msgid="6544054052049395202">"Desativar"</string>
     <string name="enable_text" msgid="9217362512327828987">"Ativar"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Limpar dados"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Desinstalar actualizações"</string>
@@ -1104,7 +1104,7 @@
     <string name="filter" msgid="2018011724373033887">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Escolher opções de filtro"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Todas"</string>
-    <string name="filter_apps_disabled" msgid="5364447573326472890">"Desativado"</string>
+    <string name="filter_apps_disabled" msgid="5364447573326472890">"Desativadas"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Transferidas"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Em execução"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Armazenamento USB"</string>
@@ -1246,6 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Palavra:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Atalho:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Idioma:"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Escreva uma palavra"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Atalho opcional"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Editar palavra"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Editar"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Eliminar"</string>
@@ -1286,8 +1288,7 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Definições do teclado físico"</string>
     <string name="development_settings_title" msgid="215179176067683667">"Opções de programador"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Definir opções de desenvolvimento da aplicação"</string>
-    <!-- no translation found for development_settings_not_available (4308569041701535607) -->
-    <skip />
+    <string name="development_settings_not_available" msgid="4308569041701535607">"As opções de programador não estão disponíveis para este utilizador"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depuração USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Modo de depuração com USB ligado"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Revogar autorizações de depuração USB"</string>
@@ -1349,11 +1350,12 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configurações"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ativado"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Desativado"</string>
-    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Utilizar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"O <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> pode recolher todo o texto que escrever, exceto palavras-passe. Isto inclui dados pessoais, como números de cartão de crédito. Também pode recolher dados sobre as suas interações com o tablet."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"O <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> pode recolher todo o texto que escrever, exceto palavras-passe. Isto inclui dados pessoais, como números de cartão de crédito. Pode também recolher dados sobre as suas interações com o telemóvel."</string>
-    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Parar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Ao tocar em OK, o <xliff:g id="SERVICE">%1$s</xliff:g> será desativado."</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"Utilizar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necessita de:"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observar as suas ações"</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Receber notificações quando estiver a interagir com uma aplicação."</string>
+    <string name="disable_service_title" msgid="9190688088562277761">"Parar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="disable_service_message" msgid="2012273739481042318">"Tocar em OK irá parar <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nenhum serviço instalado"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Necessita de um leitor de ecrã?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"O TalkBack fornece respostas faladas para ajudar os utilizadores invisuais e com deficiência visual. Pretende instalá-lo gratuitamente a partir do Android Market?"</string>
@@ -1369,7 +1371,7 @@
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que foi desligado"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"A carregar"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Ecrã activo"</string>
-    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS activado"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS ativado"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"Wi‑Fi"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Despertar"</string>
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Sinal da rede móvel"</string>
@@ -1467,7 +1469,7 @@
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Este idioma requer uma ligação de rede ativa para uma saída de síntese de voz."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Motores"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Definições de <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
-    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> está activado"</string>
+    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> está ativado"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> está desactivado"</string>
     <string name="tts_engine_settings_section" msgid="2346105138448751893">"Definições do motor"</string>
     <string name="tts_engine_settings_title" msgid="3499112142425680334">"Definições do <xliff:g id="TTS_ENGINE_NAME">%s</xliff:g>"</string>
@@ -1523,7 +1525,7 @@
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Palavra-passe incorrecta. Tem mais <xliff:g id="NUMBER">%1$d</xliff:g> tentativas antes de o armazenamento de credenciais ser apagado."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Armaz. credenciais apagado."</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"Não foi possível apagar o armazenamento de credenciais."</string>
-    <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais está activado."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais está ativado."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Para poder utilizar o armazenamento de credenciais, é necessário definir primeiro um PIN ou palavra-passe do ecrã de bloqueio."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir o comportamento quando é efetuada uma chamada de emergência"</string>
@@ -1547,7 +1549,7 @@
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Deixar de fazer cópia de segurança de palavras-passe de Wi-Fi, marcadores, outras definições e dados da aplicação, bem como apagar todas as cópias nos servidores da Google?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Definições de administração do dispositivo"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrador do dispositivo"</string>
-    <string name="remove_device_admin" msgid="3596845261596451437">"Desactivar"</string>
+    <string name="remove_device_admin" msgid="3596845261596451437">"Desativar"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administradores do dispositivo"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Não existem administradores do dispositivo disponíveis"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Ativar administrador do dispositivo?"</string>
@@ -1658,13 +1660,13 @@
     <string name="debug_hw_drawing_category" msgid="6220174216912308658">"Conversão acelerada de hardware"</string>
     <string name="debug_monitoring_category" msgid="7640508148375798343">"Monitorização"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Modo rigoroso ativado"</string>
-    <string name="strict_mode_summary" msgid="142834318897332338">"Piscar ecrã qd aplic. fazem oper. prolong. no tópico princ."</string>
+    <string name="strict_mode_summary" msgid="142834318897332338">"Piscar ecrã se aplic. fazem oper. prolong. no tópico princ."</string>
     <string name="pointer_location" msgid="6084434787496938001">"Localização do ponteiro"</string>
-    <string name="pointer_location_summary" msgid="840819275172753713">"Sobrep. de ecrã que mostra a dados atuais de toque"</string>
+    <string name="pointer_location_summary" msgid="840819275172753713">"Apresentar dados atuais de toque"</string>
     <string name="show_touches" msgid="1356420386500834339">"Apresentar toques"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Apresentar feedback visual para toques"</string>
-    <string name="show_screen_updates" msgid="5470814345876056420">"Most. atualiz. superfície"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Destacar todas as superf. janelas quando atualizam"</string>
+    <string name="show_screen_updates" msgid="5470814345876056420">"Atualiz. de superfície"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Destacar a superfície da janela ao atualizar"</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"Most.atualiz. visual. GPU"</string>
     <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"Dest. visualiz. em janelas quando desenh. c/ GPU"</string>
     <string name="show_hw_layers_updates" msgid="5645728765605699821">"Mostrar atual. cam. hard."</string>
@@ -1821,13 +1823,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Forçador"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Utilizadores"</string>
     <string name="user_you_section" msgid="6247838798859425408">"O utilizador"</string>
-    <string name="user_trusted_list_title" msgid="8841215084164687183">"Utilizadores de confiança"</string>
+    <string name="user_trusted_list_title" msgid="8914231890576711934">"Utilizadores"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Utilizadores limitados"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Adicionar utilizador"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Adic. utiliz. limit."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Os utilizadores limitados apenas podem aceder às aplicações e conteúdos selecionados"</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Adic. utiliz. fided."</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Os utilizadores fidedignos não têm restrições"</string>
+    <string name="user_add_trusted" msgid="7920950049308074671">"Adicionar utilizador padrão"</string>
+    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Os utilizadores padrão tem as suas próprias aplicações e conteúdos"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Ativo"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Não ativo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Não configurado"</string>
@@ -1844,8 +1846,7 @@
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Agora não"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"A gestão dos utilizadores só pode ser feita pelo proprietário do tablet."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"A gestão dos utilizadores só pode ser feita pelo proprietário do telemóvel."</string>
-    <!-- no translation found for user_cannot_add_accounts_message (1610930617977321638) -->
-    <skip />
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Utilizadores limitados não podem adicionar contas"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Eliminar <xliff:g id="USER_NAME">%1$s</xliff:g> deste dispositivo"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novo utilizador"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Eliminar-se a si próprio?"</string>
@@ -1874,8 +1875,7 @@
     <string name="user_rename" msgid="8523499513614655279">"MUDAR NOME"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Definir limites da aplicação"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Controlado por <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
-    <skip />
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Esta aplicação não é suportada em utilizadores limitados"</string>
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi-Fi e Rede de Telemóvel"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Permitir a modificação de definições de Wi-Fi e de Rede de Telemóvel"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>

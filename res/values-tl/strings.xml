@@ -289,7 +289,7 @@
     <string name="zone_auto" msgid="334783869352026648">"Awtomatikong time zone"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Gamitin ang time zone na ibinigay ng network"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Gamitin ang time zone na ibinigay ng network"</string>
-    <string name="date_time_24hour" msgid="1193032284921000063">"Gumamit ng format na 24-oras"</string>
+    <string name="date_time_24hour" msgid="1193032284921000063">"Gamitin ang format na 24-oras"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"Magtakda ng oras"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Pumili ng time zone"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Magtakda ng petsa"</string>
@@ -507,8 +507,7 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Maghanap ng display"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Naghahanap…"</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Walang nakita malapit wireless display."</string>
-    <!-- no translation found for wifi_display_settings_empty_list_user_restricted (1920080628834632135) -->
-    <skip />
+    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Hindi pinapayagang mag-configure ng mga wireless network ang user na ito."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Mga nakapares na display"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Mga available na device"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Kumokonekta"</string>
@@ -592,6 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Pagkabigo sa pagpapatotoo. Pakisubukang muli."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Natunton ang isa pang sesyon ng WPS. Pakisubukang muli sa loob ng ilang minuto."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Network SSID"</string>
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Ilagay ang SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Seguridad"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Lakas ng signal"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Katayuan"</string>
@@ -989,7 +989,7 @@
     <string name="use_location_title" msgid="5206937465504979977">"Lokasyon &amp; paghahanap sa Google"</string>
     <string name="use_location_summary" msgid="3978805802386162520">"Hayaan ang Google na gamitin ang iyong lokasyon upang mapabuti ang mga resulta ng paghahanap at ang iba pang mga serbisyo"</string>
     <string name="location_access_title" msgid="7064108942964081243">"Access sa aking lokasyon"</string>
-    <string name="location_access_summary" msgid="69031404093194341">"Hayaang gamitin ng apps na humiling ng pahintulot mo ang impormasyon ng iyong lokasyon"</string>
+    <string name="location_access_summary" msgid="69031404093194341">"Hayaan ang apps na humiling ng iyong pahintulot na gamitin ang impormasyon ng iyong lokasyon"</string>
     <string name="location_sources_heading" msgid="1278732419851088319">"Mga pinagmulan ng lokasyon"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Tungkol sa tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Tungkol sa telepono"</string>
@@ -1112,7 +1112,7 @@
     <string name="disabled" msgid="9206776641295849915">"Hindi Pinagana"</string>
     <string name="not_installed" msgid="1475144352069281880">"Hindi naka-install"</string>
     <string name="no_applications" msgid="7336588977497084921">"Walang apps."</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Panloob imbakan"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Panloob na storage"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Imbakan na USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD card imbakan"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Muling kino-compute ang laki…"</string>
@@ -1246,6 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Salita:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Shortcut:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Wika:"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Mag-type ng salita"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Opsyonal na shortcut"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"I-edit ang salita"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"I-edit"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Tanggalin"</string>
@@ -1286,8 +1288,7 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Mga setting ng pisikal na keyboard"</string>
     <string name="development_settings_title" msgid="215179176067683667">"Mga pagpipilian ng nag-develop"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Magtakda ng mga pagpipilian para sa pagbuo ng app"</string>
-    <!-- no translation found for development_settings_not_available (4308569041701535607) -->
-    <skip />
+    <string name="development_settings_not_available" msgid="4308569041701535607">"Hindi available ang mga pagpipilian ng developer para sa user na ito"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Debugging ng USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode kapag nakakonekta ang USB"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Bawiin ang mga pahintulot sa pag-debug ng USB"</string>
@@ -1349,11 +1350,12 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Mga Setting"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Naka-on"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Naka-off"</string>
-    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Gamitin ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Maaaring kolektahin ng <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> ang lahat ng tekstong iyong tina-type, maliban sa mga password. Kabilang dito ang personal na data tulad ng mga credit card number. Maaari rin itong mangolekta ng data tungkol sa iyong mga pakikipag-ugnayan gamit ang tablet."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Maaaring kolektahin ng <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> ang lahat ng tekstong iyong tina-type, maliban sa mga password. Kabilang dito ang personal na data gaya ng mga credit card number. Maaari rin itong mangolekta ng data tungkol sa iyong mga pakikipag-ugnayan gamit ang telepono."</string>
-    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Ihinto ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Ang pagpindot sa OK ay magpapahinto sa <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"Gumamit ng <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"Kailangan ng <xliff:g id="SERVICE">%1$s</xliff:g> na:"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Obserbahan ang iyong mga pagkilos"</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Makatanggap ng mga notification kapag nakikipag-ugnayan ka sa isang app."</string>
+    <string name="disable_service_title" msgid="9190688088562277761">"Ihinto ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="disable_service_message" msgid="2012273739481042318">"Kapag pinindot ang OK, hihinto ang <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Walang mga serbisyong naka-install"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Kailangan ng screen reader?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Nagbibigay ang TalkBack ng pasalitang feedback upang matulungan ang mga user na bulag at may mahinang paningin. Nais mo ba itong i-install nang libre mula sa Android Market?"</string>
@@ -1449,7 +1451,7 @@
     <string name="tts_default_synth_title" msgid="4755558388333117572">"Default na engine"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"Itinatakda ang speech synthesis engine upang magamit para sa tekstong sinasabi"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"Rate ng pagsasalita"</string>
-    <string name="tts_default_rate_summary" msgid="4061815292287182801">"Bilis kung saan sinasabit ang teksto"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"Bilis ng pagsambit sa teksto"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Pitch"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Naaapektuhan ang tono ng tekstong sinasabi"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Wika"</string>
@@ -1821,13 +1823,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Nagpapatupad"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Mga User"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Ikaw"</string>
-    <string name="user_trusted_list_title" msgid="8841215084164687183">"Mga pinagkakatiwalaang user"</string>
+    <string name="user_trusted_list_title" msgid="8914231890576711934">"Mga User"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Mga limitadong user"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Idagdag ang user"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Add limited user"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Ang apps at nilalaman lang na iyong pipiliin ang maa-access ng mga limitadong user"</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Add trusted user"</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Walang paghihigpit sa mga pinagkakatiwalaang user"</string>
+    <string name="user_add_trusted" msgid="7920950049308074671">"Magdagdag ng karaniwang user"</string>
+    <string name="user_add_trusted_summary" msgid="9110852056135085345">"May sariling apps at nilalaman ang mga karaniwang user"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktibo"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Hindi aktibo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Hindi naka-set up"</string>
@@ -1844,8 +1846,7 @@
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Huwag ngayon"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Ang may-ari lang ng tablet ang maaaring mamahala ng mga user."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Ang may-ari lang ng telepono ang maaaring mamahala ng mga user."</string>
-    <!-- no translation found for user_cannot_add_accounts_message (1610930617977321638) -->
-    <skip />
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Hindi makakapagdagdag ng mga account ang mga limitadong user"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Tanggal <xliff:g id="USER_NAME">%1$s</xliff:g> dito device"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Bagong user"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Tanggalin ang iyong sarili?"</string>
@@ -1874,8 +1875,7 @@
     <string name="user_rename" msgid="8523499513614655279">"I-RENAME"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Magtakda ng limit ng application"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Kinokontrol ng <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
-    <skip />
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Hindi sinusuportahan ang app na ito sa mga limitadong user"</string>
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi at Mobile"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Payagan ang pagbago sa mga setting ng Wi‑Fi at Mobile"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>

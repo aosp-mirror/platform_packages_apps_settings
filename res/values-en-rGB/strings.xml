@@ -268,7 +268,7 @@
     <string name="airplane_mode" msgid="8837269988154128601">"Aeroplane mode"</string>
     <string name="radio_controls_title" msgid="6889937359495515769">"More…"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Wireless &amp; networks"</string>
-    <string name="radio_controls_summary" msgid="1838624369870907268">"Manage Wi‑Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs"</string>
+    <string name="radio_controls_summary" msgid="1838624369870907268">"Manage Wi‑Fi, Bluetooth, aeroplane mode, mobile networks, &amp; VPNs"</string>
     <string name="roaming" msgid="3596055926335478572">"Data roaming"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Connect to data services when roaming"</string>
     <string name="roaming_disable" msgid="1295279574370898378">"Connect to data services when roaming"</string>
@@ -591,6 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Authentication failure. Please try again."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Another WPS session was detected. Please try again in a few minutes."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Network SSID"</string>
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Enter the SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Security"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signal strength"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Status"</string>
@@ -1245,6 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Word:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Shortcut:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Language:"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Type a word"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Optional shortcut"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Edit word"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Edit"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Delete"</string>
@@ -1347,11 +1350,12 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Settings"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"On"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Off"</string>
-    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Use <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> can collect all of the text that you type, except passwords. This includes personal data, such as credit card numbers. It can also collect data about your interactions with the tablet."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> can collect all of the text that you type, except passwords. This includes personal data, such as credit card numbers. It can also collect data about your interactions with the phone."</string>
-    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Stop <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Touching OK will stop <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"Use <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> needs to:"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observe your actions"</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Receive notifications when you\'re interacting with an app."</string>
+    <string name="disable_service_title" msgid="9190688088562277761">"Stop<xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="disable_service_message" msgid="2012273739481042318">"Touching OK will stop <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"No services installed"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Need a screen reader?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack provides spoken feedback to help blind and low-vision users. Do you want to install it for free from Android Market?"</string>
@@ -1677,7 +1681,7 @@
     <string name="show_cpu_usage" msgid="2389212910758076024">"Show CPU usage"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Screen overlay showing current CPU usage"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Force GPU rendering"</string>
-    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Force use of GPU for 2d drawing"</string>
+    <string name="force_hw_ui_summary" msgid="5535991166074861515">"Force use of GPU for 2D drawing"</string>
     <string name="force_msaa" msgid="7920323238677284387">"Force 4x MSAA"</string>
     <string name="force_msaa_summary" msgid="9123553203895817537">"Enable 4x MSAA in OpenGL ES 2.0 apps"</string>
     <string name="show_non_rect_clip" msgid="505954950474595172">"Debug non-rectangular clip operations"</string>
@@ -1819,13 +1823,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Enforcing"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Users"</string>
     <string name="user_you_section" msgid="6247838798859425408">"You"</string>
-    <string name="user_trusted_list_title" msgid="8841215084164687183">"Trusted users"</string>
+    <string name="user_trusted_list_title" msgid="8914231890576711934">"Users"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Limited users"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Add user"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Add limited user"</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Limited users can only access the apps and content that you select"</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Add trusted user"</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Trusted users have no restrictions"</string>
+    <string name="user_add_trusted" msgid="7920950049308074671">"Add standard user"</string>
+    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Standard users have their own apps and content"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Active"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Not active"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Not set up"</string>
