@@ -257,10 +257,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
-        boolean isSideloadingAllowed =
-                !um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
         // Side loading of apps.
-        mToggleAppInstallation.setEnabled(isSideloadingAllowed);
+        mToggleAppInstallation.setEnabled(mIsPrimary);
 
         // Package verification, only visible to primary user and if enabled
         mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);

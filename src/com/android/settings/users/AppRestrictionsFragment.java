@@ -74,6 +74,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListPopupWindow;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -104,7 +105,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private UserManager mUserManager;
     private UserHandle mUser;
 
-    private Preference mUserPreference;
     private PreferenceGroup mAppList;
 
     private static final int MAX_APP_RESTRICTIONS = 100;
@@ -125,6 +125,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private int mCustomRequestCode;
     private HashMap<Integer, AppRestrictionsPreference> mCustomRequestMap =
             new HashMap<Integer,AppRestrictionsPreference>();
+    private View mHeaderView;
+    private ImageView mUserIconView;
+    private TextView mUserNameView;
 
     private List<SelectableAppInfo> mVisibleApps;
     private List<ApplicationInfo> mUserApps;
@@ -262,11 +265,22 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getPreferenceScreen();
-        mUserPreference = findPreference(KEY_USER_INFO);
-
-        mUserPreference.setOnPreferenceClickListener(this);
-
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        if (mHeaderView == null) {
+            mHeaderView = LayoutInflater.from(getActivity()).inflate(
+                    R.layout.user_info_header, null);
+            ((ViewGroup) getListView().getParent()).addView(mHeaderView, 0);
+            mHeaderView.setOnClickListener(this);
+            mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
+            mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
+            getListView().setFastScrollEnabled(true);
+        }
+        // This is going to bind the preferences.
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -282,12 +296,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         new AppLoadingTask().execute((Void[]) null);
 
         UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
-        mUserPreference.setTitle(info.name);
         Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
         CircleFramedDrawable circularIcon =
                 CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
-        mUserPreference.setIcon(circularIcon);
-        mUserPreference.setTitle(info.name);
+        ((TextView) mHeaderView.findViewById(android.R.id.title)).setText(info.name);
+        ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(circularIcon);
     }
 
     public void onPause() {
@@ -335,6 +348,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     }
 
     private void addSystemApps(List<SelectableAppInfo> visibleApps, Intent intent) {
+        if (getActivity() == null) return;
         final PackageManager pm = getActivity().getPackageManager();
         List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent, 0);
         for (ResolveInfo app : launchableApps) {
@@ -377,6 +391,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mAppList.setOrderingAsAdded(false);
         mVisibleApps = new ArrayList<SelectableAppInfo>();
         final Context context = getActivity();
+        if (context == null) return;
         PackageManager pm = context.getPackageManager();
         IPackageManager ipm = AppGlobals.getPackageManager();
 
@@ -450,13 +465,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 packageMap.put(info.packageName, info);
             }
         }
-
     }
 
     private void populateApps() {
         final Context context = getActivity();
+        if (context == null) return;
         PackageManager pm = context.getPackageManager();
         IPackageManager ipm = AppGlobals.getPackageManager();
+        mAppList.removeAll();
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
         int i = 0;
@@ -464,14 +480,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             for (SelectableAppInfo app : mVisibleApps) {
                 String packageName = app.packageName;
                 if (packageName == null) continue;
-                final boolean isSettingsApp = packageName.equals(getActivity().getPackageName());
+                final boolean isSettingsApp = packageName.equals(context.getPackageName());
                 AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
                 final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
                 p.setIcon(app.icon);
                 p.setChecked(false);
                 p.setTitle(app.activityName);
                 if (app.masterEntry != null) {
-                    p.setSummary(getActivity().getString(R.string.user_restrictions_controlled_by,
+                    p.setSummary(context.getString(R.string.user_restrictions_controlled_by,
                             app.masterEntry.activityName));
                 }
                 p.setKey(PKG_PREFIX + packageName);
@@ -563,7 +579,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public void onClick(View v) {
-        if (v.getTag() instanceof AppRestrictionsPreference) {
+        if (v == mHeaderView) {
+            showDialog(DIALOG_ID_EDIT_USER_INFO);
+        } else if (v.getTag() instanceof AppRestrictionsPreference) {
             AppRestrictionsPreference pref = (AppRestrictionsPreference) v.getTag();
             if (v.getId() == R.id.app_restrictions_settings) {
                 toggleAppPanel(pref);
@@ -623,12 +641,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         break;
                     }
                 }
-            }
-        } else if (preference == mUserPreference) {
-            String userName = ((CharSequence) newValue).toString();
-            if (!TextUtils.isEmpty(userName)) {
-                mUserManager.setUserName(mUser.getIdentifier(), userName);
-                mUserPreference.setTitle(userName);
             }
         }
         return true;
@@ -840,8 +852,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 mAppListChanged = true;
             }
             return true;
-        } else if (preference == mUserPreference) {
-            showDialog(DIALOG_ID_EDIT_USER_INFO);
         }
         return false;
     }
@@ -862,7 +872,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             userNameView.setText(info.name);
 
             final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
-            userPhotoView.setImageDrawable(mUserPreference.getIcon());
+            userPhotoView.setImageDrawable(mUserIconView.getDrawable());
 
             mEditUserPhotoController = new EditUserPhotoController(this, userPhotoView);
 
@@ -878,10 +888,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             // Update the name if changed.
                             CharSequence userName = userNameView.getText();
                             if (!TextUtils.isEmpty(userName)) {
-                                CharSequence oldUserName = mUserPreference.getTitle();
+                                CharSequence oldUserName = mUserNameView.getText();
                                 if (oldUserName == null
                                         || !userName.toString().equals(oldUserName.toString())) {
-                                    mUserPreference.setTitle(userName);
+                                    ((TextView) mHeaderView.findViewById(android.R.id.title))
+                                            .setText(userName.toString());
                                     mUserManager.setUserName(mUser.getIdentifier(),
                                             userName.toString());
                                 }
@@ -889,8 +900,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             // Update the photo if changed.
                             Drawable userPhoto = mEditUserPhotoController.getNewUserPhotoDrawable();
                             if (userPhoto != null
-                                    && !userPhoto.equals(mUserPreference.getIcon())) {
-                                mUserPreference.setIcon(userPhoto);
+                                    && !userPhoto.equals(mUserIconView.getDrawable())) {
+                                mUserIconView.setImageDrawable(userPhoto);
                                 new AsyncTask<Void, Void, Void>() {
                                     @Override
                                     protected Void doInBackground(Void... params) {
