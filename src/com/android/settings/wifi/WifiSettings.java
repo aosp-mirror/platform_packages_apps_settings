@@ -716,7 +716,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (getActivity() == null) return;
 
         if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI)) {
-            addMessagePreference(R.string.wifi_display_settings_empty_list_user_restricted);
+            addMessagePreference(R.string.wifi_empty_list_user_restricted);
             return;
         }
         final int wifiState = mWifiManager.getWifiState();
