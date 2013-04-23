@@ -346,6 +346,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Global gesture.
         mGlobalGesturePreferenceScreen =
                 (PreferenceScreen) findPreference(ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN);
+        final int longPressOnPowerBehavior = getActivity().getResources().getInteger(
+                com.android.internal.R.integer.config_longPressOnPowerBehavior);
+        final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1;
+        if (!KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
+                || longPressOnPowerBehavior != LONG_PRESS_POWER_GLOBAL_ACTIONS) {
+            // Remove accessibility shortcut if power key is not present
+            // nor long press power does not show global actions menu.
+            mSystemsCategory.removePreference(mGlobalGesturePreferenceScreen);
+        }
     }
 
     private void updateAllPreferences() {
