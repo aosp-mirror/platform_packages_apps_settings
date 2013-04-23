@@ -45,6 +45,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -305,7 +306,9 @@ public class UserSettings extends SettingsPreferenceFragment
         int userId = newUserInfo.id;
         UserHandle user = new UserHandle(userId);
         mUserManager.setUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, true, user);
-
+        mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, user);
+        Secure.putStringForUser(getContentResolver(),
+                Secure.LOCATION_PROVIDERS_ALLOWED, "", userId);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 UserSettings.USER_DRAWABLES[
                         userId % UserSettings.USER_DRAWABLES.length]);
