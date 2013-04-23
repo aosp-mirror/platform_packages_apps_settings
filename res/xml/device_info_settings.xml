@@ -89,8 +89,11 @@
         </PreferenceScreen>
         -->
 
-        <com.android.settings.RegulatoryInfoPreference android:key="regulatory_info"
-                android:title="@string/regulatory_information" />
+        <PreferenceScreen
+                android:key="regulatory_info"
+                android:title="@string/regulatory_information">
+            <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
+        </PreferenceScreen>
 
         <!-- Device hardware model -->
         <Preference android:key="device_model" 

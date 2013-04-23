@@ -1579,6 +1579,17 @@
                        android:resource="@id/security_settings" />
         </activity>
 
+        <!-- Show regulatory info (from settings item or dialing "*#07#") -->
+        <activity android:name="RegulatoryInfoDisplayActivity"
+                  android:label="@string/regulatory_information"
+                  android:taskAffinity=""
+                  android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.settings.SHOW_REGULATORY_INFO" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
