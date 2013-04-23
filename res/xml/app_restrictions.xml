@@ -18,9 +18,8 @@
         android:title="@string/application_restrictions"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <com.android.settings.SelectableEditTextPreference
-            android:key="user_info"
-            android:order="0"
-            android:widgetLayout="@layout/preference_rename_widget" />
+    <Preference
+        android:key="user_info"
+        android:order="0"/>
 
 </PreferenceScreen>
