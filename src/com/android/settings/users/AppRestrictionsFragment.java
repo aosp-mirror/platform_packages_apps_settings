@@ -17,10 +17,14 @@
 package com.android.settings.users;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.Dialog;
+import android.app.Fragment;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.RestrictionEntry;
 import android.content.pm.ApplicationInfo;
@@ -30,48 +34,52 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.graphics.BitmapFactory;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.SwitchPreference;
-import android.text.InputType;
+import android.provider.ContactsContract.DisplayPhoto;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListPopupWindow;
 import android.widget.Switch;
 
 import com.android.settings.R;
-import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -80,8 +88,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import libcore.util.CollectionUtils;
 
 public class AppRestrictionsFragment extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener, OnClickListener, OnPreferenceClickListener {
@@ -93,10 +99,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private static final String PKG_PREFIX = "pkg_";
     private static final String KEY_USER_INFO = "user_info";
 
+    private static final int DIALOG_ID_EDIT_USER_INFO = 1;
+
     private UserManager mUserManager;
     private UserHandle mUser;
 
-    private SelectableEditTextPreference mUserPreference;
+    private Preference mUserPreference;
     private PreferenceGroup mAppList;
 
     private static final int MAX_APP_RESTRICTIONS = 100;
@@ -120,6 +128,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private List<SelectableAppInfo> mVisibleApps;
     private List<ApplicationInfo> mUserApps;
+
+    private Dialog mEditUserInfoDialog;
+
+    private EditUserPhotoController mEditUserPhotoController;
 
     static class SelectableAppInfo {
         String packageName;
@@ -250,12 +262,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getPreferenceScreen();
-        mUserPreference = (SelectableEditTextPreference) findPreference(KEY_USER_INFO);
-        mUserPreference.setOnPreferenceChangeListener(this);
-        mUserPreference.getEditText().setInputType(
-                InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-        mUserPreference.setInitialSelectionMode(
-                SelectableEditTextPreference.SELECTION_SELECT_ALL);
+        mUserPreference = findPreference(KEY_USER_INFO);
+
+        mUserPreference.setOnPreferenceClickListener(this);
+
         setHasOptionsMenu(true);
     }
 
@@ -277,7 +287,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         CircleFramedDrawable circularIcon =
                 CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
         mUserPreference.setIcon(circularIcon);
-        mUserPreference.setText(info.name);
+        mUserPreference.setTitle(info.name);
     }
 
     public void onPause() {
@@ -778,6 +788,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
+                && mEditUserPhotoController.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
         AppRestrictionsPreference pref = mCustomRequestMap.get(requestCode);
         if (pref == null) {
             Log.w(TAG, "Unknown requestCode " + requestCode);
@@ -825,7 +840,297 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 mAppListChanged = true;
             }
             return true;
+        } else if (preference == mUserPreference) {
+            showDialog(DIALOG_ID_EDIT_USER_INFO);
         }
         return false;
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        if (dialogId == DIALOG_ID_EDIT_USER_INFO) {
+            if (mEditUserInfoDialog != null) {
+                return mEditUserInfoDialog;
+            }
+
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View content = inflater.inflate(R.layout.edit_user_info_dialog_content, null);
+
+            UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
+
+            final EditText userNameView = (EditText) content.findViewById(R.id.user_name);
+            userNameView.setText(info.name);
+
+            final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
+            userPhotoView.setImageDrawable(mUserPreference.getIcon());
+
+            mEditUserPhotoController = new EditUserPhotoController(this, userPhotoView);
+
+            mEditUserInfoDialog = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.user_info_settings_title)
+                .setIconAttribute(R.drawable.ic_settings_multiuser)
+                .setView(content)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == DialogInterface.BUTTON_POSITIVE) {
+                            // Update the name if changed.
+                            CharSequence userName = userNameView.getText();
+                            if (!TextUtils.isEmpty(userName)) {
+                                CharSequence oldUserName = mUserPreference.getTitle();
+                                if (oldUserName == null
+                                        || !userName.toString().equals(oldUserName.toString())) {
+                                    mUserPreference.setTitle(userName);
+                                    mUserManager.setUserName(mUser.getIdentifier(),
+                                            userName.toString());
+                                }
+                            }
+                            // Update the photo if changed.
+                            Drawable userPhoto = mEditUserPhotoController.getNewUserPhotoDrawable();
+                            if (userPhoto != null
+                                    && !userPhoto.equals(mUserPreference.getIcon())) {
+                                mUserPreference.setIcon(userPhoto);
+                                new AsyncTask<Void, Void, Void>() {
+                                    @Override
+                                    protected Void doInBackground(Void... params) {
+                                        mUserManager.setUserIcon(mUser.getIdentifier(),
+                                                mEditUserPhotoController.getNewUserPhotoBitmap());
+                                        return null;
+                                    }
+                                }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+                            }
+                            removeDialog(DIALOG_ID_EDIT_USER_INFO);
+                        }
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+
+            // Make sure the IME is up.
+            mEditUserInfoDialog.getWindow().setSoftInputMode(
+                    WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+            return mEditUserInfoDialog;
+        }
+
+        return null;
+    }
+
+    private static class EditUserPhotoController {
+        private static final int POPUP_LIST_ITEM_ID_CHOOSE_PHOTO = 1;
+        private static final int POPUP_LIST_ITEM_ID_TAKE_PHOTO = 2;
+
+        // It seems that this class generates custom request codes and they may
+        // collide with ours, these values are very unlikely to have a conflict.
+        private static final int REQUEST_CODE_CHOOSE_PHOTO = Integer.MAX_VALUE;
+        private static final int REQUEST_CODE_TAKE_PHOTO = Integer.MAX_VALUE - 1;
+        private static final int REQUEST_CODE_CROP_PHOTO = Integer.MAX_VALUE - 2;
+
+        private static final String CROP_PICTURE_FILE_NAME = "CropEditUserPhoto.jpg";
+        private static final String TAKE_PICTURE_FILE_NAME = "TakeEditUserPhoto2.jpg";
+
+        private final int mPhotoSize;
+
+        private final Context mContext;
+        private final Fragment mFragment;
+        private final ImageView mImageView;
+
+        private final Uri mCropPictureUri;
+        private final Uri mTakePictureUri;
+
+        private Bitmap mNewUserPhotoBitmap;
+        private Drawable mNewUserPhotoDrawable;
+
+        public EditUserPhotoController(Fragment fragment, ImageView view) {
+            mContext = view.getContext();
+            mFragment = fragment;
+            mImageView = view;
+            mCropPictureUri = createTempImageUri(mContext, CROP_PICTURE_FILE_NAME);
+            mTakePictureUri = createTempImageUri(mContext, TAKE_PICTURE_FILE_NAME);
+            mPhotoSize = getPhotoSize(mContext);
+            mImageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showUpdatePhotoPopup();
+                }
+            });
+        }
+
+        public boolean onActivityResult(int requestCode, int resultCode, final Intent data) {
+            if (resultCode != Activity.RESULT_OK) {
+                return false;
+            }
+            switch (requestCode) {
+                case REQUEST_CODE_CHOOSE_PHOTO:
+                case REQUEST_CODE_CROP_PHOTO: {
+                    new AsyncTask<Void, Void, Bitmap>() {
+                        @Override
+                        protected Bitmap doInBackground(Void... params) {
+                            return BitmapFactory.decodeFile(mCropPictureUri.getPath());
+                        }
+                        @Override
+                        protected void onPostExecute(Bitmap bitmap) {
+                            mNewUserPhotoBitmap = bitmap;
+                            mNewUserPhotoDrawable = CircleFramedDrawable
+                                    .getInstance(mImageView.getContext(), mNewUserPhotoBitmap);
+                            mImageView.setImageDrawable(mNewUserPhotoDrawable);
+                            // Delete the files - not needed anymore.
+                            new File(mCropPictureUri.getPath()).delete();
+                            new File(mTakePictureUri.getPath()).delete();
+                        }
+                    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+                } return true;
+                case REQUEST_CODE_TAKE_PHOTO: {
+                    cropPhoto();
+                } break;
+            }
+            return false;
+        }
+
+        public Bitmap getNewUserPhotoBitmap() {
+            return mNewUserPhotoBitmap;
+        }
+
+        public Drawable getNewUserPhotoDrawable() {
+            return mNewUserPhotoDrawable;
+        }
+
+        private void showUpdatePhotoPopup() {
+            final boolean canTakePhoto = canTakePhoto();
+            final boolean canChoosePhoto = canChoosePhoto();
+
+            if (!canTakePhoto && !canChoosePhoto) {
+                return;
+            }
+
+            Context context = mImageView.getContext();
+            final List<AdapterItem> items = new ArrayList<AdapterItem>();
+
+            if (canTakePhoto()) {
+                String title = mImageView.getContext().getString( R.string.user_image_take_photo);
+                AdapterItem item = new AdapterItem(title, POPUP_LIST_ITEM_ID_TAKE_PHOTO);
+                items.add(item);
+            }
+
+            if (canChoosePhoto) {
+                String title = context.getString(R.string.user_image_choose_photo);
+                AdapterItem item = new AdapterItem(title, POPUP_LIST_ITEM_ID_CHOOSE_PHOTO);
+                items.add(item);
+            }
+
+            final ListPopupWindow listPopupWindow = new ListPopupWindow(context);
+
+            listPopupWindow.setAnchorView(mImageView);
+            listPopupWindow.setModal(true);
+            listPopupWindow.setInputMethodMode(ListPopupWindow.INPUT_METHOD_NOT_NEEDED);
+
+            ListAdapter adapter = new ArrayAdapter<AdapterItem>(context,
+                    R.layout.edit_user_photo_popup_item, items);
+            listPopupWindow.setAdapter(adapter);
+
+            final int width = Math.max(mImageView.getWidth(), context.getResources()
+                    .getDimensionPixelSize(R.dimen.update_user_photo_popup_min_width));
+            listPopupWindow.setWidth(width);
+
+            listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    AdapterItem item = items.get(position);
+                    switch (item.id) {
+                        case POPUP_LIST_ITEM_ID_CHOOSE_PHOTO: {
+                            choosePhoto();
+                            listPopupWindow.dismiss();
+                        } break;
+                        case POPUP_LIST_ITEM_ID_TAKE_PHOTO: {
+                            takePhoto();
+                            listPopupWindow.dismiss();
+                        } break;
+                    }
+                }
+            });
+
+            listPopupWindow.show();
+        }
+
+        private boolean canTakePhoto() {
+            return mImageView.getContext().getPackageManager().queryIntentActivities(
+                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
+                    PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
+        }
+
+        private boolean canChoosePhoto() {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            return mImageView.getContext().getPackageManager().queryIntentActivities(
+                    intent, 0).size() > 0;
+        }
+
+        private void takePhoto() {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mTakePictureUri);
+            mFragment.startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
+        }
+
+        private void choosePhoto() {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+            intent.setType("image/*");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropPictureUri);
+            appendCropExtras(intent);
+            mFragment.startActivityForResult(intent, REQUEST_CODE_CHOOSE_PHOTO);
+        }
+
+        private void cropPhoto() {
+            Intent intent = new Intent("com.android.camera.action.CROP");
+            intent.setDataAndType(mTakePictureUri, "image/*");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropPictureUri);
+            appendCropExtras(intent);
+            mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
+        }
+
+        private void appendCropExtras(Intent intent) {
+            intent.putExtra("crop", "true");
+            intent.putExtra("scale", true);
+            intent.putExtra("scaleUpIfNeeded", true);
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", mPhotoSize);
+            intent.putExtra("outputY", mPhotoSize);
+        }
+
+        private static int getPhotoSize(Context context) {
+            Cursor cursor = context.getContentResolver().query(
+                    DisplayPhoto.CONTENT_MAX_DIMENSIONS_URI,
+                    new String[]{DisplayPhoto.DISPLAY_MAX_DIM}, null, null, null);
+            try {
+                cursor.moveToFirst();
+                return cursor.getInt(0);
+            } finally {
+                cursor.close();
+            }
+        }
+
+        private static Uri createTempImageUri(Context context, String fileName) {
+            File folder = context.getExternalCacheDir();
+            folder.mkdirs();
+            File fullPath = new File(folder, fileName);
+            fullPath.delete();
+            return Uri.fromFile(fullPath.getAbsoluteFile());
+        }
+
+        private static final class AdapterItem {
+            final String title;
+            final int id;
+
+            public AdapterItem(String title, int id) {
+                this.title = title;
+                this.id = id;
+            }
+
+            @Override
+            public String toString() {
+                return title;
+            }
+        }
     }
 }
