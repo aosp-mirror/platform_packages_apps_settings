@@ -507,8 +507,7 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Vyhľadávať displeje"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Vyhľadávanie..."</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"V blízkosti sa nenašli žiadne displeje s bezdrôtovým pripojením."</string>
-    <!-- no translation found for wifi_display_settings_empty_list_user_restricted (1920080628834632135) -->
-    <skip />
+    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Tento používateľ nemôže konfigurovať bezdrôtové siete."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Spárované displeje"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Dostupné zariadenia"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Prepája sa"</string>
@@ -592,6 +591,8 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Zlyhanie overenia totožnosti. Skúste to znova."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Bola rozpoznaná ďalšia relácia WPS. Skúste to znova o niekoľko minút."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Identifikátor SSID siete"</string>
+    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
+    <skip />
     <string name="wifi_security" msgid="6603611185592956936">"Zabezpečenie"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Sila signálu"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Stav"</string>
@@ -747,7 +748,7 @@
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Počas prítomnosti zariadenia v doku"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Vypnuté"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Ak chcete nastaviť, čo sa stane, keď je telefón v doku alebo v režime spánku, zapnite funkciu Šetrič obrazovky."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"Kedy spustiť šetrič obrazovky"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"Kedy spustiť šetrič"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Spustiť"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Nastavenia"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatický jas"</string>
@@ -1246,6 +1247,10 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Slovo:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Skratka:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Jazyk:"</string>
+    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
+    <skip />
+    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
+    <skip />
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Upraviť slovo"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Upraviť"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Odstrániť"</string>
@@ -1286,8 +1291,7 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Nastavenia fyzickej klávesnice"</string>
     <string name="development_settings_title" msgid="215179176067683667">"Možnosti pre vývojárov"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Možnosti nastavenia vývoja aplikácií"</string>
-    <!-- no translation found for development_settings_not_available (4308569041701535607) -->
-    <skip />
+    <string name="development_settings_not_available" msgid="4308569041701535607">"Pre tohto používateľa sú možnosti vývojára nedostupné"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Ladenie USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Povoliť režim ladenia s pripojeným zariadením USB"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Odvolanie autorizácií na ladenie USB"</string>
@@ -1347,11 +1351,12 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Nastavenia"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Zapnuté"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Vypnuté"</string>
-    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Použiť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"Služba na zjednodušenie ovládania <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> zaznamenáva všetok text, ktorý napíšete, okrem hesiel. To zahŕňa osobné údaje, ako sú čísla kreditných kariet. Zaznamenáva aj údaje o interakcii so zariadením."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"Služba na zjednodušenie ovládania <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> zaznamenáva všetok text, ktorý napíšete, okrem hesiel. To zahŕňa osobné údaje, ako sú čísla kreditných kariet. Zaznamenáva aj údaje o využívaní telefónu."</string>
-    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Zastaviť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Ak sa dotknete klávesu OK, služba <xliff:g id="SERVICE">%1$s</xliff:g> sa zastaví."</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"Použiť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"Služba <xliff:g id="SERVICE">%1$s</xliff:g> vyžaduje nasledujúce funkcie:"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Sledovať vaše akcie"</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Dostávajte upozornenia aj pri interakcii s aplikáciami."</string>
+    <string name="disable_service_title" msgid="9190688088562277761">"Chcete zastaviť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="disable_service_message" msgid="2012273739481042318">"Ak sa dotknete klávesu OK, služba <xliff:g id="SERVICE">%1$s</xliff:g> sa zastaví."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nie sú nainštalované žiadne služby"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Potrebujete čítačku obrazovky?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Aplikácia Talkback poskytuje hovorenú odozvu na pomoc nevidomým a slabozrakým používateľom. Chcete si túto aplikáciu bezplatne nainštalovať zo služby Android Market?"</string>
@@ -1819,13 +1824,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Prísne"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Používatelia"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Vy"</string>
-    <string name="user_trusted_list_title" msgid="8841215084164687183">"Dôveryhodní používatelia"</string>
+    <string name="user_trusted_list_title" msgid="8914231890576711934">"Používatelia"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Používatelia s obm. prístupom"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Pridať používateľa"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Pridať použ. s obmedz."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Používatelia s obmedzeným prístupom môžu používať iba aplikácie a obsah, ktoré vyberiete"</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Pridať dôver. použív."</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Dôveryhodní používatelia nemajú žiadne obmedzenia"</string>
+    <string name="user_add_trusted" msgid="7920950049308074671">"Pridať štandardného používateľa"</string>
+    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Štandardní používatelia majú svoje vlastné aplikácie a obsah"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Aktívne"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Neaktívne"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nenastavené"</string>
@@ -1842,8 +1847,7 @@
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Teraz nie"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Používateľov môže spravovať iba vlastník tabletu."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Používateľov môže spravovať iba vlastník telefónu."</string>
-    <!-- no translation found for user_cannot_add_accounts_message (1610930617977321638) -->
-    <skip />
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Obmedzení používatelia nemôžu pridávať účty"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Odstrániť <xliff:g id="USER_NAME">%1$s</xliff:g> zo zariadenia"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nový používateľ"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcete odstrániť svoj profil?"</string>
@@ -1872,7 +1876,8 @@
     <string name="user_rename" msgid="8523499513614655279">"PREMENOVAŤ"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Nastaviť obmedzenia aplikácie"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Riadi: <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Pri obmedzených používateľoch sa táto aplikácia nepodopruje"</string>
+    <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
     <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Siete Wi-Fi a mobilné siete"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Povoliť úpravu nastavení sietí Wi-Fi a mobilných sietí"</string>

@@ -507,8 +507,7 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Пошук пристроїв"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Пошук…"</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Бездротові пристрої поблизу не знайдено."</string>
-    <!-- no translation found for wifi_display_settings_empty_list_user_restricted (1920080628834632135) -->
-    <skip />
+    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Цей користувач не має права налаштовувати бездротові мережі."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Спарені пристрої"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Доступні пристрої"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Під’єднуються"</string>
@@ -592,6 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Помилка автентифікації. Повторіть спробу."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Виявлено ще один сеанс WPS. Повторіть спробу через декілька хвилин."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"SSID мережі"</string>
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Введіть ідентифікатор SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Безпека"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Сила сигналу:"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Стан"</string>
@@ -913,7 +913,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Відновлення налаштувань APN за умовчанням."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Відн.налашт.за умовч."</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Відновлення налаштувань APN за умовчанням здійснено."</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"Відновл. завод. нал."</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"Скидання налаштувань"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Видаляє всі дані в пристрої"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Видаляє всі дані в телефоні"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Це зітре всі дані з "<b>"внутрішньої пам’яті"</b>" вашого планшетного ПК, зокрема:"\n\n<li>"ваш обліковий запис Google"</li>\n<li>"дані й налаштування системи та програм"</li>\n<li>"завантажені програми"</li>"."</string>
@@ -988,7 +988,7 @@
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Викор. сервер, щоб доп. GPS (знім. прап., щоб покращ. роб. GPS)"</string>
     <string name="use_location_title" msgid="5206937465504979977">"Місцезнаходж. і пошук Google"</string>
     <string name="use_location_summary" msgid="3978805802386162520">"Дозволити Google використовувати місцезнаходження для покращення результатів пошуку й інших служб"</string>
-    <string name="location_access_title" msgid="7064108942964081243">"Доступ до мого місцезнаходження"</string>
+    <string name="location_access_title" msgid="7064108942964081243">"Доступ до моїх геоданих"</string>
     <string name="location_access_summary" msgid="69031404093194341">"Надати програмам, які про це попросили, дозвіл на використання інформації про місцезнаходження"</string>
     <string name="location_sources_heading" msgid="1278732419851088319">"Джерела даних про місцезнаходження"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Про пристрій"</string>
@@ -1246,6 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Слово:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Ярлик:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Мова:"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Введіть слово"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Необов’язковий ярлик"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Редаг. слово"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Редаг."</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Видалити"</string>
@@ -1286,8 +1288,7 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Налаштування фізичної клавіатури"</string>
     <string name="development_settings_title" msgid="215179176067683667">"Параметри розробника"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Установити параметри для розробки програми"</string>
-    <!-- no translation found for development_settings_not_available (4308569041701535607) -->
-    <skip />
+    <string name="development_settings_not_available" msgid="4308569041701535607">"Параметри розробника не доступні для цього користувача"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Налагодження USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Реж. налагодж., коли підкл. ч-з USB"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Скасувати доступ до налагодження USB"</string>
@@ -1347,11 +1348,12 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Налаштування"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Увімкнено"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Вимкнено"</string>
-    <string name="accessibility_service_security_warning_title" msgid="5421628151509995404">"Використовувати службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_security_warning_summary" product="tablet" msgid="8558441850832543571">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> може збирати весь введений вами текст, окрім паролів. Це включає особисті дані, як-от номери кредитних карток. Також можуть збиратися дані про вашу взаємодію з планшетним ПК."</string>
-    <string name="accessibility_service_security_warning_summary" product="default" msgid="2869015914319424723">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> може збирати весь введений вами текст, окрім паролів. Це включає особисті дані, як-от номери кредитних карток. Також можуть збиратися дані про вашу взаємодію з телефоном."</string>
-    <string name="accessibility_service_disable_warning_title" msgid="3393956845814484859">"Зупинити службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="accessibility_service_disable_warning_summary" msgid="625013894287895398">"Торкніться ОК, щоб зупинити службу <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
+    <string name="enable_service_title" msgid="3061307612673835592">"Використовувати <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"Службі <xliff:g id="SERVICE">%1$s</xliff:g> потрібно:"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Спостерігати за вашими діями"</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Отримувати сповіщення під час вашої взаємодії з програмою."</string>
+    <string name="disable_service_title" msgid="9190688088562277761">"Зупинити <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="disable_service_message" msgid="2012273739481042318">"Торкніться ОК, щоб зупинити <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Не встановлено жодної служби"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Потрібна програма зчитування з екрана?"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Функція TalkBack забезпечує мовне голосове відтворення для користувачів із вадами зору. Хочете встановити її безкоштовно з Android Market?"</string>
@@ -1819,13 +1821,13 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Застосовано"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Користувачі"</string>
     <string name="user_you_section" msgid="6247838798859425408">"Ви"</string>
-    <string name="user_trusted_list_title" msgid="8841215084164687183">"Довірені користувачі"</string>
+    <string name="user_trusted_list_title" msgid="8914231890576711934">"Користувачі"</string>
     <string name="user_limited_list_title" msgid="6492625072867292806">"Обмежені користувачі"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Додати користувача"</string>
     <string name="user_add_restricted" msgid="2355584640156396901">"Додати обмеж.корист."</string>
     <string name="user_add_restricted_summary" msgid="6627956758186349471">"Обмежені користувачі можуть отримувати доступ лише до вибраних вами програм і вмісту"</string>
-    <string name="user_add_trusted" msgid="557634297572871869">"Додати довір.корист."</string>
-    <string name="user_add_trusted_summary" msgid="1118604533072902851">"Довірені користувачі не мають жодних обмежень"</string>
+    <string name="user_add_trusted" msgid="7920950049308074671">"Додати стандартного користувача"</string>
+    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Стандартні користувачі мають власні програми та вміст"</string>
     <string name="user_summary_active" msgid="4740649452346004418">"Активний"</string>
     <string name="user_summary_inactive" msgid="3758296246095054572">"Неактивний"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не створено"</string>
@@ -1842,8 +1844,7 @@
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не зараз"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Лише власник планшетного ПК може керувати користувачами."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Лише власник телефону може керувати користувачами."</string>
-    <!-- no translation found for user_cannot_add_accounts_message (1610930617977321638) -->
-    <skip />
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Обмежені користувачі не можуть додавати облікові записи"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g> – видалити з пристрою"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Новий користувач"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Видалити себе?"</string>
@@ -1872,7 +1873,8 @@
     <string name="user_rename" msgid="8523499513614655279">"ПЕРЕЙМЕНУВАТИ"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Установити обмеження для програми"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Керується програмою <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_not_supported_in_limited (1514792872934755368) -->
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Ця програма не підтримується для обмежених користувачів"</string>
+    <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
     <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi і мобільні мережі"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Дозволити вносити зміни в налаштування Wi‑Fi і мобільних мереж"</string>
