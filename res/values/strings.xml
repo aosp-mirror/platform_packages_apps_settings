@@ -4369,7 +4369,7 @@
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="default">Only the phone\'s owner can manage users.</string>
     <!-- Message to limited users that they cannot add accounts [CHAR LIMIT=100] -->
-    <string name="user_cannot_add_accounts_message">Limited users cannot add accounts</string>
+    <string name="user_cannot_add_accounts_message">Restricted profiles cannot add accounts</string>
 
     <!-- User details remove user menu [CHAR LIMIT=20] -->
     <string name="user_remove_user_menu">Delete <xliff:g id="user_name">%1$s</xliff:g> from this device</string>
@@ -4381,6 +4381,8 @@
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
     <string name="user_confirm_remove_title">Remove user?</string>
+    <!-- Profile removal confirmation title [CHAR LIMIT=25] -->
+    <string name="user_profile_confirm_remove_title">Remove profile?</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_self_message" product="tablet">You will lose your space and data on this tablet. You can\'t undo this action.</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
@@ -4389,6 +4391,10 @@
     <string name="user_confirm_remove_message" product="tablet">This user\'s space and data will disappear from this tablet. You can\'t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_message" product="default">This user\'s space and data will disappear from this phone. You can\'t undo this action.</string>
+    <!-- User profile removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_profile_confirm_remove_message" product="tablet">This profile\'s space and data will disappear from this tablet. You can\'t undo this action.</string>
+    <!-- User profile removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_profile_confirm_remove_message" product="default">This profile\'s space and data will disappear from this phone. You can\'t undo this action.</string>
     <!-- Setting label to show that a new user is being added [CHAR LIMIT=30] -->
     <string name="user_adding_new_user">Adding new user\u2026</string>
     <!-- Spoken content description for delete icon beside a user [CHAR LIMIT=none] -->
@@ -4468,7 +4474,7 @@
     <!-- Summary for app entries that are controlled by another entry [CHAR LIMIT=none] -->
     <string name="user_restrictions_controlled_by">Controlled by <xliff:g id="app">%1$s</xliff:g></string>
     <!-- Summary for apps that aren't supported in limited users [CHAR LIMIT=none] -->
-    <string name="app_not_supported_in_limited">This app is not supported in limited users</string>
+    <string name="app_not_supported_in_limited">This app is not supported in restricted profiles</string>
     <!-- Summary text for apps that are allowed to access accounts from the primary user [CHAR LIMIT=none] -->
     <string name="app_sees_restricted_accounts">This app can access your accounts</string>
 

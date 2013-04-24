@@ -383,10 +383,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 Dialog dlg = new AlertDialog.Builder(getActivity())
                     .setTitle(UserHandle.myUserId() == mRemovingUserId
                             ? R.string.user_confirm_remove_self_title
-                            : R.string.user_confirm_remove_title)
+                            : (mUserManager.getUserInfo(mRemovingUserId).isRestricted()
+                                    ? R.string.user_profile_confirm_remove_title
+                                    : R.string.user_confirm_remove_title))
                     .setMessage(UserHandle.myUserId() == mRemovingUserId
                             ? R.string.user_confirm_remove_self_message
-                            : R.string.user_confirm_remove_message)
+                            : (mUserManager.getUserInfo(mRemovingUserId).isRestricted()
+                                    ? R.string.user_profile_confirm_remove_message
+                                    : R.string.user_confirm_remove_message))
                     .setPositiveButton(R.string.user_delete_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
