@@ -45,7 +45,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.apache.harmony.xnet.provider.jsse.TrustedCertificateStore;
+
+import com.android.org.conscrypt.TrustedCertificateStore;
 
 public class TrustedCredentialsSettings extends Fragment {
 
