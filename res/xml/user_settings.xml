@@ -19,25 +19,13 @@
         android:title="@string/user_settings_title">
 
     <PreferenceCategory
-            android:key="trusted_user_list"
-            android:title="@string/user_trusted_list_title">
+            android:key="user_list"
+            android:title="@string/user_list_title">
     </PreferenceCategory>
 
     <Preference
-            android:key="user_add_trusted"
-            android:title="@string/user_add_trusted"
-            android:summary="@string/user_add_trusted_summary"
-            android:icon="@drawable/ic_menu_add" />
-
-    <PreferenceCategory
-            android:key="limited_user_list"
-            android:title="@string/user_limited_list_title">
-    </PreferenceCategory>
-
-    <Preference
-            android:key="user_add_restricted"
-            android:title="@string/user_add_restricted"
-            android:summary="@string/user_add_restricted_summary"
+            android:key="user_add"
+            android:title="@string/user_add_user_menu"
             android:icon="@drawable/ic_menu_add" />
 
 </PreferenceScreen>
