@@ -591,8 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentifikacija nije uspjela. Pokušajte ponovo."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Otkrivena je još jedna WPS sesija. Pokušajte ponovo za nekoliko minuta."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Mrežni SSID"</string>
-    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
-    <skip />
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Unesite SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sigurnost"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Jakost signala"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Status"</string>
@@ -1247,10 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Riječ:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Prečac:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Jezik:"</string>
-    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
-    <skip />
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Upišite riječ"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Neobavezni prečac"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Uredi riječ"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Uređivanje"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Izbriši"</string>
@@ -1357,7 +1354,8 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> treba obavljati sljedeće:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Praćenje vaših radnji"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Primajte obavijesti tijekom interakcije s aplikacijom."</string>
-    <string name="disable_service_title" msgid="9190688088562277761">"Želite li zaustaviti uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <!-- no translation found for disable_service_title (3624005212728512896) -->
+    <skip />
     <string name="disable_service_message" msgid="2012273739481042318">"Ako dodirnete \"U redu\", usluga <xliff:g id="SERVICE">%1$s</xliff:g> zaustavit će se."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nema instaliranih usluga"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Trebate čitač zaslona?"</string>
@@ -1825,26 +1823,36 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Omogućeno"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Provođenje"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Korisnici"</string>
-    <string name="user_you_section" msgid="6247838798859425408">"Vi"</string>
-    <string name="user_trusted_list_title" msgid="8914231890576711934">"Korisnici"</string>
-    <string name="user_limited_list_title" msgid="6492625072867292806">"Ograničeni korisnici"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj korisnika"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"Dodaj ograničenog"</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Ograničeni korisnici mogu pristupati samo aplikacijama i sadržajima koje odaberete"</string>
-    <string name="user_add_trusted" msgid="7920950049308074671">"Dodavanje standardnog korisnika"</string>
-    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Standardni korisnici imaju vlastite aplikacije i sadržaj"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Aktivan"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Nije aktivan"</string>
+    <!-- no translation found for user_list_title (7937158411137563543) -->
+    <skip />
+    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
+    <skip />
+    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
+    <skip />
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nije postavljen"</string>
-    <string name="user_trusted" msgid="6742122083463724471">"Pouzdani"</string>
-    <string name="user_limited" msgid="5344145255529624480">"Ograničeni"</string>
+    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Vlasnik"</string>
+    <!-- no translation found for user_you (1639158809315025986) -->
+    <skip />
     <string name="user_nickname" msgid="5148818000228994488">"Nadimak"</string>
+    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
+    <skip />
     <string name="user_add_user_title" msgid="3961861593718285403">"Dodaj novog korisnika"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"Ovaj uređaj možete dijeliti s drugima tako da stvorite dodatne korisnike. Svaki korisnik ima vlastiti prostor koji može prilagoditi sa svojim aplikacijama, pozadinskom slikom i sličnim stvarima. Korisnici također mogu podesiti postavke tabletnog računala, primjerice Wi-Fi, koje utječu na sve."\n\n"Nakon što stvorite novog korisnika, ta osoba mora proći postupak postavljanja."\n\n"Bilo koji korisnik može prihvatiti ažurirane dozvole aplikacija u ime svih drugih korisnika."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"Nakon što stvorite novog korisnika, ta osoba mora proći postupak postavljanja."\n\n"Bilo koji korisnik može prihvatiti ažurirane dozvole aplikacija u ime svih drugih korisnika."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Postaviti korisnika sada?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Provjerite može li osoba uzeti tabletno računalo i postaviti svoj prostor"</string>
+    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
+    <skip />
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Postavi sada"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ne sad"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Samo vlasnik tabletnog računala može upravljati korisnicima."</string>
@@ -1852,6 +1860,8 @@
     <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Ograničeni broj korisnika ne može dodavati račune"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g>: brisanje s uređaja"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novi korisnik"</string>
+    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Ukloniti korisnika?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Izgubit ćete svoj prostor i podatke na ovom tabletnom računalu. Ta se radnja ne može poništiti."</string>
@@ -1879,6 +1889,8 @@
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Postavljanje ograničenja aplikacije"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Kontrolira aplikacija <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Ovu aplikaciju ne podržava ograničeni broj korisnika"</string>
+    <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi i mobilne mreže"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Dopusti izmjenu postavki Wi‑Fi i mobilne mreže"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
@@ -1891,4 +1903,7 @@
     <string name="wizard_back" msgid="5567007959434765743">"Natrag"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Dalje"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Završi"</string>
+    <string name="user_image_take_photo" msgid="1280274310152803669">"Snimi fotografiju"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"Iz Galerije odaberite fotografiju"</string>
+    <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>

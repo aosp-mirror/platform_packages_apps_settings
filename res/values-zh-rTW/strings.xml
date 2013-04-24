@@ -238,8 +238,8 @@
     <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="1636218515775929394">"未掛接 USB 儲存裝置。"</string>
     <string name="sdcard_settings_not_present_status" product="default" msgid="2048419626134861599">"沒有 SD 卡。"</string>
     <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"可用容量 (bytes)："</string>
-    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="7993410985895217054">"USB 儲存裝置目前作為大量儲存裝置使用。"</string>
-    <string name="sdcard_settings_mass_storage_status" product="default" msgid="2742075324087038036">"SD 卡目前作為大量儲存裝置使用。"</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="7993410985895217054">"USB 儲存裝置目前做為大量儲存裝置使用。"</string>
+    <string name="sdcard_settings_mass_storage_status" product="default" msgid="2742075324087038036">"SD 卡目前做為大量儲存裝置使用。"</string>
     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="9191210735703409245">"現在可以放心移除 USB 儲存裝置了。"</string>
     <string name="sdcard_settings_unmounted_status" product="default" msgid="6462544066195404905">"現在可以放心移除 SD 卡了。"</string>
     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB 儲存裝置在使用期間遭到移除！"</string>
@@ -541,7 +541,7 @@
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"設定、管理無線網路存取點"</string>
     <string name="wifi_setup_wizard_title" msgid="8242230950011819054">"選取 Wi-Fi"</string>
-    <string name="wifi_starting" msgid="6732377932749942954">"正在開啓 Wi-Fi…"</string>
+    <string name="wifi_starting" msgid="6732377932749942954">"正在開啟 Wi-Fi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"正在關閉 Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"錯誤"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"處於飛行模式時"</string>
@@ -559,7 +559,7 @@
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠狀態仍保持 Wi-Fi 連線"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"變更設定時發生問題"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi 最佳化"</string>
-    <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"開啟 Wi-Fi 時盡可能節約電池用量"</string>
+    <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"開啟 Wi-Fi 時儘可能節約電池用量"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"新增網路"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi 網路"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按鈕"</string>
@@ -1351,10 +1351,11 @@
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"開啟"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"關閉"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"使用「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
-    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> 需要執行下列動作："</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要執行下列動作："</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"記錄您的操作行為"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"在您與應用程式互動時接收通知。"</string>
-    <string name="disable_service_title" msgid="9190688088562277761">"停止「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
+    <!-- no translation found for disable_service_title (3624005212728512896) -->
+    <skip />
     <string name="disable_service_message" msgid="2012273739481042318">"輕觸 [確定] 會讓「<xliff:g id="SERVICE">%1$s</xliff:g>」停止。"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安裝任何服務"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"需要螢幕閱讀器嗎？"</string>
@@ -1826,33 +1827,45 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"許可"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"執行中"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"使用者"</string>
-    <string name="user_you_section" msgid="6247838798859425408">"您"</string>
-    <string name="user_trusted_list_title" msgid="8914231890576711934">"使用者"</string>
-    <string name="user_limited_list_title" msgid="6492625072867292806">"受限的使用者"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"新增使用者"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"新增受限的使用者"</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"受限的使用者只能存取您選取的應用程式和內容"</string>
-    <string name="user_add_trusted" msgid="7920950049308074671">"新增標準使用者"</string>
-    <string name="user_add_trusted_summary" msgid="9110852056135085345">"標準使用者擁有個人專屬的應用程式和內容"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"使用中"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"非使用中"</string>
+    <!-- no translation found for user_list_title (7937158411137563543) -->
+    <skip />
+    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
+    <skip />
+    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
+    <skip />
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"尚未設定"</string>
-    <string name="user_trusted" msgid="6742122083463724471">"信任"</string>
-    <string name="user_limited" msgid="5344145255529624480">"受限"</string>
+    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"擁有者"</string>
+    <!-- no translation found for user_you (1639158809315025986) -->
+    <skip />
     <string name="user_nickname" msgid="5148818000228994488">"暱稱"</string>
+    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
+    <skip />
     <string name="user_add_user_title" msgid="3961861593718285403">"新增使用者"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"您可以建立更多使用者，與更多人共用此裝置。每位使用者都擁有個人空間，可使用並自訂個人的應用程式和桌布等等。此外，使用者可以調整平板電腦設定 (例如會影響所有人的 Wi-Fi 設定)。"\n\n"建立新的使用者之後，必須請新使用者完成設定程序。"\n\n"任何使用者都可以代表其他所有使用者接受更新的應用程式權限。"</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"您建立新的使用者之後，對方必須完成設定程序。"\n\n"任何使用者都可以代表所有其他使用者接受更新的應用程式權限。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"立即設定使用者？"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"請確保對方可以使用平板電腦並設定自己的空間"</string>
+    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
+    <skip />
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"立即設定"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"暫時不要"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"只有平板電腦的擁有者可以管理使用者。"</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"只有手機的擁有者可以管理使用者。"</string>
-    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"受限的使用者無法新增帳戶"</string>
+    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"權限受限的使用者無法新增帳戶"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"將 <xliff:g id="USER_NAME">%1$s</xliff:g> 從這個裝置中刪除"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"新使用者"</string>
+    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"您要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"移除使用者？"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您在這台平板電腦上的可用空間和資料將會消失，這個動作無法復原。"</string>
@@ -1879,7 +1892,9 @@
     <string name="user_rename" msgid="8523499513614655279">"重新命名"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"設定應用程式限制"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"受到「<xliff:g id="APP">%1$s</xliff:g>」控制"</string>
-    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"受限的使用者無法使用這個應用程式"</string>
+    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"權限受限的使用者無法使用這個應用程式"</string>
+    <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi 與行動網路"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"允許修改 Wi‑Fi 與行動網路設定"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"藍牙"</string>
@@ -1892,4 +1907,7 @@
     <string name="wizard_back" msgid="5567007959434765743">"返回"</string>
     <string name="wizard_next" msgid="3606212602795100640">"下一步"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"完成"</string>
+    <string name="user_image_take_photo" msgid="1280274310152803669">"拍照"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"從圖片庫選擇相片"</string>
+    <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>

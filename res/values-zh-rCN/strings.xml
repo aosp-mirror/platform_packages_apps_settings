@@ -591,8 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"身份验证失败。请重试。"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"检测到其他 WPS 会话。请过几分钟后重试。"</string>
     <string name="wifi_ssid" msgid="641393708309146745">"网络 SSID"</string>
-    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
-    <skip />
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"输入 SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"安全性"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"信号强度"</string>
     <string name="wifi_status" msgid="4824568012414605414">"状态信息"</string>
@@ -1247,10 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"字词："</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"快捷键："</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"语言："</string>
-    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
-    <skip />
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"输入字词"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"快捷键（选填）"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"编辑字词"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"编辑"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"删除"</string>
@@ -1355,10 +1352,11 @@
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"关闭"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"要启用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>需要："</string>
-    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"查看您的操作"</string>
-    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"可在您与应用互动时接收通知。"</string>
-    <string name="disable_service_title" msgid="9190688088562277761">"要停用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
-    <string name="disable_service_message" msgid="2012273739481042318">"触摸“确定”会停用<xliff:g id="SERVICE">%1$s</xliff:g>。"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"监测您的操作"</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"在您与应用互动时接收通知。"</string>
+    <!-- no translation found for disable_service_title (3624005212728512896) -->
+    <skip />
+    <string name="disable_service_message" msgid="2012273739481042318">"触摸“确定”将会停用<xliff:g id="SERVICE">%1$s</xliff:g>。"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"未安装任何服务"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"需要屏幕阅读器吗？"</string>
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"“话语提示”可提供语音反馈以帮助盲人和有视力障碍的用户。您要通过 Play 商店免费安装该服务吗？"</string>
@@ -1825,26 +1823,36 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"许可"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"执行中"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"用户"</string>
-    <string name="user_you_section" msgid="6247838798859425408">"您"</string>
-    <string name="user_trusted_list_title" msgid="8914231890576711934">"用户"</string>
-    <string name="user_limited_list_title" msgid="6492625072867292806">"受限用户"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"添加用户"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"添加受限用户"</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"受限用户只能享用您所选择的那些应用和内容"</string>
-    <string name="user_add_trusted" msgid="7920950049308074671">"添加标准用户"</string>
-    <string name="user_add_trusted_summary" msgid="9110852056135085345">"标准用户拥有属于自己的应用和内容"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"活动"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"非活动"</string>
+    <!-- no translation found for user_list_title (7937158411137563543) -->
+    <skip />
+    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
+    <skip />
+    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
+    <skip />
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"未设置"</string>
-    <string name="user_trusted" msgid="6742122083463724471">"受信任"</string>
-    <string name="user_limited" msgid="5344145255529624480">"受限"</string>
+    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"机主"</string>
+    <!-- no translation found for user_you (1639158809315025986) -->
+    <skip />
     <string name="user_nickname" msgid="5148818000228994488">"昵称"</string>
+    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
+    <skip />
     <string name="user_add_user_title" msgid="3961861593718285403">"添加新用户"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"您可以通过创建新用户来与其他人共享此设备。每个用户都会有自己的空间，其中可以容纳他们自己的应用、壁纸等内容。用户可以调整 Wi-Fi 等会影响到所有用户的平板电脑设置。"\n\n"您创建新用户后，该用户必须完成设置流程。"\n\n"任何用户均可代表其他所有用户接受应用的新权限。"</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"您创建新用户后，该用户必须完成设置流程。"\n\n"任何用户均可代表其他所有用户接受应用的新权限。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"是否立即设置用户？"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"请让这个人拿过平板电脑，让其设置自己的空间。"</string>
+    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
+    <skip />
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"立即设置"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"以后再说"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"只有平板电脑的拥有者可以管理用户。"</string>
@@ -1852,6 +1860,8 @@
     <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"受限用户无法添加帐户"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"将<xliff:g id="USER_NAME">%1$s</xliff:g>从此设备中删除"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"新用户"</string>
+    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"是否删除自己？"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"是否删除用户？"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您将丢失自己在这台平板电脑上的空间和数据，此操作无法撤消。"</string>
@@ -1879,6 +1889,8 @@
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"设置应用限制"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"受“<xliff:g id="APP">%1$s</xliff:g>”控制"</string>
     <string name="app_not_supported_in_limited" msgid="1514792872934755368">"受限用户无法使用此应用"</string>
+    <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi 和移动网络"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"允许修改 Wi‑Fi 和移动网络设置"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"蓝牙"</string>
@@ -1891,4 +1903,7 @@
     <string name="wizard_back" msgid="5567007959434765743">"返回"</string>
     <string name="wizard_next" msgid="3606212602795100640">"下一步"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"完成"</string>
+    <string name="user_image_take_photo" msgid="1280274310152803669">"拍照"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"从图库中选择照片"</string>
+    <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>
