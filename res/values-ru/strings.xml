@@ -591,8 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Ошибка аутентификации. Повторите попытку."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Обнаружен другой сеанс WPS. Повторите попытку через несколько минут."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Имя сети (SSID)"</string>
-    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
-    <skip />
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Введите имя сети SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Защита"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Уровень сигнала"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Статус"</string>
@@ -1247,10 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Слово:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Быстрые клавиши:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Язык:"</string>
-    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
-    <skip />
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Введите слово"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Быстрые клавиши"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Изменение слова"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Изменить"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Удалить"</string>
@@ -1353,9 +1350,10 @@
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Выключено"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Включить <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> будет:"</string>
-    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Обрабатывать ваши действия"</string>
-    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Получать информацию о том, какие действия вы выполняете в приложении"</string>
-    <string name="disable_service_title" msgid="9190688088562277761">"Отключить <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Обрабатывать ваши действия."</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Получать информацию о том, какие действия вы выполняете в приложении."</string>
+    <!-- no translation found for disable_service_title (3624005212728512896) -->
+    <skip />
     <string name="disable_service_message" msgid="2012273739481042318">"Чтобы отключить <xliff:g id="SERVICE">%1$s</xliff:g>, нажмите ОК."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Службы не установлены"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Нужна программа чтения с экрана?"</string>
@@ -1825,26 +1823,36 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Только предупреждение"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Блокировка"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Пользователи"</string>
-    <string name="user_you_section" msgid="6247838798859425408">"Вы"</string>
-    <string name="user_trusted_list_title" msgid="8914231890576711934">"Пользователи"</string>
-    <string name="user_limited_list_title" msgid="6492625072867292806">"Гости"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"Добавить пользователя"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"Добавить пользователя"</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Гости могут пользоваться только выбранными вами приложениями"</string>
-    <string name="user_add_trusted" msgid="7920950049308074671">"Добавить стандартного пользователя"</string>
-    <string name="user_add_trusted_summary" msgid="9110852056135085345">"У стандартных пользователей есть свои приложения и контент"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Активен"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Неактивен"</string>
+    <!-- no translation found for user_list_title (7937158411137563543) -->
+    <skip />
+    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
+    <skip />
+    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
+    <skip />
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не настроено"</string>
-    <string name="user_trusted" msgid="6742122083463724471">"Надежный"</string>
-    <string name="user_limited" msgid="5344145255529624480">"Ограниченный"</string>
+    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Владелец"</string>
+    <!-- no translation found for user_you (1639158809315025986) -->
+    <skip />
     <string name="user_nickname" msgid="5148818000228994488">"Псевдоним"</string>
+    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
+    <skip />
     <string name="user_add_user_title" msgid="3961861593718285403">"Добавить пользователя"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"Если вашим устройством пользуется кто-то ещё, создайте отдельные аккаунты. У каждого будет свое пространство, где можно, например, установить приложения или выбрать обои. Некоторые параметры, такие как настройки сети Wi-Fi, будут общими для всех."\n\n"Каждый новый пользователь должен выполнить настройку."\n\n"Пользователи могут разрешать обновления для любых аккаунтов на устройстве."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"Каждый новый пользователь должен выполнить настройку."\n\n"Пользователи могут разрешать обновления для любых аккаунтов на устройстве."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Настроить аккаунт?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Если у пользователя нет возможности настроить аккаунт прямо сейчас, он сможет сделать это позже."</string>
+    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
+    <skip />
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Настроить сейчас"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не сейчас"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Только владелец может настроить устройство для других пользователей."</string>
@@ -1852,6 +1860,8 @@
     <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Пользователи с ограниченным доступом не могут добавлять аккаунты"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Удалить пользователя <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Новый пользователь"</string>
+    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Удалить ваш аккаунт?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Удалить аккаунт?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Ваши данные, сохраненные на этом устройстве, будут удалены без возможности восстановления."</string>
@@ -1893,4 +1903,7 @@
     <string name="wizard_back" msgid="5567007959434765743">"Назад"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Далее"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Готово"</string>
+    <string name="user_image_take_photo" msgid="1280274310152803669">"Сфотографировать"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"Выбрать из Галереи"</string>
+    <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>
