@@ -4327,37 +4327,32 @@
 
     <!-- User settings screen title [CHAR LIMIT=25] -->
     <string name="user_settings_title">Users</string>
-    <!-- User settings section title for details about you [CHAR LIMIT=25] -->
-    <string name="user_you_section">You</string>
-    <!-- User settings trusted user list section header [CHAR LIMIT=40] -->
-    <string name="user_trusted_list_title">Users</string>
-    <!-- User settings limited user list section header [CHAR LIMIT=40] -->
-    <string name="user_limited_list_title">Limited users</string>
+    <!-- User settings header for list of users and profiles [CHAR LIMIT=40] -->
+    <string name="user_list_title">Users &amp; profiles</string>
     <!-- User settings add user menu [CHAR LIMIT=35] -->
-    <string name="user_add_user_menu">Add user</string>
-    <!-- User settings add restricted user label [CHAR LIMIT=35] -->
-    <string name="user_add_restricted">Add limited user</string>
-    <!-- User settings summary for add restricted user [CHAR LIMIT=100] -->
-    <string name="user_add_restricted_summary">Limited users can only access the apps and content you select</string>
-    <!-- User settings add user label [CHAR LIMIT=35] -->
-    <string name="user_add_trusted">Add standard user</string>
-    <!-- User settings summary for add trusted user [CHAR LIMIT=100] -->
-    <string name="user_add_trusted_summary">Standard users have their own apps and content</string>
-
-    <!-- User summary to indicate that user is currently active in the background [CHAR LIMIT=100] -->
-    <string name="user_summary_active">Active</string>
-    <!-- User summary to indicate that user is currently inactive in the background [CHAR LIMIT=100] -->
-    <string name="user_summary_inactive">Not active</string>
+    <string name="user_add_user_menu">Add user or profile</string>
+    <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
+    <string name="user_summary_restricted_profile">Restricted profile</string>
     <!-- User summary to indicate that user is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_not_set_up">Not set up</string>
-    <!-- Summary text for a trusted user [CHAR LIMIT=50] -->
-    <string name="user_trusted">Trusted</string>
-    <!-- Summary text for a limited user [CHAR LIMIT=50] -->
-    <string name="user_limited">Limited</string>
+    <!-- User summary to indicate that restricted profile is currently not set up [CHAR LIMIT=100] -->
+    <string name="user_summary_restricted_not_set_up">Not set up - Restricted profile</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
     <string name="user_owner">Owner</string>
+    <!-- User settings title for current user entry "You" user. [CHAR LIMIT=30] -->
+    <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
     <!-- Title for the preference to enter the nickname of the userto display in the user switcher [CHAR LIMIT=25]-->
     <string name="user_nickname">Nickname</string>
+    <!-- Title for add user type dialog [CHAR LIMIT=45] -->
+    <string name="user_add_user_type_title">Add</string>
+    <!-- Summary for add user entry in the choice dialog [CHAR LIMIT=none] -->
+    <string name="user_add_user_item_summary">Users have their own apps and content</string>
+    <!-- Summary for add restricted profile entry in the choice dialog [CHAR LIMIT=none] -->
+    <string name="user_add_profile_item_summary">Restricted profiles can only access the apps and content from your accounts</string>
+    <!-- Button text for adding a regular user [CHAR LIMIT=25] -->
+    <string name="user_add_user_item_title">User</string>
+    <!-- Button text for adding a restricted profile [CHAR LIMIT=25] -->
+    <string name="user_add_profile_item_title">Restricted profile</string>
     <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
     <string name="user_add_user_title">Add new user</string>
     <!-- Message for add user confirmation dialog - long version. [CHAR LIMIT=none] -->
@@ -4368,6 +4363,8 @@
     <string name="user_setup_dialog_title">Set up user now?</string>
     <!-- Message in dialog to setup a new user after creation [CHAR LIMIT=none] -->
     <string name="user_setup_dialog_message">Make sure the person is available to take the tablet and set up their space</string>
+    <!-- Message in dialog to setup a new restricted profile after creation [CHAR LIMIT=none] -->
+    <string name="user_setup_profile_dialog_message">Set up profile now?</string>
     <!-- Button text to setup the new user now [CHAR LIMIT=25] -->
     <string name="user_setup_button_setup_now">Set up now</string>
     <!-- Button text to setup the new user later [CHAR LIMIT=25] -->
@@ -4383,6 +4380,8 @@
     <string name="user_remove_user_menu">Delete <xliff:g id="user_name">%1$s</xliff:g> from this device</string>
     <!-- User details new user name [CHAR LIMIT=30] -->
     <string name="user_new_user_name">New user</string>
+    <!-- User details new restricted profile name [CHAR LIMIT=30] -->
+    <string name="user_new_profile_name">New profile</string>
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
