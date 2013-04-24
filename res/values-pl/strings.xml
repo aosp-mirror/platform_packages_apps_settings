@@ -591,8 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Błąd uwierzytelniania. Spróbuj ponownie."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Wykryto inną sesję WPS. Spróbuj ponownie za kilka minut."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Identyfikator SSID sieci"</string>
-    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
-    <skip />
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Wpisz identyfikator SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Zabezpieczenia"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Siła sygnału"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Stan"</string>
@@ -1247,10 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Słowo:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Skrót:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Język:"</string>
-    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
-    <skip />
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Wpisz słowo"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Opcjonalny skrót"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Edytuj słowo"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Edytuj"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Usuń"</string>
@@ -1355,7 +1352,8 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"Wymagania usługi <xliff:g id="SERVICE">%1$s</xliff:g>:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Obserwowanie Twoich działań"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Otrzymywanie powiadomień podczas Twojej pracy z aplikacją."</string>
-    <string name="disable_service_title" msgid="9190688088562277761">"Zatrzymać usługę <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <!-- no translation found for disable_service_title (3624005212728512896) -->
+    <skip />
     <string name="disable_service_message" msgid="2012273739481042318">"Dotknięcie OK spowoduje zatrzymanie usługi <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Brak zainstalowanych usług"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Potrzebujesz czytnika ekranu?"</string>
@@ -1823,26 +1821,36 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Pobłażliwy"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Restrykcyjny"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Użytkownicy"</string>
-    <string name="user_you_section" msgid="6247838798859425408">"Ty"</string>
-    <string name="user_trusted_list_title" msgid="8914231890576711934">"Użytkownicy"</string>
-    <string name="user_limited_list_title" msgid="6492625072867292806">"Użytkownicy z ograniczeniami"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj użytkownika"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"Dodaj użytkownika z ograniczeniami"</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Użytkownicy z ograniczeniami mają dostęp tylko do treści i aplikacji wybranych przez Ciebie"</string>
-    <string name="user_add_trusted" msgid="7920950049308074671">"Dodaj standardowego użytkownika"</string>
-    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Standardowi użytkownicy mają własne aplikacje i treści"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Aktywny"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Nieaktywny"</string>
+    <!-- no translation found for user_list_title (7937158411137563543) -->
+    <skip />
+    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
+    <skip />
+    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
+    <skip />
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nieskonfigurowany"</string>
-    <string name="user_trusted" msgid="6742122083463724471">"Zaufany"</string>
-    <string name="user_limited" msgid="5344145255529624480">"Z ograniczeniami"</string>
+    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Właściciel"</string>
+    <!-- no translation found for user_you (1639158809315025986) -->
+    <skip />
     <string name="user_nickname" msgid="5148818000228994488">"Pseudonim"</string>
+    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
+    <skip />
     <string name="user_add_user_title" msgid="3961861593718285403">"Dodaj nowego użytkownika"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"Możesz korzystać z tego urządzenia wspólnie z innymi osobami, tworząc dodatkowych użytkowników. Każdy użytkownik ma swoje własne miejsce, które może spersonalizować własnymi aplikacjami, tapetą itd. Użytkownicy mogą także zmieniać ustawienia tabletu, które dotyczą wszystkich, np. Wi-Fi."\n\n"Po utworzeniu nowego użytkownika musi on przejść przez proces konfiguracji."\n\n"Każdy użytkownik może akceptować zaktualizowane uprawnienia aplikacji w imieniu wszystkich pozostałych użytkowników."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"Po utworzeniu nowego użytkownika musi on przejść przez proces konfiguracji."\n\n"Każdy użytkownik może akceptować zaktualizowane uprawnienia aplikacji w imieniu wszystkich pozostałych użytkowników."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Skonfigurować ustawienia dla użytkownika?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Upewnij się, że ta osoba jest w pobliżu i może skonfigurować swój profil na tablecie"</string>
+    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
+    <skip />
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Skonfiguruj teraz"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Nie teraz"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Użytkownikami może zarządzać tylko właściciel tabletu."</string>
@@ -1850,6 +1858,8 @@
     <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Użytkownicy z ograniczeniami nie mogą dodawać kont"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Usuń użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g> z tego urządzenia"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nowy użytkownik"</string>
+    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcesz usunąć siebie?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Usunąć użytkownika?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Utracisz swój obszar i dane na tym tablecie. Tej czynności nie można cofnąć."</string>
@@ -1891,4 +1901,7 @@
     <string name="wizard_back" msgid="5567007959434765743">"Wróć"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Dalej"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Zakończ"</string>
+    <string name="user_image_take_photo" msgid="1280274310152803669">"Zrób zdjęcie"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"Wybierz zdjęcie z galerii"</string>
+    <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>

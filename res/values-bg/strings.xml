@@ -591,8 +591,7 @@
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Неуспешно удостоверяване. Моля, опитайте отново."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Бе открита друга сесия с WPS. Моля, опитайте отново след няколко минути."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"SSID на мрежа"</string>
-    <!-- no translation found for wifi_ssid_hint (897593601067321355) -->
-    <skip />
+    <string name="wifi_ssid_hint" msgid="897593601067321355">"Въведете SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Сигурност"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Сила на сигнала"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Състояние"</string>
@@ -1247,10 +1246,8 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Дума:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Пряк път:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Език:"</string>
-    <!-- no translation found for user_dict_settings_add_word_hint (5725254076556821247) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_shortcut_hint (7333763456561873445) -->
-    <skip />
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Напишете дума"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Незадължителен пряк път"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Редактиране на дума"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Редактиране"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Изтриване"</string>
@@ -1355,7 +1352,8 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> има нужда от следните неща:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Наблюдение на действията ви"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Получаване на известия, когато взаимодействате с приложение."</string>
-    <string name="disable_service_title" msgid="9190688088562277761">"Да се спре ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <!-- no translation found for disable_service_title (3624005212728512896) -->
+    <skip />
     <string name="disable_service_message" msgid="2012273739481042318">"С докосването на „OK“ ще спрете <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Няма инсталирани услуги"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Трябва ли ви екранен четец?"</string>
@@ -1823,26 +1821,36 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Разрешаващо"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Налагане"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Потребители"</string>
-    <string name="user_you_section" msgid="6247838798859425408">"Вие"</string>
-    <string name="user_trusted_list_title" msgid="8914231890576711934">"Потребители"</string>
-    <string name="user_limited_list_title" msgid="6492625072867292806">"Ограничени потребители"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"Потребител: Добавяне"</string>
-    <string name="user_add_restricted" msgid="2355584640156396901">"Огр. потреб.: Добав."</string>
-    <string name="user_add_restricted_summary" msgid="6627956758186349471">"Ограничените потребители имат достъп само до избраните от вас приложения и съдържание"</string>
-    <string name="user_add_trusted" msgid="7920950049308074671">"Добавяне на стандартен потребител"</string>
-    <string name="user_add_trusted_summary" msgid="9110852056135085345">"Стандартните потребители имат свои собствени приложения и съдържание"</string>
-    <string name="user_summary_active" msgid="4740649452346004418">"Активен"</string>
-    <string name="user_summary_inactive" msgid="3758296246095054572">"Неактивен"</string>
+    <!-- no translation found for user_list_title (7937158411137563543) -->
+    <skip />
+    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
+    <skip />
+    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
+    <skip />
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не е настроен"</string>
-    <string name="user_trusted" msgid="6742122083463724471">"Доверен"</string>
-    <string name="user_limited" msgid="5344145255529624480">"Ограничен"</string>
+    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Собственик"</string>
+    <!-- no translation found for user_you (1639158809315025986) -->
+    <skip />
     <string name="user_nickname" msgid="5148818000228994488">"Псевдоним"</string>
+    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
+    <skip />
+    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
+    <skip />
+    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
+    <skip />
     <string name="user_add_user_title" msgid="3961861593718285403">"Добавяне на нов потребител"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"Можете да споделите това устройство с други хора, като създадете допълнителни потребители. Всеки от тях има собствено работно пространство, което може да персонализира със свои собствени приложения, тапет и др. Те могат да коригират и настройки на таблета, като например Wi‑Fi, които засягат всички."\n\n"След като създадете нов потребител, той трябва да премине през процеса за настройка."\n\n"Всеки потребител може да приема разрешения на актуализирани приложения от името на всички останали."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"След като създадете нов потребител, той трябва да премине през процеса за настройка."\n\n"Всеки потребител може да приема разрешения на актуализирани приложения от името на всички останали."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Настройване на потребителя?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Уверете се, че човекът е налице да вземе таблета и да настрои работното си пространство"</string>
+    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
+    <skip />
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Настройване сега"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не сега"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Само собственикът на таблета може да управлява потребителите."</string>
@@ -1850,6 +1858,8 @@
     <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Ограничените потребители не могат да добавят профили"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Изтриване на <xliff:g id="USER_NAME">%1$s</xliff:g> от у-вото"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Нов потребител"</string>
+    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
+    <skip />
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Искате ли да се изтриете?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Да се премахне ли?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Ще загубите работното си пространство и данните си на този таблет. Не можете да отмените това действие."</string>
@@ -1891,4 +1901,7 @@
     <string name="wizard_back" msgid="5567007959434765743">"Назад"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Напред"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Край"</string>
+    <string name="user_image_take_photo" msgid="1280274310152803669">"Снимане"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"Избор на снимка от галерията"</string>
+    <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>
