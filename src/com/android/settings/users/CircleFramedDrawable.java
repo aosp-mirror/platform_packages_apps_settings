@@ -123,12 +123,10 @@ class CircleFramedDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        // clear background
-        final float outside = Math.min(canvas.getWidth(), canvas.getHeight());
-        final float inside = mScale * outside;
-        final float pad = (outside - inside) / 2f;
+        final float inside = mScale * mSize;
+        final float pad = (mSize - inside) / 2f;
 
-        mDstRect.set(pad, pad, outside - pad, outside - pad);
+        mDstRect.set(pad, pad, mSize - pad, mSize - pad);
         canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
 
         mFrameRect.set(mDstRect);
