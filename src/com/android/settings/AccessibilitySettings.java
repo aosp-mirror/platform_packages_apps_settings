@@ -121,8 +121,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String EXTRA_TITLE = "title";
     private static final String EXTRA_SUMMARY = "summary";
     private static final String EXTRA_SETTINGS_TITLE = "settings_title";
+    private static final String EXTRA_COMPONENT_NAME = "component_name";
     private static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
-    private static final String EXTRA_ACCESSIBILITY_SERVICE_INFO = "accessibility_service_info";
 
     // Dialog IDs.
     private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 1;
@@ -416,7 +416,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                                 settingsClassName).flattenToString());
             }
 
-            extras.putParcelable(EXTRA_ACCESSIBILITY_SERVICE_INFO, info);
+            extras.putParcelable(EXTRA_COMPONENT_NAME, componentName);
 
             mServicesCategory.addPreference(preference);
         }
@@ -677,14 +677,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             public void onChange(boolean selfChange, Uri uri) {
                 String settingValue = Settings.Secure.getString(getContentResolver(),
                         Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-                final boolean enabled = settingValue.contains(mComponentName);
+                final boolean enabled = settingValue.contains(mComponentName.flattenToString());
                 mToggleSwitch.setCheckedInternal(enabled);
             }
         };
 
-        private AccessibilityServiceInfo mAccessibilityServiceInfo;
-
-        private String mComponentName;
+        private ComponentName mComponentName;
 
         private int mShownDialogId;
 
@@ -748,53 +746,66 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     Settings.Secure.ACCESSIBILITY_ENABLED, accessibilityEnabled ? 1 : 0);
         }
 
-//        extras.putString(EXTRA_ENABLE_WARNING_TITLE, getString(
-//                R.string.accessibility_service_security_warning_title, applicationLabel));
-//        extras.putString(EXTRA_ENABLE_WARNING_MESSAGE, getString(
-//                R.string.accessibility_service_security_warning_summary, applicationLabel));
-//
-//        extras.putString(EXTRA_DISABLE_WARNING_TITLE, getString(
-//                R.string.accessibility_service_disable_warning_title,
-//                applicationLabel));
-//        extras.putString(EXTRA_DISABLE_WARNING_MESSAGE, getString(
-//                R.string.accessibility_service_disable_warning_summary,
-//                applicationLabel));
+        // IMPORTANT: Refresh the info since there are dynamically changing capabilities. For
+        // example, before JellyBean MR2 the user was granting the explore by touch one.
+        private AccessibilityServiceInfo getAccessibilityServiceInfo() {
+            List<AccessibilityServiceInfo> serviceInfos = AccessibilityManager.getInstance(
+                    getActivity()).getInstalledAccessibilityServiceList();
+            final int serviceInfoCount = serviceInfos.size();
+            for (int i = 0; i < serviceInfoCount; i++) {
+                AccessibilityServiceInfo serviceInfo = serviceInfos.get(i);
+                ResolveInfo resolveInfo = serviceInfo.getResolveInfo();
+                if (mComponentName.getPackageName().equals(resolveInfo.serviceInfo.packageName)
+                        && mComponentName.getClassName().equals(resolveInfo.serviceInfo.name)) {
+                    return serviceInfo;
+                }
+            }
+            return null;
+        }
 
         @Override
         public Dialog onCreateDialog(int dialogId) {
             switch (dialogId) {
-                case DIALOG_ID_ENABLE_WARNING:
+                case DIALOG_ID_ENABLE_WARNING: {
                     mShownDialogId = DIALOG_ID_ENABLE_WARNING;
+                    AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                    if (info == null) {
+                        return null;
+                    }
                     return new AlertDialog.Builder(getActivity())
                         .setTitle(getString(R.string.enable_service_title,
-                                mAccessibilityServiceInfo.getResolveInfo()
-                                .loadLabel(getPackageManager())))
+                                info.getResolveInfo().loadLabel(getPackageManager())))
                         .setIconAttribute(android.R.attr.alertDialogIcon)
-                        .setView(createEnableDialogContentView())
+                        .setView(createEnableDialogContentView(info))
                         .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, this)
                         .create();
-                case DIALOG_ID_DISABLE_WARNING:
+                }
+                case DIALOG_ID_DISABLE_WARNING: {
                     mShownDialogId = DIALOG_ID_DISABLE_WARNING;
+                    AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                    if (info == null) {
+                        return null;
+                    }
                     return new AlertDialog.Builder(getActivity())
                         .setTitle(getString(R.string.disable_service_title,
-                                mAccessibilityServiceInfo.getResolveInfo()
-                                .loadLabel(getPackageManager())))
+                                info.getResolveInfo().loadLabel(getPackageManager())))
                         .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setMessage(getString(R.string.disable_service_message,
-                                mAccessibilityServiceInfo.getResolveInfo()
-                                .loadLabel(getPackageManager())))
+                                info.getResolveInfo().loadLabel(getPackageManager())))
                         .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, this)
                         .create();
-                default:
+                }
+                default: {
                     throw new IllegalArgumentException();
+                }
             }
         }
 
-        private View createEnableDialogContentView() {
+        private View createEnableDialogContentView(AccessibilityServiceInfo info) {
             LayoutInflater inflater = (LayoutInflater) getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
 
@@ -804,7 +815,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             TextView capabilitiesHeaderView = (TextView) content.findViewById(
                     R.id.capabilities_header);
             capabilitiesHeaderView.setText(getString(R.string.capabilities_list_title,
-                    mAccessibilityServiceInfo.getResolveInfo().loadLabel(getPackageManager())));
+                    info.getResolveInfo().loadLabel(getPackageManager())));
 
             LinearLayout capabilitiesView = (LinearLayout) content.findViewById(R.id.capabilities);
 
@@ -826,7 +837,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             descriptionView.setText(getString(R.string.capability_desc_receiveAccessibilityEvents));
 
             List<AccessibilityServiceInfo.CapabilityInfo> capabilities =
-                    mAccessibilityServiceInfo.getCapabilityInfos();
+                    info.getCapabilityInfos();
 
             capabilitiesView.addView(capabilityView);
 
@@ -914,11 +925,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 }
             }
 
-            mAccessibilityServiceInfo = arguments.getParcelable(EXTRA_ACCESSIBILITY_SERVICE_INFO);
-
-            ServiceInfo serviceInfo = mAccessibilityServiceInfo.getResolveInfo().serviceInfo;
-            mComponentName = new ComponentName(serviceInfo.packageName,
-                    serviceInfo.name).flattenToString();
+            mComponentName = arguments.getParcelable(EXTRA_COMPONENT_NAME);
         }
     }
 
