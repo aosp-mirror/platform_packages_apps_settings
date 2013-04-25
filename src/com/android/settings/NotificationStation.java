@@ -206,26 +206,26 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     : new StatusBarNotification[][] { active, dismissed }) {
                 for (StatusBarNotification sbn : resultset) {
                     final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
-                    info.pkg = sbn.pkg;
+                    info.pkg = sbn.getPackageName();
                     info.user = sbn.getUserId();
-                    info.icon = loadIconDrawable(info.pkg, info.user, sbn.notification.icon);
+                    info.icon = loadIconDrawable(info.pkg, info.user, sbn.getNotification().icon);
                     info.pkgicon = loadPackageIconDrawable(info.pkg, info.user);
                     info.pkgname = loadPackageName(info.pkg);
-                    if (sbn.notification.extras != null) {
-                        info.title = sbn.notification.extras.getString(Notification.EXTRA_TITLE);
+                    if (sbn.getNotification().extras != null) {
+                        info.title = sbn.getNotification().extras.getString(Notification.EXTRA_TITLE);
                         if (info.title == null || "".equals(info.title)) {
-                            info.title = sbn.notification.extras.getString(Notification.EXTRA_TEXT);
+                            info.title = sbn.getNotification().extras.getString(Notification.EXTRA_TEXT);
                         }
                     }
                     if (info.title == null || "".equals(info.title)) {
-                        info.title = sbn.notification.tickerText;
+                        info.title = sbn.getNotification().tickerText;
                     }
                     // still nothing? come on, give us something!
                     if (info.title == null || "".equals(info.title)) {
                         info.title = info.pkgname;
                     }
-                    info.timestamp = sbn.postTime;
-                    info.priority = sbn.notification.priority;
+                    info.timestamp = sbn.getPostTime();
+                    info.priority = sbn.getNotification().priority;
                     logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
 
                     info.active = (resultset == active);
