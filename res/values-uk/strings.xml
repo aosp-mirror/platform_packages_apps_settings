@@ -507,7 +507,6 @@
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Пошук пристроїв"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Пошук…"</string>
     <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Бездротові пристрої поблизу не знайдено."</string>
-    <string name="wifi_display_settings_empty_list_user_restricted" msgid="1920080628834632135">"Цей користувач не має права налаштовувати бездротові мережі."</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Спарені пристрої"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Доступні пристрої"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Під’єднуються"</string>
@@ -573,6 +572,8 @@
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Змінити мережу"</string>
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Щоб переглянути доступні мережі, увімкніть Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Пошук мереж Wi-Fi…"</string>
+    <!-- no translation found for wifi_empty_list_user_restricted (8280257225419947565) -->
+    <skip />
     <string name="wifi_other_network" msgid="1048006316504242214">"Інша мережа…"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Більше"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Авто-налаштування (WPS)"</string>
@@ -1823,51 +1824,46 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Дозволено"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Застосовано"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Користувачі"</string>
-    <!-- no translation found for user_list_title (7937158411137563543) -->
-    <skip />
-    <!-- no translation found for user_add_user_menu (3154537325132012954) -->
-    <skip />
-    <!-- no translation found for user_summary_restricted_profile (6354966213806839107) -->
-    <skip />
+    <string name="user_list_title" msgid="7937158411137563543">"Користувачі та профілі"</string>
+    <string name="user_add_user_menu" msgid="3154537325132012954">"Додати користувача чи профіль"</string>
+    <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Профіль з обмеженням"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не створено"</string>
-    <!-- no translation found for user_summary_restricted_not_set_up (1628116001964325544) -->
-    <skip />
+    <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Не налаштовано – профіль з обмеженням"</string>
     <string name="user_owner" msgid="3879126011135546571">"Власник"</string>
-    <!-- no translation found for user_you (1639158809315025986) -->
-    <skip />
+    <string name="user_you" msgid="1639158809315025986">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Псевдонім"</string>
-    <!-- no translation found for user_add_user_type_title (2146438670792322349) -->
-    <skip />
-    <!-- no translation found for user_add_user_item_summary (4702776187132008661) -->
-    <skip />
-    <!-- no translation found for user_add_profile_item_summary (2505099177666579571) -->
-    <skip />
-    <!-- no translation found for user_add_user_item_title (8212199632466198969) -->
-    <skip />
-    <!-- no translation found for user_add_profile_item_title (8353515490730363621) -->
-    <skip />
+    <string name="user_add_user_type_title" msgid="2146438670792322349">"Додавання"</string>
+    <string name="user_add_user_item_summary" msgid="4702776187132008661">"Користувачі мають власні програми та вміст"</string>
+    <string name="user_add_profile_item_summary" msgid="2505099177666579571">"Профілі з обмеженням мають доступ до програм і вмісту лише з ваших облікових записів"</string>
+    <string name="user_add_user_item_title" msgid="8212199632466198969">"Користувач"</string>
+    <string name="user_add_profile_item_title" msgid="8353515490730363621">"Профіль з обмеженням"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Додати нового користувача"</string>
     <string name="user_add_user_message_long" msgid="3086244205384741788">"Щоб користуватися цим пристроєм спільно, потрібно створити додаткових користувачів. Кожен користувач має власну пам’ять, яку може використовувати для зберігання програм, фонових малюнків тощо. Користувачі також можуть налаштовувати певні параметри планшетного ПК, як-от Wi-Fi, які застосовуватимуться до решти користувачів."\n\n"Особа, для якої ви створили нового користувача, має здійснити процес налаштування."\n\n"Будь-який користувач може схвалювати дозволи на оновлення програм від імені інших користувачів."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"Особа, для якої ви створили нового користувача, має здійснити процес налаштування."\n\n"Будь-який користувач може схвалювати дозволи на оновлення програм від імені інших користувачів."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Створити користувача зараз?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Новий користувач має взяти планшетний ПК та налаштувати свій простір"</string>
-    <!-- no translation found for user_setup_profile_dialog_message (3896568553327558731) -->
-    <skip />
+    <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Налаштувати профіль зараз?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Створити зараз"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не зараз"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Лише власник планшетного ПК може керувати користувачами."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Лише власник телефону може керувати користувачами."</string>
-    <string name="user_cannot_add_accounts_message" msgid="1610930617977321638">"Обмежені користувачі не можуть додавати облікові записи"</string>
+    <!-- no translation found for user_cannot_add_accounts_message (5116692653439737050) -->
+    <skip />
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g> – видалити з пристрою"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Новий користувач"</string>
-    <!-- no translation found for user_new_profile_name (2632088404952119900) -->
-    <skip />
+    <string name="user_new_profile_name" msgid="2632088404952119900">"Новий профіль"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Видалити себе?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Видалити користувача?"</string>
+    <!-- no translation found for user_profile_confirm_remove_title (7399928935979459016) -->
+    <skip />
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Вашу пам’ять і дані буде видалено з цього планшетного ПК. Цю дію не можна відмінити."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Вашу пам’ять і дані буде видалено з цього телефону. Цю дію не можна відмінити."</string>
     <string name="user_confirm_remove_message" product="tablet" msgid="4610106937214870034">"Пам’ять і дані цього користувача буде видалено з цього планшетного ПК. Цю дію не можна відмінити."</string>
     <string name="user_confirm_remove_message" product="default" msgid="8130264611683731142">"Пам’ять і дані цього користувача буде видалено з цього телефону. Цю дію не можна відмінити."</string>
+    <!-- no translation found for user_profile_confirm_remove_message (3071489858733409187) -->
+    <skip />
+    <!-- no translation found for user_profile_confirm_remove_message (7078238859138335893) -->
+    <skip />
     <string name="user_adding_new_user" msgid="1521674650874241407">"Додавання нового користувача…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Видалити користувача"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Видалити"</string>
@@ -1888,7 +1884,8 @@
     <string name="user_rename" msgid="8523499513614655279">"ПЕРЕЙМЕНУВАТИ"</string>
     <string name="app_restrictions_custom_label" msgid="4171895848817279538">"Установити обмеження для програми"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Керується програмою <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="app_not_supported_in_limited" msgid="1514792872934755368">"Ця програма не підтримується для обмежених користувачів"</string>
+    <!-- no translation found for app_not_supported_in_limited (913035259626149121) -->
+    <skip />
     <!-- no translation found for app_sees_restricted_accounts (7503264525057246240) -->
     <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi і мобільні мережі"</string>
@@ -1903,7 +1900,11 @@
     <string name="wizard_back" msgid="5567007959434765743">"Назад"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Далі"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Завершити"</string>
-    <string name="user_image_take_photo" msgid="1280274310152803669">"Зробити фото"</string>
-    <string name="user_image_choose_photo" msgid="7940990613897477057">"Вибрати фото з галереї"</string>
+    <!-- no translation found for user_image_take_photo (1280274310152803669) -->
+    <!-- no translation found for user_image_take_photo (7496128293167402354) -->
+    <skip />
+    <!-- no translation found for user_image_choose_photo (7940990613897477057) -->
+    <!-- no translation found for user_image_choose_photo (3746334626214970837) -->
+    <skip />
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
 </resources>
