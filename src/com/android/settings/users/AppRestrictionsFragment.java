@@ -350,8 +350,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private void addSystemApps(List<SelectableAppInfo> visibleApps, Intent intent) {
         if (getActivity() == null) return;
         final PackageManager pm = getActivity().getPackageManager();
-        List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent,
-                PackageManager.GET_DISABLED_COMPONENTS);
+        List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent, 0);
         for (ResolveInfo app : launchableApps) {
             if (app.activityInfo != null && app.activityInfo.applicationInfo != null) {
                 int flags = app.activityInfo.applicationInfo.flags;
