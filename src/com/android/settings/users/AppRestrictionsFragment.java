@@ -34,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,6 +64,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -102,6 +106,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private static final int DIALOG_ID_EDIT_USER_INFO = 1;
 
+    private PackageManager mPackageManager;
     private UserManager mUserManager;
     private UserHandle mUser;
 
@@ -262,6 +267,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             }
             mNewUser = args.getBoolean(EXTRA_NEW_USER, false);
         }
+        mPackageManager = getActivity().getPackageManager();
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getPreferenceScreen();
@@ -347,22 +353,74 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
-    private void addSystemApps(List<SelectableAppInfo> visibleApps, Intent intent) {
+    private boolean isSystemPackage(String packageName) {
+        try {
+            final PackageInfo pi = mPackageManager.getPackageInfo(packageName, 0);
+            if (pi.applicationInfo == null) return false;
+            final int flags = pi.applicationInfo.flags;
+            if ((flags & ApplicationInfo.FLAG_SYSTEM) != 0
+                    || (flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                return true;
+            }
+        } catch (NameNotFoundException nnfe) {
+            // Missing package?
+        }
+        return false;
+    }
+
+    /**
+     * Find all pre-installed input methods that are marked as default
+     * and add them to an exclusion list so that they aren't
+     * presented to the user for toggling.
+     * Don't add non-default ones, as they may include other stuff that we
+     * don't need to auto-include.
+     * @param excludePackages the set of package names to append to
+     */
+    private void addSystemImes(Set<String> excludePackages) {
+        final Context context = getActivity();
+        if (context == null) return;
+        InputMethodManager imm = (InputMethodManager)
+                context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        List<InputMethodInfo> imis = imm.getInputMethodList();
+        for (InputMethodInfo imi : imis) {
+            try {
+                if (imi.isDefault(context) && isSystemPackage(imi.getPackageName())) {
+                    excludePackages.add(imi.getPackageName());
+                }
+            } catch (Resources.NotFoundException rnfe) {
+                // Not default
+            }
+        }
+    }
+
+    /**
+     * Add system apps that match an intent to the list, excluding any packages in the exclude list.
+     * @param visibleApps list of apps to append the new list to
+     * @param intent the intent to match
+     * @param excludePackages the set of package names to be excluded, since they're required
+     */
+    private void addSystemApps(List<SelectableAppInfo> visibleApps, Intent intent,
+            Set<String> excludePackages) {
         if (getActivity() == null) return;
-        final PackageManager pm = getActivity().getPackageManager();
-        List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent, 0);
+        final PackageManager pm = mPackageManager;
+        List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent,
+                PackageManager.GET_DISABLED_COMPONENTS);
         for (ResolveInfo app : launchableApps) {
             if (app.activityInfo != null && app.activityInfo.applicationInfo != null) {
                 int flags = app.activityInfo.applicationInfo.flags;
                 if ((flags & ApplicationInfo.FLAG_SYSTEM) != 0
                         || (flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
                     // System app
+                    // Skip excluded packages
+                    if (excludePackages.contains(app.activityInfo.packageName)) continue;
+
                     SelectableAppInfo info = new SelectableAppInfo();
                     info.packageName = app.activityInfo.packageName;
                     info.appName = app.activityInfo.applicationInfo.loadLabel(pm);
                     info.icon = app.activityInfo.loadIcon(pm);
                     info.activityName = app.activityInfo.loadLabel(pm);
                     if (info.activityName == null) info.activityName = info.appName;
+
                     visibleApps.add(info);
                 }
             }
@@ -392,17 +450,20 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mVisibleApps = new ArrayList<SelectableAppInfo>();
         final Context context = getActivity();
         if (context == null) return;
-        PackageManager pm = context.getPackageManager();
+        final PackageManager pm = mPackageManager;
         IPackageManager ipm = AppGlobals.getPackageManager();
+
+        final HashSet<String> excludePackages = new HashSet<String>();
+        addSystemImes(excludePackages);
 
         // Add launchers
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
         launcherIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        addSystemApps(mVisibleApps, launcherIntent);
+        addSystemApps(mVisibleApps, launcherIntent, excludePackages);
 
         // Add widgets
         Intent widgetIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        addSystemApps(mVisibleApps, widgetIntent);
+        addSystemApps(mVisibleApps, widgetIntent, excludePackages);
 
         List<ApplicationInfo> installedApps = pm.getInstalledApplications(0);
         for (ApplicationInfo app : installedApps) {
@@ -470,7 +531,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private void populateApps() {
         final Context context = getActivity();
         if (context == null) return;
-        PackageManager pm = context.getPackageManager();
+        final PackageManager pm = mPackageManager;
         IPackageManager ipm = AppGlobals.getPackageManager();
         mAppList.removeAll();
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
