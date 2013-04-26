@@ -62,19 +62,19 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothHeadset) proxy;
-            // We just bound to the service, so refresh the UI of the
-            // headset device.
+            // We just bound to the service, so refresh the UI for any connected HFP devices.
             List<BluetoothDevice> deviceList = mService.getConnectedDevices();
-            if (!deviceList.isEmpty()) {
-                BluetoothDevice firstDevice = deviceList.get(0);
-                CachedBluetoothDevice device = mDeviceManager.findDevice(firstDevice);
+            while (!deviceList.isEmpty()) {
+                BluetoothDevice nextDevice = deviceList.remove(0);
+                CachedBluetoothDevice device = mDeviceManager.findDevice(nextDevice);
                 // we may add a new device here, but generally this should not happen
                 if (device == null) {
-                    Log.w(TAG, "HeadsetProfile found new device: " + firstDevice);
-                    device = mDeviceManager.addDevice(mLocalAdapter, mProfileManager, firstDevice);
+                    Log.w(TAG, "HeadsetProfile found new device: " + nextDevice);
+                    device = mDeviceManager.addDevice(mLocalAdapter, mProfileManager, nextDevice);
                 }
                 device.onProfileStateChanged(HeadsetProfile.this,
                         BluetoothProfile.STATE_CONNECTED);
+                device.refresh();
             }
 
             mProfileManager.callServiceConnectedListeners();
