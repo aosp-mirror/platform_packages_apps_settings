@@ -26,6 +26,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.RestrictionEntry;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
@@ -140,6 +141,20 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private Dialog mEditUserInfoDialog;
 
     private EditUserPhotoController mEditUserPhotoController;
+
+    private BroadcastReceiver mUserBackgrounding = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Update the user's app selection right away without waiting for a pause
+            // onPause() might come in too late, causing apps to disappear after broadcasts
+            // have been scheduled during user startup.
+            if (mAppListChanged) {
+                if (DEBUG) Log.d(TAG, "User backgrounding, update app list");
+                updateUserAppList();
+                if (DEBUG) Log.d(TAG, "User backgrounding, done updating app list");
+            }
+        }
+    };
 
     static class SelectableAppInfo {
         String packageName;
@@ -257,7 +272,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         super.onCreate(icicle);
 
         if (icicle != null) {
-            mNewUser = icicle.getBoolean(EXTRA_NEW_USER, false);
             mUser = new UserHandle(icicle.getInt(EXTRA_USER_ID));
         } else {
             Bundle args = getArguments();
@@ -292,12 +306,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(EXTRA_NEW_USER, mNewUser);
         outState.putInt(EXTRA_USER_ID, mUser.getIdentifier());
     }
 
     public void onResume() {
         super.onResume();
+        getActivity().registerReceiver(mUserBackgrounding,
+                new IntentFilter(Intent.ACTION_USER_BACKGROUND));
         mAppListChanged = false;
         new AppLoadingTask().execute((Void[]) null);
 
@@ -311,6 +326,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     public void onPause() {
         super.onPause();
+        mNewUser = false;
+        getActivity().unregisterReceiver(mUserBackgrounding);
         if (mAppListChanged) {
             new Thread() {
                 public void run() {
@@ -336,6 +353,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     ApplicationInfo info = ipm.getApplicationInfo(packageName, 0, userId);
                     if (info == null || info.enabled == false) {
                         ipm.installExistingPackageAsUser(packageName, mUser.getIdentifier());
+                        if (DEBUG) {
+                            Log.d(TAG, "Installing " + packageName);
+                        }
                     }
                 } catch (RemoteException re) {
                 }
@@ -346,6 +366,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     if (info != null) {
                         ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
                                 PackageManager.DELETE_SYSTEM_APP);
+                        if (DEBUG) {
+                            Log.d(TAG, "Uninstalling " + packageName);
+                        }
                     }
                 } catch (RemoteException re) {
                 }
@@ -597,6 +620,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 i++;
             }
         }
+        // If this is the first time for a new profile, install/uninstall default apps for profile
+        // to avoid taking the hit in onPause(), which can cause race conditions on user switch.
+        if (mNewUser && mFirstTime) {
+            mFirstTime = false;
+            updateUserAppList();
+        }
     }
 
     private class AppLabelComparator implements Comparator<SelectableAppInfo> {
@@ -648,8 +677,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 toggleAppPanel(pref);
             } else if (!pref.isImmutable()) {
                 pref.setChecked(!pref.isChecked());
-                mSelectedPackages.put(pref.getKey().substring(PKG_PREFIX.length()),
-                        pref.isChecked());
+                final String packageName = pref.getKey().substring(PKG_PREFIX.length());
+                mSelectedPackages.put(packageName, pref.isChecked());
+                if (pref.isChecked() && pref.hasSettings
+                        && pref.restrictions == null) {
+                    // The restrictions have not been initialized, get and save them
+                    requestRestrictionsForApp(packageName, pref);
+                }
                 mAppListChanged = true;
                 updateAllEntries(pref.getKey(), pref.isChecked());
             }
@@ -722,19 +756,24 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             getActivity(), mUser);
                     onRestrictionsReceived(preference, packageName, restrictions);
                 } else {
-                    Bundle oldEntries =
-                            mUserManager.getApplicationRestrictions(packageName, mUser);
-                    Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
-                    intent.setPackage(packageName);
-                    intent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE, oldEntries);
-                    intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-                    getActivity().sendOrderedBroadcast(intent, null,
-                            new RestrictionsResultReceiver(packageName, preference),
-                            null, Activity.RESULT_OK, null, null);
+                    requestRestrictionsForApp(packageName, preference);
                 }
             }
             preference.panelOpen = !preference.panelOpen;
         }
+    }
+
+    private void requestRestrictionsForApp(String packageName,
+            AppRestrictionsPreference preference) {
+        Bundle oldEntries =
+                mUserManager.getApplicationRestrictions(packageName, mUser);
+        Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
+        intent.setPackage(packageName);
+        intent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE, oldEntries);
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        getActivity().sendOrderedBroadcast(intent, null,
+                new RestrictionsResultReceiver(packageName, preference),
+                null, Activity.RESULT_OK, null, null);
     }
 
     class RestrictionsResultReceiver extends BroadcastReceiver {
