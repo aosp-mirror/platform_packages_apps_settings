@@ -81,7 +81,11 @@ public class OwnerInfoSettings extends Fragment {
         }
         mCheckbox.setChecked(enabled);
         if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            mCheckbox.setText(R.string.show_user_info_on_lockscreen_label);
+            if (UserManager.get(getActivity()).isLinkedUser()) {
+                mCheckbox.setText(R.string.show_profile_info_on_lockscreen_label);
+            } else {
+                mCheckbox.setText(R.string.show_user_info_on_lockscreen_label);
+            }
         }
         mCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
