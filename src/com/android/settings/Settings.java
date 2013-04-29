@@ -763,7 +763,11 @@ public class Settings extends PreferenceActivity
             titleRes = R.string.wallpaper_settings_fragment_title;
         } else if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
                 && UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            titleRes = R.string.user_info_settings_title;
+            if (UserManager.get(this).isLinkedUser()) {
+                titleRes = R.string.profile_info_settings_title;
+            } else {
+                titleRes = R.string.user_info_settings_title;
+            }
         }
         startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
                 null, 0);
