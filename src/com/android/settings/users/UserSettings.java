@@ -350,11 +350,15 @@ public class UserSettings extends SettingsPreferenceFragment
         } else if (info.id == UserHandle.myUserId()) {
             // Jump to owner info panel
             Bundle extras = new Bundle();
-            extras.putBoolean(OwnerInfoSettings.EXTRA_SHOW_NICKNAME, true);
+            if (!info.isRestricted()) {
+                extras.putBoolean(OwnerInfoSettings.EXTRA_SHOW_NICKNAME, true);
+            }
+            int titleResId = info.id == UserHandle.USER_OWNER ? R.string.owner_info_settings_title
+                    : (info.isRestricted() ? R.string.profile_info_settings_title
+                            : R.string.user_info_settings_title);
             ((PreferenceActivity) getActivity()).startPreferencePanel(
                     OwnerInfoSettings.class.getName(),
-                    extras, R.string.user_info_settings_title, null,
-                    null, 0);
+                    extras, titleResId, null, null, 0);
         }
     }
 
