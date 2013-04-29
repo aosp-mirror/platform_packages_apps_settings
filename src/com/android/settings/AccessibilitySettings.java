@@ -32,6 +32,8 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -427,11 +429,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     @Override
                     protected void onBindView(View view) {
                         super.onBindView(view);
-
-                        LinearLayout containerView =
-                                (LinearLayout) view.findViewById(R.id.message_container);
-                        containerView.setGravity(Gravity.CENTER);
-
                         TextView summaryView = (TextView) view.findViewById(R.id.summary);
                         String title = getString(R.string.accessibility_no_services_installed);
                         summaryView.setText(title);
@@ -1030,8 +1027,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             super.onViewCreated(view, savedInstanceState);
             onInstallActionBarToggleSwitch();
             onProcessArguments(getArguments());
+            // Set a transparent drawable to prevent use of the default one.
+            getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
             getListView().setDivider(null);
-            getListView().setEnabled(false);
         }
 
         @Override
