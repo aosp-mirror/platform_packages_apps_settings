@@ -43,6 +43,7 @@ public class AppOpsSummary extends Fragment {
         AppOpsState.LOCATION_TEMPLATE,
         AppOpsState.PERSONAL_TEMPLATE,
         AppOpsState.MESSAGING_TEMPLATE,
+        AppOpsState.MEDIA_TEMPLATE,
         AppOpsState.DEVICE_TEMPLATE
     };
 
