@@ -18,9 +18,11 @@ package com.android.settings.users;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -55,6 +57,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.ChooseLockGeneric;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
 import com.android.settings.SelectableEditTextPreference;
@@ -89,6 +94,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_SETUP_PROFILE = 4;
     private static final int DIALOG_USER_CANNOT_MANAGE = 5;
     private static final int DIALOG_CHOOSE_USER_TYPE = 6;
+    private static final int DIALOG_NEED_LOCKSCREEN = 7;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_SETUP_USER = 2;
@@ -96,6 +102,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final int USER_TYPE_USER = 1;
     private static final int USER_TYPE_RESTRICTED_PROFILE = 2;
+
+    private static final int REQUEST_CHOOSE_LOCK = 10;
 
     private static final String KEY_ADD_USER_LONG_MESSAGE_DISPLAYED =
             "key_add_user_long_message_displayed";
@@ -275,6 +283,31 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    private boolean hasLockscreenSecurity() {
+        LockPatternUtils lpu = new LockPatternUtils(getActivity());
+        return lpu.isLockPasswordEnabled() || lpu.isLockPatternEnabled();
+    }
+
+    private void launchChooseLockscreen() {
+        Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        startActivityForResult(chooseLockIntent, REQUEST_CHOOSE_LOCK);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CHOOSE_LOCK) {
+            if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
+                addUserNow(USER_TYPE_RESTRICTED_PROFILE);
+            } else {
+                showDialog(DIALOG_NEED_LOCKSCREEN);
+            }
+        }
+    }
+
     private void onAddUserClicked(int userType) {
         synchronized (mUserLock) {
             if (mRemovingUserId == -1 && !mAddingUser) {
@@ -283,7 +316,11 @@ public class UserSettings extends SettingsPreferenceFragment
                     showDialog(DIALOG_ADD_USER);
                     break;
                 case USER_TYPE_RESTRICTED_PROFILE:
-                    addUserNow(USER_TYPE_RESTRICTED_PROFILE);
+                    if (hasLockscreenSecurity()) {
+                        addUserNow(USER_TYPE_RESTRICTED_PROFILE);
+                    } else {
+                        showDialog(DIALOG_NEED_LOCKSCREEN);
+                    }
                     break;
                 }
             }
@@ -486,6 +523,20 @@ public class UserSettings extends SettingsPreferenceFragment
                                                 : USER_TYPE_RESTRICTED_PROFILE);
                                     }
                                 })
+                        .create();
+                return dlg;
+            }
+            case DIALOG_NEED_LOCKSCREEN: {
+                Dialog dlg = new AlertDialog.Builder(context)
+                        .setMessage(R.string.user_need_lock_message)
+                        .setPositiveButton(R.string.user_set_lock_button,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        launchChooseLockscreen();
+                                    }
+                                })
+                        .setNegativeButton(android.R.string.cancel, null)
                         .create();
                 return dlg;
             }
