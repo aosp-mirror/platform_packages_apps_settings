@@ -20,10 +20,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -38,6 +40,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
     private final Context mContext;
     private Switch mSwitch;
     private AtomicBoolean mConnected = new AtomicBoolean(false);
+    private AtomicBoolean mNotifyScanMode = new AtomicBoolean(true);
 
     private final WifiManager mWifiManager;
     private boolean mStateMachineEvent;
@@ -72,6 +75,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
         // The order matters! We really should not depend on this. :(
         mIntentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        registerForNotifyUserOnScanModeChange();
     }
 
     public void resume() {
@@ -98,6 +102,29 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
         mSwitch.setEnabled(isEnabled || isDisabled);
     }
 
+    private void getPersistedNotifyScanMode() {
+        mNotifyScanMode.set(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_NOTIFY_SCAN_ALWAYS_AVAILABLE, 1) == 1);
+    }
+
+    /**
+     * Observes settings changes to notify the user when scan mode is active and
+     * Wi-Fi is turned off
+     */
+    private void registerForNotifyUserOnScanModeChange() {
+        ContentObserver contentObserver = new ContentObserver(null) {
+            @Override
+            public void onChange(boolean selfChange) {
+                getPersistedNotifyScanMode();
+            }
+        };
+
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Global.getUriFor(Settings.Global.WIFI_NOTIFY_SCAN_ALWAYS_AVAILABLE),
+                false, contentObserver);
+        getPersistedNotifyScanMode();
+    }
+
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         //Do nothing if called as a result of a state machine event
         if (mStateMachineEvent) {
@@ -115,6 +142,13 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
         if (isChecked && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
                 (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
             mWifiManager.setWifiApEnabled(null, false);
+        }
+
+        if (isChecked == false)  {
+            if (mWifiManager.isScanAlwaysAvailable() && mNotifyScanMode.get()) {
+                Intent intent = new Intent(WifiManager.ACTION_NOTIFY_SCAN_ALWAYS_AVAILABLE);
+                mContext.startActivityAsUser(intent, null, UserHandle.CURRENT);
+            }
         }
 
         if (mWifiManager.setWifiEnabled(isChecked)) {
