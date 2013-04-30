@@ -29,7 +29,8 @@
 
     <!-- User dictionary preference title and fragment will be set programmatically. -->
     <PreferenceScreen
-            android:key="key_user_dictionary_settings" />
+            android:key="key_user_dictionary_settings"
+            android:title="@string/user_dict_settings_title" />
 
     <PreferenceCategory android:key="keyboard_settings_category"
             android:title="@string/keyboard_settings_category">

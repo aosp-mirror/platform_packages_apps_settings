@@ -511,7 +511,7 @@
         </receiver>
 
         <activity android:name="Settings$UserDictionarySettingsActivity"
-                android:label="@string/user_dict_settings_titlebar"
+                android:label="@string/user_dict_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
             <intent-filter>
@@ -531,7 +531,7 @@
         </activity>
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
-                  android:label="@string/user_dict_settings_titlebar"
+                  android:label="@string/user_dict_settings_title"
                   android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
                   android:windowSoftInputMode="stateVisible"
                   android:noHistory="true"
@@ -546,7 +546,7 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="UserDictionarySettings"
-                android:label="@string/user_dict_settings_titlebar"
+                android:label="@string/user_dict_settings_title"
                 android:exported="true"
                 android:targetActivity="Settings$UserDictionarySettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
