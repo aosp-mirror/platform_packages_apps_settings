@@ -38,6 +38,9 @@ final class A2dpProfile implements LocalBluetoothProfile {
     private BluetoothA2dp mService;
     private boolean mIsProfileReady;
 
+    private final LocalBluetoothAdapter mLocalAdapter;
+    private final CachedBluetoothDeviceManager mDeviceManager;
+
     static final ParcelUuid[] SINK_UUIDS = {
         BluetoothUuid.AudioSink,
         BluetoothUuid.AdvAudioDist,
@@ -56,6 +59,19 @@ final class A2dpProfile implements LocalBluetoothProfile {
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothA2dp) proxy;
+            // We just bound to the service, so refresh the UI for any connected A2DP devices.
+            List<BluetoothDevice> deviceList = mService.getConnectedDevices();
+            while (!deviceList.isEmpty()) {
+                BluetoothDevice nextDevice = deviceList.remove(0);
+                CachedBluetoothDevice device = mDeviceManager.findDevice(nextDevice);
+                // we may add a new device here, but generally this should not happen
+                if (device == null) {
+                    Log.w(TAG, "A2dpProfile found new device: " + nextDevice);
+                    device = mDeviceManager.addDevice(mLocalAdapter, mProfileManager, nextDevice);
+                }
+                device.onProfileStateChanged(A2dpProfile.this, BluetoothProfile.STATE_CONNECTED);
+                device.refresh();
+            }
             mIsProfileReady=true;
         }
 
@@ -68,10 +84,14 @@ final class A2dpProfile implements LocalBluetoothProfile {
     public boolean isProfileReady() {
         return mIsProfileReady;
     }
-    A2dpProfile(Context context, LocalBluetoothProfileManager profileManager) {
+
+    A2dpProfile(Context context, LocalBluetoothAdapter adapter,
+            CachedBluetoothDeviceManager deviceManager,
+            LocalBluetoothProfileManager profileManager) {
+        mLocalAdapter = adapter;
+        mDeviceManager = deviceManager;
         mProfileManager = profileManager;
-        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        adapter.getProfileProxy(context, new A2dpServiceListener(),
+        mLocalAdapter.getProfileProxy(context, new A2dpServiceListener(),
                 BluetoothProfile.A2DP);
     }
 

@@ -38,6 +38,10 @@ final class HidProfile implements LocalBluetoothProfile {
     private BluetoothInputDevice mService;
     private boolean mIsProfileReady;
 
+    private final LocalBluetoothAdapter mLocalAdapter;
+    private final CachedBluetoothDeviceManager mDeviceManager;
+    private final LocalBluetoothProfileManager mProfileManager;
+
     static final String NAME = "HID";
 
     // Order of this profile in device profiles list
@@ -50,6 +54,19 @@ final class HidProfile implements LocalBluetoothProfile {
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             if (V) Log.d(TAG,"Bluetooth service connected");
             mService = (BluetoothInputDevice) proxy;
+            // We just bound to the service, so refresh the UI for any connected HID devices.
+            List<BluetoothDevice> deviceList = mService.getConnectedDevices();
+            while (!deviceList.isEmpty()) {
+                BluetoothDevice nextDevice = deviceList.remove(0);
+                CachedBluetoothDevice device = mDeviceManager.findDevice(nextDevice);
+                // we may add a new device here, but generally this should not happen
+                if (device == null) {
+                    Log.w(TAG, "HidProfile found new device: " + nextDevice);
+                    device = mDeviceManager.addDevice(mLocalAdapter, mProfileManager, nextDevice);
+                }
+                device.onProfileStateChanged(HidProfile.this, BluetoothProfile.STATE_CONNECTED);
+                device.refresh();
+            }
             mIsProfileReady=true;
         }
 
@@ -63,7 +80,12 @@ final class HidProfile implements LocalBluetoothProfile {
         return mIsProfileReady;
     }
 
-    HidProfile(Context context, LocalBluetoothAdapter adapter) {
+    HidProfile(Context context, LocalBluetoothAdapter adapter,
+        CachedBluetoothDeviceManager deviceManager,
+        LocalBluetoothProfileManager profileManager) {
+        mLocalAdapter = adapter;
+        mDeviceManager = deviceManager;
+        mProfileManager = profileManager;
         adapter.getProfileProxy(context, new InputDeviceServiceListener(),
                 BluetoothProfile.INPUT_DEVICE);
     }

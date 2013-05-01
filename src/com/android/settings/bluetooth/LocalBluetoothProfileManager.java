@@ -111,7 +111,7 @@ final class LocalBluetoothProfileManager {
         }
 
         // Always add HID and PAN profiles
-        mHidProfile = new HidProfile(context, mLocalAdapter);
+        mHidProfile = new HidProfile(context, mLocalAdapter, mDeviceManager, this);
         addProfile(mHidProfile, HidProfile.NAME,
                 BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED);
 
@@ -138,7 +138,7 @@ final class LocalBluetoothProfileManager {
         if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.AudioSource)) {
             if (mA2dpProfile == null) {
                 Log.d(TAG, "Adding local A2DP profile");
-                mA2dpProfile = new A2dpProfile(mContext, this);
+                mA2dpProfile = new A2dpProfile(mContext, mLocalAdapter, mDeviceManager, this);
                 addProfile(mA2dpProfile, A2dpProfile.NAME,
                         BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
             }
