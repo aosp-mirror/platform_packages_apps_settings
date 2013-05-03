@@ -254,6 +254,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
             mMountTogglePreference.setEnabled(true);
             mMountTogglePreference.setTitle(mResources.getString(R.string.sd_eject));
             mMountTogglePreference.setSummary(mResources.getString(R.string.sd_eject_summary));
+            addPreference(mUsageBarPreference);
+            addPreference(mItemTotal);
+            addPreference(mItemAvailable);
         } else {
             if (Environment.MEDIA_UNMOUNTED.equals(state) || Environment.MEDIA_NOFS.equals(state)
                     || Environment.MEDIA_UNMOUNTABLE.equals(state)) {
