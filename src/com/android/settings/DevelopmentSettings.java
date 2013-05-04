@@ -48,7 +48,6 @@ import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -120,7 +119,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String SHOW_NON_RECTANGULAR_CLIP_KEY = "show_non_rect_clip";
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
-    private static final String SHOW_HW_OVERDRAW_KEY = "show_hw_overdraw";
+    private static final String DEBUG_HW_OVERDRAW_KEY = "debug_hw_overdraw";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
@@ -181,8 +180,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mForceMsaa;
     private CheckBoxPreference mShowHwScreenUpdates;
     private CheckBoxPreference mShowHwLayersUpdates;
-    private CheckBoxPreference mShowHwOverdraw;
     private CheckBoxPreference mDebugLayout;
+    private ListPreference mDebugHwOverdraw;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
     private ListPreference mWindowAnimationScale;
@@ -282,8 +281,8 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowNonRectClip = addListPreference(SHOW_NON_RECTANGULAR_CLIP_KEY);
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
-        mShowHwOverdraw = findAndInitCheckboxPref(SHOW_HW_OVERDRAW_KEY);
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
+        mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
@@ -479,7 +478,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateShowNonRectClipOptions();
         updateShowHwScreenUpdatesOptions();
         updateShowHwLayersUpdatesOptions();
-        updateShowHwOverdrawOptions();
+        updateDebugHwOverdrawOptions();
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
@@ -835,15 +834,29 @@ public class DevelopmentSettings extends PreferenceFragment
         pokeSystemProperties();
     }
 
-    private void updateShowHwOverdrawOptions() {
-        updateCheckBox(mShowHwOverdraw, SystemProperties.getBoolean(
-                HardwareRenderer.DEBUG_SHOW_OVERDRAW_PROPERTY, false));
+    private void updateDebugHwOverdrawOptions() {
+        String value = SystemProperties.get(HardwareRenderer.DEBUG_OVERDRAW_PROPERTY);
+        if (value == null) {
+            value = "";
+        }
+
+        CharSequence[] values = mDebugHwOverdraw.getEntryValues();
+        for (int i = 0; i < values.length; i++) {
+            if (value.contentEquals(values[i])) {
+                mDebugHwOverdraw.setValueIndex(i);
+                mDebugHwOverdraw.setSummary(mDebugHwOverdraw.getEntries()[i]);
+                return;
+            }
+        }
+        mDebugHwOverdraw.setValueIndex(0);
+        mDebugHwOverdraw.setSummary(mDebugHwOverdraw.getEntries()[0]);
     }
 
-    private void writeShowHwOverdrawOptions() {
-        SystemProperties.set(HardwareRenderer.DEBUG_SHOW_OVERDRAW_PROPERTY,
-                mShowHwOverdraw.isChecked() ? "true" : null);
+    private void writeDebugHwOverdrawOptions(Object newValue) {
+        SystemProperties.set(HardwareRenderer.DEBUG_OVERDRAW_PROPERTY,
+                newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
+        updateDebugHwOverdrawOptions();
     }
 
     private void updateDebugLayoutOptions() {
@@ -1158,8 +1171,6 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowHwScreenUpdatesOptions();
         } else if (preference == mShowHwLayersUpdates) {
             writeShowHwLayersUpdatesOptions();
-        } else if (preference == mShowHwOverdraw) {
-            writeShowHwOverdrawOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
         }
@@ -1191,6 +1202,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mTrackFrameTime) {
             writeTrackFrameTimeOptions(newValue);
+            return true;
+        } else if (preference == mDebugHwOverdraw) {
+            writeDebugHwOverdrawOptions(newValue);
             return true;
         } else if (preference == mShowNonRectClip) {
             writeShowNonRectClipOptions(newValue);

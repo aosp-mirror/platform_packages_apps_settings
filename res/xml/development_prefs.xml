@@ -166,10 +166,12 @@
                 android:title="@string/show_hw_layers_updates"
                 android:summary="@string/show_hw_layers_updates_summary"/>
 
-        <CheckBoxPreference
-                android:key="show_hw_overdraw"
-                android:title="@string/show_hw_overdraw"
-                android:summary="@string/show_hw_overdraw_summary"/>
+        <ListPreference
+                android:key="debug_hw_overdraw"
+                android:title="@string/debug_hw_overdraw"
+                android:persistent="false"
+                android:entries="@array/debug_hw_overdraw_entries"
+                android:entryValues="@array/debug_hw_overdraw_values" />
 
         <ListPreference
                 android:key="show_non_rect_clip"
