@@ -579,11 +579,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void loadInstalledServices() {
+        Set<ComponentName> installedServices = sInstalledServices;
+        installedServices.clear();
+
         List<AccessibilityServiceInfo> installedServiceInfos =
                 AccessibilityManager.getInstance(getActivity())
                         .getInstalledAccessibilityServiceList();
-        Set<ComponentName> installedServices = sInstalledServices;
-        installedServices.clear();
+        if (installedServiceInfos == null) {
+            return;
+        }
+
         final int installedServiceInfoCount = installedServiceInfos.size();
         for (int i = 0; i < installedServiceInfoCount; i++) {
             ResolveInfo resolveInfo = installedServiceInfos.get(i).getResolveInfo();
