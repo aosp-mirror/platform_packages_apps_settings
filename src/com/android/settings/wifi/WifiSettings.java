@@ -30,6 +30,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
@@ -46,6 +47,7 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -743,9 +745,26 @@ public class WifiSettings extends SettingsPreferenceFragment
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
-                addMessagePreference(R.string.wifi_empty_list_wifi_off);
+                setOffMessage();
                 break;
         }
+    }
+
+    private void setOffMessage() {
+        if (mEmptyView != null) {
+            mEmptyView.setText(R.string.wifi_empty_list_wifi_off);
+            mEmptyView.append("\n\n");
+            int resId;
+            if (Settings.Secure.isLocationProviderEnabled(getActivity().getContentResolver(),
+                    LocationManager.NETWORK_PROVIDER)) {
+                resId = R.string.wifi_scan_notify_text_location_on;
+            } else {
+                resId = R.string.wifi_scan_notify_text_location_off;
+            }
+            CharSequence charSeq = getText(resId);
+            mEmptyView.append(charSeq);
+        }
+        getPreferenceScreen().removeAll();
     }
 
     private void addMessagePreference(int messageId) {
@@ -906,7 +925,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
-                addMessagePreference(R.string.wifi_empty_list_wifi_off);
+                setOffMessage();
                 break;
         }
 
