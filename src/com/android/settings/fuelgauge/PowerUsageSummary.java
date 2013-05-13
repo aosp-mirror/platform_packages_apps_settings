@@ -768,6 +768,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     }
 
     private void addUserUsage() {
+        final Context context = getActivity();
+        if (context == null) return;
         for (int i=0; i<mUserSippers.size(); i++) {
             final int userId = mUserSippers.keyAt(i);
             final List<BatterySipper> sippers = mUserSippers.valueAt(i);
@@ -775,16 +777,16 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             Drawable icon;
             String name;
             if (info != null) {
-                icon = UserUtils.getUserIcon(mUm, info, getResources());
+                icon = UserUtils.getUserIcon(context, mUm, info, getResources());
                 name = info != null ? info.name : null;
                 if (name == null) {
                     name = Integer.toString(info.id);
                 }
-                name = getActivity().getResources().getString(
+                name = context.getResources().getString(
                         R.string.running_process_item_user_label, name);
             } else {
                 icon = null;
-                name = getActivity().getResources().getString(
+                name = context.getResources().getString(
                         R.string.running_process_item_removed_user_label);
             }
             double power = mUserPower.get(userId);
