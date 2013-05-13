@@ -1012,7 +1012,7 @@
     <!-- Summary for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_listener_security_warning_summary">
-        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to 
+        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to
         read all notifications posted by the system or any installed app, which may include personal
         information such as contact names and the text of messages sent to you. It will also be able
         to dismiss these notifications or touch action buttons within them.
@@ -3437,8 +3437,11 @@
     <string name="tts_default_pitch_title">Pitch</string>
     <!-- On main TTS Settings screen, summary for default pitch for synthesized voice -->
     <string name="tts_default_pitch_summary">Affects the tone of the spoken text</string>
+
     <!-- On main TTS Settings screen, in default settings section, setting default language for synthesized voice -->
     <string name="tts_default_lang_title">Language</string>
+    <!-- On main TTS Settings screen, language summary if it can't default to system language [CHAR LIMIT=50] -->
+    <string name="tts_lang_not_selected">Language not selected</string>
     <!-- On main TTS Settings screen, summary for default language for synthesized voice -->
     <string name="tts_default_lang_summary">Sets the language-specific voice for the spoken text</string>
     <!-- On main TTS Settings screen, triggers playback of an example of speech synthesis -->
