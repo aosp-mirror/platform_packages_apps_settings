@@ -395,6 +395,7 @@ public class ChooseLockPassword extends PreferenceActivity {
                             LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
                     mLockPatternUtils.clearLock(isFallback);
                     mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
+                    getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
