@@ -82,6 +82,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
+    private PackageManager mPM;
     DevicePolicyManager mDPM;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -111,6 +112,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mLockPatternUtils = new LockPatternUtils(getActivity());
 
+        mPM = getActivity().getPackageManager();
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
@@ -281,15 +283,24 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        final int n = getNumEnabledNotificationListeners();
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
-        if (n == 0) {
-            mNotificationAccess.setSummary(getResources().getString(
-                    R.string.manage_notification_access_summary_zero));
-        } else {
-            mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
-                    R.plurals.manage_notification_access_summary_nonzero,
-                    n, n)));
+        if (mNotificationAccess != null) {
+            final int total = NotificationAccessSettings.getListenersCount(mPM);
+            if (total == 0) {
+                if (deviceAdminCategory != null) {
+                    deviceAdminCategory.removePreference(mNotificationAccess);
+                }
+            } else {
+                final int n = getNumEnabledNotificationListeners();
+                if (n == 0) {
+                    mNotificationAccess.setSummary(getResources().getString(
+                            R.string.manage_notification_access_summary_zero));
+                } else {
+                    mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
+                            R.plurals.manage_notification_access_summary_nonzero,
+                            n, n)));
+                }
+            }
         }
 
         return root;
