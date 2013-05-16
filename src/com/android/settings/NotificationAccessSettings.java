@@ -195,13 +195,26 @@ public class NotificationAccessSettings extends ListFragment {
     }
 
     void updateList() {
-        mList.clear();
-
         loadEnabledListeners();
 
+        getListeners(mList, mPM);
+        mList.sort(new PackageItemInfo.DisplayNameComparator(mPM));
+
+        getListView().setAdapter(mList);
+    }
+
+    static int getListenersCount(PackageManager pm) {
+        return getListeners(null, pm);
+    }
+
+    private static int getListeners(ArrayAdapter<ServiceInfo> adapter, PackageManager pm) {
+        int listeners = 0;
+        if (adapter != null) {
+            adapter.clear();
+        }
         final int user = ActivityManager.getCurrentUser();
 
-        List<ResolveInfo> installedServices = mPM.queryIntentServicesAsUser(
+        List<ResolveInfo> installedServices = pm.queryIntentServicesAsUser(
                 new Intent(NotificationListenerService.SERVICE_INTERFACE),
                 PackageManager.GET_SERVICES | PackageManager.GET_META_DATA,
                 user);
@@ -218,13 +231,12 @@ public class NotificationAccessSettings extends ListFragment {
                         + android.Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE);
                 continue;
             }
-
-            mList.add(info);
+            if (adapter != null) {
+                adapter.add(info);
+            }
+            listeners++;
         }
-
-        mList.sort(new PackageItemInfo.DisplayNameComparator(mPM));
-
-        getListView().setAdapter(mList);
+        return listeners;
     }
 
     boolean isListenerEnabled(ServiceInfo info) {
