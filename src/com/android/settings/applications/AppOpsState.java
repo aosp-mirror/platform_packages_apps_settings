@@ -183,12 +183,14 @@ public class AppOpsState {
                     AppOpsManager.OP_ACCESS_NOTIFICATIONS,
                     AppOpsManager.OP_CALL_PHONE,
                     AppOpsManager.OP_WRITE_SETTINGS,
-                    AppOpsManager.OP_SYSTEM_ALERT_WINDOW },
+                    AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
+                    AppOpsManager.OP_WAKE_LOCK },
             new boolean[] { false,
                     true,
                     true,
                     true,
-                    true, }
+                    true,
+                    true,  }
             );
 
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
