@@ -123,6 +123,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     /** Key for extra passed in from calling fragment to indicate if this is a newly created user */
     public static final String EXTRA_NEW_USER = "new_user";
 
+    private static final String KEY_SAVED_PHOTO = "pending_photo";
+
     HashMap<String,Boolean> mSelectedPackages = new HashMap<String,Boolean>();
     private boolean mFirstTime = true;
     private boolean mNewUser;
@@ -141,6 +143,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private Dialog mEditUserInfoDialog;
 
     private EditUserPhotoController mEditUserPhotoController;
+    private Bitmap mSavedPhoto;
 
     private BroadcastReceiver mUserBackgrounding = new BroadcastReceiver() {
         @Override
@@ -273,6 +276,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
         if (icicle != null) {
             mUser = new UserHandle(icicle.getInt(EXTRA_USER_ID));
+            mSavedPhoto = (Bitmap) icicle.getParcelable(KEY_SAVED_PHOTO);
         } else {
             Bundle args = getArguments();
 
@@ -307,6 +311,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(EXTRA_USER_ID, mUser.getIdentifier());
+        if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
+                && mEditUserPhotoController != null) {
+            outState.putParcelable(KEY_SAVED_PHOTO,
+                    mEditUserPhotoController.getNewUserPhotoBitmap());
+        }
     }
 
     public void onResume() {
@@ -317,11 +326,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         new AppLoadingTask().execute((Void[]) null);
 
         UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
-        Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
-        CircleFramedDrawable circularIcon =
-                CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
         ((TextView) mHeaderView.findViewById(android.R.id.title)).setText(info.name);
-        ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(circularIcon);
+        ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(
+                getCircularUserIcon());
     }
 
     public void onPause() {
@@ -335,6 +342,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 }
             }.start();
         }
+    }
+
+    private Drawable getCircularUserIcon() {
+        Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
+        CircleFramedDrawable circularIcon =
+                CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
+        return circularIcon;
     }
 
     private void updateUserAppList() {
@@ -972,9 +986,19 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             userNameView.setText(info.name);
 
             final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
-            userPhotoView.setImageDrawable(mUserIconView.getDrawable());
+            Drawable drawable = null;
+            if (mSavedPhoto != null) {
+                drawable = CircleFramedDrawable.getInstance(getActivity(), mSavedPhoto);
+            } else {
+                drawable = mUserIconView.getDrawable();
+                if (drawable == null) {
+                    drawable = getCircularUserIcon();
+                }
+            }
+            userPhotoView.setImageDrawable(drawable);
 
-            mEditUserPhotoController = new EditUserPhotoController(this, userPhotoView);
+            mEditUserPhotoController = new EditUserPhotoController(this, userPhotoView,
+                    mSavedPhoto, drawable);
 
             mEditUserInfoDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.user_info_settings_title)
@@ -998,10 +1022,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                                 }
                             }
                             // Update the photo if changed.
-                            Drawable userPhoto = mEditUserPhotoController.getNewUserPhotoDrawable();
-                            if (userPhoto != null
-                                    && !userPhoto.equals(mUserIconView.getDrawable())) {
-                                mUserIconView.setImageDrawable(userPhoto);
+                            Drawable drawable = mEditUserPhotoController.getNewUserPhotoDrawable();
+                            Bitmap bitmap = mEditUserPhotoController.getNewUserPhotoBitmap();
+                            if (drawable != null && bitmap != null
+                                    && !drawable.equals(mUserIconView.getDrawable())) {
+                                mUserIconView.setImageDrawable(drawable);
                                 new AsyncTask<Void, Void, Void>() {
                                     @Override
                                     protected Void doInBackground(Void... params) {
@@ -1013,9 +1038,15 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             }
                             removeDialog(DIALOG_ID_EDIT_USER_INFO);
                         }
+                        clearEditUserInfoDialog();
                     }
                 })
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(android.R.string.cancel,  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        clearEditUserInfoDialog();
+                    }
+                 })
                 .create();
 
             // Make sure the IME is up.
@@ -1026,6 +1057,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
 
         return null;
+    }
+
+    private void clearEditUserInfoDialog() {
+        mEditUserInfoDialog = null;
+        mSavedPhoto = null;
     }
 
     private static class EditUserPhotoController {
@@ -1053,7 +1089,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         private Bitmap mNewUserPhotoBitmap;
         private Drawable mNewUserPhotoDrawable;
 
-        public EditUserPhotoController(Fragment fragment, ImageView view) {
+        public EditUserPhotoController(Fragment fragment, ImageView view,
+                Bitmap bitmap, Drawable drawable) {
             mContext = view.getContext();
             mFragment = fragment;
             mImageView = view;
@@ -1066,6 +1103,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     showUpdatePhotoPopup();
                 }
             });
+            mNewUserPhotoBitmap = bitmap;
+            mNewUserPhotoDrawable = drawable;
         }
 
         public boolean onActivityResult(int requestCode, int resultCode, final Intent data) {
