@@ -256,7 +256,8 @@
                 android:label="@string/apn_settings"
                 android:uiOptions="none"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:launchMode="singleTask">
+                android:launchMode="singleTask"
+                android:parentActivityName="Settings$WirelessSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APN_SETTINGS" />
