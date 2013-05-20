@@ -581,7 +581,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 final boolean isSettingsApp = packageName.equals(context.getPackageName());
                 AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
                 final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
-                p.setIcon(app.icon);
+                p.setIcon(app.icon != null ? app.icon.mutate() : null);
                 p.setChecked(false);
                 p.setTitle(app.activityName);
                 if (app.masterEntry != null) {
