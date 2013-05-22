@@ -607,6 +607,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     p.setImmutable(true);
                     // If the app is required and has no restrictions, skip showing it
                     if (!hasSettings && !isSettingsApp) continue;
+                    // Get and populate the defaults, since the user is not going to be
+                    // able to toggle this app ON (it's ON by default and immutable).
+                    if (hasSettings) {
+                        requestRestrictionsForApp(packageName, p);
+                    }
                 } else if (!mNewUser && appInfoListHasPackage(mUserApps, packageName)) {
                     p.setChecked(true);
                 }
@@ -896,6 +901,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             }
         }
         preference.setRestrictions(restrictions);
+        if (count == 1 // No visible restrictions
+                && preference.isImmutable()
+                && preference.isChecked()) {
+            // Special case of required app with no visible restrictions. Remove it
+            mAppList.removePreference(preference);
+        }
     }
 
     /**
@@ -1001,7 +1012,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     mSavedPhoto, drawable);
 
             mEditUserInfoDialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.user_info_settings_title)
+                .setTitle(R.string.profile_info_settings_title)
                 .setIconAttribute(R.drawable.ic_settings_multiuser)
                 .setView(content)
                 .setCancelable(true)
