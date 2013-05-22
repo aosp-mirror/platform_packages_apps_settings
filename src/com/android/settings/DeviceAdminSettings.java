@@ -43,8 +43,10 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DeviceAdminSettings extends ListFragment {
     static final String TAG = "DeviceAdminSettings";
@@ -86,8 +88,32 @@ public class DeviceAdminSettings extends ListFragment {
         List<ResolveInfo> avail = getActivity().getPackageManager().queryBroadcastReceivers(
                 new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
                 PackageManager.GET_META_DATA);
-        int count = avail == null ? 0 : avail.size();
-        for (int i=0; i<count; i++) {
+        if (avail == null) {
+            avail = Collections.emptyList();
+        }
+
+        // Some admins listed in mActiveAdmins may not have been found by the above query.
+        // We thus add them separately.
+        Set<ComponentName> activeAdminsNotInAvail = new HashSet<ComponentName>(mActiveAdmins);
+        for (ResolveInfo ri : avail) {
+            ComponentName riComponentName =
+                    new ComponentName(ri.activityInfo.packageName, ri.activityInfo.name);
+            activeAdminsNotInAvail.remove(riComponentName);
+        }
+        if (!activeAdminsNotInAvail.isEmpty()) {
+            avail = new ArrayList<ResolveInfo>(avail);
+            PackageManager packageManager = getActivity().getPackageManager();
+            for (ComponentName unlistedActiveAdmin : activeAdminsNotInAvail) {
+                List<ResolveInfo> resolved = packageManager.queryBroadcastReceivers(
+                        new Intent().setComponent(unlistedActiveAdmin),
+                        PackageManager.GET_META_DATA);
+                if (resolved != null) {
+                    avail.addAll(resolved);
+                }
+            }
+        }
+
+        for (int i = 0, count = avail.size(); i < count; i++) {
             ResolveInfo ri = avail.get(i);
             try {
                 DeviceAdminInfo dpi = new DeviceAdminInfo(getActivity(), ri);
