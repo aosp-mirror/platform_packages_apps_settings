@@ -376,13 +376,9 @@ public class UserSettings extends SettingsPreferenceFragment
             Bundle extras = new Bundle();
             extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, userId);
             extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
-            String title = getResources().getString(R.string.user_new_user_name);
-            if (userId > UserHandle.USER_OWNER) {
-                title = mUserManager.getUserInfo(userId).name;
-            }
             ((PreferenceActivity) getActivity()).startPreferencePanel(
                     AppRestrictionsFragment.class.getName(),
-                    extras, 0, title,
+                    extras, R.string.user_restrictions_title, null,
                     null, 0);
         } else if (info.id == UserHandle.myUserId()) {
             // Jump to owner info panel
