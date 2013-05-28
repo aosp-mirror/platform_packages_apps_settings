@@ -257,9 +257,19 @@ public class WifiSettings extends SettingsPreferenceFragment
                 customButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (isPhone() && !hasSimProblem()) {
+                        boolean isConnected = false;
+                        Activity activity = getActivity();
+                        final ConnectivityManager connectivity = (ConnectivityManager)
+                                activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+                        if (connectivity != null) {
+                            final NetworkInfo info = connectivity.getActiveNetworkInfo();
+                            isConnected = (info != null) && info.isConnected();
+                        }
+                        if (isConnected) {
+                            // Warn of possible data charges
                             showDialog(WIFI_SKIPPED_DIALOG_ID);
                         } else {
+                            // Warn of lack of updates
                             showDialog(WIFI_AND_MOBILE_SKIPPED_DIALOG_ID);
                         }
                     }
@@ -688,26 +698,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
         return super.onCreateDialog(dialogId);
     }
-
-    private boolean isPhone() {
-        final TelephonyManager telephonyManager = (TelephonyManager)this.getSystemService(
-                Context.TELEPHONY_SERVICE);
-        return telephonyManager != null
-                && telephonyManager.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
-    }
-
-    /**
-    * Return true if there's any SIM related impediment to connectivity.
-    * Treats Unknown as OK. (Only returns true if we're sure of a SIM problem.)
-    */
-   protected boolean hasSimProblem() {
-       final TelephonyManager telephonyManager = (TelephonyManager)this.getSystemService(
-               Context.TELEPHONY_SERVICE);
-       return telephonyManager != null
-               && telephonyManager.getCurrentPhoneType() == TelephonyManager.PHONE_TYPE_GSM
-               && telephonyManager.getSimState() != TelephonyManager.SIM_STATE_READY
-               && telephonyManager.getSimState() != TelephonyManager.SIM_STATE_UNKNOWN;
-   }
 
     /**
      * Shows the latest access points available with supplimental information like
