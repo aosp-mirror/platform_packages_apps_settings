@@ -28,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
+import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,6 +123,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 Preference preference) {
             final String key = preference.getKey();
             boolean handled = true;
+
+            EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, key);
+
             if (KEY_UNLOCK_SET_OFF.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);

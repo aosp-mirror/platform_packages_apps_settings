@@ -6,7 +6,9 @@ LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4 android-support-v13 jsr305
 
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_SRC_FILES := \
+        $(call all-java-files-under, src) \
+        src/com/android/settings/EventLogTags.logtags
 
 LOCAL_PACKAGE_NAME := Settings
 LOCAL_CERTIFICATE := platform
