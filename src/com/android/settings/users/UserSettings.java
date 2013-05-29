@@ -134,6 +134,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
+    private Drawable mDefaultCircleAvatar;
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
 
@@ -281,6 +282,13 @@ public class UserSettings extends SettingsPreferenceFragment
             mMePreference.setIcon(encircle(b));
             mUserIcons.put(myUserId, b);
         }
+    }
+
+    private Drawable getDefaultCircleAvatar() {
+        if (mDefaultCircleAvatar == null) {
+            mDefaultCircleAvatar = encircle(R.drawable.avatar_default_1);
+        }
+        return mDefaultCircleAvatar;
     }
 
     private boolean hasLockscreenSecurity() {
@@ -638,7 +646,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
                     missingIcons.add(user.id);
-                    pref.setIcon(encircle(R.drawable.avatar_default_1));
+                    pref.setIcon(getDefaultCircleAvatar());
                 } else {
                     setPhotoId(pref, user);
                 }
@@ -650,7 +658,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
-            pref.setIcon(encircle(R.drawable.avatar_default_1));
+            pref.setIcon(getDefaultCircleAvatar());
             mUserListCategory.addPreference(pref);
         }
         getActivity().invalidateOptionsMenu();
