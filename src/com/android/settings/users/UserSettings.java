@@ -201,15 +201,10 @@ public class UserSettings extends SettingsPreferenceFragment
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
+        filter.addAction(Intent.ACTION_USER_ADDED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
         getActivity().registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
                 mHandler);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadProfile();
         updateUserList();
     }
 
