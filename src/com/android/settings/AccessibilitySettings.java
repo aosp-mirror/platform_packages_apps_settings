@@ -200,16 +200,20 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         mSettingsContentObserver.register(getContentResolver());
-        RotationPolicy.registerRotationPolicyListener(getActivity(),
-                mRotationPolicyListener);
+        if (RotationPolicy.isRotationSupported(getActivity())) {
+            RotationPolicy.registerRotationPolicyListener(getActivity(),
+                    mRotationPolicyListener);
+        }
     }
 
     @Override
     public void onPause() {
         mSettingsPackageMonitor.unregister();
-        RotationPolicy.unregisterRotationPolicyListener(getActivity(),
-                mRotationPolicyListener);
         mSettingsContentObserver.unregister(getContentResolver());
+        if (RotationPolicy.isRotationSupported(getActivity())) {
+            RotationPolicy.unregisterRotationPolicyListener(getActivity(),
+                    mRotationPolicyListener);
+        }
         super.onPause();
     }
 
@@ -320,6 +324,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Lock screen rotation.
         mToggleLockScreenRotationPreference =
                 (CheckBoxPreference) findPreference(TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
+        if (!RotationPolicy.isRotationSupported(getActivity())) {
+            mSystemsCategory.removePreference(mToggleLockScreenRotationPreference);
+        }
 
         // Speak passwords.
         mToggleSpeakPasswordPreference =

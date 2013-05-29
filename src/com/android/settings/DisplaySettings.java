@@ -95,9 +95,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
-        if (RotationPolicy.isRotationLockToggleSupported(getActivity())) {
+        if (!RotationPolicy.isRotationSupported(getActivity())
+                || RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
-            // Display settings.  However, is still available in Accessibility settings.
+            // Display settings.  However, is still available in Accessibility settings,
+            // if the device supports rotation.
             getPreferenceScreen().removePreference(mAccelerometer);
         }
 
