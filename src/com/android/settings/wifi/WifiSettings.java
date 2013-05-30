@@ -743,16 +743,19 @@ public class WifiSettings extends SettingsPreferenceFragment
     private void setOffMessage() {
         if (mEmptyView != null) {
             mEmptyView.setText(R.string.wifi_empty_list_wifi_off);
-            mEmptyView.append("\n\n");
-            int resId;
-            if (Settings.Secure.isLocationProviderEnabled(getActivity().getContentResolver(),
-                    LocationManager.NETWORK_PROVIDER)) {
-                resId = R.string.wifi_scan_notify_text_location_on;
-            } else {
-                resId = R.string.wifi_scan_notify_text_location_off;
+            if (Settings.Global.getInt(getActivity().getContentResolver(),
+                    Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1) {
+                mEmptyView.append("\n\n");
+                int resId;
+                if (Settings.Secure.isLocationProviderEnabled(getActivity().getContentResolver(),
+                        LocationManager.NETWORK_PROVIDER)) {
+                    resId = R.string.wifi_scan_notify_text_location_on;
+                } else {
+                    resId = R.string.wifi_scan_notify_text_location_off;
+                }
+                CharSequence charSeq = getText(resId);
+                mEmptyView.append(charSeq);
             }
-            CharSequence charSeq = getText(resId);
-            mEmptyView.append(charSeq);
         }
         getPreferenceScreen().removeAll();
     }
