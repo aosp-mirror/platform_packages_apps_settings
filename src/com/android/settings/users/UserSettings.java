@@ -134,7 +134,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
-    private Drawable mDefaultCircleAvatar;
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
 
@@ -201,10 +200,15 @@ public class UserSettings extends SettingsPreferenceFragment
         loadProfile();
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
-        filter.addAction(Intent.ACTION_USER_ADDED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
         getActivity().registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
                 mHandler);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadProfile();
         updateUserList();
     }
 
@@ -277,13 +281,6 @@ public class UserSettings extends SettingsPreferenceFragment
             mMePreference.setIcon(encircle(b));
             mUserIcons.put(myUserId, b);
         }
-    }
-
-    private Drawable getDefaultCircleAvatar() {
-        if (mDefaultCircleAvatar == null) {
-            mDefaultCircleAvatar = encircle(R.drawable.avatar_default_1);
-        }
-        return mDefaultCircleAvatar;
     }
 
     private boolean hasLockscreenSecurity() {
@@ -377,10 +374,10 @@ public class UserSettings extends SettingsPreferenceFragment
         UserInfo info = mUserManager.getUserInfo(userId);
         if (info.isRestricted() && mIsOwner) {
             Bundle extras = new Bundle();
-            extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, userId);
-            extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
+            extras.putInt(RestrictedProfileSettings.EXTRA_USER_ID, userId);
+            extras.putBoolean(RestrictedProfileSettings.EXTRA_NEW_USER, newUser);
             ((PreferenceActivity) getActivity()).startPreferencePanel(
-                    AppRestrictionsFragment.class.getName(),
+                    RestrictedProfileSettings.class.getName(),
                     extras, R.string.user_restrictions_title, null,
                     null, 0);
         } else if (info.id == UserHandle.myUserId()) {
@@ -641,7 +638,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
                     missingIcons.add(user.id);
-                    pref.setIcon(getDefaultCircleAvatar());
+                    pref.setIcon(encircle(R.drawable.avatar_default_1));
                 } else {
                     setPhotoId(pref, user);
                 }
@@ -653,7 +650,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
-            pref.setIcon(getDefaultCircleAvatar());
+            pref.setIcon(encircle(R.drawable.avatar_default_1));
             mUserListCategory.addPreference(pref);
         }
         getActivity().invalidateOptionsMenu();
