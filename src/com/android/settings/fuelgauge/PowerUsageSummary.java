@@ -16,6 +16,11 @@
 
 package com.android.settings.fuelgauge;
 
+import static android.os.BatteryStats.NETWORK_MOBILE_RX_BYTES;
+import static android.os.BatteryStats.NETWORK_MOBILE_TX_BYTES;
+import static android.os.BatteryStats.NETWORK_WIFI_RX_BYTES;
+import static android.os.BatteryStats.NETWORK_WIFI_TX_BYTES;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +29,6 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.BatteryStats.Uid;
 import android.os.Bundle;
@@ -229,8 +233,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     R.string.usage_type_wake_lock,
                     R.string.usage_type_gps,
                     R.string.usage_type_wifi_running,
-                    R.string.usage_type_data_send,
                     R.string.usage_type_data_recv,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_wifi_recv,
+                    R.string.usage_type_data_wifi_send,
                     R.string.usage_type_audio,
                     R.string.usage_type_video,
                 };
@@ -240,8 +246,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     sipper.wakeLockTime,
                     sipper.gpsTime,
                     sipper.wifiRunningTime,
-                    sipper.tcpBytesSent,
-                    sipper.tcpBytesReceived,
+                    sipper.mobileRxBytes,
+                    sipper.mobileTxBytes,
+                    sipper.wifiRxBytes,
+                    sipper.wifiTxBytes,
                     0,
                     0
                 };
@@ -279,16 +287,20 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     R.string.usage_type_cpu,
                     R.string.usage_type_cpu_foreground,
                     R.string.usage_type_wake_lock,
-                    R.string.usage_type_data_send,
                     R.string.usage_type_data_recv,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_wifi_recv,
+                    R.string.usage_type_data_wifi_send,
                 };
                 values = new double[] {
                     sipper.usageTime,
                     sipper.cpuTime,
                     sipper.cpuFgTime,
                     sipper.wakeLockTime,
-                    sipper.tcpBytesSent,
-                    sipper.tcpBytesReceived,
+                    sipper.mobileRxBytes,
+                    sipper.mobileTxBytes,
+                    sipper.wifiRxBytes,
+                    sipper.wifiTxBytes,
                 };
             } break;
             case BLUETOOTH:
@@ -298,16 +310,20 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     R.string.usage_type_cpu,
                     R.string.usage_type_cpu_foreground,
                     R.string.usage_type_wake_lock,
-                    R.string.usage_type_data_send,
                     R.string.usage_type_data_recv,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_wifi_recv,
+                    R.string.usage_type_data_wifi_send,
                 };
                 values = new double[] {
                     sipper.usageTime,
                     sipper.cpuTime,
                     sipper.cpuFgTime,
                     sipper.wakeLockTime,
-                    sipper.tcpBytesSent,
-                    sipper.tcpBytesReceived,
+                    sipper.mobileRxBytes,
+                    sipper.mobileTxBytes,
+                    sipper.wifiRxBytes,
+                    sipper.wifiTxBytes,
                 };
             } break;
             default:
@@ -445,7 +461,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         for (int p = 0; p < speedSteps; p++) {
             powerCpuNormal[p] = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_ACTIVE, p);
         }
-        final double averageCostPerByte = getAverageDataCost();
+        final double mobilePowerPerByte = getMobilePowerPerByte();
+        final double wifiPowerPerByte = getWifiPowerPerByte();
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
         long appWakelockTime = 0;
         BatterySipper osApp = null;
@@ -454,8 +471,8 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         final int NU = uidStats.size();
         for (int iu = 0; iu < NU; iu++) {
             Uid u = uidStats.valueAt(iu);
-            double p;
-            double power = 0;
+            double p; // in mAs
+            double power = 0; // in mAs
             double highestDrain = 0;
             String packageWithHighestDrain = null;
             //mUsageList.add(new AppUsage(u.getUid(), new double[] {power}));
@@ -535,12 +552,19 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             power += p;
             if (DEBUG && p != 0) Log.i(TAG, String.format("wakelock power=%.2f", p));
             
-            // Add cost of data traffic
-            long tcpBytesReceived = u.getTcpBytesReceived(mStatsType);
-            long tcpBytesSent = u.getTcpBytesSent(mStatsType);
-            p = (tcpBytesReceived+tcpBytesSent) * averageCostPerByte;
+            // Add cost of mobile traffic
+            final long mobileRx = u.getNetworkActivityCount(NETWORK_MOBILE_RX_BYTES, mStatsType);
+            final long mobileTx = u.getNetworkActivityCount(NETWORK_MOBILE_TX_BYTES, mStatsType);
+            p = (mobileRx + mobileTx) * mobilePowerPerByte;
             power += p;
-            if (DEBUG && p != 0) Log.i(TAG, String.format("tcp power=%.2f", p));
+            if (DEBUG && p != 0) Log.i(TAG, String.format("mobile power=%.2f", p));
+
+            // Add cost of wifi traffic
+            final long wifiRx = u.getNetworkActivityCount(NETWORK_WIFI_RX_BYTES, mStatsType);
+            final long wifiTx = u.getNetworkActivityCount(NETWORK_WIFI_TX_BYTES, mStatsType);
+            p = (wifiRx + wifiTx) * wifiPowerPerByte;
+            power += p;
+            if (DEBUG && p != 0) Log.i(TAG, String.format("wifi power=%.2f", p));
 
             // Add cost of keeping WIFI running.
             long wifiRunningTimeMs = u.getWifiRunningTime(uSecTime, which) / 1000;
@@ -602,8 +626,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                 app.wifiRunningTime = wifiRunningTimeMs;
                 app.cpuFgTime = cpuFgTime;
                 app.wakeLockTime = wakelockTime;
-                app.tcpBytesReceived = tcpBytesReceived;
-                app.tcpBytesSent = tcpBytesSent;
+                app.mobileRxBytes = mobileRx;
+                app.mobileTxBytes = mobileTx;
+                app.wifiRxBytes = wifiRx;
+                app.wifiTxBytes = wifiTx;
                 if (u.getUid() == Process.WIFI_UID) {
                     mWifiSippers.add(app);
                 } else if (u.getUid() == Process.BLUETOOTH_UID) {
@@ -725,8 +751,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             bs.wifiRunningTime += wbs.wifiRunningTime;
             bs.cpuFgTime += wbs.cpuFgTime;
             bs.wakeLockTime += wbs.wakeLockTime;
-            bs.tcpBytesReceived += wbs.tcpBytesReceived;
-            bs.tcpBytesSent += wbs.tcpBytesSent;
+            bs.mobileRxBytes += wbs.mobileRxBytes;
+            bs.mobileTxBytes += wbs.mobileTxBytes;
+            bs.wifiRxBytes += wbs.wifiRxBytes;
+            bs.wifiTxBytes += wbs.wifiTxBytes;
         }
     }
 
@@ -796,30 +824,34 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         }
     }
 
-    private double getAverageDataCost() {
-        final long WIFI_BPS = 1000000; // TODO: Extract average bit rates from system 
+    /**
+     * Return estimated power (in mAs) of sending a byte with the mobile radio.
+     */
+    private double getMobilePowerPerByte() {
         final long MOBILE_BPS = 200000; // TODO: Extract average bit rates from system
-        final double WIFI_POWER = mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ACTIVE)
-                / 3600;
         final double MOBILE_POWER = mPowerProfile.getAveragePower(PowerProfile.POWER_RADIO_ACTIVE)
                 / 3600;
-        final long mobileData = mStats.getMobileTcpBytesReceived(mStatsType) +
-                mStats.getMobileTcpBytesSent(mStatsType);
-        final long wifiData = mStats.getTotalTcpBytesReceived(mStatsType) +
-                mStats.getTotalTcpBytesSent(mStatsType) - mobileData;
+
+        final long mobileRx = mStats.getNetworkActivityCount(NETWORK_MOBILE_RX_BYTES, mStatsType);
+        final long mobileTx = mStats.getNetworkActivityCount(NETWORK_MOBILE_TX_BYTES, mStatsType);
+        final long mobileData = mobileRx + mobileTx;
+
         final long radioDataUptimeMs = mStats.getRadioDataUptime() / 1000;
         final long mobileBps = radioDataUptimeMs != 0
                 ? mobileData * 8 * 1000 / radioDataUptimeMs
                 : MOBILE_BPS;
 
-        double mobileCostPerByte = MOBILE_POWER / (mobileBps / 8);
-        double wifiCostPerByte = WIFI_POWER / (WIFI_BPS / 8);
-        if (wifiData + mobileData != 0) {
-            return (mobileCostPerByte * mobileData + wifiCostPerByte * wifiData)
-                    / (mobileData + wifiData);
-        } else {
-            return 0;
-        }
+        return MOBILE_POWER / (mobileBps / 8);
+    }
+
+    /**
+     * Return estimated power (in mAs) of sending a byte with the Wi-Fi radio.
+     */
+    private double getWifiPowerPerByte() {
+        final long WIFI_BPS = 1000000; // TODO: Extract average bit rates from system
+        final double WIFI_POWER = mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ACTIVE)
+                / 3600;
+        return WIFI_POWER / (WIFI_BPS / 8);
     }
 
     private void processMiscUsage() {

@@ -316,6 +316,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 switch (mTypes[i]) {
                     case R.string.usage_type_data_recv:
                     case R.string.usage_type_data_send:
+                    case R.string.usage_type_data_wifi_recv:
+                    case R.string.usage_type_data_wifi_send:
                         final long bytes = (long) (mValues[i]);
                         value = Formatter.formatFileSize(getActivity(), bytes);
                         break;
