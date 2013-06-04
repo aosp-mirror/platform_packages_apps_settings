@@ -386,17 +386,22 @@ public class Utils {
         }
     }
 
+    public static boolean isBatteryPresent(Intent batteryChangedIntent) {
+        return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
+    }
+
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
-        int level = batteryChangedIntent.getIntExtra("level", 0);
-        int scale = batteryChangedIntent.getIntExtra("scale", 100);
+        int level = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+        int scale = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
         return String.valueOf(level * 100 / scale) + "%";
     }
 
     public static String getBatteryStatus(Resources res, Intent batteryChangedIntent) {
         final Intent intent = batteryChangedIntent;
 
-        int plugType = intent.getIntExtra("plugged", 0);
-        int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+        int plugType = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
         String statusString;
         if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
             statusString = res.getString(R.string.battery_info_status_charging);
