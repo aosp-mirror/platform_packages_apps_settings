@@ -513,6 +513,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 info.activityName = info.appName;
                 info.icon = app.loadIcon(pm);
                 mVisibleApps.add(info);
+            } else {
+                try {
+                    PackageInfo pi = pm.getPackageInfo(app.packageName, 0);
+                    // If it's a system app that requires an account and doesn't see restricted
+                    // accounts, mark for removal. It might get shown in the UI if it has an icon
+                    // but will still be marked as false and immutable.
+                    if (pi.requiredAccountType != null && pi.restrictedAccountType == null) {
+                        mSelectedPackages.put(app.packageName, false);
+                    }
+                } catch (NameNotFoundException re) {
+                }
             }
         }
 
