@@ -182,7 +182,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
 
             if (display.equals(mWifiDisplayStatus.getActiveDisplay())) {
                 showDisconnectDialog(display);
-            } else {
+            } else if (display.canConnect()){
                 mDisplayManager.connectWifiDisplay(display.getDeviceAddress());
             }
         }
@@ -267,6 +267,17 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
         } else if (paired && contains(mWifiDisplayStatus.getAvailableDisplays(),
                 d.getDeviceAddress())) {
             p.setSummary(R.string.wifi_display_status_available);
+            for (WifiDisplay display : mWifiDisplayStatus.getAvailableDisplays()) {
+                if (display.getDeviceAddress().equals(d.getDeviceAddress()) &&
+                        !display.canConnect()) {
+                    p.setSummary(R.string.wifi_display_status_busy);
+                    p.setEnabled(false);
+                    break;
+                }
+            }
+        } else if (!paired && !d.canConnect()) {
+            p.setSummary(R.string.wifi_display_status_busy);
+            p.setEnabled(false);
         }
         if (paired) {
             p.setWidgetLayoutResource(R.layout.wifi_display_preference);
