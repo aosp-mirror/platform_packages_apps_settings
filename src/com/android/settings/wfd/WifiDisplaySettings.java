@@ -270,13 +270,13 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
             for (WifiDisplay display : mWifiDisplayStatus.getAvailableDisplays()) {
                 if (display.getDeviceAddress().equals(d.getDeviceAddress()) &&
                         !display.canConnect()) {
-                    p.setSummary(R.string.wifi_display_status_busy);
+                    p.setSummary(R.string.wifi_display_status_in_use);
                     p.setEnabled(false);
                     break;
                 }
             }
         } else if (!paired && !d.canConnect()) {
-            p.setSummary(R.string.wifi_display_status_busy);
+            p.setSummary(R.string.wifi_display_status_in_use);
             p.setEnabled(false);
         }
         if (paired) {
