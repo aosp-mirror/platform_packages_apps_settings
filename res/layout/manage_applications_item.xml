@@ -31,8 +31,9 @@
         android:id="@+id/app_icon"
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
-        android:layout_rowSpan="2"
+        android:layout_rowSpan="3"
         android:layout_marginEnd="8dip"
+        android:layout_gravity="center_vertical"
         android:scaleType="centerInside"
         android:contentDescription="@null" />
 
@@ -50,10 +51,22 @@
     <CheckBox android:id="@+id/app_on_sdcard"
         android:layout_marginStart="8dip"
         android:layout_gravity="center_vertical"
-        android:layout_rowSpan="2"
+        android:layout_rowSpan="3"
         android:visibility="gone"
         android:clickable="false"
         android:focusable="false" />
+
+    <TextView
+        android:id="@+id/app_pkgname"
+        android:layout_width="0dip"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="2dip"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/app_size"
