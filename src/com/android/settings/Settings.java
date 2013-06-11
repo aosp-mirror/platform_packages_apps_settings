@@ -19,9 +19,11 @@ package com.android.settings;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.RestrictionEntry;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -134,6 +136,23 @@ public class Settings extends PreferenceActivity
     private Header mLastHeader;
     private boolean mListeningToAccountUpdates;
 
+    private boolean mBatteryPresent = true;
+    private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+                boolean batteryPresent = Utils.isBatteryPresent(intent);
+
+                if (mBatteryPresent != batteryPresent) {
+                    mBatteryPresent = batteryPresent;
+                    invalidateHeaders();
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
@@ -218,11 +237,15 @@ public class Settings extends PreferenceActivity
             ((HeaderAdapter) listAdapter).resume();
         }
         invalidateHeaders();
+
+        registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        unregisterReceiver(mBatteryInfoReceiver);
 
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
@@ -438,6 +461,12 @@ public class Settings extends PreferenceActivity
                     }
                 } catch (RemoteException e) {
                     // ignored
+                }
+            } else if (id == R.id.battery_settings) {
+                // Remove battery settings when battery is not available. (e.g. TV)
+
+                if (!mBatteryPresent) {
+                    target.remove(i);
                 }
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
