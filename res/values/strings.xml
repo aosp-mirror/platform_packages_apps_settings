@@ -3189,10 +3189,10 @@
     <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
 
-    <!-- Summary for the enabled state of an accessiblity feature. [CHAR LIMIT=10] -->
-    <string name="accessibility_feature_state_on">On</string>
-    <!-- Summary for the disabled state of an accessiblity feature. [CHAR LIMIT=10] -->
-    <string name="accessibility_feature_state_off">Off</string>
+    <!-- Summary for the enabled state of a feature. [CHAR LIMIT=10] -->
+    <string name="feature_state_on">On</string>
+    <!-- Summary for the disabled state of a feature. [CHAR LIMIT=10] -->
+    <string name="feature_state_off">Off</string>
 
     <!-- Title for a warning about security implications of enabling an accessibility
          service. [CHAR LIMIT=NONE] -->
@@ -3231,6 +3231,35 @@
 
     <!-- Accessibility settings: button for lauching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
+
+     <!-- Printing settings -->
+    <skip />
+
+    <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
+    <string name="print_settings">Printing</string>
+    <!-- Title for print service settings screen [CHAR LIMIT=25] -->
+    <string name="print_settings_title">Printing settings</string>
+    <!-- Title for the printing preference category of print services. [CHAR LIMIT=25] -->
+    <string name="print_services_title">Services</string>
+
+    <!-- Title for a warning message about security implications of enabling a print service,
+         displayed as a dialog message when the user selects to enable a print service (tablet). [CHAR LIMIT=NONE] -->
+    <string name="print_service_security_warning_title">Use
+         <xliff:g id="service" example="My Print Service">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a print service,
+         displayed as a dialog message when the user selects to enable a print service. [CHAR LIMIT=NONE] -->
+    <string name="print_service_security_warning_summary">
+         <xliff:g id="print_service_name">%1$s</xliff:g> can receive documents you print.
+         Such documents may contain sensitive data.</string>
+
+    <!-- Title for the prompt shown as a placeholder if no print serivices are installed. [CHAR LIMIT=50] -->
+    <string name="print_no_services_installed">No services installed</string>
+
+    <!-- Title for print menu item to launch a settings activity. [CHAR LIMIT=25] -->
+    <string name="print_menu_item_settings">Settings</string>
+
+    <!-- Title for print menu item to launch the add printers activity. [CHAR LIMIT=25] -->
+    <string name="print_menu_item_add_printers">Add printers</string>
 
     <!-- App Fuel Gauge strings -->
     <skip />
