@@ -207,8 +207,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
         preferenceScreen.removeAll();
 
         if (featureState == WifiDisplayStatus.FEATURE_STATE_ON) {
-            final WifiDisplay[] pairedDisplays = mWifiDisplayStatus.getRememberedDisplays();
-            final WifiDisplay[] availableDisplays = mWifiDisplayStatus.getAvailableDisplays();
+            final WifiDisplay[] displays = mWifiDisplayStatus.getDisplays();
 
             if (mPairedDevicesCategory == null) {
                 mPairedDevicesCategory = new PreferenceCategory(getActivity());
@@ -217,13 +216,6 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
                 mPairedDevicesCategory.removeAll();
             }
             preferenceScreen.addPreference(mPairedDevicesCategory);
-
-            for (WifiDisplay d : pairedDisplays) {
-                mPairedDevicesCategory.addPreference(createWifiDisplayPreference(d, true));
-            }
-            if (mPairedDevicesCategory.getPreferenceCount() == 0) {
-                preferenceScreen.removePreference(mPairedDevicesCategory);
-            }
 
             if (mAvailableDevicesCategory == null) {
                 mAvailableDevicesCategory = new ProgressCategory(getActivity(), null,
@@ -234,10 +226,15 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
             }
             preferenceScreen.addPreference(mAvailableDevicesCategory);
 
-            for (WifiDisplay d : availableDisplays) {
-                if (!contains(pairedDisplays, d.getDeviceAddress())) {
-                    mAvailableDevicesCategory.addPreference(createWifiDisplayPreference(d, false));
+            for (WifiDisplay d : displays) {
+                if (d.isRemembered()) {
+                    mPairedDevicesCategory.addPreference(createWifiDisplayPreference(d));
+                } else if (d.isAvailable()){
+                    mAvailableDevicesCategory.addPreference(createWifiDisplayPreference(d));
                 }
+            }
+            if (mPairedDevicesCategory.getPreferenceCount() == 0) {
+                preferenceScreen.removePreference(mPairedDevicesCategory);
             }
             if (mWifiDisplayStatus.getScanState() == WifiDisplayStatus.SCAN_STATE_SCANNING) {
                 mAvailableDevicesCategory.setProgress(true);
@@ -253,7 +250,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
         getActivity().invalidateOptionsMenu();
     }
 
-    private Preference createWifiDisplayPreference(final WifiDisplay d, boolean paired) {
+    private Preference createWifiDisplayPreference(final WifiDisplay d) {
         WifiDisplayPreference p = new WifiDisplayPreference(getActivity(), d);
         if (d.equals(mWifiDisplayStatus.getActiveDisplay())) {
             switch (mWifiDisplayStatus.getActiveDisplayState()) {
@@ -264,22 +261,15 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
                     p.setSummary(R.string.wifi_display_status_connecting);
                     break;
             }
-        } else if (paired && contains(mWifiDisplayStatus.getAvailableDisplays(),
-                d.getDeviceAddress())) {
-            p.setSummary(R.string.wifi_display_status_available);
-            for (WifiDisplay display : mWifiDisplayStatus.getAvailableDisplays()) {
-                if (display.getDeviceAddress().equals(d.getDeviceAddress()) &&
-                        !display.canConnect()) {
-                    p.setSummary(R.string.wifi_display_status_in_use);
-                    p.setEnabled(false);
-                    break;
-                }
+        } else if (d.isAvailable()) {
+            if (!d.canConnect()) {
+                p.setSummary(R.string.wifi_display_status_in_use);
+                p.setEnabled(false);
+            } else if (d.isRemembered()) {
+                p.setSummary(R.string.wifi_display_status_available);
             }
-        } else if (!paired && !d.canConnect()) {
-            p.setSummary(R.string.wifi_display_status_in_use);
-            p.setEnabled(false);
         }
-        if (paired) {
+        if (d.isRemembered()) {
             p.setWidgetLayoutResource(R.layout.wifi_display_preference);
         }
         return p;
