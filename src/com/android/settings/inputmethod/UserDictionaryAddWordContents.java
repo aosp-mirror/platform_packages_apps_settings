@@ -64,7 +64,9 @@ public class UserDictionaryAddWordContents {
         final String word = args.getString(EXTRA_WORD);
         if (null != word) {
             mWordEditText.setText(word);
-            mWordEditText.setSelection(word.length());
+            // Use getText in case the edit text modified the text we set. This happens when
+            // it's too long to be edited.
+            mWordEditText.setSelection(mWordEditText.getText().length());
         }
         final String shortcut = args.getString(EXTRA_SHORTCUT);
         if (null != shortcut && null != mShortcutEditText) {
