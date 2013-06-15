@@ -150,7 +150,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
 
         addPreferencesFromResource(R.xml.power_usage_summary);
         mBatteryInfo = IBatteryStats.Stub.asInterface(
-                ServiceManager.getService("batteryinfo"));
+                ServiceManager.getService(BatteryStats.SERVICE_NAME));
         mUm = (UserManager)getActivity().getSystemService(Context.USER_SERVICE);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mBatteryStatusPref = mAppListGroup.findPreference(KEY_BATTERY_STATUS);
