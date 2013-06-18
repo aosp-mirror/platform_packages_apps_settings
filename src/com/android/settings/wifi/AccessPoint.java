@@ -348,6 +348,9 @@ class AccessPoint extends Preference {
                 case WifiConfiguration.DISABLED_DNS_FAILURE:
                     setSummary(context.getString(R.string.wifi_disabled_network_failure));
                     break;
+                case WifiConfiguration.DISABLED_ASSOCIATION_REJECT:
+                    setSummary(context.getString(R.string.wifi_disabled_association_rejected));
+                    break;
                 case WifiConfiguration.DISABLED_UNKNOWN_REASON:
                     setSummary(context.getString(R.string.wifi_disabled_generic));
             }
