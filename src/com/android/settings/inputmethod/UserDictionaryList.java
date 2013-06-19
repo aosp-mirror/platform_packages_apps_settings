@@ -21,25 +21,60 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.provider.UserDictionary;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.TreeSet;
 
 public class UserDictionaryList extends SettingsPreferenceFragment {
-
     public static final String USER_DICTIONARY_SETTINGS_INTENT_ACTION =
             "android.settings.USER_DICTIONARY_SETTINGS";
+    private String mLocale;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getActivity()));
+        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Intent intent = getActivity().getIntent();
+        final String localeFromIntent =
+                null == intent ? null : intent.getStringExtra("locale");
+
+        final Bundle arguments = getArguments();
+        final String localeFromArguments =
+                null == arguments ? null : arguments.getString("locale");
+
+        final String locale;
+        if (null != localeFromArguments) {
+            locale = localeFromArguments;
+        } else if (null != localeFromIntent) {
+            locale = localeFromIntent;
+        } else {
+            locale = null;
+        }
+        mLocale = locale;
     }
 
     static TreeSet<String> getUserDictionaryLocalesSet(Activity activity) {
@@ -47,7 +82,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         final Cursor cursor = activity.managedQuery(UserDictionary.Words.CONTENT_URI,
                 new String[] { UserDictionary.Words.LOCALE },
                 null, null, null);
-        final TreeSet<String> localeList = new TreeSet<String>();
+        final TreeSet<String> localeSet = new TreeSet<String>();
         if (null == cursor) {
             // The user dictionary service is not present or disabled. Return null.
             return null;
@@ -55,30 +90,51 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
             final int columnIndex = cursor.getColumnIndex(UserDictionary.Words.LOCALE);
             do {
                 String locale = cursor.getString(columnIndex);
-                localeList.add(null != locale ? locale : "");
+                localeSet.add(null != locale ? locale : "");
             } while (cursor.moveToNext());
         }
-        localeList.add(Locale.getDefault().toString());
-        return localeList;
+        localeSet.add(Locale.getDefault().toString());
+        final InputMethodManager imm =
+                (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        final List<InputMethodInfo> imis = imm.getEnabledInputMethodList();
+        for (InputMethodInfo imi : imis) {
+            final List<InputMethodSubtype> subtypes =
+                    imm.getEnabledInputMethodSubtypeList(
+                            imi, true /* allowsImplicitlySelectedSubtypes */);
+            for (InputMethodSubtype subtype : subtypes) {
+                final String locale = subtype.getLocale();
+                if (!TextUtils.isEmpty(locale)) {
+                    localeSet.add(locale);
+                }
+            }
+        }
+        return localeSet;
     }
 
     /**
      * Creates the entries that allow the user to go into the user dictionary for each locale.
      * @param userDictGroup The group to put the settings in.
+     * @return the shown language set
      */
-    protected void createUserDictSettings(PreferenceGroup userDictGroup) {
+    protected TreeSet<String> createUserDictSettingsAndReturnSet(PreferenceGroup userDictGroup) {
         final Activity activity = getActivity();
         userDictGroup.removeAll();
-        final TreeSet<String> localeList =
+        final TreeSet<String> localeSet =
                 UserDictionaryList.getUserDictionaryLocalesSet(activity);
+        if (mLocale != null) {
+            // If the caller explicitly specify empty string as a locale, we'll show "all languages"
+            // in the list.
+            localeSet.add(mLocale);
+        }
 
-        if (localeList.isEmpty()) {
+        if (localeSet.isEmpty()) {
             userDictGroup.addPreference(createUserDictionaryPreference(null, activity));
         } else {
-            for (String locale : localeList) {
+            for (String locale : localeSet) {
                 userDictGroup.addPreference(createUserDictionaryPreference(locale, activity));
             }
         }
+        return localeSet;
     }
 
     /**
@@ -107,6 +163,25 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        createUserDictSettings(getPreferenceScreen());
+        final TreeSet<String> localeSet = createUserDictSettingsAndReturnSet(getPreferenceScreen());
+        if (localeSet.size() <= 1) {
+            // Redirect to UserDictionarySettings if the user needs only one language.
+            final Bundle extras = new Bundle();
+            if (!localeSet.isEmpty()) {
+                // If the size of localeList is 0, we don't set the locale parameter in the
+                // extras. This will be interpreted by the UserDictionarySettings class as
+                // meaning "the current locale".
+                // Note that with the current code for
+                // UserDictionaryList#getUserDictionaryLocalesSet()
+                // the locale list always has at least one element, since it always includes
+                // the current locale explicitly.
+                // @see UserDictionaryList.getUserDictionaryLocalesSet().
+                extras.putString("locale", localeSet.first());
+            }
+            startFragment(this,
+                    com.android.settings.UserDictionarySettings.class.getCanonicalName(), -1,
+                    extras);
+            finish();
+        }
     }
 }

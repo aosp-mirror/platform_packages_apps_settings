@@ -193,24 +193,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private void updateUserDictionaryPreference(Preference userDictionaryPreference) {
         final Activity activity = getActivity();
-        final TreeSet<String> localeList = UserDictionaryList.getUserDictionaryLocalesSet(activity);
-        if (null == localeList) {
+        final TreeSet<String> localeSet = UserDictionaryList.getUserDictionaryLocalesSet(activity);
+        if (null == localeSet) {
             // The locale list is null if and only if the user dictionary service is
             // not present or disabled. In this case we need to remove the preference.
             getPreferenceScreen().removePreference(userDictionaryPreference);
-        } else if (localeList.size() <= 1) {
-            userDictionaryPreference.setFragment(
-                    com.android.settings.UserDictionarySettings.class.getName());
-            // If the size of localeList is 0, we don't set the locale parameter in the
-            // extras. This will be interpreted by the UserDictionarySettings class as
-            // meaning "the current locale".
-            // Note that with the current code for UserDictionaryList#getUserDictionaryLocalesSet()
-            // the locale list always has at least one element, since it always includes the current
-            // locale explicitly. @see UserDictionaryList.getUserDictionaryLocalesSet().
-            if (localeList.size() == 1) {
-                final String locale = (String)localeList.toArray()[0];
-                userDictionaryPreference.getExtras().putString("locale", locale);
-            }
         } else {
             userDictionaryPreference.setFragment(UserDictionaryList.class.getName());
         }
