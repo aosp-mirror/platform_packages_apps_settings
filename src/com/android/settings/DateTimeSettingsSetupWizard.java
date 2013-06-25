@@ -141,6 +141,7 @@ public class DateTimeSettingsSetupWizard extends Activity
         mDatePicker = (DatePicker)findViewById(R.id.date_picker);
         mDatePicker.setEnabled(!autoDateTimeEnabled);
         mDatePicker.setCalendarViewShown(false);
+        DateTimeSettings.configureDatePicker(mDatePicker);
 
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
