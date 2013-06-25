@@ -405,9 +405,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             final boolean serviceEnabled = accessibilityEnabled
                     && enabledServices.contains(componentName);
             if (serviceEnabled) {
-                preference.setSummary(getString(R.string.feature_state_on));
+                preference.setSummary(getString(R.string.accessibility_feature_state_on));
             } else {
-                preference.setSummary(getString(R.string.feature_state_off));
+                preference.setSummary(getString(R.string.accessibility_feature_state_off));
             }
 
             preference.setOrder(i);
