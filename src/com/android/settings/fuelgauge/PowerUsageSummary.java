@@ -57,6 +57,7 @@ import android.view.MenuItem;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.internal.os.PowerProfile;
+import com.android.internal.util.FastPrintWriter;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
@@ -256,13 +257,15 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
 
                 if (sipper.drainType == DrainType.APP) {
                     Writer result = new StringWriter();
-                    PrintWriter printWriter = new PrintWriter(result);
+                    PrintWriter printWriter = new FastPrintWriter(result, false, 1024);
                     mStats.dumpLocked(printWriter, "", mStatsType, uid.getUid());
+                    printWriter.flush();
                     args.putString(PowerUsageDetail.EXTRA_REPORT_DETAILS, result.toString());
 
                     result = new StringWriter();
-                    printWriter = new PrintWriter(result);
+                    printWriter = new FastPrintWriter(result, false, 1024);
                     mStats.dumpCheckinLocked(printWriter, mStatsType, uid.getUid());
+                    printWriter.flush();
                     args.putString(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS,
                             result.toString());
                 }
