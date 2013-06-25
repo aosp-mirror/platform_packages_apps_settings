@@ -159,9 +159,9 @@ public class PrintingSettings extends SettingsPreferenceFragment implements Dial
 
             final boolean serviceEnabled = sEnabledServiceNameSet.contains(componentName);
             if (serviceEnabled) {
-                preference.setSummary(getString(R.string.feature_state_on));
+                preference.setSummary(getString(R.string.print_feature_state_on));
             } else {
-                preference.setSummary(getString(R.string.feature_state_off));
+                preference.setSummary(getString(R.string.print_feature_state_off));
             }
 
             preference.setOrder(i);
