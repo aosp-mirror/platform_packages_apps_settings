@@ -17,14 +17,10 @@
 package com.android.settings.users;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
-import android.app.Dialog;
-import android.app.Fragment;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.RestrictionEntry;
@@ -34,16 +30,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -58,33 +50,20 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.SwitchPreference;
-import android.provider.ContactsContract.DisplayPhoto;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListPopupWindow;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -103,13 +82,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private static final boolean DEBUG = false;
 
     private static final String PKG_PREFIX = "pkg_";
-    private static final String KEY_USER_INFO = "user_info";
 
-    private static final int DIALOG_ID_EDIT_USER_INFO = 1;
-
-    private PackageManager mPackageManager;
-    private UserManager mUserManager;
-    private UserHandle mUser;
+    protected PackageManager mPackageManager;
+    protected UserManager mUserManager;
+    protected UserHandle mUser;
 
     private PreferenceGroup mAppList;
 
@@ -123,27 +99,20 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     /** Key for extra passed in from calling fragment to indicate if this is a newly created user */
     public static final String EXTRA_NEW_USER = "new_user";
 
-    private static final String KEY_SAVED_PHOTO = "pending_photo";
-
     HashMap<String,Boolean> mSelectedPackages = new HashMap<String,Boolean>();
     private boolean mFirstTime = true;
     private boolean mNewUser;
     private boolean mAppListChanged;
+    protected boolean mRestrictedProfile;
 
-    private int mCustomRequestCode;
+    private static final int CUSTOM_REQUEST_CODE_START = 1000;
+    private int mCustomRequestCode = CUSTOM_REQUEST_CODE_START;
+
     private HashMap<Integer, AppRestrictionsPreference> mCustomRequestMap =
             new HashMap<Integer,AppRestrictionsPreference>();
-    private View mHeaderView;
-    private ImageView mUserIconView;
-    private TextView mUserNameView;
 
     private List<SelectableAppInfo> mVisibleApps;
     private List<ApplicationInfo> mUserApps;
-
-    private Dialog mEditUserInfoDialog;
-
-    private EditUserPhotoController mEditUserPhotoController;
-    private Bitmap mSavedPhoto;
 
     private BroadcastReceiver mUserBackgrounding = new BroadcastReceiver() {
         @Override
@@ -153,7 +122,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             // have been scheduled during user startup.
             if (mAppListChanged) {
                 if (DEBUG) Log.d(TAG, "User backgrounding, update app list");
-                updateUserAppList();
+                applyUserAppsStates();
                 if (DEBUG) Log.d(TAG, "User backgrounding, done updating app list");
             }
         }
@@ -180,7 +149,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         boolean panelOpen;
         private boolean immutable;
         List<Preference> childPreferences = new ArrayList<Preference>();
-        private SelectableAppInfo appInfo;
         private final ColorFilter grayscaleFilter;
 
         AppRestrictionsPreference(Context context, OnClickListener listener) {
@@ -219,10 +187,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
         boolean isImmutable() {
             return immutable;
-        }
-
-        void setSelectableAppInfo(SelectableAppInfo appInfo) {
-            this.appInfo = appInfo;
         }
 
         RestrictionEntry getRestriction(String key) {
@@ -270,65 +234,44 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
+    protected void init(Bundle icicle) {
         if (icicle != null) {
             mUser = new UserHandle(icicle.getInt(EXTRA_USER_ID));
-            mSavedPhoto = (Bitmap) icicle.getParcelable(KEY_SAVED_PHOTO);
         } else {
             Bundle args = getArguments();
-
-            if (args.containsKey(EXTRA_USER_ID)) {
-                mUser = new UserHandle(args.getInt(EXTRA_USER_ID));
+            if (args != null) {
+                if (args.containsKey(EXTRA_USER_ID)) {
+                    mUser = new UserHandle(args.getInt(EXTRA_USER_ID));
+                }
+                mNewUser = args.getBoolean(EXTRA_NEW_USER, false);
             }
-            mNewUser = args.getBoolean(EXTRA_NEW_USER, false);
         }
+
+        if (mUser == null) {
+            mUser = android.os.Process.myUserHandle();
+        }
+
         mPackageManager = getActivity().getPackageManager();
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        addPreferencesFromResource(R.xml.app_restrictions);
-        mAppList = getPreferenceScreen();
-        setHasOptionsMenu(true);
-    }
+        mRestrictedProfile = mUserManager.getUserInfo(mUser.getIdentifier()).isRestricted();
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        if (mHeaderView == null) {
-            mHeaderView = LayoutInflater.from(getActivity()).inflate(
-                    R.layout.user_info_header, null);
-            ((ViewGroup) getListView().getParent()).addView(mHeaderView, 0);
-            mHeaderView.setOnClickListener(this);
-            mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
-            mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
-            getListView().setFastScrollEnabled(true);
-        }
-        // This is going to bind the preferences.
-        super.onActivityCreated(savedInstanceState);
+        addPreferencesFromResource(R.xml.app_restrictions);
+        mAppList = getAppPreferenceGroup();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(EXTRA_USER_ID, mUser.getIdentifier());
-        if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
-                && mEditUserPhotoController != null) {
-            outState.putParcelable(KEY_SAVED_PHOTO,
-                    mEditUserPhotoController.getNewUserPhotoBitmap());
-        }
     }
 
     public void onResume() {
         super.onResume();
+
         getActivity().registerReceiver(mUserBackgrounding,
                 new IntentFilter(Intent.ACTION_USER_BACKGROUND));
         mAppListChanged = false;
         new AppLoadingTask().execute((Void[]) null);
-
-        UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
-        ((TextView) mHeaderView.findViewById(android.R.id.title)).setText(info.name);
-        ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(
-                getCircularUserIcon());
     }
 
     public void onPause() {
@@ -338,25 +281,33 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         if (mAppListChanged) {
             new Thread() {
                 public void run() {
-                    updateUserAppList();
+                    applyUserAppsStates();
                 }
             }.start();
         }
     }
 
-    private Drawable getCircularUserIcon() {
+    protected PreferenceGroup getAppPreferenceGroup() {
+        return getPreferenceScreen();
+    }
+
+    protected Drawable getCircularUserIcon() {
         Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
         CircleFramedDrawable circularIcon =
                 CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
         return circularIcon;
     }
 
-    private void updateUserAppList() {
+    protected void clearSelectedApps() {
+        mSelectedPackages.clear();
+    }
+
+    private void applyUserAppsStates() {
         IPackageManager ipm = IPackageManager.Stub.asInterface(
                 ServiceManager.getService("package"));
         final int userId = mUser.getIdentifier();
-        if (!mUserManager.getUserInfo(userId).isRestricted()) {
-            Log.e(TAG, "Cannot apply application restrictions on a regular user!");
+        if (!mUserManager.getUserInfo(userId).isRestricted() && userId != UserHandle.myUserId()) {
+            Log.e(TAG, "Cannot apply application restrictions on another user!");
             return;
         }
         for (Map.Entry<String,Boolean> entry : mSelectedPackages.entrySet()) {
@@ -364,11 +315,19 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             if (entry.getValue()) {
                 // Enable selected apps
                 try {
-                    ApplicationInfo info = ipm.getApplicationInfo(packageName, 0, userId);
+                    ApplicationInfo info = ipm.getApplicationInfo(packageName,
+                            PackageManager.GET_UNINSTALLED_PACKAGES, userId);
                     if (info == null || info.enabled == false) {
                         ipm.installExistingPackageAsUser(packageName, mUser.getIdentifier());
                         if (DEBUG) {
                             Log.d(TAG, "Installing " + packageName);
+                        }
+                    }
+                    if (info != null && (info.flags&ApplicationInfo.FLAG_BLOCKED) != 0
+                            && (info.flags&ApplicationInfo.FLAG_INSTALLED) != 0) {
+                        ipm.setApplicationBlockedSettingAsUser(packageName, false, userId);
+                        if (DEBUG) {
+                            Log.d(TAG, "Unblocking " + packageName);
                         }
                     }
                 } catch (RemoteException re) {
@@ -378,10 +337,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 try {
                     ApplicationInfo info = ipm.getApplicationInfo(packageName, 0, userId);
                     if (info != null) {
-                        ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
-                                PackageManager.DELETE_SYSTEM_APP);
-                        if (DEBUG) {
-                            Log.d(TAG, "Uninstalling " + packageName);
+                        if (mRestrictedProfile) {
+                            ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
+                                    PackageManager.DELETE_SYSTEM_APP);
+                            if (DEBUG) {
+                                Log.d(TAG, "Uninstalling " + packageName);
+                            }
+                        } else {
+                            ipm.setApplicationBlockedSettingAsUser(packageName, true, userId);
+                            if (DEBUG) {
+                                Log.d(TAG, "Blocking " + packageName);
+                            }
                         }
                     }
                 } catch (RemoteException re) {
@@ -441,7 +407,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         if (getActivity() == null) return;
         final PackageManager pm = mPackageManager;
         List<ResolveInfo> launchableApps = pm.queryIntentActivities(intent,
-                PackageManager.GET_DISABLED_COMPONENTS);
+                PackageManager.GET_DISABLED_COMPONENTS | PackageManager.GET_UNINSTALLED_PACKAGES);
         for (ResolveInfo app : launchableApps) {
             if (app.activityInfo != null && app.activityInfo.applicationInfo != null) {
                 int flags = app.activityInfo.applicationInfo.flags;
@@ -502,8 +468,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         Intent widgetIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         addSystemApps(mVisibleApps, widgetIntent, excludePackages);
 
-        List<ApplicationInfo> installedApps = pm.getInstalledApplications(0);
+        List<ApplicationInfo> installedApps = pm.getInstalledApplications(
+                PackageManager.GET_UNINSTALLED_PACKAGES);
         for (ApplicationInfo app : installedApps) {
+            // If it's not installed, skip
+            if ((app.flags & ApplicationInfo.FLAG_INSTALLED) == 0) continue;
+
             if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
                     && (app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
                 // Downloaded app
@@ -519,7 +489,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     // If it's a system app that requires an account and doesn't see restricted
                     // accounts, mark for removal. It might get shown in the UI if it has an icon
                     // but will still be marked as false and immutable.
-                    if (pi.requiredAccountType != null && pi.restrictedAccountType == null) {
+                    if (mRestrictedProfile
+                            && pi.requiredAccountType != null && pi.restrictedAccountType == null) {
                         mSelectedPackages.put(app.packageName, false);
                     }
                 } catch (NameNotFoundException re) {
@@ -530,12 +501,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mUserApps = null;
         try {
             mUserApps = ipm.getInstalledApplications(
-                    0, mUser.getIdentifier()).getList();
+                    PackageManager.GET_UNINSTALLED_PACKAGES, mUser.getIdentifier()).getList();
         } catch (RemoteException re) {
         }
 
         if (mUserApps != null) {
             for (ApplicationInfo app : mUserApps) {
+                if ((app.flags & ApplicationInfo.FLAG_INSTALLED) == 0) continue;
+
                 if ((app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
                         && (app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
                     // Downloaded app
@@ -576,6 +549,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
+    private boolean isAppEnabledForUser(PackageInfo pi) {
+        if (pi == null) return false;
+        final int flags = pi.applicationInfo.flags;
+        // Return true if it is installed and not blocked
+        return ((flags&ApplicationInfo.FLAG_INSTALLED) != 0
+                && (flags&ApplicationInfo.FLAG_BLOCKED) == 0);
+    }
+
     private void populateApps() {
         final Context context = getActivity();
         if (context == null) return;
@@ -606,12 +587,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 p.setOnPreferenceClickListener(this);
                 PackageInfo pi = null;
                 try {
-                    pi = pm.getPackageInfo(packageName, 0);
-                } catch (NameNotFoundException re) {
-                    try {
-                        pi = ipm.getPackageInfo(packageName, 0, mUser.getIdentifier());
-                    } catch (RemoteException e) {
-                    }
+                    pi = ipm.getPackageInfo(packageName,
+                            PackageManager.GET_UNINSTALLED_PACKAGES, mUser.getIdentifier());
+                } catch (RemoteException e) {
                 }
                 if (pi != null && pi.requiredForAllUsers) {
                     p.setChecked(true);
@@ -623,15 +601,16 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     if (hasSettings) {
                         requestRestrictionsForApp(packageName, p);
                     }
-                } else if (!mNewUser && appInfoListHasPackage(mUserApps, packageName)) {
+                } else if (!mNewUser && isAppEnabledForUser(pi)) { /*appInfoListHasPackage(mUserApps, packageName)*/
                     p.setChecked(true);
                 }
-                if (pi.requiredAccountType != null && pi.restrictedAccountType == null) {
+                if (mRestrictedProfile
+                        && pi.requiredAccountType != null && pi.restrictedAccountType == null) {
                     p.setChecked(false);
                     p.setImmutable(true);
                     p.setSummary(R.string.app_not_supported_in_limited);
                 }
-                if (pi.restrictedAccountType != null) {
+                if (mRestrictedProfile && pi.restrictedAccountType != null) {
                     p.setSummary(R.string.app_sees_restricted_accounts);
                 }
                 if (app.masterEntry != null) {
@@ -644,7 +623,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 } else {
                     p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
                 }
-                p.setSelectableAppInfo(app);
                 mSelectedPackages.put(packageName, p.isChecked());
                 mAppListChanged = true;
                 i++;
@@ -654,7 +632,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         // to avoid taking the hit in onPause(), which can cause race conditions on user switch.
         if (mNewUser && mFirstTime) {
             mFirstTime = false;
-            updateUserAppList();
+            applyUserAppsStates();
         }
     }
 
@@ -677,15 +655,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return false;
     }
 
-    private boolean appInfoListHasPackage(List<ApplicationInfo> apps, String packageName) {
-        for (ApplicationInfo info : apps) {
-            if (info.packageName.equals(packageName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void updateAllEntries(String prefKey, boolean checked) {
         for (int i = 0; i < mAppList.getPreferenceCount(); i++) {
             Preference pref = mAppList.getPreference(i);
@@ -699,9 +668,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public void onClick(View v) {
-        if (v == mHeaderView) {
-            showDialog(DIALOG_ID_EDIT_USER_INFO);
-        } else if (v.getTag() instanceof AppRestrictionsPreference) {
+        if (v.getTag() instanceof AppRestrictionsPreference) {
             AppRestrictionsPreference pref = (AppRestrictionsPreference) v.getTag();
             if (v.getId() == R.id.app_restrictions_settings) {
                 toggleAppPanel(pref);
@@ -746,8 +713,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             listPref.setSummary(readable);
                             break;
                         case RestrictionEntry.TYPE_MULTI_SELECT:
-                            MultiSelectListPreference msListPref =
-                                    (MultiSelectListPreference) preference;
                             Set<String> set = (Set<String>) newValue;
                             String [] selectedValues = new String[set.size()];
                             set.toArray(selectedValues);
@@ -936,11 +901,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
-                && mEditUserPhotoController.onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-
         AppRestrictionsPreference pref = mCustomRequestMap.get(requestCode);
         if (pref == null) {
             Log.w(TAG, "Unknown requestCode " + requestCode);
@@ -992,317 +952,4 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return false;
     }
 
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        if (dialogId == DIALOG_ID_EDIT_USER_INFO) {
-            if (mEditUserInfoDialog != null) {
-                return mEditUserInfoDialog;
-            }
-
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-            View content = inflater.inflate(R.layout.edit_user_info_dialog_content, null);
-
-            UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
-
-            final EditText userNameView = (EditText) content.findViewById(R.id.user_name);
-            userNameView.setText(info.name);
-
-            final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
-            Drawable drawable = null;
-            if (mSavedPhoto != null) {
-                drawable = CircleFramedDrawable.getInstance(getActivity(), mSavedPhoto);
-            } else {
-                drawable = mUserIconView.getDrawable();
-                if (drawable == null) {
-                    drawable = getCircularUserIcon();
-                }
-            }
-            userPhotoView.setImageDrawable(drawable);
-
-            mEditUserPhotoController = new EditUserPhotoController(this, userPhotoView,
-                    mSavedPhoto, drawable);
-
-            mEditUserInfoDialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.profile_info_settings_title)
-                .setIconAttribute(R.drawable.ic_settings_multiuser)
-                .setView(content)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (which == DialogInterface.BUTTON_POSITIVE) {
-                            // Update the name if changed.
-                            CharSequence userName = userNameView.getText();
-                            if (!TextUtils.isEmpty(userName)) {
-                                CharSequence oldUserName = mUserNameView.getText();
-                                if (oldUserName == null
-                                        || !userName.toString().equals(oldUserName.toString())) {
-                                    ((TextView) mHeaderView.findViewById(android.R.id.title))
-                                            .setText(userName.toString());
-                                    mUserManager.setUserName(mUser.getIdentifier(),
-                                            userName.toString());
-                                }
-                            }
-                            // Update the photo if changed.
-                            Drawable drawable = mEditUserPhotoController.getNewUserPhotoDrawable();
-                            Bitmap bitmap = mEditUserPhotoController.getNewUserPhotoBitmap();
-                            if (drawable != null && bitmap != null
-                                    && !drawable.equals(mUserIconView.getDrawable())) {
-                                mUserIconView.setImageDrawable(drawable);
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        mUserManager.setUserIcon(mUser.getIdentifier(),
-                                                mEditUserPhotoController.getNewUserPhotoBitmap());
-                                        return null;
-                                    }
-                                }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
-                            }
-                            removeDialog(DIALOG_ID_EDIT_USER_INFO);
-                        }
-                        clearEditUserInfoDialog();
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel,  new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        clearEditUserInfoDialog();
-                    }
-                 })
-                .create();
-
-            // Make sure the IME is up.
-            mEditUserInfoDialog.getWindow().setSoftInputMode(
-                    WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-            return mEditUserInfoDialog;
-        }
-
-        return null;
-    }
-
-    private void clearEditUserInfoDialog() {
-        mEditUserInfoDialog = null;
-        mSavedPhoto = null;
-    }
-
-    private static class EditUserPhotoController {
-        private static final int POPUP_LIST_ITEM_ID_CHOOSE_PHOTO = 1;
-        private static final int POPUP_LIST_ITEM_ID_TAKE_PHOTO = 2;
-
-        // It seems that this class generates custom request codes and they may
-        // collide with ours, these values are very unlikely to have a conflict.
-        private static final int REQUEST_CODE_CHOOSE_PHOTO = Integer.MAX_VALUE;
-        private static final int REQUEST_CODE_TAKE_PHOTO = Integer.MAX_VALUE - 1;
-        private static final int REQUEST_CODE_CROP_PHOTO = Integer.MAX_VALUE - 2;
-
-        private static final String CROP_PICTURE_FILE_NAME = "CropEditUserPhoto.jpg";
-        private static final String TAKE_PICTURE_FILE_NAME = "TakeEditUserPhoto2.jpg";
-
-        private final int mPhotoSize;
-
-        private final Context mContext;
-        private final Fragment mFragment;
-        private final ImageView mImageView;
-
-        private final Uri mCropPictureUri;
-        private final Uri mTakePictureUri;
-
-        private Bitmap mNewUserPhotoBitmap;
-        private Drawable mNewUserPhotoDrawable;
-
-        public EditUserPhotoController(Fragment fragment, ImageView view,
-                Bitmap bitmap, Drawable drawable) {
-            mContext = view.getContext();
-            mFragment = fragment;
-            mImageView = view;
-            mCropPictureUri = createTempImageUri(mContext, CROP_PICTURE_FILE_NAME);
-            mTakePictureUri = createTempImageUri(mContext, TAKE_PICTURE_FILE_NAME);
-            mPhotoSize = getPhotoSize(mContext);
-            mImageView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showUpdatePhotoPopup();
-                }
-            });
-            mNewUserPhotoBitmap = bitmap;
-            mNewUserPhotoDrawable = drawable;
-        }
-
-        public boolean onActivityResult(int requestCode, int resultCode, final Intent data) {
-            if (resultCode != Activity.RESULT_OK) {
-                return false;
-            }
-            switch (requestCode) {
-                case REQUEST_CODE_CHOOSE_PHOTO:
-                case REQUEST_CODE_CROP_PHOTO: {
-                    new AsyncTask<Void, Void, Bitmap>() {
-                        @Override
-                        protected Bitmap doInBackground(Void... params) {
-                            return BitmapFactory.decodeFile(mCropPictureUri.getPath());
-                        }
-                        @Override
-                        protected void onPostExecute(Bitmap bitmap) {
-                            mNewUserPhotoBitmap = bitmap;
-                            mNewUserPhotoDrawable = CircleFramedDrawable
-                                    .getInstance(mImageView.getContext(), mNewUserPhotoBitmap);
-                            mImageView.setImageDrawable(mNewUserPhotoDrawable);
-                            // Delete the files - not needed anymore.
-                            new File(mCropPictureUri.getPath()).delete();
-                            new File(mTakePictureUri.getPath()).delete();
-                        }
-                    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
-                } return true;
-                case REQUEST_CODE_TAKE_PHOTO: {
-                    cropPhoto();
-                } break;
-            }
-            return false;
-        }
-
-        public Bitmap getNewUserPhotoBitmap() {
-            return mNewUserPhotoBitmap;
-        }
-
-        public Drawable getNewUserPhotoDrawable() {
-            return mNewUserPhotoDrawable;
-        }
-
-        private void showUpdatePhotoPopup() {
-            final boolean canTakePhoto = canTakePhoto();
-            final boolean canChoosePhoto = canChoosePhoto();
-
-            if (!canTakePhoto && !canChoosePhoto) {
-                return;
-            }
-
-            Context context = mImageView.getContext();
-            final List<AdapterItem> items = new ArrayList<AdapterItem>();
-
-            if (canTakePhoto()) {
-                String title = mImageView.getContext().getString( R.string.user_image_take_photo);
-                AdapterItem item = new AdapterItem(title, POPUP_LIST_ITEM_ID_TAKE_PHOTO);
-                items.add(item);
-            }
-
-            if (canChoosePhoto) {
-                String title = context.getString(R.string.user_image_choose_photo);
-                AdapterItem item = new AdapterItem(title, POPUP_LIST_ITEM_ID_CHOOSE_PHOTO);
-                items.add(item);
-            }
-
-            final ListPopupWindow listPopupWindow = new ListPopupWindow(context);
-
-            listPopupWindow.setAnchorView(mImageView);
-            listPopupWindow.setModal(true);
-            listPopupWindow.setInputMethodMode(ListPopupWindow.INPUT_METHOD_NOT_NEEDED);
-
-            ListAdapter adapter = new ArrayAdapter<AdapterItem>(context,
-                    R.layout.edit_user_photo_popup_item, items);
-            listPopupWindow.setAdapter(adapter);
-
-            final int width = Math.max(mImageView.getWidth(), context.getResources()
-                    .getDimensionPixelSize(R.dimen.update_user_photo_popup_min_width));
-            listPopupWindow.setWidth(width);
-
-            listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    AdapterItem item = items.get(position);
-                    switch (item.id) {
-                        case POPUP_LIST_ITEM_ID_CHOOSE_PHOTO: {
-                            choosePhoto();
-                            listPopupWindow.dismiss();
-                        } break;
-                        case POPUP_LIST_ITEM_ID_TAKE_PHOTO: {
-                            takePhoto();
-                            listPopupWindow.dismiss();
-                        } break;
-                    }
-                }
-            });
-
-            listPopupWindow.show();
-        }
-
-        private boolean canTakePhoto() {
-            return mImageView.getContext().getPackageManager().queryIntentActivities(
-                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
-                    PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
-        }
-
-        private boolean canChoosePhoto() {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            return mImageView.getContext().getPackageManager().queryIntentActivities(
-                    intent, 0).size() > 0;
-        }
-
-        private void takePhoto() {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mTakePictureUri);
-            mFragment.startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
-        }
-
-        private void choosePhoto() {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-            intent.setType("image/*");
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropPictureUri);
-            appendCropExtras(intent);
-            mFragment.startActivityForResult(intent, REQUEST_CODE_CHOOSE_PHOTO);
-        }
-
-        private void cropPhoto() {
-            Intent intent = new Intent("com.android.camera.action.CROP");
-            intent.setDataAndType(mTakePictureUri, "image/*");
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropPictureUri);
-            appendCropExtras(intent);
-            mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
-        }
-
-        private void appendCropExtras(Intent intent) {
-            intent.putExtra("crop", "true");
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", true);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", mPhotoSize);
-            intent.putExtra("outputY", mPhotoSize);
-        }
-
-        private static int getPhotoSize(Context context) {
-            Cursor cursor = context.getContentResolver().query(
-                    DisplayPhoto.CONTENT_MAX_DIMENSIONS_URI,
-                    new String[]{DisplayPhoto.DISPLAY_MAX_DIM}, null, null, null);
-            try {
-                cursor.moveToFirst();
-                return cursor.getInt(0);
-            } finally {
-                cursor.close();
-            }
-        }
-
-        private static Uri createTempImageUri(Context context, String fileName) {
-            File folder = context.getExternalCacheDir();
-            folder.mkdirs();
-            File fullPath = new File(folder, fileName);
-            fullPath.delete();
-            return Uri.fromFile(fullPath.getAbsoluteFile());
-        }
-
-        private static final class AdapterItem {
-            final String title;
-            final int id;
-
-            public AdapterItem(String title, int id) {
-                this.title = title;
-                this.id = id;
-            }
-
-            @Override
-            public String toString() {
-                return title;
-            }
-        }
-    }
 }
