@@ -39,6 +39,7 @@ import android.text.format.DateFormat;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -372,40 +373,10 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
-    /*  Helper routines to format timezone */
-
-    /* package */ static String getTimeZoneText(TimeZone tz) {
-        // Similar to new SimpleDateFormat("'GMT'Z, zzzz").format(new Date()), but
-        // we want "GMT-03:00" rather than "GMT-0300".
-        Date now = new Date();
-        return formatOffset(new StringBuilder(), tz, now).
-            append(", ").
-            append(tz.getDisplayName(tz.inDaylightTime(now), TimeZone.LONG)).toString();
-    }
-
-    private static StringBuilder formatOffset(StringBuilder sb, TimeZone tz, Date d) {
-        int off = tz.getOffset(d.getTime()) / 1000 / 60;
-
-        sb.append("GMT");
-        if (off < 0) {
-            sb.append('-');
-            off = -off;
-        } else {
-            sb.append('+');
-        }
-
-        int hours = off / 60;
-        int minutes = off % 60;
-
-        sb.append((char) ('0' + hours / 10));
-        sb.append((char) ('0' + hours % 10));
-
-        sb.append(':');
-
-        sb.append((char) ('0' + minutes / 10));
-        sb.append((char) ('0' + minutes % 10));
-
-        return sb;
+    private static String getTimeZoneText(TimeZone tz) {
+        SimpleDateFormat sdf = new SimpleDateFormat("ZZZZ, zzzz");
+        sdf.setTimeZone(tz);
+        return sdf.format(new Date());
     }
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
