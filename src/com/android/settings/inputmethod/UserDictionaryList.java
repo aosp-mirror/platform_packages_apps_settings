@@ -77,7 +77,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         mLocale = locale;
     }
 
-    static TreeSet<String> getUserDictionaryLocalesSet(Activity activity) {
+    public static TreeSet<String> getUserDictionaryLocalesSet(Activity activity) {
         @SuppressWarnings("deprecation")
         final Cursor cursor = activity.managedQuery(UserDictionary.Words.CONTENT_URI,
                 new String[] { UserDictionary.Words.LOCALE },
@@ -89,15 +89,21 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         } else if (cursor.moveToFirst()) {
             final int columnIndex = cursor.getColumnIndex(UserDictionary.Words.LOCALE);
             do {
-                String locale = cursor.getString(columnIndex);
+                final String locale = cursor.getString(columnIndex);
                 localeSet.add(null != locale ? locale : "");
             } while (cursor.moveToNext());
         }
-        localeSet.add(Locale.getDefault().toString());
+        // CAVEAT: Keep this for consistency of the implementation between Keyboard and Settings
+        // if (!UserDictionarySettings.IS_SHORTCUT_API_SUPPORTED) {
+        //     // For ICS, we need to show "For all languages" in case that the keyboard locale
+        //     // is different from the system locale
+        //     localeSet.add("");
+        // }
+
         final InputMethodManager imm =
                 (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         final List<InputMethodInfo> imis = imm.getEnabledInputMethodList();
-        for (InputMethodInfo imi : imis) {
+        for (final InputMethodInfo imi : imis) {
             final List<InputMethodSubtype> subtypes =
                     imm.getEnabledInputMethodSubtypeList(
                             imi, true /* allowsImplicitlySelectedSubtypes */);
@@ -108,6 +114,15 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
                 }
             }
         }
+
+        // We come here after we have collected locales from existing user dictionary entries and
+        // enabled subtypes. If we already have the locale-without-country version of the system
+        // locale, we don't add the system locale to avoid confusion even though it's technically
+        // correct to add it.
+        if (!localeSet.contains(Locale.getDefault().getLanguage().toString())) {
+            localeSet.add(Locale.getDefault().toString());
+        }
+
         return localeSet;
     }
 
