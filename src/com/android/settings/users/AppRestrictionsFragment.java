@@ -113,6 +113,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private List<SelectableAppInfo> mVisibleApps;
     private List<ApplicationInfo> mUserApps;
+    private AsyncTask mAppLoadingTask;
 
     private BroadcastReceiver mUserBackgrounding = new BroadcastReceiver() {
         @Override
@@ -271,7 +272,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         getActivity().registerReceiver(mUserBackgrounding,
                 new IntentFilter(Intent.ACTION_USER_BACKGROUND));
         mAppListChanged = false;
-        new AppLoadingTask().execute((Void[]) null);
+        if (mAppLoadingTask == null || mAppLoadingTask.getStatus() == AsyncTask.Status.FINISHED) {
+            mAppLoadingTask = new AppLoadingTask().execute((Void[]) null);
+        }
     }
 
     public void onPause() {
