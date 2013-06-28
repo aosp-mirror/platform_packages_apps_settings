@@ -43,6 +43,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
@@ -67,6 +68,9 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import dalvik.system.VMRuntime;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -93,6 +97,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
+    private static final String SELECT_RUNTIME_KEY = "select_runtime";
+    private static final String SELECT_RUNTIME_PROPERTY = "persist.sys.dalvik.vm.lib";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
@@ -311,11 +317,19 @@ public class DevelopmentSettings extends PreferenceFragment
             }
         }
 
+        Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
+        if (selectRuntime != null) {
+            mAllPrefs.add(selectRuntime);
+            if (!removePreferenceForProduction(selectRuntime)) {
+                filterRuntimeOptions(selectRuntime);
+            }
+        }
+
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
             mAllPrefs.add(hdcpChecking);
+            removePreferenceForProduction(hdcpChecking);
         }
-        removeHdcpOptionsForProduction();
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -379,15 +393,17 @@ public class DevelopmentSettings extends PreferenceFragment
         activity.getActionBar().setCustomView(null);
     }
 
-    private void removeHdcpOptionsForProduction() {
+    private boolean removePreferenceForProduction(Preference preference) {
         if ("user".equals(Build.TYPE)) {
-            Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
-            if (hdcpChecking != null) {
-                // Remove the preference
-                getPreferenceScreen().removePreference(hdcpChecking);
-                mAllPrefs.remove(hdcpChecking);
-            }
+            removePreference(preference);
+            return true;
         }
+        return false;
+    }
+
+    private void removePreference(Preference preference) {
+        getPreferenceScreen().removePreference(preference);
+        mAllPrefs.remove(preference);
     }
 
     private void setPrefsEnabledState(boolean enabled) {
@@ -464,6 +480,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateCheckBox(mEnforceReadExternal, isPermissionEnforced(READ_EXTERNAL_STORAGE));
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
+        updateRuntimeValue();
         updateHdcpValues();
         updatePasswordSummary();
         updateDebuggerOptions();
@@ -512,13 +529,60 @@ public class DevelopmentSettings extends PreferenceFragment
         pokeSystemProperties();
     }
 
+    void filterRuntimeOptions(Preference selectRuntime) {
+        ListPreference pref = (ListPreference) selectRuntime;
+        ArrayList<String> validValues = new ArrayList<String>();
+        ArrayList<String> validSummaries = new ArrayList<String>();
+        String[] values = getResources().getStringArray(R.array.select_runtime_values);
+        String[] summaries = getResources().getStringArray(R.array.select_runtime_summaries);
+        for (int i = 0; i < values.length; i++) {
+            String value = values[i];
+            String summary = summaries[i];
+            if (new File("/system/lib/" + value).exists()) {
+                validValues.add(value);
+                validSummaries.add(summary);
+            }
+        }
+        int count = validValues.size();
+        if (count <= 1) {
+            // no choices, so remove preference
+            removePreference(selectRuntime);
+        } else {
+            pref.setEntryValues(validValues.toArray(new String[count]));
+            pref.setEntries(validSummaries.toArray(new String[count]));
+        }
+    }
+
+    private String currentRuntimeValue() {
+        return SystemProperties.get(SELECT_RUNTIME_PROPERTY, VMRuntime.getRuntime().vmLibrary());
+    }
+
+    private void updateRuntimeValue() {
+        ListPreference selectRuntime = (ListPreference) findPreference(SELECT_RUNTIME_KEY);
+        if (selectRuntime != null) {
+            String currentValue = currentRuntimeValue();
+            String[] values = getResources().getStringArray(R.array.select_runtime_values);
+            String[] summaries = getResources().getStringArray(R.array.select_runtime_summaries);
+            int index = 0;
+            for (int i = 0; i < values.length; i++) {
+                if (currentValue.equals(values[i])) {
+                    index = i;
+                    break;
+                }
+            }
+            selectRuntime.setValue(values[index]);
+            selectRuntime.setSummary(summaries[index]);
+            selectRuntime.setOnPreferenceChangeListener(this);
+        }
+    }
+
     private void updateHdcpValues() {
-        int index = 1; // Defaults to drm-only. Needs to match with R.array.hdcp_checking_values
         ListPreference hdcpChecking = (ListPreference) findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
             String currentValue = SystemProperties.get(HDCP_CHECKING_PROPERTY);
             String[] values = getResources().getStringArray(R.array.hdcp_checking_values);
             String[] summaries = getResources().getStringArray(R.array.hdcp_checking_summaries);
+            int index = 1; // Defaults to drm-only. Needs to match with R.array.hdcp_checking_values
             for (int i = 0; i < values.length; i++) {
                 if (currentValue.equals(values[i])) {
                     index = i;
@@ -1180,7 +1244,34 @@ public class DevelopmentSettings extends PreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
+        if (SELECT_RUNTIME_KEY.equals(preference.getKey())) {
+            final String oldRuntimeValue = VMRuntime.getRuntime().vmLibrary();
+            final String newRuntimeValue = newValue.toString();
+            if (!newRuntimeValue.equals(oldRuntimeValue)) {
+                final Context context = getActivity();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(context.getResources().getString(R.string.select_runtime_warning_message,
+                                                                    oldRuntimeValue, newRuntimeValue));
+                builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SystemProperties.set(SELECT_RUNTIME_PROPERTY, newRuntimeValue);
+                        pokeSystemProperties();
+                        PowerManager pm = (PowerManager)
+                                context.getSystemService(Context.POWER_SERVICE);
+                        pm.reboot(null);
+                    }
+                });
+                builder.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateRuntimeValue();
+                    }
+                });
+                builder.show();
+            }
+            return true;
+        } else if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
             SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
             updateHdcpValues();
             pokeSystemProperties();
