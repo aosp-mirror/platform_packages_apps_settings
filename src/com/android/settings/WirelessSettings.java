@@ -17,12 +17,17 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
-import android.net.wifi.p2p.WifiP2pManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -31,16 +36,16 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Switch;
-
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.NsdEnabler;
 
 public class WirelessSettings extends SettingsPreferenceFragment {
+    private static final String TAG = "WirelessSettiings";
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
@@ -50,6 +55,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
 
@@ -62,6 +68,12 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private NfcAdapter mNfcAdapter;
     private NsdEnabler mNsdEnabler;
 
+    private ConnectivityManager mCm;
+    private TelephonyManager mTm;
+
+    private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
+    private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
+
     /**
      * Invoked on each preference click in this hierarchy, overrides
      * PreferenceActivity's implementation.  Used to make sure we track the
@@ -69,6 +81,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        log("onPreferenceTreeClick: preference=" + preference);
         if (preference == mAirplaneModePreference && Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode launch ECM app dialog
@@ -76,9 +89,104 @@ public class WirelessSettings extends SettingsPreferenceFragment {
                 new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
                 REQUEST_CODE_EXIT_ECM);
             return true;
+        } else if (preference == findPreference(KEY_MANAGE_MOBILE_PLAN)) {
+            onManageMobilePlanClick();
         }
         // Let the intents be launched by the Preference manager
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    private String mManageMobilePlanMessage;
+
+    public void onManageMobilePlanClick() {
+        log("onManageMobilePlanClick:");
+        mManageMobilePlanMessage = null;
+        Resources resources = getActivity().getResources();
+
+        NetworkInfo ni = mCm.getActiveNetworkInfo();
+        if (mTm.hasIccCard() && (ni != null)) {
+            // Get provisioning URL
+            String url = getProvisioningUrl();
+            if (!TextUtils.isEmpty(url)) {
+                // Send user to provisioning webpage
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+                mManageMobilePlanMessage = null;
+            } else {
+                // No provisioning URL
+                String operatorName = mTm.getSimOperatorName();
+                if (TextUtils.isEmpty(operatorName)) {
+                    // Use NetworkOperatorName as second choice in case there is no
+                    // SPN (Service Provider Name on the SIM). Such as with T-mobile.
+                    operatorName = mTm.getNetworkOperatorName();
+                    if (TextUtils.isEmpty(operatorName)) {
+                        mManageMobilePlanMessage = resources.getString(
+                                R.string.mobile_unknown_sim_operator);
+                    } else {
+                        mManageMobilePlanMessage = resources.getString(
+                                R.string.mobile_no_provisioning_url, operatorName);
+                    }
+                } else {
+                    mManageMobilePlanMessage = resources.getString(
+                            R.string.mobile_no_provisioning_url, operatorName);
+                }
+            }
+        } else if (mTm.hasIccCard() == false) {
+            // No sim card
+            mManageMobilePlanMessage = resources.getString(R.string.mobile_insert_sim_card);
+        } else {
+            // NetworkInfo is null, there is no connection
+            mManageMobilePlanMessage = resources.getString(R.string.mobile_connect_to_internet);
+        }
+        if (!TextUtils.isEmpty(mManageMobilePlanMessage)) {
+            log("onManageMobilePlanClick: message=" + mManageMobilePlanMessage);
+            showDialog(MANAGE_MOBILE_PLAN_DIALOG_ID);
+        }
+    }
+
+    private String getProvisioningUrl() {
+        String url = getActivity().getResources()
+                .getString(com.android.internal.R.string.mobile_provisioning_url);
+        log("getProvisioningUrl: mobile_provisioning_url=" + url);
+
+        // populate the iccid and imei in the provisioning url.
+        if (!TextUtils.isEmpty(url)) {
+            log("getProvisioningUrl: iccid=" + mTm.getSimSerialNumber()
+                    + " imei=" + mTm.getDeviceId() + " phone number=" + mTm.getLine1Number());
+            url = String.format(url,
+                    mTm.getSimSerialNumber() /* ICCID */,
+                    mTm.getDeviceId() /* IMEI */,
+                    mTm.getLine1Number() /* Phone number */);
+        }
+
+        log("getProvisioningUrl: url=" + url);
+        return url;
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        log("onCreateDialog: dialogId=" + dialogId);
+        switch (dialogId) {
+            case MANAGE_MOBILE_PLAN_DIALOG_ID:
+                return new AlertDialog.Builder(getActivity())
+                            .setMessage(mManageMobilePlanMessage)
+                            .setCancelable(false)
+                            .setPositiveButton(com.android.internal.R.string.ok,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    log("MANAGE_MOBILE_PLAN_DIALOG.onClickListener id=" + id);
+                                    mManageMobilePlanMessage = null;
+                                }
+                            })
+                            .create();
+        }
+        return super.onCreateDialog(dialogId);
+    }
+
+    private void log(String s) {
+        Log.d(TAG, s);
     }
 
     public static boolean isRadioAllowed(Context context, String type) {
@@ -94,6 +202,13 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mManageMobilePlanMessage = savedInstanceState.getString(SAVED_MANAGE_MOBILE_PLAN_MSG);
+        }
+        log("onCreate: mManageMobilePlanMessage=" + mManageMobilePlanMessage);
+
+        mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        mTm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
@@ -156,9 +271,10 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             mNfcEnabler = null;
         }
 
-        // Remove Mobile Network Settings if it's a wifi-only device.
+        // Remove Mobile Network Settings and Manage Mobile Plan if it's a wifi-only device.
         if (isSecondaryUser || Utils.isWifiOnly(getActivity())) {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
+            removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
 
         // Enable Proxy selector settings if allowed.
@@ -210,6 +326,15 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         }
         if (mNsdEnabler != null) {
             mNsdEnabler.resume();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (!TextUtils.isEmpty(mManageMobilePlanMessage)) {
+            outState.putString(SAVED_MANAGE_MOBILE_PLAN_MSG, mManageMobilePlanMessage);
         }
     }
 
