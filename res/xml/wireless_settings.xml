@@ -64,6 +64,11 @@
             android:targetClass="com.android.phone.MobileNetworkSettings" />
     </PreferenceScreen>
 
+    <Preference
+        android:key="manage_mobile_plan"
+        android:title="@string/manage_mobile_plan_title"
+        android:persistent="false" />
+
     <CheckBoxPreference
         android:key="toggle_nsd"
         android:title="@string/nsd_quick_toggle_title"
