@@ -29,6 +29,8 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 
+import org.junit.internal.matchers.IsCollectionContaining;
+
 import java.util.List;
 
 /**
@@ -41,6 +43,7 @@ public class RestrictionSettings extends AppRestrictionsFragment {
     private static final int MENU_RESET = Menu.FIRST + 1;
     private static final int MENU_CHANGE_PIN = Menu.FIRST + 2;
 
+    private static final String KEY_CHALLENGE_SUCCEEDED = "chsc";
     private static final String KEY_CHALLENGE_REQUESTED = "chrq";
 
     private boolean mChallengeSucceeded;
@@ -50,16 +53,19 @@ public class RestrictionSettings extends AppRestrictionsFragment {
         super.onCreate(icicle);
 
         init(icicle);
-        mChallengeSucceeded = false;
-        mChallengeRequested = icicle != null
-                ? icicle.getBoolean(KEY_CHALLENGE_REQUESTED, false)
-                : false;
+        if (icicle != null) {
+            mChallengeSucceeded = icicle.getBoolean(KEY_CHALLENGE_SUCCEEDED, false);
+            mChallengeRequested = icicle.getBoolean(KEY_CHALLENGE_REQUESTED, false);
+        }
         setHasOptionsMenu(true);
     }
 
     public void onResume() {
         super.onResume();
+        ensurePin();
+    }
 
+    private void ensurePin() {
         if (!mChallengeSucceeded) {
             getListView().setEnabled(false);
             final UserManager um = UserManager.get(getActivity());
@@ -81,24 +87,13 @@ public class RestrictionSettings extends AppRestrictionsFragment {
 
     private void resetAndRemovePin() {
         final UserManager um = UserManager.get(getActivity());
-        final PackageManager pm = getActivity().getPackageManager();
-        List<ApplicationInfo> installedApps = pm.getInstalledApplications(
-                PackageManager.GET_UNINSTALLED_PACKAGES);
-        UserHandle user = android.os.Process.myUserHandle();
-        for (ApplicationInfo info: installedApps) {
-            if ((info.flags & ApplicationInfo.FLAG_BLOCKED) != 0
-                    && (info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
-                pm.setApplicationBlockedSettingAsUser(info.packageName, false, user);
-            }
-        }
-        um.changeRestrictionsPin(null);
+        um.removeRestrictions();
         clearSelectedApps();
         finishFragment();
     }
 
     private void changePin() {
         final UserManager um = UserManager.get(getActivity());
-        um.changeRestrictionsPin(null);
         Intent requestPin = new Intent("android.intent.action.RESTRICTIONS_PIN_CREATE");
         startActivityForResult(requestPin, REQUEST_PIN_CHALLENGE);
     }
@@ -120,7 +115,11 @@ public class RestrictionSettings extends AppRestrictionsFragment {
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
         outState.putBoolean(KEY_CHALLENGE_REQUESTED, mChallengeRequested);
+        if (getActivity().isChangingConfigurations()) {
+            outState.putBoolean(KEY_CHALLENGE_SUCCEEDED, mChallengeSucceeded);
+        }
     }
 
     @Override
