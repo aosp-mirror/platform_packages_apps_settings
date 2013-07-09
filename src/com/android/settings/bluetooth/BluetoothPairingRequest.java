@@ -48,10 +48,12 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
                     intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                     BluetoothDevice.ERROR);
+            boolean secure = intent.getBooleanExtra(BluetoothDevice.EXTRA_SECURE_PAIRING, false);
             Intent pairingIntent = new Intent();
             pairingIntent.setClass(context, BluetoothPairingDialog.class);
             pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
             pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
+            pairingIntent.putExtra(BluetoothDevice.EXTRA_SECURE_PAIRING, secure);
             if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION ||
                     type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
                     type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {

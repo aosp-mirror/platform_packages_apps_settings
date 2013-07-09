@@ -1059,6 +1059,9 @@
     <!-- Message when bluetooth dialog for pin entry is showing. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_enter_pin_msg">To pair with:<xliff:g id="bold">&lt;br>&lt;b></xliff:g><xliff:g id="device_name">%1$s</xliff:g><xliff:g id="end_bold">&lt;/b>&lt;br>&lt;br></xliff:g>Type the device\'s required PIN:</string>
 
+    <!-- Message when bluetooth dialog for pin entry is showing  when HIGH security enabled-->
+    <string name="bluetooth_enter_pin_msg_hs">\nType PIN to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022. [High Security Enabled: Needs 16 character key] </string>
+
     <!-- Message when bluetooth dialog for passkey entry is showing. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_enter_passkey_msg">To pair with:<xliff:g id="bold">&lt;br>&lt;b></xliff:g><xliff:g id="device_name">%1$s</xliff:g><xliff:g id="end_bold">&lt;/b>&lt;br>&lt;br></xliff:g>Type the device\'s required passkey:</string>
 
@@ -1152,6 +1155,8 @@
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the map profile. -->
     <string name="bluetooth_profile_map">Message Access</string>
 
+    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the SAP profile. -->
+    <string name="bluetooth_profile_sap">SIM Access</string>
     <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the headset profile. [CHAR LIMIT=80] -->
@@ -1185,6 +1190,8 @@
     <string name="bluetooth_opp_profile_summary_connected">Connected to file transfer server</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference when map is connected. -->
     <string name="bluetooth_map_profile_summary_connected">Connected to map</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the SAP checkbox preference when SAP is connected. -->
+    <string name="bluetooth_sap_profile_summary_connected">Connected to SIM Access Server</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is not connected. -->
     <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
@@ -1200,6 +1207,8 @@
     <string name="bluetooth_headset_profile_summary_use_for">Use for phone audio</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference that describes how checking it will set the OPP profile as preferred. -->
     <string name="bluetooth_opp_profile_summary_use_for">Use for file transfer</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the SAP checkbox preference that describes how checking it will set the SAP profile as preferred. -->
+    <string name="bluetooth_sap_profile_summary_use_for">Use for SIM Access</string>
     <!-- Bluetooth settings. Connection options screen. The summary
          for the HID checkbox preference that describes how checking it
          will set the HID profile as preferred. -->
