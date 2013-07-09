@@ -601,7 +601,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     if (!hasSettings && !isSettingsApp) continue;
                     // Get and populate the defaults, since the user is not going to be
                     // able to toggle this app ON (it's ON by default and immutable).
-                    if (hasSettings) {
+                    // Only do this for restricted profiles, not single-user restrictions
+                    if (hasSettings && mRestrictedProfile) {
                         requestRestrictionsForApp(packageName, p);
                     }
                 } else if (!mNewUser && isAppEnabledForUser(pi)) { /*appInfoListHasPackage(mUserApps, packageName)*/
