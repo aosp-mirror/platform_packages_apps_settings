@@ -101,9 +101,11 @@ public class AppOpsState {
                     AppOpsManager.OP_FINE_LOCATION,
                     AppOpsManager.OP_GPS,
                     AppOpsManager.OP_WIFI_SCAN,
-                    AppOpsManager.OP_NEIGHBORING_CELLS },
+                    AppOpsManager.OP_NEIGHBORING_CELLS,
+                    AppOpsManager.OP_MONITOR_LOCATION },
             new boolean[] { true,
                     true,
+                    false,
                     false,
                     false,
                     false }
