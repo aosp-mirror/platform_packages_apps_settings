@@ -909,6 +909,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
             BatterySipper bs;
             synchronized (mRequestQueue) {
                 if (mRequestQueue.isEmpty() || mAbort) {
+                    mHandler.sendEmptyMessage(MSG_REPORT_FULLY_DRAWN);
                     mRequestThread = null;
                     return;
                 }
@@ -919,6 +920,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     }
 
     static final int MSG_UPDATE_NAME_ICON = 1;
+    static final int MSG_REPORT_FULLY_DRAWN = 2;
 
     Handler mHandler = new Handler() {
 
@@ -934,6 +936,9 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                         pgp.setIcon(bs.icon);
                         pgp.setTitle(bs.name);
                     }
+                    break;
+                case MSG_REPORT_FULLY_DRAWN:
+                    getActivity().reportFullyDrawn();
                     break;
             }
             super.handleMessage(msg);
