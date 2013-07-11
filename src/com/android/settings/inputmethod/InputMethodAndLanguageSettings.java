@@ -83,12 +83,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             new ArrayList<PreferenceScreen>();
     private InputManager mIm;
     private InputMethodManager mImm;
-    private List<InputMethodInfo> mImis;
     private boolean mIsOnlyImeSettings;
     private Handler mHandler;
     @SuppressWarnings("unused")
     private SettingsObserver mSettingsObserver;
     private Intent mIntentWaitingForResult;
+    private InputMethodSettingValuesWrapper mInputMethodSettingValues;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -140,7 +140,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         // Build IME preference category.
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mImis = mImm.getInputMethodList();
+        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(getActivity());
 
         mKeyboardSettingsCategory.removeAll();
         if (!mIsOnlyImeSettings) {
@@ -151,9 +151,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
 
         mInputMethodPreferenceList.clear();
-        final int N = (mImis == null ? 0 : mImis.size());
+        final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+        final int N = (imis == null ? 0 : imis.size());
         for (int i = 0; i < N; ++i) {
-            final InputMethodInfo imi = mImis.get(i);
+            final InputMethodInfo imi = imis.get(i);
             final InputMethodPreference pref = getInputMethodPreference(imi, N);
             mInputMethodPreferenceList.add(pref);
         }
@@ -260,9 +261,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         updateInputDevices();
 
-        // IME
+        // Refresh internal states in mInputMethodSettingValues to keep the latest
+        // "InputMethodInfo"s and "InputMethodSubtype"s
+        mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
+        // TODO: Consolidate the logic to InputMethodSettingsWrapper
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
-                this, getContentResolver(), mImis, null);
+                this, getContentResolver(),
+                mInputMethodSettingValues.getInputMethodList(), null);
         updateActiveInputMethodsSummary();
     }
 
@@ -276,8 +281,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
             mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
         }
+        // TODO: Consolidate the logic to InputMethodSettingsWrapper
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(
-                this, getContentResolver(), mImis, !mHardKeyboardPreferenceList.isEmpty());
+                this, getContentResolver(), mInputMethodSettingValues.getInputMethodList(),
+                !mHardKeyboardPreferenceList.isEmpty());
     }
 
     @Override
@@ -385,8 +392,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (context == null || mImm == null) return;
         final Preference curPref = getPreferenceScreen().findPreference(KEY_CURRENT_INPUT_METHOD);
         if (curPref != null) {
-            final CharSequence curIme = InputMethodAndSubtypeUtil.getCurrentInputMethodName(
-                    context, getContentResolver(), mImm, mImis, getPackageManager());
+            final CharSequence curIme =
+                    mInputMethodSettingValues.getCurrentInputMethodName(context);
             if (!TextUtils.isEmpty(curIme)) {
                 synchronized(this) {
                     curPref.setSummary(curIme);

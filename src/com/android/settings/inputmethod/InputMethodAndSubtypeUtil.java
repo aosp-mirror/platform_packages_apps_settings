@@ -154,28 +154,6 @@ public class InputMethodAndSubtypeUtil {
         return set;
     }
 
-    public static CharSequence getCurrentInputMethodName(Context context, ContentResolver resolver,
-            InputMethodManager imm, List<InputMethodInfo> imis, PackageManager pm) {
-        if (resolver == null || imis == null) return null;
-        final String currentInputMethodId = Settings.Secure.getString(resolver,
-                Settings.Secure.DEFAULT_INPUT_METHOD);
-        if (TextUtils.isEmpty(currentInputMethodId)) return null;
-        for (InputMethodInfo imi : imis) {
-            if (currentInputMethodId.equals(imi.getId())) {
-                final InputMethodSubtype subtype = imm.getCurrentInputMethodSubtype();
-                final CharSequence imiLabel = imi.loadLabel(pm);
-                final CharSequence summary = subtype != null
-                        ? TextUtils.concat(subtype.getDisplayName(context,
-                                    imi.getPackageName(), imi.getServiceInfo().applicationInfo),
-                                            (TextUtils.isEmpty(imiLabel) ?
-                                                    "" : " - " + imiLabel))
-                        : imiLabel;
-                return summary;
-            }
-        }
-        return null;
-    }
-
     public static void saveInputMethodSubtypeList(SettingsPreferenceFragment context,
             ContentResolver resolver, List<InputMethodInfo> inputMethodInfos,
             boolean hasHardKeyboard) {
