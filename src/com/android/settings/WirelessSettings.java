@@ -150,17 +150,18 @@ public class WirelessSettings extends SettingsPreferenceFragment {
                 .getString(com.android.internal.R.string.mobile_provisioning_url);
         log("getProvisioningUrl: mobile_provisioning_url=" + url);
 
-        // populate the iccid and imei in the provisioning url.
+        // populate the iccid, imei and phone number in the provisioning url.
         if (!TextUtils.isEmpty(url)) {
-            log("getProvisioningUrl: iccid=" + mTm.getSimSerialNumber()
-                    + " imei=" + mTm.getDeviceId() + " phone number=" + mTm.getLine1Number());
+            String phoneNumber = mTm.getLine1Number();
+            if (TextUtils.isEmpty(phoneNumber)) {
+                phoneNumber = "0000000000";
+            }
             url = String.format(url,
                     mTm.getSimSerialNumber() /* ICCID */,
                     mTm.getDeviceId() /* IMEI */,
-                    mTm.getLine1Number() /* Phone number */);
+                    phoneNumber /* Phone number */);
         }
 
-        log("getProvisioningUrl: url=" + url);
         return url;
     }
 
