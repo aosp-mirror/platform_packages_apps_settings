@@ -109,7 +109,7 @@ public class RestrictionSettings extends AppRestrictionsFragment {
             if (resultCode == Activity.RESULT_OK) {
                 getListView().setEnabled(true);
                 mChallengeSucceeded = true;
-            } else {
+            } else if (!isDetached()) {
                 finishFragment();
             }
             return;
