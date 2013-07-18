@@ -54,6 +54,7 @@ public class UserDictionaryAddWordFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
     }
 
     @Override
@@ -63,6 +64,8 @@ public class UserDictionaryAddWordFragment extends Fragment
         if (null == mContents) {
             mContents = new UserDictionaryAddWordContents(mRootView, getArguments());
         }
+        getActivity().getActionBar().setSubtitle(UserDictionarySettingsUtils.getLocaleDisplayName(
+                getActivity(), mContents.getCurrentUserDictionaryLocale()));
         return mRootView;
     }
 
@@ -102,13 +105,9 @@ public class UserDictionaryAddWordFragment extends Fragment
     private void updateSpinner() {
         final ArrayList<LocaleRenderer> localesList = mContents.getLocalesList(getActivity());
 
-        final Spinner localeSpinner =
-                (Spinner)mRootView.findViewById(R.id.user_dictionary_add_locale);
         final ArrayAdapter<LocaleRenderer> adapter = new ArrayAdapter<LocaleRenderer>(getActivity(),
                 android.R.layout.simple_spinner_item, localesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        localeSpinner.setAdapter(adapter);
-        localeSpinner.setOnItemSelectedListener(this);
     }
 
     @Override

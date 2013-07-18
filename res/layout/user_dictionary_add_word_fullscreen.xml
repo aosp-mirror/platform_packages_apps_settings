@@ -62,22 +62,6 @@
             android:imeOptions="flagNoFullscreen"
             android:inputType="textNoSuggestions"
             android:maxLength="@integer/maximum_user_dictionary_word_length" />
-
-        <TextView
-            android:id="@+id/user_dictionary_add_locale_label"
-            style="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical"
-            android:text="@string/user_dict_settings_add_locale_option_name" />
-
-        <Spinner
-            android:id="@+id/user_dictionary_add_locale"
-            android:layout_width="wrap_content"
-            android:layout_gravity="fill_horizontal|center_vertical"
-            android:layout_marginBottom="8dip"
-            android:layout_marginStart="8dip"
-            android:layout_marginTop="8dip" />
     </GridLayout>
 
 </LinearLayout>

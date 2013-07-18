@@ -239,4 +239,8 @@ public class UserDictionaryAddWordContents {
         localesList.add(new LocaleRenderer(activity, null)); // meaning: select another locale
         return localesList;
     }
+
+    public String getCurrentUserDictionaryLocale() {
+        return mLocale;
+    }
 }

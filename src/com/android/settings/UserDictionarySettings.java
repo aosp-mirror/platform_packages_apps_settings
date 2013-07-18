@@ -38,6 +38,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.android.settings.inputmethod.UserDictionaryAddWordContents;
+import com.android.settings.inputmethod.UserDictionarySettingsUtils;
 
 import java.util.Locale;
 
@@ -115,7 +116,9 @@ public class UserDictionarySettings extends ListFragment {
         listView.setEmptyView(emptyView);
 
         setHasOptionsMenu(true);
-
+        // Show the language as a subtitle of the action bar
+        getActivity().getActionBar().setSubtitle(
+                UserDictionarySettingsUtils.getLocaleDisplayName(getActivity(), mLocale));
     }
 
     private Cursor createCursor(final String locale) {
