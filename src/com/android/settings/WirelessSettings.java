@@ -45,7 +45,7 @@ import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.NsdEnabler;
 
 public class WirelessSettings extends SettingsPreferenceFragment {
-    private static final String TAG = "WirelessSettiings";
+    private static final String TAG = "WirelessSettings";
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
@@ -106,7 +106,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         NetworkInfo ni = mCm.getActiveNetworkInfo();
         if (mTm.hasIccCard() && (ni != null)) {
             // Get provisioning URL
-            String url = getProvisioningUrl();
+            String url = mCm.getMobileProvisioningUrl();
             if (!TextUtils.isEmpty(url)) {
                 // Send user to provisioning webpage
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -143,26 +143,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             log("onManageMobilePlanClick: message=" + mManageMobilePlanMessage);
             showDialog(MANAGE_MOBILE_PLAN_DIALOG_ID);
         }
-    }
-
-    private String getProvisioningUrl() {
-        String url = getActivity().getResources()
-                .getString(com.android.internal.R.string.mobile_provisioning_url);
-        log("getProvisioningUrl: mobile_provisioning_url=" + url);
-
-        // populate the iccid, imei and phone number in the provisioning url.
-        if (!TextUtils.isEmpty(url)) {
-            String phoneNumber = mTm.getLine1Number();
-            if (TextUtils.isEmpty(phoneNumber)) {
-                phoneNumber = "0000000000";
-            }
-            url = String.format(url,
-                    mTm.getSimSerialNumber() /* ICCID */,
-                    mTm.getDeviceId() /* IMEI */,
-                    phoneNumber /* Phone number */);
-        }
-
-        return url;
     }
 
     @Override
