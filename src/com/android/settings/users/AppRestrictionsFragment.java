@@ -57,6 +57,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
@@ -85,7 +86,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     protected PackageManager mPackageManager;
     protected UserManager mUserManager;
+    protected IPackageManager mIPm;
     protected UserHandle mUser;
+    private PackageInfo mSysPackageInfo;
 
     private PreferenceGroup mAppList;
 
@@ -129,6 +132,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     };
 
+    private BroadcastReceiver mPackageObserver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            onPackageChanged(intent);
+        }
+    };
+
     static class SelectableAppInfo {
         String packageName;
         CharSequence appName;
@@ -147,9 +157,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         private boolean hasSettings;
         private OnClickListener listener;
         private ArrayList<RestrictionEntry> restrictions;
-        boolean panelOpen;
+        private boolean mPanelOpen;
         private boolean immutable;
-        List<Preference> childPreferences = new ArrayList<Preference>();
+        private List<Preference> mChildren = new ArrayList<Preference>();
         private final ColorFilter grayscaleFilter;
 
         AppRestrictionsPreference(Context context, OnClickListener listener) {
@@ -204,6 +214,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             return restrictions;
         }
 
+        boolean isPanelOpen() {
+            return mPanelOpen;
+        }
+
+        List<Preference> getChildren() {
+            return mChildren;
+        }
+
         @Override
         protected void onBindView(View view) {
             super.onBindView(view);
@@ -222,13 +240,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             ViewGroup widget = (ViewGroup) view.findViewById(android.R.id.widget_frame);
             widget.setEnabled(!isImmutable());
             if (widget.getChildCount() > 0) {
-                final Switch switchView = (Switch) widget.getChildAt(0);
-                switchView.setEnabled(!isImmutable());
-                switchView.setTag(this);
-                switchView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                final Switch toggle = (Switch) widget.getChildAt(0);
+                toggle.setEnabled(!isImmutable());
+                toggle.setTag(this);
+                toggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        listener.onClick(switchView);
+                        listener.onClick(toggle);
                     }
                 });
             }
@@ -253,9 +271,15 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
 
         mPackageManager = getActivity().getPackageManager();
+        mIPm = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         mRestrictedProfile = mUserManager.getUserInfo(mUser.getIdentifier()).isRestricted();
-
+        try {
+            mSysPackageInfo = mPackageManager.getPackageInfo("android",
+                PackageManager.GET_SIGNATURES);
+        } catch (NameNotFoundException nnfe) {
+            // ?
+        }
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getAppPreferenceGroup();
     }
@@ -266,27 +290,50 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         outState.putInt(EXTRA_USER_ID, mUser.getIdentifier());
     }
 
+    @Override
     public void onResume() {
         super.onResume();
 
         getActivity().registerReceiver(mUserBackgrounding,
                 new IntentFilter(Intent.ACTION_USER_BACKGROUND));
+        IntentFilter packageFilter = new IntentFilter();
+        packageFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        packageFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        packageFilter.addDataScheme("package");
+        getActivity().registerReceiver(mPackageObserver, packageFilter);
+
         mAppListChanged = false;
         if (mAppLoadingTask == null || mAppLoadingTask.getStatus() == AsyncTask.Status.FINISHED) {
             mAppLoadingTask = new AppLoadingTask().execute((Void[]) null);
         }
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         mNewUser = false;
         getActivity().unregisterReceiver(mUserBackgrounding);
+        getActivity().unregisterReceiver(mPackageObserver);
         if (mAppListChanged) {
             new Thread() {
                 public void run() {
                     applyUserAppsStates();
                 }
             }.start();
+        }
+    }
+
+    private void onPackageChanged(Intent intent) {
+        String action = intent.getAction();
+        String packageName = intent.getData().getSchemeSpecificPart();
+        // Package added, check if the preference needs to be enabled
+        AppRestrictionsPreference pref = (AppRestrictionsPreference)
+                findPreference(getKeyForPackage(packageName));
+        if (pref == null) return;
+
+        if ((Intent.ACTION_PACKAGE_ADDED.equals(action) && pref.isChecked())
+                || (Intent.ACTION_PACKAGE_REMOVED.equals(action) && !pref.isChecked())) {
+            pref.setEnabled(true);
         }
     }
 
@@ -306,8 +353,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     }
 
     private void applyUserAppsStates() {
-        IPackageManager ipm = IPackageManager.Stub.asInterface(
-                ServiceManager.getService("package"));
         final int userId = mUser.getIdentifier();
         if (!mUserManager.getUserInfo(userId).isRestricted() && userId != UserHandle.myUserId()) {
             Log.e(TAG, "Cannot apply application restrictions on another user!");
@@ -315,47 +360,64 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
         for (Map.Entry<String,Boolean> entry : mSelectedPackages.entrySet()) {
             String packageName = entry.getKey();
-            if (entry.getValue()) {
-                // Enable selected apps
-                try {
-                    ApplicationInfo info = ipm.getApplicationInfo(packageName,
-                            PackageManager.GET_UNINSTALLED_PACKAGES, userId);
-                    if (info == null || info.enabled == false) {
-                        ipm.installExistingPackageAsUser(packageName, mUser.getIdentifier());
-                        if (DEBUG) {
-                            Log.d(TAG, "Installing " + packageName);
-                        }
+            boolean enabled = entry.getValue();
+            applyUserAppState(packageName, enabled);
+        }
+    }
+
+    private void applyUserAppState(String packageName, boolean enabled) {
+        final int userId = mUser.getIdentifier();
+        if (enabled) {
+            // Enable selected apps
+            try {
+                ApplicationInfo info = mIPm.getApplicationInfo(packageName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES, userId);
+                if (info == null || info.enabled == false
+                        || (info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+                    mIPm.installExistingPackageAsUser(packageName, mUser.getIdentifier());
+                    if (DEBUG) {
+                        Log.d(TAG, "Installing " + packageName);
                     }
-                    if (info != null && (info.flags&ApplicationInfo.FLAG_BLOCKED) != 0
-                            && (info.flags&ApplicationInfo.FLAG_INSTALLED) != 0) {
-                        ipm.setApplicationBlockedSettingAsUser(packageName, false, userId);
-                        if (DEBUG) {
-                            Log.d(TAG, "Unblocking " + packageName);
-                        }
-                    }
-                } catch (RemoteException re) {
                 }
-            } else {
-                // Blacklist all other apps, system or downloaded
-                try {
-                    ApplicationInfo info = ipm.getApplicationInfo(packageName, 0, userId);
-                    if (info != null) {
-                        if (mRestrictedProfile) {
-                            ipm.deletePackageAsUser(entry.getKey(), null, mUser.getIdentifier(),
-                                    PackageManager.DELETE_SYSTEM_APP);
-                            if (DEBUG) {
-                                Log.d(TAG, "Uninstalling " + packageName);
-                            }
-                        } else {
-                            ipm.setApplicationBlockedSettingAsUser(packageName, true, userId);
-                            if (DEBUG) {
-                                Log.d(TAG, "Blocking " + packageName);
-                            }
-                        }
+                if (info != null && (info.flags&ApplicationInfo.FLAG_BLOCKED) != 0
+                        && (info.flags&ApplicationInfo.FLAG_INSTALLED) != 0) {
+                    disableUiForPackage(packageName);
+                    mIPm.setApplicationBlockedSettingAsUser(packageName, false, userId);
+                    if (DEBUG) {
+                        Log.d(TAG, "Unblocking " + packageName);
                     }
-                } catch (RemoteException re) {
                 }
+            } catch (RemoteException re) {
             }
+        } else {
+            // Blacklist all other apps, system or downloaded
+            try {
+                ApplicationInfo info = mIPm.getApplicationInfo(packageName, 0, userId);
+                if (info != null) {
+                    if (mRestrictedProfile) {
+                        mIPm.deletePackageAsUser(packageName, null, mUser.getIdentifier(),
+                                PackageManager.DELETE_SYSTEM_APP);
+                        if (DEBUG) {
+                            Log.d(TAG, "Uninstalling " + packageName);
+                        }
+                    } else {
+                        disableUiForPackage(packageName);
+                        mIPm.setApplicationBlockedSettingAsUser(packageName, true, userId);
+                        if (DEBUG) {
+                            Log.d(TAG, "Blocking " + packageName);
+                        }
+                    }
+                }
+            } catch (RemoteException re) {
+            }
+        }
+    }
+
+    private void disableUiForPackage(String packageName) {
+        AppRestrictionsPreference pref = (AppRestrictionsPreference) findPreference(
+                getKeyForPackage(packageName));
+        if (pref != null) {
+            pref.setEnabled(false);
         }
     }
 
@@ -457,7 +519,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         final Context context = getActivity();
         if (context == null) return;
         final PackageManager pm = mPackageManager;
-        IPackageManager ipm = AppGlobals.getPackageManager();
+        final IPackageManager ipm = mIPm;
 
         final HashSet<String> excludePackages = new HashSet<String>();
         addSystemImes(excludePackages);
@@ -552,6 +614,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     }
 
+    private boolean isPlatformSigned(PackageInfo pi) {
+        return (pi != null && pi.signatures != null &&
+                    mSysPackageInfo.signatures[0].equals(pi.signatures[0]));
+    }
+
     private boolean isAppEnabledForUser(PackageInfo pi) {
         if (pi == null) return false;
         final int flags = pi.applicationInfo.flags;
@@ -564,7 +631,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         final Context context = getActivity();
         if (context == null) return;
         final PackageManager pm = mPackageManager;
-        IPackageManager ipm = AppGlobals.getPackageManager();
+        final IPackageManager ipm = mIPm;
+
         mAppList.removeAll();
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
@@ -583,7 +651,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     p.setSummary(context.getString(R.string.user_restrictions_controlled_by,
                             app.masterEntry.activityName));
                 }
-                p.setKey(PKG_PREFIX + packageName);
+                p.setKey(getKeyForPackage(packageName));
                 p.setSettingsEnabled(hasSettings || isSettingsApp);
                 p.setPersistent(false);
                 p.setOnPreferenceChangeListener(this);
@@ -591,10 +659,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 PackageInfo pi = null;
                 try {
                     pi = ipm.getPackageInfo(packageName,
-                            PackageManager.GET_UNINSTALLED_PACKAGES, mUser.getIdentifier());
+                            PackageManager.GET_UNINSTALLED_PACKAGES
+                            | PackageManager.GET_SIGNATURES, mUser.getIdentifier());
                 } catch (RemoteException e) {
                 }
-                if (pi != null && pi.requiredForAllUsers) {
+                if (pi != null && (pi.requiredForAllUsers || isPlatformSigned(pi))) {
                     p.setChecked(true);
                     p.setImmutable(true);
                     // If the app is required and has no restrictions, skip showing it
@@ -602,10 +671,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     // Get and populate the defaults, since the user is not going to be
                     // able to toggle this app ON (it's ON by default and immutable).
                     // Only do this for restricted profiles, not single-user restrictions
-                    if (hasSettings && mRestrictedProfile) {
+                    if (hasSettings) {
                         requestRestrictionsForApp(packageName, p);
                     }
-                } else if (!mNewUser && isAppEnabledForUser(pi)) { /*appInfoListHasPackage(mUserApps, packageName)*/
+                } else if (!mNewUser && isAppEnabledForUser(pi)) {
                     p.setChecked(true);
                 }
                 if (mRestrictedProfile
@@ -638,6 +707,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             mFirstTime = false;
             applyUserAppsStates();
         }
+    }
+
+    private String getKeyForPackage(String packageName) {
+        return PKG_PREFIX + packageName;
     }
 
     private class AppLabelComparator implements Comparator<SelectableAppInfo> {
@@ -686,6 +759,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     requestRestrictionsForApp(packageName, pref);
                 }
                 mAppListChanged = true;
+                // If it's not a restricted profile, apply the changes immediately
+                if (!mRestrictedProfile) {
+                    applyUserAppState(packageName, pref.isChecked());
+                }
                 updateAllEntries(pref.getKey(), pref.isChecked());
             }
         }
@@ -742,11 +819,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private void toggleAppPanel(AppRestrictionsPreference preference) {
         if (preference.getKey().startsWith(PKG_PREFIX)) {
-            if (preference.panelOpen) {
-                for (Preference p : preference.childPreferences) {
+            if (preference.mPanelOpen) {
+                for (Preference p : preference.mChildren) {
                     mAppList.removePreference(p);
                 }
-                preference.childPreferences.clear();
+                preference.mChildren.clear();
             } else {
                 String packageName = preference.getKey().substring(PKG_PREFIX.length());
                 if (packageName.equals(getActivity().getPackageName())) {
@@ -758,7 +835,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     requestRestrictionsForApp(packageName, preference);
                 }
             }
-            preference.panelOpen = !preference.panelOpen;
+            preference.mPanelOpen = !preference.mPanelOpen;
         }
     }
 
@@ -795,8 +872,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             Intent restrictionsIntent = (Intent) results.getParcelable(CUSTOM_RESTRICTIONS_INTENT);
             if (restrictions != null && restrictionsIntent == null) {
                 onRestrictionsReceived(preference, packageName, restrictions);
-                mUserManager.setApplicationRestrictions(packageName,
-                        RestrictionUtils.restrictionsToBundle(restrictions), mUser);
+                if (mRestrictedProfile) {
+                    mUserManager.setApplicationRestrictions(packageName,
+                            RestrictionUtils.restrictionsToBundle(restrictions), mUser);
+                }
             } else if (restrictionsIntent != null) {
                 final Intent customIntent = restrictionsIntent;
                 if (restrictions != null) {
@@ -817,7 +896,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 });
                 p.setPersistent(false);
                 p.setOrder(preference.getOrder() + 1);
-                preference.childPreferences.add(p);
+                preference.mChildren.add(p);
                 mAppList.addPreference(p);
                 preference.setRestrictions(restrictions);
             }
@@ -876,7 +955,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         + entry.getKey());
                 mAppList.addPreference(p);
                 p.setOnPreferenceChangeListener(AppRestrictionsFragment.this);
-                preference.childPreferences.add(p);
+                preference.mChildren.add(p);
                 count++;
             }
         }
@@ -946,10 +1025,13 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         if (preference.getKey().startsWith(PKG_PREFIX)) {
             AppRestrictionsPreference arp = (AppRestrictionsPreference) preference;
             if (!arp.isImmutable()) {
-                arp.setChecked(!arp.isChecked());
-                mSelectedPackages.put(arp.getKey().substring(PKG_PREFIX.length()), arp.isChecked());
-                updateAllEntries(arp.getKey(), arp.isChecked());
+                final String packageName = arp.getKey().substring(PKG_PREFIX.length());
+                final boolean newEnabledState = !arp.isChecked();
+                arp.setChecked(newEnabledState);
+                mSelectedPackages.put(packageName, newEnabledState);
+                updateAllEntries(arp.getKey(), newEnabledState);
                 mAppListChanged = true;
+                applyUserAppState(packageName, newEnabledState);
             }
             return true;
         }
