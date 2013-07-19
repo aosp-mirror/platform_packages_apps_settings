@@ -29,8 +29,6 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 
-import org.junit.internal.matchers.IsCollectionContaining;
-
 import java.util.List;
 
 /**
