@@ -488,7 +488,8 @@ public class Settings extends PreferenceActivity
                     target.remove(i);
                 }
             } else if (id == R.id.restriction_settings) {
-                if (um.isLinkedUser()) {
+                if (um.isLinkedUser()
+                        || um.hasUserRestriction(UserManager.DISALLOW_APP_RESTRICTIONS)) {
                     target.remove(i);
                 }
             }
