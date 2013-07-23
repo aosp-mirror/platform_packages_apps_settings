@@ -46,10 +46,15 @@ public class RestrictionSettings extends AppRestrictionsFragment {
 
     private boolean mChallengeSucceeded;
     private boolean mChallengeRequested;
+    private boolean mDisableSelf;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        if (UserManager.get(getActivity()).hasUserRestriction(
+                UserManager.DISALLOW_APP_RESTRICTIONS)) {
+            mDisableSelf = true;
+            return;
+        }
         init(icicle);
         if (icicle != null) {
             mChallengeSucceeded = icicle.getBoolean(KEY_CHALLENGE_SUCCEEDED, false);
@@ -60,7 +65,9 @@ public class RestrictionSettings extends AppRestrictionsFragment {
 
     public void onResume() {
         super.onResume();
-        ensurePin();
+        if (!mDisableSelf) {
+            ensurePin();
+        }
     }
 
     private void ensurePin() {
@@ -122,9 +129,10 @@ public class RestrictionSettings extends AppRestrictionsFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, MENU_RESET, 0, R.string.restriction_menu_reset);
-        menu.add(0, MENU_CHANGE_PIN, 0, R.string.restriction_menu_change_pin);
-
+        if (!mDisableSelf) {
+            menu.add(0, MENU_RESET, 0, R.string.restriction_menu_reset);
+            menu.add(0, MENU_CHANGE_PIN, 0, R.string.restriction_menu_change_pin);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
