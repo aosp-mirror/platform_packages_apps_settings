@@ -20,10 +20,12 @@ import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 import com.android.settings.Settings.SpellCheckersSettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 import com.android.settings.VoiceInputOutputSettings;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +40,7 @@ import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -200,7 +203,35 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // not present or disabled. In this case we need to remove the preference.
             getPreferenceScreen().removePreference(userDictionaryPreference);
         } else {
-            userDictionaryPreference.setFragment(UserDictionaryList.class.getName());
+            userDictionaryPreference.setOnPreferenceClickListener(
+                    new OnPreferenceClickListener() {
+                        @Override
+                        public boolean onPreferenceClick(Preference arg0) {
+                            // Redirect to UserDictionarySettings if the user needs only one
+                            // language.
+                            final Bundle extras = new Bundle();
+                            final Class<? extends Fragment> targetFragment;
+                            if (localeSet.size() <= 1) {
+                                if (!localeSet.isEmpty()) {
+                                    // If the size of localeList is 0, we don't set the locale
+                                    // parameter in the extras. This will be interpreted by the
+                                    // UserDictionarySettings class as meaning
+                                    // "the current locale". Note that with the current code for
+                                    // UserDictionaryList#getUserDictionaryLocalesSet()
+                                    // the locale list always has at least one element, since it
+                                    // always includes the current locale explicitly.
+                                    // @see UserDictionaryList.getUserDictionaryLocalesSet().
+                                    extras.putString("locale", localeSet.first());
+                                }
+                                targetFragment = UserDictionarySettings.class;
+                            } else {
+                                targetFragment = UserDictionaryList.class;
+                            }
+                            startFragment(InputMethodAndLanguageSettings.this,
+                                    targetFragment.getCanonicalName(), -1, extras);
+                            return true;
+                        }
+                    });
         }
     }
 

@@ -124,9 +124,8 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     /**
      * Creates the entries that allow the user to go into the user dictionary for each locale.
      * @param userDictGroup The group to put the settings in.
-     * @return the shown language set
      */
-    protected TreeSet<String> createUserDictSettingsAndReturnSet(PreferenceGroup userDictGroup) {
+    protected void createUserDictSettings(PreferenceGroup userDictGroup) {
         final Activity activity = getActivity();
         userDictGroup.removeAll();
         final TreeSet<String> localeSet =
@@ -144,7 +143,6 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
                 userDictGroup.addPreference(createUserDictionaryPreference(locale, activity));
             }
         }
-        return localeSet;
     }
 
     /**
@@ -173,25 +171,6 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        final TreeSet<String> localeSet = createUserDictSettingsAndReturnSet(getPreferenceScreen());
-        if (localeSet.size() <= 1) {
-            // Redirect to UserDictionarySettings if the user needs only one language.
-            final Bundle extras = new Bundle();
-            if (!localeSet.isEmpty()) {
-                // If the size of localeList is 0, we don't set the locale parameter in the
-                // extras. This will be interpreted by the UserDictionarySettings class as
-                // meaning "the current locale".
-                // Note that with the current code for
-                // UserDictionaryList#getUserDictionaryLocalesSet()
-                // the locale list always has at least one element, since it always includes
-                // the current locale explicitly.
-                // @see UserDictionaryList.getUserDictionaryLocalesSet().
-                extras.putString("locale", localeSet.first());
-            }
-            startFragment(this,
-                    com.android.settings.UserDictionarySettings.class.getCanonicalName(), -1,
-                    extras);
-            finish();
-        }
+        createUserDictSettings(getPreferenceScreen());
     }
 }
