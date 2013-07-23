@@ -53,7 +53,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.AccessibilitySettings.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
