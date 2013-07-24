@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.inputmethod;
 
 import android.app.Fragment;
@@ -51,18 +52,31 @@ public class UserDictionaryAddWordFragment extends Fragment
     private boolean mIsDeleting = false;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
+        // Keep the instance so that we remember mContents when configuration changes (eg rotation)
+        setRetainInstance(true);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedState) {
         mRootView = inflater.inflate(R.layout.user_dictionary_add_word_fullscreen, null);
         mIsDeleting = false;
+        // If we have a non-null mContents object, it's the old value before a configuration
+        // change (eg rotation) so we need to use its values. Otherwise, read from the arguments.
         if (null == mContents) {
             mContents = new UserDictionaryAddWordContents(mRootView, getArguments());
+        } else {
+            // We create a new mContents object to account for the new situation : a word has
+            // been added to the user dictionary when we started rotating, and we are now editing
+            // it. That means in particular if the word undergoes any change, the old version should
+            // be updated, so the mContents object needs to switch to EDIT mode if it was in
+            // INSERT mode.
+            mContents = new UserDictionaryAddWordContents(mRootView,
+                    mContents /* oldInstanceToBeEdited */);
         }
         getActivity().getActionBar().setSubtitle(UserDictionarySettingsUtils.getLocaleDisplayName(
                 getActivity(), mContents.getCurrentUserDictionaryLocale()));
@@ -70,7 +84,7 @@ public class UserDictionaryAddWordFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         MenuItem actionItem = menu.add(0, OPTIONS_MENU_DELETE, 0, R.string.delete)
                 .setIcon(android.R.drawable.ic_menu_delete);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
