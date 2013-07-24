@@ -135,6 +135,11 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
             // in the list.
             localeSet.add(mLocale);
         }
+        if (localeSet.size() > 1) {
+            // Have an "All languages" entry in the languages list if there are two or more active
+            // languages
+            localeSet.add("");
+        }
 
         if (localeSet.isEmpty()) {
             userDictGroup.addPreference(createUserDictionaryPreference(null, activity));
