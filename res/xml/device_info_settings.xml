@@ -85,6 +85,12 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/model_number"
                 android:summary="@string/device_info_default"/>
+
+        <!-- build date -->
+        <Preference android:key="build_date"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/build_date"
+                android:summary="@string/build_date_default" />
                 
         <!-- Device firmware version -->
         <Preference android:key="firmware_version" 
