@@ -76,6 +76,12 @@ public class ConfirmLockPattern extends PreferenceActivity {
         return modIntent;
     }
 
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (ConfirmLockPatternFragment.class.getName().equals(fragmentName)) return true;
+        return false;
+    }
+
     public static class ConfirmLockPatternFragment extends Fragment {
 
         // how long we wait to clear a wrong pattern

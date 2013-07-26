@@ -19,6 +19,7 @@ package com.android.settings;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -53,13 +54,31 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.ChooseLockPassword.ChooseLockPasswordFragment;
+import com.android.settings.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.applications.AppOpsSummary;
+import com.android.settings.applications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.deviceinfo.Memory;
+import com.android.settings.deviceinfo.UsbSettings;
+import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.SpellCheckersSettings;
+import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.nfc.AndroidBeam;
+import com.android.settings.tts.TextToSpeechSettings;
+import com.android.settings.users.AppRestrictionsFragment;
+import com.android.settings.users.UserSettings;
+import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
+import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
@@ -265,6 +284,56 @@ public class Settings extends PreferenceActivity
         if (mListeningToAccountUpdates) {
             AccountManager.get(this).removeOnAccountsUpdatedListener(this);
         }
+    }
+
+    private static final String[] ENTRY_FRAGMENTS = {
+        WirelessSettings.class.getName(),
+        WifiSettings.class.getName(),
+        AdvancedWifiSettings.class.getName(),
+        BluetoothSettings.class.getName(),
+        TetherSettings.class.getName(),
+        WifiP2pSettings.class.getName(),
+        VpnSettings.class.getName(),
+        DateTimeSettings.class.getName(),
+        LocalePicker.class.getName(),
+        InputMethodAndLanguageSettings.class.getName(),
+        SpellCheckersSettings.class.getName(),
+        UserDictionaryList.class.getName(),
+        UserDictionarySettings.class.getName(),
+        SoundSettings.class.getName(),
+        DisplaySettings.class.getName(),
+        DeviceInfoSettings.class.getName(),
+        ManageApplications.class.getName(),
+        NotificationStation.class.getName(),
+        AppOpsSummary.class.getName(),
+        LocationSettings.class.getName(),
+        SecuritySettings.class.getName(),
+        PrivacySettings.class.getName(),
+        DeviceAdminSettings.class.getName(),
+        AccessibilitySettings.class.getName(),
+        TextToSpeechSettings.class.getName(),
+        Memory.class.getName(),
+        DevelopmentSettings.class.getName(),
+        UsbSettings.class.getName(),
+        AndroidBeam.class.getName(),
+        WifiDisplaySettings.class.getName(),
+        PowerUsageSummary.class.getName(),
+        AccountSyncSettings.class.getName(),
+        CryptKeeperSettings.class.getName(),
+        DataUsageSummary.class.getName(),
+        DreamSettings.class.getName(),
+        UserSettings.class.getName(),
+        NotificationAccessSettings.class.getName(),
+    };
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        // Almost all fragments are wrapped in this,
+        // except for a few that have their own activities.
+        for (int i = 0; i < ENTRY_FRAGMENTS.length; i++) {
+            if (ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
+        }
+        return false;
     }
 
     private void switchToHeaderLocal(Header header) {
@@ -877,4 +946,5 @@ public class Settings extends PreferenceActivity
     public static class NotificationStationActivity extends Settings { /* empty */ }
     public static class UserSettingsActivity extends Settings { /* empty */ }
     public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
+    public static class UsbSettingsActivity extends Settings { /* empty */ }
 }
