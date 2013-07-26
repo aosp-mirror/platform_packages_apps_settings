@@ -27,6 +27,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -97,6 +98,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
+    private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
     private static final String SELECT_RUNTIME_KEY = "select_runtime";
     private static final String SELECT_RUNTIME_PROPERTY = "persist.sys.dalvik.vm.lib";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
@@ -167,6 +169,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private Preference mBugreport;
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
+    private CheckBoxPreference mBtHciSnoopLog;
     private CheckBoxPreference mEnforceReadExternal;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
@@ -252,6 +255,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
+        mBtHciSnoopLog = findAndInitCheckboxPref(BT_HCI_SNOOP_LOG);
         mEnforceReadExternal = findAndInitCheckboxPref(ENFORCE_READ_EXTERNAL);
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
@@ -477,6 +481,8 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
+        updateCheckBox(mBtHciSnoopLog, Settings.Secure.getInt(cr,
+                Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
         updateCheckBox(mEnforceReadExternal, isPermissionEnforced(READ_EXTERNAL_STORAGE));
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
@@ -605,6 +611,14 @@ public class DevelopmentSettings extends PreferenceFragment
         } catch (RemoteException e) {
             // Not much we can do here
         }
+    }
+
+    private void writeBtHciSnoopLogOptions() {
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        adapter.configHciSnoopLog(mBtHciSnoopLog.isChecked());
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.BLUETOOTH_HCI_LOG,
+                mBtHciSnoopLog.isChecked() ? 1 : 0);
     }
 
     private void writeDebuggerOptions() {
@@ -1193,6 +1207,8 @@ public class DevelopmentSettings extends PreferenceFragment
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                     mKeepScreenOn.isChecked() ? 
                     (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
+        } else if (preference == mBtHciSnoopLog) {
+            writeBtHciSnoopLogOptions();
         } else if (preference == mEnforceReadExternal) {
             if (mEnforceReadExternal.isChecked()) {
                 ConfirmEnforceFragment.show(this);
