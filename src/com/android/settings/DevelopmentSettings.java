@@ -1107,16 +1107,14 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private void writeExperimentalWebViewOptions() {
         if (mExperimentalWebView != null) {
-            SystemProperties.set(WebViewFactory.WEBVIEW_EXPERIMENTAL_PROPERTY,
-                    mExperimentalWebView.isChecked() ? "true" : null);
+            WebViewFactory.setUseExperimentalWebView(mExperimentalWebView.isChecked());
             pokeSystemProperties();
         }
     }
 
     private void updateExperimentalWebViewOptions() {
         if (mExperimentalWebView != null) {
-            updateCheckBox(mExperimentalWebView, SystemProperties.getBoolean(
-                    WebViewFactory.WEBVIEW_EXPERIMENTAL_PROPERTY, false));
+            updateCheckBox(mExperimentalWebView, WebViewFactory.useExperimentalWebView());
         }
     }
 
