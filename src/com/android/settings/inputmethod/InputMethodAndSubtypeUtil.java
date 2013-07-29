@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.ContentResolver;
@@ -176,8 +177,9 @@ public class InputMethodAndSubtypeUtil {
                     ((CheckBoxPreference) pref).isChecked()
                     : enabledIMEAndSubtypesMap.containsKey(imiId);
             final boolean isCurrentInputMethod = imiId.equals(currentInputMethodId);
-            final boolean systemIme = isSystemIme(imi);
-            if ((!hasHardKeyboard && isAlwaysCheckedIme(imi, context.getActivity(), imiCount))
+            final boolean systemIme = InputMethodUtils.isSystemIme(imi);
+            if ((!hasHardKeyboard && InputMethodSettingValuesWrapper.getInstance(
+                    context.getActivity()).isAlwaysCheckedIme(imi, context.getActivity()))
                     || isImeChecked) {
                 if (!enabledIMEAndSubtypesMap.containsKey(imiId)) {
                     // imiId has just been enabled
@@ -344,57 +346,5 @@ public class InputMethodAndSubtypeUtil {
                 }
             }
         }
-    }
-
-    public static boolean isSystemIme(InputMethodInfo property) {
-        return (property.getServiceInfo().applicationInfo.flags
-                & ApplicationInfo.FLAG_SYSTEM) != 0;
-    }
-
-    public static boolean isAuxiliaryIme(InputMethodInfo imi) {
-        return imi.isAuxiliaryIme();
-    }
-
-    public static boolean isAlwaysCheckedIme(InputMethodInfo imi, Context context, int imiCount) {
-        if (imiCount <= 1) {
-            return true;
-        }
-        if (!isSystemIme(imi)) {
-            return false;
-        }
-        if (isAuxiliaryIme(imi)) {
-            return false;
-        }
-        if (isValidDefaultIme(imi, context)) {
-            return true;
-        }
-        return containsSubtypeOf(imi, ENGLISH_LOCALE.getLanguage());
-    }
-
-    private static boolean isValidDefaultIme(InputMethodInfo imi, Context context) {
-        if (imi.getIsDefaultResourceId() != 0) {
-            try {
-                Resources res = context.createPackageContext(
-                        imi.getPackageName(), 0).getResources();
-                if (res.getBoolean(imi.getIsDefaultResourceId())
-                        && containsSubtypeOf(imi, context.getResources().getConfiguration().
-                                locale.getLanguage())) {
-                    return true;
-                }
-            } catch (PackageManager.NameNotFoundException ex) {
-            } catch (Resources.NotFoundException ex) {
-            }
-        }
-        return false;
-    }
-
-    private static boolean containsSubtypeOf(InputMethodInfo imi, String language) {
-        final int N = imi.getSubtypeCount();
-        for (int i = 0; i < N; ++i) {
-            if (imi.getSubtypeAt(i).getLocale().startsWith(language)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
