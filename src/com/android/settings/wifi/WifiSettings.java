@@ -646,6 +646,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                         ap = new AccessPoint(getActivity(), mAccessPointSavedState);
                         // For repeated orientation changes
                         mDlgAccessPoint = ap;
+                        // Reset the saved access point data
+                        mAccessPointSavedState = null;
                     }
                 }
                 // If it's still null, fine, it's for Add Network
