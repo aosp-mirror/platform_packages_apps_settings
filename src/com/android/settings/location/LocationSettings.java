@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.location;
 
 
 import android.content.ContentQueryMap;
@@ -32,6 +32,9 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Observable;
 import java.util.Observer;

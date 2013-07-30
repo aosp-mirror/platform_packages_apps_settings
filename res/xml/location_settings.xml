@@ -17,7 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/location_settings_title">
 
-        <com.android.settings.WrappingSwitchPreference
+        <com.android.settings.location.WrappingSwitchPreference
             android:key="location_toggle"
             android:title="@string/location_access_title"
             android:summary="@string/location_access_summary"
@@ -34,7 +34,7 @@
             android:dependency="location_toggle"
             android:persistent="false" />
 
-        <com.android.settings.WrappingCheckBoxPreference
+        <com.android.settings.location.WrappingCheckBoxPreference
             android:key="location_network"
             android:title="@string/location_network_based"
             android:summary="@string/location_neighborhood_level"
