@@ -16,9 +16,11 @@
 
 package com.android.settings.inputmethod;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import java.util.Locale;
 
@@ -27,6 +29,11 @@ import java.util.Locale;
  */
 public class UserDictionarySettingsUtils {
     public static String getLocaleDisplayName(Context context, String localeStr) {
+        if (TextUtils.isEmpty(localeStr)) {
+            // CAVEAT: localeStr should not be null because a null locale stands for the system
+            // locale in UserDictionary.Words.addWord.
+            return context.getResources().getString(R.string.user_dict_settings_all_languages);
+        }
         final Locale locale = Utils.createLocaleFromString(localeStr);
         final Locale systemLocale = context.getResources().getConfiguration().locale;
         return locale.getDisplayName(systemLocale);
