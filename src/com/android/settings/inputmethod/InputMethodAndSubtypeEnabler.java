@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -145,7 +146,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                     InputMethodInfo imi = mInputMethodProperties.get(i);
                     if (id.equals(imi.getId())) {
                         selImi = imi;
-                        if (InputMethodAndSubtypeUtil.isSystemIme(imi)) {
+                        if (InputMethodUtils.isSystemIme(imi)) {
                             InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
                                     this, mInputMethodProperties, id, true);
                             // This is a built-in IME, so no need to warn.

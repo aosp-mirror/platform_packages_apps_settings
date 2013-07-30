@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -44,7 +45,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.Collator;
-import java.util.Comparator;
 import java.util.List;
 
 public class InputMethodPreference extends CheckBoxPreference {
@@ -91,9 +91,10 @@ public class InputMethodPreference extends CheckBoxPreference {
         mImm = imm;
         mImi = imi;
         updateSummary();
-        mAlwaysChecked = InputMethodAndSubtypeUtil.isAlwaysCheckedIme(
-                imi, fragment.getActivity(), imiCount);
-        mIsSystemIme = InputMethodAndSubtypeUtil.isSystemIme(imi);
+        mAlwaysChecked = InputMethodSettingValuesWrapper.getInstance(
+                fragment.getActivity()).isAlwaysCheckedIme(
+                        imi, fragment.getActivity());
+        mIsSystemIme = InputMethodUtils.isSystemIme(imi);
         if (mAlwaysChecked) {
             setEnabled(false);
         }

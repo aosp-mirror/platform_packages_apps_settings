@@ -31,6 +31,7 @@ import android.view.inputmethod.InputMethodSubtype;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This class is a wrapper for InputMethodSettings. You need to refresh internal states
@@ -39,6 +40,8 @@ import java.util.List;
  */
 public class InputMethodSettingValuesWrapper {
     private static final String TAG = InputMethodSettingValuesWrapper.class.getSimpleName();
+    private static final Locale ENGLISH_LOCALE = new Locale("en");
+
     private static volatile InputMethodSettingValuesWrapper sInstance;
     private final ArrayList<InputMethodInfo> mMethodList = new ArrayList<InputMethodInfo>();
     private final HashMap<String, InputMethodInfo> mMethodMap =
@@ -103,5 +106,27 @@ public class InputMethodSettingValuesWrapper {
             final InputMethodSubtype subtype = mImm.getCurrentInputMethodSubtype();
             return InputMethodUtils.getImeAndSubtypeDisplayName(context, imi, subtype);
         }
+    }
+
+    public boolean isAlwaysCheckedIme(InputMethodInfo imi, Context context) {
+        if (getInputMethodList().size() <= 1) {
+            return true;
+        }
+        if (!InputMethodUtils.isSystemIme(imi)) {
+            return false;
+        }
+        return isValidSystemNonAuxAsciiCapableIme(imi, context);
+    }
+
+    private static boolean isValidSystemNonAuxAsciiCapableIme(
+            InputMethodInfo imi, Context context) {
+        if (imi.isAuxiliaryIme()) {
+            return false;
+        }
+        if (InputMethodUtils.isValidSystemDefaultIme(true /* isSystemReady */, imi, context)) {
+            return true;
+        }
+        return InputMethodUtils.containsSubtypeOf(
+                imi, ENGLISH_LOCALE.getLanguage(), null /* mode */);
     }
 }
