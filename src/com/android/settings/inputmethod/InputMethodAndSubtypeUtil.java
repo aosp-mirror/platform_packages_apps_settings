@@ -20,10 +20,6 @@ import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -32,13 +28,11 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class InputMethodAndSubtypeUtil {
@@ -49,7 +43,6 @@ public class InputMethodAndSubtypeUtil {
     private static final char INPUT_METHOD_SEPARATER = ':';
     private static final char INPUT_METHOD_SUBTYPE_SEPARATER = ';';
     private static final int NOT_A_SUBTYPE_ID = -1;
-    private static final Locale ENGLISH_LOCALE = new Locale("en");
 
     private static final TextUtils.SimpleStringSplitter sStringInputMethodSplitter
             = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SEPARATER);

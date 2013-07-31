@@ -109,24 +109,67 @@ public class InputMethodSettingValuesWrapper {
     }
 
     public boolean isAlwaysCheckedIme(InputMethodInfo imi, Context context) {
-        if (getInputMethodList().size() <= 1) {
-            return true;
+        synchronized (mMethodMap) {
+            if (mSettings.getEnabledInputMethodListLocked().size() <= 1) {
+                return true;
+            }
         }
+
+        final int enabledValidSystemNonAuxAsciiCapableImeCount =
+                getEnabledValidSystemNonAuxAsciiCapableImeCount(context);
+        if (enabledValidSystemNonAuxAsciiCapableImeCount > 1) {
+            return false;
+        }
+
+        if (enabledValidSystemNonAuxAsciiCapableImeCount == 1 && !isEnabledImi(imi)) {
+            return false;
+        }
+
         if (!InputMethodUtils.isSystemIme(imi)) {
             return false;
         }
         return isValidSystemNonAuxAsciiCapableIme(imi, context);
     }
 
-    private static boolean isValidSystemNonAuxAsciiCapableIme(
-            InputMethodInfo imi, Context context) {
+    private int getEnabledValidSystemNonAuxAsciiCapableImeCount(Context context) {
+        int count = 0;
+        final List<InputMethodInfo> enabledImis;
+        synchronized(mMethodMap) {
+            enabledImis = mSettings.getEnabledInputMethodListLocked();
+        }
+        for (final InputMethodInfo imi : enabledImis) {
+            if (isValidSystemNonAuxAsciiCapableIme(imi, context)) {
+                ++count;
+            }
+        }
+        if (count == 0) {
+            Log.w(TAG, "No \"enabledValidSystemNonAuxAsciiCapableIme\"s found.");
+        }
+        return count;
+    }
+
+    private boolean isEnabledImi(InputMethodInfo imi) {
+        final List<InputMethodInfo> enabledImis;
+        synchronized(mMethodMap) {
+            enabledImis = mSettings.getEnabledInputMethodListLocked();
+        }
+        for (final InputMethodInfo tempImi : enabledImis) {
+            if (tempImi.getId().equals(imi.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isValidSystemNonAuxAsciiCapableIme(InputMethodInfo imi,
+            Context context) {
         if (imi.isAuxiliaryIme()) {
             return false;
         }
         if (InputMethodUtils.isValidSystemDefaultIme(true /* isSystemReady */, imi, context)) {
             return true;
         }
-        return InputMethodUtils.containsSubtypeOf(
-                imi, ENGLISH_LOCALE.getLanguage(), null /* mode */);
+        return InputMethodUtils.containsSubtypeOf(imi, ENGLISH_LOCALE.getLanguage(),
+                InputMethodUtils.SUBTYPE_MODE_KEYBOARD);
     }
 }

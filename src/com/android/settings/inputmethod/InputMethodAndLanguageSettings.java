@@ -40,6 +40,7 @@ import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -49,6 +50,7 @@ import android.text.TextUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,10 +90,19 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private InputMethodManager mImm;
     private boolean mIsOnlyImeSettings;
     private Handler mHandler;
-    @SuppressWarnings("unused")
     private SettingsObserver mSettingsObserver;
     private Intent mIntentWaitingForResult;
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
+
+    private final OnPreferenceChangeListener mOnImePreferenceChangedListener =
+            new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference arg0, Object arg1) {
+                    ((BaseAdapter)getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
+                    updateInputMethodPreferenceViews();
+                    return true;
+                }
+            };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -153,19 +164,22 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mKeyboardSettingsCategory.addPreference(currentIme);
         }
 
-        mInputMethodPreferenceList.clear();
-        final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
-        final int N = (imis == null ? 0 : imis.size());
-        for (int i = 0; i < N; ++i) {
-            final InputMethodInfo imi = imis.get(i);
-            final InputMethodPreference pref = getInputMethodPreference(imi, N);
-            mInputMethodPreferenceList.add(pref);
-        }
-
-        if (!mInputMethodPreferenceList.isEmpty()) {
-            Collections.sort(mInputMethodPreferenceList);
+        synchronized (mInputMethodPreferenceList) {
+            mInputMethodPreferenceList.clear();
+            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+            final int N = (imis == null ? 0 : imis.size());
             for (int i = 0; i < N; ++i) {
-                mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+                final InputMethodInfo imi = imis.get(i);
+                final InputMethodPreference pref = getInputMethodPreference(imi);
+                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
+                mInputMethodPreferenceList.add(pref);
+            }
+
+            if (!mInputMethodPreferenceList.isEmpty()) {
+                Collections.sort(mInputMethodPreferenceList);
+                for (int i = 0; i < N; ++i) {
+                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+                }
             }
         }
 
@@ -299,7 +313,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
                 this, getContentResolver(),
                 mInputMethodSettingValues.getInputMethodList(), null);
-        updateActiveInputMethodsSummary();
+        updateInputMethodPreferenceViews();
     }
 
     @Override
@@ -409,10 +423,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private void updateActiveInputMethodsSummary() {
-        for (Preference pref : mInputMethodPreferenceList) {
-            if (pref instanceof InputMethodPreference) {
-                ((InputMethodPreference)pref).updateSummary();
+    private void updateInputMethodPreferenceViews() {
+        synchronized (mInputMethodPreferenceList) {
+            for (Preference pref : mInputMethodPreferenceList) {
+                if (pref instanceof InputMethodPreference) {
+                    ((InputMethodPreference) pref).updatePreferenceViews();
+                }
             }
         }
         updateCurrentImeName();
@@ -433,7 +449,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
     }
 
-    private InputMethodPreference getInputMethodPreference(InputMethodInfo imi, int imiSize) {
+    private InputMethodPreference getInputMethodPreference(InputMethodInfo imi) {
         final PackageManager pm = getPackageManager();
         final CharSequence label = imi.loadLabel(pm);
         // IME settings
@@ -447,7 +463,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
 
         // Add a check box for enabling/disabling IME
-        InputMethodPreference pref = new InputMethodPreference(this, intent, mImm, imi, imiSize);
+        final InputMethodPreference pref =
+                new InputMethodPreference(this, intent, mImm, imi);
         pref.setKey(imi.getId());
         pref.setTitle(label);
         return pref;
