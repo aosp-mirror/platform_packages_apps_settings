@@ -27,14 +27,14 @@
             android:key="location_sources"
             android:title="@string/location_sources_heading" />
 
-        <CheckBoxPreference
+        <com.android.settings.location.RadioButtonPreference
             android:key="location_gps"
             android:title="@string/location_gps"
             android:summary="@string/location_street_level"
             android:dependency="location_toggle"
             android:persistent="false" />
 
-        <com.android.settings.location.WrappingCheckBoxPreference
+        <com.android.settings.location.RadioButtonPreference
             android:key="location_network"
             android:title="@string/location_network_based"
             android:summary="@string/location_neighborhood_level"

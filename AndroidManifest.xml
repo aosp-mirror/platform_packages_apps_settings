@@ -704,7 +704,7 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
         </activity-alias>
-        
+
         <!-- Provide direct entry into manage apps showing storage usage for apps.
              This is for compatibility with old shortcuts. -->
         <activity-alias android:name=".applications.StorageUse"
@@ -814,7 +814,7 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" /> -->
         </activity>
-        
+
         <activity android:name="Settings$LocationSettingsActivity"
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"

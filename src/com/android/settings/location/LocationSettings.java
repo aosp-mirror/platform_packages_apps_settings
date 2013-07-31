@@ -40,7 +40,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Gesture lock pattern settings.
+ * Location access settings.
  */
 public class LocationSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
@@ -222,28 +222,6 @@ class WrappingSwitchPreference extends SwitchPreference {
     }
 
     public WrappingSwitchPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-
-        TextView title = (TextView) view.findViewById(android.R.id.title);
-        if (title != null) {
-            title.setSingleLine(false);
-            title.setMaxLines(3);
-        }
-    }
-}
-
-class WrappingCheckBoxPreference extends CheckBoxPreference {
-
-    public WrappingCheckBoxPreference(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    public WrappingCheckBoxPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
