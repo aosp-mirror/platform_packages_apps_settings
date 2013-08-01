@@ -102,13 +102,15 @@ public class AppOpsState {
                     AppOpsManager.OP_GPS,
                     AppOpsManager.OP_WIFI_SCAN,
                     AppOpsManager.OP_NEIGHBORING_CELLS,
-                    AppOpsManager.OP_MONITOR_LOCATION },
+                    AppOpsManager.OP_MONITOR_LOCATION,
+                    AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION},
             new boolean[] { true,
                     true,
                     false,
                     false,
                     false,
-                    false }
+                    false,
+                    false}
             );
 
     public static final OpsTemplate PERSONAL_TEMPLATE = new OpsTemplate(
