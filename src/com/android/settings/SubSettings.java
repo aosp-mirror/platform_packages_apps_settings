@@ -16,6 +16,11 @@
 
 package com.android.settings;
 
+import android.app.Fragment;
+import android.util.Log;
+
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
+
 /**
  * Stub class for showing sub-settings; we can't use the main Settings class
  * since for our app it is a special singleTask class.
@@ -25,6 +30,12 @@ public class SubSettings extends Settings {
     @Override
     public boolean onNavigateUp() {
         finish();
+        return true;
+    }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        Log.d("SubSettings", "Launching fragment " + fragmentName);
         return true;
     }
 }

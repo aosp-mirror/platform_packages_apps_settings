@@ -22,6 +22,7 @@ import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 
 import static com.android.internal.widget.LockPatternView.DisplayMode;
 
@@ -66,6 +67,12 @@ public class ChooseLockPattern extends PreferenceActivity {
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPatternFragment.class.getName());
         modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
+    }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (ChooseLockPatternFragment.class.getName().equals(fragmentName)) return true;
+        return false;
     }
 
     @Override

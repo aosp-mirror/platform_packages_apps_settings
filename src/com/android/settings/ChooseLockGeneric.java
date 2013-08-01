@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -35,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.ConfirmLockPattern.ConfirmLockPatternFragment;
 
 import java.util.List;
 
@@ -48,6 +50,12 @@ public class ChooseLockGeneric extends PreferenceActivity {
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockGenericFragment.class.getName());
         modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
+    }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (ChooseLockGenericFragment.class.getName().equals(fragmentName)) return true;
+        return false;
     }
 
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
