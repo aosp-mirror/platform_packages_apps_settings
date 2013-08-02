@@ -3560,6 +3560,21 @@
     <!-- Warning message about required internet conectivity for TTS synthesis, displayed as a dialog
          message when the user selects to play an example for network only locale and there's no internet connectivity. -->
     <string name="tts_engine_network_required">This language requires a working network connection for text-to-speech output.</string>
+    <!-- Text spoken by the TTS engine as an example if the engine doesn't provide sample text [CHAR LIMIT=100] -->
+    <string name="tts_default_sample_string">This is an example of speech synthesis</string>
+    <!-- On main TTS Settings screen, title of a field explaining current TTS engine status for
+	 current default language [CHAR LIMIT=50] -->
+    <string name="tts_status_title">Default language status</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+         selected language is fully supported by the engine [CHAR LIMIT=150]-->
+    <string name="tts_status_ok"><xliff:g id="locale" example="English (United States)">%1$s</xliff:g> is fully supported</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+         selected language is supported by the engine only if there's a working network connection
+	 [CHAR LIMIT=150]-->
+    <string name="tts_status_requires_network"><xliff:g id="locale" example="English (United States)">%1$s</xliff:g> requires network connection</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+         selected language is not supported by the engine [CHAR LIMIT=150]-->
+    <string name="tts_status_not_supported"><xliff:g id="locale" example="English (United States)">%1$s</xliff:g> is not supported</string>
     <!-- On main TTS Settings screen, text for divider under which all TTS engines are listed -->
     <string name="tts_engines_section">Engines</string>
     <!-- On main TTS Settings screen, text preceded by the TTS engine name, clicking this button will launch the engine settings -->
