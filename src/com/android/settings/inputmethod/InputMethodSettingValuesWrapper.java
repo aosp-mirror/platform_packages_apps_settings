@@ -109,8 +109,9 @@ public class InputMethodSettingValuesWrapper {
     }
 
     public boolean isAlwaysCheckedIme(InputMethodInfo imi, Context context) {
+        final boolean isEnabled = isEnabledImi(imi);
         synchronized (mMethodMap) {
-            if (mSettings.getEnabledInputMethodListLocked().size() <= 1) {
+            if (mSettings.getEnabledInputMethodListLocked().size() <= 1 && isEnabled) {
                 return true;
             }
         }
@@ -121,7 +122,7 @@ public class InputMethodSettingValuesWrapper {
             return false;
         }
 
-        if (enabledValidSystemNonAuxAsciiCapableImeCount == 1 && !isEnabledImi(imi)) {
+        if (enabledValidSystemNonAuxAsciiCapableImeCount == 1 && !isEnabled) {
             return false;
         }
 
