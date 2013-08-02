@@ -26,6 +26,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.ProgressCategory;
+import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Collection;
@@ -39,7 +40,7 @@ import java.util.WeakHashMap;
  * @see DevicePickerFragment
  */
 public abstract class DeviceListPreferenceFragment extends
-        SettingsPreferenceFragment implements BluetoothCallback {
+        RestrictedSettingsFragment implements BluetoothCallback {
 
     private static final String TAG = "DeviceListPreferenceFragment";
 
@@ -58,7 +59,8 @@ public abstract class DeviceListPreferenceFragment extends
     final WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
             new WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference>();
 
-    DeviceListPreferenceFragment() {
+    DeviceListPreferenceFragment(String restrictedKey) {
+        super(restrictedKey);
         mFilter = BluetoothDeviceFilter.ALL_FILTER;
     }
 

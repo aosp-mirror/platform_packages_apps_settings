@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import java.util.HashSet;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -44,7 +46,7 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.NsdEnabler;
 
-public class WirelessSettings extends SettingsPreferenceFragment {
+public class WirelessSettings extends RestrictedSettingsFragment {
     private static final String TAG = "WirelessSettings";
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
@@ -73,7 +75,11 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
+    private final HashSet<Preference> mProtectedByRestictionsPrefs = new HashSet<Preference>();
 
+    public WirelessSettings() {
+        super(null);
+    }
     /**
      * Invoked on each preference click in this hierarchy, overrides
      * PreferenceActivity's implementation.  Used to make sure we track the
@@ -81,6 +87,10 @@ public class WirelessSettings extends SettingsPreferenceFragment {
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (mProtectedByRestictionsPrefs.contains(preference) && !hasChallengeSucceeded()) {
+            restrictionsPinCheck(RESTRICTIONS_PIN_SET);
+            return false;
+        }
         log("onPreferenceTreeClick: preference=" + preference);
         if (preference == mAirplaneModePreference && Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
@@ -142,6 +152,13 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (!TextUtils.isEmpty(mManageMobilePlanMessage)) {
             log("onManageMobilePlanClick: message=" + mManageMobilePlanMessage);
             showDialog(MANAGE_MOBILE_PLAN_DIALOG_ID);
+        }
+    }
+
+    private void protectByRestrictions(String key) {
+        Preference pref = findPreference(key);
+        if (pref != null) {
+            mProtectedByRestictionsPrefs.add(pref);
         }
     }
 
@@ -225,6 +242,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
                 ps.setDependency(KEY_TOGGLE_AIRPLANE);
             }
         }
+        protectByRestrictions(KEY_WIMAX_SETTINGS);
+
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
@@ -232,7 +251,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         if (isSecondaryUser) { // Disable VPN
             removePreference(KEY_VPN_SETTINGS);
         }
-
+        protectByRestrictions(KEY_VPN_SETTINGS);
         // Manually set dependencies for Bluetooth when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_BLUETOOTH)) {
             // No bluetooth-dependent items in the list. Code kept in case one is added later.
@@ -257,6 +276,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
+        protectByRestrictions(KEY_MOBILE_NETWORK_SETTINGS);
+        protectByRestrictions(KEY_MANAGE_MOBILE_PLAN);
 
         // Remove Airplane Mode settings if it's a stationary device such as a TV.
         if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
@@ -280,6 +301,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(Utils.getTetheringLabel(cm));
         }
+        protectByRestrictions(KEY_TETHER_SETTINGS);
 
         // Enable link to CMAS app settings depending on the value in config.xml.
         boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
@@ -300,6 +322,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
             if (ps != null) root.removePreference(ps);
         }
+        protectByRestrictions(KEY_CELL_BROADCAST_SETTINGS);
     }
 
     @Override
@@ -345,6 +368,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
@@ -74,7 +73,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
     private final IntentFilter mIntentFilter;
 
-    private UserManager mUserManager;
 
     // accessed from inner class (not private to avoid thunks)
     Preference mMyDevicePreference;
@@ -96,13 +94,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     };
 
     public BluetoothSettings() {
+        super(DISALLOW_CONFIG_BLUETOOTH);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mActivityStarted = (savedInstanceState == null);    // don't auto start scan after rotation
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
@@ -171,7 +169,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (mLocalAdapter == null) return;
         // If the user is not allowed to configure bluetooth, do not show the menu.
-        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) return;
+        if (isRestrictedAndNotPinProtected()) return;
 
         boolean bluetoothIsEnabled = mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON;
         boolean isDiscovering = mLocalAdapter.isDiscovering();
@@ -219,7 +217,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     }
 
     private void startScanning() {
-        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) return;
+        if (isRestrictedAndNotPinProtected()) return;
         if (!mAvailableDevicesCategoryIsPresent) {
             getPreferenceScreen().addPreference(mAvailableDevicesCategory);
         }
@@ -266,7 +264,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 mMyDevicePreference.setEnabled(true);
                 preferenceScreen.addPreference(mMyDevicePreference);
 
-                if (! mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
+                if (!isRestrictedAndNotPinProtected()) {
                     if (mDiscoverableEnabler == null) {
                         mDiscoverableEnabler = new BluetoothDiscoverableEnabler(getActivity(),
                                 mLocalAdapter, mMyDevicePreference);
@@ -297,7 +295,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 } else {
                     mAvailableDevicesCategory.removeAll();
                 }
-                if (! mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
+                if (!isRestrictedAndNotPinProtected()) {
                     addDeviceCategory(mAvailableDevicesCategory,
                             R.string.bluetooth_preference_found_devices,
                             BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
@@ -366,7 +364,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         public void onClick(View v) {
             // User clicked on advanced options icon for a device in the list
             if (v.getTag() instanceof CachedBluetoothDevice) {
-                if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) return;
+                if (isRestrictedAndNotPinProtected()) return;
 
                 CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
 
