@@ -19,6 +19,13 @@ package com.android.settings.wifi;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -43,12 +50,10 @@ import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -72,15 +77,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Two types of UI are provided here.
@@ -90,7 +88,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * The second is for Setup Wizard, with a simplified interface that hides the action bar
  * and menus.
  */
-public class WifiSettings extends SettingsPreferenceFragment
+public class WifiSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener  {
     private static final String TAG = "WifiSettings";
     private static final int MENU_ID_WPS_PBC = Menu.FIRST;
@@ -128,9 +126,6 @@ public class WifiSettings extends SettingsPreferenceFragment
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
     private boolean mP2pSupported;
-
-
-    private UserManager mUserManager;
 
     private WifiEnabler mWifiEnabler;
     // An access point being editted is stored here.
@@ -179,6 +174,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
+        super(DISALLOW_CONFIG_WIFI);
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
@@ -292,7 +288,6 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
 
         mConnectListener = new WifiManager.ActionListener() {
                                    @Override
@@ -449,7 +444,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the user is not allowed to configure wifi, do not show the menu.
-        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)) return;
+        if (isRestrictedAndNotPinProtected()) return;
 
         final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
         if (mSetupWizardMode) {
@@ -507,7 +502,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // If the user is not allowed to configure wifi, do not handle menu selections.
-        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)) return false;
+        if (isRestrictedAndNotPinProtected()) return false;
 
         switch (item.getItemId()) {
             case MENU_ID_WPS_PBC:
@@ -709,7 +704,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
 
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI)) {
+        if (isRestrictedAndNotPinProtected()) {
             addMessagePreference(R.string.wifi_empty_list_user_restricted);
             return;
         }
