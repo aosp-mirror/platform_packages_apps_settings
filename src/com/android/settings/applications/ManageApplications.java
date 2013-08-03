@@ -22,6 +22,7 @@ import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.app.Fragment;
 import android.app.INotificationManager;
 import android.content.ComponentName;
@@ -1116,10 +1117,12 @@ public class ManageApplications extends Fragment implements
         if (mResetDialog == dialog) {
             final PackageManager pm = getActivity().getPackageManager();
             final IPackageManager mIPm = IPackageManager.Stub.asInterface(
-                            ServiceManager.getService("package"));
+                    ServiceManager.getService("package"));
             final INotificationManager nm = INotificationManager.Stub.asInterface(
                     ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             final NetworkPolicyManager npm = NetworkPolicyManager.from(getActivity());
+            final AppOpsManager aom = (AppOpsManager)getActivity().getSystemService(
+                    Context.APP_OPS_SERVICE);
             final Handler handler = new Handler(getActivity().getMainLooper());
             (new AsyncTask<Void, Void, Void>() {
                 @Override protected Void doInBackground(Void... params) {
@@ -1146,6 +1149,7 @@ public class ManageApplications extends Fragment implements
                         mIPm.resetPreferredActivities(UserHandle.myUserId());
                     } catch (RemoteException e) {
                     }
+                    aom.resetAllModes();
                     final int[] restrictedUids = npm.getUidsWithPolicy(
                             POLICY_REJECT_METERED_BACKGROUND);
                     final int currentUserId = ActivityManager.getCurrentUser();
