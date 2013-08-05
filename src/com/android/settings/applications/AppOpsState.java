@@ -525,7 +525,7 @@ public class AppOpsState {
                                 & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0) {
                             if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + " perm "
                                     + appInfo.requestedPermissions[j] + " not granted; skipping");
-                            break;
+                            continue;
                         }
                     }
                     if (DEBUG) Log.d(TAG, "Pkg " + appInfo.packageName + ": requested perm "
