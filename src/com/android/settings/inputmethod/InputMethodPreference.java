@@ -251,8 +251,6 @@ public class InputMethodPreference extends CheckBoxPreference {
         super.setChecked(checked);
         if (save) {
             saveImeSettings();
-            InputMethodSettingValuesWrapper.getInstance(
-                    getContext()).refreshAllInputMethodAndSubtypes();
             if (wasChecked != checked && mOnImePreferenceChangeListener != null) {
                 mOnImePreferenceChangeListener.onPreferenceChange(this, checked);
             }

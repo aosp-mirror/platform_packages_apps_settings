@@ -98,6 +98,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference arg0, Object arg1) {
+                    InputMethodSettingValuesWrapper.getInstance(
+                            arg0.getContext()).refreshAllInputMethodAndSubtypes();
                     ((BaseAdapter)getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
                     updateInputMethodPreferenceViews();
                     return true;

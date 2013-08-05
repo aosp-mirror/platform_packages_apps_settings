@@ -107,6 +107,10 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
+        // Refresh internal states in mInputMethodSettingValues to keep the latest
+        // "InputMethodInfo"s and "InputMethodSubtype"s
+        InputMethodSettingValuesWrapper
+                .getInstance(getActivity()).refreshAllInputMethodAndSubtypes();
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
                 this, getContentResolver(), mInputMethodProperties, mInputMethodAndSubtypePrefsMap);
         updateAutoSelectionCB();
