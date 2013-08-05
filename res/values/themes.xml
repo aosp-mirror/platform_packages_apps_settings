@@ -19,4 +19,12 @@
     <style name="Theme.WifiDialog" parent="@*android:style/Theme.Holo.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
+
+    <style name="Theme.Settings" parent="@android:style/Theme.Holo">
+        <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
+        <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
+        <item name="@*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>
+        <item name="@*android:preferenceFragmentListStyle">@style/PreferenceFragmentListSinglePane</item>
+        <item name="@*android:preferenceFragmentPaddingSide">@dimen/settings_side_margin</item>
+    </style>
 </resources>

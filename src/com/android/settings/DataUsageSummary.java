@@ -312,15 +312,10 @@ public class DataUsageSummary extends Fragment {
         // on parent container for inset.
         final boolean shouldInset = mListView.getScrollBarStyle()
                 == View.SCROLLBARS_OUTSIDE_OVERLAY;
-        if (shouldInset) {
-            mInsetSide = view.getResources().getDimensionPixelOffset(
-                    com.android.internal.R.dimen.preference_fragment_padding_side);
-        } else {
-            mInsetSide = 0;
-        }
+        mInsetSide = 0;
 
         // adjust padding around tabwidget as needed
-        prepareCustomPreferencesList(container, view, mListView, true);
+        prepareCustomPreferencesList(container, view, mListView, false);
 
         mTabHost.setup();
         mTabHost.setOnTabChangedListener(mTabListener);

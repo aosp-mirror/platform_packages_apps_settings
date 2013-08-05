@@ -14,19 +14,6 @@
      limitations under the License.
 -->
 
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="none"
-    android:fillViewport="true">
-
-    <TabWidget
-        android:id="@android:id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="?android:attr/tabWidgetStyle"
-        android:paddingStart="@dimen/settings_side_margin"
-        android:paddingEnd="@dimen/settings_side_margin"
-    />
-</HorizontalScrollView>
+<resources>
+    <dimen name="settings_side_margin">150dp</dimen>
+</resources>
