@@ -325,6 +325,8 @@ public class Settings extends PreferenceActivity
         DreamSettings.class.getName(),
         UserSettings.class.getName(),
         NotificationAccessSettings.class.getName(),
+        ManageAccountsSettings.class.getName(),
+        PrintingSettings.class.getName()
     };
 
     @Override
