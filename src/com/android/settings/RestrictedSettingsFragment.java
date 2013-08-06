@@ -25,11 +25,16 @@ import android.os.UserManager;
 /**
  * Base class for settings activities that should be pin protected when in restricted mode.
  * The constructor for this class will take the restriction key that this screen should be
- * locked by.  If {@link UserManager.hasRestrictionsPin()} and {@link UserManager.hasUserRestriction(String)} returns true for the
- * restriction key, then the user will hav
+ * locked by.  If {@link UserManager.hasRestrictionsPin()} and
+ * {@link UserManager.hasUserRestriction(String)} returns true for the restriction key, then
+ * the user will have to enter the restrictions pin before seeing the Settings screen.
  *
+ * If this settings screen should be pin protected whenever
+ * {@link UserManager.hasUserRestriction(String)} returns true, pass in
+ * {@link RESTRICTIONS_PIN_SET} to the constructor instead of a restrictions key.
  */
 public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
+    protected static final String RESTRICTIONS_PIN_SET = "restrictions_pin_set";
 
     // Should be unique across all settings screens that use this.
     private static final int REQUEST_PIN_CHALLENGE = 12309;
@@ -45,20 +50,21 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
 
     private final String mRestrictionKey;
 
-    public RestrictedSettingsFragment(String restrictedFlag) {
-        mRestrictionKey = restrictedFlag;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
+    /**
+     * @param restrictionKey The restriction key to check before pin protecting
+     *            this settings page. Pass in {@link RESTRICTIONS_PIN_SET} if it should
+     *            be PIN protected whenever a restrictions pin is set. Pass in
+     *            null if it should never be PIN protected.
+     */
+    public RestrictedSettingsFragment(String restrictionKey) {
+        mRestrictionKey = restrictionKey;
     }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
 
         if (icicle != null) {
             mChallengeSucceeded = icicle.getBoolean(KEY_CHALLENGE_SUCCEEDED, false);
@@ -79,8 +85,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mUserManager.hasUserRestriction(mRestrictionKey)
-                && mUserManager.hasRestrictionsPin()) {
+        if (shouldBePinProtected(mRestrictionKey)) {
             ensurePin();
         }
     }
@@ -121,7 +126,40 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
      * Used to determine if the settings UI should disable UI.
      */
     protected boolean isRestrictedAndNotPinProtected() {
+        if (mRestrictionKey == null || RESTRICTIONS_PIN_SET.equals(mRestrictionKey)) {
+            return false;
+        }
         return mUserManager.hasUserRestriction(mRestrictionKey)
                 && !mUserManager.hasRestrictionsPin();
     }
+
+    /**
+     * Called to trigger the pin entry if the given restriction key is locked down.
+     * @param restrictionsKey The restriction key or {@link RESTRICTIONS_PIN_SET} if
+     *          pin entry should get triggered if there is a pin set.
+     */
+   protected boolean restrictionsPinCheck(String restrictionsKey) {
+       if (shouldBePinProtected(restrictionsKey) && !mChallengeSucceeded) {
+           ensurePin();
+           return false;
+       } else {
+           return true;
+       }
+   }
+
+   protected boolean hasChallengeSucceeded() {
+       return mChallengeSucceeded;
+   }
+
+   /**
+    * Returns true if this restrictions key is locked down.
+    */
+   protected boolean shouldBePinProtected(String restrictionKey) {
+       if (restrictionKey == null) {
+           return false;
+       }
+       boolean restricted = RESTRICTIONS_PIN_SET.equals(restrictionKey)
+               || mUserManager.hasUserRestriction(restrictionKey);
+       return restricted && mUserManager.hasRestrictionsPin();
+   }
 }

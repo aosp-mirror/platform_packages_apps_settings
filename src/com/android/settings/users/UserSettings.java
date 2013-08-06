@@ -16,6 +16,10 @@
 
 package com.android.settings.users;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -42,8 +46,8 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
@@ -59,19 +63,13 @@ import android.widget.SimpleAdapter;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SelectableEditTextPreference;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class UserSettings extends SettingsPreferenceFragment
+public class UserSettings extends RestrictedSettingsFragment
         implements OnPreferenceClickListener, OnClickListener, DialogInterface.OnDismissListener,
         Preference.OnPreferenceChangeListener {
 
@@ -136,6 +134,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
+    public UserSettings() {
+        super(null);
+    }
 
     private Handler mHandler = new Handler() {
         @Override
@@ -717,6 +718,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceClick(Preference pref) {
+        if (pref == mAddUser && !restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
+            return false;
+        }
         if (pref == mMePreference) {
             Intent editProfile;
             if (!mProfileExists) {
@@ -776,7 +780,9 @@ public class UserSettings extends SettingsPreferenceFragment
             int userId = ((UserPreference) v.getTag()).getUserId();
             switch (v.getId()) {
             case UserPreference.DELETE_ID:
-                onRemoveUserClicked(userId);
+                if (restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
+                    onRemoveUserClicked(userId);
+                }
                 break;
             case UserPreference.SETTINGS_ID:
                 onManageUserClicked(userId, false);

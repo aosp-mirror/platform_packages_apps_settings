@@ -79,7 +79,7 @@ import java.util.List;
 /*
  * Displays preferences for application developers.
  */
-public class DevelopmentSettings extends PreferenceFragment
+public class DevelopmentSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "DevelopmentSettings";
@@ -210,6 +210,7 @@ public class DevelopmentSettings extends PreferenceFragment
             = new ArrayList<CheckBoxPreference>();
 
     private final HashSet<Preference> mDisabledPrefs = new HashSet<Preference>();
+    private final HashSet<Preference> mProtectedByRestrictionsPrefs = new HashSet<Preference>();
 
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
@@ -218,6 +219,10 @@ public class DevelopmentSettings extends PreferenceFragment
     private Dialog mAdbKeysDialog;
 
     private boolean mUnavailable;
+
+    public DevelopmentSettings() {
+        super(null /* Don't ask for restrictions pin on creation. */);
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -266,6 +271,13 @@ public class DevelopmentSettings extends PreferenceFragment
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
+        }
+
+        if (shouldBePinProtected(RESTRICTIONS_PIN_SET)) {
+            protectByRestrictions(mEnableAdb);
+            protectByRestrictions(mClearAdbKeys);
+            protectByRestrictions(mEnableTerminal);
+            protectByRestrictions(mPassword);
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -347,6 +359,12 @@ public class DevelopmentSettings extends PreferenceFragment
         if (pref != null) {
             pref.setEnabled(false);
             mDisabledPrefs.add(pref);
+        }
+    }
+
+    private void protectByRestrictions(Preference pref) {
+        if (pref != null) {
+            mProtectedByRestrictionsPrefs.add(pref);
         }
     }
 
@@ -793,7 +811,7 @@ public class DevelopmentSettings extends PreferenceFragment
             if (flinger != null) {
                 Parcel data = Parcel.obtain();
                 data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                final int showUpdates = mShowScreenUpdates.isChecked() ? 1 : 0; 
+                final int showUpdates = mShowScreenUpdates.isChecked() ? 1 : 0;
                 data.writeInt(showUpdates);
                 flinger.transact(1002, data, null, 0);
                 data.recycle();
@@ -810,7 +828,7 @@ public class DevelopmentSettings extends PreferenceFragment
             if (flinger != null) {
                 Parcel data = Parcel.obtain();
                 data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                final int disableOverlays = mDisableOverlays.isChecked() ? 1 : 0; 
+                final int disableOverlays = mDisableOverlays.isChecked() ? 1 : 0;
                 data.writeInt(disableOverlays);
                 flinger.transact(1008, data, null, 0);
                 data.recycle();
@@ -824,7 +842,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private void updateHardwareUiOptions() {
         updateCheckBox(mForceHardwareUi, SystemProperties.getBoolean(HARDWARE_UI_PROPERTY, false));
     }
-    
+
     private void writeHardwareUiOptions() {
         SystemProperties.set(HARDWARE_UI_PROPERTY, mForceHardwareUi.isChecked() ? "true" : "false");
         pokeSystemProperties();
@@ -952,7 +970,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
     }
-    
+
     private void writeCpuUsageOptions() {
         boolean value = mShowCpuUsage.isChecked();
         Settings.Global.putInt(getActivity().getContentResolver(),
@@ -1160,6 +1178,10 @@ public class DevelopmentSettings extends PreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (mProtectedByRestrictionsPrefs.contains(preference)
+                && !restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
+            return false;
+        }
 
         if (Utils.isMonkeyRunning()) {
             return false;
@@ -1198,12 +1220,12 @@ public class DevelopmentSettings extends PreferenceFragment
                             : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.BUGREPORT_IN_POWER_MENU, 
+                    Settings.Secure.BUGREPORT_IN_POWER_MENU,
                     mBugreportInPower.isChecked() ? 1 : 0);
         } else if (preference == mKeepScreenOn) {
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
-                    mKeepScreenOn.isChecked() ? 
+                    mKeepScreenOn.isChecked() ?
                     (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();

@@ -45,14 +45,14 @@ import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends SettingsPreferenceFragment
+public class SecuritySettings extends RestrictedSettingsFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener {
-
     static final String TAG = "SecuritySettings";
 
     // Lock Settings
@@ -82,6 +82,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
+    private final HashSet<Preference> mProtectedByRestictionsPrefs = new HashSet<Preference>();
+
     private PackageManager mPM;
     DevicePolicyManager mDPM;
 
@@ -105,6 +107,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private Preference mNotificationAccess;
 
     private boolean mIsPrimary;
+
+    public SecuritySettings() {
+        super(null /* Don't ask for restrictions pin on creation. */);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -303,7 +309,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
+        if (shouldBePinProtected(RESTRICTIONS_PIN_SET)) {
+            protectByRestrictions(mToggleAppInstallation);
+            protectByRestrictions(mToggleVerifyApps);
+        }
         return root;
+    }
+
+    private void protectByRestrictions(Preference pref) {
+        if (pref != null) {
+            mProtectedByRestictionsPrefs.add(pref);
+        }
     }
 
     private int getNumEnabledNotificationListeners() {
@@ -471,6 +487,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (mProtectedByRestictionsPrefs.contains(preference)
+                && !restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
+            return false;
+        }
+
         final String key = preference.getKey();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
