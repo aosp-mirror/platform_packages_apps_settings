@@ -973,6 +973,21 @@
                 android:resource="@id/accessibility_settings" />
         </activity>
 
+        <activity android:name="Settings$CaptioningSettingsActivity"
+                android:label="@string/accessibility_captioning_title"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings$AccessibilitySettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.CAPTIONING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.ToggleCaptioningPreferenceFragment" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/accessibility_settings" />
+        </activity>
+
         <activity android:name="Settings$TextToSpeechSettingsActivity"
                 android:label="@string/tts_settings"
                 android:taskAffinity="com.android.settings"

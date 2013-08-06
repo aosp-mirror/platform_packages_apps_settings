@@ -95,6 +95,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "select_long_press_timeout_preference";
     private static final String ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN =
             "enable_global_gesture_preference_screen";
+    private static final String CAPTIONING_PREFERENCE_SCREEN =
+            "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "screen_magnification_preference_screen";
 
@@ -189,6 +191,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mToggleSpeakPasswordPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mNoServicesMessagePreference;
+    private PreferenceScreen mCaptioningPreferenceScreen;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
     private PreferenceScreen mGlobalGesturePreferenceScreen;
 
@@ -360,6 +363,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
         }
 
+        // Captioning.
+        mCaptioningPreferenceScreen = (PreferenceScreen) findPreference(
+                CAPTIONING_PREFERENCE_SCREEN);
+
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
@@ -506,6 +513,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         String value = String.valueOf(longPressTimeout);
         mSelectLongPressTimeoutPreference.setValue(value);
         mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValuetoTitleMap.get(value));
+
+        // Captioning.
+        final boolean captioningEnabled = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, 0) == 1;
+        if (captioningEnabled) {
+            mCaptioningPreferenceScreen.setSummary(R.string.accessibility_feature_state_on);
+        } else {
+            mCaptioningPreferenceScreen.setSummary(R.string.accessibility_feature_state_off);
+        }
 
         // Screen magnification.
         final boolean magnificationEnabled = Settings.Secure.getInt(getContentResolver(),

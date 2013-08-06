@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--
+     Copyright (C) 2013 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,14 +15,8 @@
      limitations under the License.
 -->
 
-<resources>
-    <dimen name="appwidget_width">421dip</dimen>
-    <dimen name="appwidget_height">68dip</dimen>
-    <dimen name="appwidget_preview_width">120dip</dimen>
-    <dimen name="appwidget_preview_height">70dip</dimen>
-    <dimen name="keyguard_appwidget_picker_margin_left">2dip</dimen>
-    <dimen name="keyguard_appwidget_picker_margin_right">2dip</dimen>
-    <integer name="keyguard_appwidget_picker_cols">2</integer>
-
-    <dimen name="captioning_preview_height">100dp</dimen>
-</resources>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/color_preview"
+    android:layout_width="?android:attr/listPreferredItemHeight"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:contentDescription="@null" />
