@@ -21,24 +21,34 @@ import android.app.Activity;
 import android.content.Intent;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 
 /**
  * Location access settings.
  */
-public class LocationSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+public class LocationSettings extends LocationSettingsBase
+        implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = LocationSettings.class.getSimpleName();
     private static final String KEY_LOCATION_MODE = "location_mode";
+    private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
+    private static final String KEY_LOCATION_SERVICES = "location_services";
 
+    private Switch mSwitch;
+    private boolean mValidListener;
     private PreferenceScreen mLocationMode;
-    private LocationEnabler mLocationEnabler;
+    private PreferenceCategory mRecentLocationRequests;
+    private PreferenceCategory mLocationServices;
+
+    public LocationSettings() {
+        mValidListener = false;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -49,10 +59,17 @@ public class LocationSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-
-        // Make sure we reload the preference hierarchy since some of these settings
-        // depend on others...
+        mSwitch = new Switch(getActivity());
+        mSwitch.setOnCheckedChangeListener(this);
+        mValidListener = true;
         createPreferenceHierarchy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mValidListener = false;
+        mSwitch.setOnCheckedChangeListener(null);
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
@@ -63,7 +80,7 @@ public class LocationSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.location_settings);
         root = getPreferenceScreen();
 
-        mLocationMode = (PreferenceScreen) root.findPreference((KEY_LOCATION_MODE));
+        mLocationMode = (PreferenceScreen) root.findPreference(KEY_LOCATION_MODE);
         mLocationMode.setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener() {
                     @Override
@@ -77,9 +94,11 @@ public class LocationSettings extends SettingsPreferenceFragment
                         return true;
                     }
                 });
+        mRecentLocationRequests =
+                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
+        mLocationServices = (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
 
         Activity activity = getActivity();
-        Switch actionBarSwitch = new Switch(activity);
 
         if (activity instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
@@ -88,10 +107,10 @@ public class LocationSettings extends SettingsPreferenceFragment
             if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
                 final int padding = activity.getResources().getDimensionPixelSize(
                         R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPaddingRelative(0, 0, padding, 0);
+                mSwitch.setPaddingRelative(0, 0, padding, 0);
                 activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                         ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
+                activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         Gravity.CENTER_VERTICAL | Gravity.END));
@@ -100,9 +119,9 @@ public class LocationSettings extends SettingsPreferenceFragment
             Log.wtf(TAG, "Current activity is not an instance of PreferenceActivity!");
         }
 
-        mLocationEnabler = new LocationEnabler(activity, actionBarSwitch);
         setHasOptionsMenu(true);
 
+        refreshLocationMode();
         return root;
     }
 
@@ -112,7 +131,50 @@ public class LocationSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-      return true;
+    public void onModeChanged(int mode) {
+        switch (mode) {
+            case MODE_LOCATION_OFF:
+                mLocationMode.setSummary(R.string.location_mode_location_off_title);
+                break;
+            case MODE_SENSORS_ONLY:
+                mLocationMode.setSummary(R.string.location_mode_sensors_only_title);
+                break;
+            case MODE_BATTERY_SAVING:
+                mLocationMode.setSummary(R.string.location_mode_battery_saving_title);
+                break;
+            case MODE_HIGH_ACCURACY:
+                mLocationMode.setSummary(R.string.location_mode_high_accuracy_title);
+                break;
+            default:
+                break;
+        }
+
+        boolean enabled = (mode != MODE_LOCATION_OFF);
+        mLocationMode.setEnabled(enabled);
+        mRecentLocationRequests.setEnabled(enabled);
+        mLocationServices.setEnabled(enabled);
+
+        if (enabled != mSwitch.isChecked()) {
+            // set listener to null so that that code below doesn't trigger onCheckedChanged()
+            if (mValidListener) {
+                mSwitch.setOnCheckedChangeListener(null);
+            }
+            mSwitch.setChecked(enabled);
+            if (mValidListener) {
+                mSwitch.setOnCheckedChangeListener(this);
+            }
+        }
+    }
+
+    /**
+     * Listens to the state change of the location master switch.
+     */
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            setLocationMode(MODE_HIGH_ACCURACY);
+        } else {
+            setLocationMode(MODE_LOCATION_OFF);
+        }
     }
 }
