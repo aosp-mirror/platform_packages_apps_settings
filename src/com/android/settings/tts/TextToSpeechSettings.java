@@ -42,6 +42,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Checkable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -104,6 +105,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private String mSampleText = "";
     private Locale mCurrentDefaultLocale;
+    private List<String> mAvailableStrLocals;
 
     /**
      * The initialization listener used when we are initalizing the settings
@@ -144,6 +146,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultRatePref = (ListPreference) findPreference(KEY_DEFAULT_RATE);
 
         mEngineStatus = findPreference(KEY_STATUS);
+        updateEngineStatus(R.string.tts_status_checking);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
         mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
@@ -253,17 +256,50 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mCurrentDefaultLocale = defaultLocale;
 
         int defaultAvailable = mTts.setLanguage(defaultLocale);
-        if (defaultAvailable == TextToSpeech.LANG_NOT_SUPPORTED) {
+        if (evaluateDefaultLocale()) {
+            getSampleText();
+        }
+    }
+
+    private boolean evaluateDefaultLocale() {
+        if (mCurrentDefaultLocale == null) {
+            return false;
+        }
+        int defaultAvailable = mTts.setLanguage(mCurrentDefaultLocale);
+
+        // Check if language is listed in CheckVoices Action result as available voice.
+        String defaultLocaleStr = mCurrentDefaultLocale.getISO3Language();
+        boolean notInAvailableLangauges = true;
+        if (!TextUtils.isEmpty(mCurrentDefaultLocale.getISO3Country())) {
+            defaultLocaleStr += "-" + mCurrentDefaultLocale.getISO3Country();
+        }
+        if (!TextUtils.isEmpty(mCurrentDefaultLocale.getVariant())) {
+            defaultLocaleStr += "-" + mCurrentDefaultLocale.getVariant();
+        }
+        if (mAvailableStrLocals != null) {
+            for (String loc : mAvailableStrLocals) {
+                if (loc.equalsIgnoreCase(defaultLocaleStr)) {
+                    notInAvailableLangauges = false;
+                    break;
+                }
+            }
+        }
+
+        if (defaultAvailable == TextToSpeech.LANG_NOT_SUPPORTED ||
+                defaultAvailable == TextToSpeech.LANG_MISSING_DATA ||
+                mAvailableStrLocals != null && notInAvailableLangauges) {
             if (DBG) Log.d(TAG, "Default locale for this TTS engine is not supported.");
-            updateWidgetState(false);
             updateEngineStatus(R.string.tts_status_not_supported);
+            updateWidgetState(false);
+            return false;
         } else {
             if (isNetworkRequiredForSynthesis()) {
                 updateEngineStatus(R.string.tts_status_requires_network);
             } else {
                 updateEngineStatus(R.string.tts_status_ok);
             }
-            getSampleText();
+            updateWidgetState(true);
+            return true;
         }
     }
 
@@ -431,6 +467,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         // Disable the "play sample text" preference and the speech
         // rate preference while the engine is being swapped.
         updateWidgetState(false);
+        updateEngineStatus(R.string.tts_status_checking);
 
         // Keep track of the previous engine that was being used. So that
         // we can reuse the previous engine.
@@ -514,6 +551,10 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
 
         Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
+
+        mAvailableStrLocals = data.getStringArrayListExtra(
+                TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
+        evaluateDefaultLocale();
 
         final int engineCount = mEnginePreferenceCategory.getPreferenceCount();
         for (int i = 0; i < engineCount; ++i) {
