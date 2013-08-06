@@ -136,7 +136,6 @@ public class Settings extends PreferenceActivity
             R.id.location_settings,
             R.id.security_settings,
             R.id.language_settings,
-            R.id.restriction_settings,
             R.id.user_settings,
             R.id.account_settings,
             R.id.account_add,
@@ -555,11 +554,6 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.account_add) {
                 if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.restriction_settings) {
-                if (um.isLinkedUser()
-                        || um.hasUserRestriction(UserManager.DISALLOW_APP_RESTRICTIONS)) {
                     target.remove(i);
                 }
             }
