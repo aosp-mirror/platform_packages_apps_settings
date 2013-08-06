@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Gebruikersgegevens"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Profielinfo weergeven op vergrendelingsscherm"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Profielinfo"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Locatietoegang"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Locatie"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Beveiliging"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Mijn locatie\', schermontgrendeling, SIM- en referentieopslagvergrendeling instellen"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"\'Mijn locatie\' instellen, scherm ontgrendelen, opslag van referenties vergrendelen"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Plaats een simkaart en start het apparaat opnieuw"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Maak verbinding met internet"</string>
     <string name="location_title" msgid="1029961368397484576">"Mijn locatie"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Modus"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Grote nauwkeurigheid"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Accubesparing"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Alleen apparaatsensoren"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Recente locatieverzoeken"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Locatieservices"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Locatiemodus"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"GPS, wifi en mobiele netwerken gebruiken om locatie te schatten"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Wifi en mobiele netwerken gebruiken om locatie te schatten"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"GPS gebruiken om uw locatie te bepalen"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wifi en mobiele netwerklocatie"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Apps toestaan de locatieservice van Google te gebruiken om uw locatie sneller te schatten. Anonieme locatiegegevens worden verzameld en verzonden naar Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Locatie bepaald via wifi"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Gecachte processen weerg."</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Appvoorkeuren herstellen"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Appvoorkeuren herstellen?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Hierdoor worden alle voorkeuren voor de volgende items opnieuw ingesteld:\n\n "<li>"Uitgeschakelde apps"</li>\n" "<li>"Meldingen van uitgeschakelde apps"</li>\n" "<li>"Standaardapps voor acties"</li>\n" "<li>"Beperkingen voor achtergrondgegevens van apps"</li>\n\n" Er gaan geen appgegevens verloren."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Apps herstellen"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Ruimte beheren"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Een andere engine kiezen"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Deze engine voor spraaksynthese kan mogelijk alle tekst verzamelen die wordt gesproken, waaronder persoonlijke gegevens zoals wachtwoorden en creditcardnummers. Deze engine is afkomstig van de <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-engine. Het gebruik van deze engine voor spraaksynthese inschakelen?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Deze taal heeft een werkende netwerkverbinding nodig voor tekst-naar-spraak-uitvoer."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Engines"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Instellingen voor <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> is ingeschakeld"</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Gegevensuitwisseling toestaan wanneer de tablet een ander apparaat fysiek raakt"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Gegevensuitwisseling toestaan wanneer de telefoon een ander apparaat fysiek raakt"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Locatietoegang"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Locatie"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Apps uw locatiegegevens laten gebruiken"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Terug"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Volgende"</string>

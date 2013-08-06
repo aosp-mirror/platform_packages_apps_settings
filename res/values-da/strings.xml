@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Brugeroplysninger"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Vis profiloplysninger på låseskærmen"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Profiloplysninger"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Placeringsadgang"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Placering"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sikkerhed"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låsning af SIM-kort og lager for loginoplysninger"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Angiv Min placering, oplåsning af skærmen, lager for loginoplysninger"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Indsæt SIM-kort, og genstart"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Opret forbindelse til internettet"</string>
     <string name="location_title" msgid="1029961368397484576">"Min placering"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Tilstand"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Høj nøjagtighed"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Batteribesparelse"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Kun enhedens sensorer"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Seneste placeringsanmodninger"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Placeringstjenester"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Placeringstilstand"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Beregn placering med GPS, Wi-Fi og mobilnetværk"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Beregn placering med Wi-Fi og mobilnetværk"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Find din placering med GPS"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Placering af Wi-Fi- og mobilnet."</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Tillad, at apps bruger Googles placeringstjeneste til at beregne din placering hurtigere. Der indsamles anonyme placeringsdata, som sendes til Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Placeringen fastlægges af Wi-Fi"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Cachelagrede processer"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Nulstil app-præferencer"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Nulstil app-præferencer?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Dette vil nulstille alle præferencer for:\n\n"<li>"deaktiverede apps"</li>\n<li>"underretninger om deaktiverede apps"</li>\n<li>"standardapplikationer til handlinger"</li>\n<li>"begrænsninger for baggrundsdata for apps"</li>\n\n"Du vil ikke miste nogen appdata."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Nulstil apps"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrer plads"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Vælg en anden maskine"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Denne tale kan muligvis indsamle al den tekst, der udtales, inklusive personlige data som adgangskoder og kreditkortnumre. Den kommer fra <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-maskinen. Aktivér brug af denne talesyntesemaskine?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Der kræves en aktiv netværksforbindelse, for at tekst-til-tale kan anvendes på dette sprog."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Maskiner"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-indstillinger"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> er aktiveret"</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Tillad dataudveksling, når tabletten rører en anden enhed"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Tillad dataudveksling, når telefonen rører en anden enhed"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Placeringsadgang"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Placering"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Tillad, at apps bruger dine placeringsoplysninger"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Tilbage"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Næste"</string>

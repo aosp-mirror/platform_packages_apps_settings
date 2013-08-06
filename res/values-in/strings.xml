@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Info pengguna"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Tampilkan info profil di layar kunci"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Info profil"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Akses lokasi"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Lokasi"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Keamanan"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Setel Lokasiku, pembuka kunci layar, kunci kartu SIM, kunci penyimpanan kredensial"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Setel Lokasiku, pembuka kunci layar, kunci penyimpanan kredensial"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Masukkan kartu SIM dan mulai ulang"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Sambungkan ke internet"</string>
     <string name="location_title" msgid="1029961368397484576">"Lokasiku"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Mode"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Akurasi tinggi"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Hemat baterai"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Khusus sensor perangkat"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Permintaan lokasi terbaru"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Layanan lokasi"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Mode lokasi"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Pakai GPS, Wi‑Fi, &amp; jaringan seluler utk perkiraan lokasi"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Pakai Wi‑Fi &amp; jaringan seluler utk perkiraan lokasi"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Pakai GPS utk penentuan lokasi"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Lokasi Wi-Fi &amp; seluler"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Izinkan aplikasi menggunakan layanan lokasi Google untuk memperkirakan lokasi Anda dengan lebih cepat. Data lokasi anonim akan dikumpulkan dan dikirim ke Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Lokasi yang ditentukan oleh Wi-Fi"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Tampilkn proses pd tmbolok"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Setel ulang pref aplikasi"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Setel ulang pref aplikasi?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Tindakan ini akan menyetel ulang semua preferensi untuk:\n\n "<li>"Aplikasi yang dinonaktifkan"</li>\n" "<li>"Pemberitahuan aplikasi yang dinonaktifkan"</li>\n" "<li>"Aplikasi default untuk tindakan"</li>\n" "<li>"Batas data latar belakang untuk aplikasi"</li>\n\n" Anda tidak akan kehilangan data aplikasi apa pun."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Setel ulang aplikasi"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Kelola ruang"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Pilih mesin lain"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Mesin sintesis suara ini mungkin dapat mengumpulkan semua teks yang akan diucapkan, termasuk di antaranya data pribadi seperti sandi dan nomor kartu kredit. Berasal dari <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> aplikasi. Gunakan metode masukan ini?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Bahasa ini perlu sambungan jaringan yang bekerja untuk keluaran text-to-speech."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Mesin"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> setelan"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> diaktifkan"</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Memungkinkan pertukaran data saat tablet bersentuhan dengan perangkat lain"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Memungkinkan pertukaran data saat ponsel bersentuhan dengan perangkat lain"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Akses lokasi"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Lokasi"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Memungkinkan aplikasi menggunakan informasi lokasi Anda"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Kembali"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Berikutnya"</string>

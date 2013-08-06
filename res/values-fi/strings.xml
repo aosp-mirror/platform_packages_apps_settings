@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Käyttäjätiedot"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Näytä profiilin tiedot lukitusruudulla"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Profiilin tiedot"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Sijainnin käyttöoikeus"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Sijainti"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Suojaus"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Aseta Oma sijainti, näytön lukituksen poisto, SIM-kortin lukitus, käyttöoikeustietojen tallennustilan lukitus"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Aseta Oma sijainti, näytön lukituksen poisto, käyttöoikeustietojen tallennustilan lukitus"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Aseta SIM-kortti ja käynnistä uudelleen"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Muodosta yhteys internetiin"</string>
     <string name="location_title" msgid="1029961368397484576">"Oma sijainti"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Tila"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Suuri tarkkuus"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Virransäästötila"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Vain laitteen antureilla"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Viimeisimmät sijaintipyynnöt"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Sijaintipalvelut"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Paikannustila"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Paikanna GPS:n ja wifi- ja mobiiliverkkojen avulla"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Paikanna wifi- ja mobiiliverkkojen avulla"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Paikanna sijainti GPS:n avulla"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wifi- ja mobiiliverkkosijainti"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Anna sovellusten arvioida sijaintisi Googlen sijaintipalvelulla. Anonyymejä sijaintitietoja kerätään ja lähetetään Googlelle."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Sijainti on määritetty wifi-yhteyden perusteella"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Näytä välimuistiprosessit"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Nollaa sovellusasetukset"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Nollaa sovellusasetukset?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Tämä nollaa kaikki seuraavat asetukset:\n\n "<li>"Käytöstä poistetut sovellukset"</li>\n" "<li>"Käytöstä poistetut sovellusilmoitukset"</li>\n" "<li>"Toimintojen oletussovellukset"</li>\n" "<li>"Taustasovellusten tietojenkäyttörajoitukset"</li>\n\n" Et menetä mitään sovellusten tietoja."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Nollaa sovellukset"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Hallinnoi tallennustilaa"</string>
     <string name="filter" msgid="2018011724373033887">"Suodata"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Valitse toinen moottori"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Tämä puhesynteesimoottori saattaa kerätä kaiken puhutun tekstin, mukaan lukien henkilökohtaiset tiedot kuten salasanat ja luottokorttinumerot. Se on lähtöisin moottorista <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Haluatko ottaa tämän puhesynteesimoottorin käyttöön?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Tämä kieli vaatii verkkoyhteyden, jotta tekstistä puheeksi muuntaminen toimii."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Moottorit"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-asetukset"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> on käytössä"</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Salli tiedonsiirto, kun tablet-laite koskettaa toista laitetta"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Sijainnin käyttöoikeus"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Sijainti"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Anna sovellusten käyttää sijaintitietojasi"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Edellinen"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Seuraava"</string>
