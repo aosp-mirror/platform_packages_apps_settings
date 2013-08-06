@@ -97,13 +97,6 @@
         android:title="@string/applications_settings"
         android:id="@+id/application_settings" />
 
-    <!-- Manage restrictions -->
-    <header
-        android:fragment="com.android.settings.users.RestrictionSettings"
-        android:icon="@drawable/ic_settings_multiuser"
-        android:title="@string/restriction_settings_title"
-        android:id="@+id/restriction_settings" />
-
     <!-- Manage users -->
     <header
         android:fragment="com.android.settings.users.UserSettings"
@@ -117,7 +110,6 @@
         android:id="@+id/manufacturer_settings">
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
-
 
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
