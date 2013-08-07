@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Datos de usuario"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostrar datos del perfil en pantalla bloqueada"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Datos del perfil"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Acceso a la ubicación"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Ubicación"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Seguridad"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Establecer Mi ubicación, desbloqueo de pantalla, bloqueo de la tarjeta SIM, bloqueo de almacenamiento de credenciales"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Establecer Mi ubicación, desbloqueo de pantalla, bloqueo de almacenamiento de credencial"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Inserta la tarjeta SIM y reinicia."</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Conéctate a Internet."</string>
     <string name="location_title" msgid="1029961368397484576">"Mi ubicación"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Modo"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Alta precisión"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Ahorro de batería"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Solo sensores del dispositivo"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Solicit. ubicación recientes"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Servicios de ubicación"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Modo de ubicación"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Ubicar con GPS/Wi-Fi/red móvil"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Ubicar con Wi‑Fi y red móvil"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Ubicar con GPS"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Ubicación de Wi-Fi y red móvil"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que aplicaciones usen el servicio de ubicación de Google para calcular tu ubicación (se enviarán datos anónimos a Google)"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Ubicación determinada por Wi-Fi"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Mostrar procesos almacenados en la memoria caché"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Restablecer preferencias"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"¿Restablec. preferencias?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Se restablecerán las preferencias de:\n\n "<li>"aplicaciones desactivadas,"</li>\n" "<li>"notificaciones de aplicaciones desactivadas,"</li>\n" "<li>"aplicaciones predeterminadas para diferentes acciones,"</li>\n" "<li>"restricciones de datos en segundo plano para las aplicaciones."</li>\n\n" No perderás los datos de ninguna aplicación."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restablecer aplicaciones"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrar el espacio"</string>
     <string name="filter" msgid="2018011724373033887">"Filtro"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Elegir otro motor"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Es posible que este motor de síntesis de voz pueda recopilar todo el texto que se hablará, incluidos los datos personales como las contraseñas y los números de tarjetas de crédito. Proviene del motor <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. ¿Deseas activar el uso de este motor de síntesis de voz?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Este idioma necesita una conexión de red en funcionamiento para la salida de texto a voz."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Motores"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Configuración de <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> está habilitado."</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Permitir el intercambio de datos cuando la tablet toque otro dispositivo"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Permitir el intercambio de datos cuando el teléfono toque otro dispositivo"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Acceso a la ubicación"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Ubicación"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Permitir que las aplicaciones usen la información de tu ubicación"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Atrás"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Siguiente"</string>

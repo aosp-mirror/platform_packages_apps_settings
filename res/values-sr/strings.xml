@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Подаци о кориснику"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Прикажи податке о профилу на закључаном екрану"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Подаци о профилу"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Приступ локацији"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Локација"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Безбедност"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Подешавање Моје локације, откључавања екрана, закључавања SIM картице и закључавања акредитива складишта"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Подешавање Моје локације, откључавања екрана, закључавања складишта акредитива"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Убаците SIM картицу и поново покрените"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Повежите се са интернетом"</string>
     <string name="location_title" msgid="1029961368397484576">"Мојa локацијa"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Режим"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Велика прецизност"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Уштеда батерије"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Само сензори за уређаје"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Недавни захтеви за локацију"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Услуге локације"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим локације"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"GPS, Wi‑Fi и мобилне мреже за приближну локацију"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Wi‑Fi и мобилне мреже за приближну локацију"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"GPS за тачну локацију"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Локац. на основу Wi-Fi и моб. мреже"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Нека апл. користе Google-ову услугу лоцирања за брже одређивање локације. Анонимни подаци о локацији прикупљаће се и слати Google-у."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Локација се одређује помоћу Wi-Fi-ја"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Прикажи кеширане процесе"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Ресетуј подешавања аплик."</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Жел. да ресет. под. апл.?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Овим ћете ресетовати сва подешавања за:\n\n "<li>"Онемогућене апликације"</li>\n" "<li>"Обавештења о онемогућеним апликацијама"</li>\n" "<li>"Подразумеване апликације за радње"</li>\n" "<li>"Ограничења података у позадини за апликације"</li>\n\n" Нећете изгубити никакве податке о апликацијама."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Ресетуј апликације"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Управљај простором"</string>
     <string name="filter" msgid="2018011724373033887">"Филтрирај"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Изабери други уређај"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Ова технологија за синтезу говора можда може да прикупља сав текст који ће бити изговорен, укључујући личне податке као што су лозинке и бројеви кредитних картица. То потиче из технологије <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Желите ли да омогућите коришћење ове технологије за синтезу говора?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"За овај језик је потребна исправна мрежна веза за претварање језика у говор."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Машине"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> подешавања"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> је омогућено"</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Дозволите размену података када таблет додирне други уређај"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Дозволите размену података када телефон додирне други уређај"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Приступ локацији"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Локација"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Дозволите да апликације користе информације о локацији"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Назад"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Даље"</string>

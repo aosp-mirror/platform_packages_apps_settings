@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"معلومات المستخدم"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"إظهار معلومات الملف الشخصي في شاشة التأمين"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"معلومات الملف الشخصي"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"الدخول إلى الموقع"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"الموقع"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"الأمان"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"تعيين موقعي، إلغاء تأمين الشاشة، تأمين بطاقة SIM، تأمين تخزين الاعتماد"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"تعيين موقعي، إلغاء تأمين الشاشة، تأمين تخزين الاعتماد"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"الرجاء إدخال بطاقة SIM وإعادة التشغيل"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"الرجاء الاتصال بالإنترنت"</string>
     <string name="location_title" msgid="1029961368397484576">"موقعي"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"الوضع"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"دقة عالية"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"توفير شحن البطارية"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"أجهزة استشعار الجهاز فقط"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"طلبات الموقع الأخيرة"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"خدمات الموقع"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"وضع الموقع"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"GPS وشبكات جوّال لتقدير الموقع"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Wi-Fi وشبكة جوال لتقدير الموقع"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"استخدام GPS لتحديد موقعك"</string>
     <string name="location_network_based" msgid="9134175479520582215">"شبكة Wi-Fi وموقع شبكة الجوّال"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"دع التطبيقات تستخدم خدمة الموقع من Google لتقييم موقعك بشكل أسرع. سيتم جمع بيانات الموقع غير محددة الهوية وإرسالها إلى Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"الموقع الذي تم تحديده بواسطة Wi-Fi"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"عرض العمليات المخزنة مؤقتًا"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"إعادة تعيين تفضيلات التطبيقات"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"هل تريد إعادة تعيين تفضيلات التطبيقات؟"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"سيؤدي هذا إلى إعادة تعيين جميع تفضيلات:\n\n "<li>"التطبيقات المعطلة"</li>\n" "<li>"إشعارات التطبيقات المعطلة"</li>\n" "<li>"التطبيقات الافتراضية للإجراءات"</li>\n" "<li>"قيود بيانات الخلفية للتطبيقات"</li>\n\n" لن تفقد أي بيانات للتطبيقات."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"إعادة تعيين التطبيقات"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"إدارة المساحة"</string>
     <string name="filter" msgid="2018011724373033887">"تصفية"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"اختيار محرك آخر"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"ربما يمكن لمحرك اصطناع الحديث جمع كل النص التي سيتم نطقه، بما في ذلك البيانات الشخصية مثل كلمات المرور وأرقام بطاقة الائتمان. يتم إحضار ذلك من المحرك <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. هل تريد تمكين استخدام محرك اصطناع الحديث هذا؟"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"تتطلب هذه اللغة اتصال شبكة سليمًا لتحويل النص إلى كلام."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"المحركات"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"إعدادات <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"تم تمكين <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
@@ -1915,7 +1936,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC (الاتصالات قريبة المدى)"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"السماح بتبادل البيانات عندما يلمس الجهاز اللوحي جهازًا آخر"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"السماح بتبادل البيانات عندما يلمس الهاتف جهازًا آخر"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"الدخول إلى الموقع"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"الموقع"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"السماح للتطبيقات باستخدام المعلومات حول موقعك"</string>
     <string name="wizard_back" msgid="5567007959434765743">"رجوع"</string>
     <string name="wizard_next" msgid="3606212602795100640">"التالي"</string>

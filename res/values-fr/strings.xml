@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Infos utilisateur"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Afficher infos de profil sur écran de verrouillage"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Infos de profil"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"Données de localisation"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Localisation"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sécurité"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Définir les paramètres de l\'option Ma position et de verrouillage"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Définir les paramètres de la fonction Ma position, de déverrouillage de l\'écran et de verrouillage du stockage des identifiants"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insérez la carte SIM, puis redémarrez."</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Connectez-vous à Internet."</string>
     <string name="location_title" msgid="1029961368397484576">"Ma position"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"Mode"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Haute précision"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Économie de batterie"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Capteurs appareil uniquement"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Demandes localisation récentes"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Services de localisation"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Mode de localisation"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Utilis. GPS, réseaux Wi-Fi et mob. pour estimer position"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Utilis. réseaux Wi-Fi et mob. pour estimer position"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Utiliser GPS pour vous localiser"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Localis. via Wi-Fi et réseaux mobiles"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Autoriser applis à utiliser localisation Google pour estimer position plus rapidement. Infos localisation anonymes envoyées à Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Position déterminée par le Wi-Fi"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Voir processus en cache"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Réinitialiser préf. applis"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Réinitialiser préférences ?"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"Cette opération entraîne la réinitialisation de toutes les préférences pour : \n\n "<li>"les applications désactivées ;"</li>\n" "<li>"les notifications des applications désactivées ;"</li>\n" "<li>"les applications utilisées par défaut pour certaines actions ;"</li>\n" "<li>"les restrictions relatives aux données en arrière-plan pour les applications."</li>\n\n" Vous ne perdrez aucune des données relatives à ces applications."</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Réinitialiser applis"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gérer l\'espace"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrer"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Sélectionner un autre moteur"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Ce moteur de synthèse vocale est susceptible de collecter tout ce qui sera lu, y compris les données personnelles comme les mots de passe et les numéros de carte de paiement. Il provient du moteur <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Voulez-vous activer son utilisation ?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Une connexion réseau est nécessaire pour la synthèse vocale dans cette langue."</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Moteurs"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Paramètres <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> est activé."</string>
@@ -1917,7 +1938,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Autoriser l\'échange de données lorsque le téléphone est en contact avec un autre appareil"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"Accès aux données de localisation"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Localisation"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Autoriser les applications à utiliser vos données de localisation"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Retour"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Suivant"</string>

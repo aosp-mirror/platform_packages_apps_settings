@@ -311,7 +311,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"使用者資訊"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"在鎖定畫面上顯示個人資料資訊"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"個人資料資訊"</string>
-    <string name="location_settings_title" msgid="4483843407328665068">"位置資訊存取"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"定位"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"安全性"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"設定我的位置、解除鎖定畫面及鎖定認證儲存空間"</string>
@@ -985,6 +985,16 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"請插入 SIM 卡，並重新啟動裝置"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"請連線至網際網路"</string>
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
+    <string name="location_mode_title" msgid="3982009713118421689">"模式"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"高精確度"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"節約耗電量"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"僅限裝置感應器"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近的定位要求"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"定位服務"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"定位模式"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"使用 GPS、Wi-Fi 和行動網路預估位置"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"使用 Wi-Fi 和行動網路預估位置"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"使用 GPS 定出您的精確位置"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi 和行動網路位置"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"允許應用程式使用 Google 的定位服務加速判斷您的約略位置。系統會收集匿名的位置資料並傳送給 Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"根據 Wi-Fi 判定位置"</string>
@@ -1106,7 +1116,8 @@
     <string name="show_background_processes" msgid="2009840211972293429">"顯示快取處理程序"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"重設應用程式偏好設定"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"重設應用程式偏好設定？"</string>
-    <string name="reset_app_preferences_desc" msgid="1118129530999596317">"這會將下列項目的所有偏好設定全部重設：\n\n "<li>"已停用的應用程式"</li>\n" "<li>"已停用的應用程式通知"</li>\n" "<li>"執行動作的預設應用程式"</li>\n" "<li>"應用程式背景資料限制"</li>\n\n" 請放心，您的所有應用程式資料都不會遭到移除。"</string>
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"重設應用程式"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"管理空間"</string>
     <string name="filter" msgid="2018011724373033887">"篩選"</string>
@@ -1491,6 +1502,16 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"選擇其他引擎"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"此語音合成引擎可能會收集您輸入的所有語音，包括密碼和信用卡號等個人資料。此引擎來自「<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>」引擎，是否要使用此語音合成引擎？"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"您必須連上網路才能使用文字轉語音輸出功能。"</string>
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"引擎"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>設定"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已啟用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
@@ -1919,7 +1940,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"允許平板電腦與其他裝置接觸時交換資料"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"允許手機與其他裝置接觸時交換資料"</string>
-    <string name="restriction_location_enable_title" msgid="8134436816263688497">"位置資訊存取"</string>
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"位置"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"允許應用程式使用您的位置資訊"</string>
     <string name="wizard_back" msgid="5567007959434765743">"返回"</string>
     <string name="wizard_next" msgid="3606212602795100640">"下一步"</string>
