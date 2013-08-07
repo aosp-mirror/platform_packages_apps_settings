@@ -30,6 +30,7 @@ import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,6 +49,8 @@ public class InputMethodSettingValuesWrapper {
             new HashMap<String, InputMethodInfo>();
     private final InputMethodSettings mSettings;
     private final InputMethodManager mImm;
+    private final HashSet<InputMethodInfo> mAsciiCapableEnabledImis =
+            new HashSet<InputMethodInfo>();
 
     public static InputMethodSettingValuesWrapper getInstance(Context context) {
         if (sInstance == null) {
@@ -86,6 +89,26 @@ public class InputMethodSettingValuesWrapper {
             mMethodList.addAll(imms);
             for (InputMethodInfo imi : imms) {
                 mMethodMap.put(imi.getId(), imi);
+            }
+            updateAsciiCapableEnabledImis();
+        }
+    }
+
+    // TODO: Add a cts to ensure at least one AsciiCapableSubtypeEnabledImis exist
+    private void updateAsciiCapableEnabledImis() {
+        synchronized (mMethodMap) {
+            mAsciiCapableEnabledImis.clear();
+            final List<InputMethodInfo> enabledImis = mSettings.getEnabledInputMethodListLocked();
+            for (final InputMethodInfo imi : enabledImis) {
+                final int subtypeCount = imi.getSubtypeCount();
+                for (int i = 0; i < subtypeCount; ++i) {
+                    final InputMethodSubtype subtype = imi.getSubtypeAt(i);
+                    if (InputMethodUtils.SUBTYPE_MODE_KEYBOARD.equalsIgnoreCase(subtype.getMode())
+                            && subtype.isAsciiCapable()) {
+                        mAsciiCapableEnabledImis.add(imi);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -162,7 +185,7 @@ public class InputMethodSettingValuesWrapper {
         return false;
     }
 
-    public static boolean isValidSystemNonAuxAsciiCapableIme(InputMethodInfo imi,
+    public boolean isValidSystemNonAuxAsciiCapableIme(InputMethodInfo imi,
             Context context) {
         if (imi.isAuxiliaryIme()) {
             return false;
@@ -170,7 +193,12 @@ public class InputMethodSettingValuesWrapper {
         if (InputMethodUtils.isValidSystemDefaultIme(true /* isSystemReady */, imi, context)) {
             return true;
         }
-        return InputMethodUtils.containsSubtypeOf(imi, ENGLISH_LOCALE.getLanguage(),
-                InputMethodUtils.SUBTYPE_MODE_KEYBOARD);
+        if (mAsciiCapableEnabledImis.isEmpty()) {
+            Log.w(TAG, "ascii capable subtype enabled imi not found. Fall back to English"
+                    + " Keyboard subtype.");
+            return InputMethodUtils.containsSubtypeOf(imi, ENGLISH_LOCALE.getLanguage(),
+                    InputMethodUtils.SUBTYPE_MODE_KEYBOARD);
+        }
+        return mAsciiCapableEnabledImis.contains(imi);
     }
 }
