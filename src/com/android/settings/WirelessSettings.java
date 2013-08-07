@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import java.util.HashSet;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -75,7 +74,6 @@ public class WirelessSettings extends RestrictedSettingsFragment {
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
-    private final HashSet<Preference> mProtectedByRestictionsPrefs = new HashSet<Preference>();
 
     public WirelessSettings() {
         super(null);
@@ -87,9 +85,8 @@ public class WirelessSettings extends RestrictedSettingsFragment {
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (mProtectedByRestictionsPrefs.contains(preference) && !hasChallengeSucceeded()) {
-            restrictionsPinCheck(RESTRICTIONS_PIN_SET);
-            return false;
+        if (ensurePinRestrictedPreference(preference)) {
+            return true;
         }
         log("onPreferenceTreeClick: preference=" + preference);
         if (preference == mAirplaneModePreference && Boolean.parseBoolean(
@@ -152,13 +149,6 @@ public class WirelessSettings extends RestrictedSettingsFragment {
         if (!TextUtils.isEmpty(mManageMobilePlanMessage)) {
             log("onManageMobilePlanClick: message=" + mManageMobilePlanMessage);
             showDialog(MANAGE_MOBILE_PLAN_DIALOG_ID);
-        }
-    }
-
-    private void protectByRestrictions(String key) {
-        Preference pref = findPreference(key);
-        if (pref != null) {
-            mProtectedByRestictionsPrefs.add(pref);
         }
     }
 
