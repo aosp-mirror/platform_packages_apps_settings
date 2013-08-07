@@ -330,7 +330,7 @@ public class Utils {
     /**
      * Returns the WIFI IP Addresses, if any, taking into account IPv4 and IPv6 style addresses.
      * @param context the application context
-     * @return the formatted and comma-separated IP addresses, or null if none.
+     * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getWifiIpAddresses(Context context) {
         ConnectivityManager cm = (ConnectivityManager)
@@ -343,7 +343,7 @@ public class Utils {
      * Returns the default link's IP addresses, if any, taking into account IPv4 and IPv6 style
      * addresses.
      * @param context the application context
-     * @return the formatted and comma-separated IP addresses, or null if none.
+     * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getDefaultIpAddresses(Context context) {
         ConnectivityManager cm = (ConnectivityManager)
@@ -354,14 +354,14 @@ public class Utils {
 
     private static String formatIpAddresses(LinkProperties prop) {
         if (prop == null) return null;
-        Iterator<InetAddress> iter = prop.getAddresses().iterator();
+        Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) return null;
         // Concatenate all available addresses, comma separated
         String addresses = "";
         while (iter.hasNext()) {
             addresses += iter.next().getHostAddress();
-            if (iter.hasNext()) addresses += ", ";
+            if (iter.hasNext()) addresses += "\n";
         }
         return addresses;
     }
