@@ -143,7 +143,8 @@ public class Settings extends PreferenceActivity
             R.id.date_time_settings,
             R.id.about_settings,
             R.id.accessibility_settings,
-            R.id.print_settings
+            R.id.print_settings,
+            R.id.nfc_payment_settings
     };
 
     private SharedPreferences mDevelopmentPreferences;
@@ -556,6 +557,10 @@ public class Settings extends PreferenceActivity
                         || Utils.isMonkeyRunning()) {
                     target.remove(i);
                 }
+            } else if (id == R.id.nfc_payment_settings) {
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC_HCE)) {
+                    target.remove(i);
+                }
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
                     target.remove(i);
@@ -950,4 +955,5 @@ public class Settings extends PreferenceActivity
     public static class UserSettingsActivity extends Settings { /* empty */ }
     public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
     public static class UsbSettingsActivity extends Settings { /* empty */ }
+    public static class NfcPaymentActivity extends Settings { /* empty */ }
 }
