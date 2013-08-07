@@ -45,7 +45,6 @@ import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -75,14 +74,13 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_SHOW_PASSWORD = "show_password";
     private static final String KEY_CREDENTIAL_STORAGE_TYPE = "credential_storage_type";
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
+    private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
-
-    private final HashSet<Preference> mProtectedByRestictionsPrefs = new HashSet<Preference>();
 
     private PackageManager mPM;
     DevicePolicyManager mDPM;
@@ -245,6 +243,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
         // Show password
         mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
+        mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
 
         // Credential storage
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
@@ -257,7 +256,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                         : R.string.credential_storage_type_software;
             credentialStorageType.setSummary(storageSummaryRes);
 
-            mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
         } else {
             removePreference(KEY_CREDENTIALS_MANAGER);
         }
@@ -312,14 +310,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (shouldBePinProtected(RESTRICTIONS_PIN_SET)) {
             protectByRestrictions(mToggleAppInstallation);
             protectByRestrictions(mToggleVerifyApps);
+            protectByRestrictions(mResetCredentials);
+            protectByRestrictions(root.findPreference(KEY_CREDENTIALS_INSTALL));
         }
         return root;
-    }
-
-    private void protectByRestrictions(Preference pref) {
-        if (pref != null) {
-            mProtectedByRestictionsPrefs.add(pref);
-        }
     }
 
     private int getNumEnabledNotificationListeners() {
@@ -487,11 +481,9 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (mProtectedByRestictionsPrefs.contains(preference)
-                && !restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
-            return false;
+        if (ensurePinRestrictedPreference(preference)) {
+            return true;
         }
-
         final String key = preference.getKey();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();

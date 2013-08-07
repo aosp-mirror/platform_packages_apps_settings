@@ -80,7 +80,8 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.TrustedCredentialsSettings"/>
 
-        <Preference android:title="@string/credentials_install"
+        <Preference android:key="credentials_install"
+                android:title="@string/credentials_install"
                 android:summary="@string/credentials_install_summary"
                 android:persistent="false">
             <intent android:action="android.credentials.INSTALL"

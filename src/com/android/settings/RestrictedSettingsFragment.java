@@ -16,11 +16,15 @@
 
 package com.android.settings;
 
+import java.util.HashSet;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 
 /**
  * Base class for settings activities that should be pin protected when in restricted mode.
@@ -49,6 +53,8 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     private UserManager mUserManager;
 
     private final String mRestrictionKey;
+
+    private final HashSet<Preference> mProtectedByRestictionsPrefs = new HashSet<Preference>();
 
     /**
      * @param restrictionKey The restriction key to check before pin protecting
@@ -161,5 +167,31 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
        boolean restricted = RESTRICTIONS_PIN_SET.equals(restrictionKey)
                || mUserManager.hasUserRestriction(restrictionKey);
        return restricted && mUserManager.hasRestrictionsPin();
+   }
+
+   /**
+    * If the preference is one that was added by protectByRestrictions(), then it will
+    * prompt the user for the restrictions pin if they haven't entered it already.
+    * Intended to be called at the top of onPreferenceTreeClick.  If this function returns
+    * true, then onPreferenceTreeClick should return true.
+    */
+   boolean ensurePinRestrictedPreference(Preference preference) {
+       return mProtectedByRestictionsPrefs.contains(preference)
+               && !restrictionsPinCheck(RESTRICTIONS_PIN_SET);
+   }
+
+    /**
+     * Call this with any preferences that should require the PIN to be entered
+     * before they are accessible.
+     */
+   protected void protectByRestrictions(Preference pref) {
+       if (pref != null) {
+           mProtectedByRestictionsPrefs.add(pref);
+       }
+   }
+
+   protected void protectByRestrictions(String key) {
+       Preference pref = findPreference(key);
+       protectByRestrictions(pref);
    }
 }
