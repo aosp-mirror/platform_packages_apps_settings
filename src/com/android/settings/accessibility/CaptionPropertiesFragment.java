@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
@@ -50,6 +51,9 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private ColorPreference mEdgeColor;
     private ColorPreference mBackgroundColor;
     private ColorPreference mBackgroundOpacity;
+    private PreferenceCategory mCustom;
+
+    private boolean mShowingCustom;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -57,6 +61,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.captioning_settings);
         initializeAllPreferences();
         updateAllPreferences();
+        refreshShowingCustom();
         installUpdateListeners();
     }
 
@@ -70,6 +75,9 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     }
 
     private void initializeAllPreferences() {
+        mLocale = (LocalePreference) findPreference("captioning_locale");
+        mFontSize = (ListPreference) findPreference("captioning_font_size");
+
         final Resources res = getResources();
         final int[] presetValues = res.getIntArray(R.array.captioning_preset_selector_values);
         final String[] presetTitles = res.getStringArray(R.array.captioning_preset_selector_titles);
@@ -77,34 +85,39 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mPreset.setValues(presetValues);
         mPreset.setTitles(presetTitles);
 
+        mCustom = (PreferenceCategory) findPreference("custom");
+        mShowingCustom = true;
+
         final int[] colorValues = res.getIntArray(R.array.captioning_color_selector_values);
         final String[] colorTitles = res.getStringArray(R.array.captioning_color_selector_titles);
-        mForegroundColor = (ColorPreference) findPreference("captioning_foreground_color");
+        mForegroundColor = (ColorPreference) mCustom.findPreference("captioning_foreground_color");
         mForegroundColor.setTitles(colorTitles);
         mForegroundColor.setValues(colorValues);
-        mEdgeColor = (ColorPreference) findPreference("captioning_edge_color");
+        mEdgeColor = (ColorPreference) mCustom.findPreference("captioning_edge_color");
         mEdgeColor.setTitles(colorTitles);
         mEdgeColor.setValues(colorValues);
 
-        final int[] bgColorValues = res.getIntArray(
-                R.array.captioning_background_color_selector_values);
-        final String[] bgColorTitles = res.getStringArray(
-                R.array.captioning_background_color_selector_titles);
-        mBackgroundColor = (ColorPreference) findPreference("captioning_background_color");
+        // Add "none" as an additional option for backgrounds.
+        final int[] bgColorValues = new int[colorValues.length + 1];
+        final String[] bgColorTitles = new String[colorTitles.length + 1];
+        System.arraycopy(colorValues, 0, bgColorValues, 1, colorValues.length);
+        System.arraycopy(colorTitles, 0, bgColorTitles, 1, colorTitles.length);
+        bgColorValues[0] = Color.TRANSPARENT;
+        bgColorTitles[0] = getString(R.string.color_none);
+        mBackgroundColor = (ColorPreference) mCustom.findPreference("captioning_background_color");
         mBackgroundColor.setTitles(bgColorTitles);
         mBackgroundColor.setValues(bgColorValues);
 
         final int[] opacityValues = res.getIntArray(R.array.captioning_opacity_selector_values);
         final String[] opacityTitles = res.getStringArray(
                 R.array.captioning_opacity_selector_titles);
-        mBackgroundOpacity = (ColorPreference) findPreference("captioning_background_opacity");
+        mBackgroundOpacity = (ColorPreference) mCustom.findPreference(
+                "captioning_background_opacity");
         mBackgroundOpacity.setTitles(opacityTitles);
         mBackgroundOpacity.setValues(opacityValues);
 
-        mEdgeType = (EdgeTypePreference) findPreference("captioning_edge_type");
-        mTypeface = (ListPreference) findPreference("captioning_typeface");
-        mFontSize = (ListPreference) findPreference("captioning_font_size");
-        mLocale = (LocalePreference) findPreference("captioning_locale");
+        mEdgeType = (EdgeTypePreference) mCustom.findPreference("captioning_edge_type");
+        mTypeface = (ListPreference) mCustom.findPreference("captioning_typeface");
     }
 
     private void installUpdateListeners() {
@@ -159,6 +172,17 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         }
     }
 
+    private void refreshShowingCustom() {
+        final boolean customPreset = mPreset.getValue() == CaptionStyle.PRESET_CUSTOM;
+        if (!customPreset && mShowingCustom) {
+            getPreferenceScreen().removePreference(mCustom);
+            mShowingCustom = false;
+        } else if (customPreset && !mShowingCustom) {
+            getPreferenceScreen().addPreference(mCustom);
+            mShowingCustom = true;
+        }
+    }
+
     @Override
     public void onValueChanged(ListDialogPreference preference, int value) {
         final ContentResolver cr = getActivity().getContentResolver();
@@ -180,6 +204,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_COLOR, value);
         } else if (mPreset == preference) {
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, value);
+            refreshShowingCustom();
         } else if (mEdgeType == preference) {
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE, value);
         }

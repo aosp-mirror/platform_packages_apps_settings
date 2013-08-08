@@ -47,7 +47,6 @@
         android:key="custom"
         android:title="@string/captioning_custom_options_title" >
         <ListPreference
-            android:dependency="captioning_preset"
             android:entries="@array/captioning_typeface_selector_titles"
             android:entryValues="@array/captioning_typeface_selector_values"
             android:key="captioning_typeface"
@@ -56,13 +55,11 @@
             android:title="@string/captioning_typeface" />
 
         <com.android.settings.accessibility.ColorPreference
-            android:dependency="captioning_preset"
             android:key="captioning_foreground_color"
             android:persistent="false"
             android:title="@string/captioning_foreground_color" />
 
         <com.android.settings.accessibility.EdgeTypePreference
-            android:dependency="captioning_preset"
             android:key="captioning_edge_type"
             android:persistent="false"
             android:title="@string/captioning_edge_type" />
@@ -73,7 +70,6 @@
             android:persistent="false"
             android:title="@string/captioning_edge_color" />
         <com.android.settings.accessibility.ColorPreference
-            android:dependency="captioning_preset"
             android:key="captioning_background_color"
             android:persistent="false"
             android:title="@string/captioning_background_color" />
