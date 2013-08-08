@@ -33,7 +33,8 @@ import java.util.Set;
  */
 class AccessibilityUtils {
     /**
-     * @return the set of enabled accessibility services
+     * @return the set of enabled accessibility services. If there are not services
+     * it returned the unmodifiable {@link Collections#emptySet()}.
      */
     static Set<ComponentName> getEnabledServicesFromSettings(Context context) {
         final String enabledServicesSetting = Settings.Secure.getString(
