@@ -74,6 +74,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 /*
  * Displays preferences for application developers.
@@ -128,6 +129,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
     private static final String DEBUG_HW_OVERDRAW_KEY = "debug_hw_overdraw";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
+    private static final String FORCE_RTL_LAYOUT_KEY = "force_rtl_layout_all_locales";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
@@ -189,6 +191,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mShowHwScreenUpdates;
     private CheckBoxPreference mShowHwLayersUpdates;
     private CheckBoxPreference mDebugLayout;
+    private CheckBoxPreference mForceRtlLayout;
     private ListPreference mDebugHwOverdraw;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
@@ -302,6 +305,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mShowHwScreenUpdates = findAndInitCheckboxPref(SHOW_HW_SCREEN_UPDATES_KEY);
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
+        mForceRtlLayout = findAndInitCheckboxPref(FORCE_RTL_LAYOUT_KEY);
         mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -522,6 +526,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateExperimentalWebViewOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
+        updateForceRtlOptions();
     }
 
     private void resetDangerousOptions() {
@@ -958,6 +963,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         pokeSystemProperties();
     }
 
+    private void updateForceRtlOptions() {
+        updateCheckBox(mForceRtlLayout, Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0);
+    }
+
+    private void writeForceRtlOptions() {
+        boolean value = mForceRtlLayout.isChecked();
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.DEVELOPMENT_FORCE_RTL, value ? 1 : 0);
+        SystemProperties.set(Settings.Global.DEVELOPMENT_FORCE_RTL, value ? "1" : "0");
+        LocalePicker.updateLocale(getActivity().getResources().getConfiguration().locale);
+    }
+
     private void updateCpuUsageOptions() {
         updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
@@ -1263,6 +1281,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeShowHwLayersUpdatesOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
+        } else if (preference == mForceRtlLayout) {
+            writeForceRtlOptions();
         }
 
         return false;
