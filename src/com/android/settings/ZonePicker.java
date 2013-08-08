@@ -288,6 +288,8 @@ public class ZonePicker extends ListFragment {
 
     @Override
     public void onListItemClick(ListView listView, View v, int position, long id) {
+        // Ignore extra clicks
+        if (!isResumed()) return;
         final Map<?, ?> map = (Map<?, ?>)listView.getItemAtPosition(position);
         final String tzId = (String) map.get(KEY_ID);
 
