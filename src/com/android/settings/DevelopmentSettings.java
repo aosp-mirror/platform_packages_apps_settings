@@ -54,7 +54,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -210,7 +209,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             = new ArrayList<CheckBoxPreference>();
 
     private final HashSet<Preference> mDisabledPrefs = new HashSet<Preference>();
-    private final HashSet<Preference> mProtectedByRestrictionsPrefs = new HashSet<Preference>();
 
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
@@ -359,12 +357,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (pref != null) {
             pref.setEnabled(false);
             mDisabledPrefs.add(pref);
-        }
-    }
-
-    private void protectByRestrictions(Preference pref) {
-        if (pref != null) {
-            mProtectedByRestrictionsPrefs.add(pref);
         }
     }
 
@@ -1178,11 +1170,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (mProtectedByRestrictionsPrefs.contains(preference)
-                && !restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
-            return false;
+        if (super.onPreferenceTreeClick(preferenceScreen, preference)) {
+            return true;
         }
-
         if (Utils.isMonkeyRunning()) {
             return false;
         }

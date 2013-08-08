@@ -241,7 +241,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                     mParentFragment = getFragmentManager().findFragmentById(mParentFragmentId);
                     if (!(mParentFragment instanceof DialogCreatable)) {
                         throw new IllegalArgumentException(
-                                (mParentFragment != null 
+                                (mParentFragment != null
                                         ? mParentFragment.getClass().getName()
                                         : mParentFragmentId)
                                 + " must implement "
