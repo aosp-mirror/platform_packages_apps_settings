@@ -64,6 +64,7 @@ import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
 import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.Memory;
@@ -310,6 +311,7 @@ public class Settings extends PreferenceActivity
         DisplaySettings.class.getName(),
         DeviceInfoSettings.class.getName(),
         ManageApplications.class.getName(),
+        ProcessStatsUi.class.getName(),
         NotificationStation.class.getName(),
         AppOpsSummary.class.getName(),
         LocationSettings.class.getName(),
@@ -331,7 +333,7 @@ public class Settings extends PreferenceActivity
         UserSettings.class.getName(),
         NotificationAccessSettings.class.getName(),
         ManageAccountsSettings.class.getName(),
-        PrintingSettings.class.getName()
+        PrintingSettings.class.getName(),
     };
 
     @Override
