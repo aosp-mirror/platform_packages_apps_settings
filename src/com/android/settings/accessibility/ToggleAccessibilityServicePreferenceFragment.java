@@ -39,6 +39,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeListener;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -80,6 +82,10 @@ public class ToggleAccessibilityServicePreferenceFragment
         // Parse the enabled services.
         Set<ComponentName> enabledServices = AccessibilityUtils.getEnabledServicesFromSettings(
                 getActivity());
+
+        if (enabledServices == (Set<?>) Collections.emptySet()) {
+            enabledServices = new HashSet<ComponentName>();
+        }
 
         // Determine enabled services and accessibility state.
         ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
