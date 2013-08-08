@@ -37,9 +37,18 @@ import com.android.settings.R;
  * uncheck all the other preferences, you should do that by code yourself.
  */
 public class RadioButtonPreference extends CheckBoxPreference {
+    private boolean mValidListener;
+
+    public interface OnClickListener {
+        public abstract void onRadioButtonClicked(RadioButtonPreference emiter);
+    }
+
+    private OnClickListener mListener = null;
+
     public RadioButtonPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setWidgetLayoutResource(R.layout.preference_widget_radiobutton);
+        mValidListener = false;
     }
 
     public RadioButtonPreference(Context context, AttributeSet attrs) {
@@ -48,6 +57,25 @@ public class RadioButtonPreference extends CheckBoxPreference {
 
     public RadioButtonPreference(Context context) {
         this(context, null);
+    }
+
+    void setOnClickListener(OnClickListener listener) {
+        mListener = listener;
+    }
+
+    public void pause() {
+        mValidListener = false;
+    }
+
+    public void resume() {
+        mValidListener = true;
+    }
+
+    @Override
+    public void onClick() {
+        if (mListener != null) {
+            mListener.onRadioButtonClicked(this);
+        }
     }
 
     @Override

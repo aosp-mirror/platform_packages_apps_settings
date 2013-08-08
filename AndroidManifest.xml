@@ -818,6 +818,7 @@
         </activity>
 
         <activity android:name="Settings$LocationSettingsActivity"
+                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
