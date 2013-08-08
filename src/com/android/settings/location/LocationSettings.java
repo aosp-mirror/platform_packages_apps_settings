@@ -36,8 +36,11 @@ import com.android.settings.R;
 public class LocationSettings extends LocationSettingsBase
         implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = LocationSettings.class.getSimpleName();
+    /** Key for preference screen "Mode" */
     private static final String KEY_LOCATION_MODE = "location_mode";
+    /** Key for preference category "Recent location requests" */
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
+    /** Key for preference category "Location services" */
     private static final String KEY_LOCATION_SERVICES = "location_services";
 
     private Switch mSwitch;
@@ -99,6 +102,9 @@ public class LocationSettings extends LocationSettingsBase
         mLocationServices = (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
 
         Activity activity = getActivity();
+
+        RecentLocationApps recentApps = new RecentLocationApps(activity);
+        recentApps.fillAppList(mRecentLocationRequests);
 
         if (activity instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
