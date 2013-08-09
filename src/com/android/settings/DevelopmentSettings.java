@@ -1283,6 +1283,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeDebugLayoutOptions();
         } else if (preference == mForceRtlLayout) {
             writeForceRtlOptions();
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
         return false;
