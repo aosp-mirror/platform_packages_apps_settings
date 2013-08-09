@@ -18,7 +18,9 @@ package com.android.settings.applications;
 
 import com.android.internal.app.ProcessStats;
 
-public class ProcStatsEntry {
+import java.util.ArrayList;
+
+public final class ProcStatsEntry {
     final String mPackage;
     final int mUid;
     final String mName;
@@ -27,7 +29,10 @@ public class ProcStatsEntry {
     final long mAvgPss;
     final long mWeight;
 
-    ProcStatsEntry(ProcessStats.ProcessState proc, ProcessStats.ProcessDataCollection tmpTotals) {
+    ArrayList<Service> mServices;
+
+    public ProcStatsEntry(ProcessStats.ProcessState proc,
+            ProcessStats.ProcessDataCollection tmpTotals) {
         ProcessStats.computeProcessData(proc, tmpTotals, 0);
         mPackage = proc.mPackage;
         mUid = proc.mUid;
@@ -36,5 +41,36 @@ public class ProcStatsEntry {
         mDuration = tmpTotals.totalTime;
         mAvgPss = tmpTotals.avgPss;
         mWeight = mDuration * mAvgPss;
+    }
+
+    public void addServices(ProcessStats.PackageState pkgState) {
+        for (int isvc=0, NSVC=pkgState.mServices.size(); isvc<NSVC; isvc++) {
+            ProcessStats.ServiceState svc = pkgState.mServices.valueAt(isvc);
+            // XXX can't tell what process it is in!
+            if (mServices == null) {
+                mServices = new ArrayList<Service>();
+            }
+            mServices.add(new Service(svc));
+        }
+    }
+
+    public static final class Service {
+        final String mPackage;
+        final String mName;
+        final long mDuration;
+
+        public Service(ProcessStats.ServiceState service) {
+            mPackage = service.mPackage;
+            mName = service.mName;
+            mDuration = ProcessStats.dumpSingleServiceTime(null, null, service,
+                    ProcessStats.ServiceState.SERVICE_STARTED,
+                    ProcessStats.STATE_NOTHING, 0, 0)
+                + ProcessStats.dumpSingleServiceTime(null, null, service,
+                    ProcessStats.ServiceState.SERVICE_BOUND,
+                    ProcessStats.STATE_NOTHING, 0, 0)
+                + ProcessStats.dumpSingleServiceTime(null, null, service,
+                    ProcessStats.ServiceState.SERVICE_EXEC,
+                    ProcessStats.STATE_NOTHING, 0, 0);
+        }
     }
 }

@@ -33,6 +33,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.util.SparseArray;
 import android.util.TimeUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,11 +61,24 @@ public class ProcessStatsUi extends PreferenceFragment {
 
     static final int MAX_ITEMS_TO_LIST = 20;
 
+    final static Comparator<ProcStatsEntry> sEntryCompare = new Comparator<ProcStatsEntry>() {
+        @Override
+        public int compare(ProcStatsEntry lhs, ProcStatsEntry rhs) {
+            if (lhs.mWeight < rhs.mWeight) {
+                return 1;
+            } else if (lhs.mWeight > rhs.mWeight) {
+                return -1;
+            }
+            return 0;
+        }
+    };
+
     private static ProcessStats sStatsXfer;
 
     IProcessStats mProcessStats;
     UserManager mUm;
     ProcessStats mStats;
+    int mMemState;
 
     private PreferenceGroup mAppListGroup;
     private Preference mMemStatusPref;
@@ -169,8 +183,17 @@ public class ProcessStatsUi extends PreferenceFragment {
         mAppListGroup.addPreference(mMemStatusPref);
         String durationString = Utils.formatElapsedTime(getActivity(),
                 mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime);
+        CharSequence memString;
+        CharSequence[] memStates = getResources().getTextArray(R.array.ram_states);
+        if (mMemState >= 0 && mMemState < memStates.length) {
+            memString = memStates[mMemState];
+        } else {
+            memString = "?";
+        }
         mMemStatusPref.setTitle(getActivity().getString(R.string.process_stats_total_duration,
                 durationString));
+        mMemStatusPref.setSummary(getActivity().getString(R.string.process_stats_memory_status,
+                        memString));
         /*
         mMemStatusPref.setTitle(DateFormat.format(DateFormat.getBestDateTimePattern(
                 getActivity().getResources().getConfiguration().locale,
@@ -188,30 +211,47 @@ public class ProcessStatsUi extends PreferenceFragment {
 
         long now = SystemClock.uptimeMillis();
 
+        final PackageManager pm = getActivity().getPackageManager();
+
         mTotalTime = ProcessStats.dumpSingleTime(null, null, mStats.mMemFactorDurations,
                 mStats.mMemFactor, mStats.mStartTime, now);
 
+        LinearColorPreference colors = new LinearColorPreference(getActivity());
+        colors.setOrder(-1);
+        mAppListGroup.addPreference(colors);
+
+        long[] memTimes = new long[ProcessStats.ADJ_MEM_FACTOR_COUNT];
+        for (int iscreen=0; iscreen<ProcessStats.ADJ_COUNT; iscreen+=ProcessStats.ADJ_SCREEN_MOD) {
+            for (int imem=0; imem<ProcessStats.ADJ_MEM_FACTOR_COUNT; imem++) {
+                int state = imem+iscreen;
+                memTimes[imem] += mStats.mMemFactorDurations[state];
+            }
+        }
+
+        colors.setRatios(memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL] / (float)mTotalTime,
+                (memTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
+                        + memTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]) / (float)mTotalTime,
+                memTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL] / (float)mTotalTime);
+
+        ArrayList<ProcStatsEntry> procs = new ArrayList<ProcStatsEntry>();
+
+        /*
         ArrayList<ProcessStats.ProcessState> rawProcs = mStats.collectProcessesLocked(
                 ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ,
                 ProcessStats.BACKGROUND_PROC_STATES, now, null);
-
-        final PackageManager pm = getActivity().getPackageManager();
-
-        ArrayList<ProcStatsEntry> procs = new ArrayList<ProcStatsEntry>();
         for (int i=0, N=(rawProcs != null ? rawProcs.size() : 0); i<N; i++) {
             procs.add(new ProcStatsEntry(rawProcs.get(i), totals));
         }
-        Collections.sort(procs, new Comparator<ProcStatsEntry>() {
-            @Override
-            public int compare(ProcStatsEntry lhs, ProcStatsEntry rhs) {
-                if (lhs.mWeight < rhs.mWeight) {
-                    return 1;
-                } else if (lhs.mWeight > rhs.mWeight) {
-                    return -1;
-                }
-                return 0;
+        */
+
+        for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
+            SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
+            for (int iu=0; iu<uids.size(); iu++) {
+                procs.add(new ProcStatsEntry(uids.valueAt(iu), totals));
             }
-        });
+        }
+
+        Collections.sort(procs, sEntryCompare);
         while (procs.size() > MAX_ITEMS_TO_LIST) {
             procs.remove(procs.size()-1);
         }
@@ -232,19 +272,56 @@ public class ProcessStatsUi extends PreferenceFragment {
             ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null);
             ApplicationInfo targetApp = null;
             String label = proc.mName;
+            String pkgName = null;
             if (proc.mUnique) {
+                pkgName = proc.mPackage;
+                proc.addServices(mStats.getPackageStateLocked(proc.mPackage, proc.mUid));
+            } else {
+                // See if there is one significant package that was running here.
+                ArrayList<ProcStatsEntry> subProcs = new ArrayList<ProcStatsEntry>();
+                for (int ipkg=0, NPKG=mStats.mPackages.getMap().size(); ipkg<NPKG; ipkg++) {
+                    SparseArray<ProcessStats.PackageState> uids
+                            = mStats.mPackages.getMap().valueAt(ipkg);
+                    for (int iu=0, NU=uids.size(); iu<NU; iu++) {
+                        if (uids.keyAt(iu) != proc.mUid) {
+                            continue;
+                        }
+                        ProcessStats.PackageState pkgState = uids.valueAt(iu);
+                        boolean match = false;
+                        for (int iproc=0, NPROC=pkgState.mProcesses.size(); iproc<NPROC; iproc++) {
+                            ProcessStats.ProcessState subProc =
+                                    pkgState.mProcesses.valueAt(iproc);
+                            if (subProc.mName.equals(proc.mName)) {
+                                match = true;
+                                subProcs.add(new ProcStatsEntry(subProc, totals));
+                            }
+                        }
+                        if (match) {
+                            proc.addServices(mStats.getPackageStateLocked(proc.mPackage,
+                                    proc.mUid));
+                        }
+                    }
+                }
+                if ( subProcs.size() > 1) {
+                    Collections.sort(subProcs, sEntryCompare);
+                    if (subProcs.get(0).mWeight > (subProcs.get(1).mWeight*3)) {
+                        pkgName = subProcs.get(0).mPackage;
+                    }
+                }
+            }
+            if (pkgName != null) {
                 // Only one app associated with this process.
                 try {
-                    targetApp = pm.getApplicationInfo(proc.mPackage,
+                    targetApp = pm.getApplicationInfo(pkgName,
                             PackageManager.GET_DISABLED_COMPONENTS |
                             PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
                             PackageManager.GET_UNINSTALLED_PACKAGES);
                     String name = targetApp.loadLabel(pm).toString();
-                    if (proc.mName.equals(proc.mPackage)) {
+                    if (proc.mName.equals(pkgName)) {
                         label = name;
                     } else {
-                        if (proc.mName.startsWith(proc.mPackage)) {
-                            int off = proc.mPackage.length();
+                        if (proc.mName.startsWith(pkgName)) {
+                            int off = pkgName.length();
                             if (proc.mName.length() > off) {
                                 off++;
                             }
@@ -258,15 +335,15 @@ public class ProcessStatsUi extends PreferenceFragment {
             }
             if (targetApp == null) {
                 String[] packages = pm.getPackagesForUid(proc.mUid);
-                for (String pkgName : packages) {
+                for (String curPkg : packages) {
                     try {
-                        final PackageInfo pi = pm.getPackageInfo(pkgName,
+                        final PackageInfo pi = pm.getPackageInfo(curPkg,
                                 PackageManager.GET_DISABLED_COMPONENTS |
                                 PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
                                 PackageManager.GET_UNINSTALLED_PACKAGES);
                         if (pi.sharedUserLabel != 0) {
                             targetApp = pi.applicationInfo;
-                            final CharSequence nm = pm.getText(pkgName,
+                            final CharSequence nm = pm.getText(curPkg,
                                     pi.sharedUserLabel, pi.applicationInfo);
                             if (nm != null) {
                                 label = nm.toString() + " (" + proc.mName + ")";
@@ -293,6 +370,7 @@ public class ProcessStatsUi extends PreferenceFragment {
 
     private void load() {
         try {
+            mMemState = mProcessStats.getCurrentMemoryState();
             ArrayList<ParcelFileDescriptor> fds = new ArrayList<ParcelFileDescriptor>();
             byte[] data = mProcessStats.getCurrentStats(fds);
             Parcel parcel = Parcel.obtain();
@@ -300,7 +378,7 @@ public class ProcessStatsUi extends PreferenceFragment {
             parcel.setDataPosition(0);
             mStats = ProcessStats.CREATOR.createFromParcel(parcel);
             int i = fds.size()-1;
-            while (i > 0 && (mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime)
+            while (i >= 0 && (mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime)
                     < (24*60*60*1000)) {
                 Log.i(TAG, "Not enough data, loading next file @ " + i);
                 ProcessStats stats = new ProcessStats(false);
