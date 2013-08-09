@@ -31,16 +31,22 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.text.format.DateFormat;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.android.internal.app.IProcessStats;
 import com.android.internal.app.ProcessStats;
 import com.android.settings.R;
+import com.android.settings.fuelgauge.Utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ProcessStatsUi extends PreferenceFragment {
     private static final String TAG = "ProcessStatsUi";
@@ -161,6 +167,15 @@ public class ProcessStatsUi extends PreferenceFragment {
 
         mMemStatusPref.setOrder(-2);
         mAppListGroup.addPreference(mMemStatusPref);
+        String durationString = Utils.formatElapsedTime(getActivity(),
+                mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime);
+        mMemStatusPref.setTitle(getActivity().getString(R.string.process_stats_total_duration,
+                durationString));
+        /*
+        mMemStatusPref.setTitle(DateFormat.format(DateFormat.getBestDateTimePattern(
+                getActivity().getResources().getConfiguration().locale,
+                "MMMM dd, yyyy h:mm a"), mStats.mTimePeriodStartClock));
+        */
         /*
         BatteryHistoryPreference hist = new BatteryHistoryPreference(getActivity(), mStats);
         hist.setOrder(-1);
@@ -176,45 +191,73 @@ public class ProcessStatsUi extends PreferenceFragment {
         mTotalTime = ProcessStats.dumpSingleTime(null, null, mStats.mMemFactorDurations,
                 mStats.mMemFactor, mStats.mStartTime, now);
 
-        ArrayList<ProcessStats.ProcessState> procs = mStats.collectProcessesLocked(
+        ArrayList<ProcessStats.ProcessState> rawProcs = mStats.collectProcessesLocked(
                 ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ,
                 ProcessStats.BACKGROUND_PROC_STATES, now, null);
 
         final PackageManager pm = getActivity().getPackageManager();
 
+        ArrayList<ProcStatsEntry> procs = new ArrayList<ProcStatsEntry>();
+        for (int i=0, N=(rawProcs != null ? rawProcs.size() : 0); i<N; i++) {
+            procs.add(new ProcStatsEntry(rawProcs.get(i), totals));
+        }
+        Collections.sort(procs, new Comparator<ProcStatsEntry>() {
+            @Override
+            public int compare(ProcStatsEntry lhs, ProcStatsEntry rhs) {
+                if (lhs.mWeight < rhs.mWeight) {
+                    return 1;
+                } else if (lhs.mWeight > rhs.mWeight) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        while (procs.size() > MAX_ITEMS_TO_LIST) {
+            procs.remove(procs.size()-1);
+        }
+
+        long maxWeight = 0;
         for (int i=0, N=(procs != null ? procs.size() : 0); i<N; i++) {
-            ProcessStats.ProcessState ps = procs.get(i);
-            final double percentOfTotal = (((double)ps.mTmpTotalTime) / mTotalTime) * 100;
-            if (percentOfTotal < 1) continue;
+            ProcStatsEntry proc = procs.get(i);
+            if (maxWeight < proc.mWeight) {
+                maxWeight = proc.mWeight;
+            }
+        }
+
+        for (int i=0, N=(procs != null ? procs.size() : 0); i<N; i++) {
+            ProcStatsEntry proc = procs.get(i);
+            final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
+            final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
+            if (percentOfWeight < 1) continue;
             ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null);
             ApplicationInfo targetApp = null;
-            String label = ps.mName;
-            if (ps.mCommonProcess == ps) {
+            String label = proc.mName;
+            if (proc.mUnique) {
                 // Only one app associated with this process.
                 try {
-                    targetApp = pm.getApplicationInfo(ps.mPackage,
+                    targetApp = pm.getApplicationInfo(proc.mPackage,
                             PackageManager.GET_DISABLED_COMPONENTS |
                             PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
                             PackageManager.GET_UNINSTALLED_PACKAGES);
                     String name = targetApp.loadLabel(pm).toString();
-                    if (ps.mName.equals(ps.mPackage)) {
+                    if (proc.mName.equals(proc.mPackage)) {
                         label = name;
                     } else {
-                        if (ps.mName.startsWith(ps.mPackage)) {
-                            int off = ps.mPackage.length();
-                            if (ps.mName.length() > off) {
+                        if (proc.mName.startsWith(proc.mPackage)) {
+                            int off = proc.mPackage.length();
+                            if (proc.mName.length() > off) {
                                 off++;
                             }
-                            label = name + " (" + ps.mName.substring(off) + ")";
+                            label = name + " (" + proc.mName.substring(off) + ")";
                         } else {
-                            label = name + " (" + ps.mName + ")";
+                            label = name + " (" + proc.mName + ")";
                         }
                     }
                 } catch (PackageManager.NameNotFoundException e) {
                 }
             }
             if (targetApp == null) {
-                String[] packages = pm.getPackagesForUid(ps.mUid);
+                String[] packages = pm.getPackagesForUid(proc.mUid);
                 for (String pkgName : packages) {
                     try {
                         final PackageInfo pi = pm.getPackageInfo(pkgName,
@@ -226,9 +269,10 @@ public class ProcessStatsUi extends PreferenceFragment {
                             final CharSequence nm = pm.getText(pkgName,
                                     pi.sharedUserLabel, pi.applicationInfo);
                             if (nm != null) {
-                                label = nm.toString() + " (" + ps.mName + ")";
+                                label = nm.toString() + " (" + proc.mName + ")";
                             } else {
-                                label = targetApp.loadLabel(pm).toString() + " (" + ps.mName + ")";
+                                label = targetApp.loadLabel(pm).toString() + " ("
+                                        + proc.mName + ")";
                             }
                             break;
                         }
@@ -240,9 +284,8 @@ public class ProcessStatsUi extends PreferenceFragment {
             if (targetApp != null) {
                 pref.setIcon(targetApp.loadIcon(pm));
             }
-            pref.setOrder(N+100-i);
-            ProcessStats.computeProcessData(ps, totals, now);
-            pref.setPercent(percentOfTotal, totals.avgPss * 1024);
+            pref.setOrder(i);
+            pref.setPercent(percentOfWeight, percentOfTime);
             mAppListGroup.addPreference(pref);
             if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
         }
@@ -252,16 +295,42 @@ public class ProcessStatsUi extends PreferenceFragment {
         try {
             ArrayList<ParcelFileDescriptor> fds = new ArrayList<ParcelFileDescriptor>();
             byte[] data = mProcessStats.getCurrentStats(fds);
-            for (int i=0; i<fds.size(); i++) {
-                try {
-                    fds.get(i).close();
-                } catch (IOException e) {
-                }
-            }
             Parcel parcel = Parcel.obtain();
             parcel.unmarshall(data, 0, data.length);
             parcel.setDataPosition(0);
             mStats = ProcessStats.CREATOR.createFromParcel(parcel);
+            int i = fds.size()-1;
+            while (i > 0 && (mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime)
+                    < (24*60*60*1000)) {
+                Log.i(TAG, "Not enough data, loading next file @ " + i);
+                ProcessStats stats = new ProcessStats(false);
+                InputStream stream = new ParcelFileDescriptor.AutoCloseInputStream(fds.get(i));
+                stats.read(stream);
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                }
+                if (stats.mReadError == null) {
+                    mStats.add(stats);
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Added stats: ");
+                    sb.append(stats.mTimePeriodStartClockStr);
+                    sb.append(", over ");
+                    TimeUtils.formatDuration(
+                            stats.mTimePeriodEndRealtime-stats.mTimePeriodStartRealtime, sb);
+                    Log.i(TAG, sb.toString());
+                } else {
+                    Log.w(TAG, "Read error: " + stats.mReadError);
+                }
+                i--;
+            }
+            while (i >= 0) {
+                try {
+                    fds.get(i).close();
+                } catch (IOException e) {
+                }
+                i--;
+            }
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException:", e);
         }
