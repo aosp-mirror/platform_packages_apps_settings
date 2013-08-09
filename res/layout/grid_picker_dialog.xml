@@ -15,19 +15,12 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/list"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
-    <GridView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:columnWidth="112dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="spacingWidthUniform"
-        android:verticalSpacing="16dp"
-        android:paddingTop="16dp" />
-
-</LinearLayout>
+    android:layout_height="300dp"
+    android:columnWidth="112dp"
+    android:numColumns="auto_fit"
+    android:paddingTop="16dp"
+    android:stretchMode="spacingWidthUniform"
+    android:verticalSpacing="16dp" />
