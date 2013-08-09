@@ -64,6 +64,21 @@ public class ColorPreference extends ListDialogPreference {
     }
 
     @Override
+    protected CharSequence getTitleAt(int index) {
+        final CharSequence title = super.getTitleAt(index);
+        if (title != null) {
+            return title;
+        }
+
+        // If no title was supplied, format title using RGB values.
+        final int value = getValueAt(index);
+        final int r = Color.red(value);
+        final int g = Color.green(value);
+        final int b = Color.blue(value);
+        return getContext().getString(R.string.color_custom, r, g, b);
+    }
+
+    @Override
     protected void onBindView(View view) {
         super.onBindView(view);
 
