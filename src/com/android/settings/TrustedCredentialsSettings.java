@@ -58,6 +58,8 @@ public class TrustedCredentialsSettings extends Fragment {
 
     private UserManager mUserManager;
 
+    private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
+
     private static final int REQUEST_PIN_CHALLENGE = 12309;
     // If the restriction PIN is entered correctly.
     private boolean mChallengeSucceeded;
@@ -168,6 +170,10 @@ public class TrustedCredentialsSettings extends Fragment {
         addTab(Tab.SYSTEM);
         // TODO add Install button on Tab.USER to go to CertInstaller like KeyChainActivity
         addTab(Tab.USER);
+        if (getActivity().getIntent() != null &&
+                USER_ACTION.equals(getActivity().getIntent().getAction())) {
+            mTabHost.setCurrentTabByTag(Tab.USER.mTag);
+        }
         return mTabHost;
     }
 
