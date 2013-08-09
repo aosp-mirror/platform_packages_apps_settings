@@ -75,6 +75,7 @@ import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.nfc.AndroidBeam;
+import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.AppRestrictionsFragment;
 import com.android.settings.users.UserSettings;
@@ -334,7 +335,8 @@ public class Settings extends PreferenceActivity
         NotificationAccessSettings.class.getName(),
         ManageAccountsSettings.class.getName(),
         PrintingSettings.class.getName(),
-        TrustedCredentialsSettings.class.getName()
+        TrustedCredentialsSettings.class.getName(),
+        PaymentSettings.class.getName()
     };
 
     @Override
@@ -958,6 +960,6 @@ public class Settings extends PreferenceActivity
     public static class UserSettingsActivity extends Settings { /* empty */ }
     public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
     public static class UsbSettingsActivity extends Settings { /* empty */ }
-    public static class NfcPaymentActivity extends Settings { /* empty */ }
     public static class TrustedCredentialsSettingsActivity extends Settings { /* empty */ }
+    public static class PaymentSettingsActivity extends Settings { /* empty */ }
 }
