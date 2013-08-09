@@ -36,9 +36,10 @@ public class ProcessStatsPreference extends Preference {
         setIcon(icon != null ? icon : new ColorDrawable(0));
     }
 
-    public void setPercent(double percentOfTotal, long pss) {
-        mProgress = (int) Math.ceil(percentOfTotal);
-        mProgressText = pss > 0 ? Formatter.formatShortFileSize(getContext(), pss) : "";
+    public void setPercent(double percentOfWeight, double percentOfTime) {
+        mProgress = (int) Math.ceil(percentOfWeight);
+        mProgressText = getContext().getResources().getString(
+                R.string.percentage, (int) Math.ceil(percentOfTime));
         notifyChanged();
     }
 
