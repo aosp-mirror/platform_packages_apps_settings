@@ -23,6 +23,11 @@ public class LinearColorBar extends LinearLayout {
     private float mYellowRatio;
     private float mGreenRatio;
 
+    private int mLeftColor = LEFT_COLOR;
+    private int mMiddleColor = MIDDLE_COLOR;
+    private int mRightColor = RIGHT_COLOR;
+
+    private boolean mShowIndicator = true;
     private boolean mShowingGreen;
 
     final Rect mRect = new Rect();
@@ -57,6 +62,20 @@ public class LinearColorBar extends LinearLayout {
         invalidate();
     }
 
+    public void setColors(int red, int yellow, int green) {
+        mLeftColor = red;
+        mMiddleColor = yellow;
+        mRightColor = green;
+        updateIndicator();
+        invalidate();
+    }
+
+    public void setShowIndicator(boolean showIndicator) {
+        mShowIndicator = showIndicator;
+        updateIndicator();
+        invalidate();
+    }
+
     public void setShowingGreen(boolean showingGreen) {
         if (mShowingGreen != showingGreen) {
             mShowingGreen = showingGreen;
@@ -70,12 +89,15 @@ public class LinearColorBar extends LinearLayout {
         if (off < 0) off = 0;
         mRect.top = off;
         mRect.bottom = getHeight();
+        if (!mShowIndicator) {
+            return;
+        }
         if (mShowingGreen) {
             mColorGradientPaint.setShader(new LinearGradient(
-                    0, 0, 0, off-2, RIGHT_COLOR&0xffffff, RIGHT_COLOR, Shader.TileMode.CLAMP));
+                    0, 0, 0, off-2, mRightColor &0xffffff, mRightColor, Shader.TileMode.CLAMP));
         } else {
             mColorGradientPaint.setShader(new LinearGradient(
-                    0, 0, 0, off-2, MIDDLE_COLOR&0xffffff, MIDDLE_COLOR, Shader.TileMode.CLAMP));
+                    0, 0, 0, off-2, mMiddleColor&0xffffff, mMiddleColor, Shader.TileMode.CLAMP));
         }
         mEdgeGradientPaint.setShader(new LinearGradient(
                 0, 0, 0, off/2, 0x00a0a0a0, 0xffa0a0a0, Shader.TileMode.CLAMP));
@@ -111,7 +133,7 @@ public class LinearColorBar extends LinearLayout {
         if (mLastInterestingLeft != indicatorLeft || mLastInterestingRight != indicatorRight) {
             mColorPath.reset();
             mEdgePath.reset();
-            if (indicatorLeft < indicatorRight) {
+            if (mShowIndicator && indicatorLeft < indicatorRight) {
                 final int midTopY = mRect.top;
                 final int midBottomY = 0;
                 final int xoff = 2;
@@ -146,7 +168,7 @@ public class LinearColorBar extends LinearLayout {
         if (left < right) {
             mRect.left = left;
             mRect.right = right;
-            mPaint.setColor(LEFT_COLOR);
+            mPaint.setColor(mLeftColor);
             canvas.drawRect(mRect, mPaint);
             width -= (right-left);
             left = right;
@@ -157,7 +179,7 @@ public class LinearColorBar extends LinearLayout {
         if (left < right) {
             mRect.left = left;
             mRect.right = right;
-            mPaint.setColor(MIDDLE_COLOR);
+            mPaint.setColor(mMiddleColor);
             canvas.drawRect(mRect, mPaint);
             width -= (right-left);
             left = right;
@@ -168,7 +190,7 @@ public class LinearColorBar extends LinearLayout {
         if (left < right) {
             mRect.left = left;
             mRect.right = right;
-            mPaint.setColor(RIGHT_COLOR);
+            mPaint.setColor(mRightColor);
             canvas.drawRect(mRect, mPaint);
         }
     }
