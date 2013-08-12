@@ -19,9 +19,7 @@ package com.android.settings.location;
 import android.content.Context;
 import android.preference.CheckBoxPreference;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -37,8 +35,6 @@ import com.android.settings.R;
  * uncheck all the other preferences, you should do that by code yourself.
  */
 public class RadioButtonPreference extends CheckBoxPreference {
-    private boolean mValidListener;
-
     public interface OnClickListener {
         public abstract void onRadioButtonClicked(RadioButtonPreference emiter);
     }
@@ -48,7 +44,6 @@ public class RadioButtonPreference extends CheckBoxPreference {
     public RadioButtonPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setWidgetLayoutResource(R.layout.preference_widget_radiobutton);
-        mValidListener = false;
     }
 
     public RadioButtonPreference(Context context, AttributeSet attrs) {
@@ -61,14 +56,6 @@ public class RadioButtonPreference extends CheckBoxPreference {
 
     void setOnClickListener(OnClickListener listener) {
         mListener = listener;
-    }
-
-    public void pause() {
-        mValidListener = false;
-    }
-
-    public void resume() {
-        mValidListener = true;
     }
 
     @Override
