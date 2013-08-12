@@ -165,7 +165,10 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Czy chcesz nawiązać połączenie z urządzeniem „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Żądanie dotyczące książki telefonicznej"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s chce uzyskać dostęp do Twoich kontaktów i historii połączeń. Zezwolić %2$s na dostęp?"</string>
+    <string name="bluetooth_remember_choice" msgid="6198284561603824931">"Nie pytaj ponownie"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Nie pytaj ponownie"</string>
+    <string name="bluetooth_map_request" msgid="1541931183213124878">"Żądanie dostępu do wiadomości"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s chce uzyskać dostęp do Twoich wiadomości. Zezwolić na dostęp?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Ustawienia daty i godziny"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Wybierz strefę czasową"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Regionalny (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -989,8 +992,11 @@
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Wysoka dokładność"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Oszczędzanie baterii"</string>
     <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Tylko czujniki urządzenia"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"Obsługa lokalizacji wyłączona"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Ostatnie prośby o lokalizację"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Usługi lokalizacyjne"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"Wysokie użycie baterii"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"Niskie użycie baterii"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Tryb lokalizacji"</string>
     <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Określaj lokalizację przez GPS, Wi-Fi i sieci komórkowe"</string>
     <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Określaj lokalizację przez Wi-Fi i sieci komórkowe"</string>
@@ -1042,13 +1048,13 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Zmień kod PIN odblokowania"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Potwierdź zapisany wzór"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Spróbuj ponownie:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"Narysuj wzór odblokowania:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Narysuj wzór odblokowania"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Naciśnij Menu, aby uzyskać pomoc."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Puść palec, gdy gotowe."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Połącz co najmniej <xliff:g id="NUMBER">%d</xliff:g> kropki. Spróbuj jeszcze raz:"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"Wzór został nagrany."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Narysuj wzór ponownie, aby potwierdzić:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Nowy wzór odblokowania:"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Odsuń palec, gdy skończysz"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Połącz kropki (co najmniej <xliff:g id="NUMBER">%d</xliff:g>). Spróbuj ponownie."</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Wzór zapisany"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Narysuj wzór ponownie, by potwierdzić"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nowy wzór odblokowania"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potwierdź"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Narysuj ponownie"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Ponów próbę"</string>
@@ -1116,8 +1122,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Pokaż procesy z pamięci podręcznej"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Resetuj opcje aplikacji"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Zresetować opcje aplikacji?"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Zresetuje to wszystkie ustawienia:\n\n "<li>"wyłączonych aplikacji,"</li>\n" "<li>"powiadomień wyłączonych aplikacji,"</li>\n" "<li>"domyślnych aplikacji dla wybranych czynności,"</li>\n" "<li>"ograniczeń danych w tle dla aplikacji,"</li>\n" "<li>"wszystkich ograniczeń uprawnień."</li>\n\n" Nie utracisz żadnych danych aplikacji."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Resetuj aplikacje"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Zarządzaj rozmiarem"</string>
     <string name="filter" msgid="2018011724373033887">"Filtr"</string>
@@ -1356,6 +1361,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ustawienia ułatwień dostępu"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Usługi"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Napisy"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesty powiększania"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Kiedy ta funkcja jest włączona, możesz powiększyć i pomniejszyć obraz, trzykrotnie klikając ekran.\n\nW trybie powiększenia możesz:\n"<ul><li>"Przesuwać: przeciągnij palcami po ekranie."</li>\n<li>"Regulować powiększenie: ściągnij lub rozsuń palce."</li></ul>\n\n"Możesz też tymczasowo powiększyć miejsce pod palcem, klikając trzykrotnie i przytrzymując palec na ekranie. W takim widoku „lupy” możesz przesuwać palcem po ekranie i powiększać różne miejsca. Podniesienie palca spowoduje powrót do poprzedniego widoku.\n\nUwaga: trzykrotne kliknięcie powiększające działa wszędzie poza klawiaturą i paskiem nawigacji."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Skrót ułatwień dostępu"</string>
@@ -1372,6 +1378,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Ustawienia"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Wł."</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Wył."</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"Podgląd"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"Opcje standardowe"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"Język"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"Rozmiar tekstu"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Styl napisów"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"Opcje niestandardowe"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"Kolor tła"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"Przezroczystość tła"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"Kolor tekstu"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"Kolor krawędzi"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"Typ krawędzi"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"Rodzina czcionek"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"Napisy będą wyglądać tak"</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"Domyślnie"</string>
+    <string name="color_none" msgid="3475640044925814795">"Brak"</string>
+    <string name="color_white" msgid="8045195170201590239">"Biały"</string>
+    <string name="color_gray" msgid="9192312087142726313">"Szary"</string>
+    <string name="color_black" msgid="7517353520909872561">"Czarny"</string>
+    <string name="color_red" msgid="4949354900304125428">"Czerwony"</string>
+    <string name="color_green" msgid="5537717328428845841">"Zielony"</string>
+    <string name="color_blue" msgid="7731984529016953223">"Niebieski"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"Cyjan"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"Żółty"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"Amarantowy"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Użyć usługi <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Wymagania usługi <xliff:g id="SERVICE">%1$s</xliff:g>:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Obserwowanie Twoich działań"</string>
@@ -1469,6 +1500,11 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Odśwież"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"System Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Serwer mediów"</string>
+    <string name="process_stats_summary_title" msgid="1144688045609771677">"Statystyki procesów"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"Rozbudowane statystyki uruchomionych procesów"</string>
+    <string name="app_memory_use" msgid="7849258480392171939">"Użycie pamięci"</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"Statystyki: <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"Aktualny stan pamięci: <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Ustawienia głosowe"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Ustawienia funkcji głosowych"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Wyszukiwanie głosowe"</string>
@@ -1502,16 +1538,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Wybierz inny mechanizm"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Ten mechanizm syntezy mowy może gromadzić cały odczytywany tekst, w tym dane osobiste w postaci haseł i numerów kart kredytowych. Nazwa mechanizmu to <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Włączyć ten mechanizm syntezy mowy?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Do przetwarzania tekstu na mowę w tym języku wymagane jest działające połączenie sieciowe."</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"To jest przykład syntezy mowy"</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"Stan domyślnego języka"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"Język <xliff:g id="LOCALE">%1$s</xliff:g> jest w pełni obsługiwany"</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"Język <xliff:g id="LOCALE">%1$s</xliff:g> wymaga połączenia z siecią"</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"Język <xliff:g id="LOCALE">%1$s</xliff:g> nie jest obsługiwany"</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"Sprawdzam..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Mechanizmy"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Ustawienia <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"Mechanizm <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> jest włączony"</string>
@@ -1538,7 +1570,7 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"wyłączanie"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi‑Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_location" msgid="2974757497945178165">"Lokalizacja"</string>
     <string name="gadget_sync" msgid="858895763714222152">"Synchronizacja"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"Jasność <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automatyczna"</string>
@@ -1722,6 +1754,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Włącz śledzenia OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Pokaż granice układu"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Pokaż granice przycięcia, marginesy itd."</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Wymuś układ od prawej do lewej"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Wymuś wszędzie układ ekranu od prawej do lewej"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Pokaż użycie procesora"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Nakładka na ekranie pokazująca użycie procesora"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Renderowanie na GPU"</string>
@@ -1914,6 +1948,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"To ustawienie obowiązuje wszystkich użytkowników tego telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Zmień język"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Zmień rozmiar czcionki"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"Dotknij i zapłać"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"Zawsze pytaj"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"Ustawić jako Twoją preferencję?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ograniczenia"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Usuń ograniczenia"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Zmień PIN"</string>

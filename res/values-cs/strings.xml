@@ -165,7 +165,10 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Chcete se připojit k zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Požadavek telefonního seznamu"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"Zařízení %1$s žádá o přístup k vašim kontaktům a historii hovorů. Povolit zařízení %2$s přístup?"</string>
+    <string name="bluetooth_remember_choice" msgid="6198284561603824931">"Příště se neptat"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Příště se neptat"</string>
+    <string name="bluetooth_map_request" msgid="1541931183213124878">"Žádost o zprávu"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"Zařízení %1$s žádá o přístup k vašim zprávám. Povolit přístup zařízení %2$s?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Nastavení data a času"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Vybrat časové pásmo"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Regionální (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -311,8 +314,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Info o uživateli"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Zobrazit informace o profilu na obrazovce uzamčení"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informace o profilu"</string>
-    <!-- no translation found for location_settings_title (1369675479310751735) -->
-    <skip />
+    <string name="location_settings_title" msgid="1369675479310751735">"Poloha"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Zabezpečení"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moje poloha, odemknutí obrazovky, zámek SIM, zámek úložiště pověření"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavení funkce Moje poloha, odemknutí obrazovky a zamknutí úložiště pověření"</string>
@@ -986,26 +988,19 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Vložte SIM kartu a restartujte zařízení."</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Připojte se prosím k internetu."</string>
     <string name="location_title" msgid="1029961368397484576">"Moje poloha"</string>
-    <!-- no translation found for location_mode_title (3982009713118421689) -->
-    <skip />
-    <!-- no translation found for location_mode_high_accuracy_title (8241802585110932849) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_title (711273645208158637) -->
-    <skip />
-    <!-- no translation found for location_mode_sensors_only_title (5960338820984635411) -->
-    <skip />
-    <!-- no translation found for location_category_recent_location_requests (1938721350424447421) -->
-    <skip />
-    <!-- no translation found for location_category_location_services (7437150886946685979) -->
-    <skip />
-    <!-- no translation found for location_mode_screen_title (4528716772270246542) -->
-    <skip />
-    <!-- no translation found for location_mode_high_accuracy_description (8640231702873607191) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (7110846007772128971) -->
-    <skip />
-    <!-- no translation found for location_mode_sensors_only_description (3103917665724654860) -->
-    <skip />
+    <string name="location_mode_title" msgid="3982009713118421689">"Režim"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Vysoká přesnost"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Úspora baterie"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Pouze senzory zařízení"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"Poloha vypnuta"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Nedávné žádosti o urč. polohy"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Služby určování polohy"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"Vysoké využití baterie"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"Nízké využití baterie"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"Režim určování polohy"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Poloha: GPS, Wi-Fi a mob. síť"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Poloha: Wi-Fi a mob. síť"</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Urč. přes. polohy pomocí GPS"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Poloha Wi-Fi a mobilní sítě"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Povolit aplikacím používat službu polohy Google a rychleji odhadovat vaši polohu. Anonymní data budou sbírána a odesílána Googlu."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Poloha určená sítí Wi-Fi"</string>
@@ -1053,13 +1048,13 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Změna bezpečnostního kódu PIN"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Potvrďte uložené gesto"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Zkuste to znovu:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"Nakreslete své bezpečnostní gesto:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Proveďte gesto odemknutí"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Nápovědu zobrazíte stisknutím klávesy Menu."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Na závěr zdvihněte prst z obrazovky."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Minimální počet spojených teček je <xliff:g id="NUMBER">%d</xliff:g>. Zkuste to znovu:"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"Gesto bylo zaznamenáno."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Proveďte gesto znovu pro potvrzení:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Nové gesto odemknutí:"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Na závěr zdvihněte prst z obrazovky"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Minimální počet spojených teček je <xliff:g id="NUMBER">%d</xliff:g>. Zkuste to znovu."</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Gesto bylo zaznamenáno"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Proveďte gesto znovu pro potvrzení"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Nové bezpečnostní gesto"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potvrdit"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Nakreslit znovu"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Zkusit znovu"</string>
@@ -1127,8 +1122,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Zobrazit mezipaměť"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Obnovit nastavení apl."</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Obnovit nastavení apl.?"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tímto resetujete všechna nastavení následujících položek:\n\n "<li>"zakázané aplikace,"</li>\n" "<li>"zakázaná oznámení aplikací,"</li>\n" "<li>"výchozí aplikace pro různé akce,"</li>\n" "<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n" "<li>"veškerá omezení oprávnění."</li>\n\n" Nepřijdete o žádná data aplikací."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Obnovit aplikace"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Správa paměti"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
@@ -1367,6 +1361,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Nastavení usnadnění"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Služby"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Systém"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Popisky"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesta pro přiblížení obrazovky"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Je-li tato funkce zapnutá, můžete zobrazení přibližovat a oddalovat tak, že třikrát klepnete na obrazovku.\n\nPři přiblížení můžete provádět tyto činnosti:\n"<ul><li>"Posunutí: táhněte po obrazovce minimálně dvěma prsty."</li>\n<li>"Změna úrovně přiblížení: alespoň dva prsty stáhněte k sobě, nebo roztáhněte od sebe."</li></ul>\n\n"Také je možné dočasně zvětšit oblast pod prstem. Stačí na ni třikrát klepnout a podržet ji. V takto zvětšeném náhledu můžete přetáhnutím prstu prohlížet libovolné části obrazovky. Do předchozího zobrazení se vrátíte zdvihnutím prstu.\n\nPoznámka: Zvětšení trojitým klepnutím funguje ve všech částech obrazovky s výjimkou klávesnice a navigační lišty."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Zkratka usnadnění"</string>
@@ -1383,6 +1378,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Nastavení"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Zapnuto"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Vypnuto"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"Náhled"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standardní možnosti"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"Jazyk"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"Velikost textu"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Styl popisku"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"Vlastní možnosti"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"Barva pozadí"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"Neprůhlednost pozadí"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"Barva textu"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"Barva okraje"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"Typ okraje"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"Rodina písem"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"Popisek bude vypadat takto"</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"Výchozí"</string>
+    <string name="color_none" msgid="3475640044925814795">"Žádná"</string>
+    <string name="color_white" msgid="8045195170201590239">"Bílá"</string>
+    <string name="color_gray" msgid="9192312087142726313">"Šedá"</string>
+    <string name="color_black" msgid="7517353520909872561">"Černá"</string>
+    <string name="color_red" msgid="4949354900304125428">"Červená"</string>
+    <string name="color_green" msgid="5537717328428845841">"Zelená"</string>
+    <string name="color_blue" msgid="7731984529016953223">"Modrá"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"Tyrkysová"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"Žlutá"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"Purpurová"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Použít službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> potřebuje:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Sledovat vlastní akce"</string>
@@ -1480,6 +1500,11 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Aktualizovat"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"OS Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
+    <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistiky procesů"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"Prapodivné statistiky běžících procesů"</string>
+    <string name="app_memory_use" msgid="7849258480392171939">"Využití paměti"</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"Statistiky jsou ukončeny <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"Aktuální stav paměti zařízení: <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Hlasový vstup a výstup"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Nastavení hlasového vstupu a výstupu"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Hlasové vyhledávání"</string>
@@ -1513,16 +1538,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Vyberte jiný modul"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Modul pro syntézu řeči může shromažďovat veškerý mluvený text, včetně osobních dat jako jsou hesla nebo čísla kreditních karet. Je založen na modulu <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Chcete modul pro syntézu řeči aktivovat?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Pro tento jazyk je k převodu textu na hlasový výstup potřeba připojení k síti."</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"Toto je příklad syntézy řeči"</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"Stav výchozího jazyka"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"Jazyk <xliff:g id="LOCALE">%1$s</xliff:g> je plně podporován"</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"Jazyk <xliff:g id="LOCALE">%1$s</xliff:g> vyžaduje připojení k síti"</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"Jazyk <xliff:g id="LOCALE">%1$s</xliff:g> není podporován"</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"Probíhá kontrola..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Moduly"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Nastavení modulu <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"Položka <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> je aktivována"</string>
@@ -1549,7 +1570,7 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"vypínání"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi-Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_location" msgid="2974757497945178165">"Poloha"</string>
     <string name="gadget_sync" msgid="858895763714222152">"Synchronizace"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"Jas <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automaticky"</string>
@@ -1733,6 +1754,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Povolit trasování OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Zobrazit ohraničení"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Zobrazit u klipu ohraničení, okraje atd."</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Vynutit směr rozvrž. RTL"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Vynutit ve všech jazycích směr rozvržení obr. RTL"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Zobrazit využití CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Překryvná vrstva s aktuálním využitím procesoru"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Vykreslování pomocí GPU"</string>
@@ -1925,6 +1948,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Toto nastavení ovlivní všechny uživatele tohoto telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Změna jazyka"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Změna velikosti písma"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"Zaplatit dotykem telefonu"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"Vždy se dotázat"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"Nastavit jako předvolbu?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Omezení"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Odebrat omezení"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Změnit PIN"</string>
@@ -1947,8 +1973,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Povolit výměnu dat, pokud se tablet dotkne jiného zařízení"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Povolit výměnu dat, pokud se telefon dotkne jiného zařízení"</string>
-    <!-- no translation found for restriction_location_enable_title (5020268888245775164) -->
-    <skip />
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"Poloha"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Povolit aplikaci používat informace o vaší poloze"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Zpět"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Další"</string>

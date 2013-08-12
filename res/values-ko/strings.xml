@@ -165,7 +165,13 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"\'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\'에 연결하시겠습니까?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"전화번호부 요청"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s이(가) 주소록과 통화 기록에 액세스하려고 합니다. %2$s에 액세스 권한을 제공하시겠습니까?"</string>
+    <!-- no translation found for bluetooth_remember_choice (6198284561603824931) -->
+    <skip />
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"다시 묻지 않음"</string>
+    <!-- no translation found for bluetooth_map_request (1541931183213124878) -->
+    <skip />
+    <!-- no translation found for bluetooth_map_acceptance_dialog_text (8712508202081143737) -->
+    <skip />
     <string name="date_and_time" msgid="4114084177056654663">"날짜 및 시간 설정"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"시간대 선택"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"기본값(<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -311,8 +317,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"사용자 정보"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"잠금 화면에 프로필 정보 표시"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"프로필 정보"</string>
-    <!-- no translation found for location_settings_title (1369675479310751735) -->
-    <skip />
+    <string name="location_settings_title" msgid="1369675479310751735">"위치"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"보안"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"내 위치, 화면 잠금해제, SIM 카드 잠금, 자격증명 저장소 잠금 설정"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"내 위치, 화면 잠금해제, 자격증명 저장소 잠금 설정"</string>
@@ -986,26 +991,21 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIM 카드를 삽입하고 다시 시작하세요."</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"인터넷에 연결하세요."</string>
     <string name="location_title" msgid="1029961368397484576">"사용자 위치"</string>
-    <!-- no translation found for location_mode_title (3982009713118421689) -->
+    <string name="location_mode_title" msgid="3982009713118421689">"모드"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"높은 정확성"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"배터리 절약"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"기기 센서 전용"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"위치 정보 사용 안함"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"최근 위치 요청"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"위치 서비스"</string>
+    <!-- no translation found for location_high_battery_use (517199943258508020) -->
     <skip />
-    <!-- no translation found for location_mode_high_accuracy_title (8241802585110932849) -->
+    <!-- no translation found for location_low_battery_use (8602232529541903596) -->
     <skip />
-    <!-- no translation found for location_mode_battery_saving_title (711273645208158637) -->
-    <skip />
-    <!-- no translation found for location_mode_sensors_only_title (5960338820984635411) -->
-    <skip />
-    <!-- no translation found for location_category_recent_location_requests (1938721350424447421) -->
-    <skip />
-    <!-- no translation found for location_category_location_services (7437150886946685979) -->
-    <skip />
-    <!-- no translation found for location_mode_screen_title (4528716772270246542) -->
-    <skip />
-    <!-- no translation found for location_mode_high_accuracy_description (8640231702873607191) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (7110846007772128971) -->
-    <skip />
-    <!-- no translation found for location_mode_sensors_only_description (3103917665724654860) -->
-    <skip />
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"위치 모드"</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"GPS, Wi‑Fi 및 모바일 네트워크를 사용하여 위치를 예측합니다."</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Wi‑Fi 및 모바일 네트워크를 사용하여 위치를 예측합니다."</string>
+    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"GPS를 사용하여 현재 위치를 정확하게 찾습니다."</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi 및 모바일 네트워크 위치"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"사용자의 위치를 빠르게 예측하도록 앱에서 Google의 위치 서비스를 사용합니다. 익명의 위치 정보가 수집되어 Google로 전송됩니다."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi에서 측정된 위치"</string>
@@ -1053,13 +1053,18 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"잠금해제 PIN 변경"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"저장된 패턴 확인"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"다시 시도:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"잠금해제 패턴 그리기:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"잠금해제 패턴 그리기"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"도움말을 보려면 메뉴를 누르세요."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"완료되면 손가락을 뗍니다."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"<xliff:g id="NUMBER">%d</xliff:g>개 이상의 점을 연결합니다. 다시 시도하세요."</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"패턴이 기록되었습니다."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"확인을 위해 패턴 다시 그리기"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"새 잠금해제 패턴:"</string>
+    <!-- no translation found for lockpattern_recording_inprogress (6667844062721656773) -->
+    <skip />
+    <!-- no translation found for lockpattern_recording_incorrect_too_short (1348234155120957561) -->
+    <skip />
+    <!-- no translation found for lockpattern_pattern_entered_header (4316818983675591604) -->
+    <skip />
+    <!-- no translation found for lockpattern_need_to_confirm (8054853451639221265) -->
+    <skip />
+    <!-- no translation found for lockpattern_pattern_confirmed_header (8455614172231880211) -->
+    <skip />
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"확인"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"다시 그리기"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"다시 시도"</string>
@@ -1127,8 +1132,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"캐시된 프로세스 표시"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"앱 환경설정 재설정"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"앱 환경설정을 재설정하시겠습니까?"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"이 작업을 수행하면\n\n "<li>"사용 중지된 앱"</li>\n" "<li>"사용 중지된 앱 알림"</li>\n" "<li>"작업을 수행할 때 사용하는 기본 애플리케이션"</li>\n" "<li>"앱에 대한 백그라운드 데이터 제한"</li>\n" "<li>"그 밖의 권한 제한"</li>"에 대한 모든 환경설정이 재설정됩니다.\n\n 앱 데이터는 손실되지 않습니다."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"앱 재설정"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"공간 관리"</string>
     <string name="filter" msgid="2018011724373033887">"필터"</string>
@@ -1367,6 +1371,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"접근성 설정"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"서비스"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"시스템"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"캡션"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"확대 동작"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"이 기능을 사용하면 화면을 3번 탭하여 확대 및 축소할 수 있습니다.\n\n화면을 확대한 상태에서 다음 작업을 수행할 수 있습니다.\n"<ul><li>"이동: 화면에서 두 개 이상의 손가락을 드래그"</li>\n<li>"확대/축소 수준 조정: 두 개 이상의 손가락을 오므리거나 벌림"</li></ul>\n\n"또한 3번 탭한 상태를 유지하여 손가락 아래에 있는 항목을 일시적으로 확대할 수 있습니다. 확대한 상태에서 손가락을 드래그하여 화면의 다른 부분을 탐색할 수 있습니다. 손가락을 떼면 이전 상태로 돌아갑니다.\n\n참고: 세 번 탭하여 확대 기능은 키보드와 탐색 바에서는 작동하지 않습니다."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"접근성 단축키"</string>
@@ -1383,6 +1388,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"설정"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"사용"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"사용 안함"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"미리보기"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"표준 옵션"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"언어"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"텍스트 크기"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"캡션 스타일"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"맞춤설정 옵션"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"배경색"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"배경 불투명도"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"텍스트 색상"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"가장자리 색상"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"가장자리 유형"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"글꼴 모음"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"캡션이 다음과 같이 표시됩니다."</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"기본값"</string>
+    <string name="color_none" msgid="3475640044925814795">"없음"</string>
+    <string name="color_white" msgid="8045195170201590239">"흰색"</string>
+    <string name="color_gray" msgid="9192312087142726313">"회색"</string>
+    <string name="color_black" msgid="7517353520909872561">"검정색"</string>
+    <string name="color_red" msgid="4949354900304125428">"빨간색"</string>
+    <string name="color_green" msgid="5537717328428845841">"녹색"</string>
+    <string name="color_blue" msgid="7731984529016953223">"파란색"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"청록색"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"노란색"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"자홍색"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>에 필요한 기능:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"작업 살펴보기"</string>
@@ -1391,7 +1421,7 @@
     <string name="disable_service_message" msgid="2012273739481042318">"확인을 터치하면 <xliff:g id="SERVICE">%1$s</xliff:g>이(가) 중지됩니다."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"설치된 서비스가 없습니다."</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"스크린 리더가 필요하십니까?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack은 시각 장애인을 위한 음성 피드백을 제공합니다. Android 마켓에서 무료로 설치하시겠습니까?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"음성 안내 지원은 시각 장애인을 위한 음성 피드백을 제공합니다. Android 마켓에서 무료로 설치하시겠습니까?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"제공된 설명이 없습니다."</string>
     <string name="settings_button" msgid="3006713718908152930">"설정"</string>
     <string name="print_settings" msgid="4742428530112487843">"인쇄"</string>
@@ -1480,6 +1510,16 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"새로고침"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"미디어 서버"</string>
+    <!-- no translation found for process_stats_summary_title (1144688045609771677) -->
+    <skip />
+    <!-- no translation found for process_stats_summary (109387941605607762) -->
+    <skip />
+    <!-- no translation found for app_memory_use (7849258480392171939) -->
+    <skip />
+    <!-- no translation found for process_stats_total_duration (663196332079061529) -->
+    <skip />
+    <!-- no translation found for process_stats_memory_status (4251599550196193093) -->
+    <skip />
     <string name="voice_input_output_settings" msgid="1336135218350444783">"음성 입력 &amp; 출력"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"음성 입력 &amp; 출력 설정"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"음성 검색"</string>
@@ -1513,16 +1553,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"다른 엔진 선택"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"이 음성 합성 엔진은 비밀번호와 신용카드 번호 등의 개인 데이터를 비롯한 모든 음성 데이터를 수집할 수 있습니다. 이것은 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> 엔진의 기능입니다. 음성 합성 엔진을 사용하도록 설정하시겠습니까?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"이 언어로 TTS(Text-to-speech)를 출력하려면 네트워크 연결이 작동해야 합니다."</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"음성 합성의 예입니다."</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"기본 언어 상태"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"<xliff:g id="LOCALE">%1$s</xliff:g>은(는) 완전하게 지원됩니다."</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"<xliff:g id="LOCALE">%1$s</xliff:g>은(는) 네트워크 연결이 필요합니다."</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"<xliff:g id="LOCALE">%1$s</xliff:g>은(는) 지원되지 않습니다."</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"확인 중..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"엔진"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> 설정"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> 사용"</string>
@@ -1549,7 +1585,8 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"끄는 중"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi-Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"블루투스"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <!-- no translation found for gadget_location (2974757497945178165) -->
+    <skip />
     <string name="gadget_sync" msgid="858895763714222152">"동기화"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"밝기 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"자동"</string>
@@ -1733,6 +1770,10 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL 추적 사용 설정"</string>
     <string name="debug_layout" msgid="5981361776594526155">"레이아웃 범위 표시"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"클립 경계, 여백 등을 표시"</string>
+    <!-- no translation found for force_rtl_layout_all_locales (2259906643093138978) -->
+    <skip />
+    <!-- no translation found for force_rtl_layout_all_locales_summary (9192797796616132534) -->
+    <skip />
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU 사용량 표시"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"현재 CPU 사용량 오버레이 표시"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU 렌더링 강제 설정"</string>
@@ -1925,6 +1966,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"이 설정은 휴대전화의 모든 사용자에게 영향을 줍니다."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"언어 변경"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"글꼴 크기 변경"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"탭앤페이"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"항상 확인"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"기본으로 설정하시겠습니까?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"제한사항"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"제한사항 삭제"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN 변경"</string>
@@ -1947,8 +1991,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"태블릿이 다른 기기와 접촉하면 데이터 교환 허용"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"휴대전화가 다른 기기와 접촉하면 데이터 교환 허용"</string>
-    <!-- no translation found for restriction_location_enable_title (5020268888245775164) -->
-    <skip />
+    <string name="restriction_location_enable_title" msgid="5020268888245775164">"위치"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"앱에서 위치 정보를 사용하도록 허용"</string>
     <string name="wizard_back" msgid="5567007959434765743">"뒤로"</string>
     <string name="wizard_next" msgid="3606212602795100640">"다음"</string>
