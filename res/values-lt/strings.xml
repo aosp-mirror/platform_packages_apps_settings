@@ -165,7 +165,10 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Ar norite prisijungti prie „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Telefonų knygelės užklausa"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s nori pasiekti jūsų kontaktus ir skambučių istoriją. Suteikti prieigą %2$s?"</string>
+    <string name="bluetooth_remember_choice" msgid="6198284561603824931">"Daugiau neklausti"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Daugiau neklausti"</string>
+    <string name="bluetooth_map_request" msgid="1541931183213124878">"Pranešimo užklausa"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s nori pasiekti jūsų pranešimus. Suteikti prieigą %2$s?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datos ir laiko nustatymai"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Pasirinkite laiko juostą"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Pagal vietovę (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -988,12 +991,15 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Režimas"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Itin tikslu"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Akumuliatoriaus tausojimas"</string>
-    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Skirta tik įrengin. jutikliams"</string>
+    <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Skirta tik įreng. jutikliams"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"Vietovė išjungta"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Pastarosios vietovės užklausos"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Vietovės nustatymo paslaugos"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"Naudoja daug akum. energijos"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"Naudoja mažai akum. energijos"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Vietovės režimas"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Nust. viet. naud. GPS, „Wi‑Fi“ ir mob. r. tink."</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Nust. viet. naud. „Wi‑Fi“ ir mob. r. tink."</string>
+    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Vietą nust. su GPS, „Wi‑Fi“ ir mob. tinklu"</string>
+    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Vietą nust. su „Wi‑Fi“ ir mob. tinklu"</string>
     <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Naudoti GPS vietovei nurodyti"</string>
     <string name="location_network_based" msgid="9134175479520582215">"„Wi-Fi“ ir mob. tinklo vietovė"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Leisti programoms naud. „Google“ viet. pasl., kad viet. būtų nustatoma greičiau. Anonim. viet. duom. bus renk. ir siunč. „Google“."</string>
@@ -1042,13 +1048,13 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Pakeisti atrakinimo PIN kodą"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Patvirtinti išsaugotą modelį"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Bandykite dar kartą:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"Nubrėžti atrakinimo piešinį:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Nustatyti atrakinimo modelį"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Jei norite gauti pagalbos, paspauskite „Meniu“."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Baigę atleiskite pirštą."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Prijunkite mažiausiai <xliff:g id="NUMBER">%d</xliff:g> taškus. Bandykite dar kartą:"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"Modelis įrašytas."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Dar kartą nustatykite modelį, kad patvirtintumėte:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Naujas atrakinimo modelis:"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Baigę atleiskite pirštą"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Sujunkite mažiausiai <xliff:g id="NUMBER">%d</xliff:g> tašk. Bandykite dar kartą."</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Piešinys įrašytas"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Dar kartą nubrėžkite piešinį, kad patvirtintumėte"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Naujas atrakinimo piešinys"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Patvirtinti"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Nustatyti iš naujo"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Bandyti dar kartą"</string>
@@ -1116,8 +1122,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Rodyti padėtus procesus"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Iš naujo nustat. nuostat."</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Iš naujo nust. nuostat.?"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Bus iš naujo nustatytos visos toliau nurodytų objektų nuostatos:\n\n "<li>"Išjungtos programos"</li>\n" "<li>"Išjungtų programų pranešimai"</li>\n" "<li>"Numatytosios veiksmų programos"</li>\n" "<li>"Programų foninių duomenų apribojimai"</li>\n" "<li>"Visi leidimų apribojimai"</li>\n\n" Neprarasite jokių programų duomenų."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Iš naujo nustat. program."</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Valdyti vietą"</string>
     <string name="filter" msgid="2018011724373033887">"Filtruoti"</string>
@@ -1356,6 +1361,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Pasiekiamumo nustatymai"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Paslaugos"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Antraštės"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Didinimo gestai"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Kai ši funkcija įjungta, galite artinti ir tolinti tris kartus palietę ekraną.\n\nKai priartinate, galite:\n"<ul><li>"Iš lėto apžvelgti: mažiausiai dviem pirštais vilkite ekranu."</li>\n<li>"Koreguoti priartinimo lygį: suimkite mažiausiai dviem pirštais arba išskėskite juos."</li></ul>\n\n"Be to, galite laikinai padidinti tai, kas po pirštu, tris kartus palietę ir laikydami. Esant šiai padidinto vaizdo būsenai galite vilkti pirštu, jei norite naršyti skirtingas ekrano dalis. Pakelkite pirštą, kad grįžtumėte į ankstesnę būseną.\n\nPastaba: palietimo tris kartus, kad būtų padidinta, funkcija veikia visur, išskyrus klaviatūrą ir naršymo juostą."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Spart. pritaikymo neįgal. įjungimas"</string>
@@ -1372,6 +1378,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Nustatymai"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Įjungta"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Išjungta"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"Peržiūra"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standartinės parinktys"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"Kalba"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"Teksto dydis"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Antraštės stilius"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"Tinkintos parinktys"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"Fono spalva"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"Fono nepermatomumas"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"Teksto spalva"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"Krašto spalva"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"Krašto tipas"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"Šriftų šeima"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"Antraštės atrodys taip"</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"Numatytoji"</string>
+    <string name="color_none" msgid="3475640044925814795">"Nėra"</string>
+    <string name="color_white" msgid="8045195170201590239">"Balta"</string>
+    <string name="color_gray" msgid="9192312087142726313">"Pilka"</string>
+    <string name="color_black" msgid="7517353520909872561">"Juoda"</string>
+    <string name="color_red" msgid="4949354900304125428">"Raudona"</string>
+    <string name="color_green" msgid="5537717328428845841">"Žalia"</string>
+    <string name="color_blue" msgid="7731984529016953223">"Mėlyna"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"Žalsvai mėlyna"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"Geltona"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"Purpurinė"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Naudoti „<xliff:g id="SERVICE">%1$s</xliff:g>“?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"„<xliff:g id="SERVICE">%1$s</xliff:g>“ reikia:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Stebėti jūsų veiksmus"</string>
@@ -1469,6 +1500,11 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Atnaujinti"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"„Android“ OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Medijos serveris"</string>
+    <string name="process_stats_summary_title" msgid="1144688045609771677">"Procesų statistika"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"Entuziastų pateikta statistika apie vykstančius procesus"</string>
+    <string name="app_memory_use" msgid="7849258480392171939">"Naudojama atmintis"</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"Statistika per <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"Įrenginio atmintis šiuo metu yra <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Balso įvestis ir išvestis"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Balso įvesties ir išvesties nustatymai"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Balso paieška"</string>
@@ -1502,16 +1538,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Pasirinkite kitą variklį"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Šis kalbos sintezės variklis gali rinkti visą įvedamą tekstą, įskaitant asmeninius duomenis, pvz., kredito kortelės numerius, išskyrus slaptažodžius. Tai vyksta dėl variklio <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Įgalinti šio kalbos sintezės variklio naudojimą?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Pasirinkus šią kalbą, teksto vertimo kalba išvesčiai būtinas veikiantis tinklo ryšys."</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"Tai yra kalbos sintezės pavyzdys"</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"Numatytoji kalbos būsena"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"<xliff:g id="LOCALE">%1$s</xliff:g> visiškai palaikoma"</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"<xliff:g id="LOCALE">%1$s</xliff:g> būtinas tinklo ryšys"</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"<xliff:g id="LOCALE">%1$s</xliff:g> nepalaikoma"</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"Tikrinama..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Varikliai"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> nustatymai"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> įgalinta"</string>
@@ -1538,7 +1570,7 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"išjungiama"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi-Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_location" msgid="2974757497945178165">"Vietovė"</string>
     <string name="gadget_sync" msgid="858895763714222152">"Sinchronizavimas"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"Skaistis <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automatinis"</string>
@@ -1722,6 +1754,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Įgalinti „OpenGL“ pėdsak."</string>
     <string name="debug_layout" msgid="5981361776594526155">"Rodyti išdėstymo ribas"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Rodyti iškarpų ribas, kraštines ir t. t."</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Išdėst. iš dešin. į kairę"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Nust. visų lokalių ekran. išdėst. iš deš. į kairę"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Rodyti centr. proc. naud."</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Ekrano perdanga rodo dabartinį centr. proc. naud."</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Priverst. GPU atvaizd."</string>
@@ -1914,6 +1948,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Šis nustatymas turi įtakos visiems šio telefono naudotojams."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Keisti kalbą"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Keisti šrifto dydį"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"Paliesti ir mokėti"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"Klausti kaskart"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"Nustatyti kaip jūsų nuostatą?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Apribojimai"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Pašalinti apribojimus"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Keisti PIN kodą"</string>

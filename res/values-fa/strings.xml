@@ -165,7 +165,10 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"آیا می‌خواهید به \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" وصل شوید؟"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"درخواست دفترچه تلفن"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s می‌خواهد به مخاطبین و سابقه تماس شما دسترسی پیدا کند. اجازهٔ دسترسی به %2$s داده شود؟"</string>
+    <string name="bluetooth_remember_choice" msgid="6198284561603824931">"دوباره سؤال نشود"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"دوباره سؤال نشود"</string>
+    <string name="bluetooth_map_request" msgid="1541931183213124878">"درخواست پیام"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s می‌خواهد به پیام‌های شما دسترسی یابد. اجازه دسترسی به %2$s داده شود؟"</string>
     <string name="date_and_time" msgid="4114084177056654663">"تنظیمات تاریخ و ساعت"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"انتخاب منطقهٔ زمانی"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"پیش‌فرض (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -989,8 +992,11 @@
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"دقت زیاد"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"صرفه‌جویی در باتری"</string>
     <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"فقط حسگرهای دستگاه"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"موقعیت مکانی خاموش"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"درخواست‌های اخیر موقعیت مکانی"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"خدمات موقعیت مکانی"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"استفاده زیاد از باتری"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"استفاده کم از باتری"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"حالت مکان"</string>
     <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"استفاده از GPS،‏ Wi-Fi و شبکه همراه برای تخمین مکان"</string>
     <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"استفاده از Wi-Fi و شبکه همراه برای تخمین مکان"</string>
@@ -1042,13 +1048,13 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"تغییر پین بازگشایی قفل"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"تأیید الگوی ذخیره شده"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"دوباره امتحان کنید:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"الگوی بازگشایی قفل را ترسیم کنید:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"یک الگوی بازگشایی قفل بکشید"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"برای دریافت راهنمایی روی منو فشار دهید."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"پس از انجام کار، انگشت را رها کنید."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را متصل کنید. دوباره امتحان کنید:"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"الگو ضبط شد."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"مجدداً الگو را برای تأیید بکشید:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"الگوی بازگشایی قفل جدید شما:"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"پس از اتمام، انگشت را رها کنید"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را به یکدیگر متصل کنید. دوباره امتحان کنید."</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"الگو ضبط شد"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"برای تأیید دوباره الگو را بکشید"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"الگوی بازگشایی قفل جدید شما"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"تأیید"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"کشیدن مجدد"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"امتحان مجدد"</string>
@@ -1116,8 +1122,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"فرآیندهای ذخیره شده در حافظهٔ پنهان"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"بازنشانی تنظیمات برگزیده برنامه"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"تنظیمات برگزیده برنامه بازنشانی شوند؟"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"با این کار تمام تنظیمات برگزیده برای این موارد بازنشانی می‌شود:\n\n "<li>"برنامه‌های غیرفعال شده"</li>\n" "<li>"اعلان‌های برنامه غیرفعال شده"</li>\n" "<li>"برنامه‌های پیش‌فرض برای عملکردها"</li>\n" "<li>"محدودیت‌های داده پس‌زمینه برای برنامه‌ها"</li>\n" "<li>"هرگونه محدودیت‌های مجوز"</li>\n\n" هیچ داده برنامه‌ای را از دست نخواهید داد."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"بازنشانی برنامه‌ها"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"مدیریت فضا"</string>
     <string name="filter" msgid="2018011724373033887">"فیلتر"</string>
@@ -1356,6 +1361,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"تنظیمات قابلیت دسترسی"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"سرویس‌ها"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"سیستم"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"زیرنویس‌ها"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"حرکات بزرگنمایی"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"وقتی این ویژگی فعال است، شما می‌توانید با سه ضربه روی صفحه بزرگنمایی یا کوچکنمایی کنید.\n\nهنگام بزرگنمایی می‌توانید:\n"<ul><li>"حرکت کنید: دو یا چند انگشت خود را روی صفحه بکشید."</li>\n<li>"تنظیم سطح بزرگنمایی: دو یا چند انگشت خود را به هم نزدیک کنید یا از هم دور کنید."</li></ul>\n\n"همچنین می‌توانید به صورت موقت آنچه را که در زیر انگشتان شما قرار دارد با سه بار ضربه روی صفحه و نگهداشتن آن بزرگ کنید. در این حالت بزرگنمایی شده، می‌توانید انگشت خود را برای کاوش قسمت‌های مختلف صفحه بکشید. برای بازگشت به حالت قبلی خود، انگشت خود را بردارید.\n\nتوجه: سه بار ضربه برای بزرگنمایی همه جا به غیر از صفحه کلید و نوار پیمایش کار می‌کند."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"میانبرهای قابلیت دسترسی"</string>
@@ -1372,6 +1378,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"تنظیمات"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"فعال"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"غیرفعال"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"پیش‌نمایش"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"گزینه‌های استاندارد"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"زبان"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"اندازه نوشتار"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"سبک زیرنویس"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"گزینه‌های سفارشی"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"رنگ پس‌زمینه"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"ماتی پس‌زمینه"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"رنگ نوشتار"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"رنگ لبه"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"نوع لبه"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"گروه قلم"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"زیرنویس‌ها شبیه به این هستند"</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"پیش‌فرض"</string>
+    <string name="color_none" msgid="3475640044925814795">"هیچ‌کدام"</string>
+    <string name="color_white" msgid="8045195170201590239">"سفید"</string>
+    <string name="color_gray" msgid="9192312087142726313">"خاکستری"</string>
+    <string name="color_black" msgid="7517353520909872561">"سياه"</string>
+    <string name="color_red" msgid="4949354900304125428">"قرمز"</string>
+    <string name="color_green" msgid="5537717328428845841">"سبز"</string>
+    <string name="color_blue" msgid="7731984529016953223">"آبی"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"سبز آبی"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"زرد"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"زرشکی"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"استفاده از <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> باید:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"عملکردهای خود را مشاهده کنید"</string>
@@ -1469,6 +1500,11 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"تازه کردن"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"سیستم عامل Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"سرور رسانه"</string>
+    <string name="process_stats_summary_title" msgid="1144688045609771677">"آمار فرآیند"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"آمار دقیق برای فرآیندهای در حال اجرا"</string>
+    <string name="app_memory_use" msgid="7849258480392171939">"استفاده از حافظه"</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"آمار در طول <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"حافظه دستگاه در حال حاضر <xliff:g id="MEMSTATE">%1$s</xliff:g> است"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"ورودی و خروجی صوتی"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"تنظیمات ورودی و خروجی صوتی"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"جستجوی صوتی"</string>
@@ -1502,16 +1538,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"انتخاب یک موتور دیگر"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"این موتور ترکیب صوتی ممکن است بتواند تمام متن گفته شده را جمع‌آوری کند، از جمله اطلاعات شخصی مانند رمزهای ورود و شماره‌های کارت اعتباری. این کارها توسط موتور<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> انجام می‌شود. استفاده از این موتور ترکیب صوتی را فعال می‌کنید؟"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"این زبان به یک اتصال شبکه فعال برای خروجی نوشتار به گفتار نیاز دارد."</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"این نمونه‌ای از ترکیب گفتار است"</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"وضعیت زبان پیش‌فرض"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"<xliff:g id="LOCALE">%1$s</xliff:g> کاملاً پشتیبانی می‌شود"</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"<xliff:g id="LOCALE">%1$s</xliff:g> به اتصال شبکه نیاز دارد"</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"<xliff:g id="LOCALE">%1$s</xliff:g> پشتیبانی نمی‌شود"</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"در حال بررسی..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"موتورها"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> تنظیمات"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> فعال است"</string>
@@ -1538,7 +1570,7 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"در حال خاموش کردن"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi‑Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"بلوتوث"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_location" msgid="2974757497945178165">"مکان"</string>
     <string name="gadget_sync" msgid="858895763714222152">"همگام‌سازی"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"روشنایی <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"خودکار"</string>
@@ -1722,6 +1754,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"فعال کردن ردیابی‌های OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"نمایش محدوده‌های طرح‌بندی"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"نمایش مرزها، حاشیه‌ها و ویژگی‌های دیگر کلیپ."</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"اجباری کردن جهت چیدمانRTL"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"اجباری کردن جهت چیدمان RTL صفحه برای همه زبان‌ها"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"نمایش میزان استفاده از CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"همپوشانی صفحهٔ نمایش میزان استفاده از CPU فعلی"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"اجبار به تفسیر و اجرای GPU"</string>
@@ -1914,6 +1948,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"این تنظیم روی همه کاربران موجود در این تلفن تأثیر می‌گذارد."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"تغییر زبان"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"تغییر اندازه قلم"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"پرداخت با یک ضربه"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"هر بار پرسیده شود"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"به عنوان روش ترجیحی شما تنظیم شود؟"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"محدودیت‌ها"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"حذف محدودیت‌ها"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"تغییر پین"</string>

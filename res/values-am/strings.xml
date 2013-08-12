@@ -165,7 +165,10 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"ወደ\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" ለማያያዝ ይፈልጋሉ?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"የስልክ አድራሻ ጠይቅ"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s የአንተን ዕውቂያዎች እና የጥሪ ታሪኮች ለመድረስ ይፈልጋል ። ለ%2$s መድረስ ይሰጥ?"</string>
+    <string name="bluetooth_remember_choice" msgid="6198284561603824931">"ዳግመኛ አትጠይቅ"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"ዳግመኛ አትጠይቅ"</string>
+    <string name="bluetooth_map_request" msgid="1541931183213124878">"የመልዕክት ጥያቄ"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s የእርስዎን መልዕክቶች ሊደርስበት ይፈልጋል። መዳረሻ ለ%2$s ይሰጥ?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"የቀን እና ሰዓት ቅንብሮች"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"የጊዜ ሰቅ ምረጥ"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"የአካባቢው (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -989,8 +992,11 @@
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"ከፍተኛ ትክክለኝነት"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"የባትሪ ኃይል መቆጠብ"</string>
     <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"የመሣሪያ ዳሳሽ አካላት ብቻ"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"አካባቢ ጠፍቷል"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"የቅርብ ጊዜ የአካባቢ ጥያቄዎች"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"የአካባቢ አገልግሎቶች"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"ከፍተኛ የባትሪ አጠቃቀም"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"ዝቅተኛ የባትሪ አጠቃቀም"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"የአካባቢ ሁነታ"</string>
     <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"አካባቢ ለመገመት ጂ ፒ ኤስ፣ Wi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦችን ይጠቀሙ"</string>
     <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"አካባቢን ለመገመት Wi‑Fiን እና የተቀሳቃሽ ስልክ አውታረ መረቦችን ይጠቀሙ"</string>
@@ -1042,13 +1048,13 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"መክፈቻ PIN ለውጥ"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"የተቀመጠ ስርዓተ ጥለት አረጋግጥ"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"በድጋሚ ሞክር::"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"የመክፈቻ ስርዓተ ንጥል ይሳሉ"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"የመክፈቻ ስርዓተ ንጥል ሳል"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"ለእገዛ ምናሌ ተጫን"</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"ሲጨርሱ ጣትዎን ይልቀቁ"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"ቢያንስ <xliff:g id="NUMBER">%d</xliff:g> ነጥቦች አያይዝ። እንገደና ሞክር፡"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"ስርዓተ ጥለት ተመዝግቧል።"</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"ለማረጋገጥ ስርዓተ ጥለት ድጋሚ ሳል፡"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"አዲሱ የመክፈቻ ስርዓተ ጥለትዎ፡"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"ሲጨርሱ ጣትዎን ያንሱት"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"ቢያንስ <xliff:g id="NUMBER">%d</xliff:g> ነጥቦችን ያያይዙ። እንገደና ይሞክሩ።"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"ስርዓተ ጥለት ተመዝግቧል"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"ለማረጋገጥ ስርዓተ ጥለት ድጋሚ ሳል"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"አዲሱ የመክፈቻ ስርዓተ ጥለትዎ"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"አረጋግጥ"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"ድጋሚ ሳል"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"እንደገና ሞክር"</string>
@@ -1116,8 +1122,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"የተሸጎጡ ሂደቶችን አሳይ"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"የመተግበሪያዎች ምርጫዎችን ዳግም አስጀምር"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"የመተግበሪያዎች ምርጫዎች ዳግም ይጀመሩ?"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"ይሄ ሁሉንም የእነኚህ ምርጫዎችን ዳግም ያስጀምራቸዋል፦\n\n "<li>"የተሰናከሉ መተግበሪያዎች"</li>\n" "<li>"የተሰናከሉ መተግበሪያ ማሳወቂያዎች"</li>\n" "<li>"ለሁሉም እርምጃዎች ነባሪ መተግበሪያዎች"</li>\n" "<li>"የመተግበሪያዎች የጀርባ ውሂብ ገደቦች"</li>\n" "<li>"ማንኛቸውም የፍቃድ ገደቦች"</li>\n\n" ምንም የመተግበሪያ ውሂብ አይጠፋብዎትም።"</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"መተግበሪያዎችን ዳግም አስጀምር"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"ባዶ ቦታ አደራጅ"</string>
     <string name="filter" msgid="2018011724373033887">"አጣራ"</string>
@@ -1356,6 +1361,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ተደራሽነት ቅንብሮች"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"አገልግሎቶች"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"ስርዓት"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"መግለጫ ፅሑፎች"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"የማጉላት ምልክቶች"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"ይሄ ባህሪ ሲበራ ማያ ገጹን ሶስቴ መታ በማድረግ ማጉላት እና ማሳነስ ይችላሉ።\n\nአጉልተው ሳሉ እነኚህን ማድረግ ይችላሉ፦\n"<ul><li>"ማንፏቀቅ፦ በማያ ገጹ ላይ ሁለት ወይም ተጨማሪ ጣቶችን ይጎትቱ።"</li>\n<li>"የአጉላ ደረጃን ማስተካከል፦ በሁለት ወይም ተጨማሪ ጣቶች ይቆንጥጡ ወይም ጣቶችዎን ይበትኗቸው።"</li></ul>\n\n"እንዲሁም ሶስቴ መታ በማድረግና በመያዝ ከጣትዎ ስር ያለውን በጊዜያዊነት ማጉላት ይችላሉ። በዚህ የማጉላት ሁኔታ ላይ የማያ ገጹ የተለያዩ ክፍሎችን ለማሰስ ጣትዎን መጎተት ይችላሉ። ወደ ቀዳሚ ሁኔታዎን ለመመለስ ጣትዎን ያንሱ።\n\nማስታወሻ፦ ከቁልፍ ሰሌዳው እና የአሰሳ አሞሌው በስተቀር ለማጉላት ሶስቴ መታ ማድረግ በሁሉም ቦታ ላይ ይሰራል።"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"የተደራሽነት አቋራጭ"</string>
@@ -1372,6 +1378,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"ቅንብሮች"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"በርቷል"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"ጠፍቷል"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"ቅድመ-ዕይታ"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"መደበኛ አማራጮች"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"ቋንቋ"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"የፅሁፍ መጠን"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"የመግለጫ ጽሑፍ ቅጥ"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"ብጁ አማራጮች"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"የጀርባ ቀለም"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"የጀርባ ግልጽነት"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"የጽሁፍ ቀለም"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"የጠርዝ ቀለም"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"የጠርዝ አይነት"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"የቅርጸ ቁምፊ ቤተሰብ"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"መግለጫ ጽሑፎች እንዲህ ነው የሚመስሉት"</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"ነባሪ"</string>
+    <string name="color_none" msgid="3475640044925814795">"ምንም የለም"</string>
+    <string name="color_white" msgid="8045195170201590239">"ነጭ"</string>
+    <string name="color_gray" msgid="9192312087142726313">"ግራጫ"</string>
+    <string name="color_black" msgid="7517353520909872561">"ጥቁር"</string>
+    <string name="color_red" msgid="4949354900304125428">"ቀይ"</string>
+    <string name="color_green" msgid="5537717328428845841">"አረንጓዴ"</string>
+    <string name="color_blue" msgid="7731984529016953223">"ሰማያዊ"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"ሳያን"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"ቢጫ"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"ማጀንታ"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> ይጠቀሙ?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> ይህን ማድረግ አለበት፦"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"እርምጃዎችዎን ይከታተሉ"</string>
@@ -1469,6 +1500,11 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"አድስ"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android  ስርዓተ ክወና"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"ማህደረ መረጃ አገልጋይ"</string>
+    <string name="process_stats_summary_title" msgid="1144688045609771677">"የሂደት ስታቲስቲክስ"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"እያሄዱ ስላሉ ሂደቶች ያሉ ዝርዝር ስታቲስቲክስ"</string>
+    <string name="app_memory_use" msgid="7849258480392171939">"የማህደረ ትውስታ አጠቃቀም"</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"በ<xliff:g id="TIME">%1$s</xliff:g> ላይ የነበረ ስታቲስቲክስ"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"የመሣሪያ ማህደረ ትውስታ በአሁኑ ጊዜ <xliff:g id="MEMSTATE">%1$s</xliff:g> ነው"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"የድምፅ ግቤት &amp; ውፅአት"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"የድምፅ ግቤት &amp; ውፅአት ቅንብሮች"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"የድምፅ ፍለጋ"</string>
@@ -1502,16 +1538,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"ሌላ አንቀሳቃሽ ምረጥ"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"ይህ የንግግር ልምምድ አንቀሳቃሽ የሚነገረውን ፅሁፍ ሁሉ  እንደ ይለፍ ቃል እና የዱቤ ካርድ ቁጥሮች፣ የግል ውሂብ ጨምሮ ለመሰብሰብ ይችል ይሆናል።  ከ <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> አንቀሳቃሽ ይመጣል። የዚህን የንግግር ልምምድ አንቀሳቃሽ አጠቃቀም ይንቃ?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"ይህ ቋንቋ የጽሑፍ-ወደ-ንግግር ውጽዓት እንዲኖረው የሚሰራ የአውታረ መረብ ግንኙነት ያስፈልገዋል።"</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"ይህ የተሰራ ንግግር ምሳሌ ነው"</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"የነባሪ ቋንቋ ሁኔታ"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"<xliff:g id="LOCALE">%1$s</xliff:g> ሙሉ ለሙሉ ይደገፋል"</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"<xliff:g id="LOCALE">%1$s</xliff:g> የአውታረ መረብ ግንኙነት ያስፈልጋል"</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"<xliff:g id="LOCALE">%1$s</xliff:g> አይደገፍም"</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"በማረጋገጥ ላይ..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"አንቀሳቃሾች"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>ቅንብሮች"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> ተችሏል"</string>
@@ -1538,7 +1570,7 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"በማጥፋት ላይ"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi‑Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"ብሉቱዝ"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_location" msgid="2974757497945178165">"አካባቢ"</string>
     <string name="gadget_sync" msgid="858895763714222152">"አመሳስል"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"ብሩህነት <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"ራስ-ሰር"</string>
@@ -1722,6 +1754,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"የ OpenGL ክትትሎችን ያንቁ"</string>
     <string name="debug_layout" msgid="5981361776594526155">"የአቀማመጥ ገደቦችን አሳይ"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"የቅንጥብ ገደቦች፣ ጠርዞች፣ ወዘተ አሳይ"</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"የቀኝ-ወደ-ግራ አቀማመጥ አቅጣጫ አስገድድ"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"ለሁሉም አካባቢዎች የማያ ገጽ አቀማመጥ ወደ ቀኝ-ወደ-ግራ እንዲሆን አስገድድ"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"የCPU አጠቃቀም አሳይ"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"የማያ ተደራቢ የአሁኑን የCPU አጠቃቀም  እያሳየ ነው።"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU ምላሽ መስጠትን አስገድድ"</string>
@@ -1914,6 +1948,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"ይህ ቅንብር እዚህ ስልክ ላይ ያሉት ሁሉም ተጠቃሚዎች ይመለከታቸዋል።"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"ቋንቋ ይቀይሩ"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"የቅርጸ-ቁምፊ መጠን ይቀይሩ"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"መታ ያድርጉ እና ይክፈሉ"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"ሁልጊዜ ጊዜ ጠይቅ"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"እንደ ምርጫዎ ሆኖ ይዘጋጅ?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"ገደቦች"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"ገደቦችን አስወግድ"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"ፒን ቀይር"</string>

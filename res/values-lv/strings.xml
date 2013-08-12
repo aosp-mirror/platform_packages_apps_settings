@@ -165,7 +165,10 @@
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Vai vēlaties izveidot savienojumu ar ierīci <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_phonebook_request" msgid="457033227379858269">"Tālruņu kataloga pieprasījums"</string>
     <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"Ierīce %1$s vēlas piekļūt jūsu kontaktpersonām un zvanu vēsturei. Vai sniegt piekļuvi ierīcei %2$s?"</string>
+    <string name="bluetooth_remember_choice" msgid="6198284561603824931">"Nejautāt atkārtoti"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Nejautāt atkārtoti"</string>
+    <string name="bluetooth_map_request" msgid="1541931183213124878">"Ziņojuma pieprasījums"</string>
+    <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"Ierīce “%1$s” vēlas piekļūt jūsu ziņojumiem. Vai sniegt piekļuvi ierīcei “%2$s”?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datuma un laika iestatījumi"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Laika joslas izvēle"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Reģionāls (<xliff:g id="DATE">%s</xliff:g>)"</string>
@@ -989,8 +992,11 @@
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Augsta precizitāte"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Akumulatora jaudas taupīšana"</string>
     <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"Tikai ierīces sensori"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"Atrašanās vieta izslēgta"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Neseni vietu pieprasījumi"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Atrašanās vietu pakalpojumi"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"Augsts akumulatora patēriņš"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"Zems akumulatora patēriņš"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Atrašanās vietas režīms"</string>
     <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Lietot GPS, Wi‑Fi un mob. tīklus vietas noteikšanai"</string>
     <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Lietot Wi‑Fi un mob. tīklus vietas noteikšanai"</string>
@@ -1042,13 +1048,13 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Mainīt atbloķēšanas PIN"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Apstiprināt saglabāto kombināciju"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Mēģiniet vēlreiz:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="2063630508212535241">"Uzzīmējiet grafisko atslēgu:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Zīmēt atbloķēšanas kombināciju"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Lai saņemtu palīdzību, nospiediet Izvēlne."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Atbrīvojiet pirkstu, kad esat pabeidzis."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Pievienojiet vismaz <xliff:g id="NUMBER">%d</xliff:g> punktus. Mēģiniet vēlreiz:"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="8378617839439987962">"Kombinācija ir ierakstīta."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Vēlreiz zīmējiet kombināciju, lai apstiprinātu:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Jaunā atbloķēšanas kombinācija:"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Atlaidiet pirkstu, kad esat pabeidzis."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Pievienojiet vismaz <xliff:g id="NUMBER">%d</xliff:g> punktus. Mēģiniet vēlreiz."</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Kombinācija ir ierakstīta"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Vēlreiz zīmējiet kombināciju, lai apstiprinātu."</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Jaunā atbloķēšanas kombinācija"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Apstiprināt"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Uzvilkt atkārtoti"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Mēģināt vēlreiz"</string>
@@ -1116,8 +1122,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Rādīt kešatmiņā iev. pr."</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Atiest. lietotnes prefer."</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Vai atiest. liet. pref.?"</string>
-    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tādējādi tiks atiestatītas visas preferences, kas saistītas ar:\n\n "<li>"atspējotām lietotnēm;"</li>\n" "<li>"atspējotu lietotņu paziņojumiem;"</li>\n" "<li>"darbībām paredzētām noklusējuma lietojumprogrammām;"</li>\n" "<li>"lietotņu fona datu ierobežojumiem;"</li>\n" "<li>"visiem atļauju ierobežojumiem."</li>\n\n" Jūs nezaudēsiet nekādus lietotņu datus."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Atiestatīt lietotnes"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Vietas pārvaldība"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrs"</string>
@@ -1356,6 +1361,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Pieejamības iestatījumi"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Pakalpojumi"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistēma"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Paraksti"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Palielināšanas žesti"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Ja šī funkcija ir ieslēgta, varat tuvināt un tālināt, trīs reizes pieskaroties ekrānam.\n\nJa veicāt tuvināšanu, varat veikt arī tālāk norādītās darbības.\n"<ul><li>"Panoramēt — velciet divus pirkstus vai vairāk pāri ekrānam."</li>\n<li>"Pielāgot tālummaiņas līmeni — savelciet kopā divus pirkstus vai vairāk vai izpletiet tos."</li></ul>\n\n"Varat arī uz brīdi palielināt zem pirksta redzamo vienumu, trīs reizes pieskaroties ekrānam un turot. Šādā palielinājumā varat pārvilkt pirkstu, lai izvērstu citas ekrāna daļas. Paceliet pirkstu, lai atgrieztu iepriekšējo ekrāna stāvokli.\n\nPiezīme. Palielināšana, trīs reizes pieskaroties ekrānam, darbojas visos ekrānos, izņemot tastatūru un navigācijas joslu."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Pieejamības saīsne"</string>
@@ -1372,6 +1378,31 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Iestatījumi"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ieslēgta"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Izslēgta"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"Priekšskatījums"</string>
+    <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standarta opcijas"</string>
+    <string name="captioning_locale" msgid="4559155661018823503">"Valoda"</string>
+    <string name="captioning_text_size" msgid="6737002449104466028">"Teksta lielums"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Paraksta stils"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"Pielāgotas opcijas"</string>
+    <string name="captioning_background_color" msgid="9053011212948992570">"Fona krāsa"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"Fona necaurredzamība"</string>
+    <string name="captioning_foreground_color" msgid="85623486537640059">"Teksta krāsa"</string>
+    <string name="captioning_edge_color" msgid="3670094753735263238">"Malu krāsa"</string>
+    <string name="captioning_edge_type" msgid="5997247394951682154">"Malu veids"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"Fontu saime"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"Paraksti izskatīsies šādi:"</string>
+    <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
+    <string name="locale_default" msgid="2593883646136326969">"Noklusējums"</string>
+    <string name="color_none" msgid="3475640044925814795">"Nav"</string>
+    <string name="color_white" msgid="8045195170201590239">"Balta"</string>
+    <string name="color_gray" msgid="9192312087142726313">"Pelēka"</string>
+    <string name="color_black" msgid="7517353520909872561">"Melna"</string>
+    <string name="color_red" msgid="4949354900304125428">"Sarkana"</string>
+    <string name="color_green" msgid="5537717328428845841">"Zaļa"</string>
+    <string name="color_blue" msgid="7731984529016953223">"Zila"</string>
+    <string name="color_cyan" msgid="7033027180641173211">"Ciānzila"</string>
+    <string name="color_yellow" msgid="9112680561610873529">"Dzeltena"</string>
+    <string name="color_magenta" msgid="5059212823607815549">"Fuksīnsarkana"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Vai izmantot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> nepieciešams:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Novērot jūsu darbības."</string>
@@ -1469,6 +1500,11 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Atsvaidzināt"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
+    <string name="process_stats_summary_title" msgid="1144688045609771677">"Procesu statistika"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"Statistika par darbības procesiem"</string>
+    <string name="app_memory_use" msgid="7849258480392171939">"Atmiņas lietojums"</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"Statistika par laiku: <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"Ierīces atmiņas līmenis pašreiz ir <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Balss ievade un izvade"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Balss ievades un izvades iestatījumi"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Balss meklēšana"</string>
@@ -1502,16 +1538,12 @@
     <string name="tts_engine_error_reselect" msgid="2415399149293842112">"Izvēlēties citu programmu"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Lietojot šo runas sintēzes programmu, var tikt apkopots viss ierunātais teksts, tostarp tāda personīgā informācija kā paroles un kredītkaršu numuri. Tā ir no <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> programmas. Vai iespējot šīs runas sintēzes programmas lietošanu?"</string>
     <string name="tts_engine_network_required" msgid="1190837151485314743">"Lai izmantotu teksta pārveidošanu runā šajā valodā, ir nepieciešams aktīvs tīkla savienojums."</string>
-    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
-    <skip />
-    <!-- no translation found for tts_status_title (7268566550242584413) -->
-    <skip />
-    <!-- no translation found for tts_status_ok (1309762510278029765) -->
-    <skip />
-    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
-    <skip />
-    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
-    <skip />
+    <string name="tts_default_sample_string" msgid="4040835213373086322">"Šis ir runas sintēzes piemērs."</string>
+    <string name="tts_status_title" msgid="7268566550242584413">"Noklusējuma valodas statuss"</string>
+    <string name="tts_status_ok" msgid="1309762510278029765">"Lokalizācija <xliff:g id="LOCALE">%1$s</xliff:g> tiek pilnībā atbalstīta."</string>
+    <string name="tts_status_requires_network" msgid="6042500821503226892">"Lokalizācijai <xliff:g id="LOCALE">%1$s</xliff:g> nepieciešams tīkla savienojums."</string>
+    <string name="tts_status_not_supported" msgid="4491154212762472495">"Lokalizācija <xliff:g id="LOCALE">%1$s</xliff:g> netiek atbalstīta."</string>
+    <string name="tts_status_checking" msgid="4983413982985913047">"Notiek pārbaude..."</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"Programmas"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> iestatījumi"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> ir iespējots"</string>
@@ -1538,7 +1570,7 @@
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"notiek izslēgšana"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi-Fi"</string>
     <string name="gadget_bluetooth" msgid="8998572807378694410">"Bluetooth"</string>
-    <string name="gadget_gps" msgid="1558173602059236567">"GPS"</string>
+    <string name="gadget_location" msgid="2974757497945178165">"Atrašanās vieta"</string>
     <string name="gadget_sync" msgid="858895763714222152">"Sinhronizācija"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"Spilgtums <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automātisks"</string>
@@ -1722,6 +1754,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Iespējot OpenGL trases"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Rādīt izkārtojuma robežas"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Rādīt klipu robežas, malas utt."</string>
+    <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Virz. no l. uz kr. (obl.)"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Obl. izkārt. virz. no labās uz kr. pusi visām lok."</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Rādīt CPU lietojumu"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Ekrāna pārklājums ar aktuālo CPU lietojumu"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Piespiedu GPU render."</string>
@@ -1914,6 +1948,9 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Šis iestatījums ietekmē visus šī tālruņa lietotājus."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Valodas maiņa"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Fonta lieluma maiņa"</string>
+    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"Pieskarties un maksāt"</string>
+    <string name="nfc_payment_ask" msgid="1061129391464251903">"Jautāt katru reizi"</string>
+    <string name="nfc_payment_set_default" msgid="1583397933053078296">"Vai iestatīt kā jūsu preferenci?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ierobežojumi"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Ierobežojumu atcelšana"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Mainīt PIN"</string>
