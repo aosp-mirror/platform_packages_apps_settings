@@ -34,7 +34,7 @@ import com.android.settings.R;
  */
 public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
-    DevicePickerFragment() {
+    public DevicePickerFragment() {
         super(null /* Not tied to any user restrictions. */);
     }
 
