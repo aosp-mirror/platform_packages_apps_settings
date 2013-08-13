@@ -140,6 +140,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         mPlayExample = findPreference(KEY_PLAY_EXAMPLE);
         mPlayExample.setOnPreferenceClickListener(this);
+        mPlayExample.setEnabled(false);
 
         mEnginePreferenceCategory = (PreferenceCategory) findPreference(
                 KEY_ENGINE_PREFERENCE_SECTION);
@@ -363,6 +364,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private boolean isNetworkRequiredForSynthesis() {
         Set<String> features = mTts.getFeatures(mCurrentDefaultLocale);
+        if (features == null) {
+          return false;
+        }
         return features.contains(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS) &&
                 !features.contains(TextToSpeech.Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS);
     }
