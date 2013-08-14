@@ -50,6 +50,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
                 CardEmulationManager.EXTRA_SERVICE_COMPONENT);
         String category = intent.getStringExtra(CardEmulationManager.EXTRA_CATEGORY);
 
+        setResult(RESULT_CANCELED);
         if (!buildDialog(component, category)) {
             finish();
         }
@@ -62,6 +63,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
             case BUTTON_POSITIVE:
                 mBackend.setDefaultPaymentApp(mNewDefault);
                 mBackend.setAutoPaymentMode(true);
+                setResult(RESULT_OK);
                 break;
             case BUTTON_NEGATIVE:
                 break;
