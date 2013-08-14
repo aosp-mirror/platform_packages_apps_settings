@@ -106,6 +106,8 @@ public class LocationSettings extends LocationSettingsBase
         RecentLocationApps recentApps = new RecentLocationApps(activity);
         recentApps.fillAppList(mRecentLocationRequests);
 
+        SettingsInjector.addInjectedSettings(mLocationServices, activity, getPreferenceManager());
+
         if (activity instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
             // Only show the master switch when we're not in multi-pane mode, and not being used as
