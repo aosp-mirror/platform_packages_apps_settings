@@ -53,17 +53,11 @@ public class LocationMode extends LocationSettingsBase
     public void onResume() {
         super.onResume();
         createPreferenceHierarchy();
-        mHighAccuracy.resume();
-        mBatterySaving.resume();
-        mSensorsOnly.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mHighAccuracy.pause();
-        mBatterySaving.pause();
-        mSensorsOnly.pause();
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
