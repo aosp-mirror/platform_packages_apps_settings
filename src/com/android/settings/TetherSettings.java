@@ -387,6 +387,8 @@ public class TetherSettings extends SettingsPreferenceFragment
         }
 
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter == null)
+            return;
         int btState = adapter.getState();
         if (btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mBluetoothTether.setEnabled(false);
