@@ -350,13 +350,12 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
             pi = packages != null ? pm.getPackageInfo(packages[0], 0) : null;
         } catch (NameNotFoundException nnfe) { /* Nothing */ }
         ApplicationInfo ai = pi != null? pi.applicationInfo : null;
-        boolean isSystem = ai != null? (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0 : false;
 
         boolean removeHeader = true;
         switch (mDrainType) {
             case APP:
-                // If it is a Java application and it's not a system application
-                if (packages != null && !isSystem) {
+                // If it is a Java application and only one package is associated with the Uid
+                if (packages != null && packages.length == 1) {
                     addControl(R.string.battery_action_app_details,
                             R.string.battery_sugg_apps_info, ACTION_APP_DETAILS);
                     removeHeader = false;
