@@ -1001,6 +1001,7 @@
     <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"አካባቢ ለመገመት ጂ ፒ ኤስ፣ Wi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦችን ይጠቀሙ"</string>
     <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"አካባቢን ለመገመት Wi‑Fiን እና የተቀሳቃሽ ስልክ አውታረ መረቦችን ይጠቀሙ"</string>
     <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"አካባቢዎን ለመለየት ጂ ፒ ኤስ ይጠቀሙ"</string>
+    <string name="location_loading_injected_setting" msgid="4238574500081976654">"ሰርስሮ በማውጣት ላይ…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"የWi-Fi እና የተንቀሳቃሽ ስልክ አውታረ መረብ አካባቢ"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"መተግበሪያዎች አካባቢዎትን በበለጠ ፍጥነት እንዲገምቱ የGoogle የአካባቢ አገልግሎትን ይጠቀሙ። ስም አልባ የአካባቢ ውሂብ ተሰብስቦ ወደ Google ይላካል።"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"አካባቢ በWi-Fi ይታወቃል"</string>
@@ -1052,9 +1053,9 @@
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"ለእገዛ ምናሌ ተጫን"</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"ሲጨርሱ ጣትዎን ያንሱት"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"ቢያንስ <xliff:g id="NUMBER">%d</xliff:g> ነጥቦችን ያያይዙ። እንገደና ይሞክሩ።"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"ስርዓተ ጥለት ተመዝግቧል"</string>
-    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"ለማረጋገጥ ስርዓተ ጥለት ድጋሚ ሳል"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"አዲሱ የመክፈቻ ስርዓተ ጥለትዎ"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"ሥርዓተ ጥለት ተመዝግቧል"</string>
+    <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"ለማረጋገጥ ሥርዓተ ጥለት ድጋሚ ሳል"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"አዲሱ የእርስዎ የመክፈቻ ሥርዓተ ጥለት"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"አረጋግጥ"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"ድጋሚ ሳል"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"እንደገና ሞክር"</string>
@@ -1504,7 +1505,7 @@
     <string name="process_stats_summary" msgid="109387941605607762">"እያሄዱ ስላሉ ሂደቶች ያሉ ዝርዝር ስታቲስቲክስ"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"የማህደረ ትውስታ አጠቃቀም"</string>
     <string name="process_stats_total_duration" msgid="663196332079061529">"በ<xliff:g id="TIME">%1$s</xliff:g> ላይ የነበረ ስታቲስቲክስ"</string>
-    <string name="process_stats_memory_status" msgid="4251599550196193093">"የመሣሪያ ማህደረ ትውስታ በአሁኑ ጊዜ <xliff:g id="MEMSTATE">%1$s</xliff:g> ነው"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"የመሣሪያው ማህደረ ትውስታ በአሁኑ ጊዜ <xliff:g id="MEMSTATE">%1$s</xliff:g> ነው"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"የድምፅ ግቤት &amp; ውፅአት"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"የድምፅ ግቤት &amp; ውፅአት ቅንብሮች"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"የድምፅ ፍለጋ"</string>
@@ -1755,7 +1756,7 @@
     <string name="debug_layout" msgid="5981361776594526155">"የአቀማመጥ ገደቦችን አሳይ"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"የቅንጥብ ገደቦች፣ ጠርዞች፣ ወዘተ አሳይ"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"የቀኝ-ወደ-ግራ አቀማመጥ አቅጣጫ አስገድድ"</string>
-    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"ለሁሉም አካባቢዎች የማያ ገጽ አቀማመጥ ወደ ቀኝ-ወደ-ግራ እንዲሆን አስገድድ"</string>
+    <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"ለሁሉም አካባቢዎች የማያ ገጽ አቀማመጥ ከቀኝ-ወደ-ግራ እንዲሆን አስገድድ"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"የCPU አጠቃቀም አሳይ"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"የማያ ተደራቢ የአሁኑን የCPU አጠቃቀም  እያሳየ ነው።"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU ምላሽ መስጠትን አስገድድ"</string>
