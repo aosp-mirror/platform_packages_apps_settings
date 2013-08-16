@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -255,6 +257,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
          * appropriately.)
          */
         private int upgradeQualityForEncryption(int quality) {
+            // Don't upgrade quality for secondary users. Encryption requirements don't apply.
+            if (Process.myUserHandle() != UserHandle.OWNER) return quality;
             int encryptionStatus = mDPM.getStorageEncryptionStatus();
             boolean encrypted = (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE)
                     || (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVATING);
