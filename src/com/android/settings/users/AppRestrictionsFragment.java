@@ -475,13 +475,24 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 PackageManager.GET_DISABLED_COMPONENTS | PackageManager.GET_UNINSTALLED_PACKAGES);
         for (ResolveInfo app : launchableApps) {
             if (app.activityInfo != null && app.activityInfo.applicationInfo != null) {
+                final String packageName = app.activityInfo.packageName;
                 int flags = app.activityInfo.applicationInfo.flags;
                 if ((flags & ApplicationInfo.FLAG_SYSTEM) != 0
                         || (flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
                     // System app
                     // Skip excluded packages
-                    if (excludePackages.contains(app.activityInfo.packageName)) continue;
-
+                    if (excludePackages.contains(packageName)) continue;
+                    int enabled = pm.getApplicationEnabledSetting(packageName);
+                    if (enabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED
+                            || enabled == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                        // Check if the app is already enabled for the target user
+                        ApplicationInfo targetUserAppInfo = getAppInfoForUser(packageName,
+                                0, mUser);
+                        if (targetUserAppInfo == null
+                                || (targetUserAppInfo.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+                            continue;
+                        }
+                    }
                     SelectableAppInfo info = new SelectableAppInfo();
                     info.packageName = app.activityInfo.packageName;
                     info.appName = app.activityInfo.applicationInfo.loadLabel(pm);
@@ -492,6 +503,16 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     visibleApps.add(info);
                 }
             }
+        }
+    }
+
+    private ApplicationInfo getAppInfoForUser(String packageName, int flags, UserHandle user) {
+        try {
+            ApplicationInfo targetUserAppInfo = mIPm.getApplicationInfo(packageName, flags,
+                    user.getIdentifier());
+            return targetUserAppInfo;
+        } catch (RemoteException re) {
+            return null;
         }
     }
 
@@ -563,6 +584,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             }
         }
 
+        // Get the list of apps already installed for the user
         mUserApps = null;
         try {
             mUserApps = ipm.getInstalledApplications(
@@ -586,6 +608,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 }
             }
         }
+
+        // Sort the list of visible apps
         Collections.sort(mVisibleApps, new AppLabelComparator());
 
         // Remove dupes
