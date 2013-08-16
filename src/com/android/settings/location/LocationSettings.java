@@ -19,23 +19,23 @@ package com.android.settings.location;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryStatsHelper;
 
 /**
  * Location access settings.
  */
 public class LocationSettings extends LocationSettingsBase
         implements CompoundButton.OnCheckedChangeListener {
-    private static final String TAG = LocationSettings.class.getSimpleName();
     /** Key for preference screen "Mode" */
     private static final String KEY_LOCATION_MODE = "location_mode";
     /** Key for preference category "Recent location requests" */
@@ -49,6 +49,8 @@ public class LocationSettings extends LocationSettingsBase
     private PreferenceCategory mRecentLocationRequests;
     private PreferenceCategory mLocationServices;
 
+    private BatteryStatsHelper mStatsHelper;
+
     public LocationSettings() {
         mValidListener = false;
     }
@@ -57,6 +59,18 @@ public class LocationSettings extends LocationSettingsBase
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         createPreferenceHierarchy();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mStatsHelper = new BatteryStatsHelper(activity, null);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        mStatsHelper.create(icicle);
     }
 
     @Override
@@ -73,6 +87,13 @@ public class LocationSettings extends LocationSettingsBase
         super.onPause();
         mValidListener = false;
         mSwitch.setOnCheckedChangeListener(null);
+        mStatsHelper.pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mStatsHelper.destroy();
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
@@ -88,9 +109,8 @@ public class LocationSettings extends LocationSettingsBase
                 new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        PreferenceActivity preferenceActivity =
-                                (PreferenceActivity) getActivity();
-                        preferenceActivity.startPreferencePanel(
+                        PreferenceActivity activity = (PreferenceActivity) getActivity();
+                        activity.startPreferencePanel(
                                 LocationMode.class.getName(), null,
                                 R.string.location_mode_screen_title, null, LocationSettings.this,
                                 0);
@@ -101,30 +121,24 @@ public class LocationSettings extends LocationSettingsBase
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         mLocationServices = (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
 
-        Activity activity = getActivity();
-
-        RecentLocationApps recentApps = new RecentLocationApps(activity);
+        PreferenceActivity activity = (PreferenceActivity) getActivity();
+        RecentLocationApps recentApps = new RecentLocationApps(activity, mStatsHelper);
         recentApps.fillAppList(mRecentLocationRequests);
 
         SettingsInjector.addInjectedSettings(mLocationServices, activity, getPreferenceManager());
 
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            // Only show the master switch when we're not in multi-pane mode, and not being used as
-            // Setup Wizard.
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                mSwitch.setPaddingRelative(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END));
-            }
-        } else {
-            Log.wtf(TAG, "Current activity is not an instance of PreferenceActivity!");
+        // Only show the master switch when we're not in multi-pane mode, and not being used as
+        // Setup Wizard.
+        if (activity.onIsHidingHeaders() || !activity.onIsMultiPane()) {
+            final int padding = activity.getResources().getDimensionPixelSize(
+                    R.dimen.action_bar_switch_padding);
+            mSwitch.setPaddingRelative(0, 0, padding, 0);
+            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                    ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_VERTICAL | Gravity.END));
         }
 
         setHasOptionsMenu(true);
