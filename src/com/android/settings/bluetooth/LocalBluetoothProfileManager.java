@@ -346,7 +346,8 @@ final class LocalBluetoothProfileManager {
             removedProfiles.remove(mOppProfile);
         }
 
-        if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Hid) &&
+        if ((BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Hid) ||
+             BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Hogp)) &&
             mHidProfile != null) {
             profiles.add(mHidProfile);
             removedProfiles.remove(mHidProfile);
