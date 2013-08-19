@@ -335,26 +335,31 @@ public class ProcessStatsUi extends PreferenceFragment {
             }
             if (targetApp == null) {
                 String[] packages = pm.getPackagesForUid(proc.mUid);
-                for (String curPkg : packages) {
-                    try {
-                        final PackageInfo pi = pm.getPackageInfo(curPkg,
-                                PackageManager.GET_DISABLED_COMPONENTS |
-                                PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                                PackageManager.GET_UNINSTALLED_PACKAGES);
-                        if (pi.sharedUserLabel != 0) {
-                            targetApp = pi.applicationInfo;
-                            final CharSequence nm = pm.getText(curPkg,
-                                    pi.sharedUserLabel, pi.applicationInfo);
-                            if (nm != null) {
-                                label = nm.toString() + " (" + proc.mName + ")";
-                            } else {
-                                label = targetApp.loadLabel(pm).toString() + " ("
-                                        + proc.mName + ")";
+                if (packages != null) {
+                    for (String curPkg : packages) {
+                        try {
+                            final PackageInfo pi = pm.getPackageInfo(curPkg,
+                                    PackageManager.GET_DISABLED_COMPONENTS |
+                                    PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
+                                    PackageManager.GET_UNINSTALLED_PACKAGES);
+                            if (pi.sharedUserLabel != 0) {
+                                targetApp = pi.applicationInfo;
+                                final CharSequence nm = pm.getText(curPkg,
+                                        pi.sharedUserLabel, pi.applicationInfo);
+                                if (nm != null) {
+                                    label = nm.toString() + " (" + proc.mName + ")";
+                                } else {
+                                    label = targetApp.loadLabel(pm).toString() + " ("
+                                            + proc.mName + ")";
+                                }
+                                break;
                             }
-                            break;
+                        } catch (PackageManager.NameNotFoundException e) {
                         }
-                    } catch (PackageManager.NameNotFoundException e) {
                     }
+                } else {
+                    // no current packages for this uid, typically because of uninstall
+                    Log.i(TAG, "No package for uid " + proc.mUid);
                 }
             }
             pref.setTitle(label);
