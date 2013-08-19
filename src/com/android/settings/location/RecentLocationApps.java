@@ -69,7 +69,7 @@ public class RecentLocationApps {
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            mStatsHelper.startBatteryDetailPage(mActivity, mSipper);
+            mStatsHelper.startBatteryDetailPage(mActivity, mSipper, false);
             return true;
         }
     }

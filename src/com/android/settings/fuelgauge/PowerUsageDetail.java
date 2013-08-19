@@ -107,6 +107,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     public static final String EXTRA_ICON_PACKAGE = "iconPackage"; // String
     public static final String EXTRA_NO_COVERAGE = "noCoverage";
     public static final String EXTRA_ICON_ID = "iconId"; // Int
+    public static final String EXTRA_SHOW_LOCATION_BUTTON = "showLocationButton";  // Boolean
 
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
@@ -128,13 +129,14 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     private double mNoCoverage; // Percentage of time that there was no coverage
 
     private boolean mUsesGps;
+    private boolean mShowLocationButton;
 
     private static final String TAG = "PowerUsageDetail";
     private String[] mPackages;
 
     ApplicationInfo mApp;
     ComponentName mInstaller;
-    
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -176,6 +178,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         mNoCoverage = args.getDouble(EXTRA_NO_COVERAGE, 0);
         String iconPackage = args.getString(EXTRA_ICON_PACKAGE);
         int iconId = args.getInt(EXTRA_ICON_ID, 0);
+        mShowLocationButton = args.getBoolean(EXTRA_SHOW_LOCATION_BUTTON);
         if (!TextUtils.isEmpty(iconPackage)) {
             try {
                 final PackageManager pm = getActivity().getPackageManager();
@@ -362,7 +365,9 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     // If the application has a settings screen, jump to  that
                     // TODO:
                 }
-                if (mUsesGps) {
+                // If power usage detail page is launched from location page, suppress "Location"
+                // button to prevent circular loops.
+                if (mUsesGps && mShowLocationButton) {
                     addControl(R.string.location_settings_title,
                             R.string.battery_sugg_apps_gps, ACTION_LOCATION_SETTINGS);
                     removeHeader = false;

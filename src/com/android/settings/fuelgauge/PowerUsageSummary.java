@@ -144,7 +144,7 @@ public class PowerUsageSummary extends PreferenceFragment {
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatterySipper sipper = pgp.getInfo();
-        mStatsHelper.startBatteryDetailPage((PreferenceActivity) getActivity(), sipper);
+        mStatsHelper.startBatteryDetailPage((PreferenceActivity) getActivity(), sipper, true);
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
