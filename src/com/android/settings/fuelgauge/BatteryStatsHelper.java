@@ -175,7 +175,8 @@ public class BatteryStatsHelper {
         }
     }
 
-    public void startBatteryDetailPage(PreferenceActivity caller, BatterySipper sipper) {
+    public void startBatteryDetailPage(
+            PreferenceActivity caller, BatterySipper sipper, boolean showLocationButton) {
         // Initialize mStats if necessary.
         getStats();
 
@@ -193,6 +194,7 @@ public class BatteryStatsHelper {
             args.putInt(PowerUsageDetail.EXTRA_UID, sipper.uidObj.getUid());
         }
         args.putSerializable(PowerUsageDetail.EXTRA_DRAIN_TYPE, sipper.drainType);
+        args.putBoolean(PowerUsageDetail.EXTRA_SHOW_LOCATION_BUTTON, showLocationButton);
 
         int[] types;
         double[] values;
