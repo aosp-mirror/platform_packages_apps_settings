@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 
 import com.android.settings.R;
 
@@ -97,13 +98,13 @@ public class LocationMode extends LocationSettingsBase
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference emiter) {
-        int mode = LocationSettingsBase.MODE_LOCATION_OFF;
+        int mode = Settings.Secure.LOCATION_MODE_OFF;
         if (emiter == mHighAccuracy) {
-            mode = LocationSettingsBase.MODE_HIGH_ACCURACY;
+            mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
         } else if (emiter == mBatterySaving) {
-            mode = LocationSettingsBase.MODE_BATTERY_SAVING;
+            mode = Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
         } else if (emiter == mSensorsOnly) {
-            mode = LocationSettingsBase.MODE_SENSORS_ONLY;
+            mode = Settings.Secure.LOCATION_MODE_SENSORS_ONLY;
         }
         setLocationMode(mode);
     }
@@ -111,24 +112,24 @@ public class LocationMode extends LocationSettingsBase
     @Override
     public void onModeChanged(int mode) {
         switch (mode) {
-            case MODE_LOCATION_OFF:
+            case Settings.Secure.LOCATION_MODE_OFF:
                 Intent intent = new Intent();
                 PreferenceActivity pa = (PreferenceActivity) getActivity();
                 pa.finishPreferencePanel(LocationMode.this, Activity.RESULT_OK, intent);
                 break;
-            case MODE_SENSORS_ONLY:
+            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
                 updateRadioButtons(mSensorsOnly);
                 break;
-            case MODE_BATTERY_SAVING:
+            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
                 updateRadioButtons(mBatterySaving);
                 break;
-            case MODE_HIGH_ACCURACY:
+            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
                 updateRadioButtons(mHighAccuracy);
                 break;
             default:
                 break;
         }
-        boolean enabled = (mode != MODE_LOCATION_OFF);
+        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
         mHighAccuracy.setEnabled(enabled);
         mBatterySaving.setEnabled(enabled);
         mSensorsOnly.setEnabled(enabled);
