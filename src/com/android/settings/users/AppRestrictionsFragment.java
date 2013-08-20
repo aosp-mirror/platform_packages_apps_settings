@@ -157,7 +157,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         private boolean hasSettings;
         private OnClickListener listener;
         private ArrayList<RestrictionEntry> restrictions;
-        private boolean mPanelOpen;
+        private boolean panelOpen;
         private boolean immutable;
         private List<Preference> mChildren = new ArrayList<Preference>();
         private final ColorFilter grayscaleFilter;
@@ -215,7 +215,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
 
         boolean isPanelOpen() {
-            return mPanelOpen;
+            return panelOpen;
+        }
+
+        void setPanelOpen(boolean open) {
+            panelOpen = open;
         }
 
         List<Preference> getChildren() {
@@ -672,7 +676,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     // able to toggle this app ON (it's ON by default and immutable).
                     // Only do this for restricted profiles, not single-user restrictions
                     if (hasSettings) {
-                        requestRestrictionsForApp(packageName, p);
+                        requestRestrictionsForApp(packageName, p, false);
                     }
                 } else if (!mNewUser && isAppEnabledForUser(pi)) {
                     p.setChecked(true);
@@ -748,7 +752,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         if (v.getTag() instanceof AppRestrictionsPreference) {
             AppRestrictionsPreference pref = (AppRestrictionsPreference) v.getTag();
             if (v.getId() == R.id.app_restrictions_settings) {
-                toggleAppPanel(pref);
+                onAppSettingsIconClicked(pref);
             } else if (!pref.isImmutable()) {
                 pref.setChecked(!pref.isChecked());
                 final String packageName = pref.getKey().substring(PKG_PREFIX.length());
@@ -756,7 +760,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 if (pref.isChecked() && pref.hasSettings
                         && pref.restrictions == null) {
                     // The restrictions have not been initialized, get and save them
-                    requestRestrictionsForApp(packageName, pref);
+                    requestRestrictionsForApp(packageName, pref, false);
                 }
                 mAppListChanged = true;
                 // If it's not a restricted profile, apply the changes immediately
@@ -817,13 +821,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return true;
     }
 
-    private void toggleAppPanel(AppRestrictionsPreference preference) {
+    private void removeRestrictionsForApp(AppRestrictionsPreference preference) {
+        for (Preference p : preference.mChildren) {
+            mAppList.removePreference(p);
+        }
+        preference.mChildren.clear();
+    }
+
+    private void onAppSettingsIconClicked(AppRestrictionsPreference preference) {
         if (preference.getKey().startsWith(PKG_PREFIX)) {
-            if (preference.mPanelOpen) {
-                for (Preference p : preference.mChildren) {
-                    mAppList.removePreference(p);
-                }
-                preference.mChildren.clear();
+            if (preference.isPanelOpen()) {
+                removeRestrictionsForApp(preference);
             } else {
                 String packageName = preference.getKey().substring(PKG_PREFIX.length());
                 if (packageName.equals(getActivity().getPackageName())) {
@@ -832,15 +840,22 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             getActivity(), mUser);
                     onRestrictionsReceived(preference, packageName, restrictions);
                 } else {
-                    requestRestrictionsForApp(packageName, preference);
+                    requestRestrictionsForApp(packageName, preference, true /*invoke if custom*/);
                 }
             }
-            preference.mPanelOpen = !preference.mPanelOpen;
+            preference.setPanelOpen(!preference.isPanelOpen());
         }
     }
 
+    /**
+     * Send a broadcast to the app to query its restrictions
+     * @param packageName package name of the app with restrictions
+     * @param preference the preference item for the app toggle
+     * @param invokeIfCustom whether to directly launch any custom activity that is returned
+     *        for the app.
+     */
     private void requestRestrictionsForApp(String packageName,
-            AppRestrictionsPreference preference) {
+            AppRestrictionsPreference preference, boolean invokeIfCustom) {
         Bundle oldEntries =
                 mUserManager.getApplicationRestrictions(packageName, mUser);
         Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
@@ -848,7 +863,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         intent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE, oldEntries);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         getActivity().sendOrderedBroadcast(intent, null,
-                new RestrictionsResultReceiver(packageName, preference),
+                new RestrictionsResultReceiver(packageName, preference, invokeIfCustom),
                 null, Activity.RESULT_OK, null, null);
     }
 
@@ -857,11 +872,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         private static final String CUSTOM_RESTRICTIONS_INTENT = Intent.EXTRA_RESTRICTIONS_INTENT;
         String packageName;
         AppRestrictionsPreference preference;
+        boolean invokeIfCustom;
 
-        RestrictionsResultReceiver(String packageName, AppRestrictionsPreference preference) {
+        RestrictionsResultReceiver(String packageName, AppRestrictionsPreference preference,
+                boolean invokeIfCustom) {
             super();
             this.packageName = packageName;
             this.preference = preference;
+            this.invokeIfCustom = invokeIfCustom;
         }
 
         @Override
@@ -877,34 +895,21 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             RestrictionUtils.restrictionsToBundle(restrictions), mUser);
                 }
             } else if (restrictionsIntent != null) {
-                final Intent customIntent = restrictionsIntent;
-                if (restrictions != null) {
-                    customIntent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE,
-                            RestrictionUtils.restrictionsToBundle(restrictions));
-                }
-                Preference p = new Preference(context);
-                p.setTitle(R.string.app_restrictions_custom_label);
-                p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        int requestCode = generateCustomActivityRequestCode(
-                                RestrictionsResultReceiver.this.preference);
-                        AppRestrictionsFragment.this.startActivityForResult(
-                                customIntent, requestCode);
-                        return false;
-                    }
-                });
-                p.setPersistent(false);
-                p.setOrder(preference.getOrder() + 1);
-                preference.mChildren.add(p);
-                mAppList.addPreference(p);
                 preference.setRestrictions(restrictions);
+                if (invokeIfCustom && AppRestrictionsFragment.this.isResumed()) {
+                    int requestCode = generateCustomActivityRequestCode(
+                            RestrictionsResultReceiver.this.preference);
+                    AppRestrictionsFragment.this.startActivityForResult(
+                            restrictionsIntent, requestCode);
+                }
             }
         }
     }
 
     private void onRestrictionsReceived(AppRestrictionsPreference preference, String packageName,
             ArrayList<RestrictionEntry> restrictions) {
+        // Remove any earlier restrictions
+        removeRestrictionsForApp(preference);
         // Non-custom-activity case - expand the restrictions in-place
         final Context context = preference.getContext();
         int count = 1;
@@ -1004,7 +1009,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 // If there's a valid result, persist it to the user manager.
                 mUserManager.setApplicationRestrictions(packageName, bundle, mUser);
             }
-            toggleAppPanel(pref);
         }
         // Remove request from the map
         mCustomRequestMap.remove(requestCode);
