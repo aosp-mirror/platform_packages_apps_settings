@@ -119,6 +119,14 @@ public class BatterySipper implements Comparable<BatterySipper> {
         return mPackages;
     }
 
+    public int getUid() {
+        // Bail out if the current sipper is not an App sipper.
+        if (uidObj == null) {
+            return 0;
+        }
+        return uidObj.getUid();
+    }
+
     void getQuickNameIconForUid(Uid uidObj) {
         final int uid = uidObj.getUid();
         final String uidString = Integer.toString(uid);
