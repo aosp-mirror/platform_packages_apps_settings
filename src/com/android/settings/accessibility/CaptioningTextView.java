@@ -18,51 +18,273 @@ package com.android.settings.accessibility;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.res.ColorStateList;
+import android.content.res.Resources.Theme;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
-import android.os.Parcel;
-import android.support.v4.view.ViewCompat;
-import android.text.Editable;
-import android.text.ParcelableSpan;
+import android.graphics.RectF;
+import android.graphics.Typeface;
+import android.text.Layout.Alignment;
+import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.style.CharacterStyle;
-import android.text.style.UpdateAppearance;
 import android.util.AttributeSet;
-import android.view.accessibility.CaptioningManager;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.View;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
-import android.widget.TextView;
 
-public class CaptioningTextView extends TextView {
-    private MutableBackgroundColorSpan mBackgroundSpan;
-    private ColorStateList mOutlineColorState;
-    private float mOutlineWidth;
-    private int mOutlineColor;
+public class CaptioningTextView extends View {
+    // Ratio of inner padding to font size.
+    private static final float INNER_PADDING_RATIO = 0.125f;
 
-    private int mEdgeType = CaptionStyle.EDGE_TYPE_NONE;
-    private int mEdgeColor = Color.TRANSPARENT;
-    private float mEdgeWidth = 0;
+    // Default style dimensions in dips.
+    private static final float CORNER_RADIUS = 2.0f;
+    private static final float OUTLINE_WIDTH = 2.0f;
+    private static final float SHADOW_RADIUS = 2.0f;
+    private static final float SHADOW_OFFSET_X = 2.0f;
+    private static final float SHADOW_OFFSET_Y = 2.0f;
 
-    private boolean mHasBackground = false;
+    // Styled dimensions.
+    private final float mCornerRadius;
+    private final float mOutlineWidth;
+    private final float mShadowRadius;
+    private final float mShadowOffsetX;
+    private final float mShadowOffsetY;
 
-    public CaptioningTextView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
+    /** Temporary rectangle used for computing line bounds. */
+    private final RectF mLineBounds = new RectF();
+
+    /** Temporary array used for computing line wrapping. */
+    private float[] mTextWidths;
+
+    /** Reusable string builder used for holding text. */
+    private final StringBuilder mText = new StringBuilder();
+    private final StringBuilder mBreakText = new StringBuilder();
+
+    private TextPaint mPaint;
+
+    private int mForegroundColor;
+    private int mBackgroundColor;
+    private int mEdgeColor;
+    private int mEdgeType;
+
+    private boolean mHasMeasurements;
+    private int mLastMeasuredWidth;
+    private StaticLayout mLayout;
+
+    private float mSpacingMult = 1;
+    private float mSpacingAdd = 0;
+    private int mInnerPaddingX = 0;
 
     public CaptioningTextView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public CaptioningTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
+
+        final Theme theme = context.getTheme();
+        final TypedArray a = theme.obtainStyledAttributes(
+                    attrs, android.R.styleable.TextView, defStyle, 0);
+
+        CharSequence text = "";
+        int textSize = 15;
+
+        final int n = a.getIndexCount();
+        for (int i = 0; i < n; i++) {
+            int attr = a.getIndex(i);
+
+            switch (attr) {
+                case android.R.styleable.TextView_text:
+                    text = a.getText(attr);
+                    break;
+                case android.R.styleable.TextView_lineSpacingExtra:
+                    mSpacingAdd = a.getDimensionPixelSize(attr, (int) mSpacingAdd);
+                    break;
+                case android.R.styleable.TextView_lineSpacingMultiplier:
+                    mSpacingMult = a.getFloat(attr, mSpacingMult);
+                    break;
+                case android.R.styleable.TextAppearance_textSize:
+                    textSize = a.getDimensionPixelSize(attr, textSize);
+                    break;
+            }
+        }
+
+        // Set up density-dependent properties.
+        // TODO: Move these to a default style.
+        final DisplayMetrics m = getContext().getResources().getDisplayMetrics();
+        mCornerRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, CORNER_RADIUS, m);
+        mOutlineWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, OUTLINE_WIDTH, m);
+        mShadowRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, SHADOW_RADIUS, m);
+        mShadowOffsetX = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, SHADOW_OFFSET_Y, m);
+        mShadowOffsetY = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, SHADOW_OFFSET_X, m);
+
+        final TextPaint paint = new TextPaint();
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+
+        mPaint = paint;
+
+        setText(text);
+        setTextSize(textSize);
     }
 
-    public CaptioningTextView(Context context) {
-        super(context);
+    public void setText(int resId) {
+        final CharSequence text = getContext().getText(resId);
+        setText(text);
     }
 
-    public void applyStyleAndFontSize(int styleId) {
+    public void setText(CharSequence text) {
+        mText.setLength(0);
+        mText.append(text);
+
+        mHasMeasurements = false;
+
+        requestLayout();
+    }
+
+    public void setForegroundColor(int color) {
+        mForegroundColor = color;
+
+        invalidate();
+    }
+
+    @Override
+    public void setBackgroundColor(int color) {
+        mBackgroundColor = color;
+
+        invalidate();
+    }
+
+    public void setEdgeType(int edgeType) {
+        mEdgeType = edgeType;
+
+        invalidate();
+    }
+
+    public void setEdgeColor(int color) {
+        mEdgeColor = color;
+
+        invalidate();
+    }
+
+    public void setTextSize(float size) {
+        final DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
+        final float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, size, metrics);
+        if (mPaint.getTextSize() != size) {
+            mHasMeasurements = false;
+            mInnerPaddingX = (int) (size * INNER_PADDING_RATIO + 0.5f);
+            mPaint.setTextSize(size);
+
+            requestLayout();
+        }
+    }
+
+    public void setTypeface(Typeface typeface) {
+        if (mPaint.getTypeface() != typeface) {
+            mHasMeasurements = false;
+            mPaint.setTypeface(typeface);
+
+            requestLayout();
+        }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        final int widthSpec = MeasureSpec.getSize(widthMeasureSpec);
+
+        if (computeMeasurements(widthSpec)) {
+            final StaticLayout layout = mLayout;
+
+            // Account for padding.
+            final int paddingX = mPaddingLeft + mPaddingRight + mInnerPaddingX * 2;
+            final int width = layout.getWidth() + paddingX;
+            final int height = layout.getHeight() + mPaddingTop + mPaddingBottom;
+            setMeasuredDimension(width, height);
+        } else {
+            setMeasuredDimension(MEASURED_STATE_TOO_SMALL, MEASURED_STATE_TOO_SMALL);
+        }
+    }
+
+    @Override
+    public void onLayout(boolean changed, int l, int t, int r, int b) {
+        final int width = r - l;
+
+        computeMeasurements(width);
+    }
+
+    private boolean computeMeasurements(int maxWidth) {
+        if (mHasMeasurements && maxWidth == mLastMeasuredWidth) {
+            return true;
+        }
+
+        // Account for padding.
+        final int paddingX = mPaddingLeft + mPaddingRight + mInnerPaddingX;
+        maxWidth -= paddingX;
+
+        if (maxWidth <= 0) {
+            return false;
+        }
+
+        final TextPaint paint = mPaint;
+        final CharSequence text = mText;
+        final int textLength = text.length();
+        if (mTextWidths == null || mTextWidths.length < textLength) {
+            mTextWidths = new float[textLength];
+        }
+
+        final float[] textWidths = mTextWidths;
+        paint.getTextWidths(text, 0, textLength, textWidths);
+
+        // Compute total length.
+        float runLength = 0;
+        for (int i = 0; i < textLength; i++) {
+            runLength += textWidths[i];
+        }
+
+        final int lineCount = (int) (runLength / maxWidth) + 1;
+        final int lineLength = (int) (runLength / lineCount);
+
+        // Build line break buffer.
+        final StringBuilder breakText = mBreakText;
+        breakText.setLength(0);
+
+        int line = 0;
+        int lastBreak = 0;
+        int maxRunLength = 0;
+        runLength = 0;
+        for (int i = 0; i < textLength; i++) {
+            if (runLength > lineLength) {
+                final CharSequence sequence = text.subSequence(lastBreak, i);
+                final int trimmedLength = TextUtils.getTrimmedLength(sequence);
+                breakText.append(sequence, 0, trimmedLength);
+                breakText.append('\n');
+                lastBreak = i;
+                runLength = 0;
+            }
+
+            runLength += textWidths[i];
+
+            if (runLength > maxRunLength) {
+                maxRunLength = (int) Math.ceil(runLength);
+            }
+        }
+        breakText.append(text.subSequence(lastBreak, textLength));
+
+        mHasMeasurements = true;
+        mLastMeasuredWidth = maxWidth;
+
+        mLayout = new StaticLayout(breakText, paint, maxRunLength, Alignment.ALIGN_LEFT,
+                mSpacingMult, mSpacingAdd, true);
+
+        return true;
+    }
+
+    public void setStyle(int styleId) {
         final Context context = mContext;
         final ContentResolver cr = context.getContentResolver();
         final CaptionStyle style;
@@ -72,238 +294,77 @@ public class CaptioningTextView extends TextView {
             style = CaptionStyle.PRESETS[styleId];
         }
 
-        setTextColor(style.foregroundColor);
-        setBackgroundColor(style.backgroundColor);
-        setTypeface(style.getTypeface());
+        mForegroundColor = style.foregroundColor;
+        mBackgroundColor = style.backgroundColor;
+        mEdgeType = style.edgeType;
+        mEdgeColor = style.edgeColor;
+        mHasMeasurements = false;
 
-        // Clears all outlines.
-        applyEdge(style.edgeType, style.edgeColor, 4.0f);
+        final Typeface typeface = style.getTypeface();
+        setTypeface(typeface);
 
-        final float fontSize = CaptioningManager.getFontSize(cr);
-        if (fontSize != 0) {
-            setTextSize(fontSize);
-        }
-    }
-
-    /**
-     * Applies an edge preset using a combination of {@link #setOutlineLayer}
-     * and {@link #setShadowLayer}. Any subsequent calls to either of these
-     * methods will invalidate the applied preset.
-     *
-     * @param type Type of edge to apply, one of:
-     *            <ul>
-     *            <li>{@link CaptionStyle#EDGE_TYPE_NONE}
-     *            <li>{@link CaptionStyle#EDGE_TYPE_OUTLINE}
-     *            <li>{@link CaptionStyle#EDGE_TYPE_DROP_SHADOW}
-     *            </ul>
-     * @param color Edge color as a packed 32-bit ARGB color.
-     * @param width Width of the edge in pixels.
-     */
-    public void applyEdge(int type, int color, float width) {
-        if (mEdgeType != type || mEdgeColor != color || mEdgeWidth != width) {
-            final int textColor = getTextColors().getDefaultColor();
-            switch (type) {
-                case CaptionStyle.EDGE_TYPE_DROP_SHADOW:
-                    setOutlineLayer(0, 0);
-                    super.setShadowLayer(width, width, width, color);
-                    break;
-                case CaptionStyle.EDGE_TYPE_OUTLINE:
-                    setOutlineLayer(width, color);
-                    super.setShadowLayer(0, 0, 0, 0);
-                    break;
-                default:
-                    super.setShadowLayer(0, 0, 0, 0);
-                    setOutlineLayer(0, 0);
-            }
-
-            mEdgeType = type;
-            mEdgeColor = color;
-            mEdgeWidth = width;
-        }
-    }
-
-    @Override
-    public void setShadowLayer(float radius, float dx, float dy, int color) {
-        mEdgeType = CaptionStyle.EDGE_TYPE_NONE;
-
-        super.setShadowLayer(radius, dx, dy, color);
-    }
-
-    /**
-     * Gives the text an outline of the specified pixel width and color.
-     */
-    public void setOutlineLayer(float width, int color) {
-        width *= 2.0f;
-
-        mEdgeType = CaptionStyle.EDGE_TYPE_NONE;
-
-        if (mOutlineColor != color || mOutlineWidth != width) {
-            mOutlineColorState = ColorStateList.valueOf(color);
-            mOutlineColor = color;
-            mOutlineWidth = width;
-            invalidate();
-
-            // TODO: Remove after display list bug is fixed.
-            if (width > 0 && Color.alpha(color) != 0) {
-                setLayerType(ViewCompat.LAYER_TYPE_SOFTWARE, null);
-            } else {
-                setLayerType(ViewCompat.LAYER_TYPE_HARDWARE, null);
-            }
-        }
-    }
-
-    /**
-     * @return the color of the outline layer
-     * @see #setOutlineLayer(float, int)
-     */
-    public int getOutlineColor() {
-        return mOutlineColor;
-    }
-
-    /**
-     * @return the width of the outline layer
-     * @see #setOutlineLayer(float, int)
-     */
-    public float getOutlineWidth() {
-        return mOutlineWidth;
-    }
-
-    @Override
-    public Editable getEditableText() {
-        final CharSequence text = getText();
-        if (text instanceof Editable) {
-            return (Editable) text;
-        }
-
-        setText(text, BufferType.EDITABLE);
-        return (Editable) getText();
-    }
-
-    @Override
-    public void setBackgroundColor(int color) {
-        if (Color.alpha(color) == 0) {
-            if (mHasBackground) {
-                mHasBackground = false;
-                getEditableText().removeSpan(mBackgroundSpan);
-            }
-        } else {
-            if (mBackgroundSpan == null) {
-                mBackgroundSpan = new MutableBackgroundColorSpan(color);
-            } else {
-                mBackgroundSpan.setColor(color);
-            }
-
-            if (mHasBackground) {
-                invalidate();
-            } else {
-                mHasBackground = true;
-                getEditableText().setSpan(mBackgroundSpan, 0, length(), 0);
-            }
-        }
-    }
-
-    @Override
-    protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-        super.onTextChanged(text, start, lengthBefore, lengthAfter);
-
-        if (mBackgroundSpan != null) {
-            getEditableText().setSpan(mBackgroundSpan, 0, lengthAfter, 0);
-        }
+        requestLayout();
     }
 
     @Override
     protected void onDraw(Canvas c) {
-        if (mOutlineWidth > 0 && Color.alpha(mOutlineColor) > 0) {
-            final TextPaint textPaint = getPaint();
-            final Paint.Style previousStyle = textPaint.getStyle();
-            final ColorStateList previousColors = getTextColors();
-            textPaint.setStyle(Style.STROKE);
-            textPaint.setStrokeWidth(mOutlineWidth);
-            textPaint.setStrokeCap(Cap.ROUND);
-            textPaint.setStrokeJoin(Join.ROUND);
+        final StaticLayout layout = mLayout;
+        if (layout == null) {
+            return;
+        }
 
-            setTextColor(mOutlineColorState);
+        final int saveCount = c.save();
+        final int innerPaddingX = mInnerPaddingX;
+        c.translate(mPaddingLeft + innerPaddingX, mPaddingTop);
 
-            // Remove the shadow.
-            final float shadowRadius = getShadowRadius();
-            final float shadowDx = getShadowDx();
-            final float shadowDy = getShadowDy();
-            final int shadowColor = getShadowColor();
-            if (shadowRadius > 0) {
-                setShadowLayer(0, 0, 0, 0);
+        final RectF bounds = mLineBounds;
+        final int lineCount = layout.getLineCount();
+        final Paint paint = layout.getPaint();
+        paint.setShadowLayer(0, 0, 0, 0);
+
+        final int backgroundColor = mBackgroundColor;
+        if (Color.alpha(backgroundColor) > 0) {
+            paint.setColor(backgroundColor);
+            paint.setStyle(Style.FILL);
+
+            final float cornerRadius = mCornerRadius;
+            float previousBottom = layout.getLineTop(0);
+
+            for (int i = 0; i < lineCount; i++) {
+                bounds.left = layout.getLineLeft(i) - innerPaddingX;
+                bounds.right = layout.getLineRight(i) + innerPaddingX;
+                bounds.top = previousBottom;
+                bounds.bottom = layout.getLineBottom(i);
+
+                previousBottom = bounds.bottom;
+
+                c.drawRoundRect(bounds, cornerRadius, cornerRadius, paint);
             }
+        }
 
-            // Draw outline and background only.
-            super.onDraw(c);
+        final int edgeType = mEdgeType;
+        if (edgeType == CaptionStyle.EDGE_TYPE_OUTLINE) {
+            paint.setColor(mEdgeColor);
+            paint.setStyle(Style.FILL_AND_STROKE);
+            paint.setStrokeJoin(Join.ROUND);
+            paint.setStrokeWidth(mOutlineWidth);
 
-            // Restore the shadow.
-            if (shadowRadius > 0) {
-                setShadowLayer(shadowRadius, shadowDx, shadowDy, shadowColor);
+            for (int i = 0; i < lineCount; i++) {
+                layout.drawText(c, i, i);
             }
-
-            // Restore original settings.
-            textPaint.setStyle(previousStyle);
-            setTextColor(previousColors);
-
-            // Remove the background.
-            final int color;
-            if (mBackgroundSpan != null) {
-                color = mBackgroundSpan.getBackgroundColor();
-                mBackgroundSpan.setColor(Color.TRANSPARENT);
-            } else {
-                color = 0;
-            }
-
-            // Draw foreground only.
-            super.onDraw(c);
-
-            // Restore the background.
-            if (mBackgroundSpan != null) {
-                mBackgroundSpan.setColor(color);
-            }
-        } else {
-            super.onDraw(c);
-        }
-    }
-
-    public static class MutableBackgroundColorSpan extends CharacterStyle
-            implements UpdateAppearance, ParcelableSpan {
-        private int mColor;
-
-        public MutableBackgroundColorSpan(int color) {
-            mColor = color;
         }
 
-        public MutableBackgroundColorSpan(Parcel src) {
-            mColor = src.readInt();
+        if (edgeType == CaptionStyle.EDGE_TYPE_DROP_SHADOW) {
+            paint.setShadowLayer(mShadowRadius, mShadowOffsetX, mShadowOffsetY, mEdgeColor);
         }
 
-        public void setColor(int color) {
-            mColor = color;
+        paint.setColor(mForegroundColor);
+        paint.setStyle(Style.FILL);
+
+        for (int i = 0; i < lineCount; i++) {
+            layout.drawText(c, i, i);
         }
 
-        @Override
-        public int getSpanTypeId() {
-            return TextUtils.BACKGROUND_COLOR_SPAN;
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(mColor);
-        }
-
-        public int getBackgroundColor() {
-            return mColor;
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            ds.bgColor = mColor;
-        }
+        c.restoreToCount(saveCount);
     }
 }

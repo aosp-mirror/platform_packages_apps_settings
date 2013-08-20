@@ -86,10 +86,13 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
     }
 
     public static void applyCaptionProperties(CaptioningTextView previewText, int styleId) {
-        previewText.applyStyleAndFontSize(styleId);
+        previewText.setStyle(styleId);
 
         final Context context = previewText.getContext();
         final ContentResolver cr = context.getContentResolver();
+        final float fontSize = CaptioningManager.getFontSize(cr);
+        previewText.setTextSize(fontSize);
+
         final Locale locale = CaptioningManager.getLocale(cr);
         if (locale != null) {
             final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
