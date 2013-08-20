@@ -50,12 +50,14 @@ public class EdgeTypePreference extends ListDialogPreference {
     protected void onBindListItem(View view, int index) {
         final float fontSize = CaptioningManager.getFontSize(getContext().getContentResolver());
         final CaptioningTextView preview = (CaptioningTextView) view.findViewById(R.id.preview);
-        preview.setTextColor(Color.WHITE);
+
+        preview.setForegroundColor(Color.WHITE);
         preview.setBackgroundColor(Color.TRANSPARENT);
         preview.setTextSize(fontSize);
 
         final int value = getValueAt(index);
-        preview.applyEdge(value, Color.BLACK, 4.0f);
+        preview.setEdgeType(value);
+        preview.setEdgeColor(Color.BLACK);
 
         final CharSequence title = getTitleAt(index);
         if (title != null) {
