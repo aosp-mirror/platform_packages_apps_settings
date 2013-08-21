@@ -521,7 +521,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         @Override
         public int getActualState(Context context) {
             ContentResolver resolver = context.getContentResolver();
-            return Settings.Secure.isLocationMasterSwitchEnabled(resolver)
+            return Settings.Secure.getLocationMode(resolver) != Settings.Secure.LOCATION_MODE_OFF
                     ? STATE_ENABLED : STATE_DISABLED;
         }
 
@@ -541,11 +541,15 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     final UserManager um =
                             (UserManager) context.getSystemService(Context.USER_SERVICE);
                     if (!um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
-                        Settings.Secure.setLocationMasterSwitchEnabled(resolver, desiredState);
+                        int mode = desiredState
+                                ? Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
+                                : Settings.Secure.LOCATION_MODE_OFF;
+                        Settings.Secure.setLocationMode(resolver, mode);
                         return desiredState;
                     }
 
-                    return Settings.Secure.isLocationMasterSwitchEnabled(resolver);
+                    return Settings.Secure.getLocationMode(resolver)
+                            != Settings.Secure.LOCATION_MODE_OFF;
                 }
 
                 @Override
