@@ -36,6 +36,13 @@
         android:entryValues="@array/expanded_desktop_values"
         android:persistent="false" />        
 
+    <ListPreference
+        android:key="power_menu_profiles"
+        android:title="@string/power_menu_profiles_title"
+        android:entries="@array/power_menu_profiles_entries"
+        android:entryValues="@array/power_menu_profiles_values"
+        android:persistent="false" />
+
     <CheckBoxPreference
         android:key="power_menu_airplane"
         android:title="@string/power_menu_airplane_title"

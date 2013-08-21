@@ -129,6 +129,13 @@
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
 
+    <!-- Profiles -->
+    <header
+        android:id="@+id/profiles_settings"
+        android:icon="@drawable/ic_settings_profiles"
+        android:fragment="com.android.settings.profiles.ProfilesSettings"
+        android:title="@string/profiles_settings_title" />
+
     <!-- Location -->
     <header
         android:fragment="com.android.settings.location.LocationSettings"

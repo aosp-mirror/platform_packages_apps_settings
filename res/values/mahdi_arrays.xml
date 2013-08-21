@@ -63,5 +63,126 @@
         <item>2</item>
     </string-array>
 
+    <!-- Profile mode options. -->
+    <string-array name="profile_entries">
+        <item>On</item>
+        <item>Off</item>
+        <item>No override</item>
+    </string-array>
+
+    <!-- Values for vibrate_entries matching constants in SoundSettings. Do not translate. -->
+    <string-array name="profile_values" translatable="false">
+        <item>OVERRIDE</item>
+        <item>SUPPRESS</item>
+        <item>DEFAULT</item>
+    </string-array>
+
+    <!-- Profile mode options. -->
+    <string-array name="profile_connection_entries">
+        <item>Disable</item>
+        <item>Enable</item>
+    </string-array>
+
+    <!-- Profile 2G-3G mode options. -->
+    <string-array name="profile_networkmode_entries" translatable="false">
+        <item>@string/profile_networkmode_2g</item>
+        <item>@string/profile_networkmode_3g</item>
+        <item>@string/profile_networkmode_2g3g</item>
+    </string-array>
+
+    <!-- Values for profile connections. Do not translate. -->
+    <string-array name="profile_connection_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!--  Values for profile Wi-Fi triggers -->
+    <string-array name="profile_trigger_wifi_options" translatable="false">
+        <item>@string/profile_trigger_connect</item>
+        <item>@string/profile_trigger_disconnect</item>
+        <item>@string/profile_trigger_notrigger</item>
+    </string-array> 
+
+    <!--  Values for profile trigger types -->
+    <string-array name="profile_trigger_filters" translatable="false">
+        <item>@string/profile_trigger_filter_all</item>
+        <item>@string/profile_trigger_filter_wifi</item>
+        <item>@string/profile_trigger_filter_bluetooth</item>
+    </string-array>   
+   
+    <!-- Profile lock mode options. Do not translate. -->
+    <string-array name="profile_lockmode_entries" translatable="false">
+        <item>@string/profile_lockmode_default</item>
+        <item>@string/profile_lockmode_insecure</item>
+        <item>@string/profile_lockmode_disabled</item>
+    </string-array>
+
+    <!-- Profile lock mode summaries. Do not translate. -->
+    <string-array name="profile_lockmode_summaries" translatable="false">
+        <item>@string/profile_lockmode_default_summary</item>
+        <item>@string/profile_lockmode_insecure_summary</item>
+        <item>@string/profile_lockmode_disabled_summary</item>
+    </string-array>
+
+    <!-- Values for profile lock mode. Do not translate. -->
+    <string-array name="profile_lockmode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Profiles -->
+    <string-array name="power_menu_profiles_entries">
+        <item>@string/power_menu_profiles_disabled</item>
+        <item>@string/power_menu_profiles_lock</item>
+        <item>@string/power_menu_profiles_all</item>
+    </string-array>
+
+    <string-array name="power_menu_profiles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="less_notification_sounds_entries">
+        <item>@string/less_notification_sounds_default</item>
+        <item>@string/less_notification_sounds_3s</item>
+        <item>@string/less_notification_sounds_5s</item>
+        <item>@string/less_notification_sounds_10s</item>
+        <item>@string/less_notification_sounds_15s</item>
+        <item>@string/less_notification_sounds_30s</item>
+        <item>@string/less_notification_sounds_45s</item>
+        <item>@string/less_notification_sounds_1m</item>
+        <item>@string/less_notification_sounds_2m</item>
+        <item>@string/less_notification_sounds_5m</item>
+    </string-array>
+
+    <string-array name="less_notification_sounds_values" translatable="false">
+        <item>0</item>
+        <item>3000</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>45000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+    </string-array>
+
+    <!-- Ring mode options. -->
+    <string-array name="ring_mode_entries" translatable="false">
+        <item>@string/ring_mode_normal</item>
+        <item>@string/ring_mode_vibrate</item>
+        <item>@string/ring_mode_mute</item>
+    </string-array>
+
+    <!-- Values for Ring mode. Do not translate. -->
+    <string-array name="ring_mode_values" translatable="false">
+        <item>normal</item>
+        <item>vibrate</item>
+        <item>mute</item>
+    </string-array>
 </resources>
 

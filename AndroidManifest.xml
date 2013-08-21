@@ -1702,6 +1702,9 @@
 
         <activity android:name=".mahdi.CustomizationSettings" />
         <activity android:name=".mahdi.PowerMenu" />
+	<activity android:name=".notificationlight.NotificationLightSettings" />
+	<activity android:name=".notificationlight.BatteryLightSettings" />
+	<activity android:name=".profiles.ProfilesSettings" />
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to expanded-desktop config -->
          <activity android:name="Settings$PowerMenuSettingsActivity"
@@ -1713,6 +1716,48 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.mahdi.PowerMenu" />
+        </activity>
+
+	<!-- Pseudo-activity used to provide an intent-filter entry point to profiles config -->
+        <activity android:name="Settings$ProfilesSettingsActivity"
+                android:label="@string/profile_settings"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.PROFILES_SETTINGS" />
+                <action android:name="com.android.settings.PROFILES_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.SHORTCUT" />
+                </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.profiles.ProfilesSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/profiles_settings" />
+        </activity>
+
+        <activity android:name=".profiles.ProfileConfig" />
+
+        <activity android:name=".profiles.AppGroupList" />
+
+        <activity android:name=".profiles.AppGroupConfig" />
+
+        <activity android:name=".profiles.ProfileGroupConfig" />
+
+    	<activity android:name=".profiles.WifiTriggers" />
+
+        <activity android:name=".profiles.NFCProfileWriter" />
+
+        <activity android:name=".profiles.NFCProfileSelect" />        
+
+        <activity android:name=".profiles.NFCProfile"
+                android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="cm/profile" />
+            </intent-filter>
         </activity>        
 
         <!-- Mahdi-Rom activities End -->
