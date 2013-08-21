@@ -24,6 +24,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -155,23 +156,23 @@ public class LocationSettings extends LocationSettingsBase
     @Override
     public void onModeChanged(int mode) {
         switch (mode) {
-            case MODE_LOCATION_OFF:
+            case Settings.Secure.LOCATION_MODE_OFF:
                 mLocationMode.setSummary(R.string.location_mode_location_off_title);
                 break;
-            case MODE_SENSORS_ONLY:
+            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
                 mLocationMode.setSummary(R.string.location_mode_sensors_only_title);
                 break;
-            case MODE_BATTERY_SAVING:
+            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
                 mLocationMode.setSummary(R.string.location_mode_battery_saving_title);
                 break;
-            case MODE_HIGH_ACCURACY:
+            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
                 mLocationMode.setSummary(R.string.location_mode_high_accuracy_title);
                 break;
             default:
                 break;
         }
 
-        boolean enabled = (mode != MODE_LOCATION_OFF);
+        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
         mLocationMode.setEnabled(enabled);
         mRecentLocationRequests.setEnabled(enabled);
         mLocationServices.setEnabled(enabled);
@@ -194,9 +195,9 @@ public class LocationSettings extends LocationSettingsBase
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            setLocationMode(MODE_HIGH_ACCURACY);
+            setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
         } else {
-            setLocationMode(MODE_LOCATION_OFF);
+            setLocationMode(Settings.Secure.LOCATION_MODE_OFF);
         }
     }
 }
