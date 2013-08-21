@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 
+import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeListener;
 
@@ -38,7 +39,7 @@ import java.util.Locale;
 
 public class ToggleCaptioningPreferenceFragment extends Fragment {
     private CaptionPropertiesFragment mPropsFragment;
-    private CaptioningTextView mPreviewText;
+    private SubtitleView mPreviewText;
 
     @Override
     public View onCreateView(
@@ -62,14 +63,14 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
                 .findFragmentById(R.id.properties_fragment));
         mPropsFragment.setParent(this);
 
-        mPreviewText = (CaptioningTextView) view.findViewById(R.id.preview_text);
+        mPreviewText = (SubtitleView) view.findViewById(R.id.preview_text);
 
         installActionBarToggleSwitch();
         refreshPreviewText();
     }
 
     public void refreshPreviewText() {
-        final CaptioningTextView preview = mPreviewText;
+        final SubtitleView preview = mPreviewText;
         if (preview != null) {
             final Activity activity = getActivity();
             final ContentResolver cr = activity.getContentResolver();
@@ -85,7 +86,7 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
         }
     }
 
-    public static void applyCaptionProperties(CaptioningTextView previewText, int styleId) {
+    public static void applyCaptionProperties(SubtitleView previewText, int styleId) {
         previewText.setStyle(styleId);
 
         final Context context = previewText.getContext();

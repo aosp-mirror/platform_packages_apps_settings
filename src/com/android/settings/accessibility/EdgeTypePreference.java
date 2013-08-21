@@ -25,6 +25,7 @@ import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.widget.TextView;
 
+import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 
 /**
@@ -49,7 +50,7 @@ public class EdgeTypePreference extends ListDialogPreference {
     @Override
     protected void onBindListItem(View view, int index) {
         final float fontSize = CaptioningManager.getFontSize(getContext().getContentResolver());
-        final CaptioningTextView preview = (CaptioningTextView) view.findViewById(R.id.preview);
+        final SubtitleView preview = (SubtitleView) view.findViewById(R.id.preview);
 
         preview.setForegroundColor(Color.WHITE);
         preview.setBackgroundColor(Color.TRANSPARENT);

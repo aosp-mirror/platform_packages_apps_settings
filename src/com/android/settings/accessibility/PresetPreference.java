@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.widget.TextView;
 
+import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 
 public class PresetPreference extends ListDialogPreference {
@@ -40,8 +41,7 @@ public class PresetPreference extends ListDialogPreference {
 
     @Override
     protected void onBindListItem(View view, int index) {
-        final CaptioningTextView previewText = (CaptioningTextView) view.findViewById(
-                R.id.preview);
+        final SubtitleView previewText = (SubtitleView) view.findViewById(R.id.preview);
         final int value = getValueAt(index);
         ToggleCaptioningPreferenceFragment.applyCaptionProperties(previewText, value);
 
