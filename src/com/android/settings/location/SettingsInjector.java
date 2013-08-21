@@ -56,6 +56,9 @@ import java.util.List;
  * Code-sharing would require extracting {@link
  * android.content.pm.RegisteredServicesCache#parseServiceAttributes(android.content.res.Resources,
  * String, android.util.AttributeSet)} into an interface, which didn't seem worth it.
+ *
+ * TODO: register a broadcast receiver that calls updateUI() when it receives
+ * {@link SettingInjectorService#UPDATE_INTENT}.
  */
 class SettingsInjector {
 
@@ -76,15 +79,6 @@ class SettingsInjector {
      * Name of the XML tag that includes the attributes for the setting.
      */
     public static final String ATTRIBUTES_NAME = "injected-location-setting";
-
-    /**
-     * Intent action a client should broadcast when the value of one of its injected settings has
-     * changed, so that the setting can be updated in the UI.
-     *
-     * TODO: register a broadcast receiver that calls updateUI() when it receives this intent
-     */
-    public static final String UPDATE_INTENT =
-            "com.android.settings.InjectedLocationSettingChanged";
 
     /**
      * Returns a list with one {@link InjectedSetting} object for each {@link android.app.Service}
@@ -198,9 +192,6 @@ class SettingsInjector {
 
     /**
      * Add settings that other apps have injected.
-     *
-     * TODO: extract InjectedLocationSettingGetter that returns an iterable over
-     * InjectedSetting objects, so that this class can focus on UI
      */
     public static void addInjectedSettings(PreferenceGroup group, Context context,
             PreferenceManager preferenceManager) {
