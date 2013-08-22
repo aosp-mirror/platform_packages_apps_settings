@@ -16,7 +16,6 @@
 
 package com.android.settings.location;
 
-import android.R;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +31,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.preference.Preference;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -41,6 +39,8 @@ import android.util.Log;
 import android.util.Xml;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import com.android.settings.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,8 +61,9 @@ import java.util.List;
  * {@link SettingInjectorService#UPDATE_INTENT}.
  */
 class SettingsInjector {
-
     private static final String TAG = "SettingsInjector";
+
+    private static final long INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS = 1000;
 
     /**
      * Intent action marking the receiver as injecting a setting
@@ -85,8 +86,6 @@ class SettingsInjector {
      * that responds to {@link #RECEIVER_INTENT} and provides the expected setting metadata.
      *
      * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
-     *
-     * TODO: sort alphabetically
      *
      * TODO: unit test
      */
@@ -167,15 +166,17 @@ class SettingsInjector {
     private static InjectedSetting parseAttributes(
             String packageName, String className, Resources res, AttributeSet attrs) {
 
-        TypedArray sa = res.obtainAttributes(attrs, R.styleable.InjectedLocationSetting);
+        TypedArray sa = res.obtainAttributes(attrs, android.R.styleable.InjectedLocationSetting);
         try {
             // Note that to help guard against malicious string injection, we do not allow dynamic
             // specification of the label (setting title)
-            final int labelId = sa.getResourceId(R.styleable.InjectedLocationSetting_label, 0);
-            final String label = sa.getString(R.styleable.InjectedLocationSetting_label);
-            final int iconId = sa.getResourceId(R.styleable.InjectedLocationSetting_icon, 0);
+            final int labelId = sa.getResourceId(
+                    android.R.styleable.InjectedLocationSetting_label, 0);
+            final String label = sa.getString(android.R.styleable.InjectedLocationSetting_label);
+            final int iconId = sa.getResourceId(
+                    android.R.styleable.InjectedLocationSetting_icon, 0);
             final String settingsActivity =
-                    sa.getString(R.styleable.InjectedLocationSetting_settingsActivity);
+                    sa.getString(android.R.styleable.InjectedLocationSetting_settingsActivity);
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "parsed labelId: " + labelId + ", label: " + label
                         + ", iconId: " + iconId);
@@ -190,32 +191,84 @@ class SettingsInjector {
         }
     }
 
+    private static final class StatusLoader {
+        private final Context mContext;
+        private final Intent mIntent;
+        private final StatusLoader mPrev;
+
+        private boolean mLoaded = false;
+
+        /**
+         * Creates a loader and chains with the previous loader.
+         */
+        public StatusLoader(Context context, Intent intent, StatusLoader prev) {
+            mContext = context;
+            mIntent = intent;
+            mPrev = prev;
+        }
+
+        /**
+         * If the current message hasn't been loaded, loads the status messages
+         * and set time out for the next message.
+         */
+        public void loadIfNotLoaded() {
+            if (mLoaded) {
+                return;
+            }
+
+            mContext.startService(mIntent);
+            if (mPrev != null) {
+                Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        // Continue with the next item in the chain.
+                        mPrev.loadIfNotLoaded();
+                    }
+                };
+                // Ensure that we start loading the previous setting in the chain if the current
+                // setting hasn't loaded before the timeout
+                handler.sendMessageDelayed(
+                        Message.obtain(handler), INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS);
+            }
+            mLoaded = true;
+        }
+    }
+
     /**
-     * Add settings that other apps have injected.
+     * Gets a list of preferences that other apps have injected.
+     *
+     * TODO: extract InjectedLocationSettingGetter that returns an iterable over
+     * InjectedSetting objects, so that this class can focus on UI
      */
-    public static void addInjectedSettings(PreferenceGroup group, Context context,
+    public static List<Preference> getInjectedSettings(Context context,
             PreferenceManager preferenceManager) {
 
         Iterable<InjectedSetting> settings = getSettings(context);
+        ArrayList<Preference> prefs = new ArrayList<Preference>();
+        StatusLoader loader = null;
         for (InjectedSetting setting : settings) {
-            Preference pref = addServiceSetting(context, group, setting, preferenceManager);
-
-            // TODO: to prevent churn from multiple live broadcast receivers, don't trigger
-            // the next update until the sooner of: the current update completes or 1-2 seconds
-            // after the current update was started.
-            updateSetting(context, pref, setting);
+            Preference pref = addServiceSetting(context, prefs, setting, preferenceManager);
+            Intent intent = createUpdatingIntent(context, pref, setting, loader);
+            loader = new StatusLoader(context, intent, loader);
         }
+
+        // Start a thread to load each list item status.
+        if (loader != null) {
+            loader.loadIfNotLoaded();
+        }
+
+        return prefs;
     }
 
     /**
      * Adds an injected setting to the root with status "Loading...".
      */
     private static PreferenceScreen addServiceSetting(Context context,
-            PreferenceGroup group, InjectedSetting info, PreferenceManager preferenceManager) {
+            List<Preference> prefs, InjectedSetting info, PreferenceManager preferenceManager) {
 
         PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
         screen.setTitle(info.title);
-        screen.setSummary("Loading...");
+        screen.setSummary(R.string.location_loading_injected_setting);
         PackageManager pm = context.getPackageManager();
         Drawable icon = pm.getDrawable(info.packageName, info.iconId, null);
         screen.setIcon(icon);
@@ -224,15 +277,17 @@ class SettingsInjector {
         settingIntent.setClassName(info.packageName, info.settingsActivity);
         screen.setIntent(settingIntent);
 
-        group.addPreference(screen);
+        prefs.add(screen);
         return screen;
     }
 
     /**
-     * Ask the receiver for the current status for the setting, and display it when it replies.
+     * Creates an Intent to ask the receiver for the current status for the setting, and display it
+     * when it replies.
      */
-    private static void updateSetting(Context context,
-            final Preference pref, final InjectedSetting info) {
+    private static Intent createUpdatingIntent(Context context,
+            final Preference pref, final InjectedSetting info, final StatusLoader prev) {
+        final Intent receiverIntent = info.getServiceIntent();
         Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -244,14 +299,16 @@ class SettingsInjector {
                 }
                 pref.setSummary(status);
                 pref.setEnabled(enabled);
+                if (prev != null) {
+                    prev.loadIfNotLoaded();
+                }
             }
         };
         Messenger messenger = new Messenger(handler);
-        Intent receiverIntent = info.getServiceIntent();
         receiverIntent.putExtra(SettingInjectorService.MESSENGER_KEY, messenger);
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             Log.d(TAG, info + ": sending rcv-intent: " + receiverIntent + ", handler: " + handler);
         }
-        context.startService(receiverIntent);
+        return receiverIntent;
     }
 }
