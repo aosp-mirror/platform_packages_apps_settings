@@ -28,7 +28,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -64,6 +63,9 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(BluetoothDevice.ACTION_CONNECTION_ACCESS_CANCEL)) {
+                int requestType = intent.getIntExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE,
+                                               BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS);
+                if (requestType != mRequestType) return;
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if (mDevice.equals(device)) dismissDialog();
             }
@@ -94,6 +96,8 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         mRequestType = i.getIntExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE,
                                      BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS);
 
+        if(DEBUG) Log.i(TAG, "onCreate() Request type: " + mRequestType);
+
         if (mRequestType == BluetoothDevice.REQUEST_TYPE_PROFILE_CONNECTION) {
             showDialog(getString(R.string.bluetooth_connection_permission_request), mRequestType);
         } else if (mRequestType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS) {
@@ -117,6 +121,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         final AlertController.AlertParams p = mAlertParams;
         p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = title;
+        if(DEBUG) Log.i(TAG, "showDialog() Request type: " + mRequestType + " this: " + this);
         switch(requestType)
         {
         case BluetoothDevice.REQUEST_TYPE_PROFILE_CONNECTION:
@@ -137,15 +142,16 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         setupAlert();
 
     }
-
-    private String createDisplayText(String message) {
-        String mMessage1 = message;
-        return mMessage1;
+    @Override
+    public void onBackPressed() {
+        /*we need an answer so ignore back button presses during auth */
+        if(DEBUG) Log.i(TAG, "Back button pressed! ignoring");
+        return;
     }
-
     private String createRemoteName()
     {
         String mRemoteName = mDevice != null ? mDevice.getAliasName() : null;
+
         if (mRemoteName == null) mRemoteName = getString(R.string.unknown);
         return mRemoteName;
     }
@@ -154,8 +160,8 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         String mRemoteName = createRemoteName();
         mView = getLayoutInflater().inflate(R.layout.bluetooth_connection_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
-        messageView.setText(createDisplayText(getString(R.string.bluetooth_connection_dialog_text,
-                mRemoteName)));
+        messageView.setText(getString(R.string.bluetooth_connection_dialog_text,
+                mRemoteName));
         return mView;
     }
 
@@ -177,8 +183,8 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         String mRemoteName = createRemoteName();
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
-        messageView.setText(createDisplayText(getString(R.string.bluetooth_pb_acceptance_dialog_text,
-                mRemoteName, mRemoteName)));
+        messageView.setText(getString(R.string.bluetooth_pb_acceptance_dialog_text,
+                mRemoteName, mRemoteName));
         createCheckbox(R.id.bluetooth_remember_choice);
         return mView;
     }
@@ -186,8 +192,8 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         String mRemoteName = createRemoteName();
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
-        messageView.setText(createDisplayText(getString(R.string.bluetooth_map_acceptance_dialog_text,
-                mRemoteName, mRemoteName)));
+        messageView.setText(getString(R.string.bluetooth_map_acceptance_dialog_text,
+                mRemoteName, mRemoteName));
         createCheckbox(R.id.bluetooth_remember_choice);
         return mView;
     }
@@ -221,6 +227,8 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         if (mReturnPackage != null && mReturnClass != null) {
             intent.setClassName(mReturnPackage, mReturnClass);
         }
+        if(DEBUG) Log.i(TAG, "sendIntentToReceiver() Request type: " + mRequestType +
+                " mReturnPackage" + mReturnPackage + " mReturnClass" + mReturnClass);
 
         intent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         allowed ? BluetoothDevice.CONNECTION_ACCESS_YES :
@@ -230,6 +238,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
             intent.putExtra(extraName, extraValue);
         }
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
+        intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
         sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
     }
 
@@ -271,12 +280,11 @@ public class BluetoothPermissionActivity extends AlertActivity implements
                                                          bluetoothManager.getProfileManager(),
                                                          mDevice);
         }
-        if (permissionType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS){
+        if(permissionType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS){
             cachedDevice.setPhonebookPermissionChoice(permissionChoice);
         }else if (permissionType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS){
             cachedDevice.setMessagePermissionChoice(permissionChoice);
         }
-
     }
 
 }
