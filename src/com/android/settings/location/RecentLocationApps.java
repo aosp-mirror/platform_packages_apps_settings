@@ -24,8 +24,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -93,22 +91,21 @@ public class RecentLocationApps {
         }
     }
 
-    private PreferenceScreen createRecentLocationEntry(
-            PreferenceManager preferenceManager,
+    private Preference createRecentLocationEntry(
             Drawable icon,
             CharSequence label,
             boolean isHighBattery,
             Preference.OnPreferenceClickListener listener) {
-        PreferenceScreen screen = preferenceManager.createPreferenceScreen(mActivity);
-        screen.setIcon(icon);
-        screen.setTitle(label);
+        Preference pref = new Preference(mActivity);
+        pref.setIcon(icon);
+        pref.setTitle(label);
         if (isHighBattery) {
-            screen.setSummary(R.string.location_high_battery_use);
+            pref.setSummary(R.string.location_high_battery_use);
         } else {
-            screen.setSummary(R.string.location_low_battery_use);
+            pref.setSummary(R.string.location_low_battery_use);
         }
-        screen.setOnPreferenceClickListener(listener);
-        return screen;
+        pref.setOnPreferenceClickListener(listener);
+        return pref;
     }
 
     /**
@@ -140,7 +137,7 @@ public class RecentLocationApps {
      * Fills a list of applications which queried location recently within
      * specified time.
      */
-    public List<Preference> getAppList(PreferenceManager preferenceManager) {
+    public List<Preference> getAppList() {
         // Retrieve Uid-based battery blaming info and generate a package to BatterySipper HashMap
         // for later faster looking up.
         mStatsHelper.refreshStats();
@@ -169,9 +166,9 @@ public class RecentLocationApps {
         long now = System.currentTimeMillis();
         for (AppOpsManager.PackageOps ops : appOps) {
             BatterySipperWrapper wrapper = sipperMap.get(ops.getUid());
-            PreferenceScreen screen = getScreenFromOps(preferenceManager, now, ops, wrapper);
-            if (screen != null) {
-                prefs.add(screen);
+            Preference pref = getPreferenceFromOps(now, ops, wrapper);
+            if (pref != null) {
+                prefs.add(pref);
             }
         }
 
@@ -179,19 +176,17 @@ public class RecentLocationApps {
     }
 
     /**
-     * Creates a PreferenceScreen entry for the given PackageOps.
+     * Creates a Preference entry for the given PackageOps.
      *
      * This method examines the time interval of the PackageOps first. If the PackageOps is older
      * than the designated interval, this method ignores the PackageOps object and returns null.
      *
      * When the PackageOps is fresh enough, if the package has a corresponding battery blaming entry
-     * in the Uid-based battery sipper list, this method returns a PreferenceScreen pointing to the
-     * Uid battery blaming page. If the package doesn't have a battery sipper entry (typically
-     * shouldn't happen), this method returns a PreferenceScreen pointing to the App Info page for
-     * that package.
+     * in the Uid-based battery sipper list, this method returns a Preference pointing to the Uid
+     * battery blaming page. If the package doesn't have a battery sipper entry (typically shouldn't
+     * happen), this method returns a Preference pointing to the App Info page for that package.
      */
-    private PreferenceScreen getScreenFromOps(
-            PreferenceManager preferenceManager,
+    private Preference getPreferenceFromOps(
             long now,
             AppOpsManager.PackageOps ops,
             BatterySipperWrapper wrapper) {
@@ -224,7 +219,7 @@ public class RecentLocationApps {
 
         // The package is fresh enough, continue.
 
-        PreferenceScreen screen = null;
+        Preference pref = null;
         if (wrapper != null) {
             // Contains sipper. Link to Battery Blaming page.
 
@@ -233,8 +228,7 @@ public class RecentLocationApps {
             if (!wrapper.used()) {
                 BatterySipper sipper = wrapper.batterySipper();
                 sipper.loadNameAndIcon();
-                screen = createRecentLocationEntry(
-                        preferenceManager,
+                pref = createRecentLocationEntry(
                         sipper.getIcon(),
                         sipper.getLabel(),
                         highBattery,
@@ -249,8 +243,7 @@ public class RecentLocationApps {
             try {
                 ApplicationInfo appInfo = mPackageManager.getApplicationInfo(
                         packageName, PackageManager.GET_META_DATA);
-                screen = createRecentLocationEntry(
-                        preferenceManager,
+                pref = createRecentLocationEntry(
                         mPackageManager.getApplicationIcon(appInfo),
                         mPackageManager.getApplicationLabel(appInfo),
                         highBattery,
@@ -260,6 +253,6 @@ public class RecentLocationApps {
             }
         }
 
-        return screen;
+        return pref;
     }
 }
