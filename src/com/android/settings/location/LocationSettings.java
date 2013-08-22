@@ -52,9 +52,7 @@ public class LocationSettings extends LocationSettingsBase
 
     private Switch mSwitch;
     private boolean mValidListener;
-    private PreferenceScreen mLocationMode;
-    private PreferenceCategory mRecentLocationRequests;
-    private PreferenceCategory mLocationServices;
+    private Preference mLocationMode;
 
     private BatteryStatsHelper mStatsHelper;
 
@@ -125,7 +123,7 @@ public class LocationSettings extends LocationSettingsBase
         addPreferencesFromResource(R.xml.location_settings);
         root = getPreferenceScreen();
 
-        mLocationMode = (PreferenceScreen) root.findPreference(KEY_LOCATION_MODE);
+        mLocationMode = root.findPreference(KEY_LOCATION_MODE);
         mLocationMode.setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener() {
                     @Override
@@ -140,25 +138,31 @@ public class LocationSettings extends LocationSettingsBase
 
         final PreferenceManager preferenceManager = getPreferenceManager();
 
-        mRecentLocationRequests =
+        PreferenceCategory categoryRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         RecentLocationApps recentApps = new RecentLocationApps(activity, mStatsHelper);
-        List<Preference> recentLocationRequests = recentApps.getAppList(preferenceManager);
+        List<Preference> recentLocationRequests = recentApps.getAppList();
         if (recentLocationRequests.size() > 0) {
-            addPreferencesSorted(recentLocationRequests, mRecentLocationRequests);
+            addPreferencesSorted(recentLocationRequests, categoryRecentLocationRequests);
         } else {
             // If there's no item to display, add a "No recent apps" item.
-            PreferenceScreen screen = preferenceManager.createPreferenceScreen(activity);
-            screen.setTitle(R.string.location_no_recent_apps);
-            screen.setSelectable(false);
-            screen.setEnabled(false);
-            mRecentLocationRequests.addPreference(screen);
+            Preference banner = new Preference(activity);
+            banner.setLayoutResource(R.layout.location_list_no_item);
+            banner.setTitle(R.string.location_no_recent_apps);
+            banner.setSelectable(false);
+            banner.setEnabled(false);
+            categoryRecentLocationRequests.addPreference(banner);
         }
 
-        mLocationServices = (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
-        List<Preference> locationServices = SettingsInjector.getInjectedSettings(
-                activity, preferenceManager);
-        addPreferencesSorted(locationServices, mLocationServices);
+        PreferenceCategory categoryLocationServices =
+                (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
+        List<Preference> locationServices = SettingsInjector.getInjectedSettings(activity);
+        if (locationServices.size() > 0) {
+            addPreferencesSorted(locationServices, categoryLocationServices);
+        } else {
+            // If there's no item to display, remove the whole category.
+            root.removePreference(categoryLocationServices);
+        }
 
         // Only show the master switch when we're not in multi-pane mode, and not being used as
         // Setup Wizard.
@@ -206,7 +210,6 @@ public class LocationSettings extends LocationSettingsBase
 
         boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
         mLocationMode.setEnabled(enabled);
-        mLocationServices.setEnabled(enabled);
 
         if (enabled != mSwitch.isChecked()) {
             // set listener to null so that that code below doesn't trigger onCheckedChanged()
