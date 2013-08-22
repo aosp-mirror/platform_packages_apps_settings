@@ -1135,6 +1135,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeExperimentalWebViewOptions() {
         if (mExperimentalWebView != null) {
+            if (!WebViewFactory.isUseExperimentalWebViewSet()) {
+                    mEnableDialog = new AlertDialog.Builder(getActivity())
+                            .setTitle("KLP WebView broke an app?")
+                            .setMessage("Don't forget to raise a bug!\ngo/klp-webview-bug")
+                            .setIconAttribute(android.R.attr.alertDialogIcon)
+                            .setPositiveButton(android.R.string.ok, this)
+                            .show();
+            }
             WebViewFactory.setUseExperimentalWebView(mExperimentalWebView.isChecked());
             pokeSystemProperties();
         }
