@@ -31,8 +31,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -240,14 +238,13 @@ class SettingsInjector {
      * TODO: extract InjectedLocationSettingGetter that returns an iterable over
      * InjectedSetting objects, so that this class can focus on UI
      */
-    public static List<Preference> getInjectedSettings(Context context,
-            PreferenceManager preferenceManager) {
+    public static List<Preference> getInjectedSettings(Context context) {
 
         Iterable<InjectedSetting> settings = getSettings(context);
         ArrayList<Preference> prefs = new ArrayList<Preference>();
         StatusLoader loader = null;
         for (InjectedSetting setting : settings) {
-            Preference pref = addServiceSetting(context, prefs, setting, preferenceManager);
+            Preference pref = addServiceSetting(context, prefs, setting);
             Intent intent = createUpdatingIntent(context, pref, setting, loader);
             loader = new StatusLoader(context, intent, loader);
         }
@@ -263,22 +260,21 @@ class SettingsInjector {
     /**
      * Adds an injected setting to the root with status "Loading...".
      */
-    private static PreferenceScreen addServiceSetting(Context context,
-            List<Preference> prefs, InjectedSetting info, PreferenceManager preferenceManager) {
-
-        PreferenceScreen screen = preferenceManager.createPreferenceScreen(context);
-        screen.setTitle(info.title);
-        screen.setSummary(R.string.location_loading_injected_setting);
+    private static Preference addServiceSetting(
+            Context context, List<Preference> prefs, InjectedSetting info) {
+        Preference pref = new Preference(context);
+        pref.setTitle(info.title);
+        pref.setSummary(R.string.location_loading_injected_setting);
         PackageManager pm = context.getPackageManager();
         Drawable icon = pm.getDrawable(info.packageName, info.iconId, null);
-        screen.setIcon(icon);
+        pref.setIcon(icon);
 
         Intent settingIntent = new Intent();
         settingIntent.setClassName(info.packageName, info.settingsActivity);
-        screen.setIntent(settingIntent);
+        pref.setIntent(settingIntent);
 
-        prefs.add(screen);
-        return screen;
+        prefs.add(pref);
+        return pref;
     }
 
     /**

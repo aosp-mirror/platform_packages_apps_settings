@@ -16,10 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/location_settings_title">
-        <PreferenceScreen
-            android:title="Under Construction"
-            android:summary="This page is under construction and everything here is expected to be broken for a while. Keep calm and carry on!" />
-        <PreferenceScreen
+        <Preference
             android:key="location_mode"
             android:title="@string/location_mode_title"
             android:summary="@string/location_mode_location_off_title" />
