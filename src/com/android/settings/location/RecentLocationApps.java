@@ -24,7 +24,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -35,8 +34,6 @@ import com.android.settings.fuelgauge.BatterySipper;
 import com.android.settings.fuelgauge.BatteryStatsHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -143,7 +140,7 @@ public class RecentLocationApps {
      * Fills a list of applications which queried location recently within
      * specified time.
      */
-    public void fillAppList(PreferenceCategory container) {
+    public List<Preference> getAppList(PreferenceManager preferenceManager) {
         // Retrieve Uid-based battery blaming info and generate a package to BatterySipper HashMap
         // for later faster looking up.
         mStatsHelper.refreshStats();
@@ -166,10 +163,9 @@ public class RecentLocationApps {
                     AppOpsManager.OP_MONITOR_LOCATION,
                     AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION,
                 });
-        PreferenceManager preferenceManager = container.getPreferenceManager();
 
         // Process the AppOps list and generate a preference list.
-        ArrayList<PreferenceScreen> prefs = new ArrayList<PreferenceScreen>();
+        ArrayList<Preference> prefs = new ArrayList<Preference>();
         long now = System.currentTimeMillis();
         for (AppOpsManager.PackageOps ops : appOps) {
             BatterySipperWrapper wrapper = sipperMap.get(ops.getUid());
@@ -179,25 +175,7 @@ public class RecentLocationApps {
             }
         }
 
-        if (prefs.size() > 0) {
-            // If there's some items to display, sort the items and add them to the container.
-            Collections.sort(prefs, new Comparator<PreferenceScreen>() {
-                @Override
-                public int compare(PreferenceScreen lhs, PreferenceScreen rhs) {
-                    return lhs.getTitle().toString().compareTo(rhs.getTitle().toString());
-                }
-            });
-            for (PreferenceScreen entry : prefs) {
-                container.addPreference(entry);
-            }
-        } else {
-            // If there's no item to display, add a "No recent apps" item.
-            PreferenceScreen screen = preferenceManager.createPreferenceScreen(mActivity);
-            screen.setTitle(R.string.location_no_recent_apps);
-            screen.setSelectable(false);
-            screen.setEnabled(false);
-            container.addPreference(screen);
-        }
+        return prefs;
     }
 
     /**

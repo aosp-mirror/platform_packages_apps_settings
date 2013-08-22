@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.view.Gravity;
@@ -31,6 +33,10 @@ import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryStatsHelper;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Location access settings.
@@ -97,7 +103,21 @@ public class LocationSettings extends LocationSettingsBase
         mStatsHelper.destroy();
     }
 
+    private void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
+        // If there's some items to display, sort the items and add them to the container.
+        Collections.sort(prefs, new Comparator<Preference>() {
+            @Override
+            public int compare(Preference lhs, Preference rhs) {
+                return lhs.getTitle().toString().compareTo(rhs.getTitle().toString());
+            }
+        });
+        for (Preference entry : prefs) {
+            container.addPreference(entry);
+        }
+    }
+
     private PreferenceScreen createPreferenceHierarchy() {
+        final PreferenceActivity activity = (PreferenceActivity) getActivity();
         PreferenceScreen root = getPreferenceScreen();
         if (root != null) {
             root.removeAll();
@@ -110,7 +130,6 @@ public class LocationSettings extends LocationSettingsBase
                 new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        PreferenceActivity activity = (PreferenceActivity) getActivity();
                         activity.startPreferencePanel(
                                 LocationMode.class.getName(), null,
                                 R.string.location_mode_screen_title, null, LocationSettings.this,
@@ -118,15 +137,28 @@ public class LocationSettings extends LocationSettingsBase
                         return true;
                     }
                 });
+
+        final PreferenceManager preferenceManager = getPreferenceManager();
+
         mRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
-        mLocationServices = (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
-
-        PreferenceActivity activity = (PreferenceActivity) getActivity();
         RecentLocationApps recentApps = new RecentLocationApps(activity, mStatsHelper);
-        recentApps.fillAppList(mRecentLocationRequests);
+        List<Preference> recentLocationRequests = recentApps.getAppList(preferenceManager);
+        if (recentLocationRequests.size() > 0) {
+            addPreferencesSorted(recentLocationRequests, mRecentLocationRequests);
+        } else {
+            // If there's no item to display, add a "No recent apps" item.
+            PreferenceScreen screen = preferenceManager.createPreferenceScreen(activity);
+            screen.setTitle(R.string.location_no_recent_apps);
+            screen.setSelectable(false);
+            screen.setEnabled(false);
+            mRecentLocationRequests.addPreference(screen);
+        }
 
-        SettingsInjector.addInjectedSettings(mLocationServices, activity, getPreferenceManager());
+        mLocationServices = (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
+        List<Preference> locationServices = SettingsInjector.getInjectedSettings(
+                activity, preferenceManager);
+        addPreferencesSorted(locationServices, mLocationServices);
 
         // Only show the master switch when we're not in multi-pane mode, and not being used as
         // Setup Wizard.
@@ -174,7 +206,6 @@ public class LocationSettings extends LocationSettingsBase
 
         boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
         mLocationMode.setEnabled(enabled);
-        mRecentLocationRequests.setEnabled(enabled);
         mLocationServices.setEnabled(enabled);
 
         if (enabled != mSwitch.isChecked()) {
