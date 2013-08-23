@@ -18,7 +18,11 @@ package com.android.settings.location;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -53,8 +57,9 @@ public class LocationSettings extends LocationSettingsBase
     private Switch mSwitch;
     private boolean mValidListener;
     private Preference mLocationMode;
-
     private BatteryStatsHelper mStatsHelper;
+    /** Receives UPDATE_INTENT  */
+    private BroadcastReceiver mReceiver;
 
     public LocationSettings() {
         mValidListener = false;
@@ -89,6 +94,11 @@ public class LocationSettings extends LocationSettingsBase
 
     @Override
     public void onPause() {
+        try {
+            getActivity().unregisterReceiver(mReceiver);
+        } catch (RuntimeException e) {
+            // Ignore exceptions caused by race condition
+        }
         super.onPause();
         mValidListener = false;
         mSwitch.setOnCheckedChangeListener(null);
@@ -156,7 +166,18 @@ public class LocationSettings extends LocationSettingsBase
 
         PreferenceCategory categoryLocationServices =
                 (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
-        List<Preference> locationServices = SettingsInjector.getInjectedSettings(activity);
+        final SettingsInjector injector = new SettingsInjector(activity);
+        List<Preference> locationServices = injector.getInjectedSettings();
+
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                injector.reloadStatusMessages();
+            }
+        };
+        activity.registerReceiver(
+                mReceiver, new IntentFilter(SettingInjectorService.UPDATE_INTENT));
+
         if (locationServices.size() > 0) {
             addPreferencesSorted(locationServices, categoryLocationServices);
         } else {
