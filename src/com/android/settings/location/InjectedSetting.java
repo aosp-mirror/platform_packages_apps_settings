@@ -17,12 +17,17 @@
 package com.android.settings.location;
 
 import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Log;
+import com.android.internal.annotations.Immutable;
+import com.android.internal.util.Preconditions;
 
 /**
  * Specifies a setting that is being injected into Settings > Location > Location services.
  *
  * @see android.location.SettingInjectorService
  */
+@Immutable
 class InjectedSetting {
 
     /**
@@ -53,13 +58,30 @@ class InjectedSetting {
      */
     public final String settingsActivity;
 
-    public InjectedSetting(String packageName, String className,
+    private InjectedSetting(String packageName, String className,
             String title, int iconId, String settingsActivity) {
-        this.packageName = packageName;
-        this.className = className;
-        this.title = title;
+        this.packageName = Preconditions.checkNotNull(packageName, "packageName");
+        this.className = Preconditions.checkNotNull(className, "className");
+        this.title = Preconditions.checkNotNull(title, "title");
         this.iconId = iconId;
-        this.settingsActivity = settingsActivity;
+        this.settingsActivity = Preconditions.checkNotNull(settingsActivity);
+    }
+
+    /**
+     * Returns a new instance, or null.
+     */
+    public static InjectedSetting newInstance(String packageName, String className,
+            String title, int iconId, String settingsActivity) {
+        if (packageName == null || className == null ||
+                TextUtils.isEmpty(title) || TextUtils.isEmpty(settingsActivity)) {
+            if (Log.isLoggable(SettingsInjector.TAG, Log.WARN)) {
+                Log.w(SettingsInjector.TAG, "Illegal setting specification: package="
+                        + packageName + ", class=" + className
+                        + ", title=" + title + ", settingsActivity=" + settingsActivity);
+            }
+            return null;
+        }
+        return new InjectedSetting(packageName, className, title, iconId, settingsActivity);
     }
 
     @Override
@@ -80,5 +102,27 @@ class InjectedSetting {
         Intent intent = new Intent();
         intent.setClassName(packageName, className);
         return intent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InjectedSetting)) return false;
+
+        InjectedSetting that = (InjectedSetting) o;
+
+        return packageName.equals(that.packageName) && className.equals(that.className)
+                && title.equals(that.title) && iconId == that.iconId
+                && settingsActivity.equals(that.settingsActivity);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = packageName.hashCode();
+        result = 31 * result + className.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + iconId;
+        result = 31 * result + settingsActivity.hashCode();
+        return result;
     }
 }
