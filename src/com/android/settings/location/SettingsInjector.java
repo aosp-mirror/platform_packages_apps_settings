@@ -79,6 +79,13 @@ class SettingsInjector {
      */
     public static final String ATTRIBUTES_NAME = "injected-location-setting";
 
+    private Context mContext;
+    private StatusLoader mLoader = null;
+
+    public SettingsInjector(Context context) {
+        mContext = context;
+    }
+
     /**
      * Returns a list with one {@link InjectedSetting} object for each {@link android.app.Service}
      * that responds to {@link #RECEIVER_INTENT} and provides the expected setting metadata.
@@ -87,8 +94,8 @@ class SettingsInjector {
      *
      * TODO: unit test
      */
-    public static List<InjectedSetting> getSettings(Context context) {
-        PackageManager pm = context.getPackageManager();
+    private List<InjectedSetting> getSettings() {
+        PackageManager pm = mContext.getPackageManager();
         Intent receiverIntent = new Intent(RECEIVER_INTENT);
 
         List<ResolveInfo> resolveInfos =
@@ -189,8 +196,7 @@ class SettingsInjector {
         }
     }
 
-    private static final class StatusLoader {
-        private final Context mContext;
+    private final class StatusLoader {
         private final Intent mIntent;
         private final StatusLoader mPrev;
 
@@ -199,10 +205,27 @@ class SettingsInjector {
         /**
          * Creates a loader and chains with the previous loader.
          */
-        public StatusLoader(Context context, Intent intent, StatusLoader prev) {
-            mContext = context;
+        public StatusLoader(Intent intent, StatusLoader prev) {
             mIntent = intent;
             mPrev = prev;
+        }
+
+        /**
+         * Clears the loaded flag for the whole chain.
+         */
+        private void setNotLoaded() {
+            mLoaded = false;
+            if (mPrev != null) {
+                mPrev.setNotLoaded();
+            }
+        }
+
+        /**
+         * Reloads the whole chain.
+         */
+        public void reload() {
+            setNotLoaded();
+            loadIfNotLoaded();
         }
 
         /**
@@ -238,34 +261,41 @@ class SettingsInjector {
      * TODO: extract InjectedLocationSettingGetter that returns an iterable over
      * InjectedSetting objects, so that this class can focus on UI
      */
-    public static List<Preference> getInjectedSettings(Context context) {
-
-        Iterable<InjectedSetting> settings = getSettings(context);
+    public List<Preference> getInjectedSettings() {
+        Iterable<InjectedSetting> settings = getSettings();
         ArrayList<Preference> prefs = new ArrayList<Preference>();
-        StatusLoader loader = null;
+        mLoader = null;
         for (InjectedSetting setting : settings) {
-            Preference pref = addServiceSetting(context, prefs, setting);
-            Intent intent = createUpdatingIntent(context, pref, setting, loader);
-            loader = new StatusLoader(context, intent, loader);
+            Preference pref = addServiceSetting(prefs, setting);
+            Intent intent = createUpdatingIntent(pref, setting, mLoader);
+            mLoader = new StatusLoader(intent, mLoader);
         }
 
         // Start a thread to load each list item status.
-        if (loader != null) {
-            loader.loadIfNotLoaded();
+        if (mLoader != null) {
+            mLoader.loadIfNotLoaded();
         }
 
         return prefs;
     }
 
     /**
+     * Reloads the status messages for all the preference items.
+     */
+    public void reloadStatusMessages() {
+        if (mLoader != null) {
+            mLoader.reload();
+        }
+    }
+
+    /**
      * Adds an injected setting to the root with status "Loading...".
      */
-    private static Preference addServiceSetting(
-            Context context, List<Preference> prefs, InjectedSetting info) {
-        Preference pref = new Preference(context);
+    private Preference addServiceSetting(List<Preference> prefs, InjectedSetting info) {
+        Preference pref = new Preference(mContext);
         pref.setTitle(info.title);
         pref.setSummary(R.string.location_loading_injected_setting);
-        PackageManager pm = context.getPackageManager();
+        PackageManager pm = mContext.getPackageManager();
         Drawable icon = pm.getDrawable(info.packageName, info.iconId, null);
         pref.setIcon(icon);
 
@@ -281,7 +311,7 @@ class SettingsInjector {
      * Creates an Intent to ask the receiver for the current status for the setting, and display it
      * when it replies.
      */
-    private static Intent createUpdatingIntent(Context context,
+    private static Intent createUpdatingIntent(
             final Preference pref, final InjectedSetting info, final StatusLoader prev) {
         final Intent receiverIntent = info.getServiceIntent();
         Handler handler = new Handler() {
