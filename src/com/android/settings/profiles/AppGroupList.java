@@ -57,33 +57,19 @@ public class AppGroupList extends SettingsPreferenceFragment {
         if (Utils.isTablet(getActivity())) {
             getListView().setPadding(0, 0, 0, 0);
         }
-}
+    }
 
     public void refreshList() {
-        // Only enable the preferences if system profiles are enabled
-        boolean enabled = Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
-
         PreferenceScreen appgroupList = getPreferenceScreen();
         appgroupList.removeAll();
 
-        if (enabled) {
-            // Add the existing app groups
-            for (NotificationGroup group : mProfileManager.getNotificationGroups()) {
-                PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
-                pref.setKey(group.getUuid().toString());
-                pref.setTitle(group.getName());
-                pref.setPersistent(false);
-                pref.setEnabled(enabled);
-                appgroupList.addPreference(pref);
-            }
-        } else {
-            // Not enabled, display a message preference
-            Preference npref = new Preference(getActivity());
-            npref.setLayoutResource(R.layout.preference_empty_list);
-            npref.setTitle(R.string.profile_empty_list_profiles_off);
-            npref.setEnabled(false);
-            appgroupList.addPreference(npref);
+        // Add the existing app groups
+        for (NotificationGroup group : mProfileManager.getNotificationGroups()) {
+            PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
+            pref.setKey(group.getUuid().toString());
+            pref.setTitle(group.getName());
+            pref.setPersistent(false);
+            appgroupList.addPreference(pref);
         }
     }
 

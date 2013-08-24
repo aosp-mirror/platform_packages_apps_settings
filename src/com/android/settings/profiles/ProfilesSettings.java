@@ -20,7 +20,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.FragmentManager;
 import android.app.NotificationGroup;
 import android.app.Profile;
 import android.app.ProfileManager;
@@ -32,6 +32,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,9 +42,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,32 +57,27 @@ import java.util.HashMap;
 public class ProfilesSettings extends SettingsPreferenceFragment {
 
     private static final String TAG = "ProfilesSettings";
-    private static final String TAB_PROFILES = "profiles";
-    private static final String TAB_APPGROUPS = "appgroups";
     private static final String PROFILE_SERVICE = "profile";
 
     private static final int MENU_RESET = Menu.FIRST;
-    private static final int MENU_ADD_PROFILE = Menu.FIRST + 1;
-    private static final int MENU_ADD_APPGROUP = Menu.FIRST + 2;
+    private static final int MENU_ADD = Menu.FIRST + 1;
 
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
-
-    private static Menu mOptionsMenu;
 
     private ProfileManager mProfileManager;
     private ProfileEnabler mProfileEnabler;
 
     private Switch mActionBarSwitch;
-    private static TabHost mTabHost;
+
+    private ViewPager mViewPager;
+    private TextView mEmptyText;
+    private ProfilesPagerAdapter mAdapter;
+    private boolean mEnabled;
 
     ViewGroup mContainer;
 
-    TabManager mTabManager;
-
     static Bundle mSavedState;
-
-    private static Activity mActivity;
 
     public ProfilesSettings() {
         mFilter = new IntentFilter();
@@ -88,7 +86,10 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                handleEvent(context, intent);
+                String action = intent.getAction();
+                if (ProfileManager.PROFILES_STATE_CHANGED_ACTION.equals(action)) {
+                    updateProfilesEnabledState();
+                }
             }
         };
     }
@@ -96,24 +97,23 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
         mContainer = container;
-        mTabHost = (TabHost) inflater.inflate(R.layout.profile_tabs, container, false);
-        if (mTabHost != null) {
-            mProfileManager = (ProfileManager) getActivity().getSystemService(PROFILE_SERVICE); 
-            mActivity = getActivity();
 
-            setupTabs();
+        View view = inflater.inflate(R.layout.profile_tabs, container, false);
+        mViewPager = (ViewPager) view.findViewById(R.id.pager);
+        mEmptyText = (TextView) view.findViewById(R.id.empty);
 
-            // If we are resuming from a paused state, restore the last active tab
-            if (mSavedState != null) {
-                mTabHost.setCurrentTabByTag(mSavedState.getString("tab"));
-            }
+        mAdapter = new ProfilesPagerAdapter(getFragmentManager());
+        mViewPager.setAdapter(mAdapter);
 
-            setHasOptionsMenu(true);
-        }
+        PagerTabStrip tabs = (PagerTabStrip) view.findViewById(R.id.tabs);
+        tabs.setTabIndicatorColorResource(android.R.color.holo_blue_light);
 
-        return mTabHost;
+        mProfileManager = (ProfileManager) getActivity().getSystemService(PROFILE_SERVICE);
+
+        setHasOptionsMenu(true);
+
+        return view;
     }
 
     @Override
@@ -155,13 +155,15 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
         }
         getActivity().registerReceiver(mReceiver, mFilter);
 
+        // check if we are enabled
+        updateProfilesEnabledState();
+
         // If running on a phone, remove padding around tabs
         if (!Utils.isTablet(getActivity())) {
             mContainer.setPadding(0, 0, 0, 0);
         }
     }
 
-    
     @Override
     public void onPause() {
         super.onPause();
@@ -169,47 +171,23 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
             mProfileEnabler.pause();
         }
         getActivity().unregisterReceiver(mReceiver);
-
-        // store the current tab so we can get back to it later
-        if (mSavedState == null) {
-            mSavedState = new Bundle();
-        }
-        mSavedState.putString("tab", mTabHost.getCurrentTabTag());
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        mOptionsMenu = menu;
-
         menu.add(0, MENU_RESET, 0, R.string.profile_reset_title)
                 .setIcon(R.drawable.ic_settings_backup) // use the backup icon
                 .setAlphabeticShortcut('r')
+                .setEnabled(mEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-        menu.add(0, MENU_ADD_PROFILE, 0, R.string.profiles_add)
+        menu.add(0, MENU_ADD, 0, R.string.profiles_add)
                 .setIcon(R.drawable.ic_menu_add_dark)
                 .setAlphabeticShortcut('a')
+                .setEnabled(mEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-
-        menu.add(0, MENU_ADD_APPGROUP, 0, R.string.profiles_add)
-                .setIcon(R.drawable.ic_menu_add_dark)
-                .setAlphabeticShortcut('a')
-            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
-                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-
-        updateOptionsMenu();
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        updateOptionsMenu();
-    }
-
-    @Override
-    public void onDestroyOptionsMenu() {
-        mOptionsMenu = null;
     }
 
     @Override
@@ -219,12 +197,13 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
                 resetAll();
                 return true;
 
-            case MENU_ADD_PROFILE:
-                addProfile();
-                return true;
-
-            case MENU_ADD_APPGROUP:
-                addAppGroup();
+            case MENU_ADD:
+                // determine dialog to launch
+                if (mViewPager.getCurrentItem() == 0) {
+                    addProfile();
+                } else {
+                    addAppGroup();
+                }
                 return true;
 
             default:
@@ -232,87 +211,36 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
         }
     }
 
-    static void updateOptionsMenu() {
-        if (mOptionsMenu == null) {
-            return;
-        }
-
-        boolean enabled = Settings.System.getInt(mActivity.getContentResolver(),
-                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
-
-        String tabId = mTabHost.getCurrentTabTag();
-        if (TAB_PROFILES.equals(tabId) && enabled) {
-            mOptionsMenu.findItem(MENU_ADD_PROFILE).setVisible(true);
-            mOptionsMenu.findItem(MENU_ADD_APPGROUP).setVisible(false);
-            mOptionsMenu.findItem(MENU_RESET).setVisible(true);
-
-        } else if (TAB_APPGROUPS.equals(tabId) && enabled) {
-            mOptionsMenu.findItem(MENU_ADD_PROFILE).setVisible(false);
-            mOptionsMenu.findItem(MENU_ADD_APPGROUP).setVisible(true);
-            mOptionsMenu.findItem(MENU_RESET).setVisible(true);
-
-        } else {
-            // System Profiles are disabled, hide options menu items
-            mOptionsMenu.findItem(MENU_ADD_PROFILE).setVisible(false);
-            mOptionsMenu.findItem(MENU_ADD_APPGROUP).setVisible(false);
-            mOptionsMenu.findItem(MENU_RESET).setVisible(false);
-        }
-    }
-
-    public void setupTabs() {
-        mTabHost.setup();
-        mTabHost.clearAllTabs();
-
-        mTabManager = new TabManager(getActivity(), mTabHost, android.R.id.tabcontent);
-        mTabManager.addTab(mTabHost.newTabSpec(TAB_PROFILES).setIndicator(getString(R.string.profile_profiles_manage)),
-                ProfilesList.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec(TAB_APPGROUPS).setIndicator(getString(R.string.profile_appgroups_manage)),
-                AppGroupList.class, null);
-
-        // Set the profiles tab as the default
-        mTabHost.setCurrentTabByTag(TAB_PROFILES);
-
-        updateOptionsMenu();
-    }
-
-    public void refreshActiveTab() {
-        if (mTabManager != null) {
-            mTabManager.refreshTab(mTabHost.getCurrentTabTag());
-        }
-
-        updateOptionsMenu();
-    }
-
     private void addProfile() {
-        Context context = getActivity();
-        if (context != null) {
-            final EditText entry = new EditText(context);
-            entry.setSingleLine();
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View content = inflater.inflate(R.layout.profile_name_dialog, null);
+        final TextView prompt = (TextView) content.findViewById(R.id.prompt);
+        final EditText entry = (EditText) content.findViewById(R.id.name);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(R.string.menu_new_profile);
-            builder.setMessage(R.string.profile_profile_name_prompt);
-            builder.setView(entry, 34, 16, 34, 16);
-            builder.setPositiveButton(android.R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String name = entry.getText().toString();
-                            if (!mProfileManager.profileExists(name)) {
-                                Profile profile = new Profile(name);
-                                mProfileManager.addProfile(profile);
-                                mTabManager.refreshTab(TAB_PROFILES);
-                            } else {
-                                Toast.makeText(getActivity(), R.string.duplicate_profile_name, Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-            builder.setNegativeButton(android.R.string.cancel, null);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            ((TextView)dialog.findViewById(android.R.id.message)).setTextAppearance(getActivity(),
-                    android.R.style.TextAppearance_DeviceDefault_Small);
-        }
+        prompt.setText(R.string.profile_profile_name_prompt);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.menu_new_profile);
+        builder.setView(content);
+
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = entry.getText().toString();
+                if (!mProfileManager.profileExists(name)) {
+                    Profile profile = new Profile(name);
+                    mProfileManager.addProfile(profile);
+                    mAdapter.refreshProfiles();
+                } else {
+                    Toast.makeText(getActivity(),
+                            R.string.duplicate_profile_name, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void resetAll() {
@@ -323,173 +251,87 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
         alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 mProfileManager.resetAll();
-                mTabManager.refreshTab(mTabHost.getCurrentTabTag());
+                mAdapter.refreshProfiles();
+                mAdapter.refreshAppGroups();
             }
         });
         alert.setNegativeButton(R.string.cancel, null);
-        alert.create().show();
+        alert.show();
     }
 
     private void addAppGroup() {
-        Context context = getActivity();
-        if (context != null) {
-            final EditText entry = new EditText(context);
-            entry.setSingleLine();
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View content = inflater.inflate(R.layout.profile_name_dialog, null);
+        final TextView prompt = (TextView) content.findViewById(R.id.prompt);
+        final EditText entry = (EditText) content.findViewById(R.id.name);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(R.string.profile_new_appgroup);
-            builder.setMessage(R.string.profile_appgroup_name_prompt);
-            builder.setView(entry, 34, 16, 34, 16);
-            builder.setPositiveButton(android.R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String name = entry.getText().toString();
-                            if (!mProfileManager.notificationGroupExists(name)) {
-                                NotificationGroup newGroup = new NotificationGroup(entry.getText().toString());
-                                mProfileManager.addNotificationGroup(newGroup);
-                                mTabManager.refreshTab(TAB_APPGROUPS);
-                            } else {
-                                Toast.makeText(getActivity(), R.string.duplicate_appgroup_name, Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-            builder.setNegativeButton(android.R.string.cancel, null);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            ((TextView)dialog.findViewById(android.R.id.message)).setTextAppearance(getActivity(),
-                    android.R.style.TextAppearance_DeviceDefault_Small);
-        }
-    }
+        prompt.setText(R.string.profile_appgroup_name_prompt);
 
-    private void handleEvent(Context context, Intent intent) {
-        String action = intent.getAction();
-        if (ProfileManager.PROFILES_STATE_CHANGED_ACTION.equals(action)) {
-            // we don't need to check the new state, refresh will do it
-            refreshActiveTab();
-        }
-    }
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.profile_new_appgroup);
+        builder.setView(content);
 
-    /**
-     * This is a helper class that implements a generic mechanism for
-     * associating fragments with the tabs in a tab host.
-     */
-    public static class TabManager implements TabHost.OnTabChangeListener {
-        private final Activity mActivity;
-        private final TabHost mTabHost;
-        private final int mContainerId;
-        private final HashMap<String, TabInfo> mTabs = new HashMap<String, TabInfo>();
-        TabInfo mLastTab;
-
-        static final class TabInfo {
-            private final String tag;
-            private final Class<?> clss;
-            private final Bundle args;
-            private Fragment fragment;
-
-            TabInfo(String _tag, Class<?> _class, Bundle _args) {
-                tag = _tag;
-                clss = _class;
-                args = _args;
-            }
-        }
-
-        static class DummyTabFactory implements TabHost.TabContentFactory {
-            private final Context mContext;
-
-            public DummyTabFactory(Context context) {
-                mContext = context;
-            }
-
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
-            public View createTabContent(String tag) {
-                View v = new View(mContext);
-                v.setMinimumWidth(0);
-                v.setMinimumHeight(0);
-                return v;
+            public void onClick(DialogInterface dialog, int which) {
+                String name = entry.getText().toString();
+                if (!mProfileManager.notificationGroupExists(name)) {
+                    NotificationGroup newGroup = new NotificationGroup(name);
+                    mProfileManager.addNotificationGroup(newGroup);
+                    mAdapter.refreshAppGroups();
+                } else {
+                    Toast.makeText(getActivity(),
+                            R.string.duplicate_appgroup_name, Toast.LENGTH_LONG).show();
+                }
             }
-        }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
 
-        public TabManager(Activity activity, TabHost tabHost, int containerId) {
-            mActivity = activity;
-            mTabHost = tabHost;
-            mContainerId = containerId;
-            mTabHost.setOnTabChangedListener(this);
-        }
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
-        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
-            tabSpec.setContent(new DummyTabFactory(mActivity));
-            String tag = tabSpec.getTag();
+    private void updateProfilesEnabledState() {
+        Activity activity = getActivity();
 
-            TabInfo info = new TabInfo(tag, clss, args);
+        mEnabled = Settings.System.getInt(activity.getContentResolver(),
+                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1;
+        activity.invalidateOptionsMenu();
 
-            // Check to see if we already have a fragment for this tab, probably
-            // from a previously saved state.  If so, deactivate it, because our
-            // initial state is that a tab isn't shown.
-            info.fragment = mActivity.getFragmentManager().findFragmentByTag(tag);
-            if (info.fragment != null && !info.fragment.isDetached()) {
-                FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
-                ft.detach(info.fragment);
-                ft.commit();
-            }
+        mViewPager.setVisibility(mEnabled ? View.VISIBLE : View.GONE);
+        mEmptyText.setVisibility(mEnabled ? View.GONE : View.VISIBLE);
+    }
 
-            mTabs.put(tag, info);
-            mTabHost.addTab(tabSpec);
+    class ProfilesPagerAdapter extends FragmentStatePagerAdapter {
+        Fragment[] frags = { new ProfilesList(), new AppGroupList() };
+        String[] titles = { getString(R.string.profile_profiles_manage),
+                            getString(R.string.profile_appgroups_manage) };
+
+        ProfilesPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
         @Override
-        public void onTabChanged(String tabId) {
-            TabInfo newTab = mTabs.get(tabId);
-            if (mLastTab != newTab) {
-                FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
-                if (mLastTab != null) {
-                    if (mLastTab.fragment != null) {
-                        ft.detach(mLastTab.fragment);
-                    }
-                }
-
-                if (newTab != null) {
-                    if (newTab.fragment == null) {
-                        newTab.fragment = Fragment.instantiate(mActivity,
-                                newTab.clss.getName(), newTab.args);
-                        ft.add(mContainerId, newTab.fragment, newTab.tag);
-                    } else {
-                        ft.attach(newTab.fragment);
-                    }
-                }
-
-                mLastTab = newTab;
-                ft.commit();
-
-                // Toggle the appropriate menu options
-                updateOptionsMenu();
-            }
+        public Fragment getItem(int position) {
+            return frags[position];
         }
 
-        public void refreshTab(String tabId) {
-            TabInfo currentTab = mTabs.get(tabId);
-
-            if (currentTab != null) {
-                FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
-                if (currentTab.fragment != null) {
-                    ft.detach(currentTab.fragment);
-                }
-
-                if (currentTab.fragment == null) {
-                    currentTab.fragment = Fragment.instantiate(mActivity,
-                            currentTab.clss.getName(), currentTab.args);
-                    ft.add(mContainerId, currentTab.fragment, currentTab.tag);
-
-                } else {
-                    ft.attach(currentTab.fragment);
-                }
-
-                ft.commit();
-
-                // Toggle the appropriate menu options
-                updateOptionsMenu();
-            }
+        @Override
+        public int getCount() {
+            return frags.length;
         }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
+        }
+
+        public void refreshProfiles() {
+            ((ProfilesList) frags[0]).refreshList();
+        }
+
+        public void refreshAppGroups() {
+            ((AppGroupList) frags[1]).refreshList();
+        }
     }
 }
