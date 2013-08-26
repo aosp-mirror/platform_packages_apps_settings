@@ -136,6 +136,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
+    private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
@@ -179,6 +180,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private Preference mDebugAppPref;
     private CheckBoxPreference mWaitForDebugger;
     private CheckBoxPreference mVerifyAppsOverUsb;
+    private CheckBoxPreference mWifiDisplayCertification;
 
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
@@ -307,6 +309,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
         mForceRtlLayout = findAndInitCheckboxPref(FORCE_RTL_LAYOUT_KEY);
         mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
+        mWifiDisplayCertification = findAndInitCheckboxPref(WIFI_DISPLAY_CERTIFICATION_KEY);
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
@@ -527,6 +530,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
+        updateWifiDisplayCertificationOptions();
     }
 
     private void resetDangerousOptions() {
@@ -976,6 +980,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         LocalePicker.updateLocale(getActivity().getResources().getConfiguration().locale);
     }
 
+    private void updateWifiDisplayCertificationOptions() {
+        updateCheckBox(mWifiDisplayCertification, Settings.Global.getInt(
+                getActivity().getContentResolver(),
+                Settings.Global.WIFI_DISPLAY_CERTIFICATION_ON, 0) != 0);
+    }
+
+    private void writeWifiDisplayCertificationOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.WIFI_DISPLAY_CERTIFICATION_ON,
+                mWifiDisplayCertification.isChecked() ? 1 : 0);
+    }
+
     private void updateCpuUsageOptions() {
         updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
@@ -1291,6 +1307,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeDebugLayoutOptions();
         } else if (preference == mForceRtlLayout) {
             writeForceRtlOptions();
+        } else if (preference == mWifiDisplayCertification) {
+            writeWifiDisplayCertificationOptions();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
