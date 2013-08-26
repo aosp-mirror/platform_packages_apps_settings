@@ -21,7 +21,7 @@
     <string name="create" msgid="3578857613172647409">"Creaţi"</string>
     <string name="allow" msgid="3349662621170855910">"Permiteți"</string>
     <string name="deny" msgid="6947806159746484865">"Refuzați"</string>
-    <string name="device_info_default" msgid="7847265875578739287">"Necunoscută"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Necunoscut"</string>
   <plurals name="show_dev_countdown">
     <item quantity="one" msgid="5295687242294085452">"Mai aveți de parcurs <xliff:g id="STEP_COUNT">%1$d</xliff:g> pas pentru a deveni dezvoltator."</item>
     <item quantity="other" msgid="6722953419953594148">"Mai aveți de parcurs <xliff:g id="STEP_COUNT">%1$d</xliff:g> pași pentru a deveni dezvoltator."</item>
@@ -53,7 +53,7 @@
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Inactiv"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Sună"</string>
     <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"Apel în curs"</string>
-    <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Deconectat"</string>
+    <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Deconectată"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"Se conectează"</string>
     <string name="radioInfo_data_connected" msgid="7074301157399238697">"Conectat"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"Suspendat"</string>
@@ -157,7 +157,7 @@
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"O aplicație încearcă să activeze Bluetooth și să facă telefonul vizibil pentru alte gadgeturi pentru <xliff:g id="TIMEOUT">%1$d</xliff:g> (de) secunde."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"O aplicație încearcă să activeze Bluetooth și să facă tableta vizibilă pentru alte gadgeturi. Puteți modifica ulterior acest lucru din setările Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"O aplicație încearcă să activeze Bluetooth și să facă telefonul vizibil pentru alte gadgeturi. Puteți modifica ulterior acest lucru din setările Bluetooth."</string>
-    <string name="bluetooth_turning_on" msgid="4850574877288036646">"Se activează Bluetooth?"</string>
+    <string name="bluetooth_turning_on" msgid="4850574877288036646">"Se activează Bluetooth…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Se dezactivează Bluetooth..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Conectare automată"</string>
     <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Solicitare de conectare Bluetooth"</string>
@@ -1101,10 +1101,10 @@
     <string name="unknown" msgid="1592123443519355854">"Necunoscut"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Sortaţi după nume"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Sortaţi după dimensiune"</string>
-    <string name="show_running_services" msgid="5736278767975544570">"Afişaţi serv. care funcţ."</string>
+    <string name="show_running_services" msgid="5736278767975544570">"Serviciile care rulează"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Procese memorie cache"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Resetați pref. aplicații"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Resetaţi pref. aplicații?"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Resetați preferințe aplicații"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Resetați preferințele pentru aplicații?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Aceasta va reseta toate preferințele pentru:\n\n "<li>"aplicații dezactivate;"</li>\n" "<li>"notificări de aplicații dezactivate;"</li>\n" "<li>"aplicații prestabilite pentru acțiuni;"</li>\n" "<li>"restricții privind datele de fundal pentru aplicații;"</li>\n" "<li>"orice restricții de permisiuni."</li>\n\n" Nu veți pierde datele aplicațiilor."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Resetaţi aplicaţiile"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gestionaţi spaţiul"</string>
@@ -1184,8 +1184,8 @@
     <string name="service_started_by_app" msgid="818675099014723551">"Iniţiat de aplicaţie"</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> liber(i)"</string>
-    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> util."</string>
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> liberi"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> utilizați"</string>
     <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
@@ -1341,7 +1341,7 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Servicii"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistem"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesturi pentru mărire"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"După activarea acestei funcţii, puteţi mări şi micşora atingând de trei ori ecranul.\n\nÎn timp ce măriţi, puteţi:\n"<ul><li>"să deplasaţi: deplasaţi două sau mai multe degete pe ecran;"</li>\n<li>"să ajustaţi nivelul de zoom: ciupiţi cu două sau mai multe degete ori îndepărtați-le."</li></ul>\n\n"De asemenea, puteţi să măriţi temporar ce se află sub degetul dvs. atingând ecranul de trei ori şi menţinând degetul pe ecran. În această stare mărită, puteţi să glisaţi degetul pentru a explora diferite părţi ale ecranului. Ridicaţi degetul pentru a reveni la starea anterioară.\n\nNotă: atingerea triplă pentru mărire funcţionează peste tot, cu excepţia tastaturii şi a barei de navigare."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"După activarea acestei funcţii, puteţi mări şi micşora atingând de trei ori ecranul.\n\nÎn timp ce măriţi, puteţi:\n"<ul><li>"să deplasaţi: deplasaţi două sau mai multe degete pe ecran;"</li>\n<li>"să ajustaţi nivelul de zoom: ciupiţi cu două sau mai multe degete ori îndepărtați-le."</li></ul>\n\n"De asemenea, puteţi să măriţi temporar ce se află sub degetul dvs. atingând ecranul de trei ori şi menţinând degetul pe ecran. În imaginea mărită, puteţi să glisaţi degetul pentru a explora diferite părţi ale ecranului. Ridicaţi degetul pentru a reveni la starea anterioară.\n\nNotă: atingerea triplă pentru mărire funcţionează peste tot, cu excepţia tastaturii şi a barei de navigare."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Comandă rapidă de accesibilitate"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activat"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Dezactivată"</string>
@@ -1357,7 +1357,7 @@
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Activată"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Dezactivată"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Utilizați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> trebuie să:"</string>
+    <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> are funcțiile:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Remarcă acțiunile dvs."</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Primește notificări atunci când interacționați cu o aplicație."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Opriți <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1367,7 +1367,7 @@
     <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"Serviciul TalkBack oferă feedback vocal pentru a ajuta utilizatorii nevăzători şi cu probleme de vedere. Doriţi să îl instalaţi în mod gratuit din Android Market?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nu a fost furnizată o descriere."</string>
     <string name="settings_button" msgid="3006713718908152930">"Setări"</string>
-    <string name="power_usage_summary_title" msgid="7190304207330319919">"Acumulator"</string>
+    <string name="power_usage_summary_title" msgid="7190304207330319919">"Battery"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Ce funcţii au utilizat bateria"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Date utilizare baterie nedisp."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
@@ -1423,7 +1423,7 @@
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Baterie utilizată când telefonul este inactiv"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Baterie utilizată de radio celular"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Comutaţi la modul Avion pentru a economisi energia în zonele fără acoperire celulară"</string>
-    <string name="battery_desc_display" msgid="5432795282958076557">"Baterie utilizată de afişaj şi de lumina de fundal"</string>
+    <string name="battery_desc_display" msgid="5432795282958076557">"Baterie utilizată de ecran și de iluminarea din spate"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Reduceţi luminozitatea şi/sau durata până la dezactivarea ecranului"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Baterie utilizată de Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="3355461362094706957">"Dezactivați rețeaua Wi-Fi atunci când nu o utilizați sau când nu este disponibilă"</string>
@@ -1535,13 +1535,13 @@
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Trebuie să setaţi un cod PIN sau o parolă pentru blocarea ecranului înainte de a putea utiliza spaţiul de stocare a certificatelor."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ton de urgenţă"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Setaţi comportamentul la efectuarea unui apel de urgenţă"</string>
-    <string name="privacy_settings" msgid="5446972770562918934">"Creaţi o copie de rezervă şi resetaţi"</string>
-    <string name="privacy_settings_title" msgid="4856282165773594890">"Creaţi o copie de rezervă şi resetaţi"</string>
-    <string name="backup_section_title" msgid="7952232291452882740">"Creaţi şi restabiliţi copii de rezervă"</string>
+    <string name="privacy_settings" msgid="5446972770562918934">"Backup și resetare"</string>
+    <string name="privacy_settings_title" msgid="4856282165773594890">"Backup și resetare"</string>
+    <string name="backup_section_title" msgid="7952232291452882740">"Backup și restabilire"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Date personale"</string>
-    <string name="backup_data_title" msgid="1239105919852668016">"Creaţi o copie de rezervă pentru datele dvs."</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"Backup pentru date"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Creați o copie de rezervă pentru datele aplicației, parolele Wi-Fi și pentru alte setări pe serverele Google"</string>
-    <string name="backup_configure_account_title" msgid="3790872965773196615">"Cont de rezervă"</string>
+    <string name="backup_configure_account_title" msgid="3790872965773196615">"Cont de backup"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"În prezent, niciun cont nu stochează datele cu copii de rezervă"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restabilire automată"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"La reinstalarea unei aplicaţii, restabiliţi setările şi datele pentru care aţi creat o copie de rezervă"</string>
