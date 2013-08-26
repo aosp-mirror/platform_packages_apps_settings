@@ -40,7 +40,7 @@ public class ApnPreference extends Preference implements
     }
 
     public ApnPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, R.style.ApnPreference);
+        this(context, attrs, R.attr.apnPreferenceStyle);
     }
 
     public ApnPreference(Context context) {
