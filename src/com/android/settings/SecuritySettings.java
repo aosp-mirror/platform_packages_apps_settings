@@ -65,6 +65,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
+    private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
@@ -101,6 +103,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private DialogInterface mWarnInstallApps;
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
+    private CheckBoxPreference mEnableKeyguardWidgets;
 
     private Preference mNotificationAccess;
 
@@ -239,6 +242,20 @@ public class SecuritySettings extends RestrictedSettingsFragment
                                  TelephonyManager.SIM_STATE_UNKNOWN)) {
                 root.findPreference(KEY_SIM_LOCK).setEnabled(false);
             }
+        }
+
+        // Enable or disable keyguard widget checkbox based on DPM state
+        mEnableKeyguardWidgets = (CheckBoxPreference) root.findPreference(KEY_ENABLE_WIDGETS);
+        if (mEnableKeyguardWidgets != null) {
+            final boolean disabled = (0 != (mDPM.getKeyguardDisabledFeatures(null)
+                    & DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL));
+            if (disabled) {
+                mEnableKeyguardWidgets.setSummary(
+                        R.string.security_enable_widgets_disabled_summary);
+            } else {
+                mEnableKeyguardWidgets.setSummary("");
+            }
+            mEnableKeyguardWidgets.setEnabled(!disabled);
         }
 
         // Show password
@@ -477,6 +494,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (mResetCredentials != null) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
+
+        if (mEnableKeyguardWidgets != null) {
+            mEnableKeyguardWidgets.setChecked(lockPatternUtils.getWidgetsEnabled());
+        }
     }
 
     @Override
@@ -527,6 +548,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
+        } else if (KEY_ENABLE_WIDGETS.equals(key)) {
+            lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
