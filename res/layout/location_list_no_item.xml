@@ -25,7 +25,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dip"
         android:layout_marginEnd="6dip"
         android:layout_marginTop="6dip"
@@ -35,11 +35,9 @@
         <TextView android:id="@+android:id/title"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:singleLine="true"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal" />
+            android:textColor="?android:attr/textColorSecondary" />
 
     </RelativeLayout>
 
