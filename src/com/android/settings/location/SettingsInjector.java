@@ -31,18 +31,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.preference.Preference;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+import com.android.settings.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.android.settings.R;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Adds the preferences specified by the {@link InjectedSetting} objects to a preference group.
@@ -59,7 +61,7 @@ import java.util.List;
  * {@link SettingInjectorService#UPDATE_INTENT}.
  */
 class SettingsInjector {
-    private static final String TAG = "SettingsInjector";
+    static final String TAG = "SettingsInjector";
 
     private static final long INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS = 1000;
 
@@ -79,11 +81,35 @@ class SettingsInjector {
      */
     public static final String ATTRIBUTES_NAME = "injected-location-setting";
 
-    private Context mContext;
-    private StatusLoader mLoader = null;
+    /**
+     * {@link Message#what} value for starting to load status values
+     * in case we aren't already in the process of loading them.
+     */
+    private static final int WHAT_RELOAD = 1;
+
+    /**
+     * {@link Message#what} value sent after receiving a status message.
+     */
+    private static final int WHAT_RECEIVED_STATUS = 2;
+
+    /**
+     * {@link Message#what} value sent after the timeout waiting for a status message.
+     */
+    private static final int WHAT_TIMEOUT = 3;
+
+    private final Context mContext;
+
+    /**
+     * The settings that were injected
+     */
+    private final Set<Setting> mSettings;
+
+    private final Handler mHandler;
 
     public SettingsInjector(Context context) {
         mContext = context;
+        mSettings = new HashSet<Setting>();
+        mHandler = new StatusLoadingHandler();
     }
 
     /**
@@ -168,6 +194,9 @@ class SettingsInjector {
         }
     }
 
+    /**
+     * Returns an immutable representation of the static attributes for the setting, or null.
+     */
     private static InjectedSetting parseAttributes(
             String packageName, String className, Resources res, AttributeSet attrs) {
 
@@ -175,83 +204,19 @@ class SettingsInjector {
         try {
             // Note that to help guard against malicious string injection, we do not allow dynamic
             // specification of the label (setting title)
-            final int labelId = sa.getResourceId(
-                    android.R.styleable.InjectedLocationSetting_label, 0);
             final String label = sa.getString(android.R.styleable.InjectedLocationSetting_label);
             final int iconId = sa.getResourceId(
                     android.R.styleable.InjectedLocationSetting_icon, 0);
             final String settingsActivity =
                     sa.getString(android.R.styleable.InjectedLocationSetting_settingsActivity);
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "parsed labelId: " + labelId + ", label: " + label
-                        + ", iconId: " + iconId);
+                Log.d(TAG, "parsed label: " + label + ", iconId: " + iconId
+                        + ", settingsActivity: " + settingsActivity);
             }
-            if (labelId == 0 || TextUtils.isEmpty(label) || TextUtils.isEmpty(settingsActivity)) {
-                return null;
-            }
-            return new InjectedSetting(packageName, className,
+            return InjectedSetting.newInstance(packageName, className,
                     label, iconId, settingsActivity);
         } finally {
             sa.recycle();
-        }
-    }
-
-    private final class StatusLoader {
-        private final Intent mIntent;
-        private final StatusLoader mPrev;
-
-        private boolean mLoaded = false;
-
-        /**
-         * Creates a loader and chains with the previous loader.
-         */
-        public StatusLoader(Intent intent, StatusLoader prev) {
-            mIntent = intent;
-            mPrev = prev;
-        }
-
-        /**
-         * Clears the loaded flag for the whole chain.
-         */
-        private void setNotLoaded() {
-            mLoaded = false;
-            if (mPrev != null) {
-                mPrev.setNotLoaded();
-            }
-        }
-
-        /**
-         * Reloads the whole chain.
-         */
-        public void reload() {
-            setNotLoaded();
-            loadIfNotLoaded();
-        }
-
-        /**
-         * If the current message hasn't been loaded, loads the status messages
-         * and set time out for the next message.
-         */
-        public void loadIfNotLoaded() {
-            if (mLoaded) {
-                return;
-            }
-
-            mContext.startService(mIntent);
-            if (mPrev != null) {
-                Handler handler = new Handler() {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        // Continue with the next item in the chain.
-                        mPrev.loadIfNotLoaded();
-                    }
-                };
-                // Ensure that we start loading the previous setting in the chain if the current
-                // setting hasn't loaded before the timeout
-                handler.sendMessageDelayed(
-                        Message.obtain(handler), INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS);
-            }
-            mLoaded = true;
         }
     }
 
@@ -264,17 +229,12 @@ class SettingsInjector {
     public List<Preference> getInjectedSettings() {
         Iterable<InjectedSetting> settings = getSettings();
         ArrayList<Preference> prefs = new ArrayList<Preference>();
-        mLoader = null;
         for (InjectedSetting setting : settings) {
             Preference pref = addServiceSetting(prefs, setting);
-            Intent intent = createUpdatingIntent(pref, setting, mLoader);
-            mLoader = new StatusLoader(intent, mLoader);
+            mSettings.add(new Setting(setting, pref));
         }
 
-        // Start a thread to load each list item status.
-        if (mLoader != null) {
-            mLoader.loadIfNotLoaded();
-        }
+        reloadStatusMessages();
 
         return prefs;
     }
@@ -283,9 +243,10 @@ class SettingsInjector {
      * Reloads the status messages for all the preference items.
      */
     public void reloadStatusMessages() {
-        if (mLoader != null) {
-            mLoader.reload();
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, "reloadingStatusMessages: " + mSettings);
         }
+        mHandler.sendMessage(mHandler.obtainMessage(WHAT_RELOAD));
     }
 
     /**
@@ -308,33 +269,141 @@ class SettingsInjector {
     }
 
     /**
-     * Creates an Intent to ask the receiver for the current status for the setting, and display it
-     * when it replies.
+     * Loads the setting status values one at a time. Each load starts a subclass of {@link
+     * SettingInjectorService}, so to reduce memory pressure we don't want to load too many at
+     * once.
      */
-    private static Intent createUpdatingIntent(
-            final Preference pref, final InjectedSetting info, final StatusLoader prev) {
-        final Intent receiverIntent = info.getServiceIntent();
-        Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                Bundle bundle = msg.getData();
-                String status = bundle.getString(SettingInjectorService.STATUS_KEY);
-                boolean enabled = bundle.getBoolean(SettingInjectorService.ENABLED_KEY, true);
-                if (Log.isLoggable(TAG, Log.DEBUG)) {
-                    Log.d(TAG, info + ": received " + msg + ", bundle: " + bundle);
-                }
-                pref.setSummary(status);
-                pref.setEnabled(enabled);
-                if (prev != null) {
-                    prev.loadIfNotLoaded();
-                }
+    private final class StatusLoadingHandler extends Handler {
+
+        /**
+         * Settings whose status values need to be loaded. A set is used to prevent redundant loads
+         * even if {@link #reloadStatusMessages()} is called many times in rapid succession (for
+         * example, if we receive a lot of
+         * {@link android.location.SettingInjectorService#UPDATE_INTENT} broadcasts).
+         * <p/>
+         * We use a linked hash set to ensure that when {@link #reloadStatusMessages()} is called,
+         * any settings that haven't been loaded yet will finish loading before any already-loaded
+         * messages are loaded again.
+         */
+        private LinkedHashSet<Setting> mSettingsToLoad = new LinkedHashSet<Setting>();
+
+        /**
+         * Whether we're in the middle of loading settings.
+         */
+        private boolean mLoading;
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
+                Log.d(TAG, "handleMessage start: " + msg + ", mSettingsToLoad: " + mSettingsToLoad);
             }
-        };
-        Messenger messenger = new Messenger(handler);
-        receiverIntent.putExtra(SettingInjectorService.MESSENGER_KEY, messenger);
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, info + ": sending rcv-intent: " + receiverIntent + ", handler: " + handler);
+
+            switch (msg.what) {
+                case WHAT_RELOAD:
+                    mSettingsToLoad.addAll(mSettings);
+                    if (mLoading) {
+                        // Already waiting for a service to return its status, don't ask a new one
+                        return;
+                    }
+                    mLoading = true;
+                    break;
+                case WHAT_TIMEOUT:
+                    if (Log.isLoggable(TAG, Log.WARN)) {
+                        final Setting setting = (Setting) msg.obj;
+                        setting.timedOut = true;
+                        Log.w(TAG, "Timed out trying to get status for: " + setting);
+                    }
+                    break;
+                case WHAT_RECEIVED_STATUS:
+                    final Setting setting = (Setting) msg.obj;
+                    if (setting.timedOut) {
+                        // We've already restarted retrieving the next setting, don't start another
+                        return;
+                    }
+
+                    // Received the setting without timeout, clear any previous timed out status
+                    setting.timedOut = false;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unexpected what: " + msg);
+            }
+
+            // Remove the next setting to load from the queue, if any
+            Iterator<Setting> iter = mSettingsToLoad.iterator();
+            if (!iter.hasNext()) {
+                mLoading = false;
+                return;
+            }
+            Setting setting = iter.next();
+            iter.remove();
+
+            // Request the status value
+            Intent intent = setting.createUpdatingIntent();
+            mContext.startService(intent);
+
+            // Ensure that if receiving the status value takes too long, we start loading the
+            // next value anyway
+            Message timeoutMsg = obtainMessage(WHAT_TIMEOUT, setting);
+            removeMessages(WHAT_TIMEOUT);
+            sendMessageDelayed(timeoutMsg, INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS);
+
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
+                Log.d(TAG, "handleMessage end: " + msg + ", mSettingsToLoad: " + mSettingsToLoad);
+            }
         }
-        return receiverIntent;
+    }
+
+    /**
+     * Represents an injected setting and the corresponding preference.
+     */
+    private final class Setting {
+
+        public final InjectedSetting setting;
+        public final Preference preference;
+        public boolean timedOut = false;
+
+        private Setting(InjectedSetting setting, Preference preference) {
+            this.setting = setting;
+            this.preference = preference;
+        }
+
+        @Override
+        public String toString() {
+            return "Setting{" +
+                    "setting=" + setting +
+                    ", preference=" + preference +
+                    ", timedOut=" + timedOut +
+                    '}';
+        }
+
+        /**
+         * Creates an Intent to ask the receiver for the current status for the setting, and display
+         * it when it replies.
+         */
+        public Intent createUpdatingIntent() {
+            final Intent receiverIntent = setting.getServiceIntent();
+            Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    Bundle bundle = msg.getData();
+                    String status = bundle.getString(SettingInjectorService.STATUS_KEY);
+                    boolean enabled = bundle.getBoolean(SettingInjectorService.ENABLED_KEY, true);
+                    if (Log.isLoggable(TAG, Log.DEBUG)) {
+                        Log.d(TAG, setting + ": received " + msg + ", bundle: " + bundle);
+                    }
+                    preference.setSummary(status);
+                    preference.setEnabled(enabled);
+                    mHandler.sendMessage(
+                            mHandler.obtainMessage(WHAT_RECEIVED_STATUS, Setting.this));
+                }
+            };
+            Messenger messenger = new Messenger(handler);
+            receiverIntent.putExtra(SettingInjectorService.MESSENGER_KEY, messenger);
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
+                Log.d(TAG, setting + ": sending rcv-intent: " + receiverIntent
+                        + ", handler: " + handler);
+            }
+            return receiverIntent;
+        }
     }
 }
