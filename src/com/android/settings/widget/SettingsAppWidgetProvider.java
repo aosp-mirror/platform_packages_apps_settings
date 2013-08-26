@@ -521,7 +521,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         @Override
         public int getActualState(Context context) {
             ContentResolver resolver = context.getContentResolver();
-            int currentLocationMode = Settings.Secure.getLocationMode(resolver);
+            int currentLocationMode = Settings.Secure.getInt(resolver,
+                    Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
             switch (currentLocationMode) {
                 case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
                 case Settings.Secure.LOCATION_MODE_OFF:
@@ -550,7 +551,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                         int mode = desiredState
                                 ? Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
                                 : Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
-                        Settings.Secure.setLocationMode(resolver, mode);
+                        Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, mode);
                         return desiredState;
                     }
 
