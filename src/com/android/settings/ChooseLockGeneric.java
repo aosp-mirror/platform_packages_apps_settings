@@ -258,7 +258,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
          */
         private int upgradeQualityForEncryption(int quality) {
             // Don't upgrade quality for secondary users. Encryption requirements don't apply.
-            if (Process.myUserHandle() != UserHandle.OWNER) return quality;
+            if (!Process.myUserHandle().equals(UserHandle.OWNER)) return quality;
             int encryptionStatus = mDPM.getStorageEncryptionStatus();
             boolean encrypted = (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE)
                     || (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVATING);
