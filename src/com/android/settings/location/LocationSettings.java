@@ -31,6 +31,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -47,6 +48,9 @@ import java.util.List;
  */
 public class LocationSettings extends LocationSettingsBase
         implements CompoundButton.OnCheckedChangeListener {
+
+    private static final String TAG = "LocationSettings";
+
     /** Key for preference screen "Mode" */
     private static final String KEY_LOCATION_MODE = "location_mode";
     /** Key for preference category "Recent location requests" */
@@ -146,8 +150,6 @@ public class LocationSettings extends LocationSettingsBase
                     }
                 });
 
-        final PreferenceManager preferenceManager = getPreferenceManager();
-
         PreferenceCategory categoryRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         RecentLocationApps recentApps = new RecentLocationApps(activity, mStatsHelper);
@@ -172,6 +174,9 @@ public class LocationSettings extends LocationSettingsBase
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, "Received settings change intent: " + intent);
+                }
                 injector.reloadStatusMessages();
             }
         };
