@@ -17,7 +17,6 @@
 package com.android.settings.location;
 
 import android.content.ContentQueryMap;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.UserManager;
@@ -79,13 +78,13 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
         if (um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
             return;
         }
-        Settings.Secure.setLocationMode(getContentResolver(), mode);
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
         refreshLocationMode();
     }
 
     public void refreshLocationMode() {
-        ContentResolver res = getContentResolver();
-        int mode = Settings.Secure.getLocationMode(getContentResolver());
+        int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
+                Settings.Secure.LOCATION_MODE_OFF);
         onModeChanged(mode);
     }
 }
