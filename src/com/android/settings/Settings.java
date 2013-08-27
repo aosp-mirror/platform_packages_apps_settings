@@ -26,8 +26,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
@@ -144,7 +146,8 @@ public class Settings extends PreferenceActivity
             R.id.about_settings,
             R.id.accessibility_settings,
             R.id.print_settings,
-            R.id.nfc_payment_settings
+            R.id.nfc_payment_settings,
+            R.id.home_settings
     };
 
     private SharedPreferences mDevelopmentPreferences;
@@ -558,6 +561,8 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
+            } else if (id == R.id.home_settings) {
+                updateHomeSettingHeaders(header);
             } else if (id == R.id.user_settings) {
                 if (!UserHandle.MU_ENABLED
                         || !UserManager.supportsMultipleUsers()
@@ -656,6 +661,51 @@ public class Settings extends PreferenceActivity
             mListeningToAccountUpdates = true;
         }
         return headerIndex;
+    }
+
+    private boolean isSystemApp(ResolveInfo ri) {
+        return ((ri.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
+    }
+
+    private void updateHomeSettingHeaders(Header header) {
+        final PackageManager pm = getPackageManager();
+        final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
+        try {
+            ComponentName currentHome = pm.getHomeActivities(homeApps);
+            ResolveInfo iconSource = null;
+            if (currentHome == null) {
+                // no current default, so find the system home app and use that
+                for (int which = 0; which < homeApps.size(); which++) {
+                    ResolveInfo ri = homeApps.get(which);
+                    if (isSystemApp(ri)) {
+                        iconSource = ri;
+                        break;
+                    }
+                }
+            } else {
+                // find the current-home entry in the returned set
+                for (int which = 0; which < homeApps.size(); which++) {
+                    ResolveInfo ri = homeApps.get(which);
+                    ComponentName riName = new ComponentName(ri.activityInfo.packageName,
+                            ri.activityInfo.name);
+                    if (riName.equals(currentHome)) {
+                        iconSource = ri;
+                        break;
+                    }
+                }
+            }
+            if (iconSource != null) {
+                if (header.extras == null) {
+                    header.extras = new Bundle();
+                }
+                header.extras.putParcelable(HomeSettings.CURRENT_HOME, iconSource.activityInfo);
+            } else {
+                Log.v(LOG_TAG, "No home app icon found");
+            }
+        } catch (Exception e) {
+            // Can't look up the home activity; bail on configuring the icon
+            Log.w(LOG_TAG, "Problem looking up home activity!", e);
+        }
     }
 
     private void getMetaData() {
@@ -820,17 +870,17 @@ public class Settings extends PreferenceActivity
 
                     //$FALL-THROUGH$
                 case HEADER_TYPE_NORMAL:
-                    if (header.extras != null
-                            && header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
+                    if (header.extras != null &&
+                            header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
                         String accType = header.extras.getString(
                                 ManageAccountsSettings.KEY_ACCOUNT_TYPE);
-                        ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
-                        lp.width = getContext().getResources().getDimensionPixelSize(
-                                R.dimen.header_icon_width);
-                        lp.height = lp.width;
-                        holder.icon.setLayoutParams(lp);
                         Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
-                        holder.icon.setImageDrawable(icon);
+                        setHeaderIcon(holder, icon);
+                    } else if (header.extras != null &&
+                            header.extras.containsKey(HomeSettings.CURRENT_HOME)) {
+                        ActivityInfo ai = header.extras.getParcelable(HomeSettings.CURRENT_HOME);
+                        Drawable icon = ai.loadIcon(getContext().getPackageManager());
+                        setHeaderIcon(holder, icon);
                     } else {
                         holder.icon.setImageResource(header.iconRes);
                     }
@@ -846,6 +896,15 @@ public class Settings extends PreferenceActivity
             }
 
             return view;
+        }
+
+        private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
+            ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
+            lp.width = getContext().getResources().getDimensionPixelSize(
+                    R.dimen.header_icon_width);
+            lp.height = lp.width;
+            holder.icon.setLayoutParams(lp);
+            holder.icon.setImageDrawable(icon);
         }
 
         public void resume() {
