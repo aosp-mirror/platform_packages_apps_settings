@@ -56,9 +56,6 @@ import java.util.Set;
  * Code-sharing would require extracting {@link
  * android.content.pm.RegisteredServicesCache#parseServiceAttributes(android.content.res.Resources,
  * String, android.util.AttributeSet)} into an interface, which didn't seem worth it.
- *
- * TODO: register a broadcast receiver that calls updateUI() when it receives
- * {@link SettingInjectorService#UPDATE_INTENT}.
  */
 class SettingsInjector {
     static final String TAG = "SettingsInjector";
@@ -278,8 +275,8 @@ class SettingsInjector {
         /**
          * Settings whose status values need to be loaded. A set is used to prevent redundant loads
          * even if {@link #reloadStatusMessages()} is called many times in rapid succession (for
-         * example, if we receive a lot of
-         * {@link android.location.SettingInjectorService#UPDATE_INTENT} broadcasts).
+         * example, if we receive a lot of {@link
+         * android.location.SettingInjectorService#ACTION_INJECTED_SETTING_CHANGED} broadcasts).
          * <p/>
          * We use a linked hash set to ensure that when {@link #reloadStatusMessages()} is called,
          * any settings that haven't been loaded yet will finish loading before any already-loaded
@@ -386,12 +383,12 @@ class SettingsInjector {
                 @Override
                 public void handleMessage(Message msg) {
                     Bundle bundle = msg.getData();
-                    String status = bundle.getString(SettingInjectorService.STATUS_KEY);
+                    String summary = bundle.getString(SettingInjectorService.SUMMARY_KEY);
                     boolean enabled = bundle.getBoolean(SettingInjectorService.ENABLED_KEY, true);
                     if (Log.isLoggable(TAG, Log.DEBUG)) {
                         Log.d(TAG, setting + ": received " + msg + ", bundle: " + bundle);
                     }
-                    preference.setSummary(status);
+                    preference.setSummary(summary);
                     preference.setEnabled(enabled);
                     mHandler.sendMessage(
                             mHandler.obtainMessage(WHAT_RECEIVED_STATUS, Setting.this));

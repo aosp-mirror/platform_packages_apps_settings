@@ -180,8 +180,8 @@ public class LocationSettings extends LocationSettingsBase
                 injector.reloadStatusMessages();
             }
         };
-        activity.registerReceiver(
-                mReceiver, new IntentFilter(SettingInjectorService.UPDATE_INTENT));
+        activity.registerReceiver(mReceiver,
+                new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED));
 
         if (locationServices.size() > 0) {
             addPreferencesSorted(locationServices, categoryLocationServices);
