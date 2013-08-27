@@ -29,7 +29,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.CaptioningManager;
-import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
@@ -38,8 +37,19 @@ import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeList
 import java.util.Locale;
 
 public class ToggleCaptioningPreferenceFragment extends Fragment {
+    private static final float DEFAULT_FONT_SIZE = 48f;
+
     private CaptionPropertiesFragment mPropsFragment;
     private SubtitleView mPreviewText;
+    private CaptioningManager mCaptioningManager;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mCaptioningManager = (CaptioningManager) getActivity()
+                .getSystemService(Context.CAPTIONING_SERVICE);
+    }
 
     @Override
     public View onCreateView(
@@ -74,10 +84,10 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
         if (preview != null) {
             final Activity activity = getActivity();
             final ContentResolver cr = activity.getContentResolver();
-            final int styleId = CaptionStyle.getRawPreset(cr);
-            applyCaptionProperties(preview, styleId);
+            final int styleId = mCaptioningManager.getRawUserStyle();
+            applyCaptionProperties(mCaptioningManager, preview, styleId);
 
-            final Locale locale = CaptioningManager.getLocale(cr);
+            final Locale locale = mCaptioningManager.getLocale();
             if (locale != null) {
                 final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
                         activity, locale, R.string.captioning_preview_text);
@@ -86,15 +96,16 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
         }
     }
 
-    public static void applyCaptionProperties(SubtitleView previewText, int styleId) {
+    public static void applyCaptionProperties(
+            CaptioningManager manager, SubtitleView previewText, int styleId) {
         previewText.setStyle(styleId);
 
         final Context context = previewText.getContext();
         final ContentResolver cr = context.getContentResolver();
-        final float fontSize = CaptioningManager.getFontSize(cr);
-        previewText.setTextSize(fontSize);
+        final float fontScale = manager.getFontScale();
+        previewText.setTextSize(fontScale * DEFAULT_FONT_SIZE);
 
-        final Locale locale = CaptioningManager.getLocale(cr);
+        final Locale locale = manager.getLocale();
         if (locale != null) {
             final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
                     context, locale, R.string.captioning_preview_characters);
@@ -118,7 +129,7 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
                         Gravity.CENTER_VERTICAL | Gravity.END);
         actionBar.setCustomView(toggleSwitch, params);
 
-        final boolean enabled = CaptioningManager.isEnabled(getActivity().getContentResolver());
+        final boolean enabled = mCaptioningManager.isEnabled();
         mPropsFragment.getPreferenceScreen().setEnabled(enabled);
         mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         toggleSwitch.setCheckedInternal(enabled);
