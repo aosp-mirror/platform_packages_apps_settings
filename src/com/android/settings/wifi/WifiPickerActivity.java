@@ -17,6 +17,7 @@ package com.android.settings.wifi;
 
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -45,7 +46,9 @@ public class WifiPickerActivity extends PreferenceActivity implements ButtonBarH
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if (WifiSettings.class.getName().equals(fragmentName)) return true;
+        if (WifiSettings.class.getName().equals(fragmentName)
+                || WifiP2pSettings.class.getName().equals(fragmentName)
+                || AdvancedWifiSettings.class.getName().equals(fragmentName)) return true;
         return false;
     }
 
