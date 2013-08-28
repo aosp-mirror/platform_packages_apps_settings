@@ -71,11 +71,20 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
     }
 
     /** Called when location mode has changed. */
-    public abstract void onModeChanged(int mode);
+    public abstract void onModeChanged(int mode, boolean restricted);
+
+    private boolean isRestricted() {
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        return um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION);
+    }
 
     public void setLocationMode(int mode) {
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        if (um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
+        if (isRestricted()) {
+            // Location toggling disabled by user restriction. Read the current location mode to
+            // update the location master switch.
+            mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_OFF);
+            onModeChanged(mode, true);
             return;
         }
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
@@ -85,6 +94,6 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
     public void refreshLocationMode() {
         int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                 Settings.Secure.LOCATION_MODE_OFF);
-        onModeChanged(mode);
+        onModeChanged(mode, isRestricted());
     }
 }
