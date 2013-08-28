@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The Android Open Source Project
+<!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,18 +14,10 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/user_settings_title">
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:maxLevel="0" android:drawable="@drawable/ic_wifi_lock_signal_1_light" />
+    <item android:maxLevel="1" android:drawable="@drawable/ic_wifi_lock_signal_2_light" />
+    <item android:maxLevel="2" android:drawable="@drawable/ic_wifi_lock_signal_3_light" />
+    <item android:maxLevel="3" android:drawable="@drawable/ic_wifi_lock_signal_4_light" />
+</level-list>
 
-    <PreferenceCategory
-            android:key="user_list"
-            android:title="@string/user_list_title">
-    </PreferenceCategory>
-
-    <Preference
-            android:key="user_add"
-            android:title="@string/user_add_user_menu"
-            android:icon="@drawable/ic_menu_add_dark" />
-
-</PreferenceScreen>
