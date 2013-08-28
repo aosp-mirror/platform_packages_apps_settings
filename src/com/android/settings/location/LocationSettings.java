@@ -28,7 +28,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
@@ -216,7 +215,7 @@ public class LocationSettings extends LocationSettingsBase
     }
 
     @Override
-    public void onModeChanged(int mode) {
+    public void onModeChanged(int mode, boolean restricted) {
         switch (mode) {
             case Settings.Secure.LOCATION_MODE_OFF:
                 mLocationMode.setSummary(R.string.location_mode_location_off_title);
@@ -234,7 +233,8 @@ public class LocationSettings extends LocationSettingsBase
                 break;
         }
 
-        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
+        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF) && !restricted;
+        mSwitch.setEnabled(!restricted);
         mLocationMode.setEnabled(enabled);
 
         if (enabled != mSwitch.isChecked()) {
