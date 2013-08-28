@@ -111,13 +111,17 @@ final class CachedBluetoothDeviceManager {
     }
 
     public synchronized void onScanningStateChanged(boolean started) {
-        if (!started) return;
-
         // If starting a new scan, clear old visibility
         // Iterate in reverse order since devices may be removed.
         for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
             CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
-            cachedDevice.setVisible(false);
+            if (started) {
+                cachedDevice.setVisible(false);
+            } else if (!started &&
+                cachedDevice.getBondState() == BluetoothDevice.BOND_NONE &&
+                cachedDevice.isRemovable()) {
+                mCachedDevices.remove(cachedDevice);
+            }
         }
     }
 
@@ -132,6 +136,15 @@ final class CachedBluetoothDeviceManager {
         CachedBluetoothDevice cachedDevice = findDevice(device);
         if (cachedDevice != null) {
             cachedDevice.onUuidChanged();
+        }
+    }
+
+    public synchronized void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
+        Log.d(TAG,"onDeviceDeleted");
+        if (cachedDevice != null &&
+            cachedDevice.getBondState() == BluetoothDevice.BOND_NONE &&
+            cachedDevice.isRemovable()) {
+            mCachedDevices.remove(cachedDevice);
         }
     }
 

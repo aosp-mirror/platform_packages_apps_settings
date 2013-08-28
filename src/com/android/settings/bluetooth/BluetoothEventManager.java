@@ -288,6 +288,14 @@ final class BluetoothEventManager {
                         cachedDevice.setVisible(false);
                     }
                 }
+                if (cachedDevice.isRemovable()) {
+                    synchronized (mCallbacks) {
+                        for (BluetoothCallback callback : mCallbacks) {
+                            callback.onDeviceDeleted(cachedDevice);
+                        }
+                    }
+                    mDeviceManager.onDeviceDeleted(cachedDevice);
+                }
                 int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON,
                         BluetoothDevice.ERROR);
 

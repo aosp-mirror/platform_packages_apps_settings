@@ -130,6 +130,23 @@ public abstract class DeviceListPreferenceFragment extends
         }
     }
 
+    void removeOorDevices() {
+        Collection<CachedBluetoothDevice> cachedDevices =
+                mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+        for (CachedBluetoothDevice cachedDevice : cachedDevices) {
+             if (cachedDevice.getBondState() == BluetoothDevice.BOND_NONE &&
+                 !cachedDevice.isVisible()) {
+                 Log.d(TAG, "Device Removed " + cachedDevice);
+                 BluetoothDevicePreference preference = mDevicePreferenceMap.get(cachedDevice);
+                 if (preference != null) {
+                     mDeviceListGroup.removePreference(preference);
+                 }
+                 mDevicePreferenceMap.remove(cachedDevice);
+                 cachedDevice.setRemovable(true);
+             }
+         }
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
@@ -191,6 +208,9 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     public void onScanningStateChanged(boolean started) {
+        if (started == false) {
+          removeOorDevices();
+        }
         updateProgressUi(started);
     }
 
