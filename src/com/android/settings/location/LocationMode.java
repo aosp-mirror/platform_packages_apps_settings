@@ -110,7 +110,7 @@ public class LocationMode extends LocationSettingsBase
     }
 
     @Override
-    public void onModeChanged(int mode) {
+    public void onModeChanged(int mode, boolean restricted) {
         switch (mode) {
             case Settings.Secure.LOCATION_MODE_OFF:
                 Intent intent = new Intent();
@@ -129,7 +129,8 @@ public class LocationMode extends LocationSettingsBase
             default:
                 break;
         }
-        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
+
+        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF) && !restricted;
         mHighAccuracy.setEnabled(enabled);
         mBatterySaving.setEnabled(enabled);
         mSensorsOnly.setEnabled(enabled);
