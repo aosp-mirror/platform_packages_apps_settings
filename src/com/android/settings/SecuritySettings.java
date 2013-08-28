@@ -85,7 +85,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private PackageManager mPM;
-    DevicePolicyManager mDPM;
+    private DevicePolicyManager mDPM;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
@@ -168,9 +168,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
 
         // Add options for device encryption
-        DevicePolicyManager dpm =
-                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
         if (!mIsPrimary) {
@@ -186,7 +183,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
         }
 
         if (mIsPrimary) {
-            switch (dpm.getStorageEncryptionStatus()) {
+            switch (mDPM.getStorageEncryptionStatus()) {
             case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
                 // The device is currently encrypted.
                 addPreferencesFromResource(R.xml.security_settings_encrypted);
@@ -264,8 +261,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
         // Credential storage
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        mKeyStore = KeyStore.getInstance(); // needs to be initialized for onResume()
         if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-            mKeyStore = KeyStore.getInstance();
             Preference credentialStorageType = root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE);
 
             final int storageSummaryRes =
