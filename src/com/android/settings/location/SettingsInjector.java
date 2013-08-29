@@ -322,7 +322,7 @@ class SettingsInjector {
                     Log.wtf(TAG, "Unexpected what: " + msg);
             }
 
-            // Decide whether to load addiitonal settings based on the new state. Start by seeing
+            // Decide whether to load additional settings based on the new state. Start by seeing
             // if we have headroom to load another setting.
             if (mSettingsBeingLoaded.size() > 0 || mTimedOutSettings.size() > 1) {
                 // Don't load any more settings until one of the pending settings has completed.
