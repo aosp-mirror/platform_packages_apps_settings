@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"Америк"</item>
+    <item msgid="3005562397632768392">"Европ"</item>
+    <item msgid="5696915123093701218">"Африк"</item>
+    <item msgid="4439789052790868249">"Ази"</item>
+    <item msgid="956915953069815961">"Австрали"</item>
+    <item msgid="5345178126174698955">"Номхон далай"</item>
+    <item msgid="8392017019801393511">"Бүгд"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 секунд"</item>
+    <item msgid="8881760709354815449">"30 секунд"</item>
+    <item msgid="7589406073232279088">"1 минут"</item>
+    <item msgid="7001195990902244174">"2 минут"</item>
+    <item msgid="7489864775127957179">"5 минут"</item>
+    <item msgid="2314124409517439288">"10 минут"</item>
+    <item msgid="6864027152847611413">"30 минут"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"Хэзээ ч үгүй"</item>
+    <item msgid="2194151041885903260">"15 секунд"</item>
+    <item msgid="5892295237131074341">"30 секунд"</item>
+    <item msgid="3538441365970038213">"1 минут"</item>
+    <item msgid="412343871668955639">"2 минут"</item>
+    <item msgid="5076853889688991690">"5 минут"</item>
+    <item msgid="1903860996174927898">"10 минут"</item>
+    <item msgid="6415509612413178727">"30 минут"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"Шууд"</item>
+    <item msgid="6736512735606834431">"5 секунд"</item>
+    <item msgid="8044619388267891375">"15 секунд"</item>
+    <item msgid="1822002388249545488">"30 секунд"</item>
+    <item msgid="8538071621211916519">"1 минут"</item>
+    <item msgid="5663439580228932882">"2 минут"</item>
+    <item msgid="49888496216106852">"5 минут"</item>
+    <item msgid="9002737361305019353">"10 минут"</item>
+    <item msgid="4322676235684793329">"30 минут"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"Жижиг"</item>
+    <item msgid="1932071435506638315">"Энгийн"</item>
+    <item msgid="38373998008112077">"Том"</item>
+    <item msgid="7786168277516233536">"Том"</item>
+  </string-array>
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"Маш удаан"</item>
+    <item msgid="2361722960903353554">"Удаан"</item>
+    <item msgid="1145554631248513562">"Энгийн"</item>
+    <item msgid="7553665153391107454">"Хурдан"</item>
+    <item msgid="1370673569131070146">"Илүү хурдан"</item>
+    <item msgid="4648206845228970803">"Маш хурдан"</item>
+    <item msgid="4977949754169483251">"Түргэн"</item>
+    <item msgid="6106302964845503577">"Маш түргэн"</item>
+    <item msgid="6800277205640837264">"Хамгийн хурдан"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"Маш нам"</item>
+    <item msgid="2692137425242433765">"Бага"</item>
+    <item msgid="3332408460740717754">"Энгийн"</item>
+    <item msgid="4907380534957572531">"Их"</item>
+    <item msgid="4699640516390840297">"Маш өндөр"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Скан хийж байна…"</item>
+    <item msgid="8513729475867537913">"Холбогдож байна..."</item>
+    <item msgid="515055375277271756">"Гэрчлэж байна"</item>
+    <item msgid="1943354004029184381">"IP хаягийг авч байна…"</item>
+    <item msgid="4221763391123233270">"Холбогдсон"</item>
+    <item msgid="624838831631122137">"Түр хаасан"</item>
+    <item msgid="7979680559596111948">"Салгаж байна…"</item>
+    <item msgid="1634960474403853625">"Салгагдсан"</item>
+    <item msgid="746097431216080650">"Амжилтгүй"</item>
+    <item msgid="6367044185730295334">"Хориглогдсон"</item>
+    <item msgid="503942654197908005">"Муу холболтоос түр зайлсхийж байна"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Скан хийж байна…"</item>
+    <item msgid="355508996603873860">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> руу холбогдож байна…"</item>
+    <item msgid="554971459996405634">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>-тай гэрчилж байна…"</item>
+    <item msgid="7928343808033020343">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>-с IP хаягийг авч байна…"</item>
+    <item msgid="8937994881315223448">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> руу холбогдсон"</item>
+    <item msgid="1330262655415760617">"Түр хаасан"</item>
+    <item msgid="7698638434317271902">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>-с салгагдаж байна…"</item>
+    <item msgid="197508606402264311">"Салгагдсан"</item>
+    <item msgid="8578370891960825148">"Амжилтгүй"</item>
+    <item msgid="5660739516542454527">"Хориглогдсон"</item>
+    <item msgid="1805837518286731242">"Муу холболтоос түр зайлсхийж байна"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"Товчлуур"</item>
+    <item msgid="1624323946324499595">"Түнш төхөөрөмжийн PIN"</item>
+    <item msgid="5366790421523328066">"Энэ төхөөрөмжөөс PIN"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"Холбогдсон"</item>
+    <item msgid="3189211552661432651">"Уригдсан"</item>
+    <item msgid="3206450250360237549">"Амжилтгүй"</item>
+    <item msgid="7785896708926971207">"Холбогдсон"</item>
+    <item msgid="2330782789550628803">"Хүрээнээс гарсан"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"2 минут"</item>
+    <item msgid="8675215713017289017">"5 минут"</item>
+    <item msgid="477015974247590543">"1 цаг"</item>
+    <item msgid="5198271470953124739">"Хэзээ ч завсарлахгүй"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"Муу"</item>
+    <item msgid="5615082285463430971">"Боломжийн"</item>
+    <item msgid="3565079809875324621">"Сайн"</item>
+    <item msgid="5702329417707689835">"Маш сайн"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries">
+    <item msgid="3269131034472904310">"Байнга"</item>
+    <item msgid="844721238536786870">"Зөвхөн залгасан үед"</item>
+    <item msgid="2990218920631468642">"Хэзээ ч үгүй (дата ашиглалтыг нэмэгдүүлдэг)"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries_wifi_only">
+    <item msgid="2124319326282651391">"Байнга"</item>
+    <item msgid="7433294150916905997">"Зөвхөн залгасан үед"</item>
+    <item msgid="1390404486722375028">"Хэзээ ч үгүй"</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="624340809384223320">"Автомат"</item>
+    <item msgid="6670588712989942178">"Зөвхөн 5 GHz"</item>
+    <item msgid="2715516524973207876">"Зөвхөн 2.4 GHz"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"Ашиглалтын цаг"</item>
+    <item msgid="3703676222230317933">"Тооллогыг эхлүүлэх"</item>
+    <item msgid="2502754479975776899">"Апп нэр"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"Байхгүй"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"Байхгүй"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"Статик"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"Байхгүй"</item>
+    <item msgid="8673874894887358090">"Гараар"</item>
+  </string-array>
+  <string-array name="emergency_tone_entries">
+    <item msgid="5165439859689033665">"Хаах"</item>
+    <item msgid="3165868966179561687">"Сэрэмжлүүлэг"</item>
+    <item msgid="6038758039030476855">"Чичиргээ"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"Байхгүй"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP буюу CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"Тодорхойлоогүй"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"None"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"Дотоод төхөөрөмжийн сан"</item>
+    <item msgid="3738430123799803530">"Авагддаг SD карт"</item>
+    <item msgid="4498124044785815005">"Системээр шийдүүлэх"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"Байршил"</item>
+    <item msgid="255608127647030286">"Хувийн"</item>
+    <item msgid="4588829735729884491">"Зурвас"</item>
+    <item msgid="886742181977884584">"Медиа"</item>
+    <item msgid="7924928667052300589">"Төхөөрөмж"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"бүдүүн байршил"</item>
+    <item msgid="5789673140227507995">"сайн байршил"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"чичиргээ"</item>
+    <item msgid="3434165993711230924">"харилцагчдыг унших"</item>
+    <item msgid="616161687718081936">"харилцагчдыг өөрчлөх"</item>
+    <item msgid="7638002295329050091">"дуудлагын жагсаалтыг унших"</item>
+    <item msgid="6546959730920410907">"дуудлагын жагсаалтыг өөрчлөх"</item>
+    <item msgid="446877710771379667">"календарь унших"</item>
+    <item msgid="7674458294386319722">"календарийг өөрчлөх"</item>
+    <item msgid="8281201165558093009">"wi-fi скан"</item>
+    <item msgid="8694611243479480497">"мэдэгдэл"</item>
+    <item msgid="7776439107987345446">"үүрэн скан"</item>
+    <item msgid="514615766544675057">"утас руу залгах"</item>
+    <item msgid="8181415497109310680">"SMS унших"</item>
+    <item msgid="6816551144382117307">"SMS бичих"</item>
+    <item msgid="4600463921908905030">"SMS хүлээн авах"</item>
+    <item msgid="5958926493289432745">"яаралтай SMS хүлээж авах"</item>
+    <item msgid="4945269495221089540">"MMS хүлээн авах"</item>
+    <item msgid="5570472453573929087">"WAP хүлээн авах"</item>
+    <item msgid="7125408150230860501">"SMS илгээх"</item>
+    <item msgid="7080337936612188061">"ICC SMS унших"</item>
+    <item msgid="587124103118495063">"ICC SMS бичих"</item>
+    <item msgid="2320577158869025503">"тохиргоог өөрчлөх"</item>
+    <item msgid="1545733463471924009">"дээр нь нээх"</item>
+    <item msgid="3609046903962454582">"мэдэгдэлд хандах"</item>
+    <item msgid="4671646036128214513">"камера"</item>
+    <item msgid="1097324338692486211">"аудио бичих"</item>
+    <item msgid="5031552983987798163">"аудио тоглуулах"</item>
+    <item msgid="8374996688066472414">"түр санах ойг унших"</item>
+    <item msgid="3045529469061083747">"түр санах ойг өөрчлөх"</item>
+    <item msgid="5124443975763747838">"медиа товч"</item>
+    <item msgid="4547883971364273343">"аудио фокус"</item>
+    <item msgid="2603878814882344450">"үндсэн дууны хэмжээ"</item>
+    <item msgid="7136963238377062018">"хоолойн дууны хэмжээ"</item>
+    <item msgid="4270236897655923007">"хонхны дууны хэмжээ"</item>
+    <item msgid="6325739889222559394">"медиа дууны хэмжээ"</item>
+    <item msgid="5762123934816216821">"сэрүүлгийн дууны хэмжээ"</item>
+    <item msgid="785049718065337473">"мэдэгдлийн дууны хэмжээ"</item>
+    <item msgid="6700305533746877052">"блютүүтийн хэмжээ"</item>
+    <item msgid="2029227495214047094">"сэрүүн байлгах"</item>
+    <item msgid="26109888160231211">"байршлыг хянах"</item>
+    <item msgid="5753382310468855812">"өндөр чадалтай байршлуудыг хянах"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"Байршил"</item>
+    <item msgid="8677040780775113033">"Байршил"</item>
+    <item msgid="1660743989948992916">"Байршил"</item>
+    <item msgid="8791172739860195290">"Чичиргээ"</item>
+    <item msgid="383413555642128046">"Харилцагчдыг унших"</item>
+    <item msgid="3654594895269697313">"Харилцагчдыг өөрчлөх"</item>
+    <item msgid="7928393476362362538">"Дуудлагын жагсаалтыг унших"</item>
+    <item msgid="6248591205254641116">"Дуудлагын жагсаалтыг өөрчлөх"</item>
+    <item msgid="6093344633066170692">"Календарь унших"</item>
+    <item msgid="1334886368750347692">"Календарийг өөрчлөх"</item>
+    <item msgid="1638204101698708656">"Байршил"</item>
+    <item msgid="2154671955760380322">"Пост мэдэгдэл"</item>
+    <item msgid="4282477730595931828">"Байршил"</item>
+    <item msgid="4891423912898525905">"Утас руу залгах"</item>
+    <item msgid="626463821668200388">"SMS/MMS хүлээн авах"</item>
+    <item msgid="1237538540368797101">"SMS/MMS илгээх"</item>
+    <item msgid="3986142739951490025">"SMS/MMS хүлээн авах"</item>
+    <item msgid="3984213795861739778">"SMS/MMS хүлээн авах"</item>
+    <item msgid="3656243523752472788">"SMS/MMS хүлээн авах"</item>
+    <item msgid="8105802370238551510">"SMS/MMS хүлээн авах"</item>
+    <item msgid="1407766984645388488">"SMS/MMS илгээх"</item>
+    <item msgid="1530132603376027248">"SMS/MMS хүлээн авах"</item>
+    <item msgid="1188256962149204607">"SMS/MMS илгээх"</item>
+    <item msgid="4218544235221631789">"Тохиргоог өөрчлөх"</item>
+    <item msgid="736541391767350377">"Дээр нь нээх"</item>
+    <item msgid="5530815681721654194">"Хандалтын мэдэгдэл"</item>
+    <item msgid="781213371706962767">"Камер"</item>
+    <item msgid="1720492593061838172">"Аудио бичих"</item>
+    <item msgid="3493046322001257041">"Аудио тоглуулах"</item>
+    <item msgid="136815868796597058">"Түр санах ойг унших"</item>
+    <item msgid="5238692940326972503">"Түр санах ойг өөрчлөх"</item>
+    <item msgid="5753789168376302997">"Медиа товч"</item>
+    <item msgid="3265262911688671938">"Аудио фокус"</item>
+    <item msgid="2098976479485046797">"Үндсэн дууны хэмжээ"</item>
+    <item msgid="5660213838861789350">"Хоолойн дууны хэмжээ"</item>
+    <item msgid="7983336752371254444">"Хонхны дууны хэмжээ"</item>
+    <item msgid="7878027809189330917">"Медиа дууны хэмжээ"</item>
+    <item msgid="7260546305036218513">"Сэрүүлгийн дууны хэмжээ"</item>
+    <item msgid="9103719301075748925">"Мэдэгдлийн дууны хэмжээ"</item>
+    <item msgid="7025966722295861512">"Блютүүтийн хэмжээ"</item>
+    <item msgid="4665183401128289653">"Сэрүүн байлгах"</item>
+    <item msgid="8584357129746649222">"Байршил"</item>
+    <item msgid="7669257279311110599">"Байршил"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"Богино"</item>
+    <item msgid="2560532955514699713">"Дундаж"</item>
+    <item msgid="2372711992605524591">"Урт"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Үндсэн"</item>
+    <item msgid="1016452621833735880">"Sans Serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Маш жижиг"</item>
+    <item msgid="6781094565687692782">"Жижиг"</item>
+    <item msgid="8222123259497646551">"Энгийн"</item>
+    <item msgid="5813217276778560466">"Том"</item>
+    <item msgid="9044232017390975191">"Маш том"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Хоосон"</item>
+    <item msgid="1352974708028506778">"Гадна хүрээ"</item>
+    <item msgid="5850876295428722675">"Сүүдэр тусгах"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Хар дээр цагаан"</item>
+    <item msgid="4589278788192525675">"Цагаан дээр хар"</item>
+    <item msgid="1309255027325660115">"Хар дээр шар"</item>
+    <item msgid="2985943780939258562">"Цэнхэр дээр шар"</item>
+    <item msgid="7520438652121629055">"Тааруулсан"</item>
+  </string-array>
+  <string-array name="select_runtime_titles">
+    <item msgid="3574453009229338122">"Dalvik"</item>
+    <item msgid="8978402910750533864">"ART"</item>
+    <item msgid="7839859333977894115">"ART (дебаг)"</item>
+  </string-array>
+  <string-array name="select_runtime_summaries">
+    <item msgid="6412880178297884701">"Dalvik ашиглах"</item>
+    <item msgid="5131846588686178907">"ART ашиглах"</item>
+    <item msgid="4530003713865319928">"ART дебаг ашиглах"</item>
+  </string-array>
+  <string-array name="hdcp_checking_titles">
+    <item msgid="441827799230089869">"Хэзээ ч шалгахгүй"</item>
+    <item msgid="6042769699089883931">"Зөвхөн DRM контентыг шалгах"</item>
+    <item msgid="9174900380056846820">"Байнга шалгах"</item>
+  </string-array>
+  <string-array name="hdcp_checking_summaries">
+    <item msgid="505558545611516707">"HDCP шалгахыг хэзээ ч ашиглахгүй"</item>
+    <item msgid="3878793616631049349">"HDCP шалгахыг зөвхөн DRM контентэд ашиглах"</item>
+    <item msgid="45075631231212732">"Байнга HDCP шалгахыг ашиглах"</item>
+  </string-array>
+  <string-array name="window_animation_scale_entries">
+    <item msgid="8134156599370824081">"Дүрс амилуулалт идэвхгүй"</item>
+    <item msgid="6624864048416710414">"Дүрс амилуулах далайц .5x"</item>
+    <item msgid="2219332261255416635">"Дүрс амилуулах далайц 1x"</item>
+    <item msgid="3544428804137048509">"Дүрс амилуулах далайц 1.5x"</item>
+    <item msgid="3110710404225974514">"Дүрс амилуулалтын далайц 2x"</item>
+    <item msgid="4402738611528318731">"Дүрс амилуулалтын далайц 5x"</item>
+    <item msgid="6189539267968330656">"Дүрс амилуулалтын далайц 10x"</item>
+  </string-array>
+  <string-array name="transition_animation_scale_entries">
+    <item msgid="8464255836173039442">"Дүрс амилуулалт идэвхгүй"</item>
+    <item msgid="3375781541913316411">"Дүрс амилуулах далайц .5x"</item>
+    <item msgid="1991041427801869945">"Дүрс амилуулах далайц 1x"</item>
+    <item msgid="4012689927622382874">"Дүрс амилуулах далайц 1.5x"</item>
+    <item msgid="3289156759925947169">"Дүрс амилуулалтын далайц 2x"</item>
+    <item msgid="7705857441213621835">"Дүрс амилуулалтын далайц 5x"</item>
+    <item msgid="6660750935954853365">"Дүрс амилуулалтын далайц 10x"</item>
+  </string-array>
+  <string-array name="animator_duration_scale_entries">
+    <item msgid="6039901060648228241">"Дүрс амилуулалт идэвхгүй"</item>
+    <item msgid="1138649021950863198">"Дүрс амилуулах далайц .5x"</item>
+    <item msgid="4394388961370833040">"Дүрс амилуулах далайц 1x"</item>
+    <item msgid="8125427921655194973">"Дүрс амилуулах далайц 1.5x"</item>
+    <item msgid="3334024790739189573">"Дүрс амилуулалтын далайц 2x"</item>
+    <item msgid="3170120558236848008">"Дүрс амилуулалтын далайц 5x"</item>
+    <item msgid="1069584980746680398">"Дүрс амилуулалтын далайц 10x"</item>
+  </string-array>
+  <string-array name="overlay_display_devices_entries">
+    <item msgid="1606809880904982133">"Байхгүй"</item>
+    <item msgid="688482401508173818">"720x480 mdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (найдвартай)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (найдвартай)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (найдвартай)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi болон 1920x1080 xhdpi"</item>
+  </string-array>
+  <string-array name="enable_opengl_traces_entries">
+    <item msgid="3191973083884253830">"Алийг нь ч биш"</item>
+    <item msgid="9089630089455370183">"Logcat"</item>
+    <item msgid="5397807424362304288">"Systrace (График)"</item>
+    <item msgid="1340692776955662664">"Стекийг glGetError дээр дуудах"</item>
+  </string-array>
+  <string-array name="show_non_rect_clip_entries">
+    <item msgid="993742912147090253">"Идэвхгүй"</item>
+    <item msgid="675719912558941285">"Тэгш өнцөгт бус клипийн бүсийг цэнхэрээр зурах"</item>
+    <item msgid="1064373276095698656">"Шалгасан зурах командуудыг ногоон өнгөөр тэмдэглэх"</item>
+  </string-array>
+  <string-array name="track_frame_time_entries">
+    <item msgid="2193584639058893150">"Идэвхгүй"</item>
+    <item msgid="2751513398307949636">"Дэлгэц дээр савхаар"</item>
+    <item msgid="8272260411216018353">"Дэлгэц дээр шулуунаар"</item>
+    <item msgid="120512413928262547">"adb суурь доторх dumpsys gfxinfo"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"Идэвхгүй"</item>
+    <item msgid="7688197031296835369">"Давхар дүрслэлтэй хэсгийг харуулах"</item>
+    <item msgid="2290859360633824369">"Өнгө үл ялгагчид зориулсан бүсүүдийг харуулах"</item>
+    <item msgid="3448087929560624983">"Давхар дүрслэлийн тоологчийг харуулах"</item>
+  </string-array>
+  <string-array name="app_process_limit_entries">
+    <item msgid="3401625457385943795">"Стандарт хязгаар"</item>
+    <item msgid="4071574792028999443">"Далд процесс байхгүй"</item>
+    <item msgid="4810006996171705398">"Хамгийн ихдээ 1 процесс"</item>
+    <item msgid="8586370216857360863">"Хамгийн ихдээ 2 процесс"</item>
+    <item msgid="836593137872605381">"Хамгийн ихдээ 3 процесс"</item>
+    <item msgid="7899496259191969307">"Хамгийн ихдээ 4 процесс"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"Урьдчилан хуваалцсан L2TP/IPSec VPN түлхүүртэй"</item>
+    <item msgid="4725504331295252103">"Сертификаттай L2TP/IPSec VPN"</item>
+    <item msgid="7526551163264034377">"Урьдчилан хуваалцсан түлхүүртэй IPSec VPN болон Xauth гэрчлэлт"</item>
+    <item msgid="8064740940687465039">"Сертификат болон Xauth гэрчлэл бүхий IPSec VPN"</item>
+    <item msgid="4946199982372391490">"Сертификат болон холимог гэрчлэл бүхий IPSec VPN"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"Салгагдсан"</item>
+    <item msgid="6692305604213080515">"Эхлүүлж байна…"</item>
+    <item msgid="8001704909356800092">"Холбогдож байна..."</item>
+    <item msgid="4039737283841672166">"Холбогдсон"</item>
+    <item msgid="4042143101664725090">"Завсарлага"</item>
+    <item msgid="7664124146786465092">"Амжилтгүй"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"Асуух"</item>
+    <item msgid="5077768429488260031">"Хэзээ ч зөвшөөрөхгүй"</item>
+    <item msgid="1417929597727989746">"Байнга зөвшөөрөх"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"энгийн"</item>
+    <item msgid="4517779899383204000">"дунд зэргийн"</item>
+    <item msgid="406385694840950802">"бага"</item>
+    <item msgid="4212263919458209842">"эгзэгтэй"</item>
+  </string-array>
+</resources>
