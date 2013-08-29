@@ -86,17 +86,4 @@ public class PaymentBackend {
                 Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
                 app != null ? app.flattenToString() : null);
     }
-
-    public boolean isAutoPaymentMode() {
-        String mode = Settings.Secure.getString(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_MODE);
-        return (!CardEmulationManager.PAYMENT_MODE_MANUAL.equals(mode));
-    }
-
-    public void setAutoPaymentMode(boolean enable) {
-        Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_MODE,
-                enable ? CardEmulationManager.PAYMENT_MODE_AUTO
-                       : CardEmulationManager.PAYMENT_MODE_MANUAL);
-    }
 }

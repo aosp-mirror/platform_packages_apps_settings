@@ -48,8 +48,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
         PreferenceManager manager = getPreferenceManager();
         PreferenceScreen screen = manager.createPreferenceScreen(getActivity());
 
-        boolean isAuto = mPaymentBackend.isAutoPaymentMode();
-
         // Get all payment services
         List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
@@ -58,7 +56,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
                 PaymentAppPreference preference =
                         new PaymentAppPreference(getActivity(), appInfo, this);
                 // If for some reason isAuto gets out of sync, clear out app default
-                appInfo.isDefault &= isAuto;
                 preference.setIcon(appInfo.icon);
                 preference.setTitle(appInfo.caption);
                 screen.addPreference(preference);
@@ -67,7 +64,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
                 PaymentAppInfo appInfo = new PaymentAppInfo();
                 appInfo.icon = null;
                 appInfo.componentName = null;
-                appInfo.isDefault = !isAuto;
+                appInfo.isDefault = !(mPaymentBackend.getDefaultPaymentApp() != null);
                 // Add "Ask every time" option
                 PaymentAppPreference preference =
                         new PaymentAppPreference(getActivity(), appInfo, this);
@@ -85,10 +82,8 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             PaymentAppInfo appInfo = (PaymentAppInfo) v.getTag();
             if (appInfo.componentName != null) {
                 mPaymentBackend.setDefaultPaymentApp(appInfo.componentName);
-                mPaymentBackend.setAutoPaymentMode(true);
             } else {
                 mPaymentBackend.setDefaultPaymentApp(null);
-                mPaymentBackend.setAutoPaymentMode(false);
             }
             refresh();
         }
