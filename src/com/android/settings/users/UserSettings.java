@@ -135,7 +135,7 @@ public class UserSettings extends RestrictedSettingsFragment
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
     public UserSettings() {
-        super(null);
+        super(RestrictedSettingsFragment.RESTRICTIONS_PIN_SET);
     }
 
     private Handler mHandler = new Handler() {
@@ -718,9 +718,6 @@ public class UserSettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceClick(Preference pref) {
-        if (pref == mAddUser && !restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
-            return false;
-        }
         if (pref == mMePreference) {
             Intent editProfile;
             if (!mProfileExists) {
@@ -780,9 +777,7 @@ public class UserSettings extends RestrictedSettingsFragment
             int userId = ((UserPreference) v.getTag()).getUserId();
             switch (v.getId()) {
             case UserPreference.DELETE_ID:
-                if (restrictionsPinCheck(RESTRICTIONS_PIN_SET)) {
-                    onRemoveUserClicked(userId);
-                }
+                onRemoveUserClicked(userId);
                 break;
             case UserPreference.SETTINGS_ID:
                 onManageUserClicked(userId, false);

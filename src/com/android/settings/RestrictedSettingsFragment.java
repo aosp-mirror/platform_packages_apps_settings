@@ -19,12 +19,14 @@ package com.android.settings;
 import java.util.HashSet;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
 
 /**
  * Base class for settings activities that should be pin protected when in restricted mode.
@@ -38,23 +40,39 @@ import android.preference.PreferenceScreen;
  * {@link RESTRICTIONS_PIN_SET} to the constructor instead of a restrictions key.
  */
 public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
+
     protected static final String RESTRICTIONS_PIN_SET = "restrictions_pin_set";
 
+    private static final String EXTRA_PREFERENCE = "pref";
+    private static final String EXTRA_CHECKBOX_STATE = "isChecked";
     // Should be unique across all settings screens that use this.
     private static final int REQUEST_PIN_CHALLENGE = 12309;
 
     private static final String KEY_CHALLENGE_SUCCEEDED = "chsc";
     private static final String KEY_CHALLENGE_REQUESTED = "chrq";
+    private static final String KEY_RESUME_ACTION_BUNDLE = "rsmb";
 
     // If the restriction PIN is entered correctly.
     private boolean mChallengeSucceeded;
     private boolean mChallengeRequested;
+    private Bundle mResumeActionBundle;
 
     private UserManager mUserManager;
 
     private final String mRestrictionKey;
 
     private final HashSet<Preference> mProtectedByRestictionsPrefs = new HashSet<Preference>();
+
+    // Receiver to clear pin status when the screen is turned off.
+    private BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mChallengeSucceeded = false;
+            if (shouldBePinProtected(mRestrictionKey)) {
+                ensurePin(null);
+            }
+        }
+    };
 
     /**
      * @param restrictionKey The restriction key to check before pin protecting
@@ -75,6 +93,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
         if (icicle != null) {
             mChallengeSucceeded = icicle.getBoolean(KEY_CHALLENGE_SUCCEEDED, false);
             mChallengeRequested = icicle.getBoolean(KEY_CHALLENGE_REQUESTED, false);
+            mResumeActionBundle = icicle.getBundle(KEY_RESUME_ACTION_BUNDLE);
         }
     }
 
@@ -83,6 +102,9 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
         super.onSaveInstanceState(outState);
 
         outState.putBoolean(KEY_CHALLENGE_REQUESTED, mChallengeRequested);
+        if (mResumeActionBundle != null) {
+            outState.putBundle(KEY_RESUME_ACTION_BUNDLE, mResumeActionBundle);
+        }
         if (getActivity().isChangingConfigurations()) {
             outState.putBoolean(KEY_CHALLENGE_SUCCEEDED, mChallengeSucceeded);
         }
@@ -92,17 +114,52 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         if (shouldBePinProtected(mRestrictionKey)) {
-            ensurePin();
+            ensurePin(null);
+        } else {
+            // If the whole screen is not pin protected, reset mChallengeSucceeded so next
+            // time user uses a protected preference, they are prompted for pin again.
+            mChallengeSucceeded = false;
         }
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_USER_PRESENT);
+        getActivity().registerReceiver(mScreenOffReceiver, filter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mScreenOffReceiver);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_PIN_CHALLENGE) {
+            Bundle resumeActionBundle = mResumeActionBundle;
+            mResumeActionBundle = null;
             mChallengeRequested = false;
             if (resultCode == Activity.RESULT_OK) {
-
                 mChallengeSucceeded = true;
+                String prefKey = resumeActionBundle == null ?
+                        null : resumeActionBundle.getString(EXTRA_PREFERENCE);
+                if (prefKey != null) {
+                    Preference pref = findPreference(prefKey);
+                    if (pref != null) {
+                        // Make sure the checkbox state is the same as it was when we launched the
+                        // pin challenge.
+                        if (pref instanceof CheckBoxPreference
+                                && resumeActionBundle.containsKey(EXTRA_CHECKBOX_STATE)) {
+                            boolean isChecked =
+                                    resumeActionBundle.getBoolean(EXTRA_CHECKBOX_STATE, false);
+                            ((CheckBoxPreference)pref).setChecked(isChecked);
+                        }
+                        if (!onPreferenceTreeClick(getPreferenceScreen(), pref)) {
+                            Intent prefIntent = pref.getIntent();
+                            if (prefIntent != null) {
+                                pref.getContext().startActivity(prefIntent);
+                            }
+                        }
+                    }
+                }
             } else if (!isDetached()) {
                 finishFragment();
             }
@@ -112,13 +169,20 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void ensurePin() {
+    private void ensurePin(Preference preference) {
         if (!mChallengeSucceeded) {
             final UserManager um = UserManager.get(getActivity());
             if (!mChallengeRequested) {
                 if (um.hasRestrictionsPin()) {
-                    Intent requestPin =
-                            new Intent(Intent.ACTION_RESTRICTIONS_PIN_CHALLENGE);
+                    mResumeActionBundle = new Bundle();
+                    if (preference != null) {
+                        mResumeActionBundle.putString(EXTRA_PREFERENCE, preference.getKey());
+                        if (preference instanceof CheckBoxPreference) {
+                            mResumeActionBundle.putBoolean(EXTRA_CHECKBOX_STATE,
+                                    ((CheckBoxPreference)preference).isChecked());
+                        }
+                    }
+                    Intent requestPin = new Intent(Intent.ACTION_RESTRICTIONS_PIN_CHALLENGE);
                     startActivityForResult(requestPin, REQUEST_PIN_CHALLENGE);
                     mChallengeRequested = true;
                 }
@@ -144,9 +208,9 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
      * @param restrictionsKey The restriction key or {@link RESTRICTIONS_PIN_SET} if
      *          pin entry should get triggered if there is a pin set.
      */
-   protected boolean restrictionsPinCheck(String restrictionsKey) {
+   protected boolean restrictionsPinCheck(String restrictionsKey, Preference preference) {
        if (shouldBePinProtected(restrictionsKey) && !mChallengeSucceeded) {
-           ensurePin();
+           ensurePin(preference);
            return false;
        } else {
            return true;
@@ -177,7 +241,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     */
    boolean ensurePinRestrictedPreference(Preference preference) {
        return mProtectedByRestictionsPrefs.contains(preference)
-               && !restrictionsPinCheck(RESTRICTIONS_PIN_SET);
+               && !restrictionsPinCheck(RESTRICTIONS_PIN_SET, preference);
    }
 
     /**
