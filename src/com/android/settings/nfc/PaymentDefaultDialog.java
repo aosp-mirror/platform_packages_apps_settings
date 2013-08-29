@@ -62,7 +62,6 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         switch (which) {
             case BUTTON_POSITIVE:
                 mBackend.setDefaultPaymentApp(mNewDefault);
-                mBackend.setAutoPaymentMode(true);
                 setResult(RESULT_OK);
                 break;
             case BUTTON_NEGATIVE:
@@ -98,7 +97,6 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         }
 
         // Get current mode and default component
-        boolean isAuto = mBackend.isAutoPaymentMode();
         ComponentName defaultComponent = mBackend.getDefaultPaymentApp();
         if (defaultComponent != null && defaultComponent.equals(component)) {
             Log.e(TAG, "Component " + component + " is already default.");
@@ -128,7 +126,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         // Compose dialog; get
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getString(R.string.nfc_payment_set_default);
-        if (defaultAppInfo == null || !isAuto) {
+        if (defaultAppInfo == null) {
             p.mMessage = "Always use " + newAppInfo.loadLabel(pm) + " when you tap and pay?";
         } else {
             p.mMessage = "Always use " + newAppInfo.loadLabel(pm) + " instead of " +
