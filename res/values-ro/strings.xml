@@ -138,11 +138,11 @@
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"În curs de deconectare..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"Se conectează..."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_pairing" msgid="1426882272690346242">"În curs de împerechere..."</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"Se conectează…"</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Dispozitiv Bluetooth nedenumit"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Se caută dispozitive"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Nu există disp. Bluetooth în apropiere."</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Solicitare de împerechere prin Bluetooth"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Solicitare de conectare prin Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitare de împerechere"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Atingeţi pentru a împerechea cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Afişaţi fişierele primite"</string>
@@ -298,7 +298,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortaţi după fusul orar"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Îmbunătăţiţi potrivirea feţei"</string>
+    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Îmbunătățiți recunoașterea feței"</string>
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Verificare mișcare"</string>
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Se solicită clipirea la deblocare"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Blocare automată"</string>
@@ -361,7 +361,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Nivel de securitate mediu spre ridicat"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Parolă"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Securitate ridicată"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Dez. de adm., dator. pol. crip. sau a stoc. acred."</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Dezactivată de admin./politică de criptare/date de conectare"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Fără"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Glisare"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Deblocare facială"</string>
@@ -1287,7 +1287,7 @@
     <string name="configure_input_method" msgid="1317429869771850228">"Setaţi metode de introducere text"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"Setări"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Setări"</string>
-    <string name="active_input_method_subtypes" msgid="3596398805424733238">"Metode de intrare active"</string>
+    <string name="active_input_method_subtypes" msgid="3596398805424733238">"Metode active de introducere de text"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="3346751753141428573">"Utilizaţi limba sistemului"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Setări <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Alegeţi metode de intrare active"</string>
@@ -1299,8 +1299,8 @@
     <string name="development_settings_not_available" msgid="4308569041701535607">"Opțiunile de dezvoltator nu sunt disponibile pentru acest utilizator"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depanare USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Mod de depanare când este conectat USB"</string>
-    <string name="clear_adb_keys" msgid="4038889221503122743">"Revocați autorizațiile de remediere a erorilor prin USB"</string>
-    <string name="bugreport_in_power" msgid="4548816486587403971">"Rapoarte despre erori în meniul de pornire"</string>
+    <string name="clear_adb_keys" msgid="4038889221503122743">"Revoc autorizații depanare USB"</string>
+    <string name="bugreport_in_power" msgid="4548816486587403971">"Raport erori în meniul de pornire"</string>
     <string name="bugreport_in_power_summary" msgid="5764234382355067053">"Includeţi în meniul de pornire opţiunea de a executa un raport despre erori"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Activ permanent"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Ecranul nu va fi inactiv pe durata încărcării"</string>
@@ -1401,7 +1401,7 @@
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon inactiv"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Total procesor"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"Procesor în prim plan"</string>
-    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Menţineţi activ"</string>
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Păstrare în activitate"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="3134357198266380400">"Funcționare Wi-Fi"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Tabletă"</string>
@@ -1690,7 +1690,7 @@
     <string name="force_hw_ui_summary" msgid="5535991166074861515">"Forţaţi utilizarea GPU pentru desen în 2D"</string>
     <string name="force_msaa" msgid="7920323238677284387">"Forţaţi MSAA 4x"</string>
     <string name="force_msaa_summary" msgid="9123553203895817537">"Activaţi MSAA 4x în aplicaţiile OpenGL ES 2.0"</string>
-    <string name="show_non_rect_clip" msgid="505954950474595172">"Remediați operațiile de decupare non-rectangulare"</string>
+    <string name="show_non_rect_clip" msgid="505954950474595172">"Remediați decupări nerectangulare"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"Profil redare cu GPU"</string>
     <string name="window_animation_scale_title" msgid="6162587588166114700">"Scara anim. în fereastră"</string>
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Scară pt. anim. cu tranz."</string>
@@ -1742,7 +1742,7 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Această funcţie poate face ca o aplicaţie care depinde de datele de fundal să nu mai funcţioneze când sunt disponibile numai reţele mobile.\n\nPuteţi găsi comenzi mai adecvate pentru utilizarea datelor în setările disponibile în cadrul aplicaţiei."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Restricţionarea datelor de fundal este posibilă numai dacă aţi setat o limită de date mobile."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Activaţi sinc. autom. a datelor?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Modificările conturilor dvs. pe web vor fi copiate în mod automat pe tabletă.\n\nUnele conturi pot să copieze, de asemenea, în mod automat toate modificările pe care le efectuaţi pe tabletă pe web. Aşa funcţionează un Cont Google.\n\nPentru a alege ce tipuri de informaţii se pot sincroniza în fiecare cont, accesaţi Setări &gt; Conturi."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Modificările conturilor dvs. pe web vor fi copiate automat pe tabletă.\n\nUnele conturi pot să copieze automat toate modificările de pe tabletă pe web. Așa funcționează un Cont Google.\n\nPentru a alege ce tipuri de informații se pot sincroniza în fiecare cont, accesați Setări &gt; Conturi."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Modificările conturilor dvs. pe web vor fi copiate în mod automat pe telefon.\n\nUnele conturi pot să copieze, de asemenea, în mod automat toate modificările pe care le efectuaţi pe telefon pe web. Aşa funcţionează un Cont Google.\n\nPentru a alege ce tipuri de informaţii se pot sincroniza în fiecare cont, accesaţi Setări &gt; Conturi."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Dezact. sinc. autom. a datelor?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Această acţiune va economisi date şi durata bateriei, dar va trebui să sincronizaţi fiecare cont manual pentru a culege informaţiile recente. În plus, nu veţi primi notificări atunci când apar actualizări."</string>
