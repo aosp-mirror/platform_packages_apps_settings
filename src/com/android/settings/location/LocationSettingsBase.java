@@ -16,60 +16,32 @@
 
 package com.android.settings.location;
 
-import android.content.ContentQueryMap;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
-
 import android.util.Log;
-import com.android.settings.SettingsPreferenceFragment;
 
-import java.util.Observable;
-import java.util.Observer;
+import com.android.settings.SettingsPreferenceFragment;
 
 /**
  * A base class that listens to location settings change and modifies location
  * settings.
  */
-public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
+public abstract class LocationSettingsBase extends SettingsPreferenceFragment
+        implements LoaderCallbacks<Cursor> {
     private static final String TAG = "LocationSettingsBase";
-    private ContentQueryMap mContentQueryMap;
-    private Observer mSettingsObserver;
+
+    private static final int LOADER_ID_LOCATION_MODE = 1;
 
     @Override
-    public void onStart() {
-        super.onStart();
-        // listen for Location Manager settings changes
-        Cursor settingsCursor = getContentResolver().query(Settings.Secure.CONTENT_URI, null,
-                "(" + Settings.System.NAME + "=?)",
-                new String[] { Settings.Secure.LOCATION_PROVIDERS_ALLOWED },
-                null);
-        mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
-        mSettingsObserver = new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                refreshLocationMode();
-            }
-        };
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mContentQueryMap.addObserver(mSettingsObserver);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mContentQueryMap.deleteObserver(mSettingsObserver);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mContentQueryMap.close();
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        getLoaderManager().initLoader(LOADER_ID_LOCATION_MODE, null, this);
     }
 
     /** Called when location mode has changed. */
@@ -100,5 +72,27 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
         int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                 Settings.Secure.LOCATION_MODE_OFF);
         onModeChanged(mode, isRestricted());
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+            case LOADER_ID_LOCATION_MODE:
+                return new CursorLoader(getActivity(), Settings.Secure.CONTENT_URI, null,
+                        "(" + Settings.System.NAME + "=?)",
+                        new String[] { Settings.Secure.LOCATION_MODE }, null);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        refreshLocationMode();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Nothing to do here.
     }
 }
