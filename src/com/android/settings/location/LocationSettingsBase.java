@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Observable;
@@ -32,6 +33,7 @@ import java.util.Observer;
  * settings.
  */
 public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
+    private static final String TAG = "LocationSettingsBase";
     private ContentQueryMap mContentQueryMap;
     private Observer mSettingsObserver;
 
@@ -82,6 +84,9 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
         if (isRestricted()) {
             // Location toggling disabled by user restriction. Read the current location mode to
             // update the location master switch.
+            if (Log.isLoggable(TAG, Log.INFO)) {
+                Log.i(TAG, "Restricted user, not setting location mode");
+            }
             mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
             onModeChanged(mode, true);

@@ -60,6 +60,10 @@ import java.util.Set;
 class SettingsInjector {
     static final String TAG = "SettingsInjector";
 
+    /**
+     * If reading the status of a setting takes longer than this, we go ahead and start reading
+     * the next setting.
+     */
     private static final long INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS = 1000;
 
     /**
@@ -219,9 +223,6 @@ class SettingsInjector {
 
     /**
      * Gets a list of preferences that other apps have injected.
-     *
-     * TODO: extract InjectedLocationSettingGetter that returns an iterable over
-     * InjectedSetting objects, so that this class can focus on UI
      */
     public List<Preference> getInjectedSettings() {
         Iterable<InjectedSetting> settings = getSettings();
@@ -273,62 +274,83 @@ class SettingsInjector {
     private final class StatusLoadingHandler extends Handler {
 
         /**
-         * Settings whose status values need to be loaded. A set is used to prevent redundant loads
-         * even if {@link #reloadStatusMessages()} is called many times in rapid succession (for
-         * example, if we receive a lot of {@link
-         * android.location.SettingInjectorService#ACTION_INJECTED_SETTING_CHANGED} broadcasts).
-         * <p/>
-         * We use a linked hash set to ensure that when {@link #reloadStatusMessages()} is called,
-         * any settings that haven't been loaded yet will finish loading before any already-loaded
-         * messages are loaded again.
+         * Settings whose status values need to be loaded. A set is used to prevent redundant loads.
          */
-        private LinkedHashSet<Setting> mSettingsToLoad = new LinkedHashSet<Setting>();
+        private Set<Setting> mSettingsToLoad = new HashSet<Setting>();
 
         /**
-         * Whether we're in the middle of loading settings.
+         * Settings that are being loaded now and haven't timed out. In practice this should have
+         * zero or one elements.
          */
-        private boolean mLoading;
+        private Set<Setting> mSettingsBeingLoaded = new HashSet<Setting>();
+
+        /**
+         * Settings that are being loaded but have timed out. If only one setting has timed out, we
+         * will go ahead and start loading the next setting so that one slow load won't delay the
+         * load of the other settings.
+         */
+        private Set<Setting> mTimedOutSettings = new HashSet<Setting>();
+
+        private boolean mReloadRequested;
 
         @Override
         public void handleMessage(Message msg) {
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "handleMessage start: " + msg + ", mSettingsToLoad: " + mSettingsToLoad);
+                Log.d(TAG, "handleMessage start: " + msg + ", " + this);
             }
 
+            // Update state in response to message
             switch (msg.what) {
                 case WHAT_RELOAD:
-                    mSettingsToLoad.addAll(mSettings);
-                    if (mLoading) {
-                        // Already waiting for a service to return its status, don't ask a new one
-                        return;
-                    }
-                    mLoading = true;
-                    break;
-                case WHAT_TIMEOUT:
-                    if (Log.isLoggable(TAG, Log.WARN)) {
-                        final Setting setting = (Setting) msg.obj;
-                        setting.timedOut = true;
-                        Log.w(TAG, "Timed out trying to get status for: " + setting);
-                    }
+                    mReloadRequested = true;
                     break;
                 case WHAT_RECEIVED_STATUS:
-                    final Setting setting = (Setting) msg.obj;
-                    if (setting.timedOut) {
-                        // We've already restarted retrieving the next setting, don't start another
-                        return;
+                    final Setting receivedSetting = (Setting) msg.obj;
+                    mSettingsBeingLoaded.remove(receivedSetting);
+                    mTimedOutSettings.remove(receivedSetting);
+                    removeMessages(WHAT_TIMEOUT, receivedSetting);
+                    break;
+                case WHAT_TIMEOUT:
+                    final Setting timedOutSetting = (Setting) msg.obj;
+                    mSettingsBeingLoaded.remove(timedOutSetting);
+                    mTimedOutSettings.add(timedOutSetting);
+                    if (Log.isLoggable(TAG, Log.WARN)) {
+                        Log.w(TAG, "Timed out trying to get status for: " + timedOutSetting);
                     }
-
-                    // Received the setting without timeout, clear any previous timed out status
-                    setting.timedOut = false;
                     break;
                 default:
-                    throw new IllegalArgumentException("Unexpected what: " + msg);
+                    Log.wtf(TAG, "Unexpected what: " + msg);
+            }
+
+            // Decide whether to load addiitonal settings based on the new state. Start by seeing
+            // if we have headroom to load another setting.
+            if (mSettingsBeingLoaded.size() > 0 || mTimedOutSettings.size() > 1) {
+                // Don't load any more settings until one of the pending settings has completed.
+                // To reduce memory pressure, we want to be loading at most one setting (plus at
+                // most one timed-out setting) at a time. This means we'll be responsible for
+                // bringing in at most two services.
+                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, "too many services already live for " + msg + ", " + this);
+                }
+                return;
+            }
+
+            if (mReloadRequested && mSettingsToLoad.isEmpty() && mSettingsBeingLoaded.isEmpty()
+                    && mTimedOutSettings.isEmpty()) {
+                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, "reloading because idle and reload requesteed " + msg + ", " + this);
+                }
+                // Reload requested, so must reload all settings
+                mSettingsToLoad.addAll(mSettings);
+                mReloadRequested = false;
             }
 
             // Remove the next setting to load from the queue, if any
             Iterator<Setting> iter = mSettingsToLoad.iterator();
             if (!iter.hasNext()) {
-                mLoading = false;
+                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, "nothing left to do for " + msg + ", " + this);
+                }
                 return;
             }
             Setting setting = iter.next();
@@ -337,16 +359,27 @@ class SettingsInjector {
             // Request the status value
             Intent intent = setting.createUpdatingIntent();
             mContext.startService(intent);
+            mSettingsBeingLoaded.add(setting);
 
             // Ensure that if receiving the status value takes too long, we start loading the
             // next value anyway
             Message timeoutMsg = obtainMessage(WHAT_TIMEOUT, setting);
-            removeMessages(WHAT_TIMEOUT);
             sendMessageDelayed(timeoutMsg, INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS);
 
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "handleMessage end: " + msg + ", mSettingsToLoad: " + mSettingsToLoad);
+                Log.d(TAG, "handleMessage end " + msg + ", " + this
+                        + ", started loading " + setting);
             }
+        }
+
+        @Override
+        public String toString() {
+            return "StatusLoadingHandler{" +
+                    "mSettingsToLoad=" + mSettingsToLoad +
+                    ", mSettingsBeingLoaded=" + mSettingsBeingLoaded +
+                    ", mTimedOutSettings=" + mTimedOutSettings +
+                    ", mReloadRequested=" + mReloadRequested +
+                    '}';
         }
     }
 
@@ -357,7 +390,6 @@ class SettingsInjector {
 
         public final InjectedSetting setting;
         public final Preference preference;
-        public boolean timedOut = false;
 
         private Setting(InjectedSetting setting, Preference preference) {
             this.setting = setting;
@@ -369,8 +401,21 @@ class SettingsInjector {
             return "Setting{" +
                     "setting=" + setting +
                     ", preference=" + preference +
-                    ", timedOut=" + timedOut +
                     '}';
+        }
+
+        /**
+         * Returns true if they both have the same {@link #setting} value. Ignores mutable
+         * preference so that it's safe to use in sets.
+         */
+        @Override
+        public boolean equals(Object o) {
+            return this == o || o instanceof Setting && setting.equals(((Setting) o).setting);
+        }
+
+        @Override
+        public int hashCode() {
+            return setting.hashCode();
         }
 
         /**
