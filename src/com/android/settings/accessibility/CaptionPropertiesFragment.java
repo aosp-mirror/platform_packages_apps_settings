@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import com.android.settings.accessibility.ListDialogPreference.OnValueChangedLis
 public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
     private ToggleCaptioningPreferenceFragment mParent;
+    private CaptioningManager mCaptioningManager;
 
     // Standard options.
     private LocalePreference mLocale;
@@ -58,6 +60,9 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
+
         addPreferencesFromResource(R.xml.captioning_settings);
         initializeAllPreferences();
         updateAllPreferences();
@@ -134,13 +139,13 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     }
 
     private void updateAllPreferences() {
-        final ContentResolver cr = getContentResolver();
-        final int preset = CaptionStyle.getRawPreset(cr);
+        final int preset = mCaptioningManager.getRawUserStyle();
         mPreset.setValue(preset);
 
-        final float fontSize = CaptioningManager.getFontSize(cr);
+        final float fontSize = mCaptioningManager.getFontScale();
         mFontSize.setValue(Float.toString(fontSize));
 
+        final ContentResolver cr = getContentResolver();
         final CaptionStyle attrs = CaptionStyle.getCustomStyle(cr);
         mForegroundColor.setValue(attrs.foregroundColor);
         mEdgeType.setValue(attrs.edgeType);
@@ -162,7 +167,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         final String rawTypeface = attrs.mRawTypeface;
         mTypeface.setValue(rawTypeface == null ? "" : rawTypeface);
 
-        final String rawLocale = CaptioningManager.getRawLocale(cr);
+        final String rawLocale = mCaptioningManager.getRawLocale();
         mLocale.setValue(rawLocale == null ? "" : rawLocale);
     }
 
@@ -220,7 +225,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) value);
         } else if (mFontSize == preference) {
             Settings.Secure.putFloat(
-                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SIZE,
+                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                     Float.parseFloat((String) value));
         } else if (mLocale == preference) {
             Settings.Secure.putString(
