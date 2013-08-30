@@ -233,9 +233,12 @@ public class LocationSettings extends LocationSettingsBase
                 break;
         }
 
-        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF) && !restricted;
+        // Restricted user can't change the location mode, so disable the master switch. But in some
+        // corner cases, the location might still be enabled. In such case the master switch should
+        // be disabled but checked.
+        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
         mSwitch.setEnabled(!restricted);
-        mLocationMode.setEnabled(enabled);
+        mLocationMode.setEnabled(enabled && !restricted);
 
         if (enabled != mSwitch.isChecked()) {
             // set listener to null so that that code below doesn't trigger onCheckedChanged()
