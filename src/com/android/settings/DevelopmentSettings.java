@@ -74,7 +74,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
 /*
  * Displays preferences for application developers.
@@ -224,7 +223,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mUnavailable;
 
     public DevelopmentSettings() {
-        super(null /* Don't ask for restrictions pin on creation. */);
+        super(RESTRICTIONS_PIN_SET);
     }
 
     @Override
@@ -274,13 +273,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
-        }
-
-        if (shouldBePinProtected(RESTRICTIONS_PIN_SET)) {
-            protectByRestrictions(mEnableAdb);
-            protectByRestrictions(mClearAdbKeys);
-            protectByRestrictions(mEnableTerminal);
-            protectByRestrictions(mPassword);
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -1212,9 +1204,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (super.onPreferenceTreeClick(preferenceScreen, preference)) {
-            return true;
-        }
         if (Utils.isMonkeyRunning()) {
             return false;
         }
