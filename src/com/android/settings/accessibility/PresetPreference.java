@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.widget.TextView;
 
@@ -26,11 +27,18 @@ import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 
 public class PresetPreference extends ListDialogPreference {
+    private static final float DEFAULT_FONT_SIZE = 96f;
+
+    private final CaptioningManager mCaptioningManager;
+
     public PresetPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setDialogLayoutResource(R.layout.grid_picker_dialog);
         setListItemLayoutResource(R.layout.preset_picker_item);
+
+        mCaptioningManager = (CaptioningManager) context.getSystemService(
+                Context.CAPTIONING_SERVICE);
     }
 
     @Override
@@ -43,7 +51,10 @@ public class PresetPreference extends ListDialogPreference {
     protected void onBindListItem(View view, int index) {
         final SubtitleView previewText = (SubtitleView) view.findViewById(R.id.preview);
         final int value = getValueAt(index);
-        ToggleCaptioningPreferenceFragment.applyCaptionProperties(previewText, value);
+        ToggleCaptioningPreferenceFragment.applyCaptionProperties(
+                mCaptioningManager, previewText, value);
+
+        previewText.setTextSize(DEFAULT_FONT_SIZE);
 
         final CharSequence title = getTitleAt(index);
         if (title != null) {

@@ -21,7 +21,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.widget.TextView;
 
@@ -32,6 +31,11 @@ import com.android.settings.R;
  * Grid preference that allows the user to pick a captioning edge type.
  */
 public class EdgeTypePreference extends ListDialogPreference {
+    private static final int DEFAULT_FOREGROUND_COLOR = Color.WHITE;
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT;
+    private static final int DEFAULT_EDGE_COLOR = Color.BLACK;
+    private static final float DEFAULT_FONT_SIZE = 96f;
+
     public EdgeTypePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -49,16 +53,15 @@ public class EdgeTypePreference extends ListDialogPreference {
 
     @Override
     protected void onBindListItem(View view, int index) {
-        final float fontSize = CaptioningManager.getFontSize(getContext().getContentResolver());
         final SubtitleView preview = (SubtitleView) view.findViewById(R.id.preview);
 
-        preview.setForegroundColor(Color.WHITE);
-        preview.setBackgroundColor(Color.TRANSPARENT);
-        preview.setTextSize(fontSize);
+        preview.setForegroundColor(DEFAULT_FOREGROUND_COLOR);
+        preview.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        preview.setTextSize(DEFAULT_FONT_SIZE);
 
         final int value = getValueAt(index);
         preview.setEdgeType(value);
-        preview.setEdgeColor(Color.BLACK);
+        preview.setEdgeColor(DEFAULT_EDGE_COLOR);
 
         final CharSequence title = getTitleAt(index);
         if (title != null) {
