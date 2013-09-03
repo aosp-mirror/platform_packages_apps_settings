@@ -20,21 +20,18 @@ import com.android.settings.R;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.preference.Preference;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.util.Comparator;
-
 public class WifiP2pPeer extends Preference {
 
     private static final int[] STATE_SECURED = {R.attr.state_encrypted};
     public WifiP2pDevice device;
 
-    private int mRssi;
+    private final int mRssi;
     private ImageView mSignal;
 
     private static final int SIGNAL_LEVELS = 4;
@@ -57,7 +54,7 @@ public class WifiP2pPeer extends Preference {
         if (mRssi == Integer.MAX_VALUE) {
             mSignal.setImageDrawable(null);
         } else {
-            mSignal.setImageResource(R.drawable.wifi_signal);
+            mSignal.setImageResource(R.drawable.wifi_signal_dark);
             mSignal.setImageState(STATE_SECURED,  true);
         }
         refresh();

@@ -19,12 +19,9 @@ package com.android.settings.wifi;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -37,6 +34,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -76,9 +74,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.wifi.p2p.WifiP2pSettings;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Two types of UI are provided here.
@@ -134,7 +135,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
 
-    private AtomicBoolean mConnected = new AtomicBoolean(false);
+    private final AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private WifiDialog mDialog;
 
@@ -447,10 +448,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (isRestrictedAndNotPinProtected()) return;
 
         final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
+        TypedArray ta = getActivity().getTheme().obtainStyledAttributes(
+                new int[] {R.attr.ic_menu_add, R.attr.ic_wps});
         if (mSetupWizardMode) {
-            // FIXME: add setIcon() when graphics are available
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                    .setIcon(R.drawable.ic_wps)
+                    .setIcon(ta.getDrawable(1))
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
@@ -458,11 +460,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         } else {
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                    .setIcon(R.drawable.ic_wps)
+                    .setIcon(ta.getDrawable(1))
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
-                    .setIcon(R.drawable.ic_menu_add)
+                    .setIcon(ta.getDrawable(0))
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
@@ -481,6 +483,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     //.setIcon(android.R.drawable.ic_menu_manage)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
+        ta.recycle();
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -808,7 +811,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     /** A restricted multimap for use in constructAccessPoints */
     private class Multimap<K,V> {
-        private HashMap<K,List<V>> store = new HashMap<K,List<V>>();
+        private final HashMap<K,List<V>> store = new HashMap<K,List<V>>();
         /** retrieve a non-null list of values with key K */
         List<V> getAll(K key) {
             List<V> values = store.get(key);
