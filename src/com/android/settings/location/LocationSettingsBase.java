@@ -38,10 +38,27 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
 
     private static final int LOADER_ID_LOCATION_MODE = 1;
 
+    /**
+     * Whether the fragment is actively running.
+     */
+    private boolean mActive = false;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         getLoaderManager().initLoader(LOADER_ID_LOCATION_MODE, null, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mActive = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mActive = false;
     }
 
     /** Called when location mode has changed. */
@@ -61,7 +78,9 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
             }
             mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
-            onModeChanged(mode, true);
+            if (mActive) {
+                onModeChanged(mode, true);
+            }
             return;
         }
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
@@ -69,9 +88,11 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
     }
 
     public void refreshLocationMode() {
-        int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
-                Settings.Secure.LOCATION_MODE_OFF);
-        onModeChanged(mode, isRestricted());
+        if (mActive) {
+            int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_OFF);
+            onModeChanged(mode, isRestricted());
+        }
     }
 
     @Override
