@@ -140,7 +140,7 @@ public class RecentLocationApps {
     public List<Preference> getAppList() {
         // Retrieve Uid-based battery blaming info and generate a package to BatterySipper HashMap
         // for later faster looking up.
-        mStatsHelper.refreshStats();
+        mStatsHelper.refreshStats(true);
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
         // Key: package Uid. Value: BatterySipperWrapper.
         HashMap<Integer, BatterySipperWrapper> sipperMap =
