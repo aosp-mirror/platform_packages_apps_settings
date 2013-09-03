@@ -71,6 +71,7 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
@@ -336,7 +337,8 @@ public class Settings extends PreferenceActivity
         ManageAccountsSettings.class.getName(),
         PrintingSettings.class.getName(),
         TrustedCredentialsSettings.class.getName(),
-        PaymentSettings.class.getName()
+        PaymentSettings.class.getName(),
+        KeyboardLayoutPickerFragment.class.getName()
     };
 
     @Override
