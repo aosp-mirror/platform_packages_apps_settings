@@ -210,7 +210,7 @@ public class PowerUsageSummary extends PreferenceFragment {
             addNotAvailableMessage();
             return;
         }
-        mStatsHelper.refreshStats();
+        mStatsHelper.refreshStats(false);
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
         for (BatterySipper sipper : usageList) {
             if (sipper.getSortValue() < MIN_POWER_THRESHOLD) continue;
