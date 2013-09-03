@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.SystemClock;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -42,7 +43,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -65,22 +65,6 @@ class SettingsInjector {
      * the next setting.
      */
     private static final long INJECTED_STATUS_UPDATE_TIMEOUT_MILLIS = 1000;
-
-    /**
-     * Intent action marking the receiver as injecting a setting
-     */
-    public static final String RECEIVER_INTENT = "com.android.settings.InjectedLocationSetting";
-
-    /**
-     * Name of the meta-data tag used to specify the resource file that includes the settings
-     * attributes.
-     */
-    public static final String META_DATA_NAME = "com.android.settings.InjectedLocationSetting";
-
-    /**
-     * Name of the XML tag that includes the attributes for the setting.
-     */
-    public static final String ATTRIBUTES_NAME = "injected-location-setting";
 
     /**
      * {@link Message#what} value for starting to load status values
@@ -115,7 +99,8 @@ class SettingsInjector {
 
     /**
      * Returns a list with one {@link InjectedSetting} object for each {@link android.app.Service}
-     * that responds to {@link #RECEIVER_INTENT} and provides the expected setting metadata.
+     * that responds to {@link SettingInjectorService#ACTION_SERVICE_INTENT} and provides the
+     * expected setting metadata.
      *
      * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
      *
@@ -123,37 +108,38 @@ class SettingsInjector {
      */
     private List<InjectedSetting> getSettings() {
         PackageManager pm = mContext.getPackageManager();
-        Intent receiverIntent = new Intent(RECEIVER_INTENT);
+        Intent intent = new Intent(SettingInjectorService.ACTION_SERVICE_INTENT);
 
         List<ResolveInfo> resolveInfos =
-                pm.queryIntentServices(receiverIntent, PackageManager.GET_META_DATA);
+                pm.queryIntentServices(intent, PackageManager.GET_META_DATA);
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             Log.d(TAG, "Found services: " + resolveInfos);
         }
         List<InjectedSetting> settings = new ArrayList<InjectedSetting>(resolveInfos.size());
-        for (ResolveInfo receiver : resolveInfos) {
+        for (ResolveInfo resolveInfo : resolveInfos) {
             try {
-                InjectedSetting info = parseServiceInfo(receiver, pm);
-                if (info == null) {
-                    Log.w(TAG, "Unable to load service info " + receiver);
+                InjectedSetting setting = parseServiceInfo(resolveInfo, pm);
+                if (setting == null) {
+                    Log.w(TAG, "Unable to load service info " + resolveInfo);
                 } else {
-                    if (Log.isLoggable(TAG, Log.INFO)) {
-                        Log.i(TAG, "Loaded service info: " + info);
-                    }
-                    settings.add(info);
+                    settings.add(setting);
                 }
             } catch (XmlPullParserException e) {
-                Log.w(TAG, "Unable to load service info " + receiver, e);
+                Log.w(TAG, "Unable to load service info " + resolveInfo, e);
             } catch (IOException e) {
-                Log.w(TAG, "Unable to load service info " + receiver, e);
+                Log.w(TAG, "Unable to load service info " + resolveInfo, e);
             }
+        }
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, "Loaded settings: " + settings);
         }
 
         return settings;
     }
 
     /**
-     * Parses {@link InjectedSetting} from the attributes of the {@link #META_DATA_NAME} tag.
+     * Parses {@link InjectedSetting} from the attributes of the
+     * {@link SettingInjectorService#META_DATA_NAME} tag.
      *
      * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
      */
@@ -164,9 +150,9 @@ class SettingsInjector {
 
         XmlResourceParser parser = null;
         try {
-            parser = si.loadXmlMetaData(pm, META_DATA_NAME);
+            parser = si.loadXmlMetaData(pm, SettingInjectorService.META_DATA_NAME);
             if (parser == null) {
-                throw new XmlPullParserException("No " + META_DATA_NAME
+                throw new XmlPullParserException("No " + SettingInjectorService.META_DATA_NAME
                         + " meta-data for " + service + ": " + si);
             }
 
@@ -178,9 +164,9 @@ class SettingsInjector {
             }
 
             String nodeName = parser.getName();
-            if (!ATTRIBUTES_NAME.equals(nodeName)) {
+            if (!SettingInjectorService.ATTRIBUTES_NAME.equals(nodeName)) {
                 throw new XmlPullParserException("Meta-data does not start with "
-                        + ATTRIBUTES_NAME + " tag");
+                        + SettingInjectorService.ATTRIBUTES_NAME + " tag");
             }
 
             Resources res = pm.getResourcesForApplication(si.applicationInfo);
@@ -201,15 +187,15 @@ class SettingsInjector {
     private static InjectedSetting parseAttributes(
             String packageName, String className, Resources res, AttributeSet attrs) {
 
-        TypedArray sa = res.obtainAttributes(attrs, android.R.styleable.InjectedLocationSetting);
+        TypedArray sa = res.obtainAttributes(attrs, android.R.styleable.SettingInjectorService);
         try {
             // Note that to help guard against malicious string injection, we do not allow dynamic
             // specification of the label (setting title)
-            final String label = sa.getString(android.R.styleable.InjectedLocationSetting_label);
+            final String label = sa.getString(android.R.styleable.SettingInjectorService_title);
             final int iconId = sa.getResourceId(
-                    android.R.styleable.InjectedLocationSetting_icon, 0);
+                    android.R.styleable.SettingInjectorService_icon, 0);
             final String settingsActivity =
-                    sa.getString(android.R.styleable.InjectedLocationSetting_settingsActivity);
+                    sa.getString(android.R.styleable.SettingInjectorService_settingsActivity);
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "parsed label: " + label + ", iconId: " + iconId
                         + ", settingsActivity: " + settingsActivity);
@@ -306,6 +292,7 @@ class SettingsInjector {
                     break;
                 case WHAT_RECEIVED_STATUS:
                     final Setting receivedSetting = (Setting) msg.obj;
+                    receivedSetting.maybeLogElapsedTime();
                     mSettingsBeingLoaded.remove(receivedSetting);
                     mTimedOutSettings.remove(receivedSetting);
                     removeMessages(WHAT_TIMEOUT, receivedSetting);
@@ -357,8 +344,7 @@ class SettingsInjector {
             iter.remove();
 
             // Request the status value
-            Intent intent = setting.createUpdatingIntent();
-            mContext.startService(intent);
+            setting.startService();
             mSettingsBeingLoaded.add(setting);
 
             // Ensure that if receiving the status value takes too long, we start loading the
@@ -390,6 +376,7 @@ class SettingsInjector {
 
         public final InjectedSetting setting;
         public final Preference preference;
+        public long startMillis;
 
         private Setting(InjectedSetting setting, Preference preference) {
             this.setting = setting;
@@ -406,7 +393,7 @@ class SettingsInjector {
 
         /**
          * Returns true if they both have the same {@link #setting} value. Ignores mutable
-         * preference so that it's safe to use in sets.
+         * {@link #preference} and {@link #startMillis} so that it's safe to use in sets.
          */
         @Override
         public boolean equals(Object o) {
@@ -419,11 +406,10 @@ class SettingsInjector {
         }
 
         /**
-         * Creates an Intent to ask the receiver for the current status for the setting, and display
-         * it when it replies.
+         * Starts the service to fetch for the current status for the setting, and updates the
+         * preference when the service replies.
          */
-        public Intent createUpdatingIntent() {
-            final Intent receiverIntent = setting.getServiceIntent();
+        public void startService() {
             Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
@@ -440,12 +426,25 @@ class SettingsInjector {
                 }
             };
             Messenger messenger = new Messenger(handler);
-            receiverIntent.putExtra(SettingInjectorService.MESSENGER_KEY, messenger);
+
+            Intent intent = setting.getServiceIntent();
+            intent.putExtra(SettingInjectorService.MESSENGER_KEY, messenger);
+
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, setting + ": sending rcv-intent: " + receiverIntent
+                Log.d(TAG, setting + ": sending update intent: " + intent
                         + ", handler: " + handler);
+                startMillis = SystemClock.elapsedRealtime();
+            } else {
+                startMillis = 0;
             }
-            return receiverIntent;
+            mContext.startService(intent);
+        }
+
+        public void maybeLogElapsedTime() {
+            if (Log.isLoggable(TAG, Log.DEBUG) && startMillis != 0) {
+                long end = SystemClock.elapsedRealtime();
+                Log.d(TAG, this + " update took " + (end - startMillis) + " millis");
+            }
         }
     }
 }
