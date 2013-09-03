@@ -55,21 +55,8 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             for (PaymentAppInfo appInfo : appInfos) {
                 PaymentAppPreference preference =
                         new PaymentAppPreference(getActivity(), appInfo, this);
-                // If for some reason isAuto gets out of sync, clear out app default
                 preference.setIcon(appInfo.icon);
                 preference.setTitle(appInfo.caption);
-                screen.addPreference(preference);
-            }
-            if (appInfos.size() > 1) {
-                PaymentAppInfo appInfo = new PaymentAppInfo();
-                appInfo.icon = null;
-                appInfo.componentName = null;
-                appInfo.isDefault = !(mPaymentBackend.getDefaultPaymentApp() != null);
-                // Add "Ask every time" option
-                PaymentAppPreference preference =
-                        new PaymentAppPreference(getActivity(), appInfo, this);
-                preference.setIcon(null);
-                preference.setTitle(R.string.nfc_payment_ask);
                 screen.addPreference(preference);
             }
         }
@@ -82,8 +69,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             PaymentAppInfo appInfo = (PaymentAppInfo) v.getTag();
             if (appInfo.componentName != null) {
                 mPaymentBackend.setDefaultPaymentApp(appInfo.componentName);
-            } else {
-                mPaymentBackend.setDefaultPaymentApp(null);
             }
             refresh();
         }
