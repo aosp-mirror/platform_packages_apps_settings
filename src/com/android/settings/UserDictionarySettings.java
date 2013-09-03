@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import com.android.settings.inputmethod.UserDictionaryAddWordContents;
+import com.android.settings.inputmethod.UserDictionarySettingsUtils;
+
 import android.app.ListFragment;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -36,9 +39,6 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
-import com.android.settings.inputmethod.UserDictionaryAddWordContents;
-import com.android.settings.inputmethod.UserDictionarySettingsUtils;
 
 import java.util.Locale;
 
@@ -165,7 +165,7 @@ public class UserDictionarySettings extends ListFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem actionItem =
                 menu.add(0, OPTIONS_MENU_ADD, 0, R.string.user_dict_settings_add_menu_title)
-                .setIcon(R.drawable.ic_menu_add);
+                .setIcon(R.drawable.ic_menu_add_dark);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
@@ -236,8 +236,9 @@ public class UserDictionarySettings extends ListFragment {
 
         private AlphabetIndexer mIndexer;
 
-        private ViewBinder mViewBinder = new ViewBinder() {
+        private final ViewBinder mViewBinder = new ViewBinder() {
 
+            @Override
             public boolean setViewValue(View v, Cursor c, int columnIndex) {
                 if (columnIndex == INDEX_SHORTCUT) {
                     final String shortcut = c.getString(INDEX_SHORTCUT);
@@ -268,14 +269,17 @@ public class UserDictionarySettings extends ListFragment {
             setViewBinder(mViewBinder);
         }
 
+        @Override
         public int getPositionForSection(int section) {
             return null == mIndexer ? 0 : mIndexer.getPositionForSection(section);
         }
 
+        @Override
         public int getSectionForPosition(int position) {
             return null == mIndexer ? 0 : mIndexer.getSectionForPosition(position);
         }
 
+        @Override
         public Object[] getSections() {
             return null == mIndexer ? null : mIndexer.getSections();
         }
