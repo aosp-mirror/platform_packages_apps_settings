@@ -243,11 +243,22 @@ public class RecentLocationApps {
             try {
                 ApplicationInfo appInfo = mPackageManager.getApplicationInfo(
                         packageName, PackageManager.GET_META_DATA);
-                pref = createRecentLocationEntry(
-                        mPackageManager.getApplicationIcon(appInfo),
-                        mPackageManager.getApplicationLabel(appInfo),
-                        highBattery,
-                        new PackageEntryClickedListener(packageName));
+                // Multiple users can install the same package. Each user gets a different Uid for
+                // the same package.
+                //
+                // Here we retrieve the Uid with package name, that will be the Uid for that package
+                // associated with the current active user. If the Uid differs from the Uid in ops,
+                // that means this entry belongs to another inactive user and we should ignore that.
+                if (appInfo.uid == ops.getUid()) {
+                    pref = createRecentLocationEntry(
+                            mPackageManager.getApplicationIcon(appInfo),
+                            mPackageManager.getApplicationLabel(appInfo),
+                            highBattery,
+                            new PackageEntryClickedListener(packageName));
+                } else if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, "package " + packageName + " with Uid " + ops.getUid() +
+                            " belongs to another inactive account, ignored.");
+                }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.wtf(TAG, "Package not found: " + packageName);
             }
