@@ -320,7 +320,12 @@ public class BatteryStatsHelper {
                 R.string.details_title, null, null, 0);
     }
 
-    public void refreshStats() {
+    /**
+     * Refreshes the power usage list.
+     * @param includeZeroConsumption whether includes those applications which have consumed very
+     *                               little power up till now.
+     */
+    public void refreshStats(boolean includeZeroConsumption) {
         // Initialize mStats if necessary.
         getStats();
 
@@ -336,7 +341,7 @@ public class BatteryStatsHelper {
         mUserSippers.clear();
         mUserPower.clear();
 
-        processAppUsage();
+        processAppUsage(includeZeroConsumption);
         processMiscUsage();
 
         Collections.sort(mUsageList);
@@ -356,7 +361,7 @@ public class BatteryStatsHelper {
         }
     }
 
-    private void processAppUsage() {
+    private void processAppUsage(boolean includeZeroConsumption) {
         SensorManager sensorManager = (SensorManager) mActivity.getSystemService(
                 Context.SENSOR_SERVICE);
         final int which = mStatsType;
@@ -522,7 +527,7 @@ public class BatteryStatsHelper {
             // Add the app to the list if it is consuming power
             boolean isOtherUser = false;
             final int userId = UserHandle.getUserId(u.getUid());
-            if (power != 0 || u.getUid() == 0) {
+            if (power != 0 || includeZeroConsumption || u.getUid() == 0) {
                 BatterySipper app = new BatterySipper(mActivity, mRequestQueue, mHandler,
                         packageWithHighestDrain, DrainType.APP, 0, u,
                         new double[] {power});
