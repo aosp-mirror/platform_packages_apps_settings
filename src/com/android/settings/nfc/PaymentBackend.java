@@ -22,7 +22,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
-import android.nfc.cardemulation.CardEmulationManager;
+import android.nfc.cardemulation.CardEmulation;
 import android.provider.Settings;
 
 import java.util.ArrayList;
@@ -40,19 +40,19 @@ public class PaymentBackend {
 
     private final Context mContext;
     private final NfcAdapter mAdapter;
-    private final CardEmulationManager mCardEmuManager;
+    private final CardEmulation mCardEmuManager;
 
     public PaymentBackend(Context context) {
         mContext = context;
 
         mAdapter = NfcAdapter.getDefaultAdapter(context);
-        mCardEmuManager = CardEmulationManager.getInstance(mAdapter);
+        mCardEmuManager = CardEmulation.getInstance(mAdapter);
     }
 
     public List<PaymentAppInfo> getPaymentAppInfos() {
         PackageManager pm = mContext.getPackageManager();
         List<ApduServiceInfo> serviceInfos =
-                mCardEmuManager.getServices(CardEmulationManager.CATEGORY_PAYMENT);
+                mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT);
         List<PaymentAppInfo> appInfos = new ArrayList<PaymentAppInfo>();
 
         if (serviceInfos == null) return appInfos;

@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.nfc.cardemulation.CardEmulationManager;
+import android.nfc.cardemulation.CardEmulation;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -47,8 +47,8 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         mBackend = new PaymentBackend(this);
         Intent intent = getIntent();
         ComponentName component = intent.getParcelableExtra(
-                CardEmulationManager.EXTRA_SERVICE_COMPONENT);
-        String category = intent.getStringExtra(CardEmulationManager.EXTRA_CATEGORY);
+                CardEmulation.EXTRA_SERVICE_COMPONENT);
+        String category = intent.getStringExtra(CardEmulation.EXTRA_CATEGORY);
 
         setResult(RESULT_CANCELED);
         if (!buildDialog(component, category)) {
@@ -75,7 +75,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
             return false;
         }
 
-        if (!CardEmulationManager.CATEGORY_PAYMENT.equals(category)) {
+        if (!CardEmulation.CATEGORY_PAYMENT.equals(category)) {
             Log.e(TAG, "Don't support defaults for category " + category);
             return false;
         }
