@@ -19,13 +19,11 @@ package com.android.settings;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.RestrictionEntry;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -56,9 +54,6 @@ import android.widget.TextView;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
-import com.android.settings.ChooseLockPassword.ChooseLockPasswordFragment;
-import com.android.settings.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
@@ -76,8 +71,9 @@ import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
+import com.android.settings.print.PrintServiceSettingsFragment;
+import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.tts.TextToSpeechSettings;
-import com.android.settings.users.AppRestrictionsFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -334,7 +330,7 @@ public class Settings extends PreferenceActivity
         UserSettings.class.getName(),
         NotificationAccessSettings.class.getName(),
         ManageAccountsSettings.class.getName(),
-        PrintingSettings.class.getName(),
+        PrintSettingsFragment.class.getName(),
         TrustedCredentialsSettings.class.getName(),
         PaymentSettings.class.getName()
     };
@@ -495,7 +491,9 @@ public class Settings extends PreferenceActivity
                 BluetoothSettings.class.getName().equals(fragmentName) ||
                 DreamSettings.class.getName().equals(fragmentName) ||
                 LocationSettings.class.getName().equals(fragmentName) ||
-                ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName)) {
+                ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName) ||
+                PrintSettingsFragment.class.getName().equals(fragmentName) ||
+                PrintServiceSettingsFragment.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_UI_OPTIONS, ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
 

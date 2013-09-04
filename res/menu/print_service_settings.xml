@@ -14,7 +14,20 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/print_settings_title">
-</PreferenceScreen>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/print_menu_item_add_printer"
+        android:title="@string/print_menu_item_add_printer"
+        android:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/print_menu_item_settings"
+        android:title="@string/print_menu_item_settings"
+        android:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/print_menu_item_uninstall"
+        android:title="@string/print_menu_item_uninstall"
+        android:showAsAction="never">
+    </item>
+</menu>
