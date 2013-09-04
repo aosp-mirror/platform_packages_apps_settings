@@ -800,7 +800,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             sWifiState.onActualStateChange(context, intent);
         } else if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
             sBluetoothState.onActualStateChange(context, intent);
-        } else if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
+        } else if (LocationManager.MODE_CHANGED_ACTION.equals(action)) {
             sLocationState.onActualStateChange(context, intent);
         } else if (ContentResolver.ACTION_SYNC_CONN_STATUS_CHANGED.equals(action)) {
             sSyncState.onActualStateChange(context, intent);
