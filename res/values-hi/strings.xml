@@ -50,7 +50,7 @@
     <string name="radioInfo_service_off" msgid="1434084741785525415">"रेडियो बंद"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"रोमिंग"</string>
     <string name="radioInfo_roaming_not" msgid="2851853244069662307">"रोमिंग नहीं"</string>
-    <string name="radioInfo_phone_idle" msgid="7489244938838742820">"निष्क्रिय"</string>
+    <string name="radioInfo_phone_idle" msgid="7489244938838742820">"प्रयोग में नहीं"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"बज रहा है"</string>
     <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"कॉल चल रही है"</string>
     <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"डिस्कनेक्‍ट किया गया"</string>
@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"अज्ञात त्रुटि"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"ठंडा"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"आसपास के सब Bluetooth उप. के लि‍ए दृश्‍यमान (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"सभी आस-पास के Bluetooth उपकरणों के लि‍ए दृश्‍यमान"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"अन्‍य Bluetooth उपकरणों के लि‍ए दृश्‍यमान नहीं"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"केवल युग्‍मि‍त उपकरणों के लि‍ए दृश्‍यमान"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"आसपास के सब Bluetooth उप. के लि‍ए दिखाई दे रहा है (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"सभी आस-पास के Bluetooth उपकरणों के लि‍ए दिखाई दे रहा है"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"अन्‍य Bluetooth उपकरणों के लि‍ए दिखाई नहीं दे रहा है"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"केवल युग्‍मि‍त उपकरणों के लि‍ए दिखाई दे रहा है"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"दृश्यता समयबाह्य"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ध्‍वनि डायलिंग लॉक करें"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"जब स्‍क्रीन लॉक हो, तो bluetooth डायलर के उपयोग को रोकें"</string>
@@ -173,7 +173,7 @@
     <string name="choose_timezone" msgid="1362834506479536274">"समय क्षेत्र चुनें"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"क्षेत्रीय (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"पूर्वावलोकन:"</string>
-    <string name="display_font_size_label" msgid="8941851418397475389">"फ़ॉन्ट आकार:"</string>
+    <string name="display_font_size_label" msgid="8941851418397475389">"अक्षरों का आकार:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"<xliff:g id="BROADCAST">broadcast</xliff:g> भेजें"</string>
@@ -463,7 +463,7 @@
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"उपकरण सेटिंग"</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"युग्‍मित उपकरण"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"उपलब्ध उपकरण"</string>
-    <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"कनेक्‍ट करें"</string>
+    <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"जोड़ दें"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"डिस्‍कनेक्‍ट करें"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"युग्‍मित और कनेक्‍ट करें"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"अयुग्‍मित करें"</string>
@@ -486,7 +486,7 @@
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> को इस टेबलेट का इंटरनेट कनेक्‍शन शेयर करने से डिस्‍कनेक्‍ट कर दिया जाएगा."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> को इस फ़ोन का इंटरनेट कनेक्‍शन शेयर करने से डिस्‍कनेक्‍ट कर दिया जाएगा."</string>
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"युग्‍मि‍त Bluetooth उपकरण"</string>
-    <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"कनेक्‍ट करें"</string>
+    <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"जोड़ दें"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Bluetooth उपकरण से कनेक्‍ट करें"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"प्रोफ़ाइल"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"नाम बदलें"</string>
@@ -571,7 +571,7 @@
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"स्थान सटीकता को बेहतर बनाने तथा अन्य प्रयोजनों के लिए, Google और अन्य एप्लिकेशन आसपास के नेटवर्क स्कैन कर सकते हैं, भले ही Wi-Fi बंद हो. यदि आप ऐसा नहीं होने देना चाहते हैं, तो उन्नत &gt; स्कैनिंग हमेशा उपलब्ध पर जाएं."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"एप्लिकेशन आसपास के नेटवर्क स्कैन कर सकते हैं, भले ही Wi-Fi बंद हो. यदि आप ऐसा नहीं होने देना चाहते हैं, तो उन्नत &gt; स्कैनिंग हमेशा उपलब्ध पर जाएं."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"फिर से न दिखाएं"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"निष्क्रिय रहने के दौरान Wi-Fi चालू रखें"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"प्रयोग में नहीं रहने के दौरान Wi-Fi चालू रखें"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"सेटिंग बदलने में एक समस्‍या थी"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi ऑप्टिमाइज़ेशन"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi-Fi के चालू रहने पर बैटरी उपयोग को न्यूनतम करें"</string>
@@ -637,7 +637,7 @@
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"स्थान की सटीकता को बेहतर बनाने और अन्य प्रयोजनों के लिए, Wi-Fi बंद होने पर भी <xliff:g id="APP_NAME">%1$s</xliff:g> नेटवर्क स्कैनिंग को चालू करना चाहता है.\n\nइसकी अनुमति उन सभी एप्लिकेशन के लिए दें जो स्कैन करना चाहते हैं?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"अनुमति दें"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"अस्वीकार करें"</string>
-    <string name="wifi_connect" msgid="1076622875777072845">"कनेक्‍ट करें"</string>
+    <string name="wifi_connect" msgid="1076622875777072845">"जोड़ दें"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"नेटवर्क से कनेक्ट करने में विफल रहा"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"भूलें"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"नेटवर्क भूलने में विफल रहा"</string>
@@ -701,22 +701,22 @@
     <string name="musicfx_title" msgid="3415566786340790345">"संगीत प्रभाव"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"रिंगर वॉल्‍यूम"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"मौन होने पर कंपन करें"</string>
-    <string name="notification_sound_title" msgid="5137483249425507572">"डिफ़ॉल्ट सूचना ध्वनि"</string>
+    <string name="notification_sound_title" msgid="5137483249425507572">"सामान्य सूचना ध्वनि"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"पल्‍स सूचना लाइट"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"रिंगटोन"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"सूचना"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"सूचनाओं के लिए इनकमिंग कॉल वॉल्‍यूम का उपयोग करें"</string>
-    <string name="notification_sound_dialog_title" msgid="3805140135741385667">"डिफ़ॉल्ट सूचना ध्वनि"</string>
+    <string name="notification_sound_dialog_title" msgid="3805140135741385667">"सामान्य सूचना ध्वनि"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"मीडिया"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"संगीत और वीडियो के लिए वॉल्‍यूम सेट करें"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"अलार्म"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"संलग्‍न किए गए डॉक के लिए ऑडियो सेटिंग"</string>
-    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"डायल पैड स्पर्श टोन"</string>
+    <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"कॉल करते समय ध्वनी सुने"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"स्‍पर्श ध्‍वनियां"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"स्‍क्रीन लॉक ध्‍वनि"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"स्‍पर्श पर कंपन करें"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"शोर रद्दीकरण"</string>
-    <string name="volume_media_description" msgid="7949355934788807863">"संगीत, वीडियो, गेम और अन्‍य मीडिया"</string>
+    <string name="volume_media_description" msgid="7949355934788807863">"संगीत, वीडियो,गेमऔर अन्‍य मीडिया"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"रिंगटोन और सूचनाएं"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"सूचनाएं"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"अलार्म"</string>
@@ -752,23 +752,23 @@
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"फ़ोन घुमाने पर अभिविन्‍यास स्‍वचालित रूप से स्‍विच करें"</string>
     <string name="brightness" msgid="2354961343555249270">"चमक"</string>
     <string name="brightness_summary" msgid="838917350127550703">"स्‍क्रीन की चमक एडजस्ट करें"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"निष्क्रिय"</string>
+    <string name="screen_timeout" msgid="4351334843529712571">"प्रयोग में नहीं"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"नि‍ष्‍क्रि‍यता के <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> के बाद"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"वॉलपेपर"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"यहां से वॉलपेपर चुनें:"</string>
-    <string name="screensaver_settings_title" msgid="3349790120327233241">"Daydream"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"डॉक किए हुए या निष्क्रिय रहने और चार्ज करने पर"</string>
+    <string name="screensaver_settings_title" msgid="3349790120327233241">"दिवास्वप्न"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"डॉक किए हुए या प्रयोग में नहीं रहने और चार्ज करने पर"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"कोई एक"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"चार्ज करते समय"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"जब डॉक किया हुआ हो"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"बंद"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"फ़ोन के डॉक रहते समय और/या निष्क्रिय रहते समय जो भी होता है, उसे नियंत्रित करने के लिए Daydream को चालू करें."</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"फ़ोन के डॉक रहते समय और/या प्रयोग में नहीं रहते समय जो भी होता है, उसे नियंत्रित करने के लिए दिवास्वप्न को चालू करें."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"daydream कब करें"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"अब प्रारंभ करें"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"सेटिंग"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"स्‍वचालित चमक"</string>
-    <string name="title_font_size" msgid="4405544325522105222">"फ़ॉन्ट आकार"</string>
-    <string name="dialog_title_font_size" msgid="2231507851258955038">"फ़ॉन्ट आकार"</string>
+    <string name="title_font_size" msgid="4405544325522105222">"अक्षरों का आकार"</string>
+    <string name="dialog_title_font_size" msgid="2231507851258955038">"अक्षरों का आकार"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"सिम कार्ड लॉक सेटिंग"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"सिम कार्ड लॉक सेट करें"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"सिम कार्ड लॉक"</string>
@@ -832,20 +832,20 @@
     <string name="status_unavailable" msgid="7862009036663793314">"अनुपलब्ध"</string>
     <string name="status_up_time" msgid="7294859476816760399">"चालू रहने का समय"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"सचेत समय"</string>
-    <string name="internal_memory" msgid="9129595691484260784">"आंतरिक संग्रहण"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"मोबाइल संग्रहण"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB संग्रहण"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD कार्ड"</string>
     <string name="memory_available" msgid="5052397223077021181">"उपलब्ध"</string>
     <string name="memory_available_read_only" msgid="6497534390167920206">"उपलब्ध (केवल पढ़ने योग्य)"</string>
     <string name="memory_size" msgid="6629067715017232195">"कुल स्‍थान"</string>
-    <string name="memory_calculating_size" msgid="2188358544203768588">"गणना हो रही है..."</string>
+    <string name="memory_calculating_size" msgid="2188358544203768588">"गिनती हो रही है..."</string>
     <string name="memory_apps_usage" msgid="2348501997988663688">"एप्लिकेशन (एप्लिकेशन डेटा और मीडिया सामग्री)"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"मीडिया"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"डाउनलोड"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"चित्र, वीडियो"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"ऑडियो (संगीत, रिंगटोन, पॉडकास्‍ट, आदि)"</string>
     <string name="memory_media_misc_usage" msgid="235452944021647124">"विविध"</string>
-    <string name="memory_media_cache_usage" msgid="6704293333141177910">"संचित डेटा"</string>
+    <string name="memory_media_cache_usage" msgid="6704293333141177910">"संग्रहित डेटा"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"शेयर किया गया संग्रहण अनमाउंट करें"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"SD कार्ड अनमाउंट करें"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"आंतरिक USB संग्रहण अनमाउंट करें"</string>
@@ -860,8 +860,8 @@
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD कार्ड मिटाएं"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"आंतरिक USB संग्रहण का सभी डेटा मिटाता है, जैसे संगीत और फ़ोटो"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"SD कार्ड का सभी डेटा मिटाता है, जैसे संगीत और फ़ोटो"</string>
-    <string name="memory_clear_cache_title" msgid="5423840272171286191">"संचित डेटा साफ़ करें?"</string>
-    <string name="memory_clear_cache_message" msgid="4550262490807415948">"इससे सभी एप्लिकेशन का संचित डेटा साफ़ हो जाएगा."</string>
+    <string name="memory_clear_cache_title" msgid="5423840272171286191">"संग्रहित डेटा साफ़ करें?"</string>
+    <string name="memory_clear_cache_message" msgid="4550262490807415948">"इससे सभी एप्लिकेशन का संग्रहित डेटा साफ़ हो जाएगा."</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"MTP या PTP प्रकार्य सक्रिय है"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"USB संग्रहण अनमाउंट करें?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"SD कार्ड को अनमाउंट करें?"</string>
@@ -932,8 +932,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"फ़ैक्टरी डेटा रीसेट"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"टेबलेट से सभी डेटा मिटाएं"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"फ़ोन से सभी डेटा मिटाएं"</string>
-    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"इससे आपके टेबलेट के "<b>"आंतरिक संग्रहण"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और एप्‍लिकेशन डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए एप्‍लिकेशन"</li></string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"इससे आपके फ़ोन के "<b>"आंतरिक संग्रहण"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और एप्‍लिकेशन डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए एप्‍लिकेशन"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"इससे आपके टेबलेट के "<b>"मोबाइल संग्रहण"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और एप्‍लिकेशन डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए एप्‍लिकेशन"</li></string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"इससे आपके फ़ोन के "<b>"मोबाइल संग्रहण"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और एप्‍लिकेशन डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए एप्‍लिकेशन"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"आप वर्तमान में निम्‍न खातों में प्रवेश हैं:\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"संगीत"</li>\n<li>"फ़ोटो"</li>\n<li>"अन्‍य उपयोगकर्ता डेटा"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"संगीत, चित्र और अन्‍य उपयोगकर्ता डेटा साफ़ करने के लिए "<b>" USB संग्रहण"</b>" मिटाना होगा."</string>
@@ -1148,7 +1148,7 @@
     <string name="disabled" msgid="9206776641295849915">"अक्षम किया गया"</string>
     <string name="not_installed" msgid="1475144352069281880">"इंस्‍टॉल नहीं है"</string>
     <string name="no_applications" msgid="7336588977497084921">"कोई एप्‍लिकेशन नहीं."</string>
-    <string name="internal_storage" msgid="1584700623164275282">"आंतरिक संग्रहण"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"मोबाइल संग्रहण"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB संग्रहण"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD कार्ड संग्रहण"</string>
     <string name="recompute_size" msgid="7722567982831691718">"आकार पुन: परिकलित कर रहा है…"</string>
@@ -1261,13 +1261,13 @@
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> के लिए सेटिंग खोलने में विफल रहा"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"माउस/ट्रैकपैड"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"सूचक गति"</string>
-    <string name="game_controller_settings_category" msgid="8794508575329923718">"गेम नियंत्रक"</string>
+    <string name="game_controller_settings_category" msgid="8794508575329923718">"गेमनियंत्रक"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"कंपनकर्ता का उपयोग करें"</string>
-    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"कनेक्ट होने पर कंपनकर्ता को गेम नियंत्रक पर रीडायरेक्ट करें."</string>
+    <string name="vibrate_input_devices_summary" msgid="4595570516865299153">"कनेक्ट होने पर कंपनकर्ता कोगेमनियंत्रक पर रीडायरेक्ट करें."</string>
     <string name="keyboard_layout_dialog_title" msgid="8030087214949381372">"कीबोर्ड लेआउट चुनें"</string>
     <string name="keyboard_layout_dialog_setup_button" msgid="8514583747236476384">"कीबोर्ड लेआउट सेट करें"</string>
     <string name="keyboard_layout_dialog_switch_hint" msgid="3889961090676293795">"स्‍विच करने हेतु, Control-Spacebar दबाएं"</string>
-    <string name="keyboard_layout_default_label" msgid="2952672513543482165">"डिफ़ॉल्ट"</string>
+    <string name="keyboard_layout_default_label" msgid="2952672513543482165">"सामान्य"</string>
     <string name="keyboard_layout_picker_title" msgid="556081931972771610">"कीबोर्ड लेआउट"</string>
     <string name="user_dict_settings_title" msgid="3427169369758733521">"व्यक्तिगत शब्दकोष"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
@@ -1406,7 +1406,7 @@
     <string name="captioning_typeface" msgid="1826169240566563259">"फ़ॉन्ट परिवार"</string>
     <string name="captioning_preview_text" msgid="4067935959797375065">"कैप्‍शन इस तरह दिखाई देंगे"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
-    <string name="locale_default" msgid="2593883646136326969">"डिफ़ॉल्ट"</string>
+    <string name="locale_default" msgid="2593883646136326969">"सामान्य"</string>
     <string name="color_none" msgid="3475640044925814795">"कोई नहीं"</string>
     <string name="color_white" msgid="8045195170201590239">"सफ़ेद"</string>
     <string name="color_gray" msgid="9192312087142726313">"धूसर"</string>
@@ -1665,7 +1665,7 @@
     <string name="wifi_setup_next" msgid="3388694784447820477">"अगला"</string>
     <string name="wifi_setup_back" msgid="144777383739164044">"वापस जाएं"</string>
     <string name="wifi_setup_detail" msgid="2336990478140503605">"नेटवर्क विवरण"</string>
-    <string name="wifi_setup_connect" msgid="7954456989590237049">"कनेक्‍ट करें"</string>
+    <string name="wifi_setup_connect" msgid="7954456989590237049">"जोड़ दें"</string>
     <string name="wifi_setup_forget" msgid="2562847595567347526">"भूलें"</string>
     <string name="wifi_setup_save" msgid="3659235094218508211">"सहेजें"</string>
     <string name="wifi_setup_cancel" msgid="3185216020264410239">"रद्द करें"</string>
@@ -1755,7 +1755,7 @@
     <string name="pointer_location" msgid="6084434787496938001">"सूचक स्थान"</string>
     <string name="pointer_location_summary" msgid="840819275172753713">"वर्तमान स्‍पर्श डेटा दिखाने वाला स्‍क्रीन ओवरले"</string>
     <string name="show_touches" msgid="1356420386500834339">"स्पर्श दिखाएं"</string>
-    <string name="show_touches_summary" msgid="6684407913145150041">"स्पर्श के लिए दृश्यमान फ़ीडबैक दिखाएं"</string>
+    <string name="show_touches_summary" msgid="6684407913145150041">"स्पर्श के लिए दिखाई देने वाले फ़ीडबैक दिखाएं"</string>
     <string name="show_screen_updates" msgid="5470814345876056420">"सतह अपडेट दिखाएं"</string>
     <string name="show_screen_updates_summary" msgid="2569622766672785529">"विंडो सतहें अपडेट होने पर उन सभी को फ़्लैश करें"</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"GPU दृश्‍य अपडेट दिखाएं"</string>
@@ -1881,7 +1881,7 @@
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(सर्वर से प्राप्त)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"रद्द करें"</string>
     <string name="vpn_save" msgid="4233484051644764510">"सहेजें"</string>
-    <string name="vpn_connect" msgid="8469608541746132301">"कनेक्ट करें"</string>
+    <string name="vpn_connect" msgid="8469608541746132301">"जोड़ दें"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"VPN प्रोफ़ाइल संपादित करें"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">" <xliff:g id="PROFILE">%s</xliff:g> से कनेक्ट करें"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
@@ -1961,8 +1961,8 @@
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"यह सेटिंग इस टेबलेट के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"यह सेटिंग इस फ़ोन के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"भाषा बदलें"</string>
-    <string name="global_font_change_title" msgid="1887126466191012035">"फ़ॉन्ट आकार बदलें"</string>
-    <string name="nfc_payment_settings_title" msgid="4226098386809754689">"टैप करें और भुगतान करें"</string>
+    <string name="global_font_change_title" msgid="1887126466191012035">"अक्षरों का आकार बदलें"</string>
+    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"भुगतान"</string>
     <string name="nfc_payment_ask" msgid="1061129391464251903">"हर बार पूछें"</string>
     <string name="nfc_payment_set_default" msgid="1583397933053078296">"आपकी प्राथमिकता के रूप में सेट करें?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"प्रतिबंध"</string>
