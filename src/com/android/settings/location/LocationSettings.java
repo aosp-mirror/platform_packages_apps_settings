@@ -55,7 +55,7 @@ public class LocationSettings extends LocationSettingsBase
     /** Key for preference category "Recent location requests" */
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
     /** Key for preference category "Location services" */
-    private static final String KEY_LOCATION_SERVICES = "location_services";
+    private static final String KEY_APP_SETTINGS = "app_settings";
 
     private Switch mSwitch;
     private boolean mValidListener;
@@ -165,10 +165,10 @@ public class LocationSettings extends LocationSettingsBase
             categoryRecentLocationRequests.addPreference(banner);
         }
 
-        PreferenceCategory categoryLocationServices =
-                (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
+        PreferenceCategory categoryAppSettings =
+                (PreferenceCategory) root.findPreference(KEY_APP_SETTINGS);
         final SettingsInjector injector = new SettingsInjector(activity);
-        List<Preference> locationServices = injector.getInjectedSettings();
+        List<Preference> appSettings = injector.getInjectedSettings();
 
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -182,11 +182,11 @@ public class LocationSettings extends LocationSettingsBase
         activity.registerReceiver(mReceiver,
                 new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED));
 
-        if (locationServices.size() > 0) {
-            addPreferencesSorted(locationServices, categoryLocationServices);
+        if (appSettings.size() > 0) {
+            addPreferencesSorted(appSettings, categoryAppSettings);
         } else {
             // If there's no item to display, remove the whole category.
-            root.removePreference(categoryLocationServices);
+            root.removePreference(categoryAppSettings);
         }
 
         // Only show the master switch when we're not in multi-pane mode, and not being used as
