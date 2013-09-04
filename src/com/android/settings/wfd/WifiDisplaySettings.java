@@ -33,6 +33,7 @@ import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
+import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -94,6 +95,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
     private PreferenceGroup mCertCategory;
     private boolean mListen;
     private boolean mAutoGO;
+    private int mWpsConfig = WpsInfo.INVALID;
     private int mListenChannel;
     private int mOperatingChannel;
 
@@ -160,6 +162,8 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
                 Settings.Global.WIFI_DISPLAY_ON), false, mSettingsObserver);
         getContentResolver().registerContentObserver(Settings.Global.getUriFor(
                 Settings.Global.WIFI_DISPLAY_CERTIFICATION_ON), false, mSettingsObserver);
+        getContentResolver().registerContentObserver(Settings.Global.getUriFor(
+            Settings.Global.WIFI_DISPLAY_WPS_CONFIG), false, mSettingsObserver);
 
         mDisplayManager.scanWifiDisplays();
 
@@ -222,6 +226,8 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
                 Settings.Global.WIFI_DISPLAY_ON, 0) != 0;
         mWifiDisplayCertificationOn = Settings.Global.getInt(getContentResolver(),
                 Settings.Global.WIFI_DISPLAY_CERTIFICATION_ON, 0) != 0;
+        mWpsConfig = Settings.Global.getInt(getContentResolver(),
+            Settings.Global.WIFI_DISPLAY_WPS_CONFIG, WpsInfo.INVALID);
         mWifiDisplayStatus = mDisplayManager.getWifiDisplayStatus();
 
         applyState();
@@ -367,8 +373,37 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
         cbp.setChecked(mAutoGO);
         mCertCategory.addPreference(cbp);
 
-        // Drop down list for choosing listen channel
+        // Drop down list for choosing WPS method (PBC/KEYPAD/DISPLAY)
         ListPreference lp = new ListPreference(getActivity()) {
+            @Override
+            protected void onDialogClosed(boolean positiveResult) {
+                super.onDialogClosed(positiveResult);
+                if (positiveResult) {
+                    mWpsConfig = Integer.parseInt(getValue());
+                    setSummary("%1$s");
+                    getActivity().invalidateOptionsMenu();
+                    Settings.Global.putInt(getActivity().getContentResolver(),
+                            Settings.Global.WIFI_DISPLAY_WPS_CONFIG, mWpsConfig);
+                }
+            }
+        };
+        mWpsConfig = Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.WIFI_DISPLAY_WPS_CONFIG, WpsInfo.INVALID);
+        String[] wpsEntries = { "Default", "PBC", "KEYPAD", "DISPLAY" };
+        String[] wpsValues = {
+            "" + WpsInfo.INVALID,
+            "" + WpsInfo.PBC,
+            "" + WpsInfo.KEYPAD,
+            "" + WpsInfo.DISPLAY };
+        lp.setTitle(R.string.wifi_display_wps_config);
+        lp.setEntries(wpsEntries);
+        lp.setEntryValues(wpsValues);
+        lp.setValue("" + mWpsConfig);
+        lp.setSummary("%1$s");
+        mCertCategory.addPreference(lp);
+
+        // Drop down list for choosing listen channel
+        lp = new ListPreference(getActivity()) {
             @Override
             protected void onDialogClosed(boolean positiveResult) {
                 super.onDialogClosed(positiveResult);
