@@ -560,7 +560,7 @@ public class BatteryStatsHelper {
                     osApp = app;
                 }
             }
-            if (power != 0) {
+            if (power != 0 || includeZeroConsumption) {
                 if (u.getUid() == Process.WIFI_UID) {
                     mWifiPower += power;
                 } else if (u.getUid() == Process.BLUETOOTH_UID) {
@@ -725,7 +725,8 @@ public class BatteryStatsHelper {
                 name = mActivity.getResources().getString(
                         R.string.running_process_item_removed_user_label);
             }
-            double power = mUserPower.get(userId);
+            Double userPower = mUserPower.get(userId);
+            double power = (userPower != null) ? userPower : 0.0;
             BatterySipper bs = addEntry(name, DrainType.USER, 0, 0, power);
             bs.icon = icon;
             aggregateSippers(bs, sippers, "User");
