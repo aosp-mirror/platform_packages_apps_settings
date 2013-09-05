@@ -380,7 +380,7 @@ public class TrustedCredentialsSettings extends Fragment {
         removeButton.setText(certHolder.mTab.getButtonLabel(certHolder));
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                if (mUserManager.hasRestrictionsPin() && !mChallengeSucceeded) {
+                if (mUserManager.hasRestrictionsChallenge() && !mChallengeSucceeded) {
                     ensurePin();
                     return;
                 }
@@ -426,9 +426,9 @@ public class TrustedCredentialsSettings extends Fragment {
         if (!mChallengeSucceeded) {
             final UserManager um = UserManager.get(getActivity());
             if (!mChallengeRequested) {
-                if (um.hasRestrictionsPin()) {
+                if (um.hasRestrictionsChallenge()) {
                     Intent requestPin =
-                            new Intent(Intent.ACTION_RESTRICTIONS_PIN_CHALLENGE);
+                            new Intent(Intent.ACTION_RESTRICTIONS_CHALLENGE);
                     startActivityForResult(requestPin, REQUEST_PIN_CHALLENGE);
                     mChallengeRequested = true;
                 }
