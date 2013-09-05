@@ -27,13 +27,19 @@ import android.widget.TextView;
 import com.android.settings.R;
 
 public class ProcessStatsPreference extends Preference {
+    private final ProcStatsEntry mEntry;
     private int mProgress;
     private CharSequence mProgressText;
 
-    public ProcessStatsPreference(Context context, Drawable icon) {
+    public ProcessStatsPreference(Context context, Drawable icon, ProcStatsEntry entry) {
         super(context);
+        mEntry = entry;
         setLayoutResource(R.layout.app_percentage_item);
         setIcon(icon != null ? icon : new ColorDrawable(0));
+    }
+
+    public ProcStatsEntry getEntry() {
+        return mEntry;
     }
 
     public void setPercent(double percentOfWeight, double percentOfTime) {

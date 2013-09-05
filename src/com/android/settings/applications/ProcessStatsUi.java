@@ -17,8 +17,6 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -28,10 +26,10 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TimeUtils;
@@ -83,6 +81,7 @@ public class ProcessStatsUi extends PreferenceFragment {
     private PreferenceGroup mAppListGroup;
     private Preference mMemStatusPref;
 
+    long mMaxWeight;
     long mTotalTime;
 
     @Override
@@ -127,11 +126,13 @@ public class ProcessStatsUi extends PreferenceFragment {
             return false;
         }
 
-        /*
-        PreferenceActivity pa = (PreferenceActivity)getActivity();
-        pa.startPreferencePanel(PowerUsageDetail.class.getName(), args,
-                R.string.details_title, null, null, 0);
-        */
+        ProcessStatsPreference pgp = (ProcessStatsPreference) preference;
+        Bundle args = new Bundle();
+        args.putParcelable(ProcessStatsDetail.EXTRA_ENTRY, pgp.getEntry());
+        args.putLong(ProcessStatsDetail.EXTRA_MAX_WEIGHT, mMaxWeight);
+        args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, mTotalTime);
+        ((PreferenceActivity) getActivity()).startPreferencePanel(
+                ProcessStatsDetail.class.getName(), args, R.string.details_title, null, null, 0);
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -263,108 +264,19 @@ public class ProcessStatsUi extends PreferenceFragment {
                 maxWeight = proc.mWeight;
             }
         }
+        mMaxWeight = maxWeight;
 
         for (int i=0, N=(procs != null ? procs.size() : 0); i<N; i++) {
             ProcStatsEntry proc = procs.get(i);
             final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
             final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
             if (percentOfWeight < 1) continue;
-            ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null);
-            ApplicationInfo targetApp = null;
-            String label = proc.mName;
-            String pkgName = null;
-            if (proc.mUnique) {
-                pkgName = proc.mPackage;
-                proc.addServices(mStats.getPackageStateLocked(proc.mPackage, proc.mUid));
-            } else {
-                // See if there is one significant package that was running here.
-                ArrayList<ProcStatsEntry> subProcs = new ArrayList<ProcStatsEntry>();
-                for (int ipkg=0, NPKG=mStats.mPackages.getMap().size(); ipkg<NPKG; ipkg++) {
-                    SparseArray<ProcessStats.PackageState> uids
-                            = mStats.mPackages.getMap().valueAt(ipkg);
-                    for (int iu=0, NU=uids.size(); iu<NU; iu++) {
-                        if (uids.keyAt(iu) != proc.mUid) {
-                            continue;
-                        }
-                        ProcessStats.PackageState pkgState = uids.valueAt(iu);
-                        boolean match = false;
-                        for (int iproc=0, NPROC=pkgState.mProcesses.size(); iproc<NPROC; iproc++) {
-                            ProcessStats.ProcessState subProc =
-                                    pkgState.mProcesses.valueAt(iproc);
-                            if (subProc.mName.equals(proc.mName)) {
-                                match = true;
-                                subProcs.add(new ProcStatsEntry(subProc, totals));
-                            }
-                        }
-                        if (match) {
-                            proc.addServices(mStats.getPackageStateLocked(proc.mPackage,
-                                    proc.mUid));
-                        }
-                    }
-                }
-                if ( subProcs.size() > 1) {
-                    Collections.sort(subProcs, sEntryCompare);
-                    if (subProcs.get(0).mWeight > (subProcs.get(1).mWeight*3)) {
-                        pkgName = subProcs.get(0).mPackage;
-                    }
-                }
-            }
-            if (pkgName != null) {
-                // Only one app associated with this process.
-                try {
-                    targetApp = pm.getApplicationInfo(pkgName,
-                            PackageManager.GET_DISABLED_COMPONENTS |
-                            PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                            PackageManager.GET_UNINSTALLED_PACKAGES);
-                    String name = targetApp.loadLabel(pm).toString();
-                    if (proc.mName.equals(pkgName)) {
-                        label = name;
-                    } else {
-                        if (proc.mName.startsWith(pkgName)) {
-                            int off = pkgName.length();
-                            if (proc.mName.length() > off) {
-                                off++;
-                            }
-                            label = name + " (" + proc.mName.substring(off) + ")";
-                        } else {
-                            label = name + " (" + proc.mName + ")";
-                        }
-                    }
-                } catch (PackageManager.NameNotFoundException e) {
-                }
-            }
-            if (targetApp == null) {
-                String[] packages = pm.getPackagesForUid(proc.mUid);
-                if (packages != null) {
-                    for (String curPkg : packages) {
-                        try {
-                            final PackageInfo pi = pm.getPackageInfo(curPkg,
-                                    PackageManager.GET_DISABLED_COMPONENTS |
-                                    PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                                    PackageManager.GET_UNINSTALLED_PACKAGES);
-                            if (pi.sharedUserLabel != 0) {
-                                targetApp = pi.applicationInfo;
-                                final CharSequence nm = pm.getText(curPkg,
-                                        pi.sharedUserLabel, pi.applicationInfo);
-                                if (nm != null) {
-                                    label = nm.toString() + " (" + proc.mName + ")";
-                                } else {
-                                    label = targetApp.loadLabel(pm).toString() + " ("
-                                            + proc.mName + ")";
-                                }
-                                break;
-                            }
-                        } catch (PackageManager.NameNotFoundException e) {
-                        }
-                    }
-                } else {
-                    // no current packages for this uid, typically because of uninstall
-                    Log.i(TAG, "No package for uid " + proc.mUid);
-                }
-            }
-            pref.setTitle(label);
-            if (targetApp != null) {
-                pref.setIcon(targetApp.loadIcon(pm));
+            ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null, proc);
+            proc.evaluateTargetPackage(mStats, totals, sEntryCompare);
+            proc.retrieveUiData(pm);
+            pref.setTitle(proc.mUiLabel);
+            if (proc.mUiTargetApp != null) {
+                pref.setIcon(proc.mUiTargetApp.loadIcon(pm));
             }
             pref.setOrder(i);
             pref.setPercent(percentOfWeight, percentOfTime);
