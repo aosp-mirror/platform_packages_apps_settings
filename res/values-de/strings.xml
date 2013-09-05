@@ -114,7 +114,7 @@
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Sichtbar für alle Bluetooth-Geräte in der Nähe"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nicht sichtbar für andere Bluetooth-Geräte"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Nur sichtbar für Partnergeräte"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Timeout für Sichtbarkeit"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Sichtbarkeit einstellen"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sprachwahl sperren"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Verwendung des Bluetooth-Dialers bei gesperrtem Bildschirm verhindern"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-Geräte"</string>
@@ -138,7 +138,7 @@
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Verbindung wird getrennt..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"Verbindung wird hergestellt..."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_pairing" msgid="1426882272690346242">"Pairing…"</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"Kopplung läuft…"</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Unbenanntes Bluetooth-Gerät"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Suche läuft"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Kein Bluetooth-Gerät in der Nähe gefunden"</string>
@@ -537,6 +537,8 @@
     <string name="wifi_display_autonomous_go" msgid="140864379216673466">"Autonomen GO aktivieren"</string>
     <string name="wifi_display_pause" msgid="6037110530682927245">"Pausieren"</string>
     <string name="wifi_display_resume" msgid="8195590160258469425">"Fortsetzen"</string>
+    <!-- no translation found for wifi_display_wps_config (7566565571340705772) -->
+    <skip />
     <string name="wifi_display_listen_channel" msgid="4146320990898147857">"Empfangskanal"</string>
     <string name="wifi_display_operating_channel" msgid="233535284689144515">"Übertragungskanal"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
@@ -567,7 +569,7 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Schlechte Internetverbindungen vermeiden"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"WLAN nur bei guter Internetverbindung verwenden"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Erkennungsfunktion immer verfügbar"</string>
-    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Der Standortdienst von Google und andere Apps sollen auch bei deaktiviertem WLAN nach Netzwerken suchen."</string>
+    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"Der Standortdienst von Google und andere Apps sollen auch bei deaktiviertem WLAN nach Netzwerken suchen"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Zertifikate installieren"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Zur Erhöhung der Standortgenauigkeit und aus anderen Gründen können Google und andere Apps auch bei deaktiviertem WLAN nach Netzwerken in der Nähe suchen. Wenn Sie das nicht möchten, können Sie dies unter \"Erweitert\" &gt; \"Scannen immer verfügbar\" ändern."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apps können auch bei deaktiviertem WLAN nach Netzwerken in der Nähe suchen. Wenn Sie das nicht möchten, können Sie dies unter \"Erweitert\" &gt; \"Scannen immer verfügbar\" ändern."</string>
@@ -676,7 +678,7 @@
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"Nach Geräten suchen"</string>
     <string name="wifi_p2p_menu_searching" msgid="2396704492143633876">"Suche läuft…"</string>
     <string name="wifi_p2p_menu_rename" msgid="8448896306960060415">"Gerät umbenennen"</string>
-    <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Peer-Geräte"</string>
+    <string name="wifi_p2p_peer_devices" msgid="299526878463303432">"Verfügbare Geräte"</string>
     <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"Gespeicherte Gruppen"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"Verbindung nicht möglich"</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"Gerät konnte nicht umbenannt werden."</string>
@@ -746,7 +748,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Suche"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Sucheinstellungen und Suchverlauf verwalten"</string>
     <string name="display_settings" msgid="7965901687241669598">"Display"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Display autom. drehen"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Display automatisch drehen"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Ausrichtung beim Drehen des Tablets automatisch ändern"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Ausrichtung beim Drehen des Telefons automatisch ändern"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Ausrichtung beim Drehen des Tablets automatisch ändern"</string>
@@ -1006,7 +1008,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Standort aus"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Letzte Standortanfragen"</string>
     <string name="location_no_recent_apps" msgid="7156440988150119767">"In den letzten 15 Minuten wurde der Standort von keiner App abgerufen."</string>
-    <string name="location_category_location_services" msgid="7437150886946685979">"Standortdienste"</string>
+    <string name="location_category_app_settings" msgid="46434611182743486">"App-Einstellungen"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Hoher Akkuverbrauch"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Geringer Akkuverbrauch"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Standortmodus"</string>
@@ -1135,7 +1137,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Prozesse im Cache anzeigen"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"App-Einstell. zurücksetzen"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"App-Einstellungen zurücksetzen?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Dadurch werden alle Einstellungen zurückgesetzt für:\n\n "<li>"Deaktivierte Apps"</li>\n" "<li>"Deaktivierte App-Benachrichtigungen"</li>\n" "<li>"Standard-Apps für Aktionen"</li>\n" "<li>"Einschränkungen der Hintergrunddaten für Apps"</li>\n" "<li>"Jegliche Zugriffsbeschränkungen"</li>\n\n" Alle App-Daten bleiben erhalten."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Dies wird die folgenden Einstellungen zurücksetzen:\n\n "<li>"Deaktivierte Apps"</li>\n" "<li>"Deaktivierte App-Benachrichtigungen"</li>\n" "<li>"Standard-Apps für bestimmte Aktionen"</li>\n" "<li>"Einschränkungen der Hintergrunddaten für Apps"</li>\n" "<li>"Jegliche Zugriffsbeschränkungen"</li>\n\n" Alle App-Daten bleiben erhalten."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Apps zurücksetzen"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Speicherplatz verwalten"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1430,8 +1432,8 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Es wurde keine Beschreibung bereitgestellt."</string>
     <string name="settings_button" msgid="3006713718908152930">"Einstellungen"</string>
     <string name="print_settings" msgid="4742428530112487843">"Drucken"</string>
-    <string name="print_settings_title" msgid="4911263339115736689">"Druckeinstellungen"</string>
-    <string name="print_services_title" msgid="1088097751249445946">"Dienste"</string>
+    <!-- no translation found for print_settings_title (3685449667822217816) -->
+    <skip />
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g> verwenden?"</string>
     <string name="print_service_security_warning_summary" msgid="919299459931111450">"<xliff:g id="PRINT_SERVICE_NAME">%1$s</xliff:g> kann Ihre Druckdokumente empfangen. Diese Dokumente können vertrauliche Daten enthalten."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Keine Dienste installiert"</string>
@@ -1439,6 +1441,14 @@
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Drucker hinzufügen"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"An"</string>
     <string name="print_feature_state_off" msgid="7294876968403966040">"Aus"</string>
+    <!-- no translation found for print_menu_item_download_print_service (455940343930159137) -->
+    <skip />
+    <!-- no translation found for print_menu_item_add_printer (8251218970577291032) -->
+    <skip />
+    <!-- no translation found for print_menu_item_uninstall (7174810272766544109) -->
+    <skip />
+    <!-- no translation found for category_printers (4345417708283144981) -->
+    <skip />
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akku"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Was zum Akkuverbrauch beiträgt"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Keine Daten zum Akkuverbrauch"</string>
@@ -1520,6 +1530,12 @@
     <string name="app_memory_use" msgid="7849258480392171939">"Speichernutzung"</string>
     <string name="process_stats_total_duration" msgid="663196332079061529">"Statistiken für <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Der aktuelle Speicherstand des Geräts ist <xliff:g id="MEMSTATE">%1$s</xliff:g>."</string>
+    <!-- no translation found for process_stats_ram_use (1271366870003042708) -->
+    <skip />
+    <!-- no translation found for process_stats_run_time (6520628955709369115) -->
+    <skip />
+    <!-- no translation found for services_subtitle (4296402367067266425) -->
+    <skip />
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Spracheingabe&amp;-ausgabe"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Einstellungen für Spracheingabe &amp; -ausgabe"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Sprachsuche"</string>
@@ -1600,7 +1616,7 @@
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Zertifikate von SD-Karte installieren"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Anmeldedaten löschen"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Alle Zertifikate entfernen"</string>
-    <string name="trusted_credentials" msgid="4266945289534242402">"Vertrauensw. Anmeldedaten"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"Vertrauenswürdige Anmeldedaten"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vertrauenswürdige CA-Zertifikate ansehen"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Speichertyp"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardware-gestützt"</string>
@@ -1974,7 +1990,7 @@
     <string name="user_account_title" msgid="1127193807312271167">"Konto für Inhalte"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Foto-ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Cell Broadcasts"</string>
-    <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Wählen Sie aus, welche Notfallbenachrichtigungen angezeigt werden sollen."</string>
+    <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Wählen Sie aus, welche Notfallbenachrichtigungen angezeigt werden sollen"</string>
     <string name="user_restrictions_title" msgid="7745810037152772035">"Beschränkungen für Apps und Inhalte"</string>
     <string name="user_rename" msgid="8523499513614655279">"Umbenennen"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"App-Beschränkungen festlegen"</string>
