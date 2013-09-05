@@ -104,7 +104,7 @@ public class StreamVolumePreference extends Preference implements
 
     public void setStreamItem(ProfileConfig.StreamItem streamItem) {
         mStreamItem = streamItem;
-
+        
         if (mCheckBox != null) {
             mCheckBox.setChecked(mStreamItem.mSettings.isOverride());
         }

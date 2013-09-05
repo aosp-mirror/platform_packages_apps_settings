@@ -156,11 +156,12 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
         getActivity().registerReceiver(mReceiver, mFilter);
 
         // If running on a phone, remove padding around tabs
-        /*if (!Utils.isScreenLarge()) {
+        if (!Utils.isTablet(getActivity())) {
             mContainer.setPadding(0, 0, 0, 0);
-        }*/
+        }
     }
 
+    
     @Override
     public void onPause() {
         super.onPause();
@@ -183,17 +184,20 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
         menu.add(0, MENU_RESET, 0, R.string.profile_reset_title)
                 .setIcon(R.drawable.ic_settings_backup) // use the backup icon
                 .setAlphabeticShortcut('r')
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(0, MENU_ADD_PROFILE, 0, R.string.profiles_add)
                 .setIcon(R.drawable.ic_menu_add_dark)
                 .setAlphabeticShortcut('a')
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(0, MENU_ADD_APPGROUP, 0, R.string.profiles_add)
                 .setIcon(R.drawable.ic_menu_add_dark)
                 .setAlphabeticShortcut('a')
-            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         updateOptionsMenu();
     }
