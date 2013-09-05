@@ -50,6 +50,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -284,10 +287,20 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             menu.removeItem(R.id.print_menu_item_settings);
         }
 
-        MenuItem uninstall = menu.findItem(R.id.print_menu_item_uninstall);
-        Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE,
-                Uri.parse("package:" + mComponentName.getPackageName()));
-        uninstall.setIntent(uninstallIntent);
+        MenuItem searchItem = menu.findItem(R.id.print_menu_item_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String searchString) {
+                ((Filterable) getListView().getAdapter()).getFilter().filter(searchString);
+                return true;
+            }
+        });
     }
 
     private ToggleSwitch createAndAddActionBarToggleSwitch(Activity activity) {
@@ -325,21 +338,74 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     private final class PrintersAdapter extends BaseAdapter
-            implements LoaderManager.LoaderCallbacks<List<PrinterInfo>>{
+            implements LoaderManager.LoaderCallbacks<List<PrinterInfo>>, Filterable {
+        private final Object mLock = new Object();
+
         private final List<PrinterInfo> mPrinters = new ArrayList<PrinterInfo>();
+
+        private final List<PrinterInfo> mFilteredPrinters = new ArrayList<PrinterInfo>();
+
+        private CharSequence mLastSearchString;
 
         public PrintersAdapter() {
             getLoaderManager().initLoader(LOADER_ID_PRINTERS_LOADER, null, this);
         }
 
         @Override
+        public Filter getFilter() {
+            return new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence constraint) {
+                    synchronized (mLock) {
+                        if (TextUtils.isEmpty(constraint)) {
+                            return null;
+                        }
+                        FilterResults results = new FilterResults();
+                        List<PrinterInfo> filteredPrinters = new ArrayList<PrinterInfo>();
+                        String constraintLowerCase = constraint.toString().toLowerCase();
+                        final int printerCount = mPrinters.size();
+                        for (int i = 0; i < printerCount; i++) {
+                            PrinterInfo printer = mPrinters.get(i);
+                            if (printer.getName().toLowerCase().contains(constraintLowerCase)) {
+                                filteredPrinters.add(printer);
+                            }
+                        }
+                        results.values = filteredPrinters;
+                        results.count = filteredPrinters.size();
+                        return results;
+                    }
+                }
+
+                @Override
+                @SuppressWarnings("unchecked")
+                protected void publishResults(CharSequence constraint, FilterResults results) {
+                    synchronized (mLock) {
+                        mLastSearchString = constraint;
+                        mFilteredPrinters.clear();
+                        if (results == null) {
+                            mFilteredPrinters.addAll(mPrinters);
+                        } else {
+                            List<PrinterInfo> printers = (List<PrinterInfo>) results.values;
+                            mFilteredPrinters.addAll(printers);
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+            };
+        }
+
+        @Override
         public int getCount() {
-            return mPrinters.size();
+            synchronized (mLock) {
+                return mFilteredPrinters.size();
+            }
         }
 
         @Override
         public Object getItem(int position) {
-            return mPrinters.get(position);
+            synchronized (mLock) {
+                return mFilteredPrinters.get(position);
+            }
         }
 
         @Override
@@ -391,12 +457,19 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         @Override
         public void onLoadFinished(Loader<List<PrinterInfo>> loader,
                 List<PrinterInfo> printers) {
-            mPrinters.clear();
-            final int printerCount = printers.size();
-            for (int i = 0; i < printerCount; i++) {
-                PrinterInfo printer = printers.get(i);
-                if (printer.getId().getServiceName().equals(mComponentName)) {
-                    mPrinters.add(printer);
+            synchronized (mLock) {
+                mPrinters.clear();
+                final int printerCount = printers.size();
+                for (int i = 0; i < printerCount; i++) {
+                    PrinterInfo printer = printers.get(i);
+                    if (printer.getId().getServiceName().equals(mComponentName)) {
+                        mPrinters.add(printer);
+                    }
+                }
+                mFilteredPrinters.clear();
+                mFilteredPrinters.addAll(mPrinters);
+                if (!TextUtils.isEmpty(mLastSearchString)) {
+                    getFilter().filter(mLastSearchString);
                 }
             }
             notifyDataSetChanged();
@@ -404,7 +477,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         @Override
         public void onLoaderReset(Loader<List<PrinterInfo>> loader) {
-            mPrinters.clear();
+            synchronized (mLock) {
+                mPrinters.clear();
+                mFilteredPrinters.clear();
+            }
             notifyDataSetInvalidated();
         }
     }

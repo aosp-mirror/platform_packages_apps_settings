@@ -111,7 +111,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.print_settings, menu);
-        MenuItem menuItem = menu.findItem(R.id.print_menu_item_download_print_service);
+        MenuItem menuItem = menu.findItem(R.id.print_menu_item_add_service);
         menuItem.setIntent(new Intent(Intent.ACTION_VIEW,
                 Uri.parse(getString(R.string.download_print_service_query))));
     }

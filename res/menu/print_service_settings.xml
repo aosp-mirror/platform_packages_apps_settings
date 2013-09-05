@@ -16,6 +16,14 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/print_menu_item_search"
+        android:title="@string/print_menu_item_search"
+        android:icon="@*android:drawable/ic_menu_search_holo_dark"
+        android:actionViewClass="android.widget.SearchView"
+        android:showAsAction="ifRoom"
+        android:imeOptions="actionSearch">
+    </item>
+    <item
         android:id="@+id/print_menu_item_add_printer"
         android:title="@string/print_menu_item_add_printer"
         android:showAsAction="ifRoom">
@@ -24,10 +32,5 @@
         android:id="@+id/print_menu_item_settings"
         android:title="@string/print_menu_item_settings"
         android:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/print_menu_item_uninstall"
-        android:title="@string/print_menu_item_uninstall"
-        android:showAsAction="never">
     </item>
 </menu>
