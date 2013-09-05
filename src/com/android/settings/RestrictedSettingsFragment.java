@@ -173,7 +173,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
         if (!mChallengeSucceeded) {
             final UserManager um = UserManager.get(getActivity());
             if (!mChallengeRequested) {
-                if (um.hasRestrictionsPin()) {
+                if (um.hasRestrictionsChallenge()) {
                     mResumeActionBundle = new Bundle();
                     if (preference != null) {
                         mResumeActionBundle.putString(EXTRA_PREFERENCE, preference.getKey());
@@ -182,7 +182,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
                                     ((CheckBoxPreference)preference).isChecked());
                         }
                     }
-                    Intent requestPin = new Intent(Intent.ACTION_RESTRICTIONS_PIN_CHALLENGE);
+                    Intent requestPin = new Intent(Intent.ACTION_RESTRICTIONS_CHALLENGE);
                     startActivityForResult(requestPin, REQUEST_PIN_CHALLENGE);
                     mChallengeRequested = true;
                 }
@@ -200,7 +200,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
             return false;
         }
         return mUserManager.hasUserRestriction(mRestrictionKey)
-                && !mUserManager.hasRestrictionsPin();
+                && !mUserManager.hasRestrictionsChallenge();
     }
 
     /**
@@ -230,7 +230,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
        }
        boolean restricted = RESTRICTIONS_PIN_SET.equals(restrictionKey)
                || mUserManager.hasUserRestriction(restrictionKey);
-       return restricted && mUserManager.hasRestrictionsPin();
+       return restricted && mUserManager.hasRestrictionsChallenge();
    }
 
    /**
