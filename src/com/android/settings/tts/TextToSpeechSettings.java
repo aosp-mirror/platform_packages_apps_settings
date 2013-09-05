@@ -288,7 +288,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         if (defaultAvailable == TextToSpeech.LANG_NOT_SUPPORTED ||
                 defaultAvailable == TextToSpeech.LANG_MISSING_DATA ||
-                mAvailableStrLocals != null && notInAvailableLangauges) {
+                mAvailableStrLocals == null || notInAvailableLangauges) {
             if (DBG) Log.d(TAG, "Default locale for this TTS engine is not supported.");
             updateEngineStatus(R.string.tts_status_not_supported);
             updateWidgetState(false);
