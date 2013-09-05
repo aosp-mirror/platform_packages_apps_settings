@@ -19,6 +19,7 @@ package com.android.settings;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -48,6 +49,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.Switch;
@@ -745,17 +747,21 @@ public class Settings extends PreferenceActivity
         static final int HEADER_TYPE_CATEGORY = 0;
         static final int HEADER_TYPE_NORMAL = 1;
         static final int HEADER_TYPE_SWITCH = 2;
-        private static final int HEADER_TYPE_COUNT = HEADER_TYPE_SWITCH + 1;
+        static final int HEADER_TYPE_BUTTON = 3;
+        private static final int HEADER_TYPE_COUNT = HEADER_TYPE_BUTTON + 1;
 
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
         private AuthenticatorHelper mAuthHelper;
+        private DevicePolicyManager mDevicePolicyManager;
 
         private static class HeaderViewHolder {
             ImageView icon;
             TextView title;
             TextView summary;
             Switch switch_;
+            ImageButton button_;
+            View divider_;
         }
 
         private LayoutInflater mInflater;
@@ -765,6 +771,8 @@ public class Settings extends PreferenceActivity
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings) {
                 return HEADER_TYPE_SWITCH;
+            } else if (header.id == R.id.security_settings) {
+                return HEADER_TYPE_BUTTON;
             } else {
                 return HEADER_TYPE_NORMAL;
             }
@@ -797,7 +805,7 @@ public class Settings extends PreferenceActivity
         }
 
         public HeaderAdapter(Context context, List<Header> objects,
-                AuthenticatorHelper authenticatorHelper) {
+                AuthenticatorHelper authenticatorHelper, DevicePolicyManager dpm) {
             super(context, 0, objects);
 
             mAuthHelper = authenticatorHelper;
@@ -807,6 +815,7 @@ public class Settings extends PreferenceActivity
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
+            mDevicePolicyManager = dpm;
         }
 
         @Override
@@ -834,6 +843,18 @@ public class Settings extends PreferenceActivity
                         holder.summary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
                         holder.switch_ = (Switch) view.findViewById(R.id.switchWidget);
+                        break;
+
+                    case HEADER_TYPE_BUTTON:
+                        view = mInflater.inflate(R.layout.preference_header_button_item, parent,
+                                false);
+                        holder.icon = (ImageView) view.findViewById(R.id.icon);
+                        holder.title = (TextView)
+                                view.findViewById(com.android.internal.R.id.title);
+                        holder.summary = (TextView)
+                                view.findViewById(com.android.internal.R.id.summary);
+                        holder.button_ = (ImageButton) view.findViewById(R.id.buttonWidget);
+                        holder.divider_ = view.findViewById(R.id.divider);
                         break;
 
                     case HEADER_TYPE_NORMAL:
@@ -866,37 +887,70 @@ public class Settings extends PreferenceActivity
                     } else {
                         mBluetoothEnabler.setSwitch(holder.switch_);
                     }
-                    // No break, fall through on purpose to update common fields
+                    updateCommonHeaderView(header, holder);
+                    break;
 
-                    //$FALL-THROUGH$
+                case HEADER_TYPE_BUTTON:
+                    if (header.id == R.id.security_settings) {
+                        boolean hasCert = DevicePolicyManager.hasAnyCaCertsInstalled();
+                        if (hasCert) {
+                            holder.button_.setVisibility(View.VISIBLE);
+                            holder.divider_.setVisibility(View.VISIBLE);
+                            boolean isManaged = mDevicePolicyManager.getDeviceOwner() != null;
+                            if (isManaged) {
+                                holder.button_.setImageResource(R.drawable.ic_qs_certificate_info);
+                            } else {
+                                holder.button_.setImageResource(
+                                        android.R.drawable.stat_notify_error);
+                            }
+                            holder.button_.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(
+                                            android.provider.Settings.ACTION_MONITORING_CERT_INFO);
+                                    getContext().startActivity(intent);
+                                }
+                            });
+                        } else {
+                            holder.button_.setVisibility(View.GONE);
+                            holder.divider_.setVisibility(View.GONE);
+                        }
+                    }
+                    updateCommonHeaderView(header, holder);
+                    break;
+
                 case HEADER_TYPE_NORMAL:
-                    if (header.extras != null &&
-                            header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
-                        String accType = header.extras.getString(
-                                ManageAccountsSettings.KEY_ACCOUNT_TYPE);
-                        Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
-                        setHeaderIcon(holder, icon);
-                    } else if (header.extras != null &&
-                            header.extras.containsKey(HomeSettings.CURRENT_HOME)) {
-                        ActivityInfo ai = header.extras.getParcelable(HomeSettings.CURRENT_HOME);
-                        Drawable icon = ai.loadIcon(getContext().getPackageManager());
-                        setHeaderIcon(holder, icon);
-                    } else {
-                        holder.icon.setImageResource(header.iconRes);
-                    }
-                    holder.title.setText(header.getTitle(getContext().getResources()));
-                    CharSequence summary = header.getSummary(getContext().getResources());
-                    if (!TextUtils.isEmpty(summary)) {
-                        holder.summary.setVisibility(View.VISIBLE);
-                        holder.summary.setText(summary);
-                    } else {
-                        holder.summary.setVisibility(View.GONE);
-                    }
+                    updateCommonHeaderView(header, holder);
                     break;
             }
 
             return view;
         }
+
+        private void updateCommonHeaderView(Header header, HeaderViewHolder holder) {
+                if (header.extras != null
+                        && header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
+                    String accType = header.extras.getString(
+                            ManageAccountsSettings.KEY_ACCOUNT_TYPE);
+                    Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
+                    setHeaderIcon(holder, icon);
+                } else if (header.extras != null &&
+                        header.extras.containsKey(HomeSettings.CURRENT_HOME)) {
+                    ActivityInfo ai = header.extras.getParcelable(HomeSettings.CURRENT_HOME);
+                    Drawable icon = ai.loadIcon(getContext().getPackageManager());
+                    setHeaderIcon(holder, icon);
+                } else {
+                    holder.icon.setImageResource(header.iconRes);
+                }
+                holder.title.setText(header.getTitle(getContext().getResources()));
+                CharSequence summary = header.getSummary(getContext().getResources());
+                if (!TextUtils.isEmpty(summary)) {
+                    holder.summary.setVisibility(View.VISIBLE);
+                    holder.summary.setText(summary);
+                } else {
+                    holder.summary.setVisibility(View.GONE);
+                }
+            }
 
         private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
             ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
@@ -963,7 +1017,9 @@ public class Settings extends PreferenceActivity
         if (adapter == null) {
             super.setListAdapter(null);
         } else {
-            super.setListAdapter(new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper));
+            DevicePolicyManager dpm =
+                    (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+            super.setListAdapter(new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper, dpm));
         }
     }
 
