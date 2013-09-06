@@ -18,6 +18,7 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -138,8 +139,8 @@ class SettingsInjector {
     }
 
     /**
-     * Parses {@link InjectedSetting} from the attributes of the
-     * {@link SettingInjectorService#META_DATA_NAME} tag.
+     * Returns the settings parsed from the attributes of the
+     * {@link SettingInjectorService#META_DATA_NAME} tag, or null.
      *
      * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
      */
@@ -147,6 +148,15 @@ class SettingsInjector {
             throws XmlPullParserException, IOException {
 
         ServiceInfo si = service.serviceInfo;
+        ApplicationInfo ai = si.applicationInfo;
+
+        if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+            if (Log.isLoggable(TAG, Log.WARN)) {
+                Log.w(TAG, "Ignoring attempt to inject setting from app not in system image: "
+                        + service);
+                return null;
+            }
+        }
 
         XmlResourceParser parser = null;
         try {
@@ -169,7 +179,7 @@ class SettingsInjector {
                         + SettingInjectorService.ATTRIBUTES_NAME + " tag");
             }
 
-            Resources res = pm.getResourcesForApplication(si.applicationInfo);
+            Resources res = pm.getResourcesForApplication(ai);
             return parseAttributes(si.packageName, si.name, res, attrs);
         } catch (PackageManager.NameNotFoundException e) {
             throw new XmlPullParserException(
@@ -191,17 +201,17 @@ class SettingsInjector {
         try {
             // Note that to help guard against malicious string injection, we do not allow dynamic
             // specification of the label (setting title)
-            final String label = sa.getString(android.R.styleable.SettingInjectorService_title);
-            final int iconId = sa.getResourceId(
-                    android.R.styleable.SettingInjectorService_icon, 0);
+            final String title = sa.getString(android.R.styleable.SettingInjectorService_title);
+            final int iconId =
+                    sa.getResourceId(android.R.styleable.SettingInjectorService_icon, 0);
             final String settingsActivity =
                     sa.getString(android.R.styleable.SettingInjectorService_settingsActivity);
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "parsed label: " + label + ", iconId: " + iconId
+                Log.d(TAG, "parsed title: " + title + ", iconId: " + iconId
                         + ", settingsActivity: " + settingsActivity);
             }
             return InjectedSetting.newInstance(packageName, className,
-                    label, iconId, settingsActivity);
+                    title, iconId, settingsActivity);
         } finally {
             sa.recycle();
         }

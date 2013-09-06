@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -165,29 +166,7 @@ public class LocationSettings extends LocationSettingsBase
             categoryRecentLocationRequests.addPreference(banner);
         }
 
-        PreferenceCategory categoryAppSettings =
-                (PreferenceCategory) root.findPreference(KEY_APP_SETTINGS);
-        final SettingsInjector injector = new SettingsInjector(activity);
-        List<Preference> appSettings = injector.getInjectedSettings();
-
-        mReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (Log.isLoggable(TAG, Log.DEBUG)) {
-                    Log.d(TAG, "Received settings change intent: " + intent);
-                }
-                injector.reloadStatusMessages();
-            }
-        };
-        activity.registerReceiver(mReceiver,
-                new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED));
-
-        if (appSettings.size() > 0) {
-            addPreferencesSorted(appSettings, categoryAppSettings);
-        } else {
-            // If there's no item to display, remove the whole category.
-            root.removePreference(categoryAppSettings);
-        }
+        addAppSettings(activity, root);
 
         // Only show the master switch when we're not in multi-pane mode, and not being used as
         // Setup Wizard.
@@ -207,6 +186,45 @@ public class LocationSettings extends LocationSettingsBase
 
         refreshLocationMode();
         return root;
+    }
+
+    /**
+     * Add the settings injected by external apps into the "App Settings" category. Hides the
+     * category if there are no injected settings.
+     *
+     * Reloads the settings whenever receives
+     * {@link SettingInjectorService#ACTION_INJECTED_SETTING_CHANGED}. As a safety measure,
+     * also reloads on {@link LocationManager#MODE_CHANGED_ACTION} to ensure the settings are
+     * up-to-date after mode changes even if an affected app doesn't send the setting changed
+     * broadcast.
+     */
+    private void addAppSettings(Context context, PreferenceScreen root) {
+        PreferenceCategory categoryAppSettings =
+                (PreferenceCategory) root.findPreference(KEY_APP_SETTINGS);
+        final SettingsInjector injector = new SettingsInjector(context);
+        List<Preference> appSettings = injector.getInjectedSettings();
+
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, "Received settings change intent: " + intent);
+                }
+                injector.reloadStatusMessages();
+            }
+        };
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED);
+        filter.addAction(LocationManager.MODE_CHANGED_ACTION);
+        context.registerReceiver(mReceiver, filter);
+
+        if (appSettings.size() > 0) {
+            addPreferencesSorted(appSettings, categoryAppSettings);
+        } else {
+            // If there's no item to display, remove the whole category.
+            root.removePreference(categoryAppSettings);
+        }
     }
 
     @Override
