@@ -1621,14 +1621,9 @@
                 android:resource="@id/nfc_payment_settings" />
         </activity>
         <activity android:name=".nfc.PaymentDefaultDialog"
-                  android:label="@string/nfc_payment_set_default"
+                  android:label="@string/nfc_payment_set_default_label"
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Holo.Light.Dialog.Alert">
-            <intent-filter>
-                <!-- TODO this filter can be removed -->
-                <action android:name="android.nfc.cardemulation.ACTION_CHANGE_DEFAULT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.nfc.cardemulation.action.ACTION_CHANGE_DEFAULT" />
                 <category android:name="android.intent.category.DEFAULT" />
