@@ -32,8 +32,8 @@
     <string name="header_category_device" msgid="5781174212691167553">"DISPOSITIU"</string>
     <string name="header_category_personal" msgid="6225932173498802187">"PERSONAL"</string>
     <string name="header_category_system" msgid="2073558547468647128">"SISTEMA"</string>
-    <string name="turn_on_radio" msgid="8706561489788373676">"Activa la ràdio"</string>
-    <string name="turn_off_radio" msgid="1820294552893884115">"Desactiva la ràdio"</string>
+    <string name="turn_on_radio" msgid="8706561489788373676">"Activa el senyal mòbil"</string>
+    <string name="turn_off_radio" msgid="1820294552893884115">"Desactiva el senyal mòbil"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Activa SMS a través d\'IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Desactiva SMS a través d\'IMS"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"És necessari activar el registre de MI"</string>
@@ -47,7 +47,7 @@
     <string name="radioInfo_service_in" msgid="1915416319177520020">"En servei"</string>
     <string name="radioInfo_service_out" msgid="5238736759641916278">"Sense servei"</string>
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"Només trucades d\'emergència"</string>
-    <string name="radioInfo_service_off" msgid="1434084741785525415">"Ràdio desactivada"</string>
+    <string name="radioInfo_service_off" msgid="1434084741785525415">"Senyal mòbil desactivat"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Itinerància"</string>
     <string name="radioInfo_roaming_not" msgid="2851853244069662307">"No està en itinerància"</string>
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Absent"</string>
@@ -138,13 +138,13 @@
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"S\'està desconnectant..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"S\'està connectant…"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_pairing" msgid="1426882272690346242">"S\'està sincronitzant..."</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"S\'està emparellant..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Dispositiu Bluetooth sense nom"</string>
     <string name="progress_scanning" msgid="192587958424295789">"S\'està cercant"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"No s\'ha trobat cap dispositiu Bluetooth a prop."</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Sol·licitud de sincronització de Bluetooth"</string>
-    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sol·licitud de sincronització"</string>
-    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca per sincronitzar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Sol·licitud d\'emparellament de Bluetooth"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sol·licitud d\'emparellament"</string>
+    <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca per emparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostra els fitxers rebuts"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selector de dispositiu Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Sol·licitud de permís de Bluetooth"</string>
@@ -215,10 +215,10 @@
     <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"Intensitat del senyal:"</string>
     <string name="radio_info_call_status_label" msgid="4896238900685510883">"Estat de la trucada:"</string>
     <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP enviat:"</string>
-    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"Restabliments de la ràdio:"</string>
+    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"Restabliments del senyal mòbil:"</string>
     <string name="radio_info_message_waiting_label" msgid="6981842420058672207">"Espera de missatges:"</string>
     <string name="radio_info_phone_number_label" msgid="7192944627907412169">"Número de telèfon:"</string>
-    <string name="radio_info_band_mode_label" msgid="441469694142042022">"Selecciona la banda de ràdio"</string>
+    <string name="radio_info_band_mode_label" msgid="441469694142042022">"Selecciona la banda de senyal mòbil"</string>
     <string name="radio_info_network_type_label" msgid="3706382548257257987">"Tipus de xarxa:"</string>
     <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"Defineix el tipus de xarxa preferida:"</string>
     <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"Ping d\'adreça IP:"</string>
@@ -438,24 +438,24 @@
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Activa el Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
-    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la detecció del dispositiu"</string>
-    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud de sincronització de Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Per enllaçar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu el PIN que el dispositiu sol·licita:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per sincronitzar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
+    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la visibilitat del dispositiu"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud d\'emparellament de Bluetooth"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu el PIN sol·licitat pel dispositiu:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN conté lletres o símbols"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"En general, 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Pot ser que també hagis d\'introduir aquest PIN a l\'altre dispositiu."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Pot ser que també hagis d\'introduir aquesta contrasenya a l\'altre dispositiu."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per sincronitzar  amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assegura\'t que apareix aquesta contrasenya:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vols sincronitzar  amb aquest dispositiu?"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per emparellar amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assegura\'t que apareix aquesta contrasenya:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vols emparellar-lo amb aquest dispositiu?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per sincronitzar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu-hi:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> i, a continuació, prem la tecla de retorn."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronitza"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancel·la"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
-    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut sincronitzar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"No s\'ha pogut sincronitzar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, perquè el PIN o la contrasenya són incorrectes."</string>
+    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut emparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"No s\'ha pogut emparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, perquè el PIN o la contrasenya són incorrectes."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="7870998403045801381">"No es pot comunicar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Sincronització rebutjada per <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Emparellament rebutjat per <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="229861986106185022">"No s\'ha pogut connectar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Cerca dispositius"</string>
     <string name="bluetooth_search_for_devices" msgid="5957007154213560390">"Cerca dispositius"</string>
@@ -465,7 +465,7 @@
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispositius disponibles"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connecta"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Desconnecta"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Sincronitza i connecta"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Emparella i connecta"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Dessincronitza"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Desconnecta i dessincronitza"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opcions…"</string>
@@ -504,7 +504,7 @@
     <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utilitza per a entrada"</string>
     <string name="bluetooth_pan_profile_summary_use_for" msgid="5664884523822068653">"Utilitza\'l per a l\'accés a Internet"</string>
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Configuració de la base"</string>
-    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Ús del connector per a l\'àudio"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Ús de la base per a àudio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Com a telèfon amb altaveu"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per a música i contingut multimèdia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recorda la configuració"</string>
@@ -536,6 +536,7 @@
     <string name="wifi_display_autonomous_go" msgid="140864379216673466">"Activa GO autònom"</string>
     <string name="wifi_display_pause" msgid="6037110530682927245">"Atura"</string>
     <string name="wifi_display_resume" msgid="8195590160258469425">"Reprèn"</string>
+    <string name="wifi_display_wps_config" msgid="7566565571340705772">"Configuració de WPS"</string>
     <string name="wifi_display_listen_channel" msgid="4146320990898147857">"Canal per escoltar"</string>
     <string name="wifi_display_operating_channel" msgid="233535284689144515">"Canal operatiu"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
@@ -695,7 +696,7 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Pantalla"</string>
     <string name="sound_settings" msgid="5534671337768745343">"So"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"To del telèfon"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"To de trucada"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volum"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Efectes musicals"</string>
@@ -703,44 +704,44 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibra quan estigui en silenci"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"So de notificació predeterminat"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Llum de notificació"</string>
-    <string name="incoming_call_volume_title" msgid="8073714801365904099">"To"</string>
+    <string name="incoming_call_volume_title" msgid="8073714801365904099">"So de trucada"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Notificació"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Utilitza el volum de trucada entrant per a les notificacions"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"So de notificació predeterminat"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"Multimèdia"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Defineix el volum de la música i els vídeos"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Alarma"</string>
-    <string name="dock_settings_summary" msgid="455802113668982481">"Configuració d\'àudio del connector adjunt"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"Configuració d\'àudio de la base adjunta"</string>
     <string name="dtmf_tone_enable_title" msgid="8533399267725365088">"So en marcar el número"</string>
     <string name="sound_effects_enable_title" msgid="1171590821131077296">"So en tocar"</string>
     <string name="lock_sounds_enable_title" msgid="450098505659399520">"So de bloqueig de pantalla"</string>
     <string name="haptic_feedback_enable_title" msgid="2438293710530828760">"Vibrar en tocar"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Cancel·lació de sorolls"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"Música, vídeos, jocs i altres fitxers multimèdia"</string>
-    <string name="volume_ring_description" msgid="5936851631698298989">"To i notificacions"</string>
+    <string name="volume_ring_description" msgid="5936851631698298989">"So de trucada i notificacions"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Notificacions"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmes"</string>
-    <string name="volume_ring_mute" msgid="3018992671608737202">"Silencia els tons i les notificacions"</string>
+    <string name="volume_ring_mute" msgid="3018992671608737202">"Silencia els sons i les notificacions"</string>
     <string name="volume_media_mute" msgid="3399059928695998166">"Silencia la música i altres fitxers multimèdia"</string>
     <string name="volume_notification_mute" msgid="7955193480006444159">"Silencia les notificacions"</string>
     <string name="volume_alarm_mute" msgid="4452239420351035936">"Silencia les alarmes"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrar en sonar"</string>
-    <string name="dock_settings" msgid="1820107306693002541">"Connector"</string>
-    <string name="dock_settings_title" msgid="9161438664257429372">"Configuració del connector"</string>
+    <string name="dock_settings" msgid="1820107306693002541">"Base"</string>
+    <string name="dock_settings_title" msgid="9161438664257429372">"Configuració de la base"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Àudio"</string>
-    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Configuració de la base d\'escriptori connectada"</string>
-    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Configuració del connector del cotxe adjunt"</string>
-    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Tauleta no acoblada"</string>
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Configuració de la base d\'escriptori"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Configuració de la base del vehicle"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Tauleta no connectada"</string>
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telèfon no connectat"</string>
-    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Configuració del connector adjunt"</string>
-    <string name="dock_not_found_title" msgid="3290961741828952424">"No s\'ha trobat el connector"</string>
-    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Has de connectar la tauleta abans de configurar l\'àudio de connexió."</string>
-    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Has de connectar el telèfon abans de configurar l\'àudio de connexió."</string>
-    <string name="dock_sounds_enable_title" msgid="885839627097024110">"So en inserir el connector"</string>
-    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Reprodueix so en inserir o retirar la tauleta del connector"</string>
-    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reprodueix so en inserir o treure el telèfon del connector"</string>
-    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"No reprodueixis so en inserir o en retirar la tauleta del connector"</string>
-    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"No reprodueixis cap so en inserir o treure el telèfon del connector"</string>
+    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Configuració de la base adjunta"</string>
+    <string name="dock_not_found_title" msgid="3290961741828952424">"No s\'ha trobat la base"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="8405432495282299143">"Per configurar l\'àudio de la base, has de connectar-hi la tauleta."</string>
+    <string name="dock_not_found_text" product="default" msgid="1460497923342627801">"Per configurar l\'àudio de la base, has de connectar-hi el telèfon."</string>
+    <string name="dock_sounds_enable_title" msgid="885839627097024110">"So en inserir a la base"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Reprodueix so en inserir o retirar la tauleta de la base"</string>
+    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reprodueix so en inserir o treure el telèfon de la base"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"No reprodueixis so en inserir o en retirar la tauleta de la base"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"No reprodueixis cap so en inserir o treure el telèfon de la base"</string>
     <string name="account_settings" msgid="6403589284618783461">"Comptes"</string>
     <string name="search_settings" msgid="1910951467596035063">"Cerca"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gestiona la configuració i l\'historial de cerca"</string>
@@ -757,7 +758,7 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fons de pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Selecciona fons de pantalla de"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Estalvi de pantalla"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Quan el dispositiu estigui en un connector o inactiu i carregant-se"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Quan el dispositiu estigui connectat a una base o inactiu i carregant-se"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Els dos casos"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Mentre es carrega"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Quan el dispositiu estigui en un connector"</string>
@@ -1005,7 +1006,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Ubicació desactivada"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Sol·licituds d\'ubicació recents"</string>
     <string name="location_no_recent_apps" msgid="7156440988150119767">"No hi ha cap aplicació que hagi sol·licitat la ubicació els últims 15 minuts."</string>
-    <string name="location_category_location_services" msgid="7437150886946685979">"Serveis d\'ubicació"</string>
+    <string name="location_category_app_settings" msgid="46434611182743486">"Configuració de l\'aplicació"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Ús de bateria elevat"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Ús de bateria reduït"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mode d\'ubicació"</string>
@@ -1429,8 +1430,7 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"No s\'ha proporcionat cap descripció."</string>
     <string name="settings_button" msgid="3006713718908152930">"Configuració"</string>
     <string name="print_settings" msgid="4742428530112487843">"Impressió"</string>
-    <string name="print_settings_title" msgid="4911263339115736689">"Configuració d\'impressió"</string>
-    <string name="print_services_title" msgid="1088097751249445946">"Serveis"</string>
+    <string name="print_settings_title" msgid="3685449667822217816">"Serveis d\'impressió"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Vols fer servir <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="919299459931111450">"<xliff:g id="PRINT_SERVICE_NAME">%1$s</xliff:g> pot rebre els documents que imprimeixis. És possible que aquests documents continguin dades confidencials."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"No hi ha cap servei instal·lat"</string>
@@ -1438,6 +1438,10 @@
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Afegeix impressores"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Activat"</string>
     <string name="print_feature_state_off" msgid="7294876968403966040">"Desactivat"</string>
+    <string name="print_menu_item_download_print_service" msgid="455940343930159137">"No veig el meu"</string>
+    <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Afegeix una impressora"</string>
+    <string name="print_menu_item_uninstall" msgid="7174810272766544109">"Desinstal·la"</string>
+    <string name="category_printers" msgid="4345417708283144981">"Impressores"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Bateria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Elements que han utilitzat la bateria"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Dades d\'ús de bateria no disp."</string>
@@ -1494,7 +1498,7 @@
     <string name="battery_desc_voice" msgid="8980322055722959211">"Bateria utilitzada per les trucades de veu"</string>
     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Bateria utilitzada quan la tauleta estigui inactiva"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Bateria utilitzada quan el telèfon està inactiu"</string>
-    <string name="battery_desc_radio" msgid="5479196477223185367">"Bateria utilitzada per la ràdio de cel·la"</string>
+    <string name="battery_desc_radio" msgid="5479196477223185367">"Bateria utilitzada pel senyal mòbil"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Canvia al mode d\'avió per estalviar energia en zones sense cobertura de telefonia mòbil"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Bateria utilitzada per la pantalla i la retroil·luminació"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Redueix la brillantor i/o el temps d\'espera de la pantalla"</string>
@@ -1519,6 +1523,9 @@
     <string name="app_memory_use" msgid="7849258480392171939">"Ús de la memòria"</string>
     <string name="process_stats_total_duration" msgid="663196332079061529">"Estadístiques durant <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"En aquests moments la memòria del dispositiu és <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
+    <string name="process_stats_ram_use" msgid="1271366870003042708">"Ús mitjà de RAM"</string>
+    <string name="process_stats_run_time" msgid="6520628955709369115">"Temps d\'execució"</string>
+    <string name="services_subtitle" msgid="4296402367067266425">"Serveis"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Entrada i sortida de veu"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Configuració d\'entrada i sortida de veu"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Cerca per veu"</string>
@@ -1651,7 +1658,7 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Sense títol"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Notificacions"</string>
-    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"To de trucada i vibració"</string>
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"So de trucada i vibració"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Sistema"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"Configuració de Wi-Fi"</string>
     <string name="wifi_setup_title_editing_network" msgid="6020614644556717979">"Connexió a una xarxa Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
