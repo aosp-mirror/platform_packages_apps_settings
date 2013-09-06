@@ -80,9 +80,9 @@ public class MasterClear extends Fragment {
     }
 
     private boolean runRestrictionsChallenge() {
-        if (UserManager.get(getActivity()).hasRestrictionsPin()) {
+        if (UserManager.get(getActivity()).hasRestrictionsChallenge()) {
             startActivityForResult(
-                    new Intent(Intent.ACTION_RESTRICTIONS_PIN_CHALLENGE), PIN_REQUEST);
+                    new Intent(Intent.ACTION_RESTRICTIONS_CHALLENGE), PIN_REQUEST);
             return true;
         }
         return false;
