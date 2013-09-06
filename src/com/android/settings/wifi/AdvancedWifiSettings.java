@@ -16,8 +16,10 @@
 
 package com.android.settings.wifi;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiWatchdogStateMachine;
@@ -53,6 +55,18 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
 
     private WifiManager mWifiManager;
 
+    private IntentFilter mFilter;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION) ||
+                action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+                refreshWifiInfo();
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +77,24 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        mFilter = new IntentFilter();
+        mFilter.addAction(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         initPreferences();
+        getActivity().registerReceiver(mReceiver, mFilter,
+                android.Manifest.permission.CHANGE_NETWORK_STATE, null);
         refreshWifiInfo();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     private void initPreferences() {
