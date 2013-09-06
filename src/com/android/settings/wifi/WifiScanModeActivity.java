@@ -24,6 +24,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -43,7 +45,13 @@ public class WifiScanModeActivity extends Activity {
         if (savedInstanceState == null) {
             if (intent != null && intent.getAction()
                     .equals(WifiManager.ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE)) {
+                ApplicationInfo ai;
                 mApp = getCallingPackage();
+                try {
+                    PackageManager pm = getPackageManager();
+                    ai = pm.getApplicationInfo(mApp, 0);
+                    mApp = (String)pm.getApplicationLabel(ai);
+                } catch (PackageManager.NameNotFoundException e) { }
             } else {
                 finish();
                 return;
