@@ -162,7 +162,6 @@ public class LocationSettings extends LocationSettingsBase
             banner.setLayoutResource(R.layout.location_list_no_item);
             banner.setTitle(R.string.location_no_recent_apps);
             banner.setSelectable(false);
-            banner.setEnabled(false);
             categoryRecentLocationRequests.addPreference(banner);
         }
 
