@@ -39,6 +39,10 @@
                     android:text="@string/no_applications"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
         </FrameLayout>
+        <!-- Force layout direction to LTR for now as we want the text to be at the same position in
+             any Locale included the RTL ones. Will need to fix LinearColorBar RTL support later.
+             Please also note the left/right gravities that would also need to be changed for proper
+             RTL support -->
         <view class="com.android.settings.applications.LinearColorBar"
                 android:id="@+id/storage_color_bar"
                 android:layout_marginStart="@dimen/settings_side_margin"
@@ -50,11 +54,13 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:paddingTop="30dp"
-                android:paddingBottom="1dp">
+                android:paddingBottom="1dp"
+                android:layoutDirection="ltr">
             <TextView android:id="@+id/usedStorageText"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmallInverse"
                 android:textColor="#000"
                 android:singleLine="true" />
@@ -75,7 +81,7 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end"
+                android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmallInverse"
                 android:textColor="#000"
                 android:singleLine="true" />
