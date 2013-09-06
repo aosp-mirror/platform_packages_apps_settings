@@ -20,17 +20,17 @@
         android:title="@string/print_menu_item_search"
         android:icon="@*android:drawable/ic_menu_search_holo_dark"
         android:actionViewClass="android.widget.SearchView"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|collapseActionView"
         android:imeOptions="actionSearch">
     </item>
     <item
         android:id="@+id/print_menu_item_add_printer"
         android:title="@string/print_menu_item_add_printer"
-        android:showAsAction="ifRoom">
+        android:showAsAction="never">
     </item>
     <item
         android:id="@+id/print_menu_item_settings"
         android:title="@string/print_menu_item_settings"
-        android:showAsAction="ifRoom">
+        android:showAsAction="never">
     </item>
 </menu>
