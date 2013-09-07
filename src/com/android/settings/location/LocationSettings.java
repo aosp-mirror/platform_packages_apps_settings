@@ -61,6 +61,7 @@ public class LocationSettings extends LocationSettingsBase
     private Switch mSwitch;
     private boolean mValidListener;
     private Preference mLocationMode;
+    private PreferenceCategory mCategoryRecentLocationRequests;
     private BatteryStatsHelper mStatsHelper;
     /** Receives UPDATE_INTENT  */
     private BroadcastReceiver mReceiver;
@@ -150,19 +151,19 @@ public class LocationSettings extends LocationSettingsBase
                     }
                 });
 
-        PreferenceCategory categoryRecentLocationRequests =
+        mCategoryRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         RecentLocationApps recentApps = new RecentLocationApps(activity, mStatsHelper);
         List<Preference> recentLocationRequests = recentApps.getAppList();
         if (recentLocationRequests.size() > 0) {
-            addPreferencesSorted(recentLocationRequests, categoryRecentLocationRequests);
+            addPreferencesSorted(recentLocationRequests, mCategoryRecentLocationRequests);
         } else {
             // If there's no item to display, add a "No recent apps" item.
             Preference banner = new Preference(activity);
             banner.setLayoutResource(R.layout.location_list_no_item);
             banner.setTitle(R.string.location_no_recent_apps);
             banner.setSelectable(false);
-            categoryRecentLocationRequests.addPreference(banner);
+            mCategoryRecentLocationRequests.addPreference(banner);
         }
 
         addAppSettings(activity, root);
@@ -256,6 +257,7 @@ public class LocationSettings extends LocationSettingsBase
         boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
         mSwitch.setEnabled(!restricted);
         mLocationMode.setEnabled(enabled && !restricted);
+        mCategoryRecentLocationRequests.setEnabled(enabled);
 
         if (enabled != mSwitch.isChecked()) {
             // set listener to null so that that code below doesn't trigger onCheckedChanged()
