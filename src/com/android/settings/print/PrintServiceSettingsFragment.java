@@ -30,6 +30,7 @@ import android.content.Loader;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
+import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -79,9 +80,28 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             new SettingsContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            List<ComponentName> services = SettingsUtils.readEnabledPrintServices(getActivity());
-            final boolean enabled = services.contains(mComponentName);
-            mToggleSwitch.setCheckedInternal(enabled);
+            updateForServiceEnabledState();
+        }
+    };
+
+    private final DataSetObserver mDataObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            invalidateOptionsMenuIfNeeded();
+        }
+
+        @Override
+        public void onInvalidated() {
+            invalidateOptionsMenuIfNeeded();
+        }
+
+        private void invalidateOptionsMenuIfNeeded() {
+            final int unfilteredItemCount = mPrintersAdapter.getUnfilteredCount();
+            if ((mLastUnfilteredItemCount <= 0 && unfilteredItemCount > 0)
+                    || mLastUnfilteredItemCount > 0 && unfilteredItemCount <= 0) {
+                getActivity().invalidateOptionsMenu();
+            }
+            mLastUnfilteredItemCount = unfilteredItemCount;
         }
     };
 
@@ -100,14 +120,21 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private ComponentName mComponentName;
 
+    private PrintersAdapter mPrintersAdapter;
+
     // TODO: Showing sub-sub fragment does not handle the activity title
     // so we do it but this is wrong. Do a real fix when there is time.
     private CharSequence mOldActivityTitle;
+
+    private int mLastUnfilteredItemCount;
+
+    private boolean mServiceEnabled;
 
     @Override
     public void onResume() {
         mSettingsContentObserver.register(getContentResolver());
         super.onResume();
+        updateForServiceEnabledState();
     }
 
     @Override
@@ -119,9 +146,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onInstallActionBarToggleSwitch();
+        installActionBarToggleSwitch();
         processArguments(getArguments());
-        getListView().setAdapter(new PrintersAdapter());
+        mPrintersAdapter = new PrintersAdapter();
+        mPrintersAdapter.registerDataSetObserver(mDataObserver);
+        getListView().setAdapter(mPrintersAdapter);
+        updateForServiceEnabledState();
     }
 
     @Override
@@ -188,7 +218,20 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 
-    protected void onInstallActionBarToggleSwitch() {
+    private void updateForServiceEnabledState() {
+        List<ComponentName> services = SettingsUtils.readEnabledPrintServices(getActivity());
+        mServiceEnabled = services.contains(mComponentName);
+        if (mServiceEnabled) {
+            mToggleSwitch.setCheckedInternal(true);
+            mPrintersAdapter.enable();
+        } else {
+            mToggleSwitch.setCheckedInternal(false);
+            mPrintersAdapter.disable();
+        }
+        getActivity().invalidateOptionsMenu();
+    }
+
+    private void installActionBarToggleSwitch() {
         mToggleSwitch = createAndAddActionBarToggleSwitch(getActivity());
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
@@ -235,7 +278,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (!getPackageManager().queryIntentActivities(settingsIntent, 0).isEmpty()) {
                 mSettingsTitle = settingsTitle;
                 mSettingsIntent = settingsIntent;
-                setHasOptionsMenu(true);
             }
         }
 
@@ -251,7 +293,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (!getPackageManager().queryIntentActivities(addPritnersIntent, 0).isEmpty()) {
                 mAddPrintersTitle = addPrintersTitle;
                 mAddPrintersIntent = addPritnersIntent;
-                setHasOptionsMenu(true);
             }
         }
 
@@ -266,6 +307,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         // Component name.
         mComponentName = ComponentName.unflattenFromString(arguments
                 .getString(PrintSettingsFragment.EXTRA_SERVICE_COMPONENT_NAME));
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -274,33 +317,39 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         inflater.inflate(R.menu.print_service_settings, menu);
 
         MenuItem addPrinters = menu.findItem(R.id.print_menu_item_add_printer);
-        if (!TextUtils.isEmpty(mAddPrintersTitle) && mAddPrintersIntent != null) {
+        if (mServiceEnabled && !TextUtils.isEmpty(mAddPrintersTitle)
+                && mAddPrintersIntent != null) {
             addPrinters.setIntent(mAddPrintersIntent);
         } else {
             menu.removeItem(R.id.print_menu_item_add_printer);
         }
 
         MenuItem settings = menu.findItem(R.id.print_menu_item_settings);
-        if (!TextUtils.isEmpty(mSettingsTitle) && mSettingsIntent != null) {
+        if (mServiceEnabled && !TextUtils.isEmpty(mSettingsTitle)
+                && mSettingsIntent != null) {
             settings.setIntent(mSettingsIntent);
         } else {
             menu.removeItem(R.id.print_menu_item_settings);
         }
 
         MenuItem searchItem = menu.findItem(R.id.print_menu_item_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
+        if (mServiceEnabled && mPrintersAdapter.getUnfilteredCount() > 0) {
+            SearchView searchView = (SearchView) searchItem.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return true;
+                }
 
-            @Override
-            public boolean onQueryTextChange(String searchString) {
-                ((Filterable) getListView().getAdapter()).getFilter().filter(searchString);
-                return true;
-            }
-        });
+                @Override
+                public boolean onQueryTextChange(String searchString) {
+                    ((Filterable) getListView().getAdapter()).getFilter().filter(searchString);
+                    return true;
+                }
+            });
+        } else {
+            menu.removeItem(R.id.print_menu_item_search);
+        }
     }
 
     private ToggleSwitch createAndAddActionBarToggleSwitch(Activity activity) {
@@ -347,8 +396,16 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         private CharSequence mLastSearchString;
 
-        public PrintersAdapter() {
+        public void enable() {
             getLoaderManager().initLoader(LOADER_ID_PRINTERS_LOADER, null, this);
+        }
+
+        public void disable() {
+            getLoaderManager().destroyLoader(LOADER_ID_PRINTERS_LOADER);
+        }
+
+        public int getUnfilteredCount() {
+            return mPrinters.size();
         }
 
         @Override
@@ -480,6 +537,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             synchronized (mLock) {
                 mPrinters.clear();
                 mFilteredPrinters.clear();
+                mLastSearchString = null;
             }
             notifyDataSetInvalidated();
         }
