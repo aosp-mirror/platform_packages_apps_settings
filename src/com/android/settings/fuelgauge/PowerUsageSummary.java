@@ -249,7 +249,10 @@ public class PowerUsageSummary extends PreferenceFragment {
                     }
                     break;
                 case BatteryStatsHelper.MSG_REPORT_FULLY_DRAWN:
-                    getActivity().reportFullyDrawn();
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        activity.reportFullyDrawn();
+                    }
                     break;
             }
             super.handleMessage(msg);
