@@ -312,7 +312,8 @@ class SettingsInjector {
                     mSettingsBeingLoaded.remove(timedOutSetting);
                     mTimedOutSettings.add(timedOutSetting);
                     if (Log.isLoggable(TAG, Log.WARN)) {
-                        Log.w(TAG, "Timed out trying to get status for: " + timedOutSetting);
+                        Log.w(TAG, "Timed out after " + timedOutSetting.getElapsedTime()
+                                + " millis trying to get status for: " + timedOutSetting);
                     }
                     break;
                 default:
@@ -447,13 +448,21 @@ class SettingsInjector {
             } else {
                 startMillis = 0;
             }
-            mContext.startService(intent);
+
+            // Start the service, making sure that this is attributed to the current user rather
+            // than the system user.
+            mContext.startServiceAsUser(intent, android.os.Process.myUserHandle());
+        }
+
+        public long getElapsedTime() {
+            long end = SystemClock.elapsedRealtime();
+            return end - startMillis;
         }
 
         public void maybeLogElapsedTime() {
             if (Log.isLoggable(TAG, Log.DEBUG) && startMillis != 0) {
-                long end = SystemClock.elapsedRealtime();
-                Log.d(TAG, this + " update took " + (end - startMillis) + " millis");
+                long elapsed = getElapsedTime();
+                Log.d(TAG, this + " update took " + elapsed + " millis");
             }
         }
     }
