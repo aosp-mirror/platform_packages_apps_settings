@@ -16,35 +16,35 @@
 ** limitations under the License.
 */
 -->
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/all_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
+    android:paddingBottom="5dip"
+    android:orientation="vertical"
     android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle">
 
+    <!-- App snippet -->
     <LinearLayout
-        android:id="@+id/all_details"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="5dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="vertical">
 
-        <!-- App snippet -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:orientation="vertical">
+        <!-- Application snippet label, version and icon -->
+        <include
+            layout="@layout/manage_applications_item"
+            android:id="@+id/app_snippet" />
 
-            <!-- Application snippet label, version and icon -->
-            <include
-                layout="@layout/manage_applications_item"
-                android:id="@+id/app_snippet" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
 
         <!-- Operations list -->
         <LinearLayout
@@ -53,5 +53,5 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

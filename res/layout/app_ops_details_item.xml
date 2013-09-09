@@ -17,7 +17,7 @@
 */
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -30,43 +30,42 @@
         android:id="@+id/op_icon"
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_marginEnd="8dip"
         android:scaleType="centerInside"
         android:contentDescription="@null" />
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/op_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_toEndOf="@id/op_icon"
+        android:layout_toStartOf="@+id/switchWidget"
+        android:layout_marginTop="2dip"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAlignment="viewStart" />
 
-        <TextView
-            android:id="@+id/op_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginTop="2dip"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textAlignment="viewStart" />
-
-        <TextView
-            android:id="@+id/op_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal|top"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textAlignment="viewStart" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/op_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/op_icon"
+        android:layout_toStartOf="@+id/switchWidget"
+        android:layout_below="@id/op_name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="viewStart" />
 
     <Switch android:id="@+id/switchWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:layout_marginStart="8dip"
+        android:padding="8dip"
         android:focusable="false"
         android:clickable="true" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -184,7 +184,7 @@ public class AppOpsDetails extends Fragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.app_ops_details, container, false);
-        Utils.prepareCustomPreferencesList(container, view, view, false);
+        Utils.prepareCustomPreferencesList(container, view, view, true);
 
         mRootView = view;
         mOperationsSection = (LinearLayout)view.findViewById(R.id.operations_section);
