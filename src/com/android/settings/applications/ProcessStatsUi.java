@@ -30,6 +30,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TimeUtils;
@@ -245,10 +246,14 @@ public class ProcessStatsUi extends PreferenceFragment {
         }
         */
 
+        ArrayMap<String, ProcStatsEntry> processes = new ArrayMap<String, ProcStatsEntry>(
+                mStats.mProcesses.getMap().size());
         for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
             SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
             for (int iu=0; iu<uids.size(); iu++) {
-                procs.add(new ProcStatsEntry(uids.valueAt(iu), totals));
+                ProcStatsEntry ent = new ProcStatsEntry(uids.valueAt(iu), totals);
+                procs.add(ent);
+                processes.put(ent.mName, ent);
             }
         }
 
@@ -282,6 +287,21 @@ public class ProcessStatsUi extends PreferenceFragment {
             pref.setPercent(percentOfWeight, percentOfTime);
             mAppListGroup.addPreference(pref);
             if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
+        }
+
+        // Add in service info.
+        for (int ip=0, N=mStats.mPackages.getMap().size(); ip<N; ip++) {
+            SparseArray<ProcessStats.PackageState> uids = mStats.mPackages.getMap().valueAt(ip);
+            for (int iu=0; iu<uids.size(); iu++) {
+                ProcessStats.PackageState ps = uids.valueAt(iu);
+                for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
+                    ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
+                    if (ss.mProcessName != null) {
+                        ProcStatsEntry ent = processes.get(ss.mProcessName);
+                        ent.addService(ss);
+                    }
+                }
+            }
         }
     }
 

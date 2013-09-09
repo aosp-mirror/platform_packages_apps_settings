@@ -78,7 +78,6 @@ public final class ProcStatsEntry implements Parcelable {
         mBestTargetPackage = null;
         if (mUnique) {
             mBestTargetPackage = mPackage;
-            addServices(stats.getPackageStateLocked(mPackage, mUid));
         } else {
             // See if there is one significant package that was running here.
             ArrayList<ProcStatsEntry> subProcs = new ArrayList<ProcStatsEntry>();
@@ -90,17 +89,12 @@ public final class ProcStatsEntry implements Parcelable {
                         continue;
                     }
                     ProcessStats.PackageState pkgState = uids.valueAt(iu);
-                    boolean match = false;
                     for (int iproc=0, NPROC=pkgState.mProcesses.size(); iproc<NPROC; iproc++) {
                         ProcessStats.ProcessState subProc =
                                 pkgState.mProcesses.valueAt(iproc);
                         if (subProc.mName.equals(mName)) {
-                            match = true;
                             subProcs.add(new ProcStatsEntry(subProc, totals));
                         }
-                    }
-                    if (match) {
-                        addServices(stats.getPackageStateLocked(mPackage, mUid));
                     }
                 }
             }
@@ -173,12 +167,8 @@ public final class ProcStatsEntry implements Parcelable {
         }
     }
 
-    public void addServices(ProcessStats.PackageState pkgState) {
-        for (int isvc=0, NSVC=pkgState.mServices.size(); isvc<NSVC; isvc++) {
-            ProcessStats.ServiceState svc = pkgState.mServices.valueAt(isvc);
-            // XXX can't tell what process it is in!
-            mServices.add(new Service(svc));
-        }
+    public void addService(ProcessStats.ServiceState svc) {
+        mServices.add(new Service(svc));
     }
 
     @Override
@@ -213,32 +203,22 @@ public final class ProcStatsEntry implements Parcelable {
     public static final class Service implements Parcelable {
         final String mPackage;
         final String mName;
+        final String mProcess;
         final long mDuration;
 
         public Service(ProcessStats.ServiceState service) {
             mPackage = service.mPackage;
             mName = service.mName;
-            long startDuration = ProcessStats.dumpSingleServiceTime(null, null, service,
-                    ProcessStats.ServiceState.SERVICE_STARTED,
+            mProcess = service.mProcessName;
+            mDuration = ProcessStats.dumpSingleServiceTime(null, null, service,
+                    ProcessStats.ServiceState.SERVICE_RUN,
                     ProcessStats.STATE_NOTHING, 0, 0);
-            long bindDuration = ProcessStats.dumpSingleServiceTime(null, null, service,
-                    ProcessStats.ServiceState.SERVICE_BOUND,
-                    ProcessStats.STATE_NOTHING, 0, 0);
-            long execDuration = ProcessStats.dumpSingleServiceTime(null, null, service,
-                    ProcessStats.ServiceState.SERVICE_EXEC,
-                    ProcessStats.STATE_NOTHING, 0, 0);
-            if (bindDuration > startDuration) {
-                startDuration = bindDuration;
-            }
-            if (execDuration > startDuration) {
-                startDuration = execDuration;
-            }
-            mDuration = startDuration;
         }
 
         public Service(Parcel in) {
             mPackage = in.readString();
             mName = in.readString();
+            mProcess = in.readString();
             mDuration = in.readLong();
         }
 
@@ -251,6 +231,7 @@ public final class ProcStatsEntry implements Parcelable {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(mPackage);
             dest.writeString(mName);
+            dest.writeString(mProcess);
             dest.writeLong(mDuration);
         }
 
