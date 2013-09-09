@@ -96,7 +96,7 @@ public class RecentLocationApps {
             CharSequence label,
             boolean isHighBattery,
             Preference.OnPreferenceClickListener listener) {
-        Preference pref = new DimmableIconPreference(mActivity);
+        Preference pref = new Preference(mActivity);
         pref.setIcon(icon);
         pref.setTitle(label);
         if (isHighBattery) {
