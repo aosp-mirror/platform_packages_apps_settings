@@ -104,7 +104,17 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private TtsEngines mEnginesHelper = null;
 
     private String mSampleText = "";
+
+    /**
+     * Default locale used by selected TTS engine, null if not connected to any engine.
+     */
     private Locale mCurrentDefaultLocale;
+
+    /**
+     * List of available locals of selected TTS engine, as returned by
+     * {@link TextToSpeech.Engine#ACTION_CHECK_TTS_DATA} activity. If empty, then activity
+     * was not yet called.
+     */
     private List<String> mAvailableStrLocals;
 
     /**
@@ -263,7 +273,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     }
 
     private boolean evaluateDefaultLocale() {
-        if (mCurrentDefaultLocale == null) {
+        // Check if we are connected to the engine, and CHECK_VOICE_DATA returned list
+        // of available languages.
+        if (mCurrentDefaultLocale == null || mAvailableStrLocals == null) {
             return false;
         }
         int defaultAvailable = mTts.setLanguage(mCurrentDefaultLocale);
@@ -277,18 +289,17 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (!TextUtils.isEmpty(mCurrentDefaultLocale.getVariant())) {
             defaultLocaleStr += "-" + mCurrentDefaultLocale.getVariant();
         }
-        if (mAvailableStrLocals != null) {
-            for (String loc : mAvailableStrLocals) {
-                if (loc.equalsIgnoreCase(defaultLocaleStr)) {
-                    notInAvailableLangauges = false;
-                    break;
-                }
+
+        for (String loc : mAvailableStrLocals) {
+            if (loc.equalsIgnoreCase(defaultLocaleStr)) {
+              notInAvailableLangauges = false;
+              break;
             }
         }
 
         if (defaultAvailable == TextToSpeech.LANG_NOT_SUPPORTED ||
                 defaultAvailable == TextToSpeech.LANG_MISSING_DATA ||
-                mAvailableStrLocals == null || notInAvailableLangauges) {
+                notInAvailableLangauges) {
             if (DBG) Log.d(TAG, "Default locale for this TTS engine is not supported.");
             updateEngineStatus(R.string.tts_status_not_supported);
             updateWidgetState(false);
@@ -557,8 +568,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
 
         mAvailableStrLocals = data.getStringArrayListExtra(
-                TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
-        evaluateDefaultLocale();
+            TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
+        if (mAvailableStrLocals == null) {
+            Log.e(TAG, "Voice data check complete, but no available voices found");
+            // Set mAvailableStrLocals to empty list
+            mAvailableStrLocals = new ArrayList<String>();
+        }
+        if (evaluateDefaultLocale()) {
+            getSampleText();
+        }
 
         final int engineCount = mEnginePreferenceCategory.getPreferenceCount();
         for (int i = 0; i < engineCount; ++i) {
