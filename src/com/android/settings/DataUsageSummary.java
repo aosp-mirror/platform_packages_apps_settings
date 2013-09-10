@@ -141,12 +141,12 @@ import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.PieChartView;
 import com.google.android.collect.Lists;
 
+import libcore.util.Objects;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
-import libcore.util.Objects;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -275,6 +275,16 @@ public class DataUsageSummary extends Fragment {
 
         mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
         mPolicyEditor.read();
+
+        try {
+            if (!mNetworkService.isBandwidthControlEnabled()) {
+                Log.w(TAG, "No bandwidth control; leaving");
+                getActivity().finish();
+            }
+        } catch (RemoteException e) {
+            Log.w(TAG, "No bandwidth control; leaving");
+            getActivity().finish();
+        }
 
         try {
             mStatsSession = mStatsService.openSession();
