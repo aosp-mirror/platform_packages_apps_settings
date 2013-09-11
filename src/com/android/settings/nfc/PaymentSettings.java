@@ -21,9 +21,14 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -34,7 +39,9 @@ import java.util.List;
 public class PaymentSettings extends SettingsPreferenceFragment implements
         OnClickListener {
     public static final String TAG = "PaymentSettings";
+    private LayoutInflater mInflater;
     private PaymentBackend mPaymentBackend;
+
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -42,6 +49,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
 
         setHasOptionsMenu(false);
         mPaymentBackend = new PaymentBackend(getActivity());
+        mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public void refresh() {
@@ -55,12 +63,35 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             for (PaymentAppInfo appInfo : appInfos) {
                 PaymentAppPreference preference =
                         new PaymentAppPreference(getActivity(), appInfo, this);
-                preference.setIcon(appInfo.icon);
                 preference.setTitle(appInfo.caption);
-                screen.addPreference(preference);
+                if (appInfo.banner != null) {
+                    screen.addPreference(preference);
+                } else {
+                    // Ignore, no banner
+                    Log.e(TAG, "Couldn't load banner drawable of service " + appInfo.componentName);
+                }
             }
         }
-        setPreferenceScreen(screen);
+        TextView emptyText = (TextView) getView().findViewById(R.id.nfc_payment_empty_text);
+        ImageView emptyImage = (ImageView) getView().findViewById(R.id.nfc_payment_tap_image);
+        if (screen.getPreferenceCount() == 0) {
+            emptyText.setVisibility(View.VISIBLE);
+            emptyImage.setVisibility(View.VISIBLE);
+        } else {
+            emptyText.setVisibility(View.GONE);
+            emptyImage.setVisibility(View.GONE);
+            setPreferenceScreen(screen);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        View v = mInflater.inflate(R.layout.nfc_payment, container, false);
+
+        return v;
     }
 
     @Override
@@ -101,6 +132,9 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
 
             RadioButton radioButton = (RadioButton) view.findViewById(android.R.id.button1);
             radioButton.setChecked(appInfo.isDefault);
+
+            ImageView banner = (ImageView) view.findViewById(R.id.banner);
+            banner.setImageDrawable(appInfo.banner);
         }
     }
 }

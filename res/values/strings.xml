@@ -4678,13 +4678,13 @@
 
     <!-- NFC payment settings --><skip/>
     <string name="nfc_payment_settings_title">Payments</string>
-    <!-- Option to tell Android to ask the user which payment app to use every time
-         a payment terminal is tapped -->
-    <string name="nfc_payment_ask">Ask every time</string>
+    <!-- String shown when there are no NFC payment applications installed -->
+    <string name="nfc_payment_no_apps">DO NOT TRANSLATE ME</string>
     <!-- Label for the dialog that is shown when the user is asked to set a
          preferred payment application -->
-    <string name="nfc_payment_set_default">Set as your preference?</string>
-
+    <string name="nfc_payment_set_default_label">Set as your preference?</string>
+    <string name="nfc_payment_set_default">Always use <xliff:g id="app">%1$s</xliff:g> when you tap and pay?</string>
+    <string name="nfc_payment_set_default_instead_of">Always use <xliff:g id="app">%1$s</xliff:g> instead of <xliff:g id="app">%2$s</xliff:g> when you tap and pay?</string>
     <!-- Restrictions settings --><skip/>
 
     <!-- Restriction settings title [CHAR LIMIT=35] -->
