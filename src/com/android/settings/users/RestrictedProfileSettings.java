@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,14 +28,20 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.ContactsContract.DisplayPhoto;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +58,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +67,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
 
     private static final String KEY_SAVED_PHOTO = "pending_photo";
     private static final int DIALOG_ID_EDIT_USER_INFO = 1;
+    public static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
 
     private View mHeaderView;
     private ImageView mUserIconView;
@@ -269,33 +279,20 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
             mNewUserPhotoDrawable = drawable;
         }
 
-        public boolean onActivityResult(int requestCode, int resultCode, final Intent data) {
+        public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
             if (resultCode != Activity.RESULT_OK) {
                 return false;
             }
+            final Uri pictureUri = data != null && data.getData() != null
+                    ? data.getData() : mTakePictureUri;
             switch (requestCode) {
+                case REQUEST_CODE_CROP_PHOTO:
+                    onPhotoCropped(pictureUri, true);
+                    return true;
+                case REQUEST_CODE_TAKE_PHOTO:
                 case REQUEST_CODE_CHOOSE_PHOTO:
-                case REQUEST_CODE_CROP_PHOTO: {
-                    new AsyncTask<Void, Void, Bitmap>() {
-                        @Override
-                        protected Bitmap doInBackground(Void... params) {
-                            return BitmapFactory.decodeFile(mCropPictureUri.getPath());
-                        }
-                        @Override
-                        protected void onPostExecute(Bitmap bitmap) {
-                            mNewUserPhotoBitmap = bitmap;
-                            mNewUserPhotoDrawable = CircleFramedDrawable
-                                    .getInstance(mImageView.getContext(), mNewUserPhotoBitmap);
-                            mImageView.setImageDrawable(mNewUserPhotoDrawable);
-                            // Delete the files - not needed anymore.
-                            new File(mCropPictureUri.getPath()).delete();
-                            new File(mTakePictureUri.getPath()).delete();
-                        }
-                    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
-                } return true;
-                case REQUEST_CODE_TAKE_PHOTO: {
-                    cropPhoto();
-                } break;
+                    cropPhoto(pictureUri);
+                    return true;
             }
             return false;
         }
@@ -380,24 +377,35 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
 
         private void takePhoto() {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mTakePictureUri);
+            appendOutputExtra(intent, mTakePictureUri);
             mFragment.startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
         }
 
         private void choosePhoto() {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
             intent.setType("image/*");
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropPictureUri);
-            appendCropExtras(intent);
+            appendOutputExtra(intent, mTakePictureUri);
             mFragment.startActivityForResult(intent, REQUEST_CODE_CHOOSE_PHOTO);
         }
 
-        private void cropPhoto() {
+        private void cropPhoto(Uri pictureUri) {
+            // TODO: Use a public intent, when there is one.
             Intent intent = new Intent("com.android.camera.action.CROP");
-            intent.setDataAndType(mTakePictureUri, "image/*");
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropPictureUri);
+            intent.setDataAndType(pictureUri, "image/*");
+            appendOutputExtra(intent, mCropPictureUri);
             appendCropExtras(intent);
-            mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
+            if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+                mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
+            } else {
+                onPhotoCropped(pictureUri, false);
+            }
+        }
+
+        private void appendOutputExtra(Intent intent, Uri pictureUri) {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setClipData(ClipData.newRawUri(MediaStore.EXTRA_OUTPUT, pictureUri));
         }
 
         private void appendCropExtras(Intent intent) {
@@ -408,6 +416,63 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
             intent.putExtra("aspectY", 1);
             intent.putExtra("outputX", mPhotoSize);
             intent.putExtra("outputY", mPhotoSize);
+        }
+
+        private void onPhotoCropped(final Uri data, final boolean cropped) {
+            new AsyncTask<Void, Void, Bitmap>() {
+                @Override
+                protected Bitmap doInBackground(Void... params) {
+                    if (cropped) {
+                        try {
+                            InputStream imageStream = mContext.getContentResolver()
+                                    .openInputStream(data);
+                            return BitmapFactory.decodeStream(imageStream);
+                        } catch (FileNotFoundException fe) {
+                            return null;
+                        }
+                    } else {
+                        // Scale and crop to a square aspect ratio
+                        Bitmap croppedImage = Bitmap.createBitmap(mPhotoSize, mPhotoSize,
+                                Config.ARGB_8888);
+                        Canvas canvas = new Canvas(croppedImage);
+                        Bitmap fullImage = null;
+                        try {
+                            InputStream imageStream = mContext.getContentResolver()
+                                    .openInputStream(data);
+                            fullImage = BitmapFactory.decodeStream(imageStream);
+                        } catch (FileNotFoundException fe) {
+                            return null;
+                        }
+                        if (fullImage != null) {
+                            final int squareSize = Math.min(fullImage.getWidth(),
+                                    fullImage.getHeight());
+                            final int left = (fullImage.getWidth() - squareSize) / 2;
+                            final int top = (fullImage.getHeight() - squareSize) / 2;
+                            Rect rectSource = new Rect(left, top,
+                                    left + squareSize, top + squareSize);
+                            Rect rectDest = new Rect(0, 0, mPhotoSize, mPhotoSize);
+                            Paint paint = new Paint();
+                            canvas.drawBitmap(fullImage, rectSource, rectDest, paint);
+                            return croppedImage;
+                        } else {
+                            // Bah! Got nothin.
+                            return null;
+                        }
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    if (bitmap != null) {
+                        mNewUserPhotoBitmap = bitmap;
+                        mNewUserPhotoDrawable = CircleFramedDrawable
+                                .getInstance(mImageView.getContext(), mNewUserPhotoBitmap);
+                        mImageView.setImageDrawable(mNewUserPhotoDrawable);
+                    }
+                    new File(mContext.getCacheDir(), TAKE_PICTURE_FILE_NAME).delete();
+                    new File(mContext.getCacheDir(), CROP_PICTURE_FILE_NAME).delete();
+                }
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
         }
 
         private static int getPhotoSize(Context context) {
@@ -423,11 +488,13 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
         }
 
         private static Uri createTempImageUri(Context context, String fileName) {
-            File folder = context.getExternalCacheDir();
+            final File folder = context.getCacheDir();
             folder.mkdirs();
-            File fullPath = new File(folder, fileName);
+            final File fullPath = new File(folder, fileName);
             fullPath.delete();
-            return Uri.fromFile(fullPath.getAbsoluteFile());
+            final Uri fileUri =
+                    FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, fullPath);
+            return fileUri;
         }
 
         private static final class AdapterItem {
