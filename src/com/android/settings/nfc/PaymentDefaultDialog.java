@@ -125,12 +125,15 @@ public final class PaymentDefaultDialog extends AlertActivity implements
 
         // Compose dialog; get
         final AlertController.AlertParams p = mAlertParams;
-        p.mTitle = getString(R.string.nfc_payment_set_default);
+        p.mTitle = getString(R.string.nfc_payment_set_default_label);
         if (defaultAppInfo == null) {
-            p.mMessage = "Always use " + newAppInfo.loadLabel(pm) + " when you tap and pay?";
+            String formatString = getString(R.string.nfc_payment_set_default);
+            String msg = String.format(formatString, newAppInfo.loadLabel(pm));
+            p.mMessage = msg;
         } else {
-            p.mMessage = "Always use " + newAppInfo.loadLabel(pm) + " instead of " +
-                    defaultAppInfo.loadLabel(pm) + " when you tap and pay?";
+            String formatString = getString(R.string.nfc_payment_set_default_instead_of);
+            String msg = String.format(formatString, newAppInfo.loadLabel(pm), defaultAppInfo.loadLabel(pm));
+            p.mMessage = msg;
         }
         p.mPositiveButtonText = getString(R.string.yes);
         p.mNegativeButtonText = getString(R.string.no);

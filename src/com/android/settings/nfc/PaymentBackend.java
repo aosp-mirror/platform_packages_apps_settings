@@ -33,7 +33,7 @@ public class PaymentBackend {
 
     public static class PaymentAppInfo {
         CharSequence caption;
-        Drawable icon;
+        Drawable banner;
         boolean isDefault;
         public ComponentName componentName;
     }
@@ -62,7 +62,7 @@ public class PaymentBackend {
         for (ApduServiceInfo service : serviceInfos) {
             PaymentAppInfo appInfo = new PaymentAppInfo();
             appInfo.caption = service.loadLabel(pm);
-            appInfo.icon = service.loadIcon(pm);
+            appInfo.banner = service.loadBanner(pm);
             appInfo.isDefault = service.getComponent().equals(defaultApp);
             appInfo.componentName = service.getComponent();
             appInfos.add(appInfo);

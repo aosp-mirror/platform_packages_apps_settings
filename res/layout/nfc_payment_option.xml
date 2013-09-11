@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -21,53 +21,24 @@
     android:focusable="true"
     android:clickable="true"
     android:gravity="center_vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:background="?android:attr/selectableItemBackground">
-    <LinearLayout
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
         android:minWidth="@*android:dimen/preference_icon_minWidth"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+android:id/icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:id="@+id/banner"
             android:layout_gravity="center"
-            android:minWidth="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
             android:scaleType="centerInside"
-            android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"
                 />
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="6dip"
-        android:layout_marginTop="6dip"
-        android:layout_marginBottom="6dip"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+android:id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"/>
-        <TextView
-            android:id="@android:id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@android:id/title"
-            android:layout_alignStart="@android:id/title"
-            android:paddingBottom="3dip"
-            android:visibility="gone"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="13sp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:focusable="false"
-            android:maxLines="4" />
-    </RelativeLayout>
+    </FrameLayout>
     <RadioButton
         android:id="@android:id/button1"
         android:layout_width="wrap_content"
@@ -77,4 +48,4 @@
         android:duplicateParentState="true"
         android:clickable="false"
         android:focusable="false" />
-</LinearLayout>
+</RelativeLayout>
