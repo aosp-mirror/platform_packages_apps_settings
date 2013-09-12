@@ -54,6 +54,7 @@ import android.widget.TextView;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accessibility.ToggleCaptioningPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
@@ -317,6 +318,7 @@ public class Settings extends PreferenceActivity
         PrivacySettings.class.getName(),
         DeviceAdminSettings.class.getName(),
         AccessibilitySettings.class.getName(),
+        ToggleCaptioningPreferenceFragment.class.getName(),
         TextToSpeechSettings.class.getName(),
         Memory.class.getName(),
         DevelopmentSettings.class.getName(),
@@ -940,6 +942,7 @@ public class Settings extends PreferenceActivity
     public static class StorageUseActivity extends Settings { /* empty */ }
     public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
     public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
+    public static class CaptioningSettingsActivity extends Settings { /* empty */ }
     public static class SecuritySettingsActivity extends Settings { /* empty */ }
     public static class LocationSettingsActivity extends Settings { /* empty */ }
     public static class PrivacySettingsActivity extends Settings { /* empty */ }
