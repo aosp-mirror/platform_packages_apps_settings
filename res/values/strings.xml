@@ -276,6 +276,8 @@
     <string name="bluetooth_connected_no_headset">Connected (no phone)</string>
     <!-- Bluetooth settings.  Message when connected to a device, except for media audio. [CHAR LIMIT=40] -->
     <string name="bluetooth_connected_no_a2dp">Connected (no media)</string>
+    <!-- Bluetooth settings.  Message when connected to a device, except for map. [CHAR LIMIT=40] -->
+    <string name="bluetooth_connected_no_map">Connected (no message access)</string>
     <!-- Bluetooth settings.  Message when connected to a device, except for phone/media audio. [CHAR LIMIT=40] -->
     <string name="bluetooth_connected_no_headset_no_a2dp">Connected (no phone or media)</string>
     <!-- Bluetooth settings.  Message when a device is disconnected -->
@@ -349,7 +351,7 @@
     <string name="bluetooth_connection_dialog_text">"Do you want to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022?"</string>
 
     <!-- Activity label of BluetoothPbPermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_request">"Phone book request"</string>
+    <string name="bluetooth_phonebook_request">"Phone book access request"</string>
 
     <!-- Bluetooth phone book permission Alert Activity text [CHAR LIMIT=none] -->
     <string name="bluetooth_pb_acceptance_dialog_text">%1$s wants to access your contacts and call history. Give access to %2$s?</string>
@@ -360,7 +362,7 @@
     <string name="bluetooth_pb_remember_choice">Don\'t ask again</string>
 
     <!-- Activity label of BluetoothMessagePermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
-    <string name="bluetooth_map_request">"Message request"</string>
+    <string name="bluetooth_map_request">"Message access request"</string>
 
     <!-- Bluetooth message permission Alert Activity text [CHAR LIMIT=none] -->
     <string name="bluetooth_map_acceptance_dialog_text">%1$s wants to access your messages. Give access to %2$s?</string>
@@ -1147,6 +1149,8 @@
     <string name="bluetooth_profile_pan">Internet access</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (sharing this device's Internet connection). [CHAR LIMIT=40]-->
     <string name="bluetooth_profile_pan_nap">Internet connection sharing</string>
+    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the map profile. -->
+    <string name="bluetooth_profile_map">Message Access</string>
 
     <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
@@ -1179,6 +1183,8 @@
     <string name="bluetooth_headset_profile_summary_connected">Connected to phone audio</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is connected. -->
     <string name="bluetooth_opp_profile_summary_connected">Connected to file transfer server</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference when map is connected. -->
+    <string name="bluetooth_map_profile_summary_connected">Connected to map</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is not connected. -->
     <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
@@ -1202,6 +1208,8 @@
          for the PAN checkbox preference that describes how checking it
          will set the PAN profile as preferred. -->
     <string name="bluetooth_pan_profile_summary_use_for">Use for Internet access</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference that describes how checking it will set the map profile as preferred. -->
+    <string name="bluetooth_map_profile_summary_use_for">Use for map</string>
 
     <!-- Bluetooth settings.  Dock Setting Title -->
     <string name="bluetooth_dock_settings">Dock Settings</string>
