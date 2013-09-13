@@ -194,9 +194,10 @@ public class RecentLocationApps {
         List<AppOpsManager.OpEntry> entries = ops.getOps();
         boolean highBattery = false;
         boolean normalBattery = false;
+        // Earliest time for a location request to end and still be shown in list.
+        long recentLocationCutoffTime = now - RECENT_TIME_INTERVAL_MILLIS;
         for (AppOpsManager.OpEntry entry : entries) {
-            // If previous location activity is older than designated interval, ignore this app.
-            if (now - entry.getTime() <= RECENT_TIME_INTERVAL_MILLIS) {
+            if (entry.isRunning() || entry.getTime() >= recentLocationCutoffTime) {
                 switch (entry.getOp()) {
                     case AppOpsManager.OP_MONITOR_LOCATION:
                         normalBattery = true;
