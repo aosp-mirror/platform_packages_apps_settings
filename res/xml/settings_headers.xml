@@ -62,6 +62,13 @@
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
 
+    <!-- Home -->
+    <header
+        android:id="@+id/home_settings"
+        android:icon="@drawable/ic_settings_home"
+        android:fragment="com.android.settings.HomeSettings"
+        android:title="@string/home_settings" />
+
     <!-- Sound -->
     <header
         android:id="@+id/sound_settings"
