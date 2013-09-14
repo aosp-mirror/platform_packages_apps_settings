@@ -242,10 +242,14 @@ public class InstalledAppDetails extends Fragment
     }
     
     private void initDataButtons() {
-        if ((mAppEntry.info.flags&(ApplicationInfo.FLAG_SYSTEM
-                | ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA))
-                == ApplicationInfo.FLAG_SYSTEM
-                || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+        // If the app doesn't have its own space management UI
+        // And it's a system app that doesn't allow clearing user data or is an active admin
+        // Then disable the Clear Data button.
+        if (mAppEntry.info.manageSpaceActivityName == null
+                && ((mAppEntry.info.flags&(ApplicationInfo.FLAG_SYSTEM
+                        | ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA))
+                        == ApplicationInfo.FLAG_SYSTEM
+                        || mDpm.packageHasActiveAdmins(mPackageInfo.packageName))) {
             mClearDataButton.setText(R.string.clear_user_data_text);
             mClearDataButton.setEnabled(false);
             mCanClearData = false;
