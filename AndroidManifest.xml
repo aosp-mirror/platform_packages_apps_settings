@@ -854,6 +854,18 @@
                 android:resource="@id/security_settings" />
         </activity>
 
+        <activity android:name="MonitoringCertInfoActivity"
+                android:label="@string/ssl_ca_cert_dialog_title"
+                android:theme="@style/Transparent"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.MONITORING_CERT_INFO" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$TrustedCredentialsSettingsActivity"
                 android:label="@string/trusted_credentials"
                 android:taskAffinity=""
