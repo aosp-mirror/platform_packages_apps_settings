@@ -35,9 +35,13 @@ public class Utils {
      * @param millis the elapsed time in milli seconds
      * @return the formatted elapsed time
      */
-    public static String formatElapsedTime(Context context, double millis) {
+    public static String formatElapsedTime(Context context, double millis, boolean inclSeconds) {
         StringBuilder sb = new StringBuilder();
         int seconds = (int) Math.floor(millis / 1000);
+        if (!inclSeconds) {
+            // Round up.
+            seconds += 30;
+        }
 
         int days = 0, hours = 0, minutes = 0;
         if (seconds > SECONDS_PER_DAY) {
@@ -52,15 +56,28 @@ public class Utils {
             minutes = seconds / SECONDS_PER_MINUTE;
             seconds -= minutes * SECONDS_PER_MINUTE;
         }
-        if (days > 0) {
-            sb.append(context.getString(R.string.battery_history_days,
-                    days, hours, minutes, seconds));
-        } else if (hours > 0) {
-            sb.append(context.getString(R.string.battery_history_hours, hours, minutes, seconds));
-        } else if (minutes > 0) {
-            sb.append(context.getString(R.string.battery_history_minutes, minutes, seconds));
+        if (inclSeconds) {
+            if (days > 0) {
+                sb.append(context.getString(R.string.battery_history_days,
+                        days, hours, minutes, seconds));
+            } else if (hours > 0) {
+                sb.append(context.getString(R.string.battery_history_hours,
+                        hours, minutes, seconds));
+            } else if (minutes > 0) {
+                sb.append(context.getString(R.string.battery_history_minutes, minutes, seconds));
+            } else {
+                sb.append(context.getString(R.string.battery_history_seconds, seconds));
+            }
         } else {
-            sb.append(context.getString(R.string.battery_history_seconds, seconds));
+            if (days > 0) {
+                sb.append(context.getString(R.string.battery_history_days_no_seconds,
+                        days, hours, minutes));
+            } else if (hours > 0) {
+                sb.append(context.getString(R.string.battery_history_hours_no_seconds,
+                        hours, minutes));
+            } else {
+                sb.append(context.getString(R.string.battery_history_minutes_no_seconds, minutes));
+            }
         }
         return sb.toString();
     }

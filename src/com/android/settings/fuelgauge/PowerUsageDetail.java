@@ -333,7 +333,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                         mUsesGps = true;
                         // Fall through
                     default:
-                        value = Utils.formatElapsedTime(getActivity(), mValues[i]);
+                        value = Utils.formatElapsedTime(getActivity(), mValues[i], true);
                 }
                 ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_detail_item_text,
                         null);

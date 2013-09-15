@@ -340,7 +340,7 @@ public class BatteryHistoryChart extends View {
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000,
                 BatteryStats.STATS_SINCE_CHARGED);
         mStatsPeriod = uSecTime;
-        String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000);
+        String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000, true);
         mDurationString = getContext().getString(R.string.battery_stats_on_battery,
                 durationString);
         mChargingLabel = getContext().getString(R.string.battery_stats_charging_label);
@@ -382,7 +382,7 @@ public class BatteryHistoryChart extends View {
             mHavePhoneSignal = true;
         }
         if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
-        mTotalDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart);
+        mTotalDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
     }
 
     @Override

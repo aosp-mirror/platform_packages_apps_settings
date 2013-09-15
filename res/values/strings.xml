@@ -3239,6 +3239,15 @@
     <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
     <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
 
+    <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
+    <string name="battery_history_days_no_seconds"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m</string>
+
+    <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
+    <string name="battery_history_hours_no_seconds"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>m</string>
+
+    <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
+    <string name="battery_history_minutes_no_seconds"><xliff:g id="minutes">%1$d</xliff:g>m</string>
+
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
 
@@ -3619,16 +3628,38 @@
     <!-- [CHAR LIMIT=NONE] Label for amount of memory use -->
     <string name="app_memory_use">Memory use</string>
     <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
-    <string name="process_stats_total_duration">Stats over <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="process_stats_total_duration"><xliff:g id="type">%1$s</xliff:g> apps over
+        <xliff:g id="time">%2$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
+    <string name="process_stats_type_background">Background</string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
+    <string name="process_stats_type_foreground">Foreground</string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
+    <string name="process_stats_type_cached">Cached</string>
     <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
     <string name="process_stats_memory_status">Device memory is currently
         <xliff:g id="memstate">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Label for item showing details of average RAM use -->
-    <string name="process_stats_ram_use">Average RAM use</string>
+    <string name="process_stats_avg_ram_use">Average RAM use</string>
+    <!-- [CHAR LIMIT=NONE] Label for item showing details of maximum RAM use -->
+    <string name="process_stats_max_ram_use">Maximum RAM use</string>
     <!-- [CHAR LIMIT=NONE] Label for item showing percent of time spent running -->
     <string name="process_stats_run_time">Run time</string>
     <!-- [CHAR LIMIT=NONE] Subtitle for process stats services list -->
     <string name="services_subtitle">Services</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to control whether system processes are shown -->
+    <string name="menu_show_system">Show system</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to control whether computation should be based
+        on Uss (Unique Set Size) instead of Pss (Proportional Set Size) -->
+    <string name="menu_use_uss">Use Uss</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to select which type of stats to show -->
+    <string name="menu_proc_stats_type">Stats type</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show information on background processes -->
+    <string name="menu_proc_stats_type_background">Background</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show information on foreground processes -->
+    <string name="menu_proc_stats_type_foreground">Foreground</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show information on cached processes -->
+    <string name="menu_proc_stats_type_cached">Cached</string>
 
     <!-- Voice input/output settings --><skip />
     <!-- Title of setting on main settings screen. This item will take the user to the screen to tweak settings related to speech functionality -->
