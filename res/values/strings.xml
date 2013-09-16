@@ -3419,9 +3419,8 @@
          <xliff:g id="service" example="My Print Service">%1$s</xliff:g>?</string>
     <!-- Summary for a warning message about security implications of enabling a print service,
          displayed as a dialog message when the user selects to enable a print service. [CHAR LIMIT=NONE] -->
-    <string name="print_service_security_warning_summary">
-         <xliff:g id="print_service_name">%1$s</xliff:g> can receive documents you print.
-         Such documents may contain sensitive data.</string>
+    <string name="print_service_security_warning_summary">Your document may pass through
+        one or more servers on its way to the printer.</string>
 
     <!-- Title for the prompt shown as a placeholder if no print serivices are installed. [CHAR LIMIT=50] -->
     <string name="print_no_services_installed">No services installed</string>
@@ -3446,8 +3445,14 @@
     <!-- Title for the search action bar menu item. [CHAR LIMIT=20] -->
     <string name="print_menu_item_search">Search</string>
 
-    <!-- Title for the printer categoty showing a list of available printers. [CHAR LIMIT=25] -->
-    <string name="category_printers">Printers</string>
+    <!-- Title for the prompt if no printers are available and the system is searching for such. [CHAR LIMIT=50] -->
+    <string name="print_searching_for_printers">Searching for printers</string>
+
+    <!-- Title for the menu item to open the print jobs screen. [CHAR LIMIT=25] -->
+    <string name="print_print_jobs">Print jobs</string>
+
+    <!-- Title for the print jobs screen. [CHAR LIMIT=25] -->
+    <string name="print_active_print_jobs">Active print jobs</string>
 
     <!-- App Fuel Gauge strings -->
     <skip />

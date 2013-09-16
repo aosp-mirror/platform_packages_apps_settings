@@ -27,7 +27,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.database.DataSetObserver;
@@ -275,9 +278,14 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         if (!TextUtils.isEmpty(settingsTitle) && !TextUtils.isEmpty(settingsComponentName)) {
             Intent settingsIntent = new Intent(Intent.ACTION_MAIN).setComponent(
                     ComponentName.unflattenFromString(settingsComponentName.toString()));
-            if (!getPackageManager().queryIntentActivities(settingsIntent, 0).isEmpty()) {
-                mSettingsTitle = settingsTitle;
-                mSettingsIntent = settingsIntent;
+            List<ResolveInfo> resolvedActivities = getPackageManager().queryIntentActivities(
+                    settingsIntent, 0);
+            if (!resolvedActivities.isEmpty()) {
+                // The activity is a component name, therefore it is one or none.
+                if (resolvedActivities.get(0).activityInfo.exported) {
+                    mSettingsTitle = settingsTitle;
+                    mSettingsIntent = settingsIntent;
+                }
             }
         }
 
@@ -290,9 +298,14 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 && !TextUtils.isEmpty(addPrintersComponentName)) {
             Intent addPritnersIntent = new Intent(Intent.ACTION_MAIN).setComponent(
                     ComponentName.unflattenFromString(addPrintersComponentName.toString()));
-            if (!getPackageManager().queryIntentActivities(addPritnersIntent, 0).isEmpty()) {
-                mAddPrintersTitle = addPrintersTitle;
-                mAddPrintersIntent = addPritnersIntent;
+            List<ResolveInfo> resolvedActivities = getPackageManager().queryIntentActivities(
+                    addPritnersIntent, 0);
+            if (!resolvedActivities.isEmpty()) {
+                // The activity is a component name, therefore it is one or none.
+                if (resolvedActivities.get(0).activityInfo.exported) {
+                    mAddPrintersTitle = addPrintersTitle;
+                    mAddPrintersIntent = addPritnersIntent;
+                }
             }
         }
 

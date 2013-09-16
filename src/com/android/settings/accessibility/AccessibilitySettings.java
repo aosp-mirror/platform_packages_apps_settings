@@ -20,6 +20,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,6 +42,7 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
+import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
@@ -66,6 +68,8 @@ import java.util.Set;
  */
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener {
+    private static final String LOG_TAG = "AccessibilitySettings";
+
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
             "market://search?q=pname:com.google.android.marvin.talkback";
 
@@ -605,7 +609,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                                         Uri marketUri = Uri.parse(screenreaderMarketLink);
                                         Intent marketIntent = new Intent(Intent.ACTION_VIEW,
                                                 marketUri);
-                                        startActivity(marketIntent);
+                                        try {
+                                            startActivity(marketIntent);
+                                        } catch (ActivityNotFoundException anfe) {
+                                            Log.w(LOG_TAG, "Couldn't start play store activity",
+                                                    anfe);
+                                        }
                                     }
                                 })
                         .setNegativeButton(android.R.string.cancel, null)
