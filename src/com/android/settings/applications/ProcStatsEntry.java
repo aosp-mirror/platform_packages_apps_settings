@@ -38,6 +38,9 @@ public final class ProcStatsEntry implements Parcelable {
     final boolean mUnique;
     final long mDuration;
     final long mAvgPss;
+    final long mMaxPss;
+    final long mAvgUss;
+    final long mMaxUss;
     final long mWeight;
 
     String mBestTargetPackage;
@@ -50,7 +53,7 @@ public final class ProcStatsEntry implements Parcelable {
     public String mUiPackage;
 
     public ProcStatsEntry(ProcessStats.ProcessState proc,
-            ProcessStats.ProcessDataCollection tmpTotals) {
+            ProcessStats.ProcessDataCollection tmpTotals, boolean useUss, boolean weightWithTime) {
         ProcessStats.computeProcessData(proc, tmpTotals, 0);
         mPackage = proc.mPackage;
         mUid = proc.mUid;
@@ -58,7 +61,10 @@ public final class ProcStatsEntry implements Parcelable {
         mUnique = proc.mCommonProcess == proc;
         mDuration = tmpTotals.totalTime;
         mAvgPss = tmpTotals.avgPss;
-        mWeight = mDuration * mAvgPss;
+        mMaxPss = tmpTotals.maxPss;
+        mAvgUss = tmpTotals.avgUss;
+        mMaxUss = tmpTotals.maxUss;
+        mWeight = (weightWithTime ? mDuration : 1) * (useUss ? mAvgUss : mAvgPss);
     }
 
     public ProcStatsEntry(Parcel in) {
@@ -68,13 +74,16 @@ public final class ProcStatsEntry implements Parcelable {
         mUnique = in.readInt() != 0;
         mDuration = in.readLong();
         mAvgPss = in.readLong();
+        mMaxPss = in.readLong();
+        mAvgUss = in.readLong();
+        mMaxUss = in.readLong();
         mWeight = in.readLong();
         mBestTargetPackage = in.readString();
         in.readTypedList(mServices, Service.CREATOR);
     }
 
-    public void evaluateTargetPackage(ProcessStats stats,
-            ProcessStats.ProcessDataCollection totals, Comparator<ProcStatsEntry> compare) {
+    public void evaluateTargetPackage(ProcessStats stats, ProcessStats.ProcessDataCollection totals,
+            Comparator<ProcStatsEntry> compare, boolean useUss, boolean weightWithTime) {
         mBestTargetPackage = null;
         if (mUnique) {
             mBestTargetPackage = mPackage;
@@ -93,7 +102,8 @@ public final class ProcStatsEntry implements Parcelable {
                         ProcessStats.ProcessState subProc =
                                 pkgState.mProcesses.valueAt(iproc);
                         if (subProc.mName.equals(mName)) {
-                            subProcs.add(new ProcStatsEntry(subProc, totals));
+                            subProcs.add(new ProcStatsEntry(subProc, totals, useUss,
+                                    weightWithTime));
                         }
                     }
                 }
@@ -184,6 +194,9 @@ public final class ProcStatsEntry implements Parcelable {
         dest.writeInt(mUnique ? 1 : 0);
         dest.writeLong(mDuration);
         dest.writeLong(mAvgPss);
+        dest.writeLong(mMaxPss);
+        dest.writeLong(mAvgUss);
+        dest.writeLong(mMaxUss);
         dest.writeLong(mWeight);
         dest.writeString(mBestTargetPackage);
         dest.writeTypedList(mServices);
