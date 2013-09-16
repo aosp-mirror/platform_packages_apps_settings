@@ -52,6 +52,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
     public static final int ACTION_FORCE_STOP = 1;
 
     public static final String EXTRA_ENTRY = "entry";
+    public static final String EXTRA_USE_USS = "use_uss";
     public static final String EXTRA_MAX_WEIGHT = "max_weight";
     public static final String EXTRA_TOTAL_TIME = "total_time";
 
@@ -59,6 +60,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
     private DevicePolicyManager mDpm;
 
     private ProcStatsEntry mEntry;
+    private boolean mUseUss;
     private long mMaxWeight;
     private long mTotalTime;
 
@@ -83,6 +85,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
         final Bundle args = getArguments();
         mEntry = (ProcStatsEntry)args.getParcelable(EXTRA_ENTRY);
         mEntry.retrieveUiData(mPm);
+        mUseUss = args.getBoolean(EXTRA_USE_USS);
         mMaxWeight = args.getLong(EXTRA_MAX_WEIGHT);
         mTotalTime = args.getLong(EXTRA_TOTAL_TIME);
     }
@@ -177,8 +180,12 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
     }
 
     private void fillDetailsSection() {
-        addDetailsItem(mDetailsParent, getResources().getText(R.string.process_stats_ram_use),
-                Formatter.formatShortFileSize(getActivity(), mEntry.mAvgPss * 1024));
+        addDetailsItem(mDetailsParent, getResources().getText(R.string.process_stats_avg_ram_use),
+                Formatter.formatShortFileSize(getActivity(),
+                        (mUseUss ? mEntry.mAvgUss : mEntry.mAvgPss) * 1024));
+        addDetailsItem(mDetailsParent, getResources().getText(R.string.process_stats_max_ram_use),
+                Formatter.formatShortFileSize(getActivity(),
+                        (mUseUss ? mEntry.mMaxUss : mEntry.mMaxPss) * 1024));
         addDetailsItem(mDetailsParent, getResources().getText(R.string.process_stats_run_time),
                 makePercentString(getResources(), mEntry.mDuration, mTotalTime));
     }
