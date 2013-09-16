@@ -613,8 +613,8 @@
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Tersambung ke jaringan Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS sedang berlangsung dan memerlukan waktu hingga dua menit untuk selesai"</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"Gagal memulai WPS. Coba lagi setelah beberapa menit."</string>
-    <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Pengaturan keamanan router nirkabel (TKIP) tidak didukung"</string>
-    <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Pengaturan keamanan router nirkabel (TKIP) tidak didukung"</string>
+    <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Setelan keamanan router nirkabel (TKIP) tidak didukung"</string>
+    <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Setelan keamanan router nirkabel (TKIP) tidak didukung"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Pengesahan gagal. Harap coba lagi."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Terdeteksi sesi WPS lainnya. Coba lagi setelah beberapa menit."</string>
     <string name="wifi_ssid" msgid="641393708309146745">"SSID jaringan"</string>
@@ -1378,6 +1378,12 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g>jam<xliff:g id="MINUTES">%2$d</xliff:g>men <xliff:g id="SECONDS">%3$d</xliff:g>det"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>menit <xliff:g id="SECONDS">%2$d</xliff:g> detik"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g>det"</string>
+    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
+    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistik penggunaan"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Statistik penggunaan"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Sortir menurut:"</string>
@@ -1444,7 +1450,8 @@
     <string name="print_settings" msgid="4742428530112487843">"Pencetakan"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Layanan cetak"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Gunakan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="print_service_security_warning_summary" msgid="919299459931111450">"<xliff:g id="PRINT_SERVICE_NAME">%1$s</xliff:g> dapat menerima dokumen yang Anda cetak. Dokumen seperti itu dapat berisi data sensitif."</string>
+    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
+    <skip />
     <string name="print_no_services_installed" msgid="8443039625463872294">"Tidak ada layanan terpasang"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Setelan"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Tambahkan printer"</string>
@@ -1453,7 +1460,12 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Tambahkan layanan"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Tambahkan printer"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Telusuri"</string>
-    <string name="category_printers" msgid="4345417708283144981">"Printer"</string>
+    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
+    <skip />
+    <!-- no translation found for print_print_jobs (3582094777756968793) -->
+    <skip />
+    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
+    <skip />
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Baterai"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Apa yang menggunakan daya baterai"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Data penggunaan baterai tidak tersedia."</string>
@@ -1533,11 +1545,33 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistik Proses"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistik teknis tentang proses yang berjalan"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Penggunaan memori"</string>
-    <string name="process_stats_total_duration" msgid="663196332079061529">"Statistik selama <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
+    <skip />
+    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
+    <skip />
+    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
+    <skip />
+    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
+    <skip />
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Memori perangkat saat ini <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <string name="process_stats_ram_use" msgid="1271366870003042708">"Rata-rata penggunaan RAM"</string>
+    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
+    <skip />
+    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
+    <skip />
     <string name="process_stats_run_time" msgid="6520628955709369115">"Waktu berjalan"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Layanan"</string>
+    <!-- no translation found for menu_show_system (8864603400415567635) -->
+    <skip />
+    <!-- no translation found for menu_use_uss (467765290771543089) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
+    <skip />
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Masukan suara &amp; keluaran"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Masukan suara &amp; setelan keluaran"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Penelusuran suara"</string>
@@ -1932,6 +1966,18 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Nonaktif"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Tidak Wajib"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Wajib"</string>
+    <!-- no translation found for ssl_ca_cert_warning (2045866713601984673) -->
+    <skip />
+    <!-- no translation found for done_button (1991471253042622230) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_dialog_title (5339377665264149395) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_info_message (2076057204539053958) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_warning_message (8212122519110935512) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_settings_button (8760495070836213605) -->
+    <skip />
     <string name="user_settings_title" msgid="6151874007858148344">"Pengguna"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Pengguna &amp; profil"</string>
     <string name="user_add_user_menu" msgid="3154537325132012954">"Tambahkan pengguna atau profil"</string>
@@ -1984,14 +2030,10 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"Ubah bahasa"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Ubah ukuran font"</string>
     <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Pembayaran"</string>
-    <!-- no translation found for nfc_payment_no_apps (5518479703188056016) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_label (7315817259485674542) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (5427393822785989090) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (5642684106041605080) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Jadikan preferensi Anda?"</string>
+    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Selalu gunakan <xliff:g id="APP">%1$s</xliff:g> saat Anda melakukan ketuk dan bayar?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Selalu gunakan <xliff:g id="APP_0">%1$s</xliff:g>, bukan <xliff:g id="APP_1">%2$s</xliff:g>, saat menggunakan ketuk dan bayar?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Batasan"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Hapus batasan"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Ubah PIN"</string>
