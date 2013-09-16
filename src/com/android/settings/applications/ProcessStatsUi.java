@@ -37,6 +37,7 @@ import android.util.TimeUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import com.android.internal.app.IProcessStats;
 import com.android.internal.app.ProcessStats;
 import com.android.settings.R;
@@ -56,9 +57,14 @@ public class ProcessStatsUi extends PreferenceFragment {
     private static final String KEY_MEM_STATUS = "mem_status";
 
     private static final int MENU_STATS_REFRESH = Menu.FIRST;
-    private static final int MENU_HELP = Menu.FIRST + 2;
+    private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 1;
+    private static final int MENU_USE_USS = Menu.FIRST + 2;
+    private static final int MENU_TYPE_BACKGROUND = Menu.FIRST + 3;
+    private static final int MENU_TYPE_FOREGROUND = Menu.FIRST + 4;
+    private static final int MENU_TYPE_CACHED = Menu.FIRST + 5;
+    private static final int MENU_HELP = Menu.FIRST + 6;
 
-    static final int MAX_ITEMS_TO_LIST = 20;
+    static final int MAX_ITEMS_TO_LIST = 40;
 
     final static Comparator<ProcStatsEntry> sEntryCompare = new Comparator<ProcStatsEntry>() {
         @Override
@@ -78,6 +84,16 @@ public class ProcessStatsUi extends PreferenceFragment {
     UserManager mUm;
     ProcessStats mStats;
     int mMemState;
+
+    private boolean mShowSystem;
+    private boolean mUseUss;
+    private int mStatsType;
+
+    private MenuItem mShowSystemMenu;
+    private MenuItem mUseUssMenu;
+    private MenuItem mTypeBackgroundMenu;
+    private MenuItem mTypeForegroundMenu;
+    private MenuItem mTypeCachedMenu;
 
     private PreferenceGroup mAppListGroup;
     private Preference mMemStatusPref;
@@ -99,6 +115,10 @@ public class ProcessStatsUi extends PreferenceFragment {
         mUm = (UserManager)getActivity().getSystemService(Context.USER_SERVICE);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mMemStatusPref = mAppListGroup.findPreference(KEY_MEM_STATUS);
+        mShowSystem = icicle != null ? icicle.getBoolean("show_system") : false;
+        mUseUss = icicle != null ? icicle.getBoolean("use_uss") : false;
+        mStatsType = icicle != null ? icicle.getInt("stats_type", MENU_TYPE_BACKGROUND)
+                : MENU_TYPE_BACKGROUND;
         setHasOptionsMenu(true);
     }
 
@@ -111,6 +131,14 @@ public class ProcessStatsUi extends PreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("show_system", mShowSystem);
+        outState.putBoolean("use_uss", mUseUss);
+        outState.putInt("stats_type", mStatsType);
     }
 
     @Override
@@ -130,6 +158,7 @@ public class ProcessStatsUi extends PreferenceFragment {
         ProcessStatsPreference pgp = (ProcessStatsPreference) preference;
         Bundle args = new Bundle();
         args.putParcelable(ProcessStatsDetail.EXTRA_ENTRY, pgp.getEntry());
+        args.putBoolean(ProcessStatsDetail.EXTRA_USE_USS, mUseUss);
         args.putLong(ProcessStatsDetail.EXTRA_MAX_WEIGHT, mMaxWeight);
         args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, mTotalTime);
         ((PreferenceActivity) getActivity()).startPreferencePanel(
@@ -145,6 +174,31 @@ public class ProcessStatsUi extends PreferenceFragment {
                 .setAlphabeticShortcut('r');
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        mShowSystemMenu = menu.add(0, MENU_SHOW_SYSTEM, 0, R.string.menu_show_system)
+                .setAlphabeticShortcut('s')
+                .setCheckable(true)
+                .setChecked(mShowSystem)
+                .setEnabled(mStatsType == MENU_TYPE_BACKGROUND);
+        mUseUssMenu = menu.add(0, MENU_USE_USS, 0, R.string.menu_use_uss)
+                .setAlphabeticShortcut('s')
+                .setCheckable(true)
+                .setChecked(mUseUss);
+        SubMenu subMenu = menu.addSubMenu(R.string.menu_proc_stats_type);
+        mTypeBackgroundMenu = subMenu.add(0, MENU_TYPE_BACKGROUND, 0,
+                R.string.menu_proc_stats_type_background)
+                .setAlphabeticShortcut('b')
+                .setCheckable(true)
+                .setChecked(mStatsType == MENU_TYPE_BACKGROUND);
+        mTypeForegroundMenu = subMenu.add(0, MENU_TYPE_FOREGROUND, 0,
+                R.string.menu_proc_stats_type_foreground)
+                .setAlphabeticShortcut('f')
+                .setCheckable(true)
+                .setChecked(mStatsType == MENU_TYPE_FOREGROUND);
+        mTypeCachedMenu = subMenu.add(0, MENU_TYPE_CACHED, 0,
+                R.string.menu_proc_stats_type_cached)
+                .setAlphabeticShortcut('c')
+                .setCheckable(true)
+                .setChecked(mStatsType == MENU_TYPE_CACHED);
 
         /*
         String helpUrl;
@@ -162,6 +216,20 @@ public class ProcessStatsUi extends PreferenceFragment {
                 mStats = null;
                 refreshStats();
                 return true;
+            case MENU_SHOW_SYSTEM:
+                mShowSystem = !mShowSystem;
+                refreshStats();
+                return true;
+            case MENU_USE_USS:
+                mUseUss = !mUseUss;
+                refreshStats();
+                return true;
+            case MENU_TYPE_BACKGROUND:
+            case MENU_TYPE_FOREGROUND:
+            case MENU_TYPE_CACHED:
+                mStatsType = item.getItemId();
+                refreshStats();
+                return true;
             default:
                 return false;
         }
@@ -173,9 +241,56 @@ public class ProcessStatsUi extends PreferenceFragment {
         mAppListGroup.addPreference(notAvailable);
     }
 
+    public static final int[] BACKGROUND_AND_SYSTEM_PROC_STATES = new int[] {
+            ProcessStats.STATE_PERSISTENT, ProcessStats.STATE_IMPORTANT_FOREGROUND,
+            ProcessStats.STATE_IMPORTANT_BACKGROUND, ProcessStats.STATE_BACKUP,
+            ProcessStats.STATE_HEAVY_WEIGHT, ProcessStats.STATE_SERVICE,
+            ProcessStats.STATE_SERVICE_RESTARTING, ProcessStats.STATE_RECEIVER
+    };
+
+    public static final int[] FOREGROUND_PROC_STATES = new int[] {
+            ProcessStats.STATE_TOP
+    };
+
+    public static final int[] CACHED_PROC_STATES = new int[] {
+            ProcessStats.STATE_CACHED_ACTIVITY, ProcessStats.STATE_CACHED_ACTIVITY_CLIENT,
+            ProcessStats.STATE_CACHED_EMPTY
+    };
+
     private void refreshStats() {
         if (mStats == null) {
             load();
+        }
+
+        if (mShowSystemMenu != null) {
+            mShowSystemMenu.setChecked(mShowSystem);
+            mShowSystemMenu.setEnabled(mStatsType == MENU_TYPE_BACKGROUND);
+        }
+        if (mUseUssMenu != null) {
+            mUseUssMenu.setChecked(mUseUss);
+        }
+        if (mTypeBackgroundMenu != null) {
+            mTypeBackgroundMenu.setChecked(mStatsType == MENU_TYPE_BACKGROUND);
+        }
+        if (mTypeForegroundMenu != null) {
+            mTypeForegroundMenu.setChecked(mStatsType == MENU_TYPE_FOREGROUND);
+        }
+        if (mTypeCachedMenu != null) {
+            mTypeCachedMenu.setChecked(mStatsType == MENU_TYPE_CACHED);
+        }
+
+        int[] stats;
+        int statsLabel;
+        if (mStatsType == MENU_TYPE_FOREGROUND) {
+            stats = FOREGROUND_PROC_STATES;
+            statsLabel = R.string.process_stats_type_foreground;
+        } else if (mStatsType == MENU_TYPE_CACHED) {
+            stats = CACHED_PROC_STATES;
+            statsLabel = R.string.process_stats_type_cached;
+        } else {
+            stats = mShowSystem ? BACKGROUND_AND_SYSTEM_PROC_STATES
+                    : ProcessStats.BACKGROUND_PROC_STATES;
+            statsLabel = R.string.process_stats_type_background;
         }
 
         mAppListGroup.removeAll();
@@ -184,7 +299,7 @@ public class ProcessStatsUi extends PreferenceFragment {
         mMemStatusPref.setOrder(-2);
         mAppListGroup.addPreference(mMemStatusPref);
         String durationString = Utils.formatElapsedTime(getActivity(),
-                mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime);
+                mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime, false);
         CharSequence memString;
         CharSequence[] memStates = getResources().getTextArray(R.array.ram_states);
         if (mMemState >= 0 && mMemState < memStates.length) {
@@ -193,7 +308,7 @@ public class ProcessStatsUi extends PreferenceFragment {
             memString = "?";
         }
         mMemStatusPref.setTitle(getActivity().getString(R.string.process_stats_total_duration,
-                durationString));
+                getActivity().getString(statsLabel), durationString));
         mMemStatusPref.setSummary(getActivity().getString(R.string.process_stats_memory_status,
                         memString));
         /*
@@ -208,8 +323,7 @@ public class ProcessStatsUi extends PreferenceFragment {
         */
 
         ProcessStats.ProcessDataCollection totals = new ProcessStats.ProcessDataCollection(
-                ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ,
-                ProcessStats.BACKGROUND_PROC_STATES);
+                ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ, stats);
 
         long now = SystemClock.uptimeMillis();
 
@@ -251,7 +365,8 @@ public class ProcessStatsUi extends PreferenceFragment {
         for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
             SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
             for (int iu=0; iu<uids.size(); iu++) {
-                ProcStatsEntry ent = new ProcStatsEntry(uids.valueAt(iu), totals);
+                ProcStatsEntry ent = new ProcStatsEntry(uids.valueAt(iu), totals, mUseUss,
+                        mStatsType == MENU_TYPE_BACKGROUND);
                 procs.add(ent);
                 processes.put(ent.mName, ent);
             }
@@ -275,9 +390,10 @@ public class ProcessStatsUi extends PreferenceFragment {
             ProcStatsEntry proc = procs.get(i);
             final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
             final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
-            if (percentOfWeight < 1) continue;
+            if (percentOfWeight < 2) break;
             ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null, proc);
-            proc.evaluateTargetPackage(mStats, totals, sEntryCompare);
+            proc.evaluateTargetPackage(mStats, totals, sEntryCompare, mUseUss,
+                    mStatsType == MENU_TYPE_BACKGROUND);
             proc.retrieveUiData(pm);
             pref.setTitle(proc.mUiLabel);
             if (proc.mUiTargetApp != null) {
@@ -290,15 +406,17 @@ public class ProcessStatsUi extends PreferenceFragment {
         }
 
         // Add in service info.
-        for (int ip=0, N=mStats.mPackages.getMap().size(); ip<N; ip++) {
-            SparseArray<ProcessStats.PackageState> uids = mStats.mPackages.getMap().valueAt(ip);
-            for (int iu=0; iu<uids.size(); iu++) {
-                ProcessStats.PackageState ps = uids.valueAt(iu);
-                for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
-                    ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
-                    if (ss.mProcessName != null) {
-                        ProcStatsEntry ent = processes.get(ss.mProcessName);
-                        ent.addService(ss);
+        if (mStatsType == MENU_TYPE_BACKGROUND) {
+            for (int ip=0, N=mStats.mPackages.getMap().size(); ip<N; ip++) {
+                SparseArray<ProcessStats.PackageState> uids = mStats.mPackages.getMap().valueAt(ip);
+                for (int iu=0; iu<uids.size(); iu++) {
+                    ProcessStats.PackageState ps = uids.valueAt(iu);
+                    for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
+                        ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
+                        if (ss.mProcessName != null) {
+                            ProcStatsEntry ent = processes.get(ss.mProcessName);
+                            ent.addService(ss);
+                        }
                     }
                 }
             }
