@@ -1453,7 +1453,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                         obj.transact(IBinder.SYSPROPS_TRANSACTION, data, null, 0);
                     } catch (RemoteException e) {
                     } catch (Exception e) {
-                        Log.i(TAG, "Somone wrote a bad service '" + service
+                        Log.i(TAG, "Someone wrote a bad service '" + service
                                 + "' that doesn't like to be poked: " + e);
                     }
                     data.recycle();
