@@ -66,6 +66,7 @@ import java.util.List;
 public class RestrictedProfileSettings extends AppRestrictionsFragment {
 
     private static final String KEY_SAVED_PHOTO = "pending_photo";
+    private static final String KEY_AWAITING_RESULT = "awaiting_result";
     private static final int DIALOG_ID_EDIT_USER_INFO = 1;
     public static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
 
@@ -76,6 +77,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
     private Dialog mEditUserInfoDialog;
     private EditUserPhotoController mEditUserPhotoController;
     private Bitmap mSavedPhoto;
+    private boolean mWaitingForActivityResult;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -83,6 +85,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
 
         if (icicle != null) {
             mSavedPhoto = (Bitmap) icicle.getParcelable(KEY_SAVED_PHOTO);
+            mWaitingForActivityResult = icicle.getBoolean(KEY_AWAITING_RESULT, false);
         }
 
         init(icicle);
@@ -111,6 +114,9 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
             outState.putParcelable(KEY_SAVED_PHOTO,
                     mEditUserPhotoController.getNewUserPhotoBitmap());
         }
+        if (mWaitingForActivityResult) {
+            outState.putBoolean(KEY_AWAITING_RESULT, mWaitingForActivityResult);
+        }
     }
 
     @Override
@@ -124,8 +130,15 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
     }
 
     @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        mWaitingForActivityResult = true;
+        super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        mWaitingForActivityResult = false;
 
         if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
                 && mEditUserPhotoController.onActivityResult(requestCode, resultCode, data)) {
@@ -168,9 +181,8 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
                 }
             }
             userPhotoView.setImageDrawable(drawable);
-
             mEditUserPhotoController = new EditUserPhotoController(this, userPhotoView,
-                    mSavedPhoto, drawable);
+                    mSavedPhoto, drawable, mWaitingForActivityResult);
 
             mEditUserInfoDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.profile_info_settings_title)
@@ -262,12 +274,12 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
         private Drawable mNewUserPhotoDrawable;
 
         public EditUserPhotoController(Fragment fragment, ImageView view,
-                Bitmap bitmap, Drawable drawable) {
+                Bitmap bitmap, Drawable drawable, boolean waiting) {
             mContext = view.getContext();
             mFragment = fragment;
             mImageView = view;
-            mCropPictureUri = createTempImageUri(mContext, CROP_PICTURE_FILE_NAME);
-            mTakePictureUri = createTempImageUri(mContext, TAKE_PICTURE_FILE_NAME);
+            mCropPictureUri = createTempImageUri(mContext, CROP_PICTURE_FILE_NAME, !waiting);
+            mTakePictureUri = createTempImageUri(mContext, TAKE_PICTURE_FILE_NAME, !waiting);
             mPhotoSize = getPhotoSize(mContext);
             mImageView.setOnClickListener(new OnClickListener() {
                 @Override
@@ -487,11 +499,13 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
             }
         }
 
-        private static Uri createTempImageUri(Context context, String fileName) {
+        private Uri createTempImageUri(Context context, String fileName, boolean purge) {
             final File folder = context.getCacheDir();
             folder.mkdirs();
             final File fullPath = new File(folder, fileName);
-            fullPath.delete();
+            if (purge) {
+                fullPath.delete();
+            }
             final Uri fileUri =
                     FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, fullPath);
             return fileUri;
