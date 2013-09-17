@@ -400,7 +400,7 @@
     <string name="intent_sender_account_label">Account: </string>
 
     <!-- HTTP proxy settings title -->
-    <string name="proxy_settings_title">Proxy settings</string>
+    <string name="proxy_settings_title">Proxy</string>
     <!-- HTTP proxy settings. Button to clear the proxy box. -->
     <string name="proxy_clear_text">Clear</string>
     <!-- HTTP proxy settings. The port number label. -->
@@ -2380,8 +2380,13 @@
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile networks</string>
 
-    <!-- Manage mobile plan [CHAR LIMIT=35]-->
-    <string name="manage_mobile_plan_title" translatable="true">Manage mobile plan</string>
+    <!-- Mobile plan [CHAR LIMIT=35]-->
+    <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
+
+    <!-- SMS Application [CHAR LIMIT=35]-->
+    <string name="sms_application_title" translatable="true">Default SMS app</string>
+    <string name="sms_change_default_dialog_title" translatable="true">Change SMS app?</string>
+    <string name="sms_change_default_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> instead of <xliff:g id="current_app">%s</xliff:g> as your SMS application?</string>
 
     <!-- The SIM operator is not known [CHAR_ LIMIT=50]-->
     <string name="mobile_unknown_sim_operator" translatable="true">Uknown SIM operator</string>
@@ -4175,8 +4180,7 @@
     <!-- Messaage shown in dialog when you can't manually sync -->
     <string name="cant_sync_dialog_message">Sync for this item is currently disabled. To change this setting, temporarily turn on background data and automatic sync.</string>
 
-    <string name="wimax_settings">4G settings</string>
-    <string name="wimax_settings_summary">Set up &amp; manage 4G network and modem</string>
+    <string name="wimax_settings">4G</string>
     <string name="status_wimax_mac_address">4G MAC address</string>
     <!-- This is displayed to the user when the device needs to be decrypted -->
     <string name="enter_password">Type password to decrypt storage</string>
@@ -4802,8 +4806,6 @@
 
     <!-- Cell Broadcast settings title [CHAR LIMIT=50] -->
     <string name="cell_broadcast_settings">Cell broadcasts</string>
-    <!-- Cell Broadcast settings description [CHAR LIMIT=100] -->
-    <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
 
     <!-- User app limits screen title [CHAR LIMIT=35] -->
     <string name="user_restrictions_title">Application and content restrictions</string>

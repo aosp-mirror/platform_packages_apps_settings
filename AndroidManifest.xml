@@ -1642,6 +1642,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SmsDefaultDialog"
+                  android:label="@string/sms_application_title"
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.Holo.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.ACTION_CHANGE_DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$NotificationAccessSettingsActivity"
                   android:label="@string/manage_notification_access"
                   android:taskAffinity=""
