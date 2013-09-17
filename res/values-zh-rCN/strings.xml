@@ -41,7 +41,7 @@
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"打开 LTE RAM 转储"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"关闭 LTE RAM 转储"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"查看 SIM 卡地址簿"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定拨号"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定拨号号码"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"查看服务拨号"</string>
     <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"获取 PDP 列表"</string>
     <string name="radioInfo_service_in" msgid="1915416319177520020">"正在使用中"</string>
@@ -539,7 +539,7 @@
     <string name="wifi_display_options_name" msgid="4756080222307467898">"名称"</string>
     <string name="wifi_display_summary_on" msgid="3695429596604962531">"开启"</string>
     <string name="wifi_display_summary_off" msgid="2445210133184740611">"关闭"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"已停用"</string>
+    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"未启用"</string>
     <string name="wifi_display_certification_heading" msgid="3125105883233765652">"认证"</string>
     <string name="wifi_display_session_info" msgid="4733627902691604836">"会话信息"</string>
     <string name="wifi_display_listen_mode" msgid="2962301785910874273">"启用监听模式"</string>
@@ -591,7 +591,7 @@
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按钮"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"更多选项"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS PIN 输入"</string>
-    <string name="wifi_menu_p2p" msgid="7619851399250896797">"WLAN Direct"</string>
+    <string name="wifi_menu_p2p" msgid="7619851399250896797">"WLAN 直连"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"扫描"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"高级"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"连接到网络"</string>
@@ -636,7 +636,7 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"（未更改）"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"（未指定）"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"已保存"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"已停用"</string>
+    <string name="wifi_disabled_generic" msgid="4259794910584943386">"未启用"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"已停用（互联网连接状况不佳）"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"身份验证出现问题"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"不在范围内"</string>
@@ -680,7 +680,7 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"域名 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"网关"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"网络前缀长度"</string>
-    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"WLAN Direct"</string>
+    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"WLAN 直连"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"设备信息"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"记住该连接"</string>
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"搜索设备"</string>
@@ -926,7 +926,7 @@
     <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN 漫游协议"</string>
     <string name="carrier_enabled" msgid="407655861175280806">"APN 启用/停用"</string>
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN 已启用"</string>
-    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN 已停用"</string>
+    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"未启用 APN"</string>
     <string name="bearer" msgid="594270280031923558">"承载系统"</string>
     <string name="mvno_type" msgid="2543253857818336421">"MVNO 类型"</string>
     <string name="mvno_match_data" msgid="4560671695220540466">"MVNO 值"</string>
@@ -1015,7 +1015,7 @@
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"准确度高"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"耗电量低"</string>
     <string name="location_mode_sensors_only_title" msgid="5960338820984635411">"仅使用设备传感器"</string>
-    <string name="location_mode_location_off_title" msgid="2829713015012529465">"位置信息服务已关闭"</string>
+    <string name="location_mode_location_off_title" msgid="2829713015012529465">"位置信息：关闭"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近的位置信息请求"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"最近没有任何应用申请使用位置信息"</string>
     <string name="location_category_app_settings" msgid="46434611182743486">"应用设置"</string>
@@ -1158,7 +1158,7 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"正在运行"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB 存储设备"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD 卡中"</string>
-    <string name="disabled" msgid="9206776641295849915">"已停用"</string>
+    <string name="disabled" msgid="9206776641295849915">"未启用"</string>
     <string name="not_installed" msgid="1475144352069281880">"未安装"</string>
     <string name="no_applications" msgid="7336588977497084921">"无应用。"</string>
     <string name="internal_storage" msgid="1584700623164275282">"内部存储空间"</string>
@@ -1378,6 +1378,12 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> 小时 <xliff:g id="MINUTES">%2$d</xliff:g> 分 <xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> 分 <xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> 秒"</string>
+    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
+    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"使用情况统计数据"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"使用情况统计数据"</string>
     <string name="display_order_text" msgid="8592776965827565271">"排序方式："</string>
@@ -1444,7 +1450,8 @@
     <string name="print_settings" msgid="4742428530112487843">"打印"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"打印服务"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"要使用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
-    <string name="print_service_security_warning_summary" msgid="919299459931111450">"<xliff:g id="PRINT_SERVICE_NAME">%1$s</xliff:g>可以接收您打印的文档。此类文档可能包含敏感数据。"</string>
+    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
+    <skip />
     <string name="print_no_services_installed" msgid="8443039625463872294">"未安装任何服务"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"设置"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"添加打印机"</string>
@@ -1453,7 +1460,12 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"添加服务"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"添加打印机"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"搜索"</string>
-    <string name="category_printers" msgid="4345417708283144981">"打印机"</string>
+    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
+    <skip />
+    <!-- no translation found for print_print_jobs (3582094777756968793) -->
+    <skip />
+    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
+    <skip />
     <string name="power_usage_summary_title" msgid="7190304207330319919">"电池"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"耗电情况"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"无法获取电池使用数据。"</string>
@@ -1533,11 +1545,33 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"进程统计信息"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"运行中进程的相关技术统计信息"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"内存用量"</string>
-    <string name="process_stats_total_duration" msgid="663196332079061529">"<xliff:g id="TIME">%1$s</xliff:g>的统计信息"</string>
+    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
+    <skip />
+    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
+    <skip />
+    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
+    <skip />
+    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
+    <skip />
     <string name="process_stats_memory_status" msgid="4251599550196193093">"设备内存当前状态：<xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <string name="process_stats_ram_use" msgid="1271366870003042708">"RAM 平均使用率"</string>
+    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
+    <skip />
+    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
+    <skip />
     <string name="process_stats_run_time" msgid="6520628955709369115">"运行时间"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"服务"</string>
+    <!-- no translation found for menu_show_system (8864603400415567635) -->
+    <skip />
+    <!-- no translation found for menu_use_uss (467765290771543089) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
+    <skip />
     <string name="voice_input_output_settings" msgid="1336135218350444783">"语音输入与输出"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"语音输入与输出设置"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"语音搜索"</string>
@@ -1580,7 +1614,7 @@
     <string name="tts_engines_section" msgid="7515470972378742429">"引擎"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>设置"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已启用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
-    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"已停用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"未启用<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_settings_section" msgid="2346105138448751893">"引擎设置"</string>
     <string name="tts_engine_settings_title" msgid="3499112142425680334">"“<xliff:g id="TTS_ENGINE_NAME">%s</xliff:g>”的设置"</string>
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"语言和语音"</string>
@@ -1701,7 +1735,7 @@
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"建立连接可能需要几分钟时间..."</string>
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"触摸"<b>"下一步"</b>"可继续进行设置。\n\n触摸"<b>"返回"</b>"可连接到其他 WLAN 网络。"</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"同步功能已启用"</string>
-    <string name="accessibility_sync_disabled" msgid="1741194106479011384">"同步功能已停用"</string>
+    <string name="accessibility_sync_disabled" msgid="1741194106479011384">"未启用同步功能"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"同步错误。"</string>
     <string name="sync_failed" msgid="1696499856374109647">"同步失败"</string>
     <string name="sync_active" msgid="8476943765960863040">"正在同步"</string>
@@ -1929,7 +1963,7 @@
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"取消"</string>
     <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"其他系统更新"</string>
-    <string name="selinux_status_disabled" msgid="924551035552323327">"已停用"</string>
+    <string name="selinux_status_disabled" msgid="924551035552323327">"未启用"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"许可"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"执行中"</string>
     <!-- no translation found for ssl_ca_cert_warning (2045866713601984673) -->
@@ -1996,14 +2030,10 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"更改语言"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"更改字体大小"</string>
     <string name="nfc_payment_settings_title" msgid="1121386157283141856">"付款"</string>
-    <!-- no translation found for nfc_payment_no_apps (5518479703188056016) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_label (7315817259485674542) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (5427393822785989090) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (5642684106041605080) -->
-    <skip />
+    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
+    <string name="nfc_payment_set_default" msgid="5427393822785989090">"触碰付款时一律使用“<xliff:g id="APP">%1$s</xliff:g>”吗？"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"触碰付款时一律使用“<xliff:g id="APP_0">%1$s</xliff:g>”（取代“<xliff:g id="APP_1">%2$s</xliff:g>”）吗？"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"限制"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"取消限制"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改 PIN 码"</string>
