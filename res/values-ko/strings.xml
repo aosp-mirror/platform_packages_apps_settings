@@ -1091,8 +1091,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"앱 설정"</string>
     <string name="install_applications" msgid="4872012136210802181">"알 수 없는 소스"</string>
     <string name="install_unknown_applications" msgid="176855644862942064">"알 수 없는 출처의 앱 설치 허용"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"태블릿 및 개인 정보는 출처를 알 수 없는 앱의 공격에 매우 취약합니다. 이러한 앱을 사용하여 발생할 수 있는 태블릿 손상이나 데이터 손실에 대해 사용자에게 책임이 있음에 동의합니다."</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"휴대전화 및 개인 정보는 출처를 알 수 없는 앱의 공격에 매우 취약합니다. 이러한 앱을 사용하여 발생할 수 있는 휴대전화 손상이나 데이터 손실에 대해 사용자에게 책임이 있음에 동의합니다."</string>
+    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"태블릿 및 개인 정보는 출처를 알 수 없는 앱의 공격에 매우 취약합니다. 이러한 앱을 사용하여 발생할 수 있는 태블릿 손상이나 데이터 손실에 대한 책임은 사용자에게 있음에 동의합니다."</string>
+    <string name="install_all_warning" product="default" msgid="8113734576826384682">"휴대전화 및 개인 정보는 출처를 알 수 없는 앱의 공격에 매우 취약합니다. 이러한 앱을 사용하여 발생할 수 있는 휴대전화 손상이나 데이터 손실에 대한 책임은 사용자에게 있음에 동의합니다."</string>
     <string name="verify_applications" msgid="2959359554974828518">"앱 확인"</string>
     <string name="verify_applications_summary" msgid="6737505521913263792">"유해할 수 있는 앱의 설치를 허용하지 않거나 경고 표시"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"고급 설정"</string>
@@ -1329,7 +1329,7 @@
     <string name="clear_adb_keys" msgid="4038889221503122743">"USB 디버깅 권한 승인 취소"</string>
     <string name="bugreport_in_power" msgid="4548816486587403971">"전원 메뉴 버그 신고"</string>
     <string name="bugreport_in_power_summary" msgid="5764234382355067053">"전원 메뉴에 버그 신고 옵션 포함"</string>
-    <string name="keep_screen_on" msgid="1146389631208760344">"켜진 상태로 유지"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"화면 켜짐 상태 유지"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"충전하는 동안 화면이 꺼지지 않음"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"블루투스 HCI 스누프 로그 사용"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"모든 블루투스 HCI 패킷을 하나의 파일에 캡처"</string>
@@ -1432,7 +1432,7 @@
     <string name="print_settings" msgid="4742428530112487843">"인쇄"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"프린트 서비스"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
-    <string name="print_service_security_warning_summary" msgid="919299459931111450">"인쇄한 문서를 <xliff:g id="PRINT_SERVICE_NAME">%1$s</xliff:g>에서 받을 수 있습니다. 이런 문서에는 민감한 데이터가 포함되어 있을 수 있습니다."</string>
+    <string name="print_service_security_warning_summary" msgid="919299459931111450">"인쇄한 문서를 <xliff:g id="PRINT_SERVICE_NAME">%1$s</xliff:g>에서 받을 수 있습니다. 문서에는 민감한 데이터가 포함되어 있을 수 있습니다."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"설치된 서비스 없음"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"설정"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"프린터 추가"</string>
@@ -1519,10 +1519,10 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"미디어 서버"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"프로세스 통계"</string>
-    <string name="process_stats_summary" msgid="109387941605607762">"프로세스 실행에 관한 특이한 통계"</string>
+    <string name="process_stats_summary" msgid="109387941605607762">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"메모리 사용량"</string>
-    <string name="process_stats_total_duration" msgid="663196332079061529">"<xliff:g id="TIME">%1$s</xliff:g>을(를) 초과하는 통계"</string>
-    <string name="process_stats_memory_status" msgid="4251599550196193093">"현재 기기 메모리가 <xliff:g id="MEMSTATE">%1$s</xliff:g>입니다."</string>
+    <string name="process_stats_total_duration" msgid="663196332079061529">"<xliff:g id="TIME">%1$s</xliff:g> 동안의 통계"</string>
+    <string name="process_stats_memory_status" msgid="4251599550196193093">"현재 기기 메모리 수준: <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
     <string name="process_stats_ram_use" msgid="1271366870003042708">"평균 RAM 사용"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"재생 시간"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"서비스"</string>
@@ -1796,7 +1796,7 @@
     <string name="show_all_anrs" msgid="28462979638729082">"모든 ANR 보기"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"백그라운드 앱에 대해 앱 응답 없음 대화상자 표시"</string>
     <string name="experimental_webview" msgid="4492200819033780927">"시험용 WebView 사용"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"앱에서 최신(베타) WebView를 사용합니다."</string>
+    <string name="experimental_webview_summary" msgid="3431620080869482446">"앱에서 최신(베타) WebView 사용"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"데이터 사용량"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"데이터 사용 주기"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"데이터 로밍"</string>
@@ -1970,8 +1970,10 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"언어 변경"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"글꼴 크기 변경"</string>
     <string name="nfc_payment_settings_title" msgid="1121386157283141856">"결제"</string>
-    <string name="nfc_payment_ask" msgid="1061129391464251903">"항상 확인"</string>
-    <string name="nfc_payment_set_default" msgid="1583397933053078296">"기본으로 설정하시겠습니까?"</string>
+    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"기본으로 설정하시겠습니까?"</string>
+    <string name="nfc_payment_set_default" msgid="5427393822785989090">"탭하여 결제할 때 항상 <xliff:g id="APP">%1$s</xliff:g>을(를) 사용하십니까?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"탭하여 결제할 때 항상 <xliff:g id="APP_1">%2$s</xliff:g> 대신 <xliff:g id="APP_0">%1$s</xliff:g>을(를) 사용하십니까?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"제한사항"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"제한사항 삭제"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN 변경"</string>
