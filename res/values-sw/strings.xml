@@ -184,7 +184,7 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Anzisha <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Akaunti:"</string>
-    <string name="proxy_settings_title" msgid="5912878565897294401">"Mipangilio ya seva mbadala"</string>
+    <string name="proxy_settings_title" msgid="9049437837600320881">"Seva mbadala"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Futa"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Poti ya proksi"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Proksi ya Bypass ya"</string>
@@ -488,7 +488,7 @@
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Imeunganishwa kwenye sikika ya njia ya mawasiliano"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Imeunganishwa kwenye sauti ya simu"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Imeunganishwa kwenye seva ya kuhamisha faili"</string>
-    <string name="bluetooth_map_profile_summary_connected" msgid="8191407438851351713">"Imeunganishwa kwa ramani"</string>
+    <string name="bluetooth_map_profile_summary_connected" msgid="8191407438851351713">"Imeunganishwa kwenye ramani"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Haijaunganishwa kwenye seva ya kuhamisha faili"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Umeunganishwa kwa kifaa cha kuingiza"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Umeunganishwa kwa kifaa cha ufikia Mtandao"</string>
@@ -990,7 +990,10 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>itazuiwa"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Usaidizi"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mitandao ya simu"</string>
-    <string name="manage_mobile_plan_title" msgid="7588182101738043593">"Dhibiti mpango wa simu ya mkononi"</string>
+    <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mpango wa simu ya mkononi"</string>
+    <string name="sms_application_title" msgid="6134351177937015839">"Programu chaguo-msingi ya SMS"</string>
+    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Ungependa kubadilisha programu ya SMS?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"Ungependa kutumia <xliff:g id="NEW_APP">%s</xliff:g> badala ya <xliff:g id="CURRENT_APP">%s</xliff:g> kama programu yako ya SMS?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Ishara maalum ya utagutaji ya SIM isiyojulikana"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for mobile_no_provisioning_url (2399426808423775711) -->
@@ -1365,12 +1368,9 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"s<xliff:g id="HOURS">%1$d</xliff:g> d<xliff:g id="MINUTES">%2$d</xliff:g> s<xliff:g id="SECONDS">%3$d</xliff:g>"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"d <xliff:g id="MINUTES">%1$d</xliff:g> s <xliff:g id="SECONDS">%2$d</xliff:g>"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"s<xliff:g id="SECONDS">%1$d</xliff:g>"</string>
-    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
-    <skip />
+    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"Siku<xliff:g id="DAYS">%1$d</xliff:g> saa <xliff:g id="HOURS">%2$d</xliff:g> dakika <xliff:g id="MINUTES">%3$d</xliff:g>"</string>
+    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"Saa <xliff:g id="HOURS">%1$d</xliff:g> dakika <xliff:g id="MINUTES">%2$d</xliff:g>"</string>
+    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"Dakika <xliff:g id="MINUTES">%1$d</xliff:g>"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Takwimu za utumiaji"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Takwimu za utumiaji"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Panga kwa:"</string>
@@ -1437,8 +1437,7 @@
     <string name="print_settings" msgid="4742428530112487843">"Kuchapisha"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Huduma za uchapishaji"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Je, ungependa kutumia <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
-    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
-    <skip />
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Hati yako inaweza kupita kwa seva moja au zaidi inapotumwa kwa printa."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Hakuna huduma zilizosakinishwa"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Mipangilio"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Ongeza printa"</string>
@@ -1447,12 +1446,9 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Ongeza huduma"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Ongeza printa"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Utafutaji"</string>
-    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
-    <skip />
-    <!-- no translation found for print_print_jobs (3582094777756968793) -->
-    <skip />
-    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
-    <skip />
+    <string name="print_searching_for_printers" msgid="4680248496457576358">"Inatafuta printa"</string>
+    <string name="print_print_jobs" msgid="3582094777756968793">"Kazi za kuchapisha"</string>
+    <string name="print_active_print_jobs" msgid="5055524262003598199">"Kazi zinazochapishwa"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Betri"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Ni nini kimekuwa kikitumia betri"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Data ya matumizi ya betri haipatikani."</string>
@@ -1532,33 +1528,21 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Takwimu za Mchakato"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Takwimu za kitaalamu kuhusu michakato inayoendeshwa"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Kumbukumbu iliyotumika"</string>
-    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
-    <skip />
-    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
-    <skip />
-    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
-    <skip />
-    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"<xliff:g id="TYPE">%1$s</xliff:g> programu kwa <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="process_stats_type_background" msgid="3934992858120683459">"Ikifanya kazi chinichini"</string>
+    <string name="process_stats_type_foreground" msgid="7713118254089580536">"Ikifanya kazi kutoka mbele"</string>
+    <string name="process_stats_type_cached" msgid="6314925846944806511">"Iliyowekwa kwenye akiba"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Kumbukumbu ya kifaa kwa sasa <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
-    <skip />
-    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
-    <skip />
+    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"Wastani wa matumizi ya RAM"</string>
+    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"Upeo wa matumizi ya RAM"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Muda wa kuendesha"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Huduma"</string>
-    <!-- no translation found for menu_show_system (8864603400415567635) -->
-    <skip />
-    <!-- no translation found for menu_use_uss (467765290771543089) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
-    <skip />
+    <string name="menu_show_system" msgid="8864603400415567635">"Onyesha mfumo"</string>
+    <string name="menu_use_uss" msgid="467765290771543089">"Tumia USS"</string>
+    <string name="menu_proc_stats_type" msgid="4700209061072120948">"Aina ya takwimu"</string>
+    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Ikifanya kazi chinichini"</string>
+    <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"Ikifanya kazi kutoka mbele"</string>
+    <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"Iliyowekwa kwenye akiba"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Kiingizaji cha sauti &amp; kutoa nje"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Kiingizaji cha sauti &amp; mipangilio ya kutoa nje"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Tafuta kwa kutamka"</string>
@@ -1766,8 +1750,7 @@
     <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Huwezi kusawazisha mwenyewe"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Kwa sasa usawazishaji wa kipengee hiki umezimwa. Kubadilisha mpangilio huu, washa kwa muda data ya usuli na usawazishaji kiotomatiki."</string>
-    <string name="wimax_settings" msgid="1574837328738396794">"Mipangilio ya 4G"</string>
-    <string name="wimax_settings_summary" msgid="3207355006084135453">"Weka na udhibiti;i modem ya mtandao wa 4G"</string>
+    <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Anwani ya 4G MAC"</string>
     <string name="enter_password" msgid="4131758584074246224">"Ingiza nenosiri ili kusimbua hifadhi"</string>
     <string name="try_again" msgid="4272075051293936921">"Jaribu tena."</string>
@@ -2022,7 +2005,6 @@
     <string name="user_account_title" msgid="1127193807312271167">"Akaunti ya maudhui"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Kitambulisho cha Picha"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Matangazo ya simu"</string>
-    <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Chagua aina ya arifa za dharura za kuonyesha."</string>
     <string name="user_restrictions_title" msgid="7745810037152772035">"Vizuizi vya programu na maudhui"</string>
     <string name="user_rename" msgid="8523499513614655279">"BADILISHA JINA"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Weka vizuizi vya programu"</string>

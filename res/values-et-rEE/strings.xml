@@ -182,7 +182,7 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Käivita <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Konto:"</string>
-    <string name="proxy_settings_title" msgid="5912878565897294401">"Puhverserveri seaded"</string>
+    <string name="proxy_settings_title" msgid="9049437837600320881">"Puhverserver"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Kustuta"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Puhverserveri port"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Puhverserverist mööduvad"</string>
@@ -998,7 +998,10 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ühenduse jagamine lõpetatakse."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Abi"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobiilsidevõrgud"</string>
-    <string name="manage_mobile_plan_title" msgid="7588182101738043593">"Mobiilipaketi haldamine"</string>
+    <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobiilipakett"</string>
+    <string name="sms_application_title" msgid="6134351177937015839">"SMS-i vaikerakendus"</string>
+    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Kas muuta SMS-i rakendust?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"Kas kasutada SMS-i rakendusena rakenduse <xliff:g id="CURRENT_APP">%s</xliff:g> asemel rakendust <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"SIM-kaardi tundmatu operaator"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Operaatoril %1$s pole teenusepakkumise veebisaite"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Sisestage SIM-kaart ja taaskäivitage"</string>
@@ -1371,12 +1374,9 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> m <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> m <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g>s"</string>
-    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
-    <skip />
+    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> p <xliff:g id="HOURS">%2$d</xliff:g> h <xliff:g id="MINUTES">%3$d</xliff:g> min"</string>
+    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> min"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Kasutusstatistika"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Kasutusstatistika"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Sortimisalus:"</string>
@@ -1443,8 +1443,7 @@
     <string name="print_settings" msgid="4742428530112487843">"Printimine"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Printimisteenused"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Kas soovite kasutada teenust <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
-    <skip />
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Printerini jõudmiseks võib dokument läbida ühe või mitu serverit."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Ühtki teenust pole installitud"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Seaded"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Printerite lisamine"</string>
@@ -1453,12 +1452,9 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Lisa teenus"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Lisa printer"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Otsing"</string>
-    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
-    <skip />
-    <!-- no translation found for print_print_jobs (3582094777756968793) -->
-    <skip />
-    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
-    <skip />
+    <string name="print_searching_for_printers" msgid="4680248496457576358">"Printerite otsimine"</string>
+    <string name="print_print_jobs" msgid="3582094777756968793">"Prinditööd"</string>
+    <string name="print_active_print_jobs" msgid="5055524262003598199">"Aktiivsed prinditööd"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Aku"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Mis on akut kasutanud"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Aku andmed pole saadaval."</string>
@@ -1538,33 +1534,21 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Protsessi statistika"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Tehnilised üksikasjad protsesside käitamise kohta"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Mälu kasutamine"</string>
-    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
-    <skip />
-    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
-    <skip />
-    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
-    <skip />
-    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"Tüüpi <xliff:g id="TYPE">%1$s</xliff:g> rakendused perioodi <xliff:g id="TIME">%2$s</xliff:g> jooksul"</string>
+    <string name="process_stats_type_background" msgid="3934992858120683459">"Taust"</string>
+    <string name="process_stats_type_foreground" msgid="7713118254089580536">"Esiplaan"</string>
+    <string name="process_stats_type_cached" msgid="6314925846944806511">"Vahemälus"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Seadme mälu on olekus <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
-    <skip />
-    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
-    <skip />
+    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"RAM-i keskmine kasutus"</string>
+    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"RAM-i maksimaalne kasutus"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Tööaeg"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Teenused"</string>
-    <!-- no translation found for menu_show_system (8864603400415567635) -->
-    <skip />
-    <!-- no translation found for menu_use_uss (467765290771543089) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
-    <skip />
+    <string name="menu_show_system" msgid="8864603400415567635">"Süsteemi kuvamine"</string>
+    <string name="menu_use_uss" msgid="467765290771543089">"USS-i kasutamine"</string>
+    <string name="menu_proc_stats_type" msgid="4700209061072120948">"Statistika tüüp"</string>
+    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Taust"</string>
+    <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"Esiplaan"</string>
+    <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"Vahemälus"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Kõnesisend ja -väljund"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Kõnesisendi ja -väljundi seaded"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Häälotsing"</string>
@@ -1772,8 +1756,7 @@
     <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Ei saa käsitsi sünkroonida"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Selle üksuse sünkroonimine on praegu keelatud. Seade muutmiseks lülitage ajutiselt sisse taustaandmed ja automaatne sünkroonimine."</string>
-    <string name="wimax_settings" msgid="1574837328738396794">"4G seaded"</string>
-    <string name="wimax_settings_summary" msgid="3207355006084135453">"Seadistage ja hallake 4G võrku ning modemit"</string>
+    <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC-aadress"</string>
     <string name="enter_password" msgid="4131758584074246224">"Mälu dekrüpteerimiseks sisestage parool"</string>
     <string name="try_again" msgid="4272075051293936921">"Proovige uuesti."</string>
@@ -1803,7 +1786,7 @@
     <string name="show_touches" msgid="1356420386500834339">"Näita puuteid"</string>
     <string name="show_touches_summary" msgid="6684407913145150041">"Kuva visuaalset tagasisidet puudete kohta"</string>
     <string name="show_screen_updates" msgid="5470814345876056420">"Näita pinna värskendusi"</string>
-    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Akna pinna värskendam. kirjuta kogu akna pind üle"</string>
+    <string name="show_screen_updates_summary" msgid="2569622766672785529">"Akna pinna värskendamiseks kirjuta kogu akna pind üle"</string>
     <string name="show_hw_screen_updates" msgid="5036904558145941590">"Näita GPU kuva värskend."</string>
     <string name="show_hw_screen_updates_summary" msgid="1115593565980196197">"GPU-ga joonistades kirjuta akende kuvad üle"</string>
     <string name="show_hw_layers_updates" msgid="5645728765605699821">"Kuva riistv. kiht. värsk."</string>
@@ -2028,7 +2011,6 @@
     <string name="user_account_title" msgid="1127193807312271167">"Sisu konto"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Foto ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Kärjeteated"</string>
-    <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Valige kuvamiseks hädaolukorra märguannete tüübid."</string>
     <string name="user_restrictions_title" msgid="7745810037152772035">"Rakenduste ja sisu piirangud"</string>
     <string name="user_rename" msgid="8523499513614655279">"NIMETA ÜMBER"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Rakendusele piirangute määramine"</string>
