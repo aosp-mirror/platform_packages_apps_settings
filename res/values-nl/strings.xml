@@ -114,7 +114,7 @@
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Zichtbaar voor alle Bluetooth-apparaten in de buurt"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Niet zichtbaar voor andere Bluetooth-apparaten"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Alleen zichtbaar voor gekoppelde apparaten"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Time-out voor zichtbaarheid"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Zichtbaarheid uitstellen"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Spraakkeuze vergrendelen"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Gebruik van de Bluetooth-dialer voorkomen wanneer het scherm is vergrendeld"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-apparaten"</string>
@@ -567,10 +567,10 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Slechte verbindingen vermijden"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Wifi-netwerk niet gebruiken, tenzij dit een goede internetverbinding heeft"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Scannen altijd beschikbaar"</string>
-    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"De locatieservice en andere apps van Google laten scannen naar netwerken, zelfs wanneer wifi is uitgeschakeld"</string>
+    <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"De locatieservice en andere apps van Google laten scannen naar netwerken, ook wanneer wifi is uitgeschakeld"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Certificaten installeren"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Als u de nauwkeurigheid van locaties en voor andere doeleinden wilt verbeteren, kunnen Google en andere apps scannen naar netwerken in de buurt, zelfs wanneer wifi is uitgeschakeld. Als u niet wilt dat dit gebeurt, gaat u naar \'Geavanceerd\' &gt; \'Scannen altijd beschikbaar\'."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apps kunnen scannen naar netwerken in de buurt, zelfs wanneer wifi is uitgeschakeld. Als u niet wilt dat dit gebeurt, gaat u naar \'Geavanceerd\' &gt; \'Scannen altijd beschikbaar\'."</string>
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Als u de nauwkeurigheid van locaties en voor andere doeleinden wilt verbeteren, kunnen Google en andere apps scannen naar netwerken in de buurt, ook wanneer wifi is uitgeschakeld. Als u niet wilt dat dit gebeurt, gaat u naar \'Geavanceerd\' &gt; \'Scannen altijd beschikbaar\'."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apps kunnen scannen naar netwerken in de buurt, ook wanneer wifi is uitgeschakeld. Als u niet wilt dat dit gebeurt, gaat u naar \'Geavanceerd\' &gt; \'Scannen altijd beschikbaar\'."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Niet opnieuw weergeven"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Wifi behouden in slaapstand"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Er is een probleem opgetreden bij het wijzigen van de instelling"</string>
@@ -1094,7 +1094,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Uw tablet en persoonlijke gegevens zijn gevoeliger voor aanvallen door apps van onbekende bronnen. U gaat ermee akkoord dat alleen u verantwoordelijk bent voor enige schade aan uw tablet of verlies van gegevens die voortkomen uit het gebruik van deze apps."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Uw telefoon en persoonlijke gegevens worden door apps van onbekende bronnen gevoeliger voor aanvallen. U gaat ermee akkoord dat alleen u verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze apps."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Apps verifiëren"</string>
-    <string name="verify_applications_summary" msgid="6737505521913263792">"De installatie van apps die schade kunnen veroorzaken, niet toestaan of eerst waarschuwen"</string>
+    <string name="verify_applications_summary" msgid="6737505521913263792">"De installatie van apps die schade kunnen veroorzaken niet toestaan of eerst waarschuwen"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Geavanceerde instellingen"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Meer opties voor instellingen inschakelen"</string>
     <string name="application_info_label" msgid="5736524913065714880">"App-info"</string>
@@ -1970,8 +1970,10 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"Taal wijzigen"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Lettergrootte wijzigen"</string>
     <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Betalingen"</string>
-    <string name="nfc_payment_ask" msgid="1061129391464251903">"Altijd vragen"</string>
-    <string name="nfc_payment_set_default" msgid="1583397933053078296">"Instellen als uw voorkeur?"</string>
+    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Instellen als uw voorkeur?"</string>
+    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Altijd <xliff:g id="APP">%1$s</xliff:g> gebruiken voor tikken en betalen?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Altijd <xliff:g id="APP_0">%1$s</xliff:g> gebruiken in plaats van <xliff:g id="APP_1">%2$s</xliff:g> voor tikken en betalen?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Beperkingen"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Beperkingen verwijderen"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Pincode wijzigen"</string>
