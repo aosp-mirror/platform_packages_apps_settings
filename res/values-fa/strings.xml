@@ -133,7 +133,7 @@
     <string name="bluetooth_connected" msgid="6038755206916626419">"متصل"</string>
     <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"متصل شد (بدون تلفن)"</string>
     <string name="bluetooth_connected_no_a2dp" msgid="4576188601581440337">"متصل شد (بدون رسانه)"</string>
-    <string name="bluetooth_connected_no_map" msgid="6504436917057479986">"متصل (فاقد دسترسی به پیام)"</string>
+    <string name="bluetooth_connected_no_map" msgid="6504436917057479986">"متصل (عدم دسترسی به پیام)"</string>
     <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"متصل شد (بدون تلفن یا رسانه)"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"اتصال قطع شد"</string>
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"در حال قطع اتصال..."</string>
@@ -182,7 +182,7 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"شروع <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"حساب:"</string>
-    <string name="proxy_settings_title" msgid="5912878565897294401">"تنظیمات پروکسی"</string>
+    <string name="proxy_settings_title" msgid="9049437837600320881">"پروکسی"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"پاک کردن"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"درگاه پروکسی"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"‏پروکسی Bypass برای"</string>
@@ -998,7 +998,10 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> از اتصال اینترنتی با تلفن همراه قطع می‌شود."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"راهنمایی"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"شبکه‌های تلفن همراه"</string>
-    <string name="manage_mobile_plan_title" msgid="7588182101738043593">"مدیریت طرح تلفن همراه"</string>
+    <string name="manage_mobile_plan_title" msgid="7630170375010107744">"طرح تلفن همراه"</string>
+    <string name="sms_application_title" msgid="6134351177937015839">"برنامه پیامک پیش‌فرض"</string>
+    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"برنامه پیامک تغییر داده شود؟"</string>
+    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"از <xliff:g id="NEW_APP">%s</xliff:g> به‌جای <xliff:g id="CURRENT_APP">%s</xliff:g> به‌عنوان برنامه پیامک‌تان استفاده می‌کنید؟"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"شرکت مخابراتی ارائه دهنده سیم کارت ناشناس است"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"‏%1$s وب‌سایت شناخته‌شده‌ای برای آماده‌سازی ندارد."</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"لطفاً سیم کارت را وارد کنید و دوباره راه‌اندازی کنید"</string>
@@ -1371,12 +1374,9 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> ساعت و <xliff:g id="MINUTES">%2$d</xliff:g> دقیقه و <xliff:g id="SECONDS">%3$d</xliff:g> ثانیه"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>دقیقه و <xliff:g id="SECONDS">%2$d</xliff:g> ثانیه"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> ثانیه"</string>
-    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
-    <skip />
+    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> روز و <xliff:g id="HOURS">%2$d</xliff:g> ساعت و <xliff:g id="MINUTES">%3$d</xliff:g> دقیقه"</string>
+    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> ساعت و <xliff:g id="MINUTES">%2$d</xliff:g> دقیقه"</string>
+    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> دقیقه"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"آمار کاربرد"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"آمار کاربرد"</string>
     <string name="display_order_text" msgid="8592776965827565271">"ترتیب بر اساس:"</string>
@@ -1443,8 +1443,7 @@
     <string name="print_settings" msgid="4742428530112487843">"چاپ کردن"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"خدمات چاپ"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"از <xliff:g id="SERVICE">%1$s</xliff:g> استفاده شود؟"</string>
-    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
-    <skip />
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"ممکن است سند شما برای رسیدن به چاپگر از یک یا چند سرور عبور کند."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"سرویسی نصب نشده است"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"تنظیمات"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"افزودن چاپگرها"</string>
@@ -1453,12 +1452,9 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"افزودن سرویس"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"افزودن چاپگر"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"جستجو"</string>
-    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
-    <skip />
-    <!-- no translation found for print_print_jobs (3582094777756968793) -->
-    <skip />
-    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
-    <skip />
+    <string name="print_searching_for_printers" msgid="4680248496457576358">"در حال جستجو برای چاپگرها"</string>
+    <string name="print_print_jobs" msgid="3582094777756968793">"کارهای چاپی"</string>
+    <string name="print_active_print_jobs" msgid="5055524262003598199">"کارهای چاپی فعال"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"باتری"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"چه چیزی باتری را مصرف کرده است"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"اطلاعات مصرف باتری موجود نیست."</string>
@@ -1538,33 +1534,21 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"آمار فرآیند"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"آمار دقیق برای فرآیندهای در حال اجرا"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"استفاده از حافظه"</string>
-    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
-    <skip />
-    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
-    <skip />
-    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
-    <skip />
-    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"برنامه‌های <xliff:g id="TYPE">%1$s</xliff:g> در طول <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="process_stats_type_background" msgid="3934992858120683459">"پس‌زمینه"</string>
+    <string name="process_stats_type_foreground" msgid="7713118254089580536">"پیش‌زمینه"</string>
+    <string name="process_stats_type_cached" msgid="6314925846944806511">"در حافظه پنهان"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"حافظه دستگاه در حال حاضر <xliff:g id="MEMSTATE">%1$s</xliff:g> است"</string>
-    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
-    <skip />
-    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
-    <skip />
+    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"‏میانگین استفاده از RAM"</string>
+    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"‏حداکثر استفاده از RAM"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"مدت اجرا"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"خدمات"</string>
-    <!-- no translation found for menu_show_system (8864603400415567635) -->
-    <skip />
-    <!-- no translation found for menu_use_uss (467765290771543089) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
-    <skip />
+    <string name="menu_show_system" msgid="8864603400415567635">"نمایش سیستم"</string>
+    <string name="menu_use_uss" msgid="467765290771543089">"‏استفاده از Uss"</string>
+    <string name="menu_proc_stats_type" msgid="4700209061072120948">"نوع آمار"</string>
+    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"پس‌زمینه"</string>
+    <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"پیش‌زمینه"</string>
+    <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"در حافظه پنهان"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"ورودی و خروجی صوتی"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"تنظیمات ورودی و خروجی صوتی"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"جستجوی صوتی"</string>
@@ -1772,8 +1756,7 @@
     <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"نمی‌توان به‌صورت دستی همگام‌سازی کرد"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"همگام‌سازی برای این مورد در حال حاضر غیرفعال است. برای تغییر این تنظیم، داده‌های پس‌زمینه و همگام‌سازی خودکار را موقتاً روشن کنید."</string>
-    <string name="wimax_settings" msgid="1574837328738396794">"‏تنظیمات 4G"</string>
-    <string name="wimax_settings_summary" msgid="3207355006084135453">"‏تنظیم و مدیریت شبکه 4G و مودم"</string>
+    <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"‏آدرس 4G MAC"</string>
     <string name="enter_password" msgid="4131758584074246224">"برای رمزگشایی حافظه گذرواژه را تایپ کنید"</string>
     <string name="try_again" msgid="4272075051293936921">"دوباره امتحان کنید."</string>
@@ -1959,18 +1942,12 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"غیرفعال"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"مجاز"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"در حال اعمال"</string>
-    <!-- no translation found for ssl_ca_cert_warning (2045866713601984673) -->
-    <skip />
-    <!-- no translation found for done_button (1991471253042622230) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_dialog_title (5339377665264149395) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (2076057204539053958) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_warning_message (8212122519110935512) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_settings_button (8760495070836213605) -->
-    <skip />
+    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ممکن است شبکه پایش شود"</string>
+    <string name="done_button" msgid="1991471253042622230">"انجام شد"</string>
+    <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"پایش شبکه"</string>
+    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"این دستگاه توسط <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> مدیریت می‌شود.\n\nسرپرستتان می‌تواند فعالیت شبکه شما، از جمله ایمیل‌ها، برنامه‌ها، و وب‌سایت‌های ایمن، را پایش کند.\n\nبرای کسب اطلاعات بیشتر با سرپرستتان تماس بگیرید."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"یک شخص ثالث قادر به پایش فعالیت شبکه شما،\nاز جمله ایمیل‌ها، برنامه‌ها، و وب‌سایت‌های ایمن است.\n\nاعتبارنامه قابل اعتمادی که بر روی دستگاهتان نصب شده این کار را امکان‌پذیر می‌کند."</string>
+    <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"بررسی اعتبارنامه‌های قابل اعتماد"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"کاربران"</string>
     <string name="user_list_title" msgid="7937158411137563543">"کاربران و نمایه‌ها"</string>
     <string name="user_add_user_menu" msgid="3154537325132012954">"افزودن کاربر یا نمایه"</string>
@@ -2034,7 +2011,6 @@
     <string name="user_account_title" msgid="1127193807312271167">"حساب برای محتوا"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"کارت شناسایی عکس‌دار"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"پخش‌های سلولی"</string>
-    <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"انواع هشدارهای اضطراری را برای نمایش انتخاب کنید."</string>
     <string name="user_restrictions_title" msgid="7745810037152772035">"محدودیت‌های محتوا و برنامه"</string>
     <string name="user_rename" msgid="8523499513614655279">"تغییر نام"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"تنظیم محدودیت‌های برنامه"</string>

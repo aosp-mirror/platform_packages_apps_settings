@@ -182,7 +182,7 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"<xliff:g id="ACTIVITY">activity</xliff:g> starten"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Konto:"</string>
-    <string name="proxy_settings_title" msgid="5912878565897294401">"Proxy-Einstellungen"</string>
+    <string name="proxy_settings_title" msgid="9049437837600320881">"Proxy"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Löschen"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Proxy-Port"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Umgehung des Proxys für"</string>
@@ -999,7 +999,10 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Tethering für <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird deaktiviert."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Hilfe"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilfunknetze"</string>
-    <string name="manage_mobile_plan_title" msgid="7588182101738043593">"Mobildatentarif verwalten"</string>
+    <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobilfunktarif"</string>
+    <string name="sms_application_title" msgid="6134351177937015839">"Standard-SMS-App"</string>
+    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS-App wechseln?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"<xliff:g id="NEW_APP">%s</xliff:g> statt <xliff:g id="CURRENT_APP">%s</xliff:g> als SMS-App verwenden?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Unbekannter SIM-Anbieter"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Keine Bereitstellungs-Website für %1$s bekannt"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Legen Sie die SIM ein und starten das Gerät neu."</string>
@@ -1372,12 +1375,9 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> m <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> m <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
-    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
-    <skip />
+    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> d <xliff:g id="HOURS">%2$d</xliff:g> h <xliff:g id="MINUTES">%3$d</xliff:g> min"</string>
+    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> min"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Nutzungsstatistik"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Nutzungsstatistik"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Sortieren nach:"</string>
@@ -1444,8 +1444,7 @@
     <string name="print_settings" msgid="4742428530112487843">"Drucken"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Druckdienste"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g> verwenden?"</string>
-    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
-    <skip />
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Ihr Dokument kann bei der Übermittlung an den Drucker einen oder mehrere Server passieren."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Keine Dienste installiert"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Einstellungen"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Drucker hinzufügen"</string>
@@ -1454,12 +1453,9 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Dienst hinzufügen"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Drucker hinzufügen"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Suchen"</string>
-    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
-    <skip />
-    <!-- no translation found for print_print_jobs (3582094777756968793) -->
-    <skip />
-    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
-    <skip />
+    <string name="print_searching_for_printers" msgid="4680248496457576358">"Suche nach Druckern..."</string>
+    <string name="print_print_jobs" msgid="3582094777756968793">"Druckaufträge"</string>
+    <string name="print_active_print_jobs" msgid="5055524262003598199">"Aktive Druckaufträge"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akku"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Was zum Akkuverbrauch beiträgt"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Keine Daten zum Akkuverbrauch"</string>
@@ -1539,33 +1535,21 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Prozessstatistiken"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiken zu laufenden Prozessen"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Speichernutzung"</string>
-    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
-    <skip />
-    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
-    <skip />
-    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
-    <skip />
-    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"Apps (<xliff:g id="TYPE">%1$s</xliff:g>) über <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="process_stats_type_background" msgid="3934992858120683459">"Hintergrund"</string>
+    <string name="process_stats_type_foreground" msgid="7713118254089580536">"Vordergrund"</string>
+    <string name="process_stats_type_cached" msgid="6314925846944806511">"Im Cache"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Der aktuelle Speicherstand des Geräts ist <xliff:g id="MEMSTATE">%1$s</xliff:g>."</string>
-    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
-    <skip />
-    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
-    <skip />
+    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"Durchschnittliche RAM-Nutzung"</string>
+    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"Maximale RAM-Nutzung"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Laufzeit"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Dienste"</string>
-    <!-- no translation found for menu_show_system (8864603400415567635) -->
-    <skip />
-    <!-- no translation found for menu_use_uss (467765290771543089) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
-    <skip />
+    <string name="menu_show_system" msgid="8864603400415567635">"Systemprozesse anzeigen"</string>
+    <string name="menu_use_uss" msgid="467765290771543089">"USS verwenden"</string>
+    <string name="menu_proc_stats_type" msgid="4700209061072120948">"Statistiktyp"</string>
+    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Hintergrund"</string>
+    <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"Vordergrund"</string>
+    <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"Im Cache"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Spracheingabe&amp;-ausgabe"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Einstellungen für Spracheingabe &amp; -ausgabe"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Sprachsuche"</string>
@@ -1773,8 +1757,7 @@
     <skip />
     <string name="cant_sync_dialog_title" msgid="8923508322291625282">"Manuelle Synchronisierung nicht möglich"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Die Synchronisierung hierfür ist deaktiviert. Zur Änderung dieser Einstellung aktivieren Sie vorübergehend Hintergrunddaten und automatische Synchronisierung."</string>
-    <string name="wimax_settings" msgid="1574837328738396794">"4G-Einstellungen"</string>
-    <string name="wimax_settings_summary" msgid="3207355006084135453">"4G-Netzwerk einrichten &amp; verwalten"</string>
+    <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G-MAC-Adresse"</string>
     <string name="enter_password" msgid="4131758584074246224">"Passwort zum Entschlüsseln des Speichers eingeben"</string>
     <string name="try_again" msgid="4272075051293936921">"Erneut versuchen"</string>
@@ -2029,7 +2012,6 @@
     <string name="user_account_title" msgid="1127193807312271167">"Konto für Inhalte"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Foto-ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Cell Broadcasts"</string>
-    <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Wählen Sie aus, welche Notfallbenachrichtigungen angezeigt werden sollen"</string>
     <string name="user_restrictions_title" msgid="7745810037152772035">"Beschränkungen für Apps und Inhalte"</string>
     <string name="user_rename" msgid="8523499513614655279">"Umbenennen"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"App-Beschränkungen festlegen"</string>
