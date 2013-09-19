@@ -18,12 +18,14 @@ package com.android.settings;
 
 import java.util.ArrayList;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.ColorFilter;
@@ -94,7 +96,7 @@ public class HomeSettings extends SettingsPreferenceFragment {
 
     void uninstallApp(HomeAppPreference pref) {
         // Uninstallation is done by asking the OS to do it
-       Uri packageURI = Uri.parse("package:" + pref.activityName.getPackageName());
+       Uri packageURI = Uri.parse("package:" + pref.uninstallTarget);
        Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
        uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, false);
        int requestCode = REQUESTING_UNINSTALL + (pref.isChecked ? 1 : 0);
@@ -144,9 +146,8 @@ public class HomeSettings extends SettingsPreferenceFragment {
             try {
                 Drawable icon = info.loadIcon(mPm);
                 CharSequence name = info.loadLabel(mPm);
-                boolean isSystem = (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
                 HomeAppPreference pref = new HomeAppPreference(context, activityName, prefIndex,
-                        icon, name, this, isSystem);
+                        icon, name, this, info);
                 mPrefs.add(pref);
                 mPrefGroup.addPreference(pref);
                 pref.setEnabled(true);
@@ -186,14 +187,16 @@ public class HomeSettings extends SettingsPreferenceFragment {
     class HomeAppPreference extends Preference {
         ComponentName activityName;
         int index;
-        boolean isSystem;
         HomeSettings fragment;
         final ColorFilter grayscaleFilter;
         boolean isChecked;
 
+        boolean isSystem;
+        String uninstallTarget;
+
         public HomeAppPreference(Context context, ComponentName activity,
                 int i, Drawable icon, CharSequence title,
-                HomeSettings parent, boolean sys) {
+                HomeSettings parent, ActivityInfo info) {
             super(context);
             setLayoutResource(R.layout.preference_home_app);
             setIcon(icon);
@@ -201,13 +204,41 @@ public class HomeSettings extends SettingsPreferenceFragment {
             activityName = activity;
             fragment = parent;
             index = i;
-            isSystem = sys;
 
             ColorMatrix colorMatrix = new ColorMatrix();
             colorMatrix.setSaturation(0f);
             float[] matrix = colorMatrix.getArray();
             matrix[18] = 0.5f;
             grayscaleFilter = new ColorMatrixColorFilter(colorMatrix);
+
+            determineTargets(info);
+        }
+
+        // Check whether this activity is bundled on the system, with awareness
+        // of the META_HOME_ALTERNATE mechanism.
+        private void determineTargets(ActivityInfo info) {
+            final Bundle meta = info.metaData;
+            if (meta != null) {
+                final String altHomePackage = meta.getString(ActivityManager.META_HOME_ALTERNATE);
+                if (altHomePackage != null) {
+                    try {
+                        final int match = mPm.checkSignatures(info.packageName, altHomePackage);
+                        if (match >= PackageManager.SIGNATURE_MATCH) {
+                            PackageInfo altInfo = mPm.getPackageInfo(altHomePackage, 0);
+                            final int altFlags = altInfo.applicationInfo.flags;
+                            isSystem = (altFlags & ApplicationInfo.FLAG_SYSTEM) != 0;
+                            uninstallTarget = altInfo.packageName;
+                            return;
+                        }
+                    } catch (Exception e) {
+                        // e.g. named alternate package not found during lookup
+                        Log.w(TAG, "Unable to compare/resolve alternate", e);
+                    }
+                }
+            }
+            // No suitable metadata redirect, so use the package's own info
+            isSystem = (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+            uninstallTarget = info.packageName;
         }
 
         @Override
