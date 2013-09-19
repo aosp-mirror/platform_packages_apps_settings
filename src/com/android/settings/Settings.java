@@ -564,7 +564,9 @@ public class Settings extends PreferenceActivity
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.home_settings) {
-                updateHomeSettingHeaders(header);
+                if (!updateHomeSettingHeaders(header)) {
+                    target.remove(i);
+                }
             } else if (id == R.id.user_settings) {
                 if (!UserHandle.MU_ENABLED
                         || !UserManager.supportsMultipleUsers()
@@ -669,11 +671,16 @@ public class Settings extends PreferenceActivity
         return ((ri.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
     }
 
-    private void updateHomeSettingHeaders(Header header) {
+    private boolean updateHomeSettingHeaders(Header header) {
         final PackageManager pm = getPackageManager();
         final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
         try {
             ComponentName currentHome = pm.getHomeActivities(homeApps);
+            if (homeApps.size() < 2) {
+                // When there's only one available home app, omit this settings
+                // category entirely at the top level UI.
+                return false;
+            }
             ResolveInfo iconSource = null;
             if (currentHome == null) {
                 // no current default, so find the system home app and use that
@@ -708,6 +715,7 @@ public class Settings extends PreferenceActivity
             // Can't look up the home activity; bail on configuring the icon
             Log.w(LOG_TAG, "Problem looking up home activity!", e);
         }
+        return true;
     }
 
     private void getMetaData() {
