@@ -281,6 +281,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
         mSmsApplicationPreference = (SmsListPreference) findPreference(KEY_SMS_APPLICATION);
         mSmsApplicationPreference.setOnPreferenceChangeListener(this);
+        initSmsApplicationSetting();
 
         // Remove NSD checkbox by default
         getPreferenceScreen().removePreference(nsd);
