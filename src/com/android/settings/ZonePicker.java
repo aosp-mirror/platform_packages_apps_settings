@@ -229,7 +229,6 @@ public class ZonePicker extends ListFragment {
                 new ArrayList<HashMap<String, Object>>();
         private final HashSet<String> mLocalZones = new HashSet<String>();
         private final Date mNow = Calendar.getInstance().getTime();
-        private final SimpleDateFormat mGmtFormatter = new SimpleDateFormat("ZZZZ");
         private final SimpleDateFormat mZoneNameFormatter = new SimpleDateFormat("zzzz");
 
         private List<HashMap<String, Object>> getZones(Context context) {
@@ -270,7 +269,6 @@ public class ZonePicker extends ListFragment {
         private void addTimeZone(String olsonId) {
             // We always need the "GMT-07:00" string.
             final TimeZone tz = TimeZone.getTimeZone(olsonId);
-            mGmtFormatter.setTimeZone(tz);
 
             // For the display name, we treat time zones within the country differently
             // from other countries' time zones. So in en_US you'd get "Pacific Daylight Time"
@@ -289,7 +287,7 @@ public class ZonePicker extends ListFragment {
             final HashMap<String, Object> map = new HashMap<String, Object>();
             map.put(KEY_ID, olsonId);
             map.put(KEY_DISPLAYNAME, displayName);
-            map.put(KEY_GMT, mGmtFormatter.format(mNow));
+            map.put(KEY_GMT, DateTimeSettings.getTimeZoneText(tz, false));
             map.put(KEY_OFFSET, tz.getOffset(mNow.getTime()));
 
             mZones.add(map);
