@@ -65,6 +65,9 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
     static final String EXTRA_ADD_PRINTERS_COMPONENT_NAME = "add_printers_component_name";
     static final String EXTRA_SERVICE_COMPONENT_NAME = "service_component_name";
 
+    private static final String EXTRA_PRINT_SERVICE_COMPONENT_NAME =
+            "EXTRA_PRINT_SERVICE_COMPONENT_NAME";
+
     private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
 
     private final Handler mHandler = new Handler() {
@@ -97,6 +100,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         mSettingsContentObserver.register(getContentResolver());
         updateServicesPreferences();
+        startPrintServiceSettingsIfNeeded();
         setHasOptionsMenu(true);
     }
 
@@ -210,6 +214,20 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
                 mNoServicesMessagePreference.setSelectable(false);
             }
             getPreferenceScreen().addPreference(mNoServicesMessagePreference);
+        }
+    }
+
+    private void startPrintServiceSettingsIfNeeded() {
+        if (getArguments() == null) {
+            return;
+        }
+        String componentName = getArguments().getString(EXTRA_PRINT_SERVICE_COMPONENT_NAME);
+        if (componentName != null) {
+            getArguments().remove(EXTRA_PRINT_SERVICE_COMPONENT_NAME);
+            Preference prereference = findPreference(componentName);
+            if (prereference != null) {
+                prereference.performClick(getPreferenceScreen());
+            }
         }
     }
 
