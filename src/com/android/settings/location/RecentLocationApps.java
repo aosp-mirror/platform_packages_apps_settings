@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Process;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
@@ -40,6 +41,7 @@ import java.util.List;
  */
 public class RecentLocationApps {
     private static final String TAG = RecentLocationApps.class.getSimpleName();
+    private static final String ANDROID_SYSTEM_PACKAGE_NAME = "android";
 
     private static final int RECENT_TIME_INTERVAL_MILLIS = 15 * 60 * 1000;
 
@@ -165,10 +167,14 @@ public class RecentLocationApps {
         ArrayList<Preference> prefs = new ArrayList<Preference>();
         long now = System.currentTimeMillis();
         for (AppOpsManager.PackageOps ops : appOps) {
-            BatterySipperWrapper wrapper = sipperMap.get(ops.getUid());
-            Preference pref = getPreferenceFromOps(now, ops, wrapper);
-            if (pref != null) {
-                prefs.add(pref);
+            // Don't show the Android System in the list - it's not actionable for the user.
+            if (ops.getUid() != Process.SYSTEM_UID
+                    || !ANDROID_SYSTEM_PACKAGE_NAME.equals(ops.getPackageName())) {
+                BatterySipperWrapper wrapper = sipperMap.get(ops.getUid());
+                Preference pref = getPreferenceFromOps(now, ops, wrapper);
+                if (pref != null) {
+                    prefs.add(pref);
+                }
             }
         }
 
