@@ -56,15 +56,18 @@ public class ProcessStatsUi extends PreferenceFragment {
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_MEM_STATUS = "mem_status";
 
-    private static final int MENU_STATS_REFRESH = Menu.FIRST;
-    private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 1;
-    private static final int MENU_USE_USS = Menu.FIRST + 2;
-    private static final int MENU_TYPE_BACKGROUND = Menu.FIRST + 3;
-    private static final int MENU_TYPE_FOREGROUND = Menu.FIRST + 4;
-    private static final int MENU_TYPE_CACHED = Menu.FIRST + 5;
-    private static final int MENU_HELP = Menu.FIRST + 6;
+    private static final int NUM_DURATIONS = 4;
 
-    static final int MAX_ITEMS_TO_LIST = 40;
+    private static final int MENU_STATS_REFRESH = Menu.FIRST;
+    private static final int MENU_DURATION = Menu.FIRST + 1;
+    private static final int MENU_SHOW_SYSTEM = MENU_DURATION + NUM_DURATIONS;
+    private static final int MENU_USE_USS = MENU_SHOW_SYSTEM + 1;
+    private static final int MENU_TYPE_BACKGROUND = MENU_USE_USS + 1;
+    private static final int MENU_TYPE_FOREGROUND = MENU_TYPE_BACKGROUND + 1;
+    private static final int MENU_TYPE_CACHED = MENU_TYPE_FOREGROUND + 1;
+    private static final int MENU_HELP = MENU_TYPE_CACHED + 1;
+
+    static final int MAX_ITEMS_TO_LIST = 60;
 
     final static Comparator<ProcStatsEntry> sEntryCompare = new Comparator<ProcStatsEntry>() {
         @Override
@@ -85,10 +88,13 @@ public class ProcessStatsUi extends PreferenceFragment {
     ProcessStats mStats;
     int mMemState;
 
+    private long mDuration;
+    private long mLastDuration;
     private boolean mShowSystem;
     private boolean mUseUss;
     private int mStatsType;
 
+    private MenuItem[] mDurationMenus = new MenuItem[NUM_DURATIONS];
     private MenuItem mShowSystemMenu;
     private MenuItem mUseUssMenu;
     private MenuItem mTypeBackgroundMenu;
@@ -100,6 +106,21 @@ public class ProcessStatsUi extends PreferenceFragment {
 
     long mMaxWeight;
     long mTotalTime;
+
+    // The actual duration value to use for each duration option.  Note these
+    // are lower than the actual duration, since our durations are computed in
+    // batches of 3 hours so we want to allow the time we use to be slightly
+    // smaller than the actual time selected instead of bumping up to 3 hours
+    // beyond it.
+    private static final long DURATION_QUANTUM = 3*60*60*1000;
+    private static long[] sDurations = new long[] {
+        3*60*60*1000 - DURATION_QUANTUM/2, 6*60*60*1000 - DURATION_QUANTUM/2,
+        12*60*60*1000 - DURATION_QUANTUM/2, 24*60*60*1000 - DURATION_QUANTUM/2
+    };
+    private static int[] sDurationLabels = new int[] {
+            R.string.menu_duration_3h, R.string.menu_duration_6h,
+            R.string.menu_duration_12h, R.string.menu_duration_1d
+    };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -115,6 +136,7 @@ public class ProcessStatsUi extends PreferenceFragment {
         mUm = (UserManager)getActivity().getSystemService(Context.USER_SERVICE);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mMemStatusPref = mAppListGroup.findPreference(KEY_MEM_STATUS);
+        mDuration = icicle != null ? icicle.getLong("duration", sDurations[0]) : sDurations[0];
         mShowSystem = icicle != null ? icicle.getBoolean("show_system") : false;
         mUseUss = icicle != null ? icicle.getBoolean("use_uss") : false;
         mStatsType = icicle != null ? icicle.getInt("stats_type", MENU_TYPE_BACKGROUND)
@@ -136,6 +158,7 @@ public class ProcessStatsUi extends PreferenceFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putLong("duration", mDuration);
         outState.putBoolean("show_system", mShowSystem);
         outState.putBoolean("use_uss", mUseUss);
         outState.putInt("stats_type", mStatsType);
@@ -174,31 +197,31 @@ public class ProcessStatsUi extends PreferenceFragment {
                 .setAlphabeticShortcut('r');
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        SubMenu subMenu = menu.addSubMenu(R.string.menu_proc_stats_duration);
+        for (int i=0; i<NUM_DURATIONS; i++) {
+            mDurationMenus[i] = subMenu.add(0, MENU_DURATION+i, 0, sDurationLabels[i])
+                            .setCheckable(true);
+        }
         mShowSystemMenu = menu.add(0, MENU_SHOW_SYSTEM, 0, R.string.menu_show_system)
                 .setAlphabeticShortcut('s')
-                .setCheckable(true)
-                .setChecked(mShowSystem)
-                .setEnabled(mStatsType == MENU_TYPE_BACKGROUND);
+                .setCheckable(true);
         mUseUssMenu = menu.add(0, MENU_USE_USS, 0, R.string.menu_use_uss)
-                .setAlphabeticShortcut('s')
-                .setCheckable(true)
-                .setChecked(mUseUss);
-        SubMenu subMenu = menu.addSubMenu(R.string.menu_proc_stats_type);
+                .setAlphabeticShortcut('u')
+                .setCheckable(true);
+        subMenu = menu.addSubMenu(R.string.menu_proc_stats_type);
         mTypeBackgroundMenu = subMenu.add(0, MENU_TYPE_BACKGROUND, 0,
                 R.string.menu_proc_stats_type_background)
                 .setAlphabeticShortcut('b')
-                .setCheckable(true)
-                .setChecked(mStatsType == MENU_TYPE_BACKGROUND);
+                .setCheckable(true);
         mTypeForegroundMenu = subMenu.add(0, MENU_TYPE_FOREGROUND, 0,
                 R.string.menu_proc_stats_type_foreground)
                 .setAlphabeticShortcut('f')
-                .setCheckable(true)
-                .setChecked(mStatsType == MENU_TYPE_FOREGROUND);
+                .setCheckable(true);
         mTypeCachedMenu = subMenu.add(0, MENU_TYPE_CACHED, 0,
                 R.string.menu_proc_stats_type_cached)
-                .setAlphabeticShortcut('c')
-                .setCheckable(true)
-                .setChecked(mStatsType == MENU_TYPE_CACHED);
+                .setCheckable(true);
+
+        updateMenus();
 
         /*
         String helpUrl;
@@ -209,9 +232,44 @@ public class ProcessStatsUi extends PreferenceFragment {
         */
     }
 
+    void updateMenus() {
+        int closestIndex = 0;
+        long closestDelta = Math.abs(sDurations[0]-mDuration);
+        for (int i=1; i<NUM_DURATIONS; i++) {
+            long delta = Math.abs(sDurations[i]-mDuration);
+            if (delta < closestDelta) {
+                closestDelta = delta;
+                closestIndex = i;
+            }
+        }
+        for (int i=0; i<NUM_DURATIONS; i++) {
+            if (mDurationMenus[i] != null) {
+                mDurationMenus[i].setChecked(i == closestIndex);
+            }
+        }
+        mDuration = sDurations[closestIndex];
+        if (mShowSystemMenu != null) {
+            mShowSystemMenu.setChecked(mShowSystem);
+            mShowSystemMenu.setEnabled(mStatsType == MENU_TYPE_BACKGROUND);
+        }
+        if (mUseUssMenu != null) {
+            mUseUssMenu.setChecked(mUseUss);
+        }
+        if (mTypeBackgroundMenu != null) {
+            mTypeBackgroundMenu.setChecked(mStatsType == MENU_TYPE_BACKGROUND);
+        }
+        if (mTypeForegroundMenu != null) {
+            mTypeForegroundMenu.setChecked(mStatsType == MENU_TYPE_FOREGROUND);
+        }
+        if (mTypeCachedMenu != null) {
+            mTypeCachedMenu.setChecked(mStatsType == MENU_TYPE_CACHED);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        final int id = item.getItemId();
+        switch (id) {
             case MENU_STATS_REFRESH:
                 mStats = null;
                 refreshStats();
@@ -231,6 +289,10 @@ public class ProcessStatsUi extends PreferenceFragment {
                 refreshStats();
                 return true;
             default:
+                if (id >= MENU_DURATION && id < (MENU_DURATION+NUM_DURATIONS)) {
+                    mDuration = sDurations[id-MENU_DURATION];
+                    refreshStats();
+                }
                 return false;
         }
     }
@@ -258,25 +320,10 @@ public class ProcessStatsUi extends PreferenceFragment {
     };
 
     private void refreshStats() {
-        if (mStats == null) {
-            load();
-        }
+        updateMenus();
 
-        if (mShowSystemMenu != null) {
-            mShowSystemMenu.setChecked(mShowSystem);
-            mShowSystemMenu.setEnabled(mStatsType == MENU_TYPE_BACKGROUND);
-        }
-        if (mUseUssMenu != null) {
-            mUseUssMenu.setChecked(mUseUss);
-        }
-        if (mTypeBackgroundMenu != null) {
-            mTypeBackgroundMenu.setChecked(mStatsType == MENU_TYPE_BACKGROUND);
-        }
-        if (mTypeForegroundMenu != null) {
-            mTypeForegroundMenu.setChecked(mStatsType == MENU_TYPE_FOREGROUND);
-        }
-        if (mTypeCachedMenu != null) {
-            mTypeCachedMenu.setChecked(mStatsType == MENU_TYPE_CACHED);
+        if (mStats == null || mLastDuration != mDuration) {
+            load();
         }
 
         int[] stats;
@@ -390,7 +437,7 @@ public class ProcessStatsUi extends PreferenceFragment {
             ProcStatsEntry proc = procs.get(i);
             final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
             final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
-            if (percentOfWeight < 2) break;
+            if (percentOfWeight < 1) break;
             ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null, proc);
             proc.evaluateTargetPackage(mStats, totals, sEntryCompare, mUseUss,
                     mStatsType == MENU_TYPE_BACKGROUND);
@@ -425,44 +472,18 @@ public class ProcessStatsUi extends PreferenceFragment {
 
     private void load() {
         try {
+            mLastDuration = mDuration;
             mMemState = mProcessStats.getCurrentMemoryState();
-            ArrayList<ParcelFileDescriptor> fds = new ArrayList<ParcelFileDescriptor>();
-            byte[] data = mProcessStats.getCurrentStats(fds);
-            Parcel parcel = Parcel.obtain();
-            parcel.unmarshall(data, 0, data.length);
-            parcel.setDataPosition(0);
-            mStats = ProcessStats.CREATOR.createFromParcel(parcel);
-            int i = fds.size()-1;
-            while (i >= 0 && (mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime)
-                    < (24*60*60*1000)) {
-                Log.i(TAG, "Not enough data, loading next file @ " + i);
-                ProcessStats stats = new ProcessStats(false);
-                InputStream stream = new ParcelFileDescriptor.AutoCloseInputStream(fds.get(i));
-                stats.read(stream);
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                }
-                if (stats.mReadError == null) {
-                    mStats.add(stats);
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Added stats: ");
-                    sb.append(stats.mTimePeriodStartClockStr);
-                    sb.append(", over ");
-                    TimeUtils.formatDuration(
-                            stats.mTimePeriodEndRealtime-stats.mTimePeriodStartRealtime, sb);
-                    Log.i(TAG, sb.toString());
-                } else {
-                    Log.w(TAG, "Read error: " + stats.mReadError);
-                }
-                i--;
+            ParcelFileDescriptor pfd = mProcessStats.getStatsOverTime(mDuration);
+            mStats = new ProcessStats(false);
+            InputStream is = new ParcelFileDescriptor.AutoCloseInputStream(pfd);
+            mStats.read(is);
+            try {
+                is.close();
+            } catch (IOException e) {
             }
-            while (i >= 0) {
-                try {
-                    fds.get(i).close();
-                } catch (IOException e) {
-                }
-                i--;
+            if (mStats.mReadError != null) {
+                Log.w(TAG, "Failure reading process stats: " + mStats.mReadError);
             }
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException:", e);
