@@ -16,6 +16,7 @@
 
 package com.android.settings.location;
 
+import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -23,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
@@ -168,9 +170,12 @@ public class RecentLocationApps {
         long now = System.currentTimeMillis();
         for (AppOpsManager.PackageOps ops : appOps) {
             // Don't show the Android System in the list - it's not actionable for the user.
-            if (ops.getUid() != Process.SYSTEM_UID
-                    || !ANDROID_SYSTEM_PACKAGE_NAME.equals(ops.getPackageName())) {
-                BatterySipperWrapper wrapper = sipperMap.get(ops.getUid());
+            // Also don't show apps belonging to background users.
+            int uid = ops.getUid();
+            boolean isAndroidOs = (uid == Process.SYSTEM_UID)
+                    && ANDROID_SYSTEM_PACKAGE_NAME.equals(ops.getPackageName());
+            if (!isAndroidOs && ActivityManager.getCurrentUser() == UserHandle.getUserId(uid)) {
+                BatterySipperWrapper wrapper = sipperMap.get(uid);
                 Preference pref = getPreferenceFromOps(now, ops, wrapper);
                 if (pref != null) {
                     prefs.add(pref);
@@ -267,7 +272,7 @@ public class RecentLocationApps {
                             " belongs to another inactive account, ignored.");
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Log.wtf(TAG, "Package not found: " + packageName);
+                Log.wtf(TAG, "Package not found: " + packageName, e);
             }
         }
 
