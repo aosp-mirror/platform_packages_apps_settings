@@ -55,8 +55,6 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     private String mReturnPackage = null;
     private String mReturnClass = null;
 
-    private CheckBox mRememberChoice;
-    private boolean mRememberChoiceValue = false;
     private int mRequestType = 0;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -156,64 +154,50 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         return mRemoteName;
     }
 
+    // TODO(edjee): createConnectionDialogView, createPhonebookDialogView and createMapDialogView
+    // are similar. Refactor them into one method.
+    // Also, the string resources bluetooth_remember_choice and bluetooth_pb_remember_choice should
+    // be removed.
     private View createConnectionDialogView() {
         String mRemoteName = createRemoteName();
-        mView = getLayoutInflater().inflate(R.layout.bluetooth_connection_access, null);
+        mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_connection_dialog_text,
                 mRemoteName));
         return mView;
     }
 
-    private void createCheckbox(int viewId)
-    {
-        mRememberChoice = (CheckBox)mView.findViewById(viewId);
-        mRememberChoice.setChecked(false);
-        mRememberChoice.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mRememberChoiceValue = true;
-                } else {
-                    mRememberChoiceValue = false;
-                }
-            }
-            });
-    }
     private View createPhonebookDialogView() {
         String mRemoteName = createRemoteName();
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_pb_acceptance_dialog_text,
                 mRemoteName, mRemoteName));
-        createCheckbox(R.id.bluetooth_remember_choice);
         return mView;
     }
+
     private View createMapDialogView() {
         String mRemoteName = createRemoteName();
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_map_acceptance_dialog_text,
                 mRemoteName, mRemoteName));
-        createCheckbox(R.id.bluetooth_remember_choice);
         return mView;
     }
 
     private void onPositive() {
-        if (DEBUG) Log.d(TAG, "onPositive mRememberChoiceValue: " + mRememberChoiceValue);
-        if (mRememberChoiceValue)
-            savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_ALLOWED);
-
+        if (DEBUG) Log.d(TAG, "onPositive");
+        savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_ALLOWED);
+        // TODO(edjee): Now that we always save the user's choice,
+        // we can get rid of BluetoothDevice#EXTRA_ALWAYS_ALLOWED.
         sendIntentToReceiver(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY, true,
-                            BluetoothDevice.EXTRA_ALWAYS_ALLOWED, mRememberChoiceValue);
+                             BluetoothDevice.EXTRA_ALWAYS_ALLOWED, true);
         finish();
     }
 
     private void onNegative() {
-        if (DEBUG) Log.d(TAG, "onNegative mRememberChoiceValue: " + mRememberChoiceValue);
-
-        if (mRememberChoiceValue)
-            savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_REJECTED);
-
+        if (DEBUG) Log.d(TAG, "onNegative");
+        savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_UNKNOWN);
         sendIntentToReceiver(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY, false,
                              null, false // dummy value, no effect since last param is null
                              );
