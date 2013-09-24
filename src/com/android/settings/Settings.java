@@ -667,49 +667,14 @@ public class Settings extends PreferenceActivity
         return headerIndex;
     }
 
-    private boolean isSystemApp(ResolveInfo ri) {
-        return ((ri.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
-    }
-
     private boolean updateHomeSettingHeaders(Header header) {
-        final PackageManager pm = getPackageManager();
-        final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
         try {
-            ComponentName currentHome = pm.getHomeActivities(homeApps);
+            final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
+            getPackageManager().getHomeActivities(homeApps);
             if (homeApps.size() < 2) {
                 // When there's only one available home app, omit this settings
                 // category entirely at the top level UI.
                 return false;
-            }
-            ResolveInfo iconSource = null;
-            if (currentHome == null) {
-                // no current default, so find the system home app and use that
-                for (int which = 0; which < homeApps.size(); which++) {
-                    ResolveInfo ri = homeApps.get(which);
-                    if (isSystemApp(ri)) {
-                        iconSource = ri;
-                        break;
-                    }
-                }
-            } else {
-                // find the current-home entry in the returned set
-                for (int which = 0; which < homeApps.size(); which++) {
-                    ResolveInfo ri = homeApps.get(which);
-                    ComponentName riName = new ComponentName(ri.activityInfo.packageName,
-                            ri.activityInfo.name);
-                    if (riName.equals(currentHome)) {
-                        iconSource = ri;
-                        break;
-                    }
-                }
-            }
-            if (iconSource != null) {
-                if (header.extras == null) {
-                    header.extras = new Bundle();
-                }
-                header.extras.putParcelable(HomeSettings.CURRENT_HOME, iconSource.activityInfo);
-            } else {
-                Log.v(LOG_TAG, "No home app icon found");
             }
         } catch (Exception e) {
             // Can't look up the home activity; bail on configuring the icon
