@@ -1035,7 +1035,6 @@
 
         <!-- Second and third-level settings -->
 
-
         <!-- Lock screen settings -->
         <activity android:name="ConfirmLockPattern"/>
 
@@ -1050,6 +1049,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name="ChooseLockGeneric$InternalActivity" android:exported="false"
+            android:label="@string/lockpassword_choose_lock_generic_header"
+            android:excludeFromRecents="true"
+        />
 
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
