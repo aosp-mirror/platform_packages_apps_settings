@@ -7,15 +7,6 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical" >
-        <TextView
-            android:id="@+id/nfc_payment_empty_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:visibility="gone"
-            android:paddingBottom="16dp"
-            android:text="@string/nfc_payment_no_apps"/>
         <ImageView
             android:id="@+id/nfc_payment_tap_image"
             android:layout_width="fill_parent"
@@ -23,6 +14,15 @@
             android:gravity="center"
             android:visibility="gone"
             android:src="@drawable/nfc_payment_empty_state"/>
+        <TextView
+            android:id="@+id/nfc_payment_empty_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:visibility="gone"
+            android:paddingTop="16dp"
+            android:text="@string/nfc_payment_no_apps"/>
     </LinearLayout>
     <ListView
         android:id="@android:id/list"
