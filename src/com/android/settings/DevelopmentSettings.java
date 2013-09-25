@@ -326,9 +326,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
         if (selectRuntime != null) {
             mAllPrefs.add(selectRuntime);
-            if (!removePreferenceForProduction(selectRuntime)) {
-                filterRuntimeOptions(selectRuntime);
-            }
+            filterRuntimeOptions(selectRuntime);
         }
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
