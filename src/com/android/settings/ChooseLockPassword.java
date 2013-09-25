@@ -153,6 +153,9 @@ public class ChooseLockPassword extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
             Intent intent = getActivity().getIntent();
+            if (!(getActivity() instanceof ChooseLockPassword)) {
+                throw new SecurityException("Fragment contained in wrong activity");
+            }
             mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                     mRequestedQuality), mLockPatternUtils.getRequestedPasswordQuality());
             mPasswordMinLength = Math.max(
