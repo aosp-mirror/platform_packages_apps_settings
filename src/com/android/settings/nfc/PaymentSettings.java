@@ -17,12 +17,19 @@
 package com.android.settings.nfc;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -30,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
@@ -42,6 +50,8 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     private LayoutInflater mInflater;
     private PaymentBackend mPaymentBackend;
 
+    private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
+
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -50,12 +60,12 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
         setHasOptionsMenu(false);
         mPaymentBackend = new PaymentBackend(getActivity());
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        setHasOptionsMenu(true);
     }
 
     public void refresh() {
         PreferenceManager manager = getPreferenceManager();
         PreferenceScreen screen = manager.createPreferenceScreen(getActivity());
-
         // Get all payment services
         List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
@@ -80,17 +90,15 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
         } else {
             emptyText.setVisibility(View.GONE);
             emptyImage.setVisibility(View.GONE);
-            setPreferenceScreen(screen);
         }
+        setPreferenceScreen(screen);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
         View v = mInflater.inflate(R.layout.nfc_payment, container, false);
-
         return v;
     }
 
@@ -108,7 +116,52 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         refresh();
+    }
+
+    @Override
+    public void onPause() {
+        mSettingsPackageMonitor.unregister();
+        super.onPause();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.nfc_payment_settings, menu);
+        MenuItem menuItem = menu.findItem(R.id.nfc_payment_menu_item_add_service);
+        menuItem.setIntent(new Intent(Intent.ACTION_VIEW,
+                Uri.parse(getString(R.string.download_nfc_payment_service_query))));
+    }
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void dispatchMessage(Message msg) {
+            refresh();
+        }
+    };
+
+    private class SettingsPackageMonitor extends PackageMonitor {
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+           mHandler.obtainMessage().sendToTarget();
+        }
+
+        @Override
+        public void onPackageAppeared(String packageName, int reason) {
+            mHandler.obtainMessage().sendToTarget();
+        }
+
+        @Override
+        public void onPackageDisappeared(String packageName, int reason) {
+            mHandler.obtainMessage().sendToTarget();
+        }
+
+        @Override
+        public void onPackageRemoved(String packageName, int uid) {
+            mHandler.obtainMessage().sendToTarget();
+        }
     }
 
     public static class PaymentAppPreference extends Preference {

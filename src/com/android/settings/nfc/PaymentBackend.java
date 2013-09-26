@@ -61,8 +61,11 @@ public class PaymentBackend {
 
         for (ApduServiceInfo service : serviceInfos) {
             PaymentAppInfo appInfo = new PaymentAppInfo();
-            appInfo.caption = service.loadLabel(pm);
             appInfo.banner = service.loadBanner(pm);
+            appInfo.caption = service.getDescription();
+            if (appInfo.caption == null) {
+                appInfo.caption = service.loadLabel(pm);
+            }
             appInfo.isDefault = service.getComponent().equals(defaultApp);
             appInfo.componentName = service.getComponent();
             appInfos.add(appInfo);
