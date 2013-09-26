@@ -16,18 +16,15 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/print_settings_title">
+        android:title="@string/print_print_job">
 
-    <PreferenceCategory
-            android:key="print_jobs_category"
-            android:title="@string/print_print_jobs"
-            android:order="0">
-    </PreferenceCategory>
+    <Preference
+            android:key="print_job_preference">
+    </Preference>
 
-    <PreferenceCategory
-            android:key="print_services_category"
-            android:title="@string/print_settings_title"
-            android:order="1">
-    </PreferenceCategory>
+    <Preference
+            android:key="print_job_message_preference"
+            android:layout="@layout/print_job_summary">
+    </Preference>
 
 </PreferenceScreen>
