@@ -27,15 +27,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceActivity;
@@ -54,8 +51,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -69,6 +68,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.widget.CompoundButton.OnCheckedChangeListener;
 /**
  * Fragment with print service settings.
  */
@@ -83,7 +83,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             new SettingsContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            updateForServiceEnabledState();
+            updateUiForServiceState();
         }
     };
 
@@ -108,15 +108,15 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     };
 
-    protected ToggleSwitch mToggleSwitch;
+    private ToggleSwitch mToggleSwitch;
 
-    protected String mPreferenceKey;
+    private String mPreferenceKey;
 
-    protected CharSequence mSettingsTitle;
-    protected Intent mSettingsIntent;
+    private CharSequence mSettingsTitle;
+    private Intent mSettingsIntent;
 
-    protected CharSequence mAddPrintersTitle;
-    protected Intent mAddPrintersIntent;
+    private CharSequence mAddPrintersTitle;
+    private Intent mAddPrintersIntent;
 
     private CharSequence mEnableWarningTitle;
     private CharSequence mEnableWarningMessage;
@@ -135,9 +135,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     public void onResume() {
-        mSettingsContentObserver.register(getContentResolver());
         super.onResume();
-        updateForServiceEnabledState();
+        mSettingsContentObserver.register(getContentResolver());
+        updateEmptyView();
+        updateUiForServiceState();
     }
 
     @Override
@@ -149,12 +150,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        installActionBarToggleSwitch();
-        processArguments(getArguments());
-        mPrintersAdapter = new PrintersAdapter();
-        mPrintersAdapter.registerDataSetObserver(mDataObserver);
-        getListView().setAdapter(mPrintersAdapter);
-        updateForServiceEnabledState();
+        initComponents();
+        updateUiForArguments();
     }
 
     @Override
@@ -221,7 +218,40 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 
-    private void updateForServiceEnabledState() {
+    private void updateEmptyView() {
+        ListView listView = getListView();
+        ViewGroup contentRoot = (ViewGroup) listView.getParent();
+        View emptyView = listView.getEmptyView();
+        if (!mToggleSwitch.isChecked()) {
+            if (emptyView != null
+                    && emptyView.getId() != R.id.empty_printers_list_service_disabled) {
+                contentRoot.removeView(emptyView);
+                emptyView = null;
+            }
+            if (emptyView == null) {
+                emptyView = getActivity().getLayoutInflater().inflate(
+                        R.layout.empty_print_state, contentRoot, false);
+                TextView textView = (TextView) emptyView.findViewById(R.id.message);
+                textView.setText(R.string.print_service_disabled);
+                contentRoot.addView(emptyView);
+                listView.setEmptyView(emptyView);
+            }
+        } else if (mPrintersAdapter.getUnfilteredCount() <= 0) {
+            if (emptyView != null
+                    && emptyView.getId() != R.id.empty_printers_list_service_enabled) {
+                contentRoot.removeView(emptyView);
+                emptyView = null;
+            }
+            if (emptyView == null) {
+                emptyView = getActivity().getLayoutInflater().inflate(
+                        R.layout.empty_printers_list_service_enabled, contentRoot, false);
+                contentRoot.addView(emptyView);
+                listView.setEmptyView(emptyView);
+            }
+        }
+    }
+
+    private void updateUiForServiceState() {
         List<ComponentName> services = SettingsUtils.readEnabledPrintServices(getActivity());
         mServiceEnabled = services.contains(mComponentName);
         if (mServiceEnabled) {
@@ -234,7 +264,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         getActivity().invalidateOptionsMenu();
     }
 
-    private void installActionBarToggleSwitch() {
+    private void initComponents() {
+        mPrintersAdapter = new PrintersAdapter();
+        mPrintersAdapter.registerDataSetObserver(mDataObserver);
+
         mToggleSwitch = createAndAddActionBarToggleSwitch(getActivity());
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
@@ -253,9 +286,20 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 return false;
             }
         });
+        mToggleSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateEmptyView();
+            }
+        });
+
+        getListView().setEnabled(false);
+        getListView().setAdapter(mPrintersAdapter);
     }
 
-    private void processArguments(Bundle arguments) {
+    private void updateUiForArguments() {
+        Bundle arguments = getArguments();
+
         // Key.
         mPreferenceKey = arguments.getString(PrintSettingsFragment.EXTRA_PREFERENCE_KEY);
 
@@ -381,22 +425,21 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private static abstract class SettingsContentObserver extends ContentObserver {
 
-    public SettingsContentObserver(Handler handler) {
-        super(handler);
-    }
+        public SettingsContentObserver(Handler handler) {
+            super(handler);
+        }
 
-    public void register(ContentResolver contentResolver) {
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.ENABLED_PRINT_SERVICES), false, this);
-    }
+        public void register(ContentResolver contentResolver) {
+            contentResolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.ENABLED_PRINT_SERVICES), false, this);
+        }
 
-    public void unregister(ContentResolver contentResolver) {
-        contentResolver.unregisterContentObserver(this);
-    }
+        public void unregister(ContentResolver contentResolver) {
+            contentResolver.unregisterContentObserver(this);
+        }
 
-    @Override
-    public abstract void onChange(boolean selfChange, Uri uri);
-
+        @Override
+        public abstract void onChange(boolean selfChange, Uri uri);
     }
 
     private final class PrintersAdapter extends BaseAdapter
@@ -415,6 +458,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         public void disable() {
             getLoaderManager().destroyLoader(LOADER_ID_PRINTERS_LOADER);
+            mPrinters.clear();
         }
 
         public int getUnfilteredCount() {
@@ -560,7 +604,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         private static final String LOG_TAG = "PrintersLoader";
 
-        private static final boolean DEBUG = true && Build.IS_DEBUGGABLE;
+        private static final boolean DEBUG = false;
 
         private final Map<PrinterId, PrinterInfo> mPrinters =
                 new LinkedHashMap<PrinterId, PrinterInfo>();

@@ -3453,11 +3453,32 @@
     <!-- Title for the prompt if no printers are available and the system is searching for such. [CHAR LIMIT=50] -->
     <string name="print_searching_for_printers">Searching for printers</string>
 
+    <!-- Title for the prompt if no printers are available because the print service is disabled. [CHAR LIMIT=50] -->
+    <string name="print_service_disabled">Service disabled</string>
+
     <!-- Title for the menu item to open the print jobs screen. [CHAR LIMIT=25] -->
     <string name="print_print_jobs">Print jobs</string>
 
-    <!-- Title for the print jobs screen. [CHAR LIMIT=25] -->
-    <string name="print_active_print_jobs">Active print jobs</string>
+    <!-- Title for the print job settings screen. [CHAR LIMIT=25] -->
+    <string name="print_print_job">Print job</string>
+
+    <!-- Title for the button to restart a print job. [CHAR LIMIT=25] -->
+    <string name="print_restart">Restart</string>
+
+    <!-- Title for the button to cancel a print job. [CHAR LIMIT=25] -->
+    <string name="print_cancel">Cancel</string>
+
+    <!-- Template for the summary of a print job. [CHAR LIMIT=25] -->
+    <string name="print_job_summary"><xliff:g id="printer">%1$s</xliff:g>\n<xliff:g id="time">%2$s</xliff:g></string>
+
+    <!-- Template for the label of the state for a ongoing print job. [CHAR LIMIT=25] -->
+    <string name="print_printing_state_title_template">Printing <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
+
+    <!-- Template for the label of the state for a failed print job. [CHAR LIMIT=25] -->
+    <string name="print_failed_state_title_template">Printer error <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
+
+    <!-- Template for the label of the state for a blocked print job. [CHAR LIMIT=25] -->
+    <string name="print_blocked_state_title_template">Printer blocked <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
 
     <!-- App Fuel Gauge strings -->
     <skip />
