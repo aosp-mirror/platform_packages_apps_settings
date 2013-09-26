@@ -21,8 +21,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
+import android.nfc.cardemulation.HostApduService;
+import android.nfc.cardemulation.OffHostApduService;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,7 +35,10 @@ import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 public final class PaymentDefaultDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
@@ -81,17 +88,20 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         }
 
         // Check if passed in service exists
-        boolean found = false;
+        PaymentAppInfo requestedPaymentApp = null;
+        PaymentAppInfo defaultPaymentApp = null;
 
         List<PaymentAppInfo> services = mBackend.getPaymentAppInfos();
         for (PaymentAppInfo service : services) {
             if (component.equals(service.componentName)) {
-                found = true;
-                break;
+                requestedPaymentApp = service;
+            }
+            if (service.isDefault) {
+                defaultPaymentApp = service;
             }
         }
 
-        if (!found) {
+        if (requestedPaymentApp == null) {
             Log.e(TAG, "Component " + component + " is not a registered payment service.");
             return false;
         }
@@ -103,36 +113,18 @@ public final class PaymentDefaultDialog extends AlertActivity implements
             return false;
         }
 
-        PackageManager pm = getPackageManager();
-        ApplicationInfo newAppInfo;
-        try {
-            newAppInfo = pm.getApplicationInfo(component.getPackageName(), 0);
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "PM could not load app info for " + component);
-            return false;
-        }
-        ApplicationInfo defaultAppInfo = null;
-        try {
-            if (defaultComponent != null) {
-                defaultAppInfo = pm.getApplicationInfo(defaultComponent.getPackageName(), 0);
-            }
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "PM could not load app info for " + defaultComponent);
-            // Continue intentionally
-        }
-
         mNewDefault = component;
-
         // Compose dialog; get
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getString(R.string.nfc_payment_set_default_label);
-        if (defaultAppInfo == null) {
+        if (defaultPaymentApp == null) {
             String formatString = getString(R.string.nfc_payment_set_default);
-            String msg = String.format(formatString, newAppInfo.loadLabel(pm));
+            String msg = String.format(formatString, requestedPaymentApp.caption);
             p.mMessage = msg;
         } else {
             String formatString = getString(R.string.nfc_payment_set_default_instead_of);
-            String msg = String.format(formatString, newAppInfo.loadLabel(pm), defaultAppInfo.loadLabel(pm));
+            String msg = String.format(formatString, requestedPaymentApp.caption,
+                    defaultPaymentApp.caption);
             p.mMessage = msg;
         }
         p.mPositiveButtonText = getString(R.string.yes);
