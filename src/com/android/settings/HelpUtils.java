@@ -109,7 +109,7 @@ public class HelpUtils {
      * of the app's package as gotten via the context.
      * @return the uri with added query parameters
      */
-    private static Uri uriWithAddedParameters(Context context, Uri baseUri) {
+    public static Uri uriWithAddedParameters(Context context, Uri baseUri) {
         Uri.Builder builder = baseUri.buildUpon();
 
         // Add in the preferred language
