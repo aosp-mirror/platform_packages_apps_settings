@@ -256,14 +256,17 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         int status = profile.getConnectionStatus(device);
         boolean isConnected =
                 status == BluetoothProfile.STATE_CONNECTED;
-
         if (isConnected) {
             askDisconnect(getActivity(), profile);
         } else {
             if (profile.isPreferred(device)) {
                 // profile is preferred but not connected: disable auto-connect
-                profile.setPreferred(device, false);
-                refreshProfilePreference(profilePref, profile);
+                if (profile instanceof PanProfile) {
+                    mCachedDevice.connectProfile(profile);
+                } else {
+                    profile.setPreferred(device, false);
+                    refreshProfilePreference(profilePref, profile);
+                }
             } else {
                 profile.setPreferred(device, true);
                 mCachedDevice.connectProfile(profile);
