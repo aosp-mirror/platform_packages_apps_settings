@@ -301,6 +301,9 @@ public class ChooseLockPattern extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+            if (!(getActivity() instanceof ChooseLockPattern)) {
+                throw new SecurityException("Fragment contained in wrong activity");
+            }
         }
 
         @Override
@@ -331,7 +334,7 @@ public class ChooseLockPattern extends PreferenceActivity {
             topLayout.setDefaultTouchRecepient(mLockPatternView);
 
             final boolean confirmCredentials = getActivity().getIntent()
-                    .getBooleanExtra("confirm_credentials", false);
+                    .getBooleanExtra("confirm_credentials", true);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {

@@ -49,6 +49,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
         return modIntent;
     }
 
+    public static class InternalActivity extends ChooseLockGeneric {
+    }
+
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
         private static final int MIN_PASSWORD_LENGTH = 4;
         private static final String KEY_UNLOCK_BACKUP_INFO = "unlock_backup_info";
@@ -86,7 +89,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
             // Defaults to needing to confirm credentials
             final boolean confirmCredentials = getActivity().getIntent()
                 .getBooleanExtra(CONFIRM_CREDENTIALS, true);
-            mPasswordConfirmed = !confirmCredentials;
+            if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
+                mPasswordConfirmed = !confirmCredentials;
+            }
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -325,7 +330,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
         }
 
         private Intent getBiometricSensorIntent() {
-            Intent fallBackIntent = new Intent().setClass(getActivity(), ChooseLockGeneric.class);
+            Intent fallBackIntent = new Intent().setClass(getActivity(),
+                    ChooseLockGeneric.InternalActivity.class);
             fallBackIntent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, true);
             fallBackIntent.putExtra(CONFIRM_CREDENTIALS, false);
             fallBackIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE,
