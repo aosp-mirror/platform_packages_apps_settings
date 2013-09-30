@@ -45,7 +45,7 @@ public class ProcessStatsPreference extends Preference {
     public void setPercent(double percentOfWeight, double percentOfTime) {
         mProgress = (int) Math.ceil(percentOfWeight);
         mProgressText = getContext().getResources().getString(
-                R.string.percentage, (int) Math.ceil(percentOfTime));
+                R.string.percentage, (int) Math.round(percentOfTime));
         notifyChanged();
     }
 

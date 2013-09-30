@@ -21,8 +21,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.ArrayMap;
 import android.util.Log;
-import android.util.SparseArray;
 import com.android.internal.app.ProcessStats;
 
 import java.util.ArrayList;
@@ -31,11 +31,12 @@ import java.util.Comparator;
 
 public final class ProcStatsEntry implements Parcelable {
     private static final String TAG = "ProcStatsEntry";
+    private static boolean DEBUG = ProcessStatsUi.DEBUG;
 
     final String mPackage;
     final int mUid;
     final String mName;
-    final boolean mUnique;
+    final ArrayList<String> mPackages = new ArrayList<String>();
     final long mDuration;
     final long mAvgPss;
     final long mMaxPss;
@@ -45,33 +46,35 @@ public final class ProcStatsEntry implements Parcelable {
 
     String mBestTargetPackage;
 
-    ArrayList<Service> mServices = new ArrayList<Service>(2);
+    ArrayMap<String, ArrayList<Service>> mServices = new ArrayMap<String, ArrayList<Service>>(1);
 
     public ApplicationInfo mUiTargetApp;
     public String mUiLabel;
     public String mUiBaseLabel;
     public String mUiPackage;
 
-    public ProcStatsEntry(ProcessStats.ProcessState proc,
+    public ProcStatsEntry(ProcessStats.ProcessState proc, String packageName,
             ProcessStats.ProcessDataCollection tmpTotals, boolean useUss, boolean weightWithTime) {
         ProcessStats.computeProcessData(proc, tmpTotals, 0);
         mPackage = proc.mPackage;
         mUid = proc.mUid;
         mName = proc.mName;
-        mUnique = proc.mCommonProcess == proc;
+        mPackages.add(packageName);
         mDuration = tmpTotals.totalTime;
         mAvgPss = tmpTotals.avgPss;
         mMaxPss = tmpTotals.maxPss;
         mAvgUss = tmpTotals.avgUss;
         mMaxUss = tmpTotals.maxUss;
         mWeight = (weightWithTime ? mDuration : 1) * (useUss ? mAvgUss : mAvgPss);
+        if (DEBUG) Log.d(TAG, "New proc entry " + proc.mName + ": dur=" + mDuration
+                + " avgpss=" + mAvgPss + " weight=" + mWeight);
     }
 
     public ProcStatsEntry(Parcel in) {
         mPackage = in.readString();
         mUid = in.readInt();
         mName = in.readString();
-        mUnique = in.readInt() != 0;
+        in.readStringList(mPackages);
         mDuration = in.readLong();
         mAvgPss = in.readLong();
         mMaxPss = in.readLong();
@@ -79,40 +82,118 @@ public final class ProcStatsEntry implements Parcelable {
         mMaxUss = in.readLong();
         mWeight = in.readLong();
         mBestTargetPackage = in.readString();
-        in.readTypedList(mServices, Service.CREATOR);
+        final int N = in.readInt();
+        if (N > 0) {
+            mServices.ensureCapacity(N);
+            for (int i=0; i<N; i++) {
+                String key = in.readString();
+                ArrayList<Service> value = new ArrayList<Service>();
+                in.readTypedList(value, Service.CREATOR);
+                mServices.append(key, value);
+            }
+        }
     }
 
-    public void evaluateTargetPackage(ProcessStats stats, ProcessStats.ProcessDataCollection totals,
-            Comparator<ProcStatsEntry> compare, boolean useUss, boolean weightWithTime) {
+    public void addPackage(String packageName) {
+        mPackages.add(packageName);
+    }
+
+    public void evaluateTargetPackage(PackageManager pm, ProcessStats stats,
+            ProcessStats.ProcessDataCollection totals, Comparator<ProcStatsEntry> compare,
+            boolean useUss, boolean weightWithTime) {
         mBestTargetPackage = null;
-        if (mUnique) {
-            mBestTargetPackage = mPackage;
+        if (mPackages.size() == 1) {
+            if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": single pkg " + mPackages.get(0));
+            mBestTargetPackage = mPackages.get(0);
         } else {
             // See if there is one significant package that was running here.
             ArrayList<ProcStatsEntry> subProcs = new ArrayList<ProcStatsEntry>();
-            for (int ipkg=0, NPKG=stats.mPackages.getMap().size(); ipkg<NPKG; ipkg++) {
-                SparseArray<ProcessStats.PackageState> uids
-                        = stats.mPackages.getMap().valueAt(ipkg);
-                for (int iu=0, NU=uids.size(); iu<NU; iu++) {
-                    if (uids.keyAt(iu) != mUid) {
-                        continue;
-                    }
-                    ProcessStats.PackageState pkgState = uids.valueAt(iu);
-                    for (int iproc=0, NPROC=pkgState.mProcesses.size(); iproc<NPROC; iproc++) {
-                        ProcessStats.ProcessState subProc =
-                                pkgState.mProcesses.valueAt(iproc);
-                        if (subProc.mName.equals(mName)) {
-                            subProcs.add(new ProcStatsEntry(subProc, totals, useUss,
-                                    weightWithTime));
-                        }
-                    }
+            for (int ipkg=0; ipkg<mPackages.size(); ipkg++) {
+                ProcessStats.PackageState pkgState = stats.mPackages.get(mPackages.get(ipkg), mUid);
+                if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ", pkg "
+                        + mPackages.get(ipkg) + ":");
+                if (pkgState == null) {
+                    Log.w(TAG, "No package state found for " + mPackages.get(ipkg) + "/"
+                            + mUid + " in process " + mName);
+                    continue;
                 }
+                ProcessStats.ProcessState pkgProc = pkgState.mProcesses.get(mName);
+                if (pkgProc == null) {
+                    Log.w(TAG, "No process " + mName + " found in package state "
+                            + mPackages.get(ipkg) + "/" + mUid);
+                    continue;
+                }
+                subProcs.add(new ProcStatsEntry(pkgProc, pkgState.mPackageName, totals, useUss,
+                        weightWithTime));
             }
             if (subProcs.size() > 1) {
                 Collections.sort(subProcs, compare);
                 if (subProcs.get(0).mWeight > (subProcs.get(1).mWeight*3)) {
+                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": best pkg "
+                            + subProcs.get(0).mPackage + " weight " + subProcs.get(0).mWeight
+                            + " better than " + subProcs.get(1).mPackage
+                            + " weight " + subProcs.get(1).mWeight);
                     mBestTargetPackage = subProcs.get(0).mPackage;
+                    return;
                 }
+                // Couldn't find one that is best by weight, let's decide on best another
+                // way: the one that has the longest running service, accounts for at least
+                // half of the maximum weight, and has specified an explicit app icon.
+                long maxWeight = subProcs.get(0).mWeight;
+                long bestRunTime = -1;
+                for (int i=0; i<subProcs.size(); i++) {
+                    if (subProcs.get(i).mWeight < (maxWeight/2)) {
+                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                + subProcs.get(i).mPackage + " weight " + subProcs.get(i).mWeight
+                                + " too small");
+                        continue;
+                    }
+                    try {
+                        ApplicationInfo ai = pm.getApplicationInfo(subProcs.get(i).mPackage, 0);
+                        if (ai.icon == 0) {
+                            if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                    + subProcs.get(i).mPackage + " has no icon");
+                            continue;
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                + subProcs.get(i).mPackage + " failed finding app info");
+                        continue;
+                    }
+                    ArrayList<Service> subProcServices = null;
+                    for (int isp=0, NSP=mServices.size(); isp<NSP; isp++) {
+                        ArrayList<Service> subServices = mServices.valueAt(isp);
+                        if (subServices.get(0).mPackage.equals(subProcs.get(i).mPackage)) {
+                            subProcServices = subServices;
+                            break;
+                        }
+                    }
+                    long thisRunTime = 0;
+                    if (subProcServices != null) {
+                        for (int iss=0, NSS=subProcServices.size(); iss<NSS; iss++) {
+                            Service service = subProcServices.get(iss);
+                            if (service.mDuration > thisRunTime) {
+                                if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                        + subProcs.get(i).mPackage + " service " + service.mName
+                                        + " run time is " + service.mDuration);
+                                thisRunTime = service.mDuration;
+                                break;
+                            }
+                        }
+                    }
+                    if (thisRunTime > bestRunTime) {
+                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                + subProcs.get(i).mPackage + " new best run time " + thisRunTime);
+                        mBestTargetPackage = subProcs.get(i).mPackage;
+                        bestRunTime = thisRunTime;
+                    } else {
+                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                + subProcs.get(i).mPackage + " run time " + thisRunTime
+                                + " not as good as last " + bestRunTime);
+                    }
+                }
+            } else if (subProcs.size() == 1) {
+                mBestTargetPackage = subProcs.get(0).mPackage;
             }
         }
     }
@@ -178,7 +259,12 @@ public final class ProcStatsEntry implements Parcelable {
     }
 
     public void addService(ProcessStats.ServiceState svc) {
-        mServices.add(new Service(svc));
+        ArrayList<Service> services = mServices.get(svc.mPackage);
+        if (services == null) {
+            services = new ArrayList<Service>();
+            mServices.put(svc.mPackage, services);
+        }
+        services.add(new Service(svc));
     }
 
     @Override
@@ -191,7 +277,7 @@ public final class ProcStatsEntry implements Parcelable {
         dest.writeString(mPackage);
         dest.writeInt(mUid);
         dest.writeString(mName);
-        dest.writeInt(mUnique ? 1 : 0);
+        dest.writeStringList(mPackages);
         dest.writeLong(mDuration);
         dest.writeLong(mAvgPss);
         dest.writeLong(mMaxPss);
@@ -199,7 +285,12 @@ public final class ProcStatsEntry implements Parcelable {
         dest.writeLong(mMaxUss);
         dest.writeLong(mWeight);
         dest.writeString(mBestTargetPackage);
-        dest.writeTypedList(mServices);
+        final int N = mServices.size();
+        dest.writeInt(N);
+        for (int i=0; i<N; i++) {
+            dest.writeString(mServices.keyAt(i));
+            dest.writeTypedList(mServices.valueAt(i));
+        }
     }
 
     public static final Parcelable.Creator<ProcStatsEntry> CREATOR
