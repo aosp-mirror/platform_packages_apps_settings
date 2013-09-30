@@ -95,6 +95,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         @Override
         public void onChanged() {
             invalidateOptionsMenuIfNeeded();
+            updateEmptyView();
         }
 
         @Override
@@ -227,14 +228,15 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         ViewGroup contentRoot = (ViewGroup) listView.getParent();
         View emptyView = listView.getEmptyView();
         if (!mToggleSwitch.isChecked()) {
-            if (emptyView != null
-                    && emptyView.getId() != R.id.empty_printers_list_service_disabled) {
+            if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
                 contentRoot.removeView(emptyView);
                 emptyView = null;
             }
             if (emptyView == null) {
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_print_state, contentRoot, false);
+                ImageView iconView = (ImageView) emptyView.findViewById(R.id.icon);
+                iconView.setContentDescription(getString(R.string.print_service_disabled));
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_service_disabled);
                 contentRoot.addView(emptyView);
@@ -249,6 +251,21 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (emptyView == null) {
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_printers_list_service_enabled, contentRoot, false);
+                contentRoot.addView(emptyView);
+                listView.setEmptyView(emptyView);
+            }
+        } else if (mPrintersAdapter.getCount() <= 0) {
+            if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
+                contentRoot.removeView(emptyView);
+                emptyView = null;
+            }
+            if (emptyView == null) {
+                emptyView = getActivity().getLayoutInflater().inflate(
+                        R.layout.empty_print_state, contentRoot, false);
+                ImageView iconView = (ImageView) emptyView.findViewById(R.id.icon);
+                iconView.setContentDescription(getString(R.string.print_no_printers_found));
+                TextView textView = (TextView) emptyView.findViewById(R.id.message);
+                textView.setText(R.string.print_no_printers_found);
                 contentRoot.addView(emptyView);
                 listView.setEmptyView(emptyView);
             }
