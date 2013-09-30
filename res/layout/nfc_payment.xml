@@ -23,6 +23,18 @@
             android:visibility="gone"
             android:paddingTop="16dp"
             android:text="@string/nfc_payment_no_apps"/>
+        <TextView
+            android:id="@+id/nfc_payment_learn_more"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:clickable="true"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_blue_light"
+            android:paddingTop="16dp"
+            android:text="@string/nfc_payment_learn_more"/>
     </LinearLayout>
     <ListView
         android:id="@android:id/list"
