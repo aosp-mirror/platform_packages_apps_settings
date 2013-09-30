@@ -168,6 +168,23 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
         }
     }
 
+    private void addPackageHeaderItem(ViewGroup parent, String packageName) {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        ViewGroup item = (ViewGroup) inflater.inflate(R.layout.running_processes_item,
+                null);
+        parent.addView(item);
+        final ImageView icon = (ImageView) item.findViewById(R.id.icon);
+        TextView nameView = (TextView) item.findViewById(R.id.name);
+        TextView descriptionView = (TextView) item.findViewById(R.id.description);
+        try {
+            ApplicationInfo ai = mPm.getApplicationInfo(packageName, 0);
+            icon.setImageDrawable(ai.loadIcon(mPm));
+            nameView.setText(ai.loadLabel(mPm));
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+        descriptionView.setText(packageName);
+    }
+
     private void addDetailsItem(ViewGroup parent, CharSequence label, CharSequence value) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_detail_item_text,
@@ -204,22 +221,31 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
     };
 
     private void fillServicesSection() {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
         if (mEntry.mServices.size() > 0) {
-            ArrayList<ProcStatsEntry.Service> services =
-                    (ArrayList<ProcStatsEntry.Service>)mEntry.mServices.clone();
-            Collections.sort(services, sServiceCompare);
-            for (int i=0; i<services.size(); i++) {
-                ProcStatsEntry.Service service = services.get(i);
-                String label = service.mName;
-                int tail = label.lastIndexOf('.');
-                if (tail >= 0 && tail < (label.length()-1)) {
-                    label = label.substring(tail+1);
+            boolean addPackageSections = false;
+            if (mEntry.mServices.size() > 1
+                    || !mEntry.mServices.valueAt(0).get(0).mPackage.equals(mEntry.mPackage)) {
+                addPackageSections = true;
+            }
+            for (int ip=0; ip<mEntry.mServices.size(); ip++) {
+                ArrayList<ProcStatsEntry.Service> services =
+                        (ArrayList<ProcStatsEntry.Service>)mEntry.mServices.valueAt(ip).clone();
+                Collections.sort(services, sServiceCompare);
+                if (addPackageSections) {
+                    addPackageHeaderItem(mServicesParent, services.get(0).mPackage);
                 }
-                long duration = service.mDuration;
-                final double percentOfTime = (((double)duration) / mTotalTime) * 100;
-                addDetailsItem(mServicesParent, label, getActivity().getResources().getString(
-                        R.string.percentage, (int) Math.ceil(percentOfTime)));
+                for (int is=0; is<services.size(); is++) {
+                    ProcStatsEntry.Service service = services.get(is);
+                    String label = service.mName;
+                    int tail = label.lastIndexOf('.');
+                    if (tail >= 0 && tail < (label.length()-1)) {
+                        label = label.substring(tail+1);
+                    }
+                    long duration = service.mDuration;
+                    final double percentOfTime = (((double)duration) / mTotalTime) * 100;
+                    addDetailsItem(mServicesParent, label, getActivity().getResources().getString(
+                            R.string.percentage, (int) Math.ceil(percentOfTime)));
+                }
             }
         }
     }
