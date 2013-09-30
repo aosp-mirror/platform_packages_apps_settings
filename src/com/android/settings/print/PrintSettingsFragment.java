@@ -150,10 +150,13 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.print_settings, menu);
-        MenuItem menuItem = menu.findItem(R.id.print_menu_item_add_service);
-        menuItem.setIntent(new Intent(Intent.ACTION_VIEW,
-                Uri.parse(getString(R.string.download_print_service_query))));
+        String searchUri = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.PRINT_SERVICE_SEARCH_URI);
+        if (!TextUtils.isEmpty(searchUri)) {
+            MenuItem menuItem = menu.add(R.string.print_menu_item_add_service);
+            menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menuItem.setIntent(new Intent(Intent.ACTION_VIEW,Uri.parse(searchUri)));
+        }
     }
 
     @Override
