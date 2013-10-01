@@ -32,6 +32,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.database.DataSetObserver;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +57,7 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -293,7 +297,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             }
         });
 
-        getListView().setEnabled(false);
+        getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
         getListView().setAdapter(mPrintersAdapter);
     }
 
@@ -531,30 +535,40 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = getActivity().getLayoutInflater().inflate(
-                        R.layout.preference, parent, false);
+                        R.layout.printer_dropdown_item, parent, false);
             }
 
             PrinterInfo printer = (PrinterInfo) getItem(position);
             CharSequence title = printer.getName();
             CharSequence subtitle = null;
+            Drawable icon = null;
             try {
                 PackageInfo packageInfo = getPackageManager().getPackageInfo(
                         printer.getId().getServiceName().getPackageName(), 0);
                         subtitle = packageInfo.applicationInfo.loadLabel(getPackageManager());
+                        icon = packageInfo.applicationInfo.loadIcon(getPackageManager());
             } catch (NameNotFoundException nnfe) {
                 /* ignore */
             }
 
-            TextView titleView = (TextView) convertView.findViewById(android.R.id.title);
+            TextView titleView = (TextView) convertView.findViewById(R.id.title);
             titleView.setText(title);
 
-            TextView subtitleView = (TextView) convertView.findViewById(android.R.id.summary);
+            TextView subtitleView = (TextView) convertView.findViewById(R.id.subtitle);
             if (!TextUtils.isEmpty(subtitle)) {
                 subtitleView.setText(subtitle);
                 subtitleView.setVisibility(View.VISIBLE);
             } else {
                 subtitleView.setText(null);
                 subtitleView.setVisibility(View.GONE);
+            }
+
+            ImageView iconView = (ImageView) convertView.findViewById(R.id.icon);
+            if (icon != null) {
+                iconView.setImageDrawable(icon);
+                iconView.setVisibility(View.VISIBLE);
+            } else {
+                iconView.setVisibility(View.GONE);
             }
 
             return convertView;
