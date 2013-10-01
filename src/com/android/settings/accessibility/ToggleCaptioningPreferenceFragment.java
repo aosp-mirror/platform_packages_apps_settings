@@ -92,6 +92,8 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
                 final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
                         activity, locale, R.string.captioning_preview_text);
                 preview.setText(localizedText);
+            } else {
+                preview.setText(R.string.captioning_preview_text);
             }
         }
     }
@@ -110,6 +112,8 @@ public class ToggleCaptioningPreferenceFragment extends Fragment {
             final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
                     context, locale, R.string.captioning_preview_characters);
             previewText.setText(localizedText);
+        } else {
+            previewText.setText(R.string.captioning_preview_characters);
         }
     }
 
