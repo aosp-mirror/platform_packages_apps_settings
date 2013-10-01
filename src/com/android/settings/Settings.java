@@ -19,6 +19,10 @@ package com.android.settings;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -27,7 +31,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -116,6 +119,10 @@ public class Settings extends PreferenceActivity
 
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
+
+    static final int DIALOG_ONLY_ONE_HOME = 1;
+
+    private static boolean sShowNoHomeNotice = false;
 
     private String mFragmentClass;
     private int mTopLevelHeaderId;
@@ -681,8 +688,22 @@ public class Settings extends PreferenceActivity
             getPackageManager().getHomeActivities(homeApps);
             if (homeApps.size() < 2) {
                 // When there's only one available home app, omit this settings
-                // category entirely at the top level UI.
+                // category entirely at the top level UI.  If the user just
+                // uninstalled the penultimate home app candidiate, we also
+                // now tell them about why they aren't seeing 'Home' in the list.
+                if (sShowNoHomeNotice) {
+                    sShowNoHomeNotice = false;
+                    NoHomeDialogFragment.show(this);
+                }
                 return false;
+            } else {
+                // Okay, we're allowing the Home settings category.  Tell it, when
+                // invoked via this front door, that we'll need to be told about the
+                // case when the user uninstalls all but one home app.
+                if (header.fragmentArguments == null) {
+                    header.fragmentArguments = new Bundle();
+                }
+                header.fragmentArguments.putBoolean(HomeSettings.HOME_SHOW_NOTICE, true);
             }
         } catch (Exception e) {
             // Can't look up the home activity; bail on configuring the icon
@@ -722,6 +743,21 @@ public class Settings extends PreferenceActivity
     @Override
     public Button getNextButton() {
         return super.getNextButton();
+    }
+
+    public static class NoHomeDialogFragment extends DialogFragment {
+        public static void show(Activity parent) {
+            final NoHomeDialogFragment dialog = new NoHomeDialogFragment();
+            dialog.show(parent.getFragmentManager(), null);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.only_one_home_message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create();
+        }
     }
 
     private static class HeaderAdapter extends ArrayAdapter<Header> {
@@ -915,11 +951,6 @@ public class Settings extends PreferenceActivity
                             ManageAccountsSettings.KEY_ACCOUNT_TYPE);
                     Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
                     setHeaderIcon(holder, icon);
-                } else if (header.extras != null &&
-                        header.extras.containsKey(HomeSettings.CURRENT_HOME)) {
-                    ActivityInfo ai = header.extras.getParcelable(HomeSettings.CURRENT_HOME);
-                    Drawable icon = ai.loadIcon(getContext().getPackageManager());
-                    setHeaderIcon(holder, icon);
                 } else {
                     holder.icon.setImageResource(header.iconRes);
                 }
@@ -1010,6 +1041,10 @@ public class Settings extends PreferenceActivity
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, accounts);
         invalidateHeaders();
+    }
+
+    public static void requestHomeNotice() {
+        sShowNoHomeNotice = true;
     }
 
     /*
