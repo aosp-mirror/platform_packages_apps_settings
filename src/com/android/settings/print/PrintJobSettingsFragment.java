@@ -153,10 +153,12 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
 
         if (mPrintJob == null) {
             finish();
+            return;
         }
 
         if (mPrintJob.isCancelled() || mPrintJob.isCompleted()) {
             finish();
+            return;
         }
 
         PrintJobInfo info = mPrintJob.getInfo();
