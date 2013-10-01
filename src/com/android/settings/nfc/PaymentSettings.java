@@ -25,6 +25,7 @@ import android.os.Message;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,6 +39,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
+import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
@@ -49,7 +51,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     public static final String TAG = "PaymentSettings";
     private LayoutInflater mInflater;
     private PaymentBackend mPaymentBackend;
-
     private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
 
 
@@ -57,7 +58,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        setHasOptionsMenu(false);
         mPaymentBackend = new PaymentBackend(getActivity());
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         setHasOptionsMenu(true);
@@ -83,13 +83,18 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             }
         }
         TextView emptyText = (TextView) getView().findViewById(R.id.nfc_payment_empty_text);
+        TextView learnMore = (TextView) getView().findViewById(R.id.nfc_payment_learn_more);
         ImageView emptyImage = (ImageView) getView().findViewById(R.id.nfc_payment_tap_image);
         if (screen.getPreferenceCount() == 0) {
             emptyText.setVisibility(View.VISIBLE);
+            learnMore.setVisibility(View.VISIBLE);
             emptyImage.setVisibility(View.VISIBLE);
+            getListView().setVisibility(View.GONE);
         } else {
             emptyText.setVisibility(View.GONE);
+            learnMore.setVisibility(View.GONE);
             emptyImage.setVisibility(View.GONE);
+            getListView().setVisibility(View.VISIBLE);
         }
         setPreferenceScreen(screen);
     }
@@ -99,6 +104,24 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = mInflater.inflate(R.layout.nfc_payment, container, false);
+        TextView learnMore = (TextView) v.findViewById(R.id.nfc_payment_learn_more);
+        learnMore.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String helpUrl;
+                if (!TextUtils.isEmpty(helpUrl = getResources().getString(
+                        R.string.help_url_nfc_payment))) {
+                    final Uri fullUri = HelpUtils.uriWithAddedParameters(
+                            PaymentSettings.this.getActivity(), Uri.parse(helpUrl));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, fullUri);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    startActivity(intent);
+                } else {
+                    Log.e(TAG, "Help url not set.");
+                }
+            }
+        });
         return v;
     }
 
