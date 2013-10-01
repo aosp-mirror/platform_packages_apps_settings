@@ -55,7 +55,7 @@ public class LocationSettings extends LocationSettingsBase
     /** Key for preference category "Recent location requests" */
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
     /** Key for preference category "Location services" */
-    private static final String KEY_APP_SETTINGS = "app_settings";
+    private static final String KEY_LOCATION_SERVICES = "location_services";
 
     private Switch mSwitch;
     private boolean mValidListener;
@@ -145,7 +145,7 @@ public class LocationSettings extends LocationSettingsBase
             mCategoryRecentLocationRequests.addPreference(banner);
         }
 
-        addAppSettings(activity, root);
+        addLocationServices(activity, root);
 
         // Only show the master switch when we're not in multi-pane mode, and not being used as
         // Setup Wizard.
@@ -177,11 +177,11 @@ public class LocationSettings extends LocationSettingsBase
      * up-to-date after mode changes even if an affected app doesn't send the setting changed
      * broadcast.
      */
-    private void addAppSettings(Context context, PreferenceScreen root) {
-        PreferenceCategory categoryAppSettings =
-                (PreferenceCategory) root.findPreference(KEY_APP_SETTINGS);
+    private void addLocationServices(Context context, PreferenceScreen root) {
+        PreferenceCategory categoryLocationServices =
+                (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
         final SettingsInjector injector = new SettingsInjector(context);
-        List<Preference> appSettings = injector.getInjectedSettings();
+        List<Preference> locationServices = injector.getInjectedSettings();
 
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -198,11 +198,11 @@ public class LocationSettings extends LocationSettingsBase
         filter.addAction(LocationManager.MODE_CHANGED_ACTION);
         context.registerReceiver(mReceiver, filter);
 
-        if (appSettings.size() > 0) {
-            addPreferencesSorted(appSettings, categoryAppSettings);
+        if (locationServices.size() > 0) {
+            addPreferencesSorted(locationServices, categoryLocationServices);
         } else {
             // If there's no item to display, remove the whole category.
-            root.removePreference(categoryAppSettings);
+            root.removePreference(categoryLocationServices);
         }
     }
 
