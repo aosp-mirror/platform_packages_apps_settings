@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -44,12 +45,15 @@ import java.util.List;
 public class RecentLocationApps {
     private static final String TAG = RecentLocationApps.class.getSimpleName();
     private static final String ANDROID_SYSTEM_PACKAGE_NAME = "android";
+    private static final String GOOGLE_SERVICES_SHARED_UID = "com.google.uid.shared";
+    private static final String GCORE_PACKAGE_NAME = "com.google.android.gms";
 
     private static final int RECENT_TIME_INTERVAL_MILLIS = 15 * 60 * 1000;
 
     private final PreferenceActivity mActivity;
     private final BatteryStatsHelper mStatsHelper;
     private final PackageManager mPackageManager;
+    private final Drawable mGCoreIcon;
 
     // Stores all the packages that requested location within the designated interval
     // key - package name of the app
@@ -59,6 +63,18 @@ public class RecentLocationApps {
         mActivity = activity;
         mPackageManager = activity.getPackageManager();
         mStatsHelper = sipperUtil;
+        Drawable icon = null;
+        try {
+            ApplicationInfo appInfo = mPackageManager.getApplicationInfo(
+                    GCORE_PACKAGE_NAME, PackageManager.GET_META_DATA);
+            icon = mPackageManager.getApplicationIcon(appInfo);
+        } catch (PackageManager.NameNotFoundException e) {
+            if (Log.isLoggable(TAG, Log.INFO)) {
+                Log.i(TAG, "GCore not installed");
+            }
+            icon = null;
+        }
+        mGCoreIcon = icon;
     }
 
     private class UidEntryClickedListener
@@ -187,6 +203,42 @@ public class RecentLocationApps {
     }
 
     /**
+     * Retrieves the icon for given BatterySipper object.
+     *
+     * The icons on location blaming page are actually Uid-based rather than package based. For
+     * those packages that share the same Uid, BatteryStatsHelper picks the one with the most CPU
+     * usage. Both "Contact Sync" and GCore belong to "Google Services" and they share the same Uid.
+     * As a result, sometimes Contact icon may be chosen to represent "Google Services" by
+     * BatteryStatsHelper.
+     *
+     * In order to avoid displaying Contact icon for "Google Services", we hack this method to
+     * always return Puzzle icon for all packages that share the Uid of "Google Services".
+     */
+    private Drawable getIcon(BatterySipper sipper, AppOpsManager.PackageOps ops) {
+        Drawable icon = null;
+        if (mGCoreIcon != null) {
+            try {
+                PackageInfo info = mPackageManager.getPackageInfo(
+                        ops.getPackageName(), PackageManager.GET_META_DATA);
+                if (info != null && GOOGLE_SERVICES_SHARED_UID.equals(info.sharedUserId)) {
+                    if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                        Log.v(TAG, "shareUserId matches GCore, force using puzzle icon");
+                    }
+                    icon = mGCoreIcon;
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, e.toString());
+                }
+            }
+        }
+        if (icon == null) {
+            icon = sipper.getIcon();
+        }
+        return icon;
+    }
+
+    /**
      * Creates a Preference entry for the given PackageOps.
      *
      * This method examines the time interval of the PackageOps first. If the PackageOps is older
@@ -241,7 +293,7 @@ public class RecentLocationApps {
                 BatterySipper sipper = wrapper.batterySipper();
                 sipper.loadNameAndIcon();
                 pref = createRecentLocationEntry(
-                        sipper.getIcon(),
+                        getIcon(sipper, ops),
                         sipper.getLabel(),
                         highBattery,
                         new UidEntryClickedListener(sipper));
