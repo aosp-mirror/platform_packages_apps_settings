@@ -25,6 +25,7 @@ import android.os.Message;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -152,10 +153,13 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.nfc_payment_settings, menu);
-        MenuItem menuItem = menu.findItem(R.id.nfc_payment_menu_item_add_service);
-        menuItem.setIntent(new Intent(Intent.ACTION_VIEW,
-                Uri.parse(getString(R.string.download_nfc_payment_service_query))));
+        String searchUri = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.PAYMENT_SERVICE_SEARCH_URI);
+        if (!TextUtils.isEmpty(searchUri)) {
+            MenuItem menuItem = menu.add(R.string.nfc_payment_menu_item_add_service);
+            menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menuItem.setIntent(new Intent(Intent.ACTION_VIEW,Uri.parse(searchUri)));
+        }
     }
 
     private final Handler mHandler = new Handler() {
