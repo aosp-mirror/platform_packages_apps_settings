@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"模式"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"高精確度"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"節約電池用量"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"裝置感應器"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"只限裝置"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"位置關閉"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近的定位要求"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"最近沒有應用程式要求存取位置資料"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"應用程式設定"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"定位服務"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"高電池用量"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"低電池用量"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"定位模式"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"使用「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"您的文件可能會經由一個或以上的伺服器傳送至打印機。"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"未安裝任何服務"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"找不到打印機"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"設定"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"新增打印機"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"開啟"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"新增打印機"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"搜尋"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"正在搜尋打印機"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"服務已停用"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"列印工作"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"進行中的列印工作"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"列印工作"</string>
+    <string name="print_restart" msgid="8373999687329384202">"重新開始"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"取消"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"正在列印 <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"打印機錯誤：<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"打印機已封鎖 <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"電池"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"查看正在消耗電力的功能"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"沒有電池用量資料。"</string>
@@ -1945,7 +1953,8 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"網絡可能會受到監管"</string>
     <string name="done_button" msgid="1991471253042622230">"完成"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"網絡監管"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"這部裝置由下列網域管理：<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>。\n\n您的管理員可以監控您的網絡活動，包括收發電郵、使用應用程式及瀏覽安全網站。\n\n詳情請與您的管理員聯絡。"</string>
+    <!-- no translation found for ssl_ca_cert_info_message (4583879256548819713) -->
+    <skip />
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"第三方可以監察您的網絡活動，\n包括收發電郵、使用應用程式及瀏覽安全網站。\n\n當裝置安裝了信任的憑證，便可能會出現這種情況。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"檢查信任的憑證"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"用戶"</string>
@@ -1998,11 +2007,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"這項設定會影響這部手機的所有用戶。"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"更改語言"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"更改字型大小"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"付款"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"輕按付款"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"輕按一下即可付款"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"瞭解詳情"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"尋找應用程式"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"設為您的喜好設定？"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"每次輕按付款都使用「<xliff:g id="APP">%1$s</xliff:g>」嗎？"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"每次輕按付款都使用「<xliff:g id="APP_0">%1$s</xliff:g>」(而不使用「<xliff:g id="APP_1">%2$s</xliff:g>」) 嗎？"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"每次輕按付款都使用「<xliff:g id="APP">%1$s</xliff:g>」嗎？"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"每次輕按付款都使用「<xliff:g id="APP_0">%1$s</xliff:g>」(而不使用「<xliff:g id="APP_1">%2$s</xliff:g>」) 嗎？"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"限制"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"移除限制"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改 PIN 碼"</string>

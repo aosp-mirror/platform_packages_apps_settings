@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"मोड"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"उच्च सटीकता"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"बैटरी की बचत"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"उपकरण के सेंसर"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"केवल उपकरण"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"स्थान बंद"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"हाल ही के स्थान अनुरोध"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"किसी भी एप्स ने हाल ही में स्थान का अनुरोध नहीं किया है"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"एप्‍स सेटिंग"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"स्‍थान सेवा"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"अधिक बैटरी उपयोग"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"कम बैटरी उपयोग"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"स्थान मोड"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g> का उपयोग करें?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"प्रिंटर पर जाते समय आपका दस्तावेज़ एक या अधिक सर्वर से गुज़र सकता है."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"कोई सेवा इंस्‍टॉल नहीं है"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"कोई प्रिंटर नहीं मिला"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"सेटिंग"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"प्रिंटर जोड़ें"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"चालू"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"प्रिंटर जोड़ें"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"खोजें"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"प्रिंटर खोज रहा है"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"सेवा अक्षम है"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"प्रिंट कार्य"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"सक्रिय प्रिंट कार्य"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"प्रिंट कार्य"</string>
+    <string name="print_restart" msgid="8373999687329384202">"पुन: प्रारंभ करें"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"रद्द करें"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> प्रिंट हो रहा है"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"प्रिंटर त्रुटि <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"प्रिंटर अवरोधित <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"बैटरी"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"बैटरी का उपयोग कौन कर रहा है"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"बैटरी उपयोग डेटा उपलब्ध नहीं है."</string>
@@ -1941,7 +1949,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"नेटवर्क को मॉनीटर किया जा सकता है"</string>
     <string name="done_button" msgid="1991471253042622230">"पूर्ण"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"नेटवर्क मॉनिटरिंग"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"यह उपकरण <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> के द्वारा प्रबंधित किया जाता है.\n\nआपका व्यवस्थापक आपकी नेटवर्क गतिविधि के साथ ही ईमेल, एप्लिकेशन और सुरक्षित वेबसाइटों को मॉनीटर कर सकता है.\n\nअधिक जानकारी के लिए, अपने व्यवस्थापक से संपर्क करें."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"यह उपकरण इसके द्वारा प्रबंधित है:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nआपका व्यवस्थापक, ईमेल, एप्लिकेशन, और सुरक्षित वेबसाइटों सहित, आपकी नेटवर्क गतिविधि को मॉनीटर करने में सक्षम है.\n\nअधिक जानकारी के लिए, अपने व्यवस्थापक से संपर्क करें."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"तृतीय पक्ष आपकी नेटवर्क\nगतिविधि के साथ ही ईमेल, एप्लिकेशन, और सुरक्षित वेबसाइटों को मॉनीटर कर सकता है.\n\nऐसा आपके उपकरण पर इंस्टॉल किए गए विश्वसनीय क्रेडेंशियल के कारण हो रहा है."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"विश्वसनीय क्रेडेंशियल की जांच करें"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"उपयोगकर्ता"</string>
@@ -1994,11 +2002,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"यह सेटिंग इस फ़ोन के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"भाषा बदलें"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"अक्षरों का आकार बदलें"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"भुगतान"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"टैप करें और भुगतान करें"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"बस एक टैप के साथ भुगतान करें"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"अधिक जानें"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"एप्‍लिकेशन ढूंढें"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"अपनी प्राथमिकता के रूप में सेट करें?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"टैप करके भुगतान करते समय हमेशा <xliff:g id="APP">%1$s</xliff:g> का उपयोग करें?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"टैप करके भुगतान करते समय हमेशा <xliff:g id="APP_1">%2$s</xliff:g> के बजाय <xliff:g id="APP_0">%1$s</xliff:g> का उपयोग करें?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"टैप करके भुगतान करते समय हमेशा <xliff:g id="APP">%1$s</xliff:g> का उपयोग करें?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"टैप करके भुगतान करते समय हमेशा <xliff:g id="APP_1">%2$s</xliff:g> के बजाय <xliff:g id="APP_0">%1$s</xliff:g> का उपयोग करें?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"प्रतिबंध"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"प्रतिबंधों को निकालें"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"पिन बदलें"</string>

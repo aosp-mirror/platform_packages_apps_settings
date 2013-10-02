@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Режим"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Высокая точность"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Сокращение энергопотребления"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Датчики устройства"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"По датчикам устройства"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Отправка геоданных отключена"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Последние запросы места"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"В последнее время приложения не запрашивали геоданные"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Настройки приложений"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Мое местоположение"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Высокий расход заряда батареи"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Низкий расход заряда батареи"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим местоположения"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Включить <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Путь вашего документа до принтера может проходить через несколько серверов."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Сервисов нет"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Ничего не найдено"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Настройки"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Добавить принтеры"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"ВКЛ"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Добавить принтер"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Поиск"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Поиск принтеров"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Служба печати отключена"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Задания печати"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Активные задания печати"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Настройки задания печати"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Перезапустить"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Отмена"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Печать задания \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\"…"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Ошибка задания \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\""</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Задание \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\" заблокировано"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Батарея"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"На что расходуется заряд батареи"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Расход батареи неизвестен."</string>
@@ -1943,7 +1951,8 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Действия в сети могут отслеживаться"</string>
     <string name="done_button" msgid="1991471253042622230">"Готово"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Мониторинг сети"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Устройством управляет администратор домена <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nОн может отслеживать ваши действия в сети, в том числе просматривать письма, приложения и список посещенных веб-сайтов.\n\nЗа дополнительной информацией обратитесь к администратору."</string>
+    <!-- no translation found for ssl_ca_cert_info_message (4583879256548819713) -->
+    <skip />
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Администратор может отслеживать ваши действия в сети.\nНапример, он может просматривать ваши письма, приложения и список посещенных сайтов.\n\nЭто возможно благодаря надежному сертификату, установленному на устройстве."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Настройки сертификатов"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Пользователи"</string>
@@ -1996,11 +2005,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Настройки будут изменены для всех пользователей устройства."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Измените язык"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Измените размер шрифта"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Платежи"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Нажать и оплатить"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Нажать и оплатить"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Подробнее..."</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Найти приложения"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Сохранить настройку?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Всегда использовать для операции оплаты приложение \"<xliff:g id="APP">%1$s</xliff:g>\"?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Всегда использовать для операции оплаты приложение \"<xliff:g id="APP_0">%1$s</xliff:g>\" вместо \"<xliff:g id="APP_1">%2$s</xliff:g>\"?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Всегда использовать для NFC-платежей приложение \"<xliff:g id="APP">%1$s</xliff:g>\"?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Всегда использовать для NFC-платежей приложение \"<xliff:g id="APP_0">%1$s</xliff:g>\", а не \"<xliff:g id="APP_1">%2$s</xliff:g>\"?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ограничения"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Отменить ограничения"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Изменить PIN-код"</string>
