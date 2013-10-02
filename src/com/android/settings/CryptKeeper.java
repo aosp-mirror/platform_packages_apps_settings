@@ -239,6 +239,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
             | StatusBarManager.DISABLE_SYSTEM_INFO
             | StatusBarManager.DISABLE_HOME
+            | StatusBarManager.DISABLE_SEARCH
             | StatusBarManager.DISABLE_RECENT;
 
     /** @return whether or not this Activity was started for debugging the UI only. */
