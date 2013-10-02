@@ -23,6 +23,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -50,6 +51,8 @@ public class HomeSettings extends SettingsPreferenceFragment {
 
     public static final String CURRENT_HOME = "current_home";
 
+    public static final String HOME_SHOW_NOTICE = "show";
+
     PreferenceGroup mPrefGroup;
 
     PackageManager mPm;
@@ -57,6 +60,7 @@ public class HomeSettings extends SettingsPreferenceFragment {
     ArrayList<HomeAppPreference> mPrefs;
     HomeAppPreference mCurrentHome = null;
     final IntentFilter mHomeFilter;
+    boolean mShowNotice;
 
     public HomeSettings() {
         mHomeFilter = new IntentFilter(Intent.ACTION_MAIN);
@@ -126,6 +130,17 @@ public class HomeSettings extends SettingsPreferenceFragment {
                 }
             }
         }
+
+        // If we're down to just one possible home app, back out of this settings
+        // fragment and show a dialog explaining to the user that they won't see
+        // 'Home' settings now until such time as there are multiple available.
+        if (mPrefs.size() < 2) {
+            if (mShowNotice) {
+                mShowNotice = false;
+                Settings.requestHomeNotice();
+            }
+            finishFragment();
+        }
     }
 
     void buildHomeActivitiesList() {
@@ -176,6 +191,9 @@ public class HomeSettings extends SettingsPreferenceFragment {
 
         mPm = getPackageManager();
         mPrefGroup = (PreferenceGroup) findPreference("home");
+
+        Bundle args = getArguments();
+        mShowNotice = (args != null) && args.getBoolean(HOME_SHOW_NOTICE, false);
     }
 
     @Override
