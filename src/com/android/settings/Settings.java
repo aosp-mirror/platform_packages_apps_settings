@@ -325,6 +325,9 @@ public class Settings extends PreferenceActivity
         DeviceAdminSettings.class.getName(),
         AccessibilitySettings.class.getName(),
         ToggleCaptioningPreferenceFragment.class.getName(),
+        com.android.settings.accessibility.ToggleInversionPreferenceFragment.class.getName(),
+        com.android.settings.accessibility.ToggleContrastPreferenceFragment.class.getName(),
+        com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.class.getName(),
         TextToSpeechSettings.class.getName(),
         Memory.class.getName(),
         DevelopmentSettings.class.getName(),
@@ -1039,6 +1042,9 @@ public class Settings extends PreferenceActivity
     public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
     public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
     public static class CaptioningSettingsActivity extends Settings { /* empty */ }
+    public static class AccessibilityInversionSettingsActivity extends Settings { /* empty */ }
+    public static class AccessibilityContrastSettingsActivity extends Settings { /* empty */ }
+    public static class AccessibilityDaltonizerSettingsActivity extends Settings { /* empty */ }
     public static class SecuritySettingsActivity extends Settings { /* empty */ }
     public static class LocationSettingsActivity extends Settings { /* empty */ }
     public static class PrivacySettingsActivity extends Settings { /* empty */ }

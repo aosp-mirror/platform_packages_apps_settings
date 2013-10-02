@@ -3278,6 +3278,8 @@
     <string name="accessibility_services_title">Services</string>
     <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
     <string name="accessibility_system_title">System</string>
+    <!-- Title for the accessibility preference category of display related preferences. [CHAR LIMIT=25] -->
+    <string name="accessibility_display_title">Display</string>
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Captions</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
@@ -3308,6 +3310,42 @@
     <string name="accessibility_toggle_speak_password_preference_title">Speak passwords</string>
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
+    <!-- Title for the accessibility preference to configure display contrast enhancement. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_display_contrast_preference_title">Contrast enhancement</string>
+    <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_display_inversion_preference_title">Color inversion</string>
+    <!-- Title for the accessibility preference to configure display color space correction. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_display_daltonizer_preference_title">Color space correction</string>
+
+    <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
+    <string name="enable_quick_setting">Show in Quick Settings</string>
+    <!-- Title for the preference to configure contrast enhancement's brightness level. [CHAR LIMIT=NONE] -->
+    <string name="contrast_brightness">Brightness</string>
+    <!-- Title for the preference to configure contrast enhancement's contrast level. [CHAR LIMIT=NONE] -->
+    <string name="contrast_contrast">Contrast</string>
+    <!-- Title for the preference to configure the type of color inversion to apply. [CHAR LIMIT=NONE] -->
+    <string name="inversion_type">Inversion mode</string>
+    <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
+    <string name="daltonizer_type">Correction mode</string>
+    <!-- Summary shown for color space correction preference when its value is overridden by another preference [CHAR LIMIT=35] -->
+    <string name="daltonizer_type_overridden">Overridden by <xliff:g id="title" example="Simulate color space">%1$s</xliff:g></string>
+
+    <!-- Label for disabling color space adjustment [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_disabled">Disabled</string>
+    <!-- Label for converting display colors to grayscale [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_monochromacy">Monochromacy</string>
+    <!-- Label for deuteranomaly (red-green color blindness) [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_deuteranomaly">Deuteranomaly (red-green)</string>
+    <!-- Label for protanomaly (red-green color blindness) [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_protanomaly">Protanomaly (red-green)</string>
+    <!-- Label for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_tritanomaly">Tritanomaly (blue-yellow)</string>
+    <!-- Label for deuteranopia (green color blindness) [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_deuteranopia">Deuteranopia (green)</string>
+    <!-- Label for protanopia (red color blindness) [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_protanopia">Protanopia (red)</string>
+    <!-- Label for tritanopia (blue color blindness) [CHAR LIMIT=35] -->
+    <string name="daltonizer_mode_tritanopia">Tritanopia (blue)</string>
 
     <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
@@ -4309,6 +4347,9 @@
     <string name="disable_overlays">Disable HW overlays</string>
     <!-- UI debug setting: disable use of overlays summary [CHAR LIMIT=50] -->
     <string name="disable_overlays_summary">Always use GPU for screen compositing</string>
+
+    <!-- UI debug setting: simulate color space anomalies. [CHAR LIMIT=25] -->
+    <string name="simulate_color_space">Simulate color space</string>
 
     <!-- UI debug setting: enable various types of OpenGL traces [CHAR LIMIT=25] -->
     <string name="enable_opengl_traces_title">Enable OpenGL traces</string>

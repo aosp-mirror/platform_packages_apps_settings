@@ -103,6 +103,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "screen_magnification_preference_screen";
+    private static final String DISPLAY_CONTRAST_PREFERENCE_SCREEN =
+            "contrast_preference_screen";
+    private static final String DISPLAY_INVERSION_PREFERENCE_SCREEN =
+            "inversion_preference_screen";
+    private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
+            "daltonizer_preference_screen";
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -198,6 +204,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mCaptioningPreferenceScreen;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
     private PreferenceScreen mGlobalGesturePreferenceScreen;
+    private PreferenceScreen mDisplayInversionPreferenceScreen;
+    private PreferenceScreen mDisplayContrastPreferenceScreen;
+    private PreferenceScreen mDisplayDaltonizerPreferenceScreen;
 
     private int mLongPressTimeoutDefault;
 
@@ -375,6 +384,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
 
+        // Display color adjustments.
+        mDisplayContrastPreferenceScreen = (PreferenceScreen) findPreference(
+                DISPLAY_CONTRAST_PREFERENCE_SCREEN);
+        mDisplayInversionPreferenceScreen = (PreferenceScreen) findPreference(
+                DISPLAY_INVERSION_PREFERENCE_SCREEN);
+        mDisplayDaltonizerPreferenceScreen = (PreferenceScreen) findPreference(
+                DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+
         // Global gesture.
         mGlobalGesturePreferenceScreen =
                 (PreferenceScreen) findPreference(ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN);
@@ -518,25 +535,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSelectLongPressTimeoutPreference.setValue(value);
         mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValuetoTitleMap.get(value));
 
-        // Captioning.
-        final boolean captioningEnabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, 0) == 1;
-        if (captioningEnabled) {
-            mCaptioningPreferenceScreen.setSummary(R.string.accessibility_feature_state_on);
-        } else {
-            mCaptioningPreferenceScreen.setSummary(R.string.accessibility_feature_state_off);
-        }
-
-        // Screen magnification.
-        final boolean magnificationEnabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1;
-        if (magnificationEnabled) {
-            mDisplayMagnificationPreferenceScreen.setSummary(
-                    R.string.accessibility_feature_state_on);
-        } else {
-            mDisplayMagnificationPreferenceScreen.setSummary(
-                    R.string.accessibility_feature_state_off);
-        }
+        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
+                mCaptioningPreferenceScreen);
+        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
+                mDisplayMagnificationPreferenceScreen);
+        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED,
+                mDisplayInversionPreferenceScreen);
+        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_CONTRAST_ENABLED,
+                mDisplayContrastPreferenceScreen);
+        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
+                mDisplayDaltonizerPreferenceScreen);
 
         // Global gesture
         final boolean globalGestureEnabled = Settings.Global.getInt(getContentResolver(),
@@ -548,6 +556,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mGlobalGesturePreferenceScreen.setSummary(
                     R.string.accessibility_global_gesture_preference_summary_off);
         }
+    }
+
+    private void updateFeatureSummary(String prefKey, Preference pref) {
+        final boolean enabled = Settings.Secure.getInt(getContentResolver(), prefKey, 0) == 1;
+        pref.setSummary(enabled ? R.string.accessibility_feature_state_on
+                : R.string.accessibility_feature_state_off);
     }
 
     private void updateLockScreenRotationCheckbox() {

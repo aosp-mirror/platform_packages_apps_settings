@@ -92,9 +92,6 @@ public abstract class ToggleFeaturePreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         onInstallActionBarToggleSwitch();
         onProcessArguments(getArguments());
-        // Set a transparent drawable to prevent use of the default one.
-        getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
-        getListView().setDivider(null);
     }
 
     @Override
@@ -135,21 +132,45 @@ public abstract class ToggleFeaturePreferenceFragment
         return toggleSwitch;
     }
 
-    protected void onProcessArguments(Bundle arguments) {
-        // Key.
-        mPreferenceKey = arguments.getString(AccessibilitySettings.EXTRA_PREFERENCE_KEY);
-        // Enabled.
-        final boolean enabled = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-        mToggleSwitch.setCheckedInternal(enabled);
-        // Title.
-        PreferenceActivity activity = (PreferenceActivity) getActivity();
+    public void setTitle(String title) {
+        final PreferenceActivity activity = (PreferenceActivity) getActivity();
         if (!activity.onIsMultiPane() || activity.onIsHidingHeaders()) {
             mOldActivityTitle = getActivity().getTitle();
-            String title = arguments.getString(AccessibilitySettings.EXTRA_TITLE);
             getActivity().getActionBar().setTitle(title);
         }
+    }
+
+    protected void onProcessArguments(Bundle arguments) {
+        if (arguments == null) {
+            getPreferenceScreen().removePreference(mSummaryPreference);
+            return;
+        }
+
+        // Key.
+        mPreferenceKey = arguments.getString(AccessibilitySettings.EXTRA_PREFERENCE_KEY);
+
+        // Enabled.
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
+            final boolean enabled = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
+            mToggleSwitch.setCheckedInternal(enabled);
+        }
+
+        // Title.
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE)) {
+            setTitle(arguments.getString(AccessibilitySettings.EXTRA_TITLE));
+        }
+
         // Summary.
-        CharSequence summary = arguments.getCharSequence(AccessibilitySettings.EXTRA_SUMMARY);
-        mSummaryPreference.setSummary(summary);
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
+            final CharSequence summary = arguments.getCharSequence(
+                    AccessibilitySettings.EXTRA_SUMMARY);
+            mSummaryPreference.setSummary(summary);
+
+            // Set a transparent drawable to prevent use of the default one.
+            getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
+            getListView().setDivider(null);
+        } else {
+            getPreferenceScreen().removePreference(mSummaryPreference);
+        }
     }
 }
