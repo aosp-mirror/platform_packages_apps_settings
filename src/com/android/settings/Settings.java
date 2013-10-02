@@ -879,7 +879,7 @@ public class Settings extends PreferenceActivity
                             holder.divider_.setVisibility(View.VISIBLE);
                             boolean isManaged = mDevicePolicyManager.getDeviceOwner() != null;
                             if (isManaged) {
-                                holder.button_.setImageResource(R.drawable.ic_qs_certificate_info);
+                                holder.button_.setImageResource(R.drawable.ic_settings_about);
                             } else {
                                 holder.button_.setImageResource(
                                         android.R.drawable.stat_notify_error);
