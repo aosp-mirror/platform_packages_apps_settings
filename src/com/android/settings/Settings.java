@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -574,8 +575,15 @@ public class Settings extends PreferenceActivity
                     target.remove(i);
                 }
             } else if (id == R.id.nfc_payment_settings) {
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC_HCE)) {
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
                     target.remove(i);
+                } else {
+                    // Only show if NFC is on and we have the HCE feature
+                    NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+                    if (!adapter.isEnabled() || !getPackageManager().hasSystemFeature(
+                            PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
+                        target.remove(i);
+                    }
                 }
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
