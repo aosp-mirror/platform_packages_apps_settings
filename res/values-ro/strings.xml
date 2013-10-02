@@ -1001,7 +1001,7 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Mod"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Precizie ridicată"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Economisirea bateriei"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Senzorii dispozitivului"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Numai pe dispozitiv"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Locație dezactivată"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Solicitări recente de localiz."</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nicio aplicație nu a solicitat locația recent"</string>
@@ -1437,6 +1437,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Utilizați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Documentul poate trece prin unul sau mai multe servere pe calea spre imprimantă."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nu există servicii instalate"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Nu au fost găsite imprimante"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Setări"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Adăugați imprimante"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Activată"</string>
@@ -1445,8 +1446,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Adăugați o imprimantă"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Căutați"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Se caută imprimante"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Serviciu dezactivat"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Sarcini de printare"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Sarcini active de printare"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Sarcină de printare"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Reporniți"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Anulați"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Se printează <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Eroare de printare: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Printare blocată: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Battery"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Ce funcţii au utilizat bateria"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Date utilizare baterie nedisp."</string>
@@ -1995,11 +2003,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Această setare afectează toţi utilizatorii de pe acest telefon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Schimbaţi limba"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Modificaţi dimensiunea fontului"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Plăți"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Atingeți și plătiți"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Plătiți cu o atingere"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Aflați mai multe"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Găsiți aplicații"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Setați ca preferință?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Utilizați întotdeauna <xliff:g id="APP">%1$s</xliff:g> când atingeți și plătiți?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Utilizați întotdeauna <xliff:g id="APP_0">%1$s</xliff:g> în loc de <xliff:g id="APP_1">%2$s</xliff:g> când atingeți și plătiți?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Utilizați întotdeauna <xliff:g id="APP">%1$s</xliff:g> pentru funcția „atingeți și plătiți”?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Utilizați întotdeauna <xliff:g id="APP_0">%1$s</xliff:g> în loc de <xliff:g id="APP_1">%2$s</xliff:g> pentru funcția „atingeți și plătiți”?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restricții"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Eliminați restricțiile"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Schimbați codul PIN"</string>

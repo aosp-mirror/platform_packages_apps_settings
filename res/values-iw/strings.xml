@@ -1001,7 +1001,7 @@
     <string name="location_mode_title" msgid="3982009713118421689">"מצב"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"רמת דיוק גבוהה"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"חיסכון בעוצמת סוללה"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"חיישני המכשיר"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"במכשיר בלבד"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"מיקום כבוי"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"בקשות של מיקומים אחרונים"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"אין אפליקציות שביקשו מיקום לאחרונה"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"האם להשתמש ב-<xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"ייתכן שהמסמך שלך יעבור בשרת אחד או יותר בדרכו למדפסת."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"אין שירותים מותקנים"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"לא נמצאו מדפסות"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"הגדרות"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"הוסף מדפסות"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"פועל"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"הוסף מדפסת"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"חפש"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"מחפש מדפסות"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"השירות הושבת"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"עבודות הדפסה"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"עבודות הדפסה פעילות"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"עבודת הדפסה"</string>
+    <string name="print_restart" msgid="8373999687329384202">"הפעל מחדש"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"בטל"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"מדפיס את <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"שגיאת מדפסת ב-<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"המדפסת חסמה את <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"סוללה"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"מה השתמש בסוללה"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"אין נתונים זמינים על השימוש בסוללה."</string>
@@ -1994,11 +2002,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"הגדרה זו משפיעה על כל המשתמשים בטלפון הזה."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"שנה שפה"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"שנה גודל גופן"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"תשלומים"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"הקש ושלם"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"שלם באמצעות הקשה בלבד"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"למידע נוסף"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"חפש אפליקציות"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"האם להגדיר בתור ההעדפה שלך?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"האם להשתמש תמיד ב-<xliff:g id="APP">%1$s</xliff:g> בפעולת \'הקש ושלם\'?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"האם להשתמש תמיד ב-<xliff:g id="APP_0">%1$s</xliff:g> במקום ב-<xliff:g id="APP_1">%2$s</xliff:g> בפעולת \'הקש ושלם\'?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"האם להשתמש תמיד ב-<xliff:g id="APP">%1$s</xliff:g> בפעולת \'הקש ושלם\'?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"האם להשתמש תמיד ב-<xliff:g id="APP_0">%1$s</xliff:g> במקום ב-<xliff:g id="APP_1">%2$s</xliff:g> בפעולת \'הקש ושלם\'?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"הגבלות"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"הסר הגבלות"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"‏שנה PIN"</string>

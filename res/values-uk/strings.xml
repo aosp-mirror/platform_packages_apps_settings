@@ -1001,7 +1001,7 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Режим"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Висока точність"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Заощадження заряду акумулятора"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Датчики пристрою"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Лише на пристрої"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Надсилання геоданих вимкнено"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Останні запити геоданих"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Жодна програма не запитувала місцезнаходження останнім часом"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Використовувати <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"На шляху до принтера документ може проходити через декілька серверів."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Не встановлено жодну службу"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Принтери не знайдено"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Налаштування"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Додати принтери"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Увімк."</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Додати принтер"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Пошук"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Пошук принтерів"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Службу вимкнено."</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Завдання друку"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Активні завдання друку"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Завдання друку"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Перезапустити"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Скасувати"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Завдання \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\" друкується"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Помилка завдання \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\""</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Завдання \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\" заблоковано"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Акумулятор"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"На що споживається заряд акумулятора"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Дані використання акумулятора недоступні"</string>
@@ -1994,11 +2002,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Це налаштування впливає на всіх користувачів цього телефону."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Змінити мову"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Змінити розмір шрифту"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Платежі"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Натиснути й оплатити"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Платіть одним дотиком"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Докладніше"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Пошук програм"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Надавати перевагу?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Завжди використовувати <xliff:g id="APP">%1$s</xliff:g>, щоб натиснути й оплатити?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Завжди використовувати <xliff:g id="APP_0">%1$s</xliff:g>, а не <xliff:g id="APP_1">%2$s</xliff:g>, щоб натиснути й оплатити?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Завжди використовувати програму <xliff:g id="APP">%1$s</xliff:g> для оплати через NFC?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Завжди використовувати програму <xliff:g id="APP_0">%1$s</xliff:g>, а не <xliff:g id="APP_1">%2$s</xliff:g> для оплати через NFC?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Обмеження"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Зняти обмеження"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Змінити PIN-код"</string>

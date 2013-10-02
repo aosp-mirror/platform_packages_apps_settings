@@ -1003,7 +1003,7 @@
     <string name="location_mode_title" msgid="3982009713118421689">"モード"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"高精度"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"バッテリー節約"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"端末センサー"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"端末のみ"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"現在地OFF"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近の位置情報リクエスト"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"位置情報を最近リクエストしたアプリはありません"</string>
@@ -1438,6 +1438,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g>を利用しますか？"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"ドキュメントは1つ以上のサーバーを経由してプリンタに送信されることがあります。"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"インストールされているサービスはありません"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"プリンタが見つかりません"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"設定"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"プリンタを追加"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"ON"</string>
@@ -1446,8 +1447,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"プリンタを追加"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"検索"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"プリンタの検索中"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"サービスが無効です"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"印刷ジョブ"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"アクティブな印刷ジョブ"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"印刷ジョブ"</string>
+    <string name="print_restart" msgid="8373999687329384202">"再起動"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"キャンセル"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>を印刷しています"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"プリンタエラー: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>をブロックしました"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"電池"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"電池の使用状況"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"電池使用量データがありません。"</string>
@@ -1944,11 +1952,11 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Enforcing"</string>
-    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ネットワークが監視される場合があります"</string>
+    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ネットワークが監視されている可能性があります"</string>
     <string name="done_button" msgid="1991471253042622230">"完了"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"ネットワーク監視"</string>
     <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"この端末は<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>によって管理されています。\n\n管理者はあなたのネットワークアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\n詳しくは管理者にお問い合わせください。"</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"第三者があなたのネットワーク\nアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\nこれは、信頼できる認証情報が端末にインストールされているためです。"</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"第三者があなたのネットワークアクティビティ\n（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\nこれは、信頼できる認証情報が端末にインストールされているためです。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"信頼できる認証情報を確認"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"ユーザー"</string>
     <string name="user_list_title" msgid="7937158411137563543">"ユーザーとプロフィール"</string>
@@ -2000,11 +2008,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"この設定はこの端末上のすべてのユーザーに影響します。"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"言語の変更"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"フォントサイズの変更"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"支払い"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"翻訳しないでください"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"タップしてお支払い"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"タップして支払う"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"詳細"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"アプリを検索"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"設定として保存しますか？"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"タップして支払う際に常に<xliff:g id="APP">%1$s</xliff:g>を使用しますか？"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"タップして支払う際に<xliff:g id="APP_1">%2$s</xliff:g>の代わりに常に<xliff:g id="APP_0">%1$s</xliff:g>を使用しますか？"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"タップして支払う際に常に<xliff:g id="APP">%1$s</xliff:g>を使用しますか？"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"タップして支払う際に<xliff:g id="APP_1">%2$s</xliff:g>の代わりに常に<xliff:g id="APP_0">%1$s</xliff:g>を使用しますか？"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"制限"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"制限を削除"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PINを変更"</string>
