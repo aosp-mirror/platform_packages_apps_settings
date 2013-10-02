@@ -78,7 +78,7 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
                 Context.PRINT_SERVICE)).getGlobalPrintManagerForUser(
                         ActivityManager.getCurrentUser());
 
-        getActivity().getActionBar().setTitle(R.string.print_print_job);
+        getActivity().setTitle(R.string.print_print_job);
 
         processArguments();
 
