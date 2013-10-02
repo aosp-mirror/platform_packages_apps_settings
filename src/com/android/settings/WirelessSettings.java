@@ -247,12 +247,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
     private boolean isSmsSupported() {
         // Some tablet has sim card but could not do telephony operations. Skip those.
-        if (mTm.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
-            return false;
-        }
-        int simState = mTm.getSimState();
-        return simState != TelephonyManager.SIM_STATE_ABSENT &&
-                simState != TelephonyManager.SIM_STATE_UNKNOWN;
+        return (mTm.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE);
     }
 
     @Override
