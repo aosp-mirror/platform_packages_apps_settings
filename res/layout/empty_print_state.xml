@@ -15,7 +15,7 @@
 -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/empty_printers_list_service_disabled"
+    android:id="@+id/empty_print_state"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:visibility="gone">
@@ -28,11 +28,12 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dip"
             android:src="@drawable/ic_grayedout_printer"
-            android:contentDescription="@string/print_service_disabled">
+            android:contentDescription="@null">
         </ImageView>
 
         <TextView
