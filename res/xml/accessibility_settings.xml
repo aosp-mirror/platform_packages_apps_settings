@@ -74,4 +74,21 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="display_category"
+        android:title="@string/accessibility_display_title" >
+        <PreferenceScreen
+            android:fragment="com.android.settings.accessibility.ToggleContrastPreferenceFragment"
+            android:key="contrast_preference_screen"
+            android:title="@string/accessibility_display_contrast_preference_title" />
+        <PreferenceScreen
+            android:fragment="com.android.settings.accessibility.ToggleInversionPreferenceFragment"
+            android:key="inversion_preference_screen"
+            android:title="@string/accessibility_display_inversion_preference_title" />
+        <PreferenceScreen
+            android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
+            android:key="daltonizer_preference_screen"
+            android:title="@string/accessibility_display_daltonizer_preference_title" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
