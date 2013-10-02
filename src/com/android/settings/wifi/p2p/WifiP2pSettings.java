@@ -90,7 +90,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private boolean mWifiP2pSearching;
     private int mConnectedDevices;
     private WifiP2pGroup mConnectedGroup;
-    private boolean mLastGroupFormed = false;
 
     private PreferenceGroup mPeersGroup;
     private PreferenceGroup mPersistentGroup;
@@ -134,12 +133,10 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 }
                 if (networkInfo.isConnected()) {
                     if (DBG) Log.d(TAG, "Connected");
-                } else if (mLastGroupFormed != true) {
+                } else {
                     //start a search when we are disconnected
-                    //but not on group removed broadcast event
                     startSearch();
                 }
-                mLastGroupFormed = wifip2pinfo.groupFormed;
             } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
                 mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
@@ -558,7 +555,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     }
 
     private void startSearch() {
-        if (mWifiP2pManager != null && !mWifiP2pSearching) {
+        if (mWifiP2pManager != null) {
             mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
                 public void onSuccess() {
                 }
