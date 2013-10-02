@@ -37,7 +37,6 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryStatsHelper;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -62,7 +61,6 @@ public class LocationSettings extends LocationSettingsBase
     private boolean mValidListener;
     private Preference mLocationMode;
     private PreferenceCategory mCategoryRecentLocationRequests;
-    private BatteryStatsHelper mStatsHelper;
     /** Receives UPDATE_INTENT  */
     private BroadcastReceiver mReceiver;
 
@@ -74,18 +72,6 @@ public class LocationSettings extends LocationSettingsBase
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         createPreferenceHierarchy();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mStatsHelper = new BatteryStatsHelper(activity, null);
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        mStatsHelper.create(icicle);
     }
 
     @Override
@@ -107,13 +93,6 @@ public class LocationSettings extends LocationSettingsBase
         super.onPause();
         mValidListener = false;
         mSwitch.setOnCheckedChangeListener(null);
-        mStatsHelper.pause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mStatsHelper.destroy();
     }
 
     private void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
@@ -153,7 +132,7 @@ public class LocationSettings extends LocationSettingsBase
 
         mCategoryRecentLocationRequests =
                 (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
-        RecentLocationApps recentApps = new RecentLocationApps(activity, mStatsHelper);
+        RecentLocationApps recentApps = new RecentLocationApps(activity);
         List<Preference> recentLocationRequests = recentApps.getAppList();
         if (recentLocationRequests.size() > 0) {
             addPreferencesSorted(recentLocationRequests, mCategoryRecentLocationRequests);
