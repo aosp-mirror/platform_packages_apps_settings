@@ -19,7 +19,6 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -30,7 +29,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TimeUtils;
@@ -39,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import com.android.internal.app.IProcessStats;
+import com.android.internal.app.ProcessMap;
 import com.android.internal.app.ProcessStats;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.Utils;
@@ -50,8 +49,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class ProcessStatsUi extends PreferenceFragment {
-    private static final String TAG = "ProcessStatsUi";
-    private static final boolean DEBUG = false;
+    static final String TAG = "ProcessStatsUi";
+    static final boolean DEBUG = false;
 
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_MEM_STATUS = "mem_status";
@@ -75,6 +74,10 @@ public class ProcessStatsUi extends PreferenceFragment {
             if (lhs.mWeight < rhs.mWeight) {
                 return 1;
             } else if (lhs.mWeight > rhs.mWeight) {
+                return -1;
+            } else if (lhs.mDuration < rhs.mDuration) {
+                return 1;
+            } else if (lhs.mDuration > rhs.mDuration) {
                 return -1;
             }
             return 0;
@@ -112,7 +115,7 @@ public class ProcessStatsUi extends PreferenceFragment {
     // batches of 3 hours so we want to allow the time we use to be slightly
     // smaller than the actual time selected instead of bumping up to 3 hours
     // beyond it.
-    private static final long DURATION_QUANTUM = 3*60*60*1000;
+    private static final long DURATION_QUANTUM = ProcessStats.COMMIT_PERIOD;
     private static long[] sDurations = new long[] {
         3*60*60*1000 - DURATION_QUANTUM/2, 6*60*60*1000 - DURATION_QUANTUM/2,
         12*60*60*1000 - DURATION_QUANTUM/2, 24*60*60*1000 - DURATION_QUANTUM/2
@@ -319,6 +322,12 @@ public class ProcessStatsUi extends PreferenceFragment {
             ProcessStats.STATE_CACHED_EMPTY
     };
 
+    private String makeDuration(long time) {
+        StringBuilder sb = new StringBuilder(32);
+        TimeUtils.formatDuration(time, sb);
+        return sb.toString();
+    }
+
     private void refreshStats() {
         updateMenus();
 
@@ -378,6 +387,7 @@ public class ProcessStatsUi extends PreferenceFragment {
 
         mTotalTime = ProcessStats.dumpSingleTime(null, null, mStats.mMemFactorDurations,
                 mStats.mMemFactor, mStats.mStartTime, now);
+        if (DEBUG) Log.d(TAG, "Total time of stats: " + makeDuration(mTotalTime));
 
         LinearColorPreference colors = new LinearColorPreference(getActivity());
         colors.setOrder(-1);
@@ -396,7 +406,7 @@ public class ProcessStatsUi extends PreferenceFragment {
                         + memTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]) / (float)mTotalTime,
                 memTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL] / (float)mTotalTime);
 
-        ArrayList<ProcStatsEntry> procs = new ArrayList<ProcStatsEntry>();
+        ArrayList<ProcStatsEntry> entries = new ArrayList<ProcStatsEntry>();
 
         /*
         ArrayList<ProcessStats.ProcessState> rawProcs = mStats.collectProcessesLocked(
@@ -407,50 +417,43 @@ public class ProcessStatsUi extends PreferenceFragment {
         }
         */
 
-        ArrayMap<String, ProcStatsEntry> processes = new ArrayMap<String, ProcStatsEntry>(
-                mStats.mProcesses.getMap().size());
-        for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
-            SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
-            for (int iu=0; iu<uids.size(); iu++) {
-                ProcStatsEntry ent = new ProcStatsEntry(uids.valueAt(iu), totals, mUseUss,
-                        mStatsType == MENU_TYPE_BACKGROUND);
-                procs.add(ent);
-                processes.put(ent.mName, ent);
+        if (DEBUG) Log.d(TAG, "-------------------- PULLING PROCESSES");
+
+        final ProcessMap<ProcStatsEntry> entriesMap = new ProcessMap<ProcStatsEntry>();
+        for (int ipkg=0, N=mStats.mPackages.getMap().size(); ipkg<N; ipkg++) {
+            final SparseArray<ProcessStats.PackageState> pkgUids
+                    = mStats.mPackages.getMap().valueAt(ipkg);
+            for (int iu=0; iu<pkgUids.size(); iu++) {
+                final ProcessStats.PackageState st = pkgUids.valueAt(iu);
+                for (int iproc=0; iproc<st.mProcesses.size(); iproc++) {
+                    final ProcessStats.ProcessState pkgProc = st.mProcesses.valueAt(iproc);
+                    final ProcessStats.ProcessState proc = mStats.mProcesses.get(pkgProc.mName,
+                            pkgProc.mUid);
+                    if (proc == null) {
+                        Log.w(TAG, "No process found for pkg " + st.mPackageName
+                                + "/" + st.mUid + " proc name " + pkgProc.mName);
+                        continue;
+                    }
+                    ProcStatsEntry ent = entriesMap.get(proc.mName, proc.mUid);
+                    if (ent == null) {
+                        ent = new ProcStatsEntry(proc, st.mPackageName, totals, mUseUss,
+                                mStatsType == MENU_TYPE_BACKGROUND);
+                        if (ent.mDuration > 0) {
+                            if (DEBUG) Log.d(TAG, "Adding proc " + proc.mName + "/"
+                                    + proc.mUid + ": time=" + makeDuration(ent.mDuration) + " ("
+                                    + ((((double)ent.mDuration) / mTotalTime) * 100) + "%)"
+                                    + " pss=" + ent.mAvgPss);
+                            entriesMap.put(proc.mName, proc.mUid, ent);
+                            entries.add(ent);
+                        }
+                    }  else {
+                        ent.addPackage(st.mPackageName);
+                    }
+                }
             }
         }
 
-        Collections.sort(procs, sEntryCompare);
-        while (procs.size() > MAX_ITEMS_TO_LIST) {
-            procs.remove(procs.size()-1);
-        }
-
-        long maxWeight = 0;
-        for (int i=0, N=(procs != null ? procs.size() : 0); i<N; i++) {
-            ProcStatsEntry proc = procs.get(i);
-            if (maxWeight < proc.mWeight) {
-                maxWeight = proc.mWeight;
-            }
-        }
-        mMaxWeight = maxWeight;
-
-        for (int i=0, N=(procs != null ? procs.size() : 0); i<N; i++) {
-            ProcStatsEntry proc = procs.get(i);
-            final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
-            final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
-            if (percentOfWeight < 1) break;
-            ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null, proc);
-            proc.evaluateTargetPackage(mStats, totals, sEntryCompare, mUseUss,
-                    mStatsType == MENU_TYPE_BACKGROUND);
-            proc.retrieveUiData(pm);
-            pref.setTitle(proc.mUiLabel);
-            if (proc.mUiTargetApp != null) {
-                pref.setIcon(proc.mUiTargetApp.loadIcon(pm));
-            }
-            pref.setOrder(i);
-            pref.setPercent(percentOfWeight, percentOfTime);
-            mAppListGroup.addPreference(pref);
-            if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
-        }
+        if (DEBUG) Log.d(TAG, "-------------------- MAPPING SERVICES");
 
         // Add in service info.
         if (mStatsType == MENU_TYPE_BACKGROUND) {
@@ -461,11 +464,83 @@ public class ProcessStatsUi extends PreferenceFragment {
                     for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
                         ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
                         if (ss.mProcessName != null) {
-                            ProcStatsEntry ent = processes.get(ss.mProcessName);
-                            ent.addService(ss);
+                            ProcStatsEntry ent = entriesMap.get(ss.mProcessName, uids.keyAt(iu));
+                            if (ent != null) {
+                                if (DEBUG) Log.d(TAG, "Adding service " + ps.mPackageName
+                                        + "/" + ss.mName + "/" + uids.keyAt(iu) + " to proc "
+                                        + ss.mProcessName);
+                                ent.addService(ss);
+                            } else {
+                                Log.w(TAG, "No process " + ss.mProcessName + "/" + uids.keyAt(iu)
+                                        + " for service " + ss.mName);
+                            }
                         }
                     }
                 }
+            }
+        }
+
+        /*
+        SparseArray<ArrayMap<String, ProcStatsEntry>> processes
+                = new SparseArray<ArrayMap<String, ProcStatsEntry>>();
+        for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
+            SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
+            for (int iu=0; iu<uids.size(); iu++) {
+                ProcessStats.ProcessState st = uids.valueAt(iu);
+                ProcStatsEntry ent = new ProcStatsEntry(st, totals, mUseUss,
+                        mStatsType == MENU_TYPE_BACKGROUND);
+                if (ent.mDuration > 0) {
+                    if (DEBUG) Log.d(TAG, "Adding proc " + st.mName + "/" + st.mUid + ": time="
+                            + makeDuration(ent.mDuration) + " ("
+                            + ((((double)ent.mDuration) / mTotalTime) * 100) + "%)");
+                    procs.add(ent);
+                    ArrayMap<String, ProcStatsEntry> uidProcs = processes.get(ent.mUid);
+                    if (uidProcs == null) {
+                        uidProcs = new ArrayMap<String, ProcStatsEntry>();
+                        processes.put(ent.mUid, uidProcs);
+                    }
+                    uidProcs.put(ent.mName, ent);
+                }
+            }
+        }
+        */
+
+        Collections.sort(entries, sEntryCompare);
+
+        long maxWeight = 1;
+        for (int i=0, N=(entries != null ? entries.size() : 0); i<N; i++) {
+            ProcStatsEntry proc = entries.get(i);
+            if (maxWeight < proc.mWeight) {
+                maxWeight = proc.mWeight;
+            }
+        }
+        mMaxWeight = maxWeight;
+
+        if (DEBUG) Log.d(TAG, "-------------------- BUILDING UI");
+
+        for (int i=0, N=(entries != null ? entries.size() : 0); i<N; i++) {
+            ProcStatsEntry proc = entries.get(i);
+            final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
+            final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
+            if (percentOfWeight < 1 && percentOfTime < 33) {
+                if (DEBUG) Log.d(TAG, "Skipping " + proc.mName + " weight=" + percentOfWeight
+                        + " time=" + percentOfTime);
+                continue;
+            }
+            ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null, proc);
+            proc.evaluateTargetPackage(pm, mStats, totals, sEntryCompare, mUseUss,
+                    mStatsType == MENU_TYPE_BACKGROUND);
+            proc.retrieveUiData(pm);
+            pref.setTitle(proc.mUiLabel);
+            if (proc.mUiTargetApp != null) {
+                pref.setIcon(proc.mUiTargetApp.loadIcon(pm));
+            }
+            pref.setOrder(i);
+            pref.setPercent(percentOfWeight, percentOfTime);
+            mAppListGroup.addPreference(pref);
+            if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) {
+                if (DEBUG) Log.d(TAG, "Done with UI, hit item limit!");
+                break;
             }
         }
     }
