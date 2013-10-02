@@ -516,8 +516,10 @@ public class Settings extends PreferenceActivity
      */
     @Override
     public void onBuildHeaders(List<Header> headers) {
-        loadHeadersFromResource(R.xml.settings_headers, headers);
-        updateHeaderList(headers);
+        if (!onIsHidingHeaders()) {
+            loadHeadersFromResource(R.xml.settings_headers, headers);
+            updateHeaderList(headers);
+        }
     }
 
     private void updateHeaderList(List<Header> target) {
@@ -655,6 +657,7 @@ public class Settings extends PreferenceActivity
                 }
             }
             accountHeaders.add(accHeader);
+            mAuthenticatorHelper.preloadDrawableForType(this, accountType);
         }
 
         // Sort by label
