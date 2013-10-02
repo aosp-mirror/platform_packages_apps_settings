@@ -55,6 +55,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -71,8 +72,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import android.widget.CompoundButton.OnCheckedChangeListener;
 /**
  * Fragment with print service settings.
  */
@@ -130,13 +129,11 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private PrintersAdapter mPrintersAdapter;
 
-    // TODO: Showing sub-sub fragment does not handle the activity title
-    // so we do it but this is wrong. Do a real fix when there is time.
-    private CharSequence mOldActivityTitle;
-
     private int mLastUnfilteredItemCount;
 
     private boolean mServiceEnabled;
+
+    private AnnounceFilterResult mAnnounceFilterResult;
 
     @Override
     public void onResume() {
@@ -149,6 +146,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
+        if (mAnnounceFilterResult != null) {
+            mAnnounceFilterResult.remove();
+        }
         super.onPause();
     }
 
@@ -162,9 +162,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onDestroyView() {
         getActivity().getActionBar().setCustomView(null);
-        if (mOldActivityTitle != null) {
-            getActivity().getActionBar().setTitle(mOldActivityTitle);
-        }
         mToggleSwitch.setOnBeforeCheckedChangeListener(null);
         super.onDestroyView();
     }
@@ -235,8 +232,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (emptyView == null) {
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_print_state, contentRoot, false);
-                ImageView iconView = (ImageView) emptyView.findViewById(R.id.icon);
-                iconView.setContentDescription(getString(R.string.print_service_disabled));
+                emptyView.setContentDescription(getString(R.string.print_service_disabled));
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_service_disabled);
                 contentRoot.addView(emptyView);
@@ -262,8 +258,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (emptyView == null) {
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_print_state, contentRoot, false);
-                ImageView iconView = (ImageView) emptyView.findViewById(R.id.icon);
-                iconView.setContentDescription(getString(R.string.print_no_printers_found));
+                emptyView.setContentDescription(getString(R.string.print_no_printers_found));
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_no_printers_found);
                 contentRoot.addView(emptyView);
@@ -331,9 +326,11 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         // Title.
         PreferenceActivity activity = (PreferenceActivity) getActivity();
         if (!activity.onIsMultiPane() || activity.onIsHidingHeaders()) {
-            mOldActivityTitle = getActivity().getTitle();
+            // PreferenceActivity allows passing as an extra only title by its
+            // resource id but we do not have the resource id for the print
+            // service label. Therefore, we do it ourselves.
             String title = arguments.getString(PrintSettingsFragment.EXTRA_TITLE);
-            getActivity().getActionBar().setTitle(title);
+            getActivity().setTitle(title);
         }
 
         // Settings title and intent.
@@ -425,6 +422,18 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                     return true;
                 }
             });
+            searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                @Override
+                public void onViewAttachedToWindow(View view) {
+                    view.announceForAccessibility(getString(
+                            R.string.print_search_box_shown_utterance));
+                }
+                @Override
+                public void onViewDetachedFromWindow(View view) {
+                    view.announceForAccessibility(getString(
+                            R.string.print_search_box_hidden_utterance));
+                }
+            });
         } else {
             menu.removeItem(R.id.print_menu_item_search);
         }
@@ -461,6 +470,39 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         @Override
         public abstract void onChange(boolean selfChange, Uri uri);
+    }
+
+    private final class AnnounceFilterResult implements Runnable {
+        private static final int SEARCH_RESULT_ANNOUNCEMENT_DELAY = 1000; // 1 sec
+
+        public void post() {
+            remove();
+            getListView().postDelayed(this, SEARCH_RESULT_ANNOUNCEMENT_DELAY);
+        }
+
+        public void remove() {
+            getListView().removeCallbacks(this);
+        }
+
+        @Override
+        public void run() {
+            final int count = getListView().getAdapter().getCount();
+            final String text;
+            if (count <= 0) {
+                text = getString(R.string.print_no_printers_found);
+            } else {
+                text = getActivity().getResources().getQuantityString(
+                    R.plurals.print_search_result_count_utterance, count, count);
+            }
+            getListView().announceForAccessibility(text);
+        }
+    }
+
+    private void announceSearchResult() {
+        if (mAnnounceFilterResult == null) {
+            mAnnounceFilterResult = new AnnounceFilterResult();
+        }
+        mAnnounceFilterResult.post();
     }
 
     private final class PrintersAdapter extends BaseAdapter
@@ -514,7 +556,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 @Override
                 @SuppressWarnings("unchecked")
                 protected void publishResults(CharSequence constraint, FilterResults results) {
+                    final boolean resultCountChanged;
                     synchronized (mLock) {
+                        final int oldPrinterCount = mFilteredPrinters.size();
                         mLastSearchString = constraint;
                         mFilteredPrinters.clear();
                         if (results == null) {
@@ -523,6 +567,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                             List<PrinterInfo> printers = (List<PrinterInfo>) results.values;
                             mFilteredPrinters.addAll(printers);
                         }
+                        resultCountChanged = (oldPrinterCount != mFilteredPrinters.size());
+                    }
+                    if (resultCountChanged) {
+                        announceSearchResult();
                     }
                     notifyDataSetChanged();
                 }
