@@ -69,12 +69,6 @@ public class LocationSettings extends LocationSettingsBase
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        createPreferenceHierarchy();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         mSwitch = new Switch(getActivity());

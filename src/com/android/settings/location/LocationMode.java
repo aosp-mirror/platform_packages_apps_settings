@@ -45,12 +45,6 @@ public class LocationMode extends LocationSettingsBase
     private RadioButtonPreference mSensorsOnly;
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        createPreferenceHierarchy();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         createPreferenceHierarchy();
