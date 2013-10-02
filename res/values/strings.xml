@@ -3483,6 +3483,18 @@
     <!-- Template for the label of the state for a blocked print job. [CHAR LIMIT=25] -->
     <string name="print_blocked_state_title_template">Printer blocked <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
 
+    <!-- Utterance to announce that the search box is shown. This is spoken to a blind user. [CHAR LIMIT=none] -->
+    <string name="print_search_box_shown_utterance">Search box shown</string>
+
+    <!-- Utterance to announce that the search box is hidden. This is spoken to a blind user. [CHAR LIMIT=none] -->
+    <string name="print_search_box_hidden_utterance">Search box hidden</string>
+
+    <!-- Utterance to announce a change in the number of matches during a search. This is spoken to a blind user. [CHAR LIMIT=none] -->
+    <plurals name="print_search_result_count_utterance">
+        <item quantity="one"><xliff:g id="count" example="1">%1$s</xliff:g> printer found</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$s</xliff:g> printers found</item>
+    </plurals>
+
     <!-- App Fuel Gauge strings -->
     <skip />
 
