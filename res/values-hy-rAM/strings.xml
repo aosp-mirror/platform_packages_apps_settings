@@ -930,7 +930,7 @@
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Ջնջել գրասալիկից բոլոր տվյալները"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Ջնջում է հեռախոսի բոլոր տվյալները"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Սա կջնջի բոլոր տվյալները ձեր գրասալիկի "<b>" ներքին պահոցից"</b>", այդ թվում՝\n\n"<li>"Ձեր Google հաշիվը"</li>\n<li>"Համակարգի և հավելվածների տվյալներն ու կարգավորումները"</li>\n<li>"Ներբեռնված հավելվածները"</li></string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Սա կջնջի բոլոր տվյալները  ձեր սարքի "<b>"ներքին պահոցից"</b>", նաև`\n\n"<li>"Ձեր Google հաշիվը"</li>\n<li>"Համակարգի և ծրագրի տվյալները և կարգավորումները"</li>\n<li>"Ներբեռնված ծրագրերը"</li></string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Սա կջնջի բոլոր տվյալները ձեր սարքի "<b>"ներքին պահոցից"</b>", ներառյալ`\n\n"<li>"Ձեր Google հաշիվը"</li>\n<li>"Համակարգի և հավելվածների տվյալներն ու կարգավորումները"</li>\n<li>"Ներբեռնված ծրագրերը"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Դուք այժմ գրանցված եք հետևյալ հաշիվներում՝\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Երաժշտություն"</li>\n<li>"Լուսանկարներ"</li>\n<li>"Օգտվողի այլ տվյալներ"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Երաժշտությունը, նկարները և այլ տվյալները ջնջելու համար "<b>"USB կրիչը "</b>"պետք է ջնջվի:"</string>
@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Ռեժիմ"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Բարձր ճշգրտություն"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Մարտկոցի տնտեսում"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Սարքի սենսորները"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Միայն սարքը"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Տեղադրությունն անջատված"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Տեղանքի վերջին հարցումները"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Որևէ ծրագիր տեղադրության հարցում չի կատարել վերջերս"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Հավելվածի կարգավորումներ"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Տեղադրության ծառայություններ"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Մարտկոցի շատ օգտագործում"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Մարտկոցի քիչ օգտագործում"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Տեղադրության ռեժիմ"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Օգտագործե՞լ <xliff:g id="SERVICE">%1$s</xliff:g>-ը:"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Հնարավոր է՝ փաստաթուղթը  մի քանի սերվերներով անցնի մինչ տպվելը:"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Տեղադրված ծառայաթյուններ չկան"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Տպիչներ չեն գտնվել"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Կարգավորումներ"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Ավելացնել տպիչներ"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Միացված է"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Ավելացնել տպիչ"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Որոնել"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Տպիչների որոնում"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Ծառայությունն անջատված է"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Տպել աշխատանքները"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Տպելու ակտիվ աշխատանքները"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Տպել աշխատանքը"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Վերագործարկել"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Չեղարկել"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Տպվում է՝ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Տպիչի սխալ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Տպիչն արգելափակել է <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>-ը"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Մարտկոց"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Ինչն էր օգագործում մարտկոցի լիցքը"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Մարտկոցի օգտագործման տվյալներ չկան:"</string>
@@ -1648,7 +1656,7 @@
     <string name="emergency_tone_summary" msgid="722259232924572153">"Սահմանել վարքը արտակարգ իրավիճակների զանգի դեպքում"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Պահուստավորում և վերակայում"</string>
     <string name="privacy_settings_title" msgid="4856282165773594890">"Պահուստավորում &amp; վերականգնում"</string>
-    <string name="backup_section_title" msgid="7952232291452882740">"Պահուստավորել &amp; վերականգնել"</string>
+    <string name="backup_section_title" msgid="7952232291452882740">"Պահուստավորել և վերականգնել"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Անձնական տվյալներ"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Պահուստավորել իմ տվյալները"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Պահուստավորել հավելվածի տվյալները, Wi-Fi գաղտնաբառերը և Google սերվերների այլ կարգավորումները"</string>
@@ -1745,8 +1753,8 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"Հեռացնե՞լ հաշիվը:"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Այս հաշիվը հեռացնելիս գրասալիկից կջնջվեն նաև բոլոր հաղորդագրությունները, կոնտակտները և այլ տվյալները:"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Այս հաշվի հեռացումից հեռախոսից կջնջվեն նաև բոլոր հաղորդագրությունները, կոնտակտները և այլ տվյալները:"</string>
-    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"Այս հաշիվը պահանջված է որոշ հավելվածների կողմից: Դուք կարող  հեռացնել այն` միայն սարքի կարգավորումները նախնական գործարանային կարգավորումներին բերելով (ինչը ջնջում է ձեր ողջ անձնական տեղեկությունները) այստեղ՝ Կարգավորումներ &gt; Պահուստավորել &amp; վերականգնել:"</string>
-    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"Այս հաշիվը պահանջված է որոշ ծրագրերի կողմից: Դուք կարող եք այն հեռացնել միայն` հեռախոսի կարգավորումները նախնական գործարանային կարգավորումներին բերելով (ինչը կջնջի ձեր բոլոր անձնական տվյալնրը) այստեղից` Կարգավորումներ &gt; Պահուստավորել &amp; վերականգնել:"</string>
+    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"Այս հաշիվը պահանջված է որոշ հավելվածների կողմից: Դուք կարող եք այն հեռացնել` միայն սարքի կարգավորումները նախնական գործարանային կարգավորումներին բերելով (ինչը կջնջի ձեր բոլոր անձնական տվյալները) այստեղ՝ Կարգավորումներ &gt; Պահուստավորել և վերականգնել:"</string>
+    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"Այս հաշիվը պահանջված է որոշ հավելվածների կողմից: Դուք կարող եք այն հեռացնել միայն` հեռախոսի կարգավորումները նախնական գործարանային կարգավորումներին բերելով (ինչը կջնջի ձեր բոլոր անձնական տվյալնրը) այստեղից` Կարգավորումներ &gt; Պահուստավորել և վերականգնել:"</string>
     <string name="provider_label" msgid="7724593781904508866">"Ներկայացնել բաժանորդագրությունները"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
@@ -1941,7 +1949,8 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Ցանցը կարող է վերահսկվել"</string>
     <string name="done_button" msgid="1991471253042622230">"Կատարված է"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Ցանցի մշտադիտարկում"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Այս սարքը կառավարվում է <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>-ի կողմից:\n\nՁեր կառավարիչն ի վիճակի է մշտադիտարկել ձեր ցանցային գործունեությունը, այդ թվում՝ նամակները, հավելվածները և անվտանգ կայքերը:\n\nԼրացուցիչ տեղեկությունների համար դիմեք ձեր կառավարչին:"</string>
+    <!-- no translation found for ssl_ca_cert_info_message (4583879256548819713) -->
+    <skip />
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Երրորդ կողմն ի վիճակի է վերահսկել ձեր ցանցային\nգործունեությունը, այդ թվում՝ նամակները, հավելվածները և անվտանգ կայքերը:\n\nՁեր սարքում տեղադրված վստահելի վկայագրերը տալիս են դրա հնարավորությունը:"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Ստուգել վստահելի վկայագրերը"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Օգտվողներ"</string>
@@ -1994,11 +2003,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Այս կարգավորումը ազդեցություն ունի այս հեռախոսի բոլոր օգտվողների վրա:"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Փոխել լեզուն"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Փոխել տառաչափը"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Վճարումներ"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Հպել և վճարել"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Վճարեք ընդամենը մեկ հպումով"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Մանրամասն"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Գտնել հավելվածներ"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Սահմանե՞լ որպես նախընտրանք:"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Միշտ օգտագործե՞լ <xliff:g id="APP">%1$s</xliff:g> հավելվածը, երբ հպում և վճարում եք:"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Միշտ օգտագործե՞լ <xliff:g id="APP_0">%1$s</xliff:g> հավելվածը <xliff:g id="APP_1">%2$s</xliff:g>-ի փոխարեն, երբ հպում և վճարում եք:"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Միշտ օգտագործե՞լ <xliff:g id="APP">%1$s</xliff:g> հավելվածը, երբ հպում և վճարում եք:"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Միշտ օգտագործե՞լ <xliff:g id="APP_0">%1$s</xliff:g> հավելվածը <xliff:g id="APP_1">%2$s</xliff:g>-ի փոխարեն, երբ հպում և վճարում եք:"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Սահմանափակումներ"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Հանել սահմանափակումները"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Փոխել PIN-ը"</string>

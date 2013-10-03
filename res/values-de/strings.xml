@@ -1002,11 +1002,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Modus"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Hohe Genauigkeit"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Stromsparfunktion"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Gerätesensoren"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Nur Gerät"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Standort aus"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Letzte Standortanfragen"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Keine App hat kürzlich den Standort abgefragt."</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"App-Einstellungen"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Standortdienste"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Hoher Akkuverbrauch"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Geringer Akkuverbrauch"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Standortmodus"</string>
@@ -1437,6 +1437,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g> verwenden?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Ihr Dokument passiert bei der Übermittlung an den Drucker möglicherweise einen oder mehrere Server."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Keine Dienste installiert"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Keine Drucker gefunden"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Einstellungen"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Drucker hinzufügen"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"An"</string>
@@ -1445,8 +1446,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Drucker hinzufügen"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Suchen"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Suche nach Druckern…"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Dienst deaktiviert"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Druckaufträge"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Aktive Druckaufträge"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Druckauftrag"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Neu starten"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Abbrechen"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> wird gedruckt"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Druckerfehler <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Drucker hat <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> blockiert."</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akku"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Was zum Akkuverbrauch beiträgt"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Keine Daten zum Akkuverbrauch"</string>
@@ -1942,7 +1950,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Das Netzwerk wird möglicherweise überwacht."</string>
     <string name="done_button" msgid="1991471253042622230">"Fertig"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Netzwerküberwachung"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Dieses Gerät wird von <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> verwaltet.\n\nIhr Administrator kann Ihre Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nWenden Sie sich für weitere Informationen an Ihren Administrator."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Dieses Gerät wird verwaltet von:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nIhr Administrator kann Ihre Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nWenden Sie sich für weitere Informationen an Ihren Administrator."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Dritte können Ihre Netzwerkaktivitäten\nüberwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nDies wird durch vertrauenswürdige Anmeldedaten ermöglicht, die auf Ihrem Gerät installiert sind."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Vertrauenswürdige Anmeldedaten überprüfen"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Nutzer"</string>
@@ -1995,11 +2003,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Diese Einstellung betrifft alle Nutzer auf diesem Telefon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Sprache ändern"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Schriftgröße ändern"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Zahlungen"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Mobil bezahlen"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Einfach durch Tippen bezahlen"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Weitere Informationen"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Apps suchen"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Als bevorzugte Einstellung festlegen?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Immer <xliff:g id="APP">%1$s</xliff:g> verwenden, wenn Sie mobil bezahlen?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Immer <xliff:g id="APP_0">%1$s</xliff:g> statt <xliff:g id="APP_1">%2$s</xliff:g> verwenden, wenn Sie mobil bezahlen?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Immer <xliff:g id="APP">%1$s</xliff:g> verwenden, wenn Sie mobil bezahlen?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Immer <xliff:g id="APP_0">%1$s</xliff:g> statt <xliff:g id="APP_1">%2$s</xliff:g> verwenden, wenn Sie mobil bezahlen?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Einschränkungen"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Einschränkungen aufheben"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN ändern"</string>

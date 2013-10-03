@@ -317,7 +317,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Dati utente"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostra info profilo in schermata di blocco"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informazioni profilo"</string>
-    <string name="location_settings_title" msgid="1369675479310751735">"Posizione"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Geolocalizzazione"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sicurezza"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Imposta La mia posizione, sblocco schermo, blocco SIM, blocco cred."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Imposta La mia posizione, sblocco schermo, blocco archivio credenziali"</string>
@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Modalità"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Alta precisione"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Risparmio della batteria"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Sensori dispositivo"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Solo del dispositivo"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Geolocalizzazione non attiva"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Richieste di posizione recenti"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nessuna applicazione ha richiesto la posizione di recente"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Impostazioni app"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Servizi di localizzazione"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Elevato utilizzo della batteria"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Basso utilizzo della batteria"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Modalità di geolocalizzazione"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Utilizzare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Il tuo documento potrebbe attraversare uno o più server per raggiungere la stampante."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nessun servizio installato"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Nessuna stampante trovata"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Impostazioni"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Aggiungi stampanti"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Attiva"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Aggiungi stampante"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Cerca"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Ricerca di stampanti"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Servizio disabilitato"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Processi di stampa"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Processi di stampa attivi"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Processo di stampa"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Riavvia"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Annulla"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Stampa di <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Errore della stampante: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"La stampante ha bloccato <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batteria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumo batteria"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Dati uso batteria non disp."</string>
@@ -1941,7 +1949,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"La rete potrebbe essere monitorata"</string>
     <string name="done_button" msgid="1991471253042622230">"Fine"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Monitoraggio rete"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Questo dispositivo è gestito da: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nIl tuo amministratore è in grado di monitorare l\'attività della rete, inclusi siti web sicuri, email e app.\n\nPer ulteriori informazioni, contatta il tuo amministratore."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Questo dispositivo è gestito da:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nL\'amministratore è in grado di monitorare la tua attività di rete, inclusi siti web protetti, email e app.\n\nPer ulteriori informazioni rivolgiti all\'amministratore."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Una terza parte è in grado di monitorare l\'attività della\nrete, inclusi siti web sicuri, email e app.\n\nCiò è reso possibile da una credenziale attendibile installata sul dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Verifica credenziali attendibili"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Utenti"</string>
@@ -1994,11 +2002,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Questa impostazione influisce su tutti gli utenti di questo telefono."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Cambia lingua"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Cambia le dimensioni del carattere"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Pagamenti"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Touch &amp; Pay"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Paga con un tocco"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Ulteriori informazioni"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Trova app"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Impostare come preferenza?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Utilizzare sempre <xliff:g id="APP">%1$s</xliff:g> quando tocchi e paghi?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Utilizzare sempre <xliff:g id="APP_0">%1$s</xliff:g> anziché <xliff:g id="APP_1">%2$s</xliff:g> quando tocchi e paghi?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Utilizzare sempre <xliff:g id="APP">%1$s</xliff:g> per Touch &amp; Pay?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Utilizzare sempre <xliff:g id="APP_0">%1$s</xliff:g> anziché <xliff:g id="APP_1">%2$s</xliff:g> per Touch &amp; Pay?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Limitazioni"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Rimuovi limitazioni"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Cambia PIN"</string>

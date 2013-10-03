@@ -946,7 +946,7 @@
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"잠금해제 패턴을 그리세요."</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"초기화를 실행하려면 잠금해제 패턴을 그려야 합니다."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"시스템 지우기 서비스를 사용할 수 없어 초기화하지 못했습니다."</string>
-    <string name="master_clear_confirm_title" msgid="7572642091599403668">"재설정하시겠습니까?"</string>
+    <string name="master_clear_confirm_title" msgid="7572642091599403668">"초기화하시겠습니까?"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB 저장소 지우기"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD 카드 지우기"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB 저장소의 모든 데이터 지우기"</string>
@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"모드"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"높은 정확성"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"배터리 절약"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"기기 센서"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"기기 전용"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"위치 정보 사용 안함"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"최근 위치 요청"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"최근에 위치 정보를 요청한 앱이 없습니다."</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"앱 설정"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"위치 서비스"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"배터리 사용량 많음"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"배터리 사용량 적음"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"위치 모드"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"문서가 프린터로 전송되는 중에 하나 이상의 서버를 통과할 수 있습니다."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"설치된 서비스 없음"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"프린터 없음"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"설정"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"프린터 추가"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"ON"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"프린터 추가"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"검색"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"프린터 검색 중"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"서비스 사용 중지됨"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"인쇄 작업"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"진행 중인 인쇄 작업"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"인쇄 작업"</string>
+    <string name="print_restart" msgid="8373999687329384202">"다시 시작"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"취소"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> 인쇄 중"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"프린터 오류: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"인쇄 작업 오류: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"배터리"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"배터리 사용 세부정보"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"배터리 사용 데이터가 없습니다."</string>
@@ -1941,7 +1949,8 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"네트워크가 모니터링될 수 있음"</string>
     <string name="done_button" msgid="1991471253042622230">"완료"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"네트워크 모니터링"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"이 기기는 <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>에서 관리합니다.\n\n관리자는 이메일, 앱 및 보안 웹사이트를 포함한 네트워크 활동을 모니터링할 수 있습니다.\n\n자세한 정보는 관리자에게 문의하세요."</string>
+    <!-- no translation found for ssl_ca_cert_info_message (4583879256548819713) -->
+    <skip />
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">\n\n"기기에 신뢰할 수 있는 자격증명이 설치되어있기 때문에 제3자가 이메일, 앱 및 보안 웹사이트를 포함한 네트워크\n활동을 모니터링할 수 있습니다."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"신뢰할 수 있는 자격증명 확인"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"사용자"</string>
@@ -1964,7 +1973,7 @@
     <string name="user_add_user_message_long" msgid="3086244205384741788">"새로운 사용자를 추가로 만들어서 이 기기를 공유할 수 있습니다. 각 사용자는 별도의 공간을 갖게 되며 내 앱, 배경화면 등을 맞춤설정할 수 있습니다. 사용자는 또한 모두에게 영향을 주는 Wi-Fi와 같은 태블릿 설정을 조정할 수 있습니다.\n\n새로운 사용자를 만든 후에 해당 사용자는 설정 과정을 진행해야 합니다.\n\n모든 사용자는 다른 사용자들을 대신하여 업데이트된 앱 권한을 승인할 수 있습니다."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"새로운 사용자를 만들면 해당 사용자의 설정 과정을 진행해야 합니다.\n\n모든 사용자는 다른 사용자들을 대신하여 업데이트된 앱 권한을 승인할 수 있습니다."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"지금 사용자를 설정하시겠습니까?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"사용자가 태블릿을 사용하여 자신의 공간을 설정할 수 있는지 확인하세요."</string>
+    <string name="user_setup_dialog_message" msgid="614037943337008555">"추가되는 사용자가 직접 태블릿에 자신의 공간을 설정도록 하세요."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"지금 프로필을 설정하시겠습니까?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"지금 설정"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"나중에"</string>
@@ -1994,11 +2003,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"이 설정은 휴대전화의 모든 사용자에게 영향을 줍니다."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"언어 변경"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"글꼴 크기 변경"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"결제"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"탭앤페이"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"탭 한 번으로 결제하세요."</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"자세히 알아보기"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"앱 검색"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"기본으로 설정하시겠습니까?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"탭하여 결제할 때 항상 <xliff:g id="APP">%1$s</xliff:g>을(를) 사용하십니까?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"탭하여 결제할 때 항상 <xliff:g id="APP_1">%2$s</xliff:g> 대신 <xliff:g id="APP_0">%1$s</xliff:g>을(를) 사용하십니까?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"탭앤페이에 항상 <xliff:g id="APP">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"탭앤페이에 항상 <xliff:g id="APP_1">%2$s</xliff:g> 대신 <xliff:g id="APP_0">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"제한사항"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"제한사항 삭제"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN 변경"</string>
