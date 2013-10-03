@@ -1001,7 +1001,7 @@
     <string name="location_mode_title" msgid="3982009713118421689">"โหมด"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"ความแม่นยำสูง"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"ประหยัดแบตเตอรี่"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"เซ็นเซอร์ของอุปกรณ์"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"เฉพาะอุปกรณ์"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"ปิดตำแหน่ง"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"คำขอตำแหน่งล่าสุด"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"ไม่มีแอปใดทำการขอตำแหน่งเมื่อเร็วๆ นี้"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"ใช้ <xliff:g id="SERVICE">%1$s</xliff:g> หรือไม่"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"เอกสารของคุณอาจผ่านเซิร์ฟเวอร์มากกว่าหนึ่งเครื่องระหว่างไปยังเครื่องพิมพ์"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"ไม่ได้ติดตั้งบริการใดไว้"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"ไม่พบเครื่องพิมพ์"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"การตั้งค่า"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"เพิ่มเครื่องพิมพ์"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"เปิด"</string>
@@ -1444,8 +1445,15 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"เพิ่มเครื่องพิมพ์"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"ค้นหา"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"กำลังค้นหาเครื่องพิมพ์"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"ปิดใช้งานบริการไว้"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"งานพิมพ์"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"งานพิมพ์ที่ดำเนินการอยู่"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"งานพิมพ์"</string>
+    <string name="print_restart" msgid="8373999687329384202">"เริ่มต้นใหม่"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"ยกเลิก"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g> \n <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"กำลังพิมพ์ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"ข้อผิดพลาดเครื่องพิมพ์ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"เครื่องพิมพ์ได้บล็อก <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"แบตเตอรี่"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"อะไรที่ใช้งานแบตเตอรี่อยู่"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"ไม่มีข้อมูลการใช้แบตเตอรี่"</string>
@@ -1994,11 +2002,13 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"การตั้งค่านี้ส่งผลต่อผู้ใช้โทรศัพท์นี้ทุกราย"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"เปลี่ยนภาษา"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"เปลี่ยนขนาดแบบอักษร"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"การชำระเงิน"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"อย่าแปล"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"แตะและจ่าย"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"จ่ายเงินด้วยการแตะเพียงครั้งเดียว"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"เรียนรู้เพิ่มเติม"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"ค้นหาแอป"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"ตั้งเป็นค่ากำหนดของคุณไหม"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"ใช้ <xliff:g id="APP">%1$s</xliff:g> ทุกครั้งที่แตะและจ่ายไหม"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"ใช้ <xliff:g id="APP_0">%1$s</xliff:g> แทน <xliff:g id="APP_1">%2$s</xliff:g> ทุกครั้งที่แตะและจ่ายไหม"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"ใช้ <xliff:g id="APP">%1$s</xliff:g> ทุกครั้งที่แตะและจ่ายไหม"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"ใช้ <xliff:g id="APP_0">%1$s</xliff:g> แทน <xliff:g id="APP_1">%2$s</xliff:g> ทุกครั้งที่แตะและจ่ายไหม"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"ข้อจำกัด"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"ลบข้อจำกัด"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"เปลี่ยน PIN"</string>
