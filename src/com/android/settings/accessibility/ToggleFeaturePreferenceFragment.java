@@ -48,10 +48,6 @@ public abstract class ToggleFeaturePreferenceFragment
     protected CharSequence mSettingsTitle;
     protected Intent mSettingsIntent;
 
-    // TODO: Showing sub-sub fragment does not handle the activity title
-    // so we do it but this is wrong. Do a real fix when there is time.
-    private CharSequence mOldActivityTitle;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,9 +93,6 @@ public abstract class ToggleFeaturePreferenceFragment
     @Override
     public void onDestroyView() {
         getActivity().getActionBar().setCustomView(null);
-        if (mOldActivityTitle != null) {
-            getActivity().getActionBar().setTitle(mOldActivityTitle);
-        }
         mToggleSwitch.setOnBeforeCheckedChangeListener(null);
         super.onDestroyView();
     }
@@ -135,8 +128,7 @@ public abstract class ToggleFeaturePreferenceFragment
     public void setTitle(String title) {
         final PreferenceActivity activity = (PreferenceActivity) getActivity();
         if (!activity.onIsMultiPane() || activity.onIsHidingHeaders()) {
-            mOldActivityTitle = getActivity().getTitle();
-            getActivity().getActionBar().setTitle(title);
+            getActivity().setTitle(title);
         }
     }
 
