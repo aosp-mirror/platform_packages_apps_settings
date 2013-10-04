@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.Process;
 import android.security.Credentials;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyChain;
@@ -38,6 +39,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.internal.widget.LockPatternUtils;
+
+import com.android.org.bouncycastle.asn1.ASN1InputStream;
+import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+
+import org.apache.harmony.security.utils.AlgNameMapper;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /**
  * CredentialStorage handles KeyStore reset, unlock, and install.
@@ -182,6 +191,20 @@ public final class CredentialStorage extends Activity {
         return (quality >= MIN_PASSWORD_QUALITY);
     }
 
+    private boolean isHardwareBackedKey(byte[] keyData) {
+        try {
+            ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
+            PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
+            String algId = pki.getAlgorithmId().getAlgorithm().getId();
+            String algName = AlgNameMapper.map2AlgName(algId);
+
+            return KeyChain.isBoundKeyAlgorithm(algName);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to parse key data");
+            return false;
+        }
+    }
+
     /**
      * Install credentials if available, otherwise do nothing.
      */
@@ -196,17 +219,27 @@ public final class CredentialStorage extends Activity {
                 String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
                 byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
 
-                if (!mKeyStore.importKey(key, value, uid, KeyStore.FLAG_ENCRYPTED)) {
+                int flags = KeyStore.FLAG_ENCRYPTED;
+                if (uid == Process.WIFI_UID && isHardwareBackedKey(value)) {
+                    // Hardware backed keystore is secure enough to allow for WIFI stack
+                    // to enable access to secure networks without user intervention
+                    Log.d(TAG, "Saving private key with FLAG_NONE for WIFI_UID");
+                    flags = KeyStore.FLAG_NONE;
+                }
+
+                if (!mKeyStore.importKey(key, value, uid, flags)) {
                     Log.e(TAG, "Failed to install " + key + " as user " + uid);
                     return;
                 }
             }
 
+            int flags = (uid == Process.WIFI_UID) ? KeyStore.FLAG_NONE : KeyStore.FLAG_ENCRYPTED;
+
             if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
                 String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
                 byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
 
-                if (!mKeyStore.put(certName, certData, uid, KeyStore.FLAG_ENCRYPTED)) {
+                if (!mKeyStore.put(certName, certData, uid, flags)) {
                     Log.e(TAG, "Failed to install " + certName + " as user " + uid);
                     return;
                 }
@@ -216,7 +249,7 @@ public final class CredentialStorage extends Activity {
                 String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
                 byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
 
-                if (!mKeyStore.put(caListName, caListData, uid, KeyStore.FLAG_ENCRYPTED)) {
+                if (!mKeyStore.put(caListName, caListData, uid, flags)) {
                     Log.e(TAG, "Failed to install " + caListName + " as user " + uid);
                     return;
                 }
