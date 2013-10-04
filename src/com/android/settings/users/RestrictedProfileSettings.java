@@ -37,6 +37,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.support.v4.content.FileProvider;
@@ -123,10 +124,25 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
     public void onResume() {
         super.onResume();
 
-        UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
-        ((TextView) mHeaderView.findViewById(android.R.id.title)).setText(info.name);
-        ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(
-                getCircularUserIcon());
+        // Check if user still exists
+        UserInfo info = getExistingUser(mUser);
+        if (info == null) {
+            finishFragment();
+        } else {
+            ((TextView) mHeaderView.findViewById(android.R.id.title)).setText(info.name);
+            ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(
+                    getCircularUserIcon());
+        }
+    }
+
+    private UserInfo getExistingUser(UserHandle thisUser) {
+        final List<UserInfo> users = mUserManager.getUsers(true); // Only get non-dying
+        for (UserInfo user : users) {
+            if (user.id == thisUser.getIdentifier()) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
