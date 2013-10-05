@@ -1456,6 +1456,12 @@
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>を印刷しています"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"プリンタエラー: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>をブロックしました"</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"電池"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"電池の使用状況"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"電池使用量データがありません。"</string>
@@ -1523,7 +1529,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"別のBluetoothデバイスに接続してみてください"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"アプリの電池使用量"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"アプリを停止またはアンインストールします"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"アプリが使用しないように、GPSを手動で管理します"</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"アプリ側の設定で電池使用量を抑えられる場合があります"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"ユーザーの電池使用量"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"電池使用時間: <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1955,8 +1962,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ネットワークが監視されている可能性があります"</string>
     <string name="done_button" msgid="1991471253042622230">"完了"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"ネットワーク監視"</string>
-    <!-- no translation found for ssl_ca_cert_info_message (4583879256548819713) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"この端末は<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>によって管理されています。\n\n\n管理者はあなたのネットワークアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\n詳しくは管理者にお問い合わせください。"</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"第三者があなたのネットワークアクティビティ\n（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\nこれは、信頼できる認証情報が端末にインストールされているためです。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"信頼できる認証情報を確認"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"ユーザー"</string>
@@ -2005,17 +2011,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"制限のあるアプリ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"アプリの設定を展開"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"このアプリをアンインストール"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"この設定はこのタブレット上のすべてのユーザーに影響します。"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"この設定はこの端末上のすべてのユーザーに影響します。"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"言語の変更"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"フォントサイズの変更"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"タップしてお支払い"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"タップ＆ペイ"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"タップして支払う"</string>
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"詳細"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"アプリを検索"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"設定として保存しますか？"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"タップして支払う際に常に<xliff:g id="APP">%1$s</xliff:g>を使用しますか？"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"タップして支払う際に<xliff:g id="APP_1">%2$s</xliff:g>の代わりに常に<xliff:g id="APP_0">%1$s</xliff:g>を使用しますか？"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"タップ＆ペイの際に常に<xliff:g id="APP">%1$s</xliff:g>を使用しますか？"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"タップ＆ペイの際に<xliff:g id="APP_1">%2$s</xliff:g>の代わりに常に<xliff:g id="APP_0">%1$s</xliff:g>を使用しますか？"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"制限"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"制限を削除"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PINを変更"</string>
