@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Modo"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Precisión alta"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Ahorro de batería"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Sensores del dispositivo"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Solo en dispositivos"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Ubicación desactivada"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Solicit. ubicación recientes"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Ninguna aplicación solicitó la ubicación recientemente."</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Configuración de la aplicación"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Servicios de ubicación"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Uso de batería alto"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Uso de batería bajo"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Modo de ubicación"</string>
@@ -1326,11 +1326,11 @@
     <string name="enable_adb" msgid="7982306934419797485">"Depuración por USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Modo de depuración cuando se conecta el USB"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Revocar autorizaciones de depur. USB"</string>
-    <string name="bugreport_in_power" msgid="4548816486587403971">"Informes de errores en el menú de encendido"</string>
+    <string name="bugreport_in_power" msgid="4548816486587403971">"Inform. de err. en el menú Encendido"</string>
     <string name="bugreport_in_power_summary" msgid="5764234382355067053">"Incluir opción de realizar un informe de errores en el menú de encendido"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Permanecer activo"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"La pantalla nunca quedará inactiva mientras el dispositivo se esté cargando."</string>
-    <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Registro de búsqueda de HCI de Bluetooth"</string>
+    <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Registro de búsq. de HCI de Bluetooth"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Capturar todos los paquetes de HCI de Bluetooth en un archivo"</string>
     <string name="select_runtime_title" msgid="649783802363155346">"Tiempo de ejecución"</string>
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Tiempo de ejecución"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"¿Quieres usar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Es posible que el documento pase por uno o varios servidores antes de imprimirse."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"No se instaló ningún servicio."</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"No se encontraron impresoras"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Configuración"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Agregar impresoras"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Sí"</string>
@@ -1444,8 +1445,21 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Agregar impresora"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Buscar"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Buscando impresoras"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Servicio inhabilitado"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Trabajos de impresión"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Trabaj. impresión activos"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Trabajo de impresión"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Reiniciar"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Cancelar"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Imprimiendo <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Error de impresora <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"La impresora bloqueó <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batería"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Lo que ha utilizado la batería"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Sin datos de uso de batería"</string>
@@ -1513,7 +1527,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Intentar conectarse a un dispositivo Bluetooth diferente"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Batería usada por la aplicación"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Detener o desinstalar la aplicación"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Controla manualmente el GPS para que la aplicación no lo use"</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"La aplicación podrá ofrecer una configuración para reducir el uso de la batería."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Batería utilizada por el usuario"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que se desconectó"</string>
@@ -1938,10 +1953,10 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desactivado"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permisivo"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Obligatorio"</string>
-    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Es posible que la red esté supervisada."</string>
+    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Es posible que la red esté supervisada"</string>
     <string name="done_button" msgid="1991471253042622230">"Listo"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Supervisión de red"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Este dispositivo es administrado por: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nEl administrador puede supervisar la actividad de la red, incluidos los mensajes de correo electrónico, las aplicaciones y los sitios web seguros.\n\nPara obtener más información, comunícate con el administrador."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Este dispositivo está administrado por:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nEl administrador puede supervisar la actividad de la red, incluido el correo electrónico, las aplicaciones y los sitios web seguros.\n\nPara obtener más información, comunícate con el administrador."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Un tercero puede supervisar la actividad de la red,\nincluidos los mensajes de correo electrónico, las aplicaciones y los sitios web seguros.\n\nEsto es posible debido a que hay una credencial de confianza instalada en el dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Comprobar credenciales de confianza"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Usuarios"</string>
@@ -1990,15 +2005,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicaciones con restricciones"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Expandir config. a aplicación"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Desinstalar esta aplicación"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Esta configuración afecta a todos los usuarios de esta tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Esta configuración afecta a todos los usuarios de este dispositivo."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Cambiar idioma"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Cambiar tamaño de fuente"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Pagos"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"NO TRADUCIR"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Presionar y pagar"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Envía tu pago con solo presionar."</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Más información"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Buscar aplicaciones"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"¿Establecer como preferencia?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"¿Quieres usar <xliff:g id="APP">%1$s</xliff:g> siempre al tocar y pagar?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"¿Quieres usar siempre <xliff:g id="APP_0">%1$s</xliff:g> en lugar de <xliff:g id="APP_1">%2$s</xliff:g> al tocar y pagar?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"¿Quieres usar <xliff:g id="APP">%1$s</xliff:g> siempre al presionar y pagar?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"¿Quieres usar siempre <xliff:g id="APP_0">%1$s</xliff:g> en lugar de <xliff:g id="APP_1">%2$s</xliff:g> al presionar y pagar?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restricciones"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Eliminar restricciones"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Cambiar PIN"</string>

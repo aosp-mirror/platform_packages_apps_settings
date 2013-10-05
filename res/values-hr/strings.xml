@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Način"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Visoka preciznost"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Štednja baterije"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Senzori uređaja"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Samo uređaj"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Lokacija je isključena"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Nedavni zahtjevi za lokaciju"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nijedna aplikacija nije nedavno zatražila lokaciju"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Postavke aplikacije"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Usluge lociranja"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Visoka potrošnja baterije"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Niska potrošnja baterije"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Način lokacije"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Želite li upotrijebiti uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Na putu do pisača vaš dokument može proći kroz jedan ili više poslužitelja."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nema instaliranih usluga"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Nije pronađen nijedan pisač"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Postavke"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Dodavanje pisača"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Uključeno"</string>
@@ -1444,8 +1445,21 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Dodaj pisač"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Pretraži"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Traženje pisača"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Usluga je onemogućena"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Zadaci ispisa"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Aktivni zadaci ispisa"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Zadatak ispisa"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Ponovo pokreni"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Odustani"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Ispisivanje zadatka <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Pogreška pisača <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Pisač je blokirao <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Baterija"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Što troši bateriju"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Podaci o iskorištenosti baterije nisu dostupni."</string>
@@ -1513,7 +1527,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Pokušajte se povezati s drugim Bluetooth uređajem"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Baterija iskorištena upotrebom aplikacija"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Zaustavite ili deinstalirajte aplikaciju"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Ručno upravljajte GPS-om kako biste spriječili da ga aplikacija upotrebljava"</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Aplikacija možda nudi postavke za smanjenje potrošnje baterije"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Baterija koju upotrebljava korisnik"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> od isključivanja"</string>
@@ -1941,7 +1956,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Mreža se možda nadzire"</string>
     <string name="done_button" msgid="1991471253042622230">"Završeno"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Nadzor mreže"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Ovim uređajem upravlja: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nVaš administrator može nadzirati vašu mrežnu aktivnost, uključujući e-poštu, aplikacije i sigurne web-lokacije.\n\nZa više informacija obratite se administratoru."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Tim uređajem upravlja:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nVaš administrator može nadzirati vaše aktivnosti na mreži, uključujući e-poštu, aplikacije i sigurne web-lokacije.\n\nZa više informacija obratite se svom administratoru."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Treća strana može nadzirati vaše mrežne\naktivnosti, uključujući e-poštu, aplikacije i sigurne web-lokacije.\n\nTo omogućuje pouzdana vjerodajnica instalirana na vašem uređaju."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Provjeri pouzdane vjerodajnice"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Korisnici"</string>
@@ -1990,15 +2005,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikacije s ograničenjima"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Proširi postavke za aplikaciju"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Deinstaliraj aplikaciju"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Ova postavka utječe na sve korisnike na ovom tabletu."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Ova postavka utječe na sve korisnike na ovom telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Promjena jezika"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Promjena veličine fonta"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Plaćanja"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Dodirni i plati"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Platite samo jednim dodirom"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Saznajte više"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Traženje aplikacija"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Želite li to postaviti kao željeni način?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Uvijek upotrijebiti aplikaciju <xliff:g id="APP">%1$s</xliff:g> za opciju Dodirni i plati?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Uvijek upotrijebiti aplikaciju <xliff:g id="APP_0">%1$s</xliff:g> umjesto aplikacije <xliff:g id="APP_1">%2$s</xliff:g> za opciju Dodirni i plati?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Uvijek upotrijebiti aplikaciju <xliff:g id="APP">%1$s</xliff:g> za opciju Dodirni i plati?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Uvijek upotrijebiti aplikaciju <xliff:g id="APP_0">%1$s</xliff:g> umjesto aplikacije <xliff:g id="APP_1">%2$s</xliff:g> za opciju Dodirni i plati?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ograničenja"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Uklanjanje ograničenja"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Promjena PIN-a"</string>

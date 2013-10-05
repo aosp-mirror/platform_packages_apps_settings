@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Tila"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Suuri tarkkuus"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Virransäästötila"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Laitteen anturit"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Vain laitteella"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Sijainti ei käytössä"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Viimeisimmät sijaintipyynnöt"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Mikään sovellus ei ole pyytänyt sijaintia äskettäin"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Sovellusasetukset"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Sijaintipalvelut"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Suuri akun kulutus"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Vähäinen akun kulutus"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Paikannustila"</string>
@@ -1365,12 +1365,9 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> t <xliff:g id="MINUTES">%2$d</xliff:g> min <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> min <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
-    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
-    <skip />
+    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> pv <xliff:g id="HOURS">%2$d</xliff:g> t <xliff:g id="MINUTES">%3$d</xliff:g> min"</string>
+    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> t <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> min"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Käyttötiedot"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Käyttötiedot"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Lajittelu:"</string>
@@ -1437,9 +1434,9 @@
     <string name="print_settings" msgid="4742428530112487843">"Tulostetaan"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Tulostuspalvelut"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Otetaanko palvelu <xliff:g id="SERVICE">%1$s</xliff:g> käyttöön?"</string>
-    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
-    <skip />
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Asiakirja saattaa kulkea yhden tai useamman palvelimen kautta matkalla tulostimeen."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Ei asennettuja palveluita"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Tulostimia ei löydy"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Asetukset"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Lisää tulostimia"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Käytössä"</string>
@@ -1447,12 +1444,22 @@
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Lisää palvelu"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Lisää tulostin"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Haku"</string>
-    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
+    <string name="print_searching_for_printers" msgid="4680248496457576358">"Etsitään tulostimia"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Palvelu poistettu käytöstä"</string>
+    <string name="print_print_jobs" msgid="3582094777756968793">"Tulostustyöt"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Tulostustyö"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Käynnistä uudelleen"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Peruuta"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Tulostetaan <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Tulostinvirhe työlle <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Tulostin esti työn <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
     <skip />
-    <!-- no translation found for print_print_jobs (3582094777756968793) -->
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
     <skip />
-    <!-- no translation found for print_active_print_jobs (5055524262003598199) -->
-    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akku"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Mikä on käyttänyt akkua"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Akun käyttötietoja ei saatav."</string>
@@ -1520,7 +1527,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Yritä yhdistää eri Bluetooth-laitteeseen."</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Sovelluksen käyttämä akun virta"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Pysäytä tai poista sovellus"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Hallinnoi GPS:ää manuaalisesti estääksesi sovellusta käyttämästä sitä."</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Sovellus saattaa tarjota käyttöön asetuksia, joiden avulla akun käyttöä voidaan vähentää."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Käyttäjien käyttämä akun virta"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> laturin irrottamisen jälkeen"</string>
@@ -1532,19 +1540,13 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Käsittelytiedot"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Käsittelyn tarkat tiedot"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Muistin käyttö"</string>
-    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
-    <skip />
-    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
-    <skip />
-    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
-    <skip />
-    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"<xliff:g id="TYPE">%1$s</xliff:g> sovellusta aikajakson <xliff:g id="TIME">%2$s</xliff:g> kuluessa"</string>
+    <string name="process_stats_type_background" msgid="3934992858120683459">"Tausta"</string>
+    <string name="process_stats_type_foreground" msgid="7713118254089580536">"Etuala"</string>
+    <string name="process_stats_type_cached" msgid="6314925846944806511">"Välimuistissa"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Laitteen muistin nykyinen tila: <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
-    <skip />
-    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
-    <skip />
+    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"Keskimääräinen RAM-muistin käyttö"</string>
+    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"RAM-muistin käytön enimmäismäärä"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Käyttöaika"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Palvelut"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Kesto"</string>
@@ -1552,18 +1554,12 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 tuntia"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 tuntia"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 päivä"</string>
-    <!-- no translation found for menu_show_system (8864603400415567635) -->
-    <skip />
-    <!-- no translation found for menu_use_uss (467765290771543089) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
-    <skip />
-    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
-    <skip />
+    <string name="menu_show_system" msgid="8864603400415567635">"Näytä järjestelmä"</string>
+    <string name="menu_use_uss" msgid="467765290771543089">"Käytä USS-muistimääritystä"</string>
+    <string name="menu_proc_stats_type" msgid="4700209061072120948">"Tilastojen tyyppi"</string>
+    <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"Tausta"</string>
+    <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"Etuala"</string>
+    <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"Välimuistissa"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Äänisyöte ja -tulo"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Äänisyöte- ja -tulo-asetukset"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Puhehaku"</string>
@@ -1960,7 +1956,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Verkkoa saatetaan valvoa"</string>
     <string name="done_button" msgid="1991471253042622230">"Valmis"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Verkon valvonta"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Tämän laitteen hallinnoija on <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nJärjestelmänvalvoja pystyy valvomaan toimiasi verkossa, esimerkiksi sähköpostin, sovellusten ja turvallisten verkkosivustojen käyttöä.\n\nSaat lisätietoja järjestelmänvalvojalta."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Tämän laitteen hallinnoija on:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nJärjestelmänvalvoja pystyy valvomaan toimiasi verkossa, esimerkiksi sähköpostin, sovellusten ja turvallisten verkkosivustojen käyttöä.\n\nSaat lisätietoja järjestelmänvalvojalta."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Kolmas osapuoli pystyy valvomaan toimiasi verkossa,\nesimerkiksi sähköpostin, sovellusten ja turvallisten verkkosivustojen käyttöä.\n\nLaitteeseesi asennetut luotetut käyttöoikeustiedot tekevät tämän mahdolliseksi."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Tarkista luotetut käyttöoikeustiedot"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Käyttäjät"</string>
@@ -2009,15 +2005,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Rajoitetut sovellukset"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Laajenna sovelluksen asetuksia"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Poista tämä sovellus"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Tämä asetus vaikuttaa kaikkiin tämän tablet-laitteen käyttäjiin."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Tämä asetus vaikuttaa kaikkiin tämän puhelimen käyttäjiin."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Vaihda kieltä"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Muuta kirjasinkokoa"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Maksut"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"ÄLÄ KÄÄNNÄ TÄTÄ"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Napauttamalla maksaminen"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Maksa helposti napauttamalla"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Lisätietoja"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Löydä sovelluksia"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Valitaanko asetukseksi?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Käytetäänkö sovellusta <xliff:g id="APP">%1$s</xliff:g> aina kun maksat napauttamalla?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Käytetäänkö sovellusta <xliff:g id="APP_0">%1$s</xliff:g> sovelluksen <xliff:g id="APP_1">%2$s</xliff:g> sijaan aina kun maksat napauttamalla?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Käytetäänkö sovellusta <xliff:g id="APP">%1$s</xliff:g> kun maksat napauttamalla?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Käytetäänkö sovellusta <xliff:g id="APP_0">%1$s</xliff:g> sovelluksen <xliff:g id="APP_1">%2$s</xliff:g> sijaan kun maksat napauttamalla?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Rajoitukset"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Poista rajoitukset"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Vaihda PIN-koodi"</string>
