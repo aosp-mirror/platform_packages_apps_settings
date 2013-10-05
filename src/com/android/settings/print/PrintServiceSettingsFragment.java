@@ -640,6 +640,11 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
 
         @Override
+        public boolean isEnabled(int position) {
+            return false;
+        }
+
+        @Override
         public Loader<List<PrinterInfo>> onCreateLoader(int id, Bundle args) {
             if (id == LOADER_ID_PRINTERS_LOADER) {
                 return new PrintersLoader(getActivity());
