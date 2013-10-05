@@ -1005,7 +1005,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Localização desativada"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Pedidos de localização recentes"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nenhuma aplicação solicitou a localização recentemente"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Definições da aplicação"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Serviços de localização"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Utilização de bateria elevada"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Utilização de bateria baixa"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Modo de localização"</string>
@@ -1378,6 +1378,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Definições de acessibilidade"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"serviços"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"SISTEMA"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Visualização"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Legendas"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestos de ampliação"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Quando esta funcionalidade está ativada, pode aumentar ou diminuir o zoom ao tocar três vezes no ecrã.\n\nEnquanto estiver a aumentar o zoom, pode:\n"<ul><li>"Deslocar: arraste dois ou mais dedos no ecrã."</li>\n<li>"Ajustar o nível de zoom: junte dois ou mais dedos ou afaste-os."</li></ul>\n\n"Também pode aumentar temporariamente o que estiver por baixo do seu dedo ao tocar três vezes sem soltar. Neste estado aumentado, pode arrastar o dedo para explorar diferentes partes do ecrã. Levante o dedo para voltar ao estado anterior.\n\nNota: O toque triplo para aumentar funciona em todo o lado, exceto no teclado e na barra de navegação."</string>
@@ -1392,6 +1393,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Botão ligar/deslig. fim chamada"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Dizer palavras-passe"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Atraso ao manter premida a tecla"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Melhoria de contraste"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversão de cores"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Correção de espaço de cor"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Mostrar nas Definições rápidas"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Brilho"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Contraste"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Modo de inversão"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Modo de correção"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Substituído por <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Desativado"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Monocromacia"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomalia (vermelho-verde)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomalia (vermelho-verde)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomalia (azul-amarelo)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopia (verde)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopia (vermelho)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopia (azul)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configurações"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ativado"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Desativado"</string>
@@ -1460,7 +1478,7 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Bateria utilizada desde que foi desligado"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Bateria utilizada desde a reposição"</string>
-    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> de bateria"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> em bateria"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que foi desligado"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"A carregar"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Ecrã activo"</string>
@@ -1521,7 +1539,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Tentar ligação a um aparelho Bluetooth diferente"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Bateria utilizada pela aplicação"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Parar ou desinstalar a aplicação"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Controlar manualmente o GPS para impedir que a aplicação o utilize"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Selecionar o modo de poupança de bateria"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"A aplicação pode sugerir definições para reduzir a utilização da bateria"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Bateria usada pelo utilizador"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que foi desligado"</string>
@@ -1798,6 +1816,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Depurar sobreposição GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Desativ. sobreposições HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Utilizar sempre GPU para a composição do ecrã"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Simular espaço de cor"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ativar vestígios OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar limit. do esquema"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Apresentar limites de clipes, margens, etc."</string>
@@ -1949,7 +1968,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"A rede pode ser monitorizada"</string>
     <string name="done_button" msgid="1991471253042622230">"Concluído"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Monitorização da rede"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Este dispositivo é gerido por: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nO seu administrador pode monitorizar a sua atividade de rede, incluindo mensagens de email, aplicações e Websites seguros.\n\nPara obter mais informações, contacte o seu administrador."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Este dispositivo é gerido por:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nO seu administrador pode monitorizar a sua atividade de rede, incluindo emails, aplicações e Websites protegidos.\n\nPara mais informações, contacte o seu administrador."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"A sua atividade\nde rede, incluindo mensagens de email, aplicações e Websites seguros, pode ser monitorizada por terceiros.\n\nEsta situação é possível graças a uma credencial fidedigna instalada no seu dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Verificar credenciais fidedignas"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Utilizadores"</string>
@@ -1998,6 +2017,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicações com restrições"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Expandir defin. da aplicação"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Desinstalar esta aplicação"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"As definições de Página inicial serão ocultadas até instalar outra aplicação da Página inicial."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Esta definição afeta todos os utilizadores deste tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Esta definição afeta todos os utilizadores deste telemóvel."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Alterar idioma"</string>

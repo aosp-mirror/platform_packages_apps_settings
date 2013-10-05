@@ -1006,7 +1006,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Standort aus"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Letzte Standortanfragen"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Keine App hat kürzlich den Standort abgefragt."</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"App-Einstellungen"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Standortdienste"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Hoher Akkuverbrauch"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Geringer Akkuverbrauch"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Standortmodus"</string>
@@ -1379,6 +1379,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Einstellungen für Bedienungshilfen"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Dienste"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"System"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Anzeige"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Untertitel"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Vergrößerungsbewegungen"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Wenn diese Funktion aktiviert ist, können Sie heranzoomen und herauszoomen, indem Sie drei Mal auf den Bildschirm tippen.\n\nWenn Sie herangezoomt haben, können Sie:\n"<ul><li>"Schwenken: mindestens 2 Finger über den Bildschirm ziehen"</li>\n<li>"Zoomstufe anpassen: mindestens 2 Finger zusammen- oder auseinanderziehen"</li></ul>\n\n"Sie können auch das, was sich unter Ihrem Finger befindet, vorübergehend vergrößern, indem Sie drei Mal tippen und halten. In diesem vergrößerten Zustand können Sie Ihren Finger ziehen, um verschiedene Bereiche des Bildschirms zu erkunden. Heben Sie Ihren Finger an, um zum vorherigen Zustand zurückzukehren.\n\nHinweis: Das dreimalige Tippen zur Vergrößerung funktioniert überall außer in der Tastatur und in der Navigationsleiste."</string>
@@ -1393,6 +1394,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Ein/Aus beendet Anruf"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Passwörter aussprechen"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Reaktionszeit Berühren/Halten"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Kontrastverbesserung"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Farbumkehr"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Farbraumkorrektur"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"In Schnelleinstellungen anzeigen"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Helligkeit"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Kontrast"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Umkehrmodus"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Korrekturmodus"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Außer Kraft gesetzt von \"<xliff:g id="TITLE">%1$s</xliff:g>\""</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Deaktiviert"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Farbenblindheit"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomalie (Rot-Grün-Sehschwäche)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomalie (Rot-Grün-Sehschwäche)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomalie (Blau-Gelb-Sehschwäche)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopie (Grünblindheit)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopie (Rotblindheit)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopie (Blaublindheit)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Einstellungen"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"An"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Aus"</string>
@@ -1522,7 +1540,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Mit einem anderen Bluetooth-Gerät verbinden"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Akkuverbrauch durch App"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"App anhalten oder deinstallieren"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"GPS manuell steuern, damit die App es nicht verwenden kann."</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Energiesparmodus auswählen"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Die App bietet unter Umständen Einstellungen für einen geringeren Akkuverbrauch."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Akkuverbrauch durch Nutzer"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> seit dem Ausstecken"</string>
@@ -1799,6 +1817,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Debugging – GPU-Überschneidung"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW-Overlays deaktivieren"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"GPU immer für Bildschirmaufbau verwenden"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Farbraum simulieren"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL-Traces aktivieren"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Layoutgrenzen einblenden"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Clip-Begrenzungen, Ränder usw. anzeigen"</string>
@@ -1950,7 +1969,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Das Netzwerk wird möglicherweise überwacht."</string>
     <string name="done_button" msgid="1991471253042622230">"Fertig"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Netzwerküberwachung"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Dieses Gerät wird von <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> verwaltet.\n\nIhr Administrator kann Ihre Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nWenden Sie sich für weitere Informationen an Ihren Administrator."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Dieses Gerät wird verwaltet von:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nIhr Administrator kann Ihre Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nWenden Sie sich für weitere Informationen an Ihren Administrator."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Dritte können Ihre Netzwerkaktivitäten\nüberwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nDies wird durch vertrauenswürdige Anmeldedaten ermöglicht, die auf Ihrem Gerät installiert sind."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Vertrauenswürdige Anmeldedaten überprüfen"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Nutzer"</string>
@@ -1999,6 +2018,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Apps mit Einschränkungen"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"App-Einstellungen erweitern"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Diese App deinstallieren"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"Die Starteinstellungen werden erst dann angezeigt, wenn Sie eine weitere Start-App installieren."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Diese Einstellung betrifft alle Nutzer auf diesem Tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Diese Einstellung betrifft alle Nutzer auf diesem Telefon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Sprache ändern"</string>

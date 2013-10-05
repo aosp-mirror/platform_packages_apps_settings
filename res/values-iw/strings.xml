@@ -1005,7 +1005,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"מיקום כבוי"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"בקשות של מיקומים אחרונים"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"אין אפליקציות שביקשו מיקום לאחרונה"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"הגדרות אפליקציה"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"שירותי מיקום"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"שימוש בסוללה מלאה"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"שימוש בסוללה חלשה"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"מצב מיקום"</string>
@@ -1378,6 +1378,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"הגדרות נגישות"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"שירותים"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"מערכת"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"תצוגה"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"כיתובים"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"תנועות לשינוי גודל"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"כשתכונה זו מופעלת, ניתן להתקרב ולהתרחק באמצעות הקשה משולשת על המסך.\n\nבזמן שההצגה מוגדלת ניתן:\n"<ul><li>"להזיז לצדדים: גרור שתי אצבעות או יותר לאורך המסך."</li>\n<li>"לשנות את מידת ההגדלה: עשה תנועת צביטה באמצעות שתי אצבעות או הרחק אותן אחת מהשנייה."</li></ul>\n\n"ניתן גם להגדיל באופן זמני את הפריט שמתחת לאצבע על ידי הקשה משולשת והחזקה. במצב הגדלה זה ניתן לגרור את האצבע על מנת להציג כך חלקים שונים במסך. הרם את האצבע כדי לחזור למצב הקודם.\n\nשים לב: הקשה משולשת להגדלה פועלת בכל מקום מלבד במקלדת ובסרגל הניווט."</string>
@@ -1392,6 +1393,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"לחצן ההפעלה מסיים שיחה"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"אמירת סיסמאות"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"עיכוב של נגיעה והחזקה"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"הגברת ניגודיות"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"היפוך צבעים"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"תיקון של מרחב צבעים"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"הצג בהגדרות מהירות"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"בהירות"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"ניגודיות"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"מצב היפוך"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"מצב תיקון"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"נעקף על ידי <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"מושבת"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"מונוכרומטיה"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"דוטרנומליה (אדום-ירוק)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"פרוטנומליה (אדום-ירוק)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"טריטנומליה (כחול-צהוב)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"עיוורון לירוק"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"עיוורון לאדום"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"עיוורון לכחול"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"הגדרות"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"פועל"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"כבוי"</string>
@@ -1521,7 +1539,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"‏נסה להתחבר למכשיר Bluetooth אחר"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"צריכת הסוללה על ידי אפליקציות"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"הפסק את האפליקציה או הסר אותה"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"‏שלוט ב-GPS באופן ידני כדי למנוע מהאפליקציה להשתמש בו"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"בחר במצב חיסכון של חיי סוללה"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"ייתכן שהאפליקציה מציעה הגדרות לצמצום צריכת הסוללה"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"סוללה בשימוש על ידי משתמש"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> מאז הניתוק"</string>
@@ -1798,6 +1816,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"‏חריגה בניקוי באגים ב-GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"‏השבת שכבות על של HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"‏השתמש תמיד ב-GPU להרכבת מסך"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"צור הדמיה של מרחב צבעים"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"‏הפעל מעקבי OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"הצג את גבולות הפריסה"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"הצג גבולות קליפ, שוליים וכו\'"</string>
@@ -1949,7 +1968,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ייתכן שהרשת מנוטרת"</string>
     <string name="done_button" msgid="1991471253042622230">"בוצע"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"ניטור רשתות"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"המכשיר הזה מנוהל על ידי: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>‏.\n\nמנהל המערכת שלך יכול לנטר את הפעילות ברשת, כולל הודעות דוא\"ל, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף, צור קשר עם מנהל המערכת שלך."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"המכשיר הזה מנוהל על ידי:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nמנהל המערכת יכול לנטר את הפעילות שלך ברשת, כולל דוא\"ל, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף, פנה אל מנהל המערכת."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"צד שלישי יכול לנטר את הפעילות שלך\nברשת, כולל הודעות דוא\"ל, אפליקציות ואתרים מאובטחים.\n\nמצב זה מתאפשר על ידי פרטי כניסה מהימנים המותקנים במכשיר שלך."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"בדוק פרטי כניסה מהימנים"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"משתמשים"</string>
@@ -1998,6 +2017,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"אפליקציות והגבלות"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"הרחב את ההגדרות עבור האפליקציה"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"הסר את התקנת האפליקציה הזו"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"הגדרות דף הבית יוסתרו עד שתתקין אפליקציה אחרת בדף הבית."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"הגדרה זו משפיעה על כל המשתמשים בטאבלט הזה."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"הגדרה זו משפיעה על כל המשתמשים בטלפון הזה."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"שנה שפה"</string>
