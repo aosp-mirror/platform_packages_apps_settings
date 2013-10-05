@@ -33,6 +33,12 @@
             android:title="@string/title_collapse_panel"
             android:summary="@string/summary_collapse_panel" />
 
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="qs_hide_text"
+            android:title="@string/title_qs_hide_text"
+            android:defaultValue="false"
+            android:summary="@string/summary_qs_hide_text" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
