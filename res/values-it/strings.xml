@@ -317,7 +317,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"Dati utente"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostra info profilo in schermata di blocco"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informazioni profilo"</string>
-    <string name="location_settings_title" msgid="1369675479310751735">"Posizione"</string>
+    <string name="location_settings_title" msgid="1369675479310751735">"Geolocalizzazione"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Sicurezza"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Imposta La mia posizione, sblocco schermo, blocco SIM, blocco cred."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Imposta La mia posizione, sblocco schermo, blocco archivio credenziali"</string>
@@ -531,15 +531,15 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Elimina"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Fine"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Nome"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Attiva"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Non attiva"</string>
+    <string name="wifi_display_summary_on" msgid="3695429596604962531">"ON"</string>
+    <string name="wifi_display_summary_off" msgid="2445210133184740611">"OFF"</string>
     <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Disattivata"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Consenti lo scambio di dati quando il tablet tocca un altro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Consenti lo scambio di dati quando il telefono tocca un altro dispositivo"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Pronto a trasmettere i contenuti dell\'applicazione tramite NFC"</string>
-    <string name="android_beam_off_summary" msgid="4663095428454779138">"Non attivo"</string>
+    <string name="android_beam_off_summary" msgid="4663095428454779138">"OFF"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Non disponibile perché la tecnologia NFC non è attiva"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
     <string name="android_beam_explained" msgid="6981652347448777459">"Quando questa funzione è attiva, puoi trasferire contenuti di applicazioni su un altro dispositivo che supporta la tecnologia NFC tenendo vicini i due dispositivi. Puoi trasferire, ad esempio, pagine dell\'applicazione Browser, video di YouTube, contatti di Persone e altri dati.\n\nÈ sufficiente avvicinare i dispositivi (generalmente mettendo a contatto le due parti posteriori), quindi toccare lo schermo. L\'applicazione stabilisce i dati da trasferire."</string>
@@ -758,7 +758,7 @@
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Entrambi i casi"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Durante la ricarica"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Quando inserito nel dock"</string>
-    <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Disattivato"</string>
+    <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"OFF"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Per stabilire che cosa accade quando il telefono è inserito nel dock e/o in stand-by, attiva Daydream."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"Quando attivare Daydream"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Inizia subito"</string>
@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Modalità"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Alta precisione"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Risparmio della batteria"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Sensori dispositivo"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Solo del dispositivo"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Geolocalizzazione non attiva"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Richieste di posizione recenti"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nessuna applicazione ha richiesto la posizione di recente"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Impostazioni app"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Servizi di localizzazione"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Elevato utilizzo della batteria"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Basso utilizzo della batteria"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Modalità di geolocalizzazione"</string>
@@ -1382,8 +1382,8 @@
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesti di ingrandimento"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Quando questa funzione è attiva puoi aumentare e diminuire lo zoom toccando tre volte lo schermo.\n\nDopo avere aumentato lo zoom puoi:\n"<ul><li>"Eseguire una panoramica: trascina due o più dita sullo schermo."</li>\n<li>"Regolare il livello di zoom: unisci due o più dita come per fare un pizzicotto o allontanale."</li></ul>\n\n"Puoi anche ingrandire temporaneamente l\'area su cui hai il dito toccando tre volte e tenendo premuto. Nello stato ingrandito puoi trascinare il dito per esaminare parti diverse dello schermo. Solleva il dito per tornare allo stato precedente.\n\nNota. Il tocco triplo per ingrandire funziona ovunque tranne che per la tastiera e la barra di navigazione."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Collegamento Accessibilità"</string>
-    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Attiva"</string>
-    <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Disattivato"</string>
+    <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"ON"</string>
+    <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"OFF"</string>
     <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"Quando questa funzione è attiva, puoi attivare rapidamente le funzioni di accessibilità in due passaggi:\n\nPassaggio 1. Premi e tieni premuto il tasto di accensione fino all\'emissione di un suono o una vibrazione.\n\nPassaggio 2. Tocca con due dita e tieni premuto finché senti un suono di conferma.\n\nSe sul dispositivo sono configurati più utenti e utilizzi questa scorciatoia nella schermata di blocco, l\'accessibilità viene attivata temporaneamente fino allo sblocco del dispositivo."</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"Testo grande"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"Ingrandimento schermo"</string>
@@ -1393,8 +1393,8 @@
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Pronuncia le password"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Ritardo tocco e pressione"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Impostazioni"</string>
-    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Attiva"</string>
-    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Non attiva"</string>
+    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"ON"</string>
+    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"OFF"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Anteprima"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Opzioni standard"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Lingua"</string>
@@ -1436,16 +1436,30 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Utilizzare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Il tuo documento potrebbe attraversare uno o più server per raggiungere la stampante."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nessun servizio installato"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Nessuna stampante trovata"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Impostazioni"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Aggiungi stampanti"</string>
-    <string name="print_feature_state_on" msgid="8098901852502441048">"Attiva"</string>
-    <string name="print_feature_state_off" msgid="7294876968403966040">"Non attiva"</string>
+    <string name="print_feature_state_on" msgid="8098901852502441048">"ON"</string>
+    <string name="print_feature_state_off" msgid="7294876968403966040">"OFF"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Aggiungi servizio"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Aggiungi stampante"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Cerca"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Ricerca di stampanti"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Servizio disabilitato"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Processi di stampa"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Processi di stampa attivi"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Processo di stampa"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Riavvia"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Annulla"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Stampa di <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Errore della stampante: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"La stampante ha bloccato <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Casella di ricerca visualizzata"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Casella di ricerca nascosta"</string>
+  <plurals name="print_search_result_count_utterance">
+    <item quantity="one" msgid="1322401991353603285">"<xliff:g id="COUNT">%1$s</xliff:g> stampante trovata"</item>
+    <item quantity="other" msgid="460211409510874128">"<xliff:g id="COUNT">%1$s</xliff:g> stampanti trovate"</item>
+  </plurals>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batteria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumo batteria"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Dati uso batteria non disp."</string>
@@ -1513,7 +1527,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Prova a connetterti a un altro dispositivo Bluetooth"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Batteria utilizzata dall\'applicazione"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Interrompi o disinstalla l\'applicazione"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Controlla manualmente il GPS per impedire all\'applicazione di utilizzarlo"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Seleziona modalità di risparmio della batteria"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"L\'applicazione potrebbe offrire impostazioni per ridurre l\'utilizzo della batteria"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Batteria utilizzata dall\'utente"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> dallo scollegamento"</string>
@@ -1604,8 +1618,8 @@
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Aggiornamento impostazione Wi‑Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Aggiornamento impostazione Bluetooth"</string>
     <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"attivo"</string>
-    <string name="gadget_state_off" msgid="5220212352953066317">"non attivo"</string>
+    <string name="gadget_state_on" msgid="6909119593004937688">"ON"</string>
+    <string name="gadget_state_off" msgid="5220212352953066317">"OFF"</string>
     <string name="gadget_state_turning_on" msgid="3395992057029439039">"attivazione"</string>
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"disattivazione"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi‑Fi"</string>
@@ -1616,7 +1630,7 @@
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"auto"</string>
     <string name="gadget_brightness_state_full" msgid="6814570109772137631">"massima"</string>
     <string name="gadget_brightness_state_half" msgid="3696671957608774204">"media"</string>
-    <string name="gadget_brightness_state_off" msgid="946382262872753084">"non attiva"</string>
+    <string name="gadget_brightness_state_off" msgid="946382262872753084">"OFF"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Archivio credenziali"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installa da archivio"</string>
@@ -1941,7 +1955,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"La rete potrebbe essere monitorata"</string>
     <string name="done_button" msgid="1991471253042622230">"Fine"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Monitoraggio rete"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Questo dispositivo è gestito da: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nIl tuo amministratore è in grado di monitorare l\'attività della rete, inclusi siti web sicuri, email e app.\n\nPer ulteriori informazioni, contatta il tuo amministratore."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Questo dispositivo è gestito da:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nL\'amministratore è in grado di monitorare la tua attività di rete, inclusi siti web protetti, email e app.\n\nPer ulteriori informazioni rivolgiti all\'amministratore."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Una terza parte è in grado di monitorare l\'attività della\nrete, inclusi siti web sicuri, email e app.\n\nCiò è reso possibile da una credenziale attendibile installata sul dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Verifica credenziali attendibili"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Utenti"</string>
@@ -1990,15 +2004,18 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applicazioni con limitazioni"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Espandi impostazioni per app"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Disinstalla questa applicazione"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"Le impostazioni proprietarie saranno nascoste fino a quando non installi un\'altra applicazione proprietaria."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Questa impostazione influisce su tutti gli utenti di questo tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Questa impostazione influisce su tutti gli utenti di questo telefono."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Cambia lingua"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Cambia le dimensioni del carattere"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Pagamenti"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Touch &amp; Pay"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Paga con un tocco"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Ulteriori informazioni"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Trova app"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Impostare come preferenza?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Utilizzare sempre <xliff:g id="APP">%1$s</xliff:g> quando tocchi e paghi?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Utilizzare sempre <xliff:g id="APP_0">%1$s</xliff:g> anziché <xliff:g id="APP_1">%2$s</xliff:g> quando tocchi e paghi?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Utilizzare sempre <xliff:g id="APP">%1$s</xliff:g> per Touch &amp; Pay?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Utilizzare sempre <xliff:g id="APP_0">%1$s</xliff:g> anziché <xliff:g id="APP_1">%2$s</xliff:g> per Touch &amp; Pay?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Limitazioni"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Rimuovi limitazioni"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Cambia PIN"</string>

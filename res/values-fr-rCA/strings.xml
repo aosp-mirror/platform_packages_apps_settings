@@ -756,7 +756,7 @@
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Écran de veille interactif"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Lorsque l\'appareil est installé sur la station d\'accueil ou lorsqu\'il est en veille et en charge"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Les deux"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"En charge WL: 92"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"En charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Sur la station d\'accueil"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Désactivé"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"Pour contrôler le comportement du téléphone lorsqu\'il se trouve sur une station d\'accueil et/ou lorsqu\'il est en veille, activez l\'écran de veille interactif."</string>
@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Mode"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Haute précision"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Économiser la pile"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Capteurs de l\'appareil"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Appareil uniquement"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Localisation désactivée"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Demandes localisation récentes"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Aucune application n\'a récemment demandé l\'accès à votre position"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Paramètres de l\'application"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Services de localisation"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Forte utilisation de la pile"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Faible utilisation de la pile"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mode de localisation"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Votre document peut passer par un ou plusieurs serveurs avant d\'arriver à l\'imprimante."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Aucun service installé"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Aucune imprimante trouvée"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Paramètres"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Ajouter des imprimantes"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Activé"</string>
@@ -1444,8 +1445,21 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Ajouter une imprimante"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Rechercher"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Recherche d\'imprimantes en cours..."</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Service désactivé"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Tâches d\'impression"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Tâches impression actives"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Tâches d\'impression"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Recommencer"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Annuler"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Impression de <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> en cours…"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Erreur d\'impression : <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> bloquée par l\'imprimante"</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Répartition·de·l\'utilisation·de·la·batterie"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Info d\'utilisation batterie indispo"</string>
@@ -1513,7 +1527,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Essayez de vous connecter à un autre appareil Bluetooth."</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Batterie utilisée par l\'application"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Arrêter ou désinstaller l\'application"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Contrôler manuellement le GPS pour éviter que l\'application ne l\'utilise"</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"L\'application dispose peut-être de paramètres permettant de réduire l\'utilisation de la batterie."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Batterie utilisée par l\'utilisateur"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1943,7 +1958,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Le réseau peut être surveillé"</string>
     <string name="done_button" msgid="1991471253042622230">"Terminé"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Surveillance réseau"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Cet appareil est géré par : <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nVotre administrateur est en mesure de surveiller l\'activité de votre réseau, y compris les courriels, les applications et les sites Web sécurisés.\n\nPour obtenir plus d\'information à ce sujet, communiquez avec votre administrateur."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Cet appareil est géré au sein du domaine suivant :\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nL\'administrateur de ce domaine a la possibilité de surveiller vos activités sur le réseau, notamment vos courriels, vos applications et les sites Web sécurisés.\n\nPour en savoir plus à ce sujet, communiquez avec votre administrateur."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Un tiers peut surveiller votre activité réseau,\n y compris les courriels, les applications et les sites Web sécurisés.\n\nUn certificat de confiance installé sur votre appareil rend cela possible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Vérifier les certificats de confiance"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Users"</string>
@@ -1992,15 +2007,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applications avec restrictions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Développer paramètres applis"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Désinstaller cette application"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Ce paramètre affecte tous les utilisateurs de cette tablette."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Ce paramètre affecte tous les utilisateurs de cette tablette."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Modifier la langue"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Modifier la taille de la police"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Paiements"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Toucher et payer"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Payez en un toucher sur l\'écran"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"En savoir plus"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Trouver des applications"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Définir comme application de paiement par défaut?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Toujours utiliser <xliff:g id="APP">%1$s</xliff:g> pour les achats tap-and-pay?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Toujours utiliser <xliff:g id="APP_0">%1$s</xliff:g> au lieu de <xliff:g id="APP_1">%2$s</xliff:g> pour les achats tap-and-pay?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Toujours utiliser <xliff:g id="APP">%1$s</xliff:g> pour les achats « toucher et payer »?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Toujours utiliser <xliff:g id="APP_0">%1$s</xliff:g> au lieu de <xliff:g id="APP_1">%2$s</xliff:g> pour les achats « toucher et payer »?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restrictions"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Annuler les restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Modifier le NIP"</string>

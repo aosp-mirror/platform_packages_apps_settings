@@ -139,7 +139,7 @@
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Afbryder ..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"Opretter forbindelse..."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_pairing" msgid="1426882272690346242">"Parrer ..."</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"Parrer..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Unavngiven Bluetooth-enhed"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Søger"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Der blev ikke fundet Bluetooth-enheder."</string>
@@ -307,12 +307,12 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Kræv et blink med øjnene, når der låses op"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Lås automatisk"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter dvale"</string>
-    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Vis ejeroplysninger på låst skærm"</string>
-    <string name="owner_info_settings_title" msgid="2723190010708381889">"Ejeroplysninger"</string>
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Vis tekst fra ejer på låseskærm"</string>
+    <string name="owner_info_settings_title" msgid="2723190010708381889">"Tekst fra ejer"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivér widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Deaktiveret af administrator"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
-    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Indtast den tekst, der skal vises på den låste skærm"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Indtast den tekst, der skal vises på låseskærmen"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Vis brugeroplysninger ved låst skærm"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Brugeroplysninger"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Vis profiloplysninger på låseskærmen"</string>
@@ -689,7 +689,7 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Konfiguration af Wi-Fi-hotspot"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> bærbart Wi-Fi-hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <string name="home_settings" msgid="212375129455718176">"Startside"</string>
+    <string name="home_settings" msgid="212375129455718176">"Startskærm"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skærm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Lyd"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ringetone for telefon"</string>
@@ -962,20 +962,20 @@
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Du skal tegne dit oplåsningsmønster for at bekræfte, at du vil slette USB-lagringen."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Du skal tegne dit oplåsningsmønster for at bekræfte, at du vil slette SD-kortet."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Indstillinger for opkald"</string>
-    <string name="call_settings_summary" msgid="7291195704801002886">"Opsæt voicemail, viderestilling af opkald, ventende opkald, opkalds-id"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB-tethering"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"Konfigurer telefonsvarer, viderestilling af opkald, ventende opkald, opkalds-id"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Netdeling via USB"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Bærbart hotspot"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth-tethering"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Tethering"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"Tethering og bærbart hotspot"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Netdeling via Bluetooth"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Netdeling"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"Netdeling og bærbart hotspot"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-tethering"</string>
-    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB tilsluttet, kontroller for at bruge tethering"</string>
-    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Tethering anvendt"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"Netdeling via USB"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB tilsluttet, kontroller for at bruge netdeling"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Netdeling anvendt"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"Netdeling kan ikke anvendes, når USB-lager er i brug"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB ikke tilsluttet"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Fejl ved USB-tethering"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth-tethering"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Fejl ved netdeling via USB"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Netdeling via Bluetooth"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Deler tablettens internetforbindelse"</string>
     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Deler telefonens internetforbindelse"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Deler tablettens internetforbindelse med 1 enhed"</string>
@@ -986,7 +986,7 @@
     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Deler ikke telefonens internetforbindelse"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"Ikke netdelt"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"Netdeling kan ikke bruges til mere end <xliff:g id="MAXCONNECTION">%1$d</xliff:g> enheder."</string>
-    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Tethering til <xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil blive afbrudt."</string>
+    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Netdelingen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil blive afbrudt."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Hjælp"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilnetværk"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobilabonnement"</string>
@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Tilstand"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Høj nøjagtighed"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Batteribesparelse"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Enhedssensorer"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Kun til enheder"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Placering fra"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Seneste placeringsanmodninger"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Ingen apps har anmodet om placering for nylig"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Appindstillinger"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Placeringstjenester"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Højt batteriforbrug"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Lavt batteriforbrug"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Placeringstilstand"</string>
@@ -1326,8 +1326,8 @@
     <string name="enable_adb" msgid="7982306934419797485">"USB-fejlretning"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Fejlretningstilstand, når USB er tilsluttet"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Tilbagekald tilladelser for USB-fejlfinding"</string>
-    <string name="bugreport_in_power" msgid="4548816486587403971">"Rapportér fejl i menu til startknap"</string>
-    <string name="bugreport_in_power_summary" msgid="5764234382355067053">"Gør det muligt at rapportere fejl i menuen til startknappen"</string>
+    <string name="bugreport_in_power" msgid="4548816486587403971">"Rapportér fejl i menu for slukknap"</string>
+    <string name="bugreport_in_power_summary" msgid="5764234382355067053">"Gør det muligt at rapportere fejl i menuen for slukknappen"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Undgå dvale"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Skærmen går ikke i dvale under opladning"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Aktivér Bluetooth HCI snoop log"</string>
@@ -1335,13 +1335,13 @@
     <string name="select_runtime_title" msgid="649783802363155346">"Vælg kørsel"</string>
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Vælg kørsel"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Genstart for at skifte kørsel fra <xliff:g id="OLD">%1$s</xliff:g> til <xliff:g id="NEW">%2$s</xliff:g>?"</string>
-    <string name="wifi_display_certification" msgid="8611569543791307533">"Trådløs skærmcertificering"</string>
-    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Vis valgmuligheder for trådløs skærmcertificering"</string>
+    <string name="wifi_display_certification" msgid="8611569543791307533">"Certificering af trådløs skærm"</string>
+    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Vis valgmuligheder for certificering af trådløs skærm"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Imiterede placeringer"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillad imiterede placeringer"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Vil du tillade USB-fejlretning?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-fejlretning er kun beregnet til udvikling og kan bruges til at kopiere data mellem din computer og enheden, installere apps på enheden uden meddelelser og læse logdata."</string>
-    <string name="adb_keys_warning_message" msgid="6932230298032192937">"Vil du ophæve adgangen til USB-fejlfinding fra alle computere, du tidligere har godkendt?"</string>
+    <string name="adb_keys_warning_message" msgid="6932230298032192937">"Vil du ophæve adgangen til USB-fejlfinding for alle computere, du tidligere har godkendt?"</string>
     <string name="dev_settings_warning_title" msgid="7244607768088540165">"Vil du tillade udviklingsindstillinger?"</string>
     <string name="dev_settings_warning_message" msgid="2298337781139097964">"Disse indstillinger er kun beregnet til brug i forbindelse med udvikling. De kan forårsage, at din enhed og dens applikationer går ned eller ikke fungerer korrekt."</string>
     <string name="verify_apps_over_usb_title" msgid="4177086489869041953">"Kontrollér apps via USB"</string>
@@ -1399,7 +1399,7 @@
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standard muligheder"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Sprog"</string>
     <string name="captioning_text_size" msgid="6737002449104466028">"Tekststørrelse"</string>
-    <string name="captioning_preset" msgid="8939737196538429044">"Undertekststil"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"Underteksttype"</string>
     <string name="captioning_custom_options_title" msgid="5067500939930322405">"Tilpassede valgmuligheder"</string>
     <string name="captioning_background_color" msgid="9053011212948992570">"Baggrundsfarve"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"Baggrundens gennemsigtighed"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Vil du bruge <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Dit dokument går muligvis gennem én eller flere servere på vej til printeren."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Der er ikke installeret nogen tjenester"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Der blev ikke fundet nogen printere"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Indstillinger"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Tilføj printere"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Til"</string>
@@ -1444,8 +1445,21 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Tilføj printer"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Søg"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Søger efter printere"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Tjenesten er deaktiveret"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Udskriftsjobs"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Aktive udskriftsjobs"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Udskriftsjob"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Genstart"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Annuller"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> udskrives"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> kunne ikke udskrives"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Printeren har blokeret <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Batteri"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Hvad der har brugt batteriet"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Batteribrugsdata utilgængeligt."</string>
@@ -1513,7 +1527,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Prøv at oprette forbindelse til en anden Bluetooth-enhed"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Batteri brugt af app"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Stop eller afinstaller appen"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Administrer GPS manuelt for at forhindre, at appen anvender den"</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Denne app har muligvis indstillinger, der kan reducere batteriforbruget"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Brugerens batteriforbrug"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> siden afbrydelse"</string>
@@ -1618,15 +1633,15 @@
     <string name="gadget_brightness_state_half" msgid="3696671957608774204">"halv"</string>
     <string name="gadget_brightness_state_off" msgid="946382262872753084">"fra"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
-    <string name="credentials_title" msgid="4446234003860769883">"Oplysningslagring"</string>
+    <string name="credentials_title" msgid="4446234003860769883">"Lager for loginoplysninger"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Installer fra lager"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Installer fra SD-kort"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installer certifikater fra lager"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installer certifikater fra SD-kortet"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Ryd oplysninger"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Fjern alle certifikater"</string>
-    <string name="trusted_credentials" msgid="4266945289534242402">"Troværdige loginoplysninger"</string>
-    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vis troværdige CA-certifikater"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"Betroede loginoplysninger"</string>
+    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vis betroede CA-certifikater"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Lagertype"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardwarebaseret"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Kun software"</string>
@@ -1640,9 +1655,9 @@
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Ugyldig adgangskode."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Forkert adgangskode. Du har ét forsøg mere, inden oplysningslagringen slettes."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Forkert adgangskode. Du har <xliff:g id="NUMBER">%1$d</xliff:g> forsøg mere, inden oplysningslagringen slettes."</string>
-    <string name="credentials_erased" msgid="2907836028586342969">"Oplysningslagring er slettet."</string>
+    <string name="credentials_erased" msgid="2907836028586342969">"Lager for loginoplysninger er slettet."</string>
     <string name="credentials_not_erased" msgid="93461830775441220">"Loginlageret kan ikke ryddes."</string>
-    <string name="credentials_enabled" msgid="7588607413349978930">"Oplysningslagring er aktiveret."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"Lager for loginoplysninger er aktiveret."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Du skal angive en pinkode eller adgangskode til skærmlåsen, før du kan bruge lageret for loginoplysninger."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Nødtone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Angiv adfærd ved nødopkald"</string>
@@ -1811,7 +1826,7 @@
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Behold ikke aktiviteter"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Luk hver aktivitet, så snart brugeren forlader den"</string>
     <string name="app_process_limit_title" msgid="4280600650253107163">"Grænse for baggrundsprocesser"</string>
-    <string name="show_all_anrs" msgid="28462979638729082">"Vis \"App svarer ikke\"-meddelelser"</string>
+    <string name="show_all_anrs" msgid="28462979638729082">"Vis alle \"Appen svarer ikke\""</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Vis \"Appen svarer ikke\" for baggrundsapps"</string>
     <string name="experimental_webview" msgid="4492200819033780927">"Eksperimenterende WebView"</string>
     <string name="experimental_webview_summary" msgid="3431620080869482446">"Apps vil bruge det nyeste WebView (beta)"</string>
@@ -1941,8 +1956,8 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Netværket kan være overvåget"</string>
     <string name="done_button" msgid="1991471253042622230">"Luk"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Overvågning af netværk"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Denne enhed administreres af: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nDin administrator kan overvåge dine netværksaktiviteter, herunder dine e-mails, apps og sikre websites.\n\nFå flere oplysninger ved at kontakte din administrator."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"En tredjepart kan overvåge dine netværksaktiviteter, \nherunder dine e-mails, apps og sikre websites.\n\nBetroede loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Denne enhed administreres af:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nAdministratoren kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"En tredjepart kan overvåge dine netværksaktiviteter, \nf.eks. dine e-mails, apps og sikre websites.\n\nBetroede loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Kontrollér betroede loginoplysninger"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Brugere"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Brugere og profiler"</string>
@@ -1961,10 +1976,10 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Bruger"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Begrænset profil"</string>
     <string name="user_add_user_title" msgid="3961861593718285403">"Tilføj ny bruger"</string>
-    <string name="user_add_user_message_long" msgid="3086244205384741788">"Du kan dele denne enhed med andre personer ved at oprette yderligere brugere. Hver bruger har deres egen plads, som de kan tilpasse med deres egne apps, baggrunde osv. Brugerne kan også ændre indstillinger på tabletten, der påvirker alle, f.eks. indstillinger for Wi-Fi.\n\nNår du opretter en ny bruger, skal denne person gennemgå en oprettelsesproces.\n\nAlle brugere kan acceptere opdaterede apptilladelser på vegne af alle andre brugere."</string>
+    <string name="user_add_user_message_long" msgid="3086244205384741788">"Du kan dele denne enhed med andre personer ved at oprette yderligere brugere. Hver bruger har sit eget univers, som kan tilpasses med brugerens egne apps, baggrunde osv. Brugerne kan også ændre indstillinger på tabletten, der påvirker alle, f.eks. indstillinger for Wi-Fi.\n\nNår du opretter en ny bruger, skal vedkommende gennemgå en oprettelsesproces.\n\nAlle brugere kan acceptere opdaterede apptilladelser på vegne af alle andre brugere."</string>
     <string name="user_add_user_message_short" msgid="3310933423737035428">"Når du opretter en ny bruger, skal denne person gennemgå en oprettelsesproces.\n\nAlle brugere kan acceptere opdaterede apptilladelser på vegne af alle andre brugere."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Vil du konfigurere brugeren nu?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Sørg for, at personen kan tage tabletten og etablere deres plads"</string>
+    <string name="user_setup_dialog_message" msgid="614037943337008555">"Sørg for, at personen kan tage tabletten og konfigurere sit univers"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Vil du oprette en profil nu?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Konfigurer nu"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ikke nu"</string>
@@ -1977,8 +1992,8 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vil du slette dig selv?"</string>
     <string name="user_confirm_remove_title" msgid="3856148232937245711">"Vil du fjerne brugeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="7399928935979459016">"Vil du fjerne profilen?"</string>
-    <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Du vil miste din plads og dine data på denne tablet. Du kan ikke fortryde denne handling."</string>
-    <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Du vil miste din plads og dine data på denne telefon. Du kan ikke fortryde denne handling."</string>
+    <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Du vil miste dit univers og dine data på denne tablet. Du kan ikke fortryde denne handling."</string>
+    <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Du vil miste dit univers og dine data på denne telefon. Du kan ikke fortryde denne handling."</string>
     <string name="user_confirm_remove_message" product="tablet" msgid="4610106937214870034">"Denne brugers plads og data vil forsvinde fra denne tablet. Du kan ikke fortryde denne handling."</string>
     <string name="user_confirm_remove_message" product="default" msgid="8130264611683731142">"Denne brugers plads og data vil forsvinde fra denne telefon. Du kan ikke fortryde denne handling."</string>
     <string name="user_profile_confirm_remove_message" product="tablet" msgid="3071489858733409187">"Denne profils plads og data vil forsvinde fra denne tablet. Du kan ikke fortryde denne handling."</string>
@@ -1990,15 +2005,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applikationer med begrænsninger"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Udvid indstillingerne for applikationen"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Afinstaller denne applikation"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Denne indstilling påvirker alle brugere på denne tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Denne indstilling påvirker alle brugere på denne telefon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Skift sprog"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Skift skriftstørrelse"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Betalinger"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Peg og betal"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Betal med et enkelt tryk"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Få flere oplysninger"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Find apps"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Vil du angive dette som din præference?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Vil du altid bruge <xliff:g id="APP">%1$s</xliff:g>, når du bruger peg og betal?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Vil du altid bruge <xliff:g id="APP_0">%1$s</xliff:g> i stedet for <xliff:g id="APP_1">%2$s</xliff:g>, når du bruger peg og betal?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Vil du altid bruge <xliff:g id="APP">%1$s</xliff:g>, når du bruger Peg og betal?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Vil du altid bruge <xliff:g id="APP_0">%1$s</xliff:g> i stedet for <xliff:g id="APP_1">%2$s</xliff:g>, når du bruger Peg og betal?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Begrænsninger"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Fjern begrænsninger"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Skift pinkode"</string>

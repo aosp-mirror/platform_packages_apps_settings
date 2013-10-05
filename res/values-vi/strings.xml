@@ -1001,11 +1001,11 @@
     <string name="location_mode_title" msgid="3982009713118421689">"Chế độ"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Độ chính xác cao"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Tiết kiệm pin"</string>
-    <string name="location_mode_sensors_only_title" msgid="4884675860035486077">"Cảm biến thiết bị"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Chỉ thiết bị"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Tắt vị trí"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Yêu cầu vị trí gần đây"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Không có ứng dụng nào yêu cầu vị trí gần đây"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Cài đặt ứng dụng"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Dịch vụ vị trí"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Mức sử dụng pin cao"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Mức sử dụng pin thấp"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Chế độ vị trí"</string>
@@ -1436,6 +1436,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Sử dụng <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Tài liệu của bạn có thể đi qua một hoặc nhiều máy chủ trên đường đến máy in."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Chưa có dịch vụ nào được cài đặt"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"Không tìm thấy máy in"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Cài đặt"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Thêm máy in"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"Bật"</string>
@@ -1444,8 +1445,21 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Thêm máy in"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Tìm kiếm"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Đang tìm kiếm máy in"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Dịch vụ bị vô hiệu hóa"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Lệnh in"</string>
-    <string name="print_active_print_jobs" msgid="5055524262003598199">"Lệnh in đang hoạt động"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Lệnh in"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Bắt đầu lại"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"Hủy"</string>
+    <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="print_printing_state_title_template" msgid="5736107667714582025">"Đang in <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Lỗi máy in <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Máy in đã chặn <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Pin"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Cái gì đang sử dụng pin"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Không có dữ liệu sử dụng pin."</string>
@@ -1513,7 +1527,8 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Thử kết nối tới thiết bị Bluetooth khác"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Pin do ứng dụng sử dụng"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Dừng hoặc gỡ cài đặt ứng dụng"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Kiểm soát thủ công GPS để ngăn ứng dụng sử dụng GPS"</string>
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
+    <skip />
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Ứng dụng có thể cung cấp các cài đặt để giảm mức sử dụng pin"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Pin do người dùng sử dụng"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> từ khi tháo đầu cắm"</string>
@@ -1941,7 +1956,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Mạng có thể được giám sát"</string>
     <string name="done_button" msgid="1991471253042622230">"Xong"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Giám sát mạng"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Thiết bị này được quản lý bởi: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nQuản trị viên của bạn có thể giám sát hoạt động trên mạng của bạn, bao gồm email, ứng dụng và trang web bảo mật.\n\nĐể biết thêm thông tin, hãy liên hệ với quản trị viên của bạn."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Thiết bị này được quản lý bởi: \n <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> \n \nQuản trị viên của bạn có thể giám sát hoạt động mạng của bạn, bao gồm email, ứng dụng và trang web an toàn. \n \nĐể biết thêm thông tin, hãy liên hệ với quản trị viên của bạn."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Bên thứ ba có thể giám sát hoạt động trên mạng\ncủa bạn, bao gồm email, ứng dụng và trang web bảo mật.\n\nMột bằng chứng xác thực tin cậy được cài đặt trên thiết bị của bạn có thể dẫn đến khả năng này."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Kiểm tra bằng chứng xác thực tin cậy"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Người dùng"</string>
@@ -1990,15 +2005,19 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Ứng dụng có hạn chế"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Mở rộng cài đặt cho ứng dụng"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Gỡ cài đặt ứng dụng này"</string>
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Cài đặt này ảnh hưởng đến tất cả người dùng trên máy tính bảng này."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Cài đặt này ảnh hưởng đến tất cả người dùng trên điện thoại này."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Thay đổi ngôn ngữ"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Thay đổi cỡ chữ"</string>
-    <string name="nfc_payment_settings_title" msgid="1121386157283141856">"Thanh toán"</string>
-    <string name="nfc_payment_no_apps" msgid="5518479703188056016">"DO NOT TRANSLATE ME"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Nhấn và thanh toán"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Thanh toán chỉ bằng một lần chạm"</string>
+    <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Tìm hiểu thêm"</string>
+    <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Tìm ứng dụng"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Đặt làm tùy chọn của bạn?"</string>
-    <string name="nfc_payment_set_default" msgid="5427393822785989090">"Luôn sử dụng <xliff:g id="APP">%1$s</xliff:g> khi bạn nhấn và thanh toán?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="5642684106041605080">"Luôn sử dụng <xliff:g id="APP_0">%1$s</xliff:g> thay cho <xliff:g id="APP_1">%2$s</xliff:g> khi bạn nhấn và thanh toán?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Luôn sử dụng <xliff:g id="APP">%1$s</xliff:g> khi bạn nhấn và thanh toán?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Luôn sử dụng <xliff:g id="APP_0">%1$s</xliff:g> thay cho <xliff:g id="APP_1">%2$s</xliff:g> khi bạn nhấn và thanh toán?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Hạn chế"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Xóa các hạn chế"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Thay đổi PIN"</string>
