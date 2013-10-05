@@ -1005,7 +1005,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Надсилання геоданих вимкнено"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Останні запити геоданих"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Жодна програма не запитувала місцезнаходження останнім часом"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Налаштування програми"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Служби локації"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Значне використання заряду"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Низьке використання заряду"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим локації"</string>
@@ -1378,6 +1378,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Налаштування доступності"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Служби"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Система"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Дисплей"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Субтитри"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Жести збільшення"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Якщо цю функцію ввімкнено, масштаб можна змінювати, тричі торкнувшись екрана.\n\nУ збільшеному масштабі можна:\n"<ul><li>"панорамувати – проведіть принаймні двома пальцями по екрану;"</li>\n<li>"налаштовувати рівень масштабування – стисніть або розведіть принаймні два пальці."</li></ul>\n\n"Можна також тимчасово збільшувати вміст під пальцем – тричі торкніться й утримуйте. У такому збільшеному стані можна досліджувати різні частини екрана, пересуваючи палець. Підніміть палець, щоб повернутися до попереднього стану.\n\nПримітка. Потрійний дотик для збільшення працює всюди, окрім клавіатури та панелі навігації."</string>
@@ -1392,6 +1393,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Кнопка живл. закінчує виклик"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Диктувати паролі"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Затримка натискання й утримування"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Посилення контрасту"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Інверсія кольорів"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Коригування колірного простору"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Показувати на панелі швидкого налаштування"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Яскравість"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Контраст"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Режим інверсії"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Режим корекції"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Замінено на <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Вимкнено"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Монохромність"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Дейтераномалія (червоний – зелений)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Протаномалія (червоний – зелений)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Тританомалія (синій – жовтий)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Дейтеранопія (зелений)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Протанопія (червоний)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Тританопія (синій)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Налаштування"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Увімкнено"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Вимкнено"</string>
@@ -1521,7 +1539,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Спробуйте з’єднатися з іншим пристроєм Bluetooth"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Як програма використовує акумулятор"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Зупиніть або видаліть цю програму"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Контролювати GPS вручну, щоб запобігти її використанню програмою"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Виберіть енергозберігаючий режим"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"У програмі можуть бути налаштування режиму енергозбереження"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Використання акумулятора користувачем"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> з часу відключ."</string>
@@ -1798,6 +1816,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Налагодити накладання GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Вимк. апаратн. накладання"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Завжди використовувати GPU для компонування екрана"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Моделювання кольорів"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Увімк. трасування OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показувати межі макета"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показувати межі роликів, поля тощо"</string>
@@ -1949,7 +1968,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Мережа може відстежуватися"</string>
     <string name="done_button" msgid="1991471253042622230">"Готово"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Відстеження мережі"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Цим пристроєм керує домен <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nАдміністратор може відстежувати ваші дії в мережі, зокрема електронне листування, роботу в програмах і на захищених веб-сайтах.\n\nЩоб дізнатися більше, зверніться до свого адміністратора."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Цим пристроєм керує домен\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nАдміністратор може відстежувати ваші дії в мережі, зокрема електронне листування, роботу в програмах і на захищених веб-сайтах.\n \nЩоб дізнатися більше, зверніться до свого адміністратора."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Третя сторона може відстежувати ваші\nдії в мережі, зокрема електронне листування, роботу в програмах і на захищених веб-сайтах.\n\nЦе робиться за допомогою довірених облікових даних, установлених на вашому пристрої."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Перевірити довірені облікові дані"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Користувачі"</string>
@@ -1998,6 +2017,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Програми з обмеженнями"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Розгорнути налаштув. програм"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Видалити цю програму"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"Налаштування клавіші \"Головний\" з’являться, коли ви встановите іншу програму, призначену для цієї клавіші."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Це налаштування впливає на всіх користувачів цього планшетного ПК."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Це налаштування впливає на всіх користувачів цього телефону."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Змінити мову"</string>

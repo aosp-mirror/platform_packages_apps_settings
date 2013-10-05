@@ -1005,7 +1005,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Atrašanās vieta izslēgta"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Neseni vietu pieprasījumi"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Pēdējā laikā nevienā lietotnē nav pieprasīta atrašanās vietas informācija."</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Lietotnes iestatījumi"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Atrašanās vietu pakalpojumi"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Augsts akumulatora patēriņš"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Zems akumulatora patēriņš"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Atrašanās vietas režīms"</string>
@@ -1378,6 +1378,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Pieejamības iestatījumi"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Pakalpojumi"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistēma"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Displejs"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Paraksti"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Palielināšanas žesti"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Ja šī funkcija ir ieslēgta, varat tuvināt un tālināt, trīs reizes pieskaroties ekrānam.\n\nJa veicāt tuvināšanu, varat veikt arī tālāk norādītās darbības.\n"<ul><li>"Panoramēt — velciet divus pirkstus vai vairāk pāri ekrānam."</li>\n<li>"Pielāgot tālummaiņas līmeni — savelciet kopā divus pirkstus vai vairāk vai izpletiet tos."</li></ul>\n\n"Varat arī uz brīdi palielināt zem pirksta redzamo vienumu, trīs reizes pieskaroties ekrānam un turot. Šādā palielinājumā varat pārvilkt pirkstu, lai izvērstu citas ekrāna daļas. Paceliet pirkstu, lai atgrieztu iepriekšējo ekrāna stāvokli.\n\nPiezīme. Palielināšana, trīs reizes pieskaroties ekrānam, darbojas visos ekrānos, izņemot tastatūru un navigācijas joslu."</string>
@@ -1392,6 +1393,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Barošanas poga beidz zvanu"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Paroļu izrunāšana"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Aizkave, pieskaroties un turot"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Kontrasta pastiprināšana"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Krāsu inversija"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Krāstelpas korekcija"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Rādīt ātrajos iestatījumos"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Spilgtums"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Kontrasts"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Inversijas režīms"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Korekcijas režīms"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Jaunā preference: <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Atspējota"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Vienkrāsains"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deiteranomālija (sarkans/zaļš)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomālija (sarkans/zaļš)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomālija (zils/dzeltens)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deiteranopija (zaļš)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopija (sarkans)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopija (zils)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Iestatījumi"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ieslēgta"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Izslēgta"</string>
@@ -1521,7 +1539,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Mēģiniet izveidot savienojumu ar citu Bluetooth ierīci"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Lietotnes darbībai izmantotā akumulatora enerģija"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Apturiet lietotnes darbību vai atinstalējiet lietotni"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Manuāli kontrolējiet GPS, lai šīs līdzeklis netiktu izmantots lietotnē"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Atlasiet akumulatora taupīšanas režīmu"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Lietotnē var būt pieejami iestatījumi akumulatora enerģijas patēriņa samazināšanai"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Lietotāja patērētā akumulatora jauda"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> kopš atslēgšanas"</string>
@@ -1798,6 +1816,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Atkļūdot graf. proc. kapac. pārsn."</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Atspējot HW pārklājumus"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Vienmēr izmantot GPU atveidi ekrāna salikšanai"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Simulēt krāstelpu"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Iespējot OpenGL trases"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Rādīt izkārtojuma robežas"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Rādīt klipu robežas, malas utt."</string>
@@ -1949,7 +1968,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Iespējams, tīklā veiktās darbības tiek pārraudzītas."</string>
     <string name="done_button" msgid="1991471253042622230">"Gatavs"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Tīkla pārraudzība"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Šo ierīci pārvalda domēns <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nJūsu administrators var pārraudzīt darbības, ko veicat tīklā, tostarp e-pasta ziņojumus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju, sazinieties ar savu administratoru."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Šī ierīce tiek pārvaldīta šādā domēnā:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nJūsu administrators var pārraudzīt jūsu tīkla darbību, tostarp e-pasta ziņojumus, lietotnes un drošas vietnes.\n\nLai iegūtu plašāku informāciju, sazinieties ar savu administratoru."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Trešā puse var pārraudzīt darbības, ko veicat tīklā,\ntostarp e-pasta ziņojumus, lietotnes un drošās vietnes.\n\nTas ir iespējams, jo jūsu ierīcē ir instalēti uzticami akreditācijas dati."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Pārbaudīt uzticamos akreditācijas datus"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Lietotāji"</string>
@@ -1998,6 +2017,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Lietojumprogrammas ar ierobežojumiem"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Izvērst lietojumprogr. iestat."</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Atinstalēt šo lietojumprogrammu"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"Sākuma ekrāna iestatījumi tiks paslēpti, līdz instalēsiet citu sākuma ekrāna lietojumprogrammu."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Šis iestatījums ietekmē visus šī planšetdatora lietotājus."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Šis iestatījums ietekmē visus šī tālruņa lietotājus."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Valodas maiņa"</string>

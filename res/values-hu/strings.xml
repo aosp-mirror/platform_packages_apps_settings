@@ -1005,7 +1005,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Hely kikapcsolva"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Legutóbbi helylekérdezések"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Az utóbbi időben egy alkalmazás sem kért le helyadatokat."</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Alkalmazásbeállítások"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Helyszolgáltatások"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Magas akkumulátorhasználat"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Alacsony akkumulátorhasználat"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Helymeghatározási mód"</string>
@@ -1378,6 +1378,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Kisegítő lehetőségek beállításai"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Szolgáltatások"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Rendszer"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Megjelenítés"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Képaláírások"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Nagyítási kézmozdulatok"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Ha a funkció be van kapcsolva, úgy kicsinyíthet/nagyíthat, hogy háromszor rákoppint a képernyőre.\n\nNagyított állapotban:\n"<ul><li>"Pásztázhat: Két vagy több ujját húzza végig a képernyőn."</li>\n<li>"Módosíthatja a nagyítási szintet: Két ujját húzza össze vagy távolítsa el egymástól."</li></ul>\n\n"Ideiglenesen felnagyíthatja az ujja alatt lévő részt is, úgy hogy hármat koppint és lenyomva hagyja ujját. A nagyított nézetben az ujját húzva fedezheti fel a képernyő más részeit is. Az ujja felemelésével visszatérhet az előző állapotra.\n\nMegjegyzés: A háromszoros koppintással való nagyítás a billentyűzet és a navigációs sáv kivételével mindenhol működik."</string>
@@ -1392,6 +1393,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"A bekapcsoló gomb megszakítja a hívást"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Jelszavak kimondása"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Érintés és tartási késleltetés"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Kontraszt növelése"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Színek invertálása"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Színes tér javítása"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Megjelenítés a Gyorsbeállítások között"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Fényerő"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Kontraszt"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Invertált mód"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Javítási mód"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Felülírva erre: <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Letiltva"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Monokromázia"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Színtévesztés (piros–zöld)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Színtévesztés (piros– zöld)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Színtévesztés (kék–sárga)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Színvakság (zöld)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Színvakság (piros)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Színvakság (kék)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Beállítások"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"be"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Ki"</string>
@@ -1521,7 +1539,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Próbáljon meg csatlakozni egy másik Bluetooth-eszközhöz"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Az alkalmazás által felhasznált energia"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Alkalmazás leállítása vagy eltávolítása"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"A GPS kézi irányítása annak megakadályozására, hogy az alkalmazások használják"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Energiatakarékos mód kiválasztása"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Az alkalmazás felkínálhat olyan beállításokat, amelyek csökkentik az energiafelhasználást"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"A felhasználó akkumulátorhasználata"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> az utolsó töltés óta"</string>
@@ -1798,6 +1816,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"GPU tartalom-felülírási hibakeresés"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW fedvények letiltása"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Mindig a GPU használata képernyő-feldolgozáshoz"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Színes tér szimulációja"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL nyomon követése"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Elrendezéshatár mutatása"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Kliphatárok, margók stb. megjelenítése."</string>
@@ -1951,7 +1970,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Lehet, hogy a hálózat felügyelt"</string>
     <string name="done_button" msgid="1991471253042622230">"Kész"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Hálózatfelügyelet"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"Az eszköz kezelője: <xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nRendszergazdája megfigyelheti az Ön hálózati tevékenységét, köztük az e-maileket, az alkalmazásokat és a biztonságos webhelyeket.\n\nTovábbi információért forduljon rendszergazdájához."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Ezt az eszközt a következő domain felügyeli:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nA rendszergazda figyelheti a hálózati tevékenységet, beleértve az e-mailt, az alkalmazásokat és a biztonságos weboldalakat.\n\nTovábbi információért forduljon a rendszergazdához."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Egy harmadik fél megfigyelheti az Ön hálózati\ntevékenységét, beleértve az e-maileket, alkalmazásokat és biztonságos webhelyeket.\n\nEgy, az eszközre telepített megbízható tanúsítvány teszi ezt lehetővé."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Megbízható tanúsítványok ellenőrzése"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Felhasználók"</string>
@@ -2000,6 +2019,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Alkalmazások korlátozásokkal"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Alkalmazásbeállítás megnyitása"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Alkalmazás eltávolítása"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"A kezdőlap beállításai rejtve maradnak addig, amíg nem telepít egy másik kezdőlap-alkalmazást."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Ez a beállítás minden felhasználót érint ezen a táblagépen."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Ez a beállítás minden felhasználót érint ezen a telefonon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Nyelv módosítása"</string>

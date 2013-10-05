@@ -517,7 +517,7 @@
     <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"La pantalla sense fil està desactivada perquè la Wi-Fi està desactivada."</string>
     <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Cerca pantalles"</string>
     <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"S\'està cercant…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"No s\'han trobat pant. sense fils a prop."</string>
+    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"No s\'ha trobat cap pantalla sense fil a prop"</string>
     <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Pantalles sincronitzades"</string>
     <string name="wifi_display_available_devices" msgid="4558314642853513487">"Dispositius disponibles"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"S\'està connectant"</string>
@@ -1005,7 +1005,7 @@
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Ubicació desactivada"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Sol·licituds d\'ubicació recents"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Cap aplicació ha sol·licitat la ubicació recentment"</string>
-    <string name="location_category_app_settings" msgid="46434611182743486">"Configuració de l\'aplicació"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"Serveis d\'ubicació"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Ús de bateria elevat"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Ús de bateria reduït"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mode d\'ubicació"</string>
@@ -1336,7 +1336,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Selecciona temps d\'execució"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Vols tornar a iniciar per canviar el temps d\'execució de <xliff:g id="OLD">%1$s</xliff:g> a <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificació de pantalla sense fil"</string>
-    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra les opcions per a la certificació de pantalla sense fil"</string>
+    <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra les opcions de certificació de pantalla sense fil"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Ubicacions simulades"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permet les ubicacions simulades"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Voleu permetre la depuració USB?"</string>
@@ -1378,6 +1378,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Configuració d\'accessibilitat"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Serveis"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Visualització"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtítols"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestos d\'ampliació"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Quan aquesta funció està activada, pots ampliar o allunyar si piques tres cops la pantalla.\n\nQuan ampliïs, pots fer el següent.\n"<ul><li>"Panoràmica: arrossega dos dits o més per la pantalla."</li>\n<li>"Ajustar el nivell de zoom: apropa dos o més dits o bé separa\'ls."</li></ul>\n\n"També pots ampliar de manera temporal el que tinguis a sota del dit si piques tres cops i mantens premut. En aquest estat ampliat, pots arrossegar el dit per explorar diverses parts de la pantalla. Aixeca el dit per tornar a l\'estat previ.\n\nNota: Pica tres cops per ampliar a tot arreu tret de la barra de navegació i el teclat."</string>
@@ -1392,6 +1393,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"El botó d\'engegada penja"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Digues contrasenyes"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Retard toca i mantén premut"</string>
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Millora de contrast"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversió de color"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Correcció de l\'espai de color"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Mostra a la configuració ràpida"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Brillantor"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Contrast"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Mode d\'inversió"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Mode de correcció"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"S\'ha substituït per <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"S\'ha desactivat"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Monocromia"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomalia (vermell-verd)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomalia (vermell-verd)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomalia (blau-groc)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopia (verd)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopia (vermell)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopia (blau)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configuració"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Activada"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Desactivat"</string>
@@ -1406,8 +1424,8 @@
     <string name="captioning_foreground_color" msgid="85623486537640059">"Color del text"</string>
     <string name="captioning_edge_color" msgid="3670094753735263238">"Color de contorn"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"Tipus de contorn"</string>
-    <string name="captioning_typeface" msgid="1826169240566563259">"Família de tipus de lletra"</string>
-    <string name="captioning_preview_text" msgid="4067935959797375065">"Els subtítols tindran aquest aspecte"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"Tipus de lletra"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"Els subtítols es mostraran així"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"Predeterminat"</string>
     <string name="color_none" msgid="3475640044925814795">"Cap"</string>
@@ -1434,7 +1452,7 @@
     <string name="print_settings" msgid="4742428530112487843">"Impressió"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Serveis d\'impressió"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Vols fer servir <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"És possible que el teu document passi per un o més servidors abans d\'arribar a la impressora."</string>
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"És possible que el document passi per un o més servidors abans d\'imprimir-se."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"No hi ha cap servei instal·lat"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"No s\'ha trobat cap impressora"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Configuració"</string>
@@ -1445,9 +1463,9 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Afegeix una impressora"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Cerca"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"S\'estan cercant impressores"</string>
-    <string name="print_service_disabled" msgid="7739452396114245222">"El servei està desactivat"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Servei desactivat"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Tasques d\'impressió"</string>
-    <string name="print_print_job" msgid="7563741676053287211">"Imprimeix la feina"</string>
+    <string name="print_print_job" msgid="7563741676053287211">"Tasca d\'impressió"</string>
     <string name="print_restart" msgid="8373999687329384202">"Reinicia"</string>
     <string name="print_cancel" msgid="3621199386568672235">"Cancel·la"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -1460,7 +1478,7 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Ús de la bateria des que s\'ha desconnectat"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Ús de la bateria des que s\'ha restablert"</string>
-    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> de bateria"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> usant bateria"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> des de la desconnexió"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"S\'està carregant"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Pantalla activada"</string>
@@ -1521,7 +1539,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Prova de connectar-te a un altre dispositiu Bluetooth"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Bateria utilitzada per l\'aplicació"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Atura o desinstal·la l\'aplicació"</string>
-    <string name="battery_sugg_apps_gps" msgid="7287643439298561315">"Controla el GPS manualment per evitar que les aplicacions el facin servir"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Seleccioneu el mode d\'estalvi de bateria"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"L\'aplicació pot oferir paràmetres per reduir l\'ús de la bateria"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Bateria utilitzada per l\'usuari"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> des de la desconnexió"</string>
@@ -1798,6 +1816,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Depura modificacions GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Desactiva superposicions HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Utilitza sempre GPU per combinar pantalles"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Simula l\'espai de color"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Activa seguiment d\'OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostra límits de disseny"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Mostra els límits de clips, els marges, etc."</string>
@@ -1936,8 +1955,8 @@
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vols desactivar el certificat de CA del sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vols eliminar de forma permanent el certificat de CA d\'usuari?"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Corrector ortogràfic"</string>
-    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Introdueix la contrasenya actual per a còpies de seguretat completes aquí"</string>
-    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Introdueix una contrasenya nova per a còpies de seguretat completes aquí"</string>
+    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Introdueix la contrasenya actual de la còpia de seguretat completa"</string>
+    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Introdueix una contrasenya nova per a còpies de seguretat completes"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Torna a escriure aquí la contrasenya nova de còpia de seguretat completa"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Defineix contrasenya de seguretat"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Cancel·la"</string>
@@ -1946,11 +1965,11 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desactivat"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissiu"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"En aplicació"</string>
-    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Pot ser que la xarxa se supervisi."</string>
+    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"És possible que la xarxa estigui supervisada."</string>
     <string name="done_button" msgid="1991471253042622230">"Fet"</string>
-    <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Supervisió de xarxes"</string>
-    <string name="ssl_ca_cert_info_message" msgid="2076057204539053958">"<xliff:g id="MANAGING_DOMAIN">%s</xliff:g> gestiona aquest dispositiu.\n\nEl teu administrador té capacitat per supervisar la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nPer obtenir més informació, contacta amb l\'administrador."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Un tercer té la capacitat per supervisar la teva activitat de\nxarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nHi ha una credencial de confiança instal·lada que fa que això sigui possible."</string>
+    <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Supervisió de xarxa"</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Aquest dispositiu està gestionat per:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nEl teu administrador pot fer un seguiment de la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nSi vols obtenir més informació, contacta amb l\'administrador."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Un tercer pot supervisar l\'activitat de la\nxarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nAixò és possible gràcies a una credencial de confiança instal·lada al teu dispositiu."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Comprova les credencials de confiança"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Usuaris"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Usuaris i perfils"</string>
@@ -1998,6 +2017,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicacions amb restriccions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Amplia configuració aplicació"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Desinstal·la aquesta aplicació"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"La configuració d\'inici s\'amagarà fins que no instal·lis una altra aplicació d\'inici."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Aquesta configuració afecta tots els usuaris de la tauleta."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Aquesta configuració afecta tots els usuaris del telèfon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Canvi de l\'idioma"</string>
@@ -2007,7 +2027,7 @@
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Més informació"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Cerca aplicacions"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Vols establir-ho com a preferència?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Vols que sempre es faci servir <xliff:g id="APP">%1$s</xliff:g> quan utilitzis l\'opció de tocar i pagar?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Vols fer servir sempre <xliff:g id="APP">%1$s</xliff:g> amb l\'opció de Toca i paga?"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Vols que sempre es faci servir <xliff:g id="APP_0">%1$s</xliff:g> en lloc de <xliff:g id="APP_1">%2$s</xliff:g> quan utilitzis l\'opció de tocar i pagar?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restriccions"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Suprimeix restriccions"</string>
