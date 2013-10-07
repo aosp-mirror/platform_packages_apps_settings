@@ -24,6 +24,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Telephony.Sms.Intents;
+import android.telephony.TelephonyManager;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
@@ -62,23 +63,38 @@ public final class SmsDefaultDialog extends AlertActivity implements
     }
 
     private boolean buildDialog(String packageName) {
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
+            // No phone, no SMS
+            return false;
+        }
+
         mNewSmsApplicationData = SmsApplication.getSmsApplicationData(packageName, this);
         if (mNewSmsApplicationData == null) {
             return false;
         }
 
+        SmsApplicationData oldSmsApplicationData = null;
         ComponentName oldSmsComponent = SmsApplication.getDefaultSmsApplication(this, true);
-        SmsApplicationData oldSmsApplicationData =
-                SmsApplication.getSmsApplicationData(oldSmsComponent.getPackageName(), this);
-        if (oldSmsApplicationData.mPackageName.equals(mNewSmsApplicationData.mPackageName)) {
-            return false;
+        if (oldSmsComponent != null) {
+            oldSmsApplicationData =
+                    SmsApplication.getSmsApplicationData(oldSmsComponent.getPackageName(), this);
+            if (oldSmsApplicationData.mPackageName.equals(mNewSmsApplicationData.mPackageName)) {
+                return false;
+            }
         }
 
         // Compose dialog; get
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getString(R.string.sms_change_default_dialog_title);
-        p.mMessage = getString(R.string.sms_change_default_dialog_text,
-                mNewSmsApplicationData.mApplicationName, oldSmsApplicationData.mApplicationName);
+        if (oldSmsApplicationData != null) {
+            p.mMessage = getString(R.string.sms_change_default_dialog_text,
+                    mNewSmsApplicationData.mApplicationName,
+                    oldSmsApplicationData.mApplicationName);
+        } else {
+            p.mMessage = getString(R.string.sms_change_default_no_previous_dialog_text,
+                    mNewSmsApplicationData.mApplicationName);
+        }
         p.mPositiveButtonText = getString(R.string.yes);
         p.mNegativeButtonText = getString(R.string.no);
         p.mPositiveButtonListener = this;
