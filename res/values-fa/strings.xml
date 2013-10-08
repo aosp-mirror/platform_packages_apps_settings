@@ -450,7 +450,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"‏برای جفت شدن با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;مطمئن شوید که آن دستگاه این کلید عبور را نمایش می‌دهد:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"‏از::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه جفت شود؟"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"‏برای جفت کردن با:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>روی آن تایپ کنید:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>، سپس Return یا Enter را فشار دهید."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"جفت کردن"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"مرتبط سازی"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"لغو"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"جفت کردن با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> امکان‌پذیر نیست."</string>
@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"طرح تلفن همراه"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"برنامه پیامک پیش‌فرض"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"برنامه پیامک تغییر داده شود؟"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"از <xliff:g id="NEW_APP">%s</xliff:g> به‌جای <xliff:g id="CURRENT_APP">%s</xliff:g> به‌عنوان برنامه پیامک‌تان استفاده می‌کنید؟"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"شرکت مخابراتی ارائه دهنده سیم کارت ناشناس است"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"‏%1$s وب‌سایت شناخته‌شده‌ای برای آماده‌سازی ندارد."</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"لطفاً سیم کارت را وارد کنید و دوباره راه‌اندازی کنید"</string>
@@ -1454,12 +1457,12 @@
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"در حال چاپ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"خطای چاپگر <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"چاپگر کار <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> را مسدود کرد"</string>
-    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
-    <skip />
-    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
-    <skip />
-    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
-    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"کادر جستجو نمایان شد"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"کادر جستجو پنهان شد"</string>
+  <plurals name="print_search_result_count_utterance">
+    <item quantity="one" msgid="1322401991353603285">"<xliff:g id="COUNT">%1$s</xliff:g> چاپگر یافت شد"</item>
+    <item quantity="other" msgid="460211409510874128">"<xliff:g id="COUNT">%1$s</xliff:g> چاپگر یافت شد"</item>
+  </plurals>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"باتری"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"چه چیزی باتری را مصرف کرده است"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"اطلاعات مصرف باتری موجود نیست."</string>
@@ -1527,8 +1530,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"اتصال به یک دستگاه بلوتوث دیگر را امتحان کنید"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"باتری مورد استفاده توسط برنامه"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"توقف یا حذف نصب برنامه"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"انتخاب حالت صرفه‌جویی در مصرف باتری"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"این برنامه دارای تنظیماتی است که در میزان مصرف باتری صرفه‌جویی می‌کند"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"باتری استفاده شده توسط کاربر"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> از زمان جدا کردن"</string>
@@ -2005,8 +2007,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"برنامه‌های دارای محدودیت"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"توسعه تنظیمات برای برنامه"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"حذف نصب این برنامه"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"تا زمانی که برنامه صفحه اصلی دیگری نصب کنید، تنظیمات صفحه اصلی پنهان خواهند بود."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"این تنظیم روی همه کاربران موجود در این رایانه لوحی تأثیر می‌گذارد."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"این تنظیم روی همه کاربران موجود در این تلفن تأثیر می‌گذارد."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"تغییر زبان"</string>
