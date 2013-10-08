@@ -16,9 +16,6 @@
 
 package com.android.settings.location;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
@@ -75,7 +72,11 @@ public class LocationMode extends LocationSettingsBase
     }
 
     private void updateRadioButtons(RadioButtonPreference activated) {
-        if (activated == mHighAccuracy) {
+        if (activated == null) {
+            mHighAccuracy.setChecked(false);
+            mBatterySaving.setChecked(false);
+            mSensorsOnly.setChecked(false);
+        } else if (activated == mHighAccuracy) {
             mHighAccuracy.setChecked(true);
             mBatterySaving.setChecked(false);
             mSensorsOnly.setChecked(false);
@@ -107,9 +108,7 @@ public class LocationMode extends LocationSettingsBase
     public void onModeChanged(int mode, boolean restricted) {
         switch (mode) {
             case Settings.Secure.LOCATION_MODE_OFF:
-                Intent intent = new Intent();
-                PreferenceActivity pa = (PreferenceActivity) getActivity();
-                pa.finishPreferencePanel(LocationMode.this, Activity.RESULT_OK, intent);
+                updateRadioButtons(null);
                 break;
             case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
                 updateRadioButtons(mSensorsOnly);
