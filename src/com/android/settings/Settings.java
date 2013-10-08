@@ -686,6 +686,12 @@ public class Settings extends PreferenceActivity
     }
 
     private boolean updateHomeSettingHeaders(Header header) {
+        // Once we decide to show Home settings, keep showing it forever
+        SharedPreferences sp = getSharedPreferences(HomeSettings.HOME_PREFS, Context.MODE_PRIVATE);
+        if (sp.getBoolean(HomeSettings.HOME_PREFS_DO_SHOW, false)) {
+            return true;
+        }
+
         try {
             final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
             getPackageManager().getHomeActivities(homeApps);
@@ -712,6 +718,8 @@ public class Settings extends PreferenceActivity
             // Can't look up the home activity; bail on configuring the icon
             Log.w(LOG_TAG, "Problem looking up home activity!", e);
         }
+
+        sp.edit().putBoolean(HomeSettings.HOME_PREFS_DO_SHOW, true).apply();
         return true;
     }
 
