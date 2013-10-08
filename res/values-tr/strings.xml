@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobil plan"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Varsayılan SMS uygulaması"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS uygulaması değiştirilsin mi?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"SMS uygulamanız olarak <xliff:g id="CURRENT_APP">%s</xliff:g> yerine <xliff:g id="NEW_APP">%s</xliff:g> kullanılsın mı?"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Bilinmeyen SIM operatörü"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s için bilinen bir provizyon web sitesi yok"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Lütfen SIM kartı takın ve yeniden başlatın"</string>
@@ -1378,8 +1381,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Erişebilirlik ayarları"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Hizmetler"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistem"</string>
-    <!-- no translation found for accessibility_display_title (7610175687949675162) -->
-    <skip />
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Ekran"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Altyazılar"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Büyüteç hareketleri"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Bu özellik açıldığında ekrana üç kez hafifçe vurarak görüntüyü yakınlaştırabilir ve uzaklaştırabilirsiniz.\n\nYakınlaştırdığınızda şunları yapabilirsiniz\n"<ul><li>"Kaydırma: İki veya daha fazla parmağınızı ekranda sürükleyin."</li>\n<li>"Yakınlaştırrma düzeyini ayarlama: İki veya daha fazla parmağınızı birbirine yaklaştırın veya uzaklaştırın."</li></ul>\n\n"Ayrıca, üç kez hafifçe vurup parmağınızı basılı tutarak parmağınızın altındakini geçici olarak büyütebilirsiniz. Önceki duruma dönmek için parmağınızı kaldırın.\n\nNot: Üç kez hafifçe vurarak büyütme özelliği klavye ve gezinme çubuğu hariç her yerde kullanılabilir."</string>
@@ -1394,40 +1396,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Güç düğmesi çağrıyı sonlandırır"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Şifreleri sesli olarak oku"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Dokunma ve basılı tutma süresi"</string>
-    <!-- no translation found for accessibility_display_contrast_preference_title (7349034776349278205) -->
-    <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_title (2119647786141420802) -->
-    <skip />
-    <!-- no translation found for accessibility_display_daltonizer_preference_title (4034958017657406631) -->
-    <skip />
-    <!-- no translation found for enable_quick_setting (2366999897816894536) -->
-    <skip />
-    <!-- no translation found for contrast_brightness (8602573248029383063) -->
-    <skip />
-    <!-- no translation found for contrast_contrast (3269496789297300264) -->
-    <skip />
-    <!-- no translation found for inversion_type (1582233332474243333) -->
-    <skip />
-    <!-- no translation found for daltonizer_type (1124178250809091080) -->
-    <skip />
-    <!-- no translation found for daltonizer_type_overridden (3116947244410245916) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_disabled (7482661936053801862) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_monochromacy (8485709880666106721) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly (5475532989673586329) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly (8424148009038666065) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly (481725854987912389) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranopia (3042329512290521285) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanopia (1645821472162425420) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanopia (6994931013805187675) -->
-    <skip />
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Kontrast geliştirme"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Rengi ters çevirme"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Renk uzayını düzeltme"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Hızlı Ayarlar\'da göster"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Parlaklık"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Kontrast"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Ters çevirme modu"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Düzeltme modu"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"<xliff:g id="TITLE">%1$s</xliff:g> tarafından geçersiz kılındı"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Devre dışı"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Tam renk körlüğü"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Renk körlüğü (kırmızı yeşil)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Renk körlüğü (kırmızı yeşil)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Renk körlüğü (mavi sarı)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Renk körlüğü (yeşil)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Renk körlüğü (kırmızı)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Renk körlüğü (mavi)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Ayarlar"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Açık"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Kapalı"</string>
@@ -1557,8 +1542,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Farklı bir Bluetooth cihazına bağlanmaya çalışın"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Uygulama tarafından kullanılan pil"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Uygulamayı durdur veya yüklemesini kaldır"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Pil tasarruf modunu seçin"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Uygulama, pil kullanımını azaltmak için ayarlar önerebilir"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Kullanıcı tarafından harcanan pil miktarı"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Fişten çekildikten itibaren <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1835,8 +1819,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"GPU fazla çizim hatasını ayıkla"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW katmanlarını devre dışı bırak"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Ekran oluştururken her zaman GPU\'yu kullan"</string>
-    <!-- no translation found for simulate_color_space (6745847141353345872) -->
-    <skip />
+    <string name="simulate_color_space" msgid="6745847141353345872">"Renk uzayını simüle et"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL izlerini etkinleştir"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Düzen sınırlarını göster"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Klip sınırlarını, kenar boşluklarını vb. göster"</string>
@@ -2037,8 +2020,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Kısıtlamalı uygulamalar"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Uygulama ayarlarını genişlet"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Bu uygulamanın yüklemesini kaldır"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"Siz başka ana ekran uygulaması yükleyene kadar ana ekran ayarları gizlenecektir."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Bu ayar bu tabletteki tüm kullanıcıları etkiler."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Bu ayar bu telefondaki tüm kullanıcıları etkiler."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Dili değiştir"</string>

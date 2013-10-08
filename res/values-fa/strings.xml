@@ -450,7 +450,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"‏برای جفت شدن با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;مطمئن شوید که آن دستگاه این کلید عبور را نمایش می‌دهد:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"‏از::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه جفت شود؟"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"‏برای جفت کردن با:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>روی آن تایپ کنید:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>، سپس Return یا Enter را فشار دهید."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"جفت کردن"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"مرتبط سازی"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"لغو"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"جفت کردن با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> امکان‌پذیر نیست."</string>
@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"طرح تلفن همراه"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"برنامه پیامک پیش‌فرض"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"برنامه پیامک تغییر داده شود؟"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"از <xliff:g id="NEW_APP">%s</xliff:g> به‌جای <xliff:g id="CURRENT_APP">%s</xliff:g> به‌عنوان برنامه پیامک‌تان استفاده می‌کنید؟"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"شرکت مخابراتی ارائه دهنده سیم کارت ناشناس است"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"‏%1$s وب‌سایت شناخته‌شده‌ای برای آماده‌سازی ندارد."</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"لطفاً سیم کارت را وارد کنید و دوباره راه‌اندازی کنید"</string>
@@ -1378,8 +1381,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"تنظیمات قابلیت دسترسی"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"سرویس‌ها"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"سیستم"</string>
-    <!-- no translation found for accessibility_display_title (7610175687949675162) -->
-    <skip />
+    <string name="accessibility_display_title" msgid="7610175687949675162">"نمایشگر"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"زیرنویس‌ها"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"حرکات بزرگنمایی"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"وقتی این ویژگی فعال است، شما می‌توانید با سه ضربه روی صفحه بزرگنمایی یا کوچکنمایی کنید.\n\nهنگام بزرگنمایی می‌توانید:\n"<ul><li>"حرکت کنید: دو یا چند انگشت خود را روی صفحه بکشید."</li>\n<li>"تنظیم سطح بزرگنمایی: دو یا چند انگشت خود را به هم نزدیک کنید یا از هم دور کنید."</li></ul>\n\n"همچنین می‌توانید به صورت موقت آنچه را که در زیر انگشتان شما قرار دارد با سه بار ضربه روی صفحه و نگهداشتن آن بزرگ کنید. در این حالت بزرگنمایی شده، می‌توانید انگشت خود را برای کاوش قسمت‌های مختلف صفحه بکشید. برای بازگشت به حالت قبلی خود، انگشت خود را بردارید.\n\nتوجه: سه بار ضربه برای بزرگنمایی همه جا به غیر از صفحه کلید و نوار پیمایش کار می‌کند."</string>
@@ -1394,40 +1396,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"قطع تماس با دکمه روشن/خاموش"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"‏گفتن گذرواژه‎ها"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"تأخیر لمس کردن و نگه داشتن"</string>
-    <!-- no translation found for accessibility_display_contrast_preference_title (7349034776349278205) -->
-    <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_title (2119647786141420802) -->
-    <skip />
-    <!-- no translation found for accessibility_display_daltonizer_preference_title (4034958017657406631) -->
-    <skip />
-    <!-- no translation found for enable_quick_setting (2366999897816894536) -->
-    <skip />
-    <!-- no translation found for contrast_brightness (8602573248029383063) -->
-    <skip />
-    <!-- no translation found for contrast_contrast (3269496789297300264) -->
-    <skip />
-    <!-- no translation found for inversion_type (1582233332474243333) -->
-    <skip />
-    <!-- no translation found for daltonizer_type (1124178250809091080) -->
-    <skip />
-    <!-- no translation found for daltonizer_type_overridden (3116947244410245916) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_disabled (7482661936053801862) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_monochromacy (8485709880666106721) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly (5475532989673586329) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly (8424148009038666065) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly (481725854987912389) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranopia (3042329512290521285) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanopia (1645821472162425420) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanopia (6994931013805187675) -->
-    <skip />
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"بهبود کنتراست"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"وارونگی رنگ"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"تصحیح فضای رنگ"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"نمایش در تنظیمات سریع"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"روشنایی"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"کنتراست"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"حالت وارونگی"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"حالت تصحیح"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"توسط <xliff:g id="TITLE">%1$s</xliff:g> لغو شد"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"غیر فعال"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"تک‌رنگ‌بینی"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"سبزدشواربینی (قرمز-سبز)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"قرمزدشواربینی (قرمز-سبز)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"آبی‌دشواربینی (آبی-زرد)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"سبزکوری (سبز)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"قرمزکوری (قرمز)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"آبی‌کوری (آبی)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"تنظیمات"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"فعال"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"غیرفعال"</string>
@@ -1557,8 +1542,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"اتصال به یک دستگاه بلوتوث دیگر را امتحان کنید"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"باتری مورد استفاده توسط برنامه"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"توقف یا حذف نصب برنامه"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"انتخاب حالت صرفه‌جویی در مصرف باتری"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"این برنامه دارای تنظیماتی است که در میزان مصرف باتری صرفه‌جویی می‌کند"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"باتری استفاده شده توسط کاربر"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> از زمان جدا کردن"</string>
@@ -1835,8 +1819,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"‏اشکال‌زدایی بازنویسی GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"‏غیر فعال کردن پوشش HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"‏همیشه از GPU در ترکیب صفحه استفاده شود"</string>
-    <!-- no translation found for simulate_color_space (6745847141353345872) -->
-    <skip />
+    <string name="simulate_color_space" msgid="6745847141353345872">"شبیه‌سازی فضای رنگ"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"‏فعال کردن ردیابی‌های OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"نمایش محدوده‌های طرح‌بندی"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"نمایش مرزها، حاشیه‌ها و ویژگی‌های دیگر کلیپ."</string>
@@ -2037,8 +2020,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"برنامه‌های دارای محدودیت"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"توسعه تنظیمات برای برنامه"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"حذف نصب این برنامه"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"تا زمانی که برنامه صفحه اصلی دیگری نصب کنید، تنظیمات صفحه اصلی پنهان خواهند بود."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"این تنظیم روی همه کاربران موجود در این رایانه لوحی تأثیر می‌گذارد."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"این تنظیم روی همه کاربران موجود در این تلفن تأثیر می‌گذارد."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"تغییر زبان"</string>
