@@ -19,6 +19,7 @@ package com.android.settings.location;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -35,8 +36,14 @@ import com.android.settings.SettingsPreferenceFragment;
 public abstract class LocationSettingsBase extends SettingsPreferenceFragment
         implements LoaderCallbacks<Cursor> {
     private static final String TAG = "LocationSettingsBase";
+    /** Broadcast intent action when the location mode is about to change. */
+    private static final String MODE_CHANGING_ACTION =
+            "com.android.settings.location.MODE_CHANGING";
+    private static final String CURRENT_MODE_KEY = "CURRENT_MODE";
+    private static final String NEW_MODE_KEY = "NEW_MODE";
 
     private static final int LOADER_ID_LOCATION_MODE = 1;
+    private int mCurrentMode;
 
     /**
      * Whether the fragment is actively running.
@@ -83,6 +90,10 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
             }
             return;
         }
+        Intent intent = new Intent(MODE_CHANGING_ACTION);
+        intent.putExtra(CURRENT_MODE_KEY, mCurrentMode);
+        intent.putExtra(NEW_MODE_KEY, mode);
+        getActivity().sendBroadcast(intent);
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
         refreshLocationMode();
     }
@@ -91,6 +102,7 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
         if (mActive) {
             int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
+            mCurrentMode = mode;
             onModeChanged(mode, isRestricted());
         }
     }
