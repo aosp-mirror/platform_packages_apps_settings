@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Forfait mobile"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Application SMS par défaut"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Modifier l\'application SMS ?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"Utiliser <xliff:g id="NEW_APP">%s</xliff:g> au lieu de <xliff:g id="CURRENT_APP">%s</xliff:g> comme application SMS ?"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Opérateur SIM inconnu"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Aucun site Web de configuration connu pour %1$s"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insérez la carte SIM, puis redémarrez."</string>
@@ -1378,8 +1381,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Paramètres d\'accessibilité"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Système"</string>
-    <!-- no translation found for accessibility_display_title (7610175687949675162) -->
-    <skip />
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Affichage"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestes d\'agrandissement"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Lorsque cette fonctionnalité est activée, vous pouvez effectuer des zooms avant et arrière en appuyant trois fois sur l\'écran.\n\nLorsque vous effectuez un zoom avant, vous pouvez :\n"<ul><li>"Effectuer un panoramique : faites glisser deux doigts ou plus sur l\'écran."</li>\n<li>"Régler le niveau de zoom : pincez deux doigts ou plus, ou écartez-les."</li></ul>\n\n"Vous pouvez également agrandir le contenu se trouvant sous votre doigt en appuyant trois fois sur l\'écran et en prolongeant la troisième pression. Lorsque la loupe est activée, vous pouvez faire glisser votre doigt sur l\'écran pour en explorer les différentes parties. Relevez votre doigt pour revenir à l\'état précédent.\n\nRemarque : vous pouvez appuyer trois fois sur l\'écran pour agrandir le contenu partout, sauf sur le clavier et la barre de navigation."</string>
@@ -1394,40 +1396,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Marche/arrêt pour raccrocher"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Énoncer les mots de passe"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Délai de pression"</string>
-    <!-- no translation found for accessibility_display_contrast_preference_title (7349034776349278205) -->
-    <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_title (2119647786141420802) -->
-    <skip />
-    <!-- no translation found for accessibility_display_daltonizer_preference_title (4034958017657406631) -->
-    <skip />
-    <!-- no translation found for enable_quick_setting (2366999897816894536) -->
-    <skip />
-    <!-- no translation found for contrast_brightness (8602573248029383063) -->
-    <skip />
-    <!-- no translation found for contrast_contrast (3269496789297300264) -->
-    <skip />
-    <!-- no translation found for inversion_type (1582233332474243333) -->
-    <skip />
-    <!-- no translation found for daltonizer_type (1124178250809091080) -->
-    <skip />
-    <!-- no translation found for daltonizer_type_overridden (3116947244410245916) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_disabled (7482661936053801862) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_monochromacy (8485709880666106721) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly (5475532989673586329) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly (8424148009038666065) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly (481725854987912389) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranopia (3042329512290521285) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanopia (1645821472162425420) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanopia (6994931013805187675) -->
-    <skip />
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Amélioration du contraste"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversion des couleurs"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Correction de l\'espace colorimétrique"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Afficher dans la fenêtre de configuration rapide"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Luminosité"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Contraste"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Mode inversé"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Mode de correction"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Remplacé par <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Désactivé"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Monochromatisme"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deutéranomalie (rouge/vert)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomalie (rouge/vert)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomalie (bleu-jaune)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deutéranopie (vert)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopie (rouge)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopie (bleu)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Paramètres"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Activé"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Désactivé"</string>
@@ -1557,8 +1542,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Essayez de vous connecter à un autre appareil Bluetooth."</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Batterie utilisée par l\'application"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Arrêter ou désinstaller l\'application"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Sélectionnez le mode économique."</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"L\'application dispose peut-être de paramètres permettant de réduire l\'utilisation de la batterie."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Batterie utilisée par l\'utilisateur"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1835,8 +1819,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Déboguer les conflits GPU"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Désact. superpos. matér."</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Toujours utiliser le GPU pour la composition écran"</string>
-    <!-- no translation found for simulate_color_space (6745847141353345872) -->
-    <skip />
+    <string name="simulate_color_space" msgid="6745847141353345872">"Simuler espace colori."</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Activer les traces OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afficher les contours"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Afficher les limites, les marges de clip, etc."</string>
@@ -2039,8 +2022,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applications avec restrictions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Développer paramètres applis"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Désinstaller cette application"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"Les paramètres correspondants seront masqués jusqu\'à ce que vous installiez une autre application sur l\'écran d\'accueil."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Ce paramètre affecte tous les utilisateurs de cette tablette."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Ce paramètre affecte tous les utilisateurs de ce téléphone."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Modifier la langue"</string>

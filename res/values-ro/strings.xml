@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Plan de date mobile"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Aplicație SMS prestabilită"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Schimbați aplicația SMS?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"Utilizați <xliff:g id="NEW_APP">%s</xliff:g> în loc de <xliff:g id="CURRENT_APP">%s</xliff:g> ca aplicație SMS?"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Operator de SIM necunoscut"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Niciun site de provizionare cunoscut pentru %1$s"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Introduceți cartela SIM și reporniți"</string>
@@ -1379,8 +1382,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Setări de accesibilitate"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Servicii"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistem"</string>
-    <!-- no translation found for accessibility_display_title (7610175687949675162) -->
-    <skip />
+    <string name="accessibility_display_title" msgid="7610175687949675162">"Ecran"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtitrări"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gesturi pentru mărire"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"După activarea acestei funcţii, puteţi mări şi micşora atingând de trei ori ecranul.\n\nÎn timp ce măriţi, puteţi:\n"<ul><li>"să deplasaţi: deplasaţi două sau mai multe degete pe ecran;"</li>\n<li>"să ajustaţi nivelul de zoom: ciupiţi cu două sau mai multe degete ori îndepărtați-le."</li></ul>\n\n"De asemenea, puteţi să măriţi temporar ce se află sub degetul dvs. atingând ecranul de trei ori şi menţinând degetul pe ecran. În imaginea mărită, puteţi să glisaţi degetul pentru a explora diferite părţi ale ecranului. Ridicaţi degetul pentru a reveni la starea anterioară.\n\nNotă: atingerea triplă pentru mărire funcţionează peste tot, cu excepţia tastaturii şi a barei de navigare."</string>
@@ -1395,40 +1397,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Butonul de pornire închide"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Rostiţi parolele"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Întârziere la atingere continuă"</string>
-    <!-- no translation found for accessibility_display_contrast_preference_title (7349034776349278205) -->
-    <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_title (2119647786141420802) -->
-    <skip />
-    <!-- no translation found for accessibility_display_daltonizer_preference_title (4034958017657406631) -->
-    <skip />
-    <!-- no translation found for enable_quick_setting (2366999897816894536) -->
-    <skip />
-    <!-- no translation found for contrast_brightness (8602573248029383063) -->
-    <skip />
-    <!-- no translation found for contrast_contrast (3269496789297300264) -->
-    <skip />
-    <!-- no translation found for inversion_type (1582233332474243333) -->
-    <skip />
-    <!-- no translation found for daltonizer_type (1124178250809091080) -->
-    <skip />
-    <!-- no translation found for daltonizer_type_overridden (3116947244410245916) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_disabled (7482661936053801862) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_monochromacy (8485709880666106721) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly (5475532989673586329) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly (8424148009038666065) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly (481725854987912389) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranopia (3042329512290521285) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanopia (1645821472162425420) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanopia (6994931013805187675) -->
-    <skip />
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Îmbunătățirea contrastului"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversarea culorilor"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Corectarea spațiului de culoare"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Afișați în Setări rapide"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"Luminozitate"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"Contrast"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Mod de inversare"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Mod de corectare"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Valoare înlocuită de <xliff:g id="TITLE">%1$s</xliff:g>"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Dezactivat"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"Daltonism"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomalie (roșu-verde)"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomalie (roșu-verde)"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomalie (albastru-galben)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopie (verde)"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopie (roșu)"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopie (albastru)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Setări"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Activată"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Dezactivată"</string>
@@ -1558,8 +1543,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Încercaţi să vă conectaţi la un alt dispozitiv Bluetooth"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Baterie utilizată de aplicaţii"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Opriţi sau dezinstalaţi aplicaţia"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Selectați modul de economisire a bateriei"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Aplicaţia poate oferi setări pentru reducerea utilizării bateriei"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Baterie utilizată de utilizator"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> de la deconectare"</string>
@@ -1836,8 +1820,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"Depanați suprapunerea"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"Dezactivaţi suprapun. HW"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Utilizaţi mereu GPU pentru compunerea ecranului"</string>
-    <!-- no translation found for simulate_color_space (6745847141353345872) -->
-    <skip />
+    <string name="simulate_color_space" msgid="6745847141353345872">"Simulați spațiu culoare"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Monitorizări OpenGL"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afişaţi limite aspect"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Afişaţi limitele clipului, marginile etc."</string>
@@ -2038,8 +2021,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicații cu restricții"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Extindeți setările aplicației"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Dezinstalați această aplicație"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"Setările pentru ecranul de pornire vor fi ascunse până la instalarea altei aplicații pe ecranul de pornire."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Această setare afectează toţi utilizatorii de pe această tabletă."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Această setare afectează toţi utilizatorii de pe acest telefon."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Schimbaţi limba"</string>

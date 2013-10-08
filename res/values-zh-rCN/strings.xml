@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"手机套餐"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"默认短信应用"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"要更改短信应用吗？"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"要使用“<xliff:g id="NEW_APP">%s</xliff:g>”（取代“<xliff:g id="CURRENT_APP">%s</xliff:g>”）作为您的短信应用吗？"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"未知的 SIM 运营商"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s没有已知的配置网站"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"请插入 SIM 卡，然后重新启动"</string>
@@ -1378,8 +1381,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"辅助功能设置"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"服务"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"系统"</string>
-    <!-- no translation found for accessibility_display_title (7610175687949675162) -->
-    <skip />
+    <string name="accessibility_display_title" msgid="7610175687949675162">"显示"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"放大手势"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"启用此功能后，您可以通过点按屏幕三次进行缩放。\n\n放大时，您可以：\n"<ul><li>"平移：在屏幕上拖动两根或更多根手指。"</li>\n<li>"调整缩放级别：开合两根或更多根手指。"</li></ul>\n\n"同时，您还可以通过点按三次并按住的方法来暂时性地放大手指触摸到的内容。在此放大状态下，您可以拖动手指查看屏幕上的各个部分。松开手指即可返回之前的状态。\n\n请注意：点按屏幕三次进行放大的方法适用于除键盘和导航栏外的所有情况。"</string>
@@ -1394,40 +1396,23 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"按电源按钮结束通话"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"说出密码"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"触摸和按住延迟"</string>
-    <!-- no translation found for accessibility_display_contrast_preference_title (7349034776349278205) -->
-    <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_title (2119647786141420802) -->
-    <skip />
-    <!-- no translation found for accessibility_display_daltonizer_preference_title (4034958017657406631) -->
-    <skip />
-    <!-- no translation found for enable_quick_setting (2366999897816894536) -->
-    <skip />
-    <!-- no translation found for contrast_brightness (8602573248029383063) -->
-    <skip />
-    <!-- no translation found for contrast_contrast (3269496789297300264) -->
-    <skip />
-    <!-- no translation found for inversion_type (1582233332474243333) -->
-    <skip />
-    <!-- no translation found for daltonizer_type (1124178250809091080) -->
-    <skip />
-    <!-- no translation found for daltonizer_type_overridden (3116947244410245916) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_disabled (7482661936053801862) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_monochromacy (8485709880666106721) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranomaly (5475532989673586329) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanomaly (8424148009038666065) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanomaly (481725854987912389) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_deuteranopia (3042329512290521285) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_protanopia (1645821472162425420) -->
-    <skip />
-    <!-- no translation found for daltonizer_mode_tritanopia (6994931013805187675) -->
-    <skip />
+    <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"对比度增强"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"颜色反转"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"颜色空间校正"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"在“快速设置”中显示"</string>
+    <string name="contrast_brightness" msgid="8602573248029383063">"亮度"</string>
+    <string name="contrast_contrast" msgid="3269496789297300264">"对比度"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"反转模式"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"校正模式"</string>
+    <string name="daltonizer_type_overridden" msgid="3116947244410245916">"已被“<xliff:g id="TITLE">%1$s</xliff:g>”覆盖"</string>
+    <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"已停用"</string>
+    <string name="daltonizer_mode_monochromacy" msgid="8485709880666106721">"全色盲"</string>
+    <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"绿色弱视（红绿色）"</string>
+    <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"红色弱视（红绿色）"</string>
+    <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"蓝色弱视（蓝黄色）"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"绿色盲（绿色）"</string>
+    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"红色盲（红色）"</string>
+    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"蓝色盲（蓝色）"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"设置"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"开启"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"关闭"</string>
@@ -1443,7 +1428,7 @@
     <string name="captioning_edge_color" msgid="3670094753735263238">"边缘颜色"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"边缘类型"</string>
     <string name="captioning_typeface" msgid="1826169240566563259">"字体系列"</string>
-    <string name="captioning_preview_text" msgid="4067935959797375065">"字幕外观如下"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"字幕外观示例"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"默认"</string>
     <string name="color_none" msgid="3475640044925814795">"无"</string>
@@ -1557,8 +1542,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"尝试连接另一蓝牙设备"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"应用所耗电量"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"停止或卸载应用"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"选择省电模式"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"该应用中可能提供了用于减少耗电量的设置"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"用户所耗电量"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"拔下电源后已过 <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1835,8 +1819,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"调试 GPU 过度绘制"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"停用 HW 叠加层"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"始终使用 GPU 进行屏幕合成"</string>
-    <!-- no translation found for simulate_color_space (6745847141353345872) -->
-    <skip />
+    <string name="simulate_color_space" msgid="6745847141353345872">"模拟颜色空间"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"启用 OpenGL 跟踪"</string>
     <string name="debug_layout" msgid="5981361776594526155">"显示布局边界"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"显示剪辑边界、边距等。"</string>
@@ -2037,8 +2020,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"展开应用设置"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"卸载此应用"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"在您安装其他主屏幕应用之前，主屏幕设置将一直处于隐藏状态。"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"此设置会影响这台平板电脑上的所有用户。"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"此设置会影响这部手机上的所有用户。"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"更改语言"</string>
