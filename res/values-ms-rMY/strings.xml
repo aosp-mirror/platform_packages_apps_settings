@@ -992,7 +992,10 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Pelan mudah alih"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Apl SMS lalai"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Tukar apl SMS?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"Gunakan <xliff:g id="NEW_APP">%s</xliff:g> bukannya <xliff:g id="CURRENT_APP">%s</xliff:g> sebagai aplikasi SMS anda?"</string>
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Pengendali SIM tidak dikenali"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s tdk mempunyai tapak web peruntukan dikenali"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Sila masukkan kad SIM dan mulakan semula"</string>
@@ -1454,12 +1457,12 @@
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Mencetak <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Ralat pencetak <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Pencetak disekat <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
-    <skip />
-    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
-    <skip />
-    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
-    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Kotak carian ditunjukkan"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Kotak carian tersembunyi"</string>
+  <plurals name="print_search_result_count_utterance">
+    <item quantity="one" msgid="1322401991353603285">"<xliff:g id="COUNT">%1$s</xliff:g> pencetak ditemui"</item>
+    <item quantity="other" msgid="460211409510874128">"<xliff:g id="COUNT">%1$s</xliff:g> pencetak ditemui"</item>
+  </plurals>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Bateri"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Apa yang telah menggunakan bateri"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Data penggunaan bateri tidak tersedia.."</string>
@@ -1527,8 +1530,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Cuba menyambung ke peranti Bluetooth yang lain"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Bateri digunakan oleh aplikasi"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Hentikan atau nyahpasang aplikasi"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Pilih mod penjimatan bateri"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Aplikasi ini mungkin menawarkan tetapan untuk mengurangkan penggunaan bateri"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Bateri digunakan oleh pengguna"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> sejak palam dicabut"</string>
@@ -1956,7 +1958,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Rangkaian mungkin dipantau"</string>
     <string name="done_button" msgid="1991471253042622230">"Selesai"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Pemantauan rangkaian"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Peranti ini diuruskan oleh:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nPentadbir anda boleh mengawasi aktiviti rangkaian anda, termauk e-mel, apl dan tapak web selamat.\n\nUntuk maklumat lanjut, hubungi pentadbir anda."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Peranti ini diuruskan oleh:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nPentadbir anda boleh mengawasi aktiviti rangkaian anda, termasuk e-mel, apl dan tapak web selamat.\n\nUntuk maklumat lanjut, hubungi pentadbir anda."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Pihak ketiga boleh memantau aktiviti\nrangkaian anda, termasuk e-mel, apl dan tapak web selamat.\n\nBukti kelayakan dipercayai yang dipasang pada peranti anda membolehkan perkara ini."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Semak bukti kelayakan dipercayai"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Pengguna"</string>
@@ -2005,8 +2007,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikasi dengan sekatan"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Kembangkn tetapan utk aplikasi"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Nyahpasang aplikasi ini"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"Tetapan laman utama akan disembunyikan sehingga anda memasang aplikasi laman utama yang lain."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Tetapan ini melibatkan semua pengguna pada tablet ini."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Tetapan ini melibatkan semua pengguna pada telefon ini."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Tukar bahasa"</string>
