@@ -74,7 +74,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
 
     public static String makePercentString(Resources res, long amount, long total) {
         final double percent = (((double)amount) / total) * 100;
-        return res.getString(R.string.percentage, (int) Math.ceil(percent));
+        return res.getString(R.string.percentage, (int) Math.round(percent));
     }
 
     @Override
@@ -220,17 +220,42 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
         }
     };
 
+    final static Comparator<ArrayList<ProcStatsEntry.Service>> sServicePkgCompare
+            = new Comparator<ArrayList<ProcStatsEntry.Service>>() {
+        @Override
+        public int compare(ArrayList<ProcStatsEntry.Service> lhs,
+                ArrayList<ProcStatsEntry.Service> rhs) {
+            long topLhs = lhs.size() > 0 ? lhs.get(0).mDuration : 0;
+            long topRhs = rhs.size() > 0 ? rhs.get(0).mDuration : 0;
+            if (topLhs < topRhs) {
+                return 1;
+            } else if (topLhs > topRhs) {
+                return -1;
+            }
+            return 0;
+        }
+    };
+
     private void fillServicesSection() {
         if (mEntry.mServices.size() > 0) {
             boolean addPackageSections = false;
-            if (mEntry.mServices.size() > 1
-                    || !mEntry.mServices.valueAt(0).get(0).mPackage.equals(mEntry.mPackage)) {
-                addPackageSections = true;
-            }
+            // Sort it all.
+            ArrayList<ArrayList<ProcStatsEntry.Service>> servicePkgs
+                    = new ArrayList<ArrayList<ProcStatsEntry.Service>>();
             for (int ip=0; ip<mEntry.mServices.size(); ip++) {
                 ArrayList<ProcStatsEntry.Service> services =
                         (ArrayList<ProcStatsEntry.Service>)mEntry.mServices.valueAt(ip).clone();
                 Collections.sort(services, sServiceCompare);
+                servicePkgs.add(services);
+            }
+            if (mEntry.mServices.size() > 1
+                    || !mEntry.mServices.valueAt(0).get(0).mPackage.equals(mEntry.mPackage)) {
+                addPackageSections = true;
+                // Sort these so that the one(s) with the longest run durations are on top.
+                Collections.sort(servicePkgs, sServicePkgCompare);
+            }
+            for (int ip=0; ip<servicePkgs.size(); ip++) {
+                ArrayList<ProcStatsEntry.Service> services = servicePkgs.get(ip);
                 if (addPackageSections) {
                     addPackageHeaderItem(mServicesParent, services.get(0).mPackage);
                 }
