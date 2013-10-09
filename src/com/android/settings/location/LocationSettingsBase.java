@@ -93,7 +93,7 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
         Intent intent = new Intent(MODE_CHANGING_ACTION);
         intent.putExtra(CURRENT_MODE_KEY, mCurrentMode);
         intent.putExtra(NEW_MODE_KEY, mode);
-        getActivity().sendBroadcast(intent);
+        getActivity().sendBroadcast(intent, android.Manifest.permission.WRITE_SECURE_SETTINGS);
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
         refreshLocationMode();
     }
