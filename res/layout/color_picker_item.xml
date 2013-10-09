@@ -16,9 +16,13 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="96dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="16dp" >
 
     <ImageView
         android:id="@+id/color_swatch"
@@ -28,7 +32,7 @@
 
     <TextView
         android:id="@+id/summary"
-        android:layout_width="match_parent"
+        android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:gravity="center" />
 
