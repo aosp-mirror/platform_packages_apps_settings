@@ -53,6 +53,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.Filter;
@@ -423,6 +424,24 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 public boolean onQueryTextChange(String searchString) {
                     ((Filterable) getListView().getAdapter()).getFilter().filter(searchString);
                     return true;
+                }
+            });
+            searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                @Override
+                public void onViewAttachedToWindow(View view) {
+                    if (AccessibilityManager.getInstance(getActivity()).isEnabled()) {
+                        view.announceForAccessibility(getString(
+                                R.string.print_search_box_shown_utterance));
+                    }
+                }
+                @Override
+                public void onViewDetachedFromWindow(View view) {
+                    Activity activity = getActivity();
+                    if (activity != null && !activity.isFinishing()
+                            && AccessibilityManager.getInstance(activity).isEnabled()) {
+                        view.announceForAccessibility(getString(
+                                R.string.print_search_box_hidden_utterance));
+                    }
                 }
             });
         } else {
