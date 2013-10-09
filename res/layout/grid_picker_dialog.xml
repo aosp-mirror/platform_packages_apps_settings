@@ -15,12 +15,24 @@
      limitations under the License.
 -->
 
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/list"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:columnWidth="112dp"
-    android:numColumns="auto_fit"
-    android:paddingTop="16dp"
-    android:stretchMode="spacingWidthUniform"
-    android:verticalSpacing="16dp" />
+    android:layout_height="match_parent" >
+
+    <GridView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="112dp"
+        android:numColumns="auto_fit"
+        android:scrollbarStyle="insideOverlay"
+        android:stretchMode="spacingWidthUniform" />
+
+    <!-- HACK: Setting minHeight has no effect within a dialog layout,
+         so this view keeps the minimum height above 300dp. -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:visibility="invisible" />
+
+</FrameLayout>
