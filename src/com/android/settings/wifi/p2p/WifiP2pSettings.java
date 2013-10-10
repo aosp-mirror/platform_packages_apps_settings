@@ -305,9 +305,11 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
         mPeersGroup = new PreferenceCategory(getActivity());
         mPeersGroup.setTitle(R.string.wifi_p2p_peer_devices);
+        preferenceScreen.addPreference(mPeersGroup);
 
         mPersistentGroup = new PreferenceCategory(getActivity());
         mPersistentGroup.setTitle(R.string.wifi_p2p_remembered_groups);
+        preferenceScreen.addPreference(mPersistentGroup);
 
         super.onActivityCreated(savedInstanceState);
     }
