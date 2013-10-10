@@ -1210,6 +1210,21 @@
                 android:resource="@id/print_settings" />
         </activity>
 
+        <activity android:name="Settings$PrintJobSettingsActivity"
+                android:label="@string/print_print_job"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings$PrintSettingsActivity">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_PRINT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="printjob" android:pathPattern="*" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.print.PrintJobSettingsFragment" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/print_settings" />
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="DevelopmentSettings"
                   android:exported="true"

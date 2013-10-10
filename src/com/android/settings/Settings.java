@@ -81,6 +81,7 @@ import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
+import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintServiceSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.tts.TextToSpeechSettings;
@@ -350,6 +351,7 @@ public class Settings extends PreferenceActivity
         NotificationAccessSettings.class.getName(),
         ManageAccountsSettings.class.getName(),
         PrintSettingsFragment.class.getName(),
+        PrintJobSettingsFragment.class.getName(),
         TrustedCredentialsSettings.class.getName(),
         PaymentSettings.class.getName(),
         KeyboardLayoutPickerFragment.class.getName()
@@ -1114,4 +1116,5 @@ public class Settings extends PreferenceActivity
     public static class TrustedCredentialsSettingsActivity extends Settings { /* empty */ }
     public static class PaymentSettingsActivity extends Settings { /* empty */ }
     public static class PrintSettingsActivity extends Settings { /* empty */ }
+    public static class PrintJobSettingsActivity extends Settings { /* empty */ }
 }

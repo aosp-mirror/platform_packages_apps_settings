@@ -19,6 +19,7 @@ package com.android.settings.print;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.print.PrintJob;
@@ -45,6 +46,8 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     private static final int MENU_ITEM_ID_CANCEL = 1;
     private static final int MENU_ITEM_ID_RESTART = 2;
 
+    private static final String EXTRA_PRINT_JOB_ID = "EXTRA_PRINT_JOB_ID";
+
     private static final String PRINT_JOB_PREFERENCE = "print_job_preference";
     private static final String PRINT_JOB_MESSAGE_PREFERENCE = "print_job_message_preference";
 
@@ -53,7 +56,7 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     private final PrintJobStateChangeListener mPrintJobStateChangeListener =
             new PrintJobStateChangeListener() {
         @Override
-        public void onPrintJobsStateChanged(PrintJobId printJobId) {
+        public void onPrintJobStateChanged(PrintJobId printJobId) {
             updateUi();
         }
     };
@@ -141,8 +144,8 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     }
 
     private void processArguments() {
-        mPrintJobId = (PrintJobId) getArguments().getParcelable(
-                PrintSettingsFragment.EXTRA_PRINT_JOB_ID);
+        String printJobId = getArguments().getString(EXTRA_PRINT_JOB_ID);
+        mPrintJobId = PrintJobId.unflattenFromString(printJobId);
         if (mPrintJobId == null) {
             finish();
         }
