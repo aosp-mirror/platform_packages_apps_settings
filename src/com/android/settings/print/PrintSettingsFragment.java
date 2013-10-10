@@ -112,8 +112,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
 
     private PrintJobsController mPrintJobsController;
 
-    private String mPrintJobPreferenceToActivate;
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -268,19 +266,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
             if (prereference != null) {
                 prereference.performClick(getPreferenceScreen());
             }
-        } else {
-            String printJobId = getArguments().getString(EXTRA_PRINT_JOB_ID);
-            if (printJobId != null) {
-                getArguments().remove(EXTRA_PRINT_JOB_ID);
-                Preference preference = findPreference(printJobId);
-                if (preference != null) {
-                    preference.performClick(getPreferenceScreen());
-                } else {
-                    // The preference not being present may mean the the print job
-                    // loader has not completed so make a note and wait for the load.
-                    mPrintJobPreferenceToActivate = printJobId;
-                }
-            }
         }
     }
 
@@ -427,19 +412,9 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
                     }
 
                     Bundle extras = preference.getExtras();
-                    extras.putParcelable(EXTRA_PRINT_JOB_ID, printJob.getId());
+                    extras.putString(EXTRA_PRINT_JOB_ID, printJob.getId().flattenToString());
 
                     mActivePrintJobsCategory.addPreference(preference);
-                }
-
-                // If were waiting for creating a preference for a print
-                // job so we can start it - do that.
-                if (mPrintJobPreferenceToActivate != null) {
-                    Preference preference = findPreference(mPrintJobPreferenceToActivate);
-                    mPrintJobPreferenceToActivate = null;
-                    if (preference != null) {
-                        preference.performClick(getPreferenceScreen());
-                    }
                 }
             }
         }
@@ -454,7 +429,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
 
         private static final String LOG_TAG = "PrintJobsLoader";
 
-        private static final boolean DEBUG = true;
+        private static final boolean DEBUG = false;
 
         private List <PrintJobInfo> mPrintJobs = new ArrayList<PrintJobInfo>();
 
@@ -489,7 +464,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
             if (mPrintJobStateChangeListener == null) {
                 mPrintJobStateChangeListener = new PrintJobStateChangeListener() {
                     @Override
-                    public void onPrintJobsStateChanged(PrintJobId printJobId) {
+                    public void onPrintJobStateChanged(PrintJobId printJobId) {
                         onForceLoad();
                     }
                 };
