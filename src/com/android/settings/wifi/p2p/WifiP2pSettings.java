@@ -298,9 +298,11 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
-
         preferenceScreen.setOrderingAsAdded(true);
+
         mThisDevicePref = new Preference(getActivity());
+        mThisDevicePref.setPersistent(false);
+        mThisDevicePref.setSelectable(false);
         preferenceScreen.addPreference(mThisDevicePref);
 
         mPeersGroup = new PreferenceCategory(getActivity());
@@ -508,6 +510,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         if (DBG) Log.d(TAG, " mConnectedDevices " + mConnectedDevices);
     }
 
+    @Override
     public void onPersistentGroupInfoAvailable(WifiP2pGroupList groups) {
         mPersistentGroup.removeAll();
 
@@ -530,6 +533,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
     }
 
+    @Override
     public void onGroupInfoAvailable(WifiP2pGroup group) {
         if (DBG) Log.d(TAG, " group " + group);
         mConnectedGroup = group;
@@ -538,19 +542,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
     private void handleP2pStateChanged() {
         updateSearchMenu(false);
-        if (mWifiP2pEnabled) {
-            final PreferenceScreen preferenceScreen = getPreferenceScreen();
-            preferenceScreen.removeAll();
-
-            preferenceScreen.setOrderingAsAdded(true);
-            preferenceScreen.addPreference(mThisDevicePref);
-
-            mPeersGroup.setEnabled(true);
-            preferenceScreen.addPreference(mPeersGroup);
-
-            mPersistentGroup.setEnabled(true);
-            preferenceScreen.addPreference(mPersistentGroup);
-        }
+        mThisDevicePref.setEnabled(mWifiP2pEnabled);
+        mPeersGroup.setEnabled(mWifiP2pEnabled);
+        mPersistentGroup.setEnabled(mWifiP2pEnabled);
     }
 
     private void updateSearchMenu(boolean searching) {
@@ -578,10 +572,6 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             } else {
                 mThisDevicePref.setTitle(mThisDevice.deviceName);
             }
-
-            mThisDevicePref.setPersistent(false);
-            mThisDevicePref.setEnabled(true);
-            mThisDevicePref.setSelectable(false);
         }
     }
 }
