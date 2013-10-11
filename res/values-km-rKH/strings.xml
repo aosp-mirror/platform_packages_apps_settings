@@ -992,10 +992,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"ផែនការ​ទិន្នន័យ​ចល័ត"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"កម្មវិធី​ផ្ញើ​សារ SMS ​លំនាំ​ដើម"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"ប្ដូរ​កម្មវិធី​សារ SMS?"</string>
-    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
-    <skip />
-    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
-    <skip />
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"ប្រើ <xliff:g id="NEW_APP">%s</xliff:g> ជំនួស​ឲ្យ <xliff:g id="CURRENT_APP">%s</xliff:g> ជា​កម្មវិធី​សារ SMS របស់​អ្នក?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"ប្រើ <xliff:g id="NEW_APP">%s</xliff:g> ជា​កម្មវិធី​សារ SMS របស់​អ្នក?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"មិន​ស្គាល់​​ប្រតិបត្តិ​ករ​​ស៊ីមកាត"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s គ្មាន​តំបន់​បណ្ដាញ​ដែល​ផ្ដល់​បាន​​ស្គាល់"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"សូម​បញ្ចូល​ស៊ីមកាត និង​ចាប់ផ្ដើម​ឡើង​វិញ"</string>
@@ -1410,7 +1408,7 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomaly (ក្រហម​ពណ៌​បៃតង​)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomaly (ក្រហម​ពណ៌​បៃតង​)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomaly (ពណ៌​ខៀវ​-លឿង​)"</string>
-    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopia (ពណ៌​បែ​ត​ង​)"</string>
+    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopia (ពណ៌​បៃ​ត​ង​)"</string>
     <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopia (ពណ៌​ក្រហម​)"</string>
     <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopia (ពណ៌​ខៀវ​)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"ការ​កំណត់"</string>
@@ -1475,6 +1473,8 @@
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"កំពុង​​បោះពុម្ព <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"កំហុស​​ម៉ាស៊ីន​បោះពុម្ព <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"បាន​ទប់ស្កាត់​ម៉ាស៊ីន​បោះពុម្ព <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"បាន​បង្ហាញ​ប្រ​អប់​ស្វែងរក"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"បាន​លាក់​ប្រអប់​ស្វែងរក"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"ថ្ម"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"អ្វី​​ដែល​កំពុង​​ប្រើ​ថ្ម"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"មិន​មាន​ទិន្នន័យ​ការ​ប្រើ​ថ្ម"</string>
@@ -2020,7 +2020,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"កម្មវិធី​មាន​ការ​ដាក់កម្រិត"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ពង្រីក​ការ​កំណត់​សម្រាប់​កម្មវិធី"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"លុប​កម្មវិធី​នេះ"</string>
-    <string name="only_one_home_message" msgid="3538846733750242759">"ការ​កំណត់​ទំព័រ​ដើម​នឹង​ត្រូវ​បាន​លាក់​រហូត​ទាល់តែ​អ្នក​ដំឡើង​កម្មវិធី​មួយ​ផ្សេង​ទៀត​ផ្ទះ​។"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"ការ​កំណត់​ទំព័រ​ដើម​នឹង​ត្រូវ​បាន​លាក់​រហូត​ទាល់តែ​អ្នក​ដំឡើង​កម្មវិធី​​ដើម​មួយ​ផ្សេង​ទៀត​។"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"ការកំណត់​នេះ​ប៉ះពាល់​ដល់​អ្នក​ប្រើ​ទាំងអស់​លើ​កុំព្យូទ័រ​បន្ទះ​នេះ។"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"ការ​កំណត់​នេះ​ប៉ះពាល់​ដល់​អ្នក​ប្រើ​ទាំងអស់​លើ​ទូរស័ព្ទ​នេះ។"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"ប្ដូរ​ភាសា"</string>
