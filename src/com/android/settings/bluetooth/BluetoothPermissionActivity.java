@@ -197,7 +197,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     private void onNegative() {
         if (DEBUG) Log.d(TAG, "onNegative");
-        savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_UNKNOWN);
+        savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_REJECTED);
         sendIntentToReceiver(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY, false,
                              null, false // dummy value, no effect since last param is null
                              );
