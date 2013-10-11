@@ -17,8 +17,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"Oui"</string>
-    <string name="no" msgid="6731231425810196216">"NON"</string>
-    <string name="create" msgid="3578857613172647409">"Create"</string>
+    <string name="no" msgid="6731231425810196216">"Non"</string>
+    <string name="create" msgid="3578857613172647409">"Créer"</string>
     <string name="allow" msgid="3349662621170855910">"Autoriser"</string>
     <string name="deny" msgid="6947806159746484865">"Refusers"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
@@ -421,7 +421,7 @@
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Annuler"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Annuler"</string>
-    <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"SUIVANTE"</string>
+    <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Suivant"</string>
     <string name="lock_setup" msgid="3355847066343753943">"La configuration est terminée."</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Administration du périphérique"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administrateurs de l\'appareil"</string>
@@ -493,7 +493,7 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profils"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Renommer"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Autoriser le transfert de fichiers entrants"</string>
-    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connecté à l\'audio du support"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connecté aux paramètres audio du média"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Connecté à l\'audio du téléphone"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Connexion au serveur de transfert de fichiers"</string>
     <string name="bluetooth_map_profile_summary_connected" msgid="8191407438851351713">"Connecté à la carte"</string>
@@ -507,7 +507,7 @@
     <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utiliser comme entrée"</string>
     <string name="bluetooth_pan_profile_summary_use_for" msgid="5664884523822068653">"Utiliser pour l\'accès à Internet"</string>
     <string name="bluetooth_map_profile_summary_use_for" msgid="5154200119919927434">"Utiliser pour la carte"</string>
-    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Paramètres station d’accueil"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Paramètres station d\'accueil"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Utiliser la station d’accueil pour l\'audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Comme téléphone à haut-parleur"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pour la musique et le multimédia"</string>
@@ -690,7 +690,7 @@
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Point d\'accès Wi-Fi mobile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="home_settings" msgid="212375129455718176">"Accueil"</string>
-    <string name="display_settings_title" msgid="1708697328627382561">"DISPLAY"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Affichage"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Son"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Sonnerie du téléphone"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
@@ -741,7 +741,7 @@
     <string name="account_settings" msgid="6403589284618783461">"Comptes"</string>
     <string name="search_settings" msgid="1910951467596035063">"Rechercher"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Configurer les paramètres et l\'historique de recherche"</string>
-    <string name="display_settings" msgid="7965901687241669598">"DISPLAY"</string>
+    <string name="display_settings" msgid="7965901687241669598">"Affichage"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rotation auto de l\'écran"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Changer automatiquement d\'orientation lors de la rotation"</string>
@@ -992,10 +992,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Forfait de données cellulaires"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Application de texto par défaut"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Modifier l\'application de messagerie texte?"</string>
-    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
-    <skip />
-    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
-    <skip />
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Utiliser <xliff:g id="NEW_APP">%s</xliff:g> au lieu de <xliff:g id="CURRENT_APP">%s</xliff:g> comme application de messagerie texte?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Utiliser <xliff:g id="NEW_APP">%s</xliff:g> comme application de messagerie texte?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Opérateur SIM inconnu"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Aucun site Web de configuration connu pour %1$s"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insérez la carte SIM, puis redémarrez."</string>
@@ -1873,7 +1871,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Les modifications que vous apportez à vos comptes sur le Web sont automatiquement copiées sur votre tablette.\n\nCertains comptes permettent également de copier automatiquement sur le Web toutes les modifications que vous effectuez sur la tablette. C\'est le cas des comptes Google.\n\nPour sélectionner le type d\'informations à synchroniser au sein de chaque compte, accédez à Paramètres &gt; Comptes."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Les modifications que vous apportez à vos comptes sur le Web sont automatiquement copiées sur votre téléphone.\n\nCertains comptes permettent également de copier automatiquement sur le Web toutes les modifications que vous effectuez sur le téléphone. C\'est le cas des comptes Google.\n\nPour sélectionner le type d\'informations à synchroniser au sein de chaque compte, accédez à Paramètres &gt; Comptes."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Désactiver synchro auto données?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information. And you won\'t receive notifications when updates occur."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Cela limite la consommation des données et l\'utilisation de la batterie, mais vous devrez synchroniser manuellement chaque compte pour recueillir les informations récentes. Par ailleurs, vous ne recevrez pas de notifications en cas de mise à jour."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Date de réinitialisation du cycle de consommation"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Jour du mois :"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Paramètres"</string>
