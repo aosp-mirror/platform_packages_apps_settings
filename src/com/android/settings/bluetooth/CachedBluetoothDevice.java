@@ -130,6 +130,23 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             return;
         }
         mProfileConnectionState.put(profile, newProfileState);
+        if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
+            // check whether we are disconnected with this device completely
+            boolean isDisconnected = true;
+            for (LocalBluetoothProfile pf: mProfileConnectionState.keySet()) {
+                if (mProfileConnectionState.get(pf) != BluetoothProfile.STATE_DISCONNECTED) {
+                    isDisconnected = false;
+                    break;
+                }
+            }
+            // if disconnected, restore permission choice.
+            // So ACCESS_REJECTED will take effect until we are disconnected with this device.
+            if (isDisconnected) {
+                fetchPhonebookPermissionChoice();
+                fetchMessagePermissionChoice();
+            }
+        }
+
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
                 mRemovedProfiles.remove(profile);
@@ -358,6 +375,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         for (LocalBluetoothProfile profile :getProfiles()) {
             mProfileConnectionState.put(profile, BluetoothProfile.STATE_DISCONNECTED);
         }
+        fetchPhonebookPermissionChoice();
+        fetchMessagePermissionChoice();
     }
 
     // TODO: do any of these need to run async on a background thread?
@@ -649,6 +668,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void setPhonebookPermissionChoice(int permissionChoice) {
+        mPhonebookPermissionChoice = permissionChoice;
+
+        // if user reject it, don't save it to editor.
+        if (permissionChoice == ACCESS_REJECTED) return;
+
         SharedPreferences.Editor editor =
             mContext.getSharedPreferences(PHONEBOOK_PREFS_NAME, Context.MODE_PRIVATE).edit();
         if (permissionChoice == ACCESS_UNKNOWN) {
@@ -657,7 +681,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             editor.putInt(mDevice.getAddress(), permissionChoice);
         }
         editor.commit();
-        mPhonebookPermissionChoice = permissionChoice;
     }
 
     private void fetchPhonebookPermissionChoice() {
@@ -673,6 +696,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void setMessagePermissionChoice(int permissionChoice) {
+        mMessagePermissionChoice = permissionChoice;
+
+        // if user reject it, don't save it to editor.
+        if (permissionChoice == ACCESS_REJECTED) return;
+
         SharedPreferences.Editor editor =
             mContext.getSharedPreferences(MESSAGE_PREFS_NAME, Context.MODE_PRIVATE).edit();
         if (permissionChoice == ACCESS_UNKNOWN) {
@@ -681,7 +709,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             editor.putInt(mDevice.getAddress(), permissionChoice);
         }
         editor.commit();
-        mMessagePermissionChoice = permissionChoice;
     }
 
     private void fetchMessagePermissionChoice() {
