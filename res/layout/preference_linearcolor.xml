@@ -14,17 +14,21 @@
      limitations under the License.
 -->
 
-<com.android.settings.applications.LinearColorBar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
-    android:id="@+android:id/linear_color_bar"
-    android:paddingEnd="?android:attr/scrollbarSize"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:shadowRadius="4"
-    android:shadowColor="?android:attr/colorBackground"
-    android:shadowDx="2"
-    android:shadowDy="2">
-</com.android.settings.applications.LinearColorBar>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:paddingEnd="?android:attr/scrollbarSize">
+    <com.android.settings.applications.LinearColorBar
+        android:id="@+android:id/linear_color_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:shadowRadius="4"
+        android:shadowColor="?android:attr/colorBackground"
+        android:shadowDx="2"
+        android:shadowDy="2">
+    </com.android.settings.applications.LinearColorBar>
+</FrameLayout>
