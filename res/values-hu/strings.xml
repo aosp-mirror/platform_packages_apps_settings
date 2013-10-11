@@ -992,10 +992,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobil-előfizetés"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Alapértelmezett SMS-alkalmazás"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Módosítja az SMS-alkalmazást?"</string>
-    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
-    <skip />
-    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
-    <skip />
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"A(z) <xliff:g id="NEW_APP">%s</xliff:g> alkalmazást szeretné használni a(z) <xliff:g id="CURRENT_APP">%s</xliff:g> helyett az SMS-ekhez?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"A(z) <xliff:g id="NEW_APP">%s</xliff:g> alkalmazást szeretné használni az SMS-ekhez?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Ismeretlen SIM kártya szolgáltató"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s – nincs ismert hozzáférés-kezelő webhely"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Helyezze be a SIM kártyát és indítsa újra"</string>
@@ -1398,11 +1396,11 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Érintés és tartási késleltetés"</string>
     <string name="accessibility_display_contrast_preference_title" msgid="7349034776349278205">"Kontraszt növelése"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Színek invertálása"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Színes tér javítása"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Színtérkorrekció"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Megjelenítés a Gyorsbeállítások között"</string>
     <string name="contrast_brightness" msgid="8602573248029383063">"Fényerő"</string>
     <string name="contrast_contrast" msgid="3269496789297300264">"Kontraszt"</string>
-    <string name="inversion_type" msgid="1582233332474243333">"Invertált mód"</string>
+    <string name="inversion_type" msgid="1582233332474243333">"Invertálás módja"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Javítási mód"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Felülírva erre: <xliff:g id="TITLE">%1$s</xliff:g>"</string>
     <string name="daltonizer_mode_disabled" msgid="7482661936053801862">"Letiltva"</string>
@@ -1475,6 +1473,8 @@
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"A(z) <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> nyomtatása"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Nyomtatási hiba: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"A(z) <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> nyomtató letiltva."</string>
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Keresőmező megjelenítve"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Keresőmező elrejtve"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Akkumulátor"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Mi használta az akkumulátort"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Nincs akkuhasználati adat"</string>
@@ -1819,7 +1819,7 @@
     <string name="debug_hw_overdraw" msgid="2968692419951565417">"GPU tartalom-felülírási hibakeresés"</string>
     <string name="disable_overlays" msgid="2074488440505934665">"HW fedvények letiltása"</string>
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Mindig a GPU használata képernyő-feldolgozáshoz"</string>
-    <string name="simulate_color_space" msgid="6745847141353345872">"Színes tér szimulációja"</string>
+    <string name="simulate_color_space" msgid="6745847141353345872">"Színtérszimuláció"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL nyomon követése"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Elrendezéshatár mutatása"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Kliphatárok, margók stb. megjelenítése."</string>

@@ -992,10 +992,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobiliojo ryšio planas"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Numatytoji SMS programa"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Pakeisti SMS programą?"</string>
-    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
-    <skip />
-    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
-    <skip />
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Naudoti „<xliff:g id="NEW_APP">%s</xliff:g>“ kaip SMS programą vietoj „<xliff:g id="CURRENT_APP">%s</xliff:g>“?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Naudoti „<xliff:g id="NEW_APP">%s</xliff:g>“ kaip SMS programą?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Nežinomas SIM operatorius"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"„%1$s“ neturi aprūpinimo svetainės"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Įdėkite SIM kortelę ir paleiskite iš naujo"</string>
@@ -1475,6 +1473,8 @@
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Spausdinama: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Spausdintuvo klaida: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Spausdintuvas užblokavo <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Paieškos laukelis rodomas"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Paieškos laukelis paslėptas"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Baterija"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Kas naudojo akumuliatorių"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Akum. naudoj. duom. nepasiek."</string>
@@ -1657,7 +1657,7 @@
     <string name="trusted_credentials" msgid="4266945289534242402">"Patikimi įgaliojimai"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Rodyti patikimus CA sertifikatus"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Atmintinės tipas"</string>
-    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Atsarginė kopija saugoma aparatinėje įrangoje"</string>
+    <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Atsarginė kopija saugoma įrenginio vidinėje atmintyje"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Saugoma tik programinėje įrangoje"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Nubrėžti atrakinimo piešinį"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Kad patvirtintumėte kredencialų diegimą, turite nubrėžti atrakinimo piešinį."</string>
@@ -1971,7 +1971,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Tinklas gali būti stebimas"</string>
     <string name="done_button" msgid="1991471253042622230">"Atlikta"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Tinklo stebėjimas"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Ši įrenginį tvarko:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nAdministratorius gali stebėti jūsų veiklą tinkle, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos, susisiekite su administratoriumi."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Šį įrenginį tvarko:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nAdministratorius gali stebėti jūsų veiklą tinkle, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos, susisiekite su administratoriumi."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Trečioji šalis gali stebėti jūsų tinklo\nveiklą, įskaitant el. paštą, programas ir saugias svetaines.\n\nVisa tai galima dėl įrenginyje įdiegtų patikimų prisijungimo duomenų."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Tikrinti patikimus prisijungimo duomenis"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Naudotojai"</string>
