@@ -25,6 +25,8 @@ public class LinearColorPreference extends Preference {
     float mRedRatio;
     float mYellowRatio;
     float mGreenRatio;
+    int mColoredRegions = LinearColorBar.REGION_ALL;
+    LinearColorBar.OnRegionTappedListener mOnRegionTappedListener;
 
     public LinearColorPreference(Context context) {
         super(context);
@@ -38,6 +40,16 @@ public class LinearColorPreference extends Preference {
         notifyChanged();
     }
 
+    public void setOnRegionTappedListener(LinearColorBar.OnRegionTappedListener listener) {
+        mOnRegionTappedListener = listener;
+        notifyChanged();
+    }
+
+    public void setColoredRegions(int regions) {
+        mColoredRegions = regions;
+        notifyChanged();
+    }
+
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
@@ -45,7 +57,9 @@ public class LinearColorPreference extends Preference {
         LinearColorBar colors = (LinearColorBar)view.findViewById(
                 R.id.linear_color_bar);
         colors.setShowIndicator(false);
-        colors.setColors(0xffcc3000, 0xffcccc00, 0xff00cc30);
+        colors.setColors(0xffaa5030, 0xffaaaa30, 0xff30aa50);
         colors.setRatios(mRedRatio, mYellowRatio, mGreenRatio);
+        colors.setColoredRegions(mColoredRegions);
+        colors.setOnRegionTappedListener(mOnRegionTappedListener);
     }
 }
