@@ -48,7 +48,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ProcessStatsUi extends PreferenceFragment {
+public class ProcessStatsUi extends PreferenceFragment
+        implements LinearColorBar.OnRegionTappedListener {
     static final String TAG = "ProcessStatsUi";
     static final boolean DEBUG = false;
 
@@ -96,6 +97,7 @@ public class ProcessStatsUi extends PreferenceFragment {
     private boolean mShowSystem;
     private boolean mUseUss;
     private int mStatsType;
+    private int mMemRegion;
 
     private MenuItem[] mDurationMenus = new MenuItem[NUM_DURATIONS];
     private MenuItem mShowSystemMenu;
@@ -144,6 +146,8 @@ public class ProcessStatsUi extends PreferenceFragment {
         mUseUss = icicle != null ? icicle.getBoolean("use_uss") : false;
         mStatsType = icicle != null ? icicle.getInt("stats_type", MENU_TYPE_BACKGROUND)
                 : MENU_TYPE_BACKGROUND;
+        mMemRegion = icicle != null ? icicle.getInt("mem_region", LinearColorBar.REGION_GREEN)
+                : LinearColorBar.REGION_GREEN;
         setHasOptionsMenu(true);
     }
 
@@ -165,6 +169,7 @@ public class ProcessStatsUi extends PreferenceFragment {
         outState.putBoolean("show_system", mShowSystem);
         outState.putBoolean("use_uss", mUseUss);
         outState.putInt("stats_type", mStatsType);
+        outState.putInt("mem_region", mMemRegion);
     }
 
     @Override
@@ -300,6 +305,14 @@ public class ProcessStatsUi extends PreferenceFragment {
         }
     }
 
+    @Override
+    public void onRegionTapped(int region) {
+        if (mMemRegion != region) {
+            mMemRegion = region;
+            refreshStats();
+        }
+    }
+
     private void addNotAvailableMessage() {
         Preference notAvailable = new Preference(getActivity());
         notAvailable.setTitle(R.string.power_usage_not_available);
@@ -320,6 +333,15 @@ public class ProcessStatsUi extends PreferenceFragment {
     public static final int[] CACHED_PROC_STATES = new int[] {
             ProcessStats.STATE_CACHED_ACTIVITY, ProcessStats.STATE_CACHED_ACTIVITY_CLIENT,
             ProcessStats.STATE_CACHED_EMPTY
+    };
+
+    public static final int[] RED_MEM_STATES = new int[] {
+            ProcessStats.ADJ_MEM_FACTOR_CRITICAL
+    };
+
+    public static final int[] YELLOW_MEM_STATES = new int[] {
+            ProcessStats.ADJ_MEM_FACTOR_CRITICAL, ProcessStats.ADJ_MEM_FACTOR_LOW,
+            ProcessStats.ADJ_MEM_FACTOR_MODERATE
     };
 
     private String makeDuration(long time) {
@@ -357,9 +379,9 @@ public class ProcessStatsUi extends PreferenceFragment {
         String durationString = Utils.formatElapsedTime(getActivity(),
                 mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime, false);
         CharSequence memString;
-        CharSequence[] memStates = getResources().getTextArray(R.array.ram_states);
-        if (mMemState >= 0 && mMemState < memStates.length) {
-            memString = memStates[mMemState];
+        CharSequence[] memStatesStr = getResources().getTextArray(R.array.ram_states);
+        if (mMemState >= 0 && mMemState < memStatesStr.length) {
+            memString = memStatesStr[mMemState];
         } else {
             memString = "?";
         }
@@ -378,9 +400,6 @@ public class ProcessStatsUi extends PreferenceFragment {
         mAppListGroup.addPreference(hist);
         */
 
-        ProcessStats.ProcessDataCollection totals = new ProcessStats.ProcessDataCollection(
-                ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ, stats);
-
         long now = SystemClock.uptimeMillis();
 
         final PackageManager pm = getActivity().getPackageManager();
@@ -388,10 +407,6 @@ public class ProcessStatsUi extends PreferenceFragment {
         mTotalTime = ProcessStats.dumpSingleTime(null, null, mStats.mMemFactorDurations,
                 mStats.mMemFactor, mStats.mStartTime, now);
         if (DEBUG) Log.d(TAG, "Total time of stats: " + makeDuration(mTotalTime));
-
-        LinearColorPreference colors = new LinearColorPreference(getActivity());
-        colors.setOrder(-1);
-        mAppListGroup.addPreference(colors);
 
         long[] memTimes = new long[ProcessStats.ADJ_MEM_FACTOR_COUNT];
         for (int iscreen=0; iscreen<ProcessStats.ADJ_COUNT; iscreen+=ProcessStats.ADJ_SCREEN_MOD) {
@@ -401,10 +416,40 @@ public class ProcessStatsUi extends PreferenceFragment {
             }
         }
 
+        long memTotalTime;
+        int[] memStates;
+
+        LinearColorPreference colors = new LinearColorPreference(getActivity());
+        colors.setOrder(-1);
+        colors.setOnRegionTappedListener(this);
+        switch (mMemRegion) {
+            case LinearColorBar.REGION_RED:
+                colors.setColoredRegions(LinearColorBar.REGION_RED);
+                memTotalTime = memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL];
+                memStates = RED_MEM_STATES;
+                break;
+            case LinearColorBar.REGION_YELLOW:
+                colors.setColoredRegions(LinearColorBar.REGION_RED
+                        | LinearColorBar.REGION_YELLOW);
+                memTotalTime = memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL]
+                        + memTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
+                        + memTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE];
+                memStates = YELLOW_MEM_STATES;
+                break;
+            default:
+                colors.setColoredRegions(LinearColorBar.REGION_ALL);
+                memTotalTime = mTotalTime;
+                memStates = ProcessStats.ALL_MEM_ADJ;
+                break;
+        }
         colors.setRatios(memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL] / (float)mTotalTime,
                 (memTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
                         + memTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]) / (float)mTotalTime,
                 memTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL] / (float)mTotalTime);
+        mAppListGroup.addPreference(colors);
+
+        ProcessStats.ProcessDataCollection totals = new ProcessStats.ProcessDataCollection(
+                ProcessStats.ALL_SCREEN_ADJ, memStates, stats);
 
         ArrayList<ProcStatsEntry> entries = new ArrayList<ProcStatsEntry>();
 
@@ -441,7 +486,7 @@ public class ProcessStatsUi extends PreferenceFragment {
                         if (ent.mDuration > 0) {
                             if (DEBUG) Log.d(TAG, "Adding proc " + proc.mName + "/"
                                     + proc.mUid + ": time=" + makeDuration(ent.mDuration) + " ("
-                                    + ((((double)ent.mDuration) / mTotalTime) * 100) + "%)"
+                                    + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)"
                                     + " pss=" + ent.mAvgPss);
                             entriesMap.put(proc.mName, proc.mUid, ent);
                             entries.add(ent);
@@ -492,7 +537,7 @@ public class ProcessStatsUi extends PreferenceFragment {
                 if (ent.mDuration > 0) {
                     if (DEBUG) Log.d(TAG, "Adding proc " + st.mName + "/" + st.mUid + ": time="
                             + makeDuration(ent.mDuration) + " ("
-                            + ((((double)ent.mDuration) / mTotalTime) * 100) + "%)");
+                            + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)");
                     procs.add(ent);
                     ArrayMap<String, ProcStatsEntry> uidProcs = processes.get(ent.mUid);
                     if (uidProcs == null) {
@@ -521,7 +566,7 @@ public class ProcessStatsUi extends PreferenceFragment {
         for (int i=0, N=(entries != null ? entries.size() : 0); i<N; i++) {
             ProcStatsEntry proc = entries.get(i);
             final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
-            final double percentOfTime = (((double)proc.mDuration) / mTotalTime) * 100;
+            final double percentOfTime = (((double)proc.mDuration) / memTotalTime) * 100;
             if (percentOfWeight < 1 && percentOfTime < 33) {
                 if (DEBUG) Log.d(TAG, "Skipping " + proc.mName + " weight=" + percentOfWeight
                         + " time=" + percentOfTime);
