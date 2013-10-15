@@ -60,7 +60,6 @@ import android.view.HardwareRenderer;
 import android.view.IWindowManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.webkit.WebViewFactory;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -142,8 +141,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
-    private static final String WEBVIEW_EXPERIMENTAL_KEY = "experimental_webview";
-
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
 
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
@@ -203,7 +200,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
-    private CheckBoxPreference mExperimentalWebView;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
@@ -315,17 +311,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetCbPrefs.add(mShowAllANRs);
-
-        if (WebViewFactory.isExperimentalWebViewAvailable()) {
-            mExperimentalWebView = findAndInitCheckboxPref(WEBVIEW_EXPERIMENTAL_KEY);
-        } else {
-            Preference experimentalWebView = findPreference(WEBVIEW_EXPERIMENTAL_KEY);
-            PreferenceGroup debugApplicationsCategory = (PreferenceGroup)
-                    findPreference(DEBUG_APPLICATIONS_CATEGORY_KEY);
-            if (debugApplicationsCategory != null) {
-                debugApplicationsCategory.removePreference(experimentalWebView);
-            }
-        }
 
         Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
         if (selectRuntime != null) {
@@ -512,7 +497,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
-        updateExperimentalWebViewOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
@@ -1170,27 +1154,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
-    private void writeExperimentalWebViewOptions() {
-        if (mExperimentalWebView != null) {
-            if (!WebViewFactory.isUseExperimentalWebViewSet()) {
-                    mEnableDialog = new AlertDialog.Builder(getActivity())
-                            .setTitle("KLP WebView broke an app?")
-                            .setMessage("Don't forget to raise a bug!\ngo/klp-webview-bug")
-                            .setIconAttribute(android.R.attr.alertDialogIcon)
-                            .setPositiveButton(android.R.string.ok, this)
-                            .show();
-            }
-            WebViewFactory.setUseExperimentalWebView(mExperimentalWebView.isChecked());
-            pokeSystemProperties();
-        }
-    }
-
-    private void updateExperimentalWebViewOptions() {
-        if (mExperimentalWebView != null) {
-            updateCheckBox(mExperimentalWebView, WebViewFactory.useExperimentalWebView());
-        }
-    }
-
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == mEnabledSwitch) {
@@ -1305,8 +1268,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeImmediatelyDestroyActivitiesOptions();
         } else if (preference == mShowAllANRs) {
             writeShowAllANRsOptions();
-        } else if (preference == mExperimentalWebView) {
-            writeExperimentalWebViewOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
         } else if (preference == mForceMsaa) {
