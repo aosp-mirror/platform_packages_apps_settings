@@ -29,6 +29,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
@@ -309,7 +310,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
                 Uri.fromParts("package", mEntry.mUiPackage, null));
         intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mEntry.mUiPackage });
         intent.putExtra(Intent.EXTRA_UID, mEntry.mUid);
-        intent.putExtra(Intent.EXTRA_USER_HANDLE, mEntry.mUid);
+        intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mEntry.mUid));
         getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
                 Activity.RESULT_CANCELED, null, null);
     }
