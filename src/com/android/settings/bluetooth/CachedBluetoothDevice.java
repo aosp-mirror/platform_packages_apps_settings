@@ -68,6 +68,9 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     private int mMessagePermissionChoice;
 
+    private int mPhonebookRejectedTimes = 0;
+
+    private int mMessageRejectedTimes = 0;
 
     private final Collection<Callback> mCallbacks = new ArrayList<Callback>();
 
@@ -79,6 +82,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     // User has rejected the connection and let Settings app remember the decision
     final static int ACCESS_REJECTED = 2;
 
+    // how many times did User reject the connection to make the rejected persist.
+    final static int PERSIST_REJECTED_TIMES_LIMIT = 2;
 
     private final static String PHONEBOOK_PREFS_NAME = "bluetooth_phonebook_permission";
     private final static String MESSAGE_PREFS_NAME = "bluetooth_message_permission";
@@ -130,23 +135,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             return;
         }
         mProfileConnectionState.put(profile, newProfileState);
-        if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
-            // check whether we are disconnected with this device completely
-            boolean isDisconnected = true;
-            for (LocalBluetoothProfile pf: mProfileConnectionState.keySet()) {
-                if (mProfileConnectionState.get(pf) != BluetoothProfile.STATE_DISCONNECTED) {
-                    isDisconnected = false;
-                    break;
-                }
-            }
-            // if disconnected, restore permission choice.
-            // So ACCESS_REJECTED will take effect until we are disconnected with this device.
-            if (isDisconnected) {
-                fetchPhonebookPermissionChoice();
-                fetchMessagePermissionChoice();
-            }
-        }
-
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
                 mRemovedProfiles.remove(profile);
@@ -375,8 +363,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         for (LocalBluetoothProfile profile :getProfiles()) {
             mProfileConnectionState.put(profile, BluetoothProfile.STATE_DISCONNECTED);
         }
-        fetchPhonebookPermissionChoice();
-        fetchMessagePermissionChoice();
     }
 
     // TODO: do any of these need to run async on a background thread?
@@ -668,10 +654,15 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void setPhonebookPermissionChoice(int permissionChoice) {
-        mPhonebookPermissionChoice = permissionChoice;
+        // if user reject it, only save it when reject exceed limit.
+        if (permissionChoice == ACCESS_REJECTED) {
+            mPhonebookRejectedTimes++;
+            if (mPhonebookRejectedTimes < PERSIST_REJECTED_TIMES_LIMIT) {
+                return;
+            }
+        }
 
-        // if user reject it, don't save it to editor.
-        if (permissionChoice == ACCESS_REJECTED) return;
+        mPhonebookPermissionChoice = permissionChoice;
 
         SharedPreferences.Editor editor =
             mContext.getSharedPreferences(PHONEBOOK_PREFS_NAME, Context.MODE_PRIVATE).edit();
@@ -696,10 +687,15 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void setMessagePermissionChoice(int permissionChoice) {
-        mMessagePermissionChoice = permissionChoice;
+        // if user reject it, only save it when reject exceed limit.
+        if (permissionChoice == ACCESS_REJECTED) {
+            mMessageRejectedTimes++;
+            if (mMessageRejectedTimes < PERSIST_REJECTED_TIMES_LIMIT) {
+                return;
+            }
+        }
 
-        // if user reject it, don't save it to editor.
-        if (permissionChoice == ACCESS_REJECTED) return;
+        mMessagePermissionChoice = permissionChoice;
 
         SharedPreferences.Editor editor =
             mContext.getSharedPreferences(MESSAGE_PREFS_NAME, Context.MODE_PRIVATE).edit();
