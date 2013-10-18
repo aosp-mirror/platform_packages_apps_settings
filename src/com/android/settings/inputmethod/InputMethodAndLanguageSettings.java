@@ -166,25 +166,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mKeyboardSettingsCategory.addPreference(currentIme);
         }
 
-        synchronized (mInputMethodPreferenceList) {
-            mInputMethodPreferenceList.clear();
-            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
-            final int N = (imis == null ? 0 : imis.size());
-            for (int i = 0; i < N; ++i) {
-                final InputMethodInfo imi = imis.get(i);
-                final InputMethodPreference pref = getInputMethodPreference(imi);
-                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
-                mInputMethodPreferenceList.add(pref);
-            }
-
-            if (!mInputMethodPreferenceList.isEmpty()) {
-                Collections.sort(mInputMethodPreferenceList);
-                for (int i = 0; i < N; ++i) {
-                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
-                }
-            }
-        }
-
         // Build hard keyboard and game controller preference categories.
         mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
         updateInputDevices();
@@ -427,6 +408,28 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private void updateInputMethodPreferenceViews() {
         synchronized (mInputMethodPreferenceList) {
+            // Clear existing "InputMethodPreference"s
+            for (final InputMethodPreference imp : mInputMethodPreferenceList) {
+                mKeyboardSettingsCategory.removePreference(imp);
+            }
+            mInputMethodPreferenceList.clear();
+            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+            final int N = (imis == null ? 0 : imis.size());
+            for (int i = 0; i < N; ++i) {
+                final InputMethodInfo imi = imis.get(i);
+                final InputMethodPreference pref = getInputMethodPreference(imi);
+                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
+                mInputMethodPreferenceList.add(pref);
+            }
+
+            if (!mInputMethodPreferenceList.isEmpty()) {
+                Collections.sort(mInputMethodPreferenceList);
+                for (int i = 0; i < N; ++i) {
+                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+                }
+            }
+
+            // update views status
             for (Preference pref : mInputMethodPreferenceList) {
                 if (pref instanceof InputMethodPreference) {
                     ((InputMethodPreference) pref).updatePreferenceViews();
