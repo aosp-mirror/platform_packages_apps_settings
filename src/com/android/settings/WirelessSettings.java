@@ -333,6 +333,16 @@ public class WirelessSettings extends RestrictedSettingsFragment
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
+        // Remove Mobile Network Settings and Manage Mobile Plan
+        // if config_show_mobile_plan sets false.
+        boolean isMobilePlanEnabled = this.getResources().getBoolean(
+                R.bool.config_show_mobile_plan);
+        if (!isMobilePlanEnabled) {
+            Preference pref = findPreference(KEY_MANAGE_MOBILE_PLAN);
+            if (pref != null) {
+                removePreference(KEY_MANAGE_MOBILE_PLAN);
+            }
+        }
         protectByRestrictions(KEY_MOBILE_NETWORK_SETTINGS);
         protectByRestrictions(KEY_MANAGE_MOBILE_PLAN);
 
