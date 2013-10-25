@@ -1948,6 +1948,19 @@
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: -->
     <string name="sim_enter_cancel">Cancel</string>
 
+    <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
+         Displayed in a dialog box.  -->
+    <string name="wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
+    <!-- Instructions telling the user that they entered the wrong SIM PIN while trying
+         to unlock the keyguard.  Displayed in a dialog box.  -->
+    <plurals name="wrong_pin_code">
+        <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
+        <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
+    </plurals>
+    <!-- Instructions telling the user that the operation to unlock the keyguard
+         with SIM PIN failed. Displayed in one line in a large font.  -->
+    <string name="pin_failed">SIM PIN operation failed!</string>
+
     <!-- Advanced (used for diagnostics) device info activity title -->
     <string name="device_info_settings" product="tablet">Tablet status</string>
     <!-- Advanced (used for diagnostics) device info activity title -->
