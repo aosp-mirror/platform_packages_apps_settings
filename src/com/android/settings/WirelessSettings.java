@@ -80,6 +80,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
+    private PackageManager mPm;
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
@@ -124,6 +125,15 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
         NetworkInfo ni = mCm.getProvisioningOrActiveNetworkInfo();
         if (mTm.hasIccCard() && (ni != null)) {
+            // Check for carrier apps that can handle provisioning first
+            Intent provisioningIntent = new Intent(TelephonyIntents.ACTION_CARRIER_SETUP);
+            provisioningIntent.addCategory(TelephonyIntents.CATEGORY_MCCMNC_PREFIX
+                    + mTm.getSimOperator());
+            if (mPm.resolveActivity(provisioningIntent, 0 /* flags */) != null) {
+                startActivity(provisioningIntent);
+                return;
+            }
+
             // Get provisioning URL
             String url = mCm.getMobileProvisioningUrl();
             if (!TextUtils.isEmpty(url)) {
@@ -192,15 +202,14 @@ public class WirelessSettings extends RestrictedSettingsFragment
         CharSequence[] entryValues = new CharSequence[count];
         Drawable[] entryImages = new Drawable[count];
 
-        PackageManager packageManager = getPackageManager();
         int i = 0;
         for (SmsApplicationData smsApplicationData : smsApplications) {
             entries[i] = smsApplicationData.mApplicationName;
             entryValues[i] = smsApplicationData.mPackageName;
             try {
-                entryImages[i] = packageManager.getApplicationIcon(smsApplicationData.mPackageName);
+                entryImages[i] = mPm.getApplicationIcon(smsApplicationData.mPackageName);
             } catch (NameNotFoundException e) {
-                entryImages[i] = packageManager.getDefaultActivityIcon();
+                entryImages[i] = mPm.getDefaultActivityIcon();
             }
             i++;
         }
@@ -260,6 +269,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mTm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        mPm = getPackageManager();
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
@@ -352,7 +362,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
 
         // Remove Airplane Mode settings if it's a stationary device such as a TV.
-        if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
+        if (mPm.hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
             removePreference(KEY_TOGGLE_AIRPLANE);
         }
 
@@ -380,8 +390,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
                 com.android.internal.R.bool.config_cellBroadcastAppLinks);
         try {
             if (isCellBroadcastAppLinkEnabled) {
-                PackageManager pm = getPackageManager();
-                if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                if (mPm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
                         == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
                     isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
                 }
