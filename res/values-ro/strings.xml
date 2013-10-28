@@ -789,6 +789,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Nu se poate modifica starea de blocare a cardului SIM.\nCodul PIN poate fi incorect."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Anulaţi"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Codul PIN pentru cardul SIM este incorect, contactați operatorul pentru a vă debloca dispozitivul."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"Codul PIN pentru cardul SIM este incorect, v-a mai rămas <xliff:g id="NUMBER">%d</xliff:g> încercare înainte de a contacta operatorul pentru a vă debloca dispozitivul."</item>
+    <item quantity="other" msgid="77103619544346451">"Codul PIN pentru cardul SIM este incorect, v-au mai rămas <xliff:g id="NUMBER">%d</xliff:g> încercări."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Deblocarea cu ajutorul codului PIN pentru cardul SIM nu a reușit!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Stare tabletă"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Stare telefon"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualizări de sistem"</string>
@@ -1010,9 +1016,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Utilizarea intensă a bateriei"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Utilizarea redusă a bateriei"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mod de localizare"</string>
-    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Utilizarea GPS-ului, rețelelor Wi-Fi și mobile pentru determinarea locației"</string>
-    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Utilizarea rețelelor Wi-Fi și mobile pentru determinarea locației"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Utilizarea GPS-ului pentru determinarea locației"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Utilizează GPS-ul și rețelele Wi-Fi și mobile pentru determinarea locației"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Utilizează rețelele Wi-Fi și mobile pentru determinarea locației"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Utilizează GPS-ul pentru determinarea locației"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Se efectuează preluarea…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Localizare prin Wi-Fi și mobil"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Aplicaţiile estimează mai rapid locaţia cu serviciul de localizare Google. Se colectează/trimit la Google date anonime de localizare."</string>
