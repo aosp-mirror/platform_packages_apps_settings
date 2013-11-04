@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <declare-styleable name="DragSortListView">
+        <attr name="collapsedHeight" format="dimension" />
+        <attr name="dragScrollStart" format="float" />
+        <attr name="maxDragScrollSpeed" format="float" />
+        <attr name="floatBackgroundColor" format="color" />
+        <attr name="removeMode">
+            <enum name="clickRemove" value="0" />
+            <enum name="flingRemove" value="1" />
+        </attr>
+        <attr name="trackDragSort" format="boolean"/>
+        <attr name="floatAlpha" format="float"/>
+        <attr name="slideShuffleSpeed" format="float"/>
+        <attr name="removeAnimationDuration" format="integer"/>
+        <attr name="dropAnimationDuration" format="integer"/>
+        <attr name="dragEnabled" format="boolean" />
+        <attr name="sortEnabled" format="boolean" />
+        <attr name="removeEnabled" format="boolean" />
+        <attr name="dragStartMode">
+            <enum name="onDown" value="0" />
+            <enum name="onMove" value="1" />
+            <enum name="onLongPress" value="2"/>
+        </attr>
+        <attr name="dragHandleId" format="integer" />
+        <attr name="flingHandleId" format="integer" />
+        <attr name="clickRemoveId" format="integer" />
+        <attr name="useDefaultController" format="boolean" />
+    </declare-styleable>
+</resources>
