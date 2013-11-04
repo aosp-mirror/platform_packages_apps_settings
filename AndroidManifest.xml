@@ -1701,7 +1701,18 @@
 	<!-- Mahdi-Rom activities Start -->
 
         <activity android:name=".mahdi.CustomizationSettings" />
+        <activity android:name=".mahdi.PowerMenu" />
 
+        <!-- Pseudo-activity used to provide an intent-filter entry point to expanded-desktop config -->
+         <activity android:name="Settings$PowerMenuSettingsActivity"
+            android:label="@string/power_menu_title"
+            android:excludeFromRecents="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.PowerMenu" />
         </activity>        
 
         <!-- Mahdi-Rom activities End -->

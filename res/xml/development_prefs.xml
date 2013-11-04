@@ -32,6 +32,11 @@
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
     </PreferenceScreen>
 
+    <CheckBoxPreference
+        android:key="advanced_reboot"
+        android:title="@string/advanced_reboot_title"
+        android:summary="@string/advanced_reboot_summary" />
+
     <CheckBoxPreference 
         android:key="keep_screen_on" 
         android:title="@string/keep_screen_on" 

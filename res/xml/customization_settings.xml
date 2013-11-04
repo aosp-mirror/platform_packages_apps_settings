@@ -17,6 +17,13 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/customization_settings_title"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">                          
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">    
+    
+    <PreferenceScreen
+        android:key="power_menu"
+        android:title="@string/power_menu_title"
+	android:summary="@string/power_menu_summary"
+	android:icon="@drawable/ic_settings_power_menu"
+        android:fragment="com.android.settings.mahdi.PowerMenu" />               
        
 </PreferenceScreen>
