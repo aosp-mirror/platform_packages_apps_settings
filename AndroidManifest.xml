@@ -1698,6 +1698,14 @@
             </intent-filter>
         </activity>
 
+	<!-- Mahdi-Rom activities Start -->
+
+        <activity android:name=".mahdi.CustomizationSettings" />
+
+        </activity>        
+
+        <!-- Mahdi-Rom activities End -->
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"

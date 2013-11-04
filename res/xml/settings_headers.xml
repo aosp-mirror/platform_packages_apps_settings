@@ -195,6 +195,13 @@
         android:icon="@*android:drawable/ic_print"
         android:title="@string/print_settings" />
 
+    <!-- Customization -->
+    <header
+        android:id="@+id/customization_settings"
+        android:fragment="com.android.settings.mahdi.CustomizationSettings"
+        android:title="@string/customization_settings_title"
+        android:icon="@drawable/ic_settings_mahdi" />
+
     <!-- Development -->
     <header
         android:id="@+id/development_settings"
