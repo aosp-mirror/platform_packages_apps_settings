@@ -196,6 +196,12 @@
                         style="@style/wifi_item_content"
                         android:prompt="@string/proxy_settings_title"
                         android:entries="@array/wifi_proxy_settings" />
+
+                <TextView android:id="@+id/proxy_pac_info"
+                        style="@style/wifi_item_content"
+                        android:textStyle="bold"
+                        android:textAlignment="viewStart"
+                        android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout android:id="@+id/proxy_warning_limited_support"
