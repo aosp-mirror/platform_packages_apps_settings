@@ -239,6 +239,13 @@ public class WifiConfigController implements TextWatcher,
                 if (config.proxySettings == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
                     showAdvancedFields = true;
+                } else if (config.proxySettings == ProxySettings.PAC) {
+                    mProxySettingsSpinner.setVisibility(View.GONE);
+                    TextView textView = (TextView)mView.findViewById(R.id.proxy_pac_info);
+                    textView.setVisibility(View.VISIBLE);
+                    textView.setText(context.getString(R.string.proxy_url) +
+                            config.linkProperties.getHttpProxy().getPacFileUrl());
+                    showAdvancedFields = true;
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
                 }
