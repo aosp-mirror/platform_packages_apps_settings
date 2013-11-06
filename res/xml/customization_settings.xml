@@ -24,6 +24,13 @@
         android:title="@string/power_menu_title"
 	android:summary="@string/power_menu_summary"
 	android:icon="@drawable/ic_settings_power_menu"
-        android:fragment="com.android.settings.mahdi.PowerMenu" />               
+        android:fragment="com.android.settings.mahdi.PowerMenu" />
+
+    <PreferenceScreen
+        android:key="button_settings"
+        android:title="@string/button_settings_title"
+	android:summary="@string/button_settings_summary"
+	android:icon="@drawable/ic_settings_button_settings"
+        android:fragment="com.android.settings.mahdi.ButtonSettings" />              
        
 </PreferenceScreen>
