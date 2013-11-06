@@ -18,4 +18,11 @@
     <!-- Show Expanded Desktop preference -->
     <bool name="config_show_expandedDesktop">false</bool>
 
+    <!-- Volume Rocker Wake Support. Some devices do not support (PMU) this.
+         Setting to false will disable Volume Rocker Wake support -->
+    <bool name="config_show_volumeRockerWake">false</bool>
+
+    <!-- Volume rocker support. Some devices do not have a volume rocker. -->
+    <bool name="config_has_volume_rocker">true</bool>
+
 </resources>
