@@ -52,10 +52,15 @@
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
-        <CheckBoxPreference
-            android:key="notification_pulse"
-            android:title="@string/notification_pulse_title"
-            android:persistent="false" />
+        <PreferenceScreen
+                android:key="battery_light"
+                android:title="@string/battery_light_title"
+                android:fragment="com.android.settings.purity.notificationlight.BatteryLightSettings" />
+
+        <PreferenceScreen
+                android:key="notification_pulse"
+                android:title="@string/notification_pulse_title"
+                android:fragment="com.android.settings.purity.notificationlight.NotificationLightSettings" />
 
         <PreferenceScreen
                 android:key="wifi_display"
