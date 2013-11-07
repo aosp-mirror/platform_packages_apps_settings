@@ -238,7 +238,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mDeviceNamePref) {
-            mCachedDevice.setName((String) newValue);
+            mCachedDevice.setAliasName((String) newValue);
         } else if (preference instanceof CheckBoxPreference) {
             LocalBluetoothProfile prof = getProfileOf(preference);
             onProfileClicked(prof, (CheckBoxPreference) preference);
