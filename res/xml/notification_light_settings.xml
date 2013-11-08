@@ -46,13 +46,13 @@
             android:key="missed_call"
             android:title="@string/notification_light_missed_call_title"
             android:persistent="false"
-            android:dependency="notification_light_pulse" />
+            android:dependency="notification_light_pulse_custom_enable" />
 
         <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="voicemail"
             android:title="@string/notification_light_voicemail_title"
             android:persistent="false"
-            android:dependency="notification_light_pulse" />
+            android:dependency="notification_light_pulse_custom_enable" />
 
     </PreferenceCategory>
 
