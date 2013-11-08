@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2013 SlimRoms Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/status_bar_clock_title">
+
+       <CheckBoxPreference
+            android:key="status_bar_show_clock"
+            android:title="@string/status_bar_show_clock_title"
+            android:defaultValue="true" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="clock_color"
+            android:title="@string/clock_color_title"
+            android:defaultValue="0xffffff"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_style"
+            android:entries="@array/clock_style_entries"
+            android:entryValues="@array/clock_style_values"
+            android:title="@string/clock_title_enable"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="status_bar_am_pm"
+            android:dialogTitle="@string/status_bar_am_pm_title"
+            android:title="@string/status_bar_am_pm_title"
+            android:entries="@array/entries_status_bar_am_pm"
+            android:entryValues="@array/values_status_bar_am_pm"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_date_display"
+            android:title="@string/clock_date_display"
+            android:summary="@string/clock_date_display_summary"
+            android:entries="@array/clock_date_display_entries"
+            android:entryValues="@array/clock_date_display_values"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_date_style"
+            android:title="@string/clock_date_style"
+            android:entries="@array/clock_date_style_entries"
+            android:entryValues="@array/clock_date_style_values"
+            android:dependency="status_bar_show_clock" />
+
+        <ListPreference
+            android:key="clock_date_format"
+            android:title="@string/clock_date_format"
+            android:entries="@array/clock_date_format_entries_values"
+            android:entryValues="@array/clock_date_format_entries_values"
+            android:dependency="status_bar_show_clock" />
+
+</PreferenceScreen>

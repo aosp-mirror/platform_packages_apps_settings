@@ -58,6 +58,15 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
+    <!-- Purity Settings -->
+    <header android:title="@string/header_category_rom_settings" />
+
+    <!-- System -->
+    <header
+        android:id="@+id/system_settings"
+        android:fragment="com.android.settings.purity.SystemSettings"
+        android:title="@string/system_settings_title" />
+
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
