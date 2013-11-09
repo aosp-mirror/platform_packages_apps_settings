@@ -16,7 +16,11 @@
 
 package com.android.settings.mahdi;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -33,9 +37,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SoundSettings";
 
+    private static final int DLG_SAFE_HEADSET_VOLUME = 0;
+
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
+    private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
     private CheckBoxPreference mVolBtnMusicCtrl;
+    private CheckBoxPreference mSafeHeadsetVolume;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 1) != 0);
         mVolBtnMusicCtrl.setOnPreferenceChangeListener(this);
+
+        mSafeHeadsetVolume = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
+        mSafeHeadsetVolume.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.SAFE_HEADSET_VOLUME, 1) != 0);
+        mSafeHeadsetVolume.setOnPreferenceChangeListener(this);
 
     }
 
@@ -62,8 +75,73 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     Settings.System.VOLUME_MUSIC_CONTROLS,
                     (Boolean) objValue ? 1 : 0);
         }
-
+        if (KEY_SAFE_HEADSET_VOLUME.equals(key)) {
+            if ((Boolean) objValue) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.SAFE_HEADSET_VOLUME, 1);
+            } else {
+                showDialogInner(DLG_SAFE_HEADSET_VOLUME);
+            }
+        }
         return true;
+    }
+
+    private void showDialogInner(int id) {
+        DialogFragment newFragment = MyAlertDialogFragment.newInstance(id);
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(getFragmentManager(), "dialog " + id);
+    }
+
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newInstance(int id) {
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("id", id);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        SoundSettings getOwner() {
+            return (SoundSettings) getTargetFragment();
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int id = getArguments().getInt("id");
+            switch (id) {
+                case DLG_SAFE_HEADSET_VOLUME:
+                    return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.attention)
+                    .setMessage(R.string.safe_headset_volume_warning_dialog_text)
+                    .setPositiveButton(R.string.dlg_ok,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Settings.System.putInt(getOwner().getContentResolver(),
+                                    Settings.System.SAFE_HEADSET_VOLUME, 0);
+
+                        }
+                    })
+                    .setNegativeButton(R.string.dlg_cancel,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create();
+            }
+            throw new IllegalArgumentException("unknown id " + id);
+        }
+
+        @Override
+        public void onCancel(DialogInterface dialog) {
+            int id = getArguments().getInt("id");
+            switch (id) {
+                case DLG_SAFE_HEADSET_VOLUME:
+                    getOwner().mSafeHeadsetVolume.setChecked(true);
+                    break;
+            }
+        }
     }
 
 }
