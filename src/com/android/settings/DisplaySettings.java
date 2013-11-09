@@ -63,6 +63,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_ROTATION = "lockscreen_rotation";
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
+    private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
+    private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -81,7 +83,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mNotificationLight;
     private PreferenceScreen mBatteryPulse;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
-    private PreferenceCategory mWakeUpOptions;    
+    private PreferenceCategory mWakeUpOptions;
+    private ListPreference mCrtMode;   
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -191,6 +194,23 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         if (counter == 2) {
             prefSet.removePreference(mWakeUpOptions);
+        }
+
+        // respect device default configuration
+        // true fades while false animates
+        boolean electronBeamFadesConfig = getResources().getBoolean(
+                com.android.internal.R.bool.config_animateScreenLights);
+        PreferenceCategory animationOptions =
+            (PreferenceCategory) prefSet.findPreference(KEY_ANIMATION_OPTIONS);
+        mCrtMode = (ListPreference) prefSet.findPreference(KEY_POWER_CRT_MODE);
+        if (!electronBeamFadesConfig && mCrtMode != null) {
+            int crtMode = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SYSTEM_POWER_CRT_MODE, 1);
+            mCrtMode.setValue(String.valueOf(crtMode));
+            mCrtMode.setSummary(mCrtMode.getEntry());
+            mCrtMode.setOnPreferenceChangeListener(this);
+        } else if (animationOptions != null) {
+            prefSet.removePreference(animationOptions);
         }
     }
 
@@ -447,7 +467,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
                     (Boolean) objValue ? 1 : 0);
         }
-
+        if (KEY_POWER_CRT_MODE.equals(key)) {
+            int value = Integer.parseInt((String) objValue);
+            int index = mCrtMode.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SYSTEM_POWER_CRT_MODE,
+                    value);
+            mCrtMode.setSummary(mCrtMode.getEntries()[index]);
+        }
         return true;
     }
 
