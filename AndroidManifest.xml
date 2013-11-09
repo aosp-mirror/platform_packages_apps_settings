@@ -1702,8 +1702,8 @@
 
         <activity android:name=".mahdi.CustomizationSettings" />
         <activity android:name=".mahdi.PowerMenu" />
-	<activity android:name=".notificationlight.NotificationLightSettings" />
-	<activity android:name=".notificationlight.BatteryLightSettings" />
+	<activity android:name=".mahdi.notificationlight.NotificationLightSettings" />
+	<activity android:name=".mahdi.notificationlight.BatteryLightSettings" />
 	<activity android:name=".profiles.ProfilesSettings" />
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to expanded-desktop config -->
@@ -1776,6 +1776,30 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/security_settings" />
         </activity>
+
+	<!-- PerformanceControl activities -->
+        <activity android:name="com.brewcrewfoo.performance.activities.MainActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.PCSettings"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.PackActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FlasherActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FileChooser"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.ResidualsActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.iResidualsActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.KSMActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FreezerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.GovSetActivity"/>
+
+        <receiver android:name="com.brewcrewfoo.performance.service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.brewcrewfoo.performance.service.BootService"/>
 
         <!-- Mahdi-Rom activities End -->
 
