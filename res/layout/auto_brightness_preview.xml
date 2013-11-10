@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="4dip">
+
+    <com.android.settings.widget.CubicSplinePreviewView
+            android:id="@+id/brightness_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            settings:backgroundColor="@color/auto_brightness_preview_background"
+            settings:foregroundColor="@color/auto_brightness_preview_foreground"
+            settings:gridColor="@color/auto_brightness_preview_grid"
+            settings:markerColor="@color/auto_brightness_preview_markers"
+            settings:textSize="@dimen/auto_brightness_preview_text_size"
+            settings:strokeWidth="@dimen/auto_brightness_preview_stroke_width"
+            settings:markerSize="@dimen/auto_brightness_preview_marker_size"
+            settings:margin="@dimen/auto_brightness_preview_grid_margin" />
+
+</LinearLayout>

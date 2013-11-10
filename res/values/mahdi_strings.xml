@@ -318,6 +318,63 @@
     <!-- Safe headset volume restore checkbox -->
     <string name="safe_headset_volume_title">Safe headset volume</string>
     <string name="safe_headset_volume_summary">Prevent loud volume levels when headset is first plugged in</string>
-    <string name="safe_headset_volume_warning_dialog_text">Listening at high volume for long periods may damage your hearing. Disable it with caution.</string> 
+    <string name="safe_headset_volume_warning_dialog_text">Listening at high volume for long periods may damage your hearing. Disable it with caution.</string>
+
+    <!-- Automatic brightness customization -->
+    <string name="auto_brightness_setup_title">Automatic brightness</string>
+    <string name="auto_brightness_adjustment_title">Brightness adjustment</string>
+    <string name="auto_brightness_twilight_adjustment">Adjust to sunrise and sunset</string>
+    <string name="light_sensor_current_value">Current light sensor value: <xliff:g id="light_level">%d</xliff:g> lux</string>
+    <string name="auto_brightness_dialog_title">Automatic brightness levels</string>
+    <string name="auto_brightness_level_format"><xliff:g id="level">%1$d</xliff:g> lux</string>
+    <string name="auto_brightness_last_level_format"><xliff:g id="level">%1$d</xliff:g> -\n\u221e lux</string>
+    <string name="auto_brightness_brightness_format" translatable="false"><xliff:g id="percent">%s</xliff:g>%%</string>
+    <string name="auto_brightness_adjust_button">Adjust</string>
+    <string name="auto_brightness_close_button">Close</string>
+    <string name="auto_brightness_reset_button">Reset</string>
+    <string name="auto_brightness_split_dialog_title">Split brightness level</string>
+    <string name="auto_brightness_level_dialog_title">Light level setup</string>
+    <string name="auto_brightness_lux">Ambient brightness (lux)</string>
+    <string name="auto_brightness_backlight">Screen brightness (%)</string>
+    <string name="auto_brightness_reset_dialog_title">Reset levels?</string>
+    <string name="auto_brightness_reset_confirmation">All brightness levels will be reset to their default settings.</string>
+    <string name="auto_brightness_split_lux_format">Split position (between <xliff:g id="min">%1$d</xliff:g> and <xliff:g id="max">%2$d</xliff:g> lux)</string>
+    <string name="auto_brightness_level_options">Light level options</string>
+    <string name="auto_brightness_menu_edit">Edit</string>
+    <string name="auto_brightness_menu_split">Split</string>
+    <string name="auto_brightness_menu_remove">Remove</string>
+    <string name="auto_brightness_preview">Preview</string>
+    <string name="auto_brightness_preview_dialog_title">Brightness curve preview</string>
+    <string name="auto_brightness_help_dialog_title">Help</string>
+    <string name="auto_brightness_help_text"><b>How is brightness calculated?</b>
+\n\n
+The brightness curve is calculated by performing a <i>cubic spline interpolation</i>
+on a given number of <i>control points</i>. It\'s not a \'bucket-type\' calculation where
+screen brightness will stay constant for a specific range of ambient brightness. That way,
+small changes in ambient brightness do not cause a large jump in screen brightness; however,
+it can be a little hard to predict the exact consequences of changing control points.\n
+To help with that, a preview of the calculated curve can be examined. Please note that the
+preview shows the curve in <i>logarithmic</i> scale, so that all control points can be shown
+distinctively. When using a linear scale, it wouldn\'t be possible to distinguish the tendentially
+more important control points in the lower range of ambient brightness.
+\n\n
+<b>How to edit the brightness curve?</b>
+\n\n
+Each line in the brightness list corresponds to one <i>control point</i> of the
+brightness curve. To edit the brightness level of the point, you can use the slider
+present in each line. The screen brightness will be changed accordingly while touching
+the slider to give a preview of the light level.\n
+Additional options are available by long-pressing a line. By selecting \'Edit\', you can
+both edit the ambient brightness level of the control point as well as manually input the
+desired screen brightness. Selecting \'Split\' allows you to to duplicate one line into
+two in order to insert additional control points. \'Remove\' deletes the selected line.
+    </string>
+
+    <string name="auto_brightness_sensitivity_title">Adjustment sensitivity</string>
+    <string name="auto_brightness_sensitivity_verylow">Very low</string>
+    <string name="auto_brightness_sensitivity_low">Low</string>
+    <string name="auto_brightness_sensitivity_medium">Medium</string>
+    <string name="auto_brightness_sensitivity_high">High</string>
+    <string name="auto_brightness_sensitivity_veryhigh">Very high</string>
      
 </resources>

@@ -1801,6 +1801,10 @@
 
         <service android:name="com.brewcrewfoo.performance.service.BootService"/>
 
+	<activity android:name=".mahdi.AutoBrightnessSetup"
+                android:excludeFromRecents="true"
+                android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
+
         <!-- Mahdi-Rom activities End -->
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
