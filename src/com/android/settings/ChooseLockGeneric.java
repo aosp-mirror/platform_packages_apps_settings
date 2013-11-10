@@ -30,6 +30,7 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.security.KeyStore;
 import android.util.EventLog;
 import android.view.LayoutInflater;
@@ -139,33 +140,47 @@ public class ChooseLockGeneric extends PreferenceActivity {
             final String key = preference.getKey();
             boolean handled = true;
 
-            EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, key);
+	    EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, key);
 
             if (KEY_UNLOCK_SET_OFF.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);
+                setUnsecureType(-1);
             } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false);
+                setUnsecureType(1);
             } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK, false);
+                setUnsecureType(0);
             }else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
+                setUnsecureType(0);
             } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
+                setUnsecureType(0);
             } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
+                setUnsecureType(0);
             } else {
                 handled = false;
             }
             return handled;
         }
 
-        @Override
+         //this function is for future merge of other Lockscreen styles
+        //-1 = none 0 = other, 1 = slider
+        private void setUnsecureType(int usedUnsecureUnlock) {
+
+                Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
+                        Settings.Secure.LOCKSCREEN_UNSECURE_USED, usedUnsecureUnlock);
+        }
+
+	@Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View v = super.onCreateView(inflater, container, savedInstanceState);

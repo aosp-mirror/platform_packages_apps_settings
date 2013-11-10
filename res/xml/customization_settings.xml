@@ -31,6 +31,13 @@
         android:title="@string/button_settings_title"
 	android:summary="@string/button_settings_summary"
 	android:icon="@drawable/ic_settings_button_settings"
-        android:fragment="com.android.settings.mahdi.ButtonSettings" />              
+        android:fragment="com.android.settings.mahdi.ButtonSettings" />
+
+    <PreferenceScreen
+        android:key="lock_screen_settings"
+	android:title="@string/lock_screen_title"
+	android:summary="@string/lock_screen_summary"
+	android:icon="@drawable/ic_settings_lockscreen"
+        android:fragment="com.android.settings.mahdi.LockscreenInterface" />               
        
 </PreferenceScreen>

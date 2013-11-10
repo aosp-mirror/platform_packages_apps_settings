@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,10 +36,12 @@ import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -69,6 +72,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+    private static final String PREF_LOCK_SCREEN = "lock_screen_settings";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
@@ -87,7 +91,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
-    // CyanogenMod Additions
+    // Mahdi-Rom Additions
+    private static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
     private static final String KEY_APP_SECURITY_CATEGORY = "app_security";
     private static final String KEY_BLACKLIST = "blacklist";
 
@@ -116,7 +121,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     private boolean mIsPrimary;
 
-    // CyanogenMod Additions
+    // Mahdi-Rom Additions    
+    private CheckBoxPreference mLockBeforeUnlock;
     private PreferenceScreen mBlacklist;
 
     public SecuritySettings() {
@@ -146,7 +152,13 @@ public class SecuritySettings extends RestrictedSettingsFragment
         // Add package manager to check if features are available
         PackageManager pm = getPackageManager();
 
-        // Add options for lock/unlock screen
+        // Mahdi-Rom - allows for calling the settings screen with stock or mahdi view
+        boolean isMahdiSecurity = false;
+        Bundle args = getArguments();
+        if (args != null) {
+             isMahdiSecurity = args.getBoolean("mahdi_security");
+         }
+        ContentResolver resolver = getActivity().getApplicationContext().getContentResolver();
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
             // if there are multiple users, disable "None" setting
@@ -214,6 +226,38 @@ public class SecuritySettings extends RestrictedSettingsFragment
             setupLockAfterPreference();
             updateLockAfterPreferenceSummary();
         }
+
+	// Add the additional Mahdi-Rom settings
+        addPreferencesFromResource(R.xml.security_settings_mahdi);
+
+        // Lock before Unlock
+            mLockBeforeUnlock = (CheckBoxPreference) root
+                    .findPreference(LOCK_BEFORE_UNLOCK);
+            mLockBeforeUnlock.setChecked(Settings.Secure.getInt(resolver,
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, 0) == 1);
+
+        // disable lock options if lock screen set to NONE
+            // or if using pattern as a primary lock screen or
+            // as a backup to biometric
+            if ((!mLockPatternUtils.isSecure() && mLockPatternUtils.isLockScreenDisabled())
+                || (mLockPatternUtils.isLockPatternEnabled())) {               
+                if (mLockPatternUtils.isLockPatternEnabled()) {
+                    mLockBeforeUnlock.setEnabled(true);
+                } else {
+                    mLockBeforeUnlock.setEnabled(false);
+                } 
+
+            // disable menu unlock and vibrate on unlock options if
+            // using PIN/password as primary lock screen or as
+            // backup to biometric
+            } else if (mLockPatternUtils.isLockPasswordEnabled()) {                
+                mLockBeforeUnlock.setEnabled(true);
+           
+            // Disable the quick unlock if its not using PIN/password
+            // as a primary lock screen or as a backup to biometric
+            } else {                
+                mLockBeforeUnlock.setEnabled(false);
+            }
 
         // biometric weak liveliness
         mBiometricWeakLiveliness =
@@ -582,6 +626,9 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
+	} else if (preference == mLockBeforeUnlock) {
+            Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, isToggled(preference) ? 1 : 0);
         } else if (KEY_ENABLE_WIDGETS.equals(key)) {
             lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
         } else if (preference == mShowPassword) {

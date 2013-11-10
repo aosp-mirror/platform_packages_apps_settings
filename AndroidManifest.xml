@@ -1704,6 +1704,7 @@
         <activity android:name=".mahdi.PowerMenu" />
 	<activity android:name=".mahdi.notificationlight.NotificationLightSettings" />
 	<activity android:name=".mahdi.notificationlight.BatteryLightSettings" />
+	<activity android:name=".mahdi.LockscreenInterface" />
 	<activity android:name=".profiles.ProfilesSettings" />
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to expanded-desktop config -->
@@ -1804,6 +1805,17 @@
 	<activity android:name=".mahdi.AutoBrightnessSetup"
                 android:excludeFromRecents="true"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
+
+	<!-- Pseudo-activity used to provide an intent-filter entry point to ass lockscreen config -->
+        <activity android:name="Settings$LockscreenSettingsActivity"
+                android:label="@string/lock_screen_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.LockscreenInterface" />
+        </activity>
 
         <!-- Mahdi-Rom activities End -->
 
