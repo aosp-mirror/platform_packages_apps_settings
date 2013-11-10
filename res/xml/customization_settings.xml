@@ -19,10 +19,17 @@
     android:title="@string/customization_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-     <PreferenceScreen
-        android:key="quick_settings"
-	android:summary="@string/quick_settings_summary"
+    <PreferenceScreen
+        android:key="status_bar"
+	android:title="@string/status_bar_title"
+	android:summary="@string/status_bar_summary"
+	android:icon="@drawable/ic_settings_status_bar"
+        android:fragment="com.android.settings.mahdi.StatusBar" />
+
+    <PreferenceScreen
+        android:key="quick_settings"	
         android:title="@string/quick_settings_title"
+	android:summary="@string/quick_settings_summary"
 	android:icon="@drawable/ic_settings_quick_settings"         
 	android:fragment="com.android.settings.mahdi.QuickSettings" />   
     
