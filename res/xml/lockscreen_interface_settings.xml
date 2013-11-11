@@ -23,5 +23,11 @@
             android:title="@string/screen_security_category"
             android:summary="@string/screen_security_summary">             
         </PreferenceScreen>
+
+	<CheckBoxPreference
+            android:key="battery_around_lockscreen_ring"
+            android:title="@string/battery_around_lockscreen_ring"
+      	    android:summary="@string/battery_around_lockscreen_ring_summary"
+            android:defaultValue="true" />
 	    
 </PreferenceScreen>

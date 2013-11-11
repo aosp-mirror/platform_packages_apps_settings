@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Slimroms
+ * Copyright (C) 2013 Mahdi-Rom
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,23 +23,19 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.Rect;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
-import android.provider.MediaStore;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.view.Display;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.android.internal.view.RotationPolicy;
-import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -47,17 +43,23 @@ import com.android.settings.Utils;
 import java.io.File;
 import java.io.IOException;
 
-public class LockscreenInterface extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class LockscreenInterface extends SettingsPreferenceFragment implements
+OnPreferenceChangeListener {
+
     private static final String TAG = "LockscreenInterface";
-    
+
     private static final String KEY_ADDITIONAL_OPTIONS = "options_group";
+    private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
         
     private PreferenceCategory mAdditionalOptions;
+    private CheckBoxPreference mLockRingBattery;
 
     private boolean mCheckPreferences;
 
     private Activity mActivity;
-    private ContentResolver mResolver;    
+    private ContentResolver mResolver;
+    private File wallpaperImage;
+    private File wallpaperTemporary;
 
     public boolean hasButtons() {
         return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
@@ -68,7 +70,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         super.onCreate(savedInstanceState);
 
         mActivity = getActivity();
-        mResolver = mActivity.getContentResolver();        
+        mResolver = mActivity.getContentResolver();              
 
         createCustomLockscreenView();
     }
@@ -83,8 +85,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
         prefs = getPreferenceScreen();
 
-        mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);        
-        
+        mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);                
+
+        mLockRingBattery = (CheckBoxPreference)findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
+        mLockRingBattery.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, 0) == 1);
+                
         final int unsecureUnlockMethod = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.LOCKSCREEN_UNSECURE_USED, 1);
         final int lockBeforeUnlock = Settings.Secure.getInt(getActivity().getContentResolver(),
@@ -94,7 +100,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         if ((unsecureUnlockMethod != 1 && lockBeforeUnlock == 0)
                  || unsecureUnlockMethod == -1) {             
         }
-        
+                        
         mCheckPreferences = true;
         return prefs;
     }
@@ -111,6 +117,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     }
 
     @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {        
+        if (preference == mLockRingBattery) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, mLockRingBattery.isChecked() ? 1 : 0);    
+        }
+       return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (!mCheckPreferences) {
             return false;
@@ -118,6 +133,5 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
      return true;
                        
-    }
-
+    }            
 }
