@@ -52,19 +52,36 @@
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
-        <PreferenceScreen
+        <PreferenceCategory
+            android:key="category_light_options"
+            android:title="@string/display_category_light_options_title" >
+
+            <PreferenceScreen
                 android:key="battery_light"
                 android:title="@string/battery_light_title"
                 android:fragment="com.android.settings.purity.notificationlight.BatteryLightSettings" />
 
-        <PreferenceScreen
+            <PreferenceScreen
                 android:key="notification_pulse"
                 android:title="@string/notification_pulse_title"
                 android:fragment="com.android.settings.purity.notificationlight.NotificationLightSettings" />
+
+        </PreferenceCategory>
 
         <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
+        <PreferenceCategory
+            android:key="category_wakeup_options"
+            android:title="@string/display_category_wakeup_options_title" >
+
+            <CheckBoxPreference
+                android:key="pref_volume_wake"
+                android:title="@string/pref_volume_wake_title"
+                android:summary="@string/pref_volume_wake_summary" />
+
+        </PreferenceCategory>
 
 </PreferenceScreen>

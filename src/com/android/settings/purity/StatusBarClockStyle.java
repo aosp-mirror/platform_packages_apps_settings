@@ -110,7 +110,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         if (intColor == -2) {
             intColor = getResources().getColor(
                     com.android.internal.R.color.white);
-            mColorPicker.setSummary(getResources().getString(R.string.color_default));
+            mColorPicker.setSummary(getResources().getString(R.string.default_string));
         } else {
             String hexColor = String.format("#%08x", (0xffffffff & intColor));
             mColorPicker.setSummary(hexColor);

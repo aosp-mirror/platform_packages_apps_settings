@@ -64,6 +64,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
+    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -74,6 +75,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceCategory mLightOptions;
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
+    private CheckBoxPreference mVolumeWake;
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -158,6 +160,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } else {
                 updateBatteryPulseDescription();
             }
+        }
+
+        mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
+        if (mVolumeWake != null) {
+            mVolumeWake.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
+            mVolumeWake.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -350,18 +359,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private void updateLightPulseDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1) {
-            mNotificationPulse.setSummary(getString(R.string.notification_light_enabled));
+            mNotificationPulse.setSummary(getString(R.string.enabled));
         } else {
-            mNotificationPulse.setSummary(getString(R.string.notification_light_disabled));
+            mNotificationPulse.setSummary(getString(R.string.disabled));
          }
     }
 
     private void updateBatteryPulseDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.BATTERY_LIGHT_ENABLED, 1) == 1) {
-            mBatteryPulse.setSummary(getString(R.string.notification_light_enabled));
+            mBatteryPulse.setSummary(getString(R.string.enabled));
         } else {
-            mBatteryPulse.setSummary(getString(R.string.notification_light_disabled));
+            mBatteryPulse.setSummary(getString(R.string.disabled));
         }
      }
 
@@ -388,7 +397,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
         }
-
+        if (KEY_VOLUME_WAKE.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.VOLUME_WAKE_SCREEN,
+                    (Boolean) objValue ? 1 : 0);
+        }
         return true;
     }
 

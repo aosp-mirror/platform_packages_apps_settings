@@ -30,4 +30,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="status_bar_general"
+        android:title="@string/status_bar_general_title">
+
+        <CheckBoxPreference
+            android:key="status_bar_brightness_control"
+            android:title="@string/status_bar_toggle_brightness"
+            android:summary="@string/status_bar_toggle_brightness_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
