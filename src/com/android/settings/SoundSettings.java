@@ -58,7 +58,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "SoundSettings";
 
     private static final int DIALOG_NOT_DOCKED = 1;
-
+    
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
     
@@ -73,6 +73,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_LOCK_SOUNDS = "lock_sounds";
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
+    private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
@@ -117,6 +118,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
     private CheckBoxPreference mVolumeAdustSound;
+    private CheckBoxPreference mSafeHeadsetVolume;
     private CheckBoxPreference mPowerSounds;
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
@@ -254,6 +256,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolumeAdustSound.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) == 1);
         mVolumeAdustSound.setOnPreferenceChangeListener(this);
+
+	mSafeHeadsetVolume = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
+        mSafeHeadsetVolume.setPersistent(false);
+        boolean safeMediaVolumeEnabled = getResources().getBoolean(
+                com.android.internal.R.bool.config_safe_media_volume_enabled);
+        mSafeHeadsetVolume.setChecked(Settings.System.getInt(resolver,
+                Settings.System.SAFE_HEADSET_VOLUME, safeMediaVolumeEnabled ? 1 : 0) != 0);
 
         initDockSettings();
 
@@ -434,6 +443,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
                 (Boolean) objValue ? 1 : 0);
+	} else if (preference == mSafeHeadsetVolume) {
+            Settings.System.putInt(getContentResolver(), Settings.System.SAFE_HEADSET_VOLUME,
+                    mSafeHeadsetVolume.isChecked() ? 1 : 0);	
 	} else if (preference == mVolumeOverlay) {
             final int value = Integer.valueOf((String) objValue);
             final int index = mVolumeOverlay.findIndexOfValue((String) objValue);

@@ -37,12 +37,7 @@
             android:title="@string/musicfx_title">
         <intent android:targetPackage="com.android.musicfx"
                 android:targetClass="com.android.musicfx.ControlPanelPicker" />
-    </Preference>
-
-    <PreferenceScreen
-            android:key="advanced_sound_settings"
-            android:fragment="com.android.settings.mahdi.SoundSettings"
-            android:title="@string/advanced_sound_title" />
+    </Preference>    
 
     <PreferenceCategory
             android:key="category_calls_and_notification"
@@ -97,6 +92,12 @@
             android:key="volume_adjust_sounds"
             android:title="@string/volume_adjust_sounds_enable_title"
             android:summary="@string/volume_adjust_sounds_enable_summary"
+            android:defaultValue="true" />
+
+    <CheckBoxPreference
+            android:key="safe_headset_volume"
+            android:title="@string/safe_headset_volume_title"
+            android:summary="@string/safe_headset_volume_summary"
             android:defaultValue="true" />
 
     <PreferenceCategory
