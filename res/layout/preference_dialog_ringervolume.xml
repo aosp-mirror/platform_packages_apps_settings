@@ -39,66 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:visibility="gone" />
-
-        <!-- Used for the ringer/notification volume -->
-        <LinearLayout
-                android:id="@+id/ringer_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:id="@+id/ringer_description_text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="16dip"
-                    android:layout_gravity="start"
-                    android:text="@string/volume_ring_description"
-                />
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dip"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView android:id="@+id/ringer_mute_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="16dip"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:contentDescription="@string/volume_ring_mute"
-                        />
-
-                    <SeekBar android:id="@+id/ringer_volume_seekbar"
-                            android:layout_width="0dip"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingTop="2dip"
-                            android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/link_volumes_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dip"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-            <CheckBox
-                    android:id="@+id/link_ring_and_volume"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:text="@string/link_volume_ringtones"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                />
-        </LinearLayout>
-
+        
         <!-- Used for the media volume -->
         <LinearLayout
                 android:id="@+id/media_section"
@@ -141,6 +82,48 @@
 
         </LinearLayout>
 
+	<!-- Used for the ringer/notification volume -->
+        <LinearLayout
+                android:id="@+id/ringer_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/ringer_description_text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dip"
+                    android:layout_gravity="start"
+                    android:text="@string/volume_ring_description"
+                />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dip"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView android:id="@+id/ringer_mute_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dip"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:contentDescription="@string/volume_ring_mute"
+                        />
+
+                    <SeekBar android:id="@+id/ringer_volume_seekbar"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingTop="2dip"
+                            android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
+            </LinearLayout>
+
+        </LinearLayout>        
+
         <!-- Used for the notification volume -->
         <LinearLayout
                 android:id="@+id/notification_section"
@@ -182,6 +165,23 @@
                             android:layout_marginEnd="@dimen/volume_seekbar_side_margin" />
             </LinearLayout>
 
+        </LinearLayout>
+
+	<LinearLayout
+                android:id="@+id/link_volumes_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dip"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+            <CheckBox
+                    android:id="@+id/link_ring_and_volume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="@string/link_volume_ringtones"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                />
         </LinearLayout>
 
         <!-- Used for the alarm volume -->
