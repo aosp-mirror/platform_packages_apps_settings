@@ -26,7 +26,8 @@
         <PreferenceScreen
             android:fragment="com.android.settings.mahdi.StatusBarClockStyle"
             android:key="clock_style_pref"
-            android:title="@string/status_bar_clock" />
+            android:title="@string/status_bar_clock"
+	    android:summary="@string/status_bar_clock_summary" />
 
     </PreferenceCategory>
 
