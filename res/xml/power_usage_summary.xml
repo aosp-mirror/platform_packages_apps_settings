@@ -17,6 +17,23 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/battery_since_unplugged"
         android:key="app_list">
+
+    <PreferenceCategory
+        android:key="battery_prefs"
+        android:title="@string/battery_prefs_title" />
+
+    <ListPreference
+        android:key="pref_low_battery_warning_policy"
+        android:title="@string/pref_low_battery_warning_policy_title"
+        android:dialogTitle="@string/pref_low_battery_warning_policy_dialog_title"
+        android:entries="@array/pref_low_battery_warning_policy_entries"
+        android:entryValues="@array/pref_low_battery_warning_policy_values"
+        android:defaultValue="0" />
+
+    <PreferenceCategory
+        android:key="battery_stats"
+        android:title="@string/battery_stats_title" />
+
     <Preference
         style="?android:attr/preferenceInformationStyle"
         android:key="battery_status"

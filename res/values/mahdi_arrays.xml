@@ -387,4 +387,23 @@
         <item>5000</item>
         <item>10000</item>
     </integer-array>
+
+    <!-- Low battery warning policy -->
+    <string-array name="pref_low_battery_warning_policy_entries">
+        <item>@string/low_battery_warning_policy_popup_sound</item>
+        <item>@string/low_battery_warning_policy_notif_sound</item>
+        <item>@string/low_battery_warning_policy_popup</item>
+        <item>@string/low_battery_warning_policy_notif</item>
+        <item>@string/low_battery_warning_policy_sound</item>
+        <item>@string/disabled</item>
+    </string-array>
+
+    <string-array name="pref_low_battery_warning_policy_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
