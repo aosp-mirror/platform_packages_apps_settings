@@ -265,6 +265,8 @@
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
 
+    <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
+    <string name="bluetooth_broadcasting">Broadcasting</string>
     <!-- Bluetooth settings.  Dialog title to disable a single profile of a device. [CHAR LIMIT=40] -->
     <string name="bluetooth_disable_profile_title">Disable profile?</string>
     <!-- Bluetooth settings.  Message for disabling a profile of a bluetooth device. [CHAR LIMIT=NONE] -->
@@ -322,6 +324,13 @@
     <!-- Strings for asking to the user whether to allow an app to enable lasting discovery mode  -->
     <string name="bluetooth_ask_lasting_discovery" product="tablet">An app wants to make your tablet visible to other Bluetooth devices. You can change this later in Bluetooth settings.</string>
     <string name="bluetooth_ask_lasting_discovery" product="default">An app wants to make your phone visible to other Bluetooth devices. You can change this later in Bluetooth settings.</string>
+
+    <!-- Strings for asking to the user whether to allow an app to start broadcasting -->
+    <string name="bluetooth_ask_start_broadcast" product="default"><xliff:g id="app_name">%1$s</xliff:g> wants to turn on Bluetooth broadcasting to communicate with other devices nearby. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and start broadcasting -->
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default"><xliff:g id="app_name">%1$s</xliff:g> wants to turn on Bluetooth and Bluetooth broadcasting to communicate with other devices nearby. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for bluetooth broadcasting explanation -->
+    <string name="bluetooth_broadcasting_explaination" product="default">When this feature is turned on, your phone can communicate with other devices nearby.\n\nBroadcasting uses low-power Bluetooth signals.</string>
 
     <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode -->
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet">An app wants to turn on Bluetooth and make your tablet visible to other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds.</string>
