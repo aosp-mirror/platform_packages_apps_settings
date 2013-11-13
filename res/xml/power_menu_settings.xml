@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 Slimroms
+<!-- Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,17 +16,27 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/system_settings_title"
+    android:title="@string/power_menu_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceScreen
-        android:key="status_bar"
-        android:fragment="com.android.settings.purity.StatusBar"
-        android:title="@string/status_bar_title" />
+    <CheckBoxPreference
+        android:key="power_menu_reboot"
+        android:title="@string/power_menu_reboot_title"
+        android:defaultValue="true" />
 
-    <PreferenceScreen
-        android:key="power_menu"
-        android:title="@string/power_menu_title"
-        android:fragment="com.android.settings.purity.PowerMenu" />
+    <CheckBoxPreference
+        android:key="power_menu_screenshot"
+        android:title="@string/power_menu_screenshot_title"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="power_menu_airplane"
+        android:title="@string/power_menu_airplane_title"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="power_menu_silent"
+        android:title="@string/power_menu_silent_title"
+        android:defaultValue="true" />
 
 </PreferenceScreen>
