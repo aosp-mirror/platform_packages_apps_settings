@@ -16,25 +16,33 @@
 
 package com.android.settings.purity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class PowerMenu extends SettingsPreferenceFragment {
+public class PowerMenu extends SettingsPreferenceFragment implements
+        OnPreferenceChangeListener {
     private static final String TAG = "PowerMenu";
 
     private static final String KEY_REBOOT = "power_menu_reboot";
     private static final String KEY_SCREENSHOT = "power_menu_screenshot";
+    private static final String KEY_IMMERSIVE_MODE = "power_menu_immersive_mode";
     private static final String KEY_AIRPLANE = "power_menu_airplane";
     private static final String KEY_SILENT = "power_menu_silent";
 
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
+    ListPreference mImmersiveModePref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mSilentPref;
 
@@ -52,6 +60,13 @@ public class PowerMenu extends SettingsPreferenceFragment {
         mScreenshotPref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_SCREENSHOT_ENABLED, 0) == 1));
 
+        PreferenceScreen prefSet = getPreferenceScreen();
+        mImmersiveModePref = (ListPreference) prefSet.findPreference(KEY_IMMERSIVE_MODE);
+        mImmersiveModePref.setOnPreferenceChangeListener(this);
+        int expandedDesktopValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0);
+        mImmersiveModePref.setValue(String.valueOf(expandedDesktopValue));
+        updateExpandedDesktopSummary(expandedDesktopValue);
+
         mAirplanePref = (CheckBoxPreference) findPreference(KEY_AIRPLANE);
         mAirplanePref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1));
@@ -60,6 +75,17 @@ public class PowerMenu extends SettingsPreferenceFragment {
         mSilentPref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_SILENT_ENABLED, 1) == 1));
 
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mImmersiveModePref) {
+            int expandedDesktopValue = Integer.valueOf((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, expandedDesktopValue);
+            updateExpandedDesktopSummary(expandedDesktopValue);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -93,4 +119,24 @@ public class PowerMenu extends SettingsPreferenceFragment {
         return true;
     }
 
+    private void updateExpandedDesktopSummary(int value) {
+        Resources res = getResources();
+
+        if (value == 0) {
+            /* expanded desktop deactivated */
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_GLOBAL_IMMERSIVE_MODE_ENABLED, 0);
+            mImmersiveModePref.setSummary(res.getString(R.string.immersive_mode_disabled));
+        } else if (value == 1) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_GLOBAL_IMMERSIVE_MODE_ENABLED, 1);
+            String statusBarPresent = res.getString(R.string.immersive_mode_summary_status_bar);
+            mImmersiveModePref.setSummary(res.getString(R.string.summary_immersive_mode, statusBarPresent));
+        } else if (value == 2) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_GLOBAL_IMMERSIVE_MODE_ENABLED, 1);
+            String statusBarPresent = res.getString(R.string.immersive_mode_summary_no_status_bar);
+            mImmersiveModePref.setSummary(res.getString(R.string.summary_immersive_mode, statusBarPresent));
+        }
+    }
 }

@@ -29,6 +29,13 @@
         android:title="@string/power_menu_screenshot_title"
         android:defaultValue="false" />
 
+    <ListPreference
+        android:key="power_menu_immersive_mode"
+        android:title="@string/power_menu_immersive_mode"
+        android:entries="@array/immersive_mode_entries"
+        android:entryValues="@array/immersive_mode_values"
+        android:persistent="false" />
+
     <CheckBoxPreference
         android:key="power_menu_airplane"
         android:title="@string/power_menu_airplane_title"
