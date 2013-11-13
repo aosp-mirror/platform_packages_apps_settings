@@ -30,23 +30,17 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class SystemSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class SystemSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.purity_system_settings);
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
     }
 }

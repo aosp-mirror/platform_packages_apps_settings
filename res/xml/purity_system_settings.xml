@@ -20,6 +20,11 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
+        android:fragment="com.android.settings.purity.BatteryIconStyle"
+        android:key="battery_style_pref"
+        android:title="@string/battery_icon_title" />
+
+    <PreferenceScreen
         android:key="status_bar"
         android:fragment="com.android.settings.purity.StatusBar"
         android:title="@string/status_bar_title" />
