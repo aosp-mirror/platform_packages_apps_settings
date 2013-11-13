@@ -52,6 +52,11 @@
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+        <PreferenceScreen
+                android:key="wifi_display"
+                android:title="@string/wifi_display_settings_title"
+                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
         <PreferenceCategory
             android:key="category_light_options"
             android:title="@string/display_category_light_options_title" >
@@ -67,11 +72,6 @@
                 android:fragment="com.android.settings.purity.notificationlight.NotificationLightSettings" />
 
         </PreferenceCategory>
-
-        <PreferenceScreen
-                android:key="wifi_display"
-                android:title="@string/wifi_display_settings_title"
-                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
 
         <PreferenceCategory
             android:key="category_wakeup_options"
