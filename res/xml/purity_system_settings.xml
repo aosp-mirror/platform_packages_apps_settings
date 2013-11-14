@@ -20,18 +20,15 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
-        android:fragment="com.android.settings.purity.BatteryIconStyle"
-        android:key="battery_style_pref"
-        android:title="@string/battery_icon_title" />
-
-    <PreferenceScreen
         android:key="status_bar"
         android:fragment="com.android.settings.purity.StatusBar"
+        android:icon="@drawable/ic_settings_status_bar"
         android:title="@string/status_bar_title" />
 
     <PreferenceScreen
         android:key="power_menu"
         android:title="@string/power_menu_title"
+        android:icon="@drawable/ic_settings_power_menu"
         android:fragment="com.android.settings.purity.PowerMenu" />
 
 </PreferenceScreen>
