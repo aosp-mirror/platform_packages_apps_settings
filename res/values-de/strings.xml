@@ -128,6 +128,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Umbenennen"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Verbindung trennen?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Hierdurch wird die Verbindung mit&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; getrennt."</string>
+    <string name="bluetooth_broadcasting" msgid="16583128958125247">"Übertragung"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profil deaktivieren?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Deaktiviert:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Verbunden"</string>
@@ -154,6 +155,9 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Eine App versucht, Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Eine App versucht, Ihr Tablet für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Eine App versucht, Ihr Telefon für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> möchte die Bluetooth-Übertragung aktivieren, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> möchte Bluetooth und die Bluetooth-Übertragung aktivieren, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wenn diese Funktion aktiviert ist, kann Ihr Telefon mit anderen Geräten in der Nähe kommunizieren.\n\nFür die Übertragung werden stromsparende Bluetooth-Signale verwendet."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Eine App versucht, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für andere Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
@@ -514,28 +518,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Als Lautsprechertelefon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Für Musik und Medien"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Einstellungen speichern"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Kabellose Übertragung (WiDi)"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Um Geräte zu sehen, aktivieren Sie die kabellose Übertragung (WiDi)."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Kabellose Übertragung (WiDi) ist deaktiviert, da WLAN ausgeschaltet ist."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Nach Displays suchen"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Suche läuft…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Keine kabellose Übertragung in der Nähe"</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Gekoppelte Displays"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Verfügbare Geräte"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Übertragungsbildschirm"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Kabellose Übertragung aktivieren"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Kein Gerät in der Nähe gefunden"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Verbindung wird hergestellt..."</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Verbunden"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Verfügbar"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"In Verwendung"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Nicht verfügbar"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Display-Einstellungen"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Verbindung trennen?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Hierdurch wird die Verbindung mit&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; getrennt."</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Optionen für kabellose Übertragung (WiDi)"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Entfernen"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Fertig"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Name"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"An"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Aus"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Deaktiviert"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Datenaustausch bei Kontakt mit anderen Geräten zulassen"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Datenaustausch bei Kontakt mit anderen Geräten zulassen"</string>

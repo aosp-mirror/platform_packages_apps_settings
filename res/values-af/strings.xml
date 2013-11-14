@@ -128,6 +128,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Hernoem"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ontkoppel?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Dit sal jou verbinding met &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; beëindig."</string>
+    <string name="bluetooth_broadcasting" msgid="16583128958125247">"Uitsaai"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Dekativeer profiel?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Dit deaktiveer:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Gekoppel"</string>
@@ -154,6 +155,9 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"\'n Program wil jou foon sigbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"\'n Program wil jou tablet sigbaar maak vir ander Bluetooth-toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"\'n Program wil jou foon sigbaar maak vir ander Bluetooth-toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth-uitsaai aanskakel om met ander nabygeleë toestelle te kommunikeer. Jy kan dit later in Bluetooth-instellings verander."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth en Bluetooth-uitsaai aanskakel om met ander nabygeleë toestelle te kommunikeer. Jy kan dit later in Bluetooth-instellings verander."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wanneer hierdie kenmerk aangeskakel is, kan jou foon met ander nabygeleë toestelle kommunikeer.\n\nUitsaai gebruik laekrag-Bluetooth-seine."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"\'n Program wil Bluetooth aanskakel en jou tablet sigbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"\'n Program wil Bluetooth aanskakel en jou foon sigbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"\'n Program wil Bluetooth aanskakel en jou tablet sigbaar maak vir ander toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
@@ -513,28 +517,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"As luidsprekerfoon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Vir musiek en media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Onthou instellings"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Draadlose skerm"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Skakel draadlose skerm aan on toestelle te sien."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Draadlose skerm is gedeaktiveer omdat Wi-Fi af is."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Soek na skerms"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Soek tans…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Geen nabygeleë draadlose skerms is gevind nie."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Saamgebinde skerms"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Beskikbare toestelle"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Uitsaaiskerm"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktiveer draadlose skermdeling"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Geen nabygeleë toestelle is gekry nie."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Koppel tans"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Gekoppel"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Beskikbaar"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"In gebruik"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Onbeskikbaar"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Vertooninstellings"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Ontkoppel?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Dit sal jou verbinding met:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; beëindig."</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Draadlose vertoonopsies"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Vergeet"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Klaar"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Naam"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Aan"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Af"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Gedeaktiveer"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Laat dataruiling toe wanneer die tablet aan \'n ander toestel raak"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Laat data-ruilprogram toe wanneer die foon aan \'n ander toestel raak"</string>

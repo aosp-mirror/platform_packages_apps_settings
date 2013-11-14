@@ -128,6 +128,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Átnevezés"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Leválasztja?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Ezzel befejezi a kapcsolatot a következővel:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_broadcasting" msgid="16583128958125247">"Sugárzás"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profil tiltása?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Ezzel kikapcsolja a következőt:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ettől:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Csatlakozva"</string>
@@ -154,6 +155,9 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Egy alkalmazás láthatóvá akarja tenni a telefont más Bluetooth-eszközök számára <xliff:g id="TIMEOUT">%1$d</xliff:g> másodpercig."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Az egyik alkalmazás láthatóvá akarja tenni a táblagépet más eszközök számára. Ezt később módosíthatja a Bluetooth beállításokban."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Az egyik alkalmazás láthatóvá akarja tenni a telefont más eszközök számára. Ezt később módosíthatja a Bluetooth beállításokban."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> szeretné bekapcsolni a Bluetooth-sugárzást a közeli eszközökkel való kommunikációhoz. Ezt később a Bluetooth beállításaiban módosíthatja."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> szeretné bekapcsolni a Bluetooth-kapcsolatot és a Bluetooth-sugárzást a közeli eszközökkel való kommunikációhoz. Ezt később a Bluetooth beállításaiban módosíthatja."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Ha a funkció be van kapcsolva, telefonja képes a közelben lévő többi eszközzel kommunikálni.\n\nA sugárzás kis energiájú Bluetooth-jeleket használ."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Az egyik alkalmazás be akarja kapcsolni a Bluetooth funkciót, és a táblagépet láthatóvá akarja tenni más eszközök számára <xliff:g id="TIMEOUT">%1$d</xliff:g> másodpercig."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Az egyik alkalmazás be akarja kapcsolni a Bluetooth funkciót, és a telefont láthatóvá akarja tenni más eszközök számára <xliff:g id="TIMEOUT">%1$d</xliff:g> másodpercig."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Az egyik alkalmazás be akarja kapcsolni a Bluetooth funkciót, és a táblagépet láthatóvá akarja tenni más eszközök számára. Ezt később módosíthatja a Bluetooth beállításokban."</string>
@@ -513,28 +517,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Telefonhangszóróként"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Zenéhez és médiához"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Beállítások megjegyzése"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Vezeték nélküli kijelző"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Az eszközök megtekintéséhez kapcsolja be a vezeték nélküli kijelzőt."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"A vezeték nélküli kijelző le van tiltva, mert a Wi-Fi ki van kapcsolva."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Kijelzők keresése"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Keresés..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Nem található a közelben vezeték nélküli kijelző."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Párosított kijelzők"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Elérhető eszközök"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Képernyő tartalmának átküldése"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Vezeték nélküli kijelző engedélyezése"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Nem található a közelben más eszköz."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Csatlakozás"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Csatlakozva"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Elérhető"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Használatban"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Nem érhető el"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Megjelenítési beállítások"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Megszakítja?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Ezzel befejezi a kapcsolatot a következővel:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Vezeték nélküli kijelzés beállításai"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Elfelejt"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Kész"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Név"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Be"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Ki"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Letiltva"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Tegye lehetővé az adatcserét, ha a táblagép érintkezik egy másik eszközzel."</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Lehetővé teszi az adatok cseréjét, ha a telefon érintkezik egy másik készülékkel"</string>

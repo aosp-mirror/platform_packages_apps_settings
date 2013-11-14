@@ -128,6 +128,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Gi nytt navn"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Vil du koble fra?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Dette vil avslutte tilkoblingen til:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_broadcasting" msgid="16583128958125247">"Kringkasting"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vil du deaktivere profilen?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Dette deaktiverer:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Fra:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Tilkoblet"</string>
@@ -154,6 +155,9 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"En app ønsker å gjøre telefonen din synlig for andre Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"En app ønsker å gjøre nettbrettet ditt synlig for andre Bluetooth-enheter. Du kan endre dette i Bluetooth-innstillingene senere."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"En app ønsker å gjøre telefonen din synlig for andre Bluetooth-enheter. Du kan endre dette i Bluetooth-innstillingene senere."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker å slå på Bluetooth-kringkasting for å kommunisere med andre enheter i nærheten. Du kan endre dette senere i Bluetooth-innstillingene."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> ønsker å slå på Bluetooth og Bluetooth-kringkasting for å kommunisere med andre neheter i nærheten. Du kan endre dette senere i Bluetooth-innstillingene."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Når denne funksjonen er aktivert, kan telefonen kommunisere med andre enheter i nærheten.\n\nKringkasting bruker Bluetooth-signaler med lavt strømforbruk."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"En app ønsker å slå på Bluetooth og gjøre nettbrettet ditt synlig for andre enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"En app ønsker å slå på Bluetooth og gjøre telefonen din synlig for andre enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"En app ønsker å slå på Bluetooth og gjøre nettbrettet ditt synlig for andre enheter. Du kan endre dette i Bluetooth-innstillingene senere."</string>
@@ -513,28 +517,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Som høyttalertelefon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For musikk og medier"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Husk innstillinger"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Trådløs skjerm"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Slå på trådløs skjerm for å kunne se enheter."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Trådløs skjerm er deaktivert fordi Wi-Fi er slått av."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Søk etter skjermer"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Søker …"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Fant ikke trådløse skjermer i nærheten."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Skjermer koblet sammen"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Tilgjengelige enheter"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Send skjermen"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktiver trådløs skjermdeling"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Finner ingen enheter i nærheten."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Kobler til"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Tilkoblet"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Tilgjengelig"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"I bruk"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Utilgjengelig"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Skjerminnstillinger"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Vil du koble fra?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Dette avslutter tilkoblingen med:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Alternativer for trådløs skjerm"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Glem"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Ferdig"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Navn"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"På"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Av"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Deaktivert"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Tillat datautveksling når nettbrettet berører en annen enhet"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Tillat utveksling av data når telefonen berører en annen enhet"</string>
