@@ -35,4 +35,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="hardware_keys_category"
+        android:title="@string/hardware_keys_category" >      
+
+    <PreferenceScreen
+        android:key="hardware_keys"
+        android:title="@string/hardware_keys_title"
+        android:summary="@string/hardware_keys_summary"
+        android:fragment="com.android.settings.mahdi.HardwareKeys" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

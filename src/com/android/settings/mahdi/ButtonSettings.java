@@ -40,9 +40,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_VOLUME = "button_volume_keys";
     private static final String BUTTON_VOLUME_WAKE = "button_volume_wake_screen";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
+    private static final String KEY_HARDWARE_KEYS_CATEGORY = "hardware_keys_category";
+    private static final String KEY_HARDWARE_KEYS = "hardware_keys";
 
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolBtnMusicCtrl;
+    private PreferenceScreen mHardwareKeys;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,16 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 	mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 1) != 0);
-        mVolBtnMusicCtrl.setOnPreferenceChangeListener(this); 
+        mVolBtnMusicCtrl.setOnPreferenceChangeListener(this);
+
+    // Only show the hardware keys config on a device that does not have a navbar
+        mHardwareKeys = (PreferenceScreen) findPreference(KEY_HARDWARE_KEYS);
+        if (mHardwareKeys != null) {
+            if (!res.getBoolean(R.bool.config_has_hardware_buttons)) {
+                getPreferenceScreen().removePreference(mHardwareKeys);
+                getPreferenceScreen().removePreference((PreferenceCategory) findPreference(KEY_HARDWARE_KEYS_CATEGORY));
+            }        
+        } 
 
         if (hasVolumeRocker()) {
             if (!res.getBoolean(R.bool.config_show_volumeRockerWake)) {
@@ -73,7 +85,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } else {
             prefScreen.removePreference(volumeCategory);
         }
-    }
+    }    
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
