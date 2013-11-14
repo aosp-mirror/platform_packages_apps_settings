@@ -128,6 +128,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Nimeä uudelleen"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Katkaistaanko yhteys?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Katkaisee yhteyden laitteeseen:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_broadcasting" msgid="16583128958125247">"Lähetys"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Poistetaanko profiili?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Tämä poistaa profiilin&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;laitteesta&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Yhdistetty"</string>
@@ -154,6 +155,9 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Sovellus haluaa asettaa puhelimen muiden Bluetooth-laitteiden tunnistettavaksi <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunnin ajaksi."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Sovellus haluaa asettaa tablet-laitteen muiden Bluetooth-laitteiden tunnistettavaksi. Voit muuttaa valintaa myöhemmin Bluetooth-asetuksista."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Sovellus haluaa asettaa puhelimen muiden Bluetooth-laitteiden tunnistettavaksi. Voit muuttaa valintaa myöhemmin Bluetooth-asetuksista."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa ottaa Bluetooth-lähetyksen käyttöön voidakseen kommunikoida lähellä olevien laitteiden kanssa. Voit muuttaa asetusta myöhemmin valitsemalla Bluetooth-asetukset."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa ottaa Bluetoothin ja Bluetooth-lähetyksen käyttöön voidakseen kommunikoida lähellä olevien laitteiden kanssa. Voit muuttaa asetusta myöhemmin valitsemalla Bluetooth-asetukset."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Kun ominaisuus on käytössä, puhelin voi kommunikoida lähellä olevien laitteiden kanssa.\n\nLähetykseen käytetään vähän virtaa kuluttavia Bluetooth-signaaleja."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Sovellus haluaa ottaa Bluetooth-yhteyden käyttöön ja asettaa tablet-laitteen muiden Bluetooth-laitteiden tunnistettavaksi <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunnin ajaksi."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Sovellus haluaa ottaa Bluetooth-yhteyden käyttöön ja asettaa puhelimen muiden laitteiden tunnistettavaksi <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunnin ajaksi."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Sovellus haluaa ottaa Bluetooth-yhteyden käyttöön ja asettaa tablet-laitteen muiden laitteiden tunnistettavaksi. Voit muuttaa valintaa myöhemmin Bluetooth-asetuksista."</string>
@@ -513,28 +517,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Kaiuttimena"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Musiikille ja medialle"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Muista asetukset"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Langaton näyttö"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Näet laitteet ottamalla langattoman näytön käyttöön."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Langaton näyttö ei ole käytössä, koska wifi-yhteyttä ei ole muodostettu."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Etsi näyttöjä"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Etsitään..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Ei lähellä olevia langattomia näyttöjä."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Laiteparinäytöt"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Käytettävissä olevat laitteet"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Lähetysnäyttö"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Ota langaton näyttö käyttöön"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Bluetooth-laitteita ei löydy lähistöltä."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Yhdistetään"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Yhdistetty"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Käytettävissä"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Käytössä"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Ei saatavilla"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Näyttöasetukset"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Katkaistaanko yhteys?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Katkaisee yhteyden laitteeseen:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Langattomien näyttöjen asetukset"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Unohda"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Valmis"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Nimi"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Käytössä"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Ei käytössä"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Ei käytössä"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Salli tiedonsiirto, kun tablet-laite koskettaa toista laitetta"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
