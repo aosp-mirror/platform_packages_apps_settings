@@ -155,8 +155,8 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Eine App versucht, Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Eine App versucht, Ihr Tablet für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Eine App versucht, Ihr Telefon für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> möchte die Bluetooth-Übertragung aktivieren, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> möchte Bluetooth und die Bluetooth-Übertragung aktivieren, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"Für <xliff:g id="APP_NAME">%1$s</xliff:g> soll die Bluetooth-Übertragung aktiviert werden, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"Für <xliff:g id="APP_NAME">%1$s</xliff:g> sollen Bluetooth und die Bluetooth-Übertragung aktiviert werden, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wenn diese Funktion aktiviert ist, kann Ihr Telefon mit anderen Geräten in der Nähe kommunizieren.\n\nFür die Übertragung werden stromsparende Bluetooth-Signale verwendet."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Eine App versucht, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
@@ -518,7 +518,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Als Lautsprechertelefon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Für Musik und Medien"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Einstellungen speichern"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Übertragungsbildschirm"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Bildschirmübertragung"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Kabellose Übertragung aktivieren"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Kein Gerät in der Nähe gefunden"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Verbindung wird hergestellt..."</string>
@@ -1473,6 +1473,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Abbrechen"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> wird gedruckt"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> wird abgebrochen..."</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Druckerfehler <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Drucker hat <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> blockiert."</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Suchfeld angezeigt"</string>
@@ -1882,7 +1883,7 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Hintergrunddaten beschränken?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Diese Funktion kann dazu führen, dass eine auf Hintergrunddaten basierende App nicht mehr funktioniert, wenn nur Mobilfunknetze verfügbar sind.\n\nGeeignetere Kontrollmechanismen für den Datenverbrauch finden Sie in den Einstellungen der App."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Hintergrunddaten können nur beschränkt werden, wenn Sie ein Mobilfunklimit festgelegt haben."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Autom. Synchronisierung aktivieren?"</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Automatische Synchronisierung aktivieren?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Änderungen, die Sie im Web an Ihren Konten vornehmen, werden automatisch auf Ihrem Tablet übernommen.\n\nFür einige Konten werden möglicherweise auch Änderungen, die Sie auf Ihrem Tablet vornehmen, im Web übernommen. Dies ist die Funktionsweise von Google Konten.\n\nUnter \"Einstellungen &gt; Konten\" können Sie auswählen, welche Informationen in den einzelnen Konten synchronisiert werden sollen."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Änderungen, die Sie im Web an Ihren Konten vornehmen, werden automatisch auf Ihrem Telefon übernommen.\n\nFür einige Konten werden eventuell auch Änderungen, die Sie auf Ihrem Telefon vornehmen, im Web übernommen. Dies ist die Funktionsweise von Google Konten.\n\nUnter \"Einstellungen &gt; Konten\" können Sie auswählen, welche Informationen in den einzelnen Konten synchronisiert werden sollen."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Autom. Synchronisierung deaktivieren?"</string>
@@ -1905,8 +1906,8 @@
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Entfernte Apps und Nutzer"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> erhalten, <xliff:g id="SENT">%2$s</xliff:g> gesendet"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: ca. <xliff:g id="TOTAL">%1$s</xliff:g> verwendet"</string>
-    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: ca. <xliff:g id="TOTAL">%1$s</xliff:g> verbraucht. Abrechnung des Datenverbrauchs durch Tablet. Kann von Mobilfunkanbieter abweichen."</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: ca. <xliff:g id="TOTAL">%1$s</xliff:g> verbraucht. Abrechnung des Datenverbrauchs durch Telefon. Kann von Mobilfunkanbieter abweichen."</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: etwa <xliff:g id="TOTAL">%1$s</xliff:g> verbraucht. Abrechnung des Datenverbrauchs durch Tablet. Kann von Mobilfunkanbieter abweichen."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: etwa <xliff:g id="TOTAL">%1$s</xliff:g> verbraucht. Abrechnung des Datenverbrauchs durch Telefon. Kann von Mobilfunkanbieter abweichen."</string>
     <string name="data_usage_metered_title" msgid="6204750602856383278">"Mobile Hotspots"</string>
     <string name="data_usage_metered_body" msgid="4959032833706695848">"Wählen Sie die WLAN-Netzwerke aus, die mobile Hotspots sind. Die Verwendung dieser Netzwerke kann für Apps im Hintergrund eingeschränkt werden. Eventuell senden Apps auch eine Warnung, bevor diese Netzwerke für umfangreiche Downloads verwendet werden."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobilfunknetze"</string>
