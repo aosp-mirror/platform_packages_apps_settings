@@ -34,7 +34,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class StatusBar extends SettingsPreferenceFragment {
 
     private static final String TAG = "StatusBar";
 
@@ -44,10 +44,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         addPreferencesFromResource(R.xml.status_bar);
 
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
     }
 
     @Override

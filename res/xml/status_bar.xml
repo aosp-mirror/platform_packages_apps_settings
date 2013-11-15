@@ -29,6 +29,12 @@
             android:title="@string/status_bar_clock"
 	    android:summary="@string/status_bar_clock_summary" />
 
+	<PreferenceScreen
+            android:fragment="com.android.settings.mahdi.BatteryIconStyle"
+            android:key="battery_style_pref"
+            android:title="@string/battery_icon_title"
+	    android:summary="@string/battery_icon_summary" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
