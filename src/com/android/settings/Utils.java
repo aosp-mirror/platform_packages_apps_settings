@@ -345,9 +345,7 @@ public class Utils {
      * @param context the application context
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
-    public static String getDefaultIpAddresses(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static String getDefaultIpAddresses(ConnectivityManager cm) {
         LinkProperties prop = cm.getActiveLinkProperties();
         return formatIpAddresses(prop);
     }
