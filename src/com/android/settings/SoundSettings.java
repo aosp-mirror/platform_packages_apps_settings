@@ -374,6 +374,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
                     mLockSounds.isChecked() ? 1 : 0);
 
+	} else if (preference == mSafeHeadsetVolume) {
+            Settings.System.putInt(getContentResolver(), Settings.System.SAFE_HEADSET_VOLUME,
+                    mSafeHeadsetVolume.isChecked() ? 1 : 0);
+
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
@@ -442,10 +446,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (KEY_VOLUME_ADJUST_SOUNDS.equals(key)) {
             Settings.System.putInt(getContentResolver(),
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
-                (Boolean) objValue ? 1 : 0);
-	} else if (preference == mSafeHeadsetVolume) {
-            Settings.System.putInt(getContentResolver(), Settings.System.SAFE_HEADSET_VOLUME,
-                    mSafeHeadsetVolume.isChecked() ? 1 : 0);	
+                (Boolean) objValue ? 1 : 0);		
 	} else if (preference == mVolumeOverlay) {
             final int value = Integer.valueOf((String) objValue);
             final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
