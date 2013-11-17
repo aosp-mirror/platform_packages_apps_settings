@@ -51,13 +51,13 @@
     </string-array>
 
     <!-- Expanded desktop -->
-    <string-array name="expanded_desktop_entries" translatable="false">
-        <item>@string/expanded_desktop_disabled</item>
-        <item>@string/expanded_desktop_status_bar</item>
-        <item>@string/expanded_desktop_no_status_bar</item>
+    <string-array name="immersive_mode_entries" translatable="false">
+        <item>@string/immersive_mode_disabled</item>
+        <item>@string/immersive_mode_status_bar</item>
+        <item>@string/immersive_mode_no_status_bar</item>
     </string-array>
 
-    <string-array name="expanded_desktop_values" translatable="false">
+    <string-array name="immersive_mode_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -248,6 +248,51 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>    
+
+   <string-array name="values_brightness_widget" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="entries_network_widget">
+        <item>2G/3G+2G</item>
+        <item>2G/3G Only</item>
+        <item>2G/3G Only/3G+2G</item>
+    </string-array>
+
+    <string-array name="values_network_widget" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="entries_ring_widget" translatable="false">
+        <item>@string/cm_sound_mode_silent</item>
+        <item>@string/cm_sound_mode_vibrate</item>
+        <item>@string/cm_sound_mode_sound</item>
+        <item>@string/cm_sound_mode_soundVibrate</item>
+    </string-array>
+
+    <string-array name="values_ring_widget" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="entries_screentimeout_widget">
+        <item>15s/1m/5m</item>
+        <item>30s/2m/5m</item>
+    </string-array>
+
+    <string-array name="values_screentimeout_widget" translatable="false">
+        <item>0</item>
+        <item>1</item>
     </string-array>
 
     <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi region code. -->

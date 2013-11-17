@@ -30,11 +30,11 @@
         android:defaultValue="false" />
 
     <ListPreference
-        android:key="power_menu_expanded_desktop"
-        android:title="@string/power_menu_expanded_desktop"
-        android:entries="@array/expanded_desktop_entries"
-        android:entryValues="@array/expanded_desktop_values"
-        android:persistent="false" />        
+        android:key="power_menu_immersive_mode"
+        android:title="@string/power_menu_immersive_mode"
+        android:entries="@array/immersive_mode_entries"
+        android:entryValues="@array/immersive_mode_values"
+	android:persistent="false" />        
 
     <ListPreference
         android:key="power_menu_profiles"

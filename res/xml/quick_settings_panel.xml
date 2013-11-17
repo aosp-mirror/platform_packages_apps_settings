@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="pref_general_settings"
+        android:title="@string/title_general" >
+
+        <ListPreference
+            android:key="quick_pulldown"
+            android:title="@string/title_quick_pulldown"
+            android:entries="@array/quick_pulldown_entries"
+            android:entryValues="@array/quick_pulldown_values"
+            android:persistent="false" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_collapse_panel"
+            android:title="@string/title_collapse_panel"
+            android:summary="@string/summary_collapse_panel" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="static_tiles"
+        android:title="@string/title_static_tiles" >
+
+        <PreferenceScreen
+            android:key="tile_picker"
+            android:title="@string/tile_picker_title"
+            android:summary="@string/tile_picker_summary"
+            android:fragment="com.android.settings.mahdi.QuickSettingsTiles" />
+
+        <MultiSelectListPreference
+            android:key="pref_ring_mode"
+            android:dialogTitle="@string/pref_ring_mode_title"
+            android:title="@string/pref_ring_mode_title"
+            android:summary="@string/pref_ring_mode_summary"
+            android:entries="@array/entries_ring_widget"
+            android:entryValues="@array/values_ring_widget" />
+
+        <ListPreference
+            android:key="pref_network_mode"
+            android:dialogTitle="@string/pref_network_mode_title"
+            android:title="@string/pref_network_mode_title"
+            android:entries="@array/entries_network_widget"
+            android:entryValues="@array/values_network_widget" />
+
+        <ListPreference
+            android:key="pref_screentimeout_mode"
+            android:dialogTitle="@string/pref_screentimeout_mode_title"
+            android:title="@string/pref_screentimeout_mode_title"
+            android:entries="@array/entries_screentimeout_widget"
+            android:entryValues="@array/values_screentimeout_widget" />
+
+        </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_dynamic_tiles"
+        android:title="@string/title_dynamic_tiles" >
+
+        <Preference
+            style="?android:preferenceInformationStyle"
+            android:title="@string/dynamic_tiles_note_title"
+            android:summary="@string/dynamic_tiles_note_summary"
+            android:selectable="false" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_dyanmic_alarm"
+            android:title="@string/title_dynamic_alarm"
+            android:defaultValue="true" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_dyanmic_bugreport"
+            android:title="@string/title_dynamic_bugreport"
+            android:defaultValue="true" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_dyanmic_dock_battery"
+            android:title="@string/title_dynamic_dock_battery"
+            android:defaultValue="true" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_dyanmic_ime"
+            android:title="@string/title_dynamic_ime"
+            android:defaultValue="true" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_dyanmic_usbtether"
+            android:title="@string/title_dynamic_usbtether"
+            android:defaultValue="true" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_dyanmic_wifi"
+            android:title="@string/title_dynamic_wifi"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
