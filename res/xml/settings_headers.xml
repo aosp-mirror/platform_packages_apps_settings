@@ -184,6 +184,13 @@
     <header android:id="@+id/system_section"
         android:title="@string/header_category_system" />
 
+    <!-- AppOps -->
+    <header
+        android:fragment="com.android.settings.applications.AppOpsSummary"
+        android:icon="@drawable/ic_app_ops"
+        android:title="@string/appops_settings_title"
+        android:id="@+id/appops_settings" />
+
     <!-- Date & Time -->
     <header
         android:id="@+id/date_time_settings"
