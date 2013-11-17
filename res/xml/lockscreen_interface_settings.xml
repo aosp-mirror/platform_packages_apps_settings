@@ -20,6 +20,12 @@
         android:title="@string/lockscreen_widgets_category_title"
         android:key="lockscreen_widgets_category" >
 
+        <Preference
+            android:fragment="com.android.settings.purity.LockscreenTargets"
+            android:key="lockscreen_targets"
+            android:summary="@string/lockscreen_target_summary"
+            android:title="@string/lockscreen_target_title" />
+
         <com.android.settings.purity.SystemSettingCheckBoxPreference
             android:key="lockscreen_maximize_widgets"
             android:summary="@string/lockscreen_maximize_widgets_summary"

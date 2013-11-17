@@ -111,9 +111,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment {
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_ENABLE_WIDGETS.equals(key)) {
             lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
+            return true;
         }
 
-        return true;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public static class DeviceAdminLockscreenReceiver extends DeviceAdminReceiver {}
