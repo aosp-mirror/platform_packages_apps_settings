@@ -42,10 +42,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_HARDWARE_KEYS_CATEGORY = "hardware_keys_category";
     private static final String KEY_HARDWARE_KEYS = "hardware_keys";
+    private static final String CATEGORY_BACK = "button_back_key";
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
 
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolBtnMusicCtrl;
     private PreferenceScreen mHardwareKeys;
+    private CheckBoxPreference mKillAppLongpressBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 1) != 0);
         mVolBtnMusicCtrl.setOnPreferenceChangeListener(this);
+
+	mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
 
     // Only show the hardware keys config on a device that does not have a navbar
         mHardwareKeys = (PreferenceScreen) findPreference(KEY_HARDWARE_KEYS);
@@ -85,6 +90,17 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } else {
             prefScreen.removePreference(volumeCategory);
         }
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
     }    
 
     @Override
@@ -93,8 +109,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             boolean checked = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.VOLUME_WAKE_SCREEN, checked ? 1:0);
-
             return true;
+	} else if (preference == mKillAppLongpressBack) {
+             writeKillAppLongpressBackOptions();
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

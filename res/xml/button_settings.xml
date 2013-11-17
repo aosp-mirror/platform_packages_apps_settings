@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">    
 
     <PreferenceCategory
         android:key="button_volume_keys"
@@ -33,6 +33,17 @@
             android:summary="@string/volbtn_music_controls_summary"
             android:persistent="false" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="button_back_key"
+        android:title="@string/button_back_key_title" >
+
+	<CheckBoxPreference
+            android:key="kill_app_longpress_back"
+            android:title="@string/kill_app_longpress_back"
+            android:summary="@string/kill_app_longpress_back_summary"/>
+    
     </PreferenceCategory>
 
     <PreferenceCategory
