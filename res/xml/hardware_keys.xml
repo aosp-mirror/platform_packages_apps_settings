@@ -122,12 +122,17 @@
     <PreferenceCategory
         android:title="@string/additional_options_title">
 
-       <CheckBoxPreference
+        <CheckBoxPreference
             android:key="hardware_keys_show_overflow"
             android:title="@string/hardware_keys_show_overflow_title"
             android:summary="@string/hardware_keys_show_overflow_summary"
             android:persistent="false"
-            android:defaultValue="false" />       
+            android:defaultValue="false" />
+
+	<CheckBoxPreference
+            android:key="kill_app_longpress_back"
+            android:title="@string/kill_app_longpress_back"
+            android:summary="@string/kill_app_longpress_back_summary"/>       
 
     </PreferenceCategory>
 

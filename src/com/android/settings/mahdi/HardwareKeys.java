@@ -41,7 +41,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     private static final String KEY_ASSIST_LONG_PRESS = "hardware_keys_assist_long_press";
     private static final String KEY_APP_SWITCH_PRESS = "hardware_keys_app_switch_press";
     private static final String KEY_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
-    private static final String HARDWARE_KEYS_SHOW_OVERFLOW = "hardware_keys_show_overflow";    
+    private static final String HARDWARE_KEYS_SHOW_OVERFLOW = "hardware_keys_show_overflow";
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";    
 
     private static final String CATEGORY_HOME = "home_key";
     private static final String CATEGORY_MENU = "menu_key";
@@ -77,6 +78,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     private ListPreference mAppSwitchPressAction;
     private ListPreference mAppSwitchLongPressAction;
     private CheckBoxPreference mShowActionOverflow;
+    private CheckBoxPreference mKillAppLongpressBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
 	mShowActionOverflow = (CheckBoxPreference) findPreference(HARDWARE_KEYS_SHOW_OVERFLOW);
         mShowActionOverflow.setChecked(Settings.System.getInt(resolver,
                 Settings.System.UI_FORCE_OVERFLOW_BUTTON, 0) == 1);
+
+	mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
 
         if (hasHomeKey) {
             int defaultLongPressAction = res.getInteger(
@@ -255,6 +259,17 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
         return false;
     }
 
+    private void writeKillAppLongpressBackOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mEnableCustomBindings) {
@@ -263,6 +278,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
 	} else if (preference == mShowActionOverflow) {
             handleCheckboxClick(mShowActionOverflow, Settings.System.UI_FORCE_OVERFLOW_BUTTON);
             return true;
+	} else if (preference == mKillAppLongpressBack) {
+             writeKillAppLongpressBackOptions();
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
