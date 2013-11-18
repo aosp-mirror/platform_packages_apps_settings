@@ -18,6 +18,18 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">    
 
     <PreferenceCategory
+        android:key="navigation_bar"
+        android:title="@string/navigation_settings_category_title" >
+    
+    <PreferenceScreen
+        android:key="navigation_settings"
+	android:title="@string/navigation_settings_title"
+        android:summary="@string/navigation_settings_summary"
+        android:fragment="com.android.settings.mahdi.NavbarSettings" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="button_volume_keys"
         android:title="@string/button_volume_keys_title" >
 

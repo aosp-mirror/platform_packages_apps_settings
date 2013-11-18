@@ -112,10 +112,11 @@ public class NotificationsShortcutFragment extends SettingsPreferenceFragment {
                 int index = mNotificationShortcutsColorMode.findIndexOfValue(val);
                 mNotificationShortcutsColorMode.setSummary(
                     mNotificationShortcutsColorMode.getEntries()[index]);
+                updateColorPreference();
                 return true;
             }
         });
-
+        updateColorPreference();
     }
 
     @Override
@@ -130,6 +131,12 @@ public class NotificationsShortcutFragment extends SettingsPreferenceFragment {
             list.setPadding(0, paddingTop, 0, paddingBottom);
         }
         return view;
+    }
+
+    private void updateColorPreference() {
+        int navigationBarButtonColorMode = Settings.System.getInt(getContentResolver(),
+                Settings.System.NOTIFICATION_SHORTCUTS_COLOR_MODE, 0);
+        mNotificationShortcutsColor.setEnabled(navigationBarButtonColorMode != 3);
     }
 
 }

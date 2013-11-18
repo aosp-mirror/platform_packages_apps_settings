@@ -74,6 +74,11 @@ public class ButtonsListViewSettings extends ListFragment implements
     private static final int MENU_ADD = MENU_HELP + 1;
     private static final int MENU_RESET = MENU_ADD + 1;
 
+    private static final int NAV_BAR               = 0;
+    private static final int PIE                   = 1;
+    private static final int PIE_SECOND            = 2;
+    private static final int NAV_RING              = 3;
+    private static final int LOCKSCREEN_SHORTCUT   = 4;
     private static final int NOTIFICATION_SHORTCUT = 5;
 
     private static final int DEFAULT_MAX_BUTTON_NUMBER = 5;
@@ -162,7 +167,7 @@ public class ButtonsListViewSettings extends ListFragment implements
         super.onViewCreated(view, savedInstanceState);
         Resources res = getResources();
 
-        mButtonMode = getArguments().getInt("buttonMode", NOTIFICATION_SHORTCUT);
+        mButtonMode = getArguments().getInt("buttonMode", NAV_BAR);
         mMaxAllowedButtons = getArguments().getInt("maxAllowedButtons", DEFAULT_MAX_BUTTON_NUMBER);
         mAdditionalFragment = getArguments().getString("fragment", null);
         mActionValuesKey = getArguments().getString("actionValues", "shortcut_action_values");
@@ -389,7 +394,6 @@ public class ButtonsListViewSettings extends ListFragment implements
 
     private boolean checkForDuplicateMainNavButtons(String action) {
         // disabled for now till navbar navring and pie is back for 4.4
-        /*
         ButtonConfig button;
         for (int i = 0; i < mButtonConfigs.size(); i++) {
             button = mButtonConfigsAdapter.getItem(i);
@@ -402,7 +406,7 @@ public class ButtonsListViewSettings extends ListFragment implements
                         Toast.LENGTH_LONG).show();
                 return true;
             }
-        } */
+        }
         return false;
     }
 
@@ -562,6 +566,12 @@ public class ButtonsListViewSettings extends ListFragment implements
 
     private ArrayList<ButtonConfig> getConfig() {
         switch (mButtonMode) {
+            case NAV_BAR:
+                return ButtonsHelper.getNavBarConfigWithDescription(
+                    mActivity, mActionValuesKey, mActionEntriesKey);
+            case NAV_RING:
+                return ButtonsHelper.getNavRingConfigWithDescription(
+                    mActivity, mActionValuesKey, mActionEntriesKey);
             case NOTIFICATION_SHORTCUT:
                 return ButtonsHelper.getNotificationsShortcutConfig(mActivity);
         }
@@ -570,6 +580,12 @@ public class ButtonsListViewSettings extends ListFragment implements
 
     private void setConfig(ArrayList<ButtonConfig> buttonConfigs, boolean reset) {
         switch (mButtonMode) {
+            case NAV_BAR:
+                ButtonsHelper.setNavBarConfig(mActivity, buttonConfigs, reset);
+                break;
+            case NAV_RING:
+                ButtonsHelper.setNavRingConfig(mActivity, buttonConfigs, reset);
+                break;
             case NOTIFICATION_SHORTCUT:
                 ButtonsHelper.setNotificationShortcutConfig(mActivity, buttonConfigs, reset);
                 if (reset) {

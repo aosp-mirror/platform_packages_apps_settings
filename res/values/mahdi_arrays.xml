@@ -608,12 +608,14 @@
         <item>@string/icon_color_mode_all_icons</item>
         <item>@string/icon_color_mode_system_icons</item>
         <item>@string/icon_color_mode_system_custom_icons</item>
+	<item>@string/disabled</item>
     </string-array>
 
     <string-array name="icon_color_mode_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+	<item>3</item>
     </string-array>
 
     <string-array name="shortcut_action_entries">
@@ -648,6 +650,165 @@
         <item>**power**</item>
         <item>**screenshot**</item>
         <item>**search**</item>
+        <item>**torch**</item>
+        <item>**null**</item>
+    </string-array>
+
+    <!-- NavBar -->
+    <string-array name="pref_navigation_menu_entries">
+        <item>@string/navigation_menu_right</item>
+        <item>@string/navigation_menu_left</item>
+        <item>@string/navigation_menu_both</item>
+    </string-array>
+
+    <!-- right is the default, easier to keep 0 as first index -->
+    <string-array name="pref_navigation_menu_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_menu_display_entries">
+        <item>@string/navigation_menu_always_show</item>
+        <item>@string/navigation_menu_never_show</item>
+        <item>@string/navigation_menu_default_jb_behavior</item>
+    </string-array>
+
+    <string-array name="pref_menu_display_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="navigation_bar_width_entries" translatable="false">
+        <item>@string/navigation_bar_size_42_dp_default</item>
+        <item>@string/navigation_bar_size_40_dp</item>
+        <item>@string/navigation_bar_size_36_dp</item>
+        <item>@string/navigation_bar_size_30_dp</item>
+        <item>@string/navigation_bar_size_24_dp</item>
+        <item>@string/navigation_bar_size_0_dp</item>
+    </string-array>
+
+    <string-array name="navigation_bar_width" translatable="false">
+        <item>42</item>
+        <item>40</item>
+        <item>36</item>
+        <item>30</item>
+        <item>24</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="navigation_bar_height_entries" translatable="false">
+        <item>@string/navigation_bar_size_48_dp_default</item>
+        <item>@string/navigation_bar_size_44_dp</item>
+        <item>@string/navigation_bar_size_42_dp</item>
+        <item>@string/navigation_bar_size_40_dp</item>
+        <item>@string/navigation_bar_size_36_dp</item>
+        <item>@string/navigation_bar_size_30_dp</item>
+        <item>@string/navigation_bar_size_24_dp</item>
+        <item>@string/navigation_bar_size_0_dp</item>
+    </string-array>
+
+    <string-array name="navigation_bar_height" translatable="false">
+        <item>48</item>
+        <item>44</item>
+        <item>42</item>
+        <item>40</item>
+        <item>36</item>
+        <item>30</item>
+        <item>24</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="navigation_bar_height_landscape_entries" translatable="false">
+        <item>@string/navigation_bar_size_48_dp_default</item>
+        <item>@string/navigation_bar_size_44_dp</item>
+        <item>@string/navigation_bar_size_42_dp</item>
+        <item>@string/navigation_bar_size_40_dp</item>
+        <item>@string/navigation_bar_size_36_dp</item>
+        <item>@string/navigation_bar_size_30_dp</item>
+        <item>@string/navigation_bar_size_24_dp</item>
+        <item>@string/navigation_bar_size_0_dp</item>
+    </string-array>
+
+    <string-array name="navigation_bar_height_landscape" translatable="false">
+        <item>48</item>
+        <item>44</item>
+        <item>42</item>
+        <item>40</item>
+        <item>36</item>
+        <item>30</item>
+        <item>24</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="shortcut_action_entries">
+        <item>@string/shortcut_action_back</item>
+        <item>@string/shortcut_action_app</item>
+        <item>@string/shortcut_action_home</item>
+        <item>@string/shortcut_action_kill</item>
+        <item>@string/shortcut_action_lastapp</item>
+        <item>@string/shortcut_action_notifications</item>
+        <item>@string/shortcut_action_ime</item>
+        <item>@string/shortcut_action_power_menu</item>
+        <item>@string/shortcut_action_qs</item>
+        <item>@string/shortcut_action_recent</item>
+        <item>@string/shortcut_action_power</item>
+        <item>@string/shortcut_action_screenshot</item>
+        <item>@string/shortcut_action_search</item>
+        <item>@string/shortcut_action_torch</item>
+        <item>@string/shortcut_action_none</item>
+    </string-array>
+
+    <string-array name="shortcut_action_values" translatable="false">
+        <item>**back**</item>
+        <item>**app**</item>
+        <item>**home**</item>
+        <item>**kill**</item>
+        <item>**lastapp**</item>
+        <item>**notifications**</item>
+        <item>**ime**</item>
+        <item>**power_menu**</item>
+        <item>**quicksettings**</item>
+        <item>**recents**</item>
+        <item>**power**</item>
+        <item>**screenshot**</item>
+        <item>**search**</item>
+        <item>**torch**</item>
+        <item>**null**</item>
+    </string-array>
+
+    <string-array name="shortcut_action_navring_entries">
+        <item>@string/shortcut_action_app</item>
+        <item>@string/shortcut_action_kill</item>
+        <item>@string/shortcut_action_lastapp</item>
+        <item>@string/shortcut_action_notifications</item>
+        <item>@string/shortcut_action_ime</item>
+        <item>@string/shortcut_action_power_menu</item>
+        <item>@string/shortcut_action_qs</item>
+        <item>@string/shortcut_action_ring_silent</item>
+        <item>@string/shortcut_action_ring_vib</item>
+        <item>@string/shortcut_action_ring_vib_silent</item>
+        <item>@string/shortcut_action_power</item>
+        <item>@string/shortcut_action_screenshot</item>
+        <item>@string/shortcut_action_search</item>
+        <item>@string/shortcut_action_torch</item>
+        <item>@string/shortcut_action_none</item>
+    </string-array>
+
+    <string-array name="shortcut_action_navring_values" translatable="false">
+        <item>**app**</item>
+        <item>**lastapp**</item>
+        <item>**notifications**</item>
+        <item>**ime**</item>
+        <item>**power_menu**</item>
+        <item>**quicksettings**</item>
+        <item>**ring_silent**</item>
+        <item>**ring_vib**</item>
+        <item>**ring_vib_silent**</item>
+        <item>**power**</item>
+        <item>**screenshot**</item>
+        <item>**assist**</item>
         <item>**torch**</item>
         <item>**null**</item>
     </string-array>
