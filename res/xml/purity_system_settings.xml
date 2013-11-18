@@ -31,4 +31,9 @@
         android:icon="@drawable/ic_settings_power_menu"
         android:fragment="com.android.settings.purity.PowerMenu" />
 
+    <PreferenceScreen
+        android:key="lock_screen_settings"
+        android:title="@string/lock_screen_title"
+        android:fragment="com.android.settings.purity.LockscreenInterface" />
+
 </PreferenceScreen>
