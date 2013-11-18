@@ -63,6 +63,12 @@
          android:title="@string/vibrate_when_ringing_title"
          android:persistent="false" />
 
+    <!-- Quiet Hours -->
+    <PreferenceScreen               
+        android:fragment="com.android.settings.mahdi.QuietHours"
+        android:title="@string/quiet_hours_title" 
+        android:summary="@string/quiet_hours_summary" /> 
+
     <PreferenceCategory
             android:title="@string/sound_category_system_title"/>
 
