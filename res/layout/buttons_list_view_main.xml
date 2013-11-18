@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 Slimroms
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        android:background="@android:color/darker_gray"/>
+    <TextView
+        android:id="@+id/disable_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        android:text="@string/shortcut_action_disable_message"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
+    <com.android.settings.slim.dslv.DragSortListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:layout_margin="0dp"
+        android:dividerHeight="1dp"
+        settings:dragEnabled="true"
+        settings:collapsedHeight="2dp"
+        settings:dragScrollStart="0.33"
+        settings:maxDragScrollSpeed="0.5"
+        settings:floatAlpha="0.6"
+        settings:slideShuffleSpeed="0.3"
+        settings:trackDragSort="false"
+        settings:useDefaultController="true"
+        settings:dragHandleId="@id/drag_handle"
+        settings:sortEnabled="true"
+        settings:removeEnabled="true"
+        settings:dragStartMode="onMove"
+        settings:removeMode="flingRemove" />
+</LinearLayout>
+

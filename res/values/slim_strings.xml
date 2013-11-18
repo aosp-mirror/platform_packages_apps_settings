@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 SlimRoms Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="ok">OK</string>
+    <string name="reset">Reset</string>
+    <string name="attention">Attention</string>
+    <string name="enabled">Enabled</string>
+    <string name="default_string">Default</string>
+    <string name="additional_options_title">Additional options</string>
+
+    <!-- Settings main menu category heading. Rom (Launcher, Themes, System). [CHAR LIMIT=40] -->
+    <string name="header_category_rom_settings">Advanced settings</string>
+
+    <!-- Slim settings screens -->
+    <string name="interface_settings_title">Interface</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
+    <string name="set">Set</string>
+
+    <!-- About phone screen, slim version -->
+    <string name="slim_version_title">Slim version</string>
+    <string name="slim_version_default">Unknown</string>
+
+    <!-- Display settings screen, notification light settings -->
+    <string name="display_category_light_options_title">Light options</string>
+    <string name="notification_light_general_title">General</string>
+    <string name="notification_light_applist_title">Applications</string>
+    <string name="notification_light_phonelist_title">Phone</string>
+    <string name="notification_light_use_custom">Use custom values</string>
+    <string name="notification_light_missed_call_title">Missed call</string>
+    <string name="notification_light_voicemail_title">Voicemail</string>
+    <string name="notification_light_choose_app">Choose application</string>
+    <string name="notification_light_add">Add</string>
+
+    <!-- Notification light dialogs -->
+    <string name="edit_light_settings">Edit light settings</string>
+    <string name="pulse_speed_title">Pulse length and speed</string>
+    <string name="picker_arrow">→</string>
+    <string name="default_time">Normal</string>
+    <string name="custom_time">Custom</string>
+    <string name="dialog_test">Test</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_message">Remove selected item?</string>
+    <string name="dialog_test_message">Turn the screen off to see the selected notification in action or dismiss this dialog to stop the test</string>
+    <string name="dialog_test_button">Dismiss</string>
+
+    <!-- Values for the notification light pulse spinners -->
+    <string name="pulse_length_always_on">Always on</string>
+    <string name="pulse_length_very_short">Very short</string>
+    <string name="pulse_length_short">Short</string>
+    <string name="pulse_length_normal">Normal</string>
+    <string name="pulse_length_long">Long</string>
+    <string name="pulse_length_very_long">Very long</string>
+    <string name="pulse_speed_very_fast">Very fast</string>
+    <string name="pulse_speed_fast">Fast</string>
+    <string name="pulse_speed_normal">Normal</string>
+    <string name="pulse_speed_slow">Slow</string>
+    <string name="pulse_speed_very_slow">Very slow</string>
+
+    <!-- Battery light settings -->
+    <string name="battery_reset_title">Reset</string>
+    <string name="battery_light_title">Battery light</string>
+    <string name="battery_low_pulse_title">Pulse if battery low</string>
+    <string name="battery_light_list_title">Colors while charging</string>
+    <string name="battery_light_low_color_title">Battery low</string>
+    <string name="battery_light_medium_color_title">Medium charge</string>
+    <string name="battery_light_full_color_title">Fully charged</string>
+
+    <!-- Privacy Guard -->
+    <string name="app_security_title">App security</string>
+    <string name="privacy_guard_dlg_title">Enable Privacy Guard?</string>
+    <string name="privacy_guard_dlg_text">When Privacy Guard is enabled, the app will not be able to access personal data such as contacts, messages, location or call logs.</string>
+    <string name="privacy_guard_dlg_system_app_text">When enabling Privacy Guard for a built-in app, the app will not be able to access personal data such as contacts, messages, location or call logs. This may cause other apps to misbehave.</string>
+    <string name="privacy_guard_default_title">Enabled by default</string>
+    <string name="privacy_guard_default_summary">Do not access personal data by default for newly-installed apps</string>
+    <string name="privacy_guard_notification_title">Notification</string>
+    <string name="privacy_guard_notifiation_summary">Show notification if privacy guard is active.</string>
+    <string name="privacy_guard_manager_title">Privacy Guard</string>
+    <string name="privacy_guard_manager_summary">Manage which apps have access to your personal data and other apps permissions</string>
+    <string name="privacy_guard_no_user_apps">No apps are installed</string>
+    <string name="privacy_guard_filter_does_not_match">No apps with relevant permissions are installed</string>
+    <string name="privacy_guard_help_title">Help</string>
+    <string name="privacy_guard_reset_title">Reset</string>
+    <string name="privacy_guard_help_text">In this screen you can choose for which apps Privacy Guard should be active by simply tapping on them. Selected apps will not be able to access your personal data, such as contacts, messages, location or call logs. Long pressing on an entry allows to set specifically app permissions.\n\nBy default built-in apps are not shown. If you want to show them or filter apps to show only the ones requesting access to personal data by their permissions, select the respective options in the menu.</string>
+    <string name="privacy_guard_manager_show_system_apps">Show built-in apps</string>
+    <string name="privacy_guard_manager_filter_permissions">Permission filter</string>
+    <string name="privacy_guard_app_ops_detail_dialog_title">Attention</string>
+    <string name="privacy_guard_app_ops_detail_dialog_text">Selected app does not request permissions which access personal data. Do you want to modify the other permissions?</string>
+    <string name="privacy_guard_app_ops_detail_reset_dialog_text">Reset all permissions back to default?</string>
+    <string name="app_ops_btn_text">Modify</string>
+    <string name="app_ops_no_item_text">This app has no changeable permissions.</string>
+
+    <!-- Wi-Fi region code settings-->
+    <string name="wifi_setting_countrycode_title">Wi-Fi region code</string>
+    <!-- Wi-Fi settings screen, setting summary for setting the wifi frequency band [CHAR LIMIT=50]. -->
+    <string name="wifi_setting_countrycode_summary">Specify the region code for Wi-Fi</string>
+    <!-- Wi-Fi settings screen, error message when the frequency band could not be set [CHAR LIMIT=50]. -->
+    <string name="wifi_setting_countrycode_error">There was a problem setting the region code.</string>
+    <!-- Wi-Fi settings diables message if Wifi is off-->
+    <string name="wifi_setting_countrycode_disabled">Enable Wi-Fi to change this option.</string>
+
+    <!-- Status bar -->
+    <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_style_title">Style</string>
+    <string name="status_bar_general_title">General</string>
+
+    <!-- Status bar | Clock -->
+    <string name="status_bar_clock">Clock and date</string>
+    <string name="status_bar_clock_title">Clock and date style</string>
+    <string name="clock_title_enable">Alignment</string>
+    <string name="clock_color_title">Color</string>
+    <string name="status_bar_clock_style_reset">Reset color</string>
+    <string name="status_bar_show_clock_title">Show clock and date</string>
+    <string name="status_bar_am_pm_title">AM/PM</string>
+    <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
+    <string name="enable_clock_weekday">Day of the week</string>
+    <string name="enable_clock_weekday_summary">Abbreviated day of the week before the time</string>
+    <string name="right_clock">Right clock</string>
+    <string name="center_clock">Center clock</string>
+    <string name="dont_show">Don\'t show</string>
+    <string name="clock_date_display">Date</string>
+    <string name="clock_date_display_summary">Display custom date before the clock</string>
+    <string name="clock_date_style">Date style</string>
+    <string name="clock_date_format">Date format</string>
+    <string name="clock_date_string_edittext_title">Must be in DateFormat eg. MM/dd/yy</string>
+    <string name="clock_date_string_edittext_summary">Enter string</string>
+    <string name="am_pm_clock_normal">Normal font size</string>
+    <string name="am_pm_clock_small">Small font size</string>
+    <string name="am_pm_clock_none">Don\'t show</string>
+    <string name="clock_date_display_none">Don\'t show</string>
+    <string name="clock_date_display_small">Small font size</string>
+    <string name="clock_date_display_normal">Normal font size</string>
+    <string name="clock_date_style_normal">Normal</string>
+    <string name="clock_date_style_lowercase">Lowercase</string>
+    <string name="clock_date_style_uppercase">Uppercase</string>
+    <string name="clock_date_format_custom">Custom java format</string>
+    <string name="status_bar_clock_style_reset_message">Reset clock color?</string>
+    <string name="status_bar_toggle_brightness">Brightness control</string>
+    <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across status bar</string>
+    <string name="status_bar_toggle_info">Automatic brightness is enabled</string>
+
+    <!-- Wakeup options -->
+    <string name="display_category_wakeup_options_title">Wakeup options</string>
+    <string name="pref_volume_wake_title">Volume rocker wake</string>
+    <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the device</string>
+
+    <!-- Sound settings -->
+    <string name="sound_title">Sound</string>
+    <string name="advanced_sound_title">Advanced options</string>
+    <string name="volbtn_music_controls_title">Volume rocker music controls</string>
+    <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
+
+    <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
+    <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with hard keys</string>
+    <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
+    <string name="volume_ring_only_description">Ringtone</string>
+
+    <!-- Safe headset volume restore checkbox -->
+    <string name="safe_headset_volume_title">Safe headset volume</string>
+    <string name="safe_headset_volume_summary">Prevent loud volume levels when headset is first plugged in</string>
+    <string name="safe_headset_volume_warning_dialog_text">Listening at high volume for long periods may damage your hearing. Disable it with caution.</string>
+
+    <!-- Display : Animation options -->
+    <string name="display_category_animation_options_title">Animation options</string>
+    <string name="system_power_crt_mode_title">CRT animation </string>
+    <string name="system_power_crt_mode_dialog_title">CRT animation</string>
+    <string name="system_power_crt_mode_off">Don\'t show</string>
+    <string name="system_power_crt_mode_horizontal">Collapse horizontal</string>
+    <string name="system_power_crt_mode_vertical">Collapse vertical</string>
+    <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
+    <string name="system_power_crt_mode_scale">Scale down</string>
+
+    <!-- Keyboard and Input ASS methods  -->
+    <string name="title_keyboard_input">Advanced options</string>
+    <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
+    <string name="disable_fullscreen_keyboard_summary">Landscape keyboard will never take up entire screen</string>
+    <string name="volume_key_cursor_control_title">Volume key cursor control</string>
+    <string name="volume_key_cursor_control_on">Volume up/down moves cursor left/right</string>
+    <string name="volume_key_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
+    <string name="keyboard_rotation_toggle_title">Auto keyboard rotation</string>
+    <string name="keyboard_rotation_toggle_summary">Force auto-rotate when keyboard is shown</string>
+    <string name="keyboard_rotation_timeout_title">Auto-rotate timeout</string>
+    <string name="keyboard_rotation_timeout_summary">Disables auto-rotate sensor <xliff:g id="rotate_timeout">%1$s</xliff:g> seconds after keyboard is hidden</string>
+    <string name="keyboard_rotation_dialog">This feature forces auto-rotate to turn on temporarily while the keyboard is shown.  It has no effect when auto-rotate is already enabled.</string>
+    <string name="show_enter_key_title">Show enter key</string>
+    <string name="show_enter_key_summary">Force keyboard to show enter instead of emoticon key</string>
+    <string name="ime_switcher_notify">Selector notification</string>
+    <string name="ime_switcher_notify_summary">Display input method selector notification</string>
+
+    <!-- Setting checkbox title for root access -->
+    <string name="root_access">Root access</string>
+    <string name="root_access_warning_title">Allow root access?</string>
+    <string name="root_access_warning_message">Allowing applications to request root access is very dangerous and could compromise the security of your system!</string>
+    <string name="root_access_none">Disabled</string>
+    <string name="root_access_apps">Apps only</string>
+    <string name="root_access_adb">ADB only</string>
+    <string name="root_access_all">Apps and ADB</string>
+
+    <!-- Automatic brightness customization -->
+    <string name="auto_brightness_setup_title">Automatic brightness</string>
+    <string name="auto_brightness_adjustment_title">Brightness adjustment</string>
+    <string name="auto_brightness_twilight_adjustment">Adjust to sunrise and sunset</string>
+    <string name="light_sensor_current_value">Current light sensor value: <xliff:g id="light_level">%d</xliff:g> lux</string>
+    <string name="auto_brightness_dialog_title">Automatic brightness levels</string>
+    <string name="auto_brightness_level_format"><xliff:g id="level">%1$d</xliff:g> lux</string>
+    <string name="auto_brightness_last_level_format"><xliff:g id="level">%1$d</xliff:g> -\n\u221e lux</string>
+    <string name="auto_brightness_brightness_format" translatable="false"><xliff:g id="percent">%s</xliff:g>%%</string>
+    <string name="auto_brightness_adjust_button">Adjust</string>
+    <string name="auto_brightness_close_button">Close</string>
+    <string name="auto_brightness_reset_button">Reset</string>
+    <string name="auto_brightness_split_dialog_title">Split brightness level</string>
+    <string name="auto_brightness_level_dialog_title">Light level setup</string>
+    <string name="auto_brightness_lux">Ambient brightness (lux)</string>
+    <string name="auto_brightness_backlight">Screen brightness (%)</string>
+    <string name="auto_brightness_reset_dialog_title">Reset levels?</string>
+    <string name="auto_brightness_reset_confirmation">All brightness levels will be reset to their default settings.</string>
+    <string name="auto_brightness_split_lux_format">Split position (between <xliff:g id="min">%1$d</xliff:g> and <xliff:g id="max">%2$d</xliff:g> lux)</string>
+    <string name="auto_brightness_level_options">Light level options</string>
+    <string name="auto_brightness_menu_edit">Edit</string>
+    <string name="auto_brightness_menu_split">Split</string>
+    <string name="auto_brightness_menu_remove">Remove</string>
+    <string name="auto_brightness_preview">Preview</string>
+    <string name="auto_brightness_preview_dialog_title">Brightness curve preview</string>
+    <string name="auto_brightness_help_dialog_title">Help</string>
+    <string name="auto_brightness_help_text"><b>How is brightness calculated?</b>
+\n\n
+The brightness curve is calculated by performing a <i>cubic spline interpolation</i>
+on a given number of <i>control points</i>. It\'s not a \'bucket-type\' calculation where
+screen brightness will stay constant for a specific range of ambient brightness. That way,
+small changes in ambient brightness do not cause a large jump in screen brightness; however,
+it can be a little hard to predict the exact consequences of changing control points.\n
+To help with that, a preview of the calculated curve can be examined. Please note that the
+preview shows the curve in <i>logarithmic</i> scale, so that all control points can be shown
+distinctively. When using a linear scale, it wouldn\'t be possible to distinguish the tendentially
+more important control points in the lower range of ambient brightness.
+\n\n
+<b>How to edit the brightness curve?</b>
+\n\n
+Each line in the brightness list corresponds to one <i>control point</i> of the
+brightness curve. To edit the brightness level of the point, you can use the slider
+present in each line. The screen brightness will be changed accordingly while touching
+the slider to give a preview of the light level.\n
+Additional options are available by long-pressing a line. By selecting \'Edit\', you can
+both edit the ambient brightness level of the control point as well as manually input the
+desired screen brightness. Selecting \'Split\' allows you to to duplicate one line into
+two in order to insert additional control points. \'Remove\' deletes the selected line.
+    </string>
+
+    <string name="auto_brightness_sensitivity_title">Adjustment sensitivity</string>
+    <string name="auto_brightness_sensitivity_verylow">Very low</string>
+    <string name="auto_brightness_sensitivity_low">Low</string>
+    <string name="auto_brightness_sensitivity_medium">Medium</string>
+    <string name="auto_brightness_sensitivity_high">High</string>
+    <string name="auto_brightness_sensitivity_veryhigh">Very high</string>
+
+    <!-- Blacklist preferences -->
+    <string name="blacklist_title">Blacklist</string>
+    <string name="blacklist_edit_dialog_title">Edit blacklist entry</string>
+    <string name="blacklist_prefs">Settings</string>
+    <string name="blacklist_button_delete">Delete</string>
+    <string name="blacklist_empty_text">You don\'t have any blacklisted numbers. Add an entry by touching the Add (+) button.</string>
+    <string name="blacklist_disabled_empty_text">To blacklist calls and/or messages from certain numbers, enable the blacklist.</string>
+    <string name="blacklist_summary_disabled">Disabled</string>
+    <string name="blacklist_summary">Incoming calls and messages from phone numbers in the blacklist will be blocked</string>
+    <string name="blacklist_notify">Show notification</string>
+    <string name="blacklist_private_numbers_title">Private numbers</string>
+    <string name="blacklist_private_numbers_summary_disabled">Don\'t block calls from private numbers</string>
+    <string name="blacklist_private_numbers_summary">Block incoming <xliff:g id="type">%s</xliff:g> from private numbers</string>
+    <string name="blacklist_unknown_numbers_title">Unknown numbers</string>
+    <string name="blacklist_unknown_numbers_summary_disabled">Don\'t block calls or messages from numbers not in the contact list</string>
+    <string name="blacklist_unknown_numbers_summary">Block incoming <xliff:g id="type">%s</xliff:g> from numbers not in the contact list</string>
+    <string name="blacklist_summary_type_calls_only">calls</string>
+    <string name="blacklist_summary_type_messages_only">messages</string>
+    <string name="blacklist_summary_type_calls_and_messages">calls and messages</string>
+    <string name="blacklist_regex_title">Use wildcards</string>
+    <string name="blacklist_regex_summary">Use . as a wildcard and * for repetition. E.g. 123.* blocks numbers starting with 123 and .*123.* blocks numbers containing 123</string>
+    <string name="blacklist_policy_block_calls">Block incoming calls</string>
+    <string name="blacklist_policy_block_messages">Block incoming messages</string>
+
+    <!-- Blacklist management -->
+    <string name="add_blacklist_number">Add number</string>
+    <string name="remove_blacklist_number_title">Remove number</string>
+    <string name="remove_blacklist_entry">Do you want to remove this blacklist entry?</string>
+    <string name="select_contact">Select contact</string>
+
+    <string name="increasing_ring_title">Ascending ringtone</string>
+    <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
+    <string name="checkbox_increasing_ring">Enable</string>
+    <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
+    <string name="increasing_ring_min_volume_title">Ringing start volume</string>
+    <string name="increasing_ring_volume_notice">Notice:\nAs the start volume is set higher than the ringer volume, the ring tone will be played using the ringer volume.</string>
+    <string name="increasing_ring_interval_title">Increase interval</string>
+    <string name="increasing_ring_interval_eachring">On each ring</string>
+    <string name="increasing_ring_interval_half_second">0.5 seconds</string>
+    <string name="increasing_ring_interval_1second">1 second</string>
+    <string name="increasing_ring_interval_2seconds">2 seconds</string>
+    <string name="increasing_ring_interval_3seconds">3 seconds</string>
+    <string name="increasing_ring_interval_5seconds">5 seconds</string>
+    <string name="increasing_ring_interval_10seconds">10 seconds</string>
+
+    <!-- Low battery warning policy -->
+    <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
+    <string name="pref_low_battery_warning_policy_dialog_title">Indicate low battery warning with</string>
+    <string name="low_battery_warning_policy_popup_sound">Pop-up and sound</string>
+    <string name="low_battery_warning_policy_notif_sound">Notification and sound</string>
+    <string name="low_battery_warning_policy_popup">Pop-up dialog only</string>
+    <string name="low_battery_warning_policy_notif">Notification only</string>
+    <string name="low_battery_warning_policy_sound">Sound only</string>
+    <string name="battery_prefs_title">Options</string>
+    <string name="battery_stats_title">Statistics</string>
+
+    <!-- Button shorcut actions -->
+    <string name="shortcut_action_app">Custom app</string>
+    <string name="shortcut_action_home">Home</string>
+    <string name="shortcut_action_back">Back</string>
+    <string name="shortcut_action_recent">Recents</string>
+    <string name="shortcut_action_lastapp">Last app</string>
+    <string name="shortcut_action_search">Search</string>
+    <string name="shortcut_action_screenshot">Screenshot</string>
+    <string name="shortcut_action_menu">Menu</string>
+    <string name="shortcut_action_ime">Open IME Switcher</string>
+    <string name="shortcut_action_kill">Kill app</string>
+    <string name="shortcut_action_power">Screen Off</string>
+    <string name="shortcut_action_notifications">Notifications</string>
+    <string name="shortcut_action_qs">Quicksettings panel</string>
+    <string name="shortcut_action_none">None</string>
+    <string name="shortcut_action_power_menu">Power menu</string>
+    <string name="shortcut_action_torch">Torch</string>
+    <string name="shortcut_action_longpress">Longpress:</string>
+    <string name="shortcut_action_select_action_longpress">Choose longpress action:</string>
+    <string name="shortcut_action_select_action">Choose action:</string>
+    <string name="shortcut_action_select_action_newbutton">Choose new button:</string>
+    <string name="shortcut_action_reset">Reset</string>
+    <string name="shortcut_action_add">Add</string>
+    <string name="shortcut_action_reset_message">Reset all entries to default?</string>
+    <string name="shortcut_action_max">Maximum entries size has been reached</string>
+    <string name="shortcut_action_warning">Warning</string>
+    <string name="shortcut_action_warning_message">It is not possible to delete last entry</string>
+    <string name="shortcut_action_disable_message">Disabled\nAdd an entry to enable this feature</string>
+    <string name="shortcut_image_not_valid">The chosen app did not return a valid icon or does not support image cropping. Use another app</string>
+    <string name="shortcut_duplicate_entry">The chosen action cannot be added twice</string>
+
+    <string name="shortcut_action_help_shortcut">shortcut</string>
+    <string name="shortcut_action_help_button">button</string>
+    <string name="shortcut_action_help_icon">, while selecting the icon will bring up customization options</string>
+    <string name="shortcut_action_help_main">To add a %1$s, select the Add icon.  Once a %1$s is added, selecting the row will change the target%2$s\n\nTo remove a %1$s, swipe the row horizontally left or right.  Re-order a %1$s in the list by vertically dragging the anchor on the left.\n\nTo clear or reset to defaults, select the Reset icon.</string>
+    <string name="shortcut_action_help_delete_last_entry">Removing every %1$s in the list will disable the feature entirely.</string>
+    <string name="shortcut_action_help">Help</string>
+
+    <string name="icon_picker_type">Select icon type:</string>
+    <string name="icon_default">Default</string>
+    <string name="icon_presets">System icons</string>
+    <string name="icon_custom">Gallery</string>
+    <string name="shortcuts_icon_picker_alarm">Alarm</string>
+    <string name="shortcuts_icon_picker_andy">Andy</string>
+    <string name="shortcuts_icon_picker_battery">Battery</string>
+    <string name="shortcuts_icon_picker_browser">Browser</string>
+    <string name="shortcuts_icon_picker_calendar">Calendar</string>
+    <string name="shortcuts_icon_picker_camera">Camera</string>
+    <string name="shortcuts_icon_picker_cloud">Cloud</string>
+    <string name="shortcuts_icon_picker_contact">Contact</string>
+    <string name="shortcuts_icon_picker_directdial">Direct Dial</string>
+    <string name="shortcuts_icon_picker_directmessage">Direct Message</string>
+    <string name="shortcuts_icon_picker_drive">Drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Email Alternate</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Favorite</string>
+    <string name="shortcuts_icon_picker_file_browser">File Browser</string>
+    <string name="shortcuts_icon_picker_file_browser2">File Browser Alternate</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Gallery</string>
+    <string name="shortcuts_icon_picker_gears">Gears</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Help</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Keys/Accounts</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Notes</string>
+    <string name="shortcuts_icon_picker_luggage">Travel</string>
+    <string name="shortcuts_icon_picker_maps">Maps</string>
+    <string name="shortcuts_icon_picker_market">Market</string>
+    <string name="shortcuts_icon_picker_movie">Movies</string>
+    <string name="shortcuts_icon_picker_music">Music</string>
+    <string name="shortcuts_icon_picker_nav">Navigation</string>
+    <string name="shortcuts_icon_picker_phone">Phone</string>
+    <string name="shortcuts_icon_picker_package">Package</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">Pocket</string>
+    <string name="shortcuts_icon_picker_quicksettings">Quick Settings</string>
+    <string name="shortcuts_icon_picker_rss">RSS Feed</string>
+    <string name="shortcuts_icon_picker_sdcard">SDCard</string>
+    <string name="shortcuts_icon_picker_search">Search</string>
+    <string name="shortcuts_icon_picker_sms">Messaging</string>
+    <string name="shortcuts_icon_picker_tasks">Tasks</string>
+    <string name="shortcuts_icon_picker_terminal">Terminal</string>
+    <string name="shortcuts_icon_picker_transit">Transit</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Unlock</string>
+
+    <string name="icon_color_mode_all_icons">All icons</string>
+    <string name="icon_color_mode_system_icons">System icons</string>
+    <string name="icon_color_mode_system_custom_icons">System and custom icons</string>
+    <string name="icon_picker_choose_icon_title">Choose icon</string>
+    <string name="group_applications">Applications</string>
+    <string name="select_custom_app_title">Select custom application</string>
+    <string name="shortcuts_color_title">Shortcut icon color</string>
+    <string name="shortcuts_color_summary">Colorize the shortcut icons</string>
+    <string name="shortcuts_color_mode_title">Icon color mode</string>
+    <string name="shortcuts_color_mode_summary">Change the shorcuts icon color mode</string>
+
+    <!-- Notification drawer settings  -->
+    <string name="notification_drawer_title">Notification drawer</string>
+    <string name="notification_hide_carrier_title">Hide carrier label</string>
+    <string name="notification_shortcuts_settings_title">Shortcuts</string>
+    <string name="notification_shortcuts_settings_summary">Show shortcuts in the notification drawer</string>
+
+</resources>
