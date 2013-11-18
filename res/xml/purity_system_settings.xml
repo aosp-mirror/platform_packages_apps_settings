@@ -50,6 +50,12 @@
         android:fragment="com.android.settings.purity.NavbarSettings" />
 
     <PreferenceScreen
+            android:key="navigation_ring"
+            android:fragment="com.android.settings.purity.NavRing"
+            android:icon="@drawable/ic_settings_nav_bar_ring"
+            android:title="@string/navigation_ring_title" />
+
+    <PreferenceScreen
         android:key="lock_screen_settings"
         android:title="@string/lock_screen_title"
         android:icon="@drawable/ic_settings_lock_screen"
