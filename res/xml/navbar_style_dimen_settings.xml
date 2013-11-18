@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The CyanogenMod Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2012 Slimroms Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,13 +13,16 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
-     <CheckBoxPreference
-        android:key="lockscreen_maximize_widgets"
-        android:persistent="false"
-        android:title="@string/lockscreen_maximize_widgets_title"
-        android:summary="@string/lockscreen_maximize_widgets_summary" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="navigation_bar_height"
+        android:dialogTitle="@string/navigation_bar_height"
+        android:title="@string/navigation_bar_height"
+        android:entries="@array/navigation_bar_height_entries"
+        android:entryValues="@array/navigation_bar_height_values"
+        android:defaultValue="48"
+        android:persistent="false" />
 
 </PreferenceScreen>
