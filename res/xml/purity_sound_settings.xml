@@ -20,6 +20,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <CheckBoxPreference
+        android:key="safe_headset_volume"
+        android:title="@string/safe_headset_volume_title"
+        android:summary="@string/safe_headset_volume_summary"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
         android:key="volbtn_music_controls"
         android:title="@string/volbtn_music_controls_title"
         android:summary="@string/volbtn_music_controls_summary"
