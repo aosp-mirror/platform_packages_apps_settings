@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Mahdi-Rom Project
+ * Copyright (C) 2013 Slimroms Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,12 @@
 package com.android.settings.mahdi;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -63,6 +67,8 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
 
     private static final int MENU_RESET = Menu.FIRST;
 
+    private static final int DLG_RESET = 0;
+
     private ListPreference mClockStyle;
     private ListPreference mClockAmPmStyle;
     private ColorPickerPreference mColorPicker;
@@ -89,6 +95,15 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.status_bar_clock_style);
         prefSet = getPreferenceScreen();
 
+        PackageManager pm = getPackageManager();
+        Resources systemUiResources;
+        try {
+            systemUiResources = pm.getResourcesForApplication("com.android.systemui");
+        } catch (Exception e) {
+            Log.e(TAG, "can't access systemui resources",e);
+            return null;
+        }
+
         mClockStyle = (ListPreference) findPreference(PREF_ENABLE);
         mClockStyle.setOnPreferenceChangeListener(this);
         mClockStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
@@ -101,16 +116,22 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         mClockAmPmStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUSBAR_CLOCK_AM_PM_STYLE,
                 0)));
-        mClockAmPmStyle.setSummary(mClockAmPmStyle.getEntry());
+        boolean is24hour = DateFormat.is24HourFormat(getActivity());
+        if (is24hour) {
+            mClockAmPmStyle.setSummary(R.string.status_bar_am_pm_info);
+        } else {
+            mClockAmPmStyle.setSummary(mClockAmPmStyle.getEntry());
+        }
+        mClockAmPmStyle.setEnabled(!is24hour);
 
         mColorPicker = (ColorPickerPreference) findPreference(PREF_COLOR_PICKER);
         mColorPicker.setOnPreferenceChangeListener(this);
         int intColor = Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_COLOR, -2);
         if (intColor == -2) {
-            intColor = getResources().getColor(
-                    com.android.internal.R.color.white);
-            mColorPicker.setSummary(getResources().getString(R.string.color_default));
+            intColor = systemUiResources.getColor(systemUiResources.getIdentifier(
+                    "com.android.systemui:color/status_bar_clock_color", null, null));
+            mColorPicker.setSummary(getResources().getString(R.string.default_string));
         } else {
             String hexColor = String.format("#%08x", (0xffffffff & intColor));
             mColorPicker.setSummary(hexColor);
@@ -144,15 +165,6 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
                 getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_CLOCK, 1) == 1));
         mStatusBarClock.setOnPreferenceChangeListener(this);
-
-        try {
-            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.TIME_12_24) == 24) {
-                mClockAmPmStyle.setEnabled(false);
-                mClockAmPmStyle.setSummary(R.string.status_bar_am_pm_info);
-            }
-        } catch (SettingNotFoundException e ) {
-        }
 
         boolean mClockDateToggle = Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_DATE_DISPLAY, 0) != 0;
@@ -281,26 +293,11 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_RESET:
-                resetToDefault();
+                showDialogInner(DLG_RESET);
                 return true;
              default:
                 return super.onContextItemSelected(item);
         }
-    }
-
-    private void resetToDefault() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(R.string.reset);
-        alertDialog.setMessage(R.string.status_bar_clock_style_reset_message);
-        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                        Settings.System.STATUSBAR_CLOCK_COLOR, -2);
-                createCustomView();
-            }
-        });
-        alertDialog.setNegativeButton(R.string.cancel, null);
-        alertDialog.create().show();
     }
 
     private void parseClockDateFormats() {
@@ -331,6 +328,54 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
             }
         }
         mClockDateFormat.setEntries(parsedDateEntries);
+    }
+
+    private void showDialogInner(int id) {
+        DialogFragment newFragment = MyAlertDialogFragment.newInstance(id);
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(getFragmentManager(), "dialog " + id);
+    }
+
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newInstance(int id) {
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("id", id);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        StatusBarClockStyle getOwner() {
+            return (StatusBarClockStyle) getTargetFragment();
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int id = getArguments().getInt("id");
+            switch (id) {
+                case DLG_RESET:
+                    return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.reset)
+                    .setMessage(R.string.status_bar_clock_style_reset_message)
+                    .setNegativeButton(R.string.cancel, null)
+                    .setPositiveButton(R.string.dlg_ok,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Settings.System.putInt(getActivity().getContentResolver(),
+                                Settings.System.STATUSBAR_CLOCK_COLOR, -2);
+                            getOwner().createCustomView();
+                        }
+                    })
+                    .create();
+            }
+            throw new IllegalArgumentException("unknown id " + id);
+        }
+
+        @Override
+        public void onCancel(DialogInterface dialog) {
+
+        }
     }
 
 }

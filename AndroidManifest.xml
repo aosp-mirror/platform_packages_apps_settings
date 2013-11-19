@@ -1836,13 +1836,13 @@
                 android:resource="@id/customization_settings" />
         </activity>
         
-	<activity android:name=".mahdi.notificationlight.NotificationLightSettings" />
-	<activity android:name=".mahdi.notificationlight.BatteryLightSettings" />
-	<activity android:name=".mahdi.StatusBar" />
-	<activity android:name=".mahdi.HardwareKeys" />
-	<activity android:name=".mahdi.QuickSettings" />
-	<activity android:name=".mahdi.NotificationDrawerSettings" />
-	<activity android:name=".mahdi.LockscreenTargets" />
+        <activity android:name=".mahdi.notificationlight.NotificationLightSettings" />
+        <activity android:name=".mahdi.notificationlight.BatteryLightSettings" />
+        <activity android:name=".mahdi.StatusBar" />
+        <activity android:name=".mahdi.HardwareKeys" />
+        <activity android:name=".mahdi.QuickSettings" />
+        <activity android:name=".mahdi.NotificationDrawerSettings" />
+        <activity android:name=".mahdi.LockscreenTargets" />
         <activity android:name=".mahdi.lsn.LockscreenNotifications" />
         <activity android:name=".mahdi.LockscreenButtons" />
         <activity android:name=".mahdi.PrivacySettings" />
@@ -1851,7 +1851,7 @@
                 android:excludeFromRecents="true"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
 
-	<activity android:name=".ApnEditor" />	
+        <activity android:name=".ApnEditor" />	
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to quite hours settings -->
         <activity android:name="Settings$QuietHoursSettingsActivity"
@@ -1929,7 +1929,7 @@
         </activity>
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to profiles config -->
-	<activity android:name=".profiles.ProfilesSettings" />
+        <activity android:name=".profiles.ProfilesSettings" />
         <activity android:name="Settings$ProfilesSettingsActivity"
                 android:label="@string/profile_settings"
                 android:taskAffinity=""

@@ -16,30 +16,25 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/nav_bar_button_style">
-    
-    <PreferenceCategory
-        android:title="@string/nav_bar_button_style">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-             android:key="nav_button_color"
-             android:title="@string/navigation_bar_icon_tint_title"
-             android:defaultValue="0xffffffff" />
+     <net.margaritov.preference.colorpicker.ColorPickerPreference
+         android:key="nav_button_glow_color"
+         android:title="@string/navigation_bar_glow_tint_title"
+         android:defaultValue="0xffffffff" />
 
-        <ListPreference
-             android:entries="@array/icon_color_mode_entries"
-             android:entryValues="@array/icon_color_mode_values"
-             android:key="nav_button_color_mode"
-             android:title="@string/nav_button_color_mode_title"
-             android:dialogTitle="@string/nav_button_color_mode_dialog_title"
-             android:summary="@string/nav_button_color_mode_summary" />
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+         android:key="nav_button_color"
+         android:title="@string/shortcuts_color_title"
+         android:defaultValue="0xffffffff" />
 
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-             android:key="nav_button_glow_color"
-             android:title="@string/navigation_bar_glow_tint_title"
-             android:defaultValue="0xffffffff" />
-
-    </PreferenceCategory>
+    <ListPreference
+         android:entries="@array/icon_color_mode_entries"
+         android:entryValues="@array/icon_color_mode_values"
+         android:key="nav_button_color_mode"
+         android:title="@string/shortcuts_color_mode_title"
+         android:dialogTitle="@string/shortcuts_color_mode_title"
+         android:summary="@string/shortcuts_color_mode_summary" />
 
 </PreferenceScreen>
+
