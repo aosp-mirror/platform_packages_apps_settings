@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -179,6 +180,8 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
             mDeviceNameEdited = false;
             mDeviceNameView.setText(mLocalAdapter.getName());
         }
+        PreferenceActivity activity = (PreferenceActivity)getActivity();
+        activity.showBreadCrumbs(mLocalAdapter.getName(), "");
     }
 
     public void afterTextChanged(Editable s) {

@@ -25,12 +25,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.SystemProperties;
 import android.preference.Preference;
-import android.text.format.DateUtils;
+import android.util.Log;
 
 import com.android.settings.R;
-
-import android.text.format.Time;
-import android.util.Log;
 
 /**
  * BluetoothDiscoverableEnabler is a helper to manage the "Discoverable"
@@ -63,6 +60,8 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
     private final Context mContext;
     private final Handler mUiHandler;
     private final Preference mDiscoveryPreference;
+    // Preference for visibility time out.  Not final as it needs to be set through setter.
+    private Preference mVisibilityTimeoutPreference;
 
     private final LocalBluetoothAdapter mLocalAdapter;
 
@@ -102,6 +101,10 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         discoveryPreference.setPersistent(false);
     }
 
+    public void setVisibilityPreference(Preference visibilityPreference) {
+        mVisibilityTimeoutPreference = visibilityPreference;
+    }
+
     public void resume() {
         if (mLocalAdapter == null) {
             return;
@@ -111,6 +114,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         mContext.registerReceiver(mReceiver, filter);
         mDiscoveryPreference.setOnPreferenceClickListener(this);
         handleModeChanged(mLocalAdapter.getScanMode());
+        updateVisibilityTimeoutDisplay();
     }
 
     public void pause() {
@@ -121,6 +125,9 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         mUiHandler.removeCallbacks(mUpdateCountdownSummaryRunnable);
         mContext.unregisterReceiver(mReceiver);
         mDiscoveryPreference.setOnPreferenceClickListener(null);
+        if (mVisibilityTimeoutPreference != null) {
+            mVisibilityTimeoutPreference.setOnPreferenceClickListener(null);
+        }
     }
 
     public boolean onPreferenceClick(Preference preference) {
@@ -148,6 +155,23 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
             mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
             BluetoothDiscoverableTimeoutReceiver.cancelDiscoverableAlarm(mContext);
         }
+        updateVisibilityTimeoutDisplay();
+    }
+
+    // Update visibility timeout preference.
+    private void updateVisibilityTimeoutDisplay() {
+        if (mVisibilityTimeoutPreference == null) {
+            return;
+        }
+        int index = getDiscoverableTimeoutIndex();
+
+        String visibilitySummary = "";
+        CharSequence[] timeoutChoices =
+                mContext.getResources().getTextArray(R.array.bluetooth_visibility_timeout_entries);
+        if (index >= 0 && index < timeoutChoices.length) {
+            visibilitySummary = timeoutChoices[index].toString();
+        }
+        mVisibilityTimeoutPreference.setSummary(visibilitySummary);
     }
 
     private void updateTimerDisplay(int timeout) {
