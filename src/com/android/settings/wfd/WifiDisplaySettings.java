@@ -137,6 +137,11 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_remote_display;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
