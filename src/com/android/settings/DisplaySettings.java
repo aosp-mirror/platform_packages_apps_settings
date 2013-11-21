@@ -47,6 +47,7 @@ import android.util.Log;
 
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 
@@ -103,6 +104,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
 
         addPreferencesFromResource(R.xml.display_settings);
+
+        // Custom CRT settings are unsupported for tablets
+        mScreenOffAnimationPreference = (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
+            if (!Utils.isPhone(getActivity())) {
+                if ( mScreenOffAnimationPreference != null) {
+                getPreferenceScreen().removePreference(mScreenOffAnimationPreference);
+            }
+        }
 
         PreferenceScreen prefSet = getPreferenceScreen();
 

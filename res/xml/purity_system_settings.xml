@@ -25,6 +25,18 @@
         android:icon="@drawable/ic_settings_status_bar"
         android:title="@string/status_bar_title" />
 
+   <PreferenceScreen
+        android:key="quick_settings_panel"
+        android:fragment="com.android.settings.quicksettings.QuickSettings"
+        android:icon="@drawable/ic_settings_quick_settings"
+        android:title="@string/quick_settings_panel_title" />
+
+    <PreferenceScreen
+        android:key="notification_drawer"
+        android:fragment="com.android.settings.purity.NotificationDrawer"
+        android:icon="@drawable/ic_settings_ribbons"
+        android:title="@string/notification_drawer_title" />
+
     <PreferenceScreen
         android:key="power_menu"
         android:title="@string/power_menu_title"
