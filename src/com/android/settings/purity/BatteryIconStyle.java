@@ -17,6 +17,8 @@
 package com.android.settings.purity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -55,6 +57,8 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
 
 
     private static final int MENU_RESET = Menu.FIRST;
+
+    private static final int DLG_RESET = 0;
 
     private ListPreference mStatusBarBattery;
     private ColorPickerPreference mBatteryColor;
@@ -176,25 +180,11 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_RESET:
-                resetToDefault();
+                showDialogInner(DLG_RESET);
                 return true;
              default:
                 return super.onContextItemSelected(item);
         }
-    }
-
-    private void resetToDefault() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(R.string.reset);
-        alertDialog.setMessage(R.string.battery_style_reset_message);
-        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                iconColorReset();
-                createCustomView();
-            }
-        });
-        alertDialog.setNegativeButton(R.string.cancel, null);
-        alertDialog.create().show();
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -244,15 +234,6 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
         return false;
     }
 
-    private void iconColorReset() {
-        Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_BATTERY_COLOR, -2);
-        Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_BATTERY_TEXT_COLOR, -2);
-        Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_BATTERY_TEXT_CHARGING_COLOR, -2);
-    }
-
     private void updateBatteryIconOptions(int batteryIconStat) {
         mBatteryTextChargingColor.setTitle(R.string.battery_text_charging_color);
         if (batteryIconStat == 0) {
@@ -281,6 +262,58 @@ public class BatteryIconStyle extends SettingsPreferenceFragment
             mBatteryTextColor.setEnabled(true);
             mBatteryTextChargingColor.setEnabled(true);
             mCircleAnimSpeed.setEnabled(false);
+        }
+    }
+
+    private void showDialogInner(int id) {
+        DialogFragment newFragment = MyAlertDialogFragment.newInstance(id);
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(getFragmentManager(), "dialog " + id);
+    }
+
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newInstance(int id) {
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("id", id);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        BatteryIconStyle getOwner() {
+            return (BatteryIconStyle) getTargetFragment();
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int id = getArguments().getInt("id");
+            switch (id) {
+                case DLG_RESET:
+                    return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.reset)
+                    .setMessage(R.string.battery_style_reset_message)
+                    .setNegativeButton(R.string.cancel, null)
+                    .setPositiveButton(R.string.dlg_ok,
+                        new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Settings.System.putInt(getActivity().getContentResolver(),
+                                Settings.System.STATUS_BAR_BATTERY_COLOR, -2);
+                            Settings.System.putInt(getActivity().getContentResolver(),
+                                Settings.System.STATUS_BAR_BATTERY_TEXT_COLOR, -2);
+                            Settings.System.putInt(getActivity().getContentResolver(),
+                                Settings.System.STATUS_BAR_BATTERY_TEXT_CHARGING_COLOR, -2);
+                            getOwner().createCustomView();
+                        }
+                    })
+                    .create();
+            }
+            throw new IllegalArgumentException("unknown id " + id);
+        }
+
+        @Override
+        public void onCancel(DialogInterface dialog) {
+
         }
     }
 
