@@ -4,3 +4,9 @@ option java_package com.android.settings
 
 # log the type of screen lock when user sets lock screen
 90200 lock_screen_type (type|3)
+
+# log whether user accepted and activated device admin
+90201 exp_det_device_admin_activated_by_user (app_signature|3)
+
+# log whether user declined activation of device admin
+90202 exp_det_device_admin_declined_by_user (app_signature|3)
