@@ -16,38 +16,17 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/location_settings_title">
-
-        <com.android.settings.WrappingSwitchPreference
-            android:key="location_toggle"
-            android:title="@string/location_access_title"
-            android:summary="@string/location_access_summary"
-            android:persistent="true"/>
+        <Preference
+            android:key="location_mode"
+            android:title="@string/location_mode_title"
+            android:summary="@string/location_mode_location_off_title" />
 
         <PreferenceCategory
-            android:key="location_sources"
-            android:title="@string/location_sources_heading" />
+            android:key="recent_location_requests"
+            android:title="@string/location_category_recent_location_requests" />
 
-        <CheckBoxPreference
-            android:key="location_gps"
-            android:title="@string/location_gps"
-            android:summary="@string/location_street_level"
-            android:dependency="location_toggle"
-            android:persistent="false" />
-
-        <com.android.settings.WrappingCheckBoxPreference
-            android:key="location_network"
-            android:title="@string/location_network_based"
-            android:summary="@string/location_neighborhood_level"
-            android:dependency="location_toggle"
-            android:persistent="false" />
-
-<!-- Disabled to avoid confusion on devices with no AGPS
-     For Google experience devices we want AGPS on by default (if supported) so we don't really need this.
-        <CheckBoxPreference
-            android:key="assisted_gps"
-            android:title="@string/assisted_gps"
-            android:summaryOn="@string/assisted_gps_enabled"
-            android:summaryOff="@string/assisted_gps_disabled"/>
--->
+        <PreferenceCategory
+            android:key="location_services"
+            android:title="@string/location_category_location_services" />
 
 </PreferenceScreen>

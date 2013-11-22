@@ -121,7 +121,7 @@ public class UidDetailProvider {
             final UserInfo info = um.getUserInfo(userHandle);
             if (info != null) {
                 detail.label = res.getString(R.string.running_process_item_user_label, info.name);
-                detail.icon = UserUtils.getUserIcon(um, info, res);
+                detail.icon = UserUtils.getUserIcon(mContext, um, info, res);
                 return detail;
             }
         }

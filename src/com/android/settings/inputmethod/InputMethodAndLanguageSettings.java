@@ -20,10 +20,12 @@ import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 import com.android.settings.Settings.SpellCheckersSettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 import com.android.settings.VoiceInputOutputSettings;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +40,8 @@ import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -46,6 +50,7 @@ import android.text.TextUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,12 +88,23 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             new ArrayList<PreferenceScreen>();
     private InputManager mIm;
     private InputMethodManager mImm;
-    private List<InputMethodInfo> mImis;
     private boolean mIsOnlyImeSettings;
     private Handler mHandler;
-    @SuppressWarnings("unused")
     private SettingsObserver mSettingsObserver;
     private Intent mIntentWaitingForResult;
+    private InputMethodSettingValuesWrapper mInputMethodSettingValues;
+
+    private final OnPreferenceChangeListener mOnImePreferenceChangedListener =
+            new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference arg0, Object arg1) {
+                    InputMethodSettingValuesWrapper.getInstance(
+                            arg0.getContext()).refreshAllInputMethodAndSubtypes();
+                    ((BaseAdapter)getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
+                    updateInputMethodPreferenceViews();
+                    return true;
+                }
+            };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -140,7 +156,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         // Build IME preference category.
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mImis = mImm.getInputMethodList();
+        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(getActivity());
 
         mKeyboardSettingsCategory.removeAll();
         if (!mIsOnlyImeSettings) {
@@ -150,18 +166,22 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mKeyboardSettingsCategory.addPreference(currentIme);
         }
 
-        mInputMethodPreferenceList.clear();
-        final int N = (mImis == null ? 0 : mImis.size());
-        for (int i = 0; i < N; ++i) {
-            final InputMethodInfo imi = mImis.get(i);
-            final InputMethodPreference pref = getInputMethodPreference(imi, N);
-            mInputMethodPreferenceList.add(pref);
-        }
-
-        if (!mInputMethodPreferenceList.isEmpty()) {
-            Collections.sort(mInputMethodPreferenceList);
+        synchronized (mInputMethodPreferenceList) {
+            mInputMethodPreferenceList.clear();
+            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+            final int N = (imis == null ? 0 : imis.size());
             for (int i = 0; i < N; ++i) {
-                mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+                final InputMethodInfo imi = imis.get(i);
+                final InputMethodPreference pref = getInputMethodPreference(imi);
+                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
+                mInputMethodPreferenceList.add(pref);
+            }
+
+            if (!mInputMethodPreferenceList.isEmpty()) {
+                Collections.sort(mInputMethodPreferenceList);
+                for (int i = 0; i < N; ++i) {
+                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+                }
             }
         }
 
@@ -193,31 +213,41 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private void updateUserDictionaryPreference(Preference userDictionaryPreference) {
         final Activity activity = getActivity();
-        final TreeSet<String> localeList = UserDictionaryList.getUserDictionaryLocalesSet(activity);
-        if (null == localeList) {
+        final TreeSet<String> localeSet = UserDictionaryList.getUserDictionaryLocalesSet(activity);
+        if (null == localeSet) {
             // The locale list is null if and only if the user dictionary service is
             // not present or disabled. In this case we need to remove the preference.
             getPreferenceScreen().removePreference(userDictionaryPreference);
-        } else if (localeList.size() <= 1) {
-            final Intent intent =
-                    new Intent(UserDictionaryList.USER_DICTIONARY_SETTINGS_INTENT_ACTION);
-            userDictionaryPreference.setTitle(R.string.user_dict_single_settings_title);
-            userDictionaryPreference.setIntent(intent);
-            userDictionaryPreference.setFragment(
-                    com.android.settings.UserDictionarySettings.class.getName());
-            // If the size of localeList is 0, we don't set the locale parameter in the
-            // extras. This will be interpreted by the UserDictionarySettings class as
-            // meaning "the current locale".
-            // Note that with the current code for UserDictionaryList#getUserDictionaryLocalesSet()
-            // the locale list always has at least one element, since it always includes the current
-            // locale explicitly. @see UserDictionaryList.getUserDictionaryLocalesSet().
-            if (localeList.size() == 1) {
-                final String locale = (String)localeList.toArray()[0];
-                userDictionaryPreference.getExtras().putString("locale", locale);
-            }
         } else {
-            userDictionaryPreference.setTitle(R.string.user_dict_multiple_settings_title);
-            userDictionaryPreference.setFragment(UserDictionaryList.class.getName());
+            userDictionaryPreference.setOnPreferenceClickListener(
+                    new OnPreferenceClickListener() {
+                        @Override
+                        public boolean onPreferenceClick(Preference arg0) {
+                            // Redirect to UserDictionarySettings if the user needs only one
+                            // language.
+                            final Bundle extras = new Bundle();
+                            final Class<? extends Fragment> targetFragment;
+                            if (localeSet.size() <= 1) {
+                                if (!localeSet.isEmpty()) {
+                                    // If the size of localeList is 0, we don't set the locale
+                                    // parameter in the extras. This will be interpreted by the
+                                    // UserDictionarySettings class as meaning
+                                    // "the current locale". Note that with the current code for
+                                    // UserDictionaryList#getUserDictionaryLocalesSet()
+                                    // the locale list always has at least one element, since it
+                                    // always includes the current locale explicitly.
+                                    // @see UserDictionaryList.getUserDictionaryLocalesSet().
+                                    extras.putString("locale", localeSet.first());
+                                }
+                                targetFragment = UserDictionarySettings.class;
+                            } else {
+                                targetFragment = UserDictionaryList.class;
+                            }
+                            startFragment(InputMethodAndLanguageSettings.this,
+                                    targetFragment.getCanonicalName(), -1, extras);
+                            return true;
+                        }
+                    });
         }
     }
 
@@ -278,10 +308,14 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         updateInputDevices();
 
-        // IME
+        // Refresh internal states in mInputMethodSettingValues to keep the latest
+        // "InputMethodInfo"s and "InputMethodSubtype"s
+        mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
+        // TODO: Consolidate the logic to InputMethodSettingsWrapper
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
-                this, getContentResolver(), mImis, null);
-        updateActiveInputMethodsSummary();
+                this, getContentResolver(),
+                mInputMethodSettingValues.getInputMethodList(), null);
+        updateInputMethodPreferenceViews();
     }
 
     @Override
@@ -294,8 +328,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
             mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
         }
+        // TODO: Consolidate the logic to InputMethodSettingsWrapper
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(
-                this, getContentResolver(), mImis, !mHardKeyboardPreferenceList.isEmpty());
+                this, getContentResolver(), mInputMethodSettingValues.getInputMethodList(),
+                !mHardKeyboardPreferenceList.isEmpty());
     }
 
     @Override
@@ -389,10 +425,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private void updateActiveInputMethodsSummary() {
-        for (Preference pref : mInputMethodPreferenceList) {
-            if (pref instanceof InputMethodPreference) {
-                ((InputMethodPreference)pref).updateSummary();
+    private void updateInputMethodPreferenceViews() {
+        synchronized (mInputMethodPreferenceList) {
+            for (Preference pref : mInputMethodPreferenceList) {
+                if (pref instanceof InputMethodPreference) {
+                    ((InputMethodPreference) pref).updatePreferenceViews();
+                }
             }
         }
         updateCurrentImeName();
@@ -403,8 +441,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (context == null || mImm == null) return;
         final Preference curPref = getPreferenceScreen().findPreference(KEY_CURRENT_INPUT_METHOD);
         if (curPref != null) {
-            final CharSequence curIme = InputMethodAndSubtypeUtil.getCurrentInputMethodName(
-                    context, getContentResolver(), mImm, mImis, getPackageManager());
+            final CharSequence curIme =
+                    mInputMethodSettingValues.getCurrentInputMethodName(context);
             if (!TextUtils.isEmpty(curIme)) {
                 synchronized(this) {
                     curPref.setSummary(curIme);
@@ -413,7 +451,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
     }
 
-    private InputMethodPreference getInputMethodPreference(InputMethodInfo imi, int imiSize) {
+    private InputMethodPreference getInputMethodPreference(InputMethodInfo imi) {
         final PackageManager pm = getPackageManager();
         final CharSequence label = imi.loadLabel(pm);
         // IME settings
@@ -427,7 +465,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
 
         // Add a check box for enabling/disabling IME
-        InputMethodPreference pref = new InputMethodPreference(this, intent, mImm, imi, imiSize);
+        final InputMethodPreference pref =
+                new InputMethodPreference(this, intent, mImm, imi);
         pref.setKey(imi.getId());
         pref.setTitle(label);
         return pref;

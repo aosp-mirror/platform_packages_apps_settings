@@ -72,9 +72,9 @@
     <item msgid="7553665153391107454">"Rápida"</item>
     <item msgid="1370673569131070146">"Más rápida"</item>
     <item msgid="4648206845228970803">"Muy rápida"</item>
-    <item msgid="4977949754169483251">"Rápida"</item>
-    <item msgid="6106302964845503577">"Muy rápida"</item>
-    <item msgid="6800277205640837264">"La más rápida"</item>
+    <item msgid="4977949754169483251">"Superrápida"</item>
+    <item msgid="6106302964845503577">"Hiperrrápida"</item>
+    <item msgid="6800277205640837264">"Lo más rápido posible"</item>
   </string-array>
   <string-array name="tts_pitch_entries">
     <item msgid="7526050907652687351">"Muy bajo"</item>
@@ -128,7 +128,7 @@
     <item msgid="435667726254379514">"PWD"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
-    <item msgid="5085064298144493867">"Botón push"</item>
+    <item msgid="5085064298144493867">"Botón WPS"</item>
     <item msgid="1624323946324499595">"PIN del otro dispositivo"</item>
     <item msgid="5366790421523328066">"PIN del dispositivo"</item>
   </string-array>
@@ -233,7 +233,8 @@
     <item msgid="6358963769537892925">"Ubicación"</item>
     <item msgid="255608127647030286">"Personal"</item>
     <item msgid="4588829735729884491">"Mensajes"</item>
-    <item msgid="8971765125227378270">"Dispositivo"</item>
+    <item msgid="886742181977884584">"Multimedia"</item>
+    <item msgid="7924928667052300589">"Dispositivo"</item>
   </string-array>
   <string-array name="app_ops_summaries">
     <item msgid="4979188868761515915">"ubicación común"</item>
@@ -267,6 +268,17 @@
     <item msgid="5031552983987798163">"reproducir audio"</item>
     <item msgid="8374996688066472414">"leer portapapeles"</item>
     <item msgid="3045529469061083747">"modificar portapapeles"</item>
+    <item msgid="5124443975763747838">"botones multimedia"</item>
+    <item msgid="4547883971364273343">"foco de audio"</item>
+    <item msgid="2603878814882344450">"volumen principal"</item>
+    <item msgid="7136963238377062018">"volumen de la voz"</item>
+    <item msgid="4270236897655923007">"volumen del tono"</item>
+    <item msgid="6325739889222559394">"volumen multimedia"</item>
+    <item msgid="5762123934816216821">"volumen de la alarma"</item>
+    <item msgid="785049718065337473">"volumen de las notificaciones"</item>
+    <item msgid="6700305533746877052">"volumen de Bluetooth"</item>
+    <item msgid="2029227495214047094">"mantener activo"</item>
+    <item msgid="26109888160231211">"controlar ubicación"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Ubicación"</item>
@@ -300,11 +312,32 @@
     <item msgid="3493046322001257041">"Reproducir audio"</item>
     <item msgid="136815868796597058">"Leer portapapeles"</item>
     <item msgid="5238692940326972503">"Modificar portapapeles"</item>
+    <item msgid="5753789168376302997">"Botones multimedia"</item>
+    <item msgid="3265262911688671938">"Foco de audio"</item>
+    <item msgid="2098976479485046797">"Volumen principal"</item>
+    <item msgid="5660213838861789350">"Volumen de la voz"</item>
+    <item msgid="7983336752371254444">"Volumen del tono"</item>
+    <item msgid="7878027809189330917">"Volumen multimedia"</item>
+    <item msgid="7260546305036218513">"Volumen de alarma"</item>
+    <item msgid="9103719301075748925">"Volumen de notificaciones"</item>
+    <item msgid="7025966722295861512">"Volumen de Bluetooth"</item>
+    <item msgid="4665183401128289653">"Mantener activo"</item>
+    <item msgid="8584357129746649222">"Ubicación"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Corto"</item>
     <item msgid="2560532955514699713">"Medio"</item>
     <item msgid="2372711992605524591">"Largo"</item>
+  </string-array>
+  <string-array name="select_runtime_titles">
+    <item msgid="3574453009229338122">"Dalvik"</item>
+    <item msgid="8978402910750533864">"ART"</item>
+    <item msgid="7839859333977894115">"ART (depuración)"</item>
+  </string-array>
+  <string-array name="select_runtime_summaries">
+    <item msgid="6412880178297884701">"Usar Dalvik"</item>
+    <item msgid="5131846588686178907">"Usar ART"</item>
+    <item msgid="4530003713865319928">"Usar compilación de depuración de ART"</item>
   </string-array>
   <string-array name="hdcp_checking_titles">
     <item msgid="441827799230089869">"No comprobar"</item>
@@ -366,6 +399,11 @@
     <item msgid="2751513398307949636">"En pantalla como barras"</item>
     <item msgid="8272260411216018353">"En pantalla como líneas"</item>
     <item msgid="120512413928262547">"En adb shell dumpsys gfxinfo"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"No"</item>
+    <item msgid="7688197031296835369">"Mostrar áreas sobredibujadas"</item>
+    <item msgid="8332661909019981149">"Mostrar contador de sobredibujos"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Límite estándar"</item>

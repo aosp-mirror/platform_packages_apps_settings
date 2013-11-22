@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/nfc_payment_tap_image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:src="@drawable/nfc_payment_empty_state"/>
+        <TextView
+            android:id="@+id/nfc_payment_empty_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:visibility="gone"
+            android:paddingTop="16dp"
+            android:text="@string/nfc_payment_no_apps"/>
+        <TextView
+            android:id="@+id/nfc_payment_learn_more"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:clickable="true"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_blue_light"
+            android:paddingTop="16dp"
+            android:text="@string/nfc_payment_learn_more"/>
+    </LinearLayout>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp" />
+
+</FrameLayout>

@@ -276,6 +276,8 @@
     <string name="bluetooth_connected_no_headset">Connected (no phone)</string>
     <!-- Bluetooth settings.  Message when connected to a device, except for media audio. [CHAR LIMIT=40] -->
     <string name="bluetooth_connected_no_a2dp">Connected (no media)</string>
+    <!-- Bluetooth settings.  Message when connected to a device, except for map. [CHAR LIMIT=40] -->
+    <string name="bluetooth_connected_no_map">Connected (no message access)</string>
     <!-- Bluetooth settings.  Message when connected to a device, except for phone/media audio. [CHAR LIMIT=40] -->
     <string name="bluetooth_connected_no_headset_no_a2dp">Connected (no phone or media)</string>
     <!-- Bluetooth settings.  Message when a device is disconnected -->
@@ -349,13 +351,24 @@
     <string name="bluetooth_connection_dialog_text">"Do you want to connect to \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022?"</string>
 
     <!-- Activity label of BluetoothPbPermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_request">"Phone book request"</string>
+    <string name="bluetooth_phonebook_request">"Phone book access request"</string>
 
     <!-- Bluetooth phone book permission Alert Activity text [CHAR LIMIT=none] -->
     <string name="bluetooth_pb_acceptance_dialog_text">%1$s wants to access your contacts and call history. Give access to %2$s?</string>
 
     <!-- Bluetooth phone book permission Alert Activity checkbox text [CHAR LIMIT=none] -->
+    <string name="bluetooth_remember_choice">Don\'t ask again</string>
+    <!--FIXME SHOULD BE REMOVED AND ALL LANG VERSIONS FIXED TO ABOVE NAME -->
     <string name="bluetooth_pb_remember_choice">Don\'t ask again</string>
+
+    <!-- Activity label of BluetoothMessagePermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
+    <string name="bluetooth_map_request">"Message access request"</string>
+
+    <!-- Bluetooth message permission Alert Activity text [CHAR LIMIT=none] -->
+    <string name="bluetooth_map_acceptance_dialog_text">%1$s wants to access your messages. Give access to %2$s?</string>
+
+
+
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time settings</string>
@@ -387,7 +400,7 @@
     <string name="intent_sender_account_label">Account: </string>
 
     <!-- HTTP proxy settings title -->
-    <string name="proxy_settings_title">Proxy settings</string>
+    <string name="proxy_settings_title">Proxy</string>
     <!-- HTTP proxy settings. Button to clear the proxy box. -->
     <string name="proxy_clear_text">Clear</string>
     <!-- HTTP proxy settings. The port number label. -->
@@ -671,6 +684,10 @@
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
     <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
     <string name="owner_info_settings_title">Owner info</string>
+    <!-- Text shown for title of settings checkbox to enable widgets [CHAR LIMIT=20]-->
+    <string name="security_enable_widgets_title">Enable widgets</string>
+    <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
+    <string name="security_enable_widgets_disabled_summary">Disabled by administrator</string>
     <!-- Text shown for summary of owner info setting [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary"></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
@@ -684,7 +701,7 @@
     <!-- Text shown for title of profile info setting [CHAR LIMIT=20]-->
     <string name="profile_info_settings_title">Profile info</string>
     <!-- Main Settings screen setting option title for the item to take you to the location screen -->
-    <string name="location_settings_title">Location access</string>
+    <string name="location_settings_title">Location</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
     <string name="security_settings_title">Security</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
@@ -1012,7 +1029,7 @@
     <!-- Summary for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_listener_security_warning_summary">
-        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to 
+        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to
         read all notifications posted by the system or any installed app, which may include personal
         information such as contact names and the text of messages sent to you. It will also be able
         to dismiss these notifications or touch action buttons within them.
@@ -1132,6 +1149,8 @@
     <string name="bluetooth_profile_pan">Internet access</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (sharing this device's Internet connection). [CHAR LIMIT=40]-->
     <string name="bluetooth_profile_pan_nap">Internet connection sharing</string>
+    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the map profile. -->
+    <string name="bluetooth_profile_map">Message Access</string>
 
     <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
@@ -1164,6 +1183,8 @@
     <string name="bluetooth_headset_profile_summary_connected">Connected to phone audio</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is connected. -->
     <string name="bluetooth_opp_profile_summary_connected">Connected to file transfer server</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference when map is connected. -->
+    <string name="bluetooth_map_profile_summary_connected">Connected to map</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is not connected. -->
     <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
@@ -1187,6 +1208,8 @@
          for the PAN checkbox preference that describes how checking it
          will set the PAN profile as preferred. -->
     <string name="bluetooth_pan_profile_summary_use_for">Use for Internet access</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference that describes how checking it will set the map profile as preferred. -->
+    <string name="bluetooth_map_profile_summary_use_for">Use for map</string>
 
     <!-- Bluetooth settings.  Dock Setting Title -->
     <string name="bluetooth_dock_settings">Dock Settings</string>
@@ -1221,6 +1244,8 @@
     <string name="wifi_display_status_connected">Connected</string>
     <!-- Wifi Display settings. The status summary for available devices. [CHAR LIMIT=40] -->
     <string name="wifi_display_status_available">Available</string>
+    <!-- Wifi Display settings. The status summary for devices that's already in use. [CHAR LIMIT=40] -->
+    <string name="wifi_display_status_in_use">In use</string>
     <!-- Wifi Display settings. Image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
     <string name="wifi_display_details">Display settings</string>
 
@@ -1244,6 +1269,25 @@
     <string name="wifi_display_summary_off">Off</string>
     <!-- Wifi Display settings. Summary shown in Display settings. Text used for 'Disabled' state. [CHAR LIMIT=40] -->
     <string name="wifi_display_summary_disabled">Disabled</string>
+
+    <!-- Wifi Display settings. The sub heading for wireless display certification options. [CHAR LIMIT=40] -->
+    <string name="wifi_display_certification_heading" translatable="false">Certification</string>
+    <!-- Wifi Display settings. The section title for wireless display session info. [CHAR LIMIT=40] -->
+    <string name="wifi_display_session_info" translatable="false">Session info</string>
+    <!-- Wifi Display settings. The checkbox title for enabling listen mode during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_listen_mode" translatable="false">Enable listen mode</string>
+    <!-- Wifi Display settings. The checkbox title for enabling autonomous GO during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_autonomous_go" translatable="false">Enable autonomous GO</string>
+    <!-- Wifi Display settings. The button text for sending pause trigger during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_pause" translatable="false">Pause</string>
+    <!-- Wifi Display settings. The button text for sending play (resume) trigger during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_resume" translatable="false">Resume</string>
+    <!-- Wifi Display settings. The dropdown menu title for choosing WPS configuration during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_wps_config" translatable="false">WPS configuration</string>
+    <!-- Wifi Display settings. The dropdown menu title for choosing listen channel during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_listen_channel" translatable="false">Listen channel</string>
+    <!-- Wifi Display settings. The dropdown menu title for choosing operating channel during certification process. [CHAR LIMIT=40] -->
+    <string name="wifi_display_operating_channel" translatable="false">Operating channel</string>
 
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
@@ -1696,6 +1740,7 @@
     <!-- Sound and alerts settings -->
     <skip/>
     <!-- Main Settings screen setting option name to go into the display settings screen -->
+    <string name="home_settings">Home</string>
     <string name="display_settings_title">Display</string>
     <!-- Sound settings screen heading -->
     <string name="sound_settings">Sound</string>
@@ -2335,8 +2380,14 @@
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile networks</string>
 
-    <!-- Manage mobile plan [CHAR LIMIT=35]-->
-    <string name="manage_mobile_plan_title" translatable="true">Manage mobile plan</string>
+    <!-- Mobile plan [CHAR LIMIT=35]-->
+    <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
+
+    <!-- SMS Application [CHAR LIMIT=35]-->
+    <string name="sms_application_title" translatable="true">Default SMS app</string>
+    <string name="sms_change_default_dialog_title" translatable="true">Change SMS app?</string>
+    <string name="sms_change_default_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> instead of <xliff:g id="current_app">%s</xliff:g> as your SMS app?</string>
+    <string name="sms_change_default_no_previous_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> as your SMS app?</string>
 
     <!-- The SIM operator is not known [CHAR_ LIMIT=50]-->
     <string name="mobile_unknown_sim_operator" translatable="true">Uknown SIM operator</string>
@@ -2352,6 +2403,38 @@
 
     <!-- Security & location settings screen, section header for settings relating to location -->
     <string name="location_title">My Location</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, setting preference screen box label for location mode -->
+    <string name="location_mode_title">Mode</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, high accuracy location mode -->
+    <string name="location_mode_high_accuracy_title">High accuracy</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, battery saving location mode -->
+    <string name="location_mode_battery_saving_title">Battery saving</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, device only location mode -->
+    <string name="location_mode_sensors_only_title">Device only</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, location off mode -->
+    <string name="location_mode_location_off_title">Location off</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, sub category for recent location requests -->
+    <string name="location_category_recent_location_requests">Recent location requests</string>
+    <!-- Location settings screen, displayed when there's no recent app accessing location -->
+    <string name="location_no_recent_apps">No apps have requested location recently</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, sub category for location services -->
+    <string name="location_category_location_services">Location services</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, recent location requests high battery use-->
+    <string name="location_high_battery_use">High battery use</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
+    <string name="location_low_battery_use">Low battery use</string>
+    <!-- [CHAR LIMIT=30] Location mode screen, screen title -->
+    <string name="location_mode_screen_title">Location mode</string>
+    <!-- [CHAR LIMIT=130] Location mode screen, description for high accuracy mode -->
+    <string name="location_mode_high_accuracy_description">Use GPS, Wi\u2011Fi and mobile networks to estimate location </string>
+    <!-- [CHAR LIMIT=130] Location mode screen, description for battery saving mode -->
+    <string name="location_mode_battery_saving_description">Use Wi\u2011Fi and mobile networks to estimate location</string>
+    <!-- [CHAR LIMIT=130] Location mode screen, description for sensors only mode -->
+    <string name="location_mode_sensors_only_description">Use GPS to pinpoint your location</string>
+    <!-- [CHAR LIMIT=130] Location mode screen, temporary value to show as the status of a location
+         setting injected by an external app while the app is being queried for the actual value -->
+    <string name="location_loading_injected_setting">Retrieving…</string>
+
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
@@ -2463,18 +2546,18 @@
     <!-- Do not translate. -->
     <string name="lockpattern_need_to_unlock_wrong_footer" />
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen.  This si when they are supposed to draw a new unlock pattern (for example, if they are changing their unlock patterns)..-->
-    <string name="lockpattern_recording_intro_header">Draw an unlock pattern:</string>
+    <string name="lockpattern_recording_intro_header">Draw an unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen hint on bottom of screen.  We are telling them to press the menu button to see more options or help. -->
     <string name="lockpattern_recording_intro_footer">Press Menu for help.</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen while drawing pattern -->
-    <string name="lockpattern_recording_inprogress">Release finger when done.</string>
+    <string name="lockpattern_recording_inprogress">Release finger when done</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen if user doesn't connect enough dots -->
-    <string name="lockpattern_recording_incorrect_too_short">Connect at least <xliff:g id="number">%d</xliff:g> dots. Try again:</string>
+    <string name="lockpattern_recording_incorrect_too_short">Connect at least <xliff:g id="number">%d</xliff:g> dots. Try again.</string>
     <!-- Security & location settings screen, change unlock pattern screen message on top of screen after drawing pattern -->
-    <string name="lockpattern_pattern_entered_header">Pattern recorded.</string>
+    <string name="lockpattern_pattern_entered_header">Pattern recorded</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen to confirm pattern -->
-    <string name="lockpattern_need_to_confirm">Draw pattern again to confirm:</string>
-    <string name="lockpattern_pattern_confirmed_header">Your new unlock pattern:</string>
+    <string name="lockpattern_need_to_confirm">Draw pattern again to confirm</string>
+    <string name="lockpattern_pattern_confirmed_header">Your new unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen button, on bottom of screen.  After they draw a pattern and release their finger, we display the pattern so they remember.  When they are ready to draw it once again to confirm it, they press this button. -->
     <string name="lockpattern_confirm_button_text">Confirm</string>
     <!-- Security & location settings screen, change unlock pattern screen button, on bottom of screen.  After they draw a pattern and release their finger, we display the pattern so they remember.  If they are nto satisfied with this pattern, they click this button to redraw the pattern. -->
@@ -2945,13 +3028,9 @@
     <string name="keyboard_layout_picker_title">Keyboard layouts</string>
 
     <!-- User dictionary settings --><skip />
-    <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->
-    <string name="user_dict_settings_titlebar">User dictionary</string>
-    <!-- User dictionary settings, The title of the list item to go into the User dictionary settings screen when there is only one user dictionary. [CHAR LIMIT=35] -->
-    <string name="user_dict_single_settings_title">Personal dictionary</string>
-    <!-- User dictionary settings, The title of the list item to go into the User dictionary list when there are several user dictionaries. [CHAR LIMIT=35] -->
-    <string name="user_dict_multiple_settings_title">Personal dictionaries</string>
-    <!-- User dictionary settings.  The summary of the listem item to go into the User dictionary settings screen. -->
+    <!-- User dictionary settings. The title of the list item to go into the Personal dictionary settings screen. [CHAR LIMIT=35] -->
+    <string name="user_dict_settings_title">Personal dictionary</string>
+    <!-- User dictionary settings.  The summary of the list item to go into the Personal dictionary settings screen. -->
     <string name="user_dict_settings_summary">""</string>
     <!-- User dictionary settings. The title of the menu item to add a new word to the user dictionary. -->
     <string name="user_dict_settings_add_menu_title">Add</string>
@@ -3077,6 +3156,22 @@
     <string name="keep_screen_on">Stay awake</string>
     <!-- setting Checkbox summary whether to keep the screen on when plugged in  -->
     <string name="keep_screen_on_summary">Screen will never sleep while charging</string>
+    <!-- Setting Checkbox title whether to enable bluetooth HCI snoop log -->
+    <string name="bt_hci_snoop_log">Enable Bluetooth HCI snoop log</string>
+    <!-- setting Checkbox summary whether to capture all bluetooth HCI packets in a file -->
+    <string name="bt_hci_snoop_log_summary">Capture all bluetooth HCI packets in a file</string>
+
+    <!-- Runtime selection title, used for debug purposes only. [CHAR LIMIT=25] -->
+    <string name="select_runtime_title">Select runtime </string>
+    <!-- Runtime selection dialog title, used for debug purposes only. [CHAR LIMIT=25] -->
+    <string name="select_runtime_dialog_title">Select runtime</string>
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="select_runtime_warning_message">Reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
+    <!-- Setting Checkbox title whether to show options for wireless display certification -->
+    <string name="wifi_display_certification">Wireless display certification</string>
+    <!-- setting Checkbox summary whether to show options for wireless display certification  -->
+    <string name="wifi_display_certification_summary">Show options for wireless display certification</string>
     <!-- Setting Checkbox title whether to allow mock locations -->
     <string name="allow_mock_location">Allow mock locations</string>
     <!-- setting Checkbox summary whether to allow mock locations  -->
@@ -3114,6 +3209,11 @@
     <!-- Message of dialog confirming that user wants to protect external storage. [CHAR LIMIT=NONE] -->
     <string name="enforce_read_external_confirm_message" product="default">When SD card is protected, apps must request permission to read data from external storage.\n\nSome apps may not work until updated by their developers.</string>
 
+    <!-- Title of checkbox setting that enables the terminal app. [CHAR LIMIT=32] -->
+    <string name="enable_terminal_title">Local terminal</string>
+    <!-- Summary of checkbox setting that enables the terminal app. [CHAR LIMIT=64] -->
+    <string name="enable_terminal_summary">Enable terminal app that offers local shell access</string>
+
     <!-- Title for the screen that lets the user choose a gadget to add to the home screen
          (or other screens that can host gadgets).  Note to translators: we're still determining
          the final name for Gadgets/Widgets, so please translate both for now. -->
@@ -3145,6 +3245,15 @@
     <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
     <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
 
+    <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
+    <string name="battery_history_days_no_seconds"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m</string>
+
+    <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
+    <string name="battery_history_hours_no_seconds"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>m</string>
+
+    <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
+    <string name="battery_history_minutes_no_seconds"><xliff:g id="minutes">%1$d</xliff:g>m</string>
+
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
 
@@ -3166,10 +3275,12 @@
     <string name="accessibility_settings">Accessibility</string>
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
-    <!--  Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
+    <!-- Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
     <string name="accessibility_services_title">Services</string>
     <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
     <string name="accessibility_system_title">System</string>
+    <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
+    <string name="accessibility_captioning_title">Captions</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification gestures</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
@@ -3202,10 +3313,65 @@
     <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
 
-    <!-- Summary for the enabled state of an accessiblity feature. [CHAR LIMIT=10] -->
+    <!-- Summary for the enabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_on">On</string>
-    <!-- Summary for the disabled state of an accessiblity feature. [CHAR LIMIT=10] -->
+    <!-- Summary for the disabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_off">Off</string>
+
+    <!-- Title for the preference category containing the video caption preview. [CHAR LIMIT=35] -->
+    <string name="captioning_preview_title">Preview</string>
+    <!-- Title for the preference catgeory containing standard video caption options. [CHAR LIMIT=35] -->
+    <string name="captioning_standard_options_title">Standard options</string>
+    <!-- Title for the preference to change video caption locale. [CHAR LIMIT=35] -->
+    <string name="captioning_locale">Language</string>
+    <!-- Title for the preference to change video caption text size. [CHAR LIMIT=35] -->
+    <string name="captioning_text_size">Text size</string>
+    <!-- Title for the preference category containing video caption property presets. [CHAR LIMIT=35] -->
+    <string name="captioning_preset">Caption style</string>
+    <!-- Title for the preference catgeory containing custom video caption properties. [CHAR LIMIT=35] -->
+    <string name="captioning_custom_options_title">Custom options</string>
+    <!-- Title for the preference to change video caption background color. [CHAR LIMIT=35] -->
+    <string name="captioning_background_color">Background color</string>
+    <!-- Title for the preference to change video caption background opacity. [CHAR LIMIT=35] -->
+    <string name="captioning_background_opacity">Background opacity</string>
+    <!-- Title for the preference to change video caption text color. [CHAR LIMIT=35] -->
+    <string name="captioning_foreground_color">Text color</string>
+    <!-- Title for the preference to change video caption edge color. [CHAR LIMIT=35] -->
+    <string name="captioning_edge_color">Edge color</string>
+    <!-- Title for the preference to change video caption edge type. [CHAR LIMIT=35] -->
+    <string name="captioning_edge_type">Edge type</string>
+    <!-- Title for the preference to change video caption font family (ex. monospace, sans-serif). [CHAR LIMIT=35] -->
+    <string name="captioning_typeface">Font family</string>
+    <!-- Sample text for previewing video caption preferences. [CHAR LIMIT=NONE] -->
+    <string name="captioning_preview_text">Captions will look like this</string>
+    <!-- Sample characters for previewing video caption preferences. [CHAR LIMIT=2] -->
+    <string name="captioning_preview_characters">Aa</string>
+
+    <!-- Label for the default device locale. [CHAR LIMIT=35] -->
+    <string name="locale_default">Default</string>
+
+    <!-- Label for no color. [CHAR LIMIT=35] -->
+    <string name="color_none">None</string>
+    <!-- Label for the color white. [CHAR LIMIT=35] -->
+    <string name="color_white">White</string>
+    <!-- Label for the color gray. [CHAR LIMIT=35] -->
+    <string name="color_gray">Gray</string>
+    <!-- Label for the color black. [CHAR LIMIT=35] -->
+    <string name="color_black">Black</string>
+    <!-- Label for the color red. [CHAR LIMIT=35] -->
+    <string name="color_red">Red</string>
+    <!-- Label for the color green. [CHAR LIMIT=35] -->
+    <string name="color_green">Green</string>
+    <!-- Label for the color blue. [CHAR LIMIT=35] -->
+    <string name="color_blue">Blue</string>
+    <!-- Label for the color cyan. [CHAR LIMIT=35] -->
+    <string name="color_cyan">Cyan</string>
+    <!-- Label for the color yellow. [CHAR LIMIT=35] -->
+    <string name="color_yellow">Yellow</string>
+    <!-- Label for the color magenta. [CHAR LIMIT=35] -->
+    <string name="color_magenta">Magenta</string>
+    <!-- Label for custom colors, formats as a HTML color. -->
+    <string name="color_custom" translatable="false">#%1$02X%2$02X%3$02X</string>
 
     <!-- Title for a warning about security implications of enabling an accessibility
          service. [CHAR LIMIT=NONE] -->
@@ -3244,6 +3410,91 @@
 
     <!-- Accessibility settings: button for lauching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
+
+     <!-- Printing settings -->
+    <skip />
+
+    <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
+    <string name="print_settings">Printing</string>
+    <!-- Title for print service settings screen [CHAR LIMIT=25] -->
+    <string name="print_settings_title">Print services</string>
+
+    <!-- Title for a warning message about security implications of enabling a print service,
+         displayed as a dialog message when the user selects to enable a print service (tablet). [CHAR LIMIT=NONE] -->
+    <string name="print_service_security_warning_title">Use
+         <xliff:g id="service" example="My Print Service">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a print service,
+         displayed as a dialog message when the user selects to enable a print service. [CHAR LIMIT=NONE] -->
+    <string name="print_service_security_warning_summary">Your document may pass through
+        one or more servers on its way to the printer.</string>
+
+    <!-- Title for the prompt shown as a placeholder if no print serivices are installed. [CHAR LIMIT=50] -->
+    <string name="print_no_services_installed">No services installed</string>
+
+    <!-- Title for the prompt shown as a placeholder if no printers are found while searching. [CHAR LIMIT=50] -->
+    <string name="print_no_printers_found">No printers found</string>
+
+    <!-- Title for print menu item to launch a settings activity. [CHAR LIMIT=25] -->
+    <string name="print_menu_item_settings">Settings</string>
+
+    <!-- Title for print menu item to launch the add printers activity. [CHAR LIMIT=25] -->
+    <string name="print_menu_item_add_printers">Add printers</string>
+
+    <!-- Summary for the enabled state of a print feature. [CHAR LIMIT=10] -->
+    <string name="print_feature_state_on">On</string>
+    <!-- Summary for the disabled state of a print feature. [CHAR LIMIT=10] -->
+    <string name="print_feature_state_off">Off</string>
+
+    <!-- Title of the action bar button to got to Play Store to download a print service. [CHAR LIMIT=25] -->
+    <string name="print_menu_item_add_service">Add service</string>
+
+    <!-- Title of the action bar button to got to add a printer. [CHAR LIMIT=25] -->
+    <string name="print_menu_item_add_printer">Add printer</string>
+
+    <!-- Title for the search action bar menu item. [CHAR LIMIT=20] -->
+    <string name="print_menu_item_search">Search</string>
+
+    <!-- Title for the prompt if no printers are available and the system is searching for such. [CHAR LIMIT=50] -->
+    <string name="print_searching_for_printers">Searching for printers</string>
+
+    <!-- Title for the prompt if no printers are available because the print service is disabled. [CHAR LIMIT=50] -->
+    <string name="print_service_disabled">Service disabled</string>
+
+    <!-- Title for the menu item to open the print jobs screen. [CHAR LIMIT=25] -->
+    <string name="print_print_jobs">Print jobs</string>
+
+    <!-- Title for the print job settings screen. [CHAR LIMIT=25] -->
+    <string name="print_print_job">Print job</string>
+
+    <!-- Title for the button to restart a print job. [CHAR LIMIT=25] -->
+    <string name="print_restart">Restart</string>
+
+    <!-- Title for the button to cancel a print job. [CHAR LIMIT=25] -->
+    <string name="print_cancel">Cancel</string>
+
+    <!-- Template for the summary of a print job. [CHAR LIMIT=25] -->
+    <string name="print_job_summary"><xliff:g id="printer">%1$s</xliff:g>\n<xliff:g id="time">%2$s</xliff:g></string>
+
+    <!-- Template for the label of the state for a ongoing print job. [CHAR LIMIT=25] -->
+    <string name="print_printing_state_title_template">Printing <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
+
+    <!-- Template for the label of the state for a failed print job. [CHAR LIMIT=25] -->
+    <string name="print_failed_state_title_template">Printer error <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
+
+    <!-- Template for the label of the state for a blocked print job. [CHAR LIMIT=25] -->
+    <string name="print_blocked_state_title_template">Printer blocked <xliff:g id="print_job_name" example="foo.jpg">%1$s</xliff:g></string>
+
+    <!-- Utterance to announce that the search box is shown. This is spoken to a blind user. [CHAR LIMIT=none] -->
+    <string name="print_search_box_shown_utterance">Search box shown</string>
+
+    <!-- Utterance to announce that the search box is hidden. This is spoken to a blind user. [CHAR LIMIT=none] -->
+    <string name="print_search_box_hidden_utterance">Search box hidden</string>
+
+    <!-- Utterance to announce a change in the number of matches during a search. This is spoken to a blind user. [CHAR LIMIT=none] -->
+    <plurals name="print_search_result_count_utterance">
+        <item quantity="one"><xliff:g id="count" example="1">%1$s</xliff:g> printer found</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$s</xliff:g> printers found</item>
+    </plurals>
 
     <!-- App Fuel Gauge strings -->
     <skip />
@@ -3329,10 +3580,14 @@
     <string name="usage_type_phone" product="tablet">Tablet</string>
     <!-- Label for Phone usage time -->
     <string name="usage_type_phone" product="default">Phone</string>
-    <!-- Label for Data sent -->
-    <string name="usage_type_data_send">Data sent</string>
-    <!-- Label for Data received -->
-    <string name="usage_type_data_recv">Data received</string>
+    <!-- Label for mobile network data sent [CHAR LIMIT=32] -->
+    <string name="usage_type_data_send">Mobile data sent</string>
+    <!-- Label for mobile network data received [CHAR LIMIT=32] -->
+    <string name="usage_type_data_recv">Mobile data received</string>
+    <!-- Label for Wi-Fi network data sent [CHAR LIMIT=32] -->
+    <string name="usage_type_data_wifi_send">Wi\u2011Fi data sent</string>
+    <!-- Label for Wi-Fi network data received [CHAR LIMIT=32] -->
+    <string name="usage_type_data_wifi_recv">Wi\u2011Fi data received</string>
     <!-- Label for Audio usage time -->
     <string name="usage_type_audio">Audio</string>
     <!-- Label for Video usage time -->
@@ -3389,7 +3644,7 @@
     <!-- Suggestion for exploring application info to stop or uninstall -->
     <string name="battery_sugg_apps_info">Stop or uninstall the app</string>
     <!-- [CHAR LIMIT=100] Suggestion for getting apps to consume less power due to GPS-->
-    <string name="battery_sugg_apps_gps">"Manually control GPS to prevent app from using it"</string>
+    <string name="battery_sugg_apps_gps">Select battery-saving mode</string>
     <!-- Suggestion for getting apps to consume less power -->
     <string name="battery_sugg_apps_settings">The app may offer settings to reduce battery use</string>
 
@@ -3409,6 +3664,59 @@
     <string name="process_kernel_label">Android OS</string>
     <!-- Label for mediaserver process -->
     <string name="process_mediaserver_label">Mediaserver</string>
+
+    <!-- Process Stats strings -->
+    <skip />
+
+    <!-- [CHAR LIMIT=NONE] Activity title for Process Stats summary -->
+    <string name="process_stats_summary_title">Process Stats</string>
+    <!-- [CHAR LIMIT=NONE] Activity title summary for Process Stats summary -->
+    <string name="process_stats_summary">Geeky stats about running processes</string>
+    <!-- [CHAR LIMIT=NONE] Label for amount of memory use -->
+    <string name="app_memory_use">Memory use</string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
+    <string name="process_stats_total_duration"><xliff:g id="type">%1$s</xliff:g> apps over
+        <xliff:g id="time">%2$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
+    <string name="process_stats_type_background">Background</string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
+    <string name="process_stats_type_foreground">Foreground</string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
+    <string name="process_stats_type_cached">Cached</string>
+    <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
+    <string name="process_stats_memory_status">Device memory is currently
+        <xliff:g id="memstate">%1$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Label for item showing details of average RAM use -->
+    <string name="process_stats_avg_ram_use">Average RAM use</string>
+    <!-- [CHAR LIMIT=NONE] Label for item showing details of maximum RAM use -->
+    <string name="process_stats_max_ram_use">Maximum RAM use</string>
+    <!-- [CHAR LIMIT=NONE] Label for item showing percent of time spent running -->
+    <string name="process_stats_run_time">Run time</string>
+    <!-- [CHAR LIMIT=NONE] Subtitle for process stats services list -->
+    <string name="services_subtitle">Services</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to select duration of stats to show -->
+    <string name="menu_proc_stats_duration">Duration</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show 3 hours of data -->
+    <string name="menu_duration_3h">3 hours</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show 3 hours of data -->
+    <string name="menu_duration_6h">6 hours</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show 3 hours of data -->
+    <string name="menu_duration_12h">12 hours</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show 3 hours of data -->
+    <string name="menu_duration_1d">1 day</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to control whether system processes are shown -->
+    <string name="menu_show_system">Show system</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to control whether computation should be based
+        on Uss (Unique Set Size) instead of Pss (Proportional Set Size) -->
+    <string name="menu_use_uss">Use Uss</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to select which type of stats to show -->
+    <string name="menu_proc_stats_type">Stats type</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show information on background processes -->
+    <string name="menu_proc_stats_type_background">Background</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show information on foreground processes -->
+    <string name="menu_proc_stats_type_foreground">Foreground</string>
+    <!-- [CHAR LIMIT=NONE] Menu for process stats to show information on cached processes -->
+    <string name="menu_proc_stats_type_cached">Cached</string>
 
     <!-- Voice input/output settings --><skip />
     <!-- Title of setting on main settings screen. This item will take the user to the screen to tweak settings related to speech functionality -->
@@ -3452,8 +3760,11 @@
     <string name="tts_default_pitch_title">Pitch</string>
     <!-- On main TTS Settings screen, summary for default pitch for synthesized voice -->
     <string name="tts_default_pitch_summary">Affects the tone of the spoken text</string>
+
     <!-- On main TTS Settings screen, in default settings section, setting default language for synthesized voice -->
     <string name="tts_default_lang_title">Language</string>
+    <!-- On main TTS Settings screen, language summary if it can't default to system language [CHAR LIMIT=50] -->
+    <string name="tts_lang_not_selected">Language not selected</string>
     <!-- On main TTS Settings screen, summary for default language for synthesized voice -->
     <string name="tts_default_lang_summary">Sets the language-specific voice for the spoken text</string>
     <!-- On main TTS Settings screen, triggers playback of an example of speech synthesis -->
@@ -3483,6 +3794,23 @@
     <!-- Warning message about required internet conectivity for TTS synthesis, displayed as a dialog
          message when the user selects to play an example for network only locale and there's no internet connectivity. -->
     <string name="tts_engine_network_required">This language requires a working network connection for text-to-speech output.</string>
+    <!-- Text spoken by the TTS engine as an example if the engine doesn't provide sample text [CHAR LIMIT=100] -->
+    <string name="tts_default_sample_string">This is an example of speech synthesis</string>
+    <!-- On main TTS Settings screen, title of a field explaining current TTS engine status for
+	 current default language [CHAR LIMIT=50] -->
+    <string name="tts_status_title">Default language status</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+         selected language is fully supported by the engine [CHAR LIMIT=150]-->
+    <string name="tts_status_ok"><xliff:g id="locale" example="English (United States)">%1$s</xliff:g> is fully supported</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+         selected language is supported by the engine only if there's a working network connection [CHAR LIMIT=150] -->
+    <string name="tts_status_requires_network"><xliff:g id="locale" example="English (United States)">%1$s</xliff:g> requires network connection</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+         selected language is not supported by the engine [CHAR LIMIT=150] -->
+    <string name="tts_status_not_supported"><xliff:g id="locale" example="English (United States)">%1$s</xliff:g> is not supported</string>
+    <!-- On main TTS Settings screen, current TTS engine status for the current default language,
+	 tts engine is queried for status [CHAR LIMIT=150] -->
+    <string name="tts_status_checking">Checking...</string>
     <!-- On main TTS Settings screen, text for divider under which all TTS engines are listed -->
     <string name="tts_engines_section">Engines</string>
     <!-- On main TTS Settings screen, text preceded by the TTS engine name, clicking this button will launch the engine settings -->
@@ -3543,8 +3871,8 @@
     <string name="gadget_wifi">Wi\u2011Fi</string>
     <!-- Spoken description for the Bluetooth power control gadget. -->
     <string name="gadget_bluetooth">Bluetooth</string>
-    <!-- Spoken description for the GPS power control gadget. -->
-    <string name="gadget_gps">GPS</string>
+    <!-- Spoken description for the Location power control gadget. -->
+    <string name="gadget_location">Location</string>
     <!-- Spoken description for the data synchronization gadget. -->
     <string name="gadget_sync">Sync</string>
     <!-- Template for brightness gadget toggle button description. -->
@@ -3899,8 +4227,7 @@
     <!-- Messaage shown in dialog when you can't manually sync -->
     <string name="cant_sync_dialog_message">Sync for this item is currently disabled. To change this setting, temporarily turn on background data and automatic sync.</string>
 
-    <string name="wimax_settings">4G settings</string>
-    <string name="wimax_settings_summary">Set up &amp; manage 4G network and modem</string>
+    <string name="wimax_settings">4G</string>
     <string name="status_wimax_mac_address">4G MAC address</string>
     <!-- This is displayed to the user when the device needs to be decrypted -->
     <string name="enter_password">Type password to decrypt storage</string>
@@ -3989,9 +4316,7 @@
     <string name="show_hw_layers_updates_summary">Flash hardware layers green when they update</string>
 
     <!-- UI debug setting: show the amount of overdraw in apps using the GPU [CHAR LIMIT=25] -->
-    <string name="show_hw_overdraw">Show GPU overdraw</string>
-    <!-- UI debug setting: Show the amount of overdraw summary [CHAR LIMIT=50] -->
-    <string name="show_hw_overdraw_summary">From best to worst: blue, green, light red, red</string>
+    <string name="debug_hw_overdraw">Debug GPU overdraw</string>
 
     <!-- UI debug setting: disable use of overlays? [CHAR LIMIT=25] -->
     <string name="disable_overlays">Disable HW overlays</string>
@@ -4005,6 +4330,11 @@
     <string name="debug_layout">Show layout bounds</string>
     <!-- UI debug setting: show layout bounds information summary [CHAR LIMIT=50] -->
     <string name="debug_layout_summary">Show clip bounds, margins, etc.</string>
+
+    <!-- UI debug setting: force right to left layout [CHAR LIMIT=37] -->
+    <string name="force_rtl_layout_all_locales">Force RTL layout direction</string>
+    <!-- UI debug setting: force right to left layout summary [CHAR LIMIT=100] -->
+    <string name="force_rtl_layout_all_locales_summary">Force screen layout direction to RTL for all locales</string>
 
     <!-- UI debug setting: show how CPU is being used? [CHAR LIMIT=25] -->
     <string name="show_cpu_usage">Show CPU usage</string>
@@ -4056,11 +4386,6 @@
     <!-- UI debug setting: show all ANRs summary [CHAR LIMIT=50] -->
     <string name="show_all_anrs_summary">Show App Not Responding dialog
         for background apps</string>
-
-    <!-- UI debug setting: use experimental WebView [CHAR LIMIT=25] -->
-    <string name="experimental_webview">Use Experimental WebView</string>
-    <!-- UI debug setting: use experimental WebView summary [CHAR LIMIT=50] -->
-    <string name="experimental_webview_summary">Apps will use the newest (beta) WebView</string>
 
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
@@ -4337,6 +4662,22 @@
     <string name="selinux_status_permissive">Permissive</string>
     <string name="selinux_status_enforcing">Enforcing</string>
 
+    <!-- Notification of installed CA Certs --> <skip/>
+
+    <!-- Shows up when there is a user SSL CA Cert installed on the
+         device.  Indicates to the user that SSL traffic can be intercepted.  [CHAR LIMIT=NONE] -->
+    <string name="ssl_ca_cert_warning">Network may be monitored</string>
+    <!-- Button to close the SSL CA cert warning dialog box, meaning the user is done reading.  [CHAR LIMIT=NONE] -->
+    <string name="done_button">Done</string>
+    <!-- Title of Dialog warning users of SSL monitoring. [CHAR LIMIT=NONE] -->
+    <string name="ssl_ca_cert_dialog_title">Network monitoring</string>
+    <!-- Text of message to show to users whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
+    <string name="ssl_ca_cert_info_message">This device is managed by:\n<xliff:g id="managing_domain">%s</xliff:g>\n\nYour administrator is capable of monitoring your network activity, including emails, apps, and secure websites.\n\nFor more information, contact your administrator.</string>
+    <!-- Text of warning to show to users that have a SSL CA Cert installed.  [CHAR LIMIT=NONE] -->
+    <string name="ssl_ca_cert_warning_message">A third party is capable of monitoring your network\nactivity, including emails, apps, and secure websites.\n\nA trusted credential installed on your device is making this possible.</string>
+    <!-- Label on button that will take the user to the Trusted Credentials settings page.  [CHAR LIMIT=NONE]-->
+    <string name="ssl_ca_cert_settings_button">Check trusted credentials</string>
+
     <!-- User settings -->
     <skip/>
 
@@ -4433,6 +4774,11 @@
     <!-- Applicaitons with restrictions - settings button [CHAR LIMIT=30] -->
     <string name="apps_with_restrictions_settings_button">Expand settings for application</string>
 
+    <!-- Home application selection - uninstall button [CHAR LIMIT=80] -->
+    <string name="home_app_uninstall_button">Uninstall this application</string>
+    <!-- Message to user that Home Settings will be hidden because there is now only one available home application -->
+    <string name="only_one_home_message">Home settings will be hidden until you install another home application.</string>
+
     <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
     <string name="global_change_warning" product="tablet">This setting affects all users on this tablet.</string>
     <!-- Warning message when changing a global setting for a phone.[CHAR LIMIT=none] -->
@@ -4441,6 +4787,28 @@
     <string name="global_locale_change_title">Change language</string>
     <!-- Warning message title for global font change [CHAR LIMIT=40] -->
     <string name="global_font_change_title">Change font size</string>
+
+    <!-- NFC payment settings --><skip/>
+    <string name="nfc_payment_settings_title">Tap &amp; pay</string>
+    <!-- String shown when there are no NFC payment applications installed -->
+    <string name="nfc_payment_no_apps">Pay with just a tap</string>
+    <!-- String shown when there are no NFC payment applications installed, clickable, pointing to
+         a website to learn more-->
+    <string name="nfc_payment_learn_more">Learn more</string>
+    <string name="nfc_payment_menu_item_add_service">Find apps</string>
+    <!-- Label for the dialog that is shown when the user is asked to set a
+         preferred payment application -->
+    <string name="nfc_payment_set_default_label">Set as your preference?</string>
+    <string name="nfc_payment_set_default">Always use <xliff:g id="app">%1$s</xliff:g> when you tap &amp; pay?</string>
+    <string name="nfc_payment_set_default_instead_of">Always use <xliff:g id="app">%1$s</xliff:g> instead of <xliff:g id="app">%2$s</xliff:g> when you tap &amp; pay?</string>
+    <!-- Restrictions settings --><skip/>
+
+    <!-- Restriction settings title [CHAR LIMIT=35] -->
+    <string name="restriction_settings_title">Restrictions</string>
+    <!-- Restrictions screen - reset menu to reset to unrestricted [CHAR LIMIT=25] -->
+    <string name="restriction_menu_reset">Remove restrictions</string>
+    <!-- Restrictions screen - menu label to change restrictions pin [CHAR LIMIT=25] -->
+    <string name="restriction_menu_change_pin">Change PIN</string>
 
     <!-- Label for are-notifications-enabled checkbox in app details [CHAR LIMIT=20] -->
     <string name="app_notifications_switch_label">Show notifications</string>
@@ -4478,6 +4846,8 @@
     <string name="help_url_location_access" translatable="false"></string>
     <!-- Help URL, Security settings [DO NOT TRANSLATE] -->
     <string name="help_url_security" translatable="false"></string>
+    <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
+    <string name="help_url_nfc_payment" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -4486,8 +4856,6 @@
 
     <!-- Cell Broadcast settings title [CHAR LIMIT=50] -->
     <string name="cell_broadcast_settings">Cell broadcasts</string>
-    <!-- Cell Broadcast settings description [CHAR LIMIT=100] -->
-    <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
 
     <!-- User app limits screen title [CHAR LIMIT=35] -->
     <string name="user_restrictions_title">Application and content restrictions</string>
@@ -4517,7 +4885,7 @@
     <!-- Restrictions summary for allowing NFC transfers (phone) [CHAR LIMIT=100] -->
     <string name="restriction_nfc_enable_summary" product="default">Allow data exchange when the phone touches another device</string>
     <!-- Restrictions title for allowing location sharing [CHAR LIMIT=35] -->
-    <string name="restriction_location_enable_title">Location access</string>
+    <string name="restriction_location_enable_title">Location</string>
     <!-- Restrictions summary for allowing location sharing [CHAR LIMIT=100] -->
     <string name="restriction_location_enable_summary" >Let apps use your location information</string>
 

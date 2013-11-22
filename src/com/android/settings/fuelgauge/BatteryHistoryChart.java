@@ -340,7 +340,7 @@ public class BatteryHistoryChart extends View {
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000,
                 BatteryStats.STATS_SINCE_CHARGED);
         mStatsPeriod = uSecTime;
-        String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000);
+        String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000, true);
         mDurationString = getContext().getString(R.string.battery_stats_on_battery,
                 durationString);
         mChargingLabel = getContext().getString(R.string.battery_stats_charging_label);
@@ -382,7 +382,7 @@ public class BatteryHistoryChart extends View {
             mHavePhoneSignal = true;
         }
         if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
-        mTotalDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart);
+        mTotalDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
     }
 
     @Override
@@ -654,19 +654,26 @@ public class BatteryHistoryChart extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        
+
         final int width = getWidth();
         final int height = getHeight();
-        
+        final boolean layoutRtl = isLayoutRtl();
+        final int textStartX = layoutRtl ? width : 0;
+        mTextPaint.setTextAlign(layoutRtl ? Paint.Align.RIGHT : Paint.Align.LEFT);
+
         canvas.drawPath(mBatLevelPath, mBatteryBackgroundPaint);
         if (mLargeMode) {
-            canvas.drawText(mDurationString, 0, -mTextAscent + (mLineWidth/2),
+            int durationHalfWidth = mTotalDurationStringWidth / 2;
+            if (layoutRtl) durationHalfWidth = -durationHalfWidth;
+            canvas.drawText(mDurationString, textStartX, -mTextAscent + (mLineWidth / 2),
                     mTextPaint);
-            canvas.drawText(mTotalDurationString, (width/2) - (mTotalDurationStringWidth/2),
+            canvas.drawText(mTotalDurationString, (width / 2) - durationHalfWidth,
                     mLevelBottom - mTextAscent + mThinLineWidth, mTextPaint);
         } else {
-            canvas.drawText(mDurationString, (width/2) - (mDurationStringWidth/2),
-                    (height/2) - ((mTextDescent-mTextAscent)/2) - mTextAscent, mTextPaint);
+            int durationHalfWidth = mDurationStringWidth / 2;
+            if (layoutRtl) durationHalfWidth = -durationHalfWidth;
+            canvas.drawText(mDurationString, (width / 2) - durationHalfWidth,
+                    (height / 2) - ((mTextDescent - mTextAscent) / 2) - mTextAscent, mTextPaint);
         }
         if (!mBatGoodPath.isEmpty()) {
             canvas.drawPath(mBatGoodPath, mBatteryGoodPaint);
@@ -703,22 +710,22 @@ public class BatteryHistoryChart extends View {
 
         if (mLargeMode) {
             if (mHavePhoneSignal) {
-                canvas.drawText(mPhoneSignalLabel, 0,
+                canvas.drawText(mPhoneSignalLabel, textStartX,
                         height - mPhoneSignalOffset - mTextDescent, mTextPaint);
             }
             if (mHaveGps) {
-                canvas.drawText(mGpsOnLabel, 0,
+                canvas.drawText(mGpsOnLabel, textStartX,
                         height - mGpsOnOffset - mTextDescent, mTextPaint);
             }
             if (mHaveWifi) {
-                canvas.drawText(mWifiRunningLabel, 0,
+                canvas.drawText(mWifiRunningLabel, textStartX,
                         height - mWifiRunningOffset - mTextDescent, mTextPaint);
             }
-            canvas.drawText(mWakeLockLabel, 0,
+            canvas.drawText(mWakeLockLabel, textStartX,
                     height - mWakeLockOffset - mTextDescent, mTextPaint);
-            canvas.drawText(mChargingLabel, 0,
+            canvas.drawText(mChargingLabel, textStartX,
                     height - mChargingOffset - mTextDescent, mTextPaint);
-            canvas.drawText(mScreenOnLabel, 0,
+            canvas.drawText(mScreenOnLabel, textStartX,
                     height - mScreenOnOffset - mTextDescent, mTextPaint);
             canvas.drawLine(0, mLevelBottom+(mThinLineWidth/2), width,
                     mLevelBottom+(mThinLineWidth/2), mTextPaint);

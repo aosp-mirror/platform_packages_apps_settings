@@ -66,17 +66,22 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     private int mPhonebookPermissionChoice;
 
+    private int mMessagePermissionChoice;
+
+
     private final Collection<Callback> mCallbacks = new ArrayList<Callback>();
 
-    // Following constants indicate the user's choices of Phone book access settings
+    // Following constants indicate the user's choices of Phone book/message access settings
     // User hasn't made any choice or settings app has wiped out the memory
-    final static int PHONEBOOK_ACCESS_UNKNOWN = 0;
+    final static int ACCESS_UNKNOWN = 0;
     // User has accepted the connection and let Settings app remember the decision
-    final static int PHONEBOOK_ACCESS_ALLOWED = 1;
+    final static int ACCESS_ALLOWED = 1;
     // User has rejected the connection and let Settings app remember the decision
-    final static int PHONEBOOK_ACCESS_REJECTED = 2;
+    final static int ACCESS_REJECTED = 2;
+
 
     private final static String PHONEBOOK_PREFS_NAME = "bluetooth_phonebook_permission";
+    private final static String MESSAGE_PREFS_NAME = "bluetooth_message_permission";
 
     /**
      * When we connect to multiple profiles, we only want to display a single
@@ -125,6 +130,23 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             return;
         }
         mProfileConnectionState.put(profile, newProfileState);
+        if (newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
+            // check whether we are disconnected with this device completely
+            boolean isDisconnected = true;
+            for (LocalBluetoothProfile pf: mProfileConnectionState.keySet()) {
+                if (mProfileConnectionState.get(pf) != BluetoothProfile.STATE_DISCONNECTED) {
+                    isDisconnected = false;
+                    break;
+                }
+            }
+            // if disconnected, restore permission choice.
+            // So ACCESS_REJECTED will take effect until we are disconnected with this device.
+            if (isDisconnected) {
+                fetchPhonebookPermissionChoice();
+                fetchMessagePermissionChoice();
+            }
+        }
+
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
                 mRemovedProfiles.remove(profile);
@@ -135,6 +157,18 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                     mLocalNapRoleConnected = true;
                 }
             }
+            if (profile instanceof MapProfile) {
+                profile.setPreferred(mDevice, true);
+                refresh();
+            }
+        } else if (profile instanceof MapProfile &&
+                newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
+            if (mProfiles.contains(profile)) {
+                mRemovedProfiles.add(profile);
+                mProfiles.remove(profile);
+            }
+            profile.setPreferred(mDevice, false);
+            refresh();
         } else if (mLocalNapRoleConnected && profile instanceof PanProfile &&
                 ((PanProfile) profile).isLocalRoleNap(mDevice) &&
                 newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
@@ -341,6 +375,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         for (LocalBluetoothProfile profile :getProfiles()) {
             mProfileConnectionState.put(profile, BluetoothProfile.STATE_DISCONNECTED);
         }
+        fetchPhonebookPermissionChoice();
+        fetchMessagePermissionChoice();
     }
 
     // TODO: do any of these need to run async on a background thread?
@@ -349,6 +385,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         fetchBtClass();
         updateProfiles();
         fetchPhonebookPermissionChoice();
+        fetchMessagePermissionChoice();
 
         mVisible = false;
         dispatchAttributesChanged();
@@ -513,7 +550,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         if (bondState == BluetoothDevice.BOND_NONE) {
             mProfiles.clear();
             mConnectAfterPairing = false;  // cancel auto-connect
-            setPhonebookPermissionChoice(PHONEBOOK_ACCESS_UNKNOWN);
+            setPhonebookPermissionChoice(ACCESS_UNKNOWN);
+            setMessagePermissionChoice(ACCESS_UNKNOWN);
         }
 
         refresh();
@@ -630,22 +668,54 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void setPhonebookPermissionChoice(int permissionChoice) {
+        mPhonebookPermissionChoice = permissionChoice;
+
+        // if user reject it, don't save it to editor.
+        if (permissionChoice == ACCESS_REJECTED) return;
+
         SharedPreferences.Editor editor =
             mContext.getSharedPreferences(PHONEBOOK_PREFS_NAME, Context.MODE_PRIVATE).edit();
-        if (permissionChoice == PHONEBOOK_ACCESS_UNKNOWN) {
+        if (permissionChoice == ACCESS_UNKNOWN) {
             editor.remove(mDevice.getAddress());
         } else {
             editor.putInt(mDevice.getAddress(), permissionChoice);
         }
         editor.commit();
-        mPhonebookPermissionChoice = permissionChoice;
     }
 
     private void fetchPhonebookPermissionChoice() {
         SharedPreferences preference = mContext.getSharedPreferences(PHONEBOOK_PREFS_NAME,
                                                                      Context.MODE_PRIVATE);
         mPhonebookPermissionChoice = preference.getInt(mDevice.getAddress(),
-                                                       PHONEBOOK_ACCESS_UNKNOWN);
+                                                       ACCESS_UNKNOWN);
+    }
+
+
+    int getMessagePermissionChoice() {
+        return mMessagePermissionChoice;
+    }
+
+    void setMessagePermissionChoice(int permissionChoice) {
+        mMessagePermissionChoice = permissionChoice;
+
+        // if user reject it, don't save it to editor.
+        if (permissionChoice == ACCESS_REJECTED) return;
+
+        SharedPreferences.Editor editor =
+            mContext.getSharedPreferences(MESSAGE_PREFS_NAME, Context.MODE_PRIVATE).edit();
+        if (permissionChoice == ACCESS_UNKNOWN) {
+            editor.remove(mDevice.getAddress());
+        } else {
+            editor.putInt(mDevice.getAddress(), permissionChoice);
+        }
+        editor.commit();
+    }
+
+    private void fetchMessagePermissionChoice() {
+        SharedPreferences preference = mContext.getSharedPreferences(MESSAGE_PREFS_NAME,
+                                                                     Context.MODE_PRIVATE);
+        mMessagePermissionChoice = preference.getInt(mDevice.getAddress(),
+                                                       ACCESS_UNKNOWN);
     }
 
 }

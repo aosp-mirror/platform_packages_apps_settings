@@ -59,7 +59,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static final int BUTTON_WIFI = 0;
     private static final int BUTTON_BRIGHTNESS = 1;
     private static final int BUTTON_SYNC = 2;
-    private static final int BUTTON_GPS = 3;
+    private static final int BUTTON_LOCATION = 3;
     private static final int BUTTON_BLUETOOTH = 4;
 
     // This widget keeps track of two sets of states:
@@ -102,7 +102,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
     private static final StateTracker sWifiState = new WifiStateTracker();
     private static final StateTracker sBluetoothState = new BluetoothStateTracker();
-    private static final StateTracker sGpsState = new GpsStateTracker();
+    private static final StateTracker sLocationState = new LocationStateTracker();
     private static final StateTracker sSyncState = new SyncStateTracker();
     private static SettingsObserver sSettingsObserver;
 
@@ -506,24 +506,30 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * Subclass of StateTracker for GPS state.
+     * Subclass of StateTracker for location state.
      */
-    private static final class GpsStateTracker extends StateTracker {
-        public int getContainerId() { return R.id.btn_gps; }
-        public int getButtonId() { return R.id.img_gps; }
-        public int getIndicatorId() { return R.id.ind_gps; }
-        public int getButtonDescription() { return R.string.gadget_gps; }
+    private static final class LocationStateTracker extends StateTracker {
+        public int getContainerId() { return R.id.btn_location; }
+        public int getButtonId() { return R.id.img_location; }
+        public int getIndicatorId() { return R.id.ind_location; }
+        public int getButtonDescription() { return R.string.gadget_location; }
         public int getButtonImageId(boolean on) {
-            return on ? R.drawable.ic_appwidget_settings_gps_on_holo
-                    : R.drawable.ic_appwidget_settings_gps_off_holo;
+            return on ? R.drawable.ic_appwidget_settings_location_on_holo
+                    : R.drawable.ic_appwidget_settings_location_off_holo;
         }
 
         @Override
         public int getActualState(Context context) {
             ContentResolver resolver = context.getContentResolver();
-            boolean on = Settings.Secure.isLocationProviderEnabled(
-                resolver, LocationManager.GPS_PROVIDER);
-            return on ? STATE_ENABLED : STATE_DISABLED;
+            int currentLocationMode = Settings.Secure.getInt(resolver,
+                    Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
+            switch (currentLocationMode) {
+                case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
+                case Settings.Secure.LOCATION_MODE_OFF:
+                    return STATE_DISABLED;
+            }
+
+            return STATE_ENABLED;
         }
 
         @Override
@@ -542,15 +548,28 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     final UserManager um =
                             (UserManager) context.getSystemService(Context.USER_SERVICE);
                     if (!um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
-                        Settings.Secure.setLocationProviderEnabled(
-                            resolver,
-                            LocationManager.GPS_PROVIDER,
-                            desiredState);
+                        int currentMode = Settings.Secure.getInt(resolver,
+                                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
+                        int mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+                        switch (currentMode) {
+                            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
+                                mode = Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
+                                break;
+                            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
+                                mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+                                break;
+                            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
+                                mode = Settings.Secure.LOCATION_MODE_OFF;
+                                break;
+                            case Settings.Secure.LOCATION_MODE_OFF:
+                                mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+                                break;
+                        }
+                        Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, mode);
                         return desiredState;
                     }
-                    return Settings.Secure.isLocationProviderEnabled(
-                            resolver,
-                            LocationManager.GPS_PROVIDER);
+
+                    return getActualState(context) == STATE_ENABLED;
                 }
 
                 @Override
@@ -669,8 +688,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.btn_sync,
                 getLaunchPendingIntent(context,
                         BUTTON_SYNC));
-        views.setOnClickPendingIntent(R.id.btn_gps,
-                getLaunchPendingIntent(context, BUTTON_GPS));
+        views.setOnClickPendingIntent(R.id.btn_location,
+                getLaunchPendingIntent(context, BUTTON_LOCATION));
         views.setOnClickPendingIntent(R.id.btn_bluetooth,
                 getLaunchPendingIntent(context,
                         BUTTON_BLUETOOTH));
@@ -701,7 +720,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static void updateButtons(RemoteViews views, Context context) {
         sWifiState.setImageViewResources(context, views);
         sBluetoothState.setImageViewResources(context, views);
-        sGpsState.setImageViewResources(context, views);
+        sLocationState.setImageViewResources(context, views);
         sSyncState.setImageViewResources(context, views);
 
         if (getBrightnessMode(context)) {
@@ -781,8 +800,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             sWifiState.onActualStateChange(context, intent);
         } else if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
             sBluetoothState.onActualStateChange(context, intent);
-        } else if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
-            sGpsState.onActualStateChange(context, intent);
+        } else if (LocationManager.MODE_CHANGED_ACTION.equals(action)) {
+            sLocationState.onActualStateChange(context, intent);
         } else if (ContentResolver.ACTION_SYNC_CONN_STATUS_CHANGED.equals(action)) {
             sSyncState.onActualStateChange(context, intent);
         } else if (intent.hasCategory(Intent.CATEGORY_ALTERNATIVE)) {
@@ -794,8 +813,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 toggleBrightness(context);
             } else if (buttonId == BUTTON_SYNC) {
                 sSyncState.toggleState(context);
-            } else if (buttonId == BUTTON_GPS) {
-                sGpsState.toggleState(context);
+            } else if (buttonId == BUTTON_LOCATION) {
+                sLocationState.toggleState(context);
             } else if (buttonId == BUTTON_BLUETOOTH) {
                 sBluetoothState.toggleState(context);
             }

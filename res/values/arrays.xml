@@ -210,6 +210,7 @@
         <item>Dies ist ein Beispiel für Sprachsynthese in Deutsch.</item>
         <item>Questo è un esempio di sintesi vocale in italiano.</item>
         <item>Este es un ejemplo de síntesis de voz en español.</item>
+        <item>이것은 한국어 음성 합성의 예입니다.</item>
     </string-array>
     <string-array name="tts_demo_string_langs" translatable="false">
         <item>eng</item>
@@ -217,6 +218,7 @@
         <item>deu</item>
         <item>ita</item>
         <item>spa</item>
+        <item>kor</item>
     </string-array>
 
 
@@ -570,7 +572,7 @@
         <item>gid</item>
     </string-array>
 
-    <!-- Apps on SD instalaltion location options in ApplicationSettings -->
+    <!-- Apps on SD installation location options in ApplicationSettings -->
     <string-array name="app_install_location_entries">
         <item>Internal device storage</item>
         <item>Removable SD card</item>
@@ -589,6 +591,7 @@
         <item>Location</item>
         <item>Personal</item>
         <item>Messaging</item>
+        <item>Media</item>
         <item>Device</item>
     </string-array>
 
@@ -625,6 +628,18 @@
         <item>play audio</item>
         <item>read clipboard</item>
         <item>modify clipboard</item>
+        <item>media buttons</item>
+        <item>audio focus</item>
+        <item>master volume</item>
+        <item>voice volume</item>
+        <item>ring volume</item>
+        <item>media volume</item>
+        <item>alarm volume</item>
+        <item>notification volume</item>
+        <item>bluetooth volume</item>
+        <item>keep awake</item>
+        <item>monitor location</item>
+        <item>monitor high power location</item>
     </string-array>
 
     <!-- User display names for app ops codes -->
@@ -643,15 +658,15 @@
         <item>Post notification</item>
         <item>Location</item>
         <item>Call phone</item>
+        <item>Read SMS/MMS</item>
+        <item>Write SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
         <item>Receive SMS/MMS</item>
         <item>Send SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Send SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Send SMS/MMS</item>
+        <item>Read SMS/MMS</item>
+        <item>Write SMS/MMS</item>
         <item>Modify settings</item>
         <item>Draw on top</item>
         <item>Access notifications</item>
@@ -660,6 +675,18 @@
         <item>Play audio</item>
         <item>Read clipboard</item>
         <item>Modify clipboard</item>
+        <item>Media buttons</item>
+        <item>Audio focus</item>
+        <item>Master volume</item>
+        <item>Voice volume</item>
+        <item>Ring volume</item>
+        <item>Media volume</item>
+        <item>Alarm volume</item>
+        <item>Notification volume</item>
+        <item>Bluetooth volume</item>
+        <item>Keep awake</item>
+        <item>Location</item>
+        <item>Location</item>
     </string-array>
 
     <!-- Titles for the list of long press timeout options. -->
@@ -677,6 +704,191 @@
         <item>500</item>
         <item>1000</item>
         <item>1500</item>
+    </string-array>
+
+    <!-- Titles for captioning typeface preference. [CHAR LIMIT=35] -->
+    <string-array name="captioning_typeface_selector_titles">
+        <item>Default</item>
+        <item>Sans-serif</item>
+        <item>Sans-serif condensed</item>
+        <item>Serif</item>
+        <item>Monospace</item>
+    </string-array>
+
+    <!-- Values for captioning typeface preference. -->
+    <string-array name="captioning_typeface_selector_values" translatable="false" >
+        <item></item>
+        <item>sans-serif</item>
+        <item>sans-serif-condensed</item>
+        <item>serif</item>
+        <item>monospace</item>
+    </string-array>
+
+    <!-- Titles for captioning font size preference. [CHAR LIMIT=35] -->
+    <string-array name="captioning_font_size_selector_titles">
+        <item>Very small</item>
+        <item>Small</item>
+        <item>Normal</item>
+        <item>Large</item>
+        <item>Very large</item>
+    </string-array>
+
+    <!-- Values for captioning font size preference. -->
+    <string-array name="captioning_font_size_selector_values" translatable="false" >
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>1.0</item>
+        <item>1.5</item>
+        <item>2.0</item>
+    </string-array>
+
+    <!-- Titles for captioning character edge type preference. [CHAR LIMIT=35] -->
+    <string-array name="captioning_edge_type_selector_titles">
+        <item>None</item>
+        <item>Outline</item>
+        <item>Drop shadow</item>
+    </string-array>
+
+    <!-- Values for captioning character edge type preference. -->
+    <integer-array name="captioning_edge_type_selector_values" translatable="false" >
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+
+    <!-- Titles for captioning color preference. -->
+    <string-array name="captioning_color_selector_titles" translatable="false" >
+        <item>@string/color_white</item>
+        <item>@string/color_black</item>
+        <item>@string/color_red</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_green</item>
+        <item>@string/color_cyan</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_magenta</item>
+    </string-array>
+
+    <!-- Values for captioning color preference. -->
+    <integer-array name="captioning_color_selector_values" translatable="false" >
+        <item>0xFFFFFFFF</item>
+        <item>0xFF000000</item>
+        <item>0xFFFF0000</item>
+        <item>0xFFFFFF00</item>
+        <item>0xFF00FF00</item>
+        <item>0xFF00FFFF</item>
+        <item>0xFF0000FF</item>
+        <item>0xFFFF00FF</item>
+        <item>0xFF000055</item>
+        <item>0xFF0000AA</item>
+        <item>0xFF005500</item>
+        <item>0xFF005555</item>
+        <item>0xFF0055AA</item>
+        <item>0xFF0055FF</item>
+        <item>0xFF00AA00</item>
+        <item>0xFF00AA55</item>
+        <item>0xFF00AAAA</item>
+        <item>0xFF00AAFF</item>
+        <item>0xFF00FF55</item>
+        <item>0xFF00FFAA</item>
+        <item>0xFF550000</item>
+        <item>0xFF550055</item>
+        <item>0xFF5500AA</item>
+        <item>0xFF5500FF</item>
+        <item>0xFF555500</item>
+        <item>0xFF555555</item>
+        <item>0xFF5555AA</item>
+        <item>0xFF5555FF</item>
+        <item>0xFF55AA00</item>
+        <item>0xFF55AA55</item>
+        <item>0xFF55AAAA</item>
+        <item>0xFF55AAFF</item>
+        <item>0xFF55FF00</item>
+        <item>0xFF55FF55</item>
+        <item>0xFF55FFAA</item>
+        <item>0xFF55FFFF</item>
+        <item>0xFFAA0000</item>
+        <item>0xFFAA0055</item>
+        <item>0xFFAA00AA</item>
+        <item>0xFFAA00FF</item>
+        <item>0xFFAA5500</item>
+        <item>0xFFAA5555</item>
+        <item>0xFFAA55AA</item>
+        <item>0xFFAA55FF</item>
+        <item>0xFFAAAA00</item>
+        <item>0xFFAAAA55</item>
+        <item>0xFFAAAAAA</item>
+        <item>0xFFAAAAFF</item>
+        <item>0xFFAAFF00</item>
+        <item>0xFFAAFF55</item>
+        <item>0xFFAAFFAA</item>
+        <item>0xFFAAFFFF</item>
+        <item>0xFFFF0055</item>
+        <item>0xFFFF00AA</item>
+        <item>0xFFFF5500</item>
+        <item>0xFFFF5555</item>
+        <item>0xFFFF55AA</item>
+        <item>0xFFFF55FF</item>
+        <item>0xFFFFAA00</item>
+        <item>0xFFFFAA55</item>
+        <item>0xFFFFAAAA</item>
+        <item>0xFFFFAAFF</item>
+        <item>0xFFFFFF55</item>
+        <item>0xFFFFFFAA</item>
+    </integer-array>
+
+    <!-- Titles for captioning opacity preference. [CHAR LIMIT=35] -->
+    <string-array name="captioning_opacity_selector_titles" >
+        <item>25%</item>
+        <item>50%</item>
+        <item>75%</item>
+        <item>100%</item>
+    </string-array>
+
+    <!-- Values for captioning opacity preference. -->
+    <integer-array name="captioning_opacity_selector_values" translatable="false" >
+        <item>0x40FFFFFF</item>
+        <item>0x80FFFFFF</item>
+        <item>0xC0FFFFFF</item>
+        <item>0xFFFFFFFF</item>
+    </integer-array>
+
+    <!-- Titles for captioning text style preset preference. [CHAR LIMIT=35] -->
+    <string-array name="captioning_preset_selector_titles" >
+        <item>White on black</item>
+        <item>Black on white</item>
+        <item>Yellow on black</item>
+        <item>Yellow on blue</item>
+        <item>Custom</item>
+    </string-array>
+
+    <!-- Values for captioning text style preset preference. -->
+    <integer-array name="captioning_preset_selector_values" translatable="false" >
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>-1</item>
+    </integer-array>
+
+    <!-- Titles for runtime selection preference. [CHAR LIMIT=35] -->
+    <string-array name="select_runtime_titles">
+        <item>Dalvik</item>
+        <item>ART</item>
+        <item>ART (debug)</item>
+    </string-array>
+
+    <!-- Values for runtime selection preference. -->
+    <string-array name="select_runtime_values" translatable="false" >
+        <item>libdvm.so</item>
+        <item>libart.so</item>
+        <item>libartd.so</item>
+    </string-array>
+
+    <!-- Summaries for runtime selection preference. [CHAR LIMIT=100]-->
+    <string-array name="select_runtime_summaries" >
+        <item>Use Dalvik</item>
+        <item>Use ART</item>
+        <item>Use ART debug build</item>
     </string-array>
 
     <!-- Titles for HDCP checking preference. [CHAR LIMIT=35] -->
@@ -770,8 +982,11 @@
     <string-array name="overlay_display_devices_entries">
         <item>None</item>
         <item>720x480 mdpi</item>
+        <item>720x480 mdpi (secure)</item>
         <item>1280x720 tvdpi</item>
+        <item>1280x720 tvdpi (secure)</item>
         <item>1920x1080 xhdpi</item>
+        <item>1920x1080 xhdpi (secure)</item>
         <item>1280x720 tvdpi and 1920x1080 xhdpi</item>
     </string-array>
 
@@ -779,8 +994,11 @@
     <string-array name="overlay_display_devices_values" translatable="false" >
         <item></item>
         <item>720x480/160</item>
+        <item>720x480/160,secure</item>
         <item>1280x720/213</item>
+        <item>1280x720/213,secure</item>
         <item>1920x1080/320</item>
+        <item>1920x1080/320,secure</item>
         <item>1280x720/213;1920x1080/320</item>
     </string-array>
 
@@ -828,6 +1046,22 @@
         <item>visual_bars</item>
         <item>visual_lines</item>
         <item>true</item>
+    </string-array>
+
+    <!-- Titles for debug overdraw preference. [CHAR LIMIT=50] -->
+    <string-array name="debug_hw_overdraw_entries">
+        <item>Off</item>
+        <item>Show overdraw areas</item>
+        <item>Show areas for Deuteranomaly</item>
+        <item>Show overdraw counter</item>
+    </string-array>
+
+    <!-- Values for debug overdraw preference. -->
+    <string-array name="debug_hw_overdraw_values" translatable="false" >
+        <item>false</item>
+        <item>show</item>
+        <item>show_deuteranomaly</item>
+        <item>count</item>
     </string-array>
 
     <!-- Titles for app process limit preference. [CHAR LIMIT=35] -->
@@ -916,4 +1150,17 @@
         <!-- Always allow app to send to premium SMS short code. -->
         <item>Always allow</item>
     </string-array>
+
+    <!-- [CHAR LIMIT=30] Labels for memory states -->
+    <string-array name="ram_states">
+        <!-- Normal desired memory state. -->
+        <item>normal</item>
+        <!-- Moderate memory state, not as good as normal. -->
+        <item>moderate</item>
+        <!-- Memory is running low. -->
+        <item>low</item>
+        <!-- Memory is critical. -->
+        <item>critical</item>
+    </string-array>
+
 </resources>

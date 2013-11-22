@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IPowerManager;
@@ -163,7 +164,8 @@ public class BatteryInfo extends Activity {
         mUptime = (TextView) findViewById(R.id.uptime);
         
         // Get awake time plugged in and on battery
-        mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService("batteryinfo"));
+        mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService(
+                BatteryStats.SERVICE_NAME));
         mScreenStats = IPowerManager.Stub.asInterface(ServiceManager.getService(POWER_SERVICE));
         mHandler.sendEmptyMessageDelayed(EVENT_TICK, 1000);
         

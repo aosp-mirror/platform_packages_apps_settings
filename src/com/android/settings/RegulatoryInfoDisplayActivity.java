@@ -22,7 +22,11 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemProperties;
+import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -30,11 +34,14 @@ import android.widget.TextView;
  * preference item, and when "*#07#" is dialed on the Phone keypad. To enable this feature,
  * set the "config_show_regulatory_info" boolean to true in a device overlay resource, and in the
  * same overlay, either add a drawable named "regulatory_info.png" containing a graphical version
- * of the required regulatory info, or add a string resource named "regulatory_info_text" with
- * an HTML version of the required information (text will be centered in the dialog).
+ * of the required regulatory info (If ro.bootloader.hardware.sku property is set use
+ * "regulatory_info_<sku>.png where sku is ro.bootloader.hardware.sku property value in lowercase"),
+ * or add a string resource named "regulatory_info_text" with an HTML version of the required
+ * information (text will be centered in the dialog).
  */
 public class RegulatoryInfoDisplayActivity extends Activity implements
         DialogInterface.OnDismissListener {
+    private final String REGULATORY_INFO_RESOURCE = "regulatory_info";
 
     /**
      * Display the regulatory info graphic in a dialog window.
@@ -52,21 +59,27 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
                 .setTitle(R.string.regulatory_information)
                 .setOnDismissListener(this);
 
-        boolean regulatoryInfoDrawableExists;
-        try {
-            Drawable d = resources.getDrawable(R.drawable.regulatory_info);
-            // set to false if the width or height is <= 2
-            // (missing PNG can return an empty 2x2 pixel Drawable)
-            regulatoryInfoDrawableExists = (d.getIntrinsicWidth() > 2
-                    && d.getIntrinsicHeight() > 2);
-        } catch (Resources.NotFoundException ignored) {
-            regulatoryInfoDrawableExists = false;
+        boolean regulatoryInfoDrawableExists = false;
+        int resId = getResourceId();
+        if (resId != 0) {
+            try {
+                Drawable d = resources.getDrawable(resId);
+                // set to false if the width or height is <= 2
+                // (missing PNG can return an empty 2x2 pixel Drawable)
+                regulatoryInfoDrawableExists = (d.getIntrinsicWidth() > 2
+                        && d.getIntrinsicHeight() > 2);
+            } catch (Resources.NotFoundException ignored) {
+                regulatoryInfoDrawableExists = false;
+            }
         }
 
         CharSequence regulatoryText = resources.getText(R.string.regulatory_info_text);
 
         if (regulatoryInfoDrawableExists) {
-            builder.setView(getLayoutInflater().inflate(R.layout.regulatory_info, null));
+            View view = getLayoutInflater().inflate(R.layout.regulatory_info, null);
+            ImageView image = (ImageView) view.findViewById(R.id.regulatoryInfo);
+            image.setImageResource(resId);
+            builder.setView(view);
             builder.show();
         } else if (regulatoryText.length() > 0) {
             builder.setMessage(regulatoryText);
@@ -78,6 +91,24 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
             // neither drawable nor text resource exists, finish activity
             finish();
         }
+    }
+
+    private int getResourceId() {
+        // Use regulatory_info by default.
+        int resId = getResources().getIdentifier(
+                REGULATORY_INFO_RESOURCE, "drawable", getPackageName());
+
+        // When hardware sku property exists, use regulatory_info_<sku> resource if valid.
+        String sku = SystemProperties.get("ro.boot.hardware.sku", "");
+        if (!TextUtils.isEmpty(sku)) {
+            String regulatory_info_res = REGULATORY_INFO_RESOURCE + "_" + sku.toLowerCase();
+            int id = getResources().getIdentifier(
+                    regulatory_info_res, "drawable", getPackageName());
+            if (id != 0) {
+                resId = id;
+            }
+        }
+        return resId;
     }
 
     @Override

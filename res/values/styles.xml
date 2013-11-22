@@ -82,9 +82,47 @@
     <style name="Theme.CreateShortCut" parent="android:Theme.Holo.DialogWhenLarge">
     </style>
 
-    <style name="setup_wizard_theme" parent="android:Theme.Holo.NoActionBar">
-        <item name="android:windowSoftInputMode">adjustPan</item>
-        <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+    <style name="PreferenceHeaderPanelSinglePane">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="PreferencePanelSinglePane" parent="@*android:style/PreferencePanel">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+    </style>
+
+    <style name="PreferenceHeaderListSinglePane" parent="@*android:style/PreferenceHeaderList">
+        <item name="android:paddingStart">@dimen/settings_side_margin</item>
+        <item name="android:paddingEnd">@dimen/settings_side_margin</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+    </style>
+
+    <style name="PreferenceFragmentListSinglePane" parent="@*android:style/PreferenceFragmentList">
+        <item name="android:paddingStart">@dimen/settings_side_margin</item>
+        <item name="android:paddingEnd">@dimen/settings_side_margin</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+    </style>
+
+    <style name="VertDivider">
+        <item name="android:layout_width">@dimen/vert_divider_width</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@color/divider_color</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
     </style>
 
     <!-- We'd like to have this as 16dip hight including paddingTop/paddingBottom to
@@ -92,7 +130,7 @@
     <style name="TopDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/divider_height</item>
-        <item name="android:background">@color/setup_divider_color</item>
+        <item name="android:background">?attr/setup_divider_color</item>
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
         <item name="android:layout_marginTop">@dimen/divider_margin_top</item>
@@ -202,5 +240,12 @@
 
     <style name="KeyguardAppWidgetItem">
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Scrollbar style OUTSIDE_OVERLAY -->
+    <integer name="preference_scrollbar_style">33554432</integer>
+
+    <style name="ApnPreference">
+        <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 </resources>

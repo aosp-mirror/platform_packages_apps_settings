@@ -19,15 +19,23 @@ package com.android.settings;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.RestrictionEntry;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -45,19 +53,42 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.AccessibilitySettings.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accessibility.ToggleCaptioningPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.applications.AppOpsSummary;
+import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.deviceinfo.Memory;
+import com.android.settings.deviceinfo.UsbSettings;
+import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
+import com.android.settings.inputmethod.SpellCheckersSettings;
+import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.location.LocationSettings;
+import com.android.settings.nfc.AndroidBeam;
+import com.android.settings.nfc.PaymentSettings;
+import com.android.settings.print.PrintJobSettingsFragment;
+import com.android.settings.print.PrintServiceSettingsFragment;
+import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.tts.TextToSpeechSettings;
+import com.android.settings.users.UserSettings;
+import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
+import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
@@ -90,6 +121,10 @@ public class Settings extends PreferenceActivity
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
 
+    static final int DIALOG_ONLY_ONE_HOME = 1;
+
+    private static boolean sShowNoHomeNotice = false;
+
     private String mFragmentClass;
     private int mTopLevelHeaderId;
     private Header mFirstHeader;
@@ -120,7 +155,10 @@ public class Settings extends PreferenceActivity
             R.id.system_section,
             R.id.date_time_settings,
             R.id.about_settings,
-            R.id.accessibility_settings
+            R.id.accessibility_settings,
+            R.id.print_settings,
+            R.id.nfc_payment_settings,
+            R.id.home_settings
     };
 
     private SharedPreferences mDevelopmentPreferences;
@@ -133,6 +171,23 @@ public class Settings extends PreferenceActivity
     private AuthenticatorHelper mAuthenticatorHelper;
     private Header mLastHeader;
     private boolean mListeningToAccountUpdates;
+
+    private boolean mBatteryPresent = true;
+    private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+                boolean batteryPresent = Utils.isBatteryPresent(intent);
+
+                if (mBatteryPresent != batteryPresent) {
+                    mBatteryPresent = batteryPresent;
+                    invalidateHeaders();
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,11 +273,15 @@ public class Settings extends PreferenceActivity
             ((HeaderAdapter) listAdapter).resume();
         }
         invalidateHeaders();
+
+        registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        unregisterReceiver(mBatteryInfoReceiver);
 
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
@@ -240,6 +299,69 @@ public class Settings extends PreferenceActivity
         if (mListeningToAccountUpdates) {
             AccountManager.get(this).removeOnAccountsUpdatedListener(this);
         }
+    }
+
+    @Override
+    public boolean onIsMultiPane() {
+        return false;
+    }
+
+    private static final String[] ENTRY_FRAGMENTS = {
+        WirelessSettings.class.getName(),
+        WifiSettings.class.getName(),
+        AdvancedWifiSettings.class.getName(),
+        BluetoothSettings.class.getName(),
+        TetherSettings.class.getName(),
+        WifiP2pSettings.class.getName(),
+        VpnSettings.class.getName(),
+        DateTimeSettings.class.getName(),
+        LocalePicker.class.getName(),
+        InputMethodAndLanguageSettings.class.getName(),
+        SpellCheckersSettings.class.getName(),
+        UserDictionaryList.class.getName(),
+        UserDictionarySettings.class.getName(),
+        SoundSettings.class.getName(),
+        DisplaySettings.class.getName(),
+        DeviceInfoSettings.class.getName(),
+        ManageApplications.class.getName(),
+        ProcessStatsUi.class.getName(),
+        NotificationStation.class.getName(),
+        AppOpsSummary.class.getName(),
+        LocationSettings.class.getName(),
+        SecuritySettings.class.getName(),
+        PrivacySettings.class.getName(),
+        DeviceAdminSettings.class.getName(),
+        AccessibilitySettings.class.getName(),
+        ToggleCaptioningPreferenceFragment.class.getName(),
+        TextToSpeechSettings.class.getName(),
+        Memory.class.getName(),
+        DevelopmentSettings.class.getName(),
+        UsbSettings.class.getName(),
+        AndroidBeam.class.getName(),
+        WifiDisplaySettings.class.getName(),
+        PowerUsageSummary.class.getName(),
+        AccountSyncSettings.class.getName(),
+        CryptKeeperSettings.class.getName(),
+        DataUsageSummary.class.getName(),
+        DreamSettings.class.getName(),
+        UserSettings.class.getName(),
+        NotificationAccessSettings.class.getName(),
+        ManageAccountsSettings.class.getName(),
+        PrintSettingsFragment.class.getName(),
+        PrintJobSettingsFragment.class.getName(),
+        TrustedCredentialsSettings.class.getName(),
+        PaymentSettings.class.getName(),
+        KeyboardLayoutPickerFragment.class.getName()
+    };
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        // Almost all fragments are wrapped in this,
+        // except for a few that have their own activities.
+        for (int i = 0; i < ENTRY_FRAGMENTS.length; i++) {
+            if (ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
+        }
+        return false;
     }
 
     private void switchToHeaderLocal(Header header) {
@@ -387,7 +509,10 @@ public class Settings extends PreferenceActivity
                 WifiDisplaySettings.class.getName().equals(fragmentName) ||
                 BluetoothSettings.class.getName().equals(fragmentName) ||
                 DreamSettings.class.getName().equals(fragmentName) ||
-                ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName)) {
+                LocationSettings.class.getName().equals(fragmentName) ||
+                ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName) ||
+                PrintSettingsFragment.class.getName().equals(fragmentName) ||
+                PrintServiceSettingsFragment.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_UI_OPTIONS, ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
 
@@ -400,8 +525,10 @@ public class Settings extends PreferenceActivity
      */
     @Override
     public void onBuildHeaders(List<Header> headers) {
-        loadHeadersFromResource(R.xml.settings_headers, headers);
-        updateHeaderList(headers);
+        if (!onIsHidingHeaders()) {
+            loadHeadersFromResource(R.xml.settings_headers, headers);
+            updateHeaderList(headers);
+        }
     }
 
     private void updateHeaderList(List<Header> target) {
@@ -439,14 +566,35 @@ public class Settings extends PreferenceActivity
                 } catch (RemoteException e) {
                     // ignored
                 }
+            } else if (id == R.id.battery_settings) {
+                // Remove battery settings when battery is not available. (e.g. TV)
+
+                if (!mBatteryPresent) {
+                    target.remove(i);
+                }
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
+            } else if (id == R.id.home_settings) {
+                if (!updateHomeSettingHeaders(header)) {
+                    target.remove(i);
+                }
             } else if (id == R.id.user_settings) {
                 if (!UserHandle.MU_ENABLED
                         || !UserManager.supportsMultipleUsers()
                         || Utils.isMonkeyRunning()) {
                     target.remove(i);
+                }
+            } else if (id == R.id.nfc_payment_settings) {
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
+                    target.remove(i);
+                } else {
+                    // Only show if NFC is on and we have the HCE feature
+                    NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+                    if (!adapter.isEnabled() || !getPackageManager().hasSystemFeature(
+                            PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
+                        target.remove(i);
+                    }
                 }
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
@@ -518,6 +666,7 @@ public class Settings extends PreferenceActivity
                 }
             }
             accountHeaders.add(accHeader);
+            mAuthenticatorHelper.preloadDrawableForType(this, accountType);
         }
 
         // Sort by label
@@ -536,6 +685,44 @@ public class Settings extends PreferenceActivity
             mListeningToAccountUpdates = true;
         }
         return headerIndex;
+    }
+
+    private boolean updateHomeSettingHeaders(Header header) {
+        // Once we decide to show Home settings, keep showing it forever
+        SharedPreferences sp = getSharedPreferences(HomeSettings.HOME_PREFS, Context.MODE_PRIVATE);
+        if (sp.getBoolean(HomeSettings.HOME_PREFS_DO_SHOW, false)) {
+            return true;
+        }
+
+        try {
+            final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
+            getPackageManager().getHomeActivities(homeApps);
+            if (homeApps.size() < 2) {
+                // When there's only one available home app, omit this settings
+                // category entirely at the top level UI.  If the user just
+                // uninstalled the penultimate home app candidiate, we also
+                // now tell them about why they aren't seeing 'Home' in the list.
+                if (sShowNoHomeNotice) {
+                    sShowNoHomeNotice = false;
+                    NoHomeDialogFragment.show(this);
+                }
+                return false;
+            } else {
+                // Okay, we're allowing the Home settings category.  Tell it, when
+                // invoked via this front door, that we'll need to be told about the
+                // case when the user uninstalls all but one home app.
+                if (header.fragmentArguments == null) {
+                    header.fragmentArguments = new Bundle();
+                }
+                header.fragmentArguments.putBoolean(HomeSettings.HOME_SHOW_NOTICE, true);
+            }
+        } catch (Exception e) {
+            // Can't look up the home activity; bail on configuring the icon
+            Log.w(LOG_TAG, "Problem looking up home activity!", e);
+        }
+
+        sp.edit().putBoolean(HomeSettings.HOME_PREFS_DO_SHOW, true).apply();
+        return true;
     }
 
     private void getMetaData() {
@@ -571,21 +758,40 @@ public class Settings extends PreferenceActivity
         return super.getNextButton();
     }
 
+    public static class NoHomeDialogFragment extends DialogFragment {
+        public static void show(Activity parent) {
+            final NoHomeDialogFragment dialog = new NoHomeDialogFragment();
+            dialog.show(parent.getFragmentManager(), null);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.only_one_home_message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create();
+        }
+    }
+
     private static class HeaderAdapter extends ArrayAdapter<Header> {
         static final int HEADER_TYPE_CATEGORY = 0;
         static final int HEADER_TYPE_NORMAL = 1;
         static final int HEADER_TYPE_SWITCH = 2;
-        private static final int HEADER_TYPE_COUNT = HEADER_TYPE_SWITCH + 1;
+        static final int HEADER_TYPE_BUTTON = 3;
+        private static final int HEADER_TYPE_COUNT = HEADER_TYPE_BUTTON + 1;
 
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
         private AuthenticatorHelper mAuthHelper;
+        private DevicePolicyManager mDevicePolicyManager;
 
         private static class HeaderViewHolder {
             ImageView icon;
             TextView title;
             TextView summary;
             Switch switch_;
+            ImageButton button_;
+            View divider_;
         }
 
         private LayoutInflater mInflater;
@@ -595,6 +801,8 @@ public class Settings extends PreferenceActivity
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings) {
                 return HEADER_TYPE_SWITCH;
+            } else if (header.id == R.id.security_settings) {
+                return HEADER_TYPE_BUTTON;
             } else {
                 return HEADER_TYPE_NORMAL;
             }
@@ -627,7 +835,7 @@ public class Settings extends PreferenceActivity
         }
 
         public HeaderAdapter(Context context, List<Header> objects,
-                AuthenticatorHelper authenticatorHelper) {
+                AuthenticatorHelper authenticatorHelper, DevicePolicyManager dpm) {
             super(context, 0, objects);
 
             mAuthHelper = authenticatorHelper;
@@ -637,6 +845,7 @@ public class Settings extends PreferenceActivity
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
+            mDevicePolicyManager = dpm;
         }
 
         @Override
@@ -664,6 +873,18 @@ public class Settings extends PreferenceActivity
                         holder.summary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
                         holder.switch_ = (Switch) view.findViewById(R.id.switchWidget);
+                        break;
+
+                    case HEADER_TYPE_BUTTON:
+                        view = mInflater.inflate(R.layout.preference_header_button_item, parent,
+                                false);
+                        holder.icon = (ImageView) view.findViewById(R.id.icon);
+                        holder.title = (TextView)
+                                view.findViewById(com.android.internal.R.id.title);
+                        holder.summary = (TextView)
+                                view.findViewById(com.android.internal.R.id.summary);
+                        holder.button_ = (ImageButton) view.findViewById(R.id.buttonWidget);
+                        holder.divider_ = view.findViewById(R.id.divider);
                         break;
 
                     case HEADER_TYPE_NORMAL:
@@ -696,36 +917,73 @@ public class Settings extends PreferenceActivity
                     } else {
                         mBluetoothEnabler.setSwitch(holder.switch_);
                     }
-                    // No break, fall through on purpose to update common fields
+                    updateCommonHeaderView(header, holder);
+                    break;
 
-                    //$FALL-THROUGH$
+                case HEADER_TYPE_BUTTON:
+                    if (header.id == R.id.security_settings) {
+                        boolean hasCert = DevicePolicyManager.hasAnyCaCertsInstalled();
+                        if (hasCert) {
+                            holder.button_.setVisibility(View.VISIBLE);
+                            holder.divider_.setVisibility(View.VISIBLE);
+                            boolean isManaged = mDevicePolicyManager.getDeviceOwner() != null;
+                            if (isManaged) {
+                                holder.button_.setImageResource(R.drawable.ic_settings_about);
+                            } else {
+                                holder.button_.setImageResource(
+                                        android.R.drawable.stat_notify_error);
+                            }
+                            holder.button_.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(
+                                            android.provider.Settings.ACTION_MONITORING_CERT_INFO);
+                                    getContext().startActivity(intent);
+                                }
+                            });
+                        } else {
+                            holder.button_.setVisibility(View.GONE);
+                            holder.divider_.setVisibility(View.GONE);
+                        }
+                    }
+                    updateCommonHeaderView(header, holder);
+                    break;
+
                 case HEADER_TYPE_NORMAL:
-                    if (header.extras != null
-                            && header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
-                        String accType = header.extras.getString(
-                                ManageAccountsSettings.KEY_ACCOUNT_TYPE);
-                        ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
-                        lp.width = getContext().getResources().getDimensionPixelSize(
-                                R.dimen.header_icon_width);
-                        lp.height = lp.width;
-                        holder.icon.setLayoutParams(lp);
-                        Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
-                        holder.icon.setImageDrawable(icon);
-                    } else {
-                        holder.icon.setImageResource(header.iconRes);
-                    }
-                    holder.title.setText(header.getTitle(getContext().getResources()));
-                    CharSequence summary = header.getSummary(getContext().getResources());
-                    if (!TextUtils.isEmpty(summary)) {
-                        holder.summary.setVisibility(View.VISIBLE);
-                        holder.summary.setText(summary);
-                    } else {
-                        holder.summary.setVisibility(View.GONE);
-                    }
+                    updateCommonHeaderView(header, holder);
                     break;
             }
 
             return view;
+        }
+
+        private void updateCommonHeaderView(Header header, HeaderViewHolder holder) {
+                if (header.extras != null
+                        && header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
+                    String accType = header.extras.getString(
+                            ManageAccountsSettings.KEY_ACCOUNT_TYPE);
+                    Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
+                    setHeaderIcon(holder, icon);
+                } else {
+                    holder.icon.setImageResource(header.iconRes);
+                }
+                holder.title.setText(header.getTitle(getContext().getResources()));
+                CharSequence summary = header.getSummary(getContext().getResources());
+                if (!TextUtils.isEmpty(summary)) {
+                    holder.summary.setVisibility(View.VISIBLE);
+                    holder.summary.setText(summary);
+                } else {
+                    holder.summary.setVisibility(View.GONE);
+                }
+            }
+
+        private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
+            ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
+            lp.width = getContext().getResources().getDimensionPixelSize(
+                    R.dimen.header_icon_width);
+            lp.height = lp.width;
+            holder.icon.setLayoutParams(lp);
+            holder.icon.setImageDrawable(icon);
         }
 
         public void resume() {
@@ -784,7 +1042,9 @@ public class Settings extends PreferenceActivity
         if (adapter == null) {
             super.setListAdapter(null);
         } else {
-            super.setListAdapter(new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper));
+            DevicePolicyManager dpm =
+                    (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+            super.setListAdapter(new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper, dpm));
         }
     }
 
@@ -794,6 +1054,10 @@ public class Settings extends PreferenceActivity
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, accounts);
         invalidateHeaders();
+    }
+
+    public static void requestHomeNotice() {
+        sShowNoHomeNotice = true;
     }
 
     /*
@@ -822,6 +1086,7 @@ public class Settings extends PreferenceActivity
     public static class StorageUseActivity extends Settings { /* empty */ }
     public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
     public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
+    public static class CaptioningSettingsActivity extends Settings { /* empty */ }
     public static class SecuritySettingsActivity extends Settings { /* empty */ }
     public static class LocationSettingsActivity extends Settings { /* empty */ }
     public static class PrivacySettingsActivity extends Settings { /* empty */ }
@@ -841,4 +1106,9 @@ public class Settings extends PreferenceActivity
     public static class NotificationStationActivity extends Settings { /* empty */ }
     public static class UserSettingsActivity extends Settings { /* empty */ }
     public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
+    public static class UsbSettingsActivity extends Settings { /* empty */ }
+    public static class TrustedCredentialsSettingsActivity extends Settings { /* empty */ }
+    public static class PaymentSettingsActivity extends Settings { /* empty */ }
+    public static class PrintSettingsActivity extends Settings { /* empty */ }
+    public static class PrintJobSettingsActivity extends Settings { /* empty */ }
 }

@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -62,6 +63,12 @@ public class ChooseLockPassword extends PreferenceActivity {
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPasswordFragment.class.getName());
         modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
+    }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (ChooseLockPasswordFragment.class.getName().equals(fragmentName)) return true;
+        return false;
     }
 
     @Override
@@ -154,6 +161,9 @@ public class ChooseLockPassword extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
             Intent intent = getActivity().getIntent();
+            if (!(getActivity() instanceof ChooseLockPassword)) {
+                throw new SecurityException("Fragment contained in wrong activity");
+            }
             mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                     mRequestedQuality), mLockPatternUtils.getRequestedPasswordQuality());
             mPasswordMinLength = Math.max(

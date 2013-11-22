@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -49,6 +50,12 @@ public class ConfirmLockPassword extends PreferenceActivity {
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ConfirmLockPasswordFragment.class.getName());
         modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
+    }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (ConfirmLockPasswordFragment.class.getName().equals(fragmentName)) return true;
+        return false;
     }
 
     @Override

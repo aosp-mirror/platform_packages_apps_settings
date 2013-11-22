@@ -19,6 +19,10 @@ package com.android.settings.wifi;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.wifi.p2p.WifiP2pSettings;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +34,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -43,12 +48,10 @@ import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -71,10 +74,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.wifi.p2p.WifiP2pSettings;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -90,7 +89,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * The second is for Setup Wizard, with a simplified interface that hides the action bar
  * and menus.
  */
-public class WifiSettings extends SettingsPreferenceFragment
+public class WifiSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener  {
     private static final String TAG = "WifiSettings";
     private static final int MENU_ID_WPS_PBC = Menu.FIRST;
@@ -129,9 +128,6 @@ public class WifiSettings extends SettingsPreferenceFragment
     private WifiManager.ActionListener mForgetListener;
     private boolean mP2pSupported;
 
-
-    private UserManager mUserManager;
-
     private WifiEnabler mWifiEnabler;
     // An access point being editted is stored here.
     private AccessPoint mSelectedAccessPoint;
@@ -139,7 +135,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
 
-    private AtomicBoolean mConnected = new AtomicBoolean(false);
+    private final AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private WifiDialog mDialog;
 
@@ -179,6 +175,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
+        super(DISALLOW_CONFIG_WIFI);
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
@@ -292,7 +289,6 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
 
         mConnectListener = new WifiManager.ActionListener() {
                                    @Override
@@ -449,13 +445,14 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the user is not allowed to configure wifi, do not show the menu.
-        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)) return;
+        if (isRestrictedAndNotPinProtected()) return;
 
         final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
+        TypedArray ta = getActivity().getTheme().obtainStyledAttributes(
+                new int[] {R.attr.ic_menu_add, R.attr.ic_wps});
         if (mSetupWizardMode) {
-            // FIXME: add setIcon() when graphics are available
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                    .setIcon(R.drawable.ic_wps)
+                    .setIcon(ta.getDrawable(1))
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
@@ -463,11 +460,11 @@ public class WifiSettings extends SettingsPreferenceFragment
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         } else {
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                    .setIcon(R.drawable.ic_wps)
+                    .setIcon(ta.getDrawable(1))
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
-                    .setIcon(R.drawable.ic_menu_add)
+                    .setIcon(ta.getDrawable(0))
                     .setEnabled(wifiIsEnabled)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
@@ -486,6 +483,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     //.setIcon(android.R.drawable.ic_menu_manage)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
+        ta.recycle();
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -507,7 +505,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // If the user is not allowed to configure wifi, do not handle menu selections.
-        if (mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)) return false;
+        if (isRestrictedAndNotPinProtected()) return false;
 
         switch (item.getItemId()) {
             case MENU_ID_WPS_PBC:
@@ -709,7 +707,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
 
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_WIFI)) {
+        if (isRestrictedAndNotPinProtected()) {
             addMessagePreference(R.string.wifi_empty_list_user_restricted);
             return;
         }
@@ -813,7 +811,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     /** A restricted multimap for use in constructAccessPoints */
     private class Multimap<K,V> {
-        private HashMap<K,List<V>> store = new HashMap<K,List<V>>();
+        private final HashMap<K,List<V>> store = new HashMap<K,List<V>>();
         /** retrieve a non-null list of values with key K */
         List<V> getAll(K key) {
             List<V> values = store.get(key);

@@ -62,6 +62,13 @@
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
 
+    <!-- Home -->
+    <header
+        android:id="@+id/home_settings"
+        android:icon="@drawable/ic_settings_home"
+        android:fragment="com.android.settings.HomeSettings"
+        android:title="@string/home_settings" />
+
     <!-- Sound -->
     <header
         android:id="@+id/sound_settings"
@@ -104,6 +111,13 @@
         android:title="@string/user_settings_title"
         android:id="@+id/user_settings" />
 
+    <!-- Manage NFC payment apps -->
+    <header
+        android:fragment="com.android.settings.nfc.PaymentSettings"
+        android:icon="@drawable/ic_settings_nfc_payment"
+        android:title="@string/nfc_payment_settings_title"
+        android:id="@+id/nfc_payment_settings" />
+
     <!-- Manufacturer hook -->
     <header
         android:fragment="com.android.settings.WirelessSettings"
@@ -111,14 +125,13 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
-
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
 
     <!-- Location -->
     <header
-        android:fragment="com.android.settings.LocationSettings"
+        android:fragment="com.android.settings.location.LocationSettings"
         android:icon="@drawable/ic_settings_location"
         android:title="@string/location_settings_title"
         android:id="@+id/location_settings" />
@@ -152,7 +165,7 @@
     <header
             android:id="@+id/account_add"
             android:title="@string/add_account_label"
-            android:icon="@drawable/ic_menu_add">
+            android:icon="@drawable/ic_menu_add_dark">
         <intent
             android:action="android.settings.ADD_ACCOUNT_SETTINGS"/>
     </header>
@@ -171,9 +184,16 @@
     <!-- Accessibility feedback -->
     <header
         android:id="@+id/accessibility_settings"
-        android:fragment="com.android.settings.AccessibilitySettings"
+        android:fragment="com.android.settings.accessibility.AccessibilitySettings"
         android:icon="@drawable/ic_settings_accessibility"
         android:title="@string/accessibility_settings" />
+
+    <!-- Print -->
+    <header
+        android:id="@+id/print_settings"
+        android:fragment="com.android.settings.print.PrintSettingsFragment"
+        android:icon="@*android:drawable/ic_print"
+        android:title="@string/print_settings" />
 
     <!-- Development -->
     <header

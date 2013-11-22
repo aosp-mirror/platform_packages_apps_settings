@@ -15,8 +15,11 @@
  */
 package com.android.settings.inputmethod;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.preference.PreferenceActivity;
+
+import com.android.settings.ChooseLockPassword.ChooseLockPasswordFragment;
 
 public class InputMethodAndSubtypeEnablerActivity extends PreferenceActivity {
     @Override
@@ -28,4 +31,11 @@ public class InputMethodAndSubtypeEnablerActivity extends PreferenceActivity {
         }
         return modIntent;
     }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (InputMethodAndSubtypeEnabler.class.getName().equals(fragmentName)) return true;
+        return false;
+    }
+
 }

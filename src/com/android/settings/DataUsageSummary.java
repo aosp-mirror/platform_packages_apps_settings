@@ -141,12 +141,12 @@ import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.PieChartView;
 import com.google.android.collect.Lists;
 
+import libcore.util.Objects;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
-import libcore.util.Objects;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -277,6 +277,16 @@ public class DataUsageSummary extends Fragment {
         mPolicyEditor.read();
 
         try {
+            if (!mNetworkService.isBandwidthControlEnabled()) {
+                Log.w(TAG, "No bandwidth control; leaving");
+                getActivity().finish();
+            }
+        } catch (RemoteException e) {
+            Log.w(TAG, "No bandwidth control; leaving");
+            getActivity().finish();
+        }
+
+        try {
             mStatsSession = mStatsService.openSession();
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -312,15 +322,10 @@ public class DataUsageSummary extends Fragment {
         // on parent container for inset.
         final boolean shouldInset = mListView.getScrollBarStyle()
                 == View.SCROLLBARS_OUTSIDE_OVERLAY;
-        if (shouldInset) {
-            mInsetSide = view.getResources().getDimensionPixelOffset(
-                    com.android.internal.R.dimen.preference_fragment_padding_side);
-        } else {
-            mInsetSide = 0;
-        }
+        mInsetSide = 0;
 
         // adjust padding around tabwidget as needed
-        prepareCustomPreferencesList(container, view, mListView, true);
+        prepareCustomPreferencesList(container, view, mListView, false);
 
         mTabHost.setup();
         mTabHost.setOnTabChangedListener(mTabListener);

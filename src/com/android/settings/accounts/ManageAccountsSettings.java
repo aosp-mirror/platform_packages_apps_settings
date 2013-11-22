@@ -21,10 +21,7 @@ import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
@@ -36,29 +33,26 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.AccountPreference;
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.Utils;
+import com.android.settings.location.LocationSettings;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 
+/** Manages settings for Google Account. */
 public class ManageAccountsSettings extends AccountPreferenceBase
         implements OnAccountsUpdateListener {
 
@@ -74,7 +68,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private String[] mAuthorities;
     private TextView mErrorInfoView;
 
-    private SettingsDialogFragment mDialogFragment;
     // If an account type is set, then show only accounts of that type
     private String mAccountType;
     // Temporary hack, to deal with backward compatibility 
@@ -354,18 +347,71 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         }
     }
 
+    /** Listens to a preference click event and starts a fragment */
+    private class FragmentStarter
+            implements Preference.OnPreferenceClickListener {
+        private final String mClass;
+        private final int mTitleRes;
+
+        /**
+         * @param className the class name of the fragment to be started.
+         * @param title the title resource id of the started preference panel.
+         */
+        public FragmentStarter(String className, int title) {
+            mClass = className;
+            mTitleRes = title;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            ((PreferenceActivity) getActivity()).startPreferencePanel(
+                    mClass, null, mTitleRes, null, null, 0);
+            return true;
+        }
+    }
+
+    /**
+     * Filters through the preference list provided by GoogleLoginService.
+     *
+     * This method removes all the invalid intent from the list, adds account name as extra into the
+     * intent, and hack the location settings to start it as a fragment.
+     */
     private void updatePreferenceIntents(PreferenceScreen prefs) {
         PackageManager pm = getActivity().getPackageManager();
         for (int i = 0; i < prefs.getPreferenceCount();) {
-            Intent intent = prefs.getPreference(i).getIntent();
+            Preference pref = prefs.getPreference(i);
+            Intent intent = pref.getIntent();
             if (intent != null) {
-                ResolveInfo ri = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-                if (ri == null) {
-                    prefs.removePreference(prefs.getPreference(i));
-                    continue;
+                // Hack. Launch "Location" as fragment instead of as activity.
+                //
+                // When "Location" is launched as activity via Intent, there's no "Up" button at the
+                // top left, and if there's another running instance of "Location" activity, the
+                // back stack would usually point to some other place so the user won't be able to
+                // go back to the previous page by "back" key. Using fragment is a much easier
+                // solution to those problems.
+                //
+                // If we set Intent to null and assign a fragment to the PreferenceScreen item here,
+                // in order to make it work as expected, we still need to modify the container
+                // PreferenceActivity, override onPreferenceStartFragment() and call
+                // startPreferencePanel() there. In order to inject the title string there, more
+                // dirty further hack is still needed. It's much easier and cleaner to listen to
+                // preference click event here directly.
+                if (intent.getAction().equals(
+                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) {
+                    // The OnPreferenceClickListener overrides the click event completely. No intent
+                    // will get fired.
+                    pref.setOnPreferenceClickListener(new FragmentStarter(
+                            LocationSettings.class.getName(),
+                            R.string.location_settings_title));
                 } else {
-                    intent.putExtra(ACCOUNT_KEY, mFirstAccount);
-                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ResolveInfo ri = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                    if (ri == null) {
+                        prefs.removePreference(pref);
+                        continue;
+                    } else {
+                        intent.putExtra(ACCOUNT_KEY, mFirstAccount);
+                        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    }
                 }
             }
             i++;

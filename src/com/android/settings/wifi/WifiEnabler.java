@@ -120,11 +120,10 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
             mWifiManager.setWifiApEnabled(null, false);
         }
 
-        if (mWifiManager.setWifiEnabled(isChecked)) {
-            // Intent has been taken into account, disable until new state is active
-            mSwitch.setEnabled(false);
-        } else {
+        mSwitch.setEnabled(false);
+        if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error
+            mSwitch.setEnabled(true);
             Toast.makeText(mContext, R.string.wifi_error, Toast.LENGTH_SHORT).show();
         }
     }

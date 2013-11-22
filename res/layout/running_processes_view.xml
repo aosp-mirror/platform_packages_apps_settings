@@ -24,10 +24,9 @@
             android:layout_height="0px"
             android:layout_weight="1">
         <ListView android:id="@android:id/list"
+                style="@style/PreferenceFragmentListSinglePane"
                 android:layout_width="match_parent" 
                 android:layout_height="match_parent"
-                android:paddingStart="@*android:dimen/preference_fragment_padding_side"
-                android:paddingEnd="@*android:dimen/preference_fragment_padding_side"
                 android:drawSelectorOnTop="false"
                 android:scrollbarStyle="outsideOverlay"
                 android:fastScrollEnabled="true" />
@@ -38,8 +37,14 @@
                 android:text="@string/no_running_services"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
     </FrameLayout>
+    <!-- Force layout direction to LTR for now as we want the text to be at the same position in
+         any Locale included the RTL ones. Will need to fix LinearColorBar RTL support later.
+         Please also note the left/right gravities that would also need to be changed for proper
+         RTL support -->
     <view class="com.android.settings.applications.LinearColorBar"
             android:id="@+id/color_bar"
+            android:layout_marginStart="@dimen/settings_side_margin"
+            android:layout_marginEnd="@dimen/settings_side_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-5dp"
@@ -50,14 +55,13 @@
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
             android:paddingBottom="1dp"
-            android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
-            android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side">
+            android:layoutDirection="ltr">
         <TextView android:id="@+id/foregroundText"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:focusable="true"
-            android:gravity="start|bottom"
+            android:gravity="left|bottom"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
             android:textColor="#000"
             android:singleLine="true" />
@@ -79,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:focusable="true"
-            android:gravity="end|bottom"
+            android:gravity="right|bottom"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
             android:textColor="#000"
             android:singleLine="true" />

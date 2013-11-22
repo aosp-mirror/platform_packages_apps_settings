@@ -17,23 +17,28 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
+import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.ConfirmLockPattern.ConfirmLockPatternFragment;
 
 import java.util.List;
 
@@ -47,6 +52,15 @@ public class ChooseLockGeneric extends PreferenceActivity {
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockGenericFragment.class.getName());
         modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
+    }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        if (ChooseLockGenericFragment.class.getName().equals(fragmentName)) return true;
+        return false;
+    }
+
+    public static class InternalActivity extends ChooseLockGeneric {
     }
 
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
@@ -86,7 +100,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
             // Defaults to needing to confirm credentials
             final boolean confirmCredentials = getActivity().getIntent()
                 .getBooleanExtra(CONFIRM_CREDENTIALS, true);
-            mPasswordConfirmed = !confirmCredentials;
+            if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
+                mPasswordConfirmed = !confirmCredentials;
+            }
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -122,6 +138,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 Preference preference) {
             final String key = preference.getKey();
             boolean handled = true;
+
+            EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, key);
+
             if (KEY_UNLOCK_SET_OFF.equals(key)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);
@@ -243,6 +262,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
          * appropriately.)
          */
         private int upgradeQualityForEncryption(int quality) {
+            // Don't upgrade quality for secondary users. Encryption requirements don't apply.
+            if (!Process.myUserHandle().equals(UserHandle.OWNER)) return quality;
             int encryptionStatus = mDPM.getStorageEncryptionStatus();
             boolean encrypted = (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE)
                     || (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVATING);
@@ -325,7 +346,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
         }
 
         private Intent getBiometricSensorIntent() {
-            Intent fallBackIntent = new Intent().setClass(getActivity(), ChooseLockGeneric.class);
+            Intent fallBackIntent = new Intent().setClass(getActivity(),
+                    ChooseLockGeneric.InternalActivity.class);
             fallBackIntent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, true);
             fallBackIntent.putExtra(CONFIRM_CREDENTIALS, false);
             fallBackIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE,

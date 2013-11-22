@@ -33,7 +33,6 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/title"
             android:gravity="bottom"
             android:orientation="horizontal">
             <TextView
@@ -52,7 +51,7 @@
                 android:layout_marginStart="8dip"
                 android:layout_marginEnd="8dip"
                 android:layout_marginBottom="8dip"
-                android:src="@*android:drawable/ic_menu_moreoverflow_holo_dark"
+                android:src="?attr/ic_menu_moreoverflow"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/wifi_menu_more_options" />
 
@@ -124,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_menu_add" />
+                android:src="?attr/ic_menu_add" />
 
             <TextView
                 android:id="@+id/other"

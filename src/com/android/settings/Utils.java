@@ -330,7 +330,7 @@ public class Utils {
     /**
      * Returns the WIFI IP Addresses, if any, taking into account IPv4 and IPv6 style addresses.
      * @param context the application context
-     * @return the formatted and comma-separated IP addresses, or null if none.
+     * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getWifiIpAddresses(Context context) {
         ConnectivityManager cm = (ConnectivityManager)
@@ -343,7 +343,7 @@ public class Utils {
      * Returns the default link's IP addresses, if any, taking into account IPv4 and IPv6 style
      * addresses.
      * @param context the application context
-     * @return the formatted and comma-separated IP addresses, or null if none.
+     * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getDefaultIpAddresses(Context context) {
         ConnectivityManager cm = (ConnectivityManager)
@@ -354,14 +354,14 @@ public class Utils {
 
     private static String formatIpAddresses(LinkProperties prop) {
         if (prop == null) return null;
-        Iterator<InetAddress> iter = prop.getAddresses().iterator();
+        Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) return null;
         // Concatenate all available addresses, comma separated
         String addresses = "";
         while (iter.hasNext()) {
             addresses += iter.next().getHostAddress();
-            if (iter.hasNext()) addresses += ", ";
+            if (iter.hasNext()) addresses += "\n";
         }
         return addresses;
     }
@@ -386,17 +386,22 @@ public class Utils {
         }
     }
 
+    public static boolean isBatteryPresent(Intent batteryChangedIntent) {
+        return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
+    }
+
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
-        int level = batteryChangedIntent.getIntExtra("level", 0);
-        int scale = batteryChangedIntent.getIntExtra("scale", 100);
+        int level = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+        int scale = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
         return String.valueOf(level * 100 / scale) + "%";
     }
 
     public static String getBatteryStatus(Resources res, Intent batteryChangedIntent) {
         final Intent intent = batteryChangedIntent;
 
-        int plugType = intent.getIntExtra("plugged", 0);
-        int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+        int plugType = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
         String statusString;
         if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
             statusString = res.getString(R.string.battery_info_status_charging);
@@ -443,8 +448,7 @@ public class Utils {
             ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
 
             final Resources res = list.getResources();
-            final int paddingSide = res.getDimensionPixelSize(
-                    com.android.internal.R.dimen.preference_fragment_padding_side);
+            final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 

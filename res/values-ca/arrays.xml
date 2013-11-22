@@ -153,12 +153,12 @@
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Sempre"</item>
-    <item msgid="844721238536786870">"Només quan està endollat"</item>
+    <item msgid="844721238536786870">"Només quan s\'estigui carregant"</item>
     <item msgid="2990218920631468642">"Mai (augmenta l\'ús de dades)"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Sempre"</item>
-    <item msgid="7433294150916905997">"Només quan està endollat"</item>
+    <item msgid="7433294150916905997">"Només quan s\'estigui carregant"</item>
     <item msgid="1390404486722375028">"Mai"</item>
   </string-array>
   <string-array name="wifi_frequency_band_entries">
@@ -200,7 +200,7 @@
   <string-array name="emergency_tone_entries">
     <item msgid="5165439859689033665">"Desactivat"</item>
     <item msgid="3165868966179561687">"Alerta"</item>
-    <item msgid="6038758039030476855">"Vibra"</item>
+    <item msgid="6038758039030476855">"Vibració"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="3856896061242872146">"Cap"</item>
@@ -233,7 +233,8 @@
     <item msgid="6358963769537892925">"Ubicació"</item>
     <item msgid="255608127647030286">"Personal"</item>
     <item msgid="4588829735729884491">"Missatgeria"</item>
-    <item msgid="8971765125227378270">"Dispositiu"</item>
+    <item msgid="886742181977884584">"Multimèdia"</item>
+    <item msgid="7924928667052300589">"Dispositiu"</item>
   </string-array>
   <string-array name="app_ops_summaries">
     <item msgid="4979188868761515915">"ubicació aproximada"</item>
@@ -267,6 +268,17 @@
     <item msgid="5031552983987798163">"reprodueix l\'àudio"</item>
     <item msgid="8374996688066472414">"llegeix el porta-retalls"</item>
     <item msgid="3045529469061083747">"modifica el porta-retalls"</item>
+    <item msgid="5124443975763747838">"botons multimèdia"</item>
+    <item msgid="4547883971364273343">"enfocament de l\'àudio"</item>
+    <item msgid="2603878814882344450">"volum general"</item>
+    <item msgid="7136963238377062018">"volum de la veu"</item>
+    <item msgid="4270236897655923007">"volum del to"</item>
+    <item msgid="6325739889222559394">"volum multimèdia"</item>
+    <item msgid="5762123934816216821">"volum de l\'alarma"</item>
+    <item msgid="785049718065337473">"volum de notificació"</item>
+    <item msgid="6700305533746877052">"volum del Bluetooth"</item>
+    <item msgid="2029227495214047094">"actiu"</item>
+    <item msgid="26109888160231211">"supervisa la ubicació"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Ubicació"</item>
@@ -300,11 +312,32 @@
     <item msgid="3493046322001257041">"Reprodueix l\'àudio"</item>
     <item msgid="136815868796597058">"Llegeix el porta-retalls"</item>
     <item msgid="5238692940326972503">"Modifica el porta-retalls"</item>
+    <item msgid="5753789168376302997">"Botons de multimèdia"</item>
+    <item msgid="3265262911688671938">"Enfocament de l\'àudio"</item>
+    <item msgid="2098976479485046797">"Volum general"</item>
+    <item msgid="5660213838861789350">"Volum de la veu"</item>
+    <item msgid="7983336752371254444">"Volum del to"</item>
+    <item msgid="7878027809189330917">"Volum de multimèdia"</item>
+    <item msgid="7260546305036218513">"Volum de l\'alarma"</item>
+    <item msgid="9103719301075748925">"Volum de notificació"</item>
+    <item msgid="7025966722295861512">"Volum de Bluetooth"</item>
+    <item msgid="4665183401128289653">"Actiu"</item>
+    <item msgid="8584357129746649222">"Ubicació"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Curt"</item>
     <item msgid="2560532955514699713">"Mitjà"</item>
     <item msgid="2372711992605524591">"Llarg"</item>
+  </string-array>
+  <string-array name="select_runtime_titles">
+    <item msgid="3574453009229338122">"Dalvik"</item>
+    <item msgid="8978402910750533864">"ART"</item>
+    <item msgid="7839859333977894115">"ART (depuració)"</item>
+  </string-array>
+  <string-array name="select_runtime_summaries">
+    <item msgid="6412880178297884701">"Fes servir Dalvik"</item>
+    <item msgid="5131846588686178907">"Fes servir ART"</item>
+    <item msgid="4530003713865319928">"Fes servir la compilació de depuració ART"</item>
   </string-array>
   <string-array name="hdcp_checking_titles">
     <item msgid="441827799230089869">"No comprovis mai"</item>
@@ -354,18 +387,23 @@
     <item msgid="3191973083884253830">"Cap"</item>
     <item msgid="9089630089455370183">"Logcat"</item>
     <item msgid="5397807424362304288">"Systrace (gràfics)"</item>
-    <item msgid="1340692776955662664">"Pila de trucades de glGetError"</item>
+    <item msgid="1340692776955662664">"Pila de trucades a glGetError"</item>
   </string-array>
   <string-array name="show_non_rect_clip_entries">
     <item msgid="993742912147090253">"Desactivada"</item>
-    <item msgid="675719912558941285">"Pintar blava regió retall no rect."</item>
-    <item msgid="1064373276095698656">"Dest. ordres dibuix provad. en verd"</item>
+    <item msgid="675719912558941285">"Àrea retall no rectangular en blau"</item>
+    <item msgid="1064373276095698656">"Ressalta ordres de dibuix provats en verd"</item>
   </string-array>
   <string-array name="track_frame_time_entries">
     <item msgid="2193584639058893150">"Desactivat"</item>
     <item msgid="2751513398307949636">"A la pantalla com a barres"</item>
     <item msgid="8272260411216018353">"A la pantalla com a línies"</item>
     <item msgid="120512413928262547">"A adb shell dumpsys gfxinfo"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"Desactiva"</item>
+    <item msgid="7688197031296835369">"Mostra les àrees modificades"</item>
+    <item msgid="8332661909019981149">"Mostra comptador modificacions"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Límit estàndard"</item>

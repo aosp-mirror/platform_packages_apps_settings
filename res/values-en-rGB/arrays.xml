@@ -233,7 +233,8 @@
     <item msgid="6358963769537892925">"Location"</item>
     <item msgid="255608127647030286">"Personal"</item>
     <item msgid="4588829735729884491">"Messaging"</item>
-    <item msgid="8971765125227378270">"Device"</item>
+    <item msgid="886742181977884584">"Media"</item>
+    <item msgid="7924928667052300589">"Device"</item>
   </string-array>
   <string-array name="app_ops_summaries">
     <item msgid="4979188868761515915">"coarse location"</item>
@@ -246,7 +247,7 @@
     <item msgid="6546959730920410907">"modify call log"</item>
     <item msgid="446877710771379667">"read calendar"</item>
     <item msgid="7674458294386319722">"modify calendar"</item>
-    <item msgid="8281201165558093009">"wi-fi scan"</item>
+    <item msgid="8281201165558093009">"Wi-Fi scan"</item>
     <item msgid="8694611243479480497">"notification"</item>
     <item msgid="7776439107987345446">"cell scan"</item>
     <item msgid="514615766544675057">"call phone"</item>
@@ -267,6 +268,17 @@
     <item msgid="5031552983987798163">"play audio"</item>
     <item msgid="8374996688066472414">"read clipboard"</item>
     <item msgid="3045529469061083747">"modify clipboard"</item>
+    <item msgid="5124443975763747838">"media buttons"</item>
+    <item msgid="4547883971364273343">"audio focus"</item>
+    <item msgid="2603878814882344450">"master volume"</item>
+    <item msgid="7136963238377062018">"voice volume"</item>
+    <item msgid="4270236897655923007">"ring volume"</item>
+    <item msgid="6325739889222559394">"media volume"</item>
+    <item msgid="5762123934816216821">"alarm volume"</item>
+    <item msgid="785049718065337473">"notification volume"</item>
+    <item msgid="6700305533746877052">"Bluetooth volume"</item>
+    <item msgid="2029227495214047094">"keep awake"</item>
+    <item msgid="26109888160231211">"monitor location"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Location"</item>
@@ -300,11 +312,32 @@
     <item msgid="3493046322001257041">"Play audio"</item>
     <item msgid="136815868796597058">"Read clipboard"</item>
     <item msgid="5238692940326972503">"Modify clipboard"</item>
+    <item msgid="5753789168376302997">"Media buttons"</item>
+    <item msgid="3265262911688671938">"Audio focus"</item>
+    <item msgid="2098976479485046797">"Master volume"</item>
+    <item msgid="5660213838861789350">"Voice volume"</item>
+    <item msgid="7983336752371254444">"Ring volume"</item>
+    <item msgid="7878027809189330917">"Media volume"</item>
+    <item msgid="7260546305036218513">"Alarm volume"</item>
+    <item msgid="9103719301075748925">"Notification volume"</item>
+    <item msgid="7025966722295861512">"Bluetooth volume"</item>
+    <item msgid="4665183401128289653">"Keep awake"</item>
+    <item msgid="8584357129746649222">"Location"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Short"</item>
     <item msgid="2560532955514699713">"Medium"</item>
     <item msgid="2372711992605524591">"Long"</item>
+  </string-array>
+  <string-array name="select_runtime_titles">
+    <item msgid="3574453009229338122">"Dalvik"</item>
+    <item msgid="8978402910750533864">"ART"</item>
+    <item msgid="7839859333977894115">"ART (debug)"</item>
+  </string-array>
+  <string-array name="select_runtime_summaries">
+    <item msgid="6412880178297884701">"Use Dalvik"</item>
+    <item msgid="5131846588686178907">"Use ART"</item>
+    <item msgid="4530003713865319928">"Use ART debug build"</item>
   </string-array>
   <string-array name="hdcp_checking_titles">
     <item msgid="441827799230089869">"Never check"</item>
@@ -366,6 +399,11 @@
     <item msgid="2751513398307949636">"On screen as bars"</item>
     <item msgid="8272260411216018353">"On screen as lines"</item>
     <item msgid="120512413928262547">"In adb shell dumpsys gfxinfo"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"Off"</item>
+    <item msgid="7688197031296835369">"Show overdraw areas"</item>
+    <item msgid="8332661909019981149">"Show overdraw counter"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Standard limit"</item>

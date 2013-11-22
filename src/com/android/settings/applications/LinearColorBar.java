@@ -12,18 +12,29 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 public class LinearColorBar extends LinearLayout {
     static final int LEFT_COLOR = 0xff0099cc;
     static final int MIDDLE_COLOR = 0xff0099cc;
     static final int RIGHT_COLOR = 0xff888888;
+    static final int GRAY_COLOR = 0xff555555;
+    static final int WHITE_COLOR = 0xffffffff;
 
     private float mRedRatio;
     private float mYellowRatio;
     private float mGreenRatio;
 
+    private int mLeftColor = LEFT_COLOR;
+    private int mMiddleColor = MIDDLE_COLOR;
+    private int mRightColor = RIGHT_COLOR;
+
+    private boolean mShowIndicator = true;
     private boolean mShowingGreen;
+
+    private OnRegionTappedListener mOnRegionTappedListener;
+    private int mColoredRegions = REGION_RED | REGION_YELLOW | REGION_GREEN;
 
     final Rect mRect = new Rect();
     final Paint mPaint = new Paint();
@@ -31,10 +42,22 @@ public class LinearColorBar extends LinearLayout {
     int mLastInterestingLeft, mLastInterestingRight;
     int mLineWidth;
 
+    int mLastLeftDiv, mLastRightDiv;
+    int mLastRegion;
+
     final Path mColorPath = new Path();
     final Path mEdgePath = new Path();
     final Paint mColorGradientPaint = new Paint();
     final Paint mEdgeGradientPaint = new Paint();
+
+    public static final int REGION_RED = 1<<0;
+    public static final int REGION_YELLOW = 1<<1;
+    public static final int REGION_GREEN = 1<<2;
+    public static final int REGION_ALL = REGION_RED | REGION_YELLOW | REGION_GREEN;
+
+    public interface OnRegionTappedListener {
+        public void onRegionTapped(int region);
+    }
 
     public LinearColorBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,10 +73,36 @@ public class LinearColorBar extends LinearLayout {
         
     }
 
+    public void setOnRegionTappedListener(OnRegionTappedListener listener) {
+        if (listener != mOnRegionTappedListener) {
+            mOnRegionTappedListener = listener;
+            setClickable(listener != null);
+        }
+    }
+
+    public void setColoredRegions(int regions) {
+        mColoredRegions = regions;
+        invalidate();
+    }
+
     public void setRatios(float red, float yellow, float green) {
         mRedRatio = red;
         mYellowRatio = yellow;
         mGreenRatio = green;
+        invalidate();
+    }
+
+    public void setColors(int red, int yellow, int green) {
+        mLeftColor = red;
+        mMiddleColor = yellow;
+        mRightColor = green;
+        updateIndicator();
+        invalidate();
+    }
+
+    public void setShowIndicator(boolean showIndicator) {
+        mShowIndicator = showIndicator;
+        updateIndicator();
         invalidate();
     }
 
@@ -70,12 +119,15 @@ public class LinearColorBar extends LinearLayout {
         if (off < 0) off = 0;
         mRect.top = off;
         mRect.bottom = getHeight();
+        if (!mShowIndicator) {
+            return;
+        }
         if (mShowingGreen) {
             mColorGradientPaint.setShader(new LinearGradient(
-                    0, 0, 0, off-2, RIGHT_COLOR&0xffffff, RIGHT_COLOR, Shader.TileMode.CLAMP));
+                    0, 0, 0, off-2, mRightColor &0xffffff, mRightColor, Shader.TileMode.CLAMP));
         } else {
             mColorGradientPaint.setShader(new LinearGradient(
-                    0, 0, 0, off-2, MIDDLE_COLOR&0xffffff, MIDDLE_COLOR, Shader.TileMode.CLAMP));
+                    0, 0, 0, off-2, mMiddleColor&0xffffff, mMiddleColor, Shader.TileMode.CLAMP));
         }
         mEdgeGradientPaint.setShader(new LinearGradient(
                 0, 0, 0, off/2, 0x00a0a0a0, 0xffa0a0a0, Shader.TileMode.CLAMP));
@@ -85,6 +137,50 @@ public class LinearColorBar extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         updateIndicator();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (mOnRegionTappedListener != null) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    final int x = (int) event.getX();
+                    if (x < mLastLeftDiv) {
+                        mLastRegion = REGION_RED;
+                    } else if (x < mLastRightDiv) {
+                        mLastRegion = REGION_YELLOW;
+                    } else {
+                        mLastRegion = REGION_GREEN;
+                    }
+                    invalidate();
+                } break;
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void dispatchSetPressed(boolean pressed) {
+        invalidate();
+    }
+
+    @Override
+    public boolean performClick() {
+        if (mOnRegionTappedListener != null && mLastRegion != 0) {
+            mOnRegionTappedListener.onRegionTapped(mLastRegion);
+            mLastRegion = 0;
+        }
+        return super.performClick();
+    }
+
+    private int pickColor(int color, int region) {
+        if (isPressed() && (mLastRegion&region) != 0) {
+            return WHITE_COLOR;
+        }
+        if ((mColoredRegions&region) == 0) {
+            return GRAY_COLOR;
+        }
+        return color;
     }
 
     @Override
@@ -111,7 +207,7 @@ public class LinearColorBar extends LinearLayout {
         if (mLastInterestingLeft != indicatorLeft || mLastInterestingRight != indicatorRight) {
             mColorPath.reset();
             mEdgePath.reset();
-            if (indicatorLeft < indicatorRight) {
+            if (mShowIndicator && indicatorLeft < indicatorRight) {
                 final int midTopY = mRect.top;
                 final int midBottomY = 0;
                 final int xoff = 2;
@@ -146,18 +242,21 @@ public class LinearColorBar extends LinearLayout {
         if (left < right) {
             mRect.left = left;
             mRect.right = right;
-            mPaint.setColor(LEFT_COLOR);
+            mPaint.setColor(pickColor(mLeftColor, REGION_RED));
             canvas.drawRect(mRect, mPaint);
             width -= (right-left);
             left = right;
         }
+
+        mLastLeftDiv = right;
+        mLastRightDiv = right2;
 
         right = right2;
 
         if (left < right) {
             mRect.left = left;
             mRect.right = right;
-            mPaint.setColor(MIDDLE_COLOR);
+            mPaint.setColor(pickColor(mMiddleColor, REGION_YELLOW));
             canvas.drawRect(mRect, mPaint);
             width -= (right-left);
             left = right;
@@ -168,7 +267,7 @@ public class LinearColorBar extends LinearLayout {
         if (left < right) {
             mRect.left = left;
             mRect.right = right;
-            mPaint.setColor(RIGHT_COLOR);
+            mPaint.setColor(pickColor(mRightColor, REGION_GREEN));
             canvas.drawRect(mRect, mPaint);
         }
     }

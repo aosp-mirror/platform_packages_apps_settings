@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:fragment="com.android.settings.accessibility.ToggleCaptioningPreferenceFragment"
+    android:key="captioning_preference_screen"
+    android:title="@string/accessibility_captioning_title" >
+
+    <PreferenceCategory
+        android:key="standard"
+        android:title="@string/captioning_standard_options_title" >
+        <com.android.settings.accessibility.LocalePreference
+            android:key="captioning_locale"
+            android:persistent="false"
+            android:summary="%s"
+            android:title="@string/captioning_locale" />
+
+        <ListPreference
+            android:entries="@array/captioning_font_size_selector_titles"
+            android:entryValues="@array/captioning_font_size_selector_values"
+            android:key="captioning_font_size"
+            android:persistent="false"
+            android:summary="%s"
+            android:title="@string/captioning_text_size" />
+
+        <com.android.settings.accessibility.PresetPreference
+            android:key="captioning_preset"
+            android:persistent="false"
+            android:title="@string/captioning_preset" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="custom"
+        android:title="@string/captioning_custom_options_title" >
+        <ListPreference
+            android:entries="@array/captioning_typeface_selector_titles"
+            android:entryValues="@array/captioning_typeface_selector_values"
+            android:key="captioning_typeface"
+            android:persistent="false"
+            android:summary="%s"
+            android:title="@string/captioning_typeface" />
+
+        <com.android.settings.accessibility.ColorPreference
+            android:key="captioning_foreground_color"
+            android:persistent="false"
+            android:title="@string/captioning_foreground_color" />
+
+        <com.android.settings.accessibility.EdgeTypePreference
+            android:key="captioning_edge_type"
+            android:persistent="false"
+            android:title="@string/captioning_edge_type" />
+
+        <com.android.settings.accessibility.ColorPreference
+            android:dependency="captioning_edge_type"
+            android:key="captioning_edge_color"
+            android:persistent="false"
+            android:title="@string/captioning_edge_color" />
+        <com.android.settings.accessibility.ColorPreference
+            android:key="captioning_background_color"
+            android:persistent="false"
+            android:title="@string/captioning_background_color" />
+        <com.android.settings.accessibility.ColorPreference
+            android:dependency="captioning_background_color"
+            android:key="captioning_background_opacity"
+            android:persistent="false"
+            android:title="@string/captioning_background_opacity" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

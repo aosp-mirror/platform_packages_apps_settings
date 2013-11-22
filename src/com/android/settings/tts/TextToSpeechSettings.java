@@ -42,6 +42,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Checkable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -60,6 +61,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     /** Preference key for the TTS rate selection dialog. */
     private static final String KEY_DEFAULT_RATE = "tts_default_rate";
 
+    /** Preference key for the TTS status field. */
+    private static final String KEY_STATUS = "tts_status";
+
     /**
      * Preference key for the engine selection preference.
      */
@@ -75,6 +79,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private PreferenceCategory mEnginePreferenceCategory;
     private ListPreference mDefaultRatePref;
     private Preference mPlayExample;
+    private Preference mEngineStatus;
 
     private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
 
@@ -97,6 +102,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private TextToSpeech mTts = null;
     private TtsEngines mEnginesHelper = null;
+
+    private String mSampleText = "";
+
+    /**
+     * Default locale used by selected TTS engine, null if not connected to any engine.
+     */
+    private Locale mCurrentDefaultLocale;
+
+    /**
+     * List of available locals of selected TTS engine, as returned by
+     * {@link TextToSpeech.Engine#ACTION_CHECK_TTS_DATA} activity. If empty, then activity
+     * was not yet called.
+     */
+    private List<String> mAvailableStrLocals;
 
     /**
      * The initialization listener used when we are initalizing the settings
@@ -131,16 +150,34 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         mPlayExample = findPreference(KEY_PLAY_EXAMPLE);
         mPlayExample.setOnPreferenceClickListener(this);
+        mPlayExample.setEnabled(false);
 
         mEnginePreferenceCategory = (PreferenceCategory) findPreference(
                 KEY_ENGINE_PREFERENCE_SECTION);
         mDefaultRatePref = (ListPreference) findPreference(KEY_DEFAULT_RATE);
+
+        mEngineStatus = findPreference(KEY_STATUS);
+        updateEngineStatus(R.string.tts_status_checking);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
         mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
 
         setTtsUtteranceProgressListener();
         initSettings();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mTts == null || mCurrentDefaultLocale == null) {
+            return;
+        }
+        Locale ttsDefaultLocale = mTts.getDefaultLanguage();
+        if (mCurrentDefaultLocale != null && !mCurrentDefaultLocale.equals(ttsDefaultLocale)) {
+            updateWidgetState(false);
+            checkDefaultLocale();
+        }
     }
 
     private void setTtsUtteranceProgressListener() {
@@ -206,6 +243,80 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     }
 
     /**
+     * Called when the TTS engine is initialized.
+     */
+    public void onInitEngine(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
+            checkDefaultLocale();
+        } else {
+            if (DBG) Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
+            updateWidgetState(false);
+        }
+    }
+
+    private void checkDefaultLocale() {
+        Locale defaultLocale = mTts.getDefaultLanguage();
+        if (defaultLocale == null) {
+            Log.e(TAG, "Failed to get default language from engine " + mCurrentEngine);
+            updateWidgetState(false);
+            updateEngineStatus(R.string.tts_status_not_supported);
+            return;
+        }
+
+        mCurrentDefaultLocale = defaultLocale;
+
+        int defaultAvailable = mTts.setLanguage(defaultLocale);
+        if (evaluateDefaultLocale()) {
+            getSampleText();
+        }
+    }
+
+    private boolean evaluateDefaultLocale() {
+        // Check if we are connected to the engine, and CHECK_VOICE_DATA returned list
+        // of available languages.
+        if (mCurrentDefaultLocale == null || mAvailableStrLocals == null) {
+            return false;
+        }
+        int defaultAvailable = mTts.setLanguage(mCurrentDefaultLocale);
+
+        // Check if language is listed in CheckVoices Action result as available voice.
+        String defaultLocaleStr = mCurrentDefaultLocale.getISO3Language();
+        boolean notInAvailableLangauges = true;
+        if (!TextUtils.isEmpty(mCurrentDefaultLocale.getISO3Country())) {
+            defaultLocaleStr += "-" + mCurrentDefaultLocale.getISO3Country();
+        }
+        if (!TextUtils.isEmpty(mCurrentDefaultLocale.getVariant())) {
+            defaultLocaleStr += "-" + mCurrentDefaultLocale.getVariant();
+        }
+
+        for (String loc : mAvailableStrLocals) {
+            if (loc.equalsIgnoreCase(defaultLocaleStr)) {
+              notInAvailableLangauges = false;
+              break;
+            }
+        }
+
+        if (defaultAvailable == TextToSpeech.LANG_NOT_SUPPORTED ||
+                defaultAvailable == TextToSpeech.LANG_MISSING_DATA ||
+                notInAvailableLangauges) {
+            if (DBG) Log.d(TAG, "Default locale for this TTS engine is not supported.");
+            updateEngineStatus(R.string.tts_status_not_supported);
+            updateWidgetState(false);
+            return false;
+        } else {
+            if (isNetworkRequiredForSynthesis()) {
+                updateEngineStatus(R.string.tts_status_requires_network);
+            } else {
+                updateEngineStatus(R.string.tts_status_ok);
+            }
+            updateWidgetState(true);
+            return true;
+        }
+    }
+
+
+    /**
      * Ask the current default engine to return a string of sample text to be
      * spoken to the user.
      */
@@ -214,23 +325,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         if (TextUtils.isEmpty(currentEngine)) currentEngine = mTts.getDefaultEngine();
 
-
-        Locale defaultLocale = mTts.getDefaultLanguage();
-        if (defaultLocale == null) {
-            Log.e(TAG, "Failed to get default language from engine " + currentEngine);
-            return;
-        }
-        mTts.setLanguage(defaultLocale);
-
         // TODO: This is currently a hidden private API. The intent extras
         // and the intent action should be made public if we intend to make this
         // a public API. We fall back to using a canned set of strings if this
         // doesn't work.
         Intent intent = new Intent(TextToSpeech.Engine.ACTION_GET_SAMPLE_TEXT);
 
-        intent.putExtra("language", defaultLocale.getLanguage());
-        intent.putExtra("country", defaultLocale.getCountry());
-        intent.putExtra("variant", defaultLocale.getVariant());
+        intent.putExtra("language", mCurrentDefaultLocale.getLanguage());
+        intent.putExtra("country", mCurrentDefaultLocale.getCountry());
+        intent.putExtra("variant", mCurrentDefaultLocale.getVariant());
         intent.setPackage(currentEngine);
 
         try {
@@ -238,19 +341,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             startActivityForResult(intent, GET_SAMPLE_TEXT);
         } catch (ActivityNotFoundException ex) {
             Log.e(TAG, "Failed to get sample text, no activity found for " + intent + ")");
-        }
-    }
-
-    /**
-     * Called when the TTS engine is initialized.
-     */
-    public void onInitEngine(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            updateWidgetState(true);
-            if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
-        } else {
-            if (DBG) Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
-            updateWidgetState(false);
         }
     }
 
@@ -280,11 +370,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                 }
             }
         }
-        return null;
+        return getString(R.string.tts_default_sample_string);
     }
 
     private boolean isNetworkRequiredForSynthesis() {
-        Set<String> features = mTts.getFeatures(mTts.getLanguage());
+        Set<String> features = mTts.getFeatures(mCurrentDefaultLocale);
+        if (features == null) {
+          return false;
+        }
         return features.contains(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS) &&
                 !features.contains(TextToSpeech.Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS);
     }
@@ -301,24 +394,25 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             if (DBG) Log.d(TAG, "Using default sample text :" + sample);
         }
 
-        if (sample != null && mTts != null) {
-            // The engine is guaranteed to have been initialized here
-            // because this preference is not enabled otherwise.
-
-            final boolean networkRequired = isNetworkRequiredForSynthesis();
-            if (!networkRequired || networkRequired &&
-                    (mTts.isLanguageAvailable(mTts.getLanguage()) >= TextToSpeech.LANG_AVAILABLE)) {
-                HashMap<String, String> params = new HashMap<String, String>();
-                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "Sample");
-
-                mTts.speak(sample, TextToSpeech.QUEUE_FLUSH, params);
-            } else {
-                Log.w(TAG, "Network required for sample synthesis for requested language");
-                displayNetworkAlert();
-            }
+        mSampleText = sample;
+        if (mSampleText != null) {
+            updateWidgetState(true);
         } else {
-            // TODO: Display an error here to the user.
-            Log.e(TAG, "Did not have a sample string for the requested language");
+            Log.e(TAG, "Did not have a sample string for the requested language. Using default");
+        }
+    }
+
+    private void speakSampleText() {
+        final boolean networkRequired = isNetworkRequiredForSynthesis();
+        if (!networkRequired || networkRequired &&
+                (mTts.isLanguageAvailable(mCurrentDefaultLocale) >= TextToSpeech.LANG_AVAILABLE)) {
+            HashMap<String, String> params = new HashMap<String, String>();
+            params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "Sample");
+
+            mTts.speak(mSampleText, TextToSpeech.QUEUE_FLUSH, params);
+        } else {
+            Log.w(TAG, "Network required for sample synthesis for requested language");
+            displayNetworkAlert();
         }
     }
 
@@ -349,7 +443,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (preference == mPlayExample) {
             // Get the sample text from the TTS engine; onActivityResult will do
             // the actual speaking
-            getSampleText();
+            speakSampleText();
             return true;
         }
 
@@ -359,6 +453,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private void updateWidgetState(boolean enable) {
         mPlayExample.setEnabled(enable);
         mDefaultRatePref.setEnabled(enable);
+        mEngineStatus.setEnabled(enable);
+    }
+
+    private void updateEngineStatus(int resourceId) {
+        Locale locale = mCurrentDefaultLocale;
+        if (locale == null) {
+            locale = Locale.getDefault();
+        }
+        mEngineStatus.setSummary(getString(resourceId, locale.getDisplayName()));
     }
 
     private void displayNetworkAlert() {
@@ -379,6 +482,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         // Disable the "play sample text" preference and the speech
         // rate preference while the engine is being swapped.
         updateWidgetState(false);
+        updateEngineStatus(R.string.tts_status_checking);
 
         // Keep track of the previous engine that was being used. So that
         // we can reuse the previous engine.
@@ -463,6 +567,17 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
 
+        mAvailableStrLocals = data.getStringArrayListExtra(
+            TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
+        if (mAvailableStrLocals == null) {
+            Log.e(TAG, "Voice data check complete, but no available voices found");
+            // Set mAvailableStrLocals to empty list
+            mAvailableStrLocals = new ArrayList<String>();
+        }
+        if (evaluateDefaultLocale()) {
+            getSampleText();
+        }
+
         final int engineCount = mEnginePreferenceCategory.getPreferenceCount();
         for (int i = 0; i < engineCount; ++i) {
             final Preference p = mEnginePreferenceCategory.getPreference(i);
@@ -474,8 +589,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                 }
             }
         }
-
-        updateWidgetState(true);
     }
 
     @Override

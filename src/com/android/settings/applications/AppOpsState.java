@@ -101,12 +101,16 @@ public class AppOpsState {
                     AppOpsManager.OP_FINE_LOCATION,
                     AppOpsManager.OP_GPS,
                     AppOpsManager.OP_WIFI_SCAN,
-                    AppOpsManager.OP_NEIGHBORING_CELLS },
+                    AppOpsManager.OP_NEIGHBORING_CELLS,
+                    AppOpsManager.OP_MONITOR_LOCATION,
+                    AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION},
             new boolean[] { true,
                     true,
                     false,
                     false,
-                    false }
+                    false,
+                    false,
+                    false}
             );
 
     public static final OpsTemplate PERSONAL_TEMPLATE = new OpsTemplate(
@@ -149,29 +153,53 @@ public class AppOpsState {
                     true }
             );
 
-    public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
+    public static final OpsTemplate MEDIA_TEMPLATE = new OpsTemplate(
             new int[] { AppOpsManager.OP_VIBRATE,
-                    AppOpsManager.OP_POST_NOTIFICATION,
+                    AppOpsManager.OP_CAMERA,
+                    AppOpsManager.OP_RECORD_AUDIO,
+                    AppOpsManager.OP_PLAY_AUDIO,
+                    AppOpsManager.OP_TAKE_MEDIA_BUTTONS,
+                    AppOpsManager.OP_TAKE_AUDIO_FOCUS,
+                    AppOpsManager.OP_AUDIO_MASTER_VOLUME,
+                    AppOpsManager.OP_AUDIO_VOICE_VOLUME,
+                    AppOpsManager.OP_AUDIO_RING_VOLUME,
+                    AppOpsManager.OP_AUDIO_MEDIA_VOLUME,
+                    AppOpsManager.OP_AUDIO_ALARM_VOLUME,
+                    AppOpsManager.OP_AUDIO_NOTIFICATION_VOLUME,
+                    AppOpsManager.OP_AUDIO_BLUETOOTH_VOLUME, },
+            new boolean[] { false,
+                    true,
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false }
+            );
+
+    public static final OpsTemplate DEVICE_TEMPLATE = new OpsTemplate(
+            new int[] { AppOpsManager.OP_POST_NOTIFICATION,
                     AppOpsManager.OP_ACCESS_NOTIFICATIONS,
                     AppOpsManager.OP_CALL_PHONE,
                     AppOpsManager.OP_WRITE_SETTINGS,
                     AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                    AppOpsManager.OP_CAMERA,
-                    AppOpsManager.OP_RECORD_AUDIO,
-                    AppOpsManager.OP_PLAY_AUDIO },
+                    AppOpsManager.OP_WAKE_LOCK },
             new boolean[] { false,
-                    false,
                     true,
                     true,
                     true,
                     true,
-                    true,
-                    true,
-                    true }
+                    true,  }
             );
 
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
-            LOCATION_TEMPLATE, PERSONAL_TEMPLATE, MESSAGING_TEMPLATE, DEVICE_TEMPLATE
+            LOCATION_TEMPLATE, PERSONAL_TEMPLATE, MESSAGING_TEMPLATE,
+            MEDIA_TEMPLATE, DEVICE_TEMPLATE
     };
 
     /**

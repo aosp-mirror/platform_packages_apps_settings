@@ -16,14 +16,18 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.http.SslCertificate;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.UserManager;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
@@ -51,6 +55,16 @@ import com.android.org.conscrypt.TrustedCertificateStore;
 public class TrustedCredentialsSettings extends Fragment {
 
     private static final String TAG = "TrustedCredentialsSettings";
+
+    private UserManager mUserManager;
+
+    private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
+
+    private static final int REQUEST_PIN_CHALLENGE = 12309;
+    // If the restriction PIN is entered correctly.
+    private boolean mChallengeSucceeded;
+    private boolean mChallengeRequested;
+
 
     private enum Tab {
         SYSTEM("system",
@@ -142,6 +156,13 @@ public class TrustedCredentialsSettings extends Fragment {
 
     private TabHost mTabHost;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+    }
+
+
     @Override public View onCreateView(
             LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         mTabHost = (TabHost) inflater.inflate(R.layout.trusted_credentials, parent, false);
@@ -149,6 +170,10 @@ public class TrustedCredentialsSettings extends Fragment {
         addTab(Tab.SYSTEM);
         // TODO add Install button on Tab.USER to go to CertInstaller like KeyChainActivity
         addTab(Tab.USER);
+        if (getActivity().getIntent() != null &&
+                USER_ACTION.equals(getActivity().getIntent().getAction())) {
+            mTabHost.setCurrentTabByTag(Tab.USER.mTag);
+        }
         return mTabHost;
     }
 
@@ -355,6 +380,11 @@ public class TrustedCredentialsSettings extends Fragment {
         removeButton.setText(certHolder.mTab.getButtonLabel(certHolder));
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
+                if (mUserManager.hasRestrictionsChallenge() && !mChallengeSucceeded) {
+                    ensurePin();
+                    return;
+                }
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(certHolder.mTab.getButtonConfirmation(certHolder));
                 builder.setPositiveButton(
@@ -378,6 +408,35 @@ public class TrustedCredentialsSettings extends Fragment {
 
         certDialog.show();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_PIN_CHALLENGE) {
+            mChallengeRequested = false;
+            if (resultCode == Activity.RESULT_OK) {
+                mChallengeSucceeded = true;
+            }
+            return;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void ensurePin() {
+        if (!mChallengeSucceeded) {
+            final UserManager um = UserManager.get(getActivity());
+            if (!mChallengeRequested) {
+                if (um.hasRestrictionsChallenge()) {
+                    Intent requestPin =
+                            new Intent(Intent.ACTION_RESTRICTIONS_CHALLENGE);
+                    startActivityForResult(requestPin, REQUEST_PIN_CHALLENGE);
+                    mChallengeRequested = true;
+                }
+            }
+        }
+        mChallengeSucceeded = false;
+    }
+
 
     private class AliasOperation extends AsyncTask<Void, Void, Boolean> {
         private final CertHolder mCertHolder;

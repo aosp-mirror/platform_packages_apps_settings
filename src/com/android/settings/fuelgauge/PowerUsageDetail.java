@@ -36,6 +36,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -49,11 +50,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.DisplaySettings;
-import com.android.settings.LocationSettings;
 import com.android.settings.R;
 import com.android.settings.WirelessSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.location.LocationSettings;
 import com.android.settings.wifi.WifiSettings;
 
 public class PowerUsageDetail extends Fragment implements Button.OnClickListener {
@@ -107,6 +108,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     public static final String EXTRA_ICON_PACKAGE = "iconPackage"; // String
     public static final String EXTRA_NO_COVERAGE = "noCoverage";
     public static final String EXTRA_ICON_ID = "iconId"; // Int
+    public static final String EXTRA_SHOW_LOCATION_BUTTON = "showLocationButton";  // Boolean
 
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
@@ -128,13 +130,14 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     private double mNoCoverage; // Percentage of time that there was no coverage
 
     private boolean mUsesGps;
+    private boolean mShowLocationButton;
 
     private static final String TAG = "PowerUsageDetail";
     private String[] mPackages;
 
     ApplicationInfo mApp;
     ComponentName mInstaller;
-    
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -176,6 +179,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         mNoCoverage = args.getDouble(EXTRA_NO_COVERAGE, 0);
         String iconPackage = args.getString(EXTRA_ICON_PACKAGE);
         int iconId = args.getInt(EXTRA_ICON_ID, 0);
+        mShowLocationButton = args.getBoolean(EXTRA_SHOW_LOCATION_BUTTON);
         if (!TextUtils.isEmpty(iconPackage)) {
             try {
                 final PackageManager pm = getActivity().getPackageManager();
@@ -316,6 +320,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 switch (mTypes[i]) {
                     case R.string.usage_type_data_recv:
                     case R.string.usage_type_data_send:
+                    case R.string.usage_type_data_wifi_recv:
+                    case R.string.usage_type_data_wifi_send:
                         final long bytes = (long) (mValues[i]);
                         value = Formatter.formatFileSize(getActivity(), bytes);
                         break;
@@ -327,7 +333,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                         mUsesGps = true;
                         // Fall through
                     default:
-                        value = Utils.formatElapsedTime(getActivity(), mValues[i]);
+                        value = Utils.formatElapsedTime(getActivity(), mValues[i], true);
                 }
                 ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_detail_item_text,
                         null);
@@ -348,20 +354,21 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
             pi = packages != null ? pm.getPackageInfo(packages[0], 0) : null;
         } catch (NameNotFoundException nnfe) { /* Nothing */ }
         ApplicationInfo ai = pi != null? pi.applicationInfo : null;
-        boolean isSystem = ai != null? (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0 : false;
 
         boolean removeHeader = true;
         switch (mDrainType) {
             case APP:
-                // If it is a Java application and it's not a system application
-                if (packages != null && !isSystem) {
+                // If it is a Java application and only one package is associated with the Uid
+                if (packages != null && packages.length == 1) {
                     addControl(R.string.battery_action_app_details,
                             R.string.battery_sugg_apps_info, ACTION_APP_DETAILS);
                     removeHeader = false;
                     // If the application has a settings screen, jump to  that
                     // TODO:
                 }
-                if (mUsesGps) {
+                // If power usage detail page is launched from location page, suppress "Location"
+                // button to prevent circular loops.
+                if (mUsesGps && mShowLocationButton) {
                     addControl(R.string.location_settings_title,
                             R.string.battery_sugg_apps_gps, ACTION_LOCATION_SETTINGS);
                     removeHeader = false;
@@ -464,7 +471,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 Uri.fromParts("package", mPackages[0], null));
         intent.putExtra(Intent.EXTRA_PACKAGES, mPackages);
         intent.putExtra(Intent.EXTRA_UID, mUid);
-        intent.putExtra(Intent.EXTRA_USER_HANDLE, mUid);
+        intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mUid));
         getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
                 Activity.RESULT_CANCELED, null, null);
     }

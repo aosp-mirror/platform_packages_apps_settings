@@ -83,6 +83,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     private OnClickListener mDeleteGroupListener;
     private WifiP2pPeer mSelectedWifiPeer;
     private WifiP2pPersistentGroup mSelectedGroup;
+    private String mSelectedGroupName;
     private EditText mDeviceNameText;
 
     private boolean mWifiP2pEnabled;
@@ -102,6 +103,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
     private static final String SAVE_DIALOG_PEER = "PEER_STATE";
     private static final String SAVE_DEVICE_NAME = "DEV_NAME";
+    private static final String SAVE_SELECTED_GROUP = "GROUP_NAME";
 
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
@@ -160,6 +162,10 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
     };
 
+    public WifiP2pSettings() {
+        if (DBG) Log.d(TAG, "Creating WifiP2pSettings ...");
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         addPreferencesFromResource(R.xml.wifi_p2p_settings);
@@ -190,6 +196,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DEVICE_NAME)) {
             mSavedDeviceName = savedInstanceState.getString(SAVE_DEVICE_NAME);
+        }
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_SELECTED_GROUP)) {
+            mSelectedGroupName = savedInstanceState.getString(SAVE_SELECTED_GROUP);
         }
 
         mRenameListener = new OnClickListener() {
@@ -259,17 +268,28 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     if (mWifiP2pManager != null) {
-                        mWifiP2pManager.deletePersistentGroup(mChannel,
-                                mSelectedGroup.getNetworkId(),
-                                new WifiP2pManager.ActionListener() {
-                            public void onSuccess() {
-                                if (DBG) Log.d(TAG, " delete group success");
-                            }
-                            public void onFailure(int reason) {
-                                if (DBG) Log.d(TAG, " delete group fail " + reason);
-                            }
-                        });
+                        if (mSelectedGroup != null) {
+                            if (DBG) Log.d(TAG, " deleting group " + mSelectedGroup.getGroupName());
+                            mWifiP2pManager.deletePersistentGroup(mChannel,
+                                    mSelectedGroup.getNetworkId(),
+                                    new WifiP2pManager.ActionListener() {
+                                public void onSuccess() {
+                                    if (DBG) Log.d(TAG, " delete group success");
+                                }
+                                public void onFailure(int reason) {
+                                    if (DBG) Log.d(TAG, " delete group fail " + reason);
+                                }
+                            });
+                            mSelectedGroup = null;
+                        } else {
+                            if (DBG) Log.w(TAG, " No selected group to delete!" );
+                        }
                     }
+                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    if (DBG) {
+                        Log.d(TAG, " forgetting selected group " + mSelectedGroup.getGroupName());
+                    }
+                    mSelectedGroup = null;
                 }
             }
         };
@@ -453,8 +473,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setMessage(getActivity().getString(stringId))
                 .setPositiveButton(getActivity().getString(R.string.dlg_ok), mDeleteGroupListener)
-                .setNegativeButton(getActivity().getString(R.string.dlg_cancel), null)
-                .create();
+                .setNegativeButton(getActivity().getString(R.string.dlg_cancel),
+                        mDeleteGroupListener).create();
             return dialog;
         }
         return null;
@@ -467,6 +487,9 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
         if (mDeviceNameText != null) {
             outState.putString(SAVE_DEVICE_NAME, mDeviceNameText.getText().toString());
+        }
+        if (mSelectedGroup != null) {
+            outState.putString(SAVE_SELECTED_GROUP, mSelectedGroup.getGroupName());
         }
     }
 
@@ -488,7 +511,20 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
         for (WifiP2pGroup group: groups.getGroupList()) {
             if (DBG) Log.d(TAG, " group " + group);
-            mPersistentGroup.addPreference(new WifiP2pPersistentGroup(getActivity(), group));
+            WifiP2pPersistentGroup wppg = new WifiP2pPersistentGroup(getActivity(), group);
+            mPersistentGroup.addPreference(wppg);
+            if (wppg.getGroupName().equals(mSelectedGroupName)) {
+                if (DBG) Log.d(TAG, "Selecting group " + wppg.getGroupName());
+                mSelectedGroup = wppg;
+                mSelectedGroupName = null;
+            }
+        }
+        if (mSelectedGroupName != null) {
+            // Looks like there's a dialog pending getting user confirmation to delete the
+            // selected group. When user hits OK on that dialog, we won't do anything; but we
+            // shouldn't be in this situation in first place, because these groups are persistent
+            // groups and they shouldn't just get deleted!
+            Log.w(TAG, " Selected group " + mSelectedGroupName + " disappered on next query ");
         }
     }
 
