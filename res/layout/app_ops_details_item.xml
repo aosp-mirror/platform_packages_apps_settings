@@ -58,6 +58,16 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textAlignment="viewStart" />
 
+    <TextView
+        android:id="@+id/op_counts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/op_icon"
+        android:layout_toStartOf="@+id/switchWidget"
+        android:layout_below="@id/op_time"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="viewStart" />
+
     <Switch android:id="@+id/switchWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
