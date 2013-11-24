@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.purity.notificationlight;
+package com.android.settings.notificationlight;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -93,8 +93,7 @@ public class ApplicationLightPreference extends DialogPreference {
      * @param onValue
      * @param offValue
      */
-    public ApplicationLightPreference(Context context, int color, int onValue,
-        int offValue, boolean onOffChangeable) {
+    public ApplicationLightPreference(Context context, int color, int onValue, int offValue, boolean onOffChangeable) {
         super(context, null);
         mColorValue = color;
         mOnValue = onValue;
@@ -125,15 +124,12 @@ public class ApplicationLightPreference extends DialogPreference {
     }
 
     private void updatePreferenceViews() {
-        final int width = (int) mResources.getDimension(
-            R.dimen.device_memory_usage_button_width);
-        final int height = (int) mResources.getDimension(
-            R.dimen.device_memory_usage_button_height);
+        final int width = (int) mResources.getDimension(R.dimen.device_memory_usage_button_width);
+        final int height = (int) mResources.getDimension(R.dimen.device_memory_usage_button_height);
 
         if (mLightColorView != null) {
             mLightColorView.setEnabled(true);
-            mLightColorView.setImageDrawable(
-                createRectShape(width, height, 0xFF000000 + mColorValue));
+            mLightColorView.setImageDrawable(createRectShape(width, height, 0xFF000000 + mColorValue));
         }
         if (mOnValueView != null) {
             mOnValueView.setText(mapLengthValue(mOnValue));
@@ -152,10 +148,10 @@ public class ApplicationLightPreference extends DialogPreference {
     protected void showDialog(Bundle state) {
         super.showDialog(state);
 
+        if (getDialog() instanceof LightSettingsDialog) {
         final LightSettingsDialog d = (LightSettingsDialog) getDialog();
 
-        // Intercept the click on the middle button
-        // to show the test dialog and prevent the onDismiss
+        // Intercept the click on the middle button to show the test dialog and prevent the onDismiss
         d.findViewById(android.R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,10 +161,12 @@ public class ApplicationLightPreference extends DialogPreference {
                 showTestDialog(d.getColor() - 0xFF000000, onTime, offTime);
             }
         });
+        }
     }
 
     @Override
     protected Dialog createDialog() {
+        android.util.Log.e("XPLOD", "XPLOD/ LOLWTF");
         final LightSettingsDialog d = new LightSettingsDialog(getContext(),
                 0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable);
         d.setAlphaSliderVisible(false);
@@ -196,7 +194,7 @@ public class ApplicationLightPreference extends DialogPreference {
         final Context context = getContext();
 
         if (mReceiver != null) {
-            context.getApplicationContext().unregisterReceiver(mReceiver);
+            context.unregisterReceiver(mReceiver);
         }
         if (mTestDialog != null) {
             mTestDialog.dismiss();
@@ -206,17 +204,16 @@ public class ApplicationLightPreference extends DialogPreference {
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
-        context.getApplicationContext().registerReceiver(mReceiver, filter);
+        context.registerReceiver(mReceiver, filter);
 
         mTestDialog = new AlertDialog.Builder(context)
                 .setTitle(R.string.dialog_test)
                 .setMessage(R.string.dialog_test_message)
-                .setPositiveButton(R.string.dialog_test_button,
-                    new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.dialog_test_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (mReceiver != null) {
-                            context.getApplicationContext().unregisterReceiver(mReceiver);
+                            context.unregisterReceiver(mReceiver);
                             mReceiver = null;
                         }
                     }
@@ -311,7 +308,7 @@ public class ApplicationLightPreference extends DialogPreference {
                 nm.notify(1, n);
             } else if(intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 nm.cancel(1);
-                context.getApplicationContext().unregisterReceiver(mReceiver);
+                context.unregisterReceiver(mReceiver);
                 mReceiver = null;
                 mTestDialog.dismiss();
                 mTestDialog = null;

@@ -25,9 +25,9 @@
             android:key="pulse_enabled"
             android:title="@string/notification_pulse_title" />
 
-        <com.android.settings.purity.notificationlight.ApplicationLightPreference
+        <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="default"
-            android:title="@string/default_string"
+            android:title="@string/notification_light_default_value"
             android:persistent="false" />
 
         <CheckBoxPreference
@@ -40,12 +40,12 @@
         android:key="phone_list"
         android:title="@string/notification_light_phonelist_title" >
 
-            <com.android.settings.purity.notificationlight.ApplicationLightPreference
+            <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="missed_call"
             android:title="@string/notification_light_missed_call_title"
             android:persistent="false" />
 
-        <com.android.settings.purity.notificationlight.ApplicationLightPreference
+        <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="voicemail"
             android:title="@string/notification_light_voicemail_title"
             android:persistent="false" />
