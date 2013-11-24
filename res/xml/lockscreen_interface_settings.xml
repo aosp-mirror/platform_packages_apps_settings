@@ -16,10 +16,18 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
-     <CheckBoxPreference
-        android:key="lockscreen_maximize_widgets"
-        android:persistent="false"
-        android:title="@string/lockscreen_maximize_widgets_title"
-        android:summary="@string/lockscreen_maximize_widgets_summary" />
+    <PreferenceCategory
+        android:title="@string/lockscreen_widgets_category_title"
+        android:key="lockscreen_widgets_category" >
 
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="lockscreen_maximize_widgets"
+            android:summary="@string/lockscreen_maximize_widgets_summary"
+            android:title="@string/lockscreen_maximize_widgets_title" />
+
+        <CheckBoxPreference
+            android:key="keyguard_enable_widgets"
+            android:title="@string/lockscreen_enable_widgets_title" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

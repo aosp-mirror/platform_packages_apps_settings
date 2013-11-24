@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2012 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,64 +16,106 @@
 
 package com.android.settings.purity;
 
-import android.content.ContentResolver;
+import android.app.ActivityManager;
+import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
-public class LockscreenInterface extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class LockscreenInterface extends SettingsPreferenceFragment {
     private static final String TAG = "LockscreenInterface";
 
-    private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
+    private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+    private static final String LOCKSCREEN_WIDGETS_CATEGORY = "lockscreen_widgets_category";
 
-    private CheckBoxPreference mMaximizeWidgets;
+    private CheckBoxPreference mEnableKeyguardWidgets;
 
-    public boolean hasButtons() {
-        return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
-    }
+    private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+    private DevicePolicyManager mDPM;
+    private boolean mIsPrimary;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.lockscreen_interface_settings);
+        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
-        if (!Utils.isPhone(getActivity())) {
-            getPreferenceScreen().removePreference(mMaximizeWidgets);
-            mMaximizeWidgets = null;
+        addPreferencesFromResource(R.xml.lockscreen_interface_settings);
+        PreferenceCategory widgetsCategory = (PreferenceCategory) findPreference(LOCKSCREEN_WIDGETS_CATEGORY);
+
+        // Determine which user is logged in
+        mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+        if (mIsPrimary) {
+            // Its the primary user, show all the settings
+            if (!Utils.isPhone(getActivity())) {
+                if (widgetsCategory != null) {
+                    widgetsCategory.removePreference(
+                            findPreference(Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS));
+                }
+            }
+
         } else {
-            mMaximizeWidgets.setOnPreferenceChangeListener(this);
+            // Secondary user is logged in, remove all primary user specific preferences
+        }
+
+        // This applies to all users
+        // Enable or disable keyguard widget checkbox based on DPM state
+        mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
+        if (mEnableKeyguardWidgets != null) {
+            if (ActivityManager.isLowRamDeviceStatic()) {
+                // Widgets take a lot of RAM, so disable them on low-memory devices
+                if (widgetsCategory != null) {
+                    widgetsCategory.removePreference(findPreference(KEY_ENABLE_WIDGETS));
+                    mEnableKeyguardWidgets = null;
+                }
+            } else {
+                final boolean disabled = (0 != (mDPM.getKeyguardDisabledFeatures(null)
+                        & DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL));
+                if (disabled) {
+                    mEnableKeyguardWidgets.setSummary(
+                            R.string.security_enable_widgets_disabled_summary);
+                } else {
+                    mEnableKeyguardWidgets.setSummary(R.string.lockscreen_enable_widgets_summary);
+                }
+                mEnableKeyguardWidgets.setEnabled(!disabled);
+            }
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        ContentResolver cr = getActivity().getContentResolver();
-        if (mMaximizeWidgets != null) {
-            mMaximizeWidgets.setChecked(Settings.System.getInt(cr,
-                    Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
+        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if (mEnableKeyguardWidgets != null) {
+            mEnableKeyguardWidgets.setChecked(lockPatternUtils.getWidgetsEnabled());
         }
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        ContentResolver cr = getActivity().getContentResolver();
-        if (preference == mMaximizeWidgets) {
-            boolean value = (Boolean) objValue;
-            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, value ? 1 : 0);
-            return true;
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        final String key = preference.getKey();
+
+        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if (KEY_ENABLE_WIDGETS.equals(key)) {
+            lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
         }
-        return false;
+
+        return true;
     }
+
+    public static class DeviceAdminLockscreenReceiver extends DeviceAdminReceiver {}
+
 }
