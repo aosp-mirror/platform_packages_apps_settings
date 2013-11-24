@@ -849,18 +849,66 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="nav_button_color_mode_summary">Change the navigation bar button color mode</string>
     <string name="navigation_bar_glow_tint_title">Button glow color</string>
 
+    <!-- Basic Numbers -->
+    <string name="two">Two</string>
+    <string name="three">Three</string>
+    <string name="four">Four</string>
+    <string name="five">Five</string>
+    <string name="six">Six</string>
+
     <!-- Quiet hours -->
     <string name="quiet_hours_title">Quiet hours</string>
     <string name="quiet_hours_summary">Configure the hours the device should be quiet</string>
-    <string name="quiet_hours_note_summary">Note: Incoming calls will not be affected by quiet hours and will ring like normal</string>
-    <string name="quiet_hours_enabled">Enforce quiet hours</string>
+    <string name="quiet_hours_note_title">Note</string>
+    <string name="quiet_hours_note_summary">Incoming calls will behave like usual during quiet hours</string>
+    <string name="quiet_hours_enabled">Enable quiet hours</string>
+    <string name="quiet_hours_enabled_on">Quiet hours will be enforced</string>
+    <string name="quiet_hours_enabled_off">Notifications will function as normal</string>
+    <string name="quiet_hours_start">Start of quiet hours</string>
+    <string name="quiet_hours_start_summary">When to start enforcing quiet hours</string>
+    <string name="quiet_hours_end">End of quiet hours</string>
+    <string name="quiet_hours_end_summary">When to stop enforcing quiet hours</string>
     <string name="quiet_hours_mute">Mute notifications</string>
-    <string name="quiet_hours_system">Disable system sounds</string>
+    <string name="quiet_hours_mute_on">No sounds will be played</string>
+    <string name="quiet_hours_mute_off">Sounds will play like normal</string>
     <string name="quiet_hours_still">Disable vibrations</string>
+    <string name="quiet_hours_still_on">Device will not vibrate</string>
+    <string name="quiet_hours_still_off">Device will vibrate normally</string>
     <string name="quiet_hours_dim">Disable notification light</string>
+    <string name="quiet_hours_dim_on">Notification light will be disabled</string>
+    <string name="quiet_hours_dim_off">Notification light will function as normal</string>
     <string name="quiet_hours_haptic">Disable haptic feedback</string>
+    <string name="quiet_hours_haptic_on">Haptic feedback will be disabled</string>
+    <string name="quiet_hours_haptic_off">Haptic feedback will function as normal</string>
     <string name="quiet_hours_active_from">Active from</string>
     <string name="quiet_hours_active_to">to</string>
+    <string name="quiet_hours_auto_sms_group">Automatic response</string>
+    <string name="quiet_hours_auto_sms_title">Incoming text messages</string>
+    <string name="quiet_hours_auto_sms_call_title">Incoming phone calls</string>
+    <string name="quiet_hours_auto_string_title">Response to send</string>
+    <string name="quiet_hours_auto_string_explain">This message will be sent to anyone who contacts you while
+            quiet hours are active</string>
+    <string name="quiet_hours_auto_sms_null">[Automated Message] I\'ll get back to you when I can.</string>
+    <string name="quiet_hours_auto_disabled">Disabled</string>
+    <string name="quiet_hours_auto_enabled">All numbers</string>
+    <string name="quiet_hours_auto_contacts">Contacts only</string>
+    <string name="quiet_hours_bypass_group">Bypass quiet hours</string>
+    <string name="quiet_hours_sms_code_null">[Alarm]</string>
+    <string name="quiet_hours_sms_bypass_title">Text message bypass</string>
+    <string name="quiet_hours_sms_code_title">Text message key</string>
+    <string name="quiet_hours_sms_code_explain">If an incoming message contains this text your phone will
+            sound an alarm</string>
+    <string name="quiet_hours_call_bypass_title">Incoming call bypass</string>
+    <string name="quiet_hours_calls_required_title">Number of calls in 30 minutes</string>
+    <string name="quiet_hours_calls_required_summary">" calls to bypass quiet hours"</string>
+    <string name="quiet_hours_bypass_ringtone_title">Ringtone to play</string>
+    <string name="quiet_hours_bypass_ringtone_loop_title">Ringtone loop</string>
+    <string name="quiet_hours_bypass_ringtone_loop_summary_on">Ringtone will loop until dismissed</string>
+    <string name="quiet_hours_bypass_ringtone_loop_summary_off">Ringtone will play only once</string>
+    <string name="quiet_hours_alarm_dismiss">Dismiss Alarm</string>
+    <string name="quiet_hours_alarm_and">" and "</string>
+    <string name="quiet_hours_alarm_dialog_title">QUIETHOURS BYPASSED</string>
+    <string name="quiet_hours_alarm_message">" met the requirements to bypass Quiet Hours!"</string>
 
     <!-- time range preference -->
     <string name="start_time_title">Start</string>

@@ -68,6 +68,8 @@
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
     <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application android:label="@string/settings_label"
             android:icon="@mipmap/ic_launcher_settings"
@@ -104,6 +106,37 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+	<!-- QuietHours SmsCall Service -->
+
+        <service android:name=".mahdi.service.SmsCallService"/>
+        <service android:name=".mahdi.service.AlarmService"/>
+
+        <receiver
+            android:name=".mahdi.service.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"></action>
+                <action android:name="android.intent.action.TIME_CHANGED"></action>
+                <action android:name="android.intent.action.DATE_CHANGED"></action>
+                <action android:name="com.android.settings.mahdi.service.SCHEDULE_SERVICE_COMMAND"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".mahdi.service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".mahdi.service.BypassAlarm"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.android.settings.slim.service.BypassAlarm"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <!-- Wireless Controls -->
 

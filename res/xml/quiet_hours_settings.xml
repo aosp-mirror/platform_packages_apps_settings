@@ -19,39 +19,123 @@
     android:title="@string/quiet_hours_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+    <Preference
+        android:key="quiet_hours_note"
+        style="?android:preferenceInformationStyle"
+        android:title="@string/quiet_hours_note_title"
+        android:summary="@string/quiet_hours_note_summary"
+        android:selectable="false" />
+
+    <CheckBoxPreference
         android:key="quiet_hours_enabled"
         android:title="@string/quiet_hours_enabled"
-        android:summaryOn="@string/quiet_hours_note_summary"
+        android:summaryOn="@string/quiet_hours_enabled_on"
+        android:summaryOff="@string/quiet_hours_enabled_off"
         android:defaultValue="false" />
 
     <com.android.settings.mahdi.TimeRangePreference
         android:key="quiet_hours_timerange"
         android:dependency="quiet_hours_enabled" />
 
-    <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+    <CheckBoxPreference
         android:key="quiet_hours_mute"
         android:title="@string/quiet_hours_mute"
+        android:summaryOn="@string/quiet_hours_mute_on"
+        android:summaryOff="@string/quiet_hours_mute_off"
         android:dependency="quiet_hours_enabled" />
 
-    <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+    <CheckBoxPreference
         android:key="quiet_hours_haptic"
         android:title="@string/quiet_hours_haptic"
+        android:summaryOn="@string/quiet_hours_haptic_on"
+        android:summaryOff="@string/quiet_hours_haptic_off"
         android:dependency="quiet_hours_enabled" />
 
-    <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-        android:key="quiet_hours_system"
-        android:title="@string/quiet_hours_system"
-        android:dependency="quiet_hours_enabled" />
-
-    <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+    <CheckBoxPreference
         android:key="quiet_hours_still"
         android:title="@string/quiet_hours_still"
+        android:summaryOn="@string/quiet_hours_still_on"
+        android:summaryOff="@string/quiet_hours_still_off"
         android:dependency="quiet_hours_enabled" />
 
-    <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+    <CheckBoxPreference
         android:key="quiet_hours_dim"
         android:title="@string/quiet_hours_dim"
+        android:summaryOn="@string/quiet_hours_dim_on"
+        android:summaryOff="@string/quiet_hours_dim_off"
         android:dependency="quiet_hours_enabled" />
 
+    <PreferenceCategory
+        android:key="sms_respond"
+        android:title="@string/quiet_hours_auto_sms_group">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/incoming_contact_entries"
+            android:entryValues="@array/incoming_contact_values"
+            android:key="auto_sms"
+            android:title="@string/quiet_hours_auto_sms_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/incoming_contact_entries"
+            android:entryValues="@array/incoming_contact_values"
+            android:key="auto_sms_call"
+            android:title="@string/quiet_hours_auto_sms_call_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <Preference
+            android:key="auto_sms_message"
+            android:title="@string/quiet_hours_auto_string_title"
+            android:dependency="quiet_hours_enabled" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="quiethours_bypass"
+        android:title="@string/quiet_hours_bypass_group">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/incoming_contact_entries"
+            android:entryValues="@array/incoming_contact_values"
+            android:key="sms_bypass"
+            android:title="@string/quiet_hours_sms_bypass_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <Preference
+            android:key="sms_bypass_code"
+            android:title="@string/quiet_hours_sms_code_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/incoming_contact_entries"
+            android:entryValues="@array/incoming_contact_values"
+            android:key="call_bypass"
+            android:title="@string/quiet_hours_call_bypass_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/incoming_call_number_entries"
+            android:entryValues="@array/incoming_call_number_values"
+            android:key="required_calls"
+            android:title="@string/quiet_hours_calls_required_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <RingtonePreference
+            android:ringtoneType="all"
+            android:showSilent="false"
+            android:key="bypass_ringtone"
+            android:title="@string/quiet_hours_bypass_ringtone_title"
+            android:dependency="quiet_hours_enabled" />
+
+        <CheckBoxPreference
+            android:key="loop_bypass_ringtone"
+            android:title="@string/quiet_hours_bypass_ringtone_loop_title"
+            android:dependency="quiet_hours_enabled" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
