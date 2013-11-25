@@ -22,19 +22,7 @@
     <CheckBoxPreference
         android:key="power_menu_reboot"
         android:title="@string/power_menu_reboot_title"
-        android:defaultValue="true" />    
-
-    <CheckBoxPreference
-        android:key="power_menu_screenshot"
-        android:title="@string/power_menu_screenshot_title"
-        android:defaultValue="false" />
-
-    <ListPreference
-        android:key="power_menu_immersive_mode"
-        android:title="@string/power_menu_immersive_mode"
-        android:entries="@array/immersive_mode_entries"
-        android:entryValues="@array/immersive_mode_values"
-	android:persistent="false" />        
+        android:defaultValue="true" />        
 
     <ListPreference
         android:key="power_menu_profiles"
@@ -42,6 +30,23 @@
         android:entries="@array/power_menu_profiles_entries"
         android:entryValues="@array/power_menu_profiles_values"
         android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="power_menu_screenshot"
+        android:title="@string/power_menu_screenshot_title"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="power_menu_screenrecord"
+        android:title="@string/power_menu_screenrecord_title"
+        android:defaultValue="false" />
+
+    <ListPreference
+        android:key="power_menu_immersive_mode"
+        android:title="@string/power_menu_immersive_mode"
+        android:entries="@array/immersive_mode_entries"
+        android:entryValues="@array/immersive_mode_values"
+	android:persistent="false" />
 
     <CheckBoxPreference
         android:key="power_menu_airplane"

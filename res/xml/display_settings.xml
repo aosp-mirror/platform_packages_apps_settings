@@ -58,6 +58,11 @@
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
 
+	<PreferenceScreen
+                android:key="screen_recorder"
+                android:title="@string/screen_recorder_title"
+                android:fragment="com.android.settings.mahdi.ScreenRecorderSettings" />
+
         <PreferenceCategory
             android:key="category_light_options"
             android:title="@string/display_category_light_options_title" >

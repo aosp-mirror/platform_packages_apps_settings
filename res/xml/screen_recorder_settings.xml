@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/screen_recorder_title">
+
+    <ListPreference
+        android:key="screen_recorder_size"
+        android:title="@string/screen_recorder_video_dimensions_title"
+        android:entries="@array/screen_recorder_video_sizes"
+        android:entryValues="@array/screen_recorder_video_sizes"
+        android:defaultValue="720x1280" />
+
+    <ListPreference
+        android:key="screen_recorder_bitrate"
+        android:title="@string/screen_recorder_video_bitrate_title"
+        android:entries="@array/screen_recorder_bitrate_entries"
+        android:entryValues="@array/screen_recorder_bitrate_values"
+        android:defaultValue="4000000" />
+
+</PreferenceScreen>
