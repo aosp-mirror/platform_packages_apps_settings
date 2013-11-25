@@ -148,7 +148,6 @@ public class ApplicationLightPreference extends DialogPreference {
     protected void showDialog(Bundle state) {
         super.showDialog(state);
 
-        if (getDialog() instanceof LightSettingsDialog) {
         final LightSettingsDialog d = (LightSettingsDialog) getDialog();
 
         // Intercept the click on the middle button to show the test dialog and prevent the onDismiss
@@ -161,12 +160,10 @@ public class ApplicationLightPreference extends DialogPreference {
                 showTestDialog(d.getColor() - 0xFF000000, onTime, offTime);
             }
         });
-        }
     }
 
     @Override
     protected Dialog createDialog() {
-        android.util.Log.e("XPLOD", "XPLOD/ LOLWTF");
         final LightSettingsDialog d = new LightSettingsDialog(getContext(),
                 0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable);
         d.setAlphaSliderVisible(false);

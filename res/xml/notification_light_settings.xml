@@ -21,40 +21,45 @@
         android:key="general_section"
         android:title="@string/notification_light_general_title">
 
-        <CheckBoxPreference
-            android:key="pulse_enabled"
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="notification_light_pulse"
             android:title="@string/notification_pulse_title" />
 
         <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="default"
             android:title="@string/notification_light_default_value"
-            android:persistent="false" />
+            android:persistent="false"
+            android:dependency="notification_light_pulse" />
 
-        <CheckBoxPreference
-            android:key="custom_enabled"
-            android:title="@string/notification_light_use_custom" />
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="notification_light_pulse_custom_enable"
+            android:title="@string/notification_light_use_custom"
+            android:dependency="notification_light_pulse" />
 
-        </PreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="phone_list"
         android:title="@string/notification_light_phonelist_title" >
 
-            <com.android.settings.notificationlight.ApplicationLightPreference
+        <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="missed_call"
             android:title="@string/notification_light_missed_call_title"
-            android:persistent="false" />
+            android:persistent="false"
+            android:dependency="notification_light_pulse" />
 
         <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="voicemail"
             android:title="@string/notification_light_voicemail_title"
-            android:persistent="false" />
+            android:persistent="false"
+            android:dependency="notification_light_pulse" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="applications_list"
-        android:title="@string/notification_light_applist_title" >
+        android:title="@string/notification_light_applist_title"
+        android:dependency="notification_light_pulse_custom_enable" >
     </PreferenceCategory>
 
 </PreferenceScreen>

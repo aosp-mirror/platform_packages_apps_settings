@@ -23,38 +23,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
 
     <LinearLayout
         android:id="@+id/color_panel_view"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_alignLeft="@id/color_picker_view"
-        android:layout_alignRight="@id/color_picker_view"
+        android:layout_alignStart="@id/color_picker_view"
+        android:layout_alignEnd="@id/color_picker_view"
         android:layout_below="@id/color_picker_view"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
         android:orientation="horizontal" >
 
-        <com.android.settings.notificationlight.ColorPanelView
-            android:id="@+id/old_color_panel"
+        <EditText
+            android:id="@+id/hex_color_input"
             android:layout_width="0px"
+            android:maxLength="6"
+            android:digits="0123456789ABCDEFabcdef"
+            android:inputType="textNoSuggestions"
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:text="@string/picker_arrow"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
-
         <com.android.settings.notificationlight.ColorPanelView
-            android:id="@+id/new_color_panel"
+            android:id="@+id/color_panel"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
@@ -65,8 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/color_panel_view"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="4dp"
         android:orientation="vertical" >
 

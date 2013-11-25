@@ -54,16 +54,6 @@
                 android:dialogTitle="@string/dialog_title_font_size" />
 
         <PreferenceScreen
-            android:key="notification_pulse"
-            android:title="@string/notification_pulse_title"
-            android:fragment="com.android.settings.notificationlight.NotificationLightSettings" />
-
-        <PreferenceScreen
-            android:key="battery_light"
-            android:title="@string/battery_light_title"
-            android:fragment="com.android.settings.notificationlight.BatteryLightSettings" />
-
-        <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
@@ -73,6 +63,22 @@
                 android:title="@string/screen_off_animation"
                 android:entries="@array/screen_off_animation_entries"
                 android:entryValues="@array/screen_off_animation_values" />
+
+        <PreferenceCategory
+            android:key="lights_prefs"
+            android:title="@string/lights_category_title">
+
+            <PreferenceScreen
+                android:key="notification_pulse"
+                android:title="@string/notification_pulse_title"
+                android:fragment="com.android.settings.notificationlight.NotificationLightSettings" />
+
+            <PreferenceScreen
+                android:key="battery_light"
+                android:title="@string/battery_light_title"
+                android:fragment="com.android.settings.notificationlight.BatteryLightSettings" />
+
+        </PreferenceCategory>
 
         <PreferenceCategory
             android:key="category_wakeup_options"

@@ -21,21 +21,23 @@
         android:key="general_section"
         android:title="@string/notification_light_general_title">
 
-        <CheckBoxPreference
-            android:key="battery_light"
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="battery_light_enabled"
             android:title="@string/battery_light_title"
-            android:persistent="false" />
+            android:defaultValue="true" />
 
-        <CheckBoxPreference
-            android:key="battery_low_pulse"
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="battery_light_pulse"
             android:title="@string/battery_low_pulse_title"
-            android:persistent="false" />
+            android:defaultValue="true"
+            android:dependency="battery_light_enabled" />
 
-        </PreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="colors_list"
-        android:title="@string/battery_light_list_title" >
+        android:title="@string/battery_light_list_title"
+        android:dependency="battery_light_enabled" >
 
         <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="low_color"
