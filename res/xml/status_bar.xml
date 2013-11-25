@@ -37,4 +37,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/title_general">
+
+	<com.android.settings.mahdi.SystemSettingCheckBoxPreference
+	    android:key="status_bar_traffic"
+	    android:title="@string/show_network_speed"
+	    android:summary="@string/show_network_speed_summary"
+	    android:defaultValue="true" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
