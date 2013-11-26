@@ -44,6 +44,7 @@ import static com.android.internal.util.mahdi.QSConstants.TILE_VOLUME;
 import static com.android.internal.util.mahdi.QSConstants.TILE_WIFI;
 import static com.android.internal.util.mahdi.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NAVBAR;
+import static com.android.internal.util.mahdi.QSConstants.TILE_NETWORKSPEED;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -149,6 +150,9 @@ public class QuickSettingsUtil {
 	registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NAVBAR, R.string.title_tile_navbar,
                 "com.android.systemui:drawable/ic_qs_navbar_off"));
+	registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_NETWORKSPEED, R.string.title_tile_network_speed,
+                "com.android.systemui:drawable/ic_qs_network_speed_off"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
