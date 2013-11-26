@@ -47,6 +47,7 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -117,10 +118,20 @@ public class Status extends PreferenceActivity {
     static final String CB_AREA_INFO_SENDER_PERMISSION =
             "android.permission.RECEIVE_EMERGENCY_BROADCAST";
 
+    // Broadcasts to listen to for connectivity changes.
+    private static final String[] CONNECTIVITY_INTENTS = {
+            BluetoothAdapter.ACTION_STATE_CHANGED,
+            ConnectivityManager.CONNECTIVITY_ACTION_IMMEDIATE,
+            WifiManager.LINK_CONFIGURATION_CHANGED_ACTION,
+            WifiManager.NETWORK_STATE_CHANGED_ACTION,
+    };
+
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
 
     private static final int EVENT_UPDATE_STATS = 500;
+
+    private static final int EVENT_UPDATE_CONNECTIVITY = 600;
 
     private ConnectivityManager mCM;
     private TelephonyManager mTelephonyManager;
@@ -173,6 +184,10 @@ public class Status extends PreferenceActivity {
                     status.updateTimes();
                     sendEmptyMessageDelayed(EVENT_UPDATE_STATS, 1000);
                     break;
+
+                case EVENT_UPDATE_CONNECTIVITY:
+                    status.updateConnectivity();
+                    break;
             }
         }
     }
@@ -211,6 +226,17 @@ public class Status extends PreferenceActivity {
                     String latestAreaInfo = cbMessage.getMessageBody();
                     updateAreaInfo(latestAreaInfo);
                 }
+            }
+        }
+    };
+
+    private IntentFilter mConnectivityIntentFilter;
+    private final BroadcastReceiver mConnectivityReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ArrayUtils.contains(CONNECTIVITY_INTENTS, action)) {
+                mHandler.sendEmptyMessage(EVENT_UPDATE_CONNECTIVITY);
             }
         }
     };
@@ -325,6 +351,11 @@ public class Status extends PreferenceActivity {
             mWimaxMacAddress = null;
         }
 
+        mConnectivityIntentFilter = new IntentFilter();
+        for (String intent: CONNECTIVITY_INTENTS) {
+             mConnectivityIntentFilter.addAction(intent);
+        }
+
         updateConnectivity();
 
         String serial = Build.SERIAL;
@@ -356,6 +387,8 @@ public class Status extends PreferenceActivity {
                         CB_AREA_INFO_SENDER_PERMISSION);
             }
         }
+        registerReceiver(mConnectivityReceiver, mConnectivityIntentFilter,
+                         android.Manifest.permission.CHANGE_NETWORK_STATE, null);
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         mHandler.sendEmptyMessage(EVENT_UPDATE_STATS);
     }
@@ -372,6 +405,7 @@ public class Status extends PreferenceActivity {
             unregisterReceiver(mAreaInfoReceiver);
         }
         unregisterReceiver(mBatteryInfoReceiver);
+        unregisterReceiver(mConnectivityReceiver);
         mHandler.removeMessages(EVENT_UPDATE_STATS);
     }
 
