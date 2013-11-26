@@ -27,6 +27,12 @@
     <PreferenceCategory
         android:title="@string/title_general">
 
+	 <PreferenceScreen
+            android:fragment="com.android.settings.mahdi.LockscreenTargets"
+            android:key="lockscreen_targets"
+            android:summary="@string/lockscreen_target_summary"
+            android:title="@string/lockscreen_target_title" />
+
         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
             android:key="lockscreen_maximize_widgets"
             android:summary="@string/lockscreen_maximize_widgets_summary"

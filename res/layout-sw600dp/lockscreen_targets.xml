@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:prvandroid="http://schemas.android.com/apk/prv/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        android:layout_marginRight="8dip"
+        android:layout_marginLeft="8dip"
+        android:padding="4dip"
+        android:gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/lockscreen_target_info" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.android.internal.widget.multiwaveview.GlowPadView
+        android:id="@+id/lock_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:gravity="@*android:integer/kg_selector_gravity"
+        android:contentDescription="@*android:string/keyguard_accessibility_slide_area"
+        prvandroid:targetDrawables="@array/lockscreen_targets_unlock_only"
+        prvandroid:targetDescriptions="@array/lockscreen_target_descriptions_unlock_only"
+        prvandroid:handleDrawable="@drawable/ic_lockscreen_handle"
+        prvandroid:outerRingDrawable="@*android:drawable/ic_lockscreen_outerring"
+        prvandroid:outerRadius="@*android:dimen/glowpadview_target_placement_radius"
+        prvandroid:innerRadius="@*android:dimen/glowpadview_inner_radius"
+        prvandroid:snapMargin="@*android:dimen/glowpadview_snap_margin"
+        prvandroid:firstItemOffset="@*android:integer/kg_glowpad_rotation_offset"
+        prvandroid:magneticTargets="false"
+        prvandroid:feedbackCount="1"
+        prvandroid:vibrationDuration="20"
+        prvandroid:glowRadius="@*android:dimen/glowpadview_glow_radius"
+        prvandroid:pointDrawable="@*android:drawable/ic_lockscreen_glowdot"
+        prvandroid:allowScaling="true" />
+
+</LinearLayout>
