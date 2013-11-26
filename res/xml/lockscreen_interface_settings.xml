@@ -24,10 +24,20 @@
             android:summary="@string/screen_security_summary">             
         </PreferenceScreen>
 
+    <PreferenceCategory
+        android:title="@string/title_general">
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="lockscreen_maximize_widgets"
+            android:summary="@string/lockscreen_maximize_widgets_summary"
+            android:title="@string/lockscreen_maximize_widgets_title" />        
+
 	<CheckBoxPreference
             android:key="battery_around_lockscreen_ring"
             android:title="@string/battery_around_lockscreen_ring"
       	    android:summary="@string/battery_around_lockscreen_ring_summary"
             android:defaultValue="true" />
+
+    </PreferenceCategory>
 	    
 </PreferenceScreen>
