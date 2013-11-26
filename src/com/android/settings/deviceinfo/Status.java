@@ -122,18 +122,26 @@ public class Status extends PreferenceActivity {
 
     private static final int EVENT_UPDATE_STATS = 500;
 
+    private ConnectivityManager mCM;
     private TelephonyManager mTelephonyManager;
+    private WifiManager mWifiManager;
+
     private Phone mPhone = null;
     private PhoneStateIntentReceiver mPhoneStateReceiver;
     private Resources mRes;
-    private Preference mSignalStrength;
-    private Preference mUptime;
     private boolean mShowLatestAreaInfo;
 
-    private String sUnknown;
+    private String mUnknown;
+    private String mUnavailable;
 
+    private Preference mSignalStrength;
+    private Preference mUptime;
     private Preference mBatteryStatus;
     private Preference mBatteryLevel;
+    private Preference mBtAddress;
+    private Preference mIpAddress;
+    private Preference mWifiMacAddress;
+    private Preference mWimaxMacAddress;
 
     private Handler mHandler;
 
@@ -207,20 +215,36 @@ public class Status extends PreferenceActivity {
         }
     };
 
+    private boolean hasBluetooth() {
+        return BluetoothAdapter.getDefaultAdapter() != null;
+    }
+
+    private boolean hasWimax() {
+        return  mCM.getNetworkInfo(ConnectivityManager.TYPE_WIMAX) != null;
+    }
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mHandler = new MyHandler(this);
 
+        mCM = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 
         addPreferencesFromResource(R.xml.device_info_status);
         mBatteryLevel = findPreference(KEY_BATTERY_LEVEL);
         mBatteryStatus = findPreference(KEY_BATTERY_STATUS);
+        mBtAddress = findPreference(KEY_BT_ADDRESS);
+        mWifiMacAddress = findPreference(KEY_WIFI_MAC_ADDRESS);
+        mWimaxMacAddress = findPreference(KEY_WIMAX_MAC_ADDRESS);
+        mIpAddress = findPreference(KEY_IP_ADDRESS);
 
         mRes = getResources();
-        sUnknown = mRes.getString(R.string.device_info_default);
+        mUnknown = mRes.getString(R.string.device_info_default);
+        mUnavailable = mRes.getString(R.string.status_unavailable);
+
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
             mPhone = PhoneFactory.getDefaultPhone();
         }
@@ -291,10 +315,17 @@ public class Status extends PreferenceActivity {
             }
         }
 
-        setWimaxStatus();
-        setWifiStatus();
-        setBtStatus();
-        setIpAddressStatus();
+        if (!hasBluetooth()) {
+            getPreferenceScreen().removePreference(mBtAddress);
+            mBtAddress = null;
+        }
+
+        if (!hasWimax()) {
+            getPreferenceScreen().removePreference(mWimaxMacAddress);
+            mWimaxMacAddress = null;
+        }
+
+        updateConnectivity();
 
         String serial = Build.SERIAL;
         if (serial != null && !serial.equals("")) {
@@ -371,7 +402,7 @@ public class Status extends PreferenceActivity {
 
     private void setSummaryText(String preference, String text) {
             if (TextUtils.isEmpty(text)) {
-               text = sUnknown;
+               text = mUnknown;
              }
              // some preferences may be missing
              if (findPreference(preference) != null) {
@@ -474,53 +505,45 @@ public class Status extends PreferenceActivity {
     }
 
     private void setWimaxStatus() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIMAX);
-
-        if (ni == null) {
-            PreferenceScreen root = getPreferenceScreen();
-            Preference ps = (Preference) findPreference(KEY_WIMAX_MAC_ADDRESS);
-            if (ps != null) root.removePreference(ps);
-        } else {
-            Preference wimaxMacAddressPref = findPreference(KEY_WIMAX_MAC_ADDRESS);
-            String macAddress = SystemProperties.get("net.wimax.mac.address",
-                    getString(R.string.status_unavailable));
-            wimaxMacAddressPref.setSummary(macAddress);
+        if (mWimaxMacAddress != null) {
+            String macAddress = SystemProperties.get("net.wimax.mac.address", mUnavailable);
+            mWimaxMacAddress.setSummary(macAddress);
         }
     }
+
     private void setWifiStatus() {
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-
-        Preference wifiMacAddressPref = findPreference(KEY_WIFI_MAC_ADDRESS);
-
+        WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
         String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
-        wifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress
-                : getString(R.string.status_unavailable));
+        mWifiMacAddress.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress : mUnavailable);
     }
 
     private void setIpAddressStatus() {
-        Preference ipAddressPref = findPreference(KEY_IP_ADDRESS);
-        String ipAddress = Utils.getDefaultIpAddresses(this);
+        String ipAddress = Utils.getDefaultIpAddresses(this.mCM);
         if (ipAddress != null) {
-            ipAddressPref.setSummary(ipAddress);
+            mIpAddress.setSummary(ipAddress);
         } else {
-            ipAddressPref.setSummary(getString(R.string.status_unavailable));
+            mIpAddress.setSummary(mUnavailable);
         }
     }
 
     private void setBtStatus() {
         BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
-        Preference btAddressPref = findPreference(KEY_BT_ADDRESS);
-
-        if (bluetooth == null) {
-            // device not BT capable
-            getPreferenceScreen().removePreference(btAddressPref);
-        } else {
+        if (bluetooth != null && mBtAddress != null) {
             String address = bluetooth.isEnabled() ? bluetooth.getAddress() : null;
-            btAddressPref.setSummary(!TextUtils.isEmpty(address) ? address
-                    : getString(R.string.status_unavailable));
+            if (!TextUtils.isEmpty(address)) {
+               // Convert the address to lowercase for consistency with the wifi MAC address.
+                mBtAddress.setSummary(address.toLowerCase());
+            } else {
+                mBtAddress.setSummary(mUnavailable);
+            }
         }
+    }
+
+    void updateConnectivity() {
+        setWimaxStatus();
+        setWifiStatus();
+        setBtStatus();
+        setIpAddressStatus();
     }
 
     void updateTimes() {
