@@ -1137,5 +1137,6 @@ public class Settings extends PreferenceActivity
     public static class PowerMenuSettingsActivity extends Settings { /* empty */ }
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
     public static class PerformanceSettingsActivity extends Settings { /* empty */ }
-    public static class LockscreenSettingsActivity extends Settings { /* empty */ }     
+    public static class LockscreenSettingsActivity extends Settings { /* empty */ }
+    public static class ActiveDisplaySettingsActivity extends Settings { /* empty */ }     
 }

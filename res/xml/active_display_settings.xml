@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The ChameleonOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/ad_settings_title" >
+
+    <SwitchPreference
+        android:key="ad_enable"
+        android:persistent="false"
+        android:title="@string/ad_enable_title"
+        android:summaryOff="@string/ad_enable_summary_off"
+        android:summaryOn="@string/ad_enable_summary_on" />
+
+    <CheckBoxPreference
+        android:key="ad_text"
+        android:persistent="false"
+        android:title="@string/ad_text_title"
+        android:summary="@string/ad_text_summary"
+        android:dependency="ad_enable"/>
+
+    <CheckBoxPreference
+        android:key="ad_hide_low_priority"
+        android:persistent="false"
+        android:title="@string/ad_hide_low_priority_title"
+        android:summary="@string/ad_hide_low_priority_summary"
+        android:dependency="ad_enable"/>
+
+    <CheckBoxPreference
+        android:key="ad_all_notifications"
+        android:persistent="false"
+        android:title="@string/ad_all_notifications_title"
+        android:summary="@string/ad_all_notifications_summary"
+        android:dependency="ad_enable"/>
+
+    <ListPreference
+        android:key="ad_pocket_mode"
+        android:persistent="false"
+        android:title="@string/ad_pocket_mode_title"
+        android:summary="@string/ad_pocket_mode_summary"
+        android:entries="@array/ad_pocket_mode_entries"
+        android:entryValues="@array/ad_pocket_mode_values"
+        android:dependency="ad_enable"/>
+
+    <CheckBoxPreference
+        android:key="ad_sunlight_mode"
+        android:persistent="false"
+        android:title="@string/ad_sunlight_mode_title"
+        android:summary="@string/ad_sunlight_mode_summary"
+        android:dependency="ad_enable"/>
+
+    <ListPreference
+        android:key="ad_redisplay"
+        android:persistent="false"
+        android:dialogTitle="@string/ad_redisplay_title"
+        android:title="@string/ad_redisplay_title"
+        android:entries="@array/ad_redisplay_entries"
+        android:entryValues="@array/ad_redisplay_values"
+        android:dependency="ad_enable"/>
+
+<PreferenceCategory
+        android:key="ad_customizations"
+        android:title="@string/ad_customizations_title" />
+
+	<com.android.settings.mahdi.activedisplay.AppMultiSelectListPreference
+            android:key="ad_excluded_apps"
+            android:persistent="false"
+            android:title="@string/ad_excluded_apps_title"
+            android:summary="@string/ad_excluded_apps_summary"
+            android:dependency="ad_enable" />
+
+        <CheckBoxPreference
+            android:key="ad_show_date"
+            android:persistent="false"
+            android:title="@string/ad_show_date_title"
+            android:summary="@string/ad_show_date_summary"
+            android:dependency="ad_enable"/>
+
+        <CheckBoxPreference
+            android:key="ad_show_ampm"
+            android:persistent="false"
+            android:title="@string/ad_show_ampm_title"
+            android:summary="@string/ad_show_ampm_summary"
+            android:dependency="ad_enable"/>
+
+    	<com.android.settings.mahdi.activedisplay.SeekBarPreference
+            android:key="ad_brightness"
+            android:persistent="false"
+            android:title="@string/ad_brightness_title"
+            android:summary="@string/ad_brightness_summary"
+            android:max="100"
+            settings:min="0"
+            settings:unitsLeft=""
+            settings:unitsRight="%"
+            android:defaultValue="100"
+            android:dependency="ad_enable" />
+
+</PreferenceScreen>
