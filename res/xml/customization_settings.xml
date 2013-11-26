@@ -46,6 +46,13 @@
         android:summary="@string/app_sidebar_summary"
         android:icon="@drawable/ic_settings_app_bar"
         android:fragment="com.android.settings.mahdi.AppSidebar" />
+   
+    <PreferenceScreen
+        android:id="@+id/halo_settings"                
+        android:title="@string/halo_settings_title"
+	android:summary="@string/halo_settings_summary"
+	android:icon="@drawable/ic_settings_halo"
+	android:fragment="com.android.settings.mahdi.Halo" />
 
     <PreferenceScreen
         android:key="button_settings"
