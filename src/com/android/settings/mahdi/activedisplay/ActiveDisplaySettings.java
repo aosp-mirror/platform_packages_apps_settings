@@ -34,9 +34,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.android.settings.mahdi.activedisplay.SeekBarPreference;
-import com.android.settings.mahdi.activedisplay.AppMultiSelectListPreference;
-
 import static android.hardware.Sensor.TYPE_LIGHT;
 import static android.hardware.Sensor.TYPE_PROXIMITY;
 
@@ -55,18 +52,20 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SHOW_DATE = "ad_show_date";
     private static final String KEY_SHOW_AMPM = "ad_show_ampm";
     private static final String KEY_BRIGHTNESS = "ad_brightness";
+    private static final String KEY_TIMEOUT = "ad_timeout";
 
     private SwitchPreference mEnabledPref;
     private CheckBoxPreference mShowTextPref;
-    private CheckBoxPreference mShowDatePref;
-    private CheckBoxPreference mShowAmPmPref;
     private CheckBoxPreference mAllNotificationsPref;
     private CheckBoxPreference mHideLowPriorityPref;
     private ListPreference mPocketModePref;
     private CheckBoxPreference mSunlightModePref;
     private ListPreference mRedisplayPref;
-    private SeekBarPreference mBrightnessLevel;
     private AppMultiSelectListPreference mExcludedAppsPref;
+    private CheckBoxPreference mShowDatePref;
+    private CheckBoxPreference mShowAmPmPref;
+    private SeekBarPreference mBrightnessLevel;
+    private ListPreference mDisplayTimeout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,20 +91,19 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.ACTIVE_DISPLAY_HIDE_LOW_PRIORITY_NOTIFICATIONS, 0) == 1));
 
         mPocketModePref = (ListPreference) findPreference(KEY_POCKET_MODE);
-        mPocketModePref.setOnPreferenceChangeListener(this);
-        int mode = Settings.System.getInt(getContentResolver(),
-                Settings.System.ACTIVE_DISPLAY_POCKET_MODE, 0);
-        mPocketModePref.setValue(String.valueOf(mode));
-        updatePocketModeSummary(mode);
+            mPocketModePref.setOnPreferenceChangeListener(this);
+            int mode = Settings.System.getInt(getContentResolver(),
+                    Settings.System.ACTIVE_DISPLAY_POCKET_MODE, 0);
+            mPocketModePref.setValue(String.valueOf(mode));
+            updatePocketModeSummary(mode);
         if (!hasProximitySensor()) {
             getPreferenceScreen().removePreference(mPocketModePref);
         }
-
         mSunlightModePref = (CheckBoxPreference) findPreference(KEY_SUNLIGHT_MODE);
         mSunlightModePref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.ACTIVE_DISPLAY_SUNLIGHT_MODE, 0) == 1));
         if (!hasLightSensor()) {
-            getPreferenceScreen().removePreference(mSunlightModePref);
+                getPreferenceScreen().removePreference(mSunlightModePref);
         }
 
         PreferenceScreen prefSet = getPreferenceScreen();
@@ -115,6 +113,11 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.ACTIVE_DISPLAY_REDISPLAY, 0);
         mRedisplayPref.setValue(String.valueOf(timeout));
         updateRedisplaySummary(timeout);
+
+        mExcludedAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_APPS);
+        Set<String> excludedApps = getExcludedApps();
+        if (excludedApps != null) mExcludedAppsPref.setValues(excludedApps);
+        mExcludedAppsPref.setOnPreferenceChangeListener(this);
 
         mShowDatePref = (CheckBoxPreference) findPreference(KEY_SHOW_DATE);
         mShowDatePref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -129,10 +132,12 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.ACTIVE_DISPLAY_BRIGHTNESS, 100));
         mBrightnessLevel.setOnPreferenceChangeListener(this);
 
-        mExcludedAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_APPS);
-        Set<String> excludedApps = getExcludedApps();
-        if (excludedApps != null) mExcludedAppsPref.setValues(excludedApps);
-        mExcludedAppsPref.setOnPreferenceChangeListener(this);
+        mDisplayTimeout = (ListPreference) prefSet.findPreference(KEY_TIMEOUT);
+        mDisplayTimeout.setOnPreferenceChangeListener(this);
+        timeout = Settings.System.getLong(getContentResolver(),
+                Settings.System.ACTIVE_DISPLAY_TIMEOUT, 8000L);
+        mDisplayTimeout.setValue(String.valueOf(timeout));
+        updateTimeoutSummary(timeout);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -140,22 +145,26 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
             int timeout = Integer.valueOf((String) newValue);
             updateRedisplaySummary(timeout);
             return true;
-        } else if (preference == mPocketModePref) {
-            int mode = Integer.valueOf((String) newValue);
-            updatePocketModeSummary(mode);
-            return true;
         } else if (preference == mEnabledPref) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ENABLE_ACTIVE_DISPLAY,
                     ((Boolean) newValue).booleanValue() ? 1 : 0);
+            return true;
+        } else if (preference == mPocketModePref) {
+                int mode = Integer.valueOf((String) newValue);
+                updatePocketModeSummary(mode);
+            return true;
+        } else if (preference == mExcludedAppsPref) {
+            storeExcludedApps((Set<String>) newValue);
             return true;
         } else if (preference == mBrightnessLevel) {
             int brightness = ((Integer)newValue).intValue();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVE_DISPLAY_BRIGHTNESS, brightness);
             return true;
-        } else if (preference == mExcludedAppsPref) {
-            storeExcludedApps((Set<String>) newValue);
+        } else if (preference == mDisplayTimeout) {
+            long timeout = Integer.valueOf((String) newValue);
+            updateTimeoutSummary(timeout);
             return true;
         }
         return false;
@@ -204,15 +213,24 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
 
     private void updatePocketModeSummary(int value) {
         mPocketModePref.setSummary(
-                mPocketModePref.getEntries()[mPocketModePref.findIndexOfValue("" + value)]);
+            mPocketModePref.getEntries()[mPocketModePref.findIndexOfValue("" + value)]);
         Settings.System.putInt(getContentResolver(),
-                Settings.System.ACTIVE_DISPLAY_POCKET_MODE, value);
+            Settings.System.ACTIVE_DISPLAY_POCKET_MODE, value);
     }
 
     private void updateRedisplaySummary(long value) {
         mRedisplayPref.setSummary(mRedisplayPref.getEntries()[mRedisplayPref.findIndexOfValue("" + value)]);
         Settings.System.putLong(getContentResolver(),
                 Settings.System.ACTIVE_DISPLAY_REDISPLAY, value);
+    }
+
+    private void updateTimeoutSummary(long value) {
+        try {
+            mDisplayTimeout.setSummary(mDisplayTimeout.getEntries()[mDisplayTimeout.findIndexOfValue("" + value)]);
+            Settings.System.putLong(getContentResolver(),
+                    Settings.System.ACTIVE_DISPLAY_TIMEOUT, value);
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
     }
 
     private boolean hasProximitySensor() {

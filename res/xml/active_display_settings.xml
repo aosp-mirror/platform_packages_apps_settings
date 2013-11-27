@@ -32,17 +32,17 @@
         android:dependency="ad_enable"/>
 
     <CheckBoxPreference
-        android:key="ad_hide_low_priority"
-        android:persistent="false"
-        android:title="@string/ad_hide_low_priority_title"
-        android:summary="@string/ad_hide_low_priority_summary"
-        android:dependency="ad_enable"/>
-
-    <CheckBoxPreference
         android:key="ad_all_notifications"
         android:persistent="false"
         android:title="@string/ad_all_notifications_title"
         android:summary="@string/ad_all_notifications_summary"
+        android:dependency="ad_enable"/>
+
+    <CheckBoxPreference
+        android:key="ad_hide_low_priority"
+        android:persistent="false"
+        android:title="@string/ad_hide_low_priority_title"
+        android:summary="@string/ad_hide_low_priority_summary"
         android:dependency="ad_enable"/>
 
     <ListPreference
@@ -70,11 +70,11 @@
         android:entryValues="@array/ad_redisplay_values"
         android:dependency="ad_enable"/>
 
-<PreferenceCategory
+    <PreferenceCategory
         android:key="ad_customizations"
         android:title="@string/ad_customizations_title" />
 
-	<com.android.settings.mahdi.activedisplay.AppMultiSelectListPreference
+        <com.android.settings.mahdi.activedisplay.AppMultiSelectListPreference
             android:key="ad_excluded_apps"
             android:persistent="false"
             android:title="@string/ad_excluded_apps_title"
@@ -95,7 +95,16 @@
             android:summary="@string/ad_show_ampm_summary"
             android:dependency="ad_enable"/>
 
-    	<com.android.settings.mahdi.activedisplay.SeekBarPreference
+        <ListPreference
+            android:key="ad_timeout"
+            android:persistent="false"
+            android:dialogTitle="@string/ad_timeout_title"
+            android:title="@string/ad_timeout_title"
+            android:entries="@array/ad_timeout_entries"
+            android:entryValues="@array/ad_timeout_values"
+            android:dependency="ad_enable"/>
+
+        <com.android.settings.mahdi.activedisplay.SeekBarPreference
             android:key="ad_brightness"
             android:persistent="false"
             android:title="@string/ad_brightness_title"
