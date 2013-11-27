@@ -26,6 +26,12 @@
             android:persistent="false"
             android:streamType="ring" />
 
+    <ListPreference
+            android:key="volume_overlay"
+            android:title="@string/volume_overlay_title"
+            android:entries="@array/volume_overlay_entries"
+            android:entryValues="@array/volume_overlay_values" />
+
     <Preference
             android:key="musicfx"
             android:title="@string/musicfx_title">
@@ -91,7 +97,7 @@
             android:key="volume_adjust_sounds"
             android:title="@string/volume_adjust_sounds_enable_title"
             android:summary="@string/volume_adjust_sounds_enable_summary"
-            android:defaultValue="true" />
+            android:persistent="false" />
 
     <ListPreference
             android:key="emergency_tone"
