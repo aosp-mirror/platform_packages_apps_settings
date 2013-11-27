@@ -31,4 +31,27 @@
         android:summary="@string/volbtn_music_controls_summary"
         android:persistent="false" />
 
+    <PreferenceCategory
+            android:title="@string/power_notifications_category_title"/>
+
+    <CheckBoxPreference
+            android:key="power_notifications"
+            android:title="@string/power_notifications_enable_title"
+            android:summary="@string/power_notifications_enable_summary"
+            android:defaultValue="false"
+            android:persistent="false" />
+
+    <CheckBoxPreference
+            android:key="power_notifications_vibrate"
+            android:title="@string/power_notifications_vibrate_title"
+            android:defaultValue="false"
+            android:dependency="power_notifications"
+            android:persistent="false" />
+
+    <Preference
+            android:key="power_notifications_ringtone"
+            android:title="@string/power_notifications_ringtone_title"
+            android:dependency="power_notifications"
+            android:persistent="false" />
+
 </PreferenceScreen>
