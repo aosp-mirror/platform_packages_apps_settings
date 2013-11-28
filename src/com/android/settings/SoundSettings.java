@@ -205,15 +205,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mMusicFx = mSoundSettings.findPreference(KEY_MUSICFX);
         Intent i = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+        mMusicFx.setIntent(i); 
         PackageManager p = getPackageManager();
         List<ResolveInfo> ris = p.queryIntentActivities(i, PackageManager.GET_DISABLED_COMPONENTS);
-        if (ris.size() <= 2) {
-            // no need to show the item if there is no choice for the user to make
-            // note: the built in musicfx panel has two activities (one being a
-            // compatibility shim that launches either the other activity, or a
-            // third party one), hence the check for <=2. If the implementation
-            // of the compatbility layer changes, this check may need to be updated.
+        if (ris.size() == 0) { 
             mSoundSettings.removePreference(mMusicFx);
+        } else if (ris.size() == 1) { 
+            mMusicFx.setSummary(ris.get(0).loadLabel(p)); 
         }
 
         if (!Utils.isVoiceCapable(getActivity())) {
