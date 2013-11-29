@@ -83,7 +83,7 @@ public class QuickSettingsTiles extends Fragment {
             }
         }
         int panelWidth = getItemFromSystemUi("notification_panel_width", "dimen");
-        if (panelWidth != 0) {
+        if (panelWidth > 0) {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(panelWidth,
                     FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL);
             mDragView.setLayoutParams(params);
@@ -181,7 +181,7 @@ public class QuickSettingsTiles extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         genTiles();
-        mDragView.setOnRearrangeListener(new OnRearrangeListener() {
+        mDragView.setOnRearrangeListener(new DraggableGridView.OnRearrangeListener() {
             public void onRearrange(int oldIndex, int newIndex) {
                 ArrayList<String> tiles = QuickSettingsUtil.getTileListFromString(
                         QuickSettingsUtil.getCurrentTiles(getActivity(), mConfigRibbon));
@@ -339,10 +339,5 @@ public class QuickSettingsTiles extends Fragment {
                     getContext(), mIsRibbon);
             return !(usedTiles.contains(mTiles[position].tile.getId()));
         }
-    }
-
-    public interface OnRearrangeListener {
-        public abstract void onRearrange(int oldIndex, int newIndex);
-        public abstract void onDelete(int index);
     }
 }

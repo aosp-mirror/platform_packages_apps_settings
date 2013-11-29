@@ -265,7 +265,8 @@ public class QuickSettingsUtil {
 
     public static String getCurrentTiles(Context context, boolean isRibbon) {
         String tiles = Settings.System.getString(context.getContentResolver(),
-                Settings.System.QUICK_SETTINGS_TILES);
+                isRibbon ? Settings.System.QUICK_SETTINGS_RIBBON_TILES
+                         : Settings.System.QUICK_SETTINGS_TILES);
         if (tiles == null) {
             tiles = getDefaultTiles(context);
         }
@@ -274,13 +275,15 @@ public class QuickSettingsUtil {
 
     public static void saveCurrentTiles(Context context, String tiles, boolean isRibbon) {
         Settings.System.putString(context.getContentResolver(),
-                Settings.System.QUICK_SETTINGS_TILES, tiles);
+                isRibbon ? Settings.System.QUICK_SETTINGS_RIBBON_TILES
+                         : Settings.System.QUICK_SETTINGS_TILES, tiles);
     }
 
     public static void resetTiles(Context context, boolean isRibbon) {
         String defaultTiles = getDefaultTiles(context);
         Settings.System.putString(context.getContentResolver(),
-               Settings.System.QUICK_SETTINGS_TILES, defaultTiles);
+                isRibbon ? Settings.System.QUICK_SETTINGS_RIBBON_TILES
+                         : Settings.System.QUICK_SETTINGS_TILES, defaultTiles);
     }
 
     public static String mergeInNewTileString(String oldString, String newString) {

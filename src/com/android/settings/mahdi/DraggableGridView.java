@@ -42,10 +42,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.mahdi.QuickSettingsTiles.OnRearrangeListener;
 
 public class DraggableGridView extends ViewGroup implements
         View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
+
+    public interface OnRearrangeListener {
+        public abstract void onRearrange(int oldIndex, int newIndex);
+        public abstract void onDelete(int index);
+    }
 
     protected int colCount, childWidth, childHeight, cellGap, scroll = 0;
     protected float lastDelta = 0;

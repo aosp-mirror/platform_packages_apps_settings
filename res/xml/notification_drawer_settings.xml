@@ -29,6 +29,32 @@
      </PreferenceScreen>
 
     <PreferenceCategory
+        android:title="@string/category_quick_access" >
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_quick_access"
+            android:title="@string/title_quick_access"
+            android:defaultValue="false" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="qs_quick_access_linked"
+            android:title="@string/title_quick_access_linked"
+            android:summary="@string/summary_quick_access_linked"
+            android:defaultValue="true"
+            android:dependency="qs_quick_access"
+            android:disableDependentsState="true" />
+
+        <PreferenceScreen
+            android:key="tile_picker"
+            android:title="@string/tile_picker_title"
+            android:summary="@string/tile_picker_summary"
+            android:dependency="qs_quick_access_linked"
+            android:fragment="com.android.settings.mahdi.QuickSettingsTiles" >
+            <extra android:name="config_ribbon" android:value="true" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="options"
         android:title="@string/additional_options_title">
 
