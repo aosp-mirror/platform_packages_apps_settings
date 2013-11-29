@@ -558,26 +558,39 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void onBondingStateChanged(int bondState) {
-        if (bondState == BluetoothDevice.BOND_NONE) {
-            mProfiles.clear();
-            mConnectAfterPairing = false;  // cancel auto-connect
-            setPhonebookPermissionChoice(ACCESS_UNKNOWN);
-            setMessagePermissionChoice(ACCESS_UNKNOWN);
-            mPhonebookRejectedTimes = 0;
-            savePhonebookRejectTimes();
-            mMessageRejectedTimes = 0;
-            saveMessageRejectTimes();
-        }
 
-        refresh();
+        if(DEBUG) Log.d(TAG, "onBondingStateChanged" + bondState);
 
-        if (bondState == BluetoothDevice.BOND_BONDED) {
-            if (mDevice.isBluetoothDock()) {
-                onBondingDockConnect();
-            } else if (mConnectAfterPairing) {
-                connect(false);
-            }
-            mConnectAfterPairing = false;
+        switch (bondState) {
+            case BluetoothDevice.BOND_NONE:
+                mProfiles.clear();
+                // fall through
+
+            case BluetoothDevice.BOND_BONDING:
+                //Sometimes Remote device is unpaired by itself & try to connect again.
+                //so permission should be reset for that particular device.
+                mConnectAfterPairing = false;  // cancel auto-connect
+                setPhonebookPermissionChoice(ACCESS_UNKNOWN);
+                setMessagePermissionChoice(ACCESS_UNKNOWN);
+                mPhonebookRejectedTimes = 0;
+                savePhonebookRejectTimes();
+                mMessageRejectedTimes = 0;
+                saveMessageRejectTimes();
+
+                refresh();
+                break;
+
+            case BluetoothDevice.BOND_BONDED:
+                if (mDevice.isBluetoothDock()) {
+                    onBondingDockConnect();
+                } else if (mConnectAfterPairing) {
+                    connect(false);
+                }
+                mConnectAfterPairing = false;
+                break;
+
+            default:
+                Log.e(TAG, "Incorrect Bond State received");
         }
     }
 
