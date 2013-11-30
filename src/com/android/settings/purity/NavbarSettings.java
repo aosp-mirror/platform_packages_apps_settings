@@ -25,7 +25,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
-import com.android.internal.util.purity.DeviceUtils;
+import com.android.internal.util.cm.DeviceUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
