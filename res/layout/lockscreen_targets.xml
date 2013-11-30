@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
-        android:layout_marginEnd="8dip"
-        android:layout_marginStart="8dip"
+        android:layout_margin="8dip"
         android:padding="4dip"
         android:gravity="center_horizontal"
         android:textColor="#FFFFFF"
@@ -31,14 +30,10 @@
         android:orientation="horizontal"
         android:gravity="top"
         android:contentDescription="@*android:string/keyguard_accessibility_slide_area"
-        prvandroid:targetDrawables="@array/lockscreen_targets_unlock_only"
-        prvandroid:targetDescriptions="@array/lockscreen_target_descriptions_unlock_only"
-        prvandroid:handleDrawable="@drawable/ic_lockscreen_handle"
         prvandroid:outerRingDrawable="@*android:drawable/ic_lockscreen_outerring"
         prvandroid:outerRadius="@*android:dimen/glowpadview_target_placement_radius"
         prvandroid:innerRadius="@*android:dimen/glowpadview_inner_radius"
         prvandroid:snapMargin="@*android:dimen/glowpadview_snap_margin"
-        prvandroid:firstItemOffset="@*android:integer/kg_glowpad_rotation_offset"
         prvandroid:magneticTargets="false"
         prvandroid:feedbackCount="1"
         prvandroid:vibrationDuration="20"
@@ -47,3 +42,4 @@
         prvandroid:allowScaling="true" />
 
 </LinearLayout>
+

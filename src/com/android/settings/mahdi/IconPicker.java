@@ -16,9 +16,6 @@
 
 package com.android.settings.mahdi;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,19 +38,23 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.util.mahdi.LockscreenTargetUtils;
 import com.android.settings.R;
 
+import java.io.File;
+
 public class IconPicker {
+    private static final String ICON_ACTION = "com.mahdi.ACTION_PICK_ICON";
+    public static final String RESOURCE_NAME = "resource_name";
+    public static final String PACKAGE_NAME = "package_name";
+
+    public static final int REQUEST_PICK_SYSTEM = 0;
+    public static final int REQUEST_PICK_GALLERY = 1;
+    public static final int REQUEST_PICK_ICON_PACK = 2;
 
     private Activity mParent;
     private Resources mResources;
     private OnIconPickListener mIconListener;
-    private static final String ICON_ACTION = "com.mahdi.ACTION_PICK_ICON";
-    public static final String RESOURCE_NAME = "resource_name";
-    public static final String PACKAGE_NAME = "package_name";
-    public static final int REQUEST_PICK_SYSTEM = 0;
-    public static final int REQUEST_PICK_GALLERY = 1;
-    public static final int REQUEST_PICK_ICON_PACK = 2;
 
     public interface OnIconPickListener {
         void iconPicked(int requestCode, int resultCode, Intent in);
@@ -70,48 +71,55 @@ public class IconPicker {
     }
 
     public void pickIcon(final int fragmentId, final File image) {
-        Intent iconPack = new Intent(ICON_ACTION);
-        ArrayList<String> items = new ArrayList<String>();
-        items.add(mResources.getString(R.string.icon_picker_system_icons_title));
-        items.add(mResources.getString(R.string.icon_picker_gallery_title));
-        ComponentName aInfo = iconPack.resolveActivity(mParent.getPackageManager());
-        if (aInfo != null) {
-            items.add(mResources.getString(R.string.icon_picker_pack_title));
+        Intent iconPackIntent = new Intent(ICON_ACTION);
+        ComponentName component = iconPackIntent.resolveActivity(mParent.getPackageManager());
+
+        String[] items = new String[component != null ? 2 : 1];
+        items[0] = mResources.getString(R.string.icon_picker_system_icons_title);
+        //items[1] = mResources.getString(R.string.icon_picker_gallery_title);
+        if (component != null) {
+            items[1] = mResources.getString(R.string.icon_picker_pack_title);
         }
+
         new AlertDialog.Builder(mParent)
-        .setTitle(R.string.icon_picker_title)
-        .setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                showChosen(item, image, fragmentId);
-            }
-        }).show();
+                .setTitle(R.string.icon_picker_title)
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        showChosen(item, image, fragmentId);
+                    }
+                })
+                .show();
     }
 
-    private void startFragmentOrActivityForResult(Intent pickIntent, int requestCode, int fragmentId) {
+    private void startFragmentOrActivityForResult(Intent pickIntent,
+            int requestCode, int fragmentId) {
         if (fragmentId == 0) {
             mParent.startActivityForResult(pickIntent, requestCode);
         } else {
-            Fragment cFrag = mParent.getFragmentManager().findFragmentById(fragmentId);
-            if (cFrag != null) {
-                mParent.startActivityFromFragment(cFrag, pickIntent, requestCode);
+            Fragment fragment = mParent.getFragmentManager().findFragmentById(fragmentId);
+            if (fragment != null) {
+                mParent.startActivityFromFragment(fragment, pickIntent, requestCode);
             }
         }
     }
 
     private void showChosen(final int type, File image, int fragmentId) {
         if (type == REQUEST_PICK_SYSTEM) {
-            ListView listie = new ListView(mParent);
-            listie.setAdapter(new IconAdapter());
+            ListView list = new ListView(mParent);
+            final IconAdapter adapter = new IconAdapter();
+
             final Dialog dialog = new Dialog(mParent);
             dialog.setTitle(R.string.icon_picker_choose_icon_title);
-            dialog.setContentView(listie);
-            listie.setOnItemClickListener(new OnItemClickListener(){
+            dialog.setContentView(list);
+
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(new OnItemClickListener(){
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                        int position, long id) {
-                    Intent in = new Intent();
-                    in.putExtra("resource_name", ((IconAdapter) parent.getAdapter()).getItemReference(position));
-                    mIconListener.iconPicked(type, Activity.RESULT_OK, in);
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent();
+                    intent.putExtra(RESOURCE_NAME, adapter.getItemReference(position));
+                    mIconListener.iconPicked(type, Activity.RESULT_OK, intent);
                     dialog.dismiss();
                 }
             });
@@ -128,26 +136,25 @@ public class IconPicker {
             intent.putExtra("outputX", 162);
             intent.putExtra("outputY", 162);
             try {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(image));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(image));
                 intent.putExtra("return-data", false);
                 startFragmentOrActivityForResult(intent, type, fragmentId);
             } catch (ActivityNotFoundException e) {
                 e.printStackTrace();
             }
         } else if (type == REQUEST_PICK_ICON_PACK) {
-            Intent iconPack = new Intent(ICON_ACTION);
-            startFragmentOrActivityForResult(iconPack, type, fragmentId);
+            Intent iconPackIntent = new Intent(ICON_ACTION);
+            startFragmentOrActivityForResult(iconPackIntent, type, fragmentId);
         }
     }
 
     class IconAdapter extends BaseAdapter {
-
         String[] labels;
-        TypedArray icons;
+        String[] icons;
 
         public IconAdapter() {
             labels = mResources.getStringArray(R.array.lockscreen_icon_picker_labels);
-            icons = mResources.obtainTypedArray(R.array.lockscreen_icon_picker_icons);
+            icons = mResources.getStringArray(R.array.lockscreen_icon_picker_icons);
         }
 
         @Override
@@ -157,14 +164,13 @@ public class IconPicker {
 
         @Override
         public Object getItem(int position) {
-            return icons.getDrawable(position);
+            return LockscreenTargetUtils.getDrawableFromResources(
+                    mParent, null, icons[position], false);
         }
 
         public String getItemReference(int position) {
-            String name = icons.getString(position);
-            int separatorIndex = name.lastIndexOf(File.separator);
-            int periodIndex = name.lastIndexOf('.');
-            return name.substring(separatorIndex + 1, periodIndex);
+            String name = icons[position];
+            return name;
         }
 
         @Override
@@ -174,28 +180,22 @@ public class IconPicker {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View iView = convertView;
+            View view = convertView;
             if (convertView == null) {
-                iView = View.inflate(mParent, android.R.layout.simple_list_item_1, null);
+                view = View.inflate(mParent, android.R.layout.simple_list_item_1, null);
             }
-            TextView tt = (TextView) iView.findViewById(android.R.id.text1);
-            tt.setText(labels[position]);
-            Drawable ic = ((Drawable) getItem(position)).mutate();
-            int bound = mParent.getResources().getDimensionPixelSize(R.dimen.shortcut_picker_left_padding);
-            ic.setBounds(0,  0, bound, bound);
-            tt.setCompoundDrawables(ic, null, null, null);
-            return iView;
-        }
 
-    }
+            TextView label = (TextView) view.findViewById(android.R.id.text1);
+            label.setText(labels[position]);
 
-    class IconItem {
-        String label;
-        int id;
-        IconItem(String l, int i) {
-            label = l;
-            id = i;
+            Drawable icon = ((Drawable) getItem(position)).mutate();
+            int bound = mParent.getResources().getDimensionPixelSize(
+                    R.dimen.shortcut_picker_left_padding);
+
+            icon.setBounds(0,  0, bound, bound);
+            label.setCompoundDrawables(icon, null, null, null);
+
+            return view;
         }
     }
-
 }
