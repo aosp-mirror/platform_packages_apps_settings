@@ -19,7 +19,23 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/status_bar_title">
 
-    <!-- Status bar tweaks -->
+    <PreferenceCategory
+        android:title="@string/title_general">
+
+	<CheckBoxPreference
+            android:key="status_bar_brightness_control"
+            android:title="@string/status_bar_toggle_brightness"
+            android:summary="@string/status_bar_toggle_brightness_summary"
+            android:defaultValue="false" />
+
+	<com.android.settings.mahdi.SystemSettingCheckBoxPreference
+	    android:key="status_bar_traffic"
+	    android:title="@string/show_network_speed"
+	    android:summary="@string/show_network_speed_summary"
+	    android:defaultValue="true" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:title="@string/status_bar_style_title">
 
@@ -34,17 +50,6 @@
             android:key="battery_style_pref"
             android:title="@string/battery_icon_title"
 	    android:summary="@string/battery_icon_summary" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/title_general">
-
-	<com.android.settings.mahdi.SystemSettingCheckBoxPreference
-	    android:key="status_bar_traffic"
-	    android:title="@string/show_network_speed"
-	    android:summary="@string/show_network_speed_summary"
-	    android:defaultValue="true" />
 
     </PreferenceCategory>
 
