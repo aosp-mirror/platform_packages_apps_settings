@@ -68,6 +68,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
     private static final String KEY_LOCKSCREEN_ROTATION = "lockscreen_rotation";
+    private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
+    private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -86,7 +88,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceCategory mLightOptions;
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
-    
+    private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+    private PreferenceCategory mWakeUpOptions;    
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -180,6 +183,25 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } else {
                 updateBatteryPulseDescription();
             }
+        }
+
+        mWakeUpOptions = (PreferenceCategory) prefSet.findPreference(KEY_WAKEUP_CATEGORY);
+        int counter = 0;
+        mWakeUpWhenPluggedOrUnplugged =
+            (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
+        // hide option if device is already set to never wake up
+        if(!getResources().getBoolean(
+                com.android.internal.R.bool.config_unplugTurnsOnScreen)) {
+                mWakeUpOptions.removePreference(mWakeUpWhenPluggedOrUnplugged);
+                counter++;
+        } else {
+            mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
+            mWakeUpWhenPluggedOrUnplugged.setOnPreferenceChangeListener(this);
+        }
+
+        if (counter == 2) {
+            prefSet.removePreference(mWakeUpOptions);
         }
     }
 
@@ -444,6 +466,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
+        }
+
+	if (KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
+                    (Boolean) objValue ? 1 : 0);
         }
 
         return true;
