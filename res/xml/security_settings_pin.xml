@@ -43,6 +43,13 @@
             android:title="@string/unlock_quick_unlock_control_title"
             android:summary="@string/unlock_quick_unlock_control_summary" />
 
+	<ListPreference
+            android:key="lock_numpad_random"
+            android:entries="@array/lock_numpad_random_entries"
+            android:entryValues="@array/lock_numpad_random_values"
+            android:title="@string/lock_numpad_random_title"
+            android:dialogTitle="@string/lock_numpad_random_dialog_title" />
+
         <CheckBoxPreference
             android:key="keyguard_enable_widgets"
             android:title="@string/security_enable_widgets_title"/>
