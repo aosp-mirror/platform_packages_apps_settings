@@ -66,12 +66,10 @@ public class SmsCallHelper {
                 Settings.System.QUIET_HOURS_END, 0);
 
         if (quietHoursEnabled) {
-            /*
-            // Recommended for all inQuietHours() if a tile/toggle is added
+            // 24 hour - togglable
             if (quietHoursStart == quietHoursEnd) {
                 return true;
             }
-            */
 
             // Get the date in "quiet hours" format.
             int minutes = returnTimeInMinutes();
@@ -351,17 +349,12 @@ public class SmsCallHelper {
             return;
         }
 
-        /*
-         * I'd recommend setting this (throughout slim)
-         * to return true for QH settings *IF* you get a
-         * QH toggle or similar so that the user can toggle
-         * and easily get 24hr QH until toggled off.
         if (quietHoursStart == quietHoursEnd) {
             // 24 hours, start without stop
             context.startService(serviceTriggerIntent);
             return;
         }
-        */
+
 
         Calendar calendar = Calendar.getInstance();
         int currentMinutes = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
