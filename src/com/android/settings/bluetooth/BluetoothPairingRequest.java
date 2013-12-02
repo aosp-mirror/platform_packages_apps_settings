@@ -115,6 +115,19 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             NotificationManager manager = (NotificationManager) context
                     .getSystemService(Context.NOTIFICATION_SERVICE);
             manager.cancel(NOTIFICATION_ID);
+
+        } else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+            int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
+                    BluetoothDevice.ERROR);
+            int oldState = intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE,
+                    BluetoothDevice.ERROR);
+            if((oldState == BluetoothDevice.BOND_BONDING) &&
+                    (bondState == BluetoothDevice.BOND_NONE)) {
+                // Remove the notification
+                NotificationManager manager = (NotificationManager) context
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.cancel(NOTIFICATION_ID);
+            }
         }
     }
 }
