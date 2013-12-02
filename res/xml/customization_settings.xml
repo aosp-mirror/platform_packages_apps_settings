@@ -41,6 +41,13 @@
         android:fragment="com.android.settings.mahdi.NotificationDrawerSettings" />
 
     <PreferenceScreen
+        android:key="app_sidebar"
+        android:title="@string/app_sidebar_title"        
+        android:summary="@string/app_sidebar_summary"
+        android:icon="@drawable/ic_settings_app_bar"
+        android:fragment="com.android.settings.mahdi.AppSidebar" />
+
+    <PreferenceScreen
         android:key="button_settings"
         android:title="@string/button_settings_title"
 	android:summary="@string/button_settings_summary"
