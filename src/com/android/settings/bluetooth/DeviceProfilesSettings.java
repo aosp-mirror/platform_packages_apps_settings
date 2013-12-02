@@ -60,6 +60,8 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     private CachedBluetoothDevice mCachedDevice;
     private LocalBluetoothProfileManager mProfileManager;
 
+    private static final int OK_BUTTON = -1;
+
     private PreferenceGroup mProfileContainer;
     private EditTextPreference mDeviceNamePref;
 
@@ -292,8 +294,11 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         DialogInterface.OnClickListener disconnectListener =
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                device.disconnect(profile);
-                profile.setPreferred(device.getDevice(), false);
+                // Disconnect only when user has selected OK
+                if (which == OK_BUTTON) {
+                    device.disconnect(profile);
+                    profile.setPreferred(device.getDevice(), false);
+                }
             }
         };
 
