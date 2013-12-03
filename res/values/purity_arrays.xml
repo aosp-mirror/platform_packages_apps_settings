@@ -118,40 +118,6 @@
         <item>@string/clock_date_format_custom</item>
     </string-array>
 
-    <string-array name="entries_battery_icon">
-        <item>@string/battery_status_icon</item>
-        <item>@string/battery_status_percentage</item>
-        <item>@string/battery_status_icon_percentage</item>
-        <item>@string/battery_status_circle</item>
-        <item>@string/battery_status_circle_percentage</item>
-        <item>@string/battery_status_dotted_circle</item>
-        <item>@string/battery_status_dotted_circle_percentage</item>
-    </string-array>
-
-    <string-array name="values_battery_icon" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-    </string-array>
-
-    <string-array name="circle_battery_animation_speed_entries" >
-        <item>@string/circle_battery_animation_speed_none</item>
-        <item>@string/circle_battery_animation_speed_slow</item>
-        <item>@string/circle_battery_animation_speed_stock</item>
-        <item>@string/circle_battery_animation_speed_fast</item>
-    </string-array>
-
-    <string-array name="circle_battery_animation_speed_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>3</item>
-        <item>5</item>
-    </string-array>
-
     <!-- Screen-off animations -->
     <string-array name="screen_off_animation_entries">
         <item>Fade-out</item>
@@ -344,5 +310,19 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+
+    <string-array name="entries_status_bar_battery" translatable="false">
+        <item>@string/status_bar_style_icon</item>
+        <item>@string/status_bar_battery_status_circle</item>
+        <item>@string/status_bar_battery_status_circle_percentage</item>
+        <item>@string/status_bar_style_hidden</item>
+    </string-array>
+
+    <string-array name="values_status_bar_battery" translatable="false">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 </resources>

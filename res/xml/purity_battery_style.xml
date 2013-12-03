@@ -19,31 +19,10 @@
     android:title="@string/battery_icon_title">
 
     <ListPreference
-        android:key="battery_icon"
-        android:dialogTitle="@string/battery_icon_title"
-        android:title="@string/battery_icon_title"
-        android:entries="@array/entries_battery_icon"
-        android:entryValues="@array/values_battery_icon" />
-
-    <net.margaritov.preference.colorpicker.ColorPickerPreference
-        android:key="battery_color"
-        android:title="@string/battery_color_title"
-        android:defaultValue="0xffffffff" />
-
-    <ListPreference
-        android:key="circle_battery_animation_speed"
-        android:title="@string/circle_battery_animation_speed"
-        android:entries="@array/circle_battery_animation_speed_entries"
-        android:entryValues="@array/circle_battery_animation_speed_values" />
-
-    <net.margaritov.preference.colorpicker.ColorPickerPreference
-        android:key="battery_text_color"
-        android:title="@string/battery_text_color"
-        android:defaultValue="0xffffffff" />
-
-    <net.margaritov.preference.colorpicker.ColorPickerPreference
-        android:key="battery_text_charging_color"
-        android:title="@string/battery_text_charging_color"
-        android:defaultValue="0xffffffff" />
+        android:key="status_bar_battery"
+        android:dialogTitle="@string/status_bar_battery_title"
+        android:title="@string/status_bar_battery_title"
+        android:entries="@array/entries_status_bar_battery"
+        android:entryValues="@array/values_status_bar_battery" />
 
 </PreferenceScreen>
