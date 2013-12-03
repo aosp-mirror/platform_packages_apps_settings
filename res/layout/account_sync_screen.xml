@@ -27,8 +27,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/settings_side_margin"
-        android:layout_marginEnd="@dimen/settings_side_margin"
+        android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+        android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side"
         android:scaleType="fitXY"
         android:src="?android:attr/listDivider" />
 
@@ -38,7 +38,7 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:scrollbarStyle="outsideOverlay" />
+        android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle" />
 
     <TextView android:id="@+id/sync_settings_error_info"
         android:layout_width="match_parent"

@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:scrollbarStyle="@integer/preference_scrollbar_style" />
+                android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle" />
             <TextView android:id="@android:id/empty"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -45,8 +45,6 @@
              RTL support -->
         <view class="com.android.settings.applications.LinearColorBar"
                 android:id="@+id/storage_color_bar"
-                android:layout_marginStart="@dimen/settings_side_margin"
-                android:layout_marginEnd="@dimen/settings_side_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-5dp"
@@ -55,7 +53,11 @@
                 android:clipToPadding="false"
                 android:paddingTop="30dp"
                 android:paddingBottom="1dp"
-                android:layoutDirection="ltr">
+                android:layoutDirection="ltr"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+                android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side">
             <TextView android:id="@+id/usedStorageText"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -92,6 +94,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+            android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side"
             android:visibility="gone"
             android:gravity="center">
 

@@ -459,7 +459,8 @@ public class Utils {
             ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
 
             final Resources res = list.getResources();
-            final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
+            final int paddingSide = res.getDimensionPixelSize(
+                    com.android.internal.R.dimen.preference_fragment_padding_side);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
