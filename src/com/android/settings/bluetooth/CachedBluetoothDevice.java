@@ -564,12 +564,12 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         switch (bondState) {
             case BluetoothDevice.BOND_NONE:
                 mProfiles.clear();
+                mConnectAfterPairing = false;  // cancel auto-connect
                 // fall through
 
             case BluetoothDevice.BOND_BONDING:
                 //Sometimes Remote device is unpaired by itself & try to connect again.
                 //so permission should be reset for that particular device.
-                mConnectAfterPairing = false;  // cancel auto-connect
                 setPhonebookPermissionChoice(ACCESS_UNKNOWN);
                 setMessagePermissionChoice(ACCESS_UNKNOWN);
                 mPhonebookRejectedTimes = 0;
