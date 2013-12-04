@@ -73,6 +73,26 @@
 	android:title="@string/lock_screen_title"
 	android:summary="@string/lock_screen_summary"
 	android:icon="@drawable/ic_settings_lockscreen"
-        android:fragment="com.android.settings.mahdi.LockscreenInterface" />               
+        android:fragment="com.android.settings.mahdi.LockscreenInterface" />
+
+    <PreferenceScreen
+        android:key="xposed"
+        android:title="@string/xposed_title"
+        android:summary="@string/xposed_summary"
+	android:icon="@drawable/ic_settings_xposed">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="de.robv.android.xposed.installer"
+                android:targetClass="de.robv.android.xposed.installer.WelcomeActivity" />
+        </PreferenceScreen>
+
+    <PreferenceScreen
+        android:key="app_settings"
+        android:title="@string/app_settings_title"
+        android:summary="@string/app_settings_summary"
+	android:icon="@drawable/ic_settings_app_settings">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="de.robv.android.xposed.mods.appsettings"
+                android:targetClass="de.robv.android.xposed.mods.appsettings.XposedModActivity" />
+        </PreferenceScreen>
        
 </PreferenceScreen>
