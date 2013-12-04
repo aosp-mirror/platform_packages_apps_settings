@@ -434,6 +434,9 @@ public class RunningProcessesView extends FrameLayout
             @Override
             public void onClick(View v) {
                 mAdapter.setShowBackground(true);
+                if (mOwner != null) {
+                    mOwner.getActivity().invalidateOptionsMenu();
+                }
             }
         });
         mForegroundProcessText = (TextView)findViewById(R.id.foregroundText);
@@ -441,6 +444,9 @@ public class RunningProcessesView extends FrameLayout
             @Override
             public void onClick(View v) {
                 mAdapter.setShowBackground(false);
+                if (mOwner != null) {
+                    mOwner.getActivity().invalidateOptionsMenu();
+                }
             }
         });
 
