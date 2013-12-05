@@ -193,6 +193,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             scp.setFragmentIntent(this, intent);
         }
 
+        mVolumeKeyCursorControl = (ListPreference) findPreference(VOLUME_KEY_CURSOR_CONTROL);
         if(mVolumeKeyCursorControl != null) {
             mVolumeKeyCursorControl.setOnPreferenceChangeListener(this);
             mVolumeKeyCursorControl.setValue(Integer.toString(Settings.System.getInt(getActivity()
