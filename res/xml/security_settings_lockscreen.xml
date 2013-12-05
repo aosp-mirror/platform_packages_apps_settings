@@ -26,9 +26,10 @@
             android:summary="@string/unlock_set_unlock_mode_off"
             android:persistent="false"/>
 
-        <CheckBoxPreference
+        <PreferenceScreen
             android:key="keyguard_enable_widgets"
-            android:title="@string/security_enable_widgets_title"/>
+            android:fragment="com.android.settings.mahdi.LockscreenWidgets"
+            android:title="@string/lockscreen_widgets_title"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"

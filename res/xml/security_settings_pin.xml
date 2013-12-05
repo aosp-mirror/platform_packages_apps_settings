@@ -50,9 +50,10 @@
             android:title="@string/lock_numpad_random_title"
             android:dialogTitle="@string/lock_numpad_random_dialog_title" />
 
-        <CheckBoxPreference
+        <PreferenceScreen
             android:key="keyguard_enable_widgets"
-            android:title="@string/security_enable_widgets_title"/>
+            android:fragment="com.android.settings.mahdi.LockscreenWidgets"
+            android:title="@string/lockscreen_widgets_title"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"

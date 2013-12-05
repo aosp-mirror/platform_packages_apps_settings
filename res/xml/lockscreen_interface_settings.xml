@@ -17,6 +17,9 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/lock_screen_title" >
 
+    <PreferenceCategory
+        android:title="@string/title_general">
+
         <PreferenceScreen
             android:key="screen_security"
             android:fragment="com.android.settings.SecuritySettings"
@@ -24,28 +27,23 @@
             android:summary="@string/screen_security_summary">             
         </PreferenceScreen>
 
-    <PreferenceCategory
-        android:title="@string/title_general">
+	<PreferenceScreen
+        android:key="active_display"
+        android:fragment="com.android.settings.mahdi.activedisplay.ActiveDisplaySettings"
+        android:title="@string/ad_settings_title"
+        android:summary="@string/ad_settings_summary">
+        </PreferenceScreen>
 
-	 <PreferenceScreen
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_shortcuts">
+
+	<PreferenceScreen
             android:fragment="com.android.settings.mahdi.LockscreenTargets"
             android:key="lockscreen_targets"
             android:summary="@string/lockscreen_target_summary"
             android:title="@string/lockscreen_target_title" />
-	
-        <PreferenceScreen
-        android:key="lock_clock"
-        android:title="@string/lock_clock_title"
-        android:summary="@string/lock_clock_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.cyanogenmod.lockclock"
-                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
-        </PreferenceScreen>
-
-        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:summary="@string/lockscreen_maximize_widgets_summary"
-            android:title="@string/lockscreen_maximize_widgets_title" />        
 
 	<CheckBoxPreference
             android:key="battery_around_lockscreen_ring"
@@ -56,14 +54,40 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/ad_settings_title">
-
-	<PreferenceScreen
-        android:key="active_display"
-        android:fragment="com.android.settings.mahdi.activedisplay.ActiveDisplaySettings"
-        android:title="@string/ad_settings_title"
-        android:summary="@string/ad_settings_summary">
+        android:title="@string/title_widgets">
+	
+        <PreferenceScreen
+        android:key="lock_clock"
+        android:title="@string/lock_clock_title"
+        android:summary="@string/lock_clock_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.cyanogenmod.lockclock"
+                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
         </PreferenceScreen>
+
+	<CheckBoxPreference
+            android:key="lockscreen_enable_widgets"
+            android:title="@string/security_enable_widgets_title" />
+
+         <CheckBoxPreference
+            android:key="lockscreen_camera_widget"
+            android:title="@string/lockscreen_camera_widget_title"
+            android:summary="@string/lockscreen_camera_widget_summary" />
+
+        <CheckBoxPreference
+            android:key="lockscreen_use_widget_container_carousel"
+            android:title="@string/lockscreen_use_widget_container_carousel_title"
+            android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
+
+         <CheckBoxPreference
+            android:key="lockscreen_disable_hints"
+            android:title="@string/lockscreen_disable_hints_title"
+            android:summary="@string/lockscreen_disable_hints_summary" />
+
+         <CheckBoxPreference
+            android:key="lockscreen_maximize_widgets"
+            android:title="@string/lockscreen_maximize_widgets_title"
+            android:summary="@string/lockscreen_maximize_widgets_summary" />
 
     </PreferenceCategory>
 	    
