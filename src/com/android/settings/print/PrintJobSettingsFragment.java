@@ -19,7 +19,6 @@ package com.android.settings.print;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.print.PrintJob;
@@ -113,9 +112,11 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        MenuItem cancel = menu.add(0, MENU_ITEM_ID_CANCEL, Menu.NONE,
-                getString(R.string.print_cancel));
-        cancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        if (!mPrintJob.getInfo().isCancelling()) {
+            MenuItem cancel = menu.add(0, MENU_ITEM_ID_CANCEL, Menu.NONE,
+                    getString(R.string.print_cancel));
+            cancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
 
         if (mPrintJob.isFailed()) {
             MenuItem restart = menu.add(0, MENU_ITEM_ID_RESTART, Menu.NONE,
@@ -169,8 +170,13 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
         switch (info.getState()) {
             case PrintJobInfo.STATE_QUEUED:
             case PrintJobInfo.STATE_STARTED: {
-                mPrintJobPreference.setTitle(getString(
-                        R.string.print_printing_state_title_template, info.getLabel()));
+                if (!mPrintJob.getInfo().isCancelling()) {
+                    mPrintJobPreference.setTitle(getString(
+                            R.string.print_printing_state_title_template, info.getLabel()));
+                } else {
+                    mPrintJobPreference.setTitle(getString(
+                            R.string.print_cancelling_state_title_template, info.getLabel()));
+                }
             } break;
 
             case PrintJobInfo.STATE_FAILED: {
@@ -179,8 +185,13 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
             } break;
 
             case PrintJobInfo.STATE_BLOCKED: {
-                mPrintJobPreference.setTitle(getString(
-                        R.string.print_blocked_state_title_template, info.getLabel()));
+                if (!mPrintJob.getInfo().isCancelling()) {
+                    mPrintJobPreference.setTitle(getString(
+                            R.string.print_blocked_state_title_template, info.getLabel()));
+                } else {
+                    mPrintJobPreference.setTitle(getString(
+                            R.string.print_cancelling_state_title_template, info.getLabel()));
+                }
             } break;
         }
 

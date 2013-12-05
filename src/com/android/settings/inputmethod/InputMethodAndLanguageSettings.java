@@ -166,25 +166,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mKeyboardSettingsCategory.addPreference(currentIme);
         }
 
-        synchronized (mInputMethodPreferenceList) {
-            mInputMethodPreferenceList.clear();
-            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
-            final int N = (imis == null ? 0 : imis.size());
-            for (int i = 0; i < N; ++i) {
-                final InputMethodInfo imi = imis.get(i);
-                final InputMethodPreference pref = getInputMethodPreference(imi);
-                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
-                mInputMethodPreferenceList.add(pref);
-            }
-
-            if (!mInputMethodPreferenceList.isEmpty()) {
-                Collections.sort(mInputMethodPreferenceList);
-                for (int i = 0; i < N; ++i) {
-                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
-                }
-            }
-        }
-
         // Build hard keyboard and game controller preference categories.
         mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
         updateInputDevices();
@@ -311,10 +292,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         // Refresh internal states in mInputMethodSettingValues to keep the latest
         // "InputMethodInfo"s and "InputMethodSubtype"s
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
-        // TODO: Consolidate the logic to InputMethodSettingsWrapper
-        InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
-                this, getContentResolver(),
-                mInputMethodSettingValues.getInputMethodList(), null);
         updateInputMethodPreferenceViews();
     }
 
@@ -427,6 +404,28 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private void updateInputMethodPreferenceViews() {
         synchronized (mInputMethodPreferenceList) {
+            // Clear existing "InputMethodPreference"s
+            for (final InputMethodPreference imp : mInputMethodPreferenceList) {
+                mKeyboardSettingsCategory.removePreference(imp);
+            }
+            mInputMethodPreferenceList.clear();
+            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+            final int N = (imis == null ? 0 : imis.size());
+            for (int i = 0; i < N; ++i) {
+                final InputMethodInfo imi = imis.get(i);
+                final InputMethodPreference pref = getInputMethodPreference(imi);
+                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
+                mInputMethodPreferenceList.add(pref);
+            }
+
+            if (!mInputMethodPreferenceList.isEmpty()) {
+                Collections.sort(mInputMethodPreferenceList);
+                for (int i = 0; i < N; ++i) {
+                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+                }
+            }
+
+            // update views status
             for (Preference pref : mInputMethodPreferenceList) {
                 if (pref instanceof InputMethodPreference) {
                     ((InputMethodPreference) pref).updatePreferenceViews();
@@ -434,6 +433,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
         updateCurrentImeName();
+        // TODO: Consolidate the logic with InputMethodSettingsWrapper
+        // CAVEAT: The preference class here does not know about the default value - that is
+        // managed by the Input Method Manager Service, so in this case it could save the wrong
+        // value. Hence we must update the checkboxes here.
+        InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
+                this, getContentResolver(),
+                mInputMethodSettingValues.getInputMethodList(), null);
     }
 
     private void updateCurrentImeName() {
