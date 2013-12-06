@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"اگر قسمت میزبان خالی است، قسمت درگاه باید خالی باشد."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"درگاهی که وارد کردید معتبر نیست."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"‏از پروکسی HTTP توسط مرورگرها استفاده می‌شود اما ممکن است توسط برنامه‌های دیگر استفاده نشود."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"‏نشانی اینترنتی PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"مکان:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"‏CID مجاور:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"به‌عنوان تلفن دارای بلندگو"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"برای موسیقی و رسانه"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"به خاطر سپردن تنظیمات"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"نمایش بی‌سیم"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"برای دیدن دستگاه‌ها، صفحه‌نمایش بی‌سیم را روشن کنید."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"‏صفحه نمایش بی‌سیم غیرفعال است زیرا Wi-Fi خاموش است."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"جستجوی صفحه نمایش‌ها"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"در حال جستجو..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"هیچ صفحه نمایش بی‌سیمی در این نزدیکی یافت نشد."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"صفحه‌نمایش‌های مرتبط شده"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"دستگاه‌های موجود"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"فرستادن صفحه‌نمایش"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"فعال کردن امکان نمایش بی‌سیم"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"هیچ دستگاهی در این نزدیکی یافت نشد."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"در حال اتصال"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"متصل"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"در دسترس"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"درحال استفاده"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"در دسترس نیست"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"تنظیمات نمایش"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"اتصال قطع شود؟"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"‏این کار اتصال شما را با این دستگاه قطع می‌کند:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"گزینه‌های صفحه‌نمایش بی‌سیم"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"فراموش کردن"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"انجام شد"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"نام"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"روشن"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"خاموش"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"غیرفعال شد"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"تبادل داده هنگامیکه رایانهٔ لوحی در تماس با دستگاه دیگر است مجاز باشد"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"اجازه برای تبادل داده‌ها هنگامی که تلفن دستگاه دیگری را لمس می‌کند"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"نمی‌توان وضعیت قفل سیم کارت را تغییر داد.\nاحتمالاً پین نادرست است."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"تأیید"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"لغو"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"کد پین سیم کارت اشتباه است، اکنون برای گشودن قفل دستگاهتان باید با شرکت مخابراتی تماس بگیرید."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"کد پین سیم کارت اشتباه است، <xliff:g id="NUMBER">%d</xliff:g> بار دیگر می‌توانید تلاش کنید و پس از آن برای گشودن قفل دستگاهتان باید با شرکت مخابراتی تماس بگیرید."</item>
+    <item quantity="other" msgid="77103619544346451">"کد پین سیم کارت اشتباه است، <xliff:g id="NUMBER">%d</xliff:g> بار دیگر می‌توانید تلاش کنید."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"عملیات پین سیم کارت ناموفق بود!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"وضعیت رایانهٔ لوحی"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"وضعیت تلفن"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"به‌روزرسانی‌های سیستم"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"استفاده زیاد از باتری"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"استفاده کم از باتری"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"حالت مکان"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"‏استفاده از GPS،‏ Wi-Fi و شبکه همراه برای تخمین مکان"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"‏استفاده از Wi-Fi و شبکه همراه برای تخمین مکان"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"‏استفاده از GPS برای تعیین دقیق مکان‌ شما"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"‏استفاده از GPS،‏ شبکه‌های تلفن همراه و Wi-Fi برای تعیین مکان"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"‏استفاده از شبکه‌های تلفن همراه و Wi-Fi برای تعیین مکان"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"‏استفاده از GPS برای تعیین مکان شما"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"در حال بازیابی..."</string>
     <string name="location_network_based" msgid="9134175479520582215">"‏مکان شبکه تلفن همراه و Wi-Fi"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"‏به برنامه‌ها اجازه داده شود با استفاده از خدمات مکانی Google مکان شما را سریع‌تر تخمین بزنند. داده‌های مکان به‌طور ناشناس جمع‌آوری شده و به Google ارسال خواهد شد."</string>
@@ -1437,7 +1434,7 @@
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"از <xliff:g id="SERVICE">%1$s</xliff:g> استفاده شود؟"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"ممکن است سند شما برای رسیدن به چاپگر از یک یا چند سرور عبور کند."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"سرویسی نصب نشده است"</string>
-    <string name="print_no_printers_found" msgid="989018646884973683">"‏هیچ چاپگری یافت نشدj"</string>
+    <string name="print_no_printers_found" msgid="989018646884973683">"هیچ چاپگری یافت نشد"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"تنظیمات"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"افزودن چاپگرها"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"روشن"</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"لغو"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"در حال چاپ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"در حال لغو <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"خطای چاپگر <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"چاپگر کار <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> را مسدود کرد"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"کادر جستجو نمایان شد"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"محدودیت پردازش در پس‌زمینه"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏نمایش تمام ANRها"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"نمایش گفتگوی \"برنامه پاسخ نمی‌دهد\" برای برنامه‌های پس‌زمینه"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"‏‫کار با WebView آزمایشی"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"‏‫برنامه‌ها با جدیدترین WebView (بتا) کار می‌کنند"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"مصرف داده"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"چرخهٔ استفاده از داده"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"رومینگ داده"</string>
@@ -1957,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"انجام شد"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"پایش شبکه"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"این دستگاه توسط این افراد مدیریت می‌شود:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nسرپرستتان قادر است بر فعالیت شبکه شما از جمله ایمیل‌ها، برنامه‌ها و وب‌سایت‌های ایمن نظارت داشته باشد.\n\nبرای کسب اطلاعات بیشتر، با سرپرستتان تماس بگیرید."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"یک شخص ثالث قادر به پایش فعالیت شبکه شما،\nاز جمله ایمیل‌ها، برنامه‌ها، و وب‌سایت‌های ایمن است.\n\nاعتبارنامه قابل اعتمادی که بر روی دستگاهتان نصب شده این کار را امکان‌پذیر می‌کند."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"شخص ثالتی می‌تواند بر فعالیت‌های شبکه شما از جمله ایمیل‌ها، برنامه‌ها و وب‌سایت‌های ایمن نظارت داشته باشد.\n\nیک اعتبارنامه مورد اعتماد نصب شده در دستگاه شما این مورد را ممکن می‌سازد."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"بررسی اعتبارنامه‌های قابل اعتماد"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"کاربران"</string>
     <string name="user_list_title" msgid="7937158411137563543">"کاربران و نمایه‌ها"</string>

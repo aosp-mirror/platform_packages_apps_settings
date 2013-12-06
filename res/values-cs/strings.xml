@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Pokud je pole hostitel prázdné, musí být prázdné i pole port."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Zadaný port není platný."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Server proxy protokolu HTTP může používat prohlížeč, ale nesmí jej používat další aplikace."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"Adresa URL PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Místo:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Sousední identifikátor CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Jako telefon pro hlasitý poslech"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pro hudbu a média"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamatovat nastavení"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Bezdrátový displej"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Chcete-li zobrazit zařízení, zapněte bezdrátový displej."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Bezdrátový displej je zakázán, protože je vypnuté připojení Wi-Fi."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Hledat displeje"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Vyhledávání…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Žádné bezdrátové displeje v okolí"</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Spárované displeje"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Dostupná zařízení"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Vzdálená obrazovka"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Povolit bezdrátový displej"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"V okolí nebyla nalezena žádná zařízení."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Připojování"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Připojené"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Dostupné"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Používá se"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Není k dispozici"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Nastavení displeje"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Odpojit?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Tímto ukončíte připojení k zařízení:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Možnosti bezdrátového displeje"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Odstranit"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Hotovo"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Název"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Zapnuté"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Vypnuté"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Zakázané"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Povolit výměnu dat, pokud se tablet dotkne jiného zařízení"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Povolit výměnu dat, pokud se telefon dotkne jiného zařízení"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Stav zámku SIM karty nelze změnit.\nZřejmě jste zadali nesprávný kód PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Zrušit"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Zadali jste nesprávný kód PIN SIM karty. Nyní musíte za účelem odemknutí zařízení kontaktovat svého operátora."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"Zadali jste nesprávný kód PIN SIM karty. Máte ještě <xliff:g id="NUMBER">%d</xliff:g> pokus, poté budete muset o odemknutí zařízení požádat svého operátora."</item>
+    <item quantity="other" msgid="77103619544346451">"Zadali jste nesprávný kód PIN SIM karty. Počet zbývajících pokusů: <xliff:g id="NUMBER">%d</xliff:g>."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Operace pomocí kódu PIN SIM karty se nezdařila!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Stav tabletu"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Stav telefonu"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aktualizace systému"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Vysoké využívání baterie"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Nízké využívání baterie"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Režim určování polohy"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"K určení polohy použít GPS, Wi-Fi a mobilní síť"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"K určení polohy použít Wi-Fi a mobilní síť"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"K určení polohy použít GPS"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"K určení polohy použít GPS, Wi-Fi a mobilní sítě"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"K určení polohy použít Wi-Fi a mobilní sítě"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"K určení polohy použít GPS"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Načítání…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Poloha Wi-Fi a mobilní sítě"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Povolit aplikacím používat službu určování polohy Google a rychleji odhadovat vaši polohu. Anonymní data budou sbírána a odesílána Googlu."</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Storno"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Tisk úlohy <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Rušení úlohy <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Chyba tiskárny u úlohy <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Tiskárna blokuje úlohu <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Vyhledávací pole se zobrazuje"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Omezení procesů na pozadí"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Zobrazit všechny ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Dialog „Aplikace neodpovídá“ pro aplikace na pozadí"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Experimentální WebView"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Aplikace použijí nejnovější WebView (beta)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Přenesená data"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cyklus počítání dat"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Datový roaming"</string>
@@ -1957,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"Hotovo"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Monitorování sítě"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Toto zařízení je spravováno následující doménou:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nSprávce může monitorovat aktivitu v síti, včetně e-mailů, aplikací a zabezpečených webů.\n\nChcete-li získat další informace, kontaktujte svého správce."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Vaše aktivita v síti, včetně e-mailů, aplikací a zabezpečených\nwebových stránek může být monitorována třetí stranou.\n\nUmožňují to důvěryhodné identifikační údaje nainstalované ve vašem zařízení."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Vaše aktivita v síti, včetně e-mailů, aplikací a zabezpečených webových stránek může být monitorována třetí stranou.\n\nUmožňují to důvěryhodné identifikační údaje nainstalované ve vašem zařízení."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Zkontrolovat důvěryhodné identifikační údaje"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Uživatelé"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Uživatelé a profily"</string>

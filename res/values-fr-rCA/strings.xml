@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Le champ Port doit rester vide si le champ Hôte n\'est pas renseigné."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Le port indiqué n\'est pas valide."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Le serveur mandataire HTTP est utilisé par le navigateur, mais ne peut pas l\'être par les autres applications."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"URL de configuration automatique de mandataire : "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Emplacement :"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID voisin :"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Infos sur la cellule :"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Comme téléphone à haut-parleur"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pour la musique et le multimédia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Mémoriser ces paramètres"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Affichage sans fil"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Pour voir les appareils, activez l\'affichage sans fil."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"L\'affichage sans fil est désactivé, car le Wi-Fi n\'est pas activé."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Rechercher affichages"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Searching…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Aucun affichage sans fil trouvé à prox."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Affichages associés"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Appareils disponibles"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Écran de diffusion"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activer l\'affichage sans fil"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Aucun appareil détecté à proximité."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Connexion en cours…"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Connecté"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Disponible"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"En cours d\'utilisation"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Non accessible"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Paramètres d\'affichage"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Voulez-vous vraiment vous déconnecter?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Cette opération va mettre fin à votre connexion avec :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Options d\'affichage sans fil"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Supprimer"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Terminé"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"nom"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Activé"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Désactivé"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Désactivés"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Autoriser l\'échange de données lorsque le téléphone est en contact avec un autre appareil"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Impossible de changer l\'état de verrouillage de la carte SIM.\nLe NIP est peut-être incorrect."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annuler"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"NIP de carte SIM incorrect. Vous devez maintenant communiquer avec votre fournisseur de services pour déverrouiller votre appareil."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"NIP de carte SIM incorrect. Il vous reste <xliff:g id="NUMBER">%d</xliff:g> tentative. Après cela, vous devrez communiquer avec votre fournisseur de services pour déverrouiller votre appareil."</item>
+    <item quantity="other" msgid="77103619544346451">"NIP de carte SIM incorrect. Il vous reste <xliff:g id="NUMBER">%d</xliff:g> tentative(s)."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Le déverrouillage par NIP de carte SIM a échoué."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"État de la tablette"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"État du téléphone"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Mises à jour du système"</string>
@@ -1001,7 +998,7 @@
     <string name="location_title" msgid="1029961368397484576">"My Location"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Mode"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Haute précision"</string>
-    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Économiser la pile"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Économie de la pile"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Appareil uniquement"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Localisation désactivée"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Demandes localisation récentes"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Forte utilisation de la pile"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Faible utilisation de la pile"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mode de localisation"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Util. GPS+Wi-Fi+cell. pour estimer pos."</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Util. rés. Wi-Fi+cell. pour estimer pos."</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Utiliser GPS pour local. pos."</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Utiliser le GPS en conjonction avec les réseaux cellulaires et Wi-Fi pour déterminer la position"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Utiliser les réseaux Wi-Fi et cellulaires pour déterminer la position"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Utiliser le GPS pour déterminer la position"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Récupération en cours…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Localis. via Wi-Fi et réseau mob."</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Autoriser applis à utiliser localisation Google pour estimer position plus rapidement. Infos localisation anonymes envoyées à Google."</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Annuler"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Impression de <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> en cours…"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Annulation de « <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> »…"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Erreur d\'impression : <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g> bloquée par l\'imprimante"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Champ de recherche affiché"</string>
@@ -1528,7 +1526,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Essayez de vous connecter à un autre appareil Bluetooth."</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Batterie utilisée par l\'application"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Arrêter ou désinstaller l\'application"</string>
-    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Sélectionnez le mode d\'économie d\'énergie"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Sélectionnez le mode Économie de la pile"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"L\'application dispose peut-être de paramètres permettant de réduire l\'utilisation de la batterie."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Batterie utilisée par l\'utilisateur"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite processus arr.-plan"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Afficher tous les messages «L\'application ne répond pas»"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Afficher « L\'application ne répond plus » pour applis en arrière-plan"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Utiliser WebVie expérim."</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Applis utiliseront dernière version WebView (bêta)."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilisation des données"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cycle de consommation"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Itinérance des données"</string>
@@ -1959,7 +1955,7 @@
     <string name="done_button" msgid="1991471253042622230">"Terminé"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Surveillance réseau"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Cet appareil est géré au sein du domaine suivant :\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nL\'administrateur de ce domaine a la possibilité de surveiller vos activités sur le réseau, notamment vos courriels, vos applications et les sites Web sécurisés.\n\nPour en savoir plus à ce sujet, communiquez avec votre administrateur."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Un tiers peut surveiller votre activité réseau,\n y compris les courriels, les applications et les sites Web sécurisés.\n\nUn certificat de confiance installé sur votre appareil rend cela possible."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Un tiers peut surveiller votre activité réseau, y compris les courriels, les applications et les sites Web sécurisés. \n\nUn certificat de confiance installé sur votre appareil rend cela possible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Vérifier les certificats de confiance"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Utilisateurs"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Utilisateurs et profils"</string>

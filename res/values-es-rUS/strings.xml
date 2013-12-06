@@ -95,7 +95,7 @@
     <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(conexiones inalámbricas)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"No se está cargando."</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"No se realiza la carga"</string>
-    <string name="battery_info_status_full" msgid="2824614753861462808">"Cargada"</string>
+    <string name="battery_info_status_full" msgid="2824614753861462808">"Cargado"</string>
     <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Desconectado"</string>
     <string name="battery_info_power_ac" msgid="6808516193001604634">"CA"</string>
     <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"El campo del puerto debe estar vacío si el campo de servidor está vacío."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"El puerto que has escrito no es válido."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"El navegador usa el proxy HTTP pero tal vez las demás aplicaciones no lo usen."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"URL de configuración automática de proxy: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Ubicación:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID cercano:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Información móvil:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Como altavoz"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música y medios"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recordar la configuración"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Pantalla inalámbrica"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Para ver los dispositivos, activa la pantalla inalámbrica."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"La pantalla inalámbrica está inhabilitada porque la red Wi-Fi está desactivada."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Buscar pantallas"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Buscando..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"No se encontraron pantallas inalámbricas cercanas."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Pantallas sincronizadas"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Dispositivos disponibles"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Pantalla de Cast"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Habilitar pantalla inalámbrica"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No se encontraron dispositivos cercanos."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Conectando"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Conectada"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Disponible"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"En uso"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"No disponible"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Configuración de visualización"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"¿Desconectar?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Finalizará tu conexión con&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;."</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Opciones de pantalla inalámbrica"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Borrar"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Listo"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Nombre"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Activada"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Desactivada"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Inhabilitada"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permitir el intercambio de datos cuando la tablet entre en contacto con otro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permitir el intercambio de datos cuando el dispositivo toque otro dispositivo"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"No se puede cambiar el estado de bloqueo de la tarjeta SIM.\nPIN posiblemente incorrecto."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Aceptar"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Cancelar"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"El código PIN de la tarjeta SIM es incorrecto. Debes comunicarte con el proveedor para desbloquear el dispositivo."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"El código PIN de la tarjeta SIM es incorrecto. Te queda <xliff:g id="NUMBER">%d</xliff:g> intento antes de que debas comunicarte con el proveedor para desbloquear el dispositivo."</item>
+    <item quantity="other" msgid="77103619544346451">"El código PIN de la tarjeta SIM es incorrecto. Te quedan <xliff:g id="NUMBER">%d</xliff:g> intentos."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Error al desbloquear la tarjeta SIM con el PIN"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Estado del tablet"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Estado del dispositivo"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualiz. del sistema"</string>
@@ -874,7 +871,7 @@
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Desmontaje en progreso"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"Poco espacio de almacenamiento"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"Es posible que algunas funciones del sistema, como la sincronización, no funcionen correctamente. Intenta eliminar o a desactivar elementos para liberar espacio (por ejemplo, aplicaciones o contenido multimedia)."</string>
-    <string name="storage_menu_usb" msgid="5708207885333243384">"Conexión con comput. por USB"</string>
+    <string name="storage_menu_usb" msgid="5708207885333243384">"Conexión con computadora por USB"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Conexión con comput. por USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectarse como"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositivo multimedia (MTP)"</string>
@@ -1004,15 +1001,15 @@
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Ahorro de batería"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Solo en dispositivos"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Ubicación desactivada"</string>
-    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Solicit. ubicación recientes"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Solicitudes de ubicaciones recientes"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Ninguna aplicación solicitó la ubicación recientemente."</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Servicios de ubicación"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Uso de batería alto"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Uso de batería bajo"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Modo de ubicación"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Ubicar con GPS/Wi-Fi/red móvil"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Ubicar con Wi‑Fi y red móvil"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Ubicar con GPS"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Determinar ubicación con GPS, Wi‑Fi y redes móviles"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Determinar ubicación con Wi‑Fi y redes móviles"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Determinar ubicación con GPS"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Recuperando…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Ubicación de Wi-Fi y red móvil"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que aplicaciones usen el servicio de ubicación de Google para calcular tu ubicación (se enviarán datos anónimos a Google)"</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Cancelar"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Imprimiendo <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Cancelando <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Error de impresora <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"La impresora bloqueó <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>."</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Cuadro de búsqueda visible"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Límite de procesos en segundo plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Errores sin respuesta"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Mostrar diálogo cuando las aplic. en 2do plano no responden"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Usar WebView experimental"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Las aplic. usarán última versión (beta) de WebView."</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso de datos"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de datos"</string>
@@ -1957,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"Listo"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Supervisión de red"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Este dispositivo está administrado por:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nEl administrador puede supervisar la actividad de la red, incluido el correo electrónico, las aplicaciones y los sitios web seguros.\n\nPara obtener más información, comunícate con el administrador."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Un tercero puede supervisar la actividad de la red,\nincluidos los mensajes de correo electrónico, las aplicaciones y los sitios web seguros.\n\nEsto es posible debido a que hay una credencial de confianza instalada en el dispositivo."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Un tercero puede supervisar tu actividad en la red, incluido el correo electrónico, las aplicaciones y los sitios web seguros.\n\nEsto ocurre porque hay una credencial de confianza instalada en el dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Comprobar credenciales de confianza"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Usuarios"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Usuarios y perfiles"</string>

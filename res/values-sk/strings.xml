@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Ak je pole hostiteľ prázdne, musí byť prázdne aj pole port."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Zadaný port nie je platný."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Prehliadač používa server proxy pre protokol HTTP, ale ostatné aplikácie ho používať nemusia."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"Adresa URL PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Poloha:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Susedný identifikátor CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Ako reproduktor telefónu"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pre hudbu a médiá"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamätať nastavenia"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Bezdrôtový displej"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Ak chcete zobraziť zariadenia, zapnite bezdrôtový displej."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Bezdrôtový displej je zakázaný, pretože je vypnuté pripojenie Wi-Fi."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Vyhľadávať displeje"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Vyhľadávanie..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"V blízkosti sa nenašli žiadne displeje s bezdrôtovým pripojením."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Spárované displeje"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Dostupné zariadenia"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Vzdialená obrazovka"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Povoliť bezdrôtový displej"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"V okolí sa nenašli žiadne zariadenia."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Prepája sa"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Pripojené"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"K dispozícii"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Používa sa"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Nie je k dispozícii"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Nastavenia obrazovky"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Odpojiť?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Táto akcia ukončí vaše pripojenie so zariadením:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Možnosti bezdrôtového displeja"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Odstrániť"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Hotovo"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Názov"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Zapnuté"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Vypnuté"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Zakázané"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Povoliť výmenu údajov, ak sa tablet dotýka iného zariadenia"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Povoliť výmenu údajov, ak sa telefón dotýka iného zariadenia"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Stav zámku karty SIM nie je možné zmeniť.\nZrejme ste zadali nesprávny kód PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Zrušiť"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Nesprávny kód PIN karty SIM. Teraz musíte kontaktovať svojho operátora, aby vám odomkol zariadenie."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"Nesprávny kód PIN karty SIM. Zostáva vám <xliff:g id="NUMBER">%d</xliff:g> pokus, inak budete musieť kontaktovať svojho operátora, aby vám odomkol zariadenie."</item>
+    <item quantity="other" msgid="77103619544346451">"Nesprávny kód PIN karty SIM. Počet zostávajúcich pokusov: <xliff:g id="NUMBER">%d</xliff:g>."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Operácia kódu PIN karty SIM zlyhala!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Stav tabletu"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Stav telefónu"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aktualizácie systému"</string>
@@ -1001,7 +998,7 @@
     <string name="location_title" msgid="1029961368397484576">"Moja poloha"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Režim"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Vysoká presnosť"</string>
-    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Šetrenie batérie"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Úspora batérie"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Iba pre zariadenie"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Poloha je vypnutá"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Nedávne žiadosti o polohu"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Vysoká spotreba batérie"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Nízka spotreba batérie"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Režim určovania polohy"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Odhadovať polohu pomocou systému GPS, siete Wi-Fi a mobilných sietí"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Odhadovať polohu pomocou siete Wi-Fi a mobilných sietí"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Na presné určenie polohy použiť systém GPS"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Určovať polohu pomocou systému GPS, siete Wi-Fi a mobilných sietí"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Určovať polohu pomocou siete Wi-Fi a mobilných sietí"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Určovať polohu pomocou systému GPS"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Načítava sa..."</string>
     <string name="location_network_based" msgid="9134175479520582215">"Poloha Wi-Fi a mobilnej siete"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Povoliť apl. používať službu urč. polohy Google a rýchl. odhad. vašu polohu. Anonym. údaje o polohe sa budú odosielať spol. Google."</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Zrušiť"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Prebieha tlač úlohy <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Prebieha zrušenie úlohy <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Chyba tlačiarne – úloha <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Tlačiareň zablok. úlohu <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Vyhľadávacie pole je zobrazené"</string>
@@ -1528,7 +1526,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Skúste sa pripojiť k inému zariadeniu Bluetooth"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Využitie batérie aplikáciou"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Zastavte aplikáciu alebo ju odinštalujte"</string>
-    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Vyberte režim šetrenia batérie"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Vyberte režim úspory batérie"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Táto aplikácia môže ponúkať nastavenia na zníženie používania batérie"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Využitie batérie používateľom"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> od odpojenia"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limit procesov na pozadí"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Zobraziť všetky ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Zobraziť dialóg Aplikácia neodpovedá pre aplikácie na pozadí"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Experimentálne WebView"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Aplikácie použijú najnovšie WebView (beta)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Využitie dát"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cyklus počítania dát"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Dátové služby pri roamingu"</string>
@@ -1957,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"Hotovo"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Monitorovanie siete"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Toto zariadenie je spravované nasledujúcou doménou:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nSprávca môže monitorovať vašu aktivitu v sieti vrátane e-mailov, aplikácií a zabezpečených webových stránok.\n\nAk chcete získať viac informácií, kontaktujte svojho správcu."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Tretia strana môže monitorovať vašu aktivitu\nv sieti vrátane e-mailov, aplikácií a zabezpečených webových stránok.\n\nUmožňuje to dôveryhodné poverenie nainštalované vo vašom zariadení."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Vaša aktivita v sieti, vrátane e-mailov, aplikácií a zabezpečených webových stránok môže byť monitorovaná treťou stranou.\n\nUmožňujú to dôveryhodné identifikačné údaje nainštalované vo vašom zariadení."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Skontrolovať dôveryhodné poverenia"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Používatelia"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Používatelia a profily"</string>

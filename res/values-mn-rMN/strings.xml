@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Хостын талбар хоосон байгаа бол портын талбар хоосон байх шаардлагатай."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Таны оруулсан порт буруу байна."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP проксиг хөтөч ашиглаж байгаа боловч бусад апп-ууд ашиглахгүй байж магадгүй."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Байршил"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Хөрш CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Үүрийн мэдээлэл:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Чанга яригч утсаар"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Хөгжим болон медианд зориулсан"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Тохиргоог сануулах"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Утасгүй дэлгэц"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Төхөөрөмжүүдийг харахын тулд утасгүй дэлгэцийг асаана уу."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Wi-Fi хаалттай байгаа учир утасгүй дэлгэцийг идэвхгүйжүүлсэн."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Дэлгэц хайх"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Хайж байна..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Ойролцоо утасгүй дэлгэц олдсонгүй."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Хослуулсан дэлгэцүүд"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Боломжит төхөөрөмжүүд"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Дамжуулах дэлгэц"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Утасгүй дэлгэцийг идэвхжүүлэх"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Ойролцоо төхөөрөмж олдсонгүй."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Холбогдож байна"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Холбогдсон"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Боломжтой"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Ашиглаж байгаа"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Байхгүй"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Дэлгэцийн тохиргоо"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Салгах уу?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Энэ таныг дараах холболтоос салгах болно:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Утасгүй дэлгэцний тохируулга"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Мартах"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Дууссан"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Нэр"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Идэвхтэй"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Идэвхгүй"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Идэвхгүйжүүлсэн"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Таблет өөр төхөөрөмжид хүрэх үед өгөгдөл солилцохыг зөвшөөрөх"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Утас өөр төхөөрөмжид хүрэх үед өгөгдөл солилцохыг зөвшөөрөх"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"SIM картын түгжигдсэн байдлыг өөрчлөх боломжгүй.\nБуруу PIN байж магадгүй."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Тийм"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Цуцлах"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"СИМ ПИН код буруу, та төхөөрөмжийн түгжээх тайлахын тулд өөрийн оператор компанитай холбоо барина уу."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"СИМ ПИН код буруу байна, танд мобайл оператор компанитай холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдсэн байна."</item>
+    <item quantity="other" msgid="77103619544346451">"СИМ ПИН код буруу байна, танд <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдлээ."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"СИМ ПИН ажиллуулах амжилтгүй боллоо!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Таблетын статус"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Утасны статус"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Системийн шинэчлэлтүүд"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Батерейны зарцуулалт өндөр"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Батерейны зарцуулалт бага"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Байршлын горим"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Өөрийн байршлыг заахын тулд GPS ашиглах"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Өөрийн байршлыг тодорхойлохын тулд GPS ашиглах"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Дуудаж байна…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi &amp; мобайл сүлжээний байршил"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Апп-уудад Google-н байршлын үйлчилгээ ашиглан таны байршлыг хурдан олохыг зөвшөөрөх. Нэргүй байршлын мэдээлэл цуглуулагдаж Google рүү илгээгдэх болно."</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Цуцлах"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Хэвлэж байна <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Цуцлаж байна <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Принтерийн алдаа <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Принтер хориглогдсон <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Хайлтын нүдийг гаргах"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Далд процессын хязгаар"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Бүх ANRs харуулах"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Далд апп-уудад Апп Хариу Өгөхгүй байна гэснийг харуулах"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Туршилтын ВэбХарах-г ашиглах"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Апп-ууд хамгийн шинэхэн (туршилтын) WebView-г ашиглах болно"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Дата ашиглалт"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Дата ашиглалтын цикль"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Дата роуминг"</string>
@@ -1957,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"Дууссан"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Сүлжээний хяналт"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Энэ төхөөрөмжийг \n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n удирдаж байна\nТанай админ имэйл, апп болон аюулгүй вебсайтууд гэх мэтийг оруулан таны сүлжээний үйл ажиллагааг хянах боломжтой.\n\nДэлгэрэнгүй мэдээллийг админтайгаа холбогдож авна уу."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Гуравдагч талын этгээд таны сүлжээг хянаж байж болзошгүй\nүүнд имэйл, апп-ууд болон аюулгүй вебсайтууд багтана.\n\nТаны төхөөрөмж дээр суулгасан итгэмжлэгдсэн жуух энэ боломжоор хангаж байна."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Гуравдагч талын этгээд таны имэйл, апп-ууд болон аюулгүй вебсайтууд гэх мэтийг оруулан таны сүлжээний үйл ажиллагааг хянах боломжтой.\n\nТаны төхөөрөмж дээр суулгасан итгэмжлэгдсэн жуухын тусламжтайгаар ингэх боломжтой."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Итгэмжлэгдсэн жуухуудыг шалгах"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Хэрэглэгчид"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Хэрэглэгчид &amp; профайлууд"</string>

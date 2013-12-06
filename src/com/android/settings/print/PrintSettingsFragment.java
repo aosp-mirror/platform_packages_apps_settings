@@ -376,9 +376,15 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
                     switch (printJob.getState()) {
                         case PrintJobInfo.STATE_QUEUED:
                         case PrintJobInfo.STATE_STARTED: {
-                            preference.setTitle(getString(
-                                    R.string.print_printing_state_title_template,
-                                    printJob.getLabel()));
+                            if (!printJob.isCancelling()) {
+                                preference.setTitle(getString(
+                                        R.string.print_printing_state_title_template,
+                                        printJob.getLabel()));
+                            } else {
+                                preference.setTitle(getString(
+                                        R.string.print_cancelling_state_title_template,
+                                        printJob.getLabel()));
+                            }
                         } break;
 
                         case PrintJobInfo.STATE_FAILED: {
@@ -388,9 +394,15 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
                         } break;
 
                         case PrintJobInfo.STATE_BLOCKED: {
-                            preference.setTitle(getString(
-                                    R.string.print_blocked_state_title_template,
-                                    printJob.getLabel()));
+                            if (!printJob.isCancelling()) {
+                                preference.setTitle(getString(
+                                        R.string.print_blocked_state_title_template,
+                                        printJob.getLabel()));
+                            } else {
+                                preference.setTitle(getString(
+                                        R.string.print_cancelling_state_title_template,
+                                        printJob.getLabel()));
+                            }
                         } break;
                     }
 

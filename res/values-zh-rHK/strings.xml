@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"如果主機欄位留空，則通訊埠欄位也必須留空。"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"您所輸入的通訊埠無效。"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"瀏覽器會使用 HTTP Proxy，但其他應用程式不一定會採用這項設定"</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC 網址： "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"位置："</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"相鄰的客戶編號："</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"手機資訊："</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"作為手機揚聲器"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用於音樂與媒體"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"記住設定"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"無線顯示"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"如要查看裝置，請開啟無線顯示功能。"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Wi-Fi 處於關閉狀態，因此已停用無線顯示功能。"</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"搜尋顯示裝置"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"正在搜尋…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"找不到附近的無線顯示裝置。"</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"已配對的顯示裝置"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"可用的裝置"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"放送螢幕"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"啟用無線螢幕分享"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"找不到附近的裝置。"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"連線中"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"已連線"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"可用"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"使用中"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"無法使用"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"顯示設定"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"中斷連線？"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"這樣會結束您與下列裝置的連線：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"無線顯示選項"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"刪除"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"完成"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"名稱"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"開啟"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"關閉"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"已停用"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"允許平板電腦在與其他裝置接觸時交換資料"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"允許手機與其他裝置接觸時交換資料"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"無法更改 SIM 卡鎖定狀態。\n可能輸入了不正確的 PIN 碼。"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"確定"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"取消"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM PIN 碼不正確，您現在必須聯絡流動網絡供應商為您的裝置解鎖。"</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"SIM PIN 碼不正確，您剩下 <xliff:g id="NUMBER">%d</xliff:g> 次機會輸入。如果仍然輸入錯誤，您必須聯絡流動網絡供應商為您的裝置解鎖。"</item>
+    <item quantity="other" msgid="77103619544346451">"SIM PIN 碼不正確，您剩下 <xliff:g id="NUMBER">%d</xliff:g> 次機會輸入。"</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"SIM PIN 碼操作失敗！"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"平板電腦狀態"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"手機狀態"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"系統更新"</string>
@@ -992,8 +989,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"流動數據計劃"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"預設短訊應用程式"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"變更短訊應用程式？"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"改用「<xliff:g id="NEW_APP">%s</xliff:g>」作為短訊應用程式 (取代「<xliff:g id="CURRENT_APP">%s</xliff:g>」)？"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」作為短訊應用程式？"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"改用「<xliff:g id="NEW_APP">%s</xliff:g>」為您的短訊應用程式，以取代「<xliff:g id="CURRENT_APP">%s</xliff:g>」？"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」為您的短訊應用程式？"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"未知的 SIM 流動網絡供應商"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s 沒有提供任何已知的網站"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"請插入 SIM 卡，並重新啟動裝置"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"高電池用量"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"低電池用量"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"定位模式"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"使用 GPS、Wi-Fi 和流動網絡確定約略的位置"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"使用 Wi-Fi 和流動網絡確定約略的位置"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"使用 GPS 定出您的精確位置"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"使用 GPS、Wi-Fi 和流動網絡確定位置"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"使用 Wi-Fi 和流動網絡確定位置"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"使用 GPS 確定您的位置"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"正在擷取…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi 和流動網絡位置資訊"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"允許應用程式使用 Google 的位置資訊服務，藉此更快確定您的約略位置。系統會收集匿名的位置資料傳送給 Google。"</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"取消"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"正在列印 <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"正在取消 <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"打印機錯誤：<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"打印機已封鎖 <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"搜尋框已顯示"</string>
@@ -1528,7 +1526,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"嘗試連接另一部藍牙裝置"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"應用程式耗電量"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"停止或解除安裝應用程式"</string>
-    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"選取省電模式"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"選取節約電池用量模式"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"應用程式可能有提供節省電力的設定"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"用戶用電量"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"拔除插頭後已耗電 <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1832,8 +1830,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"背景處理程序限制"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"顯示所有 ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"顯示背景應用程式的「應用程式無回應」對話框"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"使用實驗版 WebView"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"應用程式將使用最新的 WebView (測試版)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"數據用量"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"資料用量週期"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"數據漫遊服務"</string>
@@ -1961,7 +1957,7 @@
     <string name="done_button" msgid="1991471253042622230">"完成"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"網絡監管"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"這部裝置由下列網域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理員可以監控您的網絡活動，包括收發電郵、使用應用程式和瀏覽安全網站。\n\n如需詳細資料，請與您的管理員聯絡。"</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"第三方可以監察您的網絡活動，\n包括收發電郵、使用應用程式及瀏覽安全網站。\n\n當裝置安裝了信任的憑證，便可能會出現這種情況。"</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以監察您的網絡活動，包括收發電郵、使用應用程式及瀏覽安全網站。\n\n裝置安裝了信任的憑證後，便可能會出現這種情況。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"檢查信任的憑證"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"用戶"</string>
     <string name="user_list_title" msgid="7937158411137563543">"用戶和個人檔案"</string>

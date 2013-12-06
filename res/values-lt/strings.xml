@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Prievado laukas turi būti tuščias, jei tuščias prieglobos laukas."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Prievadas, kurį įvedėte, netinkamas."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP įgaliotąjį serverį naudoja naršyklė, bet jo negali naudoti kitos programos."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Vieta:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Šalia esantis CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Mob. tel. informacija:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Kaip kalbėtojo telefonas"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Muzikai ir medijai"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Atsiminti nustatymus"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Belaidis rodymas"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Jei norite matyti įrenginius, įjunkite belaidį rodymą."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Belaidžio ryšio pateiktis neleidžiama, nes „Wi-Fi“ išjungta."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Ieškoti pateikčių"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Ieškoma…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Nerasta belaidžio ryšio pateikčių netol."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Susietos pateiktys"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Pasiekiami įrenginiai"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Perduoti ekraną"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Įgalinti belaidį rodymą"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Nerasta netoliese esančių įrenginių."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Jungiama"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Prijungta"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Pasiekiama"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Naudojama"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Nepasiekiamas"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Pateikties nustatymai"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Atsijungti?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Tai nutrauks ryšį su:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Belaidžio rodymo parinktys"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Pamiršti"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Atlikta"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Pavadinimas"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Įjungta"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Išjungta"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Neleidžiama"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Leisti keistis duomenimis, kai planšetinis kompiuteris aptinka kitą įrenginį"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Leisti keistis duomenimis, kai telefonas paliečia kitą įrenginį"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Neįmanoma pakeisti SIM kortelės užrakto būsenos.\nTikriausiai netinkamas PIN kodas."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Gerai"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Atšaukti"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Netinkamas SIM kortelės PIN kodas. Reikės susisiekti su operatoriumi, kad atrakintų įrenginį."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"Netinkamas SIM kortelės PIN kodas. Jums liko <xliff:g id="NUMBER">%d</xliff:g> band. Paskui reikės susisiekti su operatoriumi, kad jis atrakintų įrenginį."</item>
+    <item quantity="other" msgid="77103619544346451">"Netinkamas SIM kortelės PIN kodas, liko <xliff:g id="NUMBER">%d</xliff:g> band."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Nepavyko atlikti SIM kortelės PIN kodo operacijos."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Planšetinio kompiuterio būsena"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefono būsena"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Sistemos naujiniai"</string>
@@ -1000,7 +997,7 @@
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Prisijunkite prie interneto"</string>
     <string name="location_title" msgid="1029961368397484576">"Mano vieta"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Režimas"</string>
-    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Itin tikslu"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Didelis tikslumas"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Akumuliatoriaus tausojimas"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Tik įrenginys"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Vietovė išjungta"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Naudoja daug akum. energijos"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Naudoja mažai akum. energijos"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Vietovės režimas"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Vietą nust. su GPS, „Wi‑Fi“ ir mob. tinklu"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Vietą nust. su „Wi‑Fi“ ir mob. tinklu"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Naudoti GPS vietovei nurodyti"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Vietovę nustatyti naudojant GPS, „Wi‑Fi“ ir mobiliojo ryšio tinklus"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Vietovę nustatyti naudojant „Wi‑Fi“ ir mobiliojo ryšio tinklus"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Vietovę nustatyti naudojant GPS"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Nuskaitoma…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"„Wi-Fi“ ir mob. tinklo vietovė"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Leisti programoms naud. „Google“ viet. pasl., kad viet. būtų nustatoma greičiau. Anonim. viet. duom. bus renk. ir siunč. „Google“."</string>
@@ -1407,7 +1404,7 @@
     <string name="captioning_foreground_color" msgid="85623486537640059">"Teksto spalva"</string>
     <string name="captioning_edge_color" msgid="3670094753735263238">"Krašto spalva"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"Krašto tipas"</string>
-    <string name="captioning_typeface" msgid="1826169240566563259">"Šriftų šeima"</string>
+    <string name="captioning_typeface" msgid="1826169240566563259">"Šriftų grupė"</string>
     <string name="captioning_preview_text" msgid="4067935959797375065">"Antraštės atrodys taip"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"Numatytoji"</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Atšaukti"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Spausdinama: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Atšaukiama: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Spausdintuvo klaida: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Spausdintuvas užblokavo <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Paieškos laukelis rodomas"</string>
@@ -1828,8 +1826,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Fono procesų apribojimas"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Rodyti visus ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Fon. programose rodyti dialogo langą „Neatsako“"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Naudoti eksper. „Webview“"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Programos naudos naujausią (beta) „WebView“"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Duomenų naudojimas"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Duomenų naudojimo ciklas"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Tarptinklinis duomenų ryšys"</string>
@@ -1957,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"Atlikta"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Tinklo stebėjimas"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Šį įrenginį tvarko:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nAdministratorius gali stebėti jūsų veiklą tinkle, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos, susisiekite su administratoriumi."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Trečioji šalis gali stebėti jūsų tinklo\nveiklą, įskaitant el. paštą, programas ir saugias svetaines.\n\nVisa tai galima dėl įrenginyje įdiegtų patikimų prisijungimo duomenų."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Trečioji šalis gali stebėti jūsų tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nVisa tai galima dėl įrenginyje įdiegtų patikimų prisijungimo duomenų."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Tikrinti patikimus prisijungimo duomenis"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Naudotojai"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Naudotojai ir profiliai"</string>
