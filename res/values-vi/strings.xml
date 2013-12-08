@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Trường cổng phải trống nếu trường máy chủ lưu trữ trống."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Cổng bạn đã nhập không hợp lệ."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Proxy HTTP được sử dụng bởi trình duyệt nhưng có thể không được sử dụng bởi các ứng dụng khác."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"URL PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Vị trí:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID lân cận:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Làm loa ngoài"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Cho nhạc và phương tiện"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Nhớ cài đặt"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Hiển thị không dây"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Để xem thiết bị, bật hiển thị không dây."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Hiển thị không dây bị tắt do Wi-Fi bị tắt."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Tìm kiếm hiển thị"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Đang tìm kiếm..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Không tìm thấy hiển thị không dây lân cận nào."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Hiển thị thiết bị được ghép nối"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Thiết bị có sẵn"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Màn hình truyền"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Bật hiển thị không dây"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Không tìm thấy thiết bị lân cận nào."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Đang kết nối"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Đã kết nối"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Khả dụng"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Đang được sử dụng"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Không khả dụng"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Cài đặt hiển thị"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Ngắt kết nối?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Tác vụ này sẽ kết thúc kết nối của bạn với:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Tùy chọn hiển thị không dây"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Bỏ qua"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Xong"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Tên"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Bật"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Tắt"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Đã bị vô hiệu hóa"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Cho phép trao đổi dữ liệu khi máy tính bảng chạm vào thiết bị khác"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Cho phép trao đổi dữ liệu khi điện thoại chạm vào thiết bị khác"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Không thể thay đổi trạng thái khóa thẻ SIM.\nCó thể mã PIN không đúng."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Hủy"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Mã PIN của SIM không chính xác, bây giờ bạn phải liên hệ với nhà cung cấp dịch vụ để mở khóa thiết bị của bạn."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"Mã PIN của SIM không chính xác, bạn còn <xliff:g id="NUMBER">%d</xliff:g> lần thử trước khi bạn phải liên hệ với nhà cung cấp dịch vụ để mở khóa thiết bị của bạn."</item>
+    <item quantity="other" msgid="77103619544346451">"Mã PIN của SIM không chính xác, bạn còn <xliff:g id="NUMBER">%d</xliff:g> lần thử."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Thao tác mã PIN của SIM không thành công!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Trạng thái của máy tính bảng"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Trạng thái điện thoại"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Bản cập nhật hệ thống"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Mức sử dụng pin cao"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Mức sử dụng pin thấp"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Chế độ vị trí"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Dùng mạng GPS, WiFi, di động để đoán vị trí"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Dùng mạng WiFi &amp; di động để đoán v.trí"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Dùng GPS để xác định vị trí"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Sử dụng mạng GPS, Wi-Fi và di động để xác định vị trí"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Sử dụng mạng Wi-Fi và di động để xác định vị trí"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Sử dụng GPS để xác định vị trí của bạn"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Đang truy xuất…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Vị trí Wi‑Fi và mạng di động"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Cho phép ứng dụng dùng DV vị trí của Google để ước đoán vị trí nhanh hơn. Dữ liệu vị trí ẩn danh sẽ được thu thập và gửi tới Google."</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Hủy"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Đang in <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Hủy <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Lỗi máy in <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Máy in đã chặn <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Hiển thị hộp tìm kiếm"</string>
@@ -1955,7 +1953,7 @@
     <string name="done_button" msgid="1991471253042622230">"Xong"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Giám sát mạng"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Thiết bị này được quản lý bởi: \n <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> \n \nQuản trị viên của bạn có thể giám sát hoạt động mạng của bạn, bao gồm email, ứng dụng và trang web an toàn. \n \nĐể biết thêm thông tin, hãy liên hệ với quản trị viên của bạn."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Bên thứ ba có thể giám sát hoạt động trên mạng\ncủa bạn, bao gồm email, ứng dụng và trang web bảo mật.\n\nMột bằng chứng xác thực tin cậy được cài đặt trên thiết bị của bạn có thể dẫn đến khả năng này."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Một bên thứ ba có thể đang theo dõi hoạt động mạng của bạn, bao gồm email, ứng dụng và các trang web bảo mật.\n\nĐiều này có thể xảy ra do một chứng chỉ xác thực đáng tin cậy được cài đặt trên thiết bị của bạn."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Kiểm tra bằng chứng xác thực tin cậy"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Người dùng"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Người dùng và tiểu sử"</string>

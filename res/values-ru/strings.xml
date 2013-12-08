@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Если поле хоста не заполнено, поле порта также следует оставить пустым."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Указанный порт недействителен."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Прокси-сервер HTTP используется браузером, но недоступен для других приложений."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"URL файла автоконфигурации прокси-сервера: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Местоположение:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Соседний CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Индекс сети:"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Для громкой связи"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Беспроводной монитор"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Чтобы просмотреть список устройств, включите беспроводной проектор."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Функция отключена, т. к. нет Wi-Fi-соединения."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Поиск"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Поиск…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Беспроводные мониторы не обнаружены"</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Сопряженные экраны"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Доступные устройства"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Беспроводной монитор"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Включить"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Устройства не найдены"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Подключение…"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Подключен"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Доступен"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Используется"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Недоступен"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Настройки экрана"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Отключиться?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Произойдет разъединение с устройством&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Настройки беспроводного проектора"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Удалить"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Готово"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Название"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Включен"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Выключен"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Отключен"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Разрешить обмен данными при совмещении планшета с другим устройством"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
@@ -681,13 +672,13 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Отмена приглашения"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Вы собираетесь отменить приглашение на подключение к устройству \"<xliff:g id="PEER_NAME">%1$s</xliff:g>\". Продолжить?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Удалить эту группу?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Портативная точка доступа Wi-Fi"</string>
+    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Точка доступа Wi-Fi"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Включение точки доступа…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Выключение точки доступа…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> активна"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Ошибка подключения к точке доступа"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Настройка точки доступа Wi-Fi"</string>
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Портативная точка доступа Wi-Fi: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Сеть: <xliff:g id="NETWORK_SSID">%1$s</xliff:g>; шифрование: <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Хот-спот Android"</string>
     <string name="home_settings" msgid="212375129455718176">"Общие"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Экран"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"Не удалось изменить состояние блокировки SIM-карты.\nВозможно, введен неверный PIN-код."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"ОК"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Отмена"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Неверный PIN-код. Обратитесь к оператору связи, чтобы разблокировать SIM-карту."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"Неверный PIN-код. Осталось попыток: <xliff:g id="NUMBER">%d</xliff:g>. После этого SIM-карта будет заблокирована и вам придется обратиться к оператору связи."</item>
+    <item quantity="other" msgid="77103619544346451">"Неверный PIN-код. Осталось попыток: <xliff:g id="NUMBER">%d</xliff:g>."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"Не удалось разблокировать SIM-карту"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Состояние планшетного ПК"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Состояние телефона"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Обновление системы"</string>
@@ -992,7 +989,7 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Тарифный план"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Приложение для обмена SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Смена приложения для обмена SMS"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Использовать приложение \"<xliff:g id="NEW_APP">%s</xliff:g>\", а не \"<xliff:g id="CURRENT_APP">%s</xliff:g>\" для обмена SMS-сообщениями?"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Использовать приложение \"<xliff:g id="NEW_APP">%s</xliff:g>\" вместо \"<xliff:g id="CURRENT_APP">%s</xliff:g>\" для обмена SMS-сообщениями?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Использовать приложение \"<xliff:g id="NEW_APP">%s</xliff:g>\" для обмена SMS-сообщениями?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Неизвестный оператор"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"У оператора \"%1$s\" нет веб-сайта для синхронизации"</string>
@@ -1001,18 +998,18 @@
     <string name="location_title" msgid="1029961368397484576">"Мое местоположение"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Режим"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Высокая точность"</string>
-    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Сокращение энергопотребления"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Экономия заряда батареи"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"По датчикам устройства"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Отправка геоданных отключена"</string>
-    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Последние запросы места"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Последние геозапросы"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"В последнее время приложения не запрашивали геоданные"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Мое местоположение"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Высокий расход заряда батареи"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Низкий расход заряда батареи"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим местоположения"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Для определения местоположения используются GPS, Wi‑Fi и мобильные сети"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Для определения местоположения используются Wi‑Fi и мобильные сети"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Для определения местоположения используется GPS"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Использовать GPS, Wi‑Fi и мобильные сети для определения местоположения"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Использовать Wi‑Fi и мобильные сети для определения местоположения"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Использовать GPS для определения местоположения"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Получение…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Разрешить отправлять анонимные геоданные и позволить приложениям определять ваше местоположение с помощью Wi-Fi и мобильных сетей"</string>
@@ -1433,7 +1430,7 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Нет описания"</string>
     <string name="settings_button" msgid="3006713718908152930">"Настройки"</string>
     <string name="print_settings" msgid="4742428530112487843">"Печать"</string>
-    <string name="print_settings_title" msgid="3685449667822217816">"Службы печати"</string>
+    <string name="print_settings_title" msgid="3685449667822217816">"Средства печати"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Включить <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Путь вашего документа до принтера может проходить через несколько серверов."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Сервисов нет"</string>
@@ -1453,6 +1450,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"Отмена"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Печать задания \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\"…"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Отмена задания <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>…"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Ошибка задания \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\""</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Задание \"<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>\" заблокировано"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Окно поиска показано"</string>
@@ -1957,7 +1955,7 @@
     <string name="done_button" msgid="1991471253042622230">"Готово"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Мониторинг сети"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Устройство зарегистрировано в домене \n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>.\n\nАдминистратор может отслеживать ваши действия в интернет-сервисах, включая электронную почту, приложения и защищенные веб-сайты.\n\nЗа дополнительной информацией обращайтесь к администратору."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Администратор может отслеживать ваши действия в сети.\nНапример, он может просматривать ваши письма, приложения и список посещенных сайтов.\n\nЭто возможно благодаря надежному сертификату, установленному на устройстве."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Третья сторона может отслеживать ваши действия в сети. (например, просматривать ваши письма, приложения и список посещенных сайтов).\n\nЭто возможно благодаря надежному сертификату, установленному на устройстве."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Настройки сертификатов"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Пользователи"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Пользователи и профили"</string>
@@ -2010,7 +2008,7 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Настройки будут изменены для всех пользователей устройства."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Измените язык"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Измените размер шрифта"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Нажать и оплатить"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Оплата через NFC"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Нажать и оплатить"</string>
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Подробнее..."</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Найти приложения"</string>
