@@ -189,8 +189,6 @@ public class QuickSettingsUtil {
         if (!QSUtils.deviceSupportsCamera()) {
             removeTile(TILE_CAMERA);
         }
-
-        removeTile(TILE_NETWORKMODE);
         removeTile(TILE_LTE);
     }
 
