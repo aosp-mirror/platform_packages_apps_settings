@@ -95,6 +95,22 @@
             android:summary="@string/ad_show_ampm_summary"
             android:dependency="ad_enable"/>
 
+	<CheckBoxPreference
+            android:key="ad_turnoff_mode"
+            android:persistent="true"
+            android:title="@string/ad_turnoff_mode_title"
+            android:summary="@string/ad_turnoff_mode_summary"
+            android:dependency="ad_enable"/>
+
+        <ListPreference
+            android:key="ad_threshold"
+            android:persistent="false"
+            android:dialogTitle="@string/ad_threshold_title"
+            android:title="@string/ad_threshold_title"
+            android:entries="@array/ad_threshold_entries"
+            android:entryValues="@array/ad_threshold_values"
+            android:dependency="ad_enable"/>
+
         <ListPreference
             android:key="ad_timeout"
             android:persistent="false"
