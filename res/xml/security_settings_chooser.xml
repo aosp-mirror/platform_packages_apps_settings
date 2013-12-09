@@ -31,6 +31,11 @@
             android:fragment="com.android.settings.mahdi.LockscreenWidgets"
             android:title="@string/lockscreen_widgets_title"/>
 
+	<CheckBoxPreference
+            android:key="menu_unlock"
+            android:title="@string/unlock_menu_unlock_title"
+            android:summary="@string/unlock_menu_unlock_summary" />
+
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"

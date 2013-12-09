@@ -97,6 +97,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_BLACKLIST = "blacklist";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "quick_unlock_control";
     private static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
+    private static final String MENU_UNLOCK_PREF = "menu_unlock";
 
     private PackageManager mPM;
     private DevicePolicyManager mDPM;
@@ -128,6 +129,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private PreferenceScreen mBlacklist;
     private CheckBoxPreference mQuickUnlockScreen;
     private ListPreference mLockNumpadRandom;
+    private CheckBoxPreference mMenuUnlock;
 
     public SecuritySettings() {
         super(null /* Don't ask for restrictions pin on creation. */);
@@ -262,6 +264,15 @@ public class SecuritySettings extends RestrictedSettingsFragment
             } else {                
                 mLockBeforeUnlock.setEnabled(false);
             }
+
+	// Menu Unlock
+        mMenuUnlock = (CheckBoxPreference) root.findPreference(MENU_UNLOCK_PREF);
+        if (mMenuUnlock != null) {
+            final boolean configDisabled = getResources().getBoolean
+                    (com.android.internal.R.bool.config_disableMenuKeyInLockScreen);
+            mMenuUnlock.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.MENU_UNLOCK_SCREEN, configDisabled ? 0 : 1) == 1);
+        }
 
         // biometric weak liveliness
         mBiometricWeakLiveliness =
@@ -654,7 +665,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
 	} else if (preference == mLockBeforeUnlock) {
             Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.Secure.LOCK_BEFORE_UNLOCK, isToggled(preference) ? 1 : 0);        
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, isToggled(preference) ? 1 : 0);
+	} else if (preference == mMenuUnlock) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.MENU_UNLOCK_SCREEN, isToggled(preference) ? 1 : 0);        
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
