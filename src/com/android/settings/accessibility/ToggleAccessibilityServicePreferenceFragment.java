@@ -154,41 +154,44 @@ public class ToggleAccessibilityServicePreferenceFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING: {
-            mShownDialogId = DIALOG_ID_ENABLE_WARNING;
-            AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-            if (info == null) {
-                return null;
+                mShownDialogId = DIALOG_ID_ENABLE_WARNING;
+                AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                if (info == null) {
+                    return null;
+                }
+                AlertDialog ad = new AlertDialog.Builder(getActivity())
+                        .setTitle(getString(R.string.enable_service_title,
+                                info.getResolveInfo().loadLabel(getPackageManager())))
+                        .setIconAttribute(android.R.attr.alertDialogIcon)
+                        .setView(createEnableDialogContentView(info))
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, this)
+                        .create();
+                ad.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setFilterTouchesWhenObscured(true);
+                return ad;
             }
-            return new AlertDialog.Builder(getActivity())
-            .setTitle(getString(R.string.enable_service_title,
-                    info.getResolveInfo().loadLabel(getPackageManager())))
-                    .setIconAttribute(android.R.attr.alertDialogIcon)
-                    .setView(createEnableDialogContentView(info))
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
-        }
             case DIALOG_ID_DISABLE_WARNING: {
-            mShownDialogId = DIALOG_ID_DISABLE_WARNING;
-            AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-            if (info == null) {
-                return null;
+                mShownDialogId = DIALOG_ID_DISABLE_WARNING;
+                AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                if (info == null) {
+                    return null;
+                }
+                return new AlertDialog.Builder(getActivity())
+                        .setTitle(getString(R.string.disable_service_title,
+                                info.getResolveInfo().loadLabel(getPackageManager())))
+                        .setIconAttribute(android.R.attr.alertDialogIcon)
+                        .setMessage(getString(R.string.disable_service_message,
+                                info.getResolveInfo().loadLabel(getPackageManager())))
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, this)
+                        .create();
             }
-            return new AlertDialog.Builder(getActivity())
-            .setTitle(getString(R.string.disable_service_title,
-                    info.getResolveInfo().loadLabel(getPackageManager())))
-                    .setIconAttribute(android.R.attr.alertDialogIcon)
-                    .setMessage(getString(R.string.disable_service_message,
-                            info.getResolveInfo().loadLabel(getPackageManager())))
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
-        }
             default: {
-            throw new IllegalArgumentException();
-        }
+                throw new IllegalArgumentException();
+            }
         }
     }
 
