@@ -43,13 +43,6 @@
         android:summary="@string/keep_screen_on_summary"/>
 
     <ListPreference
-        android:key="select_runtime"
-        android:title="@string/select_runtime_title"
-        android:dialogTitle="@string/select_runtime_dialog_title"
-        android:entries="@array/select_runtime_titles"
-        android:entryValues="@array/select_runtime_values" />
-
-    <ListPreference
         android:key="hdcp_checking"
         android:title="@string/hdcp_checking_title"
         android:dialogTitle="@string/hdcp_checking_dialog_title"
@@ -277,6 +270,13 @@
             android:key="immediately_destroy_activities"
             android:title="@string/immediately_destroy_activities"
             android:summary="@string/immediately_destroy_activities_summary"/>
+
+        <ListPreference
+            android:key="select_runtime"
+            android:title="@string/select_runtime_title"
+            android:dialogTitle="@string/select_runtime_dialog_title"
+            android:entries="@array/select_runtime_titles"
+            android:entryValues="@array/select_runtime_values" />
 
         <ListPreference
             android:key="app_process_limit"
