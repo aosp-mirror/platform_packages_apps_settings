@@ -223,8 +223,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         loadInstalledServices();
         updateAllPreferences();
 
-        offerInstallAccessibilitySerivceOnce();
-
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         mSettingsContentObserver.register(getContentResolver());
         if (RotationPolicy.isRotationSupported(getActivity())) {
@@ -569,72 +567,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (context != null) {
             mToggleLockScreenRotationPreference.setChecked(
                     !RotationPolicy.isRotationLocked(context));
-        }
-    }
-
-    private void offerInstallAccessibilitySerivceOnce() {
-        // There is always one preference - if no services it is just a message.
-        if (mServicesCategory.getPreference(0) != mNoServicesMessagePreference) {
-            return;
-        }
-        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        final boolean offerInstallService = !preferences.getBoolean(
-                KEY_INSTALL_ACCESSIBILITY_SERVICE_OFFERED_ONCE, false);
-        if (offerInstallService) {
-            String screenreaderMarketLink = SystemProperties.get(
-                    SYSTEM_PROPERTY_MARKET_URL,
-                    DEFAULT_SCREENREADER_MARKET_LINK);
-            Uri marketUri = Uri.parse(screenreaderMarketLink);
-            Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
-
-            if (getPackageManager().resolveActivity(marketIntent, 0) == null) {
-                // Don't show the dialog if no market app is found/installed.
-                return;
-            }
-
-            preferences.edit().putBoolean(KEY_INSTALL_ACCESSIBILITY_SERVICE_OFFERED_ONCE,
-                    true).commit();
-            // Notify user that they do not have any accessibility
-            // services installed and direct them to Market to get TalkBack.
-            showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
-        }
-    }
-
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case DIALOG_ID_NO_ACCESSIBILITY_SERVICES:
-                return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.accessibility_service_no_apps_title)
-                        .setMessage(R.string.accessibility_service_no_apps_message)
-                        .setPositiveButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // dismiss the dialog before launching
-                                        // the activity otherwise the dialog
-                                        // removal occurs after
-                                        // onSaveInstanceState which triggers an
-                                        // exception
-                                        removeDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
-                                        String screenreaderMarketLink = SystemProperties.get(
-                                                SYSTEM_PROPERTY_MARKET_URL,
-                                                DEFAULT_SCREENREADER_MARKET_LINK);
-                                        Uri marketUri = Uri.parse(screenreaderMarketLink);
-                                        Intent marketIntent = new Intent(Intent.ACTION_VIEW,
-                                                marketUri);
-                                        try {
-                                            startActivity(marketIntent);
-                                        } catch (ActivityNotFoundException anfe) {
-                                            Log.w(LOG_TAG, "Couldn't start play store activity",
-                                                    anfe);
-                                        }
-                                    }
-                                })
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .create();
-            default:
-                return null;
         }
     }
 
