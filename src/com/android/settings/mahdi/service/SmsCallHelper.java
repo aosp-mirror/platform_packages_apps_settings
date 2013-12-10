@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.telephony.SmsManager;
@@ -55,33 +56,6 @@ public class SmsCallHelper {
     public static final int ALL_NUMBERS = 1;
     public static final int CONTACTS_ONLY = 2;
     public static final int DEFAULT_TWO = 2;
-
-    // Returns if QuietHours are currently active
-    public static boolean inQuietHours(Context context) {
-        boolean quietHoursEnabled = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.QUIET_HOURS_ENABLED, 0) != 0;
-        int quietHoursStart = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.QUIET_HOURS_START, 0);
-        int quietHoursEnd = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.QUIET_HOURS_END, 0);
-
-        if (quietHoursEnabled) {
-            // 24 hour - togglable
-            if (quietHoursStart == quietHoursEnd) {
-                return true;
-            }
-
-            // Get the date in "quiet hours" format.
-            int minutes = returnTimeInMinutes();
-            if (quietHoursEnd < quietHoursStart) {
-                // Starts at night, ends in the morning.
-                return (minutes > quietHoursStart) || (minutes < quietHoursEnd);
-            } else {
-                return (minutes > quietHoursStart) && (minutes < quietHoursEnd);
-            }
-        }
-        return false;
-    }
 
     // Return the current time
     public static int returnTimeInMinutes() {
@@ -322,12 +296,15 @@ public class SmsCallHelper {
      * AutoSMS service Stopped - Schedule again for next day
      */
     public static void scheduleService(Context context) {
-        boolean quietHoursEnabled = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.QUIET_HOURS_ENABLED, 0) != 0;
-        int quietHoursStart = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.QUIET_HOURS_START, 0);
-        int quietHoursEnd = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.QUIET_HOURS_END, 0);
+        boolean quietHoursEnabled = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.QUIET_HOURS_ENABLED, 0,
+                UserHandle.USER_CURRENT_OR_SELF) != 0;
+        int quietHoursStart = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.QUIET_HOURS_START, 0,
+                UserHandle.USER_CURRENT_OR_SELF);
+        int quietHoursEnd = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.QUIET_HOURS_END, 0,
+                UserHandle.USER_CURRENT_OR_SELF);
         int autoCall = returnUserAutoCall(context);
         int autoText = returnUserAutoText(context);
         int callBypass = returnUserCallBypass(context);
