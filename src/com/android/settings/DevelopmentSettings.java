@@ -53,7 +53,10 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.HardwareRenderer;
@@ -1276,8 +1279,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             if (!newRuntimeValue.equals(oldRuntimeValue)) {
                 final Context context = getActivity();
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(context.getResources().getString(R.string.select_runtime_warning_message,
-                                                                    oldRuntimeValue, newRuntimeValue));
+                if (oldRuntimeValue.equals("libart.so")) {
+                    builder.setMessage(context.getResources().getString(
+                            R.string.select_runtime_warning_message,
+                            oldRuntimeValue, newRuntimeValue));
+                } else {
+                    builder.setMessage(Html.fromHtml(context.getResources().getString(
+                            R.string.custom_runtime_warning_message,
+                            oldRuntimeValue, newRuntimeValue)));
+                    builder.setTitle(context.getResources().getString(
+                            R.string.custom_runtime_warning_title));
+                }
                 builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1294,7 +1306,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                         updateRuntimeValue();
                     }
                 });
-                builder.show();
+                final AlertDialog dialog = builder.show();
+                ((TextView) dialog.findViewById(android.R.id.message))
+                    .setMovementMethod(LinkMovementMethod.getInstance());
             }
             return true;
         } else if (HDCP_CHECKING_KEY.equals(preference.getKey())) {

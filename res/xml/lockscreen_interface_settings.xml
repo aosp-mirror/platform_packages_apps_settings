@@ -16,24 +16,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
+    <Preference
+        android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"
+        android:key="lockscreen_targets"
+        android:summary="@string/lockscreen_target_summary"
+        android:title="@string/lockscreen_target_title" />
+
     <PreferenceCategory
         android:title="@string/lockscreen_widgets_category_title"
         android:key="lockscreen_widgets_category" >
 
-        <Preference
-            android:fragment="com.android.settings.purity.LockscreenTargets"
-            android:key="lockscreen_targets"
-            android:summary="@string/lockscreen_target_summary"
-            android:title="@string/lockscreen_target_title" />
+        <CheckBoxPreference
+            android:key="keyguard_enable_widgets"
+            android:title="@string/lockscreen_custom_widgets_title" />
+
+        <CheckBoxPreference
+                android:key="keyguard_enable_camera"
+                android:title="@string/lockscreen_enable_camera_title" />
 
         <com.android.settings.purity.SystemSettingCheckBoxPreference
             android:key="lockscreen_maximize_widgets"
             android:summary="@string/lockscreen_maximize_widgets_summary"
             android:title="@string/lockscreen_maximize_widgets_title" />
-
-        <CheckBoxPreference
-            android:key="keyguard_enable_widgets"
-            android:title="@string/lockscreen_enable_widgets_title" />
 
     </PreferenceCategory>
 </PreferenceScreen>

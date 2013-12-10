@@ -17,9 +17,9 @@
 package com.android.settings.purity;
 
 import android.app.ActivityManager;
-import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
@@ -35,72 +35,72 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 public class LockscreenInterface extends SettingsPreferenceFragment {
-    private static final String TAG = "LockscreenInterface";
 
-    private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String LOCKSCREEN_WIDGETS_CATEGORY = "lockscreen_widgets_category";
+    private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+    private static final String KEY_ENABLE_CAMERA = "keyguard_enable_camera";
 
     private CheckBoxPreference mEnableKeyguardWidgets;
+    private CheckBoxPreference mEnableCameraWidget;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+    private LockPatternUtils mLockUtils;
     private DevicePolicyManager mDPM;
-    private boolean mIsPrimary;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.lockscreen_interface_settings);
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mLockUtils = mChooseLockSettingsHelper.utils();
+        mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        addPreferencesFromResource(R.xml.lockscreen_interface_settings);
-        PreferenceCategory widgetsCategory = (PreferenceCategory) findPreference(LOCKSCREEN_WIDGETS_CATEGORY);
+        // Find categories
+        PreferenceCategory widgetsCategory = (PreferenceCategory)
+                findPreference(LOCKSCREEN_WIDGETS_CATEGORY);
 
-        // Determine which user is logged in
-        mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
-        if (mIsPrimary) {
-            // Its the primary user, show all the settings
-            if (!Utils.isPhone(getActivity())) {
-                if (widgetsCategory != null) {
-                    widgetsCategory.removePreference(
-                            findPreference(Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS));
-                }
-            }
+        // Find preferences
+        mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
+        mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
 
+        // Remove/disable custom widgets based on device RAM and policy
+        if (ActivityManager.isLowRamDeviceStatic()) {
+            // Widgets take a lot of RAM, so disable them on low-memory devices
+            widgetsCategory.removePreference(findPreference(KEY_ENABLE_WIDGETS));
+            mEnableKeyguardWidgets = null;
         } else {
-            // Secondary user is logged in, remove all primary user specific preferences
+            checkDisabledByPolicy(mEnableKeyguardWidgets,
+                    DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL);
         }
 
-        // This applies to all users
-        // Enable or disable keyguard widget checkbox based on DPM state
-        mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
-        if (mEnableKeyguardWidgets != null) {
-            if (ActivityManager.isLowRamDeviceStatic()) {
-                // Widgets take a lot of RAM, so disable them on low-memory devices
-                if (widgetsCategory != null) {
-                    widgetsCategory.removePreference(findPreference(KEY_ENABLE_WIDGETS));
-                    mEnableKeyguardWidgets = null;
-                }
-            } else {
-                final boolean disabled = (0 != (mDPM.getKeyguardDisabledFeatures(null)
-                        & DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL));
-                if (disabled) {
-                    mEnableKeyguardWidgets.setSummary(
-                            R.string.security_enable_widgets_disabled_summary);
-                } else {
-                    mEnableKeyguardWidgets.setSummary(R.string.lockscreen_enable_widgets_summary);
-                }
-                mEnableKeyguardWidgets.setEnabled(!disabled);
-            }
+        // Enable or disable camera widget based on device and policy
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            widgetsCategory.removePreference(mEnableCameraWidget);
+            mEnableCameraWidget = null;
+        } else {
+            checkDisabledByPolicy(mEnableCameraWidget,
+                    DevicePolicyManager.KEYGUARD_DISABLE_SECURE_CAMERA);
+        }
+
+        // Remove maximize widgets on tablets
+        if (!Utils.isPhone(getActivity())) {
+            widgetsCategory.removePreference(
+                    findPreference(Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS));
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+
+        // Update custom widgets
         if (mEnableKeyguardWidgets != null) {
-            mEnableKeyguardWidgets.setChecked(lockPatternUtils.getWidgetsEnabled());
+            mEnableKeyguardWidgets.setChecked(mLockUtils.getWidgetsEnabled());
+        }
+
+        if (mEnableCameraWidget != null) {
+            mEnableCameraWidget.setChecked(mLockUtils.getCameraEnabled());
         }
     }
 
@@ -108,15 +108,40 @@ public class LockscreenInterface extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
 
-        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_ENABLE_WIDGETS.equals(key)) {
-            lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
+            mLockUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
+            return true;
+        } else if (KEY_ENABLE_CAMERA.equals(key)) {
+            mLockUtils.setCameraEnabled(mEnableCameraWidget.isChecked());
             return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
-    public static class DeviceAdminLockscreenReceiver extends DeviceAdminReceiver {}
+   /**
+     * Checks if a specific policy is disabled by a device administrator, and disables the
+     * provided preference if so.
+     * @param preference Preference
+     * @param feature Feature
+     */
+    private void checkDisabledByPolicy(Preference preference, int feature) {
+        boolean disabled = featureIsDisabled(feature);
+
+        if (disabled) {
+            preference.setSummary(R.string.security_enable_widgets_disabled_summary);
+        }
+
+        preference.setEnabled(!disabled);
+    }
+
+    /**
+     * Checks if a specific policy is disabled by a device administrator.
+     * @param feature Feature
+     * @return Is disabled
+     */
+    private boolean featureIsDisabled(int feature) {
+        return (mDPM.getKeyguardDisabledFeatures(null) & feature) != 0;
+    }
 
 }

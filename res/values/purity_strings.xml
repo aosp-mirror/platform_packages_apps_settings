@@ -134,9 +134,11 @@
     <!-- Lock screen widgets -->
     <string name="lockscreen_widgets_category_title">Widgets</string>
     <string name="lockscreen_maximize_widgets_title">Maximize widgets</string>
-    <string name="lockscreen_maximize_widgets_summary">Show widgets maximized and the unlock minimized when the screen is turned on</string>
-    <string name="lockscreen_enable_widgets_title">Widget pager</string>
-    <string name="lockscreen_enable_widgets_summary">Allow multiple widget pages to be added and selected</string>
+    <string name="lockscreen_maximize_widgets_summary">Expand widgets when the screen is turned on</string>
+    <string name="lockscreen_enable_camera_title">Camera widget</string>
+
+    <!-- Custom widgets -->
+    <string name="lockscreen_custom_widgets_title">Custom widgets</string>
 
     <!-- Navigation Bar Height -->
     <string name="navbar_settings_title">Navigation bar</string>
@@ -445,4 +447,8 @@
     <!-- Volume Keys Media Control -->
     <string name="volume_keys_control_media_stream">Media control</string>
     <string name="volume_keys_control_media_stream_summary">Volume keys control media volume rather than notifications</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="custom_runtime_warning_title">Warning</string>
+    <string name="custom_runtime_warning_message">ART is not supported by Purity. This setting is included for experimentation only and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
 </resources>
