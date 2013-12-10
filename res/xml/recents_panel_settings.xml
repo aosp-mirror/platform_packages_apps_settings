@@ -35,4 +35,19 @@
             android:defaultValue="2"
             android:dependency="recent_menu_clear_all" />
 
+    <CheckBoxPreference
+            android:key="show_recents_memory_indicator"
+            android:title="@string/show_recents_memory_indicator_title"
+            android:summary="@string/show_recents_memory_indicator_summary"
+            android:defaultValue="false" />
+
+    <ListPreference
+            android:key="recents_memory_indicator_location"
+            android:title="@string/recents_memory_indicator_location_title"
+            android:summary="@string/recents_memory_indicator_location_summary"
+            android:entries="@array/recent_clear_all_button_location_entries"
+            android:entryValues="@array/recent_clear_all_button_location_values"
+            android:defaultValue="1"
+            android:dependency="show_recents_memory_indicator" />
+
 </PreferenceScreen>
