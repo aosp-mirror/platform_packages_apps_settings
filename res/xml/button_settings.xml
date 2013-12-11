@@ -39,11 +39,19 @@
             android:summary="@string/button_volume_wake_summary"
             android:defaultValue="false" />
 
-	<CheckBoxPreference
+	<com.android.settings.mahdi.SystemSettingCheckBoxPreference
             android:key="volbtn_music_controls"
             android:title="@string/volbtn_music_controls_title"
             android:summary="@string/volbtn_music_controls_summary"
-            android:persistent="false" />
+            android:defaultValue="false" />
+
+        <ListPreference
+            android:key="button_volume_default_screen"
+            android:title="@string/button_volume_default_title"
+            android:summary="@string/button_volume_default_summary"
+            android:entries="@array/button_volume_default_entries"
+            android:entryValues="@array/button_volume_default_values"
+            android:defaultValue="0" />
 
     </PreferenceCategory>    
 
