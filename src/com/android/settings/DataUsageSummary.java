@@ -22,6 +22,9 @@ import static android.net.ConnectivityManager.TYPE_WIFI;
 import static android.net.ConnectivityManager.TYPE_WIMAX;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
+import static android.net.NetworkPolicy.CYCLE_DAILY;
+import static android.net.NetworkPolicy.CYCLE_MONTHLY;
+import static android.net.NetworkPolicy.CYCLE_WEEKLY;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
@@ -1728,6 +1731,23 @@ public class DataUsageSummary extends Fragment {
             dialog.show(parent.getFragmentManager(), TAG_CYCLE_EDITOR);
         }
 
+        private void updatePicker(int cycleLength, int cycleDay, NumberPicker cycleDayPicker,
+                NumberPicker cycleWeekDayPicker,View cdEditor) {
+            if (cycleLength == CYCLE_MONTHLY) {
+                cdEditor.setVisibility(View.VISIBLE);
+                cycleWeekDayPicker.setVisibility(View.GONE);
+                cycleDayPicker.setVisibility(View.VISIBLE);
+                cycleDayPicker.setValue(cycleDay);
+            } else if (cycleLength == CYCLE_WEEKLY) {
+                cdEditor.setVisibility(View.VISIBLE);
+                cycleWeekDayPicker.setVisibility(View.VISIBLE);
+                cycleDayPicker.setVisibility(View.GONE);
+                cycleWeekDayPicker.setValue(cycleDay);
+            } else if (cycleLength == CYCLE_DAILY) {
+                cdEditor.setVisibility(View.GONE);
+            }
+        }
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
@@ -1737,16 +1757,57 @@ public class DataUsageSummary extends Fragment {
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
 
-            final View view = dialogInflater.inflate(R.layout.data_usage_cycle_editor, null, false);
-            final NumberPicker cycleDayPicker = (NumberPicker) view.findViewById(R.id.cycle_day);
-
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
+            final int cycleLength = editor.getPolicyCycleLength(template);
             final int cycleDay = editor.getPolicyCycleDay(template);
 
+            final View view = dialogInflater.inflate(R.layout.data_usage_cycle_editor, null, false);
+            final View cdEditor = view.findViewById(R.id.cycle_day_editor);
+
+            final NumberPicker cycleDayPicker = (NumberPicker) view.findViewById(R.id.cycle_day);
             cycleDayPicker.setMinValue(1);
             cycleDayPicker.setMaxValue(31);
-            cycleDayPicker.setValue(cycleDay);
             cycleDayPicker.setWrapSelectorWheel(true);
+
+            final NumberPicker cycleWeekDayPicker = (NumberPicker) view.findViewById(
+                    R.id.cycle_weekday);
+            cycleWeekDayPicker.setMinValue(0);
+            cycleWeekDayPicker.setMaxValue(6);
+            cycleWeekDayPicker.setDisplayedValues(getResources().getStringArray(
+                    R.array.data_usage_cycle_weekdays));
+            cycleWeekDayPicker.setWrapSelectorWheel(true);
+
+            final Spinner cycleLengthSpinner = (Spinner) view.findViewById(
+                    R.id.cycle_lengths_spinner);
+            ArrayAdapter<CharSequence> cycleLengthAdapter = ArrayAdapter.createFromResource(context,
+                    R.array.data_usage_cycle_length,
+                    android.R.layout.simple_spinner_item);
+            cycleLengthAdapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item);
+            cycleLengthSpinner.setAdapter(cycleLengthAdapter);
+            cycleLengthSpinner.setSelection(cycleLength);
+            cycleLengthSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+                private int lastCycleLength = cycleLength;
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view,
+                        int position, long id) {
+                    if (position != lastCycleLength) {
+                        editor.setPolicyCycleLength(template, position);
+                        updatePicker(position, cycleDay, cycleDayPicker, cycleWeekDayPicker,
+                                cdEditor);
+                        lastCycleLength = position;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // ignored
+                }
+            });
+
+            updatePicker(cycleLength, cycleDay, cycleDayPicker, cycleWeekDayPicker, cdEditor);
 
             builder.setTitle(R.string.data_usage_cycle_editor_title);
             builder.setView(view);
@@ -1757,8 +1818,17 @@ public class DataUsageSummary extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             // clear focus to finish pending text edits
                             cycleDayPicker.clearFocus();
+                            cycleWeekDayPicker.clearFocus();
 
-                            final int cycleDay = cycleDayPicker.getValue();
+                            final int cycleDay;
+                            final int cycleLength = editor.getPolicyCycleLength(template);
+                            if (cycleLength == CYCLE_MONTHLY) {
+                                cycleDay = cycleDayPicker.getValue();
+                            } else if (cycleLength == CYCLE_WEEKLY) {
+                                cycleDay = cycleWeekDayPicker.getValue();
+                            } else {
+                                cycleDay = 0;
+                            }
                             final String cycleTimezone = new Time().timezone;
                             editor.setPolicyCycleDay(template, cycleDay, cycleTimezone);
                             target.updatePolicy(true);
