@@ -74,13 +74,13 @@ public class QuickSettingsUtil {
         TILES = Collections.unmodifiableMap(ENABLED_TILES);
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_AIRPLANE, R.string.title_tile_airplane,
-                "com.android.systemui:drawable/ic_qs_airplane_off"));
+                "com.android.systemui:drawable/ic_qs_airplane_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_BATTERY, R.string.title_tile_battery,
                 "com.android.systemui:drawable/ic_qs_battery_neutral"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_BLUETOOTH, R.string.title_tile_bluetooth,
-                "com.android.systemui:drawable/ic_qs_bluetooth_neutral"));
+                "com.android.systemui:drawable/ic_qs_bluetooth_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_BRIGHTNESS, R.string.title_tile_brightness,
                 "com.android.systemui:drawable/ic_qs_brightness_auto_off"));
@@ -89,25 +89,25 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_camera"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_IMMERSIVEMODE, R.string.title_tile_immersive_mode,
-                "com.android.systemui:drawable/ic_qs_immersive_mode_off"));
+                "com.android.systemui:drawable/ic_qs_immersive_mode_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_power,
                 "com.android.systemui:drawable/ic_qs_power"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_GPS, R.string.title_tile_gps,
-                "com.android.systemui:drawable/ic_qs_gps_neutral"));
+                "com.android.systemui:drawable/ic_qs_location_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_LOCKSCREEN, R.string.title_tile_lockscreen,
-                "com.android.systemui:drawable/ic_qs_lock_screen_off"));
+                "com.android.systemui:drawable/ic_qs_lock_screen_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_MOBILEDATA, R.string.title_tile_mobiledata,
-                "com.android.systemui:drawable/ic_qs_signal_4"));
+                "com.android.systemui:drawable/ic_qs_signal_full_4"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NETWORKMODE, R.string.title_tile_networkmode,
                 "com.android.systemui:drawable/ic_qs_2g3g_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NFC, R.string.title_tile_nfc,
-                "com.android.systemui:drawable/ic_qs_nfc_off"));
+                "com.android.systemui:drawable/ic_qs_nfc_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_AUTOROTATE, R.string.title_tile_autorotate,
                 "com.android.systemui:drawable/ic_qs_auto_rotate"));
@@ -116,10 +116,10 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_profiles"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_QUIETHOURS, R.string.title_tile_quiet_hours,
-                "com.android.systemui:drawable/ic_qs_quiet_hours_off"));
+                "com.android.systemui:drawable/ic_qs_quiet_hours_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SCREENTIMEOUT, R.string.title_tile_screen_timeout,
-                "com.android.systemui:drawable/ic_qs_screen_timeout_off"));
+                "com.android.systemui:drawable/ic_qs_screen_timeout_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SETTINGS, R.string.title_tile_settings,
                 "com.android.systemui:drawable/ic_qs_settings"));
@@ -128,10 +128,10 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_ring_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SYNC, R.string.title_tile_sync,
-                "com.android.systemui:drawable/ic_qs_sync_off"));
+                "com.android.systemui:drawable/ic_qs_sync_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_TORCH, R.string.title_tile_torch,
-                "com.android.systemui:drawable/ic_qs_torch_off"));
+                "com.android.systemui:drawable/ic_qs_torch_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_USER, R.string.title_tile_user,
                 "com.android.systemui:drawable/ic_qs_default_user"));
@@ -140,19 +140,19 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_volume"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_WIFI, R.string.title_tile_wifi,
-                "com.android.systemui:drawable/ic_qs_wifi_4"));
+                "com.android.systemui:drawable/ic_qs_wifi_full_4"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_WIFIAP, R.string.title_tile_wifiap,
                 "com.android.systemui:drawable/ic_qs_wifi_ap_neutral"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NETWORKADB, R.string.title_tile_network_adb,
-                "com.android.systemui:drawable/ic_qs_network_adb_off"));
+                "com.android.systemui:drawable/ic_qs_network_adb_on"));
 	registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NAVBAR, R.string.title_tile_navbar,
-                "com.android.systemui:drawable/ic_qs_navbar_off"));
+                "com.android.systemui:drawable/ic_qs_navbar_on"));
 	registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NETWORKSPEED, R.string.title_tile_network_speed,
-                "com.android.systemui:drawable/ic_qs_network_speed_off"));
+                "com.android.systemui:drawable/ic_qs_network_speed_on"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
