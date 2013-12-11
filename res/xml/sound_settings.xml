@@ -104,6 +104,14 @@
             android:summary="@string/volume_adjust_sounds_enable_summary"
             android:defaultValue="true" />
 
+    <PreferenceCategory
+            android:title="@string/headset_category_title"/>
+
+    <CheckBoxPreference
+            android:key="headset_connect_player"
+            android:title="@string/headset_connect_player_title"
+            android:persistent="false" />
+
     <CheckBoxPreference
             android:key="safe_headset_volume"
             android:title="@string/safe_headset_volume_title"
