@@ -168,8 +168,8 @@ public class ToggleAccessibilityServicePreferenceFragment
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, this)
                         .create();
-                ad.getButton(AlertDialog.BUTTON_POSITIVE)
-                        .setFilterTouchesWhenObscured(true);
+                ad.create();
+                ad.getButton(AlertDialog.BUTTON_POSITIVE).setFilterTouchesWhenObscured(true);
                 return ad;
             }
             case DIALOG_ID_DISABLE_WARNING: {
