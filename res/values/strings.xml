@@ -700,6 +700,10 @@
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
     <string name="security_enable_widgets_disabled_summary">Disabled by administrator</string>
+    <!-- Text shown for title of settings to setup/change NFC unlock [CHAR LIMIT=20]-->
+    <string name="nfc_unlock_title">NFC unlock</string>
+
+
     <!-- Text shown for summary of owner info setting [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary"></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
@@ -4939,4 +4943,21 @@
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
+
+    <!-- NFC unlock -->
+    <string name="lock_settings_nfc_title">NFC Screen Lock Settings</string>
+    <string name="nfc_unlock_paired_tags_title">Paired Tags</string>
+    <string name="nfc_unlock_enabled">Enabled</string>
+    <string name="start_nfc_pairing">Pair with a tag</string>
+
+    <!-- Nfc pair activity strings -->
+    <string name="title_activity_nfc_pairing">NfcPairingActivity</string>
+    <string name="pairing_button_title">Pair now</string>
+    <string name="status_no_ring_detected">Set the tag flat on a table and place the phone on top</string>
+    <string name="status_device_paired">Tag and phone successfully paired, you are done!</string>
+    <string name="status_error_invalid_device">The tag provided cannot be used to unlock your phone</string>
+    <string name="status_error_pairing_failed">The pairing with your tag failed, please try again</string>
+    <string name="enable_nfc">NFC is not enabled and is required for NFC Unlock. Please turn on NFC.</string>
+    <string name="ok">NFC Settings</string>
+
 </resources>
