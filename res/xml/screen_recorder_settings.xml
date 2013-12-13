@@ -17,4 +17,10 @@
         android:entryValues="@array/screen_recorder_bitrate_values"
         android:defaultValue="4000000" />
 
+    <CheckBoxPreference
+        android:key="screen_recorder_record_audio"
+        android:title="@string/screen_recorder_record_audio_title"
+        android:summary="@string/screen_recorder_record_audio_summary"
+        android:defaultValue="false" />
+
 </PreferenceScreen>
