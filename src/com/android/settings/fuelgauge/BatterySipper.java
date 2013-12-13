@@ -53,6 +53,10 @@ public class BatterySipper implements Comparable<BatterySipper> {
     long wifiRunningTime;
     long cpuFgTime;
     long wakeLockTime;
+    long mobileRxPackets;
+    long mobileTxPackets;
+    long wifiRxPackets;
+    long wifiTxPackets;
     long mobileRxBytes;
     long mobileTxBytes;
     long wifiRxBytes;
