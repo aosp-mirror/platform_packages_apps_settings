@@ -34,12 +34,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.android.internal.util.Objects;
 import com.android.settings.R;
 import com.android.settings.widget.ChartSweepView.OnSweepListener;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * Specific {@link ChartView} that displays {@link ChartNetworkSeriesView} along
@@ -466,7 +466,7 @@ public class ChartDataUsageView extends ChartView {
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(mMin, mMax, mSize);
+            return Objects.hash(mMin, mMax, mSize);
         }
 
         @Override
@@ -548,7 +548,7 @@ public class ChartDataUsageView extends ChartView {
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(mMin, mMax, mSize);
+            return Objects.hash(mMin, mMax, mSize);
         }
 
         @Override
