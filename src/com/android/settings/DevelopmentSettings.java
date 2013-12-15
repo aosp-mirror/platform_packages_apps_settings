@@ -1405,11 +1405,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             if (!newRuntimeValue.equals(oldRuntimeValue)) {
                 final Context context = getActivity();
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                //builder.setMessage(context.getResources().getString(R.string.select_runtime_warning_message,
-                //                                                    oldRuntimeValue, newRuntimeValue));
-                builder.setMessage(Html.fromHtml(context.getResources().getString(R.string.custom_runtime_warning_message,
-                        oldRuntimeValue, newRuntimeValue)));
-                builder.setTitle(context.getResources().getString(R.string.custom_runtime_warning_title));
+                if (oldRuntimeValue.equals("libart.so")) {
+                    builder.setMessage(context.getResources().getString(
+                            R.string.select_runtime_warning_message,
+                            oldRuntimeValue, newRuntimeValue));
+                } else {
+                    builder.setMessage(Html.fromHtml(context.getResources().getString(
+                            R.string.custom_runtime_warning_message,
+                            oldRuntimeValue, newRuntimeValue)));
+                    builder.setTitle(context.getResources().getString(
+                            R.string.custom_runtime_warning_title));
+                }
                 builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
