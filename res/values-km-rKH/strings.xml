@@ -316,6 +316,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"ព័ត៌មាន​អំពី​ម្ចាស់"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"បើក​ធាតុ​ក្រាហ្វិក"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"បាន​បិទ​ដោយ​អ្នក​គ្រប់គ្រង"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"ដោះ​សោ NFC"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"បញ្ចូល​អត្ថបទ​ ដើម្បី​បង្ហាញ​លើ​អេក្រង់​ចាក់សោ"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"បង្ហាញ​ព័ត៌មាន​អ្នក​ប្រើ​លើអេក្រង់ចាក់សោ"</string>
@@ -1448,8 +1449,6 @@
     <string name="disable_service_title" msgid="3624005212728512896">"បញ្ឈប់ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="disable_service_message" msgid="2012273739481042318">"ការ​ប៉ះ​យល់ព្រម នឹង​បញ្ឈប់ <xliff:g id="SERVICE">%1$s</xliff:g> ។"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"គ្មាន​សេវាកម្ម​បាន​ដំឡើង"</string>
-    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"ត្រូវការ​កម្មវិធី​អាន​​អេក្រង់?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"សម្ដី​ត្រឡប់​ផ្ដល់​មតិ​ជា​សំឡេង ដើម្បី​ជួយ​មនុស្ស​ពិការ​ភ្នែក ឬ​ខ្សោយ​ផ្នែក។ តើ​អ្នក​ចង់​ដំឡើង​វា​ពី​ឃ្លាំង​កម្មវិធី Android?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"គ្មាន​ការ​ពណ៌នា​បាន​ផ្ដល់។"</string>
     <string name="settings_button" msgid="3006713718908152930">"ការ​កំណត់"</string>
     <string name="print_settings" msgid="4742428530112487843">"ការ​បោះពុម្ព"</string>
@@ -2062,4 +2061,16 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"ថតរូប"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"ជ្រើស​រូបថត​ពី​វិចិត្រសាល"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"កំណត់​ការ​ចាក់​សោ​អេក្រង់ NFC"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"ស្លាក​បាន​ផ្គូផ្គង"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"បាន​បើក"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"ផ្គូ​ជា​មួយ​ស្លាក"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"ផ្គូ​ឥឡូវ"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"កំណត់​ស្លាក​​ផ្ដេក​លើ​តារាង និង​ដាក់​ទូរស័ព្ទ​នៅ​ផ្នែក​ខាង​លើ"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"បាន​ផ្គូផ្គង​ស្លាក និង​ទូរស័ព្ទ​ដោយ​ជោគជ័យ អ្នក​បាន​ធ្វើ​រួចរាល់​ហើយ!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"ស្លាក​បាន​ផ្ដល់​មិន​អាច​ត្រូវ​បាន​ប្រើ​ ដើម្បី​ដោះ​សោ​ទូរស័ព្ទ​របស់​អ្នក​បាន​ទេ"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"បាន​បរាជ័យ​ក្នុង​ការ​ផ្គូផ្គង​ជា​មួយ​ស្លាក​របស់​អ្នក សូម​ព្យាយាម​ម្ដង​ទៀត"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"មិន​បាន​បើក NFC ហើយ​ត្រូវ​បាន​ទាមទារ​សម្រាប់​ដោះ​សោ NFC ។ សូម​បើក NFC ។"</string>
+    <string name="ok" msgid="3651563352754792958">"ការ​កំណត់ NFC"</string>
 </resources>

@@ -316,6 +316,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"ຂໍ້ມູນເຈົ້າຂອງເຄື່ອງ"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ເປີດນຳໃຊ້ວິດເຈັດ"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"ຖືກປິດນຳໃຊ້ໂດຍຜູ່ເບິ່ງແຍງລະບົບ"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC ປົດລັອກ"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"ພິມຂໍ້ຄວາມເພື່ອສະແດງຜົນໃນໜ້າຈໍລັອກ"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"ສະແດງຂໍ້ມູນຜູ່ໃຊ້ໃນໜ້າຈໍລັອກ"</string>
@@ -1448,8 +1449,6 @@
     <string name="disable_service_title" msgid="3624005212728512896">"ຢຸດການເຮັດວຽກຂອງ <xliff:g id="SERVICE">%1$s</xliff:g> ບໍ່?"</string>
     <string name="disable_service_message" msgid="2012273739481042318">"ການແຕະປຸ່ມ ຕົກລົງ ຈະຢຸດການເຮັດວຽກຂອງ <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"ບໍ່ມີບໍລິການຖືກຕິດຕັ້ງເທື່ອ"</string>
-    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"ຕ້ອງການໂຕອ່ານໜ້າຈໍ?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack ຕອບສະໜອງດ້ວຍສຽງ ເພື່ອຊ່ວຍເຫຼືອຜູ່ພິການທາງສາຍຕາ ແລະຜູ່ມີບັນຫາທາງສາຍຕາ. ທ່ານຕ້ອງການຕິດຕັ້ງຟຣີຈາກ Android Market ຫຼືບໍ່?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"ບໍ່ມີລາຍລະອຽດລະບຸໄວ້."</string>
     <string name="settings_button" msgid="3006713718908152930">"ການຕັ້ງຄ່າ"</string>
     <string name="print_settings" msgid="4742428530112487843">"ການ​ພິມ"</string>
@@ -2062,4 +2061,16 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"ຖ່າຍຮູບ"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"ເລືອກຮູບຈາກແກເລີຣີ"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"ການຕັ້ງຄ່າລັອກໜ້າຈໍ NFC"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"ແທັກທີ່ຈັບຄູ່ແລ້ວ"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"ເປີດໃຊ້ແລ້ວ"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"ຈັບຄູ່ກັບແທັກໃດນຶ່ງ"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"ຈັບຄູ່ດຽວນີ້"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"ຕັ້ງແທັກໃຫ້ພຽງຢູ່ເທິງໂຕະ ແລ້ວ ວາງໂທລະສັບໄວ້ເທິງ"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"ແທັກ ແລະ ໂທລະສັບ ຈັບຄູ່ກັນແລ້ວ, ທ່ານເຮັດສຳເລັດແລ້ວ!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"ແທັກທີ່ໃຫ້ມາບໍ່ສາມາດໃຊ້ເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານໄດ້"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"ການຈັບຄູ່ກັບແທັກຂອງທ່ານລົ້ມເຫຼວ, ກະລຸນາລອງໃໝ່ອີກເທື່ອນຶ່ງ"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"ບໍ່ໄດ້ເປີດນຳໃຊ້ NFC ແລະ ມັນຈຳເປັນສຳລັບການປົດລັອກ NFC. ກະລຸນາເປີດ NFC ກ່ອນ."</string>
+    <string name="ok" msgid="3651563352754792958">"ການຕັ້ງຄ່າ NFC"</string>
 </resources>

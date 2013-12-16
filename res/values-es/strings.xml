@@ -316,6 +316,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Información del propietario"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Habilitar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Inhabilitado por administrador"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"Desbloqueo de NFC"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Introduce el texto que se mostrará en la pantalla de bloqueo."</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostrar información de usuario en la pantalla de bloqueo"</string>
@@ -1413,8 +1414,8 @@
     <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopia (rojo)"</string>
     <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopia (azul)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Ajustes"</string>
-    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Activado"</string>
-    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Desactivado"</string>
+    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Sí"</string>
+    <string name="accessibility_feature_state_off" msgid="4172584906487070211">"No"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Vista previa"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Opciones estándar"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Idioma"</string>
@@ -1448,8 +1449,6 @@
     <string name="disable_service_title" msgid="3624005212728512896">"¿Detener <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="disable_service_message" msgid="2012273739481042318">"Si tocas Aceptar, se detendrá <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"No se ha instalado ningún servicio."</string>
-    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"¿Necesitas un lector de pantalla?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack ofrece mensajes de voz para usuarios con discapacidades visuales. ¿Quieres instalarlo de forma gratuita desde Android Market?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"No se ha especificado ninguna descripción."</string>
     <string name="settings_button" msgid="3006713718908152930">"Ajustes"</string>
     <string name="print_settings" msgid="4742428530112487843">"Impresión"</string>
@@ -1636,8 +1635,8 @@
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"Actualizando configuración de la conexión Wi-Fi..."</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Actualización de la configuración de la conexión Bluetooth"</string>
     <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="gadget_state_on" msgid="6909119593004937688">"activado"</string>
-    <string name="gadget_state_off" msgid="5220212352953066317">"desactivado"</string>
+    <string name="gadget_state_on" msgid="6909119593004937688">"sí"</string>
+    <string name="gadget_state_off" msgid="5220212352953066317">"no"</string>
     <string name="gadget_state_turning_on" msgid="3395992057029439039">"activando"</string>
     <string name="gadget_state_turning_off" msgid="2395546048102176157">"desactivando"</string>
     <string name="gadget_wifi" msgid="4712584536500629417">"Wi-Fi"</string>
@@ -1648,7 +1647,7 @@
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"automático"</string>
     <string name="gadget_brightness_state_full" msgid="6814570109772137631">"completo"</string>
     <string name="gadget_brightness_state_half" msgid="3696671957608774204">"medio"</string>
-    <string name="gadget_brightness_state_off" msgid="946382262872753084">"desactivado"</string>
+    <string name="gadget_brightness_state_off" msgid="946382262872753084">"no"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Almacenamiento de credenciales"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde almacenamiento"</string>
@@ -2062,4 +2061,16 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Hacer foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Seleccionar foto de la galería"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Ajustes de bloqueo de pantalla por NFC"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Etiquetas vinculadas"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Habilitado"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Vincular con una etiqueta"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Vincular ahora"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Coloca la etiqueta sobre una mesa y el teléfono sobre ella"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"La etiqueta y el teléfono se han vinculado correctamente. Ya has terminado."</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"La etiqueta proporcionada no se puede utilizar para desbloquear el teléfono"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Se ha producido un error al vincular la etiqueta. Inténtalo de nuevo"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"La tecnología NFC no está habilitada y se necesita para desbloquear el dispositivo por NFC. Activa la tecnología NFC."</string>
+    <string name="ok" msgid="3651563352754792958">"Ajustes de NFC"</string>
 </resources>

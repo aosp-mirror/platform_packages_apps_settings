@@ -147,7 +147,7 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth-Pairing-Anfrage"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing-Anfrage"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Für Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> berühren"</string>
-    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Erhaltene Dateien anzeigen"</string>
+    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Empfangene Dateien anzeigen"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth-Geräteauswahl"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-Berechtigungsanfrage"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Eine App versucht, Bluetooth zu aktivieren."</string>
@@ -316,6 +316,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Info zum Eigentümer"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Widgets aktivieren"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Vom Administrator deaktiviert"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC-Entsperrung"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Text für Sperrbildschirm eingeben"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Nutzerinformationen bei Bildschirmsperre anzeigen"</string>
@@ -446,7 +447,7 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Verbindungen, Gerätenamen und Erkennbarkeit verwalten"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth-Pairing-Anfrage"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Geben Sie zum Pairing mit <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> die erforderliche PIN des Geräts ein:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Geben Sie zum Pairing mit <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> die PIN des Geräts ein:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Geben Sie zum Pairing mit <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> den erforderlichen Schlüssel des Geräts ein:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Die PIN enthält Buchstaben oder Symbole."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"In der Regel 0000 oder 1234"</string>
@@ -1449,8 +1450,6 @@
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> anhalten?"</string>
     <string name="disable_service_message" msgid="2012273739481042318">"Durch Berühren von \"OK\" wird <xliff:g id="SERVICE">%1$s</xliff:g> beendet."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Keine Dienste installiert"</string>
-    <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Benötigen Sie einen Screenreader?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack bietet blinden Nutzern und Nutzern mit eingeschränktem Sehvermögen gesprochenes Feedback. Möchten Sie diese Funktion kostenlos von Android Market installieren?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Es wurde keine Beschreibung bereitgestellt."</string>
     <string name="settings_button" msgid="3006713718908152930">"Einstellungen"</string>
     <string name="print_settings" msgid="4742428530112487843">"Drucken"</string>
@@ -2063,4 +2062,16 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Foto aufnehmen"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Foto aus Galerie auswählen"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Einstellungen für NFC-Display-Sperre"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Pairing-Tags"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Aktiviert"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Pairing mit einem Tag durchführen"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Pairing jetzt durchführen"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Legen Sie das Tag flach auf einen Tisch und platzieren Sie das Telefon darüber."</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"Pairing von Tag und Telefon abgeschlossen"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"Mit dem bereitgestellten Tag kann Ihr Telefon nicht entsperrt werden."</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Das Pairing mit Ihrem Tag konnte nicht durchgeführt werden. Bitte versuchen Sie es erneut."</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"NFC ist nicht aktiviert, aber für die NFC-Entsperrung erforderlich. Bitte aktivieren Sie NFC."</string>
+    <string name="ok" msgid="3651563352754792958">"NFC-Einstellungen"</string>
 </resources>
