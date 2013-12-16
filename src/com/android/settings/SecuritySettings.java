@@ -234,8 +234,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
 
             if (securityCategory != null) {
-                securityCategory.removePreference(
-                        root.findPreference(KEY_NFC_UNLOCK_SET_OR_CHANGE));
+                Preference preference = root.findPreference(KEY_NFC_UNLOCK_SET_OR_CHANGE);
+                if (preference != null) {
+                    securityCategory.removePreference(preference);
+                }
             }
         }
 
