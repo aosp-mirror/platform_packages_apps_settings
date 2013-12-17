@@ -145,11 +145,13 @@ public class QuickSettingsTiles extends Fragment {
         View tileView = null;
         if (iconRegId != 0) {
             tileView = (View) mInflater.inflate(R.layout.quick_settings_tile_generic, null, false);
-            final TextView name = (TextView) tileView.findViewById(R.id.tile_textview);
-            name.setText(titleId);
-            name.setCompoundDrawablesRelativeWithIntrinsicBounds(0, iconRegId, 0, 0);
+            final TextView name = (TextView) tileView.findViewById(R.id.text);
+            final ImageView iv = (ImageView) tileView.findViewById(R.id.image);
+            name.setText(titleId);            
+            iv.setImageDrawable(getResources().getDrawable(iconRegId));
         } else {
-            final boolean isUserTile = titleId == QuickSettingsUtil.TILES.get(QSConstants.TILE_USER).getTitleResId();
+            final boolean isUserTile =
+                    titleId == QuickSettingsUtil.TILES.get(QSConstants.TILE_USER).getTitleResId();
             if (mSystemUiResources != null && iconSysId != null) {
                 int resId = mSystemUiResources.getIdentifier(iconSysId, null, null);
                 if (resId > 0) {
@@ -157,16 +159,19 @@ public class QuickSettingsTiles extends Fragment {
                         Drawable d = mSystemUiResources.getDrawable(resId);
                         tileView = null;
                         if (isUserTile) {
-                            tileView = (View) mInflater.inflate(R.layout.quick_settings_tile_user, null, false);
+                            tileView = (View) mInflater.inflate(
+                                    R.layout.quick_settings_tile_user, null, false);
                             ImageView iv = (ImageView) tileView.findViewById(R.id.user_imageview);
                             TextView tv = (TextView) tileView.findViewById(R.id.tile_textview);
                             tv.setText(titleId);
                             iv.setImageDrawable(d);
                         } else {
-                            tileView = (View) mInflater.inflate(R.layout.quick_settings_tile_generic, null, false);
-                            final TextView name = (TextView) tileView.findViewById(R.id.tile_textview);
-                            name.setText(titleId);
-                            name.setCompoundDrawablesRelativeWithIntrinsicBounds(null, d, null, null);
+                            tileView = (View) mInflater.inflate(
+                                    R.layout.quick_settings_tile_generic, null, false);
+                            final TextView name = (TextView) tileView.findViewById(R.id.text);
+                            final ImageView iv = (ImageView) tileView.findViewById(R.id.image);
+                            name.setText(titleId);                            
+                            iv.setImageDrawable(d);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -174,6 +179,7 @@ public class QuickSettingsTiles extends Fragment {
                 }
             }
         }
+
         mDragView.addView(tileView, newTile ? mDragView.getChildCount() - 1 : mDragView.getChildCount());
     }
 

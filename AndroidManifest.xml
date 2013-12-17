@@ -1754,21 +1754,60 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/customization_settings" />
         </activity>
-
-        <activity android:name=".mahdi.PowerMenu" />
+        
 	<activity android:name=".mahdi.notificationlight.NotificationLightSettings" />
 	<activity android:name=".mahdi.notificationlight.BatteryLightSettings" />
-	<activity android:name=".mahdi.LockscreenInterface" />
-	<activity android:name=".mahdi.QuickSettings" />
 	<activity android:name=".mahdi.StatusBar" />
 	<activity android:name=".mahdi.HardwareKeys" />
 	<activity android:name=".mahdi.QuickSettings" />
 	<activity android:name=".mahdi.NotificationDrawerSettings" />
-	<activity android:name=".mahdi.NavbarSettings" />
-	<activity android:name=".mahdi.QuietHours" />
 	<activity android:name=".mahdi.LockscreenTargets" />
-	<activity android:name=".mahdi.activedisplay.ActiveDisplaySettings" /> 
-	<activity android:name=".profiles.ProfilesSettings" />
+	<activity android:name=".mahdi.activedisplay.ActiveDisplaySettings" />
+
+        <activity android:name=".mahdi.AutoBrightnessSetup"
+                android:excludeFromRecents="true"
+                android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
+
+	<activity android:name=".ApnEditor" />	
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to quite hours settings -->
+        <activity android:name="Settings$QuietHoursSettingsActivity"
+                android:label="@string/quiet_hours_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.QuietHours" />
+        </activity>
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to battery icon settings -->
+        <activity android:name="Settings$BatteryIconStyleSettingsActivity"
+                android:label="@string/battery_icon_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.BatteryIconStyle" />
+        </activity>
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to rotation settings -->
+        <activity android:name="Settings$DisplayRotationSettingsActivity"
+                android:label="@string/display_rotation_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.DisplayRotation" />
+        </activity>
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to expanded-desktop config -->
          <activity android:name="Settings$PowerMenuSettingsActivity"
@@ -1782,7 +1821,32 @@
                 android:value="com.android.settings.mahdi.PowerMenu" />
         </activity>
 
-	<!-- Pseudo-activity used to provide an intent-filter entry point to profiles config -->
+        <!-- Pseudo-activity used to provide an intent-filter entry point to lockscreen config -->
+        <activity android:name="Settings$LockscreenSettingsActivity"
+                android:label="@string/lock_screen_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.LockscreenInterface" />
+        </activity>
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to quite hours settings -->
+        <activity android:name="Settings$NavbarSettingsActivity"
+                android:label="@string/navigation_settings_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.NavbarSettings" />
+        </activity>
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to profiles config -->
+	<activity android:name=".profiles.ProfilesSettings" />
         <activity android:name="Settings$ProfilesSettingsActivity"
                 android:label="@string/profile_settings"
                 android:taskAffinity=""
@@ -1799,7 +1863,18 @@
                 android:value="com.android.settings.profiles.ProfilesSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/profiles_settings" />
-        </activity>
+            </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="ProfileSettings"
+                android:label="@string/profile_settings"
+                android:exported="true"
+                android:targetActivity="Settings$ProfilesSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.profiles.ProfilesSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/profiles_settings" />
+        </activity-alias>
 
         <activity android:name=".profiles.ProfileConfig" />
 
@@ -1809,11 +1884,11 @@
 
         <activity android:name=".profiles.ProfileGroupConfig" />
 
-    	<activity android:name=".profiles.WifiTriggers" />
+        <activity android:name=".profiles.WifiTriggers" />
 
         <activity android:name=".profiles.NFCProfileWriter" />
 
-        <activity android:name=".profiles.NFCProfileSelect" />        
+        <activity android:name=".profiles.NFCProfileSelect" />
 
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">
@@ -1822,23 +1897,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="cm/profile" />
             </intent-filter>
-        </activity>        
-
-	<!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
-        <activity android:name="Settings$BlacklistSettingsActivity"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
-                android:uiOptions="splitActionBarWhenNarrow"
-                android:label="@string/blacklist_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.blacklist.BlacklistSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/security_settings" />
         </activity>
 
 	<!-- PerformanceControl activities -->
@@ -1865,21 +1923,21 @@
 
         <service android:name="com.brewcrewfoo.performance.service.BootService"/>
 
-	<activity android:name=".mahdi.AutoBrightnessSetup"
-                android:excludeFromRecents="true"
-                android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
-
-	<activity android:name=".ApnEditor" />
-
-	<!-- Pseudo-activity used to provide an intent-filter entry point to ass lockscreen config -->
-        <activity android:name="Settings$LockscreenSettingsActivity"
-                android:label="@string/lock_screen_title">
+        <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
+        <activity android:name="Settings$BlacklistSettingsActivity"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:label="@string/blacklist_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.mahdi.LockscreenInterface" />
+                android:value="com.android.settings.blacklist.BlacklistSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/security_settings" />
         </activity>
 
         <!-- Mahdi-Rom activities End -->

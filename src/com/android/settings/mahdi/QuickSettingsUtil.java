@@ -27,6 +27,7 @@ import static com.android.internal.util.mahdi.QSConstants.TILE_DELIMITER;
 import static com.android.internal.util.mahdi.QSConstants.TILE_IMMERSIVEMODE;
 import static com.android.internal.util.mahdi.QSConstants.TILE_GPS;
 import static com.android.internal.util.mahdi.QSConstants.TILE_LOCKSCREEN;
+import static com.android.internal.util.mahdi.QSConstants.TILE_LTE;
 import static com.android.internal.util.mahdi.QSConstants.TILE_MOBILEDATA;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NETWORKADB;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NETWORKMODE;
@@ -45,6 +46,7 @@ import static com.android.internal.util.mahdi.QSConstants.TILE_WIFI;
 import static com.android.internal.util.mahdi.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NAVBAR;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NETWORKSPEED;
+import static com.android.internal.util.mahdi.QSConstants.TILE_MUSIC;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -100,6 +102,9 @@ public class QuickSettingsUtil {
                 TILE_LOCKSCREEN, R.string.title_tile_lockscreen,
                 "com.android.systemui:drawable/ic_qs_lock_screen_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_LTE, R.string.title_tile_lte,
+                "com.android.systemui:drawable/ic_qs_lte_on"));
+        registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_MOBILEDATA, R.string.title_tile_mobiledata,
                 "com.android.systemui:drawable/ic_qs_signal_full_4"));
         registerTile(new QuickSettingsUtil.TileInfo(
@@ -153,6 +158,9 @@ public class QuickSettingsUtil {
 	registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NETWORKSPEED, R.string.title_tile_network_speed,
                 "com.android.systemui:drawable/ic_qs_network_speed_on"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_MUSIC, R.string.title_tile_music,
+                "com.android.systemui:drawable/ic_qs_media_play"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
@@ -193,6 +201,11 @@ public class QuickSettingsUtil {
         // Don't show the NFC tile if not supported
         if (!QSUtils.deviceSupportsNfc(context)) {
             removeTile(TILE_NFC);
+        }
+
+        // Don't show the LTE tile if not supported
+        if (!QSUtils.deviceSupportsLte(context)) {
+            removeTile(TILE_LTE);
         }        
 
         // Don't show the Torch tile if not supported
