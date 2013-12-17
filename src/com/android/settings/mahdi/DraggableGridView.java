@@ -275,10 +275,13 @@ public class DraggableGridView extends ViewGroup implements
             resid = R.drawable.ic_menu_delete_holo_dark;
             stringid = R.string.dialog_delete_title;
         }
-        TextView addDeleteTile = ((TextView) getChildAt(getChildCount() - 1).findViewById(R.id.tile_textview));
-        addDeleteTile.setCompoundDrawablesRelativeWithIntrinsicBounds(0, resid, 0, 0);
-        addDeleteTile.setText(stringid);
-    }
+        final TextView name =
+            ((TextView) getChildAt(getChildCount() - 1).findViewById(R.id.text));
+        final ImageView iv =
+            ((ImageView) getChildAt(getChildCount() - 1).findViewById(R.id.image));
+        name.setText(stringid);
+        iv.setImageDrawable(getResources().getDrawable(resid));
+    }        
 
     public boolean onLongClick(View view) {
         if (!enabled)
