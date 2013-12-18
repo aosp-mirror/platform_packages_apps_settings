@@ -57,7 +57,6 @@ public class QuietHours extends SettingsPreferenceFragment implements
     private static final String KEY_QUIET_HOURS_STILL = "quiet_hours_still";
     private static final String KEY_QUIET_HOURS_DIM = "quiet_hours_dim";
     private static final String KEY_QUIET_HOURS_HAPTIC = "quiet_hours_haptic";
-    private static final String KEY_QUIET_HOURS_NOTE = "quiet_hours_note";
     private static final String KEY_QUIET_HOURS_TIMERANGE = "quiet_hours_timerange";
     private static final String KEY_LOOP_BYPASS_RINGTONE = "loop_bypass_ringtone";
     private static final String KEY_AUTO_SMS = "auto_sms";
@@ -73,7 +72,6 @@ public class QuietHours extends SettingsPreferenceFragment implements
     private static final int DLG_SMS_BYPASS_CODE = 1;
 
     private CheckBoxPreference mQuietHoursEnabled;
-    private Preference mQuietHoursNote;
     private CheckBoxPreference mQuietHoursRing;
     private CheckBoxPreference mQuietHoursMute;
     private CheckBoxPreference mQuietHoursStill;
@@ -116,7 +114,6 @@ public class QuietHours extends SettingsPreferenceFragment implements
             mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
 
             // Load the preferences
-            mQuietHoursNote = prefSet.findPreference(KEY_QUIET_HOURS_NOTE);
             mQuietHoursEnabled =
                 (CheckBoxPreference) prefSet.findPreference(KEY_QUIET_HOURS_ENABLED);
             mQuietHoursTimeRange =
@@ -149,13 +146,6 @@ public class QuietHours extends SettingsPreferenceFragment implements
                 (Preference) findPreference(KEY_SMS_BYPASS_CODE);
             mBypassRingtone =
                 (RingtonePreference) findPreference(KEY_BYPASS_RINGTONE);
-
-
-            // Remove the "Incoming calls behaviour" note if the device does not support phone calls
-            if (mQuietHoursNote != null && getResources().getBoolean(
-                        com.android.internal.R.bool.config_voice_capable) == false) {
-                getPreferenceScreen().removePreference(mQuietHoursNote);
-            }
 
             // Set the preference state and listeners where applicable
             mQuietHoursEnabled.setChecked(
