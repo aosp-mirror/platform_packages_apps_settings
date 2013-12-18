@@ -85,6 +85,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
     private static final String KEY_POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
     private static final String KEY_HEADSET_CONNECT_PLAYER = "headset_connect_player";
+    private static final String PREF_LESS_NOTIFICATION_SOUNDS = "less_notification_sounds";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -124,6 +125,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
     private CheckBoxPreference mHeadsetConnectPlayer;
+    private ListPreference mAnnoyingNotifications;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -266,6 +268,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mHeadsetConnectPlayer = (CheckBoxPreference) findPreference(KEY_HEADSET_CONNECT_PLAYER);
         mHeadsetConnectPlayer.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HEADSET_CONNECT_PLAYER, 0) != 0);
+
+        mAnnoyingNotifications = (ListPreference) findPreference(PREF_LESS_NOTIFICATION_SOUNDS);
+        int notificationThreshold = Settings.System.getInt(getContentResolver(),
+                Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD,
+                0);
+        mAnnoyingNotifications.setValue(Integer.toString(notificationThreshold));
+        mAnnoyingNotifications.setOnPreferenceChangeListener(this);
 
         initDockSettings();
 
@@ -460,6 +469,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.MODE_VOLUME_OVERLAY, value);
             mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
+        } else if (PREF_LESS_NOTIFICATION_SOUNDS.equals(key)) {
+            final int val = Integer.valueOf((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, val);
         }
         return true;
     }
