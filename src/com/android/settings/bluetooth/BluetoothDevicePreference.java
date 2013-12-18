@@ -232,7 +232,7 @@ public final class BluetoothDevicePreference extends Preference implements
                     break;
 
                 case BluetoothProfile.STATE_DISCONNECTED:
-                    if (profile.isProfileReady() && profile.isPreferred(cachedDevice.getDevice())) {
+                    if (profile.isProfileReady()) {
                         if (profile instanceof A2dpProfile) {
                             a2dpNotConnected = true;
                         } else if (profile instanceof HeadsetProfile) {
