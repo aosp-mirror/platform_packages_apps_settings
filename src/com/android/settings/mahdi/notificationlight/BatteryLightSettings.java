@@ -165,7 +165,7 @@ public class BatteryLightSettings extends SettingsPreferenceFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         mOptionsMenu = menu;
 
-        mOptionsMenu.add(0, MENU_RESET, 0, R.string.battery_reset_title)
+        mOptionsMenu.add(0, MENU_RESET, 0, R.string.reset)
                 .setIcon(R.drawable.ic_settings_backup) // use the backup icon
                 .setAlphabeticShortcut('r')
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
