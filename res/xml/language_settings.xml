@@ -38,6 +38,11 @@
                 android:title="@string/current_input_method" />
     </PreferenceCategory>
 
+    <PreferenceScreen
+        android:key="keyboard_input_settings"
+        android:fragment="com.android.settings.mahdi.InputMethodsSettings"
+        android:title="@string/title_keyboard_input" />
+
     <PreferenceCategory
             android:key="hard_keyboard"
             android:title="@string/builtin_keyboard_settings_title"
