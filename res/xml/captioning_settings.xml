@@ -82,6 +82,15 @@
             android:key="captioning_background_opacity"
             android:persistent="false"
             android:title="@string/captioning_background_opacity" />
+        <com.android.settings.accessibility.ColorPreference
+            android:key="captioning_window_color"
+            android:persistent="false"
+            android:title="@string/captioning_window_color" />
+        <com.android.settings.accessibility.ColorPreference
+            android:dependency="captioning_window_color"
+            android:key="captioning_window_opacity"
+            android:persistent="false"
+            android:title="@string/captioning_window_opacity" />
     </PreferenceCategory>
 
 </PreferenceScreen>

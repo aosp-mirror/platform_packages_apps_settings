@@ -31,13 +31,19 @@
             android:scaleType="centerCrop"
             android:src="@drawable/caption_background" />
 
-        <com.android.internal.widget.SubtitleView
-            android:id="@+id/preview_text"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/preview_window"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:layout_margin="16dp"
-            android:text="@string/captioning_preview_text" />
+            android:padding="16dp" >
+
+            <com.android.internal.widget.SubtitleView
+                android:id="@+id/preview_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/captioning_preview_text" />
+        </FrameLayout>
     </FrameLayout>
 
     <FrameLayout
