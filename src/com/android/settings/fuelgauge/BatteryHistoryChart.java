@@ -361,7 +361,7 @@ public class BatteryHistoryChart extends View {
             final HistoryItem rec = new HistoryItem();
             while (stats.getNextHistoryLocked(rec)) {
                 pos++;
-                if (rec.cmd == HistoryItem.CMD_UPDATE) {
+                if (rec.isDeltaData()) {
                     if (first) {
                         first = false;
                         mHistStart = rec.time;
@@ -523,7 +523,7 @@ public class BatteryHistoryChart extends View {
         if (mStats.startIteratingHistoryLocked()) {
             final HistoryItem rec = new HistoryItem();
             while (mStats.getNextHistoryLocked(rec) && i < N) {
-                if (rec.cmd == BatteryStats.HistoryItem.CMD_UPDATE) {
+                if (rec.isDeltaData()) {
                     x = (int)(((rec.time-timeStart)*w)/timeChange);
                     y = mLevelTop + levelh - ((rec.batteryLevel-batLow)*(levelh-1))/batChange;
 

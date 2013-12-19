@@ -322,8 +322,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     case R.string.usage_type_data_send:
                     case R.string.usage_type_data_wifi_recv:
                     case R.string.usage_type_data_wifi_send:
-                        final long bytes = (long) (mValues[i]);
-                        value = Formatter.formatFileSize(getActivity(), bytes);
+                        final long packets = (long) (mValues[i]);
+                        value = Long.toString(packets);
                         break;
                     case R.string.usage_type_no_coverage:
                         final int percentage = (int) Math.floor(mValues[i]);

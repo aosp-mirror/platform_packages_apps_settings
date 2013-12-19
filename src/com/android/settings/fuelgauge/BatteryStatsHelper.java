@@ -16,10 +16,10 @@
 
 package com.android.settings.fuelgauge;
 
-import static android.os.BatteryStats.NETWORK_MOBILE_RX_BYTES;
-import static android.os.BatteryStats.NETWORK_MOBILE_TX_BYTES;
-import static android.os.BatteryStats.NETWORK_WIFI_RX_BYTES;
-import static android.os.BatteryStats.NETWORK_WIFI_TX_BYTES;
+import static android.os.BatteryStats.NETWORK_MOBILE_RX_DATA;
+import static android.os.BatteryStats.NETWORK_MOBILE_TX_DATA;
+import static android.os.BatteryStats.NETWORK_WIFI_RX_DATA;
+import static android.os.BatteryStats.NETWORK_WIFI_TX_DATA;
 
 import android.app.Activity;
 import android.content.Context;
@@ -222,10 +222,10 @@ public class BatteryStatsHelper {
                     sipper.wakeLockTime,
                     sipper.gpsTime,
                     sipper.wifiRunningTime,
-                    sipper.mobileRxBytes,
-                    sipper.mobileTxBytes,
-                    sipper.wifiRxBytes,
-                    sipper.wifiTxBytes,
+                    sipper.mobileRxPackets,
+                    sipper.mobileTxPackets,
+                    sipper.wifiRxPackets,
+                    sipper.wifiTxPackets,
                     0,
                     0
                 };
@@ -275,10 +275,10 @@ public class BatteryStatsHelper {
                     sipper.cpuTime,
                     sipper.cpuFgTime,
                     sipper.wakeLockTime,
-                    sipper.mobileRxBytes,
-                    sipper.mobileTxBytes,
-                    sipper.wifiRxBytes,
-                    sipper.wifiTxBytes,
+                    sipper.mobileRxPackets,
+                    sipper.mobileTxPackets,
+                    sipper.wifiRxPackets,
+                    sipper.wifiTxPackets,
                 };
             } break;
             case BLUETOOTH:
@@ -298,10 +298,10 @@ public class BatteryStatsHelper {
                     sipper.cpuTime,
                     sipper.cpuFgTime,
                     sipper.wakeLockTime,
-                    sipper.mobileRxBytes,
-                    sipper.mobileTxBytes,
-                    sipper.wifiRxBytes,
-                    sipper.wifiTxBytes,
+                    sipper.mobileRxPackets,
+                    sipper.mobileTxPackets,
+                    sipper.wifiRxPackets,
+                    sipper.wifiTxPackets,
                 };
             } break;
             default:
@@ -371,8 +371,8 @@ public class BatteryStatsHelper {
         for (int p = 0; p < speedSteps; p++) {
             powerCpuNormal[p] = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_ACTIVE, p);
         }
-        final double mobilePowerPerByte = getMobilePowerPerByte();
-        final double wifiPowerPerByte = getWifiPowerPerByte();
+        final double mobilePowerPerPacket = getMobilePowerPerPacket();
+        final double wifiPowerPerPacket = getWifiPowerPerPacket();
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
         long appWakelockTime = 0;
         BatterySipper osApp = null;
@@ -463,16 +463,20 @@ public class BatteryStatsHelper {
             if (DEBUG && p != 0) Log.i(TAG, String.format("wakelock power=%.2f", p));
 
             // Add cost of mobile traffic
-            final long mobileRx = u.getNetworkActivityCount(NETWORK_MOBILE_RX_BYTES, mStatsType);
-            final long mobileTx = u.getNetworkActivityCount(NETWORK_MOBILE_TX_BYTES, mStatsType);
-            p = (mobileRx + mobileTx) * mobilePowerPerByte;
+            final long mobileRx = u.getNetworkActivityPackets(NETWORK_MOBILE_RX_DATA, mStatsType);
+            final long mobileTx = u.getNetworkActivityPackets(NETWORK_MOBILE_TX_DATA, mStatsType);
+            final long mobileRxB = u.getNetworkActivityBytes(NETWORK_MOBILE_RX_DATA, mStatsType);
+            final long mobileTxB = u.getNetworkActivityBytes(NETWORK_MOBILE_TX_DATA, mStatsType);
+            p = (mobileRx + mobileTx) * mobilePowerPerPacket;
             power += p;
             if (DEBUG && p != 0) Log.i(TAG, String.format("mobile power=%.2f", p));
 
             // Add cost of wifi traffic
-            final long wifiRx = u.getNetworkActivityCount(NETWORK_WIFI_RX_BYTES, mStatsType);
-            final long wifiTx = u.getNetworkActivityCount(NETWORK_WIFI_TX_BYTES, mStatsType);
-            p = (wifiRx + wifiTx) * wifiPowerPerByte;
+            final long wifiRx = u.getNetworkActivityPackets(NETWORK_WIFI_RX_DATA, mStatsType);
+            final long wifiTx = u.getNetworkActivityPackets(NETWORK_WIFI_TX_DATA, mStatsType);
+            final long wifiRxB = u.getNetworkActivityBytes(NETWORK_WIFI_RX_DATA, mStatsType);
+            final long wifiTxB = u.getNetworkActivityBytes(NETWORK_WIFI_TX_DATA, mStatsType);
+            p = (wifiRx + wifiTx) * wifiPowerPerPacket;
             power += p;
             if (DEBUG && p != 0) Log.i(TAG, String.format("wifi power=%.2f", p));
 
@@ -545,10 +549,14 @@ public class BatteryStatsHelper {
                 app.wifiRunningTime = wifiRunningTimeMs;
                 app.cpuFgTime = cpuFgTime;
                 app.wakeLockTime = wakelockTime;
-                app.mobileRxBytes = mobileRx;
-                app.mobileTxBytes = mobileTx;
-                app.wifiRxBytes = wifiRx;
-                app.wifiTxBytes = wifiTx;
+                app.mobileRxPackets = mobileRx;
+                app.mobileTxPackets = mobileTx;
+                app.wifiRxPackets = wifiRx;
+                app.wifiTxPackets = wifiTx;
+                app.mobileRxBytes = mobileRxB;
+                app.mobileTxBytes = mobileTxB;
+                app.wifiRxBytes = wifiRxB;
+                app.wifiTxBytes = wifiTxB;
                 if (u.getUid() == Process.WIFI_UID) {
                     mWifiSippers.add(app);
                 } else if (u.getUid() == Process.BLUETOOTH_UID) {
@@ -670,6 +678,10 @@ public class BatteryStatsHelper {
             bs.wifiRunningTime += wbs.wifiRunningTime;
             bs.cpuFgTime += wbs.cpuFgTime;
             bs.wakeLockTime += wbs.wakeLockTime;
+            bs.mobileRxPackets += wbs.mobileRxPackets;
+            bs.mobileTxPackets += wbs.mobileTxPackets;
+            bs.wifiRxPackets += wbs.wifiRxPackets;
+            bs.wifiTxPackets += wbs.wifiTxPackets;
             bs.mobileRxBytes += wbs.mobileRxBytes;
             bs.mobileTxBytes += wbs.mobileTxBytes;
             bs.wifiRxBytes += wbs.wifiRxBytes;
@@ -743,33 +755,33 @@ public class BatteryStatsHelper {
     }
 
     /**
-     * Return estimated power (in mAs) of sending a byte with the mobile radio.
+     * Return estimated power (in mAs) of sending or receiving a packet with the mobile radio.
      */
-    private double getMobilePowerPerByte() {
+    private double getMobilePowerPerPacket() {
         final long MOBILE_BPS = 200000; // TODO: Extract average bit rates from system
         final double MOBILE_POWER = mPowerProfile.getAveragePower(PowerProfile.POWER_RADIO_ACTIVE)
                 / 3600;
 
-        final long mobileRx = mStats.getNetworkActivityCount(NETWORK_MOBILE_RX_BYTES, mStatsType);
-        final long mobileTx = mStats.getNetworkActivityCount(NETWORK_MOBILE_TX_BYTES, mStatsType);
+        final long mobileRx = mStats.getNetworkActivityPackets(NETWORK_MOBILE_RX_DATA, mStatsType);
+        final long mobileTx = mStats.getNetworkActivityPackets(NETWORK_MOBILE_TX_DATA, mStatsType);
         final long mobileData = mobileRx + mobileTx;
 
         final long radioDataUptimeMs = mStats.getRadioDataUptime() / 1000;
-        final long mobileBps = radioDataUptimeMs != 0
-                ? mobileData * 8 * 1000 / radioDataUptimeMs
-                : MOBILE_BPS;
+        final double mobilePps = radioDataUptimeMs != 0
+                ? mobileData / (double)radioDataUptimeMs
+                : (((double)MOBILE_BPS) / 8 / 2048);
 
-        return MOBILE_POWER / (mobileBps / 8);
+        return MOBILE_POWER / mobilePps;
     }
 
     /**
      * Return estimated power (in mAs) of sending a byte with the Wi-Fi radio.
      */
-    private double getWifiPowerPerByte() {
+    private double getWifiPowerPerPacket() {
         final long WIFI_BPS = 1000000; // TODO: Extract average bit rates from system
         final double WIFI_POWER = mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ACTIVE)
                 / 3600;
-        return WIFI_POWER / (WIFI_BPS / 8);
+        return WIFI_POWER / (((double)WIFI_BPS) / 8 / 2048);
     }
 
     private void processMiscUsage() {
