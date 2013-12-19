@@ -310,7 +310,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
                 mFormatPreference.setSummary(mResources.getString(R.string.mtp_ptp_mode_summary));
             }
         } else if (mFormatPreference != null) {
-            mFormatPreference.setEnabled(true);
+            mFormatPreference.setEnabled(mMountTogglePreference.isEnabled());
             mFormatPreference.setSummary(mResources.getString(R.string.sd_format_summary));
         }
     }
