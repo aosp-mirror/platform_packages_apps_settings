@@ -54,6 +54,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private static final String PREF_BACKGROUND_OPACITY = "captioning_background_opacity";
     private static final String PREF_FOREGROUND_COLOR = "captioning_foreground_color";
     private static final String PREF_FOREGROUND_OPACITY = "captioning_foreground_opacity";
+    private static final String PREF_WINDOW_COLOR = "captioning_window_color";
+    private static final String PREF_WINDOW_OPACITY = "captioning_window_opacity";
     private static final String PREF_EDGE_COLOR = "captioning_edge_color";
     private static final String PREF_EDGE_TYPE = "captioning_edge_type";
     private static final String PREF_FONT_SIZE = "captioning_font_size";
@@ -66,6 +68,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
     private CaptioningManager mCaptioningManager;
     private SubtitleView mPreviewText;
+    private View mPreviewWindow;
 
     // Standard options.
     private LocalePreference mLocale;
@@ -80,6 +83,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private ColorPreference mEdgeColor;
     private ColorPreference mBackgroundColor;
     private ColorPreference mBackgroundOpacity;
+    private ColorPreference mWindowColor;
+    private ColorPreference mWindowOpacity;
     private PreferenceCategory mCustom;
 
     private boolean mShowingCustom;
@@ -120,6 +125,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
 
         mPreviewText = (SubtitleView) view.findViewById(R.id.preview_text);
+        mPreviewWindow = view.findViewById(R.id.preview_window);
 
         installActionBarToggleSwitch();
         refreshPreviewText();
@@ -145,6 +151,9 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
             } else {
                 preview.setText(R.string.captioning_preview_text);
             }
+
+            final CaptionStyle style = mCaptioningManager.getUserStyle();
+            mPreviewWindow.setBackgroundColor(style.windowColor);
         }
     }
 
@@ -246,6 +255,14 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mBackgroundOpacity.setTitles(opacityTitles);
         mBackgroundOpacity.setValues(opacityValues);
 
+        mWindowColor = (ColorPreference) mCustom.findPreference(PREF_WINDOW_COLOR);
+        mWindowColor.setTitles(bgColorTitles);
+        mWindowColor.setValues(bgColorValues);
+
+        mWindowOpacity = (ColorPreference) mCustom.findPreference(PREF_WINDOW_OPACITY);
+        mWindowOpacity.setTitles(opacityTitles);
+        mWindowOpacity.setValues(opacityValues);
+
         mEdgeType = (EdgeTypePreference) mCustom.findPreference(PREF_EDGE_TYPE);
         mTypeface = (ListPreference) mCustom.findPreference(PREF_TYPEFACE);
     }
@@ -257,6 +274,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mEdgeColor.setOnValueChangedListener(this);
         mBackgroundColor.setOnValueChangedListener(this);
         mBackgroundOpacity.setOnValueChangedListener(this);
+        mWindowColor.setOnValueChangedListener(this);
+        mWindowOpacity.setOnValueChangedListener(this);
         mEdgeType.setOnValueChangedListener(this);
 
         mTypeface.setOnPreferenceChangeListener(this);
@@ -278,6 +297,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
         parseColorOpacity(mForegroundColor, mForegroundOpacity, attrs.foregroundColor);
         parseColorOpacity(mBackgroundColor, mBackgroundOpacity, attrs.backgroundColor);
+        parseColorOpacity(mWindowColor, mWindowOpacity, attrs.windowColor);
 
         final String rawTypeface = attrs.mRawTypeface;
         mTypeface.setValue(rawTypeface == null ? "" : rawTypeface);
@@ -334,6 +354,10 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
             final int merged = mergeColorOpacity(mBackgroundColor, mBackgroundOpacity);
             Settings.Secure.putInt(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR, merged);
+        } else if (mWindowColor == preference || mWindowOpacity == preference) {
+            final int merged = mergeColorOpacity(mWindowColor, mWindowOpacity);
+            Settings.Secure.putInt(
+                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_WINDOW_COLOR, merged);
         } else if (mEdgeColor == preference) {
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_COLOR, value);
         } else if (mPreset == preference) {
