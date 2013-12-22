@@ -55,6 +55,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/notification_style_title">
+
+    <Preference
+         android:fragment="com.android.settings.mahdi.NotificationDrawerStyle"
+         android:key="notification_style"
+         android:title="@string/notification_background_title"
+         android:summary="@string/notification_background_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="options"
         android:title="@string/additional_options_title">
 
