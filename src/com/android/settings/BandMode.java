@@ -154,7 +154,10 @@ public class BandMode extends Activity {
 
         if (result.result != null) {
             int bands[] = (int[])result.result;
-
+            //Always show Band 0, ie Automatic
+            item = new BandListItem(0);
+            mBandListAdapter.add(item);
+            if (DBG) log("Add " + item.toString());
             for (int i=0; i<bands.length; i++) {
                 item = new BandListItem(bands[i]);
                 mBandListAdapter.add(item);
